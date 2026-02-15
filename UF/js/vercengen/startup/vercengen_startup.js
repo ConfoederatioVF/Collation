@@ -64,6 +64,10 @@ global.path = require("path");
 						default_text_colour: "auto"
 					},
 					
+					Log: {
+						default_console_height: "40vh"
+					},
+					
 					/**
 					 * Component settings for {@link ve.MultiTag}.
 					 * @type {{"<registry_key>": string[]}}

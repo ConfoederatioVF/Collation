@@ -44,15 +44,12 @@
 			
 			//Push to instances
 			log.Channel.instances.push(this);
+			log.Channel.update();
 		}
 		
-		clear () {
-			this.log_el.innerHTML = "";
-		}
+		clear () { this.log_el.innerHTML = ""; }
 		
-		close () {
-			if (this.console_window) this.console_window.close();
-		}
+		close () { if (this.console_window) this.console_window.close(); }
 		
 		error (...argn_arguments) { this.print("error", argn_arguments); }
 		
@@ -110,9 +107,7 @@
 						let error_el = document.createElement("pre");
 						error_el.innerText = local_arg.stack || local_arg.message;
 						part_el.appendChild(error_el);
-					}
-					
-					if (typeof local_arg === "string") {
+					} else if (typeof local_arg === "string") {
 						part_el.innerText = String(local_arg);
 					} else {
 						let local_object_inspector = new ve.ObjectInspector(local_arg, {
@@ -123,8 +118,12 @@
 							let placeholder = document.createElement("button");
 							placeholder.innerText = "Show large object ..";
 							placeholder.onclick = () => {
-								placeholder.replaceWith(local_object_inspector.element);
-								local_object_inspector.bind(part_el);
+								let local_confirm_modal = new ve.Confirm(`Are you sure you want to view this large object? It has a length of ${String.formatNumber(local_object_inspector.element.innerHTML.length)} character(s).`, {
+									special_function: () => {
+										placeholder.replaceWith(local_object_inspector.element);
+										local_object_inspector.bind(part_el);
+									}
+								});
 							};
 							part_el.appendChild(placeholder);
 						} else {
@@ -146,13 +145,16 @@
 			
 			//Remove log[key]
 			delete log[this.key];
+			log.Channel.update();
 		}
 		
 		/**
 		 * Updates all associated {@link ve.Log} components to ensure that they remain in-sync.
 		 */
 		static update () {
-			
+			//Iterate over all ve.Log.instances and draw them
+			for (let i = 0; i < ve.Log.instances.length; i++)
+				ve.Log.instances[i].draw();
 		}
 	};
 }
