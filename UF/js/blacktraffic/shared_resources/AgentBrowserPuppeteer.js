@@ -63,10 +63,58 @@ Blacktraffic.AgentBrowserPuppeteer = class {
 		});
 	}
 	
+	/**
+	 * Closes the browser currently mounted to the AgentBrowser.
+	 * 
+	 * @returns {Promise<Blacktraffic.AgentBrowserPuppeteer>}
+	 */
 	async close () {
 		//Close browser first
 		if (this.browser) await this.browser.close();
 		this.browser = undefined;
+		
+		//Return statement
+		return this;
+	}
+	
+	/**
+	 * Closes the tab specified.
+	 * 
+	 * @param {Object|string} arg0_tab_key
+	 * 
+	 * @returns {Promise<Blacktraffic.AgentBrowserPuppeteer>}
+	 */
+	async closeTab (arg0_tab_key) {
+		//Convert from parameters
+		let tab_obj = this.getTab(arg0_tab_key);
+		
+		//Attempt to close the tab if found
+		if (tab_obj) {
+			await tab_obj.close();
+			if (this.browser && !this.browser.isConnected())
+				this.browser = undefined;
+		}
+		
+		//Return statement
+		return this;
+	}
+	
+	/**
+	 * Closes all user tabs from the current browser.
+	 * 
+	 * @returns {Promise<Blacktraffic.AgentBrowserPuppeteer>}
+	 */
+	async closeUserTabs () {
+		//Declare local instance variables
+		let all_tab_keys = Object.keys(this.tab_obj);
+		
+		//Iterate over all_tab_keys and determine which tabs do not have a _blacktraffic_key, then close them
+		for (let i = 0; i < all_tab_keys.length; i++) {
+			let local_tab = this.tab_obj[all_tab_keys[i]];
+			
+			if (!local_tab._blacktraffic_key)
+				await this.closeTab(local_tab);
+		}
 		
 		//Return statement
 		return this;
@@ -87,6 +135,28 @@ Blacktraffic.AgentBrowserPuppeteer = class {
 		
 		//Return statement
 		return this.tab_obj[tab_key];
+	}
+	
+	/**
+	 * Focuses the specified tab.
+	 * 
+	 * @param {Object|string} arg0_tab_key
+	 * 
+	 * @returns {Promise<Object|undefined>}
+	 */
+	async focusTab (arg0_tab_key) {
+		//Convert from parameters
+		let tab_obj = this.getTab(arg0_tab_key);
+		
+		//Focus the current tab
+		if (tab_obj) {
+			await tab_obj.bringToFront();
+		} else {
+			this.warn_fn(`Blacktraffic.AgentBrowserPuppeteer: Could not focus ${tab_key}, as it doesn't exist.`)
+		}
+		
+		//Return statement
+		return tab_obj;
 	}
 	
 	/**
@@ -143,6 +213,7 @@ Blacktraffic.AgentBrowserPuppeteer = class {
 		//Open tab first
 		if (!this.browser) await this.open();
 		this.tab_obj[tab_key] = await this.browser.newPage();
+			this.tab_obj[tab_key][`_blacktraffic_key`] = tab_key;
 		let tab_obj = this.tab_obj[tab_key];
 		
 		if (url) await tab_obj.goto(url, { waitUntil: "networkidle2" });
