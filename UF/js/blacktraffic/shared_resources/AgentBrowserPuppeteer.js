@@ -51,6 +51,10 @@ Blacktraffic.AgentBrowserPuppeteer = class extends Blacktraffic.AgentBrowser {
 	
 	/**
 	 * Captures the current tab's console and feeds it into a {@link log.Channel}.
+	 * - Method of: {@link Blacktraffic.AgentBrowserPuppeteer}
+	 * 
+	 * @alias captureConsoleToChannel
+	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserPuppeteer
 	 * 
 	 * @param {Object|string} arg0_tab_key
 	 * @param {string} arg1_channel_key
@@ -91,6 +95,9 @@ Blacktraffic.AgentBrowserPuppeteer = class extends Blacktraffic.AgentBrowser {
 	/**
 	 * Closes the tab specified.
 	 * 
+	 * @alias closeTab
+	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserPuppeteer
+	 * 
 	 * @param {Object|string} arg0_tab_key
 	 * 
 	 * @returns {Promise<Blacktraffic.AgentBrowserPuppeteer>}
@@ -113,6 +120,9 @@ Blacktraffic.AgentBrowserPuppeteer = class extends Blacktraffic.AgentBrowser {
 	/**
 	 * Closes all user tabs from the current browser.
 	 * 
+	 * @alias closeUserTabs
+	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserPuppeteer
+	 * 
 	 * @returns {Promise<Blacktraffic.AgentBrowserPuppeteer>}
 	 */
 	async closeUserTabs () {
@@ -133,6 +143,9 @@ Blacktraffic.AgentBrowserPuppeteer = class extends Blacktraffic.AgentBrowser {
 	
 	/**
 	 * Focuses the specified tab.
+	 *
+	 * @alias focusTab
+	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserPuppeteer
 	 *
 	 * @param {Object|string} arg0_tab_key
 	 *
@@ -158,6 +171,9 @@ Blacktraffic.AgentBrowserPuppeteer = class extends Blacktraffic.AgentBrowser {
 	
 	/**
 	 * Fetches a specific element handle using CSS selectors.
+	 *
+	 * @alias getElement
+	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserPuppeteer
 	 * 
 	 * @param {Object|string} arg0_tab_key
 	 * @param {string} arg1_selector
@@ -175,17 +191,18 @@ Blacktraffic.AgentBrowserPuppeteer = class extends Blacktraffic.AgentBrowser {
 		//Initialise options
 		options.timeout = Math.returnSafeNumber(options.timeout, 10000);
 		
-		//Wait for the element to be located and visible
-		let element = await tab_obj.wait(until.elementLocated(By.css(selector)), options.timeout);
-			await tab_obj.wait(until.elementIsVisible(element), options.timeout);
-			await tab_obj.wait(until.elementIsEnabled(element), options.timeout);
-		
 		//Return statement
-		return element;
+		return await tab_obj.waitForSelector(selector, {
+			visible: true,
+			timeout: options.timeout,
+		});
 	}
 	
 	/**
 	 * Returns a tab object based on its key.
+	 *
+	 * @alias getTab
+	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserPuppeteer
 	 * 
 	 * @param {Object|string} arg0_tab_key
 	 * 
@@ -203,6 +220,9 @@ Blacktraffic.AgentBrowserPuppeteer = class extends Blacktraffic.AgentBrowser {
 	
 	/**
 	 * Returns all tabs in the current browser.
+	 *
+	 * @alias getTabs
+	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserPuppeteer
 	 * 
 	 * @returns {Promise<Object[]>}
 	 */
@@ -215,6 +235,9 @@ Blacktraffic.AgentBrowserPuppeteer = class extends Blacktraffic.AgentBrowser {
 	/**
 	 * Injects a script within the current tab. 
 	 * **Note.** Contexts are fully isolated when passing a function.
+	 *
+	 * @alias injectScript
+	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserPuppeteer
 	 * 
 	 * @param {string} arg0_tab_key
 	 * @param {function} arg1_function
@@ -240,6 +263,9 @@ Blacktraffic.AgentBrowserPuppeteer = class extends Blacktraffic.AgentBrowser {
 	/**
 	 * Registers an onload script for future page visits using the mounted tab. 
 	 * **Note.** Contexts are fully isolated when passing a function.
+	 *
+	 * @alias injectScriptOnload
+	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserPuppeteer
 	 * 
 	 * @param {string} arg0_tab_key
 	 * @param {function} arg1_function
@@ -267,6 +293,9 @@ Blacktraffic.AgentBrowserPuppeteer = class extends Blacktraffic.AgentBrowser {
 	
 	/**
 	 * Initialises a Chrome instance and connects Puppeteer.
+	 *
+	 * @alias open
+	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserPuppeteer
 	 * 
 	 * @returns {Promise<Blacktraffic.AgentBrowserPuppeteer>}
 	 */
@@ -305,6 +334,9 @@ Blacktraffic.AgentBrowserPuppeteer = class extends Blacktraffic.AgentBrowser {
 	
 	/**
 	 * Opens a tab at the corresponding URL. Corresponding URLs are optional.
+	 *
+	 * @alias openTab
+	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserPuppeteer
 	 * 
 	 * @param {string} [arg0_tab_key=Object.generateRandomID(this.tab_obj)]
 	 * @param {string} arg1_url
@@ -330,6 +362,9 @@ Blacktraffic.AgentBrowserPuppeteer = class extends Blacktraffic.AgentBrowser {
 	
 	/**
 	 * Reloads the given tab.
+	 *
+	 * @alias reloadTab
+	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserPuppeteer
 	 * 
 	 * @param {string} arg0_tab_key
 	 * 
@@ -348,6 +383,9 @@ Blacktraffic.AgentBrowserPuppeteer = class extends Blacktraffic.AgentBrowser {
 	
 	/**
 	 * Checks if a given tab exists.
+	 *
+	 * @alias tabExists
+	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserPuppeteer
 	 * 
 	 * @param {Object|string} arg0_tab_key
 	 * @param {Object} [arg1_options]
@@ -377,6 +415,9 @@ Blacktraffic.AgentBrowserPuppeteer = class extends Blacktraffic.AgentBrowser {
 	
 	/**
 	 * Removes the current {@link Blacktraffic.AgentBrowser}.
+	 *
+	 * @alias remove
+	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserPuppeteer
 	 */
 	async remove () {
 		await this.close(); //Close browser first
@@ -395,6 +436,9 @@ Blacktraffic.AgentBrowserPuppeteer = class extends Blacktraffic.AgentBrowser {
 	
 	/**
 	 * Takes multi-page or full-page screenshots from a Puppeteer instance. A4 page format by default, hence strange px values.
+	 *
+	 * @alias screenshotHTML
+	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserPuppeteer
 	 *
 	 * @param {Object} arg0_tab_key
 	 * @param {string} arg1_path
@@ -482,6 +526,9 @@ Blacktraffic.AgentBrowserPuppeteer = class extends Blacktraffic.AgentBrowser {
 	
 	/**
 	 * Updates the default logging channel for the current agent.
+	 *
+	 * @alias updateLogChannel
+	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserPuppeteer
 	 * 
 	 * @param {string} arg0_channel_key
 	 */
@@ -497,6 +544,9 @@ Blacktraffic.AgentBrowserPuppeteer = class extends Blacktraffic.AgentBrowser {
 	
 	/**
 	 * Waits for content to stop changing within a selector.
+	 *
+	 * @alias waitForStableSelector
+	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserPuppeteer
 	 *
 	 * @param {Object|string} arg0_tab_key - The given tab key.
 	 * @param {string} arg1_selector

@@ -103,6 +103,13 @@
 		return "mac";
 	};
 	
+	/**
+	 * Waits a certain number of ms before continuing with the current process as a synchronous command.
+	 * 
+	 * @param {number} arg0_ms
+	 * 
+	 * @returns {Promise<unknown>}
+	 */
 	Blacktraffic.sleep = function (arg0_ms) {
 		//Convert from parameters
 		let ms = arg0_ms;

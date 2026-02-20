@@ -25,20 +25,17 @@ if (!global.Blacktraffic) global.Blacktraffic = {};
 Blacktraffic.AgentBrowserSelenium = class extends Blacktraffic.AgentBrowser {
 	static instances = [];
 	
-	constructor(arg0_key, arg1_options) {
+	constructor (arg0_key, arg1_options) {
 		//Convert from parameters
 		let key = arg0_key ? arg0_key : Class.generateRandomID(Blacktraffic.AgentBrowserSelenium);
 		let options = arg1_options ? arg1_options : {};
-		super(key, options);
+			super(key, options);
 		
 		//Initialise options
 		if (options.debug_console === undefined) options.debug_console = false;
 		if (options.headless === undefined) options.headless = false;
 		
-		options.connection_attempts_threshold = Math.returnSafeNumber(
-			options.connection_attempts_threshold,
-			3
-		);
+		options.connection_attempts_threshold = Math.returnSafeNumber(options.connection_attempts_threshold, 3);
 		
 		//Declare local instance variables
 		this.updateLogChannel(options.log_channel);
@@ -54,30 +51,60 @@ Blacktraffic.AgentBrowserSelenium = class extends Blacktraffic.AgentBrowser {
 	}
 	
 	/**
-	 * Captures the current tab's console.
+	 * Captures the current tab's console and feeds it into a {@link log.Channel}.
+	 *
+	 * @alias captureConsoleToChannel
+	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserSelenium
 	 */
-	async captureConsoleToChannel(arg0_tab_key, arg1_channel_key) {
+	async captureConsoleToChannel (arg0_tab_key, arg1_channel_key) {
+		//Convert from parameters
 		let tab = this.getTab(arg0_tab_key);
 		let log_obj = log.getLoggingFunctions(arg1_channel_key);
 		
-		setInterval(async () => {
+		//Attempt to capture console in channel using polling loop
+		let logic_loop = setInterval(async () => {
 			try {
-				// Note: Firefox log retrieval via Selenium is limited compared to Chrome
+				//Note: Firefox log retrieval via Selenium is limited compared to Chrome
 				let logs = await tab.manage().logs().get("browser");
-				for (let entry of logs) {
+				
+				//Iterate over all entries in logs
+				for (let entry of logs)
 					log_obj.log_fn(`[${entry.level.name}]: ${entry.message}`);
-				}
+				
+				clearInterval(logic_loop);
 			} catch (e) {}
 		}, 1000);
 	}
 	
-	async close() {
+	/**
+	 * Closes the browser currently mounted to the AgentBrowser.
+	 *
+	 * @alias close
+	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserSelenium
+	 * 
+	 * @returns {Promise<Blacktraffic.AgentBrowser.AgentBrowserSelenium>}
+	 */
+	async close () {
+		//Close browser
 		if (this.browser) await this.browser.quit();
 		this.browser = undefined;
+		
+		//Return statement
 		return this;
 	}
 	
-	async closeTab(arg0_tab_key) {
+	/**
+	 * Closes the tab specified.
+	 *
+	 * @alias closeTab
+	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserSelenium
+	 * 
+	 * @param {Object|string} arg0_tab_key
+	 * 
+	 * @returns {Promise<Blacktraffic.AgentBrowser.AgentBrowserSelenium>}
+	 */
+	async closeTab (arg0_tab_key) {
+		//Convert from parameters
 		let tab_obj = this.getTab(arg0_tab_key);
 		if (tab_obj) {
 			let target_handle = await tab_obj.getWindowHandle();
@@ -94,32 +121,74 @@ Blacktraffic.AgentBrowserSelenium = class extends Blacktraffic.AgentBrowser {
 		return this;
 	}
 	
-	async closeUserTabs() {
+	/**
+	 * Closes all user tabs from the current browser.
+	 *
+	 * @alias closeUserTabs
+	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserSelenium
+	 * 
+	 * @returns {Promise<Blacktraffic.AgentBrowser.AgentBrowserSelenium>}
+	 */
+	async closeUserTabs () {
+		//Iterate over all_tab_keys and close tabs that do not have a _blacktraffic_key attached
 		let all_tab_keys = Object.keys(this.tab_obj);
+		
 		for (let i = 0; i < all_tab_keys.length; i++) {
 			let local_tab = this.tab_obj[all_tab_keys[i]];
 			if (!local_tab._blacktraffic_key) await this.closeTab(local_tab);
 		}
+		
+		//Return statement
 		return this;
 	}
 	
-	async focusTab(arg0_tab_key) {
+	/**
+	 * Focuses the specified tab.
+	 *
+	 * @alias focusTab
+	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserSelenium
+	 * 
+	 * @param {string} arg0_tab_key
+	 * 
+	 * @returns {Promise<Object|undefined>}
+	 */
+	async focusTab (arg0_tab_key) {
+		//Convert from parameters
 		let tab_key = arg0_tab_key;
+		
+		//Declare local instance variables
 		let tab_obj = this.getTab(tab_key);
+		
 		if (tab_obj) {
 			let handle = await tab_obj.getWindowHandle();
 			await this.browser.switchTo().window(handle);
 		} else {
-			this.warn_fn(
-				`Blacktraffic.AgentBrowserSelenium: Could not focus ${tab_key}, as it doesn't exist.`
-			);
+			this.warn_fn(`Blacktraffic.AgentBrowserSelenium: Could not focus ${tab_key}, as it doesn't exist.`);
 		}
+		
+		//Return statement
 		return tab_obj;
 	}
 	
-	async getElement(arg0_tab_key, arg1_selector, arg2_options) {
+	/**
+	 * Fetches a specific element handle using CSS selectors.
+	 *
+	 * @alias getElement
+	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserSelenium
+	 * 
+	 * @param {Object|string} arg0_tab_key
+	 * @param {string} arg1_selector
+	 * @param {Object} [arg2_options]
+	 *  @param {number} [arg2_options.timeout=10000]
+	 * 
+	 * @returns {Promise<HTMLElement>}
+	 */
+	async getElement (arg0_tab_key, arg1_selector, arg2_options) {
+		//Convert from parameters
 		let tab_obj = this.getTab(arg0_tab_key);
 		let options = arg2_options ? arg2_options : {};
+		
+		
 		options.timeout = Math.returnSafeNumber(options.timeout, 10000);
 		
 		let condition = until.elementLocated(By.css(arg1_selector));
@@ -129,29 +198,80 @@ Blacktraffic.AgentBrowserSelenium = class extends Blacktraffic.AgentBrowser {
 		return element;
 	}
 	
-	getTab(arg0_tab_key) {
+	/**
+	 * Returns a tab object based on its key.
+	 *
+	 * @alias getTab
+	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserSelenium
+	 * 
+	 * @param {Object|string} arg0_tab_key
+	 * 
+	 * @returns {Object}
+	 */
+	getTab (arg0_tab_key) {
 		let tab_key = arg0_tab_key;
 		if (typeof tab_key === "object") return tab_key;
 		return this.tab_obj[tab_key];
 	}
 	
-	async getTabs() {
+	/**
+	 * Returns all tabs in the current browser.
+	 *
+	 * @alias getTabs
+	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserSelenium
+	 * 
+	 * @returns {Promise<Object[]>}
+	 */
+	async getTabs () {
 		if (this.browser) return await this.browser.getAllWindowHandles();
 	}
 	
-	async injectScript(arg0_tab_key, arg1_function, arg2_options) {
+	/**
+	 * Injects a script within the current tab.
+	 * **Note.** Contexts are fully isolated when passing a function.
+	 *
+	 * @alias injectScript
+	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserSelenium
+	 * 
+	 * @param arg0_tab_key
+	 * @param {function} arg1_function
+	 *  @param {Object} [arg2_options]
+	 *  	@param {Object} [arg2_options.options] - Any options to pass down to the local function.
+	 *  	
+	 * @returns {Promise<Object>}
+	 */
+	async injectScript (arg0_tab_key, arg1_function, arg2_options) {
 		let tab_obj = this.getTab(arg0_tab_key);
+		let local_function = arg1_function;
 		let options = arg2_options ? arg2_options : {};
-		if (tab_obj && arg1_function) {
+		
+		//Execute function if possible
+		if (tab_obj && local_function)
 			await tab_obj.executeScript(
-				arg1_function,
+				local_function,
 				options.options ? options.options : {}
 			);
-		}
+		
+		//Return statement
 		return tab_obj;
 	}
 	
-	async injectScriptOnload(arg0_tab_key, arg1_function, arg2_options) {
+	/**
+	 * Registers an onload script for future page visits using the mounted tab.
+	 * **Note.** Contexts are fully isolated when passing a function.
+	 *
+	 * @alias injectScriptOnload
+	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserSelenium
+	 * 
+	 * @param {Object|string} arg0_tab_key
+	 * @param {function} arg1_function
+	 * @param {Object} [arg2_options]
+	 *  @param {Object} [arg2_options.options] - Any options to pass down to the local function.
+	 *  @param {string} [arg2_options.url]
+	 *  
+	 * @returns {Promise<Object>}
+	 */
+	async injectScriptOnload (arg0_tab_key, arg1_function, arg2_options) {
 		let tab_obj = this.getTab(arg0_tab_key);
 		let options = arg2_options ? arg2_options : {};
 		if (tab_obj && arg1_function) {
@@ -168,8 +288,13 @@ Blacktraffic.AgentBrowserSelenium = class extends Blacktraffic.AgentBrowser {
 	
 	/**
 	 * Initialises a Firefox instance and connects Selenium.
+	 *
+	 * @alias open
+	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserSelenium
+	 * 
+	 * @returns {Promise<Blacktraffic.AgentBrowserSelenium>}
 	 */
-	async open() {
+	async open () {
 		let attempts = 0;
 		
 		for (let i = 0; i < this.options.connection_attempts_threshold; i++) {
@@ -213,7 +338,18 @@ Blacktraffic.AgentBrowserSelenium = class extends Blacktraffic.AgentBrowser {
 		return this;
 	}
 	
-	async openTab(arg0_tab_key, arg1_url) {
+	/**
+	 * Opens a tab at the corresponding URL. Corresponding URLs are optional.
+	 *
+	 * @alias openTab
+	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserSelenium
+	 * 
+	 * @param {string} [arg0_tab_key=Object.generateRandomID(this.tab_obj)]
+	 * @param {string} arg1_url
+	 * 
+	 * @returns {Promise<Object>}
+	 */
+	async openTab (arg0_tab_key, arg1_url) {
 		let tab_key = arg0_tab_key ? arg0_tab_key : Object.generateRandomID(this.tab_obj);
 		if (!this.browser) await this.open();
 		
@@ -224,14 +360,35 @@ Blacktraffic.AgentBrowserSelenium = class extends Blacktraffic.AgentBrowser {
 		if (arg1_url) await this.browser.get(arg1_url);
 		return this.tab_obj[tab_key];
 	}
-	
-	async reloadTab(arg0_tab_key) {
+	/**
+	 * Reloads the given tab.
+	 *
+	 * @alias reloadTab
+	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserSelenium
+	 *
+	 * @param {string} arg0_tab_key
+	 *
+	 * @returns {Promise<Object>}
+	 */
+	async reloadTab (arg0_tab_key) {
 		let tab_obj = this.getTab(arg0_tab_key);
 		await tab_obj.navigate().refresh();
 		return tab_obj;
 	}
 	
-	async tabExists(arg0_tab_key, arg1_options) {
+	/**
+	 * Checks if a given tab exists.
+	 *
+	 * @alias tabExists
+	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserSelenium
+	 *
+	 * @param {Object|string} arg0_tab_key
+	 * @param {Object} [arg1_options]
+	 *  @param {boolean} [arg1_options.strict=false] - Whether to also ensure the current tab is connected.
+	 *
+	 * @returns {Promise<boolean>}
+	 */
+	async tabExists (arg0_tab_key, arg1_options) {
 		let tab_obj = this.getTab(arg0_tab_key);
 		let options = arg1_options ? arg1_options : {};
 		let is_connected = false;
@@ -246,7 +403,13 @@ Blacktraffic.AgentBrowserSelenium = class extends Blacktraffic.AgentBrowser {
 		if (options.strict && is_connected) return true;
 	}
 	
-	async remove() {
+	/**
+	 * Removes the current {@link Blacktraffic.AgentBrowser}.
+	 *
+	 * @alias remove
+	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserSelenium
+	 */
+	async remove () {
 		await this.close();
 		super.remove();
 		for (let i = 0; i < Blacktraffic.AgentBrowserSelenium.instances.length; i++) {
@@ -258,7 +421,15 @@ Blacktraffic.AgentBrowserSelenium = class extends Blacktraffic.AgentBrowser {
 		}
 	}
 	
-	updateLogChannel(arg0_channel_key) {
+	/**
+	 * Updates the default logging channel for the current agent.
+	 *
+	 * @alias updateLogChannel
+	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserSelenium
+	 *
+	 * @param {string} arg0_channel_key
+	 */
+	updateLogChannel (arg0_channel_key) {
 		let channel_key = arg0_channel_key;
 		this.log_obj = log.getLoggingFunctions(channel_key);
 		this.error_fn = this.log_obj.error_fn;
@@ -266,7 +437,17 @@ Blacktraffic.AgentBrowserSelenium = class extends Blacktraffic.AgentBrowser {
 		this.warn_fn = this.log_obj.warn_fn;
 	}
 	
-	async waitForStableContent(arg0_tab_key, arg1_selector, arg2_interval) {
+	/**
+	 * Waits for content to stop changing within a selector.
+	 *
+	 * @alias waitForStableSelector
+	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserSelenium
+	 *
+	 * @param {Object|string} arg0_tab_key - The given tab key.
+	 * @param {string} arg1_selector
+	 * @param {number} [arg2_interval=3000]
+	 */
+	async waitForStableContent (arg0_tab_key, arg1_selector, arg2_interval) {
 		let tab_obj = this.getTab(arg0_tab_key);
 		if (tab_obj) {
 			let state_key = `_Blacktraffic_stable_${arg1_selector.replace(/\W/g, "")}`;
@@ -305,6 +486,7 @@ Blacktraffic.getFirefoxBinaryPath = function () {
 	//Declare local instance variables
 	let os_platform = Blacktraffic.getOS();
 	
+	//Parse Firefox binary path based on returned OS
 	if (os_platform === "win") {
 		let suffix = "/Mozilla Firefox/firefox.exe";
 		let prefixes = [process.env.LOCALAPPDATA, process.env.ProgramFiles, process.env["PROGRAMFILES(X86)"]];
