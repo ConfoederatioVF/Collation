@@ -138,6 +138,17 @@ Blacktraffic.AgentBrowserPuppeteer = class {
 	}
 	
 	/**
+	 * Returns all tabs in the current browser.
+	 * 
+	 * @returns {Promise<Object[]>}
+	 */
+	async getTabs () {
+		//Return statement
+		if (this.browser)
+			return await this.browser.pages();
+	}
+	
+	/**
 	 * Focuses the specified tab.
 	 * 
 	 * @param {Object|string} arg0_tab_key
@@ -146,13 +157,69 @@ Blacktraffic.AgentBrowserPuppeteer = class {
 	 */
 	async focusTab (arg0_tab_key) {
 		//Convert from parameters
-		let tab_obj = this.getTab(arg0_tab_key);
+		let tab_key = arg0_tab_key;
+		
+		//Declare local instance variables
+		let tab_obj = this.getTab(tab_key);
 		
 		//Focus the current tab
 		if (tab_obj) {
 			await tab_obj.bringToFront();
 		} else {
 			this.warn_fn(`Blacktraffic.AgentBrowserPuppeteer: Could not focus ${tab_key}, as it doesn't exist.`)
+		}
+		
+		//Return statement
+		return tab_obj;
+	}
+	
+	/**
+	 * Injects a script within the current tab. 
+	 * **Note.** Contexts are fully isolated when passing a function.
+	 * 
+	 * @param {string} arg0_tab_key
+	 * @param {function} arg1_function
+	 *  @param {Object} [arg2_options]
+	 *  	@param {Object} [arg2_options.options] - Any options to pass down to the local function.
+	 * 
+	 * @returns {Promise<Object>}
+	 */
+	async injectScript (arg0_tab_key, arg1_function, arg2_options) {
+		//Convert from parameters
+		let tab_obj = this.getTab(arg0_tab_key);
+		let local_function = arg1_function;
+		let options = (arg2_options) ? arg2_options : {};
+		
+		//Inject script if possible
+		if (tab_obj && local_function)
+			await tab_obj.evaluate(local_function, (options.options) ? options.options : {});
+		
+		//Return statement
+		return tab_obj;
+	}
+	
+	/**
+	 * Registers an onload script for future page visits using the mounted tab. 
+	 * **Note.** Contexts are fully isolated when passing a function.
+	 * 
+	 * @param {string} arg0_tab_key
+	 * @param {function} arg1_function
+	 * @param {Object} [arg2_options]
+	 *  @param {Object} [arg2_options.options] - Any options to pass down to the local function.
+	 *  @param {string} [arg2_options.url]
+	 * 
+	 * @returns {Promise<Object>}
+	 */
+	async injectScriptOnload (arg0_tab_key, arg1_function, arg2_options) {
+		//Convert from parameters
+		let tab_obj = this.getTab(arg0_tab_key);
+		let local_function = arg1_function;
+		let options = (arg2_options) ? arg2_options : {};
+		
+		//Inject script at document start if possible
+		if (tab_obj && local_function) {
+			await tab_obj.evaluateOnNewDocument(local_function, (options.options) ? options.options : {});
+			if (options.url) await tab_obj.goto(options.url, { waitUntil: "networkidle2" });
 		}
 		
 		//Return statement
@@ -169,7 +236,7 @@ Blacktraffic.AgentBrowserPuppeteer = class {
 		let attempts = 0;
 		
 		//Iterate over all attempts until threshold or the for loop exits
-		for (let i = 0; i < this.options.connection_attempts_threshold.length; i++)
+		for (let i = 0; i < this.options.connection_attempts_threshold; i++)
 			try {
 				let target_port = await Blacktraffic.getFreePort();
 				
@@ -223,6 +290,53 @@ Blacktraffic.AgentBrowserPuppeteer = class {
 	}
 	
 	/**
+	 * Reloads the given tab.
+	 * 
+	 * @param {string} arg0_tab_key
+	 * 
+	 * @returns {Promise<Object>}
+	 */
+	async reloadTab (arg0_tab_key) {
+		//Convert from parameters
+		let tab_obj = this.getTab(arg0_tab_key);
+		
+		//Reload the current tab
+		await tab.reload({ waitUntil: "networkidle2" });
+		
+		//Return statement
+		return tab_obj;
+	}
+	
+	/**
+	 * Checks if a given tab exists.
+	 * 
+	 * @param {Object|string} arg0_tab_key
+	 * @param {Object} [arg1_options]
+	 *  @param {boolean} [arg1_options.strict=false] - Whether to also ensure the current tab is connected.
+	 *  
+	 * @returns {Promise<boolean>}
+	 */
+	async tabExists (arg0_tab_key, arg1_options) {
+		//Convert from parameters
+		let tab_obj = this.getTab(arg0_tab_key);
+		let options = (arg1_options) ? arg1_options : {};
+		
+		//Declare local instance variables
+		let is_connected = false;
+		
+		//options.strict handler
+		if (tab_obj && options.strict)
+			try {
+				await tab_obj.title();
+				is_connected = true;
+			} catch (e) {}
+		
+		//Return statement
+		if (!options.strict && tab_obj) return true;
+		if (options.strict && is_connected) return true;
+	}
+	
+	/**
 	 * Updates the default logging channel for the current agent.
 	 * 
 	 * @param {string} arg0_channel_key
@@ -235,6 +349,46 @@ Blacktraffic.AgentBrowserPuppeteer = class {
 			this.error_fn = this.log_obj.error_fn;
 			this.log_fn = this.log_obj.log_fn;
 			this.warn_fn = this.log_obj.warn_fn;
+	}
+	
+	/**
+	 * Waits for content to stop changing within a selector.
+	 *
+	 * @param {Object|string} arg0_tab_key - The given tab key.
+	 * @param {string} arg1_selector
+	 * @param {number} [arg2_interval=3000]
+	 */
+	async waitForStableContent (arg0_tab_key, arg1_selector, arg2_interval) {
+		//Convert from parameters
+		let tab_obj = this.getTab(arg0_tab_key);
+		let selector = arg1_selector;
+		let interval = Math.returnSafeNumber(arg2_interval, 3000);
+		
+		//Wait for function inside of tab should it exist
+		if (tab_obj) {
+			let state_key = `_Blacktraffic_stable_${selector.replace(/[^a-z]/gi, "")}`;
+			
+			await tab_obj.waitForFunction((selector, state_key) => {
+				let local_els = document.querySelectorAll(selector);
+				if (local_els.length === 0) return false;
+				
+				let last_el = local_els[local_els.length - 1];
+				
+				//Check if HTML has changed
+				if (!window[state_key]) {
+					window[state_key] = last_el.innerHTML;
+					return false;
+				}
+				
+				let current_html = last_el.innerHTML;
+				if (current_html === window[state_key]) {
+					return true;
+				} else {
+					window[state_key] = current_html;
+					return false;
+				}
+			}, { polling: interval, timeout: 0 }, selector, state_key);
+		}
 	}
 };
 
