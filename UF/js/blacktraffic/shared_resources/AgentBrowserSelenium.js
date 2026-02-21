@@ -17,6 +17,34 @@ if (!global.Blacktraffic) global.Blacktraffic = {};
  *   -
  *   - `.connection_attempts_threshold=3`: {@link number} - The number of connection attempts to use when opening the browser.
  *   - `.log_channel="console"`: {@link string}
+ * 
+ * ##### Instances:
+ * - `.key`: {@link string}
+ * - `.options`: {@link Object}
+ *   - `.onload`: {@link function}
+ * - `.tab_obj`: {@link Object}<{@link Object}>
+ *
+ * ##### Methods:
+ * - <span color=00ffff>{@link Blacktraffic.AgentBrowserSelenium.captureConsoleToChannel|captureConsoleToChannel}</span>(arg0_tab_key:{@link Object}|{@link string}, arg1_channel_key:{@link string})
+ * - <span color=00ffff>{@link Blacktraffic.AgentBrowserSelenium.close|close}</span>() | {@link Blacktraffic.AgentBrowserSelenium}
+ * - <span color=00ffff>{@link Blacktraffic.AgentBrowserSelenium.closeTab|closeTab}</span>(arg0_tab_key:{@link Object}|{@link string}) | {@link Blacktraffic.AgentBrowserSelenium}
+ * - <span color=00ffff>{@link Blacktraffic.AgentBrowserSelenium.closeUserTabs|closeUserTabs}</span>() | {@link Blacktraffic.AgentBrowserSelenium}
+ * - <span color=00ffff>{@link Blacktraffic.AgentBrowserSelenium.focusTab|focusTab}</span>(arg0_tab_key:{@link Object}|{@link string}) | {@link Object}
+ * - <span color=00ffff>{@link Blacktraffic.AgentBrowserSelenium.getElement|getElement}</span>(arg0_tab_key:{@link Object}|{@link string}, arg1_selector:{@link string}, arg2_options:{@link Object}) | {@link HTMLElement}
+ * - <span color=00ffff>{@link Blacktraffic.AgentBrowserSelenium.getTab|getTab}</span>(arg0_tab_key:{@link Object}|{@link string}) | {@link Object}
+ * - <span color=00ffff>{@link Blacktraffic.AgentBrowserSelenium.getTabs|getTabs}</span>() | {@link Array}<{@link Object}>
+ * - <span color=00ffff>{@link Blacktraffic.AgentBrowserSelenium.injectScript|injectScript}</span>(arg0_tab_key:{@link Object}|{@link string}, arg1_function:{@link function}, arg2_options:{@link Object}) | {@link Object}
+ * - <span color=00ffff>{@link Blacktraffic.AgentBrowserSelenium.injectScriptOnload|injectScriptOnload}</span>(arg0_tab_key:{@link Object}|{@link string}, arg1_function:{@link function}, arg2_options:{@link Object}) | {@link Object}
+ * - <span color=00ffff>{@link Blacktraffic.AgentBrowserSelenium.open|open}</span>() | {@link Blacktraffic.AgentBrowserSelenium}
+ * - <span color=00ffff>{@link Blacktraffic.AgentBrowserSelenium.openTab|openTab}</span>(arg0_tab_key:{@link Object}|{@link string}, arg1_url:{@link string}) | {@link Object}
+ * - <span color=00ffff>{@link Blacktraffic.AgentBrowserSelenium.reloadTab|reloadTab}</span>(arg0_tab_key:{@link Object}|{@link string}) | {@link Object}
+ * - <span color=00ffff>{@link Blacktraffic.AgentBrowserSelenium.remove|remove}</span>()
+ * - <span color=00ffff>{@link Blacktraffic.AgentBrowserSelenium.tabExists|tabExists}</span>(arg0_tab_key:{@link Object}|{@link string}, arg1_options:{@link Object})
+ * - <span color=00ffff>{@link Blacktraffic.AgentBrowserSelenium.updateLogChannel|updateLogChannel}</span>(arg0_channel_key:{@link string})
+ * - <span color=00ffff>{@link Blacktraffic.AgentBrowserSelenium.waitForStableContent|waitForStableContent}</span>(arg0_tab_key:{@link Object}|{@link string}, arg1_selector:{@link string}, arg2_interval=3000:{@link number}) | {@link boolean}
+ *
+ * ##### Static Fields:
+ * - `.instances`: {@link Array}<{@link Blacktraffic.AgentBrowserPuppeteer}>
  *
  * @augments Blacktraffic.AgentBrowser
  * @memberof Blacktraffic.AgentBrowser
