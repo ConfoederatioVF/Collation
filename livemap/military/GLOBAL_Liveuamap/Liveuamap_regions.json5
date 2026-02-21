@@ -1,0 +1,86 @@
+{
+  //United States, Russia, China are tracked in their near abroads
+  ukraine: {
+    name: "Ukraine",
+    url: "https://liveuamap.com/",
+    tags: ["ERCOM", "UA", "RU"]
+  },
+  israel_palestine: {
+    name: "Israel-Palestine",
+    url: "https://israelpalestine.liveuamap.com/",
+    tags: ["MECOM", "IS", "PS"]
+  },
+  syria: {
+    name: "Syria",
+    url: "https://syria.liveuamap.com/",
+    tags: ["MECOM", "SY"]
+  },
+  caucasus: {
+    name: "Caucasus",
+    url: "https://caucasus.liveuamap.com/",
+    tags: ["MECOM", "GE", "AZ", "AM", "RU"]
+  },
+  isis: {
+    name: "ISIS",
+    url: "https://isis.liveuamap.com/",
+    tags: ["MECOM", "SY", "IQ"]
+  },
+  asia: {
+    name: "Asia",
+    url: "https://asia.liveuamap.com/",
+    tags: ["ASCOM", "MLCOM"]
+  },
+  women: {
+    name: "Women",
+    url: "https://women.liveuamap.com/"
+  },
+  us_protests: {
+    name: "US Protests",
+    url: "https://usprotests.liveuamap.com/"
+  },
+  egypt: {
+    name: "Egypt",
+    url: "https://egypt.liveuamap.com/"
+  },
+  trade_wars: {
+    name: "Trade Wars",
+    url: "https://tradewars.liveuamap.com/"
+  },
+  russia: {
+    name: "Russia",
+    url: "https://russia.liveuamap.com/"
+  },
+  turkey: {
+    name: "Turkey",
+    url: "https://turkey.liveuamap.com/"
+  },
+  hungary: {
+    name: "Hungary",
+    url: "https://hungary.liveuamap.com/"
+  },
+  cyberwar: {
+    name: "Cyberwar",
+    url: "https://cyberwar.liveuamap.com/"
+  },
+  usa: {
+    name: "USA",
+    url: "https://usa.liveuamap.com/"
+  },
+  pacific: {
+    name: "Pacific",
+    url: "https://pacific.liveuamap.com/",
+    tags: ["MLCOM"]
+  },
+  china: {
+    name: "China",
+    url: "https://china.liveuamap.com/"
+  },
+  disasters: {
+    name: "Disasters",
+    url: "https://disasters.liveuamap.com/"
+  },
+  human_rights: {
+    name: "Human Rights",
+    url: "https://humanrights.liveuamap.com/"
+  }
+}

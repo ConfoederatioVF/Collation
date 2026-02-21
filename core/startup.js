@@ -23,6 +23,8 @@ global.h4 = "./histmap/4.data_processing/";
 global.h5 = "./histmap/5.data_post_processing/";
 global.h6 = "./histmap/6.data_visualisation/";
 
+global.l2 = "./livemap/military/";
+
 //Initialise functions
 {
   global.initialiseGlobal = function () {

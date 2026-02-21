@@ -307,7 +307,7 @@ Blacktraffic.AgentBrowserPuppeteer = class extends Blacktraffic.AgentBrowser { /
 	 * @alias injectScriptOnload
 	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserPuppeteer
 	 * 
-	 * @param {string} arg0_tab_key
+	 * @param {Object|string} arg0_tab_key
 	 * @param {function} arg1_function
 	 * @param {Object} [arg2_options]
 	 *  @param {Object} [arg2_options.options] - Any options to pass down to the local function.
