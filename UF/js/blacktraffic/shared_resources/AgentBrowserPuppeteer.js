@@ -111,6 +111,7 @@ Blacktraffic.AgentBrowserPuppeteer = class extends Blacktraffic.AgentBrowser { /
 	
 	/**
 	 * Closes the browser currently mounted to the AgentBrowser.
+	 * - Method of: {@link Blacktraffic.AgentBrowserPuppeteer}
 	 * 
 	 * @returns {Promise<Blacktraffic.AgentBrowserPuppeteer>}
 	 */
@@ -125,6 +126,7 @@ Blacktraffic.AgentBrowserPuppeteer = class extends Blacktraffic.AgentBrowser { /
 	
 	/**
 	 * Closes the tab specified.
+	 * - Method of: {@link Blacktraffic.AgentBrowserPuppeteer}
 	 * 
 	 * @alias closeTab
 	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserPuppeteer
@@ -150,6 +152,7 @@ Blacktraffic.AgentBrowserPuppeteer = class extends Blacktraffic.AgentBrowser { /
 	
 	/**
 	 * Closes all user tabs from the current browser.
+	 * - Method of: {@link Blacktraffic.AgentBrowserPuppeteer}
 	 * 
 	 * @alias closeUserTabs
 	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserPuppeteer
@@ -174,6 +177,7 @@ Blacktraffic.AgentBrowserPuppeteer = class extends Blacktraffic.AgentBrowser { /
 	
 	/**
 	 * Focuses the specified tab.
+	 * - Method of: {@link Blacktraffic.AgentBrowserPuppeteer}
 	 *
 	 * @alias focusTab
 	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserPuppeteer
@@ -202,6 +206,7 @@ Blacktraffic.AgentBrowserPuppeteer = class extends Blacktraffic.AgentBrowser { /
 	
 	/**
 	 * Fetches a specific element handle using CSS selectors.
+	 * - Method of: {@link Blacktraffic.AgentBrowserPuppeteer}
 	 *
 	 * @alias getElement
 	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserPuppeteer
@@ -231,6 +236,7 @@ Blacktraffic.AgentBrowserPuppeteer = class extends Blacktraffic.AgentBrowser { /
 	
 	/**
 	 * Returns a tab object based on its key.
+	 * - Method of: {@link Blacktraffic.AgentBrowserPuppeteer}
 	 *
 	 * @alias getTab
 	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserPuppeteer
@@ -251,6 +257,7 @@ Blacktraffic.AgentBrowserPuppeteer = class extends Blacktraffic.AgentBrowser { /
 	
 	/**
 	 * Returns all tabs in the current browser.
+	 * - Method of: {@link Blacktraffic.AgentBrowserPuppeteer}
 	 *
 	 * @alias getTabs
 	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserPuppeteer
@@ -266,6 +273,7 @@ Blacktraffic.AgentBrowserPuppeteer = class extends Blacktraffic.AgentBrowser { /
 	/**
 	 * Injects a script within the current tab. 
 	 * **Note.** Contexts are fully isolated when passing a function.
+	 * - Method of: {@link Blacktraffic.AgentBrowserPuppeteer}
 	 *
 	 * @alias injectScript
 	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserPuppeteer
@@ -294,6 +302,7 @@ Blacktraffic.AgentBrowserPuppeteer = class extends Blacktraffic.AgentBrowser { /
 	/**
 	 * Registers an onload script for future page visits using the mounted tab. 
 	 * **Note.** Contexts are fully isolated when passing a function.
+	 * - Method of: {@link Blacktraffic.AgentBrowserPuppeteer}
 	 *
 	 * @alias injectScriptOnload
 	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserPuppeteer
@@ -324,6 +333,7 @@ Blacktraffic.AgentBrowserPuppeteer = class extends Blacktraffic.AgentBrowser { /
 	
 	/**
 	 * Initialises a Chrome instance and connects Puppeteer.
+	 * - Method of: {@link Blacktraffic.AgentBrowserPuppeteer}
 	 *
 	 * @alias open
 	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserPuppeteer
@@ -365,6 +375,7 @@ Blacktraffic.AgentBrowserPuppeteer = class extends Blacktraffic.AgentBrowser { /
 	
 	/**
 	 * Opens a tab at the corresponding URL. Corresponding URLs are optional.
+	 * - Method of: {@link Blacktraffic.AgentBrowserPuppeteer}
 	 *
 	 * @alias openTab
 	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserPuppeteer
@@ -393,6 +404,7 @@ Blacktraffic.AgentBrowserPuppeteer = class extends Blacktraffic.AgentBrowser { /
 	
 	/**
 	 * Reloads the given tab.
+	 * - Method of: {@link Blacktraffic.AgentBrowserPuppeteer}
 	 *
 	 * @alias reloadTab
 	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserPuppeteer
@@ -414,6 +426,7 @@ Blacktraffic.AgentBrowserPuppeteer = class extends Blacktraffic.AgentBrowser { /
 	
 	/**
 	 * Removes the current {@link Blacktraffic.AgentBrowser}.
+	 * - Method of: {@link Blacktraffic.AgentBrowserPuppeteer}
 	 *
 	 * @alias remove
 	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserPuppeteer
@@ -435,6 +448,7 @@ Blacktraffic.AgentBrowserPuppeteer = class extends Blacktraffic.AgentBrowser { /
 	
 	/**
 	 * Takes multi-page or full-page screenshots from a Puppeteer instance. A4 page format by default, hence strange px values.
+	 * - Method of: {@link Blacktraffic.AgentBrowserPuppeteer}
 	 *
 	 * @alias screenshotHTML
 	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserPuppeteer
@@ -525,6 +539,7 @@ Blacktraffic.AgentBrowserPuppeteer = class extends Blacktraffic.AgentBrowser { /
 	
 	/**
 	 * Checks if a given tab exists.
+	 * - Method of: {@link Blacktraffic.AgentBrowserPuppeteer}
 	 *
 	 * @alias tabExists
 	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserPuppeteer
@@ -557,6 +572,7 @@ Blacktraffic.AgentBrowserPuppeteer = class extends Blacktraffic.AgentBrowser { /
 	
 	/**
 	 * Updates the default logging channel for the current agent.
+	 * - Method of: {@link Blacktraffic.AgentBrowserPuppeteer}
 	 *
 	 * @alias updateLogChannel
 	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserPuppeteer
@@ -575,6 +591,7 @@ Blacktraffic.AgentBrowserPuppeteer = class extends Blacktraffic.AgentBrowser { /
 	
 	/**
 	 * Waits for content to stop changing within a selector.
+	 * - Method of: {@link Blacktraffic.AgentBrowserPuppeteer}
 	 *
 	 * @alias waitForStableContent
 	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserPuppeteer

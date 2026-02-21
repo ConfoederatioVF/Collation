@@ -1,6 +1,8 @@
 if (!global.Blacktraffic) global.Blacktraffic = {};
 
 /**
+ * Refer to <span color = "yellow">{@link Blacktraffic.AgentBrowser}</span> for methods or fields inherited from automatic destructuring.
+ * 
  * Creates a new Selenium browser agent (Firefox) used for scraping tasks and purposes. Requires npm selenium-webdriver.
  *
  * **Note.** This shared resource type is currently a beta test, and may not be equivalent to Puppeteer logic, which is recommended for production use.
@@ -18,7 +20,7 @@ if (!global.Blacktraffic) global.Blacktraffic = {};
  *   - `.connection_attempts_threshold=3`: {@link number} - The number of connection attempts to use when opening the browser.
  *   - `.log_channel="console"`: {@link string}
  * 
- * ##### Instances:
+ * ##### Instance:
  * - `.key`: {@link string}
  * - `.options`: {@link Object}
  *   - `.onload`: {@link function}
@@ -80,6 +82,7 @@ Blacktraffic.AgentBrowserSelenium = class extends Blacktraffic.AgentBrowser { //
 	
 	/**
 	 * Captures the current tab's console and feeds it into a {@link log.Channel}.
+	 * - Method of: {@link Blacktraffic.AgentBrowserSelenium}
 	 *
 	 * @alias captureConsoleToChannel
 	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserSelenium
@@ -106,6 +109,7 @@ Blacktraffic.AgentBrowserSelenium = class extends Blacktraffic.AgentBrowser { //
 	
 	/**
 	 * Closes the browser currently mounted to the AgentBrowser.
+	 * - Method of: {@link Blacktraffic.AgentBrowserSelenium}
 	 *
 	 * @alias close
 	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserSelenium
@@ -123,6 +127,7 @@ Blacktraffic.AgentBrowserSelenium = class extends Blacktraffic.AgentBrowser { //
 	
 	/**
 	 * Closes the tab specified.
+	 * - Method of: {@link Blacktraffic.AgentBrowserSelenium}
 	 *
 	 * @alias closeTab
 	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserSelenium
@@ -155,6 +160,7 @@ Blacktraffic.AgentBrowserSelenium = class extends Blacktraffic.AgentBrowser { //
 	
 	/**
 	 * Closes all user tabs from the current browser.
+	 * - Method of: {@link Blacktraffic.AgentBrowserSelenium}
 	 *
 	 * @alias closeUserTabs
 	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserSelenium
@@ -176,6 +182,7 @@ Blacktraffic.AgentBrowserSelenium = class extends Blacktraffic.AgentBrowser { //
 	
 	/**
 	 * Focuses the specified tab.
+	 * - Method of: {@link Blacktraffic.AgentBrowserSelenium}
 	 *
 	 * @alias focusTab
 	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserSelenium
@@ -204,6 +211,7 @@ Blacktraffic.AgentBrowserSelenium = class extends Blacktraffic.AgentBrowser { //
 	
 	/**
 	 * Fetches a specific element handle using CSS selectors.
+	 * - Method of: {@link Blacktraffic.AgentBrowserSelenium}
 	 *
 	 * @alias getElement
 	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserSelenium
@@ -237,6 +245,7 @@ Blacktraffic.AgentBrowserSelenium = class extends Blacktraffic.AgentBrowser { //
 	
 	/**
 	 * Returns a tab object based on its key.
+	 * - Method of: {@link Blacktraffic.AgentBrowserSelenium}
 	 *
 	 * @alias getTab
 	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserSelenium
@@ -257,6 +266,7 @@ Blacktraffic.AgentBrowserSelenium = class extends Blacktraffic.AgentBrowser { //
 	
 	/**
 	 * Returns all tabs in the current browser.
+	 * - Method of: {@link Blacktraffic.AgentBrowserSelenium}
 	 *
 	 * @alias getTabs
 	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserSelenium
@@ -271,6 +281,7 @@ Blacktraffic.AgentBrowserSelenium = class extends Blacktraffic.AgentBrowser { //
 	/**
 	 * Injects a script within the current tab.
 	 * **Note.** Contexts are fully isolated when passing a function.
+	 * - Method of: {@link Blacktraffic.AgentBrowserSelenium}
 	 *
 	 * @alias injectScript
 	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserSelenium
@@ -298,6 +309,7 @@ Blacktraffic.AgentBrowserSelenium = class extends Blacktraffic.AgentBrowser { //
 	/**
 	 * Registers an onload script for future page visits using the mounted tab.
 	 * **Note.** Contexts are fully isolated when passing a function.
+	 * - Method of: {@link Blacktraffic.AgentBrowserSelenium}
 	 *
 	 * @alias injectScriptOnload
 	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserSelenium
@@ -329,6 +341,7 @@ Blacktraffic.AgentBrowserSelenium = class extends Blacktraffic.AgentBrowser { //
 	
 	/**
 	 * Initialises a Firefox instance and connects Selenium.
+	 * - Method of: {@link Blacktraffic.AgentBrowserSelenium}
 	 *
 	 * @alias open
 	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserSelenium
@@ -378,6 +391,7 @@ Blacktraffic.AgentBrowserSelenium = class extends Blacktraffic.AgentBrowser { //
 	
 	/**
 	 * Opens a tab at the corresponding URL. Corresponding URLs are optional.
+	 * - Method of: {@link Blacktraffic.AgentBrowserSelenium}
 	 *
 	 * @alias openTab
 	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserSelenium
@@ -406,6 +420,7 @@ Blacktraffic.AgentBrowserSelenium = class extends Blacktraffic.AgentBrowser { //
 	}
 	/**
 	 * Reloads the given tab.
+	 * - Method of: {@link Blacktraffic.AgentBrowserSelenium}
 	 *
 	 * @alias reloadTab
 	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserSelenium
@@ -427,6 +442,7 @@ Blacktraffic.AgentBrowserSelenium = class extends Blacktraffic.AgentBrowser { //
 	
 	/**
 	 * Checks if a given tab exists.
+	 * - Method of: {@link Blacktraffic.AgentBrowserSelenium}
 	 *
 	 * @alias tabExists
 	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserSelenium
@@ -459,6 +475,7 @@ Blacktraffic.AgentBrowserSelenium = class extends Blacktraffic.AgentBrowser { //
 	
 	/**
 	 * Removes the current {@link Blacktraffic.AgentBrowser}.
+	 * - Method of: {@link Blacktraffic.AgentBrowserSelenium}
 	 *
 	 * @alias remove
 	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserSelenium
@@ -479,6 +496,7 @@ Blacktraffic.AgentBrowserSelenium = class extends Blacktraffic.AgentBrowser { //
 	
 	/**
 	 * Updates the default logging channel for the current agent.
+	 * - Method of: {@link Blacktraffic.AgentBrowserSelenium}
 	 *
 	 * @alias updateLogChannel
 	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserSelenium
@@ -497,6 +515,7 @@ Blacktraffic.AgentBrowserSelenium = class extends Blacktraffic.AgentBrowser { //
 	
 	/**
 	 * Waits for content to stop changing within a selector.
+	 * - Method of: {@link Blacktraffic.AgentBrowserSelenium}
 	 *
 	 * @alias waitForStableSelector
 	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserSelenium
