@@ -17,13 +17,35 @@ if (!global.Blacktraffic) global.Blacktraffic = {};
  *   - 
  *   - `.connection_attempts_threshold=3`: {@link number} - The number of connection attempts to use when opening the browser.
  *   - `.log_channel="console"`: {@link string}
+ *   
+ * ##### Instance:
+ * - `.key`: {@link string}
+ * - `.options`: {@link Object}
+ *   - `.onload`: {@link function}
+ * - `.tab_obj`: {@link Object}<{@link Object}>
  * 
  * ##### Methods:
  * - <span color=00ffff>{@link Blacktraffic.AgentBrowserPuppeteer.captureConsoleToChannel|captureConsoleToChannel}</span>(arg0_tab_key:{@link Object}|{@link string}, arg1_channel_key:{@link string})
  * - <span color=00ffff>{@link Blacktraffic.AgentBrowserPuppeteer.close|close}</span>() | {@link Blacktraffic.AgentBrowserPuppeteer}
  * - <span color=00ffff>{@link Blacktraffic.AgentBrowserPuppeteer.closeTab|closeTab}</span>(arg0_tab_key:{@link Object}|{@link string}) | {@link Blacktraffic.AgentBrowserPuppeteer}
  * - <span color=00ffff>{@link Blacktraffic.AgentBrowserPuppeteer.closeUserTabs|closeUserTabs}</span>() | {@link Blacktraffic.AgentBrowserPuppeteer}
+ * - <span color=00ffff>{@link Blacktraffic.AgentBrowserPuppeteer.focusTab|focusTab}</span>(arg0_tab_key:{@link Object}|{@link string}) | {@link Object}
+ * - <span color=00ffff>{@link Blacktraffic.AgentBrowserPuppeteer.getElement|getElement}</span>(arg0_tab_key:{@link Object}|{@link string}, arg1_selector:{@link string}, arg2_options:{@link Object}) | {@link HTMLElement}
+ * - <span color=00ffff>{@link Blacktraffic.AgentBrowserPuppeteer.getTab|getTab}</span>(arg0_tab_key:{@link Object}|{@link string}) | {@link Object}
+ * - <span color=00ffff>{@link Blacktraffic.AgentBrowserPuppeteer.getTabs|getTabs}</span>() | {@link Array}<{@link Object}>
+ * - <span color=00ffff>{@link Blacktraffic.AgentBrowserPuppeteer.injectScript|injectScript}</span>(arg0_tab_key:{@link Object}|{@link string}, arg1_function:{@link function}, arg2_options:{@link Object}) | {@link Object}
+ * - <span color=00ffff>{@link Blacktraffic.AgentBrowserPuppeteer.injectScriptOnload|injectScriptOnload}</span>(arg0_tab_key:{@link Object}|{@link string}, arg1_function:{@link function}, arg2_options:{@link Object}) | {@link Object}
+ * - <span color=00ffff>{@link Blacktraffic.AgentBrowserPuppeteer.open|open}</span>() | {@link Blacktraffic.AgentBrowserPuppeteer}
+ * - <span color=00ffff>{@link Blacktraffic.AgentBrowserPuppeteer.openTab|openTab}</span>(arg0_tab_key:{@link Object}|{@link string}, arg1_url:{@link string}) | {@link Object}
+ * - <span color=00ffff>{@link Blacktraffic.AgentBrowserPuppeteer.reloadTab|reloadTab}</span>(arg0_tab_key:{@link Object}|{@link string}) | {@link Object}
+ * - <span color=00ffff>{@link Blacktraffic.AgentBrowserPuppeteer.remove|remove}</span>()
+ * - <span color=00ffff>{@link Blacktraffic.AgentBrowserPuppeteer.screenshotHTML|screenshotHTML}</span>(arg0_tab_key:{@link Object}|{@link string}, arg1_path:{@link string}, arg2_options:{@link Object})
+ * - <span color=00ffff>{@link Blacktraffic.AgentBrowserPuppeteer.tabExists|tabExists}</span>(arg0_tab_key:{@link Object}|{@link string}, arg1_options:{@link Object})
+ * - <span color=00ffff>{@link Blacktraffic.AgentBrowserPuppeteer.updateLogChannel|updateLogChannel}</span>(arg0_channel_key:{@link string})
+ * - <span color=00ffff>{@link Blacktraffic.AgentBrowserPuppeteer.waitForStableContent|waitForStableContent}</span>(arg0_tab_key:{@link Object}|{@link string}, arg1_selector:{@link string}, arg2_interval=3000:{@link number}) | {@link boolean}
  * 
+ * ##### Static Fields:
+ * - `.instances`: {@link Array}<{@link Blacktraffic.AgentBrowserPuppeteer}>
  * 
  * @augments Blacktraffic.AgentBrowser
  * @memberof Blacktraffic.AgentBrowser
@@ -391,38 +413,6 @@ Blacktraffic.AgentBrowserPuppeteer = class extends Blacktraffic.AgentBrowser { /
 	}
 	
 	/**
-	 * Checks if a given tab exists.
-	 *
-	 * @alias tabExists
-	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserPuppeteer
-	 * 
-	 * @param {Object|string} arg0_tab_key
-	 * @param {Object} [arg1_options]
-	 *  @param {boolean} [arg1_options.strict=false] - Whether to also ensure the current tab is connected.
-	 *  
-	 * @returns {Promise<boolean>}
-	 */
-	async tabExists (arg0_tab_key, arg1_options) {
-		//Convert from parameters
-		let tab_obj = this.getTab(arg0_tab_key);
-		let options = (arg1_options) ? arg1_options : {};
-		
-		//Declare local instance variables
-		let is_connected = false;
-		
-		//options.strict handler
-		if (tab_obj && options.strict)
-			try {
-				await tab_obj.title();
-				is_connected = true;
-			} catch (e) {}
-		
-		//Return statement
-		if (!options.strict && tab_obj) return true;
-		if (options.strict && is_connected) return true;
-	}
-	
-	/**
 	 * Removes the current {@link Blacktraffic.AgentBrowser}.
 	 *
 	 * @alias remove
@@ -534,6 +524,38 @@ Blacktraffic.AgentBrowserPuppeteer = class extends Blacktraffic.AgentBrowser { /
 	}
 	
 	/**
+	 * Checks if a given tab exists.
+	 *
+	 * @alias tabExists
+	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserPuppeteer
+	 *
+	 * @param {Object|string} arg0_tab_key
+	 * @param {Object} [arg1_options]
+	 *  @param {boolean} [arg1_options.strict=false] - Whether to also ensure the current tab is connected.
+	 *
+	 * @returns {Promise<boolean>}
+	 */
+	async tabExists (arg0_tab_key, arg1_options) {
+		//Convert from parameters
+		let tab_obj = this.getTab(arg0_tab_key);
+		let options = (arg1_options) ? arg1_options : {};
+		
+		//Declare local instance variables
+		let is_connected = false;
+		
+		//options.strict handler
+		if (tab_obj && options.strict)
+			try {
+				await tab_obj.title();
+				is_connected = true;
+			} catch (e) {}
+		
+		//Return statement
+		if (!options.strict && tab_obj) return true;
+		if (options.strict && is_connected) return true;
+	}
+	
+	/**
 	 * Updates the default logging channel for the current agent.
 	 *
 	 * @alias updateLogChannel
@@ -554,7 +576,7 @@ Blacktraffic.AgentBrowserPuppeteer = class extends Blacktraffic.AgentBrowser { /
 	/**
 	 * Waits for content to stop changing within a selector.
 	 *
-	 * @alias waitForStableSelector
+	 * @alias waitForStableContent
 	 * @memberof Blacktraffic.AgentBrowser.Blacktraffic.AgentBrowserPuppeteer
 	 *
 	 * @param {Object|string} arg0_tab_key - The given tab key.
