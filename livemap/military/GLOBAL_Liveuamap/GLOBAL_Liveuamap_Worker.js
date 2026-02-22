@@ -51,7 +51,7 @@ global.GLOBAL_Liveuamap_Worker = class {
 		this.browser.injectScriptOnload(liveuamap_tab, this.static._captureLeaflet);
 		
 		//Iterate over all_regions until regions_threshold
-		for (let i = 0; i < regions_threshold; i++) {
+		for (let i = 0; i < regions_threshold; i++) try {
 			let local_region = all_regions[i];
 			
 			console.log(`Plotting ${local_region.name} ..`);
@@ -138,9 +138,9 @@ global.GLOBAL_Liveuamap_Worker = class {
 						local_geometry.addTo(this.layer);
 				}
 				
-				await Blacktraffic.sleep(10000, 15000); //10s-15s delay between polling
+				await Blacktraffic.sleep(15000, 30000); //10s-15s delay between polling
 			}
-		}
+		} catch (e) { console.error(e); }
 	}
 	
 	remove () {
