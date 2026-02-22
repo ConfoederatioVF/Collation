@@ -16,6 +16,9 @@ html, head, body {
 
 /* -- Map -- */
 .maptalks-attribution { display: none !important; }
+.maptalks-msgBox {
+  font-family: var(--body-font-family);
+}
 
 /* -- Scrollbar styling -- */
 ::-webkit-scrollbar {
