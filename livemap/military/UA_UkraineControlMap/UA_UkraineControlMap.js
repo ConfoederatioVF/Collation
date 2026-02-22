@@ -11,6 +11,7 @@ global.UA_UkraineControlMap = class {
 	}
 	
 	initLeafletMap () {
-		this.geokmz = new GeoKMZ(`${this.static.bf}/Ukraine Control Map v2.kmz`);
+		this.geokmz = new Geospatiale.maptalks_GeoKMZ(`${this.static.bf}Ukraine Control Map v2.kmz`);
+		this.geokmz.addTo(map);
 	}
 };
