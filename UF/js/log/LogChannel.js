@@ -27,11 +27,13 @@
 	 * - <span color=00ffff>{@link ve.Log.clear|clear}</span>()
 	 * - <span color=00ffff>{@link ve.Log.close|close}</span>()
 	 * - <span color=00ffff>{@link ve.Log.error|error}</span>(argn_arguments:{@link any})
+	 * - <span color=00ffff>{@link ve.Log.fromJSON|fromJSON}</span>(arg0_json:{@link string})
 	 * - <span color=00ffff>{@link ve.Log.log|log}</span>(argn_arguments:{@link any})
 	 * - <span color=00ffff>{@link ve.Log.open|open}</span>()
 	 * - <span color=00ffff>{@link ve.Log.warn|warn}</span>(argn_arguments:{@link any})
 	 * - <span color=00ffff>{@link ve.Log.print|print}</span>(arg0_type:{@link string}, argn_arguments:{@link any})
 	 * - <span color=00ffff>{@link ve.Log.remove|remove}</span>()
+	 * - <span color=00ffff>{@link ve.Log.toJSON|toJSON}</span>() | {@link string}
 	 * 
 	 * ##### Static Fields:
 	 * - `.instances`: {@link Array}<{@link log.Channel}>
@@ -102,6 +104,22 @@
 		 * @param argn_arguments
 		 */
 		error (...argn_arguments) { this.print("error", argn_arguments); }
+		
+		/**
+		 * Loads a log history from a JSON string and restores the internal HTML.
+		 * - Method of: {@link log.Channel}
+		 *
+		 * @param {string} arg0_json - The JSON string to load.
+		 */
+		fromJSON (arg0_json) {
+			//Convert from parameters
+			let data = JSON.parse(arg0_json);
+			
+			//Hydrate current log from data
+			if (data.key) this.key = data.key;
+			if (data.options) this.options = data.options;
+			if (data.html !== undefined) this.log_el.innerHTML = data.html;
+		}
 		
 		/**
 		 * Prints a log message to the console channel, analogous to {@link console.log}.
@@ -219,6 +237,21 @@
 			//Remove log[key]
 			delete log[this.key];
 			log.Channel.update();
+		}
+		
+		/**
+		 * Serialises the current log channel's entire history and configuration to a JSON string.
+		 * - Method of: {@link log.Channel}
+		 *
+		 * @returns {string}
+		 */
+		toJSON () {
+			//Return statement
+			return JSON.stringify({
+				key: this.key,
+				options: this.options,
+				html: this.log_el.innerHTML
+			});
 		}
 		
 		/**
