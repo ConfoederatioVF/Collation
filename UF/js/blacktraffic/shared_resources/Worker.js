@@ -21,10 +21,9 @@ Blacktraffic.Worker = class {
 	static browser_obj;
 	
 	/**
-	 * //[WIP] - This needs to be changed to be fetched dynamically based on OS
 	 * @type {string}
 	 */
-	static input_chrome_profile = path.resolve(`${process.env.LOCALAPPDATA}/Google/Chrome/User Data/Profile 1`);
+	static input_chrome_profile = Blacktraffic.getChromeDefaultProfilePath();
 	
 	/**
 	 * @type {string}

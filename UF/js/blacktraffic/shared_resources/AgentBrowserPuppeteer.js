@@ -703,3 +703,59 @@ Blacktraffic.getChromeBinaryPath = function () {
 			} catch (e) {} //Which returns non-zero exit code if not found
 	}
 };
+
+/**
+ * Attempts to return the default Chrome profile path.
+ * 
+ * @param {string} [arg0_profile]
+ * 
+ * @returns {string}
+ */
+Blacktraffic.getChromeDefaultProfilePath = function (arg0_profile) {
+	//Convert from parameters
+	let profile = arg0_profile;
+	
+	//Declare local instance variables
+	let os_platform = Blacktraffic.getOS();
+	let profile_name = (profile) ? profile : "Profile 1";
+	let user_home = process.env.HOME || process.env.USERPROFILE;
+	
+	//Handle Windows
+	if (os_platform === "win") {
+		if (process.env.LOCALAPPDATA) {
+			let profile_path = path.join(
+				process.env.LOCALAPPDATA,
+				"Google/Chrome/User Data",
+				profile_name
+			);
+			if (fs.existsSync(profile_path)) return profile_path;
+		}
+	} else if (os_platform === "lin") {
+		if (user_home) {
+			let profile_path = path.join(user_home, "Library/Application Support/Google/Chrome", profile_name);
+			if (fs.existsSync(profile_path)) return profile_path;
+		}
+	} else {
+		if (user_home) {
+			//Check for both official Google Chrome and Chromium paths
+			let potential_paths = [
+				path.join(user_home, ".config/google-chrome", profile_name),
+				path.join(user_home, ".config/chromium", profile_name),
+			];
+			
+			//Iterate over all potential_paths
+			for (let local_path of potential_paths)
+				if (fs.existsSync(local_path)) return local_path;
+		}
+	}
+	
+	//Fallback after Profile 1 to Default
+	if (profile !== "Default") {
+		let default_profile_path = Blacktraffic.getChromeDefaultProfilePath("Default");
+		if (default_profile_path) return default_profile_path;
+	}
+	
+	//Return statement; fallback return if no path is found
+	console.error(`Blacktraffic.getChromeDefaultProfile() called, but path could not be found.`);
+	return undefined;
+};
