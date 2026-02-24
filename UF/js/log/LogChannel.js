@@ -33,6 +33,7 @@
 	 * - <span color=00ffff>{@link ve.Log.warn|warn}</span>(argn_arguments:{@link any})
 	 * - <span color=00ffff>{@link ve.Log.print|print}</span>(arg0_type:{@link string}, argn_arguments:{@link any})
 	 * - <span color=00ffff>{@link ve.Log.remove|remove}</span>()
+	 * - <span color=00ffff>{@link ve.Log.save|save}</span>(arg0_file_path:{@link string}, arg1_options:{@link Object}) | {@link string}
 	 * - <span color=00ffff>{@link ve.Log.toJSON|toJSON}</span>() | {@link string}
 	 * 
 	 * ##### Static Fields:
@@ -241,6 +242,43 @@
 			delete log[`${this.key}_instance`];
 			delete log[`${this.key}_warn`];
 			log.Channel.update();
+		}
+		
+		/**
+		 * Saves the present log to a given file path. Returns the output text written.
+		 * - Method of: {@link log.Channel}
+		 * 
+		 * @param {string} arg0_file_path
+		 * @param {Object} [arg1_options]
+		 *   @param {string} [arg1_options.format="plaintext"] - Either 'json'/'plaintext'.
+		 *   
+		 * @returns {string}
+		 */
+		save (arg0_file_path, arg1_options) {
+			//Convert from parameters
+			let file_path = path.resolve(arg0_file_path);
+			let options = (arg1_options) ? arg1_options : {};
+			
+			//Initialise options
+			if (!options.format) options.format = "plaintext";
+			
+			//Declare local instance variables
+			let output_folder = path.dirname(file_path); 
+			let output_text;
+			
+			//Make sure folder exists first
+			if (!fs.existsSync(output_folder))
+				fs.mkdirSync(output_folder, { recursive: true });
+			
+			if (options.format === "json") {
+				output_text = this.toJSON();
+			} else {
+				output_text = this.log_el.innerText;
+			}
+			fs.writeFileSync(file_path, output_text, "utf8");
+			
+			//Return statement
+			return file_path;
 		}
 		
 		/**
