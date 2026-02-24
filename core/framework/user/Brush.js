@@ -151,7 +151,7 @@ naissance.Brush = class extends ve.Class {
 		this.information_display = veHTML(() => {
 			let cursor_coordinates = this.cursor.getCoordinates();
 			
-			return `X: ${String.formatNumber(cursor_coordinates.x, 2)}; Y: ${String.formatNumber(cursor_coordinates.y, 2)} | Size: ${String.formatNumber(this.radius/1000, 2)}km`;
+			return `Lng (X): ${String.formatNumber(cursor_coordinates.x, 2)}; Lat (Y): ${String.formatNumber(cursor_coordinates.y, 2)} | Size: ${String.formatNumber(this.radius/1000, 2)}km`;
 		});
 		
 		super.open("instance", {
@@ -285,6 +285,8 @@ naissance.Brush = class extends ve.Class {
 			textSize: Math.returnSafeNumber(main.settings.default_label_font_size, 14)
 		};
 	}
+	
+	getCoordinates () { return this.cursor.getCoordinates(); }
 	
 	getRemovePolygon (arg0_geometry) {
 		//Convert from parameters
