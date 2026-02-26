@@ -1,5 +1,5 @@
 //Initialise functions
-{
+{ //[WIP] - Add functions to test if LMStudio is launched, and if not, to launch it automatically
 	if (!global.Blacktraffic) global.Blacktraffic = {};
 	
 	/**

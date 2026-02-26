@@ -1,6 +1,8 @@
 if (!global.Blacktraffic) global.Blacktraffic = {};
 
 /**
+ * Represents a Blacktraffic.Worker type that can be repeatedly called to execute browser automation or other tasks. A tab is currently provided by default per task, regardless of whether it actually needs a browser context to execute.
+ * 
  * ##### Constructor:
  * - `arg0_type`: {@link string} - The worker type to identify with.
  * - `arg1_options`: {@link Object}
@@ -18,6 +20,9 @@ Blacktraffic.Worker = class {
 	//[WIP] - Should be refactored in future to work with multiple browsers. Requires multiple copychecks and passes to ensure the contract is fulfilled. Need to add job interval to contract.
 	//[WIP] - Should probably use a dual-channel logging system: a temporary log just for the worker, and a permanent log for all workers of the same type. This needs a wrapper to function, [REVISIT].
 	
+	/**
+	 * @type {Blacktraffic.AgentBrowserPuppeteer}
+	 */
 	static browser_obj;
 	
 	/**
