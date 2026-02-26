@@ -24,6 +24,7 @@ if (!global.Blacktraffic) global.Blacktraffic = {};
  * ##### Methods:
  * - <span color=00ffff>{@link Blacktraffic.Worker.disable|disable}</span>()
  * - <span color=00ffff>{@link Blacktraffic.Worker.enable|enable}</span>()
+ * - <span color=00ffff>{@link Blacktraffic.Worker.error|error}</span>(argn_arguments:{@link any})
  * - <span color=00ffff>{@link Blacktraffic.Worker.getBrowser|getBrowser}</span>() | {@link Blacktraffic.AgentBrowserPuppeteer}
  * - <span color=00ffff>{@link Blacktraffic.Worker.getCurrentStatus|getCurrentStatus}</span>() | {@link string}
  * - <span color=00ffff>{@link Blacktraffic.Worker.getCurrentTimeStatus|getCurrentTimeStatus}</span>() | { status: {@link string}, timestamp: {@link number} }
@@ -31,8 +32,11 @@ if (!global.Blacktraffic) global.Blacktraffic = {};
  * - <span color=00ffff>{@link Blacktraffic.Worker.getLastSuccessfulJob|getLastSuccessfulJob}</span>() | {@link Date}
  * - <span color=00ffff>{@link Blacktraffic.Worker.getTab|getTab}</span>() | {@link Object}
  * - <span color=00ffff>{@link Blacktraffic.Worker.getTabID|getTabID}</span>() | {@link string}
+ * - <span color=00ffff>{@link Blacktraffic.Worker.log|log}</span>(argn_arguments:{@link any})
+ * - <span color=00ffff>{@link Blacktraffic.Worker.print|print}</span>(arg0_type:{@link string}, argn_arguments:{@link any})
  * - <span color=00ffff>{@link Blacktraffic.Worker.remove|remove}</span>()
  * - <span color=00ffff>{@link Blacktraffic.Worker.run|run}</span>()
+ * - <span color=00ffff>{@link Blacktraffic.Worker.warn|warn}</span>(argn_arguments:{@link any})
  *   
  * ##### Static Fields:
  * - `.browser_obj`: {@link Blacktraffic.AgentBrowserPuppeteer}
@@ -45,7 +49,6 @@ if (!global.Blacktraffic) global.Blacktraffic = {};
  */
 Blacktraffic.Worker = class {
 	//[WIP] - Should be refactored in future to work with multiple browsers. Requires multiple copychecks and passes to ensure the contract is fulfilled. Need to add job interval to contract.
-	//[WIP] - Should probably use a dual-channel logging system: a temporary log just for the worker, and a permanent log for all workers of the same type. This needs a wrapper to function, [REVISIT].
 	
 	/**
 	 * @type {Blacktraffic.AgentBrowserPuppeteer}
@@ -87,8 +90,6 @@ Blacktraffic.Worker = class {
 		//Declare local instance variables
 		this.config = (options.config_file_path && fs.existsSync(options.config_file_path)) ? 
 			JSON5.parse(fs.readFileSync(options.config_file_path)) : {};
-		this.console = (!log[options.log_channel]) ?
-			new log.Channel(options.log_channel) : log[`${options.log_channel}_instance`];
 		this.is_enabled = true;
 		this.options = options;
 		this.static = Blacktraffic.Worker;
@@ -105,6 +106,12 @@ Blacktraffic.Worker = class {
 			worker_array.push(this);
 			this.worker_id = structuredClone(this.static.workers_id_obj[type]);
 		this.name = `${type} ${this.worker_id}`;
+		
+		//Declare consoles
+		this.console = (!log[options.log_channel]) ?
+			new log.Channel(options.log_channel) : log[`${options.log_channel}_instance`];
+		this.console_local = (!log[this.name]) ? 
+			new log.Channel(this.name) : log[`${this.name}_instance`];
 	}
 	
 	/**
@@ -123,7 +130,7 @@ Blacktraffic.Worker = class {
 		
 		//Close any currently open tasks
 		if (current_tab) await current_tab.close();
-		if (this.console) this.console.log(`${this.name} disabled.`);
+		if (this.console) this.log(`${this.name} disabled.`);
 	}
 	
 	/**
@@ -137,7 +144,7 @@ Blacktraffic.Worker = class {
 	 */
 	async enable () {
 		this.is_enabled = true;
-		if (this.console) this.console.log(`${this.name} enabled.`);
+		if (this.console) this.log(`${this.name} enabled.`);
 	}
 	
 	/**
@@ -303,6 +310,48 @@ Blacktraffic.Worker = class {
 	getTabID () { return `${this.type}_${this.worker_id}`; }
 	
 	/**
+	 * Prints an error to both logging channels.
+	 * - Method of: {@link Blacktraffic.Worker}
+	 * 
+	 * @alias error
+	 * @memberof Blacktraffic.Worker
+	 * 
+	 * @param argn_arguments
+	 */
+	error (...argn_arguments) { this.print("error", argn_arguments); }
+	
+	/**
+	 * Prints a log to both logging channels.
+	 * - Method of: {@link Blacktraffic.Worker}
+	 *
+	 * @alias log
+	 * @memberof Blacktraffic.Worker
+	 * 
+	 * @param argn_arguments
+	 */
+	log (...argn_arguments) { this.print("log", argn_arguments); }
+	
+	/**
+	 * Prints a message type to both logging channels.
+	 * - Method of: {@link Blacktraffic.Worker}
+	 *
+	 * @alias print
+	 * @memberof Blacktraffic.Worker
+	 * 
+	 * @param {string} arg0_type - Either 'error'/'log'/'warn'.
+	 * @param argn_arguments
+	 */
+	print (arg0_type, ...argn_arguments) {
+		//Convert from parameters
+		let type = (arg0_type) ? arg0_type : "log";
+		let local_arguments = argn_arguments;
+		
+		//Dual-channel logging
+		this.console.print(type, local_arguments);
+		this.console_local.print(type, local_arguments);
+	}
+	
+	/**
 	 * Removes the current worker.
 	 * - Method of: {@link Blacktraffic.Worker}
 	 *
@@ -313,10 +362,12 @@ Blacktraffic.Worker = class {
 		//Declare local instance variables
 		let worker_array = this.static.workers_obj[this.type];
 		
+		//Clear console_local as well
 		if (worker_array) {
 			let index = worker_array.indexOf(this);
 			if (index > -1) worker_array.splice(index, 1);
 		}
+		this.console_local.remove();
 	}
 	
 	/**
@@ -348,9 +399,9 @@ Blacktraffic.Worker = class {
 		};
 		
 		//Initialise job; begin logging to console
-		if (this.console && !this.options.console_persistence) this.console.clear();
+		if (this.console_local && !this.options.console_persistence) this.console_local.clear();
 		this.jobs.push(job_obj);
-		this.console.log(`[${this.name}] Executing run() at ${new Date(start_time).toISOString()}.`);
+		this.log(`[${this.name}] Executing run() at ${new Date(start_time).toISOString()}.`);
 		
 		try {
 			let ontologies = [];
@@ -365,7 +416,7 @@ Blacktraffic.Worker = class {
 			
 			//Job is only successful if it returns Ontology[]
 			if (!Array.isArray(ontologies)) {
-				this.console.warn(`[${this.name}] Worker failed to return Ontology[], returned:`, ontologies);
+				this.warn(`[${this.name}] Worker failed to return Ontology[], returned:`, ontologies);
 				job_obj.status = "partially_failed";
 				this.current_job_status = "partially_failed";
 			} else {
@@ -378,18 +429,29 @@ Blacktraffic.Worker = class {
 			//Return statement
 			return ontologies;
 		} catch (e) {
-			this.console.error(`[${this.name}] Worker failed to execute properly:`, (e.stack || e));
+			this.error(`[${this.name}] Worker failed to execute properly:`, (e.stack || e));
 			job_obj.status = "failed";
 			this.current_job_status = "failed";
 		} finally {
 			job_obj.time_elapsed = Date.now() - start_time;
-			this.console.log(`[${this.name}] Worker finished in ${job_obj.time_elapsed}ms`);
+			this.log(`[${this.name}] Worker finished in ${job_obj.time_elapsed}ms`);
 			
 			try {
-				this.console.save(log_path, { format: "plaintext" }); //Save the console in plaintext form
+				this.save(log_path, { format: "plaintext" }); //Save the console in plaintext form
 			} catch (e) {
-				this.console.error(`[${this.name}] Failed to write worker log to ${log_path}:`, (e.stack || e));
+				this.error(`[${this.name}] Failed to write worker log to ${log_path}:`, (e.stack || e));
 			}
 		}
 	}
+	
+	/**
+	 * Logs a warning to both logging channels.
+	 * - Method of: {@link Blacktraffic.Worker}
+	 *
+	 * @alias warn
+	 * @memberof Blacktraffic.Worker
+	 * 
+	 * @param argn_arguments
+	 */
+	warn (...argn_arguments) { this.print("warn", argn_arguments); }
 };
