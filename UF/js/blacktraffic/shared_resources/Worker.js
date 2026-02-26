@@ -13,6 +13,33 @@ if (!global.Blacktraffic) global.Blacktraffic = {};
  *   - `.tags=[]`: {@link Array}<{@link string}>
  *   - 
  *   - `.console_persistence=false`: {@link boolean} - Whether console outputs should persist between worker jobs.
+ *   
+ * ##### Instance:
+ * - `.current_job_status="idle"`: {@link string}
+ * - `.is_enabled=true`: {@link boolean}
+ * - `.jobs=[]`: {@link Array}<{@link Object}>
+ * - `.options`: {@link Object}
+ * - `.type`: {@link string}
+ * 
+ * ##### Methods:
+ * - <span color=00ffff>{@link Blacktraffic.Worker.disable|disable}</span>()
+ * - <span color=00ffff>{@link Blacktraffic.Worker.enable|enable}</span>()
+ * - <span color=00ffff>{@link Blacktraffic.Worker.getBrowser|getBrowser}</span>() | {@link Blacktraffic.AgentBrowserPuppeteer}
+ * - <span color=00ffff>{@link Blacktraffic.Worker.getCurrentStatus|getCurrentStatus}</span>() | {@link string}
+ * - <span color=00ffff>{@link Blacktraffic.Worker.getCurrentTimeStatus|getCurrentTimeStatus}</span>() | { status: {@link string}, timestamp: {@link number} }
+ * - <span color=00ffff>{@link Blacktraffic.Worker.getJobList|getJobList}</span>() | {@link Array}<{@link Object}>
+ * - <span color=00ffff>{@link Blacktraffic.Worker.getLastSuccessfulJob|getLastSuccessfulJob}</span>() | {@link Date}
+ * - <span color=00ffff>{@link Blacktraffic.Worker.getTab|getTab}</span>() | {@link Object}
+ * - <span color=00ffff>{@link Blacktraffic.Worker.getTabID|getTabID}</span>() | {@link string}
+ * - <span color=00ffff>{@link Blacktraffic.Worker.remove|remove}</span>()
+ * - <span color=00ffff>{@link Blacktraffic.Worker.run|run}</span>()
+ *   
+ * ##### Static Fields:
+ * - `.browser_obj`: {@link Blacktraffic.AgentBrowserPuppeteer}
+ * - `.input_chrome_profile`: {@link string}
+ * - `.saves_folder`: {@link string}
+ * - `.workers_id_obj`: {@link Object}<{@link number}>
+ * - `.workers_obj`: {@link Object}<{@link Array}<{@link Object}>>
  * 
  * @type {Blacktraffic.Worker}
  */
@@ -80,6 +107,15 @@ Blacktraffic.Worker = class {
 		this.name = `${type} ${this.worker_id}`;
 	}
 	
+	/**
+	 * Disables the current worker and aborts the task it is carrying out.
+	 * - Method of: {@link Blacktraffic.Worker}
+	 * 
+	 * @alias disable
+	 * @memberof Blacktraffic.Worker
+	 * 
+	 * @returns {Promise<void>}
+	 */
 	async disable () {
 		//Declare local instance variables
 		let current_tab = await this.getTab();
@@ -90,11 +126,29 @@ Blacktraffic.Worker = class {
 		if (this.console) this.console.log(`${this.name} disabled.`);
 	}
 	
+	/**
+	 * Enables the current worker. Does not necessarily resume the task.
+	 * - Method of: {@link Blacktraffic.Worker}
+	 *
+	 * @alias enable
+	 * @memberof Blacktraffic.Worker
+	 * 
+	 * @returns {Promise<void>}
+	 */
 	async enable () {
 		this.is_enabled = true;
 		if (this.console) this.console.log(`${this.name} enabled.`);
 	}
 	
+	/**
+	 * Returns the current stored browser object.
+	 * - Method of: {@link Blacktraffic.Worker}
+	 *
+	 * @alias getBrowser
+	 * @memberof Blacktraffic.Worker
+	 * 
+	 * @returns {Promise<Blacktraffic.AgentBrowserPuppeteer>}
+	 */
 	async getBrowser () {
 		//Ensure a browser context is accessible
 		if (!this.static.browser_obj?.browser) 
@@ -110,8 +164,26 @@ Blacktraffic.Worker = class {
 		return this._browser;
 	}
 	
+	/**
+	 * Returns the current status. Either 'done'/'failed'/'idle'/'partially_failed'/'running'/.
+	 * - Method of: {@link Blacktraffic.Worker}
+	 *
+	 * @alias getCurrentStatus
+	 * @memberof Blacktraffic.Worker
+	 * 
+	 * @returns {string}
+	 */
 	getCurrentStatus () { return this.current_job_status; }
 	
+	/**
+	 * Returns the current status element and report.
+	 * - Method of: {@link Blacktraffic.Worker}
+	 *
+	 * @alias getCurrentStatusElement
+	 * @memberof Blacktraffic.Worker
+	 * 
+	 * @returns {HTMLSpanElement}
+	 */
 	getCurrentStatusElement () {
 		//Declare local instance variables
 		let last_job = this.jobs[this.jobs.length - 1];
@@ -142,6 +214,15 @@ Blacktraffic.Worker = class {
 		return status_el;
 	}
 	
+	/**
+	 * Returns the current time status. Either 'idle'/'running'/'done'.
+	 * - Method of: {@link Blacktraffic.Worker}
+	 *
+	 * @alias getCurrentTimeStatus
+	 * @memberof Blacktraffic.Worker
+	 * 
+	 * @returns {{status: string, timestamp: number}}
+	 */
 	getCurrentTimeStatus () {
 		//Declare local instance variables
 		let current_status;
@@ -159,14 +240,41 @@ Blacktraffic.Worker = class {
 		};
 	}
 	
+	/**
+	 * Returns the list of previous jobs carried out by the worker in-session.
+	 * - Method of: {@link Blacktraffic.Worker}
+	 *
+	 * @alias getJobList
+	 * @memberof Blacktraffic.Worker
+	 * 
+	 * @returns {Object[]}
+	 */
 	getJobList () { return this.jobs; }
 	
+	/**
+	 * Returns the last successful job that was successfully completed.
+	 * - Method of: {@link Blacktraffic.Worker}
+	 *
+	 * @alias getLastSuccessfulJob
+	 * @memberof Blacktraffic.Worker
+	 * 
+	 * @returns {Date}
+	 */
 	getLastSuccessfulJob () {
 		//Return statement
 		for (let i = this.jobs.length - 1; i >= 0; i--)
 			if (this.jobs[i].status === "done") return new Date(this.jobs[i].timestamp);
 	}
 	
+	/**
+	 * Returns the tab the Worker is currently executing tasks on.
+	 * - Method of: {@link Blacktraffic.Worker}
+	 *
+	 * @alias getTab
+	 * @memberof Blacktraffic.Worker
+	 * 
+	 * @returns {Promise<Object>}
+	 */
 	async getTab () {
 		//Ensure a tab context is accessible
 		if (!this._browser) await this.getBrowser();
@@ -183,8 +291,24 @@ Blacktraffic.Worker = class {
 		}
 	}
 	
+	/**
+	 * Returns the current tab ID.
+	 * - Method of: {@link Blacktraffic.Worker}
+	 *
+	 * @alias getTabID
+	 * @memberof Blacktraffic.Worker
+	 * 
+	 * @returns {string}
+	 */
 	getTabID () { return `${this.type}_${this.worker_id}`; }
 	
+	/**
+	 * Removes the current worker.
+	 * - Method of: {@link Blacktraffic.Worker}
+	 *
+	 * @alias remove
+	 * @memberof Blacktraffic.Worker
+	 */
 	remove () {
 		//Declare local instance variables
 		let worker_array = this.static.workers_obj[this.type];
@@ -195,6 +319,15 @@ Blacktraffic.Worker = class {
 		}
 	}
 	
+	/**
+	 * Runs the current worker thread and executes its `.options.special_function`.
+	 * - Method of: {@link Blacktraffic.Worker}
+	 *
+	 * @alias run
+	 * @memberof Blacktraffic.Worker
+	 * 
+	 * @returns {Promise<Ontology[]>}
+	 */
 	async run () {
 		if (!this.is_enabled) return []; //Internal guard clause if disabled
 		
