@@ -47,6 +47,7 @@
 	 * - <span color=00ffff>{@link Ontology.remove|remove}</span>()
 	 * - <span color=00ffff>{@link Ontology.removeRelation|removeRelation}</span>(arg0_relation:{@link string}, arg1_date:{@link Date})
 	 * - <span color=00ffff>{@link Ontology.removeRleations|removeRelations}</span>(arg0_relations:{@link Array}<{@link string}>, arg1_date:{@link Date})
+	 * - <span color=00ffff>{@link Ontology.saveToDatabase|saveToDatabase}</span>()
 	 * 
 	 * ##### Static Fields:
 	 * - `.initialised=false`: {@link boolean}
@@ -56,6 +57,8 @@
 	 * 
 	 * ##### Static Methods:
 	 * - <span color=00ffff>{@link Ontology.applyMutations|applyMutations}</span>(arg0_resolved_data:{@link Object}, arg1_mutations:{@link Object}) | {@link Object}
+	 * - <span color=00ffff>{@link Ontology.fromDatabase|fromDatabase}</span>()
+	 * - <span color=00ffff>{@link Ontology.getOntologyFromDatabase}</span>(arg0_ontology_id:{@link string})
 	 * - <span color=00ffff>{@link Ontology.getOntologyID|getOntologyID}</span>() | {@link string}
 	 * - <span color=00ffff>{@link Ontology.initialise|initialise}</span>()
 	 * 
@@ -153,8 +156,10 @@
 			for (let i = last_index - 1; i >= 0; i--)
 				this.state[i].data = Object.computeNegativeDiff(snapshots[i], snapshots[i + 1]);
 			
-			//Strip mutation fielkds - they've already been baked in
+			//Strip mutation fields - they've already been baked in
 			for (let local_keyframe of this.state) {
+				delete local_keyframe._saved; //Mark as dirty for the logic loop
+				
 				delete local_keyframe.add_relations;
 				delete local_keyframe.add_tags;
 				delete local_keyframe.remove_relations;
@@ -672,6 +677,35 @@
 		}
 		
 		/**
+		 * Saves unsaved state keyframes to their respective daily files.
+		 */
+		saveToDatabase () {
+			//Make sure Ontology.ontology_folder_path exists
+			if (!fs.existsSync(Ontology.ontology_folder_path))
+				fs.mkdirSync(Ontology.ontology_folder_path, { recursive: true });
+			
+			//Only save keyframes that haven't been flagged as 'saved'
+			for (let local_keyframe of this.state) {
+				if (local_keyframe._saved) continue;
+				
+				let filename = `${String.getDateString()}.ontology`;
+				let file_path = path.join(Ontology.ontology_folder_path, filename);
+				
+				//Prepare the line: ID JSON, strip internal _saved flag before stringifying
+				let save_data = Object.assign({}, local_keyframe);
+				delete save_data._saved;
+				
+				let line = `${this.id} ${JSON.stringify(save_data)}\n`;
+				
+				//Try to stream Ontology to disk
+				try {
+					fs.appendFileSync(file_path, line);
+					local_keyframe._saved = true;
+				} catch (e) { console.error(`Failed to stream ontology ${this.id} to disk.`); }
+			}
+		}
+		
+		/**
 		 * Applies relation/tag mutation fields onto a fully-resolved data object and returns the result (input is not mutated).
 		 * 
 		 * Order per category: set > add > remove.
@@ -719,6 +753,77 @@
 		}
 		
 		/**
+		 * Loads all .ontology files from the folder path and hydrates the static instances.
+		 * 
+		 * @alias #fromDatabase
+		 * @memberof Ontology
+		 */
+		//[QUARANTINE]
+		static fromDatabase () {
+			const fs = require("fs");
+			const path = require("path");
+			if (!fs.existsSync(Ontology.ontology_folder_path)) return;
+			
+			let files = fs.readdirSync(Ontology.ontology_folder_path)
+				.filter(f => f.endsWith(".ontology"))
+				.sort((a, b) => {
+					// Correctly parse DD.MM.YYYY.ontology
+					let parts_a = a.split(".");
+					let parts_b = b.split(".");
+					let date_a = new Date(Number(parts_a[2]), Number(parts_a[1]) - 1, Number(parts_a[0]));
+					let date_b = new Date(Number(parts_b[2]), Number(parts_b[1]) - 1, Number(parts_b[0]));
+					return date_a - date_b;
+				});
+			
+			let database_states = {}; // Map<id, state_array>
+			
+			for (let file of files) {
+				let content = fs.readFileSync(path.join(Ontology.ontology_folder_path, file), "utf8");
+				let lines = content.split("\n");
+				
+				for (let line of lines) {
+					if (!line.trim()) continue;
+					let space_index = line.indexOf(" ");
+					let id = line.substring(0, space_index);
+					let data_string = line.substring(space_index + 1);
+					
+					try {
+						if (!database_states[id]) database_states[id] = [];
+						database_states[id].push(JSON.parse(data_string));
+					} catch (e) {
+						console.error(`Failed to parse ontology line for ${id}`);
+					}
+				}
+			}
+			
+			// Hydrate instances (Constructor handles merge/sort/diffing)
+			for (let id in database_states) {
+				new Ontology("Ontology", database_states[id], { id: id });
+			}
+		}
+		
+		/**
+		 * Fetches a specific Ontology from the database by ID.
+		 * 
+		 * @alias #getOntologyFromDatabase
+		 * @memberof Ontology
+		 *
+		 * @param {string} arg0_ontology_id
+		 * 
+		 * @returns {Ontology|null}
+		 */
+		//[QUARANTINE]
+		static getOntologyFromDatabase (arg0_ontology_id) {
+			// In a streaming architecture, we check current instances first
+			let existing = Ontology.instances.find(i => i.id === arg0_ontology_id);
+			if (existing) return existing;
+			
+			// If not loaded, we trigger a full load (or a filtered load)
+			Ontology.fromDatabase();
+			return Ontology.instances.find(i => i.id === arg0_ontology_id) || null;
+		}
+		
+		/**
 		 * Returns an Ontology ID/hash reflective of the current date.
 		 * 
 		 * @alias #getOntologyID
@@ -740,9 +845,18 @@
 		static initialise () {
 			Ontology.initialised = true;
 			Ontology.logic_loop = setInterval(() => {
-				for (let i = 0; i < Ontology.queue.length; i++)
-					Ontology.instances.push(Ontology.queue[i]);
+				//1. Process Queue
+				for (let i = 0; i < Ontology.queue.length; i++) {
+					let local_instance = Ontology.queue[i];
+					
+					if (!Ontology.instances.includes(local_instance))
+						Ontology.instances.push(local_instance);
+				}
 				Ontology.queue = [];
+				
+				//2. Stream to database. Every 100ms we check if instances have new/dirty keyframes to append to disk
+				for (let local_instance of Ontology.instances)
+					local_instance.saveToDatabase();
 			}, 100);
 		}
 	};
