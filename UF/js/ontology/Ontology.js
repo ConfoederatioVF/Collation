@@ -86,7 +86,7 @@
 		/**
 		 * @type {string}
 		 */
-		static ontology_folder_path = "";
+		static ontology_folder_path = ve.registry.Ontology.database_folder;
 		
 		/**
 		 * @type {Ontology[]}

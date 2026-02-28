@@ -89,6 +89,10 @@ global.path = require("path");
 						save_file: "settings/NodeEditor_settings.json"
 					},
 					
+					Ontology: {
+						database_folder: "settings/Ontology_databases"
+					},
+					
 					/**
 					 * Component settings for {@link ve.ScriptManager}.
 					 */
