@@ -306,15 +306,14 @@
 			if (!isNaN(parseFloat(date)))
 				return parseFloat(date);
 		
-		// Merge with defaults (1-indexed months)
+		//Declare local instance variables
 		let date_obj = {
 			...Date.getBlankDate(),
 			...date,
 		};
-		
 		let minutes = 0;
 		
-		// --- Normalise minor overflows ---
+		//Normalise minor overflows
 		if (date_obj.minute >= 60) {
 			date_obj.hour += Math.floor(date_obj.minute / 60);
 			date_obj.minute %= 60;
@@ -332,33 +331,31 @@
 			date_obj.year--;
 		}
 		
-		// --- 1. Add full years before the current one ---
-		const target_year = date_obj.year - 1; // sum only years completed
+		//1. Add full years before the current one
+		let target_year = date_obj.year - 1; //Sum only years completed
+		
 		if (target_year >= 0) {
-			for (let y = 0; y <= target_year; y++) {
-				minutes += (Date.isLeapYear(y) ? 366 : 365) * 24 * 60;
-			}
+			for (let i = 0; i <= target_year; i++)
+				minutes += (Date.isLeapYear(i) ? 366 : 365)*24*60;
 		} else {
-			for (let y = -1; y >= target_year; y--) {
-				minutes -= (Date.isLeapYear(y) ? 366 : 365) * 24 * 60;
-			}
+			for (let i = -1; i >= target_year; i--)
+				minutes -= (Date.isLeapYear(i) ? 366 : 365)*24*60;
 		}
 		
-		// --- 2. Add completed months of current year ---
+		//2. Add completed months of current year
 		let all_months = Object.keys(Date.months);
 		for (let i = 1; i < date_obj.month; i++) {
-			let m = Date.months[all_months[i - 1]];
-			let dim = Date.isLeapYear(date_obj.year)
-				? m.leap_year_days || m.days
-				: m.days;
-			minutes += dim * 24 * 60;
+			let local_month = Date.months[all_months[i - 1]];
+			let dim = Date.isLeapYear(date_obj.year) ? 
+				(local_month.leap_year_days || local_month.days) : local_month.days;
+			minutes += dim*24*60;
 		}
 		
-		// --- 3. Add completed days ---
-		minutes += (date_obj.day - 1) * 24 * 60;
+		//3. Add completed days
+		minutes += (date_obj.day - 1)*24*60;
 		
-		// --- 4. Add partial day ---
-		minutes += date_obj.hour * 60 + date_obj.minute;
+		//4. Add partial day
+		minutes += date_obj.hour*60 + date_obj.minute;
 		
 		return minutes;
 	};
