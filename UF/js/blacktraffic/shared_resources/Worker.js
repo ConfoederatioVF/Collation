@@ -10,7 +10,6 @@ if (!global.Blacktraffic) global.Blacktraffic = {};
  *   - `.do_not_close_tab`: {@link boolean}
  *   - `.interval`: {@link number} - The interval in seconds at which to execute run().
  *   - `.log_channel="${worker}_type"`: {@link string}
- *   - `.special_function`: {@link function}(arg0_tab_obj:{@link Object}, arg1_instance:this) | {@link Array}<{@link Ontology}>
  *   - `.tags=[]`: {@link Array}<{@link string}>
  *   - 
  *   - `.console_persistence=false`: {@link boolean} - Whether console outputs should persist between worker jobs.
@@ -26,6 +25,7 @@ if (!global.Blacktraffic) global.Blacktraffic = {};
  * - <span color=00ffff>{@link Blacktraffic.Worker.disable|disable}</span>()
  * - <span color=00ffff>{@link Blacktraffic.Worker.enable|enable}</span>()
  * - <span color=00ffff>{@link Blacktraffic.Worker.error|error}</span>(argn_arguments:{@link any})
+ * - <span color=00ffff>{@link Blacktraffic.Worker.execute|execute}</span>(argn_arguments:{@link any})
  * - <span color=00ffff>{@link Blacktraffic.Worker.getBrowser|getBrowser}</span>() | {@link Blacktraffic.AgentBrowserPuppeteer}
  * - <span color=00ffff>{@link Blacktraffic.Worker.getCurrentStatus|getCurrentStatus}</span>() | {@link string}
  * - <span color=00ffff>{@link Blacktraffic.Worker.getCurrentTimeStatus|getCurrentTimeStatus}</span>() | { status: {@link string}, timestamp: {@link number} }
@@ -148,6 +148,18 @@ Blacktraffic.Worker = class {
 		//Close any currently open tasks
 		if (current_tab) await current_tab.close();
 		if (this.console) this.log(`${this.name} disabled.`);
+	}
+	
+	/**
+	 * Attempts execution of the current worker, used by child classes.
+	 * 
+	 * @returns {Promise<Ontology[]>}
+	 */
+	async execute () {
+		this.warn(`execute() attempted, but an actual method was not bound to the child class.`);
+		
+		//Return statement
+		return [];
 	}
 	
 	/**
@@ -337,7 +349,7 @@ Blacktraffic.Worker = class {
 	 * 
 	 * @param argn_arguments
 	 */
-	error (...argn_arguments) { this.print("error", argn_arguments); }
+	error (...argn_arguments) { this.print("error", ...argn_arguments); }
 	
 	/**
 	 * Prints a log to both logging channels.
@@ -347,7 +359,7 @@ Blacktraffic.Worker = class {
 	 * 
 	 * @param argn_arguments
 	 */
-	log (...argn_arguments) { this.print("log", argn_arguments); }
+	log (...argn_arguments) { this.print("log", ...argn_arguments); }
 	
 	/**
 	 * Prints a message type to both logging channels.
@@ -387,7 +399,7 @@ Blacktraffic.Worker = class {
 	}
 	
 	/**
-	 * Runs the current worker thread and executes its `.options.special_function`.
+	 * Runs the current worker thread and executes its `.execute`() method.
 	 * - Method of: {@link Blacktraffic.Worker}
 	 *
 	 * @alias run
@@ -428,10 +440,10 @@ Blacktraffic.Worker = class {
 			let tab_obj = await this.getTab();
 			
 			//Execute worker logic
-			if (typeof this.options.special_function === "function") {
-				ontologies = await this.options.special_function(tab_obj, this);
-			} else if (Array.isArray(this.options.special_function)) {
-				ontologies = this.options.special_function;
+			if (typeof this.execute === "function") {
+				ontologies = await this.execute(tab_obj, this);
+			} else if (Array.isArray(this.execute)) {
+				ontologies = this.execute;
 			}
 			
 			//Job is only successful if it returns Ontology[]
@@ -457,7 +469,8 @@ Blacktraffic.Worker = class {
 			this.log(`[${this.name}] Worker finished in ${job_obj.time_elapsed}ms`);
 			
 			try {
-				this.save(log_path, { format: "plaintext" }); //Save the console in plaintext form
+				this.console.save(log_path, { format: "plaintext" }); //Save the console in plaintext form
+				this.console_local.save(log_path, { format: "plaintext" }); //Save the console in plaintext form
 			} catch (e) {
 				this.error(`[${this.name}] Failed to write worker log to ${log_path}:`, (e.stack || e));
 			}
@@ -484,7 +497,7 @@ Blacktraffic.Worker = class {
 			let now = Date.now();
 			
 			//If never run before, or if time elapsed since last run > interval
-			if (!last_job || now - last_job.getTime() >= this.options.interval*1000)
+			if (!last_job || now - last_job.timestamp >= this.options.interval*1000)
 				await this.run();
 		};
 		
@@ -516,5 +529,5 @@ Blacktraffic.Worker = class {
 	 * 
 	 * @param argn_arguments
 	 */
-	warn (...argn_arguments) { this.print("warn", argn_arguments); }
+	warn (...argn_arguments) { this.print("warn", ...argn_arguments); }
 };

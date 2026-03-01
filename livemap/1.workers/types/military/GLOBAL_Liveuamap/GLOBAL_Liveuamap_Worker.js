@@ -1,187 +1,164 @@
-/**
- * ##### Constructor:
- * - `arg0_options`: {@link Object}
- *   - `.blacklisted_regions`: {@link Array}<{@link string}>
- *   - `.top_regions`: {@link number} - How many of the top regions to draw. -1 by default.
- * 
- * @type {GLOBAL_Liveuamap_Worker}
- */
-global.GLOBAL_Liveuamap_Worker = class {
-	//Defines
-	static _update_regions_interval = 86400*7; //Update auto-cached regions once a week
+global.GLOBAL_Liveuamap_Worker = class extends Blacktraffic.Worker {
+	static bf = `${l1m}GLOBAL_Liveuamap/`;
+	static input_auto_regions_json = path.join(this.bf, "Liveuamap_auto_regions.json");
+	static _update_regions_interval = 86400*7; //Once a week
 	
-	//Paths
-	static bf = `${l2}GLOBAL_Liveuamap/`;
-	static input_auto_regions_json = `${this.bf}Liveuamap_auto_regions.json`;
-	static input_chrome_profile = `C:/Users/htmlp/AppData/Local/Google/Chrome/User Data/Profile 1`;
-	static input_manual_regions_json = `${this.bf}Liveuamap_regions.json5`;
-	
-	//Workers
-	static workers = {};
-	
-	constructor (arg0_options) {
-		//Convert from parameters
-		let options = (arg0_options) ? arg0_options : {};
+	constructor(arg0_options) {
+		let options = arg0_options || {};
+		let target_interval = options.interval || 3600;
 		
-		//Initialise options
-		if (!options.top_regions) options.top_regions = Math.returnSafeNumber(options.top_regions, -1);
-		
-		//Declare local instance variables
-		this.options = options;
-		this.static = GLOBAL_Liveuamap_Worker;
-		
-		this.browser = new Blacktraffic.AgentBrowserPuppeteer(undefined, {
-			user_data_folder: this.static.input_chrome_profile,
-			onload: async () => {
-				await this.draw();
-			}
+		super("Liveuamap", {
+			...options,
+			interval: 0,
+			log_channel: "Liveuamap_Scraper",
 		});
-		this.webapi = Blacktraffic.AgentBrowser.webapi;
+		
+		this.options.top_regions = Math.returnSafeNumber(options.top_regions, -1);
+		this.static = GLOBAL_Liveuamap_Worker;
+		this.layer = null;
+		
+		this.options.interval = target_interval;
+		if (this.is_enabled && this.options.interval > 0) this.startInterval();
 	}
 	
-	async draw () {
-		//Declare local instance variables
-		let all_regions = await this.static.getLiveuamapRegions();
-		let liveuamap_tab = await this.browser.openTab("liveuamap");
-		let regions_threshold = (this.options.top_regions > 0) ? 
-			this.options.top_regions : all_regions.length;
+	async execute (tab, instance) {
+		let all_regions = await this.getLiveuamapRegions();
+		let regions_threshold = this.options.top_regions > 0 ? this.options.top_regions : all_regions.length;
+		let ontologies = [];
 		
-		this.layer = new maptalks.VectorLayer("liveuamap", { zIndex: 101 }).addTo(map);
+		if (!this.layer && typeof map !== "undefined") {
+			this.layer = new maptalks.VectorLayer("liveuamap", { zIndex: 101 }).addTo(map);
+		}
 		
-		//0. Load pre-load scripts
-		this.browser.injectScriptOnload(liveuamap_tab, this.webapi.Leaflet.captureMaps);
+		const webapi = Blacktraffic.AgentBrowser.webapi;
+		// We still call captureMaps here to ensure it's bound before Leaflet initializes
+		await tab.evaluateOnNewDocument(webapi.Leaflet.captureMaps);
 		
-		//Iterate over all_regions until regions_threshold
-		for (let i = 0; i < regions_threshold; i++) try {
-			let local_region = all_regions[i];
-			
-			console.log(`Plotting ${local_region.name} ..`);
-			await liveuamap_tab.goto(local_region.url, { waitUntil: "networkidle2" });
-			await Blacktraffic.sleep(Math.randomNumber(1000, 3000));
-			//Check to see if there is a modal stating it is paid
-			let is_paid = await liveuamap_tab.$eval(`.modalWrapCont`, (el) => {
-				if (el && el.innerHTML) if (el.innerHTML.includes("in free version")) 
-					return true;
-			});
-			
-			if (!is_paid) {
-				let geometries = await liveuamap_tab.evaluate(function () {
-					//Declare functions
-					let getGeometryType = this.webapi.Leaflet.getGeometryType;
+		for (let i = 0; i < regions_threshold; i++) {
+			try {
+				let local_region = all_regions[i];
+				if (!local_region) continue;
+				
+				this.log(`[${i + 1}/${regions_threshold}] Polling region: ${local_region.name} ..`);
+				
+				await tab.goto(local_region.url, { waitUntil: "networkidle2" });
+				await Blacktraffic.sleep(Math.randomNumber(2000, 4000));
+				
+				let is_paid = await tab.evaluate(() => {
+					let modal = document.querySelector(`.modalWrapCont`);
+					return modal && modal.innerHTML.includes("in free version");
+				});
+				
+				if (is_paid) {
+					this.warn(`Skipping ${local_region.name}: Blocked by free version limit.`);
+					continue;
+				}
+				
+				let geometries = await tab.evaluate(function () {
+					// Verify that webapi was successfully injected by AgentBrowser
+					if (typeof webapi === "undefined" || !webapi.Leaflet) return [];
+					if (typeof getMaps !== "function") return [];
 					
-					//Declare local instance variables
 					let current_map = getMaps()[0];
+					if (!current_map) return [];
 					
-					let all_geometry_keys = Object.keys(current_map._layers);
-					let geometries = [];
+					let layers = current_map._layers;
+					let results = [];
 					
-					//Iterate over all_geometry_keys in the given layer
-					for (let i = 0; i < all_geometry_keys.length; i++) {
-						let local_geometry = current_map._layers[all_geometry_keys[i]];
-						let local_geometry_type = getGeometryType(local_geometry);
-						let local_options = local_geometry.options;
+					for (let key in layers) {
+						let layer = layers[key];
 						
-						//Polygon handling
-						if (["polygon", "line"].includes(local_geometry_type)) {
-							geometries.push({
-								geometry: local_geometry.toGeoJSON(),
+						// Reference the function via its full path in the webapi object
+						let type = webapi.Leaflet.getGeometryType(layer);
+						let opt = layer.options;
+						
+						if (["polygon", "line"].includes(type)) {
+							results.push({
+								geometry: layer.toGeoJSON(),
 								symbol: {
-									polygonFill: local_options.fillColor,
-									polygonOpacity: parseFloat(local_options.fillOpacity),
-									
-									lineColor: local_options.color,
-									lineOpacity: parseFloat(local_options.opacity),
-									lineWidth: parseFloat(local_options.weight)
+									polygonFill: opt.fillColor,
+									polygonOpacity: parseFloat(opt.fillOpacity),
+									lineColor: opt.color,
+									lineOpacity: parseFloat(opt.opacity),
+									lineWidth: parseFloat(opt.weight),
 								},
-								
-								type: local_geometry_type
+								type: type,
 							});
-						} else if (local_geometry_type === "point") {
-							let local_icon;
-								try { local_icon = local_geometry._icon.getAttribute("src"); } catch (e) {}
-							
-							geometries.push({
-								geometry: local_geometry.toGeoJSON(),
+						} else if (type === "point") {
+							let icon = layer._icon ? layer._icon.getAttribute("src") : null;
+							results.push({
+								geometry: layer.toGeoJSON(),
 								symbol: {
-									markerDx: 0,
-									markerDy: 0,
 									markerHeight: 24,
-									markerOpacity: 1,
 									markerWidth: 24,
-									markerFile: local_icon
+									markerFile: icon,
 								},
-								
-								type: local_geometry_type
+								type: type,
 							});
 						}
 					}
-					
-					//Return statement
-					return geometries;
+					return results;
 				});
 				
-				//Plot geometries on map
-				for (let i = 0; i < geometries.length; i++) {
-					let local_geometry = maptalks.GeoJSON.toGeometry(geometries[i].geometry);
-						local_geometry.updateSymbol(geometries[i].symbol);
-						local_geometry.addTo(this.layer);
+				for (let geom of geometries) {
+					if (this.layer) {
+						let m_geom = maptalks.GeoJSON.toGeometry(geom.geometry);
+						m_geom.updateSymbol(geom.symbol);
+						m_geom.addTo(this.layer);
+					}
+					ontologies.push(geom);
 				}
 				
-				await Blacktraffic.sleep(15000, 30000); //10s-15s delay between polling
+				await Blacktraffic.sleep(Math.randomNumber(10000, 20000));
+			} catch (e) {
+				this.error(`Error processing region at index ${i}:`, e.message);
 			}
-		} catch (e) { console.error(e); }
-	}
-	
-	remove () {
+		}
 		
+		return ontologies;
 	}
 	
-	/**
-	 * Caches current Livemap regions to Liveuamap_auto_regions.json5
-	 */
-	static async getLiveuamapRegions () {
-		//Declare local instance variables
-		let input_json_path = GLOBAL_Liveuamap_Worker.input_auto_regions_json;
-		let last_modified = File.getLastModified(input_json_path);
+	async getLiveuamapRegions () {
+		const json_path = this.constructor.input_auto_regions_json;
 		let refresh_cache = false;
 		
-		//Check whether the cache should be refreshed
-		if (last_modified === undefined || last_modified.seconds >= GLOBAL_Liveuamap_Worker._update_regions_interval)
+		if (!fs.existsSync(json_path)) {
 			refresh_cache = true;
+		} else {
+			let stats = fs.statSync(json_path);
+			let age_ms = Date.now() - stats.mtimeMs;
+			if (age_ms >= this.constructor._update_regions_interval * 1000) refresh_cache = true;
+		}
 		
 		if (!refresh_cache) {
-			//Return statement
-			return JSON.parse(fs.readFileSync(input_json_path, "utf8"));
+			return JSON.parse(fs.readFileSync(json_path, "utf8"));
 		} else {
-			//Open a new browser instance and navigate to liveuamap.com
-			let temp_browser = new Blacktraffic.AgentBrowserPuppeteer("liveuamap_regions", {
-				user_data_folder: this.input_chrome_profile,
-				onload: async () => {
-					let liveuamap_tab = await temp_browser.openTab("liveuamap");
-					//0. Load pre-load scripts
-					temp_browser.injectScriptOnload(liveuamap_tab, this._captureLeaflet);
-					
-					//1. Navigate to Liveuamap; click on language
-					let _language_selector = `a#menu_languages`;
-					
-					await liveuamap_tab.goto("https://liveuamap.com/", { waitUntil: "networkidle2" });
-					await liveuamap_tab.waitForSelector(_language_selector);
-					await liveuamap_tab.click(_language_selector);
-					
-					let regions_els = await liveuamap_tab.$$eval(`div.rg-list > a`, (els) => {
-						return els.map((el) => ({
-							name: el.getAttribute("title"),
-							url: el.href
-						}));
-					});
-					
-					//Write file to input_json_path
-					await fs.writeFile(input_json_path, JSON.stringify(regions_els), (err) => {
-						if (err) console.error(err);
-					});
-					await temp_browser.remove();
-				}
-			});
+			this.log("Regions cache stale. Fetching new region list...");
+			let browser = await this.getBrowser();
+			let temp_tab = await browser.openTab("liveuamap_discovery");
+			
+			try {
+				await temp_tab.goto("https://liveuamap.com/", { waitUntil: "networkidle2" });
+				await temp_tab.waitForSelector(`a#menu_languages`);
+				await temp_tab.click(`a#menu_languages`);
+				
+				let regions = await temp_tab.$$eval(`div.rg-list > a`, (els) => {
+					return els.map((el) => ({
+						name: el.getAttribute("title"),
+						url: el.href,
+					}));
+				});
+				
+				if (!fs.existsSync(path.dirname(json_path))) fs.mkdirSync(path.dirname(json_path), { recursive: true });
+				fs.writeFileSync(json_path, JSON.stringify(regions, null, 2));
+				
+				await temp_tab.close();
+				return regions;
+			} catch (e) {
+				this.error("Failed to discover Liveuamap regions:", e.stack);
+				await temp_tab.close();
+				return fs.existsSync(json_path) ? JSON.parse(fs.readFileSync(json_path, "utf8")) : [];
+			}
 		}
 	}
 };
