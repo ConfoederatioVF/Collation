@@ -769,6 +769,12 @@
 		 * @memberof Ontology
 		 */
 		//[QUARANTINE]
+		/**
+		 * Loads all .ontology files from the folder path and hydrates the static instances.
+		 *
+		 * @alias #fromDatabase
+		 * @memberof Ontology
+		 */
 		static async fromDatabase () {
 			const fs_promises = require("fs").promises;
 			const path = require("path");
@@ -804,21 +810,23 @@
 					for (let line of lines) {
 						if (!line.trim()) continue;
 						
-						let space_index = line.indexOf(" ");
-						if (space_index === -1) continue;
+						// FIXED: Find the first '{' to correctly separate ID from JSON
+						let json_start = line.indexOf("{");
+						if (json_start === -1) continue;
 						
-						let id = line.substring(0, space_index);
-						let data_string = line.substring(space_index + 1);
+						let id = line.substring(0, json_start).trim();
+						let data_string = line.substring(json_start);
 						
 						try {
 							let keyframe = JSON.parse(data_string);
+							
 							// Mark as saved so we don't immediately try to write it back to disk
 							keyframe._saved = true;
 							
 							if (!database_states[id]) database_states[id] = [];
 							database_states[id].push(keyframe);
 						} catch (e) {
-							console.error(`[Ontology] Failed to parse JSON for ID ${id} in ${file}`);
+							console.error(`[Ontology] Failed to parse JSON for ID "${id}" in ${file}`, e);
 						}
 					}
 				} catch (e) {
@@ -827,23 +835,21 @@
 			}
 			
 			// 4. Hydrate instances
-			// We determine the class type by looking at the 'type' field in the keyframe data
 			for (let id in database_states) {
 				let state_array = database_states[id];
 				if (state_array.length === 0) continue;
 				
-				// Look for a type in the keyframes, default to "Ontology"
-				let type = state_array[0].type || "Ontology";
+				// In negative diffing, the head state (containing the full data/type) is at the end
+				let head_state = state_array[state_array.length - 1];
+				let type = head_state.type || "Ontology";
 				
-				// Attempt to find a registered subclass (e.g., global.Ontology_Event)
 				let target_class = global[`Ontology_${type}`] || Ontology;
 				
-				// Instantiate. The constructor handles merging, sorting, and diffing.
-				// If an instance with this ID already exists, it will merge the data.
+				// Instantiate. Constructor handles merging, sorting, and diffing.
 				new target_class(type, state_array, { id: id });
 			}
 			
-			console.log(`[Ontology] Successfully hydrated ${Object.keys(database_states).length} ontologies from database.`);
+			console.log(`[Ontology] Successfully hydrated ${Object.keys(database_states).length} ontologies.`);
 		}
 		
 		/**
