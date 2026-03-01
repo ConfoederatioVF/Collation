@@ -118,7 +118,7 @@ Blacktraffic.Worker = class {
 		 * @memberof Blacktraffic.Worker
 		 */
 		this.console = (!log[options.log_channel]) ?
-			new log.Channel(options.log_channel) : log[`${options.log_channel}_instance`];
+			new log.Channel(options.log_channel, { do_not_print: true }) : log[`${options.log_channel}_instance`];
 		/**
 		 * @type {log.Channel}
 		 * @memberof Blacktraffic.Worker
@@ -319,10 +319,13 @@ Blacktraffic.Worker = class {
 		if (!this._browser) await this.getBrowser();
 		
 		//Declare local instance variables
-		let current_tab = this._browser.getTab(this.getTabID());
+		let tab_id = this.getTabID();
+		
+		let current_tab = this._browser.getTab(tab_id);
 		
 		//Return statement
-		if (!current_tab) {
+		if (!current_tab || (typeof current_tab.isClosed === "function" && current_tab.isClosed())) {
+			if (current_tab) this._browser.removeTab(tab_id); //Cleanup stale reference
 			return this._browser.openTab(this.getTabID());
 		} else {
 			//Return statement
