@@ -152,8 +152,10 @@ Blacktraffic.Worker = class {
 	
 	/**
 	 * Attempts execution of the current worker, used by child classes.
+	 * - Method of: {@link Blacktraffic.Worker}
 	 * 
-	 * @returns {Promise<Ontology[]>}
+	 * @alias execute
+	 * @memberof Blacktraffic.Worker
 	 */
 	async execute () {
 		this.warn(`execute() attempted, but an actual method was not bound to the child class.`);

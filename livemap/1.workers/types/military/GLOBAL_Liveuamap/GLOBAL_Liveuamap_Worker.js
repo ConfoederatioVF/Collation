@@ -1,12 +1,15 @@
 global.GLOBAL_Liveuamap_Worker = class extends Blacktraffic.Worker {
-	static bf = typeof l1m !== "undefined" ? `${l1m}GLOBAL_Liveuamap/` : "./GLOBAL_Liveuamap/";
+	static bf = `${l1m}GLOBAL_Liveuamap/`;
 	static input_auto_regions_json = path.join(this.bf, "Liveuamap_auto_regions.json");
-	static _update_regions_interval = 86400 * 7;
+	static _update_regions_interval = 86400*7;
 	
 	constructor(arg0_options) {
-		let options = arg0_options || {};
-		let target_interval = options.interval || 3600;
+		//Convert from parameters
+		let options = (arg0_options) ? arg0_options : {};
 		
+		//Initialise options
+		options.interval = Math.returnSafeNumber(options.interval, 3600);
+		options.top_regions = Math.returnSafeNumber(options.top_regions, 5);
 		super("Liveuamap", {
 			...options,
 			interval: 0,
@@ -14,25 +17,32 @@ global.GLOBAL_Liveuamap_Worker = class extends Blacktraffic.Worker {
 			log_channel: "Liveuamap_Scraper",
 		});
 		
-		this.options.top_regions = Math.returnSafeNumber(options.top_regions, -1);
+		//Declare local instance variables
+		this.options = options;
 		this.static = GLOBAL_Liveuamap_Worker;
-		this.static.input_chrome_profile = `C:/Users/htmlp/AppData/Local/Google/Chrome/User Data/Profile 1`;
 		
-		this.options.interval = target_interval;
-		if (this.is_enabled && this.options.interval > 0) this.startInterval();
+		//Start worker
+		if (this.is_enabled && this.options.interval > 0) 
+			this.startInterval();
 	}
 	
-	async execute(tab) {
-		let all_regions = await this.getLiveuamapRegions();
-		let regions_threshold = this.options.top_regions > 0 ? this.options.top_regions : all_regions.length;
-		let ontologies = [];
+	async execute (arg0_tab, arg1_instance) {
+		//Convert from parameters
+		let tab = arg0_tab;
+		let instance = arg1_instance;
 		
-		const webapi = Blacktraffic.AgentBrowser.webapi;
+		//Declare local instance variables
+		let all_regions = await this.getLiveuamapRegions();
+		let ontologies = [];
+		let regions_threshold = Math.returnSafeNumber(this.options.top_regions, all_regions.length);
+		let webapi = Blacktraffic.AgentBrowser.webapi;
+		
 		if (!tab._scripts_injected) {
 			await tab.evaluateOnNewDocument(webapi.Leaflet.captureMaps);
 			tab._scripts_injected = true;
 		}
 		
+		//Iterate over all regions within regions_threshold
 		for (let i = 0; i < regions_threshold; i++) {
 			try {
 				let local_region = all_regions[i];
@@ -40,6 +50,7 @@ global.GLOBAL_Liveuamap_Worker = class extends Blacktraffic.Worker {
 				
 				this.log(`[${i + 1}/${regions_threshold}] Polling region: ${local_region.name} ..`);
 				
+				//Check if region is paid
 				await tab.goto(local_region.url, { waitUntil: "networkidle2" });
 				await Blacktraffic.sleep(Math.randomNumber(2000, 4000));
 				
@@ -53,51 +64,64 @@ global.GLOBAL_Liveuamap_Worker = class extends Blacktraffic.Worker {
 					continue;
 				}
 				
+				//Evaluate geometries
 				let geometries = await tab.evaluate(function () {
-					if (typeof webapi === "undefined" || !webapi.Leaflet) return [];
-					if (typeof getMaps !== "function") return [];
-					let current_map = getMaps()[0];
-					if (!current_map) return [];
-					
-					let layers = current_map._layers;
+					//Declare local instance variables
 					let results = [];
-					for (let key in layers) {
-						let layer = layers[key];
-						let type = webapi.Leaflet.getGeometryType(layer);
-						let opt = layer.options;
+					
+					try {
+						let current_map = getMaps()[0];
+						let layers = current_map._layers;
 						
-						if (["polygon", "line", "point"].includes(type)) {
+						//Iterate over all layers
+						let all_layers = Object.keys(layers);
+						
+						for (let i = 0; i < all_layers.length; i++) {
+							let local_geometry = layers[all_layers[i]];
+							let local_options = (local_geometry.options) ? local_geometry.options : {};
+							let local_type = webapi.Leaflet.getGeometryType(local_geometry);
+							let symbol_obj = {};
+							
+							//Line/Polygon/Point handling
+							if (["line", "polygon"].includes(local_type)) {
+								symbol_obj = {
+									polygonFill: local_options.fillColor,
+									polygonOpacity: parseFloat(local_options.fillOpacity),
+									lineColor: local_options.color,
+									lineOpacity: parseFloat(local_options.opacity),
+									lineWidth: parseFloat(local_options.weight)
+								}
+							} else if (local_type === "point") {
+								symbol_obj = {
+									markerFile: local_geometry._icon?.getAttribute("src"),
+									markerHeight: 24,
+									markerWidth: 24,
+								};
+							}
+							
+							//Push geometry to results
 							results.push({
-								geometry: layer.toGeoJSON(),
-								symbol: type === "point" ? {
-									markerHeight: 24, markerWidth: 24,
-									markerFile: layer._icon ? layer._icon.getAttribute("src") : null
-								} : {
-									polygonFill: opt.fillColor, polygonOpacity: parseFloat(opt.fillOpacity),
-									lineColor: opt.color, lineOpacity: parseFloat(opt.opacity), lineWidth: parseFloat(opt.weight)
-								},
-								type: type
+								geometry: local_geometry.toGeoJSON(),
+								symbol: symbol_obj,
+								type: local_type
 							});
 						}
-					}
+					} catch (e) { console.warn(e); }
+					
+					//Return statement
 					return results;
 				});
 				
 				let current_scrape_time = Date.now();
 				
-				for (let geom of geometries) {
-					// Generate a semi-stable ID based on coordinates
-					// This ensures that when the scraper runs again, it merges with the previous instance
-					let coord_string = JSON.stringify(geom.geometry.geometry.coordinates);
+				Object.iterate(geometries, (local_key, local_value) => {
+					let coord_string = JSON.stringify(local_value.geometry.geometry.coordinates);
 					let event_id = `liveuamap_${local_region.name}_${coord_string.hashCode()}`;
-					
-					// Create the Ontology_Event instance
-					// If event_id exists, the constructor returns the existing instance and calls mergeState()
-					let event = new Ontology_Event([{
+					let ontology_obj = new Ontology_Event([{
 						date: current_scrape_time,
 						data: {
-							geometry: geom.geometry,
-							symbol: geom.symbol,
+							geometry: local_value.geometry,
+							symbol: local_value.symbol,
 							region: local_region.name,
 							source: local_region.url
 						}
@@ -106,41 +130,55 @@ global.GLOBAL_Liveuamap_Worker = class extends Blacktraffic.Worker {
 						worker_type: "Liveuamap"
 					});
 					
-					// Draw the instance immediately
-					event.draw();
-					ontologies.push(event);
-				}
+					//Draw the instance immediately
+					ontology_obj.draw();
+					ontologies.push(ontology_obj);
+				});
 				
+				//Sleep to bypass rate limit
 				await Blacktraffic.sleep(Math.randomNumber(10000, 15000));
 			} catch (e) {
 				this.error(`Error processing region ${i}:`, e.message);
 			}
 		}
+		
 		return ontologies;
 	}
 	
 	async getLiveuamapRegions() {
-		const json_path = this.constructor.input_auto_regions_json;
+		//Declare local instance variables
+		let json_path = this.static.input_auto_regions_json;
+		
 		if (fs.existsSync(json_path)) {
 			let age = Date.now() - fs.statSync(json_path).mtimeMs;
-			if (age < this.constructor._update_regions_interval * 1000) return JSON.parse(fs.readFileSync(json_path, "utf8"));
+			if (age < this.static._update_regions_interval * 1000) return JSON.parse(fs.readFileSync(json_path, "utf8"));
 		}
 		this.log("Refreshing regions cache...");
-		let browser = await this.getBrowser();
-		let temp_tab = await browser.openTab("liveuamap_discovery");
+		
+		//Make sure tab for worker is open
+		let tab = await this.getTab();
+		
 		try {
-			await temp_tab.goto("https://liveuamap.com/", { waitUntil: "networkidle2" });
-			await temp_tab.waitForSelector(`a#menu_languages`);
-			await temp_tab.click(`a#menu_languages`);
-			let regions = await temp_tab.$$eval(`div.rg-list > a`, els => els.map(el => ({ name: el.getAttribute("title"), url: el.href })));
-			if (!fs.existsSync(path.dirname(json_path))) fs.mkdirSync(path.dirname(json_path), { recursive: true });
+			await tab.goto("https://liveuamap.com/", { waitUntil: "networkidle2" });
+			await tab.waitForSelector(`a#menu_languages`);
+			await tab.click(`a#menu_languages`);
+			
+			let regions = await tab.$$eval(`div.rg-list > a`, els => els.map(el => ({ name: el.getAttribute("title"), url: el.href })));
+			
+			if (!fs.existsSync(path.dirname(json_path))) 
+				fs.mkdirSync(path.dirname(json_path), { recursive: true });
 			fs.writeFileSync(json_path, JSON.stringify(regions, null, 2));
-			await temp_tab.close();
+			await tab.close();
+			
+			//Return statement
 			return regions;
 		} catch (e) {
 			this.error("Discovery failed:", e.stack);
-			await temp_tab.close();
-			return fs.existsSync(json_path) ? JSON.parse(fs.readFileSync(json_path, "utf8")) : [];
+			await tab.close();
+			
+			//Return statement
+			return (fs.existsSync(json_path)) ? 
+				JSON.parse(fs.readFileSync(json_path, "utf8")) : [];
 		}
 	}
 };

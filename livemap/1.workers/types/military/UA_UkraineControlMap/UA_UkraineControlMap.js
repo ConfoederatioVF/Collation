@@ -1,5 +1,5 @@
 global.UA_UkraineControlMap = class {
-	static bf = `${l2}UA_UkraineControlMap/`;
+	static bf = `${l1m}UA_UkraineControlMap/`;
 	
 	constructor (arg0_options) {
 		//Convert from parameters

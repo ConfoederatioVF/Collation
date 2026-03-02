@@ -340,21 +340,17 @@
 		 */
 		draw () {
 			try {
-				let subontology_found = false;
-				
-				if (global[`Ontology_${this.type}`] && this.type !== "Ontology") {
-					let local_class = global[`Ontology_${this.type}`];
+				if (this.type !== "Ontology" && global[`Ontology_${this.type}`]) {
+					let target_class = global[`Ontology_${this.type}`];
 					
-					if (local_class.is_ontology) {
-						this.geometries = global[`Ontology_${this.type}`].draw();
-						subontology_found = true;
-					}
-					
-					//Check if subontology was found
-					if (!subontology_found)
-						console.warn(`No subontology of type ${this.type} could be found.`);
+					//Only delegate if this is not already an instance of that class to prevent infinite loops
+					if (!(this instanceof target_class) && typeof target_class.prototype.draw === "function")
+						return target_class.prototype.draw.call(this);
 				}
-			} catch (e) { console.error(e); }
+			} catch (e) {
+				console.error(`[Ontology] Error in delegated draw for ${this.id}:`, e);
+			}
+			return this.geometries;
 		}
 		
 		/**
@@ -702,7 +698,7 @@
 				let file_path = path.join(Ontology.ontology_folder_path, filename);
 				
 				//Prepare the line: ID JSON, strip internal _saved flag before stringifying
-				let save_data = Object.assign({}, local_keyframe);
+				let save_data = Object.assign({ type: this.type }, local_keyframe);
 				delete save_data._saved;
 				
 				let line = `${this.id} ${JSON.stringify(save_data)}\n`;
@@ -769,12 +765,6 @@
 		 * @memberof Ontology
 		 */
 		//[QUARANTINE]
-		/**
-		 * Loads all .ontology files from the folder path and hydrates the static instances.
-		 *
-		 * @alias #fromDatabase
-		 * @memberof Ontology
-		 */
 		static async fromDatabase () {
 			const fs_promises = require("fs").promises;
 			const path = require("path");
@@ -846,7 +836,11 @@
 				let target_class = global[`Ontology_${type}`] || Ontology;
 				
 				// Instantiate. Constructor handles merging, sorting, and diffing.
-				new target_class(type, state_array, { id: id });
+				if (type === "Ontology") {
+					new target_class(type, state_array, { id: id });
+				} else {
+					new target_class(state_array, { id: id });
+				}
 			}
 			
 			console.log(`[Ontology] Successfully hydrated ${Object.keys(database_states).length} ontologies.`);

@@ -3,7 +3,7 @@
  * @extends Ontology
  */
 global.Ontology_Event = class extends Ontology {
-	constructor(arg0_state, arg1_options) {
+	constructor (arg0_state, arg1_options) {
 		// Pass 'Event' as the type to the base Ontology class
 		super("Event", arg0_state, arg1_options);
 	}

@@ -76,6 +76,7 @@ global.UI_Mapmodes = class extends ve.Class {
 						calc(-100% + var(--cell-padding))
 					)`,
 					width: "var(--body-font-size)",
+					zIndex: 1
 				},
 				'[data-selected-mapmode="true"] button': {
 					backgroundColor: `var(--accent-secondary-colour)`
