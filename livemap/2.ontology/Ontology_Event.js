@@ -26,22 +26,31 @@ global.Ontology_Event = class extends Ontology {
 		if (current_state && current_state.geometry) {
 			try {
 				// 3. Convert GeoJSON to maptalks geometry
-				let m_geom = maptalks.GeoJSON.toGeometry(current_state.geometry);
+				let geometry = maptalks.GeoJSON.toGeometry(current_state.geometry);
 				
 				// 4. Apply the symbol (styling)
 				if (current_state.symbol) {
-					m_geom.updateSymbol(current_state.symbol);
+					geometry.updateSymbol(current_state.symbol);
 				}
+				geometry.addEventListener("click", (e) => {
+					try {
+						if (current_state.html || current_state.title)
+							veWindow((current_state.html) ? current_state.html : current_state.title, {
+								name: `Event #${this.id}`,
+								can_rename: false
+							});
+					} catch (e) {}
+				});
 				
 				// 5. Add to the designated map layer
 				if (typeof map !== "undefined") {
 					// Use a specific layer for Liveuamap events
 					let layer = map.getLayer("liveuamap") || new maptalks.VectorLayer("liveuamap", { zIndex: 101 }).addTo(map);
-					m_geom.addTo(layer);
+					geometry.addTo(layer);
 				}
 				
 				// 6. Track the geometry so we can remove/update it later
-				this.geometries.push(m_geom);
+				this.geometries.push(geometry);
 			} catch (e) {
 				console.error(`[Ontology_Event] Failed to draw geometry for ${this.id}:`, e);
 			}

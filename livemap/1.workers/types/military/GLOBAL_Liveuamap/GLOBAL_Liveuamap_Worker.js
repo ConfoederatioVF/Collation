@@ -9,7 +9,6 @@ global.GLOBAL_Liveuamap_Worker = class extends Blacktraffic.Worker {
 		
 		//Initialise options
 		options.interval = Math.returnSafeNumber(options.interval, 3600);
-		options.top_regions = Math.returnSafeNumber(options.top_regions, 5);
 		super("Liveuamap", {
 			...options,
 			interval: 0,
@@ -70,6 +69,11 @@ global.GLOBAL_Liveuamap_Worker = class extends Blacktraffic.Worker {
 				let geometries = await tab.evaluate(function () {
 					//Declare local instance variables
 					let results = [];
+					let return_obj = {
+						polygon: [],
+						line: [],
+						point: []
+					};
 					
 					try {
 						let current_map = getMaps()[0];
@@ -77,9 +81,13 @@ global.GLOBAL_Liveuamap_Worker = class extends Blacktraffic.Worker {
 						
 						//Iterate over all layers
 						let all_layers = Object.keys(layers);
+						let content_ids = [];
 						
 						for (let i = 0; i < all_layers.length; i++) {
 							let local_geometry = layers[all_layers[i]];
+							if (local_geometry.toGeoJSON === undefined) continue;
+							
+							let local_html;
 							let local_options = (local_geometry.options) ? local_geometry.options : {};
 							let local_type = webapi.Leaflet.getGeometryType(local_geometry);
 							let symbol_obj = {};
@@ -95,20 +103,47 @@ global.GLOBAL_Liveuamap_Worker = class extends Blacktraffic.Worker {
 								}
 							} else if (local_type === "point") {
 								symbol_obj = {
-									markerFile: local_geometry._icon?.getAttribute("src"),
+									markerFile: structuredClone(local_geometry._icon?.getAttribute("src")),
 									markerHeight: 24,
 									markerWidth: 24,
 								};
+								
+								//Get content if possible
+								local_geometry.fire("click");
+								
+								if (local_geometry?._icon?.getAttribute("title")) {
+									let source_el = document.querySelector(`.event.selected`);
+									
+									if (source_el && !content_ids.includes(source_el.id)) {
+										local_html = source_el.innerHTML;
+										
+										//Mark source_el as being included
+										content_ids.push(source_el.id);
+									}
+								} else {
+									if (local_geometry?._popup?._content)
+										local_html = local_geometry?._popup?._content;
+								}
 							}
 							
 							//Push geometry to results
-							results.push({
-								geometry: local_geometry.toGeoJSON(),
-								symbol: symbol_obj,
-								type: local_type
-							});
+							if (return_obj[local_type])
+								return_obj[local_type].push({
+									geometry: local_geometry.toGeoJSON(),
+									symbol: symbol_obj,
+									type: local_type,
+									
+									title: local_geometry?.options?.title,
+									html: local_html
+								});
 						}
 					} catch (e) { console.warn(e); }
+					
+					//Return all_types in order
+					let all_types = Object.keys(return_obj);
+					
+					for (let i = 0; i < all_types.length; i++)
+						results = results.concat(return_obj[all_types[i]]);
 					
 					//Return statement
 					return results;
@@ -116,16 +151,17 @@ global.GLOBAL_Liveuamap_Worker = class extends Blacktraffic.Worker {
 				
 				let current_scrape_time = Date.now();
 				
-				Object.iterate(geometries, (local_key, local_value) => {
-					let coord_string = JSON.stringify(local_value.geometry.geometry.coordinates);
+				for (let i = 0; i < geometries.length; i++) try {
+					if (!geometries[i]?.geometry?.geometry?.coordinates) continue; //Make sure coordinates exist
+					
+					let coord_string = JSON.stringify(geometries[i].geometry.geometry.coordinates);
 					let event_id = `liveuamap_${local_region.name}_${coord_string.hashCode()}`;
 					let ontology_obj = new Ontology_Event([{
 						date: current_scrape_time,
 						data: {
-							geometry: local_value.geometry,
-							symbol: local_value.symbol,
 							region: local_region.name,
-							source: local_region.url
+							region_url: local_region.url,
+							...geometries[i]
 						}
 					}], {
 						id: event_id,
@@ -135,12 +171,12 @@ global.GLOBAL_Liveuamap_Worker = class extends Blacktraffic.Worker {
 					//Draw the instance immediately
 					ontology_obj.draw();
 					ontologies.push(ontology_obj);
-				});
+				} catch (e) { this.error(e); }
 				
 				//Sleep to bypass rate limit
 				await Blacktraffic.sleep(Math.randomNumber(10000, 15000));
 			} catch (e) {
-				this.error(`Error processing region ${i}:`, e.message);
+				this.error(`Error processing region ${i}:`, e);
 			}
 		}
 		
