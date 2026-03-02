@@ -14,6 +14,10 @@ html, head, body {
   top: 0px;
 }
 
+/* -- Generic classes -- */
+a { color: var(--accent-secondary-colour); }
+.fullbright { opacity: 1 !important; }
+
 /* -- Map -- */
 .maptalks-attribution { display: none !important; }
 .maptalks-msgBox {

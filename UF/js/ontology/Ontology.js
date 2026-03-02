@@ -65,6 +65,10 @@
 	 * @type {Ontology}
 	 */
 	global.Ontology = class {
+		static dirty_instances = new Set();
+		static _instances_set = new Set();
+		static _is_flushing = false;
+		
 		/**
 		 * @type {boolean}
 		 */
@@ -125,6 +129,7 @@
 			Ontology.queue.push(this);
 		}
 		
+		
 		/**
 		 * Given an array of fully-resolved snapshots (one per keyframe, indexed automatically to `this.state`), rewrite every keyframe's data so that the last entry is the full snapshot and every earlier entry is a negative diff against its successor.
 		 * @private
@@ -160,6 +165,7 @@
 				delete local_keyframe.set_relations;
 				delete local_keyframe.set_tags;
 			}
+			Ontology.dirty_instances.add(this);
 			
 			//Return statement
 			return this.state;
@@ -222,7 +228,9 @@
 		 * Sorts `this.state` in ascending order by `.date`. Last = head.
 		 * @private
 		 */
-		_sortState () { this.state.sort((a, b) => a.date - b.date); }
+		_sortState () { 
+			this.state.sort((a, b) => a.date - b.date);
+		}
 		
 		/**
 		 * Adds a new keyframe/state mutation at the given date, typically the head state. The provided `arg1_data` and optional relation/tag mutations are merged into the resolved timeline, and the entire diff chain is rebuilt so the head remains the latest full snapshot.
@@ -637,6 +645,8 @@
 				if (index !== -1) Ontology.instances.splice(index, 1);
 			let queue_index = Ontology.queue.indexOf(this);
 				if (queue_index !== -1) Ontology.queue.splice(queue_index, 1);
+			Ontology._instances_set.delete(this);
+			Ontology.dirty_instances.delete(this);
 			
 			//Remove geometries from any map layer
 			for (let local_geometry of this.geometries)
@@ -683,32 +693,32 @@
 		}
 		
 		/**
-		 * Saves unsaved state keyframes to their respective daily files.
+		 * Collects dirty keyframes into a write-batch map.
+		 * Does NOT perform I/O itself; called by the logic loop.
+		 *
+		 * @param {Map<string, {lines: string[], keyframes: Object[]}>} arg0_batch_map
 		 */
-		saveToDatabase () {
-			//Make sure Ontology.ontology_folder_path exists
-			if (!fs.existsSync(Ontology.ontology_folder_path))
-				fs.mkdirSync(Ontology.ontology_folder_path, { recursive: true });
+		saveToDatabase(arg0_batch_map) {
+			let all_clean = true;
 			
-			//Only save keyframes that haven't been flagged as 'saved'
 			for (let local_keyframe of this.state) {
 				if (local_keyframe._saved) continue;
+				all_clean = false;
 				
 				let filename = `${String.getDateString()}.ontology`;
-				let file_path = path.join(Ontology.ontology_folder_path, filename);
 				
-				//Prepare the line: ID JSON, strip internal _saved flag before stringifying
+				if (!arg0_batch_map.has(filename))
+					arg0_batch_map.set(filename, { lines: [], keyframes: [] });
+				
+				let entry = arg0_batch_map.get(filename);
 				let save_data = Object.assign({ type: this.type }, local_keyframe);
 				delete save_data._saved;
 				
-				let line = `${this.id} ${JSON.stringify(save_data)}\n`;
-				
-				//Try to stream Ontology to disk
-				try {
-					fs.appendFileSync(file_path, line);
-					local_keyframe._saved = true;
-				} catch (e) { console.error(`Failed to stream ontology ${this.id} to disk.`); }
+				entry.lines.push(`${this.id} ${JSON.stringify(save_data)}\n`);
+				entry.keyframes.push(local_keyframe);
 			}
+			
+			if (all_clean) Ontology.dirty_instances.delete(this);
 		}
 		
 		/**
@@ -766,8 +776,7 @@
 		 */
 		//[QUARANTINE]
 		static async fromDatabase () {
-			const fs_promises = require("fs").promises;
-			const path = require("path");
+			const fs_promises = fs.promises;
 			
 			// 1. Check if the directory exists
 			try {
@@ -888,19 +897,62 @@
 		 */
 		static initialise () {
 			Ontology.initialised = true;
-			Ontology.logic_loop = setInterval(() => {
-				//1. Process Queue
-				for (let i = 0; i < Ontology.queue.length; i++) {
-					let local_instance = Ontology.queue[i];
-					
-					if (!Ontology.instances.includes(local_instance))
-						Ontology.instances.push(local_instance);
-				}
-				Ontology.queue = [];
+			
+			if (!fs.existsSync(Ontology.ontology_folder_path))
+				fs.mkdirSync(Ontology.ontology_folder_path, { recursive: true });
+			
+			Ontology.logic_loop = setInterval(async () => {
+				if (Ontology._is_flushing) return;
+				Ontology._is_flushing = true;
 				
-				//2. Stream to database. Every 100ms we check if instances have new/dirty keyframes to append to disk
-				for (let local_instance of Ontology.instances)
-					local_instance.saveToDatabase();
+				try {
+					// 1. Flush queue → instances (O(1) membership via shadow Set)
+					for (let local_instance of Ontology.queue) {
+						if (!Ontology._instances_set.has(local_instance)) {
+							Ontology._instances_set.add(local_instance);
+							Ontology.instances.push(local_instance);
+						}
+					}
+					Ontology.queue = [];
+					
+					// 2. Early-exit if nothing is dirty
+					if (Ontology.dirty_instances.size === 0) return;
+					
+					// 3. Collect all dirty writes into a per-file batch
+					let batch_map = new Map();
+					
+					for (let local_instance of Ontology.dirty_instances)
+						local_instance.saveToDatabase(batch_map);
+					
+					// 4. One async write per file
+					let write_promises = [];
+					
+					for (let [filename, { lines, keyframes }] of batch_map) {
+						let file_path = path.join(
+							Ontology.ontology_folder_path,
+							filename
+						);
+						let payload = lines.join("");
+						
+						write_promises.push(
+							fs.promises
+							.appendFile(file_path, payload, "utf8")
+							.then(() => {
+								for (let kf of keyframes) kf._saved = true;
+							})
+							.catch((e) => {
+								console.error(
+									`[Ontology] Batch write failed for ${filename}:`,
+									e
+								);
+							})
+						);
+					}
+					
+					await Promise.all(write_promises);
+				} finally {
+					Ontology._is_flushing = false;
+				}
 			}, 100);
 		}
 	};

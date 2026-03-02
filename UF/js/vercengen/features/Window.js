@@ -17,7 +17,8 @@
  *   - `.element`: {@link HTMLElement}
  *   - `.id`: {@link string}
  *   - `.mode="window"`: {@link string} - Either 'static_ui'/'static_window'/'window'.
- *   - `.name=""`: {@link string} - Auto-resolves to 'Window' instead if `.can_rename=true`.
+ *   - `.name=""`: {@link string} - Auto-resolves to 'Window' instead if `.can_rename=true`.#
+ *   - `.name_class=""`: {@link string}
  *   - `.theme`: {@link string} - The CSS theme to apply to the Feature.
  *   -
  *   - `.can_close`: {@link boolean}
@@ -183,7 +184,7 @@ ve.Window = class extends ve.Feature {
 		this.element.id = this.id;
 		this.element.innerHTML = `
 			${(!options.headless) ? `<div id = "feature-header" class = "feature-header">
-				<span id = "window-name"${(this.options.can_rename) ? ` contenteditable = "plaintext-only"` : ""}>${this.name}</span>
+				<span id = "window-name"${(this.options.can_rename) ? ` contenteditable = "plaintext-only"` : ""} class = "${(this.options.name_class) ? this.options.name_class : ""}">${this.name}</span>
 			</div>` : ""}
 			<div id = "feature-body" class = "feature-body"></div>
 		`;

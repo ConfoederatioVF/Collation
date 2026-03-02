@@ -87,6 +87,7 @@ global.GLOBAL_Liveuamap_Worker = class extends Blacktraffic.Worker {
 							let local_geometry = layers[all_layers[i]];
 							if (local_geometry.toGeoJSON === undefined) continue;
 							
+							let fields_obj = {};
 							let local_html;
 							let local_options = (local_geometry.options) ? local_geometry.options : {};
 							let local_type = webapi.Leaflet.getGeometryType(local_geometry);
@@ -102,28 +103,33 @@ global.GLOBAL_Liveuamap_Worker = class extends Blacktraffic.Worker {
 									lineWidth: parseFloat(local_options.weight)
 								}
 							} else if (local_type === "point") {
+								let leaflet_id = local_geometry?._leaflet_id;
+								
+								if (leaflet_id !== undefined && window.markers)
+									for (let x = 0; x < window.markers.length; x++) {
+										let local_id = window.markers[x]?.m?._leaflet_id;
+										
+										if (local_id === leaflet_id && window.markers[x]?.v?.timestamp !== undefined) {
+											let local_value = window.markers[x].v;
+											
+											//Set defined fields_obj
+											fields_obj.image = local_value.picture;
+											fields_obj.source = local_value.source;
+											if (local_value.moreSources)
+												fields_obj.source = fields_obj.source.concat(local_value.moreSources);
+											fields_obj.timestamp = local_value.timestamp;
+										}
+									}
+										
+								
 								symbol_obj = {
 									markerFile: structuredClone(local_geometry._icon?.getAttribute("src")),
 									markerHeight: 24,
 									markerWidth: 24,
 								};
 								
-								//Get content if possible
-								local_geometry.fire("click");
-								
-								if (local_geometry?._icon?.getAttribute("title")) {
-									let source_el = document.querySelector(`.event.selected`);
-									
-									if (source_el && !content_ids.includes(source_el.id)) {
-										local_html = source_el.innerHTML;
-										
-										//Mark source_el as being included
-										content_ids.push(source_el.id);
-									}
-								} else {
-									if (local_geometry?._popup?._content)
-										local_html = local_geometry?._popup?._content;
-								}
+								if (local_geometry?._popup?._content)
+									fields_obj.html = local_geometry?._popup?._content;
 							}
 							
 							//Push geometry to results
@@ -134,7 +140,7 @@ global.GLOBAL_Liveuamap_Worker = class extends Blacktraffic.Worker {
 									type: local_type,
 									
 									title: local_geometry?.options?.title,
-									html: local_html
+									...fields_obj
 								});
 						}
 					} catch (e) { console.warn(e); }

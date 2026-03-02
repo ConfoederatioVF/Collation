@@ -1,5 +1,5 @@
 //Import libraries
-let { app, BrowserWindow, dialog, ipcMain, session } = require("electron");
+let { app, BrowserWindow, dialog, ipcMain, session, shell } = require("electron");
 let path = require("path");
 let { performance } = require("perf_hooks");
 
@@ -47,6 +47,21 @@ let win;
 
       win.setTitle(title_string);
     }, 1000);
+    
+    //<a href> handling
+    //Intercept link clicks that would navigate the current window
+    win.webContents.on("will-navigate", (event, url) => {
+      if (url !== win.webContents.getURL()) {
+        event.preventDefault();
+        shell.openExternal(url);
+      }
+    });
+    
+    //Intercept target="_blank" or window.open()
+    win.webContents.setWindowOpenHandler(({ url }) => {
+      shell.openExternal(url);
+      return { action: "deny" };
+    });
 
     //Get the default session
     try {

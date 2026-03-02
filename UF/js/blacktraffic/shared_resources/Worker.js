@@ -327,7 +327,7 @@ Blacktraffic.Worker = class {
 		
 		//Return statement
 		if (!current_tab || (typeof current_tab.isClosed === "function" && current_tab.isClosed())) {
-			if (current_tab) this._browser.removeTab(tab_id); //Cleanup stale reference
+			if (current_tab) try { this._browser.closeTab(tab_id); } catch (e) {} //Cleanup stale reference
 			return this._browser.openTab(this.getTabID());
 		} else {
 			//Return statement

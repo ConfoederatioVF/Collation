@@ -11,7 +11,7 @@ global.Ontology_Event = class extends Ontology {
 	/**
 	 * Overrides the draw method to plot the current state onto the map.
 	 */
-	draw() {
+	draw () {
 		// 1. Clean up existing geometries for this specific ontology instance
 		if (this.geometries) {
 			for (let local_geometry of this.geometries) {
@@ -22,8 +22,14 @@ global.Ontology_Event = class extends Ontology {
 		
 		// 2. Resolve the current state (latest snapshot)
 		let current_state = this.getState(Date.now());
+		let skip_draw = false;
 		
-		if (current_state && current_state.geometry) {
+		if (current_state) try {
+			if (current_state.type === "point" && Date.getDaysAgo(current_state.timestamp) > 2) 
+				skip_draw = true;
+		} catch (e) {}
+		
+		if (current_state && current_state.geometry && !skip_draw) {
 			try {
 				// 3. Convert GeoJSON to maptalks geometry
 				let geometry = maptalks.GeoJSON.toGeometry(current_state.geometry);
@@ -33,13 +39,34 @@ global.Ontology_Event = class extends Ontology {
 					geometry.updateSymbol(current_state.symbol);
 				}
 				geometry.addEventListener("click", (e) => {
-					try {
-						if (current_state.html || current_state.title)
-							veWindow((current_state.html) ? current_state.html : current_state.title, {
-								name: `Event #${this.id}`,
-								can_rename: false
+					if (!current_state.title && current_state.html) current_state.title = current_state.html; //Accept HTML as fallback
+					if (current_state.title) {
+						//Fetch name_string first
+						let name_string = (current_state.timestamp !== undefined) ?
+							(new Date(current_state.timestamp*1000)).toLocaleString() : "Unknown Time";
+						
+						let image_string = (current_state?.symbol?.markerFile) ?
+							`<img src = "${current_state.symbol.markerFile}" height = "24" style = "vertical-align: middle;"> ` : "";
+						let window_html = [
+							`${current_state.title}`,
+							"",
+							`Source: ${(current_state.source) ? `<a href = "${current_state.source}">${current_state.source}</a>` : "None"}`
+						];
+						if (current_state.image) 
+							window_html.push(`Image: <a href = "${current_state.image}">${current_state.image}</a>`);
+						
+						try {
+							veWindow(veHTML(window_html.join("<br>"), {
+								style: { overflowWrap: "break-word" }
+							}), {
+								name: `${image_string}${name_string}`,
+								name_class: "fullbright",
+								can_rename: false,
+								do_not_wrap: true,
+								width: "20rem"
 							});
-					} catch (e) {}
+						} catch (e) { console.error(e); }
+					}
 				});
 				
 				// 5. Add to the designated map layer
