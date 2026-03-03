@@ -161,7 +161,7 @@ global.GLOBAL_Liveuamap_Worker = class extends Blacktraffic.Worker {
 					if (!geometries[i]?.geometry?.geometry?.coordinates) continue; //Make sure coordinates exist
 					
 					let coord_string = JSON.stringify(geometries[i].geometry.geometry.coordinates);
-					let event_id = `liveuamap_${local_region.name}_${coord_string.hashCode()}`;
+					let event_id = `liveuamap_${local_region.name}_${String.hash(coord_string)}`;
 					let ontology_obj = new Ontology_Event([{
 						date: current_scrape_time,
 						data: {
@@ -232,18 +232,3 @@ global.GLOBAL_Liveuamap_Worker = class extends Blacktraffic.Worker {
 		}
 	}
 };
-
-/**
- * String Hashing Helper
- */
-if (!String.prototype.hashCode) {
-	String.prototype.hashCode = function() {
-		let hash = 0;
-		for (let i = 0, len = this.length; i < len; i++) {
-			let chr = this.charCodeAt(i);
-			hash = (hash << 5) - hash + chr;
-			hash |= 0;
-		}
-		return Math.abs(hash).toString(16);
-	};
-}
