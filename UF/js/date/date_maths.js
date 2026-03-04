@@ -14,10 +14,9 @@
 		
 		//Declare local instance variables
 		let now = Date.now();
-		let target_time = timestamp*1000;
 		
 		//Return statement
-		return  now - target_time;
+		return now - timestamp;
 	};
 	
 	/**
