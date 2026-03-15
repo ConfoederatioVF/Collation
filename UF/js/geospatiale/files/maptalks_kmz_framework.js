@@ -16,7 +16,7 @@ Geospatiale.maptalks_GeoKMZ = class {
 		
 		//Populate this.kmz
 		if (kmz_file) this.loadKMZ(kmz_file, {
-			popup_options: {
+			window_options: {
 				width: "25rem",
 			},
 			...options
@@ -33,7 +33,7 @@ Geospatiale.maptalks_GeoKMZ = class {
 	 *  @param {string[]} [arg1_options.exclude_types] - Any types to exclude. Either 'polygon'/'line'/'point'.
 	 *  @param {boolean} [arg1_options.do_not_display_popups=false]
 	 *  @param {function} [arg1_options.onload] - (arg0_geokmz_obj, arg1_geometries). The method to call once loading is finished.
-	 *  @param {Object} [arg1_options.popup_options]
+	 *  @param {Object} [arg1_options.window_options]
 	 */
 	loadKMZ (arg0_input_file_path, arg1_options) {
 		//Convert from parameters
@@ -103,7 +103,7 @@ Geospatiale.maptalks_GeoKMZ = class {
 							veWindow(local_properties.popup_description, {
 								name: (local_properties.popup_title) ? local_properties.popup_title : "",
 								width: "20rem",
-								...options.popup_options
+								...options.window_options
 							});
 						});
 				} catch (e) {}
