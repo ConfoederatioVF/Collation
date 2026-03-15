@@ -34,11 +34,11 @@ Blacktraffic.AgentBrowser.webapi.Leaflet = {
 	
 	getGeometryType: function (geometry) {
 		if (geometry instanceof L.Polygon) {
-			return 'polygon';
+			return "polygon";
 		} else if (geometry instanceof L.Polyline) {
-			return 'line';
+			return "line";
 		} else if (geometry instanceof L.Marker || geometry instanceof L.CircleMarker) {
-			return 'point';
+			return "point";
 		}
 	}
 };
