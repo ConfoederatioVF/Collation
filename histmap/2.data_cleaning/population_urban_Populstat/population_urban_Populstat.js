@@ -149,7 +149,7 @@ global.population_urban_Populstat = class { //[WIP] - Finish class body
 		return return_obj;
 	}
 	
-	static async D_loadPopulstatData () { //[WIP] - Finish function body
+	static async D_loadPopulstatData () {
 		//Declare local instance variables
 		let populstat_obj = JSON.parse(fs.readFileSync(this.intermediate_raw_cities_json, "utf8"));
 		
@@ -162,9 +162,39 @@ global.population_urban_Populstat = class { //[WIP] - Finish class body
 					let local_city_population_obj = {};
 					
 					//1. Iterate over all city keys, handle population figures
+					Object.iterate(local_city_value, (local_key, local_value) => {
+						let is_population_key = false;
+						
+						//Other names handling
+						if (local_key.startsWith(`variants `)) try {
+							local_city_other_names = local_value.split(", ");
+							delete local_city_value[local_key];
+						} catch (e) {}
+						
+						//Population handling
+						if (!isNaN(parseInt(local_key)) && !isNaN(parseFloat(local_value.toString())))
+							is_population_key = true;
+						if (is_population_key) {
+							local_city_population_obj[local_key] = local_value;
+							delete local_city_value[local_key];
+						}
+					});
+					
+					//2. Only cities with population figures should be kept
+					if (Object.keys(local_city_population_obj).length > 0) {
+						local_city_value.other_names = local_city_other_names;
+						local_city_value.population = local_city_population_obj;
+					} else {
+						if (!local_city_value.population) delete local_country_value[local_city_value];
+					}
 				} catch (e) { console.error(e); }
 			});
 		});
+		
+		this.populstat_obj = populstat_obj;
+		
+		//Return statement
+		return populstat_obj;
 	}
 	
 	static async E_cleanPopulstatCoords () {
