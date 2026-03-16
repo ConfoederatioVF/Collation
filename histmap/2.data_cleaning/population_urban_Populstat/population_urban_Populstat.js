@@ -338,7 +338,7 @@ global.population_urban_Populstat = class { //[WIP] - Finish class body
 		return remove_coords_keys;
 	}
 	
-	static async H_getPopulstatObject () {
+	static async process () {
 		//Declare local instance variables; this.populstat_obj
 		this.config_obj = this.A_getConfig();
 		

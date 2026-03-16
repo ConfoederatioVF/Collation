@@ -1,4 +1,5 @@
 global.population_urban_ChandlerModelski = class {
+	static chandler_modelski_obj;
 	static input_folder = `${h1}/population_urban_ChandlerModelski/`;
 	
 	static async A_getCSVs () {
@@ -52,7 +53,7 @@ global.population_urban_ChandlerModelski = class {
 							let local_year = parseInt(local_subkey.replace("bc_", ""))*-1;
 							temp_city_obj.population[local_year] = parseInt(local_subvalue);
 						} else if (local_subkey.startsWith("ad_")) {
-							let local_year = parseInt(local_subkey.replace("ad_", ""))*-1;
+							let local_year = parseInt(local_subkey.replace("ad_", ""));
 							temp_city_obj.population[local_year] = parseInt(local_subvalue);
 						}
 				});
@@ -85,7 +86,85 @@ global.population_urban_ChandlerModelski = class {
 					city_obj.population[year_key] = Math.weightedGeometricMean(pop_value);
 			}));
 		
+		this.chandler_modelski_obj = chandler_modelski_obj;
+		
 		//Return statement
-		return chandler_modelski_obj;
+		return this.chandler_modelski_obj;
+	}
+	
+	static async process () {
+		//Declare local instance variables
+		if (!this.chandler_modelski_obj) await this.B_getChandlerModelskiObject();
+			let chandler_modelski_obj = this.chandler_modelski_obj;
+		
+		//Set manual fixes; these are mostly clerical errors regarding accidental 0 entries or order of magnitude errors
+		//Aleppo, Syria
+		delete chandler_modelski_obj["Aleppo-Syria"].population["1300"]; //0 entry
+		//Alexandria, Egypt
+		chandler_modelski_obj["Alexandria-Egypt"].population["365"] = chandler_modelski_obj["Alexandria-Egypt"].population["361"]; //Alexandrian earthquake is on the wrong year
+		delete chandler_modelski_obj["Alexandria-Egypt"].population["361"]; //361 entry
+		//Algiers, Algeria
+		chandler_modelski_obj["Algiers-Algiers"].population["1925"] = 222000; //10x error
+		chandler_modelski_obj["Algiers-Algeria"] = chandler_modelski_obj["Algiers-Algiers"]; //Algiers is not a country
+		chandler_modelski_obj["Algiers-Algeria"].country = "Algeria";
+		delete chandler_modelski_obj["Algiers-Algiers"];
+		//Augsburg, Germany
+		chandler_modelski_obj["Augsburg-Germany"] = chandler_modelski_obj["Augsberg-Germany"]; //Fix name
+		chandler_modelski_obj["Augsburg-Germany"].name = "Augsburg";
+		chandler_modelski_obj["Augsburg-Germany"].other_names.push("Augsberg");
+		delete chandler_modelski_obj["Augsberg-Germany"];
+		//Birmingham, United States of America
+		//chandler_modelski_obj["Birmingham-United States of America"].population["1970"] = 300910; //Confused with Birmingham, United Kingdom
+		//Delhi, India
+		chandler_modelski_obj["Delhi-India"].population["1375"] = 200000; //10x error
+		chandler_modelski_obj["Delhi-India"].population["1399"] = 25000; //Tamurlane sacking
+		chandler_modelski_obj["Delhi-India"].population["1596"] = 80000; //10x error
+		//Fez, Morocco
+		chandler_modelski_obj["Fez-Morocco"].population["1800"] = 60000; //Weird noise drop
+		//Goa, India
+		delete chandler_modelski_obj["Goa-India"].population["1510"]; //Remove noise
+		//Izmail, Ukraine
+		chandler_modelski_obj["Izmail-Ukraine"] = chandler_modelski_obj["Izmail-Romania"]; //Izmail is in Ukraine, not Romania
+		delete chandler_modelski_obj["Izmail-Romania"];
+		//Lahore, Pakistan
+		chandler_modelski_obj["Lahore-Pakistan"].population["1600"] = 200000; //Sack of Lahore wasn't that devastating
+		chandler_modelski_obj["Lahore-Pakistan"].population["1622"] = 250000;
+		chandler_modelski_obj["Lahore-Pakistan"].population["1627"] = 255000;
+		chandler_modelski_obj["Lahore-Pakistan"].population["1631"] = 284000;
+		//Nanjing, China
+		chandler_modelski_obj["Nanjing-China"].population["1970"] = 2000000; //10x error
+		chandler_modelski_obj["Nanjing-China"].population["2000"] = 5448900; //Demonstrably false
+		//Palermo, Italy
+		chandler_modelski_obj["Palermo-Italy"].population["1150"] = 125000; //1000x error
+		//Philadelphia, United States of America
+		chandler_modelski_obj["Philadelphia-United States of America"].population["1914"] = 1760000; //10x error
+		//Skopje, Macedonia
+		chandler_modelski_obj["Skopje-Macedonia"] = chandler_modelski_obj["Skopje-Serbia"]; //Skopje is in Macedonia, not Serbia
+		delete chandler_modelski_obj["Skopje-Serbia"];
+		//Srirangapatna, India
+		chandler_modelski_obj["Srirangapatna-India"].population["1780"] = 38000; //This figure is too high
+		chandler_modelski_obj["Srirangapatna-India"].population["1799"] = 50000; //This figure is too high
+		//Tbilisi, Georgia
+		delete chandler_modelski_obj["Tbilisi-Georgia"].population["1100"]; //Zero entry
+		//Tokyo, Japan
+		delete chandler_modelski_obj["Tokyo-Japan"].population["2000"]; //Erroneous entry
+		
+		//Remove any values after 1975
+		Object.iterate(chandler_modelski_obj, (local_key, local_value) => {
+			if (local_value?.population) {
+				Object.iterate(local_value.population, (local_population_key, local_population_value) => {
+					if (parseInt(local_population_key) > 1975)
+						delete local_value.population[local_population_key];
+				});
+				
+				if (Object.keys(local_value.population).length === 0)
+					delete chandler_modelski_obj[local_key];
+			}
+		});
+		
+		this.chandler_modelski_obj = chandler_modelski_obj;
+		
+		//Return statement
+		return this.chandler_modelski_obj;
 	}
 };
