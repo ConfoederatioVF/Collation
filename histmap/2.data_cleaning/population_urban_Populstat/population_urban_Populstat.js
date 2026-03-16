@@ -28,7 +28,7 @@ global.population_urban_Populstat = class { //[WIP] - Finish class body
 			
 			if (local_link.split("/").length >= 3)
 				if (local_link.endsWith("t.htm") || local_link.endsWith("t.html"))
-					all_town_links.push(local_link[i]);
+					all_town_links.push(config_obj.links[i]);
 		}
 		
 		//Return statement
@@ -185,7 +185,7 @@ global.population_urban_Populstat = class { //[WIP] - Finish class body
 						local_city_value.other_names = local_city_other_names;
 						local_city_value.population = local_city_population_obj;
 					} else {
-						if (!local_city_value.population) delete local_country_value[local_city_value];
+						if (!local_city_value.population) delete local_country_value[local_city_key];
 					}
 				} catch (e) { console.error(e); }
 			});
@@ -216,7 +216,17 @@ global.population_urban_Populstat = class { //[WIP] - Finish class body
 	}
 	
 	static async F_geolocateAllPopulstatCities () {
+		//Declare local instance variables
+		let config_obj = this.A_getConfig();
 		
+		let all_countries = Object.keys(config_obj.countries);
+		
+		Object.iterate(config_obj.countries, async (local_country_key, local_country_value, local_country_index) => {
+			try {
+				console.log(`Processing (${local_country_index + 1}/${all_countries.length}) ..`);
+				await this.F_geolocatePopulstatCountryCities(local_country_key);
+			} catch (e) { console.error(e); }
+		});
 	}
 	
 	static async F_geolocatePopulstatCountryCities (arg0_country_key) {
@@ -235,7 +245,7 @@ global.population_urban_Populstat = class { //[WIP] - Finish class body
 			try {
 				//Save every 100 geolocated cities
 				if (local_city_index % 100 === 0 && local_city_index !== 0) 
-					fs.writeFileSync(this.intermediate_cities_json, JSON.stringify(local_city_value), "utf8");
+					fs.writeFileSync(this.intermediate_cities_json, JSON.stringify(this.populstat_obj), "utf8");
 				
 				let local_country_name = config_obj.countries[country_key];
 					local_country_name = Array.toArray(local_country_name)[0];
@@ -250,7 +260,7 @@ global.population_urban_Populstat = class { //[WIP] - Finish class body
 						
 						if (local_city_value.other_names)
 							for (let i = 0; i < local_city_value.other_names.length; i++)
-								city_names.push(`${local_city_value.other_names[x]}, ${local_country_name}`);
+								city_names.push(`${local_city_value.other_names[i]}, ${local_country_name}`);
 						
 						console.log(` - Processing ${local_city_value.name}:`, city_names.join(", "));
 						
@@ -272,7 +282,62 @@ global.population_urban_Populstat = class { //[WIP] - Finish class body
 		});
 	}
 	
-	static async G_removeDuplicatePopulstatCoords () {
+	/**
+	 * Removes duplicate coordinate pairs from `this.populstat_obj`.
+	 * 
+	 * @param {number} [arg0_precision=4]
+	 * 
+	 * @returns {string[]}
+	 */
+	static G_removeDuplicatePopulstatCoords (arg0_precision) {
+		//Convert from parameters
+		let precision = Math.returnSafeNumber(arg0_precision, 4);
+		
+		//Declare local instance variables
+		let coords_dict = {};
+		
+		//Iterate over this.populstat_obj
+		Object.iterate(this.populstat_obj, (local_country_key, local_country_value) => {
+			Object.iterate(local_country_value, (local_city_key, local_city_value) => {
+				if (local_city_value.coords) {
+					let local_coords_string = JSON.stringify([
+						Math.roundNumber(local_city_value.coords[0], precision),
+						Math.roundNumber(local_city_value.coords[1], precision)
+					]);
+					
+					if (!coords_dict[local_coords_string])
+						coords_dict[local_coords_string] = [];
+					coords_dict[local_coords_string].push(`${local_country_key}-${local_city_key}`);
+				}
+			});
+		});
+		
+		//Iterate over coords_dict
+		let remove_coords_keys = [];
+		
+		Object.iterate(coords_dict, (local_key, local_value) => {
+			if (local_value.length > 1)
+				remove_coords_keys = remove_coords_keys.concat(local_value);
+		});
+		
+		//Iterate over this.populstat_obj
+		Object.iterate(this.populstat_obj, (local_country_key, local_country_value) => {
+			Object.iterate(local_country_value, (local_city_key, local_city_value) => {
+				let local_key = `${local_country_key}-${local_city_key}`;
+				
+				if (remove_coords_keys.includes(local_key))
+					delete local_city_value.coords;
+			});
+		});
+		
+		console.log(`Pruned ${remove_coords_keys.length} duplicate coordinate pairs.`);
+		console.log(`- ${remove_coords_keys.join(", ")}`);
+		
+		//Return statement
+		return remove_coords_keys;
+	}
+	
+	static F_getPopulstatObject () {
 		
 	}
 };
