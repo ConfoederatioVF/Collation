@@ -193,7 +193,7 @@ global.landuse_HYDE = class {
 						let left_number = local_left_image.data[local_index];
 						let right_number = local_right_image.data[local_index];
 						
-						let local_value = Math.round(Array.linearInterpolation([hyde_domain[0], hyde_domain[1]], [left_number, right_number], year));
+						let local_value = Math.ceil(Array.linearInterpolation([hyde_domain[0], hyde_domain[1]], [left_number, right_number], year));
 						if (local_value < 0) local_value = 0;
 						
 						//Return statement
@@ -299,7 +299,7 @@ global.landuse_HYDE = class {
 						
 						//Return statement
 						if (local_country.hyde_scalar !== undefined)
-							return Math.round(local_value*local_country.hyde_scalar);
+							return Math.ceil(local_value*local_country.hyde_scalar);
 					}
 					return local_value;
 				}
@@ -340,7 +340,7 @@ global.landuse_HYDE = class {
 				if (values.length > 0 && years.length > 0)
 					for (let x = 0; x < all_hyde_years.length; x++)
 						if (all_hyde_years[x] >= years[0] && all_hyde_years[x] <= years[years.length - 1])
-							local_value.population[all_hyde_years[x]] = Math.round(
+							local_value.population[all_hyde_years[x]] = Math.ceil(
 								Math.returnSafeNumber(Array.cubicSplineInterpolation(years, values, all_hyde_years[x]))
 							);
 				
@@ -411,7 +411,7 @@ global.landuse_HYDE = class {
 								file_path: `${this.intermediate_rasters_scaled_to_global}/popc_${hyde_years[i]}.png`,
 								width: 4320,
 								height: 2160,
-								function: (local_index) => Math.round(local_input_png.data[local_index]*local_scalar)
+								function: (local_index) => Math.ceil(local_input_png.data[local_index]*local_scalar)
 							});
 							
 							console.log(`- ${hyde_years[i]} - Input Population: ${local_input_sum}, Scalar: ${local_scalar}`);
