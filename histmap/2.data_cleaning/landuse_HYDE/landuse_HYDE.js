@@ -227,6 +227,12 @@ global.landuse_HYDE = class {
 		let hyde_population_file_path = `${this.intermediate_rasters_equirectangular}popc_${this._getHYDEYearName(year)}_number.png`;
 		let hyde_urbc_file_path = `${this.intermediate_rasters_equirectangular}urbc_${this._getHYDEYearName(year)}_number.png`;
 		let hyde_rurc_file_path = `${this.intermediate_rasters_equirectangular}rurc_${this._getHYDEYearName(year)}_number.png`;
+		
+		if (!fs.existsSync(hyde_population_file_path) || !fs.existsSync(hyde_urbc_file_path) || !fs.existsSync(hyde_rurc_file_path)) {
+			console.error(`Could not find files for year:`, year);
+			return; //Internal guard clause if file paths do not exist
+		}
+		
 		let mcevedy_colourmap_obj = {};
 		let mcevedy_obj = (options.mcevedy_obj) ? options.mcevedy_obj : await this.C_getMcEvedyObject();
 		let mcevedy_subdivisions_file_path = this.input_raster_mcevedy;
@@ -373,17 +379,8 @@ global.landuse_HYDE = class {
 		//Iterate over all hyde_years before 1500AD and clamp them
 		for (let i = 0; i < hyde_years.length; i++)
 			if (hyde_years[i] <= 1500)
-				await new Promise((resolve, reject) => {
-					setImmediate(() => {
-						try {
-							this.C_clampHYDEToMcEvedy(hyde_years[i], {
-								mcevedy_obj: mcevedy_obj
-							});
-							resolve();
-						} catch (err) {
-							reject(err);
-						}
-					});
+				await this.C_clampHYDEToMcEvedy(hyde_years[i], {
+					mcevedy_obj: mcevedy_obj
 				});
 	}
 	
@@ -437,7 +434,7 @@ global.landuse_HYDE = class {
 		//2. Interpolate missing years
 		if (!options.exclude.includes("B")) await this.B_interpolateHYDEYearRasters();
 		//3. Clamp to McEvedy
-		if (!options.exclude.includes("C")) await this.C_clampHYDEToMcEvedy();
+		if (!options.exclude.includes("C")) await this.C_clampHYDERastersToMcEvedy();
 		//4. Clamp to global population estimates
 		if (!options.exclude.includes("D")) await this.D_scaleRastersToGlobalEstimates();
 	}
