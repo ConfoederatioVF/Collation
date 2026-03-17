@@ -16,6 +16,10 @@ global.population_urban_WorldCityPop = class {
 			world_city_pop_dom.querySelector(`table#tbl`), 
 			{ property: "textContent" }
 		);
+		let pop_dataframe_html = HTML.getTableAsDataframe(
+			world_city_pop_dom.querySelector(`table#tbl`),
+			{ property: "innerHTML" }
+		);
 		let pop_dataframe_header = pop_dataframe[0];
 		let pop_obj = {};
 		
@@ -31,18 +35,23 @@ global.population_urban_WorldCityPop = class {
 			
 			//Iterate over all years
 			for (let x = 2; x < pop_dataframe[i].length; x++) {
+				let local_html = pop_dataframe_html[i][x];
 				let local_value = parseInt(pop_dataframe[i][x].replaceAll(",", ""));
 				
-				if (!isNaN(local_value))
-					local_population_obj[pop_dataframe_header[x]] = local_value;
+				if ((local_html && local_html.startsWith("<a") && local_value > 0) || local_value === 0)
+					if (!isNaN(local_value))
+						local_population_obj[pop_dataframe_header[x]] = local_value;
 			}
+			local_population_obj = Object.expandValue(local_population_obj, {
+				expand_max: false,
+				value: 0 
+			});
 			
 			pop_obj[local_key] = {
 				name: pop_dataframe[i][0],
 				
 				country: pop_dataframe[i][1],
 				key: local_key,
-				
 				population: local_population_obj
 			};
 		}
@@ -99,9 +108,31 @@ global.population_urban_WorldCityPop = class {
 		return world_city_pop_obj;
 	}
 	
+	static async C_getHybridObject () {
+		let old_world_city_pop_obj = await this.B_geolocateWorldCityPopObject();
+		let new_world_city_pop_obj = await this.A_getWorldCityPopObject();
+		let return_obj = {};
+		
+		//Iterate over old_world_city_pop_obj and merge it with new_world_city_pop_obj corresponding entries
+		Object.iterate(old_world_city_pop_obj, (old_city_key, old_city_obj) => {
+			return_obj[old_city_key] = {
+				...old_city_obj,
+				...new_world_city_pop_obj[old_city_key]
+			};
+		});
+		
+		fs.writeFileSync(this.intermediate_worldcitypop_json, JSON.stringify(return_obj), "utf8");
+		console.log(`Wrote hybrid object file: ${this.intermediate_worldcitypop_json}`);
+		
+		this.worldcitypop_obj = return_obj;
+		
+		//Return statement
+		return return_obj;
+	}
+	
 	static async processRasters () {
 		//1. Fetch world city population object
-		await this.B_geolocateWorldCityPopObject();
+		await this.C_getHybridObject();
 		
 		//Return statement
 		return this.worldcitypop_obj;

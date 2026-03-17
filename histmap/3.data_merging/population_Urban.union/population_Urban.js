@@ -1,5 +1,6 @@
 global.population_Urban = class {
-	static bf = `${h3}/population_Urban.union/`
+	static bf = `${h3}/population_Urban.union/`;
+	static chandler_modelski_obj;
 	static intermediate_chandler_modelski_json = `${this.bf}/chandler_modelski_cities.json`;
 	
 	/**
@@ -74,10 +75,31 @@ global.population_Urban = class {
 				//Iterate over all chandler_modelski_duplicate_keys and merge their RRs into GT
 				for (let i = 0; i < chandler_modelski_duplicate_keys.length; i++) {
 					let local_city = chandler_modelski_obj[chandler_modelski_duplicate_keys[i]];
+					let local_population_keys = Object.keys(local_city.population).map(Number);
 					
-					local_population = Object.interpolateGT(local_value.population, local_city.population);
+					//Iterate over local_population, if RR is less than the equivalent GT, average GT with RR
+					Object.iterate(local_population, (local_population_key, local_population_value) => {
+						let gt_population = local_population_value;
+						let rr_population_obj = Object.linearInterpolation(local_city.population, { 
+							years: [parseInt(local_population_key)] 
+						});
+						let rr_population = Math.returnSafeNumber(rr_population_obj[local_population_key]);
+						
+						if (gt_population !== undefined)
+							if (gt_population > rr_population && rr_population !== 0)
+								local_population[local_population_key] = (gt_population + rr_population)/2;
+					});
+					
+					local_population = Object.interpolateGT(local_population, local_city.population);
 					local_population = Object.operate(local_population, `Math.round(n)`);
 				}
+				
+				//If GT is before first non-interpolated value, is interpolated, and has a population >=100k, delete the value
+				Object.iterate(local_population, (local_population_key, local_population_value) => {
+					if (local_value.links && local_value.links.length > 0)
+						if (parseInt(local_population_key) < local_value.links[0] && local_population_value >= 100000 && local_value.is_interpolated)
+							delete local_population[local_population_key];
+				});
 				
 				let new_city_obj = structuredClone(local_value);
 					new_city_obj.latitude = local_value.coords[0];
