@@ -37,6 +37,13 @@ naissance.GeometryPolygon = class extends naissance.Geometry {
 				onuserchange: (v) => this.selected = v,
 				x: 1, y: 1
 			}),
+			debug: veButton(() => {
+				console.log(`$geometry - naissance.GeometryPolygon (ID: ${this.id}):`, this);
+				window.$geometry = this;
+			}, {
+				name: "Debug",
+				x: 2, y: 1
+			})
 		}, { is_folder: false });
 		this.edit_symbol_ui = veInterface({
 			edit_fill: main.interfaces.edit_geometry_polygon.draw({ _id: () => this.id, name: "Fill" }),
@@ -180,6 +187,12 @@ naissance.GeometryPolygon = class extends naissance.Geometry {
 		//Declare local instance variables
 		let current_keyframe = this.history.getKeyframe();
 		let current_symbol = current_keyframe.value[1];
+		let is_visible = false;
+		
+		try {
+			if (current_keyframe.value[0] !== undefined && Object.keys(current_keyframe.value[0]).length)
+				is_visible = true;
+		} catch (e) {}
 		
 		//Return statement
 		return new ve.HierarchyDatatype({
@@ -200,7 +213,7 @@ naissance.GeometryPolygon = class extends naissance.Geometry {
 		},  {
 			attributes: {
 				"data-is-selected": this.selected,
-				"data-is-visible": (current_keyframe.value[0] !== undefined && Object.keys(current_keyframe.value[0]).length) ? "true" : "false",
+				"data-is-visible": (is_visible) ? "true" : "false",
 				"data-selected-geometry": (main.brush.selected_geometry?.id === this.id),
 			},
 			instance: this,
@@ -273,8 +286,10 @@ naissance.GeometryPolygon = class extends naissance.Geometry {
 	 * - #### Internal Commands:
 	 * - `.add_to_polygon`: {@link Object}
 	 *   - `.geometry`: {@link string}
+	 * - `.hide_polygon`: {@link boolean}
 	 * - `.remove_from_polygon`: {@link Object}
 	 *   - `.geometry`: {@link string}
+	 * - `.show_polygon`: {@link boolean}
 	 * - `.simplify_polygon`: {@link number} - The amount to simplify the Polygon by.
 	 */
 	static parseAction (arg0_json) { //[WIP] - Add .set_history
