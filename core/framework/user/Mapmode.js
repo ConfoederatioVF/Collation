@@ -127,8 +127,13 @@ naissance.Mapmode = class extends ve.Class { //[WIP] - Finish class body
 				}
 				
 				//Iterate over all local_mapmode.geometries and draw them
-				for (let x = 0; x < local_mapmode.geometries.length; x++)
-					local_mapmode.geometries[x].addTo(local_mapmode_layer);
+				for (let x = 0; x < local_mapmode.geometries.length; x++) {
+					let local_geometry = local_mapmode.geometries[x];
+					
+					if (main.settings.disable_mapmode_interactivity)
+						local_geometry._eventMap = {};
+					local_geometry.addTo(local_mapmode_layer);
+				}
 			}
 		}
 	}

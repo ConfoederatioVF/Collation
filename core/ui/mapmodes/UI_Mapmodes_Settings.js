@@ -15,15 +15,16 @@ global.UI_Mapmodes_Settings = class extends ve.Class {
 		}, {
 			is_folder: false
 		});
+		
+		super.open("instance", {
+			name: "Mapmode Settings",
+			width: "30rem",
+			x: "50dvw - 30rem/2"
+		});
 	}
 	
 	update () {
-		if (main.settings.disable_mapmode_interactivity) {
-			main.layers.mapmode_top_layer.setOptions({ hitDetect: false, interactive: false });
-			main.layers.mapmode_bottom_layer.setOptions({ hitDetect: false, interactive: false });
-		} else {
-			main.layers.mapmode_top_layer.setOptions({ hitDetect: true, interactive: true });
-			main.layers.mapmode_bottom_layer.setOptions({ hitDetect: true, interactive: true });
-		}
+		//Redraw Mapmodes
+		naissance.Mapmode.draw();
 	}
 };

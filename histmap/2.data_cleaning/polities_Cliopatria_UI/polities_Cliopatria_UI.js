@@ -51,7 +51,7 @@ global.polities_Cliopatria_UI = class {
 							polygonOpacity: 0.5
 						});
 						local_geometry.addEventListener("click", (e) => {
-							if (main.settings.disable_mapmode_interactivity) return;
+							//if (main.settings.disable_mapmode_interactivity) return;
 							if (this.polity_window) this.polity_window.close();
 							this.polity_window = veWindow([
 								`<b>Components:</b> ${local_properties.Components}`,
