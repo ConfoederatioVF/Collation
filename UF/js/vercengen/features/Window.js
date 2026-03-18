@@ -388,8 +388,8 @@ ve.Window = class extends ve.Feature {
 	 */
 	setCoords (arg0_x, arg1_y) {
 		//Convert from parameters
-		let x = parseInt(arg0_x);
-		let y = parseInt(arg1_y);
+		let x = arg0_x;
+		let y = arg1_y;
 		
 		//Set element X, Y position
 		this.element.style.position = "absolute";

@@ -19,7 +19,7 @@ global.UI_Mapmodes_Settings = class extends ve.Class {
 		super.open("instance", {
 			name: "Mapmode Settings",
 			width: "30rem",
-			x: "50dvw - 30rem/2"
+			x: "calc(50dvw - 30rem/2)"
 		});
 	}
 	
