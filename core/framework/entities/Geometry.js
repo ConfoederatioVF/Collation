@@ -484,8 +484,11 @@ naissance.Geometry = class extends ve.Class {
 			}
 			
 			//remove_keyframe
-			if (json.remove_keyframe)
+			if (json.remove_keyframe) {
 				geometry_obj.removeKeyframe(json.remove_keyframe);
+				geometry_obj.history.draw();
+				geometry_obj.keyframes_ui.v = geometry_obj.history.interface.v;
+			}
 			
 			//set_geometry
 			if (json.set_geometry) {
