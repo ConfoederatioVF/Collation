@@ -136,7 +136,7 @@ ve.Date = class extends ve.Component {
 			
 			if (!isNaN(actual_value)) {
 				if (actual_value < 0) {
-					actual_value = Math.abs(actual_value);
+					//actual_value = Math.abs(actual_value);
 					year_type_el.innerHTML = "BC";
 				} else if (actual_value === 0) {
 					actual_value = 1;

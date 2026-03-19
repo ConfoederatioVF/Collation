@@ -239,6 +239,8 @@
         height: 100%;
         width: 100%;
     }
+    tr:has(> td[id="0-0"]:first-child:last-child) { display: none; }
+    tr { height: 0; } /* fit-content fix */
     tr td {
         vertical-align: top;
     }

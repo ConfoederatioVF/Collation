@@ -171,6 +171,7 @@
 	String.formatDate = function (arg0_date) {
 		//Convert from parameters
 		let date = (arg0_date) ? arg0_date : Date.getCurrentDate();
+		if (typeof date === "number") date = Date.convertTimestampToDate(date);
 		
 		//Declare local instance variables
 		let day_name = String.ordinalise(date.day);

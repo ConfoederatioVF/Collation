@@ -44,7 +44,7 @@ naissance.History = class extends ve.Class {
 		Object.iterate(this.keyframes, (local_key, local_value) => {
 			//Set components_obj
 			components_obj[`t_${local_key}`] = new ve.Interface({
-				date_info: new ve.HTML(String.formatDate(local_value.date), { 
+				date_info: new ve.HTML(String.formatDate(parseInt(local_key)), { 
 					tooltip: `Timestamp: ${local_value.timestamp}`,
 					x: 0, y: 0
 				}),
@@ -98,7 +98,11 @@ naissance.History = class extends ve.Class {
 							{ type: "Geometry", geometry_id: this.options._id(), remove_keyframe: local_key },
 							{ type: "global", refresh_date: true }
 						]
-					})
+					});
+					
+					//Make sure it's really deleted
+					delete this.keyframes[local_key];
+					this.draw();
 				}, {
 					name: "<icon>delete</icon>",
 					tooltip: "Delete Keyframe",
