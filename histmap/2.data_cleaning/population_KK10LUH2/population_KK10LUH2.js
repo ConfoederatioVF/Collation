@@ -439,7 +439,9 @@ global.population_KK10LUH2 = class {
 		//2. Convert greyscale images to GeoPNGs
 		if (!options.exclude.includes("B")) await this.B_generateKK10LUH2Rasters();
 		//3. Convert greyscale images to RGBA
-		if (!options.exclude.includes("C")) await this.C_convertKK10LUH2RastersToRGBA();
+		if (!options.exclude.includes("C")) await this.C_convertKK10LUH2RastersToRGBA({
+			fallback_mode: "hyde"
+		});
 		//4. Scale KK10LUH2 to regional totals from HYDE
 		if (!options.exclude.includes("D")) await this.D_scaleKK10LUH2RastersToHYDE();
 		//5. Scale KK10LUH2 to regional totals from OWID
