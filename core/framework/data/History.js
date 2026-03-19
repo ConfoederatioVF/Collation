@@ -110,7 +110,13 @@ naissance.History = class extends ve.Class {
 					x: 4, y: 0
 				})
 			}, {
-				is_folder: false
+				is_folder: false,
+				style: {
+					"> table > tbody > tr": {
+						"[id='0-0']": { width: "20%" },
+						"[id='1-0']": { width: "50%" }
+					}
+				}
 			});
 		}, { sort_mode: "date_descending" });
 		
