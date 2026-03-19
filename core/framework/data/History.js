@@ -99,10 +99,6 @@ naissance.History = class extends ve.Class {
 							{ type: "global", refresh_date: true }
 						]
 					});
-					
-					//Make sure it's really deleted
-					delete this.keyframes[local_key];
-					this.draw();
 				}, {
 					name: "<icon>delete</icon>",
 					tooltip: "Delete Keyframe",

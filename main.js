@@ -87,6 +87,7 @@ let win;
 //App handling
 {
   app.commandLine.appendSwitch("enable-features", "SharedArrayBuffer");
+  app.commandLine.appendSwitch('js-flags', '--max-old-space-size=16384 --expose-gc');
   
   //Launch app when ready
   app.whenReady().then(() => {

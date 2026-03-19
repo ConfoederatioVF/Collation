@@ -387,6 +387,10 @@ global.population_KK10LUH2 = class {
 						return local_value;
 					}
 				});
+				
+				//Force a yield, perform GC
+				await new Promise(resolve => setImmediate(resolve));
+				if (global.gc) global.gc();
 			} else {
 				console.log(` - Could not find input raster.`)
 			}
