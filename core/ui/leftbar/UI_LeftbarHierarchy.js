@@ -16,7 +16,7 @@ global.UI_LeftbarHierarchy = class { //[WIP] - Finish naissance.Feature first
 		for (let i = 0; i < naissance.Feature.instances.length; i++) {
 			let local_feature = naissance.Feature.instances[i];
 			
-			if (!local_feature._parent)
+			if (!local_feature.parent)
 				this.hierarchy_obj[`${local_feature.class_name}-${local_feature.id}`] = local_feature.drawHierarchyDatatype();
 		}
 	}
@@ -177,9 +177,9 @@ global.UI_LeftbarHierarchy = class { //[WIP] - Finish naissance.Feature first
 						
 						naissance.Feature.instances.sort(sortFn);
 						if (naissance.Geometry?.instances) naissance.Geometry.instances.sort(sortFn);
-						
-						this.refresh();
 					}
+					
+					this.refresh();
 				} else {
 					veToast(`${allow_reassignment[1]} cannot nest itself.`);
 					setTimeout(() => this.refresh(), 100);

@@ -215,7 +215,7 @@ global.landuse_HYDE = class {
 		//Iterate over all hyde_years
 		for (let i = 0; i < hyde_years.length; i++)
 			if (!actual_hyde_years.includes(hyde_years[i]))
-				this.B_interpolateHYDEYearRaster(hyde_years[i]);
+				await this.B_interpolateHYDEYearRaster(hyde_years[i]);
 	}
 	
 	static async C_clampHYDEToMcEvedy (arg0_year, arg1_options) {
@@ -240,7 +240,7 @@ global.landuse_HYDE = class {
 		
 		//1. Process mcevedy_obj
 		Object.iterate(mcevedy_obj, (local_key, local_value) => {
-			if (local_value.colour)
+			if (local_value?.colour)
 				mcevedy_colourmap_obj[local_value.colour.join(",")] = local_key;
 			if (local_value.hyde_population === undefined) local_value.hyde_population = 0;
 			if (local_value.hyde_pixels === undefined) local_value.hyde_pixels = 0;
@@ -315,6 +315,9 @@ global.landuse_HYDE = class {
 			console.log(`- Input Sum:`, GeoPNG.getImageSum(input_output_map[i][0]));
 			console.log(`- Output Sum:`, GeoPNG.getImageSum(input_output_map[i][1]));
 		}
+		
+		//Ensure handle gets released
+		await new Promise((resolve) => setImmediate(resolve));
 	};
 	
 	static async C_getMcEvedyObject () {
