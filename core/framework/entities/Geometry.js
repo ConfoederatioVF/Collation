@@ -228,10 +228,8 @@ naissance.Geometry = class extends ve.Class {
 					}
 				})
 			}, {
-				name: "<icon>new_label</icon>", tooltip: "Manage Tags",
-				style: {
-					marginLeft: "auto", order: 99, padding: 0
-				}
+				attributes: { class: "order-99" },
+				name: "<icon>new_label</icon>", tooltip: "Manage Tags"
 			}),
 			hide_geometry: veButton(() => {
 				DALS.Timeline.parseAction({
@@ -239,10 +237,10 @@ naissance.Geometry = class extends ve.Class {
 					value: [{ type: "Geometry", geometry_id: this.id, set_properties: { hidden: true } }]
 				});
 			}, {
+				attributes: { class: "order-100" },
 				name: `<icon>visibility</icon>`,
 				limit: () => !this.current_keyframe.value[2]?.hidden,
-				tooltip: "Hide Geometry",
-				style: { order: 100, padding: 0 }
+				tooltip: "Hide Geometry"
 			}),
 			show_geometry: veButton(() => {
 				DALS.Timeline.parseAction({
@@ -250,10 +248,10 @@ naissance.Geometry = class extends ve.Class {
 					value: [{ type: "Geometry", geometry_id: this.id, set_properties: { hidden: false } }]
 				});
 			}, {
+				attributes: { class: "order-100" },
 				name: "<icon>visibility_off</icon>",
 				limit: () =>  this.current_keyframe.value[2]?.hidden,
-				tooltip: "Show Geometry",
-				style: { order: 100, padding: 0 }
+				tooltip: "Show Geometry"
 			}),
 			delete_button: veButton(() => {
 				DALS.Timeline.parseAction({
@@ -261,9 +259,9 @@ naissance.Geometry = class extends ve.Class {
 					value: [{ type: "Geometry", geometry_id: this.id, delete_geometry: true }]
 				});
 			}, {
+				attributes: { class: "order-101" },
 				name: "<icon>delete</icon>",
-				tooltip: "Delete Geometry",
-				style: { order: 101, padding: 0 }
+				tooltip: "Delete Geometry"
 			})
 		};
 	}

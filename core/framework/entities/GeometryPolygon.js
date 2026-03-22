@@ -208,9 +208,9 @@ naissance.GeometryPolygon = class extends naissance.Geometry {
 				this.history.draw();
 				super.open("instance", { name: this.name, ...this.window_options });
 			}, {
+				attributes: { class: "order-101" },
 				name: "<icon>more_vert</icon>",
-				tooltip: "More Actions",
-				style: { cursor: "padding", order: 101, padding: 0 }
+				tooltip: "More Actions"
 			})
 		},  {
 			attributes: {

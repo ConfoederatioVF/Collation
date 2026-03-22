@@ -86,6 +86,7 @@ global.UI_LeftbarHierarchy = class { //[WIP] - Finish naissance.Feature first
 			actions_bar: actions_bar,
 			...this.hierarchy_obj
 		}, {
+			attributes: { class: "ui-leftbar-hierarchy" },
 			onuserchange: (v, e) => {
 				let allow_reassignment = [true, undefined];
 				let instance = e.on_stop_data.movedNode?.instance?.options?.instance;

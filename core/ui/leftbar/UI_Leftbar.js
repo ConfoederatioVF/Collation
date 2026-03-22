@@ -58,7 +58,17 @@ global.UI_Leftbar = class extends ve.Class {
 				name: "Undo/Redo",
 				components_obj: { undo_redo: veUndoRedo() }
 			}
-		}, { starting_page: "hierarchy" });
+		}, { 
+			starting_page: "hierarchy",
+			style: {
+				".navbar": {
+					backdropFilter: "blur(10px)",
+					position: "sticky",
+					top: "0.5rem",
+					zIndex: 99
+				}
+			}
+		});
 		
 		//Open UI
 		super.open("instance", {
