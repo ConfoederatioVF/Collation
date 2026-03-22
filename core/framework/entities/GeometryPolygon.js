@@ -188,6 +188,7 @@ naissance.GeometryPolygon = class extends naissance.Geometry {
 	drawHierarchyDatatype () {
 		//Declare local instance variables
 		let current_keyframe = this.history.getKeyframe();
+			this._current_keyframe = current_keyframe;
 		let current_symbol = current_keyframe.value[1];
 		let is_visible = false;
 		
@@ -197,7 +198,7 @@ naissance.GeometryPolygon = class extends naissance.Geometry {
 		} catch (e) {}
 		
 		//Return statement
-		return new ve.HierarchyDatatype({
+		let hierarchy_datatype = new ve.HierarchyDatatype({
 			icon: veHTML(`<icon style = "${
 				(current_symbol?.polygonFill) ? `color: ${current_symbol?.polygonFill};` : ""
 			}">pentagon</icon>`, {
@@ -230,6 +231,8 @@ naissance.GeometryPolygon = class extends naissance.Geometry {
 				}
 			}
 		});
+		delete this._current_keyframe;
+		return hierarchy_datatype;
 	}
 	
 	handleNodeEditorEnd (arg0_e) {

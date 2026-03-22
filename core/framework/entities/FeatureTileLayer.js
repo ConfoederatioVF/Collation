@@ -199,7 +199,7 @@ naissance.FeatureTileLayer = class extends naissance.Feature {
 		
 		// Re-sync the maptalks layer object with the loaded options
 		if (this.layer) {
-			this.layer.setOptions(this.options);
+			this.layer._setOptions(this.options);
 			this.layer.setId(this.id);
 		} else {
 			this.layer = new maptalks.TileLayer(this.id, this.options);

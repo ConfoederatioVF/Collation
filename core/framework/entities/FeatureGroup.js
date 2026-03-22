@@ -95,6 +95,9 @@ naissance.FeatureGroup = class extends naissance.Feature {
 			
 			...hierarchy_obj
 		}, {
+			attributes: { 
+				"data-type": "FeatureGroup" 
+			},
 			instance: this,
 			is_collapsed: this.is_collapsed,
 			name: this.name,
@@ -102,14 +105,6 @@ naissance.FeatureGroup = class extends naissance.Feature {
 				onchange: (v) => {
 					this.name = v;
 					this.drawHierarchyDatatype();
-				}
-			},
-			style: {
-				".nst-content": {
-					paddingRight: 0
-				},
-				"[component='ve-button'] > button": {
-					border: 0
 				}
 			},
 			type: "group",

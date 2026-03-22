@@ -135,7 +135,8 @@ naissance.Geometry = class extends ve.Class {
 	
 	get name () {
 		//Declare local instance variables
-		let current_keyframe = this.history.getKeyframe();
+		let current_keyframe = (this._current_keyframe) ? 
+			this._current_keyframe : this.history.getKeyframe();
 		let current_value = current_keyframe.value;
 		
 		let current_name;
@@ -206,6 +207,10 @@ naissance.Geometry = class extends ve.Class {
 	 * @returns {Object}
 	 */
 	drawHierarchyDatatypeGenerics () {
+		//Declare local instance variables
+		let current_keyframe = (this._current_keyframe) ? 
+			this._current_keyframe : this.current_keyframe;
+		
 		//Return statement
 		return {
 			multitag: veButton(() => {
@@ -239,7 +244,7 @@ naissance.Geometry = class extends ve.Class {
 			}, {
 				attributes: { class: "order-100" },
 				name: `<icon>visibility</icon>`,
-				limit: () => !this.current_keyframe.value[2]?.hidden,
+				limit: () => !current_keyframe.value[2]?.hidden,
 				tooltip: "Hide Geometry"
 			}),
 			show_geometry: veButton(() => {
@@ -250,7 +255,7 @@ naissance.Geometry = class extends ve.Class {
 			}, {
 				attributes: { class: "order-100" },
 				name: "<icon>visibility_off</icon>",
-				limit: () =>  this.current_keyframe.value[2]?.hidden,
+				limit: () => current_keyframe.value[2]?.hidden,
 				tooltip: "Show Geometry"
 			}),
 			delete_button: veButton(() => {
