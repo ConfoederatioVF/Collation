@@ -1,5 +1,6 @@
 global.UI_LeftbarHierarchy = class { //[WIP] - Finish naissance.Feature first
 	static instances = [];
+	static refresh_frame = false;
 	
 	constructor () {
 		this.groups = {};
@@ -193,6 +194,11 @@ global.UI_LeftbarHierarchy = class { //[WIP] - Finish naissance.Feature first
 				padding: 0,
 				"li.nst-item > .nst-content": {
 					width: "20rem"
+				},
+				".nst-content .nst-button": { display: "block" },
+				
+				"[data-entities='0']": {
+					".nst-content .nst-button": { display: "none" }
 				}
 			}
 		});
@@ -254,7 +260,14 @@ global.UI_LeftbarHierarchy = class { //[WIP] - Finish naissance.Feature first
 	}
 	
 	static refresh () {
-		for (let i = 0; i < UI_LeftbarHierarchy.instances.length; i++)
-			UI_LeftbarHierarchy.instances[i].refresh();
+		this.refresh_frame = true;
+		
+		if (!this.logic_loop) this.logic_loop = setInterval(() => {
+			if (this.refresh_frame) {
+				for (let i = 0; i < this.instances.length; i++)
+					this.instances[i].refresh();
+				delete this.refresh_frame;
+			}
+		}, 100);
 	}
 };

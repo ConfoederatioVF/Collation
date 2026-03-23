@@ -48,54 +48,56 @@ naissance.FeatureGroup = class extends naissance.Feature {
 			}
 		
 		//Iterate over this.entities, if naissance.FeatureGroup/naissance.FeatureLayer, call .draw() recursively
-		for (let i = 0; i < this.entities.length; i++) {
-			let local_entity = this.entities[i];
-			let local_key = `${local_entity.class_name}-${local_entity.id}`;
-			
-			//naissance.FeatureGroup, naissance.FeatureLayer handling
-			if (local_entity instanceof naissance.Feature && local_entity.drawHierarchyDatatype) {
-				hierarchy_obj[local_key] = local_entity.drawHierarchyDatatype();
-			} else {
-				//naissance.Feature generic handling
-				if (local_entity instanceof naissance.Feature) {
-					hierarchy_obj[local_key] = new ve.HierarchyDatatype({
-						icon: new ve.HTML(`<icon>inventory_2</icon>`, {
-							tooltip: local_entity.class_name } )
-					}, { instance: local_entity });
-				}
-				//naissance.Geometry generic handling
-				if (local_entity instanceof naissance.Geometry) {
-					if (local_entity.drawHierarchyDatatype) {
-						hierarchy_obj[local_key] = local_entity.drawHierarchyDatatype();
-					} else { //[WIP] - Implement naissance.Geometry.name accessor
+		if (!this.is_collapsed)
+			for (let i = 0; i < this.entities.length; i++) {
+				let local_entity = this.entities[i];
+				let local_key = `${local_entity.class_name}-${local_entity.id}`;
+				
+				//naissance.FeatureGroup, naissance.FeatureLayer handling
+				if (local_entity instanceof naissance.Feature && local_entity.drawHierarchyDatatype) {
+					hierarchy_obj[local_key] = local_entity.drawHierarchyDatatype();
+				} else {
+					//naissance.Feature generic handling
+					if (local_entity instanceof naissance.Feature) {
 						hierarchy_obj[local_key] = new ve.HierarchyDatatype({
-							icon: new ve.HTML(`<icon>shapes</icon>`, {
+							icon: new ve.HTML(`<icon>inventory_2</icon>`, {
 								tooltip: local_entity.class_name } )
-						}, {
-							instance: local_entity,
-							name: local_entity.name,
-							name_options: {
-								onprogramchange: () => {
-									this.drawHierarchyDatatype();
-								},
-								onuserchange: (v) => {
-									local_entity.name = v;
+						}, { instance: local_entity });
+					}
+					//naissance.Geometry generic handling
+					if (local_entity instanceof naissance.Geometry) {
+						if (local_entity.drawHierarchyDatatype) {
+							hierarchy_obj[local_key] = local_entity.drawHierarchyDatatype();
+						} else { //[WIP] - Implement naissance.Geometry.name accessor
+							hierarchy_obj[local_key] = new ve.HierarchyDatatype({
+								icon: new ve.HTML(`<icon>shapes</icon>`, {
+									tooltip: local_entity.class_name } )
+							}, {
+								instance: local_entity,
+								name: local_entity.name,
+								name_options: {
+									onprogramchange: () => {
+										this.drawHierarchyDatatype();
+									},
+									onuserchange: (v) => {
+										local_entity.name = v;
+									}
 								}
-							}
-						});
+							});
+						}
 					}
 				}
 			}
-		}
 		
 		//Set this.interface
-		this.interface = new ve.HierarchyDatatype({
+		let interface_obj = new ve.HierarchyDatatype({
 			icon: new ve.HTML(`<icon>folder</icon>`),
 			...super.drawHierarchyDatatypeGenerics(),
 			
 			...hierarchy_obj
 		}, {
-			attributes: { 
+			attributes: {
+				"data-entities": this.entities.length,
 				"data-type": "FeatureGroup" 
 			},
 			instance: this,
@@ -107,11 +109,17 @@ naissance.FeatureGroup = class extends naissance.Feature {
 					this.drawHierarchyDatatype();
 				}
 			},
+			oncollapse: (v, e) => {
+				this.is_collapsed = v;
+				if (v === false)
+					UI_LeftbarHierarchy.refresh();
+			},
 			type: "group",
 		});
+		if (!this.interface) this.interface = interface_obj;
 		
 		//Return statement
-		return this.interface;
+		return interface_obj;
 	}
 	
 	fromJSON (arg0_json) {
