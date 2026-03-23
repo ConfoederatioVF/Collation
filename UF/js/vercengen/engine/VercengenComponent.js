@@ -166,8 +166,15 @@ ve.Component = class {
 				this.name = this.options.name;
 			
 			//.tooltip handler
-			if (this.options.tooltip)
-				this.tooltip = new ve.Tooltip(this.options.tooltip, { element: this.element });
+			if (this.options.tooltip) {
+				let createTooltip = () => this.tooltip = new ve.Tooltip(this.options.tooltip, { 
+					element: this.element });
+				
+				this.element.addEventListener("mouseover", (e) => {
+					if (Object.keys(this.tooltip).length === 0) createTooltip();
+				});
+				createTooltip();
+			}
 		});
 	}
 	
@@ -508,8 +515,8 @@ ve.Component = class {
 		if (this.logic_loop !== undefined)
 			clearInterval(this.logic_loop);
 		
-		//Iterate over l instances in child_class_obj.instances if available
-		if (child_class_obj.instances && this.id)
+		//Iterate over all instances in child_class_obj.instances if available
+		if (child_class_obj?.instances && this.id)
 			for (let i = 0; i < child_class_obj.instances.length; i++)
 				if (child_class_obj.instances[i].id === this.id) {
 					child_class_obj.instances.splice(i, 1);

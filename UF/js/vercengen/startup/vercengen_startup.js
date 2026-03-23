@@ -474,6 +474,9 @@ global.path = require("path");
 					if (options.ontology_function)
 						options.ontology_function(Ontology.instances);
 				});
+				global.ve_gc_loop = setInterval(() => {
+					ve.Tooltip.refresh();
+				}, 1000);
 				
 				clearInterval(global.initialise_ve_loop);
 				

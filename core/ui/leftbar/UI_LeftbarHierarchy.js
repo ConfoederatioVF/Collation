@@ -74,6 +74,7 @@ global.UI_LeftbarHierarchy = class { //[WIP] - Finish naissance.Feature first
 		actions_bar.element.classList.add("actions-bar");
 		let geometries_at_top = (global?.main?.settings?.hierarchy_ordering === "geometries_at_top");
 		
+		if (this.hierarchy) this.hierarchy.remove();
 		this.hierarchy_obj = {};
 		if (!geometries_at_top) {
 			this.drawFeatures();
@@ -202,6 +203,7 @@ global.UI_LeftbarHierarchy = class { //[WIP] - Finish naissance.Feature first
 				}
 			}
 		});
+		this.hierarchy = current_hierarchy;
 		
 		//3. Attach event handlers, select classes to all elements in this.hierarchy_obj
 		let all_hierarchy_els = current_hierarchy.element.querySelectorAll("li[component='ve-hierarchy-datatype']");
