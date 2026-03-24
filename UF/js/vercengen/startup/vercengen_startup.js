@@ -475,7 +475,8 @@ global.path = require("path");
 						options.ontology_function(Ontology.instances);
 				});
 				global.ve_gc_loop = setInterval(() => {
-					ve.Tooltip.refresh();
+					//Perform GC
+					if (ve?.Tooltip?.refresh) ve.Tooltip.refresh();
 				}, 1000);
 				
 				clearInterval(global.initialise_ve_loop);
@@ -491,7 +492,7 @@ global.path = require("path");
 }
 
 //[WIP] - Refactor later
-function injectConcatenatedHTML(htmlMarkup) {
+function injectConcatenatedHTML (htmlMarkup) {
 	const tempContainer = document.createElement("div");
 	tempContainer.innerHTML = htmlMarkup;
 	
