@@ -321,7 +321,7 @@ naissance.Geometry = class extends ve.Class {
 										}
 									}
 							
-							this.metadata.variables = v;
+							this.metadata.variables = e.toJSON();
 							delete this.history.do_not_draw;
 							this.history.draw();
 							this.keyframes_ui.v = this.history.interface.v;
@@ -333,7 +333,11 @@ naissance.Geometry = class extends ve.Class {
 					height: "20rem",
 					width: "30rem",
 					
-					onuserchange: (v) => {
+					onuserchange: (v, e) => {
+						//Declare local instance variables
+						let table_editor = e.instance.table_editor;
+							if (table_editor) this.metadata.variables = table_editor.toJSON();
+						
 						//Call DALS.Timeline.parseAction() .set_history 
 						if (v.close)
 							DALS.Timeline.parseAction({
