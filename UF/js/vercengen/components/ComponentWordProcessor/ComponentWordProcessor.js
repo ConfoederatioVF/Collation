@@ -169,7 +169,6 @@ ve.WordProcessor = class extends ve.Component {
 		this.handleEvents();
 		this.initWYSIWYG();
 		this.from_binding_fire_silently = true;
-		console.log(`Value passed:`, value, arg0_value);
 		this.v = value;
 		this.from_binding_fire_silently = false;
 	}
