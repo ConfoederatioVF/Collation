@@ -50,7 +50,7 @@ ve.WordProcessor = class extends ve.Component {
 		options.attributes = (options.attributes) ? options.attributes : {};
 		
 		//Declare local instance variables
-		this.element = document.createElement("span");
+		this.element = document.createElement("div");
 		this.element.setAttribute("component", "ve-word-processor");
 		this.element.instance = this;
 		let html_string = [];
@@ -139,7 +139,7 @@ ve.WordProcessor = class extends ve.Component {
 
 			//Content area
 			html_string.push(`<div class = "content-area">`);
-				html_string.push(`<br><div class = "visual-view" contenteditable></div>`);
+				html_string.push(`<br><div class = "visual-view" contenteditable spellcheck = "false"></div>`);
 				html_string.push(`<textarea class = "html-view"></textarea>`);
 			html_string.push(`</div>`);
 
@@ -169,6 +169,7 @@ ve.WordProcessor = class extends ve.Component {
 		this.handleEvents();
 		this.initWYSIWYG();
 		this.from_binding_fire_silently = true;
+		console.log(`Value passed:`, value, arg0_value);
 		this.v = value;
 		this.from_binding_fire_silently = false;
 	}
