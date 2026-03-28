@@ -51,14 +51,22 @@
     padding-right: 0; 
 }
 [naissance-ui="LeftbarHierarchy"] {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    
     .actions-bar .nst-content {
         padding: 0;
     }
     .topbar {
-        backdrop-filter: blur(10px);
-        padding-top: var(--cell-padding);
-        position: sticky;
-        top: 0;
-        z-index: 99;
+        margin-top: calc(var(--cell-padding)*1.25);
+        margin-bottom: calc(var(--cell-padding)*1.25);
+    }
+    .ui-leftbar-hierarchy {
+        flex-grow: 1;
+        overflow: auto;
+        scrollbar-color: white transparent;
+        scrollbar-width: thin;
     }
 }

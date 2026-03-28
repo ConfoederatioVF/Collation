@@ -73,7 +73,18 @@ global.UI_Leftbar = class extends ve.Class {
 					minHeight: 0,
 					overflow: "auto",
 					scrollbarColor: "white transparent",
-					scrollbarWidth: "thin"
+					scrollbarWidth: "thin",
+					
+					"> [component='ve-raw-interface']": {
+						display: "flex",
+						flexDirection: "column",
+						height: "100%"
+					}
+				},
+				"[component='ve-file-explorer']": {
+					paddingLeft: 0,
+					
+					"#file-explorer-body > [component='ve-hierarchy']": { paddingLeft: 0 }
 				}
 			}
 		});
