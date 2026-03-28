@@ -107,13 +107,10 @@ ve.Hierarchy = class extends ve.Component {
 			}, { 
 				name: " ",
 				attributes: {
-					"ve-hierarchy-searchbar": "true",
+					"ve-searchbar": "true",
 					"ve-sticky": "true"
 				},
-				style: {
-					...ve.registry.themes["ve-searchbar"],
-					...this.options.searchbar_style
-				} 
+				style: this.options.searchbar_style
 			});
 			this.searchbar_interface.bind(this.element);
 		}

@@ -1,7 +1,7 @@
 //Initialise functions
 {
 	ve.initialiseThemes = function () {
-		ve.registry.themes["ve-searchbar"] = {
+		/*ve.registry.themes["ve-searchbar"] = {
 			alignItems: "center",
 			backgroundColor: `var(--bg-secondary-colour)`,
 			border: `1px solid var(--bg-primary-colour)`,
@@ -15,6 +15,6 @@
 			"[component='ve-datalist']": {
 				"input": { marginLeft: 0 }
 			}
-		};
+		};*/
 	};
 }

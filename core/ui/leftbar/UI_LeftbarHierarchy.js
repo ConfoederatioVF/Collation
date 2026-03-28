@@ -319,14 +319,18 @@ global.UI_LeftbarHierarchy = class { //[WIP] - Finish naissance.Feature first
 		return current_hierarchy;
 	}
 	
-	drawTopbar (leftbar_hierarchy_el) {
+	drawTopbar (arg0_hierarchy_el) {
+		//Convert from parameters
+		let leftbar_hierarchy_el = arg0_hierarchy_el;
+		
+		//Declare local instance variables
 		let topbar_el = document.createElement("div");
 		topbar_el.classList.add("topbar");
 		
-		let searchbar_el = leftbar_hierarchy_el.querySelector(`[ve-hierarchy-searchbar="true"]`);
-		if (searchbar_el) searchbar_el.instance.bind(topbar_el);
+		let searchbar_el = leftbar_hierarchy_el.querySelector(`[ve-searchbar="true"]`);
+			if (searchbar_el) searchbar_el.instance.bind(topbar_el);
 		let actions_bar_el = leftbar_hierarchy_el.querySelector(`[ve-hierarchy-actions-bar="true"]`);
-		if (actions_bar_el) topbar_el.appendChild(actions_bar_el);
+			if (actions_bar_el) topbar_el.appendChild(actions_bar_el);
 		
 		return topbar_el;
 	}
