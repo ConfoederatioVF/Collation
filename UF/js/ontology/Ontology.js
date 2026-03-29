@@ -862,7 +862,7 @@
 				});
 				
 				// Initial trigger to start the stream
-				ipcRenderer.send('request-ontology-stream', Ontology.ontology_folder_path);
+				ipcRenderer.send("ontology:initialise", Ontology.ontology_folder_path);
 			});
 		}
 		
