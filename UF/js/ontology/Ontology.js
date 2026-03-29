@@ -792,11 +792,11 @@
 			
 			return new Promise((resolve, reject) => {
 				// Clean up any stale listeners
-				ipcRenderer.removeAllListeners('ontology-stream-batch');
-				ipcRenderer.removeAllListeners('ontology-stream-done');
-				ipcRenderer.removeAllListeners('ontology-stream-next');
+				ipcRenderer.removeAllListeners('ontology:stream-batch');
+				ipcRenderer.removeAllListeners('ontology:stream-done');
+				ipcRenderer.removeAllListeners('ontology:stream-next');
 				
-				ipcRenderer.on('ontology-stream-batch', (event, batch) => {
+				ipcRenderer.on('ontology:stream-batch', (event, batch) => {
 					const ids = Object.keys(batch);
 					
 					/**
@@ -840,22 +840,22 @@
 							setTimeout(() => processSlice(end), 0);
 						} else {
 							// 4. Batch finished; pull the next batch from the Main process
-							ipcRenderer.send('ontology-stream-next');
+							ipcRenderer.send('ontology:stream-next');
 						}
 					};
 					
 					processSlice(0);
 				});
 				
-				ipcRenderer.on('ontology-stream-done', () => {
+				ipcRenderer.on('ontology:stream-done', () => {
 					console.log('[Ontology] Hydration complete. Re-enabling disk saves.');
 					Ontology.is_loading = false; // Release the hydration guard
-					ipcRenderer.removeAllListeners('ontology-stream-next');
+					ipcRenderer.removeAllListeners('ontology:stream-next');
 					resolve();
 				});
 				
 				// Handle unexpected IPC errors
-				ipcRenderer.on('ontology-stream-error', (event, err) => {
+				ipcRenderer.on('ontology:stream-error', (event, err) => {
 					Ontology.is_loading = false;
 					console.error('[Ontology] IPC Stream Error:', err);
 					reject(err);

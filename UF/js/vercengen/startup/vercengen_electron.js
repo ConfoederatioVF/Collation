@@ -91,15 +91,15 @@ let readline = require("readline");
 			const sendNext = async () => {
 				const { value, done } = await currentStream.next();
 				if (done) {
-					webContents.send('ontology-stream-done');
-					ipcMain.removeListener('ontology-stream-next', sendNext);
+					webContents.send('ontology:stream-done');
+					ipcMain.removeListener('ontology:stream-next', sendNext);
 				} else {
-					webContents.send('ontology-stream-batch', value);
+					webContents.send('ontology:stream-batch', value);
 				}
 			};
 			
-			ipcMain.removeAllListeners('ontology-stream-next');
-			ipcMain.on('ontology-stream-next', sendNext);
+			ipcMain.removeAllListeners('ontology:stream-next');
+			ipcMain.on('ontology:stream-next', sendNext);
 			sendNext();
 		});
 	};
