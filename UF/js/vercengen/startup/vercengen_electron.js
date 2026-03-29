@@ -33,6 +33,7 @@ if (!global.file_read) try { file_read = require("../../file/file_read"); } catc
 		
 		ipc_main.on("ontology:initialise", async (event, folder_path) => {
 			//Declare local instance variables
+			if (!fs.existsSync(folder_path)) fs.mkdirSync(folder_path, { recursive: true });
 			let all_files = fs.readdirSync(folder_path)
 				.filter((f) => f.endsWith(".ontology"))
 				.sort((a, b) => b.localeCompare(a));
