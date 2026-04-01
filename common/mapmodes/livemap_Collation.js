@@ -2,7 +2,10 @@ config.mapmodes.livemap_Collation = {
 	name: "Collation (Livemap)",
 	icon: "visibility",
 	
-	redraw: function () {
+	redraw: function (arg0_options) {
+		//Convert from parameters
+		let options = (arg0_options) ? arg0_options : {};
+		
 		//Declare local instance variables
 		let config_obj = config.mapmodes.livemap_Collation;
 			config_obj.geometries = [];
@@ -15,10 +18,10 @@ config.mapmodes.livemap_Collation = {
 		}
 		
 		//[TEMP] - Draw calls for other Collation data sources
-		//AIS Data
 		let localDraw = () => { //30s draw loop
 			if (!config_obj.instance.is_enabled) return; //Internal guard clause to ensure draw is only active if mapmode is
 			
+			//AIS Data
 			if (!config_obj.AISFriends) config_obj.AISFriends = new GLOBAL_Navy_AISFriends_Worker();
 			config_obj.AISFriends.draw().then(() => {
 				if (config_obj.AISFriends.geometries)
@@ -26,10 +29,14 @@ config.mapmodes.livemap_Collation = {
 				config_obj.instance.setGeometries(config_obj.geometries); //Set geometries
 			});
 			
+			//UA Conflict Data
 			try {
-				if (!config_obj.UAControlMap) config_obj.UAControlMap = new UA_UkraineControlMap({ 
-					onload: () => this.redraw() 
-				});
+				if (!options.do_not_reload) {
+					if (config_obj.UAControlMap) config_obj.UAControlMap.remove();
+					config_obj.UAControlMap = new UA_UkraineControlMap({
+						onload: () => this.redraw({ do_not_reload: true })
+					});
+				}
 				if (config_obj.UAControlMap?.geokmz?.layer) {
 					let all_layer_geometries = config_obj.UAControlMap.geokmz.layer.getGeometries();
 					config_obj.geometries = config_obj.geometries.concat(all_layer_geometries);

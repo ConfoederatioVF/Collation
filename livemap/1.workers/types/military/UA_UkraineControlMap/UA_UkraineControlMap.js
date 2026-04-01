@@ -16,4 +16,8 @@ global.UA_UkraineControlMap = class {
 			...this.options
 		});
 	}
+	
+	remove () {
+		if (this.geokmz) this.geokmz.remove();
+	}
 };
