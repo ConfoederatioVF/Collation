@@ -13,6 +13,7 @@ config.mapmodes.livemap_Collation = {
 			
 			geometries = geometries.concat(local_ontology.draw());
 		}
+		geometries = Geospatiale.sortGeometries(geometries);
 		
 		//Return statement
 		return config_obj.instance.setGeometries(geometries);

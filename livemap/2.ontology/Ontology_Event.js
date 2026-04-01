@@ -26,7 +26,10 @@ global.Ontology_Event = class extends Ontology {
 		let skip_draw = false;
 		
 		if (current_state) try {
-			if (current_state.type === "point" && Date.getHoursAgo(current_state.timestamp) > Ontology_Event.draw_hours_ago) 
+			if (
+				(current_state.type === "point" && Date.getHoursAgo(current_state.timestamp) > Ontology_Event.draw_hours_ago) &&
+				current_state.timestamp !== undefined
+			) 
 				skip_draw = true;
 		} catch (e) {}
 		
