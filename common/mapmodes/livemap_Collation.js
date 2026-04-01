@@ -5,18 +5,39 @@ config.mapmodes.livemap_Collation = {
 	redraw: function () {
 		//Declare local instance variables
 		let config_obj = config.mapmodes.livemap_Collation;
-		let geometries = [];
+			config_obj.geometries = [];
+		let geometries = config_obj.geometries;
 		
 		//Iterate over all Ontologies and draw them
 		for (let i = 0; i < Ontology.instances.length; i++) {
 			let local_ontology = Ontology.instances[i];
 			
-			geometries = geometries.concat(local_ontology.draw());
+			config_obj.geometries = config_obj.geometries.concat(local_ontology.draw());
 		}
-		geometries = Geospatiale.sortGeometries(geometries);
+		
+		//[TEMP] - Draw calls for other Collation data sources
+		//AIS Data
+		let localDraw = () => { //30s draw loop
+			if (!config_obj.instance.is_enabled) return; //Internal guard clause to ensure draw is only active if mapmode is
+			
+			if (!config_obj.AISFriends) config_obj.AISFriends = new GLOBAL_Navy_AISFriends_Worker();
+			config_obj.AISFriends.draw().then(() => {
+				if (config_obj.AISFriends.geometries)
+					config_obj.geometries = config_obj.geometries.concat(config_obj.AISFriends.geometries);
+				config_obj.instance.setGeometries(config_obj.geometries); //Set geometries
+			});
+		};
+		
+		//Immediate draw pattern
+		if (!config_obj.logic_loop)
+			config_obj.logic_loop = setInterval(localDraw, 30000);
+		localDraw();
+		
+		//Sort geometries
+		config_obj.geometries = Geospatiale.sortGeometries(config_obj.geometries);
 		
 		//Return statement
-		return config_obj.instance.setGeometries(geometries);
+		return config_obj.instance.setGeometries(config_obj.geometries);
 	},
 	
 	special_function: function (v) {
@@ -30,6 +51,15 @@ config.mapmodes.livemap_Collation = {
 				onuserchange: (v) => {
 					Ontology_Event.draw_hours_ago = v;
 					config_obj.redraw();
+				}
+			}),
+			ais_days_ago: new ve.Number(Math.returnSafeNumber(config_obj.AISFriends?.options?.days_ago_threshold, 7), {
+				name: "Days Ago (AIS)",
+				onuserchange: (v) => {
+					if (config_obj.AISFriends) {
+						config_obj.AISFriends.options.days_ago_threshold = v;
+						config_obj.redraw();
+					}
 				}
 			})
 		}, {

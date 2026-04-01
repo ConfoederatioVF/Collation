@@ -15,7 +15,7 @@ global.GLOBAL_Navy_AISFriends_Worker = class {
 	async draw () {
 		//Declare local instance variables
 		let all_vessels = await this.fetchVesselData();
-		this.layer = new maptalks.VectorLayer("AISFriends").addTo(map);
+		let geometries = [];
 		
 		for (let i = 0; i < all_vessels.length; i++) try {
 			if (Date.getDaysAgo(all_vessels[i].timestamp_of_position) > this.options.days_ago_threshold) continue; //Internal guard clause for recency
@@ -36,8 +36,13 @@ global.GLOBAL_Navy_AISFriends_Worker = class {
 					textSize: 11
 				}]
 			});
-			local_marker.addTo(this.layer);
+			geometries.push(local_marker);
 		} catch (e) { console.error(e); }
+		
+		this.geometries = geometries;
+		
+		//Return statement
+		return geometries;
 	}
 	
 	async fetchVesselData () {
