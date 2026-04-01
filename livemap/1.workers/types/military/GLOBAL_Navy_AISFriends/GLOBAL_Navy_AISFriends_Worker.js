@@ -51,7 +51,7 @@ global.GLOBAL_Navy_AISFriends_Worker = class {
 		
 		// List of proxies to try in order
 		const proxyAttempts = [
-			`https://corsproxy.io/?${encodeURIComponent(targetUrl)}`,
+			`https://corsproxy.io/?url=${encodeURIComponent(targetUrl)}`,
 			`https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`,
 		];
 		

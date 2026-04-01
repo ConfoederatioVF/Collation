@@ -6,7 +6,6 @@ config.mapmodes.livemap_Collation = {
 		//Declare local instance variables
 		let config_obj = config.mapmodes.livemap_Collation;
 			config_obj.geometries = [];
-		let geometries = config_obj.geometries;
 		
 		//Iterate over all Ontologies and draw them
 		for (let i = 0; i < Ontology.instances.length; i++) {
@@ -26,6 +25,17 @@ config.mapmodes.livemap_Collation = {
 					config_obj.geometries = config_obj.geometries.concat(config_obj.AISFriends.geometries);
 				config_obj.instance.setGeometries(config_obj.geometries); //Set geometries
 			});
+			
+			try {
+				if (!config_obj.UAControlMap) config_obj.UAControlMap = new UA_UkraineControlMap({ 
+					onload: () => this.redraw() 
+				});
+				if (config_obj.UAControlMap?.geokmz?.layer) {
+					let all_layer_geometries = config_obj.UAControlMap.geokmz.layer.getGeometries();
+					config_obj.geometries = config_obj.geometries.concat(all_layer_geometries);
+					config_obj.UAControlMap.geokmz.layer.clear();
+				}
+			} catch (e) { console.error(e); }
 		};
 		
 		//Immediate draw pattern

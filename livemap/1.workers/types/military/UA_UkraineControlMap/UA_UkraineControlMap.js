@@ -7,11 +7,13 @@ global.UA_UkraineControlMap = class {
 		
 		//Declare local instance variables
 		this.static = UA_UkraineControlMap;
+		this.options = options;
 		this.initLeafletMap();
 	}
 	
 	initLeafletMap () {
-		this.geokmz = new Geospatiale.maptalks_GeoKMZ(`${this.static.bf}Ukraine Control Map v2.kmz`);
-		this.geokmz.addTo(map);
+		this.geokmz = new Geospatiale.maptalks_GeoKMZ(`${this.static.bf}Ukraine Control Map v2.kmz`, {
+			...this.options
+		});
 	}
 };
