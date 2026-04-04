@@ -133,6 +133,70 @@
 		}
 		
 		/**
+ScriptManager
+D:\Project 1509 - SVEA
+- D:\Project 1509 - SVEA\UF\js\ontology\Ontology.js
+
+Settings
+
+View
+
+Run
+
+Console
+D:\Project 1509 - SVEA\histmap\3.data_merging\population_Substrata.outlier_removal
+Clipboard is empty.   |  
+
+
+
+Save File
+Back
+
+
+config
+
+
+rasters_1.northern_america
+
+
+rasters_2.scaled_to_regions
+
+
+rasters_3.scaled_to_global
+
+
+rasters_outliers
+
+
+rasters_outliers_removed
+
+
+rasters_outliers_to_rescale
+
+
+
+population_Substrata_outlier_removal.js
+111112113114115116117118119120121122123124125126127128129130131132133134135136137138139
+'';
+			
+			this._sortState();
+			
+			// If it's a new user-created instance (not clean), mark it dirty
+			if (!is_clean_load) {
+				Ontology.dirty_instances.add(this);
+			}
+			
+			Ontology.queue.push(this);
+
+Parsed documentation for 1.915 file(s).Refresh
+Search for item ...
+
+package.json
+main.js
+Ontology.js
+Worker.js
+population_Substrata_outlier_removal.js
+
 		 * Given an array of fully-resolved snapshots (one per keyframe, indexed automatically to `this.state`), rewrite every keyframe's data so that the last entry is the full snapshot and every earlier entry is a negative diff against its successor.
 		 * @private
 		 * 

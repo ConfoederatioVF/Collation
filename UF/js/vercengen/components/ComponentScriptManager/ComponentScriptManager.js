@@ -68,6 +68,7 @@ ve.ScriptManager = class extends ve.Component {
 		if (options.style === undefined) options.style = {};
 		
 		//Declare local instance variables
+		this._instances = [];
 		this._monaco_themes = ve.ScriptManager._getMonacoThemes();
 		this._selected_view = "monaco";
 		this._settings = {
@@ -90,7 +91,8 @@ ve.ScriptManager = class extends ve.Component {
 			view_file_explorer: true
 		};
 		this.config = {
-			files: {}
+			files: {},
+			view_states: {}
 		};
 		this.id = Class.generateRandomID(ve.ScriptManager);
 		this.options = options;
@@ -478,6 +480,13 @@ ve.ScriptManager = class extends ve.Component {
 					}, {
 						name: loc("ve.registry.localisation.ScriptManager_open_find_replace")
 					}),
+					split_instance: new ve.Button(() => {
+						this._instances.push(new ve.Window(new ve.ScriptManager, {
+							...this.options.window_options
+						}));
+					}, {
+						name: "Split Instance"
+					}),
 					
 					display_load_errors: new ve.Toggle(this._settings.display_load_errors, {
 						name: loc("ve.registry.localisation.ScriptManager_display_load_errors"),
@@ -599,47 +608,56 @@ ve.ScriptManager = class extends ve.Component {
 	 * @param {string} arg0_value
 	 */
 	set v (arg0_value) {
-		//Convert from parameters
-		let local_value = (arg0_value) ? arg0_value : "";
+		let local_value = arg0_value ? arg0_value : "";
 		
-		//Declare local instance variables
-		let set_value_loop = setInterval(() => {
+		// Helper to update views
+		const updateViews = () => {
 			this.scene_blockly.show();
 			
-			if (this.scene_monaco?.editor) try {
-				//Set new code value
-				if (!this.scene_blockly._hidden) {
+			if (this.scene_monaco?.editor) {
+				try {
+					if (!this.scene_blockly._hidden) {
+						this.scene_blockly.enable();
+						this.scene_blockly.to_binding_fire_silently = true;
+						js2blocks.parseCode(local_value);
+						setTimeout(() => delete this.scene_blockly.to_binding_fire_silently);
+					}
+					this.scene_monaco.to_binding_fire_silently = true;
+					this.scene_monaco.v = local_value;
+					delete this.scene_monaco.to_binding_fire_silently;
+					this.fireFromBinding();
+				} catch (e) {
+					if (this._settings.display_load_errors)
+						log.scriptmanager(
+							loc("ve.registry.localisation.ScriptManager_error_parsing_es6", e.toString()),
+							"error"
+						);
+					
+					this.scene_blockly.hide();
 					this.scene_blockly.enable();
-					this.scene_blockly.to_binding_fire_silently = true;
-					js2blocks.parseCode(local_value);
-					setTimeout(() => delete this.scene_blockly.to_binding_fire_silently);
+					js2blocks.parseCode("");
+					this.scene_blockly.disable();
+					
+					this.scene_monaco.to_binding_fire_silently = true;
+					this.scene_monaco.v = local_value;
+					delete this.scene_monaco.to_binding_fire_silently;
+					this.fireFromBinding();
 				}
-				this.scene_monaco.to_binding_fire_silently = true;
-				this.scene_monaco.v = local_value;
-				delete this.scene_monaco.to_binding_fire_silently;
-				this.fireFromBinding();
-				clearInterval(set_value_loop);
-			} catch (e) {
-				clearInterval(set_value_loop);
-				
-				//Log error to console if this._settings.display_load_errors is true
-				if (this._settings.display_load_errors)
-					log.scriptmanager(loc("ve.registry.localisation.ScriptManager_error_parsing_es6", e.toString()), "error");
-				
-				//Hide Blockly workspace, then clear it
-				this.scene_blockly.hide();
-				this.scene_blockly.enable();
-				js2blocks.parseCode("");
-				this.scene_blockly.disable();
-				
-				//Load the file to the text editor instead (graceful degradation)
-				this.scene_blockly.disable();
-				this.scene_monaco.to_binding_fire_silently = true;
-				this.scene_monaco.v = local_value;
-				delete this.scene_monaco.to_binding_fire_silently;
-				this.fireFromBinding();
 			}
-		});
+		};
+		
+		// If editor is already loaded, update immediately. 
+		// Otherwise, use a one-time check (not a permanent loop)
+		if (this.scene_monaco?.editor) {
+			updateViews();
+		} else {
+			let check_load = setInterval(() => {
+				if (this.scene_monaco?.editor) {
+					updateViews();
+					clearInterval(check_load);
+				}
+			}, 50);
+		}
 	}
 	
 	_drawHeight () {
@@ -662,24 +680,27 @@ ve.ScriptManager = class extends ve.Component {
 	}
 	
 	loadFile (arg0_file_path, arg1_file_data, arg2_do_not_add_to_bottombar) {
-		//Convert from parameters
 		let file_path = path.resolve(arg0_file_path);
 		let file_data = arg1_file_data;
 		let do_not_add_to_bottombar = arg2_do_not_add_to_bottombar;
 		
-		if (!fs.existsSync(file_path)) return; //Internal guard clause if file path doesn't exist
+		if (!fs.existsSync(file_path)) return;
 		
-		//Declare local instance variables
+		// SAVE: Capture state of the file we are LEAVING
+		if (this._file_path && this.scene_monaco?.editor) {
+			if (!this.config.files[this._file_path]) this.config.files[this._file_path] = {};
+			this.config.files[this._file_path].view_state = this.scene_monaco.editor.saveViewState();
+		}
+		
 		try {
-			let actual_file_data = (file_data) ? file_data : fs.readFileSync(file_path, "utf8");
+			let actual_file_data = file_data ? file_data : fs.readFileSync(file_path, "utf8");
 			
+			// UPDATE PATH AND VALUE
 			this._file_path = file_path;
 			this.v = actual_file_data;
 			
-			//Load proper syntax highlighting; bottombar
 			ve.ScriptManager._loadFileExtension.call(this, path.extname(this._file_path));
-			if (!do_not_add_to_bottombar)
-				this.bottombar_obj.addFile(this._file_path);
+			if (!do_not_add_to_bottombar) this.bottombar_obj.addFile(this._file_path);
 			this.fireToBinding();
 		} catch (e) {}
 	}
