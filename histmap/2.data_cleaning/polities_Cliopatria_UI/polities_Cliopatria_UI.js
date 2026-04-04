@@ -108,9 +108,5 @@ global.polities_Cliopatria_UI = class {
 				}
 		}
 		this.geometries = this.geometries.concat(label_geometries);
-		
-		//Iterate over all this.geometries and render them on the map
-		//for (let i = 0; i < this.geometries.length; i++)
-		//	this.geometries[i].addTo(main.layers.entity_layer);
 	}
 };

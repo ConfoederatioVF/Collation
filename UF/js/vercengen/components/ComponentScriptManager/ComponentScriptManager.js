@@ -10,6 +10,7 @@
  * ##### Constructor:
  * - `arg0_value`: {@link string} - The code to load into the present ve.ScriptManager.
  * - `arg1_options`: {@link Object}
+ *   - `.do_not_allow_other_instances=false`: {@link boolean} - Whether to allow other instances.
  *   - `.do_not_auto_detect_project=false`: {@link boolean} - Whether to attempt to read from the base `.ve-sm` file upon initialisation.
  *   - `.do_not_cache_file_explorer=false`: {@link boolean} - Whether the file directory should remain the same as when last opened.
  *   - `.do_not_display_file_name=false`: {@link boolean}
@@ -485,8 +486,17 @@ ve.ScriptManager = class extends ve.Component {
 							...this.options.window_options
 						}));
 					}, {
-						name: "Split Instance"
+						name: "Split Instance",
+            limit: () => !this.options.do_not_allow_other_instances
 					}),
+          split_node_editor: new ve.Button(() => {
+            this._instances.push(new ve.Window(new ve.NodeEditor, {
+              ...this.options.window_options
+            }));
+          }, {
+            name: "Split Node Editor",
+            limit: () => !this.options.do_not_allow_other_instances
+          }),
 					
 					display_load_errors: new ve.Toggle(this._settings.display_load_errors, {
 						name: loc("ve.registry.localisation.ScriptManager_display_load_errors"),
