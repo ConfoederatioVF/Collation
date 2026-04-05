@@ -119,8 +119,10 @@ ve.Table = class extends ve.Component {
 	 * @returns {ve.Spreadsheet}
 	 */
 	convertToSpreadsheet () {
-		const current_data = [this.v]; // Wrap 2D Table data into 3D Spreadsheet format
+		//Declare local instance variables
+		let current_data = [this.v]; //Wrap 2D Table data into 3D Spreadsheet format
 		
+		//Initialise ve.Spreadsheet component
 		if (!this.spreadsheet_component) {
 			// Create the counterpart and link them
 			this.spreadsheet_component = new ve.Spreadsheet(current_data, this.options);
@@ -131,10 +133,11 @@ ve.Table = class extends ve.Component {
 			setTimeout(() => this.spreadsheet_component.v = current_data, 1000);
 		}
 		
-		// Swap DOM
+		//Swap DOM
 		if (this.element.parentNode)
 			this.element.replaceWith(this.spreadsheet_component.element);
 		
+		//Return statement
 		return this.spreadsheet_component;
 	}
 	
@@ -145,10 +148,10 @@ ve.Table = class extends ve.Component {
 	 * @alias convertToTable
 	 * @memberof ve.Component.ve.Table
 	 * 
-	 * @returns {ve.Table}
+	 * @returns {ve.Table|ve.Component.Table}
 	 */
 	convertToTable () {
-		// If we are coming back from a spreadsheet, sync the data first
+		//If we are coming back from a spreadsheet, sync the data first
 		if (this.spreadsheet_component) {
 			const spreadsheet_data = this.spreadsheet_component.convertToArray();
 			if (spreadsheet_data && spreadsheet_data[0])
@@ -158,6 +161,8 @@ ve.Table = class extends ve.Component {
 			if (this.spreadsheet_component.element.parentNode)
 				this.spreadsheet_component.element.replaceWith(this.element);
 		}
+		
+		//Return statement
 		return this;
 	}
 	
@@ -168,7 +173,7 @@ ve.Table = class extends ve.Component {
 	 * @alias draw
 	 * @memberof ve.Component.ve.draw
 	 * 
-	 * @returns {ve.Table}
+	 * @returns {ve.Table|undefined}
 	 */
 	draw () {
 		//Clear .innerHTML
