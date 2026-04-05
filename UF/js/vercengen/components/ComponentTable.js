@@ -8,6 +8,7 @@
  * - `arg0_value`: {@link Array}<{@link Array}<{@link any}>> 
  *   - Nested arrays: [n1] - Sheet, [n2] - Row
  * - `arg1_options`: {@link Object}
+ *   - `.page_sizes=ve.registry.settings.Table.page_sizes`: {@link number[]} - Set by default to [10, 20, 50, 100].
  *   - `.page_size=50`: {@link number}
  *   - `.sortable=true`: {@link boolean}
  *   - `.sort_ascending=true`: {@link boolean}
@@ -48,6 +49,7 @@ ve.Table = class extends ve.Component {
 		//Initialise options
 		options.attributes = (options.attributes) ? options.attributes : {};
 		options.page_size = Math.returnSafeNumber(options.page_size, 50);
+		options.page_sizes = ve.registry.settings.Table.page_sizes;
 		options.sortable = (options.sortable !== undefined) ? options.sortable : true;
 		options.sort_ascending = (options.sort_ascending !== undefined) ? 
 			options.sort_ascending : true;
@@ -235,8 +237,6 @@ ve.Table = class extends ve.Component {
 		//Declare local instance variables
 		let total_pages = Math.ceil(this._rows.length/this.options.page_size);
 		
-		if (total_pages <= 1) return; //Internal guard clause if there is only one page
-		
 		//Declare local instance variables
 		let current_page_label = document.createElement("span");
 			current_page_label.className = "label-current-page";
@@ -268,6 +268,29 @@ ve.Table = class extends ve.Component {
 		prev_btn.bind(nav_el);
 		nav_el.appendChild(current_page_label);
 		next_btn.bind(nav_el);
+		
+		//Page size handler
+		if (this.options.page_sizes) {
+			let select_btn = new ve.Select(this.options.page_sizes, {
+				name: loc("ve.registry.localisation.Table_max_per_page"),
+				selected: this.options.page_size.toString(),
+				
+				onuserchange: (v) => {
+					//Declare local instance variables
+					let old_page_size = this.options.page_size;
+					let new_page_size = parseInt(v);
+					
+					let first_item_index = this.current_page*old_page_size;
+					
+					this.options.page_size = new_page_size;
+					this.current_page = Math.floor(first_item_index/new_page_size);
+					this.draw();
+				}
+			});
+			
+			select_btn.bind(nav_el);
+		}
+		
 		this.element.appendChild(nav_el);
 	}
 	
