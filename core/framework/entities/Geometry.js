@@ -375,6 +375,25 @@ naissance.Geometry = class extends ve.Class {
 	}
 	
 	/**
+	 * Returns the actions bar element with geometry generics.
+	 * 
+	 * @returns {HTMLElement}
+	 */
+	getActionsBarElement () {
+		//Declare local instance variables
+		let actions_bar_el = document.createElement("div");
+			actions_bar_el.id = `actions-bar`;
+		let hierarchy_generics = this.drawHierarchyDatatypeGenerics();
+			
+		//Iterate over hierarchy_generics
+		Object.iterate(hierarchy_generics, (local_key, local_value) => 
+			local_value.bind(actions_bar_el));
+		
+		//Return statement
+		return actions_bar_el;
+	}
+	
+	/**
 	 * Hides the present Geometry. Used by {@link naissance.Feature}, not internally used.
 	 */
 	hide () {

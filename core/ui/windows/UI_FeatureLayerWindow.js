@@ -18,7 +18,7 @@ global.UI_FeatureLayerWindow = class extends ve.Class { //[WIP] - Finish class b
 		let all_entities = this.layer.getAllGeometries();
 		
 		//Initalise heeader
-		table_array.push(["", "Index", "Type", "Name", "Actions"]);
+		table_array.push(["Selected", "Index", "Type", "Name", "Actions"]);
 		
 		//Iterate over all_entities and push it to table_array
 		for (let i = 0; i < all_entities.length; i++) {
@@ -35,9 +35,11 @@ global.UI_FeatureLayerWindow = class extends ve.Class { //[WIP] - Finish class b
 			//Set local_actions_bar_el
 			let local_actions_bar_el = document.createElement("div");
 				
+			local_array[0] = veCheckbox().element;
 			local_array[1] = i;
 			local_array[2] = (local_geometry.class_name) ? local_geometry.class_name : "Geometry";
 			local_array[3] = local_geometry_name;
+			local_array[4] = local_geometry.getActionsBarElement();
 			
 			//Push local_array to table_array
 			table_array.push(local_array);

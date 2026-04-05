@@ -318,7 +318,7 @@ ve.Table = class extends ve.Component {
 		//Convert from parameters
 		let index = Math.returnSafeNumber(arg0_index);
 		
-		if (!this.options.sortable || !this.options.non_sortable_columns.includes(index)) 
+		if (!this.options.sortable || this.options.non_sortable_columns.includes(index)) 
 			return; //Internal guard clause if table is not sortable
 		
 		//Declare local instance variables
