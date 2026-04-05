@@ -43,6 +43,8 @@
  * - `._settings`: {@link Object}
  *
  * ##### Methods:
+ * - <span color=00ffff>{@link ve.ScriptManager._drawHeight|drawHeight}</span>()
+ * - <span color=00ffff>{@link ve.ScriptManager.loadFile|loadFile}</span>(arg0_file_path:{@link string}, arg1_file_data:{@link string}, arg2_do_not_add_to_bottombar:{@link boolean})
  * - <span color=00ffff>{@link ve.ScriptManager.loadSettings|loadSettings}</span>(arg0_settings:{@link Object})
  * - <span color=00ffff>{@link ve.ScriptManager.saveSettings|saveSettings}</span>() | {@link string}
  * - <span color=00ffff>{@link ve.ScriptManager.setCodeEditorTheme|setCodeEditorTheme}</span>(arg0_theme_class:{@link string})
@@ -486,16 +488,16 @@ ve.ScriptManager = class extends ve.Component {
 							...this.options.window_options
 						}));
 					}, {
-						name: "Split Instance",
-            limit: () => !this.options.do_not_allow_other_instances
+						name: loc("ve.registry.localisation.ScriptManager_split_instance"),
+            limit: () => (!this.options.do_not_allow_other_instances)
 					}),
           split_node_editor: new ve.Button(() => {
             this._instances.push(new ve.Window(new ve.NodeEditor, {
               ...this.options.window_options
             }));
           }, {
-            name: "Split Node Editor",
-            limit: () => !this.options.do_not_allow_other_instances
+            name: loc("ve.registry.localisation.ScriptManager_split_node_editor"),
+            limit: () => (!this.options.do_not_allow_other_instances)
           }),
 					
 					display_load_errors: new ve.Toggle(this._settings.display_load_errors, {
@@ -670,6 +672,12 @@ ve.ScriptManager = class extends ve.Component {
 		}
 	}
 	
+	/**
+	 * Draws the height of the given ScriptManager component.
+	 * - Method of: {@link ve.ScriptManager}
+	 * 
+	 * @private
+	 */
 	_drawHeight () {
 		//Declare local instance variables
 		let svg_el = this.scene_blockly_el.querySelector("svg");
@@ -689,28 +697,46 @@ ve.ScriptManager = class extends ve.Component {
 		}
 	}
 	
+	/**
+	 * Loads a file from the given path.
+	 * - Method of: {@link ve.ScriptManager}
+	 * 
+	 * @alias loadFile
+	 * @memberof ve.Component.ve.ScriptManager
+	 * 
+	 * @param {string} arg0_file_path
+	 * @param {string} arg1_file_data
+	 * @param {boolean} [arg2_do_not_add_to_bottombar=false]
+	 */
 	loadFile (arg0_file_path, arg1_file_data, arg2_do_not_add_to_bottombar) {
+		//Convert from parameters
 		let file_path = path.resolve(arg0_file_path);
 		let file_data = arg1_file_data;
 		let do_not_add_to_bottombar = arg2_do_not_add_to_bottombar;
 		
-		if (!fs.existsSync(file_path)) return;
+		if (!fs.existsSync(file_path)) return; //Internal guard clause if file_path doesn't exist
 		
-		// SAVE: Capture state of the file we are LEAVING
+		//Save: capture state of the file we are leaving
 		if (this._file_path && this.scene_monaco?.editor) {
 			if (!this.config.files[this._file_path]) this.config.files[this._file_path] = {};
-			this.config.files[this._file_path].view_state = this.scene_monaco.editor.saveViewState();
+			let file_obj = this.config.files[this._file_path];
+			
+			file_obj.view_state = this.scene_monaco.editor.saveViewState();
 		}
 		
 		try {
 			let actual_file_data = file_data ? file_data : fs.readFileSync(file_path, "utf8");
 			
-			// UPDATE PATH AND VALUE
+			//Update path and value
 			this._file_path = file_path;
 			this.v = actual_file_data;
 			
+			//Load extension highlighting
 			ve.ScriptManager._loadFileExtension.call(this, path.extname(this._file_path));
-			if (!do_not_add_to_bottombar) this.bottombar_obj.addFile(this._file_path);
+			if (!do_not_add_to_bottombar) 
+				this.bottombar_obj.addFile(this._file_path);
+			
+			//Fire from binding
 			this.fireToBinding();
 		} catch (e) {}
 	}
