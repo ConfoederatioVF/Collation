@@ -36,9 +36,7 @@ global.UI_FeatureLayerWindow = class extends ve.Class { //[WIP] - Finish class b
 						local_geometry_name = `Geometry`;
 					}
 			
-			//Set local_actions_bar_el
-			let local_actions_bar_el = document.createElement("div");
-				
+			//Set local_array
 			local_array[0] = veCheckbox().element;
 			local_array[1] = i;
 			local_array[2] = (local_geometry.class_name) ? local_geometry.class_name : "Geometry";
