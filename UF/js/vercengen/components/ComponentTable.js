@@ -269,7 +269,25 @@ ve.Table = class extends ve.Component {
 		//Declare local instance variables
 		let current_page_label = document.createElement("span");
 			current_page_label.className = "label-current-page";
-			current_page_label.innerHTML = loc("ve.registry.localisation.Table_pagination_info", String.formatNumber(this.current_page + 1), String.formatNumber(total_pages));
+			current_page_label.style.display = "inline-flex";
+			
+			let current_page_number = new ve.Number(this.current_page + 1, {
+				attributes: {
+					size: Math.returnSafeNumber((this.current_page + 1).toString().length, 1) + 1
+				},
+				name: loc("ve.registry.localisation.Table.page"),
+				max: total_pages,
+				min: 1,
+				onuserchange: (v, e) => {
+					this.current_page = v - 1;
+					this.draw();
+				}
+			});
+			current_page_number.element.querySelector("input").style.minWidth = "auto";
+			current_page_number.bind(current_page_label);
+			
+			let max_label = new ve.HTML(loc("ve.registry.localisation.Table_page_of_max", String.formatNumber(total_pages)));
+			max_label.bind(current_page_label);
 		let nav_el = document.createElement("div");
 			nav_el.className = "pagination-controls";
 			nav_el.style.marginTop = "var(--cell-padding)";
