@@ -275,7 +275,7 @@ ve.Table = class extends ve.Component {
 				attributes: {
 					size: Math.returnSafeNumber((this.current_page + 1).toString().length, 1) + 1
 				},
-				name: loc("ve.registry.localisation.Table.page"),
+				name: loc("ve.registry.localisation.Table_page"),
 				max: total_pages,
 				min: 1,
 				onuserchange: (v, e) => {

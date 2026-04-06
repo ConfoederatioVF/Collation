@@ -7,6 +7,9 @@ naissance.FeatureLayer = class extends naissance.Feature {
 		super();
 		this.cannot_nest_self = true;
 		this.class_name = "FeatureLayer";
+		/**
+		 * @type {Array<naissance.Feature|naissance.Geometry>}
+		 */
 		this.entities = (arg0_entities) ? arg0_entities : [];
 		this.options = (arg1_options) ? arg1_options : {};
 		this.window = new UI_FeatureLayerWindow(this);
