@@ -394,16 +394,8 @@ naissance.Geometry = class extends ve.Class {
 	}
 	
 	/**
-	 * Hides the present Geometry. Used by {@link naissance.Feature}, not internally used.
-	 */
-	hide () {
-		this._is_visible = false;
-		this.draw();
-	}
-	
-	/**
 	 * Fetches the layer that the current {@link naissance.Geometry} is appended to, if anything. Used for masking.
-	 * 
+	 *
 	 * @returns {naissance.FeatureLayer}
 	 */
 	getLayer () {
@@ -423,10 +415,11 @@ naissance.Geometry = class extends ve.Class {
 	}
 	
 	/**
-	 * Exports a {@link naissance.Geometry} class to JSON. Contract function.
+	 * Hides the present Geometry. Used by {@link naissance.Feature}, not internally used.
 	 */
-	toJSON () {
-		console.warn(`naissance.Geometry.toJSON() was called for: ${this.class_name}, but was not defined.`);
+	hide () {
+		this._is_visible = false;
+		this.draw();
 	}
 	
 	/**
@@ -449,7 +442,7 @@ naissance.Geometry = class extends ve.Class {
 		for (let i = 0; i < naissance.Geometry.instances.length; i++)
 			if (naissance.Geometry.instances[i].id === this.id)
 				naissance.Geometry.instances.splice(i, 1);
-			
+		
 		//Rerender deleted geometry and remove it from the map
 		this.history = new naissance.History();
 		this.draw();
@@ -457,7 +450,7 @@ naissance.Geometry = class extends ve.Class {
 	
 	/**
 	 * Alias for {@link naissance.History.removeKeyframe}.
-	 * 
+	 *
 	 * @param {Object} arg0_date
 	 */
 	removeKeyframe (arg0_date) {
@@ -476,6 +469,13 @@ naissance.Geometry = class extends ve.Class {
 	show () {
 		this._is_visible = true;
 		this.draw();
+	}
+	
+	/**
+	 * Exports a {@link naissance.Geometry} class to JSON. Contract function.
+	 */
+	toJSON () {
+		console.warn(`naissance.Geometry.toJSON() was called for: ${this.class_name}, but was not defined.`);
 	}
 	
 	/**

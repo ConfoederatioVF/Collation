@@ -10,6 +10,8 @@ global.UI_FeatureLayerWindow = class extends ve.Class { //[WIP] - Finish class b
 
   /**
    * Returns an {@link Object}<{@link ve.Component}> representing the current UI_FeatureLayerWIndow element that can be bound; removes the previous `.interface` if present.
+	 * 
+	 * @returns {ve.Interface}
    */
   draw () {
     super.close("instance");
