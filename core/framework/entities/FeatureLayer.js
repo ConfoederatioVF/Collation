@@ -20,7 +20,34 @@ naissance.FeatureLayer = class extends naissance.Feature {
 		
 		//Declare UI
 		this.interface = veInterface({
-			open_table: veButton(() => this.window.draw(), { name: "Open Table" }),
+			open_table: veButton(() => this.window.draw(), { name: "Edit Geometry Table", x: 0, y: 0 }),
+			show_scene_tree: veButton(() => {
+				let all_geometries = this.getAllGeometries();
+				let max_recommended = Math.returnSafeNumber(main.settings.hierarchy_recommended_max_geometries_in_layer, 100);
+				let showLayer = () => {
+					if (!this.metadata) this.metadata = {};
+					this.metadata.show_layer = true;
+					UI_LeftbarHierarchy.refresh();
+				};
+				
+				if (all_geometries.length > max_recommended) {
+					veConfirm(`This Layer contains ${String.formatNumber(all_geometries.length)} geometries. Are you sure you want to view its scene tree? (Recommended: ${String.formatNumber(max_recommended)})`, {
+						special_function: () => showLayer()
+					})
+				} else { showLayer(); }
+			}, {
+				name: "Show Scene Tree",
+				limit: () => !this.metadata?.show_layer,
+				x: 1, y: 0
+			}),
+			hide_scene_tree: veButton(() => {
+				if (this.metadata) delete this.metadata.show_layer;
+				UI_LeftbarHierarchy.refresh();
+			}, {
+				name: "Hide Scene Tree",
+				limit: () => this.metadata?.show_layer,
+				x: 1, y: 0
+			}),
 			
 			layer_type: veSelect({
 				default: {

@@ -66,7 +66,7 @@
 			UI_MapSettings.fromJSON(json.map_settings);
 		
 		//2. Handle naissance.Geometry classes
-		//Iterate over json to load in each class
+		//Iterate over JSON to load in each class
 		Object.iterate(json, (local_key, local_value) => {
 			if (local_value.class_name && local_value.type === "geometry") {
 				let geometry_obj = new naissance[local_value.class_name]();
