@@ -250,7 +250,7 @@ naissance.GeometryPolygon = class extends naissance.Geometry {
 			context_menu_button.bind(actions_bar_el);
 		
 		//Return statement
-		return actions_bar_el
+		return actions_bar_el;
 	}
 	
 	handleNodeEditorEnd (arg0_e) {

@@ -8,7 +8,9 @@
  * - `arg0_value`: {@link Array}<{@link Array}<{@link any}>> 
  *   - Nested arrays: [n1] - Sheet, [n2] - Row
  * - `arg1_options`: {@link Object}
+ *   - `.hide_columns`: {@link Array}<{@link number}> - The indices of columns to hide.
  *   - `.non_sortable_columns`: {@link number} - The indices that shouldn't be sortable.
+ *   - `.ondraw`: {@link function}(v:{@link ve.Table})
  *   - `.oncellclick`: {@link function}(v:{@link Array}<{@link any}>, e:{@link Event})
  *   - `.onrowclick`: {@link function}(v:{@link any}, e:{@link Event})
  *   - `.page_sizes=ve.registry.settings.Table.page_sizes`: {@link number[]} - Set by default to [10, 20, 50, 100].
@@ -51,6 +53,7 @@ ve.Table = class extends ve.Component {
 		
 		//Initialise options
 		options.attributes = (options.attributes) ? options.attributes : {};
+    options.hide_columns = (options.hide_columns) ? options.hide_columns : [];
 		options.non_sortable_columns = (options.non_sortable_columns) ? options.non_sortable_columns : [];
 		options.page_size = Math.returnSafeNumber(options.page_size, 50);
 		options.page_sizes = ve.registry.settings.Table.page_sizes;
@@ -197,6 +200,9 @@ ve.Table = class extends ve.Component {
 		
 		//Render header
 		this._headers.forEach((local_text, i) => {
+      //Hidden column handling
+      if (this.options.hide_columns.includes(i)) return;
+
 			let local_th_el = document.createElement("th");
 				local_th_el.innerHTML = local_text;
 				
@@ -209,6 +215,8 @@ ve.Table = class extends ve.Component {
 			}
 			header_row_el.appendChild(local_th_el);
 		});
+    header_row_el.addEventListener("contextmenu", () => this.openViewSettings());
+
 		thead_el.appendChild(header_row_el);
 		table_el.appendChild(thead_el);
 		
@@ -221,7 +229,10 @@ ve.Table = class extends ve.Component {
 		page_data.forEach((row_data) => {
 			let local_tr_el = document.createElement("tr");
 			
-			row_data.forEach((cell_data) => {
+			row_data.forEach((cell_data, i) => {
+        //Hidden column handling
+        if (this.options.hide_columns.includes(i)) return;
+
 				//Push cell
 				let local_td_el = document.createElement("td");
 					if (cell_data instanceof HTMLElement) {
@@ -251,6 +262,9 @@ ve.Table = class extends ve.Component {
 		table_el.appendChild(tbody_el);
 		this.element.appendChild(table_el);
 		this.drawPages();
+
+    //Handle .ondraw()
+    if (this.options.ondraw) this.options.ondraw(this);
 	}
 	
 	/**
@@ -359,6 +373,49 @@ ve.Table = class extends ve.Component {
 			sort_column: this.options.sort_column
 		};
 	}
+
+  /**
+   * Opens the view settings tab for the component.
+   * - Method of: {@link ve.Table}
+   * 
+   * @alias openViewSettings
+   * @memberof ve.Component.ve.Table
+   */
+  openViewSettings () {
+    //Declare local instance variables
+    let checkbox_components_obj = {};
+
+    //Iterate over all this._headers
+    for (let i = 0; i < this._headers.length; i++) {
+      let is_shown = (!this.options.hide_columns.includes(i));
+
+      checkbox_components_obj[i] = new ve.Checkbox(is_shown, {
+        name: this._headers[i],
+        onuserchange: (v) => {
+          //Hide is opposite of shown
+          if (v === false) {
+            if (!this.options.hide_columns.includes(i))
+              this.options.hide_columns.push(i);
+          } else {
+            //Iterate over this.options.hide_columns and splice it
+            for (let x = this.options.hide_columns.length - 1; x >= 0; x--)
+              if (this.options.hide_columns[x] === i)
+                this.options.hide_columns.splice(x, 1);
+          }
+
+          //Draw call
+          this.draw();
+        }
+      });
+    }
+
+    let local_context_menu = new ve.ContextMenu({
+      view_header: new ve.HTML(`<b>Show Columns:</b><br><br>`, { x: 0, y: 0 }),
+      ...checkbox_components_obj
+    }, {
+      id: "table_view_columns"
+    });
+  }
 	
 	/**
 	 * Sets the view state from an existing view object.

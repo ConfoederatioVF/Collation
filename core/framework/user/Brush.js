@@ -200,6 +200,8 @@ naissance.Brush = class extends ve.Class {
 		this._selected_geometry = v;
 		if (old_selected_geometry && old_selected_geometry.draw) 
 			old_selected_geometry.draw(); //Update draw
+    if (this._selected_geometry && this._selected_geometry.draw)
+      this._selected_geometry.draw(); //Update draw
 	}
 	
 	getAddLine (arg0_geometry) {

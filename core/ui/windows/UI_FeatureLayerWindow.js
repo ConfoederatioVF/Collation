@@ -15,20 +15,17 @@ global.UI_FeatureLayerWindow = class extends ve.Class { //[WIP] - Finish class b
    */
   draw () {
     super.close("instance");
-    if (this.interface) this.interface.remove();
 
     //Declare local instance variables
     let geometry_table_array = this.getGeometryTable({ view_tags: true });
 
     this.interface = veInterface({
-      geometry_table: veTable(geometry_table_array, {
-        onrowclick: (v, e) => console.log(v, e)
-      })
+      geometry_table: veTable(geometry_table_array)
     }, { is_folder: false });
 
     super.open("instance", { 
       can_rename: false, //[WIP] - Should be able to rename layers from here in future
-      name: (this.layer.name) ? this.layer.name : "Layer" 
+      name: (this.layer.name) ? this.layer.name : "Layer"
     });
 
     //Return statement
@@ -51,12 +48,20 @@ global.UI_FeatureLayerWindow = class extends ve.Class { //[WIP] - Finish class b
     let options = (arg0_options) ? arg0_options : {};
 
 		//Declare local instance variables
+    let _redrawSelections = () => {
+      Object.iterate(table_map, (local_key, local_value) => {
+        let local_checkbox = local_value.row[0].instance;
+
+        local_checkbox.v = (local_value.geometry?.selected);
+      });
+    };
 		let table_array = []; //[[select_button, index, geometry_type, geometry_name, actions_bar]];
+    let table_map = {}; //{ <geometry_id>: { geometry: naissance.Geometry, row: any[] } }
 		
 		//Populate table_array from entities in this.layer
 		let all_entities = this.layer.getAllGeometries();
 		
-		//Initalise heeader
+		//Initalise header
     if (!options.view_tags) {
 		  table_array.push(["Selected", "Index", "Type", "Name", "Actions"]);
     } else {
@@ -74,11 +79,12 @@ global.UI_FeatureLayerWindow = class extends ve.Class { //[WIP] - Finish class b
 					} else {
 						local_geometry_name = `Geometry`;
 					}
+      let select_component;
 			
 			//Set local_array
       //Select column
       {
-        let select_component = veCheckbox(local_geometry.selected, { //[WIP] - onprogramchange doesn't fire, no binding
+        select_component = veCheckbox(local_geometry.selected, { //[WIP] - onprogramchange doesn't fire, no binding
           attributes: {
             "data-value": String(local_geometry.selected)
           },
@@ -87,6 +93,7 @@ global.UI_FeatureLayerWindow = class extends ve.Class { //[WIP] - Finish class b
             local_geometry.selected = v;
           }
         });
+        select_component.element.geometry = local_geometry;
 
 			  local_array.push(select_component.element);
       }
@@ -120,10 +127,32 @@ global.UI_FeatureLayerWindow = class extends ve.Class { //[WIP] - Finish class b
           local_array.push("");
         }
       }
-			local_array.push(local_geometry.getActionsBarElement());
+
+      //Actions bar
+      {
+        let actions_bar_el = local_geometry.getActionsBarElement();
+        let brush_button = veButton((v, e) => {
+          if (main.brush.selected_geometry?.id !== e.element.geometry?.id) {
+            main.brush.selected_geometry = e.element.geometry;
+            select_component.v = true;
+            _redrawSelections();
+          }
+        }, {
+          name: "<icon>brush</icon>",
+          tooltip: "Move to Brush"
+        });
+          brush_button.element.geometry = local_geometry;
+          actions_bar_el.prepend(brush_button.element);
+
+			  local_array.push(actions_bar_el);
+      }
 			
 			//Push local_array to table_array
 			table_array.push(local_array);
+      table_map[local_geometry.id] = {
+        geometry: local_geometry,
+        row: local_array
+      };
 		}
 		
 		//Return statement
