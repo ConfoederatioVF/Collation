@@ -20,6 +20,13 @@ global.UI_FeatureLayerWindow = class extends ve.Class { //[WIP] - Finish class b
     let geometry_table_array = this.getGeometryTable({ view_tags: true });
 
     this.interface = veInterface({
+      searchbar: new ve.SearchSelect({}, {
+        hide_filter: true,
+        onuserchange: (v, e) => {
+          //Declare local instance variables
+          let search_value = e.search_value;
+        }
+      }),
       geometry_table: veTable(geometry_table_array)
     }, { is_folder: false });
 

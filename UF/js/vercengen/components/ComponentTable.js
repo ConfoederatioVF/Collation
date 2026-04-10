@@ -183,6 +183,11 @@ ve.Table = class extends ve.Component {
 	 * @returns {ve.Table|undefined}
 	 */
 	draw () {
+    //Declare local instance variables
+    let max_pages = Math.ceil(this._rows.length/this.options.page_size);
+      if (this.current_page >= max_pages) this.current_page = max_pages - 1;
+      if (this.current_page < 0) this.current_page = 0;
+
 		//Clear .innerHTML
 		this.element.innerHTML = "";
 		
