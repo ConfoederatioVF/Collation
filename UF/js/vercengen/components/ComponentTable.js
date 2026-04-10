@@ -8,7 +8,8 @@
  * - `arg0_value`: {@link Array}<{@link Array}<{@link any}>> 
  *   - Nested arrays: [n1] - Sheet, [n2] - Row
  * - `arg1_options`: {@link Object}
- *   - `.hide_columns`: {@link Array}<{@link number}> - The indices of columns to hide.
+ *   - `.disable_hide_columns=[]`: {@link Array}<{@link number}> - The indices of columns to disable hiding for.
+ *   - `.hide_columns=[]`: {@link Array}<{@link number}> - The indices of columns to hide.
  *   - `.non_sortable_columns`: {@link number} - The indices that shouldn't be sortable.
  *   - `.ondraw`: {@link function}(v:{@link ve.Table})
  *   - `.oncellclick`: {@link function}(v:{@link Array}<{@link any}>, e:{@link Event})
@@ -53,6 +54,7 @@ ve.Table = class extends ve.Component {
 		
 		//Initialise options
 		options.attributes = (options.attributes) ? options.attributes : {};
+    options.disable_hide_columns = (options.disable_hide_columns) ? options.disable_hide_columns : [];
     options.hide_columns = (options.hide_columns) ? options.hide_columns : [];
 		options.non_sortable_columns = (options.non_sortable_columns) ? options.non_sortable_columns : [];
 		options.page_size = Math.returnSafeNumber(options.page_size, 50);
@@ -373,6 +375,7 @@ ve.Table = class extends ve.Component {
 		//Return statement
 		return {
 			current_page: this.current_page,
+      hide_columns: this.options.hide_columns,
 			items_per_page: this.options.page_size,
 			sort_ascending: this.options.sort_ascending,
 			sort_column: this.options.sort_column
@@ -392,6 +395,8 @@ ve.Table = class extends ve.Component {
 
     //Iterate over all this._headers
     for (let i = 0; i < this._headers.length; i++) {
+      if (this.options.disable_hide_columns.includes(i)) continue; //Internal guard clause for disable_hide_columns
+
       let is_shown = (!this.options.hide_columns.includes(i));
 
       checkbox_components_obj[i] = new ve.Checkbox(is_shown, {
@@ -433,6 +438,7 @@ ve.Table = class extends ve.Component {
 		
 		//Set options and render
 		if (view_obj.current_page !== undefined) this.current_page = view_obj.current_page;
+    if (view_obj.hide_columns !== undefined) this.options.hide_columns = view_obj.hide_columns;
 		if (view_obj.items_per_page !== undefined) this.options.page_size = view_obj.items_per_page;
 		if (view_obj.sort_column !== undefined) {
 			if (view_obj.sort_ascending !== undefined) this.options.sort_ascending = view_obj.sort_ascending;

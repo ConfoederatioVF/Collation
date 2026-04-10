@@ -27,7 +27,9 @@ global.UI_FeatureLayerWindow = class extends ve.Class { //[WIP] - Finish class b
           let search_value = e.search_value;
         }
       }),
-      geometry_table: veTable(geometry_table_array)
+      geometry_table: new ve.Table(geometry_table_array, {
+        disable_hide_columns: [0]
+      })
     }, { is_folder: false });
 
     super.open("instance", { 
@@ -57,9 +59,11 @@ global.UI_FeatureLayerWindow = class extends ve.Class { //[WIP] - Finish class b
 		//Declare local instance variables
     let _redrawSelections = () => {
       Object.iterate(table_map, (local_key, local_value) => {
+        let is_selected = local_value.geometry?.selected;
         let local_checkbox = local_value.row[0].instance;
 
-        local_checkbox.v = (local_value.geometry?.selected);
+        local_checkbox.v = is_selected;
+        local_checkbox.element.setAttribute("data-value", is_selected);
       });
     };
 		let table_array = []; //[[select_button, index, geometry_type, geometry_name, actions_bar]];
@@ -93,6 +97,7 @@ global.UI_FeatureLayerWindow = class extends ve.Class { //[WIP] - Finish class b
       {
         select_component = veCheckbox(local_geometry.selected, { //[WIP] - onprogramchange doesn't fire, no binding
           attributes: {
+            "naissance-geometry-select": "true",
             "data-value": String(local_geometry.selected)
           },
           onuserchange: (v, e) => {
