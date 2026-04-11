@@ -11,8 +11,10 @@
  *     - `[n].special_function`: {@link function}(v:{@link any}) | {@link boolean} - Boolean determines whether to include result in tab. If this field does not exist, all elements are taken as valid.
  *   - `.filter_interface`: {@link ve.Interface} - The interface to provide for the filter.
  *   - `.hide_searchbar=false`: {@link boolean}
+ *   - `.onselect`: {@link function}(v:{@link boolean}, e:{ checkbox:{@link ve.Checkbox}, value:{@link any} })
  *   - `.searchbar_filters`: {@link Array}<{@link number>} - The column indices to target when filtering search results.
  *   - `.searchbar_options`: {@link Object} - The options to pass to the {@link ve.SearchSelect} for the CRUD.
+ *   - `.select_options`: {@link Object}
  *   - `.table_options`: {@link Object} - The options to pass to the {@link ve.Table} for the CRUD.
  *   
  * ##### Instance:
@@ -71,10 +73,14 @@ ve.CRUD = class extends ve.Component {
       onuserchange: (v, e) => {
         //Declare local instance variables
         let search_value = e.search_value;
+        
+        //Filter table by search_value
+        this.filterTable(search_value);
       },
       ...this.options.searchbar_options
     });
-    this.table = new ve.Table(this.getTable(), {
+    this.table_array = this.getTable();
+    this.table = new ve.Table(this.table_array, {
       disable_hide_columns: [0],
       ...this.options.table_options
     });
@@ -83,10 +89,73 @@ ve.CRUD = class extends ve.Component {
     this.searchbar.bind(this.element);
     this.table.bind(this.element);
   }
-
-  filterTable (arg0_options) {
+  
+  filterTable (arg0_search_string) {
     //Convert from parameters
-    let options = (arg0_options) ? arg0_options : {};
+    let search_string = (arg0_search_string) ? arg0_search_string : "";
+      search_string = search_string.trim().toLowerCase();
+    
+    //Declare local instance variables
+    let filtered_table_array = [];
+    let searchbar_columns = [];
+    
+    //Internal guard clause if search_string is empty
+    if (search_string.length === 0) {
+      filtered_table_array = this.getTable();
+      this.table.v = filtered_table_array;
+      
+      //Return statement
+      return filtered_table_array;
+    }
+    
+    //Set searchbar_columns
+    if (!this.options.searchbar_filters || this.options.searchbar_filters?.length === 0) {
+      for (let i = 0; i < this.options.header.length; i++)
+        searchbar_columns.push(i);
+    } else {
+      searchbar_columns = this.options.searchbar_filters;
+    }
+    
+    //Push header to filtered_table_array first
+    filtered_table_array.push(this.options.header);
+    
+    //Iterate over all rows in this.table_array
+    for (let i = 1; i < this.table_array.length; i++) {
+      let is_valid = false;
+      
+      //Iterate over all searchbar_columns in this.table_array for filters to see if "data-value" or .innerText has a valid substring
+      for (let x = 0; x < searchbar_columns.length; x++) {
+        let local_cell = this.table_array[i][x];
+        let local_values = [];
+        
+        if (local_cell instanceof HTMLElement) {
+          let data_value = local_cell.getAttribute("data-value");
+          
+          if (data_value) local_values.push(data_value);
+          local_values.push(local_cell.innerText);
+        } else {
+          local_values.push(String(local_cell));
+        }
+        
+        //Iterate over local_values and determine if any of them are valid against search_string
+        for (let y = 0; y < local_values.length; y++) {
+          let local_value = local_values[y].trim().toLowerCase();
+          
+          if (local_value.indexOf(search_string) !== -1) {
+            is_valid = true;
+            break;
+          }
+        }
+      }
+      
+      if (is_valid) filtered_table_array.push(this.table_array[i]);
+    }
+    
+    //Set this.table.v
+    this.table.v = filtered_table_array;
+    
+    //Return statement
+    return filtered_table_array;
   }
   
   getTable () {
@@ -113,7 +182,12 @@ ve.CRUD = class extends ve.Component {
           onuserchange: (v, e) => {
             e.element.setAttribute("data-value", String(v));
             this.value[i].selected = v;
-          }
+            if (this.options.onselect) this.options.onselect(v, {
+              checkbox: e,
+              value: this.value[i]
+            });
+          },
+          ...this.options.select_options
         });
         select_component.element.value = this.value[i];
         
