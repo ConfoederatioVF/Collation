@@ -71,6 +71,7 @@ global.UI_FeatureLayerWindow = class extends ve.Class {
 			},
 			table_options: {
 				disable_hide_columns: [0],
+				page_size: 10
 			},
 		});
 		
@@ -83,6 +84,8 @@ global.UI_FeatureLayerWindow = class extends ve.Class {
 		super.open("instance", {
 			can_rename: false,
 			name: this.layer.name ? this.layer.name : "Layer",
+			height: "45rem",
+			width: "60rem"
 		});
 		
 		// Return statement

@@ -75,7 +75,8 @@ ve.CRUD = class extends ve.Component {
       ...this.options.searchbar_options
     });
     this.table = new ve.Table(this.getTable(), {
-      disable_hide_columns: [0]
+      disable_hide_columns: [0],
+      ...this.options.table_options
     });
     
     //Bind elements in order
