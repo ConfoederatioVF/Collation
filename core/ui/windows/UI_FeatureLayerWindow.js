@@ -1,10 +1,10 @@
 global.UI_FeatureLayerWindow = class extends ve.Class {
-	constructor(arg0_layer_obj) {
+	constructor (arg0_layer_obj) {
 		// Convert from parameters
 		let layer_obj = arg0_layer_obj;
 		super();
 		
-		// Declare local instance variables
+		//Declare local instance variables
 		this.layer = layer_obj;
 	}
 	
@@ -15,23 +15,21 @@ global.UI_FeatureLayerWindow = class extends ve.Class {
 	 * @returns {ve.Interface}
 	 */
 	draw () {
+		//Close the current instance
 		super.close("instance");
 		
-		// Declare local instance variables
+		//Declare local instance variables
 		let all_geometries = this.layer.getAllGeometries();
 		
-		// Define the CRUD component
-		this.crud = new ve.CRUD(all_geometries, {
+		this.CRUD = new ve.CRUD(all_geometries, {
 			header: ["Type", "Name", "Tags", "Actions"],
 			special_function: (local_geometry) => {
 				let local_array = [];
 				
-				// 1. Type column
-				local_array.push(
-					local_geometry.class_name ? local_geometry.class_name : "Geometry"
-				);
+				//1. Type column
+				local_array.push((local_geometry.class_name) ? local_geometry.class_name : "Geometry");
 				
-				// 2. Name column
+				//2. Name column
 				let name_component = veText(local_geometry.name, {
 					attributes: {
 						"data-value": local_geometry.name,
@@ -47,32 +45,28 @@ global.UI_FeatureLayerWindow = class extends ve.Class {
 				});
 				local_array.push(name_component.element);
 				
-				// 3. Tags column
+				//3. Tags column
 				let local_geometry_tags = local_geometry?.metadata?.tags;
-				local_array.push(
-					Array.isArray(local_geometry_tags) ? local_geometry_tags.join(", ") : ""
-				);
+				local_array.push((Array.isArray(local_geometry_tags)) ? local_geometry_tags.join(", ") : "");
 				
-				// 4. Actions column
+				//4. Actions column
 				let actions_bar_el = local_geometry.getActionsBarElement();
-				let brush_button = veButton(
-					(v, e) => {
-						if (main.brush.selected_geometry?.id !== e.element.geometry?.id) {
-							main.brush.selected_geometry = e.element.geometry;
-							local_geometry.selected = true;
-							this.crud.redrawSelections();
-						}
-					},
-					{
-						name: "<icon>brush</icon>",
-						tooltip: "Move to Brush",
+				let brush_button = veButton((v, e) => {
+					if (main.brush.selected_geometry?.id !== e.element.geometry?.id) {
+						main.brush.selected_geometry = e.element.geometry;
+						local_geometry.selected = true;
+						this.CRUD.redrawSelections();
 					}
-				);
+				}, {
+					name: "<icon>brush</icon>",
+					tooltip: "Move to Brush",
+				});
 				brush_button.element.geometry = local_geometry;
 				actions_bar_el.prepend(brush_button.element);
 				
 				local_array.push(actions_bar_el);
 				
+				//Return statement
 				return local_array;
 			},
 			table_options: {
@@ -80,12 +74,11 @@ global.UI_FeatureLayerWindow = class extends ve.Class {
 			},
 		});
 		
-		this.interface = veInterface(
-			{
-				main_crud: this.crud,
-			},
-			{ is_folder: false }
-		);
+		this.interface = veInterface({ 
+			crud: this.CRUD, 
+		}, { 
+			is_folder: false 
+		});
 		
 		super.open("instance", {
 			can_rename: false,
@@ -94,12 +87,5 @@ global.UI_FeatureLayerWindow = class extends ve.Class {
 		
 		// Return statement
 		return this.interface;
-	}
-	
-	/**
-	 * Triggers a filter on the underlying CRUD component.
-	 */
-	filterGeometryTable(arg0_options) {
-		this.crud.filterTable(arg0_options);
 	}
 };
