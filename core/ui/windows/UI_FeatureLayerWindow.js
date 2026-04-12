@@ -68,11 +68,12 @@ global.UI_FeatureLayerWindow = class extends ve.Class {
 				//Return statement
 				return local_array;
 			},
-			table_options: {
-				disable_hide_columns: [0],
-				page_size: 10
-			},
 			
+			onsearch: (v, e) => {
+				//Refresh table
+				e.value = this.layer.getAllGeometries();
+				e.getTable();
+			},
 			onselect: (v, e) => {
 				//Brush handling
 				if (v === false)
@@ -81,6 +82,10 @@ global.UI_FeatureLayerWindow = class extends ve.Class {
 				
 				//Select value
 				e.value.selected = v;
+			},
+			table_options: {
+				disable_hide_columns: [0],
+				page_size: 10
 			}
 		});
 		

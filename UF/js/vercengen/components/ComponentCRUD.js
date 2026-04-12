@@ -11,8 +11,10 @@
  *     - `[n].special_function`: {@link function}(v:{@link any}) | {@link boolean} - Boolean determines whether to include result in tab. If this field does not exist, all elements are taken as valid.
  *   - `.filter_interface`: {@link ve.Interface} - The interface to provide for the filter.
  *   - `.hide_searchbar=false`: {@link boolean}
+ *   - `.onsearch`: {@link function}(v:{@link string}, e:{@link ve.CRUD})
  *   - `.onselect`: {@link function}(v:{@link boolean}, e:{ checkbox:{@link ve.Checkbox}, value:{@link any} })
  *   - `.searchbar_filters`: {@link Array}<{@link number>} - The column indices to target when filtering search results.
+ *   - `.searchbar_header_components`: {@link Array}<{@link ve.Component}>
  *   - `.searchbar_options`: {@link Object} - The options to pass to the {@link ve.SearchSelect} for the CRUD.
  *   - `.select_options`: {@link Object}
  *   - `.table_options`: {@link Object} - The options to pass to the {@link ve.Table} for the CRUD.
@@ -69,12 +71,26 @@ ve.CRUD = class extends ve.Component {
     //Declare local instance variables
     this.element.innerHTML = "";
     this.searchbar = new ve.SearchSelect({}, {
+      header_components_obj: {
+        filter_columns_when_searching: veButton(() => {
+          
+        }, {
+          name: "<icon>filter_alt</icon>",
+          tooltip: "Filter Columns When Searching",
+          style: {
+            display: "block",
+            marginLeft: "auto"
+          }
+        }),
+        ...this.options.searchbar_header_components
+      },
       hide_filter: true,
       onuserchange: (v, e) => {
         //Declare local instance variables
         let search_value = e.search_value;
         
         //Filter table by search_value
+        if (this.options.onsearch) this.options.onsearch(search_value, this);
         this.filterTable(search_value);
       },
       ...this.options.searchbar_options
