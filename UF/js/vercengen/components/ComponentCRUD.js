@@ -108,12 +108,14 @@ ve.CRUD = class extends ve.Component {
             }
           });
           
+          //Open this.filter_window
           this.filter_window = new ve.Window({
             ...components_obj
           }, {
             name: "Filter Search",
-            can_rename: false
-          })
+            can_rename: false,
+            width: "20rem"
+          });
         }, {
           name: "<icon>filter_alt</icon>",
           tooltip: "Filter Columns When Searching",
