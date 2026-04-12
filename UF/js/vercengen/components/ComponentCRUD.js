@@ -20,7 +20,8 @@
  *   - `.table_options`: {@link Object} - The options to pass to the {@link ve.Table} for the CRUD.
  *   
  * ##### Instance:
- * - `.page_menu`: {@link ve.PageMenu} - The PageMenu component responsible for containing CRUD sub-pages.
+ * - `.do_not_draw=false`: {@link boolean} - Whether to call .draw() when set v() is fired.
+ * - `.page_menu`: {@link ve.PageMenu} - The PageMenu component responsible for containing CRUD subpages.
  * - `.searchbar`: {@link ve.SearchSelect}
  * - `.table`: {@link ve.Table}
  * - `.table_array`: {@link Array}<{@link Array}<{@link any}>>
@@ -84,7 +85,7 @@ ve.CRUD = class extends ve.Component {
     
     //Set value and call draw
     this.value = value;
-    this.draw();
+    if (!this.options.do_not_draw) this.draw();
   }
   
   /**

@@ -22,6 +22,7 @@ global.UI_FeatureLayerWindow = class extends ve.Class {
 		let all_geometries = this.layer.getAllGeometries();
 		
 		this.CRUD = new ve.CRUD(all_geometries, {
+			do_not_draw: true,
 			header: ["Type", "Name", "Tags", "Actions"],
 			special_function: (local_geometry) => {
 				let local_array = [];
@@ -121,6 +122,7 @@ global.UI_FeatureLayerWindow = class extends ve.Class {
 		//Refresh this.CRUD
 		if (!this.CRUD) this.draw();
 		this.CRUD.value = all_geometries;
+		delete this.CRUD.options.do_not_draw; //do_not_draw flag to prevent double refresh
 		
 		if (!do_not_refresh) {
 			//Redraw this.CRUD completely
