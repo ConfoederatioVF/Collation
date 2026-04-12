@@ -20,33 +20,42 @@ naissance.FeatureLayer = class extends naissance.Feature {
 		
 		//Declare UI
 		this.interface = veInterface({
-			open_table: veButton(() => this.window.draw(), { name: "Edit Geometry Table", x: 0, y: 0 }),
-			show_geometries: veButton(() => {
-				let all_geometries = this.getAllGeometries();
-				let max_recommended = Math.returnSafeNumber(main.settings.hierarchy_recommended_max_geometries_in_layer, 100);
-				let showLayerGeometries = () => {
-					if (!this.metadata) this.metadata = {};
-					this.metadata.show_layer_geometries = true;
+			open_table: veButton(() => this.window.draw(), { name: "View Geometries", x: 0, y: 0 }),
+			show_features: veToggle(this.metadata?.show_layer_features, {
+				name: "Show Layer Features",
+				onuserchange: (v) => {
+					if (v === false) {
+						if (this.metadata) delete this.metadata.show_layer_features;
+					} else {
+						if (!this.metadata) this.metadata = {};
+						this.metadata.show_layer_features = true;
+					}
 					UI_LeftbarHierarchy.refresh();
-				};
-				
-				if (all_geometries.length > max_recommended) {
-					veConfirm(`This Layer contains ${String.formatNumber(all_geometries.length)} geometries. Are you sure you want to view its scene tree? (Recommended: ${String.formatNumber(max_recommended)})`, {
-						special_function: () => showLayerGeometries()
-					})
-				} else { showLayerGeometries(); }
-			}, {
-				name: "Show Geometries",
-				limit: () => !this.metadata?.show_layer_geometries,
-				x: 1, y: 0
+				}
 			}),
-			hide_geometries: veButton(() => {
-				if (this.metadata) delete this.metadata.show_layer_geometries;
-				UI_LeftbarHierarchy.refresh();
-			}, {
-				name: "Hide Geometries",
-				limit: () => this.metadata?.show_layer_geometries,
-				x: 1, y: 0
+			show_geometries: veToggle(this.metadata?.show_layer_geometries, {
+				name: "Show Layer Geometries",
+				onuserchange: (v, e) => {
+					let all_geometries = this.getAllGeometries();
+					let max_recommended = Math.returnSafeNumber(main.settings.hierarchy_recommended_max_geometries_in_layer, 100);
+					let showLayerGeometries = () => {
+						if (!this.metadata) this.metadata = {};
+						this.metadata.show_layer_geometries = true;
+						UI_LeftbarHierarchy.refresh();
+					};
+					
+					if (v === false) {
+						if (this.metadata) delete this.metadata.show_layer_geometries;
+						UI_LeftbarHierarchy.refresh();
+					} else {
+						if (all_geometries.length > max_recommended) {
+							veConfirm(`This Layer contains ${String.formatNumber(all_geometries.length)} geometries. Are you sure you want to view its scene tree? (Recommended: ${String.formatNumber(max_recommended)})`, {
+								onclose: () => e.v = false,
+								special_function: () => showLayerGeometries()
+							})
+						} else { showLayerGeometries(); }
+					}
+				}
 			}),
 			
 			layer_type: veSelect({
@@ -142,6 +151,7 @@ naissance.FeatureLayer = class extends naissance.Feature {
 		//Declare local instance variables
 		let all_geometries = this.getAllGeometries();
 		let hierarchy_obj = {};
+		let show_layer_features = (this.metadata?.show_layer_features) ? true : false;
 		
 		//Delete any self-references; already assigned entities with other .parent
 		for (let i = this.entities.length - 1; i >= 0; i--)
@@ -158,45 +168,46 @@ naissance.FeatureLayer = class extends naissance.Feature {
 			let local_key = `${local_entity.class_name}-${local_entity.id}`;
 			
 			//naissance.FeatureGroup, naissance.FeatureLayer handling
-			if (local_entity instanceof naissance.Feature && local_entity.drawHierarchyDatatype) {
-				//console.log(this, `is calling`, local_entity)
-				hierarchy_obj[local_key] = local_entity.drawHierarchyDatatype({ 
-					hide_geometries: (!this.metadata?.show_layer_geometries) 
-				});
-			} else {
-				//naissance.Feature generic handling
-				if (!this.metadata?.show_layer_features) continue;
-				if (local_entity instanceof naissance.Feature) {
-					hierarchy_obj[local_key] = new ve.HierarchyDatatype({
-						icon: new ve.HTML(`<icon>inventory_2</icon>`, {
-							tooltip: local_entity.class_name } )
-					}, { instance: local_entity });
-				}
-				
-				//naissance.Geometry generic handling
-				if (!this.metadata?.show_layer_geometries) continue;
-				if (local_entity instanceof naissance.Geometry) {
-					if (local_entity.drawHierarchyDatatype) {
-						hierarchy_obj[local_key] = local_entity.drawHierarchyDatatype();
-					} else { //[WIP] - Implement naissance.Geometry.name accessor
+			if (show_layer_features)
+				if (local_entity instanceof naissance.Feature && local_entity.drawHierarchyDatatype) {
+					//console.log(this, `is calling`, local_entity)
+					hierarchy_obj[local_key] = local_entity.drawHierarchyDatatype({
+						hide_features: (!show_layer_features),
+						hide_geometries: (!this.metadata?.show_layer_geometries),
+					});
+				} else {
+					//naissance.Feature generic handling
+					if (local_entity instanceof naissance.Feature) {
 						hierarchy_obj[local_key] = new ve.HierarchyDatatype({
-							icon: new ve.HTML(`<icon>shapes</icon>`, {
+							icon: new ve.HTML(`<icon>inventory_2</icon>`, {
 								tooltip: local_entity.class_name } )
-						}, {
-							instance: local_entity,
-							name: local_entity.name,
-							name_options: {
-								onprogramchange: () => {
-									this.drawHierarchyDatatype();
-								},
-								onuserchange: (v) => {
-									local_entity.name = v;
+						}, { instance: local_entity });
+					}
+					
+					//naissance.Geometry generic handling
+					if (!this.metadata?.show_layer_geometries) continue;
+					if (local_entity instanceof naissance.Geometry) {
+						if (local_entity.drawHierarchyDatatype) {
+							hierarchy_obj[local_key] = local_entity.drawHierarchyDatatype();
+						} else { //[WIP] - Implement naissance.Geometry.name accessor
+							hierarchy_obj[local_key] = new ve.HierarchyDatatype({
+								icon: new ve.HTML(`<icon>shapes</icon>`, {
+									tooltip: local_entity.class_name } )
+							}, {
+								instance: local_entity,
+								name: local_entity.name,
+								name_options: {
+									onprogramchange: () => {
+										this.drawHierarchyDatatype();
+									},
+									onuserchange: (v) => {
+										local_entity.name = v;
+									}
 								}
-							}
-						});
+							});
+						}
 					}
 				}
-			}
 		}
 		
 		//Return statement
