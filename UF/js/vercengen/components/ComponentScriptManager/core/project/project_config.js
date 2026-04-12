@@ -24,7 +24,7 @@
 	ve.ScriptManager._loadConfig = function (arg0_vesm_folder) {
     //Convert from parameters
     let vesm_folder = arg0_vesm_folder;
-			if (!vesm_folder) vesm_folder = (this._settings?.project_folder) ? 
+			if (!vesm_folder) vesm_folder = (this._settings?.project_folder && this._settings.project_folder !== "none") ? 
 				this._settings.project_folder : process.cwd();
 
     //Try to load the local .ve-sm to determine the actual project path

@@ -36,8 +36,11 @@ ve.CRUD = class extends ve.Component {
     //Initialise options
     if (!options.filters) options.filters = [{ name: "All" }];
     let new_header = ["Selected", "Index"];
+      this.head_index = 1; //Head index of the header
       if (options.header) new_header = new_header.concat(options.header);
       options.header = new_header;
+      options.searchbar_filters = (options.searchbar_filters) ? 
+        Array.toArray(options.searchbar_filters) : [];
     
     //Declare local instance variables
     this.element = document.createElement("div");
@@ -74,8 +77,39 @@ ve.CRUD = class extends ve.Component {
       header_components_obj: {
         filter_columns_when_searching: veButton(() => {
           if (this.filter_window) this.filter_window.close();
+          
+          //Declare local instance variables
+          let components_obj = {};
+          
+          //Iterate over all categories in header and show them for searchbar options
+          for (let i = this.head_index; i < this.options.header.length; i++)
+            components_obj[i] = new ve.Checkbox(this.options.searchbar_filters.includes(i), {
+              name: this.options.header[i],
+              onuserchange: (v) => {
+                if (v === true) {
+                  if (!this.options.searchbar_filters.includes(i))
+                    this.options.searchbar_filters.push(i);
+                } else {
+                  //Iterate over this.options.searchbar_filteres and splice it
+                  for (let x = this.options.searchbar_filters.length - 1; x >= 0; x--)
+                    if (this.options.searchbar_filters[x] === i)
+                      this.options.searchbar_filters.splice(x, 1);
+                }
+                
+                this.filterTable(this.searchbar.search_value);
+              }
+            });
+          
+          components_obj.mirror_visible_columns = new ve.Toggle(this.options.mirror_visible_columns, {
+            name: "Mirror Visible Columns",
+            onuserchange: (v) => {
+              this.options.mirror_visible_columns = v;
+              this.filterTable(this.searchbar.search_value);
+            }
+          });
+          
           this.filter_window = new ve.Window({
-            
+            ...components_obj
           }, {
             name: "Filter Search",
             can_rename: false
@@ -131,11 +165,19 @@ ve.CRUD = class extends ve.Component {
     }
     
     //Set searchbar_columns
-    if (!this.options.searchbar_filters || this.options.searchbar_filters?.length === 0) {
-      for (let i = 0; i < this.options.header.length; i++)
-        searchbar_columns.push(i);
+    if (this.options.mirror_visible_columns) {
+      //Iterate over all columns in header and push anything not in hide_columns
+      for (let i = 0; i < this.options.header.length; i++) try {
+        if (!this.table.options.hide_columns.includes(i))
+          searchbar_columns.push(i);
+      } catch (e) {}
     } else {
-      searchbar_columns = this.options.searchbar_filters;
+      if (!this.options.searchbar_filters || this.options.searchbar_filters?.length === 0) {
+        for (let i = 0; i < this.options.header.length; i++)
+          searchbar_columns.push(i);
+      } else {
+        searchbar_columns = this.options.searchbar_filters;
+      }
     }
     
     //Push header to filtered_table_array first
@@ -147,7 +189,7 @@ ve.CRUD = class extends ve.Component {
       
       //Iterate over all searchbar_columns in this.table_array for filters to see if "data-value" or .innerText has a valid substring
       for (let x = 0; x < searchbar_columns.length; x++) {
-        let local_cell = this.table_array[i][x];
+        let local_cell = this.table_array[i][searchbar_columns[x]];
         let local_values = [];
         
         if (local_cell instanceof HTMLElement) {
