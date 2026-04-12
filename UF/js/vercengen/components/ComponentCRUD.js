@@ -181,11 +181,16 @@ ve.CRUD = class extends ve.Component {
           },
           onuserchange: (v, e) => {
             e.element.setAttribute("data-value", String(v));
-            this.value[i].selected = v;
-            if (this.options.onselect) this.options.onselect(v, {
-              checkbox: e,
-              value: this.value[i]
-            });
+            
+            if (this.options.onselect) {
+              this.options.onselect(v, {
+                checkbox: e,
+                value: this.value[i]
+              });
+            } else {
+              this.value[i].selected = v;
+            }
+            this.redrawSelections();
           },
           ...this.options.select_options
         });
@@ -230,4 +235,14 @@ ve.CRUD = class extends ve.Component {
       local_checkbox.element.setAttribute("data-value", is_selected);
     });
   }
+};
+
+//Functional binding
+
+/**
+ * @returns {ve.CRUD}
+ */
+veCRUD = function () {
+  //Return statement
+  return new ve.CRUD(...arguments);
 };

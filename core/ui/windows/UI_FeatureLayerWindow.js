@@ -54,7 +54,6 @@ global.UI_FeatureLayerWindow = class extends ve.Class {
 				let brush_button = veButton((v, e) => {
 					if (main.brush.selected_geometry?.id !== e.element.geometry?.id) {
 						main.brush.selected_geometry = e.element.geometry;
-						local_geometry.selected = true;
 						this.CRUD.redrawSelections();
 					}
 				}, {
@@ -73,6 +72,16 @@ global.UI_FeatureLayerWindow = class extends ve.Class {
 				disable_hide_columns: [0],
 				page_size: 10
 			},
+			
+			onselect: (v, e) => {
+				//Brush handling
+				if (v === false)
+					if (main.brush.selected_geometry?.id === e.value?.id)
+						main.brush.selected_geometry = undefined;
+				
+				//Select value
+				e.value.selected = v;
+			}
 		});
 		
 		this.interface = veInterface({ 
