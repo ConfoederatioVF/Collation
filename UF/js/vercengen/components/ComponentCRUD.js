@@ -100,6 +100,8 @@ ve.CRUD = class extends ve.Component {
     this.element.innerHTML = "";
     this.page_obj = {};
     
+    let last_filter;
+
     if (!this.searchbar) this.searchbar = new ve.SearchSelect({}, {
       header_components_obj: {
         filter_columns_when_searching: veButton(() => {
@@ -164,7 +166,9 @@ ve.CRUD = class extends ve.Component {
       },
       ...this.options.searchbar_options
     });
-    this.table_array = this.getTable();
+
+    //Initialize table with header only; refresh logic will populate data
+    this.table_array = [this.options.header];
     this.table = new ve.Table(this.table_array, {
       disable_hide_columns: [0],
       ...this.options.table_options
@@ -174,7 +178,6 @@ ve.CRUD = class extends ve.Component {
     for (let i = 0; i < this.options._filters.length; i++) {
       let local_filter = this.options._filters[i];
       
-      //Set this.page_obj
       this.page_obj[local_filter.name] = {
         name: local_filter.name,
         components_obj: (i === 0) ? {
@@ -184,39 +187,39 @@ ve.CRUD = class extends ve.Component {
       };
     }
     
+    //Define localized update logic to prevent double execution
+    let updateView = (v, e) => {
+      if (last_filter === v) return;
+      last_filter = v;
+
+      //Iterate over all this.options._filters to fetch this.filter_obj
+      for (let i = 0; i < this.options._filters.length; i++) {
+        let local_filter = this.options._filters[i];
+        
+        if (local_filter.name === v) {
+          this.filter_obj = local_filter;
+          break;
+        }
+      }
+      
+      //Fetch new data and refresh table display
+      this.table_array = this.getTable(this.filter_obj?.special_function);
+      this.filterTable(this.searchbar.search_value, { do_not_refresh: true });
+      
+      this.searchbar.bind(e.element);
+      this.table.bind(e.element);
+    };
+
     //Preserve old_starting_page if possible
     let old_starting_page = (this.page_menu) ? this.page_menu.v : undefined;
     this.page_menu = new ve.PageMenu(this.page_obj, {
-      onuserchange: (v, e) => {
-        //Declare local instance variables
-        let current_page_el = e.interfaces_obj[v].element;
-        
-        //Iterate over all this.options._filters to fetch this.filter_obj
-        for (let i = 0; i < this.options._filters.length; i++) {
-          let local_filter = this.options._filters[i];
-          
-          if (local_filter.name === v) {
-            this.filter_obj = local_filter;
-            break;
-          }
-        }
-        
-        //Redraw table; then bind to current page
-        this.table_array = this.getTable(this.filter_obj?.special_function);
-        this.table.v = this.table_array;
-        this.filterTable(this.searchbar.search_value);
-        
-        this.searchbar.bind(current_page_el);
-        this.table.bind(current_page_el);
-      },
+      onuserchange: (v, e) => updateView(v, e.interfaces_obj[v]),
       starting_page: old_starting_page
     });
-    //Bind to starting this.page_menu page
-    let starting_page_el = this.page_menu.interfaces_obj[this.page_menu.v].element;
-    
-    this.searchbar.bind(starting_page_el);
-    this.table.bind(starting_page_el);
-    
+
+    //Initial draw call
+    let initial_page_name = this.page_menu.v;
+    updateView(initial_page_name, this.page_menu.interfaces_obj[initial_page_name]);
     
     this.page_menu.bind(this.element);
   }
@@ -229,13 +232,16 @@ ve.CRUD = class extends ve.Component {
    * @memberof ve.Component.ve.CRUD
    * 
    * @param {string} [arg0_search_string=""]
+   * @param {Object} [arg1_options]
+   *  @param {boolean} [arg1_options.do_not_refresh=false]
    * 
    * @returns {any[]}
    */
-  filterTable (arg0_search_string) {
+  filterTable (arg0_search_string, arg1_options) {
     //Convert from parameters
     let search_string = (arg0_search_string) ? arg0_search_string : "";
       search_string = search_string.trim().toLowerCase();
+    let options = (arg1_options) ? arg1_options : {};
     
     //Declare local instance variables
     let filtered_table_array = [];
@@ -243,7 +249,8 @@ ve.CRUD = class extends ve.Component {
     
     //Internal guard clause if search_string is empty
     if (search_string.length === 0) {
-      filtered_table_array = this.getTable(this.filter_obj?.special_function);
+      filtered_table_array = (!options.do_not_refresh) ? 
+        this.getTable(this.filter_obj?.special_function) : this.table_array;
       this.table.v = filtered_table_array;
       
       //Return statement
