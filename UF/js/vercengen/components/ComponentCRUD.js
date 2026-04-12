@@ -316,6 +316,15 @@ ve.CRUD = class extends ve.Component {
     return filtered_table_array;
   }
   
+  /**
+   * Returns all internal filters and sets them to `this.options._filters`.
+   * - Method of: {@link ve.CRUD}
+   * 
+   * @alias getFilters
+   * @memberof ve.Component.ve.CRUD
+   * 
+   * @returns {{ name: string, special_function: function|undefined }[]}
+   */
   getFilters () {
     //Declare local instance variables
     let new_filters = [{ name: "All" }];
