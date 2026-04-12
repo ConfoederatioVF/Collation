@@ -54,7 +54,7 @@ ve.Range = class extends ve.Component {
 		let html_string = [];
 		html_string.push(`<span id = "name"></span>`);
 		html_string.push(`<input type = "range"${HTML.objectToAttributes(attributes)}>`);
-		html_string.push(`<input id = "value-label" ${(this.options.disable_number_input) ? "disabled" : ""} type = "number" max = "${attributes.max}" min = "${attributes.min}" value = "${this.value}" style = "">`);
+		html_string.push(`<input id = "value-label" ${(this.options.disable_number_input) ? "disabled" : ""} type = "number" max = "${attributes.max}" min = "${attributes.min}" step = "${attributes.step}" value = "${this.value}" style = "">`);
 		
 		//Populate element and initialise handlers
 		this.element.innerHTML = html_string.join("");

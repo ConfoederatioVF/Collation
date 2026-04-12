@@ -213,6 +213,7 @@ ve.CRUD = class extends ve.Component {
     //Preserve old_starting_page if possible
     let old_starting_page = (this.page_menu) ? this.page_menu.v : undefined;
     this.page_menu = new ve.PageMenu(this.page_obj, {
+      do_not_wrap: true,
       onuserchange: (v, e) => updateView(v, e.interfaces_obj[v]),
       starting_page: old_starting_page
     });
