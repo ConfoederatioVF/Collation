@@ -44,6 +44,7 @@ ve.Range = class extends ve.Component {
 			step: (options.step !== undefined) ? options.step : 0.01,
 			...options.attributes
 		};
+		this.attributes = attributes;
 		this.element = document.createElement("div");
 			this.element.setAttribute("component", "ve-range");
 			this.element.instance = this;
@@ -102,6 +103,10 @@ ve.Range = class extends ve.Component {
 	set v (arg0_value) {
 		//Convert from parameters
 		let value = arg0_value;
+		
+		//this.attributes.max; this.attributes.min clamping
+		if (value > this.attributes.max) value = this.attributes.max;
+		if (value < this.attributes.min) value = this.attributes.min;
 		
 		//Set value and update UI
 		this.value = value;
