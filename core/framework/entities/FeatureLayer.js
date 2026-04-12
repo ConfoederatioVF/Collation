@@ -20,7 +20,7 @@ naissance.FeatureLayer = class extends naissance.Feature {
 		
 		//Declare UI
 		this.interface = veInterface({
-			open_table: veButton(() => this.window.draw(), { name: "View Geometries", x: 0, y: 0 }),
+			open_table: veButton(() => this.window.refresh(), { name: "View Geometries", x: 0, y: 0 }),
 			show_features: veToggle(this.metadata?.show_layer_features, {
 				name: "Show Layer Features",
 				onuserchange: (v) => {

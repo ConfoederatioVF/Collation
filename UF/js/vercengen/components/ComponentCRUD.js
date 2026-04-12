@@ -34,9 +34,7 @@ ve.CRUD = class extends ve.Component {
       super(options);
     
     //Initialise options
-    let new_filters = [{ name: "All" }];
-      if (options.filters) new_filters = new_filters.concat(options.filters);
-      options.filters = new_filters;
+    options._filters = this.getFilters();
     let new_header = ["Selected", "Index"];
       this.head_index = 1; //Head index of the header
       if (options.header) new_header = new_header.concat(options.header);
@@ -101,8 +99,7 @@ ve.CRUD = class extends ve.Component {
     this.element.innerHTML = "";
     this.page_obj = {};
     
-    //[WIP] - LEGACY HANDLER
-    this.searchbar = new ve.SearchSelect({}, {
+    if (!this.searchbar) this.searchbar = new ve.SearchSelect({}, {
       header_components_obj: {
         filter_columns_when_searching: veButton(() => {
           if (this.filter_window) this.filter_window.close();
@@ -172,9 +169,9 @@ ve.CRUD = class extends ve.Component {
       ...this.options.table_options
     });
     
-    //Iterate over this.options.filters and check for .name, .special_function
-    for (let i = 0; i < this.options.filters.length; i++) {
-      let local_filter = this.options.filters[i];
+    //Iterate over this.options._filters and check for .name, .special_function
+    for (let i = 0; i < this.options._filters.length; i++) {
+      let local_filter = this.options._filters[i];
       
       //Set this.page_obj
       this.page_obj[local_filter.name] = {
@@ -186,11 +183,16 @@ ve.CRUD = class extends ve.Component {
       };
     }
     
+    //Preserve old_starting_page if possible
+    let old_starting_page = (this.page_menu) ? this.page_menu.v : undefined;
     this.page_menu = new ve.PageMenu(this.page_obj, {
       onuserchange: (v, e) => {
-        //Iterate over all this.options.filters to fetch this.filter_obj
-        for (let i = 0; i < this.options.filters.length; i++) {
-          let local_filter = this.options.filters[i];
+        //Declare local instance variables
+        let current_page_el = e.interfaces_obj[v].element;
+        
+        //Iterate over all this.options._filters to fetch this.filter_obj
+        for (let i = 0; i < this.options._filters.length; i++) {
+          let local_filter = this.options._filters[i];
           
           if (local_filter.name === v) {
             this.filter_obj = local_filter;
@@ -203,10 +205,18 @@ ve.CRUD = class extends ve.Component {
         this.table.v = this.table_array;
         this.filterTable(this.searchbar.search_value);
         
-        this.searchbar.bind(e.interfaces_obj[v].element);
-        this.table.bind(e.interfaces_obj[v].element);
-      }
+        this.searchbar.bind(current_page_el);
+        this.table.bind(current_page_el);
+      },
+      starting_page: old_starting_page
     });
+    //Bind to starting this.page_menu page
+    let starting_page_el = this.page_menu.interfaces_obj[this.page_menu.v].element;
+    
+    this.searchbar.bind(starting_page_el);
+    this.table.bind(starting_page_el);
+    
+    
     this.page_menu.bind(this.element);
   }
   
@@ -295,6 +305,18 @@ ve.CRUD = class extends ve.Component {
     
     //Return statement
     return filtered_table_array;
+  }
+  
+  getFilters () {
+    //Declare local instance variables
+    let new_filters = [{ name: "All" }];
+    
+    //Concatenate new_filters
+    if (this.options.filters) new_filters = new_filters.concat(this.options.filters);
+    this.options._filters = new_filters; //Set internal cache _filters
+    
+    //Return statement
+    return new_filters;
   }
   
   /**

@@ -69,15 +69,7 @@ global.UI_FeatureLayerWindow = class extends ve.Class {
 				return local_array;
 			},
 			
-			filters: [{
-				name: "GeometryPolygon",
-				special_function: (v) => (v.name.startsWith("A"))
-			}],
-			onsearch: (v, e) => {
-				//Refresh table
-				e.value = this.layer.getAllGeometries();
-				e.getTable();
-			},
+			onsearch: () => this.refresh(),
 			onselect: (v, e) => {
 				//Brush handling
 				if (v === false)
@@ -86,6 +78,15 @@ global.UI_FeatureLayerWindow = class extends ve.Class {
 				
 				//Select value
 				e.value.selected = v;
+			},
+			searchbar_header_components: {
+				refresh: veButton(() => this.refresh(), { 
+					name: "<icon>refresh</icon>",
+					tooltip: "Refresh",
+					style: {
+						marginLeft: "var(--padding)"
+					}
+				})
 			},
 			table_options: {
 				disable_hide_columns: [0],
@@ -108,5 +109,40 @@ global.UI_FeatureLayerWindow = class extends ve.Class {
 		
 		// Return statement
 		return this.interface;
+	}
+	
+	refresh (arg0_do_not_refresh) {
+		//Convert from parameters
+		let do_not_refresh = arg0_do_not_refresh;
+		
+		//Declare local instance variables
+		let all_geometries = this.layer.getAllGeometries();
+		
+		//Refresh this.CRUD
+		if (!this.CRUD) this.draw();
+		this.CRUD.value = all_geometries;
+		
+		if (!do_not_refresh) {
+			//Redraw this.CRUD completely
+			let filters_array = [];
+			let unique_classes = [];
+			
+			//Populate filters_array and pass it to this.CRUD.options.filters
+			for (let i = 0; i < all_geometries.length; i++)
+				if (all_geometries[i].class_name)
+					if (!unique_classes.includes(all_geometries[i].class_name))
+						unique_classes.push(all_geometries[i].class_name);
+			for (let i = 0; i < unique_classes.length; i++)
+				filters_array.push({
+					name: unique_classes[i],
+					special_function: (v) => (v.class_name === unique_classes[i])
+				});
+			
+			this.CRUD.options.filters = filters_array;
+			this.CRUD.getFilters();
+			this.CRUD.draw();
+		} else {
+			this.CRUD.getTable();
+		}
 	}
 };
