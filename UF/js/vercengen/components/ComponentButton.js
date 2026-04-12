@@ -26,6 +26,9 @@ ve.Button = class extends ve.Component {
 		//Initialise options
 		options.attributes = (options.attributes) ? options.attributes : {};
 		if (options.name === undefined) options.name = loc("ve.registry.localisation.Button_confirm");
+		if (options.name.startsWith("<icon>") && !options.name.endsWith(">")) 
+			//Add default padding for text after <icon>
+			options.name += "&nbsp;&nbsp;";
 		
 		//Declare local instance variables
 		this.element = document.createElement("div");
