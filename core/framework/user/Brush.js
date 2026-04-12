@@ -132,6 +132,7 @@ naissance.Brush = class extends ve.Class {
 			from_geometry: new UI_GeometryDatalist(undefined, {
 				name: "From Geometry",
 				binding: "this.from_geometry_id",
+        filter_types: ["GeometryLine", "GeometryPolygon"],
 				limit: () => this.mode === "node_transfer",
 				width: 2,
 				x: 0, y: 3
@@ -199,6 +200,8 @@ naissance.Brush = class extends ve.Class {
 		this._selected_geometry = v;
 		if (old_selected_geometry && old_selected_geometry.draw) 
 			old_selected_geometry.draw(); //Update draw
+    if (this._selected_geometry && this._selected_geometry.draw)
+      this._selected_geometry.draw(); //Update draw
 	}
 	
 	getAddLine (arg0_geometry) {
@@ -385,7 +388,7 @@ naissance.Brush = class extends ve.Class {
 		
 		//Context menu handler
 		map.on("contextmenu", (e) => {
-			main.interfaces.ui_map_context_menu = new UI_MapContextMenu();
+      if (!this.disabled) main.interfaces.ui_map_context_menu = new UI_MapContextMenu();
 		});
 		
 		//Cursor handler

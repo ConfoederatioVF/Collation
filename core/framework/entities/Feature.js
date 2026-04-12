@@ -98,6 +98,60 @@ naissance.Feature = class extends ve.Class {
 		};
 	}
 	
+	/**
+	 * Returns an array of all {@link naissance.Geometry} instances housed in the FeatureLayer.
+	 *
+	 * @param {naissance.Feature} [arg0_object]
+	 * @param {Object} [arg1_options]
+	 *  @param {naissance.Feature[]} [arg1_options.owners]
+	 *
+	 * @returns {naissance.Geometry[]}
+	 */
+	getAllGeometries (arg0_object, arg1_options) {
+		//Convert from parameters
+		let object = (arg0_object) ? arg0_object : this;
+		let options = (arg1_options) ? arg1_options : {};
+		
+		//Initialise options
+		if (!options.owners) options.owners = [];
+		
+		//Declare local instance variables
+		let all_entities = [];
+		let owner_names = [];
+		
+		//Iterate over options.owners and fetch their .name
+		for (let i = 0; i < options.owners.length; i++) {
+			let local_name = options.owners[i]?.name;
+			
+			if (local_name) owner_names.push(local_name);
+		}
+		
+		//Iterate over all .entities and check if they have .entities
+		if (object?.entities)
+			for (let i = 0; i < object.entities.length; i++)
+				if (object.entities[i] instanceof naissance.Geometry) {
+					let local_entity = object.entities[i];
+					
+					//Edit metadata
+					if (!local_entity.metadata) local_entity.metadata = {};
+					if (!local_entity.metadata.tags) local_entity.metadata.tags = [];
+					
+					//Iterate over all owner_names and ensure they inherit the proper tags if they don't exist, i.e. convert groups to tags
+					for (let x = 0; x < owner_names.length; x++)
+						if (!local_entity.metadata.tags.includes(owner_names[x]))
+							local_entity.metadata.tags.push(owner_names[x]);
+					
+					all_entities.push(object.entities[i]);
+				} else if (object.entities[i].entities) {
+					all_entities = all_entities.concat(this.getAllGeometries(object.entities[i], {
+						owners: options.owners.concat([object.entities[i]])
+					}));
+				}
+		
+		//Return statement
+		return all_entities;
+	}
+	
 	hide () {
 		//Declare local instance variables
 		this._is_visible = false;
@@ -110,21 +164,30 @@ naissance.Feature = class extends ve.Class {
 	}
 	
 	remove () {
-		//Remove from local_feature.entities
-		for (let i = 0; i < naissance.Feature.instances.length; i++) {
-			let local_feature = naissance.Feature.instances[i];
-			
-			if (local_feature.hide) local_feature.hide();
-			if (local_feature.entities)
-				for (let x = 0; x < local_feature.entities.length; x++)
-					if (local_feature.entities[x].id === this.id)
-						naissance.Feature.instances.splice(x, 1);
-		}
+		//Declare local instance variables
+		let delete_keys = ["_entities", "entities"]
 		
 		//Remove from naissance.Feature.instances
-		for (let i = 0; i < naissance.Feature.instances.length; i++)
-			if (naissance.Feature.instances[i].id === this.id)
+		for (let i = naissance.Feature.instances.length - 1; i >= 0; i--) {
+			let local_feature = naissance.Feature.instances[i];
+			
+			if (local_feature.id === this.id)
 				naissance.Feature.instances.splice(i, 1);
+			if (local_feature.entities)
+				//Iterate over delete_keys and local_feature.entities.length to ensure clean removal
+				for (let x = 0; x < delete_keys.length; x++)
+					if (local_feature[delete_keys[x]])
+						for (let y = local_feature[delete_keys[x]].length - 1; y >= 0; y--)
+							if (local_feature[delete_keys[x]][y].id === this.id)
+								local_feature[delete_keys[x]].splice(x, 1);
+		}
+		
+		//Remove from local_feature.entities
+		if (this.hide) this.hide();
+		if (this.entities)
+			for (let x = 0; x < this.entities.length; x++)
+				if (this.entities[x].id === this.id)
+					naissance.Feature.instances.splice(x, 1);
 		
 		//Rerender deleted feature and remove it from the map
 		if (this.draw) this.draw();
@@ -151,8 +214,10 @@ naissance.Feature = class extends ve.Class {
 		//Parse commands for feature_obj
 		if (feature_obj) {
 			//delete_feature
-			if (json.delete_feature === true)
+			if (json.delete_feature === true) {
 				feature_obj.remove();
+				return;
+			}
 			
 			//set_name
 			if (typeof json.set_name === "string")

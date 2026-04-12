@@ -7,8 +7,12 @@ naissance.FeatureLayer = class extends naissance.Feature {
 		super();
 		this.cannot_nest_self = true;
 		this.class_name = "FeatureLayer";
+		/**
+		 * @type {Array<naissance.Feature|naissance.Geometry>}
+		 */
 		this.entities = (arg0_entities) ? arg0_entities : [];
 		this.options = (arg1_options) ? arg1_options : {};
+		this.window = new UI_FeatureLayerWindow(this);
 		
 		//Declare local instance variables
 		this._name = "New Layer";
@@ -16,6 +20,44 @@ naissance.FeatureLayer = class extends naissance.Feature {
 		
 		//Declare UI
 		this.interface = veInterface({
+			open_table: veButton(() => this.window.refresh(), { name: "View Geometries", x: 0, y: 0 }),
+			show_features: veToggle(this.metadata?.show_layer_features, {
+				name: "Show Layer Features",
+				onuserchange: (v) => {
+					if (v === false) {
+						if (this.metadata) delete this.metadata.show_layer_features;
+					} else {
+						if (!this.metadata) this.metadata = {};
+						this.metadata.show_layer_features = true;
+					}
+					UI_LeftbarHierarchy.refresh();
+				}
+			}),
+			show_geometries: veToggle(this.metadata?.show_layer_geometries, {
+				name: "Show Layer Geometries",
+				onuserchange: (v, e) => {
+					let all_geometries = this.getAllGeometries();
+					let max_recommended = Math.returnSafeNumber(main.settings.hierarchy_recommended_max_geometries_in_layer, 100);
+					let showLayerGeometries = () => {
+						if (!this.metadata) this.metadata = {};
+						this.metadata.show_layer_geometries = true;
+						UI_LeftbarHierarchy.refresh();
+					};
+					
+					if (v === false) {
+						if (this.metadata) delete this.metadata.show_layer_geometries;
+						UI_LeftbarHierarchy.refresh();
+					} else {
+						if (all_geometries.length > max_recommended) {
+							veConfirm(`This Layer contains ${String.formatNumber(all_geometries.length)} geometries. Are you sure you want to view its scene tree? (Recommended: ${String.formatNumber(max_recommended)})`, {
+								onclose: () => e.v = false,
+								special_function: () => showLayerGeometries()
+							})
+						} else { showLayerGeometries(); }
+					}
+				}
+			}),
+			
 			layer_type: veSelect({
 				default: {
 					name: "Default"
@@ -107,7 +149,9 @@ naissance.FeatureLayer = class extends naissance.Feature {
 	
 	drawHierarchyDatatype () {
 		//Declare local instance variables
+		let all_geometries = this.getAllGeometries();
 		let hierarchy_obj = {};
+		let show_layer_features = (this.metadata?.show_layer_features) ? true : false;
 		
 		//Delete any self-references; already assigned entities with other .parent
 		for (let i = this.entities.length - 1; i >= 0; i--)
@@ -124,40 +168,46 @@ naissance.FeatureLayer = class extends naissance.Feature {
 			let local_key = `${local_entity.class_name}-${local_entity.id}`;
 			
 			//naissance.FeatureGroup, naissance.FeatureLayer handling
-			if (local_entity instanceof naissance.Feature && local_entity.drawHierarchyDatatype) {
-				//console.log(this, `is calling`, local_entity)
-				hierarchy_obj[local_key] = local_entity.drawHierarchyDatatype();
-			} else {
-				//naissance.Feature generic handling
-				if (local_entity instanceof naissance.Feature) {
-					hierarchy_obj[local_key] = new ve.HierarchyDatatype({
-						icon: new ve.HTML(`<icon>inventory_2</icon>`, {
-							tooltip: local_entity.class_name } )
-					}, { instance: local_entity });
-				}
-				//naissance.Geometry generic handling
-				if (local_entity instanceof naissance.Geometry) {
-					if (local_entity.drawHierarchyDatatype) {
-						hierarchy_obj[local_key] = local_entity.drawHierarchyDatatype();
-					} else { //[WIP] - Implement naissance.Geometry.name accessor
+			if (show_layer_features)
+				if (local_entity instanceof naissance.Feature && local_entity.drawHierarchyDatatype) {
+					//console.log(this, `is calling`, local_entity)
+					hierarchy_obj[local_key] = local_entity.drawHierarchyDatatype({
+						hide_features: (!show_layer_features),
+						hide_geometries: (!this.metadata?.show_layer_geometries),
+					});
+				} else {
+					//naissance.Feature generic handling
+					if (local_entity instanceof naissance.Feature) {
 						hierarchy_obj[local_key] = new ve.HierarchyDatatype({
-							icon: new ve.HTML(`<icon>shapes</icon>`, {
+							icon: new ve.HTML(`<icon>inventory_2</icon>`, {
 								tooltip: local_entity.class_name } )
-						}, {
-							instance: local_entity,
-							name: local_entity.name,
-							name_options: {
-								onprogramchange: () => {
-									this.drawHierarchyDatatype();
-								},
-								onuserchange: (v) => {
-									local_entity.name = v;
+						}, { instance: local_entity });
+					}
+					
+					//naissance.Geometry generic handling
+					if (!this.metadata?.show_layer_geometries) continue;
+					if (local_entity instanceof naissance.Geometry) {
+						if (local_entity.drawHierarchyDatatype) {
+							hierarchy_obj[local_key] = local_entity.drawHierarchyDatatype();
+						} else { //[WIP] - Implement naissance.Geometry.name accessor
+							hierarchy_obj[local_key] = new ve.HierarchyDatatype({
+								icon: new ve.HTML(`<icon>shapes</icon>`, {
+									tooltip: local_entity.class_name } )
+							}, {
+								instance: local_entity,
+								name: local_entity.name,
+								name_options: {
+									onprogramchange: () => {
+										this.drawHierarchyDatatype();
+									},
+									onuserchange: (v) => {
+										local_entity.name = v;
+									}
 								}
-							}
-						});
+							});
+						}
 					}
 				}
-			}
 		}
 		
 		//Return statement
@@ -166,6 +216,7 @@ naissance.FeatureLayer = class extends naissance.Feature {
 				tooltip: `FeatureLayer - Type: ${this.type}`
 			}),
 			...super.drawHierarchyDatatypeGenerics(),
+			polity_number: veHTML(`(${String.formatNumber(all_geometries.length)})`),
 			edit: veButton(() => {
 				super.open("instance", {
 					id: this.id,
@@ -261,26 +312,6 @@ naissance.FeatureLayer = class extends naissance.Feature {
 				return true;
 	}
 	
-	getAllGeometries (arg0_object) {
-		//Convert from parameters
-		let object = (arg0_object) ? arg0_object : this;
-		
-		//Declare local instance variables
-		let all_entities = [];
-		
-		//Iterate over all .entities and check if they have .entities
-		if (object.entities)
-			for (let i = 0; i < object.entities.length; i++)
-				if (object.entities[i] instanceof naissance.Geometry) {
-					all_entities.push(object.entities[i]);
-				} else if (object.entities[i].entities) {
-					all_entities = all_entities.concat(this.getAllGeometries(object.entities[i]));
-				}
-		
-		//Return statement
-		return all_entities;
-	}
-	
 	removeEntity (arg0_naissance_obj) {
 		//Convert from parameters
 		let naissance_obj = arg0_naissance_obj;
@@ -311,11 +342,13 @@ naissance.FeatureLayer = class extends naissance.Feature {
 		//Return statement
 		return JSON.stringify({
 			id: this.id,
-			is_collapsed: this.is_collapsed,
 			name: this._name,
+			
 			entities: entity_ids,
+			is_collapsed: this.is_collapsed,
+			metadata: this.metadata,
+			options: this.options,
 			type: this._type,
-			options: this.options
 		});
 	}
 	

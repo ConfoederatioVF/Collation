@@ -34,8 +34,12 @@ naissance.FeatureGroup = class extends naissance.Feature {
 		}
 	}
 	
-	drawHierarchyDatatype () {
+	drawHierarchyDatatype (arg0_options) {
+		//Convert from parameters
+		let options = (arg0_options) ? arg0_options : {};
+		
 		//Declare local instance variables
+		let all_geometries = this.getAllGeometries();
 		let hierarchy_obj = {};
 		
 		//Delete any self-references; already assigned entities with other .parent
@@ -55,9 +59,10 @@ naissance.FeatureGroup = class extends naissance.Feature {
 				
 				//naissance.FeatureGroup, naissance.FeatureLayer handling
 				if (local_entity instanceof naissance.Feature && local_entity.drawHierarchyDatatype) {
-					hierarchy_obj[local_key] = local_entity.drawHierarchyDatatype();
+					hierarchy_obj[local_key] = local_entity.drawHierarchyDatatype(options);
 				} else {
 					//naissance.Feature generic handling
+					if (options.hide_features) continue; //Internal guard clause if features are meant to be hidden
 					if (local_entity instanceof naissance.Feature) {
 						hierarchy_obj[local_key] = new ve.HierarchyDatatype({
 							icon: new ve.HTML(`<icon>inventory_2</icon>`, {
@@ -65,6 +70,7 @@ naissance.FeatureGroup = class extends naissance.Feature {
 						}, { instance: local_entity });
 					}
 					//naissance.Geometry generic handling
+					if (options.hide_geometries) continue; //Internal guard clause if geometries are meant to be hidden
 					if (local_entity instanceof naissance.Geometry) {
 						if (local_entity.drawHierarchyDatatype) {
 							hierarchy_obj[local_key] = local_entity.drawHierarchyDatatype();
@@ -93,6 +99,8 @@ naissance.FeatureGroup = class extends naissance.Feature {
 		let interface_obj = new ve.HierarchyDatatype({
 			icon: new ve.HTML(`<icon>folder</icon>`),
 			...super.drawHierarchyDatatypeGenerics(),
+			
+			polity_number: veHTML(`(${String.formatNumber(all_geometries.length)})`),
 			
 			...hierarchy_obj
 		}, {
@@ -211,9 +219,11 @@ naissance.FeatureGroup = class extends naissance.Feature {
 		//Return statement
 		return JSON.stringify({
 			id: this.id,
-			is_collapsed: this.is_collapsed,
 			name: this._name,
+			
 			entities: entity_ids,
+			is_collapsed: this.is_collapsed,
+			metadata: this.metadata,
 			options: this.options
 		});
 	}
