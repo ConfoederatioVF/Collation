@@ -56,11 +56,28 @@ ve.CRUD = class extends ve.Component {
     delete this.from_binding_fire_silently;
   }
   
+  /**
+   * Returns an array of current values.
+   * - Accessor of: {@link ve.CRUD}
+   * 
+   * @alias v
+   * @memberof ve.Component.ve.CRUD
+   * @type {any[]}
+   */
   get v () {
     //Return statement
     return this.value;
   }
   
+  /**
+   * Sets the array of current values.
+   * - Accessor of: {@link ve.CRUD}
+   * 
+   * @alias v
+   * @memberof ve.Component.ve.CRUD
+   * 
+   * @param arg0_value
+   */
   set v (arg0_value) {
     //Convert from parameters
     let value = Array.toArray(arg0_value);
@@ -70,6 +87,13 @@ ve.CRUD = class extends ve.Component {
     this.draw();
   }
   
+  /**
+   * Draws the current component and forces a re-render.
+   * - Method of: {@link ve.CRUD}
+   * 
+   * @alias draw
+   * @memberof ve.Component.ve.CRUD
+   */
   draw () {
     //Declare local instance variables
     this.element.innerHTML = "";
@@ -148,6 +172,17 @@ ve.CRUD = class extends ve.Component {
     this.table.bind(this.element);
   }
   
+  /**
+   * Filters the current table depending on the search string given.
+   * - Method of: {@link ve.CRUD}
+   * 
+   * @alias filterTable
+   * @memberof ve.Component.ve.CRUD
+   * 
+   * @param {string} [arg0_search_string=""]
+   * 
+   * @returns {any[]}
+   */
   filterTable (arg0_search_string) {
     //Convert from parameters
     let search_string = (arg0_search_string) ? arg0_search_string : "";
@@ -224,6 +259,15 @@ ve.CRUD = class extends ve.Component {
     return filtered_table_array;
   }
   
+  /**
+   * Returns the current table array for the CRUD component.
+   * - Method of: {@link ve.CRUD}
+   * 
+   * @alias getTable
+   * @memberof ve.Component.ve.CRUD
+   * 
+   * @returns {Array.<any[]>}
+   */
   getTable () {
     //Declare local instance variables
     this.table_array = []; //[[select_button, ...draw_function(value[n])], ...]

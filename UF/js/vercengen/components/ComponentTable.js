@@ -432,6 +432,10 @@ ve.Table = class extends ve.Component {
 	
 	/**
 	 * Sets the view state from an existing view object.
+	 * - Method of: {@link ve.Table}
+	 * 
+	 * @alias setViewState
+	 * @memberof ve.Component.ve.Table
 	 * 
 	 * @param {Object} arg0_view_obj
 	 */
