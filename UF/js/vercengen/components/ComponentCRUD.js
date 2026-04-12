@@ -73,7 +73,13 @@ ve.CRUD = class extends ve.Component {
     this.searchbar = new ve.SearchSelect({}, {
       header_components_obj: {
         filter_columns_when_searching: veButton(() => {
-          
+          if (this.filter_window) this.filter_window.close();
+          this.filter_window = new ve.Window({
+            
+          }, {
+            name: "Filter Search",
+            can_rename: false
+          })
         }, {
           name: "<icon>filter_alt</icon>",
           tooltip: "Filter Columns When Searching",
