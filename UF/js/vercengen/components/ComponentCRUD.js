@@ -34,7 +34,9 @@ ve.CRUD = class extends ve.Component {
       super(options);
     
     //Initialise options
-    if (!options.filters) options.filters = [{ name: "All" }];
+    let new_filters = [{ name: "All" }];
+      if (options.filters) new_filters = new_filters.concat(options.filters);
+      options.filters = new_filters;
     let new_header = ["Selected", "Index"];
       this.head_index = 1; //Head index of the header
       if (options.header) new_header = new_header.concat(options.header);
@@ -97,6 +99,9 @@ ve.CRUD = class extends ve.Component {
   draw () {
     //Declare local instance variables
     this.element.innerHTML = "";
+    this.page_obj = {};
+    
+    //[WIP] - LEGACY HANDLER
     this.searchbar = new ve.SearchSelect({}, {
       header_components_obj: {
         filter_columns_when_searching: veButton(() => {
@@ -167,9 +172,42 @@ ve.CRUD = class extends ve.Component {
       ...this.options.table_options
     });
     
-    //Bind elements in order
-    this.searchbar.bind(this.element);
-    this.table.bind(this.element);
+    //Iterate over this.options.filters and check for .name, .special_function
+    for (let i = 0; i < this.options.filters.length; i++) {
+      let local_filter = this.options.filters[i];
+      
+      //Set this.page_obj
+      this.page_obj[local_filter.name] = {
+        name: local_filter.name,
+        components_obj: (i === 0) ? {
+          searchbar: this.searchbar,
+          table: this.table
+        } : {}
+      };
+    }
+    
+    this.page_menu = new ve.PageMenu(this.page_obj, {
+      onuserchange: (v, e) => {
+        //Iterate over all this.options.filters to fetch this.filter_obj
+        for (let i = 0; i < this.options.filters.length; i++) {
+          let local_filter = this.options.filters[i];
+          
+          if (local_filter.name === v) {
+            this.filter_obj = local_filter;
+            break;
+          }
+        }
+        
+        //Redraw table; then bind to current page
+        this.table_array = this.getTable(this.filter_obj?.special_function);
+        this.table.v = this.table_array;
+        this.filterTable(this.searchbar.search_value);
+        
+        this.searchbar.bind(e.interfaces_obj[v].element);
+        this.table.bind(e.interfaces_obj[v].element);
+      }
+    });
+    this.page_menu.bind(this.element);
   }
   
   /**
@@ -194,7 +232,7 @@ ve.CRUD = class extends ve.Component {
     
     //Internal guard clause if search_string is empty
     if (search_string.length === 0) {
-      filtered_table_array = this.getTable();
+      filtered_table_array = this.getTable(this.filter_obj?.special_function);
       this.table.v = filtered_table_array;
       
       //Return statement
@@ -266,9 +304,14 @@ ve.CRUD = class extends ve.Component {
    * @alias getTable
    * @memberof ve.Component.ve.CRUD
    * 
+   * @param {function} [arg0_filter_function] - The function to filter `this.value[i]` by. Returns: {@link boolean}.
+   * 
    * @returns {Array.<any[]>}
    */
-  getTable () {
+  getTable (arg0_filter_function) {
+    //Convert from parameteres
+    let filter_function = arg0_filter_function;
+    
     //Declare local instance variables
     this.table_array = []; //[[select_button, ...draw_function(value[n])], ...]
     this.table_map = {}; //{ <value_id>: { value: any, row: any[] } }
@@ -278,6 +321,10 @@ ve.CRUD = class extends ve.Component {
     
     //Populate table_array from value
     for (let i = 0; i < this.value.length; i++) {
+      let is_valid = true;
+        if (filter_function !== undefined) is_valid = filter_function(this.value[i]);
+      if (!is_valid) continue; //Internal guard clause if element isn't valid
+      
       let local_array = [];
       let select_component;
       

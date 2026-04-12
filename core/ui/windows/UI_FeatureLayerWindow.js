@@ -69,6 +69,10 @@ global.UI_FeatureLayerWindow = class extends ve.Class {
 				return local_array;
 			},
 			
+			filters: [{
+				name: "GeometryPolygon",
+				special_function: (v) => (v.name.startsWith("A"))
+			}],
 			onsearch: (v, e) => {
 				//Refresh table
 				e.value = this.layer.getAllGeometries();
