@@ -335,6 +335,9 @@ ve.CRUD = class extends ve.Component {
   /**
    * Redraws selection boxes for the present component.
    * - Method of: {@link ve.CRUD}
+   * 
+   * @alias redrawSelections
+   * @memberof ve.Component.ve.CRUD
    */
   redrawSelections () {
     Object.iterate(this.table_map, (local_key, local_value) => {
