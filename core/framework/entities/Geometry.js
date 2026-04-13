@@ -521,6 +521,8 @@ naissance.Geometry = class extends ve.Class {
 	 * - `.set_symbol`: {@link Object}
 	 *   - `._set_label_symbol`: {@link Object} - Private alias for `.set_label_symbol`.
 	 *   - `<symbol_key>`: {@link any}
+	 *   
+	 * @param {Object|string} arg0_json
 	 */
 	static parseAction (arg0_json) {
 		//Convert from parameters

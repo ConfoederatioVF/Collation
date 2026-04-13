@@ -204,6 +204,20 @@ naissance.Feature = class extends ve.Class {
 					this.entities[i].show();
 	}
 	
+	/**
+	 * Parses a JSON action for a target Feature.
+	 * - Static method of: {@link naissance.Feature}
+	 * 
+	 * `arg0_json`: {@link Object|string}
+	 * - `.feature_id`: {@link string} - Identifier. The {@link naissance.Feature} ID to target changes for, if any.
+	 * <br>
+	 * - ##### Extraneous Commands:
+	 * - `.delete_feature`: {@link boolean}
+	 * - `.set_name`: {@link string}
+	 * - `.set_visibility`: {@link boolean}
+	 * 
+	 * @param {Object|string} arg0_json
+	 */
 	static parseAction (arg0_json) {
 		//Convert from parameters
 		let json = (typeof arg0_json === "string") ? JSON.parse(arg0_json) : arg0_json;
