@@ -1,6 +1,10 @@
 /**
  * Refer to <span color = "yellow">{@link ve.Component}</span> for methods or fields inherited from this Component's parent such as `.options.attributes` or `.element`.
+ * 
+ * Create, Read, Update, Delete (CRUD) interface used for editing complex instances.
+ * - Functional binding: <span color=00ffff>veCRUD</span>().
  *
+ * ##### Constructor:
  * - `arg0_value`: {@link Array}<{@link any}>
  * - `arg1_options`: {@link Object}
  *   - `.header=["Selected", "Index", ...]`: {@link Array}<{@link string}>
@@ -26,6 +30,18 @@
  * - `.table`: {@link ve.Table}
  * - `.table_array`: {@link Array}<{@link Array}<{@link any}>>
  * - `.table_map`: {@link Array}<{@link Object}{ <value_id>: { value:{@link any}, row:{@link any}[] } }>
+ * - `.v`: {@link Array}<{@link any}>
+ * 
+ * ##### Methods:
+ * - <span color=00ffff>{@link ve.CRUD.draw|draw}</span>()
+ * - <span color=00ffff>{@link ve.CRUD.filterTable|filterTable}</span>(arg0_search_string:{@link string}, arg1_options:{@link Object}) | {@link Array}<{@link any}>
+ * - <span color=00ffff>{@link ve.CRUD.getFilters|getFilters}</span>() | {@link Object}{ name:{@link string}, special_function:{@link function} }
+ * - <span color=00ffff>{@link ve.CRUD.getTable|getTable}</span>(arg0_filter_function:{@link function}) | {@link Array}<{@link Array}<{@link any}>>
+ * - <span color=00ffff>{@link ve.CRUD.redrawSelections|redrawSelections}</span>()
+ * 
+ * @augments ve.Component
+ * @memberof ve.Component
+ * @type {ve.CRUD}
  */
 ve.CRUD = class extends ve.Component {
   constructor (arg0_value, arg1_options) {
