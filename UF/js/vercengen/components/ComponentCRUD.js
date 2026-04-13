@@ -339,7 +339,7 @@ ve.CRUD = class extends ve.Component {
    * @alias getFilters
    * @memberof ve.Component.ve.CRUD
    * 
-   * @returns {{ name: string, special_function: function|undefined }[]}
+   * @returns {Array.<{ name: string, special_function: function|undefined }>}
    */
   getFilters () {
     //Declare local instance variables
