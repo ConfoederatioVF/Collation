@@ -120,7 +120,7 @@ global.UI_FeatureLayerWindow = class extends ve.Class {
 		let all_geometries = this.layer.getAllGeometries();
 		
 		//Refresh this.CRUD
-		if (!this.CRUD) this.draw();
+		if (!this.CRUD || !this.isOpen("instance")) this.draw();
 		this.CRUD.value = all_geometries;
 		delete this.CRUD.options.do_not_draw; //do_not_draw flag to prevent double refresh
 		

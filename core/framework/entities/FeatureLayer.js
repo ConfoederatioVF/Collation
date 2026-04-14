@@ -80,27 +80,66 @@ naissance.FeatureLayer = class extends naissance.Feature {
 				})
 			}),
 			
+			//[WIP] - Change to Actions Palette pattern
 			actions: veInterface({
-				clean_symbols: veToggle(this._ui.clean_symbols, {
-					name: "Clean Symbols",
-					onuserchange: (v) => this._ui.clean_symbols = v,
-					x: 0, y: 0
-				}),
-				clean_keyframes: veButton(() => {
-					//Declare local instance variables
-					let all_flags = [];
-						if (this._ui.clean_symbols) all_flags.push("symbol");
-					
-					DALS.Timeline.parseAction({
-						options: { name: "Clean Keyframes", key: "clean_layer_keyframes" },
-						value: [{ 
-							type: "Feature", 
-							feature_id: this.id, 
-							clean_keyframes: all_flags
-						}]
+				clean_geometry_tags: veButton(() => {
+					veConfirm(`Are you sure you want to clean all geometry tags in ${this.name}?`, {
+						special_function: () => {
+							DALS.Timeline.parseAction({
+								options: { name: "Clean Geometry Tags", key: "clean_layer_geometry_tags" },
+								value: [{
+									type: "Feature",
+									feature_id: this.id,
+									clean_geometry_tags: true
+								}]
+							});
+							veToast(`Cleaned geometry tags.`);
+						}
 					});
-					veToast(`Cleaned layer keyframes.`);
-				}, { name: "Clean Layer Keyframes", x: 1, y: 0 })
+				}, { name: "Clean Geometry Tags" }),
+				
+				clean_keyframes: veButton(() => {
+					if (this.clean_keyframes_window) this.clean_keyframes_window.close();
+					this.clean_keyframes_window = veWindow({
+						clean_symbols: veToggle(this._ui.clean_symbols, {
+							name: "Clean Symbols",
+							onuserchange: (v) => this._ui.clean_symbols = v
+						}),
+						clean_keyframes: veButton(() => {
+							//Declare local instance variables
+							let all_flags = [];
+							if (this._ui.clean_symbols) all_flags.push("symbol");
+							
+							DALS.Timeline.parseAction({
+								options: { name: "Clean Keyframes", key: "clean_layer_keyframes" },
+								value: [{
+									type: "Feature",
+									feature_id: this.id,
+									clean_keyframes: all_flags
+								}]
+							});
+							veToast(`Cleaned layer keyframes.`);
+						}, { name: "Confirm" })
+					}, { name: "Clean Layer Keyframes", can_rename: false });
+				}, { name: "Clean Layer Keyframes"}),
+				
+				flatten_all_geometries: veButton(() => {
+					veConfirm(`Are you sure you want to flatten all geometries in ${this.name}?`, {
+						special_function: () => {
+							DALS.Timeline.parseAction({
+								options: { name: "Flatten Geometries", key: "flatten_layer_geometries" },
+								value: [{
+									type: "Feature",
+									feature_id: this.id,
+									flatten_all_geometries: true
+								}]
+							});
+							veToast(`Flattened all geometries.`);
+						}
+					});
+				}, { 
+					name: "Flatten All Geometries"
+				})
 			}, {
 				name: "Actions"
 			})
@@ -178,6 +217,7 @@ naissance.FeatureLayer = class extends naissance.Feature {
 		let all_geometries = this.getAllGeometries();
 		let hierarchy_obj = {};
 		let show_layer_features = (this.metadata?.show_layer_features) ? true : false;
+		let show_layer_geometries = (this.metadata?.show_layer_geometries) ? true : false;
 		
 		//Delete any self-references; already assigned entities with other .parent
 		for (let i = this.entities.length - 1; i >= 0; i--)
@@ -194,12 +234,13 @@ naissance.FeatureLayer = class extends naissance.Feature {
 			let local_key = `${local_entity.class_name}-${local_entity.id}`;
 			
 			//naissance.FeatureGroup, naissance.FeatureLayer handling
-			if (show_layer_features)
+			if (show_layer_features || show_layer_geometries)
 				if (local_entity instanceof naissance.Feature && local_entity.drawHierarchyDatatype) {
 					//console.log(this, `is calling`, local_entity)
+					if (!show_layer_features) continue;
 					hierarchy_obj[local_key] = local_entity.drawHierarchyDatatype({
 						hide_features: (!show_layer_features),
-						hide_geometries: (!this.metadata?.show_layer_geometries),
+						hide_geometries: (!show_layer_geometries),
 					});
 				} else {
 					//naissance.Feature generic handling
@@ -211,7 +252,7 @@ naissance.FeatureLayer = class extends naissance.Feature {
 					}
 					
 					//naissance.Geometry generic handling
-					if (!this.metadata?.show_layer_geometries) continue;
+					if (!show_layer_geometries) continue;
 					if (local_entity instanceof naissance.Geometry) {
 						if (local_entity.drawHierarchyDatatype) {
 							hierarchy_obj[local_key] = local_entity.drawHierarchyDatatype();

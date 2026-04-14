@@ -99,21 +99,23 @@ naissance.Feature = class extends ve.Class {
 	}
 	
 	/**
-	 * Returns an array of all {@link naissance.Geometry} instances housed in the FeatureLayer.
+	 * Returns an array of all {@link naissance.Geometry}|{@link naissance.Feature} instances housed in the FeatureLayer.
 	 *
 	 * @param {naissance.Feature} [arg0_object]
 	 * @param {Object} [arg1_options]
 	 *  @param {naissance.Feature[]} [arg1_options.owners]
+	 *  @param {string[]} [arg1_options.types=["Feature", "Geometry"]] - The types to filter for.
 	 *
 	 * @returns {naissance.Geometry[]}
 	 */
-	getAllGeometries (arg0_object, arg1_options) {
+	getAllEntities (arg0_object, arg1_options) {
 		//Convert from parameters
 		let object = (arg0_object) ? arg0_object : this;
 		let options = (arg1_options) ? arg1_options : {};
 		
 		//Initialise options
 		if (!options.owners) options.owners = [];
+		if (!options.types) options.types = ["Feature", "Geometry"];
 		
 		//Declare local instance variables
 		let all_entities = [];
@@ -128,10 +130,17 @@ naissance.Feature = class extends ve.Class {
 		
 		//Iterate over all .entities and check if they have .entities
 		if (object?.entities)
-			for (let i = 0; i < object.entities.length; i++)
-				if (object.entities[i] instanceof naissance.Geometry) {
-					let local_entity = object.entities[i];
-					
+			for (let i = 0; i < object.entities.length; i++) {
+				let local_entity = object.entities[i];
+				
+				//Iterate over all options.types and determine if it is valid
+				for (let x = 0; x < options.types.length; x++)
+					if (local_entity instanceof naissance[options.types[x]]) {
+						all_entities.push(local_entity);
+						break;
+					}
+				
+				if (local_entity) {
 					//Edit metadata
 					if (!local_entity.metadata) local_entity.metadata = {};
 					if (!local_entity.metadata.tags) local_entity.metadata.tags = [];
@@ -141,15 +150,58 @@ naissance.Feature = class extends ve.Class {
 						if (!local_entity.metadata.tags.includes(owner_names[x]))
 							local_entity.metadata.tags.push(owner_names[x]);
 					
-					all_entities.push(object.entities[i]);
-				} else if (object.entities[i].entities) {
-					all_entities = all_entities.concat(this.getAllGeometries(object.entities[i], {
-						owners: options.owners.concat([object.entities[i]])
-					}));
+					//Recurse if the entity has its own entities
+					if (local_entity.entities)
+						all_entities = all_entities.concat(this.getAllEntities(local_entity, {
+							...options,
+							owners: options.owners.concat([local_entity])
+						}));
 				}
+			}
 		
 		//Return statement
 		return all_entities;
+	}
+	
+	/**
+	 * Returns an array of all {@link naissance.Feature} instances housed in the Feature.
+	 * 
+	 * @param {naissance.Feature} arg0_object
+	 * @param {Object} arg1_options
+	 * 
+	 * @returns {naissance.Geometry[]}
+	 */
+	getAllFeatures (arg0_object, arg1_options) {
+		//Convert from parameters
+		let object = arg0_object;
+		let options = (arg1_options) ? arg1_options : {};
+		
+		//Return statement
+		return this.getAllEntities(object, {
+			...options,
+			types: ["Feature"]
+		});
+	}
+	
+	/**
+	 * Returns an array of all {@link naissance.Geometry} instances housed in the Feature.
+	 *
+	 * @param {naissance.Feature} [arg0_object]
+	 * @param {Object} [arg1_options]
+	 *  @param {naissance.Feature[]} [arg1_options.owners]
+	 *
+	 * @returns {naissance.Geometry[]}
+	 */
+	getAllGeometries (arg0_object, arg1_options) {
+		//Convert from parameters
+		let object = arg0_object;
+		let options = (arg1_options) ? arg1_options : {};
+		
+		//Return statement
+		return this.getAllEntities(object, {
+			...options,
+			types: ["Geometry"]
+		});
 	}
 	
 	hide () {
@@ -213,6 +265,7 @@ naissance.Feature = class extends ve.Class {
 	 * <br>
 	 * - ##### Extraneous Commands:
 	 * - `.clean_keyframes`: {@link Array}<{@link string}> - Cleans geometry keyframes for default symbols, redundant names. Options: ["symbol"]
+	 * - `.clean_geometry_tags`: {@link boolean}
 	 * - `.delete_feature`: {@link boolean}
 	 * - `.flatten_all_geometries`: {@link boolean}
 	 * - `.move_all_geometries_to_feature`: {@link string}
@@ -247,6 +300,15 @@ naissance.Feature = class extends ve.Class {
 				});
 			}
 			
+			//clean_geometry_tags
+			if (json.clean_geometry_tags) {
+				let all_geometries = feature_obj.getAllGeometries();
+				
+				//Iterate over all_geometries and clean metadata.tags
+				for (let i = 0; i < all_geometries.length; i++)
+					delete all_geometries[i].metadata.tags;
+			}
+			
 			//delete_feature
 			if (json.delete_feature === true) {
 				feature_obj.remove();
@@ -254,8 +316,19 @@ naissance.Feature = class extends ve.Class {
 			}
 			
 			//flatten_all_geometries
+			if (json.flatten_all_geometries) {
+				feature_obj.entities = feature_obj.getAllGeometries();
+				
+				//Update parent ref for all promoted geometries
+				for (let i = 0; i < feature_obj.entities.length; i++)
+					feature_obj.entities[i].parent = feature_obj;
+				UI_LeftbarHierarchy.refresh();
+			}
 			
 			//move_all_geometries_to_feature
+			if (json.move_all_geometries_to_feature) {
+				
+			}
 			
 			//set_name
 			if (typeof json.set_name === "string")
