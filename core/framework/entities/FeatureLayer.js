@@ -82,66 +82,80 @@ naissance.FeatureLayer = class extends naissance.Feature {
 			
 			//[WIP] - Change to Actions Palette pattern
 			actions: veInterface({
-				clean_geometry_tags: veButton(() => {
-					veConfirm(`Are you sure you want to clean all geometry tags in ${this.name}?`, {
-						special_function: () => {
-							DALS.Timeline.parseAction({
-								options: { name: "Clean Geometry Tags", key: "clean_layer_geometry_tags" },
-								value: [{
-									type: "Feature",
-									feature_id: this.id,
-									clean_geometry_tags: true
-								}]
-							});
-							veToast(`Cleaned geometry tags.`);
+				actions_palette: veSearchSelect({
+					clean_geometry_tags: veButton(() => {
+						veConfirm(`Are you sure you want to clean all geometry tags in ${this.name}?`, {
+							special_function: () => {
+								DALS.Timeline.parseAction({
+									options: { name: "Clean Geometry Tags", key: "clean_layer_geometry_tags" },
+									value: [{
+										type: "Feature",
+										feature_id: this.id,
+										clean_geometry_tags: true
+									}]
+								});
+								veToast(`Cleaned geometry tags.`);
+							}
+						});
+					}, { name: "Clean Geometry Tags" }),
+					
+					clean_keyframes: veButton(() => {
+						if (this.clean_keyframes_window) this.clean_keyframes_window.close();
+						this.clean_keyframes_window = veWindow({
+							clean_symbols: veToggle(this._ui.clean_symbols, {
+								name: "Clean Symbols",
+								onuserchange: (v) => this._ui.clean_symbols = v
+							}),
+							clean_keyframes: veButton(() => {
+								//Declare local instance variables
+								let all_flags = [];
+								if (this._ui.clean_symbols) all_flags.push("symbol");
+								
+								DALS.Timeline.parseAction({
+									options: { name: "Clean Keyframes", key: "clean_layer_keyframes" },
+									value: [{
+										type: "Feature",
+										feature_id: this.id,
+										clean_keyframes: all_flags
+									}]
+								});
+								veToast(`Cleaned layer keyframes.`);
+							}, { name: "Confirm" })
+						}, { name: "Clean Layer Keyframes", can_rename: false });
+					}, { name: "Clean Layer Keyframes"}),
+					
+					flatten_all_geometries: veButton(() => {
+						veConfirm(`Are you sure you want to flatten all geometries in ${this.name}?`, {
+							special_function: () => {
+								DALS.Timeline.parseAction({
+									options: { name: "Flatten Geometries", key: "flatten_layer_geometries" },
+									value: [{
+										type: "Feature",
+										feature_id: this.id,
+										flatten_all_geometries: true
+									}]
+								});
+								veToast(`Flattened all geometries.`);
+							}
+						});
+					}, {
+						name: "Flatten All Geometries"
+					})
+				}, {
+					placeholder: "Search for action ...",
+					style: {
+						"> [component='ve-button']": { 
+							display: "inline",
+							padding: 0
 						}
-					});
-				}, { name: "Clean Geometry Tags" }),
-				
-				clean_keyframes: veButton(() => {
-					if (this.clean_keyframes_window) this.clean_keyframes_window.close();
-					this.clean_keyframes_window = veWindow({
-						clean_symbols: veToggle(this._ui.clean_symbols, {
-							name: "Clean Symbols",
-							onuserchange: (v) => this._ui.clean_symbols = v
-						}),
-						clean_keyframes: veButton(() => {
-							//Declare local instance variables
-							let all_flags = [];
-							if (this._ui.clean_symbols) all_flags.push("symbol");
-							
-							DALS.Timeline.parseAction({
-								options: { name: "Clean Keyframes", key: "clean_layer_keyframes" },
-								value: [{
-									type: "Feature",
-									feature_id: this.id,
-									clean_keyframes: all_flags
-								}]
-							});
-							veToast(`Cleaned layer keyframes.`);
-						}, { name: "Confirm" })
-					}, { name: "Clean Layer Keyframes", can_rename: false });
-				}, { name: "Clean Layer Keyframes"}),
-				
-				flatten_all_geometries: veButton(() => {
-					veConfirm(`Are you sure you want to flatten all geometries in ${this.name}?`, {
-						special_function: () => {
-							DALS.Timeline.parseAction({
-								options: { name: "Flatten Geometries", key: "flatten_layer_geometries" },
-								value: [{
-									type: "Feature",
-									feature_id: this.id,
-									flatten_all_geometries: true
-								}]
-							});
-							veToast(`Flattened all geometries.`);
-						}
-					});
-				}, { 
-					name: "Flatten All Geometries"
+					}
 				})
-			}, {
-				name: "Actions"
+			}, { 
+				name: "Actions",
+				style: {
+					padding: 0,
+					
+				}
 			})
 		}, { is_folder: false });
 	}
