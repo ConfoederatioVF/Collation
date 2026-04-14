@@ -212,7 +212,10 @@ naissance.Feature = class extends ve.Class {
 	 * - `.feature_id`: {@link string} - Identifier. The {@link naissance.Feature} ID to target changes for, if any.
 	 * <br>
 	 * - ##### Extraneous Commands:
+	 * - `.clean_keyframes`: {@link Array}<{@link string}> - Cleans geometry keyframes for default symbols, redundant names. Options: ["symbol"]
 	 * - `.delete_feature`: {@link boolean}
+	 * - `.flatten_all_geometries`: {@link boolean}
+	 * - `.move_all_geometries_to_feature`: {@link string}
 	 * - `.set_name`: {@link string}
 	 * - `.set_visibility`: {@link boolean}
 	 * 
@@ -227,11 +230,31 @@ naissance.Feature = class extends ve.Class {
 		
 		//Parse commands for feature_obj
 		if (feature_obj) {
+			//clean_keyframes
+			if (json.clean_keyframes) {
+				let all_geometries = feature_obj.getAllGeometries();
+				let all_geometry_ids = [];
+				
+				//Iterate over all_geometries and append IDs for parsing
+				for (let i = 0; i < all_geometries.length; i++)
+					if (all_geometries[i].id) all_geometry_ids.push(all_geometries[i].id);
+				naissance.Geometry.parseActionForGeometries(all_geometry_ids, {
+					command: "clean_keyframes",
+					key: "clean_keyframes",
+					name: "Clean F.Geometry Keyframes",
+					value: json.clean_keyframes
+				});
+			}
+			
 			//delete_feature
 			if (json.delete_feature === true) {
 				feature_obj.remove();
 				return;
 			}
+			
+			//flatten_all_geometries
+			
+			//move_all_geometries_to_feature
 			
 			//set_name
 			if (typeof json.set_name === "string")
