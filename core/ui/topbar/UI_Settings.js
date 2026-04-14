@@ -241,7 +241,7 @@ global.UI_Settings = class extends ve.Class { //[WIP] - Add settings serialisati
 		let html_el = document.querySelector("html");
 		
 		//Apply UI scaling changes (rem)
-		html_el.style.fontSize = `${16*Math.returnSafeNumber(main.settings.ui_scaling)}px`;
+		html_el.style.fontSize = `${16*Math.returnSafeNumber(main.settings.ui_scaling, 1)}px`;
 	}
 	
 	/**
