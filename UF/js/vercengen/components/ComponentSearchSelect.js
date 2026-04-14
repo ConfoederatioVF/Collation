@@ -7,7 +7,7 @@
  * ##### Constructor:
  * - `arg0_components_obj`: {@link Object}<{@link ve.Component}> - The individual items to append to the current search select field.
  * - `arg1_options`: {@link Object}
- *   - `.display="inline"`: {@link string}
+ *   - `.display="inherit"`: {@link string}
  *   - `.header_components_obj`: {@link Object}<{@link ve.Component}>
  *   - `.hide_filter=false`: {@link boolean} - Whether to hide the filter tool.
  *   - `.filter_names`: {@link function}(arg0_attribute_key:{@link string})|{@link Object}

@@ -15,8 +15,10 @@ naissance.FeatureGroup = class extends naissance.Feature {
 		this._name = "New Group";
 		
 		//Declare UI; attached to UI_LeftbarHierarchy
-		this.interface = undefined;
-		this.drawHierarchyDatatype(); //Declares this.interface
+		this.interface = veInterface({
+			actions: this.drawActionsPalette({ move_to_filters: ["FeatureGroup"] })
+		}, { is_folder: false });
+		this.drawHierarchyDatatype();
 	}
 	
 	addEntity (arg0_naissance_obj, arg1_do_not_refresh) {
@@ -95,18 +97,30 @@ naissance.FeatureGroup = class extends naissance.Feature {
 				}
 			}
 		
-		//Set this.interface
-		let interface_obj = new ve.HierarchyDatatype({
+		//Return statement
+		return new ve.HierarchyDatatype({
 			icon: new ve.HTML(`<icon>folder</icon>`),
 			...super.drawHierarchyDatatypeGenerics(),
 			
 			polity_number: veHTML(`(${String.formatNumber(all_geometries.length)})`),
+			edit: veButton(() => {
+				super.open("instance", {
+					id: this.id,
+					name: this._name,
+					width: "24rem"
+				});
+				this.draw();
+			}, {
+				name: `<icon>more_vert</icon>`,
+				tooltip: "Edit Group",
+				style: { order: 100, padding: 0 }
+			}),
 			
 			...hierarchy_obj
 		}, {
 			attributes: {
 				"data-entities": this.entities.length,
-				"data-type": "FeatureGroup" 
+				"data-type": "FeatureGroup"
 			},
 			instance: this,
 			is_collapsed: this.is_collapsed,
@@ -124,10 +138,6 @@ naissance.FeatureGroup = class extends naissance.Feature {
 			},
 			type: "group",
 		});
-		if (!this.interface) this.interface = interface_obj;
-		
-		//Return statement
-		return interface_obj;
 	}
 	
 	fromJSON (arg0_json) {

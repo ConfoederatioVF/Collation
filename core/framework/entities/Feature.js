@@ -60,6 +60,121 @@ naissance.Feature = class extends ve.Class {
 			this._parent = undefined;
 	}
 	
+	drawActionsPalette (arg0_options) {
+		//Convert from parameters
+		let options = (arg0_options) ? arg0_options : {};
+		
+		//Initialise options
+		if (!options.move_to_filters) options.move_to_filters = ["FeatureGroup", "FeatureLayer"];
+		
+		//Return statement
+		return veInterface({
+			actions_palette: veSearchSelect({
+				clean_geometry_tags: veButton(() => {
+					veConfirm(`Are you sure you want to clean all geometry tags in ${this.name}?`, {
+						special_function: () => {
+							DALS.Timeline.parseAction({
+								options: { name: "Clean Geometry Tags", key: "clean_layer_geometry_tags" },
+								value: [{
+									type: "Feature",
+									feature_id: this.id,
+									clean_geometry_tags: true
+								}]
+							});
+							veToast(`Cleaned geometry tags.`);
+						}
+					});
+				}, { name: "Clean Geometry Tags" }),
+				
+				clean_keyframes: veButton(() => {
+					if (this.clean_keyframes_window) this.clean_keyframes_window.close();
+					this.clean_keyframes_window = veWindow({
+						clean_symbols: veToggle(this._ui.clean_symbols, {
+							name: "Clean Symbols",
+							onuserchange: (v) => this._ui.clean_symbols = v
+						}),
+						clean_keyframes: veButton(() => {
+							//Declare local instance variables
+							let all_flags = [];
+							if (this._ui.clean_symbols) all_flags.push("symbol");
+							
+							DALS.Timeline.parseAction({
+								options: { name: "Clean Keyframes", key: "clean_layer_keyframes" },
+								value: [{
+									type: "Feature",
+									feature_id: this.id,
+									clean_keyframes: all_flags
+								}]
+							});
+							veToast(`Cleaned layer keyframes.`);
+						}, { name: "Confirm" })
+					}, { name: "Clean Layer Keyframes", can_rename: false });
+				}, { name: "Clean Layer Keyframes"}),
+				flatten_all_geometries: veButton(() => {
+					veConfirm(`Are you sure you want to flatten all geometries in ${this.name}?`, {
+						special_function: () => {
+							DALS.Timeline.parseAction({
+								options: { name: "Flatten Geometries", key: "flatten_layer_geometries" },
+								value: [{
+									type: "Feature",
+									feature_id: this.id,
+									flatten_all_geometries: true
+								}]
+							});
+							veToast(`Flattened all geometries.`);
+						}
+					});
+				}, {
+					name: "Flatten All Geometries"
+				}),
+				move_entities_to: veButton(() => {
+					if (this.move_entities_window) this.move_entities_window.close();
+					this.move_entities_window = veWindow({
+						to_layer: new UI_FeatureDatalist(this._ui.to_feature_id, {
+							name: "To Layer",
+							filter_types: options.move_to_filters,
+							onuserchange: (v) => {
+								console.log(v);
+								this._ui.to_feature_id = v;
+							}
+						}),
+						confirm: veButton(() => {
+							try {
+								//Declare local instance variables
+								let ot_feature = naissance.Feature.instances.filter((v) => v.id === this._ui.to_feature_id)[0];
+								
+								//Parse action
+								DALS.Timeline.parseAction({
+									options: { name: "Move Geometries To", key: "move_layer_geometries_to" },
+									value: [{
+										type: "Feature",
+										feature_id: this.id,
+										move_all_entities_to_feature: this._ui.to_feature_id
+									}]
+								});
+								veToast(`Moved all geometries from ${this.name} Layer to ${ot_feature.name} Layer.`);
+							} catch (e) { console.error(e); }
+						}, { name: "Confirm" })
+					}, { name: "Move Entities To", can_rename: false })
+				}, { name: "Move Entities To Layer" })
+			}, {
+				display: "inline",
+				placeholder: "Search for action ...",
+				style: {
+					"> [component='ve-button']": {
+						display: "inline",
+						padding: 0
+					}
+				}
+			})
+		}, {
+			name: "Actions",
+			style: {
+				padding: 0
+			}
+		});
+	}
+	
 	drawHierarchyDatatypeGenerics () {
 		//Return statement
 		return {
@@ -291,7 +406,6 @@ naissance.Feature = class extends ve.Class {
 				//Iterate over all_geometries and append IDs for parsing
 				for (let i = 0; i < all_geometries.length; i++)
 					if (all_geometries[i].id) all_geometry_ids.push(all_geometries[i].id);
-				console.log(`All geometry IDs:`, all_geometry_ids);
 				naissance.Geometry.parseActionForGeometries(all_geometry_ids, {
 					command: "clean_keyframes",
 					key: "clean_keyframes",
