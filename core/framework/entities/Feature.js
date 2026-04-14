@@ -238,6 +238,7 @@ naissance.Feature = class extends ve.Class {
 				//Iterate over all_geometries and append IDs for parsing
 				for (let i = 0; i < all_geometries.length; i++)
 					if (all_geometries[i].id) all_geometry_ids.push(all_geometries[i].id);
+				console.log(`All geometry IDs:`, all_geometry_ids);
 				naissance.Geometry.parseActionForGeometries(all_geometry_ids, {
 					command: "clean_keyframes",
 					key: "clean_keyframes",

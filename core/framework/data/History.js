@@ -59,13 +59,15 @@ naissance.History = class extends ve.Class {
 				let current_val = local_keyframe.value[x];
 				let prev_val = running_state[x];
 				
-				if (current_val === undefined || current_val === null) continue;
+				//Skip only if undefined; null is treated as a meaningful value change
+				if (current_val === undefined) continue;
 				
-				if (typeof current_val === "object") {
+				if (typeof current_val === "object" && current_val !== null) {
 					// Handle object merging and variable delta checks
 					let is_redundant_obj = true;
 					let cleaned_obj = { ...current_val };
-					if (current_val.variables) cleaned_obj.variables = { ...current_val.variables };
+					if (current_val.variables)
+						cleaned_obj.variables = { ...current_val.variables };
 					
 					// Check nested variables
 					if (current_val.variables && prev_val && prev_val.variables) {
@@ -81,7 +83,7 @@ naissance.History = class extends ve.Class {
 						is_redundant_obj = false;
 					}
 					
-					// Check other properties of the object (excluding variables which we just handled)
+					//Check other properties of the object (excluding variables which we just handled)
 					for (let key in current_val) {
 						if (key === "variables") continue;
 						if (prev_val && Boolean.isDeepEqual(current_val[key], prev_val[key])) {
@@ -99,14 +101,19 @@ naissance.History = class extends ve.Class {
 						local_keyframe.value[x] = cleaned_obj;
 						has_meaningful_change = true;
 						
-						//Update running state for next iteration
-						if (!running_state[x]) running_state[x] = { variables: {} };
+						//Update running state for next iteration; ensure state is an object if merging
+						if (typeof running_state[x] !== "object" || running_state[x] === null)
+							running_state[x] = { variables: {} };
+						
 						if (cleaned_obj.variables)
-							running_state[x].variables = { ...running_state[x].variables, ...cleaned_obj.variables };
+							running_state[x].variables = {
+								...running_state[x].variables,
+								...cleaned_obj.variables
+							};
 						running_state[x] = { ...running_state[x], ...cleaned_obj };
 					}
 				} else {
-					//Handle primitive values
+					//Handle primitive values and null
 					if (current_val === prev_val) {
 						local_keyframe.value[x] = undefined;
 					} else {
@@ -116,7 +123,7 @@ naissance.History = class extends ve.Class {
 				}
 			}
 			
-			//If the keyframe now contains no unique data, delete the keyframe entirely;  check if any values in the array are not undefined
+			//If the keyframe now contains no unique data, delete the keyframe entirely
 			let is_empty = local_keyframe.value.every(val => val === undefined);
 			if (is_empty || !has_meaningful_change) {
 				delete this.keyframes[timestamp];
@@ -362,6 +369,22 @@ naissance.History = class extends ve.Class {
 		
 		//Delete target keyframe 
 		delete this.keyframes[timestamp];
+	}
+	
+	replaceKeyframe (arg0_keyframe, arg1_keyframe, arg2_options) {
+		//Convert from parameters
+		let keyframe = arg0_keyframe;
+		let ot_keyframe = arg1_keyframe;
+		let options = (arg2_options) ? arg2_options : {};
+		
+		//Declare local instance variables
+		let timestamp = JSON.parse(JSON.stringify(keyframe.timestamp));
+		
+		//Swap out keyframe; refresh localisation
+		this.removeKeyframe(timestamp);
+		this.addKeyframe(timestamp, ...ot_keyframe.value);
+		
+		if (options.refresh_localisation !== false) this.getKeyframe();
 	}
 	
 	toJSON () {

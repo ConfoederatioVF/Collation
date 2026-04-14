@@ -17,6 +17,7 @@ naissance.FeatureLayer = class extends naissance.Feature {
 		//Declare local instance variables
 		this._name = "New Layer";
 		this._type = "default"; //Either 'default'/'provinces'
+		this._ui = {};
 		
 		//Declare UI
 		this.interface = veInterface({
@@ -77,6 +78,31 @@ naissance.FeatureLayer = class extends naissance.Feature {
 						set_layer_option: { key: "type", value: v } 
 					}]
 				})
+			}),
+			
+			actions: veInterface({
+				clean_symbols: veToggle(this._ui.clean_symbols, {
+					name: "Clean Symbols",
+					onuserchange: (v) => this._ui.clean_symbols = v,
+					x: 0, y: 0
+				}),
+				clean_keyframes: veButton(() => {
+					//Declare local instance variables
+					let all_flags = [];
+						if (this._ui.clean_symbols) all_flags.push("symbol");
+					
+					DALS.Timeline.parseAction({
+						options: { name: "Clean Keyframes", key: "clean_layer_keyframes" },
+						value: [{ 
+							type: "Feature", 
+							feature_id: this.id, 
+							clean_keyframes: all_flags
+						}]
+					});
+					veToast(`Cleaned layer keyframes.`);
+				}, { name: "Clean Layer Keyframes", x: 1, y: 0 })
+			}, {
+				name: "Actions"
 			})
 		}, { is_folder: false });
 	}

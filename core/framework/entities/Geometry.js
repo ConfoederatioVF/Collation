@@ -558,12 +558,10 @@ naissance.Geometry = class extends ve.Class {
 						
 						//Iterate over current_brush_symbol and clean duplicates
 						Object.iterate(current_brush_symbol, (local_key, local_value) => {
-							if (local_symbol[local_key] === local_value)
+							if (local_symbol && local_symbol[local_key] === local_value)
 								delete local_symbol[local_key];
 						});
-						geometry_obj.history.removeKeyframe(first_keyframe.timestamp);
-						geometry_obj.history.addKeyframe(local_keyframe.timestamp, local_keyframe.value);
-						console.log(`Attempting to replace`, first_keyframe, `with`, local_keyframe);
+						geometry_obj.history.replaceKeyframe(first_keyframe, local_keyframe, { refresh_localisation: false });
 					}
 				}
 				
