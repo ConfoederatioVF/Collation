@@ -38,6 +38,7 @@ global.UI_GeometryDatalist = class extends ve.Component {
 		//Convert from parameters
 		let value = arg0_value;
 		
+		this.value = value;
 		if (this.datalist) this.datalist.v = value;
 		this.fireFromBinding();
 	}
@@ -71,7 +72,7 @@ global.UI_GeometryDatalist = class extends ve.Component {
 			name: (this.options.name) ? this.options.name : undefined,
 			onuserchange: (v) => {
 				this.value = v;
-				this.fireFromBinding();
+				this.fireToBinding();
 			},
 			selected: (geometry_map[current_value]) ? geometry_map[current_value] : undefined
 		});

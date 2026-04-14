@@ -123,7 +123,6 @@ naissance.FeatureLayer = class extends naissance.Feature {
 							}, { name: "Confirm" })
 						}, { name: "Clean Layer Keyframes", can_rename: false });
 					}, { name: "Clean Layer Keyframes"}),
-					
 					flatten_all_geometries: veButton(() => {
 						veConfirm(`Are you sure you want to flatten all geometries in ${this.name}?`, {
 							special_function: () => {
@@ -140,7 +139,37 @@ naissance.FeatureLayer = class extends naissance.Feature {
 						});
 					}, {
 						name: "Flatten All Geometries"
-					})
+					}),
+					move_entities_to: veButton(() => {
+						if (this.move_entities_window) this.move_entities_window.close();
+						this.move_entities_window = veWindow({
+							to_layer: new UI_FeatureDatalist(this._ui.to_feature_id, {
+								name: "To Layer",
+								filter_types: ["FeatureLayer"],
+								onuserchange: (v) => {
+									console.log(v);
+									this._ui.to_feature_id = v;
+								}
+							}),
+							confirm: veButton(() => {
+								try {
+									//Declare local instance variables
+									let ot_feature = naissance.Feature.instances.filter((v) => v.id === this._ui.to_feature_id)[0];
+									
+									//Parse action
+									DALS.Timeline.parseAction({
+										options: { name: "Move Geometries To", key: "move_layer_geometries_to" },
+										value: [{
+											type: "Feature",
+											feature_id: this.id,
+											move_all_entities_to_feature: this._ui.to_feature_id
+										}]
+									});
+									veToast(`Moved all geometries from ${this.name} Layer to ${ot_feature.name} Layer.`);
+								} catch (e) { console.error(e); }
+							}, { name: "Confirm" })
+						}, { name: "Move Entities To", can_rename: false })
+					}, { name: "Move Entities To Layer" })
 				}, {
 					placeholder: "Search for action ...",
 					style: {
