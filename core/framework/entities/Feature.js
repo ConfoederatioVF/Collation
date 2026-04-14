@@ -268,7 +268,7 @@ naissance.Feature = class extends ve.Class {
 	 * - `.clean_geometry_tags`: {@link boolean}
 	 * - `.delete_feature`: {@link boolean}
 	 * - `.flatten_all_geometries`: {@link boolean}
-	 * - `.move_all_geometries_to_feature`: {@link string}
+	 * - `.move_all_entities_to_feature`: {@link string}
 	 * - `.set_name`: {@link string}
 	 * - `.set_visibility`: {@link boolean}
 	 * 
@@ -325,9 +325,33 @@ naissance.Feature = class extends ve.Class {
 				UI_LeftbarHierarchy.refresh();
 			}
 			
-			//move_all_geometries_to_feature
-			if (json.move_all_geometries_to_feature) {
+			//move_all_entities_to_feature
+			if (typeof json.move_all_entities_to_feature === "string") {
+				let ot_feature_obj = naissance.Feature.instances.filter((v) => v.id === json.feature_id)[0];
 				
+				if (ot_feature_obj) {
+					let all_entities = feature_obj.getAllEntities();
+					
+					//Iterate over all_entities
+					for (let i = 0; i < all_entities.length; i++) {
+						let local_entity = all_entities[i];
+						
+						//Remove from old parent .entities array
+						if (local_entity.parent && local_entity.parent.entities) {
+							let parent_entities = local_entity.parent.entities;
+							
+							//Iterate over all parent_entities and splice out the entity being moved
+							for (let x = parent_entities.length - 1; x >= 0; i--)
+								if (parent_entities[x].id === local_entity.id)
+									parent_entities.splice(x, 1);
+						}
+						
+						//Move to target feature
+						local_entity.parent = ot_feature_obj;
+						if (!ot_feature_obj.entities) ot_feature_obj.entities = [];
+						ot_feature_obj.entities.push(local_entity);
+					}
+				}
 			}
 			
 			//set_name
