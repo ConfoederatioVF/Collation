@@ -298,7 +298,7 @@ naissance.GeometryPolygon = class extends naissance.Geometry {
 					options: { name: "Simplify Polygon", key: "simplify_polygon" },
 					value: [{
 						type: "GeometryPolygon",
-						geometry_id: from_geometry.id,
+						geometry_id: this.id,
 						simplify_polygon: 0.01
 					}]
 				}, true);
