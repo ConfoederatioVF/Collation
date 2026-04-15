@@ -137,6 +137,12 @@ naissance.Brush = class extends ve.Class {
 				width: 2,
 				x: 0, y: 3
 			}),
+			node_buffer: veNumber(Math.returnSafeNumber(this.node_buffer, 100), {
+				name: "Node Buffer (m)",
+				binding: "this.node_buffer",
+				limit: () => this.mode === "node_transfer",
+				x: 0, y: 4
+			}),
 			
 			properties: veButton(() => {
 				main.interfaces.edit_selected_geometries_ui.open();
@@ -144,7 +150,7 @@ naissance.Brush = class extends ve.Class {
 				name: "Edit Selected Geometries",
 				limit: () => this.hasSelectedGeometry(),
 				width: 2,
-				x: 0, y: 4
+				x: 0, y: 5
 			})
 		}, { name: "Brush Options:", open: true });
 		this.optimisation = veInterface({

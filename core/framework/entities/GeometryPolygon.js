@@ -280,7 +280,7 @@ naissance.GeometryPolygon = class extends naissance.Geometry {
 				turf.intersect(turf.featureCollection([ot_turf_geometry, cursor_turf_geometry])) :
 				turf.intersect(turf.featureCollection([turf_geometry, cursor_turf_geometry]));
 			if (!turf_intersection) return; //Internal guard clause if nothing overlaps
-			turf_intersection = turf.buffer(turf_intersection, 0.01, { units: "kilometers" });
+			turf_intersection = turf.buffer(turf_intersection, Math.returnSafeNumber(main.brush.node_buffer/1000, 0.01), { units: "kilometers" });
 			
 			//Transfer selected polygon
 			e.geometry = Geospatiale.convertTurfToMaptalks(turf_intersection);
