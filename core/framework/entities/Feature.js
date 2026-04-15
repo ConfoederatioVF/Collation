@@ -348,7 +348,7 @@ naissance.Feature = class extends ve.Class {
 					if (local_feature[delete_keys[x]])
 						for (let y = local_feature[delete_keys[x]].length - 1; y >= 0; y--)
 							if (local_feature[delete_keys[x]][y].id === this.id)
-								local_feature[delete_keys[x]].splice(x, 1);
+								local_feature[delete_keys[x]].splice(y, 1);
 		}
 		
 		//Remove from local_feature.entities
