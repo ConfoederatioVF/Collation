@@ -80,7 +80,12 @@ naissance.FeatureLayer = class extends naissance.Feature {
 				})
 			}),
 			
-			actions: this.drawActionsPalette({ move_to_filters: ["FeatureLayer"] })
+			actions: this.drawActionsPalette({
+				name: "Layer",
+				type: "layer",
+				
+				move_to_filters: ["FeatureLayer"] 
+			})
 		}, { is_folder: false });
 	}
 	

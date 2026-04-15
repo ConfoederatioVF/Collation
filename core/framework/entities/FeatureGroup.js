@@ -16,7 +16,12 @@ naissance.FeatureGroup = class extends naissance.Feature {
 		
 		//Declare UI; attached to UI_LeftbarHierarchy
 		this.interface = veInterface({
-			actions: this.drawActionsPalette({ move_to_filters: ["FeatureGroup"] })
+			actions: this.drawActionsPalette({
+				name: "Group",
+				type: "group",
+				
+				move_to_filters: ["FeatureGroup"] 
+			})
 		}, { is_folder: false });
 		this.drawHierarchyDatatype();
 	}

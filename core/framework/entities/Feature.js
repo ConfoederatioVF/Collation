@@ -65,7 +65,9 @@ naissance.Feature = class extends ve.Class {
 		let options = (arg0_options) ? arg0_options : {};
 		
 		//Initialise options
+		if (!options.name) options.name = "Feature";
 		if (!options.move_to_filters) options.move_to_filters = ["FeatureGroup", "FeatureLayer"];
+		if (!options.type) options.type = "feature";
 		
 		//Return statement
 		return veInterface({
@@ -74,7 +76,7 @@ naissance.Feature = class extends ve.Class {
 					veConfirm(`Are you sure you want to clean all geometry tags in ${this.name}?`, {
 						special_function: () => {
 							DALS.Timeline.parseAction({
-								options: { name: "Clean Geometry Tags", key: "clean_layer_geometry_tags" },
+								options: { name: "Clean Geometry Tags", key: `clean_${options.type}_geometry_tags` },
 								value: [{
 									type: "Feature",
 									feature_id: this.id,
@@ -99,22 +101,22 @@ naissance.Feature = class extends ve.Class {
 							if (this._ui.clean_symbols) all_flags.push("symbol");
 							
 							DALS.Timeline.parseAction({
-								options: { name: "Clean Keyframes", key: "clean_layer_keyframes" },
+								options: { name: "Clean Keyframes", key: `clean_${options.type}_keyframes` },
 								value: [{
 									type: "Feature",
 									feature_id: this.id,
 									clean_keyframes: all_flags
 								}]
 							});
-							veToast(`Cleaned layer keyframes.`);
+							veToast(`Cleaned ${options.name} keyframes.`);
 						}, { name: "Confirm" })
-					}, { name: "Clean Layer Keyframes", can_rename: false });
-				}, { name: "Clean Layer Keyframes"}),
+					}, { name: `Clean ${options.name} Keyframes`, can_rename: false });
+				}, { name: `Clean ${options.name} Keyframes` }),
 				flatten_all_geometries: veButton(() => {
 					veConfirm(`Are you sure you want to flatten all geometries in ${this.name}?`, {
 						special_function: () => {
 							DALS.Timeline.parseAction({
-								options: { name: "Flatten Geometries", key: "flatten_layer_geometries" },
+								options: { name: "Flatten Geometries", key: `flatten_${options.type}_geometries` },
 								value: [{
 									type: "Feature",
 									feature_id: this.id,
@@ -130,8 +132,8 @@ naissance.Feature = class extends ve.Class {
 				move_entities_to: veButton(() => {
 					if (this.move_entities_window) this.move_entities_window.close();
 					this.move_entities_window = veWindow({
-						to_layer: new UI_FeatureDatalist(this._ui.to_feature_id, {
-							name: "To Layer",
+						to_feature: new UI_FeatureDatalist(this._ui.to_feature_id, {
+							name: `To ${options.name}`,
 							filter_types: options.move_to_filters,
 							onuserchange: (v) => {
 								console.log(v);
@@ -145,18 +147,18 @@ naissance.Feature = class extends ve.Class {
 								
 								//Parse action
 								DALS.Timeline.parseAction({
-									options: { name: "Move Geometries To", key: "move_layer_geometries_to" },
+									options: { name: "Move Geometries To", key: `move_${options.type}_geometries_to` },
 									value: [{
 										type: "Feature",
 										feature_id: this.id,
 										move_all_entities_to_feature: this._ui.to_feature_id
 									}]
 								});
-								veToast(`Moved all geometries from ${this.name} Layer to ${ot_feature.name} Layer.`);
+								veToast(`Moved all geometries from ${this.name} ${options.name} to ${ot_feature.name} ${options.name}.`);
 							} catch (e) { console.error(e); }
 						}, { name: "Confirm" })
 					}, { name: "Move Entities To", can_rename: false })
-				}, { name: "Move Entities To Layer" })
+				}, { name: `Move Entities To ${options.name}` })
 			}, {
 				display: "inline",
 				placeholder: "Search for action ...",
@@ -214,7 +216,7 @@ naissance.Feature = class extends ve.Class {
 	}
 	
 	/**
-	 * Returns an array of all {@link naissance.Geometry}|{@link naissance.Feature} instances housed in the FeatureLayer.
+	 * Returns an array of all {@link naissance.Geometry}|{@link naissance.Feature} instances housed in the Feature.
 	 *
 	 * @param {naissance.Feature} [arg0_object]
 	 * @param {Object} [arg1_options]
