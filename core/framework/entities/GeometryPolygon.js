@@ -280,12 +280,10 @@ naissance.GeometryPolygon = class extends naissance.Geometry {
 				turf.intersect(turf.featureCollection([ot_turf_geometry, cursor_turf_geometry])) :
 				turf.intersect(turf.featureCollection([turf_geometry, cursor_turf_geometry]));
 			if (!turf_intersection) return; //Internal guard clause if nothing overlaps
-			turf_intersection = turf.buffer(turf_intersection, 0.001, { units: "kilometers" });
-			let turf_simplify = turf_intersection;
-				try { turf_simplify = turf.simplify(turf_intersection, { tolerance: 0.01 }); } catch (e) { console.error(e); }
+			turf_intersection = turf.buffer(turf_intersection, 0.01, { units: "kilometers" });
 			
 			//Transfer selected polygon
-			e.geometry = Geospatiale.convertTurfToMaptalks(turf_simplify);
+			e.geometry = Geospatiale.convertTurfToMaptalks(turf_intersection);
 			
 			if (main.brush.node_editor.mode === "add") {
 				DALS.Timeline.parseAction({
@@ -296,6 +294,14 @@ naissance.GeometryPolygon = class extends naissance.Geometry {
 						remove_from_polygon: { geometry: e.geometry.toJSON() }
 					}]
 				});
+				DALS.Timeline.parseAction({
+					options: { name: "Simplify Polygon", key: "simplify_polygon" },
+					value: [{
+						type: "GeometryPolygon",
+						geometry_id: from_geometry.id,
+						simplify_polygon: 0.01
+					}]
+				}, true);
 			} else if (main.brush.node_editor.mode === "remove") {
 				/*let debug_polygon = maptalks.Geometry.fromJSON(e.geometry.toJSON());
 					console.log(`Debug polygon:`, debug_polygon);
@@ -306,9 +312,18 @@ naissance.GeometryPolygon = class extends naissance.Geometry {
 					value: [{
 						type: "GeometryPolygon",
 						geometry_id: from_geometry.id,
-						add_to_polygon: { geometry: e.geometry.toJSON() }
+						add_to_polygon: { geometry: e.geometry.toJSON() },
+						simplify_polygon: 0.01
 					}]
 				});
+				DALS.Timeline.parseAction({
+					options: { name: "Simplify Polygon", key: "simplify_polygon" },
+					value: [{
+						type: "GeometryPolygon",
+						geometry_id: from_geometry.id,
+						simplify_polygon: 0.01
+					}]
+				}, true);
 			}
 			
 		} catch (e) { console.error(e); }
