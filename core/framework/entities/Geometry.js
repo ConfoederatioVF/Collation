@@ -672,6 +672,7 @@ naissance.Geometry = class extends ve.Class {
 	 *  @param {Object} [arg1_options.command="set_symbol"] - The `parseAction()` command to package up.
 	 *  @param {string} [arg1_options.key="set_geometry_symbols"]
 	 *  @param {string} [arg1_options.name="Set Geometry Symbols"]
+	 *  @param {string} [arg1_options.type="Geometry"]
 	 *  @param {function()|Object} [arg1_options.value] - The individual value to actually send to each command. If a function, the return value is concatenated. .arguments[0] if a function refers to the index.
 	 *  
 	 *  @param {Object} [arg1_options.date] - The date at which to apply this change.
@@ -685,6 +686,7 @@ naissance.Geometry = class extends ve.Class {
 		if (!options.command) options.command = "set_symbol";
 		if (!options.key) options.key = "set_geometry_symbols";
 		if (!options.name) options.name = "Set Geometry Symbols";
+		if (!options.type) options.type = "Geometry";
 		if (!options.value) options.value = {};
 		
 		//Declare local instance variables
@@ -699,7 +701,7 @@ naissance.Geometry = class extends ve.Class {
 				local_value = options.value(i);
 			
 			dals_value_array.push({ 
-				type: "Geometry", 
+				type: options.type,
 				geometry_id: geometry_ids[i], 
 				[options.command]: options.value 
 			});

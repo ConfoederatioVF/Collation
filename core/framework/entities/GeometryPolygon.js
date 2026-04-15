@@ -281,9 +281,11 @@ naissance.GeometryPolygon = class extends naissance.Geometry {
 				turf.intersect(turf.featureCollection([turf_geometry, cursor_turf_geometry]));
 			if (!turf_intersection) return; //Internal guard clause if nothing overlaps
 			turf_intersection = turf.buffer(turf_intersection, 0.001, { units: "kilometers" });
+			let turf_simplify = turf_intersection;
+				try { turf_simplify = turf.simplify(turf_intersection, { tolerance: 0.01 }); } catch (e) { console.error(e); }
 			
 			//Transfer selected polygon
-			e.geometry = Geospatiale.convertTurfToMaptalks(turf_intersection);
+			e.geometry = Geospatiale.convertTurfToMaptalks(turf_simplify);
 			
 			if (main.brush.node_editor.mode === "add") {
 				DALS.Timeline.parseAction({
@@ -438,6 +440,23 @@ naissance.GeometryPolygon = class extends naissance.Geometry {
 				
 				polygon_obj.addKeyframe(main.date, (turf_simplify) ?
 					Geospatiale.convertTurfToMaptalks(turf_simplify).toJSON() : null);
+			}
+			
+			//simplify_polygon_for_all_keyframes
+			if (json.simplify_polygon_for_all_keyframes !== undefined) {
+				Object.iterate(polygon_obj.history.keyframes, (local_key, local_value) => {
+					let local_geometry = local_value.value[0];
+					
+					if (local_geometry && local_geometry !== "undefined") {
+						let geometry = maptalks.Geometry.fromJSON(local_geometry);
+						
+						if (geometry) try {
+							let turf_simplify = turf.simplify(Geospatiale.convertMaptalksToTurf(geometry), { tolerance: json.simplify_polygon_for_all_keyframes });
+							
+							local_value.value[0] = Geospatiale.convertTurfToMaptalks(turf_simplify).toJSON();
+						} catch (e) { console.error(`Error simplifying ${polygon_obj.name}:`, local_value, e); }
+					}
+				});
 			}
 		}
 	}

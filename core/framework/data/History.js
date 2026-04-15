@@ -317,6 +317,7 @@ naissance.History = class extends ve.Class {
 									...local_keyframe.value[x].variables,
 								};
 						} else if (local_keyframe.value[x] !== undefined) {
+							if (local_keyframe.value[x] === "undefined") continue; //Overwrite undefined strings
 							if (x !== 0 && local_keyframe.value[x] === null) continue; //Null should be overridden for [1] symbols, [2] properties
 							//If the value is null or a primitive, it overwrites the previous accumulated state
 							return_keyframe.value[x] = local_keyframe.value[x];
@@ -399,6 +400,7 @@ naissance.History = class extends ve.Class {
 		for (let i = 0; i < all_keyframes.length; i++) {
 			let local_keyframe = this.keyframes[all_keyframes[i]];
 			
+			if (local_keyframe.value[0] === undefined) local_keyframe.value[0] = "undefined";
 			json_obj.keyframes[all_keyframes[i]] = { value: local_keyframe.value };
 		}
 		

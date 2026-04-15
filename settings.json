@@ -1,6 +1,6 @@
 {
   "autoload_file": [
-    "D:\\Project 1509 - SVEA\\saves\\atlas-2.naissance"
+    "D:\\Project 1509 - SVEA\\saves\\atlas.naissance"
   ],
   "disable_autoload": true,
   "autoloading_mode": "default",
@@ -18,5 +18,6 @@
   "locale": "",
   "hierarchy_ordering": "geometries_at_top",
   "hierarchy_recommended_max_geometries_in_layer": 100,
-  "ui_scaling": 0.81
+  "ui_scaling": 0.8,
+  "disable_mapmode_interactivity": true
 }

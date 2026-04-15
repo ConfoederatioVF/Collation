@@ -9,6 +9,8 @@ naissance.Feature = class extends ve.Class {
 		this.instance = this;
 		this.is_naissance_feature = true;
 		this._is_visible = true;
+		this.metadata = {};
+		this.ui = {};
 		
 		//Initialise this.options
 		if (!this.options) this.options = {};
@@ -91,14 +93,14 @@ naissance.Feature = class extends ve.Class {
 				clean_keyframes: veButton(() => {
 					if (this.clean_keyframes_window) this.clean_keyframes_window.close();
 					this.clean_keyframes_window = veWindow({
-						clean_symbols: veToggle(this._ui.clean_symbols, {
+						clean_symbols: veToggle(this.ui.clean_symbols, {
 							name: "Clean Symbols",
-							onuserchange: (v) => this._ui.clean_symbols = v
+							onuserchange: (v) => this.ui.clean_symbols = v
 						}),
 						clean_keyframes: veButton(() => {
 							//Declare local instance variables
 							let all_flags = [];
-							if (this._ui.clean_symbols) all_flags.push("symbol");
+							if (this.ui.clean_symbols) all_flags.push("symbol");
 							
 							DALS.Timeline.parseAction({
 								options: { name: "Clean Keyframes", key: `clean_${options.type}_keyframes` },
@@ -132,18 +134,18 @@ naissance.Feature = class extends ve.Class {
 				move_entities_to: veButton(() => {
 					if (this.move_entities_window) this.move_entities_window.close();
 					this.move_entities_window = veWindow({
-						to_feature: new UI_FeatureDatalist(this._ui.to_feature_id, {
+						to_feature: new UI_FeatureDatalist(this.ui.to_feature_id, {
 							name: `To ${options.name}`,
 							filter_types: options.move_to_filters,
 							onuserchange: (v) => {
 								console.log(v);
-								this._ui.to_feature_id = v;
+								this.ui.to_feature_id = v;
 							}
 						}),
 						confirm: veButton(() => {
 							try {
 								//Declare local instance variables
-								let ot_feature = naissance.Feature.instances.filter((v) => v.id === this._ui.to_feature_id)[0];
+								let ot_feature = naissance.Feature.instances.filter((v) => v.id === this.ui.to_feature_id)[0];
 								
 								//Parse action
 								DALS.Timeline.parseAction({
@@ -151,14 +153,39 @@ naissance.Feature = class extends ve.Class {
 									value: [{
 										type: "Feature",
 										feature_id: this.id,
-										move_all_entities_to_feature: this._ui.to_feature_id
+										move_all_entities_to_feature: this.ui.to_feature_id
 									}]
 								});
 								veToast(`Moved all geometries from ${this.name} ${options.name} to ${ot_feature.name} ${options.name}.`);
 							} catch (e) { console.error(e); }
 						}, { name: "Confirm" })
 					}, { name: "Move Entities To", can_rename: false })
-				}, { name: `Move Entities To ${options.name}` })
+				}, { name: `Move Entities To ${options.name}` }),
+				simplify_polygons: veButton(() => {
+					if (this.simplify_polygons_window) this.simplify_polygons_window.close();
+					this.simplify_polygons_window = veWindow({
+						simplify_threshold: veRange(Math.returnSafeNumber(this.ui.simplify_threshold, 0.01), {
+							name: `Simplify Threshold`,
+							onuserchange: (v) => this.ui.simplify_threshold = v
+						}),
+						confirm: veButton(() => {
+							//Declare local instance variables
+							let simplify_threshold = Math.returnSafeNumber(this.ui.simplify_threshold, 0.01);
+							
+							try {
+								DALS.Timeline.parseAction({
+									options: { name: "Simplify Polygons", key: `simplify_${options.type}_geometries` },
+									value: [{
+										type: "Feature",
+										feature_id: this.id,
+										simplify_all_polygons: simplify_threshold
+									}]
+								});
+								veToast(`Simplified all geometries by ${String.formatNumber(simplify_threshold)}`)
+							} catch (e) { console.error(e); }
+						}, { name: "Confirm" })
+					}, { name: "Simplify Polygons", can_rename: false });
+				}, { name: "Simplify Polygons" })
 			}, {
 				display: "inline",
 				placeholder: "Search for action ...",
@@ -388,6 +415,7 @@ naissance.Feature = class extends ve.Class {
 	 * - `.move_all_entities_to_feature`: {@link string}
 	 * - `.set_name`: {@link string}
 	 * - `.set_visibility`: {@link boolean}
+	 * - `.simplify_all_polygons`: {@link number}
 	 * 
 	 * @param {Object|string} arg0_json
 	 */
@@ -482,6 +510,23 @@ naissance.Feature = class extends ve.Class {
 				} else if (json.set_visibility === false) {
 					feature_obj.hide();
 				}
+			
+			//simplify_all_polygons
+			if (json.simplify_all_polygons !== undefined) {
+				let all_geometries = feature_obj.getAllGeometries();
+				let all_geometry_ids = [];
+				
+				//Iterate over all_geometries and append IDs for parsing
+				for (let i = 0; i < all_geometries.length; i++)
+					if (all_geometries[i].id) all_geometry_ids.push(all_geometries[i].id);
+				naissance.Geometry.parseActionForGeometries(all_geometry_ids, {
+					command: "simplify_polygon_for_all_keyframes",
+					key: "simplify_polygon_for_all_keyframes",
+					name: "Simplify F.Keyframes",
+					type: "GeometryPolygon",
+					value: json.simplify_all_polygons
+				});
+			}
 		}
 	}
 };

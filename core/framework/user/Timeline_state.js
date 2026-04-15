@@ -134,6 +134,7 @@
 			json_obj[local_feature.id] = {
 				id: local_feature.id,
 				class_name: local_feature.class_name,
+				metadata: local_feature.metadata,
 				type: "feature",
 				value: local_feature.toJSON()
 			};
