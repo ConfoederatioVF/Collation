@@ -137,10 +137,11 @@ naissance.Brush = class extends ve.Class {
 				width: 2,
 				x: 0, y: 3
 			}),
-			node_buffer: veNumber(Math.returnSafeNumber(this.node_buffer, 100), {
+			node_buffer: veNumber(Math.returnSafeNumber(this.node_buffer, 0), {
 				name: "Node Buffer (m)",
 				binding: "this.node_buffer",
 				limit: () => this.mode === "node_transfer",
+				width: 2,
 				x: 0, y: 4
 			}),
 			

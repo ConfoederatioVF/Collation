@@ -294,14 +294,16 @@ naissance.GeometryPolygon = class extends naissance.Geometry {
 						remove_from_polygon: { geometry: e.geometry.toJSON() }
 					}]
 				});
-				DALS.Timeline.parseAction({
-					options: { name: "Simplify Polygon", key: "simplify_polygon" },
-					value: [{
-						type: "GeometryPolygon",
-						geometry_id: this.id,
-						simplify_polygon: 0.01
-					}]
-				}, true);
+				setTimeout(() => {
+					DALS.Timeline.parseAction({
+						options: { name: "Simplify Polygon", key: "simplify_polygon" },
+						value: [{
+							type: "GeometryPolygon",
+							geometry_id: this.id,
+							simplify_polygon: 0.01
+						}]
+					}, true);
+				}, 100);
 			} else if (main.brush.node_editor.mode === "remove") {
 				/*let debug_polygon = maptalks.Geometry.fromJSON(e.geometry.toJSON());
 					console.log(`Debug polygon:`, debug_polygon);
@@ -316,14 +318,17 @@ naissance.GeometryPolygon = class extends naissance.Geometry {
 						simplify_polygon: 0.01
 					}]
 				});
-				DALS.Timeline.parseAction({
-					options: { name: "Simplify Polygon", key: "simplify_polygon" },
-					value: [{
-						type: "GeometryPolygon",
-						geometry_id: from_geometry.id,
-						simplify_polygon: 0.01
-					}]
-				}, true);
+				
+				setTimeout(() => {
+					DALS.Timeline.parseAction({
+						options: { name: "Simplify Polygon", key: "simplify_polygon" },
+						value: [{
+							type: "GeometryPolygon",
+							geometry_id: from_geometry.id,
+							simplify_polygon: 0.01
+						}]
+					}, true);
+				}, 100);
 			}
 			
 		} catch (e) { console.error(e); }
