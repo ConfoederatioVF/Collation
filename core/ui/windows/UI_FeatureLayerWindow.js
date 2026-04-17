@@ -117,7 +117,9 @@ global.UI_FeatureLayerWindow = class extends ve.Class {
 		let do_not_refresh = arg0_do_not_refresh;
 		
 		//Declare local instance variables
-		let all_geometries = this.layer.getAllGeometries();
+		let all_geometries = this.layer.getAllGeometries(undefined, {
+			refresh_metadata: true
+		});
 		
 		//Refresh this.CRUD
 		if (!this.CRUD || !this.isOpen("instance")) this.draw();

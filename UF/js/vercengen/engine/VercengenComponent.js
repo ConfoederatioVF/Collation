@@ -135,9 +135,8 @@ ve.Component = class {
 		
 		//Binding handlers; setTimeout() is necessary to tick a frame until ve.Component child class's constructor populates
 		setTimeout(() => {
-			HTML.applyTelestyle(this.element, this.options.style);
-			if (this.options.theme)
-				HTML.applyTelestyle(this.element, ve.registry.themes[this.options.theme]);
+			if (this.options.style) HTML.applyTelestyle(this.element, this.options.style);
+			if (this.options.theme) HTML.applyTelestyle(this.element, ve.registry.themes[this.options.theme]);
 			
 			//Flow control handlers
 			//.binding handler (bidirectional)

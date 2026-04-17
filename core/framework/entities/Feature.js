@@ -244,10 +244,12 @@ naissance.Feature = class extends ve.Class {
 	
 	/**
 	 * Returns an array of all {@link naissance.Geometry}|{@link naissance.Feature} instances housed in the Feature.
+	 * - Method of: {@link naissance.Feature}
 	 *
 	 * @param {naissance.Feature} [arg0_object]
 	 * @param {Object} [arg1_options]
 	 *  @param {naissance.Feature[]} [arg1_options.owners]
+	 *  @param {boolean} [arg1_options.refresh_metadata=false]
 	 *  @param {string[]} [arg1_options.types=["Feature", "Geometry"]] - The types to filter for.
 	 *
 	 * @returns {naissance.Geometry[]}
@@ -286,13 +288,15 @@ naissance.Feature = class extends ve.Class {
 				
 				if (local_entity) {
 					//Edit metadata
-					if (!local_entity.metadata) local_entity.metadata = {};
-					if (!local_entity.metadata.tags) local_entity.metadata.tags = [];
-					
-					//Iterate over all owner_names and ensure they inherit the proper tags if they don't exist, i.e. convert groups to tags
-					for (let x = 0; x < owner_names.length; x++)
-						if (!local_entity.metadata.tags.includes(owner_names[x]))
-							local_entity.metadata.tags.push(owner_names[x]);
+					if (options.refresh_metadata) {
+						if (!local_entity.metadata) local_entity.metadata = {};
+						if (!local_entity.metadata.tags) local_entity.metadata.tags = [];
+						
+						//Iterate over all owner_names and ensure they inherit the proper tags if they don't exist, i.e. convert groups to tags
+						for (let x = 0; x < owner_names.length; x++)
+							if (!local_entity.metadata.tags.includes(owner_names[x]))
+								local_entity.metadata.tags.push(owner_names[x]);
+					}
 					
 					//Recurse if the entity has its own entities
 					if (local_entity.entities)
