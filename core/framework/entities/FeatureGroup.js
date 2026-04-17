@@ -118,7 +118,7 @@ naissance.FeatureGroup = class extends naissance.Feature {
 			}, {
 				name: `<icon>more_vert</icon>`,
 				tooltip: "Edit Group",
-				style: { order: 100, padding: 0 }
+				attributes: { class: "order-100" },
 			}),
 			
 			...hierarchy_obj

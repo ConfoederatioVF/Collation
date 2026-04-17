@@ -198,9 +198,7 @@ naissance.Feature = class extends ve.Class {
 			})
 		}, {
 			name: "Actions",
-			style: {
-				padding: 0
-			}
+			style: { padding: 0 }
 		});
 	}
 	
