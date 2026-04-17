@@ -136,6 +136,7 @@ naissance.History = class extends ve.Class {
 	draw () {
 		//Declare local instance variables
 		let components_obj = {};
+		if (this.interface) this.interface.remove();
 		this.interface = new ve.Interface({}, { name: "Keyframes", width: 99 });
 		this.getKeyframe({ refresh_localisation: true });
 		
