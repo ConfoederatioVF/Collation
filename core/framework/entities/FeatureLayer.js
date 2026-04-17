@@ -4,7 +4,7 @@ if (!global.naissance) global.naissance = {};
  */
 naissance.FeatureLayer = class extends naissance.Feature {
 	constructor (arg0_entities, arg1_options) {
-		super();
+		super(arg1_options);
 		this.cannot_nest_self = true;
 		this.class_name = "FeatureLayer";
 		/**

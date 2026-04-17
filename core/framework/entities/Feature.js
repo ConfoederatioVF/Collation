@@ -2,14 +2,17 @@ if (!global.naissance) global.naissance = {};
 naissance.Feature = class extends ve.Class {
 	static instances = [];
 	
-	constructor () {
+	constructor (arg0_options) {
 		//Convert from parameters
+		let options = (arg0_options) ? arg0_options : {};
+		
+		//Declare local instance variables
 		super();
 		this.id = Class.generateRandomID(naissance.Feature);
 		this.instance = this;
 		this.is_naissance_feature = true;
 		this._is_visible = true;
-		this.metadata = {};
+		this.metadata = (options.metadata) ? options.metadata : {};
 		this.ui = {};
 		
 		//Initialise this.options

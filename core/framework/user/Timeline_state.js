@@ -82,9 +82,11 @@
 		//3. Handle naissance.Feature classes
 		Object.iterate(json, (local_key, local_value) => {
 			if (local_value.class_name && local_value.type === "feature") {
-				let feature_obj = new naissance[local_value.class_name]();
+				let feature_obj = new naissance[local_value.class_name](undefined, {
+					metadata: local_value.metadata
+				});
+				
 				if (local_value.id) feature_obj.id = local_value.id;
-				if (local_value.metadata) feature_obj.metadata = local_value.metadata;
 				if (local_value.value) feature_obj.json = local_value.value;
 			}
 		});
