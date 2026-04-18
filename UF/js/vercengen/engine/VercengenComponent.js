@@ -57,6 +57,7 @@
  * - <span color=00ffff>{@link ve.Component.setOwner|setOwner}</span>(arg0_value:{@link Object}, arg1_owner_array=[]:{@link Array}<{@link Object}>) - Used by the reflection engine in {@link ve.Class} to set the owner hierarchy automatically.
  * 
  * ##### Static Methods:
+ * - <span color=00ffff>{@link ve.Component.getElement|getElement}</span>(arg0_component_obj:{@link ve.Component}|{@link HTMLElement}) | {@link HTMLElement}
  * - <span color=00ffff>{@link ve.Component.linter|linter}</span>() - Run at startup if {@link ve.registry.debug_mode} is true. Lints all Vercengen components.
  * 
  * ##### Types:
