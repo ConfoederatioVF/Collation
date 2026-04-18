@@ -394,6 +394,25 @@ naissance.Geometry = class extends ve.Class {
 	}
 	
 	/**
+	 * Returns a unique list of all names as a flat array, without respect to keyframes.
+	 */
+	getAllNames () {
+		//Declare local instance variables
+		let all_names = [];
+		
+		//Iterate over this.history.keyframes
+		Object.iterate(this.history.keyframes, (local_key, local_value) => {
+			let local_properties = local_value.value?.[2];
+			
+			if (local_properties?.name)
+				if (!all_names.includes(local_properties.name))all_names.push(local_properties.name);
+		});
+		
+		//Return statement
+		return all_names;
+	}
+	
+	/**
 	 * Fetches the layer that the current {@link naissance.Geometry} is appended to, if anything. Used for masking.
 	 *
 	 * @returns {naissance.FeatureLayer}

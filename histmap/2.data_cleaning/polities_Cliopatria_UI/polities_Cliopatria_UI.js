@@ -6,7 +6,6 @@ global.polities_Cliopatria_UI = class {
 	
 	constructor (arg0_options) {
 		//Declare local instance variables
-		this.geojson_obj = JSON.parse(fs.readFileSync(polities_Cliopatria_UI.input_path, "utf8"));
 		this.geometries = [];
 		this.is_dataset = true;
 	}
@@ -23,6 +22,7 @@ global.polities_Cliopatria_UI = class {
 		let date_obj = (arg0_date) ? arg0_date : Date.getCurrentDate();
 		
 		//Declare local instance variables
+		this.geojson_obj = JSON.parse(fs.readFileSync(polities_Cliopatria_UI.input_path, "utf8"));
 		let label_geometries = [];
 		let map_defines = config.defines.map;
 		
@@ -108,5 +108,6 @@ global.polities_Cliopatria_UI = class {
 				}
 		}
 		this.geometries = this.geometries.concat(label_geometries);
+		this.geojson_obj = null; //Free memory
 	}
 };
