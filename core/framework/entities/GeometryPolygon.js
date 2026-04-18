@@ -166,8 +166,10 @@ naissance.GeometryPolygon = class extends naissance.Geometry {
 			//5. Add bindings
 			if (this.geometry) {
 				this.geometry.addEventListener("click", (e) => {
-					if (!["fill_tool", "node", "node_override", "node_transfer"].includes(main.brush.mode))
+					if (!["fill_tool", "node", "node_override", "node_transfer"].includes(main.brush.mode)) {
+						try { this.keyframes_ui.v = this.history.interface.v; } catch (e) {}
 						super.open("instance", { name: this.name, ...this.window_options });
+					}
 				});
 			}
 		}
@@ -181,7 +183,7 @@ naissance.GeometryPolygon = class extends naissance.Geometry {
 			if (this.selected_geometry) this.selected_geometry.remove();
 		}
 		
-		//7. Render keyframes
+		//7. Render keyframess
 		try { this.keyframes_ui.v = this.history.interface.v; } catch (e) {}
 	}
 	
@@ -198,7 +200,8 @@ naissance.GeometryPolygon = class extends naissance.Geometry {
 		} catch (e) {}
 		
 		//Return statement
-		let hierarchy_datatype = new ve.HierarchyDatatype({
+		if (this.hierarchy_datatype) this.hierarchy_datatype.remove();
+		this.hierarchy_datatype = new ve.HierarchyDatatype({
 			icon: veHTML(`<icon style = "${
 				(current_symbol?.polygonFill) ? `color: ${current_symbol?.polygonFill};` : ""
 			}">pentagon</icon>`, {
@@ -207,6 +210,8 @@ naissance.GeometryPolygon = class extends naissance.Geometry {
 			...super.drawHierarchyDatatypeGenerics(),
 			context_menu: veButton(() => {
 				this.history.draw();
+				
+				try { this.keyframes_ui.v = this.history.interface.v; } catch (e) {}
 				super.open("instance", { name: this.name, ...this.window_options });
 			}, {
 				attributes: { class: "order-101" },
@@ -232,7 +237,7 @@ naissance.GeometryPolygon = class extends naissance.Geometry {
 			}
 		});
 		delete this._current_keyframe;
-		return hierarchy_datatype;
+		return this.hierarchy_datatype;
 	}
 	
 	getActionsBarElement () {
@@ -241,6 +246,7 @@ naissance.GeometryPolygon = class extends naissance.Geometry {
 		
 		let context_menu_button = veButton(() => {
 			this.history.draw();
+			try { this.keyframes_ui.v = this.history.interface.v; } catch (e) {}
 			super.open("instance", { name: this.name, ...this.window_options });
 		}, {
 			attributes: { class: "order-101" },
