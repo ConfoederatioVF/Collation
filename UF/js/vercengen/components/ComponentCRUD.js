@@ -506,6 +506,19 @@ ve.CRUD = class extends ve.Component { //[WIP] - CRUD should keep track of compo
       local_checkbox.element.setAttribute("data-value", is_selected);
     });
   }
+  
+  /**
+   * Garbage collects all CRUD instances.
+   * - Static method of: {@link ve.CRUD}
+   * 
+   * @alias gc
+   * @memberof ve.Component.ve.CRUD
+   */
+  static gc () {
+    //Iterate over all .instances and gc them
+    for (let i = 0; i < ve.CRUD.instances.length; i++)
+      ve.CRUD.instances[i].gc();
+  }
 };
 
 //Functional binding

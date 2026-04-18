@@ -16,10 +16,27 @@ global.path = require("path");
 		 */
 		global.ve = {
 			/**
+			 * @type {number}
+			 */
+			start_timestamp: new Date().getTime(),
+			
+			/**
 			 * Registry is initialised from {@link window.ve_registry} if it exists. Otherwise, default settings are used across Vercengen.
 			 * @type {Object}
 			 */
-			registry: (window.ve_registry) ? window.ve_registry :{
+			registry: (window.ve_registry) ? window.ve_registry : {
+				/**
+				 * The number of seconds after program-start to target {@link ve.Component}/{@link ve.Feature} with heuristic free.
+				 * @type {number}
+				 */
+				debug_heuristic_free_start: 30,
+				
+				/**
+				 * The number of seeconds from the current timestamp to target {@link ve.Component}/{@link ve.Feature} with heuristic free.
+				 * @type {number}
+				 */
+				debug_heuristic_free_end: 30,
+				
 				/**
 				 * Determines whether or not to run linters at runtime.
 				 * @type {boolean}
@@ -29,7 +46,7 @@ global.path = require("path");
 				 * Whether to profile {@link ve.Component}. Can be memory-intensive.
 				 * @type {boolean}
 				 */
-				debug_profile_components: false,
+				debug_profile_components: true,
 				
 				/**
 				 * @type {{"<component_key>": ve.Component}}

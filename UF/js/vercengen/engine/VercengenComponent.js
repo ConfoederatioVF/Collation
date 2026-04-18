@@ -150,6 +150,7 @@ ve.Component = class {
 			let ref = new WeakRef(this);
 			
 			this._id = Class.generateRandomID(ve.Component); //Private variable since sub-components have their own .id and .instances
+			this._timestamp = new Date().getTime();
 			
 			ve.Component.instances.push(ref);
 			ve.Component.registry.register(this, ref);
