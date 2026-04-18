@@ -613,6 +613,26 @@ ve.Component = class {
 	}
 	
 	/**
+	 * Returns the {@link HTMLElement} of a given Vercengen Component/DOM Node.
+	 * - Static method of: {@link ve.Component}
+	 * 
+	 * @param {HTMLElement|ve.Component} arg0_component_obj
+	 * 
+	 * @returns {HTMLElement}
+	 */
+	static getElement (arg0_component_obj) {
+		//Convert from parameters
+		let component_obj = arg0_component_obj;
+		
+		//Return statement
+		if (component_obj.is_vercengen_component) {
+			return component_obj.element;
+		} else if (component_obj instanceof HTMLElement) {
+			return component_obj;
+		}
+	}
+	
+	/**
 	 * Runs over all Vercengen components that extend <span color="yellow">{@link ve.Component}</span> and lints them in addition to declaring `ve[local_key]`() as a functional binding for each.
 	 * - Static method of: {@link ve.Component}
 	 * 
