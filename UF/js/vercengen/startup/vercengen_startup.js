@@ -26,13 +26,19 @@ global.path = require("path");
 			 */
 			registry: (window.ve_registry) ? window.ve_registry : {
 				/**
+				 * Whether to enable heuristic free.
+				 * @type {boolean}
+				 */
+				debug_heuristic_free: false,
+				
+				/**
 				 * The number of seconds after program-start to target {@link ve.Component}/{@link ve.Feature} with heuristic free.
 				 * @type {number}
 				 */
 				debug_heuristic_free_start: 30,
 				
 				/**
-				 * The number of seeconds from the current timestamp to target {@link ve.Component}/{@link ve.Feature} with heuristic free.
+				 * The number of seconds from the current timestamp to target {@link ve.Component}/{@link ve.Feature} with heuristic free.
 				 * @type {number}
 				 */
 				debug_heuristic_free_end: 30,
@@ -46,7 +52,7 @@ global.path = require("path");
 				 * Whether to profile {@link ve.Component}. Can be memory-intensive.
 				 * @type {boolean}
 				 */
-				debug_profile_components: true,
+				debug_profile_components: false,
 				
 				/**
 				 * @type {{"<component_key>": ve.Component}}
@@ -532,6 +538,7 @@ global.path = require("path");
 				global.ve_gc_loop = setInterval(() => {
 					//Perform GC
 					if (ve?.Tooltip?.refresh) ve.Tooltip.refresh();
+					if (ve.registry.debug_heuristic_free) ve.gc();
 				}, 1000);
 				
 				clearInterval(global.initialise_ve_loop);

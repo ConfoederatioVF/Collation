@@ -295,8 +295,10 @@ ve.Component = class {
 	 */
 	get limit () {
 		//Return statement
-		return (this.limit_function !== undefined) ? 
-			this.limit_function(this.v, this) : true;
+		try {
+			return (typeof this.limit_function === "function") ?
+				this.limit_function(this.v, this) : true;
+		} catch (e) { return false; }
 	}
 	
 	/**
@@ -535,7 +537,10 @@ ve.Component = class {
 	 */
 	remove () {
 		//Declare local instance variables
-		let child_class_obj = ve[this.child_class.prototype.constructor.name];
+		let all_keys = Object.keys(this);
+			if (all_keys.length === 0) return; //Internal guard clause if already cleared
+		let child_class_obj;
+			try { child_class_obj = ve[this.child_class.prototype.constructor.name]; } catch (e) {}
 		
 		//Clear element first if available
 		if (typeof this.clear === "function")
@@ -555,8 +560,6 @@ ve.Component = class {
 		if (this.element) this.element.remove();
 		
 		//Remove everything else
-		let all_keys = Object.keys(this);
-		
 		if (this.options.onremove) this.options.onremove(this); //Fire .options.onremove if it exists
 		
 		//Iterate over this and delete it
