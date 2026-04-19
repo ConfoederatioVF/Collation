@@ -340,7 +340,7 @@ global.UI_LeftbarHierarchy = class { //[WIP] - Finish naissance.Feature first
 		this._saveScrollState();
 		
 		//2. Build the new hierarchy
-		if (this.hierarchy) this.hierarchy.remove();
+		if (this.hierarchy?.remove) this.hierarchy.remove();
 		this.hierarchy_obj = {};
 		
 		let current_hierarchy = this.drawHierarchy();

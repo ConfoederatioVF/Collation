@@ -197,7 +197,7 @@ naissance.GeometryPolygon = class extends naissance.Geometry {
 		} catch (e) {}
 		
 		//Return statement
-		if (this.hierarchy_datatype) this.hierarchy_datatype.remove();
+		if (this.hierarchy_datatype?.remove) this.hierarchy_datatype.remove();
 		this.hierarchy_datatype = new ve.HierarchyDatatype({
 			icon: veHTML(`<icon style = "${
 				(current_symbol?.polygonFill) ? `color: ${current_symbol?.polygonFill};` : ""
