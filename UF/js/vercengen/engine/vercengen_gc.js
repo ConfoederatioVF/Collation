@@ -26,7 +26,6 @@ if (!global.ve) global.ve = {};
 			
 			//Remove component
 			if (typeof local_component.remove === "function") {
-				console.log(`Freeing`, local_component);
 				local_component.remove();
 				ve.Component.instances.splice(i, 1);
 			}
