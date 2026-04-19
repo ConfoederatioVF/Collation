@@ -8,6 +8,7 @@
  *   - `.from_binding`: {@link string} - Related event: `.onprogramchange`. Unidirectional data binding.
  *   - `.to_binding`: {@link string} - Related event: `.onuserchange`. Unidirectional data binding.
  *   - 
+ *   - `.gc=false`: {@link boolean} - Whether to auto-remove the component upon being detached.
  *   - `.onchange`: {@link function}(this.v, this:{@link ve.Component})
  *   - `.onprogramchange`: {@link function}(this.v, this:{@link ve.Component})
  *   - `.onuserchange`: {@link function}(this.v, this:{@link ve.Component})
@@ -51,6 +52,7 @@
  * - <span color=00ffff>{@link ve.Component.bind|bind}</span>(arg0_container_el:{@link HTMLElement}) - Manually mounts the current component to arg0_container_el.
  * - <span color=00ffff>{@link ve.Component.fireFromBinding|fireFromBinding}</span>() - Pseudo-setter from binding. Fires only upon program-driven changes to `.v` directly.
  * - <span color=00ffff>{@link ve.Component.fireToBinding|fireToBinding}</span>() - Pseudo-setter to binding. Fires only upon user-driven changes to `.v`.
+ * - <span color=00ffff>{@link ve.Component.gc|gc}</span>() - Adds the component to garbage collection.
  * - <span color=00ffff>{@link ve.Component.remove|remove}</span>() - Removes the component/element from the DOM.
  * - <span color=00ffff>{@link ve.Component.removeComponent|removeComponent}</span>() - Unmounts the current component from its parent_el.
  * - <span color=00ffff>{@link ve.Component.setValueFromObject|setValueFromObject}</span>(arg0_object:{@link Object}, arg1_object:{@link Object}) - 
