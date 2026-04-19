@@ -112,6 +112,6 @@ let win;
 
 //IPC handling
 {
-  let ve = require("./UF/js/vercengen/startup/vercengen_electron");
+  let ve = require("./UF/js/vercengen/engine/vercengen_electron");
   ve.initialiseIPC();
 }

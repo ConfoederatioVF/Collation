@@ -147,7 +147,7 @@ ve.Component = class {
 		this.y = options.y;
 		
 		//Push to instances if ve.registry.debug_profile_components is true
-		if (ve.registry.debug_profile_components) {
+		if (ve.registry.debug_profile_components || this.options.gc) {
 			let ref = new WeakRef(this);
 			
 			this._id = Class.generateRandomID(ve.Component); //Private variable since sub-components have their own .id and .instances
@@ -570,7 +570,8 @@ ve.Component = class {
 			delete this[all_keys[i]];
 		
 		//Clear freed this.instances
-		ve.Component.instances = ve.Component.instances.filter((ref) => ref.deref() !== undefined);
+		ve.Component.instances = ve.Component.instances.filter((ref) => (
+			ref instanceof WeakRef && ref.deref() !== undefined));
 	}
 	
 	/**

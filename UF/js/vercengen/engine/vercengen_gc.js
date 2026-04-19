@@ -2,9 +2,10 @@ if (!global.ve) global.ve = {};
 
 //Initialise functions
 {
-	ve.gc = function () { //[WIP] - Heuristic free needs to be better with exception fields (.no_gc)
-		if (!ve.registry.debug_profile_components) return; //Internal guard clause if debug_profile_components doesn't exist
-		
+	/**
+	 * Performs garbage collection when elements are detached.
+	 */
+	ve.gc = function () {
 		//Declare local instance variables
 		let heuristic_free_end = ve.registry.debug_heuristic_free_end*1000;
 		let heuristic_free_start = ve.registry.debug_heuristic_free_start*1000;
