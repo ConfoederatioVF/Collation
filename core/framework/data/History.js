@@ -136,7 +136,7 @@ naissance.History = class extends ve.Class {
 		
 		//Declare local instance variables
 		let components_obj = {};
-		if (this.interface) this.interface.remove();
+		if (this.interface && typeof this.interface.remove === "function") this.interface.remove();
 		this.getKeyframe({ refresh_localisation: true });
 		
 		//Iterate over all_keyframes and push it to components_obj
@@ -216,11 +216,12 @@ naissance.History = class extends ve.Class {
 			});
 		}, { sort_mode: "date_descending" });
 		
-		this.interface = new ve.Interface(components_obj, { 
-			name: "Keyframes", width: 99 });
-		
 		//Set interface_obj.v
-		if (interface_obj) interface_obj.v = this.interface.v;
+		if (interface_obj) {
+			interface_obj.v = components_obj;
+		} else {
+			this.interface = new ve.Interface(components_obj, { name: "Keyframes", width: 99 });
+		}
 	}
 	
 	fromJSON (arg0_json) {

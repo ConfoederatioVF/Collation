@@ -167,7 +167,7 @@ naissance.GeometryPolygon = class extends naissance.Geometry {
 			if (this.geometry) {
 				this.geometry.addEventListener("click", (e) => {
 					if (!["fill_tool", "node", "node_override", "node_transfer"].includes(main.brush.mode)) {
-						try { this.history.draw(this.keyframes_ui); } catch (e) {}
+						this.history.draw(this.keyframes_ui);
 						super.open("instance", { name: this.name, ...this.window_options });
 					}
 				});
