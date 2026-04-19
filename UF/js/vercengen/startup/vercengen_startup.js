@@ -463,7 +463,7 @@ global.path = require("path");
 			"UF/js/vercengen/features",
 			
 			//Localisation
-			"UF/js/vercengen/vercengen_localisation.js",
+			"UF/js/vercengen/engine/vercengen_localisation.js",
 		] : [];
 			load_patterns = load_patterns.concat(options.load_files);
 		

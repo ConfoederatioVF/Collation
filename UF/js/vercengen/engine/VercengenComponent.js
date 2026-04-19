@@ -546,9 +546,9 @@ ve.Component = class {
 	remove () {
 		//Declare local instance variables
 		let all_keys = Object.keys(this);
-			if (all_keys.length === 0) return; //Internal guard clause if already cleared
+		if (all_keys.length === 0) return; //Internal guard clause if already cleared
 		let child_class_obj;
-			try { child_class_obj = ve[this.child_class.prototype.constructor.name]; } catch (e) {}
+		try { child_class_obj = ve[this.child_class.prototype.constructor.name]; } catch (e) {}
 		
 		//Clear element first if available
 		if (typeof this.clear === "function")
@@ -564,18 +564,20 @@ ve.Component = class {
 					break;
 				}
 		
-		//Remove DOM element
-		if (this.element) this.element.remove();
-		
 		//Remove everything else
 		if (this.options.onremove) this.options.onremove(this); //Fire .options.onremove if it exists
 		
 		//Iterate over this and delete it
 		if (this.components_obj)
 			Object.iterate(this.components_obj, (local_key, local_value) => local_value.remove());
-		for (let i = 0; i < all_keys.length; i++) 
-			this[all_keys[i]] = null;
-		Object.setPrototypeOf(this, null); //Set this to null
+		for (let i = 0; i < all_keys.length; i++) {
+			let local_value = this[all_keys[i]];
+			
+			if (typeof local_value.remove === "function")
+				local_value.remove();
+			this[all_keys[i]] = undefined; //This is more performant than delete since Object shapes are preserved
+		}
+		Object.setPrototypeOf(this, null); //Set this to null - [WARN] - This might not optimise heap; remains to be seen in production
 		
 		//Clear freed this.instances
 		ve.Component.instances = ve.Component.instances.filter((ref) => (
