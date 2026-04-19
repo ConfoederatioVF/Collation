@@ -205,6 +205,7 @@ naissance.History = class extends ve.Class {
 					x: 4, y: 0
 				})
 			}, {
+				gc: true,
 				is_folder: false,
 				style: {
 					"> table > tbody > tr": {
@@ -215,7 +216,8 @@ naissance.History = class extends ve.Class {
 			});
 		}, { sort_mode: "date_descending" });
 		
-		this.interface = new ve.Interface(components_obj, { name: "Keyframes", width: 99 });
+		this.interface = new ve.Interface(components_obj, { 
+			name: "Keyframes", width: 99 });
 		
 		//Set interface_obj.v
 		if (interface_obj) interface_obj.v = this.interface.v;

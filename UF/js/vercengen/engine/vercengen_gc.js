@@ -26,6 +26,9 @@ if (!global.ve) global.ve = {};
 			
 			//Remove component
 			if (typeof local_component.remove === "function") {
+				if (local_component.options && local_component.options.log_gc) 
+					console.log(`ve.gc(): Garbage collecting`, local_component);
+				
 				local_component.remove();
 				ve.Component.instances.splice(i, 1);
 			}
