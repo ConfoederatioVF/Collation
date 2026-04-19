@@ -569,11 +569,14 @@ ve.Component = class {
 		
 		//Iterate over this and delete it
 		if (this.components_obj)
-			Object.iterate(this.components_obj, (local_key, local_value) => local_value.remove());
+			Object.iterate(this.components_obj, (local_key, local_value) => {
+				if (local_value && local_value.remove) local_value.remove();
+			});
 		for (let i = 0; i < all_keys.length; i++) {
 			let local_value = this[all_keys[i]];
 			
-			if (typeof local_value.remove === "function")
+			if (local_value === undefined) continue;
+			if (local_value instanceof HTMLElement || local_value instanceof ve.Component)
 				local_value.remove();
 			this[all_keys[i]] = undefined; //This is more performant than delete since Object shapes are preserved
 		}

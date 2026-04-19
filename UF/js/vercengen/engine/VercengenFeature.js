@@ -140,15 +140,16 @@ ve.Feature = class {
 	 * Removes the {@link ve.Feature} from its static `.instances` field in addition to unmounting the feature from the DOM.
 	 * - Method of: {@link ve.Feature}
 	 * 
-	 * 
+	 * @param {Object} [arg0_options]
+	 *  @param {string} [arg0_options.class_instance="class"] - Either 'instance'/'class'.
 	 */
 	remove (arg0_options) {
 		//Convert from parameters
 		let options = (arg0_options) ? arg0_options : {};
 		
 		//Declare local instance variables
-		let all_keys = Object.keys(this);
-		if (all_keys.length === 0) return; //Internal guard clause if already cleared
+		//let all_keys = Object.keys(this);
+		//if (all_keys.length === 0) return; //Internal guard clause 
 		
 		//VercengenClass handler
 		if (this.options && this.options.class_instance && !options.do_not_close)
@@ -182,14 +183,17 @@ ve.Feature = class {
 							local_value.owners.splice(0, 1);
 					}
 			});
-		for (let i = 0; i < all_keys.length; i++) {
+		
+		//Iterate over all keys and delete them
+		/*for (let i = 0; i < all_keys.length; i++) {
 			let local_value = this[all_keys[i]];
 			
+			if (local_value === undefined) continue;
 			if (typeof local_value.remove === "function")
 				local_value.remove();
 			this[all_keys[i]] = undefined; //This is more performant than delete since Object shapes are preserved
 		}
-		Object.setPrototypeOf(this, null); //Set this to null - [WARN] - This might not optimise heap; remains to be seen in production
+		Object.setPrototypeOf(this, null); //Set this to null - [WARN] - This might not optimise heap; remains to be seen in production*/
 	}
 	
 	/**
