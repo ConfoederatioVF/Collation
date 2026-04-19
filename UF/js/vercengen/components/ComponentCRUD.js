@@ -426,8 +426,7 @@ ve.CRUD = class extends ve.Component {
       
       if (row_value)
         for (let x = 0; x < row_value.length; x++) {
-          if (row_value[x].instance)
-            row_value[x].instance.options.gc = true;
+          if (row_value[x].instance) row_value[x].instance.gc();
           local_array.push(row_value[x]);
         }
       

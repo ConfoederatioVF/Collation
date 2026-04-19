@@ -35,13 +35,13 @@ global.path = require("path");
 				 * The number of seconds after program-start to target {@link ve.Component}/{@link ve.Feature} with heuristic free.
 				 * @type {number}
 				 */
-				debug_heuristic_free_start: 30,
+				debug_heuristic_free_start: 0,
 				
 				/**
 				 * The number of seconds from the current timestamp to target {@link ve.Component}/{@link ve.Feature} with heuristic free.
 				 * @type {number}
 				 */
-				debug_heuristic_free_end: 30,
+				debug_heuristic_free_end: 0,
 				
 				/**
 				 * Determines whether or not to run linters at runtime.
@@ -538,7 +538,7 @@ global.path = require("path");
 				global.ve_gc_loop = setInterval(() => {
 					//Perform GC
 					if (ve?.Tooltip?.refresh) ve.Tooltip.refresh();
-					if (ve.registry.debug_heuristic_free) ve.gc();
+					ve.gc();
 				}, 1000);
 				
 				clearInterval(global.initialise_ve_loop);

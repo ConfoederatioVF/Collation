@@ -147,15 +147,7 @@ ve.Component = class {
 		this.y = options.y;
 		
 		//Push to instances if ve.registry.debug_profile_components is true
-		if (ve.registry.debug_profile_components || this.options.gc) {
-			let ref = new WeakRef(this);
-			
-			this._id = Class.generateRandomID(ve.Component); //Private variable since sub-components have their own .id and .instances
-			this._timestamp = new Date().getTime();
-			
-			ve.Component.instances.push(ref);
-			ve.Component.registry.register(this, ref);
-		}
+		if (ve.registry.debug_profile_components || this.options.gc) this.gc();
 		
 		//Binding handlers; setTimeout() is necessary to tick a frame until ve.Component child class's constructor populates
 		setTimeout(() => {
@@ -475,6 +467,21 @@ ve.Component = class {
 	}
 	
 	/**
+	 * Adds the current component to the garbage collector.
+	 * - Method of: {@link ve.Component}
+	 */
+	gc () {
+		//Declare local instance variables
+		let ref = new WeakRef(this);
+		this._id = Class.generateRandomID(ve.Component); //Private variable since sub-components have their own .id and .instances
+		this._timestamp = new Date().getTime();
+		
+		//Push the component to be GC-tracked
+		ve.Component.instances.push(ref);
+		ve.Component.registry.register(this, ref);
+	}
+	
+	/**
 	 * Sets the root parent and ownership tree. Influences {@link this.parent_el}, {@link this.owner}, {@link this.owners}.
 	 * - Method of: {@link ve.Component}
 	 * 
@@ -567,7 +574,8 @@ ve.Component = class {
 		if (this.components_obj)
 			Object.iterate(this.components_obj, (local_key, local_value) => local_value.remove());
 		for (let i = 0; i < all_keys.length; i++) 
-			delete this[all_keys[i]];
+			this[all_keys[i]] = null;
+		Object.setPrototypeOf(this, null); //Set this to null
 		
 		//Clear freed this.instances
 		ve.Component.instances = ve.Component.instances.filter((ref) => (

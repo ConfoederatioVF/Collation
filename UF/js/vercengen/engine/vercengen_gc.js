@@ -13,7 +13,7 @@ if (!global.ve) global.ve = {};
 		let timestamp = new Date().getTime();
 		
 		//Iterate over all ve.Component.instances if possible
-		for (let i = 0; i < ve.Component.instances.length; i++) {
+		for (let i =  ve.Component.instances.length - 1; i >= 0; i--) {
 			let local_component = ve.Component.instances[i].deref();
 			
 			//Check if timestamp is valid
@@ -25,7 +25,11 @@ if (!global.ve) global.ve = {};
 			if (local_component.element && local_component.element.isConnected) continue; //Internal guard clause if element is connected
 			
 			//Remove component
-			if (typeof local_component.remove === "function") local_component.remove();
+			if (typeof local_component.remove === "function") {
+				console.log(`Freeing`, local_component);
+				local_component.remove();
+				ve.Component.instances.splice(i, 1);
+			}
 		}
 	};
 }
