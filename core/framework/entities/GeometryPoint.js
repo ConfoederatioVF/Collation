@@ -202,7 +202,7 @@ naissance.GeometryPoint = class extends naissance.Geometry {
 			icon: veHTML(`<icon>location_on</icon>`, { tooltip: "GeometryPoint" }),
 			...super.drawHierarchyDatatypeGenerics(),
 			context_menu: veButton(() => {
-				this.history.draw();
+				this.history.draw(this.keyframes_ui);
 				super.open("instance", { name: this.name, ...this.window_options })
 			}, {
 				name: "<icon>more_vert</icon>",

@@ -327,8 +327,7 @@ naissance.Geometry = class extends ve.Class {
 								
 								this.metadata.variables = e.toJSON();
 								delete this.history.do_not_draw;
-								this.history.draw();
-								this.keyframes_ui.v = this.history.interface.v;
+								this.history.draw(this.keyframes_ui);
 							}
 						})
 					}, {
@@ -586,7 +585,7 @@ naissance.Geometry = class extends ve.Class {
 				
 				geometry_obj.history.cleanKeyframes();
 				geometry_obj.history.getKeyframe(); //Refresh localisation
-				geometry_obj.keyframes_ui.v = geometry_obj.history.interface.v;
+				geometry_obj.history.draw(geometry_obj.keyframes_ui);
 			}
 			
 			//delete_geometry
@@ -596,15 +595,13 @@ naissance.Geometry = class extends ve.Class {
 			//move_keyframe
 			if (json.move_keyframe) {
 				geometry_obj.history.moveKeyframe(json.move_keyframe.date, json.move_keyframe.ot_date);
-				geometry_obj.history.draw();
-				geometry_obj.keyframes_ui.v = geometry_obj.history.interface.v;
+				geometry_obj.history.draw(geometry_obj.keyframes_ui);
 			}
 			
 			//remove_keyframe
 			if (json.remove_keyframe) {
 				geometry_obj.removeKeyframe(json.remove_keyframe);
-				geometry_obj.history.draw();
-				geometry_obj.keyframes_ui.v = geometry_obj.history.interface.v;
+				geometry_obj.history.draw(geometry_obj.keyframes_ui);
 			}
 			
 			//set_geometry

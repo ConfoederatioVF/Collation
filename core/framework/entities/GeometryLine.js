@@ -196,7 +196,7 @@ naissance.GeometryLine = class extends naissance.Geometry {
 			icon: veHTML(`<icon>polyline</icon>`, { tooltip: "GeometryLine" }),
 			...super.drawHierarchyDatatypeGenerics(),
 			context_menu: veButton(() => {
-				this.history.draw();
+				this.history.draw(this.keyframes_ui);
 				super.open("instance", { name: this.name, ...this.window_options })
 			}, {
 				name: "<icon>more_vert</icon>",

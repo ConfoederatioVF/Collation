@@ -28,7 +28,6 @@ naissance.History = class extends ve.Class {
 			let local_keyframe = this.keyframes[timestamp];
 				local_keyframe.addData(...argn_arguments);
 		}
-		if (!this.do_not_draw) this.draw();
 		
 		//Return statement
 		return this.keyframes[timestamp];
@@ -129,11 +128,12 @@ naissance.History = class extends ve.Class {
 				delete this.keyframes[timestamp];
 			}
 		}
-		
-		if (!this.do_not_draw) this.draw();
 	}
 	
-	draw () {
+	draw (arg0_interface_obj) {
+		//Convert from parameter
+		let interface_obj = arg0_interface_obj;
+		
 		//Declare local instance variables
 		let components_obj = {};
 		if (this.interface) this.interface.remove();
@@ -216,6 +216,9 @@ naissance.History = class extends ve.Class {
 		}, { sort_mode: "date_descending" });
 		
 		this.interface = new ve.Interface(components_obj, { name: "Keyframes", width: 99 });
+		
+		//Set interface_obj.v
+		if (interface_obj) interface_obj.v = this.interface.v;
 	}
 	
 	fromJSON (arg0_json) {
@@ -235,7 +238,6 @@ naissance.History = class extends ve.Class {
 				this.addKeyframe(local_date, ...local_keyframe.value);
 			}
 			this.do_not_draw = false;
-			this.draw();
 		} else {
 			console.error(`naissance.History.fromJSON() requires arg0_json to have a .keyframes Array<Object>.`, json);
 		}
@@ -357,7 +359,6 @@ naissance.History = class extends ve.Class {
 			this.keyframes[ot_timestamp] = this.keyframes[timestamp];
 			
 			delete this.keyframes[timestamp];
-			if (!this.do_not_draw) this.draw();
 		}
 	}
 	

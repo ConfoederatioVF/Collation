@@ -167,7 +167,7 @@ naissance.GeometryPolygon = class extends naissance.Geometry {
 			if (this.geometry) {
 				this.geometry.addEventListener("click", (e) => {
 					if (!["fill_tool", "node", "node_override", "node_transfer"].includes(main.brush.mode)) {
-						try { this.keyframes_ui.v = this.history.interface.v; } catch (e) {}
+						try { this.history.draw(this.keyframes_ui); } catch (e) {}
 						super.open("instance", { name: this.name, ...this.window_options });
 					}
 				});
@@ -182,9 +182,6 @@ naissance.GeometryPolygon = class extends naissance.Geometry {
 					this.label_geometries[i].remove();
 			if (this.selected_geometry) this.selected_geometry.remove();
 		}
-		
-		//7. Render keyframess
-		try { this.keyframes_ui.v = this.history.interface.v; } catch (e) {}
 	}
 	
 	drawHierarchyDatatype () {
@@ -209,9 +206,7 @@ naissance.GeometryPolygon = class extends naissance.Geometry {
 			}),
 			...super.drawHierarchyDatatypeGenerics(),
 			context_menu: veButton(() => {
-				this.history.draw();
-				
-				try { this.keyframes_ui.v = this.history.interface.v; } catch (e) {}
+				try { this.history.draw(this.keyframes_ui); } catch (e) {}
 				super.open("instance", { name: this.name, ...this.window_options });
 			}, {
 				attributes: { class: "order-101" },
@@ -245,8 +240,7 @@ naissance.GeometryPolygon = class extends naissance.Geometry {
 		let actions_bar_el = super.getActionsBarElement();
 		
 		let context_menu_button = veButton(() => {
-			this.history.draw();
-			try { this.keyframes_ui.v = this.history.interface.v; } catch (e) {}
+			try { this.history.draw(this.keyframes_ui); } catch (e) {}
 			super.open("instance", { name: this.name, ...this.window_options });
 		}, {
 			attributes: { class: "order-101" },
