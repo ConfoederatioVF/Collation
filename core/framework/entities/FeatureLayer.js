@@ -327,7 +327,7 @@ naissance.FeatureLayer = class extends naissance.Feature {
 		
 		//Declare local instance variables
 		let all_geometries = this.getAllGeometries();
-		let unique_keyframes = [];
+		let unique_timestamps = [];
 		
 		//Iterate over all_geometries and fetch unique_keyframes
 		for (let i = 0; i < all_geometries.length; i++) {
@@ -335,8 +335,8 @@ naissance.FeatureLayer = class extends naissance.Feature {
 				.map(Date.convertTimestampToInt);
 			
 			for (let x = 0; x < local_history_keyframes.length; x++)
-				if (!unique_keyframes.includes(local_history_keyframes[x]))
-					unique_keyframes.push(local_history_keyframes[x]);
+				if (!unique_timestamps.includes(local_history_keyframes[x]))
+					unique_timestamps.push(local_history_keyframes[x]);
 		}
 		
 		//If return_timestamps is not false, return dates instead
@@ -344,11 +344,11 @@ naissance.FeatureLayer = class extends naissance.Feature {
 			let unique_dates = [];
 			
 			//Return statement
-			for (let i = 0; i < unique_keyframes.length; i++)
-				unique_dates.push(Date.convertTimestampToDate(unique_keyframes[i]));
+			for (let i = 0; i < unique_timestamps.length; i++)
+				unique_dates.push(Date.convertTimestampToDate(unique_timestamps[i]));
 			return unique_dates;
 		}
-		return unique_keyframes;
+		return unique_timestamps;
 	}
 	
 	hasEntity (arg0_naissance_obj) {

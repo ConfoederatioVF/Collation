@@ -423,7 +423,24 @@ naissance.Geometry = class extends ve.Class {
 		//Convert from parameters
 		let options = (arg0_options) ? arg0_options : {};
 		
+		//Declare local instance variables
+		let unique_timestamps = [];
+		
 		//Iterate over all .history.keyframes
+		Object.iterate(this.history.keyframes, (local_key, local_value) => {
+			if (local_value.value[0] !== undefined)
+				unique_timestamps.push(Date.convertTimestampToInt(local_key));
+		});
+		
+		if (!options.return_timestamps) {
+			let unique_dates = [];
+			
+			//Return statement
+			for (let i = 0; i < unique_keyframes.length; i++)
+				unique_dates.push(Date.convertTimestampToDate(unique_keyframes[i]));
+			return unique_dates;
+		}
+		return unique_timestamps;
 	}
 	
 	/**
