@@ -22,6 +22,13 @@ naissance.FeatureLayer = class extends naissance.Feature {
 		//Declare UI
 		this.interface = veInterface({
 			open_table: veButton(() => this.window.refresh(), { name: "View Geometries", x: 0, y: 0 }),
+			debug: veButton(() => {
+				console.log(`$feature - naissance.FeatureLayer (ID: ${this.id}):`, this);
+				window.$feature = this;
+			}, {
+				name: "Debug",
+				x: 1, y: 0
+			}),
 			show_features: veToggle(this.metadata?.show_layer_features, {
 				name: "Show Layer Features",
 				onuserchange: (v) => {
@@ -306,6 +313,42 @@ naissance.FeatureLayer = class extends naissance.Feature {
 		//Draw HierarchyDatatype if possible; switch type at bottom
 		this.drawHierarchyDatatype();
 		this.type = (json.type) ? json.type : "default";
+	}
+	
+	/**
+	 * Returns all unique keyframe dates in a layer.
+	 * 
+	 * @param {Object} [arg0_options]
+	 *  @param {boolean} [arg0_options.return_timestamps=false] - Whether to return timestamps.
+	 */
+	getUniqueKeyframeDates (arg0_options) {
+		//Convert from parameters
+		let options = (arg0_options) ? arg0_options : {};
+		
+		//Declare local instance variables
+		let all_geometries = this.getAllGeometries();
+		let unique_keyframes = [];
+		
+		//Iterate over all_geometries and fetch unique_keyframes
+		for (let i = 0; i < all_geometries.length; i++) {
+			let local_history_keyframes = Object.keys(all_geometries[i].history.keyframes)
+				.map(Date.convertTimestampToInt);
+			
+			for (let x = 0; x < local_history_keyframes.length; x++)
+				if (!unique_keyframes.includes(local_history_keyframes[x]))
+					unique_keyframes.push(local_history_keyframes[x]);
+		}
+		
+		//If return_timestamps is not false, return dates instead
+		if (!options.return_timestamps) {
+			let unique_dates = [];
+			
+			//Return statement
+			for (let i = 0; i < unique_keyframes.length; i++)
+				unique_dates.push(Date.convertTimestampToDate(unique_keyframes[i]));
+			return unique_dates;
+		}
+		return unique_keyframes;
 	}
 	
 	hasEntity (arg0_naissance_obj) {

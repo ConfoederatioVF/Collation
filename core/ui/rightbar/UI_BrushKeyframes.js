@@ -14,11 +14,13 @@ global.UI_BrushKeyframes = class extends ve.Class {
 				onuserchange: (v) => this.disabled = !v,
 				tooltip: "Whether to apply brush edits to the given date range."
 			}),
-			start_date: new ve.Date(main.date, {
-				name: "Start Date"
+			start_date: new ve.Date((this.start_date) ? this.start_date : main.date, {
+				name: "Start Date",
+				onuserchange: (v) => this.start_date = v
 			}),
-			end_date: new ve.Date(main.date, {
-				name: "End Date"
+			end_date: new ve.Date((this.end_date) ? this.end_date : main.date, {
+				name: "End Date",
+				onuserchange: this.end_date = v
 			})
 		}, {
 			is_folder: false
