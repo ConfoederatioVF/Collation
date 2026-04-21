@@ -145,12 +145,32 @@ naissance.Brush = class extends ve.Class {
 				x: 0, y: 4
 			}),
 			
-			properties: veButton(() => {
-				main.interfaces.edit_selected_geometries_ui.open();
+			actions_bar: veRawInterface({
+				keyframes: veButton(() => {
+					if (this.brush_keyframes_window) this.brush_keyframes_window.close();
+					this.brush_keyframes_window = veWindow(main.interfaces.edit_brush_keyframes.draw(), {
+						name: "Edit Brush Date Range",
+						can_rename: false,
+						width: "20rem",
+						x: "50dvw - 20rem/2",
+						y: "50dvh"
+					});
+				}, {
+					name: "Edit Keyframes",
+					limit: () => !this.disabled
+				}),
+				properties: veButton(() => {
+					main.interfaces.edit_selected_geometries_ui.open();
+				}, {
+					name: "Edit Selected Geometries",
+					limit: () => this.hasSelectedGeometry()
+				})
 			}, {
-				name: "Edit Selected Geometries",
-				limit: () => this.hasSelectedGeometry(),
-				width: 2,
+				style: {
+					display: "flex",
+					"[component='ve-button']": { marginRight: `var(--padding)` }
+				},
+				width: 99,
 				x: 0, y: 5
 			})
 		}, { name: "Brush Options:", open: true });
