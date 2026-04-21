@@ -412,6 +412,21 @@ naissance.Geometry = class extends ve.Class {
 	}
 	
 	/**
+	 * Returns all keyframes that change the current geometry. Returns either the timestamp/date. Dates by default.
+	 * 
+	 * @param {Object} [arg0_options]
+	 *  @param {boolean} [arg0_options.return_timestamps=false]
+	 * 
+	 * @returns {Object[]|number[]}
+	 */
+	getGeometryKeyframes (arg0_options) { //[WIP] - Finish function body
+		//Convert from parameters
+		let options = (arg0_options) ? arg0_options : {};
+		
+		//Iterate over all .history.keyframes
+	}
+	
+	/**
 	 * Fetches the layer that the current {@link naissance.Geometry} is appended to, if anything. Used for masking.
 	 *
 	 * @returns {naissance.FeatureLayer}
