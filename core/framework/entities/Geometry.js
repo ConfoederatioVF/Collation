@@ -436,8 +436,8 @@ naissance.Geometry = class extends ve.Class {
 			let unique_dates = [];
 			
 			//Return statement
-			for (let i = 0; i < unique_keyframes.length; i++)
-				unique_dates.push(Date.convertTimestampToDate(unique_keyframes[i]));
+			for (let i = 0; i < unique_timestamps.length; i++)
+				unique_dates.push(Date.convertTimestampToDate(unique_timestamps[i]));
 			return unique_dates;
 		}
 		return unique_timestamps;

@@ -20,9 +20,11 @@ naissance.BrushNodeEditor = class extends ve.Class {
 	
 	handleEvents () {
 		this.draw_tool.on("drawend", (e) => {
+			let selected_geometry = main.brush._selected_geometry;
+			
 			//Internal guard clause; check to make sure that ._selected_geometry is not in a provinces layer
-			if (main.brush._selected_geometry) {
-				let layer_obj = main.brush._selected_geometry.getLayer();
+			if (selected_geometry) {
+				let layer_obj = selected_geometry.getLayer();
 				if (layer_obj?._type === "provinces") {
 					e.geometry.remove();
 					return;
@@ -31,8 +33,9 @@ naissance.BrushNodeEditor = class extends ve.Class {
 			
 			//Otherwise, handle node additions/subtractions as normal
 			if (main.brush.disabled) try { this.draw_tool.disable(); } catch (e) {}
-			if (main.brush._selected_geometry?.handleNodeEditorEnd)
-				main.brush._selected_geometry.handleNodeEditorEnd(e);
+			
+			if (naissance[selected_geometry.class_name].handleNodeEditorEnd)
+				naissance[selected_geometry.class_name].handleNodeEditorEnd.call(selected_geometry, e);
 			e.geometry.remove();
 		});
 		this.draw_tool.on("drawstart", (e) => {
@@ -64,4 +67,135 @@ naissance.BrushNodeEditor = class extends ve.Class {
 			}
 		}
 	}
+};
+
+naissance.GeometryLine.handleNodeEditorEnd = function (arg0_e) {
+	//Convert from parameters
+	let e = (arg0_e);
+	
+	//Push action to timeline
+	if (main.brush.node_editor.mode === "add") {
+		e.geometry = main.brush.getAddLine(e.geometry);
+		DALS.Timeline.parseAction({
+			options: { name: "Add to Line", key: "add_to_line" },
+			value: [{
+				type: "GeometryLine",
+				
+				geometry_id: this.id,
+				add_to_line: { geometry: e.geometry.toJSON() }
+			}]
+		});
+	}
+	
+	main.brush.node_editor.disable();
+	main.brush.node_editor.enable();
+};
+naissance.GeometryPolygon.handleNodeEditorEnd = function (arg0_e) {
+	//Convert from parameters
+	let e = arg0_e;
+	
+	//Transfer handler
+	if (main.brush.mode === "node_transfer") try {
+		let from_geometry_id = main.brush.from_geometry_id;
+		let from_geometry;
+		if (from_geometry_id)
+			for (let i = 0; i < naissance.Geometry.instances.length; i++)
+				if (naissance.Geometry.instances[i].id === from_geometry_id) {
+					from_geometry = naissance.Geometry.instances[i];
+					break;
+				}
+		
+		//Get the intersection of from_geometry and e.geometry
+		if (!(from_geometry?.geometry && e?.geometry)) return; //Internal guard clause if neither are presently defined
+		if (from_geometry?.id === this.id) return; //Internal guard clause for self-selection
+		
+		let cursor_turf_geometry = Geospatiale.convertMaptalksToTurf(e.geometry);
+		let ot_turf_geometry = Geospatiale.convertMaptalksToTurf(from_geometry.geometry);
+		let turf_geometry = (this.geometry) ? Geospatiale.convertMaptalksToTurf(this.geometry) : null;
+		
+		let turf_intersection = (main.brush.node_editor.mode === "add") ?
+			turf.intersect(turf.featureCollection([ot_turf_geometry, cursor_turf_geometry])) :
+			turf.intersect(turf.featureCollection([turf_geometry, cursor_turf_geometry]));
+		if (!turf_intersection) return; //Internal guard clause if nothing overlaps
+		turf_intersection = turf.buffer(turf_intersection, Math.returnSafeNumber(main.brush.node_buffer/1000, 0.01), { units: "kilometers" });
+		
+		//Transfer selected polygon
+		e.geometry = Geospatiale.convertTurfToMaptalks(turf_intersection);
+		
+		if (main.brush.node_editor.mode === "add") {
+			DALS.Timeline.parseAction({
+				options: { name: "Remove from Polygon", key: "remove_from_polygon" },
+				value: [{
+					type: "GeometryPolygon",
+					geometry_id: from_geometry.id,
+					remove_from_polygon: { geometry: e.geometry.toJSON() }
+				}]
+			});
+			setTimeout(() => {
+				DALS.Timeline.parseAction({
+					options: { name: "Simplify Polygon", key: "simplify_polygon" },
+					value: [{
+						type: "GeometryPolygon",
+						geometry_id: this.id,
+						simplify_polygon: 0.01
+					}]
+				}, true);
+			}, 100);
+		} else if (main.brush.node_editor.mode === "remove") {
+			/*let debug_polygon = maptalks.Geometry.fromJSON(e.geometry.toJSON());
+				console.log(`Debug polygon:`, debug_polygon);
+				debug_polygon.addTo(main.layers.overlay_layer);*/
+			
+			DALS.Timeline.parseAction({
+				options: { name: "Add to Polygon", key: "add_to_polygon" },
+				value: [{
+					type: "GeometryPolygon",
+					geometry_id: from_geometry.id,
+					add_to_polygon: { geometry: e.geometry.toJSON() },
+					simplify_polygon: 0.01
+				}]
+			});
+			
+			setTimeout(() => {
+				DALS.Timeline.parseAction({
+					options: { name: "Simplify Polygon", key: "simplify_polygon" },
+					value: [{
+						type: "GeometryPolygon",
+						geometry_id: from_geometry.id,
+						simplify_polygon: 0.01
+					}]
+				}, true);
+			}, 100);
+		}
+		
+	} catch (e) { console.error(e); }
+	
+	//Push action to timeline
+	if (main.brush.node_editor.mode === "add") {
+		e.geometry = main.brush.getAddPolygon(e.geometry);
+		DALS.Timeline.parseAction({
+			options: { name: "Add to Polygon", key: "add_to_polygon" },
+			value: [{
+				type: "GeometryPolygon",
+				
+				geometry_id: this.id,
+				add_to_polygon: { geometry: e.geometry.toJSON() },
+				simplify_polygon: (main.brush.simplify > 0 && main.brush.simplify_applies_to_polygon) ?
+					main.brush.simplify : undefined
+			}]
+		});
+	} else if (main.brush.node_editor.mode === "remove") {
+		e.geometry = main.brush.getRemovePolygon(e.geometry);
+		DALS.Timeline.parseAction({
+			options: { name: "Remove from Polygon", key: "remove_from_polygon" },
+			value: [{
+				type: "GeometryPolygon",
+				geometry_id: this.id,
+				remove_from_polygon: { geometry: e.geometry.toJSON() }
+			}]
+		});
+	}
+	
+	main.brush.node_editor.disable();
+	main.brush.node_editor.enable();
 };

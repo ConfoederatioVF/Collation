@@ -229,26 +229,4 @@ naissance.GeometryLine = class extends naissance.Geometry {
 			}
 		});
 	}
-	
-	handleNodeEditorEnd (arg0_e) {
-		//Convert from parameters
-		let e = (arg0_e);
-		
-		//Push action to timeline
-		if (main.brush.node_editor.mode === "add") {
-			e.geometry = main.brush.getAddLine(e.geometry);
-			DALS.Timeline.parseAction({
-				options: { name: "Add to Line", key: "add_to_line" },
-				value: [{
-					type: "GeometryLine",
-					
-					geometry_id: this.id,
-					add_to_line: { geometry: e.geometry.toJSON() }
-				}]
-			});
-		}
-		
-		main.brush.node_editor.disable();
-		main.brush.node_editor.enable();
-	}
 };
