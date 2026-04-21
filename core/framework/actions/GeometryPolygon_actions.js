@@ -13,11 +13,12 @@
  * - #### Internal Commands:
  * - `.add_to_polygon`: {@link Object}
  *   - `.geometry`: {@link string}
- *   - `.time_range`: {@link Array}<{@link Object}> - [start_range, end_range]; both are Date objects or timestamps.
+ *   - `.date=main.date`: {@link Object} - The date at which to add to polygon.
+ *   - `.date_range`: {@link Array}<{@link Object}> - [start_date, end_date]; both are Date objects or timestamps.
  * - `.hide_polygon`: {@link boolean}
  * - `.remove_from_polygon`: {@link Object}
  *   - `.geometry`: {@link string}
- *   - `.time_range`: {@link Array}<{@link Object}> - [start_range, end_range]; both are Date objects or timestamps.
+ *   - `.date_range`: {@link Array}<{@link Object}> - [start_date, end_date]; both are Date objects or timestamps.
  * - `.set_polygon`: {@link Object}
  *   - `.geometry`: {@link Object}|{@link string}
  * - `.show_polygon`: {@link boolean}
@@ -50,23 +51,47 @@ naissance.GeometryPolygon.parseAction = function (arg0_json) {
 	if (polygon_obj && polygon_obj instanceof naissance.GeometryPolygon) {
 		//add_to_polygon
 		if (json.add_to_polygon) {
-			let geometry = polygon_obj.geometry;
+			let date = (json.add_to_polygon.date) ? json.add_to_polygon.date : main.date;
+			let geometry = (json.add_to_polygon.date) ?
+				polygon_obj.getGeometryKeyframeAtDate(date) : polygon_obj.geometry;
 			let ot_geometry = maptalks.Geometry.fromJSON(json.add_to_polygon.geometry);
 			
-			//Union with existing geometry if defined, if undefined replace geometry
-			if (polygon_obj.geometry) {
-				geometry = Geospatiale.convertMaptalksToTurf(geometry);
-				ot_geometry = Geospatiale.convertMaptalksToTurf(ot_geometry);
-				polygon_obj.addKeyframe(main.date, Geospatiale.convertTurfToMaptalks(
-					turf.union(turf.featureCollection([geometry, ot_geometry]))
-				).toJSON());
+			//Date range handling
+			if (json.add_to_polygon.date_range) {
+				let date_range = json.add_to_polygon.date_range;
+					date_range = [Date.getTimestamp(date_range[0]), Date.getTimestamp(date_range[1])];
+				let polygon_keyframes = polygon_obj.getGeometryKeyframes({ return_timestamps: true });
+				
+				//Keyframes are look-forwards; create the keyframe at start_date; then for .value[0] changes until end_date
+				if (!polygon_keyframes.includes(date_range[0]))
+					polygon_keyframes.unshift(date_range[0]);
+				
+				//Iterate over all polygon_keyframes and apply the changes at the given date
+				for (let i = 0; i < polygon_keyframes.length; i++)
+					DALS.Timeline.parseAction({
+						options: { name: "Add to Polygon", key: "add_to_polygon" },
+						value: [{
+							type: "GeometryPolygon",
+							geometry_id: polygon_obj.id,
+							add_to_polygon: { geometry: json.add_to_polygon.geometry }
+						}]
+					}, true);
 			} else {
-				polygon_obj.addKeyframe(main.date, ot_geometry.toJSON());
+				//Union with existing geometry if defined, if undefined replace geometry
+				if (polygon_obj.geometry) {
+					geometry = Geospatiale.convertMaptalksToTurf(geometry);
+					ot_geometry = Geospatiale.convertMaptalksToTurf(ot_geometry);
+					polygon_obj.addKeyframe(date, Geospatiale.convertTurfToMaptalks(
+						turf.union(turf.featureCollection([geometry, ot_geometry]))
+					).toJSON());
+				} else {
+					polygon_obj.addKeyframe(date, ot_geometry.toJSON());
+				}
 			}
 		}
 		
 		//remove_from_polygon
-		if (json.remove_from_polygon) {
+		if (json.remove_from_polygon) { //[WIP] - Replicate add_to_polygon logic for remove_from_polygon
 			let geometry = polygon_obj.geometry;
 			let ot_geometry = maptalks.Geometry.fromJSON(json.remove_from_polygon.geometry);
 			

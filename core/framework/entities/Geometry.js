@@ -444,6 +444,21 @@ naissance.Geometry = class extends ve.Class {
 	}
 	
 	/**
+	 * Returns the Maptalks geometry at the specific date.
+	 * 
+	 * @param {Object|number} [arg0_date]
+	 * 
+	 * @returns {Object}
+	 */
+	getGeometryKeyframeAtDate (arg0_date) {
+		//Convert from parameters
+		let date = (arg0_date) ? arg0_date : main.date;
+		
+		//Return statement
+		return this.history.getKeyframe({ date: date }).value[0];
+	}
+	
+	/**
 	 * Fetches the layer that the current {@link naissance.Geometry} is appended to, if anything. Used for masking.
 	 *
 	 * @returns {naissance.FeatureLayer}
