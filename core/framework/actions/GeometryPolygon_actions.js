@@ -13,9 +13,11 @@
  * - #### Internal Commands:
  * - `.add_to_polygon`: {@link Object}
  *   - `.geometry`: {@link string}
+ *   - `.time_range`: {@link Array}<{@link Object}> - [start_range, end_range]; both are Date objects or timestamps.
  * - `.hide_polygon`: {@link boolean}
  * - `.remove_from_polygon`: {@link Object}
  *   - `.geometry`: {@link string}
+ *   - `.time_range`: {@link Array}<{@link Object}> - [start_range, end_range]; both are Date objects or timestamps.
  * - `.set_polygon`: {@link Object}
  *   - `.geometry`: {@link Object}|{@link string}
  * - `.show_polygon`: {@link boolean}
