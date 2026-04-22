@@ -72,7 +72,7 @@ naissance.GeometryPolygon.parseAction = function (arg0_json) {
 				
 				//Iterate over all polygon_keyframes and apply the changes at the given date
 				for (let i = 0; i < polygon_keyframes.length; i++)
-					if (polygon_keyframes[i] >= date_range[0] && polygon_keyframes[i] <= date_rangee[1])
+					if (polygon_keyframes[i] >= date_range[0] && polygon_keyframes[i] <= date_range[1])
 						DALS.Timeline.parseAction({
 							options: { name: "Add to Polygon", key: "add_to_polygon" },
 							value: [{
@@ -138,7 +138,7 @@ naissance.GeometryPolygon.parseAction = function (arg0_json) {
 				if (geometry) {
 					let turf_difference;
 					try {
-						turf.difference(turf.featureCollection([
+						turf_difference = turf.difference(turf.featureCollection([
 							Geospatiale.convertMaptalksToTurf(geometry),
 							Geospatiale.convertMaptalksToTurf(ot_geometry)
 						]));
