@@ -85,15 +85,28 @@ naissance.GeometryPolygon.parseAction = function (arg0_json) {
 					}, true);
 			} else {
 				//Union with existing geometry if defined, if undefined replace geometry
-				if (geometry) {
-					geometry = Geospatiale.convertMaptalksToTurf(geometry);
-					ot_geometry = Geospatiale.convertMaptalksToTurf(ot_geometry);
-					polygon_obj.addKeyframe(date, Geospatiale.convertTurfToMaptalks(
-						turf.union(turf.featureCollection([geometry, ot_geometry]))
-					).toJSON());
+				let fallback_to_ot_geometry = false;
+				
+				if (geometry && ot_geometry) {
+					try {
+						geometry = Geospatiale.convertMaptalksToTurf(geometry);
+						ot_geometry = Geospatiale.convertMaptalksToTurf(ot_geometry);
+						polygon_obj.addKeyframe(date, Geospatiale.convertTurfToMaptalks(
+							turf.union(turf.featureCollection([geometry, ot_geometry]))
+						).toJSON());
+					} catch (e) {
+						fallback_to_ot_geometry = true;
+					}
 				} else {
-					polygon_obj.addKeyframe(date, ot_geometry.toJSON());
+					fallback_to_ot_geometry = true;
 				}
+				
+				if (fallback_to_ot_geometry && ot_geometry)
+					if (typeof ot_geometry.toJSON === "function") {
+						polygon_obj.addKeyframe(date, ot_geometry.toJSON());
+					} else {
+						polygon_obj.addKeyframe(date, ot_geometry); //Already in JSON form
+					}
 			}
 		}
 		
@@ -129,10 +142,13 @@ naissance.GeometryPolygon.parseAction = function (arg0_json) {
 			} else {
 				//Difference with existing geometry; if it covers the entire geometry set to null to hide
 				if (geometry) {
-					let turf_difference = turf.difference(turf.featureCollection([
-						Geospatiale.convertMaptalksToTurf(geometry),
-						Geospatiale.convertMaptalksToTurf(ot_geometry)
-					]));
+					let turf_difference;
+					try {
+						turf.difference(turf.featureCollection([
+							Geospatiale.convertMaptalksToTurf(geometry),
+							Geospatiale.convertMaptalksToTurf(ot_geometry)
+						]));
+					} catch (e) {}
 					polygon_obj.addKeyframe(date, (turf_difference) ?
 						Geospatiale.convertTurfToMaptalks(turf_difference).toJSON() : null);
 				}
@@ -186,10 +202,13 @@ naissance.GeometryPolygon.parseAction = function (arg0_json) {
 					} else {
 						let geometry = (json.simplify_polygon.date) ? 
 							polygon_obj.getGeometryKeyframeAtDate(date) : polygon_obj.geometry;
-						let turf_simplify = turf.simplify(Geospatiale.convertMaptalksToTurf(geometry), { tolerance: tolerance })
 						
-						polygon_obj.addKeyframe(date, (turf_simplify) ?
-							Geospatiale.convertTurfToMaptalks(turf_simplify).toJSON() : null);
+						if (geometry) {
+							let turf_simplify = turf.simplify(Geospatiale.convertMaptalksToTurf(geometry), { tolerance: tolerance })
+							
+							polygon_obj.addKeyframe(date, (turf_simplify) ?
+								Geospatiale.convertTurfToMaptalks(turf_simplify).toJSON() : null);
+						}
 					}
 				}
 			}

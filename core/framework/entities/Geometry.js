@@ -453,6 +453,7 @@ naissance.Geometry = class extends ve.Class {
 	getGeometryKeyframeAtDate (arg0_date) {
 		//Convert from parameters
 		let date = (arg0_date) ? arg0_date : main.date;
+			date = Date.convertTimestampToDate(date);
 		
 		//Return statement
 		return this.history.getKeyframe({ date: date }).value[0];

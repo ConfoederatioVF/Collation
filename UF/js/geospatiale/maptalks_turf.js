@@ -22,11 +22,16 @@
 		//Internal guard clause if the geometry is already a Turf geometry
 		if (Geospatiale.getCoordsType(geometry) === "turf_geometry") return geometry;
 		
-		//Declare local instance variables
-		let geojson = geometry.toGeoJSON();
-		
 		//Return statement
-		return turf.feature(geojson.geometry);
+		try {
+			let geojson = geometry.toGeoJSON();
+			
+			//Return statement
+			return turf.feature(geojson.geometry);
+		} catch (e) {
+			if (typeof geometry === "object") return geometry;
+			return null;
+		}
 	};
 	
 	/**
@@ -73,9 +78,9 @@
 			return undefined;
 		
 		//Check if type is 'turf_geometry'
-		if (format.geometry && format.properties && format.type && Object.keys(format).length <= 3) {
+		if (!(typeof format.toJSON === "function")) { //GeoJSON cannot have live functions bound to it
 			return "turf_geometry";
-		} else if (Object.keys(format).length > 3) {
+		} else {
 			return "maptalks_geometry";
 		}
 	};
