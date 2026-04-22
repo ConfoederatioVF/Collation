@@ -53,6 +53,20 @@ naissance.GeometryPolygon.parseAction = function (arg0_json) {
 	
 	//Parse commands for polygon_obj
 	if (polygon_obj && polygon_obj instanceof naissance.GeometryPolygon) {
+		let _parseGeometryActionsInDateRange = (date_range, special_function) => {
+			date_range =  [Date.getTimestamp(date_range[0]), Date.getTimestamp(date_range[1])];
+			let polygon_keyframes = polygon_obj.getGeometryKeyframes({ return_timestamps: true });
+			
+			//Keyframes are look-forwards; create the keyframe at start_date; then for .value[0] changes until end_date
+			if (!polygon_keyframes.includes(date_range[0]))
+				polygon_keyframes.unshift(date_range[0]);
+			
+			//Iterate over all polygon_keyframes and apply the changes at the given date
+			for (let i = 0; i < polygon_keyframes.length; i++)
+				if (polygon_keyframes[i] >= date_range[0] && polygon_keyframes[i] <= date_range[1])
+					special_function(polygon_keyframes[i]);
+		};
+		
 		//add_to_polygon
 		if (json.add_to_polygon) {
 			let date = (json.add_to_polygon.date) ? json.add_to_polygon.date : main.date;
@@ -62,28 +76,19 @@ naissance.GeometryPolygon.parseAction = function (arg0_json) {
 			
 			//Date range handling
 			if (json.add_to_polygon.date_range) {
-				let date_range = json.add_to_polygon.date_range;
-					date_range = [Date.getTimestamp(date_range[0]), Date.getTimestamp(date_range[1])];
-				let polygon_keyframes = polygon_obj.getGeometryKeyframes({ return_timestamps: true });
-				
-				//Keyframes are look-forwards; create the keyframe at start_date; then for .value[0] changes until end_date
-				if (!polygon_keyframes.includes(date_range[0]))
-					polygon_keyframes.unshift(date_range[0]);
-				
-				//Iterate over all polygon_keyframes and apply the changes at the given date
-				for (let i = 0; i < polygon_keyframes.length; i++)
-					if (polygon_keyframes[i] >= date_range[0] && polygon_keyframes[i] <= date_range[1])
-						DALS.Timeline.parseAction({
-							options: { name: "Add to Polygon", key: "add_to_polygon" },
-							value: [{
-								type: "GeometryPolygon",
-								geometry_id: polygon_obj.id,
-								add_to_polygon: {
-									date: polygon_keyframes[i],
-									geometry: json.add_to_polygon.geometry 
-								}
-							}]
-						}, true);
+				_parseGeometryActionsInDateRange(json.add_to_polygon.date_range, (local_keyframe) => {
+					DALS.Timeline.parseAction({
+						options: { name: "Add to Polygon", key: "add_to_polygon" },
+						value: [{
+							type: "GeometryPolygon",
+							geometry_id: polygon_obj.id,
+							add_to_polygon: {
+								date: local_keyframe,
+								geometry: json.add_to_polygon.geometry
+							}
+						}]
+					}, true);
+				});
 			} else {
 				//Union with existing geometry if defined, if undefined replace geometry
 				try {
@@ -112,27 +117,19 @@ naissance.GeometryPolygon.parseAction = function (arg0_json) {
 			
 			//Difference with existing geometry, if return value is null replace geometry
 			if (json.remove_from_polygon.date_range) {
-				let date_range = Date.getTimestampRange(json.remove_from_polygon.date_range);
-				let polygon_keyframes = polygon_obj.getGeometryKeyframes({ return_timestamps: true });
-				
-				//Keyframes are look-forwards; create thee keyframe at start_date, then for .value[0] changes until end date
-				if (!polygon_keyframes.includes(date_range[0]))
-					polygon_keyframes.unshift(date_range[0]);
-				
-				//Iterate over all polygon_keyframes and apply the changes at the given date
-				for (let i = 0; i < polygon_keyframes.length; i++)
-					if (polygon_keyframes[i] >= date_range[0] && polygon_keyframes[i] <= date_range[1])
-						DALS.Timeline.parseAction({
-							options: { name: "Remove from Polygon", key: "remove_from_polygon" },
-							value: [{
-								type: "GeometryPolygon",
-								geometry_id: polygon_obj.id,
-								remove_from_polygon: {
-									date: polygon_keyframes[i],
-									geometry: json.remove_from_polygon.geometry 
-								}
-							}]
-						}, true);
+				_parseGeometryActionsInDateRange(json.remove_from_polygon.date_range, (local_keyframe) => {
+					DALS.Timeline.parseAction({
+						options: { name: "Remove from Polygon", key: "remove_from_polygon" },
+						value: [{
+							type: "GeometryPolygon",
+							geometry_id: polygon_obj.id,
+							remove_from_polygon: {
+								date: local_keyframe,
+								geometry: json.remove_from_polygon.geometry
+							}
+						}]
+					}, true);
+				});
 			} else {
 				//Difference with existing geometry; if it covers the entire geometry set to null to hide
 				if (geometry) {
@@ -173,27 +170,19 @@ naissance.GeometryPolygon.parseAction = function (arg0_json) {
 					let date = (json.simplify_polygon.date) ? json.simplify_polygon.date : main.date;
 					
 					if (json.simplify_polygon.date_range) {
-						let date_range = Date.getTimestampRange(json.simplify_polygon.date_range);
-						let polygon_keyframes = polygon_obj.getGeometryKeyframes({ return_timestamps: true });
-						
-						//Keyframes are look-forwards; create thee keyframe at start_date, then for .value[0] changes until end date
-						if (!polygon_keyframes.includes(date_range[0]))
-							polygon_keyframes.unshift(date_range[0]);
-						
-						//Iterate over all polygon_keyframes and apply the changes at the given dateee
-						for (let i = 0; i < polygon_keyframes.length; i++)
-							if (polygon_keyframes[i] >= date_range[0] && polygon_keyframes[i] <= date_range[1])
-								DALS.Timeline.parseAction({
-									options: { name: "Simplify Polygon", key: "simplify_polygon" },
-									value: [{
-										type: "GeometryPolygon",
-										geometry_id: polygon_obj.id,
-										simplify_polygon: {
-											date: polygon_keyframes[i],
-											tolerance: tolerance
-										}
-									}]
-								}, true);
+						_parseGeometryActionsInDateRange(json.simplify_polygon.date_range, (local_keyframe) => {
+							DALS.Timeline.parseAction({
+								options: { name: "Simplify Polygon", key: "simplify_polygon" },
+								value: [{
+									type: "GeometryPolygon",
+									geometry_id: polygon_obj.id,
+									simplify_polygon: {
+										date: local_keyframe,
+										tolerance: tolerance
+									}
+								}]
+							}, true);
+						});
 					} else {
 						let geometry = (json.simplify_polygon.date) ? 
 							polygon_obj.getGeometryKeyframeAtDate(date) : polygon_obj.geometry;
