@@ -13,6 +13,8 @@ global.UI_BrushKeyframes = class extends ve.Class {
 		
 		//Return statement
 		return new ve.Interface({
+			info: new ve.HTML(`Out of caution, date ranges are currently only applied to Node Brushes to prevent accidental data erasures. Regular brushes can be used on temporary Polygons and transferred over using the 'Node Transfer' brush.`),
+			
 			apply_date_range: new ve.Toggle(this.enabled, {
 				name: "Apply Date Range",
 				onuserchange: (v) => this.enabled = v,
