@@ -60,7 +60,7 @@
 	
 	/**
 	 * Returns a date range given a timestamp range.
-	 * @aias Date.getDateRange
+	 * @alias Date.getDateRange
 	 *
 	 * @param {Object[]|number[]} arg0_date_range
 	 *

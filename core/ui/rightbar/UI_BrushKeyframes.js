@@ -7,23 +7,36 @@ global.UI_BrushKeyframes = class extends ve.Class {
 	 * @returns {ve.Interface}
 	 */
 	draw () {
+		//Declare local instance variables
+		let end_date = (this.end_date) ? this.end_date : JSON.parse(JSON.stringify(main.date));
+		let start_date = (this.start_date) ? this.start_date : JSON.parse(JSON.stringify(main.date));
+		
 		//Return statement
 		return new ve.Interface({
-			apply_date_range: new ve.Toggle(this.apply_date_range, {
+			apply_date_range: new ve.Toggle(this.enabled, {
 				name: "Apply Date Range",
-				onuserchange: (v) => this.disabled = !v,
+				onuserchange: (v) => this.enabled = v,
 				tooltip: "Whether to apply brush edits to the given date range."
 			}),
-			start_date: new ve.Date((this.start_date) ? this.start_date : main.date, {
+			start_date: new ve.Date(start_date, {
 				name: "Start Date",
 				onuserchange: (v) => this.start_date = v
 			}),
-			end_date: new ve.Date((this.end_date) ? this.end_date : main.date, {
+			end_date: new ve.Date(end_date, {
 				name: "End Date",
-				onuserchange: this.end_date = v
+				onuserchange: (v) => this.end_date = v
 			})
 		}, {
 			is_folder: false
 		});
+	}
+	
+	getDateRange () {
+		//Return statement
+		if (!this.enabled) return;
+		return [
+			(this.start_date) ? this.start_date : main.date,
+			(this.end_date) ? this.end_date : main.date
+		];
 	}
 }

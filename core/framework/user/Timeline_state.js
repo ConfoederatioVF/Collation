@@ -27,11 +27,12 @@
 		}
 		
 		//Save action to current timeline if needed
-		if (!do_not_push_action)
+		if (!do_not_push_action) {
 			new DALS.Action(json);
-		
-		//Force all UI_LeftbarHierarchy instances to .refresh()
-		UI_LeftbarHierarchy.refresh();
+			
+			//Force all UI_LeftbarHierarchy instances to .refresh()
+			UI_LeftbarHierarchy.refresh();
+		}
 	};
 }
 

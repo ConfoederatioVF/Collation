@@ -94,83 +94,99 @@ naissance.GeometryPolygon.handleNodeEditorEnd = function (arg0_e) {
 	//Convert from parameters
 	let e = arg0_e;
 	
+	//Declare local instance variables
+	let date_range = main.interfaces.edit_brush_keyframes.getDateRange();
+	
 	//Transfer handler
-	if (main.brush.mode === "node_transfer") try {
-		let from_geometry_id = main.brush.from_geometry_id;
-		let from_geometry;
-		if (from_geometry_id)
-			for (let i = 0; i < naissance.Geometry.instances.length; i++)
-				if (naissance.Geometry.instances[i].id === from_geometry_id) {
-					from_geometry = naissance.Geometry.instances[i];
-					break;
-				}
-		
-		//Get the intersection of from_geometry and e.geometry
-		if (!(from_geometry?.geometry && e?.geometry)) return; //Internal guard clause if neither are presently defined
-		if (from_geometry?.id === this.id) return; //Internal guard clause for self-selection
-		
-		let cursor_turf_geometry = Geospatiale.convertMaptalksToTurf(e.geometry);
-		let ot_turf_geometry = Geospatiale.convertMaptalksToTurf(from_geometry.geometry);
-		let turf_geometry = (this.geometry) ? Geospatiale.convertMaptalksToTurf(this.geometry) : null;
-		
-		let turf_intersection = (main.brush.node_editor.mode === "add") ?
-			turf.intersect(turf.featureCollection([ot_turf_geometry, cursor_turf_geometry])) :
-			turf.intersect(turf.featureCollection([turf_geometry, cursor_turf_geometry]));
-		if (!turf_intersection) return; //Internal guard clause if nothing overlaps
-		turf_intersection = turf.buffer(turf_intersection, Math.returnSafeNumber(main.brush.node_buffer/1000, 0.01), { units: "kilometers" });
-		
-		//Transfer selected polygon
-		e.geometry = Geospatiale.convertTurfToMaptalks(turf_intersection);
-		
-		if (main.brush.node_editor.mode === "add") {
-			DALS.Timeline.parseAction({
-				options: { name: "Remove from Polygon", key: "remove_from_polygon" },
-				value: [{
-					type: "GeometryPolygon",
-					geometry_id: from_geometry.id,
-					remove_from_polygon: { geometry: e.geometry.toJSON() }
-				}]
-			});
-			setTimeout(() => {
-				DALS.Timeline.parseAction({
-					options: { name: "Simplify Polygon", key: "simplify_polygon" },
-					value: [{
-						type: "GeometryPolygon",
-						geometry_id: this.id,
-						simplify_polygon: 0.01
-					}]
-				}, true);
-			}, 100);
-		} else if (main.brush.node_editor.mode === "remove") {
-			/*let debug_polygon = maptalks.Geometry.fromJSON(e.geometry.toJSON());
-				console.log(`Debug polygon:`, debug_polygon);
-				debug_polygon.addTo(main.layers.overlay_layer);*/
+	if (main.brush.mode === "node_transfer") {
+		try {
+			let from_geometry_id = main.brush.from_geometry_id;
+			let from_geometry;
+			if (from_geometry_id)
+				for (let i = 0; i < naissance.Geometry.instances.length; i++)
+					if (naissance.Geometry.instances[i].id === from_geometry_id) {
+						from_geometry = naissance.Geometry.instances[i];
+						break;
+					}
 			
-			DALS.Timeline.parseAction({
-				options: { name: "Add to Polygon", key: "add_to_polygon" },
-				value: [{
-					type: "GeometryPolygon",
-					geometry_id: from_geometry.id,
-					add_to_polygon: { geometry: e.geometry.toJSON() },
-					simplify_polygon: 0.01
-				}]
-			});
+			//Get the intersection of from_geometry and e.geometry
+			if (!(from_geometry?.geometry && e?.geometry)) return; //Internal guard clause if neither are presently defined
+			if (from_geometry?.id === this.id) return; //Internal guard clause for self-selection
 			
-			setTimeout(() => {
+			let cursor_turf_geometry = Geospatiale.convertMaptalksToTurf(e.geometry);
+			let ot_turf_geometry = Geospatiale.convertMaptalksToTurf(from_geometry.geometry);
+			let turf_geometry = (this.geometry) ? Geospatiale.convertMaptalksToTurf(this.geometry) : null;
+			
+			let turf_intersection = (main.brush.node_editor.mode === "add") ?
+				turf.intersect(turf.featureCollection([ot_turf_geometry, cursor_turf_geometry])) :
+				turf.intersect(turf.featureCollection([turf_geometry, cursor_turf_geometry]));
+			if (!turf_intersection) return; //Internal guard clause if nothing overlaps
+			turf_intersection = turf.buffer(turf_intersection, Math.returnSafeNumber(main.brush.node_buffer/1000, 0.01), { units: "kilometers" });
+			
+			//Transfer selected polygon
+			e.geometry = Geospatiale.convertTurfToMaptalks(turf_intersection);
+			
+			if (main.brush.node_editor.mode === "add") {
 				DALS.Timeline.parseAction({
-					options: { name: "Simplify Polygon", key: "simplify_polygon" },
+					options: { name: "Remove from Polygon", key: "remove_from_polygon" },
 					value: [{
 						type: "GeometryPolygon",
 						geometry_id: from_geometry.id,
-						simplify_polygon: 0.01
+						remove_from_polygon: {
+							date_range: date_range,
+							geometry: e.geometry.toJSON()
+						}
 					}]
-				}, true);
-			}, 100);
-		}
-		
-	} catch (e) { console.error(e); }
+				});
+				setTimeout(() => {
+					DALS.Timeline.parseAction({
+						options: { name: "Simplify Polygon", key: "simplify_polygon" },
+						value: [{
+							type: "GeometryPolygon",
+							geometry_id: this.id,
+							simplify_polygon: {
+								date_range: date_range,
+								tolerance: 0.01
+							}
+						}]
+					}, true);
+				}, 100);
+			} else if (main.brush.node_editor.mode === "remove") {
+				DALS.Timeline.parseAction({
+					options: { name: "Add to Polygon", key: "add_to_polygon" },
+					value: [{
+						type: "GeometryPolygon",
+						geometry_id: from_geometry.id,
+						add_to_polygon: {
+							date_range: date_range,
+							geometry: e.geometry.toJSON() 
+						},
+						simplify_polygon: {
+							date_range: date_range,
+							tolerance: 0.01
+						}
+					}]
+				});
+				
+				setTimeout(() => {
+					DALS.Timeline.parseAction({
+						options: { name: "Simplify Polygon", key: "simplify_polygon" },
+						value: [{
+							type: "GeometryPolygon",
+							geometry_id: from_geometry.id,
+							simplify_polygon: {
+								date_range: date_range,
+								tolerance: 0.01
+							}
+						}]
+					}, true);
+				}, 100);
+			}
+			
+		} catch (e) { console.error(e); }
+	}
 	
-	//Push action to timeline
+	//Push action to timeline for selected geometry
 	if (main.brush.node_editor.mode === "add") {
 		e.geometry = main.brush.getAddPolygon(e.geometry);
 		DALS.Timeline.parseAction({
@@ -179,9 +195,15 @@ naissance.GeometryPolygon.handleNodeEditorEnd = function (arg0_e) {
 				type: "GeometryPolygon",
 				
 				geometry_id: this.id,
-				add_to_polygon: { geometry: e.geometry.toJSON() },
-				simplify_polygon: (main.brush.simplify > 0 && main.brush.simplify_applies_to_polygon) ?
-					main.brush.simplify : undefined
+				add_to_polygon: {
+					date_range: date_range,
+					geometry: e.geometry.toJSON() 
+				},
+				simplify_polygon: {
+					date_range: date_range,
+					tolerance: (main.brush.simplify > 0 && main.brush.simplify_applies_to_polygon) ?
+						main.brush.simplify : undefined
+				}
 			}]
 		});
 	} else if (main.brush.node_editor.mode === "remove") {
@@ -191,7 +213,10 @@ naissance.GeometryPolygon.handleNodeEditorEnd = function (arg0_e) {
 			value: [{
 				type: "GeometryPolygon",
 				geometry_id: this.id,
-				remove_from_polygon: { geometry: e.geometry.toJSON() }
+				remove_from_polygon: {
+					date_range: date_range,
+					geometry: e.geometry.toJSON()
+				}
 			}]
 		});
 	}

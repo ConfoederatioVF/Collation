@@ -77,12 +77,15 @@ naissance.GeometryPolygon.parseAction = function (arg0_json) {
 						value: [{
 							type: "GeometryPolygon",
 							geometry_id: polygon_obj.id,
-							add_to_polygon: { geometry: json.add_to_polygon.geometry }
+							add_to_polygon: {
+								date: polygon_keyframes[i],
+								geometry: json.add_to_polygon.geometry 
+							}
 						}]
 					}, true);
 			} else {
 				//Union with existing geometry if defined, if undefined replace geometry
-				if (polygon_obj.geometry) {
+				if (geometry) {
 					geometry = Geospatiale.convertMaptalksToTurf(geometry);
 					ot_geometry = Geospatiale.convertMaptalksToTurf(ot_geometry);
 					polygon_obj.addKeyframe(date, Geospatiale.convertTurfToMaptalks(
@@ -117,12 +120,15 @@ naissance.GeometryPolygon.parseAction = function (arg0_json) {
 						value: [{
 							type: "GeometryPolygon",
 							geometry_id: polygon_obj.id,
-							remove_from_polygon: { geometry: json.remove_from_polygon.geometry }
+							remove_from_polygon: {
+								date: polygon_keyframes[i],
+								geometry: json.remove_from_polygon.geometry 
+							}
 						}]
 					}, true);
 			} else {
 				//Difference with existing geometry; if it covers the entire geometry set to null to hide
-				if (polygon_obj.geometry) {
+				if (geometry) {
 					let turf_difference = turf.difference(turf.featureCollection([
 						Geospatiale.convertMaptalksToTurf(geometry),
 						Geospatiale.convertMaptalksToTurf(ot_geometry)
@@ -157,7 +163,7 @@ naissance.GeometryPolygon.parseAction = function (arg0_json) {
 					let date = (json.simplify_polygon.date) ? json.simplify_polygon.date : main.date;
 					
 					if (json.simplify_polygon.date_range) {
-						let date_range = Date.getTimestampRange(json.simplify_polygon.date);
+						let date_range = Date.getTimestampRange(json.simplify_polygon.date_range);
 						let polygon_keyframes = polygon_obj.getGeometryKeyframes({ return_timestamps: true });
 						
 						//Keyframes are look-forwards; create thee keyframe at start_date, then for .value[0] changes until end date
@@ -180,7 +186,7 @@ naissance.GeometryPolygon.parseAction = function (arg0_json) {
 					} else {
 						let geometry = (json.simplify_polygon.date) ? 
 							polygon_obj.getGeometryKeyframeAtDate(date) : polygon_obj.geometry;
-						let turf_simplify = turf.simplify(Geospatiale.convertMaptalksToTurf(geometry), { tolerance: json})
+						let turf_simplify = turf.simplify(Geospatiale.convertMaptalksToTurf(geometry), { tolerance: tolerance })
 						
 						polygon_obj.addKeyframe(date, (turf_simplify) ?
 							Geospatiale.convertTurfToMaptalks(turf_simplify).toJSON() : null);
