@@ -72,41 +72,34 @@ naissance.GeometryPolygon.parseAction = function (arg0_json) {
 				
 				//Iterate over all polygon_keyframes and apply the changes at the given date
 				for (let i = 0; i < polygon_keyframes.length; i++)
-					DALS.Timeline.parseAction({
-						options: { name: "Add to Polygon", key: "add_to_polygon" },
-						value: [{
-							type: "GeometryPolygon",
-							geometry_id: polygon_obj.id,
-							add_to_polygon: {
-								date: polygon_keyframes[i],
-								geometry: json.add_to_polygon.geometry 
-							}
-						}]
-					}, true);
+					if (polygon_keyframes[i] >= date_range[0] && polygon_keyframes[i] <= date_rangee[1])
+						DALS.Timeline.parseAction({
+							options: { name: "Add to Polygon", key: "add_to_polygon" },
+							value: [{
+								type: "GeometryPolygon",
+								geometry_id: polygon_obj.id,
+								add_to_polygon: {
+									date: polygon_keyframes[i],
+									geometry: json.add_to_polygon.geometry 
+								}
+							}]
+						}, true);
 			} else {
 				//Union with existing geometry if defined, if undefined replace geometry
-				let fallback_to_ot_geometry = false;
-				
-				if (geometry && ot_geometry) {
-					try {
-						geometry = Geospatiale.convertMaptalksToTurf(geometry);
-						ot_geometry = Geospatiale.convertMaptalksToTurf(ot_geometry);
+				try {
+					geometry = (geometry) ? Geospatiale.convertMaptalksToTurf(geometry) : null;
+					ot_geometry = (ot_geometry) ? Geospatiale.convertMaptalksToTurf(ot_geometry) : null;
+					
+					if (geometry && ot_geometry) {
 						polygon_obj.addKeyframe(date, Geospatiale.convertTurfToMaptalks(
 							turf.union(turf.featureCollection([geometry, ot_geometry]))
 						).toJSON());
-					} catch (e) {
-						fallback_to_ot_geometry = true;
+					} else if (geometry && !ot_geometry) {
+						polygon_obj.addKeyframe(date, Geospatiale.convertTurfToMaptalks(geometry).toJSON());
+					} else if (!geometry && ot_geometry) {
+						polygon_obj.addKeyframe(date, Geospatiale.convertTurfToMaptalks(ot_geometry).toJSON());
 					}
-				} else {
-					fallback_to_ot_geometry = true;
-				}
-				
-				if (fallback_to_ot_geometry && ot_geometry)
-					if (typeof ot_geometry.toJSON === "function") {
-						polygon_obj.addKeyframe(date, ot_geometry.toJSON());
-					} else {
-						polygon_obj.addKeyframe(date, ot_geometry); //Already in JSON form
-					}
+				} catch (e) { console.error(e); }
 			}
 		}
 		
@@ -128,17 +121,18 @@ naissance.GeometryPolygon.parseAction = function (arg0_json) {
 				
 				//Iterate over all polygon_keyframes and apply the changes at the given date
 				for (let i = 0; i < polygon_keyframes.length; i++)
-					DALS.Timeline.parseAction({
-						options: { name: "Remove from Polygon", key: "remove_from_polygon" },
-						value: [{
-							type: "GeometryPolygon",
-							geometry_id: polygon_obj.id,
-							remove_from_polygon: {
-								date: polygon_keyframes[i],
-								geometry: json.remove_from_polygon.geometry 
-							}
-						}]
-					}, true);
+					if (polygon_keyframes[i] >= date_range[0] && polygon_keyframes[i] <= date_range[1])
+						DALS.Timeline.parseAction({
+							options: { name: "Remove from Polygon", key: "remove_from_polygon" },
+							value: [{
+								type: "GeometryPolygon",
+								geometry_id: polygon_obj.id,
+								remove_from_polygon: {
+									date: polygon_keyframes[i],
+									geometry: json.remove_from_polygon.geometry 
+								}
+							}]
+						}, true);
 			} else {
 				//Difference with existing geometry; if it covers the entire geometry set to null to hide
 				if (geometry) {
@@ -188,26 +182,29 @@ naissance.GeometryPolygon.parseAction = function (arg0_json) {
 						
 						//Iterate over all polygon_keyframes and apply the changes at the given dateee
 						for (let i = 0; i < polygon_keyframes.length; i++)
-							DALS.Timeline.parseAction({
-								options: { name: "Simplify Polygon", key: "simplify_polygon" },
-								value: [{
-									type: "GeometryPolygon",
-									geometry_id: polygon_obj.id,
-									simplify_polygon: {
-										date: polygon_keyframes[i],
-										tolerance: tolerance
-									}
-								}]
-							}, true);
+							if (polygon_keyframes[i] >= date_range[0] && polygon_keyframes[i] <= date_range[1])
+								DALS.Timeline.parseAction({
+									options: { name: "Simplify Polygon", key: "simplify_polygon" },
+									value: [{
+										type: "GeometryPolygon",
+										geometry_id: polygon_obj.id,
+										simplify_polygon: {
+											date: polygon_keyframes[i],
+											tolerance: tolerance
+										}
+									}]
+								}, true);
 					} else {
 						let geometry = (json.simplify_polygon.date) ? 
 							polygon_obj.getGeometryKeyframeAtDate(date) : polygon_obj.geometry;
 						
-						if (geometry) {
+						if (geometry) try {
 							let turf_simplify = turf.simplify(Geospatiale.convertMaptalksToTurf(geometry), { tolerance: tolerance })
 							
 							polygon_obj.addKeyframe(date, (turf_simplify) ?
 								Geospatiale.convertTurfToMaptalks(turf_simplify).toJSON() : null);
+						} catch (e) {
+							console.error(`Turf simplify:`, Geospatiale.convertMaptalksToTurf(geometry), geometry, e);
 						}
 					}
 				}

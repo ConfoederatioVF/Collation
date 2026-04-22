@@ -137,7 +137,7 @@ naissance.GeometryPolygon.handleNodeEditorEnd = function (arg0_e) {
 							geometry: e.geometry.toJSON()
 						}
 					}]
-				});
+				}); //Remove cut from target polygon
 				setTimeout(() => {
 					DALS.Timeline.parseAction({
 						options: { name: "Simplify Polygon", key: "simplify_polygon" },
@@ -205,7 +205,7 @@ naissance.GeometryPolygon.handleNodeEditorEnd = function (arg0_e) {
 						main.brush.simplify : undefined
 				}
 			}]
-		});
+		}); //Add cut to target polygon
 	} else if (main.brush.node_editor.mode === "remove") {
 		e.geometry = main.brush.getRemovePolygon(e.geometry);
 		DALS.Timeline.parseAction({
