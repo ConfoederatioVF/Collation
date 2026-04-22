@@ -13,16 +13,20 @@
  * - #### Internal Commands:
  * - `.add_to_polygon`: {@link Object}
  *   - `.geometry`: {@link string}
- *   - `.date=main.date`: {@link Object} - The date at which to add to polygon.
+ *   - `.date=main.date`: {@link Object}
  *   - `.date_range`: {@link Array}<{@link Object}> - [start_date, end_date]; both are Date objects or timestamps.
  * - `.hide_polygon`: {@link boolean}
  * - `.remove_from_polygon`: {@link Object}
  *   - `.geometry`: {@link string}
+ *   - `.date=main.date`: {@link Object}
  *   - `.date_range`: {@link Array}<{@link Object}> - [start_date, end_date]; both are Date objects or timestamps.
  * - `.set_polygon`: {@link Object}
  *   - `.geometry`: {@link Object}|{@link string}
  * - `.show_polygon`: {@link boolean}
- * - `.simplify_polygon`: {@link number} - The amount to simplify the Polygon by.
+ * - `.simplify_polygon`: {@link Object}|{@link number} - The amount to simplify the Polygon by.
+ *   - `.date=main.date`: {@link Object}
+ *   - `.date_range`: {@link Array}<{@link Object}> - [start_date, end_date]; both are Date objects or timestamps.
+ *   - `.tolerance`: {@link number}
  */
 naissance.GeometryPolygon.parseAction = function (arg0_json) {
 	//Convert from parameters
@@ -92,17 +96,40 @@ naissance.GeometryPolygon.parseAction = function (arg0_json) {
 		
 		//remove_from_polygon
 		if (json.remove_from_polygon) { //[WIP] - Replicate add_to_polygon logic for remove_from_polygon
-			let geometry = polygon_obj.geometry;
+			let date = (json.remove_from_polygon.date) ? json.remove_from_polygon.date : main.date;
+			let geometry = (json.remove_from_polygon.date) ?
+				polygon_obj.getGeometryKeyframeAtDate(date) : polygon_obj.geometry;
 			let ot_geometry = maptalks.Geometry.fromJSON(json.remove_from_polygon.geometry);
 			
 			//Difference with existing geometry, if return value is null replace geometry
-			if (polygon_obj.geometry) {
-				let turf_difference = turf.difference(turf.featureCollection([
-					Geospatiale.convertMaptalksToTurf(geometry),
-					Geospatiale.convertMaptalksToTurf(ot_geometry)
-				]));
-				polygon_obj.addKeyframe(main.date, (turf_difference) ?
-					Geospatiale.convertTurfToMaptalks(turf_difference).toJSON() : null);
+			if (json.remove_from_polygon.date_range) {
+				let date_range = Date.getTimestampRange(json.remove_from_polygon.date_range);
+				let polygon_keyframes = polygon_obj.getGeometryKeyframes({ return_timestamps: true });
+				
+				//Keyframes are look-forwards; create thee keyframe at start_date, then for .value[0] changes until end date
+				if (!polygon_keyframes.includes(date_range[0]))
+					polygon_keyframes.unshift(date_range[0]);
+				
+				//Iterate over all polygon_keyframes and apply the changes at the given date
+				for (let i = 0; i < polygon_keyframes.length; i++)
+					DALS.Timeline.parseAction({
+						options: { name: "Remove from Polygon", key: "remove_from_polygon" },
+						value: [{
+							type: "GeometryPolygon",
+							geometry_id: polygon_obj.id,
+							remove_from_polygon: { geometry: json.remove_from_polygon.geometry }
+						}]
+					}, true);
+			} else {
+				//Difference with existing geometry; if it covers the entire geometry set to null to hide
+				if (polygon_obj.geometry) {
+					let turf_difference = turf.difference(turf.featureCollection([
+						Geospatiale.convertMaptalksToTurf(geometry),
+						Geospatiale.convertMaptalksToTurf(ot_geometry)
+					]));
+					polygon_obj.addKeyframe(date, (turf_difference) ?
+						Geospatiale.convertTurfToMaptalks(turf_difference).toJSON() : null);
+				}
 			}
 		}
 		
@@ -117,11 +144,49 @@ naissance.GeometryPolygon.parseAction = function (arg0_json) {
 		
 		//simplify_polygon
 		if (json.simplify_polygon !== undefined) {
-			let geometry = polygon_obj.geometry;
-			let turf_simplify = turf.simplify(Geospatiale.convertMaptalksToTurf(geometry), { tolerance: json.simplify_polygon });
-			
-			polygon_obj.addKeyframe(main.date, (turf_simplify) ?
-				Geospatiale.convertTurfToMaptalks(turf_simplify).toJSON() : null);
+			if (typeof json.simplify_polygon === "number") {
+				let geometry = polygon_obj.geometry;
+				let turf_simplify = turf.simplify(Geospatiale.convertMaptalksToTurf(geometry), { tolerance: json.simplify_polygon });
+				
+				polygon_obj.addKeyframe(main.date, (turf_simplify) ?
+					Geospatiale.convertTurfToMaptalks(turf_simplify).toJSON() : null);
+			} else if (typeof json.simplify_polygon === "object") {
+				let tolerance = Math.returnSafeNumber(json.simplify_polygon.tolerance);
+				
+				if (tolerance) {
+					let date = (json.simplify_polygon.date) ? json.simplify_polygon.date : main.date;
+					
+					if (json.simplify_polygon.date_range) {
+						let date_range = Date.getTimestampRange(json.simplify_polygon.date);
+						let polygon_keyframes = polygon_obj.getGeometryKeyframes({ return_timestamps: true });
+						
+						//Keyframes are look-forwards; create thee keyframe at start_date, then for .value[0] changes until end date
+						if (!polygon_keyframes.includes(date_range[0]))
+							polygon_keyframes.unshift(date_range[0]);
+						
+						//Iterate over all polygon_keyframes and apply the changes at the given dateee
+						for (let i = 0; i < polygon_keyframes.length; i++)
+							DALS.Timeline.parseAction({
+								options: { name: "Simplify Polygon", key: "simplify_polygon" },
+								value: [{
+									type: "GeometryPolygon",
+									geometry_id: polygon_obj.id,
+									simplify_polygon: {
+										date: polygon_keyframes[i],
+										tolerance: tolerance
+									}
+								}]
+							}, true);
+					} else {
+						let geometry = (json.simplify_polygon.date) ? 
+							polygon_obj.getGeometryKeyframeAtDate(date) : polygon_obj.geometry;
+						let turf_simplify = turf.simplify(Geospatiale.convertMaptalksToTurf(geometry), { tolerance: json})
+						
+						polygon_obj.addKeyframe(date, (turf_simplify) ?
+							Geospatiale.convertTurfToMaptalks(turf_simplify).toJSON() : null);
+					}
+				}
+			}
 		}
 		
 		//simplify_polygon_for_all_keyframes
@@ -141,4 +206,8 @@ naissance.GeometryPolygon.parseAction = function (arg0_json) {
 			});
 		}
 	}
+};
+
+naissance.GeometryPolygon.parseActionForDateRange = function (arg0_date_range) { //[WIP] - Finish function body
+	
 };
