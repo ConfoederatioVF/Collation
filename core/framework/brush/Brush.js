@@ -156,7 +156,7 @@ naissance.Brush = class extends ve.Class {
 						y: "50dvh"
 					});
 				}, {
-					name: "Edit Keyframes",
+					name: "Edit Date Range",
 					limit: () => !this.disabled
 				}),
 				properties: veButton(() => {
