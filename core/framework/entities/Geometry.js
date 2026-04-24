@@ -418,11 +418,11 @@ naissance.Geometry = class extends ve.Class {
 					}
 				
 				if (!is_duplicate)
-					all_names.push({ name: local_properties.name, timestamp: Date.convertTimestampToInt(local_key) });
+					all_names.push({ name: local_properties.name, timestamp: local_value?.timestamp });
 			}
-		});
+		}, { sort_mode: "descending" });
 		
-		all_names.sort((a, b) => a.timestamp - b.timestamp);
+		all_names.sort((a, b) => b.timestamp - a.timestamp);
 		
 		//Return statement
 		return (!options.return_objects) ? 
