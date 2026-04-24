@@ -82,10 +82,14 @@ global.UI_Mapmodes = class extends ve.Class {
 	draw () {
 		//Declare local instance variables
 		let components_obj = {};
+		let map_settings = main.map.settings;
 		
 		//Iterate over all naissance.Mapmode.instances
 		for (let i = 0; i < naissance.Mapmode.instances.length; i++) {
 			let local_mapmode = naissance.Mapmode.instances[i];
+			if (!(map_settings.enabled_mapmodes && map_settings.enabled_mapmodes.includes(local_mapmode.id)))
+				continue; //Internal guard clause if map settings does not have this mapmode enabled
+				
 			components_obj[local_mapmode.id] = local_mapmode.drawHierarchyDatatype();
 			
 			let local_component_obj = components_obj[local_mapmode.id];
@@ -108,14 +112,58 @@ global.UI_Mapmodes = class extends ve.Class {
 		
 		//Declare local instance variables
 		let components_obj = {};
+		let map_settings = main.map.settings;
 		
-		//
+		if (!map_settings.enabled_mapmodes) map_settings.enabled_mapmodes = [];
+		
+		//Iterate over all naissance.Mapmode.instances and determine which are already in the local savefile
+		for (let i = 0; i < naissance.Mapmode.instances.length; i++) {
+			let local_mapmode = naissance.Mapmode.instances[i];
+			
+			let local_mapmode_button = veButton((v, e) => {
+				let mapmode_index = map_settings.enabled_mapmodes.indexOf(local_mapmode.id);
+				
+				//Toggle map_settings.enabled_mapmodes
+				(mapmode_index !== -1) ?
+					map_settings.enabled_mapmodes.splice(mapmode_index, 1) :
+					map_settings.enabled_mapmodes.push(local_mapmode.id);
+				
+				//Update attribute; save map settings
+				e.element.setAttribute("data-is-enabled", map_settings.enabled_mapmodes.includes(local_mapmode.id));
+				this.draw();
+			}, {
+				name: `${(local_mapmode.options.icon) ? `<icon>${local_mapmode.options.icon}</icon>&nbsp;&nbsp;` : ""}${local_mapmode.options.name}`,
+				attributes: {
+					"data-is-enabled": map_settings.enabled_mapmodes.includes(local_mapmode.id)
+				}
+			});
+			
+			components_obj[local_mapmode.id] = local_mapmode_button;
+		}
 		
 		this.add_mapmodes_window = veWindow({
-			
+			mapmodes_search: veSearchSelect(components_obj, {
+				display: "inline",
+				placeholder: "Search for mapmode ...",
+				searchbar_style: {
+					width: `calc(100% - var(--padding))`
+				},
+				style: {
+					"> [component='ve-button']": {
+						display: "inline",
+						padding: 0
+					},
+					"[data-is-enabled='true'] button": {
+						backgroundColor: `var(--accent-primary-colour)`
+					}
+				},
+			})
 		}, {
 			name: "Add Mapmodes",
-			can_rename: false
+			can_rename: false,
+			width: "30rem",
+			x: "50dvw - 30rem/2",
+			y: "50dvh"
 		});
 	}
 };
