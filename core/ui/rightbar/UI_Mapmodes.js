@@ -192,7 +192,8 @@ global.UI_Mapmodes = class extends ve.Class {
 				name: `${(local_mapmode.options.icon) ? `<icon>${local_mapmode.options.icon}</icon>&nbsp;&nbsp;` : ""}${local_mapmode.options.name}`,
 				attributes: {
 					"data-is-enabled": map_settings.enabled_mapmodes.includes(local_mapmode.id)
-				}
+				},
+				tooltip: local_mapmode.options.tooltip
 			});
 			
 			components_obj[local_mapmode.id] = local_mapmode_button;

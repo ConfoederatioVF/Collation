@@ -1,6 +1,7 @@
 config.mapmodes.livemap_Collation = {
 	name: "Collation (Livemap)",
 	icon: "visibility",
+	tooltip: "Because this is a live feed, geometries in this mapmode are always rendered on top of others when enabled.",
 
   onhide: function (v) {
     //Declaree local instance variables
@@ -57,7 +58,7 @@ config.mapmodes.livemap_Collation = {
 			} catch (e) { console.error(e); }
 		};
 		
-		//Immediate draw pattern
+		//Immediate draw pattern; [WARN] - This destroys manual z-index handling
 		if (!config_obj.logic_loop)
 			config_obj.logic_loop = setInterval(localDraw, 30000);
 		localDraw();

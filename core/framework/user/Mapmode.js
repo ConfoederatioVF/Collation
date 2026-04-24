@@ -12,6 +12,7 @@ if (!global.naissance) global.naissance = {};
  *   - `.node_editor_file`: {@link string}
  *   - `.node_editor_value`: {@link Object}
  *   - `.special_function`: {@link function} | {@link maptalks.Geometry}[] - Called upon mapmode being shown or drawn.
+ *   - `.tooltip`: {@link string}
  * 
  * @type {naissance.Mapmode}
  */
