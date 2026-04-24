@@ -84,7 +84,7 @@ naissance.Geometry = class extends ve.Class {
 		 */
 		this.label_geometries = [];
 		/** @type {boolean} */
-		this.selected = false; //Should be overridden by a getter/setter that attempts to render this.selected_geometry
+		this._selected = false; //Should be overridden by a getter/setter that attempts to render this.selected_geometry
 		/**
 		 * Selected geometry overlay.
 		 * - Mirror of: {@link this.geometry}
