@@ -7,7 +7,7 @@ global.UI_Mapmodes = class extends ve.Class {
 			mapmode_selection: new ve.SearchSelect({}, {
 				header_components_obj: {
 					add_new_mapmode: veButton(() => {
-						
+						this.openAddMapmodesWindow();
 					}, {
 						name: "<icon>add_circle</icon>",
 						tooltip: "Add New Mapmode",
@@ -101,5 +101,21 @@ global.UI_Mapmodes = class extends ve.Class {
 		
 		//Set new mapmode_selection value
 		this.interface.mapmode_selection.v = components_obj;
+	}
+	
+	openAddMapmodesWindow () {
+		if (this.add_mapmodes_window) this.add_mapmodes_window.close(); //Close add_mapmodes_window if already open
+		
+		//Declare local instance variables
+		let components_obj = {};
+		
+		//
+		
+		this.add_mapmodes_window = veWindow({
+			
+		}, {
+			name: "Add Mapmodes",
+			can_rename: false
+		});
 	}
 };
