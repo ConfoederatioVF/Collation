@@ -3,6 +3,8 @@ global.UI_Mapmodes = class extends ve.Class {
 		super();
 		
 		//Declare local instance variables
+		this._shift_positions = 1;
+		
 		this.interface = new ve.Interface({
 			mapmode_selection: new ve.SearchSelect({}, {
 				header_components_obj: {
@@ -83,14 +85,70 @@ global.UI_Mapmodes = class extends ve.Class {
 		//Declare local instance variables
 		let components_obj = {};
 		let map_settings = main.map.settings;
+		let mapmodes_array = main.user.mapmodes;
 		
 		//Iterate over all naissance.Mapmode.instances
 		for (let i = 0; i < naissance.Mapmode.instances.length; i++) {
 			let local_mapmode = naissance.Mapmode.instances[i];
 			if (!(map_settings.enabled_mapmodes && map_settings.enabled_mapmodes.includes(local_mapmode.id)))
 				continue; //Internal guard clause if map settings does not have this mapmode enabled
-				
-			components_obj[local_mapmode.id] = local_mapmode.drawHierarchyDatatype();
+			
+			let local_mapmode_button = local_mapmode.drawHierarchyDatatype();
+				local_mapmode_button.element.addEventListener("contextmenu", () => {
+					if (!local_mapmode.is_enabled) return; //Internal guard clause if mapmode is not enabled
+					
+					let get_current_idx = () => mapmodes_array.indexOf(local_mapmode.id);
+					
+					if (this.adjust_mapmode_window) this.adjust_mapmode_window.close();
+					this.adjust_mapmode_window = veWindow({
+						shift_bar: veRawInterface({
+							shift_left_button: veButton(() => {
+								let local_idx = get_current_idx();
+								let shift_positions = this._shift_positions;
+								let new_index = Math.max(local_idx - shift_positions, 0);
+								
+								console.log(`Current idx:`, local_idx);
+								main.user.mapmodes = Array.moveElement(mapmodes_array, local_idx, new_index);
+								this.draw();
+								naissance.Mapmode.draw();
+							}, {
+								name: "<icon>chevron_left</icon>",
+								tooltip: loc("ve.registry.localisation.List_shift_left")
+							}),
+							shift_positions: veNumber(this._shift_positions, {
+								min: 1,
+								name: loc("ve.registry.localisation.List_shift"),
+								onuserchange: (v) => this._shift_positions = v,
+								style: {
+									marginLeft: `calc(var(--padding)*0.5)`,
+									marginRight: `calc(var(--padding)*0.5)`,
+									whiteSpace: "nowrap",
+									"input": { textAlign: "center" }
+								}
+							}),
+							shift_right_button: veButton(() => {
+								let local_idx = get_current_idx();
+								let shift_positions = this._shift_positions;
+								let new_index = Math.min(local_idx + shift_positions, mapmodes_array.length - 1);
+								
+								main.user.mapmodes = Array.moveElement(mapmodes_array, local_idx, new_index);
+								this.draw();
+								naissance.Mapmode.draw();
+							}, {
+								name: "<icon>chevron_right</icon>",
+								tooltip: loc("ve.registry.localisation.List_shift_right")
+							})
+						}, {
+							style: { alignItems: "center", display: "flex", justifyContent: "center" }
+						})
+					}, {
+						name: "Adjust Mapmode",
+						can_rename: false,
+						do_not_wrap: true
+					});
+					console.log(local_mapmode);
+				});
+			components_obj[local_mapmode.id] = local_mapmode_button;
 			
 			let local_component_obj = components_obj[local_mapmode.id];
 			
