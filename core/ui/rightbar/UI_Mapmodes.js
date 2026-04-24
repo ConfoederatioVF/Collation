@@ -107,7 +107,6 @@ global.UI_Mapmodes = class extends ve.Class {
 								let shift_positions = this._shift_positions;
 								let new_index = Math.max(local_idx - shift_positions, 0);
 								
-								console.log(`Current idx:`, local_idx);
 								main.user.mapmodes = Array.moveElement(mapmodes_array, local_idx, new_index);
 								this.draw();
 								naissance.Mapmode.draw();
