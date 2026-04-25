@@ -24,5 +24,5 @@ config.defines.map = {
 			],
 		}
 	},
-	default_z_indices: [-9999, 8] //Heuristic bounds for default z-indices. Bottom mapmodes are z-indexed underneath [0]; top mapmodes are z-indexed above [1]
+	default_z_indices: [0, 8] //Heuristic bounds for default z-indices. Bottom mapmodes are z-indexed underneath [0]; top mapmodes are z-indexed above [1]
 };

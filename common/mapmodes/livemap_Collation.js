@@ -4,7 +4,7 @@ config.mapmodes.livemap_Collation = {
 	tooltip: "Because this is a live feed, geometries in this mapmode are always rendered on top of others when enabled.",
 
   onhide: function (v) {
-    //Declaree local instance variables
+    //Declare local instance variables
 		let config_obj = config.mapmodes.livemap_Collation;
 
     //Iterate over all config_obj.geometries
@@ -14,6 +14,34 @@ config.mapmodes.livemap_Collation = {
 
     config_obj.instance.setGeometries([]);
   },
+	onshow: function (v) {
+		//Declare local instance variables
+		let config_obj = config.mapmodes.livemap_Collation;
+		
+		//Refresh Collation Livemap window
+		if (main.interfaces.livemap_Collation) main.interfaces.livemap_Collation.close();
+		main.interfaces.livemap_Collation = new ve.Window({
+			hours_ago: new ve.Number(Ontology_Event.draw_hours_ago, {
+				name: "Hours Ago (Event)",
+				onuserchange: (v) => {
+					Ontology_Event.draw_hours_ago = v;
+					config_obj.redraw();
+				}
+			}),
+			ais_days_ago: new ve.Number(Math.returnSafeNumber(config_obj.AISFriends?.options?.days_ago_threshold, 7), {
+				name: "Days Ago (AIS)",
+				onuserchange: (v) => {
+					if (config_obj.AISFriends) {
+						config_obj.AISFriends.options.days_ago_threshold = v;
+						config_obj.redraw();
+					}
+				}
+			})
+		}, {
+			name: "Livemap (Collation)",
+			can_rename: false
+		});
+	},
 	
 	redraw: function (arg0_options) {
 		//Convert from parameters
@@ -73,29 +101,6 @@ config.mapmodes.livemap_Collation = {
 	special_function: function (v) {
 		//Declare local instance variables
 		let config_obj = config.mapmodes.livemap_Collation;
-		
-		if (main.interfaces.livemap_Collation) main.interfaces.livemap_Collation.close();
-		main.interfaces.livemap_Collation = new ve.Window({
-			hours_ago: new ve.Number(Ontology_Event.draw_hours_ago, {
-				name: "Hours Ago (Event)",
-				onuserchange: (v) => {
-					Ontology_Event.draw_hours_ago = v;
-					config_obj.redraw();
-				}
-			}),
-			ais_days_ago: new ve.Number(Math.returnSafeNumber(config_obj.AISFriends?.options?.days_ago_threshold, 7), {
-				name: "Days Ago (AIS)",
-				onuserchange: (v) => {
-					if (config_obj.AISFriends) {
-						config_obj.AISFriends.options.days_ago_threshold = v;
-						config_obj.redraw();
-					}
-				}
-			})
-		}, {
-			name: "Livemap (Collation)",
-			can_rename: false
-		});
 		
 		//Return statement
 		return config_obj.redraw();

@@ -89,7 +89,7 @@ global.l4p = "./livemap/4.view/politics/";
 					interactive: true,
 					zIndex: 3
 				}),
-				group_tile_layers: new maptalks.GroupTileLayer("group_tile_layers", [], { zIndex: -10000 }) //Base layer should always be beneath heuristic bounds (-9999)
+				group_tile_layers: new maptalks.GroupTileLayer("group_tile_layers", [], { zIndex: -10000 }) //Tile layers must be at bottom
 			},
 			map: map,
 			renderer: new naissance.Renderer(map),
