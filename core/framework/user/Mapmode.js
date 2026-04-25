@@ -81,10 +81,26 @@ naissance.Mapmode = class extends ve.Class { //[WIP] - Finish class body
 			}
 	}
 	
+	initLayer () {
+		let local_key = `mapmode_${this.id}`;
+		let local_mapmode_layer = main.layers[local_key];
+		
+		if (!local_mapmode_layer) {
+			main.layers[local_key] = new maptalks.VectorLayer(local_key, [], {
+				hitDetect: true,
+				interactive: true
+			});
+			main.layers[local_key].addTo(map);
+		}
+	}
+	
 	setGeometries (arg0_geometries) {
 		//Convert from parameters
 		let geometries = (arg0_geometries) ? arg0_geometries : [];
-		let mapmode_layer = main.layers[`mapmode_${this.options.layer}_layer`];
+		
+		//Declare local instance variables
+		this.initLayer();
+		let mapmode_layer = main.layers[`mapmode_${this.id}`];
 		
 		//Iterate over all present this.geometries
 		for (let i = 0; i < this.geometries.length; i++)
@@ -103,6 +119,9 @@ naissance.Mapmode = class extends ve.Class { //[WIP] - Finish class body
 	}
 	
 	static draw () {
+		//Declare local instance variables
+		let map_defines = config.defines.map;
+		
 		//Iterate over all main.user.mapmodes in order and render them
 		for (let i = 0; i < main.user.mapmodes.length; i++) {
 			let local_mapmode;
@@ -112,13 +131,20 @@ naissance.Mapmode = class extends ve.Class { //[WIP] - Finish class body
 					break;
 				}
 			
+			//Remove all current geometries before resetting
+			for (let x = 0; x < local_mapmode.geometries.length; x++)
+				local_mapmode.geometries[x].remove();
+			
 			//Draw the local_mapmode if possible
 			{
-				let local_mapmode_layer = main.layers[`mapmode_${local_mapmode.options.layer}_layer`];
+				//Initialise layer
+				local_mapmode.initLayer();
+				let local_z_index = (local_mapmode.options.layer === "bottom") ?
+					map_defines.default_z_indices[0] + i : map_defines.default_z_indices[1] + i;
 				
-				//Remove all current geometries before resetting
-				for (let x = 0; x < local_mapmode.geometries.length; x++)
-					local_mapmode.geometries[x].remove();
+				let local_key = `mapmode_${local_mapmode.id}`;
+				let local_mapmode_layer = main.layers[local_key]; //Refresh ref
+					local_mapmode_layer.setZIndex(local_z_index);
 				
 				//Assign new_geometries
 				let new_geometries = local_mapmode.options.special_function(local_mapmode);
@@ -134,6 +160,7 @@ naissance.Mapmode = class extends ve.Class { //[WIP] - Finish class body
 					let local_geometry = local_mapmode.geometries[x];
 					
           local_geometry.config("interactive", !main.settings.disable_mapmode_interactivity);
+					local_geometry.remove();
 					local_geometry.addTo(local_mapmode_layer);
 				}
 			}
