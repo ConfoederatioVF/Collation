@@ -217,6 +217,10 @@
     height: 100%;
     width: 100%;
 }
+/* -- ve.HTML -- */
+[component="ve-html"]:empty {
+    padding: 0;
+}
 
 /* -- ve.Interface -- */
 [component="ve-interface"] {
