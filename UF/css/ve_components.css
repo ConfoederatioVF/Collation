@@ -72,6 +72,10 @@
     }
     #name { align-items: center; display: flex; }
 }
+[component="ve-button"]:has(button[disabled="true"]) { 
+    opacity: 0.5;
+    pointer-events: none;
+}
 
 /* -- ve.Checkbox -- */
 [component="ve-checkbox"] {

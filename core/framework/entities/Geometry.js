@@ -277,7 +277,7 @@ naissance.Geometry = class extends ve.Class {
 	drawVariablesEditor () {
 		//Declare local instance variables
 		this.variables_ui = veInterface({
-			geometry_description: veWordProcessor(undefined, { //Loaded after 1 tick
+			geometry_description: veWordProcessor(this.metadata.description, { //Loaded after 1 tick
 				onuserchange: (v) => this.metadata.description = v
 			}),
 			actions_bar: veRawInterface({

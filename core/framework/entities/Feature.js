@@ -77,9 +77,41 @@ naissance.Feature = class extends ve.Class {
 		//Return statement
 		return veInterface({
 			actions_palette: veSearchSelect({
+				add_descriptions: veButton(() => {
+					if (this.add_descriptions_window) this.add_descriptions_window.close();
+					this.add_descriptions_window = veWindow({
+						value: veWordProcessor(this.ui.add_descriptions_value, {
+							onuserchange: (v) => this.ui.add_descriptions_value = v
+						}),
+						confirm: veButton(() => {
+							if (!(this.ui.add_descriptions_value?.length > 0)) {
+								veToast(`<icon>warn</icon> You must provide a valid description.`);
+								return;
+							}
+							
+							//Declare local instance variables
+							let all_geometries = this.getAllGeometries();
+							
+							//Iterate over all_geometries and add to .metadata.description
+							for (let i = 0; i < all_geometries.length; i++) {
+								if (!all_geometries[i].metadata) all_geometries[i].metadata = {};
+								if (!all_geometries[i].metadata.description) all_geometries[i].metadata.description = "";
+								
+								all_geometries[i].metadata.description += `\n${this.ui.add_descriptions_value}`;
+								if (all_geometries[i].variables_ui) all_geometries[i].variables_ui.remove(); //Free previous variables_ui
+								all_geometries[i].drawVariablesEditor();
+							}
+							veToast(`Added descriptions for ${all_geometries.length} geometries in ${this.name}.`);
+						}, { name: "Confirm" })
+					}, {
+						name: "Add Descriptions",
+						can_rename: false,
+						width: "30rem"
+					})
+				}, { name: "Add Descriptions" }),
 				add_field: veButton(() => {
 					
-				}, { name: "Add Field" }),
+				}, { name: "Add Field", disabled: true }),
 				add_variable: veButton(() => {
 					if (this.add_variable_window) this.add_variable_window.close();
 					this.add_variable_window = veWindow({
@@ -143,6 +175,9 @@ naissance.Feature = class extends ve.Class {
 						width: "20rem"
 					});
 				}, { name: "Add Variable" }),
+				clear_descriptions: veButton(() => {
+					
+				}, { name: "Clear Descriptions", disabled: true }),
 				clean_geometry_tags: veButton(() => {
 					veConfirm(`Are you sure you want to clean all geometry tags in ${this.name}?`, {
 						special_function: () => {
@@ -254,12 +289,15 @@ naissance.Feature = class extends ve.Class {
 						}, { name: "Confirm" })
 					}, { name: "Simplify Polygons", can_rename: false });
 				}, { name: "Simplify Polygons" }),
+				remove_description: veButton(() => {
+					
+				}, { name: "Remove Descriptions", disabled: true }),
 				remove_field: veButton(() => {
 					
-				}, { name: "Remove Field" }),
+				}, { name: "Remove Field", disabled: true }),
 				remove_variable: veButton(() => {
 					
-				}, { name: "Remove Variable" })
+				}, { name: "Remove Variable", disabled: true })
 			}, {
 				display: "inline",
 				placeholder: "Search for action ...",
