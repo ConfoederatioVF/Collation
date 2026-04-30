@@ -28,12 +28,12 @@
  *   - `.key`: {@link string}
  *   - `.values`: {@link Array}<{@link Array}<{@link Object}|{@link number}, {@link any}, ...>> - [date, value] map.
  * - `.add_variable`: {@link Object}
- *   - `.date`: {@link Object}|{@link number}
+ *   - `.date`: {@link Object}|{@link number}|{@link string} - If string, either 'start'/'end'.
  *   - `.key`: {@link string}
  *   - `.value`: {@link any}
  * - `.remove_column`: {@link string}
  * - `.remove_variable`: {@link Object}
- *   - `.date`: {@link Object}|{@link number}
+ *   - `.date`: {@link Object}|{@link number}|{@link string} - If string, either 'start'/'end'.
  *   - `.key`: {@link string}
  *
  * @param {Object|string} arg0_json
@@ -72,10 +72,21 @@ naissance.Geometry.parseAction = function (arg0_json) { //[WIP] - Add variable a
 		}
 		
 		//add_variable
-		if (typeof json.add_variable === "object")
-			geometry_obj.addKeyframe((json.add_variable.date) ? json.add_variable.date : main.date, undefined, undefined, {
+		if (typeof json.add_variable === "object") {
+			let timestamp;
+				if (timestamp === "end") {
+					timestamp = geometry_obj.history.getLastKeyframe().timestamp;
+				} else if (timestamp === "start") {
+					timestamp = geometry_obj.history.getFirstKeyframe().timestamp;
+				} else {
+					timestamp = Date.getTimestamp((json.add_variable.date) ?
+						json.add_variable.date : main.date);
+				}
+			
+			geometry_obj.addKeyframe(timestamp, undefined, undefined, {
 				variables: { [json.add_variable.key]: json.add_variable.value }
 			});
+		}
 		
 		//clean_keyframes
 		if (json.clean_keyframes) {
@@ -130,8 +141,15 @@ naissance.Geometry.parseAction = function (arg0_json) { //[WIP] - Add variable a
 		
 		//remove_variable
 		if (typeof json.remove_variable === "object") {
-			let timestamp = Date.getTimestamp((json.remove_variable.date) ? 
-				json.remove_variable.date : main.date);
+			let timestamp;
+				if (timestamp === "end") {
+					timestamp = geometry_obj.history.getLastKeyframe().timestamp;
+				} else if (timestamp === "start") {
+					timestamp = geometry_obj.history.getFirstKeyframe().timestamp;
+				} else {
+					timestamp = Date.getTimestamp((json.remove_variable.date) ?
+						json.remove_variable.date : main.date);
+				}
 			
 			let keyframe = geometry_obj.history.keyframes[timestamp];
 			
