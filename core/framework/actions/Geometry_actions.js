@@ -22,10 +22,24 @@
  * - `.set_symbol`: {@link Object}
  *   - `._set_label_symbol`: {@link Object} - Private alias for `.set_label_symbol`.
  *   - `<symbol_key>`: {@link any}
+ *   
+ * - Variables:
+ * - `.add_column`: {@link Object}
+ *   - `.key`: {@link string}
+ *   - `.values`: {@link Array}<{@link Array}<{@link Object}|{@link number}, {@link any}, ...>> - [date, value] map.
+ * - `.add_variable`: {@link Object}
+ *   - `.date`: {@link Object}|{@link number}
+ *   - `.key`: {@link string}
+ *   - `.value`: {@link any}
+ * - `.remove_column`: {@link string}
+ * - `.remove_variable`: {@link Object}
+ *   - `.date`: {@link Object}|{@link number}
+ *   - `.key`: {@link string}
+ *   - `.value`: {@link any}
  *
  * @param {Object|string} arg0_json
  */
-naissance.Geometry.parseAction = function (arg0_json) {
+naissance.Geometry.parseAction = function (arg0_json) { //[WIP] - Add variable actions
 	//Convert from parameters
 	let json = (typeof arg0_json === "string") ? JSON.parse(arg0_json) : arg0_json;
 	

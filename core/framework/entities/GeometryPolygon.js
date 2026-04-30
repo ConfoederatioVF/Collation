@@ -220,6 +220,7 @@ naissance.GeometryPolygon = class extends naissance.Geometry {
 				"data-selected-geometry": (main.brush.selected_geometry?.id === this.id),
 				"data-type": "GeometryPolygon"
 			},
+			do_not_display: true,
 			instance: this,
 			name: this.name,
 			name_options: {
