@@ -68,7 +68,7 @@ naissance.History = class extends ve.Class {
 					if (current_val.variables)
 						cleaned_obj.variables = { ...current_val.variables };
 					
-					// Check nested variables
+					//Check nested variables
 					if (current_val.variables && prev_val && prev_val.variables) {
 						for (let key in current_val.variables)
 							if (Boolean.isDeepEqual(current_val.variables[key], prev_val.variables[key])) {

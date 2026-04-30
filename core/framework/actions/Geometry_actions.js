@@ -35,7 +35,6 @@
  * - `.remove_variable`: {@link Object}
  *   - `.date`: {@link Object}|{@link number}
  *   - `.key`: {@link string}
- *   - `.value`: {@link any}
  *
  * @param {Object|string} arg0_json
  */
@@ -57,6 +56,26 @@ naissance.Geometry.parseAction = function (arg0_json) { //[WIP] - Add variable a
 					delete json.set_symbol._set_label_symbol;
 				}
 		}
+		
+		//add_column
+		if (typeof json.add_column === "object") {
+			if (!json.add_column.values) {
+				let first_keyframe = geometry_obj.history.getFirstKeyframe();
+				json.add_column.values = [[first_keyframe.timestamp, null]];
+			}
+			
+			//Iterate over all .values[n][0] dates; add keyframes at locations
+			for (let i = 0; i < json.add_column.values.length; i++)
+				geometry_obj.addKeyframe(json.add_column.values[i][0], undefined, undefined, {
+					variables: { [json.add_column.key]: json.add_column.values[i][1] }
+				});
+		}
+		
+		//add_variable
+		if (typeof json.add_variable === "object")
+			geometry_obj.addKeyframe((json.add_variable.date) ? json.add_variable.date : main.date, undefined, undefined, {
+				variables: { [json.add_variable.key]: json.add_variable.value }
+			});
 		
 		//clean_keyframes
 		if (json.clean_keyframes) {
@@ -94,10 +113,40 @@ naissance.Geometry.parseAction = function (arg0_json) { //[WIP] - Add variable a
 			geometry_obj.history.draw(geometry_obj.keyframes_ui);
 		}
 		
+		//remove_column
+		if (typeof json.remove_variable === "string") {
+			Object.iterate(geometry_obj.history, (local_key, local_value) => {
+				if (local_value?.value?.[2]?.variables)
+					delete local_value.value[2].variables[json.remove_variable];
+			});
+			geometry_obj.history.cleanKeyframes(); //Clean keyframes just in-case
+		}
+		
 		//remove_keyframe
 		if (json.remove_keyframe) {
 			geometry_obj.removeKeyframe(json.remove_keyframe);
 			geometry_obj.history.draw(geometry_obj.keyframes_ui);
+		}
+		
+		//remove_variable
+		if (typeof json.remove_variable === "object") {
+			let timestamp = Date.getTimestamp((json.remove_variable.date) ? 
+				json.remove_variable.date : main.date);
+			
+			let keyframe = geometry_obj.history.keyframes[timestamp];
+			
+			if (keyframe?.value?.[2]?.variables) {
+				delete keyframe.value[2].variables[json.remove_variable.key];
+				
+				if (Object.keys(keyframe.value[2].variables))
+					delete keyframe.value[2].variables;
+				if (
+					(keyframe.value[0] === "undefined" || !keyframe.value[0]) &&
+					(!keyframe.value[1]) &&
+					(Object.keys(keyframe.value[2]).length === 0)
+				)
+					geometry_obj.removeKeyframe(timestamp);
+			}
 		}
 		
 		//set_geometry

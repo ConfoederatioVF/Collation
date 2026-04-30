@@ -283,6 +283,7 @@ naissance.Geometry = class extends ve.Class {
 			actions_bar: veRawInterface({
 				open_variables_editor: veButton(() => {
 					if (this.variables_editor) this.variables_editor.close();
+					try { this.syncVariablesToSpreadsheet(); } catch (e) { console.error(e); } //Sync first
 					this.variables_editor = veWindow({
 						table_editor: veSpreadsheet(this.metadata.variables, {
 							dark_mode: true,
@@ -561,7 +562,7 @@ naissance.Geometry = class extends ve.Class {
 	 * - Method of: {@link naissance.Geometry}
 	 */
 	//[QUARANTINE]
-	syncVariablesToTable () {
+	syncVariablesToSpreadsheet () {
 		//Declare local instance variables
 		let first_sheet_id;
 		let snapshot = (this.metadata.variables && this.metadata.variables.sheets) ?
