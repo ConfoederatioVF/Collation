@@ -81,28 +81,48 @@ naissance.Feature = class extends ve.Class {
 					//Set defaults
 					if (this.ui.add_descriptions_avoid_duplicates === undefined) this.ui.add_descriptions_avoid_duplicates = true;
 					if (this.ui.add_descriptions_insert_at === undefined) this.ui.add_descriptions_insert_at = "append";
+					if (this.ui.add_descriptions_insert_newline === undefined) this.ui.add_descriptions_insert_newline = true;
+					if (this.ui.add_descriptions_search === undefined) this.ui.add_descriptions_search = "substring";
 					
 					if (this.add_descriptions_window) this.add_descriptions_window.close();
 					this.add_descriptions_window = veWindow({
 						value: veWordProcessor(this.ui.add_descriptions_value, {
-							onuserchange: (v) => this.ui.add_descriptions_value = v
+							onuserchange: (v) => this.ui.add_descriptions_value = v,
+							width: 99,
+							x: 0, y: 0
 						}),
-						avoid_duplicates: veToggle(this.ui.add_descriptions_avoid_duplicates, {
-							name: "Avoid Duplicates",
-							onuserchange: (v) => this.ui.add_descriptions_avoid_duplicates = v
-						}),
-						case_sensitive: veToggle(this.ui.add_descriptions_case_sensitive, {
-							name: "Case Sensitive",
-							onuserchange: (v) => this.ui.add_descriptions_case_sensitive = v
-						}),
-						insert_at: veSelect({
-							append: { name: "Append" },
-							prepend: { name: "Prepend" }
-						}, {
-							name: "Insert At",
-							onuserchange: (v) => this.ui.add_descriptions_insert_at = v,
-							selected: this.ui.add_descriptions_insert_at
-						}),
+						duplicate_filtering: veInterface({
+							avoid_duplicates: veToggle(this.ui.add_descriptions_avoid_duplicates, {
+								name: "Avoid Duplicates",
+								onuserchange: (v) => this.ui.add_descriptions_avoid_duplicates = v
+							}),
+							case_sensitive: veToggle(this.ui.add_descriptions_case_sensitive, {
+								name: "Case Sensitive",
+								onuserchange: (v) => this.ui.add_descriptions_case_sensitive = v
+							}),
+							search: veSelect({
+								substring: { name: "Substring" },
+								whole_line: { name: "Whole Line" }
+							}, {
+								name: "Search",
+								selected: this.ui.add_descriptions_search,
+								onuserchange: (v) => this.ui.add_descriptions_search = v
+							})
+						}, { name: "Duplicate Filtering", x: 0, y: 1 }),
+						insert_options: veInterface({
+							insert_at: veSelect({
+								append: { name: "Append" },
+								prepend: { name: "Prepend" }
+							}, {
+								name: "Insert At",
+								onuserchange: (v) => this.ui.add_descriptions_insert_at = v,
+								selected: this.ui.add_descriptions_insert_at
+							}),
+							insert_newline: veToggle(this.ui.add_descriptions_insert_newline, {
+								name: "Insert Newline",
+								onuserchange: (v) => this.ui.add_descriptions_insert_newline = v
+							}),
+						}, { name: "Insert Options", x: 1, y: 1 }),
 						confirm: veButton(() => {
 							if (!(this.ui.add_descriptions_value?.length > 0)) {
 								veToast(`<icon>warning</icon> You must provide a valid description.`);
