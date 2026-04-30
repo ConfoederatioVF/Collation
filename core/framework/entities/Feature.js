@@ -328,15 +328,15 @@ naissance.Feature = class extends ve.Class {
 						}, { name: "Confirm" })
 					}, { name: "Simplify Polygons", can_rename: false });
 				}, { name: "Simplify Polygons" }),
-				remove_description: veButton(() => {
-					
-				}, { name: "Remove Descriptions", disabled: true }),
 				remove_field: veButton(() => {
 					
 				}, { name: "Remove Field", disabled: true }),
 				remove_variable: veButton(() => {
 					
-				}, { name: "Remove Variable", disabled: true })
+				}, { name: "Remove Variable", disabled: true }),
+				replace_descriptions: veButton(() => {
+					
+				}, { name: "Replace Descriptions", disabled: true }),
 			}, {
 				display: "inline",
 				placeholder: "Search for action ...",
