@@ -43,6 +43,16 @@ naissance.GeometryPolygon = class extends naissance.Geometry {
 			}, {
 				name: "Debug",
 				x: 2, y: 1
+			}),
+			
+			actions_bar: veRawInterface(this.drawHierarchyDatatypeGenerics(), {
+				name: "<b>Quick Actions:</b>",
+				style: {
+					alignItems: "center",
+					display: "flex",
+					"[component='ve-button']": { marginLeft: "var(--padding)" }
+				},
+				width: 99
 			})
 		}, { is_folder: false });
 		this.edit_symbol_ui = veInterface({
