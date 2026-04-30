@@ -78,10 +78,30 @@ naissance.Feature = class extends ve.Class {
 		return veInterface({
 			actions_palette: veSearchSelect({
 				add_descriptions: veButton(() => {
+					//Set defaults
+					if (this.ui.add_descriptions_avoid_duplicates === undefined) this.ui.add_descriptions_avoid_duplicates = true;
+					if (this.ui.add_descriptions_insert_at === undefined) this.ui.add_descriptions_insert_at = "append";
+					
 					if (this.add_descriptions_window) this.add_descriptions_window.close();
 					this.add_descriptions_window = veWindow({
 						value: veWordProcessor(this.ui.add_descriptions_value, {
 							onuserchange: (v) => this.ui.add_descriptions_value = v
+						}),
+						avoid_duplicates: veToggle(this.ui.add_descriptions_avoid_duplicates, {
+							name: "Avoid Duplicates",
+							onuserchange: (v) => this.ui.add_descriptions_avoid_duplicates = v
+						}),
+						case_sensitive: veToggle(this.ui.add_descriptions_case_sensitive, {
+							name: "Case Sensitive",
+							onuserchange: (v) => this.ui.add_descriptions_case_sensitive = v
+						}),
+						insert_at: veSelect({
+							append: { name: "Append" },
+							prepend: { name: "Prepend" }
+						}, {
+							name: "Insert At",
+							onuserchange: (v) => this.ui.add_descriptions_insert_at = v,
+							selected: this.ui.add_descriptions_insert_at
 						}),
 						confirm: veButton(() => {
 							if (!(this.ui.add_descriptions_value?.length > 0)) {
@@ -97,9 +117,28 @@ naissance.Feature = class extends ve.Class {
 								if (!all_geometries[i].metadata) all_geometries[i].metadata = {};
 								if (!all_geometries[i].metadata.description) all_geometries[i].metadata.description = "";
 								
-								all_geometries[i].metadata.description += `\n${this.ui.add_descriptions_value}`;
-								if (all_geometries[i].variables_ui) all_geometries[i].variables_ui.remove(); //Free previous variables_ui
-								all_geometries[i].drawVariablesEditor();
+								let do_not_insert = false;
+								let local_description = all_geometries[i].metadata.description;
+								
+								if (this.ui.add_descriptions_avoid_duplicates)
+									if (this.ui.add_descriptions_case_sensitive) {
+										if (local_description.includes(this.ui.add_descriptions_value)) do_not_insert = true;
+									} else {
+										if (local_description.trim().toLowerCase().includes(
+											this.ui.add_descriptions_value.trim().toLowerCase())
+										) do_not_insert = true;
+									}
+								
+								if (!do_not_insert) {
+									if (this.ui.add_descriptions_insert_at === "prepend") {
+										all_geometries[i].metadata.description = `${this.ui.add_descriptions_value}\n${all_geometries[i].metadata.description}`;
+									} else {
+										all_geometries[i].metadata.description += `\n${this.ui.add_descriptions_value}`;
+									}
+									
+									if (all_geometries[i].variables_ui) all_geometries[i].variables_ui.remove(); //Free previous variables_ui
+									all_geometries[i].drawVariablesEditor();
+								}
 							}
 							veToast(`Added descriptions for ${all_geometries.length} geometries in ${this.name}.`);
 						}, { name: "Confirm" })
