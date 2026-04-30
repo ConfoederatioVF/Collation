@@ -74,9 +74,9 @@ naissance.Geometry.parseAction = function (arg0_json) { //[WIP] - Add variable a
 		//add_variable
 		if (typeof json.add_variable === "object") {
 			let timestamp;
-				if (timestamp === "end") {
+				if (json.add_variable.date === "end") {
 					timestamp = geometry_obj.history.getLastKeyframe().timestamp;
-				} else if (timestamp === "start") {
+				} else if (json.add_variable.date === "start") {
 					timestamp = geometry_obj.history.getFirstKeyframe().timestamp;
 				} else {
 					timestamp = Date.getTimestamp((json.add_variable.date) ?
@@ -142,9 +142,9 @@ naissance.Geometry.parseAction = function (arg0_json) { //[WIP] - Add variable a
 		//remove_variable
 		if (typeof json.remove_variable === "object") {
 			let timestamp;
-				if (timestamp === "end") {
+				if (json.remove_variable.date === "end") {
 					timestamp = geometry_obj.history.getLastKeyframe().timestamp;
-				} else if (timestamp === "start") {
+				} else if (json.remove_variable.date === "start") {
 					timestamp = geometry_obj.history.getFirstKeyframe().timestamp;
 				} else {
 					timestamp = Date.getTimestamp((json.remove_variable.date) ?

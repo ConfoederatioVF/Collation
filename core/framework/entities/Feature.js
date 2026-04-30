@@ -77,6 +77,72 @@ naissance.Feature = class extends ve.Class {
 		//Return statement
 		return veInterface({
 			actions_palette: veSearchSelect({
+				add_field: veButton(() => {
+					
+				}, { name: "Add Field" }),
+				add_variable: veButton(() => {
+					if (this.add_variable_window) this.add_variable_window.close();
+					this.add_variable_window = veWindow({
+						variable_key: veText(this.ui.add_variable_key, {
+							name: "Field/Variable Key",
+							onuserchange: (v) => this.ui.add_variable_key = v
+						}),
+						value: veText(this.ui.add_variable_value, {
+							name: "Value",
+							onuserchange: (v) => {
+								if (!isNaN(parseFloat(v))) {
+									this.ui.add_variable_value = parseFloat(v);
+								} else {
+									this.ui.add_variable_value = v;
+								}
+							}
+						}),
+						keyframe: veSelect({
+							end: { name: "End Date" },
+							manual: { name: "Manual Date" },
+							start: { name: "Start Date" },
+						}, {
+							name: "Keyframe",
+							selected: (this.ui.add_variable_keyframe) ? this.ui.add_variable_keyframe : "start",
+							onuserchange: (v) => this.ui.add_variable_keyframe = v
+						}),
+						date: veDate(main.date, {
+							name: "Date",
+							limit: () => this.ui.add_variable_keyframe === "manual",
+							onuserchange: (v) => this.ui.add_variable_date = v
+						}),
+						
+						confirm: veButton(() => {
+							if (!this.ui.add_variable_key) {
+								veToast(`<icon>warn</icon> You must provide a valid variable key.`);
+								return;
+							}
+							
+							let actual_date;
+								if (this.ui.add_variable_keyframe === "manual") {
+									actual_date = (this.ui.add_variable_date) ? this.ui.add_variable_date : main.date;
+								} else {
+									actual_date = (this.ui.add_variable_keyframe) ? this.ui.add_variable_keyframe : "start";
+								}
+							DALS.Timeline.parseAction({
+								options: { name: "Add Variable", key: `add_variable_${this.ui.add_variable_key}` },
+								value: [{
+									type: "Feature",
+									feature_id: this.id,
+									add_variable: {
+										date: actual_date,
+										key: this.ui.add_variable_key,
+										value: (this.ui.add_variable_value !== undefined) ? this.ui.add_variable_value : ""
+									}
+								}]
+							});
+						}, { name: "Confirm" })
+					}, { 
+						name: "Add Variable", 
+						can_rename: false,
+						width: "20rem"
+					});
+				}, { name: "Add Variable" }),
 				clean_geometry_tags: veButton(() => {
 					veConfirm(`Are you sure you want to clean all geometry tags in ${this.name}?`, {
 						special_function: () => {
@@ -92,7 +158,6 @@ naissance.Feature = class extends ve.Class {
 						}
 					});
 				}, { name: "Clean Geometry Tags" }),
-				
 				clean_keyframes: veButton(() => {
 					if (this.clean_keyframes_window) this.clean_keyframes_window.close();
 					this.clean_keyframes_window = veWindow({
@@ -188,7 +253,13 @@ naissance.Feature = class extends ve.Class {
 							} catch (e) { console.error(e); }
 						}, { name: "Confirm" })
 					}, { name: "Simplify Polygons", can_rename: false });
-				}, { name: "Simplify Polygons" })
+				}, { name: "Simplify Polygons" }),
+				remove_field: veButton(() => {
+					
+				}, { name: "Remove Field" }),
+				remove_variable: veButton(() => {
+					
+				}, { name: "Remove Variable" })
 			}, {
 				display: "inline",
 				placeholder: "Search for action ...",
@@ -201,7 +272,8 @@ naissance.Feature = class extends ve.Class {
 			})
 		}, {
 			name: "Actions",
-			style: { padding: 0 }
+			style: { padding: 0 },
+			width: 99
 		});
 	}
 	

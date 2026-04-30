@@ -605,8 +605,8 @@ naissance.Geometry = class extends ve.Class {
 			if (local_idx > max_row) max_row = local_idx;
 			
 			let local_date_cell = local_row[0];
-			if (local_date_cell?.v != null && local_idx > 0) { //Skip header row
-				//PARSE DATE COLUMN (Ensures consistency with drawVariablesEditor logic)
+			if (local_date_cell?.v != null && local_idx > 0) {
+				//Parse Date using existing convention to ensure match
 				let local_parsed_date = Date.convertStringToDate(local_date_cell.v.toString());
 				let local_ts = Date.getTimestamp(local_parsed_date);
 				
@@ -628,13 +628,14 @@ naissance.Geometry = class extends ve.Class {
 					max_row++;
 					target_row_idx = max_row;
 					let local_date = local_keyframe.date;
-					let local_cell_obj = { t: 1 }; //Default to string for safety
+					let local_cell_obj = { t: 1 };
 					
-					//Concise formatting: Store as number (t: 2) if it is a plain year
+					//CONCISE FORMATTING: Store as Number (t: 2) if it is a plain year
 					if (local_date.month === 1 && local_date.day === 1 && local_date.hour === 0 && local_date.minute === 0) {
 						local_cell_obj.v = local_date.year;
 						local_cell_obj.t = 2;
 					} else {
+						//Build concise string only as long as necessary
 						let local_str = local_date.year.toString();
 						if (local_date.minute > 0) {
 							local_str += `.${local_date.month}.${local_date.day}.${local_date.hour}.${local_date.minute}`;
@@ -664,7 +665,7 @@ naissance.Geometry = class extends ve.Class {
 					}
 					let target_col_idx = col_map[local_var_name];
 					
-					//4. Sync only if the data does not already exist in the table
+					//4. Sync only if the cell does not already contain a value
 					if (!target_row[target_col_idx] || target_row[target_col_idx].v == null) {
 						let local_cell_obj = {};
 						let local_val_str = (local_var_value != null) ? local_var_value.toString() : "";
@@ -681,7 +682,7 @@ naissance.Geometry = class extends ve.Class {
 			}
 		});
 		
-		//Update the snapshot and reload the UI if the spreadsheet is open
+		//Update the metadata snapshot and push to the active editor UI
 		this.metadata.variables = snapshot;
 		
 		if (this.variables_editor?.instance?.table_editor)
