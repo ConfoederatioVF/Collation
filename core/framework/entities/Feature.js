@@ -85,7 +85,7 @@ naissance.Feature = class extends ve.Class {
 						}),
 						confirm: veButton(() => {
 							if (!(this.ui.add_descriptions_value?.length > 0)) {
-								veToast(`<icon>warn</icon> You must provide a valid description.`);
+								veToast(`<icon>warning</icon> You must provide a valid description.`);
 								return;
 							}
 							
@@ -146,7 +146,7 @@ naissance.Feature = class extends ve.Class {
 						
 						confirm: veButton(() => {
 							if (!this.ui.add_variable_key) {
-								veToast(`<icon>warn</icon> You must provide a valid variable key.`);
+								veToast(`<icon>warning</icon> You must provide a valid variable key.`);
 								return;
 							}
 							
