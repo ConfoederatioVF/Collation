@@ -77,7 +77,7 @@ naissance.Feature = class extends ve.Class {
 		//Return statement
 		return veInterface({
 			actions_palette: veSearchSelect({
-				add_descriptions: veButton(() => {
+				add_descriptions: veButton(() => { //[WIP] - Add line_break toggle, whole line/substring searching for duplicates
 					//Set defaults
 					if (this.ui.add_descriptions_avoid_duplicates === undefined) this.ui.add_descriptions_avoid_duplicates = true;
 					if (this.ui.add_descriptions_insert_at === undefined) this.ui.add_descriptions_insert_at = "append";
@@ -131,9 +131,9 @@ naissance.Feature = class extends ve.Class {
 								
 								if (!do_not_insert) {
 									if (this.ui.add_descriptions_insert_at === "prepend") {
-										all_geometries[i].metadata.description = `${this.ui.add_descriptions_value}\n${all_geometries[i].metadata.description}`;
+										all_geometries[i].metadata.description = `${this.ui.add_descriptions_value}<br>${all_geometries[i].metadata.description}`;
 									} else {
-										all_geometries[i].metadata.description += `\n${this.ui.add_descriptions_value}`;
+										all_geometries[i].metadata.description += `<br>${this.ui.add_descriptions_value}`;
 									}
 									
 									if (all_geometries[i].variables_ui) all_geometries[i].variables_ui.remove(); //Free previous variables_ui
