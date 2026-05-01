@@ -137,28 +137,18 @@ naissance.Feature = class extends ve.Class {
 								if (!all_geometries[i].metadata) all_geometries[i].metadata = {};
 								if (!all_geometries[i].metadata.description) all_geometries[i].metadata.description = "";
 								
-								let do_not_insert = false;
 								let local_description = all_geometries[i].metadata.description;
 								
-								if (this.ui.add_descriptions_avoid_duplicates)
-									if (this.ui.add_descriptions_case_sensitive) {
-										if (local_description.includes(this.ui.add_descriptions_value)) do_not_insert = true;
-									} else {
-										if (local_description.trim().toLowerCase().includes(
-											this.ui.add_descriptions_value.trim().toLowerCase())
-										) do_not_insert = true;
-									}
+								all_geometries[i].metadata.description = String.editAddToString(local_description, this.ui.add_descriptions_value, {
+									avoid_duplicates: this.ui.add_descriptions_avoid_duplicates,
+									case_sensitive: this.ui.add_descriptions_case_sensitive,
+									insert_at: this.ui.add_descriptions_insert_at,
+									insert_newline: this.ui.add_descriptions_insert_newline,
+									search: this.ui.add_descriptions_search,
+								});
 								
-								if (!do_not_insert) {
-									if (this.ui.add_descriptions_insert_at === "prepend") {
-										all_geometries[i].metadata.description = `${this.ui.add_descriptions_value}<br>${all_geometries[i].metadata.description}`;
-									} else {
-										all_geometries[i].metadata.description += `<br>${this.ui.add_descriptions_value}`;
-									}
-									
-									if (all_geometries[i].variables_ui) all_geometries[i].variables_ui.remove(); //Free previous variables_ui
-									all_geometries[i].drawVariablesEditor();
-								}
+								if (all_geometries[i].variables_ui) all_geometries[i].variables_ui.remove(); //Free previous variables_ui
+								all_geometries[i].drawVariablesEditor();
 							}
 							veToast(`Added descriptions for ${all_geometries.length} geometries in ${this.name}.`);
 						}, { name: "Confirm" })
