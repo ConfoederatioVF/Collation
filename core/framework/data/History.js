@@ -223,7 +223,10 @@ naissance.History = class extends ve.Class {
 		if (interface_obj) {
 			interface_obj.v = components_obj;
 		} else {
-			this.interface = new ve.Interface(components_obj, { name: "Keyframes", width: 99 });
+			this.interface = new ve.Interface(components_obj, { 
+				name: `Keyframes (${String.formatNumber(this.keyframes.length)})`, 
+				width: 99 
+			});
 		}
 	}
 	
