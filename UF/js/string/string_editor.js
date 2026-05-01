@@ -70,6 +70,108 @@
 	};
 	
 	/**
+	 * Edits a string by replacing text within it.
+	 * @alias String.editReplaceInString
+	 *
+	 * @param {string} arg0_string - The original string to edit.
+	 * @param {string} arg1_find_string - The string to look for.
+	 * @param {string} arg2_replace_string - The string to replace the found occurrence with.
+	 * @param {Object} [arg3_options]
+	 *  @param {boolean} [arg3_options.case_sensitive=false]
+	 *  @param {string} [arg3_options.newline_character="<br>"]
+	 *  @param {boolean} [arg3_options.replace_all=false]
+	 *  @param {string} [arg3_options.replace_order="first"] - Either 'first'/'last'-ordered.
+	 *  @param {string} [arg3_options.search="substring"] - Either 'substring'/'whole_line'.
+	 *
+	 * @returns {string}
+	 */
+	String.editReplaceInString = function (arg0_string, arg1_find_string, arg2_replace_string, arg3_options) {
+		//Convert from parameters
+		let string = (arg0_string) ? arg0_string : "";
+		let find_string = (arg1_find_string) ? arg1_find_string : "";
+		let replace_string = (arg2_replace_string !== undefined) ? arg2_replace_string : "";
+		let options = (arg3_options) ? arg3_options : {};
+		
+		//Initialise options
+		if (options.case_sensitive === undefined) options.case_sensitive = false;
+		if (options.newline_character === undefined) options.newline_character = "<br>";
+		if (options.replace_all === undefined) options.replace_all = (options.remove_all !== undefined) ? options.remove_all : false;
+		if (options.replace_order === undefined) options.replace_order = (options.remove_order !== undefined) ? options.remove_order : "first";
+		if (options.search === undefined) options.search = "substring";
+		
+		//Declare local instance variables
+		let replaced_count = 0;
+		
+		if (options.search === "substring") {
+			if (options.replace_all) {
+				let flags = (options.case_sensitive) ? "g" : "gi";
+				let regex = new RegExp(find_string.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&"), flags);
+				
+				string = string.replace(regex, replace_string);
+			} else {
+				let search_string = (options.case_sensitive) ? string :
+					string.toLowerCase();
+				let search_find_string = (options.case_sensitive) ? find_string :
+					find_string.toLowerCase();
+				
+				let index = (options.replace_order === "first") ? search_string.indexOf(search_find_string) :
+					search_string.lastIndexOf(search_find_string);
+				
+				if (index !== -1)
+					string = string.substring(0, index) + replace_string + string.substring(index + find_string.length);
+			}
+		} else if (options.search === "whole_line") {
+			let all_lines = string.split(options.newline_character);
+			let result_lines = [];
+			
+			if (options.replace_order === "last" && !options.replace_all) {
+				for (let i = all_lines.length - 1; i >= 0; i--) {
+					let is_match = false;
+					
+					if (options.case_sensitive) {
+						if (all_lines[i].trim() === find_string.trim())
+							is_match = true;
+					} else {
+						if (String.equalsIgnoreCase(all_lines[i], find_string, { trim: true }))
+							is_match = true;
+					}
+					
+					if (is_match && replaced_count === 0) {
+						result_lines.unshift(replace_string);
+						replaced_count++;
+					} else {
+						result_lines.unshift(all_lines[i]);
+					}
+				}
+			} else {
+				for (let i = 0; i < all_lines.length; i++) {
+					let is_match = false;
+					
+					if (options.case_sensitive) {
+						if (all_lines[i].trim() === find_string.trim())
+							is_match = true;
+					} else {
+						if (String.equalsIgnoreCase(all_lines[i], find_string, { trim: true }))
+							is_match = true;
+					}
+					
+					if (is_match && (options.replace_all || replaced_count === 0)) {
+						result_lines.push(replace_string);
+						replaced_count++;
+					} else {
+						result_lines.push(all_lines[i]);
+					}
+				}
+			}
+			
+			string = result_lines.join(options.newline_character);
+		}
+		
+		//Return statement
+		return string;
+	};
+	
+	/**
 	 * Edits a string by removing text from it.
 	 * @alias String.editRemoveFromString
 	 *
@@ -84,86 +186,7 @@
 	 *
 	 * @returns {string}
 	 */
-	String.editRemoveFromString = function (arg0_string, arg1_string, arg2_options) { //[WIP] - Should be changed to String.editReplaceInString()
-		//Convert from parameters
-		let string = (arg0_string) ? arg0_string : "";
-		let ot_string = (arg1_string) ? arg1_string : "";
-		let options = (arg2_options) ? arg2_options : {};
-		
-		//Initialise options
-		if (options.case_sensitive === undefined) options.case_sensitive = false;
-		if (options.newline_character === undefined) options.newline_character = "<br>";
-		if (options.remove_all === undefined) options.remove_all = false;
-		if (options.remove_order === undefined) options.remove_order = "first";
-		if (options.search === undefined) options.search = "substring";
-		
-		//Declare local instance variables
-		let removed_count = 0;
-		
-		if (options.search === "substring") {
-			if (options.remove_all) {
-				let flags = (options.case_sensitive) ? "g" : "gi";
-				let regex = new RegExp(ot_string.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&"), flags);
-				
-				string = string.replace(regex, "");
-			} else {
-				let search_string = (options.case_sensitive) ? string :
-					string.toLowerCase();
-				let find_string = (options.case_sensitive) ? ot_string :
-					ot_string.toLowerCase();
-				
-				let index = (options.remove_order === "first") ? search_string.indexOf(find_string) :
-					search_string.lastIndexOf(find_string);
-				
-				if (index !== -1)
-					string = string.substring(0, index) + string.substring(index + ot_string.length);
-			}
-		} else if (options.search === "whole_line") {
-			let all_lines = string.split(options.newline_character);
-			let result_lines = [];
-			
-			if (options.remove_order === "last" && !options.remove_all) {
-				for (let i = all_lines.length - 1; i >= 0; i--) {
-					let is_match = false;
-					
-					if (options.case_sensitive) {
-						if (all_lines[i].trim() === ot_string.trim())
-							is_match = true;
-					} else {
-						if (String.equalsIgnoreCase(all_lines[i], ot_string, { trim: true }))
-							is_match = true;
-					}
-					
-					if (is_match && removed_count === 0) {
-						removed_count++;
-					} else {
-						result_lines.unshift(all_lines[i]);
-					}
-				}
-			} else {
-				for (let i = 0; i < all_lines.length; i++) {
-					let is_match = false;
-					
-					if (options.case_sensitive) {
-						if (all_lines[i].trim() === ot_string.trim())
-							is_match = true;
-					} else {
-						if (String.equalsIgnoreCase(all_lines[i], ot_string, { trim: true }))
-							is_match = true;
-					}
-					
-					if (is_match && (options.remove_all || removed_count === 0)) {
-						removed_count++;
-					} else {
-						result_lines.push(all_lines[i]);
-					}
-				}
-			}
-			
-			string = result_lines.join(options.newline_character);
-		}
-		
-		//Return statement
-		return string;
+	String.editRemoveFromString = function (arg0_string, arg1_string, arg2_options) {
+		return String.editReplaceInString(arg0_string, arg1_string, "", arg2_options);
 	};
 }

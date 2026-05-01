@@ -344,44 +344,49 @@ naissance.Feature = class extends ve.Class {
 				remove_variable: veButton(() => {
 					
 				}, { name: "Remove Variable", disabled: true }),
-				remove_descriptions: veButton(() => { //[WIP] - Should be changed to replace_descriptions
-					if (this.remove_descriptions_window) this.remove_descriptions_window.close();
-					this.remove_descriptions_window = veWindow({
-						value: veWordProcessor(this.ui.remove_descriptions_value, {
-							onuserchange: (v) => this.ui.remove_descriptions_value = v,
+				replace_descriptions: veButton(() => { //[WIP] - Should be changed to replace_descriptions
+					if (this.replace_descriptions_window) this.replace_descriptions_window.close();
+					this.replace_descriptions_window = veWindow({
+						find_value: veWordProcessor(this.ui.replace_descriptions_find_value, {
+							onuserchange: (v) => this.ui.replace_descriptions_find_value = v,
+							width: 99,
+							x: 0, y: 0
+						}),
+						replace_value: veWordProcessor(this.ui.replace_descriptions_replace_value, {
+							onuserchange: (v) => this.ui.replace_descriptions_replace_value = v,
 							width: 99,
 							x: 0, y: 0
 						}),
 						match_filtering: veInterface({
-							case_sensitive: veToggle(this.ui.remove_descriptions_case_sensitive, {
+							case_sensitive: veToggle(this.ui.replace_descriptions_case_sensitive, {
 								name: "Case Sensitive",
-								onuserchange: (v) => this.ui.remove_descriptions_case_sensitive = v
+								onuserchange: (v) => this.ui.replace_descriptions_case_sensitive = v
 							}),
-							remove_all: veToggle(this.ui.remove_descriptions_remove_all, {
+							remove_all: veToggle(this.ui.replace_descriptions_remove_all, {
 								name: "Remove All",
-								onuserchange: (v) => this.ui.remove_descriptions_remove_all = v
+								onuserchange: (v) => this.ui.replace_descriptions_remove_all = v
 							}),
 							remove_order: veSelect({
 								first: { name: "First-to-last" },
 								last: { name: "Last-to-first" }
 							}, {
 								name: "Remove Order",
-								onuserchange: (v) => this.ui.remove_descriptions_remove_order = v,
-								selected: (this.ui.remove_descriptions_remove_order) ? 
-									this.ui.remove_descriptions_remove_order : "first"
+								onuserchange: (v) => this.ui.replace_descriptions_remove_order = v,
+								selected: (this.ui.replace_descriptions_remove_order) ? 
+									this.ui.replace_descriptions_remove_order : "first"
 							}),
 							search: veSelect({
 								substring: { name: "Substring" },
 								whole_line: { name: "Whole Line" }
 							}, {
 								name: "Search",
-								onuserchange: (v) => this.ui.remove_descriptions_search = v,
-								selected: (this.ui.remove_descriptions_search) ? 
-									this.ui.remove_descriptions_search : "substring"
+								onuserchange: (v) => this.ui.replace_descriptions_search = v,
+								selected: (this.ui.replace_descriptions_search) ? 
+									this.ui.replace_descriptions_search : "substring"
 							})
-						}, { name: "Match Filtering", x: 0, y: 1 }),
+						}, { name: "Match Filtering", x: 0, y: 2 }),
 						confirm: veButton(() => {
-							if (!(this.ui.remove_descriptions_value?.length > 0)) {
+							if (!(this.ui.replace_descriptions_value?.length > 0)) {
 								veToast(`<icon>warning</icon> You must provide a valid value to remove.`);
 								return;
 							}
@@ -395,26 +400,30 @@ naissance.Feature = class extends ve.Class {
 								
 								let local_description = all_geometries[i].metadata.description;
 								
-								all_geometries[i].metadata.description = String.editRemoveFromString(local_description, this.ui.remove_descriptions_value, {
-									case_sensitive: this.ui.remove_descriptions_case_sensitive,
-									remove_all: this.ui.remove_descriptions_remove_all,
-									remove_order: this.ui.remove_descriptions_remove_order,
-									search: this.ui.remove_descriptions_search
-								});
+								all_geometries[i].metadata.description = String.editReplaceInString(
+									local_description, 
+									this.ui.replace_descriptions_find_value, 
+									this.ui.replace_descriptions_replace_value, 
+									{
+										case_sensitive: this.ui.replace_descriptions_case_sensitive,
+										remove_all: this.ui.replace_descriptions_remove_all,
+										remove_order: this.ui.replace_descriptions_remove_order,
+										search: this.ui.replace_descriptions_search
+									});
 								if (all_geometries[i].metadata.description?.length === 0) 
 									delete all_geometries[i].metadata.description;
 								
 								if (all_geometries[i].variables_ui) all_geometries[i].variables_ui.remove(); //Free previous variables_ui
 								all_geometries[i].drawVariablesEditor();
 							}
-							veToast(`Removed descriptions for ${all_geometries.length} geometries in ${this.name}.`);
+							veToast(`Replaced descriptions for ${all_geometries.length} geometries in ${this.name}.`);
 						})
 					}, {
-						name: "Remove Descriptions",
+						name: "Replace Descriptions",
 						can_rename: false,
 						width: "30rem"
 					});
-				}, { name: "Remove Descriptions" }),
+				}, { name: "Replace Descriptions" }),
 			}, {
 				display: "inline",
 				placeholder: "Search for action ...",
