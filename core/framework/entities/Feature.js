@@ -347,16 +347,18 @@ naissance.Feature = class extends ve.Class {
 				replace_descriptions: veButton(() => { //[WIP] - Should be changed to replace_descriptions
 					if (this.replace_descriptions_window) this.replace_descriptions_window.close();
 					this.replace_descriptions_window = veWindow({
-						find_value: veWordProcessor(this.ui.replace_descriptions_find_value, {
-							onuserchange: (v) => this.ui.replace_descriptions_find_value = v,
-							width: 99,
-							x: 0, y: 0
-						}),
-						replace_value: veWordProcessor(this.ui.replace_descriptions_replace_value, {
-							onuserchange: (v) => this.ui.replace_descriptions_replace_value = v,
-							width: 99,
-							x: 0, y: 0
-						}),
+						find: veInterface({
+							find_value: veWordProcessor(this.ui.replace_descriptions_find_value, {
+								onuserchange: (v) => this.ui.replace_descriptions_find_value = v
+							}),
+						}, { name: "Find", open: true }),
+						replace: veInterface({
+							replace_value: veWordProcessor(this.ui.replace_descriptions_replace_value, {
+								onuserchange: (v) => this.ui.replace_descriptions_replace_value = v
+							}),
+						}, { name: "Replace", open: true }),
+						information: veHTML("If no replace value is provided, the found value(s) will automatically be removed."),
+						
 						match_filtering: veInterface({
 							case_sensitive: veToggle(this.ui.replace_descriptions_case_sensitive, {
 								name: "Case Sensitive",
@@ -386,8 +388,8 @@ naissance.Feature = class extends ve.Class {
 							})
 						}, { name: "Match Filtering", x: 0, y: 2 }),
 						confirm: veButton(() => {
-							if (!(this.ui.replace_descriptions_value?.length > 0)) {
-								veToast(`<icon>warning</icon> You must provide a valid value to remove.`);
+							if (!(this.ui.replace_descriptions_find_value?.length > 0)) {
+								veToast(`<icon>warning</icon> You must provide a valid value to find.`);
 								return;
 							}
 							

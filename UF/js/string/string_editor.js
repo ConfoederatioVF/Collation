@@ -89,7 +89,7 @@
 		//Convert from parameters
 		let string = (arg0_string) ? arg0_string : "";
 		let find_string = (arg1_find_string) ? arg1_find_string : "";
-		let replace_string = (arg2_replace_string !== undefined) ? arg2_replace_string : "";
+		let replace_string = (arg2_replace_string) ? arg2_replace_string : "";
 		let options = (arg3_options) ? arg3_options : {};
 		
 		//Initialise options
