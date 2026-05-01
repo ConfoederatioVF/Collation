@@ -3,6 +3,8 @@
 	if (!global.String) global.String = {};
 	
 	/**
+	 * Edits a string by adding text to it.
+	 * @alias String.editAddToString
 	 * 
 	 * @param {string} arg0_string - The original line to edit.
 	 * @param {string} arg1_string - The line to add to the original.
@@ -13,6 +15,8 @@
 	 *  @param {boolean} [arg2_options.insert_newline=true]
 	 *  @param {string} [arg2_options.newline_character="<br>"]
 	 *  @param {string} [arg2_options.search="substring"] - Either 'substring'/'whole_line'.
+	 *  
+	 * @returns {string}
 	 */
 	String.editAddToString = function (arg0_string, arg1_string, arg2_options) {
 		//Convert from parameters
@@ -59,6 +63,104 @@
 		if (!do_not_insert) {
 			if (options.insert_at === "append") string += `${newline}${ot_string}`;
 			if (options.insert_at === "prepend") string = `${ot_string}${newline}${string}`;
+		}
+		
+		//Return statement
+		return string;
+	};
+	
+	/**
+	 * Edits a string by removing text from it.
+	 * @alias String.editRemoveFromString
+	 *
+	 * @param {string} arg0_string
+	 * @param {string} arg1_string
+	 * @param {Object} [arg2_options]
+	 *  @param {boolean} [arg2_options.case_sensitive=false]
+	 *  @param {string} [arg2_options.newline_character="<br>"]
+	 *  @param {boolean} [arg2_options.remove_all=false]
+	 *  @param {string} [arg2_options.remove_order="first"] - Either 'first'/'last'-ordered.
+	 *  @param {string} [arg2_options.search="substring"] - Either 'substring'/'whole_line'.
+	 *
+	 * @returns {string}
+	 */
+	String.editRemoveFromString = function (arg0_string, arg1_string, arg2_options) { //[WIP] - Should be changed to String.editReplaceInString()
+		//Convert from parameters
+		let string = (arg0_string) ? arg0_string : "";
+		let ot_string = (arg1_string) ? arg1_string : "";
+		let options = (arg2_options) ? arg2_options : {};
+		
+		//Initialise options
+		if (options.case_sensitive === undefined) options.case_sensitive = false;
+		if (options.newline_character === undefined) options.newline_character = "<br>";
+		if (options.remove_all === undefined) options.remove_all = false;
+		if (options.remove_order === undefined) options.remove_order = "first";
+		if (options.search === undefined) options.search = "substring";
+		
+		//Declare local instance variables
+		let removed_count = 0;
+		
+		if (options.search === "substring") {
+			if (options.remove_all) {
+				let flags = (options.case_sensitive) ? "g" : "gi";
+				let regex = new RegExp(ot_string.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&"), flags);
+				
+				string = string.replace(regex, "");
+			} else {
+				let search_string = (options.case_sensitive) ? string :
+					string.toLowerCase();
+				let find_string = (options.case_sensitive) ? ot_string :
+					ot_string.toLowerCase();
+				
+				let index = (options.remove_order === "first") ? search_string.indexOf(find_string) :
+					search_string.lastIndexOf(find_string);
+				
+				if (index !== -1)
+					string = string.substring(0, index) + string.substring(index + ot_string.length);
+			}
+		} else if (options.search === "whole_line") {
+			let all_lines = string.split(options.newline_character);
+			let result_lines = [];
+			
+			if (options.remove_order === "last" && !options.remove_all) {
+				for (let i = all_lines.length - 1; i >= 0; i--) {
+					let is_match = false;
+					
+					if (options.case_sensitive) {
+						if (all_lines[i].trim() === ot_string.trim())
+							is_match = true;
+					} else {
+						if (String.equalsIgnoreCase(all_lines[i], ot_string, { trim: true }))
+							is_match = true;
+					}
+					
+					if (is_match && removed_count === 0) {
+						removed_count++;
+					} else {
+						result_lines.unshift(all_lines[i]);
+					}
+				}
+			} else {
+				for (let i = 0; i < all_lines.length; i++) {
+					let is_match = false;
+					
+					if (options.case_sensitive) {
+						if (all_lines[i].trim() === ot_string.trim())
+							is_match = true;
+					} else {
+						if (String.equalsIgnoreCase(all_lines[i], ot_string, { trim: true }))
+							is_match = true;
+					}
+					
+					if (is_match && (options.remove_all || removed_count === 0)) {
+						removed_count++;
+					} else {
+						result_lines.push(all_lines[i]);
+					}
+				}
+			}
+			
+			string = result_lines.join(options.newline_character);
 		}
 		
 		//Return statement
