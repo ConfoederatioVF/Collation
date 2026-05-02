@@ -61,7 +61,7 @@ naissance.GeometryPolygon = class extends naissance.Geometry {
 			edit_stroke: main.interfaces.edit_geometry_line.draw({ _id: () => this.id, name: "Stroke" })
 		}, { name: "Edit Symbol" });
 		this.keyframes_ui = veInterface({}, {
-			name: "Keyframes", open: true
+			name: `Keyframes`, open: true
 		});
 		super.drawVariablesEditor();
 		
