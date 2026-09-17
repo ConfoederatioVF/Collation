@@ -261,7 +261,8 @@ global.wealth_income = class {
 			let clamped_target_path = `${local_src_dir}clamped_${current_variable}_${interp_domain[1]}.png`;
 			let brushed_target_path = `${local_src_dir}clamped_${current_variable}_${interp_domain[1]}_brushed.png`;
 			
-			if (fs.existsSync(clamped_target_path) && !fs.existsSync(brushed_target_path)) {
+			// Removed !fs.existsSync check to force overwrites during final processing if required
+			if (fs.existsSync(clamped_target_path)) {
 				console.log(`Synthesizing Population-Masked Brush for WID Target (${interp_domain[1]}) for ${current_variable}...`);
 				try {
 					let wid_mask = GeoPNG.loadImage(admin_modern.input_iso2_geocodes_raster);
@@ -298,14 +299,16 @@ global.wealth_income = class {
 				let clamped_source = `${local_src_dir}clamped_${current_variable}_${year}.png`;
 				let output_path = `${dest_dir}${current_variable}_${year}.png`;
 				
-				if (fs.existsSync(output_path) && !options.overwrite) continue;
+				// Removed `existsSync` check entirely to allow strict overwriting during final processing
 				
 				try {
+					let generated = false;
 					if (year < interp_domain[0]) {
 						// Purely structural un-clamped predictions for deep antiquity
 						if (fs.existsSync(source_path)) {
 							console.log(`[Copying] Deep Antiquity OLS format for ${current_variable} (${year})`);
 							fs.copyFileSync(source_path, output_path);
+							generated = true;
 						}
 					} else if (year >= interp_domain[0] && year < interp_domain[1]) {
 						// Interpolate between normal OLS structure and gravity-blurred WID boundary target
@@ -319,14 +322,50 @@ global.wealth_income = class {
 								lower_value_threshold: 0,
 								threshold_fraction: 0
 							});
+							generated = true;
 						}
 					} else {
 						// Standard fully constrained WID domain
 						if (fs.existsSync(clamped_source)) {
 							console.log(`[Copying] Final processed clamped format for ${current_variable} (${year})`);
 							fs.copyFileSync(clamped_source, output_path);
+							generated = true;
 						}
 					}
+					
+					// Apply Missing Data Fallback: 
+					// If the final raster has 0 for a pixel, check clamped source then check OLS source for data
+					if (generated && fs.existsSync(output_path)) {
+						let out_raster = GeoPNG.loadNumberRasterImage(output_path, { format: "float32" });
+						let clamped_raster = fs.existsSync(clamped_source) ? GeoPNG.loadNumberRasterImage(clamped_source, { format: "float32" }) : null;
+						let ols_raster = fs.existsSync(source_path) ? GeoPNG.loadNumberRasterImage(source_path, { format: "float32" }) : null;
+						
+						let modified = false;
+						
+						for (let j = 0; j < out_raster.data.length; j++) {
+							if (out_raster.data[j] === 0) {
+								if (clamped_raster && clamped_raster.data[j] !== 0) {
+									out_raster.data[j] = clamped_raster.data[j];
+									modified = true;
+								} else if (ols_raster && ols_raster.data[j] !== 0) {
+									out_raster.data[j] = ols_raster.data[j];
+									modified = true;
+								}
+							}
+						}
+						
+						// Save back if the output grid was patched
+						if (modified) {
+							GeoPNG.saveNumberRasterImage({
+								file_path: output_path,
+								format: "float32",
+								width: out_raster.width,
+								height: out_raster.height,
+								function: (idx) => out_raster.data[idx]
+							});
+						}
+					}
+					
 				} catch (e) {
 					console.error(`Pass failed for ${current_variable} in year ${year}:`, e);
 				}

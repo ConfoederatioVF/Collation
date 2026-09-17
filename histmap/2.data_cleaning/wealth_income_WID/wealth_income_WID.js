@@ -14,7 +14,7 @@ global.wealth_income_WID = class {
 		file_suffix: ".csv",
 		variables: ["disposable_income", "net_income", "discretionary_income", "net_wealth"],
 		
-		// Priority suffixes: Equal-split adults (j996) is the gold standard, followed by individual adults (j992)
+		//Priority suffixes: Equal-split adults (j996) is the gold standard, followed by individual adults (j992)
 		priority_suffixes: ["j996", "i996", "j992", "i992", "j999", "i999"],
 		
 		//Income
