@@ -1,23 +1,44 @@
 //Import modules
-const { ipcRenderer } = require("electron");
+let { ipcRenderer } = require("electron");
 global.child_process = require("child_process");
-global.cubic_spline = require("cubic-spline");
 global.electron = require("electron");
 global.electron_remote = require("@electron/remote");
 global.exec = require("child_process").exec;
 global.fs = require("fs");
-global.geotiff = require("geotiff");
-global.JSDOM = require("jsdom").JSDOM;
 global.JSON5 = require("json5");
-global.mathjs = require("mathjs");
-global.ml_matrix = require("ml-matrix");
 global.net = require("net");
-global.netcdfjs = require("netcdfjs");
 global.path = require("path");
-global.pngjs = require("pngjs");
-global.polylabel = require("polylabel");
-global.puppeteer = require("puppeteer");
 global.util = require("util");
+
+//Helper for lazy loading heavy non-startup modules on demand
+function lazyGlobal (prop_name, require_path, sub_prop) {
+  let cached;
+  Object.defineProperty(global, prop_name, {
+    get: function () {
+      if (!cached) {
+        let mod = require(require_path);
+        cached = (sub_prop) ? mod[sub_prop] : mod;
+      }
+      return cached;
+    },
+    set: function (val) {
+      cached = val;
+    },
+    configurable: true,
+    enumerable: true
+  });
+}
+
+//Lazy load pipeline and heavy math/DOM dependencies on demand
+lazyGlobal("cubic_spline", "cubic-spline");
+lazyGlobal("geotiff", "geotiff");
+lazyGlobal("JSDOM", "jsdom", "JSDOM");
+lazyGlobal("mathjs", "mathjs");
+lazyGlobal("ml_matrix", "ml-matrix");
+lazyGlobal("netcdfjs", "netcdfjs");
+lazyGlobal("pngjs", "pngjs");
+lazyGlobal("polylabel", "polylabel");
+lazyGlobal("puppeteer", "puppeteer");
 
 global.h1 = "./histmap/1.data_raw/";
 global.h2 = "./histmap/2.data_cleaning/";

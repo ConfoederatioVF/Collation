@@ -92,6 +92,15 @@
    * 
    * @returns {Promise<string>} output file path
    */
+  /**
+   * Generates Stadestér Base raster for a single year in float32 format.
+   * @alias population_Stadester_rasters.generateStadesterBaseRaster
+   * 
+   * @param {number} arg0_year
+   * @param {Object} [arg1_options]
+   * 
+   * @returns {Promise<string>} output file path
+   */
   population_Stadester_rasters.generateStadesterBaseRaster = async function (arg0_year, arg1_options) {
     //Convert from parameters
     let year = parseInt(arg0_year);
@@ -100,9 +109,9 @@
     //Declare local instance variables
     let all_city_keys;
     let base_folder = options.intermediate_base_folder || `${h2}/population_Stadester/stadester_base_rasters/`;
+    let base_raster_data = new Float32Array(4320*2160);
     let output_file_path = path.join(base_folder, `stadester_base_${year}.png`);
     let pixel_dictionary = {};
-    let pixel_obj = {};
     let stadester_obj = options.stadester_obj;
     let substrata_file_path;
     let substrata_raster;
@@ -113,14 +122,14 @@
     } else {
       substrata_file_path = `${h2}/landuse_HYDE/rasters_scaled_to_global/popc_${year}.png`;
       if (!fs.existsSync(substrata_file_path)) {
-        let hyde_name = landuse_HYDE ? landuse_HYDE._getHYDEYearName(year) : `${Math.abs(year)}${year >= 0 ? "AD" : "BC"}`;
+        let hyde_name = (typeof landuse_HYDE !== "undefined" && landuse_HYDE._getHYDEYearName) ?
+          landuse_HYDE._getHYDEYearName(year) : `${Math.abs(year)}${year >= 0 ? "AD" : "BC"}`;
         substrata_file_path = `${h2}/landuse_HYDE/rasters/popc_${hyde_name}_number.png`;
       }
     }
     
-    if (fs.existsSync(substrata_file_path)) {
+    if (fs.existsSync(substrata_file_path))
       substrata_raster = GeoPNG.loadNumberRasterImage(substrata_file_path, { format: "float32" });
-    }
     
     if (!stadester_obj) {
       let dump_path = path.join(`${h1}/population_Stadester/uud/`, "stadester.json");
@@ -136,12 +145,12 @@
       let city = stadester_obj[all_city_keys[i]];
       if (!city || !city.coords || !city.population) continue;
       
-      let pop_keys = Object.keys(city.population).map(Number);
-      let min_yr = Math.min(...pop_keys);
-      let max_yr = Math.max(...pop_keys);
+      let pop_keys = city._pop_keys || (city._pop_keys = Object.keys(city.population).map(Number));
+      let min_yr = (city._min_yr !== undefined) ? city._min_yr : (city._min_yr = Math.min(...pop_keys));
+      let max_yr = (city._max_yr !== undefined) ? city._max_yr : (city._max_yr = Math.max(...pop_keys));
       
       if ((year >= min_yr && year <= max_yr) || (max_yr >= 1975 && year >= 1975)) {
-        let px = population_Stadester_rasters.getCoordsPixel(city.coords);
+        let px = city._px || (city._px = population_Stadester_rasters.getCoordsPixel(city.coords));
         let key = `${px[0]},${px[1]}`;
         if (!pixel_dictionary[key]) pixel_dictionary[key] = [];
         pixel_dictionary[key].push(city);
@@ -151,6 +160,7 @@
     let all_pixel_keys = Object.keys(pixel_dictionary);
     for (let i = 0; i < all_pixel_keys.length; i++) {
       let center_coords = all_pixel_keys[i].split(",").map(Number);
+      let center_idx = center_coords[1]*4320 + center_coords[0];
       let local_cities = pixel_dictionary[all_pixel_keys[i]];
       if (local_cities.length === 0) continue;
       
@@ -161,19 +171,19 @@
         let radial_buffers = [];
         
         if (city.population) {
-          let p_keys = Object.keys(city.population).map(Number).sort((a, b) => a - b);
+          let p_keys = city._pop_keys_sorted || (city._pop_keys_sorted = Object.keys(city.population).map(Number).sort((a, b) => a - b));
           for (let y = 0; y < p_keys.length; y++)
             if (p_keys[y] <= year) city_pop = parseFloat(city.population[p_keys[y]]) || 0;
         }
         
         if (city.radial_buffers) {
-          let b_keys = Object.keys(city.radial_buffers).map(Number).sort((a, b) => a - b);
+          let b_keys = city._buffer_keys_sorted || (city._buffer_keys_sorted = Object.keys(city.radial_buffers).map(Number).sort((a, b) => a - b));
           for (let y = 0; y < b_keys.length; y++)
             if (b_keys[y] <= year) radial_buffers = city.radial_buffers[b_keys[y]];
         }
         
         if (radial_buffers && radial_buffers.length > 1 && substrata_raster) {
-          local_pixels[all_pixel_keys[i]] = radial_buffers[0];
+          local_pixels[center_idx] = radial_buffers[0];
           
           for (let ring = 1; ring < radial_buffers.length; ring++) {
             let annular_pixels = population_Stadester_rasters.getPixelsInAnnulus(center_coords, ring);
@@ -192,22 +202,22 @@
               let py = annular_pixels[z][1];
               let idx = py*4320 + px;
               let scaled_val = (substrata_raster.data[idx] || 0)*annular_scalar;
-              let p_key = `${px},${py}`;
-              local_pixels[p_key] = (local_pixels[p_key] || 0) + scaled_val;
+              local_pixels[idx] = (local_pixels[idx] || 0) + scaled_val;
             }
           }
         } else {
-          local_pixels[all_pixel_keys[i]] = (local_pixels[all_pixel_keys[i]] || 0) + city_pop;
+          local_pixels[center_idx] = (local_pixels[center_idx] || 0) + city_pop;
         }
         
-        let local_p_keys = Object.keys(local_pixels);
+        let local_indices = Object.keys(local_pixels);
         let cur_sum = 0;
-        for (let y = 0; y < local_p_keys.length; y++) cur_sum += local_pixels[local_p_keys[y]];
+        for (let y = 0; y < local_indices.length; y++) cur_sum += local_pixels[local_indices[y]];
         let cur_scalar = (cur_sum > 0 && city_pop > 0) ? (city_pop/cur_sum) : 1;
         
-        for (let y = 0; y < local_p_keys.length; y++) {
-          let v = local_pixels[local_p_keys[y]]*cur_scalar;
-          pixel_obj[local_p_keys[y]] = (pixel_obj[local_p_keys[y]] || 0) + v;
+        for (let y = 0; y < local_indices.length; y++) {
+          let idx = parseInt(local_indices[y]);
+          let v = local_pixels[idx]*cur_scalar;
+          base_raster_data[idx] += v;
         }
       }
     }
@@ -219,10 +229,7 @@
       height: 2160,
       width: 4320,
       function: function (local_index) {
-        let px = local_index % 4320;
-        let py = Math.floor(local_index/4320);
-        let k = `${px},${py}`;
-        return pixel_obj[k] || 0;
+        return base_raster_data[local_index];
       }
     });
     
@@ -301,7 +308,8 @@
     let urban_raster = null;
     
     if (!fs.existsSync(substrata_file_path) && year < 1975) {
-      let hyde_name = landuse_HYDE ? landuse_HYDE._getHYDEYearName(year) : `${Math.abs(year)}${year >= 0 ? "AD" : "BC"}`;
+      let hyde_name = (typeof landuse_HYDE !== "undefined" && landuse_HYDE._getHYDEYearName) ?
+        landuse_HYDE._getHYDEYearName(year) : `${Math.abs(year)}${year >= 0 ? "AD" : "BC"}`;
       substrata_file_path = `${h2}/landuse_HYDE/rasters/popc_${hyde_name}_number.png`;
     }
     
@@ -475,7 +483,8 @@
     let options = (arg1_options) ? arg1_options : {};
     
     //Declare local instance variables
-    let landarea_file = metadata_HYDE ? metadata_HYDE.input_raster_land_area : `${h1}/metadata_HYDE/general_rasters/land_area.png`;
+    let landarea_file = (typeof metadata_HYDE !== "undefined" && metadata_HYDE.input_raster_land_area) ?
+      metadata_HYDE.input_raster_land_area : `${h1}/metadata_HYDE/general_rasters/land_area.png`;
     let landarea_raster = null;
     let output_file_path = path.join(options.intermediate_popd_folder || `${h2}/population_Stadester/stadester_density_rasters/`, `stadester_density_${year}.png`);
     let pop_file_path = path.join(options.input_popc_folder || `${h2}/population_Stadester/stadester_population_rasters/`, `stadester_population_${year}.png`);
@@ -512,8 +521,9 @@
   population_Stadester_rasters.generateBaseRastersParallel = async function (arg0_years, arg1_options) {
     let years = arg0_years;
     let options = (arg1_options) ? arg1_options : {};
+    let default_concurrency = (typeof require !== "undefined") ? Math.min(4, require("os").cpus().length || 4) : 4;
     return GeoPNG.processTimeseriesParallel({
-      concurrency: options.concurrency || 4,
+      concurrency: options.concurrency || default_concurrency,
       items: years,
       name: "Stadester Base Rasters",
       handler: async (year) => population_Stadester_rasters.generateStadesterBaseRaster(year, options)
@@ -523,8 +533,9 @@
   population_Stadester_rasters.generateUrbanRastersParallel = async function (arg0_years, arg1_options) {
     let years = arg0_years;
     let options = (arg1_options) ? arg1_options : {};
+    let default_concurrency = (typeof require !== "undefined") ? Math.min(4, require("os").cpus().length || 4) : 4;
     return GeoPNG.processTimeseriesParallel({
-      concurrency: options.concurrency || 4,
+      concurrency: options.concurrency || default_concurrency,
       items: years,
       name: "Stadester Urban Rasters",
       handler: async (year) => population_Stadester_rasters.generateStadesterUrbanRaster(year, options)
@@ -534,8 +545,9 @@
   population_Stadester_rasters.generateRuralRastersParallel = async function (arg0_years, arg1_options) {
     let years = arg0_years;
     let options = (arg1_options) ? arg1_options : {};
+    let default_concurrency = (typeof require !== "undefined") ? Math.min(4, require("os").cpus().length || 4) : 4;
     return GeoPNG.processTimeseriesParallel({
-      concurrency: options.concurrency || 4,
+      concurrency: options.concurrency || default_concurrency,
       items: years,
       name: "Stadester Rural Rasters",
       handler: async (year) => population_Stadester_rasters.generateStadesterRuralRaster(year, options)
@@ -545,8 +557,9 @@
   population_Stadester_rasters.generatePopulationRastersParallel = async function (arg0_years, arg1_options) {
     let years = arg0_years;
     let options = (arg1_options) ? arg1_options : {};
+    let default_concurrency = (typeof require !== "undefined") ? Math.min(4, require("os").cpus().length || 4) : 4;
     return GeoPNG.processTimeseriesParallel({
-      concurrency: options.concurrency || 4,
+      concurrency: options.concurrency || default_concurrency,
       items: years,
       name: "Stadester Population Rasters",
       handler: async (year) => population_Stadester_rasters.generateStadesterPopulationRaster(year, options)
@@ -556,8 +569,9 @@
   population_Stadester_rasters.prepareDensityRastersParallel = async function (arg0_years, arg1_options) {
     let years = arg0_years;
     let options = (arg1_options) ? arg1_options : {};
+    let default_concurrency = (typeof require !== "undefined") ? Math.min(4, require("os").cpus().length || 4) : 4;
     return GeoPNG.processTimeseriesParallel({
-      concurrency: options.concurrency || 4,
+      concurrency: options.concurrency || default_concurrency,
       items: years,
       name: "Stadester Density Rasters",
       handler: async (year) => population_Stadester_rasters.prepareDensityRaster(year, options)

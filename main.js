@@ -1,8 +1,3 @@
-//Enable V8 bytecode compilation cache for instant cold module loading
-try {
-  let { enableCompileCache } = require("node:module");
-  if (typeof enableCompileCache === "function") enableCompileCache();
-} catch (e) {}
 
 //Import libraries
 let { app, BrowserWindow, dialog, ipcMain, Menu, session, shell } = require("electron");
@@ -48,6 +43,16 @@ let win;
     //Load file; open Inspect Element
     win.webContents.openDevTools();
     win.setMenuBarVisibility(false);
+    
+    //Forward renderer console output to terminal stdout
+    win.webContents.on("console-message", (event, ...args) => {
+      let msg = (event && event.message !== undefined) ? event.message : args[1];
+      console.log(`[RENDERER] ${msg}`);
+    });
+    win.webContents.on("render-process-gone", (event, detailed) => {
+      console.error("[RENDER PROCESS GONE]", detailed);
+    });
+    
     win.loadFile("index.html");
     
     //Listen for FPS updates from the renderer process
@@ -144,10 +149,12 @@ let win;
   app.whenReady().then(() => {
     remote_main.initialize();
     
-    //Prune bloated disk cache if needed
-    try {
-      session.defaultSession.clearCache();
-    } catch (e) {}
+    //Prune disk cache if requested via command line flag
+    if (process.argv.includes("--clear-cache")) {
+      try {
+        session.defaultSession.clearCache();
+      } catch (e) {}
+    }
     
     //Create the window and instantiate it; initialise social media
     let win = createWindow();

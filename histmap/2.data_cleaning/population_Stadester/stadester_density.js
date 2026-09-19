@@ -422,7 +422,7 @@
     for (let i = 0; i < all_cities.length; i++) {
       let city = stadester_obj[all_cities[i]];
       if (city && city.density) {
-        let d_keys = Object.keys(city.density).map(Number).sort((a, b) => a - b);
+        let d_keys = city._density_keys || Object.keys(city.density).map(Number).sort((a, b) => a - b);
         let cur_density = null;
         for (let x = 0; x < d_keys.length; x++)
           if (d_keys[x] <= year) cur_density = city.density[d_keys[x]];
@@ -499,12 +499,54 @@
     //Declare local instance variables
     let all_cities = Object.keys(stadester_obj);
     let cfg = global.population_Stadester_config;
+    let city_timeline_list = [];
     let density_dict_by_year = {};
     let global_density = population_Stadester_density.getGlobalPopulationDensityObject();
+    let total_cities_by_year = {};
     
-    for (let yr = cfg.baseline_year; yr <= cfg.end_year; yr++)
-      density_dict_by_year[yr] = population_Stadester_density.calculateDensityOrdinalsForYear(yr, stadester_obj);
+    //Prepare sorted density keys and timelines for each city once
+    for (let i = 0; i < all_cities.length; i++) {
+      let city = stadester_obj[all_cities[i]];
+      if (city && city.density) {
+        let keys = Object.keys(city.density).map(Number).sort((a, b) => a - b);
+        let vals = [];
+        for (let x = 0; x < keys.length; x++) vals.push(city.density[keys[x]]);
+        city._density_keys = keys;
+        city_timeline_list.push({
+          city: city,
+          cur_idx: -1,
+          cur_val: null,
+          key: city.key,
+          keys: keys,
+          vals: vals
+        });
+      }
+    }
     
+    //Chronological sweep across years to compute ordinals and total active cities
+    for (let yr = cfg.baseline_year; yr <= cfg.end_year; yr++) {
+      let density_list = [];
+      let year_ordinals = {};
+      
+      for (let i = 0; i < city_timeline_list.length; i++) {
+        let entry = city_timeline_list[i];
+        while (entry.cur_idx + 1 < entry.keys.length && entry.keys[entry.cur_idx + 1] <= yr) {
+          entry.cur_idx++;
+          entry.cur_val = entry.vals[entry.cur_idx];
+        }
+        if (entry.cur_val !== null && entry.cur_val > 0)
+          density_list.push({ key: entry.key, density: entry.cur_val });
+      }
+      
+      density_list.sort((a, b) => b.density - a.density);
+      for (let i = 0; i < density_list.length; i++)
+        year_ordinals[density_list[i].key] = i + 1;
+      
+      density_dict_by_year[yr] = year_ordinals;
+      total_cities_by_year[yr] = density_list.length;
+    }
+    
+    //Assign centre densities
     for (let i = 0; i < all_cities.length; i++) {
       let city = stadester_obj[all_cities[i]];
       let centre_density_obj = {};
@@ -512,7 +554,7 @@
       for (let yr = cfg.baseline_year; yr <= cfg.end_year; yr++) {
         let rank = density_dict_by_year[yr][city.key];
         if (rank) {
-          let total_cities = Object.keys(density_dict_by_year[yr]).length;
+          let total_cities = total_cities_by_year[yr];
           let a_val = 130*Math.log(total_cities/120/rank) + 506 + (global_density[yr] || 180);
           centre_density_obj[yr] = Math.max(10, a_val);
         }
@@ -544,17 +586,30 @@
     
     //Declare local instance variables
     let cfg = global.population_Stadester_config;
+    let d_lat_km;
+    let d_lng_km;
+    let diag;
+    let dist;
     let half = cfg.pixel_deg/2;
     let inside = 0;
     let subsamples = 10;
     let total = subsamples*subsamples;
     
+    //Fast envelope bounding check
+    dist = population_Stadester_density.equirectangularDistance(city_coords, pixel_coords);
+    d_lat_km = cfg.pixel_deg*111.32;
+    d_lng_km = cfg.pixel_deg*111.32*Math.cos(pixel_coords[0]*Math.PI/180);
+    diag = 0.5*Math.sqrt(d_lat_km*d_lat_km + d_lng_km*d_lng_km)*1.05;
+    
+    if (dist + diag < outer_radius && dist - diag >= inner_radius) return 1.0;
+    if (dist - diag >= outer_radius || dist + diag < inner_radius) return 0.0;
+    
     for (let i = 0; i < subsamples; i++) {
       for (let x = 0; x < subsamples; x++) {
         let d_lat = (i + 0.5)/subsamples*cfg.pixel_deg - half;
         let d_lng = (x + 0.5)/subsamples*cfg.pixel_deg - half;
-        let dist = population_Stadester_density.equirectangularDistance(city_coords, [pixel_coords[0] + d_lat, pixel_coords[1] + d_lng]);
-        if (dist >= inner_radius && dist < outer_radius) inside++;
+        let d = population_Stadester_density.equirectangularDistance(city_coords, [pixel_coords[0] + d_lat, pixel_coords[1] + d_lng]);
+        if (d >= inner_radius && d < outer_radius) inside++;
       }
     }
     
@@ -692,9 +747,10 @@
       let area_years = Object.keys(city.area).map(Number).sort((a, b) => a - b);
       if (area_years.length === 0) continue;
       
+      let px_area = population_Stadester_density.getPixelAreaAtLatitude(city.coords[0]);
+      
       for (let yr = cfg.baseline_year; yr <= cfg.end_year; yr++) {
         if (city.population[yr]) {
-          let px_area = population_Stadester_density.getPixelAreaAtLatitude(city.coords[0]);
           let city_area = parseFloat(city.area[yr]) || 0;
           let pixel_size = Math.ceil(city_area/px_area);
           

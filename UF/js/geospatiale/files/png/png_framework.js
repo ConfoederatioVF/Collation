@@ -382,6 +382,10 @@
 				GeoPNG.saveNumberToPixel(png, local_index, options.function(local_index), options);
 			}
 		
+		//Ensure destination directory exists
+		let parent_dir = path.dirname(path.resolve(options.file_path));
+		if (!fs.existsSync(parent_dir)) fs.mkdirSync(parent_dir, { recursive: true });
+		
 		//Write PNG file
 		fs.writeFileSync(options.file_path, pngjs.PNG.sync.write(png));
 		

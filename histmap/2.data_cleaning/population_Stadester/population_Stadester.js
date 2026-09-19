@@ -158,6 +158,24 @@
     }
     
     /**
+     * Ensures all input, output, and intermediate directories exist.
+     * @alias population_Stadester.ensureDirectories
+     */
+    static ensureDirectories () {
+      let dirs = [
+        this.input_popc_folder,
+        this.input_rurc_folder,
+        this.input_urbc_folder,
+        this.intermediate_base_folder,
+        this.intermediate_ghsl_folder,
+        this.intermediate_popd_folder,
+        path.dirname(path.resolve(this.file_uud_cities))
+      ];
+      for (let i = 0; i < dirs.length; i++)
+        if (!fs.existsSync(dirs[i])) fs.mkdirSync(dirs[i], { recursive: true });
+    }
+    
+    /**
      * Generates Base rasters in float32 with 2px south bug fixed and annular sampling corrected.
      * @param {Object} [arg0_options]
      * 
@@ -168,8 +186,17 @@
       let options = (arg0_options) ? arg0_options : {};
       
       //Declare local instance variables
-      let hyde_years = landuse_HYDE ? landuse_HYDE.sorted_hyde_years : [1800];
+      let hyde_years = (typeof landuse_HYDE !== "undefined" && landuse_HYDE.sorted_hyde_years) ?
+        landuse_HYDE.sorted_hyde_years : [1800];
       let years = options.years || hyde_years.filter(y => y >= -3000 && y <= 2025);
+      
+      this.ensureDirectories();
+      
+      //Preload stadester_obj once if available to avoid multi-thread 300MB re-parsing
+      if (!options.stadester_obj && fs.existsSync(this.file_stadester_final)) {
+        console.log(`- Preloading Stadestér master dataset (${this.file_stadester_final})...`);
+        options.stadester_obj = JSON.parse(fs.readFileSync(this.file_stadester_final, "utf8"));
+      }
       
       //Return statement
       return population_Stadester_rasters.generateBaseRastersParallel(years, {
@@ -189,8 +216,11 @@
       let options = (arg0_options) ? arg0_options : {};
       
       //Declare local instance variables
-      let hyde_years = landuse_HYDE ? landuse_HYDE.sorted_hyde_years : [1800];
+      let hyde_years = (typeof landuse_HYDE !== "undefined" && landuse_HYDE.sorted_hyde_years) ?
+        landuse_HYDE.sorted_hyde_years : [1800];
       let years = options.years || hyde_years.filter(y => y >= -3000 && y <= 2025);
+      
+      this.ensureDirectories();
       
       //Return statement
       return population_Stadester_rasters.generateUrbanRastersParallel(years, {
@@ -211,8 +241,11 @@
       let options = (arg0_options) ? arg0_options : {};
       
       //Declare local instance variables
-      let hyde_years = landuse_HYDE ? landuse_HYDE.sorted_hyde_years : [1800];
+      let hyde_years = (typeof landuse_HYDE !== "undefined" && landuse_HYDE.sorted_hyde_years) ?
+        landuse_HYDE.sorted_hyde_years : [1800];
       let years = options.years || hyde_years.filter(y => y >= -3000 && y <= 2025);
+      
+      this.ensureDirectories();
       
       //Return statement
       return population_Stadester_rasters.generateRuralRastersParallel(years, {
@@ -233,8 +266,11 @@
       let options = (arg0_options) ? arg0_options : {};
       
       //Declare local instance variables
-      let hyde_years = landuse_HYDE ? landuse_HYDE.sorted_hyde_years : [1800];
+      let hyde_years = (typeof landuse_HYDE !== "undefined" && landuse_HYDE.sorted_hyde_years) ?
+        landuse_HYDE.sorted_hyde_years : [1800];
       let years = options.years || hyde_years.filter(y => y >= -3000 && y <= 2025);
+      
+      this.ensureDirectories();
       
       //Return statement
       return population_Stadester_rasters.generatePopulationRastersParallel(years, {
@@ -256,8 +292,11 @@
       let options = (arg0_options) ? arg0_options : {};
       
       //Declare local instance variables
-      let hyde_years = landuse_HYDE ? landuse_HYDE.sorted_hyde_years : [1800];
+      let hyde_years = (typeof landuse_HYDE !== "undefined" && landuse_HYDE.sorted_hyde_years) ?
+        landuse_HYDE.sorted_hyde_years : [1800];
       let years = options.years || hyde_years.filter(y => y >= -3000 && y <= 2025);
+      
+      this.ensureDirectories();
       
       //Return statement
       return population_Stadester_rasters.prepareDensityRastersParallel(years, {
@@ -342,8 +381,13 @@
       let options = (arg0_options) ? arg0_options : {};
       
       //Initialise options
-      if (!options.exclude) options.exclude = [];
+      if (!options.exclude) {
+        options.exclude = [];
+        if (fs.existsSync(this.file_processed_stadester) || fs.existsSync(this.file_stadester_areas))
+          options.exclude = ["A", "B", "C", "D", "E"];
+      }
       
+      this.ensureDirectories();
       console.log(`- Launching population_Stadester master pipeline...`);
       
       if (!options.exclude.includes("A")) this.A_initialiseUUD(options);
