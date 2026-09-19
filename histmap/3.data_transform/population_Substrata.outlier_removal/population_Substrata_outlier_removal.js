@@ -379,6 +379,8 @@ global.population_Substrata_outlier_removal = class {
 		let GHSL1_domain = this.options.interpolate_to_GHSL1_domain;
 		let GHSL2_domain = this.options.interpolate_to_GHSL2_domain;
 		let hyde_years = landuse_HYDE.sorted_hyde_years;
+		let land_area_path = (typeof metadata_HYDE !== "undefined" && metadata_HYDE.input_raster_land_area) ?
+			metadata_HYDE.input_raster_land_area : `${h1}/metadata_HYDE/general_rasters/land_area.png`;
 		let to_path = `${this.input_GHSL_rasters}GHS_POP_${GHSL_domain[1]}.png`;
 		let year_gap = GHSL_domain[1] - GHSL_domain[0];
 		let year_gap2 = GHSL2_domain[1] - GHSL2_domain[0];
@@ -395,19 +397,23 @@ global.population_Substrata_outlier_removal = class {
 				
 				if (current_year < GHSL1_domain[1]) {
 					GeoPNG.linearInterpolation(local_from_path, to_path, local_output_path, {
+						buffer_distance: 5,
 						format: "float32",
 						fraction,
-						upper_value_threshold: 1024, //RGBA limit
+						land_area_file: land_area_path,
+						upper_value_threshold: 256
 					});
 					console.log(`- (1st-pass) Finished interpolating ${local_from_path} to GHSL.`);
 				} else if (current_year >= GHSL2_domain[0] && current_year < GHSL2_domain[1]) {
 					let threshold_fraction = (current_year - GHSL2_domain[0])/year_gap2;
 					
 					GeoPNG.linearInterpolation(local_from_path, to_path, local_output_path, {
+						buffer_distance: 5,
 						format: "float32",
 						fraction,
-						upper_value_threshold: 4096, //RGBA limit
-						threshold_fraction
+						land_area_file: land_area_path,
+						threshold_fraction,
+						upper_value_threshold: 256
 					});
 					console.log(`- (2nd-pass) Finished interpolating ${local_from_path} to GHSL.`);
 				} else {

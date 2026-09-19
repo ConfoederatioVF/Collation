@@ -255,10 +255,28 @@
 		let max_workers = Math.returnSafeNumber(options.concurrency, default_concurrency);
 		
 		//Declare local instance variables
-		let NodeWorker = (typeof require !== "undefined") ? require("worker_threads").Worker : null;
-		let worker_file_path = (typeof path !== "undefined") ? path.join(__dirname, "png_worker.js") : null;
+		let child_process = (typeof require !== "undefined") ? require("child_process") : null;
+		let fs_module = (typeof require !== "undefined") ? require("fs") : ((typeof fs !== "undefined") ? fs : null);
+		let is_renderer = (typeof process !== "undefined" && process.type === "renderer");
+		let NodeWorker = (!is_renderer && typeof require !== "undefined") ? require("worker_threads").Worker : null;
+		let path_module = (typeof require !== "undefined") ? require("path") : ((typeof path !== "undefined") ? path : null);
+		let worker_candidates = (path_module) ? [
+			(typeof __dirname !== "undefined") ? path_module.join(__dirname, "png_worker.js") : null,
+			(typeof __dirname !== "undefined") ? path_module.join(__dirname, "UF/js/geospatiale/files/png/png_worker.js") : null,
+			(typeof process !== "undefined" && process.cwd) ? path_module.join(process.cwd(), "UF/js/geospatiale/files/png/png_worker.js") : null,
+			(typeof process !== "undefined" && process.cwd) ? path_module.join(process.cwd(), "png_worker.js") : null,
+			(typeof global !== "undefined" && global.main_dir) ? path_module.join(global.main_dir, "UF/js/geospatiale/files/png/png_worker.js") : null
+		] : [];
+		let worker_file_path = null;
 		
-		if (!NodeWorker || !worker_file_path) return [];
+		if (fs_module)
+			for (let i = 0; i < worker_candidates.length; i++)
+				if (worker_candidates[i] && fs_module.existsSync(worker_candidates[i])) {
+					worker_file_path = worker_candidates[i];
+					break;
+				}
+		
+		if ((!NodeWorker && !child_process) || !worker_file_path) return [];
 		
 		if (GeoPNG._active_workers === undefined) GeoPNG._active_workers = new Set();
 		if (GeoPNG._pending_tasks === undefined) GeoPNG._pending_tasks = new Map();
@@ -268,9 +286,36 @@
 		//Instantiate workers up to capacity
 		if (GeoPNG._worker_pool.length === 0)
 			for (let i = 0; i < max_workers; i++) {
-				let worker = new NodeWorker(worker_file_path, {
-					workerData: { worker_id: i }
-				});
+				let worker = null;
+				
+				//Attempt Node worker_threads first if not in an Electron renderer
+				if (NodeWorker) {
+					try {
+						worker = new NodeWorker(worker_file_path, {
+							workerData: { worker_id: i }
+						});
+					} catch (e) {
+						worker = null;
+					}
+				}
+				
+				//Fallback to child_process.fork (necessary for Electron renderer orchestrators where V8 platform does not support Node Workers)
+				if (!worker && child_process && child_process.fork) {
+					worker = child_process.fork(worker_file_path, [], {
+						env: {
+							...process.env,
+							ELECTRON_RUN_AS_NODE: "1",
+							WORKER_ID: String(i)
+						},
+						stdio: ["inherit", "inherit", "inherit", "ipc"]
+					});
+					
+					//Polyfill postMessage and terminate for child_process
+					worker.postMessage = (data) => worker.send(data);
+					worker.terminate = () => worker.kill();
+				}
+				
+				if (!worker) continue;
 				
 				worker.worker_id = i;
 				GeoPNG._active_workers.add(worker);

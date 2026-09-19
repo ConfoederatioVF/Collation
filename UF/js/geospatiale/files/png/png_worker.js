@@ -3,7 +3,24 @@
 
 let fs = require("fs");
 let path = require("path");
-let { parentPort, workerData } = require("worker_threads");
+
+let parentPort = null;
+let workerData = null;
+
+try {
+	let worker_threads = require("worker_threads");
+	parentPort = worker_threads.parentPort;
+	workerData = worker_threads.workerData;
+} catch (e) {}
+
+let is_child_process = (!parentPort && typeof process !== "undefined" && typeof process.send === "function");
+let message_port = (parentPort) ? parentPort : ((is_child_process) ? {
+	on: (event, callback) => process.on(event, callback),
+	postMessage: (data) => process.send(data)
+} : null);
+
+let worker_id = (workerData && workerData.worker_id !== undefined) ?
+	workerData.worker_id : (process.env.WORKER_ID ? parseInt(process.env.WORKER_ID) : 0);
 
 //Bootstrap worker global environment
 global.fs = fs;
@@ -45,13 +62,18 @@ global.h3 = path.join(root_dir, "histmap/3.data_transform/");
 global.h4 = path.join(root_dir, "histmap/4.data_exports/");
 global.h5 = path.join(root_dir, "histmap/5.data_visualisation/");
 
+//Load common histmap pipeline modules
+safeRequire("histmap/2.data_cleaning/population_Stadester/stadester_rasters.js");
+safeRequire("histmap/2.data_cleaning/population_Stadester/stadester_uud.js");
+safeRequire("histmap/2.data_cleaning/metadata_HYDE/metadata_HYDE.js");
+
 //Task execution handlers
 let handleTask = async function (task) {
 	let task_type = task.type;
 	
 	//1. Ping healthcheck
 	if (task_type === "ping") {
-		return { pong: true, worker_id: workerData?.worker_id };
+		return { pong: true, worker_id: worker_id };
 	}
 	
 	//2. Linear raster interpolation between two years
@@ -188,8 +210,8 @@ let handleTask = async function (task) {
 };
 
 //Message receiver
-if (parentPort) {
-	parentPort.on("message", async (task) => {
+if (message_port) {
+	message_port.on("message", async (task) => {
 		if (!task) return;
 		
 		//Abort request
@@ -200,13 +222,13 @@ if (parentPort) {
 		let task_id = task.task_id;
 		try {
 			let result = await handleTask(task);
-			parentPort.postMessage({
+			message_port.postMessage({
 				task_id: task_id,
 				success: true,
 				result: result
 			});
 		} catch (err) {
-			parentPort.postMessage({
+			message_port.postMessage({
 				task_id: task_id,
 				success: false,
 				error: err.message || String(err),
@@ -215,8 +237,14 @@ if (parentPort) {
 		}
 	});
 	
-	//Ensure safe exit if parent port closes
-	parentPort.on("close", () => {
-		process.exit(0);
-	});
+	//Ensure safe exit if parent port closes or process disconnects
+	if (parentPort) {
+		parentPort.on("close", () => {
+			process.exit(0);
+		});
+	} else if (typeof process !== "undefined" && process.on) {
+		process.on("disconnect", () => {
+			process.exit(0);
+		});
+	}
 }
