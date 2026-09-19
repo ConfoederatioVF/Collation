@@ -360,8 +360,14 @@
       let lng = city.coords[1];
       
       if (angel_png) {
-        let px = Math.min(angel_png.width - 1, Math.max(0, Math.round(((lng + 180)/360)*angel_png.width)));
-        let py = Math.min(angel_png.height - 1, Math.max(0, Math.round(((90 - lat)/180)*angel_png.height)));
+        let px_coords = (typeof population_Stadester_rasters !== "undefined") ?
+          population_Stadester_rasters.getCoordsPixel(city.coords, { height: angel_png.height, width: angel_png.width }) :
+          [
+            Math.min(angel_png.width - 1, Math.max(0, Math.floor(((lng + 180)/360)*angel_png.width))),
+            Math.min(angel_png.height - 1, Math.max(0, Math.floor(((90 - lat)/180)*angel_png.height) - 1))
+          ];
+        let px = px_coords[0];
+        let py = px_coords[1];
         let idx = (py*angel_png.width + px)*4;
         let r = angel_png.data[idx], g = angel_png.data[idx + 1], b = angel_png.data[idx + 2];
         
@@ -376,8 +382,14 @@
       }
       
       if (clark_png) {
-        let px = Math.min(clark_png.width - 1, Math.max(0, Math.round(((lng + 180)/360)*clark_png.width)));
-        let py = Math.min(clark_png.height - 1, Math.max(0, Math.round(((90 - lat)/180)*clark_png.height)));
+        let px_coords = (typeof population_Stadester_rasters !== "undefined") ?
+          population_Stadester_rasters.getCoordsPixel(city.coords, { height: clark_png.height, width: clark_png.width }) :
+          [
+            Math.min(clark_png.width - 1, Math.max(0, Math.floor(((lng + 180)/360)*clark_png.width))),
+            Math.min(clark_png.height - 1, Math.max(0, Math.floor(((90 - lat)/180)*clark_png.height) - 1))
+          ];
+        let px = px_coords[0];
+        let py = px_coords[1];
         let idx = (py*clark_png.width + px)*4;
         let r = clark_png.data[idx], g = clark_png.data[idx + 1], b = clark_png.data[idx + 2];
         

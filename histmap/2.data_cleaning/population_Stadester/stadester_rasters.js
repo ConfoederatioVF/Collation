@@ -32,8 +32,8 @@
     lat = Math.max(-90, Math.min(90, coords[0]));
     lng = ((coords[1] + 180) % 360 + 360) % 360 - 180;
     
-    x = Math.round(((lng + 180)/360)*width);
-    y = Math.round(((90 - lat)/180)*height) + y_offset;
+    x = Math.floor(((lng + 180)/360)*width);
+    y = Math.floor(((90 - lat)/180)*height) + y_offset;
     
     x = Math.min(width - 1, Math.max(0, x));
     y = Math.min(height - 1, Math.max(0, y));
