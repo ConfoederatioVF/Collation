@@ -69,7 +69,10 @@ global.LFPR_Olivetti = class {
 	 * Uses ILOStat data (normalized to 0-1) where available at the pixel level,
 	 * and falls back to strictly in-domain Olivetti historical data.
 	 */
-	static async B_generateOlivettiRasters () {
+	static async B_generateOlivettiRasters (arg0_options) {
+		let options = (arg0_options) ? arg0_options : {};
+		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+
 		if (!fs.existsSync(this.intermediate_rasters_folder)) fs.mkdirSync(this.intermediate_rasters_folder, { recursive: true });
 		
 		let parsed_olivetti = this.A_getOlivettiLocalObject();
@@ -129,7 +132,7 @@ global.LFPR_Olivetti = class {
 				let sex = sexes[s];
 				let output_path = `${this.intermediate_rasters_folder}lfpr_${sex}_${year}.png`;
 				
-				if (fs.existsSync(output_path)) continue;
+				if (!overwrite && fs.existsSync(output_path)) continue;
 				
 				// Preload all 14 working-age float32 demographic rasters into memory
 				let pop_rasters = {};
@@ -209,6 +212,6 @@ global.LFPR_Olivetti = class {
 		let options = (arg0_options) ? arg0_options : {};
 		if (!options.exclude) options.exclude = [];
 		
-		if (!options.exclude.includes("B")) await this.B_generateOlivettiRasters();
+		if (!options.exclude.includes("B")) await this.B_generateOlivettiRasters(options);
 	}
 };

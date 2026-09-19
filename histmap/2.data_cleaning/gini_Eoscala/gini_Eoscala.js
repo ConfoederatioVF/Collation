@@ -22,7 +22,10 @@ global.gini_Eoscala = class {
 		interpolate_to_subngini: [1950, 1990]
 	};
 	
-	static async A_generateOLSRasters () {
+	static async A_generateOLSRasters (arg0_options) {
+		let options = (arg0_options) ? arg0_options : {};
+		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+
 		let years = this.years();
 		let base_dir = this.intermediate_ols_rasters;
 		if (!fs.existsSync(base_dir)) fs.mkdirSync(base_dir, { recursive: true });
@@ -38,7 +41,7 @@ global.gini_Eoscala = class {
 			}
 			
 			let output_file_path = `${base_dir}gini_OLS_${year}.png`;
-			if (fs.existsSync(output_file_path)) continue;
+			if (!overwrite && fs.existsSync(output_file_path)) continue;
 			
 			// Load and parse the model to filter invalid coefficients
 			let model_obj = JSON.parse(fs.readFileSync(model_path, "utf8"));
@@ -386,8 +389,9 @@ global.gini_Eoscala = class {
 			handler: async (year) => {
 				let source_path = `${src_dir}gini_clamped_${year}.png`;
 				let output_path = `${dest_dir}gini_${year}.png`;
+				let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
 				
-				if (fs.existsSync(output_path) && !options.overwrite) return;
+				if (fs.existsSync(output_path) && !overwrite) return;
 				if (!fs.existsSync(source_path)) return;
 				
 				try {
@@ -428,10 +432,11 @@ global.gini_Eoscala = class {
 	static async processRasters (arg0_options) {
 		let options = (arg0_options) ? arg0_options : {};
 		if (!options.exclude) options.exclude = [];
+		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
 		
-		if (!options.exclude.includes("A")) await this.A_generateOLSRasters();
-		if (!options.exclude.includes("B")) await this.B_normaliseOLSRasters();
-		if (!options.exclude.includes("C")) await this.C_clampOLSRasters();
-		if (!options.exclude.includes("D")) await this.D_interpolateRasters({ overwrite: true });
+		if (!options.exclude.includes("A")) await this.A_generateOLSRasters(options);
+		if (!options.exclude.includes("B")) await this.B_normaliseOLSRasters(options);
+		if (!options.exclude.includes("C")) await this.C_clampOLSRasters(options);
+		if (!options.exclude.includes("D")) await this.D_interpolateRasters({ overwrite: overwrite, ...options });
 	}
 };

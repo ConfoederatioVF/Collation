@@ -86,8 +86,10 @@
       let options = (arg0_options) ? arg0_options : {};
       
       //Declare local instance variables
-      let hyde_options = { exclude: ["A"], ...(options.hyde || {}) };
-      let substrata_options = options.substrata || {};
+      let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+      
+      let hyde_options = { exclude: ["A"], overwrite: overwrite, ...(options.hyde || {}) };
+      let substrata_options = { overwrite: overwrite, ...(options.substrata || {}) };
       
       //Function body
       console.log(`[NWM] === Step A: Processing Substrata & HYDE Land Use ===`);
@@ -109,7 +111,8 @@
       let options = (arg0_options) ? arg0_options : {};
       
       //Declare local instance variables
-      let stadester_options = options.stadester || {};
+      let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+      let stadester_options = { overwrite: overwrite, ...(options.stadester || {}) };
       
       //Function body
       console.log(`[NWM] === Step B: Processing Stadestér Demographics & Rasters ===`);
@@ -134,13 +137,15 @@
       let options = (arg0_options) ? arg0_options : {};
       
       //Declare local instance variables
-      let gdp_nom_ols_options = options.gdp_nominal_ols || {};
-      let gdp_nom_options = options.gdp_nominal || {};
-      let gdp_nom_sedac_options = { exclude: ["A"], ...(options.gdp_nominal_sedac || {}) };
-      let gdp_ppp_ols_options = options.gdp_ppp_ols || {};
-      let gdp_ppp_options = options.gdp_ppp || {};
-      let gdp_ppp_sedac_options = { exclude: ["A"], ...(options.gdp_ppp_sedac || {}) };
+      let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
       let skip_training = (options.skip_training || options.use_existing_models || options.train === false);
+      
+      let gdp_nom_ols_options = { overwrite: overwrite, ...(options.gdp_nominal_ols || {}) };
+      let gdp_nom_options = { overwrite: overwrite, ...(options.gdp_nominal || {}) };
+      let gdp_nom_sedac_options = { exclude: ["A"], overwrite: overwrite, ...(options.gdp_nominal_sedac || {}) };
+      let gdp_ppp_ols_options = { overwrite: overwrite, ...(options.gdp_ppp_ols || {}) };
+      let gdp_ppp_options = { overwrite: overwrite, ...(options.gdp_ppp || {}) };
+      let gdp_ppp_sedac_options = { exclude: ["A"], overwrite: overwrite, ...(options.gdp_ppp_sedac || {}) };
       
       //Function body
       console.log(`[NWM] === Step C: Processing Eoscala GDP (PPP & Nominal) ===`);
@@ -177,9 +182,11 @@
       let options = (arg0_options) ? arg0_options : {};
       
       //Declare local instance variables
-      let gdp_pc_options = options.gdp_pc || {};
-      let gdp_ppp_pc_options = options.gdp_ppp_pc || {};
+      let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
       let skip_training = (options.skip_training || options.use_existing_models || options.train === false);
+      
+      let gdp_pc_options = { overwrite: overwrite, ...(options.gdp_pc || {}) };
+      let gdp_ppp_pc_options = { overwrite: overwrite, ...(options.gdp_ppp_pc || {}) };
       
       if (skip_training) {
         if (!gdp_pc_options.exclude) gdp_pc_options.exclude = [];
@@ -211,8 +218,10 @@
       let options = (arg0_options) ? arg0_options : {};
       
       //Declare local instance variables
-      let eoscala_transform_options = options.gdp_eoscala_transform || options.eoscala_transform || {};
-      let stadester_transform_options = options.population_stadester_transform || options.stadester_transform || {};
+      let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+      
+      let eoscala_transform_options = { overwrite: overwrite, ...(options.gdp_eoscala_transform || options.eoscala_transform || {}) };
+      let stadester_transform_options = { overwrite: overwrite, ...(options.population_stadester_transform || options.stadester_transform || {}) };
       
       //Function body
       console.log(`[NWM] === Step E: Processing Covariate Delta Transforms ===`);
@@ -237,9 +246,11 @@
       let options = (arg0_options) ? arg0_options : {};
       
       //Declare local instance variables
-      let gini_eoscala_options = options.gini_eoscala || {};
-      let gini_ols_options = options.gini_ols || {};
+      let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
       let skip_training = (options.skip_training || options.use_existing_models || options.train === false);
+      
+      let gini_eoscala_options = { overwrite: overwrite, ...(options.gini_eoscala || {}) };
+      let gini_ols_options = { overwrite: overwrite, ...(options.gini_ols || {}) };
       
       //Function body
       console.log(`[NWM] === Step F: Processing GINI Inequality ===`);
@@ -267,10 +278,12 @@
       let options = (arg0_options) ? arg0_options : {};
       
       //Declare local instance variables
+      let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
       let skip_training = (options.skip_training || options.use_existing_models || options.train === false);
-      let wealth_income_ols_options = options.wealth_income_ols || {};
-      let wealth_income_options = options.wealth_income || {};
-      let wealth_income_wid_options = options.wealth_income_wid || {};
+      
+      let wealth_income_ols_options = { overwrite: overwrite, ...(options.wealth_income_ols || {}) };
+      let wealth_income_options = { overwrite: overwrite, ...(options.wealth_income || {}) };
+      let wealth_income_wid_options = { overwrite: overwrite, ...(options.wealth_income_wid || {}) };
       
       //Function body
       console.log(`[NWM] === Step G: Processing Wealth & Income (WID) ===`);
@@ -300,11 +313,13 @@
       let options = (arg0_options) ? arg0_options : {};
       
       //Declare local instance variables
-      let age_sex_hmd_options = options.age_sex_hmd || {};
-      let age_sex_options = options.age_sex || {};
-      let age_sex_unwpp_options = options.age_sex_unwpp || {};
-      let age_sex_worldpop_options = options.age_sex_worldpop || {};
+      let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
       let skip_training = (options.skip_training || options.use_existing_models || options.train === false);
+      
+      let age_sex_hmd_options = { overwrite: overwrite, ...(options.age_sex_hmd || {}) };
+      let age_sex_options = { overwrite: overwrite, ...(options.age_sex || {}) };
+      let age_sex_unwpp_options = { overwrite: overwrite, ...(options.age_sex_unwpp || {}) };
+      let age_sex_worldpop_options = { overwrite: overwrite, ...(options.age_sex_worldpop || {}) };
       
       if (skip_training) {
         if (!age_sex_options.exclude) age_sex_options.exclude = [];
@@ -339,11 +354,13 @@
       let options = (arg0_options) ? arg0_options : {};
       
       //Declare local instance variables
-      let births_deaths_hmd_options = options.births_deaths_hmd || {};
-      let births_deaths_kummu_options = options.births_deaths_kummu || {};
-      let births_deaths_ols_options = options.births_deaths_ols || {};
-      let births_deaths_unwpp_options = options.births_deaths_unwpp || {};
+      let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
       let skip_training = (options.skip_training || options.use_existing_models || options.train === false);
+      
+      let births_deaths_hmd_options = { overwrite: overwrite, ...(options.births_deaths_hmd || {}) };
+      let births_deaths_kummu_options = { overwrite: overwrite, ...(options.births_deaths_kummu || {}) };
+      let births_deaths_ols_options = { overwrite: overwrite, ...(options.births_deaths_ols || {}) };
+      let births_deaths_unwpp_options = { overwrite: overwrite, ...(options.births_deaths_unwpp || {}) };
       
       //Function body
       console.log(`[NWM] === Step I: Processing Crude Births & Deaths ===`);
@@ -376,13 +393,15 @@
       let options = (arg0_options) ? arg0_options : {};
       
       //Declare local instance variables
-      let lfpr_ilo_options = options.lfpr_ilo || {};
-      let lfpr_olivetti_options = options.lfpr_olivetti || {};
-      let lfpr_ols_options = options.lfpr_ols || {};
-      let professions_ilo_options = options.professions_ilo || {};
-      let professions_olivetti_options = options.professions_olivetti || {};
-      let professions_options = options.professions || {};
+      let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
       let skip_training = (options.skip_training || options.use_existing_models || options.train === false);
+      
+      let lfpr_ilo_options = { overwrite: overwrite, ...(options.lfpr_ilo || {}) };
+      let lfpr_olivetti_options = { overwrite: overwrite, ...(options.lfpr_olivetti || {}) };
+      let lfpr_ols_options = { overwrite: overwrite, ...(options.lfpr_ols || {}) };
+      let professions_ilo_options = { overwrite: overwrite, ...(options.professions_ilo || {}) };
+      let professions_olivetti_options = { overwrite: overwrite, ...(options.professions_olivetti || {}) };
+      let professions_options = { overwrite: overwrite, ...(options.professions || {}) };
       
       if (skip_training) {
         if (!professions_options.exclude) professions_options.exclude = [];
@@ -424,6 +443,7 @@
       
       //Initialise options
       if (!options.exclude) options.exclude = [];
+      if (options.overwrite === undefined) options.overwrite = true;
       if (options.use_existing_models) options.skip_training = true;
       
       //Declare local instance variables

@@ -22,6 +22,7 @@ global.LFPR_OLS = class {
 	 */
 	static async A_trainOLSModels (arg0_options) {
 		let options = (arg0_options) ? arg0_options : {};
+		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
 		if (!options.lambda) options.lambda = 1;
 		
 		if (!fs.existsSync(this.intermediate_ols_models)) fs.mkdirSync(this.intermediate_ols_models, { recursive: true });
@@ -38,7 +39,7 @@ global.LFPR_OLS = class {
 				let model_path = `${this.intermediate_ols_models}OLS_lfpr_${sex}_${year}.json`;
 				
 				if (!fs.existsSync(target_path)) continue;
-				if (fs.existsSync(model_path)) continue;
+				if (!overwrite && fs.existsSync(model_path)) continue;
 				
 				let format_year = Math.min(year, 2023);
 				let loaded_obj = await Statistics.loadOLSCovariates(target_path, {
@@ -71,7 +72,10 @@ global.LFPR_OLS = class {
 		}
 	}
 	
-	static async B_generateOLSRasters () {
+	static async B_generateOLSRasters (arg0_options) {
+		let options = (arg0_options) ? arg0_options : {};
+		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+
 		if (!fs.existsSync(this.intermediate_ols_rasters)) fs.mkdirSync(this.intermediate_ols_rasters, { recursive: true });
 		
 		let years = landuse_HYDE.sorted_hyde_years;
@@ -87,7 +91,7 @@ global.LFPR_OLS = class {
 				let year = years[y];
 				let output_path = `${this.intermediate_ols_rasters}ols_lfpr_${sex}_${year}.png`;
 				
-				if (fs.existsSync(output_path)) continue;
+				if (!overwrite && fs.existsSync(output_path)) continue;
 				
 				let format_year = Math.min(year, 2023);
 				console.log(`Generating LFPR OLS raster for ${sex} year ${year}`);
@@ -111,7 +115,10 @@ global.LFPR_OLS = class {
 	 * (log-tail C1-continuous regularisation + min-max stretch over the
 	 * regularised range), which guarantees [0, 1] while preserving variance.
 	 */
-	static async C_normaliseOLSRasters () {
+	static async C_normaliseOLSRasters (arg0_options) {
+		let options = (arg0_options) ? arg0_options : {};
+		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+
 		if (!fs.existsSync(this.intermediate_normalised_rasters)) fs.mkdirSync(this.intermediate_normalised_rasters, { recursive: true });
 		
 		let years = landuse_HYDE.sorted_hyde_years;
@@ -129,7 +136,7 @@ global.LFPR_OLS = class {
 				let normalised_path = `${this.intermediate_normalised_rasters}normalised_lfpr_${sex}_${year}.png`;
 				
 				if (!fs.existsSync(popc_path) || !fs.existsSync(ols_path)) continue;
-				if (fs.existsSync(normalised_path)) continue;
+				if (!overwrite && fs.existsSync(normalised_path)) continue;
 				
 				let popc_raster = GeoPNG.loadNumberRasterImage(popc_path, { format: "float32" });
 				let ols_raster = GeoPNG.loadNumberRasterImage(ols_path, { format: "float32" });
@@ -215,7 +222,10 @@ global.LFPR_OLS = class {
 	/**
 	 * CLAMP & GRAVITY BLUR: Combine known data (targets) and dissolve arbitrary colonial borders pre-1850.
 	 */
-	static async D_applyGravityAndClamp () {
+	static async D_applyGravityAndClamp (arg0_options) {
+		let options = (arg0_options) ? arg0_options : {};
+		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+
 		if (!fs.existsSync(this.output_lfpr_rates)) fs.mkdirSync(this.output_lfpr_rates, { recursive: true });
 		
 		let years = landuse_HYDE.sorted_hyde_years;
@@ -232,7 +242,7 @@ global.LFPR_OLS = class {
 				let output_path = `${this.output_lfpr_rates}lfpr_${sex}_${year}.png`;
 				
 				if (!fs.existsSync(normalised_path)) continue;
-				if (fs.existsSync(output_path)) continue;
+				if (!overwrite && fs.existsSync(output_path)) continue;
 				
 				let normalised_raster = GeoPNG.loadNumberRasterImage(normalised_path, { format: "float32" });
 				let target_raster = fs.existsSync(target_path) ? GeoPNG.loadNumberRasterImage(target_path, { format: "float32" }) : null;
@@ -283,7 +293,10 @@ global.LFPR_OLS = class {
 	/**
 	 * DERIVE: Synthesise the Absolute Active Labourforce using LFPR rates * Local Demographics
 	 */
-	static async E_deriveActiveLabourforce () {
+	static async E_deriveActiveLabourforce (arg0_options) {
+		let options = (arg0_options) ? arg0_options : {};
+		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+
 		if (!fs.existsSync(this.output_active_labourforce)) fs.mkdirSync(this.output_active_labourforce, { recursive: true });
 		
 		let years = landuse_HYDE.sorted_hyde_years;
@@ -330,7 +343,7 @@ global.LFPR_OLS = class {
 				
 				active_counts[sex] = { array: count_array, width: lfpr_raster.width, height: lfpr_raster.height };
 				
-				if (!fs.existsSync(output_count_path)) {
+				if (overwrite || !fs.existsSync(output_count_path)) {
 					GeoPNG.saveNumberRasterImage({
 						file_path: output_count_path,
 						format: "float32",
@@ -346,7 +359,7 @@ global.LFPR_OLS = class {
 			
 			// Compute total aggregate labourforce (Female + Male)
 			let total_path = `${this.output_active_labourforce}labourforce_t_${year}.png`;
-			if (!fs.existsSync(total_path) && active_counts.f && active_counts.m) {
+			if ((overwrite || !fs.existsSync(total_path)) && active_counts.f && active_counts.m) {
 				GeoPNG.saveNumberRasterImage({
 					file_path: total_path,
 					format: "float32",
@@ -370,9 +383,9 @@ global.LFPR_OLS = class {
 		}
 		
 		if (!options.exclude.includes("A")) await this.A_trainOLSModels(options);
-		if (!options.exclude.includes("B")) await this.B_generateOLSRasters();
-		if (!options.exclude.includes("C")) await this.C_normaliseOLSRasters();
-		if (!options.exclude.includes("D")) await this.D_applyGravityAndClamp();
-		if (!options.exclude.includes("E")) await this.E_deriveActiveLabourforce();
+		if (!options.exclude.includes("B")) await this.B_generateOLSRasters(options);
+		if (!options.exclude.includes("C")) await this.C_normaliseOLSRasters(options);
+		if (!options.exclude.includes("D")) await this.D_applyGravityAndClamp(options);
+		if (!options.exclude.includes("E")) await this.E_deriveActiveLabourforce(options);
 	}
 };

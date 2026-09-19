@@ -130,7 +130,10 @@ global.professions_ILO = class {
 		};
 	}
 	
-	static async B_generateProfessionsRasters () {
+	static async B_generateProfessionsRasters (arg0_options) {
+		let options = (arg0_options) ? arg0_options : {};
+		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+
 		if (!fs.existsSync(this.intermediate_rasters_folder)) fs.mkdirSync(this.intermediate_rasters_folder, { recursive: true });
 		
 		let parsed_ilo = this.A_getILOLocalObject();
@@ -192,7 +195,7 @@ global.professions_ILO = class {
 				for (let p = 0; p < profs_list.length; p++) {
 					let prof = profs_list[p];
 					let output_path = `${this.intermediate_rasters_folder}prof_${prof}_${sex}_${year}.png`;
-					if (fs.existsSync(output_path)) continue;
+					if (!overwrite && fs.existsSync(output_path)) continue;
 					
 					let has_data = false;
 					for (let c in interpolated_data) {
@@ -270,7 +273,10 @@ global.professions_ILO = class {
 	 * Takes the intermediate specific professions and bins them into structural categories dynamically,
 	 * using the mappings and double-counting protection logic defined in professions_map.
 	 */
-	static async C_binProfessionsRasters () {
+	static async C_binProfessionsRasters (arg0_options) {
+		let options = (arg0_options) ? arg0_options : {};
+		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+
 		if (!fs.existsSync(this.output_rasters)) fs.mkdirSync(this.output_rasters, { recursive: true });
 		
 		let parsed_ilo = this.A_getILOLocalObject();
@@ -290,7 +296,7 @@ global.professions_ILO = class {
 					let mapping = this.professions_map[bin];
 					let output_path = `${this.output_rasters}${bin}_${sex}_${year}.png`;
 					
-					if (fs.existsSync(output_path)) continue;
+					if (!overwrite && fs.existsSync(output_path)) continue;
 					
 					let loaded_rasters = {};
 					let all_keys = [...mapping.aggregates, ...mapping.subsets];
@@ -354,7 +360,7 @@ global.professions_ILO = class {
 		let options = (arg0_options) ? arg0_options : {};
 		if (!options.exclude) options.exclude = [];
 		
-		if (!options.exclude.includes("B")) await this.B_generateProfessionsRasters();
-		if (!options.exclude.includes("C")) await this.C_binProfessionsRasters();
+		if (!options.exclude.includes("B")) await this.B_generateProfessionsRasters(options);
+		if (!options.exclude.includes("C")) await this.C_binProfessionsRasters(options);
 	}
 };

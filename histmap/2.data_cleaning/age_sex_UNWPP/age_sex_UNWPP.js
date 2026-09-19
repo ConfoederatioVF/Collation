@@ -75,7 +75,11 @@ global.age_sex_UNWPP = class {
 		return unwpp_data;
 	}
 	
-	static async A_generateUNWPPRasters () {
+	static async A_generateUNWPPRasters (arg0_options) {
+		//Convert from parameters
+		let options = (arg0_options) ? arg0_options : {};
+		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+
 		//Declare local instance variables
 		let unwpp_data = this.unwpp_data || await this.A_getUNWPPGroups();
 		let all_worldpop_files = await File.getAllFiles(`${h1}/age_sex_WorldPop/rasters/`);
@@ -136,7 +140,7 @@ global.age_sex_UNWPP = class {
 				let local_year = unwpp_years[y];
 				let local_output_file = `${this.intermediate_worldpop_backcalculated}global_${local_cohort_key}_${local_year}.png`;
 				
-				if (fs.existsSync(local_output_file)) continue;
+				if (!overwrite && fs.existsSync(local_output_file)) continue;
 				
 				//Determine specific scaling ratio mapping
 				let local_scalars = {};
@@ -253,7 +257,7 @@ global.age_sex_UNWPP = class {
 		if (!options.exclude) options.exclude = [];
 		
 		//Process to Stadestér
-		if (!options.exclude.includes("A")) await this.A_generateUNWPPRasters();
-		if (!options.exclude.includes("B")) await this.B_clampToStadester();
+		if (!options.exclude.includes("A")) await this.A_generateUNWPPRasters(options);
+		if (!options.exclude.includes("B")) await this.B_clampToStadester(options);
 	}
 };

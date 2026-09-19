@@ -76,7 +76,10 @@ global.professions_Olivetti = class {
 	 * Generates final standardised bin rasters. Uses ILO data as the master precedence.
 	 * Calculates 'Services' seamlessly as the residual (1 - Ag - Mfg - ILO_Informal).
 	 */
-	static async B_generateOlivettiRasters () {
+	static async B_generateOlivettiRasters (arg0_options) {
+		let options = (arg0_options) ? arg0_options : {};
+		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+
 		if (!fs.existsSync(this.output_rasters)) fs.mkdirSync(this.output_rasters, { recursive: true });
 		
 		let parsed_olivetti = this.A_getOlivettiLocalObject();
@@ -137,7 +140,7 @@ global.professions_Olivetti = class {
 				for (let b = 0; b < bins.length; b++) {
 					if (!fs.existsSync(`${this.output_rasters}${bins[b]}_${sex}_${year}.png`)) { all_m_f_exist = false; break; }
 				}
-				if (all_m_f_exist) continue;
+				if (!overwrite && all_m_f_exist) continue;
 				
 				// Load local LFPR (Needed to convert Olivetti % Workforce into % Demographics)
 				let lfpr_path = `${this.lfpr_rasters_folder}lfpr_${sex}_${year}.png`;
@@ -154,7 +157,7 @@ global.professions_Olivetti = class {
 				for (let b = 0; b < bins.length; b++) {
 					let bin = bins[b];
 					let output_path = `${this.output_rasters}${bin}_${sex}_${year}.png`;
-					if (fs.existsSync(output_path)) continue;
+					if (!overwrite && fs.existsSync(output_path)) continue;
 					
 					GeoPNG.saveNumberRasterImage({
 						file_path: output_path,
@@ -235,7 +238,7 @@ global.professions_Olivetti = class {
 			for (let b = 0; b < bins.length; b++) {
 				let bin = bins[b];
 				let output_path_t = `${this.output_rasters}${bin}_t_${year}.png`;
-				if (fs.existsSync(output_path_t)) continue;
+				if (!overwrite && fs.existsSync(output_path_t)) continue;
 				
 				let raster_m_path = `${this.output_rasters}${bin}_m_${year}.png`;
 				let raster_f_path = `${this.output_rasters}${bin}_f_${year}.png`;
@@ -289,6 +292,6 @@ global.professions_Olivetti = class {
 		let options = (arg0_options) ? arg0_options : {};
 		if (!options.exclude) options.exclude = [];
 		
-		if (!options.exclude.includes("B")) await this.B_generateOlivettiRasters();
+		if (!options.exclude.includes("B")) await this.B_generateOlivettiRasters(options);
 	}
 };

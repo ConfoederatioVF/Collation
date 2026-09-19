@@ -174,7 +174,11 @@ global.births_deaths_HMD = class {
 	 *
 	 * @returns {Promise<void>}
 	 */
-	static async B_generateHMDRasters () {
+	static async B_generateHMDRasters (arg0_options) {
+		//Convert from parameters
+		let options = (arg0_options) ? arg0_options : {};
+		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+
 		//Declare local instance variables
 		let hmd_series = this._getInterpolatedSeries();
 		let geocode_obj = admin_modern.getHMDColourcodesObject();
@@ -250,7 +254,7 @@ global.births_deaths_HMD = class {
 				
 				let output_path = `${intermediate_folder}${file_prefix}_${year}.png`;
 				
-				if (fs.existsSync(output_path)) continue;
+				if (!overwrite && fs.existsSync(output_path)) continue;
 				
 				let scalars = {};
 				let has_data = false;
@@ -334,7 +338,11 @@ global.births_deaths_HMD = class {
 	 *
 	 * @returns {Promise<void>}
 	 */
-	static async C_clampToStadester () {
+	static async C_clampToStadester (arg0_options) {
+		//Convert from parameters
+		let options = (arg0_options) ? arg0_options : {};
+		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+
 		//Declare local instance variables
 		let hmd_series = this._getInterpolatedSeries();
 		let geocode_obj = admin_modern.getHMDColourcodesObject();
@@ -420,7 +428,7 @@ global.births_deaths_HMD = class {
 				let clamped_output_path = `${output_folder}${file_prefix}_${year}.png`;
 				
 				if (!fs.existsSync(backcalc_path)) continue;
-				if (fs.existsSync(clamped_output_path)) continue;
+				if (!overwrite && fs.existsSync(clamped_output_path)) continue;
 				
 				let backcalc_raster = GeoPNG.loadNumberRasterImage(backcalc_path, {
 					format: "float32"
@@ -542,7 +550,7 @@ global.births_deaths_HMD = class {
 		
 		//Execute steps sequentially unless skipped
 		if (!options.exclude.includes("A")) await this.A_getHMDGroups();
-		if (!options.exclude.includes("B")) await this.B_generateHMDRasters();
-		if (!options.exclude.includes("C")) await this.C_clampToStadester();
+		if (!options.exclude.includes("B")) await this.B_generateHMDRasters(options);
+		if (!options.exclude.includes("C")) await this.C_clampToStadester(options);
 	}
 };

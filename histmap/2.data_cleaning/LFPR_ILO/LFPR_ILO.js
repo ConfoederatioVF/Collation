@@ -66,7 +66,10 @@ global.LFPR_ILO = class {
 	/**
 	 * Generates a per-pixel weighted aggregated LFPR raster for Males and Females respectively.
 	 */
-	static async B_generateLFPRRasters () {
+	static async B_generateLFPRRasters (arg0_options) {
+		let options = (arg0_options) ? arg0_options : {};
+		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+
 		if (!fs.existsSync(this.output_masks_folder)) fs.mkdirSync(this.output_masks_folder, { recursive: true });
 		
 		// 1. Fetch CSV context and clamp timeline
@@ -118,7 +121,7 @@ global.LFPR_ILO = class {
 				let sex = sexes[s];
 				let output_path = `${this.output_masks_folder}lfpr_${sex}_${year}.png`;
 				
-				if (fs.existsSync(output_path)) continue;
+				if (!overwrite && fs.existsSync(output_path)) continue;
 				
 				// Preload all 14 working-age float32 demographic rasters into memory
 				let pop_rasters = {};
@@ -215,6 +218,6 @@ global.LFPR_ILO = class {
 		let options = (arg0_options) ? arg0_options : {};
 		if (!options.exclude) options.exclude = [];
 		
-		if (!options.exclude.includes("B")) await this.B_generateLFPRRasters();
+		if (!options.exclude.includes("B")) await this.B_generateLFPRRasters(options);
 	}
 };

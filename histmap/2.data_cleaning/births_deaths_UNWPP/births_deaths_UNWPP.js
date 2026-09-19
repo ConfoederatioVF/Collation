@@ -163,7 +163,11 @@ global.births_deaths_UNWPP = class {
 	 * held constant and backprojected, with aggregates scaled by national population
 	 * change between the base and target years.
 	 */
-	static async B_backcalculateFromKummu () {
+	static async B_backcalculateFromKummu (arg0_options) {
+		//Convert from parameters
+		let options = (arg0_options) ? arg0_options : {};
+		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+
 		//Declare local instance variables
 		let groups = (this.births_data && this.deaths_data) ? { births: this.births_data, deaths: this.deaths_data } : await this.A_getUNWPPGroups();
 		let births_data = groups.births;
@@ -193,7 +197,7 @@ global.births_deaths_UNWPP = class {
 			let female_deaths_output_path = `${this.intermediate_backcalculated_female_deaths_folder}female_deaths_${local_year}.png`;
 			let male_deaths_output_path = `${this.intermediate_backcalculated_male_deaths_folder}male_deaths_${local_year}.png`;
 			
-			if (fs.existsSync(births_output_path) && fs.existsSync(female_deaths_output_path) && fs.existsSync(male_deaths_output_path)) continue;
+			if (!overwrite && fs.existsSync(births_output_path) && fs.existsSync(female_deaths_output_path) && fs.existsSync(male_deaths_output_path)) continue;
 			
 			//Resolve the Kummu base year: the year itself if in range, else nearest boundary
 			let base_year = Math.min(Math.max(local_year, kummu_min_year), kummu_max_year);
@@ -344,7 +348,11 @@ global.births_deaths_UNWPP = class {
 	 * totals for a variable, no re-anchoring occurs and the rate-preserving
 	 * backcalculation from step B passes through natively.
 	 */
-	static async C_clampToStadester () {
+	static async C_clampToStadester (arg0_options) {
+		//Convert from parameters
+		let options = (arg0_options) ? arg0_options : {};
+		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+
 		//Declare local instance variables
 		let groups = (this.births_data && this.deaths_data) ? { births: this.births_data, deaths: this.deaths_data } : await this.A_getUNWPPGroups();
 		let births_data = groups.births;
@@ -389,7 +397,7 @@ global.births_deaths_UNWPP = class {
 				let clamped_output_path = `${output_folder}${file_prefix}_${local_year}.png`;
 				
 				if (!fs.existsSync(backcalc_path)) continue;
-				if (fs.existsSync(clamped_output_path)) continue;
+				if (!overwrite && fs.existsSync(clamped_output_path)) continue;
 				
 				let backcalc_raster = GeoPNG.loadNumberRasterImage(backcalc_path, {
 					format: "float32"
@@ -501,7 +509,7 @@ global.births_deaths_UNWPP = class {
 		
 		//Execute steps sequentially unless skipped
 		if (!options.exclude.includes("A")) await this.A_getUNWPPGroups();
-		if (!options.exclude.includes("B")) await this.B_backcalculateFromKummu();
-		if (!options.exclude.includes("C")) await this.C_clampToStadester();
+		if (!options.exclude.includes("B")) await this.B_backcalculateFromKummu(options);
+		if (!options.exclude.includes("C")) await this.C_clampToStadester(options);
 	}
 };

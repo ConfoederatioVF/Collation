@@ -74,7 +74,10 @@ global.age_sex = class {
 	/**
 	 * Standardises HMD, UNWPP, and WorldPop datasets into a unified target pool (1750-2025).
 	 */
-	static async A_standardiseTargets () {
+	static async A_standardiseTargets (arg0_options) {
+		let options = (arg0_options) ? arg0_options : {};
+		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+
 		if (!fs.existsSync(this.standardised_targets_folder)) fs.mkdirSync(this.standardised_targets_folder, { recursive: true });
 		
 		let cohorts = this.getCohorts();
@@ -92,7 +95,7 @@ global.age_sex = class {
 				let cohort = cohorts[c];
 				let out_path = `${this.standardised_targets_folder}global_${cohort}_${year}.png`;
 				
-				if (fs.existsSync(out_path)) continue;
+				if (!overwrite && fs.existsSync(out_path)) continue;
 				
 				let src_path = null;
 				if (year < 1950) {
@@ -123,6 +126,8 @@ global.age_sex = class {
 	 */
 	static async B_trainMultinomialLogitModels (arg0_options) {
 		let options = (arg0_options) ? arg0_options : {};
+		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+
 		if (!fs.existsSync(this.intermediate_logit_folder)) fs.mkdirSync(this.intermediate_logit_folder, { recursive: true });
 		
 		let cohorts = this.getCohorts();
@@ -132,7 +137,7 @@ global.age_sex = class {
 			let year = train_years[y];
 			let model_path = `${this.intermediate_logit_folder}multinomial_model_${year}.json`;
 			
-			if (fs.existsSync(model_path)) continue;
+			if (!overwrite && fs.existsSync(model_path)) continue;
 			console.log(`Extracting 100% valid spatial dataset for Multinomial Logit year ${year}...`);
 			
 			let format_year = year > 2023 ? 2023 : year;
@@ -235,9 +240,12 @@ global.age_sex = class {
 	 * Merges all trained yearly multinomial logit models into a single 'Unified' model
 	 * via arithmetic mean to remove era-specific and spatial biases (e.g. 1750 Sweden).
 	 */
-	static async C_mergeMultinomialLogitModels () {
+	static async C_mergeMultinomialLogitModels (arg0_options) {
+		let options = (arg0_options) ? arg0_options : {};
+		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+
 		let unified_path = `${this.intermediate_logit_folder}multinomial_model_unified.json`;
-		if (fs.existsSync(unified_path)) {
+		if (!overwrite && fs.existsSync(unified_path)) {
 			console.log(`Unified Multinomial Logit model already exists. Skipping merge.`);
 			return;
 		}
@@ -303,7 +311,10 @@ global.age_sex = class {
 	 */
 	
 	//[QUARANTINE] - This is so slow, it should be multithreaded
-	static async D_generateMultinomialLogitRasters () {
+	static async D_generateMultinomialLogitRasters (arg0_options) {
+		let options = (arg0_options) ? arg0_options : {};
+		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+
 		if (!fs.existsSync(this.intermediate_logit_rasters)) fs.mkdirSync(this.intermediate_logit_rasters, { recursive: true });
 		
 		let years = landuse_HYDE.sorted_hyde_years;
@@ -314,7 +325,7 @@ global.age_sex = class {
 			let out_base = `${this.intermediate_logit_rasters}logit_${year}.png`;
 			let check_path = out_base.replace(".png", `_class_${check_cohort}.png`);
 			
-			if (fs.existsSync(check_path)) continue;
+			if (!overwrite && fs.existsSync(check_path)) continue;
 			
 			// If year is out-of-bounds (e.g., 10000 BC), strictly use the global average transition model
 			let model_path = `${this.intermediate_logit_folder}multinomial_model_${year}.json`;
@@ -354,7 +365,10 @@ global.age_sex = class {
 	 * Clamps the logit probability fields into exact local population aggregates anchoring perfectly to Stadestér.
 	 * Probabilities are normalised per-pixel across all cohorts so that cohort sums exactly equal the Stadestér total.
 	 */
-	static async E_clampToStadester () {
+	static async E_clampToStadester (arg0_options) {
+		let options = (arg0_options) ? arg0_options : {};
+		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+
 		if (!fs.existsSync(this.intermediate_clamped_rasters)) fs.mkdirSync(this.intermediate_clamped_rasters, { recursive: true });
 		
 		let years = landuse_HYDE.sorted_hyde_years;
@@ -402,7 +416,7 @@ global.age_sex = class {
 				let c = cohorts[i];
 				let out_path = `${this.intermediate_clamped_rasters}global_${c}_${year}.png`;
 				
-				if (fs.existsSync(out_path)) continue;
+				if (!overwrite && fs.existsSync(out_path)) continue;
 				
 				let prob_raster = prob_rasters[c];
 				
@@ -438,7 +452,10 @@ global.age_sex = class {
 		}
 	}
 	
-	static async F_compositeTimeseries () {
+	static async F_compositeTimeseries (arg0_options) {
+		let options = (arg0_options) ? arg0_options : {};
+		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+
 		if (!fs.existsSync(this.output_rasters)) fs.mkdirSync(this.output_rasters, { recursive: true });
 		
 		let cohorts = this.getCohorts();
@@ -459,7 +476,7 @@ global.age_sex = class {
 				let cohort = cohorts[c];
 				let out_path = `${this.output_rasters}${cohort}_${year}.png`;
 				
-				if (fs.existsSync(out_path)) continue;
+				if (!overwrite && fs.existsSync(out_path)) continue;
 				
 				let src_path = null;
 				
@@ -510,11 +527,11 @@ global.age_sex = class {
 			console.log(`[age_sex] Skipping Steps B & C training (using existing models).`);
 		}
 		
-		if (!options.exclude.includes("A")) await this.A_standardiseTargets();
+		if (!options.exclude.includes("A")) await this.A_standardiseTargets(options);
 		if (!options.exclude.includes("B")) await this.B_trainMultinomialLogitModels(options);
-		if (!options.exclude.includes("C")) await this.C_mergeMultinomialLogitModels();
-		if (!options.exclude.includes("D")) await this.D_generateMultinomialLogitRasters();
-		if (!options.exclude.includes("E")) await this.E_clampToStadester();
-		if (!options.exclude.includes("F")) await this.F_compositeTimeseries();
+		if (!options.exclude.includes("C")) await this.C_mergeMultinomialLogitModels(options);
+		if (!options.exclude.includes("D")) await this.D_generateMultinomialLogitRasters(options);
+		if (!options.exclude.includes("E")) await this.E_clampToStadester(options);
+		if (!options.exclude.includes("F")) await this.F_compositeTimeseries(options);
 	}
 };

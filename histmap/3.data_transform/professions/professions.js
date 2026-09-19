@@ -24,7 +24,10 @@ global.professions = class {
 	 * Prepares the target absolute populations for the MNL. Calculates `not_in_work` as the structural
 	 * LFPR residual and deletes completely transparent/0-data Olivetti rasters.
 	 */
-	static async A_standardiseTargets () {
+	static async A_standardiseTargets (arg0_options) {
+		let options = (arg0_options) ? arg0_options : {};
+		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+
 		if (!fs.existsSync(this.standardised_targets_folder)) fs.mkdirSync(this.standardised_targets_folder, { recursive: true });
 		
 		let years = landuse_HYDE.sorted_hyde_years.filter(y => y >= 1750 && y <= 2025);
@@ -39,7 +42,7 @@ global.professions = class {
 				for (let i = 0; i < this.categories.length; i++) {
 					if (!fs.existsSync(`${this.standardised_targets_folder}global_${this.categories[i]}_${sex}_${year}.png`)) all_exist = false;
 				}
-				if (all_exist) continue;
+				if (!overwrite && all_exist) continue;
 				
 				let olivetti_rasters = {};
 				let has_olivetti = true;
@@ -132,6 +135,8 @@ global.professions = class {
 	 */
 	static async B_trainMultinomialLogitModels (arg0_options) {
 		let options = (arg0_options) ? arg0_options : {};
+		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+
 		if (!fs.existsSync(this.intermediate_logit_folder)) fs.mkdirSync(this.intermediate_logit_folder, { recursive: true });
 		
 		let train_years = landuse_HYDE.sorted_hyde_years.filter(y => y >= 1750 && y <= 2025);
@@ -144,7 +149,7 @@ global.professions = class {
 				let year = train_years[y];
 				let model_path = `${this.intermediate_logit_folder}multinomial_model_${sex}_${year}.json`;
 				
-				if (fs.existsSync(model_path)) continue;
+				if (!overwrite && fs.existsSync(model_path)) continue;
 				
 				let format_year = year > 2023 ? 2023 : year;
 				let valid_keys = [];
@@ -237,14 +242,17 @@ global.professions = class {
 	 * Averages MNL models to strip spatial volatility for extrapolations.
 	 * An arithmetic mean of logit coefficients equates mathematically to a geometric mean of their odds ratios.
 	 */
-	static async C_mergeMultinomialLogitModels () {
+	static async C_mergeMultinomialLogitModels (arg0_options) {
+		let options = (arg0_options) ? arg0_options : {};
+		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+
 		let train_years = landuse_HYDE.sorted_hyde_years.filter(y => y >= 1750 && y <= 2025);
 		
 		for (let s = 0; s < this.sexes.length; s++) {
 			let sex = this.sexes[s];
 			let geomean_path = `${this.intermediate_logit_folder}multinomial_model_geomean_${sex}.json`;
 			
-			if (fs.existsSync(geomean_path)) continue;
+			if (!overwrite && fs.existsSync(geomean_path)) continue;
 			
 			let models_loaded = 0;
 			let geomean_sums = {};
@@ -296,7 +304,10 @@ global.professions = class {
 	/**
 	 * Exclusively uses the Geomean model to project theoretical percent distributions across all temporal horizons.
 	 */
-	static async D_generateMultinomialLogitRasters () {
+	static async D_generateMultinomialLogitRasters (arg0_options) {
+		let options = (arg0_options) ? arg0_options : {};
+		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+
 		if (!fs.existsSync(this.intermediate_logit_rasters)) fs.mkdirSync(this.intermediate_logit_rasters, { recursive: true });
 		let years = landuse_HYDE.sorted_hyde_years;
 		
@@ -308,7 +319,7 @@ global.professions = class {
 				let out_base = `${this.intermediate_logit_rasters}logit_${sex}_${year}.png`;
 				let check_path = out_base.replace(".png", `_class_${this.olivetti_categories[0]}.png`);
 				
-				if (fs.existsSync(check_path)) continue;
+				if (!overwrite && fs.existsSync(check_path)) continue;
 				
 				// Always apply the unified geomean model
 				let model_path = `${this.intermediate_logit_folder}multinomial_model_geomean_${sex}.json`;
@@ -338,7 +349,10 @@ global.professions = class {
 	 * Clamps probabilties cleanly to rigid LFPR models establishing absolute populations + percent distributions.
 	 * Calculates and derives global 'Total (Net)' values synthetically.
 	 */
-	static async E_clampToPercentagesAndAggregates () {
+	static async E_clampToPercentagesAndAggregates (arg0_options) {
+		let options = (arg0_options) ? arg0_options : {};
+		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+
 		if (!fs.existsSync(this.output_percentages)) fs.mkdirSync(this.output_percentages, { recursive: true });
 		if (!fs.existsSync(this.output_aggregates)) fs.mkdirSync(this.output_aggregates, { recursive: true });
 		
@@ -353,7 +367,7 @@ global.professions = class {
 					if (!fs.existsSync(`${this.output_aggregates}${this.categories[i]}_${["m", "f", "t"][j]}_${year}.png`)) all_exist = false;
 				}
 			}
-			if (all_exist) continue;
+			if (!overwrite && all_exist) continue;
 			
 			let pop_t = null;
 			let agg_t = {};
@@ -500,10 +514,10 @@ global.professions = class {
 			console.log(`[professions] Skipping Steps B & C training (using existing models).`);
 		}
 		
-		if (!options.exclude.includes("A")) await this.A_standardiseTargets();
+		if (!options.exclude.includes("A")) await this.A_standardiseTargets(options);
 		if (!options.exclude.includes("B")) await this.B_trainMultinomialLogitModels(options);
-		if (!options.exclude.includes("C")) await this.C_mergeMultinomialLogitModels();
-		if (!options.exclude.includes("D")) await this.D_generateMultinomialLogitRasters();
-		if (!options.exclude.includes("E")) await this.E_clampToPercentagesAndAggregates();
+		if (!options.exclude.includes("C")) await this.C_mergeMultinomialLogitModels(options);
+		if (!options.exclude.includes("D")) await this.D_generateMultinomialLogitRasters(options);
+		if (!options.exclude.includes("E")) await this.E_clampToPercentagesAndAggregates(options);
 	}
 };

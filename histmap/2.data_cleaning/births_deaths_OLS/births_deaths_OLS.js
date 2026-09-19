@@ -258,7 +258,10 @@ global.births_deaths_OLS = class {
 		return this._getCohortDeclineArray(variable_obj.sex, year);
 	}
 	
-	static async A_generateTargetRasters () {
+	static async A_generateTargetRasters (arg0_options) {
+		let options = (arg0_options) ? arg0_options : {};
+		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+
 		let variables_obj = this._getVariablesObj();
 		let years = landuse_HYDE.sorted_hyde_years;
 		
@@ -269,7 +272,7 @@ global.births_deaths_OLS = class {
 				let variable_obj = variables_obj[variable_keys[v]];
 				let target_path = `${variable_obj.target_folder}${variable_obj.actual_prefix}_target_${year}.png`;
 				
-				if (fs.existsSync(target_path)) continue;
+				if (!overwrite && fs.existsSync(target_path)) continue;
 				
 				let actual_path = this._getActualPath(variable_obj, year);
 				if (!actual_path) continue;
@@ -306,6 +309,7 @@ global.births_deaths_OLS = class {
 	
 	static async B_trainOLSModels (arg0_options) {
 		let options = (arg0_options) ? arg0_options : {};
+		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
 		if (!options.lambda) options.lambda = 1;
 		
 		let variables_obj = this._getVariablesObj();
@@ -322,7 +326,7 @@ global.births_deaths_OLS = class {
 				let model_path = `${variable_obj.ols_folder}${variable_obj.model_prefix}${year}.json`;
 				
 				if (!fs.existsSync(target_path)) continue;
-				if (fs.existsSync(model_path)) continue;
+				if (!overwrite && fs.existsSync(model_path)) continue;
 				
 				let format_year = Math.min(year, 2023);
 				let loaded_obj = await Statistics.loadOLSCovariates(target_path, {
@@ -353,7 +357,10 @@ global.births_deaths_OLS = class {
 		}
 	}
 	
-	static async C_generateOLSRasters () {
+	static async C_generateOLSRasters (arg0_options) {
+		let options = (arg0_options) ? arg0_options : {};
+		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+
 		let variables_obj = this._getVariablesObj();
 		let years = landuse_HYDE.sorted_hyde_years;
 		let covariates_obj = this.covariates_obj();
@@ -367,7 +374,7 @@ global.births_deaths_OLS = class {
 				let year = years[y];
 				let output_path = `${variable_obj.ols_folder}ols_${variable_obj.actual_prefix}_${year}.png`;
 				
-				if (fs.existsSync(output_path)) continue;
+				if (!overwrite && fs.existsSync(output_path)) continue;
 				
 				let model_path = `${variable_obj.ols_folder}${variable_obj.model_prefix}${year}.json`;
 				if (!fs.existsSync(model_path)) model_path = unified_model_path;
@@ -387,7 +394,10 @@ global.births_deaths_OLS = class {
 		}
 	}
 	
-	static async D_normaliseOLSRasters () {
+	static async D_normaliseOLSRasters (arg0_options) {
+		let options = (arg0_options) ? arg0_options : {};
+		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+
 		let variables_obj = this._getVariablesObj();
 		let years = landuse_HYDE.sorted_hyde_years;
 		let sf = age_sex.sf();
@@ -441,7 +451,7 @@ global.births_deaths_OLS = class {
 				let bounds_path = `${this.intermediate_bounds}bounds_${variable_obj.actual_prefix}_${year}.json`;
 				
 				if (!fs.existsSync(ols_path)) continue;
-				if (fs.existsSync(normalised_path) && fs.existsSync(bounds_path)) continue;
+				if (!overwrite && fs.existsSync(normalised_path) && fs.existsSync(bounds_path)) continue;
 				
 				let popc_raster = GeoPNG.loadNumberRasterImage(popc_path, { format: "float32" });
 				let ols_raster = GeoPNG.loadNumberRasterImage(ols_path, { format: "float32" });
@@ -529,7 +539,10 @@ global.births_deaths_OLS = class {
 		}
 	}
 	
-	static async E_clampToStadester () {
+	static async E_clampToStadester (arg0_options) {
+		let options = (arg0_options) ? arg0_options : {};
+		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+
 		let variables_obj = this._getVariablesObj();
 		let years = landuse_HYDE.sorted_hyde_years; //0 is a test year
 		let sf = age_sex.sf();
@@ -558,7 +571,7 @@ global.births_deaths_OLS = class {
 				let output_path = `${variable_obj.output_folder}${variable_obj.actual_prefix}_${year}.png`;
 				
 				if (!fs.existsSync(normalised_path) || !fs.existsSync(bounds_path)) { skip_year = true; break; }
-				if (fs.existsSync(output_path)) continue;
+				if (!overwrite && fs.existsSync(output_path)) continue;
 				
 				if (!denominator_cache[variable_obj.denominator + (variable_obj.sex || "")]) {
 					denominator_cache[variable_obj.denominator + (variable_obj.sex || "")] = this._getDenominatorArray(variable_obj, year);
@@ -714,7 +727,10 @@ global.births_deaths_OLS = class {
 		}
 	}
 	
-	static async F_deriveMigrationRasters () {
+	static async F_deriveMigrationRasters (arg0_options) {
+		let options = (arg0_options) ? arg0_options : {};
+		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+
 		let years = landuse_HYDE.sorted_hyde_years;
 		let sf = age_sex.sf();
 		let cohorts = age_sex.getCohorts();
@@ -731,7 +747,7 @@ global.births_deaths_OLS = class {
 			let female_migration_path = `${this.output_female_migration_folder}female_net_migration_${year}.png`;
 			let male_migration_path = `${this.output_male_migration_folder}male_net_migration_${year}.png`;
 			
-			if (fs.existsSync(net_migration_path) && fs.existsSync(female_migration_path) && fs.existsSync(male_migration_path)) continue;
+			if (!overwrite && fs.existsSync(net_migration_path) && fs.existsSync(female_migration_path) && fs.existsSync(male_migration_path)) continue;
 			
 			let births_path = `${this.output_births_folder}births_${year}.png`;
 			let female_deaths_path = `${this.output_female_deaths_folder}female_deaths_${year}.png`;
@@ -872,11 +888,11 @@ global.births_deaths_OLS = class {
 		for (let i = 0; i < all_folders.length; i++)
 			if (!fs.existsSync(all_folders[i])) fs.mkdirSync(all_folders[i], { recursive: true });
 		
-		if (!options.exclude.includes("A")) await this.A_generateTargetRasters();
+		if (!options.exclude.includes("A")) await this.A_generateTargetRasters(options);
 		if (!options.exclude.includes("B")) await this.B_trainOLSModels(options);
-		if (!options.exclude.includes("C")) await this.C_generateOLSRasters();
-		if (!options.exclude.includes("D")) await this.D_normaliseOLSRasters();
-		if (!options.exclude.includes("E")) await this.E_clampToStadester();
-		if (!options.exclude.includes("F")) await this.F_deriveMigrationRasters();
+		if (!options.exclude.includes("C")) await this.C_generateOLSRasters(options);
+		if (!options.exclude.includes("D")) await this.D_normaliseOLSRasters(options);
+		if (!options.exclude.includes("E")) await this.E_clampToStadester(options);
+		if (!options.exclude.includes("F")) await this.F_deriveMigrationRasters(options);
 	}
 };
