@@ -21,7 +21,7 @@
 		let N = X.length;
 		let K = X[0].length;
 		
-		let XT_X = new Array(K).fill(0).map(() => new Array(K).fill(0));
+		let XT_X = Array.createMatrix(K, K);
 		
 		//Optimisation: Halved loop multiplications taking advantage of reflectional symmetry
 		for (let i = 0; i < N; i++) {
@@ -185,70 +185,11 @@
 		let output_file_path = arg0_output_file_path;
 		let options = (arg1_options) ? arg1_options : {};
 		
-		//Initialise options
-		if (!options.format) options.format = "float32";
-		if (!options.formatting_parameters) options.formatting_parameters = [];
-		options.height = Math.returnSafeNumber(options.height, 2160);
-		options.width = Math.returnSafeNumber(options.width, 4320);
-		
-		//Declare local instance variables
-		let covariates_obj = options.covariates_obj;
-		let model_obj = (typeof options.model_obj === "string") ? 
-			JSON.parse(fs.readFileSync(path.resolve(options.model_obj), "utf8")) : options.model_obj;
-		let coefficients_obj = model_obj.coefficients;
-		let rasters_obj = {};
-		
-		//Iterate over covariates_obj and load rasters
-		Object.iterate(covariates_obj, (local_key, local_value) => {
-			let local_file_path = (typeof local_value === "function") ? 
-				local_value(...options.formatting_parameters) : local_value;
-			let local_format = "int32";
-			
-			//Destructure if array is returned
-			if (Array.isArray(local_file_path)) {
-				local_format = local_file_path[1];
-				local_file_path = local_file_path[0];
-			}
-			
-			//Load existing rasters into rasters_obj
-			if (fs.existsSync(local_file_path)) {
-				rasters_obj[local_key] = GeoPNG.loadNumberRasterImage(local_file_path, {
-					format: local_format
-				});
-			} else {
-				console.warn(`- ${local_file_path} could not be found.`);
-			}
+		//Return statement
+		return await Statistics.LearningFramework.predictRaster(output_file_path, options.model_obj, {
+			...options,
+			mode: "ols"
 		});
-		
-		//Write output file from rasters_obj
-		GeoPNG.saveNumberRasterImage({
-			file_path: output_file_path,
-			format: options.format,
-			width: options.width,
-			height: options.height,
-			function: (local_index) => {
-				//Evaluate guard function if present
-				if (options.guard_clause) {
-					let should_process = options.guard_clause(local_index, rasters_obj);
-					if (!should_process) return 0;
-				}
-				
-				//Declare local instance variables
-				let local_sum = 0;
-				
-				Object.iterate(rasters_obj, (local_key, local_value) => {
-					let local_coefficient = Math.returnSafeNumber(coefficients_obj[local_key]);
-					
-					local_sum += (local_value?.data) ? 
-						(local_value.data[local_index]*local_coefficient) : 0;
-				});
-				
-				//Return statement
-				return local_sum;
-			}
-		});
-		
-		console.log(`Saved OLS for ${output_file_path}.`);
 	};
 	
 	/**
@@ -261,87 +202,18 @@
 	 *  @param {any[]} [arg1_options.formatting_parameters]
 	 *  @param {string} [arg1_options.utility_format="int32"]
 	 *  
-	 * @returns {Promise<void>}
+	 * @returns {Promise<Object>}
 	 */
 	Statistics.loadOLSCovariates = async function (arg0_utility_file_path, arg1_options) {
 		//Convert from parameters
-		let utility_file_path = path.resolve(arg0_utility_file_path);
+		let utility_file_path = arg0_utility_file_path;
 		let options = (arg1_options) ? arg1_options : {};
 		
-		//Initialise options
-		if (!options.formatting_parameters) options.formatting_parameters = [];
-		
-		//Declare local instance variables
-		let input_data = [];
-		let utility_image = GeoPNG.loadNumberRasterImage(utility_file_path, {
-			format: options.utility_format
-		});
-		let utility_data = utility_image.data;
-		let valid_keys = [];
-		
-		//Iterate over all input stocks; load each input variable as a predictor
-		Object.iterate(options.covariates_obj, (local_key, local_value) => {
-			let local_file_path = local_value(...options.formatting_parameters);
-			let local_format = "int32";
-			
-			//Destructure if array is returned
-			if (Array.isArray(local_file_path)) {
-				local_format = local_file_path[1];
-				local_file_path = local_file_path[0];
-			}
-			
-			//Attempt to load the covariate raster; drop it on failure
-			try {
-				let local_rawdata = GeoPNG.loadNumberRasterImage(local_file_path, {
-					format: local_format
-				}).data;
-				
-				input_data.push(local_rawdata);
-				valid_keys.push(local_key);
-			} catch (e) {
-				console.log(`- Missing covariate raster for ${local_key} at ${local_file_path}. Dropping coefficient for this run.`);
-			}
-		});
-		
-		//Transpose input data to match format [samples, features], discarding zeroes and NaNs safely
-		let feature_count = input_data.length;
-		let sample_count = utility_data.length;
-		let X = [];
-		let Y = [];
-		
-		//Iterate over sample_count
-		for (let i = 0; i < sample_count; i++) {
-			let has_data = false;
-			let is_valid = true;
-			let utility_value = utility_data[i];
-			
-			if (isNaN(utility_value)) {
-				is_valid = false;
-			} else if (utility_value !== 0) {
-				has_data = true;
-			}
-			
-			//Iterate over feature_count
-			let local_row = new Array(feature_count);
-			
-			for (let x = 0; x < feature_count; x++) {
-				let local_value = input_data[x][i];
-				if (isNaN(local_value)) {
-					is_valid = false;
-					break;
-				}
-				local_row[x] = local_value;
-				if (local_value !== 0) has_data = true;
-			}
-			
-			if (has_data && is_valid) {
-				X.push(local_row);
-				Y.push([utility_value]);
-			}
-		}
-		
 		//Return statement
-		return { keys: valid_keys, X, Y };
+		return await Statistics.LearningFramework.extractImageDataset(utility_file_path, {
+			...options,
+			mode: "ols"
+		});
 	};
 	
 	/**
@@ -360,88 +232,11 @@
 	Statistics.loadPointOLSCovariates = async function (arg0_points, arg1_year, arg2_options) {
 		//Convert from parameters
 		let points_list = arg0_points;
-		let target_year = parseInt(arg1_year);
+		let target_year = arg1_year;
 		let options = (arg2_options) ? arg2_options : {};
 		
-		//Declare local instance variables
-		let covariates_obj = options.covariates_obj;
-		let covariates_year = (options.covariates_year !== undefined) ? parseInt(options.covariates_year) : target_year;
-		let valid_keys = [];
-		let loaded_rasters = {};
-		let x_matrix = [];
-		let y_matrix = [];
-		
-		//Iterate over covariates_obj and load rasters for the covariate year
-		Object.iterate(covariates_obj, (local_key, local_value) => {
-			let local_file_path = (typeof local_value === "function") ?
-				local_value(covariates_year) : local_value;
-			let local_format = "int32";
-			
-			if (Array.isArray(local_file_path)) {
-				local_format = local_file_path[1];
-				local_file_path = local_file_path[0];
-			}
-			
-			try {
-				if (fs.existsSync(local_file_path)) {
-					loaded_rasters[local_key] = GeoPNG.loadNumberRasterImage(local_file_path, {
-						format: local_format
-					});
-					valid_keys.push(local_key);
-				}
-			} catch (e) {
-				console.log(`- Missing covariate raster for ${local_key} at ${local_file_path}.`);
-			}
-		});
-		
-		//If no valid keys were loaded, return empty structural dataset
-		if (valid_keys.length === 0) return { keys: [], X: [], Y: [] };
-		
-		//Filter points that match the target year and have valid targets
-		let year_points = points_list.filter(p => parseInt(p.year) === target_year && p.target !== undefined && p.target !== null && !isNaN(p.target));
-		
-		for (let i = 0; i < year_points.length; i++) {
-			let current_point = year_points[i];
-			let coords = current_point.coords;
-			let lng_val = parseFloat(coords[0]);
-			let lat_val = parseFloat(coords[1]);
-			let is_valid = true;
-			let point_features = [];
-			
-			for (let j = 0; j < valid_keys.length; j++) {
-				let key = valid_keys[j];
-				let raster = loaded_rasters[key];
-				
-				let pixel_coords = (options.get_pixel_function) ?
-					options.get_pixel_function(lng_val, lat_val, raster.width, raster.height) :
-					Geospatiale.getEquirectangularCoordsPixel(lng_val, lat_val, { width: raster.width, height: raster.height });
-				
-				if (!pixel_coords) {
-					is_valid = false;
-					break;
-				}
-				
-				let cx = pixel_coords[0];
-				let cy = pixel_coords[1];
-				let pixel_index = cy * raster.width + cx;
-				let feature_value = raster.data[pixel_index];
-				
-				if (isNaN(feature_value)) {
-					is_valid = false;
-					break;
-				}
-				
-				point_features.push(feature_value);
-			}
-			
-			if (is_valid && point_features.length === valid_keys.length) {
-				x_matrix.push(point_features);
-				y_matrix.push([current_point.target]);
-			}
-		}
-		
 		//Return statement
-		return { keys: valid_keys, X: x_matrix, Y: y_matrix };
+		return await Statistics.LearningFramework.extractPointDataset(points_list, target_year, options);
 	};
 	
 	/**
@@ -461,7 +256,7 @@
 	 */
 	Statistics.processOLSModel = async function (arg0_model, arg1_options) {
 		//Convert from parameters
-		let processed_model = (typeof arg0_model === "string") ? JSON.parse(fs.readFileSync(path.resolve(arg0_model), "utf8")) : arg0_model;
+		let processed_model = File.loadJSON(arg0_model);
 		let options = (arg1_options) ? arg1_options : {};
 		
 		//Initialise options
@@ -651,7 +446,7 @@
 		
 		//Compute column-wise RMS scales to prevent scale-mismatch singularity
 		let scales = new Array(K).fill(1);
-		let X_scaled = new Array(N).fill(0).map(() => new Array(K).fill(0));
+		let X_scaled = Array.createMatrix(N, K);
 		
 		for (let j = 0; j < K; j++) {
 			let sum_sq = 0;
@@ -669,8 +464,8 @@
 			}
 		}
 		
-		let XT_X = new Array(K).fill(0).map(() => new Array(K).fill(0));
-		let XT_Y = new Array(K).fill(0).map(() => [0]);
+		let XT_X = Array.createMatrix(K, K);
+		let XT_Y = Array.createMatrix(K, 1);
 		
 		for (let i = 0; i < N; i++) {
 			let row_X = X_scaled[i];
@@ -705,8 +500,8 @@
 		}
 		
 		//Convert scaled coefficients back to original covariate scale: beta_j = beta_scaled_j / scale_j
-		let beta_scaled_arr = beta_scaled._data || (beta_scaled.toArray ? beta_scaled.toArray() : beta_scaled);
-		let beta_orig = new Array(K).fill(0).map(() => [0]);
+		let beta_scaled_arr = Array.unwrapMatrix(beta_scaled);
+		let beta_orig = Array.createMatrix(K, 1);
 		
 		for (let j = 0; j < K; j++) {
 			beta_orig[j][0] = beta_scaled_arr[j][0] / scales[j];
@@ -777,7 +572,7 @@
 		console.log(`- Applied Ridge Regression to stabilise coefficients.`);
 		
 		//3. Convert coefficients to JSON
-		let beta_arr = beta._data || (beta.toArray ? beta.toArray() : beta);
+		let beta_arr = Array.unwrapMatrix(beta);
 		let coefficients = beta_arr.flat();
 		console.log(`- Computed coefficients.`);
 		

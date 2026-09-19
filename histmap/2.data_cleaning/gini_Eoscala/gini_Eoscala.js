@@ -168,84 +168,15 @@ global.gini_Eoscala = class {
 			target_min = Math.max(0, target_min);
 			target_max = Math.min(1, target_max);
 			
-			// --- STEP 1: GATHER VALID DATA & CALCULATE ROBUST STATISTICS ---
-			let valid_pixels = [];
-			let sum = 0;
+			// --- STEP 1 & 2: C1-CONTINUOUS LOG-TAIL REGULARISATION VIA GeoPNG ---
+			let normalised_map = GeoPNG.regulariseLogTail({
+				data: raw_raster.data,
+				target_max: target_max,
+				target_min: target_min,
+				valid_filter: (j) => landarea_raster.data[j] > 0 && popc_raster.data[j] > 0
+			});
 			
-			for (let j = 0; j < raw_raster.data.length; j++) {
-				if (landarea_raster.data[j] > 0 && popc_raster.data[j] > 0) {
-					valid_pixels.push(raw_raster.data[j]);
-					sum += raw_raster.data[j];
-				}
-			}
-			
-			let normalised_map = new Float32Array(raw_raster.data.length);
-			
-			if (valid_pixels.length > 0) {
-				valid_pixels.sort((a, b) => a - b);
-				let N = valid_pixels.length;
-				
-				let mean = sum / N;
-				let sq_sum = 0;
-				for (let j = 0; j < N; j++) sq_sum += Math.pow(valid_pixels[j] - mean, 2);
-				let std = Math.sqrt(sq_sum / N);
-				
-				// Tukey's Fences (Q1, Q3, and Interquartile Range)
-				let Q1 = valid_pixels[Math.floor(N * 0.25)];
-				let Q3 = valid_pixels[Math.floor(N * 0.75)];
-				let IQR = Q3 - Q1;
-				
-				// Scale alpha defines the strict linear bulk bounds. (Fallback to STD if IQR is completely flat)
-				let alpha = (IQR > 1e-5) ? IQR : ((std > 1e-5) ? std : 0.01);
-				
-				let T_lower = Q1 - (1.5 * alpha);
-				let T_upper = Q3 + (1.5 * alpha);
-				
-				// --- STEP 2: C1-CONTINUOUS LOG-TAIL REGULARISATION ---
-				// This guarantees a perfectly smooth curve that never flatlines at a hard ceiling.
-				const regularise = (x) => {
-					if (x > T_upper) {
-						// Upper Outlier: Logarithmic Compression
-						return T_upper + alpha * Math.log(1 + ((x - T_upper) / alpha));
-					} else if (x < T_lower) {
-						// Lower Outlier: Logarithmic Compression
-						return T_lower - alpha * Math.log(1 + ((T_lower - x) / alpha));
-					} else {
-						// The Bulk (99% of data): 100% Linear variance preservation
-						return x;
-					}
-				};
-				
-				// Because regularise(x) is strictly monotonically increasing, 
-				// the min/max of the raw array guarantees the true min/max of the regularised space.
-				let raw_min = valid_pixels[0];
-				let raw_max = valid_pixels[N - 1];
-				
-				let reg_min = regularise(raw_min);
-				let reg_max = regularise(raw_max);
-				let reg_range = reg_max - reg_min;
-				let target_range = target_max - target_min;
-				
-				for (let j = 0; j < raw_raster.data.length; j++) {
-					if (landarea_raster.data[j] > 0 && popc_raster.data[j] > 0) {
-						let x = raw_raster.data[j];
-						let x_reg = regularise(x);
-						
-						// Standard Linear Min-Max using the newly un-bunched, regularised data
-						if (reg_range === 0) {
-							normalised_map[j] = target_min;
-						} else {
-							normalised_map[j] = target_min + ((x_reg - reg_min) / reg_range) * target_range;
-						}
-					} else {
-						normalised_map[j] = 0;
-					}
-				}
-				
-				console.log(`Normalising year ${local_year} (${domain_name}) using Log-Tail Regularisation. Un-bunched limits mapped to [${target_min.toFixed(3)}, ${target_max.toFixed(3)}].`);
-			} else {
-				console.log(`Skipping normalisation for year ${local_year} (no inhabited land pixels found)`);
-			}
+			console.log(`Normalising year ${local_year} (${domain_name}) using Log-Tail Regularisation. Un-bunched limits mapped to [${target_min.toFixed(3)}, ${target_max.toFixed(3)}].`);
 			
 			GeoPNG.saveNumberRasterImage({
 				file_path: output_path,
@@ -275,6 +206,30 @@ global.gini_Eoscala = class {
 		let areal_raster_path = gini_SubNGini.output_areal_raster;
 		let areal_raster = GeoPNG.loadImage(areal_raster_path);
 		
+		//Pre-index pixel indices for each mask colour key once
+		let geocode_pixel_indices = {};
+		for (let index = 0; index < geocode_raster.data.length / 4; index++) {
+			let byte_index = index * 4;
+			let r = geocode_raster.data[byte_index];
+			let g = geocode_raster.data[byte_index + 1];
+			let b = geocode_raster.data[byte_index + 2];
+			let k = `${r},${g},${b}`;
+			if (!geocode_pixel_indices[k]) geocode_pixel_indices[k] = [];
+			geocode_pixel_indices[k].push(index);
+		}
+		
+		let areal_pixel_indices = {};
+		for (let index = 0; index < areal_raster.data.length / 4; index++) {
+			let byte_index = index * 4;
+			let r = areal_raster.data[byte_index];
+			let g = areal_raster.data[byte_index + 1];
+			let b = areal_raster.data[byte_index + 2];
+			let a = areal_raster.data[byte_index + 3];
+			let k = `${r},${g},${b},${a}`;
+			if (!areal_pixel_indices[k]) areal_pixel_indices[k] = [];
+			areal_pixel_indices[k].push(index);
+		}
+		
 		for (let i = 0; i < years.length; i++) {
 			let year = years[i];
 			let source_path = `${src_dir}gini_OLS_normalised_${year}.png`;
@@ -289,7 +244,6 @@ global.gini_Eoscala = class {
 			}
 			
 			let normalised_raster = GeoPNG.loadNumberRasterImage(source_path, { format: "float32" });
-			
 			let format_year = year > 2023 ? 2023 : year;
 			
 			let gdp_info = this.input_covariates_obj()["gdp_ppp"](format_year);
@@ -302,10 +256,10 @@ global.gini_Eoscala = class {
 			let popc_format = popc_info[1];
 			let popc_raster = GeoPNG.loadNumberRasterImage(popc_file, { format: popc_format });
 			
+			let is_gapminder = (year >= this.options.gapminder_domain[0] && year < this.options.subngini_domain[0]);
 			let target_gini_map = {};
-			let getColourKeyForPixel = null;
 			
-			if (year >= this.options.gapminder_domain[0] && year < this.options.subngini_domain[0]) {
+			if (is_gapminder) {
 				Object.iterate(geocode_obj, (colour_key, local_geocodes) => {
 					if (local_geocodes) {
 						for (let x = 0; x < local_geocodes.length; x++) {
@@ -317,14 +271,6 @@ global.gini_Eoscala = class {
 						}
 					}
 				});
-				
-				getColourKeyForPixel = (local_index) => {
-					let byte_index = local_index * 4;
-					let r = geocode_raster.data[byte_index];
-					let g = geocode_raster.data[byte_index + 1];
-					let b = geocode_raster.data[byte_index + 2];
-					return `${r},${g},${b}`;
-				};
 			} else {
 				Object.iterate(subngini_obj, (colour_key, local_value) => {
 					let region_gini = local_value?.[year];
@@ -332,141 +278,31 @@ global.gini_Eoscala = class {
 						target_gini_map[colour_key] = region_gini;
 					}
 				});
-				
-				getColourKeyForPixel = (local_index) => {
-					let byte_index = local_index * 4;
-					let r = areal_raster.data[byte_index];
-					let g = areal_raster.data[byte_index + 1];
-					let b = areal_raster.data[byte_index + 2];
-					let a = areal_raster.data[byte_index + 3];
-					return `${r},${g},${b},${a}`;
-				};
 			}
 			
-			let valid_min = Infinity;
-			let valid_max = -Infinity;
-			for (let j = 0; j < normalised_raster.data.length; j++) {
-				let val = normalised_raster.data[j];
-				if (val > 0) {
-					if (val < valid_min) valid_min = val;
-					if (val > valid_max) valid_max = val;
-				}
-			}
-			
-			Object.iterate(target_gini_map, (k, target_val) => {
-				if (target_val < valid_min) valid_min = target_val;
-				if (target_val > valid_max) valid_max = target_val;
-			});
-			
-			if (valid_min === Infinity) valid_min = 0;
-			if (valid_max === -Infinity) valid_max = 1;
-			let valid_range = valid_max - valid_min;
-			
-			let region_pixels = {};
 			let total_pixels = normalised_raster.data.length;
-			
-			for (let index = 0; index < total_pixels; index++) {
-				let norm_gini = normalised_raster.data[index];
-				if (norm_gini === 0) continue;
-				
-				let colour_key = getColourKeyForPixel(index);
-				if (target_gini_map[colour_key] !== undefined) {
-					let gdp = Math.max(0, gdp_raster.data[index]);
-					let pop = Math.max(0, popc_raster.data[index]);
-					
-					let weight = (gdp > 0) ? gdp : (pop > 0 ? pop * 0.001 : 0);
-					if (weight > 0) {
-						if (!region_pixels[colour_key]) {
-							region_pixels[colour_key] = { total_weight: 0, weighted_sum_unit: 0, pixels: [] };
-						}
-						
-						let unit_gini = (valid_range > 0) ? ((norm_gini - valid_min) / valid_range) : 0.5;
-						unit_gini = Math.max(0.0001, Math.min(0.9999, unit_gini));
-						
-						let logit_val = Math.log(unit_gini / (1 - unit_gini));
-						
-						region_pixels[colour_key].pixels.push({ index, weight, logit_val });
-						region_pixels[colour_key].total_weight += weight;
-						region_pixels[colour_key].weighted_sum_unit += (weight * unit_gini);
-					}
-				}
+			let weights = new Float32Array(total_pixels);
+			for (let j = 0; j < total_pixels; j++) {
+				let gdp = Math.max(0, gdp_raster.data[j]);
+				let pop = Math.max(0, popc_raster.data[j]);
+				weights[j] = (gdp > 0) ? gdp : (pop > 0 ? pop * 0.001 : 0);
 			}
 			
-			let transform_map = {};
-			
-			Object.iterate(region_pixels, (colour_key, data) => {
-				let target = target_gini_map[colour_key];
-				let target_unit = (valid_range > 0) ? ((target - valid_min) / valid_range) : 0.5;
-				target_unit = Math.max(0.0001, Math.min(0.9999, target_unit));
-				
-				if (data.total_weight === 0) return;
-				
-				let current_unit = data.weighted_sum_unit / data.total_weight;
-				current_unit = Math.max(0.0001, Math.min(0.9999, current_unit));
-				
-				let var_old = current_unit * (1 - current_unit);
-				let var_target = target_unit * (1 - target_unit);
-				
-				let alpha = var_old / var_target;
-				alpha = Math.max(1.0, Math.min(10.0, alpha)); // Strict Non-Compression Rule keeps variance robust
-				
-				let low = -20;
-				let high = 20;
-				let best_shift = 0;
-				
-				for (let iter = 0; iter < 50; iter++) {
-					let mid = (low + high) / 2;
-					let weighted_sum = 0;
-					
-					for (let i = 0; i < data.pixels.length; i++) {
-						let scaled_logit = data.pixels[i].logit_val * alpha;
-						let shifted_logit = scaled_logit + mid;
-						
-						let sigmoid_val = 1 / (1 + Math.exp(-shifted_logit));
-						weighted_sum += data.pixels[i].weight * sigmoid_val;
-					}
-					
-					let current_mean = weighted_sum / data.total_weight;
-					
-					if (current_mean < target_unit) {
-						low = mid;
-					} else {
-						high = mid;
-					}
-					best_shift = mid;
-				}
-				
-				transform_map[colour_key] = { alpha: alpha, shift: best_shift };
+			console.log(`Clamping year ${year} using Strict Variance-Preserving Logit adjustment.`);
+			let clamped_map = GeoPNG.applyArealClamping({
+				data: normalised_raster.data,
+				mask_pixel_indices: is_gapminder ? geocode_pixel_indices : areal_pixel_indices,
+				mode: "variance_preserving_logit",
+				targets: target_gini_map,
+				weights: weights
 			});
-			
-			console.log(`Clamping year ${year} using Strict Variance-Preserving Logit adjustment. Amplitude guaranteed >= original.`);
 			
 			GeoPNG.saveNumberRasterImage({
 				file_path: output_path,
 				format: "float32",
-				width: 4320,
 				height: 2160,
-				function: (local_index) => {
-					let norm_gini = normalised_raster.data[local_index];
-					if (norm_gini === 0) return 0;
-					
-					let colour_key = getColourKeyForPixel(local_index);
-					let transform = transform_map[colour_key];
-					
-					if (transform !== undefined) {
-						let unit_gini = (valid_range > 0) ? ((norm_gini - valid_min) / valid_range) : 0.5;
-						unit_gini = Math.max(0.0001, Math.min(0.9999, unit_gini));
-						
-						let logit_val = Math.log(unit_gini / (1 - unit_gini));
-						
-						let shifted_logit = (logit_val * transform.alpha) + transform.shift;
-						let new_unit = 1 / (1 + Math.exp(-shifted_logit));
-						
-						return valid_min + (new_unit * valid_range);
-					}
-					
-					return Math.min(valid_max, Math.max(valid_min, norm_gini));
-				}
+				width: 4320,
+				function: (local_index) => clamped_map[local_index]
 			});
 			
 			await Blacktraffic.yield();
@@ -543,50 +379,48 @@ global.gini_Eoscala = class {
 			return;
 		}
 		
-		for (let i = 0; i < years.length; i++) {
-			let year = years[i];
-			let source_path = `${src_dir}gini_clamped_${year}.png`;
-			let output_path = `${dest_dir}gini_${year}.png`;
-			
-			if (fs.existsSync(output_path) && !options.overwrite) continue;
-			if (!fs.existsSync(source_path)) continue;
-			
-			try {
-				// Eoscala -> Gapminder (Target is BRUSHED to prevent 1800 borders bleeding back into 1760)
-				if (year >= gapminder_interp[0] && year < gapminder_interp[1]) {
-					let fraction = (year - gapminder_interp[0]) / gapminder_gap;
-					console.log(`- [Interpolating] ${year} Eoscala -> Gapminder [Phase: ${fraction.toFixed(3)}]`);
-					
-					GeoPNG.linearInterpolation(source_path, gapminder_target_path, output_path, {
-						format: "float32",
-						fraction: fraction,
-						lower_value_threshold: 0,
-						threshold_fraction: 0
-					});
-					
-					// Gapminder -> SubNGini (Standard unbrushed interpolation)
-				} else if (year >= subngini_interp[0] && year < subngini_interp[1]) {
-					let fraction = (year - subngini_interp[0]) / subngini_gap;
-					console.log(`- [Interpolating] ${year} Gapminder -> SubNGini [Phase: ${fraction.toFixed(3)}]`);
-					
-					GeoPNG.linearInterpolation(source_path, subngini_target_path, output_path, {
-						format: "float32",
-						fraction: fraction,
-						lower_value_threshold: 0,
-						threshold_fraction: 0
-					});
-					
-					// Static Domains (1940, 2020, <1700, etc.) are purely copied directly
-				} else {
-					console.log(`- [Copying] Final processed format for ${year}`);
-					fs.copyFileSync(source_path, output_path);
+		await GeoPNG.processTimeseriesParallel({
+			concurrency: 4,
+			items: years,
+			name: "gini_Eoscala D_interpolateRasters",
+			handler: async (year) => {
+				let source_path = `${src_dir}gini_clamped_${year}.png`;
+				let output_path = `${dest_dir}gini_${year}.png`;
+				
+				if (fs.existsSync(output_path) && !options.overwrite) return;
+				if (!fs.existsSync(source_path)) return;
+				
+				try {
+					// Eoscala -> Gapminder (Target is BRUSHED to prevent 1800 borders bleeding back into 1760)
+					if (year >= gapminder_interp[0] && year < gapminder_interp[1]) {
+						let fraction = (year - gapminder_interp[0]) / gapminder_gap;
+						console.log(`- [Interpolating] ${year} Eoscala -> Gapminder [Phase: ${fraction.toFixed(3)}]`);
+						
+						GeoPNG.linearInterpolation(source_path, gapminder_target_path, output_path, {
+							format: "float32",
+							fraction: fraction,
+							lower_value_threshold: 0,
+							threshold_fraction: 0
+						});
+					} else if (year >= subngini_interp[0] && year < subngini_interp[1]) {
+						let fraction = (year - subngini_interp[0]) / subngini_gap;
+						console.log(`- [Interpolating] ${year} Gapminder -> SubNGini [Phase: ${fraction.toFixed(3)}]`);
+						
+						GeoPNG.linearInterpolation(source_path, subngini_target_path, output_path, {
+							format: "float32",
+							fraction: fraction,
+							lower_value_threshold: 0,
+							threshold_fraction: 0
+						});
+					} else {
+						console.log(`- [Copying] Final processed format for ${year}`);
+						fs.copyFileSync(source_path, output_path);
+					}
+				} catch (e) {
+					console.error(`[ERROR] Pass failed for year ${year}:`, e);
 				}
-			} catch (e) {
-				console.error(`[ERROR] Pass failed for year ${year}:`, e);
 			}
-			
-			await Blacktraffic.yield();
-		}
+		});
 		
 		console.log(`[D_interpolateRasters] Final Interpolation Pass Complete.`);
 	}

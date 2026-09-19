@@ -167,69 +167,25 @@ global.GDP_pc = class {
 			let output_path = `${this.intermediate_pc_estimates_folder}GDP_pc_${years[i]}.png`;
 			let current_iteration_max = 0;
 			
-			//--- STEP 1: Dasymetric Valid-Pixel Masking & Robust Statistics ---
-			let first_pass_valid = [];
-			let second_pass_valid = [];
+			//--- STEP 1 & 2: Dasymetric Valid-Pixel Masking & Robust Statistics via GeoPNG ---
+			let first_pass_min = Infinity;
+			let first_pass_max = -Infinity;
+			let total_pixels = second_pass_raster.data.length;
 			
-			for (let x = 0; x < second_pass_raster.data.length; x++) {
-				// Prevent uninhabited/ocean pixels from corrupting the variance range
+			for (let x = 0; x < total_pixels; x++) {
 				if (landarea_raster.data[x] > 0 && pop_raster.data[x] > 0) {
-					first_pass_valid.push(first_pass_raster.data[x]);
-					second_pass_valid.push(second_pass_raster.data[x]);
+					let fp_val = first_pass_raster.data[x];
+					if (fp_val < first_pass_min) first_pass_min = fp_val;
+					if (fp_val > first_pass_max) first_pass_max = fp_val;
 				}
 			}
+			let first_pass_range = (first_pass_max > first_pass_min) ? (first_pass_max - first_pass_min) : 1;
 			
-			let N = second_pass_valid.length;
-			let reg_min = 0, reg_max = 1, reg_range = 1;
-			let first_pass_min = 0, first_pass_max = 1, first_pass_range = 1;
-			let T_lower = 0, T_upper = 1, alpha = 0.01;
-			
-			if (N > 0) {
-				// Safe Min/Max loop to prevent V8 Stack Overflow on large arrays
-				first_pass_min = Infinity;
-				first_pass_max = -Infinity;
-				for (let j = 0; j < N; j++) {
-					if (first_pass_valid[j] < first_pass_min) first_pass_min = first_pass_valid[j];
-					if (first_pass_valid[j] > first_pass_max) first_pass_max = first_pass_valid[j];
-				}
-				first_pass_range = first_pass_max - first_pass_min;
-				if (first_pass_range === 0) first_pass_range = 1;
-				
-				// Second pass robust statistical bounds
-				second_pass_valid.sort((a, b) => a - b);
-				let sum = 0;
-				for (let j = 0; j < N; j++) sum += second_pass_valid[j];
-				let mean = sum / N;
-				let sq_sum = 0;
-				for (let j = 0; j < N; j++) sq_sum += Math.pow(second_pass_valid[j] - mean, 2);
-				let std = Math.sqrt(sq_sum / N);
-				
-				let Q1 = second_pass_valid[Math.floor(N * 0.25)];
-				let Q3 = second_pass_valid[Math.floor(N * 0.75)];
-				let IQR = Q3 - Q1;
-				
-				alpha = (IQR > 1e-5) ? IQR : ((std > 1e-5) ? std : 0.01);
-				T_lower = Q1 - (1.5 * alpha);
-				T_upper = Q3 + (1.5 * alpha);
-				
-				const regularise_val = (x) => {
-					if (x > T_upper) return T_upper + alpha * Math.log(1 + ((x - T_upper) / alpha));
-					else if (x < T_lower) return T_lower - alpha * Math.log(1 + ((T_lower - x) / alpha));
-					else return x;
-				};
-				
-				reg_min = regularise_val(second_pass_valid[0]);
-				reg_max = regularise_val(second_pass_valid[N - 1]);
-				reg_range = reg_max - reg_min;
-				if (reg_range === 0) reg_range = 1;
-			}
-			
-			// --- STEP 2: C1-Continuous Log-Tail Regularisation ---
-			const regularise = (x) => {
-				if (x > T_upper) return T_upper + alpha * Math.log(1 + ((x - T_upper) / alpha));
-				else if (x < T_lower) return T_lower - alpha * Math.log(1 + ((T_lower - x) / alpha));
-				else return x;
-			};
+			let second_pass_fractions = GeoPNG.regulariseLogTail({
+				data: second_pass_raster.data,
+				fraction_only: true,
+				valid_filter: (x) => landarea_raster.data[x] > 0 && pop_raster.data[x] > 0
+			});
 			
 			GeoPNG.saveNumberRasterImage({
 				file_path: output_path,
@@ -241,10 +197,7 @@ global.GDP_pc = class {
 					if (landarea_raster.data[local_index] === 0 || pop_raster.data[local_index] === 0) return 0;
 					
 					let first_pass_value = first_pass_raster.data[local_index];
-					let second_pass_value = second_pass_raster.data[local_index];
-					
-					let x_reg = regularise(second_pass_value);
-					let second_pass_fraction = (x_reg - reg_min) / reg_range;
+					let second_pass_fraction = second_pass_fractions[local_index];
 					
 					let result_value = first_pass_value + (first_pass_range * second_pass_fraction);
 					
@@ -272,27 +225,30 @@ global.GDP_pc = class {
 		//Declare local instance variables
 		let years = landuse_HYDE.sorted_hyde_years;
 		
-		//Iterate over all years
-		for (let i = 0; i < years.length; i++) {
-			let pc_path = `${this.intermediate_pc_estimates_folder}GDP_pc_${years[i]}.png`;
-			let pop_path = `${population_Stadester_Legacy.input_popc_folder}stadester_population_${years[i]}.png`;
-			let output_path = `${this.intermediate_gdp_folder}GDP_${years[i]}.png`;
-			
-			if (fs.existsSync(pc_path) && fs.existsSync(pop_path)) {
-				let pc_raster = GeoPNG.loadNumberRasterImage(pc_path, { format: "float32" });
-				let pop_raster = GeoPNG.loadNumberRasterImage(pop_path, { format: "int32" });
+		await GeoPNG.processTimeseriesParallel({
+			concurrency: 4,
+			items: years,
+			name: "GDP_pc E_generateGDPRasters",
+			handler: async (year) => {
+				let pc_path = `${this.intermediate_pc_estimates_folder}GDP_pc_${year}.png`;
+				let pop_path = `${population_Stadester_Legacy.input_popc_folder}stadester_population_${year}.png`;
+				let output_path = `${this.intermediate_gdp_folder}GDP_${year}.png`;
 				
-				GeoPNG.saveNumberRasterImage({
-					file_path: output_path,
-					format: "float32",
-					width: 4320,
-					height: 2160,
-					function: (local_index) => pc_raster.data[local_index]*pop_raster.data[local_index]
-				});
-				console.log(`- Saved total GDP: ${output_path}`);
-				await Blacktraffic.yield();
+				if (fs.existsSync(pc_path) && fs.existsSync(pop_path)) {
+					let pc_raster = GeoPNG.loadNumberRasterImage(pc_path, { format: "float32" });
+					let pop_raster = GeoPNG.loadNumberRasterImage(pop_path, { format: "int32" });
+					
+					GeoPNG.saveNumberRasterImage({
+						file_path: output_path,
+						format: "float32",
+						height: 2160,
+						width: 4320,
+						function: (local_index) => pc_raster.data[local_index]*pop_raster.data[local_index]
+					});
+					console.log(`- Saved total GDP: ${output_path}`);
+				}
 			}
-		}
+		});
 	}
 	
 	static async F_scaleGDPRastersToGlobal () {

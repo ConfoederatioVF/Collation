@@ -407,6 +407,33 @@
 	};
 	
 	/**
+	 * Creates an object from an array of keys and a parallel array of values.
+	 * @alias Object.fromArrays
+	 * 
+	 * @param {Array<string>} arg0_keys
+	 * @param {Array} arg1_values
+	 * @param {Object} [arg2_options]
+	 * 
+	 * @returns {Object}
+	 */
+	Object.fromArrays = function (arg0_keys, arg1_values, arg2_options) {
+		//Convert from parameters
+		let keys = (arg0_keys) ? arg0_keys : [];
+		let values = (arg1_values) ? arg1_values : [];
+		let options = (arg2_options) ? arg2_options : {};
+		
+		//Declare local instance variables
+		let return_obj = {};
+		
+		//Iterate over all keys
+		for (let i = 0; i < keys.length; i++)
+			return_obj[keys[i]] = values[i];
+		
+		//Return statement
+		return return_obj;
+	};
+	
+	/**
 	 * Generates and returns a random unique ID given a specific object.
 	 * @alias Object.generateRandomID
 	 * 

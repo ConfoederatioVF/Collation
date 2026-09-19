@@ -280,4 +280,26 @@
 		//Return statement
 		return (resolved === path.parse(resolved).root);
 	};
+	
+	/**
+	 * Resolves and parses a JSON file if given a file path, or passes an already parsed object through.
+	 * @alias File.loadJSON
+	 * 
+	 * @param {string|Object} arg0_file_path
+	 * @param {Object} [arg1_options]
+	 * 
+	 * @returns {Object}
+	 */
+	File.loadJSON = function (arg0_file_path, arg1_options) {
+		//Convert from parameters
+		let file_path = arg0_file_path;
+		let options = (arg1_options) ? arg1_options : {};
+		
+		//Return statement
+		if (typeof file_path === "string") {
+			let resolved_path = path.resolve(file_path);
+			return JSON.parse(fs.readFileSync(resolved_path, "utf8"));
+		}
+		return file_path;
+	};
 }

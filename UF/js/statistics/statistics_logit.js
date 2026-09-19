@@ -98,7 +98,7 @@
 		
 		//Iterate over all non-reference classes
 		for (let c = 1; c < C; c++) {
-			let hessian = Statistics.buildZeroMatrix(K, K);
+			let hessian = Array.createMatrix(K, K);
 			
 			//Accumulate Hessian; halved loop taking advantage of reflectional symmetry
 			for (let i = 0; i < N; i++) {
@@ -128,7 +128,7 @@
 			} catch (e) {
 				hessian_inv = mathjs.pinv(hessian);
 			}
-			hessian_inv = Statistics.unwrapMatrix(hessian_inv);
+			hessian_inv = Array.unwrapMatrix(hessian_inv);
 			
 			standard_errors[String(classes[c])] = hessian_inv.map((row, j) =>
 				Math.sqrt(Math.max(0, row[j]))
@@ -151,7 +151,7 @@
 	 */
 	Statistics.evaluateMultinomialModel = function (arg0_model, arg1_covariates_obj) {
 		//Convert from parameters
-		let model_obj = Statistics.loadModelObject(arg0_model);
+		let model_obj = File.loadJSON(arg0_model);
 		let { keys, X, Y } = arg1_covariates_obj;
 		
 		//Declare local instance variables
@@ -161,7 +161,7 @@
 		
 		//Iterate over all samples
 		for (let i = 0; i < X.length; i++) {
-			let local_features = Statistics.buildFeatureObject(keys, X[i]);
+			let local_features = Object.fromArrays(keys, X[i]);
 			let probabilities = Statistics.predictMultinomialProbabilities(local_features, model_obj);
 			let actual_class = String(Statistics.getClassLabel(Y, i));
 			let best_class = String(Statistics.argmaxMultinomialClass(probabilities, classes));
@@ -206,84 +206,11 @@
 		let output_file_path = arg0_output_file_path;
 		let options = (arg1_options) ? arg1_options : {};
 		
-		//Initialise options
-		if (!options.format) options.format = "int32";
-		if (!options.formatting_parameters) options.formatting_parameters = [];
-		if (!options.output_mode) options.output_mode = "class";
-		options.height = Math.returnSafeNumber(options.height, 2160);
-		options.width = Math.returnSafeNumber(options.width, 4320);
-		
-		//Declare local instance variables
-		let model_obj = Statistics.loadModelObject(options.model_obj);
-		let { rasters_obj, valid_keys } = Statistics.loadCovariateRasters(options.covariates_obj, {
-			formatting_parameters: options.formatting_parameters
+		//Return statement
+		return await Statistics.LearningFramework.predictRaster(output_file_path, options.model_obj, {
+			...options,
+			mode: "multinomial_logit"
 		});
-		
-		//Declare shared per-pixel probability helper
-		let get_probabilities = (local_index) => {
-			let local_values = valid_keys.map((local_key) => {
-				let local_raster = rasters_obj[local_key];
-				return (local_raster?.data) ? local_raster.data[local_index] : 0;
-			});
-			
-			//Return statement
-			return Statistics.predictMultinomialProbabilities(
-				Statistics.buildFeatureObject(valid_keys, local_values), model_obj
-			);
-		};
-		
-		let passes_guard = (local_index) => {
-			if (options.guard_clause)
-				return options.guard_clause(local_index, rasters_obj);
-			return true;
-		};
-		
-		//Write output file(s) from rasters_obj depending on output_mode
-		if (options.output_mode === "class") {
-			//Argmax class map
-			GeoPNG.saveNumberRasterImage({
-				file_path: output_file_path,
-				format: options.format,
-				width: options.width,
-				height: options.height,
-				function: (local_index) => {
-					if (!passes_guard(local_index)) return 0;
-					
-					//Return statement
-					return Statistics.argmaxMultinomialClass(
-						get_probabilities(local_index), model_obj.classes
-					);
-				}
-			});
-			
-			console.log(`Saved multinomial class raster for ${output_file_path}.`);
-		} else if (options.output_mode === "probability" || options.output_mode === "probabilities") {
-			//"probability" is "probabilities" restricted to a single target class
-			let is_single_class = (options.output_mode === "probability");
-			let target_classes = (is_single_class) ?
-				[String(options.class)] : model_obj.classes.map((c) => String(c));
-			
-			for (let c = 0; c < target_classes.length; c++) {
-				let local_class = target_classes[c];
-				let local_file_path = (is_single_class) ?
-					output_file_path : output_file_path.replace(/(\.[^.]+)$/, `_class_${local_class}$1`);
-				
-				GeoPNG.saveNumberRasterImage({
-					file_path: local_file_path,
-					format: "float32",
-					width: options.width,
-					height: options.height,
-					function: (local_index) => {
-						if (!passes_guard(local_index)) return 0;
-						
-						//Return statement
-						return get_probabilities(local_index)[local_class] || 0;
-					}
-				});
-				
-				console.log(`Saved multinomial probability raster (class ${local_class}) for ${local_file_path}.`);
-			}
-		}
 	};
 	
 	/**
@@ -302,63 +229,14 @@
 	 */
 	Statistics.loadMultinomialCovariates = async function (arg0_class_file_path, arg1_options) {
 		//Convert from parameters
-		let class_file_path = path.resolve(arg0_class_file_path);
+		let class_file_path = arg0_class_file_path;
 		let options = (arg1_options) ? arg1_options : {};
 		
-		//Initialise options
-		if (!options.class_format) options.class_format = "int32";
-		if (!options.formatting_parameters) options.formatting_parameters = [];
-		
-		//Declare local instance variables
-		let class_image = GeoPNG.loadNumberRasterImage(class_file_path, {
-			format: options.class_format
-		});
-		let class_data = class_image.data;
-		
-		//Load each input variable as a predictor
-		let { rasters_obj, valid_keys } = Statistics.loadCovariateRasters(options.covariates_obj, {
-			data_only: true,
-			formatting_parameters: options.formatting_parameters
-		});
-		let input_data = valid_keys.map((local_key) => rasters_obj[local_key]);
-		
-		//Transpose input data to match format [samples, features], discarding NaNs safely
-		let feature_count = input_data.length;
-		let sample_count = class_data.length;
-		let X = [];
-		let Y = [];
-		
-		//Iterate over sample_count
-		for (let i = 0; i < sample_count; i++) {
-			let is_valid = true;
-			let class_value = class_data[i];
-			
-			if (isNaN(class_value)) is_valid = false;
-			if (options.nodata_value !== undefined && class_value === options.nodata_value)
-				is_valid = false;
-			
-			//Iterate over feature_count
-			let local_row = new Array(feature_count);
-			
-			if (is_valid)
-				for (let x = 0; x < feature_count; x++) {
-					let local_value = input_data[x][i];
-					
-					if (isNaN(local_value)) {
-						is_valid = false;
-						break;
-					}
-					local_row[x] = local_value;
-				}
-			
-			if (is_valid) {
-				X.push(local_row);
-				Y.push([class_value]);
-			}
-		}
-		
 		//Return statement
-		return { keys: valid_keys, X: X, Y: Y };
+		return await Statistics.LearningFramework.extractImageDataset(class_file_path, {
+			...options,
+			mode: "multinomial_logit"
+		});
 	};
 	
 	/**
@@ -378,69 +256,11 @@
 	Statistics.loadPointMultinomialCovariates = async function (arg0_points, arg1_year, arg2_options) {
 		//Convert from parameters
 		let points_list = arg0_points;
-		let target_year = parseInt(arg1_year);
+		let target_year = arg1_year;
 		let options = (arg2_options) ? arg2_options : {};
 		
-		//Declare local instance variables
-		let covariates_year = (options.covariates_year !== undefined) ?
-			parseInt(options.covariates_year) : target_year;
-		let { rasters_obj: loaded_rasters, valid_keys } = Statistics.loadCovariateRasters(
-			options.covariates_obj, { year: covariates_year }
-		);
-		let x_matrix = [];
-		let y_matrix = [];
-		
-		//If no valid keys were loaded, return empty structural dataset
-		if (valid_keys.length === 0) return { keys: [], X: [], Y: [] };
-		
-		//Filter points that match the target year and have valid class targets
-		let year_points = points_list.filter((p) =>
-			parseInt(p.year) === target_year &&
-			p.target !== undefined && p.target !== null && !isNaN(p.target)
-		);
-		
-		for (let i = 0; i < year_points.length; i++) {
-			let current_point = year_points[i];
-			let coords = current_point.coords;
-			let lng_val = parseFloat(coords[0]);
-			let lat_val = parseFloat(coords[1]);
-			let is_valid = true;
-			let point_features = [];
-			
-			for (let j = 0; j < valid_keys.length; j++) {
-				let key = valid_keys[j];
-				let raster = loaded_rasters[key];
-				
-				let pixel_coords = (options.get_pixel_function) ?
-					options.get_pixel_function(lng_val, lat_val, raster.width, raster.height) :
-					Geospatiale.getEquirectangularCoordsPixel(lng_val, lat_val, { width: raster.width, height: raster.height });
-				
-				if (!pixel_coords) {
-					is_valid = false;
-					break;
-				}
-				
-				let cx = pixel_coords[0];
-				let cy = pixel_coords[1];
-				let pixel_index = cy*raster.width + cx;
-				let feature_value = raster.data[pixel_index];
-				
-				if (isNaN(feature_value)) {
-					is_valid = false;
-					break;
-				}
-				
-				point_features.push(feature_value);
-			}
-			
-			if (is_valid && point_features.length === valid_keys.length) {
-				x_matrix.push(point_features);
-				y_matrix.push([current_point.target]);
-			}
-		}
-		
 		//Return statement
-		return { keys: valid_keys, X: x_matrix, Y: y_matrix };
+		return await Statistics.LearningFramework.extractPointDataset(points_list, target_year, options);
 	};
 	
 	/**
@@ -463,8 +283,8 @@
 	 */
 	Statistics.multinomialLogitRegression = function (arg0_X, arg1_Y, arg2_options) {
 		//Convert from parameters
-		let X = Statistics.unwrapMatrix(arg0_X);
-		let Y = Statistics.unwrapMatrix(arg1_Y);
+		let X = Array.unwrapMatrix(arg0_X);
+		let Y = Array.unwrapMatrix(arg1_Y);
 		let options = (arg2_options) ? arg2_options : {};
 		
 		//Initialise options
@@ -502,7 +322,7 @@
 		
 		//Compute column-wise RMS scales to prevent scale-mismatch instability
 		let scales = new Array(K).fill(1);
-		let X_scaled = Statistics.buildZeroMatrix(N, K);
+		let X_scaled = Array.createMatrix(N, K);
 		
 		for (let j = 0; j < K; j++) {
 			let sum_sq = 0;
@@ -519,15 +339,15 @@
 				X_scaled[i][j] = X[i][j]/scales[j];
 		
 		//Initialise coefficients (CxK) and velocity; row 0 stays zeroed (reference class)
-		let beta = Statistics.buildZeroMatrix(C, K);
-		let velocity = Statistics.buildZeroMatrix(C, K);
+		let beta = Array.createMatrix(C, K);
+		let velocity = Array.createMatrix(C, K);
 		let converged = false;
 		let iterations_run = 0;
 		let log_likelihood = 0;
 		
 		//Main gradient descent loop
 		for (let iter = 0; iter < max_iterations; iter++) {
-			let gradient = Statistics.buildZeroMatrix(C, K);
+			let gradient = Array.createMatrix(C, K);
 			log_likelihood = 0;
 			
 			//Accumulate gradients over all samples
@@ -570,7 +390,7 @@
 		}
 		
 		//Convert scaled coefficients back to original covariate scale
-		let beta_orig = Statistics.buildZeroMatrix(C, K);
+		let beta_orig = Array.createMatrix(C, K);
 		
 		for (let c = 1; c < C; c++)
 			for (let j = 0; j < K; j++)

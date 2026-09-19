@@ -10,41 +10,6 @@
 		global.Statistics = {};
 	
 	/**
-	 * Zips a keys array and a parallel values array into a feature object.
-	 * @alias Statistics.buildFeatureObject
-	 *
-	 * @param {Array<string>} arg0_keys
-	 * @param {Array<number>} arg1_values
-	 *
-	 * @returns {Object}
-	 */
-	Statistics.buildFeatureObject = function (arg0_keys, arg1_values) {
-		//Declare local instance variables
-		let features_obj = {};
-		
-		//Iterate over all keys
-		for (let j = 0; j < arg0_keys.length; j++)
-			features_obj[arg0_keys[j]] = arg1_values[j];
-		
-		//Return statement
-		return features_obj;
-	};
-	
-	/**
-	 * Allocates a rows x cols zero-filled 2D array.
-	 * @alias Statistics.buildZeroMatrix
-	 *
-	 * @param {number} arg0_rows
-	 * @param {number} arg1_cols
-	 *
-	 * @returns {Array<Array<number>>}
-	 */
-	Statistics.buildZeroMatrix = function (arg0_rows, arg1_cols) {
-		//Return statement
-		return new Array(arg0_rows).fill(0).map(() => new Array(arg1_cols).fill(0));
-	};
-		
-	/**
 	 * Returns the class label at a given index of Y, unwrapping single-element arrays.
 	 * @alias Statistics.getClassLabel
 	 *
@@ -123,36 +88,5 @@
 		
 		//Return statement
 		return { rasters_obj: rasters_obj, valid_keys: valid_keys };
-	};
-	
-	/**
-	 * Resolves a model given either a JSON file path or an already-parsed object.
-	 * @alias Statistics.loadModelObject
-	 *
-	 * @param {string|Object} arg0_model
-	 *
-	 * @returns {Object}
-	 */
-	Statistics.loadModelObject = function (arg0_model) {
-		//Return statement
-		return (typeof arg0_model === "string") ?
-			JSON.parse(fs.readFileSync(path.resolve(arg0_model), "utf8")) : arg0_model;
-	};
-	
-	/**
-	 * Unwraps a mathjs Matrix to its underlying array, passing plain arrays through.
-	 * @alias Statistics.unwrapMatrix
-	 *
-	 * @param {Matrix|Array} arg0_matrix
-	 *
-	 * @returns {Array}
-	 */
-	Statistics.unwrapMatrix = function (arg0_matrix) {
-		//Return statement
-		try {
-			return arg0_matrix._data || arg0_matrix;
-		} catch (e) {
-			return arg0_matrix;
-		}
 	};
 }
