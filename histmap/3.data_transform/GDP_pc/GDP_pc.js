@@ -550,6 +550,10 @@ global.GDP_pc = class {
 		
 		//Initialise options
 		if (!options.exclude) options.exclude = [];
+		if (options.skip_training || options.use_existing_models || options.train === false) {
+			if (!options.exclude.includes("B")) options.exclude.push("B");
+			console.log(`[GDP_pc] Skipping Step B 2nd-pass OLS training (using existing models).`);
+		}
 		
 		//1. Generate GDP_pc rasters
 		if (!options.exclude.includes("A")) await this.A_generateGDP_pcRasters();

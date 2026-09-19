@@ -21,6 +21,9 @@
     static intermediate_ghsl_folder = `${this.bf}stadester_ghsl_rasters/`;
     static intermediate_popd_folder = `${this.bf}stadester_density_rasters/`;
     
+    static input_substrata_folder = `${h3}/population_Substrata.outlier_removal/rasters_4.interpolated_to_GHSL/`;
+    static input_substrata_fallback_folder = `${h3}/population_Substrata.outlier_removal/rasters_3.scaled_to_global/`;
+    
     static file_uud_cities = `${this.raw_folder}uud/processed_uud_cities.json`;
     static file_stadester_cities = `${this.raw_folder}uud/stadester_cities.json`;
     static file_flattened_stadester = `${this.raw_folder}uud/flattened_stadester_cities.json`;
@@ -367,6 +370,24 @@
       
       //Return statement
       return result;
+    }
+    
+    /**
+     * Resolves substrata raster path from population_Substrata.outlier_removal in float32.
+     * @alias population_Stadester.getSubstrataRasterPath
+     * 
+     * @param {number} arg0_year
+     * @param {Object} [arg1_options]
+     * 
+     * @returns {string}
+     */
+    static getSubstrataRasterPath (arg0_year, arg1_options) {
+      //Convert from parameters
+      let year = arg0_year;
+      let options = (arg1_options) ? arg1_options : {};
+      
+      //Return statement
+      return population_Stadester_rasters.getSubstrataRasterPath(year, options);
     }
     
     /**

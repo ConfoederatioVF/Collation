@@ -456,6 +456,10 @@ global.gini_OLS = class {
 		
 		//Initialise options
 		if (!options.exclude) options.exclude = [];
+		if (options.skip_training || options.use_existing_models || options.train === false) {
+			console.log(`[gini_OLS] Skipping training (using existing models).`);
+			return;
+		}
 		
 		if (!options.exclude.includes("A")) await this.A_trainEoscalaOLS(options);
 		if (!options.exclude.includes("B")) await this.B_trainGapminderOLS(options);

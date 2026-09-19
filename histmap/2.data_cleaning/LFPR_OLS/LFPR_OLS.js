@@ -364,6 +364,10 @@ global.LFPR_OLS = class {
 	static async processRasters (arg0_options) {
 		let options = (arg0_options) ? arg0_options : {};
 		if (!options.exclude) options.exclude = [];
+		if (options.skip_training || options.use_existing_models || options.train === false) {
+			if (!options.exclude.includes("A")) options.exclude.push("A");
+			console.log(`[LFPR_OLS] Skipping Step A training (using existing models).`);
+		}
 		
 		if (!options.exclude.includes("A")) await this.A_trainOLSModels(options);
 		if (!options.exclude.includes("B")) await this.B_generateOLSRasters();

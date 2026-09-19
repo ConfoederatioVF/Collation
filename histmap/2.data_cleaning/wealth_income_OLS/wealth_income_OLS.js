@@ -190,6 +190,11 @@ global.wealth_income_OLS = class {
 		
 		//Initialise options
 		if (!options.exclude) options.exclude = [];
+		if (options.skip_training || options.use_existing_models || options.train === false) {
+			if (!options.exclude.includes("A")) options.exclude.push("A");
+			if (!options.exclude.includes("B")) options.exclude.push("B");
+			console.log(`[wealth_income_OLS] Skipping Steps A & B training (using existing models).`);
+		}
 		
 		//1. Train annual OLS Variable Models
 		if (!options.exclude.includes("A")) await this.A_trainWIDModels(options);

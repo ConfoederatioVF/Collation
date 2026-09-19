@@ -248,4 +248,22 @@ global.l4p = "./livemap/4.view/politics/";
 	});
 
   trackPerformance();
+  
+  //Register lifecycle abort hooks for child workers and tasks
+  if (typeof window !== "undefined") {
+    window.addEventListener("beforeunload", () => {
+      if (global.GeoPNG && typeof GeoPNG.terminateAllWorkers === "function")
+        GeoPNG.terminateAllWorkers();
+    });
+    window.addEventListener("unload", () => {
+      if (global.GeoPNG && typeof GeoPNG.terminateAllWorkers === "function")
+        GeoPNG.terminateAllWorkers();
+    });
+  }
+  if (typeof process !== "undefined") {
+    process.on("exit", () => {
+      if (global.GeoPNG && typeof GeoPNG.terminateAllWorkers === "function")
+        GeoPNG.terminateAllWorkers();
+    });
+  }
 }

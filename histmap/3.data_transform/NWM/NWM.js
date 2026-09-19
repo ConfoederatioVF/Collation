@@ -140,15 +140,25 @@
       let gdp_ppp_ols_options = options.gdp_ppp_ols || {};
       let gdp_ppp_options = options.gdp_ppp || {};
       let gdp_ppp_sedac_options = { exclude: ["A"], ...(options.gdp_ppp_sedac || {}) };
+      let skip_training = (options.skip_training || options.use_existing_models || options.train === false);
       
       //Function body
       console.log(`[NWM] === Step C: Processing Eoscala GDP (PPP & Nominal) ===`);
       if (global.GDP_PPP_SEDAC) await GDP_PPP_SEDAC.processRasters(gdp_ppp_sedac_options);
       if (global.GDP_nominal_SEDAC) await GDP_nominal_SEDAC.processRasters(gdp_nom_sedac_options);
       
-      if (global.GDP_PPP_OLS) await GDP_PPP_OLS.processRasters(gdp_ppp_ols_options);
+      if (!skip_training) {
+        if (global.GDP_PPP_OLS) await GDP_PPP_OLS.processRasters(gdp_ppp_ols_options);
+      } else {
+        console.log(`[NWM] Step C: Skipping GDP_PPP_OLS training (using existing models).`);
+      }
       if (global.GDP_PPP) await GDP_PPP.processRasters(gdp_ppp_options);
-      if (global.GDP_nominal_OLS) await GDP_nominal_OLS.processRasters(gdp_nom_ols_options);
+      
+      if (!skip_training) {
+        if (global.GDP_nominal_OLS) await GDP_nominal_OLS.processRasters(gdp_nom_ols_options);
+      } else {
+        console.log(`[NWM] Step C: Skipping GDP_nominal_OLS training (using existing models).`);
+      }
       if (global.GDP_nominal) await GDP_nominal.processRasters(gdp_nom_options);
     }
     
@@ -159,6 +169,8 @@
      * @param {Object} [arg0_options]
      *  @param {Object} [arg0_options.gdp_pc]
      *  @param {Object} [arg0_options.gdp_ppp_pc]
+     *  @param {boolean} [arg0_options.skip_training=false]
+     *  @param {boolean} [arg0_options.use_existing_models=false]
      */
     static async D_processGDPPerCapita (arg0_options) {
       //Convert from parameters
@@ -167,6 +179,18 @@
       //Declare local instance variables
       let gdp_pc_options = options.gdp_pc || {};
       let gdp_ppp_pc_options = options.gdp_ppp_pc || {};
+      let skip_training = (options.skip_training || options.use_existing_models || options.train === false);
+      
+      if (skip_training) {
+        if (!gdp_pc_options.exclude) gdp_pc_options.exclude = [];
+        if (!gdp_pc_options.exclude.includes("B")) gdp_pc_options.exclude.push("B");
+        gdp_pc_options.skip_training = true;
+        
+        if (!gdp_ppp_pc_options.exclude) gdp_ppp_pc_options.exclude = [];
+        if (!gdp_ppp_pc_options.exclude.includes("B")) gdp_ppp_pc_options.exclude.push("B");
+        gdp_ppp_pc_options.skip_training = true;
+        console.log(`[NWM] Step D: Skipping GDP_pc & GDP_PPP_pc regression training (using existing models).`);
+      }
       
       //Function body
       console.log(`[NWM] === Step D: Processing Per Capita GDP ===`);
@@ -205,6 +229,8 @@
      * @param {Object} [arg0_options]
      *  @param {Object} [arg0_options.gini_eoscala]
      *  @param {Object} [arg0_options.gini_ols]
+     *  @param {boolean} [arg0_options.skip_training=false]
+     *  @param {boolean} [arg0_options.use_existing_models=false]
      */
     static async F_processGini (arg0_options) {
       //Convert from parameters
@@ -213,10 +239,15 @@
       //Declare local instance variables
       let gini_eoscala_options = options.gini_eoscala || {};
       let gini_ols_options = options.gini_ols || {};
+      let skip_training = (options.skip_training || options.use_existing_models || options.train === false);
       
       //Function body
       console.log(`[NWM] === Step F: Processing GINI Inequality ===`);
-      if (global.gini_OLS) await gini_OLS.processRasters(gini_ols_options);
+      if (!skip_training) {
+        if (global.gini_OLS) await gini_OLS.processRasters(gini_ols_options);
+      } else {
+        console.log(`[NWM] Step F: Skipping Gini OLS training (using existing models).`);
+      }
       if (global.gini_Eoscala) await gini_Eoscala.processRasters(gini_eoscala_options);
     }
     
@@ -228,12 +259,15 @@
      *  @param {Object} [arg0_options.wealth_income]
      *  @param {Object} [arg0_options.wealth_income_ols]
      *  @param {Object} [arg0_options.wealth_income_wid]
+     *  @param {boolean} [arg0_options.skip_training=false]
+     *  @param {boolean} [arg0_options.use_existing_models=false]
      */
     static async G_processWealthIncome (arg0_options) {
       //Convert from parameters
       let options = (arg0_options) ? arg0_options : {};
       
       //Declare local instance variables
+      let skip_training = (options.skip_training || options.use_existing_models || options.train === false);
       let wealth_income_ols_options = options.wealth_income_ols || {};
       let wealth_income_options = options.wealth_income || {};
       let wealth_income_wid_options = options.wealth_income_wid || {};
@@ -241,7 +275,11 @@
       //Function body
       console.log(`[NWM] === Step G: Processing Wealth & Income (WID) ===`);
       if (global.wealth_income_WID) await wealth_income_WID.processRasters(wealth_income_wid_options);
-      if (global.wealth_income_OLS) await wealth_income_OLS.processRasters(wealth_income_ols_options);
+      if (!skip_training) {
+        if (global.wealth_income_OLS) await wealth_income_OLS.processRasters(wealth_income_ols_options);
+      } else {
+        console.log(`[NWM] Step G: Skipping wealth_income_OLS training (using existing models).`);
+      }
       if (global.wealth_income) await wealth_income.processRasters(wealth_income_options);
     }
     
@@ -254,6 +292,8 @@
      *  @param {Object} [arg0_options.age_sex_hmd]
      *  @param {Object} [arg0_options.age_sex_unwpp]
      *  @param {Object} [arg0_options.age_sex_worldpop]
+     *  @param {boolean} [arg0_options.skip_training=false]
+     *  @param {boolean} [arg0_options.use_existing_models=false]
      */
     static async H_processAgeSex (arg0_options) {
       //Convert from parameters
@@ -264,6 +304,15 @@
       let age_sex_options = options.age_sex || {};
       let age_sex_unwpp_options = options.age_sex_unwpp || {};
       let age_sex_worldpop_options = options.age_sex_worldpop || {};
+      let skip_training = (options.skip_training || options.use_existing_models || options.train === false);
+      
+      if (skip_training) {
+        if (!age_sex_options.exclude) age_sex_options.exclude = [];
+        if (!age_sex_options.exclude.includes("B")) age_sex_options.exclude.push("B");
+        if (!age_sex_options.exclude.includes("C")) age_sex_options.exclude.push("C");
+        age_sex_options.skip_training = true;
+        console.log(`[NWM] Step H: Skipping Age-Sex Multinomial Logit training (using existing models).`);
+      }
       
       //Function body
       console.log(`[NWM] === Step H: Processing Velkscala Age-Sex Population Pyramids ===`);
@@ -282,6 +331,8 @@
      *  @param {Object} [arg0_options.births_deaths_kummu]
      *  @param {Object} [arg0_options.births_deaths_ols]
      *  @param {Object} [arg0_options.births_deaths_unwpp]
+     *  @param {boolean} [arg0_options.skip_training=false]
+     *  @param {boolean} [arg0_options.use_existing_models=false]
      */
     static async I_processBirthsDeaths (arg0_options) {
       //Convert from parameters
@@ -292,13 +343,18 @@
       let births_deaths_kummu_options = options.births_deaths_kummu || {};
       let births_deaths_ols_options = options.births_deaths_ols || {};
       let births_deaths_unwpp_options = options.births_deaths_unwpp || {};
+      let skip_training = (options.skip_training || options.use_existing_models || options.train === false);
       
       //Function body
       console.log(`[NWM] === Step I: Processing Crude Births & Deaths ===`);
       if (global.births_deaths_Kummu) await births_deaths_Kummu.processRasters(births_deaths_kummu_options);
       if (global.births_deaths_UNWPP) await births_deaths_UNWPP.processRasters(births_deaths_unwpp_options);
       if (global.births_deaths_HMD) await births_deaths_HMD.processRasters(births_deaths_hmd_options);
-      if (global.births_deaths_OLS) await births_deaths_OLS.processRasters(births_deaths_ols_options);
+      if (!skip_training) {
+        if (global.births_deaths_OLS) await births_deaths_OLS.processRasters(births_deaths_ols_options);
+      } else {
+        console.log(`[NWM] Step I: Skipping births_deaths_OLS training (using existing models).`);
+      }
     }
     
     /**
@@ -312,6 +368,8 @@
      *  @param {Object} [arg0_options.professions]
      *  @param {Object} [arg0_options.professions_ilo]
      *  @param {Object} [arg0_options.professions_olivetti]
+     *  @param {boolean} [arg0_options.skip_training=false]
+     *  @param {boolean} [arg0_options.use_existing_models=false]
      */
     static async J_processProfessions (arg0_options) {
       //Convert from parameters
@@ -324,12 +382,25 @@
       let professions_ilo_options = options.professions_ilo || {};
       let professions_olivetti_options = options.professions_olivetti || {};
       let professions_options = options.professions || {};
+      let skip_training = (options.skip_training || options.use_existing_models || options.train === false);
+      
+      if (skip_training) {
+        if (!professions_options.exclude) professions_options.exclude = [];
+        if (!professions_options.exclude.includes("B")) professions_options.exclude.push("B");
+        if (!professions_options.exclude.includes("C")) professions_options.exclude.push("C");
+        professions_options.skip_training = true;
+        console.log(`[NWM] Step J: Skipping Professions Multinomial Logit training (using existing models).`);
+      }
       
       //Function body
       console.log(`[NWM] === Step J: Processing Labour Force & Professions ===`);
       if (global.LFPR_ILO) await LFPR_ILO.processRasters(lfpr_ilo_options);
       if (global.LFPR_Olivetti) await LFPR_Olivetti.processRasters(lfpr_olivetti_options);
-      if (global.LFPR_OLS) await LFPR_OLS.processRasters(lfpr_ols_options);
+      if (!skip_training) {
+        if (global.LFPR_OLS) await LFPR_OLS.processRasters(lfpr_ols_options);
+      } else {
+        console.log(`[NWM] Step J: Skipping LFPR_OLS training (using existing models).`);
+      }
       
       if (global.professions_ILO) await professions_ILO.processRasters(professions_ilo_options);
       if (global.professions_Olivetti) await professions_Olivetti.processRasters(professions_olivetti_options);
@@ -343,7 +414,9 @@
      * 
      * @param {Object} [arg0_options]
      *  @param {Array<string>} [arg0_options.exclude] - Step letters or stage names to skip e.g. ["A", "C", "stadester"]
+     *  @param {boolean} [arg0_options.skip_training=false] - If true, skips regression/model training and reuses existing models.
      *  @param {Array<string>} [arg0_options.stages] - Specific steps or stage names to execute exclusively
+     *  @param {boolean} [arg0_options.use_existing_models=false] - Alias for skip_training.
      */
     static async processRasters (arg0_options) {
       //Convert from parameters
@@ -351,6 +424,7 @@
       
       //Initialise options
       if (!options.exclude) options.exclude = [];
+      if (options.use_existing_models) options.skip_training = true;
       
       //Declare local instance variables
       let should_run = function (step_letter, stage_name) {
@@ -362,7 +436,7 @@
       };
       
       //Function body
-      console.log(`[NWM] Launching Master NWM Pipeline...`);
+      console.log(`[NWM] Launching Master NWM Pipeline${options.skip_training ? " (Skip Training / Reusing Existing Models)" : ""}...`);
       this.loadDependencies(options);
       
       if (should_run("A", "substrata")) await this.A_processSubstrata(options);

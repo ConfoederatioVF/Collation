@@ -494,6 +494,11 @@ global.professions = class {
 	static async processRasters (arg0_options) {
 		let options = (arg0_options) ? arg0_options : {};
 		if (!options.exclude) options.exclude = [];
+		if (options.skip_training || options.use_existing_models || options.train === false) {
+			if (!options.exclude.includes("B")) options.exclude.push("B");
+			if (!options.exclude.includes("C")) options.exclude.push("C");
+			console.log(`[professions] Skipping Steps B & C training (using existing models).`);
+		}
 		
 		if (!options.exclude.includes("A")) await this.A_standardiseTargets();
 		if (!options.exclude.includes("B")) await this.B_trainMultinomialLogitModels(options);

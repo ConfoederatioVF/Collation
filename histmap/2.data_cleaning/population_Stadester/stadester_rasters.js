@@ -84,14 +84,59 @@
   };
   
   /**
-   * Generates Stadestér Base raster for a single year in float32 format.
-   * @alias population_Stadester_rasters.generateStadesterBaseRaster
+   * Resolves the substrata raster file path from population_Substrata.outlier_removal in float32.
+   * Checks intermediate_rasters_interpolated (1800-2025), then intermediate_rasters_scaled_to_global (pre-1800),
+   * with legacy fallback to intermediate_rasters_geopng_int32.
+   * @alias population_Stadester_rasters.getSubstrataRasterPath
    * 
    * @param {number} arg0_year
    * @param {Object} [arg1_options]
+   *  @param {string} [arg1_options.input_substrata_folder]
+   *  @param {string} [arg1_options.substrata_folder]
    * 
-   * @returns {Promise<string>} output file path
+   * @returns {string} substrata raster file path
    */
+  population_Stadester_rasters.getSubstrataRasterPath = function (arg0_year, arg1_options) {
+    //Convert from parameters
+    let year = parseInt(arg0_year);
+    let options = (arg1_options) ? arg1_options : {};
+    
+    //Declare local instance variables
+    let custom_folder = options.input_substrata_folder || options.substrata_folder;
+    let default_folder = (typeof population_Substrata_outlier_removal !== "undefined" && population_Substrata_outlier_removal.intermediate_rasters_interpolated) ?
+      population_Substrata_outlier_removal.intermediate_rasters_interpolated :
+      `${h3}/population_Substrata.outlier_removal/rasters_4.interpolated_to_GHSL/`;
+    let fallback_folder = (typeof population_Substrata_outlier_removal !== "undefined" && population_Substrata_outlier_removal.intermediate_rasters_scaled_to_global) ?
+      population_Substrata_outlier_removal.intermediate_rasters_scaled_to_global :
+      `${h3}/population_Substrata.outlier_removal/rasters_3.scaled_to_global/`;
+    let file_path;
+    let legacy_folder = (typeof population_Substrata_outlier_removal !== "undefined" && population_Substrata_outlier_removal.intermediate_rasters_geopng_int32) ?
+      population_Substrata_outlier_removal.intermediate_rasters_geopng_int32 :
+      `${h3}/population_Substrata.outlier_removal/rasters_5.geopng_int32/`;
+    
+    //1. Check custom folder if provided
+    if (custom_folder) {
+      file_path = path.join(custom_folder, `popc_${year}.png`);
+      if (fs.existsSync(file_path)) return file_path;
+    }
+    
+    //2. Check primary float32 interpolated folder (1800-2025)
+    file_path = path.join(default_folder, `popc_${year}.png`);
+    if (fs.existsSync(file_path)) return file_path;
+    
+    //3. Check fallback float32 scaled_to_global folder (pre-1800 and general)
+    file_path = path.join(fallback_folder, `popc_${year}.png`);
+    if (fs.existsSync(file_path)) return file_path;
+    
+    //4. Check legacy geopng_int32 folder
+    file_path = path.join(legacy_folder, `popc_${year}.png`);
+    if (fs.existsSync(file_path)) return file_path;
+    
+    //5. Return primary path by default even if not yet on disk
+    //Return statement
+    return path.join(default_folder, `popc_${year}.png`);
+  };
+  
   /**
    * Generates Stadestér Base raster for a single year in float32 format.
    * @alias population_Stadester_rasters.generateStadesterBaseRaster
@@ -116,17 +161,8 @@
     let substrata_file_path;
     let substrata_raster;
     
-    //Resolve substrata path: GHS_POP from 1975, otherwise HYDE popc_
-    if (year >= 1975) {
-      substrata_file_path = `${h1}/population_GHSL/population_rasters/2.rasters/GHS_POP_${year}.png`;
-    } else {
-      substrata_file_path = `${h2}/landuse_HYDE/rasters_scaled_to_global/popc_${year}.png`;
-      if (!fs.existsSync(substrata_file_path)) {
-        let hyde_name = (typeof landuse_HYDE !== "undefined" && landuse_HYDE._getHYDEYearName) ?
-          landuse_HYDE._getHYDEYearName(year) : `${Math.abs(year)}${year >= 0 ? "AD" : "BC"}`;
-        substrata_file_path = `${h2}/landuse_HYDE/rasters/popc_${hyde_name}_number.png`;
-      }
-    }
+    //Resolve substrata path from population_Substrata.outlier_removal in float32
+    substrata_file_path = population_Stadester_rasters.getSubstrataRasterPath(year, options);
     
     if (fs.existsSync(substrata_file_path))
       substrata_raster = GeoPNG.loadNumberRasterImage(substrata_file_path, { format: "float32" });
@@ -300,18 +336,10 @@
     
     //Declare local instance variables
     let output_file_path = path.join(options.input_rurc_folder || `${h2}/population_Stadester/stadester_rural_rasters/`, `stadester_rural_${year}.png`);
-    let substrata_file_path = (year >= 1975) ?
-      `${h1}/population_GHSL/population_rasters/2.rasters/GHS_POP_${year}.png` :
-      `${h2}/landuse_HYDE/rasters_scaled_to_global/popc_${year}.png`;
+    let substrata_file_path = population_Stadester_rasters.getSubstrataRasterPath(year, options);
     let substrata_raster = null;
     let urban_file_path = path.join(options.input_urbc_folder || `${h2}/population_Stadester/stadester_urban_rasters/`, `stadester_urban_${year}.png`);
     let urban_raster = null;
-    
-    if (!fs.existsSync(substrata_file_path) && year < 1975) {
-      let hyde_name = (typeof landuse_HYDE !== "undefined" && landuse_HYDE._getHYDEYearName) ?
-        landuse_HYDE._getHYDEYearName(year) : `${Math.abs(year)}${year >= 0 ? "AD" : "BC"}`;
-      substrata_file_path = `${h2}/landuse_HYDE/rasters/popc_${hyde_name}_number.png`;
-    }
     
     if (options.substrata_raster) {
       substrata_raster = options.substrata_raster;

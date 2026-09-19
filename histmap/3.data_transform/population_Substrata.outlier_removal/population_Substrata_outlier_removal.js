@@ -397,7 +397,7 @@ global.population_Substrata_outlier_removal = class {
 					GeoPNG.linearInterpolation(local_from_path, to_path, local_output_path, {
 						format: "float32",
 						fraction,
-						upper_value_threshold: 256, //RGBA limit
+						upper_value_threshold: 1024, //RGBA limit
 					});
 					console.log(`- (1st-pass) Finished interpolating ${local_from_path} to GHSL.`);
 				} else if (current_year >= GHSL2_domain[0] && current_year < GHSL2_domain[1]) {
@@ -406,7 +406,7 @@ global.population_Substrata_outlier_removal = class {
 					GeoPNG.linearInterpolation(local_from_path, to_path, local_output_path, {
 						format: "float32",
 						fraction,
-						upper_value_threshold: 256, //RGBA limit
+						upper_value_threshold: 4096, //RGBA limit
 						threshold_fraction
 					});
 					console.log(`- (2nd-pass) Finished interpolating ${local_from_path} to GHSL.`);

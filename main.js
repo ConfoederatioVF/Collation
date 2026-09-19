@@ -51,6 +51,7 @@ let win;
     });
     win.webContents.on("render-process-gone", (event, detailed) => {
       console.error("[RENDER PROCESS GONE]", detailed);
+      if (process.platform !== "darwin") app.quit();
     });
     
     win.loadFile("index.html");
@@ -80,6 +81,7 @@ let win;
     win.on("closed", function () {
       clearInterval(title_update_interval);
       win = null;
+      if (process.platform !== "darwin") app.quit();
     });
     
     //<a href> handling
