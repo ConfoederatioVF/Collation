@@ -3,7 +3,7 @@
   if (!global.population_Stadester_rasters) global.population_Stadester_rasters = {};
   
   /**
-   * Converts decimal coordinates [lat, lng] to equirectangular pixel coordinates with -2 y-offset fix.
+   * Converts decimal coordinates [lat, lng] to equirectangular pixel coordinates with -1 y-offset fix.
    * @alias population_Stadester_rasters.getCoordsPixel
    * 
    * @param {Array<number>} arg0_coords
@@ -24,7 +24,7 @@
     let width = options.width || 4320;
     let x;
     let y;
-    let y_offset = (cfg && cfg.stadester_y_offset !== undefined) ? cfg.stadester_y_offset : -2;
+    let y_offset = (cfg && cfg.stadester_y_offset !== undefined) ? cfg.stadester_y_offset : -1;
     
     //Guard clauses
     if (!coords || isNaN(coords[0]) || isNaN(coords[1])) return [0, 0];

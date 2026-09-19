@@ -554,16 +554,78 @@
   };
   
   /**
-   * Flattens agglomerations by subtracting city proper populations from metropolitan totals.
-   * @alias population_Stadester_uud.flattenStadesterMetros
+   * Removes duplicate city entries sharing coordinates and merges their historical populations.
+   * @alias population_Stadester_uud.removeStadesterDuplicates
    * 
    * @param {Object} arg0_stadester_obj
    * 
    * @returns {Object}
    */
-  population_Stadester_uud.flattenStadesterMetros = function (arg0_stadester_obj) {
+  population_Stadester_uud.removeStadesterDuplicates = function (arg0_stadester_obj) {
     //Convert from parameters
     let stadester_obj = arg0_stadester_obj;
+    
+    //Declare local instance variables
+    let grouped = {};
+    let result = {};
+    
+    for (let key in stadester_obj) {
+      let city = stadester_obj[key];
+      if (!city || !Array.isArray(city.coords) || city.coords.length < 2) continue;
+      let lat = Number(city.coords[0]).toFixed(3);
+      let lng = Number(city.coords[1]).toFixed(3);
+      
+      let is_agg = (city.is_agglomeration || (city.name && (city.name.toLowerCase().includes("agglomeration") || city.name.toLowerCase().includes("greater")))) ? "agg" : "city";
+      let group_key = `${lat},${lng},${is_agg}`;
+      
+      if (!grouped[group_key]) grouped[group_key] = [];
+      grouped[group_key].push({ key: key, city: city });
+    }
+    
+    for (let group_key in grouped) {
+      let group = grouped[group_key];
+      group.sort((a, b) => {
+        let num_years_a = (a.city && a.city.population) ? Object.keys(a.city.population).length : 0;
+        let num_years_b = (b.city && b.city.population) ? Object.keys(b.city.population).length : 0;
+        return num_years_b - num_years_a;
+      });
+      
+      let best = group[0].city;
+      if (!best || !best.population) continue;
+      
+      for (let i = 1; i < group.length; i++) {
+        let duplicate = group[i].city;
+        if (!duplicate || !duplicate.population) continue;
+        for (let pop_key in duplicate.population) {
+          if (!best.population.hasOwnProperty(pop_key))
+            best.population[pop_key] = duplicate.population[pop_key];
+        }
+      }
+      
+      result[group[0].key] = best;
+    }
+    
+    //Return statement
+    return result;
+  };
+
+  /**
+   * Flattens agglomerations by subtracting city proper populations from metropolitan totals.
+   * @alias population_Stadester_uud.flattenStadesterMetros
+   * 
+   * @param {Object} arg0_stadester_obj
+   * @param {boolean} [arg1_do_not_flatten_metros=false]
+   * 
+   * @returns {Object}
+   */
+  population_Stadester_uud.flattenStadesterMetros = function (arg0_stadester_obj, arg1_do_not_flatten_metros) {
+    //Convert from parameters
+    let stadester_obj = arg0_stadester_obj;
+    let do_not_flatten_metros = arg1_do_not_flatten_metros;
+    
+    //Deduplicate and merge population first
+    stadester_obj = population_Stadester_uud.removeStadesterDuplicates(stadester_obj);
+    if (do_not_flatten_metros) return stadester_obj;
     
     //Declare local instance variables
     let all_cities = Object.keys(stadester_obj);
