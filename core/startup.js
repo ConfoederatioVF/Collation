@@ -10,13 +10,54 @@ global.net = require("net");
 global.path = require("path");
 global.util = require("util");
 
+//Save node require
+global.node_require = require;
+
+//Safeguard Node.js require against AMD loader pollution (e.g. Monaco define.amd breaking UMD modules like decimal.js in mathjs)
+{
+  let Module = require("module");
+  let original_require = Module.prototype.require;
+
+  Module.prototype.require = function () {
+    //Declare local instance variables
+    let saved_amd;
+    let saved_define;
+
+    if (typeof global.define !== "undefined" && global.define && global.define.amd) {
+      saved_amd = global.define.amd;
+      saved_define = global.define;
+      try { delete global.define.amd; } catch (e) {}
+      global.define = undefined;
+      if (typeof window !== "undefined") {
+        try { delete window.define.amd; } catch (e) {}
+        window.define = undefined;
+      }
+    }
+
+    //Function body
+    try {
+      return original_require.apply(this, arguments);
+    } finally {
+      if (saved_define !== undefined) {
+        global.define = saved_define;
+        if (saved_amd !== undefined) global.define.amd = saved_amd;
+        if (typeof window !== "undefined") {
+          window.define = saved_define;
+          if (saved_amd !== undefined) window.define.amd = saved_amd;
+        }
+      }
+    }
+  };
+}
+
 //Helper for lazy loading heavy non-startup modules on demand
 function lazyGlobal (prop_name, require_path, sub_prop) {
   let cached;
   Object.defineProperty(global, prop_name, {
     get: function () {
       if (!cached) {
-        let mod = require(require_path);
+        let node_req = global.node_require || require;
+        let mod = node_req(require_path);
         cached = (sub_prop) ? mod[sub_prop] : mod;
       }
       return cached;
