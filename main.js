@@ -1,5 +1,11 @@
+//Enable V8 bytecode compilation cache for instant cold module loading
+try {
+  let { enableCompileCache } = require("node:module");
+  if (typeof enableCompileCache === "function") enableCompileCache();
+} catch (e) {}
+
 //Import libraries
-let { app, BrowserWindow, dialog, ipcMain, session, shell } = require("electron");
+let { app, BrowserWindow, dialog, ipcMain, Menu, session, shell } = require("electron");
 let discord = require("@xhayper/discord-rpc");
 let fs = require("fs");
 let path = require("path");
@@ -86,25 +92,6 @@ let win;
       return { action: "deny" };
     });
     
-    //Get the default session
-    try {
-      let default_session = session.defaultSession;
-      
-      //Set up CORS settings for the default session
-      default_session.webRequest.onHeadersReceived((details, callback) => {
-        callback({
-          responseHeaders: {
-            ...details.responseHeaders,
-            'Access-Control-Allow-Origin': ['*'],
-            'Access-Control-Allow-Methods': ['GET', 'POST', 'OPTIONS', 'PUT', 'PATCH', 'DELETE'],
-            'Access-Control-Allow-Headers': ['Content-Type', 'Authorization']
-          }
-        });
-      });
-    } catch (e) {
-      console.warn(e);
-    }
-    
     //Return statement
     return win;
   }
@@ -114,20 +101,27 @@ let win;
 {
   Discord_initRPC = async function () {
     try {
-      await rpc.login();
+      //Strict 3-second timeout so offline or unresponsive Discord never stalls startup
+      let login_promise = rpc.login();
+      let timeout_promise = new Promise((_, reject) => setTimeout(() => reject(new Error("Discord RPC timeout")), 3000));
+      
+      await Promise.race([login_promise, timeout_promise]);
       is_rpc_ready = true;
       
-      //Set initial activity
-      let discord_config_obj = JSON.parse(fs.readFileSync(discord_config_path, "utf8"));
-      
-      Discord_setRPCActivity({
-        startTimestamp: Date.now(),
+      if (fs.existsSync(discord_config_path)) {
+        let discord_config_obj = JSON.parse(fs.readFileSync(discord_config_path, "utf8"));
         
-        ...discord_config_obj.default_activity,
-        ...discord_config_obj.onlaunch_activity
-      });
-    } catch (e) { console.warn(`Failed to connect to Discord RPC:`, e); }
-  }
+        Discord_setRPCActivity({
+          startTimestamp: Date.now(),
+          
+          ...discord_config_obj.default_activity,
+          ...discord_config_obj.onlaunch_activity
+        });
+      }
+    } catch (e) {
+      console.warn(`Failed to connect to Discord RPC:`, e.message || e);
+    }
+  };
   
   Discord_setRPCActivity = function (arg0_activity) {
     //Convert from parameters
@@ -135,48 +129,52 @@ let win;
     
     if (!is_rpc_ready) return;
     rpc.user?.setActivity(activity);
-  }
+  };
 }
 
 //App handling
 {
   app.commandLine.appendSwitch("disable-site-isolation-trials");
+  app.commandLine.appendSwitch("disk-cache-size", "67108864"); //64 MB disk cache cap
+  app.commandLine.appendSwitch("media-cache-size", "67108864");
   app.commandLine.appendSwitch("enable-features", "SharedArrayBuffer");
-  app.commandLine.appendSwitch('js-flags', '--max-old-space-size=262144 --expose-gc');
+  app.commandLine.appendSwitch("js-flags", "--max-old-space-size=262144 --expose-gc");
   
   //Launch app when ready
   app.whenReady().then(() => {
     remote_main.initialize();
     
+    //Prune bloated disk cache if needed
+    try {
+      session.defaultSession.clearCache();
+    } catch (e) {}
+    
     //Create the window and instantiate it; initialise social media
     let win = createWindow();
-      remote_main.enable(win.webContents);
+    remote_main.enable(win.webContents);
     Discord_initRPC();
     
     app.on("activate", () => {
       if (BrowserWindow.getAllWindows().length === 0) createWindow();
     });
-    app.on("ready", () => {
-      Menu.setApplicationMenu(null);
-    });
+    if (Menu && Menu.setApplicationMenu) Menu.setApplicationMenu(null);
+    
     session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
-      if (details.responseHeaders['Access-Control-Allow-Origin']) {
-        // Force the header to be a single value (*) to satisfy Chromium
-        details.responseHeaders['Access-Control-Allow-Origin'] = ['*'];
+      let headers = { ...details.responseHeaders };
+      if (headers["Access-Control-Allow-Origin"]) {
+        headers["Access-Control-Allow-Origin"] = ["*"];
       }
+      headers["Access-Control-Allow-Methods"] = ["GET", "POST", "OPTIONS", "PUT", "PATCH", "DELETE"];
+      headers["Access-Control-Allow-Headers"] = ["Content-Type", "Authorization"];
       
-      callback({
-        responseHeaders: {
-          ...details.responseHeaders,
-        }
-      });
+      callback({ responseHeaders: headers });
     });
   });
   
   //Window lifecycle defaults
   app.on("before-quit", async () => {
     if (is_rpc_ready) await rpc.destroy();
-  })
+  });
   app.on("window-all-closed", () => {
     if (process.platform !== "darwin") app.quit();
   });

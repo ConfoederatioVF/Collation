@@ -212,6 +212,9 @@ global.l4p = "./livemap/4.view/politics/";
 			"!core/ui/rightbar/ui_wiki.css",
 			"histmap",
 			"!histmap/1.data_raw",
+			"!histmap/**/_rasters",
+			"!histmap/**/stadester_*_rasters",
+			"!histmap/**/rasters*",
 			"livemap",
 		],
 		special_function: function () {
