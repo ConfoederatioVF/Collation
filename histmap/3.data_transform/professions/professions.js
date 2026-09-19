@@ -324,159 +324,188 @@ global.professions = class {
 	 * Calculates and derives global 'Total (Net)' values synthetically.
 	 */
 	static async E_clampToPercentagesAndAggregates (arg0_options) {
+		//Convert from parameters
 		let options = (arg0_options) ? arg0_options : {};
-		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
 
-		if (!fs.existsSync(this.output_percentages)) fs.mkdirSync(this.output_percentages, { recursive: true });
-		if (!fs.existsSync(this.output_aggregates)) fs.mkdirSync(this.output_aggregates, { recursive: true });
-		
+		//Declare local instance variables
+		let categories = this.categories;
+		let olivetti_categories = this.olivetti_categories;
+		let output_aggregates = this.output_aggregates;
+		let output_percentages = this.output_percentages;
+		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+		let sexes = this.sexes;
+		let working_cohorts = this.working_cohorts;
 		let years = landuse_HYDE.sorted_hyde_years;
-		
-		for (let y = 0; y < years.length; y++) {
-			let year = years[y];
-			let all_exist = true;
-			
+
+		if (!fs.existsSync(output_percentages)) fs.mkdirSync(output_percentages, { recursive: true });
+		if (!fs.existsSync(output_aggregates)) fs.mkdirSync(output_aggregates, { recursive: true });
+
+		let target_years = years.filter((year) => {
+			if (overwrite) return true;
 			for (let j = 0; j < ["m", "f", "t"].length; j++) {
-				for (let i = 0; i < this.categories.length; i++) {
-					if (!fs.existsSync(`${this.output_aggregates}${this.categories[i]}_${["m", "f", "t"][j]}_${year}.png`)) all_exist = false;
+				for (let i = 0; i < categories.length; i++) {
+					if (!fs.existsSync(`${output_aggregates}${categories[i]}_${["m", "f", "t"][j]}_${year}.png`)) return true;
 				}
 			}
-			if (!overwrite && all_exist) continue;
-			
-			let pop_t = null;
-			let agg_t = {};
-			for (let i = 0; i < this.categories.length; i++) agg_t[this.categories[i]] = null;
-			let width = 4320, height = 2160;
-			
-			for (let s = 0; s < this.sexes.length; s++) {
-				let sex = this.sexes[s];
-				let lfpr_path = `${LFPR_OLS.output_lfpr_rates}lfpr_${sex}_${year}.png`;
-				
-				if (!fs.existsSync(lfpr_path)) continue;
-				let lfpr_raster = GeoPNG.loadNumberRasterImage(lfpr_path, { format: "float32" });
-				
-				width = lfpr_raster.width;
-				height = lfpr_raster.height;
-				
-				let data_len = lfpr_raster.data.length;
-				let pop_raster = new Float32Array(data_len);
-				
-				// Reconstruct working pool strictly matching 15-80 demographics
-				for (let i = 0; i < this.working_cohorts.length; i++) {
-					let cp = `${global.age_sex.output_rasters}${sex}_${this.working_cohorts[i]}_${year}.png`;
-					if (fs.existsSync(cp)) {
-						let c_raster = GeoPNG.loadNumberRasterImage(cp, { format: "float32" });
-						for (let j = 0; j < data_len; j++) {
-							let val = c_raster.data[j];
-							if (!isNaN(val) && val > 0) pop_raster[j] += val;
-						}
-					}
-				}
-				
-				if (!pop_t) pop_t = new Float32Array(data_len);
-				for (let i = 0; i < data_len; i++) pop_t[i] += pop_raster[i];
-				
-				let prob_rasters = {};
-				let missing_probs = false;
-				
-				// Only load active labor classes (MNL no longer models `not_in_work`)
-				for (let i = 0; i < this.olivetti_categories.length; i++) {
-					let path = `${this.intermediate_logit_rasters}logit_${sex}_${year}_class_${this.olivetti_categories[i]}.png`;
-					if (!fs.existsSync(path)) { missing_probs = true; break; }
-					prob_rasters[this.olivetti_categories[i]] = GeoPNG.loadNumberRasterImage(path, { format: "float32" });
-				}
-				
-				if (missing_probs) continue;
-				
-				// Normalize internal distribution explicitly bounding logic safely to LFPR anchors
-				let prob_sum_working = new Float32Array(data_len);
-				for (let i = 0; i < this.olivetti_categories.length; i++) {
-					let data = prob_rasters[this.olivetti_categories[i]].data;
-					for (let j = 0; j < data_len; j++) {
-						let val = data[j];
-						if (!isNaN(val) && val > 0) prob_sum_working[j] += val;
-					}
-				}
-				
-				for (let i = 0; i < this.categories.length; i++) {
-					let c = this.categories[i];
-					if (!agg_t[c]) agg_t[c] = new Float32Array(data_len);
+			return false;
+		});
+
+		if (target_years.length === 0) return [];
+
+		//Return statement
+		return await GeoPNG.processTimeseriesParallel({
+			concurrency: options.concurrency || 8,
+			items: target_years,
+			name: "Professions E_clampToPercentagesAndAggregates",
+			task_generator: (year) => {
+				return {
+					type: "clamp_professions",
+					age_sex_folder: global.age_sex.output_rasters,
+					categories: categories,
+					lfpr_folder: LFPR_OLS.output_lfpr_rates,
+					logit_rasters_folder: this.intermediate_logit_rasters,
+					olivetti_categories: olivetti_categories,
+					output_aggregates: output_aggregates,
+					output_percentages: output_percentages,
+					sexes: sexes,
+					working_cohorts: working_cohorts,
+					year: year
+				};
+			},
+			handler: async (year) => {
+				let agg_t = {};
+				for (let i = 0; i < categories.length; i++) agg_t[categories[i]] = null;
+				let height = 2160;
+				let pop_t = null;
+				let width = 4320;
+
+				for (let s = 0; s < sexes.length; s++) {
+					let sex = sexes[s];
+					let lfpr_path = `${LFPR_OLS.output_lfpr_rates}lfpr_${sex}_${year}.png`;
 					
-					let pct_arr = new Float32Array(data_len);
-					let agg_arr = new Float32Array(data_len);
-					let prob_data = prob_rasters[c] ? prob_rasters[c].data : null;
+					if (!fs.existsSync(lfpr_path)) continue;
+					let lfpr_raster = GeoPNG.loadNumberRasterImage(lfpr_path, { format: "float32" });
 					
-					for (let j = 0; j < data_len; j++) {
-						let pop = pop_raster[j];
-						if (pop <= 0) continue;
-						
-						let lfpr = lfpr_raster.data[j];
-						if (isNaN(lfpr)) lfpr = 0;
-						
-						let final_pct = 0;
-						if (c === "not_in_work") {
-							final_pct = Math.max(0, 1.0 - lfpr);
-						} else {
-							let sum_w = prob_sum_working[j];
-							let p_val = prob_data[j];
-							if (isNaN(p_val) || p_val < 0) p_val = 0;
-							
-							if (sum_w <= 0) {
-								final_pct = lfpr / this.olivetti_categories.length; // Hard fallback evenly distributes unknown sectors 
-							} else {
-								final_pct = lfpr * (p_val / sum_w);
+					width = lfpr_raster.width;
+					height = lfpr_raster.height;
+					
+					let data_len = lfpr_raster.data.length;
+					let pop_raster = new Float32Array(data_len);
+					
+					for (let i = 0; i < working_cohorts.length; i++) {
+						let cp = `${global.age_sex.output_rasters}${sex}_${working_cohorts[i]}_${year}.png`;
+						if (fs.existsSync(cp)) {
+							let c_raster = GeoPNG.loadNumberRasterImage(cp, { format: "float32" });
+							for (let j = 0; j < data_len; j++) {
+								let val = c_raster.data[j];
+								if (!isNaN(val) && val > 0) pop_raster[j] += val;
 							}
 						}
-						
-						pct_arr[j] = final_pct;
-						agg_arr[j] = final_pct * pop;
-						agg_t[c][j] += agg_arr[j];
 					}
 					
-					GeoPNG.saveNumberRasterImage({
-						file_path: `${this.output_percentages}${c}_${sex}_${year}.png`,
-						format: "float32",
-						width: width, height: height,
-						function: (idx) => pct_arr[idx]
-					});
+					if (!pop_t) pop_t = new Float32Array(data_len);
+					for (let i = 0; i < data_len; i++) pop_t[i] += pop_raster[i];
 					
-					GeoPNG.saveNumberRasterImage({
-						file_path: `${this.output_aggregates}${c}_${sex}_${year}.png`,
-						format: "float32",
-						width: width, height: height,
-						function: (idx) => agg_arr[idx]
-					});
-				}
-			}
-			
-			// Net Total Synthesiser via weighted aggregation 
-			if (pop_t) {
-				for (let i = 0; i < this.categories.length; i++) {
-					let c = this.categories[i];
+					let prob_rasters = {};
+					let missing_probs = false;
 					
-					GeoPNG.saveNumberRasterImage({
-						file_path: `${this.output_percentages}${c}_t_${year}.png`,
-						format: "float32",
-						width: width, height: height,
-						function: (idx) => {
-							let total_p = pop_t[idx];
-							if (total_p <= 0) return 0;
-							return agg_t[c][idx] / total_p;
+					for (let i = 0; i < olivetti_categories.length; i++) {
+						let path = `${this.intermediate_logit_rasters}logit_${sex}_${year}_class_${olivetti_categories[i]}.png`;
+						if (!fs.existsSync(path)) { missing_probs = true; break; }
+						prob_rasters[olivetti_categories[i]] = GeoPNG.loadNumberRasterImage(path, { format: "float32" });
+					}
+					
+					if (missing_probs) continue;
+					
+					let prob_sum_working = new Float32Array(data_len);
+					for (let i = 0; i < olivetti_categories.length; i++) {
+						let data = prob_rasters[olivetti_categories[i]].data;
+						for (let j = 0; j < data_len; j++) {
+							let val = data[j];
+							if (!isNaN(val) && val > 0) prob_sum_working[j] += val;
 						}
-					});
+					}
 					
-					GeoPNG.saveNumberRasterImage({
-						file_path: `${this.output_aggregates}${c}_t_${year}.png`,
-						format: "float32",
-						width: width, height: height,
-						function: (idx) => agg_t[c][idx]
-					});
+					for (let i = 0; i < categories.length; i++) {
+						let c = categories[i];
+						if (!agg_t[c]) agg_t[c] = new Float32Array(data_len);
+						
+						let pct_arr = new Float32Array(data_len);
+						let agg_arr = new Float32Array(data_len);
+						let prob_data = prob_rasters[c] ? prob_rasters[c].data : null;
+						
+						for (let j = 0; j < data_len; j++) {
+							let pop = pop_raster[j];
+							if (pop <= 0) continue;
+							
+							let lfpr = lfpr_raster.data[j];
+							if (isNaN(lfpr)) lfpr = 0;
+							
+							let final_pct = 0;
+							if (c === "not_in_work") {
+								final_pct = Math.max(0, 1.0 - lfpr);
+							} else {
+								let sum_w = prob_sum_working[j];
+								let p_val = prob_data[j];
+								if (isNaN(p_val) || p_val < 0) p_val = 0;
+								
+								if (sum_w <= 0) {
+									final_pct = lfpr / olivetti_categories.length;
+								} else {
+									final_pct = lfpr * (p_val / sum_w);
+								}
+							}
+							
+							pct_arr[j] = final_pct;
+							agg_arr[j] = final_pct * pop;
+							agg_t[c][j] += agg_arr[j];
+						}
+						
+						GeoPNG.saveNumberRasterImage({
+							file_path: `${output_percentages}${c}_${sex}_${year}.png`,
+							format: "float32",
+							height: height,
+							width: width,
+							function: (idx) => pct_arr[idx]
+						});
+						
+						GeoPNG.saveNumberRasterImage({
+							file_path: `${output_aggregates}${c}_${sex}_${year}.png`,
+							format: "float32",
+							height: height,
+							width: width,
+							function: (idx) => agg_arr[idx]
+						});
+					}
 				}
-				console.log(`Clamped Percentages & Absolute Aggregates mapped securely for m, f, t in year ${year}.`);
+				
+				if (pop_t) {
+					for (let i = 0; i < categories.length; i++) {
+						let c = categories[i];
+						
+						GeoPNG.saveNumberRasterImage({
+							file_path: `${output_percentages}${c}_t_${year}.png`,
+							format: "float32",
+							height: height,
+							width: width,
+							function: (idx) => {
+								let total_p = pop_t[idx];
+								if (total_p <= 0) return 0;
+								return agg_t[c][idx] / total_p;
+							}
+						});
+						
+						GeoPNG.saveNumberRasterImage({
+							file_path: `${output_aggregates}${c}_t_${year}.png`,
+							format: "float32",
+							height: height,
+							width: width,
+							function: (idx) => agg_t[c][idx]
+						});
+					}
+				}
 			}
-			
-			await Blacktraffic.yield();
-		}
+		});
 	}
 	
 	static async processRasters (arg0_options) {

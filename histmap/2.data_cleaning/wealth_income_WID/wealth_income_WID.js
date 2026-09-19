@@ -162,46 +162,53 @@ global.wealth_income_WID = class {
 			Object.iterate(local_json_obj, (local_key, local_value) => 
 				Object.cubicSplineInterpolation(local_value, { years }));
 			
-			//Iterate over all years
+			//Filter years with data
+			let years_with_data = [];
 			for (let x = 0; x < years.length; x++) {
+				let year = years[x];
 				let has_data = false;
-				let local_output_file_path  = `${local_folder_path}${options.variables[i]}_${years[x]}.png`;
-				
-				Object.iterate(local_json_obj, (local_key, local_value) =>  {
-					if (local_value[years[x]]) has_data = true;
+				Object.iterate(local_json_obj, (local_key, local_value) => {
+					if (local_value[year]) has_data = true;
 				});
-				if (!has_data) continue; //Internal guard clause if there is no data for the given year
-				
-				GeoPNG.saveNumberRasterImage({
-					file_path: local_output_file_path,
-					format: "float32",
-					height: 2160,
-					width: 4320,
-					function: (local_index) => {
-						let byte_index = local_index*4;
-						let local_colour_key = [
-							iso2_raster.data[byte_index],
-							iso2_raster.data[byte_index + 1],
-							iso2_raster.data[byte_index + 2]
-						].join(",");
-						let local_geocodes = iso2_obj[local_colour_key];
-						let local_value;
-						
-						//Iterate over all local_geocodes
-						if (local_geocodes)
-							for (let y = 0; y < local_geocodes.length; y++)
-								if (local_json_obj[local_geocodes[y]]?.[years[x]]) {
-									local_value = local_json_obj[local_geocodes[y]][years[x]];
-									break;
-								}
-						
-						//Return statement
-						return local_value;
-					}
-				});
-				await Blacktraffic.yield();
-				console.log(`- Saved ${local_output_file_path}.`);
+				if (has_data) years_with_data.push(year);
 			}
+			
+			await GeoPNG.processTimeseriesParallel({
+				items: years_with_data,
+				concurrency: 4,
+				name: `wealth_income_WID B_generateWIDRasters (${options.variables[i]})`,
+				handler: async (year) => {
+					let local_output_file_path = `${local_folder_path}${options.variables[i]}_${year}.png`;
+					GeoPNG.saveNumberRasterImage({
+						file_path: local_output_file_path,
+						format: "float32",
+						height: 2160,
+						width: 4320,
+						function: (local_index) => {
+							let byte_index = local_index * 4;
+							let local_colour_key = [
+								iso2_raster.data[byte_index],
+								iso2_raster.data[byte_index + 1],
+								iso2_raster.data[byte_index + 2]
+							].join(",");
+							let local_geocodes = iso2_obj[local_colour_key];
+							let local_value;
+							
+							//Iterate over all local_geocodes
+							if (local_geocodes)
+								for (let y = 0; y < local_geocodes.length; y++)
+									if (local_json_obj[local_geocodes[y]]?.[year]) {
+										local_value = local_json_obj[local_geocodes[y]][year];
+										break;
+									}
+							
+							//Return statement
+							return local_value;
+						}
+					});
+					console.log(`- Saved ${local_output_file_path}.`);
+				}
+			});
 		}
 	}
 	

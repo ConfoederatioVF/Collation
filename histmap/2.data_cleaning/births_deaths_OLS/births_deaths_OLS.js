@@ -259,52 +259,59 @@ global.births_deaths_OLS = class {
 	}
 	
 	static async A_generateTargetRasters (arg0_options) {
+		//Convert from parameters
 		let options = (arg0_options) ? arg0_options : {};
+		
+		//Initialise options
 		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
 
+		//Declare local instance variables
 		let variables_obj = this._getVariablesObj();
 		let years = landuse_HYDE.sorted_hyde_years;
 		
-		for (let y = 0; y < years.length; y++) {
-			let year = years[y];
-			let variable_keys = Object.keys(variables_obj);
-			for (let v = 0; v < variable_keys.length; v++) {
-				let variable_obj = variables_obj[variable_keys[v]];
-				let target_path = `${variable_obj.target_folder}${variable_obj.actual_prefix}_target_${year}.png`;
-				
-				if (!overwrite && fs.existsSync(target_path)) continue;
-				
-				let actual_path = this._getActualPath(variable_obj, year);
-				if (!actual_path) continue;
-				
-				let denominator_array = this._getDenominatorArray(variable_obj, year);
-				if (!denominator_array) {
-					console.warn(`- Missing composite cohort denominators for ${variable_obj.actual_prefix} year ${year}. Skipping target.`);
-					continue;
-				}
-				
-				let actual_raster = GeoPNG.loadNumberRasterImage(actual_path, { format: "float32" });
-				
-				GeoPNG.saveNumberRasterImage({
-					file_path: target_path,
-					format: "float32",
-					width: actual_raster.width,
-					height: actual_raster.height,
-					function: (local_index) => {
-						let local_count = actual_raster.data[local_index];
-						if (isNaN(local_count) || local_count <= 0) return 0;
-						
-						let local_denominator = denominator_array[local_index];
-						if (local_denominator <= 0) return 0;
-						
-						return Math.min(1, local_count / local_denominator);
+		await GeoPNG.processTimeseriesParallel({
+			items: years,
+			concurrency: options.concurrency || 4,
+			name: "births_deaths_OLS A_generateTargetRasters",
+			handler: async (year) => {
+				let variable_keys = Object.keys(variables_obj);
+				for (let v = 0; v < variable_keys.length; v++) {
+					let variable_obj = variables_obj[variable_keys[v]];
+					let target_path = `${variable_obj.target_folder}${variable_obj.actual_prefix}_target_${year}.png`;
+					
+					if (!overwrite && fs.existsSync(target_path)) continue;
+					
+					let actual_path = this._getActualPath(variable_obj, year);
+					if (!actual_path) continue;
+					
+					let denominator_array = this._getDenominatorArray(variable_obj, year);
+					if (!denominator_array) {
+						console.warn(`- Missing composite cohort denominators for ${variable_obj.actual_prefix} year ${year}. Skipping target.`);
+						continue;
 					}
-				});
-				
-				console.log(`- Generated target fraction raster: ${target_path}`);
-				await Blacktraffic.yield();
+					
+					let actual_raster = GeoPNG.loadNumberRasterImage(actual_path, { format: "float32" });
+					
+					GeoPNG.saveNumberRasterImage({
+						file_path: target_path,
+						format: "float32",
+						width: actual_raster.width,
+						height: actual_raster.height,
+						function: (local_index) => {
+							let local_count = actual_raster.data[local_index];
+							if (isNaN(local_count) || local_count <= 0) return 0;
+							
+							let local_denominator = denominator_array[local_index];
+							if (local_denominator <= 0) return 0;
+							
+							return Math.min(1, local_count / local_denominator);
+						}
+					});
+					
+					console.log(`- Generated target fraction raster: ${target_path}`);
+				}
 			}
-		}
+		});
 	}
 	
 	static async B_trainOLSModels (arg0_options) {
@@ -470,266 +477,237 @@ global.births_deaths_OLS = class {
 			
 			if (global_min === Infinity) continue;
 			
-			for (let y = 0; y < years.length; y++) {
-				let year = years[y];
-				
-				let popc_path = `${sf.input_popc_folder}stadester_population_${year}.png`;
-				if (!fs.existsSync(popc_path)) continue;
-				
-				let ols_path = `${variable_obj.ols_folder}ols_${variable_obj.actual_prefix}_${year}.png`;
-				let normalised_path = `${variable_obj.normalised_folder}normalised_${variable_obj.actual_prefix}_${year}.png`;
-				let bounds_path = `${this.intermediate_bounds}bounds_${variable_obj.actual_prefix}_${year}.json`;
-				
-				if (!fs.existsSync(ols_path)) continue;
-				if (!overwrite && fs.existsSync(normalised_path) && fs.existsSync(bounds_path)) continue;
-				
-				let popc_raster = GeoPNG.loadNumberRasterImage(popc_path, { format: "float32" });
-				let ols_raster = GeoPNG.loadNumberRasterImage(ols_path, { format: "float32" });
-				
-				let local_stats = yearly_target_stats[year];
-				let has_targets = (local_stats !== undefined);
-				let sample_size = (local_stats) ? local_stats.sample_size : 0;
-				let target_min = (local_stats) ? local_stats.min : global_min;
-				let target_max = (local_stats) ? local_stats.max : global_max;
-				
-				let uncertainty_weight = Math.exp(-sample_size/15);
-				target_min = Math.max(0, target_min - ((target_min - global_min)*uncertainty_weight));
-				target_max = Math.min(1, target_max + ((global_max - target_max)*uncertainty_weight));
-				
-				let valid_pixels = [];
-				let sum = 0;
-				for (let i = 0; i < ols_raster.data.length; i++) {
-					if (landarea_raster.data[i] > 0 && popc_raster.data[i] > 0) {
-						let local_value = ols_raster.data[i];
-						if (!isNaN(local_value)) {
-							valid_pixels.push(local_value);
-							sum += local_value;
+			await GeoPNG.processTimeseriesParallel({
+				items: years,
+				concurrency: options.concurrency || 4,
+				name: `births_deaths_OLS D_normaliseOLSRasters (${variable_obj.actual_prefix})`,
+				handler: async (year) => {
+					let popc_path = `${sf.input_popc_folder}stadester_population_${year}.png`;
+					if (!fs.existsSync(popc_path)) return;
+					
+					let ols_path = `${variable_obj.ols_folder}ols_${variable_obj.actual_prefix}_${year}.png`;
+					let normalised_path = `${variable_obj.normalised_folder}normalised_${variable_obj.actual_prefix}_${year}.png`;
+					let bounds_path = `${this.intermediate_bounds}bounds_${variable_obj.actual_prefix}_${year}.json`;
+					
+					if (!fs.existsSync(ols_path)) return;
+					if (!overwrite && fs.existsSync(normalised_path) && fs.existsSync(bounds_path)) return;
+					
+					let popc_raster = GeoPNG.loadNumberRasterImage(popc_path, { format: "float32" });
+					let ols_raster = GeoPNG.loadNumberRasterImage(ols_path, { format: "float32" });
+					
+					let local_stats = yearly_target_stats[year];
+					let has_targets = (local_stats !== undefined);
+					let sample_size = (local_stats) ? local_stats.sample_size : 0;
+					let target_min = (local_stats) ? local_stats.min : global_min;
+					let target_max = (local_stats) ? local_stats.max : global_max;
+					
+					let uncertainty_weight = Math.exp(-sample_size/15);
+					target_min = Math.max(0, target_min - ((target_min - global_min)*uncertainty_weight));
+					target_max = Math.min(1, target_max + ((global_max - target_max)*uncertainty_weight));
+					
+					let valid_pixels = [];
+					let sum = 0;
+					for (let i = 0; i < ols_raster.data.length; i++) {
+						if (landarea_raster.data[i] > 0 && popc_raster.data[i] > 0) {
+							let local_value = ols_raster.data[i];
+							if (!isNaN(local_value)) {
+								valid_pixels.push(local_value);
+								sum += local_value;
+							}
 						}
 					}
-				}
-				
-				if (valid_pixels.length === 0) continue;
-				valid_pixels.sort((a, b) => a - b);
-				
-				let N = valid_pixels.length;
-				let mean = sum/N;
-				let sq_sum = 0;
-				for (let i = 0; i < N; i++) sq_sum += Math.pow(valid_pixels[i] - mean, 2);
-				let std = Math.sqrt(sq_sum/N);
-				
-				let q1 = valid_pixels[Math.floor(N*0.25)];
-				let q3 = valid_pixels[Math.floor(N*0.75)];
-				let iqr = q3 - q1;
-				let alpha = (iqr > 1e-5) ? iqr : ((std > 1e-5) ? std : 0.01);
-				
-				let t_lower = q1 - (1.5*alpha);
-				let t_upper = q3 + (1.5*alpha);
-				
-				let regularise = function (x) {
-					if (x > t_upper) return t_upper + alpha*Math.log(1 + ((x - t_upper)/alpha));
-					if (x < t_lower) return t_lower - alpha*Math.log(1 + ((t_lower - x)/alpha));
-					return x;
-				};
-				
-				let reg_min = regularise(valid_pixels[0]);
-				let reg_max = regularise(valid_pixels[N - 1]);
-				let reg_range = reg_max - reg_min;
-				
-				let normalised_map = new Float32Array(ols_raster.data.length);
-				for (let i = 0; i < ols_raster.data.length; i++) {
-					if (landarea_raster.data[i] > 0 && popc_raster.data[i] > 0) {
-						let local_value = ols_raster.data[i];
-						if (isNaN(local_value)) continue;
-						
-						let local_regularised = regularise(local_value);
-						let unit_value = (reg_range > 0) ? ((local_regularised - reg_min)/reg_range) : 0.5;
-						normalised_map[i] = Math.max(0, Math.min(1, unit_value));
+					
+					if (valid_pixels.length === 0) return;
+					valid_pixels.sort((a, b) => a - b);
+					
+					let N = valid_pixels.length;
+					let mean = sum/N;
+					let sq_sum = 0;
+					for (let i = 0; i < N; i++) sq_sum += Math.pow(valid_pixels[i] - mean, 2);
+					let std = Math.sqrt(sq_sum/N);
+					
+					let q1 = valid_pixels[Math.floor(N*0.25)];
+					let q3 = valid_pixels[Math.floor(N*0.75)];
+					let iqr = q3 - q1;
+					let alpha = (iqr > 1e-5) ? iqr : ((std > 1e-5) ? std : 0.01);
+					
+					let t_lower = q1 - (1.5*alpha);
+					let t_upper = q3 + (1.5*alpha);
+					
+					let regularise = function (x) {
+						if (x > t_upper) return t_upper + alpha*Math.log(1 + ((x - t_upper)/alpha));
+						if (x < t_lower) return t_lower - alpha*Math.log(1 + ((t_lower - x)/alpha));
+						return x;
+					};
+					
+					let reg_min = regularise(valid_pixels[0]);
+					let reg_max = regularise(valid_pixels[N - 1]);
+					let reg_range = reg_max - reg_min;
+					
+					let normalised_map = new Float32Array(ols_raster.data.length);
+					for (let i = 0; i < ols_raster.data.length; i++) {
+						if (landarea_raster.data[i] > 0 && popc_raster.data[i] > 0) {
+							let local_value = ols_raster.data[i];
+							if (isNaN(local_value)) continue;
+							
+							let local_regularised = regularise(local_value);
+							let unit_value = (reg_range > 0) ? ((local_regularised - reg_min)/reg_range) : 0.5;
+							normalised_map[i] = Math.max(0, Math.min(1, unit_value));
+						}
 					}
+					
+					GeoPNG.saveNumberRasterImage({
+						file_path: normalised_path,
+						format: "float32",
+						width: ols_raster.width,
+						height: ols_raster.height,
+						function: (local_index) => normalised_map[local_index]
+					});
+					
+					fs.writeFileSync(bounds_path, JSON.stringify({
+						year: year,
+						has_targets: has_targets,
+						target_min: target_min,
+						target_max: target_max,
+						sample_size: sample_size
+					}));
+					
+					console.log(`- Normalised OLS raster: ${normalised_path}`);
 				}
-				
-				GeoPNG.saveNumberRasterImage({
-					file_path: normalised_path,
-					format: "float32",
-					width: ols_raster.width,
-					height: ols_raster.height,
-					function: (local_index) => normalised_map[local_index]
-				});
-				
-				fs.writeFileSync(bounds_path, JSON.stringify({
-					year: year,
-					has_targets: has_targets,
-					target_min: target_min,
-					target_max: target_max,
-					sample_size: sample_size
-				}));
-				
-				console.log(`- Normalised OLS raster: ${normalised_path}`);
-				await Blacktraffic.yield();
-			}
+			});
 		}
 	}
 	
 	static async E_clampToStadester (arg0_options) {
+		//Convert from parameters
 		let options = (arg0_options) ? arg0_options : {};
+		
+		//Initialise options
 		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
 
-		let variables_obj = this._getVariablesObj();
-		let years = landuse_HYDE.sorted_hyde_years; //0 is a test year
-		let sf = age_sex.sf();
-		
+		//Declare local instance variables
 		let geocode_obj = admin_modern.getISO3ColourcodesObject();
 		let geocode_raster = GeoPNG.loadImage(admin_modern.input_geocodes_raster);
+		let sf = age_sex.sf();
+		let variables_obj = this._getVariablesObj();
+		let years = landuse_HYDE.sorted_hyde_years;
 		
-		for (let y = 0; y < years.length; y++) {
-			let year = years[y];
-			let popc_path = `${sf.input_popc_folder}stadester_population_${year}.png`;
-			if (!fs.existsSync(popc_path)) continue;
-			
-			let popc_raster = GeoPNG.loadNumberRasterImage(popc_path, { format: "float32" });
-			let denominator_cache = {};
-			
-			// 1. Process all variables into memory first to get the RAW working aggregates
-			let raw_data = {};
-			let skip_year = false;
-			
-			let variable_keys = Object.keys(variables_obj);
-			for (let v = 0; v < variable_keys.length; v++) {
-				let v_key = variable_keys[v];
-				let variable_obj = variables_obj[v_key];
-				let normalised_path = `${variable_obj.normalised_folder}normalised_${variable_obj.actual_prefix}_${year}.png`;
-				let bounds_path = `${this.intermediate_bounds}bounds_${variable_obj.actual_prefix}_${year}.json`;
-				let output_path = `${variable_obj.output_folder}${variable_obj.actual_prefix}_${year}.png`;
+		await GeoPNG.processTimeseriesParallel({
+			items: years,
+			concurrency: options.concurrency || 4,
+			name: "births_deaths_OLS E_clampToStadester",
+			handler: async (year) => {
+				let popc_path = `${sf.input_popc_folder}stadester_population_${year}.png`;
+				if (!fs.existsSync(popc_path)) return;
 				
-				if (!fs.existsSync(normalised_path) || !fs.existsSync(bounds_path)) { skip_year = true; break; }
-				if (!overwrite && fs.existsSync(output_path)) continue;
+				let popc_raster = GeoPNG.loadNumberRasterImage(popc_path, { format: "float32" });
+				let denominator_cache = {};
 				
-				if (!denominator_cache[variable_obj.denominator + (variable_obj.sex || "")]) {
-					denominator_cache[variable_obj.denominator + (variable_obj.sex || "")] = this._getDenominatorArray(variable_obj, year);
-				}
-				let denominator_array = denominator_cache[variable_obj.denominator + (variable_obj.sex || "")];
-				if (!denominator_array) { skip_year = true; break; }
+				// 1. Process all variables into memory first to get the RAW working aggregates
+				let raw_data = {};
+				let skip_year = false;
 				
-				let normalised_raster = GeoPNG.loadNumberRasterImage(normalised_path, { format: "float32" });
-				let bounds_obj = JSON.parse(fs.readFileSync(bounds_path, "utf8"));
-				let counts_array = new Float32Array(normalised_raster.data.length);
-				
-				let target_min = bounds_obj.target_min || 0;
-				let target_max = bounds_obj.target_max || 0;
-				
-				for (let i = 0; i < normalised_raster.data.length; i++) {
-					if (popc_raster.data[i] <= 0) continue;
+				let variable_keys = Object.keys(variables_obj);
+				for (let v = 0; v < variable_keys.length; v++) {
+					let v_key = variable_keys[v];
+					let variable_obj = variables_obj[v_key];
+					let normalised_path = `${variable_obj.normalised_folder}normalised_${variable_obj.actual_prefix}_${year}.png`;
+					let bounds_path = `${this.intermediate_bounds}bounds_${variable_obj.actual_prefix}_${year}.json`;
+					let output_path = `${variable_obj.output_folder}${variable_obj.actual_prefix}_${year}.png`;
 					
-					let local_normalised = normalised_raster.data[i];
-					if (isNaN(local_normalised) || local_normalised <= 0) continue;
+					if (!fs.existsSync(normalised_path) || !fs.existsSync(bounds_path)) { skip_year = true; break; }
+					if (!overwrite && fs.existsSync(output_path)) continue;
 					
-					let local_denominator = denominator_array[i];
-					if (local_denominator <= 0) continue;
+					let cache_key = variable_obj.denominator + (variable_obj.sex || "");
+					if (!denominator_cache[cache_key]) {
+						denominator_cache[cache_key] = this._getDenominatorArray(variable_obj, year);
+					}
+					let denominator_array = denominator_cache[cache_key];
+					if (!denominator_array) { skip_year = true; break; }
 					
-					let local_fraction = target_min;
-					if (target_max > target_min) {
-						local_fraction = target_min + local_normalised * (target_max - target_min);
+					let normalised_raster = GeoPNG.loadNumberRasterImage(normalised_path, { format: "float32" });
+					let bounds_obj = JSON.parse(fs.readFileSync(bounds_path, "utf8"));
+					let counts_array = new Float32Array(normalised_raster.data.length);
+					
+					let target_min = bounds_obj.target_min || 0;
+					let target_max = bounds_obj.target_max || 0;
+					
+					for (let i = 0; i < normalised_raster.data.length; i++) {
+						if (popc_raster.data[i] <= 0) continue;
+						
+						let local_normalised = normalised_raster.data[i];
+						if (isNaN(local_normalised) || local_normalised <= 0) continue;
+						
+						let local_denominator = denominator_array[i];
+						if (local_denominator <= 0) continue;
+						
+						let local_fraction = target_min;
+						if (target_max > target_min) {
+							local_fraction = target_min + local_normalised * (target_max - target_min);
+						}
+						
+						counts_array[i] = local_fraction * local_denominator;
 					}
 					
-					counts_array[i] = local_fraction * local_denominator;
+					raw_data[v_key] = {
+						variable_obj: variable_obj,
+						counts_array: counts_array,
+						normalised_raster: normalised_raster,
+						output_path: output_path
+					};
 				}
 				
-				raw_data[v_key] = {
-					variable_obj: variable_obj,
-					counts_array: counts_array,
-					normalised_raster: normalised_raster,
-					output_path: output_path
-				};
-			}
-			
-			if (skip_year) continue;
-			
-			// 2. THE SEX-SANE REDISTRIBUTION (Intercepting the working aggregates)
-			if (raw_data.male_deaths && raw_data.female_deaths) {
-				let m_counts = raw_data.male_deaths.counts_array;
-				let f_counts = raw_data.female_deaths.counts_array;
-				let m_norm = raw_data.male_deaths.normalised_raster.data;
-				let f_norm = raw_data.female_deaths.normalised_raster.data;
+				if (skip_year) return;
 				
-				for (let i = 0; i < popc_raster.data.length; i++) {
-					if (popc_raster.data[i] <= 0) continue;
-					
-					let raw_m = m_counts[i] || 0;
-					let raw_f = f_counts[i] || 0;
-					let total = raw_m + raw_f;
-					
-					if (total > 0) {
-						let n_m = (isNaN(m_norm[i]) || m_norm[i] < 0) ? 0 : m_norm[i];
-						let n_f = (isNaN(f_norm[i]) || f_norm[i] < 0) ? 0 : f_norm[i];
-						let norm_sum = n_m + n_f;
-						
-						// Apportion the perfectly constrained total using the OLS's normalized relative intensity
-						let ratio_m = (norm_sum > 0) ? (n_m / norm_sum) : 0.5;
-						
-						m_counts[i] = total * ratio_m;
-						f_counts[i] = total * (1.0 - ratio_m);
-					}
-				}
-			}
-			
-			// 3. Apply actuals-anchoring and write to disk for all variables
-			let loaded_keys = Object.keys(raw_data);
-			for (let v = 0; v < loaded_keys.length; v++) {
-				let v_key = loaded_keys[v];
-				let data = raw_data[v_key];
-				let variable_obj = data.variable_obj;
-				let counts_array = data.counts_array;
-				let output_path = data.output_path;
-				
-				let actual_path = this._getActualPath(variable_obj, year);
-				let actual_raster = null;
-				let actual_sums = null;
-				let count_sums = null;
-				
-				if (actual_path) {
-					actual_raster = GeoPNG.loadNumberRasterImage(actual_path, { format: "float32" });
-					actual_sums = {};
-					count_sums = {};
+				// 2. THE SEX-SANE REDISTRIBUTION (Intercepting the working aggregates)
+				if (raw_data.male_deaths && raw_data.female_deaths) {
+					let m_counts = raw_data.male_deaths.counts_array;
+					let f_counts = raw_data.female_deaths.counts_array;
+					let m_norm = raw_data.male_deaths.normalised_raster.data;
+					let f_norm = raw_data.female_deaths.normalised_raster.data;
 					
 					for (let i = 0; i < popc_raster.data.length; i++) {
 						if (popc_raster.data[i] <= 0) continue;
 						
-						let byte_index = i * 4;
-						let local_colour_key = [
-							geocode_raster.data[byte_index],
-							geocode_raster.data[byte_index + 1],
-							geocode_raster.data[byte_index + 2]
-						].join(",");
-						let local_geocodes = geocode_obj[local_colour_key];
+						let raw_m = m_counts[i] || 0;
+						let raw_f = f_counts[i] || 0;
+						let total = raw_m + raw_f;
 						
-						if (local_geocodes)
-							for (let x = 0; x < local_geocodes.length; x++) {
-								let local_iso = local_geocodes[x];
-								let local_actual = actual_raster.data[i];
-								if (!isNaN(local_actual) && local_actual > 0)
-									Object.modifyValue(actual_sums, local_iso, local_actual);
-								if (counts_array[i] > 0)
-									Object.modifyValue(count_sums, local_iso, counts_array[i]);
-							}
+						if (total > 0) {
+							let n_m = (isNaN(m_norm[i]) || m_norm[i] < 0) ? 0 : m_norm[i];
+							let n_f = (isNaN(f_norm[i]) || f_norm[i] < 0) ? 0 : f_norm[i];
+							let norm_sum = n_m + n_f;
+							
+							let ratio_m = (norm_sum > 0) ? (n_m / norm_sum) : 0.5;
+							m_counts[i] = total * ratio_m;
+							f_counts[i] = total * (1.0 - ratio_m);
+						}
 					}
 				}
 				
-				GeoPNG.saveNumberRasterImage({
-					file_path: output_path,
-					format: "float32",
-					width: popc_raster.width,
-					height: popc_raster.height,
-					function: (local_index) => {
-						let local_pop = popc_raster.data[local_index];
-						if (local_pop <= 0) return 0;
+				// 3. Apply actuals-anchoring and write to disk for all variables
+				let loaded_keys = Object.keys(raw_data);
+				for (let v = 0; v < loaded_keys.length; v++) {
+					let v_key = loaded_keys[v];
+					let data = raw_data[v_key];
+					let variable_obj = data.variable_obj;
+					let counts_array = data.counts_array;
+					let output_path = data.output_path;
+					
+					let actual_path = this._getActualPath(variable_obj, year);
+					let actual_raster = null;
+					let actual_sums = null;
+					let count_sums = null;
+					
+					if (actual_path) {
+						actual_raster = GeoPNG.loadNumberRasterImage(actual_path, { format: "float32" });
+						actual_sums = {};
+						count_sums = {};
 						
-						if (actual_raster) {
-							let local_actual = actual_raster.data[local_index];
-							if (!isNaN(local_actual) && local_actual > 0) return local_actual;
-						}
-						
-						let local_count = counts_array[local_index];
-						if (actual_sums && local_count > 0) {
-							let byte_index = local_index * 4;
+						for (let i = 0; i < popc_raster.data.length; i++) {
+							if (popc_raster.data[i] <= 0) continue;
+							
+							let byte_index = i * 4;
 							let local_colour_key = [
 								geocode_raster.data[byte_index],
 								geocode_raster.data[byte_index + 1],
@@ -740,157 +718,111 @@ global.births_deaths_OLS = class {
 							if (local_geocodes)
 								for (let x = 0; x < local_geocodes.length; x++) {
 									let local_iso = local_geocodes[x];
-									let local_actual_sum = actual_sums[local_iso];
-									let local_count_sum = count_sums[local_iso];
-									
-									if (local_actual_sum !== undefined && local_actual_sum > 0 && local_count_sum !== undefined && local_count_sum > 0)
-										return local_count * (local_actual_sum / local_count_sum);
+									let local_actual = actual_raster.data[i];
+									if (!isNaN(local_actual) && local_actual > 0)
+										Object.modifyValue(actual_sums, local_iso, local_actual);
+									if (counts_array[i] > 0)
+										Object.modifyValue(count_sums, local_iso, counts_array[i]);
 								}
 						}
-						return local_count;
 					}
-				});
-				
-				console.log(`- Saved clamped raster: ${output_path}`);
+					
+					GeoPNG.saveNumberRasterImage({
+						file_path: output_path,
+						format: "float32",
+						width: popc_raster.width,
+						height: popc_raster.height,
+						function: (local_index) => {
+							let local_pop = popc_raster.data[local_index];
+							if (local_pop <= 0) return 0;
+							
+							if (actual_raster) {
+								let local_actual = actual_raster.data[local_index];
+								if (!isNaN(local_actual) && local_actual > 0) return local_actual;
+							}
+							
+							let local_count = counts_array[local_index];
+							if (actual_sums && local_count > 0) {
+								let byte_index = local_index * 4;
+								let local_colour_key = [
+									geocode_raster.data[byte_index],
+									geocode_raster.data[byte_index + 1],
+									geocode_raster.data[byte_index + 2]
+								].join(",");
+								let local_geocodes = geocode_obj[local_colour_key];
+								
+								if (local_geocodes)
+									for (let x = 0; x < local_geocodes.length; x++) {
+										let local_iso = local_geocodes[x];
+										let local_actual_sum = actual_sums[local_iso];
+										let local_count_sum = count_sums[local_iso];
+										
+										if (local_actual_sum !== undefined && local_actual_sum > 0 && local_count_sum !== undefined && local_count_sum > 0)
+											return local_count * (local_actual_sum / local_count_sum);
+									}
+							}
+							return local_count;
+						}
+					});
+					
+					console.log(`- Saved clamped raster: ${output_path}`);
+				}
 			}
-			await Blacktraffic.yield();
-		}
+		});
 	}
 	
 	static async F_deriveMigrationRasters (arg0_options) {
+		//Convert from parameters
 		let options = (arg0_options) ? arg0_options : {};
+		
+		//Initialise options
 		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
 
-		let years = landuse_HYDE.sorted_hyde_years;
-		let sf = age_sex.sf();
+		//Declare local instance variables
 		let cohorts = age_sex.getCohorts();
-		
 		let female_cohorts = cohorts.filter(c => c.startsWith("f_"));
 		let male_cohorts = cohorts.filter(c => c.startsWith("m_"));
+		let sf = age_sex.sf();
+		let target_years = [];
+		let years = landuse_HYDE.sorted_hyde_years;
 		
-		for (let y = 1; y < years.length; y++) {
-			let year = years[y];
-			let previous_year = years[y - 1];
-			let year_gap = year - previous_year;
-			
-			let net_migration_path = `${this.output_net_migration_folder}net_migration_${year}.png`;
-			let female_migration_path = `${this.output_female_migration_folder}female_net_migration_${year}.png`;
-			let male_migration_path = `${this.output_male_migration_folder}male_net_migration_${year}.png`;
-			
-			if (!overwrite && fs.existsSync(net_migration_path) && fs.existsSync(female_migration_path) && fs.existsSync(male_migration_path)) continue;
-			
-			let births_path = `${this.output_births_folder}births_${year}.png`;
-			let female_deaths_path = `${this.output_female_deaths_folder}female_deaths_${year}.png`;
-			let male_deaths_path = `${this.output_male_deaths_folder}male_deaths_${year}.png`;
-			
-			if (!fs.existsSync(births_path) || !fs.existsSync(female_deaths_path) || !fs.existsSync(male_deaths_path)) continue;
-			
-			// 1. Resolve annualized total population delta robustly
-			let delta_popc_path = `${population_Stadester_transform.delta_total_population_folder}delta_total_population_${year}.png`;
-			let delta_popc_raster = null;
-			
-			if (fs.existsSync(delta_popc_path)) {
-				let raw_delta = GeoPNG.loadNumberRasterImage(delta_popc_path, { format: "float32" });
-				delta_popc_raster = {
-					width: raw_delta.width,
-					height: raw_delta.height,
-					data: new Float32Array(raw_delta.data.length)
-				};
-				for (let i = 0; i < raw_delta.data.length; i++) {
-					delta_popc_raster.data[i] = raw_delta.data[i] / year_gap;
-				}
-			} else {
-				let popc_path = `${sf.input_popc_folder}stadester_population_${year}.png`;
-				let previous_popc_path = `${sf.input_popc_folder}stadester_population_${previous_year}.png`;
-				if (!fs.existsSync(popc_path) || !fs.existsSync(previous_popc_path)) continue;
+		for (let y = 1; y < years.length; y++) target_years.push(years[y]);
+		
+		await GeoPNG.processTimeseriesParallel({
+			items: target_years,
+			concurrency: options.concurrency || 8,
+			name: "births_deaths_OLS F_deriveMigrationRasters",
+			task_generator: (year) => {
+				let y_idx = years.indexOf(year);
+				let previous_year = years[y_idx - 1];
+				let year_gap = year - previous_year;
 				
-				let popc_raster = GeoPNG.loadNumberRasterImage(popc_path, { format: "float32" });
-				let previous_popc_raster = GeoPNG.loadNumberRasterImage(previous_popc_path, { format: "float32" });
+				let female_cohort_paths = [];
+				for (let c = 0; c < female_cohorts.length; c++)
+					female_cohort_paths.push(`${age_sex.output_rasters}${female_cohorts[c]}_${year}.png`);
+				let male_cohort_paths = [];
+				for (let c = 0; c < male_cohorts.length; c++)
+					male_cohort_paths.push(`${age_sex.output_rasters}${male_cohorts[c]}_${year}.png`);
 				
-				delta_popc_raster = {
-					width: popc_raster.width,
-					height: popc_raster.height,
-					data: new Float32Array(popc_raster.data.length)
+				return {
+					task_type: "derive_migration_rasters",
+					year: year,
+					year_gap: year_gap,
+					births_path: `${this.output_births_folder}births_${year}.png`,
+					female_deaths_path: `${this.output_female_deaths_folder}female_deaths_${year}.png`,
+					male_deaths_path: `${this.output_male_deaths_folder}male_deaths_${year}.png`,
+					delta_popc_path: `${population_Stadester_transform.delta_total_population_folder}delta_total_population_${year}.png`,
+					popc_path: `${sf.input_popc_folder}stadester_population_${year}.png`,
+					previous_popc_path: `${sf.input_popc_folder}stadester_population_${previous_year}.png`,
+					female_cohort_paths: female_cohort_paths,
+					male_cohort_paths: male_cohort_paths,
+					female_migration_path: `${this.output_female_migration_folder}female_net_migration_${year}.png`,
+					male_migration_path: `${this.output_male_migration_folder}male_net_migration_${year}.png`,
+					net_migration_path: `${this.output_net_migration_folder}net_migration_${year}.png`,
+					overwrite: overwrite
 				};
-				for (let i = 0; i < popc_raster.data.length; i++)
-					delta_popc_raster.data[i] = (popc_raster.data[i] - previous_popc_raster.data[i]) / year_gap;
 			}
-			
-			// 2. Compute local spatial sex ratio to gracefully apportion delta_popc
-			let f_pop = new Float32Array(delta_popc_raster.data.length);
-			let m_pop = new Float32Array(delta_popc_raster.data.length);
-			
-			for (let c = 0; c < female_cohorts.length; c++) {
-				let r_path = `${age_sex.output_rasters}${female_cohorts[c]}_${year}.png`;
-				if (fs.existsSync(r_path)) {
-					let r = GeoPNG.loadNumberRasterImage(r_path, { format: "float32" });
-					for (let i = 0; i < r.data.length; i++) if (r.data[i] > 0) f_pop[i] += r.data[i];
-				}
-			}
-			for (let c = 0; c < male_cohorts.length; c++) {
-				let r_path = `${age_sex.output_rasters}${male_cohorts[c]}_${year}.png`;
-				if (fs.existsSync(r_path)) {
-					let r = GeoPNG.loadNumberRasterImage(r_path, { format: "float32" });
-					for (let i = 0; i < r.data.length; i++) if (r.data[i] > 0) m_pop[i] += r.data[i];
-				}
-			}
-			
-			let delta_female = new Float32Array(delta_popc_raster.data.length);
-			let delta_male = new Float32Array(delta_popc_raster.data.length);
-			
-			for (let i = 0; i < delta_popc_raster.data.length; i++) {
-				let tot = f_pop[i] + m_pop[i];
-				let f_ratio = (tot > 0) ? (f_pop[i] / tot) : 0.5;
-				delta_female[i] = delta_popc_raster.data[i] * f_ratio;
-				delta_male[i] = delta_popc_raster.data[i] * (1 - f_ratio);
-			}
-			
-			// 3. Absolute demographics
-			let births_raster = GeoPNG.loadNumberRasterImage(births_path, { format: "float32" });
-			let female_deaths_raster = GeoPNG.loadNumberRasterImage(female_deaths_path, { format: "float32" });
-			let male_deaths_raster = GeoPNG.loadNumberRasterImage(male_deaths_path, { format: "float32" });
-			
-			let local_width = delta_popc_raster.width;
-			let local_height = delta_popc_raster.height;
-			
-			GeoPNG.saveNumberRasterImage({
-				file_path: female_migration_path,
-				format: "float32",
-				width: local_width,
-				height: local_height,
-				function: (local_index) => {
-					let local_births = (isNaN(births_raster.data[local_index])) ? 0 : births_raster.data[local_index];
-					let local_deaths = (isNaN(female_deaths_raster.data[local_index])) ? 0 : female_deaths_raster.data[local_index];
-					return delta_female[local_index] - (local_births / 2) + local_deaths;
-				}
-			});
-			GeoPNG.saveNumberRasterImage({
-				file_path: male_migration_path,
-				format: "float32",
-				width: local_width,
-				height: local_height,
-				function: (local_index) => {
-					let local_births = (isNaN(births_raster.data[local_index])) ? 0 : births_raster.data[local_index];
-					let local_deaths = (isNaN(male_deaths_raster.data[local_index])) ? 0 : male_deaths_raster.data[local_index];
-					return delta_male[local_index] - (local_births / 2) + local_deaths;
-				}
-			});
-			GeoPNG.saveNumberRasterImage({
-				file_path: net_migration_path,
-				format: "float32",
-				width: local_width,
-				height: local_height,
-				function: (local_index) => {
-					let local_births = (isNaN(births_raster.data[local_index])) ? 0 : births_raster.data[local_index];
-					let local_female_deaths = (isNaN(female_deaths_raster.data[local_index])) ? 0 : female_deaths_raster.data[local_index];
-					let local_male_deaths = (isNaN(male_deaths_raster.data[local_index])) ? 0 : male_deaths_raster.data[local_index];
-					return delta_popc_raster.data[local_index] - local_births + local_female_deaths + local_male_deaths;
-				}
-			});
-			
-			console.log(`- Derived cross-sectional migration flows for ${year}`);
-			await Blacktraffic.yield();
-		}
+		});
 	}
 	
 	static async processRasters (arg0_options) {

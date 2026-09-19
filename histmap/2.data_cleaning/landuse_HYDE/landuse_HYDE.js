@@ -223,12 +223,16 @@ global.landuse_HYDE = class {
 	static async B_interpolateHYDEYearRasters () {
 		//Declare local instance variables
 		let actual_hyde_years = this.hyde_original_years;
-		let hyde_years = this.hyde_years;
+		let missing_years = this.hyde_years.filter(y => !actual_hyde_years.includes(y));
 		
-		//Iterate over all hyde_years
-		for (let i = 0; i < hyde_years.length; i++)
-			if (!actual_hyde_years.includes(hyde_years[i]))
-				await this.B_interpolateHYDEYearRaster(hyde_years[i]);
+		await GeoPNG.processTimeseriesParallel({
+			items: missing_years,
+			concurrency: 4,
+			name: "landuse_HYDE B_interpolateHYDEYearRasters",
+			handler: async (year) => {
+				await this.B_interpolateHYDEYearRaster(year);
+			}
+		});
 	}
 	
 	static async C_clampHYDEToMcEvedy (arg0_year, arg1_options) {
@@ -393,15 +397,19 @@ global.landuse_HYDE = class {
 	
 	static async C_clampHYDERastersToMcEvedy () {
 		//Declare local instance variables
-		let hyde_years = this.hyde_years;
+		let hyde_years = this.hyde_years.filter(y => y <= 1500);
 		let mcevedy_obj = await this.C_getMcEvedyObject();
 		
-		//Iterate over all hyde_years before 1500AD and clamp them
-		for (let i = 0; i < hyde_years.length; i++)
-			if (hyde_years[i] <= 1500)
-				await this.C_clampHYDEToMcEvedy(hyde_years[i], {
+		await GeoPNG.processTimeseriesParallel({
+			items: hyde_years,
+			concurrency: 4,
+			name: "landuse_HYDE C_clampHYDERastersToMcEvedy",
+			handler: async (year) => {
+				await this.C_clampHYDEToMcEvedy(year, {
 					mcevedy_obj: mcevedy_obj
 				});
+			}
+		});
 	}
 	
 	static async D_scaleRastersToGlobalEstimates () {
@@ -409,37 +417,33 @@ global.landuse_HYDE = class {
 		let hyde_years = this.hyde_years;
 		let world_pop_obj = population_Global.A_getWorldPopulationObject();
 		
-		//Iterate over all hyde_years
-		for (let i = 0; i < hyde_years.length; i++) {
-			let local_input_raster = `${this.intermediate_rasters_mcevedy}/popc_${hyde_years[i]}.png`;
-			let local_scalar = 1;
-			
-			if (!fs.existsSync(local_input_raster)) //Load HYDE raster as fallback
-				local_input_raster = `${this.intermediate_rasters_equirectangular}/popc_${this._getHYDEYearName(hyde_years[i])}_number.png`;
-			if (fs.existsSync(local_input_raster)) 
-				await new Promise((resolve, reject) => {
-					setImmediate(() => {
-						try {
-							let local_input_png = GeoPNG.loadNumberRasterImage(local_input_raster, { format: "float32" });
-							let local_input_sum = GeoPNG.getImageSum(local_input_raster, { format: "float32" });
-							local_scalar = world_pop_obj[hyde_years[i]]/local_input_sum;
-							
-							GeoPNG.saveNumberRasterImage({
-								file_path: `${this.intermediate_rasters_scaled_to_global}/popc_${hyde_years[i]}.png`,
-								format: "float32",
-								width: 4320,
-								height: 2160,
-								function: (local_index) => Math.ceil(local_input_png.data[local_index]*local_scalar)
-							});
-							
-							console.log(`- ${hyde_years[i]} - Input Population: ${local_input_sum}, Scalar: ${local_scalar}`);
-							resolve();
-						} catch (err) {
-							reject(err);
-						}
-					});
+		await GeoPNG.processTimeseriesParallel({
+			items: hyde_years,
+			concurrency: 4,
+			name: "landuse_HYDE D_scaleRastersToGlobalEstimates",
+			handler: async (year) => {
+				let local_input_raster = `${this.intermediate_rasters_mcevedy}/popc_${year}.png`;
+				let local_scalar = 1;
+				
+				if (!fs.existsSync(local_input_raster))
+					local_input_raster = `${this.intermediate_rasters_equirectangular}/popc_${this._getHYDEYearName(year)}_number.png`;
+				if (!fs.existsSync(local_input_raster)) return;
+				
+				let local_input_png = GeoPNG.loadNumberRasterImage(local_input_raster, { format: "float32" });
+				let local_input_sum = GeoPNG.getImageSum(local_input_raster, { format: "float32" });
+				local_scalar = world_pop_obj[year] / local_input_sum;
+				
+				GeoPNG.saveNumberRasterImage({
+					file_path: `${this.intermediate_rasters_scaled_to_global}/popc_${year}.png`,
+					format: "float32",
+					width: 4320,
+					height: 2160,
+					function: (local_index) => Math.ceil(local_input_png.data[local_index] * local_scalar)
 				});
-		}
+				
+				console.log(`- ${year} - Input Population: ${local_input_sum}, Scalar: ${local_scalar}`);
+			}
+		});
 	}
 	
 	static async processRasters (arg0_options) {

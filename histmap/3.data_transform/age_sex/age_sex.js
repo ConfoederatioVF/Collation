@@ -318,111 +318,132 @@ global.age_sex = class {
 	 * Probabilities are normalised per-pixel across all cohorts so that cohort sums exactly equal the Stadestér total.
 	 */
 	static async E_clampToStadester (arg0_options) {
+		//Convert from parameters
 		let options = (arg0_options) ? arg0_options : {};
+
+		//Declare local instance variables
+		let cohorts = this.getCohorts();
 		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+		let years = landuse_HYDE.sorted_hyde_years;
 
 		if (!fs.existsSync(this.intermediate_clamped_rasters)) fs.mkdirSync(this.intermediate_clamped_rasters, { recursive: true });
-		
-		let years = landuse_HYDE.sorted_hyde_years;
-		let cohorts = this.getCohorts();
-		
-		for (let y = 0; y < years.length; y++) {
-			let year = years[y];
-			let format_year = year > 2023 ? 2023 : year;
-			let popc_info = this.covariates_obj["popc_"](format_year);
-			
-			if (!fs.existsSync(popc_info[0])) continue;
-			
-			let popc_raster = GeoPNG.loadNumberRasterImage(popc_info[0], { format: popc_info[1] });
-			
-			//1. Load all cohort probability rasters for the current year upfront
-			let prob_rasters = {};
-			let missing_probs = false;
-			
+
+		let target_years = years.filter((year) => {
+			if (overwrite) return true;
 			for (let i = 0; i < cohorts.length; i++) {
-				let prob_path = `${this.intermediate_logit_rasters}logit_${year}_class_${cohorts[i]}.png`;
-				
-				if (!fs.existsSync(prob_path)) { missing_probs = true; break; }
-				prob_rasters[cohorts[i]] = GeoPNG.loadNumberRasterImage(prob_path, { format: "float32" });
+				let out_path = `${this.intermediate_clamped_rasters}global_${cohorts[i]}_${year}.png`;
+				if (!fs.existsSync(out_path)) return true;
 			}
-			
-			if (missing_probs) continue;
-			
-			//2. Compute per-pixel probability sums for normalisation
-			let total_pixels = 4320 * 2160;
-			let prob_sums = new Float32Array(total_pixels);
-			
-			for (let i = 0; i < cohorts.length; i++) {
-				let data = prob_rasters[cohorts[i]].data;
+			return false;
+		});
+
+		if (target_years.length === 0) return [];
+
+		//Return statement
+		return await GeoPNG.processTimeseriesParallel({
+			concurrency: options.concurrency || 8,
+			items: target_years,
+			name: "Age Sex E_clampToStadester",
+			task_generator: (year) => {
+				let format_year = (year > 2023) ? 2023 : year;
+				let popc_info = this.covariates_obj["popc_"](format_year);
+
+				if (!popc_info || !fs.existsSync(popc_info[0])) return null;
+
+				return {
+					type: "clamp_cohorts_to_stadester",
+					cohorts: cohorts,
+					logit_rasters_folder: this.intermediate_logit_rasters,
+					output_folder: this.intermediate_clamped_rasters,
+					popc_format: popc_info[1] || "float32",
+					popc_path: popc_info[0],
+					year: year
+				};
+			},
+			handler: async (year) => {
+				let format_year = (year > 2023) ? 2023 : year;
+				let popc_info = this.covariates_obj["popc_"](format_year);
 				
-				for (let j = 0; j < total_pixels; j++) {
-					let val = data[j];
-					if (!isNaN(val) && val > 0) prob_sums[j] += val;
+				if (!fs.existsSync(popc_info[0])) return;
+				
+				let popc_raster = GeoPNG.loadNumberRasterImage(popc_info[0], { format: popc_info[1] });
+				let prob_rasters = {};
+				let missing_probs = false;
+				
+				for (let i = 0; i < cohorts.length; i++) {
+					let prob_path = `${this.intermediate_logit_rasters}logit_${year}_class_${cohorts[i]}.png`;
+					
+					if (!fs.existsSync(prob_path)) { missing_probs = true; break; }
+					prob_rasters[cohorts[i]] = GeoPNG.loadNumberRasterImage(prob_path, { format: "float32" });
+				}
+				
+				if (missing_probs) return;
+				
+				let total_pixels = 4320 * 2160;
+				let prob_sums = new Float32Array(total_pixels);
+				
+				for (let i = 0; i < cohorts.length; i++) {
+					let data = prob_rasters[cohorts[i]].data;
+					
+					for (let j = 0; j < total_pixels; j++) {
+						let val = data[j];
+						if (!isNaN(val) && val > 0) prob_sums[j] += val;
+					}
+				}
+				
+				for (let i = 0; i < cohorts.length; i++) {
+					let c = cohorts[i];
+					let out_path = `${this.intermediate_clamped_rasters}global_${c}_${year}.png`;
+					
+					if (!overwrite && fs.existsSync(out_path)) continue;
+					
+					let prob_raster = prob_rasters[c];
+					
+					GeoPNG.saveNumberRasterImage({
+						file_path: out_path,
+						format: "float32",
+						width: 4320,
+						height: 2160,
+						function: (local_index) => {
+							let local_stadester_pop = popc_raster.data[local_index];
+							if (local_stadester_pop <= 0) return 0;
+							
+							let local_prob_sum = prob_sums[local_index];
+							let local_prob = prob_raster.data[local_index];
+							if (isNaN(local_prob) || local_prob < 0) local_prob = 0;
+							
+							if (local_prob_sum <= 0) return local_stadester_pop / cohorts.length;
+							return local_stadester_pop * (local_prob / local_prob_sum);
+						}
+					});
 				}
 			}
-			
-			//3. Distribute normalised probabilities into exact population aggregates
-			let has_clamped = false;
-			
-			for (let i = 0; i < cohorts.length; i++) {
-				let c = cohorts[i];
-				let out_path = `${this.intermediate_clamped_rasters}global_${c}_${year}.png`;
-				
-				if (!overwrite && fs.existsSync(out_path)) continue;
-				
-				let prob_raster = prob_rasters[c];
-				
-				GeoPNG.saveNumberRasterImage({
-					file_path: out_path,
-					format: "float32",
-					width: 4320,
-					height: 2160,
-					function: (local_index) => {
-						let local_stadester_pop = popc_raster.data[local_index];
-						
-						//Ocean / Null-Mask Fallback
-						if (local_stadester_pop <= 0) return 0;
-						
-						let local_prob_sum = prob_sums[local_index];
-						let local_prob = prob_raster.data[local_index];
-						if (isNaN(local_prob) || local_prob < 0) local_prob = 0;
-						
-						//Uniform Fallback: distribute evenly across cohorts if the model yielded no signal
-						if (local_prob_sum <= 0) return local_stadester_pop / cohorts.length;
-						
-						//Normalised probabilities are distributed exactly across the anchor footprint
-						return local_stadester_pop * (local_prob / local_prob_sum);
-					}
-				});
-				
-				has_clamped = true;
-			}
-			
-			if (has_clamped) console.log(`Clamped spatial demographic cohort aggregates securely to Stadestér populations for year ${year}.`);
-			
-			await Blacktraffic.yield();
-		}
+		});
 	}
 	
 	static async F_compositeTimeseries (arg0_options) {
+		//Convert from parameters
 		let options = (arg0_options) ? arg0_options : {};
+		
+		//Initialise options
 		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+
+		//Declare local instance variables
+		let cohorts = this.getCohorts();
+		let copy_tasks = [];
+		let wp_files = [];
+		let years = landuse_HYDE.sorted_hyde_years;
 
 		if (!fs.existsSync(this.output_rasters)) fs.mkdirSync(this.output_rasters, { recursive: true });
 		
-		let cohorts = this.getCohorts();
-		let years = landuse_HYDE.sorted_hyde_years;
-		
 		//Cache the WorldPop directory listing once to avoid repeated disk reads
-		let wp_files = [];
 		if (fs.existsSync(age_sex_WorldPop.output_rasters)) {
 			wp_files = fs.readdirSync(age_sex_WorldPop.output_rasters);
 		}
 		
-		//Iterate over the full temporal domain
+		//Build copy task list across the full temporal domain
 		for (let y = 0; y < years.length; y++) {
 			let year = years[y];
-			let has_composited = false;
 			
 			for (let c = 0; c < cohorts.length; c++) {
 				let cohort = cohorts[c];
@@ -459,14 +480,25 @@ global.age_sex = class {
 				}
 				
 				if (src_path) {
-					fs.copyFileSync(src_path, out_path);
-					has_composited = true;
+					copy_tasks.push({
+						dest: out_path,
+						src: src_path
+					});
 				}
 			}
-			
-			if (has_composited) console.log(`Composited demographic cohort timeseries for year ${year}.`);
-			
-			await Blacktraffic.yield();
+		}
+		
+		if (copy_tasks.length > 0) {
+			await GeoPNG.processTimeseriesParallel({
+				items: copy_tasks,
+				concurrency: options.concurrency || 8,
+				name: "age_sex F_compositeTimeseries",
+				task_generator: (task_item) => ({
+					task_type: "copy",
+					dest_path: task_item.dest,
+					source_path: task_item.src
+				})
+			});
 		}
 	}
 	

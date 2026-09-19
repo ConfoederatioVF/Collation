@@ -298,9 +298,18 @@
 				formatting_parameters: options.formatting_parameters
 			});
 			
+			let land_raster_data = null;
+			if (options.landarea_raster_path && fs.existsSync(options.landarea_raster_path))
+				land_raster_data = GeoPNG.loadNumberRasterImage(options.landarea_raster_path, { format: "int32" })?.data;
+
 			let passes_guard = (local_index) => {
 				if (options.guard_clause)
 					return options.guard_clause(local_index, rasters_obj);
+				if (options.guard_type === "uninhabited" || options.mask_uninhabited) {
+					let local_pop = Math.returnSafeNumber(rasters_obj["popd_"]?.data[local_index], 0);
+					if (local_pop === 0) return false;
+					if (land_raster_data && land_raster_data[local_index] === 0) return false;
+				}
 				return true;
 			};
 			

@@ -166,18 +166,10 @@
       if (global.GDP_PPP_SEDAC) await GDP_PPP_SEDAC.processRasters(gdp_ppp_sedac_options);
       if (global.GDP_nominal_SEDAC) await GDP_nominal_SEDAC.processRasters(gdp_nom_sedac_options);
       
-      if (!skip_training) {
-        if (global.GDP_PPP_OLS) await GDP_PPP_OLS.processRasters(gdp_ppp_ols_options);
-      } else {
-        console.log(`[NWM] Step C: Skipping GDP_PPP_OLS training (using existing models).`);
-      }
+      if (global.GDP_PPP_OLS) await GDP_PPP_OLS.processRasters(gdp_ppp_ols_options);
       if (global.GDP_PPP) await GDP_PPP.processRasters(gdp_ppp_options);
       
-      if (!skip_training) {
-        if (global.GDP_nominal_OLS) await GDP_nominal_OLS.processRasters(gdp_nom_ols_options);
-      } else {
-        console.log(`[NWM] Step C: Skipping GDP_nominal_OLS training (using existing models).`);
-      }
+      if (global.GDP_nominal_OLS) await GDP_nominal_OLS.processRasters(gdp_nom_ols_options);
       if (global.GDP_nominal) await GDP_nominal.processRasters(gdp_nom_options);
     }
     

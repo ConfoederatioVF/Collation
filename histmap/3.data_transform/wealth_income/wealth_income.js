@@ -248,74 +248,99 @@ global.wealth_income = class {
 		let interp_domain = this.options.interpolate_to_WID_domain;
 		let interp_gap = interp_domain[1] - interp_domain[0];
 		
+		//Declare local instance variables
+		let all_tasks = [];
+
 		console.log(`Generating final time-series...`);
-		
+
 		for (let i = 0; i < variables.length; i++) {
 			let current_variable = variables[i];
-			let local_src_dir = `${src_dir}${current_variable}/`;
 			let dest_dir = this.getOutputFolder(current_variable);
-			
+			let local_src_dir = `${src_dir}${current_variable}/`;
+
 			if (!fs.existsSync(dest_dir)) fs.mkdirSync(dest_dir, { recursive: true });
-			
+
 			// Establish the brushed gravity-target for 1800 (or upper domain edge)
-			let clamped_target_path = `${local_src_dir}clamped_${current_variable}_${interp_domain[1]}.png`;
 			let brushed_target_path = `${local_src_dir}clamped_${current_variable}_${interp_domain[1]}_brushed.png`;
-			
-			// Removed !fs.existsSync check to force overwrites during final processing if required
-			if (fs.existsSync(clamped_target_path)) {
+			let clamped_target_path = `${local_src_dir}clamped_${current_variable}_${interp_domain[1]}.png`;
+
+			if (fs.existsSync(clamped_target_path) && !fs.existsSync(brushed_target_path)) {
 				console.log(`Synthesizing Population-Masked Brush for WID Target (${interp_domain[1]}) for ${current_variable}...`);
 				try {
-					let wid_mask = GeoPNG.loadImage(admin_modern.input_iso2_geocodes_raster);
-					let raw_target = GeoPNG.loadNumberRasterImage(clamped_target_path, { format: "float32" });
-					
-					let format_year = interp_domain[1] > 2023 ? 2023 : interp_domain[1];
+					let format_year = (interp_domain[1] > 2023) ? 2023 : interp_domain[1];
 					let popc_info = wealth_income_OLS.covariates_obj["popc_"](format_year);
 					let pop_raster = GeoPNG.loadNumberRasterImage(popc_info[0], { format: popc_info[1] });
-					
+					let raw_target = GeoPNG.loadNumberRasterImage(clamped_target_path, { format: "float32" });
+					let wid_mask = GeoPNG.loadImage(admin_modern.input_iso2_geocodes_raster);
+
 					let brushed_data = GeoPNG.dasymetricBlur({
+						height: raw_target.height,
 						mask_data: wid_mask.data,
 						pop_data: pop_raster.data,
+						radius: 64,
 						target_data: raw_target.data,
-						height: raw_target.height,
-						width: raw_target.width,
-						radius: 64
+						width: raw_target.width
 					});
-					
+
 					GeoPNG.saveNumberRasterImage({
 						file_path: brushed_target_path,
 						format: "float32",
-						width: raw_target.width,
+						function: (idx) => brushed_data[idx],
 						height: raw_target.height,
-						function: (idx) => brushed_data[idx]
+						width: raw_target.width
 					});
 				} catch (e) {
 					console.error(`Brush synthesis failed for ${current_variable} (${interp_domain[1]}):`, e);
 				}
 			}
-			
+
 			for (let x = 0; x < years.length; x++) {
-				let year = years[x];
-				let source_path = `${this.intermediate_normalised_rasters}${current_variable}/OLS_normalised_${current_variable}_${year}.png`;
-				let clamped_source = `${local_src_dir}clamped_${current_variable}_${year}.png`;
-				let output_path = `${dest_dir}${current_variable}_${year}.png`;
-				
-				// Removed `existsSync` check entirely to allow strict overwriting during final processing
-				
+				let current_year = years[x];
+				all_tasks.push({
+					brushed_target_path: brushed_target_path,
+					clamped_source: `${local_src_dir}clamped_${current_variable}_${current_year}.png`,
+					dest_dir: dest_dir,
+					output_path: `${dest_dir}${current_variable}_${current_year}.png`,
+					source_path: `${this.intermediate_normalised_rasters}${current_variable}/OLS_normalised_${current_variable}_${current_year}.png`,
+					variable: current_variable,
+					year: current_year
+				});
+			}
+		}
+
+		await GeoPNG.processTimeseriesParallel({
+			concurrency: options.concurrency || 8,
+			items: all_tasks,
+			name: "WID C_interpolateRasters",
+			task_generator: (task_item) => {
+				return {
+					type: "interpolate_wid_raster",
+					brushed_target_path: task_item.brushed_target_path,
+					clamped_source: task_item.clamped_source,
+					interp_domain: interp_domain,
+					output_path: task_item.output_path,
+					source_path: task_item.source_path,
+					year: task_item.year
+				};
+			},
+			handler: async (task_item) => {
+				let brushed_target_path = task_item.brushed_target_path;
+				let clamped_source = task_item.clamped_source;
+				let current_variable = task_item.variable;
+				let output_path = task_item.output_path;
+				let source_path = task_item.source_path;
+				let year = task_item.year;
+
 				try {
 					let generated = false;
 					if (year < interp_domain[0]) {
-						// Purely structural un-clamped predictions for deep antiquity
 						if (fs.existsSync(source_path)) {
-							console.log(`[Copying] Deep Antiquity OLS format for ${current_variable} (${year})`);
 							fs.copyFileSync(source_path, output_path);
 							generated = true;
 						}
 					} else if (year >= interp_domain[0] && year < interp_domain[1]) {
-						// Interpolate between normal OLS structure and gravity-blurred WID boundary target
 						if (fs.existsSync(source_path) && fs.existsSync(brushed_target_path)) {
 							let fraction = (year - interp_domain[0]) / interp_gap;
-							console.log(`[Interpolating] ${year} OLS -> WID [Phase: ${fraction.toFixed(3)}]`);
-							
 							GeoPNG.linearInterpolation(source_path, brushed_target_path, output_path, {
 								format: "float32",
 								fraction: fraction,
@@ -325,23 +350,18 @@ global.wealth_income = class {
 							generated = true;
 						}
 					} else {
-						// Standard fully constrained WID domain
 						if (fs.existsSync(clamped_source)) {
-							console.log(`[Copying] Final processed clamped format for ${current_variable} (${year})`);
 							fs.copyFileSync(clamped_source, output_path);
 							generated = true;
 						}
 					}
-					
-					// Apply Missing Data Fallback: 
-					// If the final raster has 0 for a pixel, check clamped source then check OLS source for data
+
 					if (generated && fs.existsSync(output_path)) {
-						let out_raster = GeoPNG.loadNumberRasterImage(output_path, { format: "float32" });
 						let clamped_raster = fs.existsSync(clamped_source) ? GeoPNG.loadNumberRasterImage(clamped_source, { format: "float32" }) : null;
-						let ols_raster = fs.existsSync(source_path) ? GeoPNG.loadNumberRasterImage(source_path, { format: "float32" }) : null;
-						
 						let modified = false;
-						
+						let ols_raster = fs.existsSync(source_path) ? GeoPNG.loadNumberRasterImage(source_path, { format: "float32" }) : null;
+						let out_raster = GeoPNG.loadNumberRasterImage(output_path, { format: "float32" });
+
 						for (let j = 0; j < out_raster.data.length; j++) {
 							if (out_raster.data[j] === 0) {
 								if (clamped_raster && clamped_raster.data[j] !== 0) {
@@ -353,26 +373,23 @@ global.wealth_income = class {
 								}
 							}
 						}
-						
-						// Save back if the output grid was patched
+
 						if (modified) {
 							GeoPNG.saveNumberRasterImage({
 								file_path: output_path,
 								format: "float32",
-								width: out_raster.width,
+								function: (idx) => out_raster.data[idx],
 								height: out_raster.height,
-								function: (idx) => out_raster.data[idx]
+								width: out_raster.width
 							});
 						}
 					}
-					
 				} catch (e) {
 					console.error(`Pass failed for ${current_variable} in year ${year}:`, e);
 				}
-				
-				await Blacktraffic.yield();
 			}
-		}
+		});
+
 		console.log(`Final Interpolation Pass Complete.`);
 	}
 	

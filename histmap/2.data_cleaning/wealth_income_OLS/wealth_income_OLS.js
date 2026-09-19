@@ -54,70 +54,69 @@ global.wealth_income_OLS = class {
 	static async A_trainWIDModels (arg0_options) {
 		//Convert from parameters
 		let options = (arg0_options) ? arg0_options : {};
-		
+
 		//Initialise options
 		if (!options.lambda) options.lambda = 1e6;
 		if (!options.weighting_function) options.weighting_function = (value) => Math.abs(value);
-		
+
 		//Declare local instance variables
+		let training_tasks = [];
 		let variables = wealth_income_WID.options.variables;
 		let years = landuse_HYDE.sorted_hyde_years;
-		
+
 		for (let i = 0; i < variables.length; i++) {
 			let current_variable = variables[i];
 			let local_models_folder = `${this.intermediate_ols_models_folder}${current_variable}/`;
-			
+
 			if (!fs.existsSync(local_models_folder)) fs.mkdirSync(local_models_folder, { recursive: true });
-			
-			console.log(`Processing OLS Training for ${current_variable}.`);
-			
-			//Iterate over all HYDE years
+
 			for (let x = 0; x < years.length; x++) {
 				let current_year = years[x];
 				let utility_raster_path = `${wealth_income_WID.bf}${current_variable}/${current_variable}_${current_year}.png`;
-				
+
 				if (fs.existsSync(utility_raster_path)) {
-					console.log(`- Loading covariates for ${current_variable} (${current_year})`);
-					
-					let covariates_obj = await Statistics.loadOLSCovariates(utility_raster_path, {
-						utility_format: "float32",
-						covariates_obj: this.covariates_obj,
-						formatting_parameters: [current_year]
+					training_tasks.push({
+						variable: current_variable,
+						year: current_year
 					});
-					
-					//Crucial step: Filter out Zero Values (Missing WID Data) to prevent them skewing OLS regression
-					let filtered_X = [];
-					let filtered_Y = [];
-					
-					for (let j = 0; j < covariates_obj.Y.length; j++) {
-						let utility_val = covariates_obj.Y[j][0];
-						if (utility_val !== 0 && !isNaN(utility_val)) {
-							filtered_X.push(covariates_obj.X[j]);
-							filtered_Y.push(covariates_obj.Y[j]);
-						}
-					}
-					
-					//Override matrices with cleanly filtered ones
-					covariates_obj.X = filtered_X;
-					covariates_obj.Y = filtered_Y;
-					
-					//Check if we still have valid data points remaining
-					if (covariates_obj.X.length === 0) {
-						console.warn(`- No valid non-zero data points for ${current_variable} in ${current_year}. Skipping OLS.`);
-						continue;
-					}
-					
-					//Train and write model to JSON
-					let output_file_path = `${local_models_folder}OLS_${current_variable}_${current_year}.json`;
-					
-					await Statistics.trainOLSModel(output_file_path, covariates_obj, {
-						...options,
-						key: `${current_variable}_${current_year}`
-					});
-					await Blacktraffic.yield();
 				}
 			}
 		}
+
+		if (training_tasks.length === 0) return [];
+
+		//Return statement
+		return await Statistics.trainOLSModelsParallel(training_tasks, (task_item) => {
+			let cov_obj = this.covariates_obj;
+			let covariates_map = {};
+			let current_variable = task_item.variable;
+			let current_year = task_item.year;
+			let keys = Object.keys(cov_obj);
+			let local_models_folder = `${this.intermediate_ols_models_folder}${current_variable}/`;
+			let output_file_path = `${local_models_folder}OLS_${current_variable}_${current_year}.json`;
+			let utility_raster_path = `${wealth_income_WID.bf}${current_variable}/${current_variable}_${current_year}.png`;
+
+			for (let x = 0; x < keys.length; x++) {
+				let k = keys[x];
+				covariates_map[k] = cov_obj[k](current_year);
+			}
+
+			return {
+				covariates_map: covariates_map,
+				options: {
+					...options,
+					filter_zero_targets: true,
+					formatting_parameters: [current_year],
+					key: `${current_variable}_${current_year}`
+				},
+				output_file_path: output_file_path,
+				target_file_path: utility_raster_path,
+				target_format: "float32"
+			};
+		}, {
+			concurrency: options.concurrency || 8,
+			name: "WID OLS Model Training"
+		});
 	}
 	
 	static async B_geomeanWIDModels (arg0_options) {
@@ -137,51 +136,75 @@ global.wealth_income_OLS = class {
 		}
 	}
 	
-	static async C_generateOLSRasters () {
+	static async C_generateOLSRasters (arg0_options) {
+		//Convert from parameters
+		let options = (arg0_options) ? arg0_options : {};
+
 		//Declare local instance variables
-		let variables = wealth_income_WID.options.variables;
-		let years = landuse_HYDE.sorted_hyde_years;
-		let landarea_raster = GeoPNG.loadNumberRasterImage(metadata_HYDE.input_raster_land_area, {
+		let landarea_file = metadata_HYDE.input_raster_land_area;
+		let landarea_raster = GeoPNG.loadNumberRasterImage(landarea_file, {
 			format: "int32"
 		});
-		
+		let target_tasks = [];
+		let variables = wealth_income_WID.options.variables;
+		let years = landuse_HYDE.sorted_hyde_years;
+
 		for (let i = 0; i < variables.length; i++) {
 			let current_variable = variables[i];
-			let local_models_folder = `${this.intermediate_ols_models_folder}${current_variable}/`;
+			let geomean_model_path = `${this.intermediate_ols_models_folder}${current_variable}/geomean_OLS_${current_variable}.json`;
 			let local_rasters_folder = `${this.intermediate_ols_rasters_folder}${current_variable}/`;
-			
-			if (!fs.existsSync(local_rasters_folder)) fs.mkdirSync(local_rasters_folder, { recursive: true });
-			
-			console.log(`Generating OLS Rasters for ${current_variable}.`);
-			
-			//Load the unified geomean model for the variable
-			let geomean_model_path = `${local_models_folder}geomean_OLS_${current_variable}.json`;
+
 			if (!fs.existsSync(geomean_model_path)) {
 				console.warn(`- Missing Geomean model for ${current_variable} at ${geomean_model_path}. Skipping raster generation.`);
 				continue;
 			}
-			let model_obj = JSON.parse(fs.readFileSync(geomean_model_path, "utf8"));
-			
-			//Iterate over all HYDE years applying the unified structural coefficients
+			if (!fs.existsSync(local_rasters_folder)) fs.mkdirSync(local_rasters_folder, { recursive: true });
+
 			for (let x = 0; x < years.length; x++) {
-				let current_year = years[x];
-				let local_output_path = `${local_rasters_folder}OLS_${current_variable}_${current_year}.png`;
-				
-				await Statistics.generateOLSRaster(local_output_path, {
-					covariates_obj: this.covariates_obj,
-					format: "float32",
-					formatting_parameters: [current_year],
-					model_obj: model_obj, // Pass the static, averaged JSON
-					
-					guard_clause: (local_index, rasters_obj) => {
-						//Skip calculating values over unpopulated areas and ocean pixels
-						let local_population = Math.returnSafeNumber(rasters_obj["popd_"]?.data[local_index], 0);
-						return !(local_population === 0 || landarea_raster.data[local_index] === 0);
-					}
+				target_tasks.push({
+					model_path: geomean_model_path,
+					variable: current_variable,
+					year: years[x]
 				});
-				await Blacktraffic.yield();
 			}
 		}
+
+		if (target_tasks.length === 0) return [];
+
+		//Return statement
+		return await Statistics.generateOLSRastersParallel(target_tasks, (task_item) => {
+			let cov_obj = this.covariates_obj;
+			let covariates_map = {};
+			let current_variable = task_item.variable;
+			let current_year = task_item.year;
+			let keys = Object.keys(cov_obj);
+			let local_output_path = `${this.intermediate_ols_rasters_folder}${current_variable}/OLS_${current_variable}_${current_year}.png`;
+			let model_obj = JSON.parse(fs.readFileSync(task_item.model_path, "utf8"));
+
+			for (let x = 0; x < keys.length; x++) {
+				let k = keys[x];
+				covariates_map[k] = cov_obj[k](current_year);
+			}
+
+			return {
+				covariates_map: covariates_map,
+				model_obj: model_obj,
+				options: {
+					format: "float32",
+					formatting_parameters: [current_year],
+					guard_clause: (local_index, rasters_obj) => {
+						let local_population = Math.returnSafeNumber(rasters_obj["popd_"]?.data[local_index], 0);
+						return !(local_population === 0 || landarea_raster.data[local_index] === 0);
+					},
+					landarea_raster_path: landarea_file,
+					mask_uninhabited: true
+				},
+				output_file_path: local_output_path
+			};
+		}, {
+			concurrency: options.concurrency || 8,
+			name: "WID OLS Raster Generation"
+		});
 	}
 	
 	static async processRasters (arg0_options) {
@@ -203,6 +226,6 @@ global.wealth_income_OLS = class {
 		if (!options.exclude.includes("B")) await this.B_geomeanWIDModels(options);
 		
 		//3. Raster Generation Phase (Backcalculating all years using unified model)
-		if (!options.exclude.includes("C")) await this.C_generateOLSRasters();
+		if (!options.exclude.includes("C")) await this.C_generateOLSRasters(options);
 	}
 };

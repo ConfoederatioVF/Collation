@@ -23,54 +23,74 @@ global.gini_Eoscala = class {
 	};
 	
 	static async A_generateOLSRasters (arg0_options) {
+		//Convert from parameters
 		let options = (arg0_options) ? arg0_options : {};
-		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
 
-		let years = this.years();
+		//Declare local instance variables
 		let base_dir = this.intermediate_ols_rasters;
+		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+		let target_years = [];
+		let years = this.years();
+
 		if (!fs.existsSync(base_dir)) fs.mkdirSync(base_dir, { recursive: true });
-		
+
 		for (let i = 0; i < years.length; i++) {
 			let year = years[i];
+			let output_file_path = `${base_dir}gini_OLS_${year}.png`;
+			if (!overwrite && fs.existsSync(output_file_path)) continue;
+			target_years.push(year);
+		}
+
+		if (target_years.length === 0) return [];
+
+		//Return statement
+		return await Statistics.generateOLSRastersParallel(target_years, (year) => {
+			let cov_obj = this.input_covariates_obj();
+			let covariates_map = {};
+			let filtered_coefficients = {};
+			let format_year = (year > 2023) ? 2023 : year;
+			let keys = Object.keys(cov_obj);
+			let model_obj = null;
 			let model_path = this.input_eoscala_gini_json();
-			
+			let output_file_path = `${base_dir}gini_OLS_${year}.png`;
+
 			if (year >= this.options.gapminder_domain[0] && year < this.options.subngini_domain[0]) {
 				model_path = this.input_gapminder_gini_json();
 			} else if (year >= this.options.subngini_domain[0]) {
 				model_path = this.input_subngini_json();
 			}
-			
-			let output_file_path = `${base_dir}gini_OLS_${year}.png`;
-			if (!overwrite && fs.existsSync(output_file_path)) continue;
-			
-			// Load and parse the model to filter invalid coefficients
-			let model_obj = JSON.parse(fs.readFileSync(model_path, "utf8"));
-			let filtered_coefficients = {};
-			
+
+			model_obj = JSON.parse(fs.readFileSync(model_path, "utf8"));
+
 			Object.iterate(model_obj.coefficients, (local_key, local_value) => {
 				let parsed_val = parseFloat(local_value);
-				
+
 				if (parsed_val < 1) {
 					filtered_coefficients[local_key] = parsed_val;
 				} else {
 					console.warn(`- Dropped covariate ${local_key} for year ${year} because coefficient ${parsed_val} exceeds 1.`);
 				}
 			});
-			
+
 			model_obj.coefficients = filtered_coefficients;
-			
-			// Fix for 2024-2025 missing covariates: cap the covariate formatting pull at 2023
-			let format_year = year > 2023 ? 2023 : year;
-			
-			console.log(`Generating OLS raster for year ${year} using model ${model_path}`);
-			await Statistics.generateOLSRaster(output_file_path, {
-				covariates_obj: this.input_covariates_obj(),
-				format: "float32",
-				formatting_parameters: [format_year],
-				model_obj: model_obj
-			});
-			await Blacktraffic.yield();
-		}
+
+			for (let x = 0; x < keys.length; x++) {
+				let k = keys[x];
+				covariates_map[k] = cov_obj[k](format_year);
+			}
+
+			return {
+				covariates_map: covariates_map,
+				model_obj: model_obj,
+				options: {
+					format: "float32"
+				},
+				output_file_path: output_file_path
+			};
+		}, {
+			concurrency: options.concurrency || 8,
+			name: "gini_Eoscala OLS Raster Generation"
+		});
 	}
 	
 	static async B_normaliseOLSRasters () {
@@ -383,13 +403,58 @@ global.gini_Eoscala = class {
 		}
 		
 		await GeoPNG.processTimeseriesParallel({
-			concurrency: 4,
+			concurrency: options.concurrency || 8,
 			items: years,
 			name: "gini_Eoscala D_interpolateRasters",
-			handler: async (year) => {
-				let source_path = `${src_dir}gini_clamped_${year}.png`;
+			task_generator: (year) => {
+				let fraction = 0;
 				let output_path = `${dest_dir}gini_${year}.png`;
 				let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+				let source_path = `${src_dir}gini_clamped_${year}.png`;
+
+				if (fs.existsSync(output_path) && !overwrite) return null;
+				if (!fs.existsSync(source_path)) return null;
+
+				if (year >= gapminder_interp[0] && year < gapminder_interp[1]) {
+					fraction = (year - gapminder_interp[0]) / gapminder_gap;
+					return {
+						type: "linear_interpolation",
+						from_file_path: source_path,
+						options: {
+							format: "float32",
+							fraction: fraction,
+							lower_value_threshold: 0,
+							threshold_fraction: 0
+						},
+						output_file_path: output_path,
+						to_file_path: gapminder_target_path
+					};
+				} else if (year >= subngini_interp[0] && year < subngini_interp[1]) {
+					fraction = (year - subngini_interp[0]) / subngini_gap;
+					return {
+						type: "linear_interpolation",
+						from_file_path: source_path,
+						options: {
+							format: "float32",
+							fraction: fraction,
+							lower_value_threshold: 0,
+							threshold_fraction: 0
+						},
+						output_file_path: output_path,
+						to_file_path: subngini_target_path
+					};
+				} else {
+					return {
+						type: "copy",
+						from_file_path: source_path,
+						output_file_path: output_path
+					};
+				}
+			},
+			handler: async (year) => {
+				let output_path = `${dest_dir}gini_${year}.png`;
+				let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+				let source_path = `${src_dir}gini_clamped_${year}.png`;
 				
 				if (fs.existsSync(output_path) && !overwrite) return;
 				if (!fs.existsSync(source_path)) return;

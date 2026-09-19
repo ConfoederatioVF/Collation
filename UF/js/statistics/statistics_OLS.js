@@ -657,6 +657,19 @@
 						formatting_parameters: (task_def.options && task_def.options.formatting_parameters) ? task_def.options.formatting_parameters : [],
 						utility_format: task_def.target_format || "float32"
 					});
+					if (task_def.options && task_def.options.filter_zero_targets && loaded_obj && loaded_obj.Y) {
+						let filtered_X = [];
+						let filtered_Y = [];
+						for (let j = 0; j < loaded_obj.Y.length; j++) {
+							let utility_val = loaded_obj.Y[j][0];
+							if (utility_val !== 0 && !isNaN(utility_val)) {
+								filtered_X.push(loaded_obj.X[j]);
+								filtered_Y.push(loaded_obj.Y[j]);
+							}
+						}
+						loaded_obj.X = filtered_X;
+						loaded_obj.Y = filtered_Y;
+					}
 					if (!loaded_obj || !loaded_obj.X || loaded_obj.X.length === 0) return null;
 					return Statistics.trainOLSModel(task_def.output_file_path, loaded_obj, task_def.options || {});
 				}

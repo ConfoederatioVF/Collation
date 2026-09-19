@@ -1,5 +1,8 @@
 //Initialise functions
 {
+	let fs = (typeof global.fs !== "undefined") ? global.fs : require("fs");
+	let path = (typeof global.path !== "undefined") ? global.path : require("path");
+
 	if (!global.GeoPNG)
 		/**
 		 * Analogous to a GeoTIFF file format, but in PNG form for easier editing. Single variable. Part of Geospatiale III.
@@ -95,9 +98,11 @@
 		let width = options.width;
 		
 		//Ensure destination directory exists
-		let parent_dir = path.dirname(path.resolve(options.file_path));
-		if (!fs.existsSync(parent_dir))
-			await fs.promises.mkdir(parent_dir, { recursive: true });
+		let node_path = (typeof path !== "undefined") ? path : require("path");
+		let parent_dir = node_path.dirname(node_path.resolve(options.file_path));
+		let node_fs = (typeof fs !== "undefined") ? fs : require("fs");
+		if (!node_fs.existsSync(parent_dir))
+			await node_fs.promises.mkdir(parent_dir, { recursive: true });
 		
 		if (options.data) {
 			let buffer_data = options.data;

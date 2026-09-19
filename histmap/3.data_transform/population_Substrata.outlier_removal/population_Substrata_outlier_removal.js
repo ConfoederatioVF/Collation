@@ -336,44 +336,64 @@ global.population_Substrata_outlier_removal = class {
 		}
 	}
 	
-	static async C_scaleProcessedHYDEToGlobal () {
+	static async C_scaleProcessedHYDEToGlobal (arg0_options) {
+		//Convert from parameters
+		let options = (arg0_options) ? arg0_options : {};
+
 		//Declare local instance variables
 		let hyde_years = landuse_HYDE.hyde_years;
 		let world_pop_obj = population_Global.A_getWorldPopulationObject();
-		
-		//Iterate over all hyde_years and scale to the global target
-		for (let i = 0; i < hyde_years.length; i++) {
-			//Input is the output of the Statista stage (Stage B2)
-			let local_hyde_input_path = `${this.intermediate_rasters_scaled_to_statista}popc_${hyde_years[i]}.png`;
-			//Output is the final Global Rasters folder (Stage C)
-			let local_output_path = `${this.intermediate_rasters_scaled_to_global}popc_${hyde_years[i]}.png`;
-			let local_world_pop = world_pop_obj[hyde_years[i]];
-			
-			if (fs.existsSync(local_hyde_input_path)) {
-				let local_hyde_sum = GeoPNG.getImageSum(local_hyde_input_path, {
-					format: "float32"
-				});
-				let local_scalar = local_world_pop / local_hyde_sum;
-				
-				console.log(`- Final global scaling for ${hyde_years[i]} (x${local_scalar.toFixed(4)}) ..`);
-				
-				let local_hyde_image = GeoPNG.loadNumberRasterImage(local_hyde_input_path, {
-					format: "float32"
-				});
-				GeoPNG.saveNumberRasterImage({
-					file_path: local_output_path,
+
+		//Return statement
+		return await GeoPNG.processTimeseriesParallel({
+			concurrency: options.concurrency || 8,
+			items: hyde_years,
+			name: "population_Substrata C_scaleProcessedHYDEToGlobal",
+			task_generator: (year) => {
+				let local_hyde_input_path = `${this.intermediate_rasters_scaled_to_statista}popc_${year}.png`;
+				let local_output_path = `${this.intermediate_rasters_scaled_to_global}popc_${year}.png`;
+				let local_world_pop = world_pop_obj[year];
+
+				if (!fs.existsSync(local_hyde_input_path)) return null;
+
+				return {
+					type: "scale_to_global",
 					format: "float32",
-					height: local_hyde_image.height,
-					width: local_hyde_image.width,
-					function: (local_index) => local_hyde_image.data[local_index]*local_scalar,
-				});
-			} else {
-				console.warn(`- ${local_hyde_input_path} could not be found.`);
+					input_path: local_hyde_input_path,
+					output_path: local_output_path,
+					target_sum: local_world_pop
+				};
+			},
+			handler: async (year) => {
+				let local_hyde_input_path = `${this.intermediate_rasters_scaled_to_statista}popc_${year}.png`;
+				let local_output_path = `${this.intermediate_rasters_scaled_to_global}popc_${year}.png`;
+				let local_world_pop = world_pop_obj[year];
+
+				if (fs.existsSync(local_hyde_input_path)) {
+					let local_hyde_sum = GeoPNG.getImageSum(local_hyde_input_path, {
+						format: "float32"
+					});
+					let local_scalar = local_world_pop / local_hyde_sum;
+
+					let local_hyde_image = GeoPNG.loadNumberRasterImage(local_hyde_input_path, {
+						format: "float32"
+					});
+					GeoPNG.saveNumberRasterImage({
+						file_path: local_output_path,
+						format: "float32",
+						height: local_hyde_image.height,
+						width: local_hyde_image.width,
+						function: (local_index) => local_hyde_image.data[local_index]*local_scalar
+					});
+				}
 			}
-		}
+		});
 	}
 	
-	static async D_interpolateToGHSL () {
+	static async D_interpolateToGHSL (arg0_options) {
+		//Convert from parameters
+		let options = (arg0_options) ? arg0_options : {};
+
 		//Declare local instance variables
 		let GHSL_domain = this.options.interpolate_to_GHSL_domain;
 		let GHSL1_domain = this.options.interpolate_to_GHSL1_domain;
@@ -381,81 +401,145 @@ global.population_Substrata_outlier_removal = class {
 		let hyde_years = landuse_HYDE.sorted_hyde_years;
 		let land_area_path = (typeof metadata_HYDE !== "undefined" && metadata_HYDE.input_raster_land_area) ?
 			metadata_HYDE.input_raster_land_area : `${h1}/metadata_HYDE/general_rasters/land_area.png`;
+		let target_years = hyde_years.filter((y) => y >= GHSL_domain[0]);
 		let to_path = `${this.input_GHSL_rasters}GHS_POP_${GHSL_domain[1]}.png`;
 		let year_gap = GHSL_domain[1] - GHSL_domain[0];
 		let year_gap2 = GHSL2_domain[1] - GHSL2_domain[0];
-		
-		//Iterate over all landuse_HYDE.hyde_years
-		for (let i = 0; i < hyde_years.length; i++) {
-			let current_year = hyde_years[i];
-			let local_ghsl_path = `${this.input_GHSL_rasters}GHS_POP_${current_year}.png`;
-			let local_output_path = `${this.intermediate_rasters_interpolated}popc_${current_year}.png`;
-			
-			if (current_year >= GHSL_domain[0]) {
+
+		//Return statement
+		return await GeoPNG.processTimeseriesParallel({
+			concurrency: options.concurrency || 8,
+			items: target_years,
+			name: "population_Substrata D_interpolateToGHSL",
+			task_generator: (current_year) => {
 				let fraction = (current_year - GHSL_domain[0])/year_gap;
 				let local_from_path = `${this.intermediate_rasters_scaled_to_global}popc_${current_year}.png`;
-				
+				let local_ghsl_path = `${this.input_GHSL_rasters}GHS_POP_${current_year}.png`;
+				let local_output_path = `${this.intermediate_rasters_interpolated}popc_${current_year}.png`;
+
+				if (current_year < GHSL1_domain[1]) {
+					return {
+						type: "linear_interpolation",
+						from_file_path: local_from_path,
+						options: {
+							buffer_distance: 5,
+							format: "float32",
+							fraction: fraction,
+							land_area_file: land_area_path,
+							upper_value_threshold: 256
+						},
+						output_file_path: local_output_path,
+						to_file_path: to_path
+					};
+				} else if (current_year >= GHSL2_domain[0] && current_year < GHSL2_domain[1]) {
+					let threshold_fraction = (current_year - GHSL2_domain[0])/year_gap2;
+					return {
+						type: "linear_interpolation",
+						from_file_path: local_from_path,
+						options: {
+							buffer_distance: 5,
+							format: "float32",
+							fraction: fraction,
+							land_area_file: land_area_path,
+							threshold_fraction: threshold_fraction,
+							upper_value_threshold: 256
+						},
+						output_file_path: local_output_path,
+						to_file_path: to_path
+					};
+				} else {
+					if (fs.existsSync(local_ghsl_path)) {
+						return {
+							type: "copy",
+							from_file_path: local_ghsl_path,
+							output_file_path: local_output_path
+						};
+					}
+					return null;
+				}
+			},
+			handler: async (current_year) => {
+				let fraction = (current_year - GHSL_domain[0])/year_gap;
+				let local_from_path = `${this.intermediate_rasters_scaled_to_global}popc_${current_year}.png`;
+				let local_ghsl_path = `${this.input_GHSL_rasters}GHS_POP_${current_year}.png`;
+				let local_output_path = `${this.intermediate_rasters_interpolated}popc_${current_year}.png`;
+
 				if (current_year < GHSL1_domain[1]) {
 					GeoPNG.linearInterpolation(local_from_path, to_path, local_output_path, {
 						buffer_distance: 5,
 						format: "float32",
-						fraction,
+						fraction: fraction,
 						land_area_file: land_area_path,
 						upper_value_threshold: 256
 					});
-					console.log(`- (1st-pass) Finished interpolating ${local_from_path} to GHSL.`);
 				} else if (current_year >= GHSL2_domain[0] && current_year < GHSL2_domain[1]) {
 					let threshold_fraction = (current_year - GHSL2_domain[0])/year_gap2;
-					
 					GeoPNG.linearInterpolation(local_from_path, to_path, local_output_path, {
 						buffer_distance: 5,
 						format: "float32",
-						fraction,
+						fraction: fraction,
 						land_area_file: land_area_path,
-						threshold_fraction,
+						threshold_fraction: threshold_fraction,
 						upper_value_threshold: 256
 					});
-					console.log(`- (2nd-pass) Finished interpolating ${local_from_path} to GHSL.`);
 				} else {
 					if (fs.existsSync(local_ghsl_path)) {
-						console.log(`- Copying GHSL for ${current_year}.`);
 						fs.copyFileSync(local_ghsl_path, local_output_path);
 					}
 				}
 			}
-		}
+		});
 	}
 	
-	static async D_convertToGeoPNG_int32 () {
+	static async D_convertToGeoPNG_int32 (arg0_options) {
+		//Convert from parameters
+		let options = (arg0_options) ? arg0_options : {};
+
 		//Declare local instance variables
 		let hyde_years = landuse_HYDE.sorted_hyde_years;
-		
-		//Iterate over all hyde_years and convert to GeoPNG_int32
+
 		console.log(`Converting from float32 to int32 for older versions of SVE.`);
-		for (let i = 0; i < hyde_years.length; i++) {
-			let local_input_path = `${this.intermediate_rasters_interpolated}popc_${hyde_years[i]}.png`;
-			let local_output_path = `${this.intermediate_rasters_geopng_int32}popc_${hyde_years[i]}.png`;
-				if (!fs.existsSync(local_input_path)) {
-					console.log(`- File was outside interpolated range, converting fallback instead.`);
-					local_input_path = `${this.intermediate_rasters_scaled_to_global}popc_${hyde_years[i]}.png`;
-				}
-			
-			let current_raster = GeoPNG.loadNumberRasterImage(local_input_path, {
-				format: "float32"
-			});
-			let rounding_method = "round";
-				if (hyde_years[i] < 1600) rounding_method = "ceil"; //Helps with sparse regions; prior to 1600AD due to Great Dying/Siberian colonisation effects
-			
-			GeoPNG.saveNumberRasterImage({
-				file_path: local_output_path,
-				format: "int32",
-				height: 2160,
-				width: 4320,
-				function: (local_index) => Math[rounding_method](current_raster.data[local_index])
-			});
-			console.log(`- (${i}/${hyde_years.length}) Saved int32 version to ${local_output_path}.`);
-			await Blacktraffic.yield();
-		}
+
+		//Return statement
+		return await GeoPNG.processTimeseriesParallel({
+			concurrency: options.concurrency || 8,
+			items: hyde_years,
+			name: "population_Substrata D_convertToGeoPNG_int32",
+			task_generator: (year) => {
+				let local_input_path = `${this.intermediate_rasters_interpolated}popc_${year}.png`;
+				let local_output_path = `${this.intermediate_rasters_geopng_int32}popc_${year}.png`;
+				if (!fs.existsSync(local_input_path))
+					local_input_path = `${this.intermediate_rasters_scaled_to_global}popc_${year}.png`;
+
+				let rounding_method = (year < 1600) ? "ceil" : "round";
+
+				return {
+					type: "convert_to_int32",
+					input_path: local_input_path,
+					output_path: local_output_path,
+					rounding_method: rounding_method
+				};
+			},
+			handler: async (year) => {
+				let local_input_path = `${this.intermediate_rasters_interpolated}popc_${year}.png`;
+				let local_output_path = `${this.intermediate_rasters_geopng_int32}popc_${year}.png`;
+				if (!fs.existsSync(local_input_path))
+					local_input_path = `${this.intermediate_rasters_scaled_to_global}popc_${year}.png`;
+
+				let current_raster = GeoPNG.loadNumberRasterImage(local_input_path, {
+					format: "float32"
+				});
+				let rounding_method = (year < 1600) ? "ceil" : "round";
+
+				GeoPNG.saveNumberRasterImage({
+					file_path: local_output_path,
+					format: "int32",
+					height: 2160,
+					width: 4320,
+					function: (local_index) => Math[rounding_method](current_raster.data[local_index])
+				});
+			}
+		});
 	}
 	
 	static async processRasters (arg0_options) {
@@ -471,11 +555,11 @@ global.population_Substrata_outlier_removal = class {
 		if (!options.exclude.includes("B1")) await population_Substrata_northern_america.processRasters();
 		if (!options.exclude.includes("B2")) await this.B_scaleProcessedHYDEToStatistaRegions();
 		//3. Scale processed outliers to global population
-		if (!options.exclude.includes("C")) await this.C_scaleProcessedHYDEToGlobal();
+		if (!options.exclude.includes("C")) await this.C_scaleProcessedHYDEToGlobal(options);
 		//4. Conversion to int32 for backwards compatibility
 		if (!options.exclude.includes("D")) {
-			await this.D_interpolateToGHSL();
-			await this.D_convertToGeoPNG_int32();
+			await this.D_interpolateToGHSL(options);
+			await this.D_convertToGeoPNG_int32(options);
 		}
 	}
 };
