@@ -308,43 +308,55 @@ global.births_deaths_OLS = class {
 	}
 	
 	static async B_trainOLSModels (arg0_options) {
+		//Convert from parameters
 		let options = (arg0_options) ? arg0_options : {};
+		
+		//Initialise options
+		let lambda_val = (options.lambda !== undefined) ? options.lambda : 1;
 		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
-		if (!options.lambda) options.lambda = 1;
 		
-		let variables_obj = this._getVariablesObj();
-		let years = landuse_HYDE.sorted_hyde_years;
+		//Declare local instance variables
 		let covariates_obj = this.covariates_obj();
-		
+		let variables_obj = this._getVariablesObj();
 		let variable_keys = Object.keys(variables_obj);
+		let years = landuse_HYDE.sorted_hyde_years;
+		
 		for (let v = 0; v < variable_keys.length; v++) {
 			let variable_obj = variables_obj[variable_keys[v]];
-			
-			for (let y = 0; y < years.length; y++) {
-				let year = years[y];
+			let target_years = years.filter((year) => {
 				let target_path = `${variable_obj.target_folder}${variable_obj.actual_prefix}_target_${year}.png`;
 				let model_path = `${variable_obj.ols_folder}${variable_obj.model_prefix}${year}.json`;
-				
-				if (!fs.existsSync(target_path)) continue;
-				if (!overwrite && fs.existsSync(model_path)) continue;
-				
-				let format_year = Math.min(year, 2023);
-				let loaded_obj = await Statistics.loadOLSCovariates(target_path, {
-					utility_format: "float32",
-					covariates_obj: covariates_obj,
-					formatting_parameters: [format_year]
+				if (!fs.existsSync(target_path)) return false;
+				if (!overwrite && fs.existsSync(model_path)) return false;
+				return true;
+			});
+			
+			if (target_years.length > 0) {
+				await Statistics.trainOLSModelsParallel(target_years, (year) => {
+					let all_cov_keys = Object.keys(covariates_obj);
+					let covariates_map = {};
+					let format_year = Math.min(year, 2023);
+					for (let i = 0; i < all_cov_keys.length; i++) {
+						let local_key = all_cov_keys[i];
+						let local_val = covariates_obj[local_key](format_year);
+						covariates_map[local_key] = local_val;
+					}
+					
+					return {
+						covariates_map: covariates_map,
+						options: {
+							...options,
+							key: year.toString(),
+							lambda: lambda_val
+						},
+						output_file_path: `${variable_obj.ols_folder}${variable_obj.model_prefix}${year}.json`,
+						target_file_path: `${variable_obj.target_folder}${variable_obj.actual_prefix}_target_${year}.png`,
+						target_format: "float32"
+					};
+				}, {
+					concurrency: options.concurrency,
+					name: `OLS Training (${variable_obj.actual_prefix})`
 				});
-				
-				if (!loaded_obj.X || loaded_obj.X.length === 0) continue;
-				
-				await Statistics.trainOLSModel(model_path, loaded_obj, {
-					...options,
-					lambda: options.lambda,
-					key: year.toString()
-				});
-				
-				console.log(`- Trained OLS model: ${model_path} (${loaded_obj.X.length} samples)`);
-				await Blacktraffic.yield();
 			}
 			
 			try {
@@ -358,38 +370,56 @@ global.births_deaths_OLS = class {
 	}
 	
 	static async C_generateOLSRasters (arg0_options) {
+		//Convert from parameters
 		let options = (arg0_options) ? arg0_options : {};
-		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
-
-		let variables_obj = this._getVariablesObj();
-		let years = landuse_HYDE.sorted_hyde_years;
-		let covariates_obj = this.covariates_obj();
 		
+		//Initialise options
+		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+		
+		//Declare local instance variables
+		let covariates_obj = this.covariates_obj();
+		let variables_obj = this._getVariablesObj();
 		let variable_keys = Object.keys(variables_obj);
+		let years = landuse_HYDE.sorted_hyde_years;
+		
 		for (let v = 0; v < variable_keys.length; v++) {
 			let variable_obj = variables_obj[variable_keys[v]];
 			let unified_model_path = `${variable_obj.ols_folder}geomean_${variable_obj.model_prefix.replace(/_$/, "")}.json`;
 			
-			for (let y = 0; y < years.length; y++) {
-				let year = years[y];
+			let target_years = years.filter((year) => {
 				let output_path = `${variable_obj.ols_folder}ols_${variable_obj.actual_prefix}_${year}.png`;
-				
-				if (!overwrite && fs.existsSync(output_path)) continue;
-				
+				if (!overwrite && fs.existsSync(output_path)) return false;
 				let model_path = `${variable_obj.ols_folder}${variable_obj.model_prefix}${year}.json`;
 				if (!fs.existsSync(model_path)) model_path = unified_model_path;
-				
-				if (!fs.existsSync(model_path)) continue;
-				
-				let format_year = Math.min(year, 2023);
-				console.log(`Generating OLS raster for ${variable_obj.actual_prefix} year ${year}`);
-				await Statistics.generateOLSRaster(output_path, {
-					covariates_obj: covariates_obj,
-					format: "float32",
-					formatting_parameters: [format_year],
-					model_obj: model_path
+				return fs.existsSync(model_path);
+			});
+			
+			if (target_years.length > 0) {
+				await Statistics.generateOLSRastersParallel(target_years, (year) => {
+					let all_cov_keys = Object.keys(covariates_obj);
+					let covariates_map = {};
+					let format_year = Math.min(year, 2023);
+					let model_path = `${variable_obj.ols_folder}${variable_obj.model_prefix}${year}.json`;
+					if (!fs.existsSync(model_path)) model_path = unified_model_path;
+					
+					for (let i = 0; i < all_cov_keys.length; i++) {
+						let local_key = all_cov_keys[i];
+						let local_val = covariates_obj[local_key](format_year);
+						covariates_map[local_key] = local_val;
+					}
+					
+					return {
+						covariates_map: covariates_map,
+						model_obj: model_path,
+						options: {
+							format: "float32"
+						},
+						output_file_path: `${variable_obj.ols_folder}ols_${variable_obj.actual_prefix}_${year}.png`
+					};
+				}, {
+					concurrency: options.concurrency,
+					name: `OLS Raster Generation (${variable_obj.actual_prefix})`
 				});
-				await Blacktraffic.yield();
 			}
 		}
 	}
@@ -864,9 +894,14 @@ global.births_deaths_OLS = class {
 	}
 	
 	static async processRasters (arg0_options) {
+		//Convert from parameters
 		let options = (arg0_options) ? arg0_options : {};
-		if (!options.exclude) options.exclude = [];
 		
+		//Initialise options
+		if (!options.exclude) options.exclude = [];
+		let skip_training = (options.skip_training || options.use_existing_models || options.train === false);
+		
+		//Declare local instance variables
 		let all_folders = [
 			this.intermediate_birth_targets,
 			this.intermediate_female_death_targets,
@@ -888,8 +923,8 @@ global.births_deaths_OLS = class {
 		for (let i = 0; i < all_folders.length; i++)
 			if (!fs.existsSync(all_folders[i])) fs.mkdirSync(all_folders[i], { recursive: true });
 		
-		if (!options.exclude.includes("A")) await this.A_generateTargetRasters(options);
-		if (!options.exclude.includes("B")) await this.B_trainOLSModels(options);
+		if (!options.exclude.includes("A") && !skip_training) await this.A_generateTargetRasters(options);
+		if (!options.exclude.includes("B") && !skip_training) await this.B_trainOLSModels(options);
 		if (!options.exclude.includes("C")) await this.C_generateOLSRasters(options);
 		if (!options.exclude.includes("D")) await this.D_normaliseOLSRasters(options);
 		if (!options.exclude.includes("E")) await this.E_clampToStadester(options);

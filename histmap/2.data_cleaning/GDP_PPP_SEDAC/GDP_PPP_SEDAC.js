@@ -81,12 +81,34 @@ global.GDP_PPP_SEDAC = class {
 		//Convert from parameters
 		let options = (arg0_options) ? arg0_options : {};
 		
-		//Iterate over all years
-		for (let i = 0; i < this.years.length; i++)
-			await this.B_trainGDP_PPPModel(this.years[i], {
-				...options,
-				key: this.years[i]
-			});
+		//Declare local instance variables
+		let all_covariate_keys = Object.keys(this.covariates_obj);
+		let lambda_val = (options.lambda !== undefined) ? options.lambda : 1e11;
+		
+		//Return statement
+		return await Statistics.trainOLSModelsParallel(this.years, (year) => {
+			let covariates_map = {};
+			for (let i = 0; i < all_covariate_keys.length; i++) {
+				let local_key = all_covariate_keys[i];
+				let local_val = this.covariates_obj[local_key](year);
+				covariates_map[local_key] = local_val;
+			}
+			
+			return {
+				covariates_map: covariates_map,
+				options: {
+					...options,
+					key: year.toString(),
+					lambda: lambda_val
+				},
+				output_file_path: `${this.intermediate_ols_folder}/OLS_GDP_PPP_${year}.json`,
+				target_file_path: `${this.bf}/GDP_PPP_${year}.png`,
+				target_format: "float32"
+			};
+		}, {
+			concurrency: options.concurrency,
+			name: "GDP PPP SEDAC OLS Training"
+		});
 	}
 	
 	static async C_geomeanGDP_PPPModel (arg0_prefix) {
@@ -124,6 +146,7 @@ global.GDP_PPP_SEDAC = class {
 		
 		//Initialise options
 		if (!options.exclude) options.exclude = [];
+		let skip_training = (options.skip_training || options.use_existing_models || options.train === false);
 		
 		//1. Convert to PNGs
 		if (!options.exclude.includes("A")) {
@@ -132,10 +155,10 @@ global.GDP_PPP_SEDAC = class {
 		}
 		
 		//2. Train individual yearly OLS models
-		if (!options.exclude.includes("B")) await this.B_trainGDP_PPPModels(options);
+		if (!options.exclude.includes("B") && !skip_training) await this.B_trainGDP_PPPModels(options);
 		
 		//3. Compute geomean
-		if (!options.exclude.includes("C")) try {
+		if (!options.exclude.includes("C") && !skip_training) try {
 			await this.C_geomeanGDP_PPPModel("OLS_GDP_PPP_");
 		} catch (e) { console.error(e); }
 		

@@ -226,9 +226,27 @@ global.GDP_PPP_pc = class {
 		let years = landuse_HYDE.sorted_hyde_years;
 		
 		await GeoPNG.processTimeseriesParallel({
-			concurrency: 4,
+			concurrency: 8,
 			items: years,
 			name: "GDP_PPP_pc E_generateGDP_PPPRasters",
+			task_generator: (year) => {
+				let pc_path = `${this.intermediate_pc_estimates_folder}GDP_PPP_pc_${year}.png`;
+				let pop_path = `${population_Stadester.input_popc_folder}stadester_population_${year}.png`;
+				let output_path = `${this.intermediate_gdp_ppp_folder}GDP_PPP_${year}.png`;
+				
+				if (!fs.existsSync(pc_path) || !fs.existsSync(pop_path)) return null;
+				
+				return {
+					type: "raster_operation",
+					format1: "float32",
+					format2: "float32",
+					input_path_1: pc_path,
+					input_path_2: pop_path,
+					op: "multiply",
+					output_format: "float32",
+					output_path: output_path
+				};
+			},
 			handler: async (year) => {
 				let pc_path = `${this.intermediate_pc_estimates_folder}GDP_PPP_pc_${year}.png`;
 				let pop_path = `${population_Stadester.input_popc_folder}stadester_population_${year}.png`;

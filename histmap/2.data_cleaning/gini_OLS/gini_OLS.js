@@ -219,28 +219,52 @@ global.gini_OLS = class {
 		let options = (arg0_options) ? arg0_options : {};
 		
 		//Declare local instance variables
+		let formatted_points = [];
 		let raw_points = this.getEoscalaGiniObject();
 		let unique_years = [];
 		
 		for (let i = 0; i < raw_points.length; i++) {
 			let target_year = parseInt(raw_points[i].year);
-			if (!isNaN(target_year) && !unique_years.includes(target_year)) {
+			if (!isNaN(target_year) && !unique_years.includes(target_year))
 				unique_years.push(target_year);
-			}
+			formatted_points.push({
+				coords: raw_points[i].coords,
+				target: raw_points[i].gini,
+				year: raw_points[i].year
+			});
 		}
 		
 		unique_years.sort((a, b) => a - b);
-		console.log(`- Began training for ${unique_years.length} unique years.`, unique_years);
+		console.log(`- Began training for ${unique_years.length} unique years in parallel across background workers.`);
 		
-		//Iterate over unique_years
-		for (let i = 0; i < unique_years.length; i++) {
-			console.log(` - (${i + 1}/${unique_years.length}) Finished training for year ${unique_years[i]}.`)
-			await this.A_trainEoscalaModel(unique_years[i], {
-				...options,
-				key: unique_years[i]
-			});
-			await Blacktraffic.yield();
-		}
+		//Return statement
+		return await Statistics.trainOLSModelsParallel(unique_years, (target_year) => {
+			let all_cov_keys = Object.keys(this.covariates_obj);
+			let covariates_map = {};
+			let nearest_year = this._getNearestCovariateYear(target_year);
+			
+			for (let i = 0; i < all_cov_keys.length; i++) {
+				let local_key = all_cov_keys[i];
+				let local_val = this.covariates_obj[local_key](nearest_year);
+				covariates_map[local_key] = local_val;
+			}
+			
+			return {
+				covariates_map: covariates_map,
+				covariates_year: nearest_year,
+				options: {
+					...options,
+					key: target_year.toString(),
+					lambda: (options.lambda !== undefined) ? options.lambda : 1
+				},
+				output_file_path: `${this.intermediate_ols_eoscala}/OLS_Eoscala_${target_year}.json`,
+				points: formatted_points,
+				target_year: target_year
+			};
+		}, {
+			concurrency: options.concurrency,
+			name: "Gini Eoscala Points OLS Training"
+		});
 	}
 	
 	static async A_geomeanEoscalaModel (arg0_prefix) {

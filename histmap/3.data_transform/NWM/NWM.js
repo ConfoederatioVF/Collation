@@ -146,6 +146,20 @@
       let gdp_ppp_ols_options = { overwrite: overwrite, ...(options.gdp_ppp_ols || {}) };
       let gdp_ppp_options = { overwrite: overwrite, ...(options.gdp_ppp || {}) };
       let gdp_ppp_sedac_options = { exclude: ["A"], overwrite: overwrite, ...(options.gdp_ppp_sedac || {}) };
+
+      if (skip_training) {
+        if (!gdp_ppp_sedac_options.exclude) gdp_ppp_sedac_options.exclude = [];
+        if (!gdp_ppp_sedac_options.exclude.includes("B")) gdp_ppp_sedac_options.exclude.push("B");
+        if (!gdp_ppp_sedac_options.exclude.includes("C")) gdp_ppp_sedac_options.exclude.push("C");
+        gdp_ppp_sedac_options.skip_training = true;
+
+        if (!gdp_nom_sedac_options.exclude) gdp_nom_sedac_options.exclude = [];
+        if (!gdp_nom_sedac_options.exclude.includes("B")) gdp_nom_sedac_options.exclude.push("B");
+        if (!gdp_nom_sedac_options.exclude.includes("C")) gdp_nom_sedac_options.exclude.push("C");
+        gdp_nom_sedac_options.skip_training = true;
+
+        console.log(`[NWM] Step C: Skipping GDP_PPP_SEDAC and GDP_nominal_SEDAC OLS training (using existing models).`);
+      }
       
       //Function body
       console.log(`[NWM] === Step C: Processing Eoscala GDP (PPP & Nominal) ===`);
@@ -359,7 +373,7 @@
       
       let births_deaths_hmd_options = { overwrite: overwrite, ...(options.births_deaths_hmd || {}) };
       let births_deaths_kummu_options = { overwrite: overwrite, ...(options.births_deaths_kummu || {}) };
-      let births_deaths_ols_options = { overwrite: overwrite, ...(options.births_deaths_ols || {}) };
+      let births_deaths_ols_options = { overwrite: overwrite, skip_training: skip_training, ...(options.births_deaths_ols || {}) };
       let births_deaths_unwpp_options = { overwrite: overwrite, ...(options.births_deaths_unwpp || {}) };
       
       //Function body
@@ -367,11 +381,7 @@
       if (global.births_deaths_Kummu) await births_deaths_Kummu.processRasters(births_deaths_kummu_options);
       if (global.births_deaths_UNWPP) await births_deaths_UNWPP.processRasters(births_deaths_unwpp_options);
       if (global.births_deaths_HMD) await births_deaths_HMD.processRasters(births_deaths_hmd_options);
-      if (!skip_training) {
-        if (global.births_deaths_OLS) await births_deaths_OLS.processRasters(births_deaths_ols_options);
-      } else {
-        console.log(`[NWM] Step I: Skipping births_deaths_OLS training (using existing models).`);
-      }
+      if (global.births_deaths_OLS) await births_deaths_OLS.processRasters(births_deaths_ols_options);
     }
     
     /**
@@ -398,7 +408,7 @@
       
       let lfpr_ilo_options = { overwrite: overwrite, ...(options.lfpr_ilo || {}) };
       let lfpr_olivetti_options = { overwrite: overwrite, ...(options.lfpr_olivetti || {}) };
-      let lfpr_ols_options = { overwrite: overwrite, ...(options.lfpr_ols || {}) };
+      let lfpr_ols_options = { overwrite: overwrite, skip_training: skip_training, ...(options.lfpr_ols || {}) };
       let professions_ilo_options = { overwrite: overwrite, ...(options.professions_ilo || {}) };
       let professions_olivetti_options = { overwrite: overwrite, ...(options.professions_olivetti || {}) };
       let professions_options = { overwrite: overwrite, ...(options.professions || {}) };
@@ -415,11 +425,7 @@
       console.log(`[NWM] === Step J: Processing Labour Force & Professions ===`);
       if (global.LFPR_ILO) await LFPR_ILO.processRasters(lfpr_ilo_options);
       if (global.LFPR_Olivetti) await LFPR_Olivetti.processRasters(lfpr_olivetti_options);
-      if (!skip_training) {
-        if (global.LFPR_OLS) await LFPR_OLS.processRasters(lfpr_ols_options);
-      } else {
-        console.log(`[NWM] Step J: Skipping LFPR_OLS training (using existing models).`);
-      }
+      if (global.LFPR_OLS) await LFPR_OLS.processRasters(lfpr_ols_options);
       
       if (global.professions_ILO) await professions_ILO.processRasters(professions_ilo_options);
       if (global.professions_Olivetti) await professions_Olivetti.processRasters(professions_olivetti_options);

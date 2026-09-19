@@ -21,43 +21,55 @@ global.LFPR_OLS = class {
 	 * TRAIN: Train OLS models using the LFPR_Olivetti targets.
 	 */
 	static async A_trainOLSModels (arg0_options) {
+		//Convert from parameters
 		let options = (arg0_options) ? arg0_options : {};
+		
+		//Initialise options
+		let lambda_val = (options.lambda !== undefined) ? options.lambda : 1;
 		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
-		if (!options.lambda) options.lambda = 1;
+		
+		//Declare local instance variables
+		let covariates_obj = this.covariates_obj();
+		let years = landuse_HYDE.sorted_hyde_years;
 		
 		if (!fs.existsSync(this.intermediate_ols_models)) fs.mkdirSync(this.intermediate_ols_models, { recursive: true });
 		
-		let years = landuse_HYDE.sorted_hyde_years;
-		let covariates_obj = this.covariates_obj();
-		
 		for (let s = 0; s < this.sexes.length; s++) {
 			let sex = this.sexes[s];
-			
-			for (let y = 0; y < years.length; y++) {
-				let year = years[y];
+			let target_years = years.filter((year) => {
 				let target_path = `${LFPR_Olivetti.intermediate_rasters_folder}lfpr_${sex}_${year}.png`;
 				let model_path = `${this.intermediate_ols_models}OLS_lfpr_${sex}_${year}.json`;
-				
-				if (!fs.existsSync(target_path)) continue;
-				if (!overwrite && fs.existsSync(model_path)) continue;
-				
-				let format_year = Math.min(year, 2023);
-				let loaded_obj = await Statistics.loadOLSCovariates(target_path, {
-					utility_format: "float32",
-					covariates_obj: covariates_obj,
-					formatting_parameters: [format_year]
+				if (!fs.existsSync(target_path)) return false;
+				if (!overwrite && fs.existsSync(model_path)) return false;
+				return true;
+			});
+			
+			if (target_years.length > 0) {
+				await Statistics.trainOLSModelsParallel(target_years, (year) => {
+					let all_cov_keys = Object.keys(covariates_obj);
+					let covariates_map = {};
+					let format_year = Math.min(year, 2023);
+					for (let i = 0; i < all_cov_keys.length; i++) {
+						let local_key = all_cov_keys[i];
+						let local_val = covariates_obj[local_key](format_year);
+						covariates_map[local_key] = local_val;
+					}
+					
+					return {
+						covariates_map: covariates_map,
+						options: {
+							...options,
+							key: year.toString(),
+							lambda: lambda_val
+						},
+						output_file_path: `${this.intermediate_ols_models}OLS_lfpr_${sex}_${year}.json`,
+						target_file_path: `${LFPR_Olivetti.intermediate_rasters_folder}lfpr_${sex}_${year}.png`,
+						target_format: "float32"
+					};
+				}, {
+					concurrency: options.concurrency,
+					name: `LFPR OLS Training (${sex})`
 				});
-				
-				if (!loaded_obj.X || loaded_obj.X.length === 0) continue;
-				
-				await Statistics.trainOLSModel(model_path, loaded_obj, {
-					...options,
-					lambda: options.lambda,
-					key: year.toString()
-				});
-				
-				console.log(`- Trained LFPR OLS model for Sex: ${sex}, Year: ${year} (${loaded_obj.X.length} samples)`);
-				await Blacktraffic.yield();
 			}
 			
 			// Generate the generalized geomean model for the current sex
@@ -73,37 +85,51 @@ global.LFPR_OLS = class {
 	}
 	
 	static async B_generateOLSRasters (arg0_options) {
+		//Convert from parameters
 		let options = (arg0_options) ? arg0_options : {};
-		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
-
-		if (!fs.existsSync(this.intermediate_ols_rasters)) fs.mkdirSync(this.intermediate_ols_rasters, { recursive: true });
 		
-		let years = landuse_HYDE.sorted_hyde_years;
+		//Initialise options
+		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+		
+		//Declare local instance variables
 		let covariates_obj = this.covariates_obj();
+		let years = landuse_HYDE.sorted_hyde_years;
+		
+		if (!fs.existsSync(this.intermediate_ols_rasters)) fs.mkdirSync(this.intermediate_ols_rasters, { recursive: true });
 		
 		for (let s = 0; s < this.sexes.length; s++) {
 			let sex = this.sexes[s];
 			let unified_model_path = `${this.intermediate_ols_models}geomean_OLS_lfpr_${sex}.json`;
-			
 			if (!fs.existsSync(unified_model_path)) continue;
 			
-			for (let y = 0; y < years.length; y++) {
-				let year = years[y];
+			let target_years = years.filter((year) => {
 				let output_path = `${this.intermediate_ols_rasters}ols_lfpr_${sex}_${year}.png`;
-				
-				if (!overwrite && fs.existsSync(output_path)) continue;
-				
-				let format_year = Math.min(year, 2023);
-				console.log(`Generating LFPR OLS raster for ${sex} year ${year}`);
-				
-				await Statistics.generateOLSRaster(output_path, {
-					covariates_obj: covariates_obj,
-					format: "float32",
-					formatting_parameters: [format_year],
-					model_obj: unified_model_path
+				return (overwrite || !fs.existsSync(output_path));
+			});
+			
+			if (target_years.length > 0) {
+				await Statistics.generateOLSRastersParallel(target_years, (year) => {
+					let all_cov_keys = Object.keys(covariates_obj);
+					let covariates_map = {};
+					let format_year = Math.min(year, 2023);
+					for (let i = 0; i < all_cov_keys.length; i++) {
+						let local_key = all_cov_keys[i];
+						let local_val = covariates_obj[local_key](format_year);
+						covariates_map[local_key] = local_val;
+					}
+					
+					return {
+						covariates_map: covariates_map,
+						model_obj: unified_model_path,
+						options: {
+							format: "float32"
+						},
+						output_file_path: `${this.intermediate_ols_rasters}ols_lfpr_${sex}_${year}.png`
+					};
+				}, {
+					concurrency: options.concurrency,
+					name: `LFPR OLS Raster Generation (${sex})`
 				});
-				
-				await Blacktraffic.yield();
 			}
 		}
 	}

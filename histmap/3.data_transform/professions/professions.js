@@ -134,108 +134,66 @@ global.professions = class {
 	 * Only active labor categories (olivetti_categories) are extracted to explicitly prevent training on 'not_in_work'.
 	 */
 	static async B_trainMultinomialLogitModels (arg0_options) {
+		//Convert from parameters
 		let options = (arg0_options) ? arg0_options : {};
-		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
-
-		if (!fs.existsSync(this.intermediate_logit_folder)) fs.mkdirSync(this.intermediate_logit_folder, { recursive: true });
 		
+		//Initialise options
+		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+		
+		//Declare local instance variables
+		let cov_obj = this.covariates_obj();
+		let items = [];
 		let train_years = landuse_HYDE.sorted_hyde_years.filter(y => y >= 1750 && y <= 2025);
-		let cov_obj = this.covariates_obj(); // Evoke object properties dynamically
+		
+		if (!fs.existsSync(this.intermediate_logit_folder)) fs.mkdirSync(this.intermediate_logit_folder, { recursive: true });
 		
 		for (let s = 0; s < this.sexes.length; s++) {
 			let sex = this.sexes[s];
-			
 			for (let y = 0; y < train_years.length; y++) {
 				let year = train_years[y];
 				let model_path = `${this.intermediate_logit_folder}multinomial_model_${sex}_${year}.json`;
-				
-				if (!overwrite && fs.existsSync(model_path)) continue;
-				
-				let format_year = year > 2023 ? 2023 : year;
-				let valid_keys = [];
-				let cov_rasters = {};
-				
-				let all_keys = Object.keys(cov_obj);
-				for (let i = 0; i < all_keys.length; i++) {
-					let k = all_keys[i];
-					let info = cov_obj[k](format_year);
-					
-					if (fs.existsSync(info[0])) {
-						cov_rasters[k] = GeoPNG.loadNumberRasterImage(info[0], { format: info[1] });
-						valid_keys.push(k);
-					}
-				}
-				
-				let target_rasters = {};
-				let missing_targets = false;
-				
-				for (let i = 0; i < this.olivetti_categories.length; i++) {
-					let p = `${this.standardised_targets_folder}global_${this.olivetti_categories[i]}_${sex}_${year}.png`;
-					if (!fs.existsSync(p)) { missing_targets = true; break; }
-					target_rasters[this.olivetti_categories[i]] = GeoPNG.loadNumberRasterImage(p, { format: "float32" });
-				}
-				
-				if (missing_targets) continue;
-				
-				let X = [];
-				let Y = [];
-				let data_len = target_rasters[this.olivetti_categories[0]].data.length;
-				
-				for (let i = 0; i < data_len; i++) {
-					let total_pop = 0;
-					let cat_pops = [];
-					
-					for (let j = 0; j < this.olivetti_categories.length; j++) {
-						let cp = target_rasters[this.olivetti_categories[j]].data[i];
-						cp = (isNaN(cp) || cp < 0) ? 0 : cp;
-						cat_pops.push(cp);
-						total_pop += cp;
-					}
-					
-					// Ignore ocean footprints / explicitly invalid masks gracefully
-					if (total_pop <= 0) continue;
-					
-					let x_row = [];
-					let is_valid = true;
-					
-					for (let j = 0; j < valid_keys.length; j++) {
-						let val = cov_rasters[valid_keys[j]].data[i];
-						if (isNaN(val)) { is_valid = false; break; }
-						x_row.push(val);
-					}
-					
-					if (!is_valid) continue;
-					
-					let rand = Math.random() * total_pop;
-					let cumulative = 0;
-					let selected_class = this.olivetti_categories[this.olivetti_categories.length - 1]; // Strict structural fallback
-					
-					for (let j = 0; j < this.olivetti_categories.length; j++) {
-						cumulative += cat_pops[j];
-						if (rand <= cumulative) {
-							selected_class = this.olivetti_categories[j];
-							break;
-						}
-					}
-					
-					X.push(x_row);
-					Y.push([selected_class]);
-				}
-				
-				if (X.length === 0) continue;
-				
-				console.log(`- Distilling temporal categorical model for ${sex} ${year} via ${X.length} valid active workers...`);
-				
-				await Statistics.trainMultinomialLogitModel(model_path, { keys: valid_keys, X, Y }, {
-					max_iterations: Math.returnSafeNumber(options.max_iterations, 50),
-					learning_rate: Math.returnSafeNumber(options.learning_rate, 0.1),
-					lambda: Math.returnSafeNumber(options.lambda, 1e-4),
-					debug: true
-				});
-				
-				await Blacktraffic.yield();
+				if (overwrite || !fs.existsSync(model_path))
+					items.push({ sex: sex, year: year });
 			}
 		}
+		
+		if (items.length === 0) return [];
+		
+		//Return statement
+		return await Statistics.trainMultinomialLogitModelsParallel(items, (item) => {
+			let all_keys = Object.keys(cov_obj);
+			let covariates_map = {};
+			let format_year = item.year > 2023 ? 2023 : item.year;
+			let model_path = `${this.intermediate_logit_folder}multinomial_model_${item.sex}_${item.year}.json`;
+			let target_paths = {};
+			
+			for (let i = 0; i < all_keys.length; i++) {
+				let k = all_keys[i];
+				let info = cov_obj[k](format_year);
+				covariates_map[k] = info;
+			}
+			
+			for (let i = 0; i < this.olivetti_categories.length; i++) {
+				let cat = this.olivetti_categories[i];
+				target_paths[cat] = `${this.standardised_targets_folder}global_${cat}_${item.sex}_${item.year}.png`;
+			}
+			
+			return {
+				categories: this.olivetti_categories,
+				covariates_map: covariates_map,
+				model_path: model_path,
+				options: {
+					debug: true,
+					lambda: Math.returnSafeNumber(options.lambda, 1e-4),
+					learning_rate: Math.returnSafeNumber(options.learning_rate, 0.1),
+					max_iterations: Math.returnSafeNumber(options.max_iterations, 50)
+				},
+				target_paths: target_paths
+			};
+		}, {
+			concurrency: options.concurrency,
+			name: "Professions Multinomial Logit Training"
+		});
 	}
 	
 	/**
@@ -305,44 +263,60 @@ global.professions = class {
 	 * Exclusively uses the Geomean model to project theoretical percent distributions across all temporal horizons.
 	 */
 	static async D_generateMultinomialLogitRasters (arg0_options) {
+		//Convert from parameters
 		let options = (arg0_options) ? arg0_options : {};
+		
+		//Initialise options
 		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
-
-		if (!fs.existsSync(this.intermediate_logit_rasters)) fs.mkdirSync(this.intermediate_logit_rasters, { recursive: true });
+		
+		//Declare local instance variables
+		let cov_obj = this.covariates_obj();
+		let items = [];
 		let years = landuse_HYDE.sorted_hyde_years;
+		
+		if (!fs.existsSync(this.intermediate_logit_rasters)) fs.mkdirSync(this.intermediate_logit_rasters, { recursive: true });
 		
 		for (let s = 0; s < this.sexes.length; s++) {
 			let sex = this.sexes[s];
+			let model_path = `${this.intermediate_logit_folder}multinomial_model_geomean_${sex}.json`;
+			if (!fs.existsSync(model_path)) continue;
 			
 			for (let y = 0; y < years.length; y++) {
 				let year = years[y];
 				let out_base = `${this.intermediate_logit_rasters}logit_${sex}_${year}.png`;
 				let check_path = out_base.replace(".png", `_class_${this.olivetti_categories[0]}.png`);
-				
-				if (!overwrite && fs.existsSync(check_path)) continue;
-				
-				// Always apply the unified geomean model
-				let model_path = `${this.intermediate_logit_folder}multinomial_model_geomean_${sex}.json`;
-				
-				if (!fs.existsSync(model_path)) continue;
-				
-				let format_year = year > 2023 ? 2023 : year;
-				
-				await Statistics.generateMultinomialRaster(out_base, {
-					covariates_obj: this.covariates_obj(),
-					formatting_parameters: [format_year],
-					model_obj: model_path,
-					output_mode: "probabilities",
-					format: "float32",
-					guard_clause: (local_index, rasters) => {
-						let popc = rasters["popc_"];
-						return (popc && popc.data[local_index] > 0); // Ignore pure ocean bodies identically to `age_sex`
-					}
-				});
-				
-				await Blacktraffic.yield();
+				if (overwrite || !fs.existsSync(check_path))
+					items.push({ model_path: model_path, out_base: out_base, sex: sex, year: year });
 			}
 		}
+		
+		if (items.length === 0) return [];
+		
+		//Return statement
+		return await Statistics.generateMultinomialRastersParallel(items, (item) => {
+			let all_keys = Object.keys(cov_obj);
+			let covariates_map = {};
+			let format_year = item.year > 2023 ? 2023 : item.year;
+			
+			for (let i = 0; i < all_keys.length; i++) {
+				let k = all_keys[i];
+				let info = cov_obj[k](format_year);
+				covariates_map[k] = info;
+			}
+			
+			return {
+				covariates_map: covariates_map,
+				model_obj: item.model_path,
+				options: {
+					format: "float32",
+					output_mode: "probabilities"
+				},
+				output_file_path: item.out_base
+			};
+		}, {
+			concurrency: options.concurrency,
+			name: "Professions Multinomial Logit Raster Generation"
+		});
 	}
 	
 	/**

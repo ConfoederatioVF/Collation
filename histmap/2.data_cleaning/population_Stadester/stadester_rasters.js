@@ -519,7 +519,7 @@
     let pop_raster = null;
     
     if (fs.existsSync(landarea_file))
-      landarea_raster = GeoPNG.loadNumberRasterImage(landarea_file, { format: "float32" });
+      landarea_raster = GeoPNG.loadNumberRasterImage(landarea_file, { format: "int32" });
     if (fs.existsSync(pop_file_path))
       pop_raster = GeoPNG.loadNumberRasterImage(pop_file_path, { format: "float32" });
     
@@ -531,8 +531,9 @@
       function: function (local_index) {
         let km2 = (landarea_raster && landarea_raster.data[local_index]) ? landarea_raster.data[local_index] : 0;
         let p = (pop_raster && pop_raster.data[local_index]) ? pop_raster.data[local_index] : 0;
-        if (km2 <= 0) return 0;
-        return p/km2;
+        if (km2 <= 0 || p <= 0) return 0;
+        let val = p/km2;
+        return isFinite(val) ? val : 0;
       }
     });
     
@@ -547,61 +548,129 @@
    * @alias population_Stadester_rasters.processParallel
    */
   population_Stadester_rasters.generateBaseRastersParallel = async function (arg0_years, arg1_options) {
+    //Convert from parameters
     let years = arg0_years;
     let options = (arg1_options) ? arg1_options : {};
-    let default_concurrency = (typeof require !== "undefined") ? Math.min(4, require("os").cpus().length || 4) : 4;
+    
+    //Declare local instance variables
+    let default_concurrency = (typeof require !== "undefined") ? Math.min(8, require("os").cpus().length || 4) : 4;
+    
+    //Return statement
     return GeoPNG.processTimeseriesParallel({
       concurrency: options.concurrency || default_concurrency,
       items: years,
       name: "Stadester Base Rasters",
+      task_generator: (year) => ({
+        type: "stadester_base_raster",
+        options: options,
+        year: year
+      }),
       handler: async (year) => population_Stadester_rasters.generateStadesterBaseRaster(year, options)
     });
   };
   
   population_Stadester_rasters.generateUrbanRastersParallel = async function (arg0_years, arg1_options) {
+    //Convert from parameters
     let years = arg0_years;
     let options = (arg1_options) ? arg1_options : {};
-    let default_concurrency = (typeof require !== "undefined") ? Math.min(4, require("os").cpus().length || 4) : 4;
+    
+    //Declare local instance variables
+    let default_concurrency = (typeof require !== "undefined") ? Math.min(8, require("os").cpus().length || 4) : 4;
+    
+    //Return statement
     return GeoPNG.processTimeseriesParallel({
       concurrency: options.concurrency || default_concurrency,
       items: years,
       name: "Stadester Urban Rasters",
+      task_generator: (year) => ({
+        type: "stadester_urban_raster",
+        options: options,
+        year: year
+      }),
       handler: async (year) => population_Stadester_rasters.generateStadesterUrbanRaster(year, options)
     });
   };
   
   population_Stadester_rasters.generateRuralRastersParallel = async function (arg0_years, arg1_options) {
+    //Convert from parameters
     let years = arg0_years;
     let options = (arg1_options) ? arg1_options : {};
-    let default_concurrency = (typeof require !== "undefined") ? Math.min(4, require("os").cpus().length || 4) : 4;
+    
+    //Declare local instance variables
+    let default_concurrency = (typeof require !== "undefined") ? Math.min(8, require("os").cpus().length || 4) : 4;
+    
+    //Return statement
     return GeoPNG.processTimeseriesParallel({
       concurrency: options.concurrency || default_concurrency,
       items: years,
       name: "Stadester Rural Rasters",
+      task_generator: (year) => ({
+        type: "stadester_rural_raster",
+        options: options,
+        year: year
+      }),
       handler: async (year) => population_Stadester_rasters.generateStadesterRuralRaster(year, options)
     });
   };
   
   population_Stadester_rasters.generatePopulationRastersParallel = async function (arg0_years, arg1_options) {
+    //Convert from parameters
     let years = arg0_years;
     let options = (arg1_options) ? arg1_options : {};
-    let default_concurrency = (typeof require !== "undefined") ? Math.min(4, require("os").cpus().length || 4) : 4;
+    
+    //Declare local instance variables
+    let default_concurrency = (typeof require !== "undefined") ? Math.min(8, require("os").cpus().length || 4) : 4;
+    
+    //Return statement
     return GeoPNG.processTimeseriesParallel({
       concurrency: options.concurrency || default_concurrency,
       items: years,
       name: "Stadester Population Rasters",
+      task_generator: (year) => ({
+        type: "stadester_population_raster",
+        options: options,
+        year: year
+      }),
       handler: async (year) => population_Stadester_rasters.generateStadesterPopulationRaster(year, options)
     });
   };
   
   population_Stadester_rasters.prepareDensityRastersParallel = async function (arg0_years, arg1_options) {
+    //Convert from parameters
     let years = arg0_years;
     let options = (arg1_options) ? arg1_options : {};
-    let default_concurrency = (typeof require !== "undefined") ? Math.min(4, require("os").cpus().length || 4) : 4;
+    
+    //Declare local instance variables
+    let default_concurrency = (typeof require !== "undefined") ? Math.min(8, require("os").cpus().length || 4) : 4;
+    let input_popc = options.input_popc_folder || `${h2}/population_Stadester/stadester_population_rasters/`;
+    let intermediate_popd = options.intermediate_popd_folder || `${h2}/population_Stadester/stadester_density_rasters/`;
+    let landarea_file = (typeof metadata_HYDE !== "undefined" && metadata_HYDE.input_raster_land_area) ?
+      metadata_HYDE.input_raster_land_area : `${h1}/metadata_HYDE/general_rasters/land_area.png`;
+
+    if (!fs.existsSync(intermediate_popd)) fs.mkdirSync(intermediate_popd, { recursive: true });
+
+    //Return statement
     return GeoPNG.processTimeseriesParallel({
       concurrency: options.concurrency || default_concurrency,
       items: years,
       name: "Stadester Density Rasters",
+      task_generator: (year) => {
+        let output_file_path = path.join(intermediate_popd, `stadester_density_${year}.png`);
+        let pop_file_path = path.join(input_popc, `stadester_population_${year}.png`);
+        if (!fs.existsSync(pop_file_path) || !fs.existsSync(landarea_file)) return null;
+
+        return {
+          type: "raster_operation",
+          format: "float32",
+          format_1: "float32",
+          format_2: "int32",
+          input_path_1: pop_file_path,
+          input_path_2: landarea_file,
+          op: "divide",
+          operation: "divide",
+          output_path: output_file_path
+        };
+      },
       handler: async (year) => population_Stadester_rasters.prepareDensityRaster(year, options)
     });
   };

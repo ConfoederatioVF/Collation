@@ -144,12 +144,34 @@ global.GDP_nominal_SEDAC = class {
 		let options = (arg0_options) ? arg0_options : {};
 		let years = GDP_PPP_SEDAC.years;
 		
-		//Iterate over all years
-		for (let i = 0; i < years.length; i++)
-			await this.B_trainGDPModel(years[i], {
-				...options,
-				key: years[i]
-			});
+		//Declare local instance variables
+		let all_covariate_keys = Object.keys(GDP_PPP_SEDAC.covariates_obj);
+		let lambda_val = (options.lambda !== undefined) ? options.lambda : 1e11;
+		
+		//Return statement
+		return await Statistics.trainOLSModelsParallel(years, (year) => {
+			let covariates_map = {};
+			for (let i = 0; i < all_covariate_keys.length; i++) {
+				let local_key = all_covariate_keys[i];
+				let local_val = GDP_PPP_SEDAC.covariates_obj[local_key](year);
+				covariates_map[local_key] = local_val;
+			}
+			
+			return {
+				covariates_map: covariates_map,
+				options: {
+					...options,
+					key: year.toString(),
+					lambda: lambda_val
+				},
+				output_file_path: `${this.intermediate_ols_folder}/OLS_GDP_${year}.json`,
+				target_file_path: `${this.bf}/GDP_${year}.png`,
+				target_format: "float32"
+			};
+		}, {
+			concurrency: options.concurrency,
+			name: "GDP Nominal SEDAC OLS Training"
+		});
 	}
 	
 	static async C_geomeanGDPModel (arg0_prefix) {
@@ -188,15 +210,16 @@ global.GDP_nominal_SEDAC = class {
 		
 		//Initialise options
 		if (!options.exclude) options.exclude = [];
+		let skip_training = (options.skip_training || options.use_existing_models || options.train === false);
 		
 		//1. Normalise SEDAC rasters to nominal GDP
 		if (!options.exclude.includes("A")) await this.A_normaliseSEDACRastersToNominal();
 		
 		//2. Train individual yearly OLS models
-		if (!options.exclude.includes("B")) await this.B_trainGDPModels(options);
+		if (!options.exclude.includes("B") && !skip_training) await this.B_trainGDPModels(options);
 		
 		//3. Compute geomean
-		if (!options.exclude.includes("C")) try {
+		if (!options.exclude.includes("C") && !skip_training) try {
 			await this.C_geomeanGDPModel("OLS_GDP_");
 		} catch (e) { console.error(e); }
 		

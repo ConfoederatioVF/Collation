@@ -36,15 +36,39 @@ global.GDP_PPP_OLS = class {
 		});
 	}
 	
-	static async A_generateOLS_GDP_PPPRasters () {
-		//Declare local instance variables
-		let hyde_years = landuse_HYDE.sorted_hyde_years;
+	static async A_generateOLS_GDP_PPPRasters (arg0_options) {
+		//Convert from parameters
+		let options = (arg0_options) ? arg0_options : {};
 		
-		//Iterate over all hyde_years and call A_generateOLS_GDP_PPPRaster
-		for (let i = 0; i < hyde_years.length; i++) {
-			await this.A_generateOLS_GDP_PPPRaster(hyde_years[i]);
-			await Blacktraffic.yield();
-		}
+		//Declare local instance variables
+		let all_cov_keys = Object.keys(this.input_covariates_obj());
+		let cov_func_map = this.input_covariates_obj();
+		let hyde_years = landuse_HYDE.sorted_hyde_years;
+		let model_path = this.input_coefficients_json();
+		
+		if (!fs.existsSync(this.output_ols_folder)) fs.mkdirSync(this.output_ols_folder, { recursive: true });
+		
+		//Return statement
+		return await Statistics.generateOLSRastersParallel(hyde_years, (year) => {
+			let covariates_map = {};
+			for (let i = 0; i < all_cov_keys.length; i++) {
+				let local_key = all_cov_keys[i];
+				let local_val = cov_func_map[local_key](year);
+				covariates_map[local_key] = local_val;
+			}
+			
+			return {
+				covariates_map: covariates_map,
+				model_obj: model_path,
+				options: {
+					format: "float32"
+				},
+				output_file_path: `${this.output_ols_folder}OLS_GDP_PPP_${year}.png`
+			};
+		}, {
+			concurrency: options.concurrency,
+			name: "GDP PPP OLS Raster Generation"
+		});
 	}
 	
 	static async processRasters (arg0_options) {
@@ -55,6 +79,6 @@ global.GDP_PPP_OLS = class {
 		if (!options.exclude) options.exclude = [];
 		
 		//1. Generate OLS rasters
-		if (!options.exclude.includes("A")) await this.A_generateOLS_GDP_PPPRasters();
+		if (!options.exclude.includes("A")) await this.A_generateOLS_GDP_PPPRasters(options);
 	}
 };

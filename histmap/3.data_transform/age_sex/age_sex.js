@@ -125,115 +125,63 @@ global.age_sex = class {
 	 * Trains temporally discrete multinomial models year-by-year utilizing 100% of the active raster.
 	 */
 	static async B_trainMultinomialLogitModels (arg0_options) {
+		//Convert from parameters
 		let options = (arg0_options) ? arg0_options : {};
+		
+		//Initialise options
 		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
-
+		
+		//Declare local instance variables
+		let cohorts = this.getCohorts();
+		let target_years = landuse_HYDE.sorted_hyde_years.filter(y => y >= 1750 && y <= 2025);
+		
 		if (!fs.existsSync(this.intermediate_logit_folder)) fs.mkdirSync(this.intermediate_logit_folder, { recursive: true });
 		
-		let cohorts = this.getCohorts();
-		let train_years = landuse_HYDE.sorted_hyde_years.filter(y => y >= 1750 && y <= 2025);
-		
-		for (let y = 0; y < train_years.length; y++) {
-			let year = train_years[y];
+		target_years = target_years.filter((year) => {
 			let model_path = `${this.intermediate_logit_folder}multinomial_model_${year}.json`;
-			
-			if (!overwrite && fs.existsSync(model_path)) continue;
-			console.log(`Extracting 100% valid spatial dataset for Multinomial Logit year ${year}...`);
-			
-			let format_year = year > 2023 ? 2023 : year;
-			let valid_keys = [];
-			let cov_rasters = {};
-			
-			// 1. Load Universal Covariates for the current year
+			return (overwrite || !fs.existsSync(model_path));
+		});
+		
+		if (target_years.length === 0) return [];
+		
+		//Return statement
+		return await Statistics.trainMultinomialLogitModelsParallel(target_years, (year) => {
 			let all_keys = Object.keys(this.covariates_obj);
+			let covariates_map = {};
+			let format_year = year > 2023 ? 2023 : year;
+			let model_path = `${this.intermediate_logit_folder}multinomial_model_${year}.json`;
+			let popc_info = this.covariates_obj["popc_"](format_year);
+			let target_paths = {};
+			
 			for (let i = 0; i < all_keys.length; i++) {
 				let k = all_keys[i];
 				let info = this.covariates_obj[k](format_year);
-				if (fs.existsSync(info[0])) {
-					cov_rasters[k] = GeoPNG.loadNumberRasterImage(info[0], { format: info[1] });
-					valid_keys.push(k);
-				}
+				covariates_map[k] = info;
 			}
 			
-			let popc_info = this.covariates_obj["popc_"](format_year);
-			let popc_raster = GeoPNG.loadNumberRasterImage(popc_info[0], { format: popc_info[1] });
-			
-			// 2. Load the cohort targets
-			let cohort_rasters = {};
-			let missing_targets = false;
-			for (let c of cohorts) {
-				let p = `${this.standardised_targets_folder}global_${c}_${year}.png`;
-				if (!fs.existsSync(p)) { missing_targets = true; break; }
-				cohort_rasters[c] = GeoPNG.loadNumberRasterImage(p, { format: "float32" });
+			for (let i = 0; i < cohorts.length; i++) {
+				let c = cohorts[i];
+				target_paths[c] = `${this.standardised_targets_folder}global_${c}_${year}.png`;
 			}
 			
-			if (missing_targets) {
-				console.warn(`- Skipping year ${year}: missing full cohort target structure.`);
-				continue;
-			}
-			
-			// 3. Construct the categorical event matrix utilizing the ENTIRE raster
-			let X = [];
-			let Y = [];
-			let total_pixels = 4320 * 2160;
-			
-			for (let i = 0; i < total_pixels; i++) {
-				// Is the pixel inhabited according to Stadestér?
-				if (popc_raster.data[i] > 0) {
-					
-					let total_cohort_pop = 0;
-					let cohort_pops = [];
-					
-					for (let j = 0; j < cohorts.length; j++) {
-						let cp = cohort_rasters[cohorts[j]].data[i];
-						cp = (isNaN(cp) || cp < 0) ? 0 : cp;
-						cohort_pops.push(cp);
-						total_cohort_pop += cp;
-					}
-					
-					// STRICT GUARD CLAUSE (HMD Filter): Completely skips zero-sum countries seamlessly
-					if (total_cohort_pop <= 0) continue;
-					
-					let x_row = [];
-					let is_valid = true;
-					for (let j = 0; j < valid_keys.length; j++) {
-						let val = cov_rasters[valid_keys[j]].data[i];
-						if (isNaN(val)) { is_valid = false; break; }
-						x_row.push(val);
-					}
-					
-					// If any covariate data is missing, we drop the pixel
-					if (!is_valid) continue;
-					
-					let rand = Math.random() * total_cohort_pop;
-					let cumulative = 0;
-					let selected_class = cohorts[cohorts.length - 1]; // strict fallback
-					
-					for (let j = 0; j < cohorts.length; j++) {
-						cumulative += cohort_pops[j];
-						if (rand <= cumulative) {
-							selected_class = cohorts[j];
-							break;
-						}
-					}
-					
-					X.push(x_row);
-					Y.push([selected_class]);
-				}
-			}
-			
-			console.log(`- Distilling temporal model for ${year} via ${X.length} valid urban/rural pixels...`);
-			
-			// 4. Batched Gradient Descent natively handles large memory structures
-			await Statistics.trainMultinomialLogitModel(model_path, { keys: valid_keys, X, Y }, {
-				max_iterations: Math.returnSafeNumber(options.max_iterations, 50),
-				learning_rate: Math.returnSafeNumber(options.learning_rate, 0.1),
-				lambda: Math.returnSafeNumber(options.lambda, 1e-4),
-				debug: true
-			});
-			
-			await Blacktraffic.yield();
-		}
+			return {
+				categories: cohorts,
+				covariates_map: covariates_map,
+				filter_format: (popc_info && popc_info[1]) ? popc_info[1] : "float32",
+				filter_raster_path: (popc_info) ? popc_info[0] : null,
+				model_path: model_path,
+				options: {
+					debug: true,
+					lambda: Math.returnSafeNumber(options.lambda, 1e-4),
+					learning_rate: Math.returnSafeNumber(options.learning_rate, 0.1),
+					max_iterations: Math.returnSafeNumber(options.max_iterations, 50)
+				},
+				target_paths: target_paths
+			};
+		}, {
+			concurrency: options.concurrency,
+			name: "Age Sex Multinomial Logit Training"
+		});
 	}
 	
 	/**
@@ -310,55 +258,59 @@ global.age_sex = class {
 	 * and falls back to the Unified model for pre-1750 historical prediction.
 	 */
 	
-	//[QUARANTINE] - This is so slow, it should be multithreaded
 	static async D_generateMultinomialLogitRasters (arg0_options) {
+		//Convert from parameters
 		let options = (arg0_options) ? arg0_options : {};
+		
+		//Initialise options
 		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
-
+		
+		//Declare local instance variables
+		let check_cohort = this.getCohorts()[0];
+		let years = landuse_HYDE.sorted_hyde_years;
+		
 		if (!fs.existsSync(this.intermediate_logit_rasters)) fs.mkdirSync(this.intermediate_logit_rasters, { recursive: true });
 		
-		let years = landuse_HYDE.sorted_hyde_years;
-		let check_cohort = this.getCohorts()[0];
-		
-		for (let y = 0; y < years.length; y++) {
-			let year = years[y];
+		let target_years = years.filter((year) => {
 			let out_base = `${this.intermediate_logit_rasters}logit_${year}.png`;
 			let check_path = out_base.replace(".png", `_class_${check_cohort}.png`);
-			
-			if (!overwrite && fs.existsSync(check_path)) continue;
-			
-			// If year is out-of-bounds (e.g., 10000 BC), strictly use the global average transition model
-			let model_path = `${this.intermediate_logit_folder}multinomial_model_${year}.json`;
-			
-			if (year < 1950 || year > 2025 || !fs.existsSync(model_path)) {
-				model_path = `${this.intermediate_logit_folder}multinomial_model_unified.json`;
-				console.log(`Generating MNL distribution for ${year} using robust UNIFIED global model...`);
-			} else {
-				console.log(`Generating MNL distribution for ${year} using specific historical model...`);
-			}
-			
-			if (!fs.existsSync(model_path)) {
-				console.warn(`[WARN] Missing model ${model_path}. Skipping probability generation for ${year}.`);
-				continue;
-			}
-			
+			return (overwrite || !fs.existsSync(check_path));
+		});
+		
+		if (target_years.length === 0) return [];
+		
+		//Return statement
+		return await Statistics.generateMultinomialRastersParallel(target_years, (year) => {
+			let all_keys = Object.keys(this.covariates_obj);
+			let covariates_map = {};
 			let format_year = year > 2023 ? 2023 : year;
+			let model_path = `${this.intermediate_logit_folder}multinomial_model_${year}.json`;
+			let out_base = `${this.intermediate_logit_rasters}logit_${year}.png`;
 			
-			await Statistics.generateMultinomialRaster(out_base, {
-				covariates_obj: this.covariates_obj,
-				formatting_parameters: [format_year],
+			if (year < 1950 || year > 2025 || !fs.existsSync(model_path))
+				model_path = `${this.intermediate_logit_folder}multinomial_model_unified.json`;
+			
+			if (!fs.existsSync(model_path)) return null;
+			
+			for (let i = 0; i < all_keys.length; i++) {
+				let k = all_keys[i];
+				let info = this.covariates_obj[k](format_year);
+				covariates_map[k] = info;
+			}
+			
+			return {
+				covariates_map: covariates_map,
 				model_obj: model_path,
-				output_mode: "probabilities",
-				format: "float32",
-				guard_clause: (local_index, rasters) => {
-					//Strictly skip vast ocean footprints explicitly relying on the global Stadester mask
-					let popc = rasters["popc_"];
-					return (popc && popc.data[local_index] > 0);
-				}
-			});
-			
-			await Blacktraffic.yield();
-		}
+				options: {
+					format: "float32",
+					output_mode: "probabilities"
+				},
+				output_file_path: out_base
+			};
+		}, {
+			concurrency: options.concurrency,
+			name: "Age Sex Multinomial Logit Raster Generation"
+		});
 	}
 	
 	/**

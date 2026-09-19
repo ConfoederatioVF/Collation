@@ -451,7 +451,7 @@
 		
 		//Check whether worker threads are supported and operational
 		let can_use_worker_threads = false;
-		if (use_workers && typeof require !== "undefined") {
+		if (use_workers && (task_generator || options.allow_eval_handler) && typeof require !== "undefined") {
 			try {
 				let pool = GeoPNG.getWorkerPool({ concurrency: concurrency });
 				if (pool && pool.length > 0) can_use_worker_threads = true;
@@ -468,7 +468,7 @@
 		
 		//Serialise handler if worker threads are used and handler is provided without explicit task_generator
 		let serialised_handler = null;
-		if (can_use_worker_threads && !task_generator && typeof handler === "function")
+		if (can_use_worker_threads && !task_generator && options.allow_eval_handler && typeof handler === "function")
 			serialised_handler = handler.toString();
 		
 		//Worker queue runner
@@ -497,8 +497,10 @@
 							try {
 								results[index_to_run] = await GeoPNG.executeWorkerTask(task_payload, { concurrency: concurrency });
 							} catch (worker_err) {
+								console.warn(`- [${task_name}] Worker task failed for item ${item}:`, worker_err.message || worker_err);
 								//Fallback to local handler on serialization or worker failure
 								if (typeof handler === "function") {
+									console.warn(`- [${task_name}] Falling back to local execution for item ${item} ..`);
 									results[index_to_run] = await handler(item, index_to_run, context);
 								} else {
 									throw worker_err;
