@@ -278,7 +278,7 @@ global.age_sex_HMD = class {
 			//GUARD CLAUSE: HMD is strictly for historical backcalculation prior to the UNWPP era.
 			if (year_num >= 1950) continue;
 			
-			let pop_path = `${population_Stadester_Legacy.input_popc_folder}stadester_population_${year}.png`;
+			let pop_path = `${population_Stadester.input_popc_folder}stadester_population_${year}.png`;
 			
 			if (!fs.existsSync(pop_path)) continue;
 			
@@ -314,7 +314,7 @@ global.age_sex_HMD = class {
 				}
 			});
 			
-			let stadester_raster = GeoPNG.loadNumberRasterImage(pop_path, { format: "int32" });
+			let stadester_raster = GeoPNG.loadNumberRasterImage(pop_path, { format: "float32" });
 			let total_backcalculated = new Float32Array(stadester_raster.width * stadester_raster.height);
 			
 			for (let c = 0; c < all_cohorts.length; c++) {

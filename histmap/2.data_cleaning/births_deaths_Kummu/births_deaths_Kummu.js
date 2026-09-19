@@ -99,10 +99,10 @@ global.births_deaths_Kummu = class {
 		
 		for (let i = 0; i < years_list.length; i++) {
 			let current_year = years_list[i];
-			let local_stadester_path = `${population_Stadester_Legacy.input_popc_folder}stadester_population_${current_year}.png`;
+			let local_stadester_path = `${population_Stadester.input_popc_folder}stadester_population_${current_year}.png`;
 			
 			let local_stadester_popc_raster = GeoPNG.loadNumberRasterImage(local_stadester_path, {
-				format: "int32"
+				format: "float32"
 			});
 			
 			let local_births_path = `${this.intermediate_births_folder}births_${current_year}.png`;

@@ -25,7 +25,7 @@ global.GDP_pc = class {
 	//HYDE; Stadestér formatters
 	static hf = () => `${landuse_HYDE.bf}/rasters/`;
 	static hf1 = (y) => landuse_HYDE._getHYDEYearName(y);
-	static sf = () => population_Stadester_Legacy;
+	static sf = () => population_Stadester;
 	
 	static async A_generateGDP_pcRasters () {
 		//Declare local instance variables
@@ -33,14 +33,14 @@ global.GDP_pc = class {
 		
 		for (let i = 0; i < hyde_years.length; i++) {
 			let local_gdp_file_path = `${GDP_nominal.intermediate_scaled_to_national}GDP_${hyde_years[i]}.png`;
-			let local_popc_file_path = `${population_Stadester_Legacy.input_popc_folder}stadester_population_${hyde_years[i]}.png`;
+			let local_popc_file_path = `${population_Stadester.input_popc_folder}stadester_population_${hyde_years[i]}.png`;
 			
 			if (fs.existsSync(local_gdp_file_path) && fs.existsSync(local_popc_file_path)) {
 				let local_gdp_raster = GeoPNG.loadNumberRasterImage(local_gdp_file_path, {
 					format: "float32"
 				});
 				let local_popc_raster = GeoPNG.loadNumberRasterImage(local_popc_file_path, {
-					format: "int32"
+					format: "float32"
 				});
 				let local_output_file_path = `${this.input_gdp_pc_folder}GDP_pc_${hyde_years[i]}.png`;
 				
@@ -161,8 +161,8 @@ global.GDP_pc = class {
 			let first_pass_raster = GeoPNG.loadNumberRasterImage(first_pass_path, { format: "float32" });
 			let second_pass_path = `${this.intermediate_ols_rasters_folder}OLS_GDP_pc_${years[i]}.png`;
 			let second_pass_raster = GeoPNG.loadNumberRasterImage(second_pass_path, { format: "float32" });
-			let pop_path = `${population_Stadester_Legacy.input_popc_folder}stadester_population_${years[i]}.png`;
-			let pop_raster = GeoPNG.loadNumberRasterImage(pop_path, { format: "int32" });
+			let pop_path = `${population_Stadester.input_popc_folder}stadester_population_${years[i]}.png`;
+			let pop_raster = GeoPNG.loadNumberRasterImage(pop_path, { format: "float32" });
 			
 			let output_path = `${this.intermediate_pc_estimates_folder}GDP_pc_${years[i]}.png`;
 			let current_iteration_max = 0;
@@ -231,12 +231,12 @@ global.GDP_pc = class {
 			name: "GDP_pc E_generateGDPRasters",
 			handler: async (year) => {
 				let pc_path = `${this.intermediate_pc_estimates_folder}GDP_pc_${year}.png`;
-				let pop_path = `${population_Stadester_Legacy.input_popc_folder}stadester_population_${year}.png`;
+				let pop_path = `${population_Stadester.input_popc_folder}stadester_population_${year}.png`;
 				let output_path = `${this.intermediate_gdp_folder}GDP_${year}.png`;
 				
 				if (fs.existsSync(pc_path) && fs.existsSync(pop_path)) {
 					let pc_raster = GeoPNG.loadNumberRasterImage(pc_path, { format: "float32" });
-					let pop_raster = GeoPNG.loadNumberRasterImage(pop_path, { format: "int32" });
+					let pop_raster = GeoPNG.loadNumberRasterImage(pop_path, { format: "float32" });
 					
 					GeoPNG.saveNumberRasterImage({
 						file_path: output_path,
@@ -347,8 +347,8 @@ global.GDP_pc = class {
 			if (!fs.existsSync(local_input_file_path)) continue;
 			
 			let local_input_raster = GeoPNG.loadNumberRasterImage(local_input_file_path, { format: "float32" });
-			let local_popc_file_path = `${population_Stadester_Legacy.input_popc_folder}stadester_population_${current_year}.png`;
-			let local_popc_raster = GeoPNG.loadNumberRasterImage(local_popc_file_path, { format: "int32" });
+			let local_popc_file_path = `${population_Stadester.input_popc_folder}stadester_population_${current_year}.png`;
+			let local_popc_raster = GeoPNG.loadNumberRasterImage(local_popc_file_path, { format: "float32" });
 			let local_output_file = `${this.intermediate_gdp_scaled_to_national}GDP_${current_year}.png`;
 			
 			let local_gdp_sums = {};
@@ -504,7 +504,7 @@ global.GDP_pc = class {
 		for (let i = 0; i < hyde_years.length; i++) {
 			let current_year = hyde_years[i];
 			let total_file_path = `${this.intermediate_gdp_scaled_to_national}GDP_${current_year}.png`;
-			let popc_file_path = `${population_Stadester_Legacy.input_popc_folder}stadester_population_${current_year}.png`;
+			let popc_file_path = `${population_Stadester.input_popc_folder}stadester_population_${current_year}.png`;
 			let output_file_path = `${this.output_gdp_pc_folder}GDP_pc_${current_year}.png`;
 			
 			let current_max_pc = 0;
@@ -513,7 +513,7 @@ global.GDP_pc = class {
 			
 			if (fs.existsSync(total_file_path) && fs.existsSync(popc_file_path)) {
 				let total_raster = GeoPNG.loadNumberRasterImage(total_file_path, { format: "float32" });
-				let popc_raster = GeoPNG.loadNumberRasterImage(popc_file_path, { format: "int32" });
+				let popc_raster = GeoPNG.loadNumberRasterImage(popc_file_path, { format: "float32" });
 				
 				GeoPNG.saveNumberRasterImage({
 					file_path: output_file_path,

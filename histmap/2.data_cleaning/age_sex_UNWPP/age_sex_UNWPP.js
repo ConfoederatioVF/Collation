@@ -198,7 +198,7 @@ global.age_sex_UNWPP = class {
 		//Iterate over temporal bounds
 		for (let y = 0; y < unwpp_years.length; y++) {
 			let local_year = unwpp_years[y];
-			let pop_path = `${population_Stadester_Legacy.input_popc_folder}stadester_population_${local_year}.png`;
+			let pop_path = `${population_Stadester.input_popc_folder}stadester_population_${local_year}.png`;
 			
 			//Guard clause if no Stadestér temporal anchor exists for this year
 			if (!fs.existsSync(pop_path)) continue;
@@ -226,7 +226,7 @@ global.age_sex_UNWPP = class {
 			
 			//1. Load Stadester popc anchor raster
 			let stadester_raster = GeoPNG.loadNumberRasterImage(pop_path, {
-				format: "int32"
+				format: "float32"
 			});
 			
 			//2. Dasymetric Cohort Scaling via GeoPNG framework

@@ -443,7 +443,7 @@ global.landuse_HYDE = class {
 	}
 	
 	static async processRasters (arg0_options) {
-		
+		//Convert from parameters
 		let options = (arg0_options) ? arg0_options : {};
 		
 		if (!options.exclude) options.exclude = [];

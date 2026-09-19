@@ -166,12 +166,12 @@ global.professions_ILO = class {
 		
 		for (let y = 0; y < hyde_years.length; y++) {
 			let year = hyde_years[y];
-			let rurc_path = `${population_Stadester_Legacy.input_rurc_folder}/stadester_rural_${year}.png`;
-			let urbc_path = `${population_Stadester_Legacy.input_urbc_folder}/stadester_urban_${year}.png`;
+			let rurc_path = `${population_Stadester.input_rurc_folder}stadester_rural_${year}.png`;
+			let urbc_path = `${population_Stadester.input_urbc_folder}stadester_urban_${year}.png`;
 			if (!fs.existsSync(rurc_path) || !fs.existsSync(urbc_path)) continue;
 			
-			let rurc_raster = GeoPNG.loadNumberRasterImage(rurc_path, { format: "int32" });
-			let urbc_raster = GeoPNG.loadNumberRasterImage(urbc_path, { format: "int32" });
+			let rurc_raster = GeoPNG.loadNumberRasterImage(rurc_path, { format: "float32" });
+			let urbc_raster = GeoPNG.loadNumberRasterImage(urbc_path, { format: "float32" });
 			
 			let pop_rasters_m = {}, pop_rasters_f = {};
 			for (let c = 0; c < working_cohorts.length; c++) {

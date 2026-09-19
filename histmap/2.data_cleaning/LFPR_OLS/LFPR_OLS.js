@@ -131,7 +131,7 @@ global.LFPR_OLS = class {
 				if (!fs.existsSync(popc_path) || !fs.existsSync(ols_path)) continue;
 				if (fs.existsSync(normalised_path)) continue;
 				
-				let popc_raster = GeoPNG.loadNumberRasterImage(popc_path, { format: "int32" });
+				let popc_raster = GeoPNG.loadNumberRasterImage(popc_path, { format: "float32" });
 				let ols_raster = GeoPNG.loadNumberRasterImage(ols_path, { format: "float32" });
 				
 				let valid_pixels = [];
@@ -238,7 +238,7 @@ global.LFPR_OLS = class {
 				let target_raster = fs.existsSync(target_path) ? GeoPNG.loadNumberRasterImage(target_path, { format: "float32" }) : null;
 				
 				let popc_path = `${sf.input_popc_folder}stadester_population_${year}.png`;
-				let popc_raster = fs.existsSync(popc_path) ? GeoPNG.loadNumberRasterImage(popc_path, { format: "int32" }) : null;
+				let popc_raster = fs.existsSync(popc_path) ? GeoPNG.loadNumberRasterImage(popc_path, { format: "float32" }) : null;
 				
 				let processed_data = new Float32Array(normalised_raster.data.length);
 				

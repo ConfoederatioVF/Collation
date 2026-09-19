@@ -7,7 +7,7 @@ global.GDP_PPP_SEDAC = class {
 	//Hyde; Stadestér formatters
 	static hf = () => `${landuse_HYDE.bf}/rasters/`;
 	static hf1 = (y) => landuse_HYDE._getHYDEYearName(y);
-	static sf = () => population_Stadester_Legacy;
+	static sf = () => population_Stadester;
 	static covariates_obj = {
 		//LU (Land Use)
 		"conv_rangeland": (y) => [`${this.hf()}/conv_rangeland${this.hf1(y)}_number.png`, "float32"],
@@ -27,8 +27,8 @@ global.GDP_PPP_SEDAC = class {
 		//POP (Demographics)
 		//We only include popd_, rurc_, urbc_ to prevent double-counting pops
 		"popd_": (y) => [`${this.sf().intermediate_popd_folder}/stadester_density_${y}.png`, "float32"],
-		"rurc_": (y) => [`${this.sf().input_rurc_folder}/stadester_rural_${y}.png`, "int32"],
-		"urbc_": (y) => [`${this.sf().input_urbc_folder}/stadester_urban_${y}.png`, "int32"]
+		"rurc_": (y) => [`${this.sf().input_rurc_folder}/stadester_rural_${y}.png`, "float32"],
+		"urbc_": (y) => [`${this.sf().input_urbc_folder}/stadester_urban_${y}.png`, "float32"]
 	};
 	
 	/**
@@ -128,7 +128,7 @@ global.GDP_PPP_SEDAC = class {
 		//1. Convert to PNGs
 		if (!options.exclude.includes("A")) {
 			await this.A_convertToPNGs();
-			await population_Stadester_Legacy.processRasters();
+			await population_Stadester.processRasters();
 		}
 		
 		//2. Train individual yearly OLS models

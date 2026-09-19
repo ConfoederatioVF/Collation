@@ -149,8 +149,8 @@ global.births_deaths_OLS = class {
 		let popc_path = `${sf.input_popc_folder}stadester_population_${year}.png`;
 		let prev_popc_path = `${sf.input_popc_folder}stadester_population_${prev_year}.png`;
 		
-		let pop_r = fs.existsSync(popc_path) ? GeoPNG.loadNumberRasterImage(popc_path, { format: "int32" }) : null;
-		let prev_pop_r = fs.existsSync(prev_popc_path) ? GeoPNG.loadNumberRasterImage(prev_popc_path, { format: "int32" }) : null;
+		let pop_r = fs.existsSync(popc_path) ? GeoPNG.loadNumberRasterImage(popc_path, { format: "float32" }) : null;
+		let prev_pop_r = fs.existsSync(prev_popc_path) ? GeoPNG.loadNumberRasterImage(prev_popc_path, { format: "float32" }) : null;
 		
 		let decline_array = new Float32Array(rasters[0].data.length);
 		let cohort_count = rasters.length;
@@ -443,7 +443,7 @@ global.births_deaths_OLS = class {
 				if (!fs.existsSync(ols_path)) continue;
 				if (fs.existsSync(normalised_path) && fs.existsSync(bounds_path)) continue;
 				
-				let popc_raster = GeoPNG.loadNumberRasterImage(popc_path, { format: "int32" });
+				let popc_raster = GeoPNG.loadNumberRasterImage(popc_path, { format: "float32" });
 				let ols_raster = GeoPNG.loadNumberRasterImage(ols_path, { format: "float32" });
 				
 				let local_stats = yearly_target_stats[year];
@@ -542,7 +542,7 @@ global.births_deaths_OLS = class {
 			let popc_path = `${sf.input_popc_folder}stadester_population_${year}.png`;
 			if (!fs.existsSync(popc_path)) continue;
 			
-			let popc_raster = GeoPNG.loadNumberRasterImage(popc_path, { format: "int32" });
+			let popc_raster = GeoPNG.loadNumberRasterImage(popc_path, { format: "float32" });
 			let denominator_cache = {};
 			
 			// 1. Process all variables into memory first to get the RAW working aggregates
@@ -758,8 +758,8 @@ global.births_deaths_OLS = class {
 				let previous_popc_path = `${sf.input_popc_folder}stadester_population_${previous_year}.png`;
 				if (!fs.existsSync(popc_path) || !fs.existsSync(previous_popc_path)) continue;
 				
-				let popc_raster = GeoPNG.loadNumberRasterImage(popc_path, { format: "int32" });
-				let previous_popc_raster = GeoPNG.loadNumberRasterImage(previous_popc_path, { format: "int32" });
+				let popc_raster = GeoPNG.loadNumberRasterImage(popc_path, { format: "float32" });
+				let previous_popc_raster = GeoPNG.loadNumberRasterImage(previous_popc_path, { format: "float32" });
 				
 				delta_popc_raster = {
 					width: popc_raster.width,

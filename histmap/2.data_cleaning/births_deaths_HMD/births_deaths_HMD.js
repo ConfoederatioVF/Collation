@@ -368,7 +368,7 @@ global.births_deaths_HMD = class {
 			//GUARD CLAUSE: HMD is strictly for historical backcalculation prior to the UNWPP era.
 			if (year_num >= 1950) continue;
 			
-			let pop_path = `${population_Stadester_Legacy.input_popc_folder}stadester_population_${year}.png`;
+			let pop_path = `${population_Stadester.input_popc_folder}stadester_population_${year}.png`;
 			
 			//Guard clause if no Stadestér temporal anchor exists for this year
 			if (!fs.existsSync(pop_path)) continue;
@@ -388,7 +388,7 @@ global.births_deaths_HMD = class {
 			
 			//1. Load Stadester popc anchor raster and compute national population sums over HMD regions
 			let stadester_raster = GeoPNG.loadNumberRasterImage(pop_path, {
-				format: "int32"
+				format: "float32"
 			});
 			
 			let stadester_sums = {};

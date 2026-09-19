@@ -7,7 +7,7 @@ global.GDP_nominal_OLS = class {
 	//HYDE; Stadestér formatters
 	static hf = () => `${landuse_HYDE.bf}/rasters/`;
 	static hf1 = (y) => landuse_HYDE._getHYDEYearName(y);
-	static sf = () => population_Stadester_Legacy;
+	static sf = () => population_Stadester;
 	
 	static async A_generateOLS_GDPRaster (arg0_year) {
 		//Convert from parameters

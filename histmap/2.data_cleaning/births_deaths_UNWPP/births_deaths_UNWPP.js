@@ -216,10 +216,10 @@ global.births_deaths_UNWPP = class {
 				
 				//Load base-year Stadestér population sums for the rate-preserving fallback
 				base_popc_sums = {};
-				let base_popc_path = `${population_Stadester_Legacy.input_popc_folder}stadester_population_${base_year}.png`;
+				let base_popc_path = `${population_Stadester.input_popc_folder}stadester_population_${base_year}.png`;
 				
 				if (fs.existsSync(base_popc_path)) {
-					let base_popc_raster = GeoPNG.loadNumberRasterImage(base_popc_path, { format: "int32" });
+					let base_popc_raster = GeoPNG.loadNumberRasterImage(base_popc_path, { format: "float32" });
 					base_popc_sums = this._getNationalSums(base_popc_raster, geocode_obj, geocode_raster);
 				}
 				
@@ -230,10 +230,10 @@ global.births_deaths_UNWPP = class {
 			
 			//Compute target-year Stadestér national population sums for the rate-preserving fallback
 			let target_popc_sums = {};
-			let target_popc_path = `${population_Stadester_Legacy.input_popc_folder}stadester_population_${local_year}.png`;
+			let target_popc_path = `${population_Stadester.input_popc_folder}stadester_population_${local_year}.png`;
 			
 			if (fs.existsSync(target_popc_path)) {
-				let target_popc_raster = GeoPNG.loadNumberRasterImage(target_popc_path, { format: "int32" });
+				let target_popc_raster = GeoPNG.loadNumberRasterImage(target_popc_path, { format: "float32" });
 				target_popc_sums = this._getNationalSums(target_popc_raster, geocode_obj, geocode_raster);
 			}
 			
@@ -365,7 +365,7 @@ global.births_deaths_UNWPP = class {
 		//Iterate over temporal bounds
 		for (let y = 0; y < unwpp_years.length; y++) {
 			let local_year = unwpp_years[y];
-			let pop_path = `${population_Stadester_Legacy.input_popc_folder}stadester_population_${local_year}.png`;
+			let pop_path = `${population_Stadester.input_popc_folder}stadester_population_${local_year}.png`;
 			
 			//Guard clause if no Stadestér temporal anchor exists for this year
 			if (!fs.existsSync(pop_path)) continue;
@@ -374,7 +374,7 @@ global.births_deaths_UNWPP = class {
 			
 			//1. Load Stadester popc anchor raster and compute national population sums
 			let stadester_raster = GeoPNG.loadNumberRasterImage(pop_path, {
-				format: "int32"
+				format: "float32"
 			});
 			let stadester_sums = this._getNationalSums(stadester_raster, geocode_obj, geocode_raster);
 			
