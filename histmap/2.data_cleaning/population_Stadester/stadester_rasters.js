@@ -134,7 +134,7 @@
     
     //5. Return primary path by default even if not yet on disk
     //Return statement
-    return path.join(default_folder, `popc_${year}.png`);
+    return (year < 1800) ? path.join(fallback_folder, `popc_${year}.png`) : path.join(default_folder, `popc_${year}.png`);
   };
   
   /**
@@ -160,6 +160,22 @@
     let stadester_obj = options.stadester_obj;
     let substrata_file_path;
     let substrata_raster;
+    
+    //Guard clauses
+    if (year < -3000) {
+      if (!fs.existsSync(base_folder)) fs.mkdirSync(base_folder, { recursive: true });
+      GeoPNG.saveNumberRasterImage({
+        file_path: output_file_path,
+        format: "float32",
+        function: function (local_index) { return 0; },
+        height: 2160,
+        width: 4320
+      });
+      console.log(`- Saved blank Stadestér Base raster for ${year}: ${output_file_path}`);
+      
+      //Return statement
+      return output_file_path;
+    }
     
     //Resolve substrata path from population_Substrata.outlier_removal in float32
     substrata_file_path = population_Stadester_rasters.getSubstrataRasterPath(year, options);
@@ -296,6 +312,24 @@
     let ghsl_raster = null;
     let output_file_path = path.join(options.input_urbc_folder || `${h2}/population_Stadester/stadester_urban_rasters/`, `stadester_urban_${year}.png`);
     
+    //Guard clauses
+    if (year < -3000) {
+      let urban_folder = options.input_urbc_folder || `${h2}/population_Stadester/stadester_urban_rasters/`;
+      let zero_raster = new Float32Array(4320*2160);
+      if (!fs.existsSync(urban_folder)) fs.mkdirSync(urban_folder, { recursive: true });
+      GeoPNG.saveNumberRasterImage({
+        file_path: output_file_path,
+        format: "float32",
+        function: function (local_index) { return 0; },
+        height: 2160,
+        width: 4320
+      });
+      console.log(`- Saved blank Stadestér Urban raster for ${year}: ${output_file_path}`);
+      
+      //Return statement
+      return output_file_path;
+    }
+    
     if (fs.existsSync(base_file_path))
       base_raster = GeoPNG.loadNumberRasterImage(base_file_path, { format: "float32" });
     if (fs.existsSync(ghsl_file_path))
@@ -336,10 +370,26 @@
     
     //Declare local instance variables
     let output_file_path = path.join(options.input_rurc_folder || `${h2}/population_Stadester/stadester_rural_rasters/`, `stadester_rural_${year}.png`);
+    let rural_folder;
     let substrata_file_path = population_Stadester_rasters.getSubstrataRasterPath(year, options);
     let substrata_raster = null;
     let urban_file_path = path.join(options.input_urbc_folder || `${h2}/population_Stadester/stadester_urban_rasters/`, `stadester_urban_${year}.png`);
     let urban_raster = null;
+    
+    //Guard clauses
+    if (year < -3000) {
+      rural_folder = path.dirname(output_file_path);
+      if (!fs.existsSync(rural_folder)) fs.mkdirSync(rural_folder, { recursive: true });
+      if (fs.existsSync(substrata_file_path)) {
+        fs.copyFileSync(substrata_file_path, output_file_path);
+        console.log(`- Copied Stadestér Rural raster from substrata for ${year}: ${output_file_path}`);
+      } else {
+        console.error(`- Substrata raster not found for ${year}: ${substrata_file_path}`);
+      }
+      
+      //Return statement
+      return output_file_path;
+    }
     
     if (options.substrata_raster) {
       substrata_raster = options.substrata_raster;
@@ -386,12 +436,30 @@
     
     //Declare local instance variables
     let output_file_path = path.join(options.input_popc_folder || `${h2}/population_Stadester/stadester_population_rasters/`, `stadester_population_${year}.png`);
+    let pop_folder;
     let rural_file_path = path.join(options.input_rurc_folder || `${h2}/population_Stadester/stadester_rural_rasters/`, `stadester_rural_${year}.png`);
     let rural_raster = null;
+    let substrata_file_path;
     let target_pop = null;
     let urban_file_path = path.join(options.input_urbc_folder || `${h2}/population_Stadester/stadester_urban_rasters/`, `stadester_urban_${year}.png`);
     let urban_raster = null;
     let world_pop_obj = options.world_pop_obj;
+    
+    //Guard clauses
+    if (year < -3000) {
+      pop_folder = path.dirname(output_file_path);
+      substrata_file_path = population_Stadester_rasters.getSubstrataRasterPath(year, options);
+      if (!fs.existsSync(pop_folder)) fs.mkdirSync(pop_folder, { recursive: true });
+      if (fs.existsSync(substrata_file_path)) {
+        fs.copyFileSync(substrata_file_path, output_file_path);
+        console.log(`- Copied Stadestér Total Population raster from substrata for ${year}: ${output_file_path}`);
+      } else {
+        console.error(`- Substrata raster not found for ${year}: ${substrata_file_path}`);
+      }
+      
+      //Return statement
+      return output_file_path;
+    }
     
     if (!world_pop_obj && typeof population_Global !== "undefined" && population_Global.A_getWorldPopulationObject)
       world_pop_obj = population_Global.A_getWorldPopulationObject();
@@ -560,11 +628,24 @@
       concurrency: options.concurrency || default_concurrency,
       items: years,
       name: "Stadester Base Rasters",
-      task_generator: (year) => ({
-        type: "stadester_base_raster",
-        options: options,
-        year: year
-      }),
+      task_generator: (year) => {
+        if (year < -3000) {
+          let base_folder = options.intermediate_base_folder || `${h2}/population_Stadester/stadester_base_rasters/`;
+          let output_file_path = path.join(base_folder, `stadester_base_${year}.png`);
+          return {
+            type: "blank_raster",
+            format: "float32",
+            height: 2160,
+            output_file_path: output_file_path,
+            width: 4320
+          };
+        }
+        return {
+          type: "stadester_base_raster",
+          options: options,
+          year: year
+        };
+      },
       handler: async (year) => population_Stadester_rasters.generateStadesterBaseRaster(year, options)
     });
   };
@@ -582,11 +663,24 @@
       concurrency: options.concurrency || default_concurrency,
       items: years,
       name: "Stadester Urban Rasters",
-      task_generator: (year) => ({
-        type: "stadester_urban_raster",
-        options: options,
-        year: year
-      }),
+      task_generator: (year) => {
+        if (year < -3000) {
+          let urban_folder = options.input_urbc_folder || `${h2}/population_Stadester/stadester_urban_rasters/`;
+          let output_file_path = path.join(urban_folder, `stadester_urban_${year}.png`);
+          return {
+            type: "blank_raster",
+            format: "float32",
+            height: 2160,
+            output_file_path: output_file_path,
+            width: 4320
+          };
+        }
+        return {
+          type: "stadester_urban_raster",
+          options: options,
+          year: year
+        };
+      },
       handler: async (year) => population_Stadester_rasters.generateStadesterUrbanRaster(year, options)
     });
   };
@@ -604,11 +698,25 @@
       concurrency: options.concurrency || default_concurrency,
       items: years,
       name: "Stadester Rural Rasters",
-      task_generator: (year) => ({
-        type: "stadester_rural_raster",
-        options: options,
-        year: year
-      }),
+      task_generator: (year) => {
+        if (year < -3000) {
+          let rural_folder = options.input_rurc_folder || `${h2}/population_Stadester/stadester_rural_rasters/`;
+          let output_file_path = path.join(rural_folder, `stadester_rural_${year}.png`);
+          let substrata_file_path = population_Stadester_rasters.getSubstrataRasterPath(year, options);
+          if (fs.existsSync(substrata_file_path)) {
+            return {
+              type: "copy",
+              from_file_path: substrata_file_path,
+              output_file_path: output_file_path
+            };
+          }
+        }
+        return {
+          type: "stadester_rural_raster",
+          options: options,
+          year: year
+        };
+      },
       handler: async (year) => population_Stadester_rasters.generateStadesterRuralRaster(year, options)
     });
   };
@@ -626,11 +734,25 @@
       concurrency: options.concurrency || default_concurrency,
       items: years,
       name: "Stadester Population Rasters",
-      task_generator: (year) => ({
-        type: "stadester_population_raster",
-        options: options,
-        year: year
-      }),
+      task_generator: (year) => {
+        if (year < -3000) {
+          let pop_folder = options.input_popc_folder || `${h2}/population_Stadester/stadester_population_rasters/`;
+          let output_file_path = path.join(pop_folder, `stadester_population_${year}.png`);
+          let substrata_file_path = population_Stadester_rasters.getSubstrataRasterPath(year, options);
+          if (fs.existsSync(substrata_file_path)) {
+            return {
+              type: "copy",
+              from_file_path: substrata_file_path,
+              output_file_path: output_file_path
+            };
+          }
+        }
+        return {
+          type: "stadester_population_raster",
+          options: options,
+          year: year
+        };
+      },
       handler: async (year) => population_Stadester_rasters.generateStadesterPopulationRaster(year, options)
     });
   };

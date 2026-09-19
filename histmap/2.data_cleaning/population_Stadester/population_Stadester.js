@@ -191,7 +191,7 @@
       //Declare local instance variables
       let hyde_years = (typeof landuse_HYDE !== "undefined" && landuse_HYDE.sorted_hyde_years) ?
         landuse_HYDE.sorted_hyde_years : [1800];
-      let years = options.years || hyde_years.filter(y => y >= -3000 && y <= 2025);
+      let years = options.years || hyde_years.filter(y => y >= -10000 && y <= 2025);
       
       this.ensureDirectories();
       
@@ -221,7 +221,7 @@
       //Declare local instance variables
       let hyde_years = (typeof landuse_HYDE !== "undefined" && landuse_HYDE.sorted_hyde_years) ?
         landuse_HYDE.sorted_hyde_years : [1800];
-      let years = options.years || hyde_years.filter(y => y >= -3000 && y <= 2025);
+      let years = options.years || hyde_years.filter(y => y >= -10000 && y <= 2025);
       
       this.ensureDirectories();
       
@@ -246,7 +246,7 @@
       //Declare local instance variables
       let hyde_years = (typeof landuse_HYDE !== "undefined" && landuse_HYDE.sorted_hyde_years) ?
         landuse_HYDE.sorted_hyde_years : [1800];
-      let years = options.years || hyde_years.filter(y => y >= -3000 && y <= 2025);
+      let years = options.years || hyde_years.filter(y => y >= -10000 && y <= 2025);
       
       this.ensureDirectories();
       
@@ -271,7 +271,7 @@
       //Declare local instance variables
       let hyde_years = (typeof landuse_HYDE !== "undefined" && landuse_HYDE.sorted_hyde_years) ?
         landuse_HYDE.sorted_hyde_years : [1800];
-      let years = options.years || hyde_years.filter(y => y >= -3000 && y <= 2025);
+      let years = options.years || hyde_years.filter(y => y >= -10000 && y <= 2025);
       
       this.ensureDirectories();
       
@@ -297,7 +297,7 @@
       //Declare local instance variables
       let hyde_years = (typeof landuse_HYDE !== "undefined" && landuse_HYDE.sorted_hyde_years) ?
         landuse_HYDE.sorted_hyde_years : [1800];
-      let years = options.years || hyde_years.filter(y => y >= -3000 && y <= 2025);
+      let years = options.years || hyde_years.filter(y => y >= -10000 && y <= 2025);
       
       this.ensureDirectories();
       

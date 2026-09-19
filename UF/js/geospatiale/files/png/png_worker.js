@@ -489,6 +489,41 @@ let handleTask = async function (task) {
     );
   }
 
+  if (task_type === "copy") {
+    let from_path = task.from_file_path || task.input_path;
+    let to_path = task.output_file_path || task.output_path;
+
+    if (from_path && to_path && fs.existsSync(from_path)) {
+      let out_dir = path.dirname(to_path);
+      if (!fs.existsSync(out_dir)) fs.mkdirSync(out_dir, { recursive: true });
+      fs.copyFileSync(from_path, to_path);
+      return to_path;
+    }
+    return null;
+  }
+
+  if (task_type === "blank_raster") {
+    let blank_data;
+    let format = task.format || "float32";
+    let height = task.height || 2160;
+    let out_dir;
+    let out_path = task.output_file_path || task.output_path;
+    let width = task.width || 4320;
+
+    blank_data = (format === "float32") ? new Float32Array(width * height) : new Int32Array(width * height);
+    out_dir = path.dirname(out_path);
+    if (!fs.existsSync(out_dir)) fs.mkdirSync(out_dir, { recursive: true });
+
+    await GeoPNG.saveNumberRasterImageAsync({
+      data: blank_data,
+      file_path: out_path,
+      format: format,
+      height: height,
+      width: width
+    });
+    return out_path;
+  }
+
   //13. Stadester raster generation tasks
   if (task_type === "stadester_density_raster") {
     return await population_Stadester_rasters.prepareDensityRaster(task.year, task.options || {});
