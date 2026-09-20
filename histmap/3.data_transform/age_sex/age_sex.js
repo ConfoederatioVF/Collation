@@ -81,15 +81,16 @@ global.age_sex = class {
 		if (!fs.existsSync(this.standardised_targets_folder)) fs.mkdirSync(this.standardised_targets_folder, { recursive: true });
 		
 		let cohorts = this.getCohorts();
+		let copy_tasks = [];
 		let train_years = landuse_HYDE.sorted_hyde_years.filter(y => y >= 1750 && y <= 2025);
+		let wp_files = [];
+		
+		if (fs.existsSync(age_sex_WorldPop.output_rasters)) {
+			wp_files = fs.readdirSync(age_sex_WorldPop.output_rasters);
+		}
 		
 		for (let y = 0; y < train_years.length; y++) {
 			let year = train_years[y];
-			let wp_files = [];
-			
-			if (year >= 2015 && fs.existsSync(age_sex_WorldPop.output_rasters)) {
-				wp_files = fs.readdirSync(age_sex_WorldPop.output_rasters);
-			}
 			
 			for (let c = 0; c < cohorts.length; c++) {
 				let cohort = cohorts[c];
@@ -114,9 +115,25 @@ global.age_sex = class {
 				}
 				
 				if (src_path && fs.existsSync(src_path)) {
-					fs.copyFileSync(src_path, out_path);
+					copy_tasks.push({
+						dest: out_path,
+						src: src_path
+					});
 				}
 			}
+		}
+		
+		if (copy_tasks.length > 0) {
+			await GeoPNG.processTimeseriesParallel({
+				concurrency: options.concurrency || 8,
+				items: copy_tasks,
+				name: "age_sex A_standardiseTargets",
+				task_generator: (task_item) => ({
+					dest_path: task_item.dest,
+					source_path: task_item.src,
+					task_type: "copy"
+				})
+			});
 		}
 		console.log(`Standardised target pool mapped across the timeseries.`);
 	}
@@ -303,6 +320,7 @@ global.age_sex = class {
 				model_obj: model_path,
 				options: {
 					format: "float32",
+					mask_uninhabited: true,
 					output_mode: "probabilities"
 				},
 				output_file_path: out_base
@@ -505,10 +523,16 @@ global.age_sex = class {
 	static async processRasters (arg0_options) {
 		let options = (arg0_options) ? arg0_options : {};
 		if (!options.exclude) options.exclude = [];
-		if (options.skip_training || options.use_existing_models || options.train === false) {
+		let skip_primary = (options.skip_primary || options.skip_raw || options.skip_primary_data || options.skip_raw_data || options.skip_databases);
+		let skip_training = (options.skip_training || options.use_existing_models || options.train === false);
+		
+		if (skip_training || skip_primary) {
+			if (!options.exclude.includes("A")) options.exclude.push("A");
+		}
+		if (skip_training) {
 			if (!options.exclude.includes("B")) options.exclude.push("B");
 			if (!options.exclude.includes("C")) options.exclude.push("C");
-			console.log(`[age_sex] Skipping Steps B & C training (using existing models).`);
+			console.log(`[age_sex] Skipping Steps A, B & C training (using existing models).`);
 		}
 		
 		if (!options.exclude.includes("A")) await this.A_standardiseTargets(options);

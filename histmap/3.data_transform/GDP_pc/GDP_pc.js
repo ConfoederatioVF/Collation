@@ -56,9 +56,13 @@ global.GDP_pc = class {
 			items: target_years,
 			name: "GDP_pc A_generateGDP_pcRasters",
 			task_generator: (year) => ({
+				clamp_alpha: 200000,
 				format: "float32",
 				input_path_1: `${GDP_nominal.intermediate_scaled_to_national}GDP_${year}.png`,
 				input_path_2: `${population_Stadester.input_popc_folder}stadester_population_${year}.png`,
+				log_compression_threshold: 2000000,
+				max_val: 5000000,
+				min_denominator: 0.01,
 				op: "divide",
 				output_path: `${this.input_gdp_pc_folder}GDP_pc_${year}.png`,
 				type: "raster_operation"
@@ -79,9 +83,15 @@ global.GDP_pc = class {
 					function: (local_index) => {
 						let gdp = local_gdp_raster.data[local_index];
 						let pop = local_popc_raster.data[local_index];
-						if (gdp > 0 && pop > 0) {
+						if (gdp > 0 && pop >= 0.01 && isFinite(gdp) && isFinite(pop)) {
 							let val = gdp/pop;
-							return isFinite(val) ? val : 0;
+							if (isFinite(val)) {
+								if (val > 2000000) {
+									val = 2000000 + 200000*Math.log(1 + ((val - 2000000)/200000));
+								}
+								if (val > 5000000) val = 5000000;
+								return (isFinite(val) && val < 3.402823466e38) ? val : 0;
+							}
 						}
 						return 0;
 					}
@@ -229,18 +239,23 @@ global.GDP_pc = class {
 			let total_pixels = second_pass_raster.data.length;
 			
 			for (let x = 0; x < total_pixels; x++) {
-				if (landarea_raster.data[x] > 0 && pop_raster.data[x] > 0) {
+				if (landarea_raster.data[x] > 0 && pop_raster.data[x] >= 0.01) {
 					let fp_val = first_pass_raster.data[x];
-					if (fp_val < first_pass_min) first_pass_min = fp_val;
-					if (fp_val > first_pass_max) first_pass_max = fp_val;
+					if (isFinite(fp_val) && fp_val > 0) {
+						if (fp_val < first_pass_min) first_pass_min = fp_val;
+						if (fp_val > first_pass_max) first_pass_max = fp_val;
+					}
 				}
 			}
+			if (!isFinite(first_pass_min)) first_pass_min = 0;
+			if (!isFinite(first_pass_max) || first_pass_max <= 0) first_pass_max = 5000000;
+			first_pass_max = Math.min(first_pass_max, 5000000);
 			let first_pass_range = (first_pass_max > first_pass_min) ? (first_pass_max - first_pass_min) : 1;
 			
 			let second_pass_fractions = GeoPNG.regulariseLogTail({
 				data: second_pass_raster.data,
 				fraction_only: true,
-				valid_filter: (x) => landarea_raster.data[x] > 0 && pop_raster.data[x] > 0
+				valid_filter: (x) => landarea_raster.data[x] > 0 && pop_raster.data[x] >= 0.01
 			});
 			
 			GeoPNG.saveNumberRasterImage({
@@ -250,10 +265,13 @@ global.GDP_pc = class {
 				width: 4320,
 				function: (local_index) => {
 					// Guard Clause: Keep uninhabited pixels strictly zero
-					if (landarea_raster.data[local_index] === 0 || pop_raster.data[local_index] === 0) return 0;
+					if (landarea_raster.data[local_index] === 0 || pop_raster.data[local_index] < 0.01) return 0;
 					
 					let first_pass_value = first_pass_raster.data[local_index];
+					if (!isFinite(first_pass_value) || first_pass_value < 0) first_pass_value = 0;
+					
 					let second_pass_fraction = second_pass_fractions[local_index];
+					if (!isFinite(second_pass_fraction) || second_pass_fraction < 0) second_pass_fraction = 0;
 					
 					let result_value = first_pass_value + (first_pass_range * second_pass_fraction);
 					
@@ -266,12 +284,17 @@ global.GDP_pc = class {
 						}
 					}
 					
-					if (result_value > current_iteration_max) current_iteration_max = result_value;
-					return result_value;
+					if (isFinite(result_value) && result_value > 0) {
+						if (result_value > current_iteration_max) current_iteration_max = result_value;
+						return (result_value < 3.402823466e38) ? result_value : 0;
+					}
+					return 0;
 				}
 			});
 			
-			global_prev_max = current_iteration_max;
+			if (isFinite(current_iteration_max) && current_iteration_max > 0) {
+				global_prev_max = current_iteration_max;
+			}
 			console.log(`- Saved ${output_path}. Max observed: ${current_iteration_max}`);
 			await Blacktraffic.yield();
 		}
@@ -345,6 +368,10 @@ global.GDP_pc = class {
 		let sedac1_domain = [1800, 1950];
 		let sedac2_domain = [1950, 1990];
 		let target_years = [];
+		let template_path = `${GDP_nominal_SEDAC.bf}GDP_2022.png`;
+		let template_sum = 0;
+		if (fs.existsSync(template_path))
+			template_sum = GeoPNG.getImageSum(template_path, { format: "float32" });
 		let to_path = `${GDP_nominal_SEDAC.bf}GDP_1990.png`;
 		let world_gdp_obj = GDP_nominal.getWorldGDPObject();
 		let year_gap = sedac_domain[1] - sedac_domain[0];
@@ -369,7 +396,13 @@ global.GDP_pc = class {
 				let local_from_path = `${this.intermediate_gdp_scaled_to_global}GDP_${current_year}.png`;
 				let local_output_path = `${this.intermediate_gdp_interpolated}GDP_${current_year}.png`;
 				
-				if (current_year >= sedac_domain[0] && current_year < sedac_domain[1]) {
+				if (current_year < sedac_domain[0]) {
+					return {
+						dest_path: local_output_path,
+						source_path: local_from_path,
+						type: "copy"
+					};
+				} else if (current_year >= sedac_domain[0] && current_year < sedac_domain[1]) {
 					let fraction = (current_year - sedac_domain[0])/year_gap;
 					let interp_options = { format: "float32", fraction: fraction };
 					if (current_year < sedac1_domain[1]) {
@@ -385,6 +418,25 @@ global.GDP_pc = class {
 						to_file_path: to_path,
 						type: "linear_interpolation"
 					};
+				} else if (current_year >= 1990 && current_year <= 2022) {
+					let local_sedac_path = `${GDP_nominal_SEDAC.bf}GDP_${current_year}.png`;
+					return {
+						dest_path: local_output_path,
+						source_path: local_sedac_path,
+						type: "copy"
+					};
+				} else {
+					if (fs.existsSync(template_path)) {
+						let target_global = Math.returnSafeNumber(world_gdp_obj[current_year], template_sum);
+						let global_scalar = (template_sum > 0) ? target_global/template_sum : 1;
+						return {
+							format: "float32",
+							input_path_1: template_path,
+							output_path: local_output_path,
+							scalar: global_scalar,
+							type: "raster_operation"
+						};
+					}
 				}
 				return null;
 			},
@@ -501,7 +553,7 @@ global.GDP_pc = class {
 					let stats = country_stats[country_code];
 					if (stats) {
 						let local_pop = local_popc_raster.data[x];
-						let raw_pc = (local_pop > 0) ? (local_val * stats.initial_scalar) / local_pop : 0;
+						let raw_pc = (local_pop >= 0.01) ? (local_val * stats.initial_scalar) / local_pop : 0;
 						
 						if (raw_pc > local_threshold) {
 							let regularised_pc = local_threshold + clamp_alpha * Math.log(1 + ((raw_pc - local_threshold) / clamp_alpha));
@@ -538,14 +590,14 @@ global.GDP_pc = class {
 					let stats = country_stats[country_code];
 					if (stats) {
 						let local_pop = local_popc_raster.data[local_index];
-						let raw_pc = (local_pop > 0) ? (local_val * stats.initial_scalar) / local_pop : 0;
+						let raw_pc = (local_pop >= 0.01) ? (local_val * stats.initial_scalar) / local_pop : 0;
 						
 						if (raw_pc > local_threshold) {
 							let regularised_pc = local_threshold + clamp_alpha * Math.log(1 + ((raw_pc - local_threshold) / clamp_alpha));
 							raw_scaled_data[local_index] = regularised_pc * local_pop;
 						} else {
 							let result_gdp = local_val * stats.secondary_scalar;
-							let result_pc = result_gdp / local_pop;
+							let result_pc = (local_pop >= 0.01) ? result_gdp / local_pop : 0;
 							if (result_pc > local_threshold) {
 								let reg_pc = local_threshold + clamp_alpha * Math.log(1 + ((result_pc - local_threshold) / clamp_alpha));
 								raw_scaled_data[local_index] = reg_pc * local_pop;
@@ -569,7 +621,7 @@ global.GDP_pc = class {
 				// Blur must occur on Intensive rate (PC) to preserve population weighting logic
 				let pc_data = new Float32Array(4320 * 2160);
 				for (let j = 0; j < 4320 * 2160; j++) {
-					if (local_popc_raster.data[j] > 0) {
+					if (local_popc_raster.data[j] >= 0.01) {
 						pc_data[j] = raw_scaled_data[j] / local_popc_raster.data[j];
 					}
 				}
@@ -598,11 +650,11 @@ global.GDP_pc = class {
 				function: (local_index) => {
 					let val = final_data[local_index];
 					let pop = local_popc_raster.data[local_index];
-					if (pop > 0) {
+					if (pop >= 0.01) {
 						let pc = val / pop;
-						if (pc > current_max_pc) current_max_pc = pc;
+						if (isFinite(pc) && pc > current_max_pc) current_max_pc = pc;
 					}
-					return val;
+					return (isFinite(val) && val < 3.402823466e38) ? val : 0;
 				}
 			});
 			
@@ -638,22 +690,22 @@ global.GDP_pc = class {
 					height: 2160,
 					function: (local_index) => {
 						let local_pop = popc_raster.data[local_index];
-						if (local_pop === 0) return 0;
+						if (local_pop < 0.01) return 0;
 						
 						let local_pc = total_raster.data[local_index] / local_pop;
-						if (isNaN(local_pc)) return 0;
+						if (!isFinite(local_pc)) return 0;
 						
 						// Replace flatlines with continuous compression
 						if (local_pc > local_threshold) {
 							local_pc = local_threshold + clamp_alpha * Math.log(1 + ((local_pc - local_threshold) / clamp_alpha));
 						}
 						
-						if (local_pc > current_max_pc) current_max_pc = local_pc;
-						return local_pc;
+						if (isFinite(local_pc) && local_pc > current_max_pc) current_max_pc = local_pc;
+						return (isFinite(local_pc) && local_pc < 3.402823466e38) ? local_pc : 0;
 					}
 				});
 				
-				previous_max_pc = current_max_pc;
+				if (isFinite(current_max_pc) && current_max_pc > 0) previous_max_pc = current_max_pc;
 				console.log(`- Recalculated PC for ${current_year}. Healthy max: ${current_max_pc}`);
 				await Blacktraffic.yield();
 			}

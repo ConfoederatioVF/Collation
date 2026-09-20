@@ -309,6 +309,7 @@ global.professions = class {
 				model_obj: item.model_path,
 				options: {
 					format: "float32",
+					mask_uninhabited: true,
 					output_mode: "probabilities"
 				},
 				output_file_path: item.out_base
@@ -511,10 +512,16 @@ global.professions = class {
 	static async processRasters (arg0_options) {
 		let options = (arg0_options) ? arg0_options : {};
 		if (!options.exclude) options.exclude = [];
-		if (options.skip_training || options.use_existing_models || options.train === false) {
+		let skip_primary = (options.skip_primary || options.skip_raw || options.skip_primary_data || options.skip_raw_data || options.skip_databases);
+		let skip_training = (options.skip_training || options.use_existing_models || options.train === false);
+		
+		if (skip_training || skip_primary) {
+			if (!options.exclude.includes("A")) options.exclude.push("A");
+		}
+		if (skip_training) {
 			if (!options.exclude.includes("B")) options.exclude.push("B");
 			if (!options.exclude.includes("C")) options.exclude.push("C");
-			console.log(`[professions] Skipping Steps B & C training (using existing models).`);
+			console.log(`[professions] Skipping Steps A, B & C training (using existing models).`);
 		}
 		
 		if (!options.exclude.includes("A")) await this.A_standardiseTargets(options);

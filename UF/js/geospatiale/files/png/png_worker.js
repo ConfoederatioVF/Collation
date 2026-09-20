@@ -76,6 +76,7 @@ let loadDirectory = function (rel_dir) {
 };
 
 loadDirectory("UF/js/number");
+loadDirectory("UF/js/string");
 loadDirectory("UF/js/colour");
 loadDirectory("UF/js/file");
 loadDirectory("UF/js/object");
@@ -128,12 +129,13 @@ let handleTask = async function (task) {
 
   //2. Linear raster interpolation between two years
   if (task_type === "linear_interpolation") {
-    return GeoPNG.linearInterpolation(
+    GeoPNG.linearInterpolation(
       task.from_file_path,
       task.to_file_path,
       task.output_file_path,
       task.options
     );
+    return task.output_file_path;
   }
 
   //3. Areal timeseries clamping
@@ -187,12 +189,36 @@ let handleTask = async function (task) {
       let data2 = raster2.data;
 
       if (op === "multiply") {
-        for (let i = 0; i < total_pixels; i++) output_data[i] = data1[i]*data2[i];
-      } else if (op === "divide") {
         for (let i = 0; i < total_pixels; i++) {
-          if (data1[i] > 0 && data2[i] > 0 && !isNaN(data1[i]) && !isNaN(data2[i])) {
-            let val = data1[i]/data2[i];
-            output_data[i] = isFinite(val) ? val : 0;
+          let v1 = data1[i];
+          let v2 = data2[i];
+          if (v1 > 0 && v2 > 0 && isFinite(v1) && isFinite(v2)) {
+            let val = v1*v2;
+            output_data[i] = (isFinite(val) && val < 3.402823466e38) ? val : 0;
+          } else {
+            output_data[i] = 0;
+          }
+        }
+      } else if (op === "divide") {
+        let max_val = (task.max_val !== undefined) ? task.max_val : 3.402823466e38;
+        let min_denom = (task.min_denominator !== undefined) ? task.min_denominator : 1e-12;
+        let threshold = task.log_compression_threshold;
+        let clamp_alpha = (threshold !== undefined) ? (task.clamp_alpha || threshold*0.1) : 0;
+
+        for (let i = 0; i < total_pixels; i++) {
+          let v1 = data1[i];
+          let v2 = data2[i];
+          if (v1 > 0 && v2 >= min_denom && isFinite(v1) && isFinite(v2)) {
+            let val = v1/v2;
+            if (isFinite(val)) {
+              if (threshold !== undefined && val > threshold) {
+                val = threshold + clamp_alpha*Math.log(1 + ((val - threshold)/clamp_alpha));
+              }
+              if (val > max_val) val = max_val;
+              output_data[i] = (isFinite(val) && val < 3.402823466e38) ? val : 0;
+            } else {
+              output_data[i] = 0;
+            }
           } else {
             output_data[i] = 0;
           }

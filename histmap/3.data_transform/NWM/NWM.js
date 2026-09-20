@@ -25,6 +25,8 @@
       //Declare local instance variables
       let dep_keys;
       let dep_map = {
+        admin_modern: (global.h2) ? path.join(h2, "admin_modern", "admin_modern.js") : "",
+        metadata_HYDE: (global.h2) ? path.join(h2, "metadata_HYDE", "metadata_HYDE.js") : "",
         landuse_HYDE: (global.h2) ? path.join(h2, "landuse_HYDE", "landuse_HYDE.js") : "",
         population_Substrata_outlier_removal: (global.h3) ? path.join(h3, "population_Substrata.outlier_removal", "population_Substrata_outlier_removal.js") : "",
         population_Stadester: (global.h2) ? path.join(h2, "population_Stadester", "population_Stadester.js") : "",
@@ -87,13 +89,18 @@
       
       //Declare local instance variables
       let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+      let skip_primary = (options.skip_primary || options.skip_raw || options.skip_primary_data || options.skip_raw_data || options.skip_databases);
       
       let hyde_options = { exclude: ["A"], overwrite: overwrite, ...(options.hyde || {}) };
       let substrata_options = { overwrite: overwrite, ...(options.substrata || {}) };
       
       //Function body
       console.log(`[NWM] === Step A: Processing Substrata & HYDE Land Use ===`);
-      if (global.landuse_HYDE) await landuse_HYDE.processRasters(hyde_options);
+      if (skip_primary) {
+        console.log(`[NWM] Step A: Skipping primary land use database (landuse_HYDE).`);
+      } else {
+        if (global.landuse_HYDE) await landuse_HYDE.processRasters(hyde_options);
+      }
       if (global.population_Substrata_outlier_removal)
         await population_Substrata_outlier_removal.processRasters(substrata_options);
     }
@@ -131,6 +138,9 @@
      *  @param {Object} [arg0_options.gdp_ppp]
      *  @param {Object} [arg0_options.gdp_ppp_ols]
      *  @param {Object} [arg0_options.gdp_ppp_sedac]
+     *  @param {boolean} [arg0_options.skip_primary=false]
+     *  @param {boolean} [arg0_options.skip_training=false]
+     *  @param {boolean} [arg0_options.use_existing_models=false]
      */
     static async C_processEoscalaGDP (arg0_options) {
       //Convert from parameters
@@ -138,6 +148,7 @@
       
       //Declare local instance variables
       let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+      let skip_primary = (options.skip_primary || options.skip_raw || options.skip_primary_data || options.skip_raw_data || options.skip_databases);
       let skip_training = (options.skip_training || options.use_existing_models || options.train === false);
       
       let gdp_nom_ols_options = { overwrite: overwrite, ...(options.gdp_nominal_ols || {}) };
@@ -163,8 +174,12 @@
       
       //Function body
       console.log(`[NWM] === Step C: Processing Eoscala GDP (PPP & Nominal) ===`);
-      if (global.GDP_PPP_SEDAC) await GDP_PPP_SEDAC.processRasters(gdp_ppp_sedac_options);
-      if (global.GDP_nominal_SEDAC) await GDP_nominal_SEDAC.processRasters(gdp_nom_sedac_options);
+      if (skip_primary) {
+        console.log(`[NWM] Step C: Skipping primary SEDAC baselines (GDP_PPP_SEDAC, GDP_nominal_SEDAC).`);
+      } else {
+        if (global.GDP_PPP_SEDAC) await GDP_PPP_SEDAC.processRasters(gdp_ppp_sedac_options);
+        if (global.GDP_nominal_SEDAC) await GDP_nominal_SEDAC.processRasters(gdp_nom_sedac_options);
+      }
       
       if (global.GDP_PPP_OLS) await GDP_PPP_OLS.processRasters(gdp_ppp_ols_options);
       if (global.GDP_PPP) await GDP_PPP.processRasters(gdp_ppp_options);
@@ -276,6 +291,7 @@
      *  @param {Object} [arg0_options.wealth_income]
      *  @param {Object} [arg0_options.wealth_income_ols]
      *  @param {Object} [arg0_options.wealth_income_wid]
+     *  @param {boolean} [arg0_options.skip_primary=false]
      *  @param {boolean} [arg0_options.skip_training=false]
      *  @param {boolean} [arg0_options.use_existing_models=false]
      */
@@ -285,6 +301,7 @@
       
       //Declare local instance variables
       let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+      let skip_primary = (options.skip_primary || options.skip_raw || options.skip_primary_data || options.skip_raw_data || options.skip_databases);
       let skip_training = (options.skip_training || options.use_existing_models || options.train === false);
       
       let wealth_income_ols_options = { overwrite: overwrite, ...(options.wealth_income_ols || {}) };
@@ -293,7 +310,11 @@
       
       //Function body
       console.log(`[NWM] === Step G: Processing Wealth & Income (WID) ===`);
-      if (global.wealth_income_WID) await wealth_income_WID.processRasters(wealth_income_wid_options);
+      if (skip_primary) {
+        console.log(`[NWM] Step G: Skipping primary database (wealth_income_WID).`);
+      } else {
+        if (global.wealth_income_WID) await wealth_income_WID.processRasters(wealth_income_wid_options);
+      }
       if (!skip_training) {
         if (global.wealth_income_OLS) await wealth_income_OLS.processRasters(wealth_income_ols_options);
       } else {
@@ -311,6 +332,7 @@
      *  @param {Object} [arg0_options.age_sex_hmd]
      *  @param {Object} [arg0_options.age_sex_unwpp]
      *  @param {Object} [arg0_options.age_sex_worldpop]
+     *  @param {boolean} [arg0_options.skip_primary=false]
      *  @param {boolean} [arg0_options.skip_training=false]
      *  @param {boolean} [arg0_options.use_existing_models=false]
      */
@@ -320,26 +342,40 @@
       
       //Declare local instance variables
       let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+      let skip_primary = (options.skip_primary || options.skip_raw || options.skip_primary_data || options.skip_raw_data || options.skip_databases);
       let skip_training = (options.skip_training || options.use_existing_models || options.train === false);
       
       let age_sex_hmd_options = { overwrite: overwrite, ...(options.age_sex_hmd || {}) };
-      let age_sex_options = { overwrite: overwrite, ...(options.age_sex || {}) };
+      let age_sex_options = {
+        overwrite: overwrite,
+        skip_primary: skip_primary,
+        skip_training: skip_training,
+        use_existing_models: options.use_existing_models,
+        ...(options.age_sex || {})
+      };
       let age_sex_unwpp_options = { overwrite: overwrite, ...(options.age_sex_unwpp || {}) };
       let age_sex_worldpop_options = { overwrite: overwrite, ...(options.age_sex_worldpop || {}) };
       
-      if (skip_training) {
+      if (skip_training || skip_primary) {
         if (!age_sex_options.exclude) age_sex_options.exclude = [];
-        if (!age_sex_options.exclude.includes("B")) age_sex_options.exclude.push("B");
-        if (!age_sex_options.exclude.includes("C")) age_sex_options.exclude.push("C");
+        if (!age_sex_options.exclude.includes("A")) age_sex_options.exclude.push("A");
+        if (skip_training) {
+          if (!age_sex_options.exclude.includes("B")) age_sex_options.exclude.push("B");
+          if (!age_sex_options.exclude.includes("C")) age_sex_options.exclude.push("C");
+        }
         age_sex_options.skip_training = true;
-        console.log(`[NWM] Step H: Skipping Age-Sex Multinomial Logit training (using existing models).`);
+        console.log(`[NWM] Step H: Skipping Age-Sex Multinomial Logit training & target standardisation (using existing models).`);
       }
       
       //Function body
       console.log(`[NWM] === Step H: Processing Velkscala Age-Sex Population Pyramids ===`);
-      if (global.age_sex_WorldPop) await age_sex_WorldPop.processRasters(age_sex_worldpop_options);
-      if (global.age_sex_UNWPP) await age_sex_UNWPP.processRasters(age_sex_unwpp_options);
-      if (global.age_sex_HMD) await age_sex_HMD.processRasters(age_sex_hmd_options);
+      if (skip_primary) {
+        console.log(`[NWM] Step H: Skipping primary demographic databases (WorldPop, UNWPP, HMD).`);
+      } else {
+        if (global.age_sex_WorldPop) await age_sex_WorldPop.processRasters(age_sex_worldpop_options);
+        if (global.age_sex_UNWPP) await age_sex_UNWPP.processRasters(age_sex_unwpp_options);
+        if (global.age_sex_HMD) await age_sex_HMD.processRasters(age_sex_hmd_options);
+      }
       if (global.age_sex) await age_sex.processRasters(age_sex_options);
     }
     
@@ -352,6 +388,7 @@
      *  @param {Object} [arg0_options.births_deaths_kummu]
      *  @param {Object} [arg0_options.births_deaths_ols]
      *  @param {Object} [arg0_options.births_deaths_unwpp]
+     *  @param {boolean} [arg0_options.skip_primary=false]
      *  @param {boolean} [arg0_options.skip_training=false]
      *  @param {boolean} [arg0_options.use_existing_models=false]
      */
@@ -361,6 +398,7 @@
       
       //Declare local instance variables
       let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+      let skip_primary = (options.skip_primary || options.skip_raw || options.skip_primary_data || options.skip_raw_data || options.skip_databases);
       let skip_training = (options.skip_training || options.use_existing_models || options.train === false);
       
       let births_deaths_hmd_options = { overwrite: overwrite, ...(options.births_deaths_hmd || {}) };
@@ -370,9 +408,13 @@
       
       //Function body
       console.log(`[NWM] === Step I: Processing Crude Births & Deaths ===`);
-      if (global.births_deaths_Kummu) await births_deaths_Kummu.processRasters(births_deaths_kummu_options);
-      if (global.births_deaths_UNWPP) await births_deaths_UNWPP.processRasters(births_deaths_unwpp_options);
-      if (global.births_deaths_HMD) await births_deaths_HMD.processRasters(births_deaths_hmd_options);
+      if (skip_primary) {
+        console.log(`[NWM] Step I: Skipping primary demographic databases (Kummu, UNWPP, HMD).`);
+      } else {
+        if (global.births_deaths_Kummu) await births_deaths_Kummu.processRasters(births_deaths_kummu_options);
+        if (global.births_deaths_UNWPP) await births_deaths_UNWPP.processRasters(births_deaths_unwpp_options);
+        if (global.births_deaths_HMD) await births_deaths_HMD.processRasters(births_deaths_hmd_options);
+      }
       if (global.births_deaths_OLS) await births_deaths_OLS.processRasters(births_deaths_ols_options);
     }
     
@@ -387,6 +429,7 @@
      *  @param {Object} [arg0_options.professions]
      *  @param {Object} [arg0_options.professions_ilo]
      *  @param {Object} [arg0_options.professions_olivetti]
+     *  @param {boolean} [arg0_options.skip_primary=false]
      *  @param {boolean} [arg0_options.skip_training=false]
      *  @param {boolean} [arg0_options.use_existing_models=false]
      */
@@ -396,6 +439,7 @@
       
       //Declare local instance variables
       let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+      let skip_primary = (options.skip_primary || options.skip_raw || options.skip_primary_data || options.skip_raw_data || options.skip_databases);
       let skip_training = (options.skip_training || options.use_existing_models || options.train === false);
       
       let lfpr_ilo_options = { overwrite: overwrite, ...(options.lfpr_ilo || {}) };
@@ -403,24 +447,41 @@
       let lfpr_ols_options = { overwrite: overwrite, skip_training: skip_training, ...(options.lfpr_ols || {}) };
       let professions_ilo_options = { overwrite: overwrite, ...(options.professions_ilo || {}) };
       let professions_olivetti_options = { overwrite: overwrite, ...(options.professions_olivetti || {}) };
-      let professions_options = { overwrite: overwrite, ...(options.professions || {}) };
+      let professions_options = {
+        overwrite: overwrite,
+        skip_primary: skip_primary,
+        skip_training: skip_training,
+        use_existing_models: options.use_existing_models,
+        ...(options.professions || {})
+      };
       
-      if (skip_training) {
+      if (skip_training || skip_primary) {
         if (!professions_options.exclude) professions_options.exclude = [];
-        if (!professions_options.exclude.includes("B")) professions_options.exclude.push("B");
-        if (!professions_options.exclude.includes("C")) professions_options.exclude.push("C");
+        if (!professions_options.exclude.includes("A")) professions_options.exclude.push("A");
+        if (skip_training) {
+          if (!professions_options.exclude.includes("B")) professions_options.exclude.push("B");
+          if (!professions_options.exclude.includes("C")) professions_options.exclude.push("C");
+        }
         professions_options.skip_training = true;
-        console.log(`[NWM] Step J: Skipping Professions Multinomial Logit training (using existing models).`);
+        console.log(`[NWM] Step J: Skipping Professions Multinomial Logit training & target standardisation (using existing models).`);
       }
       
       //Function body
       console.log(`[NWM] === Step J: Processing Labour Force & Professions ===`);
-      if (global.LFPR_ILO) await LFPR_ILO.processRasters(lfpr_ilo_options);
-      if (global.LFPR_Olivetti) await LFPR_Olivetti.processRasters(lfpr_olivetti_options);
+      if (skip_primary) {
+        console.log(`[NWM] Step J: Skipping primary labour databases (ILO, Olivetti).`);
+      } else {
+        if (global.LFPR_ILO) await LFPR_ILO.processRasters(lfpr_ilo_options);
+        if (global.LFPR_Olivetti) await LFPR_Olivetti.processRasters(lfpr_olivetti_options);
+      }
       if (global.LFPR_OLS) await LFPR_OLS.processRasters(lfpr_ols_options);
       
-      if (global.professions_ILO) await professions_ILO.processRasters(professions_ilo_options);
-      if (global.professions_Olivetti) await professions_Olivetti.processRasters(professions_olivetti_options);
+      if (skip_primary) {
+        //Skipped primary professions ingests
+      } else {
+        if (global.professions_ILO) await professions_ILO.processRasters(professions_ilo_options);
+        if (global.professions_Olivetti) await professions_Olivetti.processRasters(professions_olivetti_options);
+      }
       if (global.professions) await professions.processRasters(professions_options);
     }
     
@@ -431,6 +492,8 @@
      * 
      * @param {Object} [arg0_options]
      *  @param {Array<string>} [arg0_options.exclude] - Step letters or stage names to skip e.g. ["A", "C", "stadester"]
+     *  @param {boolean} [arg0_options.skip_primary=false] - If true, skips reprocessing static raw databases/artefacts (UNWPP, HMD, WorldPop, ILO, etc.)
+     *  @param {boolean} [arg0_options.skip_raw=false] - Alias for skip_primary.
      *  @param {boolean} [arg0_options.skip_training=false] - If true, skips regression/model training and reuses existing models.
      *  @param {Array<string>} [arg0_options.stages] - Specific steps or stage names to execute exclusively
      *  @param {boolean} [arg0_options.use_existing_models=false] - Alias for skip_training.
@@ -443,6 +506,9 @@
       if (!options.exclude) options.exclude = [];
       if (options.overwrite === undefined) options.overwrite = true;
       if (options.use_existing_models) options.skip_training = true;
+      if (options.skip_primary || options.skip_raw || options.skip_primary_data || options.skip_raw_data || options.skip_databases) {
+        options.skip_primary = true;
+      }
       
       //Declare local instance variables
       let should_run = function (step_letter, stage_name) {
@@ -454,7 +520,7 @@
       };
       
       //Function body
-      console.log(`[NWM] Launching Master NWM Pipeline${options.skip_training ? " (Skip Training / Reusing Existing Models)" : ""}...`);
+      console.log(`[NWM] Launching Master NWM Pipeline${options.skip_primary ? " (Skip Primary Databases & Ingests)" : ""}${options.skip_training ? " (Skip Training / Reusing Existing Models)" : ""}...`);
       this.loadDependencies(options);
       
       if (should_run("A", "substrata")) await this.A_processSubstrata(options);

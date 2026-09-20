@@ -318,22 +318,29 @@
 			
 			//Branch based on mode
 			if (mode === "multinomial_logit") {
+				let all_classes = model_obj.classes.map(c => String(c));
+				let feature_data = valid_keys.map(k => rasters_obj[k]?.data);
+				let num_all_classes = all_classes.length;
+				let num_features = valid_keys.length;
 				let output_mode = options.output_mode || "class";
-				let get_probabilities = (local_index) => {
-					let local_values = valid_keys.map((key) => {
-						let r = rasters_obj[key];
-						return (r?.data) ? r.data[local_index] : 0;
-					});
-					
-					return Statistics.predictMultinomialProbabilities(
-						Object.fromArrays(valid_keys, local_values), model_obj
-					);
-				};
-				
+
+				//Pre-extract weights into contiguous Float64Array per class for fast vectorized evaluation
+				let class_weights = new Array(num_all_classes);
+				for (let c = 0; c < num_all_classes; c++) {
+					let coeff_block = model_obj.coefficients[all_classes[c]];
+					let weights = new Float64Array(num_features);
+					if (coeff_block) {
+						for (let k = 0; k < num_features; k++) {
+							weights[k] = Math.returnSafeNumber(coeff_block[valid_keys[k]], 0);
+						}
+					}
+					class_weights[c] = weights;
+				}
+
 				if (output_mode === "class") {
 					let format = options.format || "int32";
 					let output_buffer = new Float32Array(total_pixels);
-					
+
 					for (let start_idx = 0; start_idx < total_pixels; start_idx += chunk_pixels) {
 						let end_idx = Math.min(start_idx + chunk_pixels, total_pixels);
 						for (let local_index = start_idx; local_index < end_idx; local_index++) {
@@ -341,9 +348,21 @@
 								output_buffer[local_index] = 0;
 								continue;
 							}
-							output_buffer[local_index] = Statistics.argmaxMultinomialClass(
-								get_probabilities(local_index), model_obj.classes
-							);
+							let argmax_c = 0;
+							let max_val = -Infinity;
+							for (let c = 0; c < num_all_classes; c++) {
+								let sum = 0;
+								let w = class_weights[c];
+								for (let k = 0; k < num_features; k++) {
+									let fd = feature_data[k];
+									if (fd) sum += fd[local_index]*w[k];
+								}
+								if (sum > max_val) {
+									max_val = sum;
+									argmax_c = c;
+								}
+							}
+							output_buffer[local_index] = argmax_c;
 						}
 						
 						if (typeof Blacktraffic !== "undefined" && Blacktraffic.yield)
@@ -361,39 +380,67 @@
 					console.log(`Saved multinomial class raster for ${output_file_path}.`);
 				} else if (output_mode === "probability" || output_mode === "probabilities") {
 					let is_single = (output_mode === "probability");
+					let local_exps = new Float64Array(num_all_classes);
+					let local_logits = new Float64Array(num_all_classes);
 					let target_classes = is_single ?
-						[String(options.class)] : model_obj.classes.map(c => String(c));
-					
-					for (let c = 0; c < target_classes.length; c++) {
-						let local_class = target_classes[c];
-						let local_path = is_single ?
-							output_file_path : output_file_path.replace(/(\.[^.]+)$/, `_class_${local_class}$1`);
-						let output_buffer = new Float32Array(total_pixels);
-						
-						for (let start_idx = 0; start_idx < total_pixels; start_idx += chunk_pixels) {
-							let end_idx = Math.min(start_idx + chunk_pixels, total_pixels);
-							for (let local_index = start_idx; local_index < end_idx; local_index++) {
-								if (!passes_guard(local_index)) {
-									output_buffer[local_index] = 0;
-									continue;
+						[String(options.class)] : all_classes;
+					let target_indices = target_classes.map(tc => all_classes.indexOf(tc));
+					let num_targets = target_classes.length;
+
+					let output_buffers = new Array(num_targets);
+					for (let tc = 0; tc < num_targets; tc++)
+						output_buffers[tc] = new Float32Array(total_pixels);
+
+					//Single contiguous pass over all pixels
+					for (let start_idx = 0; start_idx < total_pixels; start_idx += chunk_pixels) {
+						let end_idx = Math.min(start_idx + chunk_pixels, total_pixels);
+						for (let local_index = start_idx; local_index < end_idx; local_index++) {
+							if (!passes_guard(local_index)) continue; //Buffers are zero-initialized
+
+							let max_l = -Infinity;
+							for (let c = 0; c < num_all_classes; c++) {
+								let sum = 0;
+								let w = class_weights[c];
+								for (let k = 0; k < num_features; k++) {
+									let fd = feature_data[k];
+									if (fd) sum += fd[local_index]*w[k];
 								}
-								output_buffer[local_index] = get_probabilities(local_index)[local_class] || 0;
+								local_logits[c] = sum;
+								if (sum > max_l) max_l = sum;
 							}
-							
-							if (typeof Blacktraffic !== "undefined" && Blacktraffic.yield)
-								await Blacktraffic.yield(0);
+
+							let sum_exp = 0;
+							for (let c = 0; c < num_all_classes; c++) {
+								let e = Math.exp(local_logits[c] - max_l);
+								local_exps[c] = e;
+								sum_exp += e;
+							}
+							let inv_sum = (sum_exp > 0) ? (1/sum_exp) : 0;
+
+							for (let tc = 0; tc < num_targets; tc++) {
+								let c_idx = target_indices[tc];
+								output_buffers[tc][local_index] = (c_idx >= 0) ? (local_exps[c_idx]*inv_sum) : 0;
+							}
 						}
 						
+						if (typeof Blacktraffic !== "undefined" && Blacktraffic.yield)
+							await Blacktraffic.yield(0);
+					}
+
+					for (let tc = 0; tc < num_targets; tc++) {
+						let local_class = target_classes[tc];
+						let local_path = is_single ?
+							output_file_path : output_file_path.replace(/(\.[^.]+)$/, `_class_${local_class}$1`);
+
 						await GeoPNG.saveNumberRasterImageAsync({
-							data: output_buffer,
+							data: output_buffers[tc],
 							file_path: local_path,
 							format: "float32",
 							height: options.height,
 							width: options.width
 						});
-						
-						console.log(`Saved probability raster (class ${local_class}) for ${local_path}.`);
 					}
+					console.log(`Saved ${num_targets} probability rasters for ${output_file_path}.`);
 				}
 			} else {
 				//Mode 'ols': linear dot product of covariates and coefficients

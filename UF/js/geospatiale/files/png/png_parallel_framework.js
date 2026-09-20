@@ -524,9 +524,13 @@
 				
 				completed_count++;
 				
-				//Throttled milestone progress logging to protect Chrome DevTools
-				let percent = Math.floor((completed_count/total_items)*100);
-				if (percent % 25 === 0 && percent !== last_logged_milestone) {
+				let percent = Math.floor((completed_count / total_items) * 100);
+				let item_label = (typeof item === "object" && item !== null) ?
+					(item.year || item.name || item.dest || item.output_file_path || `Item ${index_to_run}`) : String(item);
+
+				if (total_items <= 250 || completed_count % 10 === 0 || completed_count === total_items) {
+					console.log(`- [${task_name}] [${completed_count}/${total_items}] Processed ${item_label} (${percent}%)`);
+				} else if (percent % 10 === 0 && percent !== last_logged_milestone) {
 					last_logged_milestone = percent;
 					console.log(`- [${task_name}] Progress: ${percent}% (${completed_count}/${total_items} items)`);
 				}
