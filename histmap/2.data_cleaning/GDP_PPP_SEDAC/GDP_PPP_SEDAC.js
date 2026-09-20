@@ -40,7 +40,6 @@ global.GDP_PPP_SEDAC = class {
 		//Return statement
 		return GeoTIFF.convertToPNGs(`${GDP_PPP_SEDAC.bf}/GDP_PPP_1990_2022.tif`, `${GDP_PPP_SEDAC.bf}/GDP_PPP`, {
 			format: "float32",
-			offset_y: -1,
 			years: GDP_PPP_SEDAC.years
 		});
 	}
