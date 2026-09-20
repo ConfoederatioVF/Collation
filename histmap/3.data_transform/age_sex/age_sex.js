@@ -369,7 +369,7 @@ global.age_sex = class {
 				if (!popc_info || !fs.existsSync(popc_info[0])) return null;
 
 				return {
-					type: "clamp_cohorts_to_stadester",
+					type: "clamp_cohorts_isotonic",
 					cohorts: cohorts,
 					logit_rasters_folder: this.intermediate_logit_rasters,
 					output_folder: this.intermediate_clamped_rasters,
@@ -390,49 +390,90 @@ global.age_sex = class {
 				
 				for (let i = 0; i < cohorts.length; i++) {
 					let prob_path = `${this.intermediate_logit_rasters}logit_${year}_class_${cohorts[i]}.png`;
-					
 					if (!fs.existsSync(prob_path)) { missing_probs = true; break; }
 					prob_rasters[cohorts[i]] = GeoPNG.loadNumberRasterImage(prob_path, { format: "float32" });
 				}
-				
 				if (missing_probs) return;
 				
-				let total_pixels = 4320 * 2160;
-				let prob_sums = new Float32Array(total_pixels);
+				let total_pixels = 4320*2160;
+				let num_cohorts = cohorts.length;
+				let band_widths = new Float32Array(num_cohorts);
+				for (let c = 0; c < num_cohorts; c++)
+					band_widths[c] = cohorts[c].endsWith("_00") ? 1 : (cohorts[c].endsWith("_01") ? 4 : 5);
 				
-				for (let i = 0; i < cohorts.length; i++) {
-					let data = prob_rasters[cohorts[i]].data;
-					
-					for (let j = 0; j < total_pixels; j++) {
-						let val = data[j];
-						if (!isNaN(val) && val > 0) prob_sums[j] += val;
+				let output_buffers = new Array(num_cohorts);
+				for (let c = 0; c < num_cohorts; c++)
+					output_buffers[c] = new Float32Array(total_pixels);
+				
+				let f_indices = [];
+				let m_indices = [];
+				for (let c = 0; c < num_cohorts; c++) {
+					if (cohorts[c].startsWith("f_")) f_indices.push(c);
+					else m_indices.push(c);
+				}
+				
+				let age_count = f_indices.length;
+				let age_band_widths = new Float32Array(age_count);
+				for (let k = 0; k < age_count; k++)
+					age_band_widths[k] = band_widths[f_indices[k]];
+
+				let raw_f = new Float32Array(age_count);
+				let raw_m = new Float32Array(age_count);
+				let f_coupled_buf = new Float32Array(age_count);
+				let m_coupled_buf = new Float32Array(age_count);
+				let tot_coupled_buf = new Float32Array(age_count);
+
+				let pava_buffers = {
+					block_counts: new Int32Array(age_count),
+					block_vals: new Float32Array(age_count),
+					block_weights: new Float32Array(age_count)
+				};
+
+				for (let i = 0; i < total_pixels; i++) {
+					let stade_pop = popc_raster.data[i];
+					if (stade_pop <= 0 || isNaN(stade_pop)) continue;
+
+					for (let k = 0; k < age_count; k++) {
+						let f_val = prob_rasters[cohorts[f_indices[k]]].data[i];
+						let m_val = prob_rasters[cohorts[m_indices[k]]].data[i];
+						raw_f[k] = (f_val > 0 && isFinite(f_val)) ? f_val : 0;
+						raw_m[k] = (m_val > 0 && isFinite(m_val)) ? m_val : 0;
+					}
+
+					Statistics.coupleAgeSexCohorts(raw_m, raw_f, age_band_widths, 2, {
+						buffers: pava_buffers,
+						female_output: f_coupled_buf,
+						male_output: m_coupled_buf,
+						total_output: tot_coupled_buf
+					});
+
+					let sum_rates = 0;
+					for (let k = 0; k < age_count; k++)
+						sum_rates += tot_coupled_buf[k];
+
+					if (sum_rates > 0) {
+						let scale = stade_pop / sum_rates;
+						for (let k = 0; k < age_count; k++) {
+							output_buffers[f_indices[k]][i] = f_coupled_buf[k]*scale;
+							output_buffers[m_indices[k]][i] = m_coupled_buf[k]*scale;
+						}
+					} else {
+						let even_share = stade_pop / num_cohorts;
+						for (let c = 0; c < num_cohorts; c++)
+							output_buffers[c][i] = even_share;
 					}
 				}
 				
-				for (let i = 0; i < cohorts.length; i++) {
-					let c = cohorts[i];
-					let out_path = `${this.intermediate_clamped_rasters}global_${c}_${year}.png`;
-					
+				for (let c = 0; c < num_cohorts; c++) {
+					let out_path = `${this.intermediate_clamped_rasters}global_${cohorts[c]}_${year}.png`;
 					if (!overwrite && fs.existsSync(out_path)) continue;
 					
-					let prob_raster = prob_rasters[c];
-					
-					GeoPNG.saveNumberRasterImage({
+					await GeoPNG.saveNumberRasterImageAsync({
+						data: output_buffers[c],
 						file_path: out_path,
 						format: "float32",
-						width: 4320,
 						height: 2160,
-						function: (local_index) => {
-							let local_stadester_pop = popc_raster.data[local_index];
-							if (local_stadester_pop <= 0) return 0;
-							
-							let local_prob_sum = prob_sums[local_index];
-							let local_prob = prob_raster.data[local_index];
-							if (isNaN(local_prob) || local_prob < 0) local_prob = 0;
-							
-							if (local_prob_sum <= 0) return local_stadester_pop / cohorts.length;
-							return local_stadester_pop * (local_prob / local_prob_sum);
-						}
+						width: 4320
 					});
 				}
 			}

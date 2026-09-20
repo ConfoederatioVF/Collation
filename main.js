@@ -16,6 +16,7 @@ let rpc = new discord.Client({ clientId: client_id });
 
 //Metadata - Title
 let latest_fps = 0;
+let latest_training_status = "";
 let naissance_version = "1.96b Lion";
 let title_update_interval;
 let win;
@@ -61,6 +62,32 @@ let win;
       latest_fps = fps;
     });
     
+    //Listen for training telemetry updates
+    ipcMain.on("training:telemetry", (_event, data) => {
+      if (!data) return;
+      if (win && !win.isDestroyed()) {
+        if (data.progress !== undefined) {
+          let p = (data.progress >= 0 && data.progress <= 1) ? data.progress : -1;
+          win.setProgressBar(p);
+        }
+      }
+      if (data.task_name) {
+        if (data.current_item === "Complete" || data.progress === -1) {
+          latest_training_status = `[${data.task_name}: Complete]`;
+        } else {
+          let pct = (data.percent !== undefined) ? `${data.percent}%` : "";
+          latest_training_status = `[${data.task_name}: ${data.completed}/${data.total} (${pct})]`;
+        }
+      }
+    });
+
+    ipcMain.on("training:control", (_event, command) => {
+      if (command === "clear-progress" && win && !win.isDestroyed()) {
+        win.setProgressBar(-1);
+        latest_training_status = "";
+      }
+    });
+    
     //Update the title every second with the latest data
     title_update_interval = setInterval(function () {
       let is_destroyed = !win || win.isDestroyed();
@@ -72,7 +99,8 @@ let win;
       let memory_usage = process.memoryUsage();
       let heap_used_mb = (memory_usage.heapUsed/1024/1024).toFixed(2);
       let rss_mb = (memory_usage.rss/1024/1024).toFixed(2);
-      let title_string = `Naissance World Model ${naissance_version} - FPS: ${latest_fps} | RAM: RSS ${rss_mb}MB/Heap ${heap_used_mb}MB`;
+      let training_suffix = latest_training_status ? ` | ${latest_training_status}` : "";
+      let title_string = `Naissance World Model ${naissance_version} - FPS: ${latest_fps} | RAM: RSS ${rss_mb}MB/Heap ${heap_used_mb}MB${training_suffix}`;
       
       win.setTitle(title_string);
     }, 1000);

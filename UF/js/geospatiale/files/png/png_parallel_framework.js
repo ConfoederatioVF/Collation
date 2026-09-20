@@ -535,6 +535,24 @@
 					console.log(`- [${task_name}] Progress: ${percent}% (${completed_count}/${total_items} items)`);
 				}
 				
+				//Forward telemetry to Electron main process
+				if (typeof require !== "undefined") {
+					try {
+						let electron_mod = require("electron");
+						let ipc = electron_mod.ipcRenderer;
+						if (ipc) {
+							ipc.send("training:telemetry", {
+								completed: completed_count,
+								current_item: item_label,
+								percent: percent,
+								progress: completed_count / total_items,
+								task_name: task_name,
+								total: total_items
+							});
+						}
+					} catch (e) {}
+				}
+				
 				//Yield to the event loop between queue items to maintain 60 FPS and prevent DevTools disconnect
 				if (typeof Blacktraffic !== "undefined" && Blacktraffic.yield)
 					await Blacktraffic.yield(0);
@@ -547,6 +565,24 @@
 		
 		await Promise.all(active_promises);
 		console.log(`- [${task_name}] Completed all ${total_items} items successfully.`);
+		
+		//Clear taskbar progress bar
+		if (typeof require !== "undefined") {
+			try {
+				let electron_mod = require("electron");
+				let ipc = electron_mod.ipcRenderer;
+				if (ipc) {
+					ipc.send("training:telemetry", {
+						completed: total_items,
+						current_item: "Complete",
+						percent: 100,
+						progress: -1,
+						task_name: task_name,
+						total: total_items
+					});
+				}
+			} catch (e) {}
+		}
 		
 		//Return statement
 		return results;

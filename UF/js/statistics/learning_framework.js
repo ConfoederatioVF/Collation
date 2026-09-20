@@ -325,11 +325,13 @@
 				let output_mode = options.output_mode || "class";
 
 				//Pre-extract weights into contiguous Float64Array per class for fast vectorized evaluation
+				let class_intercepts = new Float64Array(num_all_classes);
 				let class_weights = new Array(num_all_classes);
 				for (let c = 0; c < num_all_classes; c++) {
-					let coeff_block = model_obj.coefficients[all_classes[c]];
+					let coeff_block = model_obj.coefficients ? model_obj.coefficients[all_classes[c]] : null;
 					let weights = new Float64Array(num_features);
 					if (coeff_block) {
+						class_intercepts[c] = Math.returnSafeNumber(coeff_block._intercept, 0);
 						for (let k = 0; k < num_features; k++) {
 							weights[k] = Math.returnSafeNumber(coeff_block[valid_keys[k]], 0);
 						}
@@ -351,7 +353,7 @@
 							let argmax_c = 0;
 							let max_val = -Infinity;
 							for (let c = 0; c < num_all_classes; c++) {
-								let sum = 0;
+								let sum = class_intercepts[c];
 								let w = class_weights[c];
 								for (let k = 0; k < num_features; k++) {
 									let fd = feature_data[k];
@@ -399,7 +401,7 @@
 
 							let max_l = -Infinity;
 							for (let c = 0; c < num_all_classes; c++) {
-								let sum = 0;
+								let sum = class_intercepts[c];
 								let w = class_weights[c];
 								for (let k = 0; k < num_features; k++) {
 									let fd = feature_data[k];
