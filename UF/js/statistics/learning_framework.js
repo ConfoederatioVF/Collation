@@ -231,7 +231,12 @@
 					
 					let pixel_coords = (options.get_pixel_function) ?
 						options.get_pixel_function(lng_val, lat_val, raster.width, raster.height) :
-						Geospatiale.getEquirectangularCoordsPixel(lng_val, lat_val, { width: raster.width, height: raster.height });
+						((typeof Geospatiale !== "undefined" && Geospatiale.getEquirectangularCoordsPixel) ?
+							Geospatiale.getEquirectangularCoordsPixel(lng_val, lat_val, { width: raster.width, height: raster.height }) :
+							[
+								Math.min(raster.width - 1, Math.max(0, Math.floor(((lng_val + 180)/360)*raster.width))),
+								Math.min(raster.height - 1, Math.max(0, Math.floor(((90 - lat_val)/180)*raster.height)))
+							]);
 					
 					if (!pixel_coords) {
 						is_valid = false;

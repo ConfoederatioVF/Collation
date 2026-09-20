@@ -83,6 +83,9 @@ loadDirectory("UF/js/object");
 loadDirectory("UF/js/array");
 loadDirectory("UF/js/blacktraffic");
 loadDirectory("UF/js/statistics");
+loadDirectory("UF/js/geospatiale/coords");
+loadDirectory("UF/js/geospatiale/operations");
+loadDirectory("UF/js/geospatiale/files");
 loadDirectory("UF/js/geospatiale/files/png");
 
 //Define Histmap paths on global for stage modules
