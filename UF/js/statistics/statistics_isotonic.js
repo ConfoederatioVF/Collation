@@ -39,8 +39,12 @@
 		let male_rates = arg0_male_rates;
 		let female_rates = arg1_female_rates;
 		let band_widths = arg2_band_widths;
-		let start_index = (arg3_start_index !== undefined) ? Math.max(0, parseInt(arg3_start_index)) : 0;
+		let start_index = (arg3_start_index !== undefined && arg3_start_index !== null) ? parseInt(arg3_start_index) : 0;
 		let options = (arg4_options) ? arg4_options : {};
+
+		//Initialise options
+		let do_not_smooth = (options.do_not_smooth !== undefined) ? options.do_not_smooth : (options.lift_isotonic || options.pava === false || start_index < 0 || arg3_start_index === null);
+		let preserve_sex_ratios = (options.preserve_sex_ratios !== undefined) ? options.preserve_sex_ratios : (options.enforce_biological_sex_ratios === false);
 
 		//Declare local instance variables
 		let baseline_ratios = options.baseline_sex_ratios || Statistics.default_biological_sex_ratios;
@@ -74,23 +78,48 @@
 			effective_weights[i] = effective_w;
 		}
 
-		//2. Run weighted PAVA on implied female density with effective weights W_c
-		let pava_options = (options.buffers) ? { buffers: options.buffers } : {};
-		let smoothed_female_density = Statistics.pavaDecreasing(total_annualised, effective_weights, start_index, pava_options);
+		//2. Run weighted PAVA on implied female density with effective weights W_c unless smoothing is lifted
+		if (!do_not_smooth) {
+			let pava_options = (options.buffers) ? { buffers: options.buffers } : {};
+			let smoothed_female_density = Statistics.pavaDecreasing(total_annualised, effective_weights, Math.max(0, start_index), pava_options);
 
-		//3. Reconstitute female, male, and total cohorts
-		for (let i = 0; i < count; i++) {
-			let w = (band_widths && band_widths[i] > 0) ? band_widths[i] : 1;
-			let sr = (baseline_ratios && baseline_ratios[i] !== undefined) ?
-				baseline_ratios[i] :
-				(Statistics.default_biological_sex_ratios[i] || 1.0);
+			//3. Reconstitute female, male, and total cohorts
+			for (let i = 0; i < count; i++) {
+				let w = (band_widths && band_widths[i] > 0) ? band_widths[i] : 1;
+				let sr = (baseline_ratios && baseline_ratios[i] !== undefined) ?
+					baseline_ratios[i] :
+					(Statistics.default_biological_sex_ratios[i] || 1.0);
 
-			let f_sm = smoothed_female_density[i]*w;
-			let m_sm = f_sm*sr;
+				let f_sm = smoothed_female_density[i]*w;
+				let m_sm = f_sm*sr;
 
-			female_out[i] = f_sm;
-			male_out[i] = m_sm;
-			total_out[i] = f_sm + m_sm;
+				female_out[i] = f_sm;
+				male_out[i] = m_sm;
+				total_out[i] = f_sm + m_sm;
+			}
+		} else {
+			//Isotonic constraints lifted: preserve demographic shape, bulges, and dividends
+			for (let i = 0; i < count; i++) {
+				let m_val = (male_rates[i] > 0) ? male_rates[i] : 0;
+				let f_val = (female_rates[i] > 0) ? female_rates[i] : 0;
+				let tot = m_val + f_val;
+
+				if (preserve_sex_ratios) {
+					female_out[i] = f_val;
+					male_out[i] = m_val;
+					total_out[i] = tot;
+				} else {
+					let sr = (baseline_ratios && baseline_ratios[i] !== undefined) ?
+						baseline_ratios[i] :
+						(Statistics.default_biological_sex_ratios[i] || 1.0);
+					let f_alloc = tot/(1 + sr);
+					let m_alloc = f_alloc*sr;
+
+					female_out[i] = f_alloc;
+					male_out[i] = m_alloc;
+					total_out[i] = tot;
+				}
+			}
 		}
 
 		//Return statement

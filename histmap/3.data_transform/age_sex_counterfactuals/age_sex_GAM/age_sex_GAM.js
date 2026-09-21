@@ -651,8 +651,10 @@ global.age_sex_GAM = class {
         model_obj: resolved_model,
         options: {
           format: "float32",
+          lift_isotonic: true,
           mask_uninhabited: true,
-          output_mode: "probabilities"
+          output_mode: "probabilities",
+          year: year
         },
         output_file_path: out_base
       };

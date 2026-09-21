@@ -206,10 +206,14 @@
 		let output_file_path = arg0_output_file_path;
 		let options = (arg1_options) ? arg1_options : {};
 		
+		//Declare local instance variables
+		let model_obj = (typeof options.model_obj === "string") ? File.loadJSON(options.model_obj) : options.model_obj;
+		let mode = options.mode || ((model_obj && model_obj.type === "anchored_multinomial_gam") ? "anchored_multinomial_gam" : "multinomial_logit");
+
 		//Return statement
 		return await Statistics.LearningFramework.predictRaster(output_file_path, options.model_obj, {
 			...options,
-			mode: "multinomial_logit"
+			mode: mode
 		});
 	};
 	

@@ -1456,11 +1456,14 @@ let handleTask = async function (task) {
         raw_m[k] = (m_val > 0 && isFinite(m_val)) ? m_val : 0;
       }
 
-      Statistics.coupleAgeSexCohorts(raw_m, raw_f, age_band_widths, 2, {
+      Statistics.coupleAgeSexCohorts(raw_m, raw_f, age_band_widths, (task.lift_isotonic || task.do_not_smooth) ? null : 2, {
         baseline_sex_ratios: task.baseline_sex_ratios,
         buffers: pava_buffers,
+        do_not_smooth: task.do_not_smooth || task.lift_isotonic,
         female_output: f_coupled_buf,
+        lift_isotonic: task.lift_isotonic,
         male_output: m_coupled_buf,
+        preserve_sex_ratios: task.preserve_sex_ratios,
         total_output: tot_coupled_buf
       });
 
