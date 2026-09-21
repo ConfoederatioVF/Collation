@@ -39,7 +39,7 @@ for (let year of target_years) {
 	let sum_raw_total = sum_raw_f + sum_raw_m;
 
 	// Execute 2D coupled smoothing
-	let coupled = Statistics.coupleAgeSexCohorts(m_raw, f_raw, band_widths, 2);
+	let coupled = Statistics.coupleAgeSexCohorts(m_raw, f_raw, band_widths, 0);
 
 	let sum_sm_f = 0;
 	let sum_sm_m = 0;
@@ -57,8 +57,8 @@ for (let year of target_years) {
 	let rel_diff = Math.abs(sum_raw_total - sum_sm_total) / sum_raw_total;
 	console.assert(rel_diff < 1e-5, `Year ${year} total population must be conserved, rel diff = ${rel_diff}`);
 
-	// 2. Assert age monotonicity after child mortality (cohort 05+, index 2 onwards)
-	for (let i = 2; i < cohorts.length - 1; i++) {
+	// 2. Assert age monotonicity across all annualised cohorts (index 0 onwards)
+	for (let i = 0; i < cohorts.length - 1; i++) {
 		let tot_ann_curr = coupled.total[i] / band_widths[i];
 		let tot_ann_next = coupled.total[i + 1] / band_widths[i + 1];
 		console.assert(tot_ann_curr >= tot_ann_next - 1e-5, `Year ${year} total cohort ${cohorts[i]} (${tot_ann_curr.toFixed(2)}) must be >= ${cohorts[i+1]} (${tot_ann_next.toFixed(2)})`);

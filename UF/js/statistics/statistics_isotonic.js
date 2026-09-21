@@ -24,7 +24,7 @@
 	 * @param {Float32Array|Array<number>} arg0_male_rates - Raw male cohort values.
 	 * @param {Float32Array|Array<number>} arg1_female_rates - Raw female cohort values.
 	 * @param {Float32Array|Array<number>} arg2_band_widths - Cohort duration in years (e.g. 1 for 00, 4 for 01, 5 for others).
-	 * @param {number} [arg3_start_index=2] - Index from which to enforce age monotonicity (e.g. 2 for cohort 05+).
+	 * @param {number} [arg3_start_index=0] - Index from which to enforce age monotonicity (defaults to 0 on annualised density).
 	 * @param {Object} [arg4_options]
 	 *  @param {Float32Array|Array<number>} [arg4_options.baseline_sex_ratios] - Optional target sex-ratio curve M/F by cohort.
 	 *  @param {Object} [arg4_options.buffers] - Optional pre-allocated flat buffers for zero GC overhead.
@@ -39,7 +39,7 @@
 		let male_rates = arg0_male_rates;
 		let female_rates = arg1_female_rates;
 		let band_widths = arg2_band_widths;
-		let start_index = (arg3_start_index !== undefined) ? Math.max(0, parseInt(arg3_start_index)) : 2;
+		let start_index = (arg3_start_index !== undefined) ? Math.max(0, parseInt(arg3_start_index)) : 0;
 		let options = (arg4_options) ? arg4_options : {};
 
 		//Declare local instance variables

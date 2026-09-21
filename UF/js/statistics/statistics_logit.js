@@ -309,8 +309,19 @@
 		let classes = [];
 		let class_lookup = {};
 		
-		if (is_proportions) {
-			classes = options.classes ? options.classes : (Y[0].map ? Y[0].map((_, idx) => idx) : []);
+		if (options.classes && options.classes.length > 0) {
+			classes = [...options.classes];
+			if (options.reference_class && classes.includes(options.reference_class)) {
+				let ref_idx = classes.indexOf(options.reference_class);
+				if (ref_idx > 0) {
+					classes.splice(ref_idx, 1);
+					classes.unshift(options.reference_class);
+				}
+			}
+			for (let c = 0; c < classes.length; c++)
+				class_lookup[classes[c]] = c;
+		} else if (is_proportions) {
+			classes = (Y[0].map) ? Y[0].map((_, idx) => idx) : [];
 			for (let c = 0; c < classes.length; c++)
 				class_lookup[classes[c]] = c;
 		} else {
@@ -446,7 +457,58 @@
 	};
 	
 	/**
+	 * Predicts class probabilities from an ensemble of models using a convex combination in probability space.
+	 * @alias Statistics.predictMultinomialEnsemble
+	 *
+	 * @param {Object} arg0_features_obj - Map of covariate keys to feature values.
+	 * @param {Array<Object|string>} arg1_models - Array of model objects or file paths.
+	 * @param {Array<number>} [arg2_weights] - Optional array of model weights.
+	 *
+	 * @returns {Object} - Map of class labels to blended probabilities.
+	 */
+	Statistics.predictMultinomialEnsemble = function (arg0_features_obj, arg1_models, arg2_weights) {
+		//Convert from parameters
+		let features_obj = arg0_features_obj;
+		let models = (arg1_models) ? arg1_models : [];
+		let weights = (arg2_weights) ? arg2_weights : [];
+		
+		//Guard clauses
+		if (models.length === 0) return {};
+		
+		//Declare local instance variables
+		let first_model = (typeof models[0] === "string") ? File.loadJSON(models[0]) : models[0];
+		let classes = (first_model && first_model.classes) ? first_model.classes : [];
+		let return_obj = {};
+		let total_weight = 0;
+		let valid_weights = [];
+		
+		for (let c = 0; c < classes.length; c++)
+			return_obj[String(classes[c])] = 0;
+		
+		for (let m = 0; m < models.length; m++) {
+			let w = (weights[m] !== undefined) ? Math.returnSafeNumber(weights[m], 1) : 1;
+			valid_weights.push(w);
+			total_weight += w;
+		}
+		
+		for (let m = 0; m < models.length; m++) {
+			let sub_model = (typeof models[m] === "string") ? File.loadJSON(models[m]) : models[m];
+			let norm_w = (total_weight > 0) ? (valid_weights[m]/total_weight) : (1/models.length);
+			let sub_probs = Statistics.predictMultinomialProbabilities(features_obj, sub_model);
+			
+			for (let c = 0; c < classes.length; c++) {
+				let class_key = String(classes[c]);
+				return_obj[class_key] += norm_w*Math.returnSafeNumber(sub_probs[class_key], 0);
+			}
+		}
+		
+		//Return statement
+		return return_obj;
+	};
+	
+	/**
 	 * Predicts class probabilities for a single feature object against a trained multinomial logit model.
+	 * Supports both discrete multinomial_logit models and probability-space multinomial_ensemble mixtures.
 	 * @alias Statistics.predictMultinomialProbabilities
 	 *
 	 * @param {Object} arg0_features_obj - Map of covariate keys to feature values.
@@ -458,6 +520,15 @@
 		//Convert from parameters
 		let features_obj = arg0_features_obj;
 		let model_obj = arg1_model_obj;
+		
+		//Guard clauses
+		if (!model_obj) return {};
+		
+		if (model_obj.type === "multinomial_ensemble" && Array.isArray(model_obj.models)) {
+			let models_arr = model_obj.models.map((m) => m.model);
+			let weights_arr = model_obj.models.map((m) => m.weight);
+			return Statistics.predictMultinomialEnsemble(features_obj, models_arr, weights_arr);
+		}
 		
 		//Declare local instance variables
 		let classes = model_obj.classes;
@@ -749,7 +820,8 @@
 				return await Statistics.trainMultinomialLogitModel(model_path, { keys: valid_keys, X: X, Y: Y }, {
 					...opt,
 					classes: categories,
-					proportions: true
+					proportions: true,
+					reference_class: categories[0]
 				});
 			}
 		});

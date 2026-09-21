@@ -49,6 +49,7 @@
         age_sex_UNWPP: (global.h2) ? path.join(h2, "age_sex_UNWPP", "age_sex_UNWPP.js") : "",
         age_sex_HMD: (global.h2) ? path.join(h2, "age_sex_HMD", "age_sex_HMD.js") : "",
         age_sex: (global.h3) ? path.join(h3, "age_sex", "age_sex.js") : "",
+        age_sex_GAM: (global.h3) ? path.join(h3, "age_sex_counterfactuals", "age_sex_GAM", "age_sex_GAM.js") : "",
         births_deaths_Kummu: (global.h2) ? path.join(h2, "births_deaths_Kummu", "births_deaths_Kummu.js") : "",
         births_deaths_UNWPP: (global.h2) ? path.join(h2, "births_deaths_UNWPP", "births_deaths_UNWPP.js") : "",
         births_deaths_HMD: (global.h2) ? path.join(h2, "births_deaths_HMD", "births_deaths_HMD.js") : "",
@@ -362,9 +363,9 @@
         if (skip_training) {
           if (!age_sex_options.exclude.includes("B")) age_sex_options.exclude.push("B");
           if (!age_sex_options.exclude.includes("C")) age_sex_options.exclude.push("C");
+          age_sex_options.skip_training = true;
+          console.log(`[NWM] Step H: Skipping Age-Sex Multinomial Logit training (using existing models).`);
         }
-        age_sex_options.skip_training = true;
-        console.log(`[NWM] Step H: Skipping Age-Sex Multinomial Logit training & target standardisation (using existing models).`);
       }
       
       //Function body
@@ -461,9 +462,9 @@
         if (skip_training) {
           if (!professions_options.exclude.includes("B")) professions_options.exclude.push("B");
           if (!professions_options.exclude.includes("C")) professions_options.exclude.push("C");
+          professions_options.skip_training = true;
+          console.log(`[NWM] Step J: Skipping Professions Multinomial Logit training (using existing models).`);
         }
-        professions_options.skip_training = true;
-        console.log(`[NWM] Step J: Skipping Professions Multinomial Logit training & target standardisation (using existing models).`);
       }
       
       //Function body

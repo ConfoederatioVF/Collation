@@ -1,5 +1,7 @@
-//[VERCENGEN / GEOSPATIALE]
-//Dedicated worker thread for parallel geoprocessing, timeseries raster operations, and statistical model training.
+//Guard clause: Ensure worker thread scripts never execute directly within the renderer DOM thread
+if (typeof window !== "undefined" && typeof document !== "undefined") {
+  return;
+}
 
 let fs = require("fs");
 let path = require("path");
@@ -59,7 +61,9 @@ try { global.mathjs = require("mathjs"); } catch (e) {}
 try { global.ml_matrix = require("ml-matrix"); } catch (e) {}
 
 //Load core UF dependencies
-let root_dir = path.resolve(__dirname, "../../../../../");
+let root_dir = (workerData && workerData.root_dir) ?
+  workerData.root_dir :
+  (fs.existsSync(path.join(process.cwd(), "package.json")) ? process.cwd() : path.resolve(__dirname, "../../../../../"));
 
 let loadDirectory = function (rel_dir) {
   let full_dir = path.join(root_dir, rel_dir);
@@ -127,6 +131,43 @@ let handleTask = async function (task) {
     let out_dir = path.dirname(out_file);
     if (!fs.existsSync(out_dir)) fs.mkdirSync(out_dir, { recursive: true });
     fs.copyFileSync(from_file, out_file);
+    return out_file;
+  }
+
+  //1c. Composite overlay (overlays top raster where top > 0 onto base raster)
+  if (task_type === "composite_overlay") {
+    let base_file = task.base_file_path;
+    let out_file = task.output_file_path || task.dest_path;
+    let top_file = task.top_file_path;
+    let out_dir = path.dirname(out_file);
+    if (!fs.existsSync(out_dir)) fs.mkdirSync(out_dir, { recursive: true });
+
+    if (!fs.existsSync(top_file)) {
+      if (fs.existsSync(base_file)) fs.copyFileSync(base_file, out_file);
+      return out_file;
+    }
+    if (!fs.existsSync(base_file)) {
+      fs.copyFileSync(top_file, out_file);
+      return out_file;
+    }
+
+    let base_raster = await GeoPNG.loadNumberRasterImageAsync(base_file, { format: "float32" });
+    let top_raster = await GeoPNG.loadNumberRasterImageAsync(top_file, { format: "float32" });
+    let out_data = new Float32Array(base_raster.data.length);
+
+    for (let i = 0; i < out_data.length; i++) {
+      let top_val = top_raster.data[i];
+      out_data[i] = (top_val > 0 && !isNaN(top_val)) ? top_val : base_raster.data[i];
+    }
+
+    await GeoPNG.saveNumberRasterImageAsync({
+      data: out_data,
+      file_path: out_file,
+      format: "float32",
+      height: base_raster.height,
+      width: base_raster.width
+    });
+
     return out_file;
   }
 
@@ -355,18 +396,17 @@ let handleTask = async function (task) {
     return { output_file_path: output_file_path, success: true };
   }
 
-  //8. Train Multinomial Logit categorical model
+  //8. Train Multinomial Logit Model
   if (task_type === "train_multinomial_logit") {
     let categories = task.categories || [];
     let covariates_map = task.covariates_map || {};
     let model_path = path.resolve(task.model_path);
-    let options = task.options || {};
+    let opt = task.options || {};
     let target_paths = task.target_paths || {};
 
     let out_dir = path.dirname(model_path);
     if (!fs.existsSync(out_dir)) fs.mkdirSync(out_dir, { recursive: true });
 
-    //Load covariate rasters
     let cov_rasters = {};
     let valid_keys = [];
     for (let k in covariates_map) {
@@ -379,7 +419,6 @@ let handleTask = async function (task) {
       }
     }
 
-    //Load target category rasters
     let missing_target = false;
     let target_rasters = {};
     for (let i = 0; i < categories.length; i++) {
@@ -395,12 +434,10 @@ let handleTask = async function (task) {
     if (missing_target || valid_keys.length === 0)
       return { reason: "missing_inputs", success: false };
 
-    //Optional filter raster (e.g. popc_ to skip uninhabited pixels)
     let filter_raster = null;
     if (task.filter_raster_path && fs.existsSync(task.filter_raster_path))
       filter_raster = GeoPNG.loadNumberRasterImage(task.filter_raster_path, { format: task.filter_format || "float32" });
 
-    //Sample pixels
     let first_target = target_rasters[categories[0]];
     let data_len = first_target.data.length;
     let X = [];
@@ -431,26 +468,25 @@ let handleTask = async function (task) {
       }
       if (!is_valid) continue;
 
-      let cumulative = 0;
-      let rand = Math.random()*total_pop;
-      let selected_class = categories[categories.length - 1];
-      for (let j = 0; j < categories.length; j++) {
-        cumulative += cat_pops[j];
-        if (rand <= cumulative) {
-          selected_class = categories[j];
-          break;
-        }
-      }
+      let prop_row = new Float32Array(categories.length);
+      let inv_total = 1/total_pop;
+      for (let j = 0; j < categories.length; j++)
+        prop_row[j] = cat_pops[j]*inv_total;
 
       X.push(x_row);
-      Y.push([selected_class]);
+      Y.push(prop_row);
     }
 
     if (X.length === 0)
       return { reason: "no_samples", success: false };
 
-    await Statistics.trainMultinomialLogitModel(model_path, { keys: valid_keys, X: X, Y: Y }, options);
-    return { model_path: model_path, sample_count: X.length, success: true };
+    let model = await Statistics.trainMultinomialLogitModel(model_path, { keys: valid_keys, X: X, Y: Y }, {
+      ...opt,
+      classes: categories,
+      proportions: true,
+      reference_class: categories[0]
+    });
+    return { model_path: model_path, sample_count: X.length, success: !!model };
   }
 
   //9. Generate Multinomial Logit prediction raster
@@ -1246,107 +1282,6 @@ let handleTask = async function (task) {
     return { year: task.year, success: true };
   }
 
-  //5. Train Multinomial Logit Model
-  if (task_type === "train_multinomial_logit") {
-    let categories = task.categories || [];
-    let covariates_map = task.covariates_map || {};
-    let model_path = path.resolve(task.model_path);
-    let opt = task.options || {};
-    let target_paths = task.target_paths || {};
-    
-    let cov_rasters = {};
-    let valid_keys = [];
-    for (let k in covariates_map) {
-      let entry = covariates_map[k];
-      let fmt = Array.isArray(entry) ? entry[1] : "float32";
-      let p = Array.isArray(entry) ? entry[0] : entry;
-      if (fs.existsSync(p)) {
-        cov_rasters[k] = GeoPNG.loadNumberRasterImage(p, { format: fmt });
-        valid_keys.push(k);
-      }
-    }
-    
-    let missing_target = false;
-    let target_rasters = {};
-    for (let i = 0; i < categories.length; i++) {
-      let cat = categories[i];
-      let p = target_paths[cat];
-      if (!p || !fs.existsSync(p)) {
-        missing_target = true;
-        break;
-      }
-      target_rasters[cat] = GeoPNG.loadNumberRasterImage(p, { format: "float32" });
-    }
-    
-    if (missing_target || valid_keys.length === 0) return null;
-    
-    let filter_raster = null;
-    if (task.filter_raster_path && fs.existsSync(task.filter_raster_path))
-      filter_raster = GeoPNG.loadNumberRasterImage(task.filter_raster_path, { format: task.filter_format || "float32" });
-    
-    let first_target = target_rasters[categories[0]];
-    let data_len = first_target.data.length;
-    let X = [];
-    let Y = [];
-    
-    for (let i = 0; i < data_len; i++) {
-      if (filter_raster && filter_raster.data[i] <= 0) continue;
-      
-      let cat_pops = [];
-      let total_pop = 0;
-      for (let j = 0; j < categories.length; j++) {
-        let cp = target_rasters[categories[j]].data[i];
-        cp = (isNaN(cp) || cp < 0) ? 0 : cp;
-        cat_pops.push(cp);
-        total_pop += cp;
-      }
-      if (total_pop <= 0) continue;
-      
-      let is_valid = true;
-      let x_row = [];
-      for (let j = 0; j < valid_keys.length; j++) {
-        let val = cov_rasters[valid_keys[j]].data[i];
-        if (isNaN(val)) {
-          is_valid = false;
-          break;
-        }
-        x_row.push(val);
-      }
-      if (!is_valid) continue;
-      
-      let prop_row = new Float32Array(categories.length);
-      let inv_total = 1/total_pop;
-      for (let j = 0; j < categories.length; j++)
-        prop_row[j] = cat_pops[j]*inv_total;
-      
-      X.push(x_row);
-      Y.push(prop_row);
-    }
-    
-    if (X.length === 0) return null;
-    
-    let model = await Statistics.trainMultinomialLogitModel(model_path, { keys: valid_keys, X: X, Y: Y }, {
-      ...opt,
-      classes: categories,
-      proportions: true
-    });
-    return { model_path: model_path, success: !!model };
-  }
-
-  //6. Generate Multinomial Raster
-  if (task_type === "generate_multinomial_raster") {
-    let output_file_path = task.output_file_path;
-    let model_obj = task.model_obj;
-    let covariates_map = task.covariates_map;
-    let opt = task.options || {};
-    
-    await Statistics.generateMultinomialRaster(output_file_path, {
-      ...opt,
-      covariates_obj: covariates_map,
-      model_obj: model_obj
-    });
-    return { output_file_path: output_file_path, success: true };
-  }
 
   //7. Train ALR Compositional Model
   if (task_type === "train_alr_model") {

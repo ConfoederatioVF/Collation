@@ -227,19 +227,41 @@ global.path = require("path");
 	
 	/**
 	 * Returns all non-evaluated files in a folder, so long as an evaluated set is provided.
+	/**
+	 * Recursively collects files in a folder adhering to exclusion options.
+	 * @alias ve.getFilesInFolder
 	 *
 	 * @param {string} arg0_folder_path
-	 * @param {Set<string>} arg1_evaluated_set
+	 * @param {Set<string>} [arg1_evaluated_set]
 	 * @param {Object} [arg2_options]
 	 *  @param {boolean} [arg2_options.all_extensions=false] - Whether to include all files instead of just code/style assets.
+	 *  @param {string[]} [arg2_options.ignored_directories] - Directory names to skip.
+	 *  @param {string[]} [arg2_options.ignored_directory_substrings] - Substrings of directory names to skip.
+	 *  @param {string[]} [arg2_options.ignored_file_substrings] - Substrings of file names to skip (e.g. ['worker']).
 	 *
-	 * @returns {Array<string>}
+	 * @returns {string[]}
 	 */
 	ve.getFilesInFolder = function (arg0_folder_path, arg1_evaluated_set, arg2_options) {
 		//Convert from parameters
 		let folder_path = arg0_folder_path;
-		let evaluated_set = arg1_evaluated_set;
+		let evaluated_set = (arg1_evaluated_set) ? arg1_evaluated_set : new Set();
 		let options = (arg2_options) ? arg2_options : {};
+		
+		//Initialise options
+		if (!options.ignored_directories)
+			options.ignored_directories = [
+				"node_modules",
+				"saves",
+				"temp_jobs",
+				"data_raw",
+				"uud",
+				"backups",
+				"archives"
+			];
+		if (!options.ignored_directory_substrings)
+			options.ignored_directory_substrings = ["_rasters", "rasters_", "worker"];
+		if (!options.ignored_file_substrings)
+			options.ignored_file_substrings = ["worker"];
 		
 		//Declare local instance variables
 		let file_list;
@@ -254,27 +276,43 @@ global.path = require("path");
 				return 0;
 			});
 		} catch (e) {
+			//Return statement
 			return return_files;
 		}
 		
 		for (let local_file_entry of file_list) {
 			let name = local_file_entry.name;
+			let name_lower = name.toLowerCase();
 			let full_path = path.join(folder_path, name);
 			
 			if (evaluated_set.has(full_path)) continue;
 			evaluated_set.add(full_path);
 			
 			if (local_file_entry.isDirectory()) {
-				//Skip hidden directories, dependencies, and pure data/raster directories
-				if (name.startsWith(".") || name === "node_modules" || name === "saves" || name === "temp_jobs" || name === "data_raw" || name === "uud" || name === "backups")
-					continue;
-				if (name.endsWith("_rasters") || name.includes("rasters_"))
-					continue;
+				//Skip hidden directories and configurable ignored directories
+				if (name.startsWith(".")) continue;
+				if (options.ignored_directories.some((d) => d.toLowerCase() === name_lower)) continue;
+				
+				let should_skip_directory = false;
+				for (let i = 0; i < options.ignored_directory_substrings.length; i++)
+					if (name_lower.includes(options.ignored_directory_substrings[i].toLowerCase())) {
+						should_skip_directory = true;
+						break;
+					}
+				if (should_skip_directory) continue;
 				
 				return_files = return_files.concat(
 					ve.getFilesInFolder(full_path, evaluated_set, options)
 				);
 			} else {
+				let should_skip_file = false;
+				for (let i = 0; i < options.ignored_file_substrings.length; i++)
+					if (name_lower.includes(options.ignored_file_substrings[i].toLowerCase())) {
+						should_skip_file = true;
+						break;
+					}
+				if (should_skip_file) continue;
+				
 				if (options.all_extensions) {
 					return_files.push(full_path);
 				} else {
@@ -318,8 +356,8 @@ global.path = require("path");
 			try {
 				let cached_obj = JSON.parse(fs.readFileSync(cache_path, "utf8"));
 				if (cached_obj && cached_obj.pattern_hash === pattern_hash && Array.isArray(cached_obj.files)) {
-					//Fast-path return from pre-computed startup manifest
-					return cached_obj.files;
+					//Fast-path return from pre-computed startup manifest, ensuring no worker leaks
+					return cached_obj.files.filter((f) => !f.includes("worker") && fs.existsSync(f));
 				}
 			} catch (e) {}
 		}
@@ -335,7 +373,7 @@ global.path = require("path");
 			
 			let files = [];
 			if (pattern.includes("*")) {
-				files = ve.getWildcardsInFolder(base, pattern);
+				files = ve.getWildcardsInFolder(base, pattern, opt);
 			} else {
 				let absolutePath = path.resolve(base, pattern);
 				if (fs.existsSync(absolutePath)) {
@@ -391,13 +429,17 @@ global.path = require("path");
 	 *
 	 * @param {string} arg0_folder_path
 	 * @param {string} arg1_wildcard_pattern
+	 * @param {Object} [arg2_options]
 	 *
 	 * @returns {Array<string>}
 	 */
-	ve.getWildcardsInFolder = function (arg0_folder_path, arg1_wildcard_pattern) {
+	ve.getWildcardsInFolder = function (arg0_folder_path, arg1_wildcard_pattern, arg2_options) {
+		//Convert from parameters
 		let folder_path = arg0_folder_path;
 		let wildcard_pattern = arg1_wildcard_pattern;
+		let options = (arg2_options) ? arg2_options : {};
 		
+		//Declare local instance variables
 		let base = path.basename(wildcard_pattern);
 		let directory = path.dirname(wildcard_pattern);
 		
@@ -409,7 +451,7 @@ global.path = require("path");
 				fs.existsSync(absolute_path) &&
 				fs.statSync(absolute_path).isDirectory()
 			)
-				return ve.getFilesInFolder(absolute_path, new Set());
+				return ve.getFilesInFolder(absolute_path, new Set(), options);
 			return [];
 		}
 		
@@ -515,6 +557,8 @@ global.path = require("path");
 		let load_patterns = (!options.do_not_import_UF) ? [
 			"!UF/archives",
 			"!UF/js/vercengen/db",
+			"!UF/**/*worker*",
+			"!**/*worker*",
 			"UF",
 			
 			//Localisation

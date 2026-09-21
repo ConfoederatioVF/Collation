@@ -28,12 +28,13 @@ global.age_sex = class {
 		"urbc_": (y) => [`${this.sf().input_urbc_folder}/stadester_urban_${y}.png`, "float32"],
 		
 		//Eoscala (Economics)
+		"discretionary_income": (y) => [`${wealth_income.output_discretionary_income_folder}/discretionary_income_${y}.png`, "float32"],
+		"disposable_income": (y) => [`${wealth_income.output_disposable_income_folder}/disposable_income_${y}.png`, "float32"],
 		"gdp_nominal": (y) => [`${GDP_pc.intermediate_gdp_scaled_to_national}/GDP_${y}.png`, "float32"],
 		"gdp_pc": (y) => [`${GDP_pc.output_gdp_pc_folder}/GDP_pc_${y}.png`, "float32"],
 		"gdp_ppp": (y) => [`${GDP_PPP_pc.intermediate_gdp_ppp_scaled_to_national}/GDP_PPP_${y}.png`, "float32"],
 		"gdp_ppp_pc": (y) => [`${GDP_PPP_pc.output_gdp_ppp_pc_folder}/GDP_PPP_pc_${y}.png`, "float32"],
-		"discretionary_income": (y) => [`${wealth_income.output_discretionary_income_folder}/discretionary_income_${y}.png`, "float32"],
-		"disposable_income": (y) => [`${wealth_income.output_disposable_income_folder}/disposable_income_${y}.png`, "float32"],
+		"gini": (y) => [`${gini_Eoscala.output_rasters}gini_${y}.png`, "float32"],
 		"net_income": (y) => [`${wealth_income.output_net_income_folder}/net_income_${y}.png`, "float32"],
 		"net_wealth": (y) => [`${wealth_income.output_net_wealth_folder}/net_wealth_${y}.png`, "float32"],
 		
@@ -82,10 +83,10 @@ global.age_sex = class {
 		
 		let cohorts = this.getCohorts();
 		let copy_tasks = [];
-		let train_years = landuse_HYDE.sorted_hyde_years.filter(y => y >= 1750 && y <= 2025);
+		let train_years = (options.years) ? options.years : landuse_HYDE.sorted_hyde_years.filter(y => y >= 1750 && y <= 2025);
 		let wp_files = [];
 		
-		if (fs.existsSync(age_sex_WorldPop.output_rasters)) {
+		if (typeof age_sex_WorldPop !== "undefined" && fs.existsSync(age_sex_WorldPop.output_rasters)) {
 			wp_files = fs.readdirSync(age_sex_WorldPop.output_rasters);
 		}
 		
@@ -150,19 +151,21 @@ global.age_sex = class {
 		
 		//Declare local instance variables
 		let cohorts = this.getCohorts();
-		let target_years = landuse_HYDE.sorted_hyde_years.filter(y => y >= 1750 && y <= 2025);
+		let target_years = (options.years) ? options.years : landuse_HYDE.sorted_hyde_years.filter(y => y >= 1750 && y <= 2025);
 		
 		if (!fs.existsSync(this.intermediate_logit_folder)) fs.mkdirSync(this.intermediate_logit_folder, { recursive: true });
 		
 		target_years = target_years.filter((year) => {
 			let model_path = `${this.intermediate_logit_folder}multinomial_model_${year}.json`;
+			let target_path = `${this.standardised_targets_folder}global_${cohorts[0]}_${year}.png`;
+			if (!fs.existsSync(target_path)) return false;
 			return (overwrite || !fs.existsSync(model_path));
 		});
 		
 		if (target_years.length === 0) return [];
 		
 		//Return statement
-		return await Statistics.trainMultinomialLogitModelsParallel(target_years, (year) => {
+		return Statistics.trainMultinomialLogitModelsParallel(target_years, (year) => {
 			let all_keys = Object.keys(this.covariates_obj);
 			let covariates_map = {};
 			let format_year = year > 2023 ? 2023 : year;
@@ -189,9 +192,10 @@ global.age_sex = class {
 				model_path: model_path,
 				options: {
 					debug: true,
-					lambda: Math.returnSafeNumber(options.lambda, 1e-4),
+					fit_intercept: (options.fit_intercept !== undefined) ? options.fit_intercept : false,
+					lambda: Math.returnSafeNumber(options.lambda, 0),
 					learning_rate: Math.returnSafeNumber(options.learning_rate, 0.1),
-					max_iterations: Math.returnSafeNumber(options.max_iterations, 50)
+					max_iterations: Math.returnSafeNumber(options.max_iterations, 1000)
 				},
 				target_paths: target_paths
 			};
@@ -202,46 +206,47 @@ global.age_sex = class {
 	}
 	
 	/**
-	 * Merges all trained yearly multinomial logit models into a single 'Unified' model
-	 * via arithmetic mean to remove era-specific and spatial biases (e.g. 1750 Sweden).
+	 * Merges all trained yearly multinomial logit models into a single coverage-weighted 'Unified' ensemble
+	 * to prevent single-country distortion (e.g. 1750 Sweden) and eliminates arithmetic coefficient averaging.
 	 */
 	static async C_mergeMultinomialLogitModels (arg0_options) {
+		//Convert from parameters
 		let options = (arg0_options) ? arg0_options : {};
 		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
 
+		//Declare local instance variables
+		let cohorts = this.getCohorts();
+		let ensemble_models = [];
+		let max_samples = 1;
+		let models_loaded = 0;
+		let raw_models = [];
+		let train_years = (options.years) ? options.years : landuse_HYDE.sorted_hyde_years.filter(y => y >= 1750 && y <= 2025);
 		let unified_path = `${this.intermediate_logit_folder}multinomial_model_unified.json`;
+		let weights_path = `${this.intermediate_logit_folder}anchor_coverage_weights.json`;
+
 		if (!overwrite && fs.existsSync(unified_path)) {
 			console.log(`Unified Multinomial Logit model already exists. Skipping merge.`);
 			return;
 		}
 		
-		console.log(`Generating unified historical MNL model from trained ensemble...`);
+		console.log(`Generating coverage-weighted unified historical MNL ensemble...`);
 		
-		let train_years = landuse_HYDE.sorted_hyde_years.filter(y => y >= 1750 && y <= 2025);
-		let models_loaded = 0;
-		let unified_sums = {};
-		let ref_class = "";
-		let valid_covariates = [];
-		
-		// Extract and sum coefficients across all available temporal models
+		//1. Load temporal models and compute empirical sample coverage
 		for (let y = 0; y < train_years.length; y++) {
 			let year = train_years[y];
 			let p = `${this.intermediate_logit_folder}multinomial_model_${year}.json`;
 			
 			if (fs.existsSync(p)) {
 				let m = JSON.parse(fs.readFileSync(p, "utf8"));
-				models_loaded++;
-				ref_class = m.reference_class;
-				valid_covariates = m.covariates;
+				let samples = Math.returnSafeNumber(m.training?.sample_count, 1000);
+				if (samples > max_samples) max_samples = samples;
 				
-				Object.iterate(m.coefficients, (c_key, covs) => {
-					if (!unified_sums[c_key]) unified_sums[c_key] = {};
-					
-					Object.iterate(covs, (cov_key, val) => {
-						if (unified_sums[c_key][cov_key] === undefined) unified_sums[c_key][cov_key] = 0;
-						unified_sums[c_key][cov_key] += val;
-					});
+				raw_models.push({
+					model_path: p,
+					sample_count: samples,
+					year: year
 				});
+				models_loaded++;
 			}
 		}
 		
@@ -250,31 +255,45 @@ global.age_sex = class {
 			return;
 		}
 		
-		// Arithmetic Average
+		//2. Calculate coverage-weighted utility weights: C_t = (samples/max_samples)^0.3
+		let total_coverage_weight = 0;
+		for (let i = 0; i < raw_models.length; i++) {
+			let entry = raw_models[i];
+			let coverage_metric = Math.pow(entry.sample_count/max_samples, 0.3); //[WIP] - Magic number: why 0.3?
+			entry.coverage = coverage_metric;
+			total_coverage_weight += coverage_metric;
+		}
+		
+		for (let i = 0; i < raw_models.length; i++) {
+			let entry = raw_models[i];
+			let norm_w = (total_coverage_weight > 0) ? (entry.coverage/total_coverage_weight) : (1/raw_models.length);
+			ensemble_models.push({
+				coverage: entry.coverage,
+				model: entry.model_path,
+				sample_count: entry.sample_count,
+				weight: norm_w,
+				year: entry.year
+			});
+		}
+		
+		//3. Assemble unified ensemble artifact
 		let unified_model = {
-			type: "multinomial_logit",
-			classes: this.getCohorts(),
-			reference_class: ref_class,
-			covariates: valid_covariates,
-			coefficients: {}
+			classes: cohorts,
+			models: ensemble_models,
+			sample_count_max: max_samples,
+			total_anchors: models_loaded,
+			type: "multinomial_ensemble"
 		};
 		
-		Object.iterate(unified_sums, (c_key, covs) => {
-			unified_model.coefficients[c_key] = {};
-			Object.iterate(covs, (cov_key, val) => {
-				unified_model.coefficients[c_key][cov_key] = val / models_loaded;
-			});
-		});
-		
 		fs.writeFileSync(unified_path, JSON.stringify(unified_model, null, 2));
-		console.log(`Unified multinomial logit model generated and saved using ${models_loaded} historical temporal anchors.`);
+		fs.writeFileSync(weights_path, JSON.stringify(ensemble_models, null, 2));
+		console.log(`Unified coverage-weighted MNL ensemble generated and saved using ${models_loaded} historical temporal anchors.`);
 	}
 	
 	/**
 	 * Generates cohort probabilities. Uses specific temporal models where available,
-	 * and falls back to the Unified model for pre-1750 historical prediction.
+	 * premodern NDT model for pre-1500 Columbian exchange era, and coverage-weighted ensemble blending for gaps.
 	 */
-	
 	static async D_generateMultinomialLogitRasters (arg0_options) {
 		//Convert from parameters
 		let options = (arg0_options) ? arg0_options : {};
@@ -284,7 +303,7 @@ global.age_sex = class {
 		
 		//Declare local instance variables
 		let check_cohort = this.getCohorts()[0];
-		let years = landuse_HYDE.sorted_hyde_years;
+		let years = (options.years) ? options.years : landuse_HYDE.sorted_hyde_years;
 		
 		if (!fs.existsSync(this.intermediate_logit_rasters)) fs.mkdirSync(this.intermediate_logit_rasters, { recursive: true });
 		
@@ -297,17 +316,55 @@ global.age_sex = class {
 		if (target_years.length === 0) return [];
 		
 		//Return statement
-		return await Statistics.generateMultinomialRastersParallel(target_years, (year) => {
+		return Statistics.generateMultinomialRastersParallel(target_years, (year) => {
 			let all_keys = Object.keys(this.covariates_obj);
 			let covariates_map = {};
 			let format_year = year > 2023 ? 2023 : year;
 			let model_path = `${this.intermediate_logit_folder}multinomial_model_${year}.json`;
 			let out_base = `${this.intermediate_logit_rasters}logit_${year}.png`;
+			let resolved_model = model_path;
 			
-			if (year < 1950 || year > 2025 || !fs.existsSync(model_path))
-				model_path = `${this.intermediate_logit_folder}multinomial_model_unified.json`;
+			//Regime 1: Pre-1500 AD (Columbian Exchange Breakpoint) > NDT Premodern land-use model
+			if (year < 1500) {
+				let premodern_path = `${this.intermediate_logit_folder}premodern_multinomial_logit.json`;
+				if (fs.existsSync(premodern_path)) resolved_model = premodern_path;
+			} else if (!fs.existsSync(model_path)) {
+				//Regime 2: Post-1500 AD missing anchor > Coverage-weighted temporal kernel ensemble
+				let unified_path = `${this.intermediate_logit_folder}multinomial_model_unified.json`;
+				if (fs.existsSync(unified_path)) {
+					let unified_data = JSON.parse(fs.readFileSync(unified_path, "utf8"));
+					if (unified_data.type === "multinomial_ensemble" && Array.isArray(unified_data.models)) {
+						let dynamic_models = [];
+						let total_w = 0;
+						
+						for (let m = 0; m < unified_data.models.length; m++) {
+							let entry = unified_data.models[m];
+							let anchor_year = entry.year || 1950;
+							let dt = Math.abs(year - anchor_year);
+							let kernel = Math.exp(-dt/50);
+							let w = (entry.weight || 1)*kernel;
+							dynamic_models.push({ model: entry.model, weight: w, year: anchor_year });
+							total_w += w;
+						}
+						
+						if (total_w > 0) {
+							for (let m = 0; m < dynamic_models.length; m++)
+								dynamic_models[m].weight /= total_w;
+						}
+						
+						resolved_model = {
+							classes: this.getCohorts(),
+							models: dynamic_models,
+							target_year: year,
+							type: "multinomial_ensemble"
+						};
+					} else {
+						resolved_model = unified_path;
+					}
+				}
+			}
 			
-			if (!fs.existsSync(model_path)) return null;
+			if (!resolved_model) return null;
 			
 			for (let i = 0; i < all_keys.length; i++) {
 				let k = all_keys[i];
@@ -317,7 +374,7 @@ global.age_sex = class {
 			
 			return {
 				covariates_map: covariates_map,
-				model_obj: model_path,
+				model_obj: resolved_model,
 				options: {
 					format: "float32",
 					mask_uninhabited: true,
@@ -342,7 +399,7 @@ global.age_sex = class {
 		//Declare local instance variables
 		let cohorts = this.getCohorts();
 		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
-		let years = landuse_HYDE.sorted_hyde_years;
+		let years = (options.years) ? options.years : landuse_HYDE.sorted_hyde_years;
 
 		if (!fs.existsSync(this.intermediate_clamped_rasters)) fs.mkdirSync(this.intermediate_clamped_rasters, { recursive: true });
 
@@ -369,13 +426,13 @@ global.age_sex = class {
 				if (!popc_info || !fs.existsSync(popc_info[0])) return null;
 
 				return {
-					type: "clamp_cohorts_isotonic",
-					cohorts: cohorts,
-					logit_rasters_folder: this.intermediate_logit_rasters,
-					output_folder: this.intermediate_clamped_rasters,
-					popc_format: popc_info[1] || "float32",
-					popc_path: popc_info[0],
-					year: year
+				type: "clamp_cohorts_isotonic",
+				cohorts: cohorts,
+				logit_rasters_folder: this.intermediate_logit_rasters,
+				output_folder: this.intermediate_clamped_rasters,
+				popc_format: popc_info[1] || "float32",
+				popc_path: popc_info[0],
+				year: year
 				};
 			},
 			handler: async (year) => {
@@ -491,12 +548,12 @@ global.age_sex = class {
 		let cohorts = this.getCohorts();
 		let copy_tasks = [];
 		let wp_files = [];
-		let years = landuse_HYDE.sorted_hyde_years;
+		let years = (options.years) ? options.years : landuse_HYDE.sorted_hyde_years;
 
 		if (!fs.existsSync(this.output_rasters)) fs.mkdirSync(this.output_rasters, { recursive: true });
 		
 		//Cache the WorldPop directory listing once to avoid repeated disk reads
-		if (fs.existsSync(age_sex_WorldPop.output_rasters)) {
+		if (typeof age_sex_WorldPop !== "undefined" && fs.existsSync(age_sex_WorldPop.output_rasters)) {
 			wp_files = fs.readdirSync(age_sex_WorldPop.output_rasters);
 		}
 		
@@ -514,8 +571,10 @@ global.age_sex = class {
 				
 				//1. UNWPP actuals take precedence for 1950-2014
 				if (year >= 1950 && year < 2015) {
-					let unwpp_path = `${age_sex_UNWPP.output_clamped_to_stadester}global_${cohort}_${year}.png`;
-					if (fs.existsSync(unwpp_path)) src_path = unwpp_path;
+					if (typeof age_sex_UNWPP !== "undefined" && fs.existsSync(age_sex_UNWPP.output_clamped_to_stadester)) {
+						let unwpp_path = `${age_sex_UNWPP.output_clamped_to_stadester}global_${cohort}_${year}.png`;
+						if (fs.existsSync(unwpp_path)) src_path = unwpp_path;
+					}
 				}
 				
 				//2. WorldPop actuals take precedence for 2015-2025
@@ -527,8 +586,10 @@ global.age_sex = class {
 						src_path = `${age_sex_WorldPop.output_rasters}${wp_match}`;
 					} else {
 						//Fallback to UNWPP if the specific WorldPop year is missing
-						let unwpp_fallback = `${age_sex_UNWPP.output_clamped_to_stadester}global_${cohort}_${year}.png`;
+						if (typeof age_sex_UNWPP !== "undefined" && fs.existsSync(age_sex_UNWPP.output_clamped_to_stadester)) {
+							let unwpp_fallback = `${age_sex_UNWPP.output_clamped_to_stadester}global_${cohort}_${year}.png`;
 						if (fs.existsSync(unwpp_fallback)) src_path = unwpp_fallback;
+						}
 					}
 				}
 				

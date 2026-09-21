@@ -293,7 +293,7 @@
 			let options = (arg2_options) ? arg2_options : {};
 			
 			//Initialise options
-			let mode = options.mode || ((model_obj.type === "multinomial_logit") ? "multinomial_logit" : "ols");
+			let mode = options.mode || ((model_obj.type === "multinomial_logit" || model_obj.type === "multinomial_ensemble") ? "multinomial_logit" : "ols");
 			options.height = Math.returnSafeNumber(options.height, 2160);
 			options.width = Math.returnSafeNumber(options.width, 4320);
 			if (!options.formatting_parameters) options.formatting_parameters = [];
@@ -329,24 +329,61 @@
 				let num_features = valid_keys.length;
 				let output_mode = options.output_mode || "class";
 
-				//Pre-extract weights into contiguous Float64Array per class for fast vectorized evaluation
-				let class_intercepts = new Float64Array(num_all_classes);
-				let class_weights = new Array(num_all_classes);
-				for (let c = 0; c < num_all_classes; c++) {
-					let coeff_block = model_obj.coefficients ? model_obj.coefficients[all_classes[c]] : null;
-					let weights = new Float64Array(num_features);
-					if (coeff_block) {
-						class_intercepts[c] = Math.returnSafeNumber(coeff_block._intercept, 0);
-						for (let k = 0; k < num_features; k++) {
-							weights[k] = Math.returnSafeNumber(coeff_block[valid_keys[k]], 0);
+				//Support both discrete multinomial_logit models and probability-space multinomial_ensemble mixtures
+				let is_ensemble = (model_obj.type === "multinomial_ensemble" && Array.isArray(model_obj.models) && model_obj.models.length > 0);
+				let sub_models_data = [];
+
+				if (is_ensemble) {
+					let total_weight = 0;
+					for (let m = 0; m < model_obj.models.length; m++) {
+						let entry = model_obj.models[m];
+						let sub_obj = (typeof entry.model === "string") ? File.loadJSON(entry.model) : entry.model;
+						let w = Math.returnSafeNumber(entry.weight, 1);
+						if (sub_obj) {
+							sub_models_data.push({ model: sub_obj, weight: w });
+							total_weight += w;
 						}
 					}
-					class_weights[c] = weights;
+					if (total_weight > 0) {
+						for (let m = 0; m < sub_models_data.length; m++)
+							sub_models_data[m].weight /= total_weight;
+					}
+				} else {
+					sub_models_data.push({ model: model_obj, weight: 1.0 });
+				}
+
+				let num_models = sub_models_data.length;
+				let sub_intercepts = new Array(num_models);
+				let sub_weights = new Array(num_models);
+				let sub_weight_vals = new Float64Array(num_models);
+
+				for (let m = 0; m < num_models; m++) {
+					let sub = sub_models_data[m].model;
+					let s_intercepts = new Float64Array(num_all_classes);
+					let s_weights = new Array(num_all_classes);
+
+					for (let c = 0; c < num_all_classes; c++) {
+						let coeff_block = sub.coefficients ? sub.coefficients[all_classes[c]] : null;
+						let weights = new Float64Array(num_features);
+						if (coeff_block) {
+							s_intercepts[c] = Math.returnSafeNumber(coeff_block._intercept, 0);
+							for (let k = 0; k < num_features; k++) {
+								weights[k] = Math.returnSafeNumber(coeff_block[valid_keys[k]], 0);
+							}
+						}
+						s_weights[c] = weights;
+					}
+					sub_intercepts[m] = s_intercepts;
+					sub_weights[m] = s_weights;
+					sub_weight_vals[m] = sub_models_data[m].weight;
 				}
 
 				if (output_mode === "class") {
 					let format = options.format || "int32";
+					let local_exps = new Float64Array(num_all_classes);
+					let local_logits = new Float64Array(num_all_classes);
 					let output_buffer = new Float32Array(total_pixels);
+					let pixel_probs = new Float64Array(num_all_classes);
 
 					for (let start_idx = 0; start_idx < total_pixels; start_idx += chunk_pixels) {
 						let end_idx = Math.min(start_idx + chunk_pixels, total_pixels);
@@ -355,17 +392,43 @@
 								output_buffer[local_index] = 0;
 								continue;
 							}
-							let argmax_c = 0;
-							let max_val = -Infinity;
-							for (let c = 0; c < num_all_classes; c++) {
-								let sum = class_intercepts[c];
-								let w = class_weights[c];
-								for (let k = 0; k < num_features; k++) {
-									let fd = feature_data[k];
-									if (fd) sum += fd[local_index]*w[k];
+
+							for (let c = 0; c < num_all_classes; c++) pixel_probs[c] = 0;
+
+							for (let m = 0; m < num_models; m++) {
+								let max_l = -Infinity;
+								let s_intercepts = sub_intercepts[m];
+								let s_weights = sub_weights[m];
+								let w_m = sub_weight_vals[m];
+
+								for (let c = 0; c < num_all_classes; c++) {
+									let sum = s_intercepts[c];
+									let w = s_weights[c];
+									for (let k = 0; k < num_features; k++) {
+										let fd = feature_data[k];
+										if (fd) sum += fd[local_index]*w[k];
+									}
+									local_logits[c] = sum;
+									if (sum > max_l) max_l = sum;
 								}
-								if (sum > max_val) {
-									max_val = sum;
+
+								let sum_exp = 0;
+								for (let c = 0; c < num_all_classes; c++) {
+									let e = Math.exp(local_logits[c] - max_l);
+									local_exps[c] = e;
+									sum_exp += e;
+								}
+								let inv_sum = (sum_exp > 0) ? (1/sum_exp) : 0;
+
+								for (let c = 0; c < num_all_classes; c++)
+									pixel_probs[c] += w_m*(local_exps[c]*inv_sum);
+							}
+
+							let argmax_c = 0;
+							let max_p = -1;
+							for (let c = 0; c < num_all_classes; c++) {
+								if (pixel_probs[c] > max_p) {
+									max_p = pixel_probs[c];
 									argmax_c = c;
 								}
 							}
@@ -404,29 +467,36 @@
 						for (let local_index = start_idx; local_index < end_idx; local_index++) {
 							if (!passes_guard(local_index)) continue; //Buffers are zero-initialized
 
-							let max_l = -Infinity;
-							for (let c = 0; c < num_all_classes; c++) {
-								let sum = class_intercepts[c];
-								let w = class_weights[c];
-								for (let k = 0; k < num_features; k++) {
-									let fd = feature_data[k];
-									if (fd) sum += fd[local_index]*w[k];
+							for (let m = 0; m < num_models; m++) {
+								let max_l = -Infinity;
+								let s_intercepts = sub_intercepts[m];
+								let s_weights = sub_weights[m];
+								let w_m = sub_weight_vals[m];
+
+								for (let c = 0; c < num_all_classes; c++) {
+									let sum = s_intercepts[c];
+									let w = s_weights[c];
+									for (let k = 0; k < num_features; k++) {
+										let fd = feature_data[k];
+										if (fd) sum += fd[local_index]*w[k];
+									}
+									local_logits[c] = sum;
+									if (sum > max_l) max_l = sum;
 								}
-								local_logits[c] = sum;
-								if (sum > max_l) max_l = sum;
-							}
 
-							let sum_exp = 0;
-							for (let c = 0; c < num_all_classes; c++) {
-								let e = Math.exp(local_logits[c] - max_l);
-								local_exps[c] = e;
-								sum_exp += e;
-							}
-							let inv_sum = (sum_exp > 0) ? (1/sum_exp) : 0;
+								let sum_exp = 0;
+								for (let c = 0; c < num_all_classes; c++) {
+									let e = Math.exp(local_logits[c] - max_l);
+									local_exps[c] = e;
+									sum_exp += e;
+								}
+								let inv_sum = (sum_exp > 0) ? (1/sum_exp) : 0;
 
-							for (let tc = 0; tc < num_targets; tc++) {
-								let c_idx = target_indices[tc];
-								output_buffers[tc][local_index] = (c_idx >= 0) ? (local_exps[c_idx]*inv_sum) : 0;
+								for (let tc = 0; tc < num_targets; tc++) {
+									let c_idx = target_indices[tc];
+									if (c_idx >= 0)
+										output_buffers[tc][local_index] += w_m*(local_exps[c_idx]*inv_sum);
+								}
 							}
 						}
 						

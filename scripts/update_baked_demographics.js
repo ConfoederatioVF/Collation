@@ -48,7 +48,7 @@ for (let y of years) {
 		orig_tot += f_raw[i] + m_raw[i];
 	}
 
-	let coupled = Statistics.coupleAgeSexCohorts(m_raw, f_raw, band_widths, 2);
+	let coupled = Statistics.coupleAgeSexCohorts(m_raw, f_raw, band_widths, 0);
 	let new_tot = 0;
 
 	for (let i = 0; i < cohorts.length; i++) {

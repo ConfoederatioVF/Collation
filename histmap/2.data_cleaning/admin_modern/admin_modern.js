@@ -136,8 +136,11 @@ global.admin_modern = class {
 				
 				let domain = split_geocode[1].split("-").map(Number);
 				if (domain.length === 2) {
-					if (domain[1] < domain[0])
+					if (domain[1] < domain[0]) {
 						local_domain = [domain[0], last_year];
+					} else {
+						local_domain = [domain[0], domain[1]];
+					}
 				} else if (domain.length === 1) {
 					local_domain = [domain[0], domain[0]];
 				}

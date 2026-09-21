@@ -106,6 +106,14 @@ let win;
     }, 1000);
     
     //Clean up memory and intervals on close
+    win.on("close", function () {
+      try {
+        if (win && win.webContents && !win.webContents.isDestroyed()) {
+          win.webContents.closeDevTools();
+        }
+      } catch (e) {}
+    });
+    
     win.on("closed", function () {
       clearInterval(title_update_interval);
       win = null;
@@ -170,8 +178,8 @@ let win;
 //App handling
 {
   app.commandLine.appendSwitch("disable-site-isolation-trials");
-  app.commandLine.appendSwitch("disk-cache-size", "67108864"); //64 MB disk cache cap
-  app.commandLine.appendSwitch("media-cache-size", "67108864");
+  app.commandLine.appendSwitch("disk-cache-size", "1073741824"); //1 GB disk cache cap
+  app.commandLine.appendSwitch("media-cache-size", "1073741824");
   app.commandLine.appendSwitch("enable-features", "SharedArrayBuffer");
   app.commandLine.appendSwitch("js-flags", "--max-old-space-size=262144 --expose-gc");
   
