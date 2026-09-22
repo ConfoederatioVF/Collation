@@ -465,9 +465,7 @@
 			}
 		}
 		
-		let effective_concurrency = can_use_worker_threads ?
-			Math.min(concurrency, total_items) :
-			Math.min(4, total_items);
+		let effective_concurrency = Math.min(concurrency, total_items);
 		
 		console.log(`- [${task_name}] Launching ${can_use_worker_threads ? "multithreaded worker" : "local cooperative"} processing over ${total_items} items (Concurrency: ${effective_concurrency}) ..`);
 		

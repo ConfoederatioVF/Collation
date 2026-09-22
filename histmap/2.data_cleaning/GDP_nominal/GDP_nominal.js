@@ -207,7 +207,7 @@ global.GDP_nominal = class {
 				});
 				
 				Object.iterate(local_gdp_sums, (local_key, local_value) => {
-					let local_actual_gdp = gdp_obj[local_key]?.[hyde_years[i]];
+					let local_actual_gdp = gdp_obj[local_key]?.[year];
 					local_gdp_scalars[local_key] = (local_actual_gdp && local_value > 0) ? local_actual_gdp/local_value : 1;
 				});
 				
@@ -228,9 +228,10 @@ global.GDP_nominal = class {
 						
 						if (local_geocodes)
 							for (let x = 0; x < local_geocodes.length; x++) {
-								let local_gdp = gdp_obj[local_geocodes[x]]?.[hyde_years[i]];
-								if (local_gdp)
-									return local_value*local_gdp_scalars[local_geocodes[x]];
+								let local_gdp = gdp_obj[local_geocodes[x]]?.[year];
+								let local_scalar = local_gdp_scalars[local_geocodes[x]];
+								if (local_gdp && isFinite(local_scalar))
+									return local_value*local_scalar;
 							}
 						return local_value;
 					}
@@ -240,16 +241,7 @@ global.GDP_nominal = class {
 	}
 	
 	static async processRasters (arg0_options) {
-		//Convert from parameters
-		let options = (arg0_options) ? arg0_options : {};
-		
-		//Initialise options
-		if (!options.exclude) options.exclude = [];
-		
-		//Process intermediates
-		if (!options.exclude.includes("A"))
-			await this.A_scaleGDPRastersToGlobal(`${GDP_nominal_OLS.output_ols_folder}OLS_`, this.intermediate_normalised_to_global, options);
-		if (!options.exclude.includes("B"))
-			await this.B_scaleGDPRastersToNational(options);
+		// Deprecated: GDP nominal is now dynamically derived from GDP_pc (inverted logic pipeline).
+		return;
 	}
 };

@@ -154,7 +154,7 @@
       
       let gdp_nom_ols_options = { overwrite: overwrite, ...(options.gdp_nominal_ols || {}) };
       let gdp_nom_options = { overwrite: overwrite, ...(options.gdp_nominal || {}) };
-      let gdp_nom_sedac_options = { exclude: ["A"], overwrite: overwrite, ...(options.gdp_nominal_sedac || {}) };
+      let gdp_nom_sedac_options = { overwrite: overwrite, ...(options.gdp_nominal_sedac || {}) };
       let gdp_ppp_ols_options = { overwrite: overwrite, ...(options.gdp_ppp_ols || {}) };
       let gdp_ppp_options = { overwrite: overwrite, ...(options.gdp_ppp || {}) };
       let gdp_ppp_sedac_options = { exclude: ["A"], overwrite: overwrite, ...(options.gdp_ppp_sedac || {}) };
@@ -182,11 +182,12 @@
         if (global.GDP_nominal_SEDAC) await GDP_nominal_SEDAC.processRasters(gdp_nom_sedac_options);
       }
       
-      if (global.GDP_PPP_OLS) await GDP_PPP_OLS.processRasters(gdp_ppp_ols_options);
-      if (global.GDP_PPP) await GDP_PPP.processRasters(gdp_ppp_options);
-      
-      if (global.GDP_nominal_OLS) await GDP_nominal_OLS.processRasters(gdp_nom_ols_options);
-      if (global.GDP_nominal) await GDP_nominal.processRasters(gdp_nom_options);
+      // Deprecated: GDP PPP and GDP Nominal are now processed via GDP_pc & GDP_PPP_pc (inverted logic)
+      // if (global.GDP_PPP_OLS) await GDP_PPP_OLS.processRasters(gdp_ppp_ols_options);
+      // if (global.GDP_PPP) await GDP_PPP.processRasters(gdp_ppp_options);
+      // 
+      // if (global.GDP_nominal_OLS) await GDP_nominal_OLS.processRasters(gdp_nom_ols_options);
+      // if (global.GDP_nominal) await GDP_nominal.processRasters(gdp_nom_options);
     }
     
     /**
@@ -222,9 +223,11 @@
       }
       
       //Function body
-      console.log(`[NWM] === Step D: Processing Per Capita GDP ===`);
-      if (global.GDP_PPP_pc) await GDP_PPP_pc.processRasters(gdp_ppp_pc_options);
-      if (global.GDP_pc) await GDP_pc.processRasters(gdp_pc_options);
+      console.log(`[NWM] === Step D: Processing Per Capita GDP (Parallelised) ===`);
+      let gdp_pc_tasks = [];
+      if (global.GDP_PPP_pc) gdp_pc_tasks.push(GDP_PPP_pc.processRasters(gdp_ppp_pc_options));
+      if (global.GDP_pc) gdp_pc_tasks.push(GDP_pc.processRasters(gdp_pc_options));
+      await Promise.all(gdp_pc_tasks);
     }
     
     /**
@@ -523,7 +526,7 @@
       //Function body
       console.log(`[NWM] Launching Master NWM Pipeline${options.skip_primary ? " (Skip Primary Databases & Ingests)" : ""}${options.skip_training ? " (Skip Training / Reusing Existing Models)" : ""}...`);
       this.loadDependencies(options);
-      
+
       if (should_run("A", "substrata")) await this.A_processSubstrata(options);
       if (should_run("B", "stadester")) await this.B_processStadester(options);
       if (should_run("C", "eoscala_gdp")) await this.C_processEoscalaGDP(options);

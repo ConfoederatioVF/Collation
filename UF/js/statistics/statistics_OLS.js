@@ -655,7 +655,8 @@
 					let loaded_obj = await Statistics.loadOLSCovariates(task_def.target_file_path, {
 						covariates_obj: task_def.covariates_map,
 						formatting_parameters: (task_def.options && task_def.options.formatting_parameters) ? task_def.options.formatting_parameters : [],
-						utility_format: task_def.target_format || "float32"
+						utility_format: task_def.target_format || "float32",
+						weight_file_path: (task_def.options && task_def.options.weight_file_path) ? task_def.options.weight_file_path : undefined
 					});
 					if (task_def.options && task_def.options.filter_zero_targets && loaded_obj && loaded_obj.Y) {
 						let filtered_X = [];

@@ -161,6 +161,34 @@ let nearlyEqual = function (a, b, tolerance) {
 	});
 	assert(cohorts.every((cohort) => empirical[cohort] === base_counts[cohort]), "M2 overrode direct empirical data.");
 
+	//Vectorised shock buffer application must match object-level applyShocks exactly.
+	let test_counts_arr = cohorts.map((c) => base_counts[c]);
+	age_sex_classifier_shocks.applyShocksToBuffer(test_counts_arr, cohorts, {
+		catalogues: synthetic_catalogues,
+		empirical_available: false,
+		geocode: "TST",
+		year: 0
+	});
+	for (let c = 0; c < cohorts.length; c++) {
+		assert(nearlyEqual(test_counts_arr[c], adjusted[cohorts[c]], 1e-12),
+			`applyShocksToBuffer diverged from applyShocks on cohort ${cohorts[c]}`);
+	}
+
+	//Stage model compilation must produce valid Float64Array structures matching predictM1.
+	let compiled_models = age_sex_classifier_rasters._compileStageModels({
+		CDT1: uniform_model,
+		CDT2: youth_model
+	}, cohorts, ["x"]);
+	assert(compiled_models.CDT1.intercepts instanceof Float64Array, "Compiled intercepts is not a Float64Array.");
+	assert(typeof age_sex_classifier._buildISOColourLookupPacked === "function", "Missing _buildISOColourLookupPacked.");
+	assert(typeof age_sex_classifier._buildHMDColourLookupPacked === "function", "Missing _buildHMDColourLookupPacked.");
+
+	//HYDE temporal domain must span 10000 BC (-10000) to 2025 AD across 128 canonical time steps.
+	let hyde_years = age_sex_classifier.getHYDEYears();
+	assert(Array.isArray(hyde_years) && hyde_years.length === 128, `Expected 128 HYDE years, got ${hyde_years.length}`);
+	assert(hyde_years[0] === -10000, `First HYDE year must be -10000 (10000 BC), got ${hyde_years[0]}`);
+	assert(hyde_years[hyde_years.length - 1] === 2025, `Last HYDE year must be 2025 (2025 AD), got ${hyde_years[hyde_years.length - 1]}`);
+
 	//All curated entries must carry provenance and the implementation must not call PAVA.
 	for (let type of ["fertility", "migration", "mortality"]) {
 		let catalogue = age_sex_classifier.loadM2Catalogues()[type];

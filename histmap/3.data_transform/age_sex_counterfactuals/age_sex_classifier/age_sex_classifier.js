@@ -33,6 +33,25 @@ global.age_sex_classifier = class {
 		return cohorts;
 	}
 
+	/**
+	 * Returns the sorted canonical HYDE timeseries years spanning 10000 BC (-10000) to 2025 AD.
+	 * @alias age_sex_classifier.getHYDEYears
+	 *
+	 * @returns {Array<number>}
+	 */
+	static getHYDEYears () {
+		if (typeof landuse_HYDE !== "undefined" && Array.isArray(landuse_HYDE.sorted_hyde_years))
+			return landuse_HYDE.sorted_hyde_years;
+
+		let years = [
+			-10000, -9000, -8000, -7000, -6000, -5000, -4000, -3000, -2000, -1000,
+			0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700,
+			1710, 1720, 1730, 1740, 1750, 1760, 1770, 1780, 1790, 1800, 1810, 1820, 1830, 1840, 1850, 1860, 1870, 1880, 1890, 1900, 1910, 1920, 1930, 1940, 1950,
+			1951, 1952, 1953, 1954, 1955, 1956, 1957, 1958, 1959, 1960, 1961, 1962, 1963, 1964, 1965, 1966, 1967, 1968, 1969, 1970, 1971, 1972, 1973, 1974, 1975, 1976, 1977, 1978, 1979, 1980, 1981, 1982, 1983, 1984, 1985, 1986, 1987, 1988, 1989, 1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025
+		];
+		return years.sort((a, b) => a - b);
+	}
+
 	static getConfig () {
 		if (this._config) return this._config;
 		let defaults = {
@@ -103,9 +122,9 @@ global.age_sex_classifier = class {
 
 	static _loadHMDLifeTableSurvivorship (arg0_years) {
 		let years = new Set((arg0_years || []).map(String));
-		let file_path = births_deaths_HMD.input_HMD_female_deaths_file;
+		let file_path = (typeof births_deaths_HMD !== "undefined") ? births_deaths_HMD.input_HMD_female_deaths_file : "";
 		let return_obj = {};
-		if (!fs.existsSync(file_path)) return return_obj;
+		if (!file_path || !fs.existsSync(file_path)) return return_obj;
 		let lines = fs.readFileSync(file_path, "utf8").split(/\r?\n/);
 		for (let i = 0; i < lines.length; i++) {
 			let columns = lines[i].trim().split(/\s+/);
@@ -161,7 +180,8 @@ global.age_sex_classifier = class {
 		let year = Number(arg0_year);
 		let raw_data = arg1_raw_data || {};
 		let lookup = {};
-		let geocodes = admin_modern.getHMDColourcodesObject();
+		let geocodes = (typeof admin_modern !== "undefined" && typeof admin_modern.getHMDColourcodesObject === "function") ?
+			admin_modern.getHMDColourcodesObject() : {};
 		Object.iterate(geocodes, (geocode, data) => {
 			if (data.domain && (year < data.domain[0] || year > data.domain[1])) return;
 			let base = geocode.split(".")[0];
@@ -172,9 +192,32 @@ global.age_sex_classifier = class {
 		return lookup;
 	}
 
+	static _buildHMDColourLookupPacked (arg0_year, arg1_raw_data) {
+		let year = Number(arg0_year);
+		let raw_data = arg1_raw_data || {};
+		let lookup = {};
+		let geocodes = (typeof admin_modern !== "undefined" && typeof admin_modern.getHMDColourcodesObject === "function") ?
+			admin_modern.getHMDColourcodesObject() : {};
+		Object.iterate(geocodes, (geocode, data) => {
+			if (data.domain && (year < data.domain[0] || year > data.domain[1])) return;
+			let base = geocode.split(".")[0];
+			let resolved = raw_data[geocode] ? geocode : (raw_data[base] ? base : null);
+			if (!resolved) return;
+			for (let i = 0; i < data.colours.length; i++) {
+				let parts = data.colours[i].split(",");
+				if (parts.length >= 3) {
+					let packed = (Number(parts[0]) << 16) | (Number(parts[1]) << 8) | Number(parts[2]);
+					lookup[packed] = resolved;
+				}
+			}
+		});
+		return lookup;
+	}
+
 	static _buildISOColourLookup (arg0_raw_data) {
 		let raw_data = arg0_raw_data || {};
-		let source = admin_modern.getISO3ColourcodesObject();
+		let source = (typeof admin_modern !== "undefined" && typeof admin_modern.getISO3ColourcodesObject === "function") ?
+			admin_modern.getISO3ColourcodesObject() : {};
 		let lookup = {};
 		Object.iterate(source, (colour, geocodes) => {
 			for (let i = 0; i < geocodes.length; i++) {
@@ -187,15 +230,38 @@ global.age_sex_classifier = class {
 		return lookup;
 	}
 
+	static _buildISOColourLookupPacked (arg0_raw_data) {
+		let raw_data = arg0_raw_data || {};
+		let source = (typeof admin_modern !== "undefined" && typeof admin_modern.getISO3ColourcodesObject === "function") ?
+			admin_modern.getISO3ColourcodesObject() : {};
+		let lookup = {};
+		Object.iterate(source, (colour, geocodes) => {
+			for (let i = 0; i < geocodes.length; i++) {
+				if (raw_data[geocodes[i]]) {
+					let parts = colour.split(",");
+					if (parts.length >= 3) {
+						let packed = (Number(parts[0]) << 16) | (Number(parts[1]) << 8) | Number(parts[2]);
+						lookup[packed] = geocodes[i];
+					}
+					break;
+				}
+			}
+		});
+		return lookup;
+	}
+
 	static _aggregateArealCovariates (arg0_year, arg1_source, arg2_raw_data, arg3_keys) {
 		let year = Number(arg0_year);
 		let source = arg1_source;
 		let raw_data = arg2_raw_data || {};
 		let keys = arg3_keys || [];
-		let geocode_path = source === "HMD" ? admin_modern.input_hmd_raster : admin_modern.input_geocodes_raster;
+		let geocode_path = source === "HMD" ?
+			(typeof admin_modern !== "undefined" ? admin_modern.input_hmd_raster : null) :
+			(typeof admin_modern !== "undefined" ? admin_modern.input_geocodes_raster : null);
+		if (!geocode_path || !fs.existsSync(geocode_path)) return {};
 		let geocode_raster = GeoPNG.loadImage(geocode_path);
 		let colour_lookup = source === "HMD" ?
-			this._buildHMDColourLookup(year, raw_data) : this._buildISOColourLookup(raw_data);
+			this._buildHMDColourLookupPacked(year, raw_data) : this._buildISOColourLookupPacked(raw_data);
 		let format_year = year > 2023 ? 2023 : year;
 		let pop_info = this.covariates_obj.popc_?.(format_year);
 		if (!pop_info || !fs.existsSync(pop_info[0])) return {};
@@ -208,12 +274,15 @@ global.age_sex_classifier = class {
 		}
 		let aggregates = {};
 		let pixels = geocode_raster.data.length/4;
+		let geocode_data = geocode_raster.data;
+		let pop_data = population_raster.data;
 		for (let i = 0; i < pixels; i++) {
-			let colour = `${geocode_raster.data[i*4]},${geocode_raster.data[i*4 + 1]},${geocode_raster.data[i*4 + 2]}`;
-			let geocode = colour_lookup[colour];
-			if (!geocode) continue;
-			let population = this._safeNumber(population_raster.data[i], 0);
+			let population = this._safeNumber(pop_data[i], 0);
 			if (population <= 0) continue;
+			let byte_idx = i*4;
+			let packed = (geocode_data[byte_idx] << 16) | (geocode_data[byte_idx + 1] << 8) | geocode_data[byte_idx + 2];
+			let geocode = colour_lookup[packed];
+			if (!geocode) continue;
 			if (!aggregates[geocode]) {
 				aggregates[geocode] = { population: 0, sums: {} };
 				for (let k = 0; k < keys.length; k++) aggregates[geocode].sums[keys[k]] = 0;
@@ -241,34 +310,158 @@ global.age_sex_classifier = class {
 		return aggregates;
 	}
 
+	static async _aggregateArealCovariatesAsync (arg0_year, arg1_source, arg2_raw_data, arg3_keys) {
+		let year = Number(arg0_year);
+		let source = arg1_source;
+		let raw_data = arg2_raw_data || {};
+		let keys = arg3_keys || [];
+		let geocode_path = source === "HMD" ?
+			(typeof admin_modern !== "undefined" ? admin_modern.input_hmd_raster : null) :
+			(typeof admin_modern !== "undefined" ? admin_modern.input_geocodes_raster : null);
+		if (!geocode_path || !fs.existsSync(geocode_path)) return {};
+		let geocode_raster = GeoPNG.loadImage(geocode_path);
+		let colour_lookup = source === "HMD" ?
+			this._buildHMDColourLookupPacked(year, raw_data) : this._buildISOColourLookupPacked(raw_data);
+		let format_year = year > 2023 ? 2023 : year;
+		let pop_info = this.covariates_obj.popc_?.(format_year);
+		if (!pop_info || !fs.existsSync(pop_info[0])) return {};
+		let population_raster = await GeoPNG.loadNumberRasterImageAsync(pop_info[0], { format: pop_info[1] || "float32" });
+		let covariate_rasters = {};
+		for (let k = 0; k < keys.length; k++) {
+			let info = this.covariates_obj[keys[k]]?.(format_year);
+			if (info && fs.existsSync(info[0]))
+				covariate_rasters[keys[k]] = await GeoPNG.loadNumberRasterImageAsync(info[0], { format: info[1] || "float32" });
+		}
+		let aggregates = {};
+		let width = population_raster.width || 4320;
+		let height = population_raster.height || 2160;
+		let geocode_data = geocode_raster.data;
+		let pop_data = population_raster.data;
+
+		for (let y = 0; y < height; y++) {
+			let row_offset = y*width;
+			for (let x = 0; x < width; x++) {
+				let i = row_offset + x;
+				let population = pop_data[i];
+				if (population <= 0 || isNaN(population)) continue;
+				let byte_idx = i*4;
+				let packed = (geocode_data[byte_idx] << 16) | (geocode_data[byte_idx + 1] << 8) | geocode_data[byte_idx + 2];
+				let geocode = colour_lookup[packed];
+				if (!geocode) continue;
+				let agg = aggregates[geocode];
+				if (!agg) {
+					agg = { population: 0, sums: {} };
+					for (let k = 0; k < keys.length; k++) agg.sums[keys[k]] = 0;
+					aggregates[geocode] = agg;
+				}
+				agg.population += population;
+				for (let k = 0; k < keys.length; k++) {
+					let raster = covariate_rasters[keys[k]];
+					if (raster) {
+						let value = raster.data[i];
+						if (Number.isFinite(value)) agg.sums[keys[k]] += value*population;
+					}
+				}
+			}
+			if (y % 100 === 0 && typeof Blacktraffic !== "undefined" && Blacktraffic.yield)
+				await Blacktraffic.yield(0);
+		}
+
+		Object.iterate(aggregates, (geocode, aggregate) => {
+			aggregate.features = {};
+			for (let k = 0; k < keys.length; k++)
+				aggregate.features[keys[k]] = aggregate.population > 0 ? aggregate.sums[keys[k]]/aggregate.population : 0;
+			delete aggregate.sums;
+			let local_urban = aggregate.features.urbc_ || 0;
+			let local_rural = aggregate.features.rurc_ || 0;
+			let local_total = local_urban + local_rural || aggregate.features.popc_ || aggregate.population;
+			aggregate.features.urban_share = local_total > 0 ? local_urban/local_total : 0;
+			aggregate.features.log_population_density = Math.log(Math.max(0.01, aggregate.features.popd_ || 0));
+			aggregate.features.log_gdp_ppp_pc = Math.log(Math.max(1, aggregate.features.gdp_ppp_pc || 0));
+			aggregate.features.year_scaled = year/1000;
+		});
+		return aggregates;
+	}
+
 	static async _collectEmpiricalRows (arg0_options) {
 		let options = arg0_options || {};
 		let config = this.getConfig();
-		let years = options.years || config.training_years;
+		let years = options.training_years || options.years || config.training_years;
 		let keys = options.covariates || config.covariates;
 		let cohorts = this.getCohorts();
-		let hmd_targets = age_sex_HMD.A_getHMDObject();
-		let unwpp_targets = await age_sex_UNWPP.A_getUNWPPGroups();
-		let hmd_components = births_deaths_HMD.A_getHMDGroups();
-		let unwpp_components = await births_deaths_UNWPP.A_getUNWPPGroups();
+		let hmd_targets = (typeof age_sex_HMD !== "undefined" && typeof age_sex_HMD.A_getHMDObject === "function") ?
+			age_sex_HMD.A_getHMDObject() : {};
+		let unwpp_targets = (typeof age_sex_UNWPP !== "undefined" && typeof age_sex_UNWPP.A_getUNWPPGroups === "function") ?
+			await age_sex_UNWPP.A_getUNWPPGroups() : {};
+		let hmd_components = (typeof births_deaths_HMD !== "undefined" && typeof births_deaths_HMD.A_getHMDGroups === "function") ?
+			births_deaths_HMD.A_getHMDGroups() : { births: {}, female_deaths: {}, male_deaths: {} };
+		let unwpp_components = (typeof births_deaths_UNWPP !== "undefined" && typeof births_deaths_UNWPP.A_getUNWPPGroups === "function") ?
+			await births_deaths_UNWPP.A_getUNWPPGroups() : { births: {}, deaths: {} };
 		let hmd_survivorship = this._loadHMDLifeTableSurvivorship(years.filter((year) => Number(year) < 1950));
 		let global_donor = {};
 		let donor_count = 0;
-		Object.iterate(unwpp_components.births, (iso3, year_obj) => {
-			let donor = this._getBirthSchedule(year_obj["1950"]);
-			if (Object.values(donor).some((value) => value > 0)) {
-				Object.iterate(donor, (age, value) => global_donor[age] = (global_donor[age] || 0) + value);
-				donor_count++;
+		if (unwpp_components && unwpp_components.births) {
+			Object.iterate(unwpp_components.births, (iso3, year_obj) => {
+				let donor = this._getBirthSchedule(year_obj["1950"]);
+				if (Object.values(donor).some((value) => value > 0)) {
+					Object.iterate(donor, (age, value) => global_donor[age] = (global_donor[age] || 0) + value);
+					donor_count++;
+				}
+			});
+		}
+		if (donor_count > 0) Object.keys(global_donor).forEach((age) => global_donor[age] /= donor_count);
+
+		//Concurrently aggregate areal covariates across worker threads
+		let year_aggregates_list = await GeoPNG.processTimeseriesParallel({
+			concurrency: options.concurrency || 4,
+			items: years,
+			name: "Step A: Empirical Covariates",
+			task_generator: (year_val) => {
+				let year = Number(year_val);
+				let source = year < 1950 ? "HMD" : "UNWPP";
+				let target_data = source === "HMD" ? hmd_targets : unwpp_targets;
+				let geocode_path = source === "HMD" ?
+					(typeof admin_modern !== "undefined" ? admin_modern.input_hmd_raster : null) :
+					(typeof admin_modern !== "undefined" ? admin_modern.input_geocodes_raster : null);
+				let colour_lookup_packed = source === "HMD" ?
+					this._buildHMDColourLookupPacked(year, target_data) :
+					this._buildISOColourLookupPacked(target_data);
+				let format_year = year > 2023 ? 2023 : year;
+				let pop_info = this.covariates_obj.popc_?.(format_year);
+				let covariate_paths = {};
+				for (let k = 0; k < keys.length; k++) {
+					let info = this.covariates_obj[keys[k]]?.(format_year);
+					if (info && fs.existsSync(info[0]))
+						covariate_paths[keys[k]] = { path: info[0], format: info[1] || "float32" };
+				}
+
+				return {
+					colour_lookup_packed: colour_lookup_packed,
+					covariate_paths: covariate_paths,
+					geocode_path: geocode_path,
+					keys: keys,
+					population_format: pop_info ? (pop_info[1] || "float32") : "float32",
+					population_path: pop_info ? pop_info[0] : null,
+					type: "aggregate_areal_covariates",
+					year: year
+				};
+			},
+			use_workers: options.use_workers !== undefined ? options.use_workers : true,
+			handler: async (year_val) => {
+				let year = Number(year_val);
+				let source = year < 1950 ? "HMD" : "UNWPP";
+				let target_data = source === "HMD" ? hmd_targets : unwpp_targets;
+				return await this._aggregateArealCovariatesAsync(year, source, target_data, keys);
 			}
 		});
-		if (donor_count > 0) Object.keys(global_donor).forEach((age) => global_donor[age] /= donor_count);
+
 		let rows = [];
 
 		for (let y = 0; y < years.length; y++) {
 			let year = Number(years[y]);
 			let source = year < 1950 ? "HMD" : "UNWPP";
 			let target_data = source === "HMD" ? hmd_targets : unwpp_targets;
-			let aggregates = this._aggregateArealCovariates(year, source, target_data, keys);
+			let aggregates = year_aggregates_list[y] || {};
 			Object.iterate(aggregates, (geocode, aggregate) => {
 				let target = target_data[geocode]?.[String(year)];
 				if (!target) return;
@@ -513,21 +706,143 @@ global.age_sex_classifier = class {
 	}
 
 	/**
-	 * Runs the standalone classifier without changing NWM or production age_sex outputs.
+	 * Runs the standalone classifier across all HYDE years (10000 BC to 2025 AD).
+	 * @alias age_sex_classifier.processRasters
+	 *
+	 * @param {Object} [arg0_options]
+	 *  @param {number} [arg0_options.concurrency=4]
+	 *  @param {Array<string>} [arg0_options.exclude] - Steps to exclude: ["A", "B", "C", "D", "E", "F"].
+	 *  @param {boolean} [arg0_options.publish=false] - If true, copies final composite rasters into age_sex.output_rasters.
+	 *  @param {Array<number>} [arg0_options.raster_years] - Custom subset of raster years to process (defaults to all 128 HYDE years).
+	 *  @param {Array<number>} [arg0_options.training_years] - Custom empirical anchor years (defaults to config.training_years).
+	 *  @param {Array<number>} [arg0_options.years] - Alias for raster_years.
+	 *
+	 * @returns {Promise<Object>}
 	 */
 	static async processRasters (arg0_options) {
-		let options = arg0_options || {};
+		//Convert from parameters
+		let options = (arg0_options) ? arg0_options : {};
+
+		//Initialise options
 		if (!options.exclude) options.exclude = [];
+		let config = this.getConfig();
+		let raster_years = options.raster_years || options.years || this.getHYDEYears();
+		let training_years = options.training_years || config.training_years;
+
+		//Declare local instance variables
+		let pipeline_start = Date.now();
 		let rows;
-		if (!options.exclude.includes("A")) rows = await this.A_buildTrainingDataset(options);
-		if (!options.exclude.includes("B")) await this.B_trainStageClassifier({ ...options, observations: rows });
-		if (!options.exclude.includes("C")) await this.C_trainArchetypeModels(options);
-		if (!options.exclude.includes("D")) this.D_buildM1Weights(options);
-		if (!options.exclude.includes("E")) await this.E_generateM1Rasters(options);
-		if (!options.exclude.includes("F")) await this.F_applyM2AndComposite(options);
+
+		let formatDuration = (start_time) => {
+			let elapsed = (Date.now() - start_time)/1000;
+			return `${elapsed.toFixed(2)}s`;
+		};
+
+		let sendTelemetry = (step_name, percent) => {
+			if (typeof require !== "undefined") {
+				try {
+					let ipc = require("electron").ipcRenderer;
+					if (ipc) {
+						ipc.send("training:telemetry", {
+							task_name: `Classifier [${step_name}]`,
+							percent: percent,
+							progress: percent/100
+						});
+					}
+				} catch (e) {}
+			}
+		};
+
+		console.log(`========================================================================`);
+		console.log(`[age_sex_classifier] Starting Standalone Counterfactual Pipeline`);
+		console.log(`- Raster temporal domain: ${raster_years.length} HYDE years (${raster_years[0]} to ${raster_years[raster_years.length - 1]})`);
+		console.log(`- Empirical calibration:  ${training_years.length} benchmark years (${training_years[0]} to ${training_years[training_years.length - 1]})`);
+		console.log(`- Destination folder:     ${this.output_rasters}`);
+		if (options.publish)
+			console.log(`- Production target:      ${typeof age_sex !== "undefined" ? age_sex.output_rasters : "N/A"}`);
+		console.log(`========================================================================`);
+
+		//Step A: Empirical training dataset
+		if (!options.exclude.includes("A")) {
+			let step_start = Date.now();
+			console.log(`- [age_sex_classifier] Step A: Building empirical training dataset (${training_years.length} anchor years)...`);
+			sendTelemetry("Step A: Dataset", 5);
+			if (typeof Blacktraffic !== "undefined" && Blacktraffic.yield) await Blacktraffic.yield(0);
+			rows = await this.A_buildTrainingDataset({ ...options, training_years: training_years });
+			console.log(`- [age_sex_classifier] Step A completed in ${formatDuration(step_start)} (${rows.length} empirical rows).`);
+		}
+
+		//Step B: Bayesian stage classifier
+		if (!options.exclude.includes("B")) {
+			let step_start = Date.now();
+			console.log(`- [age_sex_classifier] Step B: Training Bayes stage transition classifier...`);
+			sendTelemetry("Step B: Bayes", 20);
+			if (typeof Blacktraffic !== "undefined" && Blacktraffic.yield) await Blacktraffic.yield(0);
+			await this.B_trainStageClassifier({ ...options, observations: rows });
+			console.log(`- [age_sex_classifier] Step B completed in ${formatDuration(step_start)}.`);
+		}
+
+		//Step C: CDT archetype multinomial logit models
+		if (!options.exclude.includes("C")) {
+			let step_start = Date.now();
+			console.log(`- [age_sex_classifier] Step C: Fitting CDT archetype multinomial models...`);
+			sendTelemetry("Step C: Archetypes", 40);
+			if (typeof Blacktraffic !== "undefined" && Blacktraffic.yield) await Blacktraffic.yield(0);
+			await this.C_trainArchetypeModels(options);
+			console.log(`- [age_sex_classifier] Step C completed in ${formatDuration(step_start)}.`);
+		}
+
+		//Step D: Build M1 weights sequence
+		if (!options.exclude.includes("D")) {
+			let step_start = Date.now();
+			console.log(`- [age_sex_classifier] Step D: Building M1 archetype weights sequence...`);
+			sendTelemetry("Step D: Weights", 55);
+			if (typeof Blacktraffic !== "undefined" && Blacktraffic.yield) await Blacktraffic.yield(0);
+			this.D_buildM1Weights(options);
+			console.log(`- [age_sex_classifier] Step D completed in ${formatDuration(step_start)}.`);
+		}
+
+		//Step E: Generate M1 mixture rasters
+		if (!options.exclude.includes("E")) {
+			let step_start = Date.now();
+			console.log(`- [age_sex_classifier] Step E: Generating M1 mixture rasters for ${raster_years.length} years...`);
+			sendTelemetry("Step E: M1 Rasters", 60);
+			if (typeof Blacktraffic !== "undefined" && Blacktraffic.yield) await Blacktraffic.yield(0);
+			await this.E_generateM1Rasters({ ...options, years: raster_years });
+			console.log(`- [age_sex_classifier] Step E completed in ${formatDuration(step_start)}.`);
+		}
+
+		//Step F: Apply M2 shocks and composite with empirical masks
+		if (!options.exclude.includes("F")) {
+			let step_start = Date.now();
+			console.log(`- [age_sex_classifier] Step F: Applying M2 priors and compositing cohorts for ${raster_years.length} years...`);
+			sendTelemetry("Step F: M2 Compositing", 85);
+			if (typeof Blacktraffic !== "undefined" && Blacktraffic.yield) await Blacktraffic.yield(0);
+			await this.F_applyM2AndComposite({ ...options, years: raster_years });
+			console.log(`- [age_sex_classifier] Step F completed in ${formatDuration(step_start)}.`);
+		}
+
+		sendTelemetry("Complete", 100);
+		console.log(`========================================================================`);
+		console.log(`[age_sex_classifier] Pipeline completed in ${formatDuration(pipeline_start)}.`);
+		console.log(`[age_sex_classifier] Output directories:`);
+		console.log(`  - M1 probabilities:  ${this.m1_rasters}`);
+		console.log(`  - M2 clamped:        ${this.m2_rasters}`);
+		console.log(`  - Composite cohorts: ${this.output_rasters}`);
+		if (options.publish && typeof age_sex !== "undefined")
+			console.log(`  - Production target: ${age_sex.output_rasters}`);
+		console.log(`========================================================================`);
+
+		//Return statement
 		return {
 			manifest: this.manifest_file,
 			weights: this.weights_file,
+			m1_rasters: this.m1_rasters,
+			m2_rasters: this.m2_rasters,
+			output_rasters: this.output_rasters,
+			production_rasters: (typeof age_sex !== "undefined") ? age_sex.output_rasters : null,
+			years_processed: raster_years,
+			total_years: raster_years.length,
 			m2: [this.fertility_shocks_file, this.migration_shocks_file, this.mortality_shocks_file],
 			pava: false
 		};

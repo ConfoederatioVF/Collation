@@ -32,7 +32,7 @@ global.GDP_nominal_SEDAC = class {
 				format: "float32"
 			});
 			let local_target = world_gdp_obj[years[i]];
-			let local_scalar = local_target / local_input_sum;
+			let local_scalar = (local_input_sum > 0) ? local_target / local_input_sum : 1;
 			
 			GeoPNG.saveNumberRasterImage({
 				file_path: local_file_path,
@@ -59,11 +59,10 @@ global.GDP_nominal_SEDAC = class {
 				file_path: local_file_path,
 				format: "float32",
 				function: (local_index, local_value) => {
-					let local_byte_index = local_index * 4;
 					let local_colour_key = [
-						geocode_raster.data[local_byte_index],
-						geocode_raster.data[local_byte_index + 1],
-						geocode_raster.data[local_byte_index + 2]
+						geocode_raster.data[local_index],
+						geocode_raster.data[local_index + 1],
+						geocode_raster.data[local_index + 2]
 					].join(",");
 					let local_geocodes = geocode_obj[local_colour_key];
 					
@@ -74,7 +73,7 @@ global.GDP_nominal_SEDAC = class {
 			});
 			Object.iterate(local_gdp_sums, (local_key, local_value) => {
 				let local_actual_gdp = gdp_obj[local_key]?.[years[i]];
-				local_gdp_scalars[local_key] = (local_actual_gdp) ? local_actual_gdp / local_value : 1;
+				local_gdp_scalars[local_key] = (local_actual_gdp && local_value > 0) ? local_actual_gdp / local_value : 1;
 			});
 			
 			//2. Scale by local_gdp_scalars
@@ -96,7 +95,8 @@ global.GDP_nominal_SEDAC = class {
 					if (local_geocodes)
 						for (let x = 0; x < local_geocodes.length; x++) {
 							let local_gdp = gdp_obj[local_geocodes[x]]?.[years[i]];
-							if (local_gdp) return local_value * local_gdp_scalars[local_geocodes[x]];
+							let local_scalar = local_gdp_scalars[local_geocodes[x]];
+							if (local_gdp && isFinite(local_scalar)) return local_value * local_scalar;
 						}
 					return local_value;
 				}

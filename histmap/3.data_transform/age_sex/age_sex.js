@@ -195,7 +195,9 @@ global.age_sex = class {
 					fit_intercept: (options.fit_intercept !== undefined) ? options.fit_intercept : false,
 					lambda: Math.returnSafeNumber(options.lambda, 0),
 					learning_rate: Math.returnSafeNumber(options.learning_rate, 0.1),
-					max_iterations: Math.returnSafeNumber(options.max_iterations, 1000)
+					max_iterations: Math.returnSafeNumber(options.max_iterations, 50),
+					sample_limit: Math.returnSafeNumber(options.sample_limit, 15000),
+					tolerance: Math.returnSafeNumber(options.tolerance, 1e-4)
 				},
 				target_paths: target_paths
 			};
@@ -488,7 +490,7 @@ global.age_sex = class {
 
 				for (let i = 0; i < total_pixels; i++) {
 					let stade_pop = popc_raster.data[i];
-					if (stade_pop <= 0 || isNaN(stade_pop)) continue;
+					if (stade_pop < 0.01 || isNaN(stade_pop)) continue;
 
 					for (let k = 0; k < age_count; k++) {
 						let f_val = prob_rasters[cohorts[f_indices[k]]].data[i];

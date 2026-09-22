@@ -124,18 +124,34 @@ global.age_sex_classifier_shocks = class {
 		}
 	}
 
-	static applyShocks (arg0_counts_obj, arg1_context) {
-		let counts_obj = arg0_counts_obj || {};
-		let context = arg1_context || {};
-		let cohorts = context.cohorts || Object.keys(counts_obj);
-		let counts = cohorts.map((cohort) => Math.max(0, this._safeNumber(counts_obj[cohort], 0)));
-		let original_total = counts.reduce((sum, value) => sum + value, 0);
+	/**
+	 * Applies shocks in-place to an array or TypedArray of cohort counts without allocating intermediate objects.
+	 * @alias age_sex_classifier_shocks.applyShocksToBuffer
+	 *
+	 * @param {Array<number>|Float64Array} arg0_counts
+	 * @param {Array<string>} arg1_cohorts
+	 * @param {Object} [arg2_context]
+	 *
+	 * @returns {Array<number>|Float64Array}
+	 */
+	static applyShocksToBuffer (arg0_counts, arg1_cohorts, arg2_context) {
+		//Convert from parameters
+		let counts = arg0_counts;
+		let cohorts = arg1_cohorts;
+		let context = (arg2_context) ? arg2_context : {};
 
-		//Direct observations are evidence, not a canvas for historical priors.
-		if (context.empirical_available || original_total <= 0)
-			return Object.fromEntries(cohorts.map((cohort, index) => [cohort, counts[index]]));
-
+		//Declare local instance variables
 		let catalogues = context.catalogues || {};
+		let original_total = 0;
+
+		//Calculate original total
+		for (let c = 0; c < counts.length; c++)
+			original_total += Math.max(0, this._safeNumber(counts[c], 0));
+
+		//Guard clauses
+		if (context.empirical_available || original_total <= 0) return counts;
+
+		//Iterate through shock catalogues
 		let ordered_types = ["fertility", "mortality", "migration"];
 		for (let t = 0; t < ordered_types.length; t++) {
 			let type = ordered_types[t];
@@ -144,20 +160,41 @@ global.age_sex_classifier_shocks = class {
 				let shock = shocks[s];
 				if (!this._appliesToGeocode(shock, context.geocode)) continue;
 				if (Number(context.year) < Number(shock.start_year)) continue;
-				if (type === "fertility")
+				if (type === "fertility") {
 					this._applyFertilityShock(counts, cohorts, shock, context.year);
-				else
+				} else {
 					this._applyCountShock(counts, cohorts, shock, context.year, original_total);
+				}
 			}
 		}
 
-		for (let c = 0; c < counts.length; c++)
+		let adjusted_total = 0;
+		for (let c = 0; c < counts.length; c++) {
 			counts[c] = Math.max(0, this._safeNumber(counts[c], 0));
-		let adjusted_total = counts.reduce((sum, value) => sum + value, 0);
+			adjusted_total += counts[c];
+		}
 		if (adjusted_total > 0) {
 			let scalar = original_total/adjusted_total;
 			for (let c = 0; c < counts.length; c++) counts[c] *= scalar;
 		}
+
+		//Return statement
+		return counts;
+	}
+
+	static applyShocks (arg0_counts_obj, arg1_context) {
+		//Convert from parameters
+		let counts_obj = (arg0_counts_obj) ? arg0_counts_obj : {};
+		let context = (arg1_context) ? arg1_context : {};
+
+		//Declare local instance variables
+		let cohorts = context.cohorts || Object.keys(counts_obj);
+		let counts = cohorts.map((cohort) => Math.max(0, this._safeNumber(counts_obj[cohort], 0)));
+
+		//Function body
+		this.applyShocksToBuffer(counts, cohorts, context);
+
+		//Return statement
 		return Object.fromEntries(cohorts.map((cohort, index) => [cohort, counts[index]]));
 	}
 };

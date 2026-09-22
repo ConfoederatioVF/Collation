@@ -72,13 +72,7 @@ global.GDP_PPP_OLS = class {
 	}
 	
 	static async processRasters (arg0_options) {
-		//Convert from parameters
-		let options = (arg0_options) ? arg0_options : {};
-		
-		//Initialise options
-		if (!options.exclude) options.exclude = [];
-		
-		//1. Generate OLS rasters
-		if (!options.exclude.includes("A")) await this.A_generateOLS_GDP_PPPRasters(options);
+		// Deprecated: GDP PPP is now dynamically derived from GDP_PPP_pc (inverted logic pipeline).
+		return;
 	}
 };

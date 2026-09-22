@@ -342,9 +342,9 @@
       width: 4320,
       function: function (local_index) {
         let ghsl_val = (ghsl_raster && ghsl_raster.data[local_index]) ? ghsl_raster.data[local_index] : 0;
-        if (ghsl_val > 0) return ghsl_val;
+        if (ghsl_val >= 0.01) return ghsl_val;
         let base_val = (base_raster && base_raster.data[local_index]) ? base_raster.data[local_index] : 0;
-        return base_val;
+        return (base_val >= 0.01) ? base_val : 0;
       }
     });
     
@@ -410,7 +410,8 @@
       function: function (local_index) {
         let sub_val = (substrata_raster && substrata_raster.data[local_index]) ? substrata_raster.data[local_index] : 0;
         let urb_val = (urban_raster && urban_raster.data[local_index]) ? urban_raster.data[local_index] : 0;
-        return Math.max(0, sub_val - urb_val);
+        let r_val = Math.max(0, sub_val - urb_val);
+        return (r_val >= 0.01) ? r_val : 0;
       }
     });
     
@@ -488,7 +489,8 @@
         function: function (local_index) {
           let r = (rural_raster && rural_raster.data[local_index]) ? rural_raster.data[local_index] : 0;
           let u = (urban_raster && urban_raster.data[local_index]) ? urban_raster.data[local_index] : 0;
-          return r + u;
+          let tot = r + u;
+          return (tot >= 0.01) ? tot : 0;
         }
       });
       
@@ -505,7 +507,8 @@
             height: 2160,
             width: 4320,
             function: function (local_index) {
-              return (pop_raster.data[local_index] || 0)*scalar;
+              let p = (pop_raster.data[local_index] || 0)*scalar;
+              return (p >= 0.01) ? p : 0;
             }
           });
           
@@ -519,7 +522,8 @@
             function: function (local_index) {
               let p = (final_pop_raster && final_pop_raster.data[local_index]) ? final_pop_raster.data[local_index] : 0;
               let u = (urban_raster && urban_raster.data[local_index]) ? urban_raster.data[local_index] : 0;
-              return Math.max(0, p - u);
+              let r = Math.max(0, p - u);
+              return (r >= 0.01) ? r : 0;
             }
           });
         }
@@ -539,7 +543,8 @@
         width: 4320,
         function: function (local_index) {
           let r = (rural_raster && rural_raster.data[local_index]) ? rural_raster.data[local_index] : 0;
-          return r*rural_scalar;
+          let scaled_r = r*rural_scalar;
+          return (scaled_r >= 0.01) ? scaled_r : 0;
         }
       });
       
@@ -553,7 +558,8 @@
         function: function (local_index) {
           let u = (urban_raster && urban_raster.data[local_index]) ? urban_raster.data[local_index] : 0;
           let r = (scaled_rural_raster && scaled_rural_raster.data[local_index]) ? scaled_rural_raster.data[local_index] : 0;
-          return u + r;
+          let tot = u + r;
+          return (tot >= 0.01) ? tot : 0;
         }
       });
     }
@@ -599,7 +605,7 @@
       function: function (local_index) {
         let km2 = (landarea_raster && landarea_raster.data[local_index]) ? landarea_raster.data[local_index] : 0;
         let p = (pop_raster && pop_raster.data[local_index]) ? pop_raster.data[local_index] : 0;
-        if (km2 <= 0 || p <= 0) return 0;
+        if (km2 <= 0 || p < 0.01) return 0;
         let val = p/km2;
         return isFinite(val) ? val : 0;
       }

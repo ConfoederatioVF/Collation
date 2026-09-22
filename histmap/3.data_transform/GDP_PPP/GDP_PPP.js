@@ -241,18 +241,7 @@ global.GDP_PPP = class {
 	}
 	
 	static async processRasters (arg0_options) {
-		//Convert from parameters
-		let options = (arg0_options) ? arg0_options : {};
-		
-		//Initialise options
-		if (!options.exclude) options.exclude = [];
-		
-		//Process intermediates
-		if (!options.exclude.includes("B1"))
-			await this.B_scaleGDP_PPPRastersToGlobal(`${GDP_PPP_OLS.output_ols_folder}OLS_`, this.intermediate_normalised_to_global, options);
-		if (!options.exclude.includes("A"))
-			await this.A_scaleGDP_PPPRastersToNational(options);
-		if (!options.exclude.includes("B2"))
-			await this.B_scaleGDP_PPPRastersToGlobal(this.intermediate_scaled_to_national, this.intermediate_scaled_to_global, options);
+		// Deprecated: GDP PPP is now dynamically derived from GDP_PPP_pc (inverted logic pipeline).
+		return;
 	}
 };
