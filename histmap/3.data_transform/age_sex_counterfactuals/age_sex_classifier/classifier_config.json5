@@ -1,0 +1,22 @@
+{
+  // Country-year anchors keep the fit bounded while spanning all observed transition stages.
+  training_years: [1850, 1870, 1890, 1910, 1930, 1940, 1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020],
+  covariates: [
+    "gdp_pc", "gdp_ppp_pc", "popd_", "urbc_", "rurc_",
+    "delta_popc_", "delta_gdp_pc", "cropland", "pasture",
+  ],
+  max_iterations: 50,
+  lambda: 0.001,
+  learning_rate: 0.15,
+  stay_probability: 0.85,
+  stage_thresholds: {
+    replacement_tfr: 2.15,
+    low_tfr: 2.60,
+    high_tfr: 4.00,
+    low_mortality: 0.015,
+    high_mortality: 0.025,
+    negative_growth: -0.001,
+    rapid_fertility_decline: -0.025,
+    mortality_decline: -0.0002,
+  },
+}

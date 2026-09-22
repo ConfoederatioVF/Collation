@@ -281,6 +281,7 @@
 	 *  @param {number} [arg2_options.learning_rate=0.5]
 	 *  @param {number} [arg2_options.max_iterations=1000]
 	 *  @param {number} [arg2_options.momentum=0.9]
+	 *  @param {Array<number>} [arg2_options.sample_weights] - Non-negative observation weights.
 	 *  @param {number} [arg2_options.tolerance=1e-8]
 	 *
 	 * @returns {Object|null} - { beta, classes, converged, iterations, log_likelihood }
@@ -301,6 +302,16 @@
 		//Declare local instance variables
 		let N = X.length;
 		if (N === 0) return null;
+		let sample_weights = new Float64Array(N);
+		let total_weight = 0;
+
+		for (let i = 0; i < N; i++) {
+			let local_weight = (options.sample_weights && options.sample_weights[i] !== undefined) ?
+				Math.returnSafeNumber(options.sample_weights[i], 0) : 1;
+			sample_weights[i] = Math.max(0, local_weight);
+			total_weight += sample_weights[i];
+		}
+		if (total_weight <= 0) return null;
 		
 		let K_in = X[0].length;
 		if (K_in === 0) return null;
@@ -352,9 +363,9 @@
 		for (let j = 0; j < K_in; j++) {
 			let sum_sq = 0;
 			for (let i = 0; i < N; i++)
-				sum_sq += X[i][j]*X[i][j];
+				sum_sq += sample_weights[i]*X[i][j]*X[i][j];
 			
-			let rms = Math.sqrt(sum_sq/N);
+			let rms = Math.sqrt(sum_sq/total_weight);
 			scales[j] = (rms > 1e-12) ? rms : 1;
 		}
 		
@@ -384,6 +395,8 @@
 			
 			//Accumulate gradients over all samples
 			for (let i = 0; i < N; i++) {
+				let sample_weight = sample_weights[i];
+				if (sample_weight <= 0) continue;
 				let row_X = X_scaled[i];
 				let probabilities = Statistics.softmax(Statistics.computeMultinomialLogits(row_X, beta));
 				
@@ -391,20 +404,20 @@
 					let prop_row = Y[i];
 					for (let c = 0; c < C; c++) {
 						let q_c = prop_row[c] || 0;
-						if (q_c > 0) log_likelihood += q_c*Math.log(Math.max(probabilities[c], 1e-15));
+						if (q_c > 0) log_likelihood += sample_weight*q_c*Math.log(Math.max(probabilities[c], 1e-15));
 					}
 					for (let c = 1; c < C; c++) {
-						let residual = probabilities[c] - (prop_row[c] || 0);
+						let residual = sample_weight*(probabilities[c] - (prop_row[c] || 0));
 						for (let j = 0; j < K; j++)
 							gradient[c][j] += residual*row_X[j];
 					}
 				} else {
 					let y_idx = class_lookup[Statistics.getClassLabel(Y, i)];
-					log_likelihood += Math.log(Math.max(probabilities[y_idx], 1e-15));
+					log_likelihood += sample_weight*Math.log(Math.max(probabilities[y_idx], 1e-15));
 					
 					//Gradient of NLL w.r.t. beta_c is (p_c - 1[y=c]) * x
 					for (let c = 1; c < C; c++) {
-						let residual = probabilities[c] - ((c === y_idx) ? 1 : 0);
+						let residual = sample_weight*(probabilities[c] - ((c === y_idx) ? 1 : 0));
 						for (let j = 0; j < K; j++)
 							gradient[c][j] += residual*row_X[j];
 					}
@@ -417,7 +430,7 @@
 			for (let c = 1; c < C; c++)
 				for (let j = 0; j < K; j++) {
 					let penalty = (use_intercept && j === 0) ? 0 : lambda*beta[c][j];
-					let local_gradient = gradient[c][j]/N + penalty;
+					let local_gradient = gradient[c][j]/total_weight + penalty;
 					
 					velocity[c][j] = momentum*velocity[c][j] - learning_rate*local_gradient;
 					beta[c][j] += velocity[c][j];
@@ -427,7 +440,7 @@
 			iterations_run = iter + 1;
 			
 			if (options.debug && (iter % 10 === 0 || iter === max_iterations - 1))
-				console.log(`- Iteration ${iter}/${max_iterations}: NLL = ${(-log_likelihood/N).toFixed(6)}, max_update = ${max_update.toExponential(2)}`);
+				console.log(`- Iteration ${iter}/${max_iterations}: NLL = ${(-log_likelihood/total_weight).toFixed(6)}, max_update = ${max_update.toExponential(2)}`);
 			
 			if (max_update < tolerance) {
 				converged = true;
@@ -456,7 +469,8 @@
 			converged: converged,
 			has_intercept: use_intercept,
 			iterations: iterations_run,
-			log_likelihood: log_likelihood
+			log_likelihood: log_likelihood,
+			weight_sum: total_weight
 		};
 	};
 	
@@ -618,7 +632,7 @@
 		
 		//Declare local instance variables
 		let basename = path.basename(output_file_path);
-		let { keys, X, Y } = covariates_obj;
+		let { keys, X, Y, weights } = covariates_obj;
 		
 		console.log(`- Performing multinomial logit for ${basename}.`);
 		
@@ -628,7 +642,10 @@
 		}
 		
 		//1. Apply regularised multinomial logit regression
-		let result = Statistics.multinomialLogitRegression(X, Y, options);
+		let regression_options = { ...options };
+		if (!regression_options.sample_weights && weights)
+			regression_options.sample_weights = weights;
+		let result = Statistics.multinomialLogitRegression(X, Y, regression_options);
 		
 		if (!result) {
 			console.warn(`- Regression failed to produce coefficients for ${basename}.`);
@@ -684,7 +701,8 @@
 				iterations: result.iterations,
 				lambda: Math.returnSafeNumber(options.lambda, 1e-3),
 				log_likelihood: result.log_likelihood,
-				sample_count: X.length
+				sample_count: X.length,
+				weight_sum: result.weight_sum
 			}
 		};
 		if (standard_errors_obj) model_data_obj.standard_errors = standard_errors_obj;

@@ -17,6 +17,10 @@ histmap/2.data_cleaning/**/*
 histmap/3.data_transform/**/*
 !histmap/3.data_transform/**/
 !histmap/3.data_transform/**/*.js
+!histmap/3.data_transform/age_sex_counterfactuals/age_sex_classifier/classifier_config.json5
+!histmap/3.data_transform/age_sex_counterfactuals/age_sex_classifier/M2_fertility.json5
+!histmap/3.data_transform/age_sex_counterfactuals/age_sex_classifier/M2_migration.json5
+!histmap/3.data_transform/age_sex_counterfactuals/age_sex_classifier/M2_mortality.json5
 histmap/4.data_exports/**/*
 !histmap/4.data_exports/**/
 !histmap/4.data_exports/**/*.js
