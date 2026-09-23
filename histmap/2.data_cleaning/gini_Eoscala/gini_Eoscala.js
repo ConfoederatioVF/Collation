@@ -193,6 +193,7 @@ global.gini_Eoscala = class {
 			
 			// --- STEP 1 & 2: C1-CONTINUOUS LOG-TAIL REGULARISATION VIA GeoPNG ---
 			let normalised_map = GeoPNG.regulariseLogTail({
+				allow_zero_or_negative: true,
 				data: raw_raster.data,
 				target_max: target_max,
 				target_min: target_min,

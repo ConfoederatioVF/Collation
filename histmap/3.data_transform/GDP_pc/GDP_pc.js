@@ -323,6 +323,7 @@ global.GDP_pc = class {
 				let first_pass_range = (first_pass_max > first_pass_min) ? (first_pass_max - first_pass_min) : 1;
 				
 				let second_pass_fractions = GeoPNG.regulariseLogTail({
+					allow_zero_or_negative: true,
 					data: second_pass_raster.data, fraction_only: true, valid_filter: (x) => landarea_raster.data[x] > 0 && pop_raster.data[x] >= 1.0
 				});
 				
