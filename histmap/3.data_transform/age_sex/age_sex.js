@@ -324,46 +324,61 @@ global.age_sex = class {
 			let format_year = year > 2023 ? 2023 : year;
 			let model_path = `${this.intermediate_logit_folder}multinomial_model_${year}.json`;
 			let out_base = `${this.intermediate_logit_rasters}logit_${year}.png`;
+			let has_local_anchor = fs.existsSync(model_path);
 			let resolved_model = model_path;
+			let unified_path = `${this.intermediate_logit_folder}multinomial_model_unified.json`;
 			
 			//Regime 1: Pre-1500 AD (Columbian Exchange Breakpoint) > NDT Premodern land-use model
 			if (year < 1500) {
 				let premodern_path = `${this.intermediate_logit_folder}premodern_multinomial_logit.json`;
 				if (fs.existsSync(premodern_path)) resolved_model = premodern_path;
-			} else if (!fs.existsSync(model_path)) {
-				//Regime 2: Post-1500 AD missing anchor > Coverage-weighted temporal kernel ensemble
-				let unified_path = `${this.intermediate_logit_folder}multinomial_model_unified.json`;
-				if (fs.existsSync(unified_path)) {
-					let unified_data = JSON.parse(fs.readFileSync(unified_path, "utf8"));
-					if (unified_data.type === "multinomial_ensemble" && Array.isArray(unified_data.models)) {
-						let dynamic_models = [];
-						let total_w = 0;
-						
-						for (let m = 0; m < unified_data.models.length; m++) {
-							let entry = unified_data.models[m];
-							let anchor_year = entry.year || 1950;
-							let dt = Math.abs(year - anchor_year);
-							let kernel = Math.exp(-dt/50);
-							let w = (entry.weight || 1)*kernel;
-							dynamic_models.push({ model: entry.model, weight: w, year: anchor_year });
-							total_w += w;
-						}
-						
-						if (total_w > 0) {
-							for (let m = 0; m < dynamic_models.length; m++)
-								dynamic_models[m].weight /= total_w;
-						}
-						
-						resolved_model = {
-							classes: this.getCohorts(),
-							models: dynamic_models,
-							target_year: year,
-							type: "multinomial_ensemble"
-						};
-					} else {
-						resolved_model = unified_path;
+			} else if (fs.existsSync(unified_path)) {
+				//Regime 2: Post-1500 AD > Coverage-weighted temporal kernel ensemble (blended 80/20 with local anchor if available)
+				let unified_data = JSON.parse(fs.readFileSync(unified_path, "utf8"));
+				
+				if (unified_data.type === "multinomial_ensemble" && Array.isArray(unified_data.models)) {
+					let dynamic_models = [];
+					let total_w = 0;
+					
+					for (let m = 0; m < unified_data.models.length; m++) {
+						let entry = unified_data.models[m];
+						let anchor_year = entry.year || 1950;
+						let dt = Math.abs(year - anchor_year);
+						let kernel = Math.exp(-dt/50);
+						let w = (entry.weight || 1)*kernel;
+						dynamic_models.push({ model: entry.model, weight: w, year: anchor_year });
+						total_w += w;
 					}
+					
+					if (total_w > 0) {
+						for (let m = 0; m < dynamic_models.length; m++)
+							dynamic_models[m].weight /= total_w;
+					}
+					
+					if (has_local_anchor) {
+						let local_idx = dynamic_models.findIndex(m => m.model === model_path);
+						
+						for (let m = 0; m < dynamic_models.length; m++)
+							dynamic_models[m].weight *= 0.8;
+						
+						if (local_idx !== -1) {
+							dynamic_models[local_idx].weight += 0.2;
+						} else {
+							dynamic_models.push({ model: model_path, weight: 0.2, year: year });
+						}
+					}
+					
+					resolved_model = {
+						classes: this.getCohorts(),
+						models: dynamic_models,
+						target_year: year,
+						type: "multinomial_ensemble"
+					};
+				} else {
+					resolved_model = has_local_anchor ? model_path : unified_path;
 				}
+			} else if (!has_local_anchor) {
+				resolved_model = null;
 			}
 			
 			if (!resolved_model) return null;

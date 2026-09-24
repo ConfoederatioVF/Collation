@@ -27,17 +27,8 @@ global.births_deaths_Kummu = class {
 			format: "float32",
 			years: this.years
 		});
-		console.log(`- Finished processing GeoTIFFs to rasters.`);
-	}
-	
-	/**
-	 * Shatters temporal birth and death rate rasters into unique spatial-temporal areal mask partitions.
-	 * Writes mask rasters to `_masks.png` and trace histories to `_metadata.json`.
-	 *
-	 * @returns {Promise<Object>} An object containing metadata tracking lineage for births and deaths.
-	 */
-	static async B_generateArealMasks () {
-		//Poll to ensure A_convertToPNGs has finished writing all files to disk
+		
+		//Poll to ensure GeoTIFF.convertToPNGs has finished writing all files to disk
 		let pending_disk_writes = true;
 		
 		while (pending_disk_writes) {
@@ -63,7 +54,16 @@ global.births_deaths_Kummu = class {
 				await Blacktraffic.yield();
 			}
 		}
-		
+		console.log(`- Finished processing GeoTIFFs to rasters.`);
+	}
+	
+	/**
+	 * Shatters temporal birth and death rate rasters into unique spatial-temporal areal mask partitions.
+	 * Writes mask rasters to `_masks.png` and trace histories to `_metadata.json`.
+	 *
+	 * @returns {Promise<Object>} An object containing metadata tracking lineage for births and deaths.
+	 */
+	static async B_generateArealMasks () {
 		//Declare local instance variables
 		let births_input_prefix = `${this.intermediate_births_folder}births_`;
 		let births_output_prefix = `${this.intermediate_birthrate_folder}births`;
