@@ -53,6 +53,7 @@
         births_deaths_Kummu: (global.h2) ? path.join(h2, "births_deaths_Kummu", "births_deaths_Kummu.js") : "",
         births_deaths_UNWPP: (global.h2) ? path.join(h2, "births_deaths_UNWPP", "births_deaths_UNWPP.js") : "",
         births_deaths_HMD: (global.h2) ? path.join(h2, "births_deaths_HMD", "births_deaths_HMD.js") : "",
+        migration_OLS: (global.h2) ? path.join(h2, "migration_OLS", "migration_OLS.js") : "",
         births_deaths_OLS: (global.h2) ? path.join(h2, "births_deaths_OLS", "births_deaths_OLS.js") : "",
         LFPR_ILO: (global.h2) ? path.join(h2, "LFPR_ILO", "LFPR_ILO.js") : "",
         LFPR_Olivetti: (global.h2) ? path.join(h2, "LFPR_Olivetti", "LFPR_Olivetti.js") : "",
@@ -408,6 +409,7 @@
       let births_deaths_hmd_options = { overwrite: overwrite, ...(options.births_deaths_hmd || {}) };
       let births_deaths_kummu_options = { overwrite: overwrite, ...(options.births_deaths_kummu || {}) };
       let births_deaths_ols_options = { overwrite: overwrite, skip_training: skip_training, ...(options.births_deaths_ols || {}) };
+      let migration_ols_options = { overwrite: overwrite, skip_training: skip_training, ...(options.migration_ols || {}) };
       let births_deaths_unwpp_options = { overwrite: overwrite, ...(options.births_deaths_unwpp || {}) };
       
       //Function body
@@ -419,6 +421,7 @@
         if (global.births_deaths_UNWPP) await births_deaths_UNWPP.processRasters(births_deaths_unwpp_options);
         if (global.births_deaths_HMD) await births_deaths_HMD.processRasters(births_deaths_hmd_options);
       }
+      if (global.migration_OLS) await migration_OLS.processRasters(migration_ols_options);
       if (global.births_deaths_OLS) await births_deaths_OLS.processRasters(births_deaths_ols_options);
     }
     

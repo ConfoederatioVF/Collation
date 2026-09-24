@@ -304,7 +304,7 @@ global.births_deaths_OLS = class {
 							let local_denominator = denominator_array[local_index];
 							if (local_denominator <= 0) return 0;
 							
-							return Math.min(1, local_count / local_denominator);
+							return Math.min(10, local_count / local_denominator);
 						}
 					});
 					
@@ -503,7 +503,7 @@ global.births_deaths_OLS = class {
 					
 					let uncertainty_weight = Math.exp(-sample_size/15);
 					target_min = Math.max(0, target_min - ((target_min - global_min)*uncertainty_weight));
-					target_max = Math.min(1, target_max + ((global_max - target_max)*uncertainty_weight));
+					target_max = target_max + ((global_max - target_max)*uncertainty_weight);
 					
 					let valid_pixels = [];
 					let sum = 0;
@@ -685,6 +685,56 @@ global.births_deaths_OLS = class {
 					}
 				}
 				
+				// 2.5. FLUX RECONCILIATION AGAINST MIGRATION RESIDUAL
+				let migration_path = `${this.output_net_migration_folder}net_migration_${year}.png`;
+				let delta_path = `${population_Stadester_transform.delta_total_population_folder}delta_total_population_${year}.png`;
+				
+				if (fs.existsSync(migration_path) && fs.existsSync(delta_path) && raw_data.births && raw_data.male_deaths && raw_data.female_deaths) {
+					let m_raster = GeoPNG.loadNumberRasterImage(migration_path, { format: "float32" });
+					let d_raster = GeoPNG.loadNumberRasterImage(delta_path, { format: "float32" });
+					
+					let b_counts = raw_data.births.counts_array;
+					let md_counts = raw_data.male_deaths.counts_array;
+					let fd_counts = raw_data.female_deaths.counts_array;
+					
+					let y_idx = years.indexOf(year);
+					let year_gap = 1;
+					if (y_idx > 0) year_gap = year - years[y_idx - 1];
+					
+					for (let i = 0; i < popc_raster.data.length; i++) {
+						if (popc_raster.data[i] <= 0) continue;
+						
+						let m_val = m_raster.data[i];
+						let d_val = d_raster.data[i];
+						if (isNaN(m_val) || isNaN(d_val)) continue;
+						
+						let annualized_d_val = d_val / year_gap;
+						
+						let b_raw = b_counts[i] || 0;
+						let md_raw = md_counts[i] || 0;
+						let fd_raw = fd_counts[i] || 0;
+						let d_raw = md_raw + fd_raw;
+						
+						let ng_target = annualized_d_val - m_val;
+						let t_raw = b_raw + d_raw;
+						
+						let t_final = Math.max(t_raw, Math.abs(ng_target));
+						
+						let b_final = (t_final + ng_target) / 2;
+						let d_final = (t_final - ng_target) / 2;
+						
+						b_counts[i] = Math.max(0, b_final);
+						
+						if (d_raw > 0) {
+							md_counts[i] = d_final * (md_raw / d_raw);
+							fd_counts[i] = d_final * (fd_raw / d_raw);
+						} else {
+							md_counts[i] = d_final * 0.512;
+							fd_counts[i] = d_final * 0.488;
+						}
+					}
+				}
+
 				// 3. Apply actuals-anchoring and write to disk for all variables
 				let loaded_keys = Object.keys(raw_data);
 				for (let v = 0; v < loaded_keys.length; v++) {
@@ -771,60 +821,6 @@ global.births_deaths_OLS = class {
 		});
 	}
 	
-	static async F_deriveMigrationRasters (arg0_options) {
-		//Convert from parameters
-		let options = (arg0_options) ? arg0_options : {};
-		
-		//Initialise options
-		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
-
-		//Declare local instance variables
-		let cohorts = age_sex.getCohorts();
-		let female_cohorts = cohorts.filter(c => c.startsWith("f_"));
-		let male_cohorts = cohorts.filter(c => c.startsWith("m_"));
-		let sf = age_sex.sf();
-		let target_years = [];
-		let years = landuse_HYDE.sorted_hyde_years;
-		
-		for (let y = 1; y < years.length; y++) target_years.push(years[y]);
-		
-		await GeoPNG.processTimeseriesParallel({
-			items: target_years,
-			concurrency: options.concurrency || 8,
-			name: "births_deaths_OLS F_deriveMigrationRasters",
-			task_generator: (year) => {
-				let y_idx = years.indexOf(year);
-				let previous_year = years[y_idx - 1];
-				let year_gap = year - previous_year;
-				
-				let female_cohort_paths = [];
-				for (let c = 0; c < female_cohorts.length; c++)
-					female_cohort_paths.push(`${age_sex.output_rasters}${female_cohorts[c]}_${year}.png`);
-				let male_cohort_paths = [];
-				for (let c = 0; c < male_cohorts.length; c++)
-					male_cohort_paths.push(`${age_sex.output_rasters}${male_cohorts[c]}_${year}.png`);
-				
-				return {
-					task_type: "derive_migration_rasters",
-					year: year,
-					year_gap: year_gap,
-					births_path: `${this.output_births_folder}births_${year}.png`,
-					female_deaths_path: `${this.output_female_deaths_folder}female_deaths_${year}.png`,
-					male_deaths_path: `${this.output_male_deaths_folder}male_deaths_${year}.png`,
-					delta_popc_path: `${population_Stadester_transform.delta_total_population_folder}delta_total_population_${year}.png`,
-					popc_path: `${sf.input_popc_folder}stadester_population_${year}.png`,
-					previous_popc_path: `${sf.input_popc_folder}stadester_population_${previous_year}.png`,
-					female_cohort_paths: female_cohort_paths,
-					male_cohort_paths: male_cohort_paths,
-					female_migration_path: `${this.output_female_migration_folder}female_net_migration_${year}.png`,
-					male_migration_path: `${this.output_male_migration_folder}male_net_migration_${year}.png`,
-					net_migration_path: `${this.output_net_migration_folder}net_migration_${year}.png`,
-					overwrite: overwrite
-				};
-			}
-		});
-	}
-	
 	static async processRasters (arg0_options) {
 		//Convert from parameters
 		let options = (arg0_options) ? arg0_options : {};
@@ -860,6 +856,5 @@ global.births_deaths_OLS = class {
 		if (!options.exclude.includes("C")) await this.C_generateOLSRasters(options);
 		if (!options.exclude.includes("D")) await this.D_normaliseOLSRasters(options);
 		if (!options.exclude.includes("E")) await this.E_clampToStadester(options);
-		if (!options.exclude.includes("F")) await this.F_deriveMigrationRasters(options);
 	}
 };

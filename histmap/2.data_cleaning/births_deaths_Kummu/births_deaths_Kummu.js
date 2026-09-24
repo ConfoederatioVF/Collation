@@ -28,32 +28,6 @@ global.births_deaths_Kummu = class {
 			years: this.years
 		});
 		
-		//Poll to ensure GeoTIFF.convertToPNGs has finished writing all files to disk
-		let pending_disk_writes = true;
-		
-		while (pending_disk_writes) {
-			let all_files_exist = true;
-			
-			for (let i = 0; i < this.years.length; i++) {
-				let check_births_path = `${this.intermediate_births_folder}births_${this.years[i]}.png`;
-				let check_deaths_path = `${this.intermediate_deaths_folder}deaths_${this.years[i]}.png`;
-				
-				if (!fs.existsSync(check_births_path) || !fs.existsSync(check_deaths_path)) {
-					all_files_exist = false;
-					break;
-				}
-			}
-			
-			if (all_files_exist) {
-				pending_disk_writes = false;
-			} else {
-				console.log(`- [Polling] Waiting for intermediate PNG files to write to disk...`);
-				await new Promise(function (resolve) {
-					setTimeout(resolve, 2000);
-				});
-				await Blacktraffic.yield();
-			}
-		}
 		console.log(`- Finished processing GeoTIFFs to rasters.`);
 	}
 	
