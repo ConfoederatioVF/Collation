@@ -493,43 +493,100 @@ global.age_sex = class {
 
 				let raw_f = new Float32Array(age_count);
 				let raw_m = new Float32Array(age_count);
-				let f_coupled_buf = new Float32Array(age_count);
-				let m_coupled_buf = new Float32Array(age_count);
-				let tot_coupled_buf = new Float32Array(age_count);
 
-				let pava_buffers = {
-					block_counts: new Int32Array(age_count),
-					block_vals: new Float32Array(age_count),
-					block_weights: new Float32Array(age_count)
-				};
+				// Pre-load HMD ground-truth rasters for pre-1950 historical years to bypass PAVA
+				let has_hmd = false;
+				let hmd_rasters = {};
+				let hmd_total = null;
+				if (year < 1950 && typeof age_sex_HMD !== "undefined" && fs.existsSync(age_sex_HMD.output_clamped_to_stadester)) {
+					let test_path = `${age_sex_HMD.output_clamped_to_stadester}global_${cohorts[0]}_${year}.png`;
+					if (fs.existsSync(test_path)) {
+						has_hmd = true;
+						hmd_total = new Float32Array(total_pixels);
+						for (let c = 0; c < num_cohorts; c++) {
+							let hmd_path = `${age_sex_HMD.output_clamped_to_stadester}global_${cohorts[c]}_${year}.png`;
+							if (fs.existsSync(hmd_path)) {
+								let r = GeoPNG.loadNumberRasterImage(hmd_path, { format: "float32" });
+								hmd_rasters[cohorts[c]] = r;
+								for (let i = 0; i < total_pixels; i++) {
+									let val = r.data[i];
+									if (val > 0) hmd_total[i] += val;
+								}
+							}
+						}
+					}
+				}
+
+				// Pass 1: Compute global unscaled population and apply PAVA globally
+				let global_raw_f = new Float32Array(age_count);
+				let global_raw_m = new Float32Array(age_count);
 
 				for (let i = 0; i < total_pixels; i++) {
 					let stade_pop = popc_raster.data[i];
 					if (stade_pop < 0.01 || isNaN(stade_pop)) continue;
+					
+					// Exclude HMD ground truth from global PAVA totals
+					if (has_hmd && hmd_total[i] > 0) continue; 
 
 					for (let k = 0; k < age_count; k++) {
 						let f_val = prob_rasters[cohorts[f_indices[k]]].data[i];
 						let m_val = prob_rasters[cohorts[m_indices[k]]].data[i];
-						raw_f[k] = (f_val > 0 && isFinite(f_val)) ? f_val : 0;
-						raw_m[k] = (m_val > 0 && isFinite(m_val)) ? m_val : 0;
+						
+						if (f_val > 0 && isFinite(f_val)) global_raw_f[k] += f_val * stade_pop;
+						if (m_val > 0 && isFinite(m_val)) global_raw_m[k] += m_val * stade_pop;
+					}
+				}
+
+				let global_coupled_f = new Float32Array(age_count);
+				let global_coupled_m = new Float32Array(age_count);
+				let global_coupled_tot = new Float32Array(age_count);
+
+				Statistics.coupleAgeSexCohorts(global_raw_m, global_raw_f, age_band_widths, 2, {
+					female_output: global_coupled_f,
+					male_output: global_coupled_m,
+					total_output: global_coupled_tot
+				});
+
+				let global_scale_f = new Float32Array(age_count);
+				let global_scale_m = new Float32Array(age_count);
+				for (let k = 0; k < age_count; k++) {
+					global_scale_f[k] = (global_raw_f[k] > 0) ? (global_coupled_f[k] / global_raw_f[k]) : 1;
+					global_scale_m[k] = (global_raw_m[k] > 0) ? (global_coupled_m[k] / global_raw_m[k]) : 1;
+				}
+
+				// Pass 2: Dasymetrically resolve populations proportionally using global PAVA scaling
+				for (let i = 0; i < total_pixels; i++) {
+					let stade_pop = popc_raster.data[i];
+					if (stade_pop < 0.01 || isNaN(stade_pop)) continue;
+
+					// Exclude empirical HMD ground truth from PAVA smoothing
+					if (has_hmd && hmd_total[i] > 0) {
+						let hmd_scale = stade_pop / hmd_total[i];
+						for (let c = 0; c < num_cohorts; c++) {
+							let val = (hmd_rasters[cohorts[c]]) ? hmd_rasters[cohorts[c]].data[i] : 0;
+							output_buffers[c][i] = val*hmd_scale;
+						}
+						continue;
 					}
 
-					Statistics.coupleAgeSexCohorts(raw_m, raw_f, age_band_widths, 2, {
-						buffers: pava_buffers,
-						female_output: f_coupled_buf,
-						male_output: m_coupled_buf,
-						total_output: tot_coupled_buf
-					});
-
 					let sum_rates = 0;
-					for (let k = 0; k < age_count; k++)
-						sum_rates += tot_coupled_buf[k];
+					for (let k = 0; k < age_count; k++) {
+						let f_val = prob_rasters[cohorts[f_indices[k]]].data[i];
+						let m_val = prob_rasters[cohorts[m_indices[k]]].data[i];
+						
+						let f_w = (f_val > 0 && isFinite(f_val)) ? f_val * global_scale_f[k] : 0;
+						let m_w = (m_val > 0 && isFinite(m_val)) ? m_val * global_scale_m[k] : 0;
+						
+						raw_f[k] = f_w;
+						raw_m[k] = m_w;
+						sum_rates += f_w + m_w;
+					}
 
 					if (sum_rates > 0) {
-						let scale = stade_pop / sum_rates;
+						let local_scale = stade_pop / sum_rates;
 						for (let k = 0; k < age_count; k++) {
-							output_buffers[f_indices[k]][i] = f_coupled_buf[k]*scale;
-							output_buffers[m_indices[k]][i] = m_coupled_buf[k]*scale;
+							output_buffers[f_indices[k]][i] = raw_f[k] * local_scale;
+							output_buffers[m_indices[k]][i] = raw_m[k] * local_scale;
 						}
 					} else {
 						let even_share = stade_pop / num_cohorts;

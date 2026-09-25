@@ -40,9 +40,10 @@ global.migration_OLS = class {
 				let delta_r = GeoPNG.loadNumberRasterImage(delta_path, { format: "float32" });
 				let popc_r = GeoPNG.loadNumberRasterImage(popc_path, { format: "float32" });
 				
-				let y_idx = years.indexOf(year);
+				let all_years = (typeof landuse_HYDE !== "undefined" && Array.isArray(landuse_HYDE.sorted_hyde_years)) ? landuse_HYDE.sorted_hyde_years : years;
+				let y_idx = all_years.indexOf(year);
 				let year_gap = 1;
-				if (y_idx > 0) year_gap = year - years[y_idx - 1];
+				if (y_idx > 0) year_gap = year - all_years[y_idx - 1];
 				
 				GeoPNG.saveNumberRasterImage({
 					file_path: target_path,
@@ -336,9 +337,10 @@ global.migration_OLS = class {
 				let actual_migration_raster = null;
 				let has_actual = fs.existsSync(b_path) && fs.existsSync(fd_path) && fs.existsSync(md_path) && fs.existsSync(delta_path);
 				
-				let y_idx = years.indexOf(year);
+				let all_years = (typeof landuse_HYDE !== "undefined" && Array.isArray(landuse_HYDE.sorted_hyde_years)) ? landuse_HYDE.sorted_hyde_years : years;
+				let y_idx = all_years.indexOf(year);
 				let year_gap = 1;
-				if (y_idx > 0) year_gap = year - years[y_idx - 1];
+				if (y_idx > 0) year_gap = year - all_years[y_idx - 1];
 				
 				if (has_actual) {
 					let b_r = GeoPNG.loadNumberRasterImage(b_path, { format: "float32" });
@@ -356,7 +358,7 @@ global.migration_OLS = class {
 					}
 				}
 				
-				let cohorts = (typeof age_sex !== "undefined" && age_sex.getCohorts) ? age_sex.getCohorts() : ["00", "01", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55", "60", "65", "70", "75", "80"];
+				let age_bands = ["00", "01", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55", "60", "65", "70", "75", "80"];
 				
 				// Generate Rogers-Castro multi-exponential migration schedule weights
 				// Using standard parameters derived from Wilson/Rogers-Castro fitting limits
@@ -369,26 +371,26 @@ global.migration_OLS = class {
 					return a1 * Math.exp(-alpha1 * age) + a2 * Math.exp(-alpha2 * (age - mu2) - Math.exp(-lambda2 * (age - mu2))) + c;
 				};
 				
-				for (let c = 0; c < cohorts.length; c++) {
-					let cohort = cohorts[c];
-					let age = (cohort === "00") ? 0.5 : ((cohort === "01") ? 3 : parseInt(cohort) + 2.5);
-					rc_f[cohort] = getRC(age, 20); // Females peak around 20 (marriage/domestic)
-					rc_m[cohort] = getRC(age, 22.5); // Males peak slightly later around 22-23 (labor)
+				for (let c = 0; c < age_bands.length; c++) {
+					let age_band = age_bands[c];
+					let age = (age_band === "00") ? 0.5 : ((age_band === "01") ? 3 : parseInt(age_band) + 2.5);
+					rc_f[age_band] = getRC(age, 20); // Females peak around 20 (marriage/domestic)
+					rc_m[age_band] = getRC(age, 22.5); // Males peak slightly later around 22-23 (labor)
 				}
 				
 				let pot_f = new Float32Array(popc_raster.data.length);
 				let pot_m = new Float32Array(popc_raster.data.length);
 				
-				for (let c = 0; c < cohorts.length; c++) {
-					let cohort = cohorts[c];
-					let f_path = `${h3}/age_sex/4.composite_cohorts/f_${cohort}_${year}.png`;
-					let m_path = `${h3}/age_sex/4.composite_cohorts/m_${cohort}_${year}.png`;
+				for (let c = 0; c < age_bands.length; c++) {
+					let age_band = age_bands[c];
+					let f_path = `${h3}/age_sex/4.composite_cohorts/f_${age_band}_${year}.png`;
+					let m_path = `${h3}/age_sex/4.composite_cohorts/m_${age_band}_${year}.png`;
 					
 					let fr = fs.existsSync(f_path) ? GeoPNG.loadNumberRasterImage(f_path, { format: "float32" }) : null;
 					let mr = fs.existsSync(m_path) ? GeoPNG.loadNumberRasterImage(m_path, { format: "float32" }) : null;
 					
-					let wf = rc_f[cohort] || 0.01;
-					let wm = rc_m[cohort] || 0.01;
+					let wf = rc_f[age_band] || 0.01;
+					let wm = rc_m[age_band] || 0.01;
 					
 					for (let i = 0; i < popc_raster.data.length; i++) {
 						if (fr && !isNaN(fr.data[i])) pot_f[i] += Math.max(0, fr.data[i]) * wf;
@@ -399,32 +401,36 @@ global.migration_OLS = class {
 				let final_m_array = new Float32Array(popc_raster.data.length);
 				let final_mf_array = new Float32Array(popc_raster.data.length);
 				let final_mm_array = new Float32Array(popc_raster.data.length);
+				let is_actual_mask = new Uint8Array(popc_raster.data.length);
 				
 				let global_sum_m = 0;
-				let global_sum_pop = 0;
+				let unmeasured_pop = 0;
 				
-				// Pass 1: Calculate initial migration and global sums
+				// Pass 1: Calculate initial migration and global unmeasured population
 				for (let i = 0; i < popc_raster.data.length; i++) {
 					let pop = popc_raster.data[i];
-					let m = (has_actual && !isNaN(actual_migration_raster[i])) ? actual_migration_raster[i] : migration_array[i];
+					let is_actual = (has_actual && !isNaN(actual_migration_raster[i]));
+					let m = (is_actual) ? actual_migration_raster[i] : migration_array[i];
 					if (isNaN(m)) m = 0;
 					
 					final_m_array[i] = m;
+					if (is_actual) is_actual_mask[i] = 1;
+					
 					if (pop > 0) {
 						global_sum_m += m;
-						global_sum_pop += pop;
+						if (!is_actual) unmeasured_pop += pop;
 					}
 				}
 				
-				// Calculate balancing rate to ensure global net migration sums to exactly 0
-				let balancing_rate = (global_sum_pop > 0) ? (-global_sum_m / global_sum_pop) : 0;
+				// Calculate balancing rate over unmeasured cells to ensure global net migration sums to exactly 0
+				let balancing_rate = (unmeasured_pop > 0) ? (-global_sum_m / unmeasured_pop) : 0;
 				
-				// Pass 2: Apply zero-sum balance and sex splits
+				// Pass 2: Apply zero-sum balance to unmeasured cells and compute sex splits
 				for (let i = 0; i < popc_raster.data.length; i++) {
 					let pop = popc_raster.data[i];
 					let m = final_m_array[i];
 					
-					if (pop > 0) {
+					if (!is_actual_mask[i] && pop > 0) {
 						m += (pop * balancing_rate);
 					}
 					

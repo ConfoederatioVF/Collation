@@ -637,6 +637,9 @@ global.births_deaths_OLS = class {
 					let normalised_raster = GeoPNG.loadNumberRasterImage(normalised_path, { format: "float32" });
 					let bounds_obj = JSON.parse(fs.readFileSync(bounds_path, "utf8"));
 					let counts_array = new Float32Array(normalised_raster.data.length);
+					let actual_path = this._getActualPath(variable_obj, year);
+					let actual_raster = (actual_path) ? GeoPNG.loadNumberRasterImage(actual_path, { format: "float32" }) : null;
+					let has_actual_array = new Uint8Array(normalised_raster.data.length);
 					
 					let target_min = bounds_obj.target_min || 0;
 					let target_max = bounds_obj.target_max || 0;
@@ -644,8 +647,17 @@ global.births_deaths_OLS = class {
 					for (let i = 0; i < normalised_raster.data.length; i++) {
 						if (popc_raster.data[i] <= 0) continue;
 						
+						if (actual_raster) {
+							let local_actual = actual_raster.data[i];
+							if (!isNaN(local_actual) && local_actual > 0) {
+								counts_array[i] = local_actual;
+								has_actual_array[i] = 1;
+								continue;
+							}
+						}
+						
 						let local_normalised = normalised_raster.data[i];
-						if (isNaN(local_normalised) || local_normalised <= 0) continue;
+						if (isNaN(local_normalised) || local_normalised < 0) continue;
 						
 						let local_denominator = denominator_array[i];
 						if (local_denominator <= 0) continue;
@@ -666,10 +678,12 @@ global.births_deaths_OLS = class {
 					}
 					
 					raw_data[v_key] = {
-						variable_obj: variable_obj,
+						actual_raster: actual_raster,
 						counts_array: counts_array,
+						has_actual_array: has_actual_array,
 						normalised_raster: normalised_raster,
-						output_path: output_path
+						output_path: output_path,
+						variable_obj: variable_obj
 					};
 				}
 				
@@ -677,21 +691,24 @@ global.births_deaths_OLS = class {
 				
 				// 2. THE SEX-SANE REDISTRIBUTION (Intercepting the working aggregates)
 				if (raw_data.male_deaths && raw_data.female_deaths) {
-					let m_counts = raw_data.male_deaths.counts_array;
+					let f_actual = raw_data.female_deaths.has_actual_array;
 					let f_counts = raw_data.female_deaths.counts_array;
-					let m_norm = raw_data.male_deaths.normalised_raster.data;
 					let f_norm = raw_data.female_deaths.normalised_raster.data;
+					let m_actual = raw_data.male_deaths.has_actual_array;
+					let m_counts = raw_data.male_deaths.counts_array;
+					let m_norm = raw_data.male_deaths.normalised_raster.data;
 					
 					for (let i = 0; i < popc_raster.data.length; i++) {
 						if (popc_raster.data[i] <= 0) continue;
+						if ((m_actual && m_actual[i]) || (f_actual && f_actual[i])) continue;
 						
-						let raw_m = m_counts[i] || 0;
 						let raw_f = f_counts[i] || 0;
+						let raw_m = m_counts[i] || 0;
 						let total = raw_m + raw_f;
 						
 						if (total > 0) {
-							let n_m = (isNaN(m_norm[i]) || m_norm[i] < 0) ? 0 : m_norm[i];
 							let n_f = (isNaN(f_norm[i]) || f_norm[i] < 0) ? 0 : f_norm[i];
+							let n_m = (isNaN(m_norm[i]) || m_norm[i] < 0) ? 0 : m_norm[i];
 							let norm_sum = n_m + n_f;
 							
 							let ratio_m = (norm_sum > 0) ? (n_m / norm_sum) : 0.5;
@@ -702,106 +719,283 @@ global.births_deaths_OLS = class {
 				}
 				
 				// 2.5. FLUX RECONCILIATION AGAINST MIGRATION RESIDUAL
-				let migration_path = `${this.output_net_migration_folder}net_migration_${year}.png`;
+				let delta_path = `${population_Stadester_transform.delta_total_population_folder}delta_total_population_${year}.png`;
 				let m_female_path = `${this.output_female_migration_folder}female_net_migration_${year}.png`;
 				let m_male_path = `${this.output_male_migration_folder}male_net_migration_${year}.png`;
-				let delta_path = `${population_Stadester_transform.delta_total_population_folder}delta_total_population_${year}.png`;
+				let migration_path = `${this.output_net_migration_folder}net_migration_${year}.png`;
 				
-				let m_raster_updated = false;
 				let m_raster = null, mf_raster = null, mm_raster = null;
 				
 				if (fs.existsSync(migration_path) && fs.existsSync(m_female_path) && fs.existsSync(m_male_path) && fs.existsSync(delta_path) && raw_data.births && raw_data.male_deaths && raw_data.female_deaths) {
+					let d_raster = GeoPNG.loadNumberRasterImage(delta_path, { format: "float32" });
 					m_raster = GeoPNG.loadNumberRasterImage(migration_path, { format: "float32" });
 					mf_raster = GeoPNG.loadNumberRasterImage(m_female_path, { format: "float32" });
 					mm_raster = GeoPNG.loadNumberRasterImage(m_male_path, { format: "float32" });
-					let d_raster = GeoPNG.loadNumberRasterImage(delta_path, { format: "float32" });
 					
+					let b_actual = raw_data.births.has_actual_array;
 					let b_counts = raw_data.births.counts_array;
-					let md_counts = raw_data.male_deaths.counts_array;
-					let fd_counts = raw_data.female_deaths.counts_array;
-					
-					let y_idx = years.indexOf(year);
-					let year_gap = 1;
-					if (y_idx > 0) year_gap = year - years[y_idx - 1];
-					
 					let b_denominator = denominator_cache["cohort_00"];
-					let md_denominator = denominator_cache["cohort_declinem"];
-					let fd_denominator = denominator_cache["cohort_declinef"];
+					let fd_actual = raw_data.female_deaths.has_actual_array;
+					let fd_counts = raw_data.female_deaths.counts_array;
+					let md_actual = raw_data.male_deaths.has_actual_array;
+					let md_counts = raw_data.male_deaths.counts_array;
 					
-					for (let i = 0; i < popc_raster.data.length; i++) {
+					let all_years = (typeof landuse_HYDE !== "undefined" && Array.isArray(landuse_HYDE.sorted_hyde_years)) ? landuse_HYDE.sorted_hyde_years : years;
+					let y_idx = all_years.indexOf(year);
+					let year_gap = 1;
+					if (y_idx > 0) year_gap = year - all_years[y_idx - 1];
+					
+					let total_len = popc_raster.data.length;
+					let b_min_arr = new Float32Array(total_len);
+					let b_max_arr = new Float32Array(total_len);
+					let d_min_arr = new Float32Array(total_len);
+					let d_max_arr = new Float32Array(total_len);
+					let g_arr = new Float32Array(total_len);
+					let m_min_arr = new Float32Array(total_len);
+					let m_max_arr = new Float32Array(total_len);
+					let m_orig_arr = new Float32Array(total_len);
+					
+					let active_indices = [];
+					let global_sum_m_min = 0;
+					let global_sum_m_max = 0;
+					
+					// Step 1: Establish source-aware bounds for every pixel
+					for (let i = 0; i < total_len; i++) {
 						let pop = popc_raster.data[i];
 						if (pop <= 0) continue;
 						
-						let m_val = m_raster.data[i];
 						let d_val = d_raster.data[i];
+						let m_val = m_raster.data[i];
 						if (isNaN(m_val) || isNaN(d_val)) continue;
 						
-						let annualized_d_val = d_val / year_gap;
+						let annualized_g = d_val / year_gap;
+						g_arr[i] = annualized_g;
+						m_orig_arr[i] = m_val;
 						
 						let b_raw = b_counts[i] || 0;
-						let md_raw = md_counts[i] || 0;
 						let fd_raw = fd_counts[i] || 0;
-						let d_raw = md_raw + fd_raw;
+						let md_raw = md_counts[i] || 0;
 						
-						let ng_target = annualized_d_val - m_val;
-						let delta_ng = ng_target - (b_raw - d_raw);
+						let is_b_actual = (b_actual && b_actual[i]);
+						let is_fd_actual = (fd_actual && fd_actual[i]);
+						let is_md_actual = (md_actual && md_actual[i]);
 						
-						let b_final = b_raw;
-						let d_final = d_raw;
-						
-						if (delta_ng > 0) {
-							// Population growing faster than OLS predicts -> baby boom
-							b_final += delta_ng;
-						} else if (delta_ng < 0) {
-							// Population shrinking faster than OLS predicts -> mortality crisis
-							d_final -= delta_ng;
+						// Birth bounds
+						let b_min = 0;
+						let b_max = 0;
+						if (is_b_actual) {
+							b_min = b_raw;
+							b_max = b_raw;
+						} else {
+							b_min = 0;
+							let max_cap = (b_denominator && b_denominator[i] > 0) ? (1.5 * b_denominator[i]) : Math.max(b_raw, pop * 0.06);
+							b_max = Math.max(0, max_cap);
 						}
 						
-						// CLAMP TO BIOLOGICAL PHYSICAL LIMITS
-						let max_b = (b_denominator && !isNaN(b_denominator[i])) ? (1.5 * b_denominator[i]) : 0;
-						let max_d = pop; // Deaths can never exceed the living population
+						// Death bounds with independent source locks
+						let d_min = 0;
+						let d_max = 0;
+						if (is_fd_actual && is_md_actual) {
+							d_min = fd_raw + md_raw;
+							d_max = fd_raw + md_raw;
+						} else if (is_fd_actual && !is_md_actual) {
+							d_min = fd_raw;
+							d_max = Math.max(fd_raw, pop);
+						} else if (!is_fd_actual && is_md_actual) {
+							d_min = md_raw;
+							d_max = Math.max(md_raw, pop);
+						} else {
+							d_min = 0;
+							d_max = pop;
+						}
 						
-						let min_b = 0;
-						let min_d = 0;
+						if (b_max < b_min) b_max = b_min;
+						if (d_max < d_min) d_max = d_min;
 						
-						if (b_final > max_b) b_final = max_b;
-						if (b_final < min_b) b_final = min_b;
-						if (d_final > max_d) d_final = max_d;
-						if (d_final < min_d) d_final = min_d;
+						b_min_arr[i] = b_min;
+						b_max_arr[i] = b_max;
+						d_min_arr[i] = d_min;
+						d_max_arr[i] = d_max;
 						
-						let clamped_ng = b_final - d_final;
+						let m_min = annualized_g - b_max + d_min;
+						let m_max = annualized_g - b_min + d_max;
 						
-						// The residual discrepancy MUST be absorbed by migration
-						let m_new = annualized_d_val - clamped_ng;
-						let m_diff = m_new - m_val;
+						m_min_arr[i] = m_min;
+						m_max_arr[i] = m_max;
 						
-						if (Math.abs(m_diff) > 1) {
-							m_raster.data[i] = m_new;
-							m_raster_updated = true;
+						active_indices.push(i);
+						global_sum_m_min += m_min;
+						global_sum_m_max += m_max;
+					}
+					
+					let active_count = active_indices.length;
+					let active_pixels = new Int32Array(active_indices);
+					
+					// Step 2: Global feasibility check
+					if (global_sum_m_min > 0 || global_sum_m_max < 0) {
+						console.warn(`[Demographic Reconciliation] Infeasible global migration bounds: sum(M_min)=${global_sum_m_min.toFixed(2)}, sum(M_max)=${global_sum_m_max.toFixed(2)}`);
+					}
+					
+					// Step 3: Solve for unique shift scalar lambda via monotonic 1D bisection
+					let lambda_low = -10.0;
+					let lambda_high = 10.0;
+					
+					let sum_at_low = 0;
+					let sum_at_high = 0;
+					for (let j = 0; j < active_count; j++) {
+						let idx = active_pixels[j];
+						let p = popc_raster.data[idx];
+						
+						let c_low = m_orig_arr[idx] + p * lambda_low;
+						if (c_low < m_min_arr[idx]) c_low = m_min_arr[idx];
+						else if (c_low > m_max_arr[idx]) c_low = m_max_arr[idx];
+						sum_at_low += c_low;
+						
+						let c_high = m_orig_arr[idx] + p * lambda_high;
+						if (c_high < m_min_arr[idx]) c_high = m_min_arr[idx];
+						else if (c_high > m_max_arr[idx]) c_high = m_max_arr[idx];
+						sum_at_high += c_high;
+					}
+					
+					// Expand bracket if necessary
+					let expand_count = 0;
+					while (sum_at_low > 0 && expand_count < 5) {
+						lambda_low *= 10;
+						sum_at_low = 0;
+						for (let j = 0; j < active_count; j++) {
+							let idx = active_pixels[j];
+							let c_low = m_orig_arr[idx] + popc_raster.data[idx] * lambda_low;
+							if (c_low < m_min_arr[idx]) c_low = m_min_arr[idx];
+							else if (c_low > m_max_arr[idx]) c_low = m_max_arr[idx];
+							sum_at_low += c_low;
+						}
+						expand_count++;
+					}
+					expand_count = 0;
+					while (sum_at_high < 0 && expand_count < 5) {
+						lambda_high *= 10;
+						sum_at_high = 0;
+						for (let j = 0; j < active_count; j++) {
+							let idx = active_pixels[j];
+							let c_high = m_orig_arr[idx] + popc_raster.data[idx] * lambda_high;
+							if (c_high < m_min_arr[idx]) c_high = m_min_arr[idx];
+							else if (c_high > m_max_arr[idx]) c_high = m_max_arr[idx];
+							sum_at_high += c_high;
+						}
+						expand_count++;
+					}
+					
+					let lambda_opt = 0;
+					if (sum_at_low >= 0) {
+						lambda_opt = lambda_low;
+					} else if (sum_at_high <= 0) {
+						lambda_opt = lambda_high;
+					} else {
+						for (let iter = 0; iter < 45; iter++) {
+							let lambda_mid = (lambda_low + lambda_high) / 2;
+							let sum_mid = 0;
+							for (let j = 0; j < active_count; j++) {
+								let idx = active_pixels[j];
+								let p = popc_raster.data[idx];
+								let cand = m_orig_arr[idx] + p * lambda_mid;
+								if (cand < m_min_arr[idx]) cand = m_min_arr[idx];
+								else if (cand > m_max_arr[idx]) cand = m_max_arr[idx];
+								sum_mid += cand;
+							}
+							
+							if (Math.abs(sum_mid) < 1e-5) {
+								lambda_opt = lambda_mid;
+								break;
+							}
+							if (sum_mid > 0) {
+								lambda_high = lambda_mid;
+							} else {
+								lambda_low = lambda_mid;
+							}
+							lambda_opt = (lambda_low + lambda_high) / 2;
+						}
+					}
+					
+					// Step 4: Apply optimal migration and closed-form local projection
+					for (let j = 0; j < active_count; j++) {
+						let i = active_pixels[j];
+						let pop = popc_raster.data[i];
+						
+						let is_b_actual = (b_actual && b_actual[i]);
+						let is_fd_actual = (fd_actual && fd_actual[i]);
+						let is_md_actual = (md_actual && md_actual[i]);
+						
+						let b_raw = b_counts[i] || 0;
+						let fd_raw = fd_counts[i] || 0;
+						let md_raw = md_counts[i] || 0;
+						let d_raw = fd_raw + md_raw;
+						
+						let m_opt;
+						let b_projected;
+						let d_projected;
+						
+						if (is_b_actual && is_fd_actual && is_md_actual) {
+							// All vital rates are observed actuals: preserve them exactly and set M to the exact accounting residual
+							b_projected = b_raw;
+							d_projected = d_raw;
+							m_opt = g_arr[i] - (b_raw - d_raw);
+							
+							fd_counts[i] = fd_raw;
+							md_counts[i] = md_raw;
+						} else {
+							m_opt = m_orig_arr[i] + pop * lambda_opt;
+							if (m_opt < m_min_arr[i]) m_opt = m_min_arr[i];
+							else if (m_opt > m_max_arr[i]) m_opt = m_max_arr[i];
+							
+							let n_target = g_arr[i] - m_opt;
+							
+							let l_bound = Math.max(b_min_arr[i], n_target + d_min_arr[i]);
+							let u_bound = Math.min(b_max_arr[i], n_target + d_max_arr[i]);
+							if (l_bound > u_bound) {
+								let mid = (l_bound + u_bound) / 2;
+								l_bound = mid;
+								u_bound = mid;
+							}
+							
+							let b_unconstrained = (b_raw + d_raw + n_target) / 2;
+							b_projected = Math.max(l_bound, Math.min(u_bound, b_unconstrained));
+							if (is_b_actual) b_projected = b_raw;
+							d_projected = b_projected - n_target;
+							
+							if (is_fd_actual && is_md_actual) {
+								fd_counts[i] = fd_raw;
+								md_counts[i] = md_raw;
+							} else if (is_fd_actual && !is_md_actual) {
+								fd_counts[i] = fd_raw;
+								md_counts[i] = Math.max(0, d_projected - fd_raw);
+							} else if (!is_fd_actual && is_md_actual) {
+								md_counts[i] = md_raw;
+								fd_counts[i] = Math.max(0, d_projected - md_raw);
+							} else {
+								let ratio_m = (d_raw > 0) ? (md_raw / d_raw) : 0.512;
+								md_counts[i] = d_projected * ratio_m;
+								fd_counts[i] = d_projected - md_counts[i];
+							}
+						}
+						
+						b_counts[i] = b_projected;
+						
+						let m_diff = m_opt - m_orig_arr[i];
+						if (Math.abs(m_diff) > 1e-7) {
+							m_raster.data[i] = m_opt;
 							
 							let mf_val = isNaN(mf_raster.data[i]) ? 0 : mf_raster.data[i];
 							let mm_val = isNaN(mm_raster.data[i]) ? 0 : mm_raster.data[i];
-							
-							let m_total = mf_val + mm_val;
-							let f_ratio = (Math.abs(m_total) > 0) ? (mf_val / m_total) : 0.488;
-							let m_ratio = (Math.abs(m_total) > 0) ? (mm_val / m_total) : 0.512;
+							let m_tot = mf_val + mm_val;
+							let f_ratio = (Math.abs(m_tot) > 0) ? (mf_val / m_tot) : 0.488;
+							let m_ratio = (Math.abs(m_tot) > 0) ? (mm_val / m_tot) : 0.512;
 							
 							mf_raster.data[i] = mf_val + (m_diff * f_ratio);
 							mm_raster.data[i] = mm_val + (m_diff * m_ratio);
 						}
-						
-						b_counts[i] = b_final;
-						
-						if (d_raw > 0) {
-							md_counts[i] = d_final * (md_raw / d_raw);
-							fd_counts[i] = d_final * (fd_raw / d_raw);
-						} else {
-							md_counts[i] = d_final * 0.512;
-							fd_counts[i] = d_final * 0.488;
-						}
 					}
 				}
-
+				
 				// 3. Write final clamped rasters to disk, preserving empirical actuals where available
 				let loaded_keys = Object.keys(raw_data);
 				for (let v = 0; v < loaded_keys.length; v++) {
@@ -810,9 +1004,6 @@ global.births_deaths_OLS = class {
 					let counts_array = data.counts_array;
 					let output_path = data.output_path;
 					let variable_obj = data.variable_obj;
-					
-					let actual_path = this._getActualPath(variable_obj, year);
-					let actual_raster = (actual_path) ? GeoPNG.loadNumberRasterImage(actual_path, { format: "float32" }) : null;
 					
 					GeoPNG.saveNumberRasterImage({
 						file_path: output_path,
@@ -823,24 +1014,20 @@ global.births_deaths_OLS = class {
 							let local_pop = popc_raster.data[local_index];
 							if (local_pop <= 0) return 0;
 							
-							if (actual_raster) {
-								let local_actual = actual_raster.data[local_index];
-								if (!isNaN(local_actual) && local_actual > 0) return local_actual;
-							}
-							
-							return counts_array[local_index] || 0;
+							let val = counts_array[local_index] || 0;
+							return (val > 0) ? val : 0;
 						}
 					});
 					
 					console.log(`- Saved clamped raster: ${output_path}`);
 				}
 				
-				// 4. Save updated migration rasters if flux reconciliation pushed residuals back to them
-				if (m_raster_updated) {
+				// 4. Save reconciled migration rasters ensuring complete demographic closure
+				if (m_raster) {
 					GeoPNG.saveNumberRasterImage({ file_path: migration_path, format: "float32", width: popc_raster.width, height: popc_raster.height, function: (i) => m_raster.data[i] });
 					GeoPNG.saveNumberRasterImage({ file_path: m_female_path, format: "float32", width: popc_raster.width, height: popc_raster.height, function: (i) => mf_raster.data[i] });
 					GeoPNG.saveNumberRasterImage({ file_path: m_male_path, format: "float32", width: popc_raster.width, height: popc_raster.height, function: (i) => mm_raster.data[i] });
-					console.log(`- Updated migration rasters to absorb residual biological overflow for ${year}`);
+					console.log(`- Saved reconciled migration rasters for ${year}`);
 				}
 			}
 		});
