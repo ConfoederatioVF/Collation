@@ -596,8 +596,6 @@ global.births_deaths_OLS = class {
 		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
 
 		//Declare local instance variables
-		let geocode_obj = admin_modern.getISO3ColourcodesObject();
-		let geocode_raster = GeoPNG.loadImage(admin_modern.input_geocodes_raster);
 		let sf = age_sex.sf();
 		let variables_obj = this._getVariablesObj();
 		let years = landuse_HYDE.sorted_hyde_years;
@@ -804,47 +802,17 @@ global.births_deaths_OLS = class {
 					}
 				}
 
-				// 3. Apply actuals-anchoring and write to disk for all variables
+				// 3. Write final clamped rasters to disk, preserving empirical actuals where available
 				let loaded_keys = Object.keys(raw_data);
 				for (let v = 0; v < loaded_keys.length; v++) {
 					let v_key = loaded_keys[v];
 					let data = raw_data[v_key];
-					let variable_obj = data.variable_obj;
 					let counts_array = data.counts_array;
 					let output_path = data.output_path;
+					let variable_obj = data.variable_obj;
 					
 					let actual_path = this._getActualPath(variable_obj, year);
-					let actual_raster = null;
-					let actual_sums = null;
-					let count_sums = null;
-					
-					if (actual_path) {
-						actual_raster = GeoPNG.loadNumberRasterImage(actual_path, { format: "float32" });
-						actual_sums = {};
-						count_sums = {};
-						
-						for (let i = 0; i < popc_raster.data.length; i++) {
-							if (popc_raster.data[i] <= 0) continue;
-							
-							let byte_index = i * 4;
-							let local_colour_key = [
-								geocode_raster.data[byte_index],
-								geocode_raster.data[byte_index + 1],
-								geocode_raster.data[byte_index + 2]
-							].join(",");
-							let local_geocodes = geocode_obj[local_colour_key];
-							
-							if (local_geocodes)
-								for (let x = 0; x < local_geocodes.length; x++) {
-									let local_iso = local_geocodes[x];
-									let local_actual = actual_raster.data[i];
-									if (!isNaN(local_actual) && local_actual > 0)
-										Object.modifyValue(actual_sums, local_iso, local_actual);
-									if (counts_array[i] > 0)
-										Object.modifyValue(count_sums, local_iso, counts_array[i]);
-								}
-						}
-					}
+					let actual_raster = (actual_path) ? GeoPNG.loadNumberRasterImage(actual_path, { format: "float32" }) : null;
 					
 					GeoPNG.saveNumberRasterImage({
 						file_path: output_path,
@@ -860,27 +828,7 @@ global.births_deaths_OLS = class {
 								if (!isNaN(local_actual) && local_actual > 0) return local_actual;
 							}
 							
-							let local_count = counts_array[local_index];
-							if (actual_sums && local_count > 0) {
-								let byte_index = local_index * 4;
-								let local_colour_key = [
-									geocode_raster.data[byte_index],
-									geocode_raster.data[byte_index + 1],
-									geocode_raster.data[byte_index + 2]
-								].join(",");
-								let local_geocodes = geocode_obj[local_colour_key];
-								
-								if (local_geocodes)
-									for (let x = 0; x < local_geocodes.length; x++) {
-										let local_iso = local_geocodes[x];
-										let local_actual_sum = actual_sums[local_iso];
-										let local_count_sum = count_sums[local_iso];
-										
-										if (local_actual_sum !== undefined && local_actual_sum > 0 && local_count_sum !== undefined && local_count_sum > 0)
-											return local_count * (local_actual_sum / local_count_sum);
-									}
-							}
-							return local_count;
+							return counts_array[local_index] || 0;
 						}
 					});
 					
