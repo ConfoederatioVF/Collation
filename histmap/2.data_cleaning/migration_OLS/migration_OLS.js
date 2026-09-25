@@ -16,7 +16,7 @@ global.migration_OLS = class {
 	static async A_generateTargetRasters (arg0_options) {
 		let options = (arg0_options) ? arg0_options : {};
 		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
-		let years = landuse_HYDE.sorted_hyde_years.filter(y => y >= 1950);
+		let years = (options.years || landuse_HYDE.sorted_hyde_years).filter(y => y >= 1950);
 		
 		await GeoPNG.processTimeseriesParallel({
 			items: years,
@@ -40,6 +40,10 @@ global.migration_OLS = class {
 				let delta_r = GeoPNG.loadNumberRasterImage(delta_path, { format: "float32" });
 				let popc_r = GeoPNG.loadNumberRasterImage(popc_path, { format: "float32" });
 				
+				let y_idx = years.indexOf(year);
+				let year_gap = 1;
+				if (y_idx > 0) year_gap = year - years[y_idx - 1];
+				
 				GeoPNG.saveNumberRasterImage({
 					file_path: target_path,
 					format: "float32",
@@ -47,18 +51,19 @@ global.migration_OLS = class {
 					height: b_r.height,
 					function: (i) => {
 						let pop = popc_r.data[i];
-						if (pop < 1.0 || isNaN(pop)) return 0;
+						if (pop < 1.0 || isNaN(pop)) return NaN;
 						
 						let b = isNaN(b_r.data[i]) ? 0 : Math.max(0, b_r.data[i]);
 						let fd = isNaN(fd_r.data[i]) ? 0 : Math.max(0, fd_r.data[i]);
 						let md = isNaN(md_r.data[i]) ? 0 : Math.max(0, md_r.data[i]);
 						let dpop = isNaN(delta_r.data[i]) ? 0 : delta_r.data[i];
+						let annualized_dpop = dpop / year_gap;
 						
-						let actual_migration = dpop - (b - (fd + md));
+						let actual_migration = annualized_dpop - (b - (fd + md));
 						let ratio = actual_migration / pop;
 						
-						if (ratio > 10) ratio = 10;
-						if (ratio < -10) ratio = -10;
+						if (ratio > 1) ratio = 1;
+						if (ratio < -1) ratio = -1;
 						return ratio;
 					}
 				});
@@ -113,7 +118,7 @@ global.migration_OLS = class {
 		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
 		
 		let covariates_obj = this.covariates_obj();
-		let years = landuse_HYDE.sorted_hyde_years;
+		let years = options.years || landuse_HYDE.sorted_hyde_years;
 		let unified_model_path = `${this.intermediate_ols}geomean_OLS_migration.json`;
 		
 		let target_years = years.filter((year) => {
@@ -144,7 +149,7 @@ global.migration_OLS = class {
 	static async D_normaliseOLSRasters (arg0_options) {
 		let options = (arg0_options) ? arg0_options : {};
 		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
-		let years = landuse_HYDE.sorted_hyde_years;
+		let years = options.years || landuse_HYDE.sorted_hyde_years;
 		let landarea_raster = GeoPNG.loadNumberRasterImage(metadata_HYDE.input_raster_land_area, { format: "int32" });
 		
 		let global_min = Infinity;
@@ -157,17 +162,28 @@ global.migration_OLS = class {
 			if (!fs.existsSync(target_path)) continue;
 			
 			let target_raster = GeoPNG.loadNumberRasterImage(target_path, { format: "float32" });
+			let popc_path = `${age_sex.sf().input_popc_folder}stadester_population_${year}.png`;
+			if (!fs.existsSync(popc_path)) continue;
+			let popc_raster = GeoPNG.loadNumberRasterImage(popc_path, { format: "float32" });
+			
 			let local_min = Infinity;
 			let local_max = -Infinity;
 			let local_count = 0;
 			
-			for (let i = 0; i < target_raster.data.length; i++) {
+			let sampled_targets = [];
+			for (let i = 0; i < target_raster.data.length; i += 17) { // 17 is prime to avoid grid artifacts
 				let val = target_raster.data[i];
-				if (!isNaN(val) && Math.abs(val) > 1e-10) {
-					if (val < local_min) local_min = val;
-					if (val > local_max) local_max = val;
+				let pop = popc_raster.data[i];
+				if (!isNaN(val) && Math.abs(val) > 1e-10 && pop > 10000) {
+					sampled_targets.push(val);
 					local_count++;
 				}
+			}
+			
+			if (sampled_targets.length > 0) {
+				sampled_targets.sort((a,b) => a - b);
+				local_min = sampled_targets[Math.floor(sampled_targets.length * 0.01)]; // 1st percentile
+				local_max = sampled_targets[Math.floor(sampled_targets.length * 0.99)]; // 99th percentile
 			}
 			if (local_count > 0) {
 				yearly_target_stats[year] = { min: local_min, max: local_max, sample_size: local_count };
@@ -267,7 +283,7 @@ global.migration_OLS = class {
 	static async E_deriveFinalRasters (arg0_options) {
 		let options = (arg0_options) ? arg0_options : {};
 		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
-		let years = landuse_HYDE.sorted_hyde_years;
+		let years = options.years || landuse_HYDE.sorted_hyde_years;
 		
 		await GeoPNG.processTimeseriesParallel({
 			items: years,
@@ -311,21 +327,72 @@ global.migration_OLS = class {
 				let fd_path = `${births_deaths_UNWPP.output_female_crude_deaths_folder}female_deaths_${year}.png`;
 				let md_path = `${births_deaths_UNWPP.output_male_crude_deaths_folder}male_deaths_${year}.png`;
 				let delta_path = `${population_Stadester_transform.delta_total_population_folder}delta_total_population_${year}.png`;
+				
+				let delta_r = null;
+				if (fs.existsSync(delta_path)) {
+					delta_r = GeoPNG.loadNumberRasterImage(delta_path, { format: "float32" });
+				}
+				
 				let actual_migration_raster = null;
 				let has_actual = fs.existsSync(b_path) && fs.existsSync(fd_path) && fs.existsSync(md_path) && fs.existsSync(delta_path);
+				
+				let y_idx = years.indexOf(year);
+				let year_gap = 1;
+				if (y_idx > 0) year_gap = year - years[y_idx - 1];
 				
 				if (has_actual) {
 					let b_r = GeoPNG.loadNumberRasterImage(b_path, { format: "float32" });
 					let fd_r = GeoPNG.loadNumberRasterImage(fd_path, { format: "float32" });
 					let md_r = GeoPNG.loadNumberRasterImage(md_path, { format: "float32" });
-					let delta_r = GeoPNG.loadNumberRasterImage(delta_path, { format: "float32" });
+					
 					actual_migration_raster = new Float32Array(popc_raster.data.length);
 					for(let i=0;i<popc_raster.data.length;i++){
 						let dpop = isNaN(delta_r.data[i])?0:delta_r.data[i];
+						let annualized_dpop = dpop / year_gap;
 						let b = isNaN(b_r.data[i])?0:Math.max(0,b_r.data[i]);
 						let fd = isNaN(fd_r.data[i])?0:Math.max(0,fd_r.data[i]);
 						let md = isNaN(md_r.data[i])?0:Math.max(0,md_r.data[i]);
-						actual_migration_raster[i] = dpop - (b - (fd+md));
+						actual_migration_raster[i] = annualized_dpop - (b - (fd+md));
+					}
+				}
+				
+				let cohorts = (typeof age_sex !== "undefined" && age_sex.getCohorts) ? age_sex.getCohorts() : ["00", "01", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55", "60", "65", "70", "75", "80"];
+				
+				// Generate Rogers-Castro multi-exponential migration schedule weights
+				// Using standard parameters derived from Wilson/Rogers-Castro fitting limits
+				let rc_f = {};
+				let rc_m = {};
+				let getRC = (age, mu2) => {
+					let a1 = 0.02, alpha1 = 0.1; // Childhood curve
+					let a2 = 0.06, alpha2 = 0.1, lambda2 = 0.3; // Labor force curve
+					let c = 0.003; // Baseline
+					return a1 * Math.exp(-alpha1 * age) + a2 * Math.exp(-alpha2 * (age - mu2) - Math.exp(-lambda2 * (age - mu2))) + c;
+				};
+				
+				for (let c = 0; c < cohorts.length; c++) {
+					let cohort = cohorts[c];
+					let age = (cohort === "00") ? 0.5 : ((cohort === "01") ? 3 : parseInt(cohort) + 2.5);
+					rc_f[cohort] = getRC(age, 20); // Females peak around 20 (marriage/domestic)
+					rc_m[cohort] = getRC(age, 22.5); // Males peak slightly later around 22-23 (labor)
+				}
+				
+				let pot_f = new Float32Array(popc_raster.data.length);
+				let pot_m = new Float32Array(popc_raster.data.length);
+				
+				for (let c = 0; c < cohorts.length; c++) {
+					let cohort = cohorts[c];
+					let f_path = `${h3}/age_sex/4.composite_cohorts/f_${cohort}_${year}.png`;
+					let m_path = `${h3}/age_sex/4.composite_cohorts/m_${cohort}_${year}.png`;
+					
+					let fr = fs.existsSync(f_path) ? GeoPNG.loadNumberRasterImage(f_path, { format: "float32" }) : null;
+					let mr = fs.existsSync(m_path) ? GeoPNG.loadNumberRasterImage(m_path, { format: "float32" }) : null;
+					
+					let wf = rc_f[cohort] || 0.01;
+					let wm = rc_m[cohort] || 0.01;
+					
+					for (let i = 0; i < popc_raster.data.length; i++) {
+						if (fr && !isNaN(fr.data[i])) pot_f[i] += Math.max(0, fr.data[i]) * wf;
+						if (mr && !isNaN(mr.data[i])) pot_m[i] += Math.max(0, mr.data[i]) * wm;
 					}
 				}
 				
@@ -333,12 +400,45 @@ global.migration_OLS = class {
 				let final_mf_array = new Float32Array(popc_raster.data.length);
 				let final_mm_array = new Float32Array(popc_raster.data.length);
 				
+				let global_sum_m = 0;
+				let global_sum_pop = 0;
+				
+				// Pass 1: Calculate initial migration and global sums
 				for (let i = 0; i < popc_raster.data.length; i++) {
+					let pop = popc_raster.data[i];
 					let m = (has_actual && !isNaN(actual_migration_raster[i])) ? actual_migration_raster[i] : migration_array[i];
 					if (isNaN(m)) m = 0;
+					
 					final_m_array[i] = m;
-					final_mf_array[i] = m * 0.488;
-					final_mm_array[i] = m * 0.512;
+					if (pop > 0) {
+						global_sum_m += m;
+						global_sum_pop += pop;
+					}
+				}
+				
+				// Calculate balancing rate to ensure global net migration sums to exactly 0
+				let balancing_rate = (global_sum_pop > 0) ? (-global_sum_m / global_sum_pop) : 0;
+				
+				// Pass 2: Apply zero-sum balance and sex splits
+				for (let i = 0; i < popc_raster.data.length; i++) {
+					let pop = popc_raster.data[i];
+					let m = final_m_array[i];
+					
+					if (pop > 0) {
+						m += (pop * balancing_rate);
+					}
+					
+					let pf = pot_f[i];
+					let pm = pot_m[i];
+					let total_pot = pf + pm;
+					
+					// If the pixel has no calculated potential, fallback to biological baseline
+					let f_ratio = (total_pot > 0) ? (pf / total_pot) : 0.488;
+					let m_ratio = (total_pot > 0) ? (pm / total_pot) : 0.512;
+					
+					final_m_array[i] = m;
+					final_mf_array[i] = m * f_ratio;
+					final_mm_array[i] = m * m_ratio;
 				}
 				
 				GeoPNG.saveNumberRasterImage({ file_path: net_out, format: "float32", width: popc_raster.width, height: popc_raster.height, function: (i) => final_m_array[i] });

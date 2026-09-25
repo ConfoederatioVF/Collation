@@ -30,6 +30,7 @@ global.births_deaths_OLS = class {
 		return {
 			births: {
 				denominator: "cohort_00",
+				fraction_cap: 1.5,
 				actual_folder_unwpp: births_deaths_UNWPP.output_crude_births_folder,
 				actual_folder_hmd: births_deaths_HMD.output_crude_births_folder,
 				actual_prefix: "births",
@@ -41,6 +42,7 @@ global.births_deaths_OLS = class {
 			},
 			female_deaths: {
 				denominator: "cohort_decline",
+				fraction_cap: 3.0,
 				sex: "f",
 				actual_folder_unwpp: births_deaths_UNWPP.output_female_crude_deaths_folder,
 				actual_folder_hmd: births_deaths_HMD.output_female_crude_deaths_folder,
@@ -53,6 +55,7 @@ global.births_deaths_OLS = class {
 			},
 			male_deaths: {
 				denominator: "cohort_decline",
+				fraction_cap: 3.0,
 				sex: "m",
 				actual_folder_unwpp: births_deaths_UNWPP.output_male_crude_deaths_folder,
 				actual_folder_hmd: births_deaths_HMD.output_male_crude_deaths_folder,
@@ -265,9 +268,9 @@ global.births_deaths_OLS = class {
 		//Initialise options
 		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
 
-		//Declare local instance variables
 		let variables_obj = this._getVariablesObj();
 		let years = landuse_HYDE.sorted_hyde_years;
+		if (options.years) years = years.filter(y => options.years.includes(y));
 		
 		await GeoPNG.processTimeseriesParallel({
 			items: years,
@@ -291,6 +294,8 @@ global.births_deaths_OLS = class {
 					}
 					
 					let actual_raster = GeoPNG.loadNumberRasterImage(actual_path, { format: "float32" });
+					let popc_path = `${age_sex.sf().input_popc_folder}stadester_population_${year}.png`;
+					let popc_raster = fs.existsSync(popc_path) ? GeoPNG.loadNumberRasterImage(popc_path, { format: "float32" }) : null;
 					
 					GeoPNG.saveNumberRasterImage({
 						file_path: target_path,
@@ -298,13 +303,15 @@ global.births_deaths_OLS = class {
 						width: actual_raster.width,
 						height: actual_raster.height,
 						function: (local_index) => {
+							if (popc_raster && popc_raster.data[local_index] < 10000) return NaN;
+							
 							let local_count = actual_raster.data[local_index];
-							if (isNaN(local_count) || local_count <= 0) return 0;
+							if (isNaN(local_count) || local_count <= 0) return NaN;
 							
 							let local_denominator = denominator_array[local_index];
-							if (local_denominator <= 0) return 0;
+							if (local_denominator < 1) return NaN;
 							
-							return Math.min(10, local_count / local_denominator);
+							return Math.min(variable_obj.fraction_cap, local_count / local_denominator);
 						}
 					});
 					
@@ -327,6 +334,7 @@ global.births_deaths_OLS = class {
 		let variables_obj = this._getVariablesObj();
 		let variable_keys = Object.keys(variables_obj);
 		let years = landuse_HYDE.sorted_hyde_years;
+		if (options.years) years = years.filter(y => options.years.includes(y));
 		
 		for (let v = 0; v < variable_keys.length; v++) {
 			let variable_obj = variables_obj[variable_keys[v]];
@@ -388,6 +396,7 @@ global.births_deaths_OLS = class {
 		let variables_obj = this._getVariablesObj();
 		let variable_keys = Object.keys(variables_obj);
 		let years = landuse_HYDE.sorted_hyde_years;
+		if (options.years) years = years.filter(y => options.years.includes(y));
 		
 		for (let v = 0; v < variable_keys.length; v++) {
 			let variable_obj = variables_obj[variable_keys[v]];
@@ -437,6 +446,7 @@ global.births_deaths_OLS = class {
 
 		let variables_obj = this._getVariablesObj();
 		let years = landuse_HYDE.sorted_hyde_years;
+		if (options.years) years = years.filter(y => options.years.includes(y));
 		let sf = age_sex.sf();
 		let landarea_raster = GeoPNG.loadNumberRasterImage(metadata_HYDE.input_raster_land_area, { format: "int32" });
 		
@@ -455,20 +465,20 @@ global.births_deaths_OLS = class {
 				if (!fs.existsSync(target_path)) continue;
 				
 				let target_raster = GeoPNG.loadNumberRasterImage(target_path, { format: "float32" });
-				let local_min = Infinity;
-				let local_max = -Infinity;
-				let local_count = 0;
-				
-				for (let i = 0; i < target_raster.data.length; i++) {
+				let sampled_targets = [];
+				for (let i = 0; i < target_raster.data.length; i += 7) {
 					let local_value = target_raster.data[i];
 					if (local_value > 0 && !isNaN(local_value)) {
-						if (local_value < local_min) local_min = local_value;
-						if (local_value > local_max) local_max = local_value;
-						local_count++;
+						sampled_targets.push(local_value);
 					}
 				}
 				
-				if (local_count > 0) {
+				if (sampled_targets.length > 0) {
+					sampled_targets.sort((a, b) => a - b);
+					let local_min = sampled_targets[Math.floor(sampled_targets.length * 0.01)];
+					let local_max = sampled_targets[Math.floor(sampled_targets.length * 0.99)];
+					let local_count = sampled_targets.length * 7;
+					
 					yearly_target_stats[year] = { min: local_min, max: local_max, sample_size: local_count };
 					if (local_min < global_min) global_min = local_min;
 					if (local_max > global_max) global_max = local_max;
@@ -591,6 +601,7 @@ global.births_deaths_OLS = class {
 		let sf = age_sex.sf();
 		let variables_obj = this._getVariablesObj();
 		let years = landuse_HYDE.sorted_hyde_years;
+		if (options.years) years = years.filter(y => options.years.includes(y));
 		
 		await GeoPNG.processTimeseriesParallel({
 			items: years,
@@ -646,7 +657,14 @@ global.births_deaths_OLS = class {
 							local_fraction = target_min + local_normalised * (target_max - target_min);
 						}
 						
-						counts_array[i] = local_fraction * local_denominator;
+						let count = local_fraction * local_denominator;
+						if (variable_obj.denominator === "cohort_00") {
+							count = Math.min(count, 1.5 * local_denominator);
+						} else {
+							count = Math.min(count, popc_raster.data[i]); // Deaths cannot exceed population
+						}
+						
+						counts_array[i] = count;
 					}
 					
 					raw_data[v_key] = {
@@ -687,10 +705,17 @@ global.births_deaths_OLS = class {
 				
 				// 2.5. FLUX RECONCILIATION AGAINST MIGRATION RESIDUAL
 				let migration_path = `${this.output_net_migration_folder}net_migration_${year}.png`;
+				let m_female_path = `${this.output_female_migration_folder}female_net_migration_${year}.png`;
+				let m_male_path = `${this.output_male_migration_folder}male_net_migration_${year}.png`;
 				let delta_path = `${population_Stadester_transform.delta_total_population_folder}delta_total_population_${year}.png`;
 				
-				if (fs.existsSync(migration_path) && fs.existsSync(delta_path) && raw_data.births && raw_data.male_deaths && raw_data.female_deaths) {
-					let m_raster = GeoPNG.loadNumberRasterImage(migration_path, { format: "float32" });
+				let m_raster_updated = false;
+				let m_raster = null, mf_raster = null, mm_raster = null;
+				
+				if (fs.existsSync(migration_path) && fs.existsSync(m_female_path) && fs.existsSync(m_male_path) && fs.existsSync(delta_path) && raw_data.births && raw_data.male_deaths && raw_data.female_deaths) {
+					m_raster = GeoPNG.loadNumberRasterImage(migration_path, { format: "float32" });
+					mf_raster = GeoPNG.loadNumberRasterImage(m_female_path, { format: "float32" });
+					mm_raster = GeoPNG.loadNumberRasterImage(m_male_path, { format: "float32" });
 					let d_raster = GeoPNG.loadNumberRasterImage(delta_path, { format: "float32" });
 					
 					let b_counts = raw_data.births.counts_array;
@@ -701,8 +726,13 @@ global.births_deaths_OLS = class {
 					let year_gap = 1;
 					if (y_idx > 0) year_gap = year - years[y_idx - 1];
 					
+					let b_denominator = denominator_cache["cohort_00"];
+					let md_denominator = denominator_cache["cohort_declinem"];
+					let fd_denominator = denominator_cache["cohort_declinef"];
+					
 					for (let i = 0; i < popc_raster.data.length; i++) {
-						if (popc_raster.data[i] <= 0) continue;
+						let pop = popc_raster.data[i];
+						if (pop <= 0) continue;
 						
 						let m_val = m_raster.data[i];
 						let d_val = d_raster.data[i];
@@ -716,14 +746,53 @@ global.births_deaths_OLS = class {
 						let d_raw = md_raw + fd_raw;
 						
 						let ng_target = annualized_d_val - m_val;
-						let t_raw = b_raw + d_raw;
+						let delta_ng = ng_target - (b_raw - d_raw);
 						
-						let t_final = Math.max(t_raw, Math.abs(ng_target));
+						let b_final = b_raw;
+						let d_final = d_raw;
 						
-						let b_final = (t_final + ng_target) / 2;
-						let d_final = (t_final - ng_target) / 2;
+						if (delta_ng > 0) {
+							// Population growing faster than OLS predicts -> baby boom
+							b_final += delta_ng;
+						} else if (delta_ng < 0) {
+							// Population shrinking faster than OLS predicts -> mortality crisis
+							d_final -= delta_ng;
+						}
 						
-						b_counts[i] = Math.max(0, b_final);
+						// CLAMP TO BIOLOGICAL PHYSICAL LIMITS
+						let max_b = (b_denominator && !isNaN(b_denominator[i])) ? (1.5 * b_denominator[i]) : 0;
+						let max_d = pop; // Deaths can never exceed the living population
+						
+						let min_b = 0;
+						let min_d = 0;
+						
+						if (b_final > max_b) b_final = max_b;
+						if (b_final < min_b) b_final = min_b;
+						if (d_final > max_d) d_final = max_d;
+						if (d_final < min_d) d_final = min_d;
+						
+						let clamped_ng = b_final - d_final;
+						
+						// The residual discrepancy MUST be absorbed by migration
+						let m_new = annualized_d_val - clamped_ng;
+						let m_diff = m_new - m_val;
+						
+						if (Math.abs(m_diff) > 1) {
+							m_raster.data[i] = m_new;
+							m_raster_updated = true;
+							
+							let mf_val = isNaN(mf_raster.data[i]) ? 0 : mf_raster.data[i];
+							let mm_val = isNaN(mm_raster.data[i]) ? 0 : mm_raster.data[i];
+							
+							let m_total = mf_val + mm_val;
+							let f_ratio = (Math.abs(m_total) > 0) ? (mf_val / m_total) : 0.488;
+							let m_ratio = (Math.abs(m_total) > 0) ? (mm_val / m_total) : 0.512;
+							
+							mf_raster.data[i] = mf_val + (m_diff * f_ratio);
+							mm_raster.data[i] = mm_val + (m_diff * m_ratio);
+						}
+						
+						b_counts[i] = b_final;
 						
 						if (d_raw > 0) {
 							md_counts[i] = d_final * (md_raw / d_raw);
@@ -816,6 +885,14 @@ global.births_deaths_OLS = class {
 					});
 					
 					console.log(`- Saved clamped raster: ${output_path}`);
+				}
+				
+				// 4. Save updated migration rasters if flux reconciliation pushed residuals back to them
+				if (m_raster_updated) {
+					GeoPNG.saveNumberRasterImage({ file_path: migration_path, format: "float32", width: popc_raster.width, height: popc_raster.height, function: (i) => m_raster.data[i] });
+					GeoPNG.saveNumberRasterImage({ file_path: m_female_path, format: "float32", width: popc_raster.width, height: popc_raster.height, function: (i) => mf_raster.data[i] });
+					GeoPNG.saveNumberRasterImage({ file_path: m_male_path, format: "float32", width: popc_raster.width, height: popc_raster.height, function: (i) => mm_raster.data[i] });
+					console.log(`- Updated migration rasters to absorb residual biological overflow for ${year}`);
 				}
 			}
 		});
