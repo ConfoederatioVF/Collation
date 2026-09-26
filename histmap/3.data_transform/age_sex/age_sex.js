@@ -405,247 +405,136 @@ global.age_sex = class {
 		});
 	}
 	
-	/**
-	 * Clamps the logit probability fields into exact local population aggregates anchoring perfectly to Stadestér.
-	 * Probabilities are normalised per-pixel across all cohorts so that cohort sums exactly equal the Stadestér total.
-	 */
 	static async E_clampToStadester (arg0_options) {
 		//Convert from parameters
 		let options = (arg0_options) ? arg0_options : {};
 
-		//Declare local instance variables
-		let cohorts = this.getCohorts();
+		//Initialise options
 		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
 		let years = (options.years) ? options.years : landuse_HYDE.sorted_hyde_years;
+		let smoothing_method = options.smoothing_method || "whittaker_henderson";
+		let do_not_smooth = !!(options.do_not_smooth || options.lift_isotonic);
+		let use_whittaker = (smoothing_method === "whittaker_henderson");
+		let use_global_scaling = !do_not_smooth && options.global_cohort_scaling !== false;
+		let start_index = (options.smoothing_start_index !== undefined) ? options.smoothing_start_index : 2;
 
-		if (!fs.existsSync(this.intermediate_clamped_rasters)) fs.mkdirSync(this.intermediate_clamped_rasters, { recursive: true });
+		//Whittaker sex-ratio policies are opt-in, matching the new coupling method
+		let enforce_fixed = (options.enforce_fixed_sex_ratios === true);
+		let enforce_bounds = (options.enforce_biological_sex_ratios === true);
+		let preserve_sex_ratios = (options.preserve_sex_ratios !== undefined) ?
+			options.preserve_sex_ratios : !enforce_fixed && !enforce_bounds;
+
+		//Declare local instance variables
+		let cohorts = this.getCohorts();
+		let num_cohorts = cohorts.length;
+		let f_indices = [];
+		let m_indices = [];
+		let completed_years = [];
+
+		//Guard clauses
+		if (smoothing_method !== "whittaker_henderson" && smoothing_method !== "isotonic")
+			throw new RangeError("smoothing_method must be 'whittaker_henderson' or 'isotonic'.");
+
+		if (!Number.isInteger(start_index) || start_index < 0)
+			throw new RangeError("smoothing_start_index must be a non-negative integer.");
+
+		if (use_whittaker && typeof Statistics.coupleAgeSexCohortsWhittaker !== "function")
+			throw new Error("Statistics.coupleAgeSexCohortsWhittaker is not available.");
+
+		if (!use_whittaker && typeof Statistics.coupleAgeSexCohorts !== "function")
+			throw new Error("Statistics.coupleAgeSexCohorts is not available.");
+
+		if (use_whittaker && preserve_sex_ratios && (enforce_fixed || enforce_bounds))
+			throw new Error("Preserving raw sex ratios conflicts with fixed ratios or ratio bounds.");
+
+		if (!fs.existsSync(this.intermediate_clamped_rasters))
+			fs.mkdirSync(this.intermediate_clamped_rasters, { recursive: true });
+
+		//Match female and male cohorts explicitly by age label
+		for (let c = 0; c < num_cohorts; c++) {
+			if (!cohorts[c].startsWith("f_"))
+				continue;
+
+			let age_label = cohorts[c].slice(2);
+			let male_index = cohorts.indexOf(`m_${age_label}`);
+
+			if (male_index === -1)
+				throw new Error(`Missing male counterpart for ${cohorts[c]}.`);
+
+			f_indices.push(c);
+			m_indices.push(male_index);
+		}
+
+		let age_count = f_indices.length;
+
+		if (age_count === 0 || age_count*2 !== num_cohorts)
+			throw new Error("Cohorts must contain one female and one male entry per age band.");
+
+		let age_band_widths = new Float64Array(age_count);
+
+		if (options.age_band_widths && options.age_band_widths.length !== age_count)
+			throw new RangeError("age_band_widths must contain one width per age band.");
+
+		for (let k = 0; k < age_count; k++) {
+			let age_label = cohorts[f_indices[k]].slice(2);
+			let default_width = (age_label === "00") ? 1 : ((age_label === "01") ? 4 : 5);
+			let width = options.age_band_widths ? options.age_band_widths[k] : default_width;
+
+			if (!Number.isFinite(width) || width <= 0)
+				throw new RangeError("Age-band widths must be finite and greater than zero.");
+
+			age_band_widths[k] = width;
+		}
 
 		let target_years = years.filter((year) => {
-			if (overwrite) return true;
-			for (let i = 0; i < cohorts.length; i++) {
-				let out_path = `${this.intermediate_clamped_rasters}global_${cohorts[i]}_${year}.png`;
-				if (!fs.existsSync(out_path)) return true;
+			if (overwrite)
+				return true;
+
+			for (let c = 0; c < num_cohorts; c++) {
+				let out_path = `${this.intermediate_clamped_rasters}global_${cohorts[c]}_${year}.png`;
+
+				if (!fs.existsSync(out_path))
+					return true;
 			}
+
 			return false;
 		});
 
-		if (target_years.length === 0) return [];
+		if (target_years.length === 0)
+			return [];
 
-		//Return statement
-		return await GeoPNG.processTimeseriesParallel({
-			concurrency: options.concurrency || 8,
+		return GeoPNG.processTimeseriesParallel({
+			concurrency: options.concurrency,
 			items: target_years,
-			name: "Age Sex E_clampToStadester",
+			name: `Age Sex Clamping (${smoothing_method})`,
 			task_generator: (year) => {
 				let format_year = (year > 2023) ? 2023 : year;
 				let popc_info = this.covariates_obj["popc_"](format_year);
-
-				if (!popc_info || !fs.existsSync(popc_info[0])) return null;
-
+				
 				return {
-					type: "clamp_cohorts_isotonic",
+					baseline_sex_ratios: options.baseline_sex_ratios,
 					cohorts: cohorts,
-					hmd_folder: (typeof age_sex_HMD !== "undefined") ? age_sex_HMD.output_clamped_to_stadester : path.join(global.h2 || "./histmap/2.data_cleaning/", "age_sex_HMD/2.clamped_to_stadester/"),
+					do_not_smooth: do_not_smooth,
+					enforce_biological_sex_ratios: enforce_bounds,
+					enforce_fixed_sex_ratios: enforce_fixed,
+					hmd_folder: options.hmd_folder,
+					lift_isotonic: do_not_smooth,
 					logit_rasters_folder: this.intermediate_logit_rasters,
 					output_folder: this.intermediate_clamped_rasters,
-					popc_format: popc_info[1] || "float32",
-					popc_path: popc_info[0],
+					popc_format: popc_info ? popc_info[1] : "float32",
+					popc_path: popc_info ? popc_info[0] : null,
+					preserve_sex_ratios: preserve_sex_ratios,
+					smoothing_method: smoothing_method,
+					smoothing_start_index: start_index,
+					task_type: (use_whittaker) ? "clamp_cohorts_whittaker" : "clamp_cohorts_isotonic",
+					wh_huber_delta: options.wh_huber_delta,
+					wh_lambda: options.wh_lambda,
+					wh_max_iterations: options.wh_max_iterations,
+					wh_mu: options.wh_mu,
+					wh_tolerance: options.wh_tolerance,
+					wh_weights: options.wh_weights,
 					year: year
 				};
-			},
-			handler: async (year) => {
-				let format_year = (year > 2023) ? 2023 : year;
-				let popc_info = this.covariates_obj["popc_"](format_year);
-				
-				if (!fs.existsSync(popc_info[0])) return;
-				
-				let popc_raster = GeoPNG.loadNumberRasterImage(popc_info[0], { format: popc_info[1] });
-				let prob_rasters = {};
-				let missing_probs = false;
-				
-				for (let i = 0; i < cohorts.length; i++) {
-					let prob_path = `${this.intermediate_logit_rasters}logit_${year}_class_${cohorts[i]}.png`;
-					if (!fs.existsSync(prob_path)) { missing_probs = true; break; }
-					prob_rasters[cohorts[i]] = GeoPNG.loadNumberRasterImage(prob_path, { format: "float32" });
-				}
-				if (missing_probs) return;
-				
-				let total_pixels = 4320*2160;
-				let num_cohorts = cohorts.length;
-				let band_widths = new Float32Array(num_cohorts);
-				for (let c = 0; c < num_cohorts; c++)
-					band_widths[c] = cohorts[c].endsWith("_00") ? 1 : (cohorts[c].endsWith("_01") ? 4 : 5);
-				
-				let output_buffers = new Array(num_cohorts);
-				for (let c = 0; c < num_cohorts; c++)
-					output_buffers[c] = new Float32Array(total_pixels);
-				
-				let f_indices = [];
-				let m_indices = [];
-				for (let c = 0; c < num_cohorts; c++) {
-					if (cohorts[c].startsWith("f_")) f_indices.push(c);
-					else m_indices.push(c);
-				}
-				
-				let age_count = f_indices.length;
-				let age_band_widths = new Float32Array(age_count);
-				for (let k = 0; k < age_count; k++)
-					age_band_widths[k] = band_widths[f_indices[k]];
-
-				let raw_f = new Float32Array(age_count);
-				let raw_m = new Float32Array(age_count);
-
-				// Pre-load HMD ground-truth rasters for pre-1950 historical years to bypass PAVA
-				let has_hmd = false;
-				let hmd_rasters = {};
-				let hmd_total = null;
-				let hmd_folder = (typeof age_sex_HMD !== "undefined") ? age_sex_HMD.output_clamped_to_stadester : path.join(global.h2 || "./histmap/2.data_cleaning/", "age_sex_HMD/2.clamped_to_stadester/");
-				if (year < 1950 && hmd_folder && fs.existsSync(hmd_folder)) {
-					let test_path = path.join(hmd_folder, `global_${cohorts[0]}_${year}.png`);
-					if (fs.existsSync(test_path)) {
-						has_hmd = true;
-						hmd_total = new Float32Array(total_pixels);
-						for (let c = 0; c < num_cohorts; c++) {
-							let hmd_path = path.join(hmd_folder, `global_${cohorts[c]}_${year}.png`);
-							if (fs.existsSync(hmd_path)) {
-								let r = GeoPNG.loadNumberRasterImage(hmd_path, { format: "float32" });
-								hmd_rasters[cohorts[c]] = r;
-								for (let i = 0; i < total_pixels; i++) {
-									let val = r.data[i];
-									if (val > 0) hmd_total[i] += val;
-								}
-							}
-						}
-					}
-				}
-
-				// Pass 1: Compute global unscaled population and apply PAVA globally
-				let global_raw_f = new Float32Array(age_count);
-				let global_raw_m = new Float32Array(age_count);
-
-				for (let i = 0; i < total_pixels; i++) {
-					let stade_pop = popc_raster.data[i];
-					if (stade_pop < 0.01 || isNaN(stade_pop)) continue;
-					
-					// Exclude HMD ground truth from global PAVA totals
-					if (has_hmd && hmd_total[i] > 0) continue; 
-
-					for (let k = 0; k < age_count; k++) {
-						let f_val = prob_rasters[cohorts[f_indices[k]]].data[i];
-						let m_val = prob_rasters[cohorts[m_indices[k]]].data[i];
-						
-						if (f_val > 0 && isFinite(f_val)) global_raw_f[k] += f_val * stade_pop;
-						if (m_val > 0 && isFinite(m_val)) global_raw_m[k] += m_val * stade_pop;
-					}
-				}
-
-				let global_coupled_f = new Float32Array(age_count);
-				let global_coupled_m = new Float32Array(age_count);
-				let global_coupled_tot = new Float32Array(age_count);
-
-				Statistics.coupleAgeSexCohorts(global_raw_m, global_raw_f, age_band_widths, 2, {
-					female_output: global_coupled_f,
-					male_output: global_coupled_m,
-					total_output: global_coupled_tot
-				});
-
-				let global_scale_f = new Float32Array(age_count);
-				let global_scale_m = new Float32Array(age_count);
-				for (let k = 0; k < age_count; k++) {
-					global_scale_f[k] = (global_raw_f[k] > 0) ? (global_coupled_f[k] / global_raw_f[k]) : 1;
-					global_scale_m[k] = (global_raw_m[k] > 0) ? (global_coupled_m[k] / global_raw_m[k]) : 1;
-				}
-
-				let f_coupled_buf = new Float32Array(age_count);
-				let m_coupled_buf = new Float32Array(age_count);
-				let tot_coupled_buf = new Float32Array(age_count);
-				let pava_buffers = {
-					block_counts: new Int32Array(age_count),
-					block_vals: new Float32Array(age_count),
-					block_weights: new Float32Array(age_count)
-				};
-
-				// Pass 2: Dasymetrically resolve populations proportionally using global macro-demographic scaling + local PAVA
-				for (let i = 0; i < total_pixels; i++) {
-					let stade_pop = popc_raster.data[i];
-					if (stade_pop < 0.01 || isNaN(stade_pop)) continue;
-
-					// Exclude empirical HMD ground truth from PAVA smoothing
-					if (has_hmd && hmd_total[i] > 0) {
-						let hmd_scale = stade_pop / hmd_total[i];
-						for (let c = 0; c < num_cohorts; c++) {
-							let val = (hmd_rasters[cohorts[c]]) ? hmd_rasters[cohorts[c]].data[i] : 0;
-							output_buffers[c][i] = val*hmd_scale;
-						}
-						continue;
-					}
-
-					for (let k = 0; k < age_count; k++) {
-						let f_val = prob_rasters[cohorts[f_indices[k]]].data[i];
-						let m_val = prob_rasters[cohorts[m_indices[k]]].data[i];
-						
-						let f_w = (f_val > 0 && isFinite(f_val)) ? f_val * global_scale_f[k] : 0;
-						let m_w = (m_val > 0 && isFinite(m_val)) ? m_val * global_scale_m[k] : 0;
-						
-						raw_f[k] = f_w;
-						raw_m[k] = m_w;
-					}
-
-					// Local monotonic ceiling for elderly cohorts (indices 14 to 17: 65, 70, 75, 80)
-					for (let k = 14; k < age_count; k++) {
-						let prev_f_dens = raw_f[k - 1] / age_band_widths[k - 1];
-						let max_f_w = prev_f_dens * age_band_widths[k] * 1.05;
-						if (raw_f[k] > max_f_w && max_f_w > 0) {
-							raw_f[k] = max_f_w;
-						}
-
-						let prev_m_dens = raw_m[k - 1] / age_band_widths[k - 1];
-						let max_m_w = prev_m_dens * age_band_widths[k] * 1.05;
-						if (raw_m[k] > max_m_w && max_m_w > 0) {
-							raw_m[k] = max_m_w;
-						}
-					}
-
-					Statistics.coupleAgeSexCohorts(raw_m, raw_f, age_band_widths, (options.lift_isotonic || options.do_not_smooth) ? null : 2, {
-						baseline_sex_ratios: options.baseline_sex_ratios,
-						buffers: pava_buffers,
-						do_not_smooth: options.do_not_smooth || options.lift_isotonic,
-						female_output: f_coupled_buf,
-						lift_isotonic: options.lift_isotonic,
-						male_output: m_coupled_buf,
-						preserve_sex_ratios: options.preserve_sex_ratios,
-						total_output: tot_coupled_buf
-					});
-
-					let sum_rates = 0;
-					for (let k = 0; k < age_count; k++)
-						sum_rates += f_coupled_buf[k] + m_coupled_buf[k];
-
-					if (sum_rates > 0) {
-						let local_scale = stade_pop / sum_rates;
-						for (let k = 0; k < age_count; k++) {
-							output_buffers[f_indices[k]][i] = f_coupled_buf[k] * local_scale;
-							output_buffers[m_indices[k]][i] = m_coupled_buf[k] * local_scale;
-						}
-					} else {
-						let even_share = stade_pop / num_cohorts;
-						for (let c = 0; c < num_cohorts; c++)
-							output_buffers[c][i] = even_share;
-					}
-				}
-				
-				for (let c = 0; c < num_cohorts; c++) {
-					let out_path = `${this.intermediate_clamped_rasters}global_${cohorts[c]}_${year}.png`;
-					if (!overwrite && fs.existsSync(out_path)) continue;
-					
-					await GeoPNG.saveNumberRasterImageAsync({
-						data: output_buffers[c],
-						file_path: out_path,
-						format: "float32",
-						height: 2160,
-						width: 4320
-					});
-				}
 			}
 		});
 	}

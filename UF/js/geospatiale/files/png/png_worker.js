@@ -1405,14 +1405,15 @@ let handleTask = async function (task) {
     return { output_file_path: output_file_path, success: true };
   }
 
-  //9. Clamp Cohorts with PAVA Isotonic Smoothing
-  if (task_type === "clamp_cohorts_isotonic" || task_type === "clamp_cohorts_to_stadester") {
+  //9. Clamp Cohorts with Isotonic (PAVA) or Whittaker-Henderson Graduation
+  if (task_type === "clamp_cohorts_isotonic" || task_type === "clamp_cohorts_to_stadester" || task_type === "clamp_cohorts_whittaker") {
     let cohorts = task.cohorts || [];
     let logit_folder = task.logit_rasters_folder;
     let output_folder = task.output_folder;
     let popc_path = task.popc_path;
     let year = task.year;
     let hmd_folder = task.hmd_folder || (global.h2 ? path.join(global.h2, "age_sex_HMD/2.clamped_to_stadester/") : null);
+    let use_whittaker = (task_type === "clamp_cohorts_whittaker" || task.smoothing_method === "whittaker_henderson" || task.smoothing_method === "whittaker");
 
     if (!fs.existsSync(popc_path)) return null;
     let popc_raster = await GeoPNG.loadNumberRasterImageAsync(popc_path, { format: task.popc_format || "float32" });
@@ -1452,7 +1453,7 @@ let handleTask = async function (task) {
     for (let k = 0; k < age_count; k++)
       age_band_widths[k] = band_widths[f_indices[k]];
 
-    // Pre-load HMD ground-truth rasters for pre-1950 historical years to bypass PAVA
+    // Pre-load HMD ground-truth rasters for pre-1950 historical years to bypass smoothing
     let has_hmd = false;
     let hmd_rasters = {};
     let hmd_total = null;
@@ -1475,7 +1476,7 @@ let handleTask = async function (task) {
       }
     }
 
-    // Pass 1: Compute global unscaled population and apply PAVA globally
+    // Pass 1: Compute global unscaled population and apply macro-demographic smoothing globally
     let global_raw_f = new Float32Array(age_count);
     let global_raw_m = new Float32Array(age_count);
 
@@ -1483,7 +1484,7 @@ let handleTask = async function (task) {
       let stade_pop = popc_raster.data[i];
       if (stade_pop < 0.01 || isNaN(stade_pop)) continue;
 
-      // Exclude HMD ground truth from global PAVA totals
+      // Exclude HMD ground truth from global totals
       if (has_hmd && hmd_total[i] > 0) continue;
 
       for (let k = 0; k < age_count; k++) {
@@ -1499,15 +1500,40 @@ let handleTask = async function (task) {
     let global_coupled_m = new Float32Array(age_count);
     let global_coupled_tot = new Float32Array(age_count);
 
-    Statistics.coupleAgeSexCohorts(global_raw_m, global_raw_f, age_band_widths, (task.lift_isotonic || task.do_not_smooth) ? null : 2, {
-      baseline_sex_ratios: task.baseline_sex_ratios,
-      do_not_smooth: task.do_not_smooth || task.lift_isotonic,
-      female_output: global_coupled_f,
-      lift_isotonic: task.lift_isotonic,
-      male_output: global_coupled_m,
-      preserve_sex_ratios: task.preserve_sex_ratios,
-      total_output: global_coupled_tot
-    });
+    if (use_whittaker) {
+      let enforce_fixed = (task.enforce_fixed_sex_ratios === true);
+      let enforce_bounds = (task.enforce_biological_sex_ratios === true);
+      let preserve_sex_ratios = (task.preserve_sex_ratios !== undefined) ? task.preserve_sex_ratios : !enforce_fixed && !enforce_bounds;
+
+      Statistics.coupleAgeSexCohortsWhittaker(global_raw_m, global_raw_f, age_band_widths, (task.lift_isotonic || task.do_not_smooth) ? null : task.smoothing_start_index !== undefined ? task.smoothing_start_index : 2, {
+        baseline_sex_ratios: task.baseline_sex_ratios,
+        do_not_smooth: task.do_not_smooth || task.lift_isotonic,
+        enforce_biological_sex_ratios: enforce_bounds,
+        enforce_fixed_sex_ratios: enforce_fixed,
+        female_output: global_coupled_f,
+        huber_delta: task.wh_huber_delta,
+        lambda: task.wh_lambda,
+        male_output: global_coupled_m,
+        max_iterations: task.wh_max_iterations,
+        mu: task.wh_mu,
+        preserve_sex_ratios: preserve_sex_ratios,
+        preserve_total: true,
+        sex_ratio_bounds: task.sex_ratio_bounds,
+        tolerance: task.wh_tolerance,
+        total_output: global_coupled_tot,
+        weights: task.wh_weights
+      });
+    } else {
+      Statistics.coupleAgeSexCohorts(global_raw_m, global_raw_f, age_band_widths, (task.lift_isotonic || task.do_not_smooth) ? null : 2, {
+        baseline_sex_ratios: task.baseline_sex_ratios,
+        do_not_smooth: task.do_not_smooth || task.lift_isotonic,
+        female_output: global_coupled_f,
+        lift_isotonic: task.lift_isotonic,
+        male_output: global_coupled_m,
+        preserve_sex_ratios: task.preserve_sex_ratios,
+        total_output: global_coupled_tot
+      });
+    }
 
     let global_scale_f = new Float32Array(age_count);
     let global_scale_m = new Float32Array(age_count);
@@ -1522,18 +1548,21 @@ let handleTask = async function (task) {
     let f_coupled_buf = new Float32Array(age_count);
     let m_coupled_buf = new Float32Array(age_count);
     let tot_coupled_buf = new Float32Array(age_count);
-    let pava_buffers = {
+
+    let pava_buffers = (!use_whittaker) ? {
       block_counts: new Int32Array(age_count),
       block_vals: new Float32Array(age_count),
       block_weights: new Float32Array(age_count)
-    };
+    } : null;
 
-    // Pass 2: Dasymetrically resolve populations proportionally using global macro-demographic scaling + local PAVA
+
+
+    // Pass 2: Dasymetrically resolve populations proportionally using global macro-demographic scaling + local smoothing
     for (let i = 0; i < total_pixels; i++) {
       let stade_pop = popc_raster.data[i];
       if (stade_pop < 0.01 || isNaN(stade_pop)) continue;
 
-      // Exclude empirical HMD ground truth from PAVA smoothing
+      // Exclude empirical HMD ground truth from smoothing
       if (has_hmd && hmd_total[i] > 0) {
         let hmd_scale = stade_pop / hmd_total[i];
         for (let c = 0; c < num_cohorts; c++) {
@@ -1554,33 +1583,60 @@ let handleTask = async function (task) {
         raw_m[k] = m_w;
       }
 
-      // Local monotonic ceiling for elderly cohorts (indices 14 to 17: 65, 70, 75, 80)
-      for (let k = 14; k < age_count; k++) {
-        let prev_f_dens = raw_f[k - 1] / age_band_widths[k - 1];
-        let max_f_w = prev_f_dens * age_band_widths[k] * 1.05;
-        if (raw_f[k] > max_f_w && max_f_w > 0) {
-          raw_f[k] = max_f_w;
+      if (use_whittaker) {
+        let enforce_fixed = (task.enforce_fixed_sex_ratios === true);
+        let enforce_bounds = (task.enforce_biological_sex_ratios === true);
+        let preserve_sex_ratios = (task.preserve_sex_ratios !== undefined) ? task.preserve_sex_ratios : !enforce_fixed && !enforce_bounds;
+
+        Statistics.coupleAgeSexCohortsWhittaker(raw_m, raw_f, age_band_widths, (task.lift_isotonic || task.do_not_smooth) ? null : task.smoothing_start_index !== undefined ? task.smoothing_start_index : 2, {
+          baseline_sex_ratios: task.baseline_sex_ratios,
+          do_not_smooth: task.do_not_smooth || task.lift_isotonic,
+          enforce_biological_sex_ratios: enforce_bounds,
+          enforce_fixed_sex_ratios: enforce_fixed,
+          female_output: f_coupled_buf,
+          huber_delta: task.wh_huber_delta,
+          lambda: task.wh_lambda,
+          male_output: m_coupled_buf,
+          max_iterations: task.wh_max_iterations,
+          mu: task.wh_mu,
+          preserve_sex_ratios: preserve_sex_ratios,
+          preserve_total: true,
+          sex_ratio_bounds: task.sex_ratio_bounds,
+          tolerance: task.wh_tolerance,
+          total_output: tot_coupled_buf,
+          weights: task.wh_weights
+        });
+      } else {
+        // Local monotonic ceiling for elderly cohorts (indices 14 to 17: 65, 70, 75, 80)
+        for (let k = 14; k < age_count; k++) {
+          let prev_f_dens = raw_f[k - 1] / age_band_widths[k - 1];
+          let max_f_w = prev_f_dens * age_band_widths[k] * 1.05;
+          if (raw_f[k] > max_f_w && max_f_w > 0) {
+            raw_f[k] = max_f_w;
+          }
+
+          let prev_m_dens = raw_m[k - 1] / age_band_widths[k - 1];
+          let max_m_w = prev_m_dens * age_band_widths[k] * 1.05;
+          if (raw_m[k] > max_m_w && max_m_w > 0) {
+            raw_m[k] = max_m_w;
+          }
         }
 
-        let prev_m_dens = raw_m[k - 1] / age_band_widths[k - 1];
-        let max_m_w = prev_m_dens * age_band_widths[k] * 1.05;
-        if (raw_m[k] > max_m_w && max_m_w > 0) {
-          raw_m[k] = max_m_w;
-        }
+        Statistics.coupleAgeSexCohorts(raw_m, raw_f, age_band_widths, (task.lift_isotonic || task.do_not_smooth) ? null : 2, {
+          baseline_sex_ratios: task.baseline_sex_ratios,
+          buffers: pava_buffers,
+          do_not_smooth: task.do_not_smooth || task.lift_isotonic,
+          female_output: f_coupled_buf,
+          lift_isotonic: task.lift_isotonic,
+          male_output: m_coupled_buf,
+          preserve_sex_ratios: task.preserve_sex_ratios,
+          total_output: tot_coupled_buf
+        });
       }
 
-      Statistics.coupleAgeSexCohorts(raw_m, raw_f, age_band_widths, (task.lift_isotonic || task.do_not_smooth) ? null : 2, {
-        baseline_sex_ratios: task.baseline_sex_ratios,
-        buffers: pava_buffers,
-        do_not_smooth: task.do_not_smooth || task.lift_isotonic,
-        female_output: f_coupled_buf,
-        lift_isotonic: task.lift_isotonic,
-        male_output: m_coupled_buf,
-        preserve_sex_ratios: task.preserve_sex_ratios,
-        total_output: tot_coupled_buf
-      });
-
       let sum_rates = 0;
+      for (let k = 0; k < age_count; k++)
+        sum_rates += f_coupled_buf[k] + m_coupled_buf[k];
       for (let k = 0; k < age_count; k++)
         sum_rates += f_coupled_buf[k] + m_coupled_buf[k];
 
