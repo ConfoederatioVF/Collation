@@ -26,17 +26,32 @@ global.migration_OLS = class {
 				let target_path = `${this.intermediate_target}migration_target_${year}.png`;
 				if (!overwrite && fs.existsSync(target_path)) return;
 				
-				let b_path = `${births_deaths_UNWPP.output_crude_births_folder}births_${year}.png`;
-				let fd_path = `${births_deaths_UNWPP.output_female_crude_deaths_folder}female_deaths_${year}.png`;
-				let md_path = `${births_deaths_UNWPP.output_male_crude_deaths_folder}male_deaths_${year}.png`;
+				let kummu_b_folder = (typeof births_deaths_Kummu !== "undefined") ? births_deaths_Kummu.output_births_folder : (global.h2 ? path.join(global.h2, "births_deaths_Kummu/output_birth_rasters/") : null);
+				let kummu_d_folder = (typeof births_deaths_Kummu !== "undefined") ? births_deaths_Kummu.output_deaths_folder : (global.h2 ? path.join(global.h2, "births_deaths_Kummu/output_death_rasters/") : null);
+				let unwpp_b_folder = (typeof births_deaths_UNWPP !== "undefined") ? births_deaths_UNWPP.output_crude_births_folder : (global.h2 ? path.join(global.h2, "births_deaths_UNWPP/1.crude_births/") : null);
+				let unwpp_fd_folder = (typeof births_deaths_UNWPP !== "undefined") ? births_deaths_UNWPP.output_female_crude_deaths_folder : (global.h2 ? path.join(global.h2, "births_deaths_UNWPP/1.female_crude_deaths/") : null);
+				let unwpp_md_folder = (typeof births_deaths_UNWPP !== "undefined") ? births_deaths_UNWPP.output_male_crude_deaths_folder : (global.h2 ? path.join(global.h2, "births_deaths_UNWPP/1.male_crude_deaths/") : null);
+
+				let kummu_b_path = (kummu_b_folder) ? path.join(kummu_b_folder, `births_${year}.png`) : null;
+				let kummu_d_path = (kummu_d_folder) ? path.join(kummu_d_folder, `deaths_${year}.png`) : null;
+				let has_kummu = kummu_b_path && kummu_d_path && fs.existsSync(kummu_b_path) && fs.existsSync(kummu_d_path);
+
+				let unwpp_b_path = (unwpp_b_folder) ? path.join(unwpp_b_folder, `births_${year}.png`) : null;
+				let unwpp_fd_path = (unwpp_fd_folder) ? path.join(unwpp_fd_folder, `female_deaths_${year}.png`) : null;
+				let unwpp_md_path = (unwpp_md_folder) ? path.join(unwpp_md_folder, `male_deaths_${year}.png`) : null;
+				let has_unwpp = unwpp_b_path && unwpp_fd_path && unwpp_md_path && fs.existsSync(unwpp_b_path) && fs.existsSync(unwpp_fd_path) && fs.existsSync(unwpp_md_path);
+
 				let delta_path = `${population_Stadester_transform.delta_total_population_folder}delta_total_population_${year}.png`;
 				let popc_path = `${age_sex.sf().input_popc_folder}stadester_population_${year}.png`;
 				
-				if (!fs.existsSync(b_path) || !fs.existsSync(fd_path) || !fs.existsSync(md_path) || !fs.existsSync(delta_path) || !fs.existsSync(popc_path)) return;
-				
-				let b_r = GeoPNG.loadNumberRasterImage(b_path, { format: "float32" });
-				let fd_r = GeoPNG.loadNumberRasterImage(fd_path, { format: "float32" });
-				let md_r = GeoPNG.loadNumberRasterImage(md_path, { format: "float32" });
+				if ((!has_kummu && !has_unwpp) || !fs.existsSync(delta_path) || !fs.existsSync(popc_path)) return;
+
+				let kummu_b_r = has_kummu ? GeoPNG.loadNumberRasterImage(kummu_b_path, { format: "float32" }) : null;
+				let kummu_d_r = has_kummu ? GeoPNG.loadNumberRasterImage(kummu_d_path, { format: "float32" }) : null;
+				let unwpp_b_r = has_unwpp ? GeoPNG.loadNumberRasterImage(unwpp_b_path, { format: "float32" }) : null;
+				let unwpp_fd_r = has_unwpp ? GeoPNG.loadNumberRasterImage(unwpp_fd_path, { format: "float32" }) : null;
+				let unwpp_md_r = has_unwpp ? GeoPNG.loadNumberRasterImage(unwpp_md_path, { format: "float32" }) : null;
+
 				let delta_r = GeoPNG.loadNumberRasterImage(delta_path, { format: "float32" });
 				let popc_r = GeoPNG.loadNumberRasterImage(popc_path, { format: "float32" });
 				
@@ -48,19 +63,35 @@ global.migration_OLS = class {
 				GeoPNG.saveNumberRasterImage({
 					file_path: target_path,
 					format: "float32",
-					width: b_r.width,
-					height: b_r.height,
+					width: popc_r.width,
+					height: popc_r.height,
 					function: (i) => {
 						let pop = popc_r.data[i];
 						if (pop < 1.0 || isNaN(pop)) return NaN;
 						
-						let b = isNaN(b_r.data[i]) ? 0 : Math.max(0, b_r.data[i]);
-						let fd = isNaN(fd_r.data[i]) ? 0 : Math.max(0, fd_r.data[i]);
-						let md = isNaN(md_r.data[i]) ? 0 : Math.max(0, md_r.data[i]);
+						let b = 0;
+						let d = 0;
+						let has_vital = false;
+
+						// Prefer Niva et al. (Kummu) for 2000-2019 subnational empirical data
+						if (has_kummu && !isNaN(kummu_b_r.data[i]) && !isNaN(kummu_d_r.data[i])) {
+							b = Math.max(0, kummu_b_r.data[i]);
+							d = Math.max(0, kummu_d_r.data[i]);
+							has_vital = true;
+						} else if (has_unwpp && !isNaN(unwpp_b_r.data[i])) {
+							b = Math.max(0, unwpp_b_r.data[i]);
+							let fd = isNaN(unwpp_fd_r.data[i]) ? 0 : Math.max(0, unwpp_fd_r.data[i]);
+							let md = isNaN(unwpp_md_r.data[i]) ? 0 : Math.max(0, unwpp_md_r.data[i]);
+							d = fd + md;
+							has_vital = true;
+						}
+
+						if (!has_vital) return NaN;
+
 						let dpop = isNaN(delta_r.data[i]) ? 0 : delta_r.data[i];
 						let annualized_dpop = dpop / year_gap;
 						
-						let actual_migration = annualized_dpop - (b - (fd + md));
+						let actual_migration = annualized_dpop - (b - d);
 						let ratio = actual_migration / pop;
 						
 						if (ratio > 1) ratio = 1;
@@ -68,7 +99,8 @@ global.migration_OLS = class {
 						return ratio;
 					}
 				});
-				console.log(`- Generated migration target raster: ${target_path}`);
+				let source_label = (has_kummu) ? "Niva et al. (Kummu)" : "UNWPP";
+				console.log(`- Generated migration target raster from ${source_label}: ${target_path}`);
 			}
 		});
 	}
@@ -294,10 +326,6 @@ global.migration_OLS = class {
 				let popc_path = `${age_sex.sf().input_popc_folder}stadester_population_${year}.png`;
 				if (!fs.existsSync(popc_path)) return;
 				
-				let normalised_path = `${this.intermediate_normalised}normalised_migration_${year}.png`;
-				let bounds_path = `${this.intermediate_bounds}bounds_migration_${year}.json`;
-				
-				if (!fs.existsSync(normalised_path) || !fs.existsSync(bounds_path)) return;
 				
 				let net_out = `${this.output_net_migration_folder}net_migration_${year}.png`;
 				let female_out = `${this.output_female_migration_folder}female_net_migration_${year}.png`;
@@ -306,6 +334,82 @@ global.migration_OLS = class {
 				if (!overwrite && fs.existsSync(net_out) && fs.existsSync(female_out) && fs.existsSync(male_out)) return;
 				
 				let popc_raster = GeoPNG.loadNumberRasterImage(popc_path, { format: "float32" });
+
+				// Check empirical sources (backcalculated UNWPP / Niva et al. 1950-2023)
+				let unwpp_b_folder = (typeof births_deaths_UNWPP !== "undefined") ? births_deaths_UNWPP.output_crude_births_folder : (global.h2 ? path.join(global.h2, "births_deaths_UNWPP/1.crude_births/") : null);
+				let unwpp_fd_folder = (typeof births_deaths_UNWPP !== "undefined") ? births_deaths_UNWPP.output_female_crude_deaths_folder : (global.h2 ? path.join(global.h2, "births_deaths_UNWPP/1.female_crude_deaths/") : null);
+				let unwpp_md_folder = (typeof births_deaths_UNWPP !== "undefined") ? births_deaths_UNWPP.output_male_crude_deaths_folder : (global.h2 ? path.join(global.h2, "births_deaths_UNWPP/1.male_crude_deaths/") : null);
+
+				let unwpp_b_path = (unwpp_b_folder) ? path.join(unwpp_b_folder, `births_${year}.png`) : null;
+				let unwpp_fd_path = (unwpp_fd_folder) ? path.join(unwpp_fd_folder, `female_deaths_${year}.png`) : null;
+				let unwpp_md_path = (unwpp_md_folder) ? path.join(unwpp_md_folder, `male_deaths_${year}.png`) : null;
+				let has_unwpp = unwpp_b_path && unwpp_fd_path && unwpp_md_path && fs.existsSync(unwpp_b_path) && fs.existsSync(unwpp_fd_path) && fs.existsSync(unwpp_md_path);
+
+				let delta_path = `${population_Stadester_transform.delta_total_population_folder}delta_total_population_${year}.png`;
+				let delta_r = (fs.existsSync(delta_path)) ? GeoPNG.loadNumberRasterImage(delta_path, { format: "float32" }) : null;
+
+				let is_empirical_year = has_unwpp && delta_r !== null;
+				
+				if (is_empirical_year) {
+					let all_years = (typeof landuse_HYDE !== "undefined" && Array.isArray(landuse_HYDE.sorted_hyde_years)) ? landuse_HYDE.sorted_hyde_years : years;
+					let y_idx = all_years.indexOf(year);
+					let year_gap = (y_idx > 0) ? (year - all_years[y_idx - 1]) : 1;
+
+					let unwpp_b_r = GeoPNG.loadNumberRasterImage(unwpp_b_path, { format: "float32" });
+					let unwpp_fd_r = GeoPNG.loadNumberRasterImage(unwpp_fd_path, { format: "float32" });
+					let unwpp_md_r = GeoPNG.loadNumberRasterImage(unwpp_md_path, { format: "float32" });
+
+					let final_m_array = new Float32Array(popc_raster.data.length);
+					let final_mf_array = new Float32Array(popc_raster.data.length);
+					let final_mm_array = new Float32Array(popc_raster.data.length);
+
+					let sum_m = 0;
+					let total_pop = 0;
+
+					// Pass 1: Backcalculate residual net migration from empirical vital rates
+					for (let i = 0; i < popc_raster.data.length; i++) {
+						let pop = popc_raster.data[i];
+						if (pop <= 0 || isNaN(pop)) continue;
+
+						let b = isNaN(unwpp_b_r.data[i]) ? 0 : Math.max(0, unwpp_b_r.data[i]);
+						let fd = isNaN(unwpp_fd_r.data[i]) ? 0 : Math.max(0, unwpp_fd_r.data[i]);
+						let md = isNaN(unwpp_md_r.data[i]) ? 0 : Math.max(0, unwpp_md_r.data[i]);
+						let d = fd + md;
+
+						let dpop = isNaN(delta_r.data[i]) ? 0 : delta_r.data[i];
+						let annualized_dpop = dpop / year_gap;
+						let m = annualized_dpop - (b - d);
+
+						final_m_array[i] = m;
+						sum_m += m;
+						total_pop += pop;
+					}
+
+					// Zero-sum balance adjustment ensuring planet-wide net migration sums to exactly 0
+					let balancing_rate = (total_pop > 0) ? (-sum_m / total_pop) : 0;
+					for (let i = 0; i < popc_raster.data.length; i++) {
+						let pop = popc_raster.data[i];
+						if (pop <= 0 || isNaN(pop)) continue;
+
+						let m = final_m_array[i] + (pop * balancing_rate);
+						final_m_array[i] = m;
+						final_mf_array[i] = m * 0.488;
+						final_mm_array[i] = m * 0.512;
+					}
+
+					GeoPNG.saveNumberRasterImage({ file_path: net_out, format: "float32", width: popc_raster.width, height: popc_raster.height, function: (i) => final_m_array[i] });
+					GeoPNG.saveNumberRasterImage({ file_path: female_out, format: "float32", width: popc_raster.width, height: popc_raster.height, function: (i) => final_mf_array[i] });
+					GeoPNG.saveNumberRasterImage({ file_path: male_out, format: "float32", width: popc_raster.width, height: popc_raster.height, function: (i) => final_mm_array[i] });
+					console.log(`- Saved composited empirical migration rasters from backcalculated UNWPP / Niva et al. for ${year}`);
+					return;
+				}
+
+				// Modeled historical pipeline (pre-1950): OLS predictions + Rogers-Castro schedule + zero-sum balancing
+				let normalised_path = `${this.intermediate_normalised}normalised_migration_${year}.png`;
+				let bounds_path = `${this.intermediate_bounds}bounds_migration_${year}.json`;
+				
+				if (!fs.existsSync(normalised_path) || !fs.existsSync(bounds_path)) return;
+				
 				let normalised_raster = GeoPNG.loadNumberRasterImage(normalised_path, { format: "float32" });
 				let bounds_obj = JSON.parse(fs.readFileSync(bounds_path, "utf8"));
 				let target_min = bounds_obj.target_min || 0;
@@ -321,41 +425,6 @@ global.migration_OLS = class {
 					
 					let ratio = target_min + norm_val * (target_max - target_min);
 					migration_array[i] = ratio * pop;
-				}
-				
-				// Apply anchoring if UNWPP target year
-				let b_path = `${births_deaths_UNWPP.output_crude_births_folder}births_${year}.png`;
-				let fd_path = `${births_deaths_UNWPP.output_female_crude_deaths_folder}female_deaths_${year}.png`;
-				let md_path = `${births_deaths_UNWPP.output_male_crude_deaths_folder}male_deaths_${year}.png`;
-				let delta_path = `${population_Stadester_transform.delta_total_population_folder}delta_total_population_${year}.png`;
-				
-				let delta_r = null;
-				if (fs.existsSync(delta_path)) {
-					delta_r = GeoPNG.loadNumberRasterImage(delta_path, { format: "float32" });
-				}
-				
-				let actual_migration_raster = null;
-				let has_actual = fs.existsSync(b_path) && fs.existsSync(fd_path) && fs.existsSync(md_path) && fs.existsSync(delta_path);
-				
-				let all_years = (typeof landuse_HYDE !== "undefined" && Array.isArray(landuse_HYDE.sorted_hyde_years)) ? landuse_HYDE.sorted_hyde_years : years;
-				let y_idx = all_years.indexOf(year);
-				let year_gap = 1;
-				if (y_idx > 0) year_gap = year - all_years[y_idx - 1];
-				
-				if (has_actual) {
-					let b_r = GeoPNG.loadNumberRasterImage(b_path, { format: "float32" });
-					let fd_r = GeoPNG.loadNumberRasterImage(fd_path, { format: "float32" });
-					let md_r = GeoPNG.loadNumberRasterImage(md_path, { format: "float32" });
-					
-					actual_migration_raster = new Float32Array(popc_raster.data.length);
-					for(let i=0;i<popc_raster.data.length;i++){
-						let dpop = isNaN(delta_r.data[i])?0:delta_r.data[i];
-						let annualized_dpop = dpop / year_gap;
-						let b = isNaN(b_r.data[i])?0:Math.max(0,b_r.data[i]);
-						let fd = isNaN(fd_r.data[i])?0:Math.max(0,fd_r.data[i]);
-						let md = isNaN(md_r.data[i])?0:Math.max(0,md_r.data[i]);
-						actual_migration_raster[i] = annualized_dpop - (b - (fd+md));
-					}
 				}
 				
 				let age_bands = ["00", "01", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55", "60", "65", "70", "75", "80"];
@@ -401,36 +470,31 @@ global.migration_OLS = class {
 				let final_m_array = new Float32Array(popc_raster.data.length);
 				let final_mf_array = new Float32Array(popc_raster.data.length);
 				let final_mm_array = new Float32Array(popc_raster.data.length);
-				let is_actual_mask = new Uint8Array(popc_raster.data.length);
 				
 				let global_sum_m = 0;
-				let unmeasured_pop = 0;
+				let total_pop_modeled = 0;
 				
-				// Pass 1: Calculate initial migration and global unmeasured population
+				// Pass 1: Sum initial modeled migration and total population
 				for (let i = 0; i < popc_raster.data.length; i++) {
 					let pop = popc_raster.data[i];
-					let is_actual = (has_actual && !isNaN(actual_migration_raster[i]));
-					let m = (is_actual) ? actual_migration_raster[i] : migration_array[i];
+					let m = migration_array[i];
 					if (isNaN(m)) m = 0;
-					
 					final_m_array[i] = m;
-					if (is_actual) is_actual_mask[i] = 1;
-					
 					if (pop > 0) {
 						global_sum_m += m;
-						if (!is_actual) unmeasured_pop += pop;
+						total_pop_modeled += pop;
 					}
 				}
 				
-				// Calculate balancing rate over unmeasured cells to ensure global net migration sums to exactly 0
-				let balancing_rate = (unmeasured_pop > 0) ? (-global_sum_m / unmeasured_pop) : 0;
+				// Calculate balancing rate to ensure global net migration sums to exactly 0
+				let balancing_rate = (total_pop_modeled > 0) ? (-global_sum_m / total_pop_modeled) : 0;
 				
-				// Pass 2: Apply zero-sum balance to unmeasured cells and compute sex splits
+				// Pass 2: Apply zero-sum balance and Rogers-Castro sex splits
 				for (let i = 0; i < popc_raster.data.length; i++) {
 					let pop = popc_raster.data[i];
 					let m = final_m_array[i];
 					
-					if (!is_actual_mask[i] && pop > 0) {
+					if (pop > 0) {
 						m += (pop * balancing_rate);
 					}
 					
@@ -450,7 +514,7 @@ global.migration_OLS = class {
 				GeoPNG.saveNumberRasterImage({ file_path: net_out, format: "float32", width: popc_raster.width, height: popc_raster.height, function: (i) => final_m_array[i] });
 				GeoPNG.saveNumberRasterImage({ file_path: female_out, format: "float32", width: popc_raster.width, height: popc_raster.height, function: (i) => final_mf_array[i] });
 				GeoPNG.saveNumberRasterImage({ file_path: male_out, format: "float32", width: popc_raster.width, height: popc_raster.height, function: (i) => final_mm_array[i] });
-				console.log(`- Saved final migration rasters for ${year}`);
+				console.log(`- Saved modeled migration rasters for ${year}`);
 			}
 		});
 	}

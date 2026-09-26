@@ -252,6 +252,7 @@ global.professions = class {
 					X: X,
 					Y: Y
 				}, {
+					clamp_percentage: true,
 					fit_intercept: false,
 					lambda: Math.returnSafeNumber(options.lambda, 1e-3)
 				});

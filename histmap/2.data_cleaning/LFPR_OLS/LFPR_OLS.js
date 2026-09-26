@@ -60,7 +60,8 @@ global.LFPR_OLS = class {
 						options: {
 							...options,
 							key: year.toString(),
-							lambda: lambda_val
+							lambda: lambda_val,
+							clamp_percentage: true
 						},
 						output_file_path: `${this.intermediate_ols_models}OLS_lfpr_${sex}_${year}.json`,
 						target_file_path: `${LFPR_Olivetti.intermediate_rasters_folder}lfpr_${sex}_${year}.png`,

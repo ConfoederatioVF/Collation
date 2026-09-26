@@ -475,7 +475,8 @@ global.age_sex = class {
 		let cdt_start_year = (options.cdt_start_year !== undefined) ? options.cdt_start_year : 1750;
 		let cdt_steepness = (options.cdt_steepness !== undefined) ? options.cdt_steepness : 8;
 		let do_not_smooth = !!(options.do_not_smooth || options.lift_isotonic);
-		let enforce_bounds = (options.enforce_biological_sex_ratios === true);
+		let enforce_bounds = (options.enforce_biological_sex_ratios !== undefined) ?
+			(options.enforce_biological_sex_ratios === true) : (options.preserve_sex_ratios !== true);
 		let enforce_fixed = (options.enforce_fixed_sex_ratios === true);
 		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
 		let preserve_sex_ratios = (options.preserve_sex_ratios !== undefined) ?

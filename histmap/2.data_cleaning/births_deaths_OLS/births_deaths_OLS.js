@@ -31,8 +31,9 @@ global.births_deaths_OLS = class {
 			births: {
 				denominator: "cohort_00",
 				fraction_cap: 1.5,
-				actual_folder_unwpp: births_deaths_UNWPP.output_crude_births_folder,
-				actual_folder_hmd: births_deaths_HMD.output_crude_births_folder,
+				actual_folder_kummu: (typeof births_deaths_Kummu !== "undefined") ? births_deaths_Kummu.output_births_folder : (global.h2 ? path.join(global.h2, "births_deaths_Kummu/output_birth_rasters/") : null),
+				actual_folder_unwpp: (typeof births_deaths_UNWPP !== "undefined") ? births_deaths_UNWPP.output_crude_births_folder : (global.h2 ? path.join(global.h2, "births_deaths_UNWPP/1.crude_births/") : null),
+				actual_folder_hmd: (typeof births_deaths_HMD !== "undefined") ? births_deaths_HMD.output_crude_births_folder : (global.h2 ? path.join(global.h2, "births_deaths_HMD/1.crude_births/") : null),
 				actual_prefix: "births",
 				target_folder: this.intermediate_birth_targets,
 				ols_folder: this.intermediate_ols_births,
@@ -44,8 +45,8 @@ global.births_deaths_OLS = class {
 				denominator: "cohort_decline",
 				fraction_cap: 3.0,
 				sex: "f",
-				actual_folder_unwpp: births_deaths_UNWPP.output_female_crude_deaths_folder,
-				actual_folder_hmd: births_deaths_HMD.output_female_crude_deaths_folder,
+				actual_folder_unwpp: (typeof births_deaths_UNWPP !== "undefined") ? births_deaths_UNWPP.output_female_crude_deaths_folder : (global.h2 ? path.join(global.h2, "births_deaths_UNWPP/1.female_crude_deaths/") : null),
+				actual_folder_hmd: (typeof births_deaths_HMD !== "undefined") ? births_deaths_HMD.output_female_crude_deaths_folder : (global.h2 ? path.join(global.h2, "births_deaths_HMD/1.female_crude_deaths/") : null),
 				actual_prefix: "female_deaths",
 				target_folder: this.intermediate_female_death_targets,
 				ols_folder: this.intermediate_ols_female_deaths,
@@ -57,8 +58,8 @@ global.births_deaths_OLS = class {
 				denominator: "cohort_decline",
 				fraction_cap: 3.0,
 				sex: "m",
-				actual_folder_unwpp: births_deaths_UNWPP.output_male_crude_deaths_folder,
-				actual_folder_hmd: births_deaths_HMD.output_male_crude_deaths_folder,
+				actual_folder_unwpp: (typeof births_deaths_UNWPP !== "undefined") ? births_deaths_UNWPP.output_male_crude_deaths_folder : (global.h2 ? path.join(global.h2, "births_deaths_UNWPP/1.male_crude_deaths/") : null),
+				actual_folder_hmd: (typeof births_deaths_HMD !== "undefined") ? births_deaths_HMD.output_male_crude_deaths_folder : (global.h2 ? path.join(global.h2, "births_deaths_HMD/1.male_crude_deaths/") : null),
 				actual_prefix: "male_deaths",
 				target_folder: this.intermediate_male_death_targets,
 				ols_folder: this.intermediate_ols_male_deaths,
@@ -70,7 +71,7 @@ global.births_deaths_OLS = class {
 	}
 	
 	/**
-	 * Returns the actual (HMD/UNWPP) count raster path for a variable/year, or null.
+	 * Returns the actual (Kummu/UNWPP/HMD) count raster path for a variable/year, or null.
 	 */
 	static _getActualPath (arg0_variable_obj, arg1_year) {
 		//Convert from parameters
@@ -79,10 +80,10 @@ global.births_deaths_OLS = class {
 		
 		//Declare local instance variables
 		let folder = (year >= 1950) ? variable_obj.actual_folder_unwpp : variable_obj.actual_folder_hmd;
-		let local_path = `${folder}${variable_obj.actual_prefix}_${year}.png`;
+		let local_path = (folder) ? `${folder}${variable_obj.actual_prefix}_${year}.png` : null;
 		
 		//Return statement
-		return (fs.existsSync(local_path)) ? local_path : null;
+		return (local_path && fs.existsSync(local_path)) ? local_path : null;
 	}
 	
 	/**
@@ -610,93 +611,159 @@ global.births_deaths_OLS = class {
 				if (!fs.existsSync(popc_path)) return;
 				
 				let popc_raster = GeoPNG.loadNumberRasterImage(popc_path, { format: "float32" });
+
+				// Check empirical sources (backcalculated UNWPP / Niva et al. 1950-2023)
+				let unwpp_b_folder = (typeof births_deaths_UNWPP !== "undefined") ? births_deaths_UNWPP.output_crude_births_folder : (global.h2 ? path.join(global.h2, "births_deaths_UNWPP/1.crude_births/") : null);
+				let unwpp_fd_folder = (typeof births_deaths_UNWPP !== "undefined") ? births_deaths_UNWPP.output_female_crude_deaths_folder : (global.h2 ? path.join(global.h2, "births_deaths_UNWPP/1.female_crude_deaths/") : null);
+				let unwpp_md_folder = (typeof births_deaths_UNWPP !== "undefined") ? births_deaths_UNWPP.output_male_crude_deaths_folder : (global.h2 ? path.join(global.h2, "births_deaths_UNWPP/1.male_crude_deaths/") : null);
+
+				let unwpp_b_path = (unwpp_b_folder) ? path.join(unwpp_b_folder, `births_${year}.png`) : null;
+				let unwpp_fd_path = (unwpp_fd_folder) ? path.join(unwpp_fd_folder, `female_deaths_${year}.png`) : null;
+				let unwpp_md_path = (unwpp_md_folder) ? path.join(unwpp_md_folder, `male_deaths_${year}.png`) : null;
+				let has_unwpp = unwpp_b_path && unwpp_fd_path && unwpp_md_path && fs.existsSync(unwpp_b_path) && fs.existsSync(unwpp_fd_path) && fs.existsSync(unwpp_md_path);
+
+				let b_out = `${this.output_births_folder}births_${year}.png`;
+				let fd_out = `${this.output_female_deaths_folder}female_deaths_${year}.png`;
+				let md_out = `${this.output_male_deaths_folder}male_deaths_${year}.png`;
+
+				if (!overwrite && fs.existsSync(b_out) && fs.existsSync(fd_out) && fs.existsSync(md_out)) return;
+
 				let denominator_cache = {};
-				
-				// 1. Process all variables into memory first to get the RAW working aggregates
 				let raw_data = {};
 				let skip_year = false;
-				
-				let variable_keys = Object.keys(variables_obj);
-				for (let v = 0; v < variable_keys.length; v++) {
-					let v_key = variable_keys[v];
-					let variable_obj = variables_obj[v_key];
-					let normalised_path = `${variable_obj.normalised_folder}normalised_${variable_obj.actual_prefix}_${year}.png`;
-					let bounds_path = `${this.intermediate_bounds}bounds_${variable_obj.actual_prefix}_${year}.json`;
-					let output_path = `${variable_obj.output_folder}${variable_obj.actual_prefix}_${year}.png`;
-					
-					if (!fs.existsSync(normalised_path) || !fs.existsSync(bounds_path)) { skip_year = true; break; }
-					if (!overwrite && fs.existsSync(output_path)) continue;
-					
-					let cache_key = variable_obj.denominator + (variable_obj.sex || "");
-					if (!denominator_cache[cache_key]) {
-						denominator_cache[cache_key] = this._getDenominatorArray(variable_obj, year);
+
+				if (has_unwpp) {
+					let unwpp_b_r = GeoPNG.loadNumberRasterImage(unwpp_b_path, { format: "float32" });
+					let unwpp_fd_r = GeoPNG.loadNumberRasterImage(unwpp_fd_path, { format: "float32" });
+					let unwpp_md_r = GeoPNG.loadNumberRasterImage(unwpp_md_path, { format: "float32" });
+
+					let final_b = new Float32Array(popc_raster.data.length);
+					let final_fd = new Float32Array(popc_raster.data.length);
+					let final_md = new Float32Array(popc_raster.data.length);
+					let has_act = new Uint8Array(popc_raster.data.length);
+
+					for (let i = 0; i < popc_raster.data.length; i++) {
+						let pop = popc_raster.data[i];
+						if (pop <= 0 || isNaN(pop)) continue;
+
+						let b = isNaN(unwpp_b_r.data[i]) ? 0 : Math.max(0, unwpp_b_r.data[i]);
+						let fd = isNaN(unwpp_fd_r.data[i]) ? 0 : Math.max(0, unwpp_fd_r.data[i]);
+						let md = isNaN(unwpp_md_r.data[i]) ? 0 : Math.max(0, unwpp_md_r.data[i]);
+
+						final_b[i] = b;
+						final_fd[i] = fd;
+						final_md[i] = md;
+						has_act[i] = 1;
 					}
-					let denominator_array = denominator_cache[cache_key];
-					if (!denominator_array) { skip_year = true; break; }
-					
-					let normalised_raster = GeoPNG.loadNumberRasterImage(normalised_path, { format: "float32" });
-					let bounds_obj = JSON.parse(fs.readFileSync(bounds_path, "utf8"));
-					let counts_array = new Float32Array(normalised_raster.data.length);
-					let actual_path = this._getActualPath(variable_obj, year);
-					let actual_raster = (actual_path) ? GeoPNG.loadNumberRasterImage(actual_path, { format: "float32" }) : null;
-					let has_actual_array = new Uint8Array(normalised_raster.data.length);
-					
-					let target_min = bounds_obj.target_min || 0;
-					let target_max = bounds_obj.target_max || 0;
-					
-					for (let i = 0; i < normalised_raster.data.length; i++) {
-						if (popc_raster.data[i] <= 0) continue;
-						
-						if (actual_raster) {
-							let local_actual = actual_raster.data[i];
-							if (!isNaN(local_actual) && local_actual > 0) {
-								counts_array[i] = local_actual;
-								has_actual_array[i] = 1;
-								continue;
-							}
-						}
-						
-						let local_normalised = normalised_raster.data[i];
-						if (isNaN(local_normalised) || local_normalised < 0) continue;
-						
-						let local_denominator = denominator_array[i];
-						if (local_denominator <= 0) continue;
-						
-						let local_fraction = target_min;
-						if (target_max > target_min) {
-							local_fraction = target_min + local_normalised * (target_max - target_min);
-						}
-						
-						let count = local_fraction * local_denominator;
-						if (variable_obj.denominator === "cohort_00") {
-							count = Math.min(count, 1.5 * local_denominator);
-						} else {
-							count = Math.min(count, popc_raster.data[i]); // Deaths cannot exceed population
-						}
-						
-						counts_array[i] = count;
-					}
-					
-					raw_data[v_key] = {
-						actual_raster: actual_raster,
-						counts_array: counts_array,
-						has_actual_array: has_actual_array,
-						normalised_raster: normalised_raster,
-						output_path: output_path,
-						variable_obj: variable_obj
+
+					raw_data.births = {
+						actual_raster: unwpp_b_r,
+						counts_array: final_b,
+						has_actual_array: has_act,
+						is_empirical_source: true,
+						output_path: b_out,
+						variable_obj: variables_obj.births
 					};
+					raw_data.female_deaths = {
+						actual_raster: unwpp_fd_r,
+						counts_array: final_fd,
+						has_actual_array: has_act,
+						is_empirical_source: true,
+						output_path: fd_out,
+						variable_obj: variables_obj.female_deaths
+					};
+					raw_data.male_deaths = {
+						actual_raster: unwpp_md_r,
+						counts_array: final_md,
+						has_actual_array: has_act,
+						is_empirical_source: true,
+						output_path: md_out,
+						variable_obj: variables_obj.male_deaths
+					};
+				} else {
+					// 1. Process all variables into memory first to get the RAW working aggregates
+					let variable_keys = Object.keys(variables_obj);
+					for (let v = 0; v < variable_keys.length; v++) {
+						let v_key = variable_keys[v];
+						let variable_obj = variables_obj[v_key];
+						let normalised_path = `${variable_obj.normalised_folder}normalised_${variable_obj.actual_prefix}_${year}.png`;
+						let bounds_path = `${this.intermediate_bounds}bounds_${variable_obj.actual_prefix}_${year}.json`;
+						let output_path = `${variable_obj.output_folder}${variable_obj.actual_prefix}_${year}.png`;
+						
+						if (!fs.existsSync(normalised_path) || !fs.existsSync(bounds_path)) { skip_year = true; break; }
+						if (!overwrite && fs.existsSync(output_path)) continue;
+						
+						let cache_key = variable_obj.denominator + (variable_obj.sex || "");
+						if (!denominator_cache[cache_key]) {
+							denominator_cache[cache_key] = this._getDenominatorArray(variable_obj, year);
+						}
+						let denominator_array = denominator_cache[cache_key];
+						if (!denominator_array) { skip_year = true; break; }
+						
+						let normalised_raster = GeoPNG.loadNumberRasterImage(normalised_path, { format: "float32" });
+						let bounds_obj = JSON.parse(fs.readFileSync(bounds_path, "utf8"));
+						let counts_array = new Float32Array(normalised_raster.data.length);
+						let actual_path = this._getActualPath(variable_obj, year);
+						let actual_raster = (actual_path) ? GeoPNG.loadNumberRasterImage(actual_path, { format: "float32" }) : null;
+						let has_actual_array = new Uint8Array(normalised_raster.data.length);
+						
+						let target_min = bounds_obj.target_min || 0;
+						let target_max = bounds_obj.target_max || 0;
+						
+						for (let i = 0; i < normalised_raster.data.length; i++) {
+							if (popc_raster.data[i] <= 0) continue;
+							
+							if (actual_raster) {
+								let local_actual = actual_raster.data[i];
+								if (!isNaN(local_actual) && local_actual > 0) {
+									counts_array[i] = local_actual;
+									has_actual_array[i] = 1;
+									continue;
+								}
+							}
+							
+							let local_normalised = normalised_raster.data[i];
+							if (isNaN(local_normalised) || local_normalised < 0) continue;
+							
+							let local_denominator = denominator_array[i];
+							if (local_denominator <= 0) continue;
+							
+							let local_fraction = target_min;
+							if (target_max > target_min) {
+								local_fraction = target_min + local_normalised * (target_max - target_min);
+							}
+							
+							let count = local_fraction * local_denominator;
+							if (variable_obj.denominator === "cohort_00") {
+								count = Math.min(count, 1.5 * local_denominator);
+							} else {
+								count = Math.min(count, popc_raster.data[i]); // Deaths cannot exceed population
+							}
+							
+							counts_array[i] = count;
+						}
+						
+						raw_data[v_key] = {
+							actual_raster: actual_raster,
+							counts_array: counts_array,
+							has_actual_array: has_actual_array,
+							normalised_raster: normalised_raster,
+							output_path: output_path,
+							variable_obj: variable_obj
+						};
+					}
 				}
 				
 				if (skip_year) return;
 				
 				// 2. THE SEX-SANE REDISTRIBUTION (Intercepting the working aggregates)
-				if (raw_data.male_deaths && raw_data.female_deaths) {
+				if (!has_unwpp && raw_data.male_deaths && raw_data.female_deaths) {
 					let f_actual = raw_data.female_deaths.has_actual_array;
 					let f_counts = raw_data.female_deaths.counts_array;
-					let f_norm = raw_data.female_deaths.normalised_raster.data;
+					let f_norm = (raw_data.female_deaths.normalised_raster) ? raw_data.female_deaths.normalised_raster.data : null;
 					let m_actual = raw_data.male_deaths.has_actual_array;
 					let m_counts = raw_data.male_deaths.counts_array;
-					let m_norm = raw_data.male_deaths.normalised_raster.data;
+					let m_norm = (raw_data.male_deaths.normalised_raster) ? raw_data.male_deaths.normalised_raster.data : null;
 					
 					for (let i = 0; i < popc_raster.data.length; i++) {
 						if (popc_raster.data[i] <= 0) continue;
@@ -706,7 +773,7 @@ global.births_deaths_OLS = class {
 						let raw_m = m_counts[i] || 0;
 						let total = raw_m + raw_f;
 						
-						if (total > 0) {
+						if (total > 0 && f_norm && m_norm) {
 							let n_f = (isNaN(f_norm[i]) || f_norm[i] < 0) ? 0 : f_norm[i];
 							let n_m = (isNaN(m_norm[i]) || m_norm[i] < 0) ? 0 : m_norm[i];
 							let norm_sum = n_m + n_f;
@@ -759,6 +826,8 @@ global.births_deaths_OLS = class {
 					let global_sum_m_min = 0;
 					let global_sum_m_max = 0;
 					
+					let is_empirical_data = (raw_data.births && raw_data.births.is_empirical_source);
+					
 					// Step 1: Establish source-aware bounds for every pixel
 					for (let i = 0; i < total_len; i++) {
 						let pop = popc_raster.data[i];
@@ -783,25 +852,25 @@ global.births_deaths_OLS = class {
 						// Birth bounds
 						let b_min = 0;
 						let b_max = 0;
-						if (is_b_actual) {
+						if (is_b_actual && !is_empirical_data) {
 							b_min = b_raw;
 							b_max = b_raw;
 						} else {
 							b_min = 0;
-							let max_cap = (b_denominator && b_denominator[i] > 0) ? (1.5 * b_denominator[i]) : Math.max(b_raw, pop * 0.06);
+							let max_cap = (b_denominator && b_denominator[i] > 0) ? (1.5 * b_denominator[i]) : Math.max(b_raw * 1.5, pop * 0.06);
 							b_max = Math.max(0, max_cap);
 						}
 						
 						// Death bounds with independent source locks
 						let d_min = 0;
 						let d_max = 0;
-						if (is_fd_actual && is_md_actual) {
+						if (is_fd_actual && is_md_actual && !is_empirical_data) {
 							d_min = fd_raw + md_raw;
 							d_max = fd_raw + md_raw;
-						} else if (is_fd_actual && !is_md_actual) {
+						} else if (is_fd_actual && !is_md_actual && !is_empirical_data) {
 							d_min = fd_raw;
 							d_max = Math.max(fd_raw, pop);
-						} else if (!is_fd_actual && is_md_actual) {
+						} else if (!is_fd_actual && is_md_actual && !is_empirical_data) {
 							d_min = md_raw;
 							d_max = Math.max(md_raw, pop);
 						} else {
@@ -934,8 +1003,8 @@ global.births_deaths_OLS = class {
 						let b_projected;
 						let d_projected;
 						
-						if (is_b_actual && is_fd_actual && is_md_actual) {
-							// All vital rates are observed actuals: preserve them exactly and set M to the exact accounting residual
+						if (is_b_actual && is_fd_actual && is_md_actual && !is_empirical_data) {
+							// All vital rates are observed historical actuals: preserve them exactly and set M to the exact accounting residual
 							b_projected = b_raw;
 							d_projected = d_raw;
 							m_opt = g_arr[i] - (b_raw - d_raw);
@@ -959,16 +1028,16 @@ global.births_deaths_OLS = class {
 							
 							let b_unconstrained = (b_raw + d_raw + n_target) / 2;
 							b_projected = Math.max(l_bound, Math.min(u_bound, b_unconstrained));
-							if (is_b_actual) b_projected = b_raw;
+							if (is_b_actual && !is_empirical_data) b_projected = b_raw;
 							d_projected = b_projected - n_target;
 							
-							if (is_fd_actual && is_md_actual) {
+							if (is_fd_actual && is_md_actual && !is_empirical_data) {
 								fd_counts[i] = fd_raw;
 								md_counts[i] = md_raw;
-							} else if (is_fd_actual && !is_md_actual) {
+							} else if (is_fd_actual && !is_md_actual && !is_empirical_data) {
 								fd_counts[i] = fd_raw;
 								md_counts[i] = Math.max(0, d_projected - fd_raw);
-							} else if (!is_fd_actual && is_md_actual) {
+							} else if (!is_fd_actual && is_md_actual && !is_empirical_data) {
 								md_counts[i] = md_raw;
 								fd_counts[i] = Math.max(0, d_projected - md_raw);
 							} else {
