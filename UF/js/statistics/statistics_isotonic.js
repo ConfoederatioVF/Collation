@@ -151,6 +151,52 @@
 	};
 
 	/**
+	 * Computes a normalised logistic transition kernel weight w in [0, 1] over a domain [start_val, end_val].
+	 * Returns 0 for values <= start_val, 1 for values >= end_val, and an S-curve blend for intermediate values.
+	 *
+	 * @alias Statistics.getLogisticKernelWeight
+	 *
+	 * @param {number} arg0_value
+	 * @param {number} [arg1_start_val=1750]
+	 * @param {number} [arg2_end_val=1850]
+	 * @param {Object} [arg3_options]
+	 *  @param {number} [arg3_options.steepness=8]
+	 *
+	 * @returns {number}
+	 */
+	Statistics.getLogisticKernelWeight = function (arg0_value, arg1_start_val, arg2_end_val, arg3_options) {
+		//Convert from parameters
+		let value = arg0_value;
+		let start_val = (arg1_start_val !== undefined && arg1_start_val !== null) ? arg1_start_val : 1750;
+		let end_val = (arg2_end_val !== undefined && arg2_end_val !== null) ? arg2_end_val : 1850;
+		let options = (arg3_options) ? arg3_options : {};
+
+		//Initialise options
+		let steepness = (options.steepness !== undefined) ? options.steepness : 8;
+
+		//Guard clauses
+		if (!Number.isFinite(value)) return 0;
+		if (start_val >= end_val) return (value >= end_val) ? 1 : 0;
+		if (value <= start_val) return 0;
+		if (value >= end_val) return 1;
+
+		//Declare local instance variables
+		let f_0 = 1 / (1 + Math.exp(steepness * 0.5));
+		let f_1 = 1 / (1 + Math.exp(-steepness * 0.5));
+		let f_x = 0;
+		let normalised_weight = 0;
+		let x = (value - start_val) / (end_val - start_val);
+
+		//Function body
+		f_x = 1 / (1 + Math.exp(-steepness * (x - 0.5)));
+		normalised_weight = (f_x - f_0) / (f_1 - f_0);
+		normalised_weight = Math.max(0, Math.min(1, normalised_weight));
+
+		//Return statement
+		return normalised_weight;
+	};
+
+	/**
 	 * Enforces non-increasing monotonicity on a sequence using the weighted Pool Adjacent Violators
 	 * Algorithm (PAVA). Values before arg2_start_index are preserved unconstrained.
 	 *

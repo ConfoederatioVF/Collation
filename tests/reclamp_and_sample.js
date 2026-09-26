@@ -49,16 +49,19 @@ require(path.join(h3, "age_sex/age_sex.js"));
 	console.log("1. Starting age_sex.E_clampToStadester...");
 	let t0 = Date.now();
 	await age_sex.E_clampToStadester({
+		cdt_end_year: 1850,
+		cdt_start_year: 1750,
+		cdt_steepness: 8,
 		graduate_sex_ratios: true,
 		overwrite: true,
-		smoothing_method: "whittaker_henderson",
+		smoothing_method: "piecewise_kernel",
 		wh_huber_delta: 0.05,
 		wh_lambda: 20.0,
 		wh_max_iterations: 100,
 		wh_mu: 5000.0,
 		wh_sex_ratio_lambda: 20.0,
 		wh_tolerance: 1e-4,
-		years: [1600, 1940]
+		years: [1600, 1800, 1940]
 	});
 	console.log(`   Reclamping finished in ${((Date.now() - t0)/1000).toFixed(1)}s.\n`);
 
@@ -66,14 +69,14 @@ require(path.join(h3, "age_sex/age_sex.js"));
 	console.log("2. Starting age_sex.F_compositeTimeseries...");
 	await age_sex.F_compositeTimeseries({
 		overwrite: true,
-		years: [1600, 1940]
+		years: [1600, 1800, 1940]
 	});
 	console.log("   Composite cohorts timeseries updated.\n");
 
 	// Step 3: Invalidate stale Dataviewer BMP cache
 	let dataview_cache_dir = "D:/Project 1436 - Dataview/data/raster_cache/";
 	if (fs.existsSync(dataview_cache_dir)) {
-		let cached_files = fs.readdirSync(dataview_cache_dir).filter(f => f.includes("1600") || f.includes("1940"));
+		let cached_files = fs.readdirSync(dataview_cache_dir).filter(f => f.includes("1600") || f.includes("1800") || f.includes("1940"));
 		for (let cf of cached_files) {
 			try { fs.unlinkSync(path.join(dataview_cache_dir, cf)); } catch (e) {}
 		}
@@ -123,13 +126,14 @@ require(path.join(h3, "age_sex/age_sex.js"));
 	};
 
 	let years_setup = {
-		1940: ["MMR", "IND", "JPN", "DEU", "USA", "RUS"],
-		1600: ["FRA", "IND", "CAN", "JPN"]
+		1600: ["FRA", "IND", "CAN", "JPN"],
+		1800: ["FRA", "IND", "JPN", "USA", "DEU"],
+		1940: ["MMR", "IND", "JPN", "DEU", "USA", "RUS"]
 	};
 
 	let results = {};
 
-	for (let year of [1600, 1940]) {
+	for (let year of [1600, 1800, 1940]) {
 		console.log(`4. Sampling composite rasters for Year ${year}...`);
 		results[year] = {};
 		let active_countries = years_setup[year];
@@ -178,7 +182,7 @@ require(path.join(h3, "age_sex/age_sex.js"));
 	console.log("RECLAMPED POPULATION PYRAMID RESULTS OVER REAL ISO3 AREAL MASKS");
 	console.log("================================================================================\n");
 
-	for (let year of [1600, 1940]) {
+	for (let year of [1600, 1800, 1940]) {
 		console.log(`\n################################################################################`);
 		console.log(`YEAR ${year}`);
 		console.log(`################################################################################`);

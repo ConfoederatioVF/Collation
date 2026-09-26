@@ -71,6 +71,33 @@ global.age_sex = class {
 		}
 		return cohorts;
 	}
+
+	/**
+	 * Computes the Classical Demographic Transition (CDT) kernel weight for a given year.
+	 * Returns 0 for pre-CDT (pure PAVA, year <= 1750), 1 for post-CDT (pure Whittaker, year >= 1850),
+	 * and a logistic S-curve for the transition domain [1750, 1850].
+	 *
+	 * @alias age_sex.getCDTKernelWeight
+	 *
+	 * @param {number} arg0_year
+	 * @param {number} [arg1_start_year=1750]
+	 * @param {number} [arg2_end_year=1850]
+	 * @param {Object} [arg3_options]
+	 *
+	 * @returns {number}
+	 */
+	static getCDTKernelWeight (arg0_year, arg1_start_year, arg2_end_year, arg3_options) {
+		//Convert from parameters
+		let year = arg0_year;
+		let start_year = (arg1_start_year !== undefined && arg1_start_year !== null) ? arg1_start_year : 1750;
+		let end_year = (arg2_end_year !== undefined && arg2_end_year !== null) ? arg2_end_year : 1850;
+		let options = (arg3_options) ? arg3_options : {};
+
+		//Return statement
+		return (typeof Statistics.getLogisticKernelWeight === "function") ?
+			Statistics.getLogisticKernelWeight(year, start_year, end_year, options) :
+			((year <= start_year) ? 0 : ((year >= end_year) ? 1 : (year - start_year)/(end_year - start_year)));
+	}
 	
 	/**
 	 * Standardises HMD, UNWPP, and WorldPop datasets into a unified target pool (1750-2025).
@@ -405,44 +432,79 @@ global.age_sex = class {
 		});
 	}
 	
+	/**
+	 * Clamps multinational age-sex cohort probabilities to Stadestér total population rasters.
+	 * Supports piecewise kernel smoothing (PAVA pre-CDT -> Whittaker post-CDT), pure Whittaker-Henderson,
+	 * or pure Isotonic (PAVA) graduation.
+	 *
+	 * @alias age_sex.E_clampToStadester
+	 *
+	 * @param {Object} [arg0_options]
+	 *  @param {Array<number>} [arg0_options.age_band_widths]
+	 *  @param {Float32Array|Float64Array} [arg0_options.baseline_sex_ratios]
+	 *  @param {number} [arg0_options.cdt_end_year=1850]
+	 *  @param {number} [arg0_options.cdt_start_year=1750]
+	 *  @param {number} [arg0_options.cdt_steepness=8]
+	 *  @param {number} [arg0_options.concurrency]
+	 *  @param {boolean} [arg0_options.do_not_smooth=false]
+	 *  @param {boolean} [arg0_options.enforce_biological_sex_ratios=false]
+	 *  @param {boolean} [arg0_options.enforce_fixed_sex_ratios=false]
+	 *  @param {boolean} [arg0_options.global_cohort_scaling=true]
+	 *  @param {boolean} [arg0_options.graduate_sex_ratios=true]
+	 *  @param {string} [arg0_options.hmd_folder]
+	 *  @param {boolean} [arg0_options.overwrite=true]
+	 *  @param {boolean} [arg0_options.preserve_sex_ratios]
+	 *  @param {string} [arg0_options.smoothing_method="piecewise_kernel"] - 'piecewise_kernel', 'whittaker_henderson', or 'isotonic'.
+	 *  @param {number} [arg0_options.smoothing_start_index=2]
+	 *  @param {number} [arg0_options.wh_huber_delta=0.05]
+	 *  @param {number} [arg0_options.wh_lambda=20.0]
+	 *  @param {number} [arg0_options.wh_max_iterations=200]
+	 *  @param {number} [arg0_options.wh_mu=5000.0]
+	 *  @param {number} [arg0_options.wh_sex_ratio_lambda=20.0]
+	 *  @param {number} [arg0_options.wh_tolerance=1e-5]
+	 *  @param {Array<number>} [arg0_options.years]
+	 *
+	 * @returns {Promise<Array<Object>>}
+	 */
 	static async E_clampToStadester (arg0_options) {
 		//Convert from parameters
 		let options = (arg0_options) ? arg0_options : {};
 
 		//Initialise options
-		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
-		let years = (options.years) ? options.years : landuse_HYDE.sorted_hyde_years;
-		let smoothing_method = options.smoothing_method || "whittaker_henderson";
+		let cdt_end_year = (options.cdt_end_year !== undefined) ? options.cdt_end_year : 1850;
+		let cdt_start_year = (options.cdt_start_year !== undefined) ? options.cdt_start_year : 1750;
+		let cdt_steepness = (options.cdt_steepness !== undefined) ? options.cdt_steepness : 8;
 		let do_not_smooth = !!(options.do_not_smooth || options.lift_isotonic);
-		let use_whittaker = (smoothing_method === "whittaker_henderson");
-		let use_global_scaling = !do_not_smooth && options.global_cohort_scaling !== false;
-		let start_index = (options.smoothing_start_index !== undefined) ? options.smoothing_start_index : 2;
-
-		//Whittaker sex-ratio policies are opt-in, matching the new coupling method
-		let enforce_fixed = (options.enforce_fixed_sex_ratios === true);
 		let enforce_bounds = (options.enforce_biological_sex_ratios === true);
+		let enforce_fixed = (options.enforce_fixed_sex_ratios === true);
+		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
 		let preserve_sex_ratios = (options.preserve_sex_ratios !== undefined) ?
 			options.preserve_sex_ratios : !enforce_fixed && !enforce_bounds;
+		let smoothing_method = options.smoothing_method || "piecewise_kernel";
+		let start_index = (options.smoothing_start_index !== undefined) ? options.smoothing_start_index : 2;
+		let use_global_scaling = !do_not_smooth && options.global_cohort_scaling !== false;
+		let use_whittaker = (smoothing_method === "whittaker_henderson" || smoothing_method === "whittaker");
+		let years = (options.years) ? options.years : landuse_HYDE.sorted_hyde_years;
 
 		//Declare local instance variables
 		let cohorts = this.getCohorts();
-		let num_cohorts = cohorts.length;
+		let completed_years = [];
 		let f_indices = [];
 		let m_indices = [];
-		let completed_years = [];
+		let num_cohorts = cohorts.length;
 
 		//Guard clauses
-		if (smoothing_method !== "whittaker_henderson" && smoothing_method !== "isotonic")
-			throw new RangeError("smoothing_method must be 'whittaker_henderson' or 'isotonic'.");
+		if (smoothing_method !== "piecewise_kernel" && smoothing_method !== "whittaker_henderson" && smoothing_method !== "whittaker" && smoothing_method !== "isotonic")
+			throw new RangeError("smoothing_method must be 'piecewise_kernel', 'whittaker_henderson', or 'isotonic'.");
 
 		if (!Number.isInteger(start_index) || start_index < 0)
 			throw new RangeError("smoothing_start_index must be a non-negative integer.");
 
-		if (use_whittaker && typeof Statistics.coupleAgeSexCohortsWhittaker !== "function")
-			throw new Error("Statistics.coupleAgeSexCohortsWhittaker is not available.");
-
-		if (!use_whittaker && typeof Statistics.coupleAgeSexCohorts !== "function")
+		if (typeof Statistics.coupleAgeSexCohorts !== "function")
 			throw new Error("Statistics.coupleAgeSexCohorts is not available.");
+
+		if (typeof Statistics.coupleAgeSexCohortsWhittaker !== "function")
+			throw new Error("Statistics.coupleAgeSexCohortsWhittaker is not available.");
 
 		if (use_whittaker && preserve_sex_ratios && (enforce_fixed || enforce_bounds))
 			throw new Error("Preserving raw sex ratios conflicts with fixed ratios or ratio bounds.");
@@ -510,9 +572,14 @@ global.age_sex = class {
 			task_generator: (year) => {
 				let format_year = (year > 2023) ? 2023 : year;
 				let popc_path = path.join(population_Stadester.input_popc_folder, `stadester_population_${format_year}.png`);
-				
+				let task_type = (smoothing_method === "piecewise_kernel") ? "clamp_cohorts_piecewise" :
+					((use_whittaker) ? "clamp_cohorts_whittaker" : "clamp_cohorts_isotonic");
+
 				return {
 					baseline_sex_ratios: options.baseline_sex_ratios,
+					cdt_end_year: cdt_end_year,
+					cdt_start_year: cdt_start_year,
+					cdt_steepness: cdt_steepness,
 					cohorts: cohorts,
 					do_not_smooth: do_not_smooth,
 					enforce_biological_sex_ratios: enforce_bounds,
@@ -529,7 +596,7 @@ global.age_sex = class {
 					preserve_sex_ratios: preserve_sex_ratios,
 					smoothing_method: smoothing_method,
 					smoothing_start_index: start_index,
-					task_type: (use_whittaker) ? "clamp_cohorts_whittaker" : "clamp_cohorts_isotonic",
+					task_type: task_type,
 					wh_huber_delta: options.wh_huber_delta,
 					wh_lambda: options.wh_lambda,
 					wh_max_iterations: options.wh_max_iterations,
