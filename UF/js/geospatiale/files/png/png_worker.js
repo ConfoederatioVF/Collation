@@ -1476,54 +1476,218 @@ let handleTask = async function (task) {
       }
     }
 
-    // Pass 1: Compute global unscaled population and apply macro-demographic smoothing globally
-    let global_raw_f = new Float32Array(age_count);
-    let global_raw_m = new Float32Array(age_count);
-
-    for (let i = 0; i < total_pixels; i++) {
-      let stade_pop = popc_raster.data[i];
-      if (stade_pop < 0.01 || isNaN(stade_pop)) continue;
-
-      // Exclude HMD ground truth from global totals
-      if (has_hmd && hmd_total[i] > 0) continue;
-
-      for (let k = 0; k < age_count; k++) {
-        let f_val = prob_rasters[cohorts[f_indices[k]]].data[i];
-        let m_val = prob_rasters[cohorts[m_indices[k]]].data[i];
-
-        if (f_val > 0 && isFinite(f_val)) global_raw_f[k] += f_val * stade_pop;
-        if (m_val > 0 && isFinite(m_val)) global_raw_m[k] += m_val * stade_pop;
-      }
-    }
-
-    let global_coupled_f = new Float32Array(age_count);
-    let global_coupled_m = new Float32Array(age_count);
-    let global_coupled_tot = new Float32Array(age_count);
+    console.log(`[Worker PID ${process.pid}] Initialised task for Year ${year}: loaded popc (${width}x${height}) & ${num_cohorts} cohort rasters.`);
 
     if (use_whittaker) {
+      // --- WHITTAKER-HENDERSON WITH ISO3 BINS ---
+      let geocodes_raster_path = task.geocodes_raster_path || path.join(global.h1 || "./histmap/1.data_raw/", "admin_modern/geocodes.png");
+      let geocodes_csv_path = task.geocodes_csv_path || path.join(global.h1 || "./histmap/1.data_raw/", "admin_modern/geocodes.csv");
+
+      if (!GeoPNG._cached_geocodes_index && fs.existsSync(geocodes_raster_path) && fs.existsSync(geocodes_csv_path)) {
+        let csv_content = fs.readFileSync(geocodes_csv_path, "utf8");
+        let lines = csv_content.split(/\r?\n/).filter(l => l.trim().length > 0);
+        let all_iso = [];
+        let color_to_iso_id = new Map();
+
+        for (let i = 1; i < lines.length; i++) {
+          let parts = lines[i].split(";");
+          let iso3 = parts[0].trim();
+          let color = parts[4] ? parts[4].trim() : null;
+          if (color) {
+            let cparts = color.split(",").map(Number);
+            let key = (cparts[0] << 16) | (cparts[1] << 8) | cparts[2];
+            let id = all_iso.indexOf(iso3);
+            if (id === -1) {
+              id = all_iso.length;
+              all_iso.push(iso3);
+            }
+            color_to_iso_id.set(key, id);
+          }
+        }
+
+        let geocodes_raster = GeoPNG.loadImage(geocodes_raster_path);
+        let pixel_iso_ids = new Int16Array(total_pixels);
+        pixel_iso_ids.fill(-1);
+
+        for (let i = 0; i < total_pixels; i++) {
+          let b = i * 4;
+          let key = (geocodes_raster.data[b] << 16) | (geocodes_raster.data[b+1] << 8) | geocodes_raster.data[b+2];
+          let id = color_to_iso_id.get(key);
+          if (id !== undefined) pixel_iso_ids[i] = id;
+        }
+
+        GeoPNG._cached_geocodes_index = {
+          all_iso: all_iso,
+          pixel_iso_ids: pixel_iso_ids
+        };
+      }
+
+      let all_iso = (GeoPNG._cached_geocodes_index) ? GeoPNG._cached_geocodes_index.all_iso : [];
+      let pixel_iso_ids = (GeoPNG._cached_geocodes_index) ? GeoPNG._cached_geocodes_index.pixel_iso_ids : null;
+      let num_bins = all_iso.length + 1; // Last bin is unmapped/fallback
+      let fallback_bin_id = num_bins - 1;
+
+      console.log(`[Worker PID ${process.pid}] Year ${year}: Pass 1 (Accumulating cohorts into ${num_bins} ISO3 bins)...`);
+
+      let bin_raw_f = new Array(num_bins);
+      let bin_raw_m = new Array(num_bins);
+      let bin_coupled_f = new Array(num_bins);
+      let bin_coupled_m = new Array(num_bins);
+      let bin_coupled_tot = new Array(num_bins);
+      let bin_scale_f = new Array(num_bins);
+      let bin_scale_m = new Array(num_bins);
+
+      for (let b = 0; b < num_bins; b++) {
+        bin_raw_f[b] = new Float32Array(age_count);
+        bin_raw_m[b] = new Float32Array(age_count);
+        bin_coupled_f[b] = new Float32Array(age_count);
+        bin_coupled_m[b] = new Float32Array(age_count);
+        bin_coupled_tot[b] = new Float32Array(age_count);
+        bin_scale_f[b] = new Float32Array(age_count);
+        bin_scale_m[b] = new Float32Array(age_count);
+        bin_scale_f[b].fill(1);
+        bin_scale_m[b].fill(1);
+      }
+
+      // Pass 1: Accumulate raw cohort populations into ISO3 bins
+      for (let i = 0; i < total_pixels; i++) {
+        let stade_pop = popc_raster.data[i];
+        if (stade_pop < 0.01 || isNaN(stade_pop)) continue;
+        if (has_hmd && hmd_total[i] > 0) continue;
+
+        let b_id = (pixel_iso_ids && pixel_iso_ids[i] >= 0) ? pixel_iso_ids[i] : fallback_bin_id;
+        let raw_f_b = bin_raw_f[b_id];
+        let raw_m_b = bin_raw_m[b_id];
+
+        for (let k = 0; k < age_count; k++) {
+          let f_val = prob_rasters[cohorts[f_indices[k]]].data[i];
+          let m_val = prob_rasters[cohorts[m_indices[k]]].data[i];
+
+          if (f_val > 0 && isFinite(f_val)) raw_f_b[k] += f_val * stade_pop;
+          if (m_val > 0 && isFinite(m_val)) raw_m_b[k] += m_val * stade_pop;
+        }
+      }
+
+      console.log(`[Worker PID ${process.pid}] Year ${year}: Pass 2 (Graduating ${num_bins} ISO3 country pyramids via Whittaker-Henderson)...`);
+
       let enforce_fixed = (task.enforce_fixed_sex_ratios === true);
       let enforce_bounds = (task.enforce_biological_sex_ratios === true);
       let preserve_sex_ratios = (task.preserve_sex_ratios !== undefined) ? task.preserve_sex_ratios : !enforce_fixed && !enforce_bounds;
+      let graduated_count = 0;
 
-      Statistics.coupleAgeSexCohortsWhittaker(global_raw_m, global_raw_f, age_band_widths, (task.lift_isotonic || task.do_not_smooth) ? null : task.smoothing_start_index !== undefined ? task.smoothing_start_index : 2, {
-        baseline_sex_ratios: task.baseline_sex_ratios,
-        do_not_smooth: task.do_not_smooth || task.lift_isotonic,
-        enforce_biological_sex_ratios: enforce_bounds,
-        enforce_fixed_sex_ratios: enforce_fixed,
-        female_output: global_coupled_f,
-        huber_delta: task.wh_huber_delta,
-        lambda: task.wh_lambda,
-        male_output: global_coupled_m,
-        max_iterations: task.wh_max_iterations,
-        mu: task.wh_mu,
-        preserve_sex_ratios: preserve_sex_ratios,
-        preserve_total: true,
-        sex_ratio_bounds: task.sex_ratio_bounds,
-        tolerance: task.wh_tolerance,
-        total_output: global_coupled_tot,
-        weights: task.wh_weights
-      });
+      for (let b = 0; b < num_bins; b++) {
+        let bin_pop = 0;
+        for (let k = 0; k < age_count; k++)
+          bin_pop += bin_raw_f[b][k] + bin_raw_m[b][k];
+
+        if (bin_pop <= 0) continue;
+
+        Statistics.coupleAgeSexCohortsWhittaker(
+          bin_raw_m[b],
+          bin_raw_f[b],
+          age_band_widths,
+          (task.lift_isotonic || task.do_not_smooth) ? null : task.smoothing_start_index !== undefined ? task.smoothing_start_index : 2,
+          {
+            baseline_sex_ratios: task.baseline_sex_ratios,
+            do_not_smooth: task.do_not_smooth || task.lift_isotonic,
+            enforce_biological_sex_ratios: enforce_bounds,
+            enforce_fixed_sex_ratios: enforce_fixed,
+            female_output: bin_coupled_f[b],
+            huber_delta: task.wh_huber_delta,
+            lambda: task.wh_lambda,
+            male_output: bin_coupled_m[b],
+            max_iterations: task.wh_max_iterations || 200,
+            mu: task.wh_mu,
+            preserve_sex_ratios: preserve_sex_ratios,
+            preserve_total: true,
+            sex_ratio_bounds: task.sex_ratio_bounds,
+            tolerance: task.wh_tolerance || 1e-5,
+            total_output: bin_coupled_tot[b],
+            weights: task.wh_weights
+          }
+        );
+
+        for (let k = 0; k < age_count; k++) {
+          bin_scale_f[b][k] = (bin_raw_f[b][k] > 0) ? (bin_coupled_f[b][k] / bin_raw_f[b][k]) : 1;
+          bin_scale_m[b][k] = (bin_raw_m[b][k] > 0) ? (bin_coupled_m[b][k] / bin_raw_m[b][k]) : 1;
+        }
+
+        graduated_count++;
+      }
+
+      console.log(`[Worker PID ${process.pid}] Year ${year}: Graduated ${graduated_count} ISO3 country bins. Starting Pass 3 (Dasymetric pixel allocation)...`);
+
+      // Pass 3: Dasymetrically resolve pixel populations using country-specific graduated cohort scaling
+      for (let i = 0; i < total_pixels; i++) {
+        let stade_pop = popc_raster.data[i];
+        if (stade_pop < 0.01 || isNaN(stade_pop)) continue;
+
+        if (has_hmd && hmd_total[i] > 0) {
+          let hmd_scale = stade_pop / hmd_total[i];
+          for (let c = 0; c < num_cohorts; c++) {
+            let val = (hmd_rasters[cohorts[c]]) ? hmd_rasters[cohorts[c]].data[i] : 0;
+            output_buffers[c][i] = val * hmd_scale;
+          }
+          continue;
+        }
+
+        let b_id = (pixel_iso_ids && pixel_iso_ids[i] >= 0) ? pixel_iso_ids[i] : fallback_bin_id;
+        let scale_f = bin_scale_f[b_id];
+        let scale_m = bin_scale_m[b_id];
+
+        let sum_rates = 0;
+        for (let k = 0; k < age_count; k++) {
+          let f_val = prob_rasters[cohorts[f_indices[k]]].data[i];
+          let m_val = prob_rasters[cohorts[m_indices[k]]].data[i];
+
+          let f_w = (f_val > 0 && isFinite(f_val)) ? f_val * scale_f[k] : 0;
+          let m_w = (m_val > 0 && isFinite(m_val)) ? m_val * scale_m[k] : 0;
+
+          sum_rates += f_w + m_w;
+        }
+
+        if (sum_rates > 0) {
+          let local_scale = stade_pop / sum_rates;
+          for (let k = 0; k < age_count; k++) {
+            let f_val = prob_rasters[cohorts[f_indices[k]]].data[i];
+            let m_val = prob_rasters[cohorts[m_indices[k]]].data[i];
+
+            let f_w = (f_val > 0 && isFinite(f_val)) ? f_val * scale_f[k] : 0;
+            let m_w = (m_val > 0 && isFinite(m_val)) ? m_val * scale_m[k] : 0;
+
+            output_buffers[f_indices[k]][i] = f_w * local_scale;
+            output_buffers[m_indices[k]][i] = m_w * local_scale;
+          }
+        } else {
+          let even_share = stade_pop / num_cohorts;
+          for (let c = 0; c < num_cohorts; c++)
+            output_buffers[c][i] = even_share;
+        }
+      }
     } else {
+      // --- ISOTONIC (PAVA) CLAMPING PATH ---
+      // (Maintained separately from Whittaker-Henderson)
+      let global_raw_f = new Float32Array(age_count);
+      let global_raw_m = new Float32Array(age_count);
+
+      for (let i = 0; i < total_pixels; i++) {
+        let stade_pop = popc_raster.data[i];
+        if (stade_pop < 0.01 || isNaN(stade_pop)) continue;
+        if (has_hmd && hmd_total[i] > 0) continue;
+
+        for (let k = 0; k < age_count; k++) {
+          let f_val = prob_rasters[cohorts[f_indices[k]]].data[i];
+          let m_val = prob_rasters[cohorts[m_indices[k]]].data[i];
+
+          if (f_val > 0 && isFinite(f_val)) global_raw_f[k] += f_val * stade_pop;
+          if (m_val > 0 && isFinite(m_val)) global_raw_m[k] += m_val * stade_pop;
+        }
+      }
+
+      let global_coupled_f = new Float32Array(age_count);
+      let global_coupled_m = new Float32Array(age_count);
+      let global_coupled_tot = new Float32Array(age_count);
+
       Statistics.coupleAgeSexCohorts(global_raw_m, global_raw_f, age_band_widths, (task.lift_isotonic || task.do_not_smooth) ? null : 2, {
         baseline_sex_ratios: task.baseline_sex_ratios,
         do_not_smooth: task.do_not_smooth || task.lift_isotonic,
@@ -1533,93 +1697,59 @@ let handleTask = async function (task) {
         preserve_sex_ratios: task.preserve_sex_ratios,
         total_output: global_coupled_tot
       });
-    }
 
-    let global_scale_f = new Float32Array(age_count);
-    let global_scale_m = new Float32Array(age_count);
-    for (let k = 0; k < age_count; k++) {
-      global_scale_f[k] = (global_raw_f[k] > 0) ? (global_coupled_f[k] / global_raw_f[k]) : 1;
-      global_scale_m[k] = (global_raw_m[k] > 0) ? (global_coupled_m[k] / global_raw_m[k]) : 1;
-    }
-
-    let raw_f = new Float32Array(age_count);
-    let raw_m = new Float32Array(age_count);
-
-    let f_coupled_buf = new Float32Array(age_count);
-    let m_coupled_buf = new Float32Array(age_count);
-    let tot_coupled_buf = new Float32Array(age_count);
-
-    let pava_buffers = (!use_whittaker) ? {
-      block_counts: new Int32Array(age_count),
-      block_vals: new Float32Array(age_count),
-      block_weights: new Float32Array(age_count)
-    } : null;
-
-
-
-    // Pass 2: Dasymetrically resolve populations proportionally using global macro-demographic scaling + local smoothing
-    for (let i = 0; i < total_pixels; i++) {
-      let stade_pop = popc_raster.data[i];
-      if (stade_pop < 0.01 || isNaN(stade_pop)) continue;
-
-      // Exclude empirical HMD ground truth from smoothing
-      if (has_hmd && hmd_total[i] > 0) {
-        let hmd_scale = stade_pop / hmd_total[i];
-        for (let c = 0; c < num_cohorts; c++) {
-          let val = (hmd_rasters[cohorts[c]]) ? hmd_rasters[cohorts[c]].data[i] : 0;
-          output_buffers[c][i] = val * hmd_scale;
-        }
-        continue;
-      }
-
+      let global_scale_f = new Float32Array(age_count);
+      let global_scale_m = new Float32Array(age_count);
       for (let k = 0; k < age_count; k++) {
-        let f_val = prob_rasters[cohorts[f_indices[k]]].data[i];
-        let m_val = prob_rasters[cohorts[m_indices[k]]].data[i];
-
-        let f_w = (f_val > 0 && isFinite(f_val)) ? f_val * global_scale_f[k] : 0;
-        let m_w = (m_val > 0 && isFinite(m_val)) ? m_val * global_scale_m[k] : 0;
-
-        raw_f[k] = f_w;
-        raw_m[k] = m_w;
+        global_scale_f[k] = (global_raw_f[k] > 0) ? (global_coupled_f[k] / global_raw_f[k]) : 1;
+        global_scale_m[k] = (global_raw_m[k] > 0) ? (global_coupled_m[k] / global_raw_m[k]) : 1;
       }
 
-      if (use_whittaker) {
-        let enforce_fixed = (task.enforce_fixed_sex_ratios === true);
-        let enforce_bounds = (task.enforce_biological_sex_ratios === true);
-        let preserve_sex_ratios = (task.preserve_sex_ratios !== undefined) ? task.preserve_sex_ratios : !enforce_fixed && !enforce_bounds;
+      let f_coupled_buf = new Float32Array(age_count);
+      let m_coupled_buf = new Float32Array(age_count);
+      let tot_coupled_buf = new Float32Array(age_count);
+      let pava_buffers = {
+        block_counts: new Int32Array(age_count),
+        block_vals: new Float32Array(age_count),
+        block_weights: new Float32Array(age_count)
+      };
 
-        Statistics.coupleAgeSexCohortsWhittaker(raw_m, raw_f, age_band_widths, (task.lift_isotonic || task.do_not_smooth) ? null : task.smoothing_start_index !== undefined ? task.smoothing_start_index : 2, {
-          baseline_sex_ratios: task.baseline_sex_ratios,
-          do_not_smooth: task.do_not_smooth || task.lift_isotonic,
-          enforce_biological_sex_ratios: enforce_bounds,
-          enforce_fixed_sex_ratios: enforce_fixed,
-          female_output: f_coupled_buf,
-          huber_delta: task.wh_huber_delta,
-          lambda: task.wh_lambda,
-          male_output: m_coupled_buf,
-          max_iterations: task.wh_max_iterations,
-          mu: task.wh_mu,
-          preserve_sex_ratios: preserve_sex_ratios,
-          preserve_total: true,
-          sex_ratio_bounds: task.sex_ratio_bounds,
-          tolerance: task.wh_tolerance,
-          total_output: tot_coupled_buf,
-          weights: task.wh_weights
-        });
-      } else {
+      for (let i = 0; i < total_pixels; i++) {
+        let stade_pop = popc_raster.data[i];
+        if (stade_pop < 0.01 || isNaN(stade_pop)) continue;
+
+        if (has_hmd && hmd_total[i] > 0) {
+          let hmd_scale = stade_pop / hmd_total[i];
+          for (let c = 0; c < num_cohorts; c++) {
+            let val = (hmd_rasters[cohorts[c]]) ? hmd_rasters[cohorts[c]].data[i] : 0;
+            output_buffers[c][i] = val * hmd_scale;
+          }
+          continue;
+        }
+
+        let raw_f = new Float32Array(age_count);
+        let raw_m = new Float32Array(age_count);
+
+        for (let k = 0; k < age_count; k++) {
+          let f_val = prob_rasters[cohorts[f_indices[k]]].data[i];
+          let m_val = prob_rasters[cohorts[m_indices[k]]].data[i];
+
+          let f_w = (f_val > 0 && isFinite(f_val)) ? f_val * global_scale_f[k] : 0;
+          let m_w = (m_val > 0 && isFinite(m_val)) ? m_val * global_scale_m[k] : 0;
+
+          raw_f[k] = f_w;
+          raw_m[k] = m_w;
+        }
+
         // Local monotonic ceiling for elderly cohorts (indices 14 to 17: 65, 70, 75, 80)
         for (let k = 14; k < age_count; k++) {
           let prev_f_dens = raw_f[k - 1] / age_band_widths[k - 1];
           let max_f_w = prev_f_dens * age_band_widths[k] * 1.05;
-          if (raw_f[k] > max_f_w && max_f_w > 0) {
-            raw_f[k] = max_f_w;
-          }
+          if (raw_f[k] > max_f_w && max_f_w > 0) raw_f[k] = max_f_w;
 
           let prev_m_dens = raw_m[k - 1] / age_band_widths[k - 1];
           let max_m_w = prev_m_dens * age_band_widths[k] * 1.05;
-          if (raw_m[k] > max_m_w && max_m_w > 0) {
-            raw_m[k] = max_m_w;
-          }
+          if (raw_m[k] > max_m_w && max_m_w > 0) raw_m[k] = max_m_w;
         }
 
         Statistics.coupleAgeSexCohorts(raw_m, raw_f, age_band_widths, (task.lift_isotonic || task.do_not_smooth) ? null : 2, {
@@ -1632,28 +1762,28 @@ let handleTask = async function (task) {
           preserve_sex_ratios: task.preserve_sex_ratios,
           total_output: tot_coupled_buf
         });
-      }
 
-      let sum_rates = 0;
-      for (let k = 0; k < age_count; k++)
-        sum_rates += f_coupled_buf[k] + m_coupled_buf[k];
-      for (let k = 0; k < age_count; k++)
-        sum_rates += f_coupled_buf[k] + m_coupled_buf[k];
+        let sum_rates = 0;
+        for (let k = 0; k < age_count; k++)
+          sum_rates += f_coupled_buf[k] + m_coupled_buf[k];
 
-      if (sum_rates > 0) {
-        let local_scale = stade_pop / sum_rates;
-        for (let k = 0; k < age_count; k++) {
-          output_buffers[f_indices[k]][i] = f_coupled_buf[k] * local_scale;
-          output_buffers[m_indices[k]][i] = m_coupled_buf[k] * local_scale;
+        if (sum_rates > 0) {
+          let local_scale = stade_pop / sum_rates;
+          for (let k = 0; k < age_count; k++) {
+            output_buffers[f_indices[k]][i] = f_coupled_buf[k] * local_scale;
+            output_buffers[m_indices[k]][i] = m_coupled_buf[k] * local_scale;
+          }
+        } else {
+          let even_share = stade_pop / num_cohorts;
+          for (let c = 0; c < num_cohorts; c++)
+            output_buffers[c][i] = even_share;
         }
-      } else {
-        let even_share = stade_pop / num_cohorts;
-        for (let c = 0; c < num_cohorts; c++)
-          output_buffers[c][i] = even_share;
       }
     }
 
     if (!fs.existsSync(output_folder)) fs.mkdirSync(output_folder, { recursive: true });
+
+    console.log(`[Worker PID ${process.pid}] Year ${year}: Pass 2 completed. Saving ${num_cohorts} clamped cohort rasters to disk...`);
 
     for (let c = 0; c < num_cohorts; c++) {
       let out_path = path.join(output_folder, `global_${cohorts[c]}_${year}.png`);
@@ -1664,7 +1794,10 @@ let handleTask = async function (task) {
         height: height,
         width: width
       });
+      console.log(`[Worker PID ${process.pid}] Year ${year}: Saved raster ${path.basename(out_path)} (${c + 1}/${num_cohorts})`);
     }
+
+    console.log(`[Worker PID ${process.pid}] Year ${year}: All ${num_cohorts} rasters saved successfully.`);
 
     return { year: year, success: true };
   }

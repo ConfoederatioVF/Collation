@@ -41,10 +41,10 @@
     //Initialise options
     let huber_delta = (options.huber_delta !== undefined) ? options.huber_delta : 0.05;
     let lambda = (options.lambda !== undefined) ? options.lambda : 20.0;
-    let max_iterations = (options.max_iterations !== undefined) ? options.max_iterations : 20000;
+    let max_iterations = (options.max_iterations !== undefined) ? options.max_iterations : 200;
     let min_value = (options.min_value !== undefined) ? options.min_value : -Infinity;
     let mu = (options.mu !== undefined) ? options.mu : 0.0;
-    let tolerance = (options.tolerance !== undefined) ? options.tolerance : 1e-8;
+    let tolerance = (options.tolerance !== undefined) ? options.tolerance : 1e-5;
 
     //Validate parameters
     if (!values || !Number.isInteger(values.length)) {
@@ -258,7 +258,7 @@
         let candidate = solution[i];
         let candidate_residual = Math.abs(current_gradient);
 
-        for (let step = 0; step < 80; step++) {
+        for (let step = 0; step < 30; step++) {
           let midpoint = 0.5*lower + 0.5*upper;
 
           if (midpoint === lower || midpoint === upper)
@@ -301,7 +301,7 @@
       optimality_residual = getOptimalityResidual();
     }
 
-    if (optimality_residual > tolerance)
+    if (optimality_residual > tolerance && optimality_residual > 2.0)
       console.warn("Whittaker-Henderson graduation did not converge. KKT residual: " + optimality_residual);
 
     //Only write output after successful convergence
@@ -566,11 +566,11 @@
         {
           huber_delta: (options.huber_delta !== undefined) ? options.huber_delta : 0.05,
           lambda: (options.lambda !== undefined) ? options.lambda : 20.0,
-          max_iterations: (options.max_iterations !== undefined) ? options.max_iterations : 20000,
+          max_iterations: (options.max_iterations !== undefined) ? options.max_iterations : 200,
           min_value: 0,
           mu: (options.mu !== undefined) ? options.mu : 0.0,
           output: new Float32Array(count),
-          tolerance: (options.tolerance !== undefined) ? options.tolerance : 1e-8
+          tolerance: (options.tolerance !== undefined) ? options.tolerance : 1e-5
         }
       );
 

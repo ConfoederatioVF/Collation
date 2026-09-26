@@ -509,7 +509,7 @@ global.age_sex = class {
 			name: `Age Sex Clamping (${smoothing_method})`,
 			task_generator: (year) => {
 				let format_year = (year > 2023) ? 2023 : year;
-				let popc_info = this.covariates_obj["popc_"](format_year);
+				let popc_path = path.join(population_Stadester.input_popc_folder, `stadester_population_${format_year}.png`);
 				
 				return {
 					baseline_sex_ratios: options.baseline_sex_ratios,
@@ -517,12 +517,14 @@ global.age_sex = class {
 					do_not_smooth: do_not_smooth,
 					enforce_biological_sex_ratios: enforce_bounds,
 					enforce_fixed_sex_ratios: enforce_fixed,
+					geocodes_csv_path: (typeof admin_modern !== "undefined") ? admin_modern.input_geocodes_csv : (global.h1 ? path.join(global.h1, "admin_modern/geocodes.csv") : null),
+					geocodes_raster_path: (typeof admin_modern !== "undefined") ? admin_modern.input_geocodes_raster : (global.h1 ? path.join(global.h1, "admin_modern/geocodes.png") : null),
 					hmd_folder: options.hmd_folder,
 					lift_isotonic: do_not_smooth,
 					logit_rasters_folder: this.intermediate_logit_rasters,
 					output_folder: this.intermediate_clamped_rasters,
-					popc_format: popc_info ? popc_info[1] : "float32",
-					popc_path: popc_info ? popc_info[0] : null,
+					popc_format: "float32",
+					popc_path: popc_path,
 					preserve_sex_ratios: preserve_sex_ratios,
 					smoothing_method: smoothing_method,
 					smoothing_start_index: start_index,

@@ -54,7 +54,9 @@ require(path.join(h3, "age_sex/age_sex.js"));
 		smoothing_method: "whittaker_henderson",
 		wh_lambda: 20.0,
 		wh_mu: 1500.0,
-		wh_huber_delta: 0.05
+		wh_huber_delta: 0.05,
+		wh_max_iterations: 100,
+		wh_tolerance: 1e-4
 	});
 	console.log(`   Reclamping finished in ${((Date.now() - t0)/1000).toFixed(1)}s.\n`);
 
@@ -147,6 +149,7 @@ require(path.join(h3, "age_sex/age_sex.js"));
 				results[year][iso3].total[a] = f_sum + m_sum;
 				results[year][iso3].sum_pop += f_sum + m_sum;
 			}
+			console.log(`   [Sample ${year}] Processed cohort ${age} (${a + 1}/18)...`);
 		}
 	}
 
@@ -184,4 +187,6 @@ require(path.join(h3, "age_sex/age_sex.js"));
 	// Save raw JSON for downstream analysis
 	fs.writeFileSync("C:/Users/htmlp/.gemini/antigravity-ide/brain/49d17da0-5342-4f63-84eb-c73030cc0833/reclamped_results.json", JSON.stringify(results, null, 2));
 	console.log("\nSaved results to reclamped_results.json");
+	console.log("\n[Completed] All tasks finished successfully. Exiting gracefully.");
+	process.exit(0);
 })();
