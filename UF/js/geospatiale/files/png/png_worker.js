@@ -1519,7 +1519,16 @@ let handleTask = async function (task) {
     let raw_f = new Float32Array(age_count);
     let raw_m = new Float32Array(age_count);
 
-    // Pass 2: Dasymetrically resolve populations proportionally using global PAVA scaling
+    let f_coupled_buf = new Float32Array(age_count);
+    let m_coupled_buf = new Float32Array(age_count);
+    let tot_coupled_buf = new Float32Array(age_count);
+    let pava_buffers = {
+      block_counts: new Int32Array(age_count),
+      block_vals: new Float32Array(age_count),
+      block_weights: new Float32Array(age_count)
+    };
+
+    // Pass 2: Dasymetrically resolve populations proportionally using global macro-demographic scaling + local PAVA
     for (let i = 0; i < total_pixels; i++) {
       let stade_pop = popc_raster.data[i];
       if (stade_pop < 0.01 || isNaN(stade_pop)) continue;
@@ -1534,7 +1543,6 @@ let handleTask = async function (task) {
         continue;
       }
 
-      let sum_rates = 0;
       for (let k = 0; k < age_count; k++) {
         let f_val = prob_rasters[cohorts[f_indices[k]]].data[i];
         let m_val = prob_rasters[cohorts[m_indices[k]]].data[i];
@@ -1544,14 +1552,43 @@ let handleTask = async function (task) {
 
         raw_f[k] = f_w;
         raw_m[k] = m_w;
-        sum_rates += f_w + m_w;
       }
+
+      // Local monotonic ceiling for elderly cohorts (indices 14 to 17: 65, 70, 75, 80)
+      for (let k = 14; k < age_count; k++) {
+        let prev_f_dens = raw_f[k - 1] / age_band_widths[k - 1];
+        let max_f_w = prev_f_dens * age_band_widths[k] * 1.05;
+        if (raw_f[k] > max_f_w && max_f_w > 0) {
+          raw_f[k] = max_f_w;
+        }
+
+        let prev_m_dens = raw_m[k - 1] / age_band_widths[k - 1];
+        let max_m_w = prev_m_dens * age_band_widths[k] * 1.05;
+        if (raw_m[k] > max_m_w && max_m_w > 0) {
+          raw_m[k] = max_m_w;
+        }
+      }
+
+      Statistics.coupleAgeSexCohorts(raw_m, raw_f, age_band_widths, (task.lift_isotonic || task.do_not_smooth) ? null : 2, {
+        baseline_sex_ratios: task.baseline_sex_ratios,
+        buffers: pava_buffers,
+        do_not_smooth: task.do_not_smooth || task.lift_isotonic,
+        female_output: f_coupled_buf,
+        lift_isotonic: task.lift_isotonic,
+        male_output: m_coupled_buf,
+        preserve_sex_ratios: task.preserve_sex_ratios,
+        total_output: tot_coupled_buf
+      });
+
+      let sum_rates = 0;
+      for (let k = 0; k < age_count; k++)
+        sum_rates += f_coupled_buf[k] + m_coupled_buf[k];
 
       if (sum_rates > 0) {
         let local_scale = stade_pop / sum_rates;
         for (let k = 0; k < age_count; k++) {
-          output_buffers[f_indices[k]][i] = raw_f[k] * local_scale;
-          output_buffers[m_indices[k]][i] = raw_m[k] * local_scale;
+          output_buffers[f_indices[k]][i] = f_coupled_buf[k] * local_scale;
+          output_buffers[m_indices[k]][i] = m_coupled_buf[k] * local_scale;
         }
       } else {
         let even_share = stade_pop / num_cohorts;
