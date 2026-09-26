@@ -519,6 +519,7 @@ global.age_sex = class {
 					enforce_fixed_sex_ratios: enforce_fixed,
 					geocodes_csv_path: (typeof admin_modern !== "undefined") ? admin_modern.input_geocodes_csv : (global.h1 ? path.join(global.h1, "admin_modern/geocodes.csv") : null),
 					geocodes_raster_path: (typeof admin_modern !== "undefined") ? admin_modern.input_geocodes_raster : (global.h1 ? path.join(global.h1, "admin_modern/geocodes.png") : null),
+					graduate_sex_ratios: (options.graduate_sex_ratios !== undefined) ? options.graduate_sex_ratios : true,
 					hmd_folder: options.hmd_folder,
 					lift_isotonic: do_not_smooth,
 					logit_rasters_folder: this.intermediate_logit_rasters,
@@ -532,7 +533,8 @@ global.age_sex = class {
 					wh_huber_delta: options.wh_huber_delta,
 					wh_lambda: options.wh_lambda,
 					wh_max_iterations: options.wh_max_iterations,
-					wh_mu: options.wh_mu,
+					wh_mu: (options.wh_mu !== undefined) ? options.wh_mu : 5000.0,
+					wh_sex_ratio_lambda: options.wh_sex_ratio_lambda,
 					wh_tolerance: options.wh_tolerance,
 					wh_weights: options.wh_weights,
 					year: year

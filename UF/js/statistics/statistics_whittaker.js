@@ -365,8 +365,10 @@
     //Initialise options
     let enforce_bounds = (options.enforce_biological_sex_ratios === true);
     let enforce_fixed = (options.enforce_fixed_sex_ratios === true);
+    let graduate_sex_ratios = (options.graduate_sex_ratios !== undefined) ? options.graduate_sex_ratios : !enforce_fixed;
     let preserve_sex_ratios = (options.preserve_sex_ratios !== undefined) ? options.preserve_sex_ratios : !enforce_bounds && !enforce_fixed;
     let preserve_total = (options.preserve_total !== false);
+    let sex_ratio_lambda = (options.sex_ratio_lambda !== undefined) ? options.sex_ratio_lambda : 20.0;
     let do_not_smooth = (options.do_not_smooth !== undefined) ? options.do_not_smooth : !!options.lift_isotonic;
 
     //Retain the legacy start-index disabling convention
@@ -397,7 +399,7 @@
 
     let widths = new Float32Array(count);
     let raw_totals = new Float32Array(count);
-    let male_shares = new Float32Array(count);
+    let raw_male_shares = new Float32Array(count);
     let total_density = new Float32Array(count);
     let effective_weights = new Float32Array(count);
 
@@ -496,36 +498,9 @@
         male_share = ratio/(1 + ratio);
       }
 
-      if (enforce_bounds) {
-        let cohort_bounds = bounds[i];
-
-        if (!cohort_bounds || cohort_bounds.length !== 2) {
-          console.error("Each sex-ratio bound must contain a minimum and maximum.");
-          cohort_bounds = [0, Infinity];
-        }
-
-        let ratio_min = cohort_bounds[0];
-        let ratio_max = cohort_bounds[1];
-
-        if (!Number.isFinite(ratio_min) || !Number.isFinite(ratio_max) || ratio_min < 0 || ratio_max < ratio_min) {
-          console.error("Sex-ratio bounds must be finite, non-negative, and ordered.");
-          ratio_min = 0;
-          ratio_max = Infinity;
-        }
-
-        let share_min = ratio_min/(1 + ratio_min);
-        let share_max = ratio_max/(1 + ratio_max);
-
-        if (enforce_fixed && (male_share < share_min || male_share > share_max)) {
-          console.error("A fixed sex ratio lies outside its supplied bounds.");
-        }
-
-        male_share = Math.max(share_min, Math.min(share_max, male_share));
-      }
-
       widths[i] = width;
       raw_totals[i] = total;
-      male_shares[i] = male_share;
+      raw_male_shares[i] = male_share;
       total_density[i] = total/width;
       effective_weights[i] = weight;
 
@@ -538,6 +513,41 @@
     if (!Number.isFinite(suffix_total) || !Number.isFinite(suffix_width)) {
       console.error("Aggregate cohort values overflow; rescale the inputs.");
       return { female: female_out, male: male_out, total: total_out };
+    }
+
+    //Graduate cohort sex proportions with Whittaker-Henderson if enabled
+    let male_shares = raw_male_shares;
+
+    if (graduate_sex_ratios && !enforce_fixed && count > 2) {
+      male_shares = Statistics.whittakerHendersonRobust(
+        raw_male_shares,
+        effective_weights,
+        0,
+        {
+          huber_delta: (options.huber_delta !== undefined) ? options.huber_delta : 0.05,
+          lambda: sex_ratio_lambda,
+          max_iterations: (options.max_iterations !== undefined) ? options.max_iterations : 200,
+          min_value: 0,
+          mu: 0.0,
+          tolerance: (options.tolerance !== undefined) ? options.tolerance : 1e-5
+        }
+      );
+    }
+
+    if (enforce_bounds) {
+      for (let i = 0; i < count; i++) {
+        let cohort_bounds = bounds[i] || [0, Infinity];
+        let ratio_min = cohort_bounds[0];
+        let ratio_max = cohort_bounds[1];
+
+        if (!Number.isFinite(ratio_min) || ratio_min < 0) ratio_min = 0;
+        if (!Number.isFinite(ratio_max) || ratio_max < ratio_min) ratio_max = Infinity;
+
+        let share_min = ratio_min/(1 + ratio_min);
+        let share_max = ratio_max/(1 + ratio_max);
+
+        male_shares[i] = Math.max(share_min, Math.min(share_max, male_shares[i]));
+      }
     }
 
     //An empty suffix already has an exact zero-density solution

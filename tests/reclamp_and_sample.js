@@ -49,19 +49,39 @@ require(path.join(h3, "age_sex/age_sex.js"));
 	console.log("1. Starting age_sex.E_clampToStadester...");
 	let t0 = Date.now();
 	await age_sex.E_clampToStadester({
-		years: [1600, 1940],
+		graduate_sex_ratios: true,
 		overwrite: true,
 		smoothing_method: "whittaker_henderson",
-		wh_lambda: 20.0,
-		wh_mu: 1500.0,
 		wh_huber_delta: 0.05,
+		wh_lambda: 20.0,
 		wh_max_iterations: 100,
-		wh_tolerance: 1e-4
+		wh_mu: 5000.0,
+		wh_sex_ratio_lambda: 20.0,
+		wh_tolerance: 1e-4,
+		years: [1600, 1940]
 	});
 	console.log(`   Reclamping finished in ${((Date.now() - t0)/1000).toFixed(1)}s.\n`);
 
-	// Step 2: Index ISO3 country mask pixels
-	console.log("2. Indexing ISO3 country masks from geocodes.png...");
+	// Step 2: Copy clamped rasters to composite rasters for Dataviewer
+	console.log("2. Starting age_sex.F_compositeTimeseries...");
+	await age_sex.F_compositeTimeseries({
+		overwrite: true,
+		years: [1600, 1940]
+	});
+	console.log("   Composite cohorts timeseries updated.\n");
+
+	// Step 3: Invalidate stale Dataviewer BMP cache
+	let dataview_cache_dir = "D:/Project 1436 - Dataview/data/raster_cache/";
+	if (fs.existsSync(dataview_cache_dir)) {
+		let cached_files = fs.readdirSync(dataview_cache_dir).filter(f => f.includes("1600") || f.includes("1940"));
+		for (let cf of cached_files) {
+			try { fs.unlinkSync(path.join(dataview_cache_dir, cf)); } catch (e) {}
+		}
+		console.log(`   Invalidated ${cached_files.length} cached BMPs in Dataviewer raster cache.\n`);
+	}
+
+	// Step 4: Index ISO3 country mask pixels
+	console.log("3. Indexing ISO3 country masks from geocodes.png...");
 	let csv_content = fs.readFileSync(admin_modern.input_geocodes_csv, "utf8");
 	let lines = csv_content.split(/\r?\n/).filter(l => l.trim().length > 0);
 	let target_iso3 = ["MMR", "IND", "JPN", "DEU", "USA", "RUS", "FRA", "CAN"];
@@ -86,10 +106,10 @@ require(path.join(h3, "age_sex/age_sex.js"));
 		if (iso3) iso3_pixel_indices[iso3].push(i);
 	}
 
-	// Step 3: Sample the reclamped rasters for target countries
+	// Step 5: Sample the composite rasters for target countries
 	let cohorts = age_sex.getCohorts();
 	let age_labels = ["00", "01", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55", "60", "65", "70", "75", "80"];
-	let clamped_dir = age_sex.intermediate_clamped_rasters;
+	let composite_dir = age_sex.output_rasters;
 
 	let country_names = {
 		"MMR": "Myanmar",
@@ -110,7 +130,7 @@ require(path.join(h3, "age_sex/age_sex.js"));
 	let results = {};
 
 	for (let year of [1600, 1940]) {
-		console.log(`3. Sampling reclamped rasters for Year ${year}...`);
+		console.log(`4. Sampling composite rasters for Year ${year}...`);
 		results[year] = {};
 		let active_countries = years_setup[year];
 
@@ -126,8 +146,8 @@ require(path.join(h3, "age_sex/age_sex.js"));
 
 		for (let a = 0; a < 18; a++) {
 			let age = age_labels[a];
-			let f_path = path.join(clamped_dir, `global_f_${age}_${year}.png`);
-			let m_path = path.join(clamped_dir, `global_m_${age}_${year}.png`);
+			let f_path = path.join(composite_dir, `f_${age}_${year}.png`);
+			let m_path = path.join(composite_dir, `m_${age}_${year}.png`);
 
 			let f_rast = GeoPNG.loadNumberRasterImage(f_path, { format: "float32" });
 			let m_rast = GeoPNG.loadNumberRasterImage(m_path, { format: "float32" });
