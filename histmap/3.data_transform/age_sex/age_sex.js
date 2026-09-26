@@ -443,13 +443,14 @@ global.age_sex = class {
 				if (!popc_info || !fs.existsSync(popc_info[0])) return null;
 
 				return {
-				type: "clamp_cohorts_isotonic",
-				cohorts: cohorts,
-				logit_rasters_folder: this.intermediate_logit_rasters,
-				output_folder: this.intermediate_clamped_rasters,
-				popc_format: popc_info[1] || "float32",
-				popc_path: popc_info[0],
-				year: year
+					type: "clamp_cohorts_isotonic",
+					cohorts: cohorts,
+					hmd_folder: (typeof age_sex_HMD !== "undefined") ? age_sex_HMD.output_clamped_to_stadester : path.join(global.h2 || "./histmap/2.data_cleaning/", "age_sex_HMD/2.clamped_to_stadester/"),
+					logit_rasters_folder: this.intermediate_logit_rasters,
+					output_folder: this.intermediate_clamped_rasters,
+					popc_format: popc_info[1] || "float32",
+					popc_path: popc_info[0],
+					year: year
 				};
 			},
 			handler: async (year) => {
@@ -498,13 +499,14 @@ global.age_sex = class {
 				let has_hmd = false;
 				let hmd_rasters = {};
 				let hmd_total = null;
-				if (year < 1950 && typeof age_sex_HMD !== "undefined" && fs.existsSync(age_sex_HMD.output_clamped_to_stadester)) {
-					let test_path = `${age_sex_HMD.output_clamped_to_stadester}global_${cohorts[0]}_${year}.png`;
+				let hmd_folder = (typeof age_sex_HMD !== "undefined") ? age_sex_HMD.output_clamped_to_stadester : path.join(global.h2 || "./histmap/2.data_cleaning/", "age_sex_HMD/2.clamped_to_stadester/");
+				if (year < 1950 && hmd_folder && fs.existsSync(hmd_folder)) {
+					let test_path = path.join(hmd_folder, `global_${cohorts[0]}_${year}.png`);
 					if (fs.existsSync(test_path)) {
 						has_hmd = true;
 						hmd_total = new Float32Array(total_pixels);
 						for (let c = 0; c < num_cohorts; c++) {
-							let hmd_path = `${age_sex_HMD.output_clamped_to_stadester}global_${cohorts[c]}_${year}.png`;
+							let hmd_path = path.join(hmd_folder, `global_${cohorts[c]}_${year}.png`);
 							if (fs.existsSync(hmd_path)) {
 								let r = GeoPNG.loadNumberRasterImage(hmd_path, { format: "float32" });
 								hmd_rasters[cohorts[c]] = r;

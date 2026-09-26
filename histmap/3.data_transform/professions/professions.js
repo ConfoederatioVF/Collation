@@ -189,6 +189,7 @@ global.professions = class {
 					model_path: model_path,
 					reference_category: "agriculture",
 					options: {
+						fit_intercept: false,
 						lambda: Math.returnSafeNumber(options.lambda, 1e-3)
 					},
 					target_paths: target_paths
@@ -250,7 +251,10 @@ global.professions = class {
 					reference_category: "agriculture",
 					X: X,
 					Y: Y
-				}, { lambda: Math.returnSafeNumber(options.lambda, 1e-3) });
+				}, {
+					fit_intercept: false,
+					lambda: Math.returnSafeNumber(options.lambda, 1e-3)
+				});
 			}
 		});
 	}
@@ -260,74 +264,78 @@ global.professions = class {
 	 * a global geomean fallback to respect structural economic transformations across centuries.
 	 */
 	static async C_mergeMultinomialLogitModels (arg0_options) {
+		//Convert from parameters
 		let options = (arg0_options) ? arg0_options : {};
 		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
 
+		//Declare local instance variables
 		let train_years = landuse_HYDE.sorted_hyde_years.filter(y => y >= 1750 && y <= 2025);
-		let epochs = [
-			{ key: "preindustrial", filter: (y) => y <= 1820 },
-			{ key: "industrial", filter: (y) => y > 1820 && y < 1950 },
-			{ key: "modern", filter: (y) => y >= 1950 },
-			{ key: "geomean", filter: () => true }
-		];
 		
 		for (let s = 0; s < this.sexes.length; s++) {
 			let sex = this.sexes[s];
-			
-			for (let e = 0; e < epochs.length; e++) {
-				let epoch = epochs[e];
-				let out_path = `${this.intermediate_logit_folder}multinomial_model_${epoch.key}_${sex}.json`;
-				if (!overwrite && fs.existsSync(out_path)) continue;
-				
-				let epoch_years = train_years.filter(epoch.filter);
-				let models_loaded = 0;
-				let sums = {};
-				let ref_class = "";
-				let valid_covariates = [];
-				let has_intercept = false;
-				
-				for (let y = 0; y < epoch_years.length; y++) {
-					let year = epoch_years[y];
-					let p = `${this.intermediate_logit_folder}multinomial_model_${sex}_${year}.json`;
-					
-					if (fs.existsSync(p)) {
-						let m = JSON.parse(fs.readFileSync(p, "utf8"));
-						models_loaded++;
-						ref_class = m.reference_class || m.reference_category || "agriculture";
-						valid_covariates = m.covariates;
-						if (m.has_intercept) has_intercept = true;
-						
-						Object.iterate(m.coefficients, (c_key, covs) => {
-							if (!sums[c_key]) sums[c_key] = {};
-							Object.iterate(covs, (cov_key, val) => {
-								if (sums[c_key][cov_key] === undefined) sums[c_key][cov_key] = 0;
-								sums[c_key][cov_key] += val;
-							});
-						});
-					}
-				}
-				
-				if (models_loaded === 0) continue;
-				
-				let merged_model = {
-					type: "alr_compositional",
-					categories: this.olivetti_categories,
-					reference_category: ref_class,
-					covariates: valid_covariates,
-					has_intercept: has_intercept,
-					coefficients: {}
-				};
-				
-				Object.iterate(sums, (c_key, covs) => {
-					merged_model.coefficients[c_key] = {};
-					Object.iterate(covs, (cov_key, val) => {
-						merged_model.coefficients[c_key][cov_key] = val / models_loaded;
-					});
-				});
-				
-				fs.writeFileSync(out_path, JSON.stringify(merged_model, null, 2));
-				console.log(`Established epoch ${epoch.key} model for sex (${sex}) using ${models_loaded} anchors.`);
+			let ensemble_models = [];
+			let max_samples = 1;
+			let models_loaded = 0;
+			let raw_models = [];
+			let unified_path = `${this.intermediate_logit_folder}multinomial_model_unified_${sex}.json`;
+			let weights_path = `${this.intermediate_logit_folder}anchor_coverage_weights_${sex}.json`;
+
+			if (!overwrite && fs.existsSync(unified_path)) {
+				console.log(`Unified Multinomial Logit model for sex (${sex}) already exists. Skipping merge.`);
+				continue;
 			}
+			
+			for (let y = 0; y < train_years.length; y++) {
+				let year = train_years[y];
+				let p = `${this.intermediate_logit_folder}multinomial_model_${sex}_${year}.json`;
+				
+				if (fs.existsSync(p)) {
+					let m = JSON.parse(fs.readFileSync(p, "utf8"));
+					let samples = Math.returnSafeNumber(m.training?.sample_count, 1000);
+					if (samples > max_samples) max_samples = samples;
+					
+					raw_models.push({
+						model_path: p,
+						sample_count: samples,
+						year: year
+					});
+					models_loaded++;
+				}
+			}
+			
+			if (models_loaded === 0) continue;
+			
+			let total_coverage_weight = 0;
+			for (let i = 0; i < raw_models.length; i++) {
+				let entry = raw_models[i];
+				let coverage_metric = Math.pow(entry.sample_count/max_samples, 0.3);
+				entry.coverage = coverage_metric;
+				total_coverage_weight += coverage_metric;
+			}
+			
+			for (let i = 0; i < raw_models.length; i++) {
+				let entry = raw_models[i];
+				let norm_w = (total_coverage_weight > 0) ? (entry.coverage/total_coverage_weight) : (1/raw_models.length);
+				ensemble_models.push({
+					coverage: entry.coverage,
+					model: entry.model_path,
+					sample_count: entry.sample_count,
+					weight: norm_w,
+					year: entry.year
+				});
+			}
+			
+			let unified_model = {
+				categories: this.olivetti_categories,
+				models: ensemble_models,
+				sample_count_max: max_samples,
+				total_anchors: models_loaded,
+				type: "multinomial_ensemble"
+			};
+			
+			fs.writeFileSync(unified_path, JSON.stringify(unified_model, null, 2));
+			fs.writeFileSync(weights_path, JSON.stringify(ensemble_models, null, 2));
+			console.log(`Unified coverage-weighted MNL ensemble generated for sex (${sex}) using ${models_loaded} anchors.`);
 		}
 	}
 	
@@ -348,31 +356,68 @@ global.professions = class {
 		
 		if (!fs.existsSync(this.intermediate_logit_rasters)) fs.mkdirSync(this.intermediate_logit_rasters, { recursive: true });
 		
-		let resolveModelPath = (sex, year) => {
-			let exact_path = `${this.intermediate_logit_folder}multinomial_model_${sex}_${year}.json`;
-			if (fs.existsSync(exact_path)) return exact_path;
-			
-			let epoch_key = (year <= 1820) ? "preindustrial" : ((year < 1950) ? "industrial" : "modern");
-			let epoch_path = `${this.intermediate_logit_folder}multinomial_model_${epoch_key}_${sex}.json`;
-			if (fs.existsSync(epoch_path)) return epoch_path;
-			
-			let geomean_path = `${this.intermediate_logit_folder}multinomial_model_geomean_${sex}.json`;
-			if (fs.existsSync(geomean_path)) return geomean_path;
-			return null;
-		};
-		
 		for (let s = 0; s < this.sexes.length; s++) {
 			let sex = this.sexes[s];
 			
 			for (let y = 0; y < years.length; y++) {
 				let year = years[y];
-				let model_path = resolveModelPath(sex, year);
-				if (!model_path) continue;
-				
 				let out_base = `${this.intermediate_logit_rasters}logit_${sex}_${year}.png`;
 				let check_path = out_base.replace(".png", `_class_${this.olivetti_categories[0]}.png`);
-				if (overwrite || !fs.existsSync(check_path))
-					items.push({ model_path: model_path, out_base: out_base, sex: sex, year: year });
+				if (!overwrite && fs.existsSync(check_path)) continue;
+				
+				let model_path = `${this.intermediate_logit_folder}multinomial_model_${sex}_${year}.json`;
+				let unified_path = `${this.intermediate_logit_folder}multinomial_model_unified_${sex}.json`;
+				let has_local_anchor = fs.existsSync(model_path);
+				let resolved_model = model_path;
+
+				if (fs.existsSync(unified_path)) {
+					let unified_data = JSON.parse(fs.readFileSync(unified_path, "utf8"));
+					
+					if (unified_data.type === "multinomial_ensemble" && Array.isArray(unified_data.models)) {
+						let dynamic_models = [];
+						let total_w = 0;
+						
+						for (let m = 0; m < unified_data.models.length; m++) {
+							let entry = unified_data.models[m];
+							let anchor_year = entry.year || 1950;
+							let dt = Math.abs(year - anchor_year);
+							let kernel = Math.exp(-dt/50);
+							let w = (entry.weight || 1)*kernel;
+							dynamic_models.push({ model: entry.model, weight: w, year: anchor_year });
+							total_w += w;
+						}
+						
+						if (total_w > 0) {
+							for (let m = 0; m < dynamic_models.length; m++)
+								dynamic_models[m].weight /= total_w;
+						}
+						
+						if (has_local_anchor) {
+							let local_idx = dynamic_models.findIndex(m => m.model === model_path);
+							for (let m = 0; m < dynamic_models.length; m++)
+								dynamic_models[m].weight *= 0.8;
+							if (local_idx !== -1) {
+								dynamic_models[local_idx].weight += 0.2;
+							} else {
+								dynamic_models.push({ model: model_path, weight: 0.2, year: year });
+							}
+						}
+						
+						resolved_model = {
+							categories: this.olivetti_categories,
+							models: dynamic_models,
+							target_year: year,
+							type: "multinomial_ensemble"
+						};
+					} else {
+						resolved_model = has_local_anchor ? model_path : unified_path;
+					}
+				} else if (!has_local_anchor) {
+					resolved_model = null;
+				}
+
+				if (resolved_model)
+					items.push({ model_obj: resolved_model, out_base: out_base, sex: sex, year: year });
 			}
 		}
 		
@@ -397,7 +442,7 @@ global.professions = class {
 				return {
 					type: "generate_alr_raster",
 					covariates_map: covariates_map,
-					model_obj: item.model_path,
+					model_obj: item.model_obj,
 					options: {
 						format: "float32",
 						mask_uninhabited: true
@@ -414,7 +459,7 @@ global.professions = class {
 				
 				await Statistics.generateALRRaster(item.out_base, {
 					covariates_obj: covariates_map,
-					model_obj: item.model_path
+					model_obj: item.model_obj
 				});
 			}
 		});

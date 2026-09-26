@@ -112,6 +112,9 @@ global.LFPR_OLS = class {
 					let all_cov_keys = Object.keys(covariates_obj);
 					let covariates_map = {};
 					let format_year = Math.min(year, 2023);
+					let specific_model_path = `${this.intermediate_ols_models}OLS_lfpr_${sex}_${year}.json`;
+					let resolved_model_path = fs.existsSync(specific_model_path) ? specific_model_path : unified_model_path;
+					
 					for (let i = 0; i < all_cov_keys.length; i++) {
 						let local_key = all_cov_keys[i];
 						let local_val = covariates_obj[local_key](format_year);
@@ -120,7 +123,7 @@ global.LFPR_OLS = class {
 					
 					return {
 						covariates_map: covariates_map,
-						model_obj: unified_model_path,
+						model_obj: resolved_model_path,
 						options: {
 							format: "float32"
 						},
