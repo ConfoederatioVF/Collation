@@ -14,7 +14,7 @@ global.LFPR_OLS = class {
 	// Utilise demographic parameters and structural inequality (gini) as covariates
 	static covariates_obj = () => ({
 		...age_sex.covariates_obj,
-		"gini": (y) => [`${gini_Eoscala.output_rasters}gini_${y}.png`, "float32"]
+		//"gini": (y) => [`${gini_Eoscala.output_rasters}gini_${y}.png`, "float32"]
 	});
 	
 	/**

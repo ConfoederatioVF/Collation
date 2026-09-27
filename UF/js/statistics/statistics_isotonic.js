@@ -75,11 +75,12 @@
 
 		//Declare local instance variables
 		let baseline_ratios = options.baseline_sex_ratios || Statistics.default_biological_sex_ratios;
+		let buffers = options.buffers;
 		let count = male_rates.length;
-		let effective_weights = options.effective_weights || new Float32Array(count);
+		let effective_weights = (buffers && buffers.effective_weights) ? buffers.effective_weights : (options.effective_weights || new Float32Array(count));
 		let female_out = options.female_output || new Float32Array(count);
 		let male_out = options.male_output || new Float32Array(count);
-		let total_annualised = new Float32Array(count);
+		let total_annualised = (buffers && buffers.total_annualised) ? buffers.total_annualised : new Float32Array(count);
 		let total_out = options.total_output || new Float32Array(count);
 
 		//Guard clauses
@@ -222,8 +223,9 @@
 		let options = (arg3_options) ? arg3_options : {};
 		
 		//Declare local instance variables
+		let buffers = options.buffers;
 		let total_length = values.length;
-		let output = options.output || new Float32Array(total_length);
+		let output = (buffers && buffers.output) ? buffers.output : (options.output || new Float32Array(total_length));
 		
 		//Copy unconstrained initial elements (e.g. infant and child mortality)
 		for (let i = 0; i < start_index; i++)
@@ -232,7 +234,6 @@
 		let active_length = total_length - start_index;
 		if (active_length <= 0) return output;
 		
-		let buffers = options.buffers;
 		let block_counts = (buffers && buffers.block_counts) ? buffers.block_counts : new Int32Array(active_length);
 		let block_vals = (buffers && buffers.block_vals) ? buffers.block_vals : new Float32Array(active_length);
 		let block_weights = (buffers && buffers.block_weights) ? buffers.block_weights : new Float32Array(active_length);
