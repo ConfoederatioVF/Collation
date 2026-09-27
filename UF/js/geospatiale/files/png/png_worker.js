@@ -2131,6 +2131,24 @@ let handleTask = async function (task) {
     return aggregates;
   }
 
+  //28. Generate ALR raster
+  if (task_type === "generate_alr_raster") {
+    //Declare local instance variables
+    let covariates_map = task.covariates_map;
+    let model_obj = task.model_obj;
+    let opt = (task.options) ? task.options : {};
+    let output_file_path = task.output_file_path;
+
+    await Statistics.generateALRRaster(output_file_path, {
+      covariates_obj: covariates_map,
+      mask_uninhabited: (opt.mask_uninhabited !== undefined) ? opt.mask_uninhabited : true,
+      model_obj: model_obj
+    });
+
+    //Return statement
+    return output_file_path;
+  }
+
   throw new Error(`Unknown GeoWorker task type: ${task_type}`);
 };
 

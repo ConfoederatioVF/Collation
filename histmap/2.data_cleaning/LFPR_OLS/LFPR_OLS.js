@@ -12,10 +12,13 @@ global.LFPR_OLS = class {
 	static working_cohorts = ["15", "20", "25", "30", "35", "40", "45", "50", "55", "60", "65", "70", "75", "80"];
 	
 	// Utilise demographic parameters and structural inequality (gini) as covariates
-	static covariates_obj = () => ({
-		...age_sex.covariates_obj,
-		//"gini": (y) => [`${gini_Eoscala.output_rasters}gini_${y}.png`, "float32"]
-	});
+	static covariates_obj = () => {
+		let return_obj = { ...age_sex.covariates_obj };
+		delete return_obj.gini;
+
+		//Return statement
+		return return_obj;
+	};
 	
 	/**
 	 * TRAIN: Train OLS models using the LFPR_Olivetti targets.
