@@ -2,10 +2,7 @@ global.professions = class {
 	static cf = `${h3}/professions/`;
 	
 	static covariates_obj = () => ({
-		...age_sex.covariates_obj,
-		"gini": (y) => [`${gini_Eoscala.output_rasters}gini_${y}.png`, "float32"],
-		"lfpr_f": (y) => [`${LFPR_OLS.output_lfpr_rates}lfpr_f_${y}.png`, "float32"],
-		"lfpr_m": (y) => [`${LFPR_OLS.output_lfpr_rates}lfpr_m_${y}.png`, "float32"],
+		...age_sex.covariates_obj
 	});
 	
 	// Paths
@@ -261,8 +258,16 @@ global.professions = class {
 	}
 	
 	/**
-	 * Builds epoch-aware historical models (Pre-Industrial, Industrial, Modern) as well as
-	 * a global geomean fallback to respect structural economic transformations across centuries.
+	 * Aggregates annual ALR compositional models across temporal anchors using geometric mean
+	 * in odds-ratio space (arithmetic mean in log-odds parameter space).
+	 * Produces a universal geomean model per sex (multinomial_model_geomean_${sex}.json).
+	 *
+	 * @alias professions.C_mergeMultinomialLogitModels
+	 *
+	 * @param {Object} [arg0_options]
+	 *  @param {boolean} [arg0_options.overwrite=true]
+	 *
+	 * @returns {Promise<Object>}
 	 */
 	static async C_mergeMultinomialLogitModels (arg0_options) {
 		//Convert from parameters
@@ -270,160 +275,103 @@ global.professions = class {
 		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
 
 		//Declare local instance variables
-		let train_years = landuse_HYDE.sorted_hyde_years.filter(y => y >= 1750 && y <= 2025);
-		
+		let return_obj = {};
+
+		//Function body
+		if (!fs.existsSync(this.intermediate_logit_folder))
+			fs.mkdirSync(this.intermediate_logit_folder, { recursive: true });
+
 		for (let s = 0; s < this.sexes.length; s++) {
 			let sex = this.sexes[s];
-			let ensemble_models = [];
-			let max_samples = 1;
-			let models_loaded = 0;
-			let raw_models = [];
+			let geomean_path = `${this.intermediate_logit_folder}multinomial_model_geomean_${sex}.json`;
 			let unified_path = `${this.intermediate_logit_folder}multinomial_model_unified_${sex}.json`;
-			let weights_path = `${this.intermediate_logit_folder}anchor_coverage_weights_${sex}.json`;
 
-			if (!overwrite && fs.existsSync(unified_path)) {
-				console.log(`Unified Multinomial Logit model for sex (${sex}) already exists. Skipping merge.`);
+			if (!overwrite && fs.existsSync(geomean_path) && fs.existsSync(unified_path)) {
+				console.log(`Geomean ALR model for sex (${sex}) already exists. Skipping merge.`);
+				return_obj[sex] = geomean_path;
 				continue;
 			}
-			
-			for (let y = 0; y < train_years.length; y++) {
-				let year = train_years[y];
-				let p = `${this.intermediate_logit_folder}multinomial_model_${sex}_${year}.json`;
-				
-				if (fs.existsSync(p)) {
-					let m = JSON.parse(fs.readFileSync(p, "utf8"));
-					let samples = Math.returnSafeNumber(m.training?.sample_count, 1000);
-					if (samples > max_samples) max_samples = samples;
-					
-					raw_models.push({
-						model_path: p,
-						sample_count: samples,
-						year: year
-					});
-					models_loaded++;
+
+			let geomean_model = await Statistics.geomeanALRModels(
+				this.intermediate_logit_folder,
+				`multinomial_model_${sex}_`,
+				{
+					output_file_path: geomean_path,
+					weighted: true
 				}
+			);
+
+			if (geomean_model) {
+				fs.writeFileSync(unified_path, JSON.stringify(geomean_model, null, 2));
+				return_obj[sex] = geomean_path;
+				console.log(`Universal geomean ALR model generated for sex (${sex}) at ${geomean_path}.`);
 			}
-			
-			if (models_loaded === 0) continue;
-			
-			let total_coverage_weight = 0;
-			for (let i = 0; i < raw_models.length; i++) {
-				let entry = raw_models[i];
-				let coverage_metric = Math.pow(entry.sample_count/max_samples, 0.3);
-				entry.coverage = coverage_metric;
-				total_coverage_weight += coverage_metric;
-			}
-			
-			for (let i = 0; i < raw_models.length; i++) {
-				let entry = raw_models[i];
-				let norm_w = (total_coverage_weight > 0) ? (entry.coverage/total_coverage_weight) : (1/raw_models.length);
-				ensemble_models.push({
-					coverage: entry.coverage,
-					model: entry.model_path,
-					sample_count: entry.sample_count,
-					weight: norm_w,
-					year: entry.year
-				});
-			}
-			
-			let unified_model = {
-				categories: this.olivetti_categories,
-				models: ensemble_models,
-				sample_count_max: max_samples,
-				total_anchors: models_loaded,
-				type: "multinomial_ensemble"
-			};
-			
-			fs.writeFileSync(unified_path, JSON.stringify(unified_model, null, 2));
-			fs.writeFileSync(weights_path, JSON.stringify(ensemble_models, null, 2));
-			console.log(`Unified coverage-weighted MNL ensemble generated for sex (${sex}) using ${models_loaded} anchors.`);
 		}
+
+		//Return statement
+		return return_obj;
 	}
-	
+
 	/**
-	 * Generates theoretical percent distributions across all temporal horizons using epoch-aware models.
+	 * Generates theoretical percent distributions across all temporal horizons using the universal geomean model.
+	 *
+	 * @alias professions.D_generateMultinomialLogitRasters
+	 *
+	 * @param {Object} [arg0_options]
+	 *  @param {number} [arg0_options.concurrency]
+	 *  @param {boolean} [arg0_options.overwrite=true]
+	 *  @param {Array<number>} [arg0_options.years]
+	 *
+	 * @returns {Promise<Array<any>>}
 	 */
 	static async D_generateMultinomialLogitRasters (arg0_options) {
 		//Convert from parameters
 		let options = (arg0_options) ? arg0_options : {};
-		
+
 		//Initialise options
 		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
-		
+
 		//Declare local instance variables
 		let cov_obj = this.covariates_obj();
 		let items = [];
-		let years = landuse_HYDE.sorted_hyde_years;
-		
-		if (!fs.existsSync(this.intermediate_logit_rasters)) fs.mkdirSync(this.intermediate_logit_rasters, { recursive: true });
-		
+		let years = (options.years) ? options.years : landuse_HYDE.sorted_hyde_years;
+
+		//Guard clauses
+		if (!fs.existsSync(this.intermediate_logit_rasters))
+			fs.mkdirSync(this.intermediate_logit_rasters, { recursive: true });
+
+		//Function body
 		for (let s = 0; s < this.sexes.length; s++) {
 			let sex = this.sexes[s];
-			
+			let geomean_path = `${this.intermediate_logit_folder}multinomial_model_geomean_${sex}.json`;
+
+			if (!fs.existsSync(geomean_path))
+				geomean_path = `${this.intermediate_logit_folder}multinomial_model_unified_${sex}.json`;
+
+			if (!fs.existsSync(geomean_path)) {
+				console.warn(`[professions] Geomean model missing for sex (${sex}) at ${geomean_path}. Skipping raster generation.`);
+				continue;
+			}
+
+			let model_obj = JSON.parse(fs.readFileSync(geomean_path, "utf8"));
+
 			for (let y = 0; y < years.length; y++) {
 				let year = years[y];
 				let out_base = `${this.intermediate_logit_rasters}logit_${sex}_${year}.png`;
 				let check_path = out_base.replace(".png", `_class_${this.olivetti_categories[0]}.png`);
 				if (!overwrite && fs.existsSync(check_path)) continue;
-				
-				let model_path = `${this.intermediate_logit_folder}multinomial_model_${sex}_${year}.json`;
-				let unified_path = `${this.intermediate_logit_folder}multinomial_model_unified_${sex}.json`;
-				let has_local_anchor = fs.existsSync(model_path);
-				let resolved_model = model_path;
 
-				if (fs.existsSync(unified_path)) {
-					let unified_data = JSON.parse(fs.readFileSync(unified_path, "utf8"));
-					
-					if (unified_data.type === "multinomial_ensemble" && Array.isArray(unified_data.models)) {
-						let dynamic_models = [];
-						let total_w = 0;
-						
-						for (let m = 0; m < unified_data.models.length; m++) {
-							let entry = unified_data.models[m];
-							let anchor_year = entry.year || 1950;
-							let dt = Math.abs(year - anchor_year);
-							let kernel = Math.exp(-dt/50);
-							let w = (entry.weight || 1)*kernel;
-							dynamic_models.push({ model: entry.model, weight: w, year: anchor_year });
-							total_w += w;
-						}
-						
-						if (total_w > 0) {
-							for (let m = 0; m < dynamic_models.length; m++)
-								dynamic_models[m].weight /= total_w;
-						}
-						
-						if (has_local_anchor) {
-							let local_idx = dynamic_models.findIndex(m => m.model === model_path);
-							for (let m = 0; m < dynamic_models.length; m++)
-								dynamic_models[m].weight *= 0.8;
-							if (local_idx !== -1) {
-								dynamic_models[local_idx].weight += 0.2;
-							} else {
-								dynamic_models.push({ model: model_path, weight: 0.2, year: year });
-							}
-						}
-						
-						resolved_model = {
-							categories: this.olivetti_categories,
-							models: dynamic_models,
-							target_year: year,
-							type: "multinomial_ensemble"
-						};
-					} else {
-						resolved_model = has_local_anchor ? model_path : unified_path;
-					}
-				} else if (!has_local_anchor) {
-					resolved_model = null;
-				}
-
-				if (resolved_model)
-					items.push({ model_obj: resolved_model, out_base: out_base, sex: sex, year: year });
+				items.push({
+					model_obj: model_obj,
+					out_base: out_base,
+					sex: sex,
+					year: year
+				});
 			}
 		}
-		
+
 		if (items.length === 0) return [];
-		
+
 		//Return statement
 		return await GeoPNG.processTimeseriesParallel({
 			concurrency: options.concurrency,
@@ -432,34 +380,35 @@ global.professions = class {
 			task_generator: (item) => {
 				let all_keys = Object.keys(cov_obj);
 				let covariates_map = {};
-				let format_year = item.year > 2023 ? 2023 : item.year;
-				
+				let format_year = (item.year > 2023) ? 2023 : item.year;
+
 				for (let i = 0; i < all_keys.length; i++) {
 					let k = all_keys[i];
 					let info = cov_obj[k](format_year);
 					covariates_map[k] = info;
 				}
-				
+
 				return {
-					type: "generate_alr_raster",
 					covariates_map: covariates_map,
 					model_obj: item.model_obj,
 					options: {
 						format: "float32",
 						mask_uninhabited: true
 					},
-					output_file_path: item.out_base
+					output_file_path: item.out_base,
+					type: "generate_alr_raster"
 				};
 			},
 			handler: async (item) => {
 				let all_keys = Object.keys(cov_obj);
 				let covariates_map = {};
-				let format_year = item.year > 2023 ? 2023 : item.year;
+				let format_year = (item.year > 2023) ? 2023 : item.year;
 				for (let i = 0; i < all_keys.length; i++)
 					covariates_map[all_keys[i]] = cov_obj[all_keys[i]](format_year);
-				
+
 				await Statistics.generateALRRaster(item.out_base, {
 					covariates_obj: covariates_map,
+					mask_uninhabited: true,
 					model_obj: item.model_obj
 				});
 			}

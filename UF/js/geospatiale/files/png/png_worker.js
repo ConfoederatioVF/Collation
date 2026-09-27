@@ -1494,48 +1494,8 @@ let handleTask = async function (task) {
     console.log(`[Worker PID ${process.pid}] Initialised task for Year ${year}: loaded popc (${width}x${height}) & ${num_cohorts} cohort rasters. Smoothing weight: ${wh_weight.toFixed(4)} (0=PAVA, 1=Whittaker).`);
 
     if (wh_weight <= 0.0) {
-      // --- ISOTONIC (PAVA) CLAMPING PATH ---
-      // (Maintained separately from Whittaker-Henderson; uses per-pixel PAVA from bookmark 25c1443)
-      console.log(`[Worker PID ${process.pid}] Year ${year}: Pass 1 (Computing global unscaled population and applying PAVA globally)...`);
-      let global_raw_f = new Float32Array(age_count);
-      let global_raw_m = new Float32Array(age_count);
-
-      for (let i = 0; i < total_pixels; i++) {
-        let stade_pop = popc_raster.data[i];
-        if (stade_pop < 0.01 || isNaN(stade_pop)) continue;
-        if (has_hmd && hmd_total[i] > 0) continue;
-
-        for (let k = 0; k < age_count; k++) {
-          let f_val = prob_rasters[cohorts[f_indices[k]]].data[i];
-          let m_val = prob_rasters[cohorts[m_indices[k]]].data[i];
-
-          if (f_val > 0 && isFinite(f_val)) global_raw_f[k] += f_val * stade_pop;
-          if (m_val > 0 && isFinite(m_val)) global_raw_m[k] += m_val * stade_pop;
-        }
-      }
-
-      let global_coupled_f = new Float32Array(age_count);
-      let global_coupled_m = new Float32Array(age_count);
-      let global_coupled_tot = new Float32Array(age_count);
-
-      Statistics.coupleAgeSexCohorts(global_raw_m, global_raw_f, age_band_widths, (task.lift_isotonic || task.do_not_smooth) ? null : 2, {
-        baseline_sex_ratios: task.baseline_sex_ratios,
-        do_not_smooth: task.do_not_smooth || task.lift_isotonic,
-        female_output: global_coupled_f,
-        lift_isotonic: task.lift_isotonic,
-        male_output: global_coupled_m,
-        preserve_sex_ratios: task.preserve_sex_ratios,
-        total_output: global_coupled_tot
-      });
-
-      let global_scale_f = new Float32Array(age_count);
-      let global_scale_m = new Float32Array(age_count);
-      for (let k = 0; k < age_count; k++) {
-        global_scale_f[k] = (global_raw_f[k] > 0) ? (global_coupled_f[k] / global_raw_f[k]) : 1;
-        global_scale_m[k] = (global_raw_m[k] > 0) ? (global_coupled_m[k] / global_raw_m[k]) : 1;
-      }
-
-      console.log(`[Worker PID ${process.pid}] Year ${year}: Pass 2 (Per-pixel PAVA graduation)...`);
+      // --- PURE PER-PIXEL ISOTONIC (PAVA) CLAMPING PATH ---
+      console.log(`[Worker PID ${process.pid}] Year ${year}: Pass 1 (Per-pixel PAVA graduation)...`);
 
       let f_coupled_buf = new Float32Array(age_count);
       let m_coupled_buf = new Float32Array(age_count);
@@ -1550,6 +1510,8 @@ let handleTask = async function (task) {
       let raw_f = new Float32Array(age_count);
       let raw_m = new Float32Array(age_count);
       let tot_coupled_buf = new Float32Array(age_count);
+
+      let smoothing_start = (task.smoothing_start_index !== undefined) ? task.smoothing_start_index : 2;
 
       for (let i = 0; i < total_pixels; i++) {
         let stade_pop = popc_raster.data[i];
@@ -1568,11 +1530,8 @@ let handleTask = async function (task) {
           let f_val = prob_rasters[cohorts[f_indices[k]]].data[i];
           let m_val = prob_rasters[cohorts[m_indices[k]]].data[i];
 
-          let f_w = (f_val > 0 && isFinite(f_val)) ? f_val * global_scale_f[k] : 0;
-          let m_w = (m_val > 0 && isFinite(m_val)) ? m_val * global_scale_m[k] : 0;
-
-          raw_f[k] = f_w;
-          raw_m[k] = m_w;
+          raw_f[k] = (f_val > 0 && isFinite(f_val)) ? f_val : 0;
+          raw_m[k] = (m_val > 0 && isFinite(m_val)) ? m_val : 0;
         }
 
         // Local monotonic ceiling for elderly cohorts (indices 14 to 17: 65, 70, 75, 80)
@@ -1586,7 +1545,7 @@ let handleTask = async function (task) {
           if (raw_m[k] > max_m_w && max_m_w > 0) raw_m[k] = max_m_w;
         }
 
-        Statistics.coupleAgeSexCohorts(raw_m, raw_f, age_band_widths, (task.lift_isotonic || task.do_not_smooth) ? null : 2, {
+        Statistics.coupleAgeSexCohorts(raw_m, raw_f, age_band_widths, (task.lift_isotonic || task.do_not_smooth) ? null : smoothing_start, {
           baseline_sex_ratios: task.baseline_sex_ratios,
           buffers: pava_buffers,
           do_not_smooth: task.do_not_smooth || task.lift_isotonic,
@@ -1596,6 +1555,11 @@ let handleTask = async function (task) {
           preserve_sex_ratios: task.preserve_sex_ratios,
           total_output: tot_coupled_buf
         });
+
+        if (!task.do_not_smooth && !task.lift_isotonic) {
+          Statistics.pavaDecreasing(f_coupled_buf, age_band_widths, smoothing_start, { output: f_coupled_buf });
+          Statistics.pavaDecreasing(m_coupled_buf, age_band_widths, smoothing_start, { output: m_coupled_buf });
+        }
 
         let sum_rates = 0;
         for (let k = 0; k < age_count; k++)
