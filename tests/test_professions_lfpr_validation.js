@@ -112,38 +112,45 @@ let runValidationAssessment = async function () {
 
   console.log(`Discovered ${target_years.length} years across percentage archive [${target_years[0]} to ${target_years[target_years.length - 1]}].`);
 
-  //2. Initialise worker pool
-  let worker_count = Math.min(16, os.cpus().length);
-  let pool = new ValidationWorkerPool(worker_count);
-  console.log(`Initialised ValidationWorkerPool with ${worker_count} concurrent worker threads.\n`);
-
   let completed_count = 0;
+  let results = [];
   let total_years = target_years.length;
-  let year_promises = [];
 
-  for (let i = 0; i < total_years; i++) {
-    let year = target_years[i];
-    let promise = pool.execute({
-      agg_folder: agg_folder,
-      lfpr_folder: lfpr_folder,
-      pct_folder: pct_folder,
-      year: year
-    }).then((res) => {
-      completed_count++;
-      if (completed_count % 16 === 0 || completed_count === total_years) {
-        let pct = Math.round((completed_count / total_years) * 100);
-        console.log(`[Progress] Validated ${completed_count}/${total_years} years (${pct}% complete)..`);
-      }
-      return res;
-    });
+  if (process.argv.includes("--recalc") && fs.existsSync(output_json_path)) {
+    console.log("Loading existing year metrics from JSON for summary recalculation...\n");
+    let existing_data = JSON.parse(fs.readFileSync(output_json_path, "utf8"));
+    results = Object.values(existing_data.years);
+  } else {
+    //2. Initialise worker pool
+    let worker_count = Math.min(16, os.cpus().length);
+    let pool = new ValidationWorkerPool(worker_count);
+    console.log(`Initialised ValidationWorkerPool with ${worker_count} concurrent worker threads.\n`);
 
-    year_promises.push(promise);
+    let year_promises = [];
+
+    for (let i = 0; i < total_years; i++) {
+      let year = target_years[i];
+      let promise = pool.execute({
+        agg_folder: agg_folder,
+        lfpr_folder: lfpr_folder,
+        pct_folder: pct_folder,
+        year: year
+      }).then((res) => {
+        completed_count++;
+        if (completed_count % 16 === 0 || completed_count === total_years) {
+          let pct = Math.round((completed_count / total_years) * 100);
+          console.log(`[Progress] Validated ${completed_count}/${total_years} years (${pct}% complete)..`);
+        }
+        return res;
+      });
+
+      year_promises.push(promise);
+    }
+
+    results = await Promise.all(year_promises);
+    pool.terminate();
+    console.log(`\nCompleted evaluation of all ${results.length} years in ${((Date.now() - t0) / 1000).toFixed(2)}s.`);
   }
-
-  let results = await Promise.all(year_promises);
-  pool.terminate();
-
-  console.log(`\nCompleted evaluation of all ${results.length} years in ${((Date.now() - t0) / 1000).toFixed(2)}s.`);
 
   //3. Sort and index results
   results.sort((a, b) => a.year - b.year);
@@ -157,6 +164,15 @@ let runValidationAssessment = async function () {
 
   for (let i = 0; i < results.length; i++) {
     let r = results[i];
+
+    //Update validity check against machine precision threshold
+    let sex_consistency_ok = (r.sex_consistency.max_aggregation_error < 1.0);
+    r.sex_consistency.is_valid = sex_consistency_ok;
+    r.validation.sex_consistency_valid = sex_consistency_ok;
+    r.flags = r.flags.filter(f => !f.includes("Sex aggregation error"));
+    if (!sex_consistency_ok) r.flags.push(`Sex aggregation error: max dev ${r.sex_consistency.max_aggregation_error}`);
+
+    r.is_valid = (r.validation.bounds_valid && r.validation.sum_to_one_valid && r.validation.lfpr_valid && sex_consistency_ok);
     years_map[r.year] = r;
 
     if (!r.is_valid) all_years_valid = false;

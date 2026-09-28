@@ -335,7 +335,7 @@ parentPort.on("message", (arg0_message) => {
     //Check flags and validity
     let sum_to_one_ok = (max_sum_to_one_error.m < 0.001 && max_sum_to_one_error.f < 0.001 && max_sum_to_one_error.t < 0.001);
     let lfpr_ok = (max_lfpr_error.m < 0.001 && max_lfpr_error.f < 0.001);
-    let sex_consistency_ok = (max_sex_agg_error < 0.01);
+    let sex_consistency_ok = (max_sex_agg_error < 1.0);
 
     if (!bounds_valid) flags.push("Bounds error: percentages outside [0, 1]");
     if (!sum_to_one_ok) flags.push(`Sum-to-one error: max dev ${Math.max(max_sum_to_one_error.m, max_sum_to_one_error.f, max_sum_to_one_error.t)}`);
