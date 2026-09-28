@@ -318,32 +318,32 @@
 		let covariates_obj = arg1_covariates_obj;
 		
 		//Declare local instance variables
-		let X_row = [];
-		for (let i = 0; i < model_obj.keys.length; i++) {
-			let key = model_obj.keys[i];
-			let val = covariates_obj[key];
-			if (isNaN(val)) return NaN;
-			X_row.push(val);
+		let keys = model_obj.keys;
+		let num_keys = keys.length;
+		let num_trees = model_obj.trees.length;
+		let X_row = new Float64Array(num_keys);
+		
+		for (let i = 0; i < num_keys; i++) {
+			let val = covariates_obj[keys[i]];
+			if (val === undefined || isNaN(val)) return NaN;
+			X_row[i] = val;
 		}
 		
-		let predict_tree = function (x, tree) {
-			if (tree.is_leaf) return tree.value;
-			let feature_val = x[tree.feature_index];
-			
-			if (feature_val <= tree.threshold) {
-				return predict_tree(x, tree.left);
-			} else {
-				return predict_tree(x, tree.right);
-			}
-		};
-		
 		let sum = 0;
-		for (let i = 0; i < model_obj.trees.length; i++) {
-			sum += predict_tree(X_row, model_obj.trees[i]);
+		for (let i = 0; i < num_trees; i++) {
+			let node = model_obj.trees[i];
+			while (!node.is_leaf) {
+				if (X_row[node.feature_index] <= node.threshold) {
+					node = node.left;
+				} else {
+					node = node.right;
+				}
+			}
+			sum += node.value;
 		}
 		
 		//Return statement
-		return sum / model_obj.trees.length;
+		return sum / num_trees;
 	};
 
 	/**

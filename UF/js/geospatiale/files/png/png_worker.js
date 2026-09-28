@@ -1493,6 +1493,8 @@ let handleTask = async function (task) {
     let output_file_path = task.output_file_path;
     let covariates_map = task.covariates_map;
     let opt = task.options || {};
+    let task_sex = task.sex ? task.sex.toUpperCase() : "";
+    let task_year = (task.year !== undefined) ? task.year : "";
     
     let { rasters_obj, valid_keys } = Statistics.loadCovariateRasters(covariates_map);
     
@@ -1500,65 +1502,180 @@ let handleTask = async function (task) {
     let width = rasters_obj[valid_keys[0]].width;
     let height = rasters_obj[valid_keys[0]].height;
     let output_arrays = {};
-    let loaded_models = {};
     
-    let keys = Object.keys(task.resolved_models);
-    for (let i = 0; i < keys.length; i++) {
-      let cat = keys[i];
-      output_arrays[cat] = new Float32Array(data_len);
-      
-      let model_conf = task.resolved_models[cat];
-      if (model_conf.type === "superlearner_ensemble") {
-        loaded_models[cat] = { type: "ensemble", models: [] };
-        for (let m = 0; m < model_conf.models.length; m++) {
-          loaded_models[cat].models.push({
-            weight: model_conf.models[m].weight,
-            obj: JSON.parse(fs.readFileSync(model_conf.models[m].model, "utf8"))
-          });
-        }
-      } else {
-        loaded_models[cat] = { type: "single", obj: JSON.parse(fs.readFileSync(model_conf, "utf8")) };
-      }
+    // Pre-cache feature data buffers for 0-allocation pixel loop
+    let num_valid_keys = valid_keys.length;
+    let feature_arrays = [];
+    for (let j = 0; j < num_valid_keys; j++) {
+      feature_arrays.push(rasters_obj[valid_keys[j]].data);
     }
     
-    for (let i = 0; i < data_len; i++) {
-      let is_valid = true;
-      let row_obj = {};
-      for (let j = 0; j < valid_keys.length; j++) {
-        let key = valid_keys[j];
-        let val = rasters_obj[key].data[i];
-        if (isNaN(val)) { is_valid = false; break; }
-        row_obj[key] = val;
-      }
+    let key_to_valid_idx = {};
+    for (let k = 0; k < num_valid_keys; k++) key_to_valid_idx[valid_keys[k]] = k;
+
+    if (!global._superlearner_model_cache) global._superlearner_model_cache = {};
+    let model_cache = global._superlearner_model_cache;
+
+    function loadModelCached (file_path) {
+      if (!model_cache[file_path])
+        model_cache[file_path] = JSON.parse(fs.readFileSync(file_path, "utf8"));
+      return model_cache[file_path];
+    }
+
+    function prepareCategoryEnsemble (model_conf) {
+      let all_feature_keys = {};
+      let models_list = [];
       
-      if (is_valid) {
-        let sum_p = 0;
-        let p_vals = {};
-        
-        for (let j = 0; j < keys.length; j++) {
-          let cat = keys[j];
-          let m_conf = loaded_models[cat];
-          let logit_val = 0;
-          
-          if (m_conf.type === "ensemble") {
-            for (let m = 0; m < m_conf.models.length; m++) {
-              logit_val += m_conf.models[m].weight * Statistics.evaluateSuperlearner(m_conf.models[m].obj, row_obj);
-            }
-          } else {
-            logit_val = Statistics.evaluateSuperlearner(m_conf.obj, row_obj);
-          }
-          
-          let p = Math.exp(logit_val) / (1 + Math.exp(logit_val));
-          p_vals[cat] = p;
-          sum_p += p;
-        }
-        
-        for (let j = 0; j < keys.length; j++) {
-          let cat = keys[j];
-          output_arrays[cat][i] = (sum_p > 0) ? (p_vals[cat] / sum_p) : 0;
+      if (model_conf.type === "superlearner_ensemble") {
+        for (let m = 0; m < model_conf.models.length; m++) {
+          let m_obj = loadModelCached(model_conf.models[m].model);
+          (m_obj.keys || []).forEach(k => all_feature_keys[k] = true);
+          models_list.push({ obj: m_obj, weight: model_conf.models[m].weight });
         }
       } else {
-        for (let j = 0; j < keys.length; j++) {
+        let m_obj = loadModelCached(model_conf);
+        (m_obj.keys || []).forEach(k => all_feature_keys[k] = true);
+        models_list.push({ obj: m_obj, weight: 1.0 });
+      }
+      
+      let union_keys = Object.keys(all_feature_keys);
+      let num_features = union_keys.length;
+      let feature_valid_indices = new Int32Array(num_features);
+      for (let k = 0; k < num_features; k++) {
+        let k_name = union_keys[k];
+        feature_valid_indices[k] = (key_to_valid_idx[k_name] !== undefined) ? key_to_valid_idx[k_name] : -1;
+      }
+      
+      // 1. Combine all linear models across the full ensemble (100% exact representation)
+      let combined_intercept = 0;
+      let combined_coeffs = new Float64Array(num_features);
+      for (let m = 0; m < models_list.length; m++) {
+        let m_entry = models_list[m];
+        let m_obj = m_entry.obj;
+        let W_m = m_entry.weight;
+        let w_lin = (m_obj.weights && m_obj.weights.linear !== undefined) ? m_obj.weights.linear : 0.5;
+        let intercept = (m_obj.linear_model && m_obj.linear_model.intercept) || 0;
+        combined_intercept += W_m * w_lin * intercept;
+        let coeffs = (m_obj.linear_model && m_obj.linear_model.coefficients) || {};
+        for (let k = 0; k < num_features; k++) {
+          let k_name = union_keys[k];
+          let c = coeffs[k_name];
+          if (typeof c === "number" && !isNaN(c)) combined_coeffs[k] += W_m * w_lin * c;
+        }
+      }
+
+      // 2. Random Forest: Select top 12 models with highest ensemble weights (normalized)
+      let sorted_models = [...models_list].sort((a, b) => b.weight - a.weight);
+      let top_models = sorted_models.slice(0, 12);
+      let rf_weight_sum = top_models.reduce((sum, entry) => sum + entry.weight, 0);
+
+      let flat_trees = [];
+      for (let m = 0; m < top_models.length; m++) {
+        let m_entry = top_models[m];
+        let m_obj = m_entry.obj;
+        let W_norm = (rf_weight_sum > 0) ? (m_entry.weight / rf_weight_sum) : (1 / top_models.length);
+        let w_rf = (m_obj.weights && m_obj.weights.rf !== undefined) ? m_obj.weights.rf : 0.5;
+        let trees = (m_obj.rf_model && m_obj.rf_model.trees) || [];
+        if (trees.length > 0) {
+          let scale = (W_norm * w_rf) / trees.length;
+          for (let t = 0; t < trees.length; t++) flat_trees.push({ tree: trees[t], weight: scale });
+        }
+      }
+
+      return {
+        combined_coeffs: combined_coeffs,
+        combined_intercept: combined_intercept,
+        feature_valid_indices: feature_valid_indices,
+        flat_trees: flat_trees,
+        num_features: num_features
+      };
+    }
+
+    function evaluateCategoryEnsemble (prep, feat_arrs, idx, x_buf) {
+      let lin_val = prep.combined_intercept;
+      for (let k = 0; k < prep.num_features; k++) {
+        let v_idx = prep.feature_valid_indices[k];
+        let val = (v_idx >= 0) ? feat_arrs[v_idx][idx] : 0;
+        x_buf[k] = val;
+        lin_val += val * prep.combined_coeffs[k];
+      }
+
+      let rf_val = 0;
+      let n_trees = prep.flat_trees.length;
+      for (let t = 0; t < n_trees; t++) {
+        let node = prep.flat_trees[t].tree;
+        while (!node.is_leaf) {
+          if (x_buf[node.feature_index] <= node.threshold) {
+            node = node.left;
+          } else {
+            node = node.right;
+          }
+        }
+        rf_val += node.value * prep.flat_trees[t].weight;
+      }
+
+      return lin_val + rf_val;
+    }
+
+    let keys = Object.keys(task.resolved_models);
+    let num_cats = keys.length;
+    let prepared_categories = {};
+
+    for (let i = 0; i < num_cats; i++) {
+      let cat = keys[i];
+      output_arrays[cat] = new Float32Array(data_len);
+      prepared_categories[cat] = prepareCategoryEnsemble(task.resolved_models[cat]);
+    }
+
+    let popd_idx = key_to_valid_idx["popd_"];
+    let popc_idx = key_to_valid_idx["popc_"];
+    let popd_arr = (popd_idx !== undefined) ? feature_arrays[popd_idx] : null;
+    let popc_arr = (popc_idx !== undefined) ? feature_arrays[popc_idx] : null;
+    let mask_uninhabited = (opt.mask_uninhabited !== undefined) ? opt.mask_uninhabited : true;
+
+    let x_buf = new Float64Array(100);
+    let p_vals = new Float64Array(num_cats);
+    let log_interval = Math.floor(data_len / 10);
+    console.log(`[GeoWorker] [${task_sex} ${task_year}] Starting raster computation (${num_valid_keys} covariates, ${prepared_categories[keys[0]].flat_trees.length} trees/cat)..`);
+
+    for (let i = 0; i < data_len; i++) {
+      if (i > 0 && i % log_interval === 0) {
+        let pct = Math.round((i / data_len) * 100);
+        console.log(`[GeoWorker] [${task_sex} ${task_year}] Generating professions raster: ${pct}% complete..`);
+      }
+
+      // Population guard: immediately skip uninhabited cells (ocean/desert/ice)
+      if (mask_uninhabited) {
+        let pop = (popd_arr ? popd_arr[i] : 0) || (popc_arr ? popc_arr[i] : 0);
+        if (isNaN(pop) || pop <= 0) {
+          for (let j = 0; j < num_cats; j++) output_arrays[keys[j]][i] = 0;
+          continue;
+        }
+      }
+
+      let is_valid = true;
+      for (let j = 0; j < num_valid_keys; j++) {
+        let v = feature_arrays[j][i];
+        if (isNaN(v)) { is_valid = false; break; }
+      }
+
+      if (is_valid) {
+        let sum_p = 0;
+
+        for (let j = 0; j < num_cats; j++) {
+          let cat = keys[j];
+          let logit_val = evaluateCategoryEnsemble(prepared_categories[cat], feature_arrays, i, x_buf);
+          let p = Math.exp(logit_val) / (1 + Math.exp(logit_val));
+          p_vals[j] = p;
+          sum_p += p;
+        }
+
+        for (let j = 0; j < num_cats; j++) {
+          let cat = keys[j];
+          output_arrays[cat][i] = (sum_p > 0) ? (p_vals[j] / sum_p) : 0;
+        }
+      } else {
+        for (let j = 0; j < num_cats; j++) {
           output_arrays[keys[j]][i] = NaN;
         }
       }
@@ -1576,6 +1693,7 @@ let handleTask = async function (task) {
       });
     }
     
+    console.log(`[GeoWorker] [${task_sex} ${task_year}] Generated 4 professions rasters successfully.`);
     return { output_file_path: output_file_path, success: true };
   }
 
