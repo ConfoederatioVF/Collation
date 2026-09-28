@@ -951,33 +951,62 @@ let handleTask = async function (task) {
         : null;
       let num_olivetti = olivetti_categories.length;
 
-      let calib_params = {};
+      let sample = [];
+      let tot_sample_pop = 0;
+      let step = Math.max(1, Math.floor(data_len / 30000));
+
+      for (let j = 0; j < data_len; j += step) {
+        if (pop_raster[j] > 0) {
+          sample.push({
+            p: pop_raster[j],
+            s: [
+              prob_rasters[olivetti_categories[0]].data[j] || 0,
+              prob_rasters[olivetti_categories[1]].data[j] || 0,
+              prob_rasters[olivetti_categories[2]].data[j] || 0,
+              prob_rasters[olivetti_categories[3]].data[j] || 0
+            ]
+          });
+          tot_sample_pop += pop_raster[j];
+        }
+      }
+
+      let lambda = new Float64Array(num_olivetti);
       for (let i = 0; i < num_olivetti; i++) {
         let cat = olivetti_categories[i];
-        let cat_data = prob_rasters[cat].data;
-        let sample_vals = [];
-        let step = Math.max(1, Math.floor(data_len / 50000));
-        let target_mu = (sector_baselines && sector_baselines[cat] !== undefined)
+        lambda[i] = (sector_baselines && sector_baselines[cat] !== undefined)
           ? sector_baselines[cat]
-          : (cat === "agriculture" ? 0.74 : (cat === "manufacturing" ? 0.12 : (cat === "services" ? 0.10 : 0.04)));
-        target_mu = Math.max(0.001, Math.min(0.999, target_mu));
+          : 0.25;
+      }
 
-        for (let j = 0; j < data_len; j += step) {
-          if (pop_raster[j] > 0 && !isNaN(cat_data[j]) && cat_data[j] > 0) {
-            sample_vals.push(cat_data[j]);
+      // Fast iterative proportional fitting (IPF) raking on sample to align macro proportions
+      if (tot_sample_pop > 0 && sample.length > 0) {
+        let q = new Float64Array(num_olivetti);
+        for (let iter = 0; iter < 10; iter++) {
+          for (let i = 0; i < num_olivetti; i++) q[i] = 0;
+          for (let k = 0; k < sample.length; k++) {
+            let it = sample[k];
+            let sum_ls = lambda[0]*it.s[0] + lambda[1]*it.s[1] + lambda[2]*it.s[2] + lambda[3]*it.s[3];
+            if (sum_ls > 0) {
+              let w = it.p / sum_ls;
+              q[0] += (lambda[0] * it.s[0]) * w;
+              q[1] += (lambda[1] * it.s[1]) * w;
+              q[2] += (lambda[2] * it.s[2]) * w;
+              q[3] += (lambda[3] * it.s[3]) * w;
+            }
+          }
+          let sum_l = 0;
+          for (let i = 0; i < num_olivetti; i++) {
+            let target_mu = (sector_baselines && sector_baselines[olivetti_categories[i]] !== undefined)
+              ? sector_baselines[olivetti_categories[i]]
+              : 0.25;
+            let current_share = q[i] / tot_sample_pop;
+            lambda[i] *= (target_mu / Math.max(1e-7, current_share));
+            sum_l += lambda[i];
+          }
+          if (sum_l > 0) {
+            for (let i = 0; i < num_olivetti; i++) lambda[i] /= sum_l;
           }
         }
-        sample_vals.sort((a, b) => a - b);
-        let p25 = (sample_vals.length > 0) ? sample_vals[Math.floor(sample_vals.length * 0.25)] : 0.25;
-        let p50 = (sample_vals.length > 0) ? sample_vals[Math.floor(sample_vals.length * 0.50)] : 0.25;
-        let p75 = (sample_vals.length > 0) ? sample_vals[Math.floor(sample_vals.length * 0.75)] : 0.25;
-        let iqr = p75 - p25;
-        let robust_std = Math.max(0.0001, iqr / 1.349);
-
-        let alpha = Math.log(target_mu / (1 - target_mu));
-        let beta = Math.min(2.5, Math.max(0.8, 0.12 / (target_mu * (1 - target_mu))));
-
-        calib_params[cat] = { alpha: alpha, beta: beta, p50: p50, robust_std: robust_std };
       }
 
       let agg_arrays = {};
@@ -989,7 +1018,30 @@ let handleTask = async function (task) {
         if (!agg_t[c]) agg_t[c] = new Float32Array(data_len);
       }
 
-      let s_buf = new Float64Array(num_olivetti);
+      let l0 = lambda[0], l1 = lambda[1], l2 = lambda[2], l3 = lambda[3];
+      let p0 = prob_rasters[olivetti_categories[0]].data;
+      let p1 = prob_rasters[olivetti_categories[1]].data;
+      let p2 = prob_rasters[olivetti_categories[2]].data;
+      let p3 = prob_rasters[olivetti_categories[3]].data;
+
+      let pct_c0 = pct_arrays[olivetti_categories[0]];
+      let pct_c1 = pct_arrays[olivetti_categories[1]];
+      let pct_c2 = pct_arrays[olivetti_categories[2]];
+      let pct_c3 = pct_arrays[olivetti_categories[3]];
+      let pct_niw = pct_arrays["not_in_work"];
+
+      let agg_c0 = agg_arrays[olivetti_categories[0]];
+      let agg_c1 = agg_arrays[olivetti_categories[1]];
+      let agg_c2 = agg_arrays[olivetti_categories[2]];
+      let agg_c3 = agg_arrays[olivetti_categories[3]];
+      let agg_niw = agg_arrays["not_in_work"];
+
+      let agg_t0 = agg_t[olivetti_categories[0]];
+      let agg_t1 = agg_t[olivetti_categories[1]];
+      let agg_t2 = agg_t[olivetti_categories[2]];
+      let agg_t3 = agg_t[olivetti_categories[3]];
+      let agg_t_niw = agg_t["not_in_work"];
+
       for (let j = 0; j < data_len; j++) {
         let pop = pop_raster[j];
         if (pop <= 0) continue;
@@ -997,30 +1049,42 @@ let handleTask = async function (task) {
         let lfpr = lfpr_raster.data[j];
         if (isNaN(lfpr)) lfpr = 0;
 
-        let sum_s = 0;
-        for (let i = 0; i < num_olivetti; i++) {
-          let cat = olivetti_categories[i];
-          let cp = calib_params[cat];
-          let val = prob_rasters[cat].data[j];
-          let z = (val - cp.p50) / cp.robust_std;
-          let s_val = 1 / (1 + Math.exp(-(cp.alpha + cp.beta * z)));
-          s_buf[i] = s_val;
-          sum_s += s_val;
-        }
+        let s0 = l0 * p0[j];
+        let s1 = l1 * p1[j];
+        let s2 = l2 * p2[j];
+        let s3 = l3 * p3[j];
+        let sum_s = s0 + s1 + s2 + s3;
 
-        for (let i = 0; i < num_olivetti; i++) {
-          let cat = olivetti_categories[i];
-          let norm_p = (sum_s > 0) ? (s_buf[i] / sum_s) : (1 / num_olivetti);
-          let final_pct = lfpr * norm_p;
-          pct_arrays[cat][j] = final_pct;
-          agg_arrays[cat][j] = final_pct * pop;
-          agg_t[cat][j] += agg_arrays[cat][j];
-        }
+        let norm_s = (sum_s > 0) ? (lfpr / sum_s) : 0, b = (sum_s > 0) ? 0 : (lfpr * 0.25);
+        let final_0 = s0*norm_s + b;
+        let final_1 = s1*norm_s + b;
+        let final_2 = s2*norm_s + b;
+        let final_3 = s3*norm_s + b;
+        let final_niw = Math.max(0, 1.0 - lfpr);
 
-        let not_in_work_pct = Math.max(0, 1.0 - lfpr);
-        pct_arrays["not_in_work"][j] = not_in_work_pct;
-        agg_arrays["not_in_work"][j] = not_in_work_pct * pop;
-        agg_t["not_in_work"][j] += agg_arrays["not_in_work"][j];
+        pct_c0[j] = final_0;
+        pct_c1[j] = final_1;
+        pct_c2[j] = final_2;
+        pct_c3[j] = final_3;
+        pct_niw[j] = final_niw;
+
+        let a0 = final_0 * pop;
+        let a1 = final_1 * pop;
+        let a2 = final_2 * pop;
+        let a3 = final_3 * pop;
+        let aniw = final_niw * pop;
+
+        agg_c0[j] = a0;
+        agg_c1[j] = a1;
+        agg_c2[j] = a2;
+        agg_c3[j] = a3;
+        agg_niw[j] = aniw;
+
+        agg_t0[j] += a0;
+        agg_t1[j] += a1;
+        agg_t2[j] += a2;
+        agg_t3[j] += a3;
+        agg_t_niw[j] += aniw;
       }
 
       for (let i = 0; i < categories.length; i++) {

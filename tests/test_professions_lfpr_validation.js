@@ -188,33 +188,37 @@ let runValidationAssessment = async function () {
       max_sex_agg_error_global = r.sex_consistency.max_aggregation_error;
   }
 
-  //4. Extract benchmark milestones
+  //4. Extract benchmark milestones by sex
   let milestone_years = [-10000, -8000, -6000, -4000, -3000, -2000, -1000, 0, 500, 1000, 1500, 1750, 1820, 1890, 1950, 2000, 2025];
-  let milestone_summaries = [];
+  let milestone_summaries = { f: [], m: [], t: [] };
+  let sexes = ["m", "f", "t"];
 
-  for (let i = 0; i < milestone_years.length; i++) {
-    let y = milestone_years[i];
-    let yr_data = years_map[y];
-    if (!yr_data) continue;
+  for (let s = 0; s < sexes.length; s++) {
+    let sex = sexes[s];
+    for (let i = 0; i < milestone_years.length; i++) {
+      let y = milestone_years[i];
+      let yr_data = years_map[y];
+      if (!yr_data) continue;
 
-    let prof_t = yr_data.professions.t;
-    let lfpr_t = yr_data.lfpr.t;
+      let prof = yr_data.professions[sex];
+      let lfpr = yr_data.lfpr[sex];
 
-    milestone_summaries.push({
-      agriculture_active_pct: prof_t.categories.agriculture.active_share_pct,
-      agriculture_pop_pct: prof_t.categories.agriculture.pop_weighted_pct,
-      informal_active_pct: prof_t.categories.informal_labour.active_share_pct,
-      informal_pop_pct: prof_t.categories.informal_labour.pop_weighted_pct,
-      is_valid: yr_data.is_valid,
-      lfpr_total_pct: lfpr_t.pop_weighted_mean,
-      manufacturing_active_pct: prof_t.categories.manufacturing.active_share_pct,
-      manufacturing_pop_pct: prof_t.categories.manufacturing.pop_weighted_pct,
-      not_in_work_pop_pct: prof_t.categories.not_in_work.pop_weighted_pct,
-      services_active_pct: prof_t.categories.services.active_share_pct,
-      services_pop_pct: prof_t.categories.services.pop_weighted_pct,
-      working_pop_millions: yr_data.working_age_population_millions.t,
-      year: y
-    });
+      milestone_summaries[sex].push({
+        agriculture_active_pct: prof.categories.agriculture.active_share_pct,
+        agriculture_pop_pct: prof.categories.agriculture.pop_weighted_pct,
+        informal_active_pct: prof.categories.informal_labour.active_share_pct,
+        informal_pop_pct: prof.categories.informal_labour.pop_weighted_pct,
+        is_valid: yr_data.is_valid,
+        lfpr_pct: lfpr.pop_weighted_mean,
+        manufacturing_active_pct: prof.categories.manufacturing.active_share_pct,
+        manufacturing_pop_pct: prof.categories.manufacturing.pop_weighted_pct,
+        not_in_work_pop_pct: prof.categories.not_in_work.pop_weighted_pct,
+        services_active_pct: prof.categories.services.active_share_pct,
+        services_pop_pct: prof.categories.services.pop_weighted_pct,
+        working_pop_millions: yr_data.working_age_population_millions[sex],
+        year: y
+      });
+    }
   }
 
   //5. Assemble single compiled JSON artifact
@@ -224,7 +228,8 @@ let runValidationAssessment = async function () {
       execution_time_seconds: parseFloat(((Date.now() - t0) / 1000).toFixed(2)),
       generated_at: new Date().toISOString(),
       global_bounds_valid: global_bounds_valid,
-      key_milestones_summary: milestone_summaries,
+      key_milestones_by_sex: milestone_summaries,
+      key_milestones_summary: milestone_summaries.t,
       max_lfpr_error_global: max_lfpr_error_global,
       max_sex_aggregation_error_global: max_sex_agg_error_global,
       max_sum_to_one_error_global: max_sum_to_one_error_global,
@@ -239,43 +244,54 @@ let runValidationAssessment = async function () {
   console.log(`\nSuccessfully compiled and written global validation metrics to:`);
   console.log(`-> ${output_json_path}\n`);
 
-  //6. Print formatted console table for quick review
-  console.log("=========================================================================================================================");
-  console.log("BENCHMARK HISTORICAL MILESTONES (TOTAL WORKING-AGE POPULATION)");
-  console.log("=========================================================================================================================");
-  console.log(
-    "Year".padEnd(8) +
-    "WorkingPop".padEnd(12) +
-    "LFPR (%)".padEnd(10) +
-    "Agri(Act)".padEnd(11) +
-    "Mfg(Act)".padEnd(11) +
-    "Serv(Act)".padEnd(11) +
-    "Inf(Act)".padEnd(11) +
-    "NotWork(Pop)".padEnd(14) +
-    "Sum1Err".padEnd(12) +
-    "Status"
-  );
-  console.log("-------------------------------------------------------------------------------------------------------------------------");
+  //6. Print formatted console tables for each sex
+  let sex_titles = {
+    f: "FEMALE (F) WORKING-AGE POPULATION",
+    m: "MALE (M) WORKING-AGE POPULATION",
+    t: "TOTAL (T) COMBINED POPULATION"
+  };
 
-  for (let i = 0; i < milestone_summaries.length; i++) {
-    let m = milestone_summaries[i];
-    let yr_str = (m.year < 0 ? `${Math.abs(m.year)} BC` : `${m.year} AD`).padEnd(8);
-    let pop_str = `${m.working_pop_millions.toFixed(2)}M`.padEnd(12);
-    let lfpr_str = `${(m.lfpr_total_pct * 100).toFixed(1)}%`.padEnd(10);
-    let agri_str = `${(m.agriculture_active_pct * 100).toFixed(1)}%`.padEnd(11);
-    let mfg_str = `${(m.manufacturing_active_pct * 100).toFixed(1)}%`.padEnd(11);
-    let serv_str = `${(m.services_active_pct * 100).toFixed(1)}%`.padEnd(11);
-    let inf_str = `${(m.informal_active_pct * 100).toFixed(1)}%`.padEnd(11);
-    let not_work_str = `${(m.not_in_work_pop_pct * 100).toFixed(1)}%`.padEnd(14);
-    let err_str = `${max_sum_to_one_error_global.toExponential(2)}`.padEnd(12);
-    let status_str = m.is_valid ? "VALID" : "INVALID";
+  for (let s = 0; s < sexes.length; s++) {
+    let sex = sexes[s];
+    let list = milestone_summaries[sex];
 
-    console.log(yr_str + pop_str + lfpr_str + agri_str + mfg_str + serv_str + inf_str + not_work_str + err_str + status_str);
+    console.log("=========================================================================================================================");
+    console.log(`HISTORICAL BENCHMARK MILESTONES: ${sex_titles[sex]}`);
+    console.log("=========================================================================================================================");
+    console.log(
+      "Year".padEnd(8) +
+      "WorkingPop".padEnd(12) +
+      "LFPR (%)".padEnd(10) +
+      "Agri(Act)".padEnd(11) +
+      "Mfg(Act)".padEnd(11) +
+      "Serv(Act)".padEnd(11) +
+      "Inf(Act)".padEnd(11) +
+      "NotWork(Pop)".padEnd(14) +
+      "Status"
+    );
+    console.log("-------------------------------------------------------------------------------------------------------------------------");
+
+    for (let i = 0; i < list.length; i++) {
+      let m = list[i];
+      let yr_str = (m.year < 0 ? `${Math.abs(m.year)} BC` : `${m.year} AD`).padEnd(8);
+      let pop_str = `${m.working_pop_millions.toFixed(2)}M`.padEnd(12);
+      let lfpr_str = `${(m.lfpr_pct * 100).toFixed(1)}%`.padEnd(10);
+      let agri_str = `${(m.agriculture_active_pct * 100).toFixed(1)}%`.padEnd(11);
+      let mfg_str = `${(m.manufacturing_active_pct * 100).toFixed(1)}%`.padEnd(11);
+      let serv_str = `${(m.services_active_pct * 100).toFixed(1)}%`.padEnd(11);
+      let inf_str = `${(m.informal_active_pct * 100).toFixed(1)}%`.padEnd(11);
+      let not_work_str = `${(m.not_in_work_pop_pct * 100).toFixed(1)}%`.padEnd(14);
+      let status_str = m.is_valid ? "VALID" : "INVALID";
+
+      console.log(yr_str + pop_str + lfpr_str + agri_str + mfg_str + serv_str + inf_str + not_work_str + status_str);
+    }
+    console.log("=========================================================================================================================\n");
   }
-  console.log("=========================================================================================================================\n");
+
   console.log(`Global Assessment Verdict: ${all_years_valid ? "ALL YEARS PASSED VALIDATION CHECKS" : "VALIDATION ISSUES ENCOUNTERED"}`);
   console.log(`Max Sum-to-One Error: ${max_sum_to_one_error_global}`);
   console.log(`Max LFPR Consistency Error: ${max_lfpr_error_global}`);
+  console.log(`Max Sex Aggregation Error: ${max_sex_agg_error_global}`);
 };
 
 //Execute

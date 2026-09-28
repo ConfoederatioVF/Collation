@@ -22,7 +22,14 @@ let loadFloat32Raster = function (arg0_file_path) {
 
   //Declare local instance variables
   let buffer = fs.readFileSync(file_path);
-  let parsed_png = pngjs.PNG.sync.read(buffer);
+  let parsed_png = null;
+
+  try {
+    parsed_png = pngjs.PNG.sync.read(buffer);
+  } catch (err) {
+    throw new Error(`Failed to parse PNG raster at ${file_path}: ${err.message}`);
+  }
+
   let pixel_count = parsed_png.width * parsed_png.height;
   let raw_buffer = parsed_png.data.buffer;
   let raw_byte_offset = parsed_png.data.byteOffset;

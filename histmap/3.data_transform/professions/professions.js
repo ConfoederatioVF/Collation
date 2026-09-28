@@ -730,38 +730,65 @@ global.professions = class {
 					
 					if (missing_probs) continue;
 					
-					let calib_params = {};
 					let num_olivetti = olivetti_categories.length;
 					let sector_baselines = this.getDynamicSectorBaselines(year, sex);
-					
+					let sample = [];
+					let tot_sample_pop = 0;
+					let step = Math.max(1, Math.floor(data_len / 30000));
+
+					for (let j = 0; j < data_len; j += step) {
+						if (pop_raster[j] > 0) {
+							sample.push({
+								p: pop_raster[j],
+								s: [
+									prob_rasters[olivetti_categories[0]].data[j] || 0,
+									prob_rasters[olivetti_categories[1]].data[j] || 0,
+									prob_rasters[olivetti_categories[2]].data[j] || 0,
+									prob_rasters[olivetti_categories[3]].data[j] || 0
+								]
+							});
+							tot_sample_pop += pop_raster[j];
+						}
+					}
+
+					let lambda = new Float64Array(num_olivetti);
 					for (let i = 0; i < num_olivetti; i++) {
 						let cat = olivetti_categories[i];
-						let cat_data = prob_rasters[cat].data;
-						let sample_vals = [];
-						let step = Math.max(1, Math.floor(data_len / 50000));
-						let target_mu = (sector_baselines && sector_baselines[cat] !== undefined)
+						lambda[i] = (sector_baselines && sector_baselines[cat] !== undefined)
 							? sector_baselines[cat]
-							: (cat === "agriculture" ? 0.74 : (cat === "manufacturing" ? 0.12 : (cat === "services" ? 0.10 : 0.04)));
-						target_mu = Math.max(0.001, Math.min(0.999, target_mu));
-
-						for (let j = 0; j < data_len; j += step) {
-							if (pop_raster[j] > 0 && !isNaN(cat_data[j]) && cat_data[j] > 0) {
-								sample_vals.push(cat_data[j]);
-							}
-						}
-						sample_vals.sort((a, b) => a - b);
-						let p25 = (sample_vals.length > 0) ? sample_vals[Math.floor(sample_vals.length * 0.25)] : 0.25;
-						let p50 = (sample_vals.length > 0) ? sample_vals[Math.floor(sample_vals.length * 0.50)] : 0.25;
-						let p75 = (sample_vals.length > 0) ? sample_vals[Math.floor(sample_vals.length * 0.75)] : 0.25;
-						let iqr = p75 - p25;
-						let robust_std = Math.max(0.0001, iqr / 1.349);
-
-						let alpha = Math.log(target_mu / (1 - target_mu));
-						let beta = Math.min(2.5, Math.max(0.8, 0.12 / (target_mu * (1 - target_mu))));
-
-						calib_params[cat] = { alpha: alpha, beta: beta, p50: p50, robust_std: robust_std };
+							: 0.25;
 					}
-					
+
+					// Fast iterative proportional fitting (IPF) raking on sample to align macro proportions
+					if (tot_sample_pop > 0 && sample.length > 0) {
+						let q = new Float64Array(num_olivetti);
+						for (let iter = 0; iter < 10; iter++) {
+							for (let i = 0; i < num_olivetti; i++) q[i] = 0;
+							for (let k = 0; k < sample.length; k++) {
+								let it = sample[k];
+								let sum_ls = lambda[0]*it.s[0] + lambda[1]*it.s[1] + lambda[2]*it.s[2] + lambda[3]*it.s[3];
+								if (sum_ls > 0) {
+									let w = it.p / sum_ls;
+									q[0] += (lambda[0] * it.s[0]) * w;
+									q[1] += (lambda[1] * it.s[1]) * w;
+									q[2] += (lambda[2] * it.s[2]) * w;
+									q[3] += (lambda[3] * it.s[3]) * w;
+								}
+							}
+							let sum_l = 0;
+							for (let i = 0; i < num_olivetti; i++) {
+								let target_mu = (sector_baselines && sector_baselines[olivetti_categories[i]] !== undefined)
+									? sector_baselines[olivetti_categories[i]]
+									: 0.25;
+								let current_share = q[i] / tot_sample_pop;
+								lambda[i] *= (target_mu / Math.max(1e-7, current_share));
+								sum_l += lambda[i];
+							}
+							if (sum_l > 0)
+								for (let i = 0; i < num_olivetti; i++) lambda[i] /= sum_l;
+						}
+					}
+
 					let agg_arrays = {};
 					let pct_arrays = {};
 					for (let i = 0; i < categories.length; i++) {
@@ -771,7 +798,16 @@ global.professions = class {
 						if (!agg_t[c]) agg_t[c] = new Float32Array(data_len);
 					}
 
-					let s_buf = new Float64Array(num_olivetti);
+					let l0 = lambda[0], l1 = lambda[1], l2 = lambda[2], l3 = lambda[3];
+					let p0 = prob_rasters[olivetti_categories[0]].data, p1 = prob_rasters[olivetti_categories[1]].data;
+					let p2 = prob_rasters[olivetti_categories[2]].data, p3 = prob_rasters[olivetti_categories[3]].data;
+					let pct_c0 = pct_arrays[olivetti_categories[0]], pct_c1 = pct_arrays[olivetti_categories[1]];
+					let pct_c2 = pct_arrays[olivetti_categories[2]], pct_c3 = pct_arrays[olivetti_categories[3]], pct_niw = pct_arrays["not_in_work"];
+					let agg_c0 = agg_arrays[olivetti_categories[0]], agg_c1 = agg_arrays[olivetti_categories[1]];
+					let agg_c2 = agg_arrays[olivetti_categories[2]], agg_c3 = agg_arrays[olivetti_categories[3]], agg_niw = agg_arrays["not_in_work"];
+					let agg_t0 = agg_t[olivetti_categories[0]], agg_t1 = agg_t[olivetti_categories[1]];
+					let agg_t2 = agg_t[olivetti_categories[2]], agg_t3 = agg_t[olivetti_categories[3]], agg_t_niw = agg_t["not_in_work"];
+
 					for (let j = 0; j < data_len; j++) {
 						let pop = pop_raster[j];
 						if (pop <= 0) continue;
@@ -779,30 +815,21 @@ global.professions = class {
 						let lfpr = lfpr_raster.data[j];
 						if (isNaN(lfpr)) lfpr = 0;
 
-						let sum_s = 0;
-						for (let i = 0; i < num_olivetti; i++) {
-							let cat = olivetti_categories[i];
-							let cp = calib_params[cat];
-							let val = prob_rasters[cat].data[j];
-							let z = (val - cp.p50) / cp.robust_std;
-							let s_val = 1 / (1 + Math.exp(-(cp.alpha + cp.beta * z)));
-							s_buf[i] = s_val;
-							sum_s += s_val;
-						}
+						let s0 = l0 * p0[j], s1 = l1 * p1[j], s2 = l2 * p2[j], s3 = l3 * p3[j];
+						let sum_s = s0 + s1 + s2 + s3;
 
-						for (let i = 0; i < num_olivetti; i++) {
-							let cat = olivetti_categories[i];
-							let norm_p = (sum_s > 0) ? (s_buf[i] / sum_s) : (1 / num_olivetti);
-							let final_pct = lfpr * norm_p;
-							pct_arrays[cat][j] = final_pct;
-							agg_arrays[cat][j] = final_pct * pop;
-							agg_t[cat][j] += agg_arrays[cat][j];
-						}
+						let norm_s = (sum_s > 0) ? (lfpr / sum_s) : 0, b = (sum_s > 0) ? 0 : (lfpr * 0.25);
+						let final_0 = s0*norm_s + b, final_1 = s1*norm_s + b, final_2 = s2*norm_s + b, final_3 = s3*norm_s + b;
+						let final_niw = Math.max(0, 1.0 - lfpr);
 
-						let not_in_work_pct = Math.max(0, 1.0 - lfpr);
-						pct_arrays["not_in_work"][j] = not_in_work_pct;
-						agg_arrays["not_in_work"][j] = not_in_work_pct * pop;
-						agg_t["not_in_work"][j] += agg_arrays["not_in_work"][j];
+						pct_c0[j] = final_0; pct_c1[j] = final_1; pct_c2[j] = final_2; pct_c3[j] = final_3;
+						pct_niw[j] = final_niw;
+
+						let a0 = final_0 * pop, a1 = final_1 * pop, a2 = final_2 * pop, a3 = final_3 * pop;
+						let aniw = final_niw * pop;
+
+						agg_c0[j] = a0; agg_c1[j] = a1; agg_c2[j] = a2; agg_c3[j] = a3; agg_niw[j] = aniw;
+						agg_t0[j] += a0; agg_t1[j] += a1; agg_t2[j] += a2; agg_t3[j] += a3; agg_t_niw[j] += aniw;
 					}
 
 					for (let i = 0; i < categories.length; i++) {
@@ -878,21 +905,16 @@ global.professions = class {
 		if (year >= 1890) {
 			let milestones = [
 				{ y: 1890, m: { agriculture: 0.473, manufacturing: 0.321, services: 0.170, informal_labour: 0.036 }, f: { agriculture: 0.390, manufacturing: 0.271, services: 0.280, informal_labour: 0.059 } },
-				{ y: 1950, m: { agriculture: 0.280, manufacturing: 0.360, services: 0.320, informal_labour: 0.040 }, f: { agriculture: 0.220, manufacturing: 0.260, services: 0.470, informal_labour: 0.050 } },
-				{ y: 2000, m: { agriculture: 0.120, manufacturing: 0.280, services: 0.560, informal_labour: 0.040 }, f: { agriculture: 0.080, manufacturing: 0.160, services: 0.720, informal_labour: 0.040 } },
-				{ y: 2025, m: { agriculture: 0.060, manufacturing: 0.240, services: 0.660, informal_labour: 0.040 }, f: { agriculture: 0.040, manufacturing: 0.120, services: 0.800, informal_labour: 0.040 } }
+				{ y: 1950, m: { agriculture: 0.260, manufacturing: 0.380, services: 0.320, informal_labour: 0.040 }, f: { agriculture: 0.200, manufacturing: 0.300, services: 0.450, informal_labour: 0.050 } },
+				{ y: 2000, m: { agriculture: 0.120, manufacturing: 0.260, services: 0.580, informal_labour: 0.040 }, f: { agriculture: 0.080, manufacturing: 0.160, services: 0.720, informal_labour: 0.040 } },
+				{ y: 2025, m: { agriculture: 0.060, manufacturing: 0.220, services: 0.680, informal_labour: 0.040 }, f: { agriculture: 0.040, manufacturing: 0.120, services: 0.800, informal_labour: 0.040 } }
 			];
 			let lower = milestones[0], upper = milestones[milestones.length - 1];
-
-			for (let i = 0; i < milestones.length - 1; i++) {
-				if (year >= milestones[i].y && year <= milestones[i + 1].y) {
-					lower = milestones[i]; upper = milestones[i + 1]; break;
-				}
-			}
+			for (let i = 0; i < milestones.length - 1; i++)
+				if (year >= milestones[i].y && year <= milestones[i + 1].y) { lower = milestones[i]; upper = milestones[i + 1]; break; }
 
 			let t = (upper.y === lower.y) ? 0 : (year - lower.y) / (upper.y - lower.y);
 			let s = t*t*(3 - 2*t);
-
 			return {
 				agriculture: (1 - s)*lower[sex].agriculture + s*upper[sex].agriculture,
 				manufacturing: (1 - s)*lower[sex].manufacturing + s*upper[sex].manufacturing,
@@ -901,18 +923,11 @@ global.professions = class {
 			};
 		}
 
-		//2. Industrial Transition (1750 to 1890 AD): Logistic interpolation to 1890 Olivetti
+		//2. Industrial Transition (1750 to 1890 AD): Manufacturing surges preceding services
 		if (year >= 1750 && year < 1890) {
-			let base_1750 = (sex === "f")
-				? { agriculture: 0.700, manufacturing: 0.150, services: 0.100, informal_labour: 0.050 }
-				: { agriculture: 0.740, manufacturing: 0.120, services: 0.100, informal_labour: 0.040 };
-			let base_1890 = (sex === "f")
-				? { agriculture: 0.390, manufacturing: 0.271, services: 0.280, informal_labour: 0.059 }
-				: { agriculture: 0.473, manufacturing: 0.321, services: 0.170, informal_labour: 0.036 };
-
-			let t = (year - 1750) / (1890 - 1750);
-			let s = t*t*(3 - 2*t);
-
+			let base_1750 = (sex === "f") ? { agriculture: 0.780, manufacturing: 0.080, services: 0.090, informal_labour: 0.050 } : { agriculture: 0.810, manufacturing: 0.070, services: 0.080, informal_labour: 0.040 };
+			let base_1890 = (sex === "f") ? { agriculture: 0.390, manufacturing: 0.271, services: 0.280, informal_labour: 0.059 } : { agriculture: 0.473, manufacturing: 0.321, services: 0.170, informal_labour: 0.036 };
+			let t = (year - 1750) / (1890 - 1750), s = t*t*(3 - 2*t);
 			return {
 				agriculture: (1 - s)*base_1750.agriculture + s*base_1890.agriculture,
 				manufacturing: (1 - s)*base_1750.manufacturing + s*base_1890.manufacturing,
@@ -928,23 +943,16 @@ global.professions = class {
 				{ y: 500, u: 0.0378 }, { y: 1000, u: 0.0453 }, { y: 1500, u: 0.0467 }, { y: 1750, u: 0.0468 }
 			];
 			let lower = u_points[0], upper = u_points[u_points.length - 1];
-
-			for (let i = 0; i < u_points.length - 1; i++) {
-				if (year >= u_points[i].y && year <= u_points[i + 1].y) {
-					lower = u_points[i]; upper = u_points[i + 1]; break;
-				}
-			}
+			for (let i = 0; i < u_points.length - 1; i++)
+				if (year >= u_points[i].y && year <= u_points[i + 1].y) { lower = u_points[i]; upper = u_points[i + 1]; break; }
 
 			let t = (upper.y === lower.y) ? 0 : (year - lower.y) / (upper.y - lower.y);
 			let u_rate = (1 - t)*lower.u + t*upper.u;
-
-			let inf = 0.04;
-			let mfg = 0.40*u_rate + ((sex === "f") ? 0.13 : 0.09);
-			let serv = 0.60*u_rate + 0.07;
-			let agri = Math.max(0.50, 1.0 - serv - mfg - inf);
-
+			let inf = (sex === "f") ? 0.05 : 0.04;
+			let mfg = 0.80*u_rate + ((sex === "f") ? 0.03 : 0.02);
+			let serv = 1.00*u_rate + ((sex === "f") ? 0.045 : 0.035);
 			return {
-				agriculture: agri,
+				agriculture: Math.max(0.60, 1.0 - serv - mfg - inf),
 				manufacturing: mfg,
 				services: serv,
 				informal_labour: inf
@@ -954,24 +962,19 @@ global.professions = class {
 		//4. Pre-Neolithic to Neolithic Transition (-10000 to -3000 BC): Land use intensity scales farming vs foraging
 		let lambda_points = [
 			{ y: -10000, l: 0.00 }, { y: -8000, l: 0.02 }, { y: -6000, l: 0.10 },
-			{ y: -4000, l: 0.85 }, { y: -3000, l: 1.00 }
+			{ y: -4000, l: 0.70 }, { y: -3000, l: 1.00 }
 		];
 		let lower = lambda_points[0], upper = lambda_points[lambda_points.length - 1];
-
-		for (let i = 0; i < lambda_points.length - 1; i++) {
-			if (year >= lambda_points[i].y && year <= lambda_points[i + 1].y) {
-				lower = lambda_points[i]; upper = lambda_points[i + 1]; break;
-			}
-		}
+		for (let i = 0; i < lambda_points.length - 1; i++)
+			if (year >= lambda_points[i].y && year <= lambda_points[i + 1].y) { lower = lambda_points[i]; upper = lambda_points[i + 1]; break; }
 
 		let t = (upper.y === lower.y) ? 0 : (year - lower.y) / (upper.y - lower.y);
 		let lambda = (1 - t)*lower.l + t*upper.l;
-
 		return {
-			agriculture: lambda*0.78,
-			manufacturing: (1 - lambda)*0.05 + lambda*((sex === "f") ? 0.13 : 0.09),
-			services: lambda*0.07,
-			informal_labour: (1 - lambda)*0.95 + lambda*0.04
+			agriculture: lambda*0.88,
+			manufacturing: (1 - lambda)*0.01 + lambda*((sex === "f") ? 0.03 : 0.02),
+			services: (1 - lambda)*0.01 + lambda*((sex === "f") ? 0.045 : 0.035),
+			informal_labour: (1 - lambda)*0.98 + lambda*0.04
 		};
 	}
 	
@@ -980,9 +983,7 @@ global.professions = class {
 		if (!options.exclude) options.exclude = [];
 		let skip_primary = (options.skip_primary || options.skip_raw || options.skip_primary_data || options.skip_raw_data || options.skip_databases);
 		let skip_training = (options.skip_training || options.use_existing_models || options.train === false);
-		
-		if (skip_training || skip_primary)
-			if (!options.exclude.includes("A")) options.exclude.push("A");
+		if (skip_training || skip_primary) if (!options.exclude.includes("A")) options.exclude.push("A");
 		if (skip_training) {
 			if (!options.exclude.includes("B")) options.exclude.push("B");
 			if (!options.exclude.includes("C")) options.exclude.push("C");
