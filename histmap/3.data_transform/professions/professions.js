@@ -137,7 +137,7 @@ global.professions = class {
 	 * Extracts valid spatial matrices for training categorical profession assignments via gradient descent.
 	 * Only active labor categories (olivetti_categories) are extracted to explicitly prevent training on 'not_in_work'.
 	 */
-	static async B_trainMultinomialLogitModels (arg0_options) {
+	static async B_trainIndependentEnsembles (arg0_options) {
 		//Convert from parameters
 		let options = (arg0_options) ? arg0_options : {};
 		
@@ -155,9 +155,23 @@ global.professions = class {
 			let sex = this.sexes[s];
 			for (let y = 0; y < train_years.length; y++) {
 				let year = train_years[y];
-				let model_path = `${this.intermediate_logit_folder}multinomial_model_${sex}_${year}.json`;
-				if (overwrite || !fs.existsSync(model_path))
-					items.push({ sex: sex, year: year });
+				let all_targets_exist = true;
+				for (let c = 0; c < this.olivetti_categories.length; c++) {
+					let cat = this.olivetti_categories[c];
+					let target_path = `${this.standardised_targets_folder}global_${cat}_${sex}_${year}.png`;
+					if (!fs.existsSync(target_path)) {
+						all_targets_exist = false;
+						break;
+					}
+				}
+				if (!all_targets_exist) continue;
+				
+				for (let c = 0; c < this.olivetti_categories.length; c++) {
+					let cat = this.olivetti_categories[c];
+					let model_path = `${this.intermediate_logit_folder}ensemble_model_${cat}_${sex}_${year}.json`;
+					if (overwrite || !fs.existsSync(model_path))
+						items.push({ cat: cat, sex: sex, year: year });
+				}
 			}
 		}
 		
@@ -167,13 +181,12 @@ global.professions = class {
 		return await GeoPNG.processTimeseriesParallel({
 			concurrency: options.concurrency,
 			items: items,
-			name: "Professions ALR Model Training",
+			name: "Professions Superlearner Model Training",
 			task_generator: (item) => {
 				let all_keys = Object.keys(cov_obj);
 				let covariates_map = {};
 				let format_year = item.year > 2023 ? 2023 : item.year;
-				let model_path = `${this.intermediate_logit_folder}multinomial_model_${item.sex}_${item.year}.json`;
-				let target_paths = {};
+				let model_path = `${this.intermediate_logit_folder}ensemble_model_${item.cat}_${item.sex}_${item.year}.json`;
 				
 				for (let i = 0; i < all_keys.length; i++) {
 					let k = all_keys[i];
@@ -181,20 +194,21 @@ global.professions = class {
 					covariates_map[k] = info;
 				}
 				
+				let target_paths = {};
 				for (let i = 0; i < this.olivetti_categories.length; i++) {
-					let cat = this.olivetti_categories[i];
-					target_paths[cat] = `${this.standardised_targets_folder}global_${cat}_${item.sex}_${item.year}.png`;
+					let c = this.olivetti_categories[i];
+					target_paths[c] = `${this.standardised_targets_folder}global_${c}_${item.sex}_${item.year}.png`;
 				}
 				
 				return {
-					type: "train_alr_model",
+					type: "train_superlearner_model",
+					cat: item.cat,
 					categories: this.olivetti_categories,
 					covariates_map: covariates_map,
 					model_path: model_path,
-					reference_category: "agriculture",
 					options: {
-						fit_intercept: false,
-						lambda: Math.returnSafeNumber(options.lambda, 1e-3)
+						fit_intercept: true,
+						lambda: Math.returnSafeNumber(options.lambda, 1e-4)
 					},
 					target_paths: target_paths
 				};
@@ -203,7 +217,7 @@ global.professions = class {
 				let all_keys = Object.keys(cov_obj);
 				let covariates_map = {};
 				let format_year = item.year > 2023 ? 2023 : item.year;
-				let model_path = `${this.intermediate_logit_folder}multinomial_model_${item.sex}_${item.year}.json`;
+				let model_path = `${this.intermediate_logit_folder}ensemble_model_${item.cat}_${item.sex}_${item.year}.json`;
 				
 				for (let i = 0; i < all_keys.length; i++)
 					covariates_map[all_keys[i]] = cov_obj[all_keys[i]](format_year);
@@ -211,10 +225,10 @@ global.professions = class {
 				let { rasters_obj, valid_keys } = Statistics.loadCovariateRasters(covariates_map);
 				let target_rasters = {};
 				for (let i = 0; i < this.olivetti_categories.length; i++) {
-					let cat = this.olivetti_categories[i];
-					let tp = `${this.standardised_targets_folder}global_${cat}_${item.sex}_${item.year}.png`;
+					let c = this.olivetti_categories[i];
+					let tp = `${this.standardised_targets_folder}global_${c}_${item.sex}_${item.year}.png`;
 					if (!fs.existsSync(tp)) return null;
-					target_rasters[cat] = GeoPNG.loadNumberRasterImage(tp, { format: "float32" });
+					target_rasters[c] = GeoPNG.loadNumberRasterImage(tp, { format: "float32" });
 				}
 				
 				let data_len = target_rasters[this.olivetti_categories[0]].data.length;
@@ -223,12 +237,15 @@ global.professions = class {
 				for (let i = 0; i < data_len; i++) {
 					let cat_pops = [];
 					let total_pop = 0;
+					let this_cat_pop = target_rasters[item.cat].data[i];
+					this_cat_pop = (isNaN(this_cat_pop) || this_cat_pop < 0) ? 0 : this_cat_pop;
+					
 					for (let j = 0; j < this.olivetti_categories.length; j++) {
 						let cp = target_rasters[this.olivetti_categories[j]].data[i];
 						cp = (isNaN(cp) || cp < 0) ? 0 : cp;
-						cat_pops.push(cp);
 						total_pop += cp;
 					}
+					
 					if (total_pop <= 0) continue;
 					
 					let is_valid = true;
@@ -240,25 +257,37 @@ global.professions = class {
 					}
 					if (!is_valid) continue;
 					
-					let prop_row = new Float32Array(this.olivetti_categories.length);
-					let inv_tot = 1/total_pop;
-					for (let j = 0; j < this.olivetti_categories.length; j++)
-						prop_row[j] = cat_pops[j]*inv_tot;
+					let p = this_cat_pop / total_pop;
+					p = Math.max(0.001, Math.min(0.999, p));
+					let logit = Math.log(p / (1 - p));
+					
 					X.push(x_row);
-					Y.push(prop_row);
+					Y.push(logit);
 				}
 				if (X.length === 0) return null;
 				
-				return await Statistics.trainALRModel(model_path, {
-					categories: this.olivetti_categories,
+				let max_samples = 5000;
+				if (X.length > max_samples) {
+					let sampled_X = [];
+					let sampled_Y = [];
+					let step = X.length / max_samples;
+					for (let i = 0; i < max_samples; i++) {
+						let idx = Math.floor(i * step + Math.random() * step);
+						if (idx >= X.length) idx = X.length - 1;
+						sampled_X.push(X[idx]);
+						sampled_Y.push(Y[idx]);
+					}
+					X = sampled_X;
+					Y = sampled_Y;
+				}
+				
+				return await Statistics.trainSuperlearner(model_path, {
 					keys: valid_keys,
-					reference_category: "agriculture",
 					X: X,
 					Y: Y
 				}, {
-					clamp_percentage: true,
-					fit_intercept: false,
-					lambda: Math.returnSafeNumber(options.lambda, 1e-3)
+					linear_options: { fit_intercept: true, lambda: Math.returnSafeNumber(options.lambda, 1e-4) },
+					rf_options: { max_depth: 8, min_samples_split: 5, n_trees: 15 }
 				});
 			}
 		});
@@ -268,7 +297,7 @@ global.professions = class {
 	 * Builds epoch-aware historical models (Pre-Industrial, Industrial, Modern) as well as
 	 * a global geomean fallback to respect structural economic transformations across centuries.
 	 */
-	static async C_mergeMultinomialLogitModels (arg0_options) {
+	static async C_mergeHistoricalEnsembles (arg0_options) {
 		//Convert from parameters
 		let options = (arg0_options) ? arg0_options : {};
 		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
@@ -278,76 +307,79 @@ global.professions = class {
 		
 		for (let s = 0; s < this.sexes.length; s++) {
 			let sex = this.sexes[s];
-			let ensemble_models = [];
-			let max_samples = 1;
-			let models_loaded = 0;
-			let raw_models = [];
-			let unified_path = `${this.intermediate_logit_folder}multinomial_model_unified_${sex}.json`;
-			let weights_path = `${this.intermediate_logit_folder}anchor_coverage_weights_${sex}.json`;
+			for (let c = 0; c < this.olivetti_categories.length; c++) {
+				let cat = this.olivetti_categories[c];
+				let ensemble_models = [];
+				let max_samples = 1;
+				let models_loaded = 0;
+				let raw_models = [];
+				let unified_path = `${this.intermediate_logit_folder}ensemble_model_unified_${cat}_${sex}.json`;
+				let weights_path = `${this.intermediate_logit_folder}anchor_coverage_weights_${cat}_${sex}.json`;
 
-			if (!overwrite && fs.existsSync(unified_path)) {
-				console.log(`Unified Multinomial Logit model for sex (${sex}) already exists. Skipping merge.`);
-				continue;
-			}
-			
-			for (let y = 0; y < train_years.length; y++) {
-				let year = train_years[y];
-				let p = `${this.intermediate_logit_folder}multinomial_model_${sex}_${year}.json`;
-				
-				if (fs.existsSync(p)) {
-					let m = JSON.parse(fs.readFileSync(p, "utf8"));
-					let samples = Math.returnSafeNumber(m.training?.sample_count, 1000);
-					if (samples > max_samples) max_samples = samples;
-					
-					raw_models.push({
-						model_path: p,
-						sample_count: samples,
-						year: year
-					});
-					models_loaded++;
+				if (!overwrite && fs.existsSync(unified_path)) {
+					console.log(`Unified Superlearner ensemble for sex (${sex}), category (${cat}) already exists. Skipping merge.`);
+					continue;
 				}
+				
+				for (let y = 0; y < train_years.length; y++) {
+					let year = train_years[y];
+					let p = `${this.intermediate_logit_folder}ensemble_model_${cat}_${sex}_${year}.json`;
+					
+					if (fs.existsSync(p)) {
+						let m = JSON.parse(fs.readFileSync(p, "utf8"));
+						let samples = m.sample_count || m.metrics?.sample_count || 1000;
+						if (samples > max_samples) max_samples = samples;
+						
+						raw_models.push({
+							model_path: p,
+							sample_count: samples,
+							year: year
+						});
+						models_loaded++;
+					}
+				}
+				
+				if (models_loaded === 0) continue;
+				
+				let total_coverage_weight = 0;
+				for (let i = 0; i < raw_models.length; i++) {
+					let entry = raw_models[i];
+					let coverage_metric = Math.pow(entry.sample_count/max_samples, 0.3);
+					entry.coverage = coverage_metric;
+					total_coverage_weight += coverage_metric;
+				}
+				
+				for (let i = 0; i < raw_models.length; i++) {
+					let entry = raw_models[i];
+					let norm_w = (total_coverage_weight > 0) ? (entry.coverage/total_coverage_weight) : (1/raw_models.length);
+					ensemble_models.push({
+						coverage: entry.coverage,
+						model: entry.model_path,
+						sample_count: entry.sample_count,
+						weight: norm_w,
+						year: entry.year
+					});
+				}
+				
+				let unified_model = {
+					cat: cat,
+					models: ensemble_models,
+					sample_count_max: max_samples,
+					total_anchors: models_loaded,
+					type: "superlearner_ensemble"
+				};
+				
+				fs.writeFileSync(unified_path, JSON.stringify(unified_model, null, 2));
+				fs.writeFileSync(weights_path, JSON.stringify(ensemble_models, null, 2));
+				console.log(`Unified coverage-weighted Superlearner ensemble generated for sex (${sex}), category (${cat}) using ${models_loaded} anchors.`);
 			}
-			
-			if (models_loaded === 0) continue;
-			
-			let total_coverage_weight = 0;
-			for (let i = 0; i < raw_models.length; i++) {
-				let entry = raw_models[i];
-				let coverage_metric = Math.pow(entry.sample_count/max_samples, 0.3);
-				entry.coverage = coverage_metric;
-				total_coverage_weight += coverage_metric;
-			}
-			
-			for (let i = 0; i < raw_models.length; i++) {
-				let entry = raw_models[i];
-				let norm_w = (total_coverage_weight > 0) ? (entry.coverage/total_coverage_weight) : (1/raw_models.length);
-				ensemble_models.push({
-					coverage: entry.coverage,
-					model: entry.model_path,
-					sample_count: entry.sample_count,
-					weight: norm_w,
-					year: entry.year
-				});
-			}
-			
-			let unified_model = {
-				categories: this.olivetti_categories,
-				models: ensemble_models,
-				sample_count_max: max_samples,
-				total_anchors: models_loaded,
-				type: "multinomial_ensemble"
-			};
-			
-			fs.writeFileSync(unified_path, JSON.stringify(unified_model, null, 2));
-			fs.writeFileSync(weights_path, JSON.stringify(ensemble_models, null, 2));
-			console.log(`Unified coverage-weighted MNL ensemble generated for sex (${sex}) using ${models_loaded} anchors.`);
 		}
 	}
 	
 	/**
 	 * Generates theoretical percent distributions across all temporal horizons using epoch-aware models.
 	 */
-	static async D_generateMultinomialLogitRasters (arg0_options) {
+	static async D_generateEnsembleRasters (arg0_options) {
 		//Convert from parameters
 		let options = (arg0_options) ? arg0_options : {};
 		
@@ -370,59 +402,66 @@ global.professions = class {
 				let check_path = out_base.replace(".png", `_class_${this.olivetti_categories[0]}.png`);
 				if (!overwrite && fs.existsSync(check_path)) continue;
 				
-				let model_path = `${this.intermediate_logit_folder}multinomial_model_${sex}_${year}.json`;
-				let unified_path = `${this.intermediate_logit_folder}multinomial_model_unified_${sex}.json`;
-				let has_local_anchor = fs.existsSync(model_path);
-				let resolved_model = model_path;
+				let resolved_models = {};
+				
+				for (let c = 0; c < this.olivetti_categories.length; c++) {
+					let cat = this.olivetti_categories[c];
+					let model_path = `${this.intermediate_logit_folder}ensemble_model_${cat}_${sex}_${year}.json`;
+					let unified_path = `${this.intermediate_logit_folder}ensemble_model_unified_${cat}_${sex}.json`;
+					let has_local_anchor = fs.existsSync(model_path);
+					let resolved_model = model_path;
 
-				if (fs.existsSync(unified_path)) {
-					let unified_data = JSON.parse(fs.readFileSync(unified_path, "utf8"));
-					
-					if (unified_data.type === "multinomial_ensemble" && Array.isArray(unified_data.models)) {
-						let dynamic_models = [];
-						let total_w = 0;
+					if (fs.existsSync(unified_path)) {
+						let unified_data = JSON.parse(fs.readFileSync(unified_path, "utf8"));
 						
-						for (let m = 0; m < unified_data.models.length; m++) {
-							let entry = unified_data.models[m];
-							let anchor_year = entry.year || 1950;
-							let dt = Math.abs(year - anchor_year);
-							let kernel = Math.exp(-dt/50);
-							let w = (entry.weight || 1)*kernel;
-							dynamic_models.push({ model: entry.model, weight: w, year: anchor_year });
-							total_w += w;
-						}
-						
-						if (total_w > 0) {
-							for (let m = 0; m < dynamic_models.length; m++)
-								dynamic_models[m].weight /= total_w;
-						}
-						
-						if (has_local_anchor) {
-							let local_idx = dynamic_models.findIndex(m => m.model === model_path);
-							for (let m = 0; m < dynamic_models.length; m++)
-								dynamic_models[m].weight *= 0.8;
-							if (local_idx !== -1) {
-								dynamic_models[local_idx].weight += 0.2;
-							} else {
-								dynamic_models.push({ model: model_path, weight: 0.2, year: year });
+						if (unified_data.type === "superlearner_ensemble" && Array.isArray(unified_data.models)) {
+							let dynamic_models = [];
+							let total_w = 0;
+							
+							for (let m = 0; m < unified_data.models.length; m++) {
+								let entry = unified_data.models[m];
+								let anchor_year = entry.year || 1950;
+								let dt = Math.abs(year - anchor_year);
+								let kernel = Math.exp(-dt/50);
+								let w = (entry.weight || 1)*kernel;
+								dynamic_models.push({ model: entry.model, weight: w, year: anchor_year });
+								total_w += w;
 							}
+							
+							if (total_w > 0) {
+								for (let m = 0; m < dynamic_models.length; m++)
+									dynamic_models[m].weight /= total_w;
+							}
+							
+							if (has_local_anchor) {
+								let local_idx = dynamic_models.findIndex(m => m.model === model_path);
+								for (let m = 0; m < dynamic_models.length; m++)
+									dynamic_models[m].weight *= 0.8;
+								if (local_idx !== -1) {
+									dynamic_models[local_idx].weight += 0.2;
+								} else {
+									dynamic_models.push({ model: model_path, weight: 0.2, year: year });
+								}
+							}
+							
+							resolved_model = {
+								cat: cat,
+								models: dynamic_models,
+								target_year: year,
+								type: "superlearner_ensemble"
+							};
+						} else {
+							resolved_model = has_local_anchor ? model_path : unified_path;
 						}
-						
-						resolved_model = {
-							categories: this.olivetti_categories,
-							models: dynamic_models,
-							target_year: year,
-							type: "multinomial_ensemble"
-						};
-					} else {
-						resolved_model = has_local_anchor ? model_path : unified_path;
+					} else if (!has_local_anchor) {
+						resolved_model = null;
 					}
-				} else if (!has_local_anchor) {
-					resolved_model = null;
+					
+					if (resolved_model) resolved_models[cat] = resolved_model;
 				}
 
-				if (resolved_model)
-					items.push({ model_obj: resolved_model, out_base: out_base, sex: sex, year: year });
+				if (Object.keys(resolved_models).length === this.olivetti_categories.length)
+					items.push({ resolved_models: resolved_models, out_base: out_base, sex: sex, year: year });
 			}
 		}
 		
@@ -432,7 +471,7 @@ global.professions = class {
 		return await GeoPNG.processTimeseriesParallel({
 			concurrency: options.concurrency,
 			items: items,
-			name: "Professions ALR Raster Generation",
+			name: "Professions Superlearner Raster Generation",
 			task_generator: (item) => {
 				let all_keys = Object.keys(cov_obj);
 				let covariates_map = {};
@@ -445,9 +484,9 @@ global.professions = class {
 				}
 				
 				return {
-					type: "generate_alr_raster",
+					type: "generate_superlearner_raster",
 					covariates_map: covariates_map,
-					model_obj: item.model_obj,
+					resolved_models: item.resolved_models,
 					options: {
 						format: "float32",
 						mask_uninhabited: true
@@ -462,10 +501,87 @@ global.professions = class {
 				for (let i = 0; i < all_keys.length; i++)
 					covariates_map[all_keys[i]] = cov_obj[all_keys[i]](format_year);
 				
-				await Statistics.generateALRRaster(item.out_base, {
-					covariates_obj: covariates_map,
-					model_obj: item.model_obj
-				});
+				let { rasters_obj, valid_keys } = Statistics.loadCovariateRasters(covariates_map);
+				
+				// Evaluate superlearner for each category, and convert back to probabilities
+				let data_len = rasters_obj[valid_keys[0]].data.length;
+				let width = rasters_obj[valid_keys[0]].width;
+				let height = rasters_obj[valid_keys[0]].height;
+				let output_arrays = {};
+				let loaded_models = {};
+				
+				for (let i = 0; i < this.olivetti_categories.length; i++) {
+					let cat = this.olivetti_categories[i];
+					output_arrays[cat] = new Float32Array(data_len);
+					
+					let model_conf = item.resolved_models[cat];
+					if (model_conf.type === "superlearner_ensemble") {
+						loaded_models[cat] = { type: "ensemble", models: [] };
+						for (let m = 0; m < model_conf.models.length; m++) {
+							loaded_models[cat].models.push({
+								weight: model_conf.models[m].weight,
+								obj: JSON.parse(fs.readFileSync(model_conf.models[m].model, "utf8"))
+							});
+						}
+					} else {
+						loaded_models[cat] = { type: "single", obj: JSON.parse(fs.readFileSync(model_conf, "utf8")) };
+					}
+				}
+				
+				for (let i = 0; i < data_len; i++) {
+					let is_valid = true;
+					let row_obj = {};
+					for (let j = 0; j < valid_keys.length; j++) {
+						let key = valid_keys[j];
+						let val = rasters_obj[key].data[i];
+						if (isNaN(val)) { is_valid = false; break; }
+						row_obj[key] = val;
+					}
+					
+					if (is_valid) {
+						let sum_p = 0;
+						let p_vals = {};
+						
+						for (let j = 0; j < this.olivetti_categories.length; j++) {
+							let cat = this.olivetti_categories[j];
+							let m_conf = loaded_models[cat];
+							let logit_val = 0;
+							
+							if (m_conf.type === "ensemble") {
+								for (let m = 0; m < m_conf.models.length; m++) {
+									logit_val += m_conf.models[m].weight * Statistics.evaluateSuperlearner(m_conf.models[m].obj, row_obj);
+								}
+							} else {
+								logit_val = Statistics.evaluateSuperlearner(m_conf.obj, row_obj);
+							}
+							
+							let p = Math.exp(logit_val) / (1 + Math.exp(logit_val));
+							p_vals[cat] = p;
+							sum_p += p;
+						}
+						
+						for (let j = 0; j < this.olivetti_categories.length; j++) {
+							let cat = this.olivetti_categories[j];
+							output_arrays[cat][i] = (sum_p > 0) ? (p_vals[cat] / sum_p) : 0;
+						}
+					} else {
+						for (let j = 0; j < this.olivetti_categories.length; j++) {
+							output_arrays[this.olivetti_categories[j]][i] = NaN;
+						}
+					}
+				}
+				
+				for (let i = 0; i < this.olivetti_categories.length; i++) {
+					let cat = this.olivetti_categories[i];
+					let file_path = item.out_base.replace(".png", `_class_${cat}.png`);
+					GeoPNG.saveNumberRasterImage({
+						file_path: file_path,
+						format: "float32",
+						height: height,
+						width: width,
+						function: (idx) => output_arrays[cat][idx]
+					});
+				}
 			}
 		});
 	}
@@ -675,9 +791,9 @@ global.professions = class {
 		}
 		
 		if (!options.exclude.includes("A")) await this.A_standardiseTargets(options);
-		if (!options.exclude.includes("B")) await this.B_trainMultinomialLogitModels(options);
-		if (!options.exclude.includes("C")) await this.C_mergeMultinomialLogitModels(options);
-		if (!options.exclude.includes("D")) await this.D_generateMultinomialLogitRasters(options);
+		if (!options.exclude.includes("B")) await this.B_trainIndependentEnsembles(options);
+		if (!options.exclude.includes("C")) await this.C_mergeHistoricalEnsembles(options);
+		if (!options.exclude.includes("D")) await this.D_generateEnsembleRasters(options);
 		if (!options.exclude.includes("E")) await this.E_clampToPercentagesAndAggregates(options);
 	}
 };

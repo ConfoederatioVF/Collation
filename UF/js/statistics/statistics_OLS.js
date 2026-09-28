@@ -528,15 +528,15 @@
 	 */
 	Statistics.trainOLSModel = async function (arg0_output_file_path, arg1_covariates_obj, arg2_options) {
 		//Convert from parameters
-		let output_file_path = path.resolve(arg0_output_file_path);
+		let output_file_path = (arg0_output_file_path) ? path.resolve(arg0_output_file_path) : undefined;
 		let covariates_obj = arg1_covariates_obj;
 		let options = (arg2_options) ? arg2_options : {};
 		
 		//Initialise options
-		if (!options.key) options.key = output_file_path;
+		if (!options.key) options.key = output_file_path || "in_memory_model";
 		
 		//Declare local instance variables
-		let basename = path.basename(output_file_path);
+		let basename = (output_file_path) ? path.basename(output_file_path) : "in_memory_model";
 		let { keys, X, Y } = covariates_obj;
 		
 		console.log(`- Performing OLS for ${basename}.`);
@@ -607,14 +607,33 @@
 			coefficients_obj[keys[j]] = raw_beta;
 		}
 		
+		//Calculate train MSE and RMSE
+		let sum_sq_err = 0;
+		for (let i = 0; i < N; i++) {
+			let pred = 0;
+			for (let j = 0; j < K; j++) {
+				pred += X[i][j] * (coefficients_obj[keys[j]] || 0);
+			}
+			sum_sq_err += Math.pow(pred - Y[i], 2);
+		}
+		let mse = sum_sq_err / N;
+		let rmse = Math.sqrt(mse);
+		
 		//Save model to JSON
 		let model_data_obj = {
 			key: options.key,
-			coefficients: coefficients_obj
+			keys: keys,
+			coefficients: coefficients_obj,
+			metrics: {
+				mse: mse,
+				rmse: rmse
+			}
 		};
 		
-		fs.writeFileSync(output_file_path, JSON.stringify(model_data_obj, null, 2));
-		console.log(`OLS model data for ${options.key} saved successfully in ${output_file_path}.`);
+		if (output_file_path) {
+			fs.writeFileSync(output_file_path, JSON.stringify(model_data_obj, null, 2));
+			console.log(`OLS model data for ${options.key} saved successfully in ${output_file_path}.`);
+		}
 		
 		//Return statement
 		return model_data_obj;

@@ -1405,6 +1405,327 @@ let handleTask = async function (task) {
     return { output_file_path: output_file_path, success: true };
   }
 
+  if (task_type === "train_superlearner_model") {
+    let categories = task.categories || [];
+    let covariates_map = task.covariates_map || {};
+    let model_path = path.resolve(task.model_path);
+    let opt = task.options || {};
+    let target_paths = task.target_paths || {};
+    
+    let { rasters_obj, valid_keys } = Statistics.loadCovariateRasters(covariates_map);
+    let target_rasters = {};
+    for (let i = 0; i < categories.length; i++) {
+      let c = categories[i];
+      let p = target_paths[c];
+      if (!p || !fs.existsSync(p)) {
+        console.error(`[GeoWorker] Missing target path: ${p}`);
+        return null;
+      }
+      target_rasters[c] = GeoPNG.loadNumberRasterImage(p, { format: "float32" });
+    }
+    
+    let data_len = target_rasters[categories[0]].data.length;
+    let X = [];
+    let Y = [];
+    for (let i = 0; i < data_len; i++) {
+      let cat_pops = [];
+      let total_pop = 0;
+      let this_cat_pop = target_rasters[task.cat].data[i];
+      this_cat_pop = (isNaN(this_cat_pop) || this_cat_pop < 0) ? 0 : this_cat_pop;
+      
+      for (let j = 0; j < categories.length; j++) {
+        let cp = target_rasters[categories[j]].data[i];
+        cp = (isNaN(cp) || cp < 0) ? 0 : cp;
+        total_pop += cp;
+      }
+      
+      if (total_pop <= 0) continue;
+      
+      let is_valid = true;
+      let x_row = [];
+      for (let j = 0; j < valid_keys.length; j++) {
+        let val = rasters_obj[valid_keys[j]].data[i];
+        if (isNaN(val)) { is_valid = false; break; }
+        x_row.push(val);
+      }
+      if (!is_valid) continue;
+      
+      let p = this_cat_pop / total_pop;
+      p = Math.max(0.001, Math.min(0.999, p));
+      let logit = Math.log(p / (1 - p));
+      
+      X.push(x_row);
+      Y.push(logit);
+    }
+    if (X.length === 0) {
+      console.error(`[GeoWorker] X array was empty for ${task.cat} / ${task.year}.`);
+      return null;
+    }
+    
+    //Subsample to 5,000 maximum points for performance
+    let max_samples = 5000;
+    if (X.length > max_samples) {
+      let sampled_X = [];
+      let sampled_Y = [];
+      let step = X.length / max_samples;
+      for (let i = 0; i < max_samples; i++) {
+        let idx = Math.floor(i * step + Math.random() * step);
+        if (idx >= X.length) idx = X.length - 1;
+        sampled_X.push(X[idx]);
+        sampled_Y.push(Y[idx]);
+      }
+      X = sampled_X;
+      Y = sampled_Y;
+    }
+    
+    let model = await Statistics.trainSuperlearner(model_path, {
+      keys: valid_keys,
+      X: X,
+      Y: Y
+    }, {
+      linear_options: { fit_intercept: true, lambda: Math.returnSafeNumber(opt.lambda, 1e-4) },
+      rf_options: { max_depth: 8, min_samples_split: 5, n_trees: 15 }
+    });
+    return { model_path: model_path, success: !!model };
+  }
+  
+  if (task_type === "generate_superlearner_raster") {
+    let output_file_path = task.output_file_path;
+    let covariates_map = task.covariates_map;
+    let opt = task.options || {};
+    
+    let { rasters_obj, valid_keys } = Statistics.loadCovariateRasters(covariates_map);
+    
+    let data_len = rasters_obj[valid_keys[0]].data.length;
+    let width = rasters_obj[valid_keys[0]].width;
+    let height = rasters_obj[valid_keys[0]].height;
+    let output_arrays = {};
+    let loaded_models = {};
+    
+    let keys = Object.keys(task.resolved_models);
+    for (let i = 0; i < keys.length; i++) {
+      let cat = keys[i];
+      output_arrays[cat] = new Float32Array(data_len);
+      
+      let model_conf = task.resolved_models[cat];
+      if (model_conf.type === "superlearner_ensemble") {
+        loaded_models[cat] = { type: "ensemble", models: [] };
+        for (let m = 0; m < model_conf.models.length; m++) {
+          loaded_models[cat].models.push({
+            weight: model_conf.models[m].weight,
+            obj: JSON.parse(fs.readFileSync(model_conf.models[m].model, "utf8"))
+          });
+        }
+      } else {
+        loaded_models[cat] = { type: "single", obj: JSON.parse(fs.readFileSync(model_conf, "utf8")) };
+      }
+    }
+    
+    for (let i = 0; i < data_len; i++) {
+      let is_valid = true;
+      let row_obj = {};
+      for (let j = 0; j < valid_keys.length; j++) {
+        let key = valid_keys[j];
+        let val = rasters_obj[key].data[i];
+        if (isNaN(val)) { is_valid = false; break; }
+        row_obj[key] = val;
+      }
+      
+      if (is_valid) {
+        let sum_p = 0;
+        let p_vals = {};
+        
+        for (let j = 0; j < keys.length; j++) {
+          let cat = keys[j];
+          let m_conf = loaded_models[cat];
+          let logit_val = 0;
+          
+          if (m_conf.type === "ensemble") {
+            for (let m = 0; m < m_conf.models.length; m++) {
+              logit_val += m_conf.models[m].weight * Statistics.evaluateSuperlearner(m_conf.models[m].obj, row_obj);
+            }
+          } else {
+            logit_val = Statistics.evaluateSuperlearner(m_conf.obj, row_obj);
+          }
+          
+          let p = Math.exp(logit_val) / (1 + Math.exp(logit_val));
+          p_vals[cat] = p;
+          sum_p += p;
+        }
+        
+        for (let j = 0; j < keys.length; j++) {
+          let cat = keys[j];
+          output_arrays[cat][i] = (sum_p > 0) ? (p_vals[cat] / sum_p) : 0;
+        }
+      } else {
+        for (let j = 0; j < keys.length; j++) {
+          output_arrays[keys[j]][i] = NaN;
+        }
+      }
+    }
+    
+    for (let i = 0; i < keys.length; i++) {
+      let cat = keys[i];
+      let file_path = output_file_path.replace(".png", `_class_${cat}.png`);
+      GeoPNG.saveNumberRasterImage({
+        file_path: file_path,
+        format: "float32",
+        height: height,
+        width: width,
+        function: (idx) => output_arrays[cat][idx]
+      });
+    }
+    
+    return { output_file_path: output_file_path, success: true };
+  }
+
+  //8b. Clamp Professions to Percentages and Aggregates
+  if (task_type === "clamp_professions") {
+    let age_sex_folder = task.age_sex_folder;
+    let categories = task.categories;
+    let lfpr_folder = task.lfpr_folder;
+    let logit_rasters_folder = task.logit_rasters_folder;
+    let olivetti_categories = task.olivetti_categories;
+    let output_aggregates = task.output_aggregates;
+    let output_percentages = task.output_percentages;
+    let sexes = task.sexes;
+    let working_cohorts = task.working_cohorts;
+    let year = task.year;
+
+    let agg_t = {};
+    for (let i = 0; i < categories.length; i++) agg_t[categories[i]] = null;
+    let height = 2160;
+    let pop_t = null;
+    let width = 4320;
+
+    for (let s = 0; s < sexes.length; s++) {
+      let sex = sexes[s];
+      let lfpr_path = `${lfpr_folder}lfpr_${sex}_${year}.png`;
+      if (!fs.existsSync(lfpr_path)) continue;
+      let lfpr_raster = GeoPNG.loadNumberRasterImage(lfpr_path, { format: "float32" });
+
+      width = lfpr_raster.width;
+      height = lfpr_raster.height;
+
+      let data_len = lfpr_raster.data.length;
+      let pop_raster = new Float32Array(data_len);
+
+      for (let i = 0; i < working_cohorts.length; i++) {
+        let cp = `${age_sex_folder}${sex}_${working_cohorts[i]}_${year}.png`;
+        if (fs.existsSync(cp)) {
+          let c_raster = GeoPNG.loadNumberRasterImage(cp, { format: "float32" });
+          for (let j = 0; j < data_len; j++) {
+            let val = c_raster.data[j];
+            if (!isNaN(val) && val > 0) pop_raster[j] += val;
+          }
+        }
+      }
+
+      if (!pop_t) pop_t = new Float32Array(data_len);
+      for (let i = 0; i < data_len; i++) pop_t[i] += pop_raster[i];
+
+      let prob_rasters = {};
+      let missing_probs = false;
+
+      for (let i = 0; i < olivetti_categories.length; i++) {
+        let path = `${logit_rasters_folder}logit_${sex}_${year}_class_${olivetti_categories[i]}.png`;
+        if (!fs.existsSync(path)) { missing_probs = true; break; }
+        prob_rasters[olivetti_categories[i]] = GeoPNG.loadNumberRasterImage(path, { format: "float32" });
+      }
+
+      if (missing_probs) continue;
+
+      let prob_sum_working = new Float32Array(data_len);
+      for (let i = 0; i < olivetti_categories.length; i++) {
+        let data = prob_rasters[olivetti_categories[i]].data;
+        for (let j = 0; j < data_len; j++) {
+          let val = data[j];
+          if (!isNaN(val) && val > 0) prob_sum_working[j] += val;
+        }
+      }
+
+      for (let i = 0; i < categories.length; i++) {
+        let c = categories[i];
+        if (!agg_t[c]) agg_t[c] = new Float32Array(data_len);
+
+        let pct_arr = new Float32Array(data_len);
+        let agg_arr = new Float32Array(data_len);
+        let prob_data = prob_rasters[c] ? prob_rasters[c].data : null;
+
+        for (let j = 0; j < data_len; j++) {
+          let pop = pop_raster[j];
+          if (pop <= 0) continue;
+
+          let lfpr = lfpr_raster.data[j];
+          if (isNaN(lfpr)) lfpr = 0;
+
+          let final_pct = 0;
+          if (c === "not_in_work") {
+            final_pct = Math.max(0, 1.0 - lfpr);
+          } else {
+            let sum_w = prob_sum_working[j];
+            let p_val = prob_data[j];
+            if (isNaN(p_val) || p_val < 0) p_val = 0;
+
+            if (sum_w <= 0) {
+              final_pct = lfpr / olivetti_categories.length;
+            } else {
+              final_pct = lfpr * (p_val / sum_w);
+            }
+          }
+
+          pct_arr[j] = final_pct;
+          agg_arr[j] = final_pct * pop;
+          agg_t[c][j] += agg_arr[j];
+        }
+
+        GeoPNG.saveNumberRasterImage({
+          file_path: `${output_percentages}${c}_${sex}_${year}.png`,
+          format: "float32",
+          height: height,
+          width: width,
+          function: (idx) => pct_arr[idx]
+        });
+
+        GeoPNG.saveNumberRasterImage({
+          file_path: `${output_aggregates}${c}_${sex}_${year}.png`,
+          format: "float32",
+          height: height,
+          width: width,
+          function: (idx) => agg_arr[idx]
+        });
+      }
+    }
+
+    if (pop_t) {
+      for (let i = 0; i < categories.length; i++) {
+        let c = categories[i];
+
+        GeoPNG.saveNumberRasterImage({
+          file_path: `${output_percentages}${c}_t_${year}.png`,
+          format: "float32",
+          height: height,
+          width: width,
+          function: (idx) => {
+            let total_p = pop_t[idx];
+            if (total_p <= 0) return 0;
+            return agg_t[c][idx] / total_p;
+          }
+        });
+
+        GeoPNG.saveNumberRasterImage({
+          file_path: `${output_aggregates}${c}_t_${year}.png`,
+          format: "float32",
+          height: height,
+          width: width,
+          function: (idx) => agg_t[c][idx]
+        });
+      }
+    }
+
+    return { success: true, year: year };
+  }
+
   //9. Clamp Cohorts with Isotonic (PAVA), Whittaker-Henderson, or Piecewise-Kernel Graduation
   if (task_type === "clamp_cohorts_piecewise" || task_type === "clamp_cohorts_isotonic" || task_type === "clamp_cohorts_to_stadester" || task_type === "clamp_cohorts_whittaker") {
     let cohorts = task.cohorts || [];
