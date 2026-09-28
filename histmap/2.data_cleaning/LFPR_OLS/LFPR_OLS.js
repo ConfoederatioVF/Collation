@@ -180,66 +180,56 @@ global.LFPR_OLS = class {
 					let popc_raster = GeoPNG.loadNumberRasterImage(popc_path, { format: "float32" });
 					let ols_raster = GeoPNG.loadNumberRasterImage(ols_path, { format: "float32" });
 					
-					let valid_pixels = [];
-					let sum = 0;
+					let has_valid_pixels = false;
 					for (let i = 0; i < ols_raster.data.length; i++) {
-						if (landarea_raster.data[i] > 0 && popc_raster.data[i] > 0) {
-							let local_value = ols_raster.data[i];
-							if (!isNaN(local_value)) {
-								valid_pixels.push(local_value);
-								sum += local_value;
-							}
+						if (landarea_raster.data[i] > 0 && popc_raster.data[i] > 0 && !isNaN(ols_raster.data[i])) {
+							has_valid_pixels = true;
+							break;
 						}
 					}
 					
-					if (valid_pixels.length === 0) return;
-					valid_pixels.sort((a, b) => a - b);
+					if (!has_valid_pixels) return;
 					
-					let N = valid_pixels.length;
-					let mean = sum / N;
-					let sq_sum = 0;
-					for (let i = 0; i < N; i++) sq_sum += Math.pow(valid_pixels[i] - mean, 2);
-					let std = Math.sqrt(sq_sum / N);
+					// Robust Statistics for Z-Score Normalisation
+					let valid_values = [];
+					for (let i = 0; i < ols_raster.data.length; i++) {
+						if (landarea_raster.data[i] > 0 && popc_raster.data[i] > 0 && !isNaN(ols_raster.data[i])) {
+							valid_values.push(ols_raster.data[i]);
+						}
+					}
 					
-					// Tukey's fences (per-year, from the actual OLS distribution)
-					let q1 = valid_pixels[Math.floor(N * 0.25)];
-					let q3 = valid_pixels[Math.floor(N * 0.75)];
-					let iqr = q3 - q1;
-					let alpha = (iqr > 1e-5) ? iqr : ((std > 1e-5) ? std : 0.01);
+					valid_values.sort((a, b) => a - b);
+					let p50 = valid_values[Math.floor(valid_values.length * 0.5)];
+					let p25 = valid_values[Math.floor(valid_values.length * 0.25)];
+					let p75 = valid_values[Math.floor(valid_values.length * 0.75)];
+					let iqr = p75 - p25;
+					let robust_std = iqr / 1.349;
+					if (robust_std < 0.0001) robust_std = 0.0001; // Avoid division by zero
 					
-					let t_lower = q1 - (1.5 * alpha);
-					let t_upper = q3 + (1.5 * alpha);
-					
-					let regularise = function (x) {
-						if (x > t_upper) return t_upper + alpha * Math.log(1 + ((x - t_upper) / alpha));
-						if (x < t_lower) return t_lower - alpha * Math.log(1 + ((t_lower - x) / alpha));
-						return x;
+					// Historical parameters based on expected global LFPR trends
+					let get_historical_mean = function (local_sex, local_year) {
+						if (local_sex === "m") return 0.85;
+						if (local_year < 1700) return 0.55;
+						if (local_year >= 1700 && local_year < 1900) return 0.55 - ((local_year - 1700) / 200) * 0.20;
+						return 0.35 + ((local_year - 1900) / 125) * 0.20;
 					};
 					
-					// Full Tukey normalisation range (guaranteed to land within [0, 1])
-					let reg_min = regularise(valid_pixels[0]);
-					let reg_max = regularise(valid_pixels[N - 1]);
-					let reg_range = reg_max - reg_min;
-					
-					let tukey_counterfactual = function (x) {
-						let local_regularised = regularise(x);
-						return (reg_range > 0) ? ((local_regularised - reg_min) / reg_range) : 0.5;
-					};
+					let hist_mean = get_historical_mean(sex, year);
+					let hist_std = (sex === "m") ? 0.08 : 0.15;
+					let min_bound = (sex === "m") ? 0.60 : 0.05;
+					let max_bound = (sex === "m") ? 0.98 : 0.90;
 					
 					let normalised_map = new Float32Array(ols_raster.data.length);
 					for (let i = 0; i < ols_raster.data.length; i++) {
 						if (landarea_raster.data[i] > 0 && popc_raster.data[i] > 0) {
 							let local_value = ols_raster.data[i];
-							if (isNaN(local_value)) continue;
-							
-							if (local_value >= 0.0 && local_value <= 1.0) {
-								// Valid pixel: pass through untouched
-								normalised_map[i] = local_value;
-							} else {
-								// Invalid pixel: replace with the full Tukey counterfactual,
-								// which is guaranteed to land in [0, 1] and preserves variance
-								let counterfactual = tukey_counterfactual(local_value);
-								normalised_map[i] = Math.max(0.0, Math.min(1.0, counterfactual));
+							if (!isNaN(local_value)) {
+								// Standardise and map to historical distribution
+								let z = (local_value - p50) / robust_std;
+								let mapped_val = hist_mean + z * hist_std;
+								
+								// Clamp to plausible historical bounds
+								normalised_map[i] = Math.max(min_bound, Math.min(max_bound, mapped_val));
 							}
 						}
 					}
@@ -310,11 +300,42 @@ global.LFPR_OLS = class {
 
 				let processed_data = new Float32Array(normalised_raster.data.length);
 
-				// 1. Initial Clamping (prioritise ground-truth Olivetti targets)
+				// 1. Cross-Entropy Spatial Calibration (Logit Shift)
+				// Pass 1: Accumulate population-weighted means for each target group
+				let t_groups = {};
+				
 				for (let i = 0; i < processed_data.length; i++) {
 					let t_val = target_raster ? target_raster.data[i] : 0;
 					let n_val = normalised_raster.data[i];
-					processed_data[i] = (t_val > 0 && !isNaN(t_val)) ? t_val : (isNaN(n_val) ? 0 : n_val);
+					let pop = popc_raster ? popc_raster.data[i] : 0;
+					
+					if (t_val > 0 && !isNaN(t_val) && !isNaN(n_val)) {
+						if (!t_groups[t_val]) t_groups[t_val] = { sum_n: 0, pop: 0 };
+						t_groups[t_val].sum_n += n_val * pop;
+						t_groups[t_val].pop += pop;
+					}
+				}
+				
+				// Pass 2: Apply Logit Shift to align local distribution with macro targets
+				let logit = (p) => {
+					let clamp_p = Math.max(0.0001, Math.min(0.9999, p));
+					return Math.log(clamp_p / (1 - clamp_p));
+				};
+				let sigmoid = (x) => 1 / (1 + Math.exp(-x));
+				
+				for (let i = 0; i < processed_data.length; i++) {
+					let t_val = target_raster ? target_raster.data[i] : 0;
+					let n_val = normalised_raster.data[i];
+					
+					if (t_val > 0 && !isNaN(t_val) && !isNaN(n_val) && t_groups[t_val]) {
+						let group = t_groups[t_val];
+						let n_mean = group.pop > 0 ? (group.sum_n / group.pop) : n_val;
+						
+						let shift = logit(t_val) - logit(n_mean);
+						processed_data[i] = sigmoid(logit(n_val) + shift);
+					} else {
+						processed_data[i] = isNaN(n_val) ? 0 : n_val;
+					}
 				}
 
 				// 2. Gravity Interpolation (Pre-1850) -> Prevent anachronistic sharp borders
