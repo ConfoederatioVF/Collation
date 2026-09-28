@@ -1,6 +1,5 @@
 global.professions = class {
 	static cf = `${h3}/professions/`;
-	
 	static covariates_obj = () => {
 		let return_obj = {
 			...age_sex.covariates_obj,
