@@ -33,24 +33,19 @@ global.professions = class {
 		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
 
 		if (!fs.existsSync(this.standardised_targets_folder)) fs.mkdirSync(this.standardised_targets_folder, { recursive: true });
-		
 		let years = landuse_HYDE.sorted_hyde_years.filter(y => y >= 1750 && y <= 2025);
 		
 		for (let y = 0; y < years.length; y++) {
 			let year = years[y];
-			
 			for (let s = 0; s < this.sexes.length; s++) {
 				let sex = this.sexes[s];
-				
 				let all_exist = true;
-				for (let i = 0; i < this.categories.length; i++) {
+				for (let i = 0; i < this.categories.length; i++)
 					if (!fs.existsSync(`${this.standardised_targets_folder}global_${this.categories[i]}_${sex}_${year}.png`)) all_exist = false;
-				}
 				if (!overwrite && all_exist) continue;
 				
 				let olivetti_rasters = {};
 				let has_olivetti = true;
-				
 				for (let i = 0; i < this.olivetti_categories.length; i++) {
 					let c = this.olivetti_categories[i];
 					let path = `${professions_Olivetti.output_rasters}${c}_${sex}_${year}.png`;
@@ -60,12 +55,10 @@ global.professions = class {
 						has_olivetti = false;
 					}
 				}
-				
 				if (!has_olivetti) continue;
 				
 				let data_len = olivetti_rasters[this.olivetti_categories[0]].data.length;
 				let sum_olivetti = 0;
-				
 				for (let i = 0; i < data_len; i++) {
 					for (let j = 0; j < this.olivetti_categories.length; j++) {
 						let val = olivetti_rasters[this.olivetti_categories[j]].data[i];
@@ -91,7 +84,6 @@ global.professions = class {
 				for (let i = 0; i < this.working_cohorts.length; i++) {
 					let cohort = this.working_cohorts[i];
 					let cp = `${global.age_sex.output_rasters}${sex}_${cohort}_${year}.png`;
-					
 					if (fs.existsSync(cp)) {
 						let c_raster = GeoPNG.loadNumberRasterImage(cp, { format: "float32" });
 						for (let j = 0; j < data_len; j++) {
@@ -116,12 +108,10 @@ global.professions = class {
 							
 							if (c === "not_in_work") {
 								let lfpr = lfpr_raster.data[idx];
-								if (isNaN(lfpr)) lfpr = 0;
-								return pop * Math.max(0, (1.0 - lfpr));
+								return pop * Math.max(0, (1.0 - (isNaN(lfpr) ? 0 : lfpr)));
 							} else {
 								let rate = olivetti_rasters[c].data[idx];
-								if (isNaN(rate)) rate = 0;
-								return pop * rate;
+								return pop * (isNaN(rate) ? 0 : rate);
 							}
 						}
 					});
@@ -158,8 +148,7 @@ global.professions = class {
 				let all_targets_exist = true;
 				for (let c = 0; c < this.olivetti_categories.length; c++) {
 					let cat = this.olivetti_categories[c];
-					let target_path = `${this.standardised_targets_folder}global_${cat}_${sex}_${year}.png`;
-					if (!fs.existsSync(target_path)) {
+					if (!fs.existsSync(`${this.standardised_targets_folder}global_${cat}_${sex}_${year}.png`)) {
 						all_targets_exist = false;
 						break;
 					}
@@ -187,14 +176,8 @@ global.professions = class {
 				let covariates_map = {};
 				let format_year = item.year > 2023 ? 2023 : item.year;
 				let model_path = `${this.intermediate_logit_folder}ensemble_model_${item.cat}_${item.sex}_${item.year}.json`;
-				
-				for (let i = 0; i < all_keys.length; i++) {
-					let k = all_keys[i];
-					let info = cov_obj[k](format_year);
-					covariates_map[k] = info;
-				}
-				
 				let target_paths = {};
+				for (let i = 0; i < all_keys.length; i++) covariates_map[all_keys[i]] = cov_obj[all_keys[i]](format_year);
 				for (let i = 0; i < this.olivetti_categories.length; i++) {
 					let c = this.olivetti_categories[i];
 					target_paths[c] = `${this.standardised_targets_folder}global_${c}_${item.sex}_${item.year}.png`;
@@ -206,10 +189,7 @@ global.professions = class {
 					categories: this.olivetti_categories,
 					covariates_map: covariates_map,
 					model_path: model_path,
-					options: {
-						fit_intercept: true,
-						lambda: Math.returnSafeNumber(options.lambda, 1e-4)
-					},
+					options: { fit_intercept: true, lambda: Math.returnSafeNumber(options.lambda, 1e-4) },
 					target_paths: target_paths
 				};
 			},
@@ -324,21 +304,14 @@ global.professions = class {
 				for (let y = 0; y < train_years.length; y++) {
 					let year = train_years[y];
 					let p = `${this.intermediate_logit_folder}ensemble_model_${cat}_${sex}_${year}.json`;
-					
 					if (fs.existsSync(p)) {
 						let m = JSON.parse(fs.readFileSync(p, "utf8"));
 						let samples = m.sample_count || m.metrics?.sample_count || 1000;
 						if (samples > max_samples) max_samples = samples;
-						
-						raw_models.push({
-							model_path: p,
-							sample_count: samples,
-							year: year
-						});
+						raw_models.push({ model_path: p, sample_count: samples, year: year });
 						models_loaded++;
 					}
 				}
-				
 				if (models_loaded === 0) continue;
 				
 				let total_coverage_weight = 0;
@@ -348,7 +321,6 @@ global.professions = class {
 					entry.coverage = coverage_metric;
 					total_coverage_weight += coverage_metric;
 				}
-				
 				for (let i = 0; i < raw_models.length; i++) {
 					let entry = raw_models[i];
 					let norm_w = (total_coverage_weight > 0) ? (entry.coverage/total_coverage_weight) : (1/raw_models.length);
@@ -429,15 +401,12 @@ global.professions = class {
 								total_w += w;
 							}
 							
-							if (total_w > 0) {
-								for (let m = 0; m < dynamic_models.length; m++)
-									dynamic_models[m].weight /= total_w;
-							}
+							if (total_w > 0)
+								for (let m = 0; m < dynamic_models.length; m++) dynamic_models[m].weight /= total_w;
 							
 							if (has_local_anchor) {
 								let local_idx = dynamic_models.findIndex(m => m.model === model_path);
-								for (let m = 0; m < dynamic_models.length; m++)
-									dynamic_models[m].weight *= 0.8;
+								for (let m = 0; m < dynamic_models.length; m++) dynamic_models[m].weight *= 0.8;
 								if (local_idx !== -1) {
 									dynamic_models[local_idx].weight += 0.2;
 								} else {
@@ -477,20 +446,12 @@ global.professions = class {
 				let all_keys = Object.keys(cov_obj);
 				let covariates_map = {};
 				let format_year = item.year > 2023 ? 2023 : item.year;
-				
-				for (let i = 0; i < all_keys.length; i++) {
-					let k = all_keys[i];
-					let info = cov_obj[k](format_year);
-					covariates_map[k] = info;
-				}
+				for (let i = 0; i < all_keys.length; i++) covariates_map[all_keys[i]] = cov_obj[all_keys[i]](format_year);
 				
 				return {
 					type: "generate_superlearner_raster",
 					covariates_map: covariates_map,
-					options: {
-						format: "float32",
-						mask_uninhabited: true
-					},
+					options: { format: "float32", mask_uninhabited: true },
 					output_file_path: item.out_base,
 					resolved_models: item.resolved_models,
 					sex: item.sex,
@@ -523,79 +484,52 @@ global.professions = class {
 				if (!global._superlearner_model_cache) global._superlearner_model_cache = {};
 				let model_cache = global._superlearner_model_cache;
 
-				function loadModelCached (file_path) {
-					if (!model_cache[file_path])
-						model_cache[file_path] = JSON.parse(fs.readFileSync(file_path, "utf8"));
-					return model_cache[file_path];
+				function loadModelCached (p) {
+					if (!model_cache[p]) model_cache[p] = JSON.parse(fs.readFileSync(p, "utf8"));
+					return model_cache[p];
 				}
 
-				function prepareCategoryEnsemble (model_conf) {
-					let all_feature_keys = {};
-					let models_list = [];
-					
-					if (model_conf.type === "superlearner_ensemble") {
-						for (let m = 0; m < model_conf.models.length; m++) {
-							let m_obj = loadModelCached(model_conf.models[m].model);
-							(m_obj.keys || []).forEach(k => all_feature_keys[k] = true);
-							models_list.push({ obj: m_obj, weight: model_conf.models[m].weight });
+				function prepareCategoryEnsemble (conf) {
+					let all_keys = {}, models_list = [];
+					if (conf.type === "superlearner_ensemble") {
+						for (let m = 0; m < conf.models.length; m++) {
+							let obj = loadModelCached(conf.models[m].model);
+							(obj.keys || []).forEach(k => all_keys[k] = true);
+							models_list.push({ obj: obj, weight: conf.models[m].weight });
 						}
 					} else {
-						let m_obj = loadModelCached(model_conf);
-						(m_obj.keys || []).forEach(k => all_feature_keys[k] = true);
-						models_list.push({ obj: m_obj, weight: 1.0 });
+						let obj = loadModelCached(conf);
+						(obj.keys || []).forEach(k => all_keys[k] = true);
+						models_list.push({ obj: obj, weight: 1.0 });
 					}
-					
-					let union_keys = Object.keys(all_feature_keys);
-					let num_features = union_keys.length;
-					let feature_valid_indices = new Int32Array(num_features);
-					for (let k = 0; k < num_features; k++) {
-						let k_name = union_keys[k];
-						feature_valid_indices[k] = (key_to_valid_idx[k_name] !== undefined) ? key_to_valid_idx[k_name] : -1;
-					}
-					
-					// 1. Combine all linear models across the full ensemble (100% exact representation)
-					let combined_intercept = 0;
-					let combined_coeffs = new Float64Array(num_features);
+					let u_keys = Object.keys(all_keys), n_f = u_keys.length;
+					let f_valid = new Int32Array(n_f);
+					for (let k = 0; k < n_f; k++) f_valid[k] = (key_to_valid_idx[u_keys[k]] !== undefined) ? key_to_valid_idx[u_keys[k]] : -1;
+					let lin_inter = 0, lin_coeffs = new Float64Array(n_f);
 					for (let m = 0; m < models_list.length; m++) {
-						let m_entry = models_list[m];
-						let m_obj = m_entry.obj;
-						let W_m = m_entry.weight;
-						let w_lin = (m_obj.weights && m_obj.weights.linear !== undefined) ? m_obj.weights.linear : 0.5;
-						let intercept = (m_obj.linear_model && m_obj.linear_model.intercept) || 0;
-						combined_intercept += W_m * w_lin * intercept;
-						let coeffs = (m_obj.linear_model && m_obj.linear_model.coefficients) || {};
-						for (let k = 0; k < num_features; k++) {
-							let k_name = union_keys[k];
-							let c = coeffs[k_name];
-							if (typeof c === "number" && !isNaN(c)) combined_coeffs[k] += W_m * w_lin * c;
+						let entry = models_list[m], obj = entry.obj, W = entry.weight;
+						let w_l = (obj.weights && obj.weights.linear !== undefined) ? obj.weights.linear : 0.5;
+						lin_inter += W * w_l * ((obj.linear_model && obj.linear_model.intercept) || 0);
+						let c_map = (obj.linear_model && obj.linear_model.coefficients) || {};
+						for (let k = 0; k < n_f; k++) {
+							let c_val = c_map[u_keys[k]];
+							if (typeof c_val === "number" && !isNaN(c_val)) lin_coeffs[k] += W * w_l * c_val;
 						}
 					}
-
-					// 2. Random Forest: Select top 12 models with highest ensemble weights (normalized)
-					let sorted_models = [...models_list].sort((a, b) => b.weight - a.weight);
-					let top_models = sorted_models.slice(0, 12);
-					let rf_weight_sum = top_models.reduce((sum, entry) => sum + entry.weight, 0);
-
+					let top_rf = [...models_list].sort((a, b) => b.weight - a.weight).slice(0, 12);
+					let rf_w_sum = top_rf.reduce((acc, e) => acc + e.weight, 0);
 					let flat_trees = [];
-					for (let m = 0; m < top_models.length; m++) {
-						let m_entry = top_models[m];
-						let m_obj = m_entry.obj;
-						let W_norm = (rf_weight_sum > 0) ? (m_entry.weight / rf_weight_sum) : (1 / top_models.length);
-						let w_rf = (m_obj.weights && m_obj.weights.rf !== undefined) ? m_obj.weights.rf : 0.5;
-						let trees = (m_obj.rf_model && m_obj.rf_model.trees) || [];
+					for (let m = 0; m < top_rf.length; m++) {
+						let entry = top_rf[m], obj = entry.obj;
+						let w_rf = (obj.weights && obj.weights.rf !== undefined) ? obj.weights.rf : 0.5;
+						let W_n = (rf_w_sum > 0) ? (entry.weight / rf_w_sum) : (1 / top_rf.length);
+						let trees = (obj.rf_model && obj.rf_model.trees) || [];
 						if (trees.length > 0) {
-							let scale = (W_norm * w_rf) / trees.length;
+							let scale = (W_n * w_rf) / trees.length;
 							for (let t = 0; t < trees.length; t++) flat_trees.push({ tree: trees[t], weight: scale });
 						}
 					}
-
-					return {
-						combined_coeffs: combined_coeffs,
-						combined_intercept: combined_intercept,
-						feature_valid_indices: feature_valid_indices,
-						flat_trees: flat_trees,
-						num_features: num_features
-					};
+					return { combined_coeffs: lin_coeffs, combined_intercept: lin_inter, feature_valid_indices: f_valid, flat_trees: flat_trees, num_features: n_f };
 				}
 
 				function evaluateCategoryEnsemble (prep, feat_arrs, idx, x_buf) {
@@ -606,21 +540,12 @@ global.professions = class {
 						x_buf[k] = val;
 						lin_val += val * prep.combined_coeffs[k];
 					}
-					
-					let rf_val = 0;
-					let n_trees = prep.flat_trees.length;
+					let rf_val = 0, n_trees = prep.flat_trees.length;
 					for (let t = 0; t < n_trees; t++) {
 						let node = prep.flat_trees[t].tree;
-						while (!node.is_leaf) {
-							if (x_buf[node.feature_index] <= node.threshold) {
-								node = node.left;
-							} else {
-								node = node.right;
-							}
-						}
+						while (!node.is_leaf) node = (x_buf[node.feature_index] <= node.threshold) ? node.left : node.right;
 						rf_val += node.value * prep.flat_trees[t].weight;
 					}
-					
 					return lin_val + rf_val;
 				}
 				
@@ -717,7 +642,7 @@ global.professions = class {
 		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
 		let sexes = this.sexes;
 		let working_cohorts = this.working_cohorts;
-		let years = landuse_HYDE.sorted_hyde_years;
+		let years = (options.years) ? options.years : landuse_HYDE.sorted_hyde_years;
 
 		if (!fs.existsSync(output_percentages)) fs.mkdirSync(output_percentages, { recursive: true });
 		if (!fs.existsSync(output_aggregates)) fs.mkdirSync(output_aggregates, { recursive: true });
@@ -740,6 +665,11 @@ global.professions = class {
 			items: target_years,
 			name: "Professions E_clampToPercentagesAndAggregates",
 			task_generator: (year) => {
+				let baselines_by_sex = {
+					f: this.getDynamicSectorBaselines(year, "f"),
+					m: this.getDynamicSectorBaselines(year, "m")
+				};
+
 				return {
 					type: "clamp_professions",
 					age_sex_folder: global.age_sex.output_rasters,
@@ -749,6 +679,7 @@ global.professions = class {
 					olivetti_categories: olivetti_categories,
 					output_aggregates: output_aggregates,
 					output_percentages: output_percentages,
+					sector_baselines: baselines_by_sex,
 					sexes: sexes,
 					working_cohorts: working_cohorts,
 					year: year
@@ -799,56 +730,90 @@ global.professions = class {
 					
 					if (missing_probs) continue;
 					
-					let prob_sum_working = new Float32Array(data_len);
-					for (let i = 0; i < olivetti_categories.length; i++) {
-						let data = prob_rasters[olivetti_categories[i]].data;
-						for (let j = 0; j < data_len; j++) {
-							let val = data[j];
-							if (!isNaN(val) && val > 0) prob_sum_working[j] += val;
+					let calib_params = {};
+					let num_olivetti = olivetti_categories.length;
+					let sector_baselines = this.getDynamicSectorBaselines(year, sex);
+					
+					for (let i = 0; i < num_olivetti; i++) {
+						let cat = olivetti_categories[i];
+						let cat_data = prob_rasters[cat].data;
+						let sample_vals = [];
+						let step = Math.max(1, Math.floor(data_len / 50000));
+						let target_mu = (sector_baselines && sector_baselines[cat] !== undefined)
+							? sector_baselines[cat]
+							: (cat === "agriculture" ? 0.74 : (cat === "manufacturing" ? 0.12 : (cat === "services" ? 0.10 : 0.04)));
+						target_mu = Math.max(0.001, Math.min(0.999, target_mu));
+
+						for (let j = 0; j < data_len; j += step) {
+							if (pop_raster[j] > 0 && !isNaN(cat_data[j]) && cat_data[j] > 0) {
+								sample_vals.push(cat_data[j]);
+							}
 						}
+						sample_vals.sort((a, b) => a - b);
+						let p25 = (sample_vals.length > 0) ? sample_vals[Math.floor(sample_vals.length * 0.25)] : 0.25;
+						let p50 = (sample_vals.length > 0) ? sample_vals[Math.floor(sample_vals.length * 0.50)] : 0.25;
+						let p75 = (sample_vals.length > 0) ? sample_vals[Math.floor(sample_vals.length * 0.75)] : 0.25;
+						let iqr = p75 - p25;
+						let robust_std = Math.max(0.0001, iqr / 1.349);
+
+						let alpha = Math.log(target_mu / (1 - target_mu));
+						let beta = Math.min(2.5, Math.max(0.8, 0.12 / (target_mu * (1 - target_mu))));
+
+						calib_params[cat] = { alpha: alpha, beta: beta, p50: p50, robust_std: robust_std };
 					}
 					
+					let agg_arrays = {};
+					let pct_arrays = {};
 					for (let i = 0; i < categories.length; i++) {
 						let c = categories[i];
+						pct_arrays[c] = new Float32Array(data_len);
+						agg_arrays[c] = new Float32Array(data_len);
 						if (!agg_t[c]) agg_t[c] = new Float32Array(data_len);
-						
-						let pct_arr = new Float32Array(data_len);
-						let agg_arr = new Float32Array(data_len);
-						let prob_data = prob_rasters[c] ? prob_rasters[c].data : null;
-						
-						for (let j = 0; j < data_len; j++) {
-							let pop = pop_raster[j];
-							if (pop <= 0) continue;
-							
-							let lfpr = lfpr_raster.data[j];
-							if (isNaN(lfpr)) lfpr = 0;
-							
-							let final_pct = 0;
-							if (c === "not_in_work") {
-								final_pct = Math.max(0, 1.0 - lfpr);
-							} else {
-								let sum_w = prob_sum_working[j];
-								let p_val = prob_data[j];
-								if (isNaN(p_val) || p_val < 0) p_val = 0;
-								
-								if (sum_w <= 0) {
-									final_pct = lfpr / olivetti_categories.length;
-								} else {
-									final_pct = lfpr * (p_val / sum_w);
-								}
-							}
-							
-							pct_arr[j] = final_pct;
-							agg_arr[j] = final_pct * pop;
-							agg_t[c][j] += agg_arr[j];
+					}
+
+					let s_buf = new Float64Array(num_olivetti);
+					for (let j = 0; j < data_len; j++) {
+						let pop = pop_raster[j];
+						if (pop <= 0) continue;
+
+						let lfpr = lfpr_raster.data[j];
+						if (isNaN(lfpr)) lfpr = 0;
+
+						let sum_s = 0;
+						for (let i = 0; i < num_olivetti; i++) {
+							let cat = olivetti_categories[i];
+							let cp = calib_params[cat];
+							let val = prob_rasters[cat].data[j];
+							let z = (val - cp.p50) / cp.robust_std;
+							let s_val = 1 / (1 + Math.exp(-(cp.alpha + cp.beta * z)));
+							s_buf[i] = s_val;
+							sum_s += s_val;
 						}
-						
+
+						for (let i = 0; i < num_olivetti; i++) {
+							let cat = olivetti_categories[i];
+							let norm_p = (sum_s > 0) ? (s_buf[i] / sum_s) : (1 / num_olivetti);
+							let final_pct = lfpr * norm_p;
+							pct_arrays[cat][j] = final_pct;
+							agg_arrays[cat][j] = final_pct * pop;
+							agg_t[cat][j] += agg_arrays[cat][j];
+						}
+
+						let not_in_work_pct = Math.max(0, 1.0 - lfpr);
+						pct_arrays["not_in_work"][j] = not_in_work_pct;
+						agg_arrays["not_in_work"][j] = not_in_work_pct * pop;
+						agg_t["not_in_work"][j] += agg_arrays["not_in_work"][j];
+					}
+
+					for (let i = 0; i < categories.length; i++) {
+						let c = categories[i];
+
 						GeoPNG.saveNumberRasterImage({
 							file_path: `${output_percentages}${c}_${sex}_${year}.png`,
 							format: "float32",
 							height: height,
 							width: width,
-							function: (idx) => pct_arr[idx]
+							function: (idx) => pct_arrays[c][idx]
 						});
 						
 						GeoPNG.saveNumberRasterImage({
@@ -856,7 +821,7 @@ global.professions = class {
 							format: "float32",
 							height: height,
 							width: width,
-							function: (idx) => agg_arr[idx]
+							function: (idx) => agg_arrays[c][idx]
 						});
 					}
 				}
@@ -889,6 +854,126 @@ global.professions = class {
 			}
 		});
 	}
+
+	/**
+	 * Computes dynamic historical macro sector target proportions across epochs.
+	 * Anchors to empirical proxies: HYDE agricultural land use in deep time, Stadester urbanisation
+	 * from 3000BC, pre-industrial transition splines from 1750, and Olivetti/ILO in modern history.
+	 * 
+	 * @alias professions.getDynamicSectorBaselines
+	 * @param {number} arg0_year
+	 * @param {string} [arg1_sex="m"]
+	 * 
+	 * @returns {Object} Object mapping each olivetti category to its target proportion in [0, 1].
+	 */
+	static getDynamicSectorBaselines (arg0_year, arg1_sex) {
+		//Convert from parameters
+		let year = parseInt(arg0_year);
+		let sex = (arg1_sex || "m").toLowerCase();
+
+		//Declare local instance variables
+		let return_obj = { agriculture: 0.74, manufacturing: 0.12, services: 0.10, informal_labour: 0.04 };
+
+		//1. Modern Era (1890 to 2025 AD): Empirical Olivetti and ILO benchmarks
+		if (year >= 1890) {
+			let milestones = [
+				{ y: 1890, m: { agriculture: 0.473, manufacturing: 0.321, services: 0.170, informal_labour: 0.036 }, f: { agriculture: 0.390, manufacturing: 0.271, services: 0.280, informal_labour: 0.059 } },
+				{ y: 1950, m: { agriculture: 0.280, manufacturing: 0.360, services: 0.320, informal_labour: 0.040 }, f: { agriculture: 0.220, manufacturing: 0.260, services: 0.470, informal_labour: 0.050 } },
+				{ y: 2000, m: { agriculture: 0.120, manufacturing: 0.280, services: 0.560, informal_labour: 0.040 }, f: { agriculture: 0.080, manufacturing: 0.160, services: 0.720, informal_labour: 0.040 } },
+				{ y: 2025, m: { agriculture: 0.060, manufacturing: 0.240, services: 0.660, informal_labour: 0.040 }, f: { agriculture: 0.040, manufacturing: 0.120, services: 0.800, informal_labour: 0.040 } }
+			];
+			let lower = milestones[0], upper = milestones[milestones.length - 1];
+
+			for (let i = 0; i < milestones.length - 1; i++) {
+				if (year >= milestones[i].y && year <= milestones[i + 1].y) {
+					lower = milestones[i]; upper = milestones[i + 1]; break;
+				}
+			}
+
+			let t = (upper.y === lower.y) ? 0 : (year - lower.y) / (upper.y - lower.y);
+			let s = t*t*(3 - 2*t);
+
+			return {
+				agriculture: (1 - s)*lower[sex].agriculture + s*upper[sex].agriculture,
+				manufacturing: (1 - s)*lower[sex].manufacturing + s*upper[sex].manufacturing,
+				services: (1 - s)*lower[sex].services + s*upper[sex].services,
+				informal_labour: (1 - s)*lower[sex].informal_labour + s*upper[sex].informal_labour
+			};
+		}
+
+		//2. Industrial Transition (1750 to 1890 AD): Logistic interpolation to 1890 Olivetti
+		if (year >= 1750 && year < 1890) {
+			let base_1750 = (sex === "f")
+				? { agriculture: 0.700, manufacturing: 0.150, services: 0.100, informal_labour: 0.050 }
+				: { agriculture: 0.740, manufacturing: 0.120, services: 0.100, informal_labour: 0.040 };
+			let base_1890 = (sex === "f")
+				? { agriculture: 0.390, manufacturing: 0.271, services: 0.280, informal_labour: 0.059 }
+				: { agriculture: 0.473, manufacturing: 0.321, services: 0.170, informal_labour: 0.036 };
+
+			let t = (year - 1750) / (1890 - 1750);
+			let s = t*t*(3 - 2*t);
+
+			return {
+				agriculture: (1 - s)*base_1750.agriculture + s*base_1890.agriculture,
+				manufacturing: (1 - s)*base_1750.manufacturing + s*base_1890.manufacturing,
+				services: (1 - s)*base_1750.services + s*base_1890.services,
+				informal_labour: (1 - s)*base_1750.informal_labour + s*base_1890.informal_labour
+			};
+		}
+
+		//3. Mature Agrarian Era (3000 BC to 1750 AD): Urbanisation proxy drives non-agricultural baseline
+		if (year >= -3000 && year < 1750) {
+			let u_points = [
+				{ y: -3000, u: 0.0011 }, { y: -2000, u: 0.0205 }, { y: -1000, u: 0.0164 }, { y: 0, u: 0.0343 },
+				{ y: 500, u: 0.0378 }, { y: 1000, u: 0.0453 }, { y: 1500, u: 0.0467 }, { y: 1750, u: 0.0468 }
+			];
+			let lower = u_points[0], upper = u_points[u_points.length - 1];
+
+			for (let i = 0; i < u_points.length - 1; i++) {
+				if (year >= u_points[i].y && year <= u_points[i + 1].y) {
+					lower = u_points[i]; upper = u_points[i + 1]; break;
+				}
+			}
+
+			let t = (upper.y === lower.y) ? 0 : (year - lower.y) / (upper.y - lower.y);
+			let u_rate = (1 - t)*lower.u + t*upper.u;
+
+			let inf = 0.04;
+			let mfg = 0.40*u_rate + ((sex === "f") ? 0.13 : 0.09);
+			let serv = 0.60*u_rate + 0.07;
+			let agri = Math.max(0.50, 1.0 - serv - mfg - inf);
+
+			return {
+				agriculture: agri,
+				manufacturing: mfg,
+				services: serv,
+				informal_labour: inf
+			};
+		}
+
+		//4. Pre-Neolithic to Neolithic Transition (-10000 to -3000 BC): Land use intensity scales farming vs foraging
+		let lambda_points = [
+			{ y: -10000, l: 0.00 }, { y: -8000, l: 0.02 }, { y: -6000, l: 0.10 },
+			{ y: -4000, l: 0.85 }, { y: -3000, l: 1.00 }
+		];
+		let lower = lambda_points[0], upper = lambda_points[lambda_points.length - 1];
+
+		for (let i = 0; i < lambda_points.length - 1; i++) {
+			if (year >= lambda_points[i].y && year <= lambda_points[i + 1].y) {
+				lower = lambda_points[i]; upper = lambda_points[i + 1]; break;
+			}
+		}
+
+		let t = (upper.y === lower.y) ? 0 : (year - lower.y) / (upper.y - lower.y);
+		let lambda = (1 - t)*lower.l + t*upper.l;
+
+		return {
+			agriculture: lambda*0.78,
+			manufacturing: (1 - lambda)*0.05 + lambda*((sex === "f") ? 0.13 : 0.09),
+			services: lambda*0.07,
+			informal_labour: (1 - lambda)*0.95 + lambda*0.04
+		};
+	}
 	
 	static async processRasters (arg0_options) {
 		let options = (arg0_options) ? arg0_options : {};
@@ -896,9 +981,8 @@ global.professions = class {
 		let skip_primary = (options.skip_primary || options.skip_raw || options.skip_primary_data || options.skip_raw_data || options.skip_databases);
 		let skip_training = (options.skip_training || options.use_existing_models || options.train === false);
 		
-		if (skip_training || skip_primary) {
+		if (skip_training || skip_primary)
 			if (!options.exclude.includes("A")) options.exclude.push("A");
-		}
 		if (skip_training) {
 			if (!options.exclude.includes("B")) options.exclude.push("B");
 			if (!options.exclude.includes("C")) options.exclude.push("C");
