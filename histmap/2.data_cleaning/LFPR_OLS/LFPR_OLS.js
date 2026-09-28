@@ -159,6 +159,176 @@ global.LFPR_OLS = class {
 		let landarea_raster = GeoPNG.loadNumberRasterImage(metadata_HYDE.input_raster_land_area, { format: "int32" });
 		let sf = age_sex.sf();
 		let years = landuse_HYDE.sorted_hyde_years;
+		
+		// 1. Fetch Empirical Bounds and Stats from Olivetti Data
+		let parsed_olivetti = global.LFPR_Olivetti.A_getOlivettiLocalObject();
+		let empirical_bounds = {
+			m: { min: Infinity, max: -Infinity },
+			f: { min: Infinity, max: -Infinity }
+		};
+		let empirical_stats = { m: {}, f: {} };
+		
+		Object.iterate(parsed_olivetti.data, (iso3, sexes) => {
+			Object.iterate(sexes, (local_sex, series) => {
+				Object.iterate(series, (yr, rate) => {
+					if (rate < empirical_bounds[local_sex].min) empirical_bounds[local_sex].min = rate;
+					if (rate > empirical_bounds[local_sex].max) empirical_bounds[local_sex].max = rate;
+					
+					if (!empirical_stats[local_sex][yr]) empirical_stats[local_sex][yr] = [];
+					empirical_stats[local_sex][yr].push(rate);
+				});
+			});
+		});
+		
+		let hist_mean_series = { m: {}, f: {} };
+		let hist_std_series = { m: {}, f: {} };
+		
+		// Safety defaults and clamps to prevent extreme outliers 0 or 1 breaking the math
+		for (let i = 0; i < this.sexes.length; i++) {
+			let local_sex = this.sexes[i];
+			
+			let available_years = Object.keys(empirical_stats[local_sex]).map(Number).sort((a, b) => a - b);
+			for (let j = 0; j < available_years.length; j++) {
+				let yr = available_years[j];
+				let vals = empirical_stats[local_sex][yr];
+				
+				// Only use years with >= 5 records to prevent a single country (like the UK in 1890) from defining the global historical baseline!
+				if (vals.length >= 5) {
+					let sum = vals.reduce((a, b) => a + b, 0);
+					let mean = sum / vals.length;
+					let variance = vals.reduce((a, b) => a + Math.pow(b - mean, 2), 0) / vals.length;
+					let std = Math.sqrt(variance);
+					
+					hist_mean_series[local_sex][yr] = mean;
+					hist_std_series[local_sex][yr] = std;
+				}
+			}
+			
+			// Fallback if no years meet the threshold
+			if (Object.keys(hist_mean_series[local_sex]).length === 0) {
+				for (let j = 0; j < available_years.length; j++) {
+					let yr = available_years[j];
+					let vals = empirical_stats[local_sex][yr];
+					let sum = vals.reduce((a, b) => a + b, 0);
+					let mean = sum / vals.length;
+					let variance = vals.reduce((a, b) => a + Math.pow(b - mean, 2), 0) / vals.length;
+					let std = Math.sqrt(variance);
+					
+					hist_mean_series[local_sex][yr] = mean;
+					hist_std_series[local_sex][yr] = std;
+				}
+			}
+			
+			if (empirical_bounds[local_sex].min === Infinity) {
+				empirical_bounds[local_sex] = (local_sex === "m") ? { min: 0.40, max: 0.96 } : { min: 0.05, max: 0.85 };
+			} else {
+				empirical_bounds[local_sex].min = Math.max(0.01, empirical_bounds[local_sex].min);
+				empirical_bounds[local_sex].max = Math.min(0.99, empirical_bounds[local_sex].max);
+			}
+		}
+
+		let get_empirical_stat = function (local_sex, local_year, stat_type) {
+			let series = (stat_type === "mean") ? hist_mean_series[local_sex] : hist_std_series[local_sex];
+			let available_years = Object.keys(series).map(Number).sort((a, b) => a - b);
+			
+			if (available_years.length === 0) return (stat_type === "mean") ? 0.60 : 0.20;
+			
+			// Constant historical baseline for pre-industrial times (extrapolating the earliest robust record backwards)
+			if (local_year <= available_years[0]) return series[available_years[0]];
+			
+			// Constant modern baseline (extrapolating latest record forwards)
+			if (local_year >= available_years[available_years.length - 1]) return series[available_years[available_years.length - 1]];
+			
+			// Linearly interpolate for years between records
+			let y1 = available_years[0], y2 = available_years[available_years.length - 1];
+			for (let i = 0; i < available_years.length - 1; i++) {
+				if (local_year >= available_years[i] && local_year <= available_years[i + 1]) {
+					y1 = available_years[i];
+					y2 = available_years[i + 1];
+					break;
+				}
+			}
+			
+			if (y1 === y2) return series[y1];
+			let progress = (local_year - y1) / (y2 - y1);
+			return series[y1] + progress * (series[y2] - series[y1]);
+		};
+
+		// Derive the historical trailing ratio dynamically from the empirical dataset
+		let empirical_trailing_ratios = [];
+		let available_years_m = Object.keys(hist_mean_series["m"]).map(Number);
+		let available_years_f = Object.keys(hist_mean_series["f"]).map(Number);
+		let overlapping_years = available_years_f.filter(y => available_years_m.includes(y));
+		
+		for (let i = 0; i < overlapping_years.length; i++) {
+			let yr = overlapping_years[i];
+			let f_mean = hist_mean_series["f"][yr];
+			let m_mean = hist_mean_series["m"][yr];
+			if (m_mean > 0) empirical_trailing_ratios.push(f_mean / m_mean);
+		}
+		
+		empirical_trailing_ratios.sort((a, b) => a - b);
+		let historical_trailing_ratio = (empirical_trailing_ratios.length > 0) 
+			? empirical_trailing_ratios[Math.floor(empirical_trailing_ratios.length * 0.5)] 
+			: 0.55;
+			
+		// Since male LFPR is relatively inelastic, we fetch the geometric mean of all empirical 
+		// male LFPR figures across the dataset to use as the robust historical baseline.
+		let sum_log_m = 0;
+		let count_m = 0;
+		for (let i = 0; i < available_years_m.length; i++) {
+			let yr = available_years_m[i];
+			let vals = empirical_stats["m"][yr];
+			if (vals) {
+				for (let j = 0; j < vals.length; j++) {
+					if (vals[j] > 0) {
+						sum_log_m += Math.log(vals[j]);
+						count_m++;
+					}
+				}
+			}
+		}
+		let agrarian_male_baseline = (count_m > 0) ? Math.exp(sum_log_m / count_m) : 0.85;
+		
+		console.log(`[LFPR_OLS] Calculated historical trailing ratio (F/M): ${historical_trailing_ratio.toFixed(4)}`);
+		console.log(`[LFPR_OLS] Calculated agrarian male baseline (Geomean): ${agrarian_male_baseline.toFixed(4)}`);
+
+		let get_demographic_baseline = function (local_sex, local_year) {
+			let male_baseline;
+			let empirical_m = get_empirical_stat("m", local_year, "mean");
+			
+			// Reconstruct the male baseline to avoid extrapolating the 19th-century industrial peak backwards
+			if (local_year < 1750) {
+				male_baseline = agrarian_male_baseline;
+			} else if (local_year >= 1750 && local_year < 1850) {
+				let progress = (local_year - 1750) / 100;
+				let empirical_1850 = get_empirical_stat("m", 1850, "mean");
+				male_baseline = agrarian_male_baseline + progress * (empirical_1850 - agrarian_male_baseline);
+			} else {
+				male_baseline = empirical_m;
+			}
+			
+			if (local_sex === "m") {
+				return male_baseline;
+			} else {
+				let empirical_f = get_empirical_stat("f", local_year, "mean");
+				
+				// Reconstruct the U-curve using rigorously derived parameters:
+				if (local_year < 1750) {
+					// 1. Agrarian Era: Female LFPR tracks male LFPR via the historical trailing ratio
+					return agrarian_male_baseline * historical_trailing_ratio;
+				} else if (local_year >= 1750 && local_year < 1850) {
+					// 2. Industrial Transition: Smooth interpolation down to the empirical trough
+					let agrarian_baseline_f = agrarian_male_baseline * historical_trailing_ratio;
+					let progress = (local_year - 1750) / 100;
+					let empirical_1850_f = get_empirical_stat("f", 1850, "mean");
+					return agrarian_baseline_f + progress * (empirical_1850_f - agrarian_baseline_f);
+				} else {
+					// 3. Modern Era: Trust the empirical dataset to capture the trough and subsequent rise
+					return empirical_f;
+				}
+			}
+		};
 
 		if (!fs.existsSync(this.intermediate_normalised_rasters)) fs.mkdirSync(this.intermediate_normalised_rasters, { recursive: true });
 		
@@ -206,30 +376,36 @@ global.LFPR_OLS = class {
 					let robust_std = iqr / 1.349;
 					if (robust_std < 0.0001) robust_std = 0.0001; // Avoid division by zero
 					
-					// Historical parameters based on expected global LFPR trends
-					let get_historical_mean = function (local_sex, local_year) {
-						if (local_sex === "m") return 0.85;
-						if (local_year < 1700) return 0.55;
-						if (local_year >= 1700 && local_year < 1900) return 0.55 - ((local_year - 1700) / 200) * 0.20;
-						return 0.35 + ((local_year - 1900) / 125) * 0.20;
-					};
+					// Generalised Fractional Response Equation
+					let min_bound = empirical_bounds[sex].min;
+					let max_bound = empirical_bounds[sex].max;
 					
-					let hist_mean = get_historical_mean(sex, year);
-					let hist_std = (sex === "m") ? 0.08 : 0.15;
-					let min_bound = (sex === "m") ? 0.60 : 0.05;
-					let max_bound = (sex === "m") ? 0.98 : 0.90;
+					// Apply the rigorously parameterized demographic baseline equation to anchor the Fractional Response model
+					let baseline_mean = get_demographic_baseline(sex, year);
+					baseline_mean = Math.max(min_bound + 0.02, Math.min(max_bound - 0.02, baseline_mean));
+					
+					let target_s_mean = (baseline_mean - min_bound) / (max_bound - min_bound);
+					target_s_mean = Math.max(0.01, Math.min(0.99, target_s_mean)); // Safety clamp
+					
+					let alpha = Math.log(target_s_mean / (1 - target_s_mean));
+					
+					// Force the standard deviation to stretch to empirical reality instead of relying on OLS flat variance
+					let empirical_std = get_empirical_stat(sex, year, "std");
+					let target_std = Math.min(empirical_std, (max_bound - min_bound) * 0.25);
+					target_std = Math.max(0.01, target_std); // Safety minimum variance
+					let beta = target_std / ((max_bound - min_bound) * target_s_mean * (1 - target_s_mean));
 					
 					let normalised_map = new Float32Array(ols_raster.data.length);
 					for (let i = 0; i < ols_raster.data.length; i++) {
 						if (landarea_raster.data[i] > 0 && popc_raster.data[i] > 0) {
 							let local_value = ols_raster.data[i];
 							if (!isNaN(local_value)) {
-								// Standardise and map to historical distribution
+								// Standardise OLS score
 								let z = (local_value - p50) / robust_std;
-								let mapped_val = hist_mean + z * hist_std;
 								
-								// Clamp to plausible historical bounds
-								normalised_map[i] = Math.max(min_bound, Math.min(max_bound, mapped_val));
+								// Apply Scaled Logistic Function to squash tails smoothly
+								let s_val = 1 / (1 + Math.exp(-(alpha + beta * z)));
+								normalised_map[i] = min_bound + (max_bound - min_bound) * s_val;
 							}
 						}
 					}
