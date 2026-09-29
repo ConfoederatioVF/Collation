@@ -895,12 +895,14 @@ let handleTask = async function (task) {
   if (task_type === "clamp_professions") {
     let age_sex_folder = task.age_sex_folder;
     let categories = task.categories || ["agriculture", "manufacturing", "services", "informal_labour", "not_in_work"];
+    let geocode_path = task.geocode_path || path.join(global.h1 || "./histmap/1.data_raw/", "admin_modern", "geocodes.png");
     let lfpr_folder = task.lfpr_folder;
     let logit_rasters_folder = task.logit_rasters_folder;
     let olivetti_categories = task.olivetti_categories || ["agriculture", "manufacturing", "services", "informal_labour"];
     let output_aggregates = task.output_aggregates;
     let output_percentages = task.output_percentages;
     let sexes = task.sexes || ["m", "f"];
+    let target_folder = task.target_folder || (global.professions_Olivetti ? professions_Olivetti.output_rasters : path.join(global.h1 || "./histmap/1.data_raw/", "professions_Olivetti", "output_rasters"));
     let working_cohorts = task.working_cohorts || ["15", "20", "25", "30", "35", "40", "45", "50", "55", "60", "65", "70", "75", "80"];
     let year = task.year;
 
@@ -945,6 +947,33 @@ let handleTask = async function (task) {
       }
 
       if (missing_probs) continue;
+
+      let geocode_data = null;
+      let has_targets = false;
+      let target_rasters = {};
+
+      if (target_folder && fs.existsSync(target_folder)) {
+        let all_exist = true;
+        for (let i = 0; i < olivetti_categories.length; i++) {
+          let tp = path.join(target_folder, `${olivetti_categories[i]}_${sex}_${year}.png`);
+          if (!fs.existsSync(tp)) { all_exist = false; break; }
+        }
+        if (all_exist) {
+          has_targets = true;
+          for (let i = 0; i < olivetti_categories.length; i++) {
+            let tp = path.join(target_folder, `${olivetti_categories[i]}_${sex}_${year}.png`);
+            target_rasters[olivetti_categories[i]] = await GeoPNG.loadNumberRasterImageAsync(tp, { format: "float32" });
+          }
+        }
+      }
+
+      if (has_targets && geocode_path && fs.existsSync(geocode_path)) {
+        if (!global._cached_geocodes_raster || global._cached_geocodes_path !== geocode_path) {
+          global._cached_geocodes_raster = await GeoPNG.loadImage(geocode_path);
+          global._cached_geocodes_path = geocode_path;
+        }
+        if (global._cached_geocodes_raster) geocode_data = global._cached_geocodes_raster.data;
+      }
 
       let sector_baselines = (task.sector_baselines && task.sector_baselines[sex])
         ? task.sector_baselines[sex]
@@ -1024,6 +1053,71 @@ let handleTask = async function (task) {
       let p2 = prob_rasters[olivetti_categories[2]].data;
       let p3 = prob_rasters[olivetti_categories[3]].data;
 
+      // Cross-Entropy Spatial Calibration (Logit Shift for empirical country clamps)
+      let country_factors = {};
+      let t0 = (has_targets) ? target_rasters[olivetti_categories[0]].data : null;
+      let t1 = (has_targets) ? target_rasters[olivetti_categories[1]].data : null;
+      let t2 = (has_targets) ? target_rasters[olivetti_categories[2]].data : null;
+      let t3 = (has_targets) ? target_rasters[olivetti_categories[3]].data : null;
+
+      if (has_targets) {
+        let countries = {};
+
+        for (let j = 0; j < data_len; j++) {
+          let pop = pop_raster[j];
+          let tag = t0[j] || 0, tmf = t1[j] || 0, tse = t2[j] || 0, tinf = t3[j] || 0;
+          let t_sum = tag + tmf + tse + tinf;
+          if (t_sum <= 0) continue;
+
+          let cid = 0;
+          if (geocode_data) {
+            let b_idx = j * 4;
+            cid = (geocode_data[b_idx] << 16) | (geocode_data[b_idx + 1] << 8) | geocode_data[b_idx + 2];
+          }
+          if (cid === 0) cid = `${tag.toFixed(3)}_${tmf.toFixed(3)}_${tse.toFixed(3)}_${tinf.toFixed(3)}`;
+
+          if (!countries[cid])
+            countries[cid] = { model_sum: [0, 0, 0, 0], pop: 0, target_sum: [0, 0, 0, 0] };
+
+          if (pop > 0) {
+            let lfpr = lfpr_raster.data[j];
+            if (isNaN(lfpr)) lfpr = 0;
+
+            let s0 = l0 * p0[j], s1 = l1 * p1[j], s2 = l2 * p2[j], s3 = l3 * p3[j];
+            let sum_s = s0 + s1 + s2 + s3;
+            let norm_s = (sum_s > 0) ? (lfpr / sum_s) : 0;
+            let m0 = s0 * norm_s, m1 = s1 * norm_s, m2 = s2 * norm_s, m3 = s3 * norm_s;
+
+            countries[cid].pop += pop;
+            countries[cid].target_sum[0] += tag * pop;
+            countries[cid].target_sum[1] += tmf * pop;
+            countries[cid].target_sum[2] += tse * pop;
+            countries[cid].target_sum[3] += tinf * pop;
+
+            countries[cid].model_sum[0] += m0 * pop;
+            countries[cid].model_sum[1] += m1 * pop;
+            countries[cid].model_sum[2] += m2 * pop;
+            countries[cid].model_sum[3] += m3 * pop;
+          }
+        }
+
+        for (let cid in countries) {
+          let c = countries[cid];
+          let tot_target = c.target_sum[0] + c.target_sum[1] + c.target_sum[2] + c.target_sum[3];
+          let tot_model = c.model_sum[0] + c.model_sum[1] + c.model_sum[2] + c.model_sum[3];
+
+          let f = [1, 1, 1, 1];
+          if (tot_target > 0 && tot_model > 0) {
+            for (let k = 0; k < 4; k++) {
+              let tau = c.target_sum[k] / tot_target;
+              let m_mean = c.model_sum[k] / tot_model;
+              f[k] = (m_mean > 1e-7) ? (tau / m_mean) : ((tau > 0) ? 1.0 : 0.0);
+            }
+          }
+          country_factors[cid] = f;
+        }
+      }
+
       let pct_c0 = pct_arrays[olivetti_categories[0]];
       let pct_c1 = pct_arrays[olivetti_categories[1]];
       let pct_c2 = pct_arrays[olivetti_categories[2]];
@@ -1056,10 +1150,36 @@ let handleTask = async function (task) {
         let sum_s = s0 + s1 + s2 + s3;
 
         let norm_s = (sum_s > 0) ? (lfpr / sum_s) : 0, b = (sum_s > 0) ? 0 : (lfpr * 0.25);
-        let final_0 = s0*norm_s + b;
-        let final_1 = s1*norm_s + b;
-        let final_2 = s2*norm_s + b;
-        let final_3 = s3*norm_s + b;
+        let m0 = s0*norm_s + b;
+        let m1 = s1*norm_s + b;
+        let m2 = s2*norm_s + b;
+        let m3 = s3*norm_s + b;
+
+        let final_0 = m0, final_1 = m1, final_2 = m2, final_3 = m3;
+
+        if (has_targets) {
+          let tag = t0[j] || 0, tmf = t1[j] || 0, tse = t2[j] || 0, tinf = t3[j] || 0;
+          if (tag + tmf + tse + tinf > 0) {
+            let cid = 0;
+            if (geocode_data) {
+              let b_idx = j * 4;
+              cid = (geocode_data[b_idx] << 16) | (geocode_data[b_idx + 1] << 8) | geocode_data[b_idx + 2];
+            }
+            if (cid === 0) cid = `${tag.toFixed(3)}_${tmf.toFixed(3)}_${tse.toFixed(3)}_${tinf.toFixed(3)}`;
+
+            let f = country_factors[cid];
+            if (f) {
+              let u0 = m0 * f[0], u1 = m1 * f[1], u2 = m2 * f[2], u3 = m3 * f[3];
+              let sum_u = u0 + u1 + u2 + u3;
+              let norm_u = (sum_u > 0) ? (lfpr / sum_u) : 0, b_u = (sum_u > 0) ? 0 : (lfpr * 0.25);
+              final_0 = u0 * norm_u + b_u;
+              final_1 = u1 * norm_u + b_u;
+              final_2 = u2 * norm_u + b_u;
+              final_3 = u3 * norm_u + b_u;
+            }
+          }
+        }
+
         let final_niw = Math.max(0, 1.0 - lfpr);
 
         pct_c0[j] = final_0;

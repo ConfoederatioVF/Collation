@@ -44,34 +44,27 @@ global.professions = class {
 					if (!fs.existsSync(`${this.standardised_targets_folder}global_${this.categories[i]}_${sex}_${year}.png`)) all_exist = false;
 				if (!overwrite && all_exist) continue;
 				
-				let olivetti_rasters = {};
-				let has_olivetti = true;
+				let has_olivetti = true, olivetti_rasters = {};
 				for (let i = 0; i < this.olivetti_categories.length; i++) {
-					let c = this.olivetti_categories[i];
-					let path = `${professions_Olivetti.output_rasters}${c}_${sex}_${year}.png`;
-					if (fs.existsSync(path)) {
-						olivetti_rasters[c] = GeoPNG.loadNumberRasterImage(path, { format: "float32" });
-					} else {
-						has_olivetti = false;
-					}
+					let p = `${professions_Olivetti.output_rasters}${this.olivetti_categories[i]}_${sex}_${year}.png`;
+					if (fs.existsSync(p)) olivetti_rasters[this.olivetti_categories[i]] = GeoPNG.loadNumberRasterImage(p, { format: "float32" });
+					else { has_olivetti = false; break; }
 				}
 				if (!has_olivetti) continue;
 				
-				let data_len = olivetti_rasters[this.olivetti_categories[0]].data.length;
-				let sum_olivetti = 0;
-				for (let i = 0; i < data_len; i++) {
+				let data_len = olivetti_rasters[this.olivetti_categories[0]].data.length, sum_olivetti = 0;
+				for (let i = 0; i < data_len; i++)
 					for (let j = 0; j < this.olivetti_categories.length; j++) {
 						let val = olivetti_rasters[this.olivetti_categories[j]].data[i];
 						if (!isNaN(val) && val > 0) sum_olivetti += val;
 					}
-				}
 				
 				// Zero Data Quarantine: Delete from original source and seamlessly skip training anchor
 				if (sum_olivetti <= 0) {
 					console.warn(`[CLEANUP] Stripping utterly empty Olivetti zero-data for ${sex} ${year}`);
 					for (let i = 0; i < this.olivetti_categories.length; i++) {
-						let path = `${professions_Olivetti.output_rasters}${this.olivetti_categories[i]}_${sex}_${year}.png`;
-						if (fs.existsSync(path)) fs.unlinkSync(path);
+						let p = `${professions_Olivetti.output_rasters}${this.olivetti_categories[i]}_${sex}_${year}.png`;
+						if (fs.existsSync(p)) fs.unlinkSync(p);
 					}
 					continue;
 				}
@@ -82,37 +75,24 @@ global.professions = class {
 				
 				let pop_raster = new Float32Array(data_len);
 				for (let i = 0; i < this.working_cohorts.length; i++) {
-					let cohort = this.working_cohorts[i];
-					let cp = `${global.age_sex.output_rasters}${sex}_${cohort}_${year}.png`;
+					let cp = `${global.age_sex.output_rasters}${sex}_${this.working_cohorts[i]}_${year}.png`;
 					if (fs.existsSync(cp)) {
 						let c_raster = GeoPNG.loadNumberRasterImage(cp, { format: "float32" });
-						for (let j = 0; j < data_len; j++) {
-							let val = c_raster.data[j];
-							if (!isNaN(val) && val > 0) pop_raster[j] += val;
-						}
+						for (let j = 0; j < data_len; j++)
+							if (!isNaN(c_raster.data[j]) && c_raster.data[j] > 0) pop_raster[j] += c_raster.data[j];
 					}
 				}
 				
 				for (let i = 0; i < this.categories.length; i++) {
 					let c = this.categories[i];
 					let out_path = `${this.standardised_targets_folder}global_${c}_${sex}_${year}.png`;
-					
 					GeoPNG.saveNumberRasterImage({
-						file_path: out_path,
-						format: "float32",
-						width: lfpr_raster.width,
-						height: lfpr_raster.height,
+						file_path: out_path, format: "float32", width: lfpr_raster.width, height: lfpr_raster.height,
 						function: (idx) => {
 							let pop = pop_raster[idx];
 							if (pop <= 0) return 0;
-							
-							if (c === "not_in_work") {
-								let lfpr = lfpr_raster.data[idx];
-								return pop * Math.max(0, (1.0 - (isNaN(lfpr) ? 0 : lfpr)));
-							} else {
-								let rate = olivetti_rasters[c].data[idx];
-								return pop * (isNaN(rate) ? 0 : rate);
-							}
+							if (c === "not_in_work") return pop * Math.max(0, (1.0 - (isNaN(lfpr_raster.data[idx]) ? 0 : lfpr_raster.data[idx])));
+							return pop * (isNaN(olivetti_rasters[c].data[idx]) ? 0 : olivetti_rasters[c].data[idx]);
 						}
 					});
 				}
@@ -184,13 +164,9 @@ global.professions = class {
 				}
 				
 				return {
-					type: "train_superlearner_model",
-					cat: item.cat,
-					categories: this.olivetti_categories,
-					covariates_map: covariates_map,
-					model_path: model_path,
-					options: { fit_intercept: true, lambda: Math.returnSafeNumber(options.lambda, 1e-4) },
-					target_paths: target_paths
+					type: "train_superlearner_model", cat: item.cat, categories: this.olivetti_categories,
+					covariates_map: covariates_map, model_path: model_path, target_paths: target_paths,
+					options: { fit_intercept: true, lambda: Math.returnSafeNumber(options.lambda, 1e-4) }
 				};
 			},
 			handler: async (item) => {
@@ -289,10 +265,7 @@ global.professions = class {
 			let sex = this.sexes[s];
 			for (let c = 0; c < this.olivetti_categories.length; c++) {
 				let cat = this.olivetti_categories[c];
-				let ensemble_models = [];
-				let max_samples = 1;
-				let models_loaded = 0;
-				let raw_models = [];
+				let ensemble_models = [], max_samples = 1, models_loaded = 0, raw_models = [];
 				let unified_path = `${this.intermediate_logit_folder}ensemble_model_unified_${cat}_${sex}.json`;
 				let weights_path = `${this.intermediate_logit_folder}anchor_coverage_weights_${cat}_${sex}.json`;
 
@@ -324,22 +297,10 @@ global.professions = class {
 				for (let i = 0; i < raw_models.length; i++) {
 					let entry = raw_models[i];
 					let norm_w = (total_coverage_weight > 0) ? (entry.coverage/total_coverage_weight) : (1/raw_models.length);
-					ensemble_models.push({
-						coverage: entry.coverage,
-						model: entry.model_path,
-						sample_count: entry.sample_count,
-						weight: norm_w,
-						year: entry.year
-					});
+					ensemble_models.push({ coverage: entry.coverage, model: entry.model_path, sample_count: entry.sample_count, weight: norm_w, year: entry.year });
 				}
 				
-				let unified_model = {
-					cat: cat,
-					models: ensemble_models,
-					sample_count_max: max_samples,
-					total_anchors: models_loaded,
-					type: "superlearner_ensemble"
-				};
+				let unified_model = { cat: cat, models: ensemble_models, sample_count_max: max_samples, total_anchors: models_loaded, type: "superlearner_ensemble" };
 				
 				fs.writeFileSync(unified_path, JSON.stringify(unified_model, null, 2));
 				fs.writeFileSync(weights_path, JSON.stringify(ensemble_models, null, 2));
@@ -449,13 +410,8 @@ global.professions = class {
 				for (let i = 0; i < all_keys.length; i++) covariates_map[all_keys[i]] = cov_obj[all_keys[i]](format_year);
 				
 				return {
-					type: "generate_superlearner_raster",
-					covariates_map: covariates_map,
-					options: { format: "float32", mask_uninhabited: true },
-					output_file_path: item.out_base,
-					resolved_models: item.resolved_models,
-					sex: item.sex,
-					year: item.year
+					type: "generate_superlearner_raster", covariates_map: covariates_map, options: { format: "float32", mask_uninhabited: true },
+					output_file_path: item.out_base, resolved_models: item.resolved_models, sex: item.sex, year: item.year
 				};
 			},
 			handler: async (item) => {
@@ -612,15 +568,8 @@ global.professions = class {
 				}
 				
 				for (let i = 0; i < num_cats; i++) {
-					let cat = this.olivetti_categories[i];
-					let file_path = item.out_base.replace(".png", `_class_${cat}.png`);
-					GeoPNG.saveNumberRasterImage({
-						file_path: file_path,
-						format: "float32",
-						height: height,
-						width: width,
-						function: (idx) => output_arrays[cat][idx]
-					});
+					let cat = this.olivetti_categories[i], file_path = item.out_base.replace(".png", `_class_${cat}.png`);
+					GeoPNG.saveNumberRasterImage({ file_path: file_path, format: "float32", height: height, width: width, function: (idx) => output_arrays[cat][idx] });
 				}
 			}
 		});
@@ -649,11 +598,9 @@ global.professions = class {
 
 		let target_years = years.filter((year) => {
 			if (overwrite) return true;
-			for (let j = 0; j < ["m", "f", "t"].length; j++) {
-				for (let i = 0; i < categories.length; i++) {
+			for (let j = 0; j < ["m", "f", "t"].length; j++)
+				for (let i = 0; i < categories.length; i++)
 					if (!fs.existsSync(`${output_aggregates}${categories[i]}_${["m", "f", "t"][j]}_${year}.png`)) return true;
-				}
-			}
 			return false;
 		});
 
@@ -664,27 +611,22 @@ global.professions = class {
 			concurrency: options.concurrency || 8,
 			items: target_years,
 			name: "Professions E_clampToPercentagesAndAggregates",
-			task_generator: (year) => {
-				let baselines_by_sex = {
-					f: this.getDynamicSectorBaselines(year, "f"),
-					m: this.getDynamicSectorBaselines(year, "m")
-				};
-
-				return {
-					type: "clamp_professions",
-					age_sex_folder: global.age_sex.output_rasters,
-					categories: categories,
-					lfpr_folder: LFPR_OLS.output_lfpr_rates,
-					logit_rasters_folder: this.intermediate_logit_rasters,
-					olivetti_categories: olivetti_categories,
-					output_aggregates: output_aggregates,
-					output_percentages: output_percentages,
-					sector_baselines: baselines_by_sex,
-					sexes: sexes,
-					working_cohorts: working_cohorts,
-					year: year
-				};
-			},
+			task_generator: (year) => ({
+				type: "clamp_professions",
+				age_sex_folder: global.age_sex.output_rasters,
+				categories: categories,
+				geocode_path: (typeof admin_modern !== "undefined") ? admin_modern.input_geocodes_raster : `${global.h1 || "./histmap/1.data_raw/"}admin_modern/geocodes.png`,
+				lfpr_folder: LFPR_OLS.output_lfpr_rates,
+				logit_rasters_folder: this.intermediate_logit_rasters,
+				olivetti_categories: olivetti_categories,
+				output_aggregates: output_aggregates,
+				output_percentages: output_percentages,
+				sector_baselines: { f: this.getDynamicSectorBaselines(year, "f"), m: this.getDynamicSectorBaselines(year, "m") },
+				sexes: sexes,
+				target_folder: (typeof professions_Olivetti !== "undefined") ? professions_Olivetti.output_rasters : `${global.h1 || "./histmap/1.data_raw/"}professions_Olivetti/output_rasters/`,
+				working_cohorts: working_cohorts,
+				year: year
+			}),
 			handler: async (year) => {
 				let agg_t = {};
 				for (let i = 0; i < categories.length; i++) agg_t[categories[i]] = null;
@@ -695,16 +637,14 @@ global.professions = class {
 				for (let s = 0; s < sexes.length; s++) {
 					let sex = sexes[s];
 					let lfpr_path = `${LFPR_OLS.output_lfpr_rates}lfpr_${sex}_${year}.png`;
-					
 					if (!fs.existsSync(lfpr_path)) continue;
 					let lfpr_raster = GeoPNG.loadNumberRasterImage(lfpr_path, { format: "float32" });
-					
+
 					width = lfpr_raster.width;
 					height = lfpr_raster.height;
-					
 					let data_len = lfpr_raster.data.length;
 					let pop_raster = new Float32Array(data_len);
-					
+
 					for (let i = 0; i < working_cohorts.length; i++) {
 						let cp = `${global.age_sex.output_rasters}${sex}_${working_cohorts[i]}_${year}.png`;
 						if (fs.existsSync(cp)) {
@@ -715,21 +655,46 @@ global.professions = class {
 							}
 						}
 					}
-					
+
 					if (!pop_t) pop_t = new Float32Array(data_len);
 					for (let i = 0; i < data_len; i++) pop_t[i] += pop_raster[i];
-					
-					let prob_rasters = {};
-					let missing_probs = false;
-					
+
+					let missing_probs = false, prob_rasters = {};
+
 					for (let i = 0; i < olivetti_categories.length; i++) {
 						let path = `${this.intermediate_logit_rasters}logit_${sex}_${year}_class_${olivetti_categories[i]}.png`;
 						if (!fs.existsSync(path)) { missing_probs = true; break; }
 						prob_rasters[olivetti_categories[i]] = GeoPNG.loadNumberRasterImage(path, { format: "float32" });
 					}
-					
+
 					if (missing_probs) continue;
-					
+
+					let geocode_data = null, geocode_path = (typeof admin_modern !== "undefined") ? admin_modern.input_geocodes_raster : `${global.h1 || "./histmap/1.data_raw/"}admin_modern/geocodes.png`;
+					let has_targets = false, target_folder = (typeof professions_Olivetti !== "undefined") ? professions_Olivetti.output_rasters : `${global.h1 || "./histmap/1.data_raw/"}professions_Olivetti/output_rasters/`, target_rasters = {};
+
+					if (target_folder && fs.existsSync(target_folder)) {
+						let all_exist = true;
+						for (let i = 0; i < olivetti_categories.length; i++) {
+							let tp = `${target_folder}${olivetti_categories[i]}_${sex}_${year}.png`;
+							if (!fs.existsSync(tp)) { all_exist = false; break; }
+						}
+						if (all_exist) {
+							has_targets = true;
+							for (let i = 0; i < olivetti_categories.length; i++) {
+								let tp = `${target_folder}${olivetti_categories[i]}_${sex}_${year}.png`;
+								target_rasters[olivetti_categories[i]] = GeoPNG.loadNumberRasterImage(tp, { format: "float32" });
+							}
+						}
+					}
+
+					if (has_targets && geocode_path && fs.existsSync(geocode_path)) {
+						if (!global._cached_geocodes_raster || global._cached_geocodes_path !== geocode_path) {
+							global._cached_geocodes_raster = GeoPNG.loadImage(geocode_path);
+							global._cached_geocodes_path = geocode_path;
+						}
+						if (global._cached_geocodes_raster) geocode_data = global._cached_geocodes_raster.data;
+					}
+
 					let num_olivetti = olivetti_categories.length;
 					let sector_baselines = this.getDynamicSectorBaselines(year, sex);
 					let sample = [];
@@ -752,12 +717,8 @@ global.professions = class {
 					}
 
 					let lambda = new Float64Array(num_olivetti);
-					for (let i = 0; i < num_olivetti; i++) {
-						let cat = olivetti_categories[i];
-						lambda[i] = (sector_baselines && sector_baselines[cat] !== undefined)
-							? sector_baselines[cat]
-							: 0.25;
-					}
+					for (let i = 0; i < num_olivetti; i++)
+						lambda[i] = (sector_baselines && sector_baselines[olivetti_categories[i]] !== undefined) ? sector_baselines[olivetti_categories[i]] : 0.25;
 
 					// Fast iterative proportional fitting (IPF) raking on sample to align macro proportions
 					if (tot_sample_pop > 0 && sample.length > 0) {
@@ -801,12 +762,69 @@ global.professions = class {
 					let l0 = lambda[0], l1 = lambda[1], l2 = lambda[2], l3 = lambda[3];
 					let p0 = prob_rasters[olivetti_categories[0]].data, p1 = prob_rasters[olivetti_categories[1]].data;
 					let p2 = prob_rasters[olivetti_categories[2]].data, p3 = prob_rasters[olivetti_categories[3]].data;
-					let pct_c0 = pct_arrays[olivetti_categories[0]], pct_c1 = pct_arrays[olivetti_categories[1]];
-					let pct_c2 = pct_arrays[olivetti_categories[2]], pct_c3 = pct_arrays[olivetti_categories[3]], pct_niw = pct_arrays["not_in_work"];
-					let agg_c0 = agg_arrays[olivetti_categories[0]], agg_c1 = agg_arrays[olivetti_categories[1]];
-					let agg_c2 = agg_arrays[olivetti_categories[2]], agg_c3 = agg_arrays[olivetti_categories[3]], agg_niw = agg_arrays["not_in_work"];
-					let agg_t0 = agg_t[olivetti_categories[0]], agg_t1 = agg_t[olivetti_categories[1]];
-					let agg_t2 = agg_t[olivetti_categories[2]], agg_t3 = agg_t[olivetti_categories[3]], agg_t_niw = agg_t["not_in_work"];
+
+					// Cross-Entropy Spatial Calibration (Logit Shift for empirical country clamps)
+					let country_factors = {};
+					let t0 = (has_targets) ? target_rasters[olivetti_categories[0]].data : null;
+					let t1 = (has_targets) ? target_rasters[olivetti_categories[1]].data : null;
+					let t2 = (has_targets) ? target_rasters[olivetti_categories[2]].data : null;
+					let t3 = (has_targets) ? target_rasters[olivetti_categories[3]].data : null;
+
+					if (has_targets) {
+						let countries = {};
+
+						for (let j = 0; j < data_len; j++) {
+							let pop = pop_raster[j];
+							let tag = t0[j] || 0, tmf = t1[j] || 0, tse = t2[j] || 0, tinf = t3[j] || 0;
+							let t_sum = tag + tmf + tse + tinf;
+							if (t_sum <= 0) continue;
+
+							let cid = 0;
+							if (geocode_data) {
+								let b_idx = j * 4;
+								cid = (geocode_data[b_idx] << 16) | (geocode_data[b_idx + 1] << 8) | geocode_data[b_idx + 2];
+							}
+							if (cid === 0) cid = `${tag.toFixed(3)}_${tmf.toFixed(3)}_${tse.toFixed(3)}_${tinf.toFixed(3)}`;
+
+							if (!countries[cid])
+								countries[cid] = { model_sum: [0, 0, 0, 0], pop: 0, target_sum: [0, 0, 0, 0] };
+
+							if (pop > 0) {
+								let lfpr = lfpr_raster.data[j];
+								if (isNaN(lfpr)) lfpr = 0;
+
+								let s0 = l0 * p0[j], s1 = l1 * p1[j], s2 = l2 * p2[j], s3 = l3 * p3[j];
+								let sum_s = s0 + s1 + s2 + s3;
+								let norm_s = (sum_s > 0) ? (lfpr / sum_s) : 0;
+								let m0 = s0 * norm_s, m1 = s1 * norm_s, m2 = s2 * norm_s, m3 = s3 * norm_s;
+
+								countries[cid].pop += pop;
+								countries[cid].target_sum[0] += tag * pop; countries[cid].target_sum[1] += tmf * pop;
+								countries[cid].target_sum[2] += tse * pop; countries[cid].target_sum[3] += tinf * pop;
+								countries[cid].model_sum[0] += m0 * pop; countries[cid].model_sum[1] += m1 * pop;
+								countries[cid].model_sum[2] += m2 * pop; countries[cid].model_sum[3] += m3 * pop;
+							}
+						}
+
+						for (let cid in countries) {
+							let c = countries[cid];
+							let tot_target = c.target_sum[0] + c.target_sum[1] + c.target_sum[2] + c.target_sum[3];
+							let tot_model = c.model_sum[0] + c.model_sum[1] + c.model_sum[2] + c.model_sum[3];
+
+							let f = [1, 1, 1, 1];
+							if (tot_target > 0 && tot_model > 0) {
+								for (let k = 0; k < 4; k++) {
+									let tau = c.target_sum[k] / tot_target, m_mean = c.model_sum[k] / tot_model;
+									f[k] = (m_mean > 1e-7) ? (tau / m_mean) : ((tau > 0) ? 1.0 : 0.0);
+								}
+							}
+							country_factors[cid] = f;
+						}
+					}
+
+					let pct_c0 = pct_arrays[olivetti_categories[0]], pct_c1 = pct_arrays[olivetti_categories[1]], pct_c2 = pct_arrays[olivetti_categories[2]], pct_c3 = pct_arrays[olivetti_categories[3]], pct_niw = pct_arrays["not_in_work"];
+					let agg_c0 = agg_arrays[olivetti_categories[0]], agg_c1 = agg_arrays[olivetti_categories[1]], agg_c2 = agg_arrays[olivetti_categories[2]], agg_c3 = agg_arrays[olivetti_categories[3]], agg_niw = agg_arrays["not_in_work"];
+					let agg_t0 = agg_t[olivetti_categories[0]], agg_t1 = agg_t[olivetti_categories[1]], agg_t2 = agg_t[olivetti_categories[2]], agg_t3 = agg_t[olivetti_categories[3]], agg_t_niw = agg_t["not_in_work"];
 
 					for (let j = 0; j < data_len; j++) {
 						let pop = pop_raster[j];
@@ -819,63 +837,49 @@ global.professions = class {
 						let sum_s = s0 + s1 + s2 + s3;
 
 						let norm_s = (sum_s > 0) ? (lfpr / sum_s) : 0, b = (sum_s > 0) ? 0 : (lfpr * 0.25);
-						let final_0 = s0*norm_s + b, final_1 = s1*norm_s + b, final_2 = s2*norm_s + b, final_3 = s3*norm_s + b;
+						let m0 = s0*norm_s + b, m1 = s1*norm_s + b, m2 = s2*norm_s + b, m3 = s3*norm_s + b;
+						let final_0 = m0, final_1 = m1, final_2 = m2, final_3 = m3;
+
+						if (has_targets) {
+							let tag = t0[j] || 0, tmf = t1[j] || 0, tse = t2[j] || 0, tinf = t3[j] || 0;
+							if (tag + tmf + tse + tinf > 0) {
+								let cid = 0;
+								if (geocode_data) {
+									let b_idx = j * 4;
+									cid = (geocode_data[b_idx] << 16) | (geocode_data[b_idx + 1] << 8) | geocode_data[b_idx + 2];
+								}
+								if (cid === 0) cid = `${tag.toFixed(3)}_${tmf.toFixed(3)}_${tse.toFixed(3)}_${tinf.toFixed(3)}`;
+
+								let f = country_factors[cid];
+								if (f) {
+									let u0 = m0 * f[0], u1 = m1 * f[1], u2 = m2 * f[2], u3 = m3 * f[3];
+									let sum_u = u0 + u1 + u2 + u3;
+									let norm_u = (sum_u > 0) ? (lfpr / sum_u) : 0, b_u = (sum_u > 0) ? 0 : (lfpr * 0.25);
+									final_0 = u0 * norm_u + b_u; final_1 = u1 * norm_u + b_u; final_2 = u2 * norm_u + b_u; final_3 = u3 * norm_u + b_u;
+								}
+							}
+						}
+
 						let final_niw = Math.max(0, 1.0 - lfpr);
+						pct_c0[j] = final_0; pct_c1[j] = final_1; pct_c2[j] = final_2; pct_c3[j] = final_3; pct_niw[j] = final_niw;
 
-						pct_c0[j] = final_0; pct_c1[j] = final_1; pct_c2[j] = final_2; pct_c3[j] = final_3;
-						pct_niw[j] = final_niw;
-
-						let a0 = final_0 * pop, a1 = final_1 * pop, a2 = final_2 * pop, a3 = final_3 * pop;
-						let aniw = final_niw * pop;
-
+						let a0 = final_0 * pop, a1 = final_1 * pop, a2 = final_2 * pop, a3 = final_3 * pop, aniw = final_niw * pop;
 						agg_c0[j] = a0; agg_c1[j] = a1; agg_c2[j] = a2; agg_c3[j] = a3; agg_niw[j] = aniw;
 						agg_t0[j] += a0; agg_t1[j] += a1; agg_t2[j] += a2; agg_t3[j] += a3; agg_t_niw[j] += aniw;
 					}
 
 					for (let i = 0; i < categories.length; i++) {
 						let c = categories[i];
-
-						GeoPNG.saveNumberRasterImage({
-							file_path: `${output_percentages}${c}_${sex}_${year}.png`,
-							format: "float32",
-							height: height,
-							width: width,
-							function: (idx) => pct_arrays[c][idx]
-						});
-						
-						GeoPNG.saveNumberRasterImage({
-							file_path: `${output_aggregates}${c}_${sex}_${year}.png`,
-							format: "float32",
-							height: height,
-							width: width,
-							function: (idx) => agg_arrays[c][idx]
-						});
+						GeoPNG.saveNumberRasterImage({ file_path: `${output_percentages}${c}_${sex}_${year}.png`, format: "float32", height: height, width: width, function: (idx) => pct_arrays[c][idx] });
+						GeoPNG.saveNumberRasterImage({ file_path: `${output_aggregates}${c}_${sex}_${year}.png`, format: "float32", height: height, width: width, function: (idx) => agg_arrays[c][idx] });
 					}
 				}
 				
 				if (pop_t) {
 					for (let i = 0; i < categories.length; i++) {
 						let c = categories[i];
-						
-						GeoPNG.saveNumberRasterImage({
-							file_path: `${output_percentages}${c}_t_${year}.png`,
-							format: "float32",
-							height: height,
-							width: width,
-							function: (idx) => {
-								let total_p = pop_t[idx];
-								if (total_p <= 0) return 0;
-								return agg_t[c][idx] / total_p;
-							}
-						});
-						
-						GeoPNG.saveNumberRasterImage({
-							file_path: `${output_aggregates}${c}_t_${year}.png`,
-							format: "float32",
-							height: height,
-							width: width,
-							function: (idx) => agg_t[c][idx]
-						});
+						GeoPNG.saveNumberRasterImage({ file_path: `${output_percentages}${c}_t_${year}.png`, format: "float32", height: height, width: width, function: (idx) => (pop_t[idx] > 0) ? (agg_t[c][idx] / pop_t[idx]) : 0 });
+						GeoPNG.saveNumberRasterImage({ file_path: `${output_aggregates}${c}_t_${year}.png`, format: "float32", height: height, width: width, function: (idx) => agg_t[c][idx] });
 					}
 				}
 			}
@@ -913,8 +917,7 @@ global.professions = class {
 			for (let i = 0; i < milestones.length - 1; i++)
 				if (year >= milestones[i].y && year <= milestones[i + 1].y) { lower = milestones[i]; upper = milestones[i + 1]; break; }
 
-			let t = (upper.y === lower.y) ? 0 : (year - lower.y) / (upper.y - lower.y);
-			let s = t*t*(3 - 2*t);
+			let t = (upper.y === lower.y) ? 0 : (year - lower.y) / (upper.y - lower.y), s = t*t*(3 - 2*t);
 			return {
 				agriculture: (1 - s)*lower[sex].agriculture + s*upper[sex].agriculture,
 				manufacturing: (1 - s)*lower[sex].manufacturing + s*upper[sex].manufacturing,
@@ -951,12 +954,7 @@ global.professions = class {
 			let inf = (sex === "f") ? 0.05 : 0.04;
 			let mfg = 0.80*u_rate + ((sex === "f") ? 0.03 : 0.02);
 			let serv = 1.00*u_rate + ((sex === "f") ? 0.045 : 0.035);
-			return {
-				agriculture: Math.max(0.60, 1.0 - serv - mfg - inf),
-				manufacturing: mfg,
-				services: serv,
-				informal_labour: inf
-			};
+			return { agriculture: Math.max(0.60, 1.0 - serv - mfg - inf), manufacturing: mfg, services: serv, informal_labour: inf };
 		}
 
 		//4. Pre-Neolithic to Neolithic Transition (-10000 to -3000 BC): Land use intensity scales farming vs foraging
