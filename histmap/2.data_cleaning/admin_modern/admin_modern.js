@@ -111,6 +111,10 @@ global.admin_modern = class {
 			}
 		});
 		
+		//Safety alias for Belgium variant colour
+		if (!colourcodes_obj["235,237,102"])
+			colourcodes_obj["235,237,102"] = ["BEL"];
+		
 		//Return statement
 		return colourcodes_obj;
 	}

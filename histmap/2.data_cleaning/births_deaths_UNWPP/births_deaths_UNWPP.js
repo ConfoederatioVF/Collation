@@ -176,18 +176,21 @@ global.births_deaths_UNWPP = class {
 		let geocode_obj = admin_modern.getISO3ColourcodesObject();
 		let geocode_raster = GeoPNG.loadImage(admin_modern.input_geocodes_raster);
 		
-		let unwpp_years = age_sex_UNWPP.unwpp_years;
+		let unwpp_years = (options.years) ? options.years : age_sex_UNWPP.unwpp_years;
 		let kummu_years = births_deaths_Kummu.years;
 		let kummu_min_year = kummu_years[0];
 		let kummu_max_year = kummu_years[kummu_years.length - 1];
 		
 		//Base raster cache (ordered iteration means each base is loaded once)
-		let current_base_year = null;
+		let base_births_macro_rates = {};
 		let base_births_raster = null;
-		let base_deaths_raster = null;
 		let base_births_sums = null;
+		let base_deaths_macro_rates = {};
+		let base_deaths_raster = null;
 		let base_deaths_sums = null;
+		let base_popc_raster = null;
 		let base_popc_sums = null;
+		let current_base_year = null;
 		
 		//Iterate over temporal bounds
 		for (let y = 0; y < unwpp_years.length; y++) {
@@ -206,86 +209,117 @@ global.births_deaths_UNWPP = class {
 			if (base_year !== current_base_year) {
 				let base_births_path = `${births_deaths_Kummu.output_births_folder}births_${base_year}.png`;
 				let base_deaths_path = `${births_deaths_Kummu.output_deaths_folder}deaths_${base_year}.png`;
+				let base_popc_path = `${population_Stadester.input_popc_folder}stadester_population_${base_year}.png`;
 				
-				if (!fs.existsSync(base_births_path) || !fs.existsSync(base_deaths_path)) {
-					console.warn(`[WARN] Missing Kummu base rasters for base year ${base_year}. Skipping ${local_year}.`);
+				if (!fs.existsSync(base_births_path) || !fs.existsSync(base_deaths_path) || !fs.existsSync(base_popc_path)) {
+					console.warn(`[WARN] Missing Kummu/Stadester base rasters for base year ${base_year}. Skipping ${local_year}.`);
 					current_base_year = null;
 					continue;
 				}
 				
 				base_births_raster = GeoPNG.loadNumberRasterImage(base_births_path, { format: "float32" });
 				base_deaths_raster = GeoPNG.loadNumberRasterImage(base_deaths_path, { format: "float32" });
+				base_popc_raster = GeoPNG.loadNumberRasterImage(base_popc_path, { format: "float32" });
+				
 				base_births_sums = this._getNationalSums(base_births_raster, geocode_obj, geocode_raster);
 				base_deaths_sums = this._getNationalSums(base_deaths_raster, geocode_obj, geocode_raster);
+				base_popc_sums = this._getNationalSums(base_popc_raster, geocode_obj, geocode_raster);
 				
-				//Load base-year Stadestér population sums for the rate-preserving fallback
-				base_popc_sums = {};
-				let base_popc_path = `${population_Stadester.input_popc_folder}stadester_population_${base_year}.png`;
-				
-				if (fs.existsSync(base_popc_path)) {
-					let base_popc_raster = GeoPNG.loadNumberRasterImage(base_popc_path, { format: "float32" });
-					base_popc_sums = this._getNationalSums(base_popc_raster, geocode_obj, geocode_raster);
-				}
+				//Derive national macro crude rates for spatial gap fallback
+				base_births_macro_rates = {};
+				base_deaths_macro_rates = {};
+				Object.iterate(base_popc_sums, (local_iso, local_base_pop) => {
+					if (local_base_pop > 0) {
+						if (base_births_sums[local_iso] > 0) base_births_macro_rates[local_iso] = base_births_sums[local_iso] / local_base_pop;
+						if (base_deaths_sums[local_iso] > 0) base_deaths_macro_rates[local_iso] = base_deaths_sums[local_iso] / local_base_pop;
+					}
+				});
 				
 				current_base_year = base_year;
-				
 				console.log(`- Loaded Kummu base spatial masks from ${base_year}`);
 			}
 			
-			//Compute target-year Stadestér national population sums for the rate-preserving fallback
-			let target_popc_sums = {};
+			//Load target-year Stadestér population anchor raster
 			let target_popc_path = `${population_Stadester.input_popc_folder}stadester_population_${local_year}.png`;
+			if (!fs.existsSync(target_popc_path)) continue;
+			let target_popc_raster = GeoPNG.loadNumberRasterImage(target_popc_path, { format: "float32" });
 			
-			if (fs.existsSync(target_popc_path)) {
-				let target_popc_raster = GeoPNG.loadNumberRasterImage(target_popc_path, { format: "float32" });
-				target_popc_sums = this._getNationalSums(target_popc_raster, geocode_obj, geocode_raster);
+			//Compute local demographic propensities weighted by target population
+			let total_pixels = target_popc_raster.data.length;
+			let expected_births = new Float32Array(total_pixels);
+			let expected_births_sums = {};
+			let expected_female_deaths = new Float32Array(total_pixels);
+			let expected_female_deaths_sums = {};
+			let expected_male_deaths = new Float32Array(total_pixels);
+			let expected_male_deaths_sums = {};
+			
+			for (let i = 0; i < total_pixels; i++) {
+				let local_target_pop = target_popc_raster.data[i];
+				if (local_target_pop <= 0) continue;
+				
+				let byte_index = i * 4;
+				let local_colour_key = [
+					geocode_raster.data[byte_index],
+					geocode_raster.data[byte_index + 1],
+					geocode_raster.data[byte_index + 2]
+				].join(",");
+				let local_geocodes = geocode_obj[local_colour_key];
+				
+				let primary_iso = (local_geocodes && local_geocodes.length > 0) ? local_geocodes[0] : "GLOBAL";
+				let local_base_b = base_births_raster.data[i];
+				let local_base_d = base_deaths_raster.data[i];
+				let local_base_p = base_popc_raster.data[i];
+				
+				let local_rate_b = (local_base_p > 0 && local_base_b > 0) ? (local_base_b / local_base_p) : (base_births_macro_rates[primary_iso] || 0.02);
+				let local_rate_d = (local_base_p > 0 && local_base_d > 0) ? (local_base_d / local_base_p) : (base_deaths_macro_rates[primary_iso] || 0.015);
+				
+				let exp_b = local_target_pop * local_rate_b;
+				let exp_fd = local_target_pop * local_rate_d * 0.5;
+				let exp_md = local_target_pop * local_rate_d * 0.5;
+				
+				expected_births[i] = exp_b;
+				expected_female_deaths[i] = exp_fd;
+				expected_male_deaths[i] = exp_md;
+				
+				if (local_geocodes)
+					for (let x = 0; x < local_geocodes.length; x++) {
+						let local_iso = local_geocodes[x];
+						Object.modifyValue(expected_births_sums, local_iso, exp_b);
+						Object.modifyValue(expected_female_deaths_sums, local_iso, exp_fd);
+						Object.modifyValue(expected_male_deaths_sums, local_iso, exp_md);
+					}
 			}
 			
-			//Helper function to derive the population ratio scalar. This preserves Kummu crude
-			//rates per capita while letting aggregates float with national population change
-			let getPopulationRatio = function (local_iso) {
-				let local_base_pop = base_popc_sums ? base_popc_sums[local_iso] : undefined;
-				let local_target_pop = target_popc_sums[local_iso];
-				
-				if (local_base_pop !== undefined && local_base_pop > 0 && local_target_pop !== undefined)
-					return local_target_pop / local_base_pop;
-				
-				return 1; //No population anchor available; copy base natively
-			};
-			
-			//Helper function to resolve a per-ISO scalar for a single variable. UNWPP zeroes
-			//are treated as data glitches (not truth), triggering a constant-rate Kummu
-			//backprojection. rate_fraction apportions the shared Kummu deaths base by sex
-			//when the fallback fires (1.0 for births, 0.5 per sex for deaths)
-			let resolveISOScalar = function (local_iso, local_actual, local_base_sum, rate_fraction) {
-				if (local_actual !== undefined && local_actual > 0)
-					return (local_base_sum !== 0) ? (local_actual / local_base_sum) : 0;
-				
-				//Data glitch fallback: hold the Kummu crude rate constant, scale with population
-				return getPopulationRatio(local_iso) * rate_fraction;
-			};
-			
-			//Determine per-ISO scaling ratios against UNWPP national aggregates.
-			//Each variable (births, female deaths, male deaths) is assessed independently
+			//Determine per-ISO scaling factors against UNWPP national totals
 			let births_scalars = {};
 			let female_deaths_scalars = {};
 			let male_deaths_scalars = {};
 			
-			Object.iterate(base_births_sums, (local_iso, local_base_sum) => {
+			Object.iterate(expected_births_sums, (local_iso, local_exp_b) => {
 				let local_actual_births = births_data[local_iso]?.[local_year]?.total;
-				
-				births_scalars[local_iso] = resolveISOScalar(local_iso, local_actual_births, local_base_sum, 1);
+				if (local_actual_births > 0 && local_exp_b > 0)
+					births_scalars[local_iso] = local_actual_births / local_exp_b;
+				else
+					births_scalars[local_iso] = 1;
 			});
 			
-			Object.iterate(base_deaths_sums, (local_iso, local_base_sum) => {
-				let local_female_deaths = deaths_data[local_iso]?.[local_year]?.f_total;
-				let local_male_deaths = deaths_data[local_iso]?.[local_year]?.m_total;
-				
-				female_deaths_scalars[local_iso] = resolveISOScalar(local_iso, local_female_deaths, local_base_sum, 0.5);
-				male_deaths_scalars[local_iso] = resolveISOScalar(local_iso, local_male_deaths, local_base_sum, 0.5);
+			Object.iterate(expected_female_deaths_sums, (local_iso, local_exp_fd) => {
+				let local_actual_fd = deaths_data[local_iso]?.[local_year]?.f_total;
+				if (local_actual_fd > 0 && local_exp_fd > 0)
+					female_deaths_scalars[local_iso] = local_actual_fd / local_exp_fd;
+				else
+					female_deaths_scalars[local_iso] = 1;
 			});
 			
-			//Helper to resolve a per-pixel scalar from geocodes, passing through unscaled if unrecognised
+			Object.iterate(expected_male_deaths_sums, (local_iso, local_exp_md) => {
+				let local_actual_md = deaths_data[local_iso]?.[local_year]?.m_total;
+				if (local_actual_md > 0 && local_exp_md > 0)
+					male_deaths_scalars[local_iso] = local_actual_md / local_exp_md;
+				else
+					male_deaths_scalars[local_iso] = 1;
+			});
+			
+			//Helper to resolve a per-pixel scalar from geocodes
 			let resolveScalar = function (local_index, scalar_obj, fallback) {
 				let byte_index = local_index * 4;
 				let local_colour_key = [
@@ -307,28 +341,28 @@ global.births_deaths_UNWPP = class {
 			GeoPNG.saveNumberRasterImage({
 				file_path: births_output_path,
 				format: "float32",
-				width: base_births_raster.width,
-				height: base_births_raster.height,
+				width: target_popc_raster.width,
+				height: target_popc_raster.height,
 				function: (local_index) => {
-					return base_births_raster.data[local_index] * resolveScalar(local_index, births_scalars, 1);
+					return expected_births[local_index] * resolveScalar(local_index, births_scalars, 1);
 				}
 			});
 			GeoPNG.saveNumberRasterImage({
 				file_path: female_deaths_output_path,
 				format: "float32",
-				width: base_deaths_raster.width,
-				height: base_deaths_raster.height,
+				width: target_popc_raster.width,
+				height: target_popc_raster.height,
 				function: (local_index) => {
-					return base_deaths_raster.data[local_index] * resolveScalar(local_index, female_deaths_scalars, 0.5);
+					return expected_female_deaths[local_index] * resolveScalar(local_index, female_deaths_scalars, 1);
 				}
 			});
 			GeoPNG.saveNumberRasterImage({
 				file_path: male_deaths_output_path,
 				format: "float32",
-				width: base_deaths_raster.width,
-				height: base_deaths_raster.height,
+				width: target_popc_raster.width,
+				height: target_popc_raster.height,
 				function: (local_index) => {
-					return base_deaths_raster.data[local_index] * resolveScalar(local_index, male_deaths_scalars, 0.5);
+					return expected_male_deaths[local_index] * resolveScalar(local_index, male_deaths_scalars, 1);
 				}
 			});
 			
@@ -361,7 +395,7 @@ global.births_deaths_UNWPP = class {
 		let geocode_obj = admin_modern.getISO3ColourcodesObject();
 		let geocode_raster = GeoPNG.loadImage(admin_modern.input_geocodes_raster);
 		
-		let unwpp_years = age_sex_UNWPP.unwpp_years;
+		let unwpp_years = (options.years) ? options.years : age_sex_UNWPP.unwpp_years;
 		
 		//Define the three raster series to clamp: [intermediate_path, output_path, UNWPP total accessor]
 		let raster_series = [
@@ -403,10 +437,12 @@ global.births_deaths_UNWPP = class {
 					format: "float32"
 				});
 				
-				//Compute national backcalc sums over populated pixels only
+				//Compute national backcalc sums and macro rates over populated pixels
+				let backcalc_pop_sums = {};
 				let backcalc_sums = {};
 				for (let i = 0; i < backcalc_raster.data.length; i++) {
-					if (stadester_raster.data[i] <= 0) continue;
+					let local_pop = stadester_raster.data[i];
+					if (local_pop <= 0) continue;
 					
 					let local_value = backcalc_raster.data[i];
 					if (isNaN(local_value) || local_value <= 0) continue;
@@ -420,30 +456,52 @@ global.births_deaths_UNWPP = class {
 					let local_geocodes = geocode_obj[local_colour_key];
 					
 					if (local_geocodes)
-						for (let x = 0; x < local_geocodes.length; x++)
-							Object.modifyValue(backcalc_sums, local_geocodes[x], local_value);
+						for (let x = 0; x < local_geocodes.length; x++) {
+							let local_iso = local_geocodes[x];
+							Object.modifyValue(backcalc_sums, local_iso, local_value);
+							Object.modifyValue(backcalc_pop_sums, local_iso, local_pop);
+						}
 				}
 				
-				//Determine per-ISO clamping mode: rescale existing footprint, or distribute
-				//nationally where the backcalculation has no footprint but population exists
-				let iso_scalars = {};
-				let iso_rates = {};
+				let national_macro_rates = {};
+				Object.iterate(backcalc_pop_sums, (local_iso, local_pop) => {
+					if (local_pop > 0 && backcalc_sums[local_iso] > 0)
+						national_macro_rates[local_iso] = backcalc_sums[local_iso] / local_pop;
+				});
 				
+				//Compute total expected demographic mass across all populated pixels
+				let expected_national_mass = {};
+				for (let i = 0; i < backcalc_raster.data.length; i++) {
+					let local_pop = stadester_raster.data[i];
+					if (local_pop <= 0) continue;
+					
+					let byte_index = i * 4;
+					let local_colour_key = [
+						geocode_raster.data[byte_index],
+						geocode_raster.data[byte_index + 1],
+						geocode_raster.data[byte_index + 2]
+					].join(",");
+					let local_geocodes = geocode_obj[local_colour_key];
+					let primary_iso = (local_geocodes && local_geocodes.length > 0) ? local_geocodes[0] : "GLOBAL";
+					let local_value = backcalc_raster.data[i];
+					let local_weight = (local_value > 0) ? local_value : (local_pop * (national_macro_rates[primary_iso] || 0.02));
+					
+					if (local_geocodes)
+						for (let x = 0; x < local_geocodes.length; x++)
+							Object.modifyValue(expected_national_mass, local_geocodes[x], local_weight);
+				}
+				
+				//Determine per-ISO scaling factors against UNWPP national totals
+				let iso_scalars = {};
 				Object.iterate(stadester_sums, (local_iso, local_stadester_pop) => {
 					let local_unwpp_total = total_accessor(local_iso, local_year.toString());
-					let local_backcalc_sum = backcalc_sums[local_iso] || 0;
+					let local_expected = expected_national_mass[local_iso] || 0;
 					
-					//Zero/missing UNWPP totals are data glitches, not truth: skip re-anchoring
-					//and let the rate-preserving backcalculation pass through
+					//Zero/missing UNWPP totals are data glitches: let backcalculation pass through
 					if (local_unwpp_total === undefined || local_unwpp_total <= 0) return;
 					
-					if (local_backcalc_sum > 0) {
-						//Scenario A: rescale the populated footprint to hit UNWPP totals exactly
-						iso_scalars[local_iso] = local_unwpp_total / local_backcalc_sum;
-					} else if (local_stadester_pop > 0) {
-						//Scenario B: no backcalculated footprint; distribute at the national crude rate
-						iso_rates[local_iso] = local_unwpp_total / local_stadester_pop;
-					}
+					if (local_expected > 0)
+						iso_scalars[local_iso] = local_unwpp_total / local_expected;
 				});
 				
 				GeoPNG.saveNumberRasterImage({
@@ -454,11 +512,11 @@ global.births_deaths_UNWPP = class {
 					function: (local_index) => {
 						let local_stadester_pop = stadester_raster.data[local_index];
 						
-						//If Stadester explicitly states nobody lives here, strict clamp to 0
+						//Strict zero clamp where population is zero
 						if (local_stadester_pop <= 0) return 0;
 						
 						let local_backcalc_value = backcalc_raster.data[local_index];
-						if (isNaN(local_backcalc_value)) local_backcalc_value = 0;
+						if (isNaN(local_backcalc_value) || local_backcalc_value < 0) local_backcalc_value = 0;
 						
 						let byte_index = local_index * 4;
 						let local_colour_key = [
@@ -471,14 +529,15 @@ global.births_deaths_UNWPP = class {
 						if (local_geocodes)
 							for (let x = 0; x < local_geocodes.length; x++) {
 								let local_iso = local_geocodes[x];
+								let local_scalar = iso_scalars[local_iso];
 								
-								if (iso_scalars[local_iso] !== undefined)
-									return local_backcalc_value * iso_scalars[local_iso];
-								if (iso_rates[local_iso] !== undefined)
-									return local_stadester_pop * iso_rates[local_iso];
+								if (local_scalar !== undefined) {
+									let local_weight = (local_backcalc_value > 0) ? local_backcalc_value : (local_stadester_pop * (national_macro_rates[local_iso] || 0.02));
+									return local_weight * local_scalar;
+								}
 							}
 						
-						return local_backcalc_value; //Unrecognised/glitch pixels pass through
+						return (local_backcalc_value > 0) ? local_backcalc_value : (local_stadester_pop * (national_macro_rates["GLOBAL"] || 0.02)); //Unrecognised/glitch pixels pass through
 					}
 				});
 				

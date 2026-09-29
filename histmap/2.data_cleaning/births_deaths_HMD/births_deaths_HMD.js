@@ -218,11 +218,14 @@ global.births_deaths_HMD = class {
 			}
 			
 			let base_sums = {};
+			let base_popc_sums = {};
 			let base_raster = GeoPNG.loadNumberRasterImage(base_1950_path, {
 				format: "float32"
 			});
+			let base_popc_path = `${population_Stadester.input_popc_folder}stadester_population_1950.png`;
+			let base_popc_raster = (fs.existsSync(base_popc_path)) ? GeoPNG.loadNumberRasterImage(base_popc_path, { format: "float32" }) : null;
 			
-			//1. Calculate the 1950 starting mass for each HMD region
+			//1. Calculate the 1950 starting event and population mass for each HMD region
 			GeoPNG.operateNumberRasterImage({
 				file_path: base_1950_path,
 				format: "float32",
@@ -235,11 +238,20 @@ global.births_deaths_HMD = class {
 					
 					let geocodes = colour_to_geocode[colour_key];
 					if (geocodes) {
+						let local_pop = (base_popc_raster) ? base_popc_raster.data[local_index] : 0;
 						for (let x = 0; x < geocodes.length; x++) {
-							Object.modifyValue(base_sums, geocodes[x], local_value);
+							let local_geocode = geocodes[x];
+							Object.modifyValue(base_sums, local_geocode, local_value);
+							if (local_pop > 0) Object.modifyValue(base_popc_sums, local_geocode, local_pop);
 						}
 					}
 				}
+			});
+			
+			let base_macro_rates = {};
+			Object.iterate(base_popc_sums, (local_geocode, local_pop) => {
+				if (local_pop > 0 && base_sums[local_geocode] > 0)
+					base_macro_rates[local_geocode] = base_sums[local_geocode] / local_pop;
 			});
 			
 			console.log(`- Loaded 1950 base spatial mask for ${file_prefix}`);
@@ -253,67 +265,95 @@ global.births_deaths_HMD = class {
 				if (year_num >= 1950) continue;
 				
 				let output_path = `${intermediate_folder}${file_prefix}_${year}.png`;
-				
 				if (!overwrite && fs.existsSync(output_path)) continue;
 				
-				let scalars = {};
+				let target_popc_path = `${population_Stadester.input_popc_folder}stadester_population_${year}.png`;
+				if (!fs.existsSync(target_popc_path)) continue;
+				let target_popc_raster = GeoPNG.loadNumberRasterImage(target_popc_path, { format: "float32" });
+				
+				let expected_weights = new Float32Array(target_popc_raster.data.length);
+				let expected_sums = {};
 				let has_data = false;
 				
-				//Calculate domain-restricted scalars
-				Object.iterate(geocode_obj, (geocode, data) => {
+				//Compute local demographic propensities for target year
+				for (let i = 0; i < target_popc_raster.data.length; i++) {
+					let local_target_pop = target_popc_raster.data[i];
+					if (local_target_pop <= 0) continue;
+					
+					let byte_index = i * 4;
+					let colour_key = [
+						geocode_raster.data[byte_index],
+						geocode_raster.data[byte_index + 1],
+						geocode_raster.data[byte_index + 2]
+					].join(",");
+					let geocodes = colour_to_geocode[colour_key];
+					if (!geocodes) continue;
+					
+					let primary_geocode = geocodes[0];
+					let local_data = geocode_obj[primary_geocode];
 					let in_domain = true;
-					if (data.domain) {
-						if (year_num < data.domain[0] || year_num > data.domain[1]) {
+					if (local_data && local_data.domain) {
+						if (year_num < local_data.domain[0] || year_num > local_data.domain[1])
 							in_domain = false;
-						}
 					}
+					if (!in_domain) continue;
 					
-					let hmd_code = geocode.split(".")[0];
+					let hmd_code = primary_geocode.split(".")[0];
+					let target_val = hmd_series[series_key][hmd_code]?.[year];
+					if (target_val === undefined || target_val <= 0) continue;
 					
-					if (in_domain) {
-						let target_val = hmd_series[series_key][hmd_code]?.[year];
-						//Spline overshoot can yield negatives; clamp to zero
-						target_val = (target_val !== undefined && target_val > 0) ? target_val : 0;
-						let base_pop = base_sums[geocode] || 0;
-						
-						if (target_val > 0 && base_pop > 0) {
-							scalars[geocode] = target_val / base_pop;
-							has_data = true;
-						} else {
-							scalars[geocode] = 0;
-						}
-					} else {
-						scalars[geocode] = 0;
-					}
-				});
+					let local_base_p = (base_popc_raster) ? base_popc_raster.data[i] : 0;
+					let local_base_val = base_raster.data[i];
+					let local_rate = (local_base_p > 0 && local_base_val > 0) ? (local_base_val / local_base_p) : (base_macro_rates[primary_geocode] || 0.02);
+					let exp_val = local_target_pop * local_rate;
+					
+					expected_weights[i] = exp_val;
+					has_data = true;
+					
+					for (let x = 0; x < geocodes.length; x++)
+						Object.modifyValue(expected_sums, geocodes[x], exp_val);
+				}
 				
 				//If no regions have data for this time period (e.g. 10000 BC), do not produce an output raster
 				if (!has_data) continue;
+				
+				//Calculate domain-restricted scalars
+				let scalars = {};
+				Object.iterate(expected_sums, (geocode, exp_sum) => {
+					let hmd_code = geocode.split(".")[0];
+					let target_val = hmd_series[series_key][hmd_code]?.[year];
+					target_val = (target_val !== undefined && target_val > 0) ? target_val : 0;
+					
+					if (target_val > 0 && exp_sum > 0)
+						scalars[geocode] = target_val / exp_sum;
+					else
+						scalars[geocode] = 0;
+				});
 				
 				//3. Dasymetrically save the historical raster. Regions without HMD coverage
 				//natively resolve to zero pixels, as partial coverage is expected.
 				GeoPNG.saveNumberRasterImage({
 					file_path: output_path,
 					format: "float32",
-					width: base_raster.width,
-					height: base_raster.height,
+					width: target_popc_raster.width,
+					height: target_popc_raster.height,
 					function: (local_index) => {
+						let exp_weight = expected_weights[local_index];
+						if (exp_weight <= 0) return 0;
+						
 						let byte_index = local_index * 4;
 						let colour_key = [
 							geocode_raster.data[byte_index],
 							geocode_raster.data[byte_index + 1],
 							geocode_raster.data[byte_index + 2]
 						].join(",");
-						
 						let geocodes = colour_to_geocode[colour_key];
-						let local_value = base_raster.data[local_index];
 						
 						if (geocodes) {
 							for (let x = 0; x < geocodes.length; x++) {
 								let scalar = scalars[geocodes[x]];
-								if (scalar !== undefined) {
-									return local_value * scalar;
-								}
+								if (scalar !== undefined && scalar > 0)
+									return exp_weight * scalar;
 							}
 						}
 						return 0;
@@ -434,10 +474,12 @@ global.births_deaths_HMD = class {
 					format: "float32"
 				});
 				
-				//Compute national backcalc sums over populated pixels only
+				//Compute national backcalc sums and macro rates over populated pixels
+				let backcalc_pop_sums = {};
 				let backcalc_sums = {};
 				for (let i = 0; i < backcalc_raster.data.length; i++) {
-					if (stadester_raster.data[i] <= 0) continue;
+					let local_pop = stadester_raster.data[i];
+					if (local_pop <= 0) continue;
 					
 					let local_value = backcalc_raster.data[i];
 					if (isNaN(local_value) || local_value <= 0) continue;
@@ -451,14 +493,44 @@ global.births_deaths_HMD = class {
 					let geocodes = colour_to_geocode[colour_key];
 					
 					if (geocodes)
-						for (let x = 0; x < geocodes.length; x++)
-							Object.modifyValue(backcalc_sums, geocodes[x], local_value);
+						for (let x = 0; x < geocodes.length; x++) {
+							let local_geocode = geocodes[x];
+							Object.modifyValue(backcalc_sums, local_geocode, local_value);
+							Object.modifyValue(backcalc_pop_sums, local_geocode, local_pop);
+						}
 				}
 				
-				//Determine per-region clamping mode: rescale existing footprint, or inject
-				//at the national crude rate where the base has no footprint but population exists
+				let national_macro_rates = {};
+				Object.iterate(backcalc_pop_sums, (local_geocode, local_pop) => {
+					if (local_pop > 0 && backcalc_sums[local_geocode] > 0)
+						national_macro_rates[local_geocode] = backcalc_sums[local_geocode] / local_pop;
+				});
+				
+				//Compute total expected demographic mass across all populated pixels
+				let expected_national_mass = {};
+				for (let i = 0; i < backcalc_raster.data.length; i++) {
+					let local_pop = stadester_raster.data[i];
+					if (local_pop <= 0) continue;
+					
+					let byte_index = i * 4;
+					let colour_key = [
+						geocode_raster.data[byte_index],
+						geocode_raster.data[byte_index + 1],
+						geocode_raster.data[byte_index + 2]
+					].join(",");
+					let geocodes = colour_to_geocode[colour_key];
+					if (!geocodes) continue;
+					
+					let primary_geocode = geocodes[0];
+					let local_value = backcalc_raster.data[i];
+					let local_weight = (local_value > 0) ? local_value : (local_pop * (national_macro_rates[primary_geocode] || 0.02));
+					
+					for (let x = 0; x < geocodes.length; x++)
+						Object.modifyValue(expected_national_mass, geocodes[x], local_weight);
+				}
+				
+				//Determine per-region clamping factors against HMD targets
 				let region_scalars = {};
-				let region_rates = {};
 				
 				Object.iterate(geocode_obj, (geocode, data) => {
 					let in_domain = true;
@@ -471,20 +543,12 @@ global.births_deaths_HMD = class {
 					
 					let hmd_code = geocode.split(".")[0];
 					let local_hmd_total = hmd_series[series_key][hmd_code]?.[year];
-					//Spline overshoot can yield negatives; clamp to zero
 					local_hmd_total = (local_hmd_total !== undefined && local_hmd_total > 0) ? local_hmd_total : 0;
 					if (local_hmd_total <= 0) return;
 					
-					let local_backcalc_sum = backcalc_sums[geocode] || 0;
-					let local_stadester_pop = stadester_sums[geocode] || 0;
-					
-					if (local_backcalc_sum > 0) {
-						//Scenario A: rescale the populated footprint to hit HMD totals exactly
-						region_scalars[geocode] = local_hmd_total / local_backcalc_sum;
-					} else if (local_stadester_pop > 0) {
-						//Scenario B: no backcalculated footprint; inject at the national crude rate
-						region_rates[geocode] = local_hmd_total / local_stadester_pop;
-					}
+					let local_expected = expected_national_mass[geocode] || 0;
+					if (local_expected > 0)
+						region_scalars[geocode] = local_hmd_total / local_expected;
 				});
 				
 				GeoPNG.saveNumberRasterImage({
@@ -495,11 +559,11 @@ global.births_deaths_HMD = class {
 					function: (local_index) => {
 						let local_stadester_pop = stadester_raster.data[local_index];
 						
-						//If Stadester explicitly states nobody lives here, strict clamp to 0
+						//Strict zero clamp where population is zero
 						if (local_stadester_pop <= 0) return 0;
 						
 						let local_backcalc_value = backcalc_raster.data[local_index];
-						if (isNaN(local_backcalc_value)) local_backcalc_value = 0;
+						if (isNaN(local_backcalc_value) || local_backcalc_value < 0) local_backcalc_value = 0;
 						
 						let byte_index = local_index * 4;
 						let colour_key = [
@@ -512,11 +576,12 @@ global.births_deaths_HMD = class {
 						if (geocodes)
 							for (let x = 0; x < geocodes.length; x++) {
 								let local_geocode = geocodes[x];
+								let local_scalar = region_scalars[local_geocode];
 								
-								if (region_scalars[local_geocode] !== undefined)
-									return local_backcalc_value * region_scalars[local_geocode];
-								if (region_rates[local_geocode] !== undefined)
-									return local_stadester_pop * region_rates[local_geocode];
+								if (local_scalar !== undefined) {
+									let local_weight = (local_backcalc_value > 0) ? local_backcalc_value : (local_stadester_pop * (national_macro_rates[local_geocode] || 0.02));
+									return local_weight * local_scalar;
+								}
 							}
 						
 						return 0; //No HMD coverage; partial coverage natively resolves to zero pixels
