@@ -180,10 +180,10 @@ global.births_deaths_HMD = class {
 		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
 
 		//Declare local instance variables
-		let hmd_series = this._getInterpolatedSeries();
 		let geocode_obj = admin_modern.getHMDColourcodesObject();
 		let geocode_raster = GeoPNG.loadImage(admin_modern.input_hmd_raster);
-		let hyde_years = landuse_HYDE.sorted_hyde_years;
+		let hmd_series = this._getInterpolatedSeries();
+		let hyde_years = (options.years) ? options.years.map(String) : landuse_HYDE.sorted_hyde_years;
 		
 		//Map colours to geocodes for fast pixel lookup
 		let colour_to_geocode = {};
@@ -226,27 +226,25 @@ global.births_deaths_HMD = class {
 			let base_popc_raster = (fs.existsSync(base_popc_path)) ? GeoPNG.loadNumberRasterImage(base_popc_path, { format: "float32" }) : null;
 			
 			//1. Calculate the 1950 starting event and population mass for each HMD region
-			GeoPNG.operateNumberRasterImage({
-				file_path: base_1950_path,
-				format: "float32",
-				function: (local_index, local_value) => {
-					let colour_key = [
-						geocode_raster.data[local_index],
-						geocode_raster.data[local_index + 1],
-						geocode_raster.data[local_index + 2]
-					].join(",");
-					
-					let geocodes = colour_to_geocode[colour_key];
-					if (geocodes) {
-						let local_pop = (base_popc_raster) ? base_popc_raster.data[local_index] : 0;
-						for (let x = 0; x < geocodes.length; x++) {
-							let local_geocode = geocodes[x];
-							Object.modifyValue(base_sums, local_geocode, local_value);
-							if (local_pop > 0) Object.modifyValue(base_popc_sums, local_geocode, local_pop);
-						}
+			for (let i = 0; i < base_raster.data.length; i++) {
+				let local_value = base_raster.data[i];
+				let local_index = i * 4;
+				let colour_key = [
+					geocode_raster.data[local_index],
+					geocode_raster.data[local_index + 1],
+					geocode_raster.data[local_index + 2]
+				].join(",");
+				
+				let geocodes = colour_to_geocode[colour_key];
+				if (geocodes) {
+					let local_pop = (base_popc_raster) ? base_popc_raster.data[i] : 0;
+					for (let x = 0; x < geocodes.length; x++) {
+						let local_geocode = geocodes[x];
+						Object.modifyValue(base_sums, local_geocode, local_value);
+						if (local_pop > 0) Object.modifyValue(base_popc_sums, local_geocode, local_pop);
 					}
 				}
-			});
+			}
 			
 			let base_macro_rates = {};
 			Object.iterate(base_popc_sums, (local_geocode, local_pop) => {
@@ -271,6 +269,29 @@ global.births_deaths_HMD = class {
 				if (!fs.existsSync(target_popc_path)) continue;
 				let target_popc_raster = GeoPNG.loadNumberRasterImage(target_popc_path, { format: "float32" });
 				
+				//Resolve colour to active geocode for target year
+				let year_colour_to_geocode = {};
+				Object.iterate(geocode_obj, (geocode, data) => {
+					let in_domain = true;
+					if (data.domain) {
+						if (year_num < data.domain[0] || year_num > data.domain[1]) {
+							in_domain = false;
+						}
+					}
+					if (!in_domain) return;
+					
+					let hmd_code = geocode.split(".")[0];
+					let target_val = hmd_series[series_key][hmd_code]?.[year];
+					if (target_val === undefined || target_val <= 0) return;
+					
+					if (data.colours) {
+						for (let i = 0; i < data.colours.length; i++) {
+							let colour = data.colours[i];
+							year_colour_to_geocode[colour] = geocode;
+						}
+					}
+				});
+				
 				let expected_weights = new Float32Array(target_popc_raster.data.length);
 				let expected_sums = {};
 				let has_data = false;
@@ -286,32 +307,18 @@ global.births_deaths_HMD = class {
 						geocode_raster.data[byte_index + 1],
 						geocode_raster.data[byte_index + 2]
 					].join(",");
-					let geocodes = colour_to_geocode[colour_key];
-					if (!geocodes) continue;
-					
-					let primary_geocode = geocodes[0];
-					let local_data = geocode_obj[primary_geocode];
-					let in_domain = true;
-					if (local_data && local_data.domain) {
-						if (year_num < local_data.domain[0] || year_num > local_data.domain[1])
-							in_domain = false;
-					}
-					if (!in_domain) continue;
-					
-					let hmd_code = primary_geocode.split(".")[0];
-					let target_val = hmd_series[series_key][hmd_code]?.[year];
-					if (target_val === undefined || target_val <= 0) continue;
+					let local_geocode = year_colour_to_geocode[colour_key];
+					if (!local_geocode) continue;
 					
 					let local_base_p = (base_popc_raster) ? base_popc_raster.data[i] : 0;
 					let local_base_val = base_raster.data[i];
-					let local_rate = (local_base_p > 0 && local_base_val > 0) ? (local_base_val / local_base_p) : (base_macro_rates[primary_geocode] || 0.02);
+					let local_rate = (local_base_p > 0 && local_base_val > 0) ? (local_base_val / local_base_p) : (base_macro_rates[local_geocode] || 0.02);
 					let exp_val = local_target_pop * local_rate;
 					
 					expected_weights[i] = exp_val;
 					has_data = true;
 					
-					for (let x = 0; x < geocodes.length; x++)
-						Object.modifyValue(expected_sums, geocodes[x], exp_val);
+					Object.modifyValue(expected_sums, local_geocode, exp_val);
 				}
 				
 				//If no regions have data for this time period (e.g. 10000 BC), do not produce an output raster
@@ -324,10 +331,11 @@ global.births_deaths_HMD = class {
 					let target_val = hmd_series[series_key][hmd_code]?.[year];
 					target_val = (target_val !== undefined && target_val > 0) ? target_val : 0;
 					
-					if (target_val > 0 && exp_sum > 0)
+					if (target_val > 0 && exp_sum > 0) {
 						scalars[geocode] = target_val / exp_sum;
-					else
+					} else {
 						scalars[geocode] = 0;
+					}
 				});
 				
 				//3. Dasymetrically save the historical raster. Regions without HMD coverage
@@ -347,15 +355,13 @@ global.births_deaths_HMD = class {
 							geocode_raster.data[byte_index + 1],
 							geocode_raster.data[byte_index + 2]
 						].join(",");
-						let geocodes = colour_to_geocode[colour_key];
+						let local_geocode = year_colour_to_geocode[colour_key];
+						if (!local_geocode) return 0;
 						
-						if (geocodes) {
-							for (let x = 0; x < geocodes.length; x++) {
-								let scalar = scalars[geocodes[x]];
-								if (scalar !== undefined && scalar > 0)
-									return exp_weight * scalar;
-							}
-						}
+						let scalar = scalars[local_geocode];
+						if (scalar !== undefined && scalar > 0)
+							return exp_weight * scalar;
+						
 						return 0;
 					}
 				});
@@ -384,24 +390,10 @@ global.births_deaths_HMD = class {
 		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
 
 		//Declare local instance variables
-		let hmd_series = this._getInterpolatedSeries();
 		let geocode_obj = admin_modern.getHMDColourcodesObject();
 		let geocode_raster = GeoPNG.loadImage(admin_modern.input_hmd_raster);
-		let hyde_years = landuse_HYDE.sorted_hyde_years;
-		
-		//Map colours to geocodes for fast pixel lookup
-		let colour_to_geocode = {};
-		Object.iterate(geocode_obj, (geocode, data) => {
-			if (data.colours) {
-				for (let i = 0; i < data.colours.length; i++) {
-					let colour = data.colours[i];
-					if (!colour_to_geocode[colour]) colour_to_geocode[colour] = [];
-					colour_to_geocode[colour].push(geocode);
-				}
-			}
-		});
-		
-		//Define the three raster series to clamp: [intermediate_folder, output_folder, file_prefix, series_key]
+		let hmd_series = this._getInterpolatedSeries();
+		let hyde_years = (options.years) ? options.years.map(String) : landuse_HYDE.sorted_hyde_years;
 		let raster_series = [
 			[this.intermediate_backcalculated_births_folder, this.output_crude_births_folder, "births", "births"],
 			[this.intermediate_backcalculated_female_deaths_folder, this.output_female_crude_deaths_folder, "female_deaths", "female_deaths"],
@@ -434,6 +426,25 @@ global.births_deaths_HMD = class {
 			
 			console.log(`Processing Stadester clamping of HMD births/deaths for year: ${year}`);
 			
+			//Resolve colour to active geocode for target year
+			let year_colour_to_geocode = {};
+			Object.iterate(geocode_obj, (geocode, data) => {
+				let in_domain = true;
+				if (data.domain) {
+					if (year_num < data.domain[0] || year_num > data.domain[1]) {
+						in_domain = false;
+					}
+				}
+				if (!in_domain) return;
+				
+				if (data.colours) {
+					for (let i = 0; i < data.colours.length; i++) {
+						let colour = data.colours[i];
+						year_colour_to_geocode[colour] = geocode;
+					}
+				}
+			});
+			
 			//1. Load Stadester popc anchor raster and compute national population sums over HMD regions
 			let stadester_raster = GeoPNG.loadNumberRasterImage(pop_path, {
 				format: "float32"
@@ -450,11 +461,9 @@ global.births_deaths_HMD = class {
 					geocode_raster.data[byte_index + 1],
 					geocode_raster.data[byte_index + 2]
 				].join(",");
-				let geocodes = colour_to_geocode[colour_key];
-				
-				if (geocodes)
-					for (let x = 0; x < geocodes.length; x++)
-						Object.modifyValue(stadester_sums, geocodes[x], local_value);
+				let geocode = year_colour_to_geocode[colour_key];
+				if (geocode)
+					Object.modifyValue(stadester_sums, geocode, local_value);
 			}
 			
 			//2. Clamp each raster series to the Stadestér footprint
@@ -490,14 +499,11 @@ global.births_deaths_HMD = class {
 						geocode_raster.data[byte_index + 1],
 						geocode_raster.data[byte_index + 2]
 					].join(",");
-					let geocodes = colour_to_geocode[colour_key];
-					
-					if (geocodes)
-						for (let x = 0; x < geocodes.length; x++) {
-							let local_geocode = geocodes[x];
-							Object.modifyValue(backcalc_sums, local_geocode, local_value);
-							Object.modifyValue(backcalc_pop_sums, local_geocode, local_pop);
-						}
+					let geocode = year_colour_to_geocode[colour_key];
+					if (geocode) {
+						Object.modifyValue(backcalc_sums, geocode, local_value);
+						Object.modifyValue(backcalc_pop_sums, geocode, local_pop);
+					}
 				}
 				
 				let national_macro_rates = {};
@@ -518,20 +524,17 @@ global.births_deaths_HMD = class {
 						geocode_raster.data[byte_index + 1],
 						geocode_raster.data[byte_index + 2]
 					].join(",");
-					let geocodes = colour_to_geocode[colour_key];
-					if (!geocodes) continue;
+					let geocode = year_colour_to_geocode[colour_key];
+					if (!geocode) continue;
 					
-					let primary_geocode = geocodes[0];
 					let local_value = backcalc_raster.data[i];
-					let local_weight = (local_value > 0) ? local_value : (local_pop * (national_macro_rates[primary_geocode] || 0.02));
+					let local_weight = (local_value > 0) ? local_value : (local_pop * (national_macro_rates[geocode] || 0.02));
 					
-					for (let x = 0; x < geocodes.length; x++)
-						Object.modifyValue(expected_national_mass, geocodes[x], local_weight);
+					Object.modifyValue(expected_national_mass, geocode, local_weight);
 				}
 				
 				//Determine per-region clamping factors against HMD targets
 				let region_scalars = {};
-				
 				Object.iterate(geocode_obj, (geocode, data) => {
 					let in_domain = true;
 					if (data.domain) {
@@ -571,18 +574,14 @@ global.births_deaths_HMD = class {
 							geocode_raster.data[byte_index + 1],
 							geocode_raster.data[byte_index + 2]
 						].join(",");
-						let geocodes = colour_to_geocode[colour_key];
+						let geocode = year_colour_to_geocode[colour_key];
+						if (!geocode) return 0;
 						
-						if (geocodes)
-							for (let x = 0; x < geocodes.length; x++) {
-								let local_geocode = geocodes[x];
-								let local_scalar = region_scalars[local_geocode];
-								
-								if (local_scalar !== undefined) {
-									let local_weight = (local_backcalc_value > 0) ? local_backcalc_value : (local_stadester_pop * (national_macro_rates[local_geocode] || 0.02));
-									return local_weight * local_scalar;
-								}
-							}
+						let local_scalar = region_scalars[geocode];
+						if (local_scalar !== undefined) {
+							let local_weight = (local_backcalc_value > 0) ? local_backcalc_value : (local_stadester_pop * (national_macro_rates[geocode] || 0.02));
+							return local_weight * local_scalar;
+						}
 						
 						return 0; //No HMD coverage; partial coverage natively resolves to zero pixels
 					}
