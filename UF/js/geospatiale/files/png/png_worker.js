@@ -171,6 +171,86 @@ let handleTask = async function (task) {
     return out_file;
   }
 
+  //1d. Composite age-sex cohorts with empirical actuals (e.g. HMD pre-1950)
+  if (task_type === "composite_cohorts_hmd") {
+    let clamped_folder = task.clamped_folder;
+    let cohorts = task.cohorts || [];
+    let hmd_folder = task.hmd_folder || (global.h2 ? path.join(global.h2, "age_sex_HMD/2.clamped_to_stadester/") : null);
+    let output_folder = task.output_folder;
+    let popc_path = task.popc_path;
+    let year = task.year;
+
+    if (!fs.existsSync(output_folder)) fs.mkdirSync(output_folder, { recursive: true });
+
+    let num_cohorts = cohorts.length;
+    let clamped_rasters = {};
+    for (let c = 0; c < num_cohorts; c++) {
+      let p = path.join(clamped_folder, `global_${cohorts[c]}_${year}.png`);
+      if (!fs.existsSync(p)) return null;
+      clamped_rasters[cohorts[c]] = await GeoPNG.loadNumberRasterImageAsync(p, { format: "float32" });
+    }
+
+    let width = clamped_rasters[cohorts[0]].width;
+    let height = clamped_rasters[cohorts[0]].height;
+    let total_pixels = width * height;
+
+    let has_hmd = false;
+    let hmd_rasters = {};
+    let hmd_total = null;
+    if (year < 1950 && hmd_folder && fs.existsSync(hmd_folder)) {
+      let test_path = path.join(hmd_folder, `global_${cohorts[0]}_${year}.png`);
+      if (fs.existsSync(test_path)) {
+        has_hmd = true;
+        hmd_total = new Float32Array(total_pixels);
+        for (let c = 0; c < num_cohorts; c++) {
+          let hmd_path = path.join(hmd_folder, `global_${cohorts[c]}_${year}.png`);
+          if (fs.existsSync(hmd_path)) {
+            let r = await GeoPNG.loadNumberRasterImageAsync(hmd_path, { format: "float32" });
+            hmd_rasters[cohorts[c]] = r;
+            for (let i = 0; i < total_pixels; i++) {
+              let val = r.data[i];
+              if (val > 0) hmd_total[i] += val;
+            }
+          }
+        }
+      }
+    }
+
+    let popc_raster = (popc_path && fs.existsSync(popc_path)) ?
+      await GeoPNG.loadNumberRasterImageAsync(popc_path, { format: "float32" }) : null;
+
+    let out_buffers = new Array(num_cohorts);
+    for (let c = 0; c < num_cohorts; c++)
+      out_buffers[c] = new Float32Array(total_pixels);
+
+    for (let i = 0; i < total_pixels; i++) {
+      if (has_hmd && hmd_total[i] > 0) {
+        let stade_pop = popc_raster ? popc_raster.data[i] : hmd_total[i];
+        let hmd_scale = (stade_pop > 0 && hmd_total[i] > 0) ? (stade_pop / hmd_total[i]) : 1.0;
+        for (let c = 0; c < num_cohorts; c++) {
+          let val = (hmd_rasters[cohorts[c]]) ? hmd_rasters[cohorts[c]].data[i] : 0;
+          out_buffers[c][i] = val * hmd_scale;
+        }
+      } else {
+        for (let c = 0; c < num_cohorts; c++)
+          out_buffers[c][i] = clamped_rasters[cohorts[c]].data[i];
+      }
+    }
+
+    for (let c = 0; c < num_cohorts; c++) {
+      let out_path = path.join(output_folder, `${cohorts[c]}_${year}.png`);
+      await GeoPNG.saveNumberRasterImageAsync({
+        data: out_buffers[c],
+        file_path: out_path,
+        format: "float32",
+        height: height,
+        width: width
+      });
+    }
+
+    return true;
+  }
+
   //2. Linear raster interpolation between two years
   if (task_type === "linear_interpolation") {
     GeoPNG.linearInterpolation(
@@ -1925,7 +2005,6 @@ let handleTask = async function (task) {
     let output_folder = task.output_folder;
     let popc_path = task.popc_path;
     let year = task.year;
-    let hmd_folder = task.hmd_folder || (global.h2 ? path.join(global.h2, "age_sex_HMD/2.clamped_to_stadester/") : null);
 
     // Compute piecewise-kernel weight w in [0, 1] (0 = pure PAVA, 1 = pure Whittaker)
     let cdt_start_year = (task.cdt_start_year !== undefined) ? task.cdt_start_year : 1750;
@@ -1981,29 +2060,6 @@ let handleTask = async function (task) {
     for (let k = 0; k < age_count; k++)
       age_band_widths[k] = band_widths[f_indices[k]];
 
-    // Pre-load HMD ground-truth rasters for pre-1950 historical years to bypass smoothing
-    let has_hmd = false;
-    let hmd_rasters = {};
-    let hmd_total = null;
-    if (year < 1950 && hmd_folder && fs.existsSync(hmd_folder)) {
-      let test_path = path.join(hmd_folder, `global_${cohorts[0]}_${year}.png`);
-      if (fs.existsSync(test_path)) {
-        has_hmd = true;
-        hmd_total = new Float32Array(total_pixels);
-        for (let c = 0; c < num_cohorts; c++) {
-          let hmd_path = path.join(hmd_folder, `global_${cohorts[c]}_${year}.png`);
-          if (fs.existsSync(hmd_path)) {
-            let r = await GeoPNG.loadNumberRasterImageAsync(hmd_path, { format: "float32" });
-            hmd_rasters[cohorts[c]] = r;
-            for (let i = 0; i < total_pixels; i++) {
-              let val = r.data[i];
-              if (val > 0) hmd_total[i] += val;
-            }
-          }
-        }
-      }
-    }
-
     console.log(`[Worker PID ${process.pid}] Initialised task for Year ${year}: loaded popc (${width}x${height}) & ${num_cohorts} cohort rasters. Smoothing weight: ${wh_weight.toFixed(4)} (0=PAVA, 1=Whittaker).`);
 
     if (wh_weight <= 0.0) {
@@ -2029,15 +2085,6 @@ let handleTask = async function (task) {
       for (let i = 0; i < total_pixels; i++) {
         let stade_pop = popc_raster.data[i];
         if (stade_pop < 0.01 || isNaN(stade_pop)) continue;
-
-        if (has_hmd && hmd_total[i] > 0) {
-          let hmd_scale = stade_pop / hmd_total[i];
-          for (let c = 0; c < num_cohorts; c++) {
-            let val = (hmd_rasters[cohorts[c]]) ? hmd_rasters[cohorts[c]].data[i] : 0;
-            output_buffers[c][i] = val * hmd_scale;
-          }
-          continue;
-        }
 
         for (let k = 0; k < age_count; k++) {
           let f_val = prob_rasters[cohorts[f_indices[k]]].data[i];
@@ -2159,7 +2206,6 @@ let handleTask = async function (task) {
     for (let i = 0; i < total_pixels; i++) {
       let stade_pop = popc_raster.data[i];
       if (stade_pop < 0.01 || isNaN(stade_pop)) continue;
-      if (has_hmd && hmd_total[i] > 0) continue;
 
       let b_id = (pixel_iso_ids && pixel_iso_ids[i] >= 0) ? pixel_iso_ids[i] : fallback_bin_id;
       let raw_f_b = bin_raw_f[b_id];
@@ -2317,17 +2363,6 @@ let handleTask = async function (task) {
       for (let i = 0; i < total_pixels; i++) {
         let stade_pop = popc_raster.data[i];
         if (stade_pop < 0.01 || isNaN(stade_pop)) continue;
-
-        if (has_hmd && hmd_total[i] > 0) {
-          if (is_final) {
-            let hmd_scale = stade_pop / hmd_total[i];
-            for (let c = 0; c < num_cohorts; c++) {
-              let val = (hmd_rasters[cohorts[c]]) ? hmd_rasters[cohorts[c]].data[i] : 0;
-              output_buffers[c][i] = val * hmd_scale;
-            }
-          }
-          continue;
-        }
 
         let b_id = (pixel_iso_ids && pixel_iso_ids[i] >= 0) ? pixel_iso_ids[i] : fallback_bin_id;
         let scale_f = bin_scale_f[b_id];

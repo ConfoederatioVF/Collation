@@ -451,7 +451,6 @@ global.age_sex = class {
 	 *  @param {boolean} [arg0_options.enforce_fixed_sex_ratios=false]
 	 *  @param {boolean} [arg0_options.global_cohort_scaling=true]
 	 *  @param {boolean} [arg0_options.graduate_sex_ratios=true]
-	 *  @param {string} [arg0_options.hmd_folder]
 	 *  @param {boolean} [arg0_options.overwrite=true]
 	 *  @param {boolean} [arg0_options.preserve_sex_ratios]
 	 *  @param {string} [arg0_options.smoothing_method="piecewise_kernel"] - 'piecewise_kernel', 'whittaker_henderson', or 'isotonic'.
@@ -588,7 +587,6 @@ global.age_sex = class {
 					geocodes_csv_path: (typeof admin_modern !== "undefined") ? admin_modern.input_geocodes_csv : (global.h1 ? path.join(global.h1, "admin_modern/geocodes.csv") : null),
 					geocodes_raster_path: (typeof admin_modern !== "undefined") ? admin_modern.input_geocodes_raster : (global.h1 ? path.join(global.h1, "admin_modern/geocodes.png") : null),
 					graduate_sex_ratios: (options.graduate_sex_ratios !== undefined) ? options.graduate_sex_ratios : true,
-					hmd_folder: options.hmd_folder,
 					lift_isotonic: do_not_smooth,
 					logit_rasters_folder: this.intermediate_logit_rasters,
 					output_folder: this.intermediate_clamped_rasters,
@@ -611,86 +609,142 @@ global.age_sex = class {
 		});
 	}
 	
+	/**
+	 * Composites modeled age-sex cohorts with empirical actuals (HMD pre-1950, UNWPP 1950-2014, WorldPop 2015-2025).
+	 *
+	 * @alias age_sex.F_compositeTimeseries
+	 *
+	 * @param {Object} [arg0_options]
+	 *  @param {number} [arg0_options.concurrency=8]
+	 *  @param {string} [arg0_options.hmd_folder]
+	 *  @param {boolean} [arg0_options.overwrite=true]
+	 *  @param {Array<number>} [arg0_options.years]
+	 *
+	 * @returns {Promise<void>}
+	 */
 	static async F_compositeTimeseries (arg0_options) {
 		//Convert from parameters
 		let options = (arg0_options) ? arg0_options : {};
 		
 		//Initialise options
+		let concurrency = options.concurrency || 8;
 		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
 
 		//Declare local instance variables
 		let cohorts = this.getCohorts();
 		let copy_tasks = [];
+		let hmd_composite_tasks = [];
+		let hmd_folder = (options.hmd_folder) ? options.hmd_folder :
+			((typeof age_sex_HMD !== "undefined") ? age_sex_HMD.output_clamped_to_stadester :
+			(global.h2 ? path.join(global.h2, "age_sex_HMD/2.clamped_to_stadester/") : null));
 		let wp_files = [];
 		let years = (options.years) ? options.years : landuse_HYDE.sorted_hyde_years;
 
 		if (!fs.existsSync(this.output_rasters)) fs.mkdirSync(this.output_rasters, { recursive: true });
 		
 		//Cache the WorldPop directory listing once to avoid repeated disk reads
-		if (typeof age_sex_WorldPop !== "undefined" && fs.existsSync(age_sex_WorldPop.output_rasters)) {
+		if (typeof age_sex_WorldPop !== "undefined" && fs.existsSync(age_sex_WorldPop.output_rasters))
 			wp_files = fs.readdirSync(age_sex_WorldPop.output_rasters);
-		}
 		
-		//Build copy task list across the full temporal domain
+		//Build task lists across the full temporal domain
 		for (let y = 0; y < years.length; y++) {
 			let year = years[y];
-			
-			for (let c = 0; c < cohorts.length; c++) {
-				let cohort = cohorts[c];
-				let out_path = `${this.output_rasters}${cohort}_${year}.png`;
-				
-				if (!overwrite && fs.existsSync(out_path)) continue;
-				
-				let src_path = null;
-				
-				//1. UNWPP actuals take precedence for 1950-2014
-				if (year >= 1950 && year < 2015) {
-					if (typeof age_sex_UNWPP !== "undefined" && fs.existsSync(age_sex_UNWPP.output_clamped_to_stadester)) {
-						let unwpp_path = `${age_sex_UNWPP.output_clamped_to_stadester}global_${cohort}_${year}.png`;
-						if (fs.existsSync(unwpp_path)) src_path = unwpp_path;
-					}
-				}
-				
-				//2. WorldPop actuals take precedence for 2015-2025
-				if (year >= 2015 && year <= 2025) {
-					let regex = new RegExp(`^.*${cohort}_${year}.*\\.png$`);
-					let wp_match = wp_files.find(f => regex.test(f));
-					
-					if (wp_match) {
-						src_path = `${age_sex_WorldPop.output_rasters}${wp_match}`;
-					} else {
-						//Fallback to UNWPP if the specific WorldPop year is missing
-						if (typeof age_sex_UNWPP !== "undefined" && fs.existsSync(age_sex_UNWPP.output_clamped_to_stadester)) {
-							let unwpp_fallback = `${age_sex_UNWPP.output_clamped_to_stadester}global_${cohort}_${year}.png`;
-						if (fs.existsSync(unwpp_fallback)) src_path = unwpp_fallback;
+			let has_hmd = (year < 1950 && hmd_folder && fs.existsSync(path.join(hmd_folder, `global_${cohorts[0]}_${year}.png`)));
+
+			if (has_hmd) {
+				let need_composite = overwrite;
+				if (!need_composite) {
+					for (let c = 0; c < cohorts.length; c++) {
+						let out_path = `${this.output_rasters}${cohorts[c]}_${year}.png`;
+						if (!fs.existsSync(out_path)) {
+							need_composite = true;
+							break;
 						}
 					}
 				}
-				
-				//3. Default to the clamped multinomial logit rasters for all other years (pre-1950, post-2025, or missing actuals)
-				if (!src_path) {
-					let clamped_path = `${this.intermediate_clamped_rasters}global_${cohort}_${year}.png`;
-					if (fs.existsSync(clamped_path)) src_path = clamped_path;
-				}
-				
-				if (src_path) {
-					copy_tasks.push({
-						dest: out_path,
-						src: src_path
+
+				if (need_composite) {
+					let format_year = (year > 2023) ? 2023 : year;
+					let popc_info = (this.covariates_obj && this.covariates_obj["popc_"]) ? this.covariates_obj["popc_"](format_year) : null;
+					let popc_path = (popc_info) ? popc_info[0] : (typeof population_Stadester !== "undefined" ? path.join(population_Stadester.input_popc_folder, `stadester_population_${format_year}.png`) : null);
+
+					hmd_composite_tasks.push({
+						clamped_folder: this.intermediate_clamped_rasters,
+						cohorts: cohorts,
+						hmd_folder: hmd_folder,
+						output_folder: this.output_rasters,
+						popc_path: popc_path,
+						task_type: "composite_cohorts_hmd",
+						year: year
 					});
+				}
+			} else {
+				for (let c = 0; c < cohorts.length; c++) {
+					let cohort = cohorts[c];
+					let out_path = `${this.output_rasters}${cohort}_${year}.png`;
+					
+					if (!overwrite && fs.existsSync(out_path)) continue;
+					
+					let src_path = null;
+					
+					//1. UNWPP actuals take precedence for 1950-2014
+					if (year >= 1950 && year < 2015) {
+						if (typeof age_sex_UNWPP !== "undefined" && fs.existsSync(age_sex_UNWPP.output_clamped_to_stadester)) {
+							let unwpp_path = `${age_sex_UNWPP.output_clamped_to_stadester}global_${cohort}_${year}.png`;
+							if (fs.existsSync(unwpp_path)) src_path = unwpp_path;
+						}
+					}
+					
+					//2. WorldPop actuals take precedence for 2015-2025
+					if (year >= 2015 && year <= 2025) {
+						let regex = new RegExp(`^.*${cohort}_${year}.*\\.png$`);
+						let wp_match = wp_files.find(f => regex.test(f));
+						
+						if (wp_match) {
+							src_path = `${age_sex_WorldPop.output_rasters}${wp_match}`;
+						} else {
+							//Fallback to UNWPP if the specific WorldPop year is missing
+							if (typeof age_sex_UNWPP !== "undefined" && fs.existsSync(age_sex_UNWPP.output_clamped_to_stadester)) {
+								let unwpp_fallback = `${age_sex_UNWPP.output_clamped_to_stadester}global_${cohort}_${year}.png`;
+								if (fs.existsSync(unwpp_fallback)) src_path = unwpp_fallback;
+							}
+						}
+					}
+					
+					//3. Default to the clamped multinomial logit rasters for all other years (pre-1950 without HMD, post-2025, or missing actuals)
+					if (!src_path) {
+						let clamped_path = `${this.intermediate_clamped_rasters}global_${cohort}_${year}.png`;
+						if (fs.existsSync(clamped_path)) src_path = clamped_path;
+					}
+					
+					if (src_path) {
+						copy_tasks.push({
+							dest: out_path,
+							src: src_path
+						});
+					}
 				}
 			}
 		}
 		
+		if (hmd_composite_tasks.length > 0) {
+			await GeoPNG.processTimeseriesParallel({
+				concurrency: concurrency,
+				items: hmd_composite_tasks,
+				name: "age_sex F_compositeTimeseries (HMD composite)",
+				task_generator: (task_item) => task_item
+			});
+		}
+
 		if (copy_tasks.length > 0) {
 			await GeoPNG.processTimeseriesParallel({
+				concurrency: concurrency,
 				items: copy_tasks,
-				concurrency: options.concurrency || 8,
-				name: "age_sex F_compositeTimeseries",
+				name: "age_sex F_compositeTimeseries (Copy)",
 				task_generator: (task_item) => ({
-					task_type: "copy",
 					dest_path: task_item.dest,
-					source_path: task_item.src
+					source_path: task_item.src,
+					task_type: "copy"
 				})
 			});
 		}
