@@ -732,6 +732,45 @@
         stadester_obj["Rhondda-United Kingdom"].population = cardiff_pop;
       }
       delete stadester_obj["Minneapolis-United States of America"];
+      
+      //Taipei anachronistic antiquity cleanup
+      let taipei_names = ["T'aipei-Taiwan", "Taipei-Taiwan", "Taipei-China"];
+      for (let t = 0; t < taipei_names.length; t++) {
+        let t_city = stadester_obj[taipei_names[t]];
+        if (t_city) {
+          let props = ["area", "density", "population", "rni", "radial_buffers", "centre_density"];
+          for (let p = 0; p < props.length; p++) {
+            if (t_city[props[p]]) {
+              let yr_keys = Object.keys(t_city[props[p]]);
+              for (let y = 0; y < yr_keys.length; y++) {
+                if (parseInt(yr_keys[y]) < 1700)
+                  delete t_city[props[p]][yr_keys[y]];
+              }
+            }
+          }
+        }
+      }
+      
+      //Maydanets Ukrainian archaeological megasite lapse
+      let maydanets_names = ["Maydanets-Ukraine", "Maidanets-Ukraine"];
+      for (let m = 0; m < maydanets_names.length; m++) {
+        let m_city = stadester_obj[maydanets_names[m]];
+        if (m_city) {
+          let props = ["area", "density", "population", "rni", "radial_buffers", "centre_density"];
+          for (let p = 0; p < props.length; p++) {
+            if (m_city[props[p]]) {
+              let yr_keys = Object.keys(m_city[props[p]]);
+              for (let y = 0; y < yr_keys.length; y++) {
+                if (parseInt(yr_keys[y]) >= 0)
+                  delete m_city[props[p]][yr_keys[y]];
+              }
+            }
+          }
+          if (m_city.population) {
+            m_city.population["-999"] = 0;
+          }
+        }
+      }
     } catch (e) {
       console.warn(e);
     }
@@ -925,6 +964,37 @@
                 local_city.population[yr] = Math.round(trujillo_anchors[low] + frac*(trujillo_anchors[high] - trujillo_anchors[low]));
               }
             }
+          }
+        }
+        
+        //Remove anachronistic antiquity entries (-500, 0) from Taipei
+        if (key_str.toLowerCase().includes("taipei") || key_str.toLowerCase().includes("t'aipei")) {
+          let taipei_props = ["area", "density", "population", "rni", "radial_buffers", "centre_density"];
+          for (let t = 0; t < taipei_props.length; t++) {
+            if (local_city[taipei_props[t]]) {
+              let yr_keys = Object.keys(local_city[taipei_props[t]]);
+              for (let y = 0; y < yr_keys.length; y++) {
+                if (parseInt(yr_keys[y]) < 1700)
+                  delete local_city[taipei_props[t]][yr_keys[y]];
+              }
+            }
+          }
+        }
+        
+        //Ukrainian archaeological megasites (e.g. Maydanets) lapse after antiquity
+        if (key_str.toLowerCase().includes("maydanets") || key_str.toLowerCase().includes("maidanets")) {
+          let maydanets_props = ["area", "density", "population", "rni", "radial_buffers", "centre_density"];
+          for (let m = 0; m < maydanets_props.length; m++) {
+            if (local_city[maydanets_props[m]]) {
+              let yr_keys = Object.keys(local_city[maydanets_props[m]]);
+              for (let y = 0; y < yr_keys.length; y++) {
+                if (parseInt(yr_keys[y]) >= 0)
+                  delete local_city[maydanets_props[m]][yr_keys[y]];
+              }
+            }
+          }
+          if (local_city.population) {
+            local_city.population["-999"] = 0;
           }
         }
         
