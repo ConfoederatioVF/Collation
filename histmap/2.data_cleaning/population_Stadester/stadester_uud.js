@@ -384,7 +384,7 @@
               let pop_check = population_Stadester_uud.isPopulationRatioValid(local_uud_city.population, local_city.population);
               let is_match = false;
               
-              if (local_distance < 0.01 && pop_check.valid) {
+              if (local_distance < 0.01 && (is_exact_name || pop_check.valid)) {
                 is_match = true;
               } else if (is_exact_name && local_distance <= search_radius && pop_check.valid) {
                 is_match = true;
@@ -593,12 +593,25 @@
       let best = group[0].city;
       if (!best || !best.population) continue;
       
+      let had_merged_keys = false;
       for (let i = 1; i < group.length; i++) {
         let duplicate = group[i].city;
         if (!duplicate || !duplicate.population) continue;
         for (let pop_key in duplicate.population) {
-          if (!best.population.hasOwnProperty(pop_key))
+          if (!best.population.hasOwnProperty(pop_key)) {
             best.population[pop_key] = duplicate.population[pop_key];
+            had_merged_keys = true;
+          }
+        }
+      }
+      
+      //Re-interpolate across all keys if duplicate points were incorporated to avoid sawtooth drops
+      if (had_merged_keys) {
+        let all_pop_keys = Object.keys(best.population).map(Number).filter(n => !isNaN(n)).sort((a, b) => a - b);
+        if (all_pop_keys.length >= 2) {
+          best.population = population_Stadester_uud.linearInterpolationObject(best.population, {
+            years: all_pop_keys
+          });
         }
       }
       
@@ -742,12 +755,15 @@
   
   /**
    * Generates a unified Stadestér GHSL dataset combining historical Stadestér entries and modern GHSL clusters.
-   * All GHSL city names are repaired using the GHSL source file.
+   * All GHSL and historical city names are repaired, and .region strings are assigned via Voronoi sampling.
    * @alias population_Stadester_uud.getStadesterGHSLObject
    * 
    * @param {Object} [arg0_options]
+   *  @param {string} [arg0_options.ghsl_file]
+   *  @param {Object} [arg0_options.ghsl_obj]
    *  @param {string} [arg0_options.raw_folder]
    *  @param {Object} [arg0_options.stadester_obj]
+   *  @param {string} [arg0_options.voronoi_file]
    * 
    * @returns {Object}
    */
@@ -756,25 +772,100 @@
     let options = (arg0_options) ? arg0_options : {};
     
     //Declare local instance variables
+    let all_ghsl_cities;
+    let all_region_keys;
+    let all_return_keys;
     let all_stadester_cities;
+    let colour_to_region = {};
     let cutoff_year = (global.population_Stadester_config && global.population_Stadester_config.cutoff_year) ?
       global.population_Stadester_config.cutoff_year : 1975;
+    let ghsl_candidates = [];
+    let ghsl_obj = options.ghsl_obj;
+    let pngjs_lib = (typeof pngjs !== "undefined") ? pngjs : (global.pngjs || require("pngjs"));
     let raw_folder = options.raw_folder ? options.raw_folder : `${h1}/population_Stadester/`;
+    let region_defines;
     let return_obj = {};
+    let stadester_candidates = [];
     let stadester_obj = options.stadester_obj;
+    let voronoi_candidates = [];
+    let voronoi_png = null;
     
     //Function body
     population_Stadester_uud.loadGHSLCsvNames();
     
+    //1. Load GHSL dataset (modern clusters 1975-2025)
+    if (!ghsl_obj) {
+      ghsl_candidates = [
+        options.ghsl_file,
+        path.join(raw_folder, "ghsl", "ghsl.json"),
+        path.join(h1, "population_GHSL", "ghsl.json"),
+        path.join(h1, "population_Stadester", "ghsl", "ghsl.json"),
+        "E:/Active Projects/Project 2136 - Stadestér/output/ghsl.json",
+        "D:/Project 1436 - Dataview/data/stadester/ghsl.json"
+      ];
+      for (let i = 0; i < ghsl_candidates.length; i++) {
+        if (ghsl_candidates[i] && fs.existsSync(ghsl_candidates[i])) {
+          try {
+            ghsl_obj = JSON.parse(fs.readFileSync(ghsl_candidates[i], "utf8"));
+            console.log(`- Loaded GHSL modern clusters from ${ghsl_candidates[i]}.`);
+            break;
+          } catch (e) {
+            console.warn(`- Failed to read GHSL from ${ghsl_candidates[i]}:`, e);
+          }
+        }
+      }
+    }
+    
+    if (ghsl_obj) {
+      all_ghsl_cities = Object.keys(ghsl_obj);
+      for (let i = 0; i < all_ghsl_cities.length; i++) {
+        let key_str = all_ghsl_cities[i].startsWith("ghsl-") ?
+          all_ghsl_cities[i] : `ghsl-${all_ghsl_cities[i]}`;
+        let local_city = JSON.parse(JSON.stringify(ghsl_obj[all_ghsl_cities[i]]));
+        local_city.key = key_str;
+        return_obj[key_str] = local_city;
+      }
+      console.log(`- Appended ${all_ghsl_cities.length} modern GHSL entries.`);
+    }
+    
+    //2. Load historical Stadestér dataset
     if (!stadester_obj) {
-      let final_file = path.join(raw_folder, "uud", "stadester.json");
-      if (fs.existsSync(final_file))
-        stadester_obj = JSON.parse(fs.readFileSync(final_file, "utf8"));
+      stadester_candidates = [
+        "E:/Active Projects/Project 2136 - Stadestér/input/uud/stadester.json",
+        path.join(raw_folder, "uud", "stadester.json"),
+        path.join(raw_folder, "uud", "stadester_areas.json"),
+        "E:/Active Projects/Project 2136 - Stadestér/output/stadester.json"
+      ];
+      let best_candidate_obj = null;
+      let chosen_candidate_path = "";
+      let max_candidate_cities = 0;
+      
+      for (let i = 0; i < stadester_candidates.length; i++) {
+        if (stadester_candidates[i] && fs.existsSync(stadester_candidates[i])) {
+          try {
+            let candidate_data = JSON.parse(fs.readFileSync(stadester_candidates[i], "utf8"));
+            let candidate_count = Object.keys(candidate_data).length;
+            if (candidate_count > max_candidate_cities) {
+              best_candidate_obj = candidate_data;
+              chosen_candidate_path = stadester_candidates[i];
+              max_candidate_cities = candidate_count;
+            }
+          } catch (e) {
+            console.warn(`- Failed to read Stadestér cities from ${stadester_candidates[i]}:`, e);
+          }
+        }
+      }
+      if (best_candidate_obj) {
+        stadester_obj = best_candidate_obj;
+        console.log(`- Loaded historical Stadestér cities from ${chosen_candidate_path} (${max_candidate_cities} cities).`);
+      }
     }
     
     if (stadester_obj) {
       all_stadester_cities = Object.keys(stadester_obj);
       for (let i = 0; i < all_stadester_cities.length; i++) {
+        let key_str = all_stadester_cities[i].startsWith("stadester-") ?
+          all_stadester_cities[i] : `stadester-${all_stadester_cities[i]}`;
         let local_city = JSON.parse(JSON.stringify(stadester_obj[all_stadester_cities[i]]));
         if (!local_city.coords) continue;
         
@@ -789,12 +880,131 @@
           }
         }
         
-        population_Stadester_uud.repairGHSLCityName(local_city);
-        return_obj[`stadester-${all_stadester_cities[i]}`] = local_city;
+        //Regularize Trujillo, Peru historical curve to remove cubic spline vacuum sawtooth
+        if (key_str.toLowerCase().includes("trujillo") && (key_str.includes("Peru") || key_str.includes("peru"))) {
+          if (local_city.population) {
+            let trujillo_anchors = {
+              1200: 20000,
+              1300: 20000,
+              1400: 26666,
+              1791: 9000,
+              1861: 8000,
+              1876: 11000,
+              1890: 14000,
+              1896: 45000,
+              1900: 48372,
+              1910: 56803,
+              1920: 65234,
+              1925: 70000,
+              1930: 73665,
+              1940: 82095,
+              1950: 90526,
+              1961: 99800,
+              1971: 242000,
+              1974: 331100
+            };
+            let anchor_years = Object.keys(trujillo_anchors).map(Number).sort((a, b) => a - b);
+            let pop_years = Object.keys(local_city.population).map(Number).sort((a, b) => a - b);
+            for (let y = 0; y < pop_years.length; y++) {
+              let yr = pop_years[y];
+              if (yr >= cutoff_year) continue;
+              if (trujillo_anchors[yr] !== undefined) {
+                local_city.population[yr] = trujillo_anchors[yr];
+              } else if (yr <= anchor_years[0]) {
+                local_city.population[yr] = trujillo_anchors[anchor_years[0]];
+              } else if (yr >= anchor_years[anchor_years.length - 1]) {
+                local_city.population[yr] = trujillo_anchors[anchor_years[anchor_years.length - 1]];
+              } else {
+                let low = anchor_years[0], high = anchor_years[anchor_years.length - 1];
+                for (let a = 0; a < anchor_years.length - 1; a++) {
+                  if (yr >= anchor_years[a] && yr <= anchor_years[a + 1]) {
+                    low = anchor_years[a]; high = anchor_years[a + 1]; break;
+                  }
+                }
+                let frac = (yr - low)/(high - low);
+                local_city.population[yr] = Math.round(trujillo_anchors[low] + frac*(trujillo_anchors[high] - trujillo_anchors[low]));
+              }
+            }
+          }
+        }
+        
+        local_city.key = key_str;
+        return_obj[key_str] = local_city;
+      }
+      console.log(`- Appended ${all_stadester_cities.length} historical Stadestér entries (truncated < ${cutoff_year}).`);
+    }
+    
+    //3. Assign .region (string) and .colour via Voronoi equirectangular raster sampling
+    voronoi_candidates = [
+      options.voronoi_file,
+      path.join(raw_folder, "voronoi_subdivisions.png"),
+      path.join(raw_folder, "regional_subdivisions.png"),
+      path.join(h1, "population_Stadester", "voronoi_subdivisions.png"),
+      "E:/Active Projects/Project 2136 - Stadestér/input/voronoi_subdivisions.png"
+    ];
+    for (let i = 0; i < voronoi_candidates.length; i++) {
+      if (voronoi_candidates[i] && fs.existsSync(voronoi_candidates[i])) {
+        try {
+          voronoi_png = pngjs_lib.PNG.sync.read(fs.readFileSync(voronoi_candidates[i]));
+          console.log(`- Loaded Voronoi regions raster from ${voronoi_candidates[i]} (${voronoi_png.width}x${voronoi_png.height}).`);
+          break;
+        } catch (e) {
+          console.warn(`- Failed to read Voronoi raster from ${voronoi_candidates[i]}:`, e);
+        }
       }
     }
     
+    region_defines = (global.config && global.config.defines && global.config.defines.regions) ?
+      global.config.defines.regions : {
+        northern_america: { colour: [87, 122, 175], name: "Northern America" },
+        latin_america: { colour: [71, 165, 101], name: "Latin America" },
+        europe: { colour: [47, 97, 170], name: "Europe" },
+        eastern_europe_and_russia: { colour: [20, 114, 30], name: "Eastern Europe and Russia" },
+        central_asia: { colour: [41, 193, 175], name: "Central Asia" },
+        middle_east: { colour: [198, 130, 129], name: "Middle East" },
+        maghreb_egypt: { colour: [239, 188, 112], name: "Maghreb and Egypt" },
+        sub_saharan_africa: { colour: [155, 101, 77], name: "Sub-Saharan Africa" },
+        oceania: { colour: [0, 205, 143], name: "Oceania" },
+        indian_subcontinent: { colour: [214, 144, 83], name: "Indian Subcontinent" },
+        southeast_asia: { colour: [97, 144, 163], name: "Southeast Asia" },
+        eastasia: { colour: [173, 62, 62], name: "East Asia" }
+      };
+    
+    all_region_keys = Object.keys(region_defines);
+    for (let i = 0; i < all_region_keys.length; i++) {
+      let reg = region_defines[all_region_keys[i]];
+      if (reg && reg.colour)
+        colour_to_region[reg.colour.join(",")] = { key: all_region_keys[i], colour: reg.colour };
+    }
+    
+    all_return_keys = Object.keys(return_obj);
+    for (let i = 0; i < all_return_keys.length; i++) {
+      let local_city = return_obj[all_return_keys[i]];
+      if (!local_city || !Array.isArray(local_city.coords) || local_city.coords.length < 2) continue;
+      
+      let lat = Number(local_city.coords[0]);
+      let lng = Number(local_city.coords[1]);
+      if (isNaN(lat) || isNaN(lng)) continue;
+      
+      if (voronoi_png) {
+        let x = Math.min(voronoi_png.width - 1, Math.max(0, Math.floor(((lng - (-180))/360)*voronoi_png.width)));
+        let y = Math.min(voronoi_png.height - 1, Math.max(0, Math.floor(((90 - lat)/180)*voronoi_png.height)));
+        local_city.pixel_coords = [x, y];
+        
+        let idx = (y * voronoi_png.width + x)*4;
+        let rgb_key = `${voronoi_png.data[idx]},${voronoi_png.data[idx + 1]},${voronoi_png.data[idx + 2]}`;
+        let reg = colour_to_region[rgb_key];
+        if (reg) {
+          local_city.colour = reg.colour;
+          local_city.region = reg.key;
+        }
+      }
+    }
+    
+    //4. Repair all GHSL and historical city display names
+    population_Stadester_uud.repairGHSLCityNames(return_obj);
+    
     //Return statement
-    return population_Stadester_uud.repairGHSLCityNames(return_obj);
+    return return_obj;
   };
 }

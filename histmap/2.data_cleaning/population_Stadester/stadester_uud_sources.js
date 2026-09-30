@@ -148,6 +148,16 @@
       }
     }
     
+    if (valid_checks === 0) {
+      let peak_a = population_Stadester_uud.getPeakPopulation(pop_a);
+      let peak_b = population_Stadester_uud.getPeakPopulation(pop_b);
+      if (peak_a > 0 && peak_b > 0) {
+        let ratio = peak_a/peak_b;
+        if (ratio < 0.1 || ratio > 10.0) return { valid: false, overlaps: false };
+      }
+      return { valid: true, overlaps: false };
+    }
+    
     if (valid_checks > 0 && (fail_count/valid_checks) > 0.5) return { valid: false, overlaps: true };
     if (valid_checks > 0 && valid_checks <= 2 && fail_count === valid_checks) return { valid: false, overlaps: true };
     

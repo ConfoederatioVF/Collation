@@ -366,6 +366,18 @@
         if (!fs.existsSync(parent_dir)) fs.mkdirSync(parent_dir, { recursive: true });
         fs.writeFileSync(this.file_stadester_ghsl, JSON.stringify(result, null, 2));
         console.log(`- Saved repaired Stadestér GHSL dataset to ${this.file_stadester_ghsl}.`);
+        
+        let p2136_target = "E:/Active Projects/Project 2136 - Stadestér/output/stadester_ghsl.json";
+        if (fs.existsSync(path.dirname(p2136_target))) {
+          fs.writeFileSync(p2136_target, JSON.stringify(result, null, 2));
+          console.log(`- Synchronised repaired Stadestér GHSL dataset to Project 2136 (${p2136_target}).`);
+        }
+        
+        let dataview_target = "D:/Project 1436 - Dataview/data/stadester/stadester_1.1.json";
+        if (fs.existsSync(path.dirname(dataview_target))) {
+          fs.writeFileSync(dataview_target, JSON.stringify(result, null, 2));
+          console.log(`- Synchronised repaired Stadestér GHSL dataset to Dataview (${dataview_target}).`);
+        }
       }
       
       //Return statement
