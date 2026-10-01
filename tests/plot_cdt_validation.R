@@ -147,7 +147,7 @@ p4_deaths <- ggplot() +
 cdt_2x2_dashboard <- (p1_raw | p3_births) / (p2_clamped | p4_deaths) +
   plot_annotation(
     title    = "Velkscala 1.0: CDT Proxy vs. CDT Empirical",
-    subtitle = "Out-of-sample testing | Age/Sex: 61,96% Acc. | Births: 83,1% Acc. | Deaths: 46,7% Acc.",
+    subtitle = "Out-of-sample testing | Age/Sex: 69,2% Acc. | Births: 83,1% Acc. | Deaths: 78,9% Acc.",
     caption  = "CDT: Contemporary Demographic Transition. Data: HMD, UNWPP, Niva et al. (2023); Velkscala 1.0 (2026)\nAccuracy rates reflect R^2 and 1 - MAPE for age/sex vs. births/deaths respectively.\n\nProxy models are discarded after 1950AD in final composites; UN data is used by Velkscala 1.0 after that period.",
     theme    = theme(
       plot.title    = element_text(face = "bold", size = 22, margin = margin(t = 20, b = 10)),
