@@ -444,6 +444,43 @@
       }
     }
     
+    //Inject manual records into UUD database after initial merging
+    if (!return_obj["Vaduz-Liechtenstein"])
+      return_obj["Vaduz-Liechtenstein"] = {
+        name: "Vaduz",
+        country: "Liechtenstein",
+        elevation: 455,
+        key: "Vaduz-Liechtenstein",
+        coords: [47.141, 9.521],
+        original_names: ["vaduz"],
+        other_names: ["Vaduz"],
+        population: {
+          "1400": 300,
+          "1500": 400,
+          "1600": 500,
+          "1700": 600,
+          "1800": 800,
+          "1900": 1000,
+          "1910": 1300,
+          "1920": 1400,
+          "1930": 1600,
+          "1940": 2000,
+          "1950": 2700,
+          "1960": 3400,
+          "1970": 3900,
+          "1980": 4600,
+          "1990": 4900,
+          "2000": 5000,
+          "2010": 5200,
+          "2020": 5700
+        },
+        type: "manual"
+      };
+    
+    //Ensure Lamphun geolocation is fixed to authoritative coordinates
+    if (return_obj["Lamphun-Thailand"])
+      return_obj["Lamphun-Thailand"].coords = [18.5744357, 99.00369719999999];
+    
     //Return statement
     return return_obj;
   };
@@ -725,6 +762,43 @@
       if (stadester_obj["Washington-United States"])
         stadester_obj["Washington-United States"].coords = [38.906727075772245, -77.0366352170292];
       
+      //Lamphun, Thailand geolocation fix
+      if (stadester_obj["Lamphun-Thailand"])
+        stadester_obj["Lamphun-Thailand"].coords = [18.5744357, 99.00369719999999];
+      
+      //Inject Vaduz, Liechtenstein if missing
+      if (!stadester_obj["Vaduz-Liechtenstein"])
+        stadester_obj["Vaduz-Liechtenstein"] = {
+          name: "Vaduz",
+          country: "Liechtenstein",
+          elevation: 455,
+          key: "Vaduz-Liechtenstein",
+          coords: [47.141, 9.521],
+          original_names: ["vaduz"],
+          other_names: ["Vaduz"],
+          population: {
+            "1400": 300,
+            "1500": 400,
+            "1600": 500,
+            "1700": 600,
+            "1800": 800,
+            "1900": 1000,
+            "1910": 1300,
+            "1920": 1400,
+            "1930": 1600,
+            "1940": 2000,
+            "1950": 2700,
+            "1960": 3400,
+            "1970": 3900,
+            "1980": 4600,
+            "1990": 4900,
+            "2000": 5000,
+            "2010": 5200,
+            "2020": 5700
+          },
+          type: "manual"
+        };
+      
       if (stadester_obj["Cardiff-United Kingdom"] && stadester_obj["Rhondda-United Kingdom"]) {
         let cardiff_pop = JSON.parse(JSON.stringify(stadester_obj["Cardiff-United Kingdom"].population));
         let rhondda_pop = JSON.parse(JSON.stringify(stadester_obj["Rhondda-United Kingdom"].population));
@@ -919,6 +993,12 @@
           }
         }
         
+        //Lamphun, Thailand geolocation fix
+        if (key_str === "stadester-Lamphun-Thailand" || key_str.toLowerCase().includes("lamphun")) {
+          if (local_city.coords && local_city.coords[0] < 10)
+            local_city.coords = [18.5744357, 99.00369719999999];
+        }
+        
         //Regularize Trujillo, Peru historical curve to remove cubic spline vacuum sawtooth
         if (key_str.toLowerCase().includes("trujillo") && (key_str.includes("Peru") || key_str.includes("peru"))) {
           if (local_city.population) {
@@ -1001,6 +1081,41 @@
         local_city.key = key_str;
         return_obj[key_str] = local_city;
       }
+      //Inject Vaduz into Stadestér GHSL dataset if not present
+      if (!return_obj["stadester-Vaduz-Liechtenstein"] && (!stadester_obj || !stadester_obj["Vaduz-Liechtenstein"])) {
+        return_obj["stadester-Vaduz-Liechtenstein"] = {
+          name: "Vaduz",
+          country: "Liechtenstein",
+          elevation: 455,
+          key: "stadester-Vaduz-Liechtenstein",
+          coords: [47.141, 9.521],
+          original_names: ["vaduz"],
+          other_names: ["Vaduz"],
+          population: {
+            "1400": 300,
+            "1500": 400,
+            "1600": 500,
+            "1700": 600,
+            "1800": 800,
+            "1900": 1000,
+            "1910": 1300,
+            "1920": 1400,
+            "1930": 1600,
+            "1940": 2000,
+            "1950": 2700,
+            "1960": 3400,
+            "1970": 3900,
+            "1980": 4600,
+            "1990": 4900,
+            "2000": 5000,
+            "2010": 5200,
+            "2020": 5700
+          },
+          region: "europe",
+          type: "manual"
+        };
+      }
+      
       console.log(`- Appended ${all_stadester_cities.length} historical Stadestér entries (truncated < ${cutoff_year}).`);
     }
     
