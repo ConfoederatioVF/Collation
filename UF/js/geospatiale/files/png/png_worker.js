@@ -985,34 +985,39 @@ let handleTask = async function (task) {
       let serv = 0.20;
 
       if (year <= 1890) {
-        let gdp_norm = Math.min(1.0, Math.max(0.0, (gdp_pc - 300) / 4200));
-        let urb_norm = Math.min(1.0, Math.max(0.0, (urb_rate - 0.03) / 0.32));
+        let u = Math.min(0.85, Math.max(0.01, urb_rate));
+        let z = Math.max(0, Math.log(Math.max(350, gdp_pc) / 350));
 
-        let base_agri = (sex === "f") ? 0.81 : 0.84;
-        agri = base_agri - 0.50 * Math.pow(urb_norm, 0.8) - 0.20 * Math.pow(gdp_norm, 0.7);
-        agri = Math.max(0.12, Math.min(0.85, agri));
+        inf = (sex === "f") ? (0.045 + 0.03 / (1 + z)) : (0.035 + 0.025 / (1 + z));
+        mfg = (sex === "f" ? 0.05 : 0.04) + 0.022 * z + 0.42 * u * Math.sqrt(z) + 0.48 * Math.pow(u, 1.8) * z;
+        mfg = Math.min(0.55, Math.max(0.04, mfg));
 
-        let base_mfg = (sex === "f") ? 0.08 : 0.07;
-        mfg = base_mfg + 0.32 * Math.pow(urb_norm, 0.9) + 0.14 * Math.pow(gdp_norm, 0.7);
-        mfg = Math.max(0.06, Math.min(0.50, mfg));
+        agri = (sex === "f" ? 0.82 : 0.85) - 0.12 * z - 0.65 * Math.pow(u, 0.75) * (1 + 0.15 * z);
+        agri = Math.min(0.88, Math.max(0.08, agri));
 
         serv = Math.max(0.06, 1.0 - agri - mfg - inf);
         let sum = agri + mfg + serv + inf;
-        agri /= sum; mfg /= sum; serv /= sum; inf /= sum;
+        agri /= sum;
+        mfg /= sum;
+        serv /= sum;
+        inf /= sum;
       } else {
-        let gdp_norm = Math.min(1.0, Math.max(0.0, (gdp_pc - 400) / 10000));
-        let urb_norm = Math.min(1.0, Math.max(0.0, urb_rate));
+        let u = Math.min(0.95, Math.max(0.02, urb_rate));
+        let z = Math.max(300, gdp_pc);
 
-        let base_agri = (sex === "f") ? 0.60 : 0.65;
-        agri = base_agri - 0.55 * urb_norm - 0.25 * gdp_norm;
-        agri = Math.max(0.02, Math.min(0.80, agri));
-
-        mfg = 0.10 + 0.25 * urb_norm + 0.10 * gdp_norm;
-        mfg = Math.max(0.08, Math.min(0.45, mfg));
+        inf = (sex === "f") ? (0.035 + 0.18 / (1 + Math.pow(z / 2200, 1.3))) : (0.025 + 0.15 / (1 + Math.pow(z / 2200, 1.3)));
+        agri = 0.02 + 0.78 / (1 + Math.pow(z / 1400, 1.1) + 2.5 * Math.pow(u, 1.5));
+        let mfg_curve = 0.12 + 0.18 * Math.exp(-0.5 * Math.pow((Math.log(z / 1000) - 2.2) / 1.1, 2));
+        mfg = mfg_curve * (0.6 + 0.6 * Math.pow(u, 0.8));
+        mfg = Math.min(0.50, Math.max(0.05, mfg));
+        agri = Math.min(0.85, Math.max(0.01, agri));
 
         serv = Math.max(0.10, 1.0 - agri - mfg - inf);
         let sum = agri + mfg + serv + inf;
-        agri /= sum; mfg /= sum; serv /= sum; inf /= sum;
+        agri /= sum;
+        mfg /= sum;
+        serv /= sum;
+        inf /= sum;
       }
 
       return { agriculture: agri, manufacturing: mfg, services: serv, informal_labour: inf };
@@ -1135,12 +1140,17 @@ let handleTask = async function (task) {
         if (urb_raster && !isNaN(urb_raster.data[j])) cs.urb_sum += urb_raster.data[j];
         if (rur_raster && !isNaN(rur_raster.data[j])) cs.rur_sum += rur_raster.data[j];
 
-        let sum_p = p0[j] + p1[j] + p2[j] + p3[j];
+        let p_0 = Math.max(1e-5, p0[j] || 0);
+        let p_1 = Math.max(1e-5, p1[j] || 0);
+        let p_2 = Math.max(1e-5, p2[j] || 0);
+        let p_3 = Math.max(1e-5, p3[j] || 0);
+
+        let sum_p = p_0 + p_1 + p_2 + p_3;
         let norm_p = (sum_p > 0) ? (1 / sum_p) : 0.25;
-        cs.model_sum[0] += p0[j] * norm_p * pop;
-        cs.model_sum[1] += p1[j] * norm_p * pop;
-        cs.model_sum[2] += p2[j] * norm_p * pop;
-        cs.model_sum[3] += p3[j] * norm_p * pop;
+        cs.model_sum[0] += p_0 * norm_p * pop;
+        cs.model_sum[1] += p_1 * norm_p * pop;
+        cs.model_sum[2] += p_2 * norm_p * pop;
+        cs.model_sum[3] += p_3 * norm_p * pop;
 
         if (has_targets) {
           let tag = t0[j] || 0, tmf = t1[j] || 0, tse = t2[j] || 0, tinf = t3[j] || 0;
@@ -1161,18 +1171,37 @@ let handleTask = async function (task) {
         let target = null;
         let tot_target = cs.target_sum[0] + cs.target_sum[1] + cs.target_sum[2] + cs.target_sum[3];
 
+        let avg_gdp = (cs.pop > 0) ? (cs.gdp_sum / cs.pop) : 800;
+        let tot_urb_rur = cs.urb_sum + cs.rur_sum;
+        let urb_rate = (tot_urb_rur > 0) ? (cs.urb_sum / tot_urb_rur) : 0.08;
+        let struct_target = getCountryStructuralBaselines(avg_gdp, urb_rate, year, sex);
+
         if (tot_target > 0) {
-          target = {
-            agriculture: cs.target_sum[0] / tot_target,
-            manufacturing: cs.target_sum[1] / tot_target,
-            services: cs.target_sum[2] / tot_target,
-            informal_labour: cs.target_sum[3] / tot_target
-          };
+          let emp_inf = cs.target_sum[3] / tot_target;
+          if (emp_inf < 0.005) {
+            let inf_share = struct_target.informal_labour;
+            let tot_formal = cs.target_sum[0] + cs.target_sum[1] + cs.target_sum[2];
+            if (tot_formal > 0) {
+              let scale = (1.0 - inf_share) / tot_formal;
+              target = {
+                agriculture: cs.target_sum[0] * scale,
+                manufacturing: cs.target_sum[1] * scale,
+                services: cs.target_sum[2] * scale,
+                informal_labour: inf_share
+              };
+            } else {
+              target = struct_target;
+            }
+          } else {
+            target = {
+              agriculture: cs.target_sum[0] / tot_target,
+              manufacturing: cs.target_sum[1] / tot_target,
+              services: cs.target_sum[2] / tot_target,
+              informal_labour: emp_inf
+            };
+          }
         } else {
-          let avg_gdp = (cs.pop > 0) ? (cs.gdp_sum / cs.pop) : 800;
-          let tot_urb_rur = cs.urb_sum + cs.rur_sum;
-          let urb_rate = (tot_urb_rur > 0) ? (cs.urb_sum / tot_urb_rur) : 0.08;
-          target = getCountryStructuralBaselines(avg_gdp, urb_rate, year, sex);
+          target = struct_target;
         }
 
         if (target && cs.pop > 0) {
@@ -1230,10 +1259,15 @@ let handleTask = async function (task) {
         }
         let f = country_factors[cid] || [1, 1, 1, 1];
 
-        let u0 = p0[j] * f[0];
-        let u1 = p1[j] * f[1];
-        let u2 = p2[j] * f[2];
-        let u3 = p3[j] * f[3];
+        let p_0 = Math.max(1e-5, p0[j] || 0);
+        let p_1 = Math.max(1e-5, p1[j] || 0);
+        let p_2 = Math.max(1e-5, p2[j] || 0);
+        let p_3 = Math.max(1e-5, p3[j] || 0);
+
+        let u0 = p_0 * f[0];
+        let u1 = p_1 * f[1];
+        let u2 = p_2 * f[2];
+        let u3 = p_3 * f[3];
         let sum_u = u0 + u1 + u2 + u3;
 
         let norm_u = (sum_u > 0) ? (lfpr / sum_u) : 0;

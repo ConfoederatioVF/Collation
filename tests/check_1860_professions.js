@@ -56,7 +56,9 @@ require(path.join(h3, "professions/professions.js"));
 		"GBR": { name: "Britain", r: 198, g: 69, b: 69 },
 		"FRA": { name: "France", r: 47, g: 97, b: 170 },
 		"USA": { name: "USA", r: 87, g: 122, b: 175 },
-		"CHN": { name: "China", r: 173, g: 62, b: 62 }
+		"CHN": { name: "China", r: 173, g: 62, b: 62 },
+		"SWE": { name: "Sweden", r: 119, g: 168, b: 200 },
+		"DNK": { name: "Denmark", r: 224, g: 71, b: 92 }
 	};
 
 	let target_cids = {};
