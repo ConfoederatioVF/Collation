@@ -477,6 +477,41 @@
         type: "manual"
       };
     
+    if (!return_obj["Macau-Macao"])
+      return_obj["Macau-Macao"] = {
+        name: "Macau",
+        country: "Macao",
+        elevation: 10,
+        key: "Macau-Macao",
+        coords: [22.1987, 113.5439],
+        original_names: ["macau", "macao"],
+        other_names: ["Macau", "Macao"],
+        population: {
+          "1557": 500,
+          "1560": 1000,
+          "1600": 5000,
+          "1635": 35000,
+          "1700": 19500,
+          "1750": 24000,
+          "1800": 30000,
+          "1850": 29000,
+          "1900": 63000,
+          "1910": 75000,
+          "1920": 84000,
+          "1930": 120000,
+          "1940": 150000,
+          "1950": 188000,
+          "1960": 169000,
+          "1970": 249000,
+          "1980": 242000,
+          "1990": 352000,
+          "2000": 432000,
+          "2010": 540000,
+          "2020": 680000
+        },
+        type: "manual"
+      };
+    
     //Ensure Lamphun geolocation is fixed to authoritative coordinates
     if (return_obj["Lamphun-Thailand"])
       return_obj["Lamphun-Thailand"].coords = [18.5744357, 99.00369719999999];
@@ -799,6 +834,42 @@
           type: "manual"
         };
       
+      //Inject Macau, Macao if missing
+      if (!stadester_obj["Macau-Macao"])
+        stadester_obj["Macau-Macao"] = {
+          name: "Macau",
+          country: "Macao",
+          elevation: 10,
+          key: "Macau-Macao",
+          coords: [22.1987, 113.5439],
+          original_names: ["macau", "macao"],
+          other_names: ["Macau", "Macao"],
+          population: {
+            "1557": 500,
+            "1560": 1000,
+            "1600": 5000,
+            "1635": 35000,
+            "1700": 19500,
+            "1750": 24000,
+            "1800": 30000,
+            "1850": 29000,
+            "1900": 63000,
+            "1910": 75000,
+            "1920": 84000,
+            "1930": 120000,
+            "1940": 150000,
+            "1950": 188000,
+            "1960": 169000,
+            "1970": 249000,
+            "1980": 242000,
+            "1990": 352000,
+            "2000": 432000,
+            "2010": 540000,
+            "2020": 680000
+          },
+          type: "manual"
+        };
+      
       if (stadester_obj["Cardiff-United Kingdom"] && stadester_obj["Rhondda-United Kingdom"]) {
         let cardiff_pop = JSON.parse(JSON.stringify(stadester_obj["Cardiff-United Kingdom"].population));
         let rhondda_pop = JSON.parse(JSON.stringify(stadester_obj["Rhondda-United Kingdom"].population));
@@ -1112,6 +1183,45 @@
             "2020": 5700
           },
           region: "europe",
+          type: "manual"
+        };
+      }
+      
+      //Inject Macau into Stadestér GHSL dataset if not present
+      if (!return_obj["stadester-Macau-Macao"] && (!stadester_obj || !stadester_obj["Macau-Macao"])) {
+        return_obj["stadester-Macau-Macao"] = {
+          name: "Macau",
+          country: "Macao",
+          elevation: 10,
+          key: "stadester-Macau-Macao",
+          coords: [22.1987, 113.5439],
+          original_names: ["macau", "macao"],
+          other_names: ["Macau", "Macao"],
+          population: {
+            "1557": 500,
+            "1560": 1000,
+            "1600": 5000,
+            "1635": 35000,
+            "1700": 19500,
+            "1750": 24000,
+            "1800": 30000,
+            "1850": 29000,
+            "1900": 63000,
+            "1910": 75000,
+            "1920": 84000,
+            "1930": 120000,
+            "1940": 150000,
+            "1950": 188000,
+            "1960": 169000,
+            "1970": 249000,
+            "1980": 242000,
+            "1990": 352000,
+            "2000": 432000,
+            "2010": 540000,
+            "2020": 680000
+          },
+          region: "eastasia",
+          colour: [173, 62, 62],
           type: "manual"
         };
       }
