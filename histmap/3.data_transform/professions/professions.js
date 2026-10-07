@@ -249,10 +249,6 @@ global.professions = class {
 		});
 	}
 	
-	/**
-	 * Builds epoch-aware historical models (Pre-Industrial, Industrial, Modern) as well as
-	 * a global geomean fallback to respect structural economic transformations across centuries.
-	 */
 	static async C_mergeHistoricalEnsembles (arg0_options) {
 		//Convert from parameters
 		let options = (arg0_options) ? arg0_options : {};
