@@ -341,6 +341,9 @@ global.age_sex = class {
 			return (overwrite || !fs.existsSync(check_path));
 		});
 		
+		let unified_path = `${this.intermediate_logit_folder}multinomial_model_unified.json`;
+		let unified_data = (fs.existsSync(unified_path)) ? JSON.parse(fs.readFileSync(unified_path, "utf8")) : null;
+		
 		if (target_years.length === 0) return [];
 		
 		//Return statement
@@ -352,19 +355,17 @@ global.age_sex = class {
 			let out_base = `${this.intermediate_logit_rasters}logit_${year}.png`;
 			let has_local_anchor = fs.existsSync(model_path);
 			let resolved_model = model_path;
-			let unified_path = `${this.intermediate_logit_folder}multinomial_model_unified.json`;
 			
-			if (fs.existsSync(unified_path)) {
-				let unified_data = JSON.parse(fs.readFileSync(unified_path, "utf8"));
-				
+			if (unified_data) {
 				if (unified_data.type === "multinomial_ensemble" && Array.isArray(unified_data.models)) {
 					let dynamic_models = [];
+					let eff_year = Math.max(year, 1750);
 					let total_w = 0;
 					
 					for (let m = 0; m < unified_data.models.length; m++) {
 						let entry = unified_data.models[m];
 						let anchor_year = entry.year || 1950;
-						let dt = Math.abs(year - anchor_year);
+						let dt = Math.abs(eff_year - anchor_year);
 						let kernel = Math.exp(-dt/50);
 						let w = (entry.weight || 1)*kernel;
 						dynamic_models.push({ model: entry.model, weight: w, year: anchor_year });
