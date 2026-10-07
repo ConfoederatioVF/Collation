@@ -984,7 +984,57 @@ let handleTask = async function (task) {
       let mfg = 0.25;
       let serv = 0.20;
 
-      if (year <= 1890) {
+      //1. Pre-Neolithic to Neolithic Transition (-10000 to -3000 BC): Land use intensity scales farming vs foraging
+      if (year < -3000) {
+        let lambda_points = [
+          { y: -10000, l: 0.00 }, { y: -8000, l: 0.02 }, { y: -6000, l: 0.10 },
+          { y: -4000, l: 0.70 }, { y: -3000, l: 1.00 }
+        ];
+        let lambda = 0.0;
+        if (year <= -10000) {
+          lambda = 0.0;
+        } else {
+          let lower = lambda_points[0], upper = lambda_points[lambda_points.length - 1];
+          for (let i = 0; i < lambda_points.length - 1; i++) {
+            if (year >= lambda_points[i].y && year <= lambda_points[i + 1].y) {
+              lower = lambda_points[i];
+              upper = lambda_points[i + 1];
+              break;
+            }
+          }
+          let t = (upper.y === lower.y) ? 0 : (year - lower.y) / (upper.y - lower.y);
+          lambda = (1 - t) * lower.l + t * upper.l;
+        }
+
+        let u = Math.min(0.85, Math.max(0.01, urb_rate));
+        let z = Math.max(0, Math.log(Math.max(350, gdp_pc) / 350));
+
+        let base_inf = (sex === "f") ? (0.045 + 0.03 / (1 + z)) : (0.035 + 0.025 / (1 + z));
+        let base_mfg = (sex === "f" ? 0.05 : 0.04) + 0.022 * z + 0.42 * u * Math.sqrt(z) + 0.48 * Math.pow(u, 1.8) * z;
+        base_mfg = Math.min(0.55, Math.max(0.04, base_mfg));
+
+        let base_agri = (sex === "f" ? 0.82 : 0.85) - 0.12 * z - 0.65 * Math.pow(u, 0.75) * (1 + 0.15 * z);
+        base_agri = Math.min(0.88, Math.max(0.08, base_agri));
+
+        let base_serv = Math.max(0.06, 1.0 - base_agri - base_mfg - base_inf);
+        let base_sum = base_agri + base_mfg + base_serv + base_inf;
+        base_agri /= base_sum;
+        base_mfg /= base_sum;
+        base_serv /= base_sum;
+        base_inf /= base_sum;
+
+        agri = (1 - lambda) * 0.01 + lambda * base_agri;
+        inf = (1 - lambda) * 0.97 + lambda * base_inf;
+        mfg = (1 - lambda) * 0.01 + lambda * base_mfg;
+        serv = (1 - lambda) * 0.01 + lambda * base_serv;
+
+        let sum = agri + mfg + serv + inf;
+        agri /= sum;
+        mfg /= sum;
+        serv /= sum;
+        inf /= sum;
+      } else if (year <= 1890) {
+        //2. Historical Era (-3000 to 1890 AD): Mature Agrarian and Industrial transition structural scaling (Chenery & Syrquin, 1975)
         let u = Math.min(0.85, Math.max(0.01, urb_rate));
         let z = Math.max(0, Math.log(Math.max(350, gdp_pc) / 350));
 
