@@ -9,7 +9,7 @@ global.LFPR_OLS = class {
 	static output_active_labourforce = `${this.bf}/4.active_labourforce/`;
 	
 	static sexes = ["f", "m"];
-	static working_cohorts = ["15", "20", "25", "30", "35", "40", "45", "50", "55", "60", "65", "70", "75", "80"];
+	static working_cohorts = ["15", "20", "25", "30", "35", "40", "45", "50", "55", "60"];
 	
 	// Utilise demographic parameters and structural inequality (gini) as covariates
 	static covariates_obj = () => {

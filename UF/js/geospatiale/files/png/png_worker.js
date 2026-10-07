@@ -1036,7 +1036,7 @@ let handleTask = async function (task) {
     let sexes = task.sexes || ["m", "f"];
     let target_folder = task.target_folder || (global.professions_Olivetti ? professions_Olivetti.output_rasters : path.join(global.h1 || "./histmap/1.data_raw/", "professions_Olivetti", "output_rasters"));
     let urb_path = task.urb_path || path.join(global.h2 || "./histmap/2.data_cleaning/", "population_Stadester", "stadester_urban_rasters", `stadester_urban_${task.year}.png`);
-    let working_cohorts = task.working_cohorts || ["15", "20", "25", "30", "35", "40", "45", "50", "55", "60", "65", "70", "75", "80"];
+    let working_cohorts = task.working_cohorts || ["15", "20", "25", "30", "35", "40", "45", "50", "55", "60"];
     let year = task.year;
 
     let agg_t = {};

@@ -164,7 +164,7 @@ global.professions_ILO = class {
 			});
 		});
 		
-		let working_cohorts = ["15", "20", "25", "30", "35", "40", "45", "50", "55", "60", "65", "70", "75", "80"];
+		let working_cohorts = ["15", "20", "25", "30", "35", "40", "45", "50", "55", "60"];
 		let sexes = ["m", "f", "t"];
 		
 		for (let y = 0; y < hyde_years.length; y++) {

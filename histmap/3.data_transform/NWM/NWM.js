@@ -3,11 +3,7 @@
   if (!global.NWM) global.NWM = {};
   
   /**
-   * Master orchestrator for the National / World Model (NWM) historical demographic,
-   * urban settlement, and macroeconomic raster pipeline.
-   * 
-   * Coordinates end-to-end timeseries execution across Substrata, Stadestér, Eoscala GDP,
-   * Covariates, Gini, Wealth/Income, Age/Sex population pyramids, Births/Deaths, and Professions.
+   * Master orchestrator for the Naissance World Model (NWM).
    * 
    * @class NWM
    */

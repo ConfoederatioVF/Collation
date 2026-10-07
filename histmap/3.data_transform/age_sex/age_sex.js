@@ -320,8 +320,7 @@ global.age_sex = class {
 	}
 	
 	/**
-	 * Generates cohort probabilities. Uses specific temporal models where available,
-	 * premodern NDT model for pre-1500 Columbian exchange era, and coverage-weighted ensemble blending for gaps.
+	 * Generates cohort probabilities using coverage-weighted temporal kernel ensemble blending.
 	 */
 	static async D_generateMultinomialLogitRasters (arg0_options) {
 		//Convert from parameters
@@ -355,12 +354,7 @@ global.age_sex = class {
 			let resolved_model = model_path;
 			let unified_path = `${this.intermediate_logit_folder}multinomial_model_unified.json`;
 			
-			//Regime 1: Pre-1500 AD (Columbian Exchange Breakpoint) > NDT Premodern land-use model
-			if (year < 1500) {
-				let premodern_path = `${this.intermediate_logit_folder}premodern_multinomial_logit.json`;
-				if (fs.existsSync(premodern_path)) resolved_model = premodern_path;
-			} else if (fs.existsSync(unified_path)) {
-				//Regime 2: Post-1500 AD > Coverage-weighted temporal kernel ensemble (blended 80/20 with local anchor if available)
+			if (fs.existsSync(unified_path)) {
 				let unified_data = JSON.parse(fs.readFileSync(unified_path, "utf8"));
 				
 				if (unified_data.type === "multinomial_ensemble" && Array.isArray(unified_data.models)) {

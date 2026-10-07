@@ -22,7 +22,7 @@ global.professions = class {
 	static sexes = ["m", "f"];
 	static categories = ["agriculture", "manufacturing", "services", "informal_labour", "not_in_work"];
 	static olivetti_categories = ["agriculture", "manufacturing", "services", "informal_labour"];
-	static working_cohorts = ["15", "20", "25", "30", "35", "40", "45", "50", "55", "60", "65", "70", "75", "80"];
+	static working_cohorts = ["15", "20", "25", "30", "35", "40", "45", "50", "55", "60"];
 	
 	/**
 	 * Prepares the target absolute populations for the MNL. Calculates `not_in_work` as the structural

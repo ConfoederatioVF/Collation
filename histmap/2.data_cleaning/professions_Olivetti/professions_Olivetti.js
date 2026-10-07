@@ -125,7 +125,7 @@ global.professions_Olivetti = class {
 		});
 		
 		let bins = ['agriculture', 'manufacturing', 'services', 'informal_labour'];
-		let working_cohorts = ["15", "20", "25", "30", "35", "40", "45", "50", "55", "60", "65", "70", "75", "80"];
+		let working_cohorts = ["15", "20", "25", "30", "35", "40", "45", "50", "55", "60"];
 		let primary_sexes = ["m", "f"];
 		
 		for (let y = 0; y < hyde_years.length; y++) {
