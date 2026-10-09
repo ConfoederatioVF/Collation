@@ -1070,6 +1070,17 @@
             local_city.coords = [18.5744357, 99.00369719999999];
         }
         
+        //Champotón (Chakanputun), Mexico geolocation fix
+        if (key_str === "stadester-Champotón-Mexico" || key_str.toLowerCase().includes("champot") || key_str.toLowerCase().includes("chakanputun")) {
+          local_city.coords = [19.3471645, -90.7200237];
+        }
+        
+        //Múgica, Michoacán, Mexico geolocation fix
+        if (key_str === "stadester-Múgica-Mexico" || key_str.toLowerCase().includes("múgica")) {
+          if (local_city.coords && local_city.coords[0] > 20)
+            local_city.coords = [19.01944, -102.10889];
+        }
+        
         //Regularize Trujillo, Peru historical curve to remove cubic spline vacuum sawtooth
         if (key_str.toLowerCase().includes("trujillo") && (key_str.includes("Peru") || key_str.includes("peru"))) {
           if (local_city.population) {
