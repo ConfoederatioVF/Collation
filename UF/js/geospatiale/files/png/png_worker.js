@@ -114,6 +114,8 @@ let safeRequire = function (rel_path) {
 safeRequire("histmap/2.data_cleaning/population_Stadester/stadester_rasters.js");
 safeRequire("histmap/2.data_cleaning/population_Stadester/stadester_uud.js");
 safeRequire("histmap/2.data_cleaning/metadata_HYDE/metadata_HYDE.js");
+safeRequire("histmap/2.data_cleaning/admin_modern/admin_modern.js");
+safeRequire("histmap/2.data_cleaning/professions_Bairoch/professions_Bairoch.js");
 
 //Task execution handlers
 let handleTask = async function (task) {
@@ -1033,25 +1035,74 @@ let handleTask = async function (task) {
         mfg /= sum;
         serv /= sum;
         inf /= sum;
-      } else if (year <= 1890) {
-        //2. Historical Era (-3000 to 1890 AD): Mature Agrarian and Industrial transition structural scaling (Chenery & Syrquin, 1975)
-        let u = Math.min(0.85, Math.max(0.01, urb_rate));
+      } else if (year < 1750) {
+        //2. Mature Agrarian Era (-3000 to 1750 AD): Pre-industrial guild and craft baseline
+        let u_raw = Math.min(0.85, Math.max(0.01, urb_rate));
         let z = Math.max(0, Math.log(Math.max(350, gdp_pc) / 350));
-
         inf = (sex === "f") ? (0.045 + 0.03 / (1 + z)) : (0.035 + 0.025 / (1 + z));
-        mfg = (sex === "f" ? 0.05 : 0.04) + 0.022 * z + 0.42 * u * Math.sqrt(z) + 0.48 * Math.pow(u, 1.8) * z;
-        mfg = Math.min(0.55, Math.max(0.04, mfg));
 
-        agri = (sex === "f" ? 0.82 : 0.85) - 0.12 * z - 0.65 * Math.pow(u, 0.75) * (1 + 0.15 * z);
-        agri = Math.min(0.88, Math.max(0.08, agri));
+        //In pre-industrial societies, domestic agrarian surplus bounded functional non-agricultural urbanisation to ~10-12%
+        let u_cap = 0.04 + 0.035 * Math.min(2.0, z);
+        let u_eff = Math.min(u_raw, u_cap + 0.08 * Math.max(0, u_raw - u_cap));
 
-        serv = Math.max(0.06, 1.0 - agri - mfg - inf);
+        mfg = (sex === "f" ? 0.045 : 0.035) + 0.015 * z + 0.35 * u_eff;
+        serv = (sex === "f" ? 0.055 : 0.045) + 0.020 * z + 0.45 * u_eff;
+        agri = Math.max(0.55, 1.0 - mfg - serv - inf);
+
+        let sum = agri + mfg + serv + inf;
+        agri /= sum;
+        mfg /= sum;
+        serv /= sum;
+        inf /= sum;
+      } else if (year <= 1890) {
+        //3. Industrial Transition Era (1750 to 1890 AD): First and Second Industrial Revolutions
+        let u_raw = Math.min(0.85, Math.max(0.01, urb_rate));
+        let z = Math.max(0, Math.log(Math.max(350, gdp_pc) / 350));
+        inf = (sex === "f") ? (0.045 + 0.03 / (1 + z)) : (0.035 + 0.025 / (1 + z));
+
+        let t_year = (year - 1750) / (1890 - 1750);
+        let s_time = t_year * t_year * (3 - 2 * t_year); //smoothstep spline from 0 to 1
+
+        //Pioneer take-off readiness: Great Britain reached $3623 by 1820 with mechanised steam industry
+        let pioneer_weight = Math.max(0, Math.min(1.0, (gdp_pc - 2400) / (3200 - 2400)));
+        let w_ind = Math.min(1.0, pioneer_weight + (1.0 - pioneer_weight) * s_time * Math.min(1.0, Math.max(0.05, (gdp_pc - 600) / 2400)));
+
+        //Agro-town dampening:
+        //In pre-industrial / transition economies without full industrial take-off (w_ind < 0.95),
+        //demographic urban settlements above ~8% represent agro-towns (e.g. Southern Italy, Sicily, Andalusia)
+        //where 60-80% of town residents were agricultural day-labourers (braccianti/contadini).
+        let u_cap = 0.05 + 0.03 * Math.min(2.0, z) + 0.20 * w_ind;
+        let u_eff = u_raw;
+        if (w_ind < 0.95 && u_raw > u_cap) {
+          let excess = u_raw - u_cap;
+          let non_ag_share = 0.05 + 0.95 * Math.pow(w_ind, 2);
+          u_eff = u_cap + excess * non_ag_share;
+        }
+
+        //1. Craft / proto-industrial baseline (1750):
+        let mfg_craft = (sex === "f" ? 0.070 : 0.060) + 0.035 * z + 0.30 * u_eff;
+        let serv_craft = (sex === "f" ? 0.065 : 0.055) + 0.020 * z + 0.40 * u_eff;
+        let agri_craft = Math.max(0.55, 1.0 - mfg_craft - serv_craft - inf);
+
+        //2. Modern industrial baseline (1890 Chenery & Syrquin):
+        let mfg_1890 = (sex === "f" ? 0.05 : 0.04) + 0.022 * z + 0.42 * u_eff * Math.sqrt(z) + 0.48 * Math.pow(u_eff, 1.8) * z;
+        mfg_1890 = Math.min(0.55, Math.max(0.04, mfg_1890));
+        let agri_1890 = (sex === "f" ? 0.82 : 0.85) - 0.12 * z - 0.65 * Math.pow(u_eff, 0.75) * (1 + 0.15 * z);
+        agri_1890 = Math.min(0.88, Math.max(0.08, agri_1890));
+        let serv_1890 = Math.max(0.06, 1.0 - agri_1890 - mfg_1890 - inf);
+
+        //Blend craft and modern based on industrial transition weight
+        agri = (1 - w_ind) * agri_craft + w_ind * agri_1890;
+        mfg = (1 - w_ind) * mfg_craft + w_ind * mfg_1890;
+        serv = (1 - w_ind) * serv_craft + w_ind * serv_1890;
+
         let sum = agri + mfg + serv + inf;
         agri /= sum;
         mfg /= sum;
         serv /= sum;
         inf /= sum;
       } else {
+        //4. Modern Era (post-1890): Post-industrial tertiary shift (Chenery & Syrquin, 1975 / Kuznets)
         let u = Math.min(0.95, Math.max(0.02, urb_rate));
         let z = Math.max(300, gdp_pc);
 
@@ -1077,6 +1128,8 @@ let handleTask = async function (task) {
     let categories = task.categories || ["agriculture", "manufacturing", "services", "informal_labour", "not_in_work"];
     let gdp_pc_path = task.gdp_pc_path || path.join(global.h3 || "./histmap/3.data_transform/", "GDP_pc", "8.GDP_nominal_pc_rasters", `GDP_pc_${task.year}.png`);
     let geocode_path = task.geocode_path || path.join(global.h1 || "./histmap/1.data_raw/", "admin_modern", "geocodes.png");
+    let geocode_1913_path = task.geocode_1913_path || path.join(global.h2 || "./histmap/2.data_cleaning/", "professions_Bairoch", "geocodes_1913.png");
+    let geocode_1913_json_path = task.geocode_1913_json_path || path.join(global.h2 || "./histmap/2.data_cleaning/", "professions_Bairoch", "geocodes_1913.json");
     let lfpr_folder = task.lfpr_folder;
     let logit_rasters_folder = task.logit_rasters_folder;
     let olivetti_categories = task.olivetti_categories || ["agriculture", "manufacturing", "services", "informal_labour"];
@@ -1140,6 +1193,45 @@ let handleTask = async function (task) {
         if (global._cached_geocodes_raster) geocode_data = global._cached_geocodes_raster.data;
       }
 
+      let geocode_1913_data = null;
+      let geocodes_1913_map = null;
+      if (year <= 1913 && geocode_1913_path && fs.existsSync(geocode_1913_path)) {
+        if (!global._cached_1913_raster || global._cached_1913_path !== geocode_1913_path) {
+          global._cached_1913_raster = await GeoPNG.loadImage(geocode_1913_path);
+          global._cached_1913_path = geocode_1913_path;
+        }
+        if (global._cached_1913_raster) geocode_1913_data = global._cached_1913_raster.data;
+
+        if (geocode_1913_json_path && fs.existsSync(geocode_1913_json_path)) {
+          if (!global._cached_1913_json || global._cached_1913_json_path !== geocode_1913_json_path) {
+            global._cached_1913_json = JSON.parse(fs.readFileSync(geocode_1913_json_path, "utf8"));
+            global._cached_1913_json_path = geocode_1913_json_path;
+          }
+          geocodes_1913_map = global._cached_1913_json;
+        }
+      }
+
+      let cid_to_bairoch_key = {};
+      if (geocodes_1913_map) {
+        for (let k in geocodes_1913_map) {
+          let ent = geocodes_1913_map[k];
+          if (ent.bairoch_key) cid_to_bairoch_key[ent.cid] = ent.bairoch_key;
+        }
+      }
+      if (typeof admin_modern !== "undefined" && admin_modern.getISO3ColourcodesObject) {
+        let iso3_obj = admin_modern.getISO3ColourcodesObject();
+        let b_map = (typeof professions_Bairoch !== "undefined") ? professions_Bairoch.iso3_to_bairoch_map : {};
+        for (let col in iso3_obj) {
+          let parts = col.split(",");
+          let mcid = (parseInt(parts[0]) << 16) | (parseInt(parts[1]) << 8) | parseInt(parts[2]);
+          let iso3 = iso3_obj[col][0];
+          if (iso3 && b_map[iso3]) {
+            cid_to_bairoch_key[100000 + mcid] = b_map[iso3];
+            cid_to_bairoch_key[mcid] = b_map[iso3];
+          }
+        }
+      }
+
       let has_targets = false;
       let target_rasters = {};
 
@@ -1177,7 +1269,16 @@ let handleTask = async function (task) {
         if (pop <= 0) continue;
 
         let cid = 0;
-        if (geocode_data) {
+        if (year <= 1913 && geocode_1913_data) {
+          let b_idx = j * 4;
+          let c1913 = (geocode_1913_data[b_idx] << 16) | (geocode_1913_data[b_idx + 1] << 8) | geocode_1913_data[b_idx + 2];
+          if (c1913 > 0) {
+            cid = c1913;
+          } else if (geocode_data) {
+            let mcid = (geocode_data[b_idx] << 16) | (geocode_data[b_idx + 1] << 8) | geocode_data[b_idx + 2];
+            if (mcid > 0) cid = 100000 + mcid;
+          }
+        } else if (geocode_data) {
           let b_idx = j * 4;
           cid = (geocode_data[b_idx] << 16) | (geocode_data[b_idx + 1] << 8) | geocode_data[b_idx + 2];
         }
@@ -1251,7 +1352,12 @@ let handleTask = async function (task) {
             };
           }
         } else {
-          target = struct_target;
+          let b_key = cid_to_bairoch_key[cid] || null;
+          if (b_key && typeof professions_Bairoch !== "undefined" && professions_Bairoch.applyBairochTarget) {
+            target = professions_Bairoch.applyBairochTarget(b_key, struct_target, year, sex);
+          } else {
+            target = struct_target;
+          }
         }
 
         if (target && cs.pop > 0) {
@@ -1303,7 +1409,16 @@ let handleTask = async function (task) {
         if (isNaN(lfpr)) lfpr = 0;
 
         let cid = 0;
-        if (geocode_data) {
+        if (year <= 1913 && geocode_1913_data) {
+          let b_idx = j * 4;
+          let c1913 = (geocode_1913_data[b_idx] << 16) | (geocode_1913_data[b_idx + 1] << 8) | geocode_1913_data[b_idx + 2];
+          if (c1913 > 0) {
+            cid = c1913;
+          } else if (geocode_data) {
+            let mcid = (geocode_data[b_idx] << 16) | (geocode_data[b_idx + 1] << 8) | geocode_data[b_idx + 2];
+            if (mcid > 0) cid = 100000 + mcid;
+          }
+        } else if (geocode_data) {
           let b_idx = j * 4;
           cid = (geocode_data[b_idx] << 16) | (geocode_data[b_idx + 1] << 8) | geocode_data[b_idx + 2];
         }

@@ -1,0 +1,107 @@
+{
+  "title": "PER CAPITA LEVELS OF INDUSTRIALIZATION",
+  "subtitle": "U.K. in 1900 = 100; 1913 boundaries. See notes below",
+  "source": "Paul Bairoch (1982), 'International Industrialization Levels from 1750 to 1980', Journal of European Economic History, 11(2), Table 4",
+  "years": [1750, 1800, 1860, 1913, 1928, 1953, 1980],
+  "benchmark": {
+    "country": "United Kingdom",
+    "year": 1900,
+    "level": 100
+  },
+  "data": {
+    "DEVELOPED_COUNTRIES": {
+      "name": "Developed Countries",
+      "values": [8, 8, 16, 55, 71, 135, 344]
+    },
+    "EUROPE": {
+      "name": "Europe",
+      "values": [8, 8, 17, 45, 52, 90, 267]
+    },
+    "AUT_HUN": {
+      "name": "Austria-Hungary",
+      "note": "a",
+      "note_text": "After 1913, the weighted average of Austria, Hungary and Czechoslovakia.",
+      "values": [7, 7, 11, 32, 32, 104, 342]
+    },
+    "BEL": {
+      "name": "Belgium",
+      "values": [9, 10, 28, 88, 116, 117, 316]
+    },
+    "FRA": {
+      "name": "France",
+      "note": "b",
+      "note_text": "In order to take into account territorial changes we have subtracted 5% from the levels between 1928 and 1970.",
+      "values": [9, 9, 20, 59, 78, 90, 265]
+    },
+    "DEU": {
+      "name": "Germany",
+      "note": "c",
+      "note_text": "After 1928 East and West Germany.",
+      "values": [8, 8, 15, 85, 101, 138, 393]
+    },
+    "ITA": {
+      "name": "Italy",
+      "values": [8, 8, 10, 26, 39, 61, 231]
+    },
+    "RUS": {
+      "name": "Russia",
+      "note": "d",
+      "note_text": "USSR after 1913.",
+      "values": [6, 6, 8, 20, 20, 73, 252]
+    },
+    "ESP": {
+      "name": "Spain",
+      "values": [7, 7, 11, 22, 28, 31, 159]
+    },
+    "SWE": {
+      "name": "Sweden",
+      "values": [7, 8, 15, 67, 84, 163, 409]
+    },
+    "CHE": {
+      "name": "Switzerland",
+      "values": [7, 10, 26, 87, 90, 167, 354]
+    },
+    "GBR": {
+      "name": "United Kingdom",
+      "values": [10, 16, 64, 115, 122, 210, 325]
+    },
+    "CAN": {
+      "name": "Canada",
+      "values": [null, 5, 7, 46, 82, 185, 379]
+    },
+    "USA": {
+      "name": "United States",
+      "values": [4, 9, 21, 126, 182, 354, 629]
+    },
+    "JPN": {
+      "name": "Japan",
+      "values": [7, 7, 7, 20, 30, 40, 353]
+    },
+    "THIRD_WORLD": {
+      "name": "Third World",
+      "values": [7, 6, 4, 2, 3, 5, 17]
+    },
+    "CHN": {
+      "name": "China",
+      "values": [8, 6, 4, 3, 4, 5, 24]
+    },
+    "IND": {
+      "name": "India",
+      "note": "e",
+      "note_text": "India and Pakistan after 1928.",
+      "values": [7, 6, 3, 2, 3, 5, 16]
+    },
+    "BRA": {
+      "name": "Brazil",
+      "values": [null, null, 4, 7, 10, 13, 55]
+    },
+    "MEX": {
+      "name": "Mexico",
+      "values": [null, null, 5, 7, 9, 12, 41]
+    },
+    "WORLD": {
+      "name": "World",
+      "values": [7, 6, 7, 21, 28, 48, 103]
+    }
+  }
+}
