@@ -1218,6 +1218,7 @@ let handleTask = async function (task) {
           if (ent.bairoch_key) cid_to_bairoch_key[ent.cid] = ent.bairoch_key;
         }
       }
+      let mcid_to_iso3 = {};
       if (typeof admin_modern !== "undefined" && admin_modern.getISO3ColourcodesObject) {
         let iso3_obj = admin_modern.getISO3ColourcodesObject();
         let b_map = (typeof professions_Bairoch !== "undefined") ? professions_Bairoch.iso3_to_bairoch_map : {};
@@ -1225,6 +1226,7 @@ let handleTask = async function (task) {
           let parts = col.split(",");
           let mcid = (parseInt(parts[0]) << 16) | (parseInt(parts[1]) << 8) | parseInt(parts[2]);
           let iso3 = iso3_obj[col][0];
+          if (iso3) mcid_to_iso3[mcid] = iso3;
           if (iso3 && b_map[iso3]) {
             cid_to_bairoch_key[100000 + mcid] = b_map[iso3];
             cid_to_bairoch_key[mcid] = b_map[iso3];
@@ -1272,11 +1274,13 @@ let handleTask = async function (task) {
         if (year <= 1913 && geocode_1913_data) {
           let b_idx = j * 4;
           let c1913 = (geocode_1913_data[b_idx] << 16) | (geocode_1913_data[b_idx + 1] << 8) | geocode_1913_data[b_idx + 2];
-          if (c1913 > 0) {
+          let mcid = (geocode_data) ? ((geocode_data[b_idx] << 16) | (geocode_data[b_idx + 1] << 8) | geocode_data[b_idx + 2]) : 0;
+          if (mcid > 0 && mcid_to_iso3[mcid] === "IRL") {
+            cid = 100000 + mcid;
+          } else if (c1913 > 0) {
             cid = c1913;
-          } else if (geocode_data) {
-            let mcid = (geocode_data[b_idx] << 16) | (geocode_data[b_idx + 1] << 8) | geocode_data[b_idx + 2];
-            if (mcid > 0) cid = 100000 + mcid;
+          } else if (mcid > 0) {
+            cid = 100000 + mcid;
           }
         } else if (geocode_data) {
           let b_idx = j * 4;
@@ -1412,11 +1416,13 @@ let handleTask = async function (task) {
         if (year <= 1913 && geocode_1913_data) {
           let b_idx = j * 4;
           let c1913 = (geocode_1913_data[b_idx] << 16) | (geocode_1913_data[b_idx + 1] << 8) | geocode_1913_data[b_idx + 2];
-          if (c1913 > 0) {
+          let mcid = (geocode_data) ? ((geocode_data[b_idx] << 16) | (geocode_data[b_idx + 1] << 8) | geocode_data[b_idx + 2]) : 0;
+          if (mcid > 0 && mcid_to_iso3[mcid] === "IRL") {
+            cid = 100000 + mcid;
+          } else if (c1913 > 0) {
             cid = c1913;
-          } else if (geocode_data) {
-            let mcid = (geocode_data[b_idx] << 16) | (geocode_data[b_idx + 1] << 8) | geocode_data[b_idx + 2];
-            if (mcid > 0) cid = 100000 + mcid;
+          } else if (mcid > 0) {
+            cid = 100000 + mcid;
           }
         } else if (geocode_data) {
           let b_idx = j * 4;

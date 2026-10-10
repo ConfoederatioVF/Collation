@@ -83,7 +83,6 @@ global.professions_Bairoch = class {
 
   static iso3_to_bairoch_map = {
     "GBR": "GBR",
-    "IRL": "GBR",
     "BEL": "BEL",
     "LUX": "BEL",
     "FRA": "FRA",
