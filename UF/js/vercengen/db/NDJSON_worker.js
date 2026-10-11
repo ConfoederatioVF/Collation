@@ -9,9 +9,11 @@ let { parentPort, workerData } = require("node:worker_threads");
 if (!global?.NDJSON) global.NDJSON = {};
 if (!global.ve) global.ve = {};
 
-require("../db_shared/NDJSON_history.js"); //Require NDJSON_history.js
+require("../db_shared/NDJSON_history.js");
 
 //Declare variables
+let current_file_path = null;
+let partition_cache = new Map();
 let processing = false;
 let queue = [];
 
@@ -24,28 +26,213 @@ let queue = [];
 		
 		//Return statement
 		return variable_string.split(".")
-		.reduce((local_object, local_key) => local_object?.[local_key], object);
+			.reduce((local_object, local_key) => local_object?.[local_key], object);
 	};
 }
 
+let extractCoordinates = function (obj, coords_acc) {
+	if (!obj) return;
+	
+	if (Array.isArray(obj)) {
+		if (obj.length >= 2 && typeof obj[0] === "number" && typeof obj[1] === "number") {
+			coords_acc.push(obj[0], obj[1]);
+		} else {
+			for (let i = 0; i < obj.length; i++) extractCoordinates(obj[i], coords_acc);
+		}
+	} else if (typeof obj === "object") {
+		if (obj.coordinates) {
+			extractCoordinates(obj.coordinates, coords_acc);
+		} else if (obj.geometry) {
+			extractCoordinates(obj.geometry, coords_acc);
+		} else if (obj.feature) {
+			extractCoordinates(obj.feature, coords_acc);
+		} else {
+			for (let k in obj) {
+				if (typeof obj[k] === "object") extractCoordinates(obj[k], coords_acc);
+			}
+		}
+	}
+};
+
+let calculateBBox = function (raw_keyframes, entity) {
+	let coords = [];
+	
+	if (raw_keyframes && typeof raw_keyframes === "object") {
+		let ts = History.getTimestamps(raw_keyframes);
+		for (let i = 0; i < ts.length; i++) {
+			let kf = raw_keyframes[ts[i]];
+			extractCoordinates(kf, coords);
+			if (coords.length > 0) break;
+		}
+	}
+	
+	if (coords.length === 0 && entity?.value) {
+		extractCoordinates(entity.value, coords);
+	}
+	
+	if (coords.length === 0) return null;
+	
+	let max_x = -Infinity;
+	let max_y = -Infinity;
+	let min_x = Infinity;
+	let min_y = Infinity;
+	
+	for (let i = 0; i < coords.length; i += 2) {
+		let x = coords[i];
+		let y = coords[i + 1];
+		if (x < min_x) min_x = x;
+		if (x > max_x) max_x = x;
+		if (y < min_y) min_y = y;
+		if (y > max_y) max_y = y;
+	}
+	
+	//Return statement
+	return [min_x, min_y, max_x, max_y];
+};
+
+let resolveHistory = function (data, timestamp, options) {
+	if (!data) return null;
+	
+	let history_obj = typeof data.history === "string" ? JSON.parse(data.history) : data.history;
+	if (!history_obj) return null;
+	
+	let raw_keyframes = (history_obj && history_obj.keyframes) ? history_obj.keyframes : history_obj;
+	
+	if (typeof raw_keyframes === "object" && raw_keyframes !== null) {
+		if (options?.type === "get_keyframes")
+			return History.getKeyframes(raw_keyframes);
+		return History.getKeyframe(raw_keyframes, timestamp);
+	}
+	
+	//Return statement
+	return null;
+};
+
+let loadPartition = async function (page_file) {
+	partition_cache.clear();
+	
+	if (!fs.existsSync(page_file)) return;
+	
+	let rs = fs.createReadStream(page_file);
+	let rl = readline.createInterface({ input: rs });
+	
+	try {
+		for await (let line of rl) {
+			let clean = line.trim();
+			if (clean.length === 0) continue;
+			
+			let match = clean.match(/^"([^"]+)"\s*:\s*(.*)$/);
+			if (!match) continue;
+			
+			let key = match[1];
+			let val_str = match[2];
+			if (val_str.endsWith(",")) val_str = val_str.slice(0, -1);
+			
+			try {
+				let entity = JSON.parse(val_str);
+				let history_obj = typeof entity.history === "string" ? JSON.parse(entity.history) : entity.history;
+				let raw_keyframes = (history_obj && history_obj.keyframes) ? history_obj.keyframes : history_obj;
+				let timestamps = (raw_keyframes && typeof raw_keyframes === "object") ? History.getTimestamps(raw_keyframes) : [];
+				let bbox = calculateBBox(raw_keyframes, entity);
+				
+				partition_cache.set(key, {
+					bbox: bbox,
+					class_name: entity.class_name,
+					entity: entity,
+					id: key,
+					metadata: entity.metadata,
+					raw_keyframes: raw_keyframes,
+					timestamps: timestamps,
+					type: entity.type,
+					value: entity.value
+				});
+			} catch (e) {}
+		}
+	} finally {
+		rl.close();
+		rs.destroy();
+	}
+};
+
+let updateNDJSON = async function (page_file, getUpdatedValue) {
+	let tmp_file = `${page_file}.tmp_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
+	let updated = false;
+	
+	let dir = path.dirname(page_file);
+	if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+	
+	let ws = fs.createWriteStream(tmp_file);
+	
+	if (fs.existsSync(page_file)) {
+		let rs = fs.createReadStream(page_file);
+		let rl = readline.createInterface({ input: rs });
+		
+		try {
+			for await (let line of rl) {
+				let clean = line.trim();
+				if (clean.length === 0) continue;
+				let match = clean.match(/^"([^"]+)"\s*:\s*(.*)$/);
+				
+				if (match) {
+					let key = match[1];
+					let val_str = match[2];
+					if (val_str.endsWith(",")) val_str = val_str.slice(0, -1);
+					
+					let newValue = getUpdatedValue(key, val_str);
+					if (newValue !== undefined) {
+						if (newValue !== null) ws.write(`"${key}":${JSON.stringify(newValue)}\n`);
+						updated = true;
+					} else {
+						ws.write(clean + "\n");
+					}
+				} else {
+					ws.write(clean + "\n");
+				}
+			}
+		} finally {
+			rl.close();
+			rs.destroy();
+		}
+	}
+	
+	let extra_appends = getUpdatedValue(null, null, updated);
+	if (extra_appends) {
+		for (let [k, val] of Object.entries(extra_appends))
+			if (val !== null) ws.write(`"${k}":${JSON.stringify(val)}\n`);
+	}
+	
+	ws.end();
+	await new Promise((r) => ws.on("finish", r));
+	
+	let attempts = 0;
+	let renamed = false;
+	while (!renamed && attempts < 10)
+		try {
+			fs.renameSync(tmp_file, page_file);
+			renamed = true;
+		} catch (e) {
+			attempts++;
+			if (attempts >= 10) throw e;
+			await new Promise((r) => setTimeout(r, 50));
+		}
+};
+
 parentPort.on("message", (task) => {
-	// Bypasses resource-intensive wait queues for real-time diagnostics
 	if (task.type === "get_diagnostics") {
 		let memory = process.memoryUsage();
 		let v8_stats = require("node:v8").getHeapStatistics();
 		
 		return parentPort.postMessage({
-			task_id: task.task_id,
 			results: {
-				worker_id: workerData.worker_id,
-				rss: memory.rss, // Total Resident Set Size for the whole process
-				heapUsed: memory.heapUsed,
-				heapTotal: memory.heapTotal,
+				cached_entities: partition_cache.size,
 				heapLimit: v8_stats.heap_size_limit,
-				percentage: parseFloat(
-					((memory.heapUsed / v8_stats.heap_size_limit) * 100).toFixed(2)
-				)
-			}
+				heapTotal: memory.heapTotal,
+				heapUsed: memory.heapUsed,
+				percentage: parseFloat(((memory.heapUsed / v8_stats.heap_size_limit) * 100).toFixed(2)),
+				rss: memory.rss,
+				worker_id: workerData.worker_id
+			},
+			task_id: task.task_id
 		});
 	}
 	
@@ -57,328 +244,264 @@ async function handleTask (arg0_task) {
 	//Convert from parameters
 	let task = arg0_task;
 	
-	//Declare internal helper functions
-	let findByID = async (callback) => {
-		let found = null;
-		await forEachLine(page_file, (key, val_str) => {
-			if (key === id) {
-				try {
-					let parsed = JSON.parse(val_str);
-					let res = callback(parsed);
-					if (res !== null && res !== undefined) found = res;
-				} catch (e) {}
-				return false; // Break the stream reader
-			}
-		});
-		return found;
-	};
-	
-	let findMany = async (ids, callback) => {
-		let target_ids = new Set(ids);
-		let found = {};
-		
-		await forEachLine(page_file, (key, val_str) => {
-			if (target_ids.has(key)) {
-				try {
-					let parsed = JSON.parse(val_str);
-					let res = callback(key, parsed);
-					if (res !== null && res !== undefined) {
-						found[key] = res;
-					}
-				} catch (e) {}
-				target_ids.delete(key);
-				if (target_ids.size === 0) return false; // Break early
-			}
-		});
-		return found;
-	};
-	
-	let forEachLine = async (filePath, callback) => {
-		if (fs.existsSync(filePath)) {
-			let rs = fs.createReadStream(filePath);
-			let rl = readline.createInterface({ input: rs });
-			try {
-				for await (let line of rl) {
-					let match = line.match(/^"([^"]+)"\s*:/);
-					let result = match
-						? await callback(
-							match[1],
-							getCleanValue(line.substring(line.indexOf(":") + 1)),
-							line
-						)
-						: await callback(null, null, line);
-					
-					if (result === false) break;
-				}
-			} finally {
-				rl.close();
-				rs.destroy();
-				// Ensure OS has tick to release file descriptor
-				await new Promise((r) => setImmediate(r));
-			}
-		}
-	};
-	let getCleanValue = (string) => {
-		let clean = string.trim();
-		if (clean.endsWith(",")) clean = clean.slice(0, -1);
-		
-		//Return statement
-		return clean;
-	};
-	let resolveHistory = (data, timestamp, options) => {
-		let history_obj =
-			typeof data.history === "string" ? JSON.parse(data.history) : data.history;
-		
-		//Return statement
-		if (history_obj && history_obj.keyframes) {
-			if (options?.type === "get_keyframes")
-				return History.getKeyframes(history_obj.keyframes);
-			return History.getKeyframe(history_obj.keyframes, timestamp);
-		}
-		return null;
-	};
-	
-	let updateNDJSON = async (getUpdatedValue) => {
-		let tmp_file = `${page_file}.tmp_${Date.now()}_${Math.floor(
-			Math.random() * 1000
-		)}`;
-		let updated = false;
-		
-		let dir = path.dirname(page_file);
-		if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-		
-		let ws = fs.createWriteStream(tmp_file);
-		
-		if (fs.existsSync(page_file)) {
-			await forEachLine(page_file, (key, val_str, line) => {
-				if (key) {
-					let newValue = getUpdatedValue(key, val_str);
-					if (newValue !== undefined) {
-						if (newValue !== null)
-							ws.write(`"${key}":${JSON.stringify(newValue)}\n`);
-						updated = true;
-					} else ws.write(line + "\n");
-				} else ws.write(line + "\n");
-			});
-		}
-		
-		let extra_appends = getUpdatedValue(null, null, updated);
-		if (extra_appends) {
-			for (let [k, val] of Object.entries(extra_appends))
-				if (val !== null) ws.write(`"${k}":${JSON.stringify(val)}\n`);
-		}
-		
-		ws.end();
-		await new Promise((r) => ws.on("finish", r));
-		
-		// Handle Windows EPERM via retry loop for renameSync
-		let renamed = false;
-		let attempts = 0;
-		while (!renamed && attempts < 10) {
-			try {
-				fs.renameSync(tmp_file, page_file);
-				renamed = true;
-			} catch (e) {
-				attempts++;
-				if (attempts >= 10) throw e;
-				await new Promise((r) => setTimeout(r, 50));
-			}
-		}
-	};
-	
 	//Declare local instance variables
 	let {
+		bbox,
 		file_path,
 		id,
-		limit_end,
 		keyframes,
-		update_map,
+		limit_end,
 		query,
 		task_id,
 		timestamp,
 		type,
+		update_map,
+		zoom
 	} = task;
+	
+	let base_path = file_path ? file_path.replace(/\.ndjson$/, "") : "";
 	let page_file = path.join(
-		`${file_path}.tmpndjson`,
+		`${base_path}.tmpndjson`,
 		`${workerData.worker_id}.ndjson`
 	);
 	
+	//Ensure partition loaded in memory
+	if (type === "init_partition" || current_file_path !== base_path || partition_cache.size === 0) {
+		await loadPartition(page_file);
+		current_file_path = base_path;
+		if (type === "init_partition")
+			return parentPort.postMessage({ results: true, task_id });
+	}
+	
 	if (type === "diff") {
-		let found = await findByID((obj) => {
-			let state_val = resolveHistory(obj, timestamp);
-			
-			if (state_val !== null) {
-				return {
-					key: id,
-					class_name: obj.class_name,
-					value: state_val,
-				};
-			} else {
-				return {
-					key: id,
-					class_name: obj.class_name,
-					value:
-						typeof obj.value === "string" ? JSON.parse(obj.value) : obj.value,
-				};
-			}
-		});
-		return parentPort.postMessage({ task_id, results: found });
+		let cached = partition_cache.get(id);
+		let found = null;
+		
+		if (cached) {
+			let state_val = resolveHistory(cached.entity, timestamp);
+			found = {
+				class_name: cached.class_name,
+				id: id,
+				key: id,
+				value: (state_val !== null) ? state_val : cached.value
+			};
+		}
+		
+		return parentPort.postMessage({ results: found, task_id });
 	}
 	
 	if (type === "diff_all") {
 		let list = [];
-		await forEachLine(page_file, (key, val_str) => {
-			try {
-				let entity_obj = JSON.parse(val_str);
-				let state_val = resolveHistory(entity_obj, timestamp);
+		
+		for (let [key, cached] of partition_cache) {
+			let state_val = resolveHistory(cached.entity, timestamp);
+			if (state_val !== null && state_val !== undefined) {
+				list.push({
+					class_name: cached.class_name,
+					id: key,
+					key: key,
+					value: state_val
+				});
+			} else {
+				list.push({
+					class_name: cached.class_name,
+					id: key,
+					key: key,
+					value: cached.value
+				});
+			}
+		}
+		
+		return parentPort.postMessage({ results: list, task_id });
+	}
+	
+	if (type === "diff_bbox") {
+		let list = [];
+		let q_min_x = -180;
+		let q_min_y = -90;
+		let q_max_x = 180;
+		let q_max_y = 90;
+		
+		if (Array.isArray(bbox) && bbox.length >= 4) {
+			q_min_x = bbox[0];
+			q_min_y = bbox[1];
+			q_max_x = bbox[2];
+			q_max_y = bbox[3];
+		}
+		
+		for (let [key, cached] of partition_cache) {
+			if (cached.bbox) {
+				let e_min_x = cached.bbox[0];
+				let e_min_y = cached.bbox[1];
+				let e_max_x = cached.bbox[2];
+				let e_max_y = cached.bbox[3];
 				
-				if (state_val !== null) {
+				if (e_max_x < q_min_x || e_min_x > q_max_x || e_max_y < q_min_y || e_min_y > q_max_y) {
+					continue;
+				}
+			}
+			
+			let state_val = resolveHistory(cached.entity, timestamp);
+			if (state_val !== null && state_val !== undefined) {
+				if (state_val[0] !== null) {
 					list.push({
-						key,
-						class_name: entity_obj.class_name,
-						value: state_val,
-					});
-				} else {
-					list.push({
-						key,
-						class_name: entity_obj.class_name,
-						value:
-							typeof entity_obj.value === "string"
-								? JSON.parse(entity_obj.value)
-								: entity_obj.value,
+						class_name: cached.class_name,
+						id: key,
+						key: key,
+						value: state_val
 					});
 				}
-			} catch (e) {}
-		});
-		return parentPort.postMessage({ task_id, results: list });
+			} else if (cached.value) {
+				list.push({
+					class_name: cached.class_name,
+					id: key,
+					key: key,
+					value: cached.value
+				});
+			}
+		}
+		
+		return parentPort.postMessage({ results: list, task_id });
 	}
 	
 	if (type === "get_diffs") {
-		let found = await findMany(task.ids, (key, obj) => {
-			let state_val = resolveHistory(obj, timestamp);
-			
-			if (state_val !== null) {
-				return {
-					key,
-					class_name: obj.class_name,
-					value: state_val,
-				};
-			} else {
-				return {
-					key,
-					class_name: obj.class_name,
-					value:
-						typeof obj.value === "string" ? JSON.parse(obj.value) : obj.value,
+		let found = {};
+		let target_ids = Array.isArray(task.ids) ? task.ids : [];
+		
+		for (let i = 0; i < target_ids.length; i++) {
+			let tid = target_ids[i];
+			let cached = partition_cache.get(tid);
+			if (cached) {
+				let state_val = resolveHistory(cached.entity, timestamp);
+				found[tid] = {
+					class_name: cached.class_name,
+					key: tid,
+					value: (state_val !== null) ? state_val : cached.value
 				};
 			}
-		});
-		return parentPort.postMessage({ task_id, results: found });
+		}
+		
+		return parentPort.postMessage({ results: found, task_id });
 	}
 	
 	if (type === "get_hierarchy_values") {
 		let list = [];
-		await forEachLine(page_file, (key, val_str) => {
-			try {
-				let entity_obj = JSON.parse(val_str);
+		
+		for (let [key, cached] of partition_cache) {
+			let entity_obj = cached.entity;
+			
+			if (typeof entity_obj.history !== "undefined") {
+				let current_keyframe = resolveHistory(entity_obj, timestamp);
+				let state_val = resolveHistory(entity_obj, timestamp, { type: "get_keyframes" });
+				let all_keyframes = (state_val && typeof state_val === "object") ? Object.keys(state_val) : [];
 				
-				if (typeof entity_obj.history !== "undefined") {
-					let current_keyframe = resolveHistory(entity_obj, timestamp);
-					let state_val = resolveHistory(entity_obj, timestamp, {
-						type: "get_keyframes",
-					});
-					let all_keyframes = Object.keys(state_val);
-					
-					for (let i = 0; i < all_keyframes.length; i++) {
-						let local_keyframe = state_val[all_keyframes[i]];
+				for (let i = 0; i < all_keyframes.length; i++) {
+					let local_keyframe = state_val[all_keyframes[i]];
+					if (local_keyframe) {
 						delete local_keyframe.localisation;
 						if (local_keyframe.value) local_keyframe.value[0] = undefined;
 					}
-					
-					list.push({
-						key,
-						class_name: entity_obj.class_name,
-						metadata: entity_obj.metadata,
-						name: History.getName(state_val, timestamp),
-						current_keyframe: current_keyframe,
-						value: state_val,
-					});
-				} else {
-					list.push({
-						key,
-						class_name: entity_obj.class_name,
-						metadata: entity_obj.metadata,
-						value:
-							typeof entity_obj.value === "string"
-								? JSON.parse(entity_obj.value)
-								: entity_obj.value,
-					});
 				}
-			} catch (e) {}
-		});
-		return parentPort.postMessage({ task_id, results: list });
+				
+				list.push({
+					class_name: entity_obj.class_name,
+					current_keyframe: current_keyframe,
+					key: key,
+					metadata: entity_obj.metadata,
+					name: History.getName(state_val, timestamp),
+					value: state_val
+				});
+			} else {
+				list.push({
+					class_name: entity_obj.class_name,
+					key: key,
+					metadata: entity_obj.metadata,
+					value: typeof entity_obj.value === "string" ? JSON.parse(entity_obj.value) : entity_obj.value
+				});
+			}
+		}
+		
+		return parentPort.postMessage({ results: list, task_id });
 	}
 	
 	if (type === "get_keyframes") {
-		let found = await findByID((obj) => {
-			let state_val = resolveHistory(obj, undefined, {
-				type: "get_keyframes",
-			});
-			return state_val !== null ? { key: id, value: state_val } : null;
-		});
-		return parentPort.postMessage({ task_id, results: found });
+		let cached = partition_cache.get(id);
+		let found = null;
+		
+		if (cached) {
+			let state_val = resolveHistory(cached.entity, undefined, { type: "get_keyframes" });
+			if (state_val !== null) found = { key: id, value: state_val };
+		}
+		
+		return parentPort.postMessage({ results: found, task_id });
 	}
 	
 	if (type === "get_value") {
-		let found = await findByID((obj) => obj);
-		return parentPort.postMessage({ task_id, results: found });
+		let cached = partition_cache.get(id);
+		return parentPort.postMessage({ results: cached ? cached.entity : null, task_id });
 	}
 	
 	if (type === "get_values") {
-		let found = await findMany(task.ids, (key, obj) => obj);
-		return parentPort.postMessage({ task_id, results: found });
+		let found = {};
+		let target_ids = Array.isArray(task.ids) ? task.ids : [];
+		
+		for (let i = 0; i < target_ids.length; i++) {
+			let tid = target_ids[i];
+			let cached = partition_cache.get(tid);
+			if (cached) found[tid] = cached.entity;
+		}
+		
+		return parentPort.postMessage({ results: found, task_id });
 	}
 	
 	if (type === "query") {
 		let list = [];
-		await forEachLine(page_file, (key, val_str) => {
-			if (limit_end !== undefined && list.length >= limit_end) return false;
-			try {
-				let obj = JSON.parse(val_str);
-				let matches = true;
-				
-				for (let query_key in query)
-					if (Object.getValue(obj, query_key) !== query[query_key]) {
-						matches = false;
-						break;
-					}
-				if (matches) {
-					if (typeof obj === "object" && obj !== null) obj._id = key;
-					list.push(obj);
+		
+		for (let [key, cached] of partition_cache) {
+			if (limit_end !== undefined && list.length >= limit_end) break;
+			
+			let obj = cached.entity;
+			let matches = true;
+			
+			for (let query_key in query) {
+				if (Object.getValue(obj, query_key) !== query[query_key]) {
+					matches = false;
+					break;
 				}
-			} catch (e) {}
-		});
-		return parentPort.postMessage({ task_id, results: list });
+			}
+			
+			if (matches) {
+				let result_obj = structuredClone(obj);
+				result_obj._id = key;
+				list.push(result_obj);
+			}
+		}
+		
+		return parentPort.postMessage({ results: list, task_id });
 	}
 	
 	if (type === "set_keyframes") {
-		await updateNDJSON((key, val_str, updated) => {
-			if (key === null) {
-				return updated ? null : { [id]: { history: { keyframes } } };
-			}
+		let cached = partition_cache.get(id);
+		if (cached) {
+			let history_obj = typeof cached.entity.history === "string" ? JSON.parse(cached.entity.history) : cached.entity.history;
+			if (!history_obj) history_obj = {};
+			history_obj.keyframes = keyframes;
+			cached.entity.history = history_obj;
+			cached.raw_keyframes = keyframes;
+			cached.timestamps = History.getTimestamps(keyframes);
+			cached.bbox = calculateBBox(keyframes, cached.entity);
+		}
+		
+		await updateNDJSON(page_file, (key, val_str, updated) => {
+			if (key === null) return updated ? null : { [id]: { history: { keyframes } } };
 			if (key === id) {
 				try {
 					let obj = JSON.parse(val_str);
 					let is_history_string = typeof obj.history === "string";
-					let history_obj = is_history_string
-						? JSON.parse(obj.history)
-						: obj.history;
-					
+					let history_obj = is_history_string ? JSON.parse(obj.history) : obj.history;
 					if (!history_obj) history_obj = {};
 					history_obj.keyframes = keyframes;
-					
-					obj.history = is_history_string
-						? JSON.stringify(history_obj)
-						: history_obj;
+					obj.history = is_history_string ? JSON.stringify(history_obj) : history_obj;
 					return obj;
 				} catch (e) {
 					return undefined;
@@ -386,12 +509,37 @@ async function handleTask (arg0_task) {
 			}
 			return undefined;
 		});
-		return parentPort.postMessage({ task_id, results: true });
+		
+		return parentPort.postMessage({ results: true, task_id });
 	}
 	
 	if (type === "set_values") {
+		for (let k in update_map) {
+			let val = update_map[k];
+			if (val === null) {
+				partition_cache.delete(k);
+			} else {
+				let history_obj = typeof val.history === "string" ? JSON.parse(val.history) : val.history;
+				let raw_keyframes = (history_obj && history_obj.keyframes) ? history_obj.keyframes : history_obj;
+				let timestamps = (raw_keyframes && typeof raw_keyframes === "object") ? History.getTimestamps(raw_keyframes) : [];
+				let bbox = calculateBBox(raw_keyframes, val);
+				
+				partition_cache.set(k, {
+					bbox: bbox,
+					class_name: val.class_name,
+					entity: val,
+					id: k,
+					metadata: val.metadata,
+					raw_keyframes: raw_keyframes,
+					timestamps: timestamps,
+					type: val.type,
+					value: val.value
+				});
+			}
+		}
+		
 		let updated_keys = new Set();
-		await updateNDJSON((key, val_str) => {
+		await updateNDJSON(page_file, (key, val_str) => {
 			if (key === null) {
 				let rem = {};
 				for (let k in update_map)
@@ -404,7 +552,8 @@ async function handleTask (arg0_task) {
 			}
 			return undefined;
 		});
-		return parentPort.postMessage({ task_id, results: true });
+		
+		return parentPort.postMessage({ results: true, task_id });
 	}
 }
 

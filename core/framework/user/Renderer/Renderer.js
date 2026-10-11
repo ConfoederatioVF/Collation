@@ -11,10 +11,14 @@ naissance.Renderer = class extends ve.Class {
 	 * - Method of: {@link naissance.Renderer}
 	 */
 	handleEvents () {
-		map_component.on("zoomend", () => {
-			//Call this.update() in the correct order
-			this.update();
-		});
+		if (global.map_component?.on) {
+			map_component.on("zoomend", () => {
+				this.update();
+			});
+			map_component.on("moveend", () => {
+				this.update();
+			});
+		}
 	}
 	
 	/**
@@ -104,18 +108,90 @@ naissance.Renderer = class extends ve.Class {
 	}
 	
 	/**
-	 * Draws all Features/Geometries in order by calling their draw function.
+	 * Draws all Features/Geometries in order by calling their draw function,
+	 * with requestAnimationFrame throttling and viewport spatial streaming when in DB mode.
 	 * - Method of: {@link naissance.Renderer}
 	 */
 	update () {
-		//Declare local instance variables
-		let rendering_order = this.getRenderingOrder();
-		this.active_symbol_functions = naissance.Mapmode.getActiveSymbolFunctions();
+		if (this.raf_handle && typeof cancelAnimationFrame === "function")
+			cancelAnimationFrame(this.raf_handle);
 		
-		//Iterate over all entities in rendering_order
-		for (let i = 0; i < rendering_order.length; i++)
-			if (rendering_order[i].draw)
-				rendering_order[i].draw();
+		let update_callback = () => {
+			this.raf_handle = null;
+			this.active_symbol_functions = (naissance.Mapmode?.getActiveSymbolFunctions) ?
+				naissance.Mapmode.getActiveSymbolFunctions() : [];
+			
+			//1. In-memory instances rendering (loaded via DALS.fromJSON / editor state)
+			let rendering_order = this.getRenderingOrder();
+			
+			if (rendering_order.length > 0) {
+				for (let i = 0; i < rendering_order.length; i++)
+					if (rendering_order[i].draw)
+						rendering_order[i].draw();
+				return;
+			}
+			
+			//2. Viewport-culled streaming differencing when instances are empty but DB has loaded shards
+			if (global.ve?.ndjson_file_path && global.db?.diffBBox) {
+				(async () => {
+					try {
+						let bbox;
+						let zoom = (global.map?.getZoom) ? map.getZoom() : 0;
+						
+						if (global.map?.getExtent && zoom > 2) {
+							let extent = map.getExtent();
+							if (extent) bbox = [extent.xmin, extent.ymin, extent.xmax, extent.ymax];
+						}
+						
+						let timestamp = (main?.timestamp !== undefined) ? main.timestamp :
+							(main?.date ? Date.getTimestamp(main.date) : 0);
+						
+						let visible_diffs = await db.diffBBox({ bbox: bbox, timestamp: timestamp, zoom: zoom });
+						let visible_ids = new Set();
+						if (!this.rendered_entities) this.rendered_entities = new Map();
+						
+						for (let i = 0; i < visible_diffs.length; i++) {
+							let diff = visible_diffs[i];
+							let id = diff.id || diff.key;
+							visible_ids.add(id);
+							
+							if (!diff.value || diff.value[0] === null) {
+								let inst = this.rendered_entities.get(id);
+								if (inst?.geometry) inst.geometry.remove();
+								continue;
+							}
+							
+							let inst = this.rendered_entities.get(id);
+							if (!inst && diff.class_name && naissance[diff.class_name]) {
+								inst = new naissance[diff.class_name]({ is_import: true });
+								inst.setID(id);
+								this.rendered_entities.set(id, inst);
+							}
+							
+							if (inst) {
+								inst.value = diff.value;
+								if (inst.draw) inst.draw();
+							}
+						}
+						
+						this.rendered_entities.forEach((inst, id) => {
+							if (!visible_ids.has(id)) {
+								if (inst.geometry) inst.geometry.remove();
+								this.rendered_entities.delete(id);
+							}
+						});
+					} catch (e) {
+						console.error("[Renderer] diffBBox streaming error:", e);
+					}
+				})();
+			}
+		};
+		
+		if (typeof requestAnimationFrame === "function") {
+			this.raf_handle = requestAnimationFrame(update_callback);
+		} else {
+			update_callback();
+		}
 	}
 	
 	static getAllTags () {

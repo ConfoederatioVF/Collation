@@ -94,6 +94,18 @@ config.actions.geometry_polygon = {
 			} else {
 				//Union with existing geometry if defined, if undefined replace geometry
 				try {
+					if (global.proc?.executeAction) {
+						let res = await proc.executeAction("addToPolygon", {
+							date: date,
+							entity_id: polygon_obj.id,
+							geometry: json.add_to_polygon.geometry
+						});
+						if (res && res.geometry) {
+							polygon_obj.addKeyframe(date, Geospatiale.convertTurfToMaptalks(res.geometry).toJSON());
+							return;
+						}
+					}
+					
 					geometry = (geometry) ? Geospatiale.convertMaptalksToTurf(geometry) : null;
 					ot_geometry = (ot_geometry) ? Geospatiale.convertMaptalksToTurf(ot_geometry) : null;
 					
@@ -218,6 +230,21 @@ config.actions.geometry_polygon = {
 			//Declare local instance variables
 			let geometry_obj = json.naissance_obj;
 			
+			if (global.proc?.executeAction) {
+				let res = await proc.executeAction("geometryOperation", {
+					date: main.date,
+					entity_id: geometry_obj.id,
+					options: json.geometry_operation.options,
+					ot_entity_id: (json.geometry_operation.feature_id) ? json.geometry_operation.feature_id : json.geometry_operation.geometry_id,
+					type: json.geometry_operation.type
+				});
+				if (res && res.geometry !== undefined) {
+					let maptalks_geometry = (res.geometry) ? Geospatiale.convertTurfToMaptalks(res.geometry).toJSON() : null;
+					geometry_obj.history.addKeyframe(main.date, maptalks_geometry);
+					return;
+				}
+			}
+			
 			let maptalks_geometry = naissance.Geometry.operate.call(geometry_obj,
 				json.geometry_operation.type,
 				(json.geometry_operation.feature_id) ? json.geometry_operation.feature_id : json.geometry_operation.geometry_id,
@@ -252,6 +279,19 @@ config.actions.geometry_polygon = {
 						}], true);
 					});
 				} else {
+					if (global.proc?.executeAction) {
+						let res = await proc.executeAction("removeFromPolygon", {
+							date: date,
+							entity_id: polygon_obj.id,
+							geometry: json.remove_from_polygon.geometry
+						});
+						if (res && res.geometry !== undefined) {
+							let maptalks_geom = (res.geometry) ? Geospatiale.convertTurfToMaptalks(res.geometry).toJSON() : null;
+							polygon_obj.addKeyframe(date, maptalks_geom);
+							return;
+						}
+					}
+					
 					//Difference with existing geometry; if it covers the entire geometry set to null to hide
 					if (geometry) {
 						let turf_difference;

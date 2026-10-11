@@ -129,9 +129,19 @@ config.actions.feature = {
 		},
 		special_function: async function (json) {
 			if (json.feature_operation) {
-				naissance.Feature.operate.call(json.naissance_obj,
-					json.feature_operation.type,
-					(json.feature_operation.feature_id) ? json.feature_operation.feature_id : json.feature_operation.geometry_id);
+				if (global.proc?.executeAction) {
+					await proc.executeAction("featureOperation", {
+						date: main.date,
+						feature_id: json.naissance_obj?.id,
+						operation_type: json.feature_operation.type,
+						options: json.feature_operation.options,
+						ot_entity_id: (json.feature_operation.feature_id) ? json.feature_operation.feature_id : json.feature_operation.geometry_id
+					});
+				} else {
+					naissance.Feature.operate.call(json.naissance_obj,
+						json.feature_operation.type,
+						(json.feature_operation.feature_id) ? json.feature_operation.feature_id : json.feature_operation.geometry_id);
+				}
 				UI_Leftbar.refresh();
 			}
 		}

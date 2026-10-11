@@ -19,6 +19,17 @@ if (!global.NDJSON)
 //Initialise utils
 {
 	/**
+	 * Returns the resolved base file path for the active NDJSON / savefile database.
+	 *
+	 * @returns {string}
+	 */
+	NDJSON.getFilePath = function () {
+		let raw_path = global.ve?.ndjson_file_path || global.ve?.naissance_file_path;
+		if (!raw_path || typeof raw_path !== "string") return "";
+		return path.resolve(raw_path.replace(/\.ndjson$/, ""));
+	};
+	
+	/**
 	 * Internal helper to route multi-ID tasks across worker partitions and format ordered responses.
 	 *
 	 * @param {string[]} arg0_ids
@@ -44,10 +55,12 @@ if (!global.NDJSON)
 		}
 		
 		let target_wids = Object.keys(ids_by_worker).map(Number);
+		let file_path = NDJSON.getFilePath();
+		if (!file_path) return ids.map(() => null);
 		
 		let results = await NDJSON.task(target_wids, (wid) => ({
 			type: arg1_type,
-			file_path: path.resolve(ve.ndjson_file_path),
+			file_path: file_path,
 			ids: ids_by_worker[wid],
 			...payload
 		}));
@@ -125,11 +138,13 @@ if (!global.NDJSON)
 		//Convert from parameters
 		let id = arg0_id;
 		let timestamp = arg1_timestamp;
+		let file_path = NDJSON.getFilePath();
+		if (!file_path) return null;
 		
 		//Return statement
 		return NDJSON.task(id, {
 			type: "diff",
-			file_path: path.resolve(ve.ndjson_file_path),
+			file_path: file_path,
 			id: id,
 			timestamp: timestamp
 		});
@@ -145,12 +160,46 @@ if (!global.NDJSON)
 	NDJSON.diffAll = async function (arg0_timestamp) {
 		//Convert from parameters
 		let timestamp = parseInt(arg0_timestamp);
+		let file_path = NDJSON.getFilePath();
+		if (!file_path) return [];
 		
 		//Declare local instance variables
 		let results = await NDJSON.task("all", {
 			type: "diff_all",
-			file_path: path.resolve(ve.ndjson_file_path),
+			file_path: file_path,
 			timestamp: timestamp
+		});
+		
+		//Return statement
+		return results.filter(v => v !== null).flat();
+	};
+	
+	/**
+	 * Returns diffs over `.history.keyframes` for entities intersecting the bounding box at the given timestamp.
+	 *
+	 * @param {Object} [arg0_options]
+	 *  @param {number[]} [arg0_options.bbox] - [min_x, min_y, max_x, max_y]
+	 *  @param {number|string} arg0_options.timestamp
+	 *  @param {number} [arg0_options.zoom]
+	 *
+	 * @returns {Promise<Object[]>}
+	 */
+	NDJSON.diffBBox = async function (arg0_options) {
+		//Convert from parameters
+		let options = (arg0_options) ? arg0_options : {};
+		let bbox = options.bbox;
+		let timestamp = parseInt(options.timestamp);
+		let zoom = options.zoom;
+		let file_path = NDJSON.getFilePath();
+		if (!file_path) return [];
+		
+		//Declare local instance variables
+		let results = await NDJSON.task("all", {
+			type: "diff_bbox",
+			file_path: file_path,
+			timestamp: timestamp,
+			bbox: bbox,
+			zoom: zoom
 		});
 		
 		//Return statement
@@ -191,11 +240,13 @@ if (!global.NDJSON)
 	NDJSON.getHierarchyValues = async function (arg0_timestamp) {
 		//Convert from parameters
 		let timestamp = parseInt(arg0_timestamp);
+		let file_path = NDJSON.getFilePath();
+		if (!file_path) return [];
 		
 		//Declare local instance variables
 		let results = await NDJSON.task("all", {
 			type: "get_hierarchy_values",
-			file_path: path.resolve(ve.ndjson_file_path),
+			file_path: file_path,
 			timestamp: timestamp
 		});
 		
@@ -228,11 +279,13 @@ if (!global.NDJSON)
 	NDJSON.getKeyframes = async function (arg0_id) {
 		//Convert from parameters
 		let id = arg0_id;
+		let file_path = NDJSON.getFilePath();
+		if (!file_path) return {};
 		
 		//Return statement
 		return NDJSON.task(id, {
 			type: "get_keyframes",
-			file_path: path.resolve(ve.ndjson_file_path),
+			file_path: file_path,
 			id: id
 		});
 	};
@@ -247,11 +300,13 @@ if (!global.NDJSON)
 	NDJSON.getValue = async function (arg0_id) {
 		//Convert from parameters
 		let id = arg0_id;
+		let file_path = NDJSON.getFilePath();
+		if (!file_path) return null;
 		
 		//Return statement
 		return NDJSON.task(id, {
 			type: "get_value",
-			file_path: path.resolve(ve.ndjson_file_path),
+			file_path: file_path,
 			id: id
 		});
 	};
@@ -290,17 +345,21 @@ if (!global.NDJSON)
 	 */
 	NDJSON.getWorkerPool = function (arg0_max_workers) {
 		//Convert from parameters
-		let max_workers = Math.returnSafeNumber(arg0_max_workers, os.cpus().length - 1);
+		let max_workers = (typeof Math.returnSafeNumber === "function") ?
+			Math.returnSafeNumber(arg0_max_workers, Math.max(1, os.cpus().length - 1)) :
+			((typeof arg0_max_workers === "number" && !isNaN(arg0_max_workers)) ? arg0_max_workers : Math.max(1, os.cpus().length - 1));
 		
 		//Init workerpool variables
+		if (global.ve === undefined) global.ve = {};
 		if (global.ve.ndjson_pending_tasks === undefined) global.ve.ndjson_pending_tasks = new Map();
 		if (global.ve.ndjson_task_id_counter === undefined) global.ve.ndjson_task_id_counter = 0;
 		if (global.ve.ndjson_worker_pool === undefined) global.ve.ndjson_worker_pool = [];
 		
 		//Declare local instance variables
-		if (global.ve.ndjson_worker_pool.length === 0)
+		if (global.ve.ndjson_worker_pool.length === 0) {
+			let worker_script = path.resolve(__dirname, "NDJSON_worker.js");
 			for (let i = 0; i < max_workers; i++) {
-				let worker = new NodeWorker("./UF/js/vercengen/db/NDJSON_worker.js", { workerData: { worker_id: i } });
+				let worker = new NodeWorker(worker_script, { workerData: { worker_id: i } });
 				worker.on("message", (response) => {
 					let callback = global.ve.ndjson_pending_tasks.get(response.task_id);
 					if (callback) {
@@ -310,103 +369,205 @@ if (!global.NDJSON)
 				});
 				global.ve.ndjson_worker_pool.push(worker);
 			}
+		}
 		
 		//Return statement
 		return global.ve.ndjson_worker_pool;
 	};
 	
 	/**
+	 * Terminates all workers in the NDJSON worker pool cleanly.
+	 *
+	 * @returns {Promise<void>}
+	 */
+	NDJSON.terminate = async function () {
+		if (global.ve?.ndjson_worker_pool) {
+			for (let i = 0; i < global.ve.ndjson_worker_pool.length; i++) {
+				try {
+					await global.ve.ndjson_worker_pool[i].terminate();
+				} catch (e) {}
+			}
+			global.ve.ndjson_worker_pool = [];
+			global.ve.ndjson_pending_tasks = new Map();
+		}
+	};
+	
+	/**
 	 * Loads a regular JSON file and partitions it into NDJSON files.
+	/**
+	 * Loads a regular JSON / .naissance file and streams it into partitioned NDJSON shard files.
 	 *
 	 * @param {string} arg0_file_path
 	 * @param {Object} [arg1_options]
-	 *  @param {number} [arg1_options.dynamic_chunk_size=67108864] - 64MB
-	 *  @param {number} [arg1_options.dynamic_max_workers=os.cpus().length - 1]
-	 *  @param {number} [arg1_options.ram_threshold] - % Threshold of RAM dedicated to RAM queries.
+	 *  @param {number} [arg1_options.dynamic_max_workers]
 	 *
-	 * @returns {Promise<unknown>}
+	 * @returns {Promise<string>}
 	 */
 	NDJSON.load = async function (arg0_file_path, arg1_options) {
-		//Convert from parameters		
+		//Convert from parameters
 		let file_path = path.resolve(arg0_file_path);
 		let options = (arg1_options) ? arg1_options : {};
 		
 		//Initialise options
-		options.dynamic_chunk_size = Math.returnSafeNumber(options.dynamic_chunk_size, 64*1024*1024);
-		options.dynamic_max_workers = Math.returnSafeNumber(options.dynamic_max_workers, os.cpus().length - 1);
-		options.ram_threshold = Math.returnSafeNumber(options.ram_threshold, 0.50);
+		let max_workers = (typeof options.dynamic_max_workers === "number" && !isNaN(options.dynamic_max_workers)) ?
+			options.dynamic_max_workers : Math.max(1, os.cpus().length - 1);
 		
 		//Declare local instance variables
-		let _dynamic_chunk_size = structuredClone(options.dynamic_chunk_size);
-		let _dynamic_max_workers = structuredClone(options.dynamic_max_workers);
-		let heap_limit = v8.getHeapStatistics().heap_size_limit;
-		let stats = await fs.promises.stat(file_path);
+		let folder_path = `${file_path}.tmpndjson`;
+		let pool = NDJSON.getWorkerPool(max_workers);
+		let write_streams = {};
 		
-		let active_workers = 0;
-		let current_offset = 0;
-		let global_depth = 0;
-		let write_stream = fs.createWriteStream(`${file_path}.ndjson`);
+		if (!global.ve) global.ve = {};
+		ve.naissance_file_path = file_path;
 		ve.ndjson_file_path = `${file_path}.ndjson`;
 		
-		//Initialise logic functions
-		let refreshLimits = () => {
-			let memory = process.memoryUsage();
-			let memory_usage = memory.heapUsed;
-			
-			let available_buffer = (heap_limit*options.ram_threshold) - memory_usage;
-			
-			if (available_buffer < 0) {
-				_dynamic_chunk_size = Math.max(1024*1024, _dynamic_chunk_size*0.9);
-				_dynamic_max_workers = Math.max(1, _dynamic_max_workers - 1);
+		//Ensure folder path
+		if (!fs.existsSync(folder_path))
+			fs.mkdirSync(folder_path, { recursive: true });
+		
+		for (let i = 0; i < pool.length; i++)
+			write_streams[i] = fs.createWriteStream(path.join(folder_path, `${i}.ndjson`));
+		
+		let metadata_ws = fs.createWriteStream(path.join(folder_path, "metadata.json"));
+		
+		//Stream file and parse top-level entries
+		let in_string = false;
+		let is_escaped = false;
+		let depth = 0;
+		let root_opened = false;
+		let state = "SEEK_KEY"; // SEEK_KEY, IN_KEY, SEEK_COLON, IN_VAL
+		let key_chunks = [];
+		let val_chunks = [];
+		
+		let writeEntry = async (key, val_str) => {
+			if (key === "map_settings") {
+				metadata_ws.write(val_str);
 			} else {
-				_dynamic_chunk_size = Math.min(128*1024*1024, Math.floor(available_buffer*options.ram_threshold));
-				_dynamic_max_workers = Math.min(os.cpus().length - 1, _dynamic_max_workers + 1);
+				let wid = NDJSON.getWorkerID(key, pool.length);
+				let can_write = write_streams[wid].write(`"${key}":${val_str}\n`);
+				if (!can_write)
+					await new Promise((r) => write_streams[wid].once("drain", r));
 			}
 		};
 		
-		//Return statement
-		return new Promise((resolve, reject) => {
-			let processNextChunk = () => {
-				if (current_offset >= stats.size) {
-					if (active_workers === 0) {
-						write_stream.end(async () => {
-							await NDJSON.partitionFile(`${file_path}.ndjson`);
-							resolve(`${file_path}.ndjson`);
-						});
-					}
-					return;
+		let rs = fs.createReadStream(file_path, { highWaterMark: 256*1024 });
+		
+		for await (let chunk of rs) {
+			let str = typeof chunk === "string" ? chunk : chunk.toString("utf8");
+			let len = str.length;
+			
+			for (let i = 0; i < len; i++) {
+				let ch = str[i];
+				
+				if (is_escaped) {
+					is_escaped = false;
+					if (state === "IN_KEY") key_chunks.push(ch);
+					else if (state === "IN_VAL") val_chunks.push(ch);
+					continue;
 				}
 				
-				refreshLimits();
-				if (active_workers < _dynamic_max_workers) {
-					let start = current_offset;
-					let end = Math.min(start + _dynamic_chunk_size - 1, stats.size - 1);
-					
-					active_workers++;
-					current_offset = end + 1;
-					
-					let worker = new NodeWorker("./UF/js/vercengen/db/NDJSON_parser.js", {
-						workerData: { file_path, start, end, initial_depth: global_depth }
-					});
-					worker.on("message", (message) => {
-						global_depth = message.final_depth;
-						let can_write = write_stream.write(message.transformed_data);
-						let continueProcessing = () => {
-							active_workers--;
-							processNextChunk();
-						}
-						
-						if (!can_write) write_stream.once("drain", continueProcessing);
-						else setImmediate(continueProcessing);
-					});
-					worker.on("error", reject);
-					
-					if (active_workers < _dynamic_max_workers) processNextChunk();
+				if (ch === "\\") {
+					is_escaped = true;
+					if (state === "IN_KEY") key_chunks.push(ch);
+					else if (state === "IN_VAL") val_chunks.push(ch);
+					continue;
 				}
-			};
-			
-			processNextChunk();
+				
+				if (ch === '"') {
+					in_string = !in_string;
+					if (state === "SEEK_KEY" && in_string && depth === 1) {
+						state = "IN_KEY";
+						key_chunks = [];
+						continue;
+					} else if (state === "IN_KEY" && !in_string) {
+						state = "SEEK_COLON";
+						continue;
+					} else if (state === "IN_VAL") {
+						val_chunks.push(ch);
+						continue;
+					}
+				}
+				
+				if (in_string) {
+					if (state === "IN_KEY") key_chunks.push(ch);
+					else if (state === "IN_VAL") val_chunks.push(ch);
+					continue;
+				}
+				
+				if (!root_opened) {
+					if (ch === "{") {
+						root_opened = true;
+						depth = 1;
+					}
+					continue;
+				}
+				
+				if (state === "SEEK_COLON") {
+					if (ch === ":") {
+						state = "IN_VAL";
+						val_chunks = [];
+					}
+					continue;
+				}
+				
+				if (state === "SEEK_KEY") {
+					if (ch === "}") {
+						depth = 0;
+						break;
+					}
+					continue;
+				}
+				
+				if (state === "IN_VAL") {
+					if (ch === "{" || ch === "[") {
+						depth++;
+						val_chunks.push(ch);
+					} else if (ch === "}" || ch === "]") {
+						depth--;
+						if (depth === 1) {
+							val_chunks.push(ch);
+							let key = key_chunks.join("");
+							let val = val_chunks.join("").trim();
+							state = "SEEK_KEY";
+							key_chunks = [];
+							val_chunks = [];
+							await writeEntry(key, val);
+						} else if (depth === 0) {
+							break;
+						} else {
+							val_chunks.push(ch);
+						}
+					} else if (ch === "," && depth === 1) {
+						let key = key_chunks.join("");
+						let val = val_chunks.join("").trim();
+						state = "SEEK_KEY";
+						key_chunks = [];
+						val_chunks = [];
+						await writeEntry(key, val);
+					} else {
+						val_chunks.push(ch);
+					}
+				}
+			}
+		}
+		
+		//Close all write handles
+		metadata_ws.end();
+		await new Promise((r) => metadata_ws.on("finish", r));
+		
+		for (let i = 0; i < pool.length; i++) {
+			write_streams[i].end();
+			await new Promise((r) => write_streams[i].on("finish", r));
+		}
+		
+		//Notify all workers to index their partition in memory
+		await NDJSON.task("all", {
+			type: "init_partition",
+			file_path: file_path
 		});
+		
+		//Return statement
+		return `${file_path}.ndjson`;
 	};
 	
 	/**
@@ -420,44 +581,8 @@ if (!global.NDJSON)
 		//Convert from parameters
 		let file_path = path.resolve(arg0_file_path);
 		
-		//Declare local instance variables
-		let folder_path = `${file_path}.tmpndjson`;
-		let pool = NDJSON.getWorkerPool();
-		let write_streams = {};
-		
-		//Iterate over all workers and ensure partitions
-		if (!fs.existsSync(folder_path))
-			fs.mkdirSync(folder_path, { recursive: true });
-		for (let i = 0; i < pool.length; i++)
-			write_streams[i] = fs.createWriteStream(
-				path.join(folder_path, `${i}.ndjson`)
-			);
-		
-		//Iterate over all lines in rs
-		let rs = fs.createReadStream(file_path);
-		let rl = readline.createInterface({ input: rs });
-		
-		for await (let line of rl) {
-			let match = line.match(/^"([^"]+)"\s*:/);
-			if (match) {
-				let wid = NDJSON.getWorkerID(match[1], pool.length);
-				let clean_line = line.trim();
-				if (clean_line.endsWith(",")) clean_line = clean_line.slice(0, -1);
-				
-				if (!write_streams[wid].write(clean_line + "\n"))
-					await new Promise((r) => write_streams[wid].once("drain", r));
-			}
-		}
-		
-		//Cleanup read handles explicitly
-		rl.close();
-		rs.destroy();
-		
-		//Iterate over all workers in pool and finish
-		for (let i = 0; i < pool.length; i++) {
-			write_streams[i].end();
-			await new Promise((r) => write_streams[i].on("finish", r));
-		}
+		//Return statement
+		await NDJSON.load(file_path);
 	};
 	
 	/**
@@ -480,10 +605,12 @@ if (!global.NDJSON)
 		//Declare local instance variables
 		let limit_end = options.limit_end;
 		let limit_start = Math.returnSafeNumber(options.limit_start, 0);
+		let file_path = NDJSON.getFilePath();
+		if (!file_path) return [];
 		
 		let results = await NDJSON.task("all", {
 			type: "query",
-			file_path: path.resolve(ve.ndjson_file_path),
+			file_path: file_path,
 			query: options.query_obj,
 			limit_end: limit_end
 		});
@@ -545,31 +672,56 @@ if (!global.NDJSON)
 	 *
 	 * @returns {Promise<void>}
 	 */
-	NDJSON.save = async function () {
+	/**
+	 * Saves the NDJSON partitions back into a 100% compliant .naissance file.
+	 *
+	 * @param {string} [arg0_target_path]
+	 *
+	 * @returns {Promise<string>}
+	 */
+	NDJSON.save = async function (arg0_target_path) {
+		//Convert from parameters
+		let target_path = (arg0_target_path) ?
+			path.resolve(arg0_target_path) :
+			path.resolve(global.ve?.naissance_file_path || global.ve?.ndjson_file_path?.replace(/\.ndjson$/, ""));
+		
 		//Declare local instance variables
-		let file_path = path.resolve(ve.ndjson_file_path);
+		let file_path = path.resolve(global.ve?.naissance_file_path || global.ve?.ndjson_file_path?.replace(/\.ndjson$/, ""));
 		let folder_path = `${file_path}.tmpndjson`;
 		let pool = NDJSON.getWorkerPool();
 		
-		if (!fs.existsSync(folder_path)) return; //Internal guard clause if folder path doesn't exist
+		if (!fs.existsSync(folder_path)) return target_path;
 		
-		let ws = fs.createWriteStream(file_path); // Overwrite target .ndjson
+		let ws = fs.createWriteStream(target_path);
 		ws.write("{\n");
 		
-		//Iterate over all workers and write as needed
 		let first = true;
+		
+		//1. Write metadata if extant
+		let metadata_path = path.join(folder_path, "metadata.json");
+		if (fs.existsSync(metadata_path)) {
+			let meta_content = fs.readFileSync(metadata_path, "utf8").trim();
+			if (meta_content.length > 0) {
+				ws.write(`"map_settings":${meta_content}`);
+				first = false;
+			}
+		}
+		
+		//2. Stream all worker partition shards
 		for (let i = 0; i < pool.length; i++) {
 			let page_file = path.join(folder_path, `${i}.ndjson`);
 			if (fs.existsSync(page_file)) {
-				//Iterate over all lines in rl
 				let rs = fs.createReadStream(page_file);
 				let rl = readline.createInterface({ input: rs });
+				
 				for await (let line of rl) {
-					if (line.trim().length === 0) continue;
+					let clean = line.trim();
+					if (clean.length === 0) continue;
 					if (!first) ws.write(",\n");
-					ws.write(line.trim());
+					ws.write(clean);
 					first = false;
 				}
+				
 				rl.close();
 				rs.destroy();
 			}
@@ -579,17 +731,8 @@ if (!global.NDJSON)
 		ws.end();
 		await new Promise((r) => ws.on("finish", r));
 		
-		//Retry mechanism for rmSync to handle lingering handles on Windows
-		let removed = false;
-		let attempts = 0;
-		while (!removed && attempts < 5)
-			try {
-				fs.rmSync(folder_path, { recursive: true, force: true });
-				removed = true;
-			} catch (e) {
-				attempts++;
-				await new Promise((r) => setTimeout(r, 100));
-			}
+		//Return statement
+		return target_path;
 	};
 	
 	/**
@@ -604,11 +747,13 @@ if (!global.NDJSON)
 		//Convert from parameters
 		let id = arg0_id;
 		let keyframes_obj = arg1_keyframes;
+		let file_path = NDJSON.getFilePath();
+		if (!file_path) return false;
 		
 		//Return statement
 		return NDJSON.task(id, {
 			type: "set_keyframes",
-			file_path: path.resolve(ve.ndjson_file_path),
+			file_path: file_path,
 			id: id,
 			keyframes: keyframes_obj
 		});
@@ -658,11 +803,13 @@ if (!global.NDJSON)
 		}
 		
 		let target_wids = Object.keys(updates_by_worker).map(Number);
+		let file_path = NDJSON.getFilePath();
+		if (!file_path) return false;
 		
 		//Dispatch tasks via the NDJSON.task helper
 		await NDJSON.task(target_wids, (wid) => ({
 			type: "set_values",
-			file_path: path.resolve(ve.ndjson_file_path),
+			file_path: file_path,
 			update_map: updates_by_worker[wid]
 		}));
 		

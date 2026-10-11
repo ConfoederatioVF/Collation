@@ -340,14 +340,19 @@ History.getKeyframe = function (arg0_keyframes, arg1_timestamp) {
 	
 	//Iterate over all_keyframes in order
 	for (let i = 0; i < all_keyframes.length; i++) {
-		let local_keyframe = keyframes[all_keyframes[i]];
+		let current_ts = parseInt(all_keyframes[i]);
 		
 		//Check that the keyframe is still valid
-		if (parseInt(all_keyframes[i]) <= return_keyframe.timestamp) {
-			if (!local_keyframe.value) continue;
+		if (current_ts <= return_keyframe.timestamp) {
+			let local_keyframe = keyframes[all_keyframes[i]];
+			if (!local_keyframe) continue;
+			
+			let norm_keyframe = Array.isArray(local_keyframe) ?
+				{ value: local_keyframe } :
+				(local_keyframe.value ? local_keyframe : { value: [local_keyframe] });
 			
 			//Merge keys using diffKeyframe
-			return_keyframe = History.diffKeyframe(return_keyframe, local_keyframe);
+			return_keyframe = History.diffKeyframe(return_keyframe, norm_keyframe);
 		} else { break; }
 	}
 	
@@ -366,9 +371,16 @@ History.getKeyframes = function (arg0_keyframes) {
 	//Iterate over all_keyframes in order
 	for (let i = 0; i < all_keyframes.length; i++) {
 		let local_keyframe = keyframes[all_keyframes[i]];
+		let norm_keyframe = Array.isArray(local_keyframe) ?
+			{ value: local_keyframe } :
+			(local_keyframe.value ? local_keyframe : { value: [local_keyframe] });
 		
-		local_keyframe.localisation = History.getLocalisation(return_keyframe, local_keyframe);
-		return_keyframe = History.diffKeyframe(return_keyframe, local_keyframe);
+		norm_keyframe.localisation = History.getLocalisation(return_keyframe, norm_keyframe);
+		return_keyframe = History.diffKeyframe(return_keyframe, norm_keyframe);
+		if (Array.isArray(local_keyframe)) {
+			// Attach localisation to array property if desired
+			local_keyframe.localisation = norm_keyframe.localisation;
+		}
 	}
 	
 	//Return statement
@@ -386,8 +398,9 @@ History.getName = function (arg0_keyframes) {
 	//Iterate over all_keyframes in order
 	for (let i = 0; i < all_keyframes.length; i++) {
 		let local_keyframe = keyframes[all_keyframes[i]];
+		let val = Array.isArray(local_keyframe) ? local_keyframe : local_keyframe?.value;
 		
-		if (local_keyframe.value?.[2]?.name) entity_name = local_keyframe.value[2].name;
+		if (val?.[2]?.name) entity_name = val[2].name;
 	}
 	
 	//Return statement
