@@ -100,10 +100,17 @@ if (!global.NDJSON)
 	 * @returns {Promise<any|any[]>}
 	 */
 	NDJSON.task = function (arg0_target, arg1_message) {
+		//Guard clauses
+		if (NDJSON.is_terminating)
+			return (arg0_target === "all" || Array.isArray(arg0_target)) ? Promise.resolve([]) : Promise.resolve(null);
+		
 		//Declare local instance variables
+		let is_array = false;
 		let pool = NDJSON.getWorkerPool();
 		let worker_ids = [];
-		let is_array = false;
+		
+		if (!pool || pool.length === 0)
+			return (arg0_target === "all" || Array.isArray(arg0_target)) ? Promise.resolve([]) : Promise.resolve(null);
 		
 		if (arg0_target === "all") {
 			worker_ids = pool.map((_, i) => i);
@@ -129,7 +136,18 @@ if (!global.NDJSON)
 			
 			return new Promise((resolve) => {
 				global.ve.ndjson_pending_tasks.set(task_id, resolve);
-				pool[wid].postMessage(message);
+				try {
+					if (pool[wid]) {
+						pool[wid].postMessage(message);
+					} else {
+						global.ve.ndjson_pending_tasks.delete(task_id);
+						resolve(null);
+					}
+				} catch (err) {
+					console.error(`[NDJSON.task] Failed to postMessage to worker ${wid}:`, err);
+					global.ve.ndjson_pending_tasks.delete(task_id);
+					resolve(null);
+				}
 			});
 		});
 		
@@ -386,9 +404,11 @@ if (!global.NDJSON)
 	 */
 	NDJSON.getWorkerPool = function (arg0_max_workers) {
 		//Convert from parameters
+		let default_workers = Math.max(1, Math.min(8, os.cpus().length - 1));
 		let max_workers = (typeof Math.returnSafeNumber === "function") ?
-			Math.returnSafeNumber(arg0_max_workers, Math.max(1, os.cpus().length - 1)) :
-			((typeof arg0_max_workers === "number" && !isNaN(arg0_max_workers)) ? arg0_max_workers : Math.max(1, os.cpus().length - 1));
+			Math.returnSafeNumber(arg0_max_workers, default_workers) :
+			((typeof arg0_max_workers === "number" && !isNaN(arg0_max_workers)) ? arg0_max_workers : default_workers);
+		max_workers = Math.max(1, Math.min(32, max_workers));
 		
 		//Init workerpool variables
 		if (global.ve === undefined) global.ve = {};
@@ -414,6 +434,13 @@ if (!global.NDJSON)
 						global.ve.ndjson_pending_tasks.delete(response.task_id);
 					}
 				});
+				worker.on("error", (err) => {
+					console.error(`[NDJSON_main] Worker ${i} encountered error:`, err);
+				});
+				worker.on("exit", (code) => {
+					if (code !== 0)
+						console.warn(`[NDJSON_main] Worker ${i} exited with code: ${code}`);
+				});
 				global.ve.ndjson_worker_pool.push(worker);
 			}
 		}
@@ -428,15 +455,23 @@ if (!global.NDJSON)
 	 * @returns {Promise<void>}
 	 */
 	NDJSON.terminate = async function () {
+		NDJSON.is_terminating = true;
+		if (global.ve?.ndjson_pending_tasks) {
+			for (let [task_id, callback] of global.ve.ndjson_pending_tasks) {
+				try { callback(null); } catch (e) {}
+			}
+			global.ve.ndjson_pending_tasks.clear();
+		}
 		if (global.ve?.ndjson_worker_pool) {
-			for (let i = 0; i < global.ve.ndjson_worker_pool.length; i++) {
+			let pool = global.ve.ndjson_worker_pool;
+			global.ve.ndjson_worker_pool = [];
+			for (let i = 0; i < pool.length; i++) {
 				try {
-					await global.ve.ndjson_worker_pool[i].terminate();
+					await pool[i].terminate();
 				} catch (e) {}
 			}
-			global.ve.ndjson_worker_pool = [];
-			global.ve.ndjson_pending_tasks = new Map();
 		}
+		NDJSON.is_terminating = false;
 	};
 	
 	/**
@@ -447,6 +482,7 @@ if (!global.NDJSON)
 	 * @returns {Promise<number>}
 	 */
 	NDJSON.setWorkerPoolSize = async function (arg0_count) {
+		//Convert from parameters
 		let new_count = Math.max(1, Math.min(32, parseInt(arg0_count) || 1));
 		let current_count = global.ve?.ndjson_worker_pool ? global.ve.ndjson_worker_pool.length : 0;
 		if (new_count === current_count) return current_count;
@@ -455,8 +491,10 @@ if (!global.NDJSON)
 		let pool = NDJSON.getWorkerPool(new_count);
 		let current_file = NDJSON.getFilePath();
 		if (current_file && fs.existsSync(current_file)) {
-			await NDJSON.load(current_file, { dynamic_max_workers: new_count });
+			await NDJSON.load(current_file, { dynamic_max_workers: new_count, repartition: true });
 		}
+		
+		//Return statement
 		return pool.length;
 	};
 	
@@ -475,8 +513,10 @@ if (!global.NDJSON)
 		let options = (arg1_options) ? arg1_options : {};
 		
 		//Initialise options
+		let default_workers = Math.max(1, Math.min(8, os.cpus().length - 1));
 		let max_workers = (typeof options.dynamic_max_workers === "number" && !isNaN(options.dynamic_max_workers)) ?
-			options.dynamic_max_workers : Math.max(1, os.cpus().length - 1);
+			Math.max(1, Math.min(32, options.dynamic_max_workers)) :
+			((global.ve?.ndjson_worker_pool?.length > 0) ? global.ve.ndjson_worker_pool.length : default_workers);
 		
 		//Declare local instance variables
 		let folder_path = NDJSON.getCacheDirectory(file_path);
@@ -492,8 +532,8 @@ if (!global.NDJSON)
 		}
 		
 		//Check if cached partitions are valid
-		let is_cache_valid = false;
 		let cached_partitions = [];
+		let is_cache_valid = false;
 		
 		if (fs.existsSync(folder_path)) {
 			try {
@@ -508,7 +548,7 @@ if (!global.NDJSON)
 			let metadata_path = path.join(folder_path, "metadata.json");
 			let p0_path = path.join(folder_path, "partition_0.ndjson");
 			
-			if (cached_partitions.length > 0 && fs.existsSync(metadata_path) && fs.existsSync(p0_path)) {
+			if (cached_partitions.length === max_workers && fs.existsSync(metadata_path) && fs.existsSync(p0_path)) {
 				try {
 					let file_stat = fs.existsSync(file_path) ? fs.statSync(file_path) : null;
 					let meta_stat = fs.statSync(metadata_path);
@@ -523,28 +563,48 @@ if (!global.NDJSON)
 		if (is_cache_valid) {
 			console.log(`[NDJSON] Reusing cached partitions in ${folder_path} (${cached_partitions.length} partitions)`);
 			let pool = NDJSON.getWorkerPool(cached_partitions.length);
+			if (pool.length !== cached_partitions.length) {
+				await NDJSON.terminate();
+				pool = NDJSON.getWorkerPool(cached_partitions.length);
+			}
 			if (!global.ve) global.ve = {};
-			ve.naissance_file_path = file_path;
-			ve.ndjson_file_path = path.join(folder_path, "partition_0.ndjson");
+			global.ve.naissance_file_path = file_path;
+			global.ve.ndjson_file_path = path.join(folder_path, "partition_0.ndjson");
 			
-			await NDJSON.task("all", {
-				type: "init_partition",
-				file_path: file_path
-			});
+			let pool_indices = pool.map((_, i) => i);
+			for (let b = 0; b < pool_indices.length; b += 4) {
+				let batch = pool_indices.slice(b, b + 4);
+				await NDJSON.task(batch, {
+					file_path: file_path,
+					type: "init_partition"
+				});
+			}
 			
-			return ve.ndjson_file_path;
+			return global.ve.ndjson_file_path;
 		}
 		
 		let pool = NDJSON.getWorkerPool(max_workers);
+		if (pool.length !== max_workers) {
+			await NDJSON.terminate();
+			pool = NDJSON.getWorkerPool(max_workers);
+		}
 		let write_streams = {};
 		
 		if (!global.ve) global.ve = {};
-		ve.naissance_file_path = file_path;
-		ve.ndjson_file_path = path.join(folder_path, "partition_0.ndjson");
+		global.ve.naissance_file_path = file_path;
+		global.ve.ndjson_file_path = path.join(folder_path, "partition_0.ndjson");
 		
-		//Ensure folder path inside saves/.cache
-		if (!fs.existsSync(folder_path))
+		//Ensure folder path inside saves/.cache and clean up stale partitions
+		if (!fs.existsSync(folder_path)) {
 			fs.mkdirSync(folder_path, { recursive: true });
+		} else {
+			let old_files = fs.readdirSync(folder_path);
+			for (let ofile of old_files) {
+				if (ofile.startsWith("partition_") && ofile.endsWith(".ndjson")) {
+					try { fs.unlinkSync(path.join(folder_path, ofile)); } catch (e) {}
+				}
+			}
+		}
 		
 		for (let i = 0; i < pool.length; i++)
 			write_streams[i] = fs.createWriteStream(path.join(folder_path, `partition_${i}.ndjson`));
@@ -564,7 +624,9 @@ if (!global.NDJSON)
 		
 		let writeEntry = async (key, val_str) => {
 			if (key === "map_settings") {
-				metadata_ws.write(val_str);
+				let can_write = metadata_ws.write(val_str);
+				if (!can_write)
+					await new Promise((r) => metadata_ws.once("drain", r));
 			} else {
 				let wid = NDJSON.getWorkerID(key, pool.length);
 				let can_write = write_streams[wid].write(`"${key}":${val_str}\n`);
@@ -698,13 +760,17 @@ if (!global.NDJSON)
 		}
 		
 		//Notify all workers to index their partition in memory
-		await NDJSON.task("all", {
-			type: "init_partition",
-			file_path: file_path
-		});
+		let pool_indices = pool.map((_, i) => i);
+		for (let b = 0; b < pool_indices.length; b += 4) {
+			let batch = pool_indices.slice(b, b + 4);
+			await NDJSON.task(batch, {
+				file_path: file_path,
+				type: "init_partition"
+			});
+		}
 		
 		//Return statement
-		return ve.ndjson_file_path;
+		return global.ve.ndjson_file_path;
 	};
 	
 	/**
@@ -858,8 +924,14 @@ if (!global.NDJSON)
 				for await (let line of rl) {
 					let clean = line.trim();
 					if (clean.length === 0) continue;
-					if (!first) ws.write(",\n");
-					ws.write(clean);
+					if (!first) {
+						let can_write_comma = ws.write(",\n");
+						if (!can_write_comma)
+							await new Promise((r) => ws.once("drain", r));
+					}
+					let can_write = ws.write(clean);
+					if (!can_write)
+						await new Promise((r) => ws.once("drain", r));
 					first = false;
 				}
 				

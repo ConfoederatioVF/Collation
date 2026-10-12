@@ -73,8 +73,10 @@ naissance.Geometry = class extends naissance.Entity {
 	static instances = {};
 	static reserved_keys = ["name"];
 	
-	constructor () {
-		super();
+	constructor (arg0_options) {
+		//Convert from parameters
+		let options = (arg0_options) ? arg0_options : {};
+		super(options);
 		this.history = new History({}, {
 			_id: () => this.id,
 			draw_keyframe_function: naissance.History.draw_keyframe_function,

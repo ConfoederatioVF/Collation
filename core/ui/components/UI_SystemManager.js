@@ -70,6 +70,7 @@ global.UI_SystemManager = class extends ve.Component {
    * Fetches latest metrics from DB and Process worker pools and updates UI.
    */
   async refreshDiagnostics () {
+    if (this.is_updating_db || this.is_updating_proc) return;
     try {
       if (global.db?.getDiagnostics) {
         let db_res = await db.getDiagnostics();

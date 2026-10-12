@@ -22,15 +22,21 @@ naissance.GeometryPoint = class extends naissance.Geometry {
 		}
 	};
 	
-	constructor () {
-		super();
+	constructor (arg0_options) {
+		//Convert from parameters
+		let options = (arg0_options) ? arg0_options : {};
+		super(options);
+		
+		//Declare local instance variables
 		this.class_name = "GeometryPoint";
 		this.node_editor_mode = "Point";
 		
 		//Add keyframe with default brush symbol upon instantiation
-		let brush_symbol = main.brush.getBrushSymbol();
-		if (brush_symbol)
-			this.addKeyframe(main.date, undefined, brush_symbol);
+		if (!options.is_import) {
+			let brush_symbol = main.brush.getBrushSymbol();
+			if (brush_symbol)
+				this.addKeyframe(main.date, undefined, brush_symbol);
+		}
 		
 		//KEEP AT BOTTOM!
 		this.updateOwner();
@@ -109,21 +115,23 @@ naissance.GeometryPoint = class extends naissance.Geometry {
 						this.drawLabels();
 						
 						//3.1. Draw selection
-						if (this.selected || this._is_being_moved)
+						if (this.selected || this._is_being_moved) {
 							if (this.selected_index !== undefined) {
 								let coordinates = maptalks.Coordinate.toNumberArrays(this.geometry.getCoordinates());
 								let selected_coords = coordinates[this.selected_index];
-							
-							if (selected_coords) {
-								this.selected_geometry = new maptalks.Marker(coordinates[this.selected_index]);
-								this.selected_geometry.setSymbol({
-									...symbol_obj,
-									markerFile: "./gfx/icons/marker_default_selected.png",
-									markerOpacity: 0.5
-								});
-								main.layers.selection_layer.addGeometry(this.selected_geometry);
+								
+								if (selected_coords) {
+									this.selected_geometry = new maptalks.Marker(coordinates[this.selected_index]);
+									this.selected_geometry.setSymbol({
+										...symbol_obj,
+										markerFile: "./gfx/icons/marker_default_selected.png",
+										markerOpacity: 0.5
+									});
+									main.layers.selection_layer.addGeometry(this.selected_geometry);
+								}
 							}
 						}
+					}
 				}
 			} catch (e) { console.error(e); }
 		}

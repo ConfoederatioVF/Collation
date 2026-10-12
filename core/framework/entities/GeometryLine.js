@@ -23,15 +23,21 @@ naissance.GeometryLine = class extends naissance.Geometry {
 		}
 	};
 	
-	constructor () {
-		super();
+	constructor (arg0_options) {
+		//Convert from parameters
+		let options = (arg0_options) ? arg0_options : {};
+		super(options);
+		
+		//Declare local instance variables
 		this.class_name = "GeometryLine";
 		this.node_editor_mode = "LineString";
 		
 		//Add keyframe with default brush symbol upon instantiation
-		let brush_symbol = main.brush.getBrushSymbol();
-		if (brush_symbol)
-			this.addKeyframe(main.date, undefined, brush_symbol);
+		if (!options.is_import) {
+			let brush_symbol = main.brush.getBrushSymbol();
+			if (brush_symbol)
+				this.addKeyframe(main.date, undefined, brush_symbol);
+		}
 		
 		//KEEP AT BOTTOM!
 		this.updateOwner();

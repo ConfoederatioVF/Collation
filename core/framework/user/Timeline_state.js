@@ -177,7 +177,7 @@
 								let feature_obj = new naissance[class_name](undefined, { metadata: entry.metadata });
 								feature_obj.setID(id);
 								if (entry.value) feature_obj.json = entry.value;
-								if (entry.name) feature_obj.name = entry.name;
+								if (entry.name) feature_obj._name = entry.name;
 								feature_instances.push(feature_obj);
 							} else if (class_name.startsWith("Geometry")) {
 								let geom_obj = new naissance[class_name]({ is_import: true });

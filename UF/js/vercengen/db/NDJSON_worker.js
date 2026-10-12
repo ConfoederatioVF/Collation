@@ -170,6 +170,9 @@ let loadPartition = async function (page_file) {
 	} finally {
 		rl.close();
 		rs.destroy();
+		if (global.gc) {
+			try { global.gc(); } catch (e) {}
+		}
 	}
 };
 
@@ -281,18 +284,22 @@ parentPort.on("message", (task) => {
 		let memory = process.memoryUsage();
 		let v8_stats = require("node:v8").getHeapStatistics();
 		
-		return parentPort.postMessage({
-			results: {
-				cached_entities: partition_cache.size,
-				heapLimit: v8_stats.heap_size_limit,
-				heapTotal: memory.heapTotal,
-				heapUsed: memory.heapUsed,
-				percentage: parseFloat(((memory.heapUsed / v8_stats.heap_size_limit) * 100).toFixed(2)),
-				rss: memory.rss,
-				worker_id: workerData.worker_id
-			},
-			task_id: task.task_id
-		});
+		try {
+			return parentPort.postMessage({
+				results: {
+					cached_entities: partition_cache.size,
+					heapLimit: v8_stats.heap_size_limit,
+					heapTotal: memory.heapTotal,
+					heapUsed: memory.heapUsed,
+					percentage: parseFloat(((memory.heapUsed / v8_stats.heap_size_limit) * 100).toFixed(2)),
+					rss: memory.rss,
+					worker_id: workerData.worker_id
+				},
+				task_id: task.task_id
+			});
+		} catch (e) {
+			return;
+		}
 	}
 	
 	queue.push(task);
@@ -640,13 +647,23 @@ async function handleTask (arg0_task) {
 		
 		return parentPort.postMessage({ results: true, task_id });
 	}
+	
+	//Fallback for unhandled task types
+	return parentPort.postMessage({ results: null, task_id });
 }
 
 async function processQueue () {
 	processing = true;
 	while (queue.length > 0) {
 		let task = queue.shift();
-		await handleTask(task);
+		try {
+			await handleTask(task);
+		} catch (err) {
+			console.error(`[NDJSON Worker ${workerData?.worker_id}] Error handling task ${task?.type}:`, err);
+			try {
+				parentPort.postMessage({ error: err.message, results: null, task_id: task?.task_id });
+			} catch (e) {}
+		}
 	}
 	processing = false;
 }
