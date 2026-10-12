@@ -28,8 +28,10 @@ global.UI_Leftbar = class extends ve.Class {
 								DALS.Timeline.parseAction("load_save", [{ load_save: data }]);
 							}
 						},
-						save_extension: ".naissance",
-						save_function: DALS.toJSON
+						manual_save_function: async (file_path) => {
+							await DALS.save(file_path);
+						},
+						save_extension: ".naissance"
 					})
 				}
 			},

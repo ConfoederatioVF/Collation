@@ -424,7 +424,7 @@ async function handleTask (arg0_task) {
 					continue;
 				
 				let state_val = resolveHistory(cached.entity, timestamp);
-				if (!state_val || state_val[0] === null || state_val[0] === undefined)
+				if (!state_val || state_val[0] === null || state_val[0] === undefined || state_val[0] === "undefined" || state_val[0] === "null" || state_val[0] === "")
 					continue;
 				
 				resolved_value = state_val;
@@ -432,7 +432,7 @@ async function handleTask (arg0_task) {
 				resolved_value = cached.value;
 			}
 			
-			if (resolved_value && resolved_value[0] !== null && resolved_value[0] !== undefined) {
+			if (resolved_value && resolved_value[0] !== null && resolved_value[0] !== undefined && resolved_value[0] !== "undefined" && resolved_value[0] !== "null" && resolved_value[0] !== "") {
 				list.push({
 					class_name: cached.class_name,
 					id: key,

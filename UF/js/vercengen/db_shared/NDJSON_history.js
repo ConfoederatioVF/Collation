@@ -233,7 +233,7 @@ History.diffKeyframe = function (arg0_keyframe, arg1_keyframe) {
 	if (ot_keyframe.value)
 		for (let i = 0; i < ot_keyframe.value.length; i++) {
 			if (i === 0) {
-				if (ot_keyframe.value[0] !== undefined)
+				if (ot_keyframe.value[0] !== undefined && ot_keyframe.value[0] !== "undefined" && ot_keyframe.value[0] !== "null")
 					keyframe.value[0] = ot_keyframe.value[0];
 			} else if (typeof ot_keyframe.value[i] === "object" && ot_keyframe.value[i] !== null) {
 				let old_variables = (keyframe.value[i] && keyframe.value[i].variables) ?

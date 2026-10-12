@@ -74,7 +74,7 @@ naissance.GeometryLine = class extends naissance.Geometry {
 			derender_geometry = true;
 		
 		//2. Check any cause for derendering
-		if (this.value && (this.value[0] === null || this.value[0] === undefined)) derender_geometry = true; //Coords are null, derender geometry
+		if (this.value && (this.value[0] === null || this.value[0] === undefined || this.value[0] === "undefined" || this.value[0] === "null" || this.value[0] === "")) derender_geometry = true; //Coords are null, derender geometry
 		if (this.value && this.value[2]) {
 			if (this.value[2].hidden) derender_geometry = true;
 			if (this.value[2].max_zoom && map_obj?.getZoom && map_obj.getZoom() > this.value[2].max_zoom) derender_geometry = true;
@@ -93,8 +93,19 @@ naissance.GeometryLine = class extends naissance.Geometry {
 				if (this.selected_geometry) this.selected_geometry.remove();
 				
 				//Draw this.geometry, this.label_geometries, this.selected_geometry
-				if (this.value[0]) {
-					this.geometry = maptalks.Geometry.fromJSON(this.value[0]);
+				if (this.value[0] && this.value[0] !== "undefined" && this.value[0] !== "null") {
+					let raw_geom = this.value[0];
+					if (typeof raw_geom === "string") {
+						try {
+							raw_geom = JSON.parse(raw_geom);
+						} catch (parse_err) {
+							raw_geom = null;
+						}
+					}
+					
+					if (raw_geom && typeof raw_geom === "object") {
+						this.geometry = maptalks.Geometry.fromJSON(raw_geom);
+					}
 					if (this.geometry) {
 						if (this.value[1]) this.geometry.setSymbol(this.value[1]);
 						if (main_obj?.layers?.entity_layer)

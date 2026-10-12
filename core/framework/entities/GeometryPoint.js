@@ -77,7 +77,7 @@ naissance.GeometryPoint = class extends naissance.Geometry {
 			derender_geometry = true;
 		
 		//2. Check any cause for derendering
-		if (this.value && (!this.value[0] || this.value[0] === null)) 
+		if (this.value && (!this.value[0] || this.value[0] === null || this.value[0] === "undefined" || this.value[0] === "null" || this.value[0] === "")) 
 			derender_geometry = true; //Coords are null, derender geometry
 		if (this.value && this.value[2]) {
 			if (this.value[2].hidden) derender_geometry = true;
@@ -95,10 +95,21 @@ naissance.GeometryPoint = class extends naissance.Geometry {
 					}
 				
 				//Draw this.geometry, this.label_geometries, this.selected_geometry
-				if (this.value[0]) {
+				if (this.value[0] && this.value[0] !== "undefined" && this.value[0] !== "null") {
 					if (this.selected_index === undefined) this.selected_index = 0;
 					
-					this.geometry = maptalks.Geometry.fromJSON(this.value[0]);
+					let raw_geom = this.value[0];
+					if (typeof raw_geom === "string") {
+						try {
+							raw_geom = JSON.parse(raw_geom);
+						} catch (parse_err) {
+							raw_geom = null;
+						}
+					}
+					
+					if (raw_geom && typeof raw_geom === "object") {
+						this.geometry = maptalks.Geometry.fromJSON(raw_geom);
+					}
 					if (this.geometry) {
 						let symbol_obj = default_symbol;
 						

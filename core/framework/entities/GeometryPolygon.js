@@ -96,7 +96,7 @@ naissance.GeometryPolygon = class extends naissance.Geometry {
 		if (this.value === undefined || this.value === null || this.value?.length === 0 || this._is_visible === false) return;
 		
 		//2. Check any cause for derendering
-		if (this.value && (this.value[0] === null || this.value[0] === undefined)) return;
+		if (this.value && (this.value[0] === null || this.value[0] === undefined || this.value[0] === "undefined" || this.value[0] === "null" || this.value[0] === "")) return;
 		if (this.value && this.value[2]) {
 			if (this.value[2].hidden) return;
 			if (this.value[2].max_zoom && map_obj?.getZoom && map_obj.getZoom() > this.value[2].max_zoom) return;
@@ -105,8 +105,19 @@ naissance.GeometryPolygon = class extends naissance.Geometry {
 		
 		//3. Draw this.geometry, this.label_geometries, this.selected_geometry onto map
 		try {
-			if (this.value[0]) {
-				this.geometry = maptalks.Geometry.fromJSON(this.value[0]);
+			if (this.value[0] && this.value[0] !== "undefined" && this.value[0] !== "null") {
+				let raw_geom = this.value[0];
+				if (typeof raw_geom === "string") {
+					try {
+						raw_geom = JSON.parse(raw_geom);
+					} catch (parse_err) {
+						raw_geom = null;
+					}
+				}
+				
+				if (raw_geom && typeof raw_geom === "object") {
+					this.geometry = maptalks.Geometry.fromJSON(raw_geom);
+				}
 				
 				if (this.geometry) {
 					if (main_obj?.layers?.entity_layer)

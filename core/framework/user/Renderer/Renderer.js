@@ -222,7 +222,7 @@ naissance.Renderer = class extends ve.Class {
 							let diff = visible_diffs[i];
 							let id = String(diff.id !== undefined ? diff.id : diff.key);
 							
-							if (!diff.value || !Array.isArray(diff.value) || diff.value.length === 0 || !diff.value[0]) {
+							if (!diff.value || !Array.isArray(diff.value) || diff.value.length === 0 || !diff.value[0] || diff.value[0] === "undefined" || diff.value[0] === "null") {
 								let inst = this.rendered_entities.get(id) || naissance.Geometry?.instances?.[id];
 								if (inst) {
 									this.derenderEntity(inst);

@@ -394,4 +394,93 @@
 		//Return statement
 		return json_obj;
 	};
+	
+	/**
+	 * Saves the current state either directly to disk (in legacy/in-memory mode)
+	 * or via the NDJSON partition streaming pipeline (in DB mode).
+	 *
+	 * @param {string} [arg0_target_path]
+	 *
+	 * @returns {Promise<string>}
+	 */
+	DALS.save = async function (arg0_target_path) {
+		//Convert from parameters
+		let target_path = (arg0_target_path) ?
+			path.resolve(arg0_target_path) :
+			path.resolve(global.ve?.naissance_file_path || "saves/autosave.naissance");
+		
+		//DB Mode: Flush in-memory entities and stream shards into .naissance
+		if (global.ve?.ndjson_file_path && global.db?.save) {
+			let file_path = (global.db?.getFilePath) ? global.db.getFilePath() : global.ve.naissance_file_path;
+			let folder_path = (global.NDJSON?.getCacheDirectory) ?
+				global.NDJSON.getCacheDirectory(file_path) : null;
+			
+			//1. Update metadata.json with latest map settings
+			if (folder_path && fs.existsSync(folder_path)) {
+				let metadata_path = path.join(folder_path, "metadata.json");
+				let current_meta = {};
+				if (fs.existsSync(metadata_path)) {
+					try { current_meta = JSON.parse(fs.readFileSync(metadata_path, "utf8")); } catch (e) {}
+				}
+				if (global.UI_MapSettings?.toJSON && global.map) {
+					try {
+						let live_settings = UI_MapSettings.toJSON();
+						current_meta = { ...current_meta, ...live_settings };
+					} catch (e) {}
+				}
+				try { fs.writeFileSync(metadata_path, JSON.stringify(current_meta, null, 2)); } catch (e) {}
+			}
+			
+			//2. Flush modified in-memory instances into the DB
+			let update_map = {};
+			if (naissance.Geometry?.instances) {
+				for (let id in naissance.Geometry.instances) {
+					let inst = naissance.Geometry.instances[id];
+					let kfs = inst.history?.keyframes;
+					if (kfs && Object.keys(kfs).length > 0) {
+						update_map[id] = {
+							class_name: inst.class_name,
+							history: inst.history.toJSON(),
+							id: id,
+							metadata: inst.metadata,
+							type: "geometry"
+						};
+					}
+				}
+			}
+			if (naissance.Feature?.instances) {
+				for (let id in naissance.Feature.instances) {
+					let feat = naissance.Feature.instances[id];
+					update_map[id] = {
+						class_name: feat.class_name,
+						id: id,
+						metadata: feat.metadata,
+						type: "feature",
+						value: (feat.toJSON ? feat.toJSON() : feat.value)
+					};
+				}
+			}
+			if (Object.keys(update_map).length > 0 && global.db?.setValues) {
+				await db.setValues(update_map);
+			}
+			
+			//3. Save through NDJSON streaming pipeline
+			let saved_path = await db.save(target_path);
+			global.ve.naissance_file_path = saved_path;
+			
+			//Return statement
+			return saved_path;
+		}
+		
+		//In-memory mode: Serialise and write directly
+		let json_data = DALS.toJSON();
+		let json_str = JSON.stringify(json_data, null, 2);
+		let target_dir = path.dirname(target_path);
+		if (!fs.existsSync(target_dir)) fs.mkdirSync(target_dir, { recursive: true });
+		fs.writeFileSync(target_path, json_str, "utf8");
+		global.ve.naissance_file_path = target_path;
+		
+		//Return statement
+		return target_path;
+	};
 }

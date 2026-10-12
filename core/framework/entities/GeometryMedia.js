@@ -6,8 +6,10 @@ naissance.GeometryMedia = class extends naissance.Geometry {
 		name: "Media Overlay",
 	};
 	
-	constructor () {
-		super();
+	constructor (arg0_options) {
+		//Convert from parameters
+		let options = (arg0_options) ? arg0_options : {};
+		super(options);
 		this.class_name = "GeometryMedia";
 		this.node_editor_mode = "Media";
 		
@@ -27,7 +29,8 @@ naissance.GeometryMedia = class extends naissance.Geometry {
 		this.canvas.style.top = "0";
 		this.canvas.style.zIndex = "1";
 		
-		map.getContainer().appendChild(this.canvas);
+		if (map?.getContainer && !map.getContainer().contains(this.canvas))
+			map.getContainer().appendChild(this.canvas);
 		
 		this.base_point_radius = 6;
 		this.base_hitbox_radius = 20;
@@ -44,7 +47,7 @@ naissance.GeometryMedia = class extends naissance.Geometry {
 		this._last_global_sync = 0;
 		this.canvas_dpr = 1;
 		this.image = undefined;
-		this.initial_zoom = map.getZoom();
+		this.initial_zoom = (map?.getZoom) ? map.getZoom() : 0;
 		this.geometry = undefined;
 		this.mesh_points = [];
 		this.mesh_triangles = [];
@@ -82,20 +85,23 @@ naissance.GeometryMedia = class extends naissance.Geometry {
 		this.initMesh();
 		this.handleEvents();
 		
-		//Add keyframe with default coords/symbol
-		let map_centre = map.getCenter();
-		this.addKeyframe(main.date, {
-			center: [map_centre.x, map_centre.y],
-			mesh_points: JSON.parse(JSON.stringify(this.mesh_points)),
-			initial_zoom: this.initial_zoom,
-		}, {
-			url: "",
-			opacity: 0.45,
-			warp_mode: "triangulation",
-			crop_mask: "",
-		});
+		//Add keyframe with default coords/symbol upon user creation
+		if (!options.is_import) {
+			let map_centre = (map?.getCenter) ? map.getCenter() : { x: 0, y: 0 };
+			let current_date = (main?.date !== undefined) ? main.date : 0;
+			this.addKeyframe(current_date, {
+				center: [map_centre.x, map_centre.y],
+				mesh_points: JSON.parse(JSON.stringify(this.mesh_points)),
+				initial_zoom: this.initial_zoom,
+			}, {
+				crop_mask: "",
+				opacity: 0.45,
+				url: "",
+				warp_mode: "triangulation",
+			});
+		}
 		
-		this.draw();
+		if (!options.is_import) this.draw();
 		this.updateOwner();
 	}
 	
@@ -265,19 +271,29 @@ naissance.GeometryMedia = class extends naissance.Geometry {
 		let derender_geometry = false;
 		
 		//1. Set this.value from current relative keyframe
-		this.value = this.history.getKeyframe({
-			date: main.date,
-			guaranteed_indexes: [1],
-		}).value;
-		this.value[1] = this.getSymbol(this.value[1]);
+		let main_obj = (typeof main !== "undefined") ? main : (globalThis.main || global.main);
+		let target_date = (main_obj?.timestamp !== undefined) ? main_obj.timestamp : (main_obj?.date || 0);
+		let has_local_history = (this.history?.keyframes && Object.keys(this.history.keyframes).length > 0);
+		
+		if (has_local_history) {
+			let kf_obj = this.history.getKeyframe({
+				date: target_date,
+				guaranteed_indexes: [1]
+			});
+			this.value = (kf_obj?.value) ? kf_obj.value : null;
+			if (this.value && this.value[1])
+				this.value[1] = this.getSymbol(this.value[1]);
+		} else {
+			this.value = null;
+		}
 		
 		//2. Check any cause for derendering
-		if (!this.value || this._is_visible === false) derender_geometry = true;
-		if (!this.value[0]) derender_geometry = true;
-		if (this.value && this.value[2]) {
+		if (!this.value || this._is_visible === false || !this.value[0]) {
+			derender_geometry = true;
+		} else if (this.value[2]) {
 			if (this.value[2].hidden) derender_geometry = true;
-			if (this.value[2].max_zoom && map.getZoom() > this.value[2].max_zoom) derender_geometry = true;
-			if (this.value[2].min_zoom && map.getZoom() < this.value[2].min_zoom) derender_geometry = true;
+			if (this.value[2].max_zoom && map?.getZoom && map.getZoom() > this.value[2].max_zoom) derender_geometry = true;
+			if (this.value[2].min_zoom && map?.getZoom && map.getZoom() < this.value[2].min_zoom) derender_geometry = true;
 		}
 		
 		//3. Draw this.geometry onto map
@@ -914,21 +930,33 @@ naissance.GeometryMedia = class extends naissance.Geometry {
 			mouse_sp.y <= max_y + this.hit_area_padding);
 	}
 	
-	isPrimarySelected () { return (main.brush?.selected_geometry?.id === this.id); }
+	isPrimarySelected () {
+		let main_obj = (typeof main !== "undefined") ? main : (globalThis.main || global.main);
+		return (
+			this.selected === true ||
+			main_obj?.brush?.selected_geometry?.id === this.id ||
+			main_obj?.brush?._selected_geometry?.id === this.id
+		);
+	}
 	
 	loadFile (arg0_url, arg1_timestamp) {
 		//Convert from parameters
-		let file_path = arg0_url;
+		let file_path = (arg0_url) ? arg0_url : "";
 		let timestamp = Math.returnSafeNumber(arg1_timestamp);
 		
 		//Declare local instance variables
-		let is_image = File.isImage(file_path);
+		let is_image = false;
+		if (file_path && typeof file_path === "string") {
+			if (file_path.startsWith("data:image/") || /\.(png|jpe?g|gif|webp|svg|bmp|tiff?)$/i.test(file_path)) {
+				is_image = true;
+			}
+		}
 		
 		this._loaded_url = file_path;
-		if (is_image) {
-			this.loadImage(file_path);
-		} else {
+		if (file_path && !is_image && (file_path.startsWith("data:video/") || /\.(mp4|webm|ogg|mov|mkv)$/i.test(file_path))) {
 			this.loadVideo(file_path, timestamp);
+		} else {
+			this.loadImage(file_path);
 		}
 	}
 	
@@ -1031,14 +1059,6 @@ naissance.GeometryMedia = class extends naissance.Geometry {
 		//Convert from parameters
 		let symbol_obj = (this.value?.[1]) ? this.value[1] : {};
 		
-		if (!this.image) return; //Internal guard clause for this.image
-		
-		if (this.image instanceof HTMLImageElement) {
-			if (!this.image.complete || this.image.naturalWidth === 0) return;
-		} else if (this.image instanceof HTMLVideoElement) {
-			if (this.image.readyState < 2) return; // HAVE_CURRENT_DATA
-		}
-		
 		if (!map || !map.isLoaded() || !this.geometry || this._canvas_hidden) return;
 		
 		//Ensure viewchange listener is attached to current active map instance
@@ -1059,82 +1079,119 @@ naissance.GeometryMedia = class extends naissance.Geometry {
 		this.ctx.save();
 		this.ctx.scale(this.canvas_dpr, this.canvas_dpr);
 		
-		//Composite high-res image with crop mask if active
-		this.updateMaskCanvasSize();
-		let dim = this.getImageDimensions();
-		
-		let active_image = this.image;
-		if (this.has_crop_mask) {
-			this.masked_ctx.clearRect(0, 0, dim.w, dim.h);
-			this.masked_ctx.drawImage(this.image, 0, 0, dim.w, dim.h);
-			this.masked_ctx.globalCompositeOperation = "destination-out";
-			this.masked_ctx.drawImage(this.crop_mask_canvas, 0, 0, dim.w, dim.h);
-			this.masked_ctx.globalCompositeOperation = "source-over";
-			active_image = this.masked_canvas;
+		let is_image_ready = false;
+		if (this.image) {
+			if (this.image instanceof HTMLImageElement) {
+				if (this.image.complete && this.image.naturalWidth > 0) is_image_ready = true;
+			} else if (this.image instanceof HTMLVideoElement) {
+				if (this.image.readyState >= 2) is_image_ready = true;
+			}
 		}
 		
-		//Render brush preview onto texture overlay so it passes through identical warp projections
-		if (this.crop_brush_active && this._mouse_screen_pos) {
-			let center_info = this.getImageSourcePosAtScreenPt(this._mouse_screen_pos);
-			if (center_info) {
-				let scale_x = dim.w / this.img_display_size;
-				let scale_y = dim.h / this.img_display_size;
-				let center_mask_x = center_info.x * scale_x;
-				let center_mask_y = center_info.y * scale_y;
-				
-				let R_screen = this.crop_brush_radius;
-				let edge_sp = { x: this._mouse_screen_pos.x + R_screen, y: this._mouse_screen_pos.y };
-				let edge_info = this.getImageSourcePosAtScreenPt(edge_sp);
-				
-				let mask_radius;
-				if (edge_info) {
-					let edge_mask_x = edge_info.x * scale_x;
-					let edge_mask_y = edge_info.y * scale_y;
-					mask_radius = Math.hypot(edge_mask_x - center_mask_x, edge_mask_y - center_mask_y);
-				} else {
-					let sample_sp = { x: this._mouse_screen_pos.x + 5, y: this._mouse_screen_pos.y };
-					let sample_info = this.getImageSourcePosAtScreenPt(sample_sp);
-					if (sample_info) {
-						let sample_mask_x = sample_info.x * scale_x;
-						let sample_mask_y = sample_info.y * scale_y;
-						let dist_5 = Math.hypot(sample_mask_x - center_mask_x, sample_mask_y - center_mask_y);
-						mask_radius = dist_5 * (R_screen / 5);
+		if (is_image_ready) {
+			//Composite high-res image with crop mask if active
+			this.updateMaskCanvasSize();
+			let dim = this.getImageDimensions();
+			
+			let active_image = this.image;
+			if (this.has_crop_mask) {
+				this.masked_ctx.clearRect(0, 0, dim.w, dim.h);
+				this.masked_ctx.drawImage(this.image, 0, 0, dim.w, dim.h);
+				this.masked_ctx.globalCompositeOperation = "destination-out";
+				this.masked_ctx.drawImage(this.crop_mask_canvas, 0, 0, dim.w, dim.h);
+				this.masked_ctx.globalCompositeOperation = "source-over";
+				active_image = this.masked_canvas;
+			}
+			
+			//Render brush preview onto texture overlay so it passes through identical warp projections
+			if (this.crop_brush_active && this._mouse_screen_pos) {
+				let center_info = this.getImageSourcePosAtScreenPt(this._mouse_screen_pos);
+				if (center_info) {
+					let scale_x = dim.w / this.img_display_size;
+					let scale_y = dim.h / this.img_display_size;
+					let center_mask_x = center_info.x * scale_x;
+					let center_mask_y = center_info.y * scale_y;
+					
+					let R_screen = this.crop_brush_radius;
+					let edge_sp = { x: this._mouse_screen_pos.x + R_screen, y: this._mouse_screen_pos.y };
+					let edge_info = this.getImageSourcePosAtScreenPt(edge_sp);
+					
+					let mask_radius;
+					if (edge_info) {
+						let edge_mask_x = edge_info.x * scale_x;
+						let edge_mask_y = edge_info.y * scale_y;
+						mask_radius = Math.hypot(edge_mask_x - center_mask_x, edge_mask_y - center_mask_y);
 					} else {
-						mask_radius = R_screen * scale_x;
+						let sample_sp = { x: this._mouse_screen_pos.x + 5, y: this._mouse_screen_pos.y };
+						let sample_info = this.getImageSourcePosAtScreenPt(sample_sp);
+						if (sample_info) {
+							let sample_mask_x = sample_info.x * scale_x;
+							let sample_mask_y = sample_info.y * scale_y;
+							let dist_5 = Math.hypot(sample_mask_x - center_mask_x, sample_mask_y - center_mask_y);
+							mask_radius = dist_5 * (R_screen / 5);
+						} else {
+							mask_radius = R_screen * scale_x;
+						}
 					}
+					if (mask_radius <= 0) mask_radius = 1;
+					
+					this.preview_ctx.clearRect(0, 0, dim.w, dim.h);
+					this.preview_ctx.drawImage(active_image, 0, 0, dim.w, dim.h);
+					this.preview_ctx.save();
+					this.preview_ctx.beginPath();
+					this.preview_ctx.arc(center_mask_x, center_mask_y, mask_radius, 0, Math.PI * 2);
+					this.preview_ctx.lineWidth = 1;
+					this.preview_ctx.strokeStyle = "rgb(240, 60, 60)";
+					this.preview_ctx.fillStyle = "rgba(240, 60, 60, 0.5)";
+					this.preview_ctx.fill();
+					this.preview_ctx.stroke();
+					this.preview_ctx.restore();
+					
+					active_image = this.preview_canvas;
 				}
-				if (mask_radius <= 0) mask_radius = 1;
-				
-				this.preview_ctx.clearRect(0, 0, dim.w, dim.h);
-				this.preview_ctx.drawImage(active_image, 0, 0, dim.w, dim.h);
-				this.preview_ctx.save();
-				this.preview_ctx.beginPath();
-				this.preview_ctx.arc(center_mask_x, center_mask_y, mask_radius, 0, Math.PI * 2);
-				this.preview_ctx.lineWidth = 1;
-				this.preview_ctx.strokeStyle = "rgb(240, 60, 60)";
-				this.preview_ctx.fillStyle = "rgba(240, 60, 60, 0.5)";
-				this.preview_ctx.fill();
-				this.preview_ctx.stroke();
-				this.preview_ctx.restore();
-				
-				active_image = this.preview_canvas;
 			}
-		}
-		
-		let warp_mode = (symbol_obj.warp_mode || "triangulation");
-		
-		if (warp_mode === "tps" && this.mesh_points.length >= 3) {
-			this.renderTPSSubdivided(active_image);
+			
+			let warp_mode = (symbol_obj.warp_mode || "triangulation");
+			
+			if (warp_mode === "tps" && this.mesh_points.length >= 3) {
+				this.renderTPSSubdivided(active_image);
+			} else {
+				for (let i = 0; i < this.mesh_triangles.length; i += 3) {
+					let a = this.screen_pts[this.mesh_triangles[i]];
+					let b = this.screen_pts[this.mesh_triangles[i + 1]];
+					let c = this.screen_pts[this.mesh_triangles[i + 2]];
+					this.renderTriangleSubdivided(a, b, c, active_image);
+				}
+			}
 		} else {
-			for (let i = 0; i < this.mesh_triangles.length; i += 3) {
-				let a = this.screen_pts[this.mesh_triangles[i]];
-				let b = this.screen_pts[this.mesh_triangles[i + 1]];
-				let c = this.screen_pts[this.mesh_triangles[i + 2]];
-				this.renderTriangleSubdivided(a, b, c, active_image);
+			//Draw placeholder polygon connecting the mesh perimeter when no media is loaded
+			if (this.screen_pts.length >= 4) {
+				this.ctx.save();
+				this.ctx.strokeStyle = "rgba(255, 255, 255, 0.4)";
+				this.ctx.fillStyle = "rgba(255, 255, 255, 0.08)";
+				this.ctx.lineWidth = 1.5;
+				this.ctx.setLineDash([6, 6]);
+				this.ctx.beginPath();
+				this.ctx.moveTo(this.screen_pts[0].screen_x, this.screen_pts[0].screen_y);
+				for (let i = 1; i < 4; i++) {
+					this.ctx.lineTo(this.screen_pts[i].screen_x, this.screen_pts[i].screen_y);
+				}
+				this.ctx.closePath();
+				this.ctx.fill();
+				this.ctx.stroke();
+				
+				let cx = (this.screen_pts[0].screen_x + this.screen_pts[2].screen_x) / 2;
+				let cy = (this.screen_pts[0].screen_y + this.screen_pts[2].screen_y) / 2;
+				this.ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
+				this.ctx.font = "12px sans-serif";
+				this.ctx.textAlign = "center";
+				this.ctx.textBaseline = "middle";
+				this.ctx.fillText("Media Overlay", cx, cy);
+				this.ctx.restore();
 			}
 		}
 		
-		if (this.isPrimarySelected()) {
+		if (this.isPrimarySelected() || !is_image_ready) {
 			let overlay_pts = this.screen_pts.map((p) => ({
 				x: p.screen_x,
 				y: p.screen_y,
@@ -1409,14 +1466,17 @@ naissance.GeometryMedia = class extends naissance.Geometry {
 		let symbol_obj = arg0_symbol_obj;
 		let do_not_push_to_dals = arg1_do_not_push_to_dals;
 		
+		let main_obj = (typeof main !== "undefined") ? main : (globalThis.main || global.main);
+		let target_date = (main_obj?.date !== undefined) ? main_obj.date : (main_obj?.timestamp || 0);
+		
 		//Call update media keyframe
-		DALS.Timeline.parseAction("update_media_keyframe", {
+		DALS.Timeline.parseAction("update_keyframe", [{
 			geometry_obj: this.id,
 			update_keyframe: {
-				date: main.date,
-				symbol_obj
+				date: target_date,
+				symbol_obj: symbol_obj
 			}
-		}, do_not_push_to_dals);
+		}], do_not_push_to_dals);
 	}
 	
 	updateTriangulation () {
