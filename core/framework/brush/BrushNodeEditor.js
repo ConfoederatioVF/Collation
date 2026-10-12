@@ -150,7 +150,7 @@ naissance.GeometryLine.handleNodeEditorEnd = function (arg0_e) {
 	main.brush.node_editor.disable();
 	main.brush.node_editor.enable();
 };
-naissance.GeometryPolygon.handleNodeEditorEnd = function (arg0_e) {
+naissance.GeometryPolygon.handleNodeEditorEnd = async function (arg0_e) {
 	//Convert from parameters
 	let e = arg0_e;
 	
@@ -163,9 +163,43 @@ naissance.GeometryPolygon.handleNodeEditorEnd = function (arg0_e) {
 			let from_geometry_id = main.brush.from_geometry_id;
 			let from_geometry = naissance.Geometry.instances[from_geometry_id];
 			
-			//Get the intersection of from_geometry and e.geometry
-			if (!(from_geometry?.geometry && e?.geometry)) return; //Internal guard clause if neither are presently defined
-			if (from_geometry?.id === this.id) return; //Internal guard clause for self-selection
+			if (!from_geometry) {
+				veToast("<icon>warning</icon> No source geometry selected for node transfer.");
+				main.brush.node_editor.disable();
+				main.brush.node_editor.enable();
+				return;
+			}
+			if (from_geometry.id === this.id) {
+				veToast("<icon>warning</icon> Cannot transfer nodes to the same geometry.");
+				main.brush.node_editor.disable();
+				main.brush.node_editor.enable();
+				return;
+			}
+			
+			//Ensure history is loaded for both geometries
+			if (typeof from_geometry.loadHistory === "function")
+				await from_geometry.loadHistory();
+			if (typeof this.loadHistory === "function")
+				await this.loadHistory();
+			
+			//Ensure geometries are drawn or loaded
+			if (!from_geometry.geometry) from_geometry.draw();
+			if (!from_geometry.geometry) {
+				let kf_geom = from_geometry.getGeometryKeyframeAtDate(main.date);
+				if (kf_geom) from_geometry.geometry = maptalks.Geometry.fromJSON(kf_geom);
+			}
+			if (!this.geometry) this.draw();
+			if (!this.geometry) {
+				let kf_geom = this.getGeometryKeyframeAtDate(main.date);
+				if (kf_geom) this.geometry = maptalks.Geometry.fromJSON(kf_geom);
+			}
+			
+			if (!(from_geometry?.geometry && e?.geometry)) {
+				veToast("<icon>warning</icon> Source geometry has no spatial coordinates at current date.");
+				main.brush.node_editor.disable();
+				main.brush.node_editor.enable();
+				return;
+			}
 			
 			let cursor_turf_geometry = Geospatiale.convertMaptalksToTurf(e.geometry);
 			let ot_turf_geometry = Geospatiale.convertMaptalksToTurf(from_geometry.geometry);
@@ -173,36 +207,112 @@ naissance.GeometryPolygon.handleNodeEditorEnd = function (arg0_e) {
 			
 			let turf_intersection = (main.brush.node_editor.type === "add") ?
 				turf.intersect(turf.featureCollection([ot_turf_geometry, cursor_turf_geometry])) :
-				turf.intersect(turf.featureCollection([turf_geometry, cursor_turf_geometry]));
+				(turf_geometry ? turf.intersect(turf.featureCollection([turf_geometry, cursor_turf_geometry])) : null);
 			
-			if (!turf_intersection) return; //Internal guard clause if nothing overlaps
-			turf_intersection = turf.buffer(turf_intersection, 0.001, {
-				units: "kilometers",
-				steps: 1
-			});
-			
-			//Transfer selected polygon
-			e.geometry = Geospatiale.convertTurfToMaptalks(turf_intersection);
-			
-			if (main.brush.node_editor.type === "add") {
-				DALS.Timeline.parseAction("remove_from_polygon", [{
-					geometry_obj: from_geometry.id,
-					remove_from_polygon: {
-						date_range: date_range,
-						geometry: e.geometry.toJSON()
-					}
-				}]); //Remove cut from target polygon
-			} else if (main.brush.node_editor.type === "remove") {
-				DALS.Timeline.parseAction("add_to_polygon", [{
-					geometry_obj: from_geometry.id,
-					add_to_polygon: {
-						date_range: date_range,
-						geometry: e.geometry.toJSON()
-					}
-				}]);
+			if (!turf_intersection) {
+				veToast("<icon>info</icon> No overlapping geometry found to transfer.");
+				main.brush.node_editor.disable();
+				main.brush.node_editor.enable();
+				return;
 			}
 			
-		} catch (err) { console.error(err); }
+			//Apply simplify if configured
+			if (main.brush.simplify > 0)
+				turf_intersection = turf.simplify(turf_intersection, { tolerance: main.brush.simplify });
+			
+			//Buffer for subtraction to avoid zero-width gaps on shared boundaries
+			let node_buffer_m = Math.returnSafeNumber(main.brush.node_buffer, 0);
+			let buffer_km = (node_buffer_m > 0) ? (node_buffer_m / 1000) : 0.0001;
+			let turf_subtraction = turf_intersection;
+			try {
+				let buffered = turf.buffer(turf_intersection, buffer_km, { units: "kilometers", steps: 1 });
+				if (buffered) turf_subtraction = buffered;
+			} catch (err) {}
+			
+			let maptalks_add = Geospatiale.convertTurfToMaptalks(turf_intersection);
+			let maptalks_remove = Geospatiale.convertTurfToMaptalks(turf_subtraction);
+			
+			if (!maptalks_add) return;
+			let add_json = maptalks_add.toJSON();
+			let remove_json = maptalks_remove ? maptalks_remove.toJSON() : add_json;
+			
+			//Handle date range vs single date
+			if (date_range) {
+				let start_ts = Math.min(Date.getTimestamp(date_range[0]), Date.getTimestamp(date_range[1]));
+				let end_ts = Math.max(Date.getTimestamp(date_range[0]), Date.getTimestamp(date_range[1]));
+				
+				let ts_set = new Set();
+				ts_set.add(start_ts);
+				
+				let from_ts = from_geometry.history ? from_geometry.history.getTimestamps() : [];
+				for (let i = 0; i < from_ts.length; i++)
+					if (from_ts[i] >= start_ts && from_ts[i] <= end_ts)
+						ts_set.add(from_ts[i]);
+				
+				let this_ts = this.history ? this.history.getTimestamps() : [];
+				for (let i = 0; i < this_ts.length; i++)
+					if (this_ts[i] >= start_ts && this_ts[i] <= end_ts)
+						ts_set.add(this_ts[i]);
+				
+				let all_timestamps = Array.from(ts_set).sort((a, b) => a - b);
+				
+				for (let i = 0; i < all_timestamps.length; i++) {
+					let local_ts = all_timestamps[i];
+					if (main.brush.node_editor.type === "add") {
+						await DALS.Timeline.parseAction("remove_from_polygon", [{
+							geometry_obj: from_geometry.id,
+							remove_from_polygon: { date: local_ts, geometry: remove_json }
+						}], true);
+						await DALS.Timeline.parseAction("add_to_polygon", [{
+							geometry_obj: this.id,
+							add_to_polygon: { date: local_ts, geometry: add_json }
+						}], true);
+					} else if (main.brush.node_editor.type === "remove") {
+						await DALS.Timeline.parseAction("remove_from_polygon", [{
+							geometry_obj: this.id,
+							remove_from_polygon: { date: local_ts, geometry: remove_json }
+						}], true);
+						await DALS.Timeline.parseAction("add_to_polygon", [{
+							geometry_obj: from_geometry.id,
+							add_to_polygon: { date: local_ts, geometry: add_json }
+						}], true);
+					}
+				}
+			} else {
+				//Single date (current date)
+				if (main.brush.node_editor.type === "add") {
+					await DALS.Timeline.parseAction("remove_from_polygon", [{
+						geometry_obj: from_geometry.id,
+						remove_from_polygon: { date: main.date, geometry: remove_json }
+					}], true);
+					await DALS.Timeline.parseAction("add_to_polygon", [{
+						geometry_obj: this.id,
+						add_to_polygon: { date: main.date, geometry: add_json }
+					}], true);
+				} else if (main.brush.node_editor.type === "remove") {
+					await DALS.Timeline.parseAction("remove_from_polygon", [{
+						geometry_obj: this.id,
+						remove_from_polygon: { date: main.date, geometry: remove_json }
+					}], true);
+					await DALS.Timeline.parseAction("add_to_polygon", [{
+						geometry_obj: from_geometry.id,
+						add_to_polygon: { date: main.date, geometry: add_json }
+					}], true);
+				}
+			}
+			
+			from_geometry.draw();
+			this.draw();
+			if (typeof UI_Leftbar !== "undefined" && UI_Leftbar.refresh) UI_Leftbar.refresh();
+			veToast("<icon>check</icon> Transferred nodes successfully.");
+			
+		} catch (err) {
+			console.error("[handleNodeEditorEnd] Error during node transfer:", err);
+		}
+		
+		main.brush.node_editor.disable();
+		main.brush.node_editor.enable();
+		return;
 	}
 	
 	//Push action to timeline for selected geometry

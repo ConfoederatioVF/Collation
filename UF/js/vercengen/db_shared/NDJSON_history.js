@@ -34,7 +34,7 @@ if (!global?.History) global.History = {};
 		//Return statement
 		if (all_object_keys.length !== all_ot_object_keys.length) return false;
 		for (let local_key of all_object_keys)
-			if (!all_ot_object_keys[local_key] || !Boolean.isDeepEqual(object[local_key], ot_object[local_key]))
+			if (!Object.prototype.hasOwnProperty.call(ot_object, local_key) || !Boolean.isDeepEqual(object[local_key], ot_object[local_key]))
 				return false;
 		return true;
 	};
@@ -134,7 +134,21 @@ History.cleanKeyframes = function (arg0_keyframes) {
 			let prev_val = running_state[x];
 			
 			//Skip only if undefined; null is treated as a meaningful value change
-			if (current_val === undefined) continue;
+			//Geometries at index 0 must be treated atomically
+			if (x === 0) {
+				let is_same_geom = (current_val === prev_val);
+				if (!is_same_geom && current_val && prev_val)
+					is_same_geom = Boolean.isDeepEqual(current_val, prev_val);
+				
+				if (is_same_geom) {
+					local_keyframe.value[x] = undefined;
+				} else {
+					local_keyframe.value[x] = current_val;
+					running_state[x] = current_val;
+					has_meaningful_change = true;
+				}
+				continue;
+			}
 			
 			if (typeof current_val === "object" && current_val !== null) {
 				// Handle object merging and variable delta checks

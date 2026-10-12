@@ -177,12 +177,29 @@ global.polities_Phersu_Worker = class extends Blacktraffic.Worker {
 				if (carry_over_val !== null && carry_over_val !== 'null') {
 					let carry_line = JSON.stringify(start_bound.string) + ': ' + carry_over_val;
 					if (valid_entries.length > 0) {
-						if (JSON.parse(valid_entries[0].substring(0, valid_entries[0].indexOf(': '))) !== start_bound.string)
+						let first_line = valid_entries[0];
+						let first_val = first_line.substring(first_line.indexOf(': ') + 2);
+						let first_date = JSON.parse(first_line.substring(0, first_line.indexOf(': ')));
+						
+						if (first_date !== start_bound.string && first_val !== carry_over_val)
 							valid_entries.unshift(carry_line);
 					} else {
 						valid_entries.push(carry_line);
 					}
 				}
+				
+				// Deduplicate consecutive entries with identical geometry values
+				let deduped_entries = [];
+				let last_val = undefined;
+				for (let e = 0; e < valid_entries.length; e++) {
+					let cur_line = valid_entries[e];
+					let cur_val = cur_line.substring(cur_line.indexOf(': ') + 2);
+					if (cur_val !== last_val) {
+						deduped_entries.push(cur_line);
+						last_val = cur_val;
+					}
+				}
+				valid_entries = deduped_entries;
 				
 				if (valid_entries.length > 0) {
 					let output = (slice_geom_counts[i] > 0 ? ',\n' : '') + '  ' + JSON.stringify(current_id) + ': {\n';
@@ -254,7 +271,19 @@ global.polities_Phersu_Worker = class extends Blacktraffic.Worker {
 			let first_timestamp;
 			
 			//Import geometry history
-			if (local_value.keyframes)
+			if (local_value.keyframes) {
+				let last_added_geom_str = undefined;
+				
+				// If geometry already has keyframes (e.g. unified mode importing across slices)
+				if (geometry.history?.keyframes) {
+					let existing_ts = geometry.history.getTimestamps();
+					if (existing_ts.length > 0) {
+						let last_kf = geometry.history.keyframes[existing_ts[existing_ts.length - 1]];
+						if (last_kf && last_kf.value)
+							last_added_geom_str = JSON.stringify(last_kf.value[0]);
+					}
+				}
+				
 				Object.iterate(local_value.keyframes, (local_timestamp, local_keyframe) => {
 					let parse_date = local_timestamp.split(".").map(Number);
 					let timestamp = Date.getTimestamp({
@@ -265,8 +294,14 @@ global.polities_Phersu_Worker = class extends Blacktraffic.Worker {
 						local_keyframe = turf.truncate(local_keyframe, { precision: 2, mutate: true });
 						try { local_keyframe = turf.cleanCoords(local_keyframe, { mutate: true }); } catch (e) {}
 					} catch (e) {}
+					
+					let current_geom_str = JSON.stringify(local_keyframe);
+					if (current_geom_str === last_added_geom_str) return;
+					
 					geometry.history.addKeyframe(timestamp, local_keyframe);
+					last_added_geom_str = current_geom_str;
 				});
+			}
 			
 			//Starting symbol and properties for newly instantiated geometry
 			if (is_new || !options.is_unified) {
@@ -293,6 +328,9 @@ global.polities_Phersu_Worker = class extends Blacktraffic.Worker {
 				if (first_timestamp !== undefined)
 					geometry.history.addKeyframe(first_timestamp, undefined, symbol_obj, properties_obj);
 			}
+			
+			if (geometry.history && typeof geometry.history.cleanKeyframes === "function")
+				geometry.history.cleanKeyframes();
 			
 			geom_count++;
 			if (geom_count % 100 === 0 || geom_count === geom_keys.length)
@@ -349,6 +387,12 @@ global.polities_Phersu_Worker = class extends Blacktraffic.Worker {
 					is_unified: true
 				});
 			}
+			
+			console.log("Cleaning keyframes across all unified geometries...");
+			Object.iterate(naissance.Geometry.instances, (local_id, local_geom) => {
+				if (local_geom?.history?.cleanKeyframes)
+					local_geom.history.cleanKeyframes();
+			});
 			
 			let output_path = options.file_path || options.target_path || "./saves/phersu.naissance";
 			let output_dir = path.dirname(path.resolve(output_path));

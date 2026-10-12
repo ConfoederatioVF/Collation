@@ -92,16 +92,18 @@ config.actions.geometry_polygon = {
 			//Declare local instance variables
 			let polygon_obj = json.naissance_obj;
 			
-			let date = (json.add_to_polygon.date) ? json.add_to_polygon.date : main.date;
-			let geometry = (polygon_obj && json.add_to_polygon.date) ?
-				polygon_obj.getGeometryKeyframeAtDate(date) : polygon_obj?.geometry;
-			let ot_geometry = (json.add_to_polygon.geometry) ?
-				maptalks.Geometry.fromJSON(json.add_to_polygon.geometry) : null;
+			let date = (json.add_to_polygon.date !== undefined) ? json.add_to_polygon.date : main.date;
+			let geometry = (polygon_obj) ?
+				((json.add_to_polygon.date !== undefined) ?
+					polygon_obj.getGeometryKeyframeAtDate(date) :
+					(polygon_obj.geometry || polygon_obj.getGeometryKeyframeAtDate(main.date))
+				) : null;
+			let ot_geometry = json.add_to_polygon.geometry;
 			
 			//Date range handling
 			if (json.add_to_polygon.date_range && polygon_obj?.history) {
-				polygon_obj.history.callFunctionInDateRange(json.add_to_polygon.date_range, (local_keyframe) => {
-					DALS.Timeline.parseAction("add_to_polygon", [{
+				await polygon_obj.history.callFunctionInDateRange(json.add_to_polygon.date_range, async (local_keyframe) => {
+					await DALS.Timeline.parseAction("add_to_polygon", [{
 						geometry_obj: polygon_obj.id,
 						add_to_polygon: {
 							date: local_keyframe,
@@ -298,16 +300,18 @@ config.actions.geometry_polygon = {
 			let polygon_obj = json.naissance_obj;
 			
 			if (json.remove_from_polygon) {
-				let date = (json.remove_from_polygon.date) ? json.remove_from_polygon.date : main.date;
-				let geometry = (polygon_obj && json.remove_from_polygon.date) ?
-					polygon_obj.getGeometryKeyframeAtDate(date) : polygon_obj?.geometry;
-				let ot_geometry = (json.remove_from_polygon.geometry) ?
-					maptalks.Geometry.fromJSON(json.remove_from_polygon.geometry) : null;
+				let date = (json.remove_from_polygon.date !== undefined) ? json.remove_from_polygon.date : main.date;
+				let geometry = (polygon_obj) ?
+					((json.remove_from_polygon.date !== undefined) ?
+						polygon_obj.getGeometryKeyframeAtDate(date) :
+						(polygon_obj.geometry || polygon_obj.getGeometryKeyframeAtDate(main.date))
+					) : null;
+				let ot_geometry = json.remove_from_polygon.geometry;
 				
 				//Difference with existing geometry, if return value is null replace geometry
 				if (json.remove_from_polygon.date_range && polygon_obj?.history) {
-					polygon_obj.history.callFunctionInDateRange(json.remove_from_polygon.date_range, (local_keyframe) => {
-						DALS.Timeline.parseAction("remove_from_polygon", [{
+					await polygon_obj.history.callFunctionInDateRange(json.remove_from_polygon.date_range, async (local_keyframe) => {
+						await DALS.Timeline.parseAction("remove_from_polygon", [{
 							geometry_obj: polygon_obj.id,
 							remove_from_polygon: {
 								date: local_keyframe,

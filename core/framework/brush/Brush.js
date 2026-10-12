@@ -134,6 +134,14 @@ naissance.Brush = class extends ve.Class {
 				binding: "this.from_geometry_id",
         filter_types: ["GeometryLine", "GeometryPolygon"],
 				limit: () => this.mode === "node_transfer",
+				onuserchange: async (v) => {
+					this.from_geometry_id = v;
+					let target_geom = naissance.Geometry.instances[v];
+					if (target_geom) {
+						if (typeof target_geom.loadHistory === "function") await target_geom.loadHistory();
+						if (typeof target_geom.draw === "function") target_geom.draw();
+					}
+				},
 				width: 2,
 				x: 0, y: 3
 			}),

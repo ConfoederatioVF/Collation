@@ -136,28 +136,43 @@
 		//Convert from parameters
 		let geometry = arg0_geometry;
 		
-		//Internal guard clauses
-		if (Geospatiale.getCoordsType(geometry) === "turf_geometry") return geometry;
-		if (geometry === null) return null;
+		if (!geometry) return null;
+		
+		//Unwrap maptalks serialized JSON if wrapped in .feature
+		if (geometry.feature) geometry = geometry.feature;
+		
+		//Internal guard clause if already a Turf Feature
+		if (geometry.type === "Feature" && geometry.geometry) {
+			let clean_geom = Geospatiale.cleanRings(geometry.geometry);
+			return (clean_geom) ? turf.feature(clean_geom, geometry.properties || {}) : null;
+		}
+		
+		//If raw GeoJSON geometry (Polygon, MultiPolygon, etc.)
+		if (geometry.type && geometry.coordinates) {
+			let clean_geom = Geospatiale.cleanRings(geometry);
+			return (clean_geom) ? turf.feature(clean_geom) : null;
+		}
 		
 		try {
-			if (typeof geometry === "object" && typeof geometry.toJSON !== "function") {
-				let temp_geometry = maptalks.GeoJSON.toGeometry(geometry);
-				geometry = temp_geometry === null ? maptalks.Geometry.fromJSON(geometry) : temp_geometry;
+			if (typeof geometry === "object" && typeof geometry.toGeoJSON !== "function") {
+				if (typeof maptalks !== "undefined" && maptalks.Geometry) {
+					let temp_geometry = (maptalks.GeoJSON) ? maptalks.GeoJSON.toGeometry(geometry) : null;
+					geometry = (temp_geometry === null) ? maptalks.Geometry.fromJSON(geometry) : temp_geometry;
+				}
 			}
 			
-			let geojson = geometry.toGeoJSON();
-			let geometry_data = geojson.geometry ? geojson.geometry : geojson;
-			
-			//Post-process geometry
-			let final_geometry = Geospatiale.cleanRings(geometry_data);
-			
-			//Return statement
-			return (final_geometry) ? turf.feature(final_geometry) : null;
+			if (geometry && typeof geometry.toGeoJSON === "function") {
+				let geojson = geometry.toGeoJSON();
+				let geometry_data = geojson.geometry ? geojson.geometry : geojson;
+				let final_geometry = Geospatiale.cleanRings(geometry_data);
+				return (final_geometry) ? turf.feature(final_geometry) : null;
+			}
 		} catch (e) {
-			//Return statement
-			return (typeof geometry === "object") ? geometry : null;
+			console.error("[Geospatiale] convertMaptalksToTurf error:", e);
 		}
+		
+		//Return statement
+		return (typeof geometry === "object" && geometry !== null) ? geometry : null;
 	};
 	
 	/**
@@ -168,23 +183,33 @@
 	 * @returns {maptalks.Geometry|maptalks.GeometryCollection}
 	 */
 	Geospatiale.convertTurfToMaptalks = function (arg0_geometry) {
-		const geometry = arg0_geometry;
+		let geometry = arg0_geometry;
 		
-		//Internal guard clause if the geometry is already a Maptalks geometry
-		if (Geospatiale.getCoordsType(geometry) === "maptalks_geometry") return geometry;
-		if (geometry === null) return null;
+		if (geometry === null || geometry === undefined) return null;
 		
-		// Handle Turf Feature or raw geometry
+		//Internal guard clause if the geometry is already a live Maptalks geometry
+		if (typeof geometry.toJSON === "function" && typeof geometry.getType === "function")
+			return geometry;
+		
+		if (typeof maptalks === "undefined") return geometry;
+		
+		//Handle Turf Feature or raw geometry
 		let feature = geometry;
-		if (geometry.type !== "Feature")
-			feature = { type: "Feature", geometry: geometry, properties: {} };
+		if (geometry.feature) feature = geometry.feature;
+		if (feature.type !== "Feature")
+			feature = { type: "Feature", geometry: feature, properties: {} };
 		
 		//Convert using Maptalks built-in
-		let result = maptalks.GeoJSON.toGeometry(feature);
+		let result = (maptalks.GeoJSON) ? maptalks.GeoJSON.toGeometry(feature) : null;
+		if (!result && maptalks.Geometry?.fromJSON)
+			result = maptalks.Geometry.fromJSON(feature);
 		
-		//Return statement; handle array results (MultiPolygon becomes array)
-		if (Array.isArray(result))
+		//Return statement; handle array results (MultiPolygon becomes array in some maptalks versions)
+		if (Array.isArray(result)) {
+			if (typeof maptalks.MultiPolygon === "function")
+				return new maptalks.MultiPolygon(result.map(p => p.getCoordinates()));
 			return new maptalks.GeometryCollection(result);
+		}
 		return result;
 	};
 	
@@ -203,8 +228,10 @@
 		if (!format)
 			return undefined;
 		
+		if (format.feature) format = format.feature;
+		
 		//Check if type is 'turf_geometry'
-		if (typeof format.toJSON !== "function" && format.type) { //GeoJSON cannot have live functions bound to it
+		if (typeof format.toJSON !== "function" && (format.type || format.coordinates || format.geometries)) { //GeoJSON cannot have live functions bound to it
 			return "turf_geometry";
 		} else {
 			return "maptalks_geometry";

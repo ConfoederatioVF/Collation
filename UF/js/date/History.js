@@ -151,23 +151,26 @@ global.History = class extends ve.Class {
 	 * @param {number[]|Object[]} arg0_date_range
 	 * @param {function} arg1_function - (arg0_local_keyframe:{@link HistoryKeyframe})
 	 */
-	callFunctionInDateRange (arg0_date_range, arg1_function) {
+	async callFunctionInDateRange (arg0_date_range, arg1_function) {
 		//Convert from parameters
 		let date_range = arg0_date_range;
 		let special_function = arg1_function;
 		
 		//Declare local instance variables
-		date_range =  [Date.getTimestamp(date_range[0]), Date.getTimestamp(date_range[1])];
+		let start_ts = Math.min(Date.getTimestamp(date_range[0]), Date.getTimestamp(date_range[1]));
+		let end_ts = Math.max(Date.getTimestamp(date_range[0]), Date.getTimestamp(date_range[1]));
 		let keyframes = this._getUniqueKeyframes({ indexes: [0], return_timestamps: true });
 		
+		keyframes.sort((a, b) => a - b);
 		//Keyframes are look-forwards; create the keyframe at start_date; then for .value[0] changes until end_date
-		if (!keyframes.includes(date_range[0]))
-			keyframes.unshift(date_range[0]);
+		if (!keyframes.includes(start_ts))
+			keyframes.unshift(start_ts);
+		keyframes.sort((a, b) => a - b);
 		
 		//Iterate over all polygon_keyframes and apply the changes at the given date
 		for (let i = 0; i < keyframes.length; i++)
-			if (keyframes[i] >= date_range[0] && keyframes[i] <= date_range[1])
-				special_function(keyframes[i]);
+			if (keyframes[i] >= start_ts && keyframes[i] <= end_ts)
+				await special_function(keyframes[i]);
 	}
 	
 	/**
@@ -200,6 +203,22 @@ global.History = class extends ve.Class {
 				
 				//Skip only if undefined; null is treated as a meaningful value change
 				if (current_val === undefined) continue;
+				
+				//Geometries at index 0 must be treated atomically
+				if (x === 0) {
+					let is_same_geom = (current_val === prev_val);
+					if (!is_same_geom && current_val && prev_val)
+						is_same_geom = Boolean.isDeepEqual(current_val, prev_val);
+					
+					if (is_same_geom) {
+						local_keyframe.value[x] = undefined;
+					} else {
+						local_keyframe.value[x] = current_val;
+						running_state[x] = current_val;
+						has_meaningful_change = true;
+					}
+					continue;
+				}
 				
 				if (typeof current_val === "object" && current_val !== null) {
 					// Handle object merging and variable delta checks
