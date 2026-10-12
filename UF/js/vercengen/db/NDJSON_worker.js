@@ -19,11 +19,19 @@ let queue = [];
 
 //Internal helper functions
 {
-	NDJSON.getTempDirectory = function (arg0_file_path) {
+	/**
+	 * Returns the cache partition directory in saves/.cache.
+	 *
+	 * @param {string} [arg0_file_path]
+	 *
+	 * @returns {string}
+	 */
+	NDJSON.getCacheDirectory = function (arg0_file_path) {
 		let file_path = (arg0_file_path) ? arg0_file_path : "";
 		let base_name = (file_path) ? path.basename(file_path, path.extname(file_path)) : "current";
-		return path.resolve(process.cwd(), "saves/.temp", base_name);
+		return path.resolve(process.cwd(), "saves/.cache", base_name);
 	};
+	NDJSON.getTempDirectory = NDJSON.getCacheDirectory;
 	
 	Object.getValue = function (arg0_object, arg1_variable_string) {
 		//Convert from parameters
@@ -268,11 +276,20 @@ async function handleTask (arg0_task) {
 	} = task;
 	
 	let base_path = file_path ? file_path.replace(/\.ndjson$/, "") : "";
-	let folder_path = NDJSON.getTempDirectory(base_path);
+	let folder_path = (NDJSON.getCacheDirectory) ?
+		NDJSON.getCacheDirectory(base_path) :
+		NDJSON.getTempDirectory(base_path);
 	let page_file = path.join(folder_path, `partition_${workerData.worker_id}.ndjson`);
 	if (!fs.existsSync(page_file)) {
 		let legacy_file = path.join(folder_path, `${workerData.worker_id}.ndjson`);
-		if (fs.existsSync(legacy_file)) page_file = legacy_file;
+		if (fs.existsSync(legacy_file)) {
+			page_file = legacy_file;
+		} else {
+			let legacy_temp_dir = path.resolve(process.cwd(), "saves/.temp", path.basename(base_path, path.extname(base_path)));
+			let legacy_temp_file = path.join(legacy_temp_dir, `partition_${workerData.worker_id}.ndjson`);
+			if (fs.existsSync(legacy_temp_file))
+				page_file = legacy_temp_file;
+		}
 	}
 	
 	//Ensure partition loaded in memory
@@ -351,10 +368,22 @@ async function handleTask (arg0_task) {
 				}
 			}
 			
-			let state_val = resolveHistory(cached.entity, timestamp);
-			if (state_val && state_val[0] === null) continue;
+			let has_history = (cached.timestamps && cached.timestamps.length > 0);
+			let resolved_value;
 			
-			let resolved_value = (state_val && state_val[0] !== undefined) ? state_val : cached.value;
+			if (has_history) {
+				if (!cached.timestamps.some(ts => timestamp >= ts))
+					continue;
+				
+				let state_val = resolveHistory(cached.entity, timestamp);
+				if (!state_val || state_val[0] === null || state_val[0] === undefined)
+					continue;
+				
+				resolved_value = state_val;
+			} else {
+				resolved_value = cached.value;
+			}
+			
 			if (resolved_value && resolved_value[0] !== null && resolved_value[0] !== undefined) {
 				list.push({
 					class_name: cached.class_name,

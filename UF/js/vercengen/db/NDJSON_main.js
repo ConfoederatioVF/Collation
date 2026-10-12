@@ -30,17 +30,18 @@ if (!global.NDJSON)
 	};
 	
 	/**
-	 * Returns the unified temporary partition directory in saves/.temp.
+	 * Returns the unified cache partition directory in saves/.cache.
 	 *
 	 * @param {string} [arg0_file_path]
 	 *
 	 * @returns {string}
 	 */
-	NDJSON.getTempDirectory = function (arg0_file_path) {
+	NDJSON.getCacheDirectory = function (arg0_file_path) {
 		let file_path = (arg0_file_path) ? arg0_file_path : NDJSON.getFilePath();
 		let base_name = (file_path) ? path.basename(file_path, path.extname(file_path)) : "current";
-		return path.resolve(process.cwd(), "saves/.temp", base_name);
+		return path.resolve(process.cwd(), "saves/.cache", base_name);
 	};
+	NDJSON.getTempDirectory = NDJSON.getCacheDirectory;
 	
 	/**
 	 * Internal helper to route multi-ID tasks across worker partitions and format ordered responses.
@@ -451,7 +452,54 @@ if (!global.NDJSON)
 			options.dynamic_max_workers : Math.max(1, os.cpus().length - 1);
 		
 		//Declare local instance variables
-		let folder_path = NDJSON.getTempDirectory(file_path);
+		let folder_path = NDJSON.getCacheDirectory(file_path);
+		let legacy_temp = path.resolve(process.cwd(), "saves/.temp", path.basename(file_path, path.extname(file_path)));
+		
+		if (!fs.existsSync(folder_path) && fs.existsSync(legacy_temp)) {
+			try {
+				fs.mkdirSync(path.dirname(folder_path), { recursive: true });
+				fs.renameSync(legacy_temp, folder_path);
+			} catch (e) {
+				console.warn("[NDJSON] Could not migrate legacy temp to cache:", e);
+			}
+		}
+		
+		//Check if cached partitions are valid
+		let is_cache_valid = false;
+		let cached_partitions = [];
+		
+		if (fs.existsSync(folder_path) && !options.repartition && !options.force_reload) {
+			cached_partitions = fs.readdirSync(folder_path).filter((f) => f.startsWith("partition_") && f.endsWith(".ndjson"));
+			let metadata_path = path.join(folder_path, "metadata.json");
+			let p0_path = path.join(folder_path, "partition_0.ndjson");
+			
+			if (cached_partitions.length > 0 && fs.existsSync(metadata_path) && fs.existsSync(p0_path)) {
+				try {
+					let file_stat = fs.existsSync(file_path) ? fs.statSync(file_path) : null;
+					let meta_stat = fs.statSync(metadata_path);
+					let p0_stat = fs.statSync(p0_path);
+					
+					if (p0_stat.size > 0 && (!file_stat || meta_stat.mtimeMs >= file_stat.mtimeMs - 2000))
+						is_cache_valid = true;
+				} catch (e) {}
+			}
+		}
+		
+		if (is_cache_valid) {
+			console.log(`[NDJSON] Reusing cached partitions in ${folder_path} (${cached_partitions.length} partitions)`);
+			let pool = NDJSON.getWorkerPool(cached_partitions.length);
+			if (!global.ve) global.ve = {};
+			ve.naissance_file_path = file_path;
+			ve.ndjson_file_path = path.join(folder_path, "partition_0.ndjson");
+			
+			await NDJSON.task("all", {
+				type: "init_partition",
+				file_path: file_path
+			});
+			
+			return ve.ndjson_file_path;
+		}
+		
 		let pool = NDJSON.getWorkerPool(max_workers);
 		let write_streams = {};
 		
@@ -459,7 +507,7 @@ if (!global.NDJSON)
 		ve.naissance_file_path = file_path;
 		ve.ndjson_file_path = path.join(folder_path, "partition_0.ndjson");
 		
-		//Ensure folder path inside saves/.temp
+		//Ensure folder path inside saves/.cache
 		if (!fs.existsSync(folder_path))
 			fs.mkdirSync(folder_path, { recursive: true });
 		
@@ -741,7 +789,7 @@ if (!global.NDJSON)
 		
 		//Declare local instance variables
 		let file_path = path.resolve(global.ve?.naissance_file_path || global.ve?.ndjson_file_path?.replace(/\.ndjson$/, ""));
-		let folder_path = NDJSON.getTempDirectory(file_path);
+		let folder_path = NDJSON.getCacheDirectory(file_path);
 		let pool = NDJSON.getWorkerPool();
 		
 		if (!fs.existsSync(folder_path)) return target_path;

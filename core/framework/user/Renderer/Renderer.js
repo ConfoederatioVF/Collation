@@ -7,6 +7,35 @@ naissance.Renderer = class extends ve.Class {
 	}
 	
 	/**
+	 * Completely removes all map elements (geometry, selection, labels) and clears entity state.
+	 * - Method of: {@link naissance.Renderer}
+	 *
+	 * @param {Object} arg0_instance
+	 */
+	derenderEntity (arg0_instance) {
+		//Convert from parameters
+		let inst = arg0_instance;
+		
+		if (!inst) return;
+		
+		if (inst.geometry) {
+			try { inst.geometry.remove(); } catch (e) {}
+			inst.geometry = undefined;
+		}
+		if (inst.selected_geometry) {
+			try { inst.selected_geometry.remove(); } catch (e) {}
+			inst.selected_geometry = undefined;
+		}
+		if (inst.label_geometries && Array.isArray(inst.label_geometries)) {
+			for (let i = inst.label_geometries.length - 1; i >= 0; i--) {
+				try { inst.label_geometries[i].remove(); } catch (e) {}
+			}
+			inst.label_geometries = [];
+		}
+		inst.value = undefined;
+	}
+	
+	/**
 	 * Handles Render events, particularly for zoom-related visibility.
 	 * - Method of: {@link naissance.Renderer}
 	 */
@@ -118,6 +147,8 @@ naissance.Renderer = class extends ve.Class {
 		
 		let update_callback = () => {
 			this.raf_handle = null;
+			this._update_id = (this._update_id || 0) + 1;
+			let current_update_id = this._update_id;
 			this.active_symbol_functions = (naissance.Mapmode?.getActiveSymbolFunctions) ?
 				naissance.Mapmode.getActiveSymbolFunctions() : [];
 			
@@ -131,11 +162,14 @@ naissance.Renderer = class extends ve.Class {
 				return;
 			}
 			
-			//If in-memory instances exist alongside DB shards, draw instances that have populated geometry
+			//If user has locally edited/created in-memory instances alongside DB shards, draw them
 			if (rendering_order.length > 0) {
-				for (let i = 0; i < rendering_order.length; i++)
-					if (rendering_order[i].draw && (rendering_order[i].geometry || (rendering_order[i].value && rendering_order[i].value[0])))
-						rendering_order[i].draw();
+				for (let i = 0; i < rendering_order.length; i++) {
+					let inst = rendering_order[i];
+					let has_local_history = (inst.history?.keyframes && Object.keys(inst.history.keyframes).length > 0);
+					if (has_local_history && inst.draw)
+						inst.draw();
+				}
 			}
 			
 			//2. Viewport-culled streaming differencing when DB has loaded shards
@@ -156,6 +190,10 @@ naissance.Renderer = class extends ve.Class {
 							(main_obj?.date ? Date.getTimestamp(main_obj.date) : 0);
 						
 						let visible_diffs = await db.diffBBox({ bbox: bbox, timestamp: timestamp, zoom: zoom });
+						
+						//Guard clause against stale out-of-order async responses during rapid scrubbing
+						if (this._update_id !== current_update_id) return;
+						
 						let visible_ids = new Set();
 						if (!this.rendered_entities) this.rendered_entities = new Map();
 						
@@ -164,8 +202,11 @@ naissance.Renderer = class extends ve.Class {
 							let id = diff.id || diff.key;
 							
 							if (!diff.value || !Array.isArray(diff.value) || diff.value.length === 0 || !diff.value[0]) {
-								let inst = this.rendered_entities.get(id);
-								if (inst?.geometry) inst.geometry.remove();
+								let inst = this.rendered_entities.get(id) || naissance.Geometry?.instances?.[id];
+								if (inst) {
+									this.derenderEntity(inst);
+									this.rendered_entities.delete(id);
+								}
 								continue;
 							}
 							
@@ -189,7 +230,7 @@ naissance.Renderer = class extends ve.Class {
 						
 						this.rendered_entities.forEach((inst, id) => {
 							if (!visible_ids.has(id)) {
-								if (inst.geometry) inst.geometry.remove();
+								this.derenderEntity(inst);
 								this.rendered_entities.delete(id);
 							}
 						});

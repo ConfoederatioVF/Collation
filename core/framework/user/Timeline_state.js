@@ -78,11 +78,25 @@
 					UI_DateMenu.setDate(json[i].set_date);
 				} else if (json[i].refresh_date === true) {
 					let is_playing = UI_DateMenu.isPlaying();
+					let main_obj = (typeof main !== "undefined") ? main : (globalThis.main || global.main);
 					
-					Object.iterate(naissance.Geometry.instances, (local_key, local_value) =>{
-						local_value.draw();
-						local_value.update();
-					});
+					if (global.ve?.ndjson_file_path) {
+						if (main_obj?.renderer?.update)
+							main_obj.renderer.update();
+						
+						Object.iterate(naissance.Geometry.instances, (local_key, local_value) => {
+							if (local_value.history?._hasTimestampAfter && local_value.history._hasTimestampAfter(main_obj?.timestamp)) {
+								local_value.draw();
+								local_value.update();
+							}
+						});
+					} else {
+						Object.iterate(naissance.Geometry.instances, (local_key, local_value) => {
+							local_value.draw();
+							local_value.update();
+						});
+					}
+					
 					naissance.GeometryMedia.syncToDate();
 					naissance.Mapmode.draw();
 					if (!is_playing) UI_Leftbar.refresh();
@@ -119,11 +133,11 @@
 			let shard_folder = await db.load(file_path);
 			
 			//Load map settings from metadata.json if present
-			let folder_path = (global.db?.getTempDirectory) ?
-				db.getTempDirectory(file_path) :
-				((global.NDJSON?.getTempDirectory) ?
-					NDJSON.getTempDirectory(file_path) :
-					path.resolve(process.cwd(), "saves/.temp", path.basename(file_path, path.extname(file_path))));
+			let folder_path = (global.db?.getCacheDirectory) ?
+				db.getCacheDirectory(file_path) :
+				((global.NDJSON?.getCacheDirectory) ?
+					NDJSON.getCacheDirectory(file_path) :
+					path.resolve(process.cwd(), "saves/.cache", path.basename(file_path, path.extname(file_path))));
 			let metadata_file = path.join(folder_path, "metadata.json");
 			
 			if (!global.ve) global.ve = {};

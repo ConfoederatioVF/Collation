@@ -7,6 +7,7 @@ if (!global.db)
 	global.db = {};
 
 let is_renderer = Boolean(typeof window !== "undefined" || (typeof process !== "undefined" && process?.type === "renderer"));
+let path = global.path || ((typeof require === "function") ? require("node:path") : undefined);
 
 //Initialise functions
 {
@@ -125,20 +126,21 @@ let is_renderer = Boolean(typeof window !== "undefined" || (typeof process !== "
 	};
 	
 	/**
-	 * Returns the temporary shard directory for a savefile.
+	 * Returns the cache partition directory in saves/.cache.
 	 *
 	 * @param {string} [arg0_file_path]
 	 *
 	 * @returns {string}
 	 */
-	db.getTempDirectory = function (arg0_file_path) {
+	db.getCacheDirectory = function (arg0_file_path) {
 		//Convert from parameters
 		let file_path = (arg0_file_path) ? arg0_file_path : (global.ve?.naissance_file_path || global.ve?.ndjson_file_path);
 		let base_name = (file_path) ? path.basename(file_path, path.extname(file_path)) : "current";
 		
 		//Return statement
-		return path.resolve(process.cwd(), "saves/.temp", base_name);
+		return path.resolve(process.cwd(), "saves/.cache", base_name);
 	};
+	db.getTempDirectory = db.getCacheDirectory;
 	
 	/**
 	 * Returns the Object value of a single ID.
@@ -372,7 +374,8 @@ if (!global.NDJSON && is_renderer) {
 	global.NDJSON = new Proxy({ _is_renderer_proxy: true }, {
 		get (target, prop) {
 			if (prop === "_is_renderer_proxy") return true;
-			if (prop === "getTempDirectory") return db.getTempDirectory;
+			if (prop === "getCacheDirectory") return db.getCacheDirectory;
+			if (prop === "getTempDirectory") return db.getCacheDirectory;
 			return async (...args) => await db.send(prop, ...args);
 		}
 	});
