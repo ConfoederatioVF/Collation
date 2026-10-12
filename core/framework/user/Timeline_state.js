@@ -125,6 +125,7 @@
 	DALS.load = async function (arg0_file_path) {
 		//Convert from parameters
 		let file_path = path.resolve(arg0_file_path);
+		let main_obj = (typeof main !== "undefined") ? main : (globalThis.main || global.main);
 		
 		console.log(`[DALS] Loading savefile via multithreaded DB: ${file_path}`);
 		DALS.clearMap();
@@ -144,11 +145,12 @@
 			global.ve.naissance_file_path = file_path;
 			global.ve.ndjson_file_path = shard_folder || path.join(folder_path, "partition_0.ndjson");
 			
+			let metadata_json = {};
 			if (fs.existsSync(metadata_file)) {
 				try {
 					let metadata_raw = fs.readFileSync(metadata_file, "utf8");
 					if (metadata_raw.trim().length > 0) {
-						let metadata_json = JSON.parse(metadata_raw);
+						metadata_json = JSON.parse(metadata_raw);
 						if (global.UI_MapSettings)
 							UI_MapSettings.fromJSON(metadata_json);
 					}
@@ -160,7 +162,6 @@
 			//Populate UI Leftbar Hierarchy and trigger renderer
 			let hierarchy_fn = global.db?.getHierarchyValues || global.NDJSON?.getHierarchyValues;
 			if (hierarchy_fn) {
-				let main_obj = (typeof main !== "undefined") ? main : (globalThis.main || global.main);
 				let timestamp = (main_obj?.timestamp !== undefined) ? main_obj.timestamp :
 					(main_obj?.date ? Date.getTimestamp(main_obj.date) : 0);
 				let hierarchy_values = await hierarchy_fn(timestamp);
@@ -199,13 +200,42 @@
 				}
 			}
 			
+			//Load global timestamps for Timeline Chronology
+			let global_timestamps = metadata_json?.timestamps;
+			
+			if (!global_timestamps || !Array.isArray(global_timestamps) || global_timestamps.length === 0) {
+				let timestamps_fn = global.db?.getTimestamps || global.NDJSON?.getTimestamps;
+				if (timestamps_fn) {
+					try {
+						global_timestamps = await timestamps_fn();
+						if (Array.isArray(global_timestamps) && global_timestamps.length > 0 && fs.existsSync(folder_path)) {
+							try {
+								metadata_json.timestamps = global_timestamps;
+								fs.writeFileSync(metadata_file, JSON.stringify(metadata_json, null, 2), "utf8");
+							} catch (err) {
+								console.error("[DALS] Failed to cache timestamps to metadata.json:", err);
+							}
+						}
+					} catch (e) {
+						console.error("[DALS] Error loading global timestamps:", e);
+					}
+				}
+			}
+			
+			if (main_obj?.renderer && Array.isArray(global_timestamps))
+				main_obj.renderer.timestamps = global_timestamps;
+			
 			//Trigger hierarchy refresh and renderer update
 			setTimeout(() => {
-				let main_obj = (typeof main !== "undefined") ? main : (globalThis.main || global.main);
 				try {
 					if (global.UI_Leftbar?.refresh) UI_Leftbar.refresh();
 				} catch (e) {
 					console.error("[DALS] UI_Leftbar.refresh error:", e);
+				}
+				try {
+					if (global.UI_LeftbarTimeline?.refresh) UI_LeftbarTimeline.refresh();
+				} catch (e) {
+					console.error("[DALS] UI_LeftbarTimeline.refresh error:", e);
 				}
 				try {
 					if (main_obj?.renderer?.update) main_obj.renderer.update();
@@ -215,7 +245,6 @@
 			}, 100);
 			
 			//Reload cursor
-			let main_obj = (typeof main !== "undefined") ? main : (globalThis.main || global.main);
 			if (main_obj?.layers?.cursor_layer && main_obj?.brush?.cursor)
 				main_obj.layers.cursor_layer.addGeometry(main_obj.brush.cursor);
 				

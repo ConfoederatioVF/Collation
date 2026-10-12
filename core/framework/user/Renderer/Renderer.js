@@ -44,9 +44,6 @@ naissance.Renderer = class extends ve.Class {
 			map_component.on("zoomend", () => {
 				this.update();
 			});
-			map_component.on("moveend", () => {
-				this.update();
-			});
 		}
 	}
 	
@@ -120,6 +117,9 @@ naissance.Renderer = class extends ve.Class {
 		//Declare local instance variables
 		let all_timestamps = [];
 		
+		if (this.timestamps && Array.isArray(this.timestamps))
+			all_timestamps = [...this.timestamps];
+		
 		//Iterate over all naissance.Feature.instances with no .parent
 		Object.iterate(naissance.Feature.instances, (local_key, local_feature) => {
 			if (!local_feature.parent) 
@@ -130,7 +130,7 @@ naissance.Renderer = class extends ve.Class {
 		Object.iterate(naissance.Geometry.instances, (local_key, local_geometry) => {
 			if (!local_geometry.parent) 
 				all_timestamps = Array.strictUnique(all_timestamps, local_geometry.history.getTimestamps());
-		})
+		});
 		
 		//Return statement
 		return all_timestamps.sort((a, b) => a - b);
@@ -172,24 +172,15 @@ naissance.Renderer = class extends ve.Class {
 				}
 			}
 			
-			//2. Viewport-culled streaming differencing when DB has loaded shards
+			//2. Streaming differencing when DB has loaded shards
 			if (global.ve?.ndjson_file_path && global.db?.diffBBox) {
 				(async () => {
 					try {
-						let bbox;
-						let current_map = (typeof map !== "undefined") ? map : (globalThis.map || global.map);
-						let zoom = (current_map?.getZoom) ? current_map.getZoom() : 0;
-						
-						if (current_map?.getExtent && zoom > 2) {
-							let extent = current_map.getExtent();
-							if (extent) bbox = [extent.xmin, extent.ymin, extent.xmax, extent.ymax];
-						}
-						
 						let main_obj = (typeof main !== "undefined") ? main : (globalThis.main || global.main);
 						let timestamp = (main_obj?.timestamp !== undefined) ? main_obj.timestamp :
 							(main_obj?.date ? Date.getTimestamp(main_obj.date) : 0);
 						
-						let visible_diffs = await db.diffBBox({ bbox: bbox, timestamp: timestamp, zoom: zoom });
+						let visible_diffs = await db.diffBBox({ timestamp: timestamp });
 						
 						//Guard clause against stale out-of-order async responses during rapid scrubbing
 						if (this._update_id !== current_update_id) return;

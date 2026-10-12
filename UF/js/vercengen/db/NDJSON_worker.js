@@ -344,12 +344,10 @@ async function handleTask (arg0_task) {
 	
 	if (type === "diff_bbox") {
 		let list = [];
-		let q_min_x = -180;
-		let q_min_y = -90;
-		let q_max_x = 180;
-		let q_max_y = 90;
+		let has_bbox = (Array.isArray(bbox) && bbox.length >= 4);
+		let q_min_x, q_min_y, q_max_x, q_max_y;
 		
-		if (Array.isArray(bbox) && bbox.length >= 4) {
+		if (has_bbox) {
 			q_min_x = bbox[0];
 			q_min_y = bbox[1];
 			q_max_x = bbox[2];
@@ -357,7 +355,7 @@ async function handleTask (arg0_task) {
 		}
 		
 		for (let [key, cached] of partition_cache) {
-			if (cached.bbox) {
+			if (has_bbox && cached.bbox) {
 				let e_min_x = cached.bbox[0];
 				let e_min_y = cached.bbox[1];
 				let e_max_x = cached.bbox[2];
@@ -464,6 +462,18 @@ async function handleTask (arg0_task) {
 		}
 		
 		return parentPort.postMessage({ results: found, task_id });
+	}
+	
+	if (type === "get_timestamps") {
+		let ts_set = new Set();
+		for (let [key, cached] of partition_cache) {
+			if (cached.timestamps && Array.isArray(cached.timestamps)) {
+				for (let i = 0; i < cached.timestamps.length; i++) {
+					ts_set.add(cached.timestamps[i]);
+				}
+			}
+		}
+		return parentPort.postMessage({ results: Array.from(ts_set), task_id });
 	}
 	
 	if (type === "get_value") {

@@ -269,6 +269,33 @@ if (!global.NDJSON)
 	};
 	
 	/**
+	 * Returns all unique global timestamps from all partitions.
+	 *
+	 * @returns {Promise<number[]>}
+	 */
+	NDJSON.getTimestamps = async function () {
+		let file_path = NDJSON.getFilePath();
+		if (!file_path) return [];
+		
+		let results = await NDJSON.task("all", {
+			file_path: file_path,
+			type: "get_timestamps"
+		});
+		
+		let merged = new Set();
+		for (let i = 0; i < results.length; i++) {
+			let arr = results[i];
+			if (Array.isArray(arr)) {
+				for (let x = 0; x < arr.length; x++)
+					merged.add(Number(arr[x]));
+			}
+		}
+		
+		//Return statement
+		return Array.from(merged).sort((a, b) => a - b);
+	};
+	
+	/**
 	 * Returns the Object values of multiple IDs in 1-pass.
 	 *
 	 * @param {string[]} arg0_ids

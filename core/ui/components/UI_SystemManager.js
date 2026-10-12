@@ -1,5 +1,6 @@
 /**
  * System Manager component for real-time DB and Process worker diagnostics and concurrency control.
+ * Restyled to adhere natively to Vercengen's core design system and typography.
  *
  * @type {UI_SystemManager}
  */
@@ -10,35 +11,39 @@ global.UI_SystemManager = class extends ve.Component {
     super(options);
 
     //Declare local instance variables
+    let os_module = (typeof os !== "undefined") ? os : ((typeof require === "function") ? require("node:os") : null);
+    let cpu_cores = os_module?.cpus ? os_module.cpus().length : 4;
+
     this.auto_refresh = true;
     this.db_diagnostics = [];
     this.db_target_threads = (global.ve?.ndjson_worker_pool?.length) ?
-      global.ve.ndjson_worker_pool.length : Math.max(1, (os?.cpus?.()?.length || 4) - 1);
+      global.ve.ndjson_worker_pool.length : Math.max(1, cpu_cores - 1);
     this.is_updating_db = false;
     this.is_updating_proc = false;
     this.options = options;
     this.proc_diagnostics = [];
     this.proc_target_threads = (global.proc?.worker_pool?.length) ?
-      global.proc.worker_pool.length : Math.max(1, Math.min(4, Math.ceil(((os?.cpus?.()?.length || 4) - 1) / 4)));
+      global.proc.worker_pool.length : Math.max(1, Math.min(4, Math.ceil((cpu_cores - 1) / 4)));
 
     //Build container element
     this.element = document.createElement("div");
     this.element.setAttribute("component", "ui-system-manager");
     this.element.style.cssText = `
+      box-sizing: border-box;
       display: flex;
       flex-direction: column;
+      gap: calc(var(--padding, 0.5rem)*1.5);
       height: 100%;
-      width: 100%;
       overflow-y: auto;
-      background: linear-gradient(135deg, #0b0f19 0%, #111827 50%, #0f172a 100%);
-      color: #f1f5f9;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      padding: 1.5rem;
-      box-sizing: border-box;
-      gap: 1.5rem;
+      padding: calc(var(--padding, 0.5rem)*1.5);
+      width: 100%;
+      background: transparent;
+      color: var(--body-colour, #ffffff);
+      font-family: var(--body-font-family, "Karla", sans-serif);
+      font-size: var(--body-font-size, 0.85rem);
     `;
 
-    //Initial draw & start live polling
+    //Initial draw & live polling
     this.render();
     this.refreshDiagnostics();
 
@@ -49,6 +54,7 @@ global.UI_SystemManager = class extends ve.Component {
     }, 1500);
   }
 
+
   /**
    * Cleans up running intervals when the component is removed.
    */
@@ -58,6 +64,7 @@ global.UI_SystemManager = class extends ve.Component {
       this.poll_interval = null;
     }
   }
+
 
   /**
    * Fetches latest metrics from DB and Process worker pools and updates UI.
@@ -78,6 +85,7 @@ global.UI_SystemManager = class extends ve.Component {
     }
   }
 
+
   /**
    * Formats a byte number into a legible string with European decimals.
    *
@@ -92,6 +100,7 @@ global.UI_SystemManager = class extends ve.Component {
     return `${(bytes / (1024 * 1024 * 1024)).toFixed(2).replace(".", ",")} GB`;
   }
 
+
   /**
    * Formats an integer with standard thousands separator.
    *
@@ -103,189 +112,211 @@ global.UI_SystemManager = class extends ve.Component {
     return num.toLocaleString("en-GB");
   }
 
+
   /**
-   * Builds the initial DOM layout skeleton.
+   * Builds the initial DOM layout skeleton conforming strictly to Vercengen UI conventions.
    */
   render () {
-    let os_module = (typeof os !== "undefined") ? os : require("node:os");
-    let cpu_count = os_module.cpus ? os_module.cpus().length : 4;
-    let total_ram = os_module.totalmem ? this.formatBytes(os_module.totalmem()) : "N/A";
-    let free_ram = os_module.freemem ? this.formatBytes(os_module.freemem()) : "N/A";
+    let os_module = (typeof os !== "undefined") ? os : ((typeof require === "function") ? require("node:os") : null);
+    let cpu_count = os_module?.cpus ? os_module.cpus().length : 4;
+    let total_ram = os_module?.totalmem ? this.formatBytes(os_module.totalmem()) : "N/A";
+    let free_ram = os_module?.freemem ? this.formatBytes(os_module.freemem()) : "N/A";
 
     this.element.innerHTML = `
       <style>
-        .sm-card {
-          background: rgba(30, 41, 59, 0.6);
+        .sm-panel {
+          background: rgba(255, 255, 255, 0.03);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
           border: 1px solid rgba(255, 255, 255, 0.08);
-          border-radius: 12px;
-          backdrop-filter: blur(16px);
-          padding: 1.25rem;
-          box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.3);
-          transition: transform 0.2s ease, border-color 0.2s ease;
-        }
-        .sm-card:hover {
-          border-color: rgba(99, 102, 241, 0.3);
+          border-radius: calc(var(--padding, 0.5rem)*0.5);
+          padding: calc(var(--padding, 0.5rem)*1.25);
         }
         .sm-btn {
-          background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
-          border: none;
-          color: #ffffff;
-          padding: 0.5rem 1rem;
-          border-radius: 8px;
-          font-weight: 600;
+          background-color: rgba(255, 255, 255, 0.06);
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          border-radius: calc(var(--padding, 0.5rem)*0.5);
+          color: var(--body-colour, #ffffff);
+          font-family: var(--body-font-family, "Karla", sans-serif);
+          font-size: var(--body-font-size, 0.85rem);
+          font-weight: 400;
+          padding: calc(var(--padding, 0.5rem)*0.4) calc(var(--padding, 0.5rem)*1.4);
           cursor: pointer;
-          font-size: 0.875rem;
-          transition: opacity 0.2s ease, transform 0.1s ease;
+          transition: all 0.25s ease;
           display: inline-flex;
           align-items: center;
-          gap: 0.5rem;
+          gap: 0.4rem;
         }
         .sm-btn:hover {
-          opacity: 0.9;
-          transform: translateY(-1px);
+          background-color: var(--accent-primary-colour, rgba(200, 40, 40));
+          border-color: var(--accent-secondary-colour, rgba(240, 60, 60));
+          cursor: pointer;
         }
         .sm-btn:active {
-          transform: translateY(0);
+          opacity: 0.85;
         }
         .sm-btn:disabled {
-          opacity: 0.5;
+          opacity: 0.4;
           cursor: not-allowed;
+          background-color: rgba(255, 255, 255, 0.03) !important;
         }
         .sm-badge {
           display: inline-flex;
           align-items: center;
-          gap: 0.35rem;
-          padding: 0.25rem 0.65rem;
-          border-radius: 9999px;
-          font-size: 0.75rem;
-          font-weight: 600;
-          letter-spacing: 0.025em;
+          padding: 0.12rem 0.5rem;
+          border-radius: 2px;
+          font-size: 0.7rem;
+          font-weight: 400;
+          letter-spacing: 0.04em;
+          text-transform: uppercase;
         }
         .sm-badge-online {
-          background: rgba(16, 185, 129, 0.15);
-          color: #34d399;
-          border: 1px solid rgba(16, 185, 129, 0.3);
+          background: rgba(34, 197, 94, 0.08);
+          color: #4ade80;
+          border: 1px solid rgba(34, 197, 94, 0.3);
         }
         .sm-badge-proc {
-          background: rgba(59, 130, 246, 0.15);
-          color: #60a5fa;
-          border: 1px solid rgba(59, 130, 246, 0.3);
-        }
-        .sm-dot {
-          width: 7px;
-          height: 7px;
-          border-radius: 50%;
-          background: currentColor;
-          box-shadow: 0 0 8px currentColor;
+          background: rgba(56, 189, 248, 0.08);
+          color: #38bdf8;
+          border: 1px solid rgba(56, 189, 248, 0.3);
         }
         .sm-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-          gap: 1rem;
+          grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+          gap: 0.6rem;
+        }
+        .sm-tile {
+          background: rgba(255, 255, 255, 0.02);
+          backdrop-filter: blur(4px);
+          -webkit-backdrop-filter: blur(4px);
+          border: 1px solid rgba(255, 255, 255, 0.06);
+          border-radius: calc(var(--padding, 0.5rem)*0.5);
+          padding: 0.65rem 0.85rem;
+          transition: border-color 0.2s ease, background 0.2s ease;
+        }
+        .sm-tile:hover {
+          background: rgba(255, 255, 255, 0.04);
+          border-color: rgba(255, 255, 255, 0.16);
         }
         .sm-progress-track {
           width: 100%;
-          height: 8px;
+          height: 3px;
           background: rgba(255, 255, 255, 0.06);
-          border-radius: 9999px;
+          border-radius: 1.5px;
           overflow: hidden;
-          margin-top: 0.5rem;
+          margin-top: 0.45rem;
         }
         .sm-progress-fill {
           height: 100%;
-          border-radius: 9999px;
-          transition: width 0.4s ease, background 0.4s ease;
+          border-radius: 1.5px;
+          transition: width 0.3s ease, background 0.3s ease;
         }
         .sm-input {
-          background: rgba(15, 23, 42, 0.8);
-          border: 1px solid rgba(255, 255, 255, 0.15);
-          border-radius: 6px;
-          color: #f8fafc;
-          padding: 0.4rem 0.75rem;
-          font-size: 0.9rem;
+          background: transparent;
+          border: none;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+          color: var(--body-colour, #ffffff);
+          font-family: var(--body-font-family, "Karla", sans-serif);
+          font-size: var(--body-font-size, 0.85rem);
+          font-weight: 400;
+          padding: 0.15rem 0.3rem;
           outline: none;
-          width: 70px;
+          width: 44px;
+          text-align: center;
+          transition: border-bottom-color 0.2s ease;
         }
         .sm-input:focus {
-          border-color: #6366f1;
+          border-bottom-color: var(--accent-primary-colour, rgba(200, 40, 40));
         }
       </style>
 
       <!-- Header Section -->
-      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 0.75rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 0.75rem;">
         <div>
-          <h2 style="margin: 0; font-size: 1.5rem; font-weight: 700; background: linear-gradient(90deg, #f8fafc, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-            System & Multithreading Manager
+          <h2 style="margin: 0; font-family: var(--header-font-family, 'Karla', sans-serif); font-size: 1.2rem; font-weight: 500; color: var(--header-colour, #ffffff); letter-spacing: 0.01em;">
+            Current Resources
           </h2>
-          <div style="color: #94a3b8; font-size: 0.875rem; margin-top: 0.25rem;">
-            Real-time diagnostics and concurrent thread pool orchestration
-          </div>
         </div>
 
-        <div style="display: flex; align-items: center; gap: 1rem;">
-          <label style="display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: #cbd5e1; cursor: pointer;">
-            <input type="checkbox" id="sm-auto-refresh" checked style="cursor: pointer;" />
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <label style="display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; color: rgba(255, 255, 255, 0.7); font-weight: 300; cursor: pointer;">
+            <input type="checkbox" id="sm-auto-refresh" checked style="cursor: pointer; accent-color: var(--accent-primary-colour, #c82828);" />
             Auto-refresh (1,5s)
           </label>
-          <button class="sm-btn" id="sm-refresh-btn" style="background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15);">
-            🔄 Refresh Now
+          <button class="sm-btn" id="sm-refresh-btn">
+            Refresh
           </button>
         </div>
       </div>
 
-      <!-- System Overview Banner -->
-      <div class="sm-card" style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: space-around; background: rgba(15, 23, 42, 0.75);">
-        <div>
-          <div style="font-size: 0.75rem; text-transform: uppercase; color: #64748b; font-weight: 700; letter-spacing: 0.05em;">CPU Logical Cores</div>
-          <div style="font-size: 1.4rem; font-weight: 700; color: #38bdf8; margin-top: 0.2rem;">${cpu_count} Threads</div>
+      <!-- System Overview Metrics Bar -->
+      <div class="sm-panel" style="display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: space-around; align-items: center;">
+        <div style="text-align: center; min-width: 140px;">
+          <div style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: rgba(255, 255, 255, 0.5); font-weight: 400;">CPU Logical Cores</div>
+          <div style="font-family: var(--body-font-family, 'Karla', sans-serif); font-size: 1.3rem; font-weight: 400; color: var(--header-colour, #ffffff); margin-top: 0.25rem;">
+            ${cpu_count} Threads
+          </div>
         </div>
-        <div>
-          <div style="font-size: 0.75rem; text-transform: uppercase; color: #64748b; font-weight: 700; letter-spacing: 0.05em;">System RAM Available</div>
-          <div style="font-size: 1.4rem; font-weight: 700; color: #34d399; margin-top: 0.2rem;">${free_ram} <span style="font-size: 0.85rem; color: #64748b;">/ ${total_ram}</span></div>
+        <div style="width: 1px; height: 32px; background: rgba(255, 255, 255, 0.08);"></div>
+        <div style="text-align: center; min-width: 140px;">
+          <div style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: rgba(255, 255, 255, 0.5); font-weight: 400;">System RAM Available</div>
+          <div style="font-family: var(--body-font-family, 'Karla', sans-serif); font-size: 1.3rem; font-weight: 400; color: var(--header-colour, #ffffff); margin-top: 0.25rem;">
+            ${free_ram} <span style="font-size: 0.8rem; color: rgba(255, 255, 255, 0.5); font-weight: 300;">/ ${total_ram}</span>
+          </div>
         </div>
-        <div>
-          <div style="font-size: 0.75rem; text-transform: uppercase; color: #64748b; font-weight: 700; letter-spacing: 0.05em;">Total Cached Geometries</div>
-          <div id="sm-summary-entities" style="font-size: 1.4rem; font-weight: 700; color: #f59e0b; margin-top: 0.2rem;">0</div>
+        <div style="width: 1px; height: 32px; background: rgba(255, 255, 255, 0.08);"></div>
+        <div style="text-align: center; min-width: 140px;">
+          <div style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: rgba(255, 255, 255, 0.5); font-weight: 400;">Total Cached Geometries</div>
+          <div id="sm-summary-entities" style="font-family: var(--body-font-family, 'Karla', sans-serif); font-size: 1.3rem; font-weight: 400; color: var(--header-colour, #ffffff); margin-top: 0.25rem;">
+            0
+          </div>
         </div>
-        <div>
-          <div style="font-size: 0.75rem; text-transform: uppercase; color: #64748b; font-weight: 700; letter-spacing: 0.05em;">Worker Memory Footprint</div>
-          <div id="sm-summary-ram" style="font-size: 1.4rem; font-weight: 700; color: #c084fc; margin-top: 0.2rem;">0 MB</div>
+        <div style="width: 1px; height: 32px; background: rgba(255, 255, 255, 0.08);"></div>
+        <div style="text-align: center; min-width: 140px;">
+          <div style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: rgba(255, 255, 255, 0.5); font-weight: 400;">Worker Memory Footprint</div>
+          <div id="sm-summary-ram" style="font-family: var(--body-font-family, 'Karla', sans-serif); font-size: 1.3rem; font-weight: 400; color: var(--header-colour, #ffffff); margin-top: 0.25rem;">
+            0 MB
+          </div>
         </div>
       </div>
 
       <!-- Database (DB) Workers Section -->
-      <div class="sm-card">
-        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 0.75rem;">
-          <div style="display: flex; align-items: center; gap: 0.75rem;">
-            <div style="font-size: 1.15rem; font-weight: 700; color: #f8fafc;">Database (DB) Worker Pool</div>
-            <span class="sm-badge sm-badge-online"><span class="sm-dot"></span> <span id="sm-db-count">0</span> Active</span>
+      <div class="sm-panel">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 0.75rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 0.5rem;">
+          <div style="display: flex; align-items: center; gap: 0.6rem;">
+            <span style="font-family: var(--body-font-family, 'Karla', sans-serif); font-size: 0.95rem; font-weight: 500; color: var(--header-colour, #ffffff);">
+              Database (DB) Worker Pool
+            </span>
+            <span class="sm-badge sm-badge-online"><span id="sm-db-count">0</span> Active</span>
           </div>
-          <div style="display: flex; align-items: center; gap: 0.75rem;">
-            <span style="font-size: 0.85rem; color: #94a3b8;">Concurrent Threads:</span>
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span style="font-size: 0.8rem; color: rgba(255, 255, 255, 0.6); font-weight: 300;">Concurrent Threads:</span>
             <input type="number" id="sm-db-threads-input" class="sm-input" min="1" max="32" value="${this.db_target_threads}" />
-            <button class="sm-btn" id="sm-db-apply-btn">Apply DB Threads</button>
+            <button class="sm-btn" id="sm-db-apply-btn">Apply Concurrency</button>
           </div>
         </div>
         <div id="sm-db-grid" class="sm-grid">
-          <div style="color: #64748b; font-size: 0.9rem; padding: 1rem;">No DB workers active or file not yet loaded.</div>
+          <div style="color: rgba(255, 255, 255, 0.5); font-size: 0.85rem; padding: 0.5rem 0; font-weight: 300;">No active DB worker pool detected or savefile not yet loaded.</div>
         </div>
       </div>
 
-      <!-- Process (Proc) Workers Section -->
-      <div class="sm-card">
-        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 0.75rem;">
-          <div style="display: flex; align-items: center; gap: 0.75rem;">
-            <div style="font-size: 1.15rem; font-weight: 700; color: #f8fafc;">Process (Compute) Worker Pool</div>
-            <span class="sm-badge sm-badge-proc"><span class="sm-dot"></span> <span id="sm-proc-count">0</span> Active</span>
+      <!-- Process (Compute) Workers Section -->
+      <div class="sm-panel">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 0.75rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 0.5rem;">
+          <div style="display: flex; align-items: center; gap: 0.6rem;">
+            <span style="font-family: var(--body-font-family, 'Karla', sans-serif); font-size: 0.95rem; font-weight: 500; color: var(--header-colour, #ffffff);">
+              Process (Compute) Worker Pool
+            </span>
+            <span class="sm-badge sm-badge-proc"><span id="sm-proc-count">0</span> Active</span>
           </div>
-          <div style="display: flex; align-items: center; gap: 0.75rem;">
-            <span style="font-size: 0.85rem; color: #94a3b8;">Concurrent Threads:</span>
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span style="font-size: 0.8rem; color: rgba(255, 255, 255, 0.6); font-weight: 300;">Concurrent Threads:</span>
             <input type="number" id="sm-proc-threads-input" class="sm-input" min="1" max="32" value="${this.proc_target_threads}" />
-            <button class="sm-btn" id="sm-proc-apply-btn" style="background: linear-gradient(135deg, #2563eb 0%, #06b6d4 100%);">Apply Proc Threads</button>
+            <button class="sm-btn" id="sm-proc-apply-btn">Apply Concurrency</button>
           </div>
         </div>
         <div id="sm-proc-grid" class="sm-grid">
-          <div style="color: #64748b; font-size: 0.9rem; padding: 1rem;">Process workers idle or initializing.</div>
+          <div style="color: rgba(255, 255, 255, 0.5); font-size: 0.85rem; padding: 0.5rem 0; font-weight: 300;">Process worker pool idle or standby.</div>
         </div>
       </div>
     `;
@@ -322,7 +353,7 @@ global.UI_SystemManager = class extends ve.Component {
           } finally {
             this.is_updating_db = false;
             db_apply_btn.disabled = false;
-            db_apply_btn.textContent = "Apply DB Threads";
+            db_apply_btn.textContent = "Apply Concurrency";
           }
         }
       });
@@ -345,12 +376,13 @@ global.UI_SystemManager = class extends ve.Component {
           } finally {
             this.is_updating_proc = false;
             proc_apply_btn.disabled = false;
-            proc_apply_btn.textContent = "Apply Proc Threads";
+            proc_apply_btn.textContent = "Apply Concurrency";
           }
         }
       });
     }
   }
+
 
   /**
    * Updates dynamic DOM metrics without reconstructing entire markup.
@@ -366,7 +398,7 @@ global.UI_SystemManager = class extends ve.Component {
 
     if (db_grid) {
       if (this.db_diagnostics.length === 0) {
-        db_grid.innerHTML = `<div style="color: #64748b; font-size: 0.9rem; padding: 1rem;">No DB workers active or file not yet loaded.</div>`;
+        db_grid.innerHTML = `<div style="color: rgba(255, 255, 255, 0.5); font-size: 0.85rem; padding: 0.5rem 0;">No active DB worker pool detected or savefile not yet loaded.</div>`;
       } else {
         let db_html = "";
         for (let i = 0; i < this.db_diagnostics.length; i++) {
@@ -381,27 +413,29 @@ global.UI_SystemManager = class extends ve.Component {
           total_entities += entities;
           total_rss += rss;
 
-          let color = "#10b981";
-          if (percentage > 80) color = "#ef4444";
-          else if (percentage > 60) color = "#f59e0b";
+          let color = "#4ade80";
+          if (percentage > 85) color = "var(--accent-secondary-colour, #f03c3c)";
+          else if (percentage > 65) color = "#f59e0b";
 
           db_html += `
-            <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 8px; padding: 1rem;">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                <div style="font-weight: 600; color: #e2e8f0; font-size: 0.95rem;">Partition Shard #${wid}</div>
-                <span class="sm-badge sm-badge-online"><span class="sm-dot"></span> Online</span>
+            <div class="sm-tile">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+                <div style="font-family: var(--body-font-family, 'Karla', sans-serif); font-weight: 500; font-size: 0.85rem; color: var(--header-colour, #ffffff);">
+                  Partition Shard #${wid}
+                </div>
+                <span class="sm-badge sm-badge-online">Online</span>
               </div>
-              <div style="display: flex; justify-content: space-between; font-size: 0.825rem; color: #94a3b8; margin-top: 0.4rem;">
-                <span>Cached Entities:</span>
-                <span style="font-weight: 600; color: #f8fafc;">${this.formatNumber(entities)}</span>
+              <div style="display: flex; justify-content: space-between; font-size: 0.78rem; color: rgba(255, 255, 255, 0.6); margin-top: 0.25rem;">
+                <span style="font-weight: 300;">Cached Entities:</span>
+                <span style="font-family: var(--body-font-family, 'Karla', sans-serif); font-weight: 400; color: var(--body-colour, #ffffff);">${this.formatNumber(entities)}</span>
               </div>
-              <div style="display: flex; justify-content: space-between; font-size: 0.825rem; color: #94a3b8; margin-top: 0.25rem;">
-                <span>RSS Memory:</span>
-                <span style="font-weight: 600; color: #38bdf8;">${this.formatBytes(rss)}</span>
+              <div style="display: flex; justify-content: space-between; font-size: 0.78rem; color: rgba(255, 255, 255, 0.6); margin-top: 0.2rem;">
+                <span style="font-weight: 300;">RSS Memory:</span>
+                <span style="font-family: var(--body-font-family, 'Karla', sans-serif); font-weight: 400; color: var(--body-colour, #ffffff);">${this.formatBytes(rss)}</span>
               </div>
-              <div style="display: flex; justify-content: space-between; font-size: 0.825rem; color: #94a3b8; margin-top: 0.25rem;">
-                <span>Heap Allocated:</span>
-                <span style="color: #cbd5e1;">${this.formatBytes(heap_used)} / ${this.formatBytes(heap_limit)}</span>
+              <div style="display: flex; justify-content: space-between; font-size: 0.78rem; color: rgba(255, 255, 255, 0.6); margin-top: 0.2rem;">
+                <span style="font-weight: 300;">Heap Allocated:</span>
+                <span style="font-family: var(--body-font-family, 'Karla', sans-serif); font-weight: 400; color: rgba(255, 255, 255, 0.8);">${this.formatBytes(heap_used)} / ${this.formatBytes(heap_limit)}</span>
               </div>
               <div class="sm-progress-track">
                 <div class="sm-progress-fill" style="width: ${percentage}%; background: ${color};"></div>
@@ -420,7 +454,7 @@ global.UI_SystemManager = class extends ve.Component {
 
     if (proc_grid) {
       if (this.proc_diagnostics.length === 0) {
-        proc_grid.innerHTML = `<div style="color: #64748b; font-size: 0.9rem; padding: 1rem;">Process workers idle or initializing.</div>`;
+        proc_grid.innerHTML = `<div style="color: rgba(255, 255, 255, 0.5); font-size: 0.85rem; padding: 0.5rem 0;">Process worker pool idle or standby.</div>`;
       } else {
         let proc_html = "";
         for (let i = 0; i < this.proc_diagnostics.length; i++) {
@@ -434,27 +468,29 @@ global.UI_SystemManager = class extends ve.Component {
 
           total_rss += rss;
 
-          let color = "#3b82f6";
-          if (percentage > 80) color = "#ef4444";
-          else if (percentage > 60) color = "#f59e0b";
+          let color = "#38bdf8";
+          if (percentage > 85) color = "var(--accent-secondary-colour, #f03c3c)";
+          else if (percentage > 65) color = "#f59e0b";
 
           proc_html += `
-            <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 8px; padding: 1rem;">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                <div style="font-weight: 600; color: #e2e8f0; font-size: 0.95rem;">Compute Worker #${wid}</div>
-                <span class="sm-badge sm-badge-proc"><span class="sm-dot"></span> Ready</span>
+            <div class="sm-tile">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+                <div style="font-family: var(--body-font-family, 'Karla', sans-serif); font-weight: 500; font-size: 0.85rem; color: var(--header-colour, #ffffff);">
+                  Compute Worker #${wid}
+                </div>
+                <span class="sm-badge sm-badge-proc">Ready</span>
               </div>
-              <div style="display: flex; justify-content: space-between; font-size: 0.825rem; color: #94a3b8; margin-top: 0.4rem;">
-                <span>Active Tasks:</span>
-                <span style="font-weight: 600; color: ${active_tasks > 0 ? '#38bdf8' : '#64748b'};">${active_tasks}</span>
+              <div style="display: flex; justify-content: space-between; font-size: 0.78rem; color: rgba(255, 255, 255, 0.6); margin-top: 0.25rem;">
+                <span style="font-weight: 300;">Active Tasks:</span>
+                <span style="font-family: var(--body-font-family, 'Karla', sans-serif); font-weight: 400; color: ${active_tasks > 0 ? 'var(--accent-secondary-colour, #f03c3c)' : 'var(--body-colour, #ffffff)'};">${active_tasks}</span>
               </div>
-              <div style="display: flex; justify-content: space-between; font-size: 0.825rem; color: #94a3b8; margin-top: 0.25rem;">
-                <span>RSS Memory:</span>
-                <span style="font-weight: 600; color: #60a5fa;">${this.formatBytes(rss)}</span>
+              <div style="display: flex; justify-content: space-between; font-size: 0.78rem; color: rgba(255, 255, 255, 0.6); margin-top: 0.2rem;">
+                <span style="font-weight: 300;">RSS Memory:</span>
+                <span style="font-family: var(--body-font-family, 'Karla', sans-serif); font-weight: 400; color: var(--body-colour, #ffffff);">${this.formatBytes(rss)}</span>
               </div>
-              <div style="display: flex; justify-content: space-between; font-size: 0.825rem; color: #94a3b8; margin-top: 0.25rem;">
-                <span>Heap Allocated:</span>
-                <span style="color: #cbd5e1;">${this.formatBytes(heap_used)} / ${this.formatBytes(heap_limit)}</span>
+              <div style="display: flex; justify-content: space-between; font-size: 0.78rem; color: rgba(255, 255, 255, 0.6); margin-top: 0.2rem;">
+                <span style="font-weight: 300;">Heap Allocated:</span>
+                <span style="font-family: var(--body-font-family, 'Karla', sans-serif); font-weight: 400; color: rgba(255, 255, 255, 0.8);">${this.formatBytes(heap_used)} / ${this.formatBytes(heap_limit)}</span>
               </div>
               <div class="sm-progress-track">
                 <div class="sm-progress-fill" style="width: ${percentage}%; background: ${color};"></div>

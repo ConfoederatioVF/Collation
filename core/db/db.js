@@ -7,7 +7,6 @@ if (!global.db)
 	global.db = {};
 
 let is_renderer = Boolean(typeof window !== "undefined" || (typeof process !== "undefined" && process?.type === "renderer"));
-let path = global.path || ((typeof require === "function") ? require("node:path") : undefined);
 
 //Initialise functions
 {
@@ -135,12 +134,24 @@ let path = global.path || ((typeof require === "function") ? require("node:path"
 	db.getCacheDirectory = function (arg0_file_path) {
 		//Convert from parameters
 		let file_path = (arg0_file_path) ? arg0_file_path : (global.ve?.naissance_file_path || global.ve?.ndjson_file_path);
-		let base_name = (file_path) ? path.basename(file_path, path.extname(file_path)) : "current";
+		let local_path = (global.path) ? global.path : ((typeof require === "function") ? require("node:path") : null);
+		let base_name = (file_path && local_path) ? local_path.basename(file_path, local_path.extname(file_path)) : "current";
 		
 		//Return statement
-		return path.resolve(process.cwd(), "saves/.cache", base_name);
+		return (local_path) ? local_path.resolve(process.cwd(), "saves/.cache", base_name) : `saves/.cache/${base_name}`;
 	};
 	db.getTempDirectory = db.getCacheDirectory;
+	
+	/**
+	 * Returns all unique global timestamps from all partitions.
+	 *
+	 * @returns {Promise<number[]>}
+	 */
+	db.getTimestamps = async function () {
+		//Return statement
+		if (!is_renderer && global.NDJSON?.getTimestamps) return await NDJSON.getTimestamps();
+		return await db.send("getTimestamps");
+	};
 	
 	/**
 	 * Returns the Object value of a single ID.

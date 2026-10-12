@@ -1,12 +1,10 @@
-//Import libraries
-let NodeWorker = require("node:worker_threads").Worker;
-let os = require("node:os");
-let path = require("node:path");
-
 if (!global.proc) global.proc = {};
 
 //Initialise worker pool and IPC management functions
 {
+  let NodeWorker = (typeof require === "function") ? require("node:worker_threads").Worker : null;
+  let os = (typeof require === "function") ? require("node:os") : null;
+  let path = (global.path) ? global.path : ((typeof require === "function") ? require("node:path") : null);
   /**
    * Resolves active RAM diagnostic percentage statistics from every process worker in the pool.
    *
