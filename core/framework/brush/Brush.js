@@ -4,6 +4,7 @@ naissance.Brush = class extends ve.Class {
 		super();
 		
 		//Declare local instance variables
+		this.from_geometry_id = undefined;
 		this.node_editor = new naissance.BrushNodeEditor();
 		this.radius = 50000;
 		this._selected_feature = undefined;
@@ -129,14 +130,20 @@ naissance.Brush = class extends ve.Class {
 				style: { display: "inline" },
 				x: 1, y: 2
 			}),
-			from_geometry: new UI_GeometryDatalist(undefined, {
+			from_geometry: new UI_GeometryDatalist(this.from_geometry_id, {
 				name: "From Geometry",
 				binding: "this.from_geometry_id",
         filter_types: ["GeometryLine", "GeometryPolygon"],
 				limit: () => this.mode === "node_transfer",
 				onuserchange: async (v) => {
-					this.from_geometry_id = v;
-					let target_geom = naissance.Geometry.instances[v];
+					let geom_id = v;
+					if (!naissance.Geometry.instances[geom_id]) {
+						Object.iterate(naissance.Geometry.instances, (local_id, local_geom) => {
+							if (local_geom.name === v) geom_id = local_id;
+						});
+					}
+					this.from_geometry_id = geom_id;
+					let target_geom = naissance.Geometry.instances[geom_id];
 					if (target_geom) {
 						if (typeof target_geom.loadHistory === "function") await target_geom.loadHistory();
 						if (typeof target_geom.draw === "function") target_geom.draw();
@@ -182,6 +189,7 @@ naissance.Brush = class extends ve.Class {
 				x: 0, y: 5
 			})
 		}, { name: "Brush Options:", open: true });
+		this.brush_options.setOwner(this, [this]);
 		this.optimisation = veInterface({
 			simplify: veRange(0, {
 				binding: "this.simplify",
@@ -228,6 +236,7 @@ naissance.Brush = class extends ve.Class {
 				x: 1, y: 1
 			})
 		}, { name: "Brush Optimisation:", open: true });
+		this.optimisation.setOwner(this, [this]);
 		this.information_display = veHTML(() => {
 			let cursor_coordinates = this.cursor.getCoordinates();
 			

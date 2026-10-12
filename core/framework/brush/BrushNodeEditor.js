@@ -161,7 +161,19 @@ naissance.GeometryPolygon.handleNodeEditorEnd = async function (arg0_e) {
 	if (main.brush.mode === "node_transfer") {
 		try {
 			let from_geometry_id = main.brush.from_geometry_id;
-			let from_geometry = naissance.Geometry.instances[from_geometry_id];
+			if (!from_geometry_id && main.brush.brush_options?.from_geometry)
+				from_geometry_id = main.brush.brush_options.from_geometry.v;
+			
+			let from_geometry = (from_geometry_id) ? naissance.Geometry.instances[from_geometry_id] : null;
+			if (!from_geometry && from_geometry_id) {
+				Object.iterate(naissance.Geometry.instances, (local_id, local_geom) => {
+					if (local_geom.name === from_geometry_id || local_id === from_geometry_id) {
+						from_geometry = local_geom;
+						from_geometry_id = local_id;
+					}
+				});
+			}
+			if (from_geometry) main.brush.from_geometry_id = from_geometry.id;
 			
 			if (!from_geometry) {
 				veToast("<icon>warning</icon> No source geometry selected for node transfer.");
