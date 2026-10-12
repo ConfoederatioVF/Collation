@@ -281,13 +281,14 @@ global.UI_Settings = class extends ve.Class { //[WIP] - Add settings serialisati
 		//main.settings.autoload_file handler
 		if (main.settings.autoload_file && main.settings.autoloading_mode === "default")
 			if (fs.existsSync(main.settings.autoload_file[0])) {
-				let load_data = fs.readFileSync(main.settings.autoload_file[0], "utf8");
+				let autoload_file_path = main.settings.autoload_file[0];
 				
 				//Load state
 				setTimeout(() => {
 					if (main.settings.load_savefile_as === "file") {
-						DALS.Timeline.parseAction("load_save", [{ load_savefile: main.settings.autoload_file[0] }]);
+						DALS.Timeline.parseAction("load_savefile", [{ load_savefile: autoload_file_path }]);
 					} else {
+						let load_data = fs.readFileSync(autoload_file_path, "utf8");
 						DALS.Timeline.parseAction("load_save", [{ load_save: load_data }]);
 					}
 				}, 100);

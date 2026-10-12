@@ -71,75 +71,74 @@ naissance.GeometryPolygon = class extends naissance.Geometry {
 		this.geometry = undefined;
 		this.selected_geometry = undefined;
 		
-		//1. Set this.value from current relative keyframe
-		if (this.history._hasTimestampAfter(main.timestamp)) {
-			//Declare local instance variables
-			let layer = this.getLayer();
-			let is_province = (layer?.type === "provinces");
-			
+		//1. Set this.value from current relative keyframe if present in history
+		if (this.history?._hasTimestampAfter && this.history._hasTimestampAfter(main.timestamp)) {
 			this.value = this.history.getKeyframe({ 
 				date: main.timestamp,
 				guaranteed_indexes: [1]
 			}).value;
 			this.value[1] = this.getSymbol(this.value[1]);
-				
-			if (this.value === undefined || this.value?.length === 0 || this._is_visible === false) return;
-			
-			//2. Check any cause for derendering
-			if (this.value && this.value[0] === null) return;
-			if (this.value && this.value[2]) {
-				if (this.value[2].hidden) return;
-				if (this.value[2].max_zoom && map.getZoom() > this.value[2].max_zoom) return;
-				if (this.value[2].min_zoom && map.getZoom() < this.value[2].min_zoom) return;
-			}
-			
-			//3. Draw this.geometry, this.label_geometries, this.selected_geometry onto map
-			try {
-				if (this.value[0]) {
-					this.geometry = maptalks.Geometry.fromJSON(this.value[0]);
-					main.layers.entity_layer.addGeometry(this.geometry);
-					
-					//Normal rendering
-					if (!is_province) {
-						this.geometry.setSymbol({
-							...naissance.Renderer.getDefaultSymbol({ exclude: ["point"] }),
-							...this.value?.[1],
-						});
-						this.drawLabels();
-					}
-					//Provinces rendering
-					else {
-						this.geometry.setSymbol({
-							lineColor: "#000000",
-							lineDasharray: [5, 5, 5], 
-							lineWidth: 1,
-							polygonFill: Colour.generateHexFromString(String(this.id)),
-							polygonOpacity: 0.5
-						});
-						this.geometry._naissance_province = true;
-					}
-				}
-			} catch (e) { console.error(e); }
-			
-			//4. Draw this.selected_geometry
-			try {
-				this.selected_geometry = undefined;
-				
-				if (this.geometry && this.selected) {
-					this.selected_geometry = this.geometry.copy();
-					this.selected_geometry.setSymbol({
-						lineColor: `rgb(255, 255, 0)`,
-						lineDasharray : (main.brush.selected_geometry?.id !== this.id) ? [10, 10, 10] : undefined,
-						lineOpacity: 0.5,
-						lineWidth: 4
-					});
-					main.layers.selection_layer.addGeometry(this.selected_geometry);
-				}
-			} catch (e) { console.error(e); }
-			
-			//5. Add bindings
-			this.handleOnclick({ limit: !is_province });
 		}
+		
+		let layer = this.getLayer();
+		let is_province = (layer?.type === "provinces");
+			
+		if (this.value === undefined || this.value?.length === 0 || this._is_visible === false) return;
+		
+		//2. Check any cause for derendering
+		if (this.value && this.value[0] === null) return;
+		if (this.value && this.value[2]) {
+			if (this.value[2].hidden) return;
+			if (this.value[2].max_zoom && map.getZoom() > this.value[2].max_zoom) return;
+			if (this.value[2].min_zoom && map.getZoom() < this.value[2].min_zoom) return;
+		}
+		
+		//3. Draw this.geometry, this.label_geometries, this.selected_geometry onto map
+		try {
+			if (this.value[0]) {
+				this.geometry = maptalks.Geometry.fromJSON(this.value[0]);
+				main.layers.entity_layer.addGeometry(this.geometry);
+				
+				//Normal rendering
+				if (!is_province) {
+					this.geometry.setSymbol({
+						...naissance.Renderer.getDefaultSymbol({ exclude: ["point"] }),
+						...this.value?.[1],
+					});
+					this.drawLabels();
+				}
+				//Provinces rendering
+				else {
+					this.geometry.setSymbol({
+						lineColor: "#000000",
+						lineDasharray: [5, 5, 5], 
+						lineWidth: 1,
+						polygonFill: Colour.generateHexFromString(String(this.id)),
+						polygonOpacity: 0.5
+					});
+					this.geometry._naissance_province = true;
+				}
+			}
+		} catch (e) { console.error(e); }
+		
+		//4. Draw this.selected_geometry
+		try {
+			this.selected_geometry = undefined;
+			
+			if (this.geometry && this.selected) {
+				this.selected_geometry = this.geometry.copy();
+				this.selected_geometry.setSymbol({
+					lineColor: `rgb(255, 255, 0)`,
+					lineDasharray : (main.brush.selected_geometry?.id !== this.id) ? [10, 10, 10] : undefined,
+					lineOpacity: 0.5,
+					lineWidth: 4
+				});
+				main.layers.selection_layer.addGeometry(this.selected_geometry);
+			}
+		} catch (e) { console.error(e); }
+		
+		//5. Add bindings
+		this.handleOnclick({ limit: !is_province });
 	}
 	
 	drawUI () {

@@ -13,6 +13,11 @@ if (!global.proc) global.proc = {};
    * @returns {Promise<Array<{worker_id: number, rss: number, heapUsed: number, heapTotal: number, heapLimit: number, percentage: number}>>}
    */
   proc.IPC_getDiagnostics = async function () {
+    if (typeof process !== "undefined" && process?.type === "renderer") {
+      let electron = require("electron");
+      return await electron.ipcRenderer.invoke("process:get-diagnostics");
+    }
+
     //Declare local instance variables
     let pool = proc.IPC_getWorkerPool();
     let promises = [];
@@ -42,6 +47,10 @@ if (!global.proc) global.proc = {};
    * @returns {NodeWorker[]}
    */
   proc.IPC_getWorkerPool = function (arg0_max_workers) {
+    if (typeof process !== "undefined" && process?.type === "renderer") {
+      return proc.worker_pool || [];
+    }
+
     //Convert from parameters
     let default_workers = Math.max(1, Math.min(4, Math.ceil((os.cpus().length - 1) / 4)));
     let max_workers = (arg0_max_workers && arg0_max_workers > 0) ? arg0_max_workers : default_workers;
@@ -50,21 +59,13 @@ if (!global.proc) global.proc = {};
     if (proc.task_id_counter === undefined) proc.task_id_counter = 0;
     if (proc.worker_pool === undefined) proc.worker_pool = [];
 
-    if (proc.worker_pool.length === 0) {
-      let worker_script = path.resolve(__dirname, "process_worker.js");
-      let electron_ipc = null;
-
-      try {
-        let electron = require("electron");
-        electron_ipc = electron.ipcMain;
-      } catch (e) {}
-
-      for (let i = 0; i < max_workers; i++) {
-        let worker = new NodeWorker(worker_script, {
-          workerData: { worker_id: i }
-        });
-
-        worker.active_tasks = 0;
+    if (proc._bindWorkerEvents === undefined) {
+      proc._bindWorkerEvents = function (worker, wid) {
+        let electron_ipc = null;
+        try {
+          let electron = require("electron");
+          electron_ipc = electron.ipcMain;
+        } catch (e) {}
 
         worker.on("message", (response) => {
           //1. Handle proxy/bridge requests from worker to main thread
@@ -112,15 +113,73 @@ if (!global.proc) global.proc = {};
         });
 
         worker.on("error", (err) => {
-          console.error(`[proc_main] Worker ${i} encountered error:`, err);
+          console.error(`[proc_main] Worker ${wid} encountered error:`, err);
+        });
+      };
+    }
+
+    if (proc.worker_pool.length === 0) {
+      let worker_script = path.resolve(__dirname, "process_worker.js");
+
+      for (let i = 0; i < max_workers; i++) {
+        let worker = new NodeWorker(worker_script, {
+          resourceLimits: {
+            maxOldGenerationSizeMb: 4096,
+            maxYoungGenerationSizeMb: 512
+          },
+          workerData: { worker_id: i }
         });
 
+        worker.active_tasks = 0;
+        proc._bindWorkerEvents(worker, i);
         proc.worker_pool.push(worker);
       }
     }
 
     //Return statement
     return proc.worker_pool;
+  };
+
+
+  /**
+   * Adjusts the number of concurrent process workers in the pool.
+   *
+   * @param {number} arg0_count
+   *
+   * @returns {Promise<number>}
+   */
+  proc.IPC_setWorkerPoolSize = async function (arg0_count) {
+    if (typeof process !== "undefined" && process?.type === "renderer") {
+      let electron = require("electron");
+      return await electron.ipcRenderer.invoke("process:set-worker-pool-size", arg0_count);
+    }
+
+    let new_count = Math.max(1, Math.min(32, parseInt(arg0_count) || 1));
+    let pool = proc.IPC_getWorkerPool();
+    if (pool.length === new_count) return pool.length;
+
+    while (pool.length > new_count) {
+      let worker = pool.pop();
+      try { await worker.terminate(); } catch (e) {}
+    }
+
+    let worker_script = path.resolve(__dirname, "process_worker.js");
+    while (pool.length < new_count) {
+      let wid = pool.length;
+      let worker = new NodeWorker(worker_script, {
+        resourceLimits: {
+          maxOldGenerationSizeMb: 4096,
+          maxYoungGenerationSizeMb: 512
+        },
+        workerData: { worker_id: wid }
+      });
+      worker.active_tasks = 0;
+      proc._bindWorkerEvents(worker, wid);
+      pool.push(worker);
+    }
+
+    //Return statement
+    return pool.length;
   };
 
 
@@ -134,6 +193,11 @@ if (!global.proc) global.proc = {};
   proc.IPC_task = async function (arg0_json) {
     //Convert from parameters
     let json = (arg0_json) ? arg0_json : {};
+
+    if (typeof process !== "undefined" && process?.type === "renderer") {
+      let electron = require("electron");
+      return await electron.ipcRenderer.invoke("process:invoke", json);
+    }
 
     //Declare local instance variables
     let pool = proc.IPC_getWorkerPool();

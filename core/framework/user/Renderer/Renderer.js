@@ -124,14 +124,21 @@ naissance.Renderer = class extends ve.Class {
 			//1. In-memory instances rendering (loaded via DALS.fromJSON / editor state)
 			let rendering_order = this.getRenderingOrder();
 			
-			if (rendering_order.length > 0) {
+			if (rendering_order.length > 0 && !global.ve?.ndjson_file_path) {
 				for (let i = 0; i < rendering_order.length; i++)
 					if (rendering_order[i].draw)
 						rendering_order[i].draw();
 				return;
 			}
 			
-			//2. Viewport-culled streaming differencing when instances are empty but DB has loaded shards
+			//If in-memory instances exist alongside DB shards, draw instances that have populated geometry
+			if (rendering_order.length > 0) {
+				for (let i = 0; i < rendering_order.length; i++)
+					if (rendering_order[i].draw && (rendering_order[i].geometry || (rendering_order[i].value && rendering_order[i].value[0])))
+						rendering_order[i].draw();
+			}
+			
+			//2. Viewport-culled streaming differencing when DB has loaded shards
 			if (global.ve?.ndjson_file_path && global.db?.diffBBox) {
 				(async () => {
 					try {
@@ -162,6 +169,10 @@ naissance.Renderer = class extends ve.Class {
 							}
 							
 							let inst = this.rendered_entities.get(id);
+							if (!inst && naissance.Geometry?.instances?.[id]) {
+								inst = naissance.Geometry.instances[id];
+								this.rendered_entities.set(id, inst);
+							}
 							if (!inst && diff.class_name && naissance[diff.class_name]) {
 								inst = new naissance[diff.class_name]({ is_import: true });
 								inst.setID(id);

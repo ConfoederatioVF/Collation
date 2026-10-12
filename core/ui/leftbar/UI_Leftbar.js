@@ -13,13 +13,16 @@ global.UI_Leftbar = class extends ve.Class {
 						name: " ",
 						navigation_only: true,
 						
+						manual_load_function: (arg0_file) => {
+							DALS.Timeline.parseAction("load_savefile", [{ load_savefile: arg0_file }]);
+						},
 						load_function: (arg0_data, arg1_file) => {
 							//Convert from parameters
 							let data = (arg0_data) ? arg0_data : {};
 							let file = arg1_file;
 							
 							//Load state
-							if (main.settings.load_savefile_as === "file") {
+							if (main.settings.load_savefile_as === "file" || !arg0_data) {
 								DALS.Timeline.parseAction("load_savefile", [{ load_savefile: file }]);
 							} else {
 								DALS.Timeline.parseAction("load_save", [{ load_save: data }]);

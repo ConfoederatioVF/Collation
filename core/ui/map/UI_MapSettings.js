@@ -113,9 +113,9 @@ global.UI_MapSettings = class UI_MapSettings extends ve.Class { //[WIP] - Finish
 		//Set date
 		if (json.date)
 			if (map_settings.autoload_last_date) {
-				UI_DateMenu.setDate(JSON.parse(json.date));
+				UI_DateMenu.setDate((typeof json.date === "string") ? JSON.parse(json.date) : json.date);
 			} else if (map_settings.constant_load_date) {
-				UI_DateMenu.setDate(map_settings.constant_load_date);
+				UI_DateMenu.setDate((typeof map_settings.constant_load_date === "string") ? JSON.parse(map_settings.constant_load_date) : map_settings.constant_load_date);
 			}
 		if (map_settings.save_undo_redo_trees)
 			DALS.Timeline.fromJSON(json.undo_redo_trees);

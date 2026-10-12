@@ -19,6 +19,12 @@ let queue = [];
 
 //Internal helper functions
 {
+	NDJSON.getTempDirectory = function (arg0_file_path) {
+		let file_path = (arg0_file_path) ? arg0_file_path : "";
+		let base_name = (file_path) ? path.basename(file_path, path.extname(file_path)) : "current";
+		return path.resolve(process.cwd(), "saves/.temp", base_name);
+	};
+	
 	Object.getValue = function (arg0_object, arg1_variable_string) {
 		//Convert from parameters
 		let object = arg0_object;
@@ -131,6 +137,8 @@ let loadPartition = async function (page_file) {
 			try {
 				let entity = JSON.parse(val_str);
 				let history_obj = typeof entity.history === "string" ? JSON.parse(entity.history) : entity.history;
+				if (typeof entity.history === "string")
+					entity.history = history_obj;
 				let raw_keyframes = (history_obj && history_obj.keyframes) ? history_obj.keyframes : history_obj;
 				let timestamps = (raw_keyframes && typeof raw_keyframes === "object") ? History.getTimestamps(raw_keyframes) : [];
 				let bbox = calculateBBox(raw_keyframes, entity);
@@ -260,10 +268,12 @@ async function handleTask (arg0_task) {
 	} = task;
 	
 	let base_path = file_path ? file_path.replace(/\.ndjson$/, "") : "";
-	let page_file = path.join(
-		`${base_path}.tmpndjson`,
-		`${workerData.worker_id}.ndjson`
-	);
+	let folder_path = NDJSON.getTempDirectory(base_path);
+	let page_file = path.join(folder_path, `partition_${workerData.worker_id}.ndjson`);
+	if (!fs.existsSync(page_file)) {
+		let legacy_file = path.join(folder_path, `${workerData.worker_id}.ndjson`);
+		if (fs.existsSync(legacy_file)) page_file = legacy_file;
+	}
 	
 	//Ensure partition loaded in memory
 	if (type === "init_partition" || current_file_path !== base_path || partition_cache.size === 0) {
@@ -389,36 +399,17 @@ async function handleTask (arg0_task) {
 		
 		for (let [key, cached] of partition_cache) {
 			let entity_obj = cached.entity;
+			let name = entity_obj?.metadata?.name || entity_obj?.name || entity_obj?.id || key;
+			let is_feature = (cached.type === "feature" || cached.class_name?.startsWith("Feature"));
 			
-			if (typeof entity_obj.history !== "undefined") {
-				let current_keyframe = resolveHistory(entity_obj, timestamp);
-				let state_val = resolveHistory(entity_obj, timestamp, { type: "get_keyframes" });
-				let all_keyframes = (state_val && typeof state_val === "object") ? Object.keys(state_val) : [];
-				
-				for (let i = 0; i < all_keyframes.length; i++) {
-					let local_keyframe = state_val[all_keyframes[i]];
-					if (local_keyframe) {
-						delete local_keyframe.localisation;
-						if (local_keyframe.value) local_keyframe.value[0] = undefined;
-					}
-				}
-				
-				list.push({
-					class_name: entity_obj.class_name,
-					current_keyframe: current_keyframe,
-					key: key,
-					metadata: entity_obj.metadata,
-					name: History.getName(state_val, timestamp),
-					value: state_val
-				});
-			} else {
-				list.push({
-					class_name: entity_obj.class_name,
-					key: key,
-					metadata: entity_obj.metadata,
-					value: typeof entity_obj.value === "string" ? JSON.parse(entity_obj.value) : entity_obj.value
-				});
-			}
+			list.push({
+				class_name: cached.class_name,
+				key: key,
+				metadata: entity_obj?.metadata,
+				name: name,
+				type: cached.type,
+				value: is_feature ? (typeof entity_obj?.value === "string" ? JSON.parse(entity_obj.value) : entity_obj?.value) : undefined
+			});
 		}
 		
 		return parentPort.postMessage({ results: list, task_id });

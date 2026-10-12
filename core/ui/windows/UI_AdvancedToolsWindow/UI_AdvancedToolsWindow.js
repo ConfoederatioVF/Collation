@@ -10,8 +10,11 @@ global.UI_AdvancedToolsWindow = class {
 					datavis_suite: veDatavisSuite()
 				}
 			},
-			livemap_workers: {
-				name: "Livemap Workers"
+			system_manager: {
+				name: "System Manager",
+				components_obj: {
+					system_manager: veSystemManager()
+				}
 			},
 			script_manager: {
 				name: "Script Manager (IDE)",

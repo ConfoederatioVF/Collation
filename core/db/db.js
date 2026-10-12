@@ -6,6 +6,8 @@ if (!global.db)
 	 */
 	global.db = {};
 
+let is_renderer = Boolean(typeof window !== "undefined" || (typeof process !== "undefined" && process?.type === "renderer"));
+
 //Initialise functions
 {
 	/**
@@ -22,7 +24,7 @@ if (!global.db)
 		let timestamp = arg1_timestamp;
 		
 		//Return statement
-		if (global.NDJSON?.diff) return await NDJSON.diff(id, timestamp);
+		if (!is_renderer && global.NDJSON?.diff) return await NDJSON.diff(id, timestamp);
 		return await db.send("diff", id, timestamp);
 	};
 	
@@ -38,7 +40,7 @@ if (!global.db)
 		let timestamp = arg0_timestamp;
 		
 		//Return statement
-		if (global.NDJSON?.diffAll) return await NDJSON.diffAll(timestamp);
+		if (!is_renderer && global.NDJSON?.diffAll) return await NDJSON.diffAll(timestamp);
 		return await db.send("diffAll", timestamp);
 	};
 	
@@ -57,7 +59,7 @@ if (!global.db)
 		let options = (arg0_options) ? arg0_options : {};
 		
 		//Return statement
-		if (global.NDJSON?.diffBBox) return await NDJSON.diffBBox(options);
+		if (!is_renderer && global.NDJSON?.diffBBox) return await NDJSON.diffBBox(options);
 		return await db.send("diffBBox", options);
 	};
 	
@@ -68,7 +70,7 @@ if (!global.db)
 	 */
 	db.getDiagnostics = async function () {
 		//Return statement
-		if (global.NDJSON?.getDiagnostics) return await NDJSON.getDiagnostics();
+		if (!is_renderer && global.NDJSON?.getDiagnostics) return await NDJSON.getDiagnostics();
 		return await db.send("getDiagnostics");
 	};
 	
@@ -86,8 +88,24 @@ if (!global.db)
 		let timestamp = arg1_timestamp;
 		
 		//Return statement
-		if (global.NDJSON?.getDiffs) return await NDJSON.getDiffs(ids, timestamp);
+		if (!is_renderer && global.NDJSON?.getDiffs) return await NDJSON.getDiffs(ids, timestamp);
 		return await db.send("getDiffs", ids, timestamp);
+	};
+	
+	/**
+	 * Returns hierarchy metadata for all entities at a given timestamp.
+	 *
+	 * @param {number|string} [arg0_timestamp]
+	 *
+	 * @returns {Promise<Object[]>}
+	 */
+	db.getHierarchyValues = async function (arg0_timestamp) {
+		//Convert from parameters
+		let timestamp = (arg0_timestamp !== undefined) ? arg0_timestamp : 0;
+		
+		//Return statement
+		if (!is_renderer && global.NDJSON?.getHierarchyValues) return await NDJSON.getHierarchyValues(timestamp);
+		return await db.send("getHierarchyValues", timestamp);
 	};
 	
 	/**
@@ -102,8 +120,24 @@ if (!global.db)
 		let id = arg0_id;
 		
 		//Return statement
-		if (global.NDJSON?.getKeyframes) return await NDJSON.getKeyframes(id);
+		if (!is_renderer && global.NDJSON?.getKeyframes) return await NDJSON.getKeyframes(id);
 		return await db.send("getKeyframes", id);
+	};
+	
+	/**
+	 * Returns the temporary shard directory for a savefile.
+	 *
+	 * @param {string} [arg0_file_path]
+	 *
+	 * @returns {string}
+	 */
+	db.getTempDirectory = function (arg0_file_path) {
+		//Convert from parameters
+		let file_path = (arg0_file_path) ? arg0_file_path : (global.ve?.naissance_file_path || global.ve?.ndjson_file_path);
+		let base_name = (file_path) ? path.basename(file_path, path.extname(file_path)) : "current";
+		
+		//Return statement
+		return path.resolve(process.cwd(), "saves/.temp", base_name);
 	};
 	
 	/**
@@ -118,7 +152,7 @@ if (!global.db)
 		let id = arg0_id;
 		
 		//Return statement
-		if (global.NDJSON?.getValue) return await NDJSON.getValue(id);
+		if (!is_renderer && global.NDJSON?.getValue) return await NDJSON.getValue(id);
 		return await db.send("getValue", id);
 	};
 	
@@ -134,7 +168,7 @@ if (!global.db)
 		let ids = arg0_ids;
 		
 		//Return statement
-		if (global.NDJSON?.getValues) return await NDJSON.getValues(ids);
+		if (!is_renderer && global.NDJSON?.getValues) return await NDJSON.getValues(ids);
 		return await db.send("getValues", ids);
 	};
 	
@@ -162,7 +196,7 @@ if (!global.db)
 		let options = (arg1_options) ? arg1_options : {};
 		
 		//Return statement
-		if (global.NDJSON?.load) return await NDJSON.load(file_path, options);
+		if (!is_renderer && global.NDJSON?.load) return await NDJSON.load(file_path, options);
 		return await db.send("load", file_path, options);
 	};
 	
@@ -178,7 +212,7 @@ if (!global.db)
 		let options = (arg0_options) ? arg0_options : {};
 		
 		//Return statement
-		if (global.NDJSON?.query) return await NDJSON.query(options);
+		if (!is_renderer && global.NDJSON?.query) return await NDJSON.query(options);
 		return await db.send("query", options);
 	};
 	
@@ -194,7 +228,7 @@ if (!global.db)
 		let id = arg0_id;
 		
 		//Return statement
-		if (global.NDJSON?.removeValue) return await NDJSON.removeValue(id);
+		if (!is_renderer && global.NDJSON?.removeValue) return await NDJSON.removeValue(id);
 		return await db.send("removeValue", id);
 	};
 	
@@ -210,7 +244,7 @@ if (!global.db)
 		let ids = arg0_ids;
 		
 		//Return statement
-		if (global.NDJSON?.removeValues) return await NDJSON.removeValues(ids);
+		if (!is_renderer && global.NDJSON?.removeValues) return await NDJSON.removeValues(ids);
 		return await db.send("removeValues", ids);
 	};
 	
@@ -226,12 +260,12 @@ if (!global.db)
 		let target_path = arg0_target_path;
 		
 		//Return statement
-		if (global.NDJSON?.save) return await NDJSON.save(target_path);
+		if (!is_renderer && global.NDJSON?.save) return await NDJSON.save(target_path);
 		return await db.send("save", target_path);
 	};
 	
 	/**
-	 * Internal dispatcher to call NDJSON methods via Blacktraffic IPC if NDJSON is not directly defined.
+	 * Internal dispatcher to call NDJSON methods via Blacktraffic or Electron IPC.
 	 *
 	 * @param {string} arg0_function_key
 	 * @param {any[]} argn_arguments
@@ -242,6 +276,17 @@ if (!global.db)
 		//Convert from parameters
 		let function_key = arg0_function_key;
 		
+		//Renderer IPC
+		if (is_renderer) {
+			try {
+				let electron_mod = (global.electron) ? global.electron : require("electron");
+				return await electron_mod.ipcRenderer.invoke("ndjson:invoke", function_key, ...argn_arguments);
+			} catch (e) {
+				console.error(`[db] Failed to invoke NDJSON.${function_key} via IPC:`, e);
+				return null;
+			}
+		}
+		
 		//Return statement
 		if (global.Blacktraffic?.task) {
 			return await Blacktraffic.task("ndjson", {
@@ -249,7 +294,7 @@ if (!global.db)
 			});
 		}
 		
-		console.error(`[db] Neither global.NDJSON nor global.Blacktraffic is available to execute ${function_key}`);
+		console.error(`[db] Neither global.NDJSON nor IPC is available to execute ${function_key}`);
 		return null;
 	};
 	
@@ -267,7 +312,7 @@ if (!global.db)
 		let keyframes = arg1_keyframes;
 		
 		//Return statement
-		if (global.NDJSON?.setKeyframes) return await NDJSON.setKeyframes(id, keyframes);
+		if (!is_renderer && global.NDJSON?.setKeyframes) return await NDJSON.setKeyframes(id, keyframes);
 		return await db.send("setKeyframes", id, keyframes);
 	};
 	
@@ -285,7 +330,7 @@ if (!global.db)
 		let value = arg1_value;
 		
 		//Return statement
-		if (global.NDJSON?.setValue) return await NDJSON.setValue(id, value);
+		if (!is_renderer && global.NDJSON?.setValue) return await NDJSON.setValue(id, value);
 		return await db.send("setValue", id, value);
 	};
 	
@@ -301,7 +346,34 @@ if (!global.db)
 		let update_map = arg0_update_map;
 		
 		//Return statement
-		if (global.NDJSON?.setValues) return await NDJSON.setValues(update_map);
+		if (!is_renderer && global.NDJSON?.setValues) return await NDJSON.setValues(update_map);
 		return await db.send("setValues", update_map);
 	};
+	
+	/**
+	 * Adjusts the concurrent thread pool size for DB workers.
+	 *
+	 * @param {number} arg0_count
+	 *
+	 * @returns {Promise<number>}
+	 */
+	db.setWorkerPoolSize = async function (arg0_count) {
+		//Convert from parameters
+		let count = arg0_count;
+		
+		//Return statement
+		if (!is_renderer && global.NDJSON?.setWorkerPoolSize) return await NDJSON.setWorkerPoolSize(count);
+		if (is_renderer) return await db.send("setWorkerPoolSize", count);
+		return 1;
+	};
+}
+
+if (!global.NDJSON && is_renderer) {
+	global.NDJSON = new Proxy({ _is_renderer_proxy: true }, {
+		get (target, prop) {
+			if (prop === "_is_renderer_proxy") return true;
+			if (prop === "getTempDirectory") return db.getTempDirectory;
+			return async (...args) => await db.send(prop, ...args);
+		}
+	});
 }

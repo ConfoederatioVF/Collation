@@ -45,12 +45,14 @@ naissance.GeometryLine = class extends naissance.Geometry {
 		if (this.selected_geometry) this.selected_geometry.remove();
 		this.selected_geometry = undefined;
 		
-		//1. Set this.value from current relative keyframe
-		this.value = this.history.getKeyframe({ 
-			date: main.date,
-			guaranteed_indexes: [1]
-		}).value;
-		this.value[1] = this.getSymbol(this.value[1]);
+		//1. Set this.value from current relative keyframe if present in history
+		if (this.history?._hasTimestampAfter && this.history._hasTimestampAfter(main.timestamp)) {
+			this.value = this.history.getKeyframe({ 
+				date: main.date,
+				guaranteed_indexes: [1]
+			}).value;
+			this.value[1] = this.getSymbol(this.value[1]);
+		}
 		
 		if (this.value === undefined || this.value.length === 0 || this._is_visible === false) 
 			derender_geometry = true;

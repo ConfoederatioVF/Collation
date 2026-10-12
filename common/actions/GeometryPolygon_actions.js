@@ -45,6 +45,23 @@
  *   - `.date`: {@link Object}|{@link number}|{@link string} - If string, either 'start'/'end'.
  *   - `.key`: {@link string}
  */
+//Debounced synchronization tracker to persist keyframes to DB workers without blocking renderer
+let db_sync_timeouts = new Map();
+let syncGeometryToDB = function (arg0_id, arg1_keyframes) {
+	let id = arg0_id;
+	let keyframes = arg1_keyframes;
+	if (!id || !global.db?.setKeyframes) return;
+	
+	if (db_sync_timeouts.has(id))
+		clearTimeout(db_sync_timeouts.get(id));
+	
+	let timeout = setTimeout(() => {
+		db_sync_timeouts.delete(id);
+		global.db.setKeyframes(id, keyframes).catch(() => {});
+	}, 200);
+	db_sync_timeouts.set(id, timeout);
+};
+
 config.actions.geometry_polygon = {
 	create_polygon: {
 		name: "Create Polygon",
@@ -76,12 +93,13 @@ config.actions.geometry_polygon = {
 			let polygon_obj = json.naissance_obj;
 			
 			let date = (json.add_to_polygon.date) ? json.add_to_polygon.date : main.date;
-			let geometry = (json.add_to_polygon.date) ?
-				polygon_obj.getGeometryKeyframeAtDate(date) : polygon_obj.geometry;
-			let ot_geometry = maptalks.Geometry.fromJSON(json.add_to_polygon.geometry);
+			let geometry = (polygon_obj && json.add_to_polygon.date) ?
+				polygon_obj.getGeometryKeyframeAtDate(date) : polygon_obj?.geometry;
+			let ot_geometry = (json.add_to_polygon.geometry) ?
+				maptalks.Geometry.fromJSON(json.add_to_polygon.geometry) : null;
 			
 			//Date range handling
-			if (json.add_to_polygon.date_range) {
+			if (json.add_to_polygon.date_range && polygon_obj?.history) {
 				polygon_obj.history.callFunctionInDateRange(json.add_to_polygon.date_range, (local_keyframe) => {
 					DALS.Timeline.parseAction("add_to_polygon", [{
 						geometry_obj: polygon_obj.id,
@@ -92,33 +110,44 @@ config.actions.geometry_polygon = {
 					}], true);
 				});
 			} else {
-				//Union with existing geometry if defined, if undefined replace geometry
-				try {
-					if (global.proc?.executeAction) {
-						let res = await proc.executeAction("addToPolygon", {
-							date: date,
-							entity_id: polygon_obj.id,
-							geometry: json.add_to_polygon.geometry
-						});
-						if (res && res.geometry) {
-							polygon_obj.addKeyframe(date, Geospatiale.convertTurfToMaptalks(res.geometry).toJSON());
-							return;
+				//Immediate in-memory calculation for active rendering geometry (0ms lag brushing)
+				if (polygon_obj && polygon_obj.history && (geometry || ot_geometry)) {
+					try {
+						let turf_geom = (geometry) ? Geospatiale.convertMaptalksToTurf(geometry) : null;
+						let turf_ot = (ot_geometry) ? Geospatiale.convertMaptalksToTurf(ot_geometry) : null;
+						let target_json = null;
+						
+						if (turf_geom && turf_ot) {
+							let union_res = turf.union(turf.featureCollection([turf_geom, turf_ot]));
+							target_json = union_res ? Geospatiale.convertTurfToMaptalks(union_res).toJSON() : null;
+						} else if (turf_geom && !turf_ot) {
+							target_json = Geospatiale.convertTurfToMaptalks(turf_geom).toJSON();
+						} else if (!turf_geom && turf_ot) {
+							target_json = Geospatiale.convertTurfToMaptalks(turf_ot).toJSON();
 						}
+						
+						if (target_json !== null) {
+							polygon_obj.addKeyframe(date, target_json);
+							syncGeometryToDB(polygon_obj.id, polygon_obj.history.keyframes);
+						}
+						return;
+					} catch (e) {
+						console.error(e);
 					}
-					
-					geometry = (geometry) ? Geospatiale.convertMaptalksToTurf(geometry) : null;
-					ot_geometry = (ot_geometry) ? Geospatiale.convertMaptalksToTurf(ot_geometry) : null;
-					
-					if (geometry && ot_geometry) {
-						polygon_obj.addKeyframe(date, Geospatiale.convertTurfToMaptalks(
-							turf.union(turf.featureCollection([geometry, ot_geometry]))
-						).toJSON());
-					} else if (geometry && !ot_geometry) {
-						polygon_obj.addKeyframe(date, Geospatiale.convertTurfToMaptalks(geometry).toJSON());
-					} else if (!geometry && ot_geometry) {
-						polygon_obj.addKeyframe(date, Geospatiale.convertTurfToMaptalks(ot_geometry).toJSON());
+				}
+				
+				//Offload to background worker for uninstantiated/batch entities
+				if (global.proc?.executeAction) {
+					let res = await proc.executeAction("addToPolygon", {
+						date: date,
+						entity_id: polygon_obj ? polygon_obj.id : (json.geometry_obj || json.entity_id),
+						geometry: json.add_to_polygon.geometry
+					});
+					if (res && res.geometry && polygon_obj) {
+						polygon_obj.addKeyframe(date, Geospatiale.convertTurfToMaptalks(res.geometry).toJSON());
+						return;
 					}
-				} catch (e) { console.error(e); }
+				}
 			}
 		}
 	},
@@ -230,27 +259,34 @@ config.actions.geometry_polygon = {
 			//Declare local instance variables
 			let geometry_obj = json.naissance_obj;
 			
+			//Immediate in-memory execution for active rendering entity (0ms latency)
+			if (geometry_obj && geometry_obj.history && typeof naissance?.Geometry?.operate === "function") {
+				let maptalks_geometry = naissance.Geometry.operate.call(geometry_obj,
+					json.geometry_operation.type,
+					(json.geometry_operation.feature_id) ? json.geometry_operation.feature_id : json.geometry_operation.geometry_id,
+					json.geometry_operation.options);
+				maptalks_geometry = (maptalks_geometry === null) ? null : maptalks_geometry.toJSON();
+				geometry_obj.history.addKeyframe(main.date, maptalks_geometry);
+				if (geometry_obj.draw) geometry_obj.draw();
+				syncGeometryToDB(geometry_obj.id, geometry_obj.history.keyframes);
+				return;
+			}
+			
 			if (global.proc?.executeAction) {
 				let res = await proc.executeAction("geometryOperation", {
 					date: main.date,
-					entity_id: geometry_obj.id,
+					entity_id: geometry_obj ? geometry_obj.id : (json.geometry_obj || json.entity_id),
 					options: json.geometry_operation.options,
 					ot_entity_id: (json.geometry_operation.feature_id) ? json.geometry_operation.feature_id : json.geometry_operation.geometry_id,
 					type: json.geometry_operation.type
 				});
-				if (res && res.geometry !== undefined) {
+				if (res && res.geometry !== undefined && geometry_obj) {
 					let maptalks_geometry = (res.geometry) ? Geospatiale.convertTurfToMaptalks(res.geometry).toJSON() : null;
 					geometry_obj.history.addKeyframe(main.date, maptalks_geometry);
+					if (geometry_obj.draw) geometry_obj.draw();
 					return;
 				}
 			}
-			
-			let maptalks_geometry = naissance.Geometry.operate.call(geometry_obj,
-				json.geometry_operation.type,
-				(json.geometry_operation.feature_id) ? json.geometry_operation.feature_id : json.geometry_operation.geometry_id,
-				json.geometry_operation.options);
-			maptalks_geometry = (maptalks_geometry === null) ? null : maptalks_geometry.toJSON();
-			geometry_obj.history.addKeyframe(main.date, maptalks_geometry);
 		}
 	},
 	remove_from_polygon: {
@@ -263,12 +299,13 @@ config.actions.geometry_polygon = {
 			
 			if (json.remove_from_polygon) {
 				let date = (json.remove_from_polygon.date) ? json.remove_from_polygon.date : main.date;
-				let geometry = (json.remove_from_polygon.date) ?
-					polygon_obj.getGeometryKeyframeAtDate(date) : polygon_obj.geometry;
-				let ot_geometry = maptalks.Geometry.fromJSON(json.remove_from_polygon.geometry);
+				let geometry = (polygon_obj && json.remove_from_polygon.date) ?
+					polygon_obj.getGeometryKeyframeAtDate(date) : polygon_obj?.geometry;
+				let ot_geometry = (json.remove_from_polygon.geometry) ?
+					maptalks.Geometry.fromJSON(json.remove_from_polygon.geometry) : null;
 				
 				//Difference with existing geometry, if return value is null replace geometry
-				if (json.remove_from_polygon.date_range) {
+				if (json.remove_from_polygon.date_range && polygon_obj?.history) {
 					polygon_obj.history.callFunctionInDateRange(json.remove_from_polygon.date_range, (local_keyframe) => {
 						DALS.Timeline.parseAction("remove_from_polygon", [{
 							geometry_obj: polygon_obj.id,
@@ -279,30 +316,39 @@ config.actions.geometry_polygon = {
 						}], true);
 					});
 				} else {
+					//Immediate in-memory difference for active rendering geometry (0ms lag brushing)
+					if (polygon_obj && polygon_obj.history && geometry) {
+						try {
+							let turf_difference = null;
+							try {
+								turf_difference = turf.difference(turf.featureCollection([
+									Geospatiale.convertMaptalksToTurf(geometry),
+									Geospatiale.convertMaptalksToTurf(ot_geometry)
+								]));
+							} catch (e) {}
+							
+							let diff_json = (turf_difference) ?
+								Geospatiale.convertTurfToMaptalks(turf_difference).toJSON() : null;
+							polygon_obj.addKeyframe(date, diff_json);
+							syncGeometryToDB(polygon_obj.id, polygon_obj.history.keyframes);
+							return;
+						} catch (e) {
+							console.error(e);
+						}
+					}
+					
+					//Offload to background worker for uninstantiated/batch entities
 					if (global.proc?.executeAction) {
 						let res = await proc.executeAction("removeFromPolygon", {
 							date: date,
-							entity_id: polygon_obj.id,
+							entity_id: polygon_obj ? polygon_obj.id : (json.geometry_obj || json.entity_id),
 							geometry: json.remove_from_polygon.geometry
 						});
-						if (res && res.geometry !== undefined) {
+						if (res && res.geometry !== undefined && polygon_obj) {
 							let maptalks_geom = (res.geometry) ? Geospatiale.convertTurfToMaptalks(res.geometry).toJSON() : null;
 							polygon_obj.addKeyframe(date, maptalks_geom);
 							return;
 						}
-					}
-					
-					//Difference with existing geometry; if it covers the entire geometry set to null to hide
-					if (geometry) {
-						let turf_difference;
-						try {
-							turf_difference = turf.difference(turf.featureCollection([
-								Geospatiale.convertMaptalksToTurf(geometry),
-								Geospatiale.convertMaptalksToTurf(ot_geometry)
-							]));
-						} catch (e) {}
-						polygon_obj.addKeyframe(date, (turf_difference) ?
-							Geospatiale.convertTurfToMaptalks(turf_difference).toJSON() : null);
 					}
 				}
 			}

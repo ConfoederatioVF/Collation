@@ -199,6 +199,32 @@
     if (global.proc?.IPC_terminate)
       await proc.IPC_terminate();
   };
+
+
+  /**
+   * Returns resource diagnostics from all process workers in the pool.
+   *
+   * @returns {Promise<Array<Object>>}
+   */
+  proc.getDiagnostics = async function () {
+    if (global.proc?.IPC_getDiagnostics)
+      return await proc.IPC_getDiagnostics();
+    return [];
+  };
+
+
+  /**
+   * Sets the concurrent thread pool size for process workers.
+   *
+   * @param {number} arg0_count
+   *
+   * @returns {Promise<number>}
+   */
+  proc.setWorkerPoolSize = async function (arg0_count) {
+    if (global.proc?.IPC_setWorkerPoolSize)
+      return await proc.IPC_setWorkerPoolSize(arg0_count);
+    return 1;
+  };
 }
 
 if (typeof module !== "undefined" && module.exports)

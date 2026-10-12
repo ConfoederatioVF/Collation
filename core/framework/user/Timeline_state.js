@@ -70,7 +70,8 @@
 					}
 					if (json[i].load_savefile) {
 						DALS.load(json[i].load_savefile);
-						window.discordRPC.updateActivity("editing_savefile", path.basename(json[i].load_savefile));
+						if (window?.discordRPC?.updateActivity)
+							window.discordRPC.updateActivity("editing_savefile", path.basename(json[i].load_savefile));
 					}
 				}
 				if (json[i].set_date) {
@@ -107,6 +108,97 @@
 
 //State save/load functions
 {
+	DALS.load = async function (arg0_file_path) {
+		//Convert from parameters
+		let file_path = path.resolve(arg0_file_path);
+		
+		console.log(`[DALS] Loading savefile via multithreaded DB: ${file_path}`);
+		DALS.clearMap();
+		
+		if (global.db?.load) {
+			let shard_folder = await db.load(file_path);
+			
+			//Load map settings from metadata.json if present
+			let folder_path = (global.db?.getTempDirectory) ?
+				db.getTempDirectory(file_path) :
+				((global.NDJSON?.getTempDirectory) ?
+					NDJSON.getTempDirectory(file_path) :
+					path.resolve(process.cwd(), "saves/.temp", path.basename(file_path, path.extname(file_path))));
+			let metadata_file = path.join(folder_path, "metadata.json");
+			
+			if (!global.ve) global.ve = {};
+			global.ve.naissance_file_path = file_path;
+			global.ve.ndjson_file_path = shard_folder || path.join(folder_path, "partition_0.ndjson");
+			
+			if (fs.existsSync(metadata_file)) {
+				try {
+					let metadata_raw = fs.readFileSync(metadata_file, "utf8");
+					if (metadata_raw.trim().length > 0) {
+						let metadata_json = JSON.parse(metadata_raw);
+						if (global.UI_MapSettings)
+							UI_MapSettings.fromJSON(metadata_json);
+					}
+				} catch (e) {
+					console.error(e);
+				}
+			}
+			
+			//Populate UI Leftbar Hierarchy and trigger renderer
+			let hierarchy_fn = global.db?.getHierarchyValues || global.NDJSON?.getHierarchyValues;
+			if (hierarchy_fn) {
+				let main_obj = (typeof main !== "undefined") ? main : (globalThis.main || global.main);
+				let timestamp = (main_obj?.timestamp !== undefined) ? main_obj.timestamp :
+					(main_obj?.date ? Date.getTimestamp(main_obj.date) : 0);
+				let hierarchy_values = await hierarchy_fn(timestamp);
+				
+				if (Array.isArray(hierarchy_values)) {
+					for (let i = 0; i < hierarchy_values.length; i++) {
+						let entry = hierarchy_values[i];
+						let id = entry.key || entry.id;
+						let class_name = entry.class_name;
+						
+						if (class_name && naissance[class_name]) {
+							if (class_name.startsWith("Feature")) {
+								let feature_obj = new naissance[class_name](undefined, { metadata: entry.metadata });
+								feature_obj.setID(id);
+								if (entry.value) feature_obj.json = entry.value;
+								if (entry.name) feature_obj.name = entry.name;
+							} else if (class_name.startsWith("Geometry")) {
+								let geom_obj = new naissance[class_name]({ is_import: true });
+								geom_obj.setID(id);
+								if (entry.metadata) geom_obj.metadata = entry.metadata;
+								if (entry.name) geom_obj.name = entry.name;
+							}
+						}
+					}
+				}
+			}
+			
+			//Trigger hierarchy refresh and renderer update
+			setTimeout(() => {
+				let main_obj = (typeof main !== "undefined") ? main : (globalThis.main || global.main);
+				if (global.UI_Leftbar?.refresh) UI_Leftbar.refresh();
+				if (main_obj?.renderer?.update) main_obj.renderer.update();
+			}, 100);
+			
+			//Reload cursor
+			let main_obj = (typeof main !== "undefined") ? main : (globalThis.main || global.main);
+			if (main_obj?.layers?.cursor_layer && main_obj?.brush?.cursor)
+				main_obj.layers.cursor_layer.addGeometry(main_obj.brush.cursor);
+				
+			return;
+		}
+		
+		//Fallback for non-db environment
+		fs.readFile(file_path, "utf8", (err, data) => {
+			if (err) {
+				console.error(err);
+				return;
+			}
+			DALS.fromJSON(data);
+		});
+	};
+	
 	DALS.clearMap = function () {
 		//Clear _layers
 		main._layers.province_layers = [];
