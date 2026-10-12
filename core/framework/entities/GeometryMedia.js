@@ -276,15 +276,19 @@ naissance.GeometryMedia = class extends naissance.Geometry {
 		let has_local_history = (this.history?.keyframes && Object.keys(this.history.keyframes).length > 0);
 		
 		if (has_local_history) {
-			let kf_obj = this.history.getKeyframe({
-				date: target_date,
-				guaranteed_indexes: [1]
-			});
-			this.value = (kf_obj?.value) ? kf_obj.value : null;
-			if (this.value && this.value[1])
-				this.value[1] = this.getSymbol(this.value[1]);
-		} else {
-			this.value = null;
+			if (!this.history._hasTimestampAfter || this.history._hasTimestampAfter(target_date)) {
+				let kf_obj = this.history.getKeyframe({
+					date: target_date,
+					guaranteed_indexes: [1]
+				});
+				this.value = (kf_obj?.value) ? kf_obj.value : null;
+				if (this.value && this.value[1])
+					this.value[1] = this.getSymbol(this.value[1]);
+			} else {
+				this.value = null;
+			}
+		} else if (this.value && this.value[1]) {
+			this.value[1] = this.getSymbol(this.value[1]);
 		}
 		
 		//2. Check any cause for derendering
@@ -344,6 +348,7 @@ naissance.GeometryMedia = class extends naissance.Geometry {
 				}
 				
 				this.render();
+				this.updateUI();
 			} catch (e) { console.error(e); }
 		} else {
 			//Derender geometry
@@ -412,63 +417,85 @@ naissance.GeometryMedia = class extends naissance.Geometry {
 			});
 		}
 		
+		this.updateInfoPanels();
+		
+		let clear_crop_mask = veButton(() => {
+			let dim = this.getImageDimensions();
+			this.crop_mask_ctx.clearRect(0, 0, dim.w, dim.h);
+			this.has_crop_mask = false;
+			this._crop_mask_dirty = false;
+			this.updateKeyframe({ crop_mask: "" });
+			this.render();
+		}, { name: "Clear Crop Mask" });
+		let crop_brush_toggle = veToggle(this.crop_brush_active, {
+			name: "Crop Brush Tool",
+			onuserchange: (v) => {
+				this.toggleCropBrush(v);
+				this.render();
+			},
+		});
+		let disable_pitch_checkbox = veCheckbox(symbol_obj.disable_pitch || false, {
+			name: "Disable Pitch",
+			onuserchange: (v) => this.updateKeyframe({ disable_pitch: v }),
+		});
+		let disable_rotation = veCheckbox(symbol_obj.disable_rotation || false, {
+			name: "Disable Rotation",
+			onuserchange: (v) => this.updateKeyframe({ disable_rotation: v }),
+		});
+		let media_timestamp = veNumber(symbol_obj.timestamp, {
+			name: "Media Timestamp",
+			limit: () => File.isVideo(this._loaded_url),
+			onuserchange: (v) => this.updateKeyframe({ timestamp: v }),
+		});
+		let opacity_slider = veRange(Math.returnSafeNumber(symbol_obj.opacity, 0.45), {
+			name: "Opacity",
+			min: 0,
+			max: 1,
+			step: 0.01,
+			onuserchange: (v) => {
+				this.canvas.style.opacity = v;
+				this.updateKeyframe({ opacity: v });
+			},
+		});
+		let url_input = veText(symbol_obj.url || "", {
+			name: "Media URL",
+			onuserchange: (v) => this.updateKeyframe({ url: v }),
+		});
+		let warp_mode_select = veSelect({
+			triangulation: { name: "Affine Triangles" },
+			tps: { name: "Thin Plate Spline" },
+		}, {
+			name: "Warp Mode",
+			selected: (symbol_obj.warp_mode || "triangulation"),
+			onuserchange: (v) => this.updateKeyframe({ warp_mode: v }),
+		});
+		
+		this.ui_components = {
+			clear_crop_mask: clear_crop_mask,
+			crop_brush_toggle: crop_brush_toggle,
+			disable_pitch_checkbox: disable_pitch_checkbox,
+			disable_rotation: disable_rotation,
+			media_timestamp: media_timestamp,
+			opacity_slider: opacity_slider,
+			url_input: url_input,
+			warp_mode_select: warp_mode_select
+		};
+		
 		//Return statement
 		return {
 			edit_image_ui: veInterface({
-				warp_mode_select: veSelect({
-					triangulation: { name: "Affine Triangles" },
-					tps: { name: "Thin Plate Spline" },
-				}, {
-					name: "Warp Mode",
-					selected: (symbol_obj.warp_mode || "triangulation"),
-					onuserchange: (v) => this.updateKeyframe({ warp_mode: v }),
-				}),
-				crop_brush_toggle: veToggle(this.crop_brush_active, {
-					name: "Crop Brush Tool",
-					onuserchange: (v) => {
-						this.toggleCropBrush(v);
-						this.render();
-					},
-				}),
-				clear_crop_mask: veButton(() => {
-					let dim = this.getImageDimensions();
-					this.crop_mask_ctx.clearRect(0, 0, dim.w, dim.h);
-					this.has_crop_mask = false;
-					this._crop_mask_dirty = false;
-					this.updateKeyframe({ crop_mask: "" });
-					this.render();
-				}, { name: "Clear Crop Mask" }),
-				disable_pitch_checkbox: veCheckbox(symbol_obj.disable_pitch || false, {
-					name: "Disable Pitch",
-					onuserchange: (v) => this.updateKeyframe({ disable_pitch: v }),
-				}),
-				disable_rotation: veCheckbox(symbol_obj.disable_rotation || false, {
-					name: "Disable Rotation",
-					onuserchange: (v) => this.updateKeyframe({ disable_rotation: v }),
-				}),
+				warp_mode_select: warp_mode_select,
+				crop_brush_toggle: crop_brush_toggle,
+				clear_crop_mask: clear_crop_mask,
+				disable_pitch_checkbox: disable_pitch_checkbox,
+				disable_rotation: disable_rotation,
 				points_label: veHTML("Control Points [Lng, Lat]"),
 				points_area: veHTML(this.points_area),
 				extent_label: veHTML("Canvas Extent [NW, SE]"),
 				extent_area: veHTML(this.extent_area),
-				opacity_slider: veRange(Math.returnSafeNumber(symbol_obj.opacity, 0.45), {
-					name: "Opacity",
-					min: 0,
-					max: 1,
-					step: 0.01,
-					onuserchange: (v) => {
-						this.canvas.style.opacity = v;
-						this.updateKeyframe({ opacity: v });
-					},
-				}),
-				url_input: veText(symbol_obj.url || "", {
-					name: "Media URL",
-					onuserchange: (v) => this.updateKeyframe({ url: v }),
-				}),
-				media_timestamp: veNumber(symbol_obj.timestamp, {
-					name: "Media Timestamp",
-					limit: () => File.isVideo(this._loaded_url),
-					onuserchange: (v) => this.updateKeyframe({ timestamp: v }),
-				}),
+				opacity_slider: opacity_slider,
+				url_input: url_input,
+				media_timestamp: media_timestamp,
 				media_controls: veRawInterface({
 					media_play: veButton(() =>  this._playVideo(),
 						{ name: "Play Video", limit: () => this.video_el?.paused }),
@@ -566,9 +593,37 @@ naissance.GeometryMedia = class extends naissance.Geometry {
 		};
 	}
 	
+	/**
+	 * Synchronises the Object Inspector UI elements with the active keyframe values.
+	 * - Method of: {@link naissance.GeometryMedia}
+	 */
+	updateUI () {
+		//Declare local instance variables
+		let symbol_obj = (this.value?.[1]) ? this.value[1] : {};
+		
+		if (this.ui_components) {
+			if (this.ui_components.url_input && document.activeElement !== this.ui_components.url_input.element?.querySelector?.("input"))
+				this.ui_components.url_input.v = (symbol_obj.url !== undefined) ? symbol_obj.url : "";
+			if (this.ui_components.opacity_slider)
+				this.ui_components.opacity_slider.v = Math.returnSafeNumber(symbol_obj.opacity, 0.45);
+			if (this.ui_components.warp_mode_select)
+				this.ui_components.warp_mode_select.v = (symbol_obj.warp_mode || "triangulation");
+			if (this.ui_components.disable_pitch_checkbox)
+				this.ui_components.disable_pitch_checkbox.v = Boolean(symbol_obj.disable_pitch);
+			if (this.ui_components.disable_rotation)
+				this.ui_components.disable_rotation.v = Boolean(symbol_obj.disable_rotation);
+			if (this.ui_components.media_timestamp && symbol_obj.timestamp !== undefined)
+				this.ui_components.media_timestamp.v = symbol_obj.timestamp;
+		}
+		
+		this.updateInfoPanels();
+	}
+	
 	getEventWorldPos (e) {
 		//Declare local instance variables
-		let rect = map.getContainer().getBoundingClientRect();
+		let map_container = (map?.getContainer) ? map.getContainer() : null;
+		if (!map_container || !map?.containerPointToCoordinate) return null;
+		let rect = map_container.getBoundingClientRect();
 		let pt = new maptalks.Point(e.clientX - rect.left, e.clientY - rect.top);
 		let coord = map.containerPointToCoordinate(pt);
 		
@@ -579,7 +634,9 @@ naissance.GeometryMedia = class extends naissance.Geometry {
 	
 	getEventScreenPos (e) {
 		//Declare local instance variables
-		let rect = map.getContainer().getBoundingClientRect();
+		let map_container = (map?.getContainer) ? map.getContainer() : null;
+		if (!map_container) return { x: 0, y: 0 };
+		let rect = map_container.getBoundingClientRect();
 		
 		//Return statement
 		return { x: e.clientX - rect.left, y: e.clientY - rect.top };
@@ -601,12 +658,17 @@ naissance.GeometryMedia = class extends naissance.Geometry {
 		let lng = arg0_lng;
 		let lat = arg1_lat;
 		
+		if (!map || typeof map.getProjection !== "function") return { x: 0, y: 0 };
+		
 		//Declare local instance variables
-		let projection = map.getProjection(),
-			marker_coord = this.geometry.getCoordinates(),
-			res = map.getResolution(this.initial_zoom);
-		let center_auc = projection.project(marker_coord),
-			target_auc = projection.project(new maptalks.Coordinate(lng, lat));
+		let marker_coord = (this.geometry?.getCoordinates) ? this.geometry.getCoordinates() :
+			(this.value?.[0]?.center ? new maptalks.Coordinate(this.value[0].center) :
+			(map?.getCenter ? map.getCenter() : new maptalks.Coordinate(0, 0)));
+		let projection = map.getProjection();
+		let target_zoom = (this.initial_zoom !== undefined) ? this.initial_zoom : (map?.getZoom ? map.getZoom() : 0);
+		let res = (map?.getResolution) ? map.getResolution(target_zoom) : 1;
+		let center_auc = projection.project(marker_coord);
+		let target_auc = projection.project(new maptalks.Coordinate(lng, lat));
 		
 		//Return statement
 		return {
@@ -620,14 +682,20 @@ naissance.GeometryMedia = class extends naissance.Geometry {
 		let wx = arg0_wx;
 		let wy = arg1_wy;
 		
+		if (!map || typeof map.getProjection !== "function") return [0, 0];
+		
 		//Declare local instance variables
-		let projection = map.getProjection(),
-			marker_coord = this.geometry.getCoordinates(),
-			res = map.getResolution(this.initial_zoom);
+		let marker_coord = (this.geometry?.getCoordinates) ? this.geometry.getCoordinates() :
+			(this.value?.[0]?.center ? new maptalks.Coordinate(this.value[0].center) :
+			(map?.getCenter ? map.getCenter() : new maptalks.Coordinate(0, 0)));
+		let projection = map.getProjection();
+		let target_zoom = (this.initial_zoom !== undefined) ? this.initial_zoom : (map?.getZoom ? map.getZoom() : 0);
+		let res = (map?.getResolution) ? map.getResolution(target_zoom) : 1;
 		let center_auc = projection.project(marker_coord);
 		let target_auc = new maptalks.Coordinate(
 			center_auc.x + (wx - this.img_center)*res,
-			center_auc.y - (wy - this.img_center)*res);
+			center_auc.y - (wy - this.img_center)*res
+		);
 		let coordinate_result = projection.unproject(target_auc);
 		
 		//Return statement
@@ -700,7 +768,8 @@ naissance.GeometryMedia = class extends naissance.Geometry {
 	
 	handleEvents () {
 		//Declare local instance variables; add event handlers
-		let container = map.getContainer();
+		let container = (map?.getContainer) ? map.getContainer() : null;
+		if (!container) return;
 		
 		this._onmousedown = (e) => this.handleMouseDown(e);
 		this._onmousemove = (e) => this.handleMouseMove(e);
@@ -733,7 +802,7 @@ naissance.GeometryMedia = class extends naissance.Geometry {
 		
 		//Add map refresh call
 		this._attached_map = map;
-		map.on("viewchange mousemove", this._onviewchange);
+		if (map?.on) map.on("viewchange mousemove", this._onviewchange);
 	}
 	
 	handleKeyDown (e) {
@@ -1437,6 +1506,7 @@ naissance.GeometryMedia = class extends naissance.Geometry {
 	
 	updateInfoPanels () {
 		if (!this.points_area || document.activeElement === this.points_area || document.activeElement === this.extent_area) return;
+		if (!this.mesh_points || !Array.isArray(this.mesh_points) || this.mesh_points.length === 0) return;
 		this.points_area.value = this.mesh_points
 		.map((p) => {
 			let c = this.getWorldToLngLat(p.x, p.y);

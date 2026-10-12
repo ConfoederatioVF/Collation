@@ -36,19 +36,11 @@ naissance.Renderer = class extends ve.Class {
 	}
 	
 	/**
-	 * Handles Render events, particularly for zoom-related visibility.
+	 * Handles Render events.
 	 * - Method of: {@link naissance.Renderer}
 	 */
 	handleEvents () {
-		let map_inst = global.map_component || (typeof map !== "undefined" ? map : global.map);
-		if (map_inst?.on) {
-			map_inst.on("zoomend", () => {
-				this.update();
-			});
-			map_inst.on("moveend", () => {
-				this.update();
-			});
-		}
+		//Frustum culling is handled natively by Maptalks on viewport render.
 	}
 	
 	/**
@@ -142,7 +134,7 @@ naissance.Renderer = class extends ve.Class {
 	
 	/**
 	 * Draws all Features/Geometries in order by calling their draw function,
-	 * with requestAnimationFrame throttling and viewport spatial streaming when in DB mode.
+	 * with requestAnimationFrame throttling and temporal state streaming when in DB mode.
 	 * - Method of: {@link naissance.Renderer}
 	 */
 	update () {
@@ -181,33 +173,10 @@ naissance.Renderer = class extends ve.Class {
 				(async () => {
 					try {
 						let main_obj = (typeof main !== "undefined") ? main : (globalThis.main || global.main);
-						let map_obj = (typeof map !== "undefined") ? map : (globalThis.map || global.map);
 						let timestamp = (main_obj?.timestamp !== undefined) ? main_obj.timestamp :
 							(main_obj?.date ? Date.getTimestamp(main_obj.date) : 0);
 						
-						let bbox;
-						if (map_obj && typeof map_obj.getExtent === "function") {
-							let extent = map_obj.getExtent();
-							if (extent) {
-								let min_x = (extent.xmin !== undefined) ? extent.xmin : extent.getMin?.()?.x;
-								let min_y = (extent.ymin !== undefined) ? extent.ymin : extent.getMin?.()?.y;
-								let max_x = (extent.xmax !== undefined) ? extent.xmax : extent.getMax?.()?.x;
-								let max_y = (extent.ymax !== undefined) ? extent.ymax : extent.getMax?.()?.y;
-								
-								if (min_x !== undefined && min_y !== undefined && max_x !== undefined && max_y !== undefined) {
-									let dx = Math.abs(max_x - min_x) * 0.1;
-									let dy = Math.abs(max_y - min_y) * 0.1;
-									bbox = [
-										Math.min(min_x, max_x) - dx,
-										Math.min(min_y, max_y) - dy,
-										Math.max(min_x, max_x) + dx,
-										Math.max(min_y, max_y) + dy
-									];
-								}
-							}
-						}
-						
-						let visible_diffs = await db.diffBBox({ bbox: bbox, timestamp: timestamp });
+						let visible_diffs = await db.diffBBox({ timestamp: timestamp });
 						
 						let current_target_timestamp = (main_obj?.timestamp !== undefined) ? main_obj.timestamp :
 							(main_obj?.date ? Date.getTimestamp(main_obj.date) : 0);

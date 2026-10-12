@@ -843,6 +843,9 @@ naissance.Geometry = class extends naissance.Entity {
 				if (this.hierarchy_datatype?.components_obj?.name)
 					this.hierarchy_datatype.components_obj.name.v = this.name;
 				
+				if (typeof this.draw === "function") this.draw();
+				if (typeof this.updateUI === "function") this.updateUI();
+				
 				return true;
 			}
 		} catch (e) {
