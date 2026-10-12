@@ -35,16 +35,19 @@ naissance.Entity = class extends ve.Class {
 		//Geometry: Keyframe handling
 		if (this.class_name.startsWith("Geometry")) {
 			let current_keyframe = this.history.getKeyframe({
-				guaranteed_indexes: [1]
+				guaranteed_indexes: [0, 1]
 			});
-				this._current_keyframe = current_keyframe;
-			let current_symbol = current_keyframe.value[1];
+			this._current_keyframe = current_keyframe;
+			let active_value = (current_keyframe?.value && current_keyframe.value[0] !== undefined) ?
+				current_keyframe.value : this.value;
+			let current_symbol = (active_value?.[1]) ? active_value[1] : {};
 			let is_visible = false;
 			
 			try {
 				if (
-					(current_keyframe.value[0] !== undefined && Object.keys(current_keyframe.value[0]).length) &&
-					!current_keyframe.value?.[2]?.hidden //Manual hidden attribute
+					(active_value?.[0] !== undefined && Object.keys(active_value[0]).length) &&
+					!active_value?.[2]?.hidden &&
+					this._is_visible !== false
 				) is_visible = true;
 			} catch (e) {}
 			

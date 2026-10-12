@@ -18,6 +18,12 @@ naissance.Renderer = class extends ve.Class {
 		
 		if (!inst) return;
 		
+		if (inst.canvas && inst.canvas.parentNode) {
+			try { inst.canvas.parentNode.removeChild(inst.canvas); } catch (e) {}
+		}
+		if (typeof inst._pauseVideo === "function") {
+			try { inst._pauseVideo(); } catch (e) {}
+		}
 		if (inst.geometry) {
 			try { inst.geometry.remove(); } catch (e) {}
 			inst.geometry = undefined;

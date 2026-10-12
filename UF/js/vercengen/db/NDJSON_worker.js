@@ -44,64 +44,51 @@ let queue = [];
 	};
 }
 
-let extractCoordinates = function (obj, coords_acc) {
+let updateBBoxFromCoords = function (obj, bbox) {
 	if (!obj) return;
 	
 	if (Array.isArray(obj)) {
 		if (obj.length >= 2 && typeof obj[0] === "number" && typeof obj[1] === "number") {
-			coords_acc.push(obj[0], obj[1]);
+			let x = obj[0];
+			let y = obj[1];
+			if (x < bbox[0]) bbox[0] = x;
+			if (y < bbox[1]) bbox[1] = y;
+			if (x > bbox[2]) bbox[2] = x;
+			if (y > bbox[3]) bbox[3] = y;
+			bbox[4] = true;
 		} else {
-			for (let i = 0; i < obj.length; i++) extractCoordinates(obj[i], coords_acc);
+			for (let i = 0; i < obj.length; i++) updateBBoxFromCoords(obj[i], bbox);
 		}
 	} else if (typeof obj === "object") {
 		if (obj.coordinates) {
-			extractCoordinates(obj.coordinates, coords_acc);
+			updateBBoxFromCoords(obj.coordinates, bbox);
 		} else if (obj.geometry) {
-			extractCoordinates(obj.geometry, coords_acc);
+			updateBBoxFromCoords(obj.geometry, bbox);
 		} else if (obj.feature) {
-			extractCoordinates(obj.feature, coords_acc);
-		} else {
-			for (let k in obj) {
-				if (typeof obj[k] === "object") extractCoordinates(obj[k], coords_acc);
-			}
+			updateBBoxFromCoords(obj.feature, bbox);
 		}
 	}
 };
 
 let calculateBBox = function (raw_keyframes, entity) {
-	let coords = [];
+	//Declare local instance variables: [min_x, min_y, max_x, max_y, found_any]
+	let bbox = [Infinity, Infinity, -Infinity, -Infinity, false];
 	
 	if (raw_keyframes && typeof raw_keyframes === "object") {
 		let ts = History.getTimestamps(raw_keyframes);
 		for (let i = 0; i < ts.length; i++) {
 			let kf = raw_keyframes[ts[i]];
-			extractCoordinates(kf, coords);
-			if (coords.length > 0) break;
+			updateBBoxFromCoords(kf, bbox);
+			if (bbox[4]) break;
 		}
 	}
 	
-	if (coords.length === 0 && entity?.value) {
-		extractCoordinates(entity.value, coords);
-	}
-	
-	if (coords.length === 0) return null;
-	
-	let max_x = -Infinity;
-	let max_y = -Infinity;
-	let min_x = Infinity;
-	let min_y = Infinity;
-	
-	for (let i = 0; i < coords.length; i += 2) {
-		let x = coords[i];
-		let y = coords[i + 1];
-		if (x < min_x) min_x = x;
-		if (x > max_x) max_x = x;
-		if (y < min_y) min_y = y;
-		if (y > max_y) max_y = y;
+	if (!bbox[4] && entity?.value) {
+		updateBBoxFromCoords(entity.value, bbox);
 	}
 	
 	//Return statement
-	return [min_x, min_y, max_x, max_y];
+	return bbox[4] ? [bbox[0], bbox[1], bbox[2], bbox[3]] : null;
 };
 
 let resolveHistory = function (data, timestamp, options) {
@@ -160,7 +147,6 @@ let loadPartition = async function (page_file) {
 					entity: entity,
 					id: key,
 					metadata: entity.metadata,
-					raw_keyframes: raw_keyframes,
 					timestamps: timestamps,
 					type: entity.type,
 					value: entity.value
@@ -173,6 +159,15 @@ let loadPartition = async function (page_file) {
 		if (global.gc) {
 			try { global.gc(); } catch (e) {}
 		}
+	}
+};
+
+let safeWrite = async function (ws, rs, content) {
+	let can_write = ws.write(content);
+	if (!can_write) {
+		if (rs && typeof rs.pause === "function") rs.pause();
+		await new Promise((resolve) => ws.once("drain", resolve));
+		if (rs && typeof rs.resume === "function") rs.resume();
 	}
 };
 
@@ -190,7 +185,7 @@ let updateNDJSON = async function (page_file, getUpdatedValue, options) {
 	try {
 		if (fs.existsSync(page_file)) {
 			let rs = fs.createReadStream(page_file);
-			let rl = readline.createInterface({ input: rs });
+			let rl = readline.createInterface({ input: rs, crlfDelay: Infinity });
 			
 			try {
 				for await (let line of rl) {
@@ -210,13 +205,11 @@ let updateNDJSON = async function (page_file, getUpdatedValue, options) {
 					
 					if (key !== null) {
 						if (target_id !== null && key !== target_id) {
-							let can_write = ws.write(clean + "\n");
-							if (!can_write) await new Promise((resolve) => ws.once("drain", resolve));
+							await safeWrite(ws, rs, clean + "\n");
 							continue;
 						}
 						if (target_keys !== null && !target_keys.has(key)) {
-							let can_write = ws.write(clean + "\n");
-							if (!can_write) await new Promise((resolve) => ws.once("drain", resolve));
+							await safeWrite(ws, rs, clean + "\n");
 							continue;
 						}
 						
@@ -225,18 +218,14 @@ let updateNDJSON = async function (page_file, getUpdatedValue, options) {
 						
 						let newValue = getUpdatedValue(key, val_str);
 						if (newValue !== undefined) {
-							if (newValue !== null) {
-								let can_write = ws.write(`"${key}":${JSON.stringify(newValue)}\n`);
-								if (!can_write) await new Promise((resolve) => ws.once("drain", resolve));
-							}
+							if (newValue !== null)
+								await safeWrite(ws, rs, `"${key}":${JSON.stringify(newValue)}\n`);
 							updated = true;
 						} else {
-							let can_write = ws.write(clean + "\n");
-							if (!can_write) await new Promise((resolve) => ws.once("drain", resolve));
+							await safeWrite(ws, rs, clean + "\n");
 						}
 					} else {
-						let can_write = ws.write(clean + "\n");
-						if (!can_write) await new Promise((resolve) => ws.once("drain", resolve));
+						await safeWrite(ws, rs, clean + "\n");
 					}
 				}
 			} finally {
@@ -248,10 +237,8 @@ let updateNDJSON = async function (page_file, getUpdatedValue, options) {
 		let extra_appends = getUpdatedValue(null, null, updated);
 		if (extra_appends) {
 			for (let [k, val] of Object.entries(extra_appends)) {
-				if (val !== null) {
-					let can_write = ws.write(`"${k}":${JSON.stringify(val)}\n`);
-					if (!can_write) await new Promise((resolve) => ws.once("drain", resolve));
-				}
+				if (val !== null)
+					await safeWrite(ws, null, `"${k}":${JSON.stringify(val)}\n`);
 			}
 		}
 		
@@ -577,7 +564,6 @@ async function handleTask (arg0_task) {
 			if (!history_obj) history_obj = {};
 			history_obj.keyframes = keyframes;
 			cached.entity.history = history_obj;
-			cached.raw_keyframes = keyframes;
 			cached.timestamps = History.getTimestamps(keyframes);
 			cached.bbox = calculateBBox(keyframes, cached.entity);
 		}
@@ -621,7 +607,6 @@ async function handleTask (arg0_task) {
 					entity: val,
 					id: k,
 					metadata: val.metadata,
-					raw_keyframes: raw_keyframes,
 					timestamps: timestamps,
 					type: val.type,
 					value: val.value

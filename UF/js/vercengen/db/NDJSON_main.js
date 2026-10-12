@@ -423,7 +423,7 @@ if (!global.NDJSON)
 				let worker = new NodeWorker(worker_script, {
 					resourceLimits: {
 						maxOldGenerationSizeMb: 4096,
-						maxYoungGenerationSizeMb: 512
+						maxYoungGenerationSizeMb: 128
 					},
 					workerData: { worker_id: i }
 				});
@@ -572,8 +572,8 @@ if (!global.NDJSON)
 			global.ve.ndjson_file_path = path.join(folder_path, "partition_0.ndjson");
 			
 			let pool_indices = pool.map((_, i) => i);
-			for (let b = 0; b < pool_indices.length; b += 4) {
-				let batch = pool_indices.slice(b, b + 4);
+			for (let b = 0; b < pool_indices.length; b += 2) {
+				let batch = pool_indices.slice(b, b + 2);
 				await NDJSON.task(batch, {
 					file_path: file_path,
 					type: "init_partition"
@@ -761,8 +761,8 @@ if (!global.NDJSON)
 		
 		//Notify all workers to index their partition in memory
 		let pool_indices = pool.map((_, i) => i);
-		for (let b = 0; b < pool_indices.length; b += 4) {
-			let batch = pool_indices.slice(b, b + 4);
+		for (let b = 0; b < pool_indices.length; b += 2) {
+			let batch = pool_indices.slice(b, b + 2);
 			await NDJSON.task(batch, {
 				file_path: file_path,
 				type: "init_partition"
@@ -926,12 +926,18 @@ if (!global.NDJSON)
 					if (clean.length === 0) continue;
 					if (!first) {
 						let can_write_comma = ws.write(",\n");
-						if (!can_write_comma)
+						if (!can_write_comma) {
+							rs.pause();
 							await new Promise((r) => ws.once("drain", r));
+							rs.resume();
+						}
 					}
 					let can_write = ws.write(clean);
-					if (!can_write)
+					if (!can_write) {
+						rs.pause();
 						await new Promise((r) => ws.once("drain", r));
+						rs.resume();
+					}
 					first = false;
 				}
 				

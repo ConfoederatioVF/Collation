@@ -22,6 +22,8 @@ naissance.GeometryMedia = class extends naissance.Geometry {
 		
 		//Full-viewport screen-space canvas attached directly to the map container
 		this.canvas = document.createElement("canvas");
+		this.canvas.className = "geometry-media-canvas";
+		this.canvas.setAttribute("data-entity-id", this.id);
 		this.ctx = this.canvas.getContext("2d");
 		this.canvas.style.left = "0";
 		this.canvas.style.pointerEvents = "none";
@@ -349,12 +351,16 @@ naissance.GeometryMedia = class extends naissance.Geometry {
 				
 				this.render();
 				this.updateUI();
+				if (this.hierarchy_datatype?.element)
+					this.hierarchy_datatype.element.setAttribute("data-is-visible", "true");
 			} catch (e) { console.error(e); }
 		} else {
 			//Derender geometry
 			if (this.geometry) this.geometry.hide();
 			this.canvas.style.display = "none";
 			this._canvas_hidden = true;
+			if (this.hierarchy_datatype?.element)
+				this.hierarchy_datatype.element.setAttribute("data-is-visible", "false");
 		}
 		
 		//Draw keyframes
@@ -1105,14 +1111,28 @@ naissance.GeometryMedia = class extends naissance.Geometry {
 	}
 	
 	remove (arg0_do_not_refresh) {
-		if (this.geometry) this.geometry.remove();
+		//Convert from parameters
+		let do_not_refresh = (arg0_do_not_refresh !== undefined) ? arg0_do_not_refresh : true;
 		
-		if (this.canvas && this.canvas.parentNode) this.canvas.parentNode.removeChild(this.canvas);
-		let container = (this._attached_map || map)?.getContainer();
+		//1. Pause video
+		this._pauseVideo();
+		
+		//2. Remove geometry marker
+		if (this.geometry) {
+			try { this.geometry.remove(); } catch (e) {}
+			this.geometry = undefined;
+		}
+		
+		//3. Remove canvas from DOM
+		if (this.canvas && this.canvas.parentNode)
+			this.canvas.parentNode.removeChild(this.canvas);
+		
+		//4. Detach event listeners
+		let container = (this._attached_map || map)?.getContainer?.();
 		if (container) {
-			container.removeEventListener("mousedown", this._onmousedown, true);
-			container.removeEventListener("mousemove", this._onmousemove, true);
-			container.removeEventListener("mouseup", this._onmouseup, true);
+			if (this._onmousedown) container.removeEventListener("mousedown", this._onmousedown, true);
+			if (this._onmousemove) container.removeEventListener("mousemove", this._onmousemove, true);
+			if (this._onmouseup) container.removeEventListener("mouseup", this._onmouseup, true);
 			if (this._oncontextmenu) container.removeEventListener("contextmenu", this._oncontextmenu, true);
 			if (this._onwheel) container.removeEventListener("wheel", this._onwheel, { capture: true });
 		}
@@ -1121,7 +1141,7 @@ naissance.GeometryMedia = class extends naissance.Geometry {
 			try { this._attached_map.off("viewchange mousemove", this._onviewchange); } catch (e) {}
 		}
 		
-		super.remove(arg0_do_not_refresh);
+		super.remove(do_not_refresh);
 	}
 	
 	render () {

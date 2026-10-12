@@ -276,16 +276,38 @@
 		if (main?.layers?.label_layer)
 			main.layers.label_layer.clear();
 		
+		//Derender and remove all cached renderer entities
+		if (main?.renderer?.rendered_entities) {
+			for (let [id, inst] of main.renderer.rendered_entities) {
+				if (typeof inst.remove === "function") {
+					try { inst.remove(true); } catch (e) {}
+				}
+				if (main.renderer?.derenderEntity) {
+					main.renderer.derenderEntity(inst);
+				}
+			}
+			main.renderer.rendered_entities.clear();
+		}
+		
 		//Clear geometries
-		Object.iterate(naissance.Geometry.instances, (local_key, local_geometry) =>
-			local_geometry.remove());
+		Object.iterate(naissance.Geometry.instances, (local_key, local_geometry) => {
+			try { local_geometry.remove(true); } catch (e) {}
+		});
+		
+		//Remove any lingering media canvases attached to the map container
+		let map_container = (typeof map !== "undefined" && map?.getContainer) ? map.getContainer() : null;
+		if (map_container) {
+			let all_media_canvases = map_container.querySelectorAll("canvas.geometry-media-canvas");
+			for (let i = 0; i < all_media_canvases.length; i++) {
+				if (all_media_canvases[i].parentNode)
+					all_media_canvases[i].parentNode.removeChild(all_media_canvases[i]);
+			}
+		}
 		
 		//Clear scene
 		scene.map_component.clear();
 		naissance.Feature.instances = {};
 		naissance.Geometry.instances = {};
-		if (main?.renderer?.rendered_entities)
-			main.renderer.rendered_entities.clear();
 	};
 	
 	DALS.fromJSON = function (arg0_json) {
