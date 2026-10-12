@@ -29,7 +29,14 @@ global.UI_Leftbar = class extends ve.Class {
 							}
 						},
 						manual_save_function: async (file_path) => {
-							await DALS.save(file_path);
+							try {
+								let saved_path = await DALS.save(file_path);
+								let filename = (saved_path || file_path) ? path.basename(saved_path || file_path) : "savefile";
+								veToast(`<icon>check</icon> Saved ${filename} successfully.`);
+							} catch (e) {
+								console.error("[DALS] Failed to save:", e);
+								veToast(`<icon>warning</icon> Failed to save: ${e.message || e}`);
+							}
 						},
 						save_extension: ".naissance"
 					})

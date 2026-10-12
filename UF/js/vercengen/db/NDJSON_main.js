@@ -895,12 +895,18 @@ if (!global.NDJSON)
 		
 		if (!fs.existsSync(folder_path)) return target_path;
 		
+		//1. Flush any pending worker in-memory edits to their partition shards
+		await NDJSON.task("all", {
+			file_path: file_path,
+			type: "flush_dirty"
+		});
+		
 		let ws = fs.createWriteStream(target_path);
 		ws.write("{\n");
 		
 		let first = true;
 		
-		//1. Write metadata if extant
+		//2. Write metadata if extant
 		let metadata_path = path.join(folder_path, "metadata.json");
 		if (fs.existsSync(metadata_path)) {
 			let meta_content = fs.readFileSync(metadata_path, "utf8").trim();

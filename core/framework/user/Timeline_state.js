@@ -206,14 +206,8 @@
 				if (timestamps_fn) {
 					try {
 						global_timestamps = await timestamps_fn();
-						if (Array.isArray(global_timestamps) && global_timestamps.length > 0 && fs.existsSync(folder_path)) {
-							try {
-								metadata_json.timestamps = global_timestamps;
-								fs.writeFileSync(metadata_file, JSON.stringify(metadata_json, null, 2), "utf8");
-							} catch (err) {
-								console.error("[DALS] Failed to cache timestamps to metadata.json:", err);
-							}
-						}
+						if (Array.isArray(global_timestamps) && global_timestamps.length > 0)
+							metadata_json.timestamps = global_timestamps;
 					} catch (e) {
 						console.error("[DALS] Error loading global timestamps:", e);
 					}
