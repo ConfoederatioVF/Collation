@@ -82,7 +82,9 @@ History.addKeyframe = function (arg0_keyframes, arg1_timestamp, ...argn_argument
 	//Iterate over all argn_arguments and add it to .value, concatenating any objects if they exist
 	for (let i = 0; i < argn_arguments.length; i++)
 		if (argn_arguments[i] !== undefined)
-			if (typeof argn_arguments === "object" && argn_arguments[i] !== null) {
+			if (i === 0) {
+				keyframe_obj.value[0] = argn_arguments[0];
+			} else if (typeof argn_arguments[i] === "object" && argn_arguments[i] !== null) {
 				let old_variables = (keyframe_obj.value[i]?.variables) ? 
 					keyframe_obj.value[i].variables : {};
 				
@@ -230,7 +232,10 @@ History.diffKeyframe = function (arg0_keyframe, arg1_keyframe) {
 	//Declare local instance variables
 	if (ot_keyframe.value)
 		for (let i = 0; i < ot_keyframe.value.length; i++) {
-			if (typeof ot_keyframe.value[i] === "object" && ot_keyframe.value[i] !== null) {
+			if (i === 0) {
+				if (ot_keyframe.value[0] !== undefined)
+					keyframe.value[0] = ot_keyframe.value[0];
+			} else if (typeof ot_keyframe.value[i] === "object" && ot_keyframe.value[i] !== null) {
 				let old_variables = (keyframe.value[i] && keyframe.value[i].variables) ?
 					keyframe.value[i].variables : {};
 				

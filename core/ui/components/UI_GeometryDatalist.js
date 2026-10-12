@@ -37,10 +37,16 @@ global.UI_GeometryDatalist = class extends ve.Component {
     if (!current_val && this.datalist)
       current_val = this.datalist.v;
       
-    if (current_val && !naissance.Geometry.instances[current_val])
+    if (!current_val || !String(current_val).trim()) return "";
+    
+    if (current_val && !naissance.Geometry.instances[current_val]) {
+      let norm_val = String(current_val).replace(/\s+/g, "").toLowerCase();
       Object.iterate(naissance.Geometry.instances, (local_id, local_geom) => {
-        if (local_geom.name === current_val) current_val = local_id;
+        let geom_id = String(local_id).replace(/\s+/g, "").toLowerCase();
+        let geom_name = (local_geom.name) ? String(local_geom.name).replace(/\s+/g, "").toLowerCase() : "";
+        if (geom_name === norm_val || geom_id === norm_val) current_val = local_id;
       });
+    }
       
     //Return statement
     return current_val;
@@ -77,17 +83,20 @@ global.UI_GeometryDatalist = class extends ve.Component {
           is_valid = false;
       
       //Append to map if valid geometry
-      if (is_valid)
-        geometry_map[local_geometry.id] = local_geometry.name;
+      if (is_valid) {
+        let clean_name = (local_geometry.name) ?
+          String(local_geometry.name).replace(/\r?\n|\r/g, " ").trim() : local_geometry.id;
+        geometry_map[local_geometry.id] = clean_name;
+      }
     });
     
     let current_value = this.v;
-    let selected_name = (geometry_map[current_value]) ? geometry_map[current_value] : current_value;
+    let selected_name = (current_value && geometry_map[current_value]) ? geometry_map[current_value] : current_value;
     
     if (this.datalist) {
       this.datalist.v = geometry_map;
       let input_el = this.datalist.element.querySelector("input");
-      if (input_el && selected_name !== undefined && input_el.value !== selected_name) {
+      if (input_el && current_value && selected_name !== undefined && input_el.value !== selected_name) {
         let is_focused = this.element.querySelector("input:focus");
         if (!is_focused) input_el.value = selected_name;
       }
@@ -96,17 +105,26 @@ global.UI_GeometryDatalist = class extends ve.Component {
         name: (this.options.name) ? this.options.name : undefined,
         onuserchange: (v) => {
           let resolved_id = v;
-          if (naissance.Geometry.instances[v]) {
-            resolved_id = v;
+          if (v && String(v).trim()) {
+            if (naissance.Geometry.instances[v]) {
+              resolved_id = v;
+            } else {
+              let norm_val = String(v).replace(/\s+/g, "").toLowerCase();
+              Object.iterate(naissance.Geometry.instances, (local_id, local_geom) => {
+                let geom_id = String(local_id).replace(/\s+/g, "").toLowerCase();
+                let geom_name = (local_geom.name) ? String(local_geom.name).replace(/\s+/g, "").toLowerCase() : "";
+                if (geom_name === norm_val || geom_id === norm_val) resolved_id = local_id;
+              });
+            }
           } else {
-            Object.iterate(naissance.Geometry.instances, (local_id, local_geom) => {
-              if (local_geom.name === v || local_id === v) resolved_id = local_id;
-            });
+            resolved_id = "";
           }
           this.value = resolved_id;
+          if (typeof this.options?.onuserchange === "function")
+            this.options.onuserchange(resolved_id, this);
           this.fireToBinding();
         },
-        selected: selected_name
+        selected: (current_value) ? selected_name : undefined
       });
       this.datalist.element.style.padding = 0;
       this.datalist.bind(this.element);

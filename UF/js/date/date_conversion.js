@@ -50,7 +50,7 @@
 		if (isNaN(timestamp)) return Date.getBlankDate();
 		
 		//Declare local instance variables
-		let do_not_cache_timestamps = ve.registry.settings.Date.do_not_cache_timestamps;
+		let do_not_cache_timestamps = ve?.registry?.settings?.Date?.do_not_cache_timestamps;
 		
 		// Map cache for extremely fast O(1) repeat lookups
 		if (!do_not_cache_timestamps) {

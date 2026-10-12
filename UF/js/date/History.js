@@ -342,7 +342,9 @@ global.History = class extends ve.Class {
 		
 		//Iterate over all_json_keys and assume them as keyframes
 		if (keyframes_obj) {
-			let all_keyframes = Object.keys(keyframes_obj).sort();
+			let all_keyframes = Object.keys(keyframes_obj).sort((a, b) => {
+				return Date.convertTimestampToInt(a) - Date.convertTimestampToInt(b);
+			});
 			this.do_not_draw = true;
 			this.keyframes = {};
 			
@@ -456,7 +458,10 @@ global.History = class extends ve.Class {
 						
 						//Update value if before original timestamp cutoff, or if index is a guarantee that hasn't been fixed yet
 						if (!is_past_timestamp || (is_guaranteed && !is_resolved)) {
-							if (typeof local_keyframe.value[x] === "object" && local_keyframe.value[x] !== null) {
+							if (x === 0) {
+								if (local_keyframe.value[0] !== undefined)
+									return_keyframe.value[0] = local_keyframe.value[0];
+							} else if (typeof local_keyframe.value[x] === "object" && local_keyframe.value[x] !== null) {
 								let old_variables = (return_keyframe.value[x]?.variables) ?
 									return_keyframe.value[x].variables : {};
 								

@@ -182,15 +182,18 @@ naissance.Renderer = class extends ve.Class {
 						
 						let visible_diffs = await db.diffBBox({ timestamp: timestamp });
 						
+						let current_target_timestamp = (main_obj?.timestamp !== undefined) ? main_obj.timestamp :
+							(main_obj?.date ? Date.getTimestamp(main_obj.date) : 0);
+						
 						//Guard clause against stale out-of-order async responses during rapid scrubbing
-						if (this._update_id !== current_update_id) return;
+						if (this._update_id !== current_update_id && timestamp !== current_target_timestamp) return;
 						
 						let visible_ids = new Set();
 						if (!this.rendered_entities) this.rendered_entities = new Map();
 						
 						for (let i = 0; i < visible_diffs.length; i++) {
 							let diff = visible_diffs[i];
-							let id = diff.id || diff.key;
+							let id = String(diff.id !== undefined ? diff.id : diff.key);
 							
 							if (!diff.value || !Array.isArray(diff.value) || diff.value.length === 0 || !diff.value[0]) {
 								let inst = this.rendered_entities.get(id) || naissance.Geometry?.instances?.[id];
@@ -219,12 +222,17 @@ naissance.Renderer = class extends ve.Class {
 							}
 						}
 						
-						this.rendered_entities.forEach((inst, id) => {
-							if (!visible_ids.has(id)) {
+						let ids_to_remove = [];
+						this.rendered_entities.forEach((inst, local_id) => {
+							let str_id = String(local_id);
+							if (!visible_ids.has(str_id)) {
 								this.derenderEntity(inst);
-								this.rendered_entities.delete(id);
+								ids_to_remove.push(local_id);
 							}
 						});
+						for (let i = 0; i < ids_to_remove.length; i++) {
+							this.rendered_entities.delete(ids_to_remove[i]);
+						}
 					} catch (e) {
 						console.error("[Renderer] diffBBox streaming error:", e);
 					}

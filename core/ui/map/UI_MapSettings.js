@@ -110,6 +110,15 @@ global.UI_MapSettings = class UI_MapSettings extends ve.Class { //[WIP] - Finish
 			main.map.settings = json.settings;
 		let map_settings = main.map.settings;
 		
+		//Set spatial reference
+		if (json.spatial_reference) {
+			let current_sr = map.getSpatialReference();
+			let current_code = current_sr?._projection?.code || current_sr?.projection;
+			let target_code = json.spatial_reference?.projection || json.spatial_reference?._projection?.code;
+			if (current_code !== target_code || !current_code)
+				map.setSpatialReference(json.spatial_reference);
+		}
+		
 		//Set date
 		if (json.date)
 			if (map_settings.autoload_last_date) {
@@ -119,10 +128,6 @@ global.UI_MapSettings = class UI_MapSettings extends ve.Class { //[WIP] - Finish
 			}
 		if (map_settings.save_undo_redo_trees)
 			DALS.Timeline.fromJSON(json.undo_redo_trees);
-			
-		//Set spatial reference
-		if (json.spatial_reference)
-			map.setSpatialReference(json.spatial_reference);
 		
 		//Update mapmode draw
 		main.interfaces.mapmodes_ui.draw();

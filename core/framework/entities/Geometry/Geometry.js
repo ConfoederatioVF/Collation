@@ -247,7 +247,8 @@ naissance.Geometry = class extends naissance.Entity {
 				
 				let target_layer = (is_autolabelled) ?
 					main.layers.label_layer : main.layers.overlay_label_layer;
-				let map_instance = (global.map || window.map || map);
+				let map_instance = (typeof map !== "undefined") ? map :
+					(globalThis.map || global.map || ((typeof window !== "undefined") ? window.map : null));
 				
 				if (is_autolabelled) {
 					for (let i = 0; i < this.label_geometries.length; i++)

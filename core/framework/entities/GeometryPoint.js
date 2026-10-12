@@ -52,19 +52,26 @@ naissance.GeometryPoint = class extends naissance.Geometry {
 		this.selected_geometry = undefined;
 		
 		//1. Set this.value from current relative keyframe if present in history
-		if (this.history?._hasTimestampAfter && this.history._hasTimestampAfter(main_obj?.timestamp)) {
-			this.value = this.history.getKeyframe({
-				date: main_obj?.date,
-				guaranteed_indexes: [1]
-			}).value;
-			this.value[1] = this.getSymbol(this.value[1]);
+		let has_local_history = (this.history?.keyframes && Object.keys(this.history.keyframes).length > 0);
+		if (has_local_history) {
+			if (this.history._hasTimestampAfter && this.history._hasTimestampAfter(main_obj?.timestamp)) {
+				let kf_obj = this.history.getKeyframe({
+					date: main_obj?.timestamp,
+					guaranteed_indexes: [1]
+				});
+				this.value = (kf_obj?.value) ? kf_obj.value : null;
+				if (this.value && this.value[1])
+					this.value[1] = this.getSymbol(this.value[1]);
+			} else {
+				this.value = null;
+			}
 		}
 		
-		if (this.value === undefined || this.value.length === 0 || this._is_visible === false)
+		if (this.value === undefined || this.value === null || this.value.length === 0 || this._is_visible === false)
 			derender_geometry = true;
 		
 		//2. Check any cause for derendering
-		if (this.value && !this.value[0]) 
+		if (this.value && (!this.value[0] || this.value[0] === null)) 
 			derender_geometry = true; //Coords are null, derender geometry
 		if (this.value && this.value[2]) {
 			if (this.value[2].hidden) derender_geometry = true;

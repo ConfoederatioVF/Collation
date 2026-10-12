@@ -85,7 +85,8 @@
 							main_obj.renderer.update();
 						
 						Object.iterate(naissance.Geometry.instances, (local_key, local_value) => {
-							if (local_value.history?._hasTimestampAfter && local_value.history._hasTimestampAfter(main_obj?.timestamp)) {
+							let has_local_history = (local_value.history?.keyframes && Object.keys(local_value.history.keyframes).length > 0);
+							if (has_local_history) {
 								local_value.draw();
 								local_value.update();
 							}
@@ -149,17 +150,14 @@
 			if (fs.existsSync(metadata_file)) {
 				try {
 					let metadata_raw = fs.readFileSync(metadata_file, "utf8");
-					if (metadata_raw.trim().length > 0) {
+					if (metadata_raw.trim().length > 0)
 						metadata_json = JSON.parse(metadata_raw);
-						if (global.UI_MapSettings)
-							UI_MapSettings.fromJSON(metadata_json);
-					}
 				} catch (e) {
 					console.error(e);
 				}
 			}
 			
-			//Populate UI Leftbar Hierarchy and trigger renderer
+			//1. Populate UI Leftbar Hierarchy and instances BEFORE applying map settings and date
 			let hierarchy_fn = global.db?.getHierarchyValues || global.NDJSON?.getHierarchyValues;
 			if (hierarchy_fn) {
 				let timestamp = (main_obj?.timestamp !== undefined) ? main_obj.timestamp :
@@ -171,7 +169,7 @@
 					
 					for (let i = 0; i < hierarchy_values.length; i++) {
 						let entry = hierarchy_values[i];
-						let id = entry.key || entry.id;
+						let id = String(entry.key !== undefined ? entry.key : entry.id);
 						let class_name = entry.class_name;
 						
 						if (class_name && naissance[class_name]) {
@@ -200,7 +198,7 @@
 				}
 			}
 			
-			//Load global timestamps for Timeline Chronology
+			//2. Load global timestamps for Timeline Chronology
 			let global_timestamps = metadata_json?.timestamps;
 			
 			if (!global_timestamps || !Array.isArray(global_timestamps) || global_timestamps.length === 0) {
@@ -225,7 +223,12 @@
 			if (main_obj?.renderer && Array.isArray(global_timestamps))
 				main_obj.renderer.timestamps = global_timestamps;
 			
-			//Trigger hierarchy refresh and renderer update
+			//3. Apply map settings and date from metadata.json now that instances exist
+			if (metadata_json && Object.keys(metadata_json).length > 0 && global.UI_MapSettings) {
+				UI_MapSettings.fromJSON(metadata_json);
+			}
+			
+			//4. Trigger hierarchy refresh and renderer update
 			setTimeout(() => {
 				try {
 					if (global.UI_Leftbar?.refresh) UI_Leftbar.refresh();
@@ -266,6 +269,12 @@
 		main._layers.province_layers = [];
 		if (main._layers.provinces)
 			main._layers.provinces.clear();
+		if (main?.layers?.entity_layer)
+			main.layers.entity_layer.clear();
+		if (main?.layers?.selection_layer)
+			main.layers.selection_layer.clear();
+		if (main?.layers?.label_layer)
+			main.layers.label_layer.clear();
 		
 		//Clear geometries
 		Object.iterate(naissance.Geometry.instances, (local_key, local_geometry) =>
@@ -275,6 +284,8 @@
 		scene.map_component.clear();
 		naissance.Feature.instances = {};
 		naissance.Geometry.instances = {};
+		if (main?.renderer?.rendered_entities)
+			main.renderer.rendered_entities.clear();
 	};
 	
 	DALS.fromJSON = function (arg0_json) {

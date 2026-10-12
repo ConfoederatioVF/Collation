@@ -163,16 +163,45 @@ naissance.GeometryPolygon.handleNodeEditorEnd = async function (arg0_e) {
 			let from_geometry_id = main.brush.from_geometry_id;
 			if (!from_geometry_id && main.brush.brush_options?.from_geometry)
 				from_geometry_id = main.brush.brush_options.from_geometry.v;
+			if (!from_geometry_id && main.brush.brush_options?.components_obj?.from_geometry)
+				from_geometry_id = main.brush.brush_options.components_obj.from_geometry.v;
 			
-			let from_geometry = (from_geometry_id) ? naissance.Geometry.instances[from_geometry_id] : null;
+			let from_geometry = (from_geometry_id) ? (naissance.Geometry.instances[from_geometry_id] || naissance.Feature?.instances?.[from_geometry_id]) : null;
 			if (!from_geometry && from_geometry_id) {
+				let norm_id = String(from_geometry_id).replace(/\s+/g, "").toLowerCase();
 				Object.iterate(naissance.Geometry.instances, (local_id, local_geom) => {
-					if (local_geom.name === from_geometry_id || local_id === from_geometry_id) {
+					let geom_id = String(local_id).replace(/\s+/g, "").toLowerCase();
+					let geom_name = (local_geom.name) ? String(local_geom.name).replace(/\s+/g, "").toLowerCase() : "";
+					if (geom_name === norm_id || geom_id === norm_id) {
 						from_geometry = local_geom;
 						from_geometry_id = local_id;
 					}
 				});
+				if (!from_geometry && naissance.Feature?.instances) {
+					Object.iterate(naissance.Feature.instances, (local_id, local_feat) => {
+						let feat_id = String(local_id).replace(/\s+/g, "").toLowerCase();
+						let feat_name = (local_feat.name) ? String(local_feat.name).replace(/\s+/g, "").toLowerCase() : "";
+						if (feat_name === norm_id || feat_id === norm_id) {
+							from_geometry = local_feat;
+							from_geometry_id = local_id;
+						}
+					});
+				}
 			}
+			
+			//If a Feature was matched, resolve its active geometry
+			if (from_geometry && from_geometry instanceof naissance.Feature) {
+				let sub_geoms = (typeof from_geometry.getAllGeometries === "function") ?
+					from_geometry.getAllGeometries() : (from_geometry.entities || []);
+				for (let i = 0; i < sub_geoms.length; i++) {
+					if (sub_geoms[i] instanceof naissance.GeometryPolygon || sub_geoms[i] instanceof naissance.GeometryLine) {
+						from_geometry = sub_geoms[i];
+						from_geometry_id = sub_geoms[i].id;
+						break;
+					}
+				}
+			}
+			
 			if (from_geometry) main.brush.from_geometry_id = from_geometry.id;
 			
 			if (!from_geometry) {
@@ -200,10 +229,16 @@ naissance.GeometryPolygon.handleNodeEditorEnd = async function (arg0_e) {
 				let kf_geom = from_geometry.getGeometryKeyframeAtDate(main.date);
 				if (kf_geom) from_geometry.geometry = maptalks.Geometry.fromJSON(kf_geom);
 			}
+			if (!from_geometry.geometry && from_geometry.value?.[0]) {
+				from_geometry.geometry = maptalks.Geometry.fromJSON(from_geometry.value[0]);
+			}
 			if (!this.geometry) this.draw();
 			if (!this.geometry) {
 				let kf_geom = this.getGeometryKeyframeAtDate(main.date);
 				if (kf_geom) this.geometry = maptalks.Geometry.fromJSON(kf_geom);
+			}
+			if (!this.geometry && this.value?.[0]) {
+				this.geometry = maptalks.Geometry.fromJSON(this.value[0]);
 			}
 			
 			if (!(from_geometry?.geometry && e?.geometry)) {

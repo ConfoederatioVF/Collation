@@ -69,21 +69,36 @@ ve.Datalist = class extends ve.Component {
       let is_exact_match = false;
       let resolved_id = current_input_val;
       
+      if (!current_input_val || current_input_val.trim() === "") {
+        this.from_binding_fire_silently = true;
+        this.value = "";
+        delete this.from_binding_fire_silently;
+        this.fireToBinding();
+        return;
+      }
+      
+      let norm_input = current_input_val.replace(/\s+/g, "").toLowerCase();
+      
       if (this.options_map) {
         Object.iterate(this.options_map, (local_id, local_name) => {
-          if (local_name === current_input_val || local_id === current_input_val) {
+          let clean_name = (local_name !== undefined && local_name !== null) ? String(local_name).replace(/\s+/g, "").toLowerCase() : "";
+          let clean_id = String(local_id).replace(/\s+/g, "").toLowerCase();
+          if (clean_name === norm_input || clean_id === norm_input) {
             is_exact_match = true;
             resolved_id = local_id;
           }
         });
       } else {
         let all_options = this.element.querySelectorAll("option");
-        for (let i = 0; i < all_options.length; i++)
-          if (all_options[i].value === current_input_val || all_options[i].innerHTML === current_input_val) {
+        for (let i = 0; i < all_options.length; i++) {
+          let opt_html = all_options[i].innerHTML ? all_options[i].innerHTML.replace(/\s+/g, "").toLowerCase() : "";
+          let opt_val = all_options[i].value ? all_options[i].value.replace(/\s+/g, "").toLowerCase() : "";
+          if (opt_val === norm_input || opt_html === norm_input) {
             is_exact_match = true;
             resolved_id = all_options[i].innerHTML;
             break;
           }
+        }
       }
       
       if (e.type === "change" || is_exact_match) {
@@ -121,24 +136,30 @@ ve.Datalist = class extends ve.Component {
     //Declare local instance variables
     let input_el = this.element.querySelector("input");
     let local_value = (input_el) ? input_el.value : "";
+    
+    if (!local_value || local_value.trim() === "") return "";
+    
+    let norm_input = local_value.replace(/\s+/g, "").toLowerCase();
     let resolved_id;
     
     if (this.options_map)
       Object.iterate(this.options_map, (local_id, local_name) => {
-        if (local_name === local_value || local_id === local_value)
+        let clean_name = (local_name !== undefined && local_name !== null) ? String(local_name).replace(/\s+/g, "").toLowerCase() : "";
+        let clean_id = String(local_id).replace(/\s+/g, "").toLowerCase();
+        if (clean_name === norm_input || clean_id === norm_input)
           resolved_id = local_id;
       });
       
     if (resolved_id === undefined) {
       let all_options = this.element.querySelectorAll("option");
-      for (let i = 0; i < all_options.length; i++)
-        if (all_options[i].value === local_value) {
-          resolved_id = all_options[i].innerHTML;
-          break;
-        } else if (all_options[i].innerHTML === local_value) {
+      for (let i = 0; i < all_options.length; i++) {
+        let opt_html = all_options[i].innerHTML ? all_options[i].innerHTML.replace(/\s+/g, "").toLowerCase() : "";
+        let opt_val = all_options[i].value ? all_options[i].value.replace(/\s+/g, "").toLowerCase() : "";
+        if (opt_val === norm_input || opt_html === norm_input) {
           resolved_id = all_options[i].innerHTML;
           break;
         }
+      }
     }
     
     //Return statement
@@ -171,7 +192,10 @@ ve.Datalist = class extends ve.Component {
           let text_input = this.element.querySelector("input");
           if (text_input) text_input.value = local_value;
         } else {
-          html_string.push(`<option value = "${local_value}">${local_key}</option>`);
+          let clean_name = (local_value !== undefined && local_value !== null) ?
+            String(local_value).replace(/\r?\n|\r/g, " ").trim() : "";
+          let display_name = (clean_name) ? clean_name : local_key;
+          html_string.push(`<option value = "${display_name}">${local_key}</option>`);
         }
       });
       let datalist_el = this.element.querySelector("datalist");
