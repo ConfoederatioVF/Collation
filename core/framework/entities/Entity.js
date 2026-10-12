@@ -49,9 +49,9 @@ naissance.Entity = class extends ve.Class {
 			} catch (e) {}
 			
 			//Set attributes
-			attributes_obj["data-is-selected"] = this.selected;
-			attributes_obj["data-is-visible"] = String(is_visible);
-			attributes_obj["data-selected-geometry"] = (main.brush.selected_geometry?.id === this.id);
+			attributes_obj["data-is-selected"] = String(Boolean(this.selected));
+			attributes_obj["data-is-visible"] = String(Boolean(is_visible));
+			attributes_obj["data-selected-geometry"] = String(Boolean(main?.brush?.selected_geometry?.id === this.id));
 			
 			//Set symbol
 			if (symbol_obj.colour === "fill") {

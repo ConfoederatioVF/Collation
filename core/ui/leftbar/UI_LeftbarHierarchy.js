@@ -229,32 +229,10 @@ global.UI_LeftbarHierarchy = class {
 	}
 	
 	drawGeometries () {
-		let count = 0;
-		let main_obj = (typeof main !== "undefined") ? main : (globalThis.main || global.main);
-		let max_recommended = Math.returnSafeNumber(main_obj?.settings?.hierarchy_recommended_max_geometries_in_layer, 100);
-		
 		Object.iterate(naissance.Geometry.instances, (local_key, local_geometry) => {
-			if (!local_geometry.parent && local_geometry.drawHierarchyDatatype) {
-				count++;
-				if (count <= max_recommended || this.show_all_root_geometries) {
-					this.hierarchy_obj[`${local_geometry.class_name}-${local_geometry.id}`] = local_geometry.drawHierarchyDatatype();
-				}
-			}
+			if (!local_geometry.parent && local_geometry.drawHierarchyDatatype)
+				this.hierarchy_obj[`${local_geometry.class_name}-${local_geometry.id}`] = local_geometry.drawHierarchyDatatype();
 		});
-		
-		if (count > max_recommended && !this.show_all_root_geometries) {
-			this.hierarchy_obj["geometries_truncated_notice"] = new ve.HierarchyDatatype({
-				show_more_button: new ve.Button(() => {
-					this.show_all_root_geometries = true;
-					this.refresh();
-				}, {
-					name: `Show All (${count} geometries)`
-				})
-			}, {
-				can_rename: false,
-				name: `... and ${count - max_recommended} more geometries`
-			});
-		}
 	}
 	
 	drawTopbar (arg0_hierarchy_el) {

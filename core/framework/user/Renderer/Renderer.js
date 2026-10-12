@@ -143,15 +143,17 @@ naissance.Renderer = class extends ve.Class {
 				(async () => {
 					try {
 						let bbox;
-						let zoom = (global.map?.getZoom) ? map.getZoom() : 0;
+						let current_map = (typeof map !== "undefined") ? map : (globalThis.map || global.map);
+						let zoom = (current_map?.getZoom) ? current_map.getZoom() : 0;
 						
-						if (global.map?.getExtent && zoom > 2) {
-							let extent = map.getExtent();
+						if (current_map?.getExtent && zoom > 2) {
+							let extent = current_map.getExtent();
 							if (extent) bbox = [extent.xmin, extent.ymin, extent.xmax, extent.ymax];
 						}
 						
-						let timestamp = (main?.timestamp !== undefined) ? main.timestamp :
-							(main?.date ? Date.getTimestamp(main.date) : 0);
+						let main_obj = (typeof main !== "undefined") ? main : (globalThis.main || global.main);
+						let timestamp = (main_obj?.timestamp !== undefined) ? main_obj.timestamp :
+							(main_obj?.date ? Date.getTimestamp(main_obj.date) : 0);
 						
 						let visible_diffs = await db.diffBBox({ bbox: bbox, timestamp: timestamp, zoom: zoom });
 						let visible_ids = new Set();
@@ -160,14 +162,14 @@ naissance.Renderer = class extends ve.Class {
 						for (let i = 0; i < visible_diffs.length; i++) {
 							let diff = visible_diffs[i];
 							let id = diff.id || diff.key;
-							visible_ids.add(id);
 							
-							if (!diff.value || diff.value[0] === null) {
+							if (!diff.value || !Array.isArray(diff.value) || diff.value.length === 0 || !diff.value[0]) {
 								let inst = this.rendered_entities.get(id);
 								if (inst?.geometry) inst.geometry.remove();
 								continue;
 							}
 							
+							visible_ids.add(id);
 							let inst = this.rendered_entities.get(id);
 							if (!inst && naissance.Geometry?.instances?.[id]) {
 								inst = naissance.Geometry.instances[id];

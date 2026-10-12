@@ -60,6 +60,9 @@ naissance.GeometryPolygon = class extends naissance.Geometry {
 	}
 	
 	draw () {
+		let main_obj = (typeof main !== "undefined") ? main : (globalThis.main || global.main);
+		let map_obj = (typeof map !== "undefined") ? map : (globalThis.map || global.map);
+		
 		//Remove geometry first to handle it
 		if (this.geometry) this.geometry.remove();
 		if (this.selected_geometry) this.selected_geometry.remove();
@@ -72,9 +75,9 @@ naissance.GeometryPolygon = class extends naissance.Geometry {
 		this.selected_geometry = undefined;
 		
 		//1. Set this.value from current relative keyframe if present in history
-		if (this.history?._hasTimestampAfter && this.history._hasTimestampAfter(main.timestamp)) {
+		if (this.history?._hasTimestampAfter && this.history._hasTimestampAfter(main_obj?.timestamp)) {
 			this.value = this.history.getKeyframe({ 
-				date: main.timestamp,
+				date: main_obj?.timestamp,
 				guaranteed_indexes: [1]
 			}).value;
 			this.value[1] = this.getSymbol(this.value[1]);
@@ -89,15 +92,16 @@ naissance.GeometryPolygon = class extends naissance.Geometry {
 		if (this.value && this.value[0] === null) return;
 		if (this.value && this.value[2]) {
 			if (this.value[2].hidden) return;
-			if (this.value[2].max_zoom && map.getZoom() > this.value[2].max_zoom) return;
-			if (this.value[2].min_zoom && map.getZoom() < this.value[2].min_zoom) return;
+			if (this.value[2].max_zoom && map_obj?.getZoom && map_obj.getZoom() > this.value[2].max_zoom) return;
+			if (this.value[2].min_zoom && map_obj?.getZoom && map_obj.getZoom() < this.value[2].min_zoom) return;
 		}
 		
 		//3. Draw this.geometry, this.label_geometries, this.selected_geometry onto map
 		try {
 			if (this.value[0]) {
 				this.geometry = maptalks.Geometry.fromJSON(this.value[0]);
-				main.layers.entity_layer.addGeometry(this.geometry);
+				if (main_obj?.layers?.entity_layer)
+					main_obj.layers.entity_layer.addGeometry(this.geometry);
 				
 				//Normal rendering
 				if (!is_province) {

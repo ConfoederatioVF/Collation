@@ -352,21 +352,15 @@ async function handleTask (arg0_task) {
 			}
 			
 			let state_val = resolveHistory(cached.entity, timestamp);
-			if (state_val !== null && state_val !== undefined) {
-				if (state_val[0] !== null) {
-					list.push({
-						class_name: cached.class_name,
-						id: key,
-						key: key,
-						value: state_val
-					});
-				}
-			} else if (cached.value) {
+			if (state_val && state_val[0] === null) continue;
+			
+			let resolved_value = (state_val && state_val[0] !== undefined) ? state_val : cached.value;
+			if (resolved_value && resolved_value[0] !== null && resolved_value[0] !== undefined) {
 				list.push({
 					class_name: cached.class_name,
 					id: key,
 					key: key,
-					value: cached.value
+					value: resolved_value
 				});
 			}
 		}
@@ -399,8 +393,24 @@ async function handleTask (arg0_task) {
 		
 		for (let [key, cached] of partition_cache) {
 			let entity_obj = cached.entity;
-			let name = entity_obj?.metadata?.name || entity_obj?.name || entity_obj?.id || key;
 			let is_feature = (cached.type === "feature" || cached.class_name?.startsWith("Feature"));
+			let resolved_name;
+			
+			if (!is_feature) {
+				let state_val = resolveHistory(entity_obj, timestamp);
+				if (state_val?.[2]?.name) {
+					resolved_name = state_val[2].name;
+				} else {
+					let history_obj = typeof entity_obj?.history === "string" ?
+						JSON.parse(entity_obj.history) : entity_obj?.history;
+					let raw_keyframes = (history_obj && history_obj.keyframes) ?
+						history_obj.keyframes : history_obj;
+					if (raw_keyframes && typeof raw_keyframes === "object")
+						resolved_name = History.getName(raw_keyframes);
+				}
+			}
+			
+			let name = entity_obj?.metadata?.name || entity_obj?.name || resolved_name || entity_obj?.id || key;
 			
 			list.push({
 				class_name: cached.class_name,

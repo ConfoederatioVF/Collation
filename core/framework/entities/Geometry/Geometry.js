@@ -150,17 +150,19 @@ naissance.Geometry = class extends naissance.Entity {
 	get name () {
 		//Declare local instance variables
 		let current_keyframe = this.history.getKeyframe();
+		let current_name;
 		let current_value = current_keyframe.value;
 		
-		let current_name;
-			if (current_value[2] && current_value[2].name) current_name = current_value[2].name;
-			if (!current_name)
-				Object.iterate(this.history.keyframes, (local_key, local_value) => {
-					if (local_value?.value[2] && local_value?.value[2].name) {
-						current_name = local_value.value[2].name;
-						return "break"; //Break if possible
-					}
-				});
+		if (current_value[2] && current_value[2].name) current_name = current_value[2].name;
+		if (!current_name && this.value?.[2]?.name) current_name = this.value[2].name;
+		if (!current_name)
+			Object.iterate(this.history.keyframes, (local_key, local_value) => {
+				if (local_value?.value[2] && local_value?.value[2].name) {
+					current_name = local_value.value[2].name;
+					return "break"; //Break if possible
+				}
+			});
+		if (!current_name && this._name) current_name = this._name;
 		
 		//Return statement
 		return (current_name) ? 
@@ -170,6 +172,7 @@ naissance.Geometry = class extends naissance.Entity {
 	set name (arg0_value) {
 		//Convert from parameters
 		let value = (arg0_value) ? arg0_value : `New ${(this.class_name) ? this.class_name : "Geometry"}`;
+		this._name = value;
 		
 		//Send DALS.Timeline.parseAction() command
 		DALS.Timeline.parseAction("rename_geometry", [{ geometry_obj: this.id, set_name: value }], this.fire_action_silently);
@@ -194,6 +197,8 @@ naissance.Geometry = class extends naissance.Entity {
 			//Set as primary only if no primary geometry is currently active
 			if (!main.brush.selected_geometry)
 				main.brush.selected_geometry = this;
+			if (typeof this.loadHistory === "function")
+				this.loadHistory();
 		} else {
 			//If deselecting the primary geometry, reassign primary to another selected geometry if available
 			if (main.brush?.selected_geometry?.id === this.id)
@@ -781,8 +786,10 @@ naissance.Geometry = class extends naissance.Entity {
 		if (this.geometry && options.limit)
 			this.geometry.addEventListener("click", (e)  => {
 				if (main.brush._selected_geometry?.class_name !== "GeometryMedia")
-					if (!["fill_tool", "node", "node_override", "node_transfer"].includes(main.brush.mode))
+					if (!["fill_tool", "node", "node_override", "node_transfer"].includes(main.brush.mode)) {
+						if (typeof this.loadHistory === "function") this.loadHistory();
 						this.open("instance", { name: this.name, ...this.window_options });
+					}
 				
 				if (options.special_function) options.special_function(e);
 			});
@@ -794,6 +801,53 @@ naissance.Geometry = class extends naissance.Entity {
 	hide () {
 		this._is_visible = false;
 		this.draw();
+	}
+	
+	/**
+	 * Loads keyframes from the database for the present Geometry into its `.history` instance.
+	 * - Method of: {@link naissance.Geometry}
+	 * 
+	 * @param {boolean} [arg0_force=false] - Whether to force reloading keyframes if already loaded.
+	 * 
+	 * @returns {Promise<boolean>}
+	 */
+	async loadHistory (arg0_force) {
+		//Convert from parameters
+		let force = arg0_force;
+		
+		//Guard clause: already loaded
+		if (!force && this.history?.keyframes && Object.keys(this.history.keyframes).length > 0)
+			return true;
+		
+		//Declare local instance variables
+		let db_obj = (typeof db !== "undefined") ? db : (globalThis.db || global.db);
+		
+		if (!db_obj?.getKeyframes) return false;
+		
+		try {
+			let kf_data = await db_obj.getKeyframes(this.id);
+			
+			if (kf_data?.value) {
+				this.history.fromJSON(kf_data.value);
+				
+				//Update name and keyframes UI if open
+				if (this.keyframes_ui)
+					this.history.draw(this.keyframes_ui);
+				if (this.instance_window)
+					this.instance_window.setName(this.name);
+				
+				//If LeftbarHierarchy is visible, update the item's name
+				if (this.hierarchy_datatype?.components_obj?.name)
+					this.hierarchy_datatype.components_obj.name.v = this.name;
+				
+				return true;
+			}
+		} catch (e) {
+			console.error(`[Geometry] Failed to load history for ${this.id}:`, e);
+		}
+		
+		//Return statement
+		return false;
 	}
 	
 	open (arg0_type, arg1_options) {
@@ -815,6 +869,10 @@ naissance.Geometry = class extends naissance.Entity {
 			this.history.draw(this.keyframes_ui);
 			this.drawVariablesEditor();
 		}
+		
+		//Load keyframes from DB if not yet loaded
+		if (!this.history.keyframes || Object.keys(this.history.keyframes).length === 0)
+			this.loadHistory();
 		
 		if (!this.interface) this.interface = veInterface({
 			information: veHTML(() => {

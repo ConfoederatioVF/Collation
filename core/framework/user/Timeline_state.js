@@ -152,6 +152,8 @@
 				let hierarchy_values = await hierarchy_fn(timestamp);
 				
 				if (Array.isArray(hierarchy_values)) {
+					let feature_instances = [];
+					
 					for (let i = 0; i < hierarchy_values.length; i++) {
 						let entry = hierarchy_values[i];
 						let id = entry.key || entry.id;
@@ -163,12 +165,21 @@
 								feature_obj.setID(id);
 								if (entry.value) feature_obj.json = entry.value;
 								if (entry.name) feature_obj.name = entry.name;
+								feature_instances.push(feature_obj);
 							} else if (class_name.startsWith("Geometry")) {
 								let geom_obj = new naissance[class_name]({ is_import: true });
 								geom_obj.setID(id);
 								if (entry.metadata) geom_obj.metadata = entry.metadata;
-								if (entry.name) geom_obj.name = entry.name;
+								if (entry.name) geom_obj._name = entry.name;
 							}
+						}
+					}
+					
+					//Second pass: deserialise features and attach their entities after all geometries exist
+					for (let i = 0; i < feature_instances.length; i++) {
+						let feature_obj = feature_instances[i];
+						if (feature_obj.json && typeof feature_obj.fromJSON === "function") {
+							feature_obj.fromJSON(feature_obj.json);
 						}
 					}
 				}
@@ -177,8 +188,16 @@
 			//Trigger hierarchy refresh and renderer update
 			setTimeout(() => {
 				let main_obj = (typeof main !== "undefined") ? main : (globalThis.main || global.main);
-				if (global.UI_Leftbar?.refresh) UI_Leftbar.refresh();
-				if (main_obj?.renderer?.update) main_obj.renderer.update();
+				try {
+					if (global.UI_Leftbar?.refresh) UI_Leftbar.refresh();
+				} catch (e) {
+					console.error("[DALS] UI_Leftbar.refresh error:", e);
+				}
+				try {
+					if (main_obj?.renderer?.update) main_obj.renderer.update();
+				} catch (e) {
+					console.error("[DALS] renderer.update error:", e);
+				}
 			}, 100);
 			
 			//Reload cursor

@@ -38,7 +38,11 @@ config.actions.brush = {
 			//Select new geometry
 			if (typeof json.select_geometry_id === "string") {
 				main.brush.selected_geometry = naissance.Geometry.instances[json.select_geometry_id];
-				if (main.brush.selected_geometry) main.brush.selected_geometry.draw();
+				if (main.brush.selected_geometry) {
+					main.brush.selected_geometry.draw();
+					if (typeof main.brush.selected_geometry.loadHistory === "function")
+						main.brush.selected_geometry.loadHistory();
+				}
 			} else if (json.select_geometry_id === false) {
 				main.brush.selected_geometry = undefined;
 			}

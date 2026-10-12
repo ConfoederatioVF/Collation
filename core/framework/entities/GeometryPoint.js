@@ -37,6 +37,9 @@ naissance.GeometryPoint = class extends naissance.Geometry {
 	}
 	
 	draw () {
+		let main_obj = (typeof main !== "undefined") ? main : (globalThis.main || global.main);
+		let map_obj = (typeof map !== "undefined") ? map : (globalThis.map || global.map);
+		
 		//Declare local instance variables
 		let default_symbol = naissance.Renderer.getDefaultSymbol();
 		let derender_geometry = false;
@@ -49,9 +52,9 @@ naissance.GeometryPoint = class extends naissance.Geometry {
 		this.selected_geometry = undefined;
 		
 		//1. Set this.value from current relative keyframe if present in history
-		if (this.history?._hasTimestampAfter && this.history._hasTimestampAfter(main.timestamp)) {
+		if (this.history?._hasTimestampAfter && this.history._hasTimestampAfter(main_obj?.timestamp)) {
 			this.value = this.history.getKeyframe({
-				date: main.date,
+				date: main_obj?.date,
 				guaranteed_indexes: [1]
 			}).value;
 			this.value[1] = this.getSymbol(this.value[1]);
@@ -65,8 +68,8 @@ naissance.GeometryPoint = class extends naissance.Geometry {
 			derender_geometry = true; //Coords are null, derender geometry
 		if (this.value && this.value[2]) {
 			if (this.value[2].hidden) derender_geometry = true;
-			if (this.value[2].max_zoom && map.getZoom() > this.value[2].max_zoom) derender_geometry = true;
-			if (this.value[2].min_zoom && map.getZoom() < this.value[2].min_zoom) derender_geometry = true;
+			if (this.value[2].max_zoom && map_obj?.getZoom && map_obj.getZoom() > this.value[2].max_zoom) derender_geometry = true;
+			if (this.value[2].min_zoom && map_obj?.getZoom && map_obj.getZoom() < this.value[2].min_zoom) derender_geometry = true;
 		}
 		
 		//3. Draw this.geometry, this.label from this.value onto map
@@ -92,7 +95,8 @@ naissance.GeometryPoint = class extends naissance.Geometry {
 							...this.value[1]
 						}
 					this.geometry.setSymbol(symbol_obj);
-					main.layers.entity_layer.addGeometry(this.geometry);
+					if (main_obj?.layers?.entity_layer)
+						main_obj.layers.entity_layer.addGeometry(this.geometry);
 					
 					this.drawLabels();
 					
