@@ -93,25 +93,26 @@ naissance.GeometryPoint = class extends naissance.Geometry {
 					if (this.selected_index === undefined) this.selected_index = 0;
 					
 					this.geometry = maptalks.Geometry.fromJSON(this.value[0]);
-					let symbol_obj = default_symbol;
-					
-					if (this.value[1] && this.geometry) 
-						symbol_obj = {
-							...symbol_obj,
-							...this.geometry.getSymbol(),
-							...this.value[1]
-						}
-					this.geometry.setSymbol(symbol_obj);
-					if (main_obj?.layers?.entity_layer)
-						main_obj.layers.entity_layer.addGeometry(this.geometry);
-					
-					this.drawLabels();
-					
-					//3.1. Draw selection
-					if (this.selected || this._is_being_moved)
-						if (this.selected_index !== undefined) {
-							let coordinates = maptalks.Coordinate.toNumberArrays(this.geometry.getCoordinates());
-							let selected_coords = coordinates[this.selected_index];
+					if (this.geometry) {
+						let symbol_obj = default_symbol;
+						
+						if (this.value[1]) 
+							symbol_obj = {
+								...symbol_obj,
+								...this.geometry.getSymbol(),
+								...this.value[1]
+							};
+						this.geometry.setSymbol(symbol_obj);
+						if (main_obj?.layers?.entity_layer)
+							main_obj.layers.entity_layer.addGeometry(this.geometry);
+						
+						this.drawLabels();
+						
+						//3.1. Draw selection
+						if (this.selected || this._is_being_moved)
+							if (this.selected_index !== undefined) {
+								let coordinates = maptalks.Coordinate.toNumberArrays(this.geometry.getCoordinates());
+								let selected_coords = coordinates[this.selected_index];
 							
 							if (selected_coords) {
 								this.selected_geometry = new maptalks.Marker(coordinates[this.selected_index]);

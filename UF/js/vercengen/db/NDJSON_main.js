@@ -495,6 +495,14 @@ if (!global.NDJSON)
 		let is_cache_valid = false;
 		let cached_partitions = [];
 		
+		if (fs.existsSync(folder_path)) {
+			try {
+				let leftover_tmps = fs.readdirSync(folder_path).filter((f) => f.includes(".tmp_"));
+				for (let tf of leftover_tmps)
+					try { fs.unlinkSync(path.join(folder_path, tf)); } catch (e) {}
+			} catch (e) {}
+		}
+		
 		if (fs.existsSync(folder_path) && !options.repartition && !options.force_reload) {
 			cached_partitions = fs.readdirSync(folder_path).filter((f) => f.startsWith("partition_") && f.endsWith(".ndjson"));
 			let metadata_path = path.join(folder_path, "metadata.json");

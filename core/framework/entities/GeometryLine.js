@@ -89,11 +89,13 @@ naissance.GeometryLine = class extends naissance.Geometry {
 				//Draw this.geometry, this.label_geometries, this.selected_geometry
 				if (this.value[0]) {
 					this.geometry = maptalks.Geometry.fromJSON(this.value[0]);
-					if (this.value[1] && this.geometry) this.geometry.setSymbol(this.value[1]);
-					if (main_obj?.layers?.entity_layer)
-						main_obj.layers.entity_layer.addGeometry(this.geometry);
-					
-					this.drawLabels(); //Draw labels
+					if (this.geometry) {
+						if (this.value[1]) this.geometry.setSymbol(this.value[1]);
+						if (main_obj?.layers?.entity_layer)
+							main_obj.layers.entity_layer.addGeometry(this.geometry);
+						
+						this.drawLabels(); //Draw labels
+					}
 				}
 			} catch (e) { console.error(e); }
 		}

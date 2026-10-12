@@ -107,27 +107,30 @@ naissance.GeometryPolygon = class extends naissance.Geometry {
 		try {
 			if (this.value[0]) {
 				this.geometry = maptalks.Geometry.fromJSON(this.value[0]);
-				if (main_obj?.layers?.entity_layer)
-					main_obj.layers.entity_layer.addGeometry(this.geometry);
 				
-				//Normal rendering
-				if (!is_province) {
-					this.geometry.setSymbol({
-						...naissance.Renderer.getDefaultSymbol({ exclude: ["point"] }),
-						...this.value?.[1],
-					});
-					this.drawLabels();
-				}
-				//Provinces rendering
-				else {
-					this.geometry.setSymbol({
-						lineColor: "#000000",
-						lineDasharray: [5, 5, 5], 
-						lineWidth: 1,
-						polygonFill: Colour.generateHexFromString(String(this.id)),
-						polygonOpacity: 0.5
-					});
-					this.geometry._naissance_province = true;
+				if (this.geometry) {
+					if (main_obj?.layers?.entity_layer)
+						main_obj.layers.entity_layer.addGeometry(this.geometry);
+					
+					//Normal rendering
+					if (!is_province) {
+						this.geometry.setSymbol({
+							...naissance.Renderer.getDefaultSymbol({ exclude: ["point"] }),
+							...this.value?.[1],
+						});
+						this.drawLabels();
+					}
+					//Provinces rendering
+					else {
+						this.geometry.setSymbol({
+							lineColor: "#000000",
+							lineDasharray: [5, 5, 5], 
+							lineWidth: 1,
+							polygonFill: Colour.generateHexFromString(String(this.id)),
+							polygonOpacity: 0.5
+						});
+						this.geometry._naissance_province = true;
+					}
 				}
 			}
 		} catch (e) { console.error(e); }

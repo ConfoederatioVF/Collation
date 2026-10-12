@@ -134,12 +134,15 @@ let loadPartition = async function (page_file) {
 		for await (let line of rl) {
 			let clean = line.trim();
 			if (clean.length === 0) continue;
+			if (clean.charCodeAt(0) !== 34) continue;
 			
-			let match = clean.match(/^"([^"]+)"\s*:\s*(.*)$/);
-			if (!match) continue;
+			let quote_end = clean.indexOf('"', 1);
+			if (quote_end <= 1) continue;
+			let colon_idx = clean.indexOf(':', quote_end);
+			if (colon_idx === -1) continue;
 			
-			let key = match[1];
-			let val_str = match[2];
+			let key = clean.slice(1, quote_end);
+			let val_str = clean.slice(colon_idx + 1).trim();
 			if (val_str.endsWith(",")) val_str = val_str.slice(0, -1);
 			
 			try {
@@ -170,7 +173,7 @@ let loadPartition = async function (page_file) {
 	}
 };
 
-let updateNDJSON = async function (page_file, getUpdatedValue) {
+let updateNDJSON = async function (page_file, getUpdatedValue, options) {
 	let tmp_file = `${page_file}.tmp_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
 	let updated = false;
 	
@@ -178,59 +181,99 @@ let updateNDJSON = async function (page_file, getUpdatedValue) {
 	if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 	
 	let ws = fs.createWriteStream(tmp_file);
+	let target_id = (options?.target_id !== undefined && options?.target_id !== null) ? String(options.target_id) : null;
+	let target_keys = options?.target_keys || null;
 	
-	if (fs.existsSync(page_file)) {
-		let rs = fs.createReadStream(page_file);
-		let rl = readline.createInterface({ input: rs });
-		
-		try {
-			for await (let line of rl) {
-				let clean = line.trim();
-				if (clean.length === 0) continue;
-				let match = clean.match(/^"([^"]+)"\s*:\s*(.*)$/);
-				
-				if (match) {
-					let key = match[1];
-					let val_str = match[2];
-					if (val_str.endsWith(",")) val_str = val_str.slice(0, -1);
+	try {
+		if (fs.existsSync(page_file)) {
+			let rs = fs.createReadStream(page_file);
+			let rl = readline.createInterface({ input: rs });
+			
+			try {
+				for await (let line of rl) {
+					let clean = line.trim();
+					if (clean.length === 0) continue;
 					
-					let newValue = getUpdatedValue(key, val_str);
-					if (newValue !== undefined) {
-						if (newValue !== null) ws.write(`"${key}":${JSON.stringify(newValue)}\n`);
-						updated = true;
-					} else {
-						ws.write(clean + "\n");
+					let key = null;
+					let colon_idx = -1;
+					if (clean.charCodeAt(0) === 34) {
+						let quote_end = clean.indexOf('"', 1);
+						if (quote_end > 1) {
+							colon_idx = clean.indexOf(':', quote_end);
+							if (colon_idx > quote_end)
+								key = clean.slice(1, quote_end);
+						}
 					}
-				} else {
-					ws.write(clean + "\n");
+					
+					if (key !== null) {
+						if (target_id !== null && key !== target_id) {
+							let can_write = ws.write(clean + "\n");
+							if (!can_write) await new Promise((resolve) => ws.once("drain", resolve));
+							continue;
+						}
+						if (target_keys !== null && !target_keys.has(key)) {
+							let can_write = ws.write(clean + "\n");
+							if (!can_write) await new Promise((resolve) => ws.once("drain", resolve));
+							continue;
+						}
+						
+						let val_str = clean.slice(colon_idx + 1).trim();
+						if (val_str.endsWith(",")) val_str = val_str.slice(0, -1);
+						
+						let newValue = getUpdatedValue(key, val_str);
+						if (newValue !== undefined) {
+							if (newValue !== null) {
+								let can_write = ws.write(`"${key}":${JSON.stringify(newValue)}\n`);
+								if (!can_write) await new Promise((resolve) => ws.once("drain", resolve));
+							}
+							updated = true;
+						} else {
+							let can_write = ws.write(clean + "\n");
+							if (!can_write) await new Promise((resolve) => ws.once("drain", resolve));
+						}
+					} else {
+						let can_write = ws.write(clean + "\n");
+						if (!can_write) await new Promise((resolve) => ws.once("drain", resolve));
+					}
+				}
+			} finally {
+				rl.close();
+				rs.destroy();
+			}
+		}
+		
+		let extra_appends = getUpdatedValue(null, null, updated);
+		if (extra_appends) {
+			for (let [k, val] of Object.entries(extra_appends)) {
+				if (val !== null) {
+					let can_write = ws.write(`"${k}":${JSON.stringify(val)}\n`);
+					if (!can_write) await new Promise((resolve) => ws.once("drain", resolve));
 				}
 			}
-		} finally {
-			rl.close();
-			rs.destroy();
 		}
-	}
-	
-	let extra_appends = getUpdatedValue(null, null, updated);
-	if (extra_appends) {
-		for (let [k, val] of Object.entries(extra_appends))
-			if (val !== null) ws.write(`"${k}":${JSON.stringify(val)}\n`);
-	}
-	
-	ws.end();
-	await new Promise((r) => ws.on("finish", r));
-	
-	let attempts = 0;
-	let renamed = false;
-	while (!renamed && attempts < 10)
-		try {
-			fs.renameSync(tmp_file, page_file);
-			renamed = true;
-		} catch (e) {
-			attempts++;
-			if (attempts >= 10) throw e;
-			await new Promise((r) => setTimeout(r, 50));
+		
+		ws.end();
+		await new Promise((resolve) => ws.on("finish", resolve));
+		
+		let attempts = 0;
+		let renamed = false;
+		while (!renamed && attempts < 10) {
+			try {
+				fs.renameSync(tmp_file, page_file);
+				renamed = true;
+			} catch (e) {
+				attempts++;
+				if (attempts >= 10) throw e;
+				await new Promise((resolve) => setTimeout(resolve, 50));
+			}
 		}
+	} catch (err) {
+		try { ws.destroy(); } catch (e) {}
+		if (fs.existsSync(tmp_file)) {
+			try { fs.unlinkSync(tmp_file); } catch (e) {}
+		}
+		throw err;
+	}
 };
 
 parentPort.on("message", (task) => {
@@ -533,8 +576,9 @@ async function handleTask (arg0_task) {
 		}
 		
 		await updateNDJSON(page_file, (key, val_str, updated) => {
-			if (key === null) return updated ? null : { [id]: { history: { keyframes } } };
+			if (key === null) return updated ? null : (cached?.entity ? { [id]: cached.entity } : { [id]: { history: { keyframes } } });
 			if (key === id) {
+				if (cached?.entity) return cached.entity;
 				try {
 					let obj = JSON.parse(val_str);
 					let is_history_string = typeof obj.history === "string";
@@ -548,7 +592,7 @@ async function handleTask (arg0_task) {
 				}
 			}
 			return undefined;
-		});
+		}, { target_id: id });
 		
 		return parentPort.postMessage({ results: true, task_id });
 	}
@@ -579,6 +623,7 @@ async function handleTask (arg0_task) {
 		}
 		
 		let updated_keys = new Set();
+		let target_keys = new Set(Object.keys(update_map));
 		await updateNDJSON(page_file, (key, val_str) => {
 			if (key === null) {
 				let rem = {};
@@ -591,7 +636,7 @@ async function handleTask (arg0_task) {
 				return update_map[key];
 			}
 			return undefined;
-		});
+		}, { target_keys: target_keys });
 		
 		return parentPort.postMessage({ results: true, task_id });
 	}
