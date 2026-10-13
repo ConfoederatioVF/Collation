@@ -183,9 +183,33 @@ if (!proc.actions) proc.actions = {};
     let result_geom;
     if (existing_geom && incoming_geom) {
       try {
-        result_geom = turf.union(turf.featureCollection([existing_geom, incoming_geom]));
+        let clean_existing = existing_geom;
+        let clean_incoming = incoming_geom;
+
+        try {
+          let tr_ex = turf.truncate(existing_geom, { precision: 6, coordinates: 2, mutate: false });
+          clean_existing = turf.buffer(tr_ex, 0) || existing_geom;
+        } catch (e) {}
+
+        try {
+          let tr_in = turf.truncate(incoming_geom, { precision: 6, coordinates: 2, mutate: false });
+          clean_incoming = turf.buffer(tr_in, 0) || incoming_geom;
+        } catch (e) {}
+
+        result_geom = turf.union(turf.featureCollection([clean_existing, clean_incoming]));
       } catch (e) {
-        result_geom = incoming_geom;
+        result_geom = incoming_geom || existing_geom;
+      }
+
+      if (result_geom && result_geom.geometry?.type === "GeometryCollection") {
+        let poly_geoms = result_geom.geometry.geometries.filter(
+          g => g.type === "Polygon" || g.type === "MultiPolygon"
+        );
+        if (poly_geoms.length === 1) {
+          result_geom = turf.feature(poly_geoms[0]);
+        } else if (poly_geoms.length > 1) {
+          result_geom = turf.multiPolygon(poly_geoms.flatMap(g => (g.type === "Polygon") ? [g.coordinates] : g.coordinates));
+        }
       }
     } else {
       result_geom = incoming_geom || existing_geom;
@@ -539,7 +563,15 @@ if (!proc.actions) proc.actions = {};
       }
     }
 
-    let keyframe_entry = keyframes[date];
+    let target_ts = (date !== undefined) ? parseInt(date) : 0;
+    let best_kf_ts = null;
+    let all_kf_ts = Object.keys(keyframes).map(k => parseInt(k)).filter(n => !isNaN(n)).sort((a, b) => a - b);
+    for (let i = 0; i < all_kf_ts.length; i++) {
+      if (all_kf_ts[i] <= target_ts) best_kf_ts = all_kf_ts[i];
+    }
+    if (best_kf_ts === null && all_kf_ts.length > 0) best_kf_ts = all_kf_ts[0];
+
+    let keyframe_entry = (best_kf_ts !== null) ? keyframes[String(best_kf_ts)] : keyframes[date];
     if (keyframe_entry) {
       let raw_val = (keyframe_entry.value !== undefined) ? keyframe_entry.value : keyframe_entry;
       if (Array.isArray(raw_val) && raw_val[0]) raw_val = raw_val[0];
@@ -548,10 +580,51 @@ if (!proc.actions) proc.actions = {};
 
     let result_geom = null;
     if (existing_geom && incoming_geom) {
+      let clean_existing = existing_geom;
+      let clean_incoming = incoming_geom;
+
       try {
-        result_geom = turf.difference(turf.featureCollection([existing_geom, incoming_geom]));
+        let tr_ex = turf.truncate(existing_geom, { precision: 6, coordinates: 2, mutate: false });
+        clean_existing = turf.buffer(tr_ex, 0) || existing_geom;
+      } catch (e) {}
+
+      try {
+        let tr_in = turf.truncate(incoming_geom, { precision: 6, coordinates: 2, mutate: false });
+        clean_incoming = turf.buffer(tr_in, 0) || incoming_geom;
+      } catch (e) {}
+
+      try {
+        result_geom = turf.difference(turf.featureCollection([clean_existing, clean_incoming]));
       } catch (e) {
         console.error("[proc] removeFromPolygon error:", e);
+      }
+
+      if (result_geom && result_geom.geometry?.type === "GeometryCollection") {
+        let poly_geoms = result_geom.geometry.geometries.filter(
+          g => g.type === "Polygon" || g.type === "MultiPolygon"
+        );
+        if (poly_geoms.length === 0) {
+          result_geom = null;
+        } else if (poly_geoms.length === 1) {
+          result_geom = turf.feature(poly_geoms[0]);
+        } else {
+          result_geom = turf.multiPolygon(poly_geoms.flatMap(g => (g.type === "Polygon") ? [g.coordinates] : g.coordinates));
+        }
+      }
+
+      //Protect against accidental deletion: only allow result_geom to be null if incoming_geom legitimately covers existing_geom
+      if (!result_geom) {
+        let is_fully_covered = false;
+        try {
+          let ex_area = turf.area(existing_geom);
+          let inter = turf.intersect(turf.featureCollection([existing_geom, incoming_geom]));
+          let in_area = inter ? turf.area(inter) : 0;
+          if (ex_area > 0 && in_area >= ex_area * 0.999)
+            is_fully_covered = true;
+        } catch (cov_e) {}
+
+        if (!is_fully_covered)
+          result_geom = existing_geom;
       }
     } else if (existing_geom && !incoming_geom) {
       result_geom = existing_geom;

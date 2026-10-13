@@ -152,7 +152,7 @@ naissance.Brush = class extends ve.Class {
 				width: 2,
 				x: 0, y: 3
 			}),
-			node_buffer: veNumber(Math.returnSafeNumber(this.node_buffer, 5), {
+			node_buffer: veNumber(Math.returnSafeNumber(this.node_buffer, 0), {
 				name: "Node Buffer (m)",
 				binding: "this.node_buffer",
 				limit: () => this.mode === "node_transfer",
@@ -338,23 +338,35 @@ naissance.Brush = class extends ve.Class {
 					
 					for (let i = 0; i < all_layer_geometries.length; i++)
 						if (all_layer_geometries[i].id !== this._selected_geometry.id && all_layer_geometries[i].geometry) try {
-							let is_visible = false;
+							let is_visible = true;
 							try {
-								let current_keyframe = all_layer_geometries[i].history.getKeyframe();
-								
-								if (current_keyframe) {
-									if (current_keyframe.value[0] && Object.keys(current_keyframe.value[0]).length)
-										is_visible = true;
-									if (current_keyframe.value[2] !== undefined && current_keyframe.value[2].hidden)
+								if (all_layer_geometries[i].history?.getKeyframe) {
+									let current_keyframe = all_layer_geometries[i].history.getKeyframe();
+									if (current_keyframe?.value?.[2] !== undefined && current_keyframe.value[2].hidden)
 										is_visible = false;
 								}
-							} catch (e) { console.warn(e); }
+							} catch (e) {}
 							
-							if (!["override", "node_override", "node_transfer"].includes(this.mode) && is_visible)
-								turf_geometry = turf.difference(turf.featureCollection([
-									turf_geometry,
-									Geospatiale.convertMaptalksToTurf(all_layer_geometries[i].geometry)
-								]));
+							if (!["override", "node_override", "node_transfer"].includes(this.mode) && is_visible && turf_geometry) {
+								let other_turf = Geospatiale.convertMaptalksToTurf(all_layer_geometries[i].geometry);
+								if (other_turf) {
+									try {
+										let tr_a = turf.truncate(turf_geometry, { precision: 6, coordinates: 2, mutate: false });
+										let clean_a = turf.buffer(tr_a, 0) || turf_geometry;
+										let tr_b = turf.truncate(other_turf, { precision: 6, coordinates: 2, mutate: false });
+										let clean_b = turf.buffer(tr_b, 0) || other_turf;
+										let diff = turf.difference(turf.featureCollection([clean_a, clean_b]));
+										if (diff) {
+											if (diff.geometry?.type === "GeometryCollection") {
+												let poly_geoms = diff.geometry.geometries.filter(g => g.type === "Polygon" || g.type === "MultiPolygon");
+												if (poly_geoms.length === 1) diff = turf.feature(poly_geoms[0]);
+												else if (poly_geoms.length > 1) diff = turf.multiPolygon(poly_geoms.flatMap(g => (g.type === "Polygon") ? [g.coordinates] : g.coordinates));
+											}
+											if (diff) turf_geometry = diff;
+										}
+									} catch (e) {}
+								}
+							}
 						} catch (e) { console.warn(e); }
 				}
 			}
