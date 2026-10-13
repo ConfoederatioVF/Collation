@@ -162,15 +162,33 @@ global.History = class extends ve.Class {
 		let keyframes = this._getUniqueKeyframes({ indexes: [0], return_timestamps: true });
 		
 		keyframes.sort((a, b) => a - b);
-		//Keyframes are look-forwards; create the keyframe at start_date; then for .value[0] changes until end_date
-		if (!keyframes.includes(start_ts))
-			keyframes.unshift(start_ts);
-		keyframes.sort((a, b) => a - b);
-		
-		//Iterate over all polygon_keyframes and apply the changes at the given date
-		for (let i = 0; i < keyframes.length; i++)
-			if (keyframes[i] >= start_ts && keyframes[i] <= end_ts)
-				await special_function(keyframes[i]);
+
+		//Only unshift start_ts if it falls within the entity's active lifespan
+		if (keyframes.length > 0) {
+			let earliest_ts = keyframes[0];
+			if (start_ts >= earliest_ts && !keyframes.includes(start_ts)) {
+				let kf_at_start = this.getKeyframe({ date: start_ts });
+				let is_alive = Boolean(kf_at_start?.value?.[0] && !kf_at_start?.value?.[2]?.hidden);
+				if (is_alive) keyframes.unshift(start_ts);
+			}
+		} else {
+			keyframes.push(start_ts);
+		}
+		keyframes = Array.from(new Set(keyframes)).sort((a, b) => a - b);
+
+		//Iterate over all polygon_keyframes and apply the changes only if active
+		for (let i = 0; i < keyframes.length; i++) {
+			let ts = keyframes[i];
+			if (ts >= start_ts && ts <= end_ts) {
+				if (this.getTimestamps().length > 0) {
+					let kf = this.getKeyframe({ date: ts });
+					//Skip keyframes where geometry has ended, is not yet created, or is hidden
+					if (!kf?.value || kf.value[0] === null || kf.value[0] === undefined || kf.value[0] === "null" || kf.value[2]?.hidden)
+						continue;
+				}
+				await special_function(ts);
+			}
+		}
 	}
 	
 	/**

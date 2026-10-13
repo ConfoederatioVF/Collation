@@ -375,7 +375,29 @@ naissance.GeometryPolygon.handleNodeEditorEnd = async function (arg0_e) {
     if (!arg_geom) return null;
     let m_geom = arg_geom.geometry;
     if (!m_geom && typeof arg_geom.getGeometryKeyframeAtDate === "function") {
-      let kf_json = arg_geom.getGeometryKeyframeAtDate(main.date);
+      let target_date = main.date;
+      if (date_range) {
+        let end_ts = Math.max(Date.getTimestamp(date_range[0]), Date.getTimestamp(date_range[1]));
+        let main_ts = Date.getTimestamp(main.date);
+        let start_ts = Math.min(Date.getTimestamp(date_range[0]), Date.getTimestamp(date_range[1]));
+        if (main_ts < start_ts || main_ts > end_ts) target_date = start_ts;
+      }
+      let kf_json = arg_geom.getGeometryKeyframeAtDate(target_date);
+      if (!kf_json && date_range && arg_geom.history) {
+        let all_ts = arg_geom.history.getTimestamps();
+        let end_ts = Math.max(Date.getTimestamp(date_range[0]), Date.getTimestamp(date_range[1]));
+        let start_ts = Math.min(Date.getTimestamp(date_range[0]), Date.getTimestamp(date_range[1]));
+        for (let i = 0; i < all_ts.length; i++) {
+          let ts = all_ts[i];
+          if (ts >= start_ts && ts <= end_ts) {
+            let candidate_json = arg_geom.getGeometryKeyframeAtDate(ts);
+            if (candidate_json) {
+              kf_json = candidate_json;
+              break;
+            }
+          }
+        }
+      }
       if (kf_json && maptalks.Geometry?.fromJSON)
         m_geom = maptalks.Geometry.fromJSON(kf_json);
       else if (kf_json)
@@ -590,33 +612,78 @@ naissance.GeometryPolygon.handleNodeEditorEnd = async function (arg0_e) {
       let remove_json = maptalks_remove ? maptalks_remove.toJSON() : add_json;
 
       if (date_range) {
+        let isAlive = function (arg_geom, arg_ts) {
+          if (!arg_geom || !arg_geom.history) return false;
+          let ts_int = Date.convertTimestampToInt(arg_ts);
+          if (arg_geom.history._hasTimestampAfter && !arg_geom.history._hasTimestampAfter(ts_int))
+            return false;
+          let kf = arg_geom.history.getKeyframe({ date: ts_int });
+          if (!kf || !kf.value) return false;
+          if (kf.value[0] === null || kf.value[0] === undefined || kf.value[0] === "null" || kf.value[0] === "")
+            return false;
+          if (kf.value[2] && kf.value[2].hidden)
+            return false;
+          return true;
+        };
+
         let end_ts = Math.max(Date.getTimestamp(date_range[0]), Date.getTimestamp(date_range[1]));
         let start_ts = Math.min(Date.getTimestamp(date_range[0]), Date.getTimestamp(date_range[1]));
-        let ts_set = new Set();
-        ts_set.add(start_ts);
 
         let source_ts = source_geom.history ? source_geom.history.getTimestamps() : [];
-        for (let i = 0; i < source_ts.length; i++)
-          if (source_ts[i] >= start_ts && source_ts[i] <= end_ts)
-            ts_set.add(source_ts[i]);
-
         let target_ts = target_geom.history ? target_geom.history.getTimestamps() : [];
-        for (let i = 0; i < target_ts.length; i++)
-          if (target_ts[i] >= start_ts && target_ts[i] <= end_ts)
-            ts_set.add(target_ts[i]);
 
-        let all_timestamps = Array.from(ts_set).sort((a, b) => a - b);
+        //Find effective start date where both geometries coexist
+        let effective_start_ts = null;
+        if (isAlive(source_geom, start_ts) && isAlive(target_geom, start_ts)) {
+          effective_start_ts = start_ts;
+        } else {
+          let combined_ts = Array.from(new Set([start_ts, ...source_ts, ...target_ts])).sort((a, b) => a - b);
+          for (let i = 0; i < combined_ts.length; i++) {
+            let ts = combined_ts[i];
+            if (ts >= start_ts && ts <= end_ts && isAlive(source_geom, ts) && isAlive(target_geom, ts)) {
+              effective_start_ts = ts;
+              break;
+            }
+          }
+        }
 
-        for (let i = 0; i < all_timestamps.length; i++) {
-          let local_ts = all_timestamps[i];
+        if (effective_start_ts === null) {
+          veToast("<icon>warning</icon> Source and target geometries do not coexist within the selected date range.");
+          return;
+        }
 
+        let source_set = new Set();
+        let target_set = new Set();
+
+        source_set.add(effective_start_ts);
+        target_set.add(effective_start_ts);
+
+        for (let i = 0; i < source_ts.length; i++) {
+          let ts = source_ts[i];
+          if (ts >= effective_start_ts && ts <= end_ts && isAlive(source_geom, ts))
+            source_set.add(ts);
+        }
+
+        for (let i = 0; i < target_ts.length; i++) {
+          let ts = target_ts[i];
+          if (ts >= effective_start_ts && ts <= end_ts && isAlive(target_geom, ts))
+            target_set.add(ts);
+        }
+
+        let all_source_ts = Array.from(source_set).sort((a, b) => a - b);
+        let all_target_ts = Array.from(target_set).sort((a, b) => a - b);
+
+        for (let i = 0; i < all_source_ts.length; i++) {
           await DALS.Timeline.parseAction("remove_from_polygon", [{
             geometry_obj: source_geom.id,
-            remove_from_polygon: { date: local_ts, geometry: remove_json }
+            remove_from_polygon: { date: all_source_ts[i], geometry: remove_json }
           }], true);
+        }
+
+        for (let i = 0; i < all_target_ts.length; i++) {
           await DALS.Timeline.parseAction("add_to_polygon", [{
             geometry_obj: target_geom.id,
-            add_to_polygon: { date: local_ts, geometry: add_json }
+            add_to_polygon: { date: all_target_ts[i], geometry: add_json }
           }], true);
         }
       } else {

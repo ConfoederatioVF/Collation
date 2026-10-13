@@ -98,11 +98,6 @@ config.actions.geometry_polygon = {
 				if (!polygon_obj.history?.keyframes || Object.keys(polygon_obj.history.keyframes).length === 0)
 					await polygon_obj.loadHistory();
 			
-			let date = (json.add_to_polygon.date !== undefined) ? json.add_to_polygon.date : main.date;
-			let geometry = (polygon_obj) ?
-				(polygon_obj.getGeometryKeyframeAtDate(date) || polygon_obj.geometry || polygon_obj.value?.[0] || polygon_obj.getGeometryKeyframeAtDate(main.date)) : null;
-			let ot_geometry = json.add_to_polygon.geometry;
-			
 			//Date range handling
 			if (json.add_to_polygon.date_range && polygon_obj?.history) {
 				await polygon_obj.history.callFunctionInDateRange(json.add_to_polygon.date_range, async (local_keyframe) => {
@@ -114,9 +109,31 @@ config.actions.geometry_polygon = {
 						}
 					}], true);
 				});
-			} else {
-				//Immediate in-memory calculation for active rendering geometry (0ms lag brushing)
-				if (polygon_obj && polygon_obj.history && (geometry || ot_geometry)) {
+				return;
+			}
+
+			let date = (json.add_to_polygon.date !== undefined) ? json.add_to_polygon.date : main.date;
+			let has_history = Boolean(polygon_obj?.history && polygon_obj.history.getTimestamps().length > 0);
+			let is_alive = true;
+			if (has_history) {
+				let ts = Date.getTimestamp(date);
+				if (polygon_obj.history._hasTimestampAfter && !polygon_obj.history._hasTimestampAfter(ts))
+					is_alive = false;
+				let kf = polygon_obj.history.getKeyframe({ date: date });
+				if (!kf?.value || kf.value[0] === null || kf.value[0] === undefined || kf.value[0] === "null" || kf.value[2]?.hidden)
+					is_alive = false;
+			}
+
+			//Guard clause: do not create phantom geometries outside entity lifespan
+			if (has_history && !is_alive) return;
+
+			let geometry = (polygon_obj) ? polygon_obj.getGeometryKeyframeAtDate(date) : null;
+			if (!geometry && !has_history)
+				geometry = polygon_obj?.geometry || polygon_obj?.value?.[0];
+			let ot_geometry = json.add_to_polygon.geometry;
+
+			//Immediate in-memory calculation for active rendering geometry (0ms lag brushing)
+			if (polygon_obj && polygon_obj.history && (geometry || ot_geometry)) {
 					try {
 						let turf_geom = (geometry) ? Geospatiale.convertMaptalksToTurf(geometry) : null;
 						let turf_ot = (ot_geometry) ? Geospatiale.convertMaptalksToTurf(ot_geometry) : null;
@@ -191,7 +208,6 @@ config.actions.geometry_polygon = {
 						return;
 					}
 				}
-			}
 		}
 	},
 	geometry_operation: {
@@ -347,12 +363,7 @@ config.actions.geometry_polygon = {
 					await polygon_obj.loadHistory();
 			
 			if (json.remove_from_polygon) {
-				let date = (json.remove_from_polygon.date !== undefined) ? json.remove_from_polygon.date : main.date;
-				let geometry = (polygon_obj) ?
-					(polygon_obj.getGeometryKeyframeAtDate(date) || polygon_obj.geometry || polygon_obj.value?.[0] || polygon_obj.getGeometryKeyframeAtDate(main.date)) : null;
-				let ot_geometry = json.remove_from_polygon.geometry;
-				
-				//Difference with existing geometry, if return value is null replace geometry
+				//Date range handling
 				if (json.remove_from_polygon.date_range && polygon_obj?.history) {
 					await polygon_obj.history.callFunctionInDateRange(json.remove_from_polygon.date_range, async (local_keyframe) => {
 						await DALS.Timeline.parseAction("remove_from_polygon", [{
@@ -363,9 +374,30 @@ config.actions.geometry_polygon = {
 							}
 						}], true);
 					});
-				} else {
-					//Immediate in-memory difference for active rendering geometry (0ms lag brushing)
-					if (polygon_obj && polygon_obj.history && geometry) {
+					return;
+				}
+
+				let date = (json.remove_from_polygon.date !== undefined) ? json.remove_from_polygon.date : main.date;
+				let has_history = Boolean(polygon_obj?.history && polygon_obj.history.getTimestamps().length > 0);
+				let is_alive = true;
+				if (has_history) {
+					let ts = Date.getTimestamp(date);
+					if (polygon_obj.history._hasTimestampAfter && !polygon_obj.history._hasTimestampAfter(ts))
+						is_alive = false;
+					let kf = polygon_obj.history.getKeyframe({ date: date });
+					if (!kf?.value || kf.value[0] === null || kf.value[0] === undefined || kf.value[0] === "null" || kf.value[2]?.hidden)
+						is_alive = false;
+				}
+
+				//Guard clause: do not subtract from a geometry that does not exist at this date
+				if (!is_alive) return;
+
+				let geometry = (polygon_obj) ? polygon_obj.getGeometryKeyframeAtDate(date) : null;
+				if (!geometry) return;
+				let ot_geometry = json.remove_from_polygon.geometry;
+
+				//Immediate in-memory difference for active rendering geometry (0ms lag brushing)
+				if (polygon_obj && polygon_obj.history && geometry) {
 						try {
 							let diff_succeeded = false;
 							let turf_difference = null;
@@ -456,7 +488,6 @@ config.actions.geometry_polygon = {
 						}
 					}
 				}
-			}
 		}
 	},
 	set_polygon: {

@@ -173,10 +173,24 @@ if (!proc.actions) proc.actions = {};
       }
     }
 
-    let keyframe_entry = keyframes[date];
+    let target_ts = (date !== undefined) ? parseInt(date) : 0;
+    let all_kf_ts = Object.keys(keyframes).map(k => parseInt(k)).filter(n => !isNaN(n)).sort((a, b) => a - b);
+    let best_kf_ts = null;
+    for (let i = 0; i < all_kf_ts.length; i++) {
+      if (all_kf_ts[i] <= target_ts) best_kf_ts = all_kf_ts[i];
+    }
+
+    //If entity has history and target_ts is before its first keyframe, do not create phantom keyframe before birth
+    if (all_kf_ts.length > 0 && best_kf_ts === null)
+      return { entity_id: entity_id, success: false, error: "Cannot add before entity start date" };
+
+    let keyframe_entry = (best_kf_ts !== null) ? keyframes[String(best_kf_ts)] : keyframes[date];
     if (keyframe_entry) {
       let raw_val = (keyframe_entry.value !== undefined) ? keyframe_entry.value : keyframe_entry;
       if (Array.isArray(raw_val) && raw_val[0]) raw_val = raw_val[0];
+      //If entity has ended (value[0] is null), do not resurrect after end date
+      if (all_kf_ts.length > 0 && (raw_val === null || raw_val === "null"))
+        return { entity_id: entity_id, success: false, error: "Cannot add after entity end date" };
       if (raw_val) existing_geom = proc.toTurfFeature(raw_val);
     }
 
@@ -569,12 +583,18 @@ if (!proc.actions) proc.actions = {};
     for (let i = 0; i < all_kf_ts.length; i++) {
       if (all_kf_ts[i] <= target_ts) best_kf_ts = all_kf_ts[i];
     }
-    if (best_kf_ts === null && all_kf_ts.length > 0) best_kf_ts = all_kf_ts[0];
+
+    //If entity has history and target_ts is before its first keyframe, do not modify
+    if (all_kf_ts.length > 0 && best_kf_ts === null)
+      return { entity_id: entity_id, success: false, error: "Cannot remove before entity start date" };
 
     let keyframe_entry = (best_kf_ts !== null) ? keyframes[String(best_kf_ts)] : keyframes[date];
     if (keyframe_entry) {
       let raw_val = (keyframe_entry.value !== undefined) ? keyframe_entry.value : keyframe_entry;
       if (Array.isArray(raw_val) && raw_val[0]) raw_val = raw_val[0];
+      //If entity has ended (value[0] is null), do not resurrect after end date
+      if (all_kf_ts.length > 0 && (raw_val === null || raw_val === "null"))
+        return { entity_id: entity_id, success: false, error: "Cannot remove after entity end date" };
       if (raw_val) existing_geom = proc.toTurfFeature(raw_val);
     }
 
