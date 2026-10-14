@@ -1,8 +1,9 @@
 global.population_GHSL = class { //[WIP] - Finish class body
 	//[NOTE] - Láng-Ritter et al. rural pop. underweighting is currently being contested. As of 22 August 2026, it should be waited on to see how the academic debate/response chain around it shakes out before going through with code changes - Kätzchen and Tacitus
-	static bf = `${h1}/population_GHSL`;
-	static input_geotiffs_folder = `${this.bf}/population_rasters/1.geotiffs/`;
-	static intermediate_rasters_folder = `${this.bf}/population_rasters/2.rasters/`;
+	static bf = `${h2}/population_GHSL/`;
+	static cleaned_rasters_folder = `${this.bf}cleaned_rasters/`;
+	static input_geotiffs_folder = `${h1}/population_GHSL/population_rasters/1.geotiffs/`;
+	static input_raw_rasters_folder = `${h1}/population_GHSL/population_rasters/2.rasters/`;
 	
 	static async A_convertToPNGs () {
 		//Declare local instance variables
@@ -18,8 +19,8 @@ global.population_GHSL = class { //[WIP] - Finish class body
 				let local_year = parseInt(file_name.replace("GHS_POP_E", "")
 				.replace(".tif", ""));
 				
-				let local_output_path = `${this.intermediate_rasters_folder}GHS_POP_${local_year}.png`;
-				let temp_tif_path = `${this.intermediate_rasters_folder}temp_${file_name}`;
+				let local_output_path = `${this.cleaned_rasters_folder}GHS_POP_${local_year}.png`;
+				let temp_tif_path = `${this.cleaned_rasters_folder}temp_${file_name}`;
 				
 				//Translate 64-bit GeoTIFF to a standard Float32 TIFF to fix the predictor decompression error
 				let command = `conda run gdal_translate -ot Float32 "${all_files[i]}" "${temp_tif_path}"`;
@@ -36,7 +37,21 @@ global.population_GHSL = class { //[WIP] - Finish class body
 	
 	static async A_fixCorruptPixels () {
 		//Declare local instance variables
-		let all_files = await File.getAllFiles(this.intermediate_rasters_folder);
+		if (!fs.existsSync(this.cleaned_rasters_folder))
+			fs.mkdirSync(this.cleaned_rasters_folder, { recursive: true });
+			
+		//Initialise cleaned_rasters_folder from input_raw_rasters_folder if not already populated
+		if (fs.existsSync(this.input_raw_rasters_folder)) {
+			let raw_files = await File.getAllFiles(this.input_raw_rasters_folder);
+			for (let i = 0; i < raw_files.length; i++) {
+				let file_name = path.basename(raw_files[i]);
+				let dest_path = path.join(this.cleaned_rasters_folder, file_name);
+				if (!fs.existsSync(dest_path))
+					fs.copyFileSync(raw_files[i], dest_path);
+			}
+		}
+
+		let all_files = await File.getAllFiles(this.cleaned_rasters_folder);
 		let corrupt_floats = [];
 		let corrupt_raw_bytes = [ //[WIP] - Are these the only corrupt_raw_bytes? Set it as a mask for subsequent rasters
 			[57, 13, 4, 233],
@@ -99,7 +114,7 @@ global.population_GHSL = class { //[WIP] - Finish class body
 	static async B_interpolatePNGs () {
 		//Declare local instance variables
 		this.B_is_interpolating = true;
-		let all_files = await File.getAllFiles(this.intermediate_rasters_folder);
+		let all_files = await File.getAllFiles(this.cleaned_rasters_folder);
 		let all_years = [];
 		
 		//Iterate over all_files and push to all_years
@@ -120,12 +135,12 @@ global.population_GHSL = class { //[WIP] - Finish class body
 			let year_gap = end_year - start_year;
 			
 			if (year_gap > 1) {
-				let from_file_path = path.join(this.intermediate_rasters_folder, `GHS_POP_${start_year}.png`);
-				let to_file_path = path.join(this.intermediate_rasters_folder, `GHS_POP_${end_year}.png`);
+				let from_file_path = path.join(this.cleaned_rasters_folder, `GHS_POP_${start_year}.png`);
+				let to_file_path = path.join(this.cleaned_rasters_folder, `GHS_POP_${end_year}.png`);
 				
 				for (let x = start_year + 1; x < end_year; x++) {
 					let fraction = (x - start_year)/year_gap;
-					let output_file_path = path.join(this.intermediate_rasters_folder, `GHS_POP_${x}.png`);
+					let output_file_path = path.join(this.cleaned_rasters_folder, `GHS_POP_${x}.png`);
 					
 					GeoPNG.linearInterpolation(from_file_path, to_file_path, output_file_path, {
 						format: "float32",
@@ -143,10 +158,10 @@ global.population_GHSL = class { //[WIP] - Finish class body
 		while (this.B_is_interpolating) await new Promise((resolve) => setTimeout(resolve, 100));
 		
 		//Declare local instance variables
-		let all_files = await File.getAllFiles(this.intermediate_rasters_folder);
+		let all_files = await File.getAllFiles(this.cleaned_rasters_folder);
 		let world_pop_obj = population_Global.A_getWorldPopulationObject();
 		
-		//Iterate over all_files in this.intermediate_rasters_folder and scale them
+		//Iterate over all_files in this.cleaned_rasters_folder and scale them
 		for (let i = 0; i < all_files.length; i++) {
 			let local_input_file_path = all_files[i];
 			let local_scalar = 1;
@@ -192,7 +207,7 @@ global.population_GHSL = class { //[WIP] - Finish class body
 	
 	static async D_printPopulation () {
 		//Declare local instance variables
-		let all_files = await File.getAllFiles(this.intermediate_rasters_folder);
+		let all_files = await File.getAllFiles(this.cleaned_rasters_folder);
 		let world_pop_obj = population_Global.A_getWorldPopulationObject();
 		let year_files = [];
 		
@@ -224,6 +239,23 @@ global.population_GHSL = class { //[WIP] - Finish class body
 		}
 	}
 	
+	/**
+	 * Adjusts 2020-2025 modern substrata rasters using WorldPop cohorts (2020-2024) and Worldometer country projections (2025).
+	 * @alias population_GHSL.E_adjustModernSubstrata
+	 * 
+	 * @param {Object} [arg0_options]
+	 */
+	static async E_adjustModernSubstrata (arg0_options) {
+		//Convert from parameters
+		let options = (arg0_options) ? arg0_options : {};
+		
+		//Declare local instance variables
+		let script_path = path.join(__dirname, "adjust_modern_substrata_2020_2025.py");
+		
+		console.log(`- Running modern substrata adjustment (2020-2025) via WorldPop & Worldometer ..`);
+		child_process.execSync(`python "${script_path}"`, { stdio: "inherit" });
+	}
+	
 	static async processRasters (arg0_options) {
 		//Convert from parameters
 		let options = (arg0_options) ? arg0_options : {};
@@ -248,6 +280,10 @@ global.population_GHSL = class { //[WIP] - Finish class body
 		//2nd Pass C: Re-scale the newly interpolated frames to map them onto the true non-linear exponential population curve
 		if (!options.exclude.includes("C"))
 			await this.C_scalePNGsToGlobalPopulation();
+		
+		//Adjust modern substrata for 2020-2025 using empirical WorldPop and Worldometer projections
+		if (!options.exclude.includes("E"))
+			await this.E_adjustModernSubstrata(options);
 		
 		if (!options.exclude.includes("D"))
 			await this.D_printPopulation();

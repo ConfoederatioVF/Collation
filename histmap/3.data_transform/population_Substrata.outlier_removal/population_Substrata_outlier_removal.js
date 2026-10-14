@@ -1,6 +1,6 @@
 global.population_Substrata_outlier_removal = class {
 	static bf = `${h3}/population_Substrata.outlier_removal/`;
-	static input_GHSL_rasters = `${h1}/population_GHSL/population_rasters/2.rasters/`;
+	static input_GHSL_rasters = `${h2}/population_GHSL/cleaned_rasters/`;
 	static input_outlier_rasters = `${this.bf}rasters_outliers/`;
 	static input_outlier_rasters_to_scale = `${this.bf}rasters_outliers_to_scale/`;
 	static intermediate_outliers_removed_rasters = `${this.bf}rasters_outliers_removed/`;
