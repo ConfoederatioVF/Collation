@@ -25,6 +25,9 @@ global.landuse_HYDE = class {
 		"urbc_": "Urban Population (pop/cell)"
 	};
 	static hyde_original_years = [
+		//1000-year intervals
+		-10000, -9000, -8000, -7000, -6000, -5000, -4000, -3000, -2000, -1000,
+		
 		//100-year intervals
 		0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700,
 		
@@ -32,10 +35,7 @@ global.landuse_HYDE = class {
 		1710, 1720, 1730, 1740, 1750, 1760, 1770, 1780, 1790, 1800, 1810, 1820, 1830, 1840, 1850, 1860, 1870, 1880, 1890, 1900, 1910, 1920, 1930, 1940, 1950,
 		
 		//1-year intervals
-		1951, 1952, 1953, 1954, 1955, 1956, 1957, 1958, 1959, 1960, 1961, 1962, 1963, 1964, 1965, 1966, 1967, 1968, 1969, 1970, 1971, 1972, 1973, 1974, 1975, 1976, 1977, 1978, 1979, 1980, 1981, 1982, 1983, 1984, 1985, 1986, 1987, 1988, 1989, 1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2023,
-		
-		//Post-addendum (1000-year intervals except 10000BC in base dataset)
-		-1000, -3000, -4000, -5000, -6000, -7000, -8000, -9000
+		1951, 1952, 1953, 1954, 1955, 1956, 1957, 1958, 1959, 1960, 1961, 1962, 1963, 1964, 1965, 1966, 1967, 1968, 1969, 1970, 1971, 1972, 1973, 1974, 1975, 1976, 1977, 1978, 1979, 1980, 1981, 1982, 1983, 1984, 1985, 1986, 1987, 1988, 1989, 1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025
 	];
 	static hyde_years = [
 		//1000-year intervals
@@ -48,14 +48,14 @@ global.landuse_HYDE = class {
 		1710, 1720, 1730, 1740, 1750, 1760, 1770, 1780, 1790, 1800, 1810, 1820, 1830, 1840, 1850, 1860, 1870, 1880, 1890, 1900, 1910, 1920, 1930, 1940, 1950,
 		
 		//1-year intervals
-		1951, 1952, 1953, 1954, 1955, 1956, 1957, 1958, 1959, 1960, 1961, 1962, 1963, 1964, 1965, 1966, 1967, 1968, 1969, 1970, 1971, 1972, 1973, 1974, 1975, 1976, 1977, 1978, 1979, 1980, 1981, 1982, 1983, 1984, 1985, 1986, 1987, 1988, 1989, 1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023,
+		1951, 1952, 1953, 1954, 1955, 1956, 1957, 1958, 1959, 1960, 1961, 1962, 1963, 1964, 1965, 1966, 1967, 1968, 1969, 1970, 1971, 1972, 1973, 1974, 1975, 1976, 1977, 1978, 1979, 1980, 1981, 1982, 1983, 1984, 1985, 1986, 1987, 1988, 1989, 1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025
 	];
-	static sorted_hyde_years = this.hyde_years.concat([2024, 2025])
+	static sorted_hyde_years = this.hyde_years.slice()
 		.sort((a, b) => a - b);
 	
 	static input_mcevedy_json = `${h2}/landuse_HYDE/config/mcevedy_data.json`;
 	static input_raster_mcevedy = `${h2}/landuse_HYDE/config/mcevedy_subdivisions.png`;
-	static input_rasters_equirectangular = `${h1}/landuse_HYDE/`;
+	static input_rasters_equirectangular = `${h1}/landuse_HYDE3.5/`;
 	static intermediate_rasters_equirectangular = `${h2}/landuse_HYDE/rasters/`;
 	static intermediate_rasters_mcevedy = `${h2}/landuse_HYDE/rasters_mcevedy/`;
 	static intermediate_rasters_scaled_to_global = `${h2}/landuse_HYDE/rasters_scaled_to_global/`;
@@ -105,6 +105,14 @@ global.landuse_HYDE = class {
 		if (!options.format) options.format = "float32";
 		
 		//Declare local instance variables
+		let extractor_script = path.join(input_folder, "extract_hyde35.py");
+		
+		if (fs.existsSync(extractor_script)) {
+			console.log(`[landuse_HYDE] Executing NetCDF-4 extractor: ${extractor_script} ...`);
+			await Blacktraffic.Python_run(extractor_script);
+			return;
+		}
+		
 		let all_input_files = await File.getAllFiles(input_folder);
 		
 		//Iterate over all_input_files

@@ -16,8 +16,14 @@ global.population_Substrata_outlier_removal = class {
 		interpolate_to_GHSL2_domain: [1950, 1975]
 	};
 	
-	static statista_obj = () => JSON.parse(fs.readFileSync(`${this.bf}.config/statista_regions.json`, "utf8"));
-	static statista_regions_raster = `${this.bf}/config/statista_regions.png`;
+	static statista_obj = () => {
+		let json5_path = `${this.bf}config/statista_regions.json5`;
+		let json_path = `${this.bf}config/statista_regions.json`;
+		if (fs.existsSync(json5_path))
+			return (typeof JSON5 !== "undefined") ? JSON5.parse(fs.readFileSync(json5_path, "utf8")) : JSON.parse(fs.readFileSync(json5_path, "utf8"));
+		return JSON.parse(fs.readFileSync(json_path, "utf8"));
+	};
+	static statista_regions_raster = `${this.bf}config/statista_regions.png`;
 	
 	static async _printPopulation () {
 		//Declare local instance variables

@@ -45,17 +45,17 @@ global.population_KK10LUH2 = class {
 					let local_input_path = `${this.input_luh2_folder}${luh2_stocks[x]}/LUH2_${luh2_stocks[x]}_${i}.png`;
 					
 					luh2_images[luh2_stocks[x]] = GeoPNG.loadNumberRasterImage(local_input_path, { 
-						format: "greyscale" 
+						format: "float32" 
 					});
 				} catch (e) { console.error(e); }
 				
 				console.log(`- Averaging LUH2 raster for ${i} ..`);
 				GeoPNG.saveNumberRasterImage({
 					file_path: `${this.intermediate_luh2_rasters}LUH2_${i}.png`,
-					format: "greyscale",
+					format: "float32",
 					
 					height: luh2_images[luh2_stocks[0]].height,
-					width: luh2_images[luh2_stocks[1]].width,
+					width: luh2_images[luh2_stocks[0]].width,
 					function: function (arg0_index) {
 						//Convert from parameters
 						let index = arg0_index;
@@ -94,16 +94,16 @@ global.population_KK10LUH2 = class {
 				
 				if (in_luh2_domain && in_kk10_domain) {
 					let luh2_image = GeoPNG.loadNumberRasterImage(luh2_file_path, { 
-						format: "greyscale" 
+						format: "float32" 
 					});
 					let kk10_image = GeoPNG.loadNumberRasterImage(kk10_file_path, { 
-						format: "greyscale" 
+						format: "float32" 
 					});
 					
 					console.log(`- Averaging KK10 and LUH2 for ${hyde_years[i]} ..`);
 					GeoPNG.saveNumberRasterImage({
 						file_path: output_file_path,
-						format: "greyscale",
+						format: "float32",
 						
 						height: luh2_image.height,
 						width: luh2_image.width,
@@ -150,7 +150,9 @@ global.population_KK10LUH2 = class {
 			//Fallback handling
 			if (!fs.existsSync(input_file_path)) 
 				if (options.fallback_mode === "kk10luh2_domain") {
-					input_file_path = `${this.intermediate_kk10_luh2_greyscale_rasters}KK10LUH2_${this.input_kk10luh2_domain[0]}.png`;
+					let fallback_year = (hyde_years[i] < this.input_kk10luh2_domain[0]) ?
+						this.input_kk10luh2_domain[0] : this.input_kk10luh2_domain[1];
+					input_file_path = `${this.intermediate_kk10_luh2_greyscale_rasters}KK10LUH2_${fallback_year}.png`;
 				} else {
 					//Simply copy over the original HYDE raster otherwise
 					let hyde_file_path = `${landuse_HYDE.intermediate_rasters_scaled_to_global}popc_${hyde_years[i]}.png`;
@@ -162,35 +164,20 @@ global.population_KK10LUH2 = class {
 			
 			//Regular non-fallback handling
 			if (fs.existsSync(input_file_path)) {
-				let greyscale_image = GeoPNG.loadImage(input_file_path);
-				let greyscale_sum = 0;
+				let local_raster = GeoPNG.loadNumberRasterImage(input_file_path, { format: "float32" });
+				let raster_sum = GeoPNG.getImageSum(input_file_path, { format: "float32" });
 				let local_world_pop = world_pop_obj[hyde_years[i]];
+				let population_per_pixel = (raster_sum > 0) ? local_world_pop/raster_sum : 0;
 				
-				//Iterate over all pixels in greyscale_image
-				for (let x = 0; x < greyscale_image.width; x++)
-					for (let y = 0; y < greyscale_image.height; y++) {
-						let local_index = (greyscale_image.width*y + x) << 2; //4 bytes per pixel (RGBA)
-						let r = greyscale_image.data[local_index];
-						
-						greyscale_sum += r/255;
-					}
-				
-				let population_per_pixel = local_world_pop/greyscale_sum;
-				
-				//Save number raster image
-				console.log(`- Converting KK10_LUH2 from greyscale to GeoPNG for ${hyde_years[i]} ..`);
+				console.log(`- Calibrating KK10LUH2 float32 GeoPNG for ${hyde_years[i]} ..`);
 				GeoPNG.saveNumberRasterImage({
 					file_path: output_file_path,
 					format: "float32",
-					height: greyscale_image.height,
-					width: greyscale_image.width,
-					
+					height: local_raster.height,
+					width: local_raster.width,
 					function: function (arg0_index) {
-						//Convert from parameters
-						let local_index = arg0_index*4; //Index must be multiplied by 4 since we are using loadImage(), and not loadNumberRasterImage()
-						
 						//Return statement
-						return (greyscale_image.data[local_index]/255)*population_per_pixel;
+						return local_raster.data[arg0_index]*population_per_pixel;
 					}
 				});
 			}
@@ -603,11 +590,20 @@ global.population_KK10LUH2 = class {
 		
 		if (!options.exclude) options.exclude = [];
 		
-		//1. Average greyscales from KK10/LUH2 climate models
+		//0. Extract raw NetCDF files to 5-arcmin float32 GeoPNGs if requested
+		if (options.extract_raw || options.reextract) {
+			let extractor_script = path.join(this.input_kk10_folder, "..", "extract_kk10luh2.py");
+			if (fs.existsSync(extractor_script)) {
+				console.log(`[population_KK10LUH2] Extracting KK10 & LUH2 from NetCDF to float32 GeoPNGs ...`);
+				await Blacktraffic.Python_run(extractor_script);
+			}
+		}
+		
+		//1. Average land use fractions from LUH2 climate model in float32
 		if (!options.exclude.includes("A")) await this.A_averageLUH2Rasters();
-		//2. Convert greyscale images to GeoPNGs
+		//2. Combine KK10 and LUH2 rasters in float32
 		if (!options.exclude.includes("B")) await this.B_generateKK10LUH2Rasters();
-		//3. Convert greyscale images to RGBA
+		//3. Calibrate KK10LUH2 rasters to world population totals in float32
 		if (!options.exclude.includes("C")) await this.C_convertKK10LUH2RastersToRGBA({
 			fallback_mode: "kk10luh2_domain"
 		});

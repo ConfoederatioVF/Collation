@@ -24,6 +24,8 @@
         admin_modern: (global.h2) ? path.join(h2, "admin_modern", "admin_modern.js") : "",
         metadata_HYDE: (global.h2) ? path.join(h2, "metadata_HYDE", "metadata_HYDE.js") : "",
         landuse_HYDE: (global.h2) ? path.join(h2, "landuse_HYDE", "landuse_HYDE.js") : "",
+        population_KK10LUH2: (global.h2) ? path.join(h2, "population_KK10LUH2", "population_KK10LUH2.js") : "",
+        population_Substrata_northern_america: (global.h3) ? path.join(h3, "population_Substrata.northern_america", "population_Substrata_northern_america.js") : "",
         population_Substrata_outlier_removal: (global.h3) ? path.join(h3, "population_Substrata.outlier_removal", "population_Substrata_outlier_removal.js") : "",
         population_Stadester: (global.h2) ? path.join(h2, "population_Stadester", "population_Stadester.js") : "",
         GDP_PPP_SEDAC: (global.h2) ? path.join(h2, "GDP_PPP_SEDAC", "GDP_PPP_SEDAC.js") : "",
@@ -74,11 +76,12 @@
     }
     
     /**
-     * Step A: Processes HYDE land use rasters and Velkscala Substrata population outlier removal.
+     * Step A: Processes HYDE land use rasters, KK10LUH2 fallback calibration, and Velkscala Substrata population outlier removal.
      * @alias NWM.A_processSubstrata
      * 
      * @param {Object} [arg0_options]
      *  @param {Object} [arg0_options.hyde] - Options passed to landuse_HYDE.processRasters
+     *  @param {Object} [arg0_options.kk10luh2] - Options passed to population_KK10LUH2.processRasters
      *  @param {Object} [arg0_options.substrata] - Options passed to population_Substrata_outlier_removal.processRasters
      */
     static async A_processSubstrata (arg0_options) {
@@ -90,6 +93,7 @@
       let skip_primary = (options.skip_primary || options.skip_raw || options.skip_primary_data || options.skip_raw_data || options.skip_databases);
       
       let hyde_options = { exclude: ["A"], overwrite: overwrite, ...(options.hyde || {}) };
+      let kk10luh2_options = { overwrite: overwrite, ...(options.kk10luh2 || {}) };
       let substrata_options = { overwrite: overwrite, ...(options.substrata || {}) };
       
       //Function body
@@ -98,6 +102,10 @@
         console.log(`[NWM] Step A: Skipping primary land use database (landuse_HYDE).`);
       } else {
         if (global.landuse_HYDE) await landuse_HYDE.processRasters(hyde_options);
+      }
+      if (global.population_KK10LUH2) {
+        console.log(`[NWM] Step A: Calibrating KK10LUH2 fallback model ...`);
+        await population_KK10LUH2.processRasters(kk10luh2_options);
       }
       if (global.population_Substrata_outlier_removal)
         await population_Substrata_outlier_removal.processRasters(substrata_options);
