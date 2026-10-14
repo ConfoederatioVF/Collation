@@ -413,8 +413,9 @@ global.population_KK10LUH2 = class {
 			population_Substrata_outlier_removal.statista_regions_raster,
 		);
 		let regions_map = {};
-		let statista_obj = JSON.parse(
-			JSON.stringify(population_Substrata_outlier_removal.statista_obj),
+		let statista_raw = population_Substrata_outlier_removal.statista_obj;
+		let statista_obj = structuredClone(
+			(typeof statista_raw === "function") ? statista_raw() : statista_raw
 		);
 		
 		let global_min_year = Infinity;

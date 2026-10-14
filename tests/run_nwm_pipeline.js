@@ -48,16 +48,10 @@ require(path.join(h3, "population_Substrata.outlier_removal/population_Substrata
     let t_start = Date.now();
     console.log("=== Starting NWM Calibration Pipeline ===");
 
-    // Step 1: KK10LUH2 Steps B & C
-    console.log("\n--- [Step 1] KK10LUH2 Steps B & C ---");
+    // Step 2b: KK10LUH2 Steps F, G (Statista & Global Scaling)
+    console.log("\n--- [Step 2b] KK10LUH2 Steps F, G (Statista & Global Scaling) ---");
     await population_KK10LUH2.processRasters({
-      exclude: ["A", "D", "E", "F", "G"]
-    });
-
-    // Step 2: KK10LUH2 Steps D, E, F, G (Regional and Global Scaling)
-    console.log("\n--- [Step 2] KK10LUH2 Steps D, E, F, G (Regional and Global Scaling) ---");
-    await population_KK10LUH2.processRasters({
-      exclude: ["A", "B", "C"]
+      exclude: ["A", "B", "C", "D", "E"]
     });
 
     // Step 3: Outlier Removal & Calibration
