@@ -5,7 +5,7 @@ global.gini_SubNGini = class { //[WIP] - Finish class body
 	static intermediate_subnational_rasters = `${h2}/gini_SubNGini/subnational_gini_rasters/`;
 	static output_areal_json = `${this.intermediate_subnational_masks_folder}areal_metadata.json`;
 	static output_areal_raster = `${this.intermediate_subnational_masks_folder}areal_masks.png`;
-	static years = Array.getFilledDomain(1990, 2023);
+	static years = Array.getFilledDomain(1990, 2025);
 	
 	static async A_convertToPNGs () {
 		console.log(`- Converting SubNGini to rasters ...`);

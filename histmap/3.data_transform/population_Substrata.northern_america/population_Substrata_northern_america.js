@@ -270,28 +270,25 @@ global.population_Substrata_northern_america = class {
 		//Declare local instance variables
 		let hyde_years = (options.hyde_years) ? options.hyde_years : landuse_HYDE.sorted_hyde_years;
 		let northern_america_obj = await this.A_getNorthernAmericaPopulationObject();
-			let northern_america_domain = northern_america_obj.domain;
-		let raster_obj = {};
+		let northern_america_domain = northern_america_obj.domain;
 		
 		let all_png_files = fs.readdirSync(this.input_rasters_regions)
-		.filter((file) => path.extname(file).toLowerCase() === ".png");
+			.filter((file) => path.extname(file).toLowerCase() === ".png");
 		
-		//Iterate over all_png_files and populate raster_obj
-		for (let i = 0; i < all_png_files.length; i++)
-			all_png_files[i] = `${this.input_rasters_regions}/${all_png_files[i]}`;
+		let raster_obj = {};
 		for (let i = 0; i < all_png_files.length; i++) {
-			console.log(`- Loading ${all_png_files[i]} ..`);
-			raster_obj[all_png_files[i]] = GeoPNG.loadImage(all_png_files[i]);
+			let full_path = path.join(this.input_rasters_regions, all_png_files[i]);
+			raster_obj[all_png_files[i]] = GeoPNG.loadImage(full_path);
 		}
 		
 		//1. Load Land Area Raster (1:1 pixel array)
 		let land_area_raster = GeoPNG.loadNumberRasterImage(metadata_HYDE.input_raster_land_area, {
 			format: "int32"
 		});
+		let land_area_data = land_area_raster.data;
 		let raster_height = land_area_raster.height;
 		let raster_width = land_area_raster.width;
 		let total_pixel_count = raster_width*raster_height;
-		let land_area_data = land_area_raster.data;
 		
 		let all_mask_keys = Object.keys(northern_america_obj.areal_masks);
 		
@@ -301,8 +298,8 @@ global.population_Substrata_northern_america = class {
 			land_area_raster: land_area_raster,
 			mask_rasters: all_png_files.map((f) => raster_obj[f])
 		});
-		let mask_pixel_indices = areal_indexing.mask_pixel_indices;
 		let mask_areas = areal_indexing.mask_areas;
+		let mask_pixel_indices = areal_indexing.mask_pixel_indices;
 		
 		let checkMaskDomain = function (arg0_mask, arg1_year) {
 			let mask_domain = northern_america_domain;
@@ -322,7 +319,7 @@ global.population_Substrata_northern_america = class {
 		
 		//Iterate over all hyde_years in parallel
 		await GeoPNG.processTimeseriesParallel({
-			concurrency: 4,
+			concurrency: options.concurrency || 4,
 			items: hyde_years,
 			name: "Northern America Substrata Dasymetric",
 			handler: async (current_year) => {
@@ -331,13 +328,19 @@ global.population_Substrata_northern_america = class {
 				
 				if (!fs.existsSync(local_input_file_path)) return;
 				
+				//If year is completely beyond the temporal scope of all northern america models (> 1896), copy cleanly
+				if (current_year > 1896) {
+					fs.copyFileSync(local_input_file_path, local_output_file_path);
+					return;
+				}
+				
 				//Load underlying HYDE population raster asynchronously
 				let base_pop_raster = await GeoPNG.loadNumberRasterImageAsync(local_input_file_path, { format: "float32" });
 				let pop_buffer = new Float64Array(base_pop_raster.data);
-				let year_targets = {};
 				let active_mask_indices = {};
+				let year_targets = {};
 				
-				//Determine targets for active masks for current year
+				//Determine targets for active masks for current year in exact insertion order
 				for (let x = 0; x < all_mask_keys.length; x++) {
 					let mask_key = all_mask_keys[x];
 					let local_mask = northern_america_obj.areal_masks[mask_key];
@@ -356,12 +359,18 @@ global.population_Substrata_northern_america = class {
 					}
 					
 					if (target_pop !== undefined && target_pop > 0) {
-						year_targets[local_mask.key] = target_pop;
 						active_mask_indices[local_mask.key] = indices;
+						year_targets[local_mask.key] = target_pop;
 					}
 				}
 				
-				//Apply dasymetric scaling
+				//If no active targets for this year, copy cleanly
+				if (Object.keys(year_targets).length === 0) {
+					fs.copyFileSync(local_input_file_path, local_output_file_path);
+					return;
+				}
+				
+				//Apply dasymetric scaling sequentially across hierarchical layers
 				pop_buffer = GeoPNG.dasymetricScale({
 					data: pop_buffer,
 					mask_pixel_indices: active_mask_indices,
@@ -382,7 +391,7 @@ global.population_Substrata_northern_america = class {
 		});
 	}
 	
-	static async processRasters () {
-		await this.A_generateStadesterNorthernAmericaRasters();
+	static async processRasters (arg0_options) {
+		await this.A_generateStadesterNorthernAmericaRasters(arg0_options);
 	}
 }

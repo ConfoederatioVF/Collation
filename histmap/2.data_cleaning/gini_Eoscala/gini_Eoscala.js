@@ -16,7 +16,7 @@ global.gini_Eoscala = class {
 	static options = {
 		//Domains for dasymetric masking
 		gapminder_domain: [1800, 1990],
-		subngini_domain: [1990, 2023],
+		subngini_domain: [1990, 2025],
 		
 		interpolate_to_gapminder: [1700, 1800],
 		interpolate_to_subngini: [1950, 1990]
@@ -30,7 +30,7 @@ global.gini_Eoscala = class {
 		let base_dir = this.intermediate_ols_rasters;
 		let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
 		let target_years = [];
-		let years = this.years();
+		let years = (options.years) ? options.years : this.years();
 
 		if (!fs.existsSync(base_dir)) fs.mkdirSync(base_dir, { recursive: true });
 
@@ -48,7 +48,7 @@ global.gini_Eoscala = class {
 			let cov_obj = this.input_covariates_obj();
 			let covariates_map = {};
 			let filtered_coefficients = {};
-			let format_year = (year > 2023) ? 2023 : year;
+			let format_year = (year > 2025) ? 2025 : year;
 			let keys = Object.keys(cov_obj);
 			let model_obj = null;
 			let model_path = this.input_eoscala_gini_json();
@@ -97,8 +97,12 @@ global.gini_Eoscala = class {
 		});
 	}
 	
-	static async B_normaliseOLSRasters () {
-		let target_years = this.years();
+	static async B_normaliseOLSRasters (arg0_options) {
+		//Convert from parameters
+		let options = (arg0_options) ? arg0_options : {};
+		
+		//Declare local instance variables
+		let target_years = (options.years) ? options.years : this.years();
 		let src_dir = this.intermediate_ols_rasters;
 		let dest_dir = this.intermediate_normalised_rasters;
 		if (!fs.existsSync(dest_dir)) fs.mkdirSync(dest_dir, { recursive: true });
@@ -149,7 +153,7 @@ global.gini_Eoscala = class {
 			
 			let raw_raster = GeoPNG.loadNumberRasterImage(source_path, { format: "float32" });
 			
-			let format_year = local_year > 2023 ? 2023 : local_year;
+			let format_year = local_year > 2025 ? 2025 : local_year;
 			let popc_info = this.input_covariates_obj()["popc_"](format_year);
 			let popc_raster = GeoPNG.loadNumberRasterImage(popc_info[0], { format: popc_info[1] });
 			
@@ -220,8 +224,12 @@ global.gini_Eoscala = class {
 		}
 	}
 	
-	static async C_clampOLSRasters () {
-		let years = this.years();
+	static async C_clampOLSRasters (arg0_options) {
+		//Convert from parameters
+		let options = (arg0_options) ? arg0_options : {};
+		
+		//Declare local instance variables
+		let years = (options.years) ? options.years : this.years();
 		let src_dir = this.intermediate_normalised_rasters;
 		let dest_dir = this.intermediate_clamped_rasters;
 		if (!fs.existsSync(dest_dir)) fs.mkdirSync(dest_dir, { recursive: true });
@@ -272,7 +280,7 @@ global.gini_Eoscala = class {
 			}
 			
 			let normalised_raster = GeoPNG.loadNumberRasterImage(source_path, { format: "float32" });
-			let format_year = year > 2023 ? 2023 : year;
+			let format_year = year > 2025 ? 2025 : year;
 			
 			let gdp_info = this.input_covariates_obj()["gdp_ppp"](format_year);
 			let gdp_file = gdp_info[0];
@@ -339,7 +347,7 @@ global.gini_Eoscala = class {
 	
 	static async D_interpolateRasters (arg0_options = {}) {
 		let options = arg0_options;
-		let years = this.years();
+		let years = (options.years) ? options.years : this.years();
 		let src_dir = this.intermediate_clamped_rasters;
 		let dest_dir = this.output_rasters;
 		
@@ -367,7 +375,7 @@ global.gini_Eoscala = class {
 				try {
 					let gapminder_mask = GeoPNG.loadImage(admin_modern.input_geocodes_raster);
 					let raw_target = GeoPNG.loadNumberRasterImage(clamped_path, { format: "float32" });
-					let format_year = year > 2023 ? 2023 : year;
+					let format_year = year > 2025 ? 2025 : year;
 					let popc_info = this.input_covariates_obj()["popc_"](format_year);
 					let pop_raster = GeoPNG.loadNumberRasterImage(popc_info[0], { format: popc_info[1] });
 					

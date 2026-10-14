@@ -59,6 +59,7 @@ global.pngjs = require("pngjs");
 try { global.JSON5 = require("json5"); } catch (e) {}
 try { global.mathjs = require("mathjs"); } catch (e) {}
 try { global.ml_matrix = require("ml-matrix"); } catch (e) {}
+try { global.cubic_spline = require("cubic-spline"); } catch (e) {}
 
 //Load core UF dependencies
 let root_dir = (workerData && workerData.root_dir) ?
@@ -111,9 +112,11 @@ let safeRequire = function (rel_path) {
 };
 
 //Load common histmap pipeline modules
+safeRequire("histmap/2.data_cleaning/metadata_HYDE/metadata_HYDE.js");
+safeRequire("histmap/2.data_cleaning/landuse_HYDE/landuse_HYDE.js");
+safeRequire("histmap/2.data_cleaning/population_Global/population_Global.js");
 safeRequire("histmap/2.data_cleaning/population_Stadester/stadester_rasters.js");
 safeRequire("histmap/2.data_cleaning/population_Stadester/stadester_uud.js");
-safeRequire("histmap/2.data_cleaning/metadata_HYDE/metadata_HYDE.js");
 safeRequire("histmap/2.data_cleaning/admin_modern/admin_modern.js");
 safeRequire("histmap/2.data_cleaning/professions_Bairoch/professions_Bairoch.js");
 

@@ -292,7 +292,55 @@
   };
   
   /**
-   * Generates Stadestér Urban raster for a single year by merging Base with GHSL in float32.
+   * Caches and returns a flat pixel index to ISO2 country code mapping.
+   * @alias population_Stadester_rasters.getPixelToISO2Mapping
+   * 
+   * @returns {Array<string|null>}
+   */
+  population_Stadester_rasters.getPixelToISO2Mapping = function () {
+    //Declare local instance variables
+    let colourcodes;
+    let iso2_img;
+    let iso2_path;
+    let pixel_map;
+    let rgb_to_iso2;
+    
+    if (global._cached_stadester_pixel_to_iso2)
+      return global._cached_stadester_pixel_to_iso2;
+    
+    iso2_path = (typeof admin_modern !== "undefined" && admin_modern.input_iso2_geocodes_raster) ?
+      admin_modern.input_iso2_geocodes_raster : `${h1}/admin_modern/iso2.png`;
+    
+    if (!fs.existsSync(iso2_path)) return null;
+    
+    colourcodes = (typeof admin_modern !== "undefined" && admin_modern.getISO2ColourcodesObject) ?
+      admin_modern.getISO2ColourcodesObject() : {};
+    iso2_img = GeoPNG.loadImage(iso2_path);
+    pixel_map = new Array(4320*2160);
+    rgb_to_iso2 = {};
+    
+    for (let colour in colourcodes) {
+      let codes = colourcodes[colour];
+      if (codes && codes.length > 0) {
+        let rgb = colour.split(",").slice(0, 3).join(",");
+        rgb_to_iso2[rgb] = codes[0];
+      }
+    }
+    
+    for (let i = 0; i < 4320*2160; i++) {
+      let b = i*4;
+      let rgb = `${iso2_img.data[b]},${iso2_img.data[b + 1]},${iso2_img.data[b + 2]}`;
+      pixel_map[i] = rgb_to_iso2[rgb] || null;
+    }
+    
+    global._cached_stadester_pixel_to_iso2 = pixel_map;
+    
+    //Return statement
+    return pixel_map;
+  };
+
+  /**
+   * Generates Stadestér Urban raster for a single year preserving JSON ground truth in float32.
    * @alias population_Stadester_rasters.generateStadesterUrbanRaster
    * 
    * @param {number} arg0_year
@@ -308,14 +356,11 @@
     //Declare local instance variables
     let base_file_path = path.join(options.intermediate_base_folder || `${h2}/population_Stadester/stadester_base_rasters/`, `stadester_base_${year}.png`);
     let base_raster = null;
-    let ghsl_file_path = `${h1}/population_GHSL/urban_rasters/GHSL_${year}.png`;
-    let ghsl_raster = null;
     let output_file_path = path.join(options.input_urbc_folder || `${h2}/population_Stadester/stadester_urban_rasters/`, `stadester_urban_${year}.png`);
+    let urban_folder = path.dirname(output_file_path);
     
     //Guard clauses
     if (year < -3000) {
-      let urban_folder = options.input_urbc_folder || `${h2}/population_Stadester/stadester_urban_rasters/`;
-      let zero_raster = new Float32Array(4320*2160);
       if (!fs.existsSync(urban_folder)) fs.mkdirSync(urban_folder, { recursive: true });
       GeoPNG.saveNumberRasterImage({
         file_path: output_file_path,
@@ -330,19 +375,21 @@
       return output_file_path;
     }
     
-    if (fs.existsSync(base_file_path))
+    if (options.base_raster) {
+      base_raster = options.base_raster;
+    } else if (fs.existsSync(base_file_path)) {
       base_raster = GeoPNG.loadNumberRasterImage(base_file_path, { format: "float32" });
-    if (fs.existsSync(ghsl_file_path))
-      ghsl_raster = GeoPNG.loadNumberRasterImage(ghsl_file_path, { format: "float32" });
+    }
     
+    if (!fs.existsSync(urban_folder)) fs.mkdirSync(urban_folder, { recursive: true });
+    
+    //Stadestér Base preserves exact city numbers from stadester.json
     GeoPNG.saveNumberRasterImage({
       file_path: output_file_path,
       format: "float32",
       height: 2160,
       width: 4320,
       function: function (local_index) {
-        let ghsl_val = (ghsl_raster && ghsl_raster.data[local_index]) ? ghsl_raster.data[local_index] : 0;
-        if (ghsl_val >= 0.01) return ghsl_val;
         let base_val = (base_raster && base_raster.data[local_index]) ? base_raster.data[local_index] : 0;
         return (base_val >= 0.01) ? base_val : 0;
       }
@@ -355,7 +402,148 @@
   };
   
   /**
-   * Generates Stadestér Rural raster for a single year by subtracting Urban from substrata in float32.
+   * Reconciles Rural and Total Population rasters using national dasymetric rural scaling in float32.
+   * Preserves exact urban city populations from stadester.json and calibrates rural to national totals.
+   * @alias population_Stadester_rasters.reconcileStadesterDemographics
+   * 
+   * @param {number} arg0_year
+   * @param {Object} [arg1_options]
+   * 
+   * @returns {Promise<Object>} { pop_file_path, rural_file_path }
+   */
+  population_Stadester_rasters.reconcileStadesterDemographics = async function (arg0_year, arg1_options) {
+    //Convert from parameters
+    let year = parseInt(arg0_year);
+    let options = (arg1_options) ? arg1_options : {};
+    
+    //Declare local instance variables
+    let country_raw_rur = {};
+    let country_scalar = {};
+    let country_sub = {};
+    let country_urb = {};
+    let global_raw_rur = 0;
+    let global_sub = 0;
+    let global_urb = 0;
+    let pixel_to_iso2 = population_Stadester_rasters.getPixelToISO2Mapping();
+    let pop_file_path = path.join(options.input_popc_folder || `${h2}/population_Stadester/stadester_population_rasters/`, `stadester_population_${year}.png`);
+    let pop_folder = path.dirname(pop_file_path);
+    let raw_rural_data = new Float32Array(4320*2160);
+    let rural_data = new Float32Array(4320*2160);
+    let rural_file_path = path.join(options.input_rurc_folder || `${h2}/population_Stadester/stadester_rural_rasters/`, `stadester_rural_${year}.png`);
+    let rural_folder = path.dirname(rural_file_path);
+    let substrata_file_path = population_Stadester_rasters.getSubstrataRasterPath(year, options);
+    let substrata_raster = null;
+    let total_data = new Float32Array(4320*2160);
+    let total_pixels = 4320*2160;
+    let urban_file_path = path.join(options.input_urbc_folder || `${h2}/population_Stadester/stadester_urban_rasters/`, `stadester_urban_${year}.png`);
+    let urban_raster = null;
+    
+    //Ensure destination directories exist
+    if (!fs.existsSync(pop_folder)) fs.mkdirSync(pop_folder, { recursive: true });
+    if (!fs.existsSync(rural_folder)) fs.mkdirSync(rural_folder, { recursive: true });
+    
+    //Guard clauses
+    if (year < -3000) {
+      if (fs.existsSync(substrata_file_path)) {
+        fs.copyFileSync(substrata_file_path, rural_file_path);
+        fs.copyFileSync(substrata_file_path, pop_file_path);
+        console.log(`- Copied Stadestér Rural & Pop rasters from substrata for ${year}`);
+      }
+      return { pop_file_path: pop_file_path, rural_file_path: rural_file_path };
+    }
+    
+    //Load substrata raster
+    if (options.substrata_raster) {
+      substrata_raster = options.substrata_raster;
+    } else if (fs.existsSync(substrata_file_path)) {
+      substrata_raster = GeoPNG.loadNumberRasterImage(substrata_file_path, { format: "float32" });
+    }
+    
+    //Ensure urban raster is loaded (generate if missing)
+    if (options.urban_raster) {
+      urban_raster = options.urban_raster;
+    } else if (fs.existsSync(urban_file_path)) {
+      urban_raster = GeoPNG.loadNumberRasterImage(urban_file_path, { format: "float32" });
+    } else {
+      await population_Stadester_rasters.generateStadesterUrbanRaster(year, options);
+      if (fs.existsSync(urban_file_path))
+        urban_raster = GeoPNG.loadNumberRasterImage(urban_file_path, { format: "float32" });
+    }
+    
+    //Pass 1: Accumulate Substrata target, Urban ground truth, and Raw Rural per country
+    for (let i = 0; i < total_pixels; i++) {
+      let s = (substrata_raster && substrata_raster.data[i]) ? substrata_raster.data[i] : 0;
+      let u = (urban_raster && urban_raster.data[i]) ? urban_raster.data[i] : 0;
+      let rr = Math.max(0, s - u);
+      raw_rural_data[i] = rr;
+      
+      global_sub += s;
+      global_urb += u;
+      global_raw_rur += rr;
+      
+      if (pixel_to_iso2) {
+        let c = pixel_to_iso2[i];
+        if (c) {
+          country_sub[c] = (country_sub[c] || 0) + s;
+          country_urb[c] = (country_urb[c] || 0) + u;
+          country_raw_rur[c] = (country_raw_rur[c] || 0) + rr;
+        }
+      }
+    }
+    
+    //Compute per-country rural scalars: TargetRural = max(0, TargetTotal - Urban)
+    if (pixel_to_iso2) {
+      let all_countries = Object.keys(country_sub);
+      for (let i = 0; i < all_countries.length; i++) {
+        let c = all_countries[i];
+        let s = country_sub[c];
+        let u = country_urb[c] || 0;
+        let target_r = Math.max(0, s - u);
+        let raw_r = country_raw_rur[c] || 0;
+        country_scalar[c] = (raw_r > 0 && target_r > 0) ? (target_r/raw_r) : 0;
+      }
+    }
+    
+    let fallback_target_r = Math.max(0, global_sub - global_urb);
+    let fallback_scalar = (global_raw_rur > 0 && fallback_target_r > 0) ? (fallback_target_r/global_raw_rur) : 1;
+    
+    //Pass 2: Apply national rural scalar and build strictly consistent Total = Urban + Rural
+    for (let i = 0; i < total_pixels; i++) {
+      let c = pixel_to_iso2 ? pixel_to_iso2[i] : null;
+      let sc = (c && country_scalar[c] !== undefined) ? country_scalar[c] : fallback_scalar;
+      let u = (urban_raster && urban_raster.data[i]) ? urban_raster.data[i] : 0;
+      let r = raw_rural_data[i]*sc;
+      
+      rural_data[i] = (r >= 0.01) ? r : 0;
+      let tot = u + rural_data[i];
+      total_data[i] = (tot >= 0.01) ? tot : 0;
+    }
+    
+    //Save both Rural and Total Population rasters
+    GeoPNG.saveNumberRasterImage({
+      file_path: rural_file_path,
+      format: "float32",
+      height: 2160,
+      width: 4320,
+      function: function (local_index) { return rural_data[local_index]; }
+    });
+    
+    GeoPNG.saveNumberRasterImage({
+      file_path: pop_file_path,
+      format: "float32",
+      height: 2160,
+      width: 4320,
+      function: function (local_index) { return total_data[local_index]; }
+    });
+    
+    console.log(`- Saved reconciled Stadestér Rural & Pop rasters for ${year}: Total=${pop_file_path}`);
+    
+    //Return statement
+    return { pop_file_path: pop_file_path, rural_file_path: rural_file_path };
+  };
+  
+  /**
+   * Generates Stadestér Rural raster for a single year by reconciling with national targets in float32.
    * @alias population_Stadester_rasters.generateStadesterRuralRaster
    * 
    * @param {number} arg0_year
@@ -369,60 +557,14 @@
     let options = (arg1_options) ? arg1_options : {};
     
     //Declare local instance variables
-    let output_file_path = path.join(options.input_rurc_folder || `${h2}/population_Stadester/stadester_rural_rasters/`, `stadester_rural_${year}.png`);
-    let rural_folder;
-    let substrata_file_path = population_Stadester_rasters.getSubstrataRasterPath(year, options);
-    let substrata_raster = null;
-    let urban_file_path = path.join(options.input_urbc_folder || `${h2}/population_Stadester/stadester_urban_rasters/`, `stadester_urban_${year}.png`);
-    let urban_raster = null;
-    
-    //Guard clauses
-    if (year < -3000) {
-      rural_folder = path.dirname(output_file_path);
-      if (!fs.existsSync(rural_folder)) fs.mkdirSync(rural_folder, { recursive: true });
-      if (fs.existsSync(substrata_file_path)) {
-        fs.copyFileSync(substrata_file_path, output_file_path);
-        console.log(`- Copied Stadestér Rural raster from substrata for ${year}: ${output_file_path}`);
-      } else {
-        console.error(`- Substrata raster not found for ${year}: ${substrata_file_path}`);
-      }
-      
-      //Return statement
-      return output_file_path;
-    }
-    
-    if (options.substrata_raster) {
-      substrata_raster = options.substrata_raster;
-    } else if (fs.existsSync(substrata_file_path)) {
-      substrata_raster = GeoPNG.loadNumberRasterImage(substrata_file_path, { format: "float32" });
-    }
-    if (options.urban_raster) {
-      urban_raster = options.urban_raster;
-    } else if (fs.existsSync(urban_file_path)) {
-      urban_raster = GeoPNG.loadNumberRasterImage(urban_file_path, { format: "float32" });
-    }
-    
-    GeoPNG.saveNumberRasterImage({
-      file_path: output_file_path,
-      format: "float32",
-      height: 2160,
-      width: 4320,
-      function: function (local_index) {
-        let sub_val = (substrata_raster && substrata_raster.data[local_index]) ? substrata_raster.data[local_index] : 0;
-        let urb_val = (urban_raster && urban_raster.data[local_index]) ? urban_raster.data[local_index] : 0;
-        let r_val = Math.max(0, sub_val - urb_val);
-        return (r_val >= 0.01) ? r_val : 0;
-      }
-    });
-    
-    console.log(`- Saved Stadestér Rural raster for ${year}: ${output_file_path}`);
+    let result = await population_Stadester_rasters.reconcileStadesterDemographics(year, options);
     
     //Return statement
-    return output_file_path;
+    return result.rural_file_path;
   };
   
   /**
-   * Generates Stadestér Population raster and reconciles rural population to global targets in float32.
+   * Generates Stadestér Population raster and reconciles rural population to targets in float32.
    * @alias population_Stadester_rasters.generateStadesterPopulationRaster
    * 
    * @param {number} arg0_year
@@ -436,138 +578,10 @@
     let options = (arg1_options) ? arg1_options : {};
     
     //Declare local instance variables
-    let output_file_path = path.join(options.input_popc_folder || `${h2}/population_Stadester/stadester_population_rasters/`, `stadester_population_${year}.png`);
-    let pop_folder;
-    let rural_file_path = path.join(options.input_rurc_folder || `${h2}/population_Stadester/stadester_rural_rasters/`, `stadester_rural_${year}.png`);
-    let rural_raster = null;
-    let substrata_file_path;
-    let target_pop = null;
-    let urban_file_path = path.join(options.input_urbc_folder || `${h2}/population_Stadester/stadester_urban_rasters/`, `stadester_urban_${year}.png`);
-    let urban_raster = null;
-    let world_pop_obj = options.world_pop_obj;
-    
-    //Guard clauses
-    if (year < -3000) {
-      pop_folder = path.dirname(output_file_path);
-      substrata_file_path = population_Stadester_rasters.getSubstrataRasterPath(year, options);
-      if (!fs.existsSync(pop_folder)) fs.mkdirSync(pop_folder, { recursive: true });
-      if (fs.existsSync(substrata_file_path)) {
-        fs.copyFileSync(substrata_file_path, output_file_path);
-        console.log(`- Copied Stadestér Total Population raster from substrata for ${year}: ${output_file_path}`);
-      } else {
-        console.error(`- Substrata raster not found for ${year}: ${substrata_file_path}`);
-      }
-      
-      //Return statement
-      return output_file_path;
-    }
-    
-    if (!world_pop_obj && typeof population_Global !== "undefined" && population_Global.A_getWorldPopulationObject)
-      world_pop_obj = population_Global.A_getWorldPopulationObject();
-    
-    if (world_pop_obj && world_pop_obj[year])
-      target_pop = world_pop_obj[year];
-    
-    if (options.urban_raster) {
-      urban_raster = options.urban_raster;
-    } else if (fs.existsSync(urban_file_path)) {
-      urban_raster = GeoPNG.loadNumberRasterImage(urban_file_path, { format: "float32" });
-    }
-    if (options.rural_raster) {
-      rural_raster = options.rural_raster;
-    } else if (fs.existsSync(rural_file_path)) {
-      rural_raster = GeoPNG.loadNumberRasterImage(rural_file_path, { format: "float32" });
-    }
-    
-    if (year < 1975) {
-      //Save initial combined population
-      GeoPNG.saveNumberRasterImage({
-        file_path: output_file_path,
-        format: "float32",
-        height: 2160,
-        width: 4320,
-        function: function (local_index) {
-          let r = (rural_raster && rural_raster.data[local_index]) ? rural_raster.data[local_index] : 0;
-          let u = (urban_raster && urban_raster.data[local_index]) ? urban_raster.data[local_index] : 0;
-          let tot = r + u;
-          return (tot >= 0.01) ? tot : 0;
-        }
-      });
-      
-      //Scale to world population estimate
-      if (target_pop) {
-        let cur_sum = GeoPNG.getImageSum(output_file_path, { format: "float32" });
-        if (cur_sum > 0) {
-          let scalar = target_pop/cur_sum;
-          let pop_raster = GeoPNG.loadNumberRasterImage(output_file_path, { format: "float32" });
-          
-          GeoPNG.saveNumberRasterImage({
-            file_path: output_file_path,
-            format: "float32",
-            height: 2160,
-            width: 4320,
-            function: function (local_index) {
-              let p = (pop_raster.data[local_index] || 0)*scalar;
-              return (p >= 0.01) ? p : 0;
-            }
-          });
-          
-          //Regenerate rural as Total - Urban
-          let final_pop_raster = GeoPNG.loadNumberRasterImage(output_file_path, { format: "float32" });
-          GeoPNG.saveNumberRasterImage({
-            file_path: rural_file_path,
-            format: "float32",
-            height: 2160,
-            width: 4320,
-            function: function (local_index) {
-              let p = (final_pop_raster && final_pop_raster.data[local_index]) ? final_pop_raster.data[local_index] : 0;
-              let u = (urban_raster && urban_raster.data[local_index]) ? urban_raster.data[local_index] : 0;
-              let r = Math.max(0, p - u);
-              return (r >= 0.01) ? r : 0;
-            }
-          });
-        }
-      }
-    } else {
-      //From 1975 onwards: Urban is rigid baseline, scale Rural to match target_pop - global_urban_pop
-      let global_urban_pop = urban_raster ? GeoPNG.getImageSum(urban_file_path, { format: "float32" }) : 0;
-      let target_rural = target_pop ? Math.max(0, target_pop - global_urban_pop) : null;
-      let raw_rural_sum = rural_raster ? GeoPNG.getImageSum(rural_file_path, { format: "float32" }) : 0;
-      let rural_scalar = (target_rural !== null && raw_rural_sum > 0) ? (target_rural/raw_rural_sum) : 1;
-      
-      //Write scaled Rural raster
-      GeoPNG.saveNumberRasterImage({
-        file_path: rural_file_path,
-        format: "float32",
-        height: 2160,
-        width: 4320,
-        function: function (local_index) {
-          let r = (rural_raster && rural_raster.data[local_index]) ? rural_raster.data[local_index] : 0;
-          let scaled_r = r*rural_scalar;
-          return (scaled_r >= 0.01) ? scaled_r : 0;
-        }
-      });
-      
-      //Write Total Population: Urban + Scaled Rural
-      let scaled_rural_raster = GeoPNG.loadNumberRasterImage(rural_file_path, { format: "float32" });
-      GeoPNG.saveNumberRasterImage({
-        file_path: output_file_path,
-        format: "float32",
-        height: 2160,
-        width: 4320,
-        function: function (local_index) {
-          let u = (urban_raster && urban_raster.data[local_index]) ? urban_raster.data[local_index] : 0;
-          let r = (scaled_rural_raster && scaled_rural_raster.data[local_index]) ? scaled_rural_raster.data[local_index] : 0;
-          let tot = u + r;
-          return (tot >= 0.01) ? tot : 0;
-        }
-      });
-    }
-    
-    console.log(`- Saved Stadestér Total Population raster for ${year}: ${output_file_path}`);
+    let result = await population_Stadester_rasters.reconcileStadesterDemographics(year, options);
     
     //Return statement
-    return output_file_path;
+    return result.pop_file_path;
   };
   
   /**

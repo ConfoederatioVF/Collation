@@ -258,20 +258,27 @@ global.landuse_HYDE = class {
 			return; //Internal guard clause if file paths do not exist
 		}
 		
+		let country_stats = {};
 		let mcevedy_colourmap_obj = {};
 		let mcevedy_obj = (options.mcevedy_obj) ? options.mcevedy_obj : await this.C_getMcEvedyObject();
 		let mcevedy_subdivisions_file_path = this.input_raster_mcevedy;
 		let mcevedy_subdivisions_image = pngjs.PNG.sync.read(fs.readFileSync(mcevedy_subdivisions_file_path));
 		
-		//1. Process mcevedy_obj
+		//1. Initialise country_stats for the current year
 		Object.iterate(mcevedy_obj, (local_key, local_value) => {
-			if (local_value?.colour)
-				mcevedy_colourmap_obj[local_value.colour.join(",")] = local_key;
-			if (local_value.hyde_population === undefined) local_value.hyde_population = 0;
-			if (local_value.hyde_pixels === undefined) local_value.hyde_pixels = 0;
+			if (local_value?.colour) {
+				let color_key = local_value.colour.join(",");
+				mcevedy_colourmap_obj[color_key] = local_key;
+				country_stats[local_key] = {
+					hyde_pixels: 0,
+					hyde_population: 0,
+					key: local_key,
+					scalar: 1
+				};
+			}
 		});
 		
-		//2. Process popc to sum up .hyde_population for year and calculate hyde_scalar_obj
+		//2. Process popc to sum up .hyde_population for this specific year
 		GeoPNG.operateNumberRasterImage({
 			file_path: hyde_population_file_path,
 			format: "float32",
@@ -282,24 +289,29 @@ global.landuse_HYDE = class {
 					mcevedy_subdivisions_image.data[local_index + 2]
 				].join(",");
 				
-				if (mcevedy_colourmap_obj[local_key]) {
-					let local_country = mcevedy_obj[mcevedy_colourmap_obj[local_key]];
+				let country_key = mcevedy_colourmap_obj[local_key];
+				if (country_key && country_stats[country_key]) {
+					let local_country = country_stats[country_key];
 					local_country.hyde_pixels++;
 					local_country.hyde_population += local_value;
 				}
 			}
 		});
-		Object.iterate(mcevedy_obj, (local_key, local_value) => {
-			if (local_value?.population)
-				if (local_value.population[year.toString()] !== undefined) {
-					let local_mcevedy_population = local_value.population[year.toString()];
-					
-					if (local_mcevedy_population !== 0) {
-						local_value.hyde_scalar = Math.returnSafeNumber(local_mcevedy_population/local_value.hyde_population, 1);
-					} else {
-						local_value.hyde_scalar = 0;
-					}
+		Object.iterate(country_stats, (local_key, local_value) => {
+			let country_raw = mcevedy_obj[local_key];
+			if (country_raw?.population && country_raw.population[year.toString()] !== undefined) {
+				let local_mcevedy_population = country_raw.population[year.toString()];
+				
+				if (local_mcevedy_population > 0 && local_value.hyde_population > 0) {
+					local_value.scalar = Math.returnSafeNumber(local_mcevedy_population/local_value.hyde_population, 1);
+				} else if (local_mcevedy_population === 0) {
+					local_value.scalar = 0;
+				} else {
+					local_value.scalar = 1;
 				}
+			} else {
+				local_value.scalar = 1;
+			}
 		});
 		
 		//3. Process hyde_population_file_path, hyde_urbc_file_path, hyde_rurc_file_path
@@ -309,7 +321,7 @@ global.landuse_HYDE = class {
 			[hyde_rurc_file_path, `${this.intermediate_rasters_mcevedy}rurc_${year}.png`]
 		];
 		
-		//Iterate over input_output_map and scale by .hyde_scalar
+		//Iterate over input_output_map and scale by scalar
 		for (let i = 0; i < input_output_map.length; i++) {
 			let local_input_png = GeoPNG.loadNumberRasterImage(input_output_map[i][0], {
 				format: "float32"
@@ -328,13 +340,14 @@ global.landuse_HYDE = class {
 					].join(",");
 					let local_value = local_input_png.data[local_index];
 					
-					//Implement hyde_scalar
-					if (mcevedy_colourmap_obj[local_key]) {
-						let local_country = mcevedy_obj[mcevedy_colourmap_obj[local_key]];
+					//Implement scalar
+					let country_key = mcevedy_colourmap_obj[local_key];
+					if (country_key && country_stats[country_key]) {
+						let local_country = country_stats[country_key];
 						
 						//Return statement
-						if (local_country.hyde_scalar !== undefined)
-							return Math.ceil(local_value*local_country.hyde_scalar);
+						if (local_country.scalar !== undefined)
+							return local_value*local_country.scalar;
 					}
 					return local_value;
 				}
@@ -446,7 +459,7 @@ global.landuse_HYDE = class {
 					format: "float32",
 					width: 4320,
 					height: 2160,
-					function: (local_index) => Math.ceil(local_input_png.data[local_index] * local_scalar)
+					function: (local_index) => local_input_png.data[local_index] * local_scalar
 				});
 				
 				console.log(`- ${year} - Input Population: ${local_input_sum}, Scalar: ${local_scalar}`);

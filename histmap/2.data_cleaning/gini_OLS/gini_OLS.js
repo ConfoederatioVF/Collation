@@ -9,7 +9,7 @@ global.gini_OLS = class {
 	
 	//Hyde; Stadestér formatters
 	static hf = () => `${landuse_HYDE.bf}/rasters/`;
-	static hf1 = (y) => landuse_HYDE._getHYDEYearName(y);
+	static hf1 = (y) => landuse_HYDE._getHYDEYearName(Math.min(2023, y));
 	static sf = () => population_Stadester;
 	static covariates_obj = {
 		//LU (Land Use)
@@ -55,7 +55,7 @@ global.gini_OLS = class {
 	static options = {
 		eoscala_domain: [-21500, 2006],
 		gapminder_domain: [1800, 1990],
-		subngini_domain: [1990, 2023]
+		subngini_domain: [1990, 2025]
 	};
 	
 	static _getNearestCovariateYear (arg0_year) {
@@ -162,8 +162,158 @@ global.gini_OLS = class {
 	}
 	
 	static getSubNGiniObject () {
+		//Declare local instance variables
+		let subngini_file = this.input_gini_subngini_json();
+		if (!fs.existsSync(subngini_file)) return {};
+		let subngini_obj = JSON.parse(fs.readFileSync(subngini_file, "utf8"));
+		
+		//Check if 2024 & 2025 are already present in subngini_obj
+		let sample_keys = Object.keys(subngini_obj);
+		if (sample_keys.length > 0 && subngini_obj[sample_keys[0]]["2024"] !== undefined) {
+			return subngini_obj;
+		}
+		
+		//Otherwise, extrapolate relativistically for 2024 and 2025 via population-weighted OLS rate of change
+		return this.extrapolateSubNGiniSeries(subngini_obj);
+	}
+	
+	/**
+	 * Extrapolates the SubNGini series for 2024-2025 based on population-weighted
+	 * OLS rate of change per ISO3 geocode in logit-space (Option A).
+	 * 
+	 * @param {Object} [arg0_subngini_obj]
+	 * @returns {Object}
+	 */
+	static extrapolateSubNGiniSeries (arg0_subngini_obj) {
+		//Convert from parameters
+		let subngini_obj = arg0_subngini_obj;
+		
+		//Declare local instance variables
+		let areal_raster_path = gini_SubNGini.output_areal_raster;
+		let geocode_obj = admin_modern.getISO3ColourcodesObject();
+		let geocode_raster_path = admin_modern.input_geocodes_raster;
+		let ols_2023_path = `${h2}/gini_Eoscala/1.OLS_rasters/gini_OLS_2023.png`;
+		let ols_2024_path = `${h2}/gini_Eoscala/1.OLS_rasters/gini_OLS_2024.png`;
+		let ols_2025_path = `${h2}/gini_Eoscala/1.OLS_rasters/gini_OLS_2025.png`;
+		let pop_path = `${population_Stadester.input_popc_folder}/stadester_population_2023.png`;
+		
+		if (!fs.existsSync(areal_raster_path) || !fs.existsSync(geocode_raster_path) ||
+				!fs.existsSync(ols_2023_path) || !fs.existsSync(ols_2024_path) || !fs.existsSync(ols_2025_path)) {
+			return subngini_obj;
+		}
+		
+		let areal_raster = GeoPNG.loadImage(areal_raster_path);
+		let geocode_raster = GeoPNG.loadImage(geocode_raster_path);
+		let ols_2023 = GeoPNG.loadNumberRasterImage(ols_2023_path, { format: "float32" });
+		let ols_2024 = GeoPNG.loadNumberRasterImage(ols_2024_path, { format: "float32" });
+		let ols_2025 = GeoPNG.loadNumberRasterImage(ols_2025_path, { format: "float32" });
+		let pop_raster = (fs.existsSync(pop_path)) ?
+			GeoPNG.loadNumberRasterImage(pop_path, { format: "float32" }) : null;
+		
+		//1. Map each subnational region to its dominant ISO3 country code
+		let region_counts = {};
+		for (let i = 0; i < areal_raster.data.length / 4; i++) {
+			let bi = i * 4;
+			let a = areal_raster.data[bi + 3];
+			if (a > 0) {
+				let r_key = `${areal_raster.data[bi]},${areal_raster.data[bi+1]},${areal_raster.data[bi+2]},${a}`;
+				let g_key = `${geocode_raster.data[bi]},${geocode_raster.data[bi+1]},${geocode_raster.data[bi+2]}`;
+				let codes = geocode_obj[g_key];
+				if (codes && codes[0]) {
+					if (!region_counts[r_key]) region_counts[r_key] = {};
+					region_counts[r_key][codes[0]] = (region_counts[r_key][codes[0]] || 0) + 1;
+				}
+			}
+		}
+		
+		let region_to_country = {};
+		Object.iterate(region_counts, (r_key, counts) => {
+			let best_c = null;
+			let best_count = -1;
+			Object.iterate(counts, (c, cnt) => {
+				if (cnt > best_count) {
+					best_count = cnt;
+					best_c = c;
+				}
+			});
+			region_to_country[r_key] = best_c;
+		});
+		
+		//2. Calculate population-weighted OLS Gini per ISO3 for 2023, 2024, 2025
+		let pop_sums = {};
+		let sums_23 = {};
+		let sums_24 = {};
+		let sums_25 = {};
+		
+		for (let i = 0; i < ols_2023.data.length; i++) {
+			let bi = i * 4;
+			let g_key = `${geocode_raster.data[bi]},${geocode_raster.data[bi+1]},${geocode_raster.data[bi+2]}`;
+			let codes = geocode_obj[g_key];
+			if (codes && codes[0]) {
+				let c = codes[0];
+				let p = (pop_raster) ? pop_raster.data[i] : 1.0;
+				if (p > 0) {
+					sums_23[c] = (sums_23[c] || 0) + ols_2023.data[i] * p;
+					sums_24[c] = (sums_24[c] || 0) + ols_2024.data[i] * p;
+					sums_25[c] = (sums_25[c] || 0) + ols_2025.data[i] * p;
+					pop_sums[c] = (pop_sums[c] || 0) + p;
+				}
+			}
+		}
+		
+		let safe_logit = (v) => {
+			let p = Math.max(0.01, Math.min(0.99, v));
+			return Math.log(p / (1 - p));
+		};
+		let safe_sigmoid = (x) => {
+			return 1 / (1 + Math.exp(-x));
+		};
+		
+		let deltas_2024 = {};
+		let deltas_2025 = {};
+		Object.iterate(pop_sums, (c, total_pop) => {
+			if (total_pop > 0) {
+				let m23 = sums_23[c] / total_pop;
+				let m24 = sums_24[c] / total_pop;
+				let m25 = sums_25[c] / total_pop;
+				deltas_2024[c] = safe_logit(m24) - safe_logit(m23);
+				deltas_2025[c] = safe_logit(m25) - safe_logit(m24);
+			}
+		});
+		
+		//3. Extrapolate each subnational region in logit space
+		Object.iterate(subngini_obj, (r_key, year_map) => {
+			let g23 = parseFloat(year_map["2023"]);
+			if (isNaN(g23) || g23 === 0) {
+				year_map["2024"] = 0;
+				year_map["2025"] = 0;
+			} else {
+				let c = region_to_country[r_key];
+				let d24 = (c && deltas_2024[c] !== undefined) ? deltas_2024[c] : 0;
+				let d25 = (c && deltas_2025[c] !== undefined) ? deltas_2025[c] : 0;
+				
+				let l23 = safe_logit(g23);
+				let l24 = l23 + d24;
+				let g24 = Math.min(0.95, Math.max(0.05, safe_sigmoid(l24)));
+				
+				let l25 = l24 + d25;
+				let g25 = Math.min(0.95, Math.max(0.05, safe_sigmoid(l25)));
+				
+				year_map["2024"] = g24;
+				year_map["2025"] = g25;
+			}
+		});
+		
+		//Persist to disk so subsequent reads are cached
+		try {
+			fs.writeFileSync(gini_SubNGini.output_areal_json, JSON.stringify(subngini_obj));
+			console.log(`[gini_OLS] Successfully extended SubNGini to 2024-2025 and saved to ${gini_SubNGini.output_areal_json}`);
+		} catch (e) {
+			console.warn(`[gini_OLS] Failed writing extended SubNGini JSON to disk:`, e);
+		}
+		
 		//Return statement
-		return JSON.parse(fs.readFileSync(this.input_gini_subngini_json(), "utf8"));
+		return subngini_obj;
 	}
 	
 	//Eoscala OLS Start

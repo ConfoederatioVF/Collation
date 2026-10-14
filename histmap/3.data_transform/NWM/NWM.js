@@ -34,6 +34,7 @@
         GDP_PPP: (global.h3) ? path.join(h3, "GDP_PPP", "GDP_PPP.js") : "",
         GDP_nominal_OLS: (global.h2) ? path.join(h2, "GDP_nominal_OLS", "GDP_nominal_OLS.js") : "",
         GDP_nominal: (global.h2) ? path.join(h2, "GDP_nominal", "GDP_nominal.js") : "",
+        Eoscala_GDP: (global.h3) ? path.join(h3, "Eoscala_GDP", "Eoscala_GDP.js") : "",
         GDP_PPP_pc: (global.h3) ? path.join(h3, "GDP_PPP_pc", "GDP_PPP_pc.js") : "",
         GDP_pc: (global.h3) ? path.join(h3, "GDP_pc", "GDP_pc.js") : "",
         population_Stadester_transform: (global.h3) ? path.join(h3, "population_Stadester.transform", "population_Stadester_transform.js") : "",
@@ -179,24 +180,18 @@
       }
       
       //Function body
-      console.log(`[NWM] === Step C: Processing Eoscala GDP (PPP & Nominal) ===`);
+      console.log(`[NWM] === Step C: Processing Eoscala GDP Primary Baselines (SEDAC) ===`);
       if (skip_primary) {
         console.log(`[NWM] Step C: Skipping primary SEDAC baselines (GDP_PPP_SEDAC, GDP_nominal_SEDAC).`);
       } else {
         if (global.GDP_PPP_SEDAC) await GDP_PPP_SEDAC.processRasters(gdp_ppp_sedac_options);
         if (global.GDP_nominal_SEDAC) await GDP_nominal_SEDAC.processRasters(gdp_nom_sedac_options);
       }
-      
-      // Deprecated: GDP PPP and GDP Nominal are now processed via GDP_pc & GDP_PPP_pc (inverted logic)
-      // if (global.GDP_PPP_OLS) await GDP_PPP_OLS.processRasters(gdp_ppp_ols_options);
-      // if (global.GDP_PPP) await GDP_PPP.processRasters(gdp_ppp_options);
-      // 
-      // if (global.GDP_nominal_OLS) await GDP_nominal_OLS.processRasters(gdp_nom_ols_options);
-      // if (global.GDP_nominal) await GDP_nominal.processRasters(gdp_nom_options);
     }
     
     /**
-     * Step D: Computes per capita GDP (PPP pc & Nominal pc) rasters by dividing downscaled GDP by total population.
+     * Step D: Downscales historical GDP and per capita GDP (PPP and Nominal) in parallel via unified Eoscala_GDP,
+     * simultaneously producing both national-scaled total GDP and per-capita GDP rasters.
      * @alias NWM.D_processGDPPerCapita
      * 
      * @param {Object} [arg0_options]

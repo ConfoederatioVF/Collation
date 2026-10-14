@@ -167,9 +167,12 @@ global.population_Substrata_outlier_removal = class {
 	}
 	
 	//[QUARANTINE]
-	static async B_scaleProcessedHYDEToStatistaRegions () {
+	static async B_scaleProcessedHYDEToStatistaRegions (arg0_options) {
+		//Convert from parameters
+		let options = (arg0_options) ? arg0_options : {};
+
 		//Declare local instance variables
-		let hyde_years = landuse_HYDE.hyde_years;
+		let hyde_years = options.hyde_years || landuse_HYDE.hyde_years;
 		let regions_mask = GeoPNG.loadImage(this.statista_regions_raster);
 		let regions_map = {};
 		let statista_obj = this.statista_obj();
@@ -558,8 +561,8 @@ global.population_Substrata_outlier_removal = class {
 		//1. Remove outliers for HYDE
 		if (!options.exclude.includes("A")) await this.A_removeOutliersForHYDE();
 		//2. Handle continental regions, i.e. Northern America; Statista regions
-		if (!options.exclude.includes("B1")) await population_Substrata_northern_america.processRasters();
-		if (!options.exclude.includes("B2")) await this.B_scaleProcessedHYDEToStatistaRegions();
+		if (!options.exclude.includes("B1")) await population_Substrata_northern_america.processRasters(options);
+		if (!options.exclude.includes("B2")) await this.B_scaleProcessedHYDEToStatistaRegions(options);
 		//3. Scale processed outliers to global population
 		if (!options.exclude.includes("C")) await this.C_scaleProcessedHYDEToGlobal(options);
 		//4. Conversion to int32 for backwards compatibility
