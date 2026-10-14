@@ -65,10 +65,14 @@ global.gini_Eoscala = class {
 			Object.iterate(model_obj.coefficients, (local_key, local_value) => {
 				let parsed_val = parseFloat(local_value);
 
-				if (parsed_val < 1) {
-					filtered_coefficients[local_key] = parsed_val;
+				if (!isNaN(parsed_val) && isFinite(parsed_val)) {
+					if (parsed_val < 1) {
+						filtered_coefficients[local_key] = parsed_val;
+					} else {
+						console.warn(`- Dropped covariate ${local_key} for year ${year} because coefficient ${parsed_val} exceeds 1.`);
+					}
 				} else {
-					console.warn(`- Dropped covariate ${local_key} for year ${year} because coefficient ${parsed_val} exceeds 1.`);
+					console.warn(`- Dropped covariate ${local_key} for year ${year} because coefficient is invalid (${local_value}).`);
 				}
 			});
 

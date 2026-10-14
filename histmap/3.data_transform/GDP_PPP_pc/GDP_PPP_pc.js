@@ -4,10 +4,11 @@ global.GDP_PPP_pc = class {
 		let covariates_obj = {
 			...GDP_PPP_SEDAC.covariates_obj,
 			//Demographics: Retain urban and rural counts to model urban agglomeration and productivity premium
-			"popd_": (y) => [`${this.sf().intermediate_popd_folder}/stadester_density_${y}.png`, "float32"],
 			"rurc_": (y) => [`${this.sf().input_rurc_folder}/stadester_rural_${y}.png`, "float32"],
 			"urbc_": (y) => [`${this.sf().input_urbc_folder}/stadester_urban_${y}.png`, "float32"]
 		};
+		delete covariates_obj["uopp_"];
+		delete covariates_obj["popd_"];
 		
 		//Return statement
 		return covariates_obj;
@@ -137,7 +138,6 @@ global.GDP_PPP_pc = class {
 		//Initialise options
 		if (!options.key) options.key = year.toString();
 		if (!options.lambda) options.lambda = 1e6;
-		if (!options.weighting_function) options.weighting_function = (value) => Math.abs(value);
 		
 		//Declare local instance variables
 		let covariates_obj = await this.B_loadCovariates(year);
@@ -169,9 +169,7 @@ global.GDP_PPP_pc = class {
 				options: {
 					...options,
 					key: year.toString(),
-					lambda: Math.returnSafeNumber(options.lambda, 1e6),
-					weight_file_path: `${population_Stadester.input_popc_folder}stadester_population_${year}.png`,
-					weighting_function: (value) => Math.abs(value)
+					lambda: Math.returnSafeNumber(options.lambda, 1e6)
 				},
 				output_file_path: `${this.intermediate_ols_folder}OLS_GDP_PPP_pc_${year}.json`,
 				target_file_path: `${this.input_gdp_pc_folder}GDP_PPP_pc_${year}.png`,
@@ -695,6 +693,9 @@ global.GDP_PPP_pc = class {
 				
 				let final_data = raw_scaled_data;
 				if (year > 0 && year < 1800) {
+					let local_urbc_path = `${population_Stadester.input_urbc_folder}stadester_urban_${year}.png`;
+					let local_urbc_raster = (fs.existsSync(local_urbc_path)) ?
+						GeoPNG.loadNumberRasterImage(local_urbc_path, { format: "float32" }) : null;
 					let pc_data = new Float32Array(4320 * 2160);
 					for (let j = 0; j < 4320 * 2160; j++) {
 						if (local_popc_raster.data[j] >= 1.0) pc_data[j] = raw_scaled_data[j] / local_popc_raster.data[j];
@@ -703,7 +704,10 @@ global.GDP_PPP_pc = class {
 						mask_data: geocode_raster.data, pop_data: local_popc_raster.data, target_data: pc_data, height: 2160, width: 4320, radius: 64
 					});
 					final_data = new Float32Array(4320 * 2160);
-					for (let j = 0; j < 4320 * 2160; j++) final_data[j] = blurred_pc[j] * local_popc_raster.data[j];
+					for (let j = 0; j < 4320 * 2160; j++) {
+						let is_urban = (local_urbc_raster && local_urbc_raster.data[j] > 0);
+						final_data[j] = (is_urban ? pc_data[j] : blurred_pc[j]) * local_popc_raster.data[j];
+					}
 				}
 				
 				GeoPNG.saveNumberRasterImage({

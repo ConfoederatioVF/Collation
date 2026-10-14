@@ -144,9 +144,14 @@
 		let hybrid_coefficients = {};
 		
 		for (let key in all_coefficients) {
-			hybrid_coefficients[key] = Math.weightedGeometricMean(all_coefficients[key]);
+			let local_val = Math.weightedGeometricMean(all_coefficients[key]);
+			
 			if (options.weighting_function)
-				hybrid_coefficients[key] = options.weighting_function(hybrid_coefficients[key]);
+				local_val = options.weighting_function(local_val);
+			if (local_val === null || isNaN(local_val) || !isFinite(local_val))
+				local_val = 0;
+			
+			hybrid_coefficients[key] = local_val;
 		}
 		
 		let output_data = {
