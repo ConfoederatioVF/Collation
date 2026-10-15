@@ -292,52 +292,56 @@
   };
   
   /**
-   * Caches and returns a flat pixel index to ISO2 country code mapping.
-   * @alias population_Stadester_rasters.getPixelToISO2Mapping
+  /**
+   * Caches and returns a flat pixel index to ISO3 country code mapping.
+   * @alias population_Stadester_rasters.getPixelToGeocodeMapping
    * 
    * @returns {Array<string|null>}
    */
-  population_Stadester_rasters.getPixelToISO2Mapping = function () {
+  population_Stadester_rasters.getPixelToGeocodeMapping = function () {
     //Declare local instance variables
     let colourcodes;
-    let iso2_img;
-    let iso2_path;
+    let geocode_img;
+    let geocode_path;
     let pixel_map;
-    let rgb_to_iso2;
+    let rgb_to_iso3;
     
-    if (global._cached_stadester_pixel_to_iso2)
-      return global._cached_stadester_pixel_to_iso2;
+    if (global._cached_stadester_pixel_to_geocode)
+      return global._cached_stadester_pixel_to_geocode;
     
-    iso2_path = (typeof admin_modern !== "undefined" && admin_modern.input_iso2_geocodes_raster) ?
-      admin_modern.input_iso2_geocodes_raster : `${h1}/admin_modern/iso2.png`;
+    geocode_path = (typeof admin_modern !== "undefined" && admin_modern.input_geocodes_raster) ?
+      admin_modern.input_geocodes_raster : `${h1}/admin_modern/geocodes.png`;
     
-    if (!fs.existsSync(iso2_path)) return null;
+    if (!fs.existsSync(geocode_path)) return null;
     
-    colourcodes = (typeof admin_modern !== "undefined" && admin_modern.getISO2ColourcodesObject) ?
-      admin_modern.getISO2ColourcodesObject() : {};
-    iso2_img = GeoPNG.loadImage(iso2_path);
+    colourcodes = (typeof admin_modern !== "undefined" && admin_modern.getISO3ColourcodesObject) ?
+      admin_modern.getISO3ColourcodesObject() : {};
+    geocode_img = GeoPNG.loadImage(geocode_path);
     pixel_map = new Array(4320*2160);
-    rgb_to_iso2 = {};
+    rgb_to_iso3 = {};
     
     for (let colour in colourcodes) {
       let codes = colourcodes[colour];
       if (codes && codes.length > 0) {
         let rgb = colour.split(",").slice(0, 3).join(",");
-        rgb_to_iso2[rgb] = codes[0];
+        rgb_to_iso3[rgb] = codes[0];
       }
     }
     
     for (let i = 0; i < 4320*2160; i++) {
       let b = i*4;
-      let rgb = `${iso2_img.data[b]},${iso2_img.data[b + 1]},${iso2_img.data[b + 2]}`;
-      pixel_map[i] = rgb_to_iso2[rgb] || null;
+      let rgb = `${geocode_img.data[b]},${geocode_img.data[b + 1]},${geocode_img.data[b + 2]}`;
+      pixel_map[i] = rgb_to_iso3[rgb] || null;
     }
     
-    global._cached_stadester_pixel_to_iso2 = pixel_map;
+    global._cached_stadester_pixel_to_geocode = pixel_map;
     
     //Return statement
     return pixel_map;
   };
+  
+  population_Stadester_rasters.getPixelToISO2Mapping = population_Stadester_rasters.getPixelToGeocodeMapping;
+
 
   /**
    * Generates Stadestér Urban raster for a single year preserving JSON ground truth in float32.
@@ -418,13 +422,17 @@
     
     //Declare local instance variables
     let country_raw_rur = {};
-    let country_scalar = {};
+    let country_scalar_r = {};
+    let country_scalar_u = {};
     let country_sub = {};
     let country_urb = {};
+    let fallback_scalar_r = 1;
+    let fallback_scalar_u = 1;
     let global_raw_rur = 0;
     let global_sub = 0;
     let global_urb = 0;
-    let pixel_to_iso2 = population_Stadester_rasters.getPixelToISO2Mapping();
+    let pixel_to_geocode = (options.pixel_to_geocode) ?
+      options.pixel_to_geocode : population_Stadester_rasters.getPixelToGeocodeMapping();
     let pop_file_path = path.join(options.input_popc_folder || `${h2}/population_Stadester/stadester_population_rasters/`, `stadester_population_${year}.png`);
     let pop_folder = path.dirname(pop_file_path);
     let raw_rural_data = new Float32Array(4320*2160);
@@ -435,12 +443,15 @@
     let substrata_raster = null;
     let total_data = new Float32Array(4320*2160);
     let total_pixels = 4320*2160;
+    let urban_data = new Float32Array(4320*2160);
     let urban_file_path = path.join(options.input_urbc_folder || `${h2}/population_Stadester/stadester_urban_rasters/`, `stadester_urban_${year}.png`);
+    let urban_folder = path.dirname(urban_file_path);
     let urban_raster = null;
     
     //Ensure destination directories exist
     if (!fs.existsSync(pop_folder)) fs.mkdirSync(pop_folder, { recursive: true });
     if (!fs.existsSync(rural_folder)) fs.mkdirSync(rural_folder, { recursive: true });
+    if (!fs.existsSync(urban_folder)) fs.mkdirSync(urban_folder, { recursive: true });
     
     //Guard clauses
     if (year < -3000) {
@@ -449,7 +460,7 @@
         fs.copyFileSync(substrata_file_path, pop_file_path);
         console.log(`- Copied Stadestér Rural & Pop rasters from substrata for ${year}`);
       }
-      return { pop_file_path: pop_file_path, rural_file_path: rural_file_path };
+      return { pop_file_path: pop_file_path, rural_file_path: rural_file_path, urban_file_path: urban_file_path };
     }
     
     //Load substrata raster
@@ -481,8 +492,8 @@
       global_urb += u;
       global_raw_rur += rr;
       
-      if (pixel_to_iso2) {
-        let c = pixel_to_iso2[i];
+      if (pixel_to_geocode) {
+        let c = pixel_to_geocode[i];
         if (c) {
           country_sub[c] = (country_sub[c] || 0) + s;
           country_urb[c] = (country_urb[c] || 0) + u;
@@ -491,35 +502,56 @@
       }
     }
     
-    //Compute per-country rural scalars: TargetRural = max(0, TargetTotal - Urban)
-    if (pixel_to_iso2) {
+    //Compute per-country scalars:
+    //If U < S: Preserve exact urban ground truth from stadester.json and dasymetrically calibrate rural: TargetRural = S - U
+    //If U >= S: Urban alone meets or exceeds national baseline S; scale (urban + rural) proportionally by S / (U + RR) to eliminate zeroes
+    if (pixel_to_geocode) {
       let all_countries = Object.keys(country_sub);
       for (let i = 0; i < all_countries.length; i++) {
         let c = all_countries[i];
+        let raw_r = country_raw_rur[c] || 0;
         let s = country_sub[c];
         let u = country_urb[c] || 0;
-        let target_r = Math.max(0, s - u);
-        let raw_r = country_raw_rur[c] || 0;
-        country_scalar[c] = (raw_r > 0 && target_r > 0) ? (target_r/raw_r) : 0;
+        
+        if (u < s) {
+          let target_r = s - u;
+          country_scalar_r[c] = (raw_r > 0) ? (target_r/raw_r) : 0;
+          country_scalar_u[c] = 1;
+        } else {
+          let combined = u + raw_r;
+          let sc = (combined > 0) ? (s/combined) : 1;
+          country_scalar_r[c] = sc;
+          country_scalar_u[c] = sc;
+        }
       }
     }
     
-    let fallback_target_r = Math.max(0, global_sub - global_urb);
-    let fallback_scalar = (global_raw_rur > 0 && fallback_target_r > 0) ? (fallback_target_r/global_raw_rur) : 1;
+    if (global_urb < global_sub) {
+      let fallback_target_r = global_sub - global_urb;
+      fallback_scalar_r = (global_raw_rur > 0) ? (fallback_target_r/global_raw_rur) : 1;
+      fallback_scalar_u = 1;
+    } else {
+      let global_combined = global_urb + global_raw_rur;
+      let sc = (global_combined > 0) ? (global_sub/global_combined) : 1;
+      fallback_scalar_r = sc;
+      fallback_scalar_u = sc;
+    }
     
-    //Pass 2: Apply national rural scalar and build strictly consistent Total = Urban + Rural
+    //Pass 2: Apply scalars and construct strictly consistent Total = Urban + Rural
     for (let i = 0; i < total_pixels; i++) {
-      let c = pixel_to_iso2 ? pixel_to_iso2[i] : null;
-      let sc = (c && country_scalar[c] !== undefined) ? country_scalar[c] : fallback_scalar;
-      let u = (urban_raster && urban_raster.data[i]) ? urban_raster.data[i] : 0;
-      let r = raw_rural_data[i]*sc;
+      let c = pixel_to_geocode ? pixel_to_geocode[i] : null;
+      let sc_r = (c && country_scalar_r[c] !== undefined) ? country_scalar_r[c] : fallback_scalar_r;
+      let sc_u = (c && country_scalar_u[c] !== undefined) ? country_scalar_u[c] : fallback_scalar_u;
+      let r = raw_rural_data[i]*sc_r;
+      let u = (urban_raster && urban_raster.data[i]) ? urban_raster.data[i]*sc_u : 0;
       
       rural_data[i] = (r >= 0.01) ? r : 0;
-      let tot = u + rural_data[i];
+      urban_data[i] = (u >= 0.01) ? u : 0;
+      let tot = urban_data[i] + rural_data[i];
       total_data[i] = (tot >= 0.01) ? tot : 0;
     }
     
-    //Save both Rural and Total Population rasters
+    //Save Rural, Total Population, and synchronised Urban rasters
     GeoPNG.saveNumberRasterImage({
       file_path: rural_file_path,
       format: "float32",
@@ -536,10 +568,18 @@
       function: function (local_index) { return total_data[local_index]; }
     });
     
-    console.log(`- Saved reconciled Stadestér Rural & Pop rasters for ${year}: Total=${pop_file_path}`);
+    GeoPNG.saveNumberRasterImage({
+      file_path: urban_file_path,
+      format: "float32",
+      height: 2160,
+      width: 4320,
+      function: function (local_index) { return urban_data[local_index]; }
+    });
+    
+    console.log(`- Saved reconciled Stadestér Urban, Rural & Pop rasters for ${year}: Total=${pop_file_path}`);
     
     //Return statement
-    return { pop_file_path: pop_file_path, rural_file_path: rural_file_path };
+    return { pop_file_path: pop_file_path, rural_file_path: rural_file_path, urban_file_path: urban_file_path };
   };
   
   /**

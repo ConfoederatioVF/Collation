@@ -449,7 +449,18 @@
             let local_sedac_path = `${this.sedac_class().bf}${this.prefix}_${current_year}.png`;
             if (fs.existsSync(local_sedac_path) && pop_raster) {
               let sedac_raster = GeoPNG.loadNumberRasterImage(local_sedac_path, { format: "float32" });
-              fs.copyFileSync(local_sedac_path, local_output_path);
+              GeoPNG.saveNumberRasterImage({
+                file_path: local_output_path,
+                format: "float32",
+                height: 2160,
+                width: 4320,
+                function: (local_index) => {
+                  let p = pop_raster.data[local_index];
+                  if (p < 1.0) return 0;
+                  let tot = sedac_raster.data[local_index];
+                  return (isFinite(tot) && tot > 0) ? (tot / p) : 0;
+                }
+              });
               return;
             }
           }
@@ -485,7 +496,7 @@
           let pc_raster = GeoPNG.loadNumberRasterImage(pc_path, { format: "float32" });
           
           if (current_year < sedac_domain[0]) {
-            //Pre-1800: multiply modelled per capita by population to produce extensive total GDP for 6.interpolated
+            //Pre-1800: preserve modelled per capita directly in per-capita space
             GeoPNG.saveNumberRasterImage({
               file_path: local_output_path,
               format: "float32",
@@ -494,7 +505,7 @@
               function: (local_index) => {
                 let pc = pc_raster.data[local_index];
                 let p = (pop_raster) ? pop_raster.data[local_index] : 0;
-                return (p >= 1.0 && isFinite(pc) && pc > 0) ? pc * p : 0;
+                return (p >= 1.0 && isFinite(pc) && pc > 0) ? pc : 0;
               }
             });
           } else {
@@ -621,9 +632,11 @@
       //1. Fast sequential pre-pass for thresholds and country calibration scalars in per-capita space
       for (let i = 0; i < hyde_years.length; i++) {
         let current_year = hyde_years[i];
-        let local_input_file_path = `${this.intermediate_pc_estimates_folder}${this.pc_prefix}_${current_year}.png`;
+        let local_input_file_path = (current_year < 1990 && fs.existsSync(`${this.intermediate_pc_estimates_folder}${this.pc_prefix}_${current_year}.png`)) ?
+          `${this.intermediate_pc_estimates_folder}${this.pc_prefix}_${current_year}.png` :
+          `${this.intermediate_gdp_interpolated}${this.prefix}_${current_year}.png`;
         if (!fs.existsSync(local_input_file_path))
-          local_input_file_path = `${this.intermediate_gdp_interpolated}${this.prefix}_${current_year}.png`;
+          local_input_file_path = `${this.intermediate_pc_estimates_folder}${this.pc_prefix}_${current_year}.png`;
         if (!fs.existsSync(local_input_file_path)) continue;
         
         let local_input_raster = GeoPNG.loadNumberRasterImage(local_input_file_path, { format: "float32" });
@@ -637,7 +650,7 @@
         let current_max_pc = 0;
         let delong_hg_base = this.getDelongBaseline(-10000);
         let delong_world_base = this.getDelongBaseline(current_year);
-        let is_total_raster = local_input_file_path.includes(this.prefix + "_") && !local_input_file_path.includes(this.pc_prefix + "_");
+        let is_total_raster = local_input_file_path.includes(this.prefix + "_") && !local_input_file_path.includes(this.pc_prefix + "_") && !local_input_file_path.includes("interpolated");
         let local_delta_sums = {};
         let local_min_ols = {};
         let local_pop_sums = {};
@@ -654,8 +667,8 @@
             if (local_geocodes && local_geocodes.length > 0) {
               let primary_code = local_geocodes[0];
               let local_pc = is_total_raster ? (local_input_raster.data[x] / p) : local_input_raster.data[x];
+              Object.modifyValue(local_pop_sums, primary_code, p);
               if (local_pc > 0) {
-                Object.modifyValue(local_pop_sums, primary_code, p);
                 if (local_min_ols[primary_code] === undefined || local_pc < local_min_ols[primary_code])
                   local_min_ols[primary_code] = local_pc;
               }
@@ -673,10 +686,9 @@
             if (local_geocodes && local_geocodes.length > 0) {
               let primary_code = local_geocodes[0];
               let local_pc = is_total_raster ? (local_input_raster.data[x] / p) : local_input_raster.data[x];
-              if (local_pc > 0 && local_min_ols[primary_code] !== undefined) {
-                let delta = Math.max(0, local_pc - local_min_ols[primary_code]);
-                Object.modifyValue(local_delta_sums, primary_code, delta * p);
-              }
+              let min_base = (local_min_ols[primary_code] !== undefined) ? local_min_ols[primary_code] : 0;
+              let delta = Math.max(0, local_pc - min_base);
+              Object.modifyValue(local_delta_sums, primary_code, delta * p);
             }
           }
         }
@@ -687,7 +699,7 @@
           let local_target_total = gdp_national_obj[local_key]?.[current_year];
           let min_ols = (local_min_ols[local_key] !== undefined) ? local_min_ols[local_key] : 0;
           let target_pc = (local_target_total && pop_c > 0) ? (local_target_total / pop_c) : delong_world_base;
-          let country_floor = Math.min(target_pc * 0.5, delong_hg_base * 0.5);
+          let country_floor = Math.min(target_pc * 0.5, delong_world_base * 0.5);
           let surplus_pc = Math.max(0, target_pc - country_floor);
           
           country_stats[local_key] = {
@@ -705,7 +717,6 @@
           let p = local_popc_raster.data[x];
           if (p >= 1.0) {
             let local_pc = is_total_raster ? (local_input_raster.data[x] / p) : local_input_raster.data[x];
-            if (local_pc === 0) continue;
             let byte_index = x * 4;
             let local_colour_key = `${geocode_raster.data[byte_index]},${geocode_raster.data[byte_index+1]},${geocode_raster.data[byte_index+2]}`;
             let local_geocodes = geocode_obj[local_colour_key];
@@ -716,9 +727,6 @@
               if (stats) {
                 let delta = Math.max(0, local_pc - stats.min_ols);
                 let mult = (stats.delta_mean > 0) ? (delta / stats.delta_mean) : 1.0;
-                let local_urb = (local_urbc_raster) ? local_urbc_raster.data[x] : 0;
-                if (local_urb <= 0 || isNaN(local_urb))
-                  mult = Math.min(1.25, mult);
                 let cell_pc = stats.delong_base + stats.surplus_pc * mult;
                 if (cell_pc > local_threshold)
                   cell_pc = local_threshold + clamp_alpha * Math.log(1 + ((cell_pc - local_threshold) / clamp_alpha));
@@ -742,9 +750,11 @@
           if (!thresholds[year]) return null;
           let stats = thresholds[year].stats;
           let threshold = thresholds[year].threshold;
-          let local_input_file_path = `${this.intermediate_pc_estimates_folder}${this.pc_prefix}_${year}.png`;
+          let local_input_file_path = (year < 1990 && fs.existsSync(`${this.intermediate_pc_estimates_folder}${this.pc_prefix}_${year}.png`)) ?
+            `${this.intermediate_pc_estimates_folder}${this.pc_prefix}_${year}.png` :
+            `${this.intermediate_gdp_interpolated}${this.prefix}_${year}.png`;
           if (!fs.existsSync(local_input_file_path))
-            local_input_file_path = `${this.intermediate_gdp_interpolated}${this.prefix}_${year}.png`;
+            local_input_file_path = `${this.intermediate_pc_estimates_folder}${this.pc_prefix}_${year}.png`;
           let local_input_raster = GeoPNG.loadNumberRasterImage(local_input_file_path, { format: "float32" });
           let local_popc_file_path = `${population_Stadester.input_popc_folder}stadester_population_${year}.png`;
           let local_popc_raster = GeoPNG.loadNumberRasterImage(local_popc_file_path, { format: "float32" });
@@ -753,7 +763,7 @@
             GeoPNG.loadNumberRasterImage(local_urbc_file_path, { format: "float32" }) : null;
           let local_output_pc = `${this.output_gdp_pc_folder}${this.pc_prefix}_${year}.png`;
           let local_output_total = `${this.intermediate_gdp_scaled_to_national}${this.prefix}_${year}.png`;
-          let is_total_raster = local_input_file_path.includes(this.prefix + "_") && !local_input_file_path.includes(this.pc_prefix + "_");
+          let is_total_raster = local_input_file_path.includes(this.prefix + "_") && !local_input_file_path.includes(this.pc_prefix + "_") && !local_input_file_path.includes("interpolated");
           
           let clamp_alpha = threshold * 0.1;
           let delong_hg_base = this.getDelongBaseline(-10000);
@@ -765,7 +775,6 @@
             let local_pop = local_popc_raster.data[local_index];
             if (local_pop < 1.0) continue;
             let local_pc = is_total_raster ? (local_input_raster.data[local_index] / local_pop) : local_input_raster.data[local_index];
-            if (local_pc === 0) continue;
             let byte_index = local_index * 4;
             let local_colour_key = `${geocode_raster.data[byte_index]},${geocode_raster.data[byte_index+1]},${geocode_raster.data[byte_index+2]}`;
             let local_geocodes = geocode_obj[local_colour_key];
@@ -777,9 +786,6 @@
               if (s) {
                 let delta = Math.max(0, local_pc - s.min_ols);
                 let mult = (s.delta_mean > 0) ? (delta / s.delta_mean) : 1.0;
-                let local_urb = (local_urbc_raster) ? local_urbc_raster.data[local_index] : 0;
-                if (local_urb <= 0 || isNaN(local_urb))
-                  mult = Math.min(1.25, mult);
                 cell_pc = s.delong_base + s.surplus_pc * mult;
                 if (cell_pc > threshold)
                   cell_pc = threshold + clamp_alpha * Math.log(1 + ((cell_pc - threshold) / clamp_alpha));
