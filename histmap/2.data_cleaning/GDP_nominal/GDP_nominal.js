@@ -56,56 +56,24 @@ global.GDP_nominal = class {
 	}
 	
 	/**
-	 * Returns estimations of World GDP nominal physical subsistence baseline per capita.
+	 * Returns estimations of World GDP nominal baseline per capita from DeLong's ex-Nordhaus series.
 	 * 
 	 * @returns {Object}
 	 */
 	static getDelongSubsistenceBaselineObject () {
-		//Declare local instance variables
-		let delong_series = {};
-		let hyde_years = landuse_HYDE.sorted_hyde_years;
-		if (typeof GDP_PPP === "undefined" && typeof require !== "undefined") {
-			try {
-				let gdp_ppp_path = (global.h3) ?
-					path.join(global.h3, "GDP_PPP/GDP_PPP.js") :
-					path.join((typeof root_dir !== "undefined") ? root_dir : ".", "histmap/3.data_transform/GDP_PPP/GDP_PPP.js");
-				require(gdp_ppp_path);
-			} catch (e) {}
-		}
-		let ppp_subsistence_obj = (typeof GDP_PPP !== "undefined" && GDP_PPP.getDelongSubsistenceBaselineObject) ?
-			GDP_PPP.getDelongSubsistenceBaselineObject() : {};
-		let world_nominal_obj = this.getWorldGDPObject();
-		let world_ppp_obj = (typeof GDP_PPP !== "undefined" && GDP_PPP.getWorldGDP_PPPObject) ?
-			GDP_PPP.getWorldGDP_PPPObject() : {};
-		
-		for (let i = 0; i < hyde_years.length; i++) {
-			let y = hyde_years[i];
-			let deflator = (world_ppp_obj[y] && world_ppp_obj[y] > 0 && world_nominal_obj[y]) ?
-				(world_nominal_obj[y] / world_ppp_obj[y]) : 1;
-			let ppp_sub = ppp_subsistence_obj[y];
-			if (ppp_sub !== undefined)
-				delong_series[y] = ppp_sub * deflator;
-		}
-		
 		//Return statement
-		return delong_series;
+		return this.getDelongBaselineObject();
 	}
 	
 	/**
-	 * Returns the De Long physical subsistence floor per capita for a given year.
+	 * Returns the De Long nominal subsistence baseline per capita for a given year.
 	 * 
 	 * @param {number|string} [arg0_year=-10000]
 	 * @returns {number}
 	 */
 	static getDelongSubsistenceBaseline (arg0_year) {
-		//Convert from parameters
-		let year = (arg0_year !== undefined) ? parseInt(arg0_year) : -10000;
-		
-		//Declare local instance variables
-		let b_obj = this.getDelongSubsistenceBaselineObject();
-		
 		//Return statement
-		return (b_obj[year] !== undefined) ? b_obj[year] : b_obj[-10000];
+		return this.getDelongBaseline(arg0_year);
 	}
 	
 	/**
@@ -242,23 +210,16 @@ global.GDP_nominal = class {
 			if (valid_entry_years.length === 0) return;
 			
 			let t_first = valid_entry_years[0];
-			let pc_first = pc_series[t_first] || delong_hg_base;
-			let base_first = delong_baseline_obj[t_first] || delong_hg_base;
-			let sub_first = delong_subsistence_obj[t_first] || delong_sub_base;
-			let d_first = dev_index_cache[t_first]?.[code]?.dev_index || 1.0;
-			let rel_entry = (base_first > 0) ? (pc_first / base_first) : 1.0;
 			
-			//Pre-entry trajectory: surplus emergence modulated by intensive development index
+			//Pre-entry trajectory: 100% empirical baseline modulated by national development index
 			for (let i = 0; i < hyde_years.length; i++) {
 				let y = hyde_years[i];
 				if (y < t_first) {
 					let base_y = delong_baseline_obj[y] || delong_hg_base;
 					let sub_y = delong_subsistence_obj[y] || delong_sub_base;
-					let target_trajectory = base_y * rel_entry;
-					let d_y = dev_index_cache[y]?.[code]?.dev_index || 0.0;
-					let dev_ratio = (d_first > 0) ? Math.min(1.5, d_y / d_first) : 0;
-					let pc_val = delong_hg_base + (target_trajectory - delong_hg_base) * dev_ratio;
-					pc_series[y] = Math.max(delong_hg_base, pc_val);
+					let d_y = dev_index_cache[y]?.[code]?.dev_index || (delong_hg_base / base_y);
+					let target_pc = base_y * d_y;
+					pc_series[y] = Math.max(delong_hg_base, target_pc);
 				}
 			}
 			
@@ -273,8 +234,7 @@ global.GDP_nominal = class {
 			for (let i = 0; i < hyde_years.length; i++) {
 				let y = hyde_years[i];
 				let pop_y = national_populations[y]?.[code] || 0;
-				let sub_y = delong_subsistence_obj[y] || delong_sub_base;
-				let pc_y = Math.max(sub_y, interpolated_pc[y] || sub_y);
+				let pc_y = Math.max(delong_hg_base, interpolated_pc[y] || delong_hg_base);
 				
 				gdp_pc_obj[code][y] = pc_y;
 				gdp_obj[code][y] = pc_y * pop_y;

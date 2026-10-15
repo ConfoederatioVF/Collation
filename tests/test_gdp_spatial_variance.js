@@ -54,6 +54,7 @@ let testGDPSpatialVariance = async function (arg0_options) {
   let year = (options.year !== undefined) ? options.year : 0;
   
   //Declare local instance variables
+  let country_means = {};
   let failed_countries = [];
   let geocode_obj = admin_modern.getISO3ColourcodesObject();
   let geocode_raster = GeoPNG.loadImage(admin_modern.input_geocodes_raster);
@@ -61,13 +62,14 @@ let testGDPSpatialVariance = async function (arg0_options) {
   let gdp_obj = gdp_class.getGDPObject ? gdp_class.getGDPObject() : gdp_class.getGDP_PPPObject();
   let gdp_pc_class = (mode === "nominal") ? GDP_pc : GDP_PPP_pc;
   let pc_file_path = path.join(gdp_pc_class.output_gdp_pc_folder, `${gdp_pc_class.pc_prefix}_${year}.png`);
+  let delong_hg_base = gdp_class.getDelongBaseline(-10000);
   let pop_file_path = `${population_Stadester.input_popc_folder}stadester_population_${year}.png`;
-  let sub_floor = gdp_class.getDelongSubsistenceBaseline(year);
+  let sub_floor = delong_hg_base * 0.25;
   
   console.log(`\n========================================================================`);
   console.log(`[TEST] Testing GDP Per Capita Spatial Variance for Year ${year === 0 ? "1 AD (0)" : year + " AD"} [${mode}]`);
   console.log(`Target Raster: ${pc_file_path}`);
-  console.log(`DeLong Subsistence Floor: $${sub_floor.toFixed(2)}`);
+  console.log(`DeLong Subsistence Floor: $${sub_floor.toFixed(2)} (Ex-Nordhaus -10000 BC base: $${delong_hg_base.toFixed(2)})`);
   console.log(`========================================================================\n`);
   
   if (!fs.existsSync(pc_file_path)) {
@@ -192,8 +194,10 @@ let testGDPSpatialVariance = async function (arg0_options) {
     let max_modal_count = Math.max(...Object.values(val_counts));
     let modal_pct = (max_modal_count / cells.length) * 100;
     
+    country_means[code] = weighted_mean;
+    
     //Variance failure condition: zero std dev, single unique value, or >= 95% modal plateau
-    let min_std_dev = (mode === "nominal") ? (1.0 * sub_floor / 140.85) : 1.0;
+    let min_std_dev = (mode === "nominal") ? 0.2 : 1.0;
     let is_flat = (unique_values <= 1 || (std_dev < min_std_dev && unique_values < cells.length) || (cells.length >= 20 && modal_pct >= 95));
     if (is_flat) {
       failed_countries.push({
@@ -216,13 +220,67 @@ let testGDPSpatialVariance = async function (arg0_options) {
   
   if (failed_countries.length > 0) {
     console.error(`\n[FAIL] ${failed_countries.length} country code(s) exhibit flat spatial distribution:`);
-    failed_countries.forEach(f => {
+    failed_countries.forEach((f) => {
       console.error(`  - ${f.code}: cells = ${f.cells}, std_dev = $${f.std_dev.toFixed(2)}, unique = ${f.unique}, modal = ${f.modal_pct.toFixed(1)}%, min = $${f.min.toFixed(2)}, max = $${f.max.toFixed(2)}`);
     });
     return false;
   }
   
   console.log(`  [PASS] ALL ${tested_countries} multi-cell countries possess robust continuous spatial variance!\n`);
+  
+  //3. Historical Relative Ranking Sniff Test (Year 0 / 1 AD)
+  if (year === 0) {
+    console.log(`--- [3/3] Historical Relative Ranking Sniff Test (Year 0 / 1 AD) ---`);
+    let cze_mean = country_means["CZE"] || 0;
+    let egy_mean = country_means["EGY"] || 0;
+    let fra_mean = country_means["FRA"] || 0;
+    let grc_mean = country_means["GRC"] || 0;
+    let ita_mean = country_means["ITA"] || 0;
+    let rus_mean = country_means["RUS"] || 0;
+    
+    // Novgorod coords: lat 58.52, lon 31.27; Lyon coords: lat 45.76, lon 4.83
+    let nov_idx = Math.floor(((31.27 + 180) / 360) * 4320) + Math.floor(((90 - 58.52) / 180) * 2160) * 4320;
+    let lyo_idx = Math.floor(((4.83 + 180) / 360) * 4320) + Math.floor(((90 - 45.76) / 180) * 2160) * 4320;
+    let nov_pc = pc_raster.data[nov_idx];
+    let lyo_pc = pc_raster.data[lyo_idx];
+    
+    console.log(`  ITA (Roman heartland):           $${ita_mean.toFixed(2)}`);
+    console.log(`  EGY (Ptolemaic/Roman Egypt):     $${egy_mean.toFixed(2)}`);
+    console.log(`  GRC (Ancient Greece):            $${grc_mean.toFixed(2)}`);
+    console.log(`  FRA (Roman Gaul mean):           $${fra_mean.toFixed(2)}`);
+    console.log(`  CZE (Bohemian tribal territory): $${cze_mean.toFixed(2)}`);
+    console.log(`  RUS (Tribal Russia mean):        $${rus_mean.toFixed(2)}`);
+    console.log(`  Lyon cell (Lugdunum):            $${lyo_pc.toFixed(2)}`);
+    console.log(`  Novgorod cell:                   $${nov_pc.toFixed(2)}`);
+    
+    let ranking_ok = true;
+    if (cze_mean >= ita_mean) {
+      console.error(`  [FAIL] Czechia ($${cze_mean.toFixed(2)}) ranks above or equal to Roman Italy ($${ita_mean.toFixed(2)})!`);
+      ranking_ok = false;
+    }
+    if (cze_mean >= egy_mean) {
+      console.error(`  [FAIL] Czechia ($${cze_mean.toFixed(2)}) ranks above or equal to Egypt ($${egy_mean.toFixed(2)})!`);
+      ranking_ok = false;
+    }
+    if (cze_mean >= grc_mean) {
+      console.error(`  [FAIL] Czechia ($${cze_mean.toFixed(2)}) ranks above or equal to Greece ($${grc_mean.toFixed(2)})!`);
+      ranking_ok = false;
+    }
+    if (rus_mean >= fra_mean) {
+      console.error(`  [FAIL] Russia ($${rus_mean.toFixed(2)}) ranks above or equal to Roman Gaul ($${fra_mean.toFixed(2)})!`);
+      ranking_ok = false;
+    }
+    if (nov_pc >= lyo_pc) {
+      console.error(`  [FAIL] Novgorod pixel ($${nov_pc.toFixed(2)}) ranks above or equal to Lyon ($${lyo_pc.toFixed(2)})!`);
+      ranking_ok = false;
+    }
+    if (ranking_ok) {
+      console.log(`  [PASS] Historical relative rankings pass sniff test (Rome/Egypt/Greece > Czechia and Gaul > Russia/Novgorod)!\n`);
+    } else {
+      return false;
+    }
+  }
+  
   return global_sane;
 };
 

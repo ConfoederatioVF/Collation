@@ -629,10 +629,13 @@
         let local_input_raster = GeoPNG.loadNumberRasterImage(local_input_file_path, { format: "float32" });
         let local_popc_file_path = `${population_Stadester.input_popc_folder}stadester_population_${current_year}.png`;
         let local_popc_raster = GeoPNG.loadNumberRasterImage(local_popc_file_path, { format: "float32" });
+        let local_urbc_file_path = `${population_Stadester.input_urbc_folder}stadester_urban_${current_year}.png`;
+        let local_urbc_raster = (fs.existsSync(local_urbc_file_path)) ?
+          GeoPNG.loadNumberRasterImage(local_urbc_file_path, { format: "float32" }) : null;
         
         let country_stats = {};
         let current_max_pc = 0;
-        let delong_sub_base = this.getDelongSubsistenceBaseline(current_year);
+        let delong_hg_base = this.getDelongBaseline(-10000);
         let delong_world_base = this.getDelongBaseline(current_year);
         let is_total_raster = local_input_file_path.includes(this.prefix + "_") && !local_input_file_path.includes(this.pc_prefix + "_");
         let local_delta_sums = {};
@@ -684,11 +687,11 @@
           let local_target_total = gdp_national_obj[local_key]?.[current_year];
           let min_ols = (local_min_ols[local_key] !== undefined) ? local_min_ols[local_key] : 0;
           let target_pc = (local_target_total && pop_c > 0) ? (local_target_total / pop_c) : delong_world_base;
-          target_pc = Math.max(delong_sub_base, target_pc);
-          let surplus_pc = Math.max(0, target_pc - delong_sub_base);
+          let country_floor = Math.min(target_pc * 0.5, delong_hg_base * 0.5);
+          let surplus_pc = Math.max(0, target_pc - country_floor);
           
           country_stats[local_key] = {
-            delong_base: delong_sub_base,
+            delong_base: country_floor,
             delta_mean: delta_mean,
             min_ols: min_ols,
             pop: pop_c,
@@ -712,9 +715,11 @@
               let stats = country_stats[local_geocodes[0]];
               if (stats) {
                 let delta = Math.max(0, local_pc - stats.min_ols);
-                let cell_pc = (stats.delta_mean > 0) ?
-                  (stats.delong_base + stats.surplus_pc * (delta / stats.delta_mean)) :
-                  stats.target_pc;
+                let mult = (stats.delta_mean > 0) ? (delta / stats.delta_mean) : 1.0;
+                let local_urb = (local_urbc_raster) ? local_urbc_raster.data[x] : 0;
+                if (local_urb <= 0 || isNaN(local_urb))
+                  mult = Math.min(1.25, mult);
+                let cell_pc = stats.delong_base + stats.surplus_pc * mult;
                 if (cell_pc > local_threshold)
                   cell_pc = local_threshold + clamp_alpha * Math.log(1 + ((cell_pc - local_threshold) / clamp_alpha));
                 final_pc = cell_pc;
@@ -743,12 +748,16 @@
           let local_input_raster = GeoPNG.loadNumberRasterImage(local_input_file_path, { format: "float32" });
           let local_popc_file_path = `${population_Stadester.input_popc_folder}stadester_population_${year}.png`;
           let local_popc_raster = GeoPNG.loadNumberRasterImage(local_popc_file_path, { format: "float32" });
+          let local_urbc_file_path = `${population_Stadester.input_urbc_folder}stadester_urban_${year}.png`;
+          let local_urbc_raster = (fs.existsSync(local_urbc_file_path)) ?
+            GeoPNG.loadNumberRasterImage(local_urbc_file_path, { format: "float32" }) : null;
           let local_output_pc = `${this.output_gdp_pc_folder}${this.pc_prefix}_${year}.png`;
           let local_output_total = `${this.intermediate_gdp_scaled_to_national}${this.prefix}_${year}.png`;
           let is_total_raster = local_input_file_path.includes(this.prefix + "_") && !local_input_file_path.includes(this.pc_prefix + "_");
           
           let clamp_alpha = threshold * 0.1;
-          let delong_sub_base = this.getDelongSubsistenceBaseline(year);
+          let delong_hg_base = this.getDelongBaseline(-10000);
+          let min_cell_floor = delong_hg_base * 0.25;
           let raw_calibrated_pc = new Float32Array(4320 * 2160);
           
           //Calibrate per-capita GDP per cell using continuous OLS surplus allocation
@@ -767,18 +776,20 @@
               let s = stats[primary_code];
               if (s) {
                 let delta = Math.max(0, local_pc - s.min_ols);
-                cell_pc = (s.delta_mean > 0) ?
-                  (s.delong_base + s.surplus_pc * (delta / s.delta_mean)) :
-                  s.target_pc;
+                let mult = (s.delta_mean > 0) ? (delta / s.delta_mean) : 1.0;
+                let local_urb = (local_urbc_raster) ? local_urbc_raster.data[local_index] : 0;
+                if (local_urb <= 0 || isNaN(local_urb))
+                  mult = Math.min(1.25, mult);
+                cell_pc = s.delong_base + s.surplus_pc * mult;
                 if (cell_pc > threshold)
                   cell_pc = threshold + clamp_alpha * Math.log(1 + ((cell_pc - threshold) / clamp_alpha));
               } else {
-                cell_pc = Math.max(delong_sub_base, local_pc);
+                cell_pc = Math.max(min_cell_floor, local_pc);
               }
             } else {
-              cell_pc = Math.max(delong_sub_base, local_pc);
+              cell_pc = Math.max(min_cell_floor, local_pc);
             }
-            raw_calibrated_pc[local_index] = Math.max(delong_sub_base, cell_pc);
+            raw_calibrated_pc[local_index] = Math.max(min_cell_floor, cell_pc);
           }
           
           let final_pc_data = raw_calibrated_pc;
@@ -801,7 +812,7 @@
             for (let j = 0; j < 4320 * 2160; j++) {
               let is_urban = (local_urbc_raster && local_urbc_raster.data[j] > 0);
               let val = is_urban ? raw_calibrated_pc[j] : blurred_pc[j];
-              final_pc_data[j] = Math.max(delong_sub_base, val);
+              final_pc_data[j] = Math.max(min_cell_floor, val);
             }
           }
           
@@ -815,7 +826,7 @@
               let local_pop = local_popc_raster.data[local_index];
               if (local_pop < 1.0) return 0;
               let pc_val = final_pc_data[local_index];
-              return (isFinite(pc_val) && pc_val > 0 && pc_val < 3.402823466e38) ? Math.max(delong_sub_base, pc_val) : 0;
+              return (isFinite(pc_val) && pc_val > 0 && pc_val < 3.402823466e38) ? Math.max(min_cell_floor, pc_val) : 0;
             }
           });
           
@@ -830,7 +841,7 @@
               if (local_pop < 1.0) return 0;
               let pc_val = final_pc_data[local_index];
               if (!isFinite(pc_val) || pc_val <= 0) return 0;
-              let total_val = Math.max(delong_sub_base, pc_val) * local_pop;
+              let total_val = Math.max(min_cell_floor, pc_val) * local_pop;
               return (isFinite(total_val) && total_val < 3.402823466e38) ? total_val : 0;
             }
           });
