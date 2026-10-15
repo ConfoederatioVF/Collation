@@ -74,6 +74,7 @@
           //1. Calculate national populations and global average
           let world_gdp = 0;
           let world_pop = 0;
+          
           for (let local_index = 0; local_index < local_popc_raster.data.length; local_index++) {
             let local_pop = local_popc_raster.data[local_index];
             if (local_pop > 0) {
@@ -95,11 +96,8 @@
               world_pop += p;
             }
           }
-          let global_avg_pc = (world_pop > 0) ? (world_gdp / world_pop) : ((this.mode === "nominal") ? 178.3 : 363.6);
-          let max_historical_pc = (year <= 1800) ?
-            ((year <= 100) ? 2500 : 3500 + 4500 * ((year - 1) / 1799)) :
-            Infinity;
-          let min_historical_pc = (year <= 1800) ? 150 : 0;
+          let delong_hg_base = this.getDelongBaseline(year);
+          let global_avg_pc = (world_pop > 0) ? Math.max(delong_hg_base, world_gdp / world_pop) : delong_hg_base;
           
           //2. Assign uniform per-capita figures (intensive initialisation)
           GeoPNG.saveNumberRasterImage({
@@ -121,12 +119,7 @@
                   let target_pop = national_pop_sums[primary_code];
                   
                   if (target_gdp && target_pop > 0) {
-                    let raw_pc = target_gdp / target_pop;
-                    if (target_pop < 100 || raw_pc > max_historical_pc || raw_pc < min_historical_pc)
-                      return global_avg_pc;
-                    if (year <= 100 && primary_code !== "ITA")
-                      raw_pc = Math.min(raw_pc, 1180);
-                    return raw_pc;
+                    return Math.max(delong_hg_base, target_gdp / target_pop);
                   } else {
                     return global_avg_pc;
                   }
@@ -374,25 +367,10 @@
           let second_pass_raster = GeoPNG.loadNumberRasterImage(second_pass_path, { format: "float32" });
           let pop_raster = GeoPNG.loadNumberRasterImage(pop_path, { format: "float32" });
           
-          let first_pass_min = Infinity, first_pass_max = -Infinity;
-          for (let x = 0; x < second_pass_raster.data.length; x++) {
-            if (landarea_raster.data[x] > 0 && pop_raster.data[x] >= 1.0) {
-              let fp_val = first_pass_raster.data[x];
-              if (isFinite(fp_val) && fp_val > 0) {
-                if (fp_val < first_pass_min) first_pass_min = fp_val;
-                if (fp_val > first_pass_max) first_pass_max = fp_val;
-              }
-            }
-          }
-          if (!isFinite(first_pass_min)) first_pass_min = 0;
-          if (!isFinite(first_pass_max) || first_pass_max <= 0) first_pass_max = 5000000;
-          first_pass_max = Math.min(first_pass_max, 5000000);
-          let first_pass_range = (first_pass_max > first_pass_min) ? (first_pass_max - first_pass_min) : 1;
-          
-          let second_pass_fractions = GeoPNG.regulariseLogTail({
-            allow_zero_or_negative: true,
+          //Tukey's fences with log-tail normalisation
+          let regularised_pc = GeoPNG.regulariseLogTail({
+            allow_zero_or_negative: false,
             data: second_pass_raster.data,
-            fraction_only: true,
             valid_filter: (x) => landarea_raster.data[x] > 0 && pop_raster.data[x] >= 1.0
           });
           
@@ -403,15 +381,8 @@
             width: 4320,
             function: (local_index) => {
               if (landarea_raster.data[local_index] === 0 || pop_raster.data[local_index] < 1.0) return 0;
-              let fp_val = first_pass_raster.data[local_index];
-              if (!isFinite(fp_val) || fp_val <= 0) return 0;
-              let sp_frac = second_pass_fractions[local_index];
-              if (!isFinite(sp_frac) || sp_frac < 0) sp_frac = 0;
-              
-              //Modulate national per-capita target by local relative urban/agricultural productivity:
-              //Rural baseline reaches 0.75 * G_c; intensive urban agglomeration reaches 2.25 * G_c.
-              let res = fp_val * (0.75 + 1.5 * sp_frac);
-              return (isFinite(res) && res > 0 && res < 3.402823466e38) ? res : 0;
+              let pc_val = regularised_pc[local_index];
+              return (isFinite(pc_val) && pc_val > 0 && pc_val < 3.402823466e38) ? pc_val : 0;
             }
           });
         }
@@ -578,6 +549,48 @@
     }
     
     /**
+     * Returns the De Long subsistence baseline per capita for the current mode and year.
+     * Evaluates from DeLong ex-Nordhaus series (delong_gdp_pc.csv) converted to 2000$.
+     * 
+     * @param {number|string} [arg0_year=-10000]
+     * @returns {number}
+     */
+    static getDelongBaseline (arg0_year) {
+      //Convert from parameters
+      let year = (arg0_year !== undefined) ? parseInt(arg0_year) : -10000;
+      
+      //Return statement
+      if (this.mode === "nominal") {
+        return (typeof GDP_nominal !== "undefined" && GDP_nominal.getDelongBaseline) ?
+          GDP_nominal.getDelongBaseline(year) : undefined;
+      } else {
+        return (typeof GDP_PPP !== "undefined" && GDP_PPP.getDelongBaseline) ?
+          GDP_PPP.getDelongBaseline(year) : undefined;
+      }
+    }
+    
+    /**
+     * Returns the De Long physical subsistence floor per capita for a given year.
+     * @alias Eoscala_GDP.getDelongSubsistenceBaseline
+     * 
+     * @param {number|string} [arg0_year=-10000]
+     * @returns {number}
+     */
+    static getDelongSubsistenceBaseline (arg0_year) {
+      //Convert from parameters
+      let year = (arg0_year !== undefined) ? parseInt(arg0_year) : -10000;
+      
+      //Return statement
+      if (this.mode === "nominal") {
+        return (typeof GDP_nominal !== "undefined" && GDP_nominal.getDelongSubsistenceBaseline) ?
+          GDP_nominal.getDelongSubsistenceBaseline(year) : undefined;
+      } else {
+        return (typeof GDP_PPP !== "undefined" && GDP_PPP.getDelongSubsistenceBaseline) ?
+          GDP_PPP.getDelongSubsistenceBaseline(year) : undefined;
+      }
+    }
+    
+    /**
      * Step H: Calibrates Per-Capita GDP to national Maddison benchmarks FIRST,
      * preserving intra-national spatial heterogeneity, urban productivity premiums, and dasymetric structure.
      * Downstream, Total GDP is computed as extensive aggregate: Total = PerCapita * Population.
@@ -619,82 +632,72 @@
         
         let country_stats = {};
         let current_max_pc = 0;
-        let local_gdp_sums = {};
+        let delong_sub_base = this.getDelongSubsistenceBaseline(current_year);
+        let delong_world_base = this.getDelongBaseline(current_year);
+        let is_total_raster = local_input_file_path.includes(this.prefix + "_") && !local_input_file_path.includes(this.pc_prefix + "_");
+        let local_delta_sums = {};
+        let local_min_ols = {};
         let local_pop_sums = {};
         let local_threshold = (previous_max_pc > 0) ? Math.min(previous_max_pc * 4, 500000) : 500000;
         let clamp_alpha = local_threshold * 0.1;
         
-        let is_total_raster = local_input_file_path.includes(this.prefix + "_") && !local_input_file_path.includes(this.pc_prefix + "_");
-        
-        //Calculate national population and unscaled GDP (sum of pc * pop)
+        //Calculate national population and minimum OLS estimate per country
         for (let x = 0; x < local_input_raster.data.length; x++) {
           let p = local_popc_raster.data[x];
           if (p >= 1.0) {
             let byte_index = x * 4;
             let local_colour_key = `${geocode_raster.data[byte_index]},${geocode_raster.data[byte_index+1]},${geocode_raster.data[byte_index+2]}`;
             let local_geocodes = geocode_obj[local_colour_key];
-            if (local_geocodes) {
+            if (local_geocodes && local_geocodes.length > 0) {
+              let primary_code = local_geocodes[0];
               let local_pc = is_total_raster ? (local_input_raster.data[x] / p) : local_input_raster.data[x];
-              let g_val = local_pc * p;
-              for (let y = 0; y < local_geocodes.length; y++) {
-                Object.modifyValue(local_gdp_sums, local_geocodes[y], g_val);
-                Object.modifyValue(local_pop_sums, local_geocodes[y], p);
+              if (local_pc > 0) {
+                Object.modifyValue(local_pop_sums, primary_code, p);
+                if (local_min_ols[primary_code] === undefined || local_pc < local_min_ols[primary_code])
+                  local_min_ols[primary_code] = local_pc;
               }
             }
           }
         }
         
-        //Calibrate per-capita scalar per country: s_c = Target_GDP / (Sum_i pc_i * pop_i)
-        Object.iterate(local_gdp_sums, (local_key, local_value) => {
-          let local_target = gdp_national_obj[local_key]?.[current_year];
-          let pop_c = local_pop_sums[local_key] || 0;
-          let is_tiny_pop = (current_year <= 1820 && pop_c < 100);
-          let initial_s = 1.0;
-          if (local_target && local_value > 0) {
-            initial_s = is_tiny_pop ? 1.0 : (local_target / local_value);
-            if (current_year <= 1820)
-              initial_s = Math.max(0.2, Math.min(3.0, initial_s));
+        //Calculate population-weighted OLS delta sums per country
+        for (let x = 0; x < local_input_raster.data.length; x++) {
+          let p = local_popc_raster.data[x];
+          if (p >= 1.0) {
+            let byte_index = x * 4;
+            let local_colour_key = `${geocode_raster.data[byte_index]},${geocode_raster.data[byte_index+1]},${geocode_raster.data[byte_index+2]}`;
+            let local_geocodes = geocode_obj[local_colour_key];
+            if (local_geocodes && local_geocodes.length > 0) {
+              let primary_code = local_geocodes[0];
+              let local_pc = is_total_raster ? (local_input_raster.data[x] / p) : local_input_raster.data[x];
+              if (local_pc > 0 && local_min_ols[primary_code] !== undefined) {
+                let delta = Math.max(0, local_pc - local_min_ols[primary_code]);
+                Object.modifyValue(local_delta_sums, primary_code, delta * p);
+              }
+            }
           }
+        }
+        
+        //Calibrate per-capita surplus and statistics per country
+        Object.iterate(local_pop_sums, (local_key, pop_c) => {
+          let delta_mean = (pop_c > 0 && local_delta_sums[local_key] > 0) ? (local_delta_sums[local_key] / pop_c) : 0;
+          let local_target_total = gdp_national_obj[local_key]?.[current_year];
+          let min_ols = (local_min_ols[local_key] !== undefined) ? local_min_ols[local_key] : 0;
+          let target_pc = (local_target_total && pop_c > 0) ? (local_target_total / pop_c) : delong_world_base;
+          target_pc = Math.max(delong_sub_base, target_pc);
+          let surplus_pc = Math.max(0, target_pc - delong_sub_base);
+          
           country_stats[local_key] = {
-            initial_scalar: initial_s,
-            outlier_gdp: 0,
-            remaining_input_sum: 0,
-            target_gdp: local_target || local_value
+            delong_base: delong_sub_base,
+            delta_mean: delta_mean,
+            min_ols: min_ols,
+            pop: pop_c,
+            surplus_pc: surplus_pc,
+            target_pc: target_pc
           };
         });
         
-        //Identify outliers in per-capita space and calculate secondary scalars
-        for (let x = 0; x < local_input_raster.data.length; x++) {
-          let p = local_popc_raster.data[x];
-          if (p >= 1.0) {
-            let local_pc = is_total_raster ? (local_input_raster.data[x] / p) : local_input_raster.data[x];
-            if (local_pc === 0) continue;
-            let byte_index = x * 4;
-            let local_colour_key = `${geocode_raster.data[byte_index]},${geocode_raster.data[byte_index+1]},${geocode_raster.data[byte_index+2]}`;
-            let local_geocodes = geocode_obj[local_colour_key];
-            
-            if (local_geocodes && local_geocodes.length > 0) {
-              let stats = country_stats[local_geocodes[0]];
-              if (stats) {
-                let raw_pc = local_pc * stats.initial_scalar;
-                if (raw_pc > local_threshold) {
-                  let reg_pc = local_threshold + clamp_alpha * Math.log(1 + ((raw_pc - local_threshold) / clamp_alpha));
-                  stats.outlier_gdp += reg_pc * p;
-                } else {
-                  stats.remaining_input_sum += local_pc * p;
-                }
-              }
-            }
-          }
-        }
-        
-        Object.iterate(country_stats, (country_code, stats) => {
-          let remaining_target = Math.max(0, stats.target_gdp - stats.outlier_gdp);
-          let s_sec = (stats.remaining_input_sum > 0) ? remaining_target / stats.remaining_input_sum : stats.initial_scalar;
-          if (current_year <= 1820) s_sec = Math.max(0.2, Math.min(3.0, s_sec));
-          stats.secondary_scalar = s_sec;
-        });
-        
+        //Determine current_max_pc
         for (let x = 0; x < local_input_raster.data.length; x++) {
           let p = local_popc_raster.data[x];
           if (p >= 1.0) {
@@ -708,15 +711,13 @@
             if (local_geocodes && local_geocodes.length > 0) {
               let stats = country_stats[local_geocodes[0]];
               if (stats) {
-                let raw_pc = local_pc * stats.initial_scalar;
-                if (raw_pc > local_threshold) {
-                  final_pc = local_threshold + clamp_alpha * Math.log(1 + ((raw_pc - local_threshold) / clamp_alpha));
-                } else {
-                  let res_pc = local_pc * stats.secondary_scalar;
-                  if (res_pc > local_threshold) {
-                    final_pc = local_threshold + clamp_alpha * Math.log(1 + ((res_pc - local_threshold) / clamp_alpha));
-                  } else final_pc = res_pc;
-                }
+                let delta = Math.max(0, local_pc - stats.min_ols);
+                let cell_pc = (stats.delta_mean > 0) ?
+                  (stats.delong_base + stats.surplus_pc * (delta / stats.delta_mean)) :
+                  stats.target_pc;
+                if (cell_pc > local_threshold)
+                  cell_pc = local_threshold + clamp_alpha * Math.log(1 + ((cell_pc - local_threshold) / clamp_alpha));
+                final_pc = cell_pc;
               }
             }
             if (isFinite(final_pc) && final_pc > current_max_pc) current_max_pc = final_pc;
@@ -747,9 +748,10 @@
           let is_total_raster = local_input_file_path.includes(this.prefix + "_") && !local_input_file_path.includes(this.pc_prefix + "_");
           
           let clamp_alpha = threshold * 0.1;
+          let delong_sub_base = this.getDelongSubsistenceBaseline(year);
           let raw_calibrated_pc = new Float32Array(4320 * 2160);
           
-          //Calibrate per-capita GDP per cell (preserving urban premium and local variance)
+          //Calibrate per-capita GDP per cell using continuous OLS surplus allocation
           for (let local_index = 0; local_index < local_input_raster.data.length; local_index++) {
             let local_pop = local_popc_raster.data[local_index];
             if (local_pop < 1.0) continue;
@@ -759,38 +761,31 @@
             let local_colour_key = `${geocode_raster.data[byte_index]},${geocode_raster.data[byte_index+1]},${geocode_raster.data[byte_index+2]}`;
             let local_geocodes = geocode_obj[local_colour_key];
             
+            let cell_pc = local_pc;
             if (local_geocodes && local_geocodes.length > 0) {
               let primary_code = local_geocodes[0];
               let s = stats[primary_code];
               if (s) {
-                let raw_pc = local_pc * s.initial_scalar;
-                let res_pc = (raw_pc > threshold) ?
-                  (threshold + clamp_alpha * Math.log(1 + ((raw_pc - threshold) / clamp_alpha))) :
-                  (local_pc * s.secondary_scalar);
-                if (res_pc > threshold)
-                  res_pc = threshold + clamp_alpha * Math.log(1 + ((res_pc - threshold) / clamp_alpha));
-                
-                //Antiquity supremacy constraint (year <= 100): Roman Italy is the global summit
-                if (year <= 100) {
-                  if (primary_code === "ITA") {
-                    res_pc = Math.min(res_pc, 3500);
-                  } else {
-                    res_pc = Math.min(res_pc, 1180);
-                  }
-                }
-                raw_calibrated_pc[local_index] = res_pc;
+                let delta = Math.max(0, local_pc - s.min_ols);
+                cell_pc = (s.delta_mean > 0) ?
+                  (s.delong_base + s.surplus_pc * (delta / s.delta_mean)) :
+                  s.target_pc;
+                if (cell_pc > threshold)
+                  cell_pc = threshold + clamp_alpha * Math.log(1 + ((cell_pc - threshold) / clamp_alpha));
               } else {
-                let fallback_pc = local_pc;
-                if (year <= 100) fallback_pc = Math.min(fallback_pc, (primary_code === "ITA") ? 3500 : 1180);
-                raw_calibrated_pc[local_index] = fallback_pc;
+                cell_pc = Math.max(delong_sub_base, local_pc);
               }
-            } else raw_calibrated_pc[local_index] = local_pc;
+            } else {
+              cell_pc = Math.max(delong_sub_base, local_pc);
+            }
+            raw_calibrated_pc[local_index] = Math.max(delong_sub_base, cell_pc);
           }
           
           let final_pc_data = raw_calibrated_pc;
           
-          //For pre-industrial era (year < 1800): apply dasymetric blur to rural per-capita variance, preserving urban cores
-          if (year < 1800) {
+          //For pre-industrial era (year < 1800): apply dasymetric blur only if explicitly enabled
+          let blur_radius = (options.blur_radius !== undefined) ? options.blur_radius : 0;
+          if (year < 1800 && blur_radius > 0) {
             let local_urbc_path = `${population_Stadester.input_urbc_folder}stadester_urban_${year}.png`;
             let local_urbc_raster = (fs.existsSync(local_urbc_path)) ?
               GeoPNG.loadNumberRasterImage(local_urbc_path, { format: "float32" }) : null;
@@ -798,14 +793,15 @@
               height: 2160,
               mask_data: geocode_raster.data,
               pop_data: local_popc_raster.data,
-              radius: 64,
+              radius: blur_radius,
               target_data: raw_calibrated_pc,
               width: 4320
             });
             final_pc_data = new Float32Array(4320 * 2160);
             for (let j = 0; j < 4320 * 2160; j++) {
               let is_urban = (local_urbc_raster && local_urbc_raster.data[j] > 0);
-              final_pc_data[j] = is_urban ? raw_calibrated_pc[j] : blurred_pc[j];
+              let val = is_urban ? raw_calibrated_pc[j] : blurred_pc[j];
+              final_pc_data[j] = Math.max(delong_sub_base, val);
             }
           }
           
@@ -819,7 +815,7 @@
               let local_pop = local_popc_raster.data[local_index];
               if (local_pop < 1.0) return 0;
               let pc_val = final_pc_data[local_index];
-              return (isFinite(pc_val) && pc_val > 0 && pc_val < 3.402823466e38) ? pc_val : 0;
+              return (isFinite(pc_val) && pc_val > 0 && pc_val < 3.402823466e38) ? Math.max(delong_sub_base, pc_val) : 0;
             }
           });
           
@@ -834,7 +830,7 @@
               if (local_pop < 1.0) return 0;
               let pc_val = final_pc_data[local_index];
               if (!isFinite(pc_val) || pc_val <= 0) return 0;
-              let total_val = pc_val * local_pop;
+              let total_val = Math.max(delong_sub_base, pc_val) * local_pop;
               return (isFinite(total_val) && total_val < 3.402823466e38) ? total_val : 0;
             }
           });

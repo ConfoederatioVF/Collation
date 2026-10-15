@@ -13,11 +13,101 @@ if (typeof cubic_spline === "undefined" && typeof require !== "undefined") {
 
 global.GDP_PPP = class {
 	static bf = `${h1}GDP_PPP/`;
+	static input_delong_gdp_pc_csv = `${this.bf}delong_gdp_pc.csv`;
 	static input_gdp_ppp_national_csv = `${this.bf}gdp_ppp_national_eoscala_1.4.csv`;
 	static input_gdp_ppp_world_json = `${this.bf}gdp_ppp_world_eoscala_1.4.json5`;
 	static intermediate_normalised_to_global = `${h3}GDP_PPP/1.scaled_to_global/`;
 	static intermediate_scaled_to_national = `${h3}GDP_PPP/2.scaled_to_national/`;
 	static intermediate_scaled_to_global = `${h3}GDP_PPP/3.scaled_to_global/`;
+	
+	/**
+	 * Returns estimations of World GDP PPP per capita from DeLong's ex-Nordhaus series (delong_gdp_pc.csv).
+	 * Converted to 2000$ using BEA US GDP deflator.
+	 * 
+	 * @returns {Object}
+	 */
+	static getDelongBaselineObject () {
+		//Declare local instance variables
+		let csv_path = (fs.existsSync(this.input_delong_gdp_pc_csv)) ?
+			this.input_delong_gdp_pc_csv :
+			path.join((typeof root_dir !== "undefined") ? root_dir : ".", "histmap/1.data_raw/GDP_PPP/delong_gdp_pc.csv");
+		let delong_series = {};
+		let hyde_years = landuse_HYDE.sorted_hyde_years;
+		let raw_csv = File.loadCSVAsJSON(csv_path, { delimiter: ",", mode: "vertical" });
+		
+		for (let y in raw_csv) {
+			let yr = parseInt(y);
+			if (yr === 1) yr = 0;
+			let val = parseFloat(raw_csv[y].ex_nordhaus_2000?.[0]);
+			if (!isNaN(val)) delong_series[yr] = val;
+		}
+		
+		//Return statement
+		return Object.cubicSplineInterpolation(delong_series, { years: hyde_years });
+	}
+	
+	/**
+	 * Returns estimations of World GDP PPP subsistence floor per capita from DeLong's constant pre-1500 series.
+	 * Converted to 2000$ using empirical deflator.
+	 * 
+	 * @returns {Object}
+	 */
+	static getDelongSubsistenceBaselineObject () {
+		//Declare local instance variables
+		let csv_path = (fs.existsSync(this.input_delong_gdp_pc_csv)) ?
+			this.input_delong_gdp_pc_csv :
+			path.join((typeof root_dir !== "undefined") ? root_dir : ".", "histmap/1.data_raw/GDP_PPP/delong_gdp_pc.csv");
+		let delong_series = {};
+		let hyde_years = landuse_HYDE.sorted_hyde_years;
+		let raw_csv = File.loadCSVAsJSON(csv_path, { delimiter: ",", mode: "vertical" });
+		
+		for (let y in raw_csv) {
+			let yr = parseInt(y);
+			if (yr === 1) yr = 0;
+			let raw_sub = parseFloat(raw_csv[y].constant_pre1500_1990?.[0]);
+			let raw_1990 = parseFloat(raw_csv[y].ex_nordhaus_1990?.[0]);
+			let raw_2000 = parseFloat(raw_csv[y].ex_nordhaus_2000?.[0]);
+			let deflator = (raw_1990 > 0 && raw_2000 > 0) ? (raw_2000 / raw_1990) : 1;
+			if (!isNaN(raw_sub)) delong_series[yr] = raw_sub * deflator;
+		}
+		
+		//Return statement
+		return Object.cubicSplineInterpolation(delong_series, { years: hyde_years });
+	}
+	
+	/**
+	 * Returns the De Long physical subsistence baseline per capita for a given year.
+	 * 
+	 * @param {number|string} [arg0_year=-10000]
+	 * @returns {number}
+	 */
+	static getDelongSubsistenceBaseline (arg0_year) {
+		//Convert from parameters
+		let year = (arg0_year !== undefined) ? parseInt(arg0_year) : -10000;
+		
+		//Declare local instance variables
+		let b_obj = this.getDelongSubsistenceBaselineObject();
+		
+		//Return statement
+		return (b_obj[year] !== undefined) ? b_obj[year] : b_obj[-10000];
+	}
+	
+	/**
+	 * Returns the De Long world average baseline per capita for a given year (defaults to -10000 BC).
+	 * 
+	 * @param {number|string} [arg0_year=-10000]
+	 * @returns {number}
+	 */
+	static getDelongBaseline (arg0_year) {
+		//Convert from parameters
+		let year = (arg0_year !== undefined) ? parseInt(arg0_year) : -10000;
+		
+		//Declare local instance variables
+		let b_obj = this.getDelongBaselineObject();
+		
+		//Return statement
+		return (b_obj[year] !== undefined) ? b_obj[year] : b_obj[-10000];
+	}
 	
 	/**
 	 * Fetches a {"<year>": {@link number}} map per geocode for GDP PPP,
@@ -73,7 +163,10 @@ global.GDP_PPP = class {
 			}
 			world_avg_pc[y] = (p > 0) ? (world_gdp_obj[y] / p) : 0;
 		}
-		let delong_hg_base = world_avg_pc[-10000];
+		let delong_baseline_obj = this.getDelongBaselineObject();
+		let delong_hg_base = delong_baseline_obj[-10000];
+		let delong_subsistence_obj = this.getDelongSubsistenceBaselineObject();
+		let delong_sub_base = delong_subsistence_obj[-10000];
 		
 		//Destructure gdp_ppp_csv into raw_maddison_obj
 		Object.iterate(gdp_ppp_csv, (local_key, local_value) => {
@@ -96,6 +189,29 @@ global.GDP_PPP = class {
 			}
 		});
 		
+		//Helper to interpolate national population for any arbitrary year from empirical HYDE timeseries
+		let getNationalPopulation = (code, year) => {
+			if (national_populations[year]?.[code] > 0) return national_populations[year][code];
+			let next_y = null;
+			let prev_y = null;
+			for (let i = 0; i < hyde_years.length; i++) {
+				let hy = hyde_years[i];
+				if (national_populations[hy]?.[code] > 0) {
+					if (hy <= year) prev_y = hy;
+					if (hy >= year && next_y === null) next_y = hy;
+				}
+			}
+			if (prev_y !== null && next_y !== null && prev_y !== next_y) {
+				let p0 = national_populations[prev_y][code];
+				let p1 = national_populations[next_y][code];
+				let fraction = (year - prev_y) / (next_y - prev_y);
+				return p0 + fraction * (p1 - p0);
+			}
+			if (prev_y !== null) return national_populations[prev_y][code];
+			if (next_y !== null) return national_populations[next_y][code];
+			return 0;
+		};
+		
 		//Process each geocode with intensive per-capita emergence ramp-up
 		Object.iterate(raw_maddison_obj, (code, series) => {
 			let extant_years = Object.keys(series).map(Number).sort((a, b) => a - b);
@@ -104,27 +220,31 @@ global.GDP_PPP = class {
 			//Convert extant empirical points into intensive per-capita figures
 			let pc_series = {};
 			extant_years.forEach((yr) => {
-				let pop_yr = national_populations[yr]?.[code] || national_populations[1800]?.[code] || 1000000;
+				let pop_yr = getNationalPopulation(code, yr);
 				if (pop_yr > 0) pc_series[yr] = series[yr] / pop_yr;
 			});
 			
-			let t_first = extant_years[0];
+			let valid_entry_years = Object.keys(pc_series).map(Number).sort((a, b) => a - b);
+			if (valid_entry_years.length === 0) return;
+			
+			let t_first = valid_entry_years[0];
 			let pc_first = pc_series[t_first] || delong_hg_base;
+			let base_first = delong_baseline_obj[t_first] || delong_hg_base;
+			let sub_first = delong_subsistence_obj[t_first] || delong_sub_base;
+			let d_first = dev_index_cache[t_first]?.[code]?.dev_index || 1.0;
+			let rel_entry = (base_first > 0) ? (pc_first / base_first) : 1.0;
 			
-			let dev_entry = dev_index_cache[t_first]?.[code]?.dev_index || 0.0;
-			let dev_base = dev_index_cache[-10000]?.[code]?.dev_index || 0.0;
-			let dev_range = dev_entry - dev_base;
-			
-			//Pure linear interpolation from -10000 BC DeLong baseline to t_first empirical entry using development index
+			//Pre-entry trajectory: surplus emergence modulated by intensive development index
 			for (let i = 0; i < hyde_years.length; i++) {
 				let y = hyde_years[i];
 				if (y < t_first) {
-					let alpha = 0.0;
-					if (dev_range > 0) {
-						let dev_y = dev_index_cache[y]?.[code]?.dev_index || 0.0;
-						alpha = Math.max(0.0, Math.min(1.0, (dev_y - dev_base) / dev_range));
-					}
-					pc_series[y] = delong_hg_base + alpha * (pc_first - delong_hg_base);
+					let base_y = delong_baseline_obj[y] || delong_hg_base;
+					let sub_y = delong_subsistence_obj[y] || delong_sub_base;
+					let target_trajectory = base_y * rel_entry;
+					let d_y = dev_index_cache[y]?.[code]?.dev_index || 0.0;
+					let dev_ratio = (d_first > 0) ? Math.min(1.5, d_y / d_first) : 0;
+					let pc_val = delong_hg_base + (target_trajectory - delong_hg_base) * dev_ratio;
+					pc_series[y] = Math.max(delong_hg_base, pc_val);
 				}
 			}
 			
@@ -138,37 +258,14 @@ global.GDP_PPP = class {
 			
 			for (let i = 0; i < hyde_years.length; i++) {
 				let y = hyde_years[i];
-				let pop_y = national_populations[y]?.[code] || 1;
-				let pc_y = interpolated_pc[y] || delong_hg_base;
+				let pop_y = national_populations[y]?.[code] || 0;
+				let sub_y = delong_subsistence_obj[y] || delong_sub_base;
+				let pc_y = Math.max(sub_y, interpolated_pc[y] || sub_y);
 				
-				//Enforce historical sanity bounds on per-capita
-				pc_y = Math.max(150, Math.min(pc_y, (y <= 100) ? 2500 : 80000));
 				gdp_pc_obj[code][y] = pc_y;
 				gdp_ppp_obj[code][y] = pc_y * pop_y;
 			}
 		});
-		
-		//Antiquity Italian Supremacy Pass: Roman Italy is #1 in Per-Capita GDP (y <= 100)
-		let antiquity_years = [0, 100];
-		for (let i = 0; i < antiquity_years.length; i++) {
-			let y = antiquity_years[i];
-			let ita_pop = national_populations[y]?.ITA || 7000000;
-			let ita_gdp = (y === 0) ? (raw_maddison_obj.ITA?.[0] || 8947632995) : 9600000000;
-			let ita_pc = ita_gdp / ita_pop;
-			
-			if (gdp_ppp_obj.ITA) gdp_ppp_obj.ITA[y] = ita_gdp;
-			if (gdp_pc_obj.ITA) gdp_pc_obj.ITA[y] = ita_pc;
-			
-			Object.keys(gdp_ppp_obj).forEach((c) => {
-				if (c !== "ITA") {
-					let pop_c = national_populations[y]?.[c] || 1;
-					if (gdp_pc_obj[c][y] > ita_pc * 0.85) {
-						gdp_pc_obj[c][y] = ita_pc * 0.85;
-						gdp_ppp_obj[c][y] = gdp_pc_obj[c][y] * pop_c;
-					}
-				}
-			});
-		}
 		
 		//Return statement
 		return gdp_ppp_obj;
