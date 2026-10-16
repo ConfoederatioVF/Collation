@@ -15,6 +15,7 @@ global.population_KK10LUH2 = class {
 	static input_owid_raster = `${h2}/population_KK10LUH2/config/owid_continents.png`;
 	static intermediate_luh2_rasters = `${h2}/population_KK10LUH2/rasters_LUH2_anthropogenic_mean/`;
 	static intermediate_kk10_luh2_greyscale_rasters = `${h2}/population_KK10LUH2/rasters_KK10LUH2_greyscale/`;
+	static intermediate_kk10_luh2_alcc_rasters = `${h2}/population_KK10LUH2/rasters_KK10LUH2_alcc_km2/`;
 	static intermediate_kk10_luh2_rasters = `${h2}/population_KK10LUH2/rasters_KK10LUH2/`;
 	static intermediate_kk10_luh2_regional_rasters = `${h2}/population_KK10LUH2/rasters_KK10LUH2_1._regional_scaling/`;
 	static output_kk10_luh2_global_rasters = `${h2}/population_KK10LUH2/rasters_KK10LUH2_2._global_scaling/`;
@@ -49,7 +50,7 @@ global.population_KK10LUH2 = class {
 					});
 				} catch (e) { console.error(e); }
 				
-				console.log(`- Averaging LUH2 raster for ${i} ..`);
+				console.log(`- Summing LUH2 land use rasters for ${i} ..`);
 				GeoPNG.saveNumberRasterImage({
 					file_path: `${this.intermediate_luh2_rasters}LUH2_${i}.png`,
 					format: "float32",
@@ -63,7 +64,7 @@ global.population_KK10LUH2 = class {
 						//Declare local instance variables
 						let local_sum = 0;
 						
-						//Average all luh2_images
+						//Sum all disjoint luh2 land use categories
 						for (let x = 0; x < luh2_stocks.length; x++) {
 							let local_value = luh2_images[luh2_stocks[x]].data[index];
 							
@@ -71,7 +72,7 @@ global.population_KK10LUH2 = class {
 						}
 						
 						//Return statement
-						return local_sum/luh2_stocks.length;
+						return Math.min(1, Math.max(0, local_sum));
 					}
 				});
 			} catch (e) { console.error(e); }
@@ -127,6 +128,51 @@ global.population_KK10LUH2 = class {
 				//3. If this is of only the luh2_domain; merely copy the luh2 raster to its destination
 				if (in_luh2_domain && !in_kk10_domain)
 					fs.copyFileSync(luh2_file_path, output_file_path);
+			}
+		} catch (e) { console.error(e); }
+	}
+	
+	static async B2_generateALCCAreaRasters () {
+		//Declare local instance variables
+		let hyde_years = landuse_HYDE.hyde_years;
+		let land_area_raster = GeoPNG.loadNumberRasterImage(metadata_HYDE.input_raster_land_area, {
+			format: "int32"
+		});
+		
+		//Iterate over all hyde_years
+		for (let i = 0; i < hyde_years.length; i++) try {
+			let input_file_path = `${this.intermediate_kk10_luh2_greyscale_rasters}KK10LUH2_${hyde_years[i]}.png`;
+			let output_file_path = `${this.intermediate_kk10_luh2_alcc_rasters}KK10LUH2_${hyde_years[i]}.png`;
+			
+			//Fallback handling for years outside KK10LUH2 domain
+			if (!fs.existsSync(input_file_path)) {
+				let fallback_year = (hyde_years[i] < this.input_kk10luh2_domain[0]) ?
+					this.input_kk10luh2_domain[0] : this.input_kk10luh2_domain[1];
+				input_file_path = `${this.intermediate_kk10_luh2_greyscale_rasters}KK10LUH2_${fallback_year}.png`;
+			}
+			
+			if (fs.existsSync(input_file_path)) {
+				let fraction_raster = GeoPNG.loadNumberRasterImage(input_file_path, {
+					format: "float32"
+				});
+				
+				console.log(`- Computing ALCC km^2/cell for ${hyde_years[i]} ..`);
+				GeoPNG.saveNumberRasterImage({
+					file_path: output_file_path,
+					format: "float32",
+					height: fraction_raster.height,
+					width: fraction_raster.width,
+					function: function (arg0_index) {
+						//Convert from parameters
+						let index = arg0_index;
+						let cell_area = land_area_raster.data[index];
+						let fraction_val = fraction_raster.data[index];
+						
+						//Return statement
+						if (cell_area <= 0 || fraction_val <= 0) return 0;
+						return fraction_val*cell_area;
+					}
+				});
 			}
 		} catch (e) { console.error(e); }
 	}
@@ -600,10 +646,12 @@ global.population_KK10LUH2 = class {
 			}
 		}
 		
-		//1. Average land use fractions from LUH2 climate model in float32
+		//1. Sum land use fractions from LUH2 climate model in float32
 		if (!options.exclude.includes("A")) await this.A_averageLUH2Rasters();
 		//2. Combine KK10 and LUH2 rasters in float32
 		if (!options.exclude.includes("B")) await this.B_generateKK10LUH2Rasters();
+		//2b. Generate ALCC physical area rasters (km^2/cell) for Dataview
+		if (!options.exclude.includes("B2")) await this.B2_generateALCCAreaRasters();
 		//3. Calibrate KK10LUH2 rasters to world population totals in float32
 		if (!options.exclude.includes("C")) await this.C_convertKK10LUH2RastersToRGBA({
 			fallback_mode: "kk10luh2_domain"
