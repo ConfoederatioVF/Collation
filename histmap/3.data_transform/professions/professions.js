@@ -612,7 +612,7 @@ global.professions = class {
 				type: "clamp_professions",
 				age_sex_folder: global.age_sex.output_rasters,
 				categories: categories,
-				gdp_pc_path: (typeof GDP_pc !== "undefined" && GDP_pc.output_gdp_pc_folder) ? path.join(GDP_pc.output_gdp_pc_folder, `GDP_pc_${year}.png`) : `${global.h3 || "./histmap/3.data_transform/"}GDP_pc/8.GDP_nominal_pc_rasters/GDP_pc_${year}.png`,
+				gdp_pc_path: (typeof GDP_pc !== "undefined" && GDP_pc.output_gdp_pc_folder) ? path.join(GDP_pc.output_gdp_pc_folder, `GDP_pc_${year}.png`) : `${global.h3 || "./histmap/3.data_transform/"}GDP_pc/6.GDP_nominal_pc_rasters/GDP_pc_${year}.png`,
 				geocode_path: (typeof admin_modern !== "undefined") ? admin_modern.input_geocodes_raster : `${global.h1 || "./histmap/1.data_raw/"}admin_modern/geocodes.png`,
 				geocode_1913_path: (typeof professions_Bairoch !== "undefined") ? professions_Bairoch.output_geocodes_1913_raster : `${global.h2 || "./histmap/2.data_cleaning/"}professions_Bairoch/geocodes_1913.png`,
 				geocode_1913_json_path: (typeof professions_Bairoch !== "undefined") ? professions_Bairoch.output_geocodes_1913_json : `${global.h2 || "./histmap/2.data_cleaning/"}professions_Bairoch/geocodes_1913.json`,
@@ -740,7 +740,7 @@ global.professions = class {
 						}
 					}
 
-					let gdp_pc_path = (typeof GDP_pc !== "undefined" && GDP_pc.output_gdp_pc_folder) ? path.join(GDP_pc.output_gdp_pc_folder, `GDP_pc_${year}.png`) : `${global.h3 || "./histmap/3.data_transform/"}GDP_pc/8.GDP_nominal_pc_rasters/GDP_pc_${year}.png`;
+					let gdp_pc_path = (typeof GDP_pc !== "undefined" && GDP_pc.output_gdp_pc_folder) ? path.join(GDP_pc.output_gdp_pc_folder, `GDP_pc_${year}.png`) : `${global.h3 || "./histmap/3.data_transform/"}GDP_pc/6.GDP_nominal_pc_rasters/GDP_pc_${year}.png`;
 					let urb_path = `${global.h2 || "./histmap/2.data_cleaning/"}population_Stadester/stadester_urban_rasters/stadester_urban_${year}.png`;
 					let rur_path = `${global.h2 || "./histmap/2.data_cleaning/"}population_Stadester/stadester_rural_rasters/stadester_rural_${year}.png`;
 

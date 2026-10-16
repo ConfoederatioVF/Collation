@@ -22,14 +22,13 @@
     static intermediate_ols_folder = `${this.cf}1.OLS/`;
     static intermediate_ols_rasters_folder = `${this.cf}2.OLS_pc_estimates/`;
     static intermediate_pc_estimates_folder = `${this.cf}3.pc_estimates/`;
-    static intermediate_gdp_folder = `${this.cf}/4.GDP_rasters/`;
-    static intermediate_gdp_scaled_to_global = `${this.cf}/5.scaled_to_global/`;
-    static intermediate_gdp_interpolated = `${this.cf}/6.interpolated/`;
-    static intermediate_gdp_local_scaled_to_national = `${this.cf}7.scaled_to_national/`;
-    static get intermediate_gdp_scaled_to_national () {
-      return (global.GDP_nominal?.intermediate_scaled_to_national) ? GDP_nominal.intermediate_scaled_to_national : `${h3}/GDP_nominal/2.scaled_to_national/`;
-    }
-    static output_gdp_pc_folder = `${this.cf}/8.GDP_nominal_pc_rasters/`;
+    static intermediate_sedac_blended_folder = `${this.cf}4.sedac_blended/`;
+    static intermediate_gdp_scaled_to_national = `${this.cf}5.scaled_to_national/`;
+    static output_gdp_pc_folder = `${this.cf}6.GDP_nominal_pc_rasters/`;
+    
+    //Backward-compatible getters
+    static get intermediate_gdp_interpolated () { return this.intermediate_sedac_blended_folder; }
+    static get intermediate_gdp_local_scaled_to_national () { return this.intermediate_gdp_scaled_to_national; }
     
     //HYDE; Stadestér formatters
     static hf = () => `${landuse_HYDE.bf}/rasters/`;

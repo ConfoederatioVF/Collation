@@ -14,9 +14,9 @@ if (typeof cubic_spline === "undefined" && typeof require !== "undefined") {
 global.GDP_nominal = class {
 	static input_gdp_national_csv = `${h1}/GDP_nominal/gdp_national_eoscala_1.4.csv`;
 	static input_gdp_world_json = `${h1}/GDP_nominal/gdp_world_eoscala_1.4.json5`;
-	static input_delong_gdp_pc_csv = `${h1}GDP_PPP/delong_gdp_pc.csv`;
-	static intermediate_normalised_to_global = `${h3}GDP_nominal/1.scaled_to_global/`;
-	static intermediate_scaled_to_national = `${h3}GDP_nominal/2.scaled_to_national/`;
+	static get intermediate_scaled_to_national () {
+		return (global.GDP_pc) ? GDP_pc.intermediate_gdp_scaled_to_national : `${h3}GDP_pc/5.scaled_to_national/`;
+	}
 	
 	/**
 	 * Returns estimations of World GDP nominal per capita from DeLong's ex-Nordhaus series.

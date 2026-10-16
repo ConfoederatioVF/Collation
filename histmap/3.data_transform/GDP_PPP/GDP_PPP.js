@@ -16,9 +16,9 @@ global.GDP_PPP = class {
 	static input_delong_gdp_pc_csv = `${this.bf}delong_gdp_pc.csv`;
 	static input_gdp_ppp_national_csv = `${this.bf}gdp_ppp_national_eoscala_1.4.csv`;
 	static input_gdp_ppp_world_json = `${this.bf}gdp_ppp_world_eoscala_1.4.json5`;
-	static intermediate_normalised_to_global = `${h3}GDP_PPP/1.scaled_to_global/`;
-	static intermediate_scaled_to_national = `${h3}GDP_PPP/2.scaled_to_national/`;
-	static intermediate_scaled_to_global = `${h3}GDP_PPP/3.scaled_to_global/`;
+	static get intermediate_scaled_to_national () {
+		return (global.GDP_PPP_pc) ? GDP_PPP_pc.intermediate_gdp_scaled_to_national : `${h3}GDP_PPP_pc/5.scaled_to_national/`;
+	}
 	
 	/**
 	 * Returns estimations of World GDP PPP per capita from DeLong's ex-Nordhaus series (delong_gdp_pc.csv).

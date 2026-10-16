@@ -26,9 +26,10 @@ global.wealth_income = class {
 		}
 	}
 	
-	static async A_normaliseOLSRasters () {
-		let variables = wealth_income_WID.options.variables;
-		let years = landuse_HYDE.sorted_hyde_years;
+	static async A_normaliseOLSRasters (arg0_options) {
+		let options = (arg0_options) ? arg0_options : {};
+		let variables = (options.variables) ? options.variables : wealth_income_WID.options.variables;
+		let years = (options.years) ? options.years : landuse_HYDE.sorted_hyde_years;
 		let src_dir = wealth_income_OLS.intermediate_ols_rasters_folder;
 		
 		let dest_dir = this.intermediate_normalised_rasters;
@@ -123,9 +124,10 @@ global.wealth_income = class {
 		}
 	}
 	
-	static async B_clampOLSRasters () {
-		let variables = wealth_income_WID.options.variables;
-		let years = landuse_HYDE.sorted_hyde_years;
+	static async B_clampOLSRasters (arg0_options) {
+		let options = (arg0_options) ? arg0_options : {};
+		let variables = (options.variables) ? options.variables : wealth_income_WID.options.variables;
+		let years = (options.years) ? options.years : landuse_HYDE.sorted_hyde_years;
 		
 		let src_dir = this.intermediate_normalised_rasters;
 		let dest_dir = this.intermediate_clamped_rasters;
@@ -239,10 +241,10 @@ global.wealth_income = class {
 		}
 	}
 	
-	static async C_interpolateRasters (arg0_options = {}) {
-		let options = arg0_options;
-		let variables = wealth_income_WID.options.variables;
-		let years = landuse_HYDE.sorted_hyde_years;
+	static async C_interpolateRasters (arg0_options) {
+		let options = (arg0_options) ? arg0_options : {};
+		let variables = (options.variables) ? options.variables : wealth_income_WID.options.variables;
+		let years = (options.years) ? options.years : landuse_HYDE.sorted_hyde_years;
 		
 		let src_dir = this.intermediate_clamped_rasters;
 		let interp_domain = this.options.interpolate_to_WID_domain;
@@ -398,12 +400,12 @@ global.wealth_income = class {
 		if (!options.exclude) options.exclude = [];
 		
 		// 1. Regularise the raw OLS rasters using robust Tukey statistics
-		if (!options.exclude.includes("A")) await this.A_normaliseOLSRasters();
+		if (!options.exclude.includes("A")) await this.A_normaliseOLSRasters(options);
 		
 		// 2. Clamp rasters directly against the WID per-capita country averages
-		if (!options.exclude.includes("B")) await this.B_clampOLSRasters();
+		if (!options.exclude.includes("B")) await this.B_clampOLSRasters(options);
 		
 		// 3. Spatially interpolate pre-modern rasters to dissolve political borders smoothly
-		if (!options.exclude.includes("C")) await this.C_interpolateRasters({ overwrite: true });
+		if (!options.exclude.includes("C")) await this.C_interpolateRasters(options);
 	}
 };

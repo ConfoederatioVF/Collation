@@ -143,26 +143,212 @@ global.wealth_income_WID = class {
 		}
 	}
 	
-	static async B_generateWIDRasters () {
+	/**
+	 * Reconciles national accounts WID series by dasymetrically subtracting resolved subsets from regional
+	 * aggregates and applying anchor-year relativistic backcalculation via GDP PPP per capita.
+	 * 
+	 * @param {Object} [arg0_options]
+	 *  @param {Array<string>} [arg0_options.variables] - Target variables to reconcile.
+	 */
+	static async B_reconcileRegionalFallbacks (arg0_options) {
+		//Convert from parameters
+		let options = (arg0_options) ? arg0_options : {};
+		
+		//Initialise options
+		if (!options.variables) options.variables = this.options.variables;
+		
 		//Declare local instance variables
+		let dev_index_file = path.join(
+			(typeof root_dir !== "undefined") ? root_dir : ".",
+			"histmap/2.data_cleaning/population_Stadester/stadester_national_populations.json"
+		);
+		let geocodes_lines = fs.readFileSync(admin_modern.input_iso2_geocodes_csv, "utf8").trim().split("\n").slice(1);
+		let hyde_years = landuse_HYDE.sorted_hyde_years;
+		let iso2_to_iso3 = {};
+		let national_populations = JSON.parse(fs.readFileSync(dev_index_file, "utf8"));
+		let regional_csv = File.loadCSVAsJSON(admin_modern.input_regional_geocodes_csv, { delimiter: ";", mode: "vertical" });
+		let regions = {};
+		let sovereign_map = {
+			"CN": "CHN", "DE": "DEU", "DK": "DNK", "FR": "FRA", "GB": "GBR",
+			"LT": "LTU", "MA": "MAR", "NL": "NLD", "PL": "POL", "RU": "RUS",
+			"TZ": "TZA", "US": "USA"
+		};
+		
+		//Destructure iso2_geocodes
+		for (let i = 0; i < geocodes_lines.length; i++) {
+			let line = geocodes_lines[i];
+			let parts = line.split(";");
+			if (parts[0] && parts[1]) iso2_to_iso3[parts[0].trim()] = parts[1].trim();
+		}
+		
+		//Destructure regional aggregates
+		for (let r_key in regional_csv) {
+			let str = regional_csv[r_key]["Other Geocodes"]?.[0];
+			if (str) regions[r_key] = str.split(",").map(s => s.trim()).filter(Boolean);
+		}
+		
+		let gdp_ppp_extensive = GDP_PPP.getGDP_PPPObject();
+		
+		let getPop = (iso2, yr) => {
+			let iso3 = iso2_to_iso3[iso2];
+			if (!iso3) return 0;
+			if (Object.values(sovereign_map).includes(iso3))
+				if (sovereign_map[iso2] !== iso3) return 0;
+			return national_populations[yr]?.[iso3] || 0;
+		};
+		
+		let getGdpPc = (iso2, yr) => {
+			let iso3 = iso2_to_iso3[iso2];
+			if (!iso3) return 0;
+			let p = getPop(iso2, yr);
+			if (p === 0) return 0;
+			return (gdp_ppp_extensive[iso3]?.[yr] || 0) / p;
+		};
+		
+		for (let i = 0; i < options.variables.length; i++) {
+			let var_name = options.variables[i];
+			let file_path = `${this.input_json}${var_name}.json`;
+			if (!fs.existsSync(file_path)) continue;
+			
+			console.log(`Reconciling regional fallbacks for ${var_name}...`);
+			let var_data = JSON.parse(fs.readFileSync(file_path, "utf8"));
+			let countries = Object.keys(var_data).filter(k => k.length === 2 && !k.includes("-"));
+			
+			//1. Anchor-year identification & relativistic backcalculation for countries with empirical observations
+			for (let x = 0; x < countries.length; x++) {
+				let c = countries[x];
+				let series = var_data[c] || {};
+				let emp_years = Object.keys(series).map(Number).sort((a, b) => a - b);
+				
+				if (emp_years.length > 0) {
+					let t_anchor = emp_years[0];
+					let val_anchor = series[t_anchor];
+					let gdp_pc_anchor = getGdpPc(c, t_anchor);
+					
+					if (val_anchor > 0 && gdp_pc_anchor > 0) {
+						for (let y = 0; y < hyde_years.length; y++) {
+							let yr = hyde_years[y];
+							if (yr < t_anchor) {
+								let g_yr = getGdpPc(c, yr);
+								if (g_yr > 0) series[yr] = val_anchor * (g_yr / gdp_pc_anchor);
+							}
+						}
+					}
+					
+					let t_latest = emp_years[emp_years.length - 1];
+					let val_latest = series[t_latest];
+					let gdp_pc_latest = getGdpPc(c, t_latest);
+					
+					if (val_latest > 0 && gdp_pc_latest > 0) {
+						for (let y = 0; y < hyde_years.length; y++) {
+							let yr = hyde_years[y];
+							if (yr > t_latest) {
+								let g_yr = getGdpPc(c, yr);
+								if (g_yr > 0) series[yr] = val_latest * (g_yr / gdp_pc_latest);
+							}
+						}
+					}
+				}
+			}
+			
+			//2. Regional dasymetric reconciliation & residual re-balancing
+			for (let r_key in regions) {
+				let members = regions[r_key];
+				let reg_series = var_data[r_key] || var_data[r_key.replace("-MER", "").replace("-PPP", "")];
+				if (!reg_series) continue;
+				
+				for (let y = 0; y < hyde_years.length; y++) {
+					let yr = hyde_years[y];
+					let i_R = reg_series[yr];
+					if (i_R === undefined || i_R === null) continue;
+					
+					let P_R = 0;
+					let reg_gdp_ppp = 0;
+					let S = [];
+					let U = [];
+					
+					for (let z = 0; z < members.length; z++) {
+						let m = members[z];
+						let p = getPop(m, yr);
+						let g = getGdpPc(m, yr)*p;
+						P_R += p;
+						reg_gdp_ppp += g;
+						
+						if (var_data[m]?.[yr] !== undefined) S.push(m);
+						else U.push(m);
+					}
+					
+					let g_R = (P_R > 0) ? (reg_gdp_ppp / P_R) : 0;
+					
+					//Fill completely missing members from regional indicator scaled to country relative productivity
+					for (let z = 0; z < U.length; z++) {
+						let u = U[z];
+						if (!var_data[u]) var_data[u] = {};
+						let g_u = getGdpPc(u, yr);
+						if (g_u > 0 && g_R > 0) var_data[u][yr] = i_R * (g_u / g_R);
+					}
+					
+					//Dasymetric residual re-balancing if residual pool is positive
+					let V_R = i_R * P_R;
+					let V_S = 0;
+					for (let z = 0; z < S.length; z++) V_S += var_data[S[z]][yr] * getPop(S[z], yr);
+					let V_res = V_R - V_S;
+					
+					if (V_res > 0 && U.length > 0) {
+						let hat_V_U = 0;
+						for (let z = 0; z < U.length; z++) hat_V_U += (var_data[U[z]][yr] || 0) * getPop(U[z], yr);
+						if (hat_V_U > 0) {
+							let lambda = Math.min(Math.max(V_res / hat_V_U, 0.25), 4.0);
+							for (let z = 0; z < U.length; z++) var_data[U[z]][yr] *= lambda;
+						}
+					}
+				}
+			}
+			
+			fs.writeFileSync(file_path, JSON.stringify(var_data, null, 2));
+			console.log(`Saved reconciled dataset to ${file_path}.`);
+		}
+	}
+	
+	/**
+	 * Generates WID raster surfaces for the specified variables and years.
+	 * 
+	 * @param {Object} [arg0_options]
+	 *  @param {number} [arg0_options.concurrency=4]
+	 *  @param {boolean} [arg0_options.overwrite=true]
+	 *  @param {Array<string>} [arg0_options.variables]
+	 *  @param {Array<number>} [arg0_options.years]
+	 */
+	static async C_generateWIDRasters (arg0_options) {
+		//Convert from parameters
+		let options = (arg0_options) ? arg0_options : {};
+		
+		//Initialise options
+		if (!options.concurrency) options.concurrency = 4;
+		if (options.overwrite === undefined) options.overwrite = true;
+		if (!options.variables) options.variables = this.options.variables;
+		
+		//Declare local instance variables
+		let all_hyde_years = landuse_HYDE.sorted_hyde_years;
 		let iso2_obj = admin_modern.getWIDColourcodesObject();
 		let iso2_raster = GeoPNG.loadImage(admin_modern.input_iso2_geocodes_raster);
-		let options = this.options;
-		let years = landuse_HYDE.sorted_hyde_years;
+		let target_variables = options.variables;
+		let years = (options.years) ? options.years : landuse_HYDE.sorted_hyde_years;
 		
 		//Create folders
-		for (let i = 0; i < options.variables.length; i++) {
-			let local_folder_path = `${this.bf}${options.variables[i]}/`;
-			let local_json_obj = JSON.parse(fs.readFileSync(`${this.input_json}${options.variables[i]}.json`,  "utf8"));
+		for (let i = 0; i < target_variables.length; i++) {
+			let current_variable = target_variables[i];
+			let local_folder_path = `${this.bf}${current_variable}/`;
+			let local_json_obj = JSON.parse(fs.readFileSync(`${this.input_json}${current_variable}.json`, "utf8"));
 			
 			if (!fs.existsSync(local_folder_path))
 				fs.mkdirSync(local_folder_path, { recursive: true });
 			
-			//local_json_obj needs to be processed for years
+			//local_json_obj needs to be processed for all HYDE years via cubic spline
 			Object.iterate(local_json_obj, (local_key, local_value) => 
-				Object.cubicSplineInterpolation(local_value, { years }));
+				Object.cubicSplineInterpolation(local_value, { years: all_hyde_years }));
 			
-			//Filter years with data
+			//Filter years with data matching target_years
 			let years_with_data = [];
 			for (let x = 0; x < years.length; x++) {
 				let year = years[x];
@@ -173,12 +359,20 @@ global.wealth_income_WID = class {
 				if (has_data) years_with_data.push(year);
 			}
 			
+			if (!options.overwrite)
+				years_with_data = years_with_data.filter(y => !fs.existsSync(`${local_folder_path}${current_variable}_${y}.png`));
+			
+			if (years_with_data.length === 0) {
+				console.log(`- All rasters up to date for ${current_variable}.`);
+				continue;
+			}
+			
 			await GeoPNG.processTimeseriesParallel({
 				items: years_with_data,
-				concurrency: 4,
-				name: `wealth_income_WID B_generateWIDRasters (${options.variables[i]})`,
+				concurrency: options.concurrency,
+				name: `wealth_income_WID C_generateWIDRasters (${current_variable})`,
 				handler: async (year) => {
-					let local_output_file_path = `${local_folder_path}${options.variables[i]}_${year}.png`;
+					let local_output_file_path = `${local_folder_path}${current_variable}_${year}.png`;
 					GeoPNG.saveNumberRasterImage({
 						file_path: local_output_file_path,
 						format: "float32",
@@ -212,6 +406,10 @@ global.wealth_income_WID = class {
 		}
 	}
 	
+	static B_generateWIDRasters (arg0_options) {
+		return this.C_generateWIDRasters(arg0_options);
+	}
+	
 	static async processRasters (arg0_options) {
 		//Convert from parameters
 		let options = (arg0_options) ? arg0_options : {};
@@ -220,7 +418,8 @@ global.wealth_income_WID = class {
 		if (!options.exclude) options.exclude = [];
 		
 		//Process WID
-		if (!options.exclude.includes("A")) await this.A_cacheWIDObjects();
-		if (!options.exclude.includes("B")) await this.B_generateWIDRasters();
+		if (!options.exclude.includes("A")) await this.A_cacheWIDObjects(options);
+		if (!options.exclude.includes("B")) await this.B_reconcileRegionalFallbacks(options);
+		if (!options.exclude.includes("C")) await this.C_generateWIDRasters(options);
 	}
 };

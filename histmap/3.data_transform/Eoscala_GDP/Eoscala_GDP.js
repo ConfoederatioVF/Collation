@@ -852,11 +852,11 @@
             }
           });
           
-          //Sync to local 7.scaled_to_national if directory is present
+          //Sync to local directory if distinct from primary output
           if (this.intermediate_gdp_local_scaled_to_national) {
             let local_scaled_dir = path.resolve(this.intermediate_gdp_local_scaled_to_national);
-            if (fs.existsSync(local_scaled_dir)) {
-              let local_copy_dest = path.join(local_scaled_dir, `${this.prefix}_${year}.png`);
+            let local_copy_dest = path.join(local_scaled_dir, `${this.prefix}_${year}.png`);
+            if (fs.existsSync(local_scaled_dir) && path.resolve(local_copy_dest) !== path.resolve(local_output_total)) {
               fs.copyFileSync(local_output_total, local_copy_dest);
             }
           }
