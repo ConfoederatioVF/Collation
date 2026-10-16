@@ -364,7 +364,7 @@
           population_Stadester_rasters.getCoordsPixel(city.coords, { height: angel_png.height, width: angel_png.width }) :
           [
             Math.min(angel_png.width - 1, Math.max(0, Math.floor(((lng + 180)/360)*angel_png.width))),
-            Math.min(angel_png.height - 1, Math.max(0, Math.floor(((90 - lat)/180)*angel_png.height) - 1))
+            Math.min(angel_png.height - 1, Math.max(0, Math.floor(((90 - lat)/180)*angel_png.height)))
           ];
         let px = px_coords[0];
         let py = px_coords[1];
@@ -386,7 +386,7 @@
           population_Stadester_rasters.getCoordsPixel(city.coords, { height: clark_png.height, width: clark_png.width }) :
           [
             Math.min(clark_png.width - 1, Math.max(0, Math.floor(((lng + 180)/360)*clark_png.width))),
-            Math.min(clark_png.height - 1, Math.max(0, Math.floor(((90 - lat)/180)*clark_png.height) - 1))
+            Math.min(clark_png.height - 1, Math.max(0, Math.floor(((90 - lat)/180)*clark_png.height)))
           ];
         let px = px_coords[0];
         let py = px_coords[1];
