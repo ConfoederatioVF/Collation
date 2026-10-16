@@ -53,6 +53,7 @@ global.population_KK10LUH2 = class {
 				console.log(`- Summing LUH2 land use rasters for ${i} ..`);
 				GeoPNG.saveNumberRasterImage({
 					file_path: `${this.intermediate_luh2_rasters}LUH2_${i}.png`,
+					filterType: 4,
 					format: "float32",
 					
 					height: luh2_images[luh2_stocks[0]].height,
@@ -75,6 +76,11 @@ global.population_KK10LUH2 = class {
 						return Math.min(1, Math.max(0, local_sum));
 					}
 				});
+				
+				luh2_images = null;
+				await new Promise(resolve => setImmediate(resolve));
+				let gc_func = (typeof global !== "undefined" && global.gc) || (typeof window !== "undefined" && window.gc) || (typeof gc !== "undefined" && gc);
+				if (gc_func) gc_func();
 			} catch (e) { console.error(e); }
 	}
 	
@@ -104,6 +110,7 @@ global.population_KK10LUH2 = class {
 					console.log(`- Averaging KK10 and LUH2 for ${hyde_years[i]} ..`);
 					GeoPNG.saveNumberRasterImage({
 						file_path: output_file_path,
+						filterType: 4,
 						format: "float32",
 						
 						height: luh2_image.height,
@@ -117,18 +124,21 @@ global.population_KK10LUH2 = class {
 						}
 					});
 					
+					luh2_image = null;
+					kk10_image = null;
 					console.log(`- File written to ${output_file_path}.`);
-					continue;
-				}
-				
-				//2. If this is of only the kk10_domain; merely copy the kk10 raster to its destination
-				if (in_kk10_domain && !in_luh2_domain)
+				} else if (in_kk10_domain && !in_luh2_domain) {
+					//2. If this is of only the kk10_domain; merely copy the kk10 raster to its destination
 					fs.copyFileSync(kk10_file_path, output_file_path);
-				
-				//3. If this is of only the luh2_domain; merely copy the luh2 raster to its destination
-				if (in_luh2_domain && !in_kk10_domain)
+				} else if (in_luh2_domain && !in_kk10_domain) {
+					//3. If this is of only the luh2_domain; merely copy the luh2 raster to its destination
 					fs.copyFileSync(luh2_file_path, output_file_path);
+				}
 			}
+			
+			await new Promise(resolve => setImmediate(resolve));
+			let gc_func = (typeof global !== "undefined" && global.gc) || (typeof window !== "undefined" && window.gc) || (typeof gc !== "undefined" && gc);
+			if (gc_func) gc_func();
 		} catch (e) { console.error(e); }
 	}
 	
@@ -159,6 +169,7 @@ global.population_KK10LUH2 = class {
 				console.log(`- Computing ALCC km^2/cell for ${hyde_years[i]} ..`);
 				GeoPNG.saveNumberRasterImage({
 					file_path: output_file_path,
+					filterType: 4,
 					format: "float32",
 					height: fraction_raster.height,
 					width: fraction_raster.width,
@@ -173,7 +184,13 @@ global.population_KK10LUH2 = class {
 						return fraction_val*cell_area;
 					}
 				});
+				
+				fraction_raster = null;
 			}
+			
+			await new Promise(resolve => setImmediate(resolve));
+			let gc_func = (typeof global !== "undefined" && global.gc) || (typeof window !== "undefined" && window.gc) || (typeof gc !== "undefined" && gc);
+			if (gc_func) gc_func();
 		} catch (e) { console.error(e); }
 	}
 	
@@ -211,13 +228,15 @@ global.population_KK10LUH2 = class {
 			//Regular non-fallback handling
 			if (fs.existsSync(input_file_path)) {
 				let local_raster = GeoPNG.loadNumberRasterImage(input_file_path, { format: "float32" });
-				let raster_sum = GeoPNG.getImageSum(input_file_path, { format: "float32" });
+				let raster_sum = 0;
+				for (let x = 0; x < local_raster.data.length; x++) raster_sum += local_raster.data[x];
 				let local_world_pop = world_pop_obj[hyde_years[i]];
 				let population_per_pixel = (raster_sum > 0) ? local_world_pop/raster_sum : 0;
 				
 				console.log(`- Calibrating KK10LUH2 float32 GeoPNG for ${hyde_years[i]} ..`);
 				GeoPNG.saveNumberRasterImage({
 					file_path: output_file_path,
+					filterType: 4,
 					format: "float32",
 					height: local_raster.height,
 					width: local_raster.width,
@@ -226,7 +245,13 @@ global.population_KK10LUH2 = class {
 						return local_raster.data[arg0_index]*population_per_pixel;
 					}
 				});
+				
+				local_raster = null;
 			}
+			
+			await new Promise(resolve => setImmediate(resolve));
+			let gc_func = (typeof global !== "undefined" && global.gc) || (typeof window !== "undefined" && window.gc) || (typeof gc !== "undefined" && gc);
+			if (gc_func) gc_func();
 		}
 	}
 	
@@ -238,6 +263,8 @@ global.population_KK10LUH2 = class {
 		
 		//Iterate over all hyde_years and fetch the sum per Nelson region
 		for (let i = 0; i < hyde_years.length; i++) {
+			let hyde_file_path = `${landuse_HYDE.intermediate_rasters_scaled_to_global}popc_${hyde_years[i]}.png`;
+			let kk10_file_path = `${this.intermediate_kk10_luh2_rasters}KK10LUH2_${hyde_years[i]}.png`;
 			let local_regions_obj = {};
 			
 			Object.iterate(nelson_obj.regions, (local_key, local_value) => {
@@ -251,71 +278,82 @@ global.population_KK10LUH2 = class {
 			});
 			
 			//Fetch .HYDE_population for all regions
-			GeoPNG.operateNumberRasterImage({
-				file_path: `${landuse_HYDE.intermediate_rasters_scaled_to_global}popc_${hyde_years[i]}.png`,
-				format: "float32",
-				function: (local_index, local_value) => {
-					let local_key = [
-						nelson_png.data[local_index],
-						nelson_png.data[local_index + 1],
-						nelson_png.data[local_index + 2]
-					].join(",");
-					let local_region = local_regions_obj[local_key];
-					
-					if (local_region)
-						local_region.HYDE_population += local_value;
+			if (fs.existsSync(hyde_file_path)) {
+				let hyde_raster = GeoPNG.loadNumberRasterImage(hyde_file_path, { format: "float32" });
+				for (let x = 0; x < hyde_raster.data.length; x++) {
+					let val = hyde_raster.data[x];
+					if (val > 0) {
+						let byte_index = x*4;
+						let local_key = [
+							nelson_png.data[byte_index],
+							nelson_png.data[byte_index + 1],
+							nelson_png.data[byte_index + 2]
+						].join(",");
+						let local_region = local_regions_obj[local_key];
+						if (local_region) local_region.HYDE_population += val;
+					}
 				}
-			});
+				hyde_raster = null;
+			}
 			
-			//Fetch .KK10LUH2_population for all regions
-			GeoPNG.operateNumberRasterImage({
-				file_path: `${this.intermediate_kk10_luh2_rasters}KK10LUH2_${hyde_years[i]}.png`,
-				format: "float32",
-				function: (local_index, local_value) => {
-					let local_key = [
-						nelson_png.data[local_index],
-						nelson_png.data[local_index + 1],
-						nelson_png.data[local_index + 2]
-					].join(",");
-					let local_region = local_regions_obj[local_key];
-					
-					if (local_region)
-						local_region.KK10LUH2_population += local_value;
+			//Fetch .KK10LUH2_population for all regions and scale
+			if (fs.existsSync(kk10_file_path)) {
+				let local_input_png = GeoPNG.loadNumberRasterImage(kk10_file_path, {
+					format: "float32"
+				});
+				
+				for (let x = 0; x < local_input_png.data.length; x++) {
+					let val = local_input_png.data[x];
+					if (val > 0) {
+						let byte_index = x*4;
+						let local_key = [
+							nelson_png.data[byte_index],
+							nelson_png.data[byte_index + 1],
+							nelson_png.data[byte_index + 2]
+						].join(",");
+						let local_region = local_regions_obj[local_key];
+						if (local_region) local_region.KK10LUH2_population += val;
+					}
 				}
-			});
+				
+				//Calculate scalars
+				Object.iterate(local_regions_obj, (local_key, local_value) => {
+					local_value.scalar = Math.returnSafeNumber(local_value.HYDE_population/local_value.KK10LUH2_population, 1);
+				});
+				
+				GeoPNG.saveNumberRasterImage({
+					file_path: `${this.intermediate_kk10_luh2_regional_rasters}popc_${hyde_years[i]}.png`,
+					filterType: 4,
+					format: "float32",
+					width: 4320,
+					height: 2160,
+					function: (local_index) => {
+						let byte_index = local_index*4;
+						let local_key = [
+							nelson_png.data[byte_index],
+							nelson_png.data[byte_index + 1],
+							nelson_png.data[byte_index + 2]
+						].join(",");
+						let local_region = local_regions_obj[local_key];
+						let local_value = local_input_png.data[local_index];
+						
+						//Return statement
+						if (local_region?.scalar !== undefined)
+							return local_value*local_region.scalar;
+						return local_value;
+					}
+				});
+				
+				console.log(`- Finished scaling KK10LUH2 ${hyde_years[i]} to regional HYDE aggregates ..`);
+				local_input_png = null;
+			}
 			
-			//Calculate scalars
-			Object.iterate(local_regions_obj, (local_key, local_value) => {
-				local_value.scalar = Math.returnSafeNumber(local_value.HYDE_population/local_value.KK10LUH2_population, 1);
-			});
+			local_regions_obj = null;
 			
-			//Apply scalar to resulting raster
-			let local_input_png = GeoPNG.loadNumberRasterImage(`${this.intermediate_kk10_luh2_rasters}KK10LUH2_${hyde_years[i]}.png`, {
-				format: "float32"
-			});
-			
-			GeoPNG.saveNumberRasterImage({
-				file_path: `${this.intermediate_kk10_luh2_regional_rasters}popc_${hyde_years[i]}.png`,
-				format: "float32",
-				width: 4320,
-				height: 2160,
-				function: (local_index) => {
-					let local_key = [
-						nelson_png.data[local_index*4],
-						nelson_png.data[local_index*4 + 1],
-						nelson_png.data[local_index*4 + 2]
-					].join(",");
-					let local_region = local_regions_obj[local_key];
-					let local_value = local_input_png.data[local_index];
-					
-					//Return statement
-					if (local_region?.scalar !== undefined)
-						return local_value*local_region.scalar;
-					return local_value;
-				}
-			});
-			
-			console.log(`- Finished scaling KK10LUH2 ${hyde_years[i]} to regional HYDE aggregates ..`)
+			//Force a yield, perform GC
+			await new Promise(resolve => setImmediate(resolve));
+			let gc_func = (typeof global !== "undefined" && global.gc) || (typeof window !== "undefined" && window.gc) || (typeof gc !== "undefined" && gc);
+			if (gc_func) gc_func();
 		}
 	}
 	
@@ -379,31 +417,31 @@ global.population_KK10LUH2 = class {
 			
 			//Adjust raster image to OWID/HYDE
 			let local_input_file_path = `${this.intermediate_kk10_luh2_regional_rasters}popc_${hyde_years[i]}.png`;
-			let local_input_raster = GeoPNG.loadNumberRasterImage(local_input_file_path, {
-				format: "float32"
-			});
 			
-			console.log(`- Standardising to OWID for ${hyde_years[i]} ..`);
 			if (fs.existsSync(local_input_file_path)) {
+				console.log(`- Standardising to OWID for ${hyde_years[i]} ..`);
+				let local_input_raster = GeoPNG.loadNumberRasterImage(local_input_file_path, {
+					format: "float32"
+				});
 				let local_owid_obj = {};
 				let local_owid_scalars = {};
 				
-				//Populate local_owid_obj
-				GeoPNG.operateNumberRasterImage({
-					file_path: `${this.intermediate_kk10_luh2_regional_rasters}popc_${hyde_years[i]}.png`,
-					format: "float32",
-					function: (local_index, local_value) => {
+				//Populate local_owid_obj in a single pass without re-reading raster from disk
+				for (let x = 0; x < local_input_raster.data.length; x++) {
+					let val = local_input_raster.data[x];
+					if (val > 0) {
+						let byte_index = x*4;
 						let local_colour_key = [
-							owid_png.data[local_index],
-							owid_png.data[local_index + 1],
-							owid_png.data[local_index + 2]
+							owid_png.data[byte_index],
+							owid_png.data[byte_index + 1],
+							owid_png.data[byte_index + 2]
 						].join(",");
 						let local_region = owid_obj[local_colour_key];
 						
 						if (local_region)
-							Object.modifyValue(local_owid_obj, local_colour_key, local_value);
+							Object.modifyValue(local_owid_obj, local_colour_key, val);
 					}
-				});
+				}
 				
 				//Iterate over all_owid_regions, populate local_owid_scalars
 				Object.iterate(owid_obj, (local_key, local_value) => {
@@ -417,6 +455,7 @@ global.population_KK10LUH2 = class {
 				
 				GeoPNG.saveNumberRasterImage({
 					file_path: `${this.intermediate_kk10_luh2_regional_rasters}popc_${hyde_years[i]}.png`,
+					filterType: 4,
 					format: "float32",
 					height: 2160,
 					width: 4320,
@@ -442,17 +481,32 @@ global.population_KK10LUH2 = class {
 					}
 				});
 				
-				//Force a yield, perform GC
-				await new Promise(resolve => setImmediate(resolve));
-				if (global.gc) global.gc();
+				local_input_raster = null;
+				local_owid_obj = null;
+				local_owid_scalars = null;
 			} else {
-				console.log(` - Could not find input raster.`)
+				console.log(` - Could not find input raster.`);
 			}
+			
+			//Force a yield, perform GC
+			await new Promise(resolve => setImmediate(resolve));
+			let gc_func = (typeof global !== "undefined" && global.gc) || (typeof window !== "undefined" && window.gc) || (typeof gc !== "undefined" && gc);
+			if (gc_func) gc_func();
 		}
 	}
 	
 	//[QUARANTINE] - Duplicated code
 	static async F_scaleKK10LUH2RastersToStatista () {
+		//Ensure population_Substrata_outlier_removal dependency is loaded
+		if (typeof population_Substrata_outlier_removal === "undefined") {
+			let substrata_path = (global.h3) ? path.join(global.h3, "population_Substrata.outlier_removal/population_Substrata_outlier_removal.js") : "";
+			if (fs.existsSync(substrata_path)) require(substrata_path);
+		}
+		if (typeof population_Substrata_outlier_removal === "undefined") {
+			console.warn("[population_KK10LUH2] population_Substrata_outlier_removal not available, skipping Statista scaling.");
+			return;
+		}
+		
 		//Declare local instance variables
 		let hyde_years = landuse_HYDE.hyde_years;
 		let regions_mask = GeoPNG.loadImage(
@@ -562,6 +616,7 @@ global.population_KK10LUH2 = class {
 				//Apply regional scaling and overwrite the regional raster
 				GeoPNG.saveNumberRasterImage({
 					file_path: file_path,
+					filterType: 4,
 					format: "float32",
 					height: current_raster.height,
 					width: current_raster.width,
@@ -584,9 +639,14 @@ global.population_KK10LUH2 = class {
 					},
 				});
 				
+				current_raster = null;
+				regional_sums = null;
+				regional_scalars = null;
+				
 				//Force a yield, perform GC
 				await new Promise(resolve => setImmediate(resolve));
-				if (global.gc) global.gc();
+				let gc_func = (typeof global !== "undefined" && global.gc) || (typeof window !== "undefined" && window.gc) || (typeof gc !== "undefined" && gc);
+				if (gc_func) gc_func();
 			}
 		}
 	}
@@ -601,33 +661,30 @@ global.population_KK10LUH2 = class {
 			let local_input_file_path = `${this.intermediate_kk10_luh2_regional_rasters}popc_${hyde_years[i]}.png`;
 			let local_scalar = 1;
 			
-			if (fs.existsSync(local_input_file_path))
-				await new Promise((resolve, reject) => {
-					setImmediate(() => {
-						try {
-							let local_input_png = GeoPNG.loadNumberRasterImage(local_input_file_path, {
-								format: "float32"
-							});
-							let local_input_sum = GeoPNG.getImageSum(local_input_file_path, {
-								format: "float32"
-							});
-							local_scalar = world_pop_obj[hyde_years[i]]/local_input_sum;
-							
-							GeoPNG.saveNumberRasterImage({
-								file_path: `${this.output_kk10_luh2_global_rasters}/popc_${hyde_years[i]}.png`,
-								format: "float32",
-								width: 4320,
-								height: 2160,
-								function: (local_index) => local_input_png.data[local_index]*local_scalar
-							});
-							
-							console.log(`- ${hyde_years[i]} - Input Population: ${local_input_sum}, Scalar: ${local_scalar}`);
-							resolve();
-						} catch (err) {
-							reject(err);
-						}
-					});
+			if (fs.existsSync(local_input_file_path)) {
+				let local_input_png = GeoPNG.loadNumberRasterImage(local_input_file_path, {
+					format: "float32"
 				});
+				let local_input_sum = 0;
+				for (let x = 0; x < local_input_png.data.length; x++) local_input_sum += local_input_png.data[x];
+				local_scalar = (local_input_sum > 0) ? world_pop_obj[hyde_years[i]]/local_input_sum : 0;
+				
+				GeoPNG.saveNumberRasterImage({
+					file_path: `${this.output_kk10_luh2_global_rasters}/popc_${hyde_years[i]}.png`,
+					filterType: 4,
+					format: "float32",
+					width: 4320,
+					height: 2160,
+					function: (local_index) => local_input_png.data[local_index]*local_scalar
+				});
+				
+				console.log(`- ${hyde_years[i]} - Input Population: ${local_input_sum}, Scalar: ${local_scalar}`);
+				local_input_png = null;
+			}
+			
+			await new Promise(resolve => setImmediate(resolve));
+			let gc_func = (typeof global !== "undefined" && global.gc) || (typeof window !== "undefined" && window.gc) || (typeof gc !== "undefined" && gc);
+			if (gc_func) gc_func();
 		}
 	}
 	

@@ -574,10 +574,11 @@
 		if (!options.format) options.format = "int32";
 		
 		//Declare local instance variables
+		let filter_type = (options.filterType !== undefined) ? options.filterType : -1;
 		let png = new pngjs.PNG({
 			height: options.height,
 			width: options.width,
-			filterType: -1
+			filterType: filter_type
 		});
 		
 		//Iterate over options.height; options.width
@@ -593,13 +594,15 @@
 		if (!fs.existsSync(parent_dir)) fs.mkdirSync(parent_dir, { recursive: true });
 		
 		//Write PNG file
-		fs.writeFileSync(options.file_path, pngjs.PNG.sync.write(png));
+		let output_buffer = pngjs.PNG.sync.write(png, { filterType: filter_type });
+		fs.writeFileSync(options.file_path, output_buffer);
+		output_buffer = null;
 		
 		//Return statement
 		return {
 			width: options.width,
 			height: options.height,
-			data: png.data
+			data: (options.return_data !== false) ? png.data : undefined
 		};
 	};
 	

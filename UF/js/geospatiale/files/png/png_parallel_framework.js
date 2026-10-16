@@ -89,9 +89,10 @@
 		if (!options.format) options.format = "int32";
 		
 		//Declare local instance variables
+		let filter_type = (options.filterType !== undefined) ? options.filterType : -1;
 		let height = options.height;
 		let png = new pngjs.PNG({
-			filterType: -1,
+			filterType: filter_type,
 			height: height,
 			width: options.width
 		});
@@ -119,12 +120,13 @@
 		}
 		
 		//Pack and write asynchronously
-		let output_buffer = pngjs.PNG.sync.write(png);
+		let output_buffer = pngjs.PNG.sync.write(png, { filterType: filter_type });
 		await fs.promises.writeFile(options.file_path, output_buffer);
+		output_buffer = null;
 		
 		//Return statement
 		return {
-			data: png.data,
+			data: (options.return_data !== false) ? png.data : undefined,
 			height: height,
 			width: width
 		};
