@@ -405,6 +405,13 @@
       let watershed_spds;
       let wmobb_meta = JSON.parse(fs.readFileSync(this.input_wmobb_meta, "utf8"));
       let wmobb_raster = GeoPNG.loadNumberRasterImage(this.input_wmobb_raster, { format: "int32" });
+      let world_targets;
+
+      if (!global.population_Global && typeof h2 !== "undefined") {
+        let pop_global_file = path.join(h2, "population_Global/population_Global.js");
+        if (fs.existsSync(pop_global_file)) require(pop_global_file);
+      }
+      world_targets = (global.population_Global) ? population_Global.A_getWorldPopulationObject() : {};
 
       if (fs.existsSync(path.join(this.config_folder, "watershed_spds.json"))) {
         watershed_spds = JSON.parse(fs.readFileSync(path.join(this.config_folder, "watershed_spds.json"), "utf8"));
@@ -419,14 +426,9 @@
       console.log("- Aggregating global demographic envelopes from Stadestér population ...");
       for (let y = 0; y < target_years.length; y++) {
         let yr = target_years[y];
-        global_targets[yr] = 0;
         let sta_path = path.join(this.input_stadester_population_folder, `stadester_population_${yr}.png`);
-        if (fs.existsSync(sta_path)) {
-          global_targets[yr] = GeoPNG.getImageSum(sta_path, { format: "float32" });
-        } else {
-          let default_targets = { "0": 222991707, "-1000": 67854467, "-2000": 36543055, "-3000": 26200596, "-4000": 13686249, "-5000": 9312752, "-6000": 12409674, "-7000": 10555264, "-8000": 4827447, "-9000": 4000000, "-10000": 3295098 };
-          global_targets[yr] = default_targets[yr] || 10000000;
-        }
+        global_targets[yr] = (fs.existsSync(sta_path)) ?
+          GeoPNG.getImageSum(sta_path, { format: "float32" }) : (world_targets[yr] || 0);
       }
 
       //Step 2: Pre-index empirical historical population baselines per watershed

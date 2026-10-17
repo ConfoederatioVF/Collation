@@ -5,6 +5,8 @@ global.fs = fs;
 global.path = path;
 global.pngjs = require("pngjs");
 global.mathjs = require("mathjs");
+global.cubic_spline = require("cubic-spline");
+global.JSON5 = require("json5");
 let root_dir = path.resolve(".");
 
 let loadDirectory = function (rel_dir) {
@@ -36,6 +38,7 @@ global.h5 = path.join(root_dir, "histmap/5.data_visualisation/");
 
 require(path.join(h2, "metadata_HYDE/metadata_HYDE.js"));
 require(path.join(h2, "landuse_HYDE/landuse_HYDE.js"));
+require(path.join(h2, "population_Global/population_Global.js"));
 require(path.join(h2, "population_Stadester/population_Stadester.js"));
 require(path.join(h2, "population_c14bazAAR/population_c14bazAAR.js"));
 

@@ -1,6 +1,8 @@
 //Initialise functions
 {
 	if (!global.population_Global) global.population_Global = {};
+	if (!global.JSON5) try { global.JSON5 = require("json5"); } catch (e) {}
+	if (!global.cubic_spline) try { global.cubic_spline = require("cubic-spline"); } catch (e) {}
 	
 	global.population_Global = class {
 		static input_global_population_json = `${h1}/population_Global/global_population_estimates.json5`;
