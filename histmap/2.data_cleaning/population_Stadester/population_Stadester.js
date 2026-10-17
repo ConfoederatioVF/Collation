@@ -2,6 +2,20 @@
 {
   if (!global.population_Stadester) global.population_Stadester = {};
   
+  if (typeof require !== "undefined") {
+    let cur_dir = (typeof __dirname !== "undefined") ? __dirname : path.resolve(`${global.h2 || "./histmap/2.data_cleaning/"}/population_Stadester/`);
+    try {
+      if (!global.population_Stadester_uud && fs.existsSync(path.join(cur_dir, "stadester_uud.js")))
+        require(path.join(cur_dir, "stadester_uud.js"));
+      if (!global.population_Stadester_density && fs.existsSync(path.join(cur_dir, "stadester_density.js")))
+        require(path.join(cur_dir, "stadester_density.js"));
+      if (!global.population_Stadester_rasters && fs.existsSync(path.join(cur_dir, "stadester_rasters.js")))
+        require(path.join(cur_dir, "stadester_rasters.js"));
+    } catch (e) {
+      console.warn(`[population_Stadester] Failed to load companion modules:`, e);
+    }
+  }
+  
   /**
    * Main class interface for the Stadestér Historical GIS City & Raster Demographics pipeline.
    * Synthetically merges Populstat, Chandler-Modelski, DeVries, and Buringh sources into UUD,
