@@ -17,6 +17,12 @@
     static raw_folder = `${h1}/population_c14bazAAR/`;
     static config_folder = `${this.bf}config/`;
 
+    static input_archaeoglobe_csv = `${h1}/landuse_ArchaeoGLOBE/ARCHAEOGLOBE_CONSENSUS_ASSESSMENT.csv`;
+    static input_archaeoglobe_folder = `${h1}/landuse_ArchaeoGLOBE/`;
+    static input_archaeoglobe_meta = `${this.config_folder}archaeoglobe_metadata.json`;
+    static input_archaeoglobe_watershed_fractions = `${this.config_folder}archaeoglobe_watershed_fractions.json`;
+    static input_archaeoglobe_watershed_indicators = `${this.config_folder}archaeoglobe_watershed_indicators.json`;
+    static input_archaeoglobe_watershed_map = `${this.config_folder}archaeoglobe_watershed_map.json`;
     static input_c14_csv = `${this.raw_folder}c14_cleaned_dedup.csv`;
     static input_c14_summary = `${this.config_folder}c14_dates_summary.json`;
     static input_hyde_landuse_folder = `${h2}/landuse_HYDE/rasters/`;
@@ -25,7 +31,10 @@
     static input_intcal_json = `${this.config_folder}intcal20.json`;
     static input_kk10luh2_global_folder = `${h2}/population_KK10LUH2/rasters_KK10LUH2_2._global_scaling/`;
     static input_land_area_raster = `${h1}/metadata_HYDE/general_rasters/land_area.png`;
+    static input_outlier_rasters = `${h3}/population_Substrata.outlier_removal/rasters_outliers/`;
     static input_shcal_json = `${this.config_folder}shcal20.json`;
+
+    static input_stadester_population_folder = `${h2}/population_Stadester/stadester_population_rasters/`;
     static input_stadester_urban_folder = `${h2}/population_Stadester/stadester_urban_rasters/`;
     static input_wmobb_meta = `${this.config_folder}wmobb_metadata.json`;
     static input_wmobb_raster = `${this.config_folder}wmobb_raster.png`;
@@ -81,36 +90,33 @@
       let options = (arg0_options) ? arg0_options : {};
 
       //Declare local instance variables
+      let all_basin_keys;
+      let buildCurveLookup = function (curve_data) {
+        let lookup = {};
+        for (let i = 0; i < curve_data.cal_bp.length; i++)
+          lookup[Math.round(curve_data.cal_bp[i])] = { age: curve_data.c14_age[i], sigma: curve_data.sigma[i] };
+        return lookup;
+      };
       let cal_curve = JSON.parse(fs.readFileSync(this.input_intcal_json, "utf8"));
       let c14_raw_content = fs.readFileSync(this.input_c14_csv, "utf8");
+      let header, idx_age, idx_lat, idx_std, idx_wmobb;
+      let intcal_lookup;
       let lines = c14_raw_content.split("\n");
       let out_spds_path = path.join(this.config_folder, "watershed_spds.json");
+      let processed_count = 0;
       let shcal_curve = JSON.parse(fs.readFileSync(this.input_shcal_json, "utf8"));
+      let shcal_lookup;
       let target_years = this.target_years;
       let watershed_spds = {};
+      let wmobb_meta = JSON.parse(fs.readFileSync(this.input_wmobb_meta, "utf8"));
 
       if (!fs.existsSync(this.intermediate_spds_folder))
         fs.mkdirSync(this.intermediate_spds_folder, { recursive: true });
 
-      //Pre-index calibration curves for fast lookup
-      let buildCurveLookup = function (curve_data) {
-        let lookup = {};
-        for (let i = 0; i < curve_data.cal_bp.length; i++) {
-          let cbp = Math.round(curve_data.cal_bp[i]);
-          lookup[cbp] = {
-            age: curve_data.c14_age[i],
-            sigma: curve_data.sigma[i]
-          };
-        }
-        return lookup;
-      };
+      intcal_lookup = buildCurveLookup(cal_curve);
+      shcal_lookup = buildCurveLookup(shcal_curve);
+      all_basin_keys = Object.keys(wmobb_meta);
 
-      let intcal_lookup = buildCurveLookup(cal_curve);
-      let shcal_lookup = buildCurveLookup(shcal_curve);
-
-      //Initialise storage for each of the 516 potential basins
-      let wmobb_meta = JSON.parse(fs.readFileSync(this.input_wmobb_meta, "utf8"));
-      let all_basin_keys = Object.keys(wmobb_meta);
       for (let i = 0; i < all_basin_keys.length; i++) {
         let b_key = all_basin_keys[i];
         watershed_spds[b_key] = {};
@@ -120,51 +126,31 @@
 
       console.log(`- Calibrating radiocarbon determinations across ${lines.length - 1} records ...`);
 
-      //Iterate over dates and compute probability densities
-      let header = lines[0].split(",").map(c => c.trim());
-      let idx_age = header.indexOf("c14age");
-      let idx_lat = header.indexOf("lat");
-      let idx_std = header.indexOf("c14std");
-      let idx_wmobb = header.indexOf("wmobb");
+      header = lines[0].split(",").map(c => c.trim());
+      idx_age = header.indexOf("c14age");
+      idx_lat = header.indexOf("lat");
+      idx_std = header.indexOf("c14std");
+      idx_wmobb = header.indexOf("wmobb");
 
-      let processed_count = 0;
       for (let i = 1; i < lines.length; i++) {
         let line = lines[i].trim();
         if (!line) continue;
-
         let parts = line.split(",");
-        let age = parseInt(parts[idx_age]);
-        let err = parseInt(parts[idx_std]);
-        let lat = parseFloat(parts[idx_lat]);
-        let wmobb = parts[idx_wmobb];
-
+        let age = parseInt(parts[idx_age]), err = parseInt(parts[idx_std]), lat = parseFloat(parts[idx_lat]), wmobb = parts[idx_wmobb];
         if (isNaN(age) || isNaN(err) || !watershed_spds[wmobb]) continue;
-
         let curve_map = (lat < 0) ? shcal_lookup : intcal_lookup;
 
-        //Evaluate probability density for each target year
         for (let y = 0; y < target_years.length; y++) {
           let yr = target_years[y];
-          let cal_bp = 1950 - yr; // Convert calendar year to cal BP
-          let pt = curve_map[cal_bp];
-          if (!pt) {
-            let nearest = Math.round(cal_bp / 5) * 5;
-            pt = curve_map[nearest] || { age: cal_bp, sigma: 15 };
-          }
-
+          let cal_bp = 1950 - yr;
+          let pt = curve_map[cal_bp] || curve_map[Math.round(cal_bp / 5) * 5] || { age: cal_bp, sigma: 15 };
           let total_var = Math.max(1, (err*err) + (pt.sigma*pt.sigma));
           let diff = age - pt.age;
-          
-          //Truncate Gaussian tail beyond 4 sigma to eliminate float underflow artefacts
-          if (diff*diff > 16*total_var) continue;
-          
-          let prob = Math.exp(-(diff*diff) / (2*total_var)) / Math.sqrt(2*Math.PI*total_var);
-
-          //Taphonomic survival correction: power-law scaling
-          let taph_correction = Math.pow(cal_bp + 500, 1.15) / 1000.0;
-          let corrected_prob = prob * taph_correction;
-
-          watershed_spds[wmobb][yr] += corrected_prob;
+          if (diff*diff <= 16*total_var) {
+            let prob = Math.exp(-(diff*diff) / (2*total_var)) / Math.sqrt(2*Math.PI*total_var);
+            let taph_correction = Math.pow(cal_bp + 500, 1.15) / 1000.0;
+            watershed_spds[wmobb][yr] += prob * taph_correction;
+          }
         }
         processed_count++;
       }
@@ -178,7 +164,46 @@
 
 
     /**
+     * Identifies watersheds that intersect the glaciated outlier masks in population_Substrata.outlier_removal/rasters_outliers/.
+     * @param {Object} [arg0_options]
+     *
+     * @returns {Set<string>} Set of watershed IDs subject to targeted glaciation correction.
+     */
+    static _getGlaciatedOutlierBasins (arg0_options) {
+      //Convert from parameters
+      let options = (arg0_options) ? arg0_options : {};
+
+      //Declare local instance variables
+      let glaciated_basins = new Set();
+      let mask_dir = this.input_outlier_rasters;
+      let mask_names = ["stpetersburgrussia_-10000_1700.png", "russia_-10000_1400.png"];
+      let wmobb_raster = GeoPNG.loadNumberRasterImage(this.input_wmobb_raster, { format: "int32" });
+
+      for (let i = 0; i < mask_names.length; i++) {
+        let mask_path = path.join(mask_dir, mask_names[i]);
+        if (fs.existsSync(mask_path)) {
+          let mask_img = GeoPNG.loadImage(mask_path);
+          for (let p = 0; p < mask_img.width * mask_img.height; p++) {
+            let r = mask_img.data[p * 4];
+            let g = mask_img.data[p * 4 + 1];
+            let b = mask_img.data[p * 4 + 2];
+            let a = mask_img.data[p * 4 + 3];
+            if (r === 0 && g === 0 && b === 0 && a === 255) {
+              let b_id = wmobb_raster.data[p];
+              if (b_id > 0) glaciated_basins.add(String(b_id));
+            }
+          }
+        }
+      }
+
+      //Return statement
+      return glaciated_basins;
+    }
+
+
+    /**
      * Inpaints buffered modern urban mask pixels via inverse-distance weighted boundary interpolation,
+
      * enforcing continuous spatial topology and eliminating discordant step-stamping.
      * @param {Float32Array} [arg0_raster_data] Global float32 raster buffer.
      * @param {Uint8Array} [arg1_urban_mask] Binary mask of modern urban pixels.
@@ -247,31 +272,24 @@
         } else {
           let wide_den = 0;
           let wide_num = 0;
-          let wide_radius = radius * 2;
-          for (let ry = -wide_radius; ry <= wide_radius; ry++) {
-            let ny = y + ry;
-            if (ny >= 0 && ny < height) {
-              for (let rx = -wide_radius; rx <= wide_radius; rx++) {
-                let nx = (x + rx + width) % width;
-                let n_idx = ny * width + nx;
-                if (urban_mask[n_idx] === 0) {
-                  let d2 = rx * rx + ry * ry;
-                  let w = 1.0 / Math.max(1, d2);
-                  wide_num += w * raster_data[n_idx];
-                  wide_den += w;
-                }
+          let wide_r = radius * 2;
+          for (let ry = -wide_r; ry <= wide_r; ry++)
+            for (let rx = -wide_r; rx <= wide_r; rx++) {
+              let ny = y + ry;
+              let nx = (x + rx + width) % width;
+              if (ny >= 0 && ny < height && urban_mask[ny * width + nx] === 0) {
+                let w = 1.0 / Math.max(1, rx * rx + ry * ry);
+                wide_num += w * raster_data[ny * width + nx];
+                wide_den += w;
               }
             }
-          }
           temp_data[p] = (wide_den > 0) ? (wide_num / wide_den) : 0;
         }
       }
 
       //Copy inpainted values back into raster_data
-      for (let i = 0; i < masked_indices.length; i++) {
-        let p = masked_indices[i];
-        raster_data[p] = temp_data[p];
-      }
+      for (let i = 0; i < masked_indices.length; i++)
+        raster_data[masked_indices[i]] = temp_data[masked_indices[i]];
 
       //Return statement
       return raster_data;
@@ -295,17 +313,11 @@
 
       //Declare local instance variables
       let d = [];
-      let h;
-      let h00;
-      let h01;
-      let h10;
-      let h11;
+      let h, h00, h01, h10, h11;
       let i = 0;
       let m = [];
       let n = x_pts.length;
-      let t;
-      let t2;
-      let t3;
+      let t, t2, t3;
 
       //Guard clauses
       if (n === 0) return 0;
@@ -321,13 +333,8 @@
       m = new Array(n);
       m[0] = d[0];
       m[n - 1] = d[n - 2];
-      for (let k = 1; k < n - 1; k++) {
-        if (d[k - 1] * d[k] <= 0) {
-          m[k] = 0;
-        } else {
-          m[k] = 2.0 / (1.0 / d[k - 1] + 1.0 / d[k]);
-        }
-      }
+      for (let k = 1; k < n - 1; k++)
+        m[k] = (d[k - 1] * d[k] <= 0) ? 0 : 2.0 / (1.0 / d[k - 1] + 1.0 / d[k]);
 
       //Step 3: Fritsch-Carlson condition to preserve monotonicity
       for (let k = 0; k < n - 1; k++) {
@@ -354,7 +361,6 @@
       t = (x_eval - x_pts[i]) / h;
       t2 = t * t;
       t3 = t2 * t;
-
       h00 = 2.0 * t3 - 3.0 * t2 + 1.0;
       h10 = t3 - 2.0 * t2 + t;
       h01 = -2.0 * t3 + 3.0 * t2;
@@ -366,8 +372,8 @@
 
 
     /**
-     * Anchors watershed trajectories and applies smooth monotonic spline interpolation to the -10000 BC intercept
-     * for watersheds with late-antiquity radiocarbon signals but absent Paleolithic dates.
+     * Calibrates radiocarbon SPD intensity against fractionally binned ArchaeoGLOBE carrying-capacity priors,
+     * reconciling local demographic trajectories with global demographic envelopes across all antiquity time slices.
      * @param {Object} [arg0_options]
      *
      * @returns {Object} Map of watershed ID to final antiquity population trajectories.
@@ -377,14 +383,21 @@
       let options = (arg0_options) ? arg0_options : {};
 
       //Declare local instance variables
+      let ag_indicators = (fs.existsSync(this.input_archaeoglobe_watershed_indicators)) ?
+        JSON.parse(fs.readFileSync(this.input_archaeoglobe_watershed_indicators, "utf8")) : {};
+      let ag_pts_x = [-10000, -8000, -6000, -4000, -2000, -1000, 0];
       let all_basins;
+      let basin_hyde_0 = {};
+      let basin_hyde_series = {};
+      let basin_stadester_0 = {};
       let c14_summary = JSON.parse(fs.readFileSync(this.input_c14_summary, "utf8"));
       let date_counts;
+      let glaciated_basins = this._getGlaciatedOutlierBasins(options);
       let global_targets = {};
       let out_pops_path = path.join(this.config_folder, "watershed_populations.json");
+      let stadester_0_path = path.join(this.input_stadester_population_folder, "stadester_population_0.png");
+      let stadester_0_raster;
       let target_years = this.target_years;
-      let total_spds = {};
-      let watershed_hyde_totals = {};
       let watershed_pops = {};
       let watershed_spds;
       let wmobb_meta = JSON.parse(fs.readFileSync(this.input_wmobb_meta, "utf8"));
@@ -399,116 +412,128 @@
       all_basins = Object.keys(wmobb_meta);
       date_counts = c14_summary.basin_counts || {};
 
-      //Initialise watershed population storage
-      for (let i = 0; i < all_basins.length; i++) {
-        let b = all_basins[i];
-        watershed_hyde_totals[b] = {};
-        watershed_pops[b] = {};
-        for (let y = 0; y < target_years.length; y++) {
-          watershed_hyde_totals[b][target_years[y]] = 0;
-          watershed_pops[b][target_years[y]] = 0;
-        }
-      }
-
-      //Step 1: Compute HYDE 3.5 population totals for each watershed across all target years
-      console.log("- Aggregating HYDE 3.5 baseline populations per watershed ...");
+      //Step 1: Compute global population target envelopes for each target year
+      console.log("- Aggregating global demographic envelopes from Stadestér population ...");
       for (let y = 0; y < target_years.length; y++) {
         let yr = target_years[y];
         global_targets[yr] = 0;
-        let hyde_path = path.join(this.input_hyde_popc_folder, `popc_${yr}.png`);
-        if (!fs.existsSync(hyde_path)) continue;
-
-        let hyde_raster = GeoPNG.loadNumberRasterImage(hyde_path, { format: "float32" });
-        for (let p = 0; p < hyde_raster.data.length; p++) {
-          let b_id = String(wmobb_raster.data[p]);
-          let val = hyde_raster.data[p];
-          if (val > 0 && watershed_hyde_totals[b_id]) {
-            watershed_hyde_totals[b_id][yr] += val;
-            global_targets[yr] += val;
-          }
+        let sta_path = path.join(this.input_stadester_population_folder, `stadester_population_${yr}.png`);
+        if (fs.existsSync(sta_path)) {
+          global_targets[yr] = GeoPNG.getImageSum(sta_path, { format: "float32" });
+        } else {
+          let default_targets = {
+            "0": 222991707, "-1000": 67854467, "-2000": 36543055, "-3000": 26200596,
+            "-4000": 13686249, "-5000": 9312752, "-6000": 12409674, "-7000": 10555264,
+            "-8000": 4827447, "-9000": 4000000, "-10000": 3295098
+          };
+          global_targets[yr] = default_targets[yr] || 10000000;
         }
       }
 
-      //Step 2: Aggregate global SPD per year
+      //Step 2: Pre-index empirical historical population baselines per watershed
+      console.log("- Pre-indexing empirical historical population baselines per watershed ...");
       for (let y = 0; y < target_years.length; y++) {
         let yr = target_years[y];
-        total_spds[yr] = 0;
-        for (let i = 0; i < all_basins.length; i++) {
-          let b = all_basins[i];
-          total_spds[yr] += (watershed_spds[b] ? (watershed_spds[b][yr] || 0) : 0);
+        basin_hyde_series[yr] = {};
+        let hyde_path = path.join(this.input_hyde_popc_folder, `popc_${yr}.png`);
+        if (fs.existsSync(hyde_path)) {
+          let hyde_raster = GeoPNG.loadNumberRasterImage(hyde_path, { format: "float32" });
+          for (let p = 0; p < hyde_raster.data.length; p++) {
+            let b = wmobb_raster.data[p];
+            if (b > 0)
+              basin_hyde_series[yr][b] = (basin_hyde_series[yr][b] || 0) + (hyde_raster.data[p] || 0);
+          }
+          hyde_raster = null;
         }
       }
+      basin_hyde_0 = basin_hyde_series[0] || {};
 
-      //Step 3: Trajectory anchoring and monotonic spline interpolation to -10000 BC intercept
-      console.log("- Interpolating watershed demographic trajectories over monotonic splines to intercept ...");
+      if (fs.existsSync(stadester_0_path)) {
+        stadester_0_raster = GeoPNG.loadNumberRasterImage(stadester_0_path, { format: "float32" });
+        for (let p = 0; p < stadester_0_raster.data.length; p++) {
+          let b = wmobb_raster.data[p];
+          if (b > 0)
+            basin_stadester_0[b] = (basin_stadester_0[b] || 0) + (stadester_0_raster.data[p] || 0);
+        }
+        stadester_0_raster = null;
+      }
+
+      //Step 3: Backcalculate antiquity watershed trajectories via ArchaeoGLOBE priors and radiocarbon dynamics
+      console.log("- Backcalculating antiquity watershed trajectories via ArchaeoGLOBE priors and radiocarbon dynamics ...");
       for (let i = 0; i < all_basins.length; i++) {
         let b = all_basins[i];
-        let n_dates = date_counts[b] || 0;
+        let h0_val = basin_hyde_0[b] || 0;
+        let inds = (ag_indicators[b]) ? ag_indicators[b].epochs : null;
+        let is_glaciated = glaciated_basins.has(String(b));
+        let n = date_counts[b] || 0;
         let s = watershed_spds[b] || {};
+        let s0_val = basin_stadester_0[b] || 0;
 
-        let active_years = [];
+        //Anchor targeted glaciated outlier mask basins to empirical baseline, preserving Stadestér elsewhere
+        let anchor_0 = is_glaciated ? (h0_val || s0_val) : (s0_val || h0_val);
+
+        //1. Evaluate monotonic Hermite spline over fractionally binned ArchaeoGLOBE relative carrying capacity
+        let ag_pts_y = ag_pts_x.map(function (yr) {
+          if (inds && inds[yr] && inds[yr].rel_capacity !== undefined)
+            return inds[yr].rel_capacity;
+          return (yr === 0) ? 1.0 : 0.04;
+        });
+
+        let ag_interp = {};
         for (let y = 0; y < target_years.length; y++) {
           let yr = target_years[y];
-          if ((s[yr] || 0) >= 0.005) active_years.push(yr);
+          ag_interp[yr] = this._interpolateMonotonicSpline(ag_pts_x, ag_pts_y, yr);
         }
 
-        if (active_years.length >= 1 && n_dates >= 10) {
-          let known_pts = {};
+        //2. Prehistoric radiocarbon SPD moderation (relative to prehistoric mean, never dividing by 1 AD)
+        let pre_s_vals = [];
+        for (let y = 0; y < target_years.length; y++) {
+          let yr = target_years[y];
+          if (yr < 0 && s[yr] !== undefined && s[yr] > 0)
+            pre_s_vals.push(s[yr]);
+        }
+        let s_mean = (pre_s_vals.length > 0) ? (pre_s_vals.reduce((a, c) => a + c, 0) / pre_s_vals.length) : 0;
+        let w = Math.min(0.50, n / (n + 100.0));
 
-          //For active radiocarbon epochs, compute population from relative SPD share blended with HYDE
-          for (let k = 0; k < active_years.length; k++) {
-            let yr = active_years[k];
-            let spd_share = (total_spds[yr] > 0) ? ((s[yr] || 0) / total_spds[yr]) : 0;
-            let c14_pop = global_targets[yr] * spd_share;
-            let hyde_pop = watershed_hyde_totals[b][yr] || 0;
-            let weight = Math.min(0.85, n_dates / (n_dates + 30.0));
-            known_pts[yr] = weight * c14_pop + (1.0 - weight) * hyde_pop;
+        watershed_pops[b] = {};
+        watershed_pops[b][0] = anchor_0;
+
+        for (let y = 0; y < target_years.length; y++) {
+          let yr = target_years[y];
+          if (yr === 0) continue;
+
+          let mod_factor = 1.0;
+          let r_ag = ag_interp[yr];
+          let r_h = (h0_val > 0) ? ((basin_hyde_series[yr][b] || 0) / h0_val) : 0.04;
+          let r_base = is_glaciated ? r_h : r_ag;
+          let s_yr = s[yr] || 0;
+
+          if (n >= 10 && s_mean > 0) {
+            let rel_diff = (s_yr - s_mean) / (s_mean + 0.01);
+            let clamped_diff = Math.max(-0.60, Math.min(1.50, rel_diff));
+            mod_factor = 1.0 + w * clamped_diff;
           }
 
-          //Baseline intercept at -10000 BC
-          if (!known_pts[-10000])
-            known_pts[-10000] = Math.max(1, watershed_hyde_totals[b][-10000] || 1);
-
-          //Anchor at 0 AD
-          if (!known_pts[0])
-            known_pts[0] = Math.max(1, watershed_hyde_totals[b][0] || 1);
-
-          let x_pts = Object.keys(known_pts).map(Number).sort(function (a, b) { return a - b; });
-          let y_pts = [];
-          for (let k = 0; k < x_pts.length; k++) y_pts.push(known_pts[x_pts[k]]);
-
-          //Interpolate over monotonic spline to fill missing epochs down to the intercept
-          for (let y = 0; y < target_years.length; y++) {
-            let yr = target_years[y];
-            watershed_pops[b][yr] = this._interpolateMonotonicSpline(x_pts, y_pts, yr);
-          }
-        } else {
-          //Pure fallback to HYDE 3.5 (ArchaeoGLOBE)
-          for (let y = 0; y < target_years.length; y++) {
-            let yr = target_years[y];
-            watershed_pops[b][yr] = watershed_hyde_totals[b][yr] || 0;
-          }
+          let trajectory_ratio = Math.max(0.005, r_base * mod_factor);
+          watershed_pops[b][yr] = anchor_0 * trajectory_ratio;
         }
       }
+
+
 
       //Step 4: Reconcile watershed trajectories with global demographic envelopes
       console.log("- Reconciling watershed trajectories with global demographic envelopes ...");
       for (let y = 0; y < target_years.length; y++) {
         let yr = target_years[y];
-        let target = global_targets[yr] || 0;
-        let unscaled_sum = 0;
+        let sum_pop = 0;
+        for (let i = 0; i < all_basins.length; i++)
+          sum_pop += (watershed_pops[all_basins[i]][yr] || 0);
 
+        let target = global_targets[yr] || 0;
+        let scalar = (sum_pop > 0 && target > 0) ? (target / sum_pop) : 1;
         for (let i = 0; i < all_basins.length; i++) {
           let b = all_basins[i];
-          unscaled_sum += watershed_pops[b][yr] || 0;
-        }
-
-        if (unscaled_sum > 0 && target > 0) {
-          let scalar = target / unscaled_sum;
-          for (let i = 0; i < all_basins.length; i++) {
-            let b = all_basins[i];
-            watershed_pops[b][yr] = watershed_pops[b][yr] * scalar;
-          }
+          watershed_pops[b][yr] *= scalar;
         }
       }
 
@@ -534,7 +559,8 @@
 
       //Declare local instance variables
       let all_models = {};
-      let keys = ["crop", "graz", "conv", "hyde_pop"];
+      let glaciated_basins = this._getGlaciatedOutlierBasins(options);
+      let keys = ["crop", "graz", "conv", "stadester_pop"];
       let land_area_raster = GeoPNG.loadNumberRasterImage(this.input_land_area_raster, { format: "int32" });
       let model_path = path.join(this.config_folder, "c14_wls_disaggregation_models.json");
       let rural_targets;
@@ -565,25 +591,16 @@
 
       //Generate 1-pixel buffered modern urban mask (HYDE 2023 uopp > 10 km²)
       console.log("- Constructing 1px-buffered modern urban mask from HYDE 2023 uopp ...");
-      if (uopp_raster) {
-        for (let y = 0; y < 2160; y++) {
-          let row_offset = y * 4320;
-          for (let x = 0; x < 4320; x++) {
-            if (uopp_raster.data[row_offset + x] > 10.0) {
+      if (uopp_raster)
+        for (let y = 0; y < 2160; y++)
+          for (let x = 0; x < 4320; x++)
+            if (uopp_raster.data[y * 4320 + x] > 10.0)
               for (let dy = -1; dy <= 1; dy++) {
                 let ny = y + dy;
-                if (ny >= 0 && ny < 2160) {
-                  let nrow_offset = ny * 4320;
-                  for (let dx = -1; dx <= 1; dx++) {
-                    let nx = (x + dx + 4320) % 4320;
-                    urban_mask[nrow_offset + nx] = 1;
-                  }
-                }
+                if (ny >= 0 && ny < 2160)
+                  for (let dx = -1; dx <= 1; dx++)
+                    urban_mask[ny * 4320 + ((x + dx + 4320) % 4320)] = 1;
               }
-            }
-          }
-        }
-      }
 
       console.log("- Fitting Weighted Least Squares (WLS) disaggregation over HYDE land use covariates ...");
 
@@ -595,32 +612,39 @@
         let cr_path = path.join(this.input_hyde_landuse_folder, `cropland${yr_name}_number.png`);
         let gr_path = path.join(this.input_hyde_landuse_folder, `grazing${yr_name}_number.png`);
         let cv_path = path.join(this.input_hyde_landuse_folder, `conv_rangeland${yr_name}_number.png`);
-        let pop_path = path.join(this.input_hyde_landuse_folder, `popc_${yr_name}_number.png`);
+        let pop_path = path.join(this.input_stadester_population_folder, `stadester_population_${yr}.png`);
+        let urb_path = path.join(this.input_stadester_urban_folder, `stadester_urban_${yr}.png`);
 
         let cr = (fs.existsSync(cr_path)) ? GeoPNG.loadNumberRasterImage(cr_path, { format: "float32" }) : null;
         let gr = (fs.existsSync(gr_path)) ? GeoPNG.loadNumberRasterImage(gr_path, { format: "float32" }) : null;
         let cv = (fs.existsSync(cv_path)) ? GeoPNG.loadNumberRasterImage(cv_path, { format: "float32" }) : null;
         let pop = (fs.existsSync(pop_path)) ? GeoPNG.loadNumberRasterImage(pop_path, { format: "float32" }) : null;
+        let urb = (fs.existsSync(urb_path)) ? GeoPNG.loadNumberRasterImage(urb_path, { format: "float32" }) : null;
 
         //Inpaint modern urban sprawl pixels via boundary-constrained harmonic interpolation
         if (pop)
           this._inpaintModernUrbanMask(pop.data, urban_mask, { radius: 3 });
 
-        //Step 1: Aggregate basin-level sums of HYDE land use covariates
+        //Step 1: Aggregate basin-level sums of HYDE land use covariates and Stadestér rural population
         let basin_stats = {};
         for (let p = 0; p < total_pixels; p++) {
           let b = wmobb_raster.data[p];
           if (b > 0) {
-            if (!basin_stats[b]) basin_stats[b] = { conv: 0, crop: 0, graz: 0, hyde_pop: 0, land: 0 };
+            if (!basin_stats[b]) basin_stats[b] = { conv: 0, crop: 0, graz: 0, land: 0, stadester_pop: 0 };
             if (cr) basin_stats[b].crop += (cr.data[p] || 0);
             if (gr) basin_stats[b].graz += (gr.data[p] || 0);
             if (cv) basin_stats[b].conv += (cv.data[p] || 0);
             if (pop) {
               let a_val = land_area_raster.data[p] || 0;
-              let h_val = pop.data[p] || 0;
-              if (yr < this.urban_overlay_start_year && a_val > 0)
-                h_val = Math.min(h_val, 1.0 * a_val);
-              basin_stats[b].hyde_pop += h_val;
+              let u_val = (urb) ? (urb.data[p] || 0) : 0;
+              let p_val = pop.data[p] || 0;
+              //Subtract urban population to isolate rural component and avoid double counting urban pixels
+              let rur_val = Math.max(0, p_val - u_val);
+              if (yr < this.urban_overlay_start_year && a_val > 0 && glaciated_basins.has(String(b))) {
+                let max_forager_density = (yr <= -5000) ? 0.05 : 0.20;
+                rur_val = Math.min(rur_val, max_forager_density * a_val);
+              }
+              basin_stats[b].stadester_pop += rur_val;
             }
             basin_stats[b].land += (land_area_raster.data[p] || 0);
           }
@@ -636,7 +660,7 @@
           let s = basin_stats[b];
           if (s.land > 0) {
             let w = 1.0 / Math.sqrt(s.land);
-            X.push([s.crop*w, s.graz*w, s.conv*w, s.hyde_pop*w]);
+            X.push([s.crop*w, s.graz*w, s.conv*w, s.stadester_pop*w]);
             Y.push([y_val*w]);
           }
         }
@@ -646,54 +670,53 @@
         let beta_conv = Math.min(100, Math.max(0, ols?.coefficients?.conv || 0));
         let beta_crop = Math.min(500, Math.max(0, ols?.coefficients?.crop || 0));
         let beta_graz = Math.min(100, Math.max(0, ols?.coefficients?.graz || 0));
-        let beta_hyde = Math.min(10, Math.max(0, ols?.coefficients?.hyde_pop || 0));
+        let beta_sta = Math.min(10, Math.max(0, ols?.coefficients?.stadester_pop || 0));
 
         //Fallback guard if all coefficients are zero
-        if (beta_crop + beta_graz + beta_conv + beta_hyde === 0)
-          beta_hyde = 1.0;
+        if (beta_crop + beta_graz + beta_conv + beta_sta === 0)
+          beta_sta = 1.0;
 
-        let coeffs = {
-          conv: beta_conv,
-          crop: beta_crop,
-          graz: beta_graz,
-          hyde_pop: beta_hyde
-        };
+        let coeffs = { conv: beta_conv, crop: beta_crop, graz: beta_graz, stadester_pop: beta_sta };
+        all_models[yr] = { coefficients: coeffs, metrics: { rmse: ols?.metrics?.rmse } };
 
-        all_models[yr] = {
-          coefficients: coeffs,
-          metrics: { rmse: ols?.metrics?.rmse }
-        };
-
-        console.log(`  [Year ${yr}] WLS Non-Negative Densities: Crop: ${beta_crop.toFixed(2)}/km² | Graz: ${beta_graz.toFixed(2)}/km² | Conv: ${beta_conv.toFixed(2)}/km² | Baseline: ${beta_hyde.toFixed(4)} (RMSE: ${(ols?.metrics?.rmse || 0).toFixed(2)})`);
+        console.log(`  [Year ${yr}] WLS Non-Negative Densities: Crop: ${beta_crop.toFixed(2)}/km² | Graz: ${beta_graz.toFixed(2)}/km² | Conv: ${beta_conv.toFixed(2)}/km² | Baseline: ${beta_sta.toFixed(4)} (RMSE: ${(ols?.metrics?.rmse || 0).toFixed(2)})`);
 
         //Step 4: Generate continuous intra-watershed disaggregation weights W(p)
         let weights_data = new Float32Array(total_pixels);
         for (let p = 0; p < total_pixels; p++) {
+          let u_val = (urb) ? (urb.data[p] || 0) : 0;
+          //Explicitly zero out rural disaggregation weights on urban pixels to guarantee no double counting
+          if (u_val > 0) {
+            weights_data[p] = 0;
+            continue;
+          }
+
           let c_val = (cr) ? (cr.data[p] || 0) : 0;
           let g_val = (gr) ? (gr.data[p] || 0) : 0;
           let v_val = (cv) ? (cv.data[p] || 0) : 0;
-          let h_val = (pop) ? (pop.data[p] || 0) : 0;
-          let a_val = land_area_raster.data[p] || 0;
-          if (yr < this.urban_overlay_start_year && a_val > 0)
-            h_val = Math.min(h_val, 1.0 * a_val);
+          let p_val = (pop) ? (pop.data[p] || 0) : 0;
+          let s_val = Math.max(0, p_val - u_val);
+          let b_id = String(wmobb_raster.data[p]);
+          if (yr < this.urban_overlay_start_year && glaciated_basins.has(b_id)) {
+            let a_val = land_area_raster.data[p] || 0;
+            if (a_val > 0) {
+              let max_forager_density = (yr <= -5000) ? 0.05 : 0.20;
+              s_val = Math.min(s_val, max_forager_density * a_val);
+            }
+          }
 
-          let w_pred = beta_crop*c_val + beta_graz*g_val + beta_conv*v_val + beta_hyde*h_val;
+          let w_pred = beta_crop*c_val + beta_graz*g_val + beta_conv*v_val + beta_sta*s_val;
           weights_data[p] = Math.max(0, w_pred);
         }
 
-        GeoPNG.saveNumberRasterImage({
-          file_path: out_weights_path,
-          format: "float32",
-          function: function (idx) { return weights_data[idx]; },
-          height: 2160,
-          width: 4320
-        });
+        GeoPNG.saveNumberRasterImage({ file_path: out_weights_path, format: "float32", function: function (idx) { return weights_data[idx]; }, height: 2160, width: 4320 });
 
         //Free memory
         cr = null;
         gr = null;
         cv = null;
         pop = null;
+        urb = null;
         weights_data = null;
         await new Promise(resolve => setImmediate(resolve));
         if (typeof global.gc === "function") global.gc();
@@ -737,13 +760,7 @@
 
         if (yr < urban_overlay_year) {
           //Pre-3000 BC: Pure rural/forager regime (urbc = 0)
-          GeoPNG.saveNumberRasterImage({
-            file_path: urban_out_path,
-            format: "float32",
-            function: function () { return 0; },
-            height: 2160,
-            width: 4320
-          });
+          GeoPNG.saveNumberRasterImage({ file_path: urban_out_path, format: "float32", function: function () { return 0; }, height: 2160, width: 4320 });
 
           //Target rural equals total watershed population
           let all_b = Object.keys(watershed_pops);
@@ -758,13 +775,7 @@
           if (urban_raster) {
             fs.copyFileSync(src_urban_path, urban_out_path);
           } else {
-            GeoPNG.saveNumberRasterImage({
-              file_path: urban_out_path,
-              format: "float32",
-              function: function () { return 0; },
-              height: 2160,
-              width: 4320
-            });
+            GeoPNG.saveNumberRasterImage({ file_path: urban_out_path, format: "float32", function: function () { return 0; }, height: 2160, width: 4320 });
           }
 
           //Sum urban population per watershed
@@ -876,14 +887,18 @@
           } else {
             //Fallback to habitable land area if basin has zero WLS weight
             let area_sum = 0;
-            for (let k = 0; k < pixels.length; k++)
-              area_sum += Math.max(0, land_area_raster.data[pixels[k]] || 0);
+            for (let k = 0; k < pixels.length; k++) {
+              let p_idx = pixels[k];
+              if (!urban_raster || urban_raster.data[p_idx] <= 0)
+                area_sum += Math.max(0, land_area_raster.data[pixels[k]] || 0);
+            }
 
             if (area_sum > 0) {
               let factor = target_rural / area_sum;
               for (let k = 0; k < pixels.length; k++) {
                 let p_idx = pixels[k];
-                rurc_data[p_idx] = Math.max(0, land_area_raster.data[p_idx] || 0) * factor;
+                if (!urban_raster || urban_raster.data[p_idx] <= 0)
+                  rurc_data[p_idx] = Math.max(0, land_area_raster.data[p_idx] || 0) * factor;
               }
             }
           }
@@ -897,21 +912,8 @@
         }
 
         //Save rurc and popc rasters in Big-endian float32 GeoPNG
-        GeoPNG.saveNumberRasterImage({
-          file_path: rurc_out_path,
-          format: "float32",
-          function: function (idx) { return rurc_data[idx]; },
-          height: 2160,
-          width: 4320
-        });
-
-        GeoPNG.saveNumberRasterImage({
-          file_path: popc_out_path,
-          format: "float32",
-          function: function (idx) { return popc_data[idx]; },
-          height: 2160,
-          width: 4320
-        });
+        GeoPNG.saveNumberRasterImage({ file_path: rurc_out_path, format: "float32", function: function (idx) { return rurc_data[idx]; }, height: 2160, width: 4320 });
+        GeoPNG.saveNumberRasterImage({ file_path: popc_out_path, format: "float32", function: function (idx) { return popc_data[idx]; }, height: 2160, width: 4320 });
 
         let total_world_pop = 0;
         for (let p = 0; p < total_pixels; p++) total_world_pop += popc_data[p];
@@ -954,12 +956,7 @@
         let urb_sum = GeoPNG.getImageSum(urb_path, { format: "float32" });
 
         let diff = Math.abs(pop_sum - (rur_sum + urb_sum));
-        validation_report.years[yr] = {
-          difference: diff,
-          pop_total: Math.round(pop_sum),
-          rural_total: Math.round(rur_sum),
-          urban_total: Math.round(urb_sum)
-        };
+        validation_report.years[yr] = { difference: diff, pop_total: Math.round(pop_sum), rural_total: Math.round(rur_sum), urban_total: Math.round(urb_sum) };
         console.log(`  [Year ${yr}] Pop: ${Math.round(pop_sum).toLocaleString()} | Rural: ${Math.round(rur_sum).toLocaleString()} | Urban: ${Math.round(urb_sum).toLocaleString()} (Δ: ${diff.toFixed(4)})`);
       }
 
