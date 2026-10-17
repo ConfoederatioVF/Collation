@@ -118,6 +118,13 @@ if (!global.GeoPNG.tasks) global.GeoPNG.tasks = {};
     //Guard clause
     if (!from_file || !out_file || !fs.existsSync(from_file)) return null;
 
+    if (from_file.endsWith(".png") && typeof GeoPNG.isValidRaster === "function") {
+      if (!GeoPNG.isValidRaster(from_file)) {
+        console.error(`- [GeoPNG.tasks.copy] Skipping corrupted or empty PNG source file: ${from_file}`);
+        return null;
+      }
+    }
+
     let out_dir = path.dirname(out_file);
     if (!fs.existsSync(out_dir)) fs.mkdirSync(out_dir, { recursive: true });
     fs.copyFileSync(from_file, out_file);

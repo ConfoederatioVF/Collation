@@ -119,6 +119,7 @@ safeRequire("histmap/2.data_cleaning/population_Stadester/stadester_rasters.js")
 safeRequire("histmap/2.data_cleaning/population_Stadester/stadester_uud.js");
 safeRequire("histmap/2.data_cleaning/admin_modern/admin_modern.js");
 safeRequire("histmap/2.data_cleaning/professions_Bairoch/professions_Bairoch.js");
+safeRequire("histmap/3.data_transform/professions/professions.js");
 
 //Load modular task definitions from ./tasks/
 let loadTasks = function () {

@@ -103,6 +103,8 @@ global.births_deaths_OLS = class {
 		let f_00_raster = GeoPNG.loadNumberRasterImage(f_00_path, { format: "float32" });
 		let m_00_raster = GeoPNG.loadNumberRasterImage(m_00_path, { format: "float32" });
 		
+		if (!f_00_raster || !m_00_raster || !f_00_raster.data || !m_00_raster.data) return null;
+		
 		let return_array = new Float32Array(f_00_raster.data.length);
 		for (let i = 0; i < return_array.length; i++) {
 			let local_f = (isNaN(f_00_raster.data[i])) ? 0 : f_00_raster.data[i];
@@ -143,7 +145,7 @@ global.births_deaths_OLS = class {
 			let p = `${age_sex.output_rasters}${c}_${year}.png`;
 			return fs.existsSync(p) ? GeoPNG.loadNumberRasterImage(p, { format: "float32" }) : null;
 		});
-		if (rasters.includes(null)) return null;
+		if (rasters.includes(null) || rasters.some(r => !r || !r.data)) return null;
 		
 		let years = landuse_HYDE.sorted_hyde_years;
 		let prev_year = years[Math.max(0, years.indexOf(year) - 1)];
@@ -155,6 +157,8 @@ global.births_deaths_OLS = class {
 		
 		let pop_r = fs.existsSync(popc_path) ? GeoPNG.loadNumberRasterImage(popc_path, { format: "float32" }) : null;
 		let prev_pop_r = fs.existsSync(prev_popc_path) ? GeoPNG.loadNumberRasterImage(prev_popc_path, { format: "float32" }) : null;
+		if (pop_r && !pop_r.data) pop_r = null;
+		if (prev_pop_r && !prev_pop_r.data) prev_pop_r = null;
 		
 		let decline_array = new Float32Array(rasters[0].data.length);
 		let cohort_count = rasters.length;
@@ -295,8 +299,13 @@ global.births_deaths_OLS = class {
 					}
 					
 					let actual_raster = GeoPNG.loadNumberRasterImage(actual_path, { format: "float32" });
+					if (!actual_raster || !actual_raster.data) {
+						console.warn(`- Missing or invalid actuals raster at ${actual_path}. Skipping target.`);
+						continue;
+					}
 					let popc_path = `${age_sex.sf().input_popc_folder}stadester_population_${year}.png`;
 					let popc_raster = fs.existsSync(popc_path) ? GeoPNG.loadNumberRasterImage(popc_path, { format: "float32" }) : null;
+					if (popc_raster && !popc_raster.data) popc_raster = null;
 					
 					GeoPNG.saveNumberRasterImage({
 						file_path: target_path,
@@ -505,6 +514,7 @@ global.births_deaths_OLS = class {
 					
 					let popc_raster = GeoPNG.loadNumberRasterImage(popc_path, { format: "float32" });
 					let ols_raster = GeoPNG.loadNumberRasterImage(ols_path, { format: "float32" });
+					if (!popc_raster || !ols_raster || !popc_raster.data || !ols_raster.data) return;
 					
 					let local_stats = yearly_target_stats[year];
 					let has_targets = (local_stats !== undefined);

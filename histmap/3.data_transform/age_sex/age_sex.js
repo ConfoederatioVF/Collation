@@ -694,11 +694,13 @@ global.age_sex = class {
 					if (year >= 2015 && year <= 2025) {
 						let regex = new RegExp(`^.*${cohort}_${year}.*\\.png$`);
 						let wp_match = wp_files.find(f => regex.test(f));
+						let wp_full_path = (wp_match) ? `${age_sex_WorldPop.output_rasters}${wp_match}` : null;
+						let wp_is_valid = (wp_full_path && fs.existsSync(wp_full_path) && (typeof GeoPNG.isValidRaster !== "function" || GeoPNG.isValidRaster(wp_full_path)));
 						
-						if (wp_match) {
-							src_path = `${age_sex_WorldPop.output_rasters}${wp_match}`;
+						if (wp_is_valid) {
+							src_path = wp_full_path;
 						} else {
-							//Fallback to UNWPP if the specific WorldPop year is missing
+							//Fallback to UNWPP if the specific WorldPop year is missing or corrupt
 							if (typeof age_sex_UNWPP !== "undefined" && fs.existsSync(age_sex_UNWPP.output_clamped_to_stadester)) {
 								let unwpp_fallback = `${age_sex_UNWPP.output_clamped_to_stadester}global_${cohort}_${year}.png`;
 								if (fs.existsSync(unwpp_fallback)) src_path = unwpp_fallback;
