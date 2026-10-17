@@ -93,8 +93,7 @@
       let all_basin_keys;
       let buildCurveLookup = function (curve_data) {
         let lookup = {};
-        for (let i = 0; i < curve_data.cal_bp.length; i++)
-          lookup[Math.round(curve_data.cal_bp[i])] = { age: curve_data.c14_age[i], sigma: curve_data.sigma[i] };
+        for (let i = 0; i < curve_data.cal_bp.length; i++) lookup[Math.round(curve_data.cal_bp[i])] = { age: curve_data.c14_age[i], sigma: curve_data.sigma[i] };
         return lookup;
       };
       let cal_curve = JSON.parse(fs.readFileSync(this.input_intcal_json, "utf8"));
@@ -218,7 +217,9 @@
       let options = (arg2_options) ? arg2_options : {};
 
       //Declare local instance variables
+      let fallback_data = options.fallback_data;
       let height = 2160;
+      let land_area = options.land_area;
       let masked_indices = [];
       let radius = (options.radius !== undefined) ? options.radius : 3;
       let temp_data;
@@ -229,9 +230,10 @@
       //Guard clauses
       if (!raster_data || !urban_mask) return raster_data;
 
-      //Identify all masked pixels
+      //Identify all masked pixels on habitable land
       for (let p = 0; p < total_pixels; p++)
-        if (urban_mask[p] === 1) masked_indices.push(p);
+        if (urban_mask[p] === 1 && (!land_area || land_area[p] > 0))
+          masked_indices.push(p);
 
       if (masked_indices.length === 0) return raster_data;
 
@@ -259,14 +261,14 @@
           if (ny >= 0 && ny < height) {
             let nx = (x + entry.rx + width) % width;
             let n_idx = ny * width + nx;
-            if (urban_mask[n_idx] === 0) {
+            if (urban_mask[n_idx] === 0 && (!land_area || land_area[n_idx] > 0)) {
               num += entry.w * raster_data[n_idx];
               den += entry.w;
             }
           }
         }
 
-        //If boundary pixels were found within radius, inpaint; else fallback to wider search
+        //If boundary pixels were found within radius, inpaint; else fallback to wider search or baseline
         if (den > 0) {
           temp_data[p] = num / den;
         } else {
@@ -277,13 +279,14 @@
             for (let rx = -wide_r; rx <= wide_r; rx++) {
               let ny = y + ry;
               let nx = (x + rx + width) % width;
-              if (ny >= 0 && ny < height && urban_mask[ny * width + nx] === 0) {
+              if (ny >= 0 && ny < height && urban_mask[ny * width + nx] === 0 && (!land_area || land_area[ny * width + nx] > 0)) {
                 let w = 1.0 / Math.max(1, rx * rx + ry * ry);
                 wide_num += w * raster_data[ny * width + nx];
                 wide_den += w;
               }
             }
-          temp_data[p] = (wide_den > 0) ? (wide_num / wide_den) : 0;
+          let fb_val = (fallback_data && fallback_data[p] > 0) ? fallback_data[p] : raster_data[p];
+          temp_data[p] = (wide_den > 0) ? (wide_num / wide_den) : fb_val;
         }
       }
 
@@ -421,11 +424,7 @@
         if (fs.existsSync(sta_path)) {
           global_targets[yr] = GeoPNG.getImageSum(sta_path, { format: "float32" });
         } else {
-          let default_targets = {
-            "0": 222991707, "-1000": 67854467, "-2000": 36543055, "-3000": 26200596,
-            "-4000": 13686249, "-5000": 9312752, "-6000": 12409674, "-7000": 10555264,
-            "-8000": 4827447, "-9000": 4000000, "-10000": 3295098
-          };
+          let default_targets = { "0": 222991707, "-1000": 67854467, "-2000": 36543055, "-3000": 26200596, "-4000": 13686249, "-5000": 9312752, "-6000": 12409674, "-7000": 10555264, "-8000": 4827447, "-9000": 4000000, "-10000": 3295098 };
           global_targets[yr] = default_targets[yr] || 10000000;
         }
       }
@@ -610,20 +609,26 @@
         let out_weights_path = path.join(this.intermediate_wls_folder, `c14_wls_weights_${yr}.png`);
 
         let cr_path = path.join(this.input_hyde_landuse_folder, `cropland${yr_name}_number.png`);
-        let gr_path = path.join(this.input_hyde_landuse_folder, `grazing${yr_name}_number.png`);
         let cv_path = path.join(this.input_hyde_landuse_folder, `conv_rangeland${yr_name}_number.png`);
+        let gr_path = path.join(this.input_hyde_landuse_folder, `grazing${yr_name}_number.png`);
+        let kk_path = path.join(this.input_kk10luh2_global_folder, `popc_${yr}.png`);
         let pop_path = path.join(this.input_stadester_population_folder, `stadester_population_${yr}.png`);
         let urb_path = path.join(this.input_stadester_urban_folder, `stadester_urban_${yr}.png`);
 
         let cr = (fs.existsSync(cr_path)) ? GeoPNG.loadNumberRasterImage(cr_path, { format: "float32" }) : null;
-        let gr = (fs.existsSync(gr_path)) ? GeoPNG.loadNumberRasterImage(gr_path, { format: "float32" }) : null;
         let cv = (fs.existsSync(cv_path)) ? GeoPNG.loadNumberRasterImage(cv_path, { format: "float32" }) : null;
+        let gr = (fs.existsSync(gr_path)) ? GeoPNG.loadNumberRasterImage(gr_path, { format: "float32" }) : null;
+        let kk = (fs.existsSync(kk_path)) ? GeoPNG.loadNumberRasterImage(kk_path, { format: "float32" }) : null;
         let pop = (fs.existsSync(pop_path)) ? GeoPNG.loadNumberRasterImage(pop_path, { format: "float32" }) : null;
         let urb = (fs.existsSync(urb_path)) ? GeoPNG.loadNumberRasterImage(urb_path, { format: "float32" }) : null;
 
         //Inpaint modern urban sprawl pixels via boundary-constrained harmonic interpolation
         if (pop)
-          this._inpaintModernUrbanMask(pop.data, urban_mask, { radius: 3 });
+          this._inpaintModernUrbanMask(pop.data, urban_mask, {
+            fallback_data: (kk) ? kk.data : null,
+            land_area: land_area_raster.data,
+            radius: 3
+          });
 
         //Step 1: Aggregate basin-level sums of HYDE land use covariates and Stadestér rural population
         let basin_stats = {};
@@ -712,12 +717,7 @@
         GeoPNG.saveNumberRasterImage({ file_path: out_weights_path, format: "float32", function: function (idx) { return weights_data[idx]; }, height: 2160, width: 4320 });
 
         //Free memory
-        cr = null;
-        gr = null;
-        cv = null;
-        pop = null;
-        urb = null;
-        weights_data = null;
+        cr = null; cv = null; gr = null; kk = null; pop = null; urb = null; weights_data = null;
         await new Promise(resolve => setImmediate(resolve));
         if (typeof global.gc === "function") global.gc();
       }
