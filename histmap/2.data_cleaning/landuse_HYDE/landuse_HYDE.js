@@ -155,6 +155,72 @@ global.landuse_HYDE = class {
 	}
 	
 	/**
+	 * Returns an in-memory or on-disk number raster for any HYDE variable and year.
+	 * If the exact year exists on disk, loads and returns it.
+	 * If not, finds the surrounding anchor years in hyde_original_years and linearly interpolates.
+	 * @alias landuse_HYDE.getInterpolatedRaster
+	 * 
+	 * @param {string} arg0_key - e.g. "cropland", "grazing", "conv_rangeland"
+	 * @param {number} arg1_year - Target year e.g. -3500
+	 * @param {Object} [arg2_options]
+	 * 
+	 * @returns {Object} GeoPNG raster object { data: Float32Array, height: 2160, width: 4320 }
+	 */
+	static getInterpolatedRaster (arg0_key, arg1_year, arg2_options) {
+		//Convert from parameters
+		let key = arg0_key;
+		let year = parseInt(arg1_year);
+		let options = (arg2_options) ? arg2_options : {};
+		
+		//Declare local instance variables
+		let actual_years = this.hyde_original_years;
+		let domain = (Array.findDomain) ? Array.findDomain(actual_years, year) : null;
+		if (!domain) {
+			let sorted = actual_years.slice().sort((a, b) => a - b);
+			let left = sorted[0];
+			let right = sorted[sorted.length - 1];
+			for (let i = 0; i < sorted.length - 1; i++)
+				if (year >= sorted[i] && year <= sorted[i + 1]) {
+					left = sorted[i];
+					right = sorted[i + 1];
+					break;
+				}
+			domain = [left, right];
+		}
+		let exact_file = `${this.intermediate_rasters_equirectangular}${key}${this._getHYDEYearName(year)}_number.png`;
+		
+		if (fs.existsSync(exact_file))
+			return GeoPNG.loadNumberRasterImage(exact_file, { format: "float32" });
+		
+		if (!domain || domain.length < 2 || domain[0] === domain[1]) {
+			let closest_year = (domain && domain[0] !== undefined) ? domain[0] : 0;
+			let closest_file = `${this.intermediate_rasters_equirectangular}${key}${this._getHYDEYearName(closest_year)}_number.png`;
+			return (fs.existsSync(closest_file)) ? GeoPNG.loadNumberRasterImage(closest_file, { format: "float32" }) : null;
+		}
+		
+		let left_file = `${this.intermediate_rasters_equirectangular}${key}${this._getHYDEYearName(domain[0])}_number.png`;
+		let right_file = `${this.intermediate_rasters_equirectangular}${key}${this._getHYDEYearName(domain[1])}_number.png`;
+		let left_img = (fs.existsSync(left_file)) ? GeoPNG.loadNumberRasterImage(left_file, { format: "float32" }) : null;
+		let right_img = (fs.existsSync(right_file)) ? GeoPNG.loadNumberRasterImage(right_file, { format: "float32" }) : null;
+		
+		if (!left_img && !right_img) return null;
+		if (!left_img) return right_img;
+		if (!right_img) return left_img;
+		
+		let f = (year - domain[0]) / (domain[1] - domain[0]);
+		let total_pixels = left_img.width * left_img.height;
+		let out_data = new Float32Array(total_pixels);
+		
+		for (let p = 0; p < total_pixels; p++) {
+			let v = (1 - f) * left_img.data[p] + f * right_img.data[p];
+			out_data[p] = (v > 0) ? v : 0;
+		}
+		
+		//Return statement
+		return { data: out_data, height: left_img.height, width: left_img.width };
+	}
+	
+	/**
 	 * Fills in missing HYDE years by performing linear or polynomial interpolation.
 	 * 
 	 * @param {number|string} arg0_year - The year to generate the raster set for.

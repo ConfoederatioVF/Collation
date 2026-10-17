@@ -152,8 +152,12 @@ global.births_deaths_OLS = class {
 		let year_gap = (year === prev_year) ? 1 : (year - prev_year);
 		
 		let sf = age_sex.sf();
-		let popc_path = `${sf.input_popc_folder}stadester_population_${year}.png`;
-		let prev_popc_path = `${sf.input_popc_folder}stadester_population_${prev_year}.png`;
+		let popc_path = `${sf.input_popc_folder}velkscala_population_${year}.png`;
+		if (!fs.existsSync(popc_path) && typeof population_Stadester !== "undefined")
+			popc_path = `${population_Stadester.input_popc_folder}stadester_population_${year}.png`;
+		let prev_popc_path = `${sf.input_popc_folder}velkscala_population_${prev_year}.png`;
+		if (!fs.existsSync(prev_popc_path) && typeof population_Stadester !== "undefined")
+			prev_popc_path = `${population_Stadester.input_popc_folder}stadester_population_${prev_year}.png`;
 		
 		let pop_r = fs.existsSync(popc_path) ? GeoPNG.loadNumberRasterImage(popc_path, { format: "float32" }) : null;
 		let prev_pop_r = fs.existsSync(prev_popc_path) ? GeoPNG.loadNumberRasterImage(prev_popc_path, { format: "float32" }) : null;
@@ -303,7 +307,9 @@ global.births_deaths_OLS = class {
 						console.warn(`- Missing or invalid actuals raster at ${actual_path}. Skipping target.`);
 						continue;
 					}
-					let popc_path = `${age_sex.sf().input_popc_folder}stadester_population_${year}.png`;
+					let popc_path = `${age_sex.sf().input_popc_folder}velkscala_population_${year}.png`;
+					if (!fs.existsSync(popc_path) && typeof population_Stadester !== "undefined")
+						popc_path = `${population_Stadester.input_popc_folder}stadester_population_${year}.png`;
 					let popc_raster = fs.existsSync(popc_path) ? GeoPNG.loadNumberRasterImage(popc_path, { format: "float32" }) : null;
 					if (popc_raster && !popc_raster.data) popc_raster = null;
 					
@@ -502,7 +508,9 @@ global.births_deaths_OLS = class {
 				concurrency: options.concurrency || 4,
 				name: `births_deaths_OLS D_normaliseOLSRasters (${variable_obj.actual_prefix})`,
 				handler: async (year) => {
-					let popc_path = `${sf.input_popc_folder}stadester_population_${year}.png`;
+					let popc_path = `${sf.input_popc_folder}velkscala_population_${year}.png`;
+					if (!fs.existsSync(popc_path) && typeof population_Stadester !== "undefined")
+						popc_path = `${population_Stadester.input_popc_folder}stadester_population_${year}.png`;
 					if (!fs.existsSync(popc_path)) return;
 					
 					let ols_path = `${variable_obj.ols_folder}ols_${variable_obj.actual_prefix}_${year}.png`;
@@ -617,7 +625,9 @@ global.births_deaths_OLS = class {
 			concurrency: options.concurrency || 4,
 			name: "births_deaths_OLS E_clampToStadester",
 			handler: async (year) => {
-				let popc_path = `${sf.input_popc_folder}stadester_population_${year}.png`;
+				let popc_path = `${sf.input_popc_folder}velkscala_population_${year}.png`;
+				if (!fs.existsSync(popc_path) && typeof population_Stadester !== "undefined")
+					popc_path = `${population_Stadester.input_popc_folder}stadester_population_${year}.png`;
 				if (!fs.existsSync(popc_path)) return;
 				
 				let popc_raster = GeoPNG.loadNumberRasterImage(popc_path, { format: "float32" });
@@ -796,7 +806,7 @@ global.births_deaths_OLS = class {
 				}
 				
 				// 2.5. FLUX RECONCILIATION AGAINST MIGRATION RESIDUAL
-				let delta_path = `${population_Stadester_transform.delta_total_population_folder}delta_total_population_${year}.png`;
+				let delta_path = `${population_Velkscala_transform.delta_total_population_folder}delta_total_population_${year}.png`;
 				let m_female_path = `${this.output_female_migration_folder}female_net_migration_${year}.png`;
 				let m_male_path = `${this.output_male_migration_folder}male_net_migration_${year}.png`;
 				let migration_path = `${this.output_net_migration_folder}net_migration_${year}.png`;

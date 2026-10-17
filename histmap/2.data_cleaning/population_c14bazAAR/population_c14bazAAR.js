@@ -44,9 +44,11 @@
     static output_urban_folder = `${this.bf}3.rasters_urban/`;
     static output_rural_folder = `${this.bf}4.rasters_rural/`;
     static output_rasters_scaled_to_global = `${this.bf}5.rasters_scaled_to_global/`;
+    static output_density_folder = `${this.bf}6.rasters_density/`;
 
     static base_year = 0; // 1 AD (astronomical year 0 / 1950 cal BP)
-    static target_years = [-10000, -9000, -8000, -7000, -6000, -5000, -4000, -3000, -2000, -1000, 0];
+    static anchor_years = [-10000, -9000, -8000, -7000, -6000, -5000, -4000, -3000, -2000, -1000, 0];
+    static target_years = Array.from({ length: 101 }, (_, i) => -10000 + i * 100);
     static urban_overlay_start_year = -3000; // 3000 BC
 
     /**
@@ -56,24 +58,15 @@
      * @returns {Object} Summary metadata object.
      */
     static A_ingestC14Data (arg0_options) {
-      //Convert from parameters
-      let options = (arg0_options) ? arg0_options : {};
-
-      //Declare local instance variables
-      let summary_obj;
-
-      //Guard clauses
+      let options = (arg0_options) ? arg0_options : {}, summary_obj = null;
       if (!fs.existsSync(this.input_c14_csv)) {
         console.error(`- [population_c14bazAAR.A_ingestC14Data] Missing ${this.input_c14_csv}.`);
         return null;
       }
-
       if (fs.existsSync(this.input_c14_summary)) {
         summary_obj = JSON.parse(fs.readFileSync(this.input_c14_summary, "utf8"));
         console.log(`- Loaded c14bazAAR summary: ${summary_obj.total_dates} dates across ${summary_obj.total_basins} basins.`);
       }
-
-      //Return statement
       return summary_obj;
     }
 
@@ -90,30 +83,22 @@
       let options = (arg0_options) ? arg0_options : {};
 
       //Declare local instance variables
-      let all_basin_keys;
+      let all_basin_keys, cal_curve = JSON.parse(fs.readFileSync(this.input_intcal_json, "utf8"));
+      let c14_raw_content = fs.readFileSync(this.input_c14_csv, "utf8"), header, idx_age, idx_lat, idx_std, idx_wmobb;
+      let lines = c14_raw_content.split("\n"), out_spds_path = path.join(this.config_folder, "watershed_spds.json"), processed_count = 0;
+      let shcal_curve = JSON.parse(fs.readFileSync(this.input_shcal_json, "utf8")), target_years = this.target_years;
+      let watershed_spds = {}, wmobb_meta = JSON.parse(fs.readFileSync(this.input_wmobb_meta, "utf8"));
       let buildCurveLookup = function (curve_data) {
         let lookup = {};
         for (let i = 0; i < curve_data.cal_bp.length; i++) lookup[Math.round(curve_data.cal_bp[i])] = { age: curve_data.c14_age[i], sigma: curve_data.sigma[i] };
         return lookup;
       };
-      let cal_curve = JSON.parse(fs.readFileSync(this.input_intcal_json, "utf8"));
-      let c14_raw_content = fs.readFileSync(this.input_c14_csv, "utf8");
-      let header, idx_age, idx_lat, idx_std, idx_wmobb;
-      let intcal_lookup;
-      let lines = c14_raw_content.split("\n");
-      let out_spds_path = path.join(this.config_folder, "watershed_spds.json");
-      let processed_count = 0;
-      let shcal_curve = JSON.parse(fs.readFileSync(this.input_shcal_json, "utf8"));
-      let shcal_lookup;
-      let target_years = this.target_years;
-      let watershed_spds = {};
-      let wmobb_meta = JSON.parse(fs.readFileSync(this.input_wmobb_meta, "utf8"));
 
       if (!fs.existsSync(this.intermediate_spds_folder))
         fs.mkdirSync(this.intermediate_spds_folder, { recursive: true });
 
-      intcal_lookup = buildCurveLookup(cal_curve);
-      shcal_lookup = buildCurveLookup(shcal_curve);
+      let intcal_lookup = buildCurveLookup(cal_curve);
+      let shcal_lookup = buildCurveLookup(shcal_curve);
       all_basin_keys = Object.keys(wmobb_meta);
 
       for (let i = 0; i < all_basin_keys.length; i++) {
@@ -124,7 +109,6 @@
       }
 
       console.log(`- Calibrating radiocarbon determinations across ${lines.length - 1} records ...`);
-
       header = lines[0].split(",").map(c => c.trim());
       idx_age = header.indexOf("c14age");
       idx_lat = header.indexOf("lat");
@@ -169,12 +153,8 @@
      * @returns {Set<string>} Set of watershed IDs subject to targeted glaciation correction.
      */
     static _getGlaciatedOutlierBasins (arg0_options) {
-      //Convert from parameters
       let options = (arg0_options) ? arg0_options : {};
-
-      //Declare local instance variables
-      let glaciated_basins = new Set();
-      let mask_dir = this.input_outlier_rasters;
+      let glaciated_basins = new Set(), mask_dir = this.input_outlier_rasters;
       let mask_names = ["stpetersburgrussia_-10000_1700.png", "russia_-10000_1400.png"];
       let wmobb_raster = GeoPNG.loadNumberRasterImage(this.input_wmobb_raster, { format: "int32" });
 
@@ -183,10 +163,7 @@
         if (fs.existsSync(mask_path)) {
           let mask_img = GeoPNG.loadImage(mask_path);
           for (let p = 0; p < mask_img.width * mask_img.height; p++) {
-            let r = mask_img.data[p * 4];
-            let g = mask_img.data[p * 4 + 1];
-            let b = mask_img.data[p * 4 + 2];
-            let a = mask_img.data[p * 4 + 3];
+            let r = mask_img.data[p * 4], g = mask_img.data[p * 4 + 1], b = mask_img.data[p * 4 + 2], a = mask_img.data[p * 4 + 3];
             if (r === 0 && g === 0 && b === 0 && a === 255) {
               let b_id = wmobb_raster.data[p];
               if (b_id > 0) glaciated_basins.add(String(b_id));
@@ -194,8 +171,6 @@
           }
         }
       }
-
-      //Return statement
       return glaciated_basins;
     }
 
@@ -212,77 +187,48 @@
      */
     static _inpaintModernUrbanMask (arg0_raster_data, arg1_urban_mask, arg2_options) {
       //Convert from parameters
-      let raster_data = arg0_raster_data;
-      let urban_mask = arg1_urban_mask;
-      let options = (arg2_options) ? arg2_options : {};
+      let raster_data = arg0_raster_data, urban_mask = arg1_urban_mask, options = (arg2_options) ? arg2_options : {};
 
       //Declare local instance variables
-      let fallback_data = options.fallback_data;
-      let height = 2160;
-      let land_area = options.land_area;
-      let masked_indices = [];
-      let radius = (options.radius !== undefined) ? options.radius : 3;
-      let temp_data;
-      let total_pixels = height * 4320;
-      let weights = [];
-      let width = 4320;
+      let fallback_data = options.fallback_data, height = 2160, land_area = options.land_area, masked_indices = [];
+      let radius = (options.radius !== undefined) ? options.radius : 3, total_pixels = height * 4320, weights = [], width = 4320;
 
       //Guard clauses
       if (!raster_data || !urban_mask) return raster_data;
 
       //Identify all masked pixels on habitable land
       for (let p = 0; p < total_pixels; p++)
-        if (urban_mask[p] === 1 && (!land_area || land_area[p] > 0))
-          masked_indices.push(p);
-
+        if (urban_mask[p] === 1 && (!land_area || land_area[p] > 0)) masked_indices.push(p);
       if (masked_indices.length === 0) return raster_data;
 
-      //Pre-compute local inverse distance weights for search radius
       for (let ry = -radius; ry <= radius; ry++)
         for (let rx = -radius; rx <= radius; rx++) {
           let d2 = rx * rx + ry * ry;
-          if (d2 > 0 && d2 <= radius * radius + 1)
-            weights.push({ rx: rx, ry: ry, w: 1.0 / Math.max(1, d2) });
+          if (d2 > 0 && d2 <= radius * radius + 1) weights.push({ rx: rx, ry: ry, w: 1.0 / Math.max(1, d2) });
         }
 
-      //Iteratively inpaint masked pixels from perimeter rural boundary
-      temp_data = new Float32Array(raster_data);
+      let temp_data = new Float32Array(raster_data);
       for (let i = 0; i < masked_indices.length; i++) {
-        let p = masked_indices[i];
-        let x = p % width;
-        let y = Math.floor(p / width);
-
-        let den = 0;
-        let num = 0;
-
+        let p = masked_indices[i], x = p % width, y = Math.floor(p / width), den = 0, num = 0;
         for (let k = 0; k < weights.length; k++) {
-          let entry = weights[k];
-          let ny = y + entry.ry;
+          let entry = weights[k], ny = y + entry.ry;
           if (ny >= 0 && ny < height) {
-            let nx = (x + entry.rx + width) % width;
-            let n_idx = ny * width + nx;
+            let n_idx = ny * width + ((x + entry.rx + width) % width);
             if (urban_mask[n_idx] === 0 && (!land_area || land_area[n_idx] > 0)) {
-              num += entry.w * raster_data[n_idx];
-              den += entry.w;
+              num += entry.w * raster_data[n_idx]; den += entry.w;
             }
           }
         }
-
-        //If boundary pixels were found within radius, inpaint; else fallback to wider search or baseline
         if (den > 0) {
           temp_data[p] = num / den;
         } else {
-          let wide_den = 0;
-          let wide_num = 0;
-          let wide_r = radius * 2;
+          let wide_den = 0, wide_num = 0, wide_r = radius * 2;
           for (let ry = -wide_r; ry <= wide_r; ry++)
             for (let rx = -wide_r; rx <= wide_r; rx++) {
-              let ny = y + ry;
-              let nx = (x + rx + width) % width;
+              let ny = y + ry, nx = (x + rx + width) % width;
               if (ny >= 0 && ny < height && urban_mask[ny * width + nx] === 0 && (!land_area || land_area[ny * width + nx] > 0)) {
                 let w = 1.0 / Math.max(1, rx * rx + ry * ry);
-                wide_num += w * raster_data[ny * width + nx];
-                wide_den += w;
+                wide_num += w * raster_data[ny * width + nx]; wide_den += w;
               }
             }
           let fb_val = (fallback_data && fallback_data[p] > 0) ? fallback_data[p] : raster_data[p];
@@ -290,11 +236,8 @@
         }
       }
 
-      //Copy inpainted values back into raster_data
       for (let i = 0; i < masked_indices.length; i++)
         raster_data[masked_indices[i]] = temp_data[masked_indices[i]];
-
-      //Return statement
       return raster_data;
     }
 
@@ -310,17 +253,8 @@
      */
     static _interpolateMonotonicSpline (arg0_x_pts, arg1_y_pts, arg2_x_eval) {
       //Convert from parameters
-      let x_pts = (arg0_x_pts) ? arg0_x_pts : [];
-      let y_pts = (arg1_y_pts) ? arg1_y_pts : [];
-      let x_eval = (arg2_x_eval !== undefined) ? arg2_x_eval : 0;
-
-      //Declare local instance variables
-      let d = [];
-      let h, h00, h01, h10, h11;
-      let i = 0;
-      let m = [];
-      let n = x_pts.length;
-      let t, t2, t3;
+      let x_pts = (arg0_x_pts) ? arg0_x_pts : [], y_pts = (arg1_y_pts) ? arg1_y_pts : [], x_eval = (arg2_x_eval !== undefined) ? arg2_x_eval : 0;
+      let d = [], i = 0, m = [], n = x_pts.length;
 
       //Guard clauses
       if (n === 0) return 0;
@@ -328,48 +262,23 @@
       if (x_eval <= x_pts[0]) return y_pts[0];
       if (x_eval >= x_pts[n - 1]) return y_pts[n - 1];
 
-      //Step 1: Compute secants d_k = (y_{k+1} - y_k) / (x_{k+1} - x_k)
-      for (let k = 0; k < n - 1; k++)
-        d.push((y_pts[k + 1] - y_pts[k]) / (x_pts[k + 1] - x_pts[k]));
-
-      //Step 2: Initialise tangents m_k
+      for (let k = 0; k < n - 1; k++) d.push((y_pts[k + 1] - y_pts[k]) / (x_pts[k + 1] - x_pts[k]));
       m = new Array(n);
-      m[0] = d[0];
-      m[n - 1] = d[n - 2];
+      m[0] = d[0]; m[n - 1] = d[n - 2];
       for (let k = 1; k < n - 1; k++)
         m[k] = (d[k - 1] * d[k] <= 0) ? 0 : 2.0 / (1.0 / d[k - 1] + 1.0 / d[k]);
 
-      //Step 3: Fritsch-Carlson condition to preserve monotonicity
       for (let k = 0; k < n - 1; k++) {
-        if (Math.abs(d[k]) < 1e-9) {
-          m[k] = 0;
-          m[k + 1] = 0;
-        } else {
-          let alpha = m[k] / d[k];
-          let beta = m[k + 1] / d[k];
-          let norm = alpha * alpha + beta * beta;
-          if (norm > 9.0) {
-            let tau = 3.0 / Math.sqrt(norm);
-            m[k] = tau * alpha * d[k];
-            m[k + 1] = tau * beta * d[k];
-          }
+        if (Math.abs(d[k]) < 1e-9) { m[k] = 0; m[k + 1] = 0; } else {
+          let alpha = m[k] / d[k], beta = m[k + 1] / d[k], norm = alpha * alpha + beta * beta;
+          if (norm > 9.0) { let tau = 3.0 / Math.sqrt(norm); m[k] = tau * alpha * d[k]; m[k + 1] = tau * beta * d[k]; }
         }
       }
 
-      //Step 4: Locate segment [x_i, x_{i+1}]
       while (i < n - 2 && x_eval > x_pts[i + 1]) i++;
+      let h = x_pts[i + 1] - x_pts[i], t = (x_eval - x_pts[i]) / h, t2 = t * t, t3 = t2 * t;
+      let h00 = 2.0 * t3 - 3.0 * t2 + 1.0, h10 = t3 - 2.0 * t2 + t, h01 = -2.0 * t3 + 3.0 * t2, h11 = t3 - t2;
 
-      //Step 5: Hermite basis evaluation
-      h = x_pts[i + 1] - x_pts[i];
-      t = (x_eval - x_pts[i]) / h;
-      t2 = t * t;
-      t3 = t2 * t;
-      h00 = 2.0 * t3 - 3.0 * t2 + 1.0;
-      h10 = t3 - 2.0 * t2 + t;
-      h01 = -2.0 * t3 + 3.0 * t2;
-      h11 = t3 - t2;
-
-      //Return statement
       return Math.max(0, h00 * y_pts[i] + h10 * h * m[i] + h01 * y_pts[i + 1] + h11 * h * m[i + 1]);
     }
 
@@ -422,19 +331,27 @@
       all_basins = Object.keys(wmobb_meta);
       date_counts = c14_summary.basin_counts || {};
 
+      let anchor_years = this.anchor_years;
+      let anchor_targets = {};
+
       //Step 1: Compute global population target envelopes for each target year
       console.log("- Aggregating global demographic envelopes from Stadestér population ...");
+      for (let a = 0; a < anchor_years.length; a++) {
+        let yr = anchor_years[a];
+        let sta_path = path.join(this.input_stadester_population_folder, `stadester_population_${yr}.png`);
+        anchor_targets[yr] = (fs.existsSync(sta_path)) ?
+          GeoPNG.getImageSum(sta_path, { format: "float32" }) : (world_targets[yr] || 0);
+      }
+      let anchor_target_vals = anchor_years.map(y => anchor_targets[y]);
       for (let y = 0; y < target_years.length; y++) {
         let yr = target_years[y];
-        let sta_path = path.join(this.input_stadester_population_folder, `stadester_population_${yr}.png`);
-        global_targets[yr] = (fs.existsSync(sta_path)) ?
-          GeoPNG.getImageSum(sta_path, { format: "float32" }) : (world_targets[yr] || 0);
+        global_targets[yr] = this._interpolateMonotonicSpline(anchor_years, anchor_target_vals, yr);
       }
 
       //Step 2: Pre-index empirical historical population baselines per watershed
       console.log("- Pre-indexing empirical historical population baselines per watershed ...");
-      for (let y = 0; y < target_years.length; y++) {
-        let yr = target_years[y];
+      for (let a = 0; a < anchor_years.length; a++) {
+        let yr = anchor_years[a];
         basin_hyde_series[yr] = {};
         let hyde_path = path.join(this.input_hyde_popc_folder, `popc_${yr}.png`);
         if (fs.existsSync(hyde_path)) {
@@ -445,6 +362,23 @@
               basin_hyde_series[yr][b] = (basin_hyde_series[yr][b] || 0) + (hyde_raster.data[p] || 0);
           }
           hyde_raster = null;
+        }
+      }
+      //Interpolate basin_hyde_series for intermediate years
+      for (let y = 0; y < target_years.length; y++) {
+        let yr = target_years[y];
+        if (basin_hyde_series[yr]) continue;
+        let y0 = anchor_years[0], y1 = anchor_years[anchor_years.length - 1];
+        for (let a = 0; a < anchor_years.length - 1; a++) {
+          if (yr >= anchor_years[a] && yr <= anchor_years[a + 1]) {
+            y0 = anchor_years[a]; y1 = anchor_years[a + 1]; break;
+          }
+        }
+        let f = (yr - y0) / (y1 - y0);
+        basin_hyde_series[yr] = {};
+        for (let i = 0; i < all_basins.length; i++) {
+          let b = all_basins[i];
+          basin_hyde_series[yr][b] = (1 - f) * (basin_hyde_series[y0]?.[b] || 0) + f * (basin_hyde_series[y1]?.[b] || 0);
         }
       }
       basin_hyde_0 = basin_hyde_series[0] || {};
@@ -603,10 +537,11 @@
                     urban_mask[ny * 4320 + ((x + dx + 4320) % 4320)] = 1;
               }
 
+      let anchor_years = this.anchor_years;
       console.log("- Fitting Weighted Least Squares (WLS) disaggregation over HYDE land use covariates ...");
 
-      for (let y = 0; y < target_years.length; y++) {
-        let yr = target_years[y];
+      for (let y = 0; y < anchor_years.length; y++) {
+        let yr = anchor_years[y];
         let yr_name = landuse_HYDE._getHYDEYearName(yr);
         let out_weights_path = path.join(this.intermediate_wls_folder, `c14_wls_weights_${yr}.png`);
 
@@ -724,6 +659,29 @@
         if (typeof global.gc === "function") global.gc();
       }
 
+      //Interpolate WLS weights linearly across intermediate 100-year intervals
+      console.log("- Linearly interpolating continuous WLS weights across intermediate 100-year intervals ...");
+      for (let a = 0; a < anchor_years.length - 1; a++) {
+        let y0 = anchor_years[a], y1 = anchor_years[a + 1];
+        let p0 = path.join(this.intermediate_wls_folder, `c14_wls_weights_${y0}.png`);
+        let p1 = path.join(this.intermediate_wls_folder, `c14_wls_weights_${y1}.png`);
+        let r0 = GeoPNG.loadNumberRasterImage(p0, { format: "float32" });
+        let r1 = GeoPNG.loadNumberRasterImage(p1, { format: "float32" });
+
+        for (let step = 1; step < 10; step++) {
+          let yr = y0 + step * 100, f = step / 10.0, out_p = path.join(this.intermediate_wls_folder, `c14_wls_weights_${yr}.png`);
+          let inter_data = new Float32Array(total_pixels), u_p = path.join(this.input_stadester_urban_folder, `stadester_urban_${yr}.png`);
+          let u_r = (fs.existsSync(u_p)) ? GeoPNG.loadNumberRasterImage(u_p, { format: "float32" }) : null;
+          for (let p = 0; p < total_pixels; p++)
+            inter_data[p] = (u_r && u_r.data[p] > 0) ? 0 : ((1 - f) * r0.data[p] + f * r1.data[p]);
+          GeoPNG.saveNumberRasterImage({ file_path: out_p, format: "float32", function: (idx) => inter_data[idx], height: 2160, width: 4320 });
+          inter_data = null; u_r = null;
+        }
+        r0 = null; r1 = null;
+        await new Promise(resolve => setImmediate(resolve));
+        if (typeof global.gc === "function") global.gc();
+      }
+
       fs.writeFileSync(model_path, JSON.stringify(all_models, null, 2));
       console.log(`- Saved WLS disaggregation weights to ${this.intermediate_wls_folder}.`);
 
@@ -769,7 +727,7 @@
           for (let i = 0; i < all_b.length; i++)
             watershed_rurals[yr][all_b[i]] = watershed_pops[all_b[i]][yr];
         } else {
-          //3000 BC Onwards: Ingest Stadestér urban ground truth
+          //3000 BC Onwards: Ingest Stadestér urban ground truth or interpolate
           let src_urban_path = path.join(this.input_stadester_urban_folder, `stadester_urban_${yr}.png`);
           let urban_raster = (fs.existsSync(src_urban_path)) ?
             GeoPNG.loadNumberRasterImage(src_urban_path, { format: "float32" }) : null;
@@ -777,7 +735,30 @@
           if (urban_raster) {
             fs.copyFileSync(src_urban_path, urban_out_path);
           } else {
-            GeoPNG.saveNumberRasterImage({ file_path: urban_out_path, format: "float32", function: function () { return 0; }, height: 2160, width: 4320 });
+            //Interpolate urban raster between surrounding Stadestér anchors [-3000, -2000, -1000, 0]
+            let u_anchors = [-3000, -2000, -1000, 0];
+            let y0 = -3000, y1 = 0;
+            for (let a = 0; a < u_anchors.length - 1; a++) {
+              if (yr >= u_anchors[a] && yr <= u_anchors[a + 1]) {
+                y0 = u_anchors[a]; y1 = u_anchors[a + 1]; break;
+              }
+            }
+            let p0 = path.join(this.input_stadester_urban_folder, `stadester_urban_${y0}.png`);
+            let p1 = path.join(this.input_stadester_urban_folder, `stadester_urban_${y1}.png`);
+            let u0 = (fs.existsSync(p0)) ? GeoPNG.loadNumberRasterImage(p0, { format: "float32" }) : null;
+            let u1 = (fs.existsSync(p1)) ? GeoPNG.loadNumberRasterImage(p1, { format: "float32" }) : null;
+            if (u0 && u1) {
+              let f = (yr - y0) / (y1 - y0);
+              let u_data = new Float32Array(4320 * 2160);
+              for (let p = 0; p < u_data.length; p++)
+                u_data[p] = (1 - f) * u0.data[p] + f * u1.data[p];
+              urban_raster = { data: u_data, height: 2160, width: 4320 };
+              GeoPNG.saveNumberRasterImage({ file_path: urban_out_path, format: "float32", function: (idx) => u_data[idx], height: 2160, width: 4320 });
+              u_data = null;
+            } else {
+              GeoPNG.saveNumberRasterImage({ file_path: urban_out_path, format: "float32", function: () => 0, height: 2160, width: 4320 });
+            }
+            u0 = null; u1 = null;
           }
 
           //Sum urban population per watershed
@@ -917,15 +898,27 @@
         GeoPNG.saveNumberRasterImage({ file_path: rurc_out_path, format: "float32", function: function (idx) { return rurc_data[idx]; }, height: 2160, width: 4320 });
         GeoPNG.saveNumberRasterImage({ file_path: popc_out_path, format: "float32", function: function (idx) { return popc_data[idx]; }, height: 2160, width: 4320 });
 
+        //Compute and save density raster
+        if (!fs.existsSync(this.output_density_folder)) fs.mkdirSync(this.output_density_folder, { recursive: true });
+        let popd_out_path = path.join(this.output_density_folder, `popd_${yr}.png`);
+        let popd_data = new Float32Array(total_pixels);
+        for (let p = 0; p < total_pixels; p++) {
+          let a_val = land_area_raster.data[p] || 0;
+          popd_data[p] = (a_val > 0) ? (popc_data[p] / a_val) : 0;
+        }
+        GeoPNG.saveNumberRasterImage({ file_path: popd_out_path, format: "float32", function: function (idx) { return popd_data[idx]; }, height: 2160, width: 4320 });
+
         let total_world_pop = 0;
         for (let p = 0; p < total_pixels; p++) total_world_pop += popc_data[p];
-        console.log(`- Year ${yr}: Total Population = ${Math.round(total_world_pop).toLocaleString()} (saved ${popc_out_path})`);
+        if (yr % 500 === 0 || yr === 0)
+          console.log(`- Year ${yr}: Total Population = ${Math.round(total_world_pop).toLocaleString()} (saved ${popc_out_path})`);
 
         //Free memory
         wls_raster = null;
         urban_raster = null;
         rurc_data = null;
         popc_data = null;
+        popd_data = null;
         await new Promise(resolve => setImmediate(resolve));
         if (typeof global.gc === "function") global.gc();
       }
@@ -959,7 +952,8 @@
 
         let diff = Math.abs(pop_sum - (rur_sum + urb_sum));
         validation_report.years[yr] = { difference: diff, pop_total: Math.round(pop_sum), rural_total: Math.round(rur_sum), urban_total: Math.round(urb_sum) };
-        console.log(`  [Year ${yr}] Pop: ${Math.round(pop_sum).toLocaleString()} | Rural: ${Math.round(rur_sum).toLocaleString()} | Urban: ${Math.round(urb_sum).toLocaleString()} (Δ: ${diff.toFixed(4)})`);
+        if (yr % 1000 === 0 || yr === 0 || diff > 0.01)
+          console.log(`  [Year ${yr}] Pop: ${Math.round(pop_sum).toLocaleString()} | Rural: ${Math.round(rur_sum).toLocaleString()} | Urban: ${Math.round(urb_sum).toLocaleString()} (Δ: ${diff.toFixed(4)})`);
       }
 
       fs.writeFileSync(path.join(this.config_folder, "validation_report.json"), JSON.stringify(validation_report, null, 2));

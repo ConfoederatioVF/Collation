@@ -95,7 +95,7 @@ global.GDP_PPP = class {
 		//Declare local instance variables
 		let dev_index_file = path.join(
 			(typeof root_dir !== "undefined") ? root_dir : ".",
-			"histmap/2.data_cleaning/population_Stadester/stadester_national_development_index.json"
+			"histmap/2.data_cleaning/population_Velkscala/velkscala_national_development_index.json"
 		);
 		let dev_index_cache = {};
 		if (fs.existsSync(dev_index_file)) {
@@ -104,11 +104,21 @@ global.GDP_PPP = class {
 			} catch (e) {
 				console.error("[GDP_PPP] Failed loading development index cache:", e);
 			}
+		} else {
+			let dev_index_fallback = path.join(
+				(typeof root_dir !== "undefined") ? root_dir : ".",
+				"histmap/2.data_cleaning/population_Stadester/stadester_national_development_index.json"
+			);
+			if (fs.existsSync(dev_index_fallback)) {
+				try {
+					dev_index_cache = JSON.parse(fs.readFileSync(dev_index_fallback, "utf8"));
+				} catch (e) {}
+			}
 		}
 		
 		let national_pop_file = path.join(
 			(typeof root_dir !== "undefined") ? root_dir : ".",
-			"histmap/2.data_cleaning/population_Stadester/stadester_national_populations.json"
+			"histmap/2.data_cleaning/population_Velkscala/velkscala_national_populations.json"
 		);
 		let national_populations = {};
 		if (fs.existsSync(national_pop_file)) {
@@ -116,6 +126,16 @@ global.GDP_PPP = class {
 				national_populations = JSON.parse(fs.readFileSync(national_pop_file, "utf8"));
 			} catch (e) {
 				console.error("[GDP_PPP] Failed loading national populations cache:", e);
+			}
+		} else {
+			let national_pop_fallback = path.join(
+				(typeof root_dir !== "undefined") ? root_dir : ".",
+				"histmap/2.data_cleaning/population_Stadester/stadester_national_populations.json"
+			);
+			if (fs.existsSync(national_pop_fallback)) {
+				try {
+					national_populations = JSON.parse(fs.readFileSync(national_pop_fallback, "utf8"));
+				} catch (e) {}
 			}
 		}
 		

@@ -41,8 +41,10 @@ global.migration_OLS = class {
 				let unwpp_md_path = (unwpp_md_folder) ? path.join(unwpp_md_folder, `male_deaths_${year}.png`) : null;
 				let has_unwpp = unwpp_b_path && unwpp_fd_path && unwpp_md_path && fs.existsSync(unwpp_b_path) && fs.existsSync(unwpp_fd_path) && fs.existsSync(unwpp_md_path);
 
-				let delta_path = `${population_Stadester_transform.delta_total_population_folder}delta_total_population_${year}.png`;
-				let popc_path = `${age_sex.sf().input_popc_folder}stadester_population_${year}.png`;
+				let delta_path = `${population_Velkscala_transform.delta_total_population_folder}delta_total_population_${year}.png`;
+				let popc_path = `${age_sex.sf().input_popc_folder}velkscala_population_${year}.png`;
+				if (!fs.existsSync(popc_path) && typeof population_Stadester !== "undefined")
+					popc_path = `${population_Stadester.input_popc_folder}stadester_population_${year}.png`;
 				
 				if ((!has_kummu && !has_unwpp) || !fs.existsSync(delta_path) || !fs.existsSync(popc_path)) return;
 
@@ -195,7 +197,9 @@ global.migration_OLS = class {
 			if (!fs.existsSync(target_path)) continue;
 			
 			let target_raster = GeoPNG.loadNumberRasterImage(target_path, { format: "float32" });
-			let popc_path = `${age_sex.sf().input_popc_folder}stadester_population_${year}.png`;
+			let popc_path = `${age_sex.sf().input_popc_folder}velkscala_population_${year}.png`;
+			if (!fs.existsSync(popc_path) && typeof population_Stadester !== "undefined")
+				popc_path = `${population_Stadester.input_popc_folder}stadester_population_${year}.png`;
 			if (!fs.existsSync(popc_path)) continue;
 			let popc_raster = GeoPNG.loadNumberRasterImage(popc_path, { format: "float32" });
 			
@@ -232,7 +236,9 @@ global.migration_OLS = class {
 			concurrency: options.concurrency || 4,
 			name: `migration_OLS D_normaliseOLSRasters`,
 			handler: async (year) => {
-				let popc_path = `${age_sex.sf().input_popc_folder}stadester_population_${year}.png`;
+				let popc_path = `${age_sex.sf().input_popc_folder}velkscala_population_${year}.png`;
+				if (!fs.existsSync(popc_path) && typeof population_Stadester !== "undefined")
+					popc_path = `${population_Stadester.input_popc_folder}stadester_population_${year}.png`;
 				let ols_path = `${this.intermediate_ols}ols_migration_${year}.png`;
 				let normalised_path = `${this.intermediate_normalised}normalised_migration_${year}.png`;
 				let bounds_path = `${this.intermediate_bounds}bounds_migration_${year}.json`;
@@ -323,7 +329,9 @@ global.migration_OLS = class {
 			concurrency: options.concurrency || 4,
 			name: "migration_OLS E_deriveFinalRasters",
 			handler: async (year) => {
-				let popc_path = `${age_sex.sf().input_popc_folder}stadester_population_${year}.png`;
+				let popc_path = `${age_sex.sf().input_popc_folder}velkscala_population_${year}.png`;
+				if (!fs.existsSync(popc_path) && typeof population_Stadester !== "undefined")
+					popc_path = `${population_Stadester.input_popc_folder}stadester_population_${year}.png`;
 				if (!fs.existsSync(popc_path)) return;
 				
 				
@@ -345,7 +353,7 @@ global.migration_OLS = class {
 				let unwpp_md_path = (unwpp_md_folder) ? path.join(unwpp_md_folder, `male_deaths_${year}.png`) : null;
 				let has_unwpp = unwpp_b_path && unwpp_fd_path && unwpp_md_path && fs.existsSync(unwpp_b_path) && fs.existsSync(unwpp_fd_path) && fs.existsSync(unwpp_md_path);
 
-				let delta_path = `${population_Stadester_transform.delta_total_population_folder}delta_total_population_${year}.png`;
+				let delta_path = `${population_Velkscala_transform.delta_total_population_folder}delta_total_population_${year}.png`;
 				let delta_r = (fs.existsSync(delta_path)) ? GeoPNG.loadNumberRasterImage(delta_path, { format: "float32" }) : null;
 
 				let is_empirical_year = has_unwpp && delta_r !== null;

@@ -277,6 +277,7 @@ global.l4p = "./livemap/4.view/politics/";
 			"!histmap/3.data_transform/age_sex_counterfactuals/archives",
 			"!histmap/**/_rasters",
 			"!histmap/**/stadester_*_rasters",
+			"!histmap/**/velkscala_*_rasters",
 			"!histmap/**/rasters*",
 			"!scratch/",
 			"!tests/",

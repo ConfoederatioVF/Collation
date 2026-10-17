@@ -36,7 +36,7 @@
     //HYDE; Stadestér formatters
     static hf = () => `${landuse_HYDE.bf}/rasters/`;
     static hf1 = (y) => landuse_HYDE._getHYDEYearName(y);
-    static sf = () => population_Stadester;
+    static sf = () => population_Velkscala;
     
     //Model calibration bindings
     static getGDPObject = () => GDP_PPP.getGDP_PPPObject();

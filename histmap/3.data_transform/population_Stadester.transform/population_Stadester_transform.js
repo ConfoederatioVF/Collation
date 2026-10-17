@@ -6,34 +6,34 @@ global.population_Stadester_transform = class {
 	
 	static async A_generateDeltaRasters () {
 		let hyde_years = landuse_HYDE.sorted_hyde_years;
-		let stad = population_Stadester;
+		let velk = population_Velkscala;
 		
 		//Generate delta series for all folders
 		console.log(`Generating delta series for ${this.delta_population_density_folder} ..`);
 		await GeoPNG.generateDeltaSeries(this.delta_population_density_folder, {
 			input_format: "float32",
-			input_format_function: (y) => `${stad.intermediate_popd_folder}stadester_density_${y}.png`,
+			input_format_function: (y) => `${velk.intermediate_popd_folder}velkscala_density_${y}.png`,
 			prefix: "delta_population_density_",
 			years: hyde_years
 		});
 		console.log(`Generating delta series for ${this.delta_rural_population_folder} ..`);
 		await GeoPNG.generateDeltaSeries(this.delta_rural_population_folder, {
 			input_format: "float32",
-			input_format_function: (y) => `${stad.input_rurc_folder}stadester_rural_${y}.png`,
+			input_format_function: (y) => `${velk.input_rurc_folder}velkscala_rural_${y}.png`,
 			prefix: "delta_rural_population_",
 			years: hyde_years 
 		});
 		console.log(`Generating delta series for ${this.delta_total_population_folder} ..`);
 		await GeoPNG.generateDeltaSeries(this.delta_total_population_folder, {
 			input_format: "float32",
-			input_format_function: (y) => `${stad.input_popc_folder}stadester_population_${y}.png`,
+			input_format_function: (y) => `${velk.input_popc_folder}velkscala_population_${y}.png`,
 			prefix: "delta_total_population_",
 			years: hyde_years 
 		});
 		console.log(`Generating delta series for ${this.delta_urban_population_folder} ..`);
 		await GeoPNG.generateDeltaSeries(this.delta_urban_population_folder, {
 			input_format: "float32",
-			input_format_function: (y) => `${stad.input_urbc_folder}stadester_urban_${y}.png`,
+			input_format_function: (y) => `${velk.input_urbc_folder}velkscala_urban_${y}.png`,
 			prefix: "delta_urban_population_",
 			years: hyde_years
 		});
@@ -50,3 +50,5 @@ global.population_Stadester_transform = class {
 		if (!options.exclude.includes("A")) await this.A_generateDeltaRasters();
 	}
 };
+
+global.population_Velkscala_transform = global.population_Stadester_transform;

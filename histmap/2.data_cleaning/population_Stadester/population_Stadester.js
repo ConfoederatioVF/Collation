@@ -32,6 +32,19 @@
     static file_stadester_final = `${this.raw_folder}uud/stadester.json`;
     static file_stadester_ghsl = `${this.raw_folder}uud/stadester_ghsl.json`;
     
+    static antiquity_years = Array.from({ length: 101 }, (_, i) => -10000 + i * 100);
+    static urban_antiquity_years = Array.from({ length: 31 }, (_, i) => -3000 + i * 100);
+
+    /**
+     * Complete array of urban years: all 100-year antiquity intervals (-10000 to 0) + post-1AD HYDE years.
+     * @returns {Array<number>}
+     */
+    static get all_urban_years () {
+      let post_1ad = (typeof landuse_HYDE !== "undefined" && landuse_HYDE.sorted_hyde_years) ?
+        landuse_HYDE.sorted_hyde_years.filter(y => y > 0) : [];
+      return [...this.antiquity_years, ...post_1ad];
+    }
+    
     /**
      * Initialises UUD from raw modified sources in 1.data_raw/population_Stadester/.
      * @param {Object} [arg0_options]
@@ -189,9 +202,7 @@
       let options = (arg0_options) ? arg0_options : {};
       
       //Declare local instance variables
-      let hyde_years = (typeof landuse_HYDE !== "undefined" && landuse_HYDE.sorted_hyde_years) ?
-        landuse_HYDE.sorted_hyde_years : [1800];
-      let years = options.years || hyde_years.filter(y => y >= -10000 && y <= 2025);
+      let years = options.years || this.all_urban_years;
       
       this.ensureDirectories();
       
@@ -219,9 +230,7 @@
       let options = (arg0_options) ? arg0_options : {};
       
       //Declare local instance variables
-      let hyde_years = (typeof landuse_HYDE !== "undefined" && landuse_HYDE.sorted_hyde_years) ?
-        landuse_HYDE.sorted_hyde_years : [1800];
-      let years = options.years || hyde_years.filter(y => y >= -10000 && y <= 2025);
+      let years = options.years || this.all_urban_years;
       
       this.ensureDirectories();
       
@@ -416,7 +425,7 @@
       //Initialise options
       if (!options.exclude) {
         options.exclude = [];
-        if (fs.existsSync(this.file_processed_stadester) || fs.existsSync(this.file_stadester_areas))
+        if (!options.overwrite && (fs.existsSync(this.file_processed_stadester) || fs.existsSync(this.file_stadester_areas)))
           options.exclude = ["A", "B", "C", "D", "E"];
       }
       

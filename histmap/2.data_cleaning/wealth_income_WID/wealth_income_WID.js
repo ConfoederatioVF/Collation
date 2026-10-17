@@ -160,8 +160,14 @@ global.wealth_income_WID = class {
 		//Declare local instance variables
 		let dev_index_file = path.join(
 			(typeof root_dir !== "undefined") ? root_dir : ".",
-			"histmap/2.data_cleaning/population_Stadester/stadester_national_populations.json"
+			"histmap/2.data_cleaning/population_Velkscala/velkscala_national_populations.json"
 		);
+		if (!fs.existsSync(dev_index_file)) {
+			dev_index_file = path.join(
+				(typeof root_dir !== "undefined") ? root_dir : ".",
+				"histmap/2.data_cleaning/population_Stadester/stadester_national_populations.json"
+			);
+		}
 		let geocodes_lines = fs.readFileSync(admin_modern.input_iso2_geocodes_csv, "utf8").trim().split("\n").slice(1);
 		let hyde_years = landuse_HYDE.sorted_hyde_years;
 		let iso2_to_iso3 = {};

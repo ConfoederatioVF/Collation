@@ -623,11 +623,11 @@ global.professions = class {
 				output_aggregates: output_aggregates,
 				output_folder: output_percentages,
 				output_percentages: output_percentages,
-				rur_path: `${global.h2 || "./histmap/2.data_cleaning/"}population_Stadester/stadester_rural_rasters/stadester_rural_${year}.png`,
+				rur_path: (typeof population_Velkscala !== "undefined") ? `${population_Velkscala.input_rurc_folder}velkscala_rural_${year}.png` : `${global.h2 || "./histmap/2.data_cleaning/"}population_Velkscala/velkscala_rural_rasters/velkscala_rural_${year}.png`,
 				sector_baselines: { f: this.getDynamicSectorBaselines(year, "f"), m: this.getDynamicSectorBaselines(year, "m") },
 				sexes: sexes,
 				target_folder: (typeof professions_Olivetti !== "undefined") ? professions_Olivetti.output_rasters : `${global.h1 || "./histmap/1.data_raw/"}professions_Olivetti/output_rasters/`,
-				urb_path: `${global.h2 || "./histmap/2.data_cleaning/"}population_Stadester/stadester_urban_rasters/stadester_urban_${year}.png`,
+				urb_path: (typeof population_Velkscala !== "undefined") ? `${population_Velkscala.input_urbc_folder}velkscala_urban_${year}.png` : `${global.h2 || "./histmap/2.data_cleaning/"}population_Velkscala/velkscala_urban_rasters/velkscala_urban_${year}.png`,
 				working_cohorts: working_cohorts,
 				year: year
 			}),
@@ -742,9 +742,12 @@ global.professions = class {
 						}
 					}
 
-					let gdp_pc_path = (typeof GDP_pc !== "undefined" && GDP_pc.output_gdp_pc_folder) ? path.join(GDP_pc.output_gdp_pc_folder, `GDP_pc_${year}.png`) : `${global.h3 || "./histmap/3.data_transform/"}GDP_pc/6.GDP_nominal_pc_rasters/GDP_pc_${year}.png`;
-					let urb_path = `${global.h2 || "./histmap/2.data_cleaning/"}population_Stadester/stadester_urban_rasters/stadester_urban_${year}.png`;
-					let rur_path = `${global.h2 || "./histmap/2.data_cleaning/"}population_Stadester/stadester_rural_rasters/stadester_rural_${year}.png`;
+					let urb_path = (typeof population_Velkscala !== "undefined") ? `${population_Velkscala.input_urbc_folder}velkscala_urban_${year}.png` : `${global.h2 || "./histmap/2.data_cleaning/"}population_Velkscala/velkscala_urban_rasters/velkscala_urban_${year}.png`;
+					if (!fs.existsSync(urb_path))
+						urb_path = `${global.h2 || "./histmap/2.data_cleaning/"}population_Stadester/stadester_urban_rasters/stadester_urban_${year}.png`;
+					let rur_path = (typeof population_Velkscala !== "undefined") ? `${population_Velkscala.input_rurc_folder}velkscala_rural_${year}.png` : `${global.h2 || "./histmap/2.data_cleaning/"}population_Velkscala/velkscala_rural_rasters/velkscala_rural_${year}.png`;
+					if (!fs.existsSync(rur_path))
+						rur_path = `${global.h2 || "./histmap/2.data_cleaning/"}population_Stadester/stadester_rural_rasters/stadester_rural_${year}.png`;
 
 					let gdp_raster = fs.existsSync(gdp_pc_path) ? GeoPNG.loadNumberRasterImage(gdp_pc_path, { format: "float32" }) : null;
 					let rur_raster = fs.existsSync(rur_path) ? GeoPNG.loadNumberRasterImage(rur_path, { format: "float32" }) : null;

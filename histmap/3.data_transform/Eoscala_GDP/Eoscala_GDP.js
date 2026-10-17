@@ -13,8 +13,8 @@
     static input_covariates_obj = () => {
       let covariates_obj = {
         ...GDP_PPP_SEDAC.covariates_obj,
-        "rurc_": (y) => [`${population_Stadester.input_rurc_folder}/stadester_rural_${y}.png`, "float32"],
-        "urbc_": (y) => [`${population_Stadester.input_urbc_folder}/stadester_urban_${y}.png`, "float32"]
+        "rurc_": (y) => [`${population_Velkscala.input_rurc_folder}velkscala_rural_${y}.png`, "float32"],
+        "urbc_": (y) => [`${population_Velkscala.input_urbc_folder}velkscala_urban_${y}.png`, "float32"]
       };
       delete covariates_obj["uopp_"];
       delete covariates_obj["popd_"];
@@ -50,7 +50,7 @@
       
       for (let i = 0; i < hyde_years.length; i++) {
         let local_output_path = `${this.input_gdp_pc_folder}${this.pc_prefix}_${hyde_years[i]}.png`;
-        let local_popc_path = `${population_Stadester.input_popc_folder}stadester_population_${hyde_years[i]}.png`;
+        let local_popc_path = `${population_Velkscala.input_popc_folder}velkscala_population_${hyde_years[i]}.png`;
         
         if (fs.existsSync(local_popc_path))
           if (overwrite || !fs.existsSync(local_output_path))
@@ -67,7 +67,7 @@
         handler: async (year) => {
           let geocode_raster = GeoPNG.loadImage(geocodes_raster_path);
           let local_output_path = `${this.input_gdp_pc_folder}${this.pc_prefix}_${year}.png`;
-          let local_popc_path = `${population_Stadester.input_popc_folder}stadester_population_${year}.png`;
+          let local_popc_path = `${population_Velkscala.input_popc_folder}velkscala_population_${year}.png`;
           let local_popc_raster = GeoPNG.loadNumberRasterImage(local_popc_path, { format: "float32" });
           let national_pop_sums = {};
           
@@ -360,7 +360,7 @@
           
           let first_pass_path = `${this.input_gdp_pc_folder}${this.pc_prefix}_${year}.png`;
           let second_pass_path = `${this.intermediate_ols_rasters_folder}OLS_${this.pc_prefix}_${year}.png`;
-          let pop_path = `${population_Stadester.input_popc_folder}stadester_population_${year}.png`;
+          let pop_path = `${population_Velkscala.input_popc_folder}velkscala_population_${year}.png`;
           let output_path = `${this.intermediate_pc_estimates_folder}${this.pc_prefix}_${year}.png`;
           
           let first_pass_raster = GeoPNG.loadNumberRasterImage(first_pass_path, { format: "float32" });
@@ -440,7 +440,7 @@
         name: `${this.prefix} Step E: SEDAC Historical Blending`,
         handler: async (current_year) => {
           let local_output_path = `${this.intermediate_gdp_interpolated}${this.prefix}_${current_year}.png`;
-          let pop_path = `${population_Stadester.input_popc_folder}stadester_population_${current_year}.png`;
+          let pop_path = `${population_Velkscala.input_popc_folder}velkscala_population_${current_year}.png`;
           let pop_raster = (fs.existsSync(pop_path)) ?
             GeoPNG.loadNumberRasterImage(pop_path, { format: "float32" }) : null;
           
@@ -467,7 +467,7 @@
           
           //2. Post-2022: scale SEDAC 2022 per-capita by world per-capita growth
           if (current_year > 2022) {
-            let pop_2022_path = `${population_Stadester.input_popc_folder}stadester_population_2022.png`;
+            let pop_2022_path = `${population_Velkscala.input_popc_folder}velkscala_population_2022.png`;
             if (fs.existsSync(template_path) && fs.existsSync(pop_2022_path) && pop_raster) {
               let target_global = Math.returnSafeNumber(world_gdp_obj[current_year], template_sum);
               let global_scalar = (template_sum > 0) ? target_global / template_sum : 1;
@@ -512,7 +512,7 @@
             //1800 <= current_year < 1990: blend modelled per capita into SEDAC 1990 per capita in per-capita space
             let fraction = (current_year - sedac_domain[0]) / year_gap;
             let is_early = (current_year < sedac1_domain[1]);
-            let pop_1990_path = `${population_Stadester.input_popc_folder}stadester_population_1990.png`;
+            let pop_1990_path = `${population_Velkscala.input_popc_folder}velkscala_population_1990.png`;
             let pop_1990_raster = (fs.existsSync(pop_1990_path)) ?
               GeoPNG.loadNumberRasterImage(pop_1990_path, { format: "float32" }) : null;
             let threshold_fraction = (!is_early) ? (current_year - sedac2_domain[0]) / year_gap2 : 0;
@@ -640,9 +640,9 @@
         if (!fs.existsSync(local_input_file_path)) continue;
         
         let local_input_raster = GeoPNG.loadNumberRasterImage(local_input_file_path, { format: "float32" });
-        let local_popc_file_path = `${population_Stadester.input_popc_folder}stadester_population_${current_year}.png`;
+        let local_popc_file_path = `${population_Velkscala.input_popc_folder}velkscala_population_${current_year}.png`;
         let local_popc_raster = GeoPNG.loadNumberRasterImage(local_popc_file_path, { format: "float32" });
-        let local_urbc_file_path = `${population_Stadester.input_urbc_folder}stadester_urban_${current_year}.png`;
+        let local_urbc_file_path = `${population_Velkscala.input_urbc_folder}velkscala_urban_${current_year}.png`;
         let local_urbc_raster = (fs.existsSync(local_urbc_file_path)) ?
           GeoPNG.loadNumberRasterImage(local_urbc_file_path, { format: "float32" }) : null;
         
@@ -756,9 +756,9 @@
           if (!fs.existsSync(local_input_file_path))
             local_input_file_path = `${this.intermediate_pc_estimates_folder}${this.pc_prefix}_${year}.png`;
           let local_input_raster = GeoPNG.loadNumberRasterImage(local_input_file_path, { format: "float32" });
-          let local_popc_file_path = `${population_Stadester.input_popc_folder}stadester_population_${year}.png`;
+          let local_popc_file_path = `${population_Velkscala.input_popc_folder}velkscala_population_${year}.png`;
           let local_popc_raster = GeoPNG.loadNumberRasterImage(local_popc_file_path, { format: "float32" });
-          let local_urbc_file_path = `${population_Stadester.input_urbc_folder}stadester_urban_${year}.png`;
+          let local_urbc_file_path = `${population_Velkscala.input_urbc_folder}velkscala_urban_${year}.png`;
           let local_urbc_raster = (fs.existsSync(local_urbc_file_path)) ?
             GeoPNG.loadNumberRasterImage(local_urbc_file_path, { format: "float32" }) : null;
           let local_output_pc = `${this.output_gdp_pc_folder}${this.pc_prefix}_${year}.png`;
@@ -803,7 +803,7 @@
           //For pre-industrial era (year < 1800): apply dasymetric blur only if explicitly enabled
           let blur_radius = (options.blur_radius !== undefined) ? options.blur_radius : 0;
           if (year < 1800 && blur_radius > 0) {
-            let local_urbc_path = `${population_Stadester.input_urbc_folder}stadester_urban_${year}.png`;
+            let local_urbc_path = `${population_Velkscala.input_urbc_folder}velkscala_urban_${year}.png`;
             let local_urbc_raster = (fs.existsSync(local_urbc_path)) ?
               GeoPNG.loadNumberRasterImage(local_urbc_path, { format: "float32" }) : null;
             let blurred_pc = GeoPNG.dasymetricBlur({

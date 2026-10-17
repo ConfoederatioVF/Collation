@@ -547,7 +547,9 @@
       1830, 1840, 1850, 1860, 1870, 1880, 1890, 1900, 1910, 1920, 1930,
       1940, 1950, 1960, 1970, 1980, 1990, 2000, 2005, 2010, 2015, 2020
     ];
-    let target_years = hyde_years.filter(y => y >= -3000 && y <= 2025);
+    let antiquity_100y = Array.from({ length: 31 }, (_, i) => -3000 + i * 100);
+    let post_1ad = hyde_years.filter(y => y > 0 && y <= 2025);
+    let target_years = (options.years) ? options.years.filter(y => y >= -3000 && y <= 2025) : [...antiquity_100y, ...post_1ad];
     
     console.log(`- Interpolating UUD for ${all_cities.length} cities over years:`, target_years.length);
     for (let i = 0; i < all_cities.length; i++) {

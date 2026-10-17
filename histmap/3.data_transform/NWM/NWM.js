@@ -28,6 +28,8 @@
         population_Substrata_northern_america: (global.h3) ? path.join(h3, "population_Substrata.northern_america", "population_Substrata_northern_america.js") : "",
         population_Substrata_outlier_removal: (global.h3) ? path.join(h3, "population_Substrata.outlier_removal", "population_Substrata_outlier_removal.js") : "",
         population_Stadester: (global.h2) ? path.join(h2, "population_Stadester", "population_Stadester.js") : "",
+        population_c14bazAAR: (global.h2) ? path.join(h2, "population_c14bazAAR", "population_c14bazAAR.js") : "",
+        population_Velkscala: (global.h2) ? path.join(h2, "population_Velkscala", "population_Velkscala.js") : "",
         GDP_PPP_SEDAC: (global.h2) ? path.join(h2, "GDP_PPP_SEDAC", "GDP_PPP_SEDAC.js") : "",
         GDP_nominal_SEDAC: (global.h2) ? path.join(h2, "GDP_nominal_SEDAC", "GDP_nominal_SEDAC.js") : "",
         GDP_PPP_OLS: (global.h2) ? path.join(h2, "GDP_PPP_OLS", "GDP_PPP_OLS.js") : "",
@@ -38,6 +40,7 @@
         GDP_PPP_pc: (global.h3) ? path.join(h3, "GDP_PPP_pc", "GDP_PPP_pc.js") : "",
         GDP_pc: (global.h3) ? path.join(h3, "GDP_pc", "GDP_pc.js") : "",
         population_Stadester_transform: (global.h3) ? path.join(h3, "population_Stadester.transform", "population_Stadester_transform.js") : "",
+        population_Velkscala_transform: (global.h3) ? path.join(h3, "population_Stadester.transform", "population_Stadester_transform.js") : "",
         GDP_Eoscala_transform: (global.h3) ? path.join(h3, "GDP_Eoscala.transform", "GDP_Eoscala_transform.js") : "",
         gini_OLS: (global.h2) ? path.join(h2, "gini_OLS", "gini_OLS.js") : "",
         gini_Eoscala: (global.h2) ? path.join(h2, "gini_Eoscala", "gini_Eoscala.js") : "",
@@ -113,25 +116,54 @@
     }
     
     /**
-     * Step B: Processes the Stadestér Historical GIS City & Raster Demographics pipeline.
-     * Integrates concentric radial walkability buffering, float32 processing, annular pixel correction, and GHSL city repair.
+     * Step B: Processes Demographics: Stadestér prior -> c14bazAAR antiquity downscaling -> Velkscala compositing.
+     * @alias NWM.B_processDemographics
      * @alias NWM.B_processStadester
      * 
      * @param {Object} [arg0_options]
+     *  @param {Object} [arg0_options.c14bazAAR] - Options passed to population_c14bazAAR.processRasters
+     *  @param {boolean} [arg0_options.skip_c14=false] - If true, skips c14bazAAR processing
+     *  @param {boolean} [arg0_options.skip_stadester=false] - If true, skips population_Stadester prior processing
+     *  @param {boolean} [arg0_options.skip_velkscala=false] - If true, skips population_Velkscala compositing
      *  @param {Object} [arg0_options.stadester] - Options passed to population_Stadester.processRasters
+     *  @param {Object} [arg0_options.velkscala] - Options passed to population_Velkscala.processRasters
      */
-    static async B_processStadester (arg0_options) {
+    static async B_processDemographics (arg0_options) {
       //Convert from parameters
       let options = (arg0_options) ? arg0_options : {};
       
       //Declare local instance variables
       let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
+
+      let c14_options = { overwrite: overwrite, ...(options.c14bazAAR || options.c14 || {}) };
       let stadester_options = { overwrite: overwrite, ...(options.stadester || {}) };
+      let velkscala_options = { overwrite: overwrite, ...(options.velkscala || {}) };
       
       //Function body
-      console.log(`[NWM] === Step B: Processing Stadestér Demographics & Rasters ===`);
-      if (global.population_Stadester)
+      console.log(`[NWM] === Step B: Processing Demographics (Stadestér -> c14bazAAR -> Velkscala) ===`);
+      
+      //1. Stadestér Prior
+      if (!options.skip_stadester && global.population_Stadester) {
+        console.log(`[NWM] Running population_Stadester (Priors & Post-1AD)...`);
         await population_Stadester.processRasters(stadester_options);
+      }
+      
+      //2. c14bazAAR Antiquity 100-year increments
+      if (!options.skip_c14 && global.population_c14bazAAR) {
+        console.log(`[NWM] Running population_c14bazAAR (Antiquity 10000 BC - 1 AD in 100y increments)...`);
+        await population_c14bazAAR.processRasters(c14_options);
+      }
+      
+      //3. Velkscala Demographic Compositing
+      if (!options.skip_velkscala && global.population_Velkscala) {
+        console.log(`[NWM] Running population_Velkscala (Canonical Demographic Compositing)...`);
+        await population_Velkscala.processRasters(velkscala_options);
+      }
+    }
+
+    static async B_processStadester (arg0_options) {
+      //Return statement
+      return this.B_processDemographics(arg0_options);
     }
     
     /**
@@ -246,11 +278,13 @@
       let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
       
       let eoscala_transform_options = { overwrite: overwrite, ...(options.gdp_eoscala_transform || options.eoscala_transform || {}) };
-      let stadester_transform_options = { overwrite: overwrite, ...(options.population_stadester_transform || options.stadester_transform || {}) };
+      let stadester_transform_options = { overwrite: overwrite, ...(options.population_velkscala_transform || options.velkscala_transform || options.population_stadester_transform || options.stadester_transform || {}) };
       
       //Function body
       console.log(`[NWM] === Step E: Processing Covariate Delta Transforms ===`);
-      if (global.population_Stadester_transform)
+      if (global.population_Velkscala_transform)
+        await population_Velkscala_transform.processRasters(stadester_transform_options);
+      else if (global.population_Stadester_transform)
         await population_Stadester_transform.processRasters(stadester_transform_options);
       if (global.GDP_Eoscala_transform)
         await GDP_Eoscala_transform.processRasters(eoscala_transform_options);
@@ -530,7 +564,8 @@
       this.loadDependencies(options);
 
       if (should_run("A", "substrata")) await this.A_processSubstrata(options);
-      if (should_run("B", "stadester")) await this.B_processStadester(options);
+      if (should_run("B", "demographics") || should_run("B", "stadester") || should_run("B", "velkscala"))
+        await this.B_processDemographics(options);
       if (should_run("C", "eoscala_gdp")) await this.C_processEoscalaGDP(options);
       if (should_run("D", "gdp_pc")) await this.D_processGDPPerCapita(options);
       if (should_run("E", "covariates")) await this.E_processCovariates(options);

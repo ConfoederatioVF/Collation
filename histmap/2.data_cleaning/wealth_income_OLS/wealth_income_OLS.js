@@ -8,7 +8,7 @@ global.wealth_income_OLS = class {
 	//Hyde; Stadestér formatters
 	static hf = () => `${landuse_HYDE.bf}/rasters/`;
 	static hf1 = (y) => landuse_HYDE._getHYDEYearName(y);
-	static sf = () => population_Stadester;
+	static sf = () => population_Velkscala;
 	static covariates_obj = {
 		//LU (Land Use)
 		"conv_rangeland": (y) => [`${this.hf()}/conv_rangeland${this.hf1(y)}_number.png`, "float32"],
@@ -27,10 +27,10 @@ global.wealth_income_OLS = class {
 		"uopp_": (y) => [`${this.hf()}/uopp_${this.hf1(y)}_number.png`, "float32"],
 		
 		//POP (Demographics)
-		"popc_": (y) => [`${this.sf().input_popc_folder}/stadester_population_${y}.png`, "float32"],
-		"popd_": (y) => [`${this.sf().intermediate_popd_folder}/stadester_density_${y}.png`, "float32"],
-		"rurc_": (y) => [`${this.sf().input_rurc_folder}/stadester_rural_${y}.png`, "float32"],
-		"urbc_": (y) => [`${this.sf().input_urbc_folder}/stadester_urban_${y}.png`, "float32"],
+		"popc_": (y) => [`${this.sf().input_popc_folder}velkscala_population_${y}.png`, "float32"],
+		"popd_": (y) => [`${this.sf().intermediate_popd_folder}velkscala_density_${y}.png`, "float32"],
+		"rurc_": (y) => [`${this.sf().input_rurc_folder}velkscala_rural_${y}.png`, "float32"],
+		"urbc_": (y) => [`${this.sf().input_urbc_folder}velkscala_urban_${y}.png`, "float32"],
 		
 		//Eoscala (Economics)
 		"gdp_nominal": (y) => [`${GDP_pc.intermediate_gdp_scaled_to_national}/GDP_${y}.png`, "float32"],
@@ -44,11 +44,11 @@ global.wealth_income_OLS = class {
 		"delta_gdp_pc": (y) => [`${GDP_Eoscala_transform.delta_GDP_pc_folder}/delta_GDP_pc_${y}.png`, "float32"],
 		"delta_gdp_ppp": (y) => [`${GDP_Eoscala_transform.delta_GDP_PPP_folder}/delta_GDP_PPP_${y}.png`, "float32"],
 		"delta_gdp_ppp_pc": (y) => [`${GDP_Eoscala_transform.delta_GDP_PPP_pc_folder}/delta_GDP_PPP_pc_${y}.png`, "float32"],
-		"delta_popd_": (y) => [`${population_Stadester_transform.delta_population_density_folder}/delta_population_density_${y}.png`, "float32"],
+		"delta_popd_": (y) => [`${population_Velkscala_transform.delta_population_density_folder}delta_population_density_${y}.png`, "float32"],
 		
-		"delta_popc_": (y) => [`${population_Stadester_transform.delta_total_population_folder}/delta_total_population_${y}.png`, "float32"],
-		"delta_rurc_": (y) => [`${population_Stadester_transform.delta_rural_population_folder}/delta_rural_population_${y}.png`, "float32"],
-		"delta_urbc_": (y) => [`${population_Stadester_transform.delta_urban_population_folder}/delta_urban_population_${y}.png`, "float32"]
+		"delta_popc_": (y) => [`${population_Velkscala_transform.delta_total_population_folder}delta_total_population_${y}.png`, "float32"],
+		"delta_rurc_": (y) => [`${population_Velkscala_transform.delta_rural_population_folder}delta_rural_population_${y}.png`, "float32"],
+		"delta_urbc_": (y) => [`${population_Velkscala_transform.delta_urban_population_folder}delta_urban_population_${y}.png`, "float32"]
 	};
 	
 	static async A_trainWIDModels (arg0_options) {
