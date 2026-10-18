@@ -42,7 +42,7 @@ global.migration_OLS = class {
 				let has_unwpp = unwpp_b_path && unwpp_fd_path && unwpp_md_path && fs.existsSync(unwpp_b_path) && fs.existsSync(unwpp_fd_path) && fs.existsSync(unwpp_md_path);
 
 				let delta_path = `${population_Velkscala_transform.delta_total_population_folder}delta_total_population_${year}.png`;
-				let popc_path = `${age_sex.sf().input_popc_folder}velkscala_population_${year}.png`;
+				let popc_path = `${age_sex.sf().input_popc_folder}population_${year}.png`;
 				if (!fs.existsSync(popc_path) && typeof population_Stadester !== "undefined")
 					popc_path = `${population_Stadester.input_popc_folder}stadester_population_${year}.png`;
 				
@@ -197,7 +197,7 @@ global.migration_OLS = class {
 			if (!fs.existsSync(target_path)) continue;
 			
 			let target_raster = GeoPNG.loadNumberRasterImage(target_path, { format: "float32" });
-			let popc_path = `${age_sex.sf().input_popc_folder}velkscala_population_${year}.png`;
+			let popc_path = `${age_sex.sf().input_popc_folder}population_${year}.png`;
 			if (!fs.existsSync(popc_path) && typeof population_Stadester !== "undefined")
 				popc_path = `${population_Stadester.input_popc_folder}stadester_population_${year}.png`;
 			if (!fs.existsSync(popc_path)) continue;
@@ -236,7 +236,7 @@ global.migration_OLS = class {
 			concurrency: options.concurrency || 4,
 			name: `migration_OLS D_normaliseOLSRasters`,
 			handler: async (year) => {
-				let popc_path = `${age_sex.sf().input_popc_folder}velkscala_population_${year}.png`;
+				let popc_path = `${age_sex.sf().input_popc_folder}population_${year}.png`;
 				if (!fs.existsSync(popc_path) && typeof population_Stadester !== "undefined")
 					popc_path = `${population_Stadester.input_popc_folder}stadester_population_${year}.png`;
 				let ols_path = `${this.intermediate_ols}ols_migration_${year}.png`;
@@ -329,7 +329,7 @@ global.migration_OLS = class {
 			concurrency: options.concurrency || 4,
 			name: "migration_OLS E_deriveFinalRasters",
 			handler: async (year) => {
-				let popc_path = `${age_sex.sf().input_popc_folder}velkscala_population_${year}.png`;
+				let popc_path = `${age_sex.sf().input_popc_folder}population_${year}.png`;
 				if (!fs.existsSync(popc_path) && typeof population_Stadester !== "undefined")
 					popc_path = `${population_Stadester.input_popc_folder}stadester_population_${year}.png`;
 				if (!fs.existsSync(popc_path)) return;

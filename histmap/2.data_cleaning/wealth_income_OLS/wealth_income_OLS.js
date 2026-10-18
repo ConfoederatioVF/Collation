@@ -27,10 +27,10 @@ global.wealth_income_OLS = class {
 		"uopp_": (y) => [`${this.hf()}/uopp_${this.hf1(y)}_number.png`, "float32"],
 		
 		//POP (Demographics)
-		"popc_": (y) => [`${this.sf().input_popc_folder}velkscala_population_${y}.png`, "float32"],
-		"popd_": (y) => [`${this.sf().intermediate_popd_folder}velkscala_density_${y}.png`, "float32"],
-		"rurc_": (y) => [`${this.sf().input_rurc_folder}velkscala_rural_${y}.png`, "float32"],
-		"urbc_": (y) => [`${this.sf().input_urbc_folder}velkscala_urban_${y}.png`, "float32"],
+		"popc_": (y) => [`${this.sf().input_popc_folder}population_${y}.png`, "float32"],
+		"popd_": (y) => [`${this.sf().intermediate_popd_folder}population_density_${y}.png`, "float32"],
+		"rurc_": (y) => [`${this.sf().input_rurc_folder}population_rural_${y}.png`, "float32"],
+		"urbc_": (y) => [`${this.sf().input_urbc_folder}population_urban_${y}.png`, "float32"],
 		
 		//Eoscala (Economics)
 		"gdp_nominal": (y) => [`${GDP_pc.intermediate_gdp_scaled_to_national}/GDP_${y}.png`, "float32"],

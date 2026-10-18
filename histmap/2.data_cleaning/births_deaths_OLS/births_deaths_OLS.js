@@ -152,10 +152,10 @@ global.births_deaths_OLS = class {
 		let year_gap = (year === prev_year) ? 1 : (year - prev_year);
 		
 		let sf = age_sex.sf();
-		let popc_path = `${sf.input_popc_folder}velkscala_population_${year}.png`;
+		let popc_path = `${sf.input_popc_folder}population_${year}.png`;
 		if (!fs.existsSync(popc_path) && typeof population_Stadester !== "undefined")
 			popc_path = `${population_Stadester.input_popc_folder}stadester_population_${year}.png`;
-		let prev_popc_path = `${sf.input_popc_folder}velkscala_population_${prev_year}.png`;
+		let prev_popc_path = `${sf.input_popc_folder}population_${prev_year}.png`;
 		if (!fs.existsSync(prev_popc_path) && typeof population_Stadester !== "undefined")
 			prev_popc_path = `${population_Stadester.input_popc_folder}stadester_population_${prev_year}.png`;
 		
@@ -307,7 +307,7 @@ global.births_deaths_OLS = class {
 						console.warn(`- Missing or invalid actuals raster at ${actual_path}. Skipping target.`);
 						continue;
 					}
-					let popc_path = `${age_sex.sf().input_popc_folder}velkscala_population_${year}.png`;
+					let popc_path = `${age_sex.sf().input_popc_folder}population_${year}.png`;
 					if (!fs.existsSync(popc_path) && typeof population_Stadester !== "undefined")
 						popc_path = `${population_Stadester.input_popc_folder}stadester_population_${year}.png`;
 					let popc_raster = fs.existsSync(popc_path) ? GeoPNG.loadNumberRasterImage(popc_path, { format: "float32" }) : null;
@@ -508,7 +508,7 @@ global.births_deaths_OLS = class {
 				concurrency: options.concurrency || 4,
 				name: `births_deaths_OLS D_normaliseOLSRasters (${variable_obj.actual_prefix})`,
 				handler: async (year) => {
-					let popc_path = `${sf.input_popc_folder}velkscala_population_${year}.png`;
+					let popc_path = `${sf.input_popc_folder}population_${year}.png`;
 					if (!fs.existsSync(popc_path) && typeof population_Stadester !== "undefined")
 						popc_path = `${population_Stadester.input_popc_folder}stadester_population_${year}.png`;
 					if (!fs.existsSync(popc_path)) return;
@@ -625,7 +625,7 @@ global.births_deaths_OLS = class {
 			concurrency: options.concurrency || 4,
 			name: "births_deaths_OLS E_clampToStadester",
 			handler: async (year) => {
-				let popc_path = `${sf.input_popc_folder}velkscala_population_${year}.png`;
+				let popc_path = `${sf.input_popc_folder}population_${year}.png`;
 				if (!fs.existsSync(popc_path) && typeof population_Stadester !== "undefined")
 					popc_path = `${population_Stadester.input_popc_folder}stadester_population_${year}.png`;
 				if (!fs.existsSync(popc_path)) return;

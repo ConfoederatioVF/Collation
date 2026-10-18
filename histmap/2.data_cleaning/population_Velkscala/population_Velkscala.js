@@ -14,10 +14,10 @@
     static bf = `${h2}/population_Velkscala/`;
     static config_folder = `${this.bf}config/`;
 
-    static input_popc_folder = `${this.bf}velkscala_population_rasters/`;
-    static input_rurc_folder = `${this.bf}velkscala_rural_rasters/`;
-    static input_urbc_folder = `${this.bf}velkscala_urban_rasters/`;
-    static intermediate_popd_folder = `${this.bf}velkscala_density_rasters/`;
+    static input_popc_folder = `${this.bf}population_rasters/`;
+    static input_rurc_folder = `${this.bf}population_rural_rasters/`;
+    static input_urbc_folder = `${this.bf}population_urban_rasters/`;
+    static intermediate_popd_folder = `${this.bf}population_density_rasters/`;
 
     static input_c14_popc = `${h2}/population_c14bazAAR/5.rasters_scaled_to_global/`;
     static input_c14_rurc = `${h2}/population_c14bazAAR/4.rasters_rural/`;
@@ -31,8 +31,10 @@
 
     static file_stadester_national_development_index = `${h2}/population_Stadester/stadester_national_development_index.json`;
     static file_stadester_national_populations = `${h2}/population_Stadester/stadester_national_populations.json`;
-    static file_velkscala_national_development_index = `${this.bf}velkscala_national_development_index.json`;
-    static file_velkscala_national_populations = `${this.bf}velkscala_national_populations.json`;
+    static file_national_development_index = `${this.bf}national_development_index.json`;
+    static file_national_populations = `${this.bf}national_populations.json`;
+    static file_velkscala_national_development_index = `${this.bf}national_development_index.json`;
+    static file_velkscala_national_populations = `${this.bf}national_populations.json`;
 
     static antiquity_years = Array.from({ length: 101 }, (_, i) => -10000 + i * 100);
 
@@ -95,10 +97,10 @@
         let src_urbc = path.join(this.input_c14_urbc, `urbc_${yr}.png`);
         let src_popd = path.join(this.input_c14_popd, `popd_${yr}.png`);
 
-        let dst_popc = path.join(this.input_popc_folder, `velkscala_population_${yr}.png`);
-        let dst_rurc = path.join(this.input_rurc_folder, `velkscala_rural_${yr}.png`);
-        let dst_urbc = path.join(this.input_urbc_folder, `velkscala_urban_${yr}.png`);
-        let dst_popd = path.join(this.intermediate_popd_folder, `velkscala_density_${yr}.png`);
+        let dst_popc = path.join(this.input_popc_folder, `population_${yr}.png`);
+        let dst_rurc = path.join(this.input_rurc_folder, `population_rural_${yr}.png`);
+        let dst_urbc = path.join(this.input_urbc_folder, `population_urban_${yr}.png`);
+        let dst_popd = path.join(this.intermediate_popd_folder, `population_density_${yr}.png`);
 
         if (fs.existsSync(src_popc) && (overwrite || !fs.existsSync(dst_popc))) fs.copyFileSync(src_popc, dst_popc);
         if (fs.existsSync(src_rurc) && (overwrite || !fs.existsSync(dst_rurc))) fs.copyFileSync(src_rurc, dst_rurc);
@@ -131,10 +133,10 @@
         let src_urbc = path.join(this.input_stad_urbc, `stadester_urban_${yr}.png`);
         let src_popd = path.join(this.input_stad_popd, `stadester_density_${yr}.png`);
 
-        let dst_popc = path.join(this.input_popc_folder, `velkscala_population_${yr}.png`);
-        let dst_rurc = path.join(this.input_rurc_folder, `velkscala_rural_${yr}.png`);
-        let dst_urbc = path.join(this.input_urbc_folder, `velkscala_urban_${yr}.png`);
-        let dst_popd = path.join(this.intermediate_popd_folder, `velkscala_density_${yr}.png`);
+        let dst_popc = path.join(this.input_popc_folder, `population_${yr}.png`);
+        let dst_rurc = path.join(this.input_rurc_folder, `population_rural_${yr}.png`);
+        let dst_urbc = path.join(this.input_urbc_folder, `population_urban_${yr}.png`);
+        let dst_popd = path.join(this.intermediate_popd_folder, `population_density_${yr}.png`);
 
         if (fs.existsSync(src_popc) && (overwrite || !fs.existsSync(dst_popc))) fs.copyFileSync(src_popc, dst_popc);
         if (fs.existsSync(src_rurc) && (overwrite || !fs.existsSync(dst_rurc))) fs.copyFileSync(src_rurc, dst_rurc);
@@ -152,13 +154,18 @@
      */
     static C_syncMetadata (arg0_options) {
       this.ensureDirectories();
+      let legacy_ndi = path.join(this.bf, "velkscala_national_development_index.json");
+      let legacy_pop = path.join(this.bf, "velkscala_national_populations.json");
+
       if (fs.existsSync(this.file_stadester_national_development_index)) {
-        fs.copyFileSync(this.file_stadester_national_development_index, this.file_velkscala_national_development_index);
-        console.log(`[population_Velkscala] Step C: Synchronised national development index to ${this.file_velkscala_national_development_index}.`);
+        fs.copyFileSync(this.file_stadester_national_development_index, this.file_national_development_index);
+        fs.copyFileSync(this.file_stadester_national_development_index, legacy_ndi);
+        console.log(`[population_Velkscala] Step C: Synchronised national development index to ${this.file_national_development_index}.`);
       }
       if (fs.existsSync(this.file_stadester_national_populations)) {
-        fs.copyFileSync(this.file_stadester_national_populations, this.file_velkscala_national_populations);
-        console.log(`[population_Velkscala] Step C: Synchronised national populations to ${this.file_velkscala_national_populations}.`);
+        fs.copyFileSync(this.file_stadester_national_populations, this.file_national_populations);
+        fs.copyFileSync(this.file_stadester_national_populations, legacy_pop);
+        console.log(`[population_Velkscala] Step C: Synchronised national populations to ${this.file_national_populations}.`);
       }
     }
 
@@ -176,7 +183,7 @@
       console.log(`[population_Velkscala] Step D: Validating completeness across ${all_years.length} timesteps ...`);
       for (let i = 0; i < all_years.length; i++) {
         let yr = all_years[i];
-        let p = path.join(this.input_popc_folder, `velkscala_population_${yr}.png`);
+        let p = path.join(this.input_popc_folder, `population_${yr}.png`);
         if (!fs.existsSync(p)) missing_files.push(`popc_${yr}`);
       }
 

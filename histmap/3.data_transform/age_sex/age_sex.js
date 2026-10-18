@@ -22,10 +22,10 @@ global.age_sex = class {
 		"uopp_": (y) => [`${this.hf()}/uopp_${this.hf1(y)}_number.png`, "float32"],
 		
 		//POP (Demographics)
-		"popc_": (y) => [`${this.sf().input_popc_folder}velkscala_population_${y}.png`, "float32"],
-		"popd_": (y) => [`${this.sf().intermediate_popd_folder}velkscala_density_${y}.png`, "float32"],
-		"rurc_": (y) => [`${this.sf().input_rurc_folder}velkscala_rural_${y}.png`, "float32"],
-		"urbc_": (y) => [`${this.sf().input_urbc_folder}velkscala_urban_${y}.png`, "float32"],
+		"popc_": (y) => [`${this.sf().input_popc_folder}population_${y}.png`, "float32"],
+		"popd_": (y) => [`${this.sf().intermediate_popd_folder}population_density_${y}.png`, "float32"],
+		"rurc_": (y) => [`${this.sf().input_rurc_folder}population_rural_${y}.png`, "float32"],
+		"urbc_": (y) => [`${this.sf().input_urbc_folder}population_urban_${y}.png`, "float32"],
 		
 		//Eoscala (Economics)
 		"discretionary_income": (y) => [`${wealth_income.output_discretionary_income_folder}/discretionary_income_${y}.png`, "float32"],
@@ -567,7 +567,7 @@ global.age_sex = class {
 			task_generator: (year) => {
 				let format_year = (year > 2023) ? 2023 : year;
 				let popc_path = (typeof population_Velkscala !== "undefined") ?
-					path.join(population_Velkscala.input_popc_folder, `velkscala_population_${format_year}.png`) :
+					path.join(population_Velkscala.input_popc_folder, `population_${format_year}.png`) :
 					path.join(population_Stadester.input_popc_folder, `stadester_population_${format_year}.png`);
 				let task_type = (smoothing_method === "piecewise_kernel") ? "clamp_cohorts_piecewise" :
 					((use_whittaker) ? "clamp_cohorts_whittaker" : "clamp_cohorts_isotonic");
@@ -663,7 +663,7 @@ global.age_sex = class {
 				if (need_composite) {
 					let format_year = (year > 2023) ? 2023 : year;
 					let popc_info = (this.covariates_obj && this.covariates_obj["popc_"]) ? this.covariates_obj["popc_"](format_year) : null;
-					let popc_path = (popc_info) ? popc_info[0] : (typeof population_Velkscala !== "undefined" ? path.join(population_Velkscala.input_popc_folder, `velkscala_population_${format_year}.png`) : (typeof population_Stadester !== "undefined" ? path.join(population_Stadester.input_popc_folder, `stadester_population_${format_year}.png`) : null));
+					let popc_path = (popc_info) ? popc_info[0] : (typeof population_Velkscala !== "undefined" ? path.join(population_Velkscala.input_popc_folder, `population_${format_year}.png`) : (typeof population_Stadester !== "undefined" ? path.join(population_Stadester.input_popc_folder, `stadester_population_${format_year}.png`) : null));
 
 					hmd_composite_tasks.push({
 						clamped_folder: this.intermediate_clamped_rasters,
