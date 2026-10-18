@@ -1,0 +1,64 @@
+#' @rdname db_getter_backend
+#' @export
+get_euroevol <- function(db_url = get_db_url("euroevol")) {
+
+  db_url1 <- db_url[1]
+  db_url2 <- db_url[2]
+  db_url3 <- db_url[3]
+
+  check_connection_to_url(db_url1)
+  check_connection_to_url(db_url2)
+  check_connection_to_url(db_url3)
+
+  # read dates data
+  dates <- db_url1 %>%
+    data.table::fread(
+      colClasses = "character",
+      showProgress = FALSE
+    )
+
+  # read site data
+  sites <- db_url2 %>%
+    data.table::fread(
+      sep = ",",
+      colClasses = "character",
+      showProgress = FALSE
+    )
+
+  # read phases data
+  phases <- db_url3 %>%
+    data.table::fread(
+      drop = c(
+        "Subculture"
+      ),
+      colClasses = "character",
+      showProgress = FALSE
+    ) %>%
+    dplyr::select(-"Period", -"SiteID")
+
+  # merge and prepare
+  euroevol <- dates %>%
+    # merge
+    dplyr::left_join(sites, by = "SiteID") %>%
+    dplyr::left_join(phases, by = "PhaseCode") %>%
+    base::replace(., . == "NULL", NA) %>%
+    base::replace(., . == "", NA) %>%
+    dplyr::transmute(
+      labnr = .data[["LabCode"]],
+      c14age = .data[["C14Age"]],
+      c14std = .data[["C14SD"]],
+      material = .data[["Material"]],
+      species = .data[["MaterialSpecies"]],
+      country = .data[["Country"]],
+      lat = .data[["Latitude"]],
+      lon = .data[["Longitude"]],
+      site = .data[["SiteName"]],
+      period = .data[["Period"]],
+      culture = .data[["Culture"]],
+      sitetype = .data[["Type"]]
+    ) %>%
+    add_sourcedb_columns("euroevol") %>%
+    as.c14_date_list()
+
+  return(euroevol)
+}
