@@ -290,10 +290,9 @@
 		let NodeWorker = (!is_renderer && typeof require !== "undefined") ? require("worker_threads").Worker : null;
 		let path_module = (typeof require !== "undefined") ? require("path") : ((typeof path !== "undefined") ? path : null);
 		let worker_candidates = (path_module) ? [
-			(typeof __dirname !== "undefined") ? path_module.join(__dirname, "png_worker.js") : null,
 			(typeof __dirname !== "undefined") ? path_module.join(__dirname, "UF/js/geospatiale/files/png/png_worker.js") : null,
+			(typeof __dirname !== "undefined") ? path_module.join(__dirname, "png_worker.js") : null,
 			(typeof process !== "undefined" && process.cwd) ? path_module.join(process.cwd(), "UF/js/geospatiale/files/png/png_worker.js") : null,
-			(typeof process !== "undefined" && process.cwd) ? path_module.join(process.cwd(), "png_worker.js") : null,
 			(typeof global !== "undefined" && global.main_dir) ? path_module.join(global.main_dir, "UF/js/geospatiale/files/png/png_worker.js") : null
 		] : [];
 		let worker_file_path = null;
