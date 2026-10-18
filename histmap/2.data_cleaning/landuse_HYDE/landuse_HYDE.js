@@ -128,14 +128,11 @@ global.landuse_HYDE = class {
 				//Await the recursive call so the folders are processed in order
 				await this.A_convertToPNGs(current_path, output_folder, options);
 			} else if (current_path.endsWith(".asc")) {
-				let local_suffix = (options.format === "percentage") ? 
-					"_percentage" : "_number";
-				
 				//Extract filename without extension and build output path
 				let local_file_name = path.basename(current_path, ".asc");
 				let output_path = path.join(
 					output_folder,
-					`${local_file_name}${local_suffix}.png`
+					`${local_file_name}.png`
 				);
 				console.log(`Converting: ${local_file_name}.asc`);
 				
@@ -187,19 +184,19 @@ global.landuse_HYDE = class {
 				}
 			domain = [left, right];
 		}
-		let exact_file = `${this.intermediate_rasters_equirectangular}${key}${this._getHYDEYearName(year)}_number.png`;
+		let exact_file = `${this.intermediate_rasters_equirectangular}${key}${this._getHYDEYearName(year)}.png`;
 		
 		if (fs.existsSync(exact_file))
 			return GeoPNG.loadNumberRasterImage(exact_file, { format: "float32" });
 		
 		if (!domain || domain.length < 2 || domain[0] === domain[1]) {
 			let closest_year = (domain && domain[0] !== undefined) ? domain[0] : 0;
-			let closest_file = `${this.intermediate_rasters_equirectangular}${key}${this._getHYDEYearName(closest_year)}_number.png`;
+			let closest_file = `${this.intermediate_rasters_equirectangular}${key}${this._getHYDEYearName(closest_year)}.png`;
 			return (fs.existsSync(closest_file)) ? GeoPNG.loadNumberRasterImage(closest_file, { format: "float32" }) : null;
 		}
 		
-		let left_file = `${this.intermediate_rasters_equirectangular}${key}${this._getHYDEYearName(domain[0])}_number.png`;
-		let right_file = `${this.intermediate_rasters_equirectangular}${key}${this._getHYDEYearName(domain[1])}_number.png`;
+		let left_file = `${this.intermediate_rasters_equirectangular}${key}${this._getHYDEYearName(domain[0])}.png`;
+		let right_file = `${this.intermediate_rasters_equirectangular}${key}${this._getHYDEYearName(domain[1])}.png`;
 		let left_img = (fs.existsSync(left_file)) ? GeoPNG.loadNumberRasterImage(left_file, { format: "float32" }) : null;
 		let right_img = (fs.existsSync(right_file)) ? GeoPNG.loadNumberRasterImage(right_file, { format: "float32" }) : null;
 		
@@ -246,8 +243,8 @@ global.landuse_HYDE = class {
 		console.log(`Generating Rasters for year ${year} ..`);
 		
 		for (let i = 0; i < all_hyde_keys.length; i++) {
-			let local_left_image_path = `${this.intermediate_rasters_equirectangular}${all_hyde_keys[i]}${this._getHYDEYearName(hyde_domain[0])}_number.png`;
-			let local_right_image_path = `${this.intermediate_rasters_equirectangular}${all_hyde_keys[i]}${this._getHYDEYearName(hyde_domain[1])}_number.png`;
+			let local_left_image_path = `${this.intermediate_rasters_equirectangular}${all_hyde_keys[i]}${this._getHYDEYearName(hyde_domain[0])}.png`;
+			let local_right_image_path = `${this.intermediate_rasters_equirectangular}${all_hyde_keys[i]}${this._getHYDEYearName(hyde_domain[1])}.png`;
 			
 			let local_left_image = GeoPNG.loadNumberRasterImage(local_left_image_path, { 
 				format: "float32" 
@@ -256,8 +253,7 @@ global.landuse_HYDE = class {
 				format: "float32"
 			});
 			
-			let local_number_output_file_path = `${this.intermediate_rasters_equirectangular}${all_hyde_keys[i]}${this._getHYDEYearName(year)}_number.png`;
-			let local_percentage_output_file_path = `${this.intermediate_rasters_equirectangular}${all_hyde_keys[i]}${this._getHYDEYearName(year)}_percentage.png`;
+			let local_number_output_file_path = `${this.intermediate_rasters_equirectangular}${all_hyde_keys[i]}${this._getHYDEYearName(year)}.png`;
 			let skip_file = false;
 			if (options.skip_file_if_it_exists)
 				skip_file = fs.existsSync(local_number_output_file_path);
@@ -285,9 +281,6 @@ global.landuse_HYDE = class {
 						return local_value;
 					}
 				});
-			GeoPNG.savePercentageRasterImage(local_number_output_file_path, local_percentage_output_file_path, {
-				format: "float32"
-			});
 		}
 	}
 	
@@ -315,9 +308,9 @@ global.landuse_HYDE = class {
 		let options = (arg1_options) ? arg1_options : {};
 		
 		//Declare local instance variables
-		let hyde_population_file_path = `${this.intermediate_rasters_equirectangular}popc_${this._getHYDEYearName(year)}_number.png`;
-		let hyde_urbc_file_path = `${this.intermediate_rasters_equirectangular}urbc_${this._getHYDEYearName(year)}_number.png`;
-		let hyde_rurc_file_path = `${this.intermediate_rasters_equirectangular}rurc_${this._getHYDEYearName(year)}_number.png`;
+		let hyde_population_file_path = `${this.intermediate_rasters_equirectangular}popc_${this._getHYDEYearName(year)}.png`;
+		let hyde_urbc_file_path = `${this.intermediate_rasters_equirectangular}urbc_${this._getHYDEYearName(year)}.png`;
+		let hyde_rurc_file_path = `${this.intermediate_rasters_equirectangular}rurc_${this._getHYDEYearName(year)}.png`;
 		
 		if (!fs.existsSync(hyde_population_file_path) || !fs.existsSync(hyde_urbc_file_path) || !fs.existsSync(hyde_rurc_file_path)) {
 			console.error(`Could not find files for year:`, year);
@@ -513,7 +506,7 @@ global.landuse_HYDE = class {
 				let local_scalar = 1;
 				
 				if (!fs.existsSync(local_input_raster))
-					local_input_raster = `${this.intermediate_rasters_equirectangular}/popc_${this._getHYDEYearName(year)}_number.png`;
+					local_input_raster = `${this.intermediate_rasters_equirectangular}/popc_${this._getHYDEYearName(year)}.png`;
 				if (!fs.existsSync(local_input_raster)) return;
 				
 				let local_input_png = GeoPNG.loadNumberRasterImage(local_input_raster, { format: "float32" });

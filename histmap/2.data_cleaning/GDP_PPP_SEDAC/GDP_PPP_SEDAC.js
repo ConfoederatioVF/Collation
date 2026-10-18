@@ -10,19 +10,19 @@ global.GDP_PPP_SEDAC = class {
 	static sf = () => population_Stadester;
 	static covariates_obj = {
 		//LU (Land Use)
-		"conv_rangeland": (y) => [`${this.hf()}/conv_rangeland${this.hf1(y)}_number.png`, "float32"],
-		"cropland": (y) => [`${this.hf()}/cropland${this.hf1(y)}_number.png`, "float32"],
-		"grazing": (y) => [`${this.hf()}/grazing${this.hf1(y)}_number.png`, "float32"],
-		"ir_norice": (y) => [`${this.hf()}/ir_norice${this.hf1(y)}_number.png`, "float32"],
-		"ir_rice": (y) => [`${this.hf()}/ir_rice${this.hf1(y)}_number.png`, "float32"],
-		"pasture": (y) => [`${this.hf()}/pasture${this.hf1(y)}_number.png`, "float32"],
-		"rangeland": (y) => [`${this.hf()}/rangeland${this.hf1(y)}_number.png`, "float32"],
-		"rf_norice": (y) => [`${this.hf()}/rf_norice${this.hf1(y)}_number.png`, "float32"],
-		"rf_rice": (y) => [`${this.hf()}/rf_rice${this.hf1(y)}_number.png`, "float32"],
-		"tot_irri": (y) => [`${this.hf()}/tot_irri${this.hf1(y)}_number.png`, "float32"],
-		"tot_rainfed": (y) => [`${this.hf()}/tot_rainfed${this.hf1(y)}_number.png`, "float32"],
-		"tot_rice": (y) => [`${this.hf()}/tot_rice${this.hf1(y)}_number.png`, "float32"],
-		"uopp_": (y) => [`${this.hf()}/uopp_${this.hf1(y)}_number.png`, "float32"],
+		"conv_rangeland": (y) => [`${this.hf()}/conv_rangeland${this.hf1(y)}.png`, "float32"],
+		"cropland": (y) => [`${this.hf()}/cropland${this.hf1(y)}.png`, "float32"],
+		"grazing": (y) => [`${this.hf()}/grazing${this.hf1(y)}.png`, "float32"],
+		"ir_norice": (y) => [`${this.hf()}/ir_norice${this.hf1(y)}.png`, "float32"],
+		"ir_rice": (y) => [`${this.hf()}/ir_rice${this.hf1(y)}.png`, "float32"],
+		"pasture": (y) => [`${this.hf()}/pasture${this.hf1(y)}.png`, "float32"],
+		"rangeland": (y) => [`${this.hf()}/rangeland${this.hf1(y)}.png`, "float32"],
+		"rf_norice": (y) => [`${this.hf()}/rf_norice${this.hf1(y)}.png`, "float32"],
+		"rf_rice": (y) => [`${this.hf()}/rf_rice${this.hf1(y)}.png`, "float32"],
+		"tot_irri": (y) => [`${this.hf()}/tot_irri${this.hf1(y)}.png`, "float32"],
+		"tot_rainfed": (y) => [`${this.hf()}/tot_rainfed${this.hf1(y)}.png`, "float32"],
+		"tot_rice": (y) => [`${this.hf()}/tot_rice${this.hf1(y)}.png`, "float32"],
+		"uopp_": (y) => [`${this.hf()}/uopp_${this.hf1(y)}.png`, "float32"],
 		
 		//POP (Demographics)
 		//We only include popd_, rurc_, urbc_ to prevent double-counting pops

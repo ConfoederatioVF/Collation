@@ -27,7 +27,7 @@
     static input_c14_summary = `${this.config_folder}c14_dates_summary.json`;
     static input_hyde_landuse_folder = `${h2}/landuse_HYDE/rasters/`;
     static input_hyde_popc_folder = `${h2}/landuse_HYDE/rasters_scaled_to_global/`;
-    static input_hyde_uopp_raster = `${h2}/landuse_HYDE/rasters/uopp_2023AD_number.png`;
+    static input_hyde_uopp_raster = `${h2}/landuse_HYDE/rasters/uopp_2023AD.png`;
     static input_intcal_json = `${this.config_folder}intcal20.json`;
     static input_kk10luh2_global_folder = `${h2}/population_KK10LUH2/rasters_KK10LUH2_2._global_scaling/`;
     static input_land_area_raster = `${h1}/metadata_HYDE/general_rasters/land_area.png`;
@@ -545,9 +545,9 @@
         let yr_name = landuse_HYDE._getHYDEYearName(yr);
         let out_weights_path = path.join(this.intermediate_wls_folder, `c14_wls_weights_${yr}.png`);
 
-        let cr_path = path.join(this.input_hyde_landuse_folder, `cropland${yr_name}_number.png`);
-        let cv_path = path.join(this.input_hyde_landuse_folder, `conv_rangeland${yr_name}_number.png`);
-        let gr_path = path.join(this.input_hyde_landuse_folder, `grazing${yr_name}_number.png`);
+        let cr_path = path.join(this.input_hyde_landuse_folder, `cropland${yr_name}.png`);
+        let cv_path = path.join(this.input_hyde_landuse_folder, `conv_rangeland${yr_name}.png`);
+        let gr_path = path.join(this.input_hyde_landuse_folder, `grazing${yr_name}.png`);
         let kk_path = path.join(this.input_kk10luh2_global_folder, `popc_${yr}.png`);
         let pop_path = path.join(this.input_stadester_population_folder, `stadester_population_${yr}.png`);
         let urb_path = path.join(this.input_stadester_urban_folder, `stadester_urban_${yr}.png`);

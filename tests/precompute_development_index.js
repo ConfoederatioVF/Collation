@@ -60,8 +60,8 @@ require(path.join(h3, "GDP_PPP/GDP_PPP.js"));
       let y_name = landuse_HYDE._getHYDEYearName(year);
     let pop_path = path.join(h2, `population_Stadester/stadester_population_rasters/stadester_population_${year}.png`);
     let urb_path = path.join(h2, `population_Stadester/stadester_urban_rasters/stadester_urban_${year}.png`);
-    let crop_path = path.join(h2, `landuse_HYDE/rasters/cropland${y_name}_number.png`);
-    let past_path = path.join(h2, `landuse_HYDE/rasters/pasture${y_name}_number.png`);
+    let crop_path = path.join(h2, `landuse_HYDE/rasters/cropland${y_name}.png`);
+    let past_path = path.join(h2, `landuse_HYDE/rasters/pasture${y_name}.png`);
     
     let pop_raster = fs.existsSync(pop_path) ? GeoPNG.loadNumberRasterImage(pop_path, { format: "float32" }) : null;
     let urb_raster = fs.existsSync(urb_path) ? GeoPNG.loadNumberRasterImage(urb_path, { format: "float32" }) : null;
