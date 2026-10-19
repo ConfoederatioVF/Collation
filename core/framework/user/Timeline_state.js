@@ -1,5 +1,7 @@
 //State mutation functions
 {
+	if (!DALS.deleted_ids) DALS.deleted_ids = new Set();
+
 	/**
 	 * Parses a user action inside Naissance. All user actions must be mapped to a valid JSON schema.
 	 * @alias DALS.Timeline.parseAction
@@ -302,6 +304,7 @@
 		scene.map_component.clear();
 		naissance.Feature.instances = {};
 		naissance.Geometry.instances = {};
+		if (DALS.deleted_ids) DALS.deleted_ids.clear();
 	};
 	
 	DALS.fromJSON = function (arg0_json) {
@@ -445,6 +448,12 @@
 					} catch (e) {}
 				}
 				try { fs.writeFileSync(metadata_path, JSON.stringify(current_meta, null, 2)); } catch (e) {}
+			}
+			
+			//1.5. Flush any tracked deleted IDs into the DB
+			if (DALS.deleted_ids && DALS.deleted_ids.size > 0 && global.db?.removeValues) {
+				await db.removeValues(Array.from(DALS.deleted_ids));
+				DALS.deleted_ids.clear();
 			}
 			
 			//2. Flush modified in-memory instances into the DB

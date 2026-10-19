@@ -317,32 +317,67 @@ naissance.Feature = class extends naissance.Entity {
 		super.open(type, options);
 	}
 	
-	remove () {
+	/**
+	 * Removes the Feature from the map, memory, and database.
+	 * - Method of: {@link naissance.Feature}
+	 * 
+	 * @param {boolean|Object} [arg0_options] - If boolean, acts as do_not_persist.
+	 *  @param {boolean} [arg0_options.do_not_persist=false]
+	 *  @param {boolean} [arg0_options.do_not_refresh=false]
+	 */
+	remove (arg0_options) {
+		//Convert from parameters
+		let options = (typeof arg0_options === "object" && arg0_options !== null) ? arg0_options : {};
+		let do_not_persist = (typeof arg0_options === "boolean") ? arg0_options : (options.do_not_persist === true);
+		let do_not_refresh = (options.do_not_refresh === true);
+		
 		//Declare local instance variables
-		let delete_keys = ["_entities", "entities"]
+		let delete_keys = ["_entities", "entities"];
+		
+		//Close open UIs
+		this.close("instance");
+		this.close("class");
 		
 		//Remove from naissance.Feature.instances
-		main.brush.selected_feature = undefined;
+		if (main?.brush) main.brush.selected_feature = undefined;
 		delete naissance.Feature.instances[this.id];
+		
+		//Track deletion and notify DB
+		if (!do_not_persist) {
+			if (global.DALS?.deleted_ids) DALS.deleted_ids.add(this.id);
+			if (global.db?.removeValue) global.db.removeValue(this.id);
+		}
 		
 		Object.iterate(naissance.Feature.instances, (local_key, local_feature) => {
 			for (let i = 0; i < delete_keys.length; i++)
 				if (local_feature[delete_keys[i]])
 					for (let x = local_feature[delete_keys[i]].length - 1; x >= 0; x--)
-						if (local_feature[delete_keys[i]][x].id === this.id)
+						if (local_feature[delete_keys[i]][x]?.id === this.id || local_feature[delete_keys[i]][x] === this)
 							local_feature[delete_keys[i]].splice(x, 1);
 		});
 		
-		//Remove from local_feature.entities
+		//Remove all child entities
 		if (this.hide) this.hide();
-		if (this.entities)
-			for (let i = 0; i < this.entities.length; i++)
-				if (this.entities[i].id === this.id)
-					this.entities[i].remove();
+		if (this.entities) {
+			for (let i = this.entities.length - 1; i >= 0; i--) {
+				let child = this.entities[i];
+				if (child && typeof child.remove === "function") {
+					child.remove(arg0_options);
+				} else if (child?.id) {
+					if (!do_not_persist) {
+						if (global.DALS?.deleted_ids) DALS.deleted_ids.add(child.id);
+						if (global.db?.removeValue) global.db.removeValue(child.id);
+					}
+					delete naissance.Geometry?.instances?.[child.id];
+					delete naissance.Feature?.instances?.[child.id];
+				}
+			}
+		}
 		
 		//Rerender deleted feature and remove it from the map
 		if (this.draw) this.draw();
-		UI_Leftbar.refresh();
+		if (!do_not_refresh)
+			if (global.UI_Leftbar?.refresh) UI_Leftbar.refresh();
 	}
 	
 	setID (arg0_id) {
@@ -357,7 +392,7 @@ naissance.Feature = class extends naissance.Entity {
 	}
 	
 	show () {
-		this._is_visible = true;``
+		this._is_visible = true;
 		
 		//Iterate over all entities; attempt to show all entities
 		if (this.entities)

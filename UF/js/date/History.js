@@ -384,6 +384,20 @@ global.History = class extends ve.Class {
 	}
 	
 	/**
+	 * Returns the first timestamp key in `.keyframes`.
+	 * - Method of: {@link History}
+	 * 
+	 * @returns {number|string|undefined}
+	 */
+	getFirstKey () {
+		//Declare local instance variables
+		let all_timestamps = this.getTimestamps();
+		
+		//Return statement
+		return (all_timestamps.length > 0) ? all_timestamps[0] : undefined;
+	}
+	
+	/**
 	 * Returns the first keyframe in `.keyframes`.
 	 * - Method of: {@link History}
 	 * 
@@ -398,17 +412,65 @@ global.History = class extends ve.Class {
 	}
 	
 	/**
-	 * Returns the last keyframe in `.keyframes`.
+	 * Returns the last timestamp key in `.keyframes`.
 	 * - Method of: {@link History}
 	 * 
-	 * @returns {HistoryKeyframe|undefined}
+	 * @param {Object} [arg0_options]
+	 *  @param {boolean} [arg0_options.has_geometry=false]
+	 *  @param {boolean} [arg0_options.only_valid=false]
+	 * 
+	 * @returns {number|string|undefined}
 	 */
-	getLastKeyframe () {
+	getLastKey (arg0_options) {
+		//Convert from parameters
+		let options = (arg0_options) ? arg0_options : {};
+		
 		//Declare local instance variables
 		let all_timestamps = this.getTimestamps();
 		
+		if (options.has_geometry || options.only_valid)
+			for (let i = all_timestamps.length - 1; i >= 0; i--) {
+				let local_keyframe = this.keyframes[all_timestamps[i]];
+				let local_value = (local_keyframe?.value !== undefined) ? local_keyframe.value : local_keyframe;
+				
+				if (Array.isArray(local_value))
+					if (local_value[0] !== undefined && local_value[0] !== null && local_value[0] !== "null" && local_value[0] !== "undefined")
+						return all_timestamps[i];
+			}
+		
 		//Return statement
-		return (all_timestamps.length > 0) ? this.keyframes[all_timestamps.length - 1] : undefined;
+		return (all_timestamps.length > 0) ? all_timestamps[all_timestamps.length - 1] : undefined;
+	}
+	
+	/**
+	 * Returns the last keyframe in `.keyframes`.
+	 * - Method of: {@link History}
+	 * 
+	 * @param {Object} [arg0_options]
+	 *  @param {boolean} [arg0_options.has_geometry=false]
+	 *  @param {boolean} [arg0_options.only_valid=false]
+	 * 
+	 * @returns {HistoryKeyframe|undefined}
+	 */
+	getLastKeyframe (arg0_options) {
+		//Convert from parameters
+		let options = (arg0_options) ? arg0_options : {};
+		
+		//Declare local instance variables
+		let all_timestamps = this.getTimestamps();
+		
+		if (options.has_geometry || options.only_valid)
+			for (let i = all_timestamps.length - 1; i >= 0; i--) {
+				let local_keyframe = this.keyframes[all_timestamps[i]];
+				let local_value = (local_keyframe?.value !== undefined) ? local_keyframe.value : local_keyframe;
+				
+				if (Array.isArray(local_value))
+					if (local_value[0] !== undefined && local_value[0] !== null && local_value[0] !== "null" && local_value[0] !== "undefined")
+						return local_keyframe;
+			}
+		
+		//Return statement
+		return (all_timestamps.length > 0) ? this.keyframes[all_timestamps[all_timestamps.length - 1]] : undefined;
 	}
 	
 	/**
@@ -472,12 +534,12 @@ global.History = class extends ve.Class {
 					for (let x = 0; x < local_keyframe.value.length; x++) {
 						let is_guaranteed = (options.guaranteed_indexes) ?
 							options.guaranteed_indexes.includes(x) : false;
-						let is_resolved = (return_keyframe.value[x] !== undefined && return_keyframe.value[x] !== null);
+						let is_resolved = (return_keyframe.value[x] !== undefined && return_keyframe.value[x] !== null && return_keyframe.value[x] !== "undefined" && return_keyframe.value[x] !== "null");
 						
 						//Update value if before original timestamp cutoff, or if index is a guarantee that hasn't been fixed yet
 						if (!is_past_timestamp || (is_guaranteed && !is_resolved)) {
 							if (x === 0) {
-								if (local_keyframe.value[0] !== undefined)
+								if (local_keyframe.value[0] !== undefined && local_keyframe.value[0] !== "undefined" && local_keyframe.value[0] !== "null")
 									return_keyframe.value[0] = local_keyframe.value[0];
 							} else if (typeof local_keyframe.value[x] === "object" && local_keyframe.value[x] !== null) {
 								let old_variables = (return_keyframe.value[x]?.variables) ?
@@ -503,7 +565,7 @@ global.History = class extends ve.Class {
 							}
 							
 							//Remove from guarantees if now truthy
-							if (is_guaranteed && return_keyframe.value[x] !== undefined && return_keyframe.value[x] !== null)
+							if (is_guaranteed && return_keyframe.value[x] !== undefined && return_keyframe.value[x] !== null && return_keyframe.value[x] !== "undefined" && return_keyframe.value[x] !== "null")
 								remaining_guarantees = remaining_guarantees.filter(idx => idx !== x);
 						}
 					}

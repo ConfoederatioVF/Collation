@@ -571,7 +571,18 @@ config.actions.geometry = {
 			};
 		},
 		special_function: async function (json) {
-			if (json.delete_geometry === true) json.naissance_obj.remove();
+			if (json.delete_geometry === true) {
+				if (json.naissance_obj && typeof json.naissance_obj.remove === "function") {
+					json.naissance_obj.remove();
+				} else {
+					let geom_id = json.geometry_obj;
+					if (geom_id) {
+						if (global.DALS?.deleted_ids) DALS.deleted_ids.add(geom_id);
+						if (global.db?.removeValue) global.db.removeValue(geom_id);
+						if (naissance.Geometry?.instances) delete naissance.Geometry.instances[geom_id];
+					}
+				}
+			}
 		}
 	},
 	delete_tags: {

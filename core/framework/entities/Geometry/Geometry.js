@@ -716,7 +716,11 @@ naissance.Geometry = class extends naissance.Entity {
 		} else if (date_type === "current_date") {
 			timestamps.push(main.timestamp);
 		} else if (date_type === "end_keyframe") {
-			timestamps.push(all_timestamps[all_timestamps.length - 1]);
+			let last_valid_key = (this.history?.getLastKey) ?
+				this.history.getLastKey({ has_geometry: true }) : undefined;
+			
+			timestamps.push((last_valid_key !== undefined) ?
+				Number(last_valid_key) : all_timestamps[all_timestamps.length - 1]);
 		} else if (date_type === "start_keyframe") {
 			timestamps.push(all_timestamps[0]);
 		} else if (Array.isArray(date_type)) {
@@ -930,30 +934,88 @@ naissance.Geometry = class extends naissance.Entity {
 	}
 	
 	/**
-	 * Removes the current {@link naissance.Geometry} instance.
+	 * Removes the current {@link naissance.Geometry} instance from the map, memory, and database.
+	 * - Method of: {@link naissance.Geometry}
+	 * 
+	 * @param {boolean|Object} [arg0_options] - If boolean, acts as do_not_persist.
+	 *  @param {boolean} [arg0_options.do_not_persist=false]
+	 *  @param {boolean} [arg0_options.do_not_refresh=false]
 	 */
-	remove (arg0_do_not_refresh) {
+	remove (arg0_options) {
 		//Convert from parameters
-		let do_not_refresh = arg0_do_not_refresh;
+		let options = (typeof arg0_options === "object" && arg0_options !== null) ? arg0_options : {};
+		let do_not_persist = (typeof arg0_options === "boolean") ? arg0_options : (options.do_not_persist === true);
+		let do_not_refresh = (options.do_not_refresh === true);
 		
-		super.close("instance"); //Close any open UIs
+		//Declare local instance variables
+		let all_features = naissance.Feature?.instances;
+		let current_brush = (typeof main !== "undefined") ? main?.brush : undefined;
+		let current_renderer = (typeof main !== "undefined") ? main?.renderer : undefined;
+		let delete_keys = ["_entities", "entities"];
 		
-		//Remove from naissance.Feature .entities
-		Object.iterate(naissance.Feature.instances, (local_key, local_feature) => {
-			if (local_feature.entities)
-				for (let i = 0; i < local_feature.entities.length; i++)
-					if (local_feature.entities[i].id === this.id)
-						local_feature.entities.splice(i, 1);
-		});
+		//Close open UIs
+		this.close("instance");
+		this.close("class");
+		if (this.interface && typeof this.interface.remove === "function") this.interface.remove();
+		
+		//Clear selection
+		if (current_brush?.selected_geometry?.id === this.id)
+			current_brush.selected_geometry = undefined;
+		if (Array.isArray(naissance.Brush?.selected_geometries))
+			naissance.Brush.selected_geometries = naissance.Brush.selected_geometries.filter(g => (g.id || g) !== this.id);
+		
+		//Derender and remove from map
+		if (current_renderer) {
+			if (current_renderer.derenderEntity) current_renderer.derenderEntity(this);
+			if (current_renderer.rendered_entities) current_renderer.rendered_entities.delete(this.id);
+		}
+		if (this.geometry && typeof this.geometry.remove === "function") {
+			this.geometry.remove();
+			this.geometry = undefined;
+		}
+		if (this.selected_geometry && typeof this.selected_geometry.remove === "function") {
+			this.selected_geometry.remove();
+			this.selected_geometry = undefined;
+		}
+		if (Array.isArray(this.label_geometries)) {
+			for (let i = 0; i < this.label_geometries.length; i++)
+				if (typeof this.label_geometries[i]?.remove === "function")
+					this.label_geometries[i].remove();
+			this.label_geometries = [];
+		}
+		
+		//Remove from parent Feature if any
+		if (this.parent?.entities) {
+			for (let i = this.parent.entities.length - 1; i >= 0; i--)
+				if (this.parent.entities[i] === this || this.parent.entities[i]?.id === this.id)
+					this.parent.entities.splice(i, 1);
+		}
+		if (all_features) {
+			Object.iterate(all_features, (local_key, local_feature) => {
+				for (let i = 0; i < delete_keys.length; i++) {
+					if (local_feature[delete_keys[i]]) {
+						for (let x = local_feature[delete_keys[i]].length - 1; x >= 0; x--) {
+							if (local_feature[delete_keys[i]][x]?.id === this.id || local_feature[delete_keys[i]][x] === this)
+								local_feature[delete_keys[i]].splice(x, 1);
+						}
+					}
+				}
+			});
+		}
 		
 		//Remove from naissance.Geometry.instances
 		delete naissance.Geometry.instances[this.id];
-		
-		//Rerender deleted geometry and remove it from the map
 		this.history = new History();
+		
+		//Track deletion and notify DB
+		if (!do_not_persist) {
+			if (global.DALS?.deleted_ids) DALS.deleted_ids.add(this.id);
+			if (global.db?.removeValue) global.db.removeValue(this.id);
+		}
+		
+		//Refresh hierarchy UI
 		if (!do_not_refresh)
-			this.draw();
-		if (this.interface) this.interface.remove();
+			if (global.UI_Leftbar?.refresh) UI_Leftbar.refresh();
 	}
 	
 	/**

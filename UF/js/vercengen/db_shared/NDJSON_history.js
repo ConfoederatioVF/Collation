@@ -279,23 +279,45 @@ History.getFirstKeyframe = function (arg0_keyframes) {
 		keyframes_obj[all_timestamps[0]] : null;
 };
 
-History.getLastKey = function (arg0_keyframes) {
+History.getLastKey = function (arg0_keyframes, arg1_options) {
 	//Convert from parameters
 	let keyframes_obj = (arg0_keyframes) ? arg0_keyframes : {};
+	let options = (arg1_options) ? arg1_options : {};
 	
 	//Declare local instance variables
 	let all_timestamps = History.getTimestamps(keyframes_obj);
+	
+	if (options.has_geometry || options.only_valid)
+		for (let i = all_timestamps.length - 1; i >= 0; i--) {
+			let local_keyframe = keyframes_obj[all_timestamps[i]];
+			let local_value = (Array.isArray(local_keyframe)) ? local_keyframe : local_keyframe?.value;
+			
+			if (Array.isArray(local_value))
+				if (local_value[0] !== undefined && local_value[0] !== null && local_value[0] !== "null" && local_value[0] !== "undefined")
+					return all_timestamps[i];
+		}
 	
 	//Return statement
 	return (all_timestamps.length > 0) ? all_timestamps[all_timestamps.length - 1] : null;
 };
 
-History.getLastKeyframe = function (arg0_keyframes) {
+History.getLastKeyframe = function (arg0_keyframes, arg1_options) {
 	//Convert from parameters
 	let keyframes_obj = (arg0_keyframes) ? arg0_keyframes : {};
+	let options = (arg1_options) ? arg1_options : {};
 	
 	//Declare local instance variables
 	let all_timestamps = History.getTimestamps(keyframes_obj);
+	
+	if (options.has_geometry || options.only_valid)
+		for (let i = all_timestamps.length - 1; i >= 0; i--) {
+			let local_keyframe = keyframes_obj[all_timestamps[i]];
+			let local_value = (Array.isArray(local_keyframe)) ? local_keyframe : local_keyframe?.value;
+			
+			if (Array.isArray(local_value))
+				if (local_value[0] !== undefined && local_value[0] !== null && local_value[0] !== "null" && local_value[0] !== "undefined")
+					return local_keyframe;
+		}
 	
 	//Return statement
 	return (all_timestamps.length > 0) ? 

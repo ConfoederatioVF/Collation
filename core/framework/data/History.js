@@ -20,8 +20,24 @@ naissance.History = class {
 				(local_value.localisation) ? local_value.localisation : "", { x: 1, y: 0 }),
 			actions_bar: veRawInterface({
 				jump_to_date: veButton((e) => {
+					let is_geom_removed = false;
+					let target_key = parseInt(local_key);
+					
+					if (Array.isArray(local_value)) {
+						is_geom_removed = (local_value[0] === null || local_value[0] === "null" || local_value[2]?.hidden === true);
+					} else if (local_value && Array.isArray(local_value.value)) {
+						is_geom_removed = (local_value.value[0] === null || local_value.value[0] === "null" || local_value.value[2]?.hidden === true);
+					}
+					
+					if (is_geom_removed) {
+						let all_timestamps = (history_obj.getTimestamps) ? history_obj.getTimestamps() : [];
+						let first_ts = (all_timestamps.length > 0) ? parseInt(all_timestamps[0]) : 0;
+						
+						target_key = Math.max(first_ts, target_key - 1);
+					}
+					
 					DALS.Timeline.parseAction("load_date", [
-						{ set_date: Date.convertTimestampToDate(local_key) },
+						{ set_date: Date.convertTimestampToDate(target_key) },
 						{ refresh_date: true }
 					]);
 				}, {

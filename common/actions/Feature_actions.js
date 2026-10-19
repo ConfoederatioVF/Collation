@@ -48,8 +48,18 @@ config.actions.feature = {
 		scope: ["Feature"],
 		
 		special_function: async function (json) {
-			if (json.delete_feature === true)
-				json.naissance_obj.remove();
+			if (json.delete_feature === true) {
+				if (json.naissance_obj && typeof json.naissance_obj.remove === "function") {
+					json.naissance_obj.remove();
+				} else {
+					let feat_id = json.feature_obj;
+					if (feat_id) {
+						if (global.DALS?.deleted_ids) DALS.deleted_ids.add(feat_id);
+						if (global.db?.removeValue) global.db.removeValue(feat_id);
+						if (naissance.Feature?.instances) delete naissance.Feature.instances[feat_id];
+					}
+				}
+			}
 		}
 	},
 	feature_operation: {
