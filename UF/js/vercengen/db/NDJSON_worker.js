@@ -116,7 +116,7 @@ let loadPartition = async function (page_file) {
 	
 	if (!fs.existsSync(page_file)) return;
 	
-	let rs = fs.createReadStream(page_file);
+	let rs = fs.createReadStream(page_file, { highWaterMark: 1024 * 1024 });
 	let rl = readline.createInterface({ input: rs });
 	
 	try {
@@ -180,13 +180,13 @@ let updateNDJSON = async function (page_file, getUpdatedValue, options) {
 	let dir = path.dirname(page_file);
 	if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 	
-	let ws = fs.createWriteStream(tmp_file);
+	let ws = fs.createWriteStream(tmp_file, { highWaterMark: 1024 * 1024 });
 	let target_id = (options?.target_id !== undefined && options?.target_id !== null) ? String(options.target_id) : null;
 	let target_keys = options?.target_keys || null;
 	
 	try {
 		if (fs.existsSync(page_file)) {
-			let rs = fs.createReadStream(page_file);
+			let rs = fs.createReadStream(page_file, { highWaterMark: 1024 * 1024 });
 			let rl = readline.createInterface({ input: rs, crlfDelay: Infinity });
 			
 			try {
@@ -207,11 +207,17 @@ let updateNDJSON = async function (page_file, getUpdatedValue, options) {
 					
 					if (key !== null) {
 						if (target_id !== null && key !== target_id) {
-							await safeWrite(ws, rs, clean + "\n");
+							await safeWrite(ws, rs, clean);
+							await safeWrite(ws, rs, "\n");
+							if (clean.length > 5 * 1024 * 1024 && global.gc)
+								try { global.gc(); } catch (e) {}
 							continue;
 						}
 						if (target_keys !== null && !target_keys.has(key)) {
-							await safeWrite(ws, rs, clean + "\n");
+							await safeWrite(ws, rs, clean);
+							await safeWrite(ws, rs, "\n");
+							if (clean.length > 5 * 1024 * 1024 && global.gc)
+								try { global.gc(); } catch (e) {}
 							continue;
 						}
 						
@@ -220,15 +226,23 @@ let updateNDJSON = async function (page_file, getUpdatedValue, options) {
 						
 						let newValue = getUpdatedValue(key, val_str);
 						if (newValue !== undefined) {
-							if (newValue !== null)
-								await safeWrite(ws, rs, `"${key}":${JSON.stringify(newValue)}\n`);
+							if (newValue !== null) {
+								await safeWrite(ws, rs, `"${key}":`);
+								await safeWrite(ws, rs, JSON.stringify(newValue));
+								await safeWrite(ws, rs, "\n");
+							}
 							updated = true;
 						} else {
-							await safeWrite(ws, rs, clean + "\n");
+							await safeWrite(ws, rs, clean);
+							await safeWrite(ws, rs, "\n");
 						}
 					} else {
-						await safeWrite(ws, rs, clean + "\n");
+						await safeWrite(ws, rs, clean);
+						await safeWrite(ws, rs, "\n");
 					}
+
+					if (clean.length > 5 * 1024 * 1024 && global.gc)
+						try { global.gc(); } catch (e) {}
 				}
 			} finally {
 				rl.close();

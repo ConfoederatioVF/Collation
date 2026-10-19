@@ -15,6 +15,7 @@ if not exist "node_modules\" (
 echo [Naissance HGIS] Auto-run is starting ..
 echo [Naissance HGIS] Depending on your system, this may take a while.
 
+set NODE_OPTIONS=--max-old-space-size=8192
 call npm start
 
 if %ERRORLEVEL% neq 0 (

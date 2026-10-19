@@ -419,13 +419,13 @@ if (!global.NDJSON)
 		//Declare local instance variables
 		if (global.ve.ndjson_worker_pool.length === 0) {
 			let worker_script = path.resolve(__dirname, "NDJSON_worker.js");
-			for (let i = 0; i < max_workers; i++) {
+			let createWorker = function (worker_id) {
 				let worker = new NodeWorker(worker_script, {
 					resourceLimits: {
-						maxOldGenerationSizeMb: 4096,
-						maxYoungGenerationSizeMb: 128
+						maxOldGenerationSizeMb: 8192,
+						maxYoungGenerationSizeMb: 512
 					},
-					workerData: { worker_id: i }
+					workerData: { worker_id: worker_id }
 				});
 				worker.on("message", (response) => {
 					let callback = global.ve.ndjson_pending_tasks.get(response.task_id);
@@ -435,12 +435,32 @@ if (!global.NDJSON)
 					}
 				});
 				worker.on("error", (err) => {
-					console.error(`[NDJSON_main] Worker ${i} encountered error:`, err);
+					console.error(`[NDJSON_main] Worker ${worker_id} encountered error:`, err);
 				});
 				worker.on("exit", (code) => {
-					if (code !== 0)
-						console.warn(`[NDJSON_main] Worker ${i} exited with code: ${code}`);
+					if (code !== 0 && !NDJSON.is_terminating) {
+						console.warn(`[NDJSON_main] Worker ${worker_id} exited with code: ${code}. Respawning worker...`);
+						try {
+							let replacement = createWorker(worker_id);
+							global.ve.ndjson_worker_pool[worker_id] = replacement;
+							let file_path = NDJSON.getFilePath();
+							if (file_path) {
+								replacement.postMessage({
+									file_path: file_path,
+									task_id: global.ve.ndjson_task_id_counter++,
+									type: "init_partition"
+								});
+							}
+						} catch (respawn_err) {
+							console.error(`[NDJSON_main] Failed to respawn worker ${worker_id}:`, respawn_err);
+						}
+					}
 				});
+				return worker;
+			};
+			
+			for (let i = 0; i < max_workers; i++) {
+				let worker = createWorker(i);
 				global.ve.ndjson_worker_pool.push(worker);
 			}
 		}
@@ -889,10 +909,20 @@ if (!global.NDJSON)
 			path.resolve(global.ve?.naissance_file_path || global.ve?.ndjson_file_path?.replace(/\.ndjson$/, ""));
 		
 		//Declare local instance variables
+		let bak_path = `${target_path}.bak`;
+		let comma_newline = Buffer.from(",\n");
 		let file_path = path.resolve(global.ve?.naissance_file_path || global.ve?.ndjson_file_path?.replace(/\.ndjson$/, ""));
 		let folder_path = NDJSON.getCacheDirectory(file_path);
+		let newline = Buffer.from("\n");
 		let pool = NDJSON.getWorkerPool();
+		let tmp_path = `${target_path}.tmp_${Date.now()}`;
 		
+		let writeBuf = async function (arg0_ws, arg1_buf) {
+			if (!arg0_ws.write(arg1_buf))
+				await new Promise((resolve) => arg0_ws.once("drain", resolve));
+		};
+		
+		//Guard clauses
 		if (!fs.existsSync(folder_path)) return target_path;
 		
 		//1. Flush any pending worker in-memory edits to their partition shards
@@ -901,60 +931,114 @@ if (!global.NDJSON)
 			type: "flush_dirty"
 		});
 		
-		let ws = fs.createWriteStream(target_path);
-		ws.write("{\n");
-		
-		let first = true;
+		let ws = fs.createWriteStream(tmp_path, { highWaterMark: 1024 * 1024 });
+		await writeBuf(ws, Buffer.from("{\n"));
 		
 		//2. Write metadata if extant
 		let metadata_path = path.join(folder_path, "metadata.json");
 		if (fs.existsSync(metadata_path)) {
 			let meta_content = fs.readFileSync(metadata_path, "utf8").trim();
-			if (meta_content.length > 0) {
-				ws.write(`"map_settings":${meta_content}`);
-				first = false;
-			}
+			if (meta_content.length > 0)
+				await writeBuf(ws, Buffer.from(`"map_settings":${meta_content},\n`));
 		}
 		
-		//2. Stream all worker partition shards
+		//3. Stream partition shards via native buffer chunk parsing (zero string allocations)
 		for (let i = 0; i < pool.length; i++) {
+			let is_last = (i === pool.length - 1);
 			let page_file = path.join(folder_path, `partition_${i}.ndjson`);
 			if (!fs.existsSync(page_file)) {
 				let legacy_file = path.join(folder_path, `${i}.ndjson`);
 				if (fs.existsSync(legacy_file)) page_file = legacy_file;
 			}
+			
 			if (fs.existsSync(page_file)) {
-				let rs = fs.createReadStream(page_file);
-				let rl = readline.createInterface({ input: rs });
+				let leftover = Buffer.alloc(0);
+				let pending_line = null;
+				let rs = fs.createReadStream(page_file, { highWaterMark: 1024 * 1024 });
 				
-				for await (let line of rl) {
-					let clean = line.trim();
-					if (clean.length === 0) continue;
-					if (!first) {
-						let can_write_comma = ws.write(",\n");
-						if (!can_write_comma) {
-							rs.pause();
-							await new Promise((r) => ws.once("drain", r));
-							rs.resume();
+				for await (let chunk of rs) {
+					let start = 0;
+					for (let x = 0; x < chunk.length; x++) {
+						if (chunk[x] === 10) { // '\n'
+							let line_buf = chunk.subarray(start, x);
+							if (leftover.length > 0) {
+								line_buf = Buffer.concat([leftover, line_buf]);
+								leftover = Buffer.alloc(0);
+							}
+							if (line_buf.length > 0 && line_buf[line_buf.length - 1] === 13)
+								line_buf = line_buf.subarray(0, line_buf.length - 1);
+							if (line_buf.length > 0) {
+								if (!is_last) {
+									await writeBuf(ws, line_buf);
+									await writeBuf(ws, comma_newline);
+								} else {
+									if (pending_line !== null) {
+										await writeBuf(ws, pending_line);
+										await writeBuf(ws, comma_newline);
+									}
+									pending_line = Buffer.from(line_buf);
+								}
+							}
+							start = x + 1;
 						}
 					}
-					let can_write = ws.write(clean);
-					if (!can_write) {
-						rs.pause();
-						await new Promise((r) => ws.once("drain", r));
-						rs.resume();
+					if (start < chunk.length) {
+						let rem = chunk.subarray(start);
+						leftover = (leftover.length > 0) ? Buffer.concat([leftover, rem]) : Buffer.from(rem);
 					}
-					first = false;
 				}
 				
-				rl.close();
-				rs.destroy();
+				if (leftover.length > 0) {
+					if (leftover[leftover.length - 1] === 13)
+						leftover = leftover.subarray(0, leftover.length - 1);
+					if (leftover.length > 0) {
+						if (!is_last) {
+							await writeBuf(ws, leftover);
+							await writeBuf(ws, comma_newline);
+						} else {
+							if (pending_line !== null) {
+								await writeBuf(ws, pending_line);
+								await writeBuf(ws, comma_newline);
+							}
+							pending_line = Buffer.from(leftover);
+						}
+					}
+				}
+				
+				if (is_last && pending_line !== null) {
+					await writeBuf(ws, pending_line);
+					await writeBuf(ws, newline);
+				}
 			}
 		}
 		
-		ws.write("\n}");
+		await writeBuf(ws, Buffer.from("}"));
 		ws.end();
-		await new Promise((r) => ws.on("finish", r));
+		await new Promise((resolve) => ws.on("finish", resolve));
+		
+		//4. Verify boundary JSON structure before replacement
+		let stat = fs.statSync(tmp_path);
+		let fd = fs.openSync(tmp_path, "r");
+		let head_buf = Buffer.alloc(50);
+		let tail_buf = Buffer.alloc(50);
+		fs.readSync(fd, head_buf, 0, 50, 0);
+		fs.readSync(fd, tail_buf, 0, 50, Math.max(0, stat.size - 50));
+		fs.closeSync(fd);
+		
+		let head_str = head_buf.toString("utf8");
+		let tail_str = tail_buf.toString("utf8");
+		if (!head_str.startsWith("{\n") || !tail_str.trim().endsWith("}")) {
+			try { fs.unlinkSync(tmp_path); } catch (e) {}
+			throw new Error(`[NDJSON.save] Invalid JSON structure compiled to ${tmp_path}`);
+		}
+		
+		//5. Atomic replacement with backup
+		if (fs.existsSync(target_path)) {
+			try { fs.copyFileSync(target_path, bak_path); } catch (e) {}
+		}
+		
+		fs.copyFileSync(tmp_path, target_path);
+		try { fs.unlinkSync(tmp_path); } catch (e) {}
 		
 		//Return statement
 		return target_path;
