@@ -380,7 +380,7 @@
             height: 2160,
             width: 4320,
             function: (local_index) => {
-              if (landarea_raster.data[local_index] === 0 || pop_raster.data[local_index] < 1.0) return 0;
+              if (landarea_raster.data[local_index] === 0 || pop_raster.data[local_index] < 0.01) return 0;
               let pc_val = regularised_pc[local_index];
               return (isFinite(pc_val) && pc_val > 0 && pc_val < 3.402823466e38) ? pc_val : 0;
             }
@@ -456,7 +456,7 @@
                 width: 4320,
                 function: (local_index) => {
                   let p = pop_raster.data[local_index];
-                  if (p < 1.0) return 0;
+                  if (p < 0.01) return 0;
                   let tot = sedac_raster.data[local_index];
                   return (isFinite(tot) && tot > 0) ? (tot / p) : 0;
                 }
@@ -481,7 +481,7 @@
                 width: 4320,
                 function: (local_index) => {
                   let p_2022 = pop_2022_raster.data[local_index];
-                  if (p_2022 < 1.0) return 0;
+                  if (p_2022 < 0.01) return 0;
                   let base_pc = template_raster.data[local_index] / p_2022;
                   return base_pc * global_scalar;
                 }
@@ -505,7 +505,7 @@
               function: (local_index) => {
                 let pc = pc_raster.data[local_index];
                 let p = (pop_raster) ? pop_raster.data[local_index] : 0;
-                return (p >= 1.0 && isFinite(pc) && pc > 0) ? pc : 0;
+                return (p >= 0.01 && isFinite(pc) && pc > 0) ? pc : 0;
               }
             });
           } else {
@@ -526,7 +526,7 @@
               function: (local_index) => {
                 let from_pc = pc_raster.data[local_index];
                 let p_1990 = (pop_1990_raster) ? pop_1990_raster.data[local_index] : 1;
-                let to_pc = (p_1990 >= 1.0) ? to_raster.data[local_index] / p_1990 : 0;
+                let to_pc = (p_1990 >= 0.01) ? to_raster.data[local_index] / p_1990 : 0;
                 
                 if (is_early) {
                   return from_pc + (to_pc - from_pc) * fraction;
@@ -650,7 +650,7 @@
         let current_max_pc = 0;
         let delong_hg_base = this.getDelongBaseline(-10000);
         let delong_world_base = this.getDelongBaseline(current_year);
-        let is_total_raster = local_input_file_path.includes(this.prefix + "_") && !local_input_file_path.includes(this.pc_prefix + "_") && !local_input_file_path.includes("interpolated");
+        let is_total_raster = local_input_file_path.includes(this.prefix + "_") && !local_input_file_path.includes(this.pc_prefix + "_") && !local_input_file_path.includes("interpolated") && !local_input_file_path.includes("sedac_blended");
         let local_delta_sums = {};
         let local_min_ols = {};
         let local_pop_sums = {};
@@ -660,13 +660,13 @@
         //Calculate national population and minimum OLS estimate per country
         for (let x = 0; x < local_input_raster.data.length; x++) {
           let p = local_popc_raster.data[x];
-          if (p >= 1.0) {
+          if (p >= 0.01) {
             let byte_index = x * 4;
             let local_colour_key = `${geocode_raster.data[byte_index]},${geocode_raster.data[byte_index+1]},${geocode_raster.data[byte_index+2]}`;
             let local_geocodes = geocode_obj[local_colour_key];
             if (local_geocodes && local_geocodes.length > 0) {
               let primary_code = local_geocodes[0];
-              let local_pc = is_total_raster ? (local_input_raster.data[x] / p) : local_input_raster.data[x];
+              let local_pc = is_total_raster ? ((p >= 1.0) ? (local_input_raster.data[x] / p) : 0) : local_input_raster.data[x];
               Object.modifyValue(local_pop_sums, primary_code, p);
               if (local_pc > 0) {
                 if (local_min_ols[primary_code] === undefined || local_pc < local_min_ols[primary_code])
@@ -679,13 +679,13 @@
         //Calculate population-weighted OLS delta sums per country
         for (let x = 0; x < local_input_raster.data.length; x++) {
           let p = local_popc_raster.data[x];
-          if (p >= 1.0) {
+          if (p >= 0.01) {
             let byte_index = x * 4;
             let local_colour_key = `${geocode_raster.data[byte_index]},${geocode_raster.data[byte_index+1]},${geocode_raster.data[byte_index+2]}`;
             let local_geocodes = geocode_obj[local_colour_key];
             if (local_geocodes && local_geocodes.length > 0) {
               let primary_code = local_geocodes[0];
-              let local_pc = is_total_raster ? (local_input_raster.data[x] / p) : local_input_raster.data[x];
+              let local_pc = is_total_raster ? ((p >= 1.0) ? (local_input_raster.data[x] / p) : 0) : local_input_raster.data[x];
               let min_base = (local_min_ols[primary_code] !== undefined) ? local_min_ols[primary_code] : 0;
               let delta = Math.max(0, local_pc - min_base);
               Object.modifyValue(local_delta_sums, primary_code, delta * p);
@@ -763,7 +763,7 @@
             GeoPNG.loadNumberRasterImage(local_urbc_file_path, { format: "float32" }) : null;
           let local_output_pc = `${this.output_gdp_pc_folder}${this.pc_prefix}_${year}.png`;
           let local_output_total = `${this.intermediate_gdp_scaled_to_national}${this.prefix}_${year}.png`;
-          let is_total_raster = local_input_file_path.includes(this.prefix + "_") && !local_input_file_path.includes(this.pc_prefix + "_") && !local_input_file_path.includes("interpolated");
+          let is_total_raster = local_input_file_path.includes(this.prefix + "_") && !local_input_file_path.includes(this.pc_prefix + "_") && !local_input_file_path.includes("interpolated") && !local_input_file_path.includes("sedac_blended");
           
           let clamp_alpha = threshold * 0.1;
           let delong_hg_base = this.getDelongBaseline(-10000);
@@ -773,8 +773,8 @@
           //Calibrate per-capita GDP per cell using continuous OLS surplus allocation
           for (let local_index = 0; local_index < local_input_raster.data.length; local_index++) {
             let local_pop = local_popc_raster.data[local_index];
-            if (local_pop < 1.0) continue;
-            let local_pc = is_total_raster ? (local_input_raster.data[local_index] / local_pop) : local_input_raster.data[local_index];
+            if (local_pop < 0.01) continue;
+            let local_pc = is_total_raster ? ((local_pop >= 1.0) ? (local_input_raster.data[local_index] / local_pop) : 0) : local_input_raster.data[local_index];
             let byte_index = local_index * 4;
             let local_colour_key = `${geocode_raster.data[byte_index]},${geocode_raster.data[byte_index+1]},${geocode_raster.data[byte_index+2]}`;
             let local_geocodes = geocode_obj[local_colour_key];
@@ -844,7 +844,7 @@
             width: 4320,
             function: (local_index) => {
               let local_pop = local_popc_raster.data[local_index];
-              if (local_pop < 1.0) return 0;
+              if (local_pop < 0.01) return 0;
               let pc_val = final_pc_data[local_index];
               if (!isFinite(pc_val) || pc_val <= 0) return 0;
               let total_val = Math.max(min_cell_floor, pc_val) * local_pop;
