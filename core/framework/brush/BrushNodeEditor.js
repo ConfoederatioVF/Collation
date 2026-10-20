@@ -295,36 +295,57 @@ naissance.BrushNodeEditor = class extends ve.Class {
           continue;
       }
 
-      let cand_turf = (cand_maptalks.type) ? cand_maptalks : Geospatiale.convertMaptalksToTurf(cand_maptalks);
+      let cand_turf = Geospatiale.convertMaptalksToTurf(cand_maptalks);
       if (!cand_turf) continue;
 
       cand_turf = naissance.BrushNodeEditor.healTopology(cand_turf);
+      if (!cand_turf) continue;
 
       //Component-level spatial decomposition: isolate only components overlapping the edit window
       let active_cand = cand_turf;
-      let cand_type = cand_turf.geometry?.type || cand_turf.type;
+      let cand_geom = cand_turf.geometry || cand_turf;
+      if (!cand_geom || !Array.isArray(cand_geom.coordinates) || cand_geom.coordinates.length === 0)
+        continue;
+
+      let cand_type = cand_geom.type;
       let cur_bbox = turf.bbox(resolved);
       let query_pad = (snap_buffer_km / 111.32) + 0.01;
       let cur_envelope = [cur_bbox[0] - query_pad, cur_bbox[1] - query_pad, cur_bbox[2] + query_pad, cur_bbox[3] + query_pad];
 
       if (cand_type === "MultiPolygon") {
-        let c_coords = cand_turf.geometry ? cand_turf.geometry.coordinates : cand_turf.coordinates;
+        let c_coords = cand_geom.coordinates;
         let matching_components = [];
 
         for (let c = 0; c < c_coords.length; c++) {
-          let p_feat = turf.polygon(c_coords[c]);
-          let p_bbox = turf.bbox(p_feat);
-          let p_overlaps = !(
-            p_bbox[0] > cur_envelope[2] || p_bbox[2] < cur_envelope[0] ||
-            p_bbox[1] > cur_envelope[3] || p_bbox[3] < cur_envelope[1]
-          );
+          if (!Array.isArray(c_coords[c]) || c_coords[c].length === 0) continue;
+          try {
+            let p_feat = turf.polygon(c_coords[c]);
+            let p_bbox = turf.bbox(p_feat);
+            let p_overlaps = !(
+              p_bbox[0] > cur_envelope[2] || p_bbox[2] < cur_envelope[0] ||
+              p_bbox[1] > cur_envelope[3] || p_bbox[3] < cur_envelope[1]
+            );
 
-          if (p_overlaps) matching_components.push(c_coords[c]);
+            if (p_overlaps) matching_components.push(c_coords[c]);
+          } catch (p_err) {}
         }
 
         if (matching_components.length === 1) active_cand = turf.polygon(matching_components[0]);
         else if (matching_components.length > 1) active_cand = turf.multiPolygon(matching_components);
         else active_cand = null;
+      } else if (cand_type === "Polygon") {
+        try {
+          let p_bbox = turf.bbox(active_cand);
+          let p_overlaps = !(
+            p_bbox[0] > cur_envelope[2] || p_bbox[2] < cur_envelope[0] ||
+            p_bbox[1] > cur_envelope[3] || p_bbox[3] < cur_envelope[1]
+          );
+          if (!p_overlaps) active_cand = null;
+        } catch (p_err) {
+          active_cand = null;
+        }
+      } else {
+        active_cand = null;
       }
 
       if (!active_cand) continue;
@@ -810,23 +831,46 @@ naissance.GeometryPolygon.handleNodeEditorEnd = async function (arg0_e) {
           if (local_turf) {
             local_turf = naissance.BrushNodeEditor.healTopology(local_turf);
             let test_cand = local_turf;
-            let l_type = local_turf.geometry?.type || local_turf.type;
+            let l_geom = local_turf.geometry || local_turf;
+
+            if (!l_geom || !Array.isArray(l_geom.coordinates) || l_geom.coordinates.length === 0)
+              continue;
+
+            let l_type = l_geom.type;
 
             if (l_type === "MultiPolygon") {
-              let l_coords = local_turf.geometry ? local_turf.geometry.coordinates : local_turf.coordinates;
+              let l_coords = l_geom.coordinates;
               let l_matches = [];
+
               for (let c = 0; c < l_coords.length; c++) {
-                let p_f = turf.polygon(l_coords[c]);
-                let p_b = turf.bbox(p_f);
+                if (!Array.isArray(l_coords[c]) || l_coords[c].length === 0) continue;
+                try {
+                  let p_f = turf.polygon(l_coords[c]);
+                  let p_b = turf.bbox(p_f);
+                  let p_ol = !(
+                    p_b[0] > cursor_bbox[2] || p_b[2] < cursor_bbox[0] ||
+                    p_b[1] > cursor_bbox[3] || p_b[3] < cursor_bbox[1]
+                  );
+                  if (p_ol) l_matches.push(l_coords[c]);
+                } catch (p_err) {}
+              }
+
+              if (l_matches.length === 1) test_cand = turf.polygon(l_matches[0]);
+              else if (l_matches.length > 1) test_cand = turf.multiPolygon(l_matches);
+              else test_cand = null;
+            } else if (l_type === "Polygon") {
+              try {
+                let p_b = turf.bbox(test_cand);
                 let p_ol = !(
                   p_b[0] > cursor_bbox[2] || p_b[2] < cursor_bbox[0] ||
                   p_b[1] > cursor_bbox[3] || p_b[3] < cursor_bbox[1]
                 );
-                if (p_ol) l_matches.push(l_coords[c]);
+                if (!p_ol) test_cand = null;
+              } catch (p_err) {
+                test_cand = null;
               }
-              if (l_matches.length === 1) test_cand = turf.polygon(l_matches[0]);
-              else if (l_matches.length > 1) test_cand = turf.multiPolygon(l_matches);
-              else test_cand = null;
+            } else {
+              test_cand = null;
             }
 
             if (test_cand) {
@@ -913,6 +957,7 @@ naissance.GeometryPolygon.handleNodeEditorEnd = async function (arg0_e) {
     }], true);
   } else if (main.brush.node_editor.type === "remove") {
     e.geometry = main.brush.getRemovePolygon(e.geometry);
+    if (!e.geometry) return;
 
     await DALS.Timeline.parseAction("remove_from_polygon", [{
       geometry_obj: this.id,

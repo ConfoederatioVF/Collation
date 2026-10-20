@@ -172,7 +172,7 @@
 		}
 		
 		//Return statement
-		return (typeof geometry === "object" && geometry !== null) ? geometry : null;
+		return (typeof geometry === "object" && geometry !== null && geometry.type && Array.isArray(geometry.coordinates)) ? geometry : null;
 	};
 	
 	/**
