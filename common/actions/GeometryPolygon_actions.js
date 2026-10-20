@@ -151,7 +151,7 @@ config.actions.geometry_polygon = {
 			}
 
 			let date = (json.add_to_polygon.date !== undefined) ? json.add_to_polygon.date : main.date;
-			let has_history = Boolean(polygon_obj?.history && polygon_obj.history.getTimestamps().length > 0);
+			let has_history = Boolean(polygon_obj?.history && Object.keys(polygon_obj.history.keyframes).length > 0);
 			let is_alive = true;
 			if (has_history) {
 				let ts = Date.getTimestamp(date);
@@ -411,7 +411,7 @@ config.actions.geometry_polygon = {
 				}
 
 				let date = (json.remove_from_polygon.date !== undefined) ? json.remove_from_polygon.date : main.date;
-				let has_history = Boolean(polygon_obj?.history && polygon_obj.history.getTimestamps().length > 0);
+				let has_history = Boolean(polygon_obj?.history && Object.keys(polygon_obj.history.keyframes).length > 0);
 				let is_alive = true;
 				if (has_history) {
 					let ts = Date.getTimestamp(date);
@@ -562,19 +562,21 @@ config.actions.geometry_polygon = {
 					let date = (json.simplify_polygon.date) ? json.simplify_polygon.date : main.date;
 					
 					if (json.simplify_polygon.date_range) {
-						polygon_obj.history.callFunctionInDateRange(json.simplify_polygon.date_range, (local_keyframe) => {
-							let local_simplify_options = json.simplify_polygon;
+						await polygon_obj.history.callFunctionInDateRange(json.simplify_polygon.date_range, async (local_keyframe) => {
+							let local_simplify_options = { ...json.simplify_polygon };
 							delete local_simplify_options.date_range;
 							
-							DALS.Timeline.parseAction("simplify_polygon", [{
+							await DALS.Timeline.parseAction("simplify_polygon", [{
 								geometry_obj: polygon_obj.id,
 								simplify_polygon: {
 									date: local_keyframe,
+									do_not_draw: true,
 									tolerance: tolerance,
 									...local_simplify_options
 								}
 							}], true);
 						});
+						if (polygon_obj.draw) polygon_obj.draw();
 					} else {
 						let geometry = (json.simplify_polygon.date) ?
 							polygon_obj.getGeometryKeyframeAtDate(date) : polygon_obj.geometry;
@@ -585,7 +587,10 @@ config.actions.geometry_polygon = {
 								turf_simplify = turf.truncate(turf_simplify, { precision: json.simplify_polygon.truncate });
 							
 							polygon_obj.addKeyframe(date, (turf_simplify) ?
-								Geospatiale.convertTurfToMaptalks(turf_simplify).toJSON() : null);
+								Geospatiale.convertTurfToMaptalks(turf_simplify).toJSON() : null, undefined, undefined, {
+									do_not_draw: Boolean(json.simplify_polygon?.do_not_draw)
+								});
+							if (!json.simplify_polygon?.do_not_draw && polygon_obj.draw) polygon_obj.draw();
 						} catch (e) {
 							console.error(`Turf simplify:`, Geospatiale.convertMaptalksToTurf(geometry), geometry, e);
 						}

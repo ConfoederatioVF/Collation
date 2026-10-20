@@ -180,14 +180,14 @@ global.History = class extends ve.Class {
 		for (let i = 0; i < keyframes.length; i++) {
 			let ts = keyframes[i];
 			if (ts >= start_ts && ts <= end_ts) {
-				if (this.getTimestamps().length > 0) {
+				if (Object.keys(this.keyframes).length > 0) {
 					let kf = this.getKeyframe({ date: ts });
 					//Skip keyframes where geometry has ended, is not yet created, or is hidden
 					if (!kf?.value || kf.value[0] === null || kf.value[0] === undefined || kf.value[0] === "null" || kf.value[2]?.hidden)
 						continue;
 				}
 				await special_function(ts);
-				await new Promise(resolve => setTimeout(resolve, 0));
+				await new Promise(resolve => setTimeout(resolve, 1));
 			}
 		}
 	}

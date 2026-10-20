@@ -48,8 +48,16 @@
 					}
 				}
 				
+				//Auto-close ring if 3 or more unique vertices exist
+				if (clean_ring.length >= 3) {
+					let first_pt = clean_ring[0];
+					let last_pt = clean_ring[clean_ring.length - 1];
+					if (first_pt[0] !== last_pt[0] || first_pt[1] !== last_pt[1])
+						clean_ring.push([first_pt[0], first_pt[1]]);
+				}
+				
 				if (clean_ring.length >= 4) {
-					valid_rings.push(local_ring);
+					valid_rings.push(clean_ring);
 				} else {
 					//Return statement
 					if (i === 0) return null;
@@ -87,8 +95,16 @@
 							if (!is_duplicate) clean_ring.push(point_a);
 						}
 					
+					//Auto-close ring if 3 or more unique vertices exist
+					if (clean_ring.length >= 3) {
+						let first_pt = clean_ring[0];
+						let last_pt = clean_ring[clean_ring.length - 1];
+						if (first_pt[0] !== last_pt[0] || first_pt[1] !== last_pt[1])
+							clean_ring.push([first_pt[0], first_pt[1]]);
+					}
+					
 					if (clean_ring.length >= 4) {
-						valid_rings.push(local_ring);
+						valid_rings.push(clean_ring);
 					} else {
 						if (x === 0) {
 							is_poly_valid = false;
@@ -337,6 +353,12 @@
 		//Single polygon handling
 		try {
 			let clean_target = Geospatiale.cleanRings(target_turf) || target_turf;
+			let target_bbox = turf.bbox(clean_target);
+			let overlaps = !(
+				target_bbox[0] > sub_bbox[2] || target_bbox[2] < sub_bbox[0] ||
+				target_bbox[1] > sub_bbox[3] || target_bbox[3] < sub_bbox[1]
+			);
+			if (!overlaps) return clean_target;
 			
 			//Return statement
 			return turf.difference(turf.featureCollection([clean_target, clean_sub]));
@@ -445,6 +467,16 @@
 		//Single polygon handling
 		try {
 			let clean_target = Geospatiale.cleanRings(target_turf) || target_turf;
+			let target_bbox = turf.bbox(clean_target);
+			let overlaps = !(
+				target_bbox[0] > add_bbox[2] || target_bbox[2] < add_bbox[0] ||
+				target_bbox[1] > add_bbox[3] || target_bbox[3] < add_bbox[1]
+			);
+			if (!overlaps) {
+				let target_coords = clean_target.geometry ? clean_target.geometry.coordinates : clean_target.coordinates;
+				let add_coords = clean_add.geometry ? clean_add.geometry.coordinates : clean_add.coordinates;
+				return turf.multiPolygon([target_coords, add_coords]);
+			}
 			
 			//Return statement
 			return turf.union(turf.featureCollection([clean_target, clean_add]));

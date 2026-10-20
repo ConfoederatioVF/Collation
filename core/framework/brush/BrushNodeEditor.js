@@ -41,9 +41,12 @@ naissance.BrushNodeEditor = class extends ve.Class {
       this.geometry = null;
     }
 
-    map.off("click", this._click_listener);
-    map.off("dblclick", this._dblclick_listener);
-    map.off("mousemove", this._mousemove_listener);
+    if (typeof map !== "undefined" && map) {
+      map.off("click", this._click_listener);
+      map.off("dblclick", this._dblclick_listener);
+      map.off("mousemove", this._mousemove_listener);
+      try { map.config("doubleClickZoom", true); } catch (e) {}
+    }
   }
 
   /**
@@ -89,9 +92,12 @@ naissance.BrushNodeEditor = class extends ve.Class {
     this.enabled = true;
     this.type = "add";
 
-    map_component.on("click", this._click_listener);
-    map_component.on("dblclick", this._dblclick_listener);
-    map_component.on("mousemove", this._mousemove_listener);
+    if (typeof map !== "undefined" && map) {
+      try { map.config("doubleClickZoom", false); } catch (e) {}
+      map.on("click", this._click_listener);
+      map.on("dblclick", this._dblclick_listener);
+      map.on("mousemove", this._mousemove_listener);
+    }
   }
 
   /**
@@ -145,8 +151,6 @@ naissance.BrushNodeEditor = class extends ve.Class {
       if (is_line && !is_node_brush && main.brush._selected_geometry?.isOpen("instance"))
         return;
 
-      this.disable();
-      this.enable();
       this.type = (HTML.ctrl_pressed) ? "remove" : "add";
     }
 
@@ -162,23 +166,59 @@ naissance.BrushNodeEditor = class extends ve.Class {
     //Convert from parameters
     let e = arg0_e;
 
-    //Guard clause
-    if (this.coords.length < 2) return;
-
     //Declare local instance variables
+    let is_polygon = (this.mode === "Polygon");
     let selected_geometry = main.brush._selected_geometry;
+
+    //Deduplicate consecutive identical coordinates (e.g. from rapid double-click)
+    let clean_coords = [];
+    for (let i = 0; i < this.coords.length; i++) {
+      let pt = this.coords[i];
+      let prev = clean_coords[clean_coords.length - 1];
+      let is_dup = prev && (
+        (pt.x !== undefined && pt.x === prev.x && pt.y === prev.y) ||
+        (Array.isArray(pt) && pt[0] === prev[0] && pt[1] === prev[1])
+      );
+      if (!is_dup) clean_coords.push(pt);
+    }
+
+    //Guard clauses
+    if (clean_coords.length < 2) return;
+    if (is_polygon && clean_coords.length < 3) {
+      veToast("<icon>warning</icon> Polygons require at least 3 distinct points.");
+      return;
+    }
+
+    let finished_geometry = null;
+    if (is_polygon) {
+      let ring_coords = [...clean_coords];
+      let first = ring_coords[0];
+      let last = ring_coords[ring_coords.length - 1];
+      let is_closed = (first.x !== undefined) ?
+        (first.x === last.x && first.y === last.y) : (first[0] === last[0] && first[1] === last[1]);
+      if (!is_closed) ring_coords.push(first);
+      finished_geometry = new maptalks.Polygon(ring_coords);
+    } else {
+      finished_geometry = new maptalks.LineString(clean_coords);
+    }
 
     if (selected_geometry) {
       let layer_obj = selected_geometry.getLayer();
 
-      if (layer_obj?._type === "provinces") {
+      if (layer_obj?._type === "provinces" || layer_obj?.type === "provinces") {
         this.disable();
         this.enable();
         return;
       }
 
-      if (naissance[selected_geometry.class_name]?.handleNodeEditorEnd)
-        await naissance[selected_geometry.class_name].handleNodeEditorEnd.call(selected_geometry, { geometry: this.geometry });
+      if (naissance[selected_geometry.class_name]?.handleNodeEditorEnd) {
+        try {
+          await naissance[selected_geometry.class_name].handleNodeEditorEnd.call(selected_geometry, { geometry: finished_geometry });
+        } catch (handler_err) {
+          console.error("[ondblclick] Error in handleNodeEditorEnd:", handler_err);
+          veToast("<icon>error</icon> Failed to apply node editing.");
+        }
+      }
     }
 
     this.disable();
@@ -331,25 +371,12 @@ naissance.BrushNodeEditor = class extends ve.Class {
       if (!active_cand) continue;
 
       try {
-        let is_overlapping = false;
-        let is_nearby = false;
-
         let inter = turf.intersect(turf.featureCollection([resolved, active_cand]));
-        if (inter && turf.area(inter) > 0.1) is_overlapping = true;
+        if (inter && turf.area(inter) > 0.1) {
+          let diff = (Geospatiale.diffComponentWise) ?
+            Geospatiale.diffComponentWise(resolved, active_cand) :
+            turf.difference(turf.featureCollection([resolved, active_cand]));
 
-        if (!is_overlapping) {
-          let test_buf = turf.buffer(resolved, snap_buffer_km, { units: "kilometers" });
-          if (test_buf) {
-            let near_inter = turf.intersect(turf.featureCollection([test_buf, active_cand]));
-            if (near_inter && turf.area(near_inter) > 0.1) {
-              is_nearby = true;
-              resolved = test_buf;
-            }
-          }
-        }
-
-        if (is_overlapping || is_nearby) {
-          let diff = turf.difference(turf.featureCollection([resolved, active_cand]));
           if (diff) {
             if (diff.geometry?.type === "GeometryCollection") {
               let poly_geoms = diff.geometry.geometries.filter(g => g.type === "Polygon" || g.type === "MultiPolygon");
@@ -466,8 +493,27 @@ naissance.GeometryPolygon.handleNodeEditorEnd = async function (arg0_e) {
     return (m_geom) ? Geospatiale.convertMaptalksToTurf(m_geom) : null;
   };
 
-  //Guard clause
-  if (!cursor_turf_geometry) return;
+  //Guard clause: fallback to coordinate extraction if standard conversion returned null
+  if (!cursor_turf_geometry && e.geometry) {
+    try {
+      let raw_coords = (e.geometry.getCoordinates) ? e.geometry.getCoordinates() : e.geometry.coordinates;
+      let flat_rings = naissance.BrushNodeEditor.flattenCoordinates(raw_coords);
+      if (flat_rings.length > 0 && flat_rings[0].length >= 3) {
+        let clean_ring = flat_rings[0].map(pt => [pt.x !== undefined ? pt.x : pt[0], pt.y !== undefined ? pt.y : pt[1]]);
+        let first = clean_ring[0];
+        let last = clean_ring[clean_ring.length - 1];
+        if (first[0] !== last[0] || first[1] !== last[1]) clean_ring.push([first[0], first[1]]);
+        if (clean_ring.length >= 4) cursor_turf_geometry = turf.polygon([clean_ring]);
+      }
+    } catch (fallback_err) {
+      console.error("[handleNodeEditorEnd] Fallback conversion failed:", fallback_err);
+    }
+  }
+
+  if (!cursor_turf_geometry) {
+    veToast("<icon>warning</icon> Could not form a valid geometry from drawn nodes.");
+    return;
+  }
 
   //Heal topology of drawn selection to eliminate self-intersections and bowties
   cursor_turf_geometry = naissance.BrushNodeEditor.healTopology(cursor_turf_geometry);
@@ -883,20 +929,23 @@ naissance.GeometryPolygon.handleNodeEditorEnd = async function (arg0_e) {
           await new Promise(resolve => setTimeout(resolve, 0));
         }
 
-        //Add override geometry to this selected polity (union over)
-        await DALS.Timeline.parseAction("add_to_polygon", [{
+        let has_simplify = Boolean(main.brush.simplify > 0 && main.brush.simplify_applies_to_polygon);
+        let mvp_entry = {
           geometry_obj: this.id,
           add_to_polygon: {
             date: (date_range) ? undefined : main.date,
             date_range: date_range,
             geometry: override_json
-          },
-          simplify_polygon: {
-            date_range: date_range,
-            tolerance: (main.brush.simplify > 0 && main.brush.simplify_applies_to_polygon) ?
-              main.brush.simplify : undefined
           }
-        }], true);
+        };
+        if (has_simplify) {
+          mvp_entry.simplify_polygon = {
+            date_range: date_range,
+            tolerance: main.brush.simplify
+          };
+        }
+
+        await DALS.Timeline.parseAction("add_to_polygon", [mvp_entry], true);
 
         this.draw();
         if (typeof UI_Leftbar !== "undefined" && UI_Leftbar.refresh) UI_Leftbar.refresh();
@@ -928,19 +977,23 @@ naissance.GeometryPolygon.handleNodeEditorEnd = async function (arg0_e) {
     e.geometry = main.brush.getAddPolygon(e.geometry);
     if (!e.geometry) return;
 
-    await DALS.Timeline.parseAction("add_to_polygon", [{
+    let has_simplify = Boolean(main.brush.simplify > 0 && main.brush.simplify_applies_to_polygon);
+    let mvp_entry = {
       geometry_obj: this.id,
       add_to_polygon: {
         date: (date_range) ? undefined : main.date,
         date_range: date_range,
         geometry: e.geometry.toJSON()
-      },
-      simplify_polygon: {
-        date_range: date_range,
-        tolerance: (main.brush.simplify > 0 && main.brush.simplify_applies_to_polygon) ?
-          main.brush.simplify : undefined
       }
-    }], true);
+    };
+    if (has_simplify) {
+      mvp_entry.simplify_polygon = {
+        date_range: date_range,
+        tolerance: main.brush.simplify
+      };
+    }
+
+    await DALS.Timeline.parseAction("add_to_polygon", [mvp_entry], true);
   } else if (main.brush.node_editor.type === "remove") {
     e.geometry = main.brush.getRemovePolygon(e.geometry);
     if (!e.geometry) return;
