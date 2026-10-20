@@ -106,9 +106,15 @@ global.UI_LeftbarTimeline = class { //[WIP] - Add Shift/Ctrl + Left/Right Arrow 
 		if (!(global.main || window.main)) return; //Internal guard clause if main is not defined
 		
 		//Declare local instance variables
-		let all_timestamps = main.renderer.getTimestamps();
+		let all_timestamps = UI_LeftbarTimeline._cache?.timestamps || main.renderer.getTimestamps();
 		let has_timestamp = (all_timestamps.includes(main.timestamp));
 		let keyframes_obj = {};
+		
+		//Skip redundant full DOM reconstruction if state has not changed
+		if (this._last_timestamp === main.timestamp && this._last_timestamps_length === all_timestamps.length)
+			return;
+		this._last_timestamp = main.timestamp;
+		this._last_timestamps_length = all_timestamps.length;
 		
 		//Iterate over all_timestamps and push to keyframes_obj
 		for (let i = 0; i < all_timestamps.length; i++) {

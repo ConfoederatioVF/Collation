@@ -316,8 +316,11 @@ async function handleTask (arg0_task) {
 	//Declare local instance variables
 	let {
 		bbox,
+		date,
+		diff,
 		file_path,
 		id,
+		keyframe,
 		keyframes,
 		limit_end,
 		query,
@@ -584,6 +587,55 @@ async function handleTask (arg0_task) {
 			dirty_keys.clear();
 		}
 		
+		return parentPort.postMessage({ results: true, task_id });
+	}
+	
+	if (type === "set_keyframe") {
+		let cached = partition_cache.get(id);
+		let ts_key = typeof date === "object" ? Date.getTimestamp(date) : date;
+		ts_key = String(ts_key);
+		
+		if (cached) {
+			let history_obj = typeof cached.entity.history === "string" ? JSON.parse(cached.entity.history) : cached.entity.history;
+			if (!history_obj) history_obj = {};
+			if (!history_obj.keyframes) history_obj.keyframes = {};
+			
+			history_obj.keyframes[ts_key] = keyframe;
+			cached.entity.history = history_obj;
+			
+			let ts_num = Number(ts_key);
+			if (!cached.timestamps.includes(ts_num)) {
+				cached.timestamps.push(ts_num);
+				cached.timestamps.sort((a, b) => a - b);
+			}
+			if (cached.bbox) {
+				updateBBoxFromCoords(keyframe, cached.bbox);
+			} else {
+				cached.bbox = calculateBBox(history_obj.keyframes, cached.entity);
+			}
+		}
+		dirty_keys.add(id);
+		return parentPort.postMessage({ results: true, task_id });
+	}
+	
+	if (type === "set_keyframes_diff") {
+		let cached = partition_cache.get(id);
+		if (cached && diff && typeof diff === "object") {
+			let history_obj = typeof cached.entity.history === "string" ? JSON.parse(cached.entity.history) : cached.entity.history;
+			if (!history_obj) history_obj = {};
+			if (!history_obj.keyframes) history_obj.keyframes = {};
+			
+			for (let ts in diff) {
+				let ts_key = String(ts);
+				history_obj.keyframes[ts_key] = diff[ts];
+				let ts_num = Number(ts_key);
+				if (!cached.timestamps.includes(ts_num)) cached.timestamps.push(ts_num);
+				if (cached.bbox) updateBBoxFromCoords(diff[ts], cached.bbox);
+			}
+			cached.timestamps.sort((a, b) => a - b);
+			cached.entity.history = history_obj;
+		}
+		dirty_keys.add(id);
 		return parentPort.postMessage({ results: true, task_id });
 	}
 	

@@ -107,7 +107,15 @@ naissance.GeometryLine = class extends naissance.Geometry {
 						this.geometry = maptalks.Geometry.fromJSON(raw_geom);
 					}
 					if (this.geometry) {
-						if (this.value[1]) this.geometry.setSymbol(this.value[1]);
+						let symbol_obj = { ...(this.value[1] || {}) };
+						if (this.selected) {
+							symbol_obj.lineColor = "rgb(255, 255, 0)";
+							symbol_obj.lineWidth = 4;
+							symbol_obj.lineOpacity = 0.8;
+							if (main.brush?.selected_geometry?.id !== this.id)
+								symbol_obj.lineDasharray = [10, 10, 10];
+						}
+						this.geometry.setSymbol(symbol_obj);
 						if (main_obj?.layers?.entity_layer)
 							main_obj.layers.entity_layer.addGeometry(this.geometry);
 						
@@ -117,19 +125,8 @@ naissance.GeometryLine = class extends naissance.Geometry {
 			} catch (e) { console.error(e); }
 		}
 		
-		//4. Draw this.selected_geometry
-		try {
-			if (this.geometry && this.selected) {
-				this.selected_geometry = this.geometry.copy();
-				this.selected_geometry.setSymbol({
-					lineColor: `rgb(255, 255, 0)`,
-					lineDasharray : (main.brush.selected_geometry?.id !== this.id) ? [10, 10, 10] : undefined,
-					lineOpacity: 0.5,
-					lineWidth: 4
-				});
-				main.layers.selection_layer.addGeometry(this.selected_geometry);
-			}
-		} catch (e) { console.error(e); }
+		//4. Draw this.selected_geometry (zero-copy: selection symbol applied directly to this.geometry)
+		this.selected_geometry = undefined;
 		
 		//5. Add bindings
 		if (this.geometry) {

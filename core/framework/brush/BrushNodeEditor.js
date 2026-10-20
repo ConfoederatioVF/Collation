@@ -255,9 +255,27 @@ naissance.BrushNodeEditor = class extends ve.Class {
       snap_buffer_km = Math.max(0.01, screen_res * 10 * 111.32);
     }
 
+    let resolved_bbox = turf.bbox(resolved);
+    let buf_deg = (snap_buffer_km / 111.32) + 0.05;
+    let query_bbox = [
+      resolved_bbox[0] - buf_deg,
+      resolved_bbox[1] - buf_deg,
+      resolved_bbox[2] + buf_deg,
+      resolved_bbox[3] + buf_deg
+    ];
+
     //Function body
     for (let i = 0; i < layer_geometries.length; i++) {
       let cand = layer_geometries[i];
+      let cand_ext = cand.geometry?.getExtent ? cand.geometry.getExtent() : null;
+      if (cand_ext) {
+        if (cand_ext.xmin > query_bbox[2] || cand_ext.xmax < query_bbox[0] || cand_ext.ymin > query_bbox[3] || cand_ext.ymax < query_bbox[1])
+          continue;
+      } else if (cand.bbox) {
+        if (cand.bbox[0] > query_bbox[2] || cand.bbox[2] < query_bbox[0] || cand.bbox[1] > query_bbox[3] || cand.bbox[3] < query_bbox[1])
+          continue;
+      }
+
       let cand_maptalks = cand.geometry;
 
       if (!cand_maptalks && typeof cand.getGeometryKeyframeAtDate === "function") {
@@ -271,22 +289,57 @@ naissance.BrushNodeEditor = class extends ve.Class {
         cand_maptalks = (maptalks.Geometry?.fromJSON) ? maptalks.Geometry.fromJSON(cand.value[0]) : cand.value[0];
 
       if (!cand_maptalks) continue;
+      if (cand_maptalks.getExtent) {
+        let m_ext = cand_maptalks.getExtent();
+        if (m_ext && (m_ext.xmin > query_bbox[2] || m_ext.xmax < query_bbox[0] || m_ext.ymin > query_bbox[3] || m_ext.ymax < query_bbox[1]))
+          continue;
+      }
+
       let cand_turf = (cand_maptalks.type) ? cand_maptalks : Geospatiale.convertMaptalksToTurf(cand_maptalks);
       if (!cand_turf) continue;
 
       cand_turf = naissance.BrushNodeEditor.healTopology(cand_turf);
 
+      //Component-level spatial decomposition: isolate only components overlapping the edit window
+      let active_cand = cand_turf;
+      let cand_type = cand_turf.geometry?.type || cand_turf.type;
+      let cur_bbox = turf.bbox(resolved);
+      let query_pad = (snap_buffer_km / 111.32) + 0.01;
+      let cur_envelope = [cur_bbox[0] - query_pad, cur_bbox[1] - query_pad, cur_bbox[2] + query_pad, cur_bbox[3] + query_pad];
+
+      if (cand_type === "MultiPolygon") {
+        let c_coords = cand_turf.geometry ? cand_turf.geometry.coordinates : cand_turf.coordinates;
+        let matching_components = [];
+
+        for (let c = 0; c < c_coords.length; c++) {
+          let p_feat = turf.polygon(c_coords[c]);
+          let p_bbox = turf.bbox(p_feat);
+          let p_overlaps = !(
+            p_bbox[0] > cur_envelope[2] || p_bbox[2] < cur_envelope[0] ||
+            p_bbox[1] > cur_envelope[3] || p_bbox[3] < cur_envelope[1]
+          );
+
+          if (p_overlaps) matching_components.push(c_coords[c]);
+        }
+
+        if (matching_components.length === 1) active_cand = turf.polygon(matching_components[0]);
+        else if (matching_components.length > 1) active_cand = turf.multiPolygon(matching_components);
+        else active_cand = null;
+      }
+
+      if (!active_cand) continue;
+
       try {
         let is_overlapping = false;
         let is_nearby = false;
 
-        let inter = turf.intersect(turf.featureCollection([resolved, cand_turf]));
+        let inter = turf.intersect(turf.featureCollection([resolved, active_cand]));
         if (inter && turf.area(inter) > 0.1) is_overlapping = true;
 
         if (!is_overlapping) {
           let test_buf = turf.buffer(resolved, snap_buffer_km, { units: "kilometers" });
           if (test_buf) {
-            let near_inter = turf.intersect(turf.featureCollection([test_buf, cand_turf]));
+            let near_inter = turf.intersect(turf.featureCollection([test_buf, active_cand]));
             if (near_inter && turf.area(near_inter) > 0.1) {
               is_nearby = true;
               resolved = test_buf;
@@ -295,7 +348,7 @@ naissance.BrushNodeEditor = class extends ve.Class {
         }
 
         if (is_overlapping || is_nearby) {
-          let diff = turf.difference(turf.featureCollection([resolved, cand_turf]));
+          let diff = turf.difference(turf.featureCollection([resolved, active_cand]));
           if (diff) {
             if (diff.geometry?.type === "GeometryCollection") {
               let poly_geoms = diff.geometry.geometries.filter(g => g.type === "Polygon" || g.type === "MultiPolygon");
@@ -485,9 +538,19 @@ naissance.GeometryPolygon.handleNodeEditorEnd = async function (arg0_e) {
       if (!from_geometry) {
         let best_area = 0;
         let best_candidate;
+        let cursor_bbox = turf.bbox(cursor_turf_geometry);
 
         for (let i = 0; i < candidate_geometries.length; i++) {
           let cand = candidate_geometries[i];
+          let cand_ext = cand.geometry?.getExtent ? cand.geometry.getExtent() : null;
+          if (cand_ext) {
+            if (cand_ext.xmin > cursor_bbox[2] || cand_ext.xmax < cursor_bbox[0] || cand_ext.ymin > cursor_bbox[3] || cand_ext.ymax < cursor_bbox[1])
+              continue;
+          } else if (cand.bbox) {
+            if (cand.bbox[0] > cursor_bbox[2] || cand.bbox[2] < cursor_bbox[0] || cand.bbox[1] > cursor_bbox[3] || cand.bbox[3] < cursor_bbox[1])
+              continue;
+          }
+
           let cand_turf = getTurfGeometry(cand);
 
           if (cand_turf) {
@@ -676,14 +739,14 @@ naissance.GeometryPolygon.handleNodeEditorEnd = async function (arg0_e) {
         for (let i = 0; i < all_source_ts.length; i++) {
           await DALS.Timeline.parseAction("remove_from_polygon", [{
             geometry_obj: source_geom.id,
-            remove_from_polygon: { date: all_source_ts[i], geometry: remove_json }
+            remove_from_polygon: { date: all_source_ts[i], do_not_draw: true, geometry: remove_json }
           }], true);
         }
 
         for (let i = 0; i < all_target_ts.length; i++) {
           await DALS.Timeline.parseAction("add_to_polygon", [{
             geometry_obj: target_geom.id,
-            add_to_polygon: { date: all_target_ts[i], geometry: add_json }
+            add_to_polygon: { date: all_target_ts[i], do_not_draw: true, geometry: add_json }
           }], true);
         }
       } else {
@@ -726,9 +789,19 @@ naissance.GeometryPolygon.handleNodeEditorEnd = async function (arg0_e) {
 
         //Find all other polities in the same layer that overlap the drawn geometry
         let affected_geometries = [];
+        let cursor_bbox = turf.bbox(cursor_turf_geometry);
 
         for (let i = 0; i < candidate_geometries.length; i++) {
           let local_geom = candidate_geometries[i];
+          let local_ext = local_geom.geometry?.getExtent ? local_geom.geometry.getExtent() : null;
+          if (local_ext) {
+            if (local_ext.xmin > cursor_bbox[2] || local_ext.xmax < cursor_bbox[0] || local_ext.ymin > cursor_bbox[3] || local_ext.ymax < cursor_bbox[1])
+              continue;
+          } else if (local_geom.bbox) {
+            if (local_geom.bbox[0] > cursor_bbox[2] || local_geom.bbox[2] < cursor_bbox[0] || local_geom.bbox[1] > cursor_bbox[3] || local_geom.bbox[3] < cursor_bbox[1])
+              continue;
+          }
+
           if (typeof local_geom.loadHistory === "function")
             await local_geom.loadHistory();
 
@@ -736,12 +809,34 @@ naissance.GeometryPolygon.handleNodeEditorEnd = async function (arg0_e) {
 
           if (local_turf) {
             local_turf = naissance.BrushNodeEditor.healTopology(local_turf);
-            let inter = null;
-            try {
-              inter = turf.intersect(turf.featureCollection([local_turf, cursor_turf_geometry]));
-            } catch (cand_err) {}
+            let test_cand = local_turf;
+            let l_type = local_turf.geometry?.type || local_turf.type;
 
-            if (inter && turf.area(inter) > 1.0) affected_geometries.push(local_geom);
+            if (l_type === "MultiPolygon") {
+              let l_coords = local_turf.geometry ? local_turf.geometry.coordinates : local_turf.coordinates;
+              let l_matches = [];
+              for (let c = 0; c < l_coords.length; c++) {
+                let p_f = turf.polygon(l_coords[c]);
+                let p_b = turf.bbox(p_f);
+                let p_ol = !(
+                  p_b[0] > cursor_bbox[2] || p_b[2] < cursor_bbox[0] ||
+                  p_b[1] > cursor_bbox[3] || p_b[3] < cursor_bbox[1]
+                );
+                if (p_ol) l_matches.push(l_coords[c]);
+              }
+              if (l_matches.length === 1) test_cand = turf.polygon(l_matches[0]);
+              else if (l_matches.length > 1) test_cand = turf.multiPolygon(l_matches);
+              else test_cand = null;
+            }
+
+            if (test_cand) {
+              let inter = null;
+              try {
+                inter = turf.intersect(turf.featureCollection([test_cand, cursor_turf_geometry]));
+              } catch (cand_err) {}
+
+              if (inter && turf.area(inter) > 1.0) affected_geometries.push(local_geom);
+            }
           }
         }
 

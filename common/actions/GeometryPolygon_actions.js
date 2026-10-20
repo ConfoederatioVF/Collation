@@ -45,8 +45,43 @@
  *   - `.date`: {@link Object}|{@link number}|{@link string} - If string, either 'start'/'end'.
  *   - `.key`: {@link string}
  */
-//Debounced synchronization tracker to persist keyframes to DB workers without blocking renderer
+//Debounced synchronization tracker to persist keyframes differentially to DB workers without blocking renderer
 let db_sync_timeouts = new Map();
+let db_pending_diffs = new Map();
+
+let syncKeyframeToDB = function (arg0_id, arg1_date, arg2_keyframe) {
+	let id = arg0_id;
+	let date = arg1_date;
+	let keyframe = arg2_keyframe;
+	if (!id || (!global.db?.setKeyframe && !global.db?.setKeyframes)) return;
+	
+	let ts_key = (typeof date === "object") ? Date.getTimestamp(date) : date;
+	ts_key = String(ts_key);
+	
+	if (!db_pending_diffs.has(id))
+		db_pending_diffs.set(id, {});
+	db_pending_diffs.get(id)[ts_key] = keyframe;
+	
+	if (db_sync_timeouts.has(id))
+		clearTimeout(db_sync_timeouts.get(id));
+	
+	let timeout = setTimeout(() => {
+		db_sync_timeouts.delete(id);
+		let diff = db_pending_diffs.get(id);
+		db_pending_diffs.delete(id);
+		
+		if (diff && Object.keys(diff).length > 0) {
+			if (global.db?.setKeyframesDiff) {
+				global.db.setKeyframesDiff(id, diff).catch(() => {});
+			} else if (global.db?.setKeyframe && Object.keys(diff).length === 1) {
+				let single_ts = Object.keys(diff)[0];
+				global.db.setKeyframe(id, single_ts, diff[single_ts]).catch(() => {});
+			}
+		}
+	}, 200);
+	db_sync_timeouts.set(id, timeout);
+};
+
 let syncGeometryToDB = function (arg0_id, arg1_keyframes) {
 	let id = arg0_id;
 	let keyframes = arg1_keyframes;
@@ -57,6 +92,7 @@ let syncGeometryToDB = function (arg0_id, arg1_keyframes) {
 	
 	let timeout = setTimeout(() => {
 		db_sync_timeouts.delete(id);
+		db_pending_diffs.delete(id);
 		global.db.setKeyframes(id, keyframes).catch(() => {});
 	}, 200);
 	db_sync_timeouts.set(id, timeout);
@@ -105,10 +141,12 @@ config.actions.geometry_polygon = {
 						geometry_obj: polygon_obj.id,
 						add_to_polygon: {
 							date: local_keyframe,
+							do_not_draw: true,
 							geometry: json.add_to_polygon.geometry
 						}
 					}], true);
 				});
+				if (polygon_obj.draw) polygon_obj.draw();
 				return;
 			}
 
@@ -142,20 +180,11 @@ config.actions.geometry_polygon = {
 						if (turf_geom && turf_ot) {
 							let union_res = null;
 							try {
-								let clean_geom = turf_geom;
-								let clean_ot = turf_ot;
-								try {
-									let tr_g = turf.truncate(turf_geom, { precision: 6, coordinates: 2, mutate: false });
-									clean_geom = turf.buffer(tr_g, 0) || turf_geom;
-								} catch (e) {}
-								try {
-									let tr_o = turf.truncate(turf_ot, { precision: 6, coordinates: 2, mutate: false });
-									clean_ot = turf.buffer(tr_o, 0) || turf_ot;
-								} catch (e) {}
-
-								union_res = turf.union(turf.featureCollection([clean_geom, clean_ot]));
+								union_res = (Geospatiale.unionComponentWise) ?
+									Geospatiale.unionComponentWise(turf_geom, turf_ot) :
+									turf.union(turf.featureCollection([turf_geom, turf_ot]));
 							} catch (e) {
-								console.error("[add_to_polygon] turf.union error:", e);
+								console.error("[add_to_polygon] union error:", e);
 								union_res = turf_ot || turf_geom;
 							}
 
@@ -183,8 +212,8 @@ config.actions.geometry_polygon = {
 						
 						if (target_json !== null) {
 							polygon_obj.addKeyframe(date, target_json);
-							syncGeometryToDB(polygon_obj.id, polygon_obj.history.keyframes);
-							if (polygon_obj.draw) polygon_obj.draw();
+							syncKeyframeToDB(polygon_obj.id, date, target_json);
+							if (!json.add_to_polygon?.do_not_draw && polygon_obj.draw) polygon_obj.draw();
 						}
 						return;
 					} catch (e) {
@@ -327,7 +356,7 @@ config.actions.geometry_polygon = {
 				maptalks_geometry = (maptalks_geometry === null) ? null : maptalks_geometry.toJSON();
 				geometry_obj.history.addKeyframe(main.date, maptalks_geometry);
 				if (geometry_obj.draw) geometry_obj.draw();
-				syncGeometryToDB(geometry_obj.id, geometry_obj.history.keyframes);
+				syncKeyframeToDB(geometry_obj.id, main.date, maptalks_geometry);
 				return;
 			}
 			
@@ -370,10 +399,12 @@ config.actions.geometry_polygon = {
 							geometry_obj: polygon_obj.id,
 							remove_from_polygon: {
 								date: local_keyframe,
+								do_not_draw: true,
 								geometry: json.remove_from_polygon.geometry
 							}
 						}], true);
 					});
+					if (polygon_obj.draw) polygon_obj.draw();
 					return;
 				}
 
@@ -405,25 +436,23 @@ config.actions.geometry_polygon = {
 							let turf_remove = Geospatiale.convertMaptalksToTurf(ot_geometry);
 							
 							if (turf_existing && turf_remove) {
+								let bbox_existing = turf.bbox(turf_existing);
+								let bbox_remove = turf.bbox(turf_remove);
+								let overlaps = !(
+									bbox_existing[0] > bbox_remove[2] ||
+									bbox_existing[2] < bbox_remove[0] ||
+									bbox_existing[1] > bbox_remove[3] ||
+									bbox_existing[3] < bbox_remove[1]
+								);
+								if (!overlaps) return;
+								
 								try {
-									let clean_existing = turf_existing;
-									let clean_remove = turf_remove;
-									try {
-										let tr_ex = turf.truncate(turf_existing, { precision: 6, coordinates: 2, mutate: false });
-										clean_existing = turf.buffer(tr_ex, 0) || turf_existing;
-									} catch (e) {}
-									try {
-										let tr_rm = turf.truncate(turf_remove, { precision: 6, coordinates: 2, mutate: false });
-										clean_remove = turf.buffer(tr_rm, 0) || turf_remove;
-									} catch (e) {}
-
-									turf_difference = turf.difference(turf.featureCollection([
-										clean_existing,
-										clean_remove
-									]));
+									turf_difference = (Geospatiale.diffComponentWise) ?
+										Geospatiale.diffComponentWise(turf_existing, turf_remove) :
+										turf.difference(turf.featureCollection([turf_existing, turf_remove]));
 									diff_succeeded = true;
 								} catch (e) {
-									console.error("[remove_from_polygon] turf.difference error:", e);
+									console.error("[remove_from_polygon] diff error:", e);
 								}
 								
 								//Clean up GeometryCollection if points/lines mixed in
@@ -461,8 +490,8 @@ config.actions.geometry_polygon = {
 												m_obj.toJSON() : (turf_difference.feature || turf_difference);
 										}
 										polygon_obj.addKeyframe(date, diff_json);
-										syncGeometryToDB(polygon_obj.id, polygon_obj.history.keyframes);
-										if (polygon_obj.draw) polygon_obj.draw();
+										syncKeyframeToDB(polygon_obj.id, date, diff_json);
+										if (!json.remove_from_polygon?.do_not_draw && polygon_obj.draw) polygon_obj.draw();
 									}
 								}
 								return;

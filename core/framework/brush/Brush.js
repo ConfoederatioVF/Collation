@@ -333,29 +333,39 @@ naissance.Brush = class extends ve.Class {
 				let current_layer = this._selected_geometry.getLayer();
 				
 				//2.2. If defined, buffer first (to prevent zero-width holes), then difference all geometries in the layer from turf_cursor_geometry
-				if (current_layer) {
+				if (current_layer && turf_geometry) {
 					let all_layer_geometries = current_layer.getAllGeometries();
+					let brush_bbox = turf.bbox(turf_geometry);
 					
-					for (let i = 0; i < all_layer_geometries.length; i++)
-						if (all_layer_geometries[i].id !== this._selected_geometry.id && all_layer_geometries[i].geometry) try {
+					for (let i = 0; i < all_layer_geometries.length; i++) {
+						let local_geom = all_layer_geometries[i];
+						
+						if (local_geom.id !== this._selected_geometry.id && local_geom.geometry) try {
+							let ext = (local_geom.geometry.getExtent) ? local_geom.geometry.getExtent() : null;
+							if (ext) {
+								if (ext.xmin > brush_bbox[2] || ext.xmax < brush_bbox[0] || ext.ymin > brush_bbox[3] || ext.ymax < brush_bbox[1])
+									continue;
+							} else if (local_geom.bbox) {
+								if (local_geom.bbox[0] > brush_bbox[2] || local_geom.bbox[2] < brush_bbox[0] || local_geom.bbox[1] > brush_bbox[3] || local_geom.bbox[3] < brush_bbox[1])
+									continue;
+							}
+							
 							let is_visible = true;
 							try {
-								if (all_layer_geometries[i].history?.getKeyframe) {
-									let current_keyframe = all_layer_geometries[i].history.getKeyframe();
+								if (local_geom.history?.getKeyframe) {
+									let current_keyframe = local_geom.history.getKeyframe();
 									if (current_keyframe?.value?.[2] !== undefined && current_keyframe.value[2].hidden)
 										is_visible = false;
 								}
 							} catch (e) {}
 							
-							if (!["override", "node_override", "node_transfer"].includes(this.mode) && is_visible && turf_geometry) {
-								let other_turf = Geospatiale.convertMaptalksToTurf(all_layer_geometries[i].geometry);
+							if (!["override", "node_override", "node_transfer"].includes(this.mode) && is_visible) {
+								let other_turf = Geospatiale.convertMaptalksToTurf(local_geom.geometry);
 								if (other_turf) {
 									try {
-										let tr_a = turf.truncate(turf_geometry, { precision: 6, coordinates: 2, mutate: false });
-										let clean_a = turf.buffer(tr_a, 0) || turf_geometry;
-										let tr_b = turf.truncate(other_turf, { precision: 6, coordinates: 2, mutate: false });
-										let clean_b = turf.buffer(tr_b, 0) || other_turf;
-										let diff = turf.difference(turf.featureCollection([clean_a, clean_b]));
+										let diff = (Geospatiale.diffComponentWise) ?
+											Geospatiale.diffComponentWise(turf_geometry, other_turf) :
+											turf.difference(turf.featureCollection([turf_geometry, other_turf]));
 										if (diff) {
 											if (diff.geometry?.type === "GeometryCollection") {
 												let poly_geoms = diff.geometry.geometries.filter(g => g.type === "Polygon" || g.type === "MultiPolygon");
@@ -368,6 +378,7 @@ naissance.Brush = class extends ve.Class {
 								}
 							}
 						} catch (e) { console.warn(e); }
+					}
 				}
 			}
 			

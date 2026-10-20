@@ -256,4 +256,184 @@
 		//Return statement
 		return coords.every(Geospatiale.isGeoJSONCoords);
 	};
+	
+	/**
+	 * Performs a component-wise polygon difference operation. For MultiPolygons,
+	 * disjoint components outside the subtractor bounding box are passed through
+	 * by reference, strictly bounding memory and execution to intersecting parts.
+	 *
+	 * @param {Object} arg0_target_turf - Target polygon/multipolygon GeoJSON.
+	 * @param {Object} arg1_subtractor_turf - Subtractor polygon/multipolygon GeoJSON.
+	 *
+	 * @returns {Object|null}
+	 */
+	Geospatiale.diffComponentWise = function (arg0_target_turf, arg1_subtractor_turf) {
+		//Convert from parameters
+		let target_turf = arg0_target_turf;
+		let subtractor_turf = arg1_subtractor_turf;
+		
+		//Guard clauses
+		if (!target_turf) return null;
+		if (!subtractor_turf) return target_turf;
+		
+		//Declare local instance variables
+		let clean_sub = Geospatiale.cleanRings(subtractor_turf) || subtractor_turf;
+		let sub_bbox = turf.bbox(clean_sub);
+		let target_type = target_turf.geometry?.type || target_turf.type;
+		
+		//Function body
+		if (target_type === "MultiPolygon") {
+			let coords = target_turf.geometry ? target_turf.geometry.coordinates : target_turf.coordinates;
+			let retained_polygons = [];
+			
+			for (let i = 0; i < coords.length; i++) {
+				let poly_feature = turf.polygon(coords[i]);
+				let poly_bbox = turf.bbox(poly_feature);
+				
+				let overlaps = !(
+					poly_bbox[0] > sub_bbox[2] || poly_bbox[2] < sub_bbox[0] ||
+					poly_bbox[1] > sub_bbox[3] || poly_bbox[3] < sub_bbox[1]
+				);
+				
+				if (!overlaps) {
+					retained_polygons.push(coords[i]);
+				} else {
+					let diff_result = null;
+					try {
+						let clean_poly = Geospatiale.cleanRings(poly_feature) || poly_feature;
+						diff_result = turf.difference(turf.featureCollection([clean_poly, clean_sub]));
+					} catch (diff_err) {}
+					
+					if (diff_result) {
+						let res_type = diff_result.geometry?.type || diff_result.type;
+						let res_coords = diff_result.geometry ? diff_result.geometry.coordinates : diff_result.coordinates;
+						
+						if (res_type === "Polygon") {
+							retained_polygons.push(res_coords);
+						} else if (res_type === "MultiPolygon") {
+							for (let x = 0; x < res_coords.length; x++)
+								retained_polygons.push(res_coords[x]);
+						}
+					}
+				}
+			}
+			
+			if (retained_polygons.length === 0) return null;
+			if (retained_polygons.length === 1) return turf.polygon(retained_polygons[0]);
+			
+			//Return statement
+			return turf.multiPolygon(retained_polygons);
+		}
+		
+		//Single polygon handling
+		try {
+			let clean_target = Geospatiale.cleanRings(target_turf) || target_turf;
+			
+			//Return statement
+			return turf.difference(turf.featureCollection([clean_target, clean_sub]));
+		} catch (e) {
+			//Return statement
+			return target_turf;
+		}
+	};
+	
+	/**
+	 * Performs a component-wise polygon union operation. If the added polygon
+	 * is disjoint from all existing components, it is appended without full sweep-line clipping.
+	 * If it intersects one or more components, only the intersecting components are unioned.
+	 *
+	 * @param {Object} arg0_target_turf - Target polygon/multipolygon GeoJSON.
+	 * @param {Object} arg1_added_turf - Added polygon/multipolygon GeoJSON.
+	 *
+	 * @returns {Object}
+	 */
+	Geospatiale.unionComponentWise = function (arg0_target_turf, arg1_added_turf) {
+		//Convert from parameters
+		let target_turf = arg0_target_turf;
+		let added_turf = arg1_added_turf;
+		
+		//Guard clauses
+		if (!target_turf && !added_turf) return null;
+		if (!target_turf) return added_turf;
+		if (!added_turf) return target_turf;
+		
+		//Declare local instance variables
+		let add_bbox = turf.bbox(added_turf);
+		let clean_add = Geospatiale.cleanRings(added_turf) || added_turf;
+		let target_type = target_turf.geometry?.type || target_turf.type;
+		
+		//Function body
+		if (target_type === "MultiPolygon") {
+			let coords = target_turf.geometry ? target_turf.geometry.coordinates : target_turf.coordinates;
+			let intersecting_polygons = [];
+			let retained_polygons = [];
+			
+			for (let i = 0; i < coords.length; i++) {
+				let poly_feature = turf.polygon(coords[i]);
+				let poly_bbox = turf.bbox(poly_feature);
+				
+				let overlaps = !(
+					poly_bbox[0] > add_bbox[2] || poly_bbox[2] < add_bbox[0] ||
+					poly_bbox[1] > add_bbox[3] || poly_bbox[3] < add_bbox[1]
+				);
+				
+				if (!overlaps) {
+					retained_polygons.push(coords[i]);
+				} else {
+					intersecting_polygons.push(poly_feature);
+				}
+			}
+			
+			//If completely disjoint from all components, simply append as new component
+			if (intersecting_polygons.length === 0) {
+				let add_type = clean_add.geometry?.type || clean_add.type;
+				let add_coords = clean_add.geometry ? clean_add.geometry.coordinates : clean_add.coordinates;
+				
+				if (add_type === "Polygon") {
+					retained_polygons.push(add_coords);
+				} else if (add_type === "MultiPolygon") {
+					for (let x = 0; x < add_coords.length; x++)
+						retained_polygons.push(add_coords[x]);
+				}
+				
+				//Return statement
+				return turf.multiPolygon(retained_polygons);
+			}
+			
+			//Only union the intersecting components with the added polygon
+			let active_union = clean_add;
+			for (let i = 0; i < intersecting_polygons.length; i++) {
+				try {
+					let u = turf.union(turf.featureCollection([active_union, intersecting_polygons[i]]));
+					if (u) active_union = u;
+				} catch (union_err) {}
+			}
+			
+			let union_type = active_union.geometry?.type || active_union.type;
+			let union_coords = active_union.geometry ? active_union.geometry.coordinates : active_union.coordinates;
+			
+			if (union_type === "Polygon") {
+				retained_polygons.push(union_coords);
+			} else if (union_type === "MultiPolygon") {
+				for (let x = 0; x < union_coords.length; x++)
+					retained_polygons.push(union_coords[x]);
+			}
+			
+			if (retained_polygons.length === 1) return turf.polygon(retained_polygons[0]);
+			
+			//Return statement
+			return turf.multiPolygon(retained_polygons);
+		}
+		
+		//Single polygon handling
+		try {
+			let clean_target = Geospatiale.cleanRings(target_turf) || target_turf;
+			
+			//Return statement
+			return turf.union(turf.featureCollection([clean_target, clean_add]));
+		} catch (e) {
+			//Return statement
+			return target_turf;
+		}
+	};
 }

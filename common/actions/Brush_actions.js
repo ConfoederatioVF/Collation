@@ -16,26 +16,7 @@ config.actions.brush = {
 		name: "Select Geometry ID",
 		scope: ["Brush", "Geometry"],
 		special_function: async function (json) {
-			//Handle old geometry
-			//main.brush.mode === "override" handling
-			if (main.brush.selected_geometry && ["node_override", "override"].includes(main.brush.mode)) {
-				//1. Fetch the current layer, turf_cursor_geometry of the present brush
-				let current_layer = main.brush.selected_geometry.getLayer();
-				
-				//2. If defined, difference turf_brush_geometry from all geometries in the layer
-				if (current_layer && main.brush.selected_geometry.geometry) {
-					let all_layer_geometries = current_layer.getAllGeometries();
-					
-					for (let i = 0; i < all_layer_geometries.length; i++)
-						if (all_layer_geometries[i].id !== main.brush.selected_geometry.id && all_layer_geometries[i].geometry) try {
-							DALS.Timeline.parseAction("remove_from_polygon", [{
-								geometry_obj: all_layer_geometries[i].id,
-								remove_from_polygon: { geometry: main.brush.selected_geometry.geometry.toJSON() }
-							}]);
-						} catch (e) { console.warn(e); }
-				}
-			}
-			
+
 			//Select new geometry
 			if (json.select_geometry_id !== undefined && json.select_geometry_id !== false && json.select_geometry_id !== null) {
 				let id = String(json.select_geometry_id);

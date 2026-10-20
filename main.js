@@ -181,7 +181,7 @@ let win;
   app.commandLine.appendSwitch("disk-cache-size", "1073741824"); //1 GB disk cache cap
   app.commandLine.appendSwitch("media-cache-size", "1073741824");
   app.commandLine.appendSwitch("enable-features", "SharedArrayBuffer");
-  app.commandLine.appendSwitch("js-flags", "--max-old-space-size=262144 --expose-gc");
+  app.commandLine.appendSwitch("js-flags", "--max-old-space-size=8192 --expose-gc");
   
   //Launch app when ready
   app.whenReady().then(() => {

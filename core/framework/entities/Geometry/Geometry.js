@@ -574,16 +574,21 @@ naissance.Geometry = class extends naissance.Entity {
 				move_to_brush: veButton(() => {
 					DALS.Timeline.parseAction("select_geometry", [{
 						type: "Brush", select_geometry_id: this.id
-					}]);
+					}], true);
 				}, {
 					name: `<icon>brush</icon>`,
 					tooltip: "Move to Brush",
 					limit: () => (main.brush.selected_geometry?.id !== this.id)
 				}),
-				finish_geometry: veButton(() => {
+				finish_geometry: veButton(async () => {
+					if (main.brush?.node_editor?.enabled && main.brush.node_editor.coords?.length >= 2) {
+						let selected_geometry = main.brush.selected_geometry;
+						if (selected_geometry && naissance[selected_geometry.class_name]?.handleNodeEditorEnd)
+							await naissance[selected_geometry.class_name].handleNodeEditorEnd.call(selected_geometry, { geometry: main.brush.node_editor.geometry });
+					}
 					DALS.Timeline.parseAction("deselect_geometry", [{
 						type: "Brush", select_geometry_id: false
-					}]);
+					}], true);
 				}, {
 					name: `<icon>download_done</icon>`,
 					tooltip: "Finish Geometry",
@@ -605,16 +610,21 @@ naissance.Geometry = class extends naissance.Entity {
 				move_to_brush: veButton(() => {
 					DALS.Timeline.parseAction("select_geometry", [{
 						type: "Brush", select_geometry_id: this.id
-					}]);
+					}], true);
 				}, {
 					name: `<icon>brush</icon>`,
 					tooltip: "Move to Brush",
 					limit: () => (main.brush.selected_geometry?.id !== this.id)
 				}),
-				finish_geometry: veButton(() => {
+				finish_geometry: veButton(async () => {
+					if (main.brush?.node_editor?.enabled && main.brush.node_editor.coords?.length >= 2) {
+						let selected_geometry = main.brush.selected_geometry;
+						if (selected_geometry && naissance[selected_geometry.class_name]?.handleNodeEditorEnd)
+							await naissance[selected_geometry.class_name].handleNodeEditorEnd.call(selected_geometry, { geometry: main.brush.node_editor.geometry });
+					}
 					DALS.Timeline.parseAction("deselect_geometry", [{
 						type: "Brush", select_geometry_id: false
-					}]);
+					}], true);
 				}, {
 					name: `<icon>download_done</icon>`,
 					tooltip: "Finish Geometry",

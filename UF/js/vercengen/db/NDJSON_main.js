@@ -1052,6 +1052,57 @@ if (!global.NDJSON)
 	 *
 	 * @returns {Promise<boolean>}
 	 */
+	/**
+	 * Sets a single keyframe for a specific entity ID in its partition worker.
+	 *
+	 * @param {string} arg0_id
+	 * @param {number|Object|string} arg1_date
+	 * @param {Object} arg2_keyframe
+	 *
+	 * @returns {Promise<boolean>}
+	 */
+	NDJSON.setKeyframe = async function (arg0_id, arg1_date, arg2_keyframe) {
+		//Convert from parameters
+		let id = arg0_id;
+		let date = arg1_date;
+		let keyframe = arg2_keyframe;
+		let file_path = NDJSON.getFilePath();
+		if (!file_path) return false;
+		
+		//Return statement
+		return NDJSON.task(id, {
+			type: "set_keyframe",
+			file_path: file_path,
+			id: id,
+			date: date,
+			keyframe: keyframe
+		});
+	};
+	
+	/**
+	 * Sets multiple modified keyframes differentially for an entity ID in its partition worker.
+	 *
+	 * @param {string} arg0_id
+	 * @param {Object} arg1_diff
+	 *
+	 * @returns {Promise<boolean>}
+	 */
+	NDJSON.setKeyframesDiff = async function (arg0_id, arg1_diff) {
+		//Convert from parameters
+		let id = arg0_id;
+		let diff = arg1_diff;
+		let file_path = NDJSON.getFilePath();
+		if (!file_path) return false;
+		
+		//Return statement
+		return NDJSON.task(id, {
+			type: "set_keyframes_diff",
+			file_path: file_path,
+			id: id,
+			diff: diff
+		});
+	};
+	
 	NDJSON.setKeyframes = async function (arg0_id, arg1_keyframes) {
 		//Convert from parameters
 		let id = arg0_id;

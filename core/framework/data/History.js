@@ -9,30 +9,32 @@ naissance.History = class {
 		let components_obj = options.components_obj;
 		let local_key = options.key;
 		let local_value = options.value;
+		let kf_localisation = (typeof local_value?.localisation === "string") ? local_value.localisation : "";
+		let kf_ts = (local_value && typeof local_value.timestamp === "number") ? local_value.timestamp : parseInt(local_key);
 		
 		//Set components_obj
 		components_obj[`t_${local_key}`] = new ve.Interface({
 			date_info: new ve.HTML(String.formatDate(parseInt(local_key)), {
-				tooltip: `Timestamp: ${local_value.timestamp}`,
+				tooltip: `Timestamp: ${kf_ts}`,
 				x: 0, y: 0
 			}),
-			localisation: veHTML(() =>
-				(local_value.localisation) ? local_value.localisation : "", { x: 1, y: 0 }),
+			localisation: veHTML(() => kf_localisation, { x: 1, y: 0 }),
 			actions_bar: veRawInterface({
 				jump_to_date: veButton((e) => {
+					let cur_kf = history_obj.keyframes?.[local_key];
+					let cur_val = cur_kf?.value || cur_kf;
 					let is_geom_removed = false;
 					let target_key = parseInt(local_key);
 					
-					if (Array.isArray(local_value)) {
-						is_geom_removed = (local_value[0] === null || local_value[0] === "null" || local_value[2]?.hidden === true);
-					} else if (local_value && Array.isArray(local_value.value)) {
-						is_geom_removed = (local_value.value[0] === null || local_value.value[0] === "null" || local_value.value[2]?.hidden === true);
+					if (Array.isArray(cur_val)) {
+						is_geom_removed = (cur_val[0] === null || cur_val[0] === "null" || cur_val[2]?.hidden === true);
+					} else if (cur_val && Array.isArray(cur_val.value)) {
+						is_geom_removed = (cur_val.value[0] === null || cur_val.value[0] === "null" || cur_val.value[2]?.hidden === true);
 					}
 					
 					if (is_geom_removed) {
 						let all_timestamps = (history_obj.getTimestamps) ? history_obj.getTimestamps() : [];
 						let first_ts = (all_timestamps.length > 0) ? parseInt(all_timestamps[0]) : 0;
-						
 						target_key = Math.max(first_ts, target_key - 1);
 					}
 					
@@ -45,13 +47,15 @@ naissance.History = class {
 					tooltip: "Jump to Date"
 				}),
 				move_keyframe: veButton(() => {
+					let cur_kf = history_obj.keyframes?.[local_key];
+					let move_ts = cur_kf?.timestamp || kf_ts;
 					let move_keyframe_window = veWindow({
-						new_date: veDate(local_value.timestamp, { name: "New Date" }),
+						new_date: veDate(move_ts, { name: "New Date" }),
 						confirm: veButton(() => {
 							DALS.Timeline.parseAction("move_keyframe", [{
 								geometry_obj: history_obj.options._id(),
 								move_keyframe: {
-									date: local_value.timestamp,
+									date: move_ts,
 									ot_date: move_keyframe_window.new_date.v
 								}
 							}]);
@@ -87,6 +91,7 @@ naissance.History = class {
 		let local_keyframe_ui = components_obj[`t_${local_key}`];
 		local_keyframe_ui.element.addEventListener("contextmenu", (e) => {
 			if (history_obj.keyframe_context_menu) history_obj.keyframe_context_menu.close();
+			let cur_kf = history_obj.keyframes?.[local_key];
 			
 			history_obj.keyframe_context_menu = veContextMenu({
 				copy_timestamp: veButton(() => {
@@ -94,15 +99,19 @@ naissance.History = class {
 					veToast(`Copied timestamp to keyboard.`);
 				}, { name: "Copy Timestamp" }),
 				copy_geometry_to_date: veButton(() => {
-					history_obj.addKeyframe(main.timestamp, ...[local_value.value[0]]);
-					veToast(`Copied geometry keyframe to present date.`);
+					let geom_to_copy = cur_kf?.value?.[0];
+					if (geom_to_copy !== undefined) {
+						history_obj.addKeyframe(main.timestamp, geom_to_copy);
+						veToast(`Copied geometry keyframe to present date.`);
+					}
 				}, { name: "Copy Geometry To Date" }),
 				
 				//Edit Symbol, Edit Properties
 				edit_symbol_button: veButton(() => {
 					if (history_obj.edit_symbol_object_window) history_obj.edit_symbol_object_window.close();
+					let sym_val = cur_kf?.value?.[1];
 					history_obj.edit_symbol_object_window = veWindow({
-						symbol_obj: veObjectEditor(local_value.value[1], {
+						symbol_obj: veObjectEditor(sym_val, {
 							onuserchange: (v) => history_obj.edit_symbol_object = v
 						}),
 						confirm: veButton(() => {
@@ -111,7 +120,7 @@ naissance.History = class {
 									history_obj.addKeyframe(local_key, undefined, history_obj.edit_symbol_object);
 									veToast(`Edited symbol at timestamp.`);
 								} else {
-									local_value.value[1] = undefined;
+									if (cur_kf?.value) cur_kf.value[1] = undefined;
 									veToast(`Deleted symbol at timestamp.`);
 								}
 							history_obj.getKeyframe({ refresh_localisation: true });
@@ -120,8 +129,9 @@ naissance.History = class {
 				}, { name: "Edit Symbol" }),
 				edit_properties_button: veButton(() => {
 					if (history_obj.edit_properties_object_window) history_obj.edit_properties_object_window.close();
+					let prop_val = cur_kf?.value?.[2];
 					history_obj.edit_properties_object_window = veWindow({
-						symbol_obj: veObjectEditor(local_value.value[2], {
+						symbol_obj: veObjectEditor(prop_val, {
 							onuserchange: (v) => history_obj.edit_properties_object = v
 						}),
 						confirm: veButton(() => {
@@ -130,14 +140,14 @@ naissance.History = class {
 									history_obj.addKeyframe(local_key, undefined, undefined, history_obj.edit_properties_object);
 									veToast(`Edited properties at timestamp.`);
 								} else {
-									local_value.value[2] = undefined;
+									if (cur_kf?.value) cur_kf.value[2] = undefined;
 									veToast(`Deleted properties at timestamp.`);
 								}
 							history_obj.getKeyframe({ refresh_localisation: true });
 						}, { name: "Confirm" })
 					}, { name: "Edit Properties", can_rename: false, width: "20rem" });
 				}, { name: "Edit Properties" })
-			}, { id: "ui_keyframe_context_menu" })
+			}, { id: "ui_keyframe_context_menu" });
 		});
 	}
 };

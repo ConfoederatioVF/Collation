@@ -125,42 +125,43 @@ naissance.GeometryPolygon = class extends naissance.Geometry {
 					
 					//Normal rendering
 					if (!is_province) {
-						this.geometry.setSymbol({
+						let symbol_obj = {
 							...naissance.Renderer.getDefaultSymbol({ exclude: ["point"] }),
-							...this.value?.[1],
-						});
+							...this.value?.[1]
+						};
+						if (this.selected) {
+							symbol_obj.lineColor = "rgb(255, 255, 0)";
+							symbol_obj.lineWidth = 4;
+							symbol_obj.lineOpacity = 0.8;
+							if (main.brush?.selected_geometry?.id !== this.id)
+								symbol_obj.lineDasharray = [10, 10, 10];
+						}
+						this.geometry.setSymbol(symbol_obj);
 						this.drawLabels();
 					}
 					//Provinces rendering
 					else {
-						this.geometry.setSymbol({
+						let symbol_obj = {
 							lineColor: "#000000",
 							lineDasharray: [5, 5, 5], 
 							lineWidth: 1,
 							polygonFill: Colour.generateHexFromString(String(this.id)),
 							polygonOpacity: 0.5
-						});
+						};
+						if (this.selected) {
+							symbol_obj.lineColor = "rgb(255, 255, 0)";
+							symbol_obj.lineWidth = 4;
+							symbol_obj.lineDasharray = undefined;
+						}
+						this.geometry.setSymbol(symbol_obj);
 						this.geometry._naissance_province = true;
 					}
 				}
 			}
 		} catch (e) { console.error(e); }
 		
-		//4. Draw this.selected_geometry
-		try {
-			this.selected_geometry = undefined;
-			
-			if (this.geometry && this.selected) {
-				this.selected_geometry = this.geometry.copy();
-				this.selected_geometry.setSymbol({
-					lineColor: `rgb(255, 255, 0)`,
-					lineDasharray : (main.brush.selected_geometry?.id !== this.id) ? [10, 10, 10] : undefined,
-					lineOpacity: 0.5,
-					lineWidth: 4
-				});
-				main.layers.selection_layer.addGeometry(this.selected_geometry);
-			}
-		} catch (e) { console.error(e); }
+		//4. Draw this.selected_geometry (zero-copy: selection symbol applied directly to this.geometry)
+		this.selected_geometry = undefined;
 		
 		//5. Add bindings
 		this.handleOnclick({ limit: !is_province });

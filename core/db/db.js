@@ -312,6 +312,44 @@ let is_renderer = Boolean(typeof window !== "undefined" || (typeof process !== "
 	};
 	
 	/**
+	 * Sets a single keyframe differentially for a specific entity ID.
+	 *
+	 * @param {string} arg0_id
+	 * @param {number|Object|string} arg1_date
+	 * @param {Object} arg2_keyframe
+	 *
+	 * @returns {Promise<boolean>}
+	 */
+	db.setKeyframe = async function (arg0_id, arg1_date, arg2_keyframe) {
+		//Convert from parameters
+		let id = arg0_id;
+		let date = arg1_date;
+		let keyframe = arg2_keyframe;
+		
+		//Return statement
+		if (!is_renderer && global.NDJSON?.setKeyframe) return await NDJSON.setKeyframe(id, date, keyframe);
+		return await db.send("setKeyframe", id, date, keyframe);
+	};
+	
+	/**
+	 * Sets multiple modified keyframes differentially for a specific entity ID.
+	 *
+	 * @param {string} arg0_id
+	 * @param {Object} arg1_diff
+	 *
+	 * @returns {Promise<boolean>}
+	 */
+	db.setKeyframesDiff = async function (arg0_id, arg1_diff) {
+		//Convert from parameters
+		let id = arg0_id;
+		let diff = arg1_diff;
+		
+		//Return statement
+		if (!is_renderer && global.NDJSON?.setKeyframesDiff) return await NDJSON.setKeyframesDiff(id, diff);
+		return await db.send("setKeyframesDiff", id, diff);
+	};
+	
+	/**
 	 * Sets keyframes for a specific entity ID.
 	 *
 	 * @param {string} arg0_id

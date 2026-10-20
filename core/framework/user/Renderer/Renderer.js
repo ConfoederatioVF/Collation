@@ -117,25 +117,32 @@ naissance.Renderer = class extends ve.Class {
 	 */
 	getTimestamps () {
 		//Declare local instance variables
-		let all_timestamps = [];
+		let ts_set = new Set();
 		
 		if (this.timestamps && Array.isArray(this.timestamps))
-			all_timestamps = [...this.timestamps];
+			for (let i = 0; i < this.timestamps.length; i++)
+				ts_set.add(this.timestamps[i]);
 		
 		//Iterate over all naissance.Feature.instances with no .parent
 		Object.iterate(naissance.Feature.instances, (local_key, local_feature) => {
-			if (!local_feature.parent) 
-				all_timestamps = Array.strictUnique(all_timestamps, local_feature.getTimestamps());
+			if (!local_feature.parent && typeof local_feature.getTimestamps === "function") {
+				let local_ts = local_feature.getTimestamps();
+				for (let i = 0; i < local_ts.length; i++)
+					ts_set.add(local_ts[i]);
+			}
 		});
 		
 		//Iterate over all naissance.Geometry.instances with no parent
 		Object.iterate(naissance.Geometry.instances, (local_key, local_geometry) => {
-			if (!local_geometry.parent) 
-				all_timestamps = Array.strictUnique(all_timestamps, local_geometry.history.getTimestamps());
+			if (!local_geometry.parent && typeof local_geometry.history?.getTimestamps === "function") {
+				let local_ts = local_geometry.history.getTimestamps();
+				for (let i = 0; i < local_ts.length; i++)
+					ts_set.add(local_ts[i]);
+			}
 		});
 		
 		//Return statement
-		return all_timestamps.sort((a, b) => a - b);
+		return Array.from(ts_set).sort((a, b) => a - b);
 	}
 	
 	/**
