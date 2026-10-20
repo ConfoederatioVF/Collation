@@ -591,6 +591,17 @@ global.polities_Phersu_Worker = class extends Blacktraffic.Worker {
 			
 			let date_string = arg0_entry.date_string;
 			let file_path = path.join(this.static.geojson_folder, `${date_string}.json`);
+			let year_num = parseInt(date_string.split(".")[0], 10);
+			
+			//Guard against default fallback landing page (-3499 BC Nomes)
+			if (year_num > -3000) {
+				let features = arg0_entry.data.features || [];
+				let first_state = features[0]?.properties?.state || "";
+				if (features.length <= 50 && first_state.includes("Bows")) {
+					this.warn(`Rejecting corrupted fallback GeoJSON for [${date_string}] (-3499BC landing page detected).`);
+					return;
+				}
+			}
 			
 			if (arg0_entry.string !== last_geojson_string) {
 				if (!fs.existsSync(file_path)) {
