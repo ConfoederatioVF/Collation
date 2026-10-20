@@ -13,6 +13,8 @@ naissance.BrushNodeEditor = class extends ve.Class {
 
     this._click_listener = (e) => { this.onclick(e); };
     this._dblclick_listener = (e) => { this.ondblclick(e); };
+    this._keydown_listener = (e) => { this.onkeydown(e); };
+    this._last_closed_time = 0;
     this._mousemove_listener = (e) => { this.onmousemove(e); };
   }
 
@@ -49,6 +51,9 @@ naissance.BrushNodeEditor = class extends ve.Class {
       map.off("mousemove", this._mousemove_listener);
       try { map.config("doubleClickZoom", true); } catch (e) {}
     }
+
+    if (typeof window !== "undefined")
+      window.removeEventListener("keydown", this._keydown_listener);
   }
 
   /**
@@ -72,7 +77,7 @@ naissance.BrushNodeEditor = class extends ve.Class {
     if (draw_coords.length < 2) return;
 
     //Function body
-    if (this.mode === "LineString" || this.mode === "FreeHandLineString")
+    if (this.mode === "LineString" || this.mode === "FreeHandLineString" || draw_coords.length < 3)
       current_mode = "LineString";
 
     this.geometry = new maptalks[current_mode](draw_coords, {
@@ -101,6 +106,9 @@ naissance.BrushNodeEditor = class extends ve.Class {
       map.on("dblclick", this._dblclick_listener);
       map.on("mousemove", this._mousemove_listener);
     }
+
+    if (typeof window !== "undefined")
+      window.addEventListener("keydown", this._keydown_listener);
   }
 
   /**
@@ -145,6 +153,7 @@ naissance.BrushNodeEditor = class extends ve.Class {
 
     //Guard clause
     if (this.busy) return;
+    if (this._last_closed_time && (Date.now() - this._last_closed_time < 400)) return;
 
     //Declare local instance variables
     let is_ctrl = Boolean(e?.domEvent?.ctrlKey || e?.ctrlKey || HTML.ctrl_pressed);
@@ -166,17 +175,36 @@ naissance.BrushNodeEditor = class extends ve.Class {
 
     //Check if user clicked near the starting vertex to close the polygon ring
     if (is_polygon && this.coords.length >= 3 && e.coordinate) {
-      let first = this.coords[0];
-      let fx = (first.x !== undefined) ? first.x : first[0];
-      let fy = (first.y !== undefined) ? first.y : first[1];
-      let px = (e.coordinate.x !== undefined) ? e.coordinate.x : e.coordinate[0];
-      let py = (e.coordinate.y !== undefined) ? e.coordinate.y : e.coordinate[1];
-      let screen_res = (typeof map !== "undefined" && typeof map.getResolution === "function") ? map.getResolution() : 0.001;
-      let snap_tol = screen_res * 12;
+      let is_near_start = false;
 
-      if (Math.hypot(px - fx, py - fy) <= snap_tol) {
+      if (typeof map !== "undefined" && map.coordinateToContainerPoint) {
+        let click_cp = (e.containerPoint) ? e.containerPoint : map.coordinateToContainerPoint(e.coordinate);
+        let first_cp = map.coordinateToContainerPoint(this.coords[0]);
+
+        if (first_cp && click_cp) {
+          let screen_dist = Math.hypot(click_cp.x - first_cp.x, click_cp.y - first_cp.y);
+          if (screen_dist <= 15) is_near_start = true;
+        }
+      }
+
+      if (is_near_start) {
         this.ondblclick(e);
         return;
+      }
+    }
+
+    //Deduplicate accidental rapid repeat clicks in virtually the same screen spot
+    if (this.coords.length > 0 && e.coordinate) {
+      let last_node = this.coords[this.coords.length - 1];
+
+      if (typeof map !== "undefined" && map.coordinateToContainerPoint) {
+        let click_cp = (e.containerPoint) ? e.containerPoint : map.coordinateToContainerPoint(e.coordinate);
+        let last_cp = map.coordinateToContainerPoint(last_node);
+
+        if (last_cp && click_cp) {
+          let screen_dist = Math.hypot(click_cp.x - last_cp.x, click_cp.y - last_cp.y);
+          if (screen_dist < 6) return;
+        }
       }
     }
 
@@ -194,7 +222,9 @@ naissance.BrushNodeEditor = class extends ve.Class {
 
     //Guard clause
     if (this.busy) return;
+    if (this._last_closed_time && (Date.now() - this._last_closed_time < 400)) return;
     this.busy = true;
+    this._last_closed_time = Date.now();
 
     //Declare local instance variables
     let is_ctrl = Boolean(e?.domEvent?.ctrlKey || e?.ctrlKey || HTML.ctrl_pressed);
@@ -216,6 +246,7 @@ naissance.BrushNodeEditor = class extends ve.Class {
     for (let i = 0; i < local_coords.length; i++) {
       let pt = local_coords[i];
       let prev = clean_coords[clean_coords.length - 1];
+
       if (prev) {
         let px = (pt.x !== undefined) ? pt.x : pt[0];
         let py = (pt.y !== undefined) ? pt.y : pt[1];
@@ -227,9 +258,29 @@ naissance.BrushNodeEditor = class extends ve.Class {
       clean_coords.push(pt);
     }
 
+    //If user clicked near the starting node, remove closing duplicate from the ring vertices
+    if (is_polygon && clean_coords.length >= 2) {
+      let first = clean_coords[0];
+      let last = clean_coords[clean_coords.length - 1];
+      let fx = (first.x !== undefined) ? first.x : first[0];
+      let fy = (first.y !== undefined) ? first.y : first[1];
+      let lx = (last.x !== undefined) ? last.x : last[0];
+      let ly = (last.y !== undefined) ? last.y : last[1];
+
+      let is_closing_node = (Math.hypot(lx - fx, ly - fy) < 1e-6);
+      if (!is_closing_node && typeof map !== "undefined" && map.coordinateToContainerPoint) {
+        let first_cp = map.coordinateToContainerPoint(first);
+        let last_cp = map.coordinateToContainerPoint(last);
+        if (first_cp && last_cp && Math.hypot(last_cp.x - first_cp.x, last_cp.y - first_cp.y) <= 15)
+          is_closing_node = true;
+      }
+
+      if (is_closing_node) clean_coords.pop();
+    }
+
     //Guard clauses
     if (clean_coords.length < 2 || (is_polygon && clean_coords.length < 3)) {
-      if (is_polygon && clean_coords.length >= 1)
+      if (is_polygon && clean_coords.length > 0)
         veToast("<icon>warning</icon> Polygons require at least 3 distinct points.");
       this.busy = false;
       this.disable();
@@ -240,11 +291,7 @@ naissance.BrushNodeEditor = class extends ve.Class {
     let finished_geometry = null;
     if (is_polygon) {
       let ring_coords = [...clean_coords];
-      let first = ring_coords[0];
-      let last = ring_coords[ring_coords.length - 1];
-      let is_closed = (first.x !== undefined) ?
-        (first.x === last.x && first.y === last.y) : (first[0] === last[0] && first[1] === last[1]);
-      if (!is_closed) ring_coords.push(first);
+      ring_coords.push(clean_coords[0]);
       finished_geometry = new maptalks.Polygon(ring_coords);
     } else {
       finished_geometry = new maptalks.LineString(clean_coords);
@@ -254,9 +301,8 @@ naissance.BrushNodeEditor = class extends ve.Class {
       if (selected_geometry) {
         let layer_obj = selected_geometry.getLayer();
 
-        if (layer_obj?._type === "provinces" || layer_obj?.type === "provinces") {
+        if (layer_obj?._type === "provinces" || layer_obj?.type === "provinces")
           return;
-        }
 
         if (naissance[selected_geometry.class_name]?.handleNodeEditorEnd) {
           try {
@@ -275,6 +321,36 @@ naissance.BrushNodeEditor = class extends ve.Class {
   }
 
   /**
+   * Handles keydown events to allow Enter to finish or Escape to cancel.
+   *
+   * @param {KeyboardEvent} arg0_e - Keydown event.
+   */
+  onkeydown (arg0_e) {
+    //Convert from parameters
+    let e = arg0_e;
+
+    //Guard clause
+    if (this.busy || !this.enabled) return;
+
+    //Function body
+    if (e.key === "Enter") {
+      let is_polygon = (this.mode === "Polygon");
+      let min_points = (is_polygon) ? 3 : 2;
+
+      if (this.coords.length >= min_points) {
+        e.preventDefault();
+        this.ondblclick(e);
+      }
+    } else if (e.key === "Escape") {
+      this.coords = [];
+      if (this.geometry) {
+        this.geometry.remove();
+        this.geometry = null;
+      }
+    }
+  }
+
+  /**
    * Handles map mousemove events to preview drawn nodes.
    *
    * @param {Object} arg0_e - Map mousemove event.
@@ -287,8 +363,23 @@ naissance.BrushNodeEditor = class extends ve.Class {
     if (this.busy) return;
     if (this.coords.length === 0) return;
 
+    //Declare local instance variables
+    let hover_coord = e.coordinate;
+    let is_polygon = (this.mode === "Polygon");
+
+    //Snap cursor preview to starting vertex if hovering near it
+    if (is_polygon && this.coords.length >= 3 && typeof map !== "undefined" && map.coordinateToContainerPoint && e.coordinate) {
+      let first_cp = map.coordinateToContainerPoint(this.coords[0]);
+      let mouse_cp = (e.containerPoint) ? e.containerPoint : map.coordinateToContainerPoint(e.coordinate);
+
+      if (first_cp && mouse_cp) {
+        let screen_dist = Math.hypot(mouse_cp.x - first_cp.x, mouse_cp.y - first_cp.y);
+        if (screen_dist <= 15) hover_coord = this.coords[0];
+      }
+    }
+
     //Function body
-    this.draw(e.coordinate);
+    this.draw(hover_coord);
   }
 
   /**
@@ -307,10 +398,28 @@ naissance.BrushNodeEditor = class extends ve.Class {
 
     //Function body
     try {
-      let truncated = turf.truncate(turf_geometry, { precision: 6, coordinates: 2, mutate: false });
-      let clean = turf.buffer(truncated, 0);
-      if (clean && clean.geometry) return clean;
-    } catch (e) {}
+      let clean_geom = (Geospatiale.cleanRings) ?
+        Geospatiale.cleanRings(turf_geometry) : turf_geometry;
+      clean_geom = clean_geom || turf_geometry;
+
+      let kinks = (turf.kinks) ? turf.kinks(clean_geom) : null;
+      if (kinks && kinks.features && kinks.features.length > 0 && turf.unkinkPolygon) {
+        let unkinked = turf.unkinkPolygon(clean_geom);
+
+        if (unkinked && unkinked.features && unkinked.features.length > 0) {
+          if (unkinked.features.length === 1) {
+            return unkinked.features[0];
+          } else {
+            let coords_list = unkinked.features.map(f => f.geometry.coordinates);
+            return turf.multiPolygon(coords_list);
+          }
+        }
+      }
+
+      return clean_geom;
+    } catch (e) {
+      console.warn("[healTopology] error, using original geometry:", e);
+    }
 
     //Return statement
     return turf_geometry;
@@ -343,8 +452,8 @@ naissance.BrushNodeEditor = class extends ve.Class {
     let snap_buffer_km = tolerance_km;
 
     if (snap_buffer_km === undefined) {
-      let screen_res = (typeof map !== "undefined" && typeof map.getResolution === "function") ? map.getResolution() : 0.001;
-      snap_buffer_km = Math.max(0.01, screen_res * 10 * 111.32);
+      let screen_res = (typeof map !== "undefined" && typeof map.getResolution === "function") ? map.getResolution() : 10;
+      snap_buffer_km = Math.max(0.01, (screen_res * 10) / 1000);
     }
 
     let resolved_bbox = turf.bbox(resolved);
@@ -751,7 +860,7 @@ naissance.GeometryPolygon.handleNodeEditorEnd = async function (arg0_e) {
       }
 
       //Apply simplify if configured
-      if (main.brush.simplify > 0)
+      if (main.brush.simplify > 0 && main.brush.simplify_applies_to_polygon)
         turf_intersection = turf.simplify(turf_intersection, { tolerance: main.brush.simplify });
 
       let node_buffer_m = Math.returnSafeNumber(main.brush.node_buffer, 0);
@@ -884,7 +993,7 @@ naissance.GeometryPolygon.handleNodeEditorEnd = async function (arg0_e) {
         if (!this.geometry && typeof this.draw === "function")
           this.draw();
 
-        if (main.brush.simplify > 0)
+        if (main.brush.simplify > 0 && main.brush.simplify_applies_to_polygon)
           cursor_turf_geometry = turf.simplify(cursor_turf_geometry, { tolerance: main.brush.simplify });
 
         let maptalks_override = Geospatiale.convertTurfToMaptalks(cursor_turf_geometry);
@@ -1022,12 +1131,8 @@ naissance.GeometryPolygon.handleNodeEditorEnd = async function (arg0_e) {
 
   //3. Default Node handler
   if (main.brush.node_editor.type === "add") {
-    //Snap and resolve against other polities in the same layer
-    cursor_turf_geometry = naissance.BrushNodeEditor.snapPolygonToLayer(cursor_turf_geometry, candidate_geometries);
-    e.geometry = Geospatiale.convertTurfToMaptalks(cursor_turf_geometry);
-
-    e.geometry = main.brush.getAddPolygon(e.geometry);
-    if (!e.geometry) return;
+    let maptalks_add = Geospatiale.convertTurfToMaptalks(cursor_turf_geometry);
+    if (!maptalks_add) return;
 
     let has_simplify = Boolean(main.brush.simplify > 0 && main.brush.simplify_applies_to_polygon);
     let mvp_entry = {
@@ -1035,7 +1140,7 @@ naissance.GeometryPolygon.handleNodeEditorEnd = async function (arg0_e) {
       add_to_polygon: {
         date: (date_range) ? undefined : main.date,
         date_range: date_range,
-        geometry: e.geometry.toJSON()
+        geometry: maptalks_add.toJSON()
       }
     };
     if (has_simplify) {
@@ -1046,17 +1151,23 @@ naissance.GeometryPolygon.handleNodeEditorEnd = async function (arg0_e) {
     }
 
     await DALS.Timeline.parseAction("add_to_polygon", [mvp_entry], true);
+    if (typeof this.draw === "function") this.draw();
+    if (typeof UI_Leftbar !== "undefined" && UI_Leftbar.refresh) UI_Leftbar.refresh();
+    veToast("<icon>check</icon> Added nodes to polygon successfully.");
   } else if (main.brush.node_editor.type === "remove") {
-    e.geometry = main.brush.getRemovePolygon(e.geometry);
-    if (!e.geometry) return;
+    let maptalks_remove = Geospatiale.convertTurfToMaptalks(cursor_turf_geometry);
+    if (!maptalks_remove) return;
 
     await DALS.Timeline.parseAction("remove_from_polygon", [{
       geometry_obj: this.id,
       remove_from_polygon: {
         date: (date_range) ? undefined : main.date,
         date_range: date_range,
-        geometry: e.geometry.toJSON()
+        geometry: maptalks_remove.toJSON()
       }
     }], true);
+    if (typeof this.draw === "function") this.draw();
+    if (typeof UI_Leftbar !== "undefined" && UI_Leftbar.refresh) UI_Leftbar.refresh();
+    veToast("<icon>check</icon> Removed nodes from polygon successfully.");
   }
 };

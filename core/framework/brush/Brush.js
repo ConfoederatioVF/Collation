@@ -322,7 +322,10 @@ naissance.Brush = class extends ve.Class {
 			let turf_geometry = Geospatiale.convertMaptalksToTurf(geometry);
 			
 			//1. Brush; Simplify handling
-			if (main.brush.simplify > 0)
+			let is_node_mode = ["node", "node_override", "node_transfer"].includes(this.mode);
+			let should_simplify = (main.brush.simplify > 0) && (!is_node_mode || main.brush.simplify_applies_to_polygon);
+			
+			if (should_simplify)
 				turf_geometry = turf.simplify(turf_geometry, {
 					tolerance: main.brush.simplify
 				});
@@ -419,7 +422,10 @@ naissance.Brush = class extends ve.Class {
 			let turf_geometry = Geospatiale.convertMaptalksToTurf(geometry);
 			
 			//1. Brush; Simplify handling
-			if (main.brush.simplify > 0)
+			let is_node_mode = ["node", "node_override", "node_transfer"].includes(this.mode);
+			let should_simplify = (main.brush.simplify > 0) && (!is_node_mode || main.brush.simplify_applies_to_polygon);
+			
+			if (should_simplify)
 				turf_geometry = turf.simplify(turf_geometry, {
 					tolerance: main.brush.simplify
 				});
