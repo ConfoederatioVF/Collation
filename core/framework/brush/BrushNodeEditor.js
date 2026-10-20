@@ -5,6 +5,7 @@ naissance.BrushNodeEditor = class extends ve.Class {
     super();
 
     //Declare local instance variables
+    this.busy = false;
     this.coords = [];
     this.enabled = false;
     this.mode = "Polygon";
@@ -33,6 +34,7 @@ naissance.BrushNodeEditor = class extends ve.Class {
    * Disables the node editor and clears map listeners and preview geometries.
    */
   disable () {
+    this.busy = false;
     this.enabled = false;
     this.coords = [];
 
@@ -89,6 +91,7 @@ naissance.BrushNodeEditor = class extends ve.Class {
    */
   enable () {
     this.disable();
+    this.busy = false;
     this.enabled = true;
     this.type = "add";
 
@@ -140,18 +143,41 @@ naissance.BrushNodeEditor = class extends ve.Class {
     //Convert from parameters
     let e = arg0_e;
 
+    //Guard clause
+    if (this.busy) return;
+
     //Declare local instance variables
+    let is_ctrl = Boolean(e?.domEvent?.ctrlKey || e?.ctrlKey || HTML.ctrl_pressed);
     let is_line = ["FreeHandLineString", "LineString"].includes(this.mode);
     let is_node_brush = ["node", "node_override", "node_transfer"].includes(main.brush.mode);
+    let is_polygon = (this.mode === "Polygon");
 
     //Guard clause
-    if (is_line && HTML.ctrl_pressed) return; //Remove isn't valid for GeometryLine
+    if (is_line && is_ctrl) return; //Remove isn't valid for GeometryLine
 
     if (this.coords.length === 0) {
       if (is_line && !is_node_brush && main.brush._selected_geometry?.isOpen("instance"))
         return;
 
-      this.type = (HTML.ctrl_pressed) ? "remove" : "add";
+      this.type = (is_ctrl) ? "remove" : "add";
+    } else if (is_ctrl) {
+      this.type = "remove";
+    }
+
+    //Check if user clicked near the starting vertex to close the polygon ring
+    if (is_polygon && this.coords.length >= 3 && e.coordinate) {
+      let first = this.coords[0];
+      let fx = (first.x !== undefined) ? first.x : first[0];
+      let fy = (first.y !== undefined) ? first.y : first[1];
+      let px = (e.coordinate.x !== undefined) ? e.coordinate.x : e.coordinate[0];
+      let py = (e.coordinate.y !== undefined) ? e.coordinate.y : e.coordinate[1];
+      let screen_res = (typeof map !== "undefined" && typeof map.getResolution === "function") ? map.getResolution() : 0.001;
+      let snap_tol = screen_res * 12;
+
+      if (Math.hypot(px - fx, py - fy) <= snap_tol) {
+        this.ondblclick(e);
+        return;
+      }
     }
 
     this.addNode(e.coordinate);
@@ -166,26 +192,48 @@ naissance.BrushNodeEditor = class extends ve.Class {
     //Convert from parameters
     let e = arg0_e;
 
+    //Guard clause
+    if (this.busy) return;
+    this.busy = true;
+
     //Declare local instance variables
+    let is_ctrl = Boolean(e?.domEvent?.ctrlKey || e?.ctrlKey || HTML.ctrl_pressed);
     let is_polygon = (this.mode === "Polygon");
+    let local_coords = [...this.coords];
     let selected_geometry = main.brush._selected_geometry;
 
-    //Deduplicate consecutive identical coordinates (e.g. from rapid double-click)
+    if (is_ctrl) this.type = "remove";
+
+    //Clear active preview immediately so user gets instant visual feedback
+    if (this.geometry) {
+      this.geometry.remove();
+      this.geometry = null;
+    }
+    this.coords = [];
+
+    //Deduplicate consecutive identical/micro-jitter coordinates (e.g. from rapid double-click)
     let clean_coords = [];
-    for (let i = 0; i < this.coords.length; i++) {
-      let pt = this.coords[i];
+    for (let i = 0; i < local_coords.length; i++) {
+      let pt = local_coords[i];
       let prev = clean_coords[clean_coords.length - 1];
-      let is_dup = prev && (
-        (pt.x !== undefined && pt.x === prev.x && pt.y === prev.y) ||
-        (Array.isArray(pt) && pt[0] === prev[0] && pt[1] === prev[1])
-      );
-      if (!is_dup) clean_coords.push(pt);
+      if (prev) {
+        let px = (pt.x !== undefined) ? pt.x : pt[0];
+        let py = (pt.y !== undefined) ? pt.y : pt[1];
+        let qx = (prev.x !== undefined) ? prev.x : prev[0];
+        let qy = (prev.y !== undefined) ? prev.y : prev[1];
+        let dist = Math.hypot(px - qx, py - qy);
+        if (dist < 1e-6) continue;
+      }
+      clean_coords.push(pt);
     }
 
     //Guard clauses
-    if (clean_coords.length < 2) return;
-    if (is_polygon && clean_coords.length < 3) {
-      veToast("<icon>warning</icon> Polygons require at least 3 distinct points.");
+    if (clean_coords.length < 2 || (is_polygon && clean_coords.length < 3)) {
+      if (is_polygon && clean_coords.length >= 1)
+        veToast("<icon>warning</icon> Polygons require at least 3 distinct points.");
+      this.busy = false;
+      this.disable();
+      this.enable();
       return;
     }
 
@@ -202,27 +250,28 @@ naissance.BrushNodeEditor = class extends ve.Class {
       finished_geometry = new maptalks.LineString(clean_coords);
     }
 
-    if (selected_geometry) {
-      let layer_obj = selected_geometry.getLayer();
+    try {
+      if (selected_geometry) {
+        let layer_obj = selected_geometry.getLayer();
 
-      if (layer_obj?._type === "provinces" || layer_obj?.type === "provinces") {
-        this.disable();
-        this.enable();
-        return;
-      }
+        if (layer_obj?._type === "provinces" || layer_obj?.type === "provinces") {
+          return;
+        }
 
-      if (naissance[selected_geometry.class_name]?.handleNodeEditorEnd) {
-        try {
-          await naissance[selected_geometry.class_name].handleNodeEditorEnd.call(selected_geometry, { geometry: finished_geometry });
-        } catch (handler_err) {
-          console.error("[ondblclick] Error in handleNodeEditorEnd:", handler_err);
-          veToast("<icon>error</icon> Failed to apply node editing.");
+        if (naissance[selected_geometry.class_name]?.handleNodeEditorEnd) {
+          try {
+            await naissance[selected_geometry.class_name].handleNodeEditorEnd.call(selected_geometry, { geometry: finished_geometry });
+          } catch (handler_err) {
+            console.error("[ondblclick] Error in handleNodeEditorEnd:", handler_err);
+            veToast("<icon>error</icon> Failed to apply node editing.");
+          }
         }
       }
+    } finally {
+      this.busy = false;
+      this.disable();
+      this.enable();
     }
-
-    this.disable();
-    this.enable();
   }
 
   /**
@@ -234,8 +283,11 @@ naissance.BrushNodeEditor = class extends ve.Class {
     //Convert from parameters
     let e = arg0_e;
 
-    //Function body
+    //Guard clause
+    if (this.busy) return;
     if (this.coords.length === 0) return;
+
+    //Function body
     this.draw(e.coordinate);
   }
 
@@ -465,7 +517,7 @@ naissance.GeometryPolygon.handleNodeEditorEnd = async function (arg0_e) {
       }
       let kf_json = arg_geom.getGeometryKeyframeAtDate(target_date);
       if (!kf_json && date_range && arg_geom.history) {
-        let all_ts = arg_geom.history.getTimestamps();
+        let all_ts = Object.keys(arg_geom.history.keyframes || {}).map(ts => Date.convertTimestampToInt(ts)).sort((a, b) => a - b);
         let end_ts = Math.max(Date.getTimestamp(date_range[0]), Date.getTimestamp(date_range[1]));
         let start_ts = Math.min(Date.getTimestamp(date_range[0]), Date.getTimestamp(date_range[1]));
         for (let i = 0; i < all_ts.length; i++) {
@@ -739,8 +791,8 @@ naissance.GeometryPolygon.handleNodeEditorEnd = async function (arg0_e) {
         let end_ts = Math.max(Date.getTimestamp(date_range[0]), Date.getTimestamp(date_range[1]));
         let start_ts = Math.min(Date.getTimestamp(date_range[0]), Date.getTimestamp(date_range[1]));
 
-        let source_ts = source_geom.history ? source_geom.history.getTimestamps() : [];
-        let target_ts = target_geom.history ? target_geom.history.getTimestamps() : [];
+        let source_ts = source_geom.history?.keyframes ? Object.keys(source_geom.history.keyframes).map(ts => Date.convertTimestampToInt(ts)) : [];
+        let target_ts = target_geom.history?.keyframes ? Object.keys(target_geom.history.keyframes).map(ts => Date.convertTimestampToInt(ts)) : [];
 
         //Find effective start date where both geometries coexist
         let effective_start_ts = null;

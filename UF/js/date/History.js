@@ -177,6 +177,8 @@ global.History = class extends ve.Class {
 		keyframes = Array.from(new Set(keyframes)).sort((a, b) => a - b);
 
 		//Iterate over all polygon_keyframes and apply the changes only if active
+		let last_yield_time = (typeof performance !== "undefined") ? performance.now() : Date.now();
+
 		for (let i = 0; i < keyframes.length; i++) {
 			let ts = keyframes[i];
 			if (ts >= start_ts && ts <= end_ts) {
@@ -187,7 +189,11 @@ global.History = class extends ve.Class {
 						continue;
 				}
 				await special_function(ts);
-				await new Promise(resolve => setTimeout(resolve, 1));
+				let current_time = (typeof performance !== "undefined") ? performance.now() : Date.now();
+				if (current_time - last_yield_time > 20) {
+					await new Promise(resolve => setTimeout(resolve, 0));
+					last_yield_time = (typeof performance !== "undefined") ? performance.now() : Date.now();
+				}
 			}
 		}
 	}
