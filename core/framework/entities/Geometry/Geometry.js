@@ -211,16 +211,27 @@ naissance.Geometry = class extends naissance.Entity {
 		UI_Leftbar.refresh();
 	}
 	
-	addKeyframe (arg0_date, arg1_coords, arg2_symbol, arg3_data) {
+	/**
+	 * Adds a keyframe at the given date with coordinates, symbol and data.
+	 *
+	 * @param {Object|number} [arg0_date]
+	 * @param {Object} [arg1_coords]
+	 * @param {Object} [arg2_symbol]
+	 * @param {Object} [arg3_data]
+	 * @param {Object} [arg4_options]
+	 *  @param {boolean} [arg4_options.do_not_draw=false]
+	 */
+	addKeyframe (arg0_date, arg1_coords, arg2_symbol, arg3_data, arg4_options) {
 		//Convert from parameters
 		let date = (arg0_date) ? arg0_date : main.date;
 		let coords = arg1_coords;
 		let symbol = arg2_symbol;
 		let data = arg3_data;
+		let options = (arg4_options) ? arg4_options : {};
 		
 		//Declare local instance variables
 		this.history.addKeyframe(date, coords, symbol, data);
-		this.draw();
+		if (!options.do_not_draw) this.draw();
 	}
 	
 	drawLabels () {

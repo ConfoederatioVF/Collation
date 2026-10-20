@@ -211,7 +211,9 @@ config.actions.geometry_polygon = {
 						}
 						
 						if (target_json !== null) {
-							polygon_obj.addKeyframe(date, target_json);
+							polygon_obj.addKeyframe(date, target_json, undefined, undefined, {
+								do_not_draw: Boolean(json.add_to_polygon?.do_not_draw)
+							});
 							syncKeyframeToDB(polygon_obj.id, date, target_json);
 							if (!json.add_to_polygon?.do_not_draw && polygon_obj.draw) polygon_obj.draw();
 						}
@@ -489,7 +491,9 @@ config.actions.geometry_polygon = {
 											diff_json = (m_obj && typeof m_obj.toJSON === "function") ?
 												m_obj.toJSON() : (turf_difference.feature || turf_difference);
 										}
-										polygon_obj.addKeyframe(date, diff_json);
+										polygon_obj.addKeyframe(date, diff_json, undefined, undefined, {
+											do_not_draw: Boolean(json.remove_from_polygon?.do_not_draw)
+										});
 										syncKeyframeToDB(polygon_obj.id, date, diff_json);
 										if (!json.remove_from_polygon?.do_not_draw && polygon_obj.draw) polygon_obj.draw();
 									}

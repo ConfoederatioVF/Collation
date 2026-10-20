@@ -287,17 +287,26 @@
 			let retained_polygons = [];
 			
 			for (let i = 0; i < coords.length; i++) {
-				let poly_feature = turf.polygon(coords[i]);
-				let poly_bbox = turf.bbox(poly_feature);
+				let ring = coords[i]?.[0];
+				if (!ring || ring.length < 4) continue;
+				let p_min_x = Infinity, p_min_y = Infinity, p_max_x = -Infinity, p_max_y = -Infinity;
+				for (let v = 0; v < ring.length; v++) {
+					let pt = ring[v];
+					if (pt[0] < p_min_x) p_min_x = pt[0];
+					if (pt[0] > p_max_x) p_max_x = pt[0];
+					if (pt[1] < p_min_y) p_min_y = pt[1];
+					if (pt[1] > p_max_y) p_max_y = pt[1];
+				}
 				
 				let overlaps = !(
-					poly_bbox[0] > sub_bbox[2] || poly_bbox[2] < sub_bbox[0] ||
-					poly_bbox[1] > sub_bbox[3] || poly_bbox[3] < sub_bbox[1]
+					p_min_x > sub_bbox[2] || p_max_x < sub_bbox[0] ||
+					p_min_y > sub_bbox[3] || p_max_y < sub_bbox[1]
 				);
 				
 				if (!overlaps) {
 					retained_polygons.push(coords[i]);
 				} else {
+					let poly_feature = turf.polygon(coords[i]);
 					let diff_result = null;
 					try {
 						let clean_poly = Geospatiale.cleanRings(poly_feature) || poly_feature;
@@ -369,18 +378,26 @@
 			let retained_polygons = [];
 			
 			for (let i = 0; i < coords.length; i++) {
-				let poly_feature = turf.polygon(coords[i]);
-				let poly_bbox = turf.bbox(poly_feature);
+				let ring = coords[i]?.[0];
+				if (!ring || ring.length < 4) continue;
+				let p_min_x = Infinity, p_min_y = Infinity, p_max_x = -Infinity, p_max_y = -Infinity;
+				for (let v = 0; v < ring.length; v++) {
+					let pt = ring[v];
+					if (pt[0] < p_min_x) p_min_x = pt[0];
+					if (pt[0] > p_max_x) p_max_x = pt[0];
+					if (pt[1] < p_min_y) p_min_y = pt[1];
+					if (pt[1] > p_max_y) p_max_y = pt[1];
+				}
 				
 				let overlaps = !(
-					poly_bbox[0] > add_bbox[2] || poly_bbox[2] < add_bbox[0] ||
-					poly_bbox[1] > add_bbox[3] || poly_bbox[3] < add_bbox[1]
+					p_min_x > add_bbox[2] || p_max_x < add_bbox[0] ||
+					p_min_y > add_bbox[3] || p_max_y < add_bbox[1]
 				);
 				
 				if (!overlaps) {
 					retained_polygons.push(coords[i]);
 				} else {
-					intersecting_polygons.push(poly_feature);
+					intersecting_polygons.push(turf.polygon(coords[i]));
 				}
 			}
 			

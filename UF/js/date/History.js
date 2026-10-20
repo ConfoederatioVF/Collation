@@ -187,6 +187,7 @@ global.History = class extends ve.Class {
 						continue;
 				}
 				await special_function(ts);
+				await new Promise(resolve => setTimeout(resolve, 0));
 			}
 		}
 	}

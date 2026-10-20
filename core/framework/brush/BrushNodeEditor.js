@@ -267,33 +267,13 @@ naissance.BrushNodeEditor = class extends ve.Class {
     //Function body
     for (let i = 0; i < layer_geometries.length; i++) {
       let cand = layer_geometries[i];
-      let cand_ext = cand.geometry?.getExtent ? cand.geometry.getExtent() : null;
-      if (cand_ext) {
-        if (cand_ext.xmin > query_bbox[2] || cand_ext.xmax < query_bbox[0] || cand_ext.ymin > query_bbox[3] || cand_ext.ymax < query_bbox[1])
-          continue;
-      } else if (cand.bbox) {
-        if (cand.bbox[0] > query_bbox[2] || cand.bbox[2] < query_bbox[0] || cand.bbox[1] > query_bbox[3] || cand.bbox[3] < query_bbox[1])
-          continue;
-      }
+      if (!cand || !cand.geometry) continue;
+
+      let cand_ext = (cand.geometry.getExtent) ? cand.geometry.getExtent() : null;
+      if (cand_ext && (cand_ext.xmin > query_bbox[2] || cand_ext.xmax < query_bbox[0] || cand_ext.ymin > query_bbox[3] || cand_ext.ymax < query_bbox[1]))
+        continue;
 
       let cand_maptalks = cand.geometry;
-
-      if (!cand_maptalks && typeof cand.getGeometryKeyframeAtDate === "function") {
-        let kf_json = cand.getGeometryKeyframeAtDate(main.date);
-        if (kf_json && maptalks.Geometry?.fromJSON)
-          cand_maptalks = maptalks.Geometry.fromJSON(kf_json);
-        else if (kf_json)
-          cand_maptalks = kf_json;
-      }
-      if (!cand_maptalks && cand.value?.[0])
-        cand_maptalks = (maptalks.Geometry?.fromJSON) ? maptalks.Geometry.fromJSON(cand.value[0]) : cand.value[0];
-
-      if (!cand_maptalks) continue;
-      if (cand_maptalks.getExtent) {
-        let m_ext = cand_maptalks.getExtent();
-        if (m_ext && (m_ext.xmin > query_bbox[2] || m_ext.xmax < query_bbox[0] || m_ext.ymin > query_bbox[3] || m_ext.ymax < query_bbox[1]))
-          continue;
-      }
 
       let cand_turf = Geospatiale.convertMaptalksToTurf(cand_maptalks);
       if (!cand_turf) continue;
@@ -493,12 +473,12 @@ naissance.GeometryPolygon.handleNodeEditorEnd = async function (arg0_e) {
   cursor_turf_geometry = naissance.BrushNodeEditor.healTopology(cursor_turf_geometry);
   if (!cursor_turf_geometry) return;
 
-  //Collect other polities in the same layer
+  //Collect other rendered polities in the same layer
   if (current_layer && typeof current_layer.getAllGeometries === "function") {
-    candidate_geometries = current_layer.getAllGeometries().filter(g => g.id !== this.id);
+    candidate_geometries = current_layer.getAllGeometries().filter(g => g.id !== this.id && g.geometry);
   } else {
     candidate_geometries = Object.values(naissance.Geometry?.instances || {}).filter(
-      g => g.id !== this.id && g instanceof naissance.GeometryPolygon
+      g => g.id !== this.id && g instanceof naissance.GeometryPolygon && g.geometry
     );
   }
 
@@ -762,6 +742,7 @@ naissance.GeometryPolygon.handleNodeEditorEnd = async function (arg0_e) {
             geometry_obj: source_geom.id,
             remove_from_polygon: { date: all_source_ts[i], do_not_draw: true, geometry: remove_json }
           }], true);
+          await new Promise(resolve => setTimeout(resolve, 0));
         }
 
         for (let i = 0; i < all_target_ts.length; i++) {
@@ -769,7 +750,11 @@ naissance.GeometryPolygon.handleNodeEditorEnd = async function (arg0_e) {
             geometry_obj: target_geom.id,
             add_to_polygon: { date: all_target_ts[i], do_not_draw: true, geometry: add_json }
           }], true);
+          await new Promise(resolve => setTimeout(resolve, 0));
         }
+
+        if (source_geom.draw) source_geom.draw();
+        if (target_geom.draw) target_geom.draw();
       } else {
         await DALS.Timeline.parseAction("remove_from_polygon", [{
           geometry_obj: source_geom.id,
@@ -895,6 +880,7 @@ naissance.GeometryPolygon.handleNodeEditorEnd = async function (arg0_e) {
             }
           }], true);
           if (affected_geometries[i].draw) affected_geometries[i].draw();
+          await new Promise(resolve => setTimeout(resolve, 0));
         }
 
         //Add override geometry to this selected polity (union over)
