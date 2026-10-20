@@ -362,7 +362,7 @@ naissance.Brush = class extends ve.Class {
 								}
 							} catch (e) {}
 							
-							if (!["override", "node_override", "node_transfer", "node"].includes(this.mode) && is_visible) {
+							if (!["override", "node_override", "node_transfer"].includes(this.mode) && is_visible) {
 								let other_turf = Geospatiale.convertMaptalksToTurf(local_geom.geometry);
 								if (other_turf) {
 									try {

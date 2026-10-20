@@ -449,32 +449,44 @@ naissance.BrushNodeEditor = class extends ve.Class {
     //Declare local instance variables
     let healed = naissance.BrushNodeEditor.healTopology(turf_geometry);
     let resolved = healed;
-    let snap_buffer_km = tolerance_km;
 
-    if (snap_buffer_km === undefined) {
-      let screen_res = (typeof map !== "undefined" && typeof map.getResolution === "function") ? map.getResolution() : 10;
-      snap_buffer_km = Math.max(0.01, (screen_res * 10) / 1000);
-    }
-
-    let resolved_bbox = turf.bbox(resolved);
-    let buf_deg = (snap_buffer_km / 111.32) + 0.05;
-    let query_bbox = [
-      resolved_bbox[0] - buf_deg,
-      resolved_bbox[1] - buf_deg,
-      resolved_bbox[2] + buf_deg,
-      resolved_bbox[3] + buf_deg
-    ];
+    if (!resolved) return null;
 
     //Function body
     for (let i = 0; i < layer_geometries.length; i++) {
       let cand = layer_geometries[i];
-      if (!cand || !cand.geometry) continue;
+      if (!cand) continue;
 
-      let cand_ext = (cand.geometry.getExtent) ? cand.geometry.getExtent() : null;
-      if (cand_ext && (cand_ext.xmin > query_bbox[2] || cand_ext.xmax < query_bbox[0] || cand_ext.ymin > query_bbox[3] || cand_ext.ymax < query_bbox[1]))
-        continue;
+      //Check visibility and active state
+      if (cand._is_visible === false) continue;
+      if (cand.value && cand.value[0] === null) continue;
+      if (cand.value && cand.value[2] && cand.value[2].hidden) continue;
+      try {
+        if (cand.history?.getKeyframe) {
+          let current_keyframe = cand.history.getKeyframe();
+          if (current_keyframe?.value?.[0] === null || current_keyframe?.value?.[0] === "null") continue;
+          if (current_keyframe?.value?.[2]?.hidden) continue;
+        }
+      } catch (e) {}
 
-      let cand_maptalks = cand.geometry;
+      let cand_maptalks = cand.geometry || (cand.value ? cand.value[0] : null);
+      if (!cand_maptalks) continue;
+
+      let cand_bbox = null;
+      let cur_bbox = turf.bbox(resolved);
+
+      if (cand_maptalks.getExtent) {
+        let ext = cand_maptalks.getExtent();
+        if (ext) cand_bbox = [ext.xmin, ext.ymin, ext.xmax, ext.ymax];
+      } else if (cand.bbox) {
+        cand_bbox = cand.bbox;
+      }
+
+      if (cand_bbox) {
+        if (cand_bbox[0] > cur_bbox[2] || cand_bbox[2] < cur_bbox[0] ||
+            cand_bbox[1] > cur_bbox[3] || cand_bbox[3] < cur_bbox[1])
+          continue;
+      }
 
       let cand_turf = Geospatiale.convertMaptalksToTurf(cand_maptalks);
       if (!cand_turf) continue;
@@ -482,76 +494,33 @@ naissance.BrushNodeEditor = class extends ve.Class {
       cand_turf = naissance.BrushNodeEditor.healTopology(cand_turf);
       if (!cand_turf) continue;
 
-      //Component-level spatial decomposition: isolate only components overlapping the edit window
-      let active_cand = cand_turf;
       let cand_geom = cand_turf.geometry || cand_turf;
       if (!cand_geom || !Array.isArray(cand_geom.coordinates) || cand_geom.coordinates.length === 0)
         continue;
 
-      let cand_type = cand_geom.type;
-      let cur_bbox = turf.bbox(resolved);
-      let query_pad = (snap_buffer_km / 111.32) + 0.01;
-      let cur_envelope = [cur_bbox[0] - query_pad, cur_bbox[1] - query_pad, cur_bbox[2] + query_pad, cur_bbox[3] + query_pad];
-
-      if (cand_type === "MultiPolygon") {
-        let c_coords = cand_geom.coordinates;
-        let matching_components = [];
-
-        for (let c = 0; c < c_coords.length; c++) {
-          if (!Array.isArray(c_coords[c]) || c_coords[c].length === 0) continue;
-          try {
-            let p_feat = turf.polygon(c_coords[c]);
-            let p_bbox = turf.bbox(p_feat);
-            let p_overlaps = !(
-              p_bbox[0] > cur_envelope[2] || p_bbox[2] < cur_envelope[0] ||
-              p_bbox[1] > cur_envelope[3] || p_bbox[3] < cur_envelope[1]
-            );
-
-            if (p_overlaps) matching_components.push(c_coords[c]);
-          } catch (p_err) {}
-        }
-
-        if (matching_components.length === 1) active_cand = turf.polygon(matching_components[0]);
-        else if (matching_components.length > 1) active_cand = turf.multiPolygon(matching_components);
-        else active_cand = null;
-      } else if (cand_type === "Polygon") {
-        try {
-          let p_bbox = turf.bbox(active_cand);
-          let p_overlaps = !(
-            p_bbox[0] > cur_envelope[2] || p_bbox[2] < cur_envelope[0] ||
-            p_bbox[1] > cur_envelope[3] || p_bbox[3] < cur_envelope[1]
-          );
-          if (!p_overlaps) active_cand = null;
-        } catch (p_err) {
-          active_cand = null;
-        }
-      } else {
-        active_cand = null;
-      }
-
-      if (!active_cand) continue;
-
       try {
-        let inter = turf.intersect(turf.featureCollection([resolved, active_cand]));
-        if (inter && turf.area(inter) > 0.1) {
-          let diff = (Geospatiale.diffComponentWise) ?
-            Geospatiale.diffComponentWise(resolved, active_cand) :
-            turf.difference(turf.featureCollection([resolved, active_cand]));
+        let diff = (Geospatiale.diffComponentWise) ?
+          Geospatiale.diffComponentWise(resolved, cand_turf) :
+          turf.difference(turf.featureCollection([resolved, cand_turf]));
 
-          if (diff) {
-            if (diff.geometry?.type === "GeometryCollection") {
-              let poly_geoms = diff.geometry.geometries.filter(g => g.type === "Polygon" || g.type === "MultiPolygon");
-              if (poly_geoms.length === 1) diff = turf.feature(poly_geoms[0]);
-              else if (poly_geoms.length > 1) diff = turf.multiPolygon(poly_geoms.flatMap(g => (g.type === "Polygon") ? [g.coordinates] : g.coordinates));
-            }
-            if (diff) resolved = diff;
+        if (diff !== undefined) {
+          if (diff && diff.geometry?.type === "GeometryCollection") {
+            let poly_geoms = diff.geometry.geometries.filter(g => g.type === "Polygon" || g.type === "MultiPolygon");
+            if (poly_geoms.length === 1) diff = turf.feature(poly_geoms[0]);
+            else if (poly_geoms.length > 1) diff = turf.multiPolygon(poly_geoms.flatMap(g => (g.type === "Polygon") ? [g.coordinates] : g.coordinates));
+            else diff = null;
           }
+          resolved = diff;
         }
-      } catch (diff_err) {}
+
+        if (!resolved) break;
+      } catch (diff_err) {
+        console.warn("[snapPolygonToLayer] diff error:", diff_err);
+      }
     }
 
     //Return statement
-    return (resolved) ? resolved : turf_geometry;
+    return resolved;
   }
 
   /**
@@ -682,10 +651,10 @@ naissance.GeometryPolygon.handleNodeEditorEnd = async function (arg0_e) {
 
   //Collect other rendered polities in the same layer
   if (current_layer && typeof current_layer.getAllGeometries === "function") {
-    candidate_geometries = current_layer.getAllGeometries().filter(g => g.id !== this.id && g.geometry);
+    candidate_geometries = current_layer.getAllGeometries().filter(g => g.id !== this.id && (g.geometry || g.value?.[0]));
   } else {
     candidate_geometries = Object.values(naissance.Geometry?.instances || {}).filter(
-      g => g.id !== this.id && g instanceof naissance.GeometryPolygon && g.geometry
+      g => g.id !== this.id && g instanceof naissance.GeometryPolygon && (g.geometry || g.value?.[0])
     );
   }
 
@@ -1131,6 +1100,13 @@ naissance.GeometryPolygon.handleNodeEditorEnd = async function (arg0_e) {
 
   //3. Default Node handler
   if (main.brush.node_editor.type === "add") {
+    //Snap and resolve against other polities in the same layer
+    cursor_turf_geometry = naissance.BrushNodeEditor.snapPolygonToLayer(cursor_turf_geometry, candidate_geometries);
+    if (!cursor_turf_geometry) {
+      veToast("<icon>info</icon> Drawn nodes completely overlap adjacent polities in the same layer.");
+      return;
+    }
+
     let maptalks_add = Geospatiale.convertTurfToMaptalks(cursor_turf_geometry);
     if (!maptalks_add) return;
 
