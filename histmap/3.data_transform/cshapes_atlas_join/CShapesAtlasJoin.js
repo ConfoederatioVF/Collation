@@ -13,7 +13,8 @@
    * CShapesAtlasJoin spatiotemporally joins CShapes-Europe (1816-1886) and CShapes-2.0 (1886+)
    * into atlas_simplified.naissance, ensuring CShapes names take precedence, colours are inherited
    * via pole of inaccessibility, non-European polities (like Turkey-in-Asia and Siberia) are preserved,
-   * and underlying CShapes-Europe entities are cleanly deactivated after 1886.
+   * canonical Seshat IDs are accurately assigned, and underlying CShapes-Europe entities are cleanly
+   * deactivated after 1886.
    *
    * @class CShapesAtlasJoin
    */
@@ -27,6 +28,22 @@
     static simp_atlas_path = (typeof fs !== "undefined" && fs.existsSync("saves/atlas_simplified.naissance.bak"))
       ? "saves/atlas_simplified.naissance.bak"
       : "saves/atlas_simplified.naissance";
+
+    static cow_seshat_map = {
+      2: "us_united_states_modern",
+      210: "nl_dutch_emp_2",
+      225: "ch_swiss_conf_4",
+      230: "es_spanish_emp_3",
+      235: "pt_portugal_modern_1",
+      300: "at_habsburg_2",
+      305: "at_austrian_rep_2",
+      325: "it_italy_k_modern",
+      345: "sr_yugoslavia",
+      360: "ro_romania_modern",
+      390: "dk_danish_emp_modern",
+      750: "in_british_raj",
+      775: "mm_konbaung_dyn"
+    };
 
     /**
      * Builds a fast spatial bounding-box index of active Atlas polygons at a target timestamp.
@@ -137,6 +154,73 @@
     }
 
     /**
+     * Helper to assemble and emit a CShapes polity feature group into the savefile.
+     *
+     * @param {string} arg0_target_id
+     * @param {number} arg1_ts
+     * @param {Object} arg2_grp
+     * @param {Array<Object>} arg3_spatial_index
+     * @param {Map<string, Object>} arg4_meta_map
+     * @param {Map<string, Object>} arg5_history_map
+     * @param {Map<string, Object>} arg6_state_tracker
+     * @param {Map<string, string>} [arg7_name_map]
+     */
+    static emitCShapesPolity (arg0_target_id, arg1_ts, arg2_grp, arg3_spatial_index, arg4_meta_map, arg5_history_map, arg6_state_tracker, arg7_name_map) {
+      let grp = arg2_grp;
+      let history_map = arg5_history_map;
+      let meta_map = arg4_meta_map;
+      let name_map = arg7_name_map;
+      let spatial_index = arg3_spatial_index;
+      let state_tracker = arg6_state_tracker;
+      let target_id = arg0_target_id;
+      let ts = arg1_ts;
+
+      let merged_geom = grp.combined_geom;
+      if (!merged_geom) {
+        let combined_polys = [];
+        for (let f = 0; f < grp.features.length; f++) {
+          let g = grp.features[f].geometry;
+          if (g.type === "Polygon") combined_polys.push(g.coordinates);
+          else if (g.type === "MultiPolygon") {
+            for (let m = 0; m < g.coordinates.length; m++) combined_polys.push(g.coordinates[m]);
+          }
+        }
+
+        merged_geom = (combined_polys.length === 1)
+          ? { coordinates: combined_polys[0], type: "Polygon" }
+          : { coordinates: combined_polys, type: "MultiPolygon" };
+      }
+
+      let color = this.inheritColorViaPOI(grp.features[0], spatial_index, "#7289da");
+      let sym = { polygonFill: color, textSize: 14 };
+
+      //Prevent name mutations across keyframes by preserving existing canonical name
+      let canon_name = (name_map && name_map.has(target_id)) ? name_map.get(target_id) : (grp.name || grp.meta.name);
+      if (name_map && !name_map.has(target_id)) name_map.set(target_id, canon_name);
+
+      let props = {
+        cow: grp.meta.cow || grp.meta.cow_code,
+        cow_code: grp.meta.cow_code || grp.meta.cow,
+        name: canon_name,
+        seshat_id: grp.meta.seshat_id
+      };
+
+      if (!meta_map.has(target_id)) {
+        meta_map.set(target_id, {
+          class_name: "GeometryPolygon",
+          id: target_id,
+          metadata: {
+            description: `Simplified Polity: ${props.name}\nSeshatID: ${props.seshat_id}\nCOW: ${props.cow_code}\nBase Source: CShapes`,
+            tags: ["Polities"]
+          },
+          type: "geometry"
+        });
+      }
+
+      this.emitKeyframe(target_id, ts, merged_geom, sym, props, history_map, state_tracker);
+    }
+
+    /**
      * Emits a sparse diff keyframe, omitting unchanged properties/symbols to prevent duplication.
      *
      * @param {string} arg0_id
@@ -198,16 +282,84 @@
         history_map.get(id)[ts] = [feat_obj, (symbol_changed ? symbol : null), diff_props];
         prev.last_props = Object.assign({}, prev.last_props, diff_props);
         if (symbol_changed) prev.last_symbol = Object.assign({}, symbol);
+        prev.last_geom = geom;
         prev.last_geom_sig = sig;
       } else if (symbol_changed) {
         history_map.get(id)[ts] = [feat_obj, symbol];
         prev.last_symbol = Object.assign({}, symbol);
+        prev.last_geom = geom;
         prev.last_geom_sig = sig;
       } else {
         //Sparse keyframe: boundary geometry only
         history_map.get(id)[ts] = [feat_obj];
+        prev.last_geom = geom;
         prev.last_geom_sig = sig;
       }
+    }
+
+    /**
+     * Resolves the canonical, time-varying Seshat ID for historical polities.
+     *
+     * @param {number|string} arg0_cow_code
+     * @param {number} arg1_year
+     * @param {string} [arg2_default_seshat]
+     *
+     * @returns {string} Canonical Seshat ID
+     */
+    static getCanonicalSeshatId (arg0_cow_code, arg1_year, arg2_default_seshat) {
+      //Convert from parameters
+      let cow_code = Number(arg0_cow_code);
+      let default_seshat = (arg2_default_seshat !== undefined) ? String(arg2_default_seshat) : "";
+      let year = Number(arg1_year);
+
+      //Declare local instance variables
+      let seshat_id = default_seshat;
+
+      if (cow_code === 255) {
+        //Prussia pre-1871; Germany post-1871
+        if (year < 1871) {
+          seshat_id = "de_hohenzollern_2";
+        } else if (year < 1918) {
+          seshat_id = "de_hohenzollern_3";
+        } else if (year < 1933) {
+          seshat_id = "de_weimar_rep";
+        } else if (year <= 1945) {
+          seshat_id = "de_ns_germany";
+        } else {
+          seshat_id = "de_germany_unified_1";
+        }
+      } else if (cow_code === 200) {
+        seshat_id = (year <= 1852) ? "gb_british_emp_1" : "gb_british_emp_2";
+      } else if (cow_code === 365) {
+        if (year < 1917) {
+          seshat_id = "ru_romanov_dyn_2";
+        } else if (year <= 1991) {
+          seshat_id = "ru_soviet_union";
+        } else {
+          seshat_id = "ru_russian_federation";
+        }
+      } else if (cow_code === 640) {
+        seshat_id = (year <= 1922) ? "tr_ottoman_emp_4" : "tr_turkey_rep";
+      } else if (cow_code === 220) {
+        seshat_id = (year < 1870) ? "fr_france_modern_1" : "fr_france_modern_2";
+      } else if (cow_code === 710) {
+        if (year < 1912) {
+          seshat_id = "cn_qing_dyn_1";
+        } else if (year < 1949) {
+          seshat_id = "cn_rep_china_1";
+        } else {
+          seshat_id = "cn_chinese_peoples_rep";
+        }
+      } else if (cow_code === 380) {
+        seshat_id = (year <= 1905) ? "sv_united_k_sweden_and_norway" : "sv_sweden_k_modern";
+      } else if (cow_code === 2) {
+        seshat_id = (year < 1865) ? "us_antebellum" : "us_united_states_modern";
+      } else if (CShapesAtlasJoin.cow_seshat_map[cow_code]) {
+        seshat_id = CShapesAtlasJoin.cow_seshat_map[cow_code];
+      }
+
+      //Return statement
+      return seshat_id;
     }
 
     /**
@@ -290,6 +442,7 @@
       //Return statement
       return false;
     }
+
 
     /**
      * Parses the CShapes metadata text file mapping names and codes to Seshat IDs and COW codes.
@@ -398,6 +551,7 @@
       let c2_by_polity;
       let entity_history_map = new Map();
       let entity_meta_map = new Map();
+      let entity_name_map = new Map();
       let entity_state_tracker = new Map();
       let eu_by_polity;
       let last_log = Date.now();
@@ -430,6 +584,8 @@
               break;
             }
           }
+
+          if (init_name) entity_name_map.set(k, init_name);
 
           let desc = (ent.metadata && ent.metadata.description) || "";
           let match = desc.match(/SeshatID:\s*([^\n]+)/);
@@ -476,12 +632,13 @@
               let kf = orig.history[String(ts)];
               if (kf && kf[0] !== null) {
                 let geom = kf[0].feature ? kf[0].feature.geometry : null;
+                let prev_st = entity_state_tracker.get(id);
                 entity_state_tracker.set(id, {
                   is_active: true,
                   last_geom: geom,
                   last_geom_sig: this.computeGeomSignature(geom),
-                  last_props: kf[2] || {},
-                  last_symbol: kf[1] || {}
+                  last_props: Object.assign({}, prev_st ? prev_st.last_props : {}, kf[2] || {}),
+                  last_symbol: Object.assign({}, prev_st ? prev_st.last_symbol : {}, kf[1] || {})
                 });
               } else if (kf && kf[0] === null) {
                 entity_state_tracker.set(id, { is_active: false, last_geom: null, last_geom_sig: null });
@@ -498,13 +655,13 @@
           for (let i = 0; i < active_eu.length; i++) {
             let feat = active_eu[i];
             let p = feat.properties;
-            let meta = sources.eu_meta.get(p.Id + "|" + p.Name) || sources.eu_meta.get(p.Name.toLowerCase()) || {
+            let meta = sources.eu_meta.get(String(p.Id)) || sources.eu_meta.get(p.Id + "|" + p.Name) || sources.eu_meta.get(p.Name.toLowerCase()) || {
               cow: p.Id, cow_code: p.Id, name: p.Name, seshat_id: `(${p.Name})`
             };
 
             let key = String(p.Id);
             let polity_name = p.Name;
-            let seshat_id = meta.seshat_id || `(${p.Name})`;
+            let seshat_id = this.getCanonicalSeshatId(p.Id, year, meta.seshat_id || `(${p.Name})`);
 
             //Handle Prussia (pre-1871) vs Germany (1871+)
             if (p.Id === 255) {
@@ -513,8 +670,14 @@
                 seshat_id = "de_hohenzollern_2";
               } else {
                 polity_name = "Germany";
-                seshat_id = "de_germany_unified_1";
+                seshat_id = this.getCanonicalSeshatId(255, year, "de_hohenzollern_3");
               }
+            } else if (p.Id === 220) {
+              polity_name = "French Republic";
+            } else if (p.Id === 325) {
+              polity_name = "Italy";
+            } else if (p.Id === 360) {
+              polity_name = "Romania";
             }
 
             if (!eu_by_polity.has(key)) {
@@ -528,6 +691,7 @@
           }
 
           //B2. Process base polities: identify transcontinental empires, preserve non-European polities
+          let active_outside_eu_ids = new Set();
           for (let id of entity_meta_map.keys()) {
             let ent = sources.simp_data[id];
             if (!ent || !ent.history) continue;
@@ -539,7 +703,6 @@
             }
 
             let name = (st.properties && st.properties.name) || "";
-            let s_id = (st.properties && st.properties.seshat_id) || "";
             let is_russia = (id === "10264500703" || name.includes("Russian Empire"));
             let is_ottoman = (id === "52816277001" || id === "52817277008" || name.includes("Ottoman Empire"));
             let is_uk = (id === "87693477140" || id === "87692477137");
@@ -554,29 +717,37 @@
             else if (id === "93731444700" || name === "Kingdom of Portugal" || name === "Portugal") trans_code = "235";
             else if (id === "86136600825" || id === "45749774697" || name === "Netherlands") trans_code = "210";
             else if (id === "58904326755" || id === "65372656937" || name === "Denmark" || name === "Denmark-Norway") trans_code = "390";
+            else if (id === "43745445780" || id === "92931798598" || name.includes("Tunis")) trans_code = "616";
 
             if (trans_code) {
               let eu_grp = eu_by_polity.get(trans_code);
               if (eu_grp && eu_grp.features.length > 0) {
-                let f_eu = eu_grp.features[0];
                 let f_atlas = turf.feature(st.geometry);
-
                 try {
-                  let diff = turf.difference(turf.featureCollection([f_atlas, f_eu]));
-                  if (diff && diff.geometry) {
-                    let overseas_polys = (diff.geometry.type === "MultiPolygon") ? diff.geometry.coordinates : [diff.geometry.coordinates];
-                    let eu_polys = [];
-                    for (let f = 0; f < eu_grp.features.length; f++) {
-                      let g = eu_grp.features[f].geometry;
-                      if (g.type === "Polygon") eu_polys.push(g.coordinates);
-                      else if (g.type === "MultiPolygon") {
-                        for (let m = 0; m < g.coordinates.length; m++) eu_polys.push(g.coordinates[m]);
+                  let feats_to_union = [f_atlas];
+                  if (eu_grp.combined_geom) {
+                    feats_to_union.push(turf.feature(eu_grp.combined_geom));
+                  } else {
+                    feats_to_union = feats_to_union.concat(eu_grp.features);
+                  }
+                  let un = turf.union(turf.featureCollection(feats_to_union));
+                  if (un && un.geometry) {
+                    let un_bb = turf.bbox(un);
+                    for (let f = 0; f < active_eu.length; f++) {
+                      let f_other = active_eu[f];
+                      if (String(f_other.properties.Id) === trans_code) continue;
+                      let b = eu_bboxes[f];
+                      if (!(un_bb[2] < b[0] || un_bb[0] > b[2] || un_bb[3] < b[1] || un_bb[1] > b[3])) {
+                        try {
+                          let inter = turf.intersect(turf.featureCollection([un, f_other]));
+                          if (inter && inter.geometry && (turf.area(inter) / 1e6) > 20) {
+                            let diff = turf.difference(turf.featureCollection([un, f_other]));
+                            if (diff && diff.geometry) un = diff;
+                          }
+                        } catch (e) {}
                       }
                     }
-                    let all_p = overseas_polys.concat(eu_polys);
-                    eu_grp.combined_geom = (all_p.length === 1)
-                      ? { coordinates: all_p[0], type: "Polygon" }
-                      : { coordinates: all_p, type: "MultiPolygon" };
+                    eu_grp.combined_geom = un.geometry;
                   }
                 } catch (e) {}
               }
@@ -591,12 +762,16 @@
 
               if (!in_eu) {
                 //Polity is outside Europe (USA, Canada, Brazil, China, Khiva, Tunis, British Guiana, French Gabon, etc.)
+                active_outside_eu_ids.add(id);
                 let s_props = Object.assign({}, st.properties);
-                let meta = sources.eu_meta.get((s_props.name || "").toLowerCase()) || sources.c2_meta.get((s_props.name || "").toLowerCase());
+                let meta = sources.eu_meta.get(String(s_props.cow)) || sources.c2_meta.get(String(s_props.cow)) ||
+                           sources.eu_meta.get((s_props.name || "").toLowerCase()) || sources.c2_meta.get((s_props.name || "").toLowerCase());
                 if (meta && meta.cow) {
                   s_props.cow = meta.cow;
                   s_props.cow_code = meta.cow;
                 }
+                s_props.seshat_id = this.getCanonicalSeshatId(s_props.cow || (meta && meta.cow), year, s_props.seshat_id);
+                if (entity_name_map.has(id)) s_props.name = entity_name_map.get(id);
                 this.emitKeyframe(id, ts, st.geometry, st.symbol, s_props, entity_history_map, entity_state_tracker);
               } else {
                 //Polity is inside Europe: superseded by CShapes-Europe; deactivate cleanly
@@ -609,16 +784,18 @@
           let active_eu_target_ids = new Set();
           for (let code of eu_by_polity.keys()) {
             let grp = eu_by_polity.get(code);
-            let target_id = global.PolitiesAtlasJoin.hashToSnowflakeId("cshapes_" + code);
+            let target_id = (code === "255" && year < 1871)
+              ? global.PolitiesAtlasJoin.hashToSnowflakeId("cshapes_255_prussia")
+              : global.PolitiesAtlasJoin.hashToSnowflakeId("cshapes_" + code);
             active_eu_target_ids.add(target_id);
 
-            this.emitCShapesPolity(target_id, ts, grp, spatial_index, entity_meta_map, entity_history_map, entity_state_tracker);
+            this.emitCShapesPolity(target_id, ts, grp, spatial_index, entity_meta_map, entity_history_map, entity_state_tracker, entity_name_map);
           }
 
-          //B4. Deactivate any previously active CShapes-Europe entities that are no longer active at this timestamp
+          //B4. Deactivate any previously active entities that are no longer active at this timestamp
           for (let [id, state] of entity_state_tracker.entries()) {
-            if (state && state.is_active && !entity_meta_map.has(id)) {
-              if (!active_eu_target_ids.has(id)) {
+            if (state && state.is_active) {
+              if (!active_eu_target_ids.has(id) && !active_outside_eu_ids.has(id)) {
                 this.deactivateEntity(id, ts, entity_history_map, entity_state_tracker);
               }
             }
@@ -638,19 +815,44 @@
           for (let i = 0; i < active_c2.length; i++) {
             let feat = active_c2[i];
             let p = feat.properties;
-            let meta = sources.c2_meta.get(p.gwcode + "|" + p.cntry_name) || sources.c2_meta.get(p.cntry_name.toLowerCase()) || {
+            let meta = sources.c2_meta.get(String(p.gwcode)) || sources.c2_meta.get(p.gwcode + "|" + p.cntry_name) || sources.c2_meta.get(p.cntry_name.toLowerCase()) || {
               cow: p.gwcode, cow_code: p.gwcode, name: p.cntry_name, seshat_id: `(${p.cntry_name})`
             };
 
-            let code_key = String(p.gwcode);
+            let s_key = meta.seshat_id;
             let polity_name = p.cntry_name;
-            if (p.gwcode === 255) {
+            let cow_code = p.gwcode;
+
+            //Special historical grouping for Burma and British Raj
+            if (p.cntry_name.includes("Burma") || p.cntry_name.includes("Myanmar")) {
+              cow_code = 775;
+              polity_name = "Burma";
+              s_key = "(Burma)";
+            } else if (p.cntry_name === "India" && year < 1947) {
+              cow_code = 750;
+              polity_name = "British Raj";
+              s_key = "(British Raj)";
+            } else if (p.gwcode === 255) {
               polity_name = "Germany";
-              meta = Object.assign({}, meta, { cow: 255, cow_code: 255, name: "Germany", seshat_id: "de_germany_unified_1" });
+            } else if (p.gwcode === 220) {
+              polity_name = "French Republic";
+            } else if (p.gwcode === 325) {
+              polity_name = "Italy";
+            } else if (p.gwcode === 360) {
+              polity_name = "Romania";
+            } else if (p.gwcode === 710) {
+              polity_name = "China";
             }
 
+            let seshat_id = (s_key === "(Burma)" || s_key === "(British Raj)")
+              ? s_key
+              : this.getCanonicalSeshatId(cow_code, year, s_key);
+            meta = Object.assign({}, meta, { cow: cow_code, cow_code: cow_code, name: polity_name, seshat_id: seshat_id });
+
+            let code_key = (s_key === "(Burma)" || s_key === "(British Raj)") ? s_key : String(cow_code);
             if (!c2_by_polity.has(code_key)) {
               c2_by_polity.set(code_key, {
+                cow_code: cow_code,
                 features: [],
                 meta: meta,
                 name: polity_name
@@ -664,10 +866,28 @@
           //C2. Emit CShapes-2.0 polities with CShapes names taking precedence
           for (let code_key of c2_by_polity.keys()) {
             let grp = c2_by_polity.get(code_key);
-            let target_id = global.PolitiesAtlasJoin.hashToSnowflakeId("cshapes_" + code_key);
+            let target_id = (code_key === "(Burma)")
+              ? "79315678680"
+              : ((code_key === "(British Raj)")
+                ? "562205920"
+                : global.PolitiesAtlasJoin.hashToSnowflakeId("cshapes_" + code_key));
             c2_active_ids.add(target_id);
 
-            this.emitCShapesPolity(target_id, ts, grp, spatial_index, entity_meta_map, entity_history_map, entity_state_tracker);
+            this.emitCShapesPolity(target_id, ts, grp, spatial_index, entity_meta_map, entity_history_map, entity_state_tracker, entity_name_map);
+          }
+
+          //C2b. Special case: Burma prior to 1937 in Epoch C (when CShapes-2.0 has not yet started tracking Burma)
+          if (year < 1937) {
+            let burma_id = "79315678680";
+            let burma_ent = sources.simp_data[burma_id];
+            if (burma_ent && burma_ent.history) {
+              let st = global.PolitiesAtlasJoin.getEntityStateAtTimestamp(burma_ent, ts);
+              if (st && st.geometry) {
+                c2_active_ids.add(burma_id);
+                let s_props = Object.assign({}, st.properties, { name: "Burma", seshat_id: "(Burma)" });
+                this.emitKeyframe(burma_id, ts, st.geometry, st.symbol, s_props, entity_history_map, entity_state_tracker);
+              }
+            }
           }
 
           //C3. Deactivate ALL pre-1887 entities (including all CShapes-Europe entities) so 0 linger after 1886
@@ -730,62 +950,6 @@
       let stat = fs.statSync(this.out_atlas_path);
       console.log(`[CShapesAtlasJoin] Finished successfully! Written ${(stat.size / 1024 / 1024).toFixed(2)} MB to ${this.out_atlas_path}`);
     }
-
-    /**
-     * Helper to assemble and emit a CShapes polity feature group into the savefile.
-     */
-    static emitCShapesPolity (arg0_target_id, arg1_ts, arg2_grp, arg3_spatial_index, arg4_meta_map, arg5_history_map, arg6_state_tracker) {
-      let grp = arg2_grp;
-      let history_map = arg5_history_map;
-      let meta_map = arg4_meta_map;
-      let spatial_index = arg3_spatial_index;
-      let state_tracker = arg6_state_tracker;
-      let target_id = arg0_target_id;
-      let ts = arg1_ts;
-
-      let merged_geom = grp.combined_geom;
-      if (!merged_geom) {
-        let combined_polys = [];
-        for (let f = 0; f < grp.features.length; f++) {
-          let g = grp.features[f].geometry;
-          if (g.type === "Polygon") combined_polys.push(g.coordinates);
-          else if (g.type === "MultiPolygon") {
-            for (let m = 0; m < g.coordinates.length; m++) combined_polys.push(g.coordinates[m]);
-          }
-        }
-
-        merged_geom = (combined_polys.length === 1)
-          ? { coordinates: combined_polys[0], type: "Polygon" }
-          : { coordinates: combined_polys, type: "MultiPolygon" };
-      }
-
-      let color = this.inheritColorViaPOI(grp.features[0], spatial_index, "#7289da");
-      let sym = { polygonFill: color, textSize: 14 };
-
-      //CShapes names take absolute precedence over previous atlas_simplified names
-      let canon_name = grp.name || grp.meta.name;
-
-      let props = {
-        cow: grp.meta.cow || grp.meta.cow_code,
-        cow_code: grp.meta.cow_code || grp.meta.cow,
-        name: canon_name,
-        seshat_id: grp.meta.seshat_id
-      };
-
-      if (!meta_map.has(target_id)) {
-        meta_map.set(target_id, {
-          class_name: "GeometryPolygon",
-          id: target_id,
-          metadata: {
-            description: `Simplified Polity: ${props.name}\nSeshatID: ${props.seshat_id}\nCOW: ${props.cow_code}\nBase Source: CShapes`,
-            tags: ["Polities"]
-          },
-          type: "geometry"
-        });
-      }
-
-      this.emitKeyframe(target_id, ts, merged_geom, sym, props, history_map, state_tracker);
-    }
   };
 
   //Auto-execute if executed directly via Node CLI
@@ -793,7 +957,7 @@
     global.CShapesAtlasJoin.run()
       .then(() => process.exit(0))
       .catch((err) => {
-        console.error("[CShapesAtlasJoin] Fatal error:", err);
+        console.error("[CShapesAtlasJoin] Fatal execution error:", err);
         process.exit(1);
       });
   }
