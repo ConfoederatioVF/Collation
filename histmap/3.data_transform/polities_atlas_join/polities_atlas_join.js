@@ -195,13 +195,15 @@
      *
      * @param {string} arg0_name
      * @param {string} arg1_seshat_id
+     * @param {string} [arg2_ident_name]
      *
      * @returns {boolean} True if entity is a distinct dependency/mandate
      */
-    static isSeparateDependency (arg0_name, arg1_seshat_id) {
+    static isSeparateDependency (arg0_name, arg1_seshat_id, arg2_ident_name) {
       //Convert from parameters
       let name = String(arg0_name || "").trim();
       let seshat_id = String(arg1_seshat_id || "").trim();
+      let ident_name = String(arg2_ident_name || "").trim();
 
       //Guard clause: regional parenthetical peer groups merge together (e.g. (Burma), (British Raj))
       if (seshat_id.startsWith("(") && seshat_id.endsWith(")")) return false;
@@ -211,45 +213,42 @@
       let canon_words;
       let canonical;
       let clio_entry;
-      let dependency_terms;
+      let dep_terms = ["administration", "colony", "condominium", "concession", "dependency", "dominion", "general government", "generalbezirk", "mandate", "occupied", "occupation", "presidency", "protectorate", "regency of", "reich commissariat", "reichskommissariat", "territory of", "viceroyalty"];
       let has_core_match;
+      let ident_lower = ident_name.toLowerCase();
       let name_lower = name.toLowerCase();
       let name_words;
       let sub_titles;
 
-      canonical = (this.cliopatria_canonicals) ? this.cliopatria_canonicals.get(seshat_id) : null;
-      if (!canonical) {
-        dependency_terms = ["administration", "colony", "condominium", "concession", "dependency", "dominion", "mandate", "occupied", "presidency", "protectorate", "regency of", "territory of", "viceroyalty"];
-        for (let i = 0; i < dependency_terms.length; i++)
-          if (name_lower.includes(dependency_terms[i])) return true;
-        return false;
+      for (let i = 0; i < dep_terms.length; i++) {
+        if (name_lower.includes(dep_terms[i]) || ident_lower.includes(dep_terms[i])) return true;
       }
+
+      canonical = (this.cliopatria_canonicals) ? this.cliopatria_canonicals.get(seshat_id) : null;
+      if (!canonical) return false;
 
       canon_lower = canonical.toLowerCase();
-      if (name_lower === canon_lower) return false;
+      if (name_lower === canon_lower || ident_lower === canon_lower) return false;
 
       //1. Cliopatria explicit member-of check
-      clio_entry = (this.cliopatria_members) ? this.cliopatria_members.get(name_lower) : null;
+      clio_entry = (this.cliopatria_members) ? (this.cliopatria_members.get(name_lower) || this.cliopatria_members.get(ident_lower)) : null;
       if (clio_entry && clio_entry.member_of) return true;
 
-      //2. Dependency and mandate status terms
-      dependency_terms = ["administration", "colony", "condominium", "concession", "dependency", "dominion", "mandate", "occupied", "presidency", "protectorate", "regency of", "territory of", "viceroyalty"];
-      for (let i = 0; i < dependency_terms.length; i++)
-        if (name_lower.includes(dependency_terms[i])) return true;
-
-      //3. Sub-kingdom or feudal title divergence under an imperial metropole
-      if (canon_lower.includes("empire") || canon_lower.includes("republic") || canon_lower.includes("confederation") || canon_lower.includes("union")) {
+      //2. Sub-kingdom or feudal title divergence under an imperial/republican metropole
+      if (canon_lower.includes("empire") || canon_lower.includes("republic") || canon_lower.includes("confederation") || canon_lower.includes("union") || canon_lower.includes("germany")) {
         sub_titles = ["county of ", "duchy of ", "kingdom of ", "landgraviate of ", "margraviate of ", "principality of "];
-        for (let i = 0; i < sub_titles.length; i++)
-          if (name_lower.startsWith(sub_titles[i]) && !name_lower.includes(canon_lower)) return true;
+        for (let i = 0; i < sub_titles.length; i++) {
+          if ((name_lower.startsWith(sub_titles[i]) || ident_lower.startsWith(sub_titles[i])) && !name_lower.includes(canon_lower) && !ident_lower.includes(canon_lower))
+            return true;
+        }
       }
 
-      //4. Semantic geographic divergence from imperial metropole
+      //3. Semantic geographic divergence from imperial metropole
       canon_words = canon_lower.split(/[^a-z]+/).filter((w) => w.length > 3);
       name_words = name_lower.split(/[^a-z]+/).filter((w) => w.length > 3);
       has_core_match = canon_words.some((cw) => name_words.some((nw) => nw.includes(cw) || cw.includes(nw)));
 
-      if (!has_core_match && !name_lower.includes(canon_lower)) return true;
+      if (!has_core_match && !name_lower.includes(canon_lower) && !ident_lower.includes(canon_lower)) return true;
 
       //Return statement
       return false;
@@ -262,28 +261,36 @@
      *
      * @param {string} arg0_name
      * @param {string} arg1_seshat_id
+     * @param {string} [arg2_ident_name]
      *
      * @returns {number} Metropolitan affinity score
      */
-    static getMetropolitanScore (arg0_name, arg1_seshat_id) {
+    static getMetropolitanScore (arg0_name, arg1_seshat_id, arg2_ident_name) {
       //Convert from parameters
       let name = String(arg0_name || "").trim();
       let seshat_id = String(arg1_seshat_id || "").trim();
+      let ident_name = String(arg2_ident_name || "").trim();
 
       //Declare local instance variables
       let canon_lower;
       let canon_words;
       let canonical;
+      let dep_terms = ["administration", "colony", "condominium", "concession", "dependency", "dominion", "general government", "generalbezirk", "mandate", "occupied", "occupation", "presidency", "protectorate", "regency of", "reich commissariat", "reichskommissariat", "territory of", "viceroyalty"];
+      let ident_lower = ident_name.toLowerCase();
       let match_count = 0;
       let name_lower = name.toLowerCase();
       let name_words;
       let score = 0;
 
       canonical = (this.cliopatria_canonicals) ? this.cliopatria_canonicals.get(seshat_id) : null;
+      if (!canonical && seshat_id.startsWith("(") && seshat_id.endsWith(")"))
+        canonical = seshat_id.slice(1, -1);
+
       if (canonical) {
         canon_lower = canonical.toLowerCase();
-        if (name_lower === canon_lower) return 100;
+        if (name_lower === canon_lower || ident_lower === canon_lower) return 100;
         if (name_lower.includes(canon_lower) || canon_lower.includes(name_lower)) score += 60;
+        if (ident_lower.includes(canon_lower) || canon_lower.includes(ident_lower)) score += 60;
 
         canon_words = canon_lower.split(/[^a-z]+/).filter((w) => w.length > 3);
         name_words = name_lower.split(/[^a-z]+/).filter((w) => w.length > 3);
@@ -293,7 +300,9 @@
         score += match_count * 15;
       }
 
-      if (this.isSeparateDependency(name, seshat_id)) score -= 50;
+      for (let i = 0; i < dep_terms.length; i++) {
+        if (name_lower.includes(dep_terms[i]) || ident_lower.includes(dep_terms[i])) score -= 50;
+      }
 
       //Return statement
       return score;
@@ -320,6 +329,7 @@
       let map_entries = arg3_map_entries || {};
 
       //Declare local instance variables
+      let active_name = (active_state && active_state.properties && active_state.properties.name) ? active_state.properties.name.toLowerCase() : "";
       let entries = map_entries[entity_id] || [];
       let fallback_name;
       let is_parenthetical;
@@ -334,7 +344,15 @@
       //1. Exact match in correlation map
       matches = entries.filter((e) => year >= e.from && year <= e.to);
       if (matches.length > 0) {
-        matches.sort((a, b) => (a.span - b.span) || (b.line_num - a.line_num));
+        matches.sort((a, b) => {
+          let a_m = (active_name && a.name.toLowerCase() === active_name) ? 1 : 0;
+          let b_m = (active_name && b.name.toLowerCase() === active_name) ? 1 : 0;
+          if (a_m !== b_m) return b_m - a_m;
+          let a_s = (active_name && (active_name.includes(a.name.toLowerCase()) || a.name.toLowerCase().includes(active_name))) ? 1 : 0;
+          let b_s = (active_name && (active_name.includes(b.name.toLowerCase()) || b.name.toLowerCase().includes(active_name))) ? 1 : 0;
+          if (a_s !== b_s) return b_s - a_s;
+          return (a.span - b.span) || (b.line_num - a.line_num);
+        });
         m = matches[0];
         is_parenthetical = m.raw_seshat_id.startsWith("(") && m.raw_seshat_id.endsWith(")");
         //Return statement
@@ -560,9 +578,12 @@
             let p_name = parts[0];
             let s_id = parts[1];
             let m_of = parts[2] || "";
-            if (p_name.startsWith("(") && p_name.endsWith(")")) {
-              let clean = p_name.slice(1, -1);
-              if (!this.cliopatria_canonicals.has(s_id)) this.cliopatria_canonicals.set(s_id, clean);
+            let is_parenthetical = p_name.startsWith("(") && p_name.endsWith(")");
+            let clean = (is_parenthetical) ? p_name.slice(1, -1) : p_name;
+            if (is_parenthetical) {
+              this.cliopatria_canonicals.set(s_id, clean);
+            } else if (m_of === "" && !this.cliopatria_canonicals.has(s_id)) {
+              this.cliopatria_canonicals.set(s_id, clean);
             }
             this.cliopatria_members.set(p_name.toLowerCase(), { member_of: m_of, name: p_name, seshat_id: s_id });
           }
@@ -633,15 +654,16 @@
           let name = (state.properties && state.properties.name) || ident.name;
 
           //Semantic Defence Check: keep dependencies and mandates separate
-          let is_dep = this.isSeparateDependency(name, ident.seshat_id);
+          let is_dep = this.isSeparateDependency(name, ident.seshat_id, ident.name);
           let group_key = (is_dep) ? `${name}_${ident.seshat_id}` : ident.seshat_id;
 
-          let score = this.getMetropolitanScore(name, ident.seshat_id);
+          let score = this.getMetropolitanScore(name, ident.seshat_id, ident.name);
 
           if (!active_groups.has(group_key)) {
             active_groups.set(group_key, {
               highest_score: score,
               ident: ident,
+              is_dep: is_dep,
               polygons: [],
               primary_entity_id: id,
               primary_state: state
@@ -660,9 +682,19 @@
 
         //Update active polities
         active_groups.forEach((grp, g_key) => {
+          let is_dep = grp.is_dep;
+
           if (!unified_polities.has(g_key)) {
+            let canon = (this.cliopatria_canonicals) ? this.cliopatria_canonicals.get(grp.ident.seshat_id) : null;
+            if (!canon && grp.ident.seshat_id.startsWith("(") && grp.ident.seshat_id.endsWith(")"))
+              canon = grp.ident.seshat_id.slice(1, -1);
+
+            let original_name = (is_dep)
+              ? ((grp.primary_state && grp.primary_state.properties && grp.primary_state.properties.name) || grp.ident.name)
+              : (canon || grp.ident.name || ((grp.primary_state && grp.primary_state.properties && grp.primary_state.properties.name) || "Polity"));
+
             unified_polities.set(g_key, {
-              canonical_name: (grp.primary_state && grp.primary_state.properties && grp.primary_state.properties.name) || grp.ident.name,
+              canonical_name: original_name,
               highest_score: grp.highest_score,
               ident: grp.ident,
               is_active: false,
@@ -671,6 +703,7 @@
               last_geom_sig: null,
               last_props: null,
               last_symbol: null,
+              original_name: original_name,
               primary_atlas_id: grp.primary_entity_id
             });
           }
@@ -678,7 +711,6 @@
           let pol = unified_polities.get(g_key);
           if (grp.highest_score > pol.highest_score) {
             pol.highest_score = grp.highest_score;
-            pol.canonical_name = (grp.primary_state && grp.primary_state.properties && grp.primary_state.properties.name) || grp.ident.name;
             pol.primary_atlas_id = grp.primary_entity_id;
           }
 
@@ -715,11 +747,11 @@
             textSize: (grp.primary_state && grp.primary_state.symbol && grp.primary_state.symbol.textSize) || 14
           };
           let current_props = {
-            name: (grp.primary_state && grp.primary_state.properties && grp.primary_state.properties.name) || grp.ident.name,
-            seshat_id: grp.ident.seshat_id
+            name: pol.original_name,
+            seshat_id: pol.ident.seshat_id
           };
 
-          //Strict Diff Pattern
+          //Strict Diff Pattern: Only allow original name per country (no name changes across keyframes)
           if (!pol.is_active || !pol.last_props) {
             pol.keyframes[String(t)] = [
               { feature: { geometry: merged_geom, properties: {}, type: "Feature" } },
@@ -733,16 +765,12 @@
             pol.is_active = true;
           } else {
             let symbol_changed = (current_symbol.polygonFill !== pol.last_symbol.polygonFill || current_symbol.textSize !== pol.last_symbol.textSize);
-            let name_changed = (current_props.name !== pol.last_props.name);
             let seshat_changed = (current_props.seshat_id !== pol.last_props.seshat_id);
-            let props_changed = (name_changed || seshat_changed);
 
-            if (!geom_changed && !symbol_changed && !props_changed) return;
+            if (!geom_changed && !symbol_changed && !seshat_changed) return;
 
-            if (props_changed) {
-              let prop_diff = {};
-              if (name_changed) prop_diff.name = current_props.name;
-              if (seshat_changed) prop_diff.seshat_id = current_props.seshat_id;
+            if (seshat_changed) {
+              let prop_diff = { seshat_id: current_props.seshat_id };
               pol.keyframes[String(t)] = [
                 { feature: { geometry: merged_geom, properties: {}, type: "Feature" } },
                 (symbol_changed ? current_symbol : null),
@@ -874,14 +902,10 @@
           let s_id = pol.ident.seshat_id || "";
           let prefix = s_id.replace(/^\(/, "").split("_")[0];
           let region_prefix_map = {
-            ar: "70026347630", au: "45066516298", bd: "19853446951", bo: "70026347630",
-            br: "70026347630", ca: "55812148848", cl: "70026347630", cn: "96891234970",
-            co: "70026347630", dz: "6066323292", eg: "6066323292", et: "25715763203",
-            gl: "55812148848", in: "19853446951", iq: "35194181118", ir: "35194181118",
-            jp: "96891234970", kr: "96891234970", lk: "19853446951", ly: "6066323292",
-            ma: "6066323292", mn: "96891234970", mx: "70026347630", no: "94350264119",
-            nz: "45066516298", pe: "70026347630", pk: "19853446951", py: "70026347630",
-            ru: "34506973799", sa: "35194181118", sy: "35194181118", tn: "6066323292",
+            ar: "70026347630", au: "45066516298", bd: "19853446951", bo: "70026347630", br: "70026347630", ca: "55812148848", cl: "70026347630", cn: "96891234970",
+            co: "70026347630", dz: "6066323292", eg: "6066323292", et: "25715763203", gl: "55812148848", in: "19853446951", iq: "35194181118", ir: "35194181118",
+            jp: "96891234970", kr: "96891234970", lk: "19853446951", ly: "6066323292", ma: "6066323292", mn: "96891234970", mx: "70026347630", no: "94350264119",
+            nz: "45066516298", pe: "70026347630", pk: "19853446951", py: "70026347630", ru: "34506973799", sa: "35194181118", sy: "35194181118", tn: "6066323292",
             tr: "35194181118", us: "55812148848", ve: "70026347630"
           };
           assigned_group = region_prefix_map[prefix] || "94350264119";

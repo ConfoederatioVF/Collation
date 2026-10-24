@@ -341,6 +341,51 @@ if (uk_id === sudan_id || uk_name.toLowerCase().includes("sudan") || uk_name.toL
   metropole_defence_ok = false;
 }
 
+// 4. Germany across 1934-1944 (must ALWAYS be Nazi Germany, never Kingdom of Greece or Czechoslovakia)
+let berlin = turf.point([13.40, 52.52]);
+let athens = turf.point([23.72, 37.98]);
+let test_years_germany = [1934, 1939, 1941, 1944];
+let germany_names_seen = [];
+
+for (let yr of test_years_germany) {
+  let ts = Date.getTimestamp({ minute: 1, year: yr });
+  for (let k of entity_keys) {
+    let ent = savefile[k];
+    if (ent.class_name !== "GeometryPolygon" || !ent.history) continue;
+    let state = global.PolitiesAtlasJoin.getEntityStateAtTimestamp(ent, ts);
+    if (!state || !state.geometry) continue;
+    try {
+      if (turf.booleanPointInPolygon(berlin, turf.feature(state.geometry))) {
+        let n = state.properties.name || "";
+        germany_names_seen.push(`${yr}:${n}`);
+        if (n.toLowerCase().includes("greece") || n.toLowerCase().includes("czechoslovakia")) {
+          console.error(`FAIL: Germany at ${yr} renamed to "${n}"!`);
+          metropole_defence_ok = false;
+        }
+      }
+    } catch (e) {}
+  }
+}
+console.log(`- Germany (Berlin) across WWII: ${germany_names_seen.join(", ")}`);
+
+// 5. Check no entities have name mutations across keyframes
+let entities_with_name_mutations = 0;
+for (let k of entity_keys) {
+  let ent = savefile[k];
+  if (ent.class_name !== "GeometryPolygon" || !ent.history) continue;
+  let seen_names = new Set();
+  for (let ts in ent.history) {
+    let kf = ent.history[ts];
+    if (kf && kf[2] && kf[2].name) seen_names.add(kf[2].name);
+  }
+  if (seen_names.size > 1) entities_with_name_mutations++;
+}
+console.log(`- Entities with name mutations across keyframes: ${entities_with_name_mutations} (Expected: 0)`);
+if (entities_with_name_mutations > 0) {
+  console.error(`FAIL: ${entities_with_name_mutations} polities mutate names across keyframes!`);
+  metropole_defence_ok = false;
+}
+
 if (metropole_defence_ok) {
   console.log("PASS: Gate 5 passed - Semantic defence check prevents dependencies from annexing/renaming metropoles.");
   results.gates_passed++;
