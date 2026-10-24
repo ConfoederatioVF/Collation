@@ -341,6 +341,64 @@ if (uk_id === sudan_id || uk_name.toLowerCase().includes("sudan") || uk_name.toL
   metropole_defence_ok = false;
 }
 
+// 3b. UK vs British Guiana at 1850 & UK vs British North America at 1800
+let ts_1850 = Date.getTimestamp({ minute: 1, year: 1850 });
+let georgetown = turf.point([-58.15, 6.80]);
+let uk_ent_1850 = null;
+let guiana_ent_1850 = null;
+
+let ts_1800 = Date.getTimestamp({ minute: 1, year: 1800 });
+let bna_pt = turf.point([-82.05, 52.32]);
+let uk_ent_1800 = null;
+let bna_ent_1800 = null;
+
+for (let k of entity_keys) {
+  let ent = savefile[k];
+  if (ent.class_name !== "GeometryPolygon" || !ent.history) continue;
+  let state_1850 = global.PolitiesAtlasJoin.getEntityStateAtTimestamp(ent, ts_1850);
+  if (state_1850 && state_1850.geometry) {
+    try {
+      let f = turf.feature(state_1850.geometry);
+      if (turf.booleanPointInPolygon(london, f)) uk_ent_1850 = { ent, state: state_1850 };
+      if (turf.booleanPointInPolygon(georgetown, f)) guiana_ent_1850 = { ent, state: state_1850 };
+    } catch (e) {}
+  }
+  let state_1800 = global.PolitiesAtlasJoin.getEntityStateAtTimestamp(ent, ts_1800);
+  if (state_1800 && state_1800.geometry) {
+    try {
+      let f = turf.feature(state_1800.geometry);
+      if (turf.booleanPointInPolygon(london, f)) uk_ent_1800 = { ent, state: state_1800 };
+      if (turf.booleanPointInPolygon(bna_pt, f)) bna_ent_1800 = { ent, state: state_1800 };
+    } catch (e) {}
+  }
+}
+
+let uk_name_1850 = uk_ent_1850 ? (uk_ent_1850.state.properties.name || "") : "NONE";
+let guiana_name_1850 = guiana_ent_1850 ? (guiana_ent_1850.state.properties.name || "") : "NONE";
+let uk_id_1850 = uk_ent_1850 ? uk_ent_1850.ent.id : "NONE";
+let guiana_id_1850 = guiana_ent_1850 ? guiana_ent_1850.ent.id : "NONE";
+
+console.log(`- UK (London) at 1850: ID=${uk_id_1850}, Name="${uk_name_1850}"`);
+console.log(`- Guiana (Georgetown) at 1850: ID=${guiana_id_1850}, Name="${guiana_name_1850}"`);
+
+if (uk_id_1850 === guiana_id_1850 || uk_name_1850.toLowerCase().includes("guiana")) {
+  console.error("FAIL: British Guiana conquered the UK!");
+  metropole_defence_ok = false;
+}
+
+let uk_name_1800 = uk_ent_1800 ? (uk_ent_1800.state.properties.name || "") : "NONE";
+let bna_name_1800 = bna_ent_1800 ? (bna_ent_1800.state.properties.name || "") : "NONE";
+let uk_id_1800 = uk_ent_1800 ? uk_ent_1800.ent.id : "NONE";
+let bna_id_1800 = bna_ent_1800 ? bna_ent_1800.ent.id : "NONE";
+
+console.log(`- UK (London) at 1800: ID=${uk_id_1800}, Name="${uk_name_1800}"`);
+console.log(`- BNA (North America) at 1800: ID=${bna_id_1800}, Name="${bna_name_1800}"`);
+
+if (uk_id_1800 === bna_id_1800 || uk_name_1800.toLowerCase().includes("north america")) {
+  console.error("FAIL: British North America conquered the UK!");
+  metropole_defence_ok = false;
+}
+
 // 4. Germany across 1934-1944 (must ALWAYS be Nazi Germany, never Kingdom of Greece or Czechoslovakia)
 let berlin = turf.point([13.40, 52.52]);
 let athens = turf.point([23.72, 37.98]);

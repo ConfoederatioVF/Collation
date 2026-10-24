@@ -10,7 +10,6 @@
     try { require(path.resolve(process.cwd(), "UF/js/date/date_conversion.js")); } catch (e) {}
   }
 
-
   /**
    * PolitiesAtlasJoin executes a spatio-temporal join and topological simplification
    * between atlas.naissance and Cliopatria, generating atlas_simplified.naissance.
@@ -24,8 +23,21 @@
    */
   global.PolitiesAtlasJoin = class {
     static config_path = "histmap/2.data_cleaning/polities_atlas_join/polities_atlas_join.json5";
-
-
+    static dep_terms = ["administration", "colony", "condominium", "concession", "dependency", "dominion", "general government", "generalbezirk", "mandate", "occupied", "occupation", "presidency", "protectorate", "regency of", "reich commissariat", "reichskommissariat", "settlement", "territory of", "viceroyalty"];
+    static demonyms = ["american", "anglo", "austrian", "belgian", "british", "danish", "dutch", "french", "german", "italian", "japanese", "ottoman", "portuguese", "roman", "russian", "spanish", "swedish"];
+    static sovereign_types = ["commonwealth", "confederation", "crown", "dominion", "empire", "federation", "kingdom", "monarchy", "principality", "realm", "republic", "state", "states", "tsardom", "union"];
+    static metro_roots = {
+      at: ["austria", "habsburg"], be: ["belgium", "belgian"], ca: ["canada", "canadian"],
+      cn: ["china", "chinese", "qing", "ming"], de: ["germany", "german", "holy roman", "prussia", "francia"],
+      dk: ["denmark", "danish"], eg: ["egypt", "ayyubid", "mamluk", "fatimid", "ptolemaic"],
+      es: ["spain", "spanish", "castile", "aragon"], fr: ["france", "french", "frank"],
+      gb: ["britain", "british", "england", "english", "united kingdom", "wessex", "scotland"],
+      in: ["india", "mughal", "maurya", "gupta", "delhi", "maratha"], iq: ["abbasid", "mesopotamia", "iraq"],
+      ir: ["persia", "iran", "safavid", "qajar"], it: ["italy", "italian", "rome", "roman"],
+      jp: ["japan", "japanese"], nl: ["netherlands", "dutch", "holland"], pt: ["portugal", "portuguese"],
+      ru: ["russia", "russian", "soviet", "moscow", "muscovy"], se: ["sweden", "swedish"],
+      tr: ["ottoman", "byzantine", "turkey", "turkish"], us: ["united states", "america", "usa"]
+    };
 
     /**
      * Cleans and validates polygon rings, ensuring closure and filtering out degenerate sliver holes.
@@ -68,7 +80,6 @@
       //Return statement
       return valid_rings;
     }
-
 
     /**
      * Resolves the active state of an Atlas entity at a target timestamp.
@@ -152,7 +163,6 @@
       };
     }
 
-
     /**
      * Produces a deterministic 11-digit snowflake ID from an input string.
      *
@@ -186,7 +196,6 @@
       return String(id_num);
     }
 
-
     /**
      * Semantic defence check determining whether an Atlas constituent is a subordinate dependency,
      * mandate, or distinct sub-kingdom that must NOT be merged into the sovereign metropole polygon.
@@ -212,16 +221,34 @@
       let canon_lower;
       let canon_words;
       let canonical;
-      let clio_entry;
-      let dep_terms = ["administration", "colony", "condominium", "concession", "dependency", "dominion", "general government", "generalbezirk", "mandate", "occupied", "occupation", "presidency", "protectorate", "regency of", "reich commissariat", "reichskommissariat", "territory of", "viceroyalty"];
       let has_core_match;
+      let has_root;
       let ident_lower = ident_name.toLowerCase();
+      let iso_prefix = seshat_id.split("_")[0];
       let name_lower = name.toLowerCase();
       let name_words;
-      let sub_titles;
+      let roots = PolitiesAtlasJoin.metro_roots[iso_prefix];
 
-      for (let i = 0; i < dep_terms.length; i++) {
-        if (name_lower.includes(dep_terms[i]) || ident_lower.includes(dep_terms[i])) return true;
+      for (let i = 0; i < PolitiesAtlasJoin.dep_terms.length; i++) {
+        if (name_lower.includes(PolitiesAtlasJoin.dep_terms[i]) || ident_lower.includes(PolitiesAtlasJoin.dep_terms[i])) return true;
+      }
+
+      //Colonial adjective check (e.g. British Guiana, British North America, French Gabon, Dutch East Indies)
+      for (let i = 0; i < PolitiesAtlasJoin.demonyms.length; i++) {
+        let dem = PolitiesAtlasJoin.demonyms[i];
+        if (name_lower.startsWith(dem + " ") || name_lower.startsWith(dem + "-") || ident_lower.startsWith(dem + " ") || ident_lower.startsWith(dem + "-")) {
+          let rem1 = (name_lower.startsWith(dem + " ") || name_lower.startsWith(dem + "-")) ? name_lower.slice(dem.length + 1) : "";
+          let rem2 = (ident_lower.startsWith(dem + " ") || ident_lower.startsWith(dem + "-")) ? ident_lower.slice(dem.length + 1) : "";
+          let is_sov = PolitiesAtlasJoin.sovereign_types.some((st) => rem1.includes(st) || rem2.includes(st));
+          if (!is_sov) return true;
+        }
+      }
+
+      //Sovereign metropole lexical check
+      if (roots) {
+        has_root = roots.some((r) => name_lower.includes(r) || ident_lower.includes(r));
+        if (has_root) return false;
+        return true;
       }
 
       canonical = (this.cliopatria_canonicals) ? this.cliopatria_canonicals.get(seshat_id) : null;
@@ -230,30 +257,14 @@
       canon_lower = canonical.toLowerCase();
       if (name_lower === canon_lower || ident_lower === canon_lower) return false;
 
-      //1. Cliopatria explicit member-of check
-      clio_entry = (this.cliopatria_members) ? (this.cliopatria_members.get(name_lower) || this.cliopatria_members.get(ident_lower)) : null;
-      if (clio_entry && clio_entry.member_of) return true;
-
-      //2. Sub-kingdom or feudal title divergence under an imperial/republican metropole
-      if (canon_lower.includes("empire") || canon_lower.includes("republic") || canon_lower.includes("confederation") || canon_lower.includes("union") || canon_lower.includes("germany")) {
-        sub_titles = ["county of ", "duchy of ", "kingdom of ", "landgraviate of ", "margraviate of ", "principality of "];
-        for (let i = 0; i < sub_titles.length; i++) {
-          if ((name_lower.startsWith(sub_titles[i]) || ident_lower.startsWith(sub_titles[i])) && !name_lower.includes(canon_lower) && !ident_lower.includes(canon_lower))
-            return true;
-        }
-      }
-
-      //3. Semantic geographic divergence from imperial metropole
       canon_words = canon_lower.split(/[^a-z]+/).filter((w) => w.length > 3);
       name_words = name_lower.split(/[^a-z]+/).filter((w) => w.length > 3);
       has_core_match = canon_words.some((cw) => name_words.some((nw) => nw.includes(cw) || cw.includes(nw)));
-
       if (!has_core_match && !name_lower.includes(canon_lower) && !ident_lower.includes(canon_lower)) return true;
 
       //Return statement
       return false;
     }
-
 
     /**
      * Scores how closely an Atlas constituent represents the sovereign metropole of a Seshat ID.
@@ -275,11 +286,14 @@
       let canon_lower;
       let canon_words;
       let canonical;
-      let dep_terms = ["administration", "colony", "condominium", "concession", "dependency", "dominion", "general government", "generalbezirk", "mandate", "occupied", "occupation", "presidency", "protectorate", "regency of", "reich commissariat", "reichskommissariat", "territory of", "viceroyalty"];
       let ident_lower = ident_name.toLowerCase();
+      let is_sov;
+      let iso_prefix = seshat_id.split("_")[0];
       let match_count = 0;
+      let matches_root;
       let name_lower = name.toLowerCase();
       let name_words;
+      let roots = PolitiesAtlasJoin.metro_roots[iso_prefix];
       let score = 0;
 
       canonical = (this.cliopatria_canonicals) ? this.cliopatria_canonicals.get(seshat_id) : null;
@@ -288,9 +302,9 @@
 
       if (canonical) {
         canon_lower = canonical.toLowerCase();
-        if (name_lower === canon_lower || ident_lower === canon_lower) return 100;
-        if (name_lower.includes(canon_lower) || canon_lower.includes(name_lower)) score += 60;
-        if (ident_lower.includes(canon_lower) || canon_lower.includes(ident_lower)) score += 60;
+        if (name_lower === canon_lower || ident_lower === canon_lower) score += 100;
+        else if (name_lower.includes(canon_lower) || canon_lower.includes(name_lower)) score += 60;
+        else if (ident_lower.includes(canon_lower) || canon_lower.includes(ident_lower)) score += 60;
 
         canon_words = canon_lower.split(/[^a-z]+/).filter((w) => w.length > 3);
         name_words = name_lower.split(/[^a-z]+/).filter((w) => w.length > 3);
@@ -300,14 +314,32 @@
         score += match_count * 15;
       }
 
-      for (let i = 0; i < dep_terms.length; i++) {
-        if (name_lower.includes(dep_terms[i]) || ident_lower.includes(dep_terms[i])) score -= 50;
+      if (roots) {
+        matches_root = roots.some((r) => name_lower.includes(r) || ident_lower.includes(r));
+        if (matches_root) {
+          score += 60;
+          is_sov = PolitiesAtlasJoin.sovereign_types.some((st) => name_lower.includes(st) || ident_lower.includes(st));
+          if (is_sov) score += 40;
+        }
+      }
+
+      for (let i = 0; i < PolitiesAtlasJoin.dep_terms.length; i++) {
+        if (name_lower.includes(PolitiesAtlasJoin.dep_terms[i]) || ident_lower.includes(PolitiesAtlasJoin.dep_terms[i])) score -= 60;
+      }
+
+      for (let i = 0; i < PolitiesAtlasJoin.demonyms.length; i++) {
+        let dem = PolitiesAtlasJoin.demonyms[i];
+        if (name_lower.startsWith(dem + " ") || name_lower.startsWith(dem + "-") || ident_lower.startsWith(dem + " ") || ident_lower.startsWith(dem + "-")) {
+          let rem1 = (name_lower.startsWith(dem + " ") || name_lower.startsWith(dem + "-")) ? name_lower.slice(dem.length + 1) : "";
+          let rem2 = (ident_lower.startsWith(dem + " ") || ident_lower.startsWith(dem + "-")) ? ident_lower.slice(dem.length + 1) : "";
+          let is_colonial_sov = PolitiesAtlasJoin.sovereign_types.some((st) => rem1.includes(st) || rem2.includes(st));
+          if (!is_colonial_sov) score -= 60;
+        }
       }
 
       //Return statement
       return score;
     }
-
 
     /**
      * Resolves the canonical polity identity for an Atlas entity at a specific year.
@@ -364,10 +396,11 @@
         };
       }
 
-      //2. Preceding entry continuation (for premature map ends, e.g. Bolivia, Paraguay, Chile, Norway)
+      //2. Preceding or succeeding entry fallback (for premature map ends, e.g. Bolivia, Paraguay, Chile, Norway)
       preceding = entries.filter((e) => e.to < year).sort((a, b) => b.to - a.to);
-      if (preceding.length > 0) {
-        p = preceding[0];
+      succeeding = entries.filter((e) => e.from > year).sort((a, b) => a.from - b.from);
+      p = (preceding.length > 0) ? preceding[0] : ((succeeding.length > 0) ? succeeding[0] : null);
+      if (p) {
         state_name = (active_state && active_state.properties && active_state.properties.name) || p.name;
         is_parenthetical = p.raw_seshat_id.startsWith("(") && p.raw_seshat_id.endsWith(")");
         //Return statement
@@ -376,21 +409,6 @@
           name: state_name,
           raw_seshat_id: p.raw_seshat_id,
           seshat_id: p.raw_seshat_id
-        };
-      }
-
-      //3. Succeeding entry fallback
-      succeeding = entries.filter((e) => e.from > year).sort((a, b) => a.from - b.from);
-      if (succeeding.length > 0) {
-        s = succeeding[0];
-        state_name = (active_state && active_state.properties && active_state.properties.name) || s.name;
-        is_parenthetical = s.raw_seshat_id.startsWith("(") && s.raw_seshat_id.endsWith(")");
-        //Return statement
-        return {
-          is_parenthetical: is_parenthetical,
-          name: state_name,
-          raw_seshat_id: s.raw_seshat_id,
-          seshat_id: s.raw_seshat_id
         };
       }
 
@@ -404,7 +422,6 @@
         seshat_id: `(${fallback_name})`
       };
     }
-
 
     /**
      * Performs topological union over an array of polygon coordinate arrays with 1km buffering.
@@ -520,7 +537,6 @@
       };
     }
 
-
     /**
      * Loads configuration, atlas.naissance, and correlation map datasets.
      *
@@ -597,7 +613,6 @@
         map_entries: map_entries
       };
     }
-
 
     /**
      * Iterates through all discrete timestamps, resolving entity identities, unioning
@@ -753,11 +768,7 @@
 
           //Strict Diff Pattern: Only allow original name per country (no name changes across keyframes)
           if (!pol.is_active || !pol.last_props) {
-            pol.keyframes[String(t)] = [
-              { feature: { geometry: merged_geom, properties: {}, type: "Feature" } },
-              current_symbol,
-              current_props
-            ];
+            pol.keyframes[String(t)] = [{ feature: { geometry: merged_geom, properties: {}, type: "Feature" } }, current_symbol, current_props];
             kf_stats[3]++;
             total_keyframes++;
             pol.last_symbol = current_symbol;
@@ -771,28 +782,19 @@
 
             if (seshat_changed) {
               let prop_diff = { seshat_id: current_props.seshat_id };
-              pol.keyframes[String(t)] = [
-                { feature: { geometry: merged_geom, properties: {}, type: "Feature" } },
-                (symbol_changed ? current_symbol : null),
-                prop_diff
-              ];
+              pol.keyframes[String(t)] = [{ feature: { geometry: merged_geom, properties: {}, type: "Feature" } }, (symbol_changed ? current_symbol : null), prop_diff];
               kf_stats[3]++;
               total_keyframes++;
               pol.last_props = Object.assign({}, pol.last_props, prop_diff);
               if (symbol_changed) pol.last_symbol = current_symbol;
             } else if (symbol_changed) {
-              pol.keyframes[String(t)] = [
-                { feature: { geometry: merged_geom, properties: {}, type: "Feature" } },
-                current_symbol
-              ];
+              pol.keyframes[String(t)] = [{ feature: { geometry: merged_geom, properties: {}, type: "Feature" } }, current_symbol];
               kf_stats[2]++;
               total_keyframes++;
               pol.last_symbol = current_symbol;
             } else {
               //Sparse keyframe: ONLY boundary geometry changed
-              pol.keyframes[String(t)] = [
-                { feature: { geometry: merged_geom, properties: {}, type: "Feature" } }
-              ];
+              pol.keyframes[String(t)] = [{ feature: { geometry: merged_geom, properties: {}, type: "Feature" } }];
               kf_stats[1]++;
               total_keyframes++;
             }
@@ -823,7 +825,6 @@
       //Return statement
       return unified_polities;
     }
-
 
     /**
      * Reassembles the final savefile containing consolidated polities, FeatureGroups, and layers.
@@ -887,10 +888,7 @@
           class_name: "GeometryPolygon",
           history: pol.keyframes,
           id: entity_id,
-          metadata: {
-            description: `Simplified Polity: ${pol.canonical_name}\nSeshatID: ${pol.ident.seshat_id}\nBase Source: Cliopatria`,
-            tags: ["Polities"]
-          },
+          metadata: { description: `Simplified Polity: ${pol.canonical_name}\nSeshatID: ${pol.ident.seshat_id}\nBase Source: Cliopatria`, tags: ["Polities"] },
           type: "geometry"
         };
 
@@ -940,7 +938,6 @@
       //Return statement
       return final_savefile;
     }
-
 
     /**
      * Main pipeline execution entry point.
