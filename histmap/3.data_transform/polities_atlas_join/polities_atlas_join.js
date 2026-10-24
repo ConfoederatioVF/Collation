@@ -3,7 +3,6 @@
   let fs = (typeof require !== "undefined") ? require("fs") : global.fs;
   let json5 = (typeof require !== "undefined") ? require("json5") : (global.JSON5 || global.json5);
   let path = (typeof require !== "undefined") ? require("path") : global.path;
-  let polylabel = (typeof require !== "undefined") ? require("polylabel") : global.polylabel;
   let turf = global.turf || ((typeof require !== "undefined") ? require(path.resolve(process.cwd(), "UF/js/geospatiale/turf.min.js")) : null);
 
   if (typeof require !== "undefined") {
@@ -14,397 +13,60 @@
 
   /**
    * PolitiesAtlasJoin executes a spatio-temporal join and topological simplification
-   * between atlas.naissance and the Cliopatria historical dataset, generating atlas_simplified.naissance.
+   * between atlas.naissance and Cliopatria, generating atlas_simplified.naissance.
    *
-   * It maps fine-grained Atlas entities and polygon components down to canonical Seshat polities,
-   * merges constituents into unified MultiPolygons per polity at each epoch, preserves authentic
-   * metropolitan colours, respects military occupation overrides, and produces sparse timeline keyframes.
+   * It maps Atlas entities down to canonical Seshat polities driven by the curated correlation
+   * map, buffers joins by 1km to prevent degenerate topology, keeps parenthetical IDs intact
+   * without improper merges, identifies metropoles by sovereignty rather than spurious area,
+   * eliminates premature country termination, and produces sparse keyframes.
    *
    * @class PolitiesAtlasJoin
    */
   global.PolitiesAtlasJoin = class {
     static config_path = "histmap/2.data_cleaning/polities_atlas_join/polities_atlas_join.json5";
 
-    static country_prefixes = {
-      "america": "us", "american": "us", "anatolia": "tr", "aquitaine": "fr", "aragon": "es",
-      "assyria": "iq", "athens": "gr", "austria": "at", "austrian": "at", "aztec": "mx",
-      "babylon": "iq", "bavaria": "de", "belgian": "be", "belgium": "be", "brazil": "br",
-      "brazilian": "br", "britain": "gb", "british": "gb", "burgundy": "fr", "canada": "ca",
-      "canadian": "ca", "castile": "es", "china": "cn", "chinese": "cn", "chola": "in",
-      "danish": "dk", "denmark": "dk", "dutch": "nl", "egypt": "eg", "egyptian": "eg",
-      "england": "gb", "florence": "it", "france": "fr", "french": "fr", "german": "de",
-      "germany": "de", "greece": "gr", "greek": "gr", "greenland": "gl", "habsburg": "at",
-      "han": "cn", "india": "in", "indian": "in", "ireland": "ie", "irish": "ie",
-      "italian": "it", "italy": "it", "japan": "jp", "japanese": "jp", "maratha": "in",
-      "maya": "mx", "mesopotamia": "iq", "mexican": "mx", "mexico": "mx", "ming": "cn",
-      "moscow": "ru", "mughal": "in", "netherlands": "nl", "normandy": "fr", "norway": "no",
-      "norwegian": "no", "ottoman": "tr", "poland": "pl", "polish": "pl", "portugal": "pt",
-      "portuguese": "pt", "prussia": "de", "qing": "cn", "rome": "it", "russia": "ru",
-      "russian": "ru", "saxony": "de", "scotland": "gb", "song": "cn", "soviet": "ru",
-      "spain": "es", "spanish": "es", "sparta": "gr", "sumer": "iq", "sweden": "se",
-      "swedish": "se", "tang": "cn", "tokugawa": "jp", "turkey": "tr", "united states": "us",
-      "venice": "it", "wales": "gb", "weimar": "de"
-    };
 
 
     /**
-     * Converts arbitrary string to clean snake_case slug.
+     * Cleans and validates polygon rings, ensuring closure and filtering out degenerate sliver holes.
      *
-     * @param {string} arg0_text
+     * @param {Array<Array<number[]>>} arg0_rings
      *
-     * @returns {string}
+     * @returns {Array<Array<number[]>>|null}
      */
-    static slugify (arg0_text) {
+    static cleanPolygonRings (arg0_rings) {
       //Convert from parameters
-      let text = (arg0_text !== undefined && arg0_text !== null) ? String(arg0_text) : "";
+      let rings = arg0_rings;
+
+      //Guard clause
+      if (!rings || !rings[0] || rings[0].length < 3) return null;
 
       //Declare local instance variables
-      let cleaned;
+      let first;
+      let last;
+      let outer;
+      let valid_rings;
 
-      cleaned = text.toLowerCase()
-        .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-        .replace(/[^a-z0-9]+/g, "_")
-        .replace(/^_+|_+$/g, "");
+      outer = rings[0].slice();
+      first = outer[0];
+      last = outer[outer.length - 1];
+      if (first[0] !== last[0] || first[1] !== last[1]) outer.push([first[0], first[1]]);
+      if (outer.length < 4) return null;
 
-      //Return statement
-      return cleaned || "unknown";
-    }
-
-
-    /**
-     * Derives a canonical, non-blank Seshat ID for a Cliopatria feature.
-     *
-     * @param {Object} arg0_feature
-     *
-     * @returns {string}
-     */
-    static getCanonicalSeshatId (arg0_feature) {
-      //Convert from parameters
-      let feature = arg0_feature;
-
-      //Declare local instance variables
-      let existing_id;
-      let is_metropolitan_britain;
-      let is_metropolitan_denmark;
-      let is_metropolitan_france;
-      let is_metropolitan_netherlands;
-      let is_metropolitan_spain;
-      let name;
-      let name_lower;
-      let prefix = "pl";
-      let props;
-      let slug;
-
-      props = (feature && feature.properties) ? feature.properties : {};
-      name = (props.Name || "unknown").trim();
-      name_lower = name.toLowerCase();
-      existing_id = (props.SeshatID || "").trim();
-
-      //Identify metropolitan nations to ensure overseas colonies/mandates get distinct IDs
-      is_metropolitan_britain = (name === "Kingdom of Great Britain" || name === "United Kingdom" || name === "Kingdom of England");
-      is_metropolitan_france = (name.startsWith("French ") || name === "Kingdom of France") &&
-        !name.includes("Mandate") && !name.includes("Africa") && !name.includes("Indochina") &&
-        !name.includes("Antilles") && !name.includes("Oceania") && !name.includes("Establishments") &&
-        !name.includes("Louisiana") && !name.includes("Guyana") && !name.includes("Gabon") &&
-        !name.includes("Congo") && !name.includes("Sudan") && !name.includes("Dahomey") && !name.includes("Madagascar");
-      is_metropolitan_netherlands = (name === "Netherlands" || name === "Dutch Republic");
-      is_metropolitan_denmark = (name === "Kingdom of Denmark" || name === "Denmark" || name === "Denmark-Norway");
-      is_metropolitan_spain = (name === "Kingdom of Spain" || name.includes("Spanish Republic") || name === "Crown of Castile" || name === "Crown of Aragon");
-
-      if (existing_id) {
-        if (existing_id.startsWith("gb_british_emp") && !is_metropolitan_britain) existing_id = "";
-        if (existing_id.startsWith("fr_") && !is_metropolitan_france && !name_lower.includes("france")) existing_id = "";
-        if (existing_id.startsWith("nl_dutch_emp") && !is_metropolitan_netherlands) existing_id = "";
-        if (existing_id.startsWith("dk_") && !is_metropolitan_denmark) existing_id = "";
-        if (existing_id.startsWith("es_") && !is_metropolitan_spain && !name_lower.includes("spain")) existing_id = "";
-      }
-
-      if (existing_id) return existing_id;
-
-      //Derive country code prefix
-      for (let kw in this.country_prefixes) {
-        if (name_lower.includes(kw)) {
-          prefix = this.country_prefixes[kw];
-          break;
+      valid_rings = [outer];
+      for (let i = 1; i < rings.length; i++) {
+        let r = rings[i];
+        if (r && r.length >= 3) {
+          let r_closed = r.slice();
+          let rf = r_closed[0];
+          let rl = r_closed[r_closed.length - 1];
+          if (rf[0] !== rl[0] || rf[1] !== rl[1]) r_closed.push([rf[0], rf[1]]);
+          if (r_closed.length >= 4) valid_rings.push(r_closed);
         }
       }
 
-      slug = this.slugify(name);
-
       //Return statement
-      return `${prefix}_${slug}`;
-    }
-
-
-    /**
-     * Loads configuration, atlas.naissance, and Cliopatria GeoJSON datasets.
-     *
-     * @param {Object} [arg0_options]
-     * @param {string} [arg0_options.config_path]
-     *
-     * @returns {Object} Loaded datasets and configuration
-     */
-    static A_loadData (arg0_options) {
-      //Convert from parameters
-      let options = (arg0_options) ? arg0_options : {};
-
-      //Declare local instance variables
-      let atlas_data;
-      let cliopatria_data;
-      let config;
-      let config_file_path;
-
-      config_file_path = options.config_path || this.config_path;
-      console.log(`[PolitiesAtlasJoin] Loading configuration from: ${config_file_path}...`);
-      config = json5.parse(fs.readFileSync(config_file_path, "utf8"));
-
-      console.log(`[PolitiesAtlasJoin] Loading Atlas savefile from: ${config.input_atlas_path}...`);
-      atlas_data = JSON.parse(fs.readFileSync(config.input_atlas_path, "utf8"));
-
-      console.log(`[PolitiesAtlasJoin] Loading Cliopatria dataset from: ${config.input_cliopatria_path}...`);
-      cliopatria_data = JSON.parse(fs.readFileSync(config.input_cliopatria_path, "utf8"));
-
-      //Return statement
-      return {
-        atlas_data: atlas_data,
-        cliopatria_data: cliopatria_data,
-        config: config
-      };
-    }
-
-
-    /**
-     * Indexes Cliopatria polities with bounding boxes, spatial POIs, and canonical Seshat IDs.
-     *
-     * @param {Object} arg0_cliopatria_data
-     *
-     * @returns {Array<Object>} Indexed Cliopatria features
-     */
-    static B_indexCliopatria (arg0_cliopatria_data) {
-      //Convert from parameters
-      let cliopatria_data = arg0_cliopatria_data;
-
-      //Declare local instance variables
-      let features;
-      let indexed = [];
-
-      features = (cliopatria_data && cliopatria_data.features) ? cliopatria_data.features : [];
-      console.log(`[PolitiesAtlasJoin] Indexing ${features.length} Cliopatria features...`);
-
-      for (let i = 0; i < features.length; i++) {
-        let f = features[i];
-        let p = f.properties || {};
-
-        //Filter out aggregate super-containers with parentheses
-        if (p.Name && (p.Name.startsWith("(") || (p.Components && p.Components.trim() !== "")))
-          continue;
-
-        let bbox;
-        try {
-          bbox = turf.bbox(f);
-        } catch (e) {
-          continue;
-        }
-
-        let seshat_id = this.getCanonicalSeshatId(f);
-
-        indexed.push({
-          bbox: bbox,
-          feature: f,
-          from_year: p.FromYear,
-          name: p.Name,
-          poi: p.poi || [0, 0],
-          seshat_id: seshat_id,
-          to_year: p.ToYear
-        });
-      }
-
-      console.log(`[PolitiesAtlasJoin] Successfully indexed ${indexed.length} non-aggregate polities.`);
-
-      //Return statement
-      return indexed;
-    }
-
-
-    /**
-     * Spatially resolves the canonical polity identity for a constituent polygon at a specific year.
-     *
-     * @param {Array} arg0_polygon_coords
-     * @param {number} arg1_year
-     * @param {Array<Object>} arg2_indexed_clio
-     * @param {Object} arg3_config
-     * @param {Object} arg4_entity_context
-     *
-     * @returns {Object} Resolved polity identity
-     */
-    static C_matchPolygonToPolity (arg0_polygon_coords, arg1_year, arg2_indexed_clio, arg3_config, arg4_entity_context) {
-      //Convert from parameters
-      let polygon_coords = arg0_polygon_coords;
-      let year = arg1_year;
-      let indexed_clio = arg2_indexed_clio;
-      let config = arg3_config;
-      let entity_context = arg4_entity_context || {};
-
-      //Guard clause: validate polygon ring
-      if (!polygon_coords || !polygon_coords[0] || polygon_coords[0].length < 4) return null;
-
-      //Declare local instance variables
-      let atlas_name;
-      let best_candidate = null;
-      let best_distance = Infinity;
-      let matching_candidates = [];
-      let occupation_overrides;
-      let poly_bbox;
-      let poly_feat;
-      let pt;
-      let pt_coords;
-
-      atlas_name = entity_context.name || "";
-      occupation_overrides = config.occupation_overrides || [];
-
-      try {
-        poly_feat = turf.polygon(polygon_coords);
-        pt = turf.pointOnFeature(poly_feat);
-        pt_coords = pt.geometry.coordinates;
-        poly_bbox = turf.bbox(poly_feat);
-      } catch (e) {
-        return null;
-      }
-
-      //1. Sovereign Integrity Shield: Check for historical military occupations
-      for (let i = 0; i < occupation_overrides.length; i++) {
-        let ovr = occupation_overrides[i];
-        if (year >= ovr.start_year && year <= ovr.end_year) {
-          let patterns = ovr.territory_patterns || [ovr.territory.toLowerCase()];
-          let is_territory_match = patterns.some((p) => atlas_name.toLowerCase().includes(p.toLowerCase()));
-          if (is_territory_match) {
-            //Return statement: sovereign identity preserved
-            return {
-              is_protected: true,
-              name: ovr.preserved_name || atlas_name,
-              seshat_id: ovr.seshat_id || ("pl_" + this.slugify(ovr.preserved_name || atlas_name))
-            };
-          }
-        }
-      }
-
-      //2. Spatial Point-in-Polygon Search against Cliopatria features active at current year
-      for (let i = 0; i < indexed_clio.length; i++) {
-        let c = indexed_clio[i];
-        if (year < c.from_year || year > c.to_year) continue;
-
-        //Bounding box overlap pre-check
-        if (pt_coords[0] < c.bbox[0] || pt_coords[0] > c.bbox[2] ||
-            pt_coords[1] < c.bbox[1] || pt_coords[1] > c.bbox[3]) {
-          continue;
-        }
-
-        try {
-          if (turf.booleanPointInPolygon(pt, c.feature)) {
-            //Calculate distance to POI to rank candidates
-            let poi_dist = Math.hypot(c.poi[0] - pt_coords[1], c.poi[1] - pt_coords[0]);
-            matching_candidates.push({
-              candidate: c,
-              poi_dist: poi_dist
-            });
-          }
-        } catch (err) {}
-      }
-
-      //Pick best matching candidate by POI proximity
-      if (matching_candidates.length > 0) {
-        matching_candidates.sort((a, b) => a.poi_dist - b.poi_dist);
-        let chosen = matching_candidates[0].candidate;
-
-        //Return statement
-        return {
-          is_protected: false,
-          name: chosen.name,
-          seshat_id: chosen.seshat_id
-        };
-      }
-
-      //3. Spatial Proximity Fallback for coastal slivers and islands within 1.5 degrees (~150 km)
-      for (let i = 0; i < indexed_clio.length; i++) {
-        let c = indexed_clio[i];
-        if (year < c.from_year || year > c.to_year) continue;
-
-        let dx = Math.max(c.bbox[0] - pt_coords[0], 0, pt_coords[0] - c.bbox[2]);
-        let dy = Math.max(c.bbox[1] - pt_coords[1], 0, pt_coords[1] - c.bbox[3]);
-        let dist = Math.hypot(dx, dy);
-
-        if (dist < 1.5 && dist < best_distance) {
-          best_distance = dist;
-          best_candidate = c;
-        }
-      }
-
-      if (best_candidate) {
-        //Return statement
-        return {
-          is_protected: false,
-          name: best_candidate.name,
-          seshat_id: best_candidate.seshat_id
-        };
-      }
-
-      //4. Fallback: Retain native Atlas identity, assigning clean canonical seshat_id
-      let fallback_slug = this.slugify(atlas_name || entity_context.id || "polity");
-
-      //Return statement
-      return {
-        is_protected: false,
-        name: atlas_name || "Unknown Polity",
-        seshat_id: "at_" + fallback_slug
-      };
-    }
-
-
-    /**
-     * Performs topological union over an array of polygon coordinate arrays.
-     *
-     * @param {Array} arg0_polygons
-     *
-     * @returns {Object} Unified GeoJSON geometry
-     */
-    static D_unionPolygons (arg0_polygons) {
-      //Convert from parameters
-      let polygons = arg0_polygons || [];
-
-      //Guard clauses
-      if (polygons.length === 0) return null;
-      if (polygons.length === 1) {
-        return {
-          coordinates: polygons[0],
-          type: "Polygon"
-        };
-      }
-
-      //Declare local instance variables
-      let fc;
-      let features = [];
-      let union_result;
-
-      for (let i = 0; i < polygons.length; i++) {
-        try {
-          features.push(turf.polygon(polygons[i]));
-        } catch (e) {}
-      }
-
-      if (features.length === 1) return features[0].geometry;
-
-      try {
-        fc = turf.featureCollection(features);
-        union_result = turf.union(fc);
-        if (union_result && union_result.geometry) return union_result.geometry;
-      } catch (e) {}
-
-      //Fallback: Combine into MultiPolygon if union topological calculation fails
-      //Return statement
-      return {
-        coordinates: polygons,
-        type: "MultiPolygon"
-      };
+      return valid_rings;
     }
 
 
@@ -428,7 +90,6 @@
       let active_geom = null;
       let active_props = {};
       let active_symbol = null;
-      let active_ts = null;
       let is_hidden = false;
       let timestamps;
 
@@ -445,10 +106,8 @@
         if (kf[0] !== undefined && kf[0] !== "undefined") {
           if (kf[0] === null) {
             active_geom = null;
-            active_ts = ts;
           } else if (kf[0].feature) {
             active_geom = kf[0].feature;
-            active_ts = ts;
             is_hidden = false;
           }
         }
@@ -467,27 +126,27 @@
 
       if (is_hidden || !active_geom || !active_geom.geometry) return null;
 
-      //Lifespan check: if entity ceased recording before modern era and has ended, derender
-      let last_entity_ts = timestamps[timestamps.length - 1];
-      if (target_ts > last_entity_ts) {
-        let last_kf = entity.history[String(last_entity_ts)];
-        if (last_kf && (last_kf[0] === null || (last_kf[2] && last_kf[2].hidden === true)))
-          return null;
+      //Ancient entity lifespan limit (only for raw atlas entities ceasing recording prior to modern era)
+      let is_simplified = entity.metadata && entity.metadata.description && entity.metadata.description.includes("Simplified Polity");
+      if (!is_simplified) {
+        let last_entity_ts = timestamps[timestamps.length - 1];
+        if (target_ts > last_entity_ts) {
+          let last_kf = entity.history[String(last_entity_ts)];
+          if (last_kf && (last_kf[0] === null || (last_kf[2] && last_kf[2].hidden === true)))
+            return null;
 
-        let last_date = (Date.convertTimestampToDate) ? Date.convertTimestampToDate(last_entity_ts) : null;
-        let last_year = (last_date) ? last_date.year : Math.round(last_entity_ts / 8766);
-        let target_date = (Date.convertTimestampToDate) ? Date.convertTimestampToDate(target_ts) : null;
-        let target_year = (target_date) ? target_date.year : Math.round(target_ts / 8766);
+          let last_date = (Date.convertTimestampToDate) ? Date.convertTimestampToDate(last_entity_ts) : null;
+          let last_year = (last_date) ? last_date.year : Math.round(last_entity_ts / 8766);
+          let target_date = (Date.convertTimestampToDate) ? Date.convertTimestampToDate(target_ts) : null;
+          let target_year = (target_date) ? target_date.year : Math.round(target_ts / 8766);
 
-        if (last_year < 1900 && target_year > last_year + 5) return null;
+          if (last_year < 1750 && target_year > last_year + 5) return null;
+        }
       }
 
       //Return statement
       return {
-        active_ts: active_ts,
         geometry: active_geom.geometry,
-        id: entity.id,
-        metadata: entity.metadata,
         properties: active_props,
         symbol: active_symbol
       };
@@ -495,208 +154,643 @@
 
 
     /**
-     * Iterates through all discrete timestamps, matching and unioning polygons per Seshat polity.
+     * Produces a deterministic 11-digit snowflake ID from an input string.
      *
-     * @param {Object} arg0_atlas_data
-     * @param {Array<Object>} arg1_indexed_clio
-     * @param {Object} arg2_config
+     * @param {string} arg0_str
      *
-     * @returns {Map<string, Object>} Reconstructed unified polities
+     * @returns {string}
      */
-    static E_processAllTimestamps (arg0_atlas_data, arg1_indexed_clio, arg2_config) {
+    static hashToSnowflakeId (arg0_str) {
       //Convert from parameters
-      let atlas_data = arg0_atlas_data;
-      let indexed_clio = arg1_indexed_clio;
-      let config = arg2_config;
+      let str = String(arg0_str || "");
 
       //Declare local instance variables
-      let all_timestamps = new Set();
-      let entity_keys = Object.keys(atlas_data).filter((k) => k !== "map_settings");
-      let last_log_time = Date.now();
-      let polygon_entities = {};
-      let sorted_timestamps;
-      let total_keyframes_recorded = 0;
-      let total_unions_performed = 0;
-      let unified_polities = new Map();
+      let abs_hash1;
+      let abs_hash2;
+      let hash = 5381;
+      let hash2 = 0;
+      let id_num;
 
-      for (let i = 0; i < entity_keys.length; i++) {
-        let e = atlas_data[entity_keys[i]];
-        if (e.class_name === "GeometryPolygon" && e.history) {
-          polygon_entities[entity_keys[i]] = e;
-          let ts_keys = Object.keys(e.history);
-          for (let x = 0; x < ts_keys.length; x++)
-            all_timestamps.add(parseInt(ts_keys[x]));
+      for (let i = 0; i < str.length; i++) {
+        let char = str.charCodeAt(i);
+        hash = ((hash << 5) + hash) + char;
+        hash = hash & hash;
+        hash2 = (hash2 * 33) ^ char;
+      }
+
+      abs_hash1 = Math.abs(hash) % 90000;
+      abs_hash2 = Math.abs(hash2) % 1000000;
+      id_num = (10000 + abs_hash1)*1000000 + abs_hash2;
+
+      //Return statement
+      return String(id_num);
+    }
+
+
+    /**
+     * Semantic defence check determining whether an Atlas constituent is a subordinate dependency,
+     * mandate, or distinct sub-kingdom that must NOT be merged into the sovereign metropole polygon.
+     * Genuine peer constituents sharing regional grouping IDs (e.g. Shan States of Burma, Indian Princely States)
+     * pass the check and are allowed to merge.
+     *
+     * @param {string} arg0_name
+     * @param {string} arg1_seshat_id
+     *
+     * @returns {boolean} True if entity is a distinct dependency/mandate
+     */
+    static isSeparateDependency (arg0_name, arg1_seshat_id) {
+      //Convert from parameters
+      let name = String(arg0_name || "").trim();
+      let seshat_id = String(arg1_seshat_id || "").trim();
+
+      //Guard clause: regional parenthetical peer groups merge together (e.g. (Burma), (British Raj))
+      if (seshat_id.startsWith("(") && seshat_id.endsWith(")")) return false;
+
+      //Declare local instance variables
+      let canon_lower;
+      let canon_words;
+      let canonical;
+      let clio_entry;
+      let dependency_terms;
+      let has_core_match;
+      let name_lower = name.toLowerCase();
+      let name_words;
+      let sub_titles;
+
+      canonical = (this.cliopatria_canonicals) ? this.cliopatria_canonicals.get(seshat_id) : null;
+      if (!canonical) {
+        dependency_terms = ["administration", "colony", "condominium", "concession", "dependency", "dominion", "mandate", "occupied", "presidency", "protectorate", "regency of", "territory of", "viceroyalty"];
+        for (let i = 0; i < dependency_terms.length; i++)
+          if (name_lower.includes(dependency_terms[i])) return true;
+        return false;
+      }
+
+      canon_lower = canonical.toLowerCase();
+      if (name_lower === canon_lower) return false;
+
+      //1. Cliopatria explicit member-of check
+      clio_entry = (this.cliopatria_members) ? this.cliopatria_members.get(name_lower) : null;
+      if (clio_entry && clio_entry.member_of) return true;
+
+      //2. Dependency and mandate status terms
+      dependency_terms = ["administration", "colony", "condominium", "concession", "dependency", "dominion", "mandate", "occupied", "presidency", "protectorate", "regency of", "territory of", "viceroyalty"];
+      for (let i = 0; i < dependency_terms.length; i++)
+        if (name_lower.includes(dependency_terms[i])) return true;
+
+      //3. Sub-kingdom or feudal title divergence under an imperial metropole
+      if (canon_lower.includes("empire") || canon_lower.includes("republic") || canon_lower.includes("confederation") || canon_lower.includes("union")) {
+        sub_titles = ["county of ", "duchy of ", "kingdom of ", "landgraviate of ", "margraviate of ", "principality of "];
+        for (let i = 0; i < sub_titles.length; i++)
+          if (name_lower.startsWith(sub_titles[i]) && !name_lower.includes(canon_lower)) return true;
+      }
+
+      //4. Semantic geographic divergence from imperial metropole
+      canon_words = canon_lower.split(/[^a-z]+/).filter((w) => w.length > 3);
+      name_words = name_lower.split(/[^a-z]+/).filter((w) => w.length > 3);
+      has_core_match = canon_words.some((cw) => name_words.some((nw) => nw.includes(cw) || cw.includes(nw)));
+
+      if (!has_core_match && !name_lower.includes(canon_lower)) return true;
+
+      //Return statement
+      return false;
+    }
+
+
+    /**
+     * Scores how closely an Atlas constituent represents the sovereign metropole of a Seshat ID.
+     * Used to systematically anchor names, metadata, and symbology to the true metropole.
+     *
+     * @param {string} arg0_name
+     * @param {string} arg1_seshat_id
+     *
+     * @returns {number} Metropolitan affinity score
+     */
+    static getMetropolitanScore (arg0_name, arg1_seshat_id) {
+      //Convert from parameters
+      let name = String(arg0_name || "").trim();
+      let seshat_id = String(arg1_seshat_id || "").trim();
+
+      //Declare local instance variables
+      let canon_lower;
+      let canon_words;
+      let canonical;
+      let match_count = 0;
+      let name_lower = name.toLowerCase();
+      let name_words;
+      let score = 0;
+
+      canonical = (this.cliopatria_canonicals) ? this.cliopatria_canonicals.get(seshat_id) : null;
+      if (canonical) {
+        canon_lower = canonical.toLowerCase();
+        if (name_lower === canon_lower) return 100;
+        if (name_lower.includes(canon_lower) || canon_lower.includes(name_lower)) score += 60;
+
+        canon_words = canon_lower.split(/[^a-z]+/).filter((w) => w.length > 3);
+        name_words = name_lower.split(/[^a-z]+/).filter((w) => w.length > 3);
+        for (let i = 0; i < canon_words.length; i++) {
+          if (name_words.includes(canon_words[i])) match_count++;
+        }
+        score += match_count * 15;
+      }
+
+      if (this.isSeparateDependency(name, seshat_id)) score -= 50;
+
+      //Return statement
+      return score;
+    }
+
+
+    /**
+     * Resolves the canonical polity identity for an Atlas entity at a specific year.
+     * Evaluates exact correlation map matches, preceding continuations, succeeding fallbacks,
+     * and native Atlas properties, guaranteeing complete historical coverage.
+     *
+     * @param {string} arg0_entity_id
+     * @param {number} arg1_year
+     * @param {Object} arg2_active_state
+     * @param {Object} arg3_map_entries
+     *
+     * @returns {Object} Resolved identity object
+     */
+    static resolveEntityIdentityAtYear (arg0_entity_id, arg1_year, arg2_active_state, arg3_map_entries) {
+      //Convert from parameters
+      let entity_id = arg0_entity_id;
+      let year = arg1_year;
+      let active_state = arg2_active_state;
+      let map_entries = arg3_map_entries || {};
+
+      //Declare local instance variables
+      let entries = map_entries[entity_id] || [];
+      let fallback_name;
+      let is_parenthetical;
+      let m;
+      let matches;
+      let p;
+      let preceding;
+      let s;
+      let state_name;
+      let succeeding;
+
+      //1. Exact match in correlation map
+      matches = entries.filter((e) => year >= e.from && year <= e.to);
+      if (matches.length > 0) {
+        matches.sort((a, b) => (a.span - b.span) || (b.line_num - a.line_num));
+        m = matches[0];
+        is_parenthetical = m.raw_seshat_id.startsWith("(") && m.raw_seshat_id.endsWith(")");
+        //Return statement
+        return {
+          is_parenthetical: is_parenthetical,
+          name: m.name,
+          raw_seshat_id: m.raw_seshat_id,
+          seshat_id: m.raw_seshat_id
+        };
+      }
+
+      //2. Preceding entry continuation (for premature map ends, e.g. Bolivia, Paraguay, Chile, Norway)
+      preceding = entries.filter((e) => e.to < year).sort((a, b) => b.to - a.to);
+      if (preceding.length > 0) {
+        p = preceding[0];
+        state_name = (active_state && active_state.properties && active_state.properties.name) || p.name;
+        is_parenthetical = p.raw_seshat_id.startsWith("(") && p.raw_seshat_id.endsWith(")");
+        //Return statement
+        return {
+          is_parenthetical: is_parenthetical,
+          name: state_name,
+          raw_seshat_id: p.raw_seshat_id,
+          seshat_id: p.raw_seshat_id
+        };
+      }
+
+      //3. Succeeding entry fallback
+      succeeding = entries.filter((e) => e.from > year).sort((a, b) => a.from - b.from);
+      if (succeeding.length > 0) {
+        s = succeeding[0];
+        state_name = (active_state && active_state.properties && active_state.properties.name) || s.name;
+        is_parenthetical = s.raw_seshat_id.startsWith("(") && s.raw_seshat_id.endsWith(")");
+        //Return statement
+        return {
+          is_parenthetical: is_parenthetical,
+          name: state_name,
+          raw_seshat_id: s.raw_seshat_id,
+          seshat_id: s.raw_seshat_id
+        };
+      }
+
+      //4. Native Atlas property fallback
+      fallback_name = (active_state && active_state.properties && active_state.properties.name) || `Polity ${entity_id}`;
+      //Return statement
+      return {
+        is_parenthetical: true,
+        name: fallback_name,
+        raw_seshat_id: `(${fallback_name})`,
+        seshat_id: `(${fallback_name})`
+      };
+    }
+
+
+    /**
+     * Performs topological union over an array of polygon coordinate arrays with 1km buffering.
+     * Buffering eliminates slivers and degenerate topology on shared constituent boundaries.
+     *
+     * @param {Array} arg0_polygons
+     *
+     * @returns {Object|null} Unified GeoJSON geometry
+     */
+    static unionPolygonsBuffered (arg0_polygons) {
+      //Convert from parameters
+      let polygons = arg0_polygons || [];
+
+      //Declare local instance variables
+      let cleaned_polys = [];
+      let clusters = [];
+      let features = [];
+      let result_parts = [];
+      let visited = new Set();
+
+      for (let i = 0; i < polygons.length; i++) {
+        let cl = this.cleanPolygonRings(polygons[i]);
+        if (cl) cleaned_polys.push(cl);
+      }
+
+      //Guard clauses
+      if (cleaned_polys.length === 0) return null;
+      if (cleaned_polys.length === 1) {
+        return {
+          coordinates: cleaned_polys[0],
+          type: "Polygon"
+        };
+      }
+
+      for (let i = 0; i < cleaned_polys.length; i++) {
+        try {
+          let f = turf.polygon(cleaned_polys[i]);
+          features.push({ bbox: turf.bbox(f), feat: f, poly: cleaned_polys[i] });
+        } catch (e) {
+          result_parts.push(cleaned_polys[i]);
         }
       }
 
-      sorted_timestamps = Array.from(all_timestamps).sort((a, b) => a - b);
-      console.log(`[PolitiesAtlasJoin] Processing ${sorted_timestamps.length} timestamps across ${Object.keys(polygon_entities).length} Atlas polygons...`);
+      //Cluster touching or overlapping constituents
+      for (let i = 0; i < features.length; i++) {
+        if (visited.has(i)) continue;
+        let cluster = [i];
+        let queue = [i];
+        visited.add(i);
 
-      for (let t_idx = 0; t_idx < sorted_timestamps.length; t_idx++) {
-        let current_ts = sorted_timestamps[t_idx];
-        let current_date = (Date.convertTimestampToDate) ? Date.convertTimestampToDate(current_ts) : null;
-        let current_year = (current_date) ? current_date.year : Math.round(current_ts / 8766);
+        while (queue.length > 0) {
+          let curr = queue.shift();
+          let curr_f = features[curr];
 
-        //Gather active polygon entities at current timestamp
-        let active_states = [];
-        let poly_ids = Object.keys(polygon_entities);
+          for (let j = 0; j < features.length; j++) {
+            if (visited.has(j)) continue;
+            let other_f = features[j];
 
-        for (let i = 0; i < poly_ids.length; i++) {
-          let state = this.getEntityStateAtTimestamp(polygon_entities[poly_ids[i]], current_ts);
-          if (state) active_states.push(state);
-        }
-
-        //Break each active entity into constituent polygons and match to canonical Seshat polities
-        let groups = new Map();
-
-        for (let i = 0; i < active_states.length; i++) {
-          let state = active_states[i];
-          let g = state.geometry;
-          let poly_coords_array = (g.type === "Polygon") ? [g.coordinates] : g.coordinates;
-
-          for (let p_idx = 0; p_idx < poly_coords_array.length; p_idx++) {
-            let coords = poly_coords_array[p_idx];
-            let identity = this.C_matchPolygonToPolity(coords, current_year, indexed_clio, config, {
-              id: state.id,
-              name: (state.properties && state.properties.name) ? state.properties.name : ""
-            });
-
-            if (!identity) continue;
-            let g_key = identity.seshat_id;
-
-            if (!groups.has(g_key)) {
-              groups.set(g_key, {
-                identity: identity,
-                polygons: [],
-                primary_state: state,
-                states: []
-              });
+            if (curr_f.bbox[0] <= other_f.bbox[2] && curr_f.bbox[2] >= other_f.bbox[0] &&
+                curr_f.bbox[1] <= other_f.bbox[3] && curr_f.bbox[3] >= other_f.bbox[1]) {
+              try {
+                if (turf.booleanIntersects(curr_f.feat, other_f.feat)) {
+                  visited.add(j);
+                  cluster.push(j);
+                  queue.push(j);
+                }
+              } catch (err) {}
             }
+          }
+        }
+        clusters.push(cluster);
+      }
 
-            let g_entry = groups.get(g_key);
-            g_entry.polygons.push(coords);
-            g_entry.states.push(state);
+      //Union touching clusters with 1km buffer
+      for (let c = 0; c < clusters.length; c++) {
+        let clist = clusters[c];
+        if (clist.length === 1) {
+          result_parts.push(features[clist[0]].poly);
+        } else {
+          try {
+            let bufs = [];
+            for (let idx of clist) {
+              let b = turf.buffer(features[idx].feat, 1, { units: "kilometers" });
+              bufs.push(b || features[idx].feat);
+            }
+            let u = turf.union(turf.featureCollection(bufs));
+            if (u && u.geometry) {
+              if (u.geometry.type === "Polygon") {
+                result_parts.push(u.geometry.coordinates);
+              } else if (u.geometry.type === "MultiPolygon") {
+                for (let part of u.geometry.coordinates) result_parts.push(part);
+              }
+            } else {
+              for (let idx of clist) result_parts.push(features[idx].poly);
+            }
+          } catch (e) {
+            for (let idx of clist) result_parts.push(features[idx].poly);
+          }
+        }
+      }
+
+      if (result_parts.length === 1) {
+        return {
+          coordinates: result_parts[0],
+          type: "Polygon"
+        };
+      }
+
+      //Return statement
+      return {
+        coordinates: result_parts,
+        type: "MultiPolygon"
+      };
+    }
+
+
+    /**
+     * Loads configuration, atlas.naissance, and correlation map datasets.
+     *
+     * @param {Object} [arg0_options]
+     * @param {string} [arg0_options.config_path]
+     *
+     * @returns {Object} Loaded datasets and configuration
+     */
+    static A_loadData (arg0_options) {
+      //Convert from parameters
+      let options = (arg0_options) ? arg0_options : {};
+
+      //Declare local instance variables
+      let atlas_data;
+      let config;
+      let config_file_path;
+      let map_content;
+      let map_entries = {};
+      let map_lines;
+
+      config_file_path = options.config_path || this.config_path;
+      console.log(`[PolitiesAtlasJoin] Loading configuration from: ${config_file_path}...`);
+      config = json5.parse(fs.readFileSync(config_file_path, "utf8"));
+
+      console.log(`[PolitiesAtlasJoin] Loading Atlas savefile from: ${config.input_atlas_path}...`);
+      atlas_data = JSON.parse(fs.readFileSync(config.input_atlas_path, "utf8"));
+
+      console.log(`[PolitiesAtlasJoin] Loading correlation map from: ${config.correlation_map_path}...`);
+      map_content = fs.readFileSync(config.correlation_map_path, "utf8");
+
+      map_lines = map_content.split("\n").filter((l) => l.trim() && !l.startsWith("#"));
+      for (let i = 0; i < map_lines.length; i++) {
+        let parts = map_lines[i].split("|").map((s) => s.trim());
+        let aid = parts[0];
+        if (!map_entries[aid]) map_entries[aid] = [];
+        map_entries[aid].push({
+          from: Number(parts[1]),
+          line_num: i + 1,
+          name: parts[3],
+          raw_seshat_id: parts[4],
+          span: Number(parts[2]) - Number(parts[1]),
+          to: Number(parts[2])
+        });
+      }
+
+      //Load Cliopatria semantic hierarchy
+      let clio_dump_path = path.resolve(path.dirname(config_file_path), "cliopatria_polities_dump.txt");
+      if (fs.existsSync(clio_dump_path)) {
+        let clio_lines = fs.readFileSync(clio_dump_path, "utf8").split("\n");
+        this.cliopatria_canonicals = new Map();
+        this.cliopatria_members = new Map();
+        for (let i = 1; i < clio_lines.length; i++) {
+          let parts = clio_lines[i].split("|").map((s) => s.trim());
+          if (parts.length >= 2 && parts[1]) {
+            let p_name = parts[0];
+            let s_id = parts[1];
+            let m_of = parts[2] || "";
+            if (p_name.startsWith("(") && p_name.endsWith(")")) {
+              let clean = p_name.slice(1, -1);
+              if (!this.cliopatria_canonicals.has(s_id)) this.cliopatria_canonicals.set(s_id, clean);
+            }
+            this.cliopatria_members.set(p_name.toLowerCase(), { member_of: m_of, name: p_name, seshat_id: s_id });
+          }
+        }
+      }
+
+      //Return statement
+      return {
+        atlas_data: atlas_data,
+        config: config,
+        map_entries: map_entries
+      };
+    }
+
+
+    /**
+     * Iterates through all discrete timestamps, resolving entity identities, unioning
+     * contemporaneous constituents with 1km buffering, and emitting sparse diff keyframes.
+     *
+     * @param {Object} arg0_atlas_data
+     * @param {Object} arg1_map_entries
+     *
+     * @returns {Map<string, Object>} Unified polities with sparse keyframes
+     */
+    static B_processTimestamps (arg0_atlas_data, arg1_map_entries) {
+      //Convert from parameters
+      let atlas_data = arg0_atlas_data || {};
+      let map_entries = arg1_map_entries || {};
+
+      //Declare local instance variables
+      let atlas_ids = Object.keys(atlas_data).filter((k) => atlas_data[k].class_name === "GeometryPolygon" && atlas_data[k].history);
+      let kf_stats = { 1: 0, 2: 0, 3: 0, nulls: 0 };
+      let last_log_time = Date.now();
+      let sorted_ts;
+      let total_keyframes = 0;
+      let ts_set = new Set();
+      let unified_polities = new Map();
+
+      for (let i = 0; i < atlas_ids.length; i++) {
+        let ent = atlas_data[atlas_ids[i]];
+        for (let t in ent.history) ts_set.add(parseInt(t));
+      }
+      sorted_ts = Array.from(ts_set).sort((a, b) => a - b);
+      console.log(`[PolitiesAtlasJoin] Processing ${sorted_ts.length} timestamps across ${atlas_ids.length} Atlas polygons...`);
+
+      for (let t_idx = 0; t_idx < sorted_ts.length; t_idx++) {
+        let t = sorted_ts[t_idx];
+        let date = Date.convertTimestampToDate(t);
+        let y = (date) ? date.year : Math.round(t / 8766);
+
+        let active_groups = new Map();
+
+        for (let i = 0; i < atlas_ids.length; i++) {
+          let id = atlas_ids[i];
+          let ent = atlas_data[id];
+          let state = this.getEntityStateAtTimestamp(ent, t);
+          if (!state || !state.geometry) continue;
+
+          let poly_arr = (state.geometry.type === "Polygon") ? [state.geometry.coordinates] : state.geometry.coordinates;
+          let cleaned_rings = [];
+          for (let p = 0; p < poly_arr.length; p++) {
+            let cl = this.cleanPolygonRings(poly_arr[p]);
+            if (cl) cleaned_rings.push(cl);
+          }
+          if (cleaned_rings.length === 0) continue;
+
+          let ident = this.resolveEntityIdentityAtYear(id, y, state, map_entries);
+          let name = (state.properties && state.properties.name) || ident.name;
+
+          //Semantic Defence Check: keep dependencies and mandates separate
+          let is_dep = this.isSeparateDependency(name, ident.seshat_id);
+          let group_key = (is_dep) ? `${name}_${ident.seshat_id}` : ident.seshat_id;
+
+          let score = this.getMetropolitanScore(name, ident.seshat_id);
+
+          if (!active_groups.has(group_key)) {
+            active_groups.set(group_key, {
+              highest_score: score,
+              ident: ident,
+              polygons: [],
+              primary_entity_id: id,
+              primary_state: state
+            });
+          }
+
+          let grp = active_groups.get(group_key);
+          for (let c = 0; c < cleaned_rings.length; c++) grp.polygons.push(cleaned_rings[c]);
+
+          if (score > grp.highest_score) {
+            grp.highest_score = score;
+            grp.primary_state = state;
+            grp.primary_entity_id = id;
           }
         }
 
-        //Process each active group
-        groups.forEach((group_val, g_key) => {
-          let primary_state = group_val.primary_state;
-
-          //Authentic colour preservation from metropolitan constituent
-          let authentic_fill = (primary_state && primary_state.symbol && primary_state.symbol.polygonFill)
-            ? primary_state.symbol.polygonFill
-            : "#7289da";
-
-          let current_symbol = {
-            polygonFill: authentic_fill,
-            textSize: (primary_state && primary_state.symbol && primary_state.symbol.textSize) || 14
-          };
-
-          //Constituent signature based on polygon count and names
-          let current_signature = `${group_val.polygons.length}|${group_val.identity.name}|${authentic_fill}`;
-
+        //Update active polities
+        active_groups.forEach((grp, g_key) => {
           if (!unified_polities.has(g_key)) {
             unified_polities.set(g_key, {
-              first_ts: current_ts,
-              identity: group_val.identity,
+              canonical_name: (grp.primary_state && grp.primary_state.properties && grp.primary_state.properties.name) || grp.ident.name,
+              highest_score: grp.highest_score,
+              ident: grp.ident,
               is_active: false,
               keyframes: {},
               last_geom: null,
+              last_geom_sig: null,
               last_props: null,
-              last_signature: null,
               last_symbol: null,
-              last_ts: current_ts,
-              primary_atlas_id: primary_state.id
+              primary_atlas_id: grp.primary_entity_id
             });
           }
 
-          let pol_entry = unified_polities.get(g_key);
-          pol_entry.last_ts = current_ts;
+          let pol = unified_polities.get(g_key);
+          if (grp.highest_score > pol.highest_score) {
+            pol.highest_score = grp.highest_score;
+            pol.canonical_name = (grp.primary_state && grp.primary_state.properties && grp.primary_state.properties.name) || grp.ident.name;
+            pol.primary_atlas_id = grp.primary_entity_id;
+          }
 
-          if (pol_entry.last_signature !== current_signature) {
-            let merged_geom = this.D_unionPolygons(group_val.polygons);
-            total_unions_performed++;
-
-            let current_props = {
-              cliopatria_name: group_val.identity.name,
-              name: group_val.identity.name,
-              seshat_id: group_val.identity.seshat_id
-            };
-
-            //Sparse Keyframe Rule
-            if (!pol_entry.is_active || !pol_entry.last_props) {
-              pol_entry.keyframes[String(current_ts)] = [
-                {
-                  feature: {
-                    geometry: merged_geom,
-                    properties: {},
-                    type: "Feature"
-                  }
-                },
-                current_symbol,
-                current_props
-              ];
-              pol_entry.last_symbol = current_symbol;
-              pol_entry.last_props = current_props;
-            } else {
-              let symbol_changed = (JSON.stringify(current_symbol) !== JSON.stringify(pol_entry.last_symbol));
-              let props_changed = (JSON.stringify(current_props) !== JSON.stringify(pol_entry.last_props));
-
-              if (symbol_changed || props_changed) {
-                pol_entry.keyframes[String(current_ts)] = [
-                  {
-                    feature: {
-                      geometry: merged_geom,
-                      properties: {},
-                      type: "Feature"
-                    }
-                  },
-                  current_symbol,
-                  current_props
-                ];
-                pol_entry.last_symbol = current_symbol;
-                pol_entry.last_props = current_props;
-              } else {
-                pol_entry.keyframes[String(current_ts)] = [
-                  {
-                    feature: {
-                      geometry: merged_geom,
-                      properties: {},
-                      type: "Feature"
-                    }
-                  }
-                ];
+          let coord_count = 0;
+          let coord_sum_x = 0;
+          let coord_sum_y = 0;
+          for (let p = 0; p < grp.polygons.length; p++) {
+            let poly = grp.polygons[p];
+            for (let r = 0; r < poly.length; r++) {
+              let ring = poly[r];
+              coord_count += ring.length;
+              if (ring.length > 0) {
+                coord_sum_x += ring[0][0] + ring[ring.length - 1][0];
+                coord_sum_y += ring[0][1] + ring[ring.length - 1][1];
+                let mid = Math.floor(ring.length / 2);
+                coord_sum_x += ring[mid][0];
+                coord_sum_y += ring[mid][1];
               }
             }
+          }
 
-            pol_entry.is_active = true;
-            pol_entry.last_geom = merged_geom;
-            pol_entry.last_signature = current_signature;
-            total_keyframes_recorded++;
+          let geom_sig = `${grp.polygons.length}|${coord_count}|${coord_sum_x.toFixed(3)}|${coord_sum_y.toFixed(3)}`;
+          let geom_changed = (geom_sig !== pol.last_geom_sig);
+          let merged_geom = (geom_changed || !pol.last_geom) ? this.unionPolygonsBuffered(grp.polygons) : pol.last_geom;
+          if (!merged_geom) return;
+          pol.last_geom = merged_geom;
+          pol.last_geom_sig = geom_sig;
+
+          let fill = (grp.primary_state && grp.primary_state.symbol && grp.primary_state.symbol.polygonFill)
+            ? grp.primary_state.symbol.polygonFill
+            : ((pol.last_symbol) ? pol.last_symbol.polygonFill : "#7289da");
+          let current_symbol = {
+            polygonFill: fill,
+            textSize: (grp.primary_state && grp.primary_state.symbol && grp.primary_state.symbol.textSize) || 14
+          };
+          let current_props = {
+            name: (grp.primary_state && grp.primary_state.properties && grp.primary_state.properties.name) || grp.ident.name,
+            seshat_id: grp.ident.seshat_id
+          };
+
+          //Strict Diff Pattern
+          if (!pol.is_active || !pol.last_props) {
+            pol.keyframes[String(t)] = [
+              { feature: { geometry: merged_geom, properties: {}, type: "Feature" } },
+              current_symbol,
+              current_props
+            ];
+            kf_stats[3]++;
+            total_keyframes++;
+            pol.last_symbol = current_symbol;
+            pol.last_props = current_props;
+            pol.is_active = true;
+          } else {
+            let symbol_changed = (current_symbol.polygonFill !== pol.last_symbol.polygonFill || current_symbol.textSize !== pol.last_symbol.textSize);
+            let name_changed = (current_props.name !== pol.last_props.name);
+            let seshat_changed = (current_props.seshat_id !== pol.last_props.seshat_id);
+            let props_changed = (name_changed || seshat_changed);
+
+            if (!geom_changed && !symbol_changed && !props_changed) return;
+
+            if (props_changed) {
+              let prop_diff = {};
+              if (name_changed) prop_diff.name = current_props.name;
+              if (seshat_changed) prop_diff.seshat_id = current_props.seshat_id;
+              pol.keyframes[String(t)] = [
+                { feature: { geometry: merged_geom, properties: {}, type: "Feature" } },
+                (symbol_changed ? current_symbol : null),
+                prop_diff
+              ];
+              kf_stats[3]++;
+              total_keyframes++;
+              pol.last_props = Object.assign({}, pol.last_props, prop_diff);
+              if (symbol_changed) pol.last_symbol = current_symbol;
+            } else if (symbol_changed) {
+              pol.keyframes[String(t)] = [
+                { feature: { geometry: merged_geom, properties: {}, type: "Feature" } },
+                current_symbol
+              ];
+              kf_stats[2]++;
+              total_keyframes++;
+              pol.last_symbol = current_symbol;
+            } else {
+              //Sparse keyframe: ONLY boundary geometry changed
+              pol.keyframes[String(t)] = [
+                { feature: { geometry: merged_geom, properties: {}, type: "Feature" } }
+              ];
+              kf_stats[1]++;
+              total_keyframes++;
+            }
           }
         });
 
-        //Terminate polities that ceased to be active
-        unified_polities.forEach((pol_entry, g_key) => {
-          if (!groups.has(g_key) && pol_entry.is_active) {
-            pol_entry.keyframes[String(current_ts)] = [null];
-            pol_entry.is_active = false;
-            pol_entry.last_geom = null;
-            pol_entry.last_signature = null;
-            total_keyframes_recorded++;
+        //Deactivate ceased polities
+        unified_polities.forEach((pol, g_key) => {
+          if (!active_groups.has(g_key) && pol.is_active) {
+            pol.keyframes[String(t)] = [null];
+            kf_stats.nulls++;
+            total_keyframes++;
+            pol.is_active = false;
+            pol.last_geom = null;
+            pol.last_geom_sig = null;
           }
         });
 
-        //Periodic progress logging
-        if (Date.now() - last_log_time > 5000 || t_idx === sorted_timestamps.length - 1) {
-          let pct = Math.round((t_idx / sorted_timestamps.length) * 100);
-          console.log(`[PolitiesAtlasJoin] Progress: ${pct}% (Epoch: Year ${current_year}, TS ${t_idx + 1}/${sorted_timestamps.length}, KFs: ${total_keyframes_recorded})`);
+        if (Date.now() - last_log_time > 5000 || t_idx === sorted_ts.length - 1) {
+          let pct = Math.round(((t_idx + 1) / sorted_ts.length) * 100);
+          console.log(`[PolitiesAtlasJoin] Progress: ${pct}% (TS ${t_idx + 1}/${sorted_ts.length}, Year ${y}, KFs: ${total_keyframes})`);
           last_log_time = Date.now();
         }
       }
 
-      console.log(`[PolitiesAtlasJoin] Finished timestamp processing. Generated ${unified_polities.size} consolidated polities with ${total_keyframes_recorded} sparse keyframes.`);
+      console.log(`[PolitiesAtlasJoin] Finished timestamp processing. Generated ${unified_polities.size} polities with ${total_keyframes} keyframes.`);
 
       //Return statement
       return unified_polities;
@@ -708,20 +802,22 @@
      *
      * @param {Map<string, Object>} arg0_unified_polities
      * @param {Object} arg1_atlas_data
-     * @param {Object} arg2_config
+     * @param {Object} [arg2_config]
      *
      * @returns {Object} Complete savefile object
      */
-    static F_assembleSavefile (arg0_unified_polities, arg1_atlas_data, arg2_config) {
+    static C_assembleSavefile (arg0_unified_polities, arg1_atlas_data, arg2_config) {
       //Convert from parameters
       let unified_polities = arg0_unified_polities;
-      let atlas_data = arg1_atlas_data;
-      let config = arg2_config;
+      let atlas_data = arg1_atlas_data || {};
+      let config = arg2_config || {};
 
       //Declare local instance variables
       let final_savefile = {};
       let group_entities_map = new Map();
       let original_entity_to_group = new Map();
+      let pol_keys = Array.from(unified_polities.keys());
+      let used_ids = new Set();
 
       console.log(`[PolitiesAtlasJoin] Assembling savefile structure...`);
 
@@ -744,25 +840,27 @@
       }
 
       //3. Reconstruct GeometryPolygon entities
-      let pol_keys = Array.from(unified_polities.keys());
-      let used_ids = new Set();
-
       for (let i = 0; i < pol_keys.length; i++) {
         let g_key = pol_keys[i];
-        let pol_entry = unified_polities.get(g_key);
+        let pol = unified_polities.get(g_key);
 
-        let entity_id = pol_entry.primary_atlas_id;
+        let entity_id = pol.primary_atlas_id;
         if (!entity_id || used_ids.has(entity_id)) {
-          entity_id = String(Math.floor(Math.random() * 90000000000 + 10000000000));
+          entity_id = this.hashToSnowflakeId(g_key);
+          if (used_ids.has(entity_id)) {
+            let offset = 1;
+            while (used_ids.has(`${entity_id}_${offset}`)) offset++;
+            entity_id = `${entity_id}_${offset}`;
+          }
         }
         used_ids.add(entity_id);
 
         let new_entity = {
           class_name: "GeometryPolygon",
-          history: pol_entry.keyframes,
+          history: pol.keyframes,
           id: entity_id,
           metadata: {
-            description: `Simplified Polity: ${pol_entry.identity.name}\nSeshatID: ${pol_entry.identity.seshat_id}\nBase Source: Cliopatria`,
+            description: `Simplified Polity: ${pol.canonical_name}\nSeshatID: ${pol.ident.seshat_id}\nBase Source: Cliopatria`,
             tags: ["Polities"]
           },
           type: "geometry"
@@ -771,8 +869,23 @@
         final_savefile[entity_id] = new_entity;
 
         //Anchor into regional FeatureGroup
-        let assigned_group = original_entity_to_group.get(pol_entry.primary_atlas_id);
-        if (!assigned_group) assigned_group = "94350264119"; //Default to 3. Europe
+        let assigned_group = original_entity_to_group.get(pol.primary_atlas_id);
+        if (!assigned_group) {
+          let s_id = pol.ident.seshat_id || "";
+          let prefix = s_id.replace(/^\(/, "").split("_")[0];
+          let region_prefix_map = {
+            ar: "70026347630", au: "45066516298", bd: "19853446951", bo: "70026347630",
+            br: "70026347630", ca: "55812148848", cl: "70026347630", cn: "96891234970",
+            co: "70026347630", dz: "6066323292", eg: "6066323292", et: "25715763203",
+            gl: "55812148848", in: "19853446951", iq: "35194181118", ir: "35194181118",
+            jp: "96891234970", kr: "96891234970", lk: "19853446951", ly: "6066323292",
+            ma: "6066323292", mn: "96891234970", mx: "70026347630", no: "94350264119",
+            nz: "45066516298", pe: "70026347630", pk: "19853446951", py: "70026347630",
+            ru: "34506973799", sa: "35194181118", sy: "35194181118", tn: "6066323292",
+            tr: "35194181118", us: "55812148848", ve: "70026347630"
+          };
+          assigned_group = region_prefix_map[prefix] || "94350264119";
+        }
 
         if (group_entities_map.has(assigned_group)) {
           group_entities_map.get(assigned_group).push({
@@ -806,23 +919,38 @@
 
 
     /**
-     * Main pipeline entry point.
+     * Main pipeline execution entry point.
+     *
+     * @param {Object} [arg0_options]
+     *
+     * @returns {Promise<void>}
      */
-    static async run () {
-      let loaded = this.A_loadData();
-      let indexed_clio = this.B_indexCliopatria(loaded.cliopatria_data);
-      let unified_polities = this.E_processAllTimestamps(loaded.atlas_data, indexed_clio, loaded.config);
-      let final_savefile = this.F_assembleSavefile(unified_polities, loaded.atlas_data, loaded.config);
+    static async run (arg0_options) {
+      //Convert from parameters
+      let options = (arg0_options) ? arg0_options : {};
 
-      let output_path = loaded.config.output_atlas_path;
+      //Declare local instance variables
+      let assembled_savefile;
+      let keys;
+      let loaded_data;
+      let out_stream;
+      let output_path;
+      let stat;
+      let unified_polities;
+
+      loaded_data = this.A_loadData(options);
+      unified_polities = this.B_processTimestamps(loaded_data.atlas_data, loaded_data.map_entries);
+      assembled_savefile = this.C_assembleSavefile(unified_polities, loaded_data.atlas_data, loaded_data.config);
+
+      output_path = loaded_data.config.output_atlas_path;
       console.log(`[PolitiesAtlasJoin] Writing output to: ${output_path}...`);
 
-      let out_stream = fs.createWriteStream(output_path, { encoding: "utf8" });
+      out_stream = fs.createWriteStream(output_path, { encoding: "utf8" });
       out_stream.write("{\n");
-      let keys = Object.keys(final_savefile);
+      keys = Object.keys(assembled_savefile);
       for (let i = 0; i < keys.length; i++) {
         let k = keys[i];
-        let val_str = JSON.stringify(final_savefile[k]);
+        let val_str = JSON.stringify(assembled_savefile[k]);
         let comma = (i < keys.length - 1) ? "," : "";
         out_stream.write(`  ${JSON.stringify(k)}: ${val_str}${comma}\n`);
       }
@@ -830,7 +958,7 @@
       out_stream.end();
 
       await new Promise((resolve) => out_stream.on("finish", resolve));
-      let stat = fs.statSync(output_path);
+      stat = fs.statSync(output_path);
       console.log(`[PolitiesAtlasJoin] Finished successfully! Saved ${(stat.size / 1024 / 1024).toFixed(2)} MB to ${output_path}`);
     }
   };
