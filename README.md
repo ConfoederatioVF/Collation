@@ -15,9 +15,7 @@
 
 ### Abstract.
 
-**Collation** is a monorepo fork of [Naissance HGIS](https://github.com/Confoederatio/Naissance/) used for producing the <ins>Naissance World Model</ins> (NWM). It is also often used as a testbed for developing new Naissance GIS capabilities.
-
-The NWM is split up into **Livemap** and **Histmap** components. Livemap refers to real-time mapping, whereas Histmap refers to proxy models and datasets relating to past events on Earth. Combined, they form a complete model of the world.
+**Collation** is a monorepo fork of [Naissance HGIS](https://github.com/Confoederatio/Naissance/) used for producing the <ins>Naissance World Model</ins> (NWM). It is also often used as a testbed for developing new Naissance GIS capabilities. The NWM is split up into **Livemap** and **Histmap** components. Livemap refers to real-time mapping, whereas Histmap refers to proxy models and datasets relating to past events on Earth. Combined, they form a complete model of the world.
 
 Since the original data sources used in historical modelling as well as Livemap Ontologies are very large, they cannot be stored on GitHub and are available upon request or can be manually populated from references. If you do not have the programming and search engine knowledge necessary to make this happen, turn back now to use Naissance HGIS instead.
 
