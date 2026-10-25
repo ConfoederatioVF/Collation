@@ -34,12 +34,26 @@ global.GDP_PPP_SEDAC = class {
 	/**
 	 * Returns a PNG array after converting GDP (PPP) 2017$100s from .geotiff to .png.
 	 *
+	 * @param {Object} [arg0_options]
+	 *  @param {number} [arg0_options.offset_x=0]
+	 *  @param {number} [arg0_options.offset_y=0]
+	 *
 	 * @returns {Array<Object>}
 	 */
-	static async A_convertToPNGs () {
+	static async A_convertToPNGs (arg0_options) {
+		//Convert from parameters
+		let options = (arg0_options) ? arg0_options : {};
+		
+		//Declare local instance variables
+		let offset_x = Math.returnSafeNumber(options.offset_x, 0);
+		let offset_y = Math.returnSafeNumber(options.offset_y, 0);
+		
 		//Return statement
 		return GeoTIFF.convertToPNGs(`${GDP_PPP_SEDAC.bf}/GDP_PPP_1990_2022.tif`, `${GDP_PPP_SEDAC.bf}/GDP_PPP`, {
+			...options,
 			format: "float32",
+			offset_x: offset_x,
+			offset_y: offset_y,
 			years: GDP_PPP_SEDAC.years
 		});
 	}
@@ -150,7 +164,7 @@ global.GDP_PPP_SEDAC = class {
 		
 		//1. Convert to PNGs
 		if (!options.exclude.includes("A")) {
-			await this.A_convertToPNGs();
+			await this.A_convertToPNGs(options);
 			await population_Stadester.processRasters();
 		}
 		
