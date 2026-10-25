@@ -23,8 +23,8 @@ Since the original data sources used in historical modelling as well as Livemap 
 
 Prototype features are also added to Collation, and due to the rapid pace of development, it is recommended for any builds to be synced to the dev branch. We will not be issuing releases for Collation - mainstream releases are reserved for the main Naissance repository. In addition, static images of datasets are also posted and made available on their respective repositories when feasible.
 
-<details>
-  <summary><h3>Naissance World Model (Datasets).</h3></summary>
+<details open>
+  <summary><h3>Naissance World Model.</h3></summary>
 
 For ready-made data analysis, you may find it useful to use Confoederatio histmaps/livemaps instead. We typically refer to the collection of all our datasets as the **Naissance World Model**, which is divided as follows alongside corresponding metadata.
 
