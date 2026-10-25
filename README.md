@@ -40,7 +40,8 @@ For ready-made data analysis over desktop/mobile clients, you may find it useful
 #### Histmap:
 
 > **Note.** Stadestér refers to urban data, whereas Velkscala refers to population data generally, including ALCC/LU models.
-> **Bold** datasets are recommended, as they tend to be the most up-to-date and comprehensive. Only relevant versions are kept for accessibility purposes; see individual repositories for version history.
+
+**Bold** datasets are recommended, as they tend to be the most up-to-date and comprehensive. Only relevant versions are kept for accessibility purposes; see individual repositories for version history.
 
 - Atlas: (Vector) - De facto and de jure polity borders from 3000-2025AD.
   - [**[Atlas 0.7]**](https://datavault.confoederatio.org/s/rPntqXwCxzXg4Bk) | [[Atlas 0.6]](https://confoederatio.org/pages/atlas) | [[Atlas 0.5]](https://www.youtube.com/watch?v=Kc0zNfiAd8c)
