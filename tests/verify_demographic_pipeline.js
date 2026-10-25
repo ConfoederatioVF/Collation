@@ -38,6 +38,7 @@ require(path.join(h2, "landuse_HYDE/landuse_HYDE.js"));
 require(path.join(h2, "admin_modern/admin_modern.js"));
 require(path.join(h3, "population_Stadester.transform/population_Stadester_transform.js"));
 require(path.join(h2, "population_Stadester/population_Stadester.js"));
+require(path.join(h2, "population_Velkscala/population_Velkscala.js"));
 require(path.join(h3, "age_sex/age_sex.js"));
 require(path.join(h2, "births_deaths_Kummu/births_deaths_Kummu.js"));
 require(path.join(h2, "births_deaths_UNWPP/births_deaths_UNWPP.js"));
@@ -70,7 +71,8 @@ require(path.join(h2, "migration_OLS/migration_OLS.js"));
 	let mf_path = `${births_deaths_OLS.output_female_migration_folder}female_net_migration_${target_year}.png`;
 	let mm_path = `${births_deaths_OLS.output_male_migration_folder}male_net_migration_${target_year}.png`;
 	let delta_path = `${population_Stadester_transform.delta_total_population_folder}delta_total_population_${target_year}.png`;
-	let popc_path = `${age_sex.sf().input_popc_folder}stadester_population_${target_year}.png`;
+	let popc_path = `${age_sex.sf().input_popc_folder}population_${target_year}.png`;
+	if (!fs.existsSync(popc_path)) popc_path = `${age_sex.sf().input_popc_folder}stadester_population_${target_year}.png`;
 
 	let b_r = GeoPNG.loadNumberRasterImage(b_path, { format: "float32" });
 	let fd_r = GeoPNG.loadNumberRasterImage(fd_path, { format: "float32" });
@@ -145,7 +147,7 @@ require(path.join(h2, "migration_OLS/migration_OLS.js"));
 		let m = m_r.data[i] || 0;
 		let mf = mf_r.data[i] || 0;
 		let mm = mm_r.data[i] || 0;
-		let dpop_annual = (delta_r.data[i] || 0) / year_gap;
+		let dpop_annual = delta_r.data[i] || 0;
 
 		total_b += b;
 		total_fd += fd;

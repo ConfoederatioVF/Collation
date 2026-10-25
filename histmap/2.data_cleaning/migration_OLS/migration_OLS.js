@@ -91,13 +91,10 @@ global.migration_OLS = class {
 						if (!has_vital) return NaN;
 
 						let dpop = isNaN(delta_r.data[i]) ? 0 : delta_r.data[i];
-						let annualized_dpop = dpop / year_gap;
+						let annualized_dpop = dpop;
 						
 						let actual_migration = annualized_dpop - (b - d);
 						let ratio = actual_migration / pop;
-						
-						if (ratio > 1) ratio = 1;
-						if (ratio < -1) ratio = -1;
 						return ratio;
 					}
 				});
@@ -187,50 +184,6 @@ global.migration_OLS = class {
 		let years = options.years || landuse_HYDE.sorted_hyde_years;
 		let landarea_raster = GeoPNG.loadNumberRasterImage(metadata_HYDE.input_raster_land_area, { format: "int32" });
 		
-		let global_min = Infinity;
-		let global_max = -Infinity;
-		let yearly_target_stats = {};
-		
-		for (let y = 0; y < years.length; y++) {
-			let year = years[y];
-			let target_path = `${this.intermediate_target}migration_target_${year}.png`;
-			if (!fs.existsSync(target_path)) continue;
-			
-			let target_raster = GeoPNG.loadNumberRasterImage(target_path, { format: "float32" });
-			let popc_path = `${age_sex.sf().input_popc_folder}population_${year}.png`;
-			if (!fs.existsSync(popc_path) && typeof population_Stadester !== "undefined")
-				popc_path = `${population_Stadester.input_popc_folder}stadester_population_${year}.png`;
-			if (!fs.existsSync(popc_path)) continue;
-			let popc_raster = GeoPNG.loadNumberRasterImage(popc_path, { format: "float32" });
-			
-			let local_min = Infinity;
-			let local_max = -Infinity;
-			let local_count = 0;
-			
-			let sampled_targets = [];
-			for (let i = 0; i < target_raster.data.length; i += 17) { // 17 is prime to avoid grid artifacts
-				let val = target_raster.data[i];
-				let pop = popc_raster.data[i];
-				if (!isNaN(val) && Math.abs(val) > 1e-10 && pop > 10000) {
-					sampled_targets.push(val);
-					local_count++;
-				}
-			}
-			
-			if (sampled_targets.length > 0) {
-				sampled_targets.sort((a,b) => a - b);
-				local_min = sampled_targets[Math.floor(sampled_targets.length * 0.01)]; // 1st percentile
-				local_max = sampled_targets[Math.floor(sampled_targets.length * 0.99)]; // 99th percentile
-			}
-			if (local_count > 0) {
-				yearly_target_stats[year] = { min: local_min, max: local_max, sample_size: local_count };
-				if (local_min < global_min) global_min = local_min;
-				if (local_max > global_max) global_max = local_max;
-			}
-		}
-		
-		if (global_min === Infinity) return;
-		
 		await GeoPNG.processTimeseriesParallel({
 			items: years,
 			concurrency: options.concurrency || 4,
@@ -248,16 +201,62 @@ global.migration_OLS = class {
 				
 				let popc_raster = GeoPNG.loadNumberRasterImage(popc_path, { format: "float32" });
 				let ols_raster = GeoPNG.loadNumberRasterImage(ols_path, { format: "float32" });
-				
-				let local_stats = yearly_target_stats[year];
-				let has_targets = (local_stats !== undefined);
-				let sample_size = (local_stats) ? local_stats.sample_size : 0;
-				let target_min = (local_stats) ? local_stats.min : global_min;
-				let target_max = (local_stats) ? local_stats.max : global_max;
-				
-				let uncertainty_weight = Math.exp(-sample_size/15);
-				target_min = target_min - ((target_min - global_min)*uncertainty_weight);
-				target_max = target_max + ((global_max - target_max)*uncertainty_weight);
+				let delta_path = `${population_Velkscala_transform.delta_total_population_folder}delta_total_population_${year}.png`;
+				let delta_r = (fs.existsSync(delta_path)) ? GeoPNG.loadNumberRasterImage(delta_path, { format: "float32" }) : null;
+
+				let target_path = `${this.intermediate_target}migration_target_${year}.png`;
+				let has_targets = fs.existsSync(target_path);
+				let sample_size = 0;
+				let sampled_values = [];
+
+				if (has_targets) {
+					let target_raster = GeoPNG.loadNumberRasterImage(target_path, { format: "float32" });
+					for (let i = 0; i < target_raster.data.length; i += 17) {
+						let pop = popc_raster.data[i];
+						let val = target_raster.data[i];
+						if (pop > 0 && !isNaN(val)) {
+							sampled_values.push(val);
+							sample_size++;
+						}
+					}
+				} else if (delta_r) {
+					for (let i = 0; i < popc_raster.data.length; i += 17) {
+						let pop = popc_raster.data[i];
+						let dp = delta_r.data[i];
+						if (pop > 0 && !isNaN(dp)) {
+							sampled_values.push(dp / pop);
+							sample_size++;
+						}
+					}
+				}
+
+				let target_min = 0;
+				let target_max = 0;
+
+				if (sampled_values.length > 0) {
+					sampled_values.sort((a, b) => a - b);
+					let n = sampled_values.length;
+					let q1 = sampled_values[Math.floor(n * 0.25)];
+					let q3 = sampled_values[Math.floor(n * 0.75)];
+					let iqr = q3 - q1;
+					let lower_fence = q1 - 1.5 * iqr;
+					let upper_fence = q3 + 1.5 * iqr;
+
+					let regularise = (x) => {
+						if (iqr > 0) {
+							if (x > upper_fence) return upper_fence + iqr * Math.log(1 + ((x - upper_fence) / iqr));
+							if (x < lower_fence) return lower_fence - iqr * Math.log(1 + ((lower_fence - x) / iqr));
+						}
+						return x;
+					};
+
+					target_min = regularise(sampled_values[0]);
+					target_max = regularise(sampled_values[n - 1]);
+					if (target_max <= target_min) {
+						target_min = lower_fence;
+						target_max = upper_fence;
+					}
+				}
 				
 				let valid_pixels = [];
 				for (let i = 0; i < ols_raster.data.length; i++) {
@@ -279,7 +278,7 @@ global.migration_OLS = class {
 				let q1 = valid_pixels[Math.floor(N*0.25)];
 				let q3 = valid_pixels[Math.floor(N*0.75)];
 				let iqr = q3 - q1;
-				let alpha = (iqr > 1e-5) ? iqr : ((std > 1e-5) ? std : 0.01);
+				let alpha = (iqr > 1e-5) ? iqr : ((std > 1e-5) ? std : 1.0);
 				
 				let t_lower = q1 - (1.5*alpha);
 				let t_upper = q3 + (1.5*alpha);
@@ -382,25 +381,43 @@ global.migration_OLS = class {
 						let b = isNaN(unwpp_b_r.data[i]) ? 0 : Math.max(0, unwpp_b_r.data[i]);
 						let fd = isNaN(unwpp_fd_r.data[i]) ? 0 : Math.max(0, unwpp_fd_r.data[i]);
 						let md = isNaN(unwpp_md_r.data[i]) ? 0 : Math.max(0, unwpp_md_r.data[i]);
-						let d = fd + md;
+						let d = Math.min(pop, fd + md);
 
 						let dpop = isNaN(delta_r.data[i]) ? 0 : delta_r.data[i];
-						let annualized_dpop = dpop / year_gap;
-						let m = annualized_dpop - (b - d);
-
+						let m = dpop - (b - d);
+						if (m > dpop + pop) m = dpop + pop;
 						final_m_array[i] = m;
-						sum_m += m;
-						total_pop += pop;
 					}
 
-					// Zero-sum balance adjustment ensuring planet-wide net migration sums to exactly 0
-					let balancing_rate = (total_pop > 0) ? (-sum_m / total_pop) : 0;
-					for (let i = 0; i < popc_raster.data.length; i++) {
-						let pop = popc_raster.data[i];
-						if (pop <= 0 || isNaN(pop)) continue;
+					// Waterfill balancing ensuring planet-wide net migration sums to 0 without violating M <= g + pop
+					for (let iter = 0; iter < 3; iter++) {
+						let global_sum_m = 0;
+						let eligible_pop = 0;
+						for (let i = 0; i < popc_raster.data.length; i++) {
+							let pop = popc_raster.data[i];
+							if (pop <= 0) continue;
+							let m = final_m_array[i];
+							global_sum_m += m;
+							let g = (delta_r && !isNaN(delta_r.data[i])) ? delta_r.data[i] : 0;
+							if (m < g + pop) eligible_pop += pop;
+						}
+						if (Math.abs(global_sum_m) < 0.01 || eligible_pop === 0) break;
+						let rate = -global_sum_m / eligible_pop;
+						for (let i = 0; i < popc_raster.data.length; i++) {
+							let pop = popc_raster.data[i];
+							if (pop <= 0) continue;
+							let g = (delta_r && !isNaN(delta_r.data[i])) ? delta_r.data[i] : 0;
+							let m = final_m_array[i];
+							if (m < g + pop) {
+								m += pop * rate;
+								if (m > g + pop) m = g + pop;
+								final_m_array[i] = m;
+							}
+						}
+					}
 
-						let m = final_m_array[i] + (pop * balancing_rate);
-						final_m_array[i] = m;
+					for (let i = 0; i < popc_raster.data.length; i++) {
+						let m = final_m_array[i];
 						final_mf_array[i] = m * 0.488;
 						final_mm_array[i] = m * 0.512;
 					}
@@ -432,7 +449,10 @@ global.migration_OLS = class {
 					if (isNaN(norm_val)) continue;
 					
 					let ratio = target_min + norm_val * (target_max - target_min);
-					migration_array[i] = ratio * pop;
+					let m = ratio * pop;
+					let g = (delta_r && !isNaN(delta_r.data[i])) ? delta_r.data[i] : 0;
+					if (m > g + pop) m = g + pop;
+					migration_array[i] = m;
 				}
 				
 				let age_bands = ["00", "01", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55", "60", "65", "70", "75", "80"];
@@ -479,32 +499,40 @@ global.migration_OLS = class {
 				let final_mf_array = new Float32Array(popc_raster.data.length);
 				let final_mm_array = new Float32Array(popc_raster.data.length);
 				
-				let global_sum_m = 0;
-				let total_pop_modeled = 0;
-				
-				// Pass 1: Sum initial modeled migration and total population
 				for (let i = 0; i < popc_raster.data.length; i++) {
-					let pop = popc_raster.data[i];
 					let m = migration_array[i];
-					if (isNaN(m)) m = 0;
-					final_m_array[i] = m;
-					if (pop > 0) {
+					final_m_array[i] = isNaN(m) ? 0 : m;
+				}
+				
+				for (let iter = 0; iter < 3; iter++) {
+					let global_sum_m = 0;
+					let eligible_pop = 0;
+					for (let i = 0; i < popc_raster.data.length; i++) {
+						let pop = popc_raster.data[i];
+						if (pop <= 0) continue;
+						let m = final_m_array[i];
 						global_sum_m += m;
-						total_pop_modeled += pop;
+						let g = (delta_r && !isNaN(delta_r.data[i])) ? delta_r.data[i] : 0;
+						if (m < g + pop) eligible_pop += pop;
+					}
+					if (Math.abs(global_sum_m) < 0.01 || eligible_pop === 0) break;
+					let rate = -global_sum_m / eligible_pop;
+					for (let i = 0; i < popc_raster.data.length; i++) {
+						let pop = popc_raster.data[i];
+						if (pop <= 0) continue;
+						let g = (delta_r && !isNaN(delta_r.data[i])) ? delta_r.data[i] : 0;
+						let m = final_m_array[i];
+						if (m < g + pop) {
+							m += pop * rate;
+							if (m > g + pop) m = g + pop;
+							final_m_array[i] = m;
+						}
 					}
 				}
 				
-				// Calculate balancing rate to ensure global net migration sums to exactly 0
-				let balancing_rate = (total_pop_modeled > 0) ? (-global_sum_m / total_pop_modeled) : 0;
-				
-				// Pass 2: Apply zero-sum balance and Rogers-Castro sex splits
+				// Pass 2: Rogers-Castro sex splits
 				for (let i = 0; i < popc_raster.data.length; i++) {
-					let pop = popc_raster.data[i];
 					let m = final_m_array[i];
-					
-					if (pop > 0) {
-						m += (pop * balancing_rate);
-					}
 					
 					let pf = pot_f[i];
 					let pm = pot_m[i];

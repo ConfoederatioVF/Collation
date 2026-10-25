@@ -854,7 +854,7 @@ global.births_deaths_OLS = class {
 						let is_fd_actual = (fd_actual && fd_actual[i]);
 						let is_md_actual = (md_actual && md_actual[i]);
 						let is_hmd = ((is_b_actual || (is_fd_actual && is_md_actual)) && !is_empirical_data);
-						let g = d_val / year_gap;
+						let g = d_val;
 						
 						if (is_hmd) {
 							let b = b_counts[i] || 0;
@@ -882,56 +882,73 @@ global.births_deaths_OLS = class {
 					}
 					
 					// 2. Conserve global net migration zero-sum and accumulate non-HMD country targets
-					let balance_rate = (non_hmd_pop_sum > 0) ? (-hmd_m_diff_sum / non_hmd_pop_sum) : 0;
+					for (let iter = 0; iter < 3; iter++) {
+						let total_m_sum = 0;
+						let non_hmd_eligible_pop = 0;
+						for (let i = 0; i < total_len; i++) {
+							let pop = popc_raster.data[i];
+							if (pop <= 0) continue;
+							let m_val = m_raster.data[i];
+							if (isNaN(m_val)) continue;
+							total_m_sum += m_val;
+							let is_b_actual = (b_actual && b_actual[i]);
+							let is_fd_actual = (fd_actual && fd_actual[i]);
+							let is_md_actual = (md_actual && md_actual[i]);
+							let is_hmd = ((is_b_actual || (is_fd_actual && is_md_actual)) && !is_empirical_data);
+							if (!is_hmd) {
+								let d_val = d_raster.data[i];
+								if (m_val < d_val + pop) non_hmd_eligible_pop += pop;
+							}
+						}
+						if (Math.abs(total_m_sum) < 0.1 || non_hmd_eligible_pop === 0) break;
+						let balance_rate = -total_m_sum / non_hmd_eligible_pop;
+						for (let i = 0; i < total_len; i++) {
+							let pop = popc_raster.data[i];
+							if (pop <= 0) continue;
+							let is_b_actual = (b_actual && b_actual[i]);
+							let is_fd_actual = (fd_actual && fd_actual[i]);
+							let is_md_actual = (md_actual && md_actual[i]);
+							let is_hmd = ((is_b_actual || (is_fd_actual && is_md_actual)) && !is_empirical_data);
+							if (is_hmd) continue;
+							let d_val = d_raster.data[i];
+							let m_val = m_raster.data[i];
+							if (isNaN(d_val) || isNaN(m_val)) continue;
+							if (m_val < d_val + pop) {
+								let m_cand = m_val + pop * balance_rate;
+								if (m_cand > d_val + pop) m_cand = d_val + pop;
+								let m_diff = m_cand - m_val;
+								m_raster.data[i] = m_cand;
+								let mf_val = isNaN(mf_raster.data[i]) ? 0 : mf_raster.data[i];
+								let mm_val = isNaN(mm_raster.data[i]) ? 0 : mm_raster.data[i];
+								let tot_m = mf_val + mm_val;
+								let fr = (tot_m !== 0) ? (mf_val / tot_m) : 0.488;
+								mf_raster.data[i] = mf_val + m_diff * fr;
+								mm_raster.data[i] = mm_val + m_diff * (1 - fr);
+							}
+						}
+					}
+						
 					let country_b_raw = {};
 					let country_d_raw = {};
 					let country_n_target = {};
-					
 					for (let i = 0; i < total_len; i++) {
 						let pop = popc_raster.data[i];
 						if (pop <= 0) continue;
-						
 						let d_val = d_raster.data[i];
 						let m_val = m_raster.data[i];
 						if (isNaN(d_val) || isNaN(m_val)) continue;
-						
 						let is_b_actual = (b_actual && b_actual[i]);
 						let is_fd_actual = (fd_actual && fd_actual[i]);
 						let is_md_actual = (md_actual && md_actual[i]);
 						let is_hmd = ((is_b_actual || (is_fd_actual && is_md_actual)) && !is_empirical_data);
 						if (is_hmd) continue;
-						
-						let g = d_val / year_gap;
-						let m_adj = m_val + pop * balance_rate;
-						let m_diff = m_adj - m_val;
-						
-						m_raster.data[i] = m_adj;
-						
-						let mf_val = isNaN(mf_raster.data[i]) ? 0 : mf_raster.data[i];
-						let mm_val = isNaN(mm_raster.data[i]) ? 0 : mm_raster.data[i];
-						let tot_m = mf_val + mm_val;
-						let fr = (tot_m !== 0) ? (mf_val / tot_m) : 0.488;
-						
-						mf_raster.data[i] = mf_val + m_diff * fr;
-						mm_raster.data[i] = mm_val + m_diff * (1 - fr);
-						
-						let b_raw = b_counts[i] || 0;
-						let fd_raw = fd_counts[i] || 0;
-						let md_raw = md_counts[i] || 0;
-						let d_raw = fd_raw + md_raw;
-						let n_target = g - m_adj;
-						
+						let n_target = d_val - m_val;
 						let bi = i * 4;
-						let local_colour_key = [
-							geocode_raster.data[bi],
-							geocode_raster.data[bi + 1],
-							geocode_raster.data[bi + 2]
-						].join(",");
+						let local_colour_key = [geocode_raster.data[bi], geocode_raster.data[bi + 1], geocode_raster.data[bi + 2]].join(",");
 						let local_geocodes = geocode_obj[local_colour_key];
 						let local_iso = (local_geocodes && local_geocodes.length > 0) ? local_geocodes[0] : "GLOBAL";
-						
-						Object.modifyValue(country_b_raw, local_iso, b_raw);
-						Object.modifyValue(country_d_raw, local_iso, d_raw);
+						Object.modifyValue(country_b_raw, local_iso, b_counts[i] || 0);
+						Object.modifyValue(country_d_raw, local_iso, (fd_counts[i] || 0) + (md_counts[i] || 0));
 						Object.modifyValue(country_n_target, local_iso, n_target);
 					}
 					
@@ -957,6 +974,8 @@ global.births_deaths_OLS = class {
 					});
 					
 					// 4. Reconcile non-HMD pixels: births and deaths close the demographic accounting identity
+					let count_d_over_pop = 0;
+					let sum_d_over_pop_m_diff = 0;
 					for (let i = 0; i < total_len; i++) {
 						let pop = popc_raster.data[i];
 						if (pop <= 0) continue;
@@ -971,7 +990,7 @@ global.births_deaths_OLS = class {
 						let is_hmd = ((is_b_actual || (is_fd_actual && is_md_actual)) && !is_empirical_data);
 						if (is_hmd) continue;
 						
-						let g = d_val / year_gap;
+						let g = d_val;
 						let m = m_raster.data[i];
 						let n_target = g - m;
 						
@@ -1009,17 +1028,6 @@ global.births_deaths_OLS = class {
 						if (d_final > pop) {
 							d_final = pop;
 							b_final = Math.max(0, pop + n_target);
-							let m_residual_pixel = g - (b_final - d_final);
-							let m_diff_pixel = m_residual_pixel - m_raster.data[i];
-							m_raster.data[i] = m_residual_pixel;
-							
-							let mf_val = isNaN(mf_raster.data[i]) ? 0 : mf_raster.data[i];
-							let mm_val = isNaN(mm_raster.data[i]) ? 0 : mm_raster.data[i];
-							let tot_m = mf_val + mm_val;
-							let fr = (tot_m !== 0) ? (mf_val / tot_m) : 0.488;
-							
-							mf_raster.data[i] = mf_val + m_diff_pixel * fr;
-							mm_raster.data[i] = mm_val + m_diff_pixel * (1 - fr);
 						}
 						
 						let ratio_m = (d_raw > 0) ? (md_raw / d_raw) : 0.512;
