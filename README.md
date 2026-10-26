@@ -38,17 +38,17 @@ For ready-made data analysis over desktop/mobile clients, you may find it useful
 
 > **Note.** Stadestér refers to urban data, whereas Velkscala refers to population data generally, including ALCC/LU models.
 
-**Bold** datasets are recommended, as they tend to be the most up-to-date and comprehensive. Only relevant versions are kept for accessibility purposes; see individual repositories for version history.
+Methods reports currently lag several versions behind where they should be. For internal methods notes and reports, please contact a CRD member. We also try to keep summary methodologies up-to-date on [Confoederatio Dataview](https://dataview.confoederatio.org/) per indicator.
 
 - Atlas: (Vector) - De facto and de jure polity borders from 3000-2025AD.
-  - [**[Atlas 0.7]**](https://datavault.confoederatio.org/s/rPntqXwCxzXg4Bk) | [[Atlas 0.6]](https://confoederatio.org/pages/atlas) | [[Atlas 0.5]](https://www.youtube.com/watch?v=Kc0zNfiAd8c)
+  - [[Atlas 0.7] (Datavault)](https://datavault.confoederatio.org/s/rPntqXwCxzXg4Bk) | [Atlas 0.5-0.6 Legacy](https://confoederatio.org/pages/atlas) | [Atlas 0.5 (Sources)](https://confoederatiodocs.info/CRD+(Confoederatio%2C+Research+Division)/Documentation/Notes+%26+Scripts/Atlas+0.5+Sources)
   - **Note.** De facto frontiers are modelled at daily resolution, whilst de jure frontiers are sub-yearly at most, since they conjoin Seshat, Correlates of War, and C-Shapes 2.0.
 - Eoscala: (Raster) - Economic estimates from 10000BC-2025AD at 5-arcmin resolution. Tabular national accounts data since 1800AD at yearly resolution.
-  - [**[Eoscala 1.5]**](https://datavault.confoederatio.org/s/2Kytdej7ABpw4rr)
+  - [[Eoscala 1.5] (Datavault)](https://datavault.confoederatio.org/s/2Kytdej7ABpw4rr) | [Eoscala 1.0 (Methodology)](https://confoederatio.org/papers/Eoscala%201.0_Velkscala%200.5%20-%20A%20Gridded%20Reconstruction%20of%20Global%20GDP%20and%20Population%20from%2010000BC%20to%20the%20Present.pdf)
 - Stadestér: (Vector) - Discrete urban data for 41k+ cities between 3000BC-2025AD at annual resolution. Yearly urban extents are made available from 1800AD onwards. Historical names and capital city histories included.
-  - [**[Stadestér 1.1]**](https://datavault.confoederatio.org/s/QcXSrmcA7qYSmR6) | [[Stadestér 1.0]](https://doi.org/10.5281/zenodo.17180328)
+  - [[Stadestér 1.1] (Datavault)](https://datavault.confoederatio.org/s/QcXSrmcA7qYSmR6) | [Stadestér 1.0/Velkscala 0.7 (Methodology)](https://doi.org/10.5281/zenodo.17180328)
 - Velkscala: (Raster/Vector) - Aggregate population estimates, land use, and ALCC from 10000BC-2025AD. Urban data can be found under <ins>Stadestér</ins>.
-  - [**[Velkscala 1.0]**](https://datavault.confoederatio.org/s/44Pfgt7ya8wE77b)
+  - [[Velkscala 1.0] (Datavault)](https://datavault.confoederatio.org/s/44Pfgt7ya8wE77b) | [Velkscala 1.0 Modelling Report](https://confoederatio.org/papers/Velkscala%20Modelling%20Report%20-%208%20October%202026.pdf) | [Stadestér 1.0/Velkscala 0.7 (Methodology)](https://doi.org/10.5281/zenodo.17180328)
  
 <div align = "center">
   <img src = "https://i.postimg.cc/VkhQL7Cp/17-velkscala.png" width = "50%"><br><br>
