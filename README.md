@@ -57,8 +57,8 @@ Methods reports currently lag several versions behind where they should be. For 
 
 #### Livemap:
 
-- Collation (Vector) - ORBATs, territorial control, and geospatialised news aggregation. Scripts for self-hosting are available [here](https://github.com/Confoederatio/Collation).
 - Harbinger - Turns arbitrary, noisy image data and text-scrapes into georeferenced geometries/ontologies using CV/ML techniques. Recommended only for higher-end devices.
   - [[Toolkit (Github)]](https://github.com/ConfoederatioVF/Harbinger) | [[Harbinger.Deprojector]](https://github.com/ConfoederatioVF/Harbinger.Deprojector) | [[Harbinger.Segmentation]](https://github.com/ConfoederatioVF/Harbinger.Segmentation)
+- Livemap (Vector) - ORBATs, territorial control, and geospatialised news aggregation. Scripts for self-hosting are available [here](https://github.com/Confoederatio/Collation).
 
 </details>
