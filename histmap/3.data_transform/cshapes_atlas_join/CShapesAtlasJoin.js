@@ -193,8 +193,12 @@
       let canon_name = (name_map && name_map.has(target_id)) ? name_map.get(target_id) : (grp.name || grp.meta.name);
       if (name_map && !name_map.has(target_id)) name_map.set(target_id, canon_name);
 
+      let cow_code = grp.meta.cow_code || grp.meta.cow;
+      let gwcode = grp.meta.gwcode || grp.gwcode || cow_code;
+
       let props = {
-        cow_code: grp.meta.cow_code || grp.meta.cow,
+        cow_code: cow_code,
+        gwcode: gwcode,
         name: canon_name,
         seshat_id: grp.meta.seshat_id
       };
@@ -204,7 +208,8 @@
           class_name: "GeometryPolygon",
           id: target_id,
           metadata: {
-            description: `Simplified Polity: ${props.name}\nSeshatID: ${props.seshat_id}\nCOW: ${props.cow_code}\nBase Source: CShapes`,
+            description: `Simplified Polity: ${props.name}\nSeshatID: ${props.seshat_id}\nCOW: ${props.cow_code}\nBase Source: CShapes\nGW: ${props.gwcode}`,
+            gwcode: props.gwcode,
             name: props.name,
             tags: ["Polities", "C-Shapes"]
           },
@@ -670,10 +675,19 @@
 
             let key = String(p.Id);
             let polity_name = p.Name;
-            let seshat_id = this.getCanonicalSeshatId(p.Id, year, meta.seshat_id || `(${p.Name})`);
+            let cow_code = meta.cow_code || meta.cow || p.Id;
+            let gwcode = (p.Id >= 10000) ? cow_code : p.Id;
+            if (p.Id === 340) {
+              cow_code = 345;
+              gwcode = (year >= 2006) ? 340 : 345;
+            }
+
+            let seshat_id = this.getCanonicalSeshatId(cow_code, year, meta.seshat_id || `(${p.Name})`);
 
             //Handle Prussia (pre-1871) vs Germany (1871+)
             if (p.Id === 255) {
+              cow_code = 255;
+              gwcode = 255;
               if (year < 1871) {
                 polity_name = "Prussia";
                 seshat_id = "de_hohenzollern_2";
@@ -687,8 +701,10 @@
 
             if (!eu_by_polity.has(key)) {
               eu_by_polity.set(key, {
+                cow_code: cow_code,
                 features: [],
-                meta: Object.assign({}, meta, { cow_code: p.Id, name: polity_name, seshat_id: seshat_id }),
+                gwcode: gwcode,
+                meta: Object.assign({}, meta, { cow_code: cow_code, gwcode: gwcode, name: polity_name, seshat_id: seshat_id }),
                 name: polity_name
               });
             }
@@ -821,15 +837,63 @@
 
             let s_key = meta.seshat_id;
             let polity_name = p.cntry_name;
-            let cow_code = p.gwcode;
+            let cow_code = meta.cow_code || meta.cow || p.gwcode;
+            let gwcode = p.gwcode;
+
+            //Special temporal cases for Germany, Yemen, Serbia, and microstates
+            if (p.gwcode === 260) {
+              if (year >= 1990) {
+                cow_code = 255;
+                gwcode = 260;
+                polity_name = "Germany";
+              } else {
+                cow_code = 260;
+                gwcode = 260;
+                polity_name = "German Federal Republic";
+              }
+            } else if (p.gwcode === 678) {
+              if (year >= 1990) {
+                cow_code = 679;
+                gwcode = 678;
+                polity_name = "Yemen";
+              } else {
+                cow_code = 678;
+                gwcode = 678;
+                polity_name = "Yemen (Arab Republic of Yemen)";
+              }
+            } else if (p.gwcode === 340) {
+              if (year >= 2006) {
+                cow_code = 345;
+                gwcode = 340;
+                polity_name = "Serbia";
+              } else {
+                cow_code = 345;
+                gwcode = 345;
+                polity_name = "Serbia";
+              }
+            } else if (p.gwcode === 970) {
+              cow_code = 946;
+              gwcode = 970;
+            } else if (p.gwcode === 971) {
+              cow_code = 970;
+              gwcode = 971;
+            } else if (p.gwcode === 973) {
+              cow_code = 947;
+              gwcode = 973;
+            } else if (p.gwcode === 972) {
+              cow_code = 955;
+              gwcode = 972;
+            }
 
             //Special historical grouping for Burma and British Raj
             if (p.cntry_name.includes("Burma") || p.cntry_name.includes("Myanmar")) {
               cow_code = 775;
+              gwcode = 775;
               polity_name = "Burma";
               s_key = "(Burma)";
             } else if (p.cntry_name === "India" && year < 1947) {
               cow_code = 750;
+              gwcode = 750;
               polity_name = "British Raj";
               s_key = "(British Raj)";
             }
@@ -837,13 +901,14 @@
             let seshat_id = (s_key === "(Burma)" || s_key === "(British Raj)")
               ? s_key
               : this.getCanonicalSeshatId(cow_code, year, s_key);
-            meta = Object.assign({}, meta, { cow_code: cow_code, is_c2: true, name: polity_name, seshat_id: seshat_id });
+            meta = Object.assign({}, meta, { cow_code: cow_code, gwcode: gwcode, is_c2: true, name: polity_name, seshat_id: seshat_id });
 
-            let code_key = (s_key === "(Burma)" || s_key === "(British Raj)") ? s_key : String(cow_code);
+            let code_key = (s_key === "(Burma)" || s_key === "(British Raj)") ? s_key : String(p.gwcode);
             if (!c2_by_polity.has(code_key)) {
               c2_by_polity.set(code_key, {
                 cow_code: cow_code,
                 features: [],
+                gwcode: gwcode,
                 meta: meta,
                 name: polity_name
               });
