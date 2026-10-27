@@ -194,7 +194,6 @@
       if (name_map && !name_map.has(target_id)) name_map.set(target_id, canon_name);
 
       let props = {
-        cow: grp.meta.cow || grp.meta.cow_code,
         cow_code: grp.meta.cow_code || grp.meta.cow,
         name: canon_name,
         seshat_id: grp.meta.seshat_id
@@ -666,7 +665,7 @@
             let feat = active_eu[i];
             let p = feat.properties;
             let meta = sources.eu_meta.get(String(p.Id)) || sources.eu_meta.get(p.Id + "|" + p.Name) || sources.eu_meta.get(p.Name.toLowerCase()) || {
-              cow: p.Id, cow_code: p.Id, name: p.Name, seshat_id: `(${p.Name})`
+              cow_code: p.Id, name: p.Name, seshat_id: `(${p.Name})`
             };
 
             let key = String(p.Id);
@@ -689,7 +688,7 @@
             if (!eu_by_polity.has(key)) {
               eu_by_polity.set(key, {
                 features: [],
-                meta: Object.assign({}, meta, { cow: p.Id, cow_code: p.Id, name: polity_name, seshat_id: seshat_id }),
+                meta: Object.assign({}, meta, { cow_code: p.Id, name: polity_name, seshat_id: seshat_id }),
                 name: polity_name
               });
             }
@@ -765,13 +764,13 @@
                 //Polity is outside Europe (USA, Canada, Brazil, China, Khiva, Tunis, British Guiana, French Gabon, etc.)
                 active_outside_eu_ids.add(id);
                 let s_props = Object.assign({}, st.properties);
-                let meta = sources.eu_meta.get(String(s_props.cow)) || sources.c2_meta.get(String(s_props.cow)) ||
+                let meta = sources.eu_meta.get(String(s_props.cow_code || s_props.cow)) || sources.c2_meta.get(String(s_props.cow_code || s_props.cow)) ||
                            sources.eu_meta.get((s_props.name || "").toLowerCase()) || sources.c2_meta.get((s_props.name || "").toLowerCase());
-                if (meta && meta.cow) {
-                  s_props.cow = meta.cow;
-                  s_props.cow_code = meta.cow;
+                if (meta && (meta.cow_code || meta.cow)) {
+                  s_props.cow_code = meta.cow_code || meta.cow;
+                  delete s_props.cow;
                 }
-                s_props.seshat_id = this.getCanonicalSeshatId(s_props.cow || (meta && meta.cow), year, s_props.seshat_id);
+                s_props.seshat_id = this.getCanonicalSeshatId(s_props.cow_code || (meta && (meta.cow_code || meta.cow)), year, s_props.seshat_id);
                 if (entity_name_map.has(id)) s_props.name = entity_name_map.get(id);
                 this.emitKeyframe(id, ts, st.geometry, st.symbol, s_props, entity_history_map, entity_state_tracker);
               } else {
@@ -817,7 +816,7 @@
             let feat = active_c2[i];
             let p = feat.properties;
             let meta = sources.c2_meta.get(String(p.gwcode)) || sources.c2_meta.get(p.gwcode + "|" + p.cntry_name) || sources.c2_meta.get(p.cntry_name.toLowerCase()) || {
-              cow: p.gwcode, cow_code: p.gwcode, name: p.cntry_name, seshat_id: `(${p.cntry_name})`
+              cow_code: p.gwcode, name: p.cntry_name, seshat_id: `(${p.cntry_name})`
             };
 
             let s_key = meta.seshat_id;
@@ -838,7 +837,7 @@
             let seshat_id = (s_key === "(Burma)" || s_key === "(British Raj)")
               ? s_key
               : this.getCanonicalSeshatId(cow_code, year, s_key);
-            meta = Object.assign({}, meta, { cow: cow_code, cow_code: cow_code, is_c2: true, name: polity_name, seshat_id: seshat_id });
+            meta = Object.assign({}, meta, { cow_code: cow_code, is_c2: true, name: polity_name, seshat_id: seshat_id });
 
             let code_key = (s_key === "(Burma)" || s_key === "(British Raj)") ? s_key : String(cow_code);
             if (!c2_by_polity.has(code_key)) {
