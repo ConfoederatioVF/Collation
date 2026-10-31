@@ -254,5 +254,6 @@
     
     devries_coord_overrides: {
       "BREST-France": [48.390394, -4.486076]
+    }
   };
 }
