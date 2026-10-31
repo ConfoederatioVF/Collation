@@ -239,6 +239,20 @@
       "Sydney-Australia", "Taian-China", "Taiyuan-China", "Tarsus-Turkey", "Tehran-Iran",
       "Tokyo-Japan", "Tripoli-Libya", "Urumqi-China", "Vishakhapatnam-India", "Wuzhou-China",
       "Xingtai-China", "Srirangapatna-India", "St. Louis-United States of America", "Visakhapatnam-India"
-    ]
+    ],
+    
+    buringh_coord_overrides: {
+      "Aachen-Germany": [50.7753455, 6.0838868],
+      "Carrara-Italy": [44.069655, 10.0824161],
+      "Kungur-Russia": [57.431641, 56.9397122],
+      "Poltava-Ukraine": [49.588267, 34.551417],
+      "Quimper-France": [47.9976492, -4.0973449],
+      "Riga-Latvia": [56.9676941, 24.1056221],
+      "Sterlitamak-Russia": [53.630421, 55.9308009],
+      "Tournus-France": [46.561816, 4.9119529]
+    },
+    
+    devries_coord_overrides: {
+      "BREST-France": [48.390394, -4.486076]
   };
 }

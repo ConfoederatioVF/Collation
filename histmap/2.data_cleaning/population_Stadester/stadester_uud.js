@@ -1,6 +1,8 @@
 //Initialise functions
 {
   if (!global.population_Stadester_uud) global.population_Stadester_uud = {};
+  if (!global.population_Stadester_config && typeof require !== "undefined")
+    try { require(path.join(__dirname, "config", "stadester_config.js")); } catch (e) {}
   if (!global.cubic_spline) try { global.cubic_spline = require("cubic-spline"); } catch (e) {}
   
   /**
@@ -328,6 +330,18 @@
       return false;
     }
     
+    function isBlockedMerge(city_a, city_b) {
+      let names_a = population_Stadester_uud.getAllCityNames(city_a);
+      let names_b = population_Stadester_uud.getAllCityNames(city_b);
+      for (let i = 0; i < cannot_be_merged.length; i++) {
+        let pair_a = population_Stadester_uud.processCityName(cannot_be_merged[i].name);
+        let pair_b = population_Stadester_uud.processCityName(cannot_be_merged[i].ot_name);
+        if ((names_a.includes(pair_a) && names_b.includes(pair_b)) || (names_a.includes(pair_b) && names_b.includes(pair_a)))
+          return true;
+      }
+      return false;
+    }
+    
     let all_db_keys = Object.keys(db_configs);
     for (let i = 0; i < all_db_keys.length; i++) {
       let local_db = db_configs[all_db_keys[i]];
@@ -360,11 +374,18 @@
       
       for (let x = 0; x < all_local_cities.length; x++) {
         let local_city = local_db.data[all_local_cities[x]];
+        let has_valid_coords = Boolean(
+          local_city &&
+          Array.isArray(local_city.coords) &&
+          !isNaN(parseFloat(local_city.coords[0])) &&
+          !isNaN(parseFloat(local_city.coords[1]))
+        );
         let was_merged = [false, undefined];
         
-        if (local_city.coords) {
+        if (has_valid_coords) {
           let search_radius = Math.max(local_db.precision || 0, max_explicit_precision);
-          let cells_to_check = getGridCells(local_city.coords, search_radius + 0.5);
+          let semantic_radius = Math.max(search_radius, local_db.semantic_precision || 0);
+          let cells_to_check = getGridCells(local_city.coords, semantic_radius + 0.5);
           let candidate_keys = new Set();
           
           for (let c = 0; c < cells_to_check.length; c++) {
@@ -378,15 +399,18 @@
           
           for (let y = 0; y < candidate_array.length; y++) {
             let local_uud_city = return_obj[candidate_array[y]];
-            if (local_uud_city && local_uud_city.coords) {
+            if (local_uud_city && local_uud_city.coords && !isBlockedMerge(local_uud_city, local_city)) {
               let local_distance = population_Stadester_uud.getCoordsDistance(local_uud_city.coords, local_city.coords);
               let is_exact_name = population_Stadester_uud.checkExactNameMatch(local_uud_city, local_city);
+              let is_same_country = Boolean(local_uud_city.country && local_city.country && local_uud_city.country === local_city.country);
               let pop_check = population_Stadester_uud.isPopulationRatioValid(local_uud_city.population, local_city.population);
               let is_match = false;
               
               if (local_distance < 0.01 && (is_exact_name || pop_check.valid)) {
                 is_match = true;
               } else if (is_exact_name && local_distance <= search_radius && pop_check.valid) {
+                is_match = true;
+              } else if (is_exact_name && is_same_country && local_distance <= semantic_radius && pop_check.valid) {
                 is_match = true;
               } else if (local_db.precision && local_distance <= local_db.precision && pop_check.valid && (is_exact_name || pop_check.overlaps)) {
                 is_match = true;
@@ -396,7 +420,9 @@
                 let score = 0;
                 if (is_exact_name) score += 10000;
                 if (local_distance < 0.01) score += 5000;
-                score += (1.0 - (local_distance/Math.max(0.01, search_radius)))*1000;
+                if (local_distance <= search_radius) score += 3000;
+                if (Boolean(local_db.is_metro) === isAgglomeration(local_uud_city)) score += 2000;
+                score += (1.0 - (local_distance/Math.max(0.01, semantic_radius)))*1000;
                 let peak = population_Stadester_uud.getPeakPopulation(local_uud_city.population);
                 score += (peak/100);
                 if (score > best_score) {
@@ -415,10 +441,19 @@
           population_Stadester_uud.mergeCityEntries(actual_city, local_city, local_db.is_metro);
           actual_city.type = all_db_keys[i];
           return_obj[actual_city.key] = actual_city;
-          if (all_local_cities[x] !== actual_city.key) delete return_obj[all_local_cities[x]];
-        } else {
+        } else if (has_valid_coords) {
+          let target_key = all_local_cities[x];
+          if (return_obj[target_key]) {
+            let suffix_idx = 1;
+            target_key = `${all_local_cities[x]}_${all_db_keys[i]}`;
+            while (return_obj[target_key]) {
+              suffix_idx++;
+              target_key = `${all_local_cities[x]}_${all_db_keys[i]}_${suffix_idx}`;
+            }
+          }
+          local_city.key = target_key;
           local_city.type = all_db_keys[i];
-          return_obj[all_local_cities[x]] = local_city;
+          return_obj[target_key] = local_city;
           addToGrid(local_city);
         }
       }
@@ -799,6 +834,10 @@
       if (stadester_obj["Washington-United States"])
         stadester_obj["Washington-United States"].coords = [38.906727075772245, -77.0366352170292];
       
+      //Aachen, Germany geolocation fix (Buringh raw coords point to Bergisch Gladbach)
+      if (stadester_obj["Aachen-Germany"])
+        stadester_obj["Aachen-Germany"].coords = [50.7753455, 6.0838868];
+      
       //Lamphun, Thailand geolocation fix
       if (stadester_obj["Lamphun-Thailand"])
         stadester_obj["Lamphun-Thailand"].coords = [18.5744357, 99.00369719999999];
@@ -1017,33 +1056,27 @@
     //2. Load historical Stadestér dataset
     if (!stadester_obj) {
       stadester_candidates = [
-        "E:/Active Projects/Project 2136 - Stadestér/input/uud/stadester.json",
+        options.stadester_file,
         path.join(raw_folder, "uud", "stadester.json"),
         path.join(raw_folder, "uud", "stadester_areas.json"),
+        "E:/Active Projects/Project 2136 - Stadestér/input/uud/stadester.json",
         "E:/Active Projects/Project 2136 - Stadestér/output/stadester.json"
       ];
-      let best_candidate_obj = null;
-      let chosen_candidate_path = "";
-      let max_candidate_cities = 0;
       
       for (let i = 0; i < stadester_candidates.length; i++) {
         if (stadester_candidates[i] && fs.existsSync(stadester_candidates[i])) {
           try {
             let candidate_data = JSON.parse(fs.readFileSync(stadester_candidates[i], "utf8"));
             let candidate_count = Object.keys(candidate_data).length;
-            if (candidate_count > max_candidate_cities) {
-              best_candidate_obj = candidate_data;
-              chosen_candidate_path = stadester_candidates[i];
-              max_candidate_cities = candidate_count;
+            if (candidate_count > 0) {
+              stadester_obj = candidate_data;
+              console.log(`- Loaded historical Stadestér cities from ${stadester_candidates[i]} (${candidate_count} cities).`);
+              break;
             }
           } catch (e) {
             console.warn(`- Failed to read Stadestér cities from ${stadester_candidates[i]}:`, e);
           }
         }
-      }
-      if (best_candidate_obj) {
-        stadester_obj = best_candidate_obj;
-        console.log(`- Loaded historical Stadestér cities from ${chosen_candidate_path} (${max_candidate_cities} cities).`);
       }
     }
     

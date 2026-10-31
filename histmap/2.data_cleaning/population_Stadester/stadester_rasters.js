@@ -1,6 +1,8 @@
 //Initialise functions
 {
   if (!global.population_Stadester_rasters) global.population_Stadester_rasters = {};
+  if (!global.population_Stadester_config && typeof require !== "undefined")
+    try { require(path.join(__dirname, "config", "stadester_config.js")); } catch (e) {}
   
   /**
    * Converts decimal coordinates [lat, lng] to equirectangular pixel coordinates.
@@ -184,9 +186,18 @@
       substrata_raster = GeoPNG.loadNumberRasterImage(substrata_file_path, { format: "float32" });
     
     if (!stadester_obj) {
-      let dump_path = path.join(`${h1}/population_Stadester/uud/`, "stadester.json");
-      if (fs.existsSync(dump_path))
-        stadester_obj = JSON.parse(fs.readFileSync(dump_path, "utf8"));
+      let dump_path = options.stadester_file_path || path.join(`${h1}/population_Stadester/uud/`, "stadester.json");
+      if (fs.existsSync(dump_path)) {
+        let dump_mtime = fs.statSync(dump_path).mtimeMs;
+        if (global._cached_stadester_obj && global._cached_stadester_path === dump_path && global._cached_stadester_mtime === dump_mtime) {
+          stadester_obj = global._cached_stadester_obj;
+        } else {
+          stadester_obj = JSON.parse(fs.readFileSync(dump_path, "utf8"));
+          global._cached_stadester_obj = stadester_obj;
+          global._cached_stadester_path = dump_path;
+          global._cached_stadester_mtime = dump_mtime;
+        }
+      }
     }
     
     if (!stadester_obj) return output_file_path;
@@ -292,7 +303,6 @@
   };
   
   /**
-  /**
    * Caches and returns a flat pixel index to ISO3 country code mapping.
    * @alias population_Stadester_rasters.getPixelToGeocodeMapping
    * 
@@ -332,6 +342,43 @@
       let b = i*4;
       let rgb = `${geocode_img.data[b]},${geocode_img.data[b + 1]},${geocode_img.data[b + 2]}`;
       pixel_map[i] = rgb_to_iso3[rgb] || null;
+    }
+    
+    //Assign 2-pixel coastal fringe so harbour/island cities map to nearest land ISO3 geocode
+    let best_dist_sq = new Uint8Array(4320*2160);
+    let land_map = pixel_map.slice();
+    best_dist_sq.fill(255);
+    for (let i = 0; i < 2160; i++) {
+      let row_offset = i*4320;
+      for (let x = 0; x < 4320; x++) {
+        let idx = row_offset + x;
+        let iso = land_map[idx];
+        if (!iso) continue;
+        
+        let left_iso = land_map[row_offset + ((x + 4319) % 4320)];
+        let right_iso = land_map[row_offset + ((x + 1) % 4320)];
+        let up_iso = (i > 0) ? land_map[idx - 4320] : iso;
+        let down_iso = (i < 2159) ? land_map[idx + 4320] : iso;
+        if (left_iso && right_iso && up_iso && down_iso) continue;
+        
+        for (let y = -2; y <= 2; y++) {
+          let ny = i + y;
+          if (ny < 0 || ny >= 2160) continue;
+          let n_row = ny*4320;
+          for (let z = -2; z <= 2; z++) {
+            if (y === 0 && z === 0) continue;
+            let nx = (x + z + 4320) % 4320;
+            let n_idx = n_row + nx;
+            if (!land_map[n_idx]) {
+              let dist_sq = y*y + z*z;
+              if (dist_sq < best_dist_sq[n_idx]) {
+                best_dist_sq[n_idx] = dist_sq;
+                pixel_map[n_idx] = iso;
+              }
+            }
+          }
+        }
+      }
     }
     
     global._cached_stadester_pixel_to_geocode = pixel_map;
@@ -504,7 +551,9 @@
     
     //Compute per-country scalars:
     //If U < S: Preserve exact urban ground truth from stadester.json and dasymetrically calibrate rural: TargetRural = S - U
-    //If U >= S: Urban alone meets or exceeds national baseline S; scale (urban + rural) proportionally by S / (U + RR) to eliminate zeroes
+    //If U >= S: Preserve exact urban ground truth (scalar_u = 1) and maintain a minimal rural hinterland floor so cities are never overridden downward
+    let min_rural_ratio = (options.min_rural_hinterland_ratio !== undefined) ?
+      options.min_rural_hinterland_ratio : 0.05;
     if (pixel_to_geocode) {
       let all_countries = Object.keys(country_sub);
       for (let i = 0; i < all_countries.length; i++) {
@@ -518,10 +567,9 @@
           country_scalar_r[c] = (raw_r > 0) ? (target_r/raw_r) : 0;
           country_scalar_u[c] = 1;
         } else {
-          let combined = u + raw_r;
-          let sc = (combined > 0) ? (s/combined) : 1;
-          country_scalar_r[c] = sc;
-          country_scalar_u[c] = sc;
+          let target_r = Math.min(raw_r, u*min_rural_ratio);
+          country_scalar_r[c] = (raw_r > 0) ? (target_r/raw_r) : 0;
+          country_scalar_u[c] = 1;
         }
       }
     }
@@ -531,10 +579,9 @@
       fallback_scalar_r = (global_raw_rur > 0) ? (fallback_target_r/global_raw_rur) : 1;
       fallback_scalar_u = 1;
     } else {
-      let global_combined = global_urb + global_raw_rur;
-      let sc = (global_combined > 0) ? (global_sub/global_combined) : 1;
-      fallback_scalar_r = sc;
-      fallback_scalar_u = sc;
+      let fallback_target_r = Math.min(global_raw_rur, global_urb*min_rural_ratio);
+      fallback_scalar_r = (global_raw_rur > 0) ? (fallback_target_r/global_raw_rur) : 0;
+      fallback_scalar_u = 1;
     }
     
     //Pass 2: Apply scalars and construct strictly consistent Total = Urban + Rural
@@ -682,6 +729,8 @@
     
     //Declare local instance variables
     let default_concurrency = (typeof require !== "undefined") ? Math.min(8, require("os").cpus().length || 4) : 4;
+    let worker_options = Object.assign({}, options);
+    delete worker_options.stadester_obj;
     
     //Return statement
     return GeoPNG.processTimeseriesParallel({
@@ -702,7 +751,7 @@
         }
         return {
           type: "stadester_base_raster",
-          options: options,
+          options: worker_options,
           year: year
         };
       },
@@ -795,18 +844,6 @@
       items: years,
       name: "Stadester Population Rasters",
       task_generator: (year) => {
-        if (year < -3000) {
-          let pop_folder = options.input_popc_folder || `${h2}/population_Stadester/stadester_population_rasters/`;
-          let output_file_path = path.join(pop_folder, `stadester_population_${year}.png`);
-          let substrata_file_path = population_Stadester_rasters.getSubstrataRasterPath(year, options);
-          if (fs.existsSync(substrata_file_path)) {
-            return {
-              type: "copy",
-              from_file_path: substrata_file_path,
-              output_file_path: output_file_path
-            };
-          }
-        }
         return {
           type: "stadester_population_raster",
           options: options,

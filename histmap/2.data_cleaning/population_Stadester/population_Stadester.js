@@ -5,6 +5,8 @@
   if (typeof require !== "undefined") {
     let cur_dir = (typeof __dirname !== "undefined") ? __dirname : path.resolve(`${global.h2 || "./histmap/2.data_cleaning/"}/population_Stadester/`);
     try {
+      if (!global.population_Stadester_config && fs.existsSync(path.join(cur_dir, "config", "stadester_config.js")))
+        require(path.join(cur_dir, "config", "stadester_config.js"));
       if (!global.population_Stadester_uud && fs.existsSync(path.join(cur_dir, "stadester_uud.js")))
         require(path.join(cur_dir, "stadester_uud.js"));
       if (!global.population_Stadester_density && fs.existsSync(path.join(cur_dir, "stadester_density.js")))
@@ -45,6 +47,7 @@
     static file_stadester_areas = `${this.raw_folder}uud/stadester_areas.json`;
     static file_stadester_final = `${this.raw_folder}uud/stadester.json`;
     static file_stadester_ghsl = `${this.raw_folder}uud/stadester_ghsl.json`;
+    static file_stadester_vis = `${(typeof h5 !== "undefined") ? h5 : "./histmap/5.data_visualisation/"}stadester/stadester_1.1.json`;
     
     static antiquity_years = Array.from({ length: 101 }, (_, i) => -10000 + i * 100);
     static urban_antiquity_years = Array.from({ length: 31 }, (_, i) => -3000 + i * 100);
@@ -133,6 +136,11 @@
       stadester_obj = population_Stadester_uud.fixStadesterErrors(stadester_obj);
       fs.writeFileSync(this.file_processed_stadester, JSON.stringify(stadester_obj, null, 2));
       console.log(`- Saved processed Stadestér dataset to ${this.file_processed_stadester}.`);
+      
+      if (!options.do_not_sync_vis && this.file_stadester_vis && fs.existsSync(path.dirname(path.resolve(this.file_stadester_vis)))) {
+        fs.writeFileSync(this.file_stadester_vis, JSON.stringify(stadester_obj, null, 2));
+        console.log(`- Synchronised processed Stadestér visualisation dataset to ${this.file_stadester_vis}.`);
+      }
       
       //Return statement
       return stadester_obj;
@@ -275,6 +283,7 @@
       
       //Return statement
       return population_Stadester_rasters.generateRuralRastersParallel(years, {
+        input_popc_folder: this.input_popc_folder,
         input_rurc_folder: this.input_rurc_folder,
         input_urbc_folder: this.input_urbc_folder,
         ...options
@@ -454,8 +463,12 @@
       
       if (!options.exclude.includes("F")) await this.F_generateBaseRasters(options);
       if (!options.exclude.includes("G")) await this.G_generateUrbanRasters(options);
-      if (!options.exclude.includes("H")) await this.H_generateRuralRasters(options);
-      if (!options.exclude.includes("I")) await this.I_generatePopulationRasters(options);
+      if (!options.exclude.includes("I")) {
+        //reconcileStadesterDemographics outputs synchronised Urban, Rural and Total Population rasters in one pass
+        await this.I_generatePopulationRasters(options);
+      } else if (!options.exclude.includes("H")) {
+        await this.H_generateRuralRasters(options);
+      }
       if (!options.exclude.includes("J")) await this.J_prepareIntermediates(options);
       
       console.log(`- Successfully completed population_Stadester pipeline.`);

@@ -1,6 +1,8 @@
 //Initialise functions
 {
   if (!global.population_Stadester_density) global.population_Stadester_density = {};
+  if (!global.population_Stadester_config && typeof require !== "undefined")
+    try { require(path.join(__dirname, "config", "stadester_config.js")); } catch (e) {}
   
   /**
    * Calculates global mean urban density across years 1800-2000 from Angel decadal rates.

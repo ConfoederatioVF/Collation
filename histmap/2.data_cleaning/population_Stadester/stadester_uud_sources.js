@@ -1,6 +1,8 @@
 //Initialise functions
 {
   if (!global.population_Stadester_uud) global.population_Stadester_uud = {};
+  if (!global.population_Stadester_config && typeof require !== "undefined")
+    try { require(path.join(__dirname, "config", "stadester_config.js")); } catch (e) {}
   
   /**
    * Normalises and cleans city names for fuzzy semantic matching.
@@ -401,26 +403,35 @@
     //Declare local instance variables
     let buringh_file = path.join(raw_folder, "buringh", "European urban population, 700 - 2000.txt");
     let buringh_array = File.loadCSVAsArray(buringh_file, { delimiter: "@", utf: "utf16le" });
-    let header = buringh_array[0];
+    let coord_overrides = (global.population_Stadester_config && global.population_Stadester_config.buringh_coord_overrides) ?
+      global.population_Stadester_config.buringh_coord_overrides : {};
+    let header = (buringh_array.length > 0 && Array.isArray(buringh_array[0])) ? buringh_array[0] : null;
     let return_obj = {};
+    let start_index = (header) ? 1 : 0;
     
-    for (let i = 1; i < buringh_array.length; i++) {
+    for (let i = start_index; i < buringh_array.length; i++) {
       let local_city = buringh_array[i];
       let local_obj = {};
-      for (let x = 0; x < local_city.length; x++)
-        local_obj[header[x]] = local_city[x];
+      
+      if (Array.isArray(local_city)) {
+        for (let x = 0; x < local_city.length; x++)
+          local_obj[header[x]] = local_city[x];
+      } else if (local_city && typeof local_city === "object") {
+        local_obj = local_city;
+      }
       
       if (!local_obj.city) continue;
       let local_country = local_obj.country;
       let local_key = `${local_obj.city}-${local_obj.country}`;
       
       if (!return_obj[local_key]) {
+        let parsed_coords = coord_overrides[local_key] ? coord_overrides[local_key].slice() : [
+          parseFloat(String(local_obj["latitude in degrees"]).replace(",", ".")),
+          parseFloat(String(local_obj["longitude in degrees"]).replace(",", "."))
+        ];
         return_obj[local_key] = {
           name: local_obj.city,
-          coords: [
-            parseFloat(String(local_obj["latitude in degrees"]).replace(",", ".")),
-            parseFloat(String(local_obj["longitude in degrees"]).replace(",", "."))
-          ],
+          coords: parsed_coords,
           country: local_country,
           other_names: local_obj["synonyms and historical names"] ?
             local_obj["synonyms and historical names"].split(",").map(item => item.trim()) : [],
@@ -430,7 +441,7 @@
       }
       
       let actual_city = return_obj[local_key];
-      let local_population = parseFloat(local_obj["inhabitants in 000-s"]);
+      let local_population = parseFloat(String(local_obj["inhabitants in 000-s"]).replace(",", "."));
       if (local_population > 0 && local_obj.year)
         actual_city.population[local_obj.year] = local_population*1000;
     }
@@ -456,13 +467,17 @@
     
     //Declare local instance variables
     let actual_return_obj = {};
+    let all_cities_keys;
+    let all_return_keys;
+    let coord_overrides = (global.population_Stadester_config && global.population_Stadester_config.devries_coord_overrides) ?
+      global.population_Stadester_config.devries_coord_overrides : {};
     let devries_cities_file = path.join(raw_folder, "devries", "europop.csv");
     let devries_cities = File.loadCSVAsJSON(devries_cities_file, { mode: "vertical" });
     let devries_coords_file = path.join(raw_folder, "devries", "city_coords.csv");
     let devries_coords = File.loadCSVAsArray(devries_coords_file);
     let return_obj = {};
     
-    let all_cities_keys = Object.keys(devries_cities);
+    all_cities_keys = Object.keys(devries_cities);
     for (let i = 0; i < all_cities_keys.length; i++) {
       let local_city = devries_cities[all_cities_keys[i]];
       return_obj[all_cities_keys[i]] = {
@@ -474,7 +489,7 @@
       if (local_city.year) {
         for (let x = 0; x < local_city.year.length; x++) {
           if (local_city.population && local_city.population[x] && local_city.population[x] !== "NA") {
-            let local_population = parseInt(local_city.population[x]*1000);
+            let local_population = parseInt(parseFloat(local_city.population[x])*1000);
             if (local_population > 0)
               actual_city.population[local_city.year[x]] = local_population;
           }
@@ -483,16 +498,25 @@
       if (local_city.region) actual_city.country = local_city.region[0];
     }
     
-    for (let i = 1; i < devries_coords.length; i++) {
+    for (let i = 0; i < devries_coords.length; i++) {
       let local_value = devries_coords[i];
-      let local_lat = parseFloat(local_value[1]);
-      let local_lng = parseFloat(local_value[0]);
-      let local_key = local_value[2];
-      if (return_obj[local_key])
-        return_obj[local_key].coords = [local_lat, local_lng];
+      if (!local_value) continue;
+      
+      let local_key = Array.isArray(local_value) ? local_value[2] : local_value.city;
+      let local_lat = parseFloat(Array.isArray(local_value) ? local_value[1] : local_value.lat);
+      let local_lng = parseFloat(Array.isArray(local_value) ? local_value[0] : local_value.lon);
+      
+      if (local_key && return_obj[local_key] && !isNaN(local_lat) && !isNaN(local_lng)) {
+        let override_key = `${local_key}-${return_obj[local_key].country}`;
+        if (coord_overrides[override_key]) {
+          return_obj[local_key].coords = coord_overrides[override_key].slice();
+        } else {
+          return_obj[local_key].coords = [local_lat, local_lng];
+        }
+      }
     }
     
-    let all_return_keys = Object.keys(return_obj);
+    all_return_keys = Object.keys(return_obj);
     for (let i = 0; i < all_return_keys.length; i++) {
       let local_city = return_obj[all_return_keys[i]];
       let local_city_name = population_Stadester_uud.regulariseCityName(local_city.key);
