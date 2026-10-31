@@ -1,4 +1,5 @@
 global.landuse_HYDE = class {
+	static _cache_mcevedy_annual_sums;
 	static _cache_mcevedy_obj;
 	static bf = `${h2}/landuse_HYDE/`;
 	static hyde_dictionary = {
@@ -358,9 +359,19 @@ global.landuse_HYDE = class {
 		});
 		Object.iterate(country_stats, (local_key, local_value) => {
 			let country_raw = mcevedy_obj[local_key];
-			if (country_raw?.population && country_raw.population[year.toString()] !== undefined) {
-				let local_mcevedy_population = country_raw.population[year.toString()];
-				
+			if (!country_raw?.population) {
+				local_value.scalar = 1;
+				return;
+			}
+			
+			let local_mcevedy_population;
+			if (country_raw.population[year.toString()] !== undefined) {
+				local_mcevedy_population = country_raw.population[year.toString()];
+			} else if (country_raw.is_initially_uninhabited && year < country_raw.min_year) {
+				local_mcevedy_population = 0;
+			}
+			
+			if (local_mcevedy_population !== undefined) {
 				if (local_mcevedy_population > 0 && local_value.hyde_population > 0) {
 					local_value.scalar = Math.returnSafeNumber(local_mcevedy_population/local_value.hyde_population, 1);
 				} else if (local_mcevedy_population === 0) {
@@ -421,67 +432,150 @@ global.landuse_HYDE = class {
 		await new Promise((resolve) => setImmediate(resolve));
 	};
 	
-  static async C_getMcEvedyObject (arg0_options) {
-    //Convert from parameters
-    let options = (arg0_options) ? arg0_options : {};
+	/**
+	 * Retrieves and formats McEvedy data, scaling figures from millions into exact base units.
+	 * Preserves precise annual figures and only falls back to cubic spline interpolation for
+	 * unrecorded intermediate years within a country's historical domain.
+	 * @alias landuse_HYDE.C_getMcEvedyObject
+	 * 
+	 * @param {Object} [arg0_options]
+	 *  @param {boolean} [arg0_options.force_reload=false]
+	 * 
+	 * @returns {Object}
+	 */
+	static async C_getMcEvedyObject (arg0_options) {
+		//Convert from parameters
+		let options = (arg0_options) ? arg0_options : {};
 
-    if (!options.force_reload && this._cache_mcevedy_obj) return this._cache_mcevedy_obj; //Internal guard clause if this._cache_mcevedy_obj has already been calculated
+		//Guard clause if already calculated
+		if (!options.force_reload && this._cache_mcevedy_obj)
+			return this._cache_mcevedy_obj;
 
-    //Declare local instance variables
-    let all_hyde_years = [];
-    let hyde_years = this.hyde_years;
-    let mcevedy_obj = JSON.parse(fs.readFileSync(this.input_mcevedy_json, "utf8"));
-
-    //Populate all_hyde_years
-    all_hyde_years = all_hyde_years.concat(hyde_years);
-    all_hyde_years = Array.sort(all_hyde_years, { mode: "ascending" });
-
-    //Perform polynomial interpolation on McEvedy data
-    Object.iterate(mcevedy_obj, (local_key, local_value) => {
-      if (local_value.population) {
-        //Iterate over local_value.population to convert it from millions to base units
-        local_value.population = Object.multiply(local_value.population, 1000000);
-        let values = Object.values(local_value.population).map((value) => value);
-        let years = Object.keys(local_value.population).map((year) => parseInt(year));
-
-        //Ensure values; years are sorted properly
-        let sorted_indices = years.map((_, i) => i).sort((a, b) => years[a] - years[b]);
-        years = sorted_indices.map((i) => years[i]);
-        values = sorted_indices.map((i) => values[i]);
-
-        //Iterate over all_hyde_years and perform interpolation if within the given domain
-        if (values.length > 0 && years.length > 0)
-          for (let x = 0; x < all_hyde_years.length; x++)
-            if (all_hyde_years[x] >= years[0] && all_hyde_years[x] <= years[years.length - 1])
-              local_value.population[all_hyde_years[x]] = Math.ceil(
-                Math.returnSafeNumber(Array.cubicSplineInterpolation(years, values, all_hyde_years[x]))
-              );
-
-        //Iterate over all hyde_years and set to 0 if first local_country.population year is <= 1
-        let first_population_value = local_value.population[years[0]];
-
-        if (first_population_value <= 1)
-          for (let x = 0; x < all_hyde_years.length; x++)
-            if (all_hyde_years[x] <= years[0])
-              local_value.population[all_hyde_years[x]] = 0;
-
-        //Remove any McEvedy data projected after 1975
-        Object.iterate(local_value.population, (local_subkey) => {
-          if (parseInt(local_subkey) > 1975)
-            delete local_value.population[local_subkey];
-        });
-      }
-    });
-    this._cache_mcevedy_obj = mcevedy_obj;
-
-    //Return statement
-    return mcevedy_obj;
-  }
-	
-	static async C_clampHYDERastersToMcEvedy () {
 		//Declare local instance variables
-		let hyde_years = this.hyde_years.filter(y => y <= 1500);
-		let mcevedy_obj = await this.C_getMcEvedyObject();
+		let all_hyde_years = Array.sort(this.hyde_years.slice(), { mode: "ascending" });
+		let mcevedy_obj = JSON.parse(fs.readFileSync(this.input_mcevedy_json, "utf8"));
+
+		//Process McEvedy data
+		Object.iterate(mcevedy_obj, (local_key, local_value) => {
+			if (local_value.population) {
+				let raw_years = Object.keys(local_value.population).map((year) => parseInt(year));
+				let sorted_indices = raw_years.map((_, i) => i).sort((a, b) => raw_years[a] - raw_years[b]);
+				let years = sorted_indices.map((i) => raw_years[i]);
+				let values = [];
+
+				//Convert population to integer base units, preserving exact annual sums
+				for (let i = 0; i < years.length; i++) {
+					let yr_str = years[i].toString();
+					let base_units = Math.round(local_value.population[yr_str]*1000000);
+					local_value.population[yr_str] = base_units;
+					values.push(base_units);
+				}
+
+				//Establish domain metadata
+				let first_population_value = (values.length > 0) ? values[0] : 0;
+				let is_initially_uninhabited = (first_population_value <= 1);
+				let max_year = (years.length > 0) ? years[years.length - 1] : 1975;
+				let min_year = (years.length > 0) ? years[0] : 0;
+
+				local_value.is_initially_uninhabited = is_initially_uninhabited;
+				local_value.max_year = max_year;
+				local_value.min_year = min_year;
+
+				//Interpolate only missing HYDE years within domain
+				if (values.length > 1 && years.length > 1)
+					for (let x = 0; x < all_hyde_years.length; x++) {
+						let hyde_yr = all_hyde_years[x];
+						let hyde_yr_str = hyde_yr.toString();
+
+						if (hyde_yr >= min_year && hyde_yr <= max_year) {
+							if (local_value.population[hyde_yr_str] === undefined)
+								local_value.population[hyde_yr_str] = Math.round(
+									Math.returnSafeNumber(Array.cubicSplineInterpolation(years, values, hyde_yr))
+								);
+						}
+					}
+
+				//Set uninhabited years before initial discovery/settlement to 0
+				if (is_initially_uninhabited)
+					for (let x = 0; x < all_hyde_years.length; x++)
+						if (all_hyde_years[x] <= min_year)
+							local_value.population[all_hyde_years[x].toString()] = 0;
+
+				//Remove any McEvedy projections beyond 1975
+				Object.iterate(local_value.population, (local_subkey) => {
+					if (parseInt(local_subkey) > 1975)
+						delete local_value.population[local_subkey];
+				});
+			}
+		});
+
+		this._cache_mcevedy_obj = mcevedy_obj;
+
+		//Return statement
+		return mcevedy_obj;
+	}
+	
+	/**
+	 * Computes the global sum across all countries in McEvedy data for every recorded year.
+	 * @alias landuse_HYDE.getMcEvedyAnnualSums
+	 * 
+	 * @param {Object} [arg0_options]
+	 *  @param {boolean} [arg0_options.force_reload=false]
+	 *  @param {boolean} [arg0_options.in_millions=false]
+	 * 
+	 * @returns {Object} { [year]: population }
+	 */
+	static async getMcEvedyAnnualSums (arg0_options) {
+		//Convert from parameters
+		let options = (arg0_options) ? arg0_options : {};
+
+		//Guard clause
+		if (!options.force_reload && this._cache_mcevedy_annual_sums) {
+			if (options.in_millions)
+				return Object.operate(this._cache_mcevedy_annual_sums, "n/1000000");
+			return this._cache_mcevedy_annual_sums;
+		}
+
+		//Declare local instance variables
+		let annual_sums = {};
+		let mcevedy_obj = await this.C_getMcEvedyObject(options);
+
+		//Iterate over all countries and sum annual populations
+		Object.iterate(mcevedy_obj, (local_key, local_value) => {
+			if (local_value?.population)
+				Object.iterate(local_value.population, (year_str, pop_val) => {
+					let yr = parseInt(year_str);
+					if (yr <= 1975)
+						annual_sums[year_str] = (annual_sums[year_str] || 0) + pop_val;
+				});
+		});
+
+		annual_sums = Object.sortKeys(annual_sums, { type: "ascending" });
+		this._cache_mcevedy_annual_sums = annual_sums;
+
+		//Return statement
+		if (options.in_millions)
+			return Object.operate(annual_sums, "n/1000000");
+		return annual_sums;
+	}
+	
+	/**
+	 * Clamps HYDE population rasters to McEvedy country totals.
+	 * @alias landuse_HYDE.C_clampHYDERastersToMcEvedy
+	 * 
+	 * @param {Object} [arg0_options]
+	 *  @param {Object} [arg0_options.mcevedy_obj]
+	 *  @param {Array<number>} [arg0_options.years]
+	 */
+	static async C_clampHYDERastersToMcEvedy (arg0_options) {
+		//Convert from parameters
+		let options = (arg0_options) ? arg0_options : {};
+
+		//Declare local instance variables
+		let hyde_years = (options.years) ?
+			options.years : this.hyde_years.filter(y => y <= 1500);
+		let mcevedy_obj = (options.mcevedy_obj) ?
+			options.mcevedy_obj : await this.C_getMcEvedyObject(options);
 		
 		await GeoPNG.processTimeseriesParallel({
 			items: hyde_years,
@@ -489,16 +583,29 @@ global.landuse_HYDE = class {
 			name: "landuse_HYDE C_clampHYDERastersToMcEvedy",
 			handler: async (year) => {
 				await this.C_clampHYDEToMcEvedy(year, {
+					...options,
 					mcevedy_obj: mcevedy_obj
 				});
 			}
 		});
 	}
 	
-	static async D_scaleRastersToGlobalEstimates () {
+	/**
+	 * Scales rasters to global population estimates derived from scholarly historical datasets.
+	 * @alias landuse_HYDE.D_scaleRastersToGlobalEstimates
+	 * 
+	 * @param {Object} [arg0_options]
+	 *  @param {Array<number>} [arg0_options.years]
+	 *  @param {Object} [arg0_options.world_pop_obj]
+	 */
+	static async D_scaleRastersToGlobalEstimates (arg0_options) {
+		//Convert from parameters
+		let options = (arg0_options) ? arg0_options : {};
+
 		//Declare local instance variables
-		let hyde_years = this.hyde_years;
-		let world_pop_obj = population_Global.A_getWorldPopulationObject();
+		let hyde_years = (options.years) ? options.years : this.hyde_years;
+		let world_pop_obj = (options.world_pop_obj) ?
+			options.world_pop_obj : population_Global.A_getWorldPopulationObject(options);
 		
 		await GeoPNG.processTimeseriesParallel({
 			items: hyde_years,
@@ -542,8 +649,8 @@ global.landuse_HYDE = class {
 		//2. Interpolate missing years
 		if (!options.exclude.includes("B")) await this.B_interpolateHYDEYearRasters();
 		//3. Clamp to McEvedy
-		if (!options.exclude.includes("C")) await this.C_clampHYDERastersToMcEvedy();
+		if (!options.exclude.includes("C")) await this.C_clampHYDERastersToMcEvedy(options);
 		//4. Clamp to global population estimates
-		if (!options.exclude.includes("D")) await this.D_scaleRastersToGlobalEstimates();
+		if (!options.exclude.includes("D")) await this.D_scaleRastersToGlobalEstimates(options);
 	}
 };

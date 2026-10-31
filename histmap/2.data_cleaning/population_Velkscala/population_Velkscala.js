@@ -170,15 +170,90 @@
     }
 
     /**
+     * Reads the global raster for a specific year and returns its sum in base units.
+     * @alias population_Velkscala.getGlobalPopulationSum
+     * 
+     * @param {number|string} arg0_year
+     * 
+     * @returns {number|null} Sum of all cells in persons, or null if raster is not found.
+     */
+    static getGlobalPopulationSum (arg0_year) {
+      //Convert from parameters
+      let year = parseInt(arg0_year);
+
+      //Declare local instance variables
+      let raster_path = path.join(this.input_popc_folder, `population_${year}.png`);
+
+      //Guard clause
+      if (!fs.existsSync(raster_path)) return null;
+
+      //Return statement
+      return Math.round(GeoPNG.getImageSum(raster_path, { format: "float32" }));
+    }
+
+    /**
+     * Aggregates national population totals from the Velkscala population raster for a given year.
+     * @alias population_Velkscala.getNationalPopulationsForYear
+     * 
+     * @param {number|string} arg0_year
+     * @param {Object} [arg1_options]
+     *  @param {Object} [arg1_options.pixel_to_geocode]
+     * 
+     * @returns {Object|null} { [iso_code]: population }
+     */
+    static getNationalPopulationsForYear (arg0_year, arg1_options) {
+      //Convert from parameters
+      let year = parseInt(arg0_year);
+      let options = (arg1_options) ? arg1_options : {};
+
+      //Declare local instance variables
+      let raster_path = path.join(this.input_popc_folder, `population_${year}.png`);
+      let pixel_to_geocode = (options.pixel_to_geocode) ?
+        options.pixel_to_geocode : ((typeof population_Stadester_rasters !== "undefined") ?
+          population_Stadester_rasters.getPixelToGeocodeMapping() : null);
+
+      //Guard clauses
+      if (!fs.existsSync(raster_path) || !pixel_to_geocode) return null;
+
+      let img = GeoPNG.loadNumberRasterImage(raster_path, { format: "float32" });
+      let national_pops = {};
+      let total_pixels = img.width*img.height;
+
+      for (let i = 0; i < total_pixels; i++) {
+        let code = pixel_to_geocode[i];
+        if (code)
+          national_pops[code] = (national_pops[code] || 0) + img.data[i];
+      }
+
+      Object.iterate(national_pops, (code, val) => {
+        national_pops[code] = Math.round(val);
+      });
+
+      //Return statement
+      return Object.sortKeys(national_pops, { type: "ascending" });
+    }
+
+    /**
      * Step D: Validates timeseries continuity and boundary stability at 1 AD.
      * @param {Object} [arg0_options]
+     *  @param {boolean} [arg0_options.validate_sums=true] - Whether to check boundary continuity and sample raster sums.
+     * 
      * @returns {Object} Validation summary
      */
     static D_validateCompositing (arg0_options) {
+      //Convert from parameters
       let options = (arg0_options) ? arg0_options : {};
+
+      //Declare local instance variables
       let all_years = this.all_years;
       let missing_files = [];
-      let report = { total_timesteps: all_years.length, missing: [] };
+      let report = {
+        boundary_1ad_continuity: null,
+        missing: [],
+        sample_sums: {},
+        total_timesteps: all_years.length
+      };
+      let validate_sums = (options.validate_sums !== undefined) ? options.validate_sums : true;
 
       console.log(`[population_Velkscala] Step D: Validating completeness across ${all_years.length} timesteps ...`);
       for (let i = 0; i < all_years.length; i++) {
@@ -194,7 +269,35 @@
         console.log(`[population_Velkscala] Step D: All ${all_years.length} timesteps verified present.`);
       }
 
+      //Check 1 AD boundary continuity and sample sums
+      if (validate_sums && typeof GeoPNG !== "undefined") {
+        let sum_0 = this.getGlobalPopulationSum(0);
+        let sum_100 = this.getGlobalPopulationSum(100);
+
+        if (sum_0 !== null && sum_100 !== null && sum_0 > 0) {
+          let ratio = sum_100 / sum_0;
+          let is_continuous = (ratio >= 0.4 && ratio <= 2.5);
+          report.boundary_1ad_continuity = {
+            is_continuous: is_continuous,
+            ratio: Number(ratio.toFixed(4)),
+            sum_0_ad: sum_0,
+            sum_100_ad: sum_100
+          };
+          console.log(`[population_Velkscala] Step D: 1 AD Boundary check - 0 AD: ${sum_0.toLocaleString()}, 100 AD: ${sum_100.toLocaleString()} (Ratio: ${ratio.toFixed(4)}, Continuous: ${is_continuous})`);
+        }
+
+        //Sample benchmark years across antiquity and post-1AD
+        let benchmark_years = [-10000, -5000, -1000, 0, 100, 500, 1000, 1500, 1750, 1900, 1975, 2025];
+        for (let b = 0; b < benchmark_years.length; b++) {
+          let b_yr = benchmark_years[b];
+          let b_sum = this.getGlobalPopulationSum(b_yr);
+          if (b_sum !== null) report.sample_sums[b_yr.toString()] = b_sum;
+        }
+      }
+
       fs.writeFileSync(path.join(this.config_folder, "compositing_report.json"), JSON.stringify(report, null, 2));
+
+      //Return statement
       return report;
     }
 
