@@ -421,59 +421,62 @@ global.landuse_HYDE = class {
 		await new Promise((resolve) => setImmediate(resolve));
 	};
 	
-	static async C_getMcEvedyObject () {
-		if (this._cache_mcevedy_obj) return this._cache_mcevedy_obj; //Internal guard clause if this._cache_mcevedy_obj has already been calculated
-		
-		//Declare local instance variables
-		let all_hyde_years = [];
-		let hyde_years = this.hyde_years;
-		let mcevedy_obj = JSON.parse(fs.readFileSync(this.input_mcevedy_json, "utf8"));
-		
-		//Populate all_hyde_years
-		all_hyde_years = all_hyde_years.concat(hyde_years);
-		all_hyde_years = Array.sort(all_hyde_years, { mode: "ascending" });
-		
-		//Perform polynomial interpolation on McEvedy data
-		Object.iterate(mcevedy_obj, (local_key, local_value) => {
-			if (local_value.population) {
-				//Iterate over local_value.population to convert it from millions to base units
-				local_value.population = Object.multiply(local_value.population, 1000000);
-				let values = Object.values(local_value.population).map((value) => value);
-				let years = Object.keys(local_value.population).map((year) => parseInt(year));
-				
-				//Ensure values; years are sorted properly
-				let sorted_indices = years.map((_, i) => i).sort((a, b) => years[a] - years[b]);
-					years = sorted_indices.map(i => years[i]);
-					values = sorted_indices.map(i => values[i]);
-				
-				//Iterate over all_hyde_years and perform interpolation if within the given domain
-				if (values.length > 0 && years.length > 0)
-					for (let x = 0; x < all_hyde_years.length; x++)
-						if (all_hyde_years[x] >= years[0] && all_hyde_years[x] <= years[years.length - 1])
-							local_value.population[all_hyde_years[x]] = Math.ceil(
-								Math.returnSafeNumber(Array.cubicSplineInterpolation(years, values, all_hyde_years[x]))
-							);
-				
-				//Iterate over all hyde_years and set to 0 if first local_country.population year is < 0.0001
-				let first_population_value = local_value.population[years[0]];
-				
-				if (first_population_value <= 1)
-					for (let x = 0; x < all_hyde_years.length; x++)
-						if (all_hyde_years[x] <= years[0])
-							local_value.population[all_hyde_years[x]] = 0;
-				
-				//Remove any McEvedy data projected after 1975
-				Object.iterate(local_value.population, (local_subkey) => {
-					if (parseInt(local_subkey) > 1975)
-						delete local_value.population[local_key];
-				});
-			}
-		});
-		this._cache_mcevedy_obj = mcevedy_obj;
-		
-		//Return statement
-		return mcevedy_obj;
-	}
+  static async C_getMcEvedyObject (arg0_options) {
+    //Convert from parameters
+    let options = (arg0_options) ? arg0_options : {};
+
+    if (!options.force_reload && this._cache_mcevedy_obj) return this._cache_mcevedy_obj; //Internal guard clause if this._cache_mcevedy_obj has already been calculated
+
+    //Declare local instance variables
+    let all_hyde_years = [];
+    let hyde_years = this.hyde_years;
+    let mcevedy_obj = JSON.parse(fs.readFileSync(this.input_mcevedy_json, "utf8"));
+
+    //Populate all_hyde_years
+    all_hyde_years = all_hyde_years.concat(hyde_years);
+    all_hyde_years = Array.sort(all_hyde_years, { mode: "ascending" });
+
+    //Perform polynomial interpolation on McEvedy data
+    Object.iterate(mcevedy_obj, (local_key, local_value) => {
+      if (local_value.population) {
+        //Iterate over local_value.population to convert it from millions to base units
+        local_value.population = Object.multiply(local_value.population, 1000000);
+        let values = Object.values(local_value.population).map((value) => value);
+        let years = Object.keys(local_value.population).map((year) => parseInt(year));
+
+        //Ensure values; years are sorted properly
+        let sorted_indices = years.map((_, i) => i).sort((a, b) => years[a] - years[b]);
+        years = sorted_indices.map((i) => years[i]);
+        values = sorted_indices.map((i) => values[i]);
+
+        //Iterate over all_hyde_years and perform interpolation if within the given domain
+        if (values.length > 0 && years.length > 0)
+          for (let x = 0; x < all_hyde_years.length; x++)
+            if (all_hyde_years[x] >= years[0] && all_hyde_years[x] <= years[years.length - 1])
+              local_value.population[all_hyde_years[x]] = Math.ceil(
+                Math.returnSafeNumber(Array.cubicSplineInterpolation(years, values, all_hyde_years[x]))
+              );
+
+        //Iterate over all hyde_years and set to 0 if first local_country.population year is <= 1
+        let first_population_value = local_value.population[years[0]];
+
+        if (first_population_value <= 1)
+          for (let x = 0; x < all_hyde_years.length; x++)
+            if (all_hyde_years[x] <= years[0])
+              local_value.population[all_hyde_years[x]] = 0;
+
+        //Remove any McEvedy data projected after 1975
+        Object.iterate(local_value.population, (local_subkey) => {
+          if (parseInt(local_subkey) > 1975)
+            delete local_value.population[local_subkey];
+        });
+      }
+    });
+    this._cache_mcevedy_obj = mcevedy_obj;
+
+    //Return statement
+    return mcevedy_obj;
+  }
 	
 	static async C_clampHYDERastersToMcEvedy () {
 		//Declare local instance variables

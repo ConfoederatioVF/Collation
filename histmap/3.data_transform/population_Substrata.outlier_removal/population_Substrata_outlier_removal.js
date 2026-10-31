@@ -1,6 +1,8 @@
 global.population_Substrata_outlier_removal = class {
 	static bf = `${h3}/population_Substrata.outlier_removal/`;
 	static input_GHSL_rasters = `${h2}/population_GHSL/cleaned_rasters/`;
+	static input_hyde_uopp_raster = `${h2}/landuse_HYDE/rasters/uopp_2023AD.png`;
+	static input_land_area_raster = `${h1}/metadata_HYDE/general_rasters/land_area.png`;
 	static input_outlier_rasters = `${this.bf}rasters_outliers/`;
 	static input_outlier_rasters_to_scale = `${this.bf}rasters_outliers_to_scale/`;
 	static intermediate_outliers_removed_rasters = `${this.bf}rasters_outliers_removed/`;
@@ -13,7 +15,11 @@ global.population_Substrata_outlier_removal = class {
 	static options = {
 		interpolate_to_GHSL_domain: [1800, 1975],
 		interpolate_to_GHSL1_domain: [1800, 1950],
-		interpolate_to_GHSL2_domain: [1950, 1975]
+		interpolate_to_GHSL2_domain: [1950, 1975],
+		urban_mask_buffer_radius: 1,
+		urban_mask_end_year: 1800,
+		urban_mask_inpaint_radius: 3,
+		urban_uopp_threshold: 10.0
 	};
 	
 	static statista_obj = () => {
@@ -75,96 +81,145 @@ global.population_Substrata_outlier_removal = class {
 		return return_obj;
 	}
 	
-	static async A_removeOutliersForHYDEYear (arg0_year) {
-		//Convert from parameters
-		let year = arg0_year;
-		
-		//Declare local instance variables
-		let fallback_file_path = `${population_KK10LUH2.output_kk10_luh2_global_rasters}popc_${year}.png`;
-		let fallback_raster = GeoPNG.loadNumberRasterImage(fallback_file_path, {
-			format: "float32"
-		});
-		let hyde_input_file_path = `${landuse_HYDE.intermediate_rasters_scaled_to_global}popc_${year}.png`;
-		let hyde_output_file_path = `${this.intermediate_outliers_removed_rasters}popc_${year}.png`;
-		
-		let hyde_outlier_masks = await this.A_getHYDEOutlierMasksObject();
-		let hyde_outlier_rasters = {};
-		let hyde_pixel_outliers = new Set();
-		let hyde_raster = GeoPNG.loadNumberRasterImage(hyde_input_file_path, {
-			format: "float32"
-		});
-		
-		//Iterate over all_hyde_outlier_masks; load hyde_outlier_rasters
-		Object.iterate(hyde_outlier_masks, (local_key, local_value) => {
-			if (year >= local_value?.start_year && year <= local_value?.end_year)
-				hyde_outlier_rasters[local_key] = GeoPNG.loadImage(local_key);
-		});
-		
-		//Operate over current image; check if number is an outlier compared to neighbouring pixels; iterate over all pixels in hyde_raster, excluding border pixels
-		for (let i = 1; i < hyde_raster.height - 1; i++)
-			for (let x = 1; x < hyde_raster.width - 1; x++) {
-				let local_index = i*hyde_raster.width + x;
-				let neighbour_average = GeoPNG.getRasterNeighbourAverage(hyde_raster.data, i, x, hyde_raster.height, hyde_raster.width);
-				
-				if (!isNaN(neighbour_average) && neighbour_average > 0 && hyde_raster.data[local_index] > 8*neighbour_average)
-					hyde_pixel_outliers.add(local_index);
-			}
-		
-		console.log(` - Outliers detected:`, hyde_pixel_outliers.size);
-		
-		//Save number raster image
-		GeoPNG.saveNumberRasterImage({
-			file_path: hyde_output_file_path,
-			format: "float32",
-			height: hyde_raster.height,
-			width: hyde_raster.width,
-			function: (local_index) => {
-				//Declare local instance variables
-				let byte_index = local_index*4;
-				let is_outlier = (hyde_pixel_outliers.has(local_index));
-				
-				//Check if any of hyde_outlier_rasters contains [0, 0, 0] masking for this pixel
-				if (!is_outlier) {
-					let all_hyde_outlier_rasters = Object.keys(hyde_outlier_rasters);
-					
-					for (let i = 0; i < all_hyde_outlier_rasters.length; i++) {
-						let local_raster = hyde_outlier_rasters[all_hyde_outlier_rasters[i]];
-						let local_raster_colour = [
-							local_raster.data[byte_index],
-							local_raster.data[byte_index + 1],
-							local_raster.data[byte_index + 2],
-							local_raster.data[byte_index + 3]
-						].join(",");
-						
-						//Break if outlier is detected
-						if (local_raster_colour === "0,0,0,255") {
-							is_outlier = true;
-							break;
-						}
-					}
-				}
-				
-				//If this pixel is an outlier, overwrite it with the equivalent content in fallback_image
-				//Return statement
-				if (is_outlier) {
-					return fallback_raster.data[local_index];
-				} else {
-					return hyde_raster.data[local_index];
-				}
-			}
-		});
-	}
-	
-	static async A_removeOutliersForHYDE () {
-		//Declare local instance variables
-		let hyde_years = landuse_HYDE.hyde_years;
-		
-		//Iterate over all hyde_years
-		for (let i = 0; i < hyde_years.length; i++) try {
-			console.log(`- Removing HYDE outliers for ${landuse_HYDE._getHYDEYearName(hyde_years[i])} ..`);
-			await this.A_removeOutliersForHYDEYear(hyde_years[i]);
-		} catch (e) { console.error(e); }
-	}
+  /**
+   * Removes single-pixel outliers, regional outlier masks, and (for years < 1800 AD) HYDE urban footprints
+   * via inverse-distance weighted boundary inpainting so modern/ancient HYDE city confusion does not enter Velkscala substrata.
+   * @alias population_Substrata_outlier_removal.A_removeOutliersForHYDEYear
+   *
+   * @param {number|string} arg0_year
+   * @param {Object} [arg1_options]
+   */
+  static async A_removeOutliersForHYDEYear (arg0_year, arg1_options) {
+    //Convert from parameters
+    let year = parseInt(arg0_year);
+    let options = (arg1_options) ? arg1_options : {};
+
+    //Declare local instance variables
+    let all_hyde_outlier_rasters = [];
+    let cleaned_data = null;
+    let fallback_file_path = `${population_KK10LUH2.output_kk10_luh2_global_rasters}popc_${year}.png`;
+    let fallback_raster = GeoPNG.loadNumberRasterImage(fallback_file_path, { format: "float32" });
+    let hyde_input_file_path = `${landuse_HYDE.intermediate_rasters_scaled_to_global}popc_${year}.png`;
+    let hyde_outlier_masks = (options.hyde_outlier_masks) ?
+      options.hyde_outlier_masks : await this.A_getHYDEOutlierMasksObject();
+    let hyde_outlier_rasters = {};
+    let hyde_output_file_path = (options.output_file_path) ?
+      options.output_file_path : `${this.intermediate_outliers_removed_rasters}popc_${year}.png`;
+    let hyde_pixel_outliers = new Set();
+    let hyde_raster = GeoPNG.loadNumberRasterImage(hyde_input_file_path, { format: "float32" });
+    let land_area_path = (typeof metadata_HYDE !== "undefined" && metadata_HYDE.input_raster_land_area) ?
+      metadata_HYDE.input_raster_land_area : this.input_land_area_raster;
+    let land_area_raster = null;
+    let total_pixels = 0;
+    let urban_mask_end_year = (options.urban_mask_end_year !== undefined) ?
+      options.urban_mask_end_year : this.options.urban_mask_end_year;
+
+    //Guard clauses
+    if (!hyde_raster || !hyde_raster.data) return;
+
+    if (!this._cached_land_area_raster && fs.existsSync(land_area_path))
+      this._cached_land_area_raster = GeoPNG.loadNumberRasterImage(land_area_path, { format: "int32" });
+    land_area_raster = this._cached_land_area_raster;
+
+    //Iterate over all_hyde_outlier_masks; load hyde_outlier_rasters
+    Object.iterate(hyde_outlier_masks, (local_key, local_value) => {
+      if (year >= local_value?.start_year && year <= local_value?.end_year)
+        hyde_outlier_rasters[local_key] = GeoPNG.loadImage(local_key);
+    });
+    all_hyde_outlier_rasters = Object.keys(hyde_outlier_rasters);
+
+    //1. Detect isolated > 8x Moore neighbourhood spikes
+    for (let i = 1; i < hyde_raster.height - 1; i++)
+      for (let x = 1; x < hyde_raster.width - 1; x++) {
+        let local_index = i*hyde_raster.width + x;
+        let neighbour_average = GeoPNG.getRasterNeighbourAverage(hyde_raster.data, i, x, hyde_raster.height, hyde_raster.width);
+
+        if (!isNaN(neighbour_average) && neighbour_average > 0 && hyde_raster.data[local_index] > 8*neighbour_average)
+          hyde_pixel_outliers.add(local_index);
+      }
+
+    console.log(` - Outliers detected:`, hyde_pixel_outliers.size);
+
+    //2. Materialise outlier-cleaned buffer
+    total_pixels = hyde_raster.height*hyde_raster.width;
+    cleaned_data = new Float32Array(total_pixels);
+
+    for (let i = 0; i < total_pixels; i++) {
+      let byte_index = i*4;
+      let is_outlier = hyde_pixel_outliers.has(i);
+
+      if (!is_outlier)
+        for (let x = 0; x < all_hyde_outlier_rasters.length; x++) {
+          let local_raster = hyde_outlier_rasters[all_hyde_outlier_rasters[x]];
+          if (
+            local_raster.data[byte_index] === 0 &&
+            local_raster.data[byte_index + 1] === 0 &&
+            local_raster.data[byte_index + 2] === 0 &&
+            local_raster.data[byte_index + 3] === 255
+          ) {
+            is_outlier = true;
+            break;
+          }
+        }
+
+      cleaned_data[i] = (is_outlier && fallback_raster && fallback_raster.data) ?
+        fallback_raster.data[i] : hyde_raster.data[i];
+    }
+
+    //3. Mask out and inpaint HYDE urban areas for years < 1800 AD (same IDW boundary scheme as c14bazAAR + HYDE urbc_<yr> > 0)
+    if (year < urban_mask_end_year && typeof GeoPNG.getModernUrbanMask === "function" && typeof GeoPNG.inpaintUrbanMask === "function") {
+      let urbc_mcevedy_path = `${landuse_HYDE.intermediate_rasters_mcevedy}urbc_${year}.png`;
+      let urbc_raw_path = `${landuse_HYDE.intermediate_rasters_equirectangular}urbc_${landuse_HYDE._getHYDEYearName(year)}.png`;
+      let urbc_path = (fs.existsSync(urbc_mcevedy_path)) ? urbc_mcevedy_path : urbc_raw_path;
+      let urban_mask = GeoPNG.getModernUrbanMask(this.input_hyde_uopp_raster, {
+        buffer_radius: this.options.urban_mask_buffer_radius,
+        height: hyde_raster.height,
+        threshold: this.options.urban_uopp_threshold,
+        urbc_raster: urbc_path,
+        width: hyde_raster.width
+      });
+
+      GeoPNG.inpaintUrbanMask(cleaned_data, urban_mask, {
+        fallback_data: (fallback_raster) ? fallback_raster.data : null,
+        height: hyde_raster.height,
+        land_area: (land_area_raster) ? land_area_raster.data : null,
+        radius: this.options.urban_mask_inpaint_radius,
+        width: hyde_raster.width
+      });
+    }
+
+    //4. Save number raster image
+    if (!options.do_not_save)
+      GeoPNG.saveNumberRasterImage({
+        file_path: hyde_output_file_path,
+        format: "float32",
+        height: hyde_raster.height,
+        width: hyde_raster.width,
+        function: (local_index) => cleaned_data[local_index]
+      });
+
+    //Return statement
+    return cleaned_data;
+  }
+
+
+  static async A_removeOutliersForHYDE (arg0_options) {
+    //Convert from parameters
+    let options = (arg0_options) ? arg0_options : {};
+
+    //Declare local instance variables
+    let hyde_outlier_masks = await this.A_getHYDEOutlierMasksObject();
+    let hyde_years = (options.hyde_years) ? options.hyde_years : landuse_HYDE.hyde_years;
+
+    //Iterate over all hyde_years
+    for (let i = 0; i < hyde_years.length; i++) try {
+      console.log(`- Removing HYDE outliers for ${landuse_HYDE._getHYDEYearName(hyde_years[i])} ..`);
+      await this.A_removeOutliersForHYDEYear(hyde_years[i], {
+        ...options,
+        hyde_outlier_masks: hyde_outlier_masks
+      });
+    } catch (e) { console.error(e); }
+  }
 	
 	//[QUARANTINE]
 	static async B_scaleProcessedHYDEToStatistaRegions (arg0_options) {
@@ -350,7 +405,7 @@ global.population_Substrata_outlier_removal = class {
 		let options = (arg0_options) ? arg0_options : {};
 
 		//Declare local instance variables
-		let hyde_years = landuse_HYDE.hyde_years;
+		let hyde_years = (options.hyde_years) ? options.hyde_years : landuse_HYDE.hyde_years;
 		let world_pop_obj = population_Global.A_getWorldPopulationObject();
 
 		//Return statement
@@ -407,7 +462,7 @@ global.population_Substrata_outlier_removal = class {
 		let GHSL_domain = this.options.interpolate_to_GHSL_domain;
 		let GHSL1_domain = this.options.interpolate_to_GHSL1_domain;
 		let GHSL2_domain = this.options.interpolate_to_GHSL2_domain;
-		let hyde_years = landuse_HYDE.sorted_hyde_years;
+		let hyde_years = (options.hyde_years) ? options.hyde_years : landuse_HYDE.sorted_hyde_years;
 		let land_area_path = (typeof metadata_HYDE !== "undefined" && metadata_HYDE.input_raster_land_area) ?
 			metadata_HYDE.input_raster_land_area : `${h1}/metadata_HYDE/general_rasters/land_area.png`;
 		let target_years = hyde_years.filter((y) => y >= GHSL_domain[0]);
@@ -505,7 +560,7 @@ global.population_Substrata_outlier_removal = class {
 		let options = (arg0_options) ? arg0_options : {};
 
 		//Declare local instance variables
-		let hyde_years = landuse_HYDE.sorted_hyde_years;
+		let hyde_years = (options.hyde_years) ? options.hyde_years : landuse_HYDE.sorted_hyde_years;
 
 		console.log(`Converting from float32 to int32 for older versions of SVE.`);
 
@@ -559,7 +614,7 @@ global.population_Substrata_outlier_removal = class {
 		if (!options.exclude) options.exclude = [];
 		
 		//1. Remove outliers for HYDE
-		if (!options.exclude.includes("A")) await this.A_removeOutliersForHYDE();
+		if (!options.exclude.includes("A")) await this.A_removeOutliersForHYDE(options);
 		//2. Handle continental regions, i.e. Northern America; Statista regions
 		if (!options.exclude.includes("B1")) await population_Substrata_northern_america.processRasters(options);
 		if (!options.exclude.includes("B2")) await this.B_scaleProcessedHYDEToStatistaRegions(options);

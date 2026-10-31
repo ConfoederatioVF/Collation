@@ -229,31 +229,113 @@
 	 * 
 	 * @returns {number}
 	 */
-	Array.cubicSplineInterpolation = function (arg0_x_values, arg1_y_values, arg2_x_to_interpolate) {
-		//Convert from parameters
-		let x_values = Array.toArray(arg0_x_values);
-		let y_values = Array.toArray(arg1_y_values).map(y =>
-			(y > 0 ? Math.log(y) : Math.log(1e-6)));
-		let x_to_interpolate = parseInt(arg2_x_to_interpolate);
-		
-		//Declare local instance variables
-		let interpolation = new cubic_spline(x_values, y_values);
-		let interpolated_value = Math.exp(interpolation.at(x_to_interpolate));
-		let prev_val = -Infinity, next_val = Infinity;
-		
-		//Iterate over all x_values
-		for (let i = 0; i < x_values.length; i++) {
-			if (x_values[i] <= x_to_interpolate) prev_val = Math.exp(y_values[i]);
-			if (x_values[i] >= x_to_interpolate) { next_val = Math.exp(y_values[i]); break; }
-		}
-		
-		//Clamp the spline value, don't overwrite it with a linear one
-		let lower = Math.min(prev_val, next_val);
-		let upper = Math.max(prev_val, next_val);
-		
-		//Return statement
-		return Math.max(lower, Math.min(interpolated_value, upper));
-	};
+  Array.cubicSplineInterpolation = function (arg0_x_values, arg1_y_values, arg2_x_to_interpolate) {
+    //Convert from parameters
+    let x_values = Array.toArray(arg0_x_values);
+    let raw_y_values = Array.toArray(arg1_y_values).map((y) => Math.returnSafeNumber(y, 0));
+    let x_to_interpolate = parseFloat(arg2_x_to_interpolate);
+
+    //Declare local instance variables
+    let interpolated_value = 0;
+    let interpolation = null;
+    let lower = 0;
+    let next_idx = -1;
+    let next_val = 0;
+    let pos_log_y = [];
+    let pos_x = [];
+    let prev_idx = -1;
+    let prev_val = 0;
+    let upper = 0;
+
+    //Guard clauses
+    if (x_values.length === 0 || isNaN(x_to_interpolate)) return 0;
+    if (x_values.length === 1) return raw_y_values[0];
+
+    //Locate surrounding extant anchors
+    for (let i = 0; i < x_values.length; i++) {
+      if (x_values[i] <= x_to_interpolate) prev_idx = i;
+      if (x_values[i] >= x_to_interpolate) {
+        next_idx = i;
+        break;
+      }
+    }
+
+    if (prev_idx === -1) return raw_y_values[0];
+    if (next_idx === -1) return raw_y_values[raw_y_values.length - 1];
+    if (prev_idx === next_idx) return raw_y_values[prev_idx];
+
+    prev_val = raw_y_values[prev_idx];
+    next_val = raw_y_values[next_idx];
+
+    //Handle zero-bounded intervals without log(0) distortion
+    if (prev_val <= 0 && next_val <= 0) return 0;
+    if (prev_val <= 0 || next_val <= 0) {
+      let span = x_values[next_idx] - x_values[prev_idx];
+      let t = (span > 0) ? ((x_to_interpolate - x_values[prev_idx])/span) : 0;
+      t = Math.max(0, Math.min(1, t));
+      let weight = 0.5*t + 0.5*t*t;
+
+      //Return statement
+      return (prev_val <= 0) ? (next_val*weight) : (prev_val*(1 - weight));
+    }
+
+    //Collect strictly positive anchors for shape-preserving (PCHIP) log-space cubic spline
+    for (let i = 0; i < x_values.length; i++)
+      if (raw_y_values[i] > 0) {
+        pos_x.push(x_values[i]);
+        pos_log_y.push(Math.log(raw_y_values[i]));
+      }
+
+    if (pos_x.length < 2) return prev_val;
+
+    let d = [];
+    let k = pos_x.length;
+    let m = new Array(k);
+    let seg = 0;
+
+    for (let i = 0; i < k - 1; i++)
+      d.push((pos_log_y[i + 1] - pos_log_y[i])/(pos_x[i + 1] - pos_x[i]));
+    m[0] = d[0];
+    m[k - 1] = d[k - 2];
+    for (let i = 1; i < k - 1; i++) {
+      if (d[i - 1]*d[i] <= 0) {
+        m[i] = 0;
+      } else {
+        m[i] = 2.0/(1.0/d[i - 1] + 1.0/d[i]);
+      }
+    }
+    for (let i = 0; i < k - 1; i++) {
+      if (Math.abs(d[i]) < 1e-12) {
+        m[i] = 0;
+        m[i + 1] = 0;
+      } else {
+        let alpha = m[i]/d[i];
+        let beta = m[i + 1]/d[i];
+        let norm = alpha*alpha + beta*beta;
+        if (norm > 9.0) {
+          let tau = 3.0/Math.sqrt(norm);
+          m[i] = tau*alpha*d[i];
+          m[i + 1] = tau*beta*d[i];
+        }
+      }
+    }
+    for (let i = 0; i < k - 2; i++)
+      if (x_to_interpolate > pos_x[i + 1]) seg = i + 1;
+
+    let h = pos_x[seg + 1] - pos_x[seg];
+    let t = (x_to_interpolate - pos_x[seg])/h;
+    let t2 = t*t;
+    let t3 = t2*t;
+    let log_val = (2.0*t3 - 3.0*t2 + 1.0)*pos_log_y[seg] + (t3 - 2.0*t2 + t)*h*m[seg] +
+      (-2.0*t3 + 3.0*t2)*pos_log_y[seg + 1] + (t3 - t2)*h*m[seg + 1];
+
+    interpolated_value = Math.exp(log_val);
+    lower = Math.min(prev_val, next_val);
+    upper = Math.max(prev_val, next_val);
+
+    //Return statement
+    return Math.max(lower, Math.min(interpolated_value, upper));
+  };
 	
 	/**
 	 * Performs a division operation on every valid element in an array, recursively.

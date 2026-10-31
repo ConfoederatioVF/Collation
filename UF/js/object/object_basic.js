@@ -259,34 +259,109 @@
 				target_years.push(i);
 		}
 		
-		//Pre-calculate the Spline in log-space once per object to avoid O(N) recalculations
-		let y_values = values.map(y => (y > 0 ? Math.log(y) : Math.log(1e-6)));
-		
-		let interpolation = new cubic_spline(extant_years, y_values);
-		let start_year = Math.returnSafeNumber(extant_years[0]);
-		let end_year = Math.returnSafeNumber(extant_years[extant_years.length - 1]);
-		
-		//Iterate over all years in domain
-		for (let i = 0; i < target_years.length; i++) {
-			let current_year = target_years[i];
-			
-			if (current_year >= start_year && current_year <= end_year) {
-				let interpolated_value = Math.exp(interpolation.at(current_year));
-				
-				//Iterate over extant_years; find bounds only for clamping
-				let prev_val = -Infinity, next_val = Infinity;
-				for (let x = 0; x < extant_years.length; x++) {
-					if (extant_years[x] <= current_year) prev_val = Math.exp(y_values[x]);
-					if (extant_years[x] >= current_year) { next_val = Math.exp(y_values[x]); break; }
-				}
-				
-				//Clamp the spline value, don't overwrite it with a linear one
-				let lower = Math.min(prev_val, next_val);
-				let upper = Math.max(prev_val, next_val);
-				
-				object[current_year] = Math.max(lower, Math.min(interpolated_value, upper));
-			}
-		}
+    //Pre-calculate shape-preserving (PCHIP) cubic Hermite tangents in log-space over strictly positive anchors
+    let pchip_m = null;
+    let pos_log_y = [];
+    let pos_x = [];
+    let raw_values = values.map((y) => Math.returnSafeNumber(y, 0));
+
+    for (let i = 0; i < extant_years.length; i++)
+      if (raw_values[i] > 0) {
+        pos_x.push(extant_years[i]);
+        pos_log_y.push(Math.log(raw_values[i]));
+      }
+
+    if (pos_x.length >= 2) {
+      let d = [];
+      let k = pos_x.length;
+      pchip_m = new Array(k);
+
+      for (let i = 0; i < k - 1; i++)
+        d.push((pos_log_y[i + 1] - pos_log_y[i])/(pos_x[i + 1] - pos_x[i]));
+      pchip_m[0] = d[0];
+      pchip_m[k - 1] = d[k - 2];
+      for (let i = 1; i < k - 1; i++) {
+        if (d[i - 1]*d[i] <= 0) {
+          pchip_m[i] = 0;
+        } else {
+          pchip_m[i] = 2.0/(1.0/d[i - 1] + 1.0/d[i]);
+        }
+      }
+      for (let i = 0; i < k - 1; i++) {
+        if (Math.abs(d[i]) < 1e-12) {
+          pchip_m[i] = 0;
+          pchip_m[i + 1] = 0;
+        } else {
+          let alpha = pchip_m[i]/d[i];
+          let beta = pchip_m[i + 1]/d[i];
+          let norm = alpha*alpha + beta*beta;
+          if (norm > 9.0) {
+            let tau = 3.0/Math.sqrt(norm);
+            pchip_m[i] = tau*alpha*d[i];
+            pchip_m[i + 1] = tau*beta*d[i];
+          }
+        }
+      }
+    }
+
+    let start_year = Math.returnSafeNumber(extant_years[0]);
+    let end_year = Math.returnSafeNumber(extant_years[extant_years.length - 1]);
+
+    //Iterate over all years in domain
+    for (let i = 0; i < target_years.length; i++) {
+      let current_year = target_years[i];
+
+      if (current_year >= start_year && current_year <= end_year) {
+        let next_idx = -1;
+        let prev_idx = -1;
+
+        for (let x = 0; x < extant_years.length; x++) {
+          if (extant_years[x] <= current_year) prev_idx = x;
+          if (extant_years[x] >= current_year) {
+            next_idx = x;
+            break;
+          }
+        }
+
+        if (prev_idx !== -1 && next_idx !== -1) {
+          if (prev_idx === next_idx) {
+            object[current_year] = raw_values[prev_idx];
+          } else {
+            let prev_val = raw_values[prev_idx];
+            let next_val = raw_values[next_idx];
+
+            if (prev_val <= 0 && next_val <= 0) {
+              object[current_year] = 0;
+            } else if (prev_val <= 0 || next_val <= 0) {
+              let span = extant_years[next_idx] - extant_years[prev_idx];
+              let t = (span > 0) ? ((current_year - extant_years[prev_idx])/span) : 0;
+              t = Math.max(0, Math.min(1, t));
+              let weight = 0.5*t + 0.5*t*t;
+
+              object[current_year] = (prev_val <= 0) ? (next_val*weight) : (prev_val*(1 - weight));
+            } else if (pchip_m) {
+              let seg = 0;
+              for (let x = 0; x < pos_x.length - 2; x++)
+                if (current_year > pos_x[x + 1]) seg = x + 1;
+
+              let h = pos_x[seg + 1] - pos_x[seg];
+              let t = (current_year - pos_x[seg])/h;
+              let t2 = t*t;
+              let t3 = t2*t;
+              let log_val = (2.0*t3 - 3.0*t2 + 1.0)*pos_log_y[seg] + (t3 - 2.0*t2 + t)*h*pchip_m[seg] +
+                (-2.0*t3 + 3.0*t2)*pos_log_y[seg + 1] + (t3 - t2)*h*pchip_m[seg + 1];
+              let interpolated_value = Math.exp(log_val);
+              let lower = Math.min(prev_val, next_val);
+              let upper = Math.max(prev_val, next_val);
+
+              object[current_year] = Math.max(lower, Math.min(interpolated_value, upper));
+            } else {
+              object[current_year] = prev_val;
+            }
+          }
+        }
+      }
+    }
 		
 		//Return statement
 		return object;
