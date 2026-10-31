@@ -1,5 +1,5 @@
 global.professions_Bairoch = class {
-  static input_table_json = "./common/economics/bairoch_table_4.json";
+  static input_table_json = `${(global.h1 || "./histmap/1.data_raw/").replace(/[\\\/]$/, "")}/professions_Bairoch/bairoch_table_4.json`;
   static input_detailed_borders_1914 = "./saves/detailed_borders/4.1914.1.1.naissance";
   static input_detailed_borders_1991 = "./saves/detailed_borders/7.1991.1.1.naissance";
   static output_folder = `${(global.h2 || "./histmap/2.data_cleaning/").replace(/[\\\/]$/, "")}/professions_Bairoch/`;
