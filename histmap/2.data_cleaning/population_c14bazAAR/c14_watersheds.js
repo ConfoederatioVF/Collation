@@ -3,9 +3,10 @@
   if (!global.population_c14bazAAR_watersheds) global.population_c14bazAAR_watersheds = {};
 
   /**
-   * Calibrates radiocarbon SPD intensity against pre-normalised ArchaeoGLOBE priors and HYDE 3.5 empirical baselines,
-   * applying smooth sample-sufficiency HYDE fallbacks when radiocarbon dates are sparse and anchoring smoothed SPDs
-   * to late-prehistoric levels so steady hunter-gatherer watersheds are never crushed below HYDE.
+   * Calibrates radiocarbon SPD intensity against ArchaeoGLOBE carrying-capacity priors in a two-stage framework:
+   * (1) computes un-diluted c14bazAAR trajectories reconciled to global Stadestér envelopes so radiocarbon-rich
+   * watersheds retain full archaeological weight, and (2) applies a one-sided empirical HYDE 3.5 deficit fallback
+   * strictly in sparse or remote low-density watersheds (< 2 people/km² at 1 AD) before final global reconciliation.
    * @alias population_c14bazAAR_watersheds.anchorAndBackcalculate
    *
    * @param {Object} [arg0_options]
@@ -20,9 +21,7 @@
 
     //Declare local instance variables
     let ag_indicators = {};
-    let ag_norm_scalars = {};
     let ag_pts_x = [-10000, -8000, -6000, -4000, -2000, -1000, 0];
-    let ag_raw_map = {};
     let all_basins = [];
     let anchor_0_map = {};
     let anchor_target_vals = [];
@@ -30,18 +29,23 @@
     let anchor_years = [];
     let basin_hyde_0 = {};
     let basin_hyde_series = {};
+    let basin_land_area = {};
     let basin_stadester_0 = {};
     let c14_cls = global.population_c14bazAAR || {};
+    let c14_pops = {};
+    let c14_summary = null;
+    let c14_summary_path = options.input_c14_summary || c14_cls.input_c14_summary;
     let config_folder = options.config_folder || c14_cls.config_folder;
+    let date_counts = {};
     let epoch_counts = null;
     let glaciated_basins = null;
     let global_targets = {};
     let hyde_popc_folder = options.input_hyde_popc_folder || c14_cls.input_hyde_popc_folder;
     let indicators_path = options.input_archaeoglobe_watershed_indicators || c14_cls.input_archaeoglobe_watershed_indicators;
-    let kernel_half_steps = 12;
-    let kernel_weights = [];
+    let land_area_path = options.input_land_area_raster || c14_cls.input_land_area_raster;
+    let land_area_raster = null;
     let out_pops_path = "";
-    let r_hyde_map = {};
+    let s_ref_map = {};
     let spds_path = "";
     let stadester_0_path = "";
     let stadester_0_raster = null;
@@ -68,11 +72,25 @@
     spds_path = path.join(config_folder, "watershed_spds.json");
     stadester_0_path = path.join(stadester_pop_folder, "stadester_population_0.png");
 
+    if (c14_summary_path && fs.existsSync(c14_summary_path)) {
+      c14_summary = JSON.parse(fs.readFileSync(c14_summary_path, "utf8"));
+      date_counts = c14_summary.basin_counts || {};
+    }
     if (indicators_path && fs.existsSync(indicators_path))
       ag_indicators = JSON.parse(fs.readFileSync(indicators_path, "utf8"));
     glaciated_basins = population_c14bazAAR_watersheds.getGlaciatedOutlierBasins(options);
     wmobb_meta = JSON.parse(fs.readFileSync(wmobb_meta_path, "utf8"));
     wmobb_raster = GeoPNG.loadNumberRasterImage(wmobb_raster_path, { format: "int32" });
+
+    if (land_area_path && fs.existsSync(land_area_path)) {
+      land_area_raster = GeoPNG.loadNumberRasterImage(land_area_path, { format: "int32" });
+      for (let i = 0; i < wmobb_raster.data.length; i++) {
+        let basin_id = wmobb_raster.data[i];
+        if (basin_id > 0)
+          basin_land_area[basin_id] = (basin_land_area[basin_id] || 0) + Math.max(0, land_area_raster.data[i] || 0);
+      }
+      land_area_raster = null;
+    }
 
     if (!global.population_Global && typeof h2 !== "undefined") {
       let pop_global_file = path.join(h2, "population_Global/population_Global.js");
@@ -89,11 +107,6 @@
 
     epoch_counts = population_c14bazAAR_watersheds.getWatershedPrehistoricCounts(options);
     all_basins = Object.keys(wmobb_meta);
-
-    for (let i = 0; i <= kernel_half_steps; i++) {
-      let dt = i*100;
-      kernel_weights.push(Math.exp(-(dt*dt)/(2*400*400)));
-    }
 
     //Step 1: Compute global population target envelopes for each target year
     console.log("- Aggregating global demographic envelopes from Stadestér population ...");
@@ -113,7 +126,7 @@
       global_targets[yr] = population_c14bazAAR_watersheds.interpolateMonotonicSpline(anchor_years, anchor_target_vals, yr);
     }
 
-    //Step 2: Pre-index empirical historical HYDE baselines per watershed
+    //Step 2: Pre-index empirical historical HYDE baselines and 1 AD Stadestér anchors per watershed
     console.log("- Pre-indexing empirical historical population baselines per watershed ...");
     for (let i = 0; i < anchor_years.length; i++) {
       let yr = anchor_years[i];
@@ -123,9 +136,9 @@
       if (fs.existsSync(hyde_path)) {
         let hyde_raster = GeoPNG.loadNumberRasterImage(hyde_path, { format: "float32" });
         for (let x = 0; x < hyde_raster.data.length; x++) {
-          let b = wmobb_raster.data[x];
-          if (b > 0)
-            basin_hyde_series[yr][b] = (basin_hyde_series[yr][b] || 0) + (hyde_raster.data[x] || 0);
+          let basin_id = wmobb_raster.data[x];
+          if (basin_id > 0)
+            basin_hyde_series[yr][basin_id] = (basin_hyde_series[yr][basin_id] || 0) + (hyde_raster.data[x] || 0);
         }
         hyde_raster = null;
       }
@@ -136,12 +149,12 @@
       if (!basin_hyde_series[yr]) basin_hyde_series[yr] = {};
     }
     for (let i = 0; i < all_basins.length; i++) {
-      let b = all_basins[i];
-      let b_anchor_vals = anchor_years.map((yr) => basin_hyde_series[yr]?.[b] || 0);
+      let basin_id = all_basins[i];
+      let b_anchor_vals = anchor_years.map((yr) => basin_hyde_series[yr]?.[basin_id] || 0);
       for (let x = 0; x < target_years.length; x++) {
         let yr = target_years[x];
-        if (basin_hyde_series[yr][b] === undefined)
-          basin_hyde_series[yr][b] = population_c14bazAAR_watersheds.interpolateMonotonicSpline(anchor_years, b_anchor_vals, yr);
+        if (basin_hyde_series[yr][basin_id] === undefined)
+          basin_hyde_series[yr][basin_id] = population_c14bazAAR_watersheds.interpolateMonotonicSpline(anchor_years, b_anchor_vals, yr);
       }
     }
     basin_hyde_0 = basin_hyde_series[0] || {};
@@ -149,30 +162,49 @@
     if (fs.existsSync(stadester_0_path)) {
       stadester_0_raster = GeoPNG.loadNumberRasterImage(stadester_0_path, { format: "float32" });
       for (let i = 0; i < stadester_0_raster.data.length; i++) {
-        let b = wmobb_raster.data[i];
-        if (b > 0)
-          basin_stadester_0[b] = (basin_stadester_0[b] || 0) + (stadester_0_raster.data[i] || 0);
+        let basin_id = wmobb_raster.data[i];
+        if (basin_id > 0)
+          basin_stadester_0[basin_id] = (basin_stadester_0[basin_id] || 0) + (stadester_0_raster.data[i] || 0);
       }
       stadester_0_raster = null;
     }
 
-    //Step 3: Precompute per-basin 0 AD anchors, HYDE relative curves, and pre-normalise ArchaeoGLOBE to global envelope
+    //Step 3 (Stage 1): Compute un-diluted c14bazAAR ArchaeoGLOBE + SPD trajectories and reconcile globally
+    console.log("- Computing Stage 1 c14bazAAR ArchaeoGLOBE + SPD trajectories ...");
     for (let i = 0; i < all_basins.length; i++) {
-      let b = all_basins[i];
-      let h0_val = basin_hyde_0[b] || 0;
-      let inds = (ag_indicators[b]) ? ag_indicators[b].epochs : null;
-      let is_glaciated = glaciated_basins.has(String(b));
-      let s0_val = basin_stadester_0[b] || 0;
+      let ag_pts_y = [];
+      let anchor_0 = 0;
+      let basin_id = all_basins[i];
+      let h0_val = basin_hyde_0[basin_id] || 0;
+      let inds = null;
+      let is_glaciated = glaciated_basins.has(String(basin_id));
+      let late_count = 0;
+      let late_sum = 0;
+      let n_total = 0;
+      let pre_count = 0;
+      let pre_sum = 0;
+      let raw_spd = watershed_spds[basin_id] || {};
+      let s0_val = basin_stadester_0[basin_id] || 0;
+      let s_late = 0;
+      let s_mean = 0;
+      let w_mod = 0;
 
+      if (ag_indicators[basin_id]) inds = ag_indicators[basin_id].epochs;
       if (is_glaciated) {
-        anchor_0_map[b] = h0_val || s0_val;
+        anchor_0 = h0_val || s0_val;
       } else {
-        anchor_0_map[b] = s0_val || h0_val;
+        anchor_0 = s0_val || h0_val;
       }
-      ag_raw_map[b] = {};
-      r_hyde_map[b] = {};
+      anchor_0_map[basin_id] = anchor_0;
 
-      let ag_pts_y = ag_pts_x.map(function (arg0_yr) {
+      if (date_counts[basin_id] !== undefined) {
+        n_total = date_counts[basin_id];
+      } else {
+        n_total = epoch_counts.n_pre[basin_id] || 0;
+      }
+      w_mod = Math.min(0.50, n_total/(n_total + 100.0));
+
+      ag_pts_y = ag_pts_x.map(function (arg0_yr) {
         let yr = arg0_yr;
         if (inds && inds[yr] && inds[yr].rel_capacity !== undefined)
           return inds[yr].rel_capacity;
@@ -182,146 +214,180 @@
 
       for (let x = 0; x < target_years.length; x++) {
         let yr = target_years[x];
-        let global_rel = 0.04;
-
-        if (global_targets[0] > 0) global_rel = global_targets[yr]/global_targets[0];
-        ag_raw_map[b][yr] = population_c14bazAAR_watersheds.interpolateMonotonicSpline(ag_pts_x, ag_pts_y, yr);
-        if (h0_val > 0) {
-          r_hyde_map[b][yr] = (basin_hyde_series[yr][b] || 0)/h0_val;
-        } else {
-          r_hyde_map[b][yr] = global_rel;
+        let s_val = raw_spd[yr] || 0;
+        if (yr < 0 && s_val > 0) {
+          pre_sum += s_val;
+          pre_count++;
         }
+        if (yr >= -1000 && yr <= 0) {
+          late_sum += s_val;
+          late_count++;
+        }
+      }
+      if (pre_count > 0) s_mean = pre_sum/pre_count;
+      if (late_count > 0) s_late = late_sum/late_count;
+      if (s_late > 1e-4) {
+        s_ref_map[basin_id] = s_late;
+      } else {
+        s_ref_map[basin_id] = s_mean;
+      }
+
+      c14_pops[basin_id] = {};
+      c14_pops[basin_id][0] = anchor_0;
+
+      for (let x = 0; x < target_years.length; x++) {
+        let global_rel = 0.04;
+        let mod_factor = 1.0;
+        let r_ag = 0;
+        let r_base = 0;
+        let r_h = 0;
+        let yr = target_years[x];
+
+        if (yr === 0) continue;
+        if (global_targets[0] > 0) global_rel = global_targets[yr]/global_targets[0];
+        r_ag = population_c14bazAAR_watersheds.interpolateMonotonicSpline(ag_pts_x, ag_pts_y, yr);
+        if (h0_val > 0) {
+          r_h = (basin_hyde_series[yr][basin_id] || 0)/h0_val;
+        } else {
+          r_h = global_rel;
+        }
+        if (is_glaciated) {
+          r_base = r_h;
+        } else {
+          r_base = r_ag;
+        }
+
+        if (n_total >= 10 && s_mean > 0) {
+          let rel_diff = ((raw_spd[yr] || 0) - s_mean)/(s_mean + 0.01);
+          let clamped_diff = Math.max(-0.60, Math.min(1.50, rel_diff));
+          mod_factor = 1.0 + w_mod*clamped_diff;
+        }
+
+        c14_pops[basin_id][yr] = anchor_0*Math.max(0.005, r_base*mod_factor);
       }
     }
 
     for (let i = 0; i < target_years.length; i++) {
+      let scalar = 1.0;
+      let sum_pop = 0;
       let yr = target_years[i];
-      if (yr === 0) {
-        ag_norm_scalars[yr] = 1.0;
-      } else {
-        let ag_weighted_sum = 0;
-        for (let x = 0; x < all_basins.length; x++) {
-          let b = all_basins[x];
-          ag_weighted_sum += anchor_0_map[b]*ag_raw_map[b][yr];
-        }
-        if (ag_weighted_sum > 0 && global_targets[yr] > 0) {
-          ag_norm_scalars[yr] = global_targets[yr]/ag_weighted_sum;
-        } else {
-          ag_norm_scalars[yr] = 1.0;
-        }
-      }
+      let target = global_targets[yr] || 0;
+
+      for (let x = 0; x < all_basins.length; x++)
+        sum_pop += (c14_pops[all_basins[x]][yr] || 0);
+      if (sum_pop > 0 && target > 0) scalar = target/sum_pop;
+
+      for (let x = 0; x < all_basins.length; x++)
+        c14_pops[all_basins[x]][yr] *= scalar;
     }
 
-    //Step 4: Backcalculate antiquity watershed trajectories with confidence-weighted HYDE fallbacks
-    console.log("- Backcalculating antiquity watershed trajectories with radiocarbon-confidence HYDE fallbacks ...");
+    //Step 4 (Stage 2): Apply one-sided HYDE 3.5 deficit fallback strictly in sparse/remote low-density watersheds
+    console.log("- Applying one-sided HYDE 3.5 deficit fallbacks for sparse remote watersheds ...");
     for (let i = 0; i < all_basins.length; i++) {
-      let b = all_basins[i];
-      let anchor_0 = anchor_0_map[b];
-      let is_glaciated = glaciated_basins.has(String(b));
-      let n_pre = epoch_counts.n_pre[b] || 0;
-      let pre_count = 0;
-      let pre_sum = 0;
-      let raw_spd = watershed_spds[b] || {};
-      let ref_count = 0;
-      let ref_sum = 0;
-      let s_mean = 0;
-      let s_ref = 0;
-      let s_smooth = {};
-      let w_basin = 0;
+      let anchor_0 = 0;
+      let area_km2 = 1;
+      let basin_id = all_basins[i];
+      let dens_0 = 0;
+      let fhg_0 = 0;
+      let h0_val = 0;
+      let is_glaciated = glaciated_basins.has(String(basin_id));
+      let n_pre = 0;
+      let raw_spd = watershed_spds[basin_id] || {};
+      let remote_factor = 0;
+      let s_sm = {};
+      let w_basin = 1.0;
 
-      if (n_pre >= 10) w_basin = (n_pre - 10)/((n_pre - 10) + 60.0);
+      anchor_0 = anchor_0_map[basin_id] || 0;
+      area_km2 = Math.max(1, basin_land_area[basin_id] || 1);
+      dens_0 = anchor_0/area_km2;
+      fhg_0 = ag_indicators[basin_id]?.epochs?.[0]?.fhg || 0;
+      h0_val = basin_hyde_0[basin_id] || 0;
+      n_pre = epoch_counts.n_pre[basin_id] || 0;
 
-      //Gaussian millennial smoothing (sigma = 400 yr) over raw 100-year SPDs
+      if (n_pre < 40) w_basin = n_pre/40.0;
+      if (anchor_0 < 1000000)
+        remote_factor = Math.max(0, Math.min(1.0, (2.0 - dens_0)/1.0));
+
       for (let x = 0; x < target_years.length; x++) {
         let k_den = 0;
         let k_num = 0;
-        let val_sm = 0;
         let yr = target_years[x];
 
-        for (let y = -kernel_half_steps; y <= kernel_half_steps; y++) {
+        for (let y = -3; y <= 3; y++) {
           let idx_n = x + y;
           if (idx_n >= 0 && idx_n < target_years.length) {
-            let kw = kernel_weights[Math.abs(y)];
+            let kw = Math.exp(-(y*y)/(2*1.5*1.5));
             k_num += kw*(raw_spd[target_years[idx_n]] || 0);
             k_den += kw;
           }
         }
-
-        if (k_den > 0) val_sm = k_num/k_den;
-        s_smooth[yr] = val_sm;
-        if (yr < 0) {
-          pre_sum += val_sm;
-          pre_count++;
-        }
-        if (yr >= -1000 && yr <= 0) {
-          ref_sum += val_sm;
-          ref_count++;
+        if (k_den > 0) {
+          s_sm[yr] = k_num/k_den;
+        } else {
+          s_sm[yr] = 0;
         }
       }
 
-      if (pre_count > 0) s_mean = pre_sum/pre_count;
-      if (ref_count > 0 && ref_sum > 1e-6) {
-        s_ref = ref_sum/ref_count;
-      } else {
-        s_ref = s_mean;
-      }
-
-      watershed_pops[b] = {};
-      watershed_pops[b][0] = anchor_0;
+      watershed_pops[basin_id] = {};
+      watershed_pops[basin_id][0] = anchor_0;
 
       for (let x = 0; x < target_years.length; x++) {
+        let alpha = 0;
+        let h_emp = 0;
+        let h_scale_0 = 1.0;
+        let n_loc = 0;
+        let p_c14 = 0;
+        let p_final = 0;
+        let p_hyde = 0;
+        let w_c14 = 1.0;
+        let w_loc = 1.0;
         let yr = target_years[x];
+
         if (yr === 0) continue;
+        p_c14 = c14_pops[basin_id][yr] || 0;
+        p_final = p_c14;
 
-        let n_loc = epoch_counts.n_local[b]?.[yr] || 0;
-        let r_ag_norm = ag_raw_map[b][yr]*ag_norm_scalars[yr];
-        let r_h = r_hyde_map[b][yr];
-        let trajectory_ratio = r_h;
+        n_loc = epoch_counts.n_local[basin_id]?.[yr] || 0;
+        if (n_loc < 5) w_loc = n_loc/5.0;
+        w_c14 = Math.min(1.0, 0.65*w_basin + 0.35*w_loc);
 
-        if (!is_glaciated && w_basin > 0) {
-          let mod_factor = 1.0;
-          let r_informed = 0;
-          let r_prior = 0;
-          let r_spd = r_h;
-          let w_local = Math.min(1.0, n_loc/(n_loc + 6.0) + n_pre/(n_pre + 500.0));
-          let w_c14 = w_basin*w_local;
+        h_emp = basin_hyde_series[yr][basin_id] || 0;
+        alpha = Math.max(0, Math.min(1.0, (yr + 2000)/2000.0));
+        if (h0_val > 0) h_scale_0 = Math.min(1.25, anchor_0/h0_val);
+        p_hyde = h_emp*((1.0 - alpha)*Math.min(1.0, h_scale_0) + alpha*h_scale_0);
 
-          if (s_ref > 1e-6) r_spd = s_smooth[yr]/s_ref;
-          if (r_ag_norm < r_h) {
-            r_prior = Math.max(r_ag_norm, Math.min(r_h, r_spd));
-          } else {
-            r_prior = 0.5*r_ag_norm + 0.5*r_h;
+        if (!is_glaciated && p_c14 < p_hyde && remote_factor > 0) {
+          let p_hg = p_c14;
+          let p_sparse = 0;
+          let w_hyde_sparse = (1.0 - w_c14)*remote_factor;
+
+          p_sparse = (1.0 - w_hyde_sparse)*p_c14 + w_hyde_sparse*p_hyde;
+          if (fhg_0 >= 0.50 && dens_0 <= 0.50 && n_pre < 500 && s_ref_map[basin_id] > 1e-4) {
+            let p_spd = anchor_0*(s_sm[yr]/s_ref_map[basin_id]);
+            p_hg = Math.max(p_c14, Math.min(0.85*p_hyde, p_spd)*remote_factor);
           }
-
-          if (s_mean > 1e-6) {
-            let rel_diff = (s_smooth[yr] - s_mean)/(s_mean + 1e-4);
-            let clamped_diff = Math.max(-0.50, Math.min(1.20, rel_diff));
-            mod_factor = 1.0 + 0.45*clamped_diff;
-          }
-
-          r_informed = Math.max(0.002, r_prior*mod_factor);
-          trajectory_ratio = (1.0 - w_c14)*r_h + w_c14*r_informed;
+          p_final = Math.max(p_sparse, p_hg);
         }
 
-        watershed_pops[b][yr] = anchor_0*Math.max(0, trajectory_ratio);
+        watershed_pops[basin_id][yr] = Math.max(0, p_final);
       }
     }
 
-    //Step 5: Reconcile watershed trajectories with global demographic envelopes
+    //Step 5: Reconcile final watershed trajectories with global demographic envelopes
     console.log("- Reconciling watershed trajectories with global demographic envelopes ...");
     for (let i = 0; i < target_years.length; i++) {
-      let scalar = 1;
+      let scalar = 1.0;
       let sum_pop = 0;
-      let target = global_targets[target_years[i]] || 0;
       let yr = target_years[i];
+      let target = global_targets[yr] || 0;
 
       for (let x = 0; x < all_basins.length; x++)
         sum_pop += (watershed_pops[all_basins[x]][yr] || 0);
       if (sum_pop > 0 && target > 0) scalar = target/sum_pop;
 
       for (let x = 0; x < all_basins.length; x++) {
-        let b = all_basins[x];
-        watershed_pops[b][yr] *= scalar;
+        let basin_id = all_basins[x];
+        watershed_pops[basin_id][yr] *= scalar;
       }
     }
 

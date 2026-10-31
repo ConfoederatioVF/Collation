@@ -178,9 +178,10 @@
 
 
     /**
-     * Calibrates radiocarbon SPD intensity against pre-normalised ArchaeoGLOBE priors and HYDE 3.5 empirical baselines,
-     * applying smooth sample-sufficiency HYDE fallbacks when radiocarbon dates are sparse and anchoring smoothed SPDs
-     * to late-prehistoric levels so steady hunter-gatherer watersheds are never crushed below HYDE.
+     * Calibrates radiocarbon SPD intensity against ArchaeoGLOBE carrying-capacity priors in a two-stage framework:
+     * (1) computes un-diluted c14bazAAR trajectories reconciled to global Stadestér envelopes so radiocarbon-rich
+     * watersheds retain full archaeological weight, and (2) applies a one-sided empirical HYDE 3.5 deficit fallback
+     * strictly in sparse or remote low-density watersheds (< 2 people/km² at 1 AD) before final global reconciliation.
      * @param {Object} [arg0_options]
      *
      * @returns {Object} Map of watershed ID to final antiquity population trajectories.
