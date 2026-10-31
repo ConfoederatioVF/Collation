@@ -7,6 +7,8 @@
     try {
       if (!global.population_c14bazAAR_watersheds && fs.existsSync(path.join(cur_dir, "c14_watersheds.js")))
         require(path.join(cur_dir, "c14_watersheds.js"));
+      if (!global.population_c14bazAAR_binning && fs.existsSync(path.join(cur_dir, "c14_fractional_binning.js")))
+        require(path.join(cur_dir, "c14_fractional_binning.js"));
     } catch (e) {
       console.warn(`[population_c14bazAAR] Failed to load companion modules:`, e);
     }
@@ -210,6 +212,8 @@
       //Declare local instance variables
       let all_models = {};
       let anchor_years = this.anchor_years;
+      let chunk_index = null;
+      let do_not_erase_borders = Boolean(options.do_not_erase_borders);
       let glaciated_basins = this._getGlaciatedOutlierBasins(options);
       let keys = ["crop", "graz", "conv", "stadester_pop"];
       let land_area_raster = GeoPNG.loadNumberRasterImage(this.input_land_area_raster, { format: "int32" });
@@ -224,6 +228,15 @@
 
       if (!fs.existsSync(this.intermediate_wls_folder))
         fs.mkdirSync(this.intermediate_wls_folder, { recursive: true });
+
+      if (!do_not_erase_borders && typeof population_c14bazAAR_binning !== "undefined") {
+        console.log("- Pre-indexing WMO watershed x ISO3 chunks for pre-1 AD fractional binning ...");
+        chunk_index = population_c14bazAAR_binning.buildWatershedISO3ChunkIndex({
+          land_area_data: land_area_raster.data,
+          wmobb_data: wmobb_raster.data
+        });
+        console.log(`  Indexed ${chunk_index.total_multi_basins} multi-ISO3 watersheds (${chunk_index.total_chunks} chunks).`);
+      }
 
       //Ensure rural targets exist or compute from watershed populations
       if (fs.existsSync(path.join(this.config_folder, "watershed_rural_targets.json"))) {
@@ -282,6 +295,14 @@
             fallback_data: (kk) ? kk.data : null,
             land_area: land_area_raster.data,
             radius: 3
+          });
+
+        //Inpaint compact HYDE land-use outlier masks (e.g. Liechtenstein agricultural back-projection spikes)
+        if (typeof population_c14bazAAR_binning !== "undefined")
+          population_c14bazAAR_binning.inpaintOutlierCovariates(yr, [cr, gr, cv], {
+            input_outlier_rasters: this.input_outlier_rasters,
+            land_area: land_area_raster.data,
+            radius: 4
           });
 
         //Step 1: Aggregate basin-level sums of HYDE land use covariates and Stadestér rural population
@@ -376,25 +397,60 @@
         if (typeof global.gc === "function") global.gc();
       }
 
-      //Interpolate WLS weights linearly across intermediate 100-year intervals
-      console.log("- Linearly interpolating continuous WLS weights across intermediate 100-year intervals ...");
-      for (let a = 0; a < anchor_years.length - 1; a++) {
-        let y0 = anchor_years[a], y1 = anchor_years[a + 1];
-        let p0 = path.join(this.intermediate_wls_folder, `c14_wls_weights_${y0}.png`);
-        let p1 = path.join(this.intermediate_wls_folder, `c14_wls_weights_${y1}.png`);
-        let r0 = GeoPNG.loadNumberRasterImage(p0, { format: "float32" });
-        let r1 = GeoPNG.loadNumberRasterImage(p1, { format: "float32" });
+      //Interpolate WLS weights linearly across intermediate 100-year intervals and apply pre-1 AD fractional binning
+      console.log("- Linearly interpolating continuous WLS weights and erasing pre-1 AD modern ISO3 borders ...");
+      for (let i = 0; i < anchor_years.length - 1; i++) {
+        let local_y0 = anchor_years[i];
+        let local_y1 = anchor_years[i + 1];
+        let local_p0 = path.join(this.intermediate_wls_folder, `c14_wls_weights_${local_y0}.png`);
+        let local_p1 = path.join(this.intermediate_wls_folder, `c14_wls_weights_${local_y1}.png`);
+        let local_r0 = GeoPNG.loadNumberRasterImage(local_p0, { format: "float32" });
+        let local_r1 = GeoPNG.loadNumberRasterImage(local_p1, { format: "float32" });
 
-        for (let step = 1; step < 10; step++) {
-          let yr = y0 + step*100, f = step/10.0, out_p = path.join(this.intermediate_wls_folder, `c14_wls_weights_${yr}.png`);
-          let inter_data = new Float32Array(total_pixels), u_p = path.join(this.input_stadester_urban_folder, `stadester_urban_${yr}.png`);
-          let u_r = (fs.existsSync(u_p)) ? GeoPNG.loadNumberRasterImage(u_p, { format: "float32" }) : null;
-          for (let p = 0; p < total_pixels; p++)
-            inter_data[p] = (u_r && u_r.data[p] > 0) ? 0 : ((1 - f)*r0.data[p] + f*r1.data[p]);
-          GeoPNG.saveNumberRasterImage({ file_path: out_p, format: "float32", function: (idx) => inter_data[idx], height: 2160, width: 4320 });
-          inter_data = null; u_r = null;
+        for (let x = 1; x < 10; x++) {
+          let local_f = x/10.0;
+          let local_inter_data = new Float32Array(total_pixels);
+          let local_yr = local_y0 + x*100;
+          let local_out_p = path.join(this.intermediate_wls_folder, `c14_wls_weights_${local_yr}.png`);
+          let local_u_out = path.join(this.output_urban_folder, `urbc_${local_yr}.png`);
+          let local_u_sta = path.join(this.input_stadester_urban_folder, `stadester_urban_${local_yr}.png`);
+          let local_u_path = (fs.existsSync(local_u_out)) ? local_u_out : local_u_sta;
+          let local_u_r = (local_yr >= this.urban_overlay_start_year && fs.existsSync(local_u_path)) ?
+            GeoPNG.loadNumberRasterImage(local_u_path, { format: "float32" }) : null;
+
+          for (let y = 0; y < total_pixels; y++)
+            local_inter_data[y] = (local_u_r && local_u_r.data[y] > 0) ? 0 : ((1.0 - local_f)*local_r0.data[y] + local_f*local_r1.data[y]);
+
+          if (chunk_index && local_yr < this.base_year)
+            population_c14bazAAR_binning.reconcileWatershedISO3Chunks(local_inter_data, {
+              chunk_index: chunk_index,
+              land_area_data: land_area_raster.data,
+              urban_data: (local_u_r) ? local_u_r.data : null
+            });
+
+          GeoPNG.saveNumberRasterImage({ file_path: local_out_p, format: "float32", function: function (idx) { return local_inter_data[idx]; }, height: 2160, width: 4320 });
+          local_inter_data = null;
+          local_u_r = null;
         }
-        r0 = null; r1 = null;
+
+        if (chunk_index && local_y0 < this.base_year) {
+          let local_u0_out = path.join(this.output_urban_folder, `urbc_${local_y0}.png`);
+          let local_u0_sta = path.join(this.input_stadester_urban_folder, `stadester_urban_${local_y0}.png`);
+          let local_u0_path = (fs.existsSync(local_u0_out)) ? local_u0_out : local_u0_sta;
+          let local_u0_r = (local_y0 >= this.urban_overlay_start_year && fs.existsSync(local_u0_path)) ?
+            GeoPNG.loadNumberRasterImage(local_u0_path, { format: "float32" }) : null;
+
+          population_c14bazAAR_binning.reconcileWatershedISO3Chunks(local_r0.data, {
+            chunk_index: chunk_index,
+            land_area_data: land_area_raster.data,
+            urban_data: (local_u0_r) ? local_u0_r.data : null
+          });
+          GeoPNG.saveNumberRasterImage({ file_path: local_p0, format: "float32", function: function (idx) { return local_r0.data[idx]; }, height: 2160, width: 4320 });
+          local_u0_r = null;
+        }
+
+        local_r0 = null;
+        local_r1 = null;
         await new Promise((resolve) => setImmediate(resolve));
         if (typeof global.gc === "function") global.gc();
       }

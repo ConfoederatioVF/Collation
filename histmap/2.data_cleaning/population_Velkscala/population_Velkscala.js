@@ -149,22 +149,81 @@
     }
 
     /**
-     * Step C: Synchronises national development index and population metadata tables.
+     * Step C: Synchronises national development index and population metadata tables,
+     * updating antiquity HYDE anchor years (-10000 to 0) in Velkscala national populations
+     * directly from composited c14bazAAR rasters.
      * @param {Object} [arg0_options]
      */
     static C_syncMetadata (arg0_options) {
-      this.ensureDirectories();
+      //Convert from parameters
+      let options = (arg0_options) ? arg0_options : {};
+
+      //Declare local instance variables
+      let anchor_years = [-10000, -9000, -8000, -7000, -6000, -5000, -4000, -3000, -2000, -1000, 0];
+      let geocode_img = null;
+      let geocode_obj = null;
+      let geocode_path = (typeof admin_modern !== "undefined" && admin_modern.input_geocodes_raster) ?
+        admin_modern.input_geocodes_raster : `${h1}/admin_modern/geocodes.png`;
       let legacy_ndi = path.join(this.bf, "velkscala_national_development_index.json");
       let legacy_pop = path.join(this.bf, "velkscala_national_populations.json");
+      let national_pops_obj = null;
+      let rgb_to_iso3 = {};
 
+
+      this.ensureDirectories();
       if (fs.existsSync(this.file_stadester_national_development_index)) {
         fs.copyFileSync(this.file_stadester_national_development_index, this.file_national_development_index);
         fs.copyFileSync(this.file_stadester_national_development_index, legacy_ndi);
         console.log(`[population_Velkscala] Step C: Synchronised national development index to ${this.file_national_development_index}.`);
       }
+
       if (fs.existsSync(this.file_stadester_national_populations)) {
-        fs.copyFileSync(this.file_stadester_national_populations, this.file_national_populations);
-        fs.copyFileSync(this.file_stadester_national_populations, legacy_pop);
+        national_pops_obj = JSON.parse(fs.readFileSync(this.file_stadester_national_populations, "utf8"));
+
+        if (!options.do_not_recompute_antiquity && fs.existsSync(geocode_path) && typeof admin_modern !== "undefined" && typeof admin_modern.getISO3ColourcodesObject === "function") {
+          geocode_obj = admin_modern.getISO3ColourcodesObject();
+          geocode_img = GeoPNG.loadImage(geocode_path);
+          for (let local_col in geocode_obj) {
+            let local_codes = geocode_obj[local_col];
+            if (local_codes && local_codes.length > 0)
+              rgb_to_iso3[local_col.split(",").slice(0, 3).join(",")] = local_codes[0];
+          }
+
+          let local_total_px = geocode_img.width*geocode_img.height;
+          let local_px_codes = new Array(local_total_px);
+          for (let i = 0; i < local_total_px; i++) {
+            let local_b = i*4;
+            let local_rgb = `${geocode_img.data[local_b]},${geocode_img.data[local_b + 1]},${geocode_img.data[local_b + 2]}`;
+            local_px_codes[i] = rgb_to_iso3[local_rgb] || null;
+          }
+
+          for (let i = 0; i < anchor_years.length; i++) {
+            let local_yr = anchor_years[i];
+            let local_pop_path = path.join(this.input_popc_folder, `population_${local_yr}.png`);
+            if (!fs.existsSync(local_pop_path)) continue;
+
+            let local_pop_r = GeoPNG.loadNumberRasterImage(local_pop_path, { format: "float32" });
+            let local_yr_sums = {};
+            for (let x = 0; x < local_total_px; x++) {
+              let local_c = local_px_codes[x];
+              let local_v = local_pop_r.data[x] || 0;
+              if (local_c && local_v > 0)
+                local_yr_sums[local_c] = (local_yr_sums[local_c] || 0) + local_v;
+            }
+
+            let local_sorted_codes = Object.keys(local_yr_sums).sort();
+            let local_yr_entry = {};
+            for (let x = 0; x < local_sorted_codes.length; x++) {
+              let local_c = local_sorted_codes[x];
+              local_yr_entry[local_c] = Number(local_yr_sums[local_c].toFixed(2));
+            }
+            national_pops_obj[local_yr] = local_yr_entry;
+          }
+        }
+
+        let local_json_str = JSON.stringify(national_pops_obj, null, 2);
+        fs.writeFileSync(this.file_national_populations, local_json_str, "utf8");
+        fs.writeFileSync(legacy_pop, local_json_str, "utf8");
         console.log(`[population_Velkscala] Step C: Synchronised national populations to ${this.file_national_populations}.`);
       }
     }
