@@ -8,7 +8,7 @@ The goal of this workflow is to regenerate polity IDs for `saves/atlas_defacto.n
 
 Multiple file paths across different projects need to be changed to ensure compatibility.
 
-Properties to change: `.id`, `.state_id`; the key of the GeometryPolygon is the same as the `.id`. This may change; you will have to define for yourself which ID properties merit changing to keep in line with this directive.
+Properties to change: `.id`, `.state_id`; the key of the GeometryPolygon is the same as the `.id`. This may change; you will have to define for yourself which ID properties merit changing to keep in line with this directive. Note that IDs must be unique.
 
 ## Step 1. Check file paths.
 
