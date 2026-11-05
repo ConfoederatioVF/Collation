@@ -12,7 +12,8 @@ disable-model-invocation: true
 ## Step 2. Edit Polity `.description` fields.
 
 1. Check the `.link` of each polity entry, and form a brief description based off the Wikipedia summary. In addition, the contents of the infobox should be formatted as tags following a double line break `\n\n` at the end of the description.
-2. Because this will take a lot of tokens, any subagents should use Gemini 3.8 Flash if possible instead of Gemini 4 Argon.
+2. Each description must materially be paraphrased or changed. No sentence from the original description should be used. Your new description should align with British English.
+3. Because this will take a lot of tokens, any subagents should use Gemini 3.8 Flash if possible instead of Gemini 4 Argon.
 
 Example format:
 ```
