@@ -23,4 +23,4 @@ Capital and largest city: Paris (de facto); Official languages: French; Common l
 
 ## Step 3. Repackage properties back into atlas_defacto.naissance.
 
-1. Re-package `.description` fields back into atlas_defacto.naissance, and bake the cache file so that the user can inspect the .naissance files and ensure that it is correct. Remember not to duplicate .name properties over multiple keyframes, keep diff architecture in mind.
+1. Re-package `.description` fields back into atlas_defacto.naissance, and bake the cache file so that the user can inspect the .naissance files and ensure that it is correct. Remember not to duplicate `.description` properties over multiple keyframes, keep diff architecture in mind.
