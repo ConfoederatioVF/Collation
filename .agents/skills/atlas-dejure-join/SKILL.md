@@ -1,5 +1,7 @@
 ---
+name: atlas-dejure-join
 description: Joins Seshat-compatible atlas_simplified.naissance with CShapes-2.0 and CShapes-Europe.
+disable-model-invocation: true
 ---
 
 atlas_simplified.naissance currently needs to be joined with CShapes-2.0. The way this should work is that: 
