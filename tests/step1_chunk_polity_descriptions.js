@@ -54,7 +54,7 @@ async function A_chunkPolityDescriptions () {
 
     entities_array.push({
       control_type: (first_props.control_type || "").replace(/[\t\r\n]+/g, " ").trim(),
-      description: (obj.metadata?.description || "").replace(/[\t\r\n]+/g, " ").trim(),
+      description: (obj.metadata?.description || "").replace(/\r\n/g, "\n").trim(),
       end_date: `${d_end.year}-${String(d_end.month).padStart(2, "0")}-${String(d_end.day).padStart(2, "0")}`,
       id: key,
       id_num: Number(key),
@@ -168,13 +168,14 @@ async function A_chunkPolityDescriptions () {
 
     for (let x = 0; x < slice.length; x++) {
       let item = slice[x];
+      let tsv_desc = item.description.replace(/\t+/g, " ").replace(/\n\n/g, " \\n\\n ").replace(/\n+/g, " ");
       txt_lines.push(`${item.id}: ${item.description}`);
-      tsv_lines.push(`${item.id}\t${item.name}\t${item.start_date}..${item.end_date}\t${item.control_type}\t${item.parent}\t${item.label}\t${item.link}\t${item.description}`);
+      tsv_lines.push(`${item.id}\t${item.name}\t${item.start_date}..${item.end_date}\t${item.control_type}\t${item.parent}\t${item.label}\t${item.link}\t${tsv_desc}`);
     }
 
     let tsv_path = path.join(tests_dir, `polity_descriptions_context_${i}.tsv`);
     let txt_path = path.join(temp_jobs_dir, `polity_descriptions_${i}.txt`);
-    fs.writeFileSync(txt_path, txt_lines.join("\n") + "\n", "utf8");
+    fs.writeFileSync(txt_path, txt_lines.join("\n\n") + "\n", "utf8");
     fs.writeFileSync(tsv_path, tsv_lines.join("\n") + "\n", "utf8");
     console.log(`Chunk ${i}: ${slice.length} polities (IDs ${slice[0].id}..${slice[slice.length - 1].id}) -> ${txt_path}`);
   }
