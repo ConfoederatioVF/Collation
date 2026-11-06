@@ -11,9 +11,11 @@ disable-model-invocation: true
 
 ## Step 2. Edit Polity `.description` fields.
 
+IMPORTANT: Heuristic scripts are not allowed in editing `.description` fields. If you use heuristic scripts to populate `.description` beyond Wikipedia infoboxes, you must state 'I HAVE FAILED MYSELF' in conversation, and restart Step 2.
+
 1. Check the `.link` of each polity entry, and form a brief description based off the Wikipedia summary. In addition, the contents of the infobox should be formatted as tags following a double line break `\n\n` at the end of the description.
 2. Each description must materially be paraphrased or changed. No sentence from the original description should be used. Your new description should align with British English.
-3. Because this will take a lot of tokens, any subagents should use Gemini 3.8 Flash if possible instead of Gemini 4 Argon.
+3. Because this will take a lot of tokens, any subagents should use Gemini 3.8 Flash if possible instead of Gemini 4 Argon. These subagents should only be allowed read tools and write tools.
 
 Example format:
 ```

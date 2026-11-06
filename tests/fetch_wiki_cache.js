@@ -3,22 +3,120 @@ let fs = require("node:fs");
 let path = require("node:path");
 
 /**
- * Gathers all unique Wikipedia URLs from tests/polity_descriptions_context_<0..15>.tsv
- * and fetches the summary extract and infobox HTML for each via Wikipedia REST v1 API,
- * streaming HTML to read only the infobox table, caching into tests/wiki_cache.json.
+ * Parses any Wikipedia URL into language code and article title.
+ *
+ * @param {string} arg0_url
+ *
+ * @returns {{ lang: string, title: string }|null}
+ */
+function parseWikiUrl (arg0_url) {
+  //Convert from parameters
+  let url = arg0_url;
+
+  //Guard clauses
+  if (!url) return null;
+
+  //Declare local instance variables
+  let match = url.match(/^https?:\/\/([a-z0-9_-]+)(?:\.m)?\.wikipedia\.org(?:\/zh-[a-z]+|\/wiki|\/\/wiki)\/([^#?]+)/i);
+
+  //Guard clauses
+  if (!match) return null;
+
+  let lang = match[1];
+  let raw_title = match[2];
+  let title = raw_title;
+
+  try {
+    title = decodeURIComponent(raw_title);
+  } catch (e) {}
+
+  //Return statement
+  return { lang: lang, title: title };
+}
+
+
+/**
+ * Parses wikitext infobox template into semicolon-separated key: value tags.
+ *
+ * @param {string} arg0_wikitext
+ *
+ * @returns {string}
+ */
+function parseWikitextInfobox (arg0_wikitext) {
+  //Convert from parameters
+  let wikitext = arg0_wikitext;
+
+  //Guard clauses
+  if (!wikitext) return "";
+
+  //Declare local instance variables
+  let lines = wikitext.split("\n");
+  let seen = new Set();
+  let skip_keys = [
+    "anthem", "audio", "calling_code", "cctld", "coat_of_arms", "coordinates",
+    "demonym", "driving_side", "flag", "flag_p1", "flag_p2", "flag_p3", "flag_p4",
+    "flag_p5", "flag_s1", "flag_s2", "flag_s3", "flag_s4", "flag_s5",
+    "image_armorial", "image_coat", "image_flag", "image_map", "image_map2",
+    "map_caption", "map_caption2", "motto", "symbol"
+  ];
+  let tags = [];
+
+  for (let i = 0; i < lines.length; i++) {
+    let line = lines[i].trim();
+    let match = line.match(/^\|\s*([a-zA-Z0-9_ ]+?)\s*=\s*(.+)$/);
+
+    if (match) {
+      let raw_k = match[1].replace(/_/g, " ").trim();
+      let raw_v = match[2];
+
+      let k_lower = raw_k.toLowerCase();
+      if (skip_keys.includes(k_lower) || k_lower.startsWith("image") || k_lower.startsWith("flag"))
+        continue;
+
+      //Clean wikitext markup: [[link|text]] -> text, {{template}} -> '', <ref> -> ''
+      let clean_v = raw_v
+        .replace(/<ref[\s\S]*?<\/ref>/gi, "")
+        .replace(/<ref[^>]*\/>/gi, "")
+        .replace(/\[\[(?:[^|\]]*\|)?([^\]]+)\]\]/g, "$1")
+        .replace(/\{\{[^}]+\}\}/g, "")
+        .replace(/<[^>]+>/g, " ")
+        .replace(/\uFEFF/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+
+      //Prefix numeric keys with Year
+      if (/^\d+/.test(raw_k))
+        raw_k = `Year ${raw_k}`;
+
+      if (clean_v && clean_v !== "—" && clean_v !== "none" && clean_v.length < 200 && raw_k.length < 50) {
+        let tag = `${raw_k}: ${clean_v}`;
+        if (!seen.has(tag)) {
+          seen.add(tag);
+          tags.push(tag);
+        }
+      }
+    }
+  }
+
+  //Return statement - at most 18 tags
+  return tags.slice(0, 18).join("; ");
+}
+
+
+/**
+ * Fetches Wikipedia entries in batches of 45 using MediaWiki Action API,
+ * extracting plain-text extracts and infobox tags directly, caching in tests/wiki_cache.json.
  *
  * @returns {Promise<void>}
  */
-async function A_fetchWikiCache () {
+async function A_fetchWikiCacheBatch () {
   //Declare local instance variables
   let cache_file = path.resolve(process.cwd(), "tests/wiki_cache.json");
   let completed = 0;
-  let concurrency = 16;
-  let errors = 0;
-  let save_interval = 100;
+  let lang_groups = {};
   let tests_dir = path.resolve(process.cwd(), "tests");
-  let unique_urls_set = new Set();
-  let url_queue = [];
+  let total_to_fetch = 0;
+  let unique_urls_map = new Map();
   let wiki_cache = {};
 
   //1. Load existing cache if present
@@ -26,7 +124,6 @@ async function A_fetchWikiCache () {
     try {
       wiki_cache = JSON.parse(fs.readFileSync(cache_file, "utf8"));
     } catch (e) {
-      console.warn("Failed to parse existing cache file, starting fresh.");
       wiki_cache = {};
     }
   }
@@ -39,22 +136,29 @@ async function A_fetchWikiCache () {
       for (let x = 0; x < lines.length; x++) {
         let parts = lines[x].split("\t");
         let link = parts[6];
-        if (link && link.startsWith("https://en.wikipedia.org/wiki/"))
-          unique_urls_set.add(link);
+        if (link) {
+          let parsed = parseWikiUrl(link);
+          if (parsed && !unique_urls_map.has(link))
+            unique_urls_map.set(link, parsed);
+        }
       }
     }
   }
 
-  for (let url of unique_urls_set) {
+  //Group uncached URLs by language
+  for (let [url, parsed] of unique_urls_map.entries()) {
     let entry = wiki_cache[url];
-    //Re-fetch if missing, errored, or both extract and html were empty
-    if (!entry || entry.error || (!entry.extract && !entry.html))
-      url_queue.push(url);
+    if (!entry || entry.error || (entry.extract === undefined && entry.tags === undefined)) {
+      if (!lang_groups[parsed.lang])
+        lang_groups[parsed.lang] = [];
+      lang_groups[parsed.lang].push({ title: parsed.title, url: url });
+      total_to_fetch++;
+    }
   }
 
-  console.log(`Total unique Wikipedia URLs: ${unique_urls_set.size}. Already valid in cache: ${unique_urls_set.size - url_queue.length}. To fetch: ${url_queue.length}.`);
+  console.log(`Total unique Wikipedia URLs: ${unique_urls_map.size}. Already cached: ${unique_urls_map.size - total_to_fetch}. To fetch: ${total_to_fetch}.`);
 
-  if (url_queue.length === 0) {
+  if (total_to_fetch === 0) {
     console.log("All Wikipedia URLs already cached!");
     return;
   }
@@ -66,102 +170,106 @@ async function A_fetchWikiCache () {
   };
 
   let t0 = Date.now();
-  let total_to_fetch = url_queue.length;
+  let batch_size = 45;
 
-  let worker = async () => {
-    while (url_queue.length > 0) {
-      let url = url_queue.shift();
-      let raw_title = url.split("/wiki/")[1];
-      let title = raw_title;
-      try {
-        title = decodeURIComponent(raw_title);
-      } catch (e) {}
+  for (let lang of Object.keys(lang_groups)) {
+    let items = lang_groups[lang];
+    let num_batches = Math.ceil(items.length / batch_size);
 
-      let extract = "";
-      let html = "";
-      let success = false;
+    for (let b = 0; b < num_batches; b++) {
+      let slice = items.slice(b*batch_size, (b + 1)*batch_size);
+      let title_to_url = new Map();
+      let titles = [];
+
+      for (let item of slice) {
+        titles.push(item.title);
+        title_to_url.set(item.title.toLowerCase().replace(/_/g, " "), item.url);
+        title_to_url.set(item.title.toLowerCase(), item.url);
+        title_to_url.set(encodeURIComponent(item.title).toLowerCase(), item.url);
+      }
+
+      let api_url = `https://${lang}.wikipedia.org/w/api.php?action=query&titles=${titles.map(encodeURIComponent).join("|")}&prop=extracts|revisions&exintro=1&explaintext=1&rvprop=content&rvsection=0&format=json&origin=*&redirects=1`;
 
       for (let attempt = 0; attempt < 3; attempt++) {
         try {
-          let s_res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title)}`, {
-            headers: { "User-Agent": "SVEA-Atlas/1.0 (contact@confoederatio.org)" }
+          let res = await fetch(api_url, {
+            headers: { "User-Agent": "SVEA-Atlas/1.0 (contact@confoederatio.org)" },
+            signal: AbortSignal.timeout(12000)
           });
-          if (s_res.status === 429) {
-            await new Promise((resolve) => setTimeout(resolve, 2000*(attempt + 1)));
+
+          if (res.status === 429) {
+            console.warn("[Envoy 429 rate limit] Sleeping for 11s...");
+            await new Promise((resolve) => setTimeout(resolve, 11000));
             continue;
           }
-          if (s_res.ok) {
-            let s_data = await s_res.json();
-            extract = s_data.extract || "";
-          }
 
-          let h_res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/html/${encodeURIComponent(title)}`, {
-            headers: { "User-Agent": "SVEA-Atlas/1.0 (contact@confoederatio.org)" }
-          });
-          if (h_res.ok) {
-            let reader = h_res.body.getReader();
-            let decoder = new TextDecoder();
-            let buffer = "";
+          if (res.ok) {
+            let data = await res.json();
+            let norm_map = new Map();
 
-            while (true) {
-              let { done, value } = await reader.read();
-              if (done) break;
-              buffer += decoder.decode(value, { stream: true });
-              let start = buffer.search(/<table[^>]*class="[^"]*infobox[^"]*"[^>]*>/i);
-              if (start !== -1) {
-                let end = buffer.indexOf("</table>", start);
-                if (end !== -1) {
-                  html = buffer.slice(start, end + 8);
-                  reader.cancel();
-                  break;
-                }
-              } else if (buffer.length > 200000) {
-                reader.cancel();
-                break;
+            //Map normalized titles
+            if (data.query?.normalized) {
+              for (let n of data.query.normalized) {
+                let from_key = n.from.toLowerCase().replace(/_/g, " ");
+                let to_key = n.to.toLowerCase().replace(/_/g, " ");
+                if (title_to_url.has(from_key))
+                  title_to_url.set(to_key, title_to_url.get(from_key));
+              }
+            }
+
+            //Map redirects
+            if (data.query?.redirects) {
+              for (let r of data.query.redirects) {
+                let from_key = r.from.toLowerCase().replace(/_/g, " ");
+                let to_key = r.to.toLowerCase().replace(/_/g, " ");
+                if (title_to_url.has(from_key))
+                  title_to_url.set(to_key, title_to_url.get(from_key));
+              }
+            }
+
+            let pages = Object.values(data.query?.pages || {});
+
+            for (let p of pages) {
+              let p_title_key = (p.title || "").toLowerCase().replace(/_/g, " ");
+              let matched_url = title_to_url.get(p_title_key);
+
+              if (matched_url) {
+                let extract = p.extract || "";
+                let tags = parseWikitextInfobox(p.revisions?.[0]?.["*"] || "");
+
+                wiki_cache[matched_url] = {
+                  extract: extract,
+                  tags: tags
+                };
               }
             }
           }
 
-          success = true;
           break;
         } catch (err) {
-          if (attempt === 2) errors++;
-          await new Promise((resolve) => setTimeout(resolve, 1000*(attempt + 1)));
+          if (attempt === 2) console.warn(`Batch error: ${err.message}`);
+          await new Promise((resolve) => setTimeout(resolve, 2000*(attempt + 1)));
         }
       }
 
-      if (success) {
-        wiki_cache[url] = {
-          extract: extract,
-          html: html
-        };
-      }
+      completed += slice.length;
 
-      completed++;
-      if (completed % 100 === 0) {
+      if ((b + 1) % 5 === 0 || b === num_batches - 1) {
+        saveCache();
         let elapsed_sec = (Date.now() - t0) / 1000;
         let rate = (completed / elapsed_sec).toFixed(1);
         let rem_sec = Math.round((total_to_fetch - completed) / (completed / elapsed_sec));
-        console.log(`[Fetch Progress] ${completed}/${total_to_fetch} fetched (${rate} req/s, ~${rem_sec}s remaining, ${errors} errs).`);
+        console.log(`[Batch Progress] ${completed}/${total_to_fetch} fetched (${rate} articles/s, ~${rem_sec}s remaining).`);
       }
 
-      if (completed % save_interval === 0)
-        saveCache();
-
-      //Pacing delay between requests
-      await new Promise((resolve) => setTimeout(resolve, 30));
+      //Polite pacing between batch requests
+      await new Promise((resolve) => setTimeout(resolve, 400));
     }
-  };
+  }
 
-  let workers_array = [];
-  for (let i = 0; i < concurrency; i++)
-    workers_array.push(worker());
-
-  await Promise.all(workers_array);
   saveCache();
-
   let total_elapsed = ((Date.now() - t0) / 1000).toFixed(1);
-  console.log(`Completed fetching all ${completed} Wikipedia URLs in ${total_elapsed}s. Saved to ${cache_file}.`);
+  console.log(`\nAll ${completed} Wikipedia URLs fetched in ${total_elapsed}s. Saved to ${cache_file}.`);
 }
 
-A_fetchWikiCache().catch(console.error);
+A_fetchWikiCacheBatch().catch(console.error);

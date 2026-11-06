@@ -116,7 +116,9 @@
         .visual-view {
             min-height: 12rem;
             outline: none;
+            overflow-wrap: break-word;
             padding: 15px 12px;
+            white-space: pre-wrap;
         }
         .visual-view:not(:empty) {
             min-height: 12rem;

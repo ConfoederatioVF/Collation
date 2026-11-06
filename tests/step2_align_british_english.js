@@ -217,7 +217,11 @@ async function A_alignBritishEnglish () {
   }
 
   console.log(`\nCompleted British English alignment: ${total_modified} of ${total_polities} polities updated across 16 chunks.`);
+  module.exports = { toBritishEnglish };
 }
 
-A_alignBritishEnglish().catch(console.error);
+if (require.main === module)
+  A_alignBritishEnglish().catch(console.error);
+
+module.exports = { toBritishEnglish };
 
