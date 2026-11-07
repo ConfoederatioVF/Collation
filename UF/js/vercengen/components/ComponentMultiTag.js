@@ -60,7 +60,6 @@ ve.MultiTag = class extends ve.Component {
 			if (!this.registry_array.includes(tag))
 				this.registry_array.push(tag);
 		this.refresh();
-		this.v = this.value;
 	}
 	
 	/**
@@ -108,11 +107,15 @@ ve.MultiTag = class extends ve.Component {
 	 * @param {string[]} arg0_value
 	 */
 	set v (arg0_value) {
-		//Declare local instance variables
-		let value = (arg0_value) ? Array.toArray(arg0_value) : arg0_value;
+		//Convert from parameters
+		let value = (arg0_value !== undefined && arg0_value !== null) ?
+			Array.toArray(arg0_value).filter((local_tag) => local_tag !== null && local_tag !== undefined && local_tag !== "") : [];
 		
 		//Refresh, set value, then fire from binding
 		this.local_tags = value;
+		for (let i = 0; i < this.local_tags.length; i++)
+			if (!this.registry_array.includes(this.local_tags[i]))
+				this.registry_array.push(this.local_tags[i]);
 		this.refresh();
 		this.fireFromBinding();
 	}
@@ -127,10 +130,12 @@ ve.MultiTag = class extends ve.Component {
 	notifyAllInstances () {
 		//Declare local instance variables
 		let key = this.options.tags_key || "global";
-		
-		//Refresh all instances with this key
 		let instances = ve.MultiTag.instances[key] || [];
-			instances.forEach(instance => instance.refresh());
+		
+		//Refresh datalist suggestions across all instances with this key without resetting list items
+		for (let i = 0; i < instances.length; i++)
+			if (typeof instances[i].refreshSuggestions === "function")
+				instances[i].refreshSuggestions();
 	}
 	
 	/**
@@ -155,7 +160,7 @@ ve.MultiTag = class extends ve.Component {
 			this.components_obj.datalist.v = this.datalist_options;
 		}
 		
-		//Create this.components_obj.list if ill-defined
+		//Create this.components_obj.list if ill-defined, otherwise sync items to this.local_tags
 		if (!this.components_obj.list) {
 			this._initialising = true;
 			let element_options = {
@@ -171,23 +176,28 @@ ve.MultiTag = class extends ve.Component {
 								duplicate_count++;
 						}
 						
-						if (duplicate_count > 0) {
+						if (duplicate_count > 0 && v !== "") {
 							veToast(`<icon>warning</icon> This tag is a duplicate of a previous tag, and will not be registered.`);
+							this._suppress_list_userchange = true;
+							e.from_binding_fire_silently = true;
 							e.v = "";
-						} else {
-							if (!this.registry_array.includes(v))
-								this.registry_array.push(v);
-							this.updateLocalTags();
-							this.notifyAllInstances();
-							this.fireToBinding();
+							delete e.from_binding_fire_silently;
+						} else if (v !== "" && !this.registry_array.includes(v)) {
+							this.registry_array.push(v);
 						}
 					}
 				}
 			};
+			this._element_options = element_options;
 			this.components_obj.datalist.options = element_options;
 			this.components_obj.list = new ve.List([this.components_obj.datalist], {
+				do_not_bubble_owners: true,
 				onuserchange: (v, e) => {
 					if (this._initialising) return;
+					if (this._suppress_list_userchange) {
+						delete this._suppress_list_userchange;
+						return;
+					}
 					this.updateLocalTags();
 					this.notifyAllInstances();
 					this.fireToBinding();
@@ -195,27 +205,64 @@ ve.MultiTag = class extends ve.Component {
 				style: {
 					padding: 0
 				},
-				options: element_options,
+				options: element_options
 			});
 			this.components_obj.list.bind(this.element);
-			
-			//Iterate over all this.local_tags; initialise list items from local_tags
-			if (this.local_tags.length - 1 > 0)
-				for (let i = 0; i < this.local_tags.length - 1; i++)
-					this.components_obj.list.addItem();
-			for (let i = 0; i < this.local_tags.length; i++)
-				this.components_obj.list.v[i].v = this.local_tags[i];
+			this._syncListItems();
 			this._initialising = false;
 		} else {
-			//Update suggestions on all datalist items in the list
-			this.components_obj.datalist.v = this.datalist_options;
-			this.components_obj.list.placeholder = this.datalist_options;
-			
-			//Iterate over all items in the current list
-			for (let i = 0; i < this.components_obj.list.v.length; i++) {
-				this.components_obj.list.v[i].v = this.datalist_options;
-			}
+			this._initialising = true;
+			this.refreshSuggestions();
+			this._syncListItems();
+			this._initialising = false;
 		}
+	}
+	
+	/**
+	 * Updates suggestion `<datalist>` options on all items in this MultiTag without altering selected tag values.
+	 * - Method of: {@link ve.MultiTag}
+	 */
+	refreshSuggestions () {
+		//Declare local instance variables
+		this.datalist_options = {};
+		for (let i = 0; i < this.registry_array.length; i++)
+			this.datalist_options[this.registry_array[i]] = this.registry_array[i];
+		
+		if (this.components_obj.datalist)
+			this.components_obj.datalist.v = this.datalist_options;
+		if (this.components_obj.list) {
+			this.components_obj.list.placeholder = this.datalist_options;
+			for (let i = 0; i < this.components_obj.list.v.length; i++)
+				this.components_obj.list.v[i].v = this.datalist_options;
+		}
+	}
+	
+	/**
+	 * Synchronises `this.components_obj.list` items to match `this.local_tags` silently.
+	 * - Method of: {@link ve.MultiTag}
+	 * @private
+	 */
+	_syncListItems () {
+		if (!this.components_obj.list) return;
+		
+		//Declare local instance variables
+		let target_tags = Array.isArray(this.local_tags) ? this.local_tags : [];
+		let desired_count = Math.max(target_tags.length, 1);
+		let items = [];
+		
+		for (let i = 0; i < desired_count; i++) {
+			let item_datalist = new ve.Datalist(this.datalist_options, this._element_options);
+			item_datalist.from_binding_fire_silently = true;
+			item_datalist.v = (target_tags[i] !== undefined) ? String(target_tags[i]) : "";
+			delete item_datalist.from_binding_fire_silently;
+			items.push(item_datalist);
+		}
+		this.components_obj.datalist = items[0];
+		this.components_obj.list.from_binding_fire_silently = true;
+		this.components_obj.list.v = items;
+		delete this.components_obj.list.from_binding_fire_silently;
+		if (this.owner)
+			this.components_obj.list.setOwner(this.owner, []);
 	}
 	
 	/**

@@ -110,6 +110,7 @@ ve.ScriptManagerMonaco = class extends ve.Component {
 				
 				// 4. Handle value changes and sync to Blockly
 				this.editor.onDidChangeModelContent(() => {
+					if (this.do_not_fire_to_binding || this.to_binding_fire_silently) return;
 					this._exportToBlockly();
 					this.fireToBinding();
 				});
@@ -177,7 +178,7 @@ ve.ScriptManagerMonaco = class extends ve.Component {
 		}
 		
 		//Fire from binding
-		delete this.do_not_fire_to_binding;
+		this.do_not_fire_to_binding = Boolean(this.options.do_not_fire_to_binding);
 		this.fireFromBinding();
 	}
 	
@@ -353,10 +354,15 @@ ve.ScriptManagerMonaco = class extends ve.Component {
 			...this.options.monaco_options
 		});
 		
-		//Apply current theme; restore view state
+		//Apply current theme; restore view state and change listener
 		if (this._theme)
 			this.setTheme(this._theme);
 		this.editor.restoreViewState(view_state);
+		this.editor.onDidChangeModelContent(() => {
+			if (this.do_not_fire_to_binding || this.to_binding_fire_silently) return;
+			this._exportToBlockly();
+			this.fireToBinding();
+		});
 	}
 	
 	/**

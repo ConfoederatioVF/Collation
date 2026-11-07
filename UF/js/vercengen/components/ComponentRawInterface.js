@@ -45,7 +45,9 @@ ve.RawInterface = class extends ve.Component {
 		//KEEP AT BOTTOM!
 		this.name = this.options.name;
 		this.reserved_keys = Object.keys(this).concat(["reserved_keys", "v"]);
+		this.from_binding_fire_silently = true;
 		this.v = components_obj;
+		delete this.from_binding_fire_silently;
 	}
 	
 	/**
@@ -74,13 +76,18 @@ ve.RawInterface = class extends ve.Component {
 		//Convert from parameters
 		let components_obj = arg0_components_obj;
 		
-		//Declare local instance variables
-		let all_component_els = this.element.querySelectorAll(`[component]`);
+		//Reset old destructured bindings and direct child component elements
+		Object.iterate(this.components_obj, (local_key, local_value) => {
+			if (!this.reserved_keys.includes(local_key)) delete this[local_key];
+		});
+		let direct_children = Array.from(this.element.children);
+		for (let i = 0; i < direct_children.length; i++)
+			if (direct_children[i].hasAttribute("component"))
+				direct_children[i].remove();
 		
-		//Set this.components_obj; reset this.element by removing all selectors with [component] attributes
-		all_component_els.forEach((local_element) => local_element.remove());
+		this.components_obj = components_obj;
 		Object.iterate(components_obj, (local_key, local_value) => {
-			if (typeof local_value === "object") {
+			if (typeof local_value === "object" && local_value !== null) {
 				if (!this.reserved_keys.includes(local_key)) {
 					this[local_key] = local_value;
 				} else {
@@ -95,7 +102,8 @@ ve.RawInterface = class extends ve.Component {
 				local_value.parent_el = this.element;
 			}
 		});
-		if (this.options.onchange) this.options.onchange(this);
+		this.setOwner(this.owner, this.owners);
+		this.fireFromBinding();
 	}
 };
 

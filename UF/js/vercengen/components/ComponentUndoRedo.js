@@ -187,7 +187,9 @@ ve.UndoRedo = class extends ve.Component {
 			this.draw();
 			this.handleEvents();
 		});
+		this.from_binding_fire_silently = true;
 		this.v = DALS.Timeline.current_timeline;
+		delete this.from_binding_fire_silently;
 	}
 	
 	/**
@@ -239,6 +241,8 @@ ve.UndoRedo = class extends ve.Component {
 	 * @param {boolean} [arg0_force_update] - Whether to force update the current Actions Map.
 	 */
 	draw (arg0_force_update) {
+		if (this._is_removing) return;
+		
 		//Convert from parameters
 		let force_update = arg0_force_update;
 		
@@ -474,10 +478,11 @@ ve.UndoRedo = class extends ve.Component {
 					};
 				}
 				
+				if (this.html_select) this.html_select.remove();
 				this.html_select = new ve.Interface({
 					select_field: new ve.Select(this.timeline_select_obj, {
 						name: "Viewing:",
-						onchange: (v, e) => {
+						onuserchange: (v, e) => {
 							this.value = v;
 							this.draw(true);
 							this.fireToBinding();
@@ -497,7 +502,7 @@ ve.UndoRedo = class extends ve.Component {
 							}, {
 								name: `<b>${loc("ve.registry.localisation.UndoRedo_sort_timelines")}</b><br><br>`,
 								selected: this.options.sort_mode,
-								onchange: (v, e) => {
+								onuserchange: (v, e) => {
 									this.options.sort_mode = v;
 									this.draw(true);
 								}
@@ -506,7 +511,7 @@ ve.UndoRedo = class extends ve.Component {
 					}, { name: "<icon>filter_alt</icon>", tooltip: loc("ve.registry.localisation.UndoRedo_sorting_filter"), x: 1, y: 0 }),
 					timeline_name: new ve.Text(timeline_obj.name, {
 						name: `${loc("ve.registry.localisation.UndoRedo_name")} `,
-						onchange: (v, e) => {
+						onuserchange: (v, e) => {
 							timeline_obj.name = v;
 							this.draw(true);
 						},
@@ -514,6 +519,7 @@ ve.UndoRedo = class extends ve.Component {
 					})
 				}, { is_folder: false });
 				
+				if (this.html_information) this.html_information.remove();
 				this.html_information = new ve.HTML(() => `Timeline ID: ${DALS.Timeline.current_timeline} | Index: #${DALS.Timeline.current_index}<br><li style = "margin-left: calc(var(--padding)*2);"><b>Active Branch</b>: ${DALS.Timeline.getTimeline(DALS.Timeline.current_timeline).name}</li>`);
 				this.html_list_el.appendChild(this.html_select.element);
 				this.html_list_el.appendChild(this.html_information.element);

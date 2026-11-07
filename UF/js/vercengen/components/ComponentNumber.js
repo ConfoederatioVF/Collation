@@ -37,13 +37,6 @@ ve.Number = class extends ve.Component {
 		options.attributes = (options.attributes) ? options.attributes : {};
 		
 		//Declare local instance variables
-		let attributes = {
-			readonly: options.disabled,
-			max: options.max,
-			min: options.min,
-			step: options.step,
-			...options.attributes
-		};
 		this.element = document.createElement("div");
 			this.element.setAttribute("component", "ve-number");
 			this.element.instance = this;
@@ -52,40 +45,11 @@ ve.Number = class extends ve.Component {
 		this.options = options;
 		this.value = value;
 		
-		//Format html_string
-		let html_string = [];
-		html_string.push(`<span id = "name"></span> `);
-		html_string.push(`<input type = "number"${HTML.objectToAttributes(attributes)}>`);
-		
-		//Populate element and initialise handlers
-		this.element.innerHTML = html_string.join("");
-		
-		let input_el = this.element.querySelector("input");
-		input_el.addEventListener("input", (e) => {
-			let num_val = global.Number(e.target.value);
-			if (!isNaN(num_val)) {
-				this.value = num_val;
-				if (typeof this.options.oninput === "function")
-					this.options.oninput(this.value, this);
-			}
-		});
-		input_el.addEventListener("change", (e) => {
-			if (this.options.max && e.target.value > this.options.max)
-				e.target.value = this.options.max;
-			if (this.options.min && e.target.value < this.options.min)
-				e.target.value = this.options.min;
-			
-			this.from_binding_fire_silently = true;
-			this.v = global.Number(e.target.value);
-			delete this.from_binding_fire_silently;
-			this.fireToBinding();
-			if (typeof this.options.onchange === "function")
-				this.options.onchange(this.value, this);
-			if (typeof this.options.onuserchange === "function")
-				this.options.onuserchange(this.value, this);
-		});
-		this.name = options.name;
+		//Populate scalar element and initialise handlers
+		this._renderScalarInput();
+		this.from_binding_fire_silently = true;
 		this.v = this.value;
+		delete this.from_binding_fire_silently;
 	}
 
 	/**
@@ -157,10 +121,21 @@ ve.Number = class extends ve.Component {
 		if (Array.isArray(value)) {
 			//Populate this.list_component with all_components
 			let all_components = [];
+			if (this.list_component)
+				this.list_component.remove();
 			
 			for (let i = 0; i < value.length; i++)
 				all_components.push(new ve.Number(value[i]));
-			this.list_component = new ve.List(all_components, this.options.list_options);
+			this.list_component = new ve.List(all_components, {
+				...this.options.list_options,
+				do_not_bubble_owners: true,
+				onuserchange: () => {
+					this.value = this.v;
+					this.fireToBinding();
+				}
+			});
+			if (this.owner)
+				this.list_component.setOwner(this.owner, []);
 			
 			//Set value and refresh
 			this.value = value;
@@ -168,11 +143,11 @@ ve.Number = class extends ve.Component {
 			this.element.appendChild(this.list_component.element);
 			this.fireFromBinding();
 		} else {
-			//Refresh this.element if possible
+			//Restore scalar input in-place if switching from array mode
 			if (this.list_component) {
-				let temp_component = new ve.Number(value, this.options);
-				this.element = temp_component.element;
+				this.list_component.remove();
 				delete this.list_component;
+				this._renderScalarInput();
 			}
 			
 			//Set value and update UI
@@ -180,6 +155,50 @@ ve.Number = class extends ve.Component {
 			this.element.querySelector("input").value = this.value;
 			this.fireFromBinding();
 		}
+	}
+	
+	/**
+	 * Renders the scalar `<input type="number">` markup and attaches DOM listeners on `this.element`.
+	 * - Method of: {@link ve.Number}
+	 * @private
+	 */
+	_renderScalarInput () {
+		//Declare local instance variables
+		let attributes = {
+			readonly: this.options.disabled,
+			max: this.options.max,
+			min: this.options.min,
+			step: this.options.step,
+			...this.options.attributes
+		};
+		let html_string = [];
+		
+		//Format html_string
+		html_string.push(`<span id = "name"></span> `);
+		html_string.push(`<input type = "number"${HTML.objectToAttributes(attributes)}>`);
+		this.element.innerHTML = html_string.join("");
+		
+		let input_el = this.element.querySelector("input");
+		input_el.addEventListener("input", (e) => {
+			let num_val = global.Number(e.target.value);
+			if (!isNaN(num_val)) {
+				this.value = num_val;
+				if (typeof this.options.oninput === "function")
+					this.options.oninput(this.value, this);
+			}
+		});
+		input_el.addEventListener("change", (e) => {
+			if (this.options.max !== undefined && global.Number(e.target.value) > this.options.max)
+				e.target.value = this.options.max;
+			if (this.options.min !== undefined && global.Number(e.target.value) < this.options.min)
+				e.target.value = this.options.min;
+			
+			this.from_binding_fire_silently = true;
+			this.v = global.Number(e.target.value);
+			delete this.from_binding_fire_silently;
+			this.fireToBinding();
+		});
+		this.name = this.options.name;
 	}
 	
 	/**

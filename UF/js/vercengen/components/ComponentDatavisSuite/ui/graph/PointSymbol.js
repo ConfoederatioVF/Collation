@@ -29,6 +29,7 @@ ve.DatavisSuite.PointSymbol = class extends ve.Component {
 		let value = (arg0_value) ? arg0_value : {};
 		
 		//Declare local instance variables
+		this.value = value;
 		if (!value.decal) value.decal = {};
 		if (!this.value.decal) this.value.decal = {};
 		
@@ -160,12 +161,11 @@ ve.DatavisSuite.PointSymbol = class extends ve.Component {
 		}, {
 			name: (this.options.name) ? this.options.name : loc("ve.registry.localisation.PointSymbol_point_symbol"),
 			onuserchange: (v, e) => {
-				delete this.do_not_fire_to_binding;
 				this.fireToBinding();
 			}
 		});
 		this.interface.bind(this.element);
-		this.value = value;
+		this.fireFromBinding();
 	}
 };
 

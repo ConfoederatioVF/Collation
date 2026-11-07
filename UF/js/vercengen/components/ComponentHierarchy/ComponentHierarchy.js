@@ -53,7 +53,9 @@ ve.Hierarchy = class extends ve.Component {
 		this.options = options;
 		
 		//Append components_obj to this.element
+		this.from_binding_fire_silently = true;
 		this.v = components_obj;
+		delete this.from_binding_fire_silently;
 		ve.Hierarchy.instances.push(this);
 	}
 	
@@ -170,8 +172,10 @@ ve.Hierarchy = class extends ve.Component {
 			if (this.options.onitemchange) this.options.onitemchange(this.v, { item_el: e.movedNode, old_parent_el: e.originalParentItem, new_parent_el: e.newParentItem });
 			this.on_stop_data = e;
 			this.fireToBinding();
+			delete this.on_stop_data;
 		});
 		
+		this.setOwner(this.owner, this.owners);
 		this.fireFromBinding();
 		this._restoreScrollState();
 	}

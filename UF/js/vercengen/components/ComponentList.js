@@ -98,7 +98,9 @@ ve.List = class extends ve.Component { //[WIP] - Make empty lists valid
 		
 		//Set this.v to be the inputted ve.Component[]
 		if (options.name) this.name = options.name;
+		this.from_binding_fire_silently = true;
 		this.v = value;
+		delete this.from_binding_fire_silently;
 	}
 	
 	/**
@@ -211,7 +213,8 @@ ve.List = class extends ve.Component { //[WIP] - Make empty lists valid
       if (this.components_el.children[i] !== current_component.element)
         this.components_el.insertBefore(current_component.element, this.components_el.children[i] || null);
 
-      current_component.setOwner(this, [this]);
+      let item_owners = (Array.isArray(this.owners) ? this.owners : []).concat([this]);
+      current_component.setOwner(this.owner, item_owners);
       
       //2. Define context menu interfaces (only if not already initialised)
       if (!current_component._ve_list_init) {

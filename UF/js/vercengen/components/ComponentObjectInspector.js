@@ -38,7 +38,9 @@ ve.ObjectInspector = class extends ve.Component {
 		this.value = value;
 		
 		//Format HTML string
+		this.from_binding_fire_silently = true;
 		this.v = this.value;
+		delete this.from_binding_fire_silently;
 	}
 	
 	/**
@@ -68,10 +70,11 @@ ve.ObjectInspector = class extends ve.Component {
 		let value = arg0_value;
 		
 		//Set this.element.innerHTML to reflect the object at hand
+		this.value = value;
 		this.element.innerHTML = ve.ObjectInspector.generateHTMLRecursively(this.value, this.options.key_name, {
 			max_depth: this.options.max_depth
 		});
-		this.value = value;
+		this.fireFromBinding();
 	}
 	
 	/**

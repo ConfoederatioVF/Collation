@@ -74,11 +74,13 @@ ve.Spreadsheet = class extends ve.Component {
 		
 		this.initialisation_loop = setInterval(() => {
 			try {
+				this.from_binding_fire_silently = true;
 				if (this.value?.is_snapshot) {
 					this.fromJSON(this.value);
 				} else {
 					this.v = this.value;
 				}
+				delete this.from_binding_fire_silently;
 				
 				//Parse options
 				if (this.options.dark_mode)

@@ -73,9 +73,11 @@ ve.ScriptManagerBlockly = class extends ve.Component {
 		
 		//Call after Blockly initialization
 		this.interceptBlocklyTransforms();
-		this.workspace.addChangeListener(() => {
+		this.workspace.addChangeListener((e) => {
+			if (e && e.isUiEvent) return;
+			if (this.to_binding_fire_silently || this.do_not_fire_to_binding) return;
 			this._exportToMonaco();
-			this.fireToBinding(); 
+			this.fireToBinding();
 		});
 		
 		this.fixBlocklyScaling();
@@ -93,7 +95,8 @@ ve.ScriptManagerBlockly = class extends ve.Component {
 	get v () {
 		//Return statement
 		try {
-			return Blockly.Javascript.workspaceToCode(Blockly.mainWorkspace);
+			let generator = Blockly.JavaScript || Blockly.Javascript;
+			return generator.workspaceToCode(this.workspace || Blockly.mainWorkspace);
 		} catch (e) {}
 	}
 	

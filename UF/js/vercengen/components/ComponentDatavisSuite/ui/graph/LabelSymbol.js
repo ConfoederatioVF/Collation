@@ -39,6 +39,7 @@ ve.DatavisSuite.LabelSymbol = class extends ve.Component { //[WIP] - Refactor to
 		let value = (arg0_value) ? arg0_value : {};
 		
 		//Parse value
+		this.value = value;
 		this.element.innerHTML = "";
 		this.interface = new ve.Interface({
 			text_options: new ve.Interface({
@@ -274,12 +275,11 @@ ve.DatavisSuite.LabelSymbol = class extends ve.Component { //[WIP] - Refactor to
 		}, { 
 			name: (this.options.name) ? this.options.name : loc("ve.registry.localisation.LabelSymbol_label_symbol"),
 			onuserchange: (v, e) => {
-				delete this.do_not_fire_to_binding;
 				this.fireToBinding();
 			}
 		});
 		this.interface.bind(this.element);
-		this.value = value;
+		this.fireFromBinding();
 	}
 };
 

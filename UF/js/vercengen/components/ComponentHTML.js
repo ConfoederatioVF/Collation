@@ -42,7 +42,9 @@ ve.HTML = class extends ve.Component {
 		this.value = value;
 		
 		//Set .v
+		this.from_binding_fire_silently = true;
 		this.v = this.value;
+		delete this.from_binding_fire_silently;
 	}
 	
 	/**
@@ -70,31 +72,43 @@ ve.HTML = class extends ve.Component {
 		//Convert from parameters
 		let value = arg0_value;
 		
+		//Helper to apply rendered content onto this.element
+		let renderContent = (arg0_content) => {
+			if (arg0_content && typeof arg0_content === "object") {
+				if (this.element.firstChild !== arg0_content || this.element.childNodes.length !== 1) {
+					this.element.innerHTML = "";
+					this.element.appendChild(arg0_content);
+				}
+			} else {
+				let next_html = (arg0_content !== undefined) ? String(arg0_content) : "";
+				if (this.element.innerHTML !== next_html)
+					this.element.innerHTML = next_html;
+			}
+		};
+		
+		//Clear any previous immediate-mode polling loop before updating
+		if (this.draw_loop) {
+			clearInterval(this.draw_loop);
+			delete this.draw_loop;
+		}
+		
 		//Set value and update UI
 		this.value = value;
 		if (typeof this.value === "function") {
-			if (this.draw_loop) {
-				clearInterval(this.draw_loop);
-				delete this.draw_loop;
-			}
 			this.draw_function = this.value;
+			renderContent(this.draw_function(this));
 			if (this.options.do_not_refresh !== true) {
-				this.v = this.draw_function(this);
 				this.draw_loop = setInterval(() => {
-					if (typeof this.draw_function === "function") {
-						this.v = this.draw_function(this);
-					} else {
+					if (this._is_removing || typeof this.draw_function !== "function") {
 						clearInterval(this.draw_loop);
+						return;
 					}
+					renderContent(this.draw_function(this));
 				}, 100);
-			} else {
-				this.v = this.draw_function(this);
 			}
-		} else if (typeof this.value === "object") {
-			this.element.innerHTML = "";
-			this.element.appendChild(this.value);
 		} else {
-			this.element.innerHTML = this.value;
+			delete this.draw_function;
+			renderContent(this.value);
 		}
 		this.value = this.element;
 		this.fireFromBinding();

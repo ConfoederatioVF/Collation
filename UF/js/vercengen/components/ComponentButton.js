@@ -64,7 +64,9 @@ ve.Button = class extends ve.Component {
 			if (this.fireToBinding) this.fireToBinding();
 		});
 		this.name = options.name;
+		this.from_binding_fire_silently = true;
 		this.v = this.value;
+		delete this.from_binding_fire_silently;
 	}
 
 	/**

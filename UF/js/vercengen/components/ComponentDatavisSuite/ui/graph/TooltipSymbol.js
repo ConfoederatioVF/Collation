@@ -31,6 +31,7 @@ ve.DatavisSuite.TooltipSymbol = class extends ve.Component {
 		let value = (arg0_value) ? arg0_value : {};
 		
 		//Parse value
+		this.value = value;
 		this.element.innerHTML = "";
 		this.interface = new ve.Interface({
 			show: new ve.Toggle(value.show, {
@@ -281,9 +282,10 @@ ve.DatavisSuite.TooltipSymbol = class extends ve.Component {
 		}, {
 			name: (this.options.name) ? this.options.name : loc("ve.registry.localisation.TooltipSymbol_tooltip_symbol"),
 			onuserchange: (v, e) => {
-				delete this.do_not_fire_to_binding;
 				this.fireToBinding();
 			}
 		});
+		this.interface.bind(this.element);
+		this.fireFromBinding();
 	}
 }

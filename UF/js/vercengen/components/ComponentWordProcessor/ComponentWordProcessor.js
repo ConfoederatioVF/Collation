@@ -170,7 +170,7 @@ ve.WordProcessor = class extends ve.Component {
 		this.initWYSIWYG();
 		this.from_binding_fire_silently = true;
 		this.v = value;
-		this.from_binding_fire_silently = false;
+		delete this.from_binding_fire_silently;
 	}
 	
 	/**
@@ -219,9 +219,11 @@ ve.WordProcessor = class extends ve.Component {
 		
 		//Add change handlers
 		html_view_el.addEventListener("input", (e) => {
+			visual_view_el.innerHTML = html_view_el.value;
 			this.fireToBinding();
 		});
 		visual_view_el.addEventListener("input", (e) => {
+			html_view_el.value = visual_view_el.innerHTML;
 			this.fireToBinding();
 		});
 	}
@@ -268,11 +270,16 @@ ve.WordProcessor = class extends ve.Component {
 		
 		//Declare local instance variables
 		let html_content_el = wysiwyg_el.querySelector(`.html-view`);
+		let toggle_button_el = wysiwyg_el.querySelector(`.editor-button[data-action="toggle-view"]`);
 		let visual_content_el = wysiwyg_el.querySelector(`.visual-view`);
+		let is_html_view = (
+			(toggle_button_el && toggle_button_el.classList.contains("active")) ||
+			html_content_el.style.display === "block"
+		);
 		
 		//Return statement
-		return (html_content_el.innerHTML.length > visual_content_el.innerHTML.length) ?
-			html_content_el.innerHTML : visual_content_el.innerHTML;
+		return (is_html_view) ?
+			html_content_el.value : visual_content_el.innerHTML;
 	}
 	
 	/**

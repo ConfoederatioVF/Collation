@@ -30,6 +30,7 @@ ve.DatavisSuite.AxisSymbol_Polar = class extends ve.Component {
 		let value = (arg0_value) ? arg0_value : {};
 		
 		//Parse value
+		this.value = value;
 		this.element.innerHTML = "";
 		this.interface = new ve.Interface({
 			id: new ve.Text(value.id, {
@@ -108,7 +109,6 @@ ve.DatavisSuite.AxisSymbol_Polar = class extends ve.Component {
 					this.options.graph_obj.options.symbol.polar = this.value;
 					this.options.graph_obj.draw();
 				}
-				delete this.do_not_fire_to_binding;
 				this.fireToBinding();
 			},
 			style: this.options.style,
@@ -116,7 +116,7 @@ ve.DatavisSuite.AxisSymbol_Polar = class extends ve.Component {
 			y: this.options.y
 		});
 		this.interface.bind(this.element);
-		this.value = value;
+		this.fireFromBinding();
 	}
 };
 

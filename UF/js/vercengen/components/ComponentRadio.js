@@ -80,7 +80,9 @@ ve.Radio = class extends ve.Component { //[WIP] - ve.Radio should be refactored 
 		ve.Radio.instances.push(this);
 		
 		this.name = options.name;
+		this.from_binding_fire_silently = true;
 		this.v = this.value;
+		delete this.from_binding_fire_silently;
 	}
 	
 	/**
@@ -93,7 +95,8 @@ ve.Radio = class extends ve.Component { //[WIP] - ve.Radio should be refactored 
 	 */
 	get v () {
 		//Declare local instance variables
-		return this.element.querySelector(`input[type="radio"]:checked`).id;
+		let checked_el = this.element.querySelector(`input[type="radio"]:checked`);
+		return (checked_el) ? checked_el.id : "";
 	}
 	
 	/**
@@ -113,23 +116,39 @@ ve.Radio = class extends ve.Component { //[WIP] - ve.Radio should be refactored 
 		if (typeof value === "boolean") {
 			//Set singular checkbox value
 			this.value = value;
-			this.element.querySelector(`input[type="radio"]`).checked = value;
-		} else {
+			let radio_el = this.element.querySelector(`input[type="radio"]`);
+			if (radio_el) radio_el.checked = value;
+		} else if (typeof value === "string") {
+			let radio_el = this.element.querySelector(`input[type="radio"][id="${value}"]`);
+			if (radio_el) radio_el.checked = true;
+		} else if (typeof value === "object" && value !== null) {
 			let traverse = (ul_el, values) => {
 				[...ul_el.children].forEach((li_el) => {
 					if (li_el.tagName === "LI") {
 						let input_el = li_el.querySelector(`input[type="radio"]`);
-						if (input_el && input_el.id in values)
-							input_el.checked = (!!values[input_el.id]);
+						if (input_el && input_el.id in values) {
+							let item_val = values[input_el.id];
+							if (typeof item_val === "object" && item_val !== null) {
+								input_el.checked = Boolean(
+									item_val.checked || item_val.selected ||
+									this.options.checked === input_el.id || this.options.selected === input_el.id
+								);
+							} else {
+								input_el.checked = Boolean(
+									item_val ||
+									this.options.checked === input_el.id || this.options.selected === input_el.id
+								);
+							}
+						}
 					} else if (li_el.tagName === "UL") {
 						if (li_el.id && typeof values[li_el.id] === "object")
 							traverse(li_el, values[li_el.id]);
 					}
-				})
+				});
 			};
 			
 			let root_ul = this.element.querySelector("ul");
-			traverse(root_ul, value);
+			if (root_ul) traverse(root_ul, value);
 			this.value = value;
 		}
 		this.fireFromBinding();
@@ -157,8 +176,8 @@ ve.Radio = class extends ve.Component { //[WIP] - ve.Radio should be refactored 
 		
 		//Iterate over all keys in value
 		Object.iterate(value, (local_key, local_value) => {
-			let is_checked = (local_value === true || local_value.checked);
-				if (local_this.options.checked === local_key) is_checked = true;
+			let is_checked = Boolean(local_value === true || local_value?.checked || local_value?.selected);
+				if (local_this.options.checked === local_key || local_this.options.selected === local_key) is_checked = true;
 			
 			if (typeof local_value === "object" && local_value.is_category) {
 				html_string.push(`<ul id = "${local_key}">`);

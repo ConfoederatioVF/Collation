@@ -166,18 +166,14 @@ ve.Feature = class {
 					break;
 				}
 		
-		//Reset any child owners if their first owner is this ve.Feature
+		//Reset any child owners referencing this ve.Feature
 		if (this.components_obj)
 			Object.iterate(this.components_obj, (local_key, local_value) => {
-				if (local_value.owner && local_value.owner.is_vercengen_feature)
-					if (local_value.owner.id === this.id) {
-						//Remove the .owner
-						delete local_value.owner;
-						
-						//Splice .owners to remove the present .owner
-						if (local_value.owners.length >= 1)
-							local_value.owners.splice(0, 1);
-					}
+				if (!local_value) return;
+				if (local_value.owner && local_value.owner.is_vercengen_feature && local_value.owner.id === this.id)
+					delete local_value.owner;
+				if (Array.isArray(local_value.owners))
+					local_value.owners = local_value.owners.filter((local_owner) => local_owner !== this);
 			});
 		
 		if (this.element) this.element.remove();
@@ -198,15 +194,10 @@ ve.Feature = class {
 			try {
 				if (local_value) {
 					local_value.removeComponent();
-					if (local_value.owner && local_value.owner.is_vercengen_feature)
-						if (local_value.owner.id === this.id) {
-							//Remove the .owner
-							delete local_value.owner;
-							
-							//Splice .owners to remove the present .owner
-							if (local_value.owners.length >= 1)
-								local_value.owners.splice(0, 1);
-						}
+					if (local_value.owner && local_value.owner.is_vercengen_feature && local_value.owner.id === this.id)
+						delete local_value.owner;
+					if (Array.isArray(local_value.owners))
+						local_value.owners = local_value.owners.filter((local_owner) => local_owner !== this);
 				}
 				delete this.components_obj[local_key];
 			} catch (e) { console.error(e); }
@@ -214,16 +205,26 @@ ve.Feature = class {
 	}
 	
 	/**
-	 * Iterates over all present Vercengen components in {@link ve.Feature} and sets their owner to the current Feature if they do not already have populated `.owner`/`.owners` fields.
+	 * Iterates over all present Vercengen components in {@link ve.Feature} and sets their owner to the current Feature if they do not already have a non-Feature owner, whilst ensuring this Feature is included in `.owners`.
 	 * - Method of: {@link ve.Feature}
 	 */
 	updateOwner () {
 		//Iterate over all this.components_obj
 		if (this.components_obj)
 			Object.iterate(this.components_obj, (local_key, local_value) => {
-				if (local_value.is_vercengen_component)
-					if (!local_value.owner || local_value.owner.is_vercengen_feature)
-						this.components_obj[local_key].setOwner(this, [this]);
+				if (local_value?.is_vercengen_component)
+					if (!local_value.owner || local_value.owner.is_vercengen_feature) {
+						let root_owner = (this.options?.class_instance) ? this.options.class_instance : this;
+						let owner_chain = (root_owner !== this) ? [root_owner, this] : [this];
+						this.components_obj[local_key].setOwner(root_owner, owner_chain);
+					} else {
+						let existing_owners = Array.isArray(local_value.owners) ?
+							local_value.owners.filter((local_owner) => local_owner !== this) : [local_value.owner];
+						if (!existing_owners.includes(local_value.owner))
+							existing_owners.unshift(local_value.owner);
+						existing_owners.push(this);
+						this.components_obj[local_key].setOwner(local_value.owner, existing_owners);
+					}
 			});
 	}
 	

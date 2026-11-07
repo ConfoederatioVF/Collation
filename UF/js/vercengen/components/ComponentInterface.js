@@ -48,8 +48,14 @@ ve.Interface = class extends ve.Component {
 		if (options.is_folder !== false) options.is_folder = true;
 		
 		//Factory handler
-		if (options.type === "flex") return new ve.FlexInterface(components_obj, options);
-		if (options.type === "raw") return new ve.RawInterface(components_obj, options);
+		if (options.type === "flex") {
+			this._is_removing = true;
+			return new ve.FlexInterface(components_obj, options);
+		}
+		if (options.type === "raw") {
+			this._is_removing = true;
+			return new ve.RawInterface(components_obj, options);
+		}
 		
 		//Declare local instance variables
 		let attributes = {
@@ -83,7 +89,9 @@ ve.Interface = class extends ve.Component {
 		//KEEP AT BOTTOM!
 		this.name = (options.name) ? options.name : loc("ve.registry.localisation.Interface_folder");
 		this.reserved_keys = Object.keys(this).concat(["reserved_keys", "v"]);
+		this.from_binding_fire_silently = true;
 		this.v = components_obj;
+		delete this.from_binding_fire_silently;
 	}
 	
 	/**
@@ -134,9 +142,10 @@ ve.Interface = class extends ve.Component {
 			} else {
 				console.warn(`ve.Interface: ${local_key} is a reserved key. It can therefore not be set to:`, local_value);
 			}
-		})
+		});
+		this.setOwner(this.owner, this.owners);
 		this.redraw();
-		if (this.options.onchange) this.options.onchange(this.value);
+		this.fireFromBinding();
 	}
 	
 	/**
@@ -156,6 +165,9 @@ ve.Interface = class extends ve.Component {
 		
 		//Assign x, y coordinates to component_obj
 		this.components_obj[component_key] = component_obj;
+		if (!this.reserved_keys.includes(component_key))
+			this[component_key] = component_obj;
+		this.setOwner(this.owner, this.owners);
 		this.redraw();
 	}
 	

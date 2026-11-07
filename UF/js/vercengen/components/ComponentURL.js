@@ -60,7 +60,9 @@ ve.URL = class extends ve.Component {
 			if (String.isURL(this.value))
 				require("electron").shell.openExternal(this.value);
 		});
+		this.from_binding_fire_silently = true;
 		this.v = this.value;
+		delete this.from_binding_fire_silently;
 	}
 	
 	/**

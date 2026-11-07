@@ -250,6 +250,7 @@ ve.ScriptManager = class extends ve.Component {
 			},
 			onuserchange: (v, e) => {
 				this._blockly_change = true;
+				this.fireToBinding();
 			}
 		});
 		this.scene_blockly_el = this.scene_blockly.element;
@@ -272,6 +273,7 @@ ve.ScriptManager = class extends ve.Component {
 				this._monaco_change = true;
 				if (this._settings.autosave_projects)
 					ve.ScriptManager._autosave.call(this);
+				this.fireToBinding();
 			}
 		});
 			this.scene_monaco_initialisation_loop = setInterval(() => {
@@ -731,14 +733,16 @@ ve.ScriptManager = class extends ve.Component {
 			
 			//Update path and value
 			this._file_path = file_path;
+			this.from_binding_fire_silently = true;
 			this.v = actual_file_data;
+			delete this.from_binding_fire_silently;
 			
 			//Load extension highlighting
 			ve.ScriptManager._loadFileExtension.call(this, path.extname(this._file_path));
 			if (!do_not_add_to_bottombar) 
 				this.bottombar_obj.addFile(this._file_path);
 			
-			//Fire from binding
+			//Fire to binding
 			this.fireToBinding();
 		} catch (e) {}
 	}

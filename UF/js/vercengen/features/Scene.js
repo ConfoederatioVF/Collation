@@ -86,6 +86,7 @@ ve.Scene = class extends ve.Feature {
 			if (local_value.element)
 				this.element.appendChild(local_value.element);
 		});
+		this.updateOwner();
 	}
 	
 	/**

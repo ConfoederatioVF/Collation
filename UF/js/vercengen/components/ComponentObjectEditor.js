@@ -662,6 +662,7 @@ ve.ObjectEditor = class extends ve.Component { //[WIP] - Fix documentation; rewo
 		
 		this.hierarchy = new ve.Hierarchy(hierarchy_obj, {
 			disable_searchbar: false,
+			do_not_bubble_owners: true,
 			searchbar_style: { marginBottom: "0" },
 			onuserchange: (v, e) => this._handleReorder(v, e)
 		});
@@ -669,7 +670,7 @@ ve.ObjectEditor = class extends ve.Component { //[WIP] - Fix documentation; rewo
 		this.hierarchy.element.style.height = "100%";
 		this.hierarchy.element.style.overflowY = "auto";
 		
-		if (this.owner) this.hierarchy.setOwner(this.owner);
+		if (this.owner) this.hierarchy.setOwner(this.owner, []);
 		this.element.appendChild(this.hierarchy.element);
 	}
 };

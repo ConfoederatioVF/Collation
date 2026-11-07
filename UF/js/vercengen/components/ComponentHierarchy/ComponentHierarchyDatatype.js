@@ -154,7 +154,9 @@ ve.HierarchyDatatype = class extends ve.Component {
 				disabled: this.options.disabled,
 				...this.options.name_options
 			});
+			this.from_binding_fire_silently = true;
 			this.v = this.components_obj;
+			delete this.from_binding_fire_silently;
 		}
 	}
 	
@@ -189,6 +191,7 @@ ve.HierarchyDatatype = class extends ve.Component {
 		
 		//Reset this.components_obj
 		this.components_obj = components_obj;
+		this.setOwner(this.owner, this.owners);
 		this.refresh();
 		this.fireFromBinding();
 	}

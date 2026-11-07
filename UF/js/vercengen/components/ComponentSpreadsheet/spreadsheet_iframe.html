@@ -100,7 +100,9 @@
 	startResizeLoop();
 	
   //MODIFY END
+	let is_setting_data = false;
 	univerAPI.addEvent(univerAPI.Event.SheetValueChanged, (e) => {
+		if (is_setting_data) return;
 		window.parent.ve.Spreadsheet.fireToBinding(window.table_id);
 	});
 	
@@ -314,6 +316,7 @@
 		let data_obj = arg0_data_obj;
 		if (!data_obj) data_obj = {};
 		
+		is_setting_data = true;
 		try {
 			let active_workbook = univerAPI.getActiveWorkbook();
 			
@@ -328,6 +331,10 @@
 			return new_workbook;
 		} catch (e) {
 			console.error("Failed to load workbook data:", e);
+		} finally {
+			setTimeout(() => {
+				is_setting_data = false;
+			}, 0);
 		}
 	}
 	

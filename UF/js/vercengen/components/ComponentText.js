@@ -34,13 +34,6 @@ ve.Text = class extends ve.Component {
 		options.attributes = (options.attributes) ? options.attributes : {};
 		
 		//Declare local instance variables
-		let attributes = {
-			disabled: options.disabled,
-			size: options.length,
-			maxlength: options.max,
-			minlength: options.min,
-			...options.attributes
-		};
 		this.element = document.createElement("div");
 			this.element.setAttribute("component", "ve-text");
 			this.element.instance = this;
@@ -48,23 +41,11 @@ ve.Text = class extends ve.Component {
 		this.options = options;
 		this.value = value;
 		
-		//Format html_string
-		let html_string = [];
-		html_string.push(`<span id = "name"></span> `);
-		html_string.push(`<input type = "text"${HTML.objectToAttributes(attributes)}>`);
-		
-		//Populate element and initialise handlers
-		this.element.innerHTML = html_string.join("");
-		
-		let input_el = this.element.querySelector("input");
-		input_el.addEventListener("change", (e) => {
-			this.from_binding_fire_silently = true;
-			this.v = global.String(e.target.value);
-			delete this.from_binding_fire_silently;
-			this.fireToBinding();
-		});
-		if (options.name) this.name = options.name;
+		//Populate scalar element and initialise handlers
+		this._renderScalarInput();
+		this.from_binding_fire_silently = true;
 		this.v = this.value;
+		delete this.from_binding_fire_silently;
 	}
 	
 	/**
@@ -82,8 +63,11 @@ ve.Text = class extends ve.Component {
 			
 			for (let i = 0; i < this.list_component.v.length; i++) {
 				let local_value = this.list_component.v[i].v;
-				if (this.options.parse_number)
-					if (!isNaN(parseFloat(local_value))) local_value = parseFloat(local_value);
+				if (this.options.parse_number && local_value !== undefined && local_value !== null) {
+					let trimmed_value = String(local_value).trim();
+					if (trimmed_value !== "" && !isNaN(global.Number(trimmed_value)))
+						local_value = global.Number(trimmed_value);
+				}
 				all_values.push(local_value);
 			}
 			
@@ -92,11 +76,14 @@ ve.Text = class extends ve.Component {
 		} else {
 			let local_value = structuredClone(this.value);
 			
-			if (this.options.parse_number)
-				if (!isNaN(parseFloat(local_value))) local_value = parseFloat(local_value);
+			if (this.options.parse_number && local_value !== undefined && local_value !== null) {
+				let trimmed_value = String(local_value).trim();
+				if (trimmed_value !== "" && !isNaN(global.Number(trimmed_value)))
+					local_value = global.Number(trimmed_value);
+			}
 			
 			//Return statement
-			return this.value;
+			return local_value;
 		}
 	}
 	
@@ -121,10 +108,21 @@ ve.Text = class extends ve.Component {
 		if (Array.isArray(value)) {
 			//Populate this.list_component with all_components
 			let all_components = [];
+			if (this.list_component)
+				this.list_component.remove();
 			
 			for (let i = 0; i < value.length; i++)
 				all_components.push(new ve.Text(value[i]));
-			this.list_component = new ve.List(all_components, this.options.list_options);
+			this.list_component = new ve.List(all_components, {
+				...this.options.list_options,
+				do_not_bubble_owners: true,
+				onuserchange: () => {
+					this.value = this.v;
+					this.fireToBinding();
+				}
+			});
+			if (this.owner)
+				this.list_component.setOwner(this.owner, []);
 			
 			//Set value and refresh
 			this.value = value;
@@ -132,17 +130,48 @@ ve.Text = class extends ve.Component {
 			this.element.appendChild(this.list_component.element);
 			this.fireFromBinding();
 		} else {
-			//Refresh this.element if possible
+			//Restore scalar input in-place if switching from array mode
 			if (this.list_component) {
-				let temp_component = new ve.Text(value, this.options);
-				this.element = temp_component.element;
+				this.list_component.remove();
 				delete this.list_component;
+				this._renderScalarInput();
 			}
 			
 			this.value = value;
 			this.element.querySelector("input").value = this.value;
 			this.fireFromBinding();
 		}
+	}
+	
+	/**
+	 * Renders the scalar `<input type="text">` markup and attaches DOM listeners on `this.element`.
+	 * - Method of: {@link ve.Text}
+	 * @private
+	 */
+	_renderScalarInput () {
+		//Declare local instance variables
+		let attributes = {
+			disabled: this.options.disabled,
+			size: this.options.length,
+			maxlength: this.options.max,
+			minlength: this.options.min,
+			...this.options.attributes
+		};
+		let html_string = [];
+		
+		//Format html_string
+		html_string.push(`<span id = "name"></span> `);
+		html_string.push(`<input type = "text"${HTML.objectToAttributes(attributes)}>`);
+		this.element.innerHTML = html_string.join("");
+		
+		let input_el = this.element.querySelector("input");
+		input_el.addEventListener("change", (e) => {
+			this.from_binding_fire_silently = true;
+			this.v = global.String(e.target.value);
+			delete this.from_binding_fire_silently;
+			this.fireToBinding();
+		});
+		if (this.options.name) this.name = this.options.name;
 	}
 };
 

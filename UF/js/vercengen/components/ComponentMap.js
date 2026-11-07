@@ -56,7 +56,9 @@ ve.Map = class extends ve.Component {
 		this.map = undefined;
 		
 		//Set this.v
+		this.from_binding_fire_silently = true;
 		this.v = value;
+		delete this.from_binding_fire_silently;
 	}
 	
 	/**

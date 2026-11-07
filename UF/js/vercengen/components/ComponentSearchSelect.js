@@ -58,7 +58,9 @@ ve.SearchSelect = class extends ve.Component {
 		this.search_value = "";
 		
 		//Append components_obj to this.element
+		this.from_binding_fire_silently = true;
 		this.v = components_obj;
+		delete this.from_binding_fire_silently;
 	}
 	
 	/**
@@ -180,6 +182,7 @@ ve.SearchSelect = class extends ve.Component {
 		//Populate this.element from this.components_obj
 		Object.iterate(this.components_obj, (local_key, local_value) =>
 			this.element.appendChild(local_value.element));
+		this.setOwner(this.owner, this.owners);
 		this.fireFromBinding();
 	}
 	

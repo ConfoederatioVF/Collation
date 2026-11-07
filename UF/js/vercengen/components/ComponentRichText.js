@@ -66,12 +66,14 @@ ve.RichText = class extends ve.Component {
 		//Populate element and initialise handlers
 		this.element.innerHTML = html_string.join("");
 		this.element.querySelector(`#biuf-input`).addEventListener("input", (e) => {
-			this.sendOnchangeEvent();
 			this.handleBIUF(e.target);
+			this.sendOnchangeEvent();
 		});
 		this.initBIUFToolbar();
 		super.name = options.name;
+		this.from_binding_fire_silently = true;
 		this.v = this.value;
+		delete this.from_binding_fire_silently;
 	}
 	
 	/**
@@ -102,7 +104,9 @@ ve.RichText = class extends ve.Component {
 		if (value === undefined) return; //Internal guard clause if value is undefined
 		
 		//Set #biuf-input value
+		this.value = value;
 		this.element.querySelector(`#biuf-input`).innerHTML = value;
+		this.fireFromBinding();
 	}
 	
 	//Internal helper functions

@@ -55,7 +55,9 @@ ve.Password = class extends ve.Component {
 			delete this.from_binding_fire_silently;
 			this.fireToBinding();
 		});
+		this.from_binding_fire_silently = true;
 		this.v = this.value;
+		delete this.from_binding_fire_silently;
 	}
 	
 	/**

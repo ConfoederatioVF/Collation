@@ -54,7 +54,9 @@ ve.Wiki = class extends ve.Component {
 		this.value = value;
 		
 		//Set .v
+		this.from_binding_fire_silently = true;
 		this.v = this.value;
+		delete this.from_binding_fire_silently;
 	}
 	
 	/**

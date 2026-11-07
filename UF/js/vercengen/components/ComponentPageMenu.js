@@ -115,12 +115,20 @@ ve.PageMenu = class extends ve.Component { //[WIP] - This should be updated late
 		
 		//2. Body handling; display starting interface
 		{
-			let initialise_underline_loop = setInterval(() => {
+			this.logic_loop = setInterval(() => {
+				if (this._is_removing) {
+					clearInterval(this.logic_loop);
+					return;
+				}
 				if (!document.contains(this.element)) return;
 				this.updateUnderline();
-				clearInterval(initialise_underline_loop);
+				clearInterval(this.logic_loop);
+				delete this.logic_loop;
 			});
+			this.setOwner(this.owner, this.owners);
+			this.from_binding_fire_silently = true;
 			this.v = options.starting_page;
+			delete this.from_binding_fire_silently;
 			if (options.name) this.name = options.name;
 		}
 	}
@@ -181,7 +189,8 @@ ve.PageMenu = class extends ve.Component { //[WIP] - This should be updated late
 			this.interface_el.appendChild(this.interfaces_obj[page_key].element);
 		}
 		setTimeout(() => {
-			this.updateUnderline();
+			if (!this._is_removing && typeof this.updateUnderline === "function")
+				this.updateUnderline();
 		}, 100);
 		this.fireFromBinding();
 	}
@@ -194,6 +203,8 @@ ve.PageMenu = class extends ve.Component { //[WIP] - This should be updated late
 	 * @memberof ve.Component.ve.PageMenu
 	 */
 	updateUnderline () {
+		if (this._is_removing || !this.navbar_el || !this.underline_el) return;
+		
 		//Declare local instance variables
 		let active_tab = this.navbar_el.querySelector(`.tab.active`);
 			if (!active_tab) return;
@@ -208,6 +219,7 @@ ve.PageMenu = class extends ve.Component { //[WIP] - This should be updated late
 		this.underline_el.style.top = `${underline_y}px`;
 		
 		requestAnimationFrame(() => {
+			if (this._is_removing || !this.underline_el) return;
 			this.underline_el.style.left = `${offset_left}px`;
 			this.underline_el.style.transition = `left 0.5s ease, width 0.5s ease`;
 			this.underline_el.style.width = `${tab_width}px`;

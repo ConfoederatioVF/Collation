@@ -50,6 +50,7 @@ ve.DatavisSuite.FillSymbol = class extends ve.Component { //[WIP] - Refactor to 
 		let value = (arg0_value) ? arg0_value : {};
 		
 		//Parse value
+		this.value = value;
 		this.element.innerHTML = "";
 		this.interface = new ve.Interface({
 			fill_colour: new ve.Colour(value.color, {
@@ -85,12 +86,11 @@ ve.DatavisSuite.FillSymbol = class extends ve.Component { //[WIP] - Refactor to 
 		}, {
 			name: (this.options.name) ? this.options.name : loc("ve.registry.localisation.FillSymbol_fill_symbol"),
 			onuserchange: (v, e) => {
-				delete this.do_not_fire_to_binding;
 				this.fireToBinding();
 			}
 		});
 		this.interface.bind(this.element);
-		this.value = value;
+		this.fireFromBinding();
 	}
 };
 

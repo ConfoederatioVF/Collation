@@ -30,6 +30,7 @@ ve.DatavisSuite.TitleSymbol = class extends ve.Component {
 		let value = (arg0_value) ? arg0_value : {};
 		
 		//Parse value
+		this.value = value;
 		this.element.innerHTML = "";
 		this.interface = new ve.Interface({
 			id: new ve.Text(value.id, {
@@ -239,12 +240,11 @@ ve.DatavisSuite.TitleSymbol = class extends ve.Component {
 		}, {
 			name: (this.options.name) ? this.options.name : loc("ve.registry.localisation.TitleSymbol_title_symbol"),
 			onuserchange: () => {
-				delete this.do_not_fire_to_binding;
 				this.fireToBinding();
 			}
 		});
 		this.interface.bind(this.element);
-		this.value = value;
+		this.fireFromBinding();
 	}
 };
 

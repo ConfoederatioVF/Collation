@@ -310,7 +310,9 @@ ve.NodeEditor = class extends ve.Component {
 				this.loadSettings(fs.readFileSync(nodeeditor_settings.save_file, "utf8"));
 			} catch (e) { console.warn(e); }
 		
+		this.from_binding_fire_silently = true;
 		this.v = value;
+		delete this.from_binding_fire_silently;
 		ve.NodeEditor.instances.push(this);
 	}
 	

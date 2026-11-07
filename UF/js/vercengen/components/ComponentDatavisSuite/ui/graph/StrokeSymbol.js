@@ -6,6 +6,9 @@ ve.DatavisSuite.StrokeSymbol = class extends ve.Component {
 		super(options);
 		
 		//Initialise options
+		options.attributes = (options.attributes) ? options.attributes : {};
+		
+		//Declare local instance variables
 		this.element = document.createElement("div");
 		this.element.setAttribute("component", "ve-datavis-suite-stroke-symbol");
 		this.element.instance = this;
@@ -26,6 +29,7 @@ ve.DatavisSuite.StrokeSymbol = class extends ve.Component {
 		let value = (arg0_value) ? arg0_value : {};
 		
 		//Parse value
+		this.value = value;
 		this.element.innerHTML = "";
 		this.interface = new ve.Interface({
 			stroke_colour: new ve.Colour((value.color) ? value.color : "#000000", {
@@ -117,12 +121,11 @@ ve.DatavisSuite.StrokeSymbol = class extends ve.Component {
 		}, {
 			name: (this.options.name) ? this.options.name : loc("ve.registry.localisation.StrokeSymbol_stroke_symbol"),
 			onuserchange: (v, e) => {
-				delete this.do_not_fire_to_binding;
 				this.fireToBinding();
 			}
 		});
 		this.interface.bind(this.element);
-		this.value = value;
+		this.fireFromBinding();
 	}
 };
 

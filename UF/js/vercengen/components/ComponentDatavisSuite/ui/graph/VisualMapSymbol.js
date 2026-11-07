@@ -30,6 +30,7 @@ ve.DatavisSuite.VisualMapSymbol = class extends ve.Component {
 		let value = (arg0_value) ? arg0_value : {};
 		
 		//Declare local instance variables
+		this.value = value;
 		let all_pieces = [];
 		
 		if (value.pieces)
@@ -135,9 +136,10 @@ ve.DatavisSuite.VisualMapSymbol = class extends ve.Component {
 		}, {
 			name: (this.options.name) ? this.options.name : loc("ve.registry.localisation.VisualMapSymbol_visual_map_symbol"),
 			onuserchange: (v, e) => {
-				delete this.do_not_fire_to_binding;
 				this.fireToBinding();
 			}
 		});
+		this.interface.bind(this.element);
+		this.fireFromBinding();
 	}
 }

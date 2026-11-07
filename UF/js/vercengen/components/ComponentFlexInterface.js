@@ -52,6 +52,7 @@ ve.FlexInterface = class extends ve.Component { //[WIP] - Finish CSS and JS hand
 		this.value = value;
 		
 		//Set .v
+		this.handleEvents();
 		this.from_binding_fire_silently = true;
 		//KEEP AT BOTTOM!
 		this.name = this.options.name;
@@ -87,9 +88,15 @@ ve.FlexInterface = class extends ve.Component { //[WIP] - Finish CSS and JS hand
 		//Convert from parameters
 		let value = (arg0_value) ? arg0_value : {};
 		
+		//Reset old destructured bindings
+		if (this.components_obj)
+			Object.iterate(this.components_obj, (local_key, local_value) => {
+				if (!this.reserved_keys.includes(local_key)) delete this[local_key];
+			});
+		
 		//Set this.value and refresh flex interface
-		this.components_obj = this.value;
 		this.value = value;
+		this.components_obj = this.value;
 		this.element.innerHTML = "";
 		this.element.appendChild(ve.FlexInterface.generateHTMLRecursively(undefined, this.value, {
 			type: this.value.type
@@ -97,14 +104,15 @@ ve.FlexInterface = class extends ve.Component { //[WIP] - Finish CSS and JS hand
 		
 		//Destructure components
 		Object.iterate(this.value, (local_key, local_value) => {
+			if (local_key === "type" || local_key === "options") return;
 			if (!this.reserved_keys.includes(local_key) && typeof local_value === "object") {
 				this[local_key] = local_value;
-			} else {
-				console.warn(`ve.RawInterface: ${local_key} is a reserved key. It can therefore not be set to:`, local_value);
+			} else if (this.reserved_keys.includes(local_key)) {
+				console.warn(`ve.FlexInterface: ${local_key} is a reserved key. It can therefore not be set to:`, local_value);
 			}
 		});
 		
-		this.handleEvents();
+		this.setOwner(this.owner, this.owners);
 		this.fireFromBinding();
 	}
 	

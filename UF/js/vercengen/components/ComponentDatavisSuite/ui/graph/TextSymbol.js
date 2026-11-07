@@ -29,6 +29,7 @@ ve.DatavisSuite.TextSymbol = class extends ve.Component {
 		let value = (arg0_value) ? arg0_value : {};
 		
 		//Parse value
+		this.value = value;
 		this.element.innerHTML = "";
 		this.interface = new ve.Interface({
 			colour: new ve.Colour((value.color) ? value.color : "#000000", {
@@ -101,7 +102,7 @@ ve.DatavisSuite.TextSymbol = class extends ve.Component {
 			}),
 			text_border_width: new ve.Number(Math.returnSafeNumber(value.textBorderWidth, 0), {
 				name: loc("ve.registry.localisation.TextSymbol_text_border_width"),
-				onuserchange: (v) => this.value.textBorderWidth
+				onuserchange: (v) => this.value.textBorderWidth = v
 			}),
 			text_shadow_blur: new ve.Number(Math.returnSafeNumber(value.textShadowBlur), {
 				name: loc("ve.registry.localisation.TextSymbol_shadow_blur"),
@@ -127,21 +128,20 @@ ve.DatavisSuite.TextSymbol = class extends ve.Component {
 		}, {
 			name: (this.options.name) ? this.options.name : loc("ve.registry.localisation.TextSymbol_text_symbol"),
 			onuserchange: (v, e) => {
-				delete this.do_not_fire_to_binding;
 				this.fireToBinding();
 			}
 		});
 		this.interface.bind(this.element);
-		this.value = value;
+		this.fireFromBinding();
 	}
 };
 
 //Functional binding
 
 /**
- * @returns {ve.DatavisSuite.StrokeSymbol}
+ * @returns {ve.DatavisSuite.TextSymbol}
  */
 veDatavisSuiteTextSymbol = function () {
 	//Return statement
-	return new ve.DatavisSuite.StrokeSymbol(...arguments);
+	return new ve.DatavisSuite.TextSymbol(...arguments);
 };

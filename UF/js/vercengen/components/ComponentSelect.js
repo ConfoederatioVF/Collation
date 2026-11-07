@@ -79,7 +79,10 @@ ve.Select = class veSelect extends ve.Component {
 			delete this.from_binding_fire_silently;
 			this.fireToBinding();
 		});
+		this.name = options.name;
+		this.from_binding_fire_silently = true;
 		this.v = this.value;
+		delete this.from_binding_fire_silently;
 	}
 	
 	/**
@@ -91,10 +94,14 @@ ve.Select = class veSelect extends ve.Component {
 	 * @type {string}
 	 */
 	get v () {
+		//Declare local instance variables
+		let all_option_els = this.element.querySelectorAll("option");
+		let select_el = this.element.querySelector("select");
+		let selected_el = (select_el && select_el.selectedIndex > -1) ?
+			all_option_els[select_el.selectedIndex] : undefined;
+		
 		//Return statement
-		return this.element.querySelectorAll("option")[
-			this.element.querySelector("select").selectedIndex
-		].id;
+		return (selected_el) ? selected_el.id : "";
 	}
 	
 	/**
@@ -111,7 +118,7 @@ ve.Select = class veSelect extends ve.Component {
 		let value = arg0_value;
 		
 		//Declare local instance variables
-		if (typeof value === "object") {
+		if (typeof value === "object" && value !== null) {
 			let actual_value_obj = {};
 			
 			if (Array.isArray(value)) {
@@ -124,11 +131,14 @@ ve.Select = class veSelect extends ve.Component {
 			this.value = actual_value_obj;
 			this.element.querySelector("select").innerHTML = this.generateHTML().join("");
 			Object.iterate(this.value, (local_key, local_value) => {
-				if (local_value.selected || this.options.selected === local_key)
-					this.element.querySelector(`option[id="${local_key}"]`).selected = true;
+				if (local_value?.selected || this.options.selected === local_key) {
+					let option_el = this.element.querySelector(`option[id="${local_key}"]`);
+					if (option_el) option_el.selected = true;
+				}
 			});
 		} else if (typeof value === "string") {
-			this.element.querySelector(`option[id="${value}"]`).selected = true;
+			let option_el = this.element.querySelector(`option[id="${value}"]`);
+			if (option_el) option_el.selected = true;
 		}
 		this.fireFromBinding();
 	}

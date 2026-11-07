@@ -100,7 +100,12 @@ ve.DatavisSuite = class extends ve.Component { //[WIP] - Finish function body
 					},
 					x: 0, y: 0,
 					
-					load_function: (arg0_value) => this.v = arg0_value,
+					load_function: (arg0_value) => {
+						this.from_binding_fire_silently = true;
+						this.v = arg0_value;
+						delete this.from_binding_fire_silently;
+						this.fireToBinding();
+					},
 					save_extension: ".ve-ds",
 					save_function: () => this.v
 				}),
@@ -193,6 +198,7 @@ ve.DatavisSuite = class extends ve.Component { //[WIP] - Finish function body
 			this.drawEditSeriesHierarchy();
 		if (this.graph_window)
 			this.drawEditGraph();
+		this.fireFromBinding();
 	}
 	
 	/**

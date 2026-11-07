@@ -135,7 +135,10 @@ ve.Date = class extends ve.Component {
 			let parsed_date = (raw_value && isNaN(Number(raw_value))) ? Date.convertStringToDate(raw_value) : null;
 			
 			if (parsed_date) {
+				this.from_binding_fire_silently = true;
 				this.v = parsed_date;
+				delete this.from_binding_fire_silently;
+				this.fireToBinding();
 				return;
 			}
 			
@@ -163,7 +166,10 @@ ve.Date = class extends ve.Component {
 			let parsed_date = (raw_value && raw_value.includes(" ") && isNaN(Number(raw_value))) ? Date.convertStringToDate(raw_value) : null;
 			
 			if (parsed_date) {
+				this.from_binding_fire_silently = true;
 				this.v = parsed_date;
+				delete this.from_binding_fire_silently;
+				this.fireToBinding();
 				return;
 			}
 			
@@ -191,7 +197,10 @@ ve.Date = class extends ve.Component {
 			let parsed_date = (raw_value && isNaN(Number(raw_value))) ? Date.convertStringToDate(raw_value) : null;
 			
 			if (parsed_date) {
+				this.from_binding_fire_silently = true;
 				this.v = parsed_date;
+				delete this.from_binding_fire_silently;
+				this.fireToBinding();
 				return;
 			}
 			

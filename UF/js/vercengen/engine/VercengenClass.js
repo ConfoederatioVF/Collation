@@ -47,8 +47,11 @@ ve.Class = class {
 		this.class_window = undefined;
 		this.instance_window = undefined;
 		
-		//Call updateOwner() upon initialisation
+		//Call updateOwner() upon initialisation and after subclass constructor populates fields
 		this.updateOwner();
+		queueMicrotask(() => {
+			if (!this._is_removing) this.updateOwner();
+		});
 	}
 	
 	//Class methods
@@ -232,13 +235,13 @@ ve.Class = class {
 		
 		//Iterate over all components in state_obj to update their owners
 		Object.iterate(state_obj, (local_key, local_value) => {
+			if (typeof local_value?.setOwner === "function")
+				local_value.setOwner(this, [this]);
 			if (!local_value?.options?.do_not_display === true)
 				if (local_key.startsWith("static-")) {
 					class_components_obj[local_key] = local_value;
-					class_components_obj[local_key].setOwner(this, [this]);
 				} else {
 					instance_components_obj[local_key] = local_value;
-					instance_components_obj[local_key].setOwner(this, [this]);
 				}
 		});
 		

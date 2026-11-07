@@ -42,6 +42,7 @@ ve.DatavisSuite.AxisSymbol = class extends ve.Component {
 		let value = (arg0_value) ? arg0_value : {};
 		
 		//Declare local instance variables
+		this.value = value;
 		let data_series = {};
 		let position_obj = new ve.Select({
 			top: { name: loc("ve.registry.localisation.AxisSymbol_top") },
@@ -947,7 +948,6 @@ ve.DatavisSuite.AxisSymbol = class extends ve.Component {
 			name: (this.options.name) ? this.options.name : loc("ve.registry.localisation.AxisSymbol_axis_symbol"),
 			onuserchange: () => {
 				//Draw graph; fire to binding if possible
-				delete this.do_not_fire_to_binding;
 				this.fireToBinding();
 			},
 			style: this.options.style,
@@ -955,7 +955,7 @@ ve.DatavisSuite.AxisSymbol = class extends ve.Component {
 			y: this.options.y
 		});
 		this.interface.bind(this.element);
-		this.value = value;
+		this.fireFromBinding();
 	}
 	
 	/**

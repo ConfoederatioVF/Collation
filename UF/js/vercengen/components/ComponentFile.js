@@ -77,7 +77,9 @@ ve.File = class extends ve.Component {
 		});
 		this.interface.bind(this.element);
 		
+		this.from_binding_fire_silently = true;
 		this.v = this.value;
+		delete this.from_binding_fire_silently;
 	}
 	
 	/**
@@ -186,7 +188,9 @@ ve.File = class extends ve.Component {
 						}
 						
 						//Set selected paths
+						this.from_binding_fire_silently = true;
 						this.v = selected_paths;
+						delete this.from_binding_fire_silently;
 						this.fireToBinding();
 						veToast(loc("ve.registry.localisation.File_selected_files", String.formatNumber(selected_paths.length)));
 						this.file_explorer_modal.close();
@@ -213,7 +217,9 @@ ve.File = class extends ve.Component {
 									await this.options.manual_save_function(full_save_path);
 									veToast(loc("ve.registry.localisation.File_successfully_saved_file", full_save_path));
 									this.file_explorer_modal.close();
+									this.from_binding_fire_silently = true;
 									this.v = [full_save_path];
+									delete this.from_binding_fire_silently;
 									this.fireToBinding();
 								} catch (e) {
 									console.error(e);
@@ -249,7 +255,9 @@ ve.File = class extends ve.Component {
 										veToast(loc("ve.registry.localisation.File_successfully_saved_file", full_save_path));
 										this.file_explorer_modal.close();
 									});
+									this.from_binding_fire_silently = true;
 									this.v = [full_save_path];
+									delete this.from_binding_fire_silently;
 									this.fireToBinding();
 								};
 								
@@ -261,7 +269,9 @@ ve.File = class extends ve.Component {
 							} else {
 								veToast(loc("ve.registry.localisation.File_successfully_saved_file", full_save_path));
 								this.file_explorer_modal.close();
+								this.from_binding_fire_silently = true;
 								this.v = [full_save_path];
+								delete this.from_binding_fire_silently;
 								this.fireToBinding();
 							}
 						} catch (e) {

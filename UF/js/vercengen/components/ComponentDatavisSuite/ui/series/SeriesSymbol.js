@@ -31,6 +31,7 @@ ve.DatavisSuite.SeriesSymbol = class extends ve.Component {
 		let value = (arg0_value) ? arg0_value : {};
 		
 		//Declare local instance variables
+		this.value = value;
 		let components_obj = {};
 		
 		//Series type selection
@@ -743,12 +744,11 @@ ve.DatavisSuite.SeriesSymbol = class extends ve.Component {
 		}, {
 			name: (this.options.name) ? this.options.name : loc("ve.registry.localisation.SeriesSymbol_series_symbol"),
 			onuserchange: (v, e) => {
-				delete this.do_not_fire_to_binding;
 				this.fireToBinding();
 			},
 			open: true
 		});
-		this.interface.setOwner(this, [this]);
 		this.interface.bind(this.element);
+		this.fireFromBinding();
 	}
 };

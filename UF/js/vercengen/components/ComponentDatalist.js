@@ -70,9 +70,9 @@ ve.Datalist = class extends ve.Component {
       let resolved_id = current_input_val;
       
       if (!current_input_val || current_input_val.trim() === "") {
-        this.from_binding_fire_silently = true;
+        if (e.type === "change" && this._last_emitted_user_value === "") return;
+        this._last_emitted_user_value = "";
         this.value = "";
-        delete this.from_binding_fire_silently;
         this.fireToBinding();
         return;
       }
@@ -101,7 +101,13 @@ ve.Datalist = class extends ve.Component {
         }
       }
       
+      if (e.type === "input" && !is_exact_match) {
+        delete this._last_emitted_user_value;
+        return;
+      }
       if (e.type === "change" || is_exact_match) {
+        if (e.type === "change" && this._last_emitted_user_value === resolved_id) return;
+        this._last_emitted_user_value = resolved_id;
         this.from_binding_fire_silently = true;
         this.value = resolved_id;
         delete this.from_binding_fire_silently;
@@ -113,7 +119,9 @@ ve.Datalist = class extends ve.Component {
     input_el.addEventListener("input", handleValueChange);
     
     this.name = options.name;
+    this.from_binding_fire_silently = true;
     this.v = this.value;
+    delete this.from_binding_fire_silently;
     
     //Set options.selected if available
     if (options.selected) {
@@ -184,22 +192,33 @@ ve.Datalist = class extends ve.Component {
     let html_string = [];
     
     if (typeof value === "object" && value !== null) {
-      this.options_map = value;
+      let has_selected = Object.prototype.hasOwnProperty.call(value, "selected");
+      let next_options_map = {};
       
       //Iterate over all keys in value and assign <option> tags to the datalist
       Object.iterate(value, (local_key, local_value) => {
-        if (local_key === "selected") {
-          let text_input = this.element.querySelector("input");
-          if (text_input) text_input.value = local_value;
-        } else {
+        if (local_key !== "selected") {
+          next_options_map[local_key] = local_value;
           let clean_name = (local_value !== undefined && local_value !== null) ?
             String(local_value).replace(/\r?\n|\r/g, " ").trim() : "";
           let display_name = (clean_name) ? clean_name : local_key;
           html_string.push(`<option value = "${display_name}">${local_key}</option>`);
         }
       });
+      this.options_map = next_options_map;
       let datalist_el = this.element.querySelector("datalist");
       if (datalist_el) datalist_el.innerHTML = html_string.join("");
+      if (!has_selected) return;
+      
+      let selected_display = (value.selected !== undefined && next_options_map[value.selected] !== undefined) ?
+        next_options_map[value.selected] : value.selected;
+      let text_input = this.element.querySelector("input");
+      if (text_input) text_input.value = (selected_display !== undefined && selected_display !== null) ? selected_display : "";
+      
+      delete this._last_emitted_user_value;
+      this.value = value.selected;
+      this.fireFromBinding();
+      return;
     } else if (typeof value === "string") {
       let display_value = value;
       
@@ -218,6 +237,7 @@ ve.Datalist = class extends ve.Component {
       if (text_input) text_input.value = display_value;
     }
     
+    delete this._last_emitted_user_value;
     this.value = value;
     this.fireFromBinding();
   }

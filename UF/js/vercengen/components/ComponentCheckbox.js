@@ -62,12 +62,8 @@ ve.Checkbox = class extends ve.Component {
 				this.value = this.v;
 				this.from_binding_fire_silently = true;
 				this.v = this.value; //Needs to run setter
-				this.from_binding_fire_silently = false;
+				delete this.from_binding_fire_silently;
 				this.fireToBinding();
-				if (typeof this.options.onchange === "function")
-					this.options.onchange(this.value, this);
-				if (typeof this.options.onuserchange === "function")
-					this.options.onuserchange(this.value, this);
 			});
 		} else if (typeof value === "object") {
 			let html_string = [];
@@ -88,17 +84,15 @@ ve.Checkbox = class extends ve.Component {
 				this.value = this.v;
 				this.from_binding_fire_silently = true;
 				this.v = this.value; //Needs to run setter
-				this.from_binding_fire_silently = false;
+				delete this.from_binding_fire_silently;
 				this.fireToBinding();
-				if (typeof this.options.onchange === "function")
-					this.options.onchange(this.value, this);
-				if (typeof this.options.onuserchange === "function")
-					this.options.onuserchange(this.value, this);
 			}));
 		}
 		
 		this.name = options.name;
+		this.from_binding_fire_silently = true;
 		this.v = this.value;
+		delete this.from_binding_fire_silently;
 	}
 	
 	/**

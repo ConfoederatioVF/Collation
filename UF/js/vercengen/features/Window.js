@@ -332,6 +332,7 @@ ve.Window = class extends ve.Feature {
 		let feature_body_el = this.element.querySelector(`#feature-body`);
 		
 		//Automatically wrap this.components_obj in a ve.Interface object (.is_folder=false)
+		this.updateOwner();
 		if (!this.options.do_not_wrap) {
 			feature_body_el.innerHTML = "";
 			this._interface = new ve.Interface(this.components_obj, { //[WIP] - Make generic via .is_container field for ve.Interface
@@ -343,6 +344,9 @@ ve.Window = class extends ve.Feature {
 					width: "100%"
 				}
 			});
+			let root_owner = (this.options?.class_instance) ? this.options.class_instance : this;
+			let owner_chain = (root_owner !== this) ? [root_owner, this] : [this];
+			this._interface.setOwner(root_owner, owner_chain);
 			this._interface.element.setAttribute("class", "ve-disable-nesting");
 			feature_body_el.appendChild(this._interface.element);
 		} else {

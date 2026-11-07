@@ -484,7 +484,7 @@ ve.FileExplorer = class extends ve.Component {
 		previous_folder_obj.element.ondblclick = (e) => {
 			this.from_binding_fire_silently = true;
 			this.v = previous_folder_path;
-			this.from_binding_fire_silently = false;
+			delete this.from_binding_fire_silently;
 			this.fireToBinding();
 		};
 		
@@ -507,7 +507,7 @@ ve.FileExplorer = class extends ve.Component {
 				hierarchy_obj[all_drives[i]].element.ondblclick = () => {
 					this.from_binding_fire_silently = true;
 					this.v = all_drives[i];
-					this.from_binding_fire_silently = false;
+					delete this.from_binding_fire_silently;
 					this.fireToBinding();
 				};
 			}
@@ -568,7 +568,7 @@ ve.FileExplorer = class extends ve.Component {
 					
 					this.from_binding_fire_silently = true;
 					this.v = local_full_path;
-					this.from_binding_fire_silently = false;
+					delete this.from_binding_fire_silently;
 					this.fireToBinding();
 				};
 			}
@@ -684,13 +684,15 @@ ve.FileExplorer = class extends ve.Component {
 		//Set hierarchy depending on whether it already exists or not
 		let file_explorer_el = this.element.querySelector(`#file-explorer-body`);
 		
-		this.hierarchy = new ve.Hierarchy(hierarchy_obj, { disable_searchbar: true });
+		this.hierarchy = new ve.Hierarchy(hierarchy_obj, {
+			disable_searchbar: true,
+			do_not_bubble_owners: true
+		});
 		file_explorer_el.innerHTML = "";
 		file_explorer_el.appendChild(this.hierarchy.element);
 		
-		setTimeout(() => {
-			this.hierarchy.setOwner(this.owner, [this.owner]);
-		});
+		if (this.owner)
+			this.hierarchy.setOwner(this.owner, []);
 		if (this.options.onrefresh)
 			this.options.onrefresh(this.v, this);
 	}
