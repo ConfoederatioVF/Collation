@@ -145,4 +145,66 @@
 		yellow: "#ffff00",
 		yellowgreen: "#9acd32"
 	};
+
+  Colour._palettes = {
+    spectral: [
+      [158, 1, 66],
+      [213, 62, 79],
+      [244, 109, 67],
+      [253, 174, 97],
+      [254, 224, 139],
+      [255, 255, 191],
+      [230, 245, 152],
+      [171, 221, 164],
+      [102, 194, 165],
+      [50, 136, 189],
+      [94, 79, 162]
+    ]
+  };
+
+
+  /**
+   * Samples a continuous RGB colour from a named palette in {@link Colour._palettes} over normalised [0, 1].
+   * @alias Colour.samplePalette
+   *
+   * @param {string} arg0_palette_key - Palette identifier (e.g. 'spectral').
+   * @param {number} arg1_t - Normalised interpolation factor in [0, 1].
+   *
+   * @returns {number[]} Interpolated [R, G, B] array.
+   */
+  Colour.samplePalette = function (arg0_palette_key, arg1_t) {
+    //Convert from parameters
+    let palette_key = arg0_palette_key;
+    let t = arg1_t;
+
+    //Declare local instance variables
+    let frac = 0;
+    let hi_idx = 0;
+    let lo_idx = 0;
+    let max_idx = 0;
+    let palette_array = (Colour._palettes && Colour._palettes[palette_key]) ?
+      Colour._palettes[palette_key] : Colour._palettes.spectral;
+    let scaled_pos = 0;
+    let t_clamped = Math.min(1, Math.max(0, Number(t) || 0));
+
+    //Guard clauses
+    if (!palette_array || palette_array.length === 0) {
+      console.error(`- [Colour.samplePalette] Invalid palette key: ${palette_key}`);
+      return [255, 255, 255];
+    }
+
+
+    max_idx = palette_array.length - 1;
+    scaled_pos = t_clamped*max_idx;
+    lo_idx = Math.floor(scaled_pos);
+    hi_idx = Math.min(max_idx, lo_idx + 1);
+    frac = scaled_pos - lo_idx;
+
+    //Return statement
+    return [
+      Math.round(palette_array[lo_idx][0] + (palette_array[hi_idx][0] - palette_array[lo_idx][0])*frac),
+      Math.round(palette_array[lo_idx][1] + (palette_array[hi_idx][1] - palette_array[lo_idx][1])*frac),
+      Math.round(palette_array[lo_idx][2] + (palette_array[hi_idx][2] - palette_array[lo_idx][2])*frac)
+    ];
+  };
 }

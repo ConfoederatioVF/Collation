@@ -9,6 +9,8 @@
         require(path.join(cur_dir, "c14_watersheds.js"));
       if (!global.population_c14bazAAR_binning && fs.existsSync(path.join(cur_dir, "c14_fractional_binning.js")))
         require(path.join(cur_dir, "c14_fractional_binning.js"));
+      if (!global.population_c14bazAAR_maps && fs.existsSync(path.join(cur_dir, "c14_radiocarbon_maps.js")))
+        require(path.join(cur_dir, "c14_radiocarbon_maps.js"));
     } catch (e) {
       console.warn(`[population_c14bazAAR] Failed to load companion modules:`, e);
     }
@@ -57,6 +59,7 @@
     static output_rural_folder = `${this.bf}4.rasters_rural/`;
     static output_rasters_scaled_to_global = `${this.bf}5.rasters_scaled_to_global/`;
     static output_density_folder = `${this.bf}6.rasters_density/`;
+    static output_images_folder = `${this.bf}images/`;
 
     static base_year = 0; // 1 AD (astronomical year 0 / 1950 cal BP)
     static anchor_years = [-10000, -9000, -8000, -7000, -6000, -5000, -4000, -3000, -2000, -1000, 0];
@@ -733,6 +736,22 @@
 
       //Return statement
       return validation_report;
+    }
+
+
+    /**
+     * Generates conical and equirectangular radiocarbon distribution maps over Russia (excl. Kaliningrad)
+     * for 1 AD–1500 AD using the Spectral colourscheme and translucent graticules.
+     * @param {Object} [arg0_options]
+     *
+     * @returns {Promise<Object>} Summary of calibrated Russian determinations and output image paths.
+     */
+    static async H_generateRussiaRadiocarbonMaps (arg0_options) {
+      //Convert from parameters
+      let options = (arg0_options) ? arg0_options : {};
+
+      //Return statement
+      return await population_c14bazAAR_maps.generateRussiaRadiocarbonMaps(options);
     }
 
 
