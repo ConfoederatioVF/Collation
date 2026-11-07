@@ -224,7 +224,9 @@ naissance.Action = class {
 		//Convert from parameters
 		let naissance_obj = arg0_naissance_obj;
 		
-		if (typeof naissance_obj === "string") return [naissance_obj]; //Internal guard clause for string types
+		//Internal guard clauses
+		if (!naissance_obj) return [];
+		if (typeof naissance_obj === "string") return [naissance_obj];
 		
 		//Declare local instance variables
 		let scopes = [];
@@ -313,11 +315,22 @@ naissance.Action = class {
 										}
 										
 										//If so, execute an action for this Geometry
-										if (passes_check)
+										if (passes_check) {
+											let geom_inst = all_geometries[i];
+											if (
+												global.ve?.ndjson_file_path &&
+												json.delete_geometry !== true &&
+												typeof geom_inst?.loadHistory === "function" &&
+												(!geom_inst.history?.keyframes || Object.keys(geom_inst.history.keyframes).length === 0)
+											)
+												await geom_inst.loadHistory();
+											if (geom_inst?.id && json.delete_geometry !== true && global.DALS?.markDirty)
+												DALS.markDirty(geom_inst.id);
 											await special_function({
 												...json,
-												naissance_obj: all_geometries[i],
+												naissance_obj: geom_inst,
 											});
+										}
 									}
 								}
 							};

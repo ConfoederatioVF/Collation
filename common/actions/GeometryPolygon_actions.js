@@ -58,7 +58,48 @@ let action_remove_cache = {
 	turf_remove: null
 };
 let db_pending_diffs = new Map();
+let db_pending_keyframes = new Map();
 let db_sync_timeouts = new Map();
+
+if (global.DALS) {
+	DALS.cancelPendingDBSync = function () {
+		for (let [, timeout_id] of db_sync_timeouts)
+			clearTimeout(timeout_id);
+		db_sync_timeouts.clear();
+		db_pending_diffs.clear();
+		db_pending_keyframes.clear();
+	};
+	
+	DALS.flushPendingDBSync = async function () {
+		for (let [, timeout_id] of db_sync_timeouts)
+			clearTimeout(timeout_id);
+		db_sync_timeouts.clear();
+		
+		let promises = [];
+		for (let [id, kfs] of db_pending_keyframes) {
+			if (global.db?.setKeyframes)
+				promises.push(global.db.setKeyframes(id, kfs).catch(() => {}));
+		}
+		db_pending_keyframes.clear();
+		
+		for (let [id, diff] of db_pending_diffs) {
+			if (diff && Object.keys(diff).length > 0) {
+				if (global.db?.setKeyframesDiff) {
+					promises.push(global.db.setKeyframesDiff(id, diff).catch(() => {}));
+				} else if (global.db?.setKeyframe && Object.keys(diff).length === 1) {
+					let single_ts = Object.keys(diff)[0];
+					promises.push(global.db.setKeyframe(id, single_ts, diff[single_ts]).catch(() => {}));
+				}
+			}
+		}
+		db_pending_diffs.clear();
+		
+		if (promises.length > 0)
+			await Promise.all(promises);
+		if (typeof DALS.syncDirtyToDB === "function")
+			await DALS.syncDirtyToDB();
+	};
+}
 
 let syncKeyframeToDB = function (arg0_id, arg1_date, arg2_keyframe) {
 	let id = arg0_id;
@@ -69,9 +110,12 @@ let syncKeyframeToDB = function (arg0_id, arg1_date, arg2_keyframe) {
 	let ts_key = (typeof date === "object") ? Date.getTimestamp(date) : date;
 	ts_key = String(ts_key);
 	
+	let live_kf_val = global.naissance?.Geometry?.instances?.[id]?.history?.keyframes?.[ts_key]?.value;
+	let synced_val = Array.isArray(live_kf_val) ? live_kf_val : (Array.isArray(keyframe) ? keyframe : [keyframe]);
+	
 	if (!db_pending_diffs.has(id))
 		db_pending_diffs.set(id, {});
-	db_pending_diffs.get(id)[ts_key] = keyframe;
+	db_pending_diffs.get(id)[ts_key] = synced_val;
 	
 	if (db_sync_timeouts.has(id))
 		clearTimeout(db_sync_timeouts.get(id));
@@ -98,13 +142,16 @@ let syncGeometryToDB = function (arg0_id, arg1_keyframes) {
 	let keyframes = arg1_keyframes;
 	if (!id || !global.db?.setKeyframes) return;
 	
+	db_pending_keyframes.set(id, keyframes);
 	if (db_sync_timeouts.has(id))
 		clearTimeout(db_sync_timeouts.get(id));
 	
 	let timeout = setTimeout(() => {
 		db_sync_timeouts.delete(id);
 		db_pending_diffs.delete(id);
-		global.db.setKeyframes(id, keyframes).catch(() => {});
+		let pending_kfs = db_pending_keyframes.get(id) || keyframes;
+		db_pending_keyframes.delete(id);
+		global.db.setKeyframes(id, pending_kfs).catch(() => {});
 	}, 200);
 	db_sync_timeouts.set(id, timeout);
 };
@@ -862,6 +909,8 @@ config.actions.geometry_polygon = {
 					} catch (e) { console.error(`Error simplifying ${polygon_obj.name}:`, local_value, e); }
 				}
 			});
+			if (polygon_obj?.id && global.DALS?.markDirty)
+				DALS.markDirty(polygon_obj.id);
 		}
 	}
 };

@@ -68,7 +68,8 @@ DALS.Action = class {
 			let old_timeline = DALS.Timeline.getTimeline(DALS.Timeline.current_timeline);
 			
 			if (DALS.Timeline.current_index !== old_timeline.value.length - 1) {
-				let new_timeline = old_timeline.branch();
+				let branch_options = (json.head_state !== undefined) ? { head_state: json.head_state } : {};
+				let new_timeline = old_timeline.branch(branch_options);
 					DALS.Timeline.current_timeline = new_timeline.id;
 					DALS.Timeline.current_index = 0;
 				

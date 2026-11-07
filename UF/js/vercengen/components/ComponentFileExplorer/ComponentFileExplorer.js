@@ -139,16 +139,23 @@ ve.FileExplorer = class extends ve.Component {
 		this.refresh();
 		
 		this.logic_loop = setInterval(() => {
-			let current_files = fs.readdirSync(this.v).join("");
+			if (this._reading_dir || !this.v || !fs.existsSync(this.v)) return;
+			this._reading_dir = true;
 			
-			if (this._checksum === undefined) {
-				this._checksum = current_files;
-			} else if (current_files !== this._checksum) {
-				this.refresh();
-				this._checksum = current_files;
-				this.fireFromBinding();
-			}
-		}, 100);
+			fs.promises.readdir(this.v).then((entries) => {
+				let current_files = entries.filter((f) => !f.includes(".tmp_") && !f.endsWith(".bak")).join("");
+				
+				if (this._checksum === undefined) {
+					this._checksum = current_files;
+				} else if (current_files !== this._checksum) {
+					this.refresh();
+					this._checksum = current_files;
+					this.fireFromBinding();
+				}
+			}).catch(() => {}).finally(() => {
+				this._reading_dir = false;
+			});
+		}, 500);
 	}
 	
 	/**

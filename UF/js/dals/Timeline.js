@@ -67,11 +67,13 @@ DALS.Timeline = class {
 		this.name = (options.name) ? options.name : `${loc("ve.registry.localisation.UndoRedo_timeline")} ${this.id}`;
 		this.options = options;
 		this.parent_timeline = options.parent_timeline;
-		this.value = [DALS.toJSON()];
+		this.value = [(options.head_state !== undefined) ? options.head_state : DALS.toJSON()];
 		
 		//Ensure that the current timeline is always the last timeline created/split off
-		if (options.current_timeline !== false)
+		if (options.current_timeline !== false) {
+			DALS.Timeline.current_index = 0;
 			DALS.Timeline.current_timeline = this.id;
+		}
 		DALS.Timeline.instances.push(this);
 	}
 	
@@ -487,33 +489,45 @@ DALS.Timeline = class {
 			target_index = this.value.length - 1;
 		
 		//2. Load initial state at head
-		DALS.Timeline.current_index = 0;
-		DALS.Timeline.current_timeline = this.id;
-		await Promise.resolve(DALS.fromJSON(this.value[0]));
+		if (typeof DALS.cancelPendingDBSync === "function")
+			DALS.cancelPendingDBSync();
 		
-		if (local_jump_token !== DALS.Timeline.jump_token)
-			return DALS.Timeline.current_index;
-		
-		//3. If jumping to the head, stop after loading the head state
-		if (target_index === 0)
-			return DALS.Timeline.current_index;
-		
-		//4. Redo actions from the state head up to the requested absolute index
-		for (let i = 1; i <= target_index; i++) {
-			let action_obj = (typeof this.value[i] === "string") ?
-				JSON.parse(this.value[i]) : this.value[i];
-			
-			let action_key = action_obj.key || action_obj.options?.key;
-			let action_value = (action_obj.value !== undefined) ?
-				action_obj.value : action_obj;
-			
-			await DALS.Timeline.parseAction(action_key, action_value, true);
+		DALS.Timeline.is_replaying = true;
+		try {
+			DALS.Timeline.current_index = 0;
+			DALS.Timeline.current_timeline = this.id;
+			await Promise.resolve(DALS.fromJSON(this.value[0]));
 			
 			if (local_jump_token !== DALS.Timeline.jump_token)
 				return DALS.Timeline.current_index;
 			
-			DALS.Timeline.current_index = i;
+			//3. Redo actions from the state head up to the requested absolute index
+			if (target_index > 0) {
+				for (let i = 1; i <= target_index; i++) {
+					let action_obj = (typeof this.value[i] === "string") ?
+						JSON.parse(this.value[i]) : this.value[i];
+					
+					let action_key = action_obj.key || action_obj.options?.key;
+					let action_value = (action_obj.value !== undefined) ?
+						action_obj.value : action_obj;
+					
+					await DALS.Timeline.parseAction(action_key, action_value, true);
+					
+					if (local_jump_token !== DALS.Timeline.jump_token)
+						return DALS.Timeline.current_index;
+					
+					DALS.Timeline.current_index = i;
+				}
+			}
+		} finally {
+			if (local_jump_token === DALS.Timeline.jump_token)
+				DALS.Timeline.is_replaying = false;
 		}
+		
+		if (typeof DALS.flushPendingDBSync === "function")
+			await DALS.flushPendingDBSync();
+		if (typeof DALS.scheduleRefresh === "function")
+			DALS.scheduleRefresh(0);
 		
 		//Return statement
 		return DALS.Timeline.current_index;
@@ -536,16 +550,20 @@ DALS.Timeline = class {
 	 * Jumps to the start of this timeline.
 	 * - Method of: {@link DALS.Timeline}
 	 */
-	jumpToStart () {
+	async jumpToStart () {
 		//Invalidate any in-progress jump/replay
 		if (DALS.Timeline.jump_token === undefined)
 			DALS.Timeline.jump_token = 0;
 		DALS.Timeline.jump_token++;
+		DALS.Timeline.is_replaying = false;
+		
+		if (typeof DALS.cancelPendingDBSync === "function")
+			DALS.cancelPendingDBSync();
 		
 		//Load initial state
 		DALS.Timeline.current_index = 0;
 		DALS.Timeline.current_timeline = this.id;
-		DALS.fromJSON(this.value[0]);
+		await Promise.resolve(DALS.fromJSON(this.value[0]));
 	}
 	
 	/**
@@ -648,6 +666,7 @@ DALS.Timeline = class {
 				if (!local_timeline)
 					local_timeline = new DALS.Timeline({
 						current_timeline: false,
+						head_state: {}
 					});
 				
 				local_timeline.fromJSON(path_data);
@@ -779,12 +798,12 @@ DALS.Timeline = class {
 	 * 
 	 * @param {DALS.Timeline|string} arg0_timeline_id
 	 */
-	static jumpToTimeline (arg0_timeline_id) {
+	static async jumpToTimeline (arg0_timeline_id) {
 		//Convert from parameters
 		let timeline_id = arg0_timeline_id;
 		
 		//jumpToStart of target timeline
-		DALS.Timeline.getTimeline(timeline_id).jumpToStart();
+		await DALS.Timeline.getTimeline(timeline_id).jumpToStart();
 	}
 	
 	/**

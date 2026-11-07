@@ -262,6 +262,22 @@ let is_renderer = Boolean(typeof window !== "undefined" || (typeof process !== "
 	};
 	
 	/**
+	 * Restores in-memory worker partitions to the clean session baseline without re-reading shards from disk.
+	 *
+	 * @param {string} [arg0_file_path]
+	 *
+	 * @returns {Promise<boolean>}
+	 */
+	db.restoreBaseline = async function (arg0_file_path) {
+		//Convert from parameters
+		let file_path = arg0_file_path;
+		
+		//Return statement
+		if (!is_renderer && global.NDJSON?.restoreBaseline) return await NDJSON.restoreBaseline(file_path);
+		return await db.send("restoreBaseline", file_path);
+	};
+	
+	/**
 	 * Saves partitioned shards back into a 100% compliant .naissance file.
 	 *
 	 * @param {string} [arg0_target_path]

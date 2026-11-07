@@ -79,7 +79,7 @@ naissance.Geometry = class extends naissance.Entity {
 		super(options);
 		this.history = new History({}, {
 			_id: () => this.id,
-			draw_keyframe_function: naissance.History.draw_keyframe_function,
+			draw_keyframe_function: naissance.History?.draw_keyframe_function,
 			localisation_function: naissance.Geometry.history_localisation_function
 		});
 		this.id = Class.generateRandomID(naissance.Geometry);
@@ -129,6 +129,8 @@ naissance.Geometry = class extends naissance.Entity {
 		
 		//Push to naissance.Geometry.instances
 		naissance.Geometry.instances[this.id] = this;
+		if (!options.is_import && global.DALS?.markDirty)
+			DALS.markDirty(this.id);
 		if (main.brush.selected_feature?.entities) {
 			this.parent = main.brush.selected_feature;
 			main.brush.selected_feature.entities.push(this);
@@ -856,7 +858,12 @@ naissance.Geometry = class extends naissance.Entity {
 			let kf_data = await db_obj.getKeyframes(this.id);
 			
 			if (kf_data?.value) {
-				this.history.fromJSON(kf_data.value);
+				this.history._is_loading_from_db = true;
+				try {
+					this.history.fromJSON(kf_data.value);
+				} finally {
+					this.history._is_loading_from_db = false;
+				}
 				
 				//Update name and keyframes UI if open
 				if (this.keyframes_ui)
@@ -1026,6 +1033,8 @@ naissance.Geometry = class extends naissance.Entity {
 		
 		//Remove from naissance.Geometry.instances
 		delete naissance.Geometry.instances[this.id];
+		if (global.DALS?.dirty_ids) DALS.dirty_ids.delete(this.id);
+		if (global.DALS?.unsynced_dirty_ids) DALS.unsynced_dirty_ids.delete(this.id);
 		this.history = new History();
 		
 		//Track deletion and notify DB
@@ -1063,6 +1072,14 @@ naissance.Geometry = class extends naissance.Entity {
 		this.id = id;
 		naissance.Geometry.instances[id] = this;
 		delete naissance.Geometry.instances[old_id];
+		if (global.DALS?.dirty_ids?.has(old_id)) {
+			DALS.dirty_ids.delete(old_id);
+			DALS.dirty_ids.add(id);
+		}
+		if (global.DALS?.unsynced_dirty_ids?.has(old_id)) {
+			DALS.unsynced_dirty_ids.delete(old_id);
+			DALS.unsynced_dirty_ids.add(id);
+		}
 	}
 	
 	/**

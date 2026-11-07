@@ -139,6 +139,8 @@ global.History = class extends ve.Class {
 			let local_keyframe = this.keyframes[timestamp];
 			local_keyframe.addData(...argn_arguments);
 		}
+		if (!this._is_loading_from_db && typeof this.options?._id === "function" && global.DALS?.markDirty)
+			DALS.markDirty(this.options._id());
 		
 		//Return statement
 		return this.keyframes[timestamp];
@@ -312,6 +314,8 @@ global.History = class extends ve.Class {
 				delete this.keyframes[timestamp];
 			}
 		}
+		if (!this._is_loading_from_db && typeof this.options?._id === "function" && global.DALS?.markDirty)
+			DALS.markDirty(this.options._id());
 	}
 	
 	/**
@@ -640,6 +644,8 @@ global.History = class extends ve.Class {
 			this.keyframes[ot_timestamp] = this.keyframes[timestamp];
 			
 			delete this.keyframes[timestamp];
+			if (!this._is_loading_from_db && typeof this.options?._id === "function" && global.DALS?.markDirty)
+				DALS.markDirty(this.options._id());
 		}
 	}
 	
@@ -658,6 +664,8 @@ global.History = class extends ve.Class {
 		
 		//Delete target keyframe 
 		delete this.keyframes[timestamp];
+		if (!this._is_loading_from_db && typeof this.options?._id === "function" && global.DALS?.markDirty)
+			DALS.markDirty(this.options._id());
 	}
 	
 	/**

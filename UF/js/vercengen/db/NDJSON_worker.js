@@ -10,13 +10,29 @@ if (!global?.NDJSON) global.NDJSON = {};
 if (!global.ve) global.ve = {};
 
 require("../db_shared/NDJSON_history.js");
+require("./ndjson_io.js");
 
 //Declare variables
+let baseline_overrides = new Map();
 let current_file_path = null;
 let dirty_keys = new Set();
+let has_flushed_since_load = false;
+let has_loaded_partition = false;
 let partition_cache = new Map();
 let processing = false;
 let queue = [];
+
+let recordBaseline = function (arg0_key) {
+	//Convert from parameters
+	let key = String(arg0_key);
+	
+	//Guard clause if baseline was already captured for this session
+	if (baseline_overrides.has(key)) return;
+	
+	//Declare local instance variables
+	let existing = partition_cache.get(key);
+	baseline_overrides.set(key, existing ? structuredClone(existing) : null);
+};
 
 //Internal helper functions
 {
@@ -111,8 +127,11 @@ let resolveHistory = function (data, timestamp, options) {
 };
 
 let loadPartition = async function (page_file) {
-	partition_cache.clear();
+	baseline_overrides.clear();
 	dirty_keys.clear();
+	has_flushed_since_load = false;
+	has_loaded_partition = true;
+	partition_cache.clear();
 	
 	if (!fs.existsSync(page_file)) return;
 	
@@ -161,124 +180,6 @@ let loadPartition = async function (page_file) {
 		if (global.gc) {
 			try { global.gc(); } catch (e) {}
 		}
-	}
-};
-
-let safeWrite = async function (ws, rs, content) {
-	let can_write = ws.write(content);
-	if (!can_write) {
-		if (rs && typeof rs.pause === "function") rs.pause();
-		await new Promise((resolve) => ws.once("drain", resolve));
-		if (rs && typeof rs.resume === "function") rs.resume();
-	}
-};
-
-let updateNDJSON = async function (page_file, getUpdatedValue, options) {
-	let tmp_file = `${page_file}.tmp_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
-	let updated = false;
-	
-	let dir = path.dirname(page_file);
-	if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-	
-	let ws = fs.createWriteStream(tmp_file, { highWaterMark: 1024 * 1024 });
-	let target_id = (options?.target_id !== undefined && options?.target_id !== null) ? String(options.target_id) : null;
-	let target_keys = options?.target_keys || null;
-	
-	try {
-		if (fs.existsSync(page_file)) {
-			let rs = fs.createReadStream(page_file, { highWaterMark: 1024 * 1024 });
-			let rl = readline.createInterface({ input: rs, crlfDelay: Infinity });
-			
-			try {
-				for await (let line of rl) {
-					let clean = line.trim();
-					if (clean.length === 0) continue;
-					
-					let key = null;
-					let colon_idx = -1;
-					if (clean.charCodeAt(0) === 34) {
-						let quote_end = clean.indexOf('"', 1);
-						if (quote_end > 1) {
-							colon_idx = clean.indexOf(':', quote_end);
-							if (colon_idx > quote_end)
-								key = clean.slice(1, quote_end);
-						}
-					}
-					
-					if (key !== null) {
-						if (target_id !== null && key !== target_id) {
-							await safeWrite(ws, rs, clean);
-							await safeWrite(ws, rs, "\n");
-							if (clean.length > 5 * 1024 * 1024 && global.gc)
-								try { global.gc(); } catch (e) {}
-							continue;
-						}
-						if (target_keys !== null && !target_keys.has(key)) {
-							await safeWrite(ws, rs, clean);
-							await safeWrite(ws, rs, "\n");
-							if (clean.length > 5 * 1024 * 1024 && global.gc)
-								try { global.gc(); } catch (e) {}
-							continue;
-						}
-						
-						let val_str = clean.slice(colon_idx + 1).trim();
-						if (val_str.endsWith(",")) val_str = val_str.slice(0, -1);
-						
-						let newValue = getUpdatedValue(key, val_str);
-						if (newValue !== undefined) {
-							if (newValue !== null) {
-								await safeWrite(ws, rs, `"${key}":`);
-								await safeWrite(ws, rs, JSON.stringify(newValue));
-								await safeWrite(ws, rs, "\n");
-							}
-							updated = true;
-						} else {
-							await safeWrite(ws, rs, clean);
-							await safeWrite(ws, rs, "\n");
-						}
-					} else {
-						await safeWrite(ws, rs, clean);
-						await safeWrite(ws, rs, "\n");
-					}
-
-					if (clean.length > 5 * 1024 * 1024 && global.gc)
-						try { global.gc(); } catch (e) {}
-				}
-			} finally {
-				rl.close();
-				rs.destroy();
-			}
-		}
-		
-		let extra_appends = getUpdatedValue(null, null, updated);
-		if (extra_appends) {
-			for (let [k, val] of Object.entries(extra_appends)) {
-				if (val !== null)
-					await safeWrite(ws, null, `"${k}":${JSON.stringify(val)}\n`);
-			}
-		}
-		
-		ws.end();
-		await new Promise((resolve) => ws.on("finish", resolve));
-		
-		let attempts = 0;
-		let renamed = false;
-		while (!renamed && attempts < 10) {
-			try {
-				fs.renameSync(tmp_file, page_file);
-				renamed = true;
-			} catch (e) {
-				attempts++;
-				if (attempts >= 10) throw e;
-				await new Promise((resolve) => setTimeout(resolve, 50));
-			}
-		}
-	} catch (err) {
-		try { ws.destroy(); } catch (e) {}
-		if (fs.existsSync(tmp_file)) {
-			try { fs.unlinkSync(tmp_file); } catch (e) {}
-		}
-		throw err;
 	}
 };
 
@@ -331,7 +232,22 @@ async function handleTask (arg0_task) {
 		zoom
 	} = task;
 	
+	if (type === "compile_savefile") {
+		let saved_path = await NDJSON.compileSavefile({
+			folder_path: task.folder_path,
+			pool_length: task.pool_length,
+			target_folder_path: task.target_folder_path,
+			target_path: task.target_path
+		});
+		return parentPort.postMessage({ results: saved_path, task_id });
+	}
+	
 	let base_path = file_path ? file_path.replace(/\.ndjson$/, "") : "";
+	if (type === "rebind_file_path") {
+		current_file_path = base_path;
+		return parentPort.postMessage({ results: true, task_id });
+	}
+	
 	let folder_path = (NDJSON.getCacheDirectory) ?
 		NDJSON.getCacheDirectory(base_path) :
 		NDJSON.getTempDirectory(base_path);
@@ -348,11 +264,27 @@ async function handleTask (arg0_task) {
 		}
 	}
 	
+	if (type === "restore_baseline" && current_file_path === base_path && has_loaded_partition) {
+		for (let [k, orig] of baseline_overrides) {
+			if (orig === null) {
+				partition_cache.delete(k);
+			} else {
+				partition_cache.set(k, structuredClone(orig));
+			}
+			if (has_flushed_since_load)
+				dirty_keys.add(k);
+		}
+		baseline_overrides.clear();
+		if (!has_flushed_since_load)
+			dirty_keys.clear();
+		return parentPort.postMessage({ results: true, task_id });
+	}
+	
 	//Ensure partition loaded in memory
-	if (type === "init_partition" || current_file_path !== base_path || partition_cache.size === 0) {
+	if (type === "init_partition" || type === "restore_baseline" || current_file_path !== base_path || !has_loaded_partition) {
 		await loadPartition(page_file);
 		current_file_path = base_path;
-		if (type === "init_partition")
+		if (type === "init_partition" || type === "restore_baseline")
 			return parentPort.postMessage({ results: true, task_id });
 	}
 	
@@ -578,29 +510,47 @@ async function handleTask (arg0_task) {
 	
 	if (type === "flush_dirty") {
 		if (dirty_keys.size > 0) {
+			let seen_keys = new Set();
 			let target_keys = new Set(dirty_keys);
-			await updateNDJSON(page_file, (key, val_str) => {
+			
+			await NDJSON.updateShardFile(page_file, (key) => {
+				if (key === null) {
+					let appends = {};
+					for (let dk of target_keys) {
+						if (!seen_keys.has(dk)) {
+							let cached = partition_cache.get(dk);
+							if (cached?.entity) appends[dk] = cached.entity;
+						}
+					}
+					return appends;
+				}
+				seen_keys.add(key);
 				let cached = partition_cache.get(key);
 				if (cached?.entity) return cached.entity;
-				return undefined;
+				return null;
 			}, { target_keys: target_keys });
+			
 			dirty_keys.clear();
+			has_flushed_since_load = true;
 		}
 		
 		return parentPort.postMessage({ results: true, task_id });
 	}
 	
 	if (type === "set_keyframe") {
-		let cached = partition_cache.get(id);
+		let str_id = String(id);
+		recordBaseline(str_id);
+		let cached = partition_cache.get(str_id);
 		let ts_key = typeof date === "object" ? Date.getTimestamp(date) : date;
 		ts_key = String(ts_key);
 		
 		if (cached) {
 			let history_obj = typeof cached.entity.history === "string" ? JSON.parse(cached.entity.history) : cached.entity.history;
-			if (!history_obj) history_obj = {};
-			if (!history_obj.keyframes) history_obj.keyframes = {};
+			if (!history_obj || typeof history_obj !== "object") history_obj = {};
+			let target_kfs = (history_obj.keyframes && typeof history_obj.keyframes === "object") ?
+				history_obj.keyframes : history_obj;
 			
-			history_obj.keyframes[ts_key] = keyframe;
+			target_kfs[ts_key] = keyframe;
 			cached.entity.history = history_obj;
 			
 			let ts_num = Number(ts_key);
@@ -611,113 +561,127 @@ async function handleTask (arg0_task) {
 			if (cached.bbox) {
 				updateBBoxFromCoords(keyframe, cached.bbox);
 			} else {
-				cached.bbox = calculateBBox(history_obj.keyframes, cached.entity);
+				cached.bbox = calculateBBox(target_kfs, cached.entity);
 			}
+		} else {
+			let keyframes_obj = { [ts_key]: keyframe };
+			partition_cache.set(str_id, {
+				bbox: calculateBBox(keyframes_obj, null),
+				class_name: "Geometry",
+				entity: { history: keyframes_obj, id: str_id, type: "geometry" },
+				id: str_id,
+				metadata: {},
+				timestamps: [Number(ts_key)],
+				type: "geometry",
+				value: undefined
+			});
 		}
-		dirty_keys.add(id);
+		dirty_keys.add(str_id);
 		return parentPort.postMessage({ results: true, task_id });
 	}
 	
 	if (type === "set_keyframes_diff") {
-		let cached = partition_cache.get(id);
-		if (cached && diff && typeof diff === "object") {
-			let history_obj = typeof cached.entity.history === "string" ? JSON.parse(cached.entity.history) : cached.entity.history;
-			if (!history_obj) history_obj = {};
-			if (!history_obj.keyframes) history_obj.keyframes = {};
-			
-			for (let ts in diff) {
-				let ts_key = String(ts);
-				history_obj.keyframes[ts_key] = diff[ts];
-				let ts_num = Number(ts_key);
-				if (!cached.timestamps.includes(ts_num)) cached.timestamps.push(ts_num);
-				if (cached.bbox) updateBBoxFromCoords(diff[ts], cached.bbox);
+		let str_id = String(id);
+		recordBaseline(str_id);
+		let cached = partition_cache.get(str_id);
+		if (diff && typeof diff === "object") {
+			if (cached) {
+				let history_obj = typeof cached.entity.history === "string" ? JSON.parse(cached.entity.history) : cached.entity.history;
+				if (!history_obj || typeof history_obj !== "object") history_obj = {};
+				let target_kfs = (history_obj.keyframes && typeof history_obj.keyframes === "object") ?
+					history_obj.keyframes : history_obj;
+				
+				for (let ts in diff) {
+					let ts_key = String(ts);
+					if (diff[ts] === undefined) {
+						delete target_kfs[ts_key];
+					} else {
+						target_kfs[ts_key] = diff[ts];
+						let ts_num = Number(ts_key);
+						if (!cached.timestamps.includes(ts_num)) cached.timestamps.push(ts_num);
+						if (cached.bbox) updateBBoxFromCoords(diff[ts], cached.bbox);
+					}
+				}
+				cached.timestamps = History.getTimestamps(target_kfs);
+				cached.entity.history = history_obj;
+			} else {
+				let keyframes_obj = {};
+				for (let ts in diff)
+					if (diff[ts] !== undefined) keyframes_obj[String(ts)] = diff[ts];
+				partition_cache.set(str_id, {
+					bbox: calculateBBox(keyframes_obj, null),
+					class_name: "Geometry",
+					entity: { history: keyframes_obj, id: str_id, type: "geometry" },
+					id: str_id,
+					metadata: {},
+					timestamps: History.getTimestamps(keyframes_obj),
+					type: "geometry",
+					value: undefined
+				});
 			}
-			cached.timestamps.sort((a, b) => a - b);
-			cached.entity.history = history_obj;
 		}
-		dirty_keys.add(id);
+		dirty_keys.add(str_id);
 		return parentPort.postMessage({ results: true, task_id });
 	}
 	
 	if (type === "set_keyframes") {
-		let cached = partition_cache.get(id);
+		let str_id = String(id);
+		recordBaseline(str_id);
+		let cached = partition_cache.get(str_id);
+		let raw_kfs = (keyframes && keyframes.keyframes && typeof keyframes.keyframes === "object") ?
+			keyframes.keyframes : (keyframes || {});
 		if (cached) {
-			let history_obj = typeof cached.entity.history === "string" ? JSON.parse(cached.entity.history) : cached.entity.history;
-			if (!history_obj) history_obj = {};
-			history_obj.keyframes = keyframes;
-			cached.entity.history = history_obj;
-			cached.timestamps = History.getTimestamps(keyframes);
-			cached.bbox = calculateBBox(keyframes, cached.entity);
+			cached.entity.history = raw_kfs;
+			cached.timestamps = History.getTimestamps(raw_kfs);
+			cached.bbox = calculateBBox(raw_kfs, cached.entity);
 		} else {
-			let history_obj = { keyframes: keyframes };
-			let timestamps = History.getTimestamps(keyframes);
-			let bbox = calculateBBox(keyframes, null);
-			partition_cache.set(id, {
+			let timestamps = History.getTimestamps(raw_kfs);
+			let bbox = calculateBBox(raw_kfs, null);
+			partition_cache.set(str_id, {
 				bbox: bbox,
 				class_name: "Geometry",
-				entity: { history: history_obj, id: id },
-				id: id,
+				entity: { history: raw_kfs, id: str_id, type: "geometry" },
+				id: str_id,
 				metadata: {},
 				timestamps: timestamps,
 				type: "geometry",
 				value: undefined
 			});
 		}
-		dirty_keys.add(id);
+		dirty_keys.add(str_id);
 		
 		return parentPort.postMessage({ results: true, task_id });
 	}
 	
 	if (type === "set_values") {
 		for (let k in update_map) {
+			let str_k = String(k);
 			let val = update_map[k];
+			recordBaseline(str_k);
+			
 			if (val === null) {
-				partition_cache.delete(k);
+				partition_cache.delete(str_k);
 			} else {
 				let history_obj = typeof val.history === "string" ? JSON.parse(val.history) : val.history;
+				if (typeof val.history === "string")
+					val.history = history_obj;
 				let raw_keyframes = (history_obj && history_obj.keyframes) ? history_obj.keyframes : history_obj;
 				let timestamps = (raw_keyframes && typeof raw_keyframes === "object") ? History.getTimestamps(raw_keyframes) : [];
 				let bbox = calculateBBox(raw_keyframes, val);
 				
-				partition_cache.set(k, {
+				partition_cache.set(str_k, {
 					bbox: bbox,
 					class_name: val.class_name,
 					entity: val,
-					id: k,
+					id: str_k,
 					metadata: val.metadata,
 					timestamps: timestamps,
 					type: val.type,
 					value: val.value
 				});
 			}
+			dirty_keys.add(str_k);
 		}
-		
-		let updated_keys = new Set();
-		let target_keys = new Set(Object.keys(update_map));
-		if (dirty_keys.size > 0) {
-			for (let dk of dirty_keys) {
-				if (!target_keys.has(dk)) {
-					target_keys.add(dk);
-					let cached = partition_cache.get(dk);
-					if (cached?.entity) update_map[dk] = cached.entity;
-				}
-			}
-			dirty_keys.clear();
-		}
-		
-		await updateNDJSON(page_file, (key, val_str) => {
-			if (key === null) {
-				let rem = {};
-				for (let k in update_map)
-					if (!updated_keys.has(k)) rem[k] = update_map[k];
-				return rem;
-			}
-			if (update_map.hasOwnProperty(key)) {
-				updated_keys.add(key);
-				return update_map[key];
-			}
-			return undefined;
-		}, { target_keys: target_keys });
 		
 		return parentPort.postMessage({ results: true, task_id });
 	}

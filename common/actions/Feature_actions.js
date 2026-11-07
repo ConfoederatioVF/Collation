@@ -319,20 +319,26 @@ config.actions.feature = {
 					
 					//Iterate over all import_file_paths
 					for (let i = 0; i < import_file_paths.length; i++) try {
-						let local_group = this;
+						let action_mvp = [];
+						let target_feature_id = this.id;
 						if (separate_groups) {
-							local_group = new naissance.FeatureGroup();
-							local_group.moveToFeature(this);
+							let group_id = Class.generateRandomID(naissance.Feature);
+							target_feature_id = group_id;
+							action_mvp.push(
+								{ type: "FeatureGroup", create_group: { id: group_id, do_not_refresh: true } },
+								{ feature_obj: group_id, move_to_feature: { feature_id: this.id } }
+							);
 						}
-						
-						DALS.Timeline.parseAction(`import_file`, [{
-							feature_obj: local_group.id,
+						action_mvp.push({
+							feature_obj: target_feature_id,
 							import_file: {
 								type: import_file_type,
 								file_path: this.ui.import_file_path[i],
 								options: local_options
 							}
-						}]);
+						});
+						
+						DALS.Timeline.parseAction(`import_file`, action_mvp);
 						console.log(`Imported File ${i + 1}/${import_file_paths.length} for ${this.name} using ${import_file_type}.`);
 					} catch (e) {
 						console.error(`Error importing File ${i + 1}/${import_file_paths.length}`, e);
@@ -344,9 +350,9 @@ config.actions.feature = {
 			};
 		},
 		special_function: async function (json) {
-			if (json.naissance_obj.entities) {
-				naissance.Feature.importFile.call(json.naissance_obj, 
-					json.import_file.file_path, json.import_file.type, json.import_file.options);
+			if (json.naissance_obj?.entities) {
+				await Promise.resolve(naissance.Feature.importFile.call(json.naissance_obj, 
+					json.import_file.file_path, json.import_file.type, json.import_file.options));
 				UI_Leftbar.refresh();
 			}
 		}
