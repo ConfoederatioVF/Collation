@@ -25,17 +25,18 @@ Execution is divided into two sequential phases:
   - Verify every file in `./papers/` begins with a valid `%PDF` header and is `> 10 KB` (never save HTML landing/error pages as `.pdf`).
   - Open-access repositories (CyberLeninka, Zenodo, JSTOR Open, Archive.org, institutional repositories) and shadow libraries (`Sci-Hub`, `LibGen`, `Anna's Archive`) are permitted to obtain obscure regional monographs and journal articles.
   - Reference archived PDFs in `<region>_literature_review.bib` (`note = {Archived PDF: ./papers/<filename>.pdf}`) and link them in prose where appropriate (`[archived PDF](papers/<filename>.pdf)`).
-- **Realistic Demographic Trajectories (`10000BC - 1900AD`)**:
-  - Avoid noisy, stochastic, or erratic oscillations. Population trajectories across `10000BC - 1900AD` must reflect realistic ecological carrying capacities, agricultural/metallurgical transitions, documented epidemic or warfare shocks, and pre-industrial growth rates, anchored at the modern end by early censuses or tax registers up to `1900AD`.
+- **User-Definable Time Domain & Realistic Demographic Trajectories (Default `10000BC - 2000AD`)**:
+  - The start and end dates of the demographic series are user-definable; if the user does not explicitly specify a start date, default to `10000BC`, and if the user does not explicitly specify an end date, extend the series to `2000AD`.
+  - Avoid noisy, stochastic, or erratic oscillations. Population trajectories across the target time domain must reflect realistic ecological carrying capacities, agricultural/metallurgical transitions, documented epidemic or warfare shocks, and pre-industrial/modern growth rates, anchored in later centuries by tax registers and censuses up to the target end year (`2000AD` by default).
 
 ### 2. Prose, Style, and Localization Rules
 - **British English (`EN-GB`)**: Use non-Oxford British English (`colonisation`, `urbanisation`, `centre`, `programme`, `kilometres`, `archaeological`, no serial/Oxford comma).
 - **Plain Academic Prose (Zero Technobabble)**:
   - Write clear, natural human academic prose. Strictly forbid inflated AI jargon or pseudo-scientific phrasing:
     - *Forbidden*: `"Complete Secular Holocene Demographic Trajectory"`, `"Spatiotemporal Paleodemographic Carrying-Capacity Envelope"`, `"Multi-Scalar Techno-Ecological Regime Shift"`, `"Diachronic Nucleation Vector"`.
-    - *Required*: `"Population Estimates"`, `"Regional Subdivisions"`, `"Prehistoric Foragers and Early Farmers (10000BC - 1000BC)"`, `"Classical and Medieval Settlements (500BC - 1500AD)"`, `"Early Modern and Census Era (1500 - 1900AD)"`.
-- **Compact Dates (`10000BC`, `1897AD`)**:
-  - Never put a space before `BC` or `AD` in prose, figure labels, or table headers/cells: write `10000BC`, `500BC`, `1AD`, `1200AD`, `1897AD`, `1900AD` (and ranges such as `1000-1200AD` or `4000-2000BC`).
+    - *Required*: `"Population Estimates"`, `"Regional Subdivisions"`, `"Prehistoric Foragers and Early Farmers (10000BC - 1000BC)"`, `"Classical and Medieval Settlements (500BC - 1500AD)"`, `"Early Modern and Modern Census Era (1500 - 2000AD)"`.
+- **Compact Dates (`10000BC`, `1897AD`, `2000AD`)**:
+  - Never put a space before `BC` or `AD` in prose, figure labels, or table headers/cells: write `10000BC`, `500BC`, `1AD`, `1200AD`, `1897AD`, `1900AD`, `2000AD` (and ranges such as `1000-1200AD` or `4000-2000BC`).
 - **European Decimals & Semantic Abbreviations**:
   - Use commas for decimals (`58,88`, `12,5k`, `1,45M`) and spaces for thousands separators (`1 250`, `20 425`).
 - **Plain Hyphens Only**:
@@ -75,7 +76,7 @@ Execution is divided into two sequential phases:
 1. **Regional Parallelisation**:
    - Spawn one subagent (`invoke_subagent` with `TypeName: "self"`, `Model: "inherit"`) per region (or pair of small adjacent sub-regions).
 2. **Self-Contained Subagent Prompts**:
-   - Every subagent prompt must explicitly state: (a) the forbidden internal/global sources rule, (b) the `10000BC - 1900AD` horizon and `./papers/` PDF archiving requirement, (c) the British English plain-prose and `10000BC`/`1897AD` formatting rules, (d) the path to [`references/intellte_setup_and_audit.md`](./references/intellte_setup_and_audit.md) for the mandatory `{r setup, include=FALSE}` block, and (e) the requirement to visually check all PNG figures (`read_file`) and audit compiled PDFs (`pymupdf`).
+   - Every subagent prompt must explicitly state: (a) the forbidden internal/global sources rule, (b) the target time domain (`10000BC - 2000AD` by default, or the user-specified start/end dates) and `./papers/` PDF archiving requirement, (c) the British English plain-prose and `10000BC`/`1897AD`/`2000AD` formatting rules, (d) the path to [`references/intellte_setup_and_audit.md`](./references/intellte_setup_and_audit.md) for the mandatory `{r setup, include=FALSE}` block, and (e) the requirement to visually check all PNG figures (`read_file`) and audit compiled PDFs (`pymupdf`).
 3. **Incremental File Generation (Preventing Stream Idle Timeouts)**:
    - Instruct subagents never to draft 150–250+ settlements or an entire 800-line `.Rmd` inside a single massive `<thought>` block. Instead, write data in modular Python generator scripts (`build_<region>_part1.py`, `build_<region>_part2.py`) of 80–120 entries at a time.
 4. **Directory-Grouped R Markdown Compilation**:
@@ -93,20 +94,20 @@ Execution is divided into two sequential phases:
    - Create `histmap/1.data_raw/population_regional/<macro_region>/<sub_region>/` along with `./papers/` and `./figures/` subdirectories.
    - Copy `template.tex` and `crd-mla-numeric.csl` from `E:/Active Projects/Project 1746 - Intellte/core/rticles/intellte/` into each regional directory (ensuring `template.tex` suppresses empty `Footnotes` sections).
 2. **External Literature Search & PDF Archiving**:
-   - Search regional archaeological, historical, cadastral, and census literature covering `10000BC - 1900AD`.
+   - Search regional archaeological, historical, cadastral, and census literature covering the target time domain (`10000BC - 2000AD` by default, or the user-specified start/end dates).
    - Download and verify at least 15–35+ source PDFs per region into `./papers/` and build `<region>_literature_review.bib`.
 3. **Generate Real GIS Maps & Default Matplotlib Figures**:
    - Generate `figures/<region>_regional_map.png` using real Natural Earth / HydroSHEDS / administrative boundaries and settlement coordinates.
-   - Generate 2–3 default Matplotlib demographic charts (`10000BC - 1900AD` regional/sub-basin trajectories, ecological zone distributions, or urban hierarchy charts) with zero text occlusion.
+   - Generate 2–3 default Matplotlib demographic charts (covering the full time domain `10000BC - 2000AD` by default: regional/sub-basin trajectories, ecological zone distributions, or urban hierarchy charts) with zero text occlusion.
    - Inspect all `.png` files with `read_file` to confirm visual quality.
 4. **Draft & Compile `<region>_literature_review.{Rmd,pdf,md}`**:
-   - Write `<region>_literature_review.Rmd` using the `{r setup, include=FALSE}` block from [`references/intellte_setup_and_audit.md`](./references/intellte_setup_and_audit.md), plain academic British English headings (`Population Estimates`, `Regional Subdivisions`, chronological period sections up to `1900AD`), and `render_table_template()` / `render_figure_template()`.
+   - Write `<region>_literature_review.Rmd` using the `{r setup, include=FALSE}` block from [`references/intellte_setup_and_audit.md`](./references/intellte_setup_and_audit.md), plain academic British English headings (`Population Estimates`, `Regional Subdivisions`, chronological period sections up to the target end date, `2000AD` by default), and `render_table_template()` / `render_figure_template()`.
    - Render `.pdf` and `.md` via `Rscript.exe` and run the `pymupdf` check (`max_x1 <= 540.1 pt`, `qmarks == []`).
 
 ### Phase 2: Regional Settlement Gazetteers (`_settlements`)
 
 1. **Compile `<region>_settlements.json` in `population_Stadester` Format**:
-   - Build `<region>_settlements.json` using incremental Python generator scripts so that each region contains **120–250+ individual settlements** spanning Prehistoric/Ancient (`10000BC - 500AD`), Classical/Medieval (`500 - 1500AD`), and Early Modern/Census (`1500 - 1900AD`) periods.
+   - Build `<region>_settlements.json` using incremental Python generator scripts so that each region contains **120–250+ individual settlements** spanning the target time domain (`10000BC - 2000AD` by default: Prehistoric/Ancient, Classical/Medieval, and Early Modern/Modern Census periods).
    - **Split all compound sites**: Every archaeological site, hillfort, town, fort, mission, trading post, and census town must be an individual entry with its own `[lat, lon]` coordinates.
    - **Exact `population_Stadester` JSON Schema**:
      ```json
@@ -122,7 +123,8 @@ Execution is divided into two sequential phases:
            "1000": 4500,
            "1500": 12000,
            "1800": 18500,
-           "1900": 42300
+           "1900": 42300,
+           "2000": 185000
          }
        }
      }

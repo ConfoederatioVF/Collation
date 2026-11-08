@@ -16,7 +16,7 @@ Use this exact setup block at the top of both `<region>_literature_review.Rmd` a
 ```markdown
 ---
 title: "DEMOGRAPHIC AND SETTLEMENT HISTORY OF <REGION UPPERCASE>."
-subtitle: "Regional Boundaries, Archaeological Synthesis, and Population Estimates (<START_YEAR>BC - 1900AD)."
+subtitle: "Regional Boundaries, Archaeological Synthesis, and Population Estimates (<START_YEAR, default 10000BC> - <END_YEAR, default 2000AD>)."
 date: "<Day Month Year>"
 authors_line: "Aust Kätzchen"
 emails:
