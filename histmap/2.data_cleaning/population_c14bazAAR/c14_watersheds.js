@@ -190,8 +190,8 @@
       let w_mod = 0;
 
       if (ag_indicators[basin_id]) inds = ag_indicators[basin_id].epochs;
-      if (is_glaciated) {
-        anchor_0 = h0_val || s0_val;
+      if (is_glaciated && h0_val > 0) {
+        anchor_0 = Math.min(h0_val, s0_val || h0_val);
       } else {
         anchor_0 = s0_val || h0_val;
       }
@@ -539,7 +539,7 @@
     let c14_cls = global.population_c14bazAAR || {};
     let glaciated_basins = new Set();
     let mask_dir = options.input_outlier_rasters || c14_cls.input_outlier_rasters;
-    let mask_names = ["stpetersburgrussia_-10000_1700.png", "russia_-10000_1400.png"];
+    let mask_names = ["stpetersburgrussia_-10000_0.png", "russia_-10000_0.png"];
     let wmobb_raster = null;
     let wmobb_raster_path = options.input_wmobb_raster || c14_cls.input_wmobb_raster;
 

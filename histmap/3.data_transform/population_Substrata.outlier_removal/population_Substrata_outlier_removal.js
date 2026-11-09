@@ -304,15 +304,19 @@ global.population_Substrata_outlier_removal = class {
 				});
 				
 				// Helper to filter active masks for current year
-				let get_active_rasters = (mask_obj) => {
+				let get_active_rasters = (mask_obj, exclude_russia_macro) => {
 					let active = [];
 					Object.values(mask_obj).forEach((m) => {
+						if (exclude_russia_macro) {
+							let bname = path.basename(m.file_path).toLowerCase();
+							if (bname.startsWith("russia_") || bname.startsWith("siberia_") || bname.startsWith("stpetersburgrussia_")) return;
+						}
 						if (year >= m.start_year && year <= m.end_year) active.push(GeoPNG.loadImage(m.file_path));
 					});
 					return active;
 				};
 				
-				let active_standard_rasters = get_active_rasters(standard_outlier_masks);
+				let active_standard_rasters = get_active_rasters(standard_outlier_masks, true);
 				let active_scalable_rasters = get_active_rasters(scalable_outlier_masks);
 				
 				let regional_sums = {};
@@ -618,11 +622,23 @@ global.population_Substrata_outlier_removal = class {
 		//2. Handle continental regions, i.e. Northern America; Statista regions
 		if (!options.exclude.includes("B1")) await population_Substrata_northern_america.processRasters(options);
 		if (!options.exclude.includes("B2")) await this.B_scaleProcessedHYDEToStatistaRegions(options);
+		if (!options.exclude.includes("B3")) {
+			if (typeof population_Substrata_russia === "undefined" && typeof require !== "undefined")
+				try { require(path.join(__dirname, "../population_Substrata.russia/population_Substrata_russia.js")); } catch (e) {}
+			if (typeof population_Substrata_russia !== "undefined")
+				await population_Substrata_russia.processRasters(options);
+		}
 		//3. Scale processed outliers to global population
-		if (!options.exclude.includes("C")) await this.C_scaleProcessedHYDEToGlobal(options);
+		if (!options.exclude.includes("C")) {
+			await this.C_scaleProcessedHYDEToGlobal(options);
+			if (!options.exclude.includes("B3") && typeof population_Substrata_russia !== "undefined" && typeof population_Substrata_russia.E_preserveDomainInGHSLInterpolatedRasters === "function")
+				population_Substrata_russia.E_preserveDomainInGHSLInterpolatedRasters(options);
+		}
 		//4. Conversion to int32 for backwards compatibility
 		if (!options.exclude.includes("D")) {
 			await this.D_interpolateToGHSL(options);
+			if (!options.exclude.includes("B3") && typeof population_Substrata_russia !== "undefined" && typeof population_Substrata_russia.E_preserveDomainInGHSLInterpolatedRasters === "function")
+				population_Substrata_russia.E_preserveDomainInGHSLInterpolatedRasters(options);
 			await this.D_convertToGeoPNG_int32(options);
 		}
 	}

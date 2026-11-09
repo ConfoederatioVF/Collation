@@ -11,7 +11,7 @@
     pixel_deg: 5/60,
     area_to_pop_growth_rate_ratio: 1.27,
     stadester_y_offset: 0,
-    uud_domain: [-3000, 2025],
+    uud_domain: [-10000, 2025],
     
     baseline_density_per_ha: [175, 190],
     angel_density_change_per_decade: {

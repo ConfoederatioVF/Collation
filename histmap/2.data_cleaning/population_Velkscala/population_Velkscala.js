@@ -159,7 +159,7 @@
       let options = (arg0_options) ? arg0_options : {};
 
       //Declare local instance variables
-      let anchor_years = [-10000, -9000, -8000, -7000, -6000, -5000, -4000, -3000, -2000, -1000, 0];
+      let anchor_years = [-10000, -9000, -8000, -7000, -6000, -5000, -4000, -3000, -2000, -1000, 0, ...this.post_1ad_years];
       let geocode_img = null;
       let geocode_obj = null;
       let geocode_path = (typeof admin_modern !== "undefined" && admin_modern.input_geocodes_raster) ?
@@ -223,6 +223,7 @@
 
         let local_json_str = JSON.stringify(national_pops_obj, null, 2);
         fs.writeFileSync(this.file_national_populations, local_json_str, "utf8");
+        fs.writeFileSync(this.file_stadester_national_populations, local_json_str, "utf8");
         fs.writeFileSync(legacy_pop, local_json_str, "utf8");
         console.log(`[population_Velkscala] Step C: Synchronised national populations to ${this.file_national_populations}.`);
       }

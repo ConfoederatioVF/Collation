@@ -26,6 +26,7 @@
         landuse_HYDE: (global.h2) ? path.join(h2, "landuse_HYDE", "landuse_HYDE.js") : "",
         population_KK10LUH2: (global.h2) ? path.join(h2, "population_KK10LUH2", "population_KK10LUH2.js") : "",
         population_Substrata_northern_america: (global.h3) ? path.join(h3, "population_Substrata.northern_america", "population_Substrata_northern_america.js") : "",
+        population_Substrata_russia: (global.h3) ? path.join(h3, "population_Substrata.russia", "population_Substrata_russia.js") : "",
         population_Substrata_outlier_removal: (global.h3) ? path.join(h3, "population_Substrata.outlier_removal", "population_Substrata_outlier_removal.js") : "",
         population_Stadester: (global.h2) ? path.join(h2, "population_Stadester", "population_Stadester.js") : "",
         population_c14bazAAR: (global.h2) ? path.join(h2, "population_c14bazAAR", "population_c14bazAAR.js") : "",

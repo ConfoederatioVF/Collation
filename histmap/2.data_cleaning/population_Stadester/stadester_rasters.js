@@ -164,7 +164,7 @@
     let substrata_raster;
     
     //Guard clauses
-    if (year < -3000) {
+    if (year < -10000) {
       if (!fs.existsSync(base_folder)) fs.mkdirSync(base_folder, { recursive: true });
       GeoPNG.saveNumberRasterImage({
         file_path: output_file_path,
@@ -411,7 +411,7 @@
     let urban_folder = path.dirname(output_file_path);
     
     //Guard clauses
-    if (year < -3000) {
+    if (year < -10000) {
       if (!fs.existsSync(urban_folder)) fs.mkdirSync(urban_folder, { recursive: true });
       GeoPNG.saveNumberRasterImage({
         file_path: output_file_path,
@@ -501,7 +501,7 @@
     if (!fs.existsSync(urban_folder)) fs.mkdirSync(urban_folder, { recursive: true });
     
     //Guard clauses
-    if (year < -3000) {
+    if (year < -10000) {
       if (fs.existsSync(substrata_file_path)) {
         fs.copyFileSync(substrata_file_path, rural_file_path);
         fs.copyFileSync(substrata_file_path, pop_file_path);
@@ -738,7 +738,7 @@
       items: years,
       name: "Stadester Base Rasters",
       task_generator: (year) => {
-        if (year < -3000) {
+        if (year < -10000) {
           let base_folder = options.intermediate_base_folder || `${h2}/population_Stadester/stadester_base_rasters/`;
           let output_file_path = path.join(base_folder, `stadester_base_${year}.png`);
           return {
@@ -773,7 +773,7 @@
       items: years,
       name: "Stadester Urban Rasters",
       task_generator: (year) => {
-        if (year < -3000) {
+        if (year < -10000) {
           let urban_folder = options.input_urbc_folder || `${h2}/population_Stadester/stadester_urban_rasters/`;
           let output_file_path = path.join(urban_folder, `stadester_urban_${year}.png`);
           return {
@@ -808,7 +808,7 @@
       items: years,
       name: "Stadester Rural Rasters",
       task_generator: (year) => {
-        if (year < -3000) {
+        if (year < -10000) {
           let rural_folder = options.input_rurc_folder || `${h2}/population_Stadester/stadester_rural_rasters/`;
           let output_file_path = path.join(rural_folder, `stadester_rural_${year}.png`);
           let substrata_file_path = population_Stadester_rasters.getSubstrataRasterPath(year, options);

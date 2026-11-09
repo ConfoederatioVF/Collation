@@ -298,7 +298,8 @@
       populstat: { data: population_Stadester_uud.getPopulstatObject(raw_folder) },
       chandler_modelski: { data: population_Stadester_uud.getWorldcitypopObject(raw_folder), is_metro: true, precision: 0.1, semantic_precision: 1 },
       devries: { data: population_Stadester_uud.getDeVriesCitiesObject(raw_folder), precision: 0.1, semantic_precision: 1 },
-      buringh: { data: population_Stadester_uud.getBuringhObject(raw_folder), precision: 0.05, semantic_precision: 1 }
+      buringh: { data: population_Stadester_uud.getBuringhObject(raw_folder), precision: 0.05, semantic_precision: 1 },
+      polaris_russia: { data: population_Stadester_uud.getPolarisRussiaObject(options), is_polaris: true, precision: 0.05, semantic_precision: 0.25 }
     };
     
     function getGridCells(coords, radius) {
@@ -414,6 +415,8 @@
                 is_match = true;
               } else if (local_db.precision && local_distance <= local_db.precision && pop_check.valid && (is_exact_name || pop_check.overlaps)) {
                 is_match = true;
+              } else if (local_db.is_polaris && (local_distance < 0.025 || (is_exact_name && (is_same_country || local_distance <= search_radius) && local_distance <= semantic_radius))) {
+                is_match = true;
               }
               
               if (is_match) {
@@ -422,6 +425,7 @@
                 if (local_distance < 0.01) score += 5000;
                 if (local_distance <= search_radius) score += 3000;
                 if (Boolean(local_db.is_metro) === isAgglomeration(local_uud_city)) score += 2000;
+                if (local_db.is_polaris && isAgglomeration(local_uud_city)) score -= 500000;
                 score += (1.0 - (local_distance/Math.max(0.01, semantic_radius)))*1000;
                 let peak = population_Stadester_uud.getPeakPopulation(local_uud_city.population);
                 score += (peak/100);
@@ -438,6 +442,17 @@
         
         if (was_merged[0] && was_merged[1]) {
           let actual_city = was_merged[1];
+          if (local_db.is_polaris) {
+            if (!actual_city.population) actual_city.population = {};
+            if (local_city.population) {
+              let pol_years = Object.keys(local_city.population);
+              for (let y = 0; y < pol_years.length; y++) {
+                let yr_num = parseInt(pol_years[y], 10);
+                if (yr_num <= 1900)
+                  delete actual_city.population[pol_years[y]];
+              }
+            }
+          }
           population_Stadester_uud.mergeCityEntries(actual_city, local_city, local_db.is_metro);
           actual_city.type = all_db_keys[i];
           return_obj[actual_city.key] = actual_city;
@@ -582,9 +597,10 @@
       1830, 1840, 1850, 1860, 1870, 1880, 1890, 1900, 1910, 1920, 1930,
       1940, 1950, 1960, 1970, 1980, 1990, 2000, 2005, 2010, 2015, 2020
     ];
+    let prehistoric_1000y = [-10000, -9000, -8000, -7000, -6000, -5000, -4000];
     let antiquity_100y = Array.from({ length: 31 }, (_, i) => -3000 + i * 100);
     let post_1ad = hyde_years.filter(y => y > 0 && y <= 2025);
-    let target_years = (options.years) ? options.years.filter(y => y >= -3000 && y <= 2025) : [...antiquity_100y, ...post_1ad];
+    let target_years = (options.years) ? options.years.filter(y => y >= -10000 && y <= 2025) : [...prehistoric_1000y, ...antiquity_100y, ...post_1ad];
     
     console.log(`- Interpolating UUD for ${all_cities.length} cities over years:`, target_years.length);
     for (let i = 0; i < all_cities.length; i++) {

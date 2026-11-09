@@ -975,4 +975,174 @@
     //Return statement
     return cities_obj;
   };
+  
+  /**
+   * Loads and deduplicates the 13 regional Russian and Kievan Rus settlement gazetteers from
+   * histmap/1.data_raw/population_regional/russia/ according to histmap/1.data_raw/population_regional/russia/polaris_gazetteers.json5.
+   * Specialist regional gazetteers (priority 2) override broad synthesis entries (priority 1) when matched
+   * within exact_coord_match_km (2,5 km) or by name/other_names within haversine_name_match_km (15,0 km).
+   * @alias population_Stadester_uud.getPolarisRussiaObject
+   * 
+   * @param {Object} [arg0_options]
+   * 
+   * @returns {Object}
+   */
+  population_Stadester_uud.getPolarisRussiaObject = function (arg0_options) {
+    //Convert from parameters
+    let options = (arg0_options) ? arg0_options : {};
+    
+    //Declare local instance variables
+    let exact_coord_match_km = 2.5;
+    let gazetteers = [];
+    let haversine_name_match_km = 15.0;
+    let manifest_obj = {};
+    let return_obj = {};
+    let root_dir = (fs.existsSync("./histmap/1.data_raw")) ?
+      path.resolve(".") : path.resolve(__dirname, "../../..");
+    let config_path = (options.config_path) ?
+      options.config_path :
+      ((typeof h1 !== "undefined" && fs.existsSync(`${h1}population_regional/russia/polaris_gazetteers.json5`)) ?
+        path.resolve(`${h1}population_regional/russia/polaris_gazetteers.json5`) :
+        path.join(root_dir, "histmap/1.data_raw/population_regional/russia/polaris_gazetteers.json5"));
+    
+    //Guard clauses
+    if (!fs.existsSync(config_path)) {
+      console.error(`population_Stadester_uud.getPolarisRussiaObject: Manifest not found at ${config_path}`);
+      return {};
+    }
+    
+    //Function body
+    try {
+      manifest_obj = JSON5.parse(fs.readFileSync(config_path, "utf8"));
+    } catch (e) {
+      console.error(`population_Stadester_uud.getPolarisRussiaObject: Failed to parse ${config_path}:`, e);
+      return {};
+    }
+    
+    let merge_opts = manifest_obj.merge_options || manifest_obj.deduplication;
+    if (merge_opts) {
+      if (Number.isFinite(merge_opts.exact_coord_match_km))
+        exact_coord_match_km = merge_opts.exact_coord_match_km;
+      if (Number.isFinite(merge_opts.haversine_name_match_km))
+        haversine_name_match_km = merge_opts.haversine_name_match_km;
+    }
+    if (Array.isArray(manifest_obj.gazetteers))
+      gazetteers = manifest_obj.gazetteers.slice().sort(function (a, b) {
+        return (b.priority || 0) - (a.priority || 0);
+      });
+    
+    for (let i = 0; i < gazetteers.length; i++) {
+      let gaz_entry = gazetteers[i];
+      let rel_path = gaz_entry.path || gaz_entry.file_path;
+      let gaz_id = gaz_entry.key || gaz_entry.id;
+      let gaz_path = path.join(root_dir, rel_path);
+      if (!fs.existsSync(gaz_path)) {
+        console.error(`population_Stadester_uud.getPolarisRussiaObject: Gazetteer file missing at ${gaz_path}`);
+        continue;
+      }
+      
+      let raw_json;
+      try {
+        raw_json = JSON5.parse(fs.readFileSync(gaz_path, "utf8"));
+      } catch (e) {
+        console.error(`population_Stadester_uud.getPolarisRussiaObject: Failed to parse ${gaz_path}:`, e);
+        continue;
+      }
+      
+      let all_keys = Object.keys(raw_json);
+      for (let x = 0; x < all_keys.length; x++) {
+        let city_key = all_keys[x];
+        let raw_city = raw_json[city_key];
+        if (!raw_city || !Array.isArray(raw_city.coords) || raw_city.coords.length < 2) continue;
+        
+        let lat = parseFloat(raw_city.coords[0]);
+        let lng = parseFloat(raw_city.coords[1]);
+        if (!Number.isFinite(lat) || !Number.isFinite(lng)) continue;
+        if (lat < -90 || lat > 90 || lng < -180 || lng > 180) continue;
+        
+        //Clean population series to finite positive numbers
+        let clean_pop = {};
+        if (raw_city.population && typeof raw_city.population === "object") {
+          let pop_years = Object.keys(raw_city.population);
+          for (let y = 0; y < pop_years.length; y++) {
+            let yr = parseInt(pop_years[y], 10);
+            let val = Number(raw_city.population[pop_years[y]]);
+            if (Number.isFinite(yr) && Number.isFinite(val) && val > 0)
+              clean_pop[yr] = Math.round(val);
+          }
+        }
+        if (Object.keys(clean_pop).length === 0) continue;
+        
+        let candidate_city = {
+          name: raw_city.name || city_key.split("-")[0],
+          country: raw_city.country || gaz_entry.default_country || "Russia",
+          region: raw_city.region || gaz_id,
+          coords: [lat, lng],
+          key: city_key,
+          other_names: Array.isArray(raw_city.other_names) ? raw_city.other_names.slice() : [],
+          original_names: [],
+          population: clean_pop,
+          polaris_priority: gaz_entry.priority || 1,
+          polaris_source: gaz_id
+        };
+        
+        let candidate_names = population_Stadester_uud.getAllCityNames(candidate_city);
+        candidate_city.original_names = candidate_names.slice();
+        
+        //Check against existing entries in return_obj for duplicate settlement
+        let existing_keys = Object.keys(return_obj);
+        let matched_key = undefined;
+        for (let y = 0; y < existing_keys.length; y++) {
+          let ex_city = return_obj[existing_keys[y]];
+          let dist_km = population_Stadester_uud.haversineDistance(ex_city.coords, candidate_city.coords);
+          if (dist_km <= exact_coord_match_km) {
+            matched_key = existing_keys[y];
+            break;
+          }
+          if (dist_km <= haversine_name_match_km) {
+            let is_name_match = population_Stadester_uud.checkExactNameMatch(ex_city, candidate_city);
+            if (is_name_match) {
+              matched_key = existing_keys[y];
+              break;
+            }
+          }
+        }
+        
+        if (matched_key) {
+          let ex_city = return_obj[matched_key];
+          //Since gazetteers are sorted descending by priority, ex_city has >= priority than candidate_city.
+          //Backfill only missing benchmark years or merge same-priority observations.
+          let cand_years = Object.keys(candidate_city.population);
+          for (let y = 0; y < cand_years.length; y++) {
+            let yr = cand_years[y];
+            if (ex_city.population[yr] === undefined) {
+              ex_city.population[yr] = candidate_city.population[yr];
+            } else if (ex_city.polaris_priority === candidate_city.polaris_priority) {
+              ex_city.population[yr] = Math.round(Math.sqrt(ex_city.population[yr]*candidate_city.population[yr]));
+            }
+          }
+          for (let y = 0; y < candidate_city.other_names.length; y++)
+            if (!ex_city.other_names.includes(candidate_city.other_names[y]))
+              ex_city.other_names.push(candidate_city.other_names[y]);
+          for (let y = 0; y < candidate_city.original_names.length; y++)
+            if (!ex_city.original_names.includes(candidate_city.original_names[y]))
+              ex_city.original_names.push(candidate_city.original_names[y]);
+        } else {
+          let target_key = city_key;
+          let suffix = 2;
+          while (return_obj[target_key]) {
+            target_key = `${city_key}_${suffix}`;
+            suffix++;
+          }
+          candidate_city.key = target_key;
+          return_obj[target_key] = candidate_city;
+        }
+      }
+    }
+    
+    console.log(`- Loaded ${Object.keys(return_obj).length} deduplicated POLARIS Russia & Kievan Rus settlements from ${gazetteers.length} gazetteers.`);
+    
+    //Return statement
+    return return_obj;
+  };
 }
