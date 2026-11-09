@@ -532,7 +532,7 @@
     for (let i = 0; i < total_pixels; i++) {
       let s = (substrata_raster && substrata_raster.data[i]) ? substrata_raster.data[i] : 0;
       let u = (urban_raster && urban_raster.data[i]) ? urban_raster.data[i] : 0;
-      let rr = Math.max(0, s - u);
+      let rr = (s > u) ? (s - u) : ((s > 0) ? Math.max(1e-4, s*0.05) : 0);
       raw_rural_data[i] = rr;
       
       global_sub += s;
@@ -592,10 +592,10 @@
       let r = raw_rural_data[i]*sc_r;
       let u = (urban_raster && urban_raster.data[i]) ? urban_raster.data[i]*sc_u : 0;
       
-      rural_data[i] = (r >= 0.01) ? r : 0;
+      rural_data[i] = (r >= 1e-6) ? r : 0;
       urban_data[i] = (u >= 0.01) ? u : 0;
       let tot = urban_data[i] + rural_data[i];
-      total_data[i] = (tot >= 0.01) ? tot : 0;
+      total_data[i] = (tot >= 1e-6) ? tot : 0;
     }
     
     //Save Rural, Total Population, and synchronised Urban rasters
