@@ -1090,20 +1090,25 @@
         candidate_city.original_names = candidate_names.slice();
         
         //Check against existing entries in return_obj for duplicate settlement
+        let cand_yr_nums = Object.keys(candidate_city.population).map(Number).filter(n => !isNaN(n)).sort((a, b) => a - b);
+        let cand_min_yr = cand_yr_nums[0];
+        let cand_max_yr = cand_yr_nums[cand_yr_nums.length - 1];
         let existing_keys = Object.keys(return_obj);
         let matched_key = undefined;
         for (let y = 0; y < existing_keys.length; y++) {
           let ex_city = return_obj[existing_keys[y]];
           let dist_km = population_Stadester_uud.haversineDistance(ex_city.coords, candidate_city.coords);
-          if (dist_km <= exact_coord_match_km) {
-            matched_key = existing_keys[y];
-            break;
-          }
           if (dist_km <= haversine_name_match_km) {
             let is_name_match = population_Stadester_uud.checkExactNameMatch(ex_city, candidate_city);
             if (is_name_match) {
-              matched_key = existing_keys[y];
-              break;
+              let ex_yr_nums = Object.keys(ex_city.population).map(Number).filter(n => !isNaN(n)).sort((a, b) => a - b);
+              let ex_min_yr = ex_yr_nums[0];
+              let ex_max_yr = ex_yr_nums[ex_yr_nums.length - 1];
+              let temporal_gap = Math.max(ex_min_yr - cand_max_yr, cand_min_yr - ex_max_yr);
+              if (temporal_gap <= 350) {
+                matched_key = existing_keys[y];
+                break;
+              }
             }
           }
         }

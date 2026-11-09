@@ -93,8 +93,23 @@
     let target_years = (options.years || options.all_years) ? (options.years || options.all_years) : years;
     for (let i = 0; i < target_years.length; i++) {
       let cur_year = target_years[i];
-      if (cur_year >= min_year && cur_year <= max_year)
-        object[cur_year] = population_Stadester_uud.cubicSplineInterpolation(years, values, cur_year);
+      if (cur_year >= min_year && cur_year <= max_year) {
+        let left_idx = 0;
+        for (let j = 0; j < years.length - 1; j++)
+          if (cur_year >= years[j] && cur_year <= years[j + 1]) {
+            left_idx = j;
+            break;
+          }
+        let x0 = years[left_idx], x1 = years[left_idx + 1];
+        let gap = x1 - x0;
+        let is_hiatus = (
+          (x0 >= 0 && gap >= 450) ||
+          (x0 < 0 && x1 >= 0 && gap >= 450) ||
+          (x0 <= -1500 && x1 > -1500 && gap >= 1000)
+        );
+        if (!is_hiatus || cur_year === x0 || cur_year === x1)
+          object[cur_year] = population_Stadester_uud.cubicSplineInterpolation(years, values, cur_year);
+      }
     }
     
     //Return statement
@@ -148,9 +163,15 @@
           }
         let x0 = years[left_idx], x1 = years[left_idx + 1];
         let y0 = values[left_idx], y1 = values[left_idx + 1];
+        let gap = x1 - x0;
+        let is_hiatus = (
+          (x0 >= 0 && gap >= 450) ||
+          (x0 < 0 && x1 >= 0 && gap >= 450) ||
+          (x0 <= -1500 && x1 > -1500 && gap >= 1000)
+        );
         if (x1 === x0) {
           object[cur_year] = y0;
-        } else {
+        } else if (!is_hiatus || cur_year === x0 || cur_year === x1) {
           object[cur_year] = y0 + (y1 - y0)*((cur_year - x0)/(x1 - x0));
         }
       }
@@ -407,15 +428,51 @@
               let pop_check = population_Stadester_uud.isPopulationRatioValid(local_uud_city.population, local_city.population);
               let is_match = false;
               
-              if (local_distance < 0.01 && (is_exact_name || pop_check.valid)) {
+              if (local_db.is_polaris) {
+                if (
+                  is_exact_name &&
+                  (is_same_country || local_distance <= search_radius) &&
+                  local_distance <= semantic_radius
+                ) {
+                  let pol_yrs = Object.keys(local_city.population || {}).map(Number).filter(n => !isNaN(n)).sort((a, b) => a - b);
+                  let uud_yrs = Object.keys(local_uud_city.population || {}).map(Number).filter(n => !isNaN(n)).sort((a, b) => a - b);
+                  let found_yr = parseInt(local_uud_city["found.yr"], 10);
+                  let is_temporally_compatible = true;
+                  
+                  if (pol_yrs.length > 0 && uud_yrs.length > 0) {
+                    let pol_min_yr = pol_yrs[0];
+                    let pol_max_yr = pol_yrs[pol_yrs.length - 1];
+                    let uud_min_yr = uud_yrs[0];
+                    let uud_max_yr = uud_yrs[uud_yrs.length - 1];
+                    let temporal_gap = Math.max(uud_min_yr - pol_max_yr, pol_min_yr - uud_max_yr);
+                    let is_rus_continuation = (
+                      pol_min_yr >= 500 &&
+                      pol_max_yr >= 1200 &&
+                      (local_city.country === "Ukraine" || local_city.country === "Belarus") &&
+                      (!Number.isFinite(found_yr) || found_yr <= 1350)
+                    );
+                    
+                    if (pol_min_yr < 500 && uud_min_yr >= 1400) {
+                      is_temporally_compatible = false;
+                    } else if (temporal_gap > 350 && !is_rus_continuation) {
+                      is_temporally_compatible = false;
+                    } else if (Number.isFinite(found_yr) && found_yr >= 1350 && pol_min_yr < 1300) {
+                      is_temporally_compatible = false;
+                    } else if (Number.isFinite(found_yr) && found_yr < 1350 && pol_min_yr < found_yr - 200) {
+                      is_temporally_compatible = false;
+                    }
+                  }
+                  
+                  if (is_temporally_compatible)
+                    is_match = true;
+                }
+              } else if (local_distance < 0.01 && (is_exact_name || (pop_check.valid && pop_check.overlaps))) {
                 is_match = true;
               } else if (is_exact_name && local_distance <= search_radius && pop_check.valid) {
                 is_match = true;
               } else if (is_exact_name && is_same_country && local_distance <= semantic_radius && pop_check.valid) {
                 is_match = true;
               } else if (local_db.precision && local_distance <= local_db.precision && pop_check.valid && (is_exact_name || pop_check.overlaps)) {
-                is_match = true;
-              } else if (local_db.is_polaris && (local_distance < 0.025 || (is_exact_name && (is_same_country || local_distance <= search_radius) && local_distance <= semantic_radius))) {
                 is_match = true;
               }
               
@@ -715,32 +772,57 @@
         return num_years_b - num_years_a;
       });
       
-      let best = group[0].city;
-      if (!best || !best.population) continue;
-      
-      let had_merged_keys = false;
-      for (let i = 1; i < group.length; i++) {
-        let duplicate = group[i].city;
-        if (!duplicate || !duplicate.population) continue;
-        for (let pop_key in duplicate.population) {
-          if (!best.population.hasOwnProperty(pop_key)) {
-            best.population[pop_key] = duplicate.population[pop_key];
-            had_merged_keys = true;
+      let clusters_in_cell = [];
+      for (let i = 0; i < group.length; i++) {
+        let candidate_entry = group[i];
+        let candidate_city = candidate_entry.city;
+        if (!candidate_city || !candidate_city.population) continue;
+        
+        let cand_yrs = Object.keys(candidate_city.population).map(Number).filter(n => !isNaN(n)).sort((a, b) => a - b);
+        let merged_into_cluster = false;
+        
+        for (let c = 0; c < clusters_in_cell.length; c++) {
+          let leader_entry = clusters_in_cell[c];
+          let leader_city = leader_entry.city;
+          let is_same_name = population_Stadester_uud.checkExactNameMatch(leader_city, candidate_city);
+          if (is_same_name) {
+            let lead_yrs = Object.keys(leader_city.population).map(Number).filter(n => !isNaN(n)).sort((a, b) => a - b);
+            let temporal_gap = (lead_yrs.length > 0 && cand_yrs.length > 0) ?
+              Math.max(lead_yrs[0] - cand_yrs[cand_yrs.length - 1], cand_yrs[0] - lead_yrs[lead_yrs.length - 1]) : 0;
+            if (temporal_gap <= 350) {
+              for (let pop_key in candidate_city.population) {
+                if (!leader_city.population.hasOwnProperty(pop_key)) {
+                  leader_city.population[pop_key] = candidate_city.population[pop_key];
+                  leader_entry.had_merged_keys = true;
+                }
+              }
+              merged_into_cluster = true;
+              break;
+            }
           }
         }
-      }
-      
-      //Re-interpolate across all keys if duplicate points were incorporated to avoid sawtooth drops
-      if (had_merged_keys) {
-        let all_pop_keys = Object.keys(best.population).map(Number).filter(n => !isNaN(n)).sort((a, b) => a - b);
-        if (all_pop_keys.length >= 2) {
-          best.population = population_Stadester_uud.linearInterpolationObject(best.population, {
-            years: all_pop_keys
+        
+        if (!merged_into_cluster)
+          clusters_in_cell.push({
+            key: candidate_entry.key,
+            city: candidate_city,
+            had_merged_keys: false
           });
-        }
       }
       
-      result[group[0].key] = best;
+      for (let c = 0; c < clusters_in_cell.length; c++) {
+        let cluster_item = clusters_in_cell[c];
+        let best = cluster_item.city;
+        if (cluster_item.had_merged_keys) {
+          let all_pop_keys = Object.keys(best.population).map(Number).filter(n => !isNaN(n)).sort((a, b) => a - b);
+          if (all_pop_keys.length >= 2) {
+            best.population = population_Stadester_uud.linearInterpolationObject(best.population, {
+              years: all_pop_keys
+            });
+          }
+        }
+        result[cluster_item.key] = best;
+      }
     }
     
     //Return statement
