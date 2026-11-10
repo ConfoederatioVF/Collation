@@ -12,6 +12,11 @@ Use this exact setup block at the top of both `<region>_literature_review.Rmd` a
 - Compact `10000BC` / `1897AD` year formatting without spaces.
 - Plain hyphens (`-`) in place of em/en-dashes.
 - Non-overlapping `!htbp` figure placement capped at `0.42\textheight`.
+- Ensure tables do not overflow the width of the page.
+- Cover images and figures should not result in deadspace or pages overflowing to the next, visually inspect pages with figures to ensure this is the case.
+- Do not overuse formatting such as bold.
+- Monospace should be reserved only for code.
+- Prose should be written in a human way. Caption lengths for figures should be descriptive and restricted.
 
 ```markdown
 ---

@@ -126,11 +126,12 @@
       global_targets[yr] = population_c14bazAAR_watersheds.interpolateMonotonicSpline(anchor_years, anchor_target_vals, yr);
     }
 
-    //Step 2: Pre-index empirical historical HYDE baselines and 1 AD Stadestér anchors per watershed
+    //Step 2: Pre-index empirical historical Stadestér/HYDE baselines and 1 AD Stadestér anchors per watershed
     console.log("- Pre-indexing empirical historical population baselines per watershed ...");
     for (let i = 0; i < anchor_years.length; i++) {
       let yr = anchor_years[i];
-      let hyde_path = path.join(hyde_popc_folder, `popc_${yr}.png`);
+      let sta_path = path.join(stadester_pop_folder, `stadester_population_${yr}.png`);
+      let hyde_path = (fs.existsSync(sta_path)) ? sta_path : path.join(hyde_popc_folder, `popc_${yr}.png`);
       basin_hyde_series[yr] = {};
 
       if (fs.existsSync(hyde_path)) {
@@ -190,11 +191,7 @@
       let w_mod = 0;
 
       if (ag_indicators[basin_id]) inds = ag_indicators[basin_id].epochs;
-      if (is_glaciated && h0_val > 0) {
-        anchor_0 = Math.min(h0_val, s0_val || h0_val);
-      } else {
-        anchor_0 = s0_val || h0_val;
-      }
+      anchor_0 = s0_val || h0_val;
       anchor_0_map[basin_id] = anchor_0;
 
       if (date_counts[basin_id] !== undefined) {
@@ -254,7 +251,7 @@
         if (is_glaciated) {
           r_base = r_h;
         } else {
-          r_base = r_ag;
+          r_base = 0.65*r_h + 0.35*r_ag;
         }
 
         if (n_total >= 10 && s_mean > 0) {
@@ -281,8 +278,8 @@
         c14_pops[all_basins[x]][yr] *= scalar;
     }
 
-    //Step 4 (Stage 2): Apply one-sided HYDE 3.5 deficit fallback strictly in sparse/remote low-density watersheds
-    console.log("- Applying one-sided HYDE 3.5 deficit fallbacks for sparse remote watersheds ...");
+    //Step 4 (Stage 2): Apply one-sided HYDE 3.5 / Stadestér deficit fallback
+    console.log("- Applying one-sided HYDE 3.5 / Stadestér deficit fallbacks for sparse remote watersheds ...");
     for (let i = 0; i < all_basins.length; i++) {
       let anchor_0 = 0;
       let area_km2 = 1;
@@ -290,7 +287,6 @@
       let dens_0 = 0;
       let fhg_0 = 0;
       let h0_val = 0;
-      let is_glaciated = glaciated_basins.has(String(basin_id));
       let n_pre = 0;
       let raw_spd = watershed_spds[basin_id] || {};
       let remote_factor = 0;
@@ -356,7 +352,7 @@
         if (h0_val > 0) h_scale_0 = Math.min(1.25, anchor_0/h0_val);
         p_hyde = h_emp*((1.0 - alpha)*Math.min(1.0, h_scale_0) + alpha*h_scale_0);
 
-        if (!is_glaciated && p_c14 < p_hyde && remote_factor > 0) {
+        if (p_c14 < p_hyde && remote_factor > 0) {
           let p_hg = p_c14;
           let p_sparse = 0;
           let w_hyde_sparse = (1.0 - w_c14)*remote_factor;
@@ -368,6 +364,7 @@
           }
           p_final = Math.max(p_sparse, p_hg);
         }
+        p_final = Math.max(p_final, 0.85*h_emp);
 
         watershed_pops[basin_id][yr] = Math.max(0, p_final);
       }

@@ -318,15 +318,10 @@
             if (gr) basin_stats[b].graz += (gr.data[p] || 0);
             if (cv) basin_stats[b].conv += (cv.data[p] || 0);
             if (pop) {
-              let a_val = land_area_raster.data[p] || 0;
               let u_val = (urb) ? (urb.data[p] || 0) : 0;
               let p_val = pop.data[p] || 0;
               //Subtract urban population to isolate rural component and avoid double counting urban pixels
               let rur_val = Math.max(0, p_val - u_val);
-              if (yr < this.urban_overlay_start_year && a_val > 0 && glaciated_basins.has(String(b))) {
-                let max_forager_density = (yr <= -5000) ? 0.05 : 0.20;
-                rur_val = Math.min(rur_val, max_forager_density*a_val);
-              }
               basin_stats[b].stadester_pop += rur_val;
             }
             basin_stats[b].land += (land_area_raster.data[p] || 0);
@@ -379,14 +374,6 @@
           let v_val = (cv) ? (cv.data[p] || 0) : 0;
           let p_val = (pop) ? (pop.data[p] || 0) : 0;
           let s_val = Math.max(0, p_val - u_val);
-          let b_id = String(wmobb_raster.data[p]);
-          if (yr < this.urban_overlay_start_year && glaciated_basins.has(b_id)) {
-            let a_val = land_area_raster.data[p] || 0;
-            if (a_val > 0) {
-              let max_forager_density = (yr <= -5000) ? 0.05 : 0.20;
-              s_val = Math.min(s_val, max_forager_density*a_val);
-            }
-          }
 
           let w_pred = beta_crop*c_val + beta_graz*g_val + beta_conv*v_val + beta_sta*s_val;
           weights_data[p] = Math.max(0, w_pred);
@@ -436,7 +423,7 @@
           local_u_r = null;
         }
 
-        if (chunk_index && local_y0 < this.base_year) {
+        if (chunk_index && local_y0 <= this.base_year) {
           let local_u0_out = path.join(this.output_urban_folder, `urbc_${local_y0}.png`);
           let local_u0_sta = path.join(this.input_stadester_urban_folder, `stadester_urban_${local_y0}.png`);
           let local_u0_path = (fs.existsSync(local_u0_out)) ? local_u0_out : local_u0_sta;
@@ -450,6 +437,22 @@
           });
           GeoPNG.saveNumberRasterImage({ file_path: local_p0, format: "float32", function: function (idx) { return local_r0.data[idx]; }, height: 2160, width: 4320 });
           local_u0_r = null;
+        }
+
+        if (chunk_index && i === anchor_years.length - 2 && local_y1 <= this.base_year) {
+          let local_u1_out = path.join(this.output_urban_folder, `urbc_${local_y1}.png`);
+          let local_u1_sta = path.join(this.input_stadester_urban_folder, `stadester_urban_${local_y1}.png`);
+          let local_u1_path = (fs.existsSync(local_u1_out)) ? local_u1_out : local_u1_sta;
+          let local_u1_r = (local_y1 >= this.urban_overlay_start_year && fs.existsSync(local_u1_path)) ?
+            GeoPNG.loadNumberRasterImage(local_u1_path, { format: "float32" }) : null;
+
+          population_c14bazAAR_binning.reconcileWatershedISO3Chunks(local_r1.data, {
+            chunk_index: chunk_index,
+            land_area_data: land_area_raster.data,
+            urban_data: (local_u1_r) ? local_u1_r.data : null
+          });
+          GeoPNG.saveNumberRasterImage({ file_path: local_p1, format: "float32", function: function (idx) { return local_r1.data[idx]; }, height: 2160, width: 4320 });
+          local_u1_r = null;
         }
 
         local_r0 = null;
@@ -595,14 +598,51 @@
       if (!fs.existsSync(this.output_rasters_scaled_to_global))
         fs.mkdirSync(this.output_rasters_scaled_to_global, { recursive: true });
 
-      //Pre-index watershed pixel indices to ensure high-performance downscaling
+      //Pre-index watershed pixel indices and watershed-boundary seam pixels to ensure high-performance downscaling
       console.log("- Pre-indexing watershed pixel indices ...");
       let basin_pixels = {};
+      let wmo_seam_dist = new Uint8Array(total_pixels).fill(255);
+      let wmo_seam_q = [];
+      let wmo_seam_pixels = [];
       for (let p = 0; p < total_pixels; p++) {
         let b = wmobb_raster.data[p];
         if (b > 0) {
           if (!basin_pixels[b]) basin_pixels[b] = [];
           basin_pixels[b].push(p);
+          let r = Math.floor(p/4320);
+          let c = p % 4320;
+          if (
+            (r > 0 && wmobb_raster.data[p - 4320] > 0 && wmobb_raster.data[p - 4320] !== b) ||
+            (r + 1 < 2160 && wmobb_raster.data[p + 4320] > 0 && wmobb_raster.data[p + 4320] !== b) ||
+            (c > 0 && wmobb_raster.data[p - 1] > 0 && wmobb_raster.data[p - 1] !== b) ||
+            (c + 1 < 4320 && wmobb_raster.data[p + 1] > 0 && wmobb_raster.data[p + 1] !== b)
+          ) {
+            wmo_seam_dist[p] = 1;
+            wmo_seam_q.push(p);
+            wmo_seam_pixels.push(p);
+          }
+        }
+      }
+      let ws_head = 0;
+      while (ws_head < wmo_seam_q.length) {
+        let curr_p = wmo_seam_q[ws_head++];
+        let d = wmo_seam_dist[curr_p];
+        if (d >= 4) continue;
+        let r = Math.floor(curr_p/4320);
+        let c = curr_p % 4320;
+        let nbrs = [
+          (r > 0) ? curr_p - 4320 : -1,
+          (r + 1 < 2160) ? curr_p + 4320 : -1,
+          (c > 0) ? curr_p - 1 : -1,
+          (c + 1 < 4320) ? curr_p + 1 : -1
+        ];
+        for (let x = 0; x < 4; x++) {
+          let np = nbrs[x];
+          if (np >= 0 && wmobb_raster.data[np] > 0 && wmo_seam_dist[np] > d + 1) {
+            wmo_seam_dist[np] = d + 1;
+            wmo_seam_q.push(np);
+            wmo_seam_pixels.push(np);
+          }
         }
       }
 
@@ -622,6 +662,7 @@
 
         let rurc_data = new Float32Array(total_pixels);
         let popc_data = new Float32Array(total_pixels);
+        let basin_factors = {};
 
         let all_basins = Object.keys(basin_pixels);
         for (let i = 0; i < all_basins.length; i++) {
@@ -639,6 +680,7 @@
 
           if (weight_sum > 0) {
             let factor = target_rural/weight_sum;
+            basin_factors[b] = factor;
             for (let k = 0; k < pixels.length; k++) {
               let p_idx = pixels[k];
               rurc_data[p_idx] = wls_raster.data[p_idx]*factor;
@@ -659,6 +701,44 @@
                 if (!urban_raster || urban_raster.data[p_idx] <= 0)
                   rurc_data[p_idx] = Math.max(0, land_area_raster.data[p_idx] || 0)*factor;
               }
+            }
+          }
+        }
+
+        //Smooth watershed scaling factors across WMO watershed boundaries so basin seams do not form step-edges
+        if (wls_raster) {
+          for (let i = 0; i < wmo_seam_pixels.length; i++) {
+            let p_idx = wmo_seam_pixels[i];
+            let w_val = wls_raster.data[p_idx];
+            if (w_val <= 0) continue;
+            let b0 = wmobb_raster.data[p_idx];
+            let f0 = basin_factors[b0];
+            if (!f0 || f0 <= 0) continue;
+            let d = wmo_seam_dist[p_idx];
+            let r = Math.floor(p_idx/4320);
+            let c = p_idx % 4320;
+            let log_sum = 0;
+            let w_sum = 0;
+            for (let dy = -3; dy <= 3; dy++) {
+              let ry = r + dy;
+              if (ry < 0 || ry >= 2160) continue;
+              for (let dx = -3; dx <= 3; dx++) {
+                let cx = c + dx;
+                if (cx < 0 || cx >= 4320) continue;
+                let np = ry*4320 + cx;
+                let nb = wmobb_raster.data[np];
+                let nf = basin_factors[nb];
+                if (nf > 0) {
+                  let kw = Math.exp(-(dx*dx + dy*dy)/6.0);
+                  log_sum += kw*Math.log(nf);
+                  w_sum += kw;
+                }
+              }
+            }
+            if (w_sum > 0) {
+              let alpha_s = 0.70*(1 - (d - 1)/4.0);
+              let f_smooth = Math.exp((1 - alpha_s)*Math.log(f0) + alpha_s*(log_sum/w_sum));
+              rurc_data[p_idx] = w_val*f_smooth;
             }
           }
         }

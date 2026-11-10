@@ -441,7 +441,7 @@
     //Declare local instance variables
     let chunk_index = options.chunk_index || null;
     let land_area_data = options.land_area_data || null;
-    let max_log_shift = (options.max_log_shift !== undefined) ? options.max_log_shift : 8.0;
+    let max_log_shift = (options.max_log_shift !== undefined) ? options.max_log_shift : 0.45;
     let multi_basin_keys = [];
     let reconciled_basins = 0;
     let urban_data = options.urban_data || null;
