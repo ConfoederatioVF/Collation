@@ -64,7 +64,7 @@
     static base_year = 0; // 1 AD (astronomical year 0 / 1950 cal BP)
     static anchor_years = [-10000, -9000, -8000, -7000, -6000, -5000, -4000, -3000, -2000, -1000, 0];
     static target_years = Array.from({ length: 101 }, (_, i) => -10000 + i*100);
-    static urban_overlay_start_year = -3000; // 3000 BC
+    static urban_overlay_start_year = -10000; // 10000 BC
 
     /**
      * Identifies watersheds that intersect the glaciated outlier masks in population_Substrata.outlier_removal/rasters_outliers/.
@@ -227,7 +227,7 @@
       let uopp_raster = (fs.existsSync(this.input_hyde_uopp_raster)) ?
         GeoPNG.loadNumberRasterImage(this.input_hyde_uopp_raster, { format: "float32" }) : null;
       let urban_mask = new Uint8Array(total_pixels);
-      let wmobb_raster = GeoPNG.loadNumberRasterImage(this.input_wmobb_raster, { format: "int32" });
+      let wmobb_raster = population_c14bazAAR_watersheds.loadBufferedWMOBBRaster(this.input_wmobb_raster);
 
       if (!fs.existsSync(this.intermediate_wls_folder))
         fs.mkdirSync(this.intermediate_wls_folder, { recursive: true });
@@ -292,6 +292,15 @@
         let pop = (fs.existsSync(pop_path)) ? GeoPNG.loadNumberRasterImage(pop_path, { format: "float32" }) : null;
         let urb = (fs.existsSync(urb_path)) ? GeoPNG.loadNumberRasterImage(urb_path, { format: "float32" }) : null;
 
+        //Isolate Stadestér rural component on urban pixels prior to modern urban sprawl inpainting
+        if (pop && urb)
+          for (let p = 0; p < total_pixels; p++) {
+            let p_val = pop.data[p] || 0;
+            let u_val = urb.data[p] || 0;
+            if (u_val > 0)
+              pop.data[p] = (p_val > u_val) ? (p_val - u_val) : Math.max(1e-4, ((p_val > 0) ? p_val : u_val)*0.05);
+          }
+
         //Inpaint modern & HYDE urban sprawl pixels via boundary-constrained IDW interpolation
         if (pop)
           this._inpaintModernUrbanMask(pop.data, yr_urban_mask || urban_mask, {
@@ -318,10 +327,7 @@
             if (gr) basin_stats[b].graz += (gr.data[p] || 0);
             if (cv) basin_stats[b].conv += (cv.data[p] || 0);
             if (pop) {
-              let u_val = (urb) ? (urb.data[p] || 0) : 0;
-              let p_val = pop.data[p] || 0;
-              //Subtract urban population to isolate rural component and avoid double counting urban pixels
-              let rur_val = Math.max(0, p_val - u_val);
+              let rur_val = Math.max(0, pop.data[p] || 0);
               basin_stats[b].stadester_pop += rur_val;
             }
             basin_stats[b].land += (land_area_raster.data[p] || 0);
@@ -362,20 +368,16 @@
         //Step 4: Generate continuous intra-watershed disaggregation weights W(p)
         let weights_data = new Float32Array(total_pixels);
         for (let p = 0; p < total_pixels; p++) {
-          let u_val = (urb) ? (urb.data[p] || 0) : 0;
-          //Explicitly zero out rural disaggregation weights on urban pixels to guarantee no double counting
-          if (u_val > 0) {
-            weights_data[p] = 0;
-            continue;
-          }
-
           let c_val = (cr) ? (cr.data[p] || 0) : 0;
           let g_val = (gr) ? (gr.data[p] || 0) : 0;
+          let p_val = (pop) ? Math.max(0, pop.data[p] || 0) : 0;
+          let u_val = (urb) ? (urb.data[p] || 0) : 0;
           let v_val = (cv) ? (cv.data[p] || 0) : 0;
-          let p_val = (pop) ? (pop.data[p] || 0) : 0;
-          let s_val = Math.max(0, p_val - u_val);
+          let s_val = (u_val > 0 && p_val <= 0) ? Math.max(1e-4, u_val*0.05) : p_val;
 
           let w_pred = beta_crop*c_val + beta_graz*g_val + beta_conv*v_val + beta_sta*s_val;
+          if (u_val > 0 && w_pred <= 0)
+            w_pred = Math.max(1e-4, beta_sta*u_val*0.05);
           weights_data[p] = Math.max(0, w_pred);
         }
 
@@ -408,8 +410,12 @@
           let local_u_r = (local_yr >= this.urban_overlay_start_year && fs.existsSync(local_u_path)) ?
             GeoPNG.loadNumberRasterImage(local_u_path, { format: "float32" }) : null;
 
-          for (let y = 0; y < total_pixels; y++)
-            local_inter_data[y] = (local_u_r && local_u_r.data[y] > 0) ? 0 : ((1.0 - local_f)*local_r0.data[y] + local_f*local_r1.data[y]);
+          for (let y = 0; y < total_pixels; y++) {
+            let local_w = (1.0 - local_f)*local_r0.data[y] + local_f*local_r1.data[y];
+            if (local_u_r && local_u_r.data[y] > 0 && local_w <= 0)
+              local_w = Math.max(1e-4, local_u_r.data[y]*0.05);
+            local_inter_data[y] = local_w;
+          }
 
           if (chunk_index && local_yr < this.base_year)
             population_c14bazAAR_binning.reconcileWatershedISO3Chunks(local_inter_data, {
@@ -485,12 +491,12 @@
       let urban_overlay_year = this.urban_overlay_start_year;
       let watershed_pops = JSON.parse(fs.readFileSync(path.join(this.config_folder, "watershed_populations.json"), "utf8"));
       let watershed_rurals = {};
-      let wmobb_raster = GeoPNG.loadNumberRasterImage(this.input_wmobb_raster, { format: "int32" });
+      let wmobb_raster = population_c14bazAAR_watersheds.loadBufferedWMOBBRaster(this.input_wmobb_raster);
 
       if (!fs.existsSync(this.output_urban_folder))
         fs.mkdirSync(this.output_urban_folder, { recursive: true });
 
-      console.log("- Processing Stadestér urban overlay from 3000 BC onwards ...");
+      console.log("- Processing Stadestér urban overlay from 10000 BC onwards ...");
 
       for (let y = 0; y < target_years.length; y++) {
         let yr = target_years[y];
@@ -498,7 +504,7 @@
         let urban_out_path = path.join(this.output_urban_folder, `urbc_${yr}.png`);
 
         if (yr < urban_overlay_year) {
-          //Pre-3000 BC: Pure rural/forager regime (urbc = 0)
+          //Pre-overlay regime: Pure rural/forager regime (urbc = 0)
           GeoPNG.saveNumberRasterImage({ file_path: urban_out_path, format: "float32", function: function () { return 0; }, height: 2160, width: 4320 });
 
           //Target rural equals total watershed population
@@ -506,7 +512,7 @@
           for (let i = 0; i < all_b.length; i++)
             watershed_rurals[yr][all_b[i]] = watershed_pops[all_b[i]][yr];
         } else {
-          //3000 BC Onwards: Ingest Stadestér urban ground truth or interpolate
+          //Ingest Stadestér urban ground truth or interpolate
           let src_urban_path = path.join(this.input_stadester_urban_folder, `stadester_urban_${yr}.png`);
           let urban_raster = (fs.existsSync(src_urban_path)) ?
             GeoPNG.loadNumberRasterImage(src_urban_path, { format: "float32" }) : null;
@@ -514,9 +520,9 @@
           if (urban_raster) {
             fs.copyFileSync(src_urban_path, urban_out_path);
           } else {
-            //Interpolate urban raster between surrounding Stadestér anchors [-3000, -2000, -1000, 0]
-            let u_anchors = [-3000, -2000, -1000, 0];
-            let y0 = -3000, y1 = 0;
+            //Interpolate urban raster between surrounding Stadestér anchors
+            let u_anchors = this.anchor_years;
+            let y0 = u_anchors[0], y1 = u_anchors[u_anchors.length - 1];
             for (let a = 0; a < u_anchors.length - 1; a++) {
               if (yr >= u_anchors[a] && yr <= u_anchors[a + 1]) {
                 y0 = u_anchors[a]; y1 = u_anchors[a + 1]; break;
@@ -591,7 +597,7 @@
       let target_years = this.target_years;
       let total_pixels = 4320*2160;
       let watershed_rurals = JSON.parse(fs.readFileSync(path.join(this.config_folder, "watershed_rural_targets.json"), "utf8"));
-      let wmobb_raster = GeoPNG.loadNumberRasterImage(this.input_wmobb_raster, { format: "int32" });
+      let wmobb_raster = population_c14bazAAR_watersheds.loadBufferedWMOBBRaster(this.input_wmobb_raster);
 
       if (!fs.existsSync(this.output_rural_folder))
         fs.mkdirSync(this.output_rural_folder, { recursive: true });
@@ -675,31 +681,41 @@
           //Sum WLS weights within this basin
           let weight_sum = 0;
           if (wls_raster)
-            for (let k = 0; k < pixels.length; k++)
-              weight_sum += wls_raster.data[pixels[k]];
+            for (let k = 0; k < pixels.length; k++) {
+              let p_idx = pixels[k];
+              let w_val = wls_raster.data[p_idx];
+              if (w_val <= 0 && urban_raster && urban_raster.data[p_idx] > 0)
+                w_val = Math.max(1e-4, urban_raster.data[p_idx]*0.05);
+              weight_sum += w_val;
+            }
 
           if (weight_sum > 0) {
             let factor = target_rural/weight_sum;
             basin_factors[b] = factor;
             for (let k = 0; k < pixels.length; k++) {
               let p_idx = pixels[k];
-              rurc_data[p_idx] = wls_raster.data[p_idx]*factor;
+              let w_val = wls_raster.data[p_idx];
+              if (w_val <= 0 && urban_raster && urban_raster.data[p_idx] > 0)
+                w_val = Math.max(1e-4, urban_raster.data[p_idx]*0.05);
+              rurc_data[p_idx] = w_val*factor;
             }
           } else {
             //Fallback to habitable land area if basin has zero WLS weight
             let area_sum = 0;
             for (let k = 0; k < pixels.length; k++) {
               let p_idx = pixels[k];
-              if (!urban_raster || urban_raster.data[p_idx] <= 0)
-                area_sum += Math.max(0, land_area_raster.data[pixels[k]] || 0);
+              let p_area = Math.max(0, land_area_raster.data[p_idx] || 0);
+              if (p_area <= 0 && urban_raster && urban_raster.data[p_idx] > 0) p_area = 1;
+              area_sum += p_area;
             }
 
             if (area_sum > 0) {
               let factor = target_rural/area_sum;
               for (let k = 0; k < pixels.length; k++) {
                 let p_idx = pixels[k];
-                if (!urban_raster || urban_raster.data[p_idx] <= 0)
-                  rurc_data[p_idx] = Math.max(0, land_area_raster.data[p_idx] || 0)*factor;
+                let p_area = Math.max(0, land_area_raster.data[p_idx] || 0);
+                if (p_area <= 0 && urban_raster && urban_raster.data[p_idx] > 0) p_area = 1;
+                rurc_data[p_idx] = p_area*factor;
               }
             }
           }

@@ -80,7 +80,7 @@
       ag_indicators = JSON.parse(fs.readFileSync(indicators_path, "utf8"));
     glaciated_basins = population_c14bazAAR_watersheds.getGlaciatedOutlierBasins(options);
     wmobb_meta = JSON.parse(fs.readFileSync(wmobb_meta_path, "utf8"));
-    wmobb_raster = GeoPNG.loadNumberRasterImage(wmobb_raster_path, { format: "int32" });
+    wmobb_raster = population_c14bazAAR_watersheds.loadBufferedWMOBBRaster(wmobb_raster_path);
 
     if (land_area_path && fs.existsSync(land_area_path)) {
       land_area_raster = GeoPNG.loadNumberRasterImage(land_area_path, { format: "int32" });
@@ -782,6 +782,75 @@
 
     //Return statement
     return Math.max(0, h00*y_pts[idx] + h10*h*m[idx] + h01*y_pts[idx + 1] + h11*h*m[idx + 1]);
+  };
+
+
+  /**
+   * Loads the WMO watershed raster and assigns a 2-pixel coastal fringe so harbour/island settlements
+   * map to their nearest terrestrial WMO watershed.
+   * @alias population_c14bazAAR_watersheds.loadBufferedWMOBBRaster
+   *
+   * @param {string} [arg0_wmobb_path]
+   *
+   * @returns {Object} { data: Int32Array, height: number, width: number }
+   */
+  population_c14bazAAR_watersheds.loadBufferedWMOBBRaster = function (arg0_wmobb_path) {
+    //Convert from parameters
+    let wmobb_path = arg0_wmobb_path || (global.population_c14bazAAR && global.population_c14bazAAR.input_wmobb_raster);
+
+    //Declare local instance variables
+    let best_dist_sq;
+    let height = 2160;
+    let orig_data;
+    let width = 4320;
+    let wmobb_raster;
+
+    //Guard clauses
+    if (!wmobb_path || !fs.existsSync(wmobb_path))
+      return { data: new Int32Array(4320*2160), height: 2160, width: 4320 };
+
+    wmobb_raster = GeoPNG.loadNumberRasterImage(wmobb_path, { format: "int32" });
+    height = wmobb_raster.height || 2160;
+    width = wmobb_raster.width || 4320;
+    best_dist_sq = new Uint8Array(width*height);
+    orig_data = wmobb_raster.data.slice();
+    best_dist_sq.fill(255);
+
+    for (let i = 0; i < height; i++) {
+      let row_offset = i*width;
+      for (let x = 0; x < width; x++) {
+        let idx = row_offset + x;
+        let b_id = orig_data[idx];
+        if (b_id <= 0) continue;
+
+        let down_b = (i < height - 1) ? orig_data[idx + width] : b_id;
+        let left_b = orig_data[row_offset + ((x + width - 1) % width)];
+        let right_b = orig_data[row_offset + ((x + 1) % width)];
+        let up_b = (i > 0) ? orig_data[idx - width] : b_id;
+        if (left_b > 0 && right_b > 0 && up_b > 0 && down_b > 0) continue;
+
+        for (let y = -2; y <= 2; y++) {
+          let ny = i + y;
+          if (ny < 0 || ny >= height) continue;
+          let n_row = ny*width;
+          for (let z = -2; z <= 2; z++) {
+            if (y === 0 && z === 0) continue;
+            let nx = (x + z + width) % width;
+            let n_idx = n_row + nx;
+            if (orig_data[n_idx] <= 0) {
+              let dist_sq = y*y + z*z;
+              if (dist_sq < best_dist_sq[n_idx]) {
+                best_dist_sq[n_idx] = dist_sq;
+                wmobb_raster.data[n_idx] = b_id;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    //Return statement
+    return wmobb_raster;
   };
 }
 

@@ -474,10 +474,6 @@
         local_active_adj[x] = [];
         for (let y = 0; y < local_px_arr.length; y++) {
           let local_p = local_px_arr[y];
-          if (urban_data && urban_data[local_p] > 0) {
-            weights_data[local_p] = 0;
-            continue;
-          }
           let local_a = land_area_data[local_p] || 0;
           let local_w = Math.max(0, weights_data[local_p] || 0);
           if (local_a > 0) {
@@ -649,8 +645,7 @@
             let local_px_arr = local_chunks[local_g].pixels_array;
             for (let z = 0; z < local_px_arr.length; z++) {
               let local_p = local_px_arr[z];
-              if (!urban_data || urban_data[local_p] <= 0)
-                weights_data[local_p] = local_eps_d*Math.max(0, land_area_data[local_p] || 0);
+              weights_data[local_p] = local_eps_d*Math.max(0, land_area_data[local_p] || 0);
             }
           }
         }
@@ -663,13 +658,9 @@
         let local_scalar = local_chunk_scalars[x];
         for (let y = 0; y < local_px_arr.length; y++) {
           let local_p = local_px_arr[y];
-          if (urban_data && urban_data[local_p] > 0) {
-            weights_data[local_p] = 0;
-          } else {
-            let local_v = Math.max(0, weights_data[local_p] || 0)*local_scalar;
-            weights_data[local_p] = local_v;
-            local_new_basin_weight += local_v;
-          }
+          let local_v = Math.max(0, weights_data[local_p] || 0)*local_scalar;
+          weights_data[local_p] = local_v;
+          local_new_basin_weight += local_v;
         }
       }
 

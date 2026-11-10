@@ -157,6 +157,10 @@
     let all_city_keys;
     let base_folder = options.intermediate_base_folder || `${h2}/population_Stadester/stadester_base_rasters/`;
     let base_raster_data = new Float32Array(4320*2160);
+    let cfg = global.population_Stadester_config;
+    let min_urban_population = (options.min_urban_raster_population !== undefined) ?
+      options.min_urban_raster_population :
+      ((cfg && cfg.min_urban_raster_population !== undefined) ? cfg.min_urban_raster_population : 5000);
     let output_file_path = path.join(base_folder, `stadester_base_${year}.png`);
     let pixel_dictionary = {};
     let stadester_obj = options.stadester_obj;
@@ -238,6 +242,7 @@
           for (let y = 0; y < p_keys.length; y++)
             if (p_keys[y] <= year) city_pop = parseFloat(city.population[p_keys[y]]) || 0;
         }
+        if (city_pop <= min_urban_population) continue;
         
         if (city.radial_buffers) {
           let b_keys = city._buffer_keys_sorted || (city._buffer_keys_sorted = Object.keys(city.radial_buffers).map(Number).sort((a, b) => a - b));
@@ -532,7 +537,7 @@
     for (let i = 0; i < total_pixels; i++) {
       let s = (substrata_raster && substrata_raster.data[i]) ? substrata_raster.data[i] : 0;
       let u = (urban_raster && urban_raster.data[i]) ? urban_raster.data[i] : 0;
-      let rr = (s > u) ? (s - u) : ((s > 0) ? Math.max(1e-4, s*0.05) : 0);
+      let rr = (s > u) ? (s - u) : ((s > 0 || u > 0) ? Math.max(1e-4, ((s > 0) ? s : u)*0.05) : 0);
       raw_rural_data[i] = rr;
       
       global_sub += s;
