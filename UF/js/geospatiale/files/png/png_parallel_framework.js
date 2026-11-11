@@ -498,7 +498,7 @@
 		//Initialise options
 		let cpu_count = (typeof require !== "undefined") ? require("os").cpus().length : 4;
 		let default_concurrency = Math.max(1, Math.min(cpu_count - 2, 16));
-		let concurrency = Math.returnSafeNumber(options.concurrency, default_concurrency);
+		let concurrency = Math.returnSafeNumber(options.concurrency || options.concurrecy, default_concurrency);
 		let context = (options.context) ? options.context : {};
 		let handler = options.handler;
 		let items = (options.items) ? options.items : [];

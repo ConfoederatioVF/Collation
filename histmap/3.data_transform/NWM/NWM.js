@@ -97,7 +97,7 @@
       let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
       let skip_primary = (options.skip_primary || options.skip_raw || options.skip_primary_data || options.skip_raw_data || options.skip_databases);
       
-      let concurrency = options.concurrency;
+      let concurrency = options.concurrency || options.concurrecy;
       let hyde_options = { ...(concurrency ? { concurrency } : {}), exclude: ["A"], overwrite: overwrite, ...(options.hyde || {}) };
       let kk10luh2_options = { ...(concurrency ? { concurrency } : {}), overwrite: overwrite, ...(options.kk10luh2 || {}) };
       let substrata_options = { ...(concurrency ? { concurrency } : {}), overwrite: overwrite, ...(options.substrata || {}) };
@@ -112,6 +112,16 @@
       if (global.population_KK10LUH2) {
         console.log(`[NWM] Step A: Calibrating KK10LUH2 fallback model ...`);
         await population_KK10LUH2.processRasters(kk10luh2_options);
+      }
+      if (overwrite && !options.skip_stadester && global.population_Stadester) {
+        console.log(`[NWM] Step A: Refreshing Stadestér UUD & urban rasters prior to Substrata Russia calibration...`);
+        await population_Stadester.processRasters({
+          ...(concurrency ? { concurrency } : {}),
+          exclude: ["H", "I", "J"],
+          overwrite: true,
+          ...(options.stadester || {})
+        });
+        options._stadester_uud_refreshed = true;
       }
       if (global.population_Substrata_outlier_removal)
         await population_Substrata_outlier_removal.processRasters(substrata_options);
@@ -137,9 +147,14 @@
       //Declare local instance variables
       let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
 
-      let concurrency = options.concurrency;
+      let concurrency = options.concurrency || options.concurrecy;
       let c14_options = { ...(concurrency ? { concurrency } : {}), overwrite: overwrite, ...(options.c14bazAAR || options.c14 || {}) };
-      let stadester_options = { ...(concurrency ? { concurrency } : {}), overwrite: overwrite, ...(options.stadester || {}) };
+      let stadester_options = {
+        ...(concurrency ? { concurrency } : {}),
+        ...(options._stadester_uud_refreshed ? { exclude: ["A", "B", "C", "D", "E"] } : {}),
+        overwrite: overwrite,
+        ...(options.stadester || {})
+      };
       let velkscala_options = { ...(concurrency ? { concurrency } : {}), overwrite: overwrite, ...(options.velkscala || {}) };
       
       //Function body
@@ -193,7 +208,7 @@
       let skip_primary = (options.skip_primary || options.skip_raw || options.skip_primary_data || options.skip_raw_data || options.skip_databases);
       let skip_training = (options.skip_training || options.use_existing_models || options.train === false);
       
-      let concurrency = options.concurrency;
+      let concurrency = options.concurrency || options.concurrecy;
       let gdp_nom_ols_options = { ...(concurrency ? { concurrency } : {}), overwrite: overwrite, ...(options.gdp_nominal_ols || {}) };
       let gdp_nom_options = { ...(concurrency ? { concurrency } : {}), overwrite: overwrite, ...(options.gdp_nominal || {}) };
       let gdp_nom_sedac_options = { ...(concurrency ? { concurrency } : {}), overwrite: overwrite, ...(options.gdp_nominal_sedac || {}) };
@@ -244,7 +259,7 @@
       let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
       let skip_training = (options.skip_training || options.use_existing_models || options.train === false);
       
-      let concurrency = options.concurrency;
+      let concurrency = options.concurrency || options.concurrecy;
       let gdp_pc_options = { ...(concurrency ? { concurrency } : {}), overwrite: overwrite, ...(options.gdp_pc || {}) };
       let gdp_ppp_pc_options = { ...(concurrency ? { concurrency } : {}), overwrite: overwrite, ...(options.gdp_ppp_pc || {}) };
       
@@ -282,7 +297,7 @@
       //Declare local instance variables
       let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
       
-      let concurrency = options.concurrency;
+      let concurrency = options.concurrency || options.concurrecy;
       let eoscala_transform_options = { ...(concurrency ? { concurrency } : {}), overwrite: overwrite, ...(options.gdp_eoscala_transform || options.eoscala_transform || {}) };
       let stadester_transform_options = { ...(concurrency ? { concurrency } : {}), overwrite: overwrite, ...(options.population_velkscala_transform || options.velkscala_transform || options.population_stadester_transform || options.stadester_transform || {}) };
       
@@ -314,7 +329,7 @@
       let overwrite = (options.overwrite !== undefined) ? options.overwrite : true;
       let skip_training = (options.skip_training || options.use_existing_models || options.train === false);
       
-      let concurrency = options.concurrency;
+      let concurrency = options.concurrency || options.concurrecy;
       let gini_eoscala_options = { ...(concurrency ? { concurrency } : {}), overwrite: overwrite, ...(options.gini_eoscala || {}) };
       let gini_ols_options = { ...(concurrency ? { concurrency } : {}), overwrite: overwrite, ...(options.gini_ols || {}) };
       
@@ -349,7 +364,7 @@
       let skip_primary = (options.skip_primary || options.skip_raw || options.skip_primary_data || options.skip_raw_data || options.skip_databases);
       let skip_training = (options.skip_training || options.use_existing_models || options.train === false);
       
-      let concurrency = options.concurrency;
+      let concurrency = options.concurrency || options.concurrecy;
       let wealth_income_ols_options = { ...(concurrency ? { concurrency } : {}), overwrite: overwrite, ...(options.wealth_income_ols || {}) };
       let wealth_income_options = { ...(concurrency ? { concurrency } : {}), overwrite: overwrite, ...(options.wealth_income || {}) };
       let wealth_income_wid_options = { ...(concurrency ? { concurrency } : {}), overwrite: overwrite, ...(options.wealth_income_wid || {}) };
@@ -391,7 +406,7 @@
       let skip_primary = (options.skip_primary || options.skip_raw || options.skip_primary_data || options.skip_raw_data || options.skip_databases);
       let skip_training = (options.skip_training || options.use_existing_models || options.train === false);
       
-      let concurrency = options.concurrency;
+      let concurrency = options.concurrency || options.concurrecy;
       let age_sex_hmd_options = { ...(concurrency ? { concurrency } : {}), overwrite: overwrite, ...(options.age_sex_hmd || {}) };
       let age_sex_options = {
         ...(concurrency ? { concurrency } : {}),
@@ -449,7 +464,7 @@
       let skip_primary = (options.skip_primary || options.skip_raw || options.skip_primary_data || options.skip_raw_data || options.skip_databases);
       let skip_training = (options.skip_training || options.use_existing_models || options.train === false);
       
-      let concurrency = options.concurrency;
+      let concurrency = options.concurrency || options.concurrecy;
       let births_deaths_hmd_options = { ...(concurrency ? { concurrency } : {}), overwrite: overwrite, ...(options.births_deaths_hmd || {}) };
       let births_deaths_kummu_options = { ...(concurrency ? { concurrency } : {}), overwrite: overwrite, ...(options.births_deaths_kummu || {}) };
       let births_deaths_ols_options = { ...(concurrency ? { concurrency } : {}), overwrite: overwrite, skip_training: skip_training, ...(options.births_deaths_ols || {}) };
@@ -493,7 +508,7 @@
       let skip_primary = (options.skip_primary || options.skip_raw || options.skip_primary_data || options.skip_raw_data || options.skip_databases);
       let skip_training = (options.skip_training || options.use_existing_models || options.train === false);
       
-      let concurrency = options.concurrency;
+      let concurrency = options.concurrency || options.concurrecy;
       let lfpr_ilo_options = { ...(concurrency ? { concurrency } : {}), overwrite: overwrite, ...(options.lfpr_ilo || {}) };
       let lfpr_olivetti_options = { ...(concurrency ? { concurrency } : {}), overwrite: overwrite, ...(options.lfpr_olivetti || {}) };
       let lfpr_ols_options = { ...(concurrency ? { concurrency } : {}), overwrite: overwrite, skip_training: skip_training, ...(options.lfpr_ols || {}) };
@@ -557,6 +572,7 @@
       
       //Initialise options
       if (!options.exclude) options.exclude = [];
+      if (options.concurrecy && !options.concurrency) options.concurrency = options.concurrecy;
       if (options.overwrite === undefined) options.overwrite = true;
       if (options.use_existing_models) options.skip_training = true;
       if (options.skip_primary || options.skip_raw || options.skip_primary_data || options.skip_raw_data || options.skip_databases) {
