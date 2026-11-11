@@ -38,7 +38,7 @@ Execution is divided into two sequential phases:
 - **Compact Dates (`10000BC`, `1897AD`, `2000AD`)**:
   - Never put a space before `BC` or `AD` in prose, figure labels, or table headers/cells: write `10000BC`, `500BC`, `1AD`, `1200AD`, `1897AD`, `1900AD`, `2000AD` (and ranges such as `1000-1200AD` or `4000-2000BC`).
 - **European Decimals & Semantic Abbreviations**:
-  - Use commas for decimals (`58,88`, `12,5k`, `1,45M`) and spaces for thousands separators (`1 250`, `20 425`).
+  - Use commas for decimals (`58,88`, `12,5k`, `1,45M`) and full stops for thousands separators (`1.250`, `20.425`).
 - **Plain Hyphens Only**:
   - Replace all em-dashes (`—`), en-dashes (`–`), and `---`/`--` with plain hyphens (`-` or ` - `).
 - **Minimal Inline Formatting & Script Transliteration**:
