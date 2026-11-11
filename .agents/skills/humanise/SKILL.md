@@ -5,6 +5,8 @@ description: Humanises a paper or piece of text, removing traces of AI writing.
 
 This skill may be pointed at any piece of text, file, or a folder. The scope of the text to humanise is determined by the user or agent. If pointed at a folder, discover all files that the user/agent is asking to change first.
 
+- See global rules: write in non-Oxford British English (EN-GB), with European decimal formatting (DE). Timezones should be GMT, spell out dates (i.e. 17 November 2025).
+
 ## Step 1. DO NOTs.
 
 - Do not use technobabble.
