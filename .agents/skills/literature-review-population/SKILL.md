@@ -137,3 +137,5 @@ Execution is divided into two sequential phases:
 3. **Final Verification & Cleanup**:
    - Run the automated verification script in [`references/intellte_setup_and_audit.md`](./references/intellte_setup_and_audit.md) across all `_literature_review.pdf`, `_settlements.pdf`, and `_settlements.json` files to verify schema compliance, top-aligned headers (`valign=top`), `max_x1 <= 540.1 pt`, and `0` unresolved `??` tokens.
    - Remove any temporary helper scripts from `/tests/` once verification completes.
+
+Once this process completes, ensure you run the `/humanise` skill if it exists to ensure your paper is in compliance.
