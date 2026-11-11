@@ -224,21 +224,22 @@
       let options = (arg0_options) ? arg0_options : {};
       
       //Declare local instance variables
-      let years = options.years || this.all_urban_years;
+      let local_options = {
+        intermediate_base_folder: this.intermediate_base_folder,
+        ...options
+      };
+      let years = local_options.years || this.all_urban_years;
       
       this.ensureDirectories();
       
-      //Preload stadester_obj once if available to avoid multi-thread 300MB re-parsing
-      if (!options.stadester_obj && fs.existsSync(this.file_stadester_final)) {
+      //Only preload stadester_obj on main thread when running without worker threads so options is never polluted
+      if (local_options.use_workers === false && !local_options.stadester_obj && fs.existsSync(this.file_stadester_final)) {
         console.log(`- Preloading Stadestér master dataset (${this.file_stadester_final})...`);
-        options.stadester_obj = JSON.parse(fs.readFileSync(this.file_stadester_final, "utf8"));
+        local_options.stadester_obj = JSON.parse(fs.readFileSync(this.file_stadester_final, "utf8"));
       }
       
       //Return statement
-      return population_Stadester_rasters.generateBaseRastersParallel(years, {
-        intermediate_base_folder: this.intermediate_base_folder,
-        ...options
-      });
+      return population_Stadester_rasters.generateBaseRastersParallel(years, local_options);
     }
     
     /**

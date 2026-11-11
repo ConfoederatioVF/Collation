@@ -978,7 +978,7 @@
   
   /**
    * Loads and deduplicates the 13 regional Russian and Kievan Rus settlement gazetteers from
-   * histmap/1.data_raw/population_regional/russia/ according to histmap/1.data_raw/population_regional/russia/polaris_gazetteers.json5.
+   * histmap/1.data_raw/population_regional/POLARIS/ according to histmap/1.data_raw/population_regional/POLARIS/polaris_gazetteers.json5.
    * Specialist regional gazetteers (priority 2) override broad synthesis entries (priority 1) when matched
    * within exact_coord_match_km (2,5 km) or by name/other_names within haversine_name_match_km (15,0 km).
    * @alias population_Stadester_uud.getPolarisRussiaObject
@@ -1001,9 +1001,9 @@
       path.resolve(".") : path.resolve(__dirname, "../../..");
     let config_path = (options.config_path) ?
       options.config_path :
-      ((typeof h1 !== "undefined" && fs.existsSync(`${h1}population_regional/russia/polaris_gazetteers.json5`)) ?
-        path.resolve(`${h1}population_regional/russia/polaris_gazetteers.json5`) :
-        path.join(root_dir, "histmap/1.data_raw/population_regional/russia/polaris_gazetteers.json5"));
+      ((typeof h1 !== "undefined" && fs.existsSync(`${h1}population_regional/POLARIS/polaris_gazetteers.json5`)) ?
+        path.resolve(`${h1}population_regional/POLARIS/polaris_gazetteers.json5`) :
+        path.join(root_dir, "histmap/1.data_raw/population_regional/POLARIS/polaris_gazetteers.json5"));
     
     //Guard clauses
     if (!fs.existsSync(config_path)) {

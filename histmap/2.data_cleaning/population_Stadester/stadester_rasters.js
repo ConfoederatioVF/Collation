@@ -735,7 +735,11 @@
     //Declare local instance variables
     let default_concurrency = (typeof require !== "undefined") ? Math.min(8, require("os").cpus().length || 4) : 4;
     let worker_options = Object.assign({}, options);
+    delete worker_options.base_raster;
+    delete worker_options.pixel_to_geocode;
     delete worker_options.stadester_obj;
+    delete worker_options.substrata_raster;
+    delete worker_options.urban_raster;
     
     //Return statement
     return GeoPNG.processTimeseriesParallel({
@@ -771,6 +775,12 @@
     
     //Declare local instance variables
     let default_concurrency = (typeof require !== "undefined") ? Math.min(8, require("os").cpus().length || 4) : 4;
+    let worker_options = Object.assign({}, options);
+    delete worker_options.base_raster;
+    delete worker_options.pixel_to_geocode;
+    delete worker_options.stadester_obj;
+    delete worker_options.substrata_raster;
+    delete worker_options.urban_raster;
     
     //Return statement
     return GeoPNG.processTimeseriesParallel({
@@ -791,7 +801,7 @@
         }
         return {
           type: "stadester_urban_raster",
-          options: options,
+          options: worker_options,
           year: year
         };
       },
@@ -806,6 +816,12 @@
     
     //Declare local instance variables
     let default_concurrency = (typeof require !== "undefined") ? Math.min(8, require("os").cpus().length || 4) : 4;
+    let worker_options = Object.assign({}, options);
+    delete worker_options.base_raster;
+    delete worker_options.pixel_to_geocode;
+    delete worker_options.stadester_obj;
+    delete worker_options.substrata_raster;
+    delete worker_options.urban_raster;
     
     //Return statement
     return GeoPNG.processTimeseriesParallel({
@@ -827,7 +843,7 @@
         }
         return {
           type: "stadester_rural_raster",
-          options: options,
+          options: worker_options,
           year: year
         };
       },
@@ -842,6 +858,12 @@
     
     //Declare local instance variables
     let default_concurrency = (typeof require !== "undefined") ? Math.min(8, require("os").cpus().length || 4) : 4;
+    let worker_options = Object.assign({}, options);
+    delete worker_options.base_raster;
+    delete worker_options.pixel_to_geocode;
+    delete worker_options.stadester_obj;
+    delete worker_options.substrata_raster;
+    delete worker_options.urban_raster;
     
     //Return statement
     return GeoPNG.processTimeseriesParallel({
@@ -851,7 +873,7 @@
       task_generator: (year) => {
         return {
           type: "stadester_population_raster",
-          options: options,
+          options: worker_options,
           year: year
         };
       },

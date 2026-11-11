@@ -339,7 +339,19 @@
 					});
 					
 					//Polyfill postMessage and terminate for child_process
-					worker.postMessage = (data) => worker.send(data);
+					worker.postMessage = (data) => {
+						if (!worker.connected)
+							throw new Error(`[GeoWorker ${i}] IPC channel closed.`);
+						worker.send(data, (err) => {
+							if (err && data && data.task_id !== undefined) {
+								let cb = GeoPNG._pending_tasks.get(data.task_id);
+								if (cb) {
+									GeoPNG._pending_tasks.delete(data.task_id);
+									cb.reject(err);
+								}
+							}
+						});
+					};
 					worker.terminate = () => worker.kill();
 				}
 				
@@ -347,6 +359,22 @@
 				
 				worker.worker_id = i;
 				GeoPNG._active_workers.add(worker);
+				
+				let rejectWorkerPendingTasks = (reason) => {
+					GeoPNG._active_workers.delete(worker);
+					if (GeoPNG._worker_pool) {
+						let pool_idx = GeoPNG._worker_pool.indexOf(worker);
+						if (pool_idx !== -1) GeoPNG._worker_pool.splice(pool_idx, 1);
+					}
+					if (GeoPNG._pending_tasks) {
+						for (let [tid, cb] of GeoPNG._pending_tasks.entries()) {
+							if (cb && cb.worker_id === worker.worker_id) {
+								GeoPNG._pending_tasks.delete(tid);
+								cb.reject(reason);
+							}
+						}
+					}
+				};
 				
 				worker.on("message", (response) => {
 					if (!response || response.task_id === undefined) return;
@@ -363,11 +391,11 @@
 				
 				worker.on("error", (err) => {
 					console.error(`[GeoWorker ${i}] Thread error:`, err);
-					GeoPNG._active_workers.delete(worker);
+					rejectWorkerPendingTasks(err || new Error(`[GeoWorker ${i}] Thread error`));
 				});
 				
-				worker.on("exit", () => {
-					GeoPNG._active_workers.delete(worker);
+				worker.on("exit", (code) => {
+					rejectWorkerPendingTasks(new Error(`[GeoWorker ${i}] Exited with code ${code}`));
 				});
 				
 				GeoPNG._worker_pool.push(worker);
@@ -432,8 +460,13 @@
 		
 		//Return statement
 		return new Promise((resolve, reject) => {
-			GeoPNG._pending_tasks.set(task_id, { resolve: resolve, reject: reject });
-			worker.postMessage(task);
+			GeoPNG._pending_tasks.set(task_id, { reject: reject, resolve: resolve, worker_id: worker.worker_id });
+			try {
+				worker.postMessage(task);
+			} catch (err) {
+				GeoPNG._pending_tasks.delete(task_id);
+				reject(err);
+			}
 		});
 	};
 	

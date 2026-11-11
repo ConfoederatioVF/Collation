@@ -12,18 +12,20 @@
 
   /**
    * Mosaics, dasymetrically calibrates, and spatiotemporally smooths the Russian (`sites_IA_RAS`, -10000 to 1900 AD)
-   * and Kievan Rus (`sites_belarus_ukraine`, -10000 to 1900 AD) kriged population substrata across all 14 regional
-   * literature-review areal masks (`histmap/1.data_raw/population_regional/russia/`) before compositing into
+   * and Kievan Rus (`sites_belarus_ukraine`, -10000 to 1900 AD) kriged population substrata and modern GHSL/HYDE
+   * settlement priors (1910 to 2025 AD) across all 14 regional literature-review areal masks and 8 national epoch
+   * areal masks (`histmap/1.data_raw/population_regional/POLARIS/`) before compositing into
    * `population_Substrata.outlier_removal`.
    *
    * Logical flow is prefixed with step letters (`A_` through `E_`):
    * - `A_loadManifestAndMasks`: Delegates to `population_Substrata_russia_masks.A_loadManifestAndMasks`.
    * - `B_mosaicKrigedSubstrataForYear`: Loads the kriged `sites_IA_RAS` and `sites_belarus_ukraine` rasters (`-10000..1900`)
-   *   for a given benchmark year and mosaics them over their respective domains.
-   * - `C_computeCalibratedFieldForYear`: Computes dasymetric calibration multipliers per sub-region, smooths the
-   *   log-multiplier field across all internal and cross-domain (`dom 1 <-> dom 2`) boundaries, re-normalises regional
-   *   totals, and applies cross-domain seam blending along the Belarus–Russia, Ukraine–Russia, and Crimea frontiers.
-   * - `processRasters`: Applies temporal log-Laplacian regularisation across the 48 HYDE benchmark years (`-10000..1900 AD`),
+   *   and modern GHSL/HYDE spatial priors (`1910..2025`) for a given benchmark year and mosaics them over their domains.
+   * - `C_computeCalibratedFieldForYear`: Computes dasymetric calibration multipliers per sub-region (Priority 2 + Priority 1
+   *   for `-10000..1900`, reconciled with Priority 3 `national_epoch_masks` for `1400..2025`), smooths the log-multiplier
+   *   field across internal and cross-domain (`dom 1 <-> dom 2`) boundaries, re-normalises regional totals, and applies
+   *   cross-domain seam blending along the Belarus–Russia, Ukraine–Russia, and Crimea frontiers.
+   * - `processRasters`: Applies temporal log-Laplacian regularisation across all 128 HYDE benchmark years (`-10000..2025 AD`),
    *   cleans foreign outlier-mask spillover cells, and composites the calibrated mosaic into `rasters_2.scaled_to_regions/`
    *   with clamped foreign-neighbour feathering.
    * - `E_preserveDomainInGHSLInterpolatedRasters`: Preserves calibrated POLARIS domains in `rasters_3.scaled_to_global/`
@@ -37,19 +39,19 @@
       ((fs.existsSync("./histmap/3.data_transform/population_Substrata.russia")) ?
         path.resolve("./histmap/3.data_transform/population_Substrata.russia") + path.sep :
         path.join(__dirname, "/"));
-    static config_path = (typeof h1 !== "undefined" && fs.existsSync(`${h1}population_regional/russia/russia_areal_masks.json5`)) ?
-      path.resolve(`${h1}population_regional/russia/russia_areal_masks.json5`) :
-      ((fs.existsSync("./histmap/1.data_raw/population_regional/russia/russia_areal_masks.json5")) ?
-        path.resolve("./histmap/1.data_raw/population_regional/russia/russia_areal_masks.json5") :
-        path.resolve(__dirname, "../../1.data_raw/population_regional/russia/russia_areal_masks.json5"));
+    static config_path = (typeof h1 !== "undefined" && fs.existsSync(`${h1}population_regional/POLARIS/russia_areal_masks.json5`)) ?
+      path.resolve(`${h1}population_regional/POLARIS/russia_areal_masks.json5`) :
+      ((fs.existsSync("./histmap/1.data_raw/population_regional/POLARIS/russia_areal_masks.json5")) ?
+        path.resolve("./histmap/1.data_raw/population_regional/POLARIS/russia_areal_masks.json5") :
+        path.resolve(__dirname, "../../1.data_raw/population_regional/POLARIS/russia_areal_masks.json5"));
     static project_root = (fs.existsSync("./histmap/1.data_raw")) ?
       path.resolve(".") :
       path.resolve(__dirname, "../../..");
 
     /**
-     * Step A: Loads `histmap/1.data_raw/population_regional/russia/russia_areal_masks.json5`, indexes all specialist (Priority 2)
-     * and macro (Priority 1) `4320x2160` RGB PNG areal masks, closes western frontier mask gaps, and builds pixel-level
-     * domain, cross-domain seam, and exterior foreign-feathering tables.
+     * Step A: Loads `histmap/1.data_raw/population_regional/POLARIS/russia_areal_masks.json5`, indexes all specialist (Priority 2),
+     * macro (Priority 1), and national epoch (Priority 3) `4320x2160` RGB PNG areal masks, closes western frontier mask gaps,
+     * and builds pixel-level domain, cross-domain seam, and exterior foreign-feathering tables.
      * @alias population_Substrata_russia.A_loadManifestAndMasks
      *
      * @param {Object} [arg0_options]
@@ -70,18 +72,21 @@
 
 
     /**
-     * Step B: Loads and mosaics the `sites_IA_RAS` and `sites_belarus_ukraine` kriged population rasters for `arg1_year`.
+     * Step B: Loads and mosaics the `sites_IA_RAS` and `sites_belarus_ukraine` kriged population rasters (`-10000..1900`)
+     * or blended 1900-kriged / GHSL spatial priors (`1910..2025`) for `arg1_year`.
      * @alias population_Substrata_russia.B_mosaicKrigedSubstrataForYear
      *
      * @param {Object} arg0_context - Output from `A_loadManifestAndMasks`
-     * @param {number} arg1_year - Benchmark year (`-10000` to `1900`)
+     * @param {number} arg1_year - Benchmark year (`-10000` to `2025`)
+     * @param {Float32Array} [arg2_urban_valid] - Optional urban population array to subtract from post-1900 GHSL priors
      *
      * @returns {Float32Array} Valid-cell array of length `arg0_context.n_valid`
      */
-    static B_mosaicKrigedSubstrataForYear (arg0_context, arg1_year) {
+    static B_mosaicKrigedSubstrataForYear (arg0_context, arg1_year, arg2_urban_valid) {
       //Convert from parameters
       let context = arg0_context;
       let year = Number(arg1_year);
+      let urban_valid = arg2_urban_valid;
 
       //Declare local instance variables
       let bu_folder = path.join(context.root_dir, context.manifest.substrata_sources.belarus_ukraine.rasters_folder);
@@ -91,25 +96,68 @@
       let rus_path = path.join(rus_folder, `popc_${year}.png`);
 
       //Function body
-      if (fs.existsSync(rus_path)) {
-        let rus_png = PNG.sync.read(fs.readFileSync(rus_path));
-        let rus_dv = new DataView(rus_png.data.buffer, rus_png.data.byteOffset, rus_png.data.byteLength);
-        for (let i = 0; i < context.n_valid; i++) {
-          let idx = context.valid_indices[i];
-          if (context.pixel_domain[idx] !== 1) continue;
-          let val = this.readPositiveFloat32(rus_png.data, rus_dv, idx*4);
-          if (val > 0) mosaic_valid[i] = val;
+      if (year <= 1900) {
+        if (fs.existsSync(rus_path)) {
+          let rus_png = PNG.sync.read(fs.readFileSync(rus_path));
+          let rus_dv = new DataView(rus_png.data.buffer, rus_png.data.byteOffset, rus_png.data.byteLength);
+          for (let i = 0; i < context.n_valid; i++) {
+            let idx = context.valid_indices[i];
+            if (context.pixel_domain[idx] !== 1) continue;
+            let val = this.readPositiveFloat32(rus_png.data, rus_dv, idx*4);
+            if (val > 0) mosaic_valid[i] = val;
+          }
         }
-      }
 
-      if (fs.existsSync(bu_path)) {
-        let bu_png = PNG.sync.read(fs.readFileSync(bu_path));
-        let bu_dv = new DataView(bu_png.data.buffer, bu_png.data.byteOffset, bu_png.data.byteLength);
+        if (fs.existsSync(bu_path)) {
+          let bu_png = PNG.sync.read(fs.readFileSync(bu_path));
+          let bu_dv = new DataView(bu_png.data.buffer, bu_png.data.byteOffset, bu_png.data.byteLength);
+          for (let i = 0; i < context.n_valid; i++) {
+            let idx = context.valid_indices[i];
+            if (context.pixel_domain[idx] !== 2) continue;
+            let val = this.readPositiveFloat32(bu_png.data, bu_dv, idx*4);
+            if (val > 0) mosaic_valid[i] = val;
+          }
+        }
+      } else {
+        if (!context._cached_mosaic_1900)
+          context._cached_mosaic_1900 = this.B_mosaicKrigedSubstrataForYear(context, 1900);
+
+        let ghsl_year = Math.max(1975, Math.min(2025, year));
+        let ghsl_path = path.join(
+          context.root_dir,
+          "histmap/2.data_cleaning/population_GHSL/cleaned_rasters",
+          `GHS_POP_${ghsl_year}.png`
+        );
+        let r1_path = path.join(
+          context.root_dir,
+          "histmap/3.data_transform/population_Substrata.outlier_removal/rasters_1.northern_america",
+          `popc_${year}.png`
+        );
+        let prior_path = fs.existsSync(ghsl_path) ? ghsl_path : (fs.existsSync(r1_path) ? r1_path : null);
+        let prior_valid = new Float32Array(context.n_valid);
+
+        if (prior_path) {
+          if (ghsl_year === 1975 && year < 1975 && context._cached_ghsl_1975) {
+            prior_valid = context._cached_ghsl_1975;
+          } else {
+            let p_png = PNG.sync.read(fs.readFileSync(prior_path));
+            let p_dv = new DataView(p_png.data.buffer, p_png.data.byteOffset, p_png.data.byteLength);
+            for (let i = 0; i < context.n_valid; i++) {
+              let idx = context.valid_indices[i];
+              let val = this.readPositiveFloat32(p_png.data, p_dv, idx*4);
+              if (val > 0) prior_valid[i] = val;
+            }
+            if (ghsl_year === 1975 && year < 1975)
+              context._cached_ghsl_1975 = prior_valid;
+          }
+        }
+
+        let w_modern = (year >= 1975) ? 1.0 : Math.max(0, Math.min(1, (year - 1900)/75.0));
+        let m1900 = context._cached_mosaic_1900;
         for (let i = 0; i < context.n_valid; i++) {
-          let idx = context.valid_indices[i];
-          if (context.pixel_domain[idx] !== 2) continue;
-          let val = this.readPositiveFloat32(bu_png.data, bu_dv, idx*4);
-          if (val > 0) mosaic_valid[i] = val;
+          let u_sub = (urban_valid && urban_valid[i] > 0) ? urban_valid[i]*0.85 : 0;
+          let mod_rur = Math.max(1e-4, prior_valid[i] - u_sub);
+          mosaic_valid[i] = Math.max(1e-4, (1 - w_modern)*m1900[i] + w_modern*mod_rur);
         }
       }
 
@@ -291,12 +339,82 @@
         }
       }
 
-      //3. Spatially smooth `log_mult` across internal and (for `year <= 1300`) cross-domain (`dom 1 <-> dom 2`) boundaries
+      //2b. Priority 3 National Epoch Masks (`1400..2026 AD`) calibration across both `dom === 1` and `dom === 2`
+      if (year >= 1400 && context.national_epoch_entries && context.national_epoch_entries.length > 0) {
+        if (year <= 1900) {
+          for (let i = 0; i < n_valid; i++)
+            calibrated[i] = Math.max(1e-4, calibrated[i]*Math.exp(log_mult[i]));
+          log_mult.fill(0);
+          zone_targets = [];
+        }
+
+        let active_nat_entry = null;
+        for (let i = 0; i < context.national_epoch_entries.length; i++) {
+          let ne = context.national_epoch_entries[i];
+          if (year >= ne.domain[0] && year <= ne.domain[1])
+            active_nat_entry = ne;
+        }
+
+        if (active_nat_entry) {
+          for (let x = 0; x < active_nat_entry.zones.length; x++) {
+            let nz = active_nat_entry.zones[x];
+            if (nz.pixels.length === 0) continue;
+            let raw_target_pop = this.resolveZoneTargetPopulation(nz.population, year);
+            if (raw_target_pop < 0) continue;
+            let p3_target_pop = raw_target_pop*(nz.domain_fraction !== undefined ? nz.domain_fraction : 1.0);
+
+            let current_sum = 0;
+            let spec_px_count = 0;
+            let urban_sum = 0;
+            for (let y = 0; y < nz.pixels.length; y++) {
+              let p_idx = nz.pixels[y];
+              let v_idx = px_to_valid[p_idx];
+              if (v_idx >= 0) {
+                current_sum += calibrated[v_idx];
+                urban_sum += urban_valid[v_idx];
+                if (year <= 1900) {
+                  let sm = context.pixel_spec_mask[p_idx];
+                  if (sm >= 0) {
+                    let se = context.specialist_entries[sm];
+                    if (se && year >= se.domain[0] && year <= se.domain[1])
+                      spec_px_count++;
+                  }
+                }
+              }
+            }
+
+            let target_pop = p3_target_pop;
+            if (year <= 1900 && spec_px_count > 0) {
+              let spec_frac = spec_px_count/nz.pixels.length;
+              let w_p3 = 1.0 - 0.35*spec_frac;
+              target_pop = w_p3*p3_target_pop + (1 - w_p3)*(current_sum + urban_sum);
+            }
+
+            let min_rural_pop = Math.max(nz.pixels.length*0.02, Math.min(target_pop*0.06, current_sum*0.20));
+            let rural_target_pop = Math.max(min_rural_pop, target_pop - urban_sum);
+            let scalar = (current_sum > 0) ? (rural_target_pop/current_sum) : 1.0;
+            let eff_log = Math.log(Math.max(1e-4, Math.min(1e4, scalar)));
+
+            for (let y = 0; y < nz.pixels.length; y++) {
+              let v_idx = px_to_valid[nz.pixels[y]];
+              if (v_idx >= 0) log_mult[v_idx] = eff_log;
+            }
+
+            zone_targets.push({
+              domain_code: (nz.dom2_pixels.length > nz.dom1_pixels.length) ? 2 : 1,
+              max_year: active_nat_entry.domain[1],
+              pixels: nz.pixels,
+              target_pop: rural_target_pop
+            });
+          }
+        }
+      }
+
+      //3. Spatially smooth `log_mult` across internal and cross-domain (`dom 1 <-> dom 2`) boundaries
       for (let p = 0; p < blur_passes; p++) {
         let horiz = new Float32Array(n_valid);
         for (let i = 0; i < n_valid; i++) {
           let idx = valid_indices[i];
-          if (year > 1300 && pixel_domain[idx] !== 1) continue;
           let row_start = Math.floor(idx/width)*width;
           let c = idx % width;
           let c0 = Math.max(0, c - blur_radius);
@@ -305,7 +423,7 @@
           let cnt = 0;
           for (let cx = c0; cx <= c1; cx++) {
             let n_idx = row_start + cx;
-            if ((year <= 1300) ? (pixel_domain[n_idx] > 0) : (pixel_domain[n_idx] === 1)) {
+            if (pixel_domain[n_idx] > 0) {
               let nv = px_to_valid[n_idx];
               if (nv >= 0) {
                 sum += log_mult[nv];
@@ -318,7 +436,6 @@
 
         for (let i = 0; i < n_valid; i++) {
           let idx = valid_indices[i];
-          if (year > 1300 && pixel_domain[idx] !== 1) continue;
           let r = Math.floor(idx/width);
           let c = idx % width;
           let r0 = Math.max(0, r - blur_radius);
@@ -327,7 +444,7 @@
           let cnt = 0;
           for (let ry = r0; ry <= r1; ry++) {
             let n_idx = ry*width + c;
-            if ((year <= 1300) ? (pixel_domain[n_idx] > 0) : (pixel_domain[n_idx] === 1)) {
+            if (pixel_domain[n_idx] > 0) {
               let nv = px_to_valid[n_idx];
               if (nv >= 0) {
                 sum += horiz[nv];
@@ -359,8 +476,8 @@
         }
       }
 
-      //5. Cross-domain (`dom 1 <-> dom 2`) seam blending within 6 pixels of internal borders when both domains are active (`year <= 1300`)
-      if (year <= 1300) {
+      //5. Cross-domain (`dom 1 <-> dom 2`) seam blending within 6 pixels of internal borders
+      {
         let seam_copy = new Float32Array(calibrated);
         for (let i = 0; i < n_valid; i++) {
           let cd = context.cross_dom_dist[i];
@@ -407,10 +524,8 @@
 
 
     /**
-     * Step E: Preserves calibrated POLARIS (`dom === 1` for -10000..1900 AD; `dom === 2` strictly for -10000..1300 AD)
-     * populations in `rasters_3.scaled_to_global/` (while conserving the exact global population sum on non-POLARIS pixels)
-     * and preserves only `dom === 1` (`Russia + Crimea`) in `rasters_4.interpolated_to_GHSL/` (for 1800..1900 AD) so
-     * Belarus and Mainland Ukraine (`dom === 2`) are never affected by POLARIS masks beyond 1400 AD.
+     * Step E: Preserves calibrated POLARIS (`dom === 1` and `dom === 2` across `-10000..2025 AD`)
+     * populations in `rasters_3.scaled_to_global/` and `rasters_4.interpolated_to_GHSL/` (`1800..2025 AD`).
      * @alias population_Substrata_russia.E_preserveDomainInGHSLInterpolatedRasters
      *
      * @param {Object} [arg0_options]
@@ -434,7 +549,7 @@
         context.root_dir,
         "histmap/3.data_transform/population_Substrata.outlier_removal/rasters_2.scaled_to_regions"
       );
-      let years_1800_1900 = [1800, 1810, 1820, 1830, 1840, 1850, 1860, 1870, 1880, 1890, 1900];
+      let years_1800_2025 = hyde_years.filter((yr) => yr >= 1800);
 
       //Guard clauses
       if (!fs.existsSync(global_folder)) return;
@@ -453,14 +568,6 @@
           let r3_dv = new DataView(r3_png.data.buffer, r3_png.data.byteOffset, r3_png.data.byteLength);
           let u_valid = this.loadUrbanValidForYear(context, yr);
 
-          let target_global_sum = 0;
-          for (let idx = 0; idx < context.n_pixels; idx++) {
-            let v = this.readPositiveFloat32(r3_png.data, r3_dv, idx*4);
-            if (v > 0) target_global_sum += v;
-          }
-
-          let polaris_sum = 0;
-          let is_polaris = new Uint8Array(context.n_pixels);
           if (context.foreign_spillover_pairs && context.foreign_spillover_pairs.length > 0) {
             for (let s = 0; s < context.foreign_spillover_pairs.length; s++) {
               let s_idx = context.foreign_spillover_pairs[s][0];
@@ -478,37 +585,16 @@
           }
           for (let x = 0; x < context.n_valid; x++) {
             let idx = context.valid_indices[x];
-            let dom = context.pixel_domain[idx];
-            if (dom === 2 && yr > 1300) continue;
-            is_polaris[idx] = 1;
             let p4 = idx*4;
             let v2 = this.readPositiveFloat32(r2_png.data, r2_dv, p4);
             let v_out = Math.max(u_valid[x] + 1e-4, v2);
             if (v_out > 0) {
               r3_dv.setFloat32(p4, v_out, false);
-              polaris_sum += v_out;
             } else {
               r3_png.data[p4] = 0;
               r3_png.data[p4 + 1] = 0;
               r3_png.data[p4 + 2] = 0;
               r3_png.data[p4 + 3] = 0;
-            }
-          }
-
-          let rest_sum = 0;
-          for (let idx = 0; idx < context.n_pixels; idx++) {
-            if (is_polaris[idx]) continue;
-            let v = this.readPositiveFloat32(r3_png.data, r3_dv, idx*4);
-            if (v > 0) rest_sum += v;
-          }
-
-          if (rest_sum > 0 && target_global_sum > polaris_sum) {
-            let rest_scalar = (target_global_sum - polaris_sum)/rest_sum;
-            for (let idx = 0; idx < context.n_pixels; idx++) {
-              if (is_polaris[idx]) continue;
-              let p4 = idx*4;
-              let v = this.readPositiveFloat32(r3_png.data, r3_dv, p4);
-              if (v > 0) r3_dv.setFloat32(p4, v*rest_scalar, false);
             }
           }
 
@@ -518,8 +604,8 @@
 
       if (!fs.existsSync(ghsl_folder)) return;
 
-      for (let i = 0; i < years_1800_1900.length; i++) {
-        let yr = years_1800_1900[i];
+      for (let i = 0; i < years_1800_2025.length; i++) {
+        let yr = years_1800_2025[i];
         let r3_path = path.join(global_folder, `popc_${yr}.png`);
         let r4_path = path.join(ghsl_folder, `popc_${yr}.png`);
         if (!fs.existsSync(r3_path) || !fs.existsSync(r4_path)) continue;
@@ -530,21 +616,17 @@
         let r4_dv = new DataView(r4_png.data.buffer, r4_png.data.byteOffset, r4_png.data.byteLength);
         let u_valid = this.loadUrbanValidForYear(context, yr);
 
-        //Only preserve `dom === 1` (`Russia + Crimea`) in `r4_png` (`1800..1900 AD`), leaving `dom === 2` untouched
         for (let x = 0; x < context.n_valid; x++) {
           let idx = context.valid_indices[x];
-          if (context.pixel_domain[idx] !== 1) continue;
           let p4 = idx*4;
           let v3 = this.readPositiveFloat32(r3_png.data, r3_dv, p4);
-          let cd = context.cross_dom_dist[x];
-          if (cd <= 3 && context.cross_dom_anchor_idx[x] >= 0) {
-            let a_idx = context.cross_dom_anchor_idx[x];
-            let a_val = this.readPositiveFloat32(r4_png.data, r4_dv, a_idx*4);
-            if (a_val > 0 && v3 > 0) {
-              let raw_w = 0.5*(1 - Math.cos(Math.PI*(cd/4.0)));
-              let w_cd = 0.65 + 0.35*raw_w;
-              let a_clamped = Math.max(v3*0.55, Math.min(v3*1.45, a_val));
-              v3 = w_cd*v3 + (1 - w_cd)*a_clamped;
+          let w_feather = context.feather_weights[x];
+          if (w_feather < 0.999 && context.foreign_anchor_idx[x] >= 0) {
+            let f_idx = context.foreign_anchor_idx[x];
+            let f_val = this.readPositiveFloat32(r4_png.data, r4_dv, f_idx*4);
+            if (f_val > 0 && v3 > 0) {
+              let f_clamped = Math.max(v3*0.55, Math.min(v3*1.45, f_val));
+              v3 = w_feather*v3 + (1 - w_feather)*f_clamped;
             }
           }
           let v_out = Math.max(u_valid[x] + 1e-4, v3);
@@ -638,8 +720,8 @@
 
       for (let i = 0; i < n_years; i++) {
         let yr = hyde_years[i];
-        let mosaic_valid = this.B_mosaicKrigedSubstrataForYear(context, yr);
         let urban_valid = this.loadUrbanValidForYear(context, yr);
+        let mosaic_valid = this.B_mosaicKrigedSubstrataForYear(context, yr, urban_valid);
         let cal_obj = this.C_computeCalibratedFieldForYear(context, mosaic_valid, yr, urban_valid);
         calibrated_series.push(cal_obj.calibrated_rural);
         urban_series.push(urban_valid);
@@ -658,8 +740,6 @@
         let alpha_t = dt_prev/(dt_prev + dt_next);
 
         for (let i = 0; i < n_valid; i++) {
-          let idx = context.valid_indices[i];
-          if (context.pixel_domain[idx] === 2 && yr > 1300) continue;
           let v_curr = curr_arr[i];
           let v_prev = prev_arr[i];
           let v_next = next_arr[i];
@@ -673,7 +753,6 @@
         let z_targets = zone_targets_series[t];
         for (let z_idx = 0; z_idx < z_targets.length; z_idx++) {
           let zt = z_targets[z_idx];
-          if (zt.domain_code === 2 && yr > 1300) continue;
           let z_sum = 0;
           for (let x = 0; x < zt.pixels.length; x++) {
             let v_idx = px_to_valid[zt.pixels[x]];
@@ -690,9 +769,6 @@
       }
 
       if (!fs.existsSync(out_folder)) fs.mkdirSync(out_folder, { recursive: true });
-
-      let idx_1300 = hyde_years.indexOf(1300);
-      let cal_1300_rural = (idx_1300 >= 0) ? temporally_smoothed[idx_1300] : null;
 
       for (let t = 0; t < n_years; t++) {
         let yr = hyde_years[t];
@@ -732,53 +808,14 @@
           }
         }
 
-        //At `yr === 1400` (`post_domain_blend_years`), blend 50% 1300 AD spatial weights with 50% `base_png` while conserving `base_png` total
-        let dom2_1400_r = null;
-        if (yr === 1400 && cal_1300_rural) {
-          dom2_1400_r = new Float32Array(n_valid);
-          let base_tot = 0;
-          let u_tot = 0;
-          let p1300_tot = 0;
-          let b1400_r_tot = 0;
-          for (let i = 0; i < n_valid; i++) {
-            let idx = context.valid_indices[i];
-            if (context.pixel_domain[idx] !== 2) continue;
-            let bv = this.readPositiveFloat32(base_png.data, base_dv, idx*4);
-            let uv = u_arr[i];
-            let br = Math.max(1e-4, bv - uv);
-            base_tot += bv;
-            u_tot += uv;
-            p1300_tot += cal_1300_rural[i];
-            b1400_r_tot += br;
-          }
-          let r_target_1400 = Math.max(1, base_tot - u_tot);
-          let p_scale = (p1300_tot > 0) ? (r_target_1400/p1300_tot) : 1.0;
-          let b_scale = (b1400_r_tot > 0) ? (r_target_1400/b1400_r_tot) : 1.0;
-          for (let i = 0; i < n_valid; i++) {
-            let idx = context.valid_indices[i];
-            if (context.pixel_domain[idx] !== 2) continue;
-            let bv = this.readPositiveFloat32(base_png.data, base_dv, idx*4);
-            let br = Math.max(1e-4, bv - u_arr[i]);
-            dom2_1400_r[i] = Math.max(1e-4, 0.5*(cal_1300_rural[i]*p_scale) + 0.5*(br*b_scale));
-          }
-        }
-
         for (let i = 0; i < n_valid; i++) {
           let idx = context.valid_indices[i];
           let dom = context.pixel_domain[idx];
           let p4 = idx*4;
 
-          //Beyond 1400 AD (`yr > 1400`), leave Belarus and Mainland Ukraine (`dom === 2`) completely untouched
-          if (dom === 2 && yr > 1400) {
-            bu_sum += this.readPositiveFloat32(base_png.data, base_dv, p4);
-            continue;
-          }
-
           let u_val = u_arr[i];
           let w_feather = context.feather_weights[i];
-          let r_val = (dom === 2 && yr === 1400 && dom2_1400_r) ?
-            dom2_1400_r[i] :
-            Math.max(1e-4, cal_arr[i]);
+          let r_val = Math.max(1e-4, cal_arr[i]);
           let r_feathered = r_val;
 
           if (w_feather < 0.999 && context.foreign_anchor_idx[i] >= 0) {
@@ -787,19 +824,6 @@
             if (f_val > 0) {
               let f_clamped = Math.max(r_val*0.55, Math.min(r_val*1.45, f_val));
               r_feathered = Math.max(1e-4, w_feather*r_val + (1 - w_feather)*f_clamped);
-            }
-          }
-
-          //For `dom === 1` (`Russia + Crimea`) at `yr >= 1400`, feather border pixels against adjacent `dom === 2` (`Belarus/Ukraine`) in `base_png`
-          if (dom === 1 && yr >= 1400 && context.cross_dom_dist[i] <= 3 && context.cross_dom_anchor_idx[i] >= 0) {
-            let cd = context.cross_dom_dist[i];
-            let a_idx = context.cross_dom_anchor_idx[i];
-            let a_val = this.readPositiveFloat32(base_png.data, base_dv, a_idx*4);
-            if (a_val > 0) {
-              let raw_w = 0.5*(1 - Math.cos(Math.PI*(cd/4.0)));
-              let w_cd = 0.65 + 0.35*raw_w;
-              let a_clamped = Math.max(r_feathered*0.55, Math.min(r_feathered*1.45, a_val));
-              r_feathered = Math.max(1e-4, w_cd*r_feathered + (1 - w_cd)*a_clamped);
             }
           }
 
