@@ -34,8 +34,12 @@
     for (let i = cfg.baseline_year; i <= last_angel_year; i++)
       all_angel_years.push(i);
     
+    let interpolated_obj = population_Stadester_uud.cubicSplineInterpolationObject(return_obj, { years: all_angel_years });
+    for (let i = last_angel_year + 1; i <= cfg.end_year; i++)
+      interpolated_obj[i] = interpolated_obj[last_angel_year];
+    
     //Return statement
-    return population_Stadester_uud.cubicSplineInterpolationObject(return_obj, { years: all_angel_years });
+    return interpolated_obj;
   };
   
   /**
@@ -136,9 +140,21 @@
         
         let all_rni_keys = Object.keys(rni_obj).map(Number).sort((a, b) => a - b);
         for (let i = 0; i < all_rni_keys.length; i++) {
-          let rni = rni_obj[all_rni_keys[i]];
-          city_obj.area[all_rni_keys[i]] = Math.max(0.01, current_area + (current_area*rni*area_growth_ratio));
-          current_area = city_obj.area[all_rni_keys[i]];
+          let rni_yr = all_rni_keys[i];
+          let rni = rni_obj[rni_yr];
+          let cur_pop = parseFloat(city_obj.population[rni_yr]) || 0;
+          if (current_area <= 0.01 && cur_pop > 0)
+            current_area = Math.max(0.01, (cur_pop/baseline_density)/100);
+          city_obj.area[rni_yr] = Math.max(0.01, current_area + (current_area*rni*area_growth_ratio));
+          current_area = city_obj.area[rni_yr];
+        }
+        
+        let last_pop_yr = all_population_keys[all_population_keys.length - 1];
+        if (last_pop_yr > cfg.baseline_year && city_obj.area[last_pop_yr] === undefined) {
+          let last_pop = parseFloat(city_obj.population[last_pop_yr]) || 0;
+          if (current_area <= 0.01 && last_pop > 0)
+            current_area = Math.max(0.01, (last_pop/baseline_density)/100);
+          city_obj.area[last_pop_yr] = Math.max(0.01, current_area);
         }
       }
     }
@@ -205,9 +221,21 @@
       
       let all_rni_keys = Object.keys(rni_obj).map(Number).sort((a, b) => a - b);
       for (let i = 0; i < all_rni_keys.length; i++) {
-        let rni = rni_obj[all_rni_keys[i]];
-        city_obj.area[all_rni_keys[i]] = Math.max(0.01, current_area + (current_area*rni*area_growth_ratio));
-        current_area = city_obj.area[all_rni_keys[i]];
+        let rni_yr = all_rni_keys[i];
+        let rni = rni_obj[rni_yr];
+        let cur_pop = parseFloat(city_obj.population[rni_yr]) || 0;
+        if (current_area <= 0.01 && cur_pop > 0)
+          current_area = Math.max(0.01, (cur_pop/(global_pop_density_obj[rni_yr] || 180))/100);
+        city_obj.area[rni_yr] = Math.max(0.01, current_area + (current_area*rni*area_growth_ratio));
+        current_area = city_obj.area[rni_yr];
+      }
+      
+      let last_pop_yr = all_population_keys[all_population_keys.length - 1];
+      if (last_pop_yr > entry_year && city_obj.area[last_pop_yr] === undefined) {
+        let last_pop = parseFloat(city_obj.population[last_pop_yr]) || 0;
+        if (current_area <= 0.01 && last_pop > 0)
+          current_area = Math.max(0.01, (last_pop/(global_pop_density_obj[last_pop_yr] || 180))/100);
+        city_obj.area[last_pop_yr] = Math.max(0.01, current_area);
       }
     }
     

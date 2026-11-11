@@ -381,6 +381,11 @@
 					let callback = GeoPNG._pending_tasks.get(response.task_id);
 					if (callback) {
 						GeoPNG._pending_tasks.delete(response.task_id);
+						if (GeoPNG._pending_tasks.size === 0 && GeoPNG._worker_pool) {
+							for (let w = 0; w < GeoPNG._worker_pool.length; w++)
+								if (GeoPNG._worker_pool[w] && typeof GeoPNG._worker_pool[w].unref === "function")
+									GeoPNG._worker_pool[w].unref();
+						}
 						if (response.success) {
 							callback.resolve(response.result);
 						} else {
@@ -460,6 +465,7 @@
 		
 		//Return statement
 		return new Promise((resolve, reject) => {
+			if (typeof worker.ref === "function") worker.ref();
 			GeoPNG._pending_tasks.set(task_id, { reject: reject, resolve: resolve, worker_id: worker.worker_id });
 			try {
 				worker.postMessage(task);

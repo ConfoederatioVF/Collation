@@ -9,6 +9,8 @@
         require(path.join(cur_dir, "config", "stadester_config.js"));
       if (!global.population_Stadester_uud && fs.existsSync(path.join(cur_dir, "stadester_uud.js")))
         require(path.join(cur_dir, "stadester_uud.js"));
+      if (!global.population_Stadester_ghsl && fs.existsSync(path.join(cur_dir, "stadester_ghsl.js")))
+        require(path.join(cur_dir, "stadester_ghsl.js"));
       if (!global.population_Stadester_density && fs.existsSync(path.join(cur_dir, "stadester_density.js")))
         require(path.join(cur_dir, "stadester_density.js"));
       if (!global.population_Stadester_rasters && fs.existsSync(path.join(cur_dir, "stadester_rasters.js")))
@@ -134,6 +136,10 @@
       fs.writeFileSync(this.file_flattened_stadester, JSON.stringify(stadester_obj, null, 2));
       
       stadester_obj = population_Stadester_uud.fixStadesterErrors(stadester_obj);
+      stadester_obj = population_Stadester_uud.integrateGHSLIntoStadester(stadester_obj, {
+        raw_folder: this.raw_folder,
+        ...options
+      });
       fs.writeFileSync(this.file_processed_stadester, JSON.stringify(stadester_obj, null, 2));
       console.log(`- Saved processed Stadestér dataset to ${this.file_processed_stadester}.`);
       
