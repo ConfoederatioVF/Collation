@@ -15,6 +15,8 @@ This skill may be pointed at any piece of text, file, or a folder. The scope of 
 - Do not overuse bullet points. Bullet points should be reserved for lists.
 - Do not place a space between /, i.e. ' / '. Humans do not write this way.
 - Do not use em dashes, use hyphens instead.
+- Do not use trailing zeroes in numbers unless needed (i.e. 15:00GMT; here trailing zeroes are needed, but not in 42,000, the number forty-two. Here it is merely confusing). 
+  - A preference is generally held for two decimal places at most (i.e. 48,72) to not confuse Americans, but this can be exceeded if needed for accuracy.
 
 ## Step 2. Formatting Rules.
 
