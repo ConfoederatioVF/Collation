@@ -1,6 +1,8 @@
 //Initialise functions
 {
   if (!global.population_Stadester_uud) global.population_Stadester_uud = {};
+  if (!global.JSON5 && typeof require !== "undefined")
+    try { global.JSON5 = require("json5"); } catch (e) {}
   if (!global.population_Stadester_config && typeof require !== "undefined")
     try { require(path.join(__dirname, "config", "stadester_config.js")); } catch (e) {}
   
@@ -561,9 +563,14 @@
         let local_key = `${all_local_cities[x]}-${local_country_name}`;
         
         if (local_city.population) {
+          let normalised_pop = {};
           let pop_keys = Object.keys(local_city.population);
-          for (let y = 0; y < pop_keys.length; y++)
-            local_city.population[pop_keys[y]] = local_city.population[pop_keys[y]]*1000;
+          for (let y = 0; y < pop_keys.length; y++) {
+            let raw_key = String(pop_keys[y]).trim();
+            let norm_key = (raw_key.length >= 8 && Number(raw_key) > 10000) ? raw_key.slice(0, 4) : raw_key;
+            normalised_pop[norm_key] = local_city.population[pop_keys[y]]*1000;
+          }
+          local_city.population = normalised_pop;
         }
         local_city.country = local_country_name;
         local_city.key = local_key;
@@ -1104,8 +1111,17 @@
               let ex_yr_nums = Object.keys(ex_city.population).map(Number).filter(n => !isNaN(n)).sort((a, b) => a - b);
               let ex_min_yr = ex_yr_nums[0];
               let ex_max_yr = ex_yr_nums[ex_yr_nums.length - 1];
-              let temporal_gap = Math.max(ex_min_yr - cand_max_yr, cand_min_yr - ex_max_yr);
-              if (temporal_gap <= 350) {
+              let is_temporally_compatible = true;
+              if (ex_min_yr > cand_max_yr || cand_min_yr > ex_max_yr) {
+                let gap_end = (ex_min_yr > cand_max_yr) ? ex_min_yr : cand_min_yr;
+                let gap_start = (ex_min_yr > cand_max_yr) ? cand_max_yr : ex_max_yr;
+                let max_allowed_gap = (typeof population_Stadester_uud.getMaxTemporalProximityGap === "function") ?
+                  population_Stadester_uud.getMaxTemporalProximityGap(gap_start, gap_end) :
+                  ((gap_start < 0 && gap_end <= 200) ? 1000 : 200);
+                if ((gap_end - gap_start) > max_allowed_gap)
+                  is_temporally_compatible = false;
+              }
+              if (is_temporally_compatible) {
                 matched_key = existing_keys[y];
                 break;
               }

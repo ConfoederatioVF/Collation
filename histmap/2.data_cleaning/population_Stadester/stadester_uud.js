@@ -56,6 +56,54 @@
   };
   
   /**
+   * Returns the HYDE benchmark step interval at a given year (1000 years before 0 AD, 100 years from 0 to 1700 AD, 10 years after 1700 AD).
+   * @alias population_Stadester_uud.getHydeIntervalAtYear
+   * 
+   * @param {number} arg0_year
+   * 
+   * @returns {number}
+   */
+  population_Stadester_uud.getHydeIntervalAtYear = function (arg0_year) {
+    //Convert from parameters
+    let year = Number(arg0_year);
+    
+    //Return statement
+    if (year < 0) {
+      return 1000;
+    } else if (year < 1700) {
+      return 100;
+    } else {
+      return 10;
+    }
+  };
+  
+  /**
+   * Returns the maximum allowed temporal proximity gap between two benchmark years: +/-200 years or the HYDE interval at that time period, whichever is greater.
+   * @alias population_Stadester_uud.getMaxTemporalProximityGap
+   * 
+   * @param {number} arg0_y0
+   * @param {number} arg1_y1
+   * 
+   * @returns {number}
+   */
+  population_Stadester_uud.getMaxTemporalProximityGap = function (arg0_y0, arg1_y1) {
+    //Convert from parameters
+    let y0 = Number(arg0_y0);
+    let y1 = Number(arg1_y1);
+    
+    //Declare local instance variables
+    let max_yr = Math.max(y0, y1);
+    let min_yr = Math.min(y0, y1);
+    
+    //Return statement
+    if (min_yr < 0 && max_yr <= 200) {
+      return Math.max(200, population_Stadester_uud.getHydeIntervalAtYear(min_yr));
+    } else {
+      return Math.max(200, population_Stadester_uud.getHydeIntervalAtYear(max_yr));
+    }
+  };
+  
+  /**
    * Cubic spline interpolates missing year values on a city population dictionary.
    * @alias population_Stadester_uud.cubicSplineInterpolationObject
    * 
@@ -101,14 +149,17 @@
             break;
           }
         let x0 = years[left_idx], x1 = years[left_idx + 1];
+        let y0 = values[left_idx], y1 = values[left_idx + 1];
         let gap = x1 - x0;
-        let is_hiatus = (
-          (x0 >= 0 && gap >= 450) ||
-          (x0 < 0 && x1 >= 0 && gap >= 450) ||
-          (x0 <= -1500 && x1 > -1500 && gap >= 1000)
-        );
-        if (!is_hiatus || cur_year === x0 || cur_year === x1)
+        let max_gap = population_Stadester_uud.getMaxTemporalProximityGap(x0, x1);
+        let is_hiatus = (gap > max_gap || y0 <= 0 || y1 <= 0);
+        if (cur_year === x0) {
+          object[cur_year] = y0;
+        } else if (cur_year === x1) {
+          object[cur_year] = y1;
+        } else if (!is_hiatus) {
           object[cur_year] = population_Stadester_uud.cubicSplineInterpolation(years, values, cur_year);
+        }
       }
     }
     
@@ -164,14 +215,13 @@
         let x0 = years[left_idx], x1 = years[left_idx + 1];
         let y0 = values[left_idx], y1 = values[left_idx + 1];
         let gap = x1 - x0;
-        let is_hiatus = (
-          (x0 >= 0 && gap >= 450) ||
-          (x0 < 0 && x1 >= 0 && gap >= 450) ||
-          (x0 <= -1500 && x1 > -1500 && gap >= 1000)
-        );
-        if (x1 === x0) {
+        let max_gap = population_Stadester_uud.getMaxTemporalProximityGap(x0, x1);
+        let is_hiatus = (gap > max_gap || y0 <= 0 || y1 <= 0);
+        if (cur_year === x0) {
           object[cur_year] = y0;
-        } else if (!is_hiatus || cur_year === x0 || cur_year === x1) {
+        } else if (cur_year === x1) {
+          object[cur_year] = y1;
+        } else if (!is_hiatus) {
           object[cur_year] = y0 + (y1 - y0)*((cur_year - x0)/(x1 - x0));
         }
       }
@@ -428,52 +478,47 @@
               let pop_check = population_Stadester_uud.isPopulationRatioValid(local_uud_city.population, local_city.population);
               let is_match = false;
               
-              if (local_db.is_polaris) {
-                if (
-                  is_exact_name &&
-                  (is_same_country || local_distance <= search_radius) &&
-                  local_distance <= semantic_radius
-                ) {
-                  let pol_yrs = Object.keys(local_city.population || {}).map(Number).filter(n => !isNaN(n)).sort((a, b) => a - b);
-                  let uud_yrs = Object.keys(local_uud_city.population || {}).map(Number).filter(n => !isNaN(n)).sort((a, b) => a - b);
-                  let found_yr = parseInt(local_uud_city["found.yr"], 10);
-                  let is_temporally_compatible = true;
-                  
-                  if (pol_yrs.length > 0 && uud_yrs.length > 0) {
-                    let pol_min_yr = pol_yrs[0];
-                    let pol_max_yr = pol_yrs[pol_yrs.length - 1];
-                    let uud_min_yr = uud_yrs[0];
-                    let uud_max_yr = uud_yrs[uud_yrs.length - 1];
-                    let temporal_gap = Math.max(uud_min_yr - pol_max_yr, pol_min_yr - uud_max_yr);
-                    let is_rus_continuation = (
-                      pol_min_yr >= 500 &&
-                      pol_max_yr >= 1200 &&
-                      (local_city.country === "Ukraine" || local_city.country === "Belarus") &&
-                      (!Number.isFinite(found_yr) || found_yr <= 1350)
-                    );
-                    
-                    if (pol_min_yr < 500 && uud_min_yr >= 1400) {
-                      is_temporally_compatible = false;
-                    } else if (temporal_gap > 350 && !is_rus_continuation) {
-                      is_temporally_compatible = false;
-                    } else if (Number.isFinite(found_yr) && found_yr >= 1350 && pol_min_yr < 1300) {
-                      is_temporally_compatible = false;
-                    } else if (Number.isFinite(found_yr) && found_yr < 1350 && pol_min_yr < found_yr - 200) {
-                      is_temporally_compatible = false;
-                    }
-                  }
-                  
-                  if (is_temporally_compatible)
-                    is_match = true;
+              let cand_yrs = Object.keys(local_city.population || {}).map(Number).filter(n => !isNaN(n) && Number(local_city.population[n]) > 0).sort((a, b) => a - b);
+              let uud_yrs = Object.keys(local_uud_city.population || {}).map(Number).filter(n => !isNaN(n) && Number(local_uud_city.population[n]) > 0).sort((a, b) => a - b);
+              let found_yr = parseInt(local_uud_city["found.yr"], 10);
+              let is_temporally_compatible = true;
+              
+              if (cand_yrs.length > 0 && uud_yrs.length > 0) {
+                let cand_min_yr = cand_yrs[0];
+                let cand_max_yr = cand_yrs[cand_yrs.length - 1];
+                let uud_min_yr = uud_yrs[0];
+                let uud_max_yr = uud_yrs[uud_yrs.length - 1];
+                
+                if (uud_min_yr > cand_max_yr || cand_min_yr > uud_max_yr) {
+                  let gap_end = (uud_min_yr > cand_max_yr) ? uud_min_yr : cand_min_yr;
+                  let gap_start = (uud_min_yr > cand_max_yr) ? cand_max_yr : uud_max_yr;
+                  let max_allowed_gap = population_Stadester_uud.getMaxTemporalProximityGap(gap_start, gap_end);
+                  let temporal_gap = gap_end - gap_start;
+                  if (temporal_gap > max_allowed_gap)
+                    is_temporally_compatible = false;
                 }
-              } else if (local_distance < 0.01 && (is_exact_name || (pop_check.valid && pop_check.overlaps))) {
-                is_match = true;
-              } else if (is_exact_name && local_distance <= search_radius && pop_check.valid) {
-                is_match = true;
-              } else if (is_exact_name && is_same_country && local_distance <= semantic_radius && pop_check.valid) {
-                is_match = true;
-              } else if (local_db.precision && local_distance <= local_db.precision && pop_check.valid && (is_exact_name || pop_check.overlaps)) {
-                is_match = true;
+                if (local_db.is_polaris && Number.isFinite(found_yr) && cand_min_yr < found_yr - 200)
+                  is_temporally_compatible = false;
+              }
+              
+              if (is_temporally_compatible) {
+                if (local_db.is_polaris) {
+                  if (
+                    is_exact_name &&
+                    (is_same_country || local_distance <= search_radius) &&
+                    local_distance <= semantic_radius
+                  ) {
+                    is_match = true;
+                  }
+                } else if (local_distance < 0.01 && (is_exact_name || (pop_check.valid && pop_check.overlaps))) {
+                  is_match = true;
+                } else if (is_exact_name && local_distance <= search_radius && pop_check.valid) {
+                  is_match = true;
+                } else if (is_exact_name && is_same_country && local_distance <= semantic_radius && pop_check.valid) {
+                  is_match = true;
+                } else if (local_db.precision && local_distance <= local_db.precision && pop_check.valid && (is_exact_name || pop_check.overlaps)) {
+                  is_match = true;
+                }
               }
               
               if (is_match) {
@@ -499,6 +544,48 @@
         
         if (was_merged[0] && was_merged[1]) {
           let actual_city = was_merged[1];
+          if (local_city.population && actual_city.population) {
+            let act_yrs = Object.keys(actual_city.population).map(Number).filter(n => !isNaN(n) && Number(actual_city.population[n]) > 0).sort((a, b) => a - b);
+            let cand_yrs = Object.keys(local_city.population).map(Number).filter(n => !isNaN(n) && Number(local_city.population[n]) > 0).sort((a, b) => a - b);
+            if (act_yrs.length > 0 && cand_yrs.length > 1) {
+              let cand_clusters = [[cand_yrs[0]]];
+              for (let y = 1; y < cand_yrs.length; y++) {
+                let prev_y = cand_yrs[y - 1];
+                let cur_y = cand_yrs[y];
+                let max_gap = population_Stadester_uud.getMaxTemporalProximityGap(prev_y, cur_y);
+                if ((cur_y - prev_y) > max_gap) {
+                  cand_clusters.push([cur_y]);
+                } else {
+                  cand_clusters[cand_clusters.length - 1].push(cur_y);
+                }
+              }
+              if (cand_clusters.length > 1) {
+                let act_max = act_yrs[act_yrs.length - 1];
+                let act_min = act_yrs[0];
+                let filtered_pop = {};
+                let kept_any = false;
+                for (let y = 0; y < cand_clusters.length; y++) {
+                  let cl = cand_clusters[y];
+                  let c_max = cl[cl.length - 1];
+                  let c_min = cl[0];
+                  let cl_ok = true;
+                  if (act_min > c_max || c_min > act_max) {
+                    let g_end = (act_min > c_max) ? act_min : c_min;
+                    let g_start = (act_min > c_max) ? c_max : act_max;
+                    if ((g_end - g_start) > population_Stadester_uud.getMaxTemporalProximityGap(g_start, g_end))
+                      cl_ok = false;
+                  }
+                  if (cl_ok) {
+                    for (let z = 0; z < cl.length; z++)
+                      filtered_pop[cl[z]] = local_city.population[cl[z]];
+                    kept_any = true;
+                  }
+                }
+                if (kept_any)
+                  local_city = Object.assign({}, local_city, { population: filtered_pop });
+              }
+            }
+          }
           if (local_db.is_polaris) {
             if (!actual_city.population) actual_city.population = {};
             if (local_city.population) {
@@ -646,7 +733,7 @@
     
     //Declare local instance variables
     let all_cities = Object.keys(uud_obj);
-    let hyde_years = landuse_HYDE ? landuse_HYDE.sorted_hyde_years : [
+    let hyde_years = (typeof landuse_HYDE !== "undefined" && landuse_HYDE) ? landuse_HYDE.sorted_hyde_years : [
       -3000, -2500, -2000, -1500, -1000, -900, -800, -700, -600, -500,
       -400, -300, -200, -100, 0, 100, 200, 300, 400, 500, 600, 700,
       800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1710,
@@ -786,10 +873,22 @@
           let leader_city = leader_entry.city;
           let is_same_name = population_Stadester_uud.checkExactNameMatch(leader_city, candidate_city);
           if (is_same_name) {
-            let lead_yrs = Object.keys(leader_city.population).map(Number).filter(n => !isNaN(n)).sort((a, b) => a - b);
-            let temporal_gap = (lead_yrs.length > 0 && cand_yrs.length > 0) ?
-              Math.max(lead_yrs[0] - cand_yrs[cand_yrs.length - 1], cand_yrs[0] - lead_yrs[lead_yrs.length - 1]) : 0;
-            if (temporal_gap <= 350) {
+            let lead_yrs = Object.keys(leader_city.population).map(Number).filter(n => !isNaN(n) && Number(leader_city.population[n]) > 0).sort((a, b) => a - b);
+            let is_temporally_compatible = true;
+            if (lead_yrs.length > 0 && cand_yrs.length > 0) {
+              let cand_max_yr = cand_yrs[cand_yrs.length - 1];
+              let cand_min_yr = cand_yrs[0];
+              let lead_max_yr = lead_yrs[lead_yrs.length - 1];
+              let lead_min_yr = lead_yrs[0];
+              if (lead_min_yr > cand_max_yr || cand_min_yr > lead_max_yr) {
+                let gap_end = (lead_min_yr > cand_max_yr) ? lead_min_yr : cand_min_yr;
+                let gap_start = (lead_min_yr > cand_max_yr) ? cand_max_yr : lead_max_yr;
+                let max_allowed_gap = population_Stadester_uud.getMaxTemporalProximityGap(gap_start, gap_end);
+                if ((gap_end - gap_start) > max_allowed_gap)
+                  is_temporally_compatible = false;
+              }
+            }
+            if (is_temporally_compatible) {
               for (let pop_key in candidate_city.population) {
                 if (!leader_city.population.hasOwnProperty(pop_key)) {
                   leader_city.population[pop_key] = candidate_city.population[pop_key];

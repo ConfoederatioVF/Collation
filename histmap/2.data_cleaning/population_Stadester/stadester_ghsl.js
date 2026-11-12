@@ -478,6 +478,22 @@
       let lng = Number(local_city.coords[1]);
       if (isNaN(lat) || isNaN(lng)) continue;
       
+      //Enforce temporal proximity filter (+/-200 years or HYDE interval at cutoff_year) before matching to 1975-2025 GHSL clusters
+      let max_pre_yr = -Infinity;
+      if (local_city.population) {
+        let pop_keys = Object.keys(local_city.population);
+        for (let x = 0; x < pop_keys.length; x++) {
+          let yr = Number(pop_keys[x]);
+          let val = Array.isArray(local_city.population[pop_keys[x]]) ?
+            Number(local_city.population[pop_keys[x]][0]) : Number(local_city.population[pop_keys[x]]);
+          if (!isNaN(yr) && yr < cutoff_year && val > 0 && yr > max_pre_yr)
+            max_pre_yr = yr;
+        }
+      }
+      let max_ghsl_gap = (typeof population_Stadester_uud !== "undefined" && typeof population_Stadester_uud.getMaxTemporalProximityGap === "function") ?
+        population_Stadester_uud.getMaxTemporalProximityGap(max_pre_yr, cutoff_year) : 200;
+      if (!Number.isFinite(max_pre_yr) || (cutoff_year - max_pre_yr) > max_ghsl_gap) continue;
+      
       let px = Math.min(4319, Math.max(0, Math.floor(((lng + 180)/360)*4320)));
       let py = Math.min(2159, Math.max(0, Math.floor(((90 - lat)/180)*2160)));
       let entry_idx = city_entries.length;
@@ -555,6 +571,7 @@
       
       if (fs.existsSync(png_path)) {
         let png_obj = pngjs_lib.PNG.sync.read(fs.readFileSync(png_path));
+        let height = png_obj.height;
         let width = png_obj.width;
         
         for (let x = 0; x < city_entries.length; x++) {
@@ -563,8 +580,29 @@
           
           let idx = (ce.py*width + ce.px)*4;
           let center_id = (((png_obj.data[idx] << 24) | (png_obj.data[idx + 1] << 16) | (png_obj.data[idx + 2] << 8) | png_obj.data[idx + 3]) >>> 0);
-          if (center_id > 0 && ghsl_by_id.has(center_id))
+          if (center_id > 0 && ghsl_by_id.has(center_id)) {
             ce.epoch_cluster[ep] = center_id;
+          } else {
+            for (let dy = -1; dy <= 1 && !ce.epoch_cluster[ep]; dy++) {
+              let ny = ce.py + dy;
+              if (ny < 0 || ny >= height) continue;
+              for (let dx = -1; dx <= 1; dx++) {
+                if (dx === 0 && dy === 0) continue;
+                let nx = ce.px + dx;
+                if (nx < 0 || nx >= width) continue;
+                let n_idx = (ny*width + nx)*4;
+                let n_id = (((png_obj.data[n_idx] << 24) | (png_obj.data[n_idx + 1] << 16) | (png_obj.data[n_idx + 2] << 8) | png_obj.data[n_idx + 3]) >>> 0);
+                if (n_id > 0 && ghsl_by_id.has(n_id)) {
+                  let n_ghsl = ghsl_by_id.get(n_id);
+                  let n_toks = String(n_ghsl.name || "").split(";").map(s => population_Stadester_ghsl.normaliseGHSLName(s)).filter(Boolean);
+                  if (n_toks.length > 0 && population_Stadester_ghsl.matchesAnyGHSLToken(ce.norm_names, [n_toks[0]])) {
+                    ce.epoch_cluster[ep] = n_id;
+                    break;
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -629,6 +667,17 @@
           primary_candidates.push(m);
         if (population_Stadester_ghsl.matchesAnyGHSLToken(m.norm_names, ghsl_tokens))
           token_candidates.push(m);
+      }
+      if (primary_candidates.length === 0 && token_candidates.length === 0) {
+        for (let x = 0; x < members.length; x++) {
+          let m = members[x];
+          let ref_pop = population_Stadester_ghsl.getModernReferencePopulation(m.city);
+          if (ref_pop <= 0) continue;
+          if (population_Stadester_ghsl.matchesAnyGHSLToken(m.norm_names, first_token))
+            primary_candidates.push(m);
+          if (population_Stadester_ghsl.matchesAnyGHSLToken(m.norm_names, ghsl_tokens))
+            token_candidates.push(m);
+        }
       }
       
       primary_candidates.sort((a, b) => population_Stadester_ghsl.getModernReferencePopulation(b.city) - population_Stadester_ghsl.getModernReferencePopulation(a.city));

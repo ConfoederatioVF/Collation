@@ -476,8 +476,8 @@
 
 
     /**
-     * Overlays Stadestér historical urban populations from 3000 BC onwards.
-     * Computes urban totals and balances rural residuals per watershed.
+     * Overlays Stadestér historical urban populations (`>= 5,000`) and accounts for sub-urban (`< 5,000`) settlements
+     * from 10000 BC onwards. Computes urban totals and balances rural residuals per watershed.
      * @param {Object} [arg0_options]
      *
      * @returns {Object} Map of target years to watershed rural allocations.
@@ -493,24 +493,49 @@
       let watershed_rurals = {};
       let wmobb_raster = population_c14bazAAR_watersheds.loadBufferedWMOBBRaster(this.input_wmobb_raster);
 
+      if (!global.population_Stadester_rasters && typeof require !== "undefined") {
+        let rasters_file = path.join(global.h2 || "./histmap/2.data_cleaning/", "population_Stadester/stadester_rasters.js");
+        if (fs.existsSync(rasters_file)) {
+          try { require(rasters_file); } catch (e) {}
+        }
+      }
+
       if (!fs.existsSync(this.output_urban_folder))
         fs.mkdirSync(this.output_urban_folder, { recursive: true });
 
-      console.log("- Processing Stadestér urban overlay from 10000 BC onwards ...");
+      console.log("- Processing Stadestér urban overlay and sub-5k rural settlement floors from 10000 BC onwards ...");
 
       for (let y = 0; y < target_years.length; y++) {
         let yr = target_years[y];
         watershed_rurals[yr] = {};
         let urban_out_path = path.join(this.output_urban_folder, `urbc_${yr}.png`);
+        let sub_urb_data = (global.population_Stadester_rasters && global.population_Stadester_rasters.getSubUrbanSettlementsData) ?
+          global.population_Stadester_rasters.getSubUrbanSettlementsData(yr, options) :
+          new Float32Array(4320*2160);
 
         if (yr < urban_overlay_year) {
-          //Pre-overlay regime: Pure rural/forager regime (urbc = 0)
+          //Pre-overlay regime: Pure rural/forager regime (urbc = 0), still anchoring sub-5k settlements in rural targets
           GeoPNG.saveNumberRasterImage({ file_path: urban_out_path, format: "float32", function: function () { return 0; }, height: 2160, width: 4320 });
 
-          //Target rural equals total watershed population
+          let watershed_sub_urbans = {};
+          for (let p = 0; p < sub_urb_data.length; p++) {
+            let s_val = sub_urb_data[p];
+            if (s_val > 0) {
+              let b_id = String(wmobb_raster.data[p]);
+              watershed_sub_urbans[b_id] = (watershed_sub_urbans[b_id] || 0) + s_val;
+            }
+          }
+
+          //Target rural equals total watershed population (floored by sub-5k settlements)
           let all_b = Object.keys(watershed_pops);
-          for (let i = 0; i < all_b.length; i++)
-            watershed_rurals[yr][all_b[i]] = watershed_pops[all_b[i]][yr];
+          for (let i = 0; i < all_b.length; i++) {
+            let b = all_b[i];
+            let sub_pop = watershed_sub_urbans[b] || 0;
+            let tot_pop = watershed_pops[b][yr] || 0;
+            let min_rur = (sub_pop > 0) ? sub_pop*1.05 : 0;
+            watershed_rurals[yr][b] = Math.max(min_rur, tot_pop);
+            watershed_pops[b][yr] = watershed_rurals[yr][b];
+          }
         } else {
           //Ingest Stadestér urban ground truth or interpolate
           let src_urban_path = path.join(this.input_stadester_urban_folder, `stadester_urban_${yr}.png`);
@@ -520,7 +545,9 @@
           if (urban_raster) {
             fs.copyFileSync(src_urban_path, urban_out_path);
           } else {
-            //Interpolate urban raster between surrounding Stadestér anchors
+            //Interpolate urban raster between surrounding Stadestér anchors and merge any direct >= 5k settlements at yr
+            let direct_urb = (global.population_Stadester_rasters && global.population_Stadester_rasters.getUrbanSettlementsData) ?
+              global.population_Stadester_rasters.getUrbanSettlementsData(yr, options) : null;
             let u_anchors = this.anchor_years;
             let y0 = u_anchors[0], y1 = u_anchors[u_anchors.length - 1];
             for (let a = 0; a < u_anchors.length - 1; a++) {
@@ -535,38 +562,56 @@
             if (u0 && u1) {
               let f = (yr - y0)/(y1 - y0);
               let u_data = new Float32Array(4320*2160);
-              for (let p = 0; p < u_data.length; p++)
-                u_data[p] = (1 - f)*u0.data[p] + f*u1.data[p];
+              for (let p = 0; p < u_data.length; p++) {
+                let interp_u = (1 - f)*u0.data[p] + f*u1.data[p];
+                let dir_u = (direct_urb) ? direct_urb[p] : 0;
+                u_data[p] = Math.max(interp_u, dir_u);
+              }
               urban_raster = { data: u_data, height: 2160, width: 4320 };
               GeoPNG.saveNumberRasterImage({ file_path: urban_out_path, format: "float32", function: (idx) => u_data[idx], height: 2160, width: 4320 });
               u_data = null;
+            } else if (direct_urb) {
+              urban_raster = { data: direct_urb, height: 2160, width: 4320 };
+              GeoPNG.saveNumberRasterImage({ file_path: urban_out_path, format: "float32", function: (idx) => direct_urb[idx], height: 2160, width: 4320 });
             } else {
               GeoPNG.saveNumberRasterImage({ file_path: urban_out_path, format: "float32", function: () => 0, height: 2160, width: 4320 });
             }
             u0 = null; u1 = null;
           }
 
-          //Sum urban population per watershed
+          //Sum urban (5k+) and sub-urban (<5k) population per watershed
+          let watershed_sub_urbans = {};
           let watershed_urbans = {};
           if (urban_raster)
             for (let p = 0; p < urban_raster.data.length; p++) {
-              let b_id = String(wmobb_raster.data[p]);
               let u_val = urban_raster.data[p];
-              if (u_val > 0)
+              if (u_val > 0) {
+                let b_id = String(wmobb_raster.data[p]);
                 watershed_urbans[b_id] = (watershed_urbans[b_id] || 0) + u_val;
+              }
             }
+          for (let p = 0; p < sub_urb_data.length; p++) {
+            let s_val = sub_urb_data[p];
+            if (s_val > 0) {
+              let b_id = String(wmobb_raster.data[p]);
+              watershed_sub_urbans[b_id] = (watershed_sub_urbans[b_id] || 0) + s_val;
+            }
+          }
 
-          //Allocate rural residuals
+          //Allocate rural residuals ensuring sub-5k settlements are fully accommodated inside watershed_rurals
           let all_b = Object.keys(watershed_pops);
           for (let i = 0; i < all_b.length; i++) {
             let b = all_b[i];
+            let sub_urb_pop = watershed_sub_urbans[b] || 0;
             let tot_pop = watershed_pops[b][yr] || 0;
             let urb_pop = watershed_urbans[b] || 0;
+            let settled_pop = urb_pop + sub_urb_pop;
+            let min_rur = sub_urb_pop + settled_pop*0.05;
 
-            if (urb_pop >= tot_pop && urb_pop > 0) {
-              //Floor total watershed population to accommodate verified metropolis
-              watershed_pops[b][yr] = urb_pop*1.05;
-              watershed_rurals[yr][b] = urb_pop*0.05;
+            if (tot_pop - urb_pop < min_rur && settled_pop > 0) {
+              //Floor total watershed population to accommodate verified settlements + rural hinterland
+              watershed_rurals[yr][b] = min_rur;
+              watershed_pops[b][yr] = urb_pop + min_rur;
             } else {
               watershed_rurals[yr][b] = Math.max(0, tot_pop - urb_pop);
             }
@@ -574,6 +619,7 @@
         }
       }
 
+      fs.writeFileSync(path.join(this.config_folder, "watershed_populations.json"), JSON.stringify(watershed_pops, null, 2));
       fs.writeFileSync(path.join(this.config_folder, "watershed_rural_targets.json"), JSON.stringify(watershed_rurals, null, 2));
 
       //Return statement
@@ -583,7 +629,8 @@
 
     /**
      * Dasymetrically downscales rural population using WLS land use disaggregation weights
-     * strictly conserving mass across each watershed boundary, and combines with Stadestér urban centres.
+     * strictly conserving mass across each watershed boundary, anchoring `< 5,000` Stadestér settlements
+     * in `rurc`, and combining with Stadestér `5,000+` urban centres (`urbc`).
      * @param {Object} [arg0_options]
      *
      * @returns {Promise<void>}
@@ -598,6 +645,13 @@
       let total_pixels = 4320*2160;
       let watershed_rurals = JSON.parse(fs.readFileSync(path.join(this.config_folder, "watershed_rural_targets.json"), "utf8"));
       let wmobb_raster = population_c14bazAAR_watersheds.loadBufferedWMOBBRaster(this.input_wmobb_raster);
+
+      if (!global.population_Stadester_rasters && typeof require !== "undefined") {
+        let rasters_file = path.join(global.h2 || "./histmap/2.data_cleaning/", "population_Stadester/stadester_rasters.js");
+        if (fs.existsSync(rasters_file)) {
+          try { require(rasters_file); } catch (e) {}
+        }
+      }
 
       if (!fs.existsSync(this.output_rural_folder))
         fs.mkdirSync(this.output_rural_folder, { recursive: true });
@@ -661,6 +715,9 @@
         let urbc_out_path = path.join(this.output_urban_folder, `urbc_${yr}.png`);
         let wls_path = path.join(this.intermediate_wls_folder, `c14_wls_weights_${yr}.png`);
 
+        let sub_urb_data = (global.population_Stadester_rasters && global.population_Stadester_rasters.getSubUrbanSettlementsData) ?
+          global.population_Stadester_rasters.getSubUrbanSettlementsData(yr, options) :
+          new Float32Array(total_pixels);
         let urban_raster = (fs.existsSync(urbc_out_path)) ?
           GeoPNG.loadNumberRasterImage(urbc_out_path, { format: "float32" }) : null;
         let wls_raster = (fs.existsSync(wls_path)) ?
@@ -674,9 +731,14 @@
         for (let i = 0; i < all_basins.length; i++) {
           let b = all_basins[i];
           let pixels = basin_pixels[b];
-          let target_rural = watershed_rurals[yr][b] || 0;
+          let basin_sub_urb = 0;
+          for (let k = 0; k < pixels.length; k++)
+            basin_sub_urb += sub_urb_data[pixels[k]];
 
+          let target_rural = Math.max(basin_sub_urb, watershed_rurals[yr][b] || 0);
           if (target_rural <= 0) continue;
+
+          let scalable_rural = Math.max(0, target_rural - basin_sub_urb);
 
           //Sum WLS weights within this basin
           let weight_sum = 0;
@@ -684,20 +746,22 @@
             for (let k = 0; k < pixels.length; k++) {
               let p_idx = pixels[k];
               let w_val = wls_raster.data[p_idx];
-              if (w_val <= 0 && urban_raster && urban_raster.data[p_idx] > 0)
-                w_val = Math.max(1e-4, urban_raster.data[p_idx]*0.05);
+              let settled_p = ((urban_raster) ? urban_raster.data[p_idx] : 0) + sub_urb_data[p_idx];
+              if (w_val <= 0 && settled_p > 0)
+                w_val = Math.max(1e-4, settled_p*0.05);
               weight_sum += w_val;
             }
 
           if (weight_sum > 0) {
-            let factor = target_rural/weight_sum;
+            let factor = scalable_rural/weight_sum;
             basin_factors[b] = factor;
             for (let k = 0; k < pixels.length; k++) {
               let p_idx = pixels[k];
               let w_val = wls_raster.data[p_idx];
-              if (w_val <= 0 && urban_raster && urban_raster.data[p_idx] > 0)
-                w_val = Math.max(1e-4, urban_raster.data[p_idx]*0.05);
-              rurc_data[p_idx] = w_val*factor;
+              let settled_p = ((urban_raster) ? urban_raster.data[p_idx] : 0) + sub_urb_data[p_idx];
+              if (w_val <= 0 && settled_p > 0)
+                w_val = Math.max(1e-4, settled_p*0.05);
+              rurc_data[p_idx] = sub_urb_data[p_idx] + w_val*factor;
             }
           } else {
             //Fallback to habitable land area if basin has zero WLS weight
@@ -705,17 +769,24 @@
             for (let k = 0; k < pixels.length; k++) {
               let p_idx = pixels[k];
               let p_area = Math.max(0, land_area_raster.data[p_idx] || 0);
-              if (p_area <= 0 && urban_raster && urban_raster.data[p_idx] > 0) p_area = 1;
+              let settled_p = ((urban_raster) ? urban_raster.data[p_idx] : 0) + sub_urb_data[p_idx];
+              if (p_area <= 0 && settled_p > 0) p_area = 1;
               area_sum += p_area;
             }
 
             if (area_sum > 0) {
-              let factor = target_rural/area_sum;
+              let factor = scalable_rural/area_sum;
               for (let k = 0; k < pixels.length; k++) {
                 let p_idx = pixels[k];
                 let p_area = Math.max(0, land_area_raster.data[p_idx] || 0);
-                if (p_area <= 0 && urban_raster && urban_raster.data[p_idx] > 0) p_area = 1;
-                rurc_data[p_idx] = p_area*factor;
+                let settled_p = ((urban_raster) ? urban_raster.data[p_idx] : 0) + sub_urb_data[p_idx];
+                if (p_area <= 0 && settled_p > 0) p_area = 1;
+                rurc_data[p_idx] = sub_urb_data[p_idx] + p_area*factor;
+              }
+            } else {
+              for (let k = 0; k < pixels.length; k++) {
+                let p_idx = pixels[k];
+                rurc_data[p_idx] = sub_urb_data[p_idx];
               }
             }
           }
@@ -754,14 +825,16 @@
             if (w_sum > 0) {
               let alpha_s = 0.70*(1 - (d - 1)/4.0);
               let f_smooth = Math.exp((1 - alpha_s)*Math.log(f0) + alpha_s*(log_sum/w_sum));
-              rurc_data[p_idx] = w_val*f_smooth;
+              rurc_data[p_idx] = sub_urb_data[p_idx] + w_val*f_smooth;
             }
           }
         }
 
-        //Combine Urban + Rural into Total popc
+        //Combine Urban + Rural into Total popc (guaranteeing rurc >= sub_urb_data everywhere, including island/coastal cells)
         for (let p = 0; p < total_pixels; p++) {
           let u_val = (urban_raster) ? urban_raster.data[p] : 0;
+          if (rurc_data[p] < sub_urb_data[p])
+            rurc_data[p] = sub_urb_data[p];
           let r_val = rurc_data[p];
           popc_data[p] = u_val + r_val;
         }

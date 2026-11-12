@@ -140,6 +140,199 @@
   };
   
   /**
+   * Loads and caches the Stadestér UUD JSON object (`stadester.json`), refreshing when disk mtime changes.
+   * @alias population_Stadester_rasters.loadStadesterObject
+   *
+   * @param {Object} [arg0_options]
+   *
+   * @returns {Object|null}
+   */
+  population_Stadester_rasters.loadStadesterObject = function (arg0_options) {
+    //Convert from parameters
+    let options = (arg0_options) ? arg0_options : {};
+
+    //Declare local instance variables
+    let dump_mtime = 0;
+    let dump_path = options.stadester_file_path || path.join(`${h1}/population_Stadester/uud/`, "stadester.json");
+    let stadester_obj = options.stadester_obj || null;
+
+    //Guard clauses
+    if (stadester_obj) return stadester_obj;
+    if (!fs.existsSync(dump_path)) return null;
+
+    //Function body
+    dump_mtime = fs.statSync(dump_path).mtimeMs;
+    if (global._cached_stadester_obj && global._cached_stadester_path === dump_path && global._cached_stadester_mtime === dump_mtime) {
+      stadester_obj = global._cached_stadester_obj;
+    } else {
+      stadester_obj = JSON.parse(fs.readFileSync(dump_path, "utf8"));
+      global._cached_stadester_obj = stadester_obj;
+      global._cached_stadester_path = dump_path;
+      global._cached_stadester_mtime = dump_mtime;
+    }
+
+    //Return statement
+    return stadester_obj;
+  };
+
+
+  /**
+   * Resolves a city's population at a target year from `city.population`, respecting the temporal proximity gap
+   * (`Math.max(200, hyde_interval)`) so disconnected historical/archaeological clusters are never bridged across hiatuses.
+   * @alias population_Stadester_rasters.getCityPopulationAtYear
+   *
+   * @param {Object} arg0_city
+   * @param {number} arg1_year
+   *
+   * @returns {number}
+   */
+  population_Stadester_rasters.getCityPopulationAtYear = function (arg0_city, arg1_year) {
+    //Convert from parameters
+    let city = arg0_city;
+    let year = Number(arg1_year);
+
+    //Declare local instance variables
+    let max_yr = 0;
+    let min_yr = 0;
+    let p_keys = [];
+
+    //Guard clauses
+    if (!city || !city.population || !Number.isFinite(year)) return 0;
+    if (city.population[year] !== undefined)
+      return parseFloat(city.population[year]) || 0;
+
+    //Function body
+    p_keys = city._pop_keys_sorted || (city._pop_keys_sorted = Object.keys(city.population).map(Number).sort((a, b) => a - b));
+    if (p_keys.length === 0) return 0;
+
+    min_yr = p_keys[0];
+    max_yr = p_keys[p_keys.length - 1];
+    if (year < min_yr) return 0;
+    if (year > max_yr) {
+      if (max_yr >= 1975 && year >= 1975 && (year - max_yr) <= 200)
+        return parseFloat(city.population[max_yr]) || 0;
+      return 0;
+    }
+
+    for (let i = 0; i < p_keys.length - 1; i++) {
+      let y0 = p_keys[i];
+      let y1 = p_keys[i + 1];
+      if (year >= y0 && year <= y1) {
+        let gap = y1 - y0;
+        let max_gap = 200;
+        if (typeof population_Stadester !== "undefined" && population_Stadester.getMaxTemporalProximityGap) {
+          max_gap = population_Stadester.getMaxTemporalProximityGap(y0, y1);
+        } else {
+          let hyde_int = (y1 <= 0 || y0 < 0) ? 1000 : ((y1 <= 1700 || y0 < 1700) ? 100 : 10);
+          max_gap = Math.max(200, hyde_int);
+        }
+        if (gap <= max_gap && gap > 0) {
+          let v0 = parseFloat(city.population[y0]) || 0;
+          let v1 = parseFloat(city.population[y1]) || 0;
+          return v0 + ((year - y0)/gap)*(v1 - v0);
+        }
+        return 0;
+      }
+    }
+
+    //Return statement
+    return 0;
+  };
+
+
+  /**
+   * Computes a `Float32Array(4320*2160)` of sub-urban settlement populations (`0 < city_pop < min_urban_raster_population`)
+   * from `stadester.json` for a given year so settlements with `< 5,000` people are preserved in rural and total population rasters.
+   * @alias population_Stadester_rasters.getSubUrbanSettlementsData
+   *
+   * @param {number} arg0_year
+   * @param {Object} [arg1_options]
+   *
+   * @returns {Float32Array}
+   */
+  population_Stadester_rasters.getSubUrbanSettlementsData = function (arg0_year, arg1_options) {
+    //Convert from parameters
+    let year = parseInt(arg0_year);
+    let options = (arg1_options) ? arg1_options : {};
+
+    //Declare local instance variables
+    let all_city_keys;
+    let cfg = global.population_Stadester_config;
+    let min_urban_population = (options.min_urban_raster_population !== undefined) ?
+      options.min_urban_raster_population :
+      ((cfg && cfg.min_urban_raster_population !== undefined) ? cfg.min_urban_raster_population : 5000);
+    let stadester_obj = population_Stadester_rasters.loadStadesterObject(options);
+    let sub_urban_data = new Float32Array(4320*2160);
+
+    //Guard clauses
+    if (year < -10000 || !stadester_obj) return sub_urban_data;
+
+    //Function body
+    all_city_keys = Object.keys(stadester_obj);
+    for (let i = 0; i < all_city_keys.length; i++) {
+      let city = stadester_obj[all_city_keys[i]];
+      if (!city || !city.coords || !city.population) continue;
+
+      let city_pop = population_Stadester_rasters.getCityPopulationAtYear(city, year);
+      if (city_pop <= 0 || city_pop >= min_urban_population) continue;
+
+      let px = city._px || (city._px = population_Stadester_rasters.getCoordsPixel(city.coords));
+      let center_idx = px[1]*4320 + px[0];
+      sub_urban_data[center_idx] += city_pop;
+    }
+
+    //Return statement
+    return sub_urban_data;
+  };
+
+
+  /**
+   * Computes a `Float32Array(4320*2160)` of urban settlement populations (`city_pop >= min_urban_raster_population`)
+   * from `stadester.json` for a given year (useful for intermediate 100-year antiquity steps not in `stadester_years`).
+   * @alias population_Stadester_rasters.getUrbanSettlementsData
+   *
+   * @param {number} arg0_year
+   * @param {Object} [arg1_options]
+   *
+   * @returns {Float32Array}
+   */
+  population_Stadester_rasters.getUrbanSettlementsData = function (arg0_year, arg1_options) {
+    //Convert from parameters
+    let year = parseInt(arg0_year);
+    let options = (arg1_options) ? arg1_options : {};
+
+    //Declare local instance variables
+    let all_city_keys;
+    let cfg = global.population_Stadester_config;
+    let min_urban_population = (options.min_urban_raster_population !== undefined) ?
+      options.min_urban_raster_population :
+      ((cfg && cfg.min_urban_raster_population !== undefined) ? cfg.min_urban_raster_population : 5000);
+    let stadester_obj = population_Stadester_rasters.loadStadesterObject(options);
+    let urban_data = new Float32Array(4320*2160);
+
+    //Guard clauses
+    if (year < -10000 || !stadester_obj) return urban_data;
+
+    //Function body
+    all_city_keys = Object.keys(stadester_obj);
+    for (let i = 0; i < all_city_keys.length; i++) {
+      let city = stadester_obj[all_city_keys[i]];
+      if (!city || !city.coords || !city.population) continue;
+
+      let city_pop = population_Stadester_rasters.getCityPopulationAtYear(city, year);
+      if (city_pop < min_urban_population) continue;
+
+      let px = city._px || (city._px = population_Stadester_rasters.getCoordsPixel(city.coords));
+      let center_idx = px[1]*4320 + px[0];
+      urban_data[center_idx] += city_pop;
+    }
+
+    //Return statement
+    return urban_data;
+  };
+
+
+  /**
    * Generates Stadestér Base raster for a single year in float32 format.
    * @alias population_Stadester_rasters.generateStadesterBaseRaster
    * 
@@ -163,7 +356,7 @@
       ((cfg && cfg.min_urban_raster_population !== undefined) ? cfg.min_urban_raster_population : 5000);
     let output_file_path = path.join(base_folder, `stadester_base_${year}.png`);
     let pixel_dictionary = {};
-    let stadester_obj = options.stadester_obj;
+    let stadester_obj = population_Stadester_rasters.loadStadesterObject(options);
     let substrata_file_path;
     let substrata_raster;
     
@@ -188,21 +381,6 @@
     
     if (fs.existsSync(substrata_file_path))
       substrata_raster = GeoPNG.loadNumberRasterImage(substrata_file_path, { format: "float32" });
-    
-    if (!stadester_obj) {
-      let dump_path = options.stadester_file_path || path.join(`${h1}/population_Stadester/uud/`, "stadester.json");
-      if (fs.existsSync(dump_path)) {
-        let dump_mtime = fs.statSync(dump_path).mtimeMs;
-        if (global._cached_stadester_obj && global._cached_stadester_path === dump_path && global._cached_stadester_mtime === dump_mtime) {
-          stadester_obj = global._cached_stadester_obj;
-        } else {
-          stadester_obj = JSON.parse(fs.readFileSync(dump_path, "utf8"));
-          global._cached_stadester_obj = stadester_obj;
-          global._cached_stadester_path = dump_path;
-          global._cached_stadester_mtime = dump_mtime;
-        }
-      }
-    }
     
     if (!stadester_obj) return output_file_path;
     all_city_keys = Object.keys(stadester_obj);
@@ -233,21 +411,28 @@
       
       for (let x = 0; x < local_cities.length; x++) {
         let city = local_cities[x];
-        let city_pop = 0;
+        let city_pop = population_Stadester_rasters.getCityPopulationAtYear(city, year);
         let local_pixels = {};
         let radial_buffers = [];
         
-        if (city.population) {
-          let p_keys = city._pop_keys_sorted || (city._pop_keys_sorted = Object.keys(city.population).map(Number).sort((a, b) => a - b));
-          for (let y = 0; y < p_keys.length; y++)
-            if (p_keys[y] <= year) city_pop = parseFloat(city.population[p_keys[y]]) || 0;
-        }
-        if (city_pop <= min_urban_population) continue;
+        if (city_pop < min_urban_population) continue;
         
         if (city.radial_buffers) {
-          let b_keys = city._buffer_keys_sorted || (city._buffer_keys_sorted = Object.keys(city.radial_buffers).map(Number).sort((a, b) => a - b));
-          for (let y = 0; y < b_keys.length; y++)
-            if (b_keys[y] <= year) radial_buffers = city.radial_buffers[b_keys[y]];
+          if (city.radial_buffers[year] !== undefined) {
+            radial_buffers = city.radial_buffers[year];
+          } else {
+            let b_keys = city._buffer_keys_sorted || (city._buffer_keys_sorted = Object.keys(city.radial_buffers).map(Number).sort((a, b) => a - b));
+            for (let y = 0; y < b_keys.length; y++) {
+              if (b_keys[y] <= year) {
+                let b_gap = year - b_keys[y];
+                let max_b_gap = (typeof population_Stadester !== "undefined" && population_Stadester.getMaxTemporalProximityGap) ?
+                  population_Stadester.getMaxTemporalProximityGap(b_keys[y], year) :
+                  ((year <= 0 || b_keys[y] < 0) ? 1000 : 200);
+                if (b_gap <= max_b_gap)
+                  radial_buffers = city.radial_buffers[b_keys[y]];
+              }
+            }
+          }
         }
         
         if (radial_buffers && radial_buffers.length > 1 && substrata_raster) {
@@ -459,13 +644,14 @@
   
   /**
    * Reconciles Rural and Total Population rasters using national dasymetric rural scaling in float32.
-   * Preserves exact urban city populations from stadester.json and calibrates rural to national totals.
+   * Preserves exact urban city populations (`>= 5,000`) and sub-urban settlement populations (`< 5,000`) from `stadester.json`,
+   * anchoring `< 5,000` settlements inside the rural raster so no settlement gridcell ever has less population than the settlement itself.
    * @alias population_Stadester_rasters.reconcileStadesterDemographics
    * 
    * @param {number} arg0_year
    * @param {Object} [arg1_options]
    * 
-   * @returns {Promise<Object>} { pop_file_path, rural_file_path }
+   * @returns {Promise<Object>} { pop_file_path, rural_file_path, urban_file_path }
    */
   population_Stadester_rasters.reconcileStadesterDemographics = async function (arg0_year, arg1_options) {
     //Convert from parameters
@@ -477,11 +663,13 @@
     let country_scalar_r = {};
     let country_scalar_u = {};
     let country_sub = {};
+    let country_sub_urb = {};
     let country_urb = {};
     let fallback_scalar_r = 1;
     let fallback_scalar_u = 1;
     let global_raw_rur = 0;
     let global_sub = 0;
+    let global_sub_urb = 0;
     let global_urb = 0;
     let pixel_to_geocode = (options.pixel_to_geocode) ?
       options.pixel_to_geocode : population_Stadester_rasters.getPixelToGeocodeMapping();
@@ -491,6 +679,7 @@
     let rural_data = new Float32Array(4320*2160);
     let rural_file_path = path.join(options.input_rurc_folder || `${h2}/population_Stadester/stadester_rural_rasters/`, `stadester_rural_${year}.png`);
     let rural_folder = path.dirname(rural_file_path);
+    let sub_urban_data = null;
     let substrata_file_path = population_Stadester_rasters.getSubstrataRasterPath(year, options);
     let substrata_raster = null;
     let total_data = new Float32Array(4320*2160);
@@ -532,16 +721,24 @@
       if (fs.existsSync(urban_file_path))
         urban_raster = GeoPNG.loadNumberRasterImage(urban_file_path, { format: "float32" });
     }
+
+    //Load sub-5k settlement populations from stadester.json so small settlements are anchored in rural & total rasters
+    sub_urban_data = (options.sub_urban_data) ?
+      options.sub_urban_data :
+      population_Stadester_rasters.getSubUrbanSettlementsData(year, options);
     
-    //Pass 1: Accumulate Substrata target, Urban ground truth, and Raw Rural per country
+    //Pass 1: Accumulate Substrata target, Urban (5k+) ground truth, Sub-Urban (<5k) settlement ground truth, and Raw Rural hinterland per country
     for (let i = 0; i < total_pixels; i++) {
       let s = (substrata_raster && substrata_raster.data[i]) ? substrata_raster.data[i] : 0;
+      let sub_u = (sub_urban_data && sub_urban_data[i]) ? sub_urban_data[i] : 0;
       let u = (urban_raster && urban_raster.data[i]) ? urban_raster.data[i] : 0;
-      let rr = (s > u) ? (s - u) : ((s > 0 || u > 0) ? Math.max(1e-4, ((s > 0) ? s : u)*0.05) : 0);
+      let settled = u + sub_u;
+      let rr = (s > settled) ? (s - settled) : ((s > 0 || settled > 0) ? Math.max(1e-4, ((s > 0) ? s : settled)*0.05) : 0);
       raw_rural_data[i] = rr;
       
       global_sub += s;
       global_urb += u;
+      global_sub_urb += sub_u;
       global_raw_rur += rr;
       
       if (pixel_to_geocode) {
@@ -549,14 +746,15 @@
         if (c) {
           country_sub[c] = (country_sub[c] || 0) + s;
           country_urb[c] = (country_urb[c] || 0) + u;
+          country_sub_urb[c] = (country_sub_urb[c] || 0) + sub_u;
           country_raw_rur[c] = (country_raw_rur[c] || 0) + rr;
         }
       }
     }
     
     //Compute per-country scalars:
-    //If U < S: Preserve exact urban ground truth from stadester.json and dasymetrically calibrate rural: TargetRural = S - U
-    //If U >= S: Preserve exact urban ground truth (scalar_u = 1) and maintain a minimal rural hinterland floor so cities are never overridden downward
+    //If U + SubU < S: Preserve exact urban (5k+) and sub-urban (<5k) ground truth from stadester.json and calibrate rural hinterland: TargetHinterland = S - U - SubU
+    //If U + SubU >= S: Preserve exact settlement ground truth and maintain a minimal rural hinterland floor so settlements are never overridden downward
     let min_rural_ratio = (options.min_rural_hinterland_ratio !== undefined) ?
       options.min_rural_hinterland_ratio : 0.05;
     if (pixel_to_geocode) {
@@ -565,36 +763,40 @@
         let c = all_countries[i];
         let raw_r = country_raw_rur[c] || 0;
         let s = country_sub[c];
+        let sub_u = country_sub_urb[c] || 0;
         let u = country_urb[c] || 0;
+        let settled = u + sub_u;
         
-        if (u < s) {
-          let target_r = s - u;
+        if (settled < s) {
+          let target_r = s - settled;
           country_scalar_r[c] = (raw_r > 0) ? (target_r/raw_r) : 0;
           country_scalar_u[c] = 1;
         } else {
-          let target_r = Math.min(raw_r, u*min_rural_ratio);
+          let target_r = Math.min(raw_r, settled*min_rural_ratio);
           country_scalar_r[c] = (raw_r > 0) ? (target_r/raw_r) : 0;
           country_scalar_u[c] = 1;
         }
       }
     }
     
-    if (global_urb < global_sub) {
-      let fallback_target_r = global_sub - global_urb;
+    let global_settled = global_urb + global_sub_urb;
+    if (global_settled < global_sub) {
+      let fallback_target_r = global_sub - global_settled;
       fallback_scalar_r = (global_raw_rur > 0) ? (fallback_target_r/global_raw_rur) : 1;
       fallback_scalar_u = 1;
     } else {
-      let fallback_target_r = Math.min(global_raw_rur, global_urb*min_rural_ratio);
+      let fallback_target_r = Math.min(global_raw_rur, global_settled*min_rural_ratio);
       fallback_scalar_r = (global_raw_rur > 0) ? (fallback_target_r/global_raw_rur) : 0;
       fallback_scalar_u = 1;
     }
     
-    //Pass 2: Apply scalars and construct strictly consistent Total = Urban + Rural
+    //Pass 2: Apply scalars and construct strictly consistent Rural = SubU + Hinterland and Total = Urban + Rural
     for (let i = 0; i < total_pixels; i++) {
       let c = pixel_to_geocode ? pixel_to_geocode[i] : null;
       let sc_r = (c && country_scalar_r[c] !== undefined) ? country_scalar_r[c] : fallback_scalar_r;
       let sc_u = (c && country_scalar_u[c] !== undefined) ? country_scalar_u[c] : fallback_scalar_u;
-      let r = raw_rural_data[i]*sc_r;
+      let sub_u = (sub_urban_data && sub_urban_data[i]) ? sub_urban_data[i] : 0;
+      let r = sub_u + raw_rural_data[i]*sc_r;
       let u = (urban_raster && urban_raster.data[i]) ? urban_raster.data[i]*sc_u : 0;
       
       rural_data[i] = (r >= 1e-6) ? r : 0;

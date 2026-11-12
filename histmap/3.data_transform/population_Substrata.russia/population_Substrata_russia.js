@@ -646,7 +646,9 @@
 
 
     /**
-     * Helper: Loads the `stadester_urban_<year>.png` raster onto the valid domain pixels (`context.n_valid`).
+     * Helper: Loads the `stadester_urban_<year>.png` (`>= 5,000`) raster and `< 5,000` settlement populations
+     * from `stadester.json` onto the valid domain pixels (`context.n_valid`) so all settlements are anchored in
+     * the regional substrata `popc` mosaic without inflating zone totals.
      * @alias population_Substrata_russia.loadUrbanValidForYear
      *
      * @param {Object} arg0_context
@@ -660,6 +662,11 @@
       let year = Number(arg1_year);
 
       //Declare local instance variables
+      let stadester_dump_path = path.join(
+        context.root_dir,
+        "histmap/1.data_raw/population_Stadester/uud/stadester.json"
+      );
+      let sub_urban_data = null;
       let urban_path = path.join(
         context.root_dir,
         "histmap/2.data_cleaning/population_Stadester/stadester_urban_rasters",
@@ -667,16 +674,38 @@
       );
       let urban_valid = new Float32Array(context.n_valid);
 
-      //Guard clauses
-      if (!fs.existsSync(urban_path)) return urban_valid;
-
       //Function body
-      let u_png = PNG.sync.read(fs.readFileSync(urban_path));
-      let u_dv = new DataView(u_png.data.buffer, u_png.data.byteOffset, u_png.data.byteLength);
-      for (let i = 0; i < context.n_valid; i++) {
-        let idx = context.valid_indices[i];
-        let val = this.readPositiveFloat32(u_png.data, u_dv, idx*4);
-        if (val > 0) urban_valid[i] = val;
+      if (fs.existsSync(urban_path)) {
+        let u_png = PNG.sync.read(fs.readFileSync(urban_path));
+        let u_dv = new DataView(u_png.data.buffer, u_png.data.byteOffset, u_png.data.byteLength);
+        for (let i = 0; i < context.n_valid; i++) {
+          let idx = context.valid_indices[i];
+          let val = this.readPositiveFloat32(u_png.data, u_dv, idx*4);
+          if (val > 0) urban_valid[i] = val;
+        }
+      }
+
+      if (!global.population_Stadester_rasters && typeof require !== "undefined") {
+        let rasters_js = path.join(
+          context.root_dir,
+          "histmap/2.data_cleaning/population_Stadester/stadester_rasters.js"
+        );
+        if (fs.existsSync(rasters_js)) {
+          try { require(rasters_js); } catch (e) {}
+        }
+      }
+
+      if (global.population_Stadester_rasters && global.population_Stadester_rasters.getSubUrbanSettlementsData) {
+        sub_urban_data = global.population_Stadester_rasters.getSubUrbanSettlementsData(year, {
+          stadester_file_path: stadester_dump_path
+        });
+        if (sub_urban_data) {
+          for (let i = 0; i < context.n_valid; i++) {
+            let idx = context.valid_indices[i];
+            let sub_val = sub_urban_data[idx];
+            if (sub_val > 0) urban_valid[i] += sub_val;
+          }
+        }
       }
 
       //Return statement

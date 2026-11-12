@@ -197,6 +197,27 @@
       fs.writeFileSync(this.file_stadester_final, JSON.stringify(stadester_obj, null, 2));
       console.log(`- Saved final radially-buffered Stadestér dataset to ${this.file_stadester_final}.`);
       
+      if (this.file_stadester_vis) {
+        let vis_dir = path.dirname(path.resolve(this.file_stadester_vis));
+        if (!fs.existsSync(vis_dir)) fs.mkdirSync(vis_dir, { recursive: true });
+        fs.writeFileSync(this.file_stadester_vis, JSON.stringify(stadester_obj, null, 2));
+        console.log(`- Synchronised final Stadestér dataset to ${this.file_stadester_vis}.`);
+      }
+      
+      let dataview_targets = [
+        "F:/Active Projects/Project 1436 - Dataview/data/stadester/stadester_1.1.json",
+        "D:/Project 1436 - Dataview/data/stadester/stadester_1.1.json"
+      ];
+      for (let i = 0; i < dataview_targets.length; i++) {
+        let dv_target = dataview_targets[i];
+        if (fs.existsSync(path.dirname(dv_target))) {
+          fs.writeFileSync(dv_target, JSON.stringify(stadester_obj, null, 2));
+          let dv_cache = path.join(path.dirname(dv_target), "cache", "stadester_1.1_lite.json");
+          if (fs.existsSync(dv_cache)) try { fs.unlinkSync(dv_cache); } catch (e) {}
+          console.log(`- Synchronised final Stadestér dataset to Dataview (${dv_target}).`);
+        }
+      }
+      
       //Return statement
       return stadester_obj;
     }
