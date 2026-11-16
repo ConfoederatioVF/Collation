@@ -299,111 +299,188 @@
     let options = (arg1_options) ? arg1_options : {};
     
     //Declare local instance variables
-    let all_ghsl_keys;
-    let area_cols = {};
-    let backfilled_count = 0;
-    let cfg = global.population_Stadester_config;
-    let country_idx;
+    let all_ghsl_keys, area_cols = {}, backfilled_count = 0, cfg = global.population_Stadester_config;
+    let country_idx, csv_meta_by_id = new Map(), dv_by_key = new Map(), dv_grid = new Map();
+    let dv_dir = options.dataview_data_dir || "F:/Active Projects/Project 1436 - Dataview/data/stadester";
     let epochs = [1975, 1980, 1985, 1990, 1995, 2000, 2005, 2010, 2015, 2020, 2025];
-    let ghsl_by_id = new Map();
-    let headers;
-    let id_idx;
-    let lines;
-    let name_idx;
-    let pop_cols = {};
-    let raw_text;
-    let ucdb_candidates;
-    let ucdb_csv_path = null;
+    let ghsl_by_id = new Map(), headers, id_idx, lines, meta_grid = new Map(), name_idx;
+    let pop_cols = {}, raw_text, repaired_count = 0, ucdb_csv_path = null;
+    let ghsl_csv_candidates = [
+      options.ghsl_csv_path, path.join(dv_dir, "GHSL.csv"),
+      path.join((typeof h1 !== "undefined") ? h1 : "./histmap/1.data_raw", "population_Stadester", "ghsl", "GHSL.csv"),
+      path.join((typeof h1 !== "undefined") ? h1 : "./histmap/1.data_raw", "population_GHSL", "GHSL.csv")
+    ];
+    let isMojibake = (arg0_s) => { let s = (arg0_s !== undefined && arg0_s !== null) ? String(arg0_s) : ""; return /[?\uFFFD]/.test(s) || s.includes("\u00EF\u00BF\u00BD"); };
+    let parseEuFloat = (arg0_s) => parseFloat(String(arg0_s).trim().replace(/\./g, "").replace(",", "."));
+    let pushGrid = (arg0_m, arg1_lat, arg2_lng, arg3_v) => {
+      let gk = `${Math.floor(arg2_lng)},${Math.floor(arg1_lat)}`;
+      if (!arg0_m.has(gk)) arg0_m.set(gk, []);
+      arg0_m.get(gk).push(arg3_v);
+    };
+    let findGridMatches = (arg0_m, arg1_lat, arg2_lng) => {
+      let res = [];
+      for (let dx = -1; dx <= 1; dx++)
+        for (let dy = -1; dy <= 1; dy++) {
+          let b = arg0_m.get(`${Math.floor(arg2_lng) + dx},${Math.floor(arg1_lat) + dy}`);
+          if (b) res = res.concat(b);
+        }
+      return res;
+    };
     
-    //Function body
+    //Function body: load clean UTF-8 names from GHSL.csv, Dataview all_cities_coords.json, and city_metadata.json ([lng, lat])
+    for (let i = 0; i < ghsl_csv_candidates.length; i++) {
+      if (ghsl_csv_candidates[i] && fs.existsSync(ghsl_csv_candidates[i])) {
+        try {
+          let csv_lines = fs.readFileSync(ghsl_csv_candidates[i], "utf8").replace(/^\uFEFF/, "").split(/\r?\n/);
+          for (let x = 1; x < csv_lines.length; x++) {
+            let parts = csv_lines[x].split(";"), uid = Number(parts[0]);
+            if (Number.isFinite(uid) && uid > 0 && (parts[1] || parts[2]))
+              csv_meta_by_id.set(uid, { country: (parts[2] || "").trim(), name: (parts[1] || "").trim() });
+          }
+          break;
+        } catch (e) {}
+      }
+    }
+    try {
+      let p_coords = path.join(dv_dir, "all_cities_coords.json");
+      if (fs.existsSync(p_coords)) {
+        let dv_list = JSON.parse(fs.readFileSync(p_coords, "utf8"));
+        for (let i = 0; i < dv_list.length; i++) {
+          let item = dv_list[i];
+          if (!item || !item.key) continue;
+          let k_low = String(item.key).toLowerCase();
+          dv_by_key.set(k_low, item);
+          if (k_low.startsWith("ghsl-")) {
+            dv_by_key.set(k_low.slice(5), item);
+            if (Array.isArray(item.coords) && item.coords.length >= 2)
+              pushGrid(dv_grid, Number(item.coords[1]), Number(item.coords[0]), { item: item, lat: Number(item.coords[1]), lng: Number(item.coords[0]) });
+          }
+        }
+      }
+    } catch (e) {}
+    try {
+      let p_meta = path.join(dv_dir, "city_metadata.json");
+      if (fs.existsSync(p_meta)) {
+        let raw_meta = JSON.parse(fs.readFileSync(p_meta, "utf8"));
+        let meta_arr = Array.isArray(raw_meta) ? raw_meta : Object.values(raw_meta);
+        for (let i = 0; i < meta_arr.length; i++) {
+          let m = meta_arr[i];
+          if (!m || !Array.isArray(m.coords) || m.coords.length < 2) continue;
+          let lat = Number(m.coords[1]), lng = Number(m.coords[0]);
+          if (!Number.isFinite(lat) || !Number.isFinite(lng)) continue;
+          let aliases = [m.name, ...(Array.isArray(m.other_names) ? m.other_names : []), ...(Array.isArray(m.historical_names) ? m.historical_names.map(h => h && h.name) : [])].filter(a => a && !isMojibake(a));
+          if (aliases.length > 0) pushGrid(meta_grid, lat, lng, { aliases: aliases, lat: lat, lng: lng, name: m.name || aliases[0] });
+        }
+      }
+    } catch (e) {}
+    
+    let repairClusterEntry = function (arg0_entry, arg1_uc_id, arg2_raw_key) {
+      let entry = arg0_entry, uc_id = Number(arg1_uc_id), raw_key = String(arg2_raw_key || entry.key || "");
+      let csv_rec = csv_meta_by_id.get(uc_id), orig_name = entry.name || "";
+      let dv_rec = dv_by_key.get(raw_key.toLowerCase()) || dv_by_key.get(`ghsl-${raw_key.toLowerCase()}`);
+      let has_coords = Array.isArray(entry.coords) && entry.coords.length >= 2;
+      if (!dv_rec && has_coords) {
+        let elat = Number(entry.coords[0]), elng = Number(entry.coords[1]), best_d = 0.12;
+        let pool = findGridMatches(dv_grid, elat, elng);
+        for (let b = 0; b < pool.length; b++) {
+          let d = Math.hypot(pool[b].lat - elat, pool[b].lng - elng);
+          if (d < best_d) { best_d = d; dv_rec = pool[b].item; }
+        }
+      }
+      let clean_name = (csv_rec && csv_rec.name && !isMojibake(csv_rec.name) && csv_rec.name !== "N/A" && csv_rec.name !== "0") ?
+        csv_rec.name : ((dv_rec && dv_rec.name && !isMojibake(dv_rec.name)) ? dv_rec.name : "");
+      if (clean_name && (!orig_name || isMojibake(orig_name) || orig_name === "N/A" || orig_name === "0" || orig_name.startsWith("ghsl-"))) {
+        if (orig_name && !isMojibake(orig_name) && orig_name !== clean_name) {
+          if (!Array.isArray(entry.other_names)) entry.other_names = [];
+          if (!entry.other_names.includes(orig_name)) entry.other_names.push(orig_name);
+        }
+        entry.name = clean_name;
+        repaired_count++;
+      }
+      if (!entry.country || isMojibake(entry.country))
+        entry.country = (csv_rec && csv_rec.country && !isMojibake(csv_rec.country)) ? csv_rec.country : ((dv_rec && dv_rec.country && !isMojibake(dv_rec.country)) ? dv_rec.country : entry.country);
+      if (!entry.key || isMojibake(entry.key) || entry.key === `ghsl-${uc_id}`) {
+        let prefix = raw_key.startsWith("ghsl-") ? "ghsl-" : "";
+        let stem_name = (entry.name && !isMojibake(entry.name)) ? entry.name : `ghsl-${uc_id}`;
+        entry.key = entry.country ? `${prefix}${stem_name}-${entry.country}` : (stem_name.startsWith("ghsl-") ? stem_name : `ghsl-${uc_id}`);
+      }
+      let alias_pool = (dv_rec && Array.isArray(dv_rec.other_names)) ? dv_rec.other_names.slice() : [];
+      if (has_coords && typeof population_Stadester_ghsl !== "undefined") {
+        let elat = Number(entry.coords[0]), elng = Number(entry.coords[1]);
+        let norm_self = population_Stadester_ghsl.normaliseGHSLName(entry.name);
+        let mb = findGridMatches(meta_grid, elat, elng);
+        for (let m = 0; m < mb.length; m++)
+          if (Math.hypot(mb[m].lat - elat, mb[m].lng - elng) <= 0.15 && norm_self &&
+            (population_Stadester_ghsl.normaliseGHSLName(mb[m].name) === norm_self || mb[m].aliases.some(a => population_Stadester_ghsl.normaliseGHSLName(a) === norm_self)))
+            alias_pool = alias_pool.concat(mb[m].aliases);
+      }
+      if (alias_pool.length > 0) {
+        if (!Array.isArray(entry.other_names)) entry.other_names = [];
+        for (let a = 0; a < alias_pool.length; a++)
+          if (alias_pool[a] && !isMojibake(alias_pool[a]) && alias_pool[a] !== entry.name && !entry.other_names.includes(alias_pool[a]))
+            entry.other_names.push(alias_pool[a]);
+      }
+    };
+    
     if (ghsl_obj) {
       all_ghsl_keys = Object.keys(ghsl_obj);
       for (let i = 0; i < all_ghsl_keys.length; i++) {
         let local_ghsl = ghsl_obj[all_ghsl_keys[i]];
-        if (local_ghsl && local_ghsl.id)
+        if (local_ghsl && local_ghsl.id) {
+          repairClusterEntry(local_ghsl, local_ghsl.id, all_ghsl_keys[i]);
           ghsl_by_id.set(Number(local_ghsl.id), local_ghsl);
+        }
       }
     }
-    
-    ucdb_candidates = [
-      options.ucdb_csv_path,
-      cfg && cfg.ucdb_csv_path,
+    let ucdb_candidates = [
+      options.ucdb_csv_path, cfg && cfg.ucdb_csv_path,
       path.join((typeof h1 !== "undefined") ? h1 : "./histmap/1.data_raw", "population_GHSL", "GHS_UCDB_MTUC_GLOBE_R2024A.csv"),
       "./histmap/1.data_raw/population_GHSL/GHS_UCDB_MTUC_GLOBE_R2024A.csv"
     ];
-    for (let i = 0; i < ucdb_candidates.length; i++) {
-      if (ucdb_candidates[i] && fs.existsSync(ucdb_candidates[i])) {
-        ucdb_csv_path = ucdb_candidates[i];
-        break;
-      }
-    }
-    
+    for (let i = 0; i < ucdb_candidates.length; i++)
+      if (ucdb_candidates[i] && fs.existsSync(ucdb_candidates[i])) { ucdb_csv_path = ucdb_candidates[i]; break; }
     if (ucdb_csv_path) {
       raw_text = fs.readFileSync(ucdb_csv_path, "utf8").replace(/^\uFEFF/, "");
       lines = raw_text.split(/\r?\n/);
       if (lines.length > 1) {
         headers = lines[0].split(";").map(s => s.trim());
-        id_idx = headers.indexOf("ID_MTUC_G0");
-        if (id_idx < 0) id_idx = 0;
-        name_idx = headers.indexOf("GC_UCN_MAI_2025");
-        if (name_idx < 0) name_idx = 1;
-        country_idx = headers.indexOf("GC_CNT_GAD_2025");
-        if (country_idx < 0) country_idx = 3;
-        
+        id_idx = Math.max(0, headers.indexOf("ID_MTUC_G0"));
+        name_idx = headers.indexOf("GC_UCN_MAI_2025"); if (name_idx < 0) name_idx = 1;
+        country_idx = headers.indexOf("GC_CNT_GAD_2025"); if (country_idx < 0) country_idx = 3;
         for (let i = 0; i < epochs.length; i++) {
-          let ep = epochs[i];
-          pop_cols[ep] = headers.indexOf(`MT_POP_TOT_${ep}`);
-          area_cols[ep] = headers.indexOf(`MT_UCA_KM2_${ep}`);
+          pop_cols[epochs[i]] = headers.indexOf(`MT_POP_TOT_${epochs[i]}`);
+          area_cols[epochs[i]] = headers.indexOf(`MT_UCA_KM2_${epochs[i]}`);
         }
-        
         for (let i = 1; i < lines.length; i++) {
           let line = lines[i].trim();
           if (!line) continue;
-          let cols = line.split(";");
-          let uc_id = Number(cols[id_idx]);
+          let cols = line.split(";"), uc_id = Number(cols[id_idx]);
           if (!Number.isFinite(uc_id) || uc_id <= 0 || ghsl_by_id.has(uc_id)) continue;
-          
-          let area_obj = {};
-          let has_positive_pop = false;
-          let pop_obj = {};
-          
+          let area_obj = {}, has_positive_pop = false, pop_obj = {};
           for (let x = 0; x < epochs.length; x++) {
-            let ep = epochs[x];
-            let p_idx = pop_cols[ep];
-            let a_idx = area_cols[ep];
+            let ep = epochs[x], p_idx = pop_cols[ep], a_idx = area_cols[ep];
             if (p_idx >= 0 && cols[p_idx] !== undefined) {
-              let p_clean = String(cols[p_idx]).trim().replace(/\./g, "").replace(",", ".");
-              let p_val = parseFloat(p_clean);
-              if (Number.isFinite(p_val) && p_val > 0) {
-                pop_obj[ep] = Math.round(p_val);
-                has_positive_pop = true;
-              }
+              let p_val = parseEuFloat(cols[p_idx]);
+              if (Number.isFinite(p_val) && p_val > 0) { pop_obj[ep] = Math.round(p_val); has_positive_pop = true; }
             }
             if (a_idx >= 0 && cols[a_idx] !== undefined) {
-              let a_clean = String(cols[a_idx]).trim().replace(/\./g, "").replace(",", ".");
-              let a_val = parseFloat(a_clean);
-              if (Number.isFinite(a_val) && a_val > 0)
-                area_obj[ep] = a_val;
+              let a_val = parseEuFloat(cols[a_idx]);
+              if (Number.isFinite(a_val) && a_val > 0) area_obj[ep] = a_val;
             }
           }
-          
           if (has_positive_pop) {
             let uc_country = (cols[country_idx] && cols[country_idx] !== "#N/A") ? String(cols[country_idx]).trim() : "";
             let uc_name = (cols[name_idx] && cols[name_idx] !== "N/A") ? String(cols[name_idx]).trim() : `ghsl-${uc_id}`;
-            ghsl_by_id.set(uc_id, {
-              area: area_obj,
-              country: uc_country,
-              id: uc_id,
-              key: uc_country ? `${uc_name}-${uc_country}` : `ghsl-${uc_id}`,
-              name: uc_name,
-              population: pop_obj
-            });
+            let raw_k = uc_country ? `${uc_name}-${uc_country}` : `ghsl-${uc_id}`;
+            let entry_obj = { area: area_obj, country: uc_country, id: uc_id, key: raw_k, name: uc_name, population: pop_obj };
+            repairClusterEntry(entry_obj, uc_id, raw_k);
+            ghsl_by_id.set(uc_id, entry_obj);
             backfilled_count++;
           }
         }
       }
-      if (backfilled_count > 0)
-        console.log(`- Backfilled ${backfilled_count} missing GHS-UCDB clusters from CSV (total ${ghsl_by_id.size} clusters).`);
+      if (backfilled_count > 0 || repaired_count > 0)
+        console.log(`- Backfilled ${backfilled_count} missing GHS-UCDB clusters, repaired ${repaired_count} UTF-8 names (total ${ghsl_by_id.size} clusters).`);
     }
     
     //Return statement

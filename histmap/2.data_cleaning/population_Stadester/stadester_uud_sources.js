@@ -413,8 +413,9 @@
     //Declare local instance variables
     let buringh_file = path.join(raw_folder, "buringh", "European urban population, 700 - 2000.txt");
     let buringh_array = File.loadCSVAsArray(buringh_file, { delimiter: "@", utf: "utf16le" });
-    let coord_overrides = (global.population_Stadester_config && global.population_Stadester_config.buringh_coord_overrides) ?
-      global.population_Stadester_config.buringh_coord_overrides : {};
+    let cfg = global.population_Stadester_config;
+    let cfg_buringh = (cfg && cfg.coord_overrides && cfg.coord_overrides.buringh) ? cfg.coord_overrides.buringh : {};
+    let coord_overrides = (cfg && cfg.buringh_coord_overrides) ? cfg.buringh_coord_overrides : {};
     let header = (buringh_array.length > 0 && Array.isArray(buringh_array[0])) ? buringh_array[0] : null;
     let return_obj = {};
     let start_index = (header) ? 1 : 0;
@@ -433,9 +434,13 @@
       if (!local_obj.city) continue;
       let local_country = local_obj.country;
       let local_key = `${local_obj.city}-${local_obj.country}`;
+      let ov = cfg_buringh[local_key];
+      if (ov && ov.resolution === "non_settlement") continue;
+      if (ov && ov.country_override) local_country = ov.country_override;
       
       if (!return_obj[local_key]) {
-        let parsed_coords = coord_overrides[local_key] ? coord_overrides[local_key].slice() : [
+        let ov_coords = (ov && Array.isArray(ov.coords) && ov.coords.length >= 2) ? ov.coords : coord_overrides[local_key];
+        let parsed_coords = ov_coords ? ov_coords.slice() : [
           parseFloat(String(local_obj["latitude in degrees"]).replace(",", ".")),
           parseFloat(String(local_obj["longitude in degrees"]).replace(",", "."))
         ];
@@ -479,8 +484,9 @@
     let actual_return_obj = {};
     let all_cities_keys;
     let all_return_keys;
-    let coord_overrides = (global.population_Stadester_config && global.population_Stadester_config.devries_coord_overrides) ?
-      global.population_Stadester_config.devries_coord_overrides : {};
+    let cfg = global.population_Stadester_config;
+    let cfg_devries = (cfg && cfg.coord_overrides && cfg.coord_overrides.devries) ? cfg.coord_overrides.devries : {};
+    let coord_overrides = (cfg && cfg.devries_coord_overrides) ? cfg.devries_coord_overrides : {};
     let devries_cities_file = path.join(raw_folder, "devries", "europop.csv");
     let devries_cities = File.loadCSVAsJSON(devries_cities_file, { mode: "vertical" });
     let devries_coords_file = path.join(raw_folder, "devries", "city_coords.csv");
@@ -518,7 +524,15 @@
       
       if (local_key && return_obj[local_key] && !isNaN(local_lat) && !isNaN(local_lng)) {
         let override_key = `${local_key}-${return_obj[local_key].country}`;
-        if (coord_overrides[override_key]) {
+        let ov = cfg_devries[local_key] || cfg_devries[override_key] || cfg_devries[`${return_obj[local_key].country}.${local_key}`];
+        if (ov && ov.resolution === "non_settlement") {
+          return_obj[local_key]._skip_non_settlement = true;
+          continue;
+        }
+        if (ov && ov.country_override) return_obj[local_key].country = ov.country_override;
+        if (ov && Array.isArray(ov.coords) && ov.coords.length >= 2) {
+          return_obj[local_key].coords = ov.coords.slice();
+        } else if (coord_overrides[override_key]) {
           return_obj[local_key].coords = coord_overrides[override_key].slice();
         } else {
           return_obj[local_key].coords = [local_lat, local_lng];
@@ -529,6 +543,7 @@
     all_return_keys = Object.keys(return_obj);
     for (let i = 0; i < all_return_keys.length; i++) {
       let local_city = return_obj[all_return_keys[i]];
+      if (local_city._skip_non_settlement) continue;
       let local_city_name = population_Stadester_uud.regulariseCityName(local_city.key);
       let local_key = (local_city.country) ? `${local_city_name}-${local_city.country}` : local_city_name;
       
@@ -554,21 +569,43 @@
     let raw_folder = arg0_raw_folder ? arg0_raw_folder : `${h1}/population_Stadester/`;
     
     //Declare local instance variables
-    let country_mappings = (global.population_Stadester_config && global.population_Stadester_config.populstat_countries) ?
-      global.population_Stadester_config.populstat_countries : {};
+    let cfg = global.population_Stadester_config;
+    let country_mappings = (cfg && cfg.populstat_countries) ? cfg.populstat_countries : {};
+    let pop_overrides = (cfg && cfg.coord_overrides && cfg.coord_overrides.populstat) ? cfg.coord_overrides.populstat : {};
     let populstat_file = path.join(raw_folder, "populstat_cities", "populstat_cities.json");
     let populstat_obj = JSON.parse(fs.readFileSync(populstat_file, "utf8"));
     let return_obj = {};
+    let sub_fields = ["prov.", "province", "prefecture", "state", "région", "subdivision"];
     
     let all_countries = Object.keys(populstat_obj);
     for (let i = 0; i < all_countries.length; i++) {
-      let local_country = populstat_obj[all_countries[i]];
+      let raw_country_key = all_countries[i];
+      let local_country = populstat_obj[raw_country_key];
       let all_local_cities = Object.keys(local_country);
-      let local_country_name = country_mappings[all_countries[i]] || all_countries[i];
+      let local_country_name = country_mappings[raw_country_key] || raw_country_key;
       
       for (let x = 0; x < all_local_cities.length; x++) {
-        let local_city = local_country[all_local_cities[x]];
-        let local_key = `${all_local_cities[x]}-${local_country_name}`;
+        let raw_city_key = all_local_cities[x];
+        let ov = pop_overrides[`${raw_country_key}.${raw_city_key}`];
+        if (ov && ov.resolution === "non_settlement") continue;
+        
+        let local_city = local_country[raw_city_key];
+        let eff_country = (ov && ov.country_override) ? ov.country_override : local_country_name;
+        let local_key = `${raw_city_key}-${eff_country}`;
+        
+        if (ov && Array.isArray(ov.coords) && ov.coords.length >= 2)
+          local_city.coords = ov.coords.slice();
+        if (ov && ov.subdivision_override !== undefined) {
+          let sub_updated = false;
+          for (let s = 0; s < sub_fields.length; s++) {
+            if (local_city[sub_fields[s]] !== undefined) {
+              local_city[sub_fields[s]] = ov.subdivision_override;
+              sub_updated = true;
+              break;
+            }
+          }
+          if (!sub_updated) local_city.subdivision = ov.subdivision_override;
+        }
         
         if (local_city.population) {
           let normalised_pop = {};
@@ -580,7 +617,7 @@
           }
           local_city.population = normalised_pop;
         }
-        local_city.country = local_country_name;
+        local_city.country = eff_country;
         local_city.key = local_key;
         return_obj[local_key] = local_city;
       }
@@ -603,10 +640,35 @@
     let raw_folder = arg0_raw_folder ? arg0_raw_folder : `${h1}/population_Stadester/`;
     
     //Declare local instance variables
+    let all_wcp_keys;
+    let cfg = global.population_Stadester_config;
     let wcp_file = path.join(raw_folder, "worldcitypop", "chandler_modelski_cities.json");
+    let wcp_obj = JSON.parse(fs.readFileSync(wcp_file, "utf8"));
+    let wcp_overrides = (cfg && cfg.coord_overrides && cfg.coord_overrides.worldcitypop) ? cfg.coord_overrides.worldcitypop : {};
+    
+    //Function body
+    all_wcp_keys = Object.keys(wcp_obj);
+    for (let i = 0; i < all_wcp_keys.length; i++) {
+      let k = all_wcp_keys[i];
+      let entry = wcp_obj[k];
+      if (!entry) continue;
+      let ov = wcp_overrides[k] || (entry.country ? wcp_overrides[`${entry.country}.${k}`] : null);
+      if (!ov) continue;
+      if (ov.resolution === "non_settlement") {
+        delete wcp_obj[k];
+        continue;
+      }
+      if (Array.isArray(ov.coords) && ov.coords.length >= 2) {
+        entry.coords = [Number(ov.coords[0]), Number(ov.coords[1])];
+        entry.latitude = Number(ov.coords[0]);
+        entry.longitude = Number(ov.coords[1]);
+      }
+      if (ov.country_override)
+        entry.country = ov.country_override;
+    }
     
     //Return statement
-    return JSON.parse(fs.readFileSync(wcp_file, "utf8"));
+    return wcp_obj;
   };
   
   /**
@@ -813,6 +875,7 @@
         path.join(h1, "population_Stadester", "ghsl", "GHSL.csv"),
         path.join(h1, "population_GHSL", "GHSL.csv"),
         path.join(h1, "population_GHSL", "GHS_UCDB_MTUC_GLOBE_R2024A.csv"),
+        "F:/Active Projects/Project 1436 - Dataview/data/stadester/GHSL.csv",
         "D:/Project 1436 - Dataview/data/stadester/GHSL.csv"
       ];
       for (let i = 0; i < candidate_paths.length; i++) {
@@ -991,11 +1054,25 @@
     return cities_obj;
   };
   
+  population_Stadester_uud.getViscountRegionalObject = function (arg0_options) {
+    //Convert from parameters
+    let options = (arg0_options) ? arg0_options : {};
+
+    //Guard clauses
+    if (!global.ViscountGazetteerLoader && typeof require !== "undefined") {
+      try { require(path.join(__dirname, "ViscountGazetteerLoader.js")); } catch (e) {}
+    }
+    if (!global.ViscountGazetteerLoader) {
+      console.error("population_Stadester_uud.getViscountRegionalObject: ViscountGazetteerLoader unavailable.");
+      return {};
+    }
+
+    //Return statement
+    return global.ViscountGazetteerLoader.getViscountRegionalObject(options);
+  };
+
   /**
-   * Loads and deduplicates the 13 regional Russian and Kievan Rus settlement gazetteers from
-   * histmap/1.data_raw/population_regional/POLARIS/ according to histmap/1.data_raw/population_regional/POLARIS/polaris_gazetteers.json5.
-   * Specialist regional gazetteers (priority 2) override broad synthesis entries (priority 1) when matched
-   * within exact_coord_match_km (2,5 km) or by name/other_names within haversine_name_match_km (15,0 km).
+   * Backwards-compatible wrapper loading Project POLARIS settlements via ViscountGazetteerLoader.
    * @alias population_Stadester_uud.getPolarisRussiaObject
    * 
    * @param {Object} [arg0_options]
@@ -1005,183 +1082,11 @@
   population_Stadester_uud.getPolarisRussiaObject = function (arg0_options) {
     //Convert from parameters
     let options = (arg0_options) ? arg0_options : {};
-    
-    //Declare local instance variables
-    let exact_coord_match_km = 2.5;
-    let gazetteers = [];
-    let haversine_name_match_km = 15.0;
-    let manifest_obj = {};
-    let return_obj = {};
-    let root_dir = (fs.existsSync("./histmap/1.data_raw")) ?
-      path.resolve(".") : path.resolve(__dirname, "../../..");
-    let config_path = (options.config_path) ?
-      options.config_path :
-      ((typeof h1 !== "undefined" && fs.existsSync(`${h1}population_regional/POLARIS/polaris_gazetteers.json5`)) ?
-        path.resolve(`${h1}population_regional/POLARIS/polaris_gazetteers.json5`) :
-        path.join(root_dir, "histmap/1.data_raw/population_regional/POLARIS/polaris_gazetteers.json5"));
-    
-    //Guard clauses
-    if (!fs.existsSync(config_path)) {
-      console.error(`population_Stadester_uud.getPolarisRussiaObject: Manifest not found at ${config_path}`);
-      return {};
-    }
-    
-    //Function body
-    try {
-      manifest_obj = JSON5.parse(fs.readFileSync(config_path, "utf8"));
-    } catch (e) {
-      console.error(`population_Stadester_uud.getPolarisRussiaObject: Failed to parse ${config_path}:`, e);
-      return {};
-    }
-    
-    let merge_opts = manifest_obj.merge_options || manifest_obj.deduplication;
-    if (merge_opts) {
-      if (Number.isFinite(merge_opts.exact_coord_match_km))
-        exact_coord_match_km = merge_opts.exact_coord_match_km;
-      if (Number.isFinite(merge_opts.haversine_name_match_km))
-        haversine_name_match_km = merge_opts.haversine_name_match_km;
-    }
-    if (Array.isArray(manifest_obj.gazetteers))
-      gazetteers = manifest_obj.gazetteers.slice().sort(function (a, b) {
-        return (b.priority || 0) - (a.priority || 0);
-      });
-    
-    for (let i = 0; i < gazetteers.length; i++) {
-      let gaz_entry = gazetteers[i];
-      let rel_path = gaz_entry.path || gaz_entry.file_path;
-      let gaz_id = gaz_entry.key || gaz_entry.id;
-      let gaz_path = path.join(root_dir, rel_path);
-      if (!fs.existsSync(gaz_path)) {
-        console.error(`population_Stadester_uud.getPolarisRussiaObject: Gazetteer file missing at ${gaz_path}`);
-        continue;
-      }
-      
-      let raw_json;
-      try {
-        raw_json = JSON5.parse(fs.readFileSync(gaz_path, "utf8"));
-      } catch (e) {
-        console.error(`population_Stadester_uud.getPolarisRussiaObject: Failed to parse ${gaz_path}:`, e);
-        continue;
-      }
-      
-      let all_keys = Object.keys(raw_json);
-      for (let x = 0; x < all_keys.length; x++) {
-        let city_key = all_keys[x];
-        let raw_city = raw_json[city_key];
-        if (!raw_city || !Array.isArray(raw_city.coords) || raw_city.coords.length < 2) continue;
-        
-        let lat = parseFloat(raw_city.coords[0]);
-        let lng = parseFloat(raw_city.coords[1]);
-        if (!Number.isFinite(lat) || !Number.isFinite(lng)) continue;
-        if (lat < -90 || lat > 90 || lng < -180 || lng > 180) continue;
-        
-        //Clean population series to finite positive numbers
-        let clean_pop = {};
-        if (raw_city.population && typeof raw_city.population === "object") {
-          let pop_years = Object.keys(raw_city.population);
-          for (let y = 0; y < pop_years.length; y++) {
-            let yr = parseInt(pop_years[y], 10);
-            let val = Number(raw_city.population[pop_years[y]]);
-            if (Number.isFinite(yr) && Number.isFinite(val) && val > 0)
-              clean_pop[yr] = Math.round(val);
-          }
-        }
-        if (Object.keys(clean_pop).length === 0) continue;
-        
-        let candidate_city = {
-          name: raw_city.name || city_key.split("-")[0],
-          country: raw_city.country || gaz_entry.default_country || "Russia",
-          region: raw_city.region || gaz_id,
-          coords: [lat, lng],
-          key: city_key,
-          other_names: Array.isArray(raw_city.other_names) ? raw_city.other_names.slice() : [],
-          original_names: [],
-          population: clean_pop,
-          polaris_priority: gaz_entry.priority || 1,
-          polaris_source: gaz_id
-        };
-        if (gaz_id === "russian_invasion_of_ukraine")
-          candidate_city._war_displacement_years = Object.keys(clean_pop).map(Number).filter(n => !isNaN(n));
-        
-        let candidate_names = population_Stadester_uud.getAllCityNames(candidate_city);
-        candidate_city.original_names = candidate_names.slice();
-        
-        //Check against existing entries in return_obj for duplicate settlement
-        let cand_yr_nums = Object.keys(candidate_city.population).map(Number).filter(n => !isNaN(n)).sort((a, b) => a - b);
-        let cand_min_yr = cand_yr_nums[0];
-        let cand_max_yr = cand_yr_nums[cand_yr_nums.length - 1];
-        let existing_keys = Object.keys(return_obj);
-        let matched_key = undefined;
-        for (let y = 0; y < existing_keys.length; y++) {
-          let ex_city = return_obj[existing_keys[y]];
-          let dist_km = population_Stadester_uud.haversineDistance(ex_city.coords, candidate_city.coords);
-          if (dist_km <= haversine_name_match_km) {
-            let is_name_match = population_Stadester_uud.checkExactNameMatch(ex_city, candidate_city);
-            if (is_name_match) {
-              let ex_yr_nums = Object.keys(ex_city.population).map(Number).filter(n => !isNaN(n)).sort((a, b) => a - b);
-              let ex_min_yr = ex_yr_nums[0];
-              let ex_max_yr = ex_yr_nums[ex_yr_nums.length - 1];
-              let is_temporally_compatible = true;
-              if (ex_min_yr > cand_max_yr || cand_min_yr > ex_max_yr) {
-                let gap_end = (ex_min_yr > cand_max_yr) ? ex_min_yr : cand_min_yr;
-                let gap_start = (ex_min_yr > cand_max_yr) ? cand_max_yr : ex_max_yr;
-                let max_allowed_gap = (typeof population_Stadester_uud.getMaxTemporalProximityGap === "function") ?
-                  population_Stadester_uud.getMaxTemporalProximityGap(gap_start, gap_end) :
-                  ((gap_start < 0 && gap_end <= 200) ? 1000 : 200);
-                if ((gap_end - gap_start) > max_allowed_gap)
-                  is_temporally_compatible = false;
-              }
-              if (is_temporally_compatible) {
-                matched_key = existing_keys[y];
-                break;
-              }
-            }
-          }
-        }
-        
-        if (matched_key) {
-          let ex_city = return_obj[matched_key];
-          //Since gazetteers are sorted descending by priority, ex_city has >= priority than candidate_city.
-          //Backfill only missing benchmark years or merge same-priority observations.
-          let cand_years = Object.keys(candidate_city.population);
-          for (let y = 0; y < cand_years.length; y++) {
-            let yr = cand_years[y];
-            if (gaz_id === "russian_invasion_of_ukraine" || ex_city.population[yr] === undefined) {
-              ex_city.population[yr] = candidate_city.population[yr];
-            } else if (ex_city.polaris_priority === candidate_city.polaris_priority) {
-              ex_city.population[yr] = Math.round(Math.sqrt(ex_city.population[yr]*candidate_city.population[yr]));
-            }
-          }
-          if (Array.isArray(candidate_city._war_displacement_years)) {
-            if (!ex_city._war_displacement_years) ex_city._war_displacement_years = [];
-            for (let y = 0; y < candidate_city._war_displacement_years.length; y++) {
-              let w_yr = candidate_city._war_displacement_years[y];
-              if (!ex_city._war_displacement_years.includes(w_yr))
-                ex_city._war_displacement_years.push(w_yr);
-            }
-          }
-          for (let y = 0; y < candidate_city.other_names.length; y++)
-            if (!ex_city.other_names.includes(candidate_city.other_names[y]))
-              ex_city.other_names.push(candidate_city.other_names[y]);
-          for (let y = 0; y < candidate_city.original_names.length; y++)
-            if (!ex_city.original_names.includes(candidate_city.original_names[y]))
-              ex_city.original_names.push(candidate_city.original_names[y]);
-        } else {
-          let target_key = city_key;
-          let suffix = 2;
-          while (return_obj[target_key]) {
-            target_key = `${city_key}_${suffix}`;
-            suffix++;
-          }
-          candidate_city.key = target_key;
-          return_obj[target_key] = candidate_city;
-        }
-      }
-    }
-    
-    console.log(`- Loaded ${Object.keys(return_obj).length} deduplicated POLARIS Russia & Kievan Rus settlements from ${gazetteers.length} gazetteers.`);
-    
+
     //Return statement
-    return return_obj;
+    return population_Stadester_uud.getViscountRegionalObject({
+      only_project: "POLARIS",
+      ...options
+    });
   };
 }

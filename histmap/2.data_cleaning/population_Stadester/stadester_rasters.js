@@ -3,6 +3,8 @@
   if (!global.population_Stadester_rasters) global.population_Stadester_rasters = {};
   if (!global.population_Stadester_config && typeof require !== "undefined")
     try { require(path.join(__dirname, "config", "stadester_config.js")); } catch (e) {}
+  if (!global.StadesterPartitionIO && typeof require !== "undefined")
+    try { require(path.join(__dirname, "StadesterPartitionIO.js")); } catch (e) {}
   
   /**
    * Converts decimal coordinates [lat, lng] to equirectangular pixel coordinates.
@@ -140,7 +142,8 @@
   };
   
   /**
-   * Loads and caches the Stadestér UUD JSON object (`stadester.json`), refreshing when disk mtime changes.
+   * Loads and caches the Stadestér UUD dataset (partitioned Viscount shards or legacy `stadester.json`),
+   * refreshing when disk mtime changes.
    * @alias population_Stadester_rasters.loadStadesterObject
    *
    * @param {Object} [arg0_options]
@@ -152,12 +155,36 @@
     let options = (arg0_options) ? arg0_options : {};
 
     //Declare local instance variables
+    let default_transform_path = (typeof h3 !== "undefined") ?
+      path.join(`${h3}/population_Stadester.transform/stadester/`, "stadester") :
+      path.resolve(__dirname, "../../3.data_transform/population_Stadester.transform/stadester/stadester");
     let dump_mtime = 0;
-    let dump_path = options.stadester_file_path || path.join(`${h1}/population_Stadester/uud/`, "stadester.json");
+    let dump_path = options.stadester_file_path || default_transform_path;
+    let legacy_path = path.join(`${h1}/population_Stadester/uud/`, "stadester.json");
+    let partition_io = global.StadesterPartitionIO;
     let stadester_obj = options.stadester_obj || null;
 
     //Guard clauses
     if (stadester_obj) return stadester_obj;
+    if (partition_io) {
+      if (!partition_io.hasDataset(dump_path) && partition_io.hasDataset(legacy_path))
+        dump_path = legacy_path;
+      if (!partition_io.hasDataset(dump_path)) return null;
+
+      dump_mtime = partition_io.getDatasetMtimeMs(dump_path);
+      if (global._cached_stadester_obj && global._cached_stadester_path === dump_path && global._cached_stadester_mtime === dump_mtime) {
+        stadester_obj = global._cached_stadester_obj;
+      } else {
+        stadester_obj = partition_io.readPartitionedStadester(dump_path);
+        global._cached_stadester_obj = stadester_obj;
+        global._cached_stadester_path = dump_path;
+        global._cached_stadester_mtime = dump_mtime;
+      }
+
+      //Return statement
+      return stadester_obj;
+    }
+
     if (!fs.existsSync(dump_path)) return null;
 
     //Function body

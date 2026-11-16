@@ -228,18 +228,24 @@
     
     whitelisted_cities: [
       "Adana-Turkey", "Alexandria-Egypt", "Amarapura-Myanmar", "Augsburg-Germany", "Basra-Iraq",
-      "Bussa-Nigeria", "Beijing-China", "Birmingham-United States of America", "Changchun-China",
-      "Changzhou-China", "Chongqing-China", "Cincinnati-United States of America", "Cochin-India",
-      "Curitiba-Brazil", "Datong-China", "Delhi-India", "Esfahan-Iran", "Genova-Italy",
-      "Hefei-China", "Houston-United States of America", "Inwa-Myanmar", "Izmail-Ukraine",
-      "Kashi-China", "Leshan-China", "Louisville-United States of America", "Luanda-Angola",
-      "Luoyang-China", "Madrid-Spain", "Malaga-Spain", "Meerut-India", "Melbourne-Australia",
-      "Mumbai-India", "Nanning-China", "New Orleans-United States of America", "Oran-Algeria",
-      "Osaka-Japan", "Padang-Indonesia", "Pekalongan-Indonesia", "Pittsburgh-United States of America",
-      "Potosi-Bolivia", "Poznan-Poland", "Qiqihar-China", "Samarkand-Uzbekistan", "Skopje-Macedonia",
-      "Sydney-Australia", "Taian-China", "Taiyuan-China", "Tarsus-Turkey", "Tehran-Iran",
-      "Tokyo-Japan", "Tripoli-Libya", "Urumqi-China", "Vishakhapatnam-India", "Wuzhou-China",
-      "Xingtai-China", "Srirangapatna-India", "St. Louis-United States of America", "Visakhapatnam-India"
+      "Bussa-Nigeria", "Beijing-China", "Birmingham-Alabama", "Birmingham-United States",
+      "Birmingham-United States of America", "Changchun-China", "Changzhou-China", "Chongqing-China",
+      "Cincinnati-Ohio", "Cincinnati-United States", "Cincinnati-United States of America",
+      "Cochin-India", "Curitiba-Brazil", "Datong-China", "Delhi-India", "Esfahan-Iran",
+      "Genova-Italy", "Hefei-China", "Houston-Texas", "Houston-United States",
+      "Houston-United States of America", "Inwa-Myanmar", "Izmail-Ukraine", "Kashi-China",
+      "Leshan-China", "Louisville-Kentucky", "Louisville-United States",
+      "Louisville-United States of America", "Luanda-Angola", "Luoyang-China", "Madrid-Spain",
+      "Malaga-Spain", "Meerut-India", "Melbourne-Australia", "Mumbai-India", "Nanning-China",
+      "New Orleans-Louisiana", "New Orleans-United States", "New Orleans-United States of America",
+      "Oran-Algeria", "Osaka-Japan", "Padang-Indonesia", "Pekalongan-Indonesia",
+      "Pittsburgh-Pennsylvania", "Pittsburgh-United States", "Pittsburgh-United States of America",
+      "Potosi-Bolivia", "Poznan-Poland", "Qiqihar-China", "Samarkand-Uzbekistan",
+      "Skopje-Macedonia", "Skopje-North Macedonia", "Sydney-Australia", "Taian-China",
+      "Taiyuan-China", "Tarsus-Turkey", "Tehran-Iran", "Tokyo-Japan", "Tripoli-Libya",
+      "Urumqi-China", "Vishakhapatnam-India", "Wuzhou-China", "Xingtai-China",
+      "Srirangapatna-India", "St. Louis-Missouri", "St. Louis-United States",
+      "St. Louis-United States of America", "Visakhapatnam-India"
     ],
     
     buringh_coord_overrides: {
@@ -260,25 +266,35 @@
   };
   
   if (typeof fs !== "undefined" && typeof path !== "undefined") {
-    let json5_lib = (typeof JSON5 !== "undefined") ? JSON5 : null;
-    let partition_cfg;
-    let partition_cfg_candidates = [
-      "./common/stadester/ghs_pop_partition.json5",
-      (typeof __dirname !== "undefined") ? path.resolve(__dirname, "../../../../common/stadester/ghs_pop_partition.json5") : null
+    let config_files = [
+      { assign_top_level: true, file: "ghs_pop_partition.json5", key: "ghs_pop_partition" },
+      { assign_top_level: false, file: "populstat_countries.json5", key: "populstat_countries" },
+      { assign_top_level: false, file: "coord_overrides.json5", key: "coord_overrides" }
     ];
+    let json5_lib = (typeof JSON5 !== "undefined") ? JSON5 : null;
     if (!json5_lib && typeof require !== "undefined")
       try { json5_lib = require("json5"); } catch (e) {}
     
-    for (let i = 0; i < partition_cfg_candidates.length; i++) {
-      let candidate_path = partition_cfg_candidates[i];
-      if (candidate_path && fs.existsSync(candidate_path) && json5_lib) {
-        try {
-          partition_cfg = json5_lib.parse(fs.readFileSync(candidate_path, "utf8"));
-          global.population_Stadester_config.ghs_pop_partition = partition_cfg;
-          Object.assign(global.population_Stadester_config, partition_cfg);
-          break;
-        } catch (e) {
-          console.warn(`[population_Stadester_config] Failed to parse ${candidate_path}:`, e);
+    if (json5_lib) {
+      for (let i = 0; i < config_files.length; i++) {
+        let cfg_spec = config_files[i];
+        let candidates = [
+          `./common/stadester/${cfg_spec.file}`,
+          (typeof __dirname !== "undefined") ? path.resolve(__dirname, `../../../../common/stadester/${cfg_spec.file}`) : null
+        ];
+        for (let x = 0; x < candidates.length; x++) {
+          let candidate_path = candidates[x];
+          if (candidate_path && fs.existsSync(candidate_path)) {
+            try {
+              let parsed_cfg = json5_lib.parse(fs.readFileSync(candidate_path, "utf8"));
+              global.population_Stadester_config[cfg_spec.key] = parsed_cfg;
+              if (cfg_spec.assign_top_level)
+                Object.assign(global.population_Stadester_config, parsed_cfg);
+              break;
+            } catch (e) {
+              console.warn(`[population_Stadester_config] Failed to parse ${candidate_path}:`, e);
+            }
+          }
         }
       }
     }

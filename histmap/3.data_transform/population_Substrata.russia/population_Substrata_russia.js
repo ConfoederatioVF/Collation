@@ -664,7 +664,7 @@
       //Declare local instance variables
       let stadester_dump_path = path.join(
         context.root_dir,
-        "histmap/1.data_raw/population_Stadester/uud/stadester.json"
+        "histmap/3.data_transform/population_Stadester.transform/stadester/stadester"
       );
       let sub_urban_data = null;
       let urban_path = path.join(

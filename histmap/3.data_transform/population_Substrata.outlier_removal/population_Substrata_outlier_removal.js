@@ -623,22 +623,36 @@ global.population_Substrata_outlier_removal = class {
 		if (!options.exclude.includes("B1")) await population_Substrata_northern_america.processRasters(options);
 		if (!options.exclude.includes("B2")) await this.B_scaleProcessedHYDEToStatistaRegions(options);
 		if (!options.exclude.includes("B3")) {
-			if (typeof population_Substrata_russia === "undefined" && typeof require !== "undefined")
-				try { require(path.join(__dirname, "../population_Substrata.russia/population_Substrata_russia.js")); } catch (e) {}
-			if (typeof population_Substrata_russia !== "undefined")
-				await population_Substrata_russia.processRasters(options);
+			if (typeof ViscountSubstrataPipeline === "undefined" && typeof require !== "undefined")
+				try { require(path.join(__dirname, "../population_Substrata.viscount/ViscountSubstrataPipeline.js")); } catch (e) {}
+			if (typeof ViscountSubstrataPipeline !== "undefined") {
+				await ViscountSubstrataPipeline.processRasters(options);
+			} else {
+				if (typeof population_Substrata_russia === "undefined" && typeof require !== "undefined")
+					try { require(path.join(__dirname, "../population_Substrata.russia/population_Substrata_russia.js")); } catch (e) {}
+				if (typeof population_Substrata_russia !== "undefined")
+					await population_Substrata_russia.processRasters(options);
+			}
 		}
 		//3. Scale processed outliers to global population
 		if (!options.exclude.includes("C")) {
 			await this.C_scaleProcessedHYDEToGlobal(options);
-			if (!options.exclude.includes("B3") && typeof population_Substrata_russia !== "undefined" && typeof population_Substrata_russia.E_preserveDomainInGHSLInterpolatedRasters === "function")
-				population_Substrata_russia.E_preserveDomainInGHSLInterpolatedRasters(options);
+			if (!options.exclude.includes("B3")) {
+				if (typeof ViscountSubstrataPipeline !== "undefined" && typeof ViscountSubstrataPipeline.E_preserveAllViscountDomainsInGlobalRasters === "function")
+					ViscountSubstrataPipeline.E_preserveAllViscountDomainsInGlobalRasters(options);
+				else if (typeof population_Substrata_russia !== "undefined" && typeof population_Substrata_russia.E_preserveDomainInGHSLInterpolatedRasters === "function")
+					population_Substrata_russia.E_preserveDomainInGHSLInterpolatedRasters(options);
+			}
 		}
 		//4. Conversion to int32 for backwards compatibility
 		if (!options.exclude.includes("D")) {
 			await this.D_interpolateToGHSL(options);
-			if (!options.exclude.includes("B3") && typeof population_Substrata_russia !== "undefined" && typeof population_Substrata_russia.E_preserveDomainInGHSLInterpolatedRasters === "function")
-				population_Substrata_russia.E_preserveDomainInGHSLInterpolatedRasters(options);
+			if (!options.exclude.includes("B3")) {
+				if (typeof ViscountSubstrataPipeline !== "undefined" && typeof ViscountSubstrataPipeline.E_preserveAllViscountDomainsInGlobalRasters === "function")
+					ViscountSubstrataPipeline.E_preserveAllViscountDomainsInGlobalRasters(options);
+				else if (typeof population_Substrata_russia !== "undefined" && typeof population_Substrata_russia.E_preserveDomainInGHSLInterpolatedRasters === "function")
+					population_Substrata_russia.E_preserveDomainInGHSLInterpolatedRasters(options);
+			}
 			await this.D_convertToGeoPNG_int32(options);
 		}
 	}

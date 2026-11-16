@@ -116,6 +116,8 @@ safeRequire("histmap/2.data_cleaning/metadata_HYDE/metadata_HYDE.js");
 safeRequire("histmap/2.data_cleaning/landuse_HYDE/landuse_HYDE.js");
 safeRequire("histmap/2.data_cleaning/population_Global/population_Global.js");
 safeRequire("histmap/2.data_cleaning/population_Stadester/config/stadester_config.js");
+safeRequire("histmap/2.data_cleaning/population_Stadester/StadesterPartitionIO.js");
+safeRequire("histmap/2.data_cleaning/population_Stadester/ViscountGazetteerLoader.js");
 safeRequire("histmap/2.data_cleaning/population_Stadester/stadester_density.js");
 safeRequire("histmap/2.data_cleaning/population_Stadester/stadester_rasters.js");
 safeRequire("histmap/2.data_cleaning/population_Stadester/stadester_uud.js");

@@ -8,7 +8,16 @@ config.mapmodes.stadester = {
 		//Declare local instance variables
 		let all_geometries = [];
 		let config_obj = config.mapmodes.stadester;
-		if (!config_obj.stadester_obj) config_obj.stadester_obj = JSON.parse(fs.readFileSync(`${h5}/stadester/stadester_1.1.json`));
+		if (!config_obj.stadester_obj) {
+			if (typeof StadesterPartitionIO !== "undefined" && StadesterPartitionIO.hasDataset(`${h5}/stadester/stadester_1.1`)) {
+				config_obj.stadester_obj = StadesterPartitionIO.readPartitionedStadester(`${h5}/stadester/stadester_1.1`);
+			} else if (fs.existsSync(`${h5}/stadester/stadester_1.1/stadester_manifest.json`)) {
+				let partition_mod = require(path.resolve("./histmap/2.data_cleaning/population_Stadester/StadesterPartitionIO.js"));
+				config_obj.stadester_obj = partition_mod.StadesterPartitionIO.readPartitionedStadester(`${h5}/stadester/stadester_1.1`);
+			} else if (fs.existsSync(`${h5}/stadester/stadester_1.1.json`)) {
+				config_obj.stadester_obj = JSON.parse(fs.readFileSync(`${h5}/stadester/stadester_1.1.json`, "utf8"));
+			}
+		}
 		
 		if (config_obj.last_year === undefined || config_obj.last_year !== main.date.year) {
 			config_obj.last_year = main.date.year;

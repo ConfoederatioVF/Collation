@@ -4,6 +4,8 @@
   if (!global.population_Stadester_uud) global.population_Stadester_uud = {};
   if (!global.population_Stadester_config && typeof require !== "undefined")
     try { require(path.join(__dirname, "config", "stadester_config.js")); } catch (e) {}
+  if (!global.StadesterPartitionIO && typeof require !== "undefined")
+    try { require(path.join(__dirname, "StadesterPartitionIO.js")); } catch (e) {}
   if (!global.population_Stadester_ghsl_helpers && typeof require !== "undefined")
     try { require(path.join(__dirname, "stadester_ghsl_helpers.js")); } catch (e) {}
   if (!global.population_Stadester_ghs_pop && typeof require !== "undefined")
@@ -118,8 +120,14 @@
     
     //2. Load historical Stadestér dataset
     if (!stadester_obj) {
+      let transform_base = (typeof h3 !== "undefined") ?
+        path.join(`${h3}/population_Stadester.transform/stadester/`) :
+        path.resolve(__dirname, "../../3.data_transform/population_Stadester.transform/stadester/");
+      let partition_io = global.StadesterPartitionIO;
       stadester_candidates = [
         options.stadester_file,
+        path.join(transform_base, "stadester"),
+        path.join(transform_base, "stadester_areas"),
         path.join(raw_folder, "uud", "stadester.json"),
         path.join(raw_folder, "uud", "stadester_areas.json"),
         "E:/Active Projects/Project 2136 - Stadestér/input/uud/stadester.json",
@@ -127,18 +135,28 @@
       ];
       
       for (let i = 0; i < stadester_candidates.length; i++) {
-        if (stadester_candidates[i] && fs.existsSync(stadester_candidates[i])) {
-          try {
-            let candidate_data = JSON.parse(fs.readFileSync(stadester_candidates[i], "utf8"));
+        let candidate_path = stadester_candidates[i];
+        if (!candidate_path) continue;
+        try {
+          if (partition_io && partition_io.hasDataset(candidate_path)) {
+            let candidate_data = partition_io.readPartitionedStadester(candidate_path);
             let candidate_count = Object.keys(candidate_data).length;
             if (candidate_count > 0) {
               stadester_obj = candidate_data;
-              console.log(`- Loaded historical Stadestér cities from ${stadester_candidates[i]} (${candidate_count} cities).`);
+              console.log(`- Loaded historical Stadestér cities from ${candidate_path} (${candidate_count} cities).`);
               break;
             }
-          } catch (e) {
-            console.warn(`- Failed to read Stadestér cities from ${stadester_candidates[i]}:`, e);
+          } else if (fs.existsSync(candidate_path) && fs.statSync(candidate_path).isFile()) {
+            let candidate_data = JSON.parse(fs.readFileSync(candidate_path, "utf8"));
+            let candidate_count = Object.keys(candidate_data).length;
+            if (candidate_count > 0) {
+              stadester_obj = candidate_data;
+              console.log(`- Loaded historical Stadestér cities from ${candidate_path} (${candidate_count} cities).`);
+              break;
+            }
           }
+        } catch (e) {
+          console.warn(`- Failed to read Stadestér cities from ${candidate_path}:`, e);
         }
       }
     }

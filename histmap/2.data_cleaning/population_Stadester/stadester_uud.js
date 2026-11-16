@@ -418,7 +418,7 @@
       chandler_modelski: { data: population_Stadester_uud.getWorldcitypopObject(raw_folder), is_metro: true, precision: 0.1, semantic_precision: 1 },
       devries: { data: population_Stadester_uud.getDeVriesCitiesObject(raw_folder), precision: 0.1, semantic_precision: 1 },
       buringh: { data: population_Stadester_uud.getBuringhObject(raw_folder), precision: 0.05, semantic_precision: 1 },
-      polaris_russia: { data: population_Stadester_uud.getPolarisRussiaObject(options), is_polaris: true, precision: 0.05, semantic_precision: 0.25 }
+      viscount_regional: { data: population_Stadester_uud.getViscountRegionalObject(options), is_polaris: true, precision: 0.05, semantic_precision: 0.25 }
     };
     
     function getGridCells(coords, radius) {
@@ -522,7 +522,15 @@
             if (local_uud_city && local_uud_city.coords && !isBlockedMerge(local_uud_city, local_city)) {
               let local_distance = population_Stadester_uud.getCoordsDistance(local_uud_city.coords, local_city.coords);
               let is_exact_name = population_Stadester_uud.checkExactNameMatch(local_uud_city, local_city);
-              let is_same_country = Boolean(local_uud_city.country && local_city.country && local_uud_city.country === local_city.country);
+              let is_same_country = Boolean(
+                local_uud_city.country &&
+                local_city.country &&
+                (
+                  local_uud_city.country === local_city.country ||
+                  (typeof population_Stadester_ghsl !== "undefined" && typeof population_Stadester_ghsl.areCompatibleTwinCountries === "function" &&
+                    population_Stadester_ghsl.areCompatibleTwinCountries(local_uud_city.country, local_city.country))
+                )
+              );
               let pop_check = population_Stadester_uud.isPopulationRatioValid(local_uud_city.population, local_city.population);
               let is_match = false;
               
@@ -646,6 +654,11 @@
             }
           }
           population_Stadester_uud.mergeCityEntries(actual_city, local_city, local_db.is_metro);
+          if (local_city.viscount_project && (!actual_city.viscount_z_priority || local_city.viscount_z_priority > actual_city.viscount_z_priority)) {
+            actual_city.viscount_order = local_city.viscount_order;
+            actual_city.viscount_project = local_city.viscount_project;
+            actual_city.viscount_z_priority = local_city.viscount_z_priority;
+          }
           actual_city.type = all_db_keys[i];
           return_obj[actual_city.key] = actual_city;
         } else if (has_valid_coords) {

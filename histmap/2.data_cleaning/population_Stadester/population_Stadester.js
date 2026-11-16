@@ -7,6 +7,10 @@
     try {
       if (!global.population_Stadester_config && fs.existsSync(path.join(cur_dir, "config", "stadester_config.js")))
         require(path.join(cur_dir, "config", "stadester_config.js"));
+      if (!global.StadesterPartitionIO && fs.existsSync(path.join(cur_dir, "StadesterPartitionIO.js")))
+        require(path.join(cur_dir, "StadesterPartitionIO.js"));
+      if (!global.ViscountGazetteerLoader && fs.existsSync(path.join(cur_dir, "ViscountGazetteerLoader.js")))
+        require(path.join(cur_dir, "ViscountGazetteerLoader.js"));
       if (!global.population_Stadester_uud && fs.existsSync(path.join(cur_dir, "stadester_uud.js")))
         require(path.join(cur_dir, "stadester_uud.js"));
       if (!global.population_Stadester_ghsl_helpers && fs.existsSync(path.join(cur_dir, "stadester_ghsl_helpers.js")))
@@ -45,15 +49,16 @@
     
     static input_substrata_folder = `${h3}/population_Substrata.outlier_removal/rasters_4.interpolated_to_GHSL/`;
     static input_substrata_fallback_folder = `${h3}/population_Substrata.outlier_removal/rasters_3.scaled_to_global/`;
+    static transform_stadester_folder = `${(typeof h3 !== "undefined") ? h3 : "./histmap/3.data_transform"}/population_Stadester.transform/stadester/`;
     
-    static file_uud_cities = `${this.raw_folder}uud/processed_uud_cities.json`;
-    static file_stadester_cities = `${this.raw_folder}uud/stadester_cities.json`;
-    static file_flattened_stadester = `${this.raw_folder}uud/flattened_stadester_cities.json`;
-    static file_processed_stadester = `${this.raw_folder}uud/processed_stadester_cities.json`;
-    static file_stadester_areas = `${this.raw_folder}uud/stadester_areas.json`;
-    static file_stadester_final = `${this.raw_folder}uud/stadester.json`;
-    static file_stadester_ghsl = `${this.raw_folder}uud/stadester_ghsl.json`;
-    static file_stadester_vis = `${(typeof h5 !== "undefined") ? h5 : "./histmap/5.data_visualisation/"}stadester/stadester_1.1.json`;
+    static file_uud_cities = `${this.bf}uud/processed_uud_cities.json`;
+    static file_stadester_cities = `${this.bf}uud/stadester_cities.json`;
+    static file_flattened_stadester = `${this.bf}uud/flattened_stadester_cities.json`;
+    static file_processed_stadester = `${this.bf}uud/processed_stadester_cities.json`;
+    static file_stadester_areas = `${this.transform_stadester_folder}stadester_areas`;
+    static file_stadester_final = `${this.transform_stadester_folder}stadester`;
+    static file_stadester_ghsl = `${this.transform_stadester_folder}stadester_ghsl`;
+    static file_stadester_vis = `${(typeof h5 !== "undefined") ? h5 : "./histmap/5.data_visualisation/"}stadester/stadester_1.1`;
     
     static antiquity_years = Array.from({ length: 101 }, (_, i) => -10000 + i * 100);
     static urban_antiquity_years = Array.from({ length: 31 }, (_, i) => -3000 + i * 100);
@@ -169,12 +174,8 @@
       console.log(`- Saved processed Stadestér dataset to ${this.file_processed_stadester}.`);
       
       if (!options.do_not_sync_vis && this.file_stadester_vis && fs.existsSync(path.dirname(path.resolve(this.file_stadester_vis)))) {
-        if (typeof population_Stadester_ghs_pop !== "undefined" && typeof population_Stadester_ghs_pop.writeJSONSafe === "function") {
-          population_Stadester_ghs_pop.writeJSONSafe(this.file_stadester_vis, stadester_obj);
-        } else {
-          fs.writeFileSync(this.file_stadester_vis, JSON.stringify(stadester_obj, null, 2));
-        }
-        console.log(`- Synchronised processed Stadestér visualisation dataset to ${this.file_stadester_vis}.`);
+        StadesterPartitionIO.writePartitionedStadester(this.file_stadester_vis, stadester_obj, { version: "1.1" });
+        console.log(`- Synchronised processed Stadestér visualisation shards to ${this.file_stadester_vis}.`);
       }
       
       //Return statement
@@ -202,12 +203,8 @@
       });
       if (typeof population_Stadester_ghs_pop !== "undefined" && typeof population_Stadester_ghs_pop.cleanTransientMetadata === "function")
         population_Stadester_ghs_pop.cleanTransientMetadata(stadester_obj);
-      if (typeof population_Stadester_ghs_pop !== "undefined" && typeof population_Stadester_ghs_pop.writeJSONSafe === "function") {
-        population_Stadester_ghs_pop.writeJSONSafe(this.file_stadester_areas, stadester_obj);
-      } else {
-        fs.writeFileSync(this.file_stadester_areas, JSON.stringify(stadester_obj, null, 2));
-      }
-      console.log(`- Saved Stadestér areas to ${this.file_stadester_areas}.`);
+      StadesterPartitionIO.writePartitionedStadester(this.file_stadester_areas, stadester_obj, { version: "1.1" });
+      console.log(`- Saved partitioned Stadestér areas to ${this.file_stadester_areas}.`);
       
       //Return statement
       return stadester_obj;
@@ -225,50 +222,221 @@
       
       //Declare local instance variables
       let stadester_obj = options.stadester_obj;
-      if (!stadester_obj && fs.existsSync(this.file_stadester_areas))
-        stadester_obj = JSON.parse(fs.readFileSync(this.file_stadester_areas, "utf8"));
+      if (!stadester_obj && StadesterPartitionIO.hasDataset(this.file_stadester_areas))
+        stadester_obj = StadesterPartitionIO.readPartitionedStadester(this.file_stadester_areas);
       
       stadester_obj = population_Stadester_density.cacheRadialBuffers(stadester_obj);
       if (typeof population_Stadester_ghs_pop !== "undefined" && typeof population_Stadester_ghs_pop.cleanTransientMetadata === "function")
         population_Stadester_ghs_pop.cleanTransientMetadata(stadester_obj);
-      if (typeof population_Stadester_ghs_pop !== "undefined" && typeof population_Stadester_ghs_pop.writeJSONSafe === "function") {
-        population_Stadester_ghs_pop.writeJSONSafe(this.file_stadester_final, stadester_obj);
-      } else {
-        fs.writeFileSync(this.file_stadester_final, JSON.stringify(stadester_obj, null, 2));
-      }
-      console.log(`- Saved final radially-buffered Stadestér dataset to ${this.file_stadester_final}.`);
+      StadesterPartitionIO.writePartitionedStadester(this.file_stadester_final, stadester_obj, { version: "1.1" });
+      console.log(`- Saved final partitioned Stadestér dataset to ${this.file_stadester_final}.`);
       
       if (this.file_stadester_vis) {
         let vis_dir = path.dirname(path.resolve(this.file_stadester_vis));
         if (!fs.existsSync(vis_dir)) fs.mkdirSync(vis_dir, { recursive: true });
-        if (typeof population_Stadester_ghs_pop !== "undefined" && typeof population_Stadester_ghs_pop.writeJSONSafe === "function") {
-          population_Stadester_ghs_pop.writeJSONSafe(this.file_stadester_vis, stadester_obj);
-        } else {
-          fs.writeFileSync(this.file_stadester_vis, JSON.stringify(stadester_obj, null, 2));
-        }
-        console.log(`- Synchronised final Stadestér dataset to ${this.file_stadester_vis}.`);
+        StadesterPartitionIO.writePartitionedStadester(this.file_stadester_vis, stadester_obj, { version: "1.1" });
+        console.log(`- Synchronised final partitioned Stadestér dataset to ${this.file_stadester_vis}.`);
       }
       
       let dataview_targets = [
-        "F:/Active Projects/Project 1436 - Dataview/data/stadester/stadester_1.1.json",
-        "D:/Project 1436 - Dataview/data/stadester/stadester_1.1.json"
+        "F:/Active Projects/Project 1436 - Dataview/data/stadester/stadester_1.1",
+        "D:/Project 1436 - Dataview/data/stadester/stadester_1.1"
       ];
       for (let i = 0; i < dataview_targets.length; i++) {
         let dv_target = dataview_targets[i];
-        if (fs.existsSync(path.dirname(dv_target))) {
-          if (typeof population_Stadester_ghs_pop !== "undefined" && typeof population_Stadester_ghs_pop.writeJSONSafe === "function") {
-            population_Stadester_ghs_pop.writeJSONSafe(dv_target, stadester_obj);
-          } else {
-            fs.writeFileSync(dv_target, JSON.stringify(stadester_obj, null, 2));
-          }
-          let dv_cache = path.join(path.dirname(dv_target), "cache", "stadester_1.1_lite.json");
+        let dv_dir = path.dirname(dv_target);
+        if (fs.existsSync(dv_dir)) {
+          StadesterPartitionIO.writePartitionedStadester(dv_target, stadester_obj, { version: "1.1" });
+          let dv_cache = path.join(dv_dir, "cache", "stadester_1.1_lite.json");
+          let dv_city_cache = path.join(dv_dir, "cache", "stadester_city_cache.json");
           if (fs.existsSync(dv_cache)) try { fs.unlinkSync(dv_cache); } catch (e) {}
-          console.log(`- Synchronised final Stadestér dataset to Dataview (${dv_target}).`);
+          if (fs.existsSync(dv_city_cache)) try { fs.unlinkSync(dv_city_cache); } catch (e) {}
+          this.syncDataviewCityCoords(dv_dir, stadester_obj);
+          console.log(`- Synchronised final partitioned Stadestér dataset to Dataview (${dv_target}).`);
         }
       }
       
       //Return statement
       return stadester_obj;
+    }
+
+    /**
+     * Synchronises updated coordinates ([lng, lat]), country, and region onto Dataview's `all_cities_coords.json`.
+     * @alias population_Stadester.syncDataviewCityCoords
+     *
+     * @param {string} arg0_dv_dir
+     * @param {Object} arg1_stadester_obj
+     *
+     * @returns {number} Number of updated records
+     */
+    static syncDataviewCityCoords (arg0_dv_dir, arg1_stadester_obj) {
+      //Convert from parameters
+      let dv_dir = arg0_dv_dir;
+      let stadester_obj = arg1_stadester_obj;
+
+      //Declare local instance variables
+      let all_coords;
+      let all_keys;
+      let cfg = global.population_Stadester_config;
+      let colour_to_region = {};
+      let coords_path = path.join(dv_dir, "all_cities_coords.json");
+      let country_regions = {
+        "angola": "sub_saharan_africa",
+        "australia": "oceania",
+        "chad": "sub_saharan_africa",
+        "cook islands": "oceania",
+        "eswatini": "sub_saharan_africa",
+        "fiji": "oceania",
+        "ghana": "sub_saharan_africa",
+        "guadeloupe": "latin_america",
+        "japan": "eastasia",
+        "kiribati": "oceania",
+        "marshall islands": "oceania",
+        "micronesia": "oceania",
+        "nauru": "oceania",
+        "new zealand": "oceania",
+        "niue": "oceania",
+        "norfolk island": "oceania",
+        "north korea": "eastasia",
+        "north macedonia": "europe",
+        "palau": "oceania",
+        "poland": "europe",
+        "saint barthelemy": "latin_america",
+        "saint martin": "latin_america",
+        "samoa": "oceania",
+        "slovenia": "europe",
+        "solomon islands": "oceania",
+        "south korea": "eastasia",
+        "spain": "europe",
+        "sudan": "sub_saharan_africa",
+        "taiwan": "eastasia",
+        "the bahamas": "latin_america",
+        "the gambia": "sub_saharan_africa",
+        "tokelau": "oceania",
+        "tonga": "oceania",
+        "tuvalu": "oceania",
+        "united kingdom": "europe",
+        "vanuatu": "oceania"
+      };
+      let pngjs_lib = (typeof pngjs !== "undefined") ? pngjs : (global.pngjs || require("pngjs"));
+      let stad_lookup = new Map();
+      let updated_count = 0;
+      let voronoi_path = path.join(this.raw_folder, "voronoi_subdivisions.png");
+      let voronoi_png = null;
+
+      //Guard clauses
+      if (!stadester_obj || !fs.existsSync(coords_path)) return 0;
+
+      //Function body
+      all_coords = JSON.parse(fs.readFileSync(coords_path, "utf8"));
+      all_keys = Object.keys(stadester_obj);
+
+      for (let i = 0; i < all_keys.length; i++) {
+        let k = all_keys[i];
+        let c = stadester_obj[k];
+        if (!c || !Array.isArray(c.coords) || c.coords.length < 2) continue;
+        stad_lookup.set(k, c);
+        if (c.name && c.country) {
+          let alt_k = `${c.name}-${c.country}`;
+          if (!stad_lookup.has(alt_k)) stad_lookup.set(alt_k, c);
+        }
+      }
+
+      //Register old-country -> new-city fallback aliases from coord_overrides
+      if (cfg && cfg.coord_overrides) {
+        let pop_ov = cfg.coord_overrides.populstat || {};
+        let pop_countries = cfg.populstat_countries || {};
+        for (let k of Object.keys(pop_ov)) {
+          let ov = pop_ov[k];
+          if (ov && ov.country_override) {
+            let old_country = pop_countries[ov.raw_country_key] || ov.raw_country_key;
+            let target = stadester_obj[`${ov.raw_city_key}-${ov.country_override}`];
+            if (target) stad_lookup.set(`${ov.raw_city_key}-${old_country}`, target);
+          }
+        }
+        let wcp_ov = cfg.coord_overrides.worldcitypop || {};
+        for (let k of Object.keys(wcp_ov)) {
+          let ov = wcp_ov[k];
+          let target = stadester_obj[k];
+          if (target && ov && ov.country_override && target.name)
+            stad_lookup.set(`${target.name}-${ov.country_override}`, target);
+        }
+      }
+
+      if (cfg && cfg.regions && fs.existsSync(voronoi_path)) {
+        try {
+          voronoi_png = pngjs_lib.PNG.sync.read(fs.readFileSync(voronoi_path));
+          let reg_keys = Object.keys(cfg.regions);
+          for (let i = 0; i < reg_keys.length; i++) {
+            let r_cfg = cfg.regions[reg_keys[i]];
+            if (r_cfg && r_cfg.colour)
+              colour_to_region[r_cfg.colour.join(",")] = reg_keys[i];
+          }
+        } catch (e) {}
+      }
+
+      for (let i = 0; i < all_coords.length; i++) {
+        let item = all_coords[i];
+        if (!item || !item.key) continue;
+
+        let match = null;
+        let strip_k = String(item.key).replace(/^stadester-/, "");
+        if (stad_lookup.has(strip_k)) {
+          match = stad_lookup.get(strip_k);
+        } else if (Array.isArray(item.dataset_keys)) {
+          for (let x = 0; x < item.dataset_keys.length; x++) {
+            let dk = String(item.dataset_keys[x]).replace(/^stadester-/, "");
+            if (stad_lookup.has(dk)) {
+              match = stad_lookup.get(dk);
+              break;
+            }
+          }
+        }
+        if (!match || !Array.isArray(match.coords) || match.coords.length < 2) continue;
+
+        let lat = Number(match.coords[0]);
+        let lng = Number(match.coords[1]);
+        if (!Number.isFinite(lat) || !Number.isFinite(lng)) continue;
+
+        let new_lng = Number(lng.toFixed(5));
+        let new_lat = Number(lat.toFixed(5));
+        let old_lng = Array.isArray(item.coords) ? Number(item.coords[0]) : NaN;
+        let old_lat = Array.isArray(item.coords) ? Number(item.coords[1]) : NaN;
+        let coords_changed = !Number.isFinite(old_lng) || !Number.isFinite(old_lat) ||
+          Math.abs(old_lng - new_lng) > 1e-5 || Math.abs(old_lat - new_lat) > 1e-5;
+        let item_changed = false;
+
+        if (coords_changed) {
+          item.coords = [new_lng, new_lat];
+          item_changed = true;
+        }
+        if (match.country && item.country !== match.country && !String(item.key).startsWith("ghsl-")) {
+          item.country = match.country;
+          item_changed = true;
+        }
+
+        let norm_c = String(item.country || match.country || "").toLowerCase().trim();
+        let expected_reg = country_regions[norm_c];
+        if (!expected_reg && coords_changed && voronoi_png) {
+          let vx = Math.min(voronoi_png.width - 1, Math.max(0, Math.floor(((lng + 180)/360)*voronoi_png.width)));
+          let vy = Math.min(voronoi_png.height - 1, Math.max(0, Math.floor(((90 - lat)/180)*voronoi_png.height)));
+          let v_idx = (vy*voronoi_png.width + vx)*4;
+          expected_reg = colour_to_region[`${voronoi_png.data[v_idx]},${voronoi_png.data[v_idx + 1]},${voronoi_png.data[v_idx + 2]}`];
+        }
+        if (expected_reg && item.region !== expected_reg) {
+          item.region = expected_reg;
+          item_changed = true;
+        }
+        if (item_changed) updated_count++;
+      }
+
+      if (updated_count > 0) {
+        fs.writeFileSync(coords_path, JSON.stringify(all_coords), "utf8");
+        console.log(`- Synced ${updated_count} updated records in ${coords_path}.`);
+      }
+
+      //Return statement
+      return updated_count;
     }
     
     /**
@@ -309,9 +477,9 @@
       this.ensureDirectories();
       
       //Only preload stadester_obj on main thread when running without worker threads so options is never polluted
-      if (local_options.use_workers === false && !local_options.stadester_obj && fs.existsSync(this.file_stadester_final)) {
+      if (local_options.use_workers === false && !local_options.stadester_obj && StadesterPartitionIO.hasDataset(this.file_stadester_final)) {
         console.log(`- Preloading Stadestér master dataset (${this.file_stadester_final})...`);
-        local_options.stadester_obj = JSON.parse(fs.readFileSync(this.file_stadester_final, "utf8"));
+        local_options.stadester_obj = StadesterPartitionIO.readPartitionedStadester(this.file_stadester_final);
       }
       
       //Return statement
@@ -433,13 +601,13 @@
       let target_file = options.file || this.file_stadester_final;
       
       //Function body
-      if (!cities_obj && fs.existsSync(target_file))
-        cities_obj = JSON.parse(fs.readFileSync(target_file, "utf8"));
+      if (!cities_obj && StadesterPartitionIO.hasDataset(target_file))
+        cities_obj = StadesterPartitionIO.readPartitionedStadester(target_file);
       
       if (cities_obj) {
         population_Stadester_uud.repairGHSLCityNames(cities_obj, options);
         if (options.save !== false && target_file)
-          fs.writeFileSync(target_file, JSON.stringify(cities_obj, null, 2));
+          StadesterPartitionIO.writePartitionedStadester(target_file, cities_obj, { version: "1.1" });
       }
       
       //Return statement
@@ -468,21 +636,19 @@
       });
       
       if (options.save !== false) {
-        parent_dir = path.dirname(path.resolve(this.file_stadester_ghsl));
-        if (!fs.existsSync(parent_dir)) fs.mkdirSync(parent_dir, { recursive: true });
-        fs.writeFileSync(this.file_stadester_ghsl, JSON.stringify(result, null, 2));
-        console.log(`- Saved repaired Stadestér GHSL dataset to ${this.file_stadester_ghsl}.`);
+        StadesterPartitionIO.writePartitionedStadester(this.file_stadester_ghsl, result, { version: "1.1" });
+        console.log(`- Saved repaired partitioned Stadestér GHSL dataset to ${this.file_stadester_ghsl}.`);
         
         let p2136_target = "E:/Active Projects/Project 2136 - Stadestér/output/stadester_ghsl.json";
         if (fs.existsSync(path.dirname(p2136_target))) {
-          fs.writeFileSync(p2136_target, JSON.stringify(result, null, 2));
+          population_Stadester_ghs_pop.writeJSONSafe(p2136_target, result);
           console.log(`- Synchronised repaired Stadestér GHSL dataset to Project 2136 (${p2136_target}).`);
         }
         
-        let dataview_target = "D:/Project 1436 - Dataview/data/stadester/stadester_ghsl.json";
+        let dataview_target = "F:/Active Projects/Project 1436 - Dataview/data/stadester/stadester_ghsl";
         if (fs.existsSync(path.dirname(dataview_target))) {
-          fs.writeFileSync(dataview_target, JSON.stringify(result, null, 2));
-          console.log(`- Synchronised repaired Stadestér GHSL dataset to Dataview (${dataview_target}).`);
+          StadesterPartitionIO.writePartitionedStadester(dataview_target, result, { version: "1.1" });
+          console.log(`- Synchronised repaired partitioned Stadestér GHSL dataset to Dataview (${dataview_target}).`);
         }
       }
       
@@ -522,7 +688,7 @@
       //Initialise options
       if (!options.exclude) {
         options.exclude = [];
-        if (!options.overwrite && (fs.existsSync(this.file_processed_stadester) || fs.existsSync(this.file_stadester_areas)))
+        if (!options.overwrite && (fs.existsSync(this.file_processed_stadester) || StadesterPartitionIO.hasDataset(this.file_stadester_areas)))
           options.exclude = ["A", "B", "C", "D", "E"];
       }
       

@@ -20,32 +20,71 @@
     //Declare local instance variables
     let c_a;
     let c_b;
-    let legacy_russia;
-    let legacy_uk;
+    let jurisdiction_groups;
+    let normaliseJurisdiction = function (arg0_val) {
+      return String(arg0_val || "")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .trim()
+        .toLowerCase();
+    };
+    let us_states;
     
     //Function body
-    c_a = String(country_a || "").trim().toLowerCase();
-    c_b = String(country_b || "").trim().toLowerCase();
+    c_a = normaliseJurisdiction(country_a);
+    c_b = normaliseJurisdiction(country_b);
     
     //Guard clauses
     if (!c_a || !c_b) return false;
     if (c_a === c_b) return true;
     
-    if ((c_a === "usa" && c_b.startsWith("usas-")) || (c_b === "usa" && c_a.startsWith("usas-"))) {
+    us_states = [
+      "alabama", "alaska", "arizona", "arkansas", "california", "colorado", "connecticut",
+      "delaware", "district of columbia", "florida", "georgia", "hawaii", "idaho", "illinois",
+      "indiana", "iowa", "kansas", "kentucky", "louisiana", "maine", "maryland", "massachusetts",
+      "michigan", "minnesota", "mississippi", "missouri", "montana", "nebraska", "nevada",
+      "new hampshire", "new jersey", "new mexico", "new york", "north carolina", "north dakota",
+      "ohio", "oklahoma", "oregon", "pennsylvania", "rhode island", "south carolina",
+      "south dakota", "tennessee", "texas", "united states", "united states of america",
+      "uniteds", "usa", "utah", "vermont", "virginia", "washington", "west virginia",
+      "wisconsin", "wyoming"
+    ];
+    let isUS = function (arg0_c) {
+      return arg0_c.startsWith("usas-") || us_states.includes(arg0_c);
+    };
+    if (isUS(c_a) && isUS(c_b)) {
       //Return statement
       return true;
     }
     
-    legacy_uk = ["uk", "unkingd", "united kingdom", "great britain"];
-    if (legacy_uk.includes(c_a) && legacy_uk.includes(c_b)) {
-      //Return statement
-      return true;
-    }
-    
-    legacy_russia = ["russia", "russia_polaris_russia", "ussr"];
-    if (legacy_russia.includes(c_a) && legacy_russia.includes(c_b)) {
-      //Return statement
-      return true;
+    jurisdiction_groups = [
+      ["bahamas", "the bahamas"],
+      ["bosnia", "bosnia herzegovina", "bosnia and herzegovina", "bosniah"],
+      ["central african republic", "central african rep.", "centraf", "car"],
+      ["czech republic", "czechia", "czech rep.", "czechrp"],
+      ["dominican republic", "dominican rep.", "dominrp", "domirep"],
+      ["gambia", "the gambia"],
+      ["italy", "northern italy", "central italy", "southern italy"],
+      ["ivory coast", "cote d'ivoire", "ivoryco"],
+      ["korea", "south korea", "north korea", "skorea", "nkorea"],
+      ["luxembourg", "luxemburg", "luxembg", "luxembu"],
+      ["macedonia", "north macedonia", "macedon"],
+      ["netherlands", "the netherlands", "netherl"],
+      ["romania", "romenia"],
+      ["russia", "russia_polaris_russia", "ussr"],
+      ["saint barthelemy", "saint-barthelemy"],
+      ["saint martin", "saint-martin"],
+      ["swaziland", "eswatini", "eswatin"],
+      ["trinidad & tobago", "trinidad and tobago", "trinidt", "trinidad"],
+      ["uae", "united arab emirates", "unarabe"],
+      ["uk", "unkingd", "unitedk", "united kingdom", "great britain", "england and wales", "scotland"]
+    ];
+    for (let i = 0; i < jurisdiction_groups.length; i++) {
+      let grp = jurisdiction_groups[i];
+      if (grp.includes(c_a) && grp.includes(c_b)) {
+        //Return statement
+        return true;
+      }
     }
     
     //Return statement
@@ -513,6 +552,9 @@
     return name
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[Đđ]/g, "d")
+      .replace(/[Łł]/g, "l")
+      .replace(/[Øø]/g, "o")
       .replace(/\([^)]*\)/g, "")
       .replace(/\b(greater|agglomeration|zona urbana|cdp|city|grad|subtotal)\b/gi, "")
       .replace(/['’`´]/g, "")
