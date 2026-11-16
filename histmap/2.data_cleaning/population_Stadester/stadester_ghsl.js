@@ -4,43 +4,10 @@
   if (!global.population_Stadester_uud) global.population_Stadester_uud = {};
   if (!global.population_Stadester_config && typeof require !== "undefined")
     try { require(path.join(__dirname, "config", "stadester_config.js")); } catch (e) {}
-  
-  /**
-   * Returns all normalised name tokens for a Stadestér city object for GHSL cluster matching.
-   * @alias population_Stadester_ghsl.getNormalisedCityNames
-   * 
-   * @param {Object} arg0_city_obj
-   * 
-   * @returns {Array<string>}
-   */
-  population_Stadester_ghsl.getNormalisedCityNames = function (arg0_city_obj) {
-    //Convert from parameters
-    let city_obj = arg0_city_obj;
-    
-    //Declare local instance variables
-    let all_raw_names;
-    let name_set = new Set();
-    let norm_name;
-    
-    //Guard clauses
-    if (!city_obj) return [];
-    
-    //Function body
-    all_raw_names = (population_Stadester_uud && population_Stadester_uud.getAllCityNames) ?
-      population_Stadester_uud.getAllCityNames(city_obj) : [];
-    
-    for (let i = 0; i < all_raw_names.length; i++) {
-      norm_name = population_Stadester_ghsl.normaliseGHSLName(all_raw_names[i]);
-      if (norm_name) name_set.add(norm_name);
-    }
-    if (city_obj.name) {
-      norm_name = population_Stadester_ghsl.normaliseGHSLName(city_obj.name);
-      if (norm_name) name_set.add(norm_name);
-    }
-    
-    //Return statement
-    return Array.from(name_set);
-  };
+  if (!global.population_Stadester_ghsl_helpers && typeof require !== "undefined")
+    try { require(path.join(__dirname, "stadester_ghsl_helpers.js")); } catch (e) {}
+  if (!global.population_Stadester_ghs_pop && typeof require !== "undefined")
+    try { require(path.join(__dirname, "stadester_ghs_pop.js")); } catch (e) {}
   
   /**
    * Generates a unified Stadestér GHSL dataset combining historical Stadestér entries and modern GHSL clusters.
@@ -111,6 +78,38 @@
         let key_str = all_ghsl_cities[i].startsWith("ghsl-") ?
           all_ghsl_cities[i] : `ghsl-${all_ghsl_cities[i]}`;
         let local_city = JSON.parse(JSON.stringify(ghsl_obj[all_ghsl_cities[i]]));
+        let pop_interp = (local_city.population) ?
+          population_Stadester_ghsl.interpolateGHSLSeries(local_city.population) : null;
+        let area_interp = (local_city.area) ?
+          population_Stadester_ghsl.interpolateGHSLSeries(local_city.area) : null;
+        
+        if (pop_interp && pop_interp.first_active_ep !== null) {
+          for (let yr = cutoff_year; yr <= 2025; yr++) {
+            if (pop_interp.values[yr] !== undefined) {
+              local_city.population[yr] = Math.round(pop_interp.values[yr]);
+            } else if (yr < pop_interp.first_active_ep) {
+              local_city.population[yr] = 0;
+            }
+          }
+        }
+        if (area_interp && area_interp.first_active_ep !== null) {
+          for (let yr = cutoff_year; yr <= 2025; yr++) {
+            if (area_interp.values[yr] !== undefined) {
+              local_city.area[yr] = area_interp.values[yr];
+            } else if (yr < area_interp.first_active_ep) {
+              local_city.area[yr] = 0;
+            }
+          }
+        }
+        if (local_city.population && local_city.area) {
+          if (!local_city.density) local_city.density = {};
+          for (let yr = cutoff_year; yr <= 2025; yr++) {
+            let p_val = Number(local_city.population[yr]) || 0;
+            let a_val = Number(local_city.area[yr]) || 0;
+            local_city.density[yr] = (p_val > 0 && a_val > 0) ? (p_val/a_val) : 0;
+          }
+        }
+        
         local_city.key = key_str;
         return_obj[key_str] = local_city;
       }
@@ -292,7 +291,8 @@
             "1990": 4900,
             "2000": 5000,
             "2010": 5200,
-            "2020": 5700
+            "2020": 5700,
+            "2025": 5800
           },
           region: "europe",
           type: "manual"
@@ -330,7 +330,8 @@
             "1990": 352000,
             "2000": 432000,
             "2010": 540000,
-            "2020": 680000
+            "2020": 680000,
+            "2025": 710000
           },
           region: "eastasia",
           colour: [173, 62, 62],
@@ -432,8 +433,7 @@
     let options = (arg1_options) ? arg1_options : {};
     
     //Declare local instance variables
-    let all_city_keys;
-    let all_ghsl_keys;
+    let built_entries;
     let city_entries = [];
     let city_grid = new Map();
     let cluster_members = new Map();
@@ -441,7 +441,7 @@
       global.population_Stadester_config.cutoff_year : 1975;
     let end_year = 2025;
     let epochs = [1975, 1980, 1985, 1990, 1995, 2000, 2005, 2010, 2015, 2020, 2025];
-    let ghsl_by_id = new Map();
+    let ghsl_by_id;
     let ghsl_folder = options.ghsl_mask_folder || path.join((typeof h1 !== "undefined") ? h1 : "./histmap/1.data_raw", "population_GHSL");
     let ghsl_json_path;
     let ghsl_obj = options.ghsl_obj;
@@ -462,57 +462,10 @@
     }
     if (!ghsl_obj) return stadester_obj;
     
-    all_ghsl_keys = Object.keys(ghsl_obj);
-    for (let i = 0; i < all_ghsl_keys.length; i++) {
-      let local_ghsl = ghsl_obj[all_ghsl_keys[i]];
-      if (local_ghsl && local_ghsl.id)
-        ghsl_by_id.set(Number(local_ghsl.id), local_ghsl);
-    }
-    
-    all_city_keys = Object.keys(stadester_obj);
-    for (let i = 0; i < all_city_keys.length; i++) {
-      let local_city = stadester_obj[all_city_keys[i]];
-      if (!local_city || !Array.isArray(local_city.coords) || local_city.coords.length < 2) continue;
-      
-      let lat = Number(local_city.coords[0]);
-      let lng = Number(local_city.coords[1]);
-      if (isNaN(lat) || isNaN(lng)) continue;
-      
-      //Enforce temporal proximity filter (+/-200 years or HYDE interval at cutoff_year) before matching to 1975-2025 GHSL clusters
-      let max_pre_yr = -Infinity;
-      if (local_city.population) {
-        let pop_keys = Object.keys(local_city.population);
-        for (let x = 0; x < pop_keys.length; x++) {
-          let yr = Number(pop_keys[x]);
-          let val = Array.isArray(local_city.population[pop_keys[x]]) ?
-            Number(local_city.population[pop_keys[x]][0]) : Number(local_city.population[pop_keys[x]]);
-          if (!isNaN(yr) && yr < cutoff_year && val > 0 && yr > max_pre_yr)
-            max_pre_yr = yr;
-        }
-      }
-      let max_ghsl_gap = (typeof population_Stadester_uud !== "undefined" && typeof population_Stadester_uud.getMaxTemporalProximityGap === "function") ?
-        population_Stadester_uud.getMaxTemporalProximityGap(max_pre_yr, cutoff_year) : 200;
-      if (!Number.isFinite(max_pre_yr) || (cutoff_year - max_pre_yr) > max_ghsl_gap) continue;
-      
-      let px = Math.min(4319, Math.max(0, Math.floor(((lng + 180)/360)*4320)));
-      let py = Math.min(2159, Math.max(0, Math.floor(((90 - lat)/180)*2160)));
-      let entry_idx = city_entries.length;
-      let cell_key = `${Math.floor(lng)},${Math.floor(lat)}`;
-      
-      city_entries.push({
-        city: local_city,
-        epoch_cluster: {},
-        key: all_city_keys[i],
-        lat: lat,
-        lng: lng,
-        norm_names: population_Stadester_ghsl.getNormalisedCityNames(local_city),
-        px: px,
-        py: py
-      });
-      
-      if (!city_grid.has(cell_key)) city_grid.set(cell_key, []);
-      city_grid.get(cell_key).push(entry_idx);
-    }
+    ghsl_by_id = population_Stadester_ghs_pop.loadCompleteUCDBMap(ghsl_obj, options);
+    built_entries = population_Stadester_ghs_pop.buildGHSLCityEntries(stadester_obj, { cutoff_year: cutoff_year });
+    city_entries = built_entries.city_entries;
+    city_grid = built_entries.city_grid;
     
     //1. Match Stadestér settlements against epoch-specific GHSL GeoJSON and PNG areal masks (1975..2025)
     for (let i = 0; i < epochs.length; i++) {
@@ -619,8 +572,26 @@
       }
     }
     
-    //3. For each GHSL cluster, identify primary city, subtract non-primary settlements, and overwrite 1975-2025
+    //3A. Rank GHSL clusters by peak population and claim exclusive primary cities and twins
     let all_cluster_ids = Array.from(cluster_members.keys());
+    let claimed_primary_set = new Set();
+    let cluster_peaks = new Map();
+    let cluster_plans = [];
+    
+    for (let i = 0; i < all_cluster_ids.length; i++) {
+      let c_id = all_cluster_ids[i];
+      let g_city = ghsl_by_id.get(c_id);
+      let peak_val = 0;
+      if (g_city && g_city.population) {
+        for (let x = 0; x < epochs.length; x++) {
+          let v = Number(g_city.population[epochs[x]]) || 0;
+          if (v > peak_val) peak_val = v;
+        }
+      }
+      cluster_peaks.set(c_id, peak_val);
+    }
+    all_cluster_ids.sort((a, b) => (cluster_peaks.get(b) || 0) - (cluster_peaks.get(a) || 0));
+    
     for (let i = 0; i < all_cluster_ids.length; i++) {
       let uc_id = all_cluster_ids[i];
       let ghsl_city = ghsl_by_id.get(uc_id);
@@ -650,9 +621,14 @@
       
       let earliest_pool = [];
       for (let x = 0; x < members.length; x++)
-        if (members[x].epoch_cluster[earliest_ep] === uc_id)
+        if (members[x].epoch_cluster[earliest_ep] === uc_id && !claimed_primary_set.has(members[x]))
           earliest_pool.push(members[x]);
-      if (earliest_pool.length === 0) earliest_pool = members.slice();
+      if (earliest_pool.length === 0) {
+        for (let x = 0; x < members.length; x++)
+          if (!claimed_primary_set.has(members[x]))
+            earliest_pool.push(members[x]);
+      }
+      if (earliest_pool.length === 0) continue;
       
       let ghsl_tokens = String(ghsl_city.name || "").split(";").map(s => population_Stadester_ghsl.normaliseGHSLName(s)).filter(Boolean);
       let first_token = ghsl_tokens.length > 0 ? [ghsl_tokens[0]] : [];
@@ -661,7 +637,7 @@
       
       for (let x = 0; x < earliest_pool.length; x++) {
         let m = earliest_pool[x];
-        let ref_pop = population_Stadester_ghsl.getModernReferencePopulation(m.city);
+        let ref_pop = population_Stadester_ghsl.getModernReferencePopulation({ population: m.raw_pop });
         if (ref_pop <= 0) continue;
         if (population_Stadester_ghsl.matchesAnyGHSLToken(m.norm_names, first_token))
           primary_candidates.push(m);
@@ -671,7 +647,8 @@
       if (primary_candidates.length === 0 && token_candidates.length === 0) {
         for (let x = 0; x < members.length; x++) {
           let m = members[x];
-          let ref_pop = population_Stadester_ghsl.getModernReferencePopulation(m.city);
+          if (claimed_primary_set.has(m)) continue;
+          let ref_pop = population_Stadester_ghsl.getModernReferencePopulation({ population: m.raw_pop });
           if (ref_pop <= 0) continue;
           if (population_Stadester_ghsl.matchesAnyGHSLToken(m.norm_names, first_token))
             primary_candidates.push(m);
@@ -680,22 +657,32 @@
         }
       }
       
-      primary_candidates.sort((a, b) => population_Stadester_ghsl.getModernReferencePopulation(b.city) - population_Stadester_ghsl.getModernReferencePopulation(a.city));
-      token_candidates.sort((a, b) => population_Stadester_ghsl.getModernReferencePopulation(b.city) - population_Stadester_ghsl.getModernReferencePopulation(a.city));
-      earliest_pool.sort((a, b) => population_Stadester_ghsl.getModernReferencePopulation(b.city) - population_Stadester_ghsl.getModernReferencePopulation(a.city));
+      primary_candidates.sort((a, b) =>
+        population_Stadester_ghsl.getModernReferencePopulation({ population: b.raw_pop }) -
+        population_Stadester_ghsl.getModernReferencePopulation({ population: a.raw_pop })
+      );
+      token_candidates.sort((a, b) =>
+        population_Stadester_ghsl.getModernReferencePopulation({ population: b.raw_pop }) -
+        population_Stadester_ghsl.getModernReferencePopulation({ population: a.raw_pop })
+      );
+      earliest_pool.sort((a, b) =>
+        population_Stadester_ghsl.getModernReferencePopulation({ population: b.raw_pop }) -
+        population_Stadester_ghsl.getModernReferencePopulation({ population: a.raw_pop })
+      );
       
       let chosen_list = primary_candidates;
       if (token_candidates.length > 0) {
-        let best_tok_pop = population_Stadester_ghsl.getModernReferencePopulation(token_candidates[0].city);
-        let best_pri_pop = (chosen_list.length > 0) ? population_Stadester_ghsl.getModernReferencePopulation(chosen_list[0].city) : 0;
+        let best_tok_pop = population_Stadester_ghsl.getModernReferencePopulation({ population: token_candidates[0].raw_pop });
+        let best_pri_pop = (chosen_list.length > 0) ?
+          population_Stadester_ghsl.getModernReferencePopulation({ population: chosen_list[0].raw_pop }) : 0;
         if (chosen_list.length === 0 || best_tok_pop > best_pri_pop*1.5)
           chosen_list = token_candidates;
       }
       if (chosen_list.length === 0) {
         chosen_list = earliest_pool;
       } else if (earliest_pool.length > 0) {
-        let best_pool_pop = population_Stadester_ghsl.getModernReferencePopulation(earliest_pool[0].city);
-        let best_chosen_pop = population_Stadester_ghsl.getModernReferencePopulation(chosen_list[0].city);
+        let best_pool_pop = population_Stadester_ghsl.getModernReferencePopulation({ population: earliest_pool[0].raw_pop });
+        let best_chosen_pop = population_Stadester_ghsl.getModernReferencePopulation({ population: chosen_list[0].raw_pop });
         if (best_pool_pop > best_chosen_pop*2.0)
           chosen_list = earliest_pool;
       }
@@ -703,17 +690,17 @@
       let primary_entry = chosen_list[0];
       if (!primary_entry) continue;
       
-      //Prefer non-agglomeration entry as primary record if both <City> and <City> (agglomeration) exist in the mask
+      //Prefer non-agglomeration entry as primary record only when it represents the comparable core twin within 25 km
       if (primary_entry.key.toLowerCase().includes("agglomeration")) {
+        let pri_ref_w = population_Stadester_ghsl.getClusterEntryReferenceWeight(primary_entry.raw_pop, earliest_ep);
         for (let x = 0; x < members.length; x++) {
           let m = members[x];
+          if (claimed_primary_set.has(m) || m.key.toLowerCase().includes("agglomeration")) continue;
+          let dist_km = population_Stadester_uud.haversineDistance(m.city.coords, primary_entry.city.coords);
           if (
-            !m.key.toLowerCase().includes("agglomeration") &&
-            population_Stadester_ghsl.getModernReferencePopulation(m.city) > 0 &&
-            (
-              population_Stadester_uud.checkExactNameMatch(m.city, primary_entry.city) ||
-              population_Stadester_ghsl.matchesAnyGHSLToken(m.norm_names, primary_entry.norm_names)
-            )
+            dist_km <= 25 &&
+            population_Stadester_ghsl.isCoLocatedCityTwin(m, primary_entry, dist_km) &&
+            population_Stadester_ghsl.getClusterEntryReferenceWeight(m.raw_pop, earliest_ep) >= 0.5*pri_ref_w
           ) {
             primary_entry = m;
             break;
@@ -721,250 +708,234 @@
         }
       }
       
-      //Group co-located same-name / agglomeration twins of the primary city so they do not subtract from primary_entry
+      //Group co-located same-name / agglomeration twins within primary jurisdiction
       let primary_group = [];
-      let primary_set = new Set();
       for (let x = 0; x < members.length; x++) {
         let m = members[x];
+        if (claimed_primary_set.has(m)) continue;
+        let dist_km = (m === primary_entry) ? 0 : population_Stadester_uud.haversineDistance(m.city.coords, primary_entry.city.coords);
         if (
           m === primary_entry ||
-          population_Stadester_uud.checkExactNameMatch(m.city, primary_entry.city) ||
-          population_Stadester_ghsl.matchesAnyGHSLToken(m.norm_names, primary_entry.norm_names)
+          population_Stadester_ghsl.isCoLocatedCityTwin(m, primary_entry, dist_km)
         ) {
           primary_group.push(m);
-          primary_set.add(m);
+          claimed_primary_set.add(m);
+          m.locked_primary_uc_id = uc_id;
         }
       }
       
-      let subordinates = [];
-      for (let x = 0; x < members.length; x++)
-        if (!primary_set.has(members[x]))
-          subordinates.push(members[x]);
+      cluster_plans.push({
+        ghsl_city: ghsl_city,
+        members: members,
+        primary_entry: primary_entry,
+        primary_group: primary_group,
+        uc_id: uc_id
+      });
+    }
+    
+    //3B. Conserving proportional partition of PCHIP-smoothed GHSL totals (1975-2025)
+    for (let i = 0; i < cluster_plans.length; i++) {
+      let plan = cluster_plans[i];
+      let ghsl_city = plan.ghsl_city;
+      let members = plan.members;
+      let primary_entry = plan.primary_entry;
+      let primary_group = plan.primary_group;
+      let uc_id = plan.uc_id;
+      
+      let pop_interp = population_Stadester_ghsl.interpolateGHSLSeries(ghsl_city.population);
+      let first_active_ep = pop_interp.first_active_ep;
+      if (!first_active_ep) continue;
+      let area_interp = population_Stadester_ghsl.interpolateGHSLSeries(ghsl_city.area);
+      
+      let g0 = pop_interp.values[first_active_ep] || 0;
+      let r_pri = population_Stadester_ghsl.getClusterEntryReferenceWeight(primary_entry.raw_pop, first_active_ep);
+      let r_sum_grp = 0;
+      for (let x = 0; x < primary_group.length; x++)
+        r_sum_grp += population_Stadester_ghsl.getClusterEntryReferenceWeight(primary_group[x].raw_pop, first_active_ep);
+      
+      let w_primary = (primary_group.length > 1 && r_pri < 0.5*Math.min(g0, r_sum_grp)) ?
+        Math.min(g0, r_sum_grp) : r_pri;
+      w_primary = Math.max(1, w_primary);
+      
+      let sub_entries = [];
+      for (let x = 0; x < members.length; x++) {
+        let m = members[x];
+        if (m.locked_primary_uc_id) continue;
+        let sub_w = population_Stadester_ghsl.getClusterEntryReferenceWeight(m.raw_pop, first_active_ep);
+        if (sub_w > 0)
+          sub_entries.push({ sub: m, w_ref: sub_w });
+      }
       
       if (!primary_entry.city.population) primary_entry.city.population = {};
+      if (!primary_entry.city._ghsl_area) primary_entry.city._ghsl_area = {};
       
       for (let yr = cutoff_year; yr <= end_year; yr++) {
-        let g_pop = parseFloat(ghsl_city.population[yr]);
-        if (isNaN(g_pop)) continue;
+        let alpha = 1;
+        if (first_active_ep > cutoff_year) {
+          if (yr <= first_active_ep - 5) continue;
+          if (yr < first_active_ep) alpha = (yr - (first_active_ep - 5))/5;
+        }
+        
+        let eff_yr = Math.max(first_active_ep, yr);
+        let g_pop = pop_interp.values[eff_yr];
+        if (!Number.isFinite(g_pop) || g_pop <= 0) continue;
+        let g_area = (area_interp && area_interp.values && area_interp.values[eff_yr] > 0) ?
+          area_interp.values[eff_yr] : 0;
         
         let e0 = epochs[0];
         let e1 = epochs[epochs.length - 1];
-        for (let k = 0; k < epochs.length - 1; k++) {
-          if (yr >= epochs[k] && yr <= epochs[k + 1]) {
-            e0 = epochs[k];
-            e1 = epochs[k + 1];
+        for (let a = 0; a < epochs.length - 1; a++) {
+          if (yr >= epochs[a] && yr <= epochs[a + 1]) {
+            e0 = epochs[a];
+            e1 = epochs[a + 1];
             break;
           }
         }
         
+        let active_subs = [];
         let frac = (e1 > e0) ? (yr - e0)/(e1 - e0) : 0;
-        let sub_sum = 0;
+        let sub_weight_sum = 0;
         
-        for (let x = 0; x < subordinates.length; x++) {
-          let sub = subordinates[x];
+        for (let x = 0; x < sub_entries.length; x++) {
+          let sub_info = sub_entries[x];
+          let sub = sub_info.sub;
+          if (sub.city && sub.city.polaris_source === "russian_invasion_of_ukraine" && Number.isFinite(sub.raw_min_year) && yr < sub.raw_min_year)
+            continue;
           let w0 = (sub.epoch_cluster[e0] === uc_id) ? 1 : 0;
           let w1 = (sub.epoch_cluster[e1] === uc_id) ? 1 : 0;
-          let weight = (1 - frac)*w0 + frac*w1;
-          
-          if (weight > 0 && sub.city.population && sub.city.population[yr] !== undefined) {
-            let sub_pop = parseFloat(sub.city.population[yr]) || 0;
-            if (sub_pop > 0) sub_sum += weight*sub_pop;
+          let w_raw = (1 - frac)*w0 + frac*w1;
+          if (w_raw > 0) {
+            let w_contrib = w_raw*sub_info.w_ref;
+            sub_weight_sum += w_contrib;
+            active_subs.push({ sub: sub, w_contrib: w_contrib, w_raw: w_raw });
           }
         }
         
-        primary_entry.city.population[yr] = Math.max(0, Math.round(g_pop - sub_sum));
+        let denom = w_primary + sub_weight_sum;
+        let p_ghsl = g_pop*(w_primary/denom);
+        let a_ghsl = (g_area > 0) ? g_area*(w_primary/denom) : 0;
         
-        //Zero redundant primary twins in 1975-2025 so primary population is not double-counted
-        for (let x = 0; x < primary_group.length; x++) {
-          let twin = primary_group[x];
-          if (twin !== primary_entry && twin.city.population)
-            twin.city.population[yr] = 0;
+        primary_entry.has_ucdb = true;
+        primary_entry.ucdb_weight_by_year[yr] = alpha;
+        primary_entry.ucdb_pop_by_year[yr] = p_ghsl;
+        
+        if (alpha >= 1 - 1e-9) {
+          let g_pop_int = Math.round(g_pop);
+          let sub_int_total = 0;
+          
+          for (let x = 0; x < active_subs.length; x++) {
+            let item = active_subs[x];
+            let sub = item.sub;
+            let s_share = g_pop*(item.w_contrib/denom);
+            let s_int = Math.min(Math.max(0, g_pop_int - sub_int_total), Math.round(s_share));
+            let a_sub = (g_area > 0) ? g_area*(item.w_contrib/denom) : 0;
+            
+            sub_int_total += s_int;
+            if (!sub.ghsl_w_sum) sub.ghsl_w_sum = {};
+            if (!sub.ghsl_pop_sum) sub.ghsl_pop_sum = {};
+            if (!sub.ghsl_area_sum) sub.ghsl_area_sum = {};
+            sub.ghsl_w_sum[yr] = (sub.ghsl_w_sum[yr] || 0) + item.w_raw;
+            sub.ghsl_pop_sum[yr] = (sub.ghsl_pop_sum[yr] || 0) + s_int;
+            sub.ghsl_area_sum[yr] = (sub.ghsl_area_sum[yr] || 0) + a_sub;
+          }
+          
+          primary_entry.city.population[yr] = Math.max(0, g_pop_int - sub_int_total);
+          if (a_ghsl > 0) primary_entry.city._ghsl_area[yr] = a_ghsl;
+          
+          for (let x = 0; x < primary_group.length; x++) {
+            let twin = primary_group[x];
+            if (twin !== primary_entry && twin.city.population) {
+              twin.is_suppressed_ucdb_twin = true;
+              twin.city.population[yr] = 0;
+              if (!twin.city._ghsl_area) twin.city._ghsl_area = {};
+              twin.city._ghsl_area[yr] = 0;
+            }
+          }
+        } else {
+          let pri_raw = population_Stadester_ghsl.getContinuousCityPopulation(primary_entry.raw_pop, yr);
+          if (pri_raw > 0)
+            primary_entry.city.population[yr] = Math.max(0, Math.round((1 - alpha)*pri_raw + alpha*p_ghsl));
+          if (a_ghsl > 0) {
+            if (!primary_entry.city._ghsl_area_partial) primary_entry.city._ghsl_area_partial = {};
+            primary_entry.city._ghsl_area_partial[yr] = { area: alpha*a_ghsl, weight: alpha };
+          }
+          
+          for (let x = 0; x < primary_group.length; x++) {
+            let twin = primary_group[x];
+            if (twin !== primary_entry && twin.city.population) {
+              twin.is_suppressed_ucdb_twin = true;
+              let twin_raw = population_Stadester_ghsl.getContinuousCityPopulation(twin.raw_pop, yr);
+              twin.city.population[yr] = Math.max(0, Math.round((1 - alpha)*twin_raw));
+            }
+          }
+          
+          for (let x = 0; x < active_subs.length; x++) {
+            let item = active_subs[x];
+            let sub = item.sub;
+            let s_share = g_pop*(item.w_contrib/denom);
+            let a_sub = (g_area > 0) ? g_area*(item.w_contrib/denom) : 0;
+            if (!sub.ghsl_w_sum) sub.ghsl_w_sum = {};
+            if (!sub.ghsl_pop_sum) sub.ghsl_pop_sum = {};
+            if (!sub.ghsl_area_sum) sub.ghsl_area_sum = {};
+            sub.ghsl_w_sum[yr] = (sub.ghsl_w_sum[yr] || 0) + alpha*item.w_raw;
+            sub.ghsl_pop_sum[yr] = (sub.ghsl_pop_sum[yr] || 0) + alpha*s_share;
+            sub.ghsl_area_sum[yr] = (sub.ghsl_area_sum[yr] || 0) + alpha*a_sub;
+          }
         }
       }
       
       integrated_count++;
     }
     
-    console.log(`- Integrated GHSL (1975-2025) DEGURBA areal mask populations into ${integrated_count} primary Stadestér cities.`);
-    
-    //Return statement
-    return stadester_obj;
-  };
-  
-  /**
-   * Returns a reference modern population (1975/2000/1970/1980) for ranking primary city candidates.
-   * @alias population_Stadester_ghsl.getModernReferencePopulation
-   * 
-   * @param {Object} arg0_city_obj
-   * 
-   * @returns {number}
-   */
-  population_Stadester_ghsl.getModernReferencePopulation = function (arg0_city_obj) {
-    //Convert from parameters
-    let city_obj = arg0_city_obj;
-    
-    //Guard clauses
-    if (!city_obj || !city_obj.population) return 0;
-    
-    //Return statement
-    return Number(
-      city_obj.population[1975] ||
-      city_obj.population[2000] ||
-      city_obj.population[1970] ||
-      city_obj.population[1980] ||
-      0
-    );
-  };
-  
-  /**
-   * Checks whether any normalised city name matches any normalised GHSL token.
-   * @alias population_Stadester_ghsl.matchesAnyGHSLToken
-   * 
-   * @param {Array<string>} arg0_city_names
-   * @param {Array<string>} arg1_tokens
-   * 
-   * @returns {boolean}
-   */
-  population_Stadester_ghsl.matchesAnyGHSLToken = function (arg0_city_names, arg1_tokens) {
-    //Convert from parameters
-    let city_names = arg0_city_names || [];
-    let tokens = arg1_tokens || [];
-    
-    //Function body
-    for (let i = 0; i < city_names.length; i++) {
-      let c_name = city_names[i];
-      if (!c_name) continue;
-      for (let x = 0; x < tokens.length; x++) {
-        let tok = tokens[x];
-        if (!tok) continue;
-        if (c_name === tok) return true;
+    //3C. Finalise subordinate settlement populations across all GHSL clusters
+    for (let i = 0; i < city_entries.length; i++) {
+      let ce = city_entries[i];
+      if (ce.locked_primary_uc_id || !ce.ghsl_w_sum) continue;
+      if (!ce.city.population) ce.city.population = {};
+      
+      for (let yr = cutoff_year; yr <= end_year; yr++) {
+        let w_raw_sum = ce.ghsl_w_sum[yr] || 0;
+        if (w_raw_sum <= 0) continue;
+        
+        let area_sum = ce.ghsl_area_sum[yr] || 0;
+        let pop_sum = ce.ghsl_pop_sum[yr] || 0;
+        let w_tot = Math.min(1, w_raw_sum);
+        if (w_raw_sum > 1) {
+          area_sum = area_sum*(1/w_raw_sum);
+          pop_sum = pop_sum*(1/w_raw_sum);
+        }
+        
+        ce.has_ucdb = true;
+        ce.ucdb_weight_by_year[yr] = w_tot;
+        ce.ucdb_pop_by_year[yr] = pop_sum;
+        
+        if (w_tot >= 1 - 1e-9) {
+          ce.city.population[yr] = Math.max(0, Math.round(pop_sum));
+          if (area_sum > 0) {
+            if (!ce.city._ghsl_area) ce.city._ghsl_area = {};
+            ce.city._ghsl_area[yr] = area_sum;
+          }
+        } else {
+          let out_pop = (1 - w_tot)*population_Stadester_ghsl.getContinuousCityPopulation(ce.raw_pop, yr);
+          if (out_pop > 0)
+            ce.city.population[yr] = Math.max(0, Math.round(out_pop + pop_sum));
+          if (area_sum > 0) {
+            if (!ce.city._ghsl_area_partial) ce.city._ghsl_area_partial = {};
+            ce.city._ghsl_area_partial[yr] = { area: area_sum, weight: w_tot };
+          }
+        }
       }
     }
     
-    //Return statement
-    return false;
-  };
-  
-  /**
-   * Normalises a city or GHSL token name by stripping diacritics, parentheticals, and urban suffixes.
-   * @alias population_Stadester_ghsl.normaliseGHSLName
-   * 
-   * @param {string} arg0_name
-   * 
-   * @returns {string}
-   */
-  population_Stadester_ghsl.normaliseGHSLName = function (arg0_name) {
-    //Convert from parameters
-    let name = (arg0_name) ? `${arg0_name}` : "";
+    console.log(`- Integrated GHSL (1975-2025) DEGURBA areal mask populations into ${integrated_count} primary Stadestér cities.`);
+    
+    //3D. Partition 5-arcmin GHS-POP gridcells across post-empirical years for settlements missing GHS-UCDB coverage and restore protected overrides
+    population_Stadester_ghs_pop.partitionGHSPopGridcells(stadester_obj, city_entries, options);
+    population_Stadester_ghs_pop.restoreManualEntries(city_entries, options);
+    population_Stadester_ghs_pop.restoreWarDisplacementYears(city_entries, options);
     
     //Return statement
-    return name
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .replace(/\([^)]*\)/g, "")
-      .replace(/\b(greater|agglomeration|zona urbana|cdp|city|grad|subtotal)\b/gi, "")
-      .replace(/['’`´]/g, "")
-      .replace(/[^a-zA-Z0-9\s]/g, " ")
-      .replace(/\s+/g, " ")
-      .trim()
-      .toLowerCase();
-  };
-  
-  /**
-   * Checks whether [lng, lat] falls inside a GeoJSON Polygon or MultiPolygon geometry.
-   * @alias population_Stadester_ghsl.pointInGeometry
-   * 
-   * @param {number} arg0_lng
-   * @param {number} arg1_lat
-   * @param {Object} arg2_geometry
-   * 
-   * @returns {boolean}
-   */
-  population_Stadester_ghsl.pointInGeometry = function (arg0_lng, arg1_lat, arg2_geometry) {
-    //Convert from parameters
-    let lng = Number(arg0_lng);
-    let lat = Number(arg1_lat);
-    let geometry = arg2_geometry;
-    
-    //Guard clauses
-    if (!geometry || !geometry.coordinates) return false;
-    
-    //Function body
-    if (geometry.type === "Polygon")
-      return population_Stadester_ghsl.pointInPolygon(lng, lat, geometry.coordinates);
-    if (geometry.type === "MultiPolygon") {
-      for (let i = 0; i < geometry.coordinates.length; i++)
-        if (population_Stadester_ghsl.pointInPolygon(lng, lat, geometry.coordinates[i]))
-          return true;
-    }
-    
-    //Return statement
-    return false;
-  };
-  
-  /**
-   * Checks whether [lng, lat] falls inside a Polygon ring array (outer ring minus holes).
-   * @alias population_Stadester_ghsl.pointInPolygon
-   * 
-   * @param {number} arg0_lng
-   * @param {number} arg1_lat
-   * @param {Array<Array<Array<number>>>} arg2_rings
-   * 
-   * @returns {boolean}
-   */
-  population_Stadester_ghsl.pointInPolygon = function (arg0_lng, arg1_lat, arg2_rings) {
-    //Convert from parameters
-    let lng = Number(arg0_lng);
-    let lat = Number(arg1_lat);
-    let rings = arg2_rings;
-    
-    //Guard clauses
-    if (!rings || rings.length === 0) return false;
-    if (!population_Stadester_ghsl.pointInRing(lng, lat, rings[0])) return false;
-    
-    //Function body
-    for (let i = 1; i < rings.length; i++)
-      if (population_Stadester_ghsl.pointInRing(lng, lat, rings[i]))
-        return false;
-    
-    //Return statement
-    return true;
-  };
-  
-  /**
-   * Ray-casting point-in-ring test for [lng, lat].
-   * @alias population_Stadester_ghsl.pointInRing
-   * 
-   * @param {number} arg0_lng
-   * @param {number} arg1_lat
-   * @param {Array<Array<number>>} arg2_ring
-   * 
-   * @returns {boolean}
-   */
-  population_Stadester_ghsl.pointInRing = function (arg0_lng, arg1_lat, arg2_ring) {
-    //Convert from parameters
-    let lng = Number(arg0_lng);
-    let lat = Number(arg1_lat);
-    let ring = arg2_ring;
-    
-    //Declare local instance variables
-    let inside = false;
-    
-    //Guard clauses
-    if (!ring || ring.length < 3) return false;
-    
-    //Function body
-    for (let i = 0, x = ring.length - 1; i < ring.length; x = i++) {
-      let xi = ring[i][0];
-      let xj = ring[x][0];
-      let yi = ring[i][1];
-      let yj = ring[x][1];
-      let intersect = ((yi > lat) !== (yj > lat)) && (lng < (xj - xi)*(lat - yi)/((yj - yi) || 1e-12) + xi);
-      if (intersect) inside = !inside;
-    }
-    
-    //Return statement
-    return inside;
+    return stadester_obj;
   };
   
   //Expose on population_Stadester_uud for pipeline compatibility

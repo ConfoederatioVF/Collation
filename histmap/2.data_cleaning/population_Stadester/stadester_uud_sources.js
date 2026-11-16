@@ -381,6 +381,14 @@
     }
     
     if (source_city.is_agglomeration_of) target_city.is_agglomeration_of = source_city.is_agglomeration_of;
+    if (Array.isArray(source_city._war_displacement_years)) {
+      if (!target_city._war_displacement_years) target_city._war_displacement_years = [];
+      for (let i = 0; i < source_city._war_displacement_years.length; i++) {
+        let w_yr = source_city._war_displacement_years[i];
+        if (!target_city._war_displacement_years.includes(w_yr))
+          target_city._war_displacement_years.push(w_yr);
+      }
+    }
     if (source_city.population)
       target_city.population = is_metro ?
         population_Stadester_uud.mergeCityPopulations(source_city.population, target_city.population) :
@@ -1092,6 +1100,8 @@
           polaris_priority: gaz_entry.priority || 1,
           polaris_source: gaz_id
         };
+        if (gaz_id === "russian_invasion_of_ukraine")
+          candidate_city._war_displacement_years = Object.keys(clean_pop).map(Number).filter(n => !isNaN(n));
         
         let candidate_names = population_Stadester_uud.getAllCityNames(candidate_city);
         candidate_city.original_names = candidate_names.slice();
@@ -1136,10 +1146,18 @@
           let cand_years = Object.keys(candidate_city.population);
           for (let y = 0; y < cand_years.length; y++) {
             let yr = cand_years[y];
-            if (ex_city.population[yr] === undefined) {
+            if (gaz_id === "russian_invasion_of_ukraine" || ex_city.population[yr] === undefined) {
               ex_city.population[yr] = candidate_city.population[yr];
             } else if (ex_city.polaris_priority === candidate_city.polaris_priority) {
               ex_city.population[yr] = Math.round(Math.sqrt(ex_city.population[yr]*candidate_city.population[yr]));
+            }
+          }
+          if (Array.isArray(candidate_city._war_displacement_years)) {
+            if (!ex_city._war_displacement_years) ex_city._war_displacement_years = [];
+            for (let y = 0; y < candidate_city._war_displacement_years.length; y++) {
+              let w_yr = candidate_city._war_displacement_years[y];
+              if (!ex_city._war_displacement_years.includes(w_yr))
+                ex_city._war_displacement_years.push(w_yr);
             }
           }
           for (let y = 0; y < candidate_city.other_names.length; y++)

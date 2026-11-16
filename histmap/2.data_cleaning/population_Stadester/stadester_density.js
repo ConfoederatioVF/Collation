@@ -87,29 +87,103 @@
   };
   
   /**
-   * Estimates baseline city area in square kilometres at baseline year (1800) and projects via RNI.
-   * @alias population_Stadester_density.estimateBaselineCityArea
+   * Projects city area and RNI forward from a starting anchor year using path-independent Angel density and bounded city-size scaling.
+   * @alias population_Stadester_density.projectCityAreaFromYear
    * 
    * @param {Object} arg0_city_obj
+   * @param {number} arg1_start_year
+   * @param {number} arg2_start_area
+   * @param {Object} [arg3_global_pop_density_obj]
    * 
    * @returns {Object}
    */
-  population_Stadester_density.estimateBaselineCityArea = function (arg0_city_obj) {
+  population_Stadester_density.projectCityAreaFromYear = function (arg0_city_obj, arg1_start_year, arg2_start_area, arg3_global_pop_density_obj) {
     //Convert from parameters
     let city_obj = arg0_city_obj;
+    let global_pop_density_obj = (arg3_global_pop_density_obj) ?
+      arg3_global_pop_density_obj : population_Stadester_density.getGlobalPopulationDensityObject();
+    let start_area = parseFloat(arg2_start_area) || 0;
+    let start_year = parseInt(arg1_start_year);
     
     //Declare local instance variables
     let all_population_keys;
-    let area_growth_ratio;
     let baseline_density;
     let cfg = global.population_Stadester_config;
-    let city_baseline_population;
     let current_area;
+    let ref_start_ha;
+    let rni_obj = {};
+    let start_density_km2;
+    let start_lookup_yr;
+    let start_pop;
     
     //Guard clauses
     if (!city_obj || !city_obj.population) return city_obj;
     
-    area_growth_ratio = cfg.area_to_pop_growth_rate_ratio;
+    //Function body
+    baseline_density = (cfg.baseline_density_per_ha[0] + cfg.baseline_density_per_ha[1])/2;
+    if (!city_obj.area) city_obj.area = {};
+    
+    current_area = Math.max(0.01, start_area);
+    city_obj.area[start_year] = current_area;
+    start_pop = Math.max(0, parseFloat(city_obj.population[start_year]) || 0);
+    start_lookup_yr = Math.max(cfg.baseline_year, Math.min(cfg.end_year, start_year));
+    ref_start_ha = (global_pop_density_obj && global_pop_density_obj[start_lookup_yr]) ?
+      global_pop_density_obj[start_lookup_yr] : baseline_density;
+    start_density_km2 = (start_pop > 0 && current_area > 0) ? (start_pop/current_area) : (baseline_density*100);
+    all_population_keys = Object.keys(city_obj.population).map(Number).filter(n => !isNaN(n)).sort((a, b) => a - b);
+    
+    for (let i = 1; i < all_population_keys.length; i++) {
+      let yr = all_population_keys[i];
+      if (yr <= start_year) continue;
+      
+      let prev_yr = all_population_keys[i - 1];
+      let cur_val = Math.max(0, parseFloat(city_obj.population[yr]) || 0);
+      let prev_val = Math.max(0, parseFloat(city_obj.population[prev_yr]) || 0);
+      let rni = (prev_val > 0) ? (cur_val - prev_val)/prev_val : 0;
+      rni_obj[prev_yr] = rni;
+      
+      if (cur_val <= 0) {
+        city_obj.area[yr] = 0;
+      } else {
+        let lookup_yr = Math.max(cfg.baseline_year, Math.min(cfg.end_year, yr));
+        let ref_yr_ha = (global_pop_density_obj && global_pop_density_obj[lookup_yr]) ?
+          global_pop_density_obj[lookup_yr] : ref_start_ha;
+        let angel_ratio = (ref_start_ha > 0) ? (ref_yr_ha/ref_start_ha) : 1;
+        let scale_factor = (start_pop > 0) ? Math.pow(Math.max(1, cur_val/start_pop), 0.15) : 1;
+        let target_density_km2 = Math.min(100000, Math.max(500, (start_density_km2*angel_ratio)/scale_factor));
+        city_obj.area[yr] = Math.max(0.01, cur_val/target_density_km2);
+      }
+    }
+    city_obj.rni = rni_obj;
+    
+    //Return statement
+    return city_obj;
+  };
+  
+  /**
+   * Estimates baseline city area in square kilometres at baseline year (1800) and projects via RNI.
+   * @alias population_Stadester_density.estimateBaselineCityArea
+   * 
+   * @param {Object} arg0_city_obj
+   * @param {Object} [arg1_global_pop_density_obj]
+   * 
+   * @returns {Object}
+   */
+  population_Stadester_density.estimateBaselineCityArea = function (arg0_city_obj, arg1_global_pop_density_obj) {
+    //Convert from parameters
+    let city_obj = arg0_city_obj;
+    let global_pop_density_obj = (arg1_global_pop_density_obj) ?
+      arg1_global_pop_density_obj : population_Stadester_density.getGlobalPopulationDensityObject();
+    
+    //Declare local instance variables
+    let baseline_density;
+    let cfg = global.population_Stadester_config;
+    let city_baseline_population;
+    let start_area;
+    
+    //Guard clauses
+    if (!city_obj || !city_obj.population) return city_obj;
+    
     baseline_density = (cfg.baseline_density_per_ha[0] + cfg.baseline_density_per_ha[1])/2;
     
     if (!city_obj.population[cfg.baseline_year])
@@ -121,42 +195,8 @@
     if (!city_obj.area) city_obj.area = {};
     
     if (city_baseline_population > 0) {
-      current_area = (city_baseline_population/baseline_density)/100;
-      city_obj.area[cfg.baseline_year] = current_area;
-      
-      all_population_keys = Object.keys(city_obj.population).map(Number).sort((a, b) => a - b);
-      if (all_population_keys.length >= 2) {
-        let rni_obj = {};
-        for (let i = 1; i < all_population_keys.length; i++) {
-          let yr = all_population_keys[i];
-          if (yr > cfg.baseline_year) {
-            let cur_val = parseFloat(city_obj.population[yr]) || 0;
-            let prev_val = parseFloat(city_obj.population[all_population_keys[i - 1]]) || 0;
-            let rni = (prev_val > 0) ? (cur_val - prev_val)/prev_val : 0;
-            rni_obj[all_population_keys[i - 1]] = rni;
-          }
-        }
-        city_obj.rni = rni_obj;
-        
-        let all_rni_keys = Object.keys(rni_obj).map(Number).sort((a, b) => a - b);
-        for (let i = 0; i < all_rni_keys.length; i++) {
-          let rni_yr = all_rni_keys[i];
-          let rni = rni_obj[rni_yr];
-          let cur_pop = parseFloat(city_obj.population[rni_yr]) || 0;
-          if (current_area <= 0.01 && cur_pop > 0)
-            current_area = Math.max(0.01, (cur_pop/baseline_density)/100);
-          city_obj.area[rni_yr] = Math.max(0.01, current_area + (current_area*rni*area_growth_ratio));
-          current_area = city_obj.area[rni_yr];
-        }
-        
-        let last_pop_yr = all_population_keys[all_population_keys.length - 1];
-        if (last_pop_yr > cfg.baseline_year && city_obj.area[last_pop_yr] === undefined) {
-          let last_pop = parseFloat(city_obj.population[last_pop_yr]) || 0;
-          if (current_area <= 0.01 && last_pop > 0)
-            current_area = Math.max(0.01, (last_pop/baseline_density)/100);
-          city_obj.area[last_pop_yr] = Math.max(0.01, current_area);
-        }
-      }
+      start_area = (city_baseline_population/baseline_density)/100;
+      population_Stadester_density.projectCityAreaFromYear(city_obj, cfg.baseline_year, start_area, global_pop_density_obj);
     }
     
     //Return statement
@@ -180,10 +220,10 @@
     
     //Declare local instance variables
     let all_population_keys;
-    let area_growth_ratio;
-    let cfg = global.population_Stadester_config;
-    let current_area;
+    let density_val;
     let entry_year = null;
+    let pop_val;
+    let start_area;
     
     //Guard clauses
     if (!city_obj || !city_obj.population) return city_obj;
@@ -191,7 +231,6 @@
     
     if (!city_obj.area) city_obj.area = {};
     all_population_keys = Object.keys(city_obj.population).map(Number).sort((a, b) => a - b);
-    area_growth_ratio = cfg.area_to_pop_growth_rate_ratio;
     
     for (let i = 0; i < all_population_keys.length; i++) {
       let yr = all_population_keys[i];
@@ -202,41 +241,10 @@
     }
     
     if (entry_year !== null) {
-      let pop_val = parseFloat(city_obj.population[entry_year]);
-      let density_val = global_pop_density_obj[entry_year] || 180;
-      current_area = Math.max(0.01, (pop_val/density_val)/100);
-      city_obj.area[entry_year] = current_area;
-      
-      let rni_obj = {};
-      for (let i = 1; i < all_population_keys.length; i++) {
-        let yr = all_population_keys[i];
-        if (yr > entry_year) {
-          let cur_val = parseFloat(city_obj.population[yr]) || 0;
-          let prev_val = parseFloat(city_obj.population[all_population_keys[i - 1]]) || 0;
-          let rni = (prev_val > 0) ? (cur_val - prev_val)/prev_val : 0;
-          rni_obj[all_population_keys[i - 1]] = rni;
-        }
-      }
-      city_obj.rni = rni_obj;
-      
-      let all_rni_keys = Object.keys(rni_obj).map(Number).sort((a, b) => a - b);
-      for (let i = 0; i < all_rni_keys.length; i++) {
-        let rni_yr = all_rni_keys[i];
-        let rni = rni_obj[rni_yr];
-        let cur_pop = parseFloat(city_obj.population[rni_yr]) || 0;
-        if (current_area <= 0.01 && cur_pop > 0)
-          current_area = Math.max(0.01, (cur_pop/(global_pop_density_obj[rni_yr] || 180))/100);
-        city_obj.area[rni_yr] = Math.max(0.01, current_area + (current_area*rni*area_growth_ratio));
-        current_area = city_obj.area[rni_yr];
-      }
-      
-      let last_pop_yr = all_population_keys[all_population_keys.length - 1];
-      if (last_pop_yr > entry_year && city_obj.area[last_pop_yr] === undefined) {
-        let last_pop = parseFloat(city_obj.population[last_pop_yr]) || 0;
-        if (current_area <= 0.01 && last_pop > 0)
-          current_area = Math.max(0.01, (last_pop/(global_pop_density_obj[last_pop_yr] || 180))/100);
-        city_obj.area[last_pop_yr] = Math.max(0.01, current_area);
-      }
+      pop_val = parseFloat(city_obj.population[entry_year]);
+      density_val = global_pop_density_obj[entry_year] || 180;
+      start_area = Math.max(0.01, (pop_val/density_val)/100);
+      population_Stadester_density.projectCityAreaFromYear(city_obj, entry_year, start_area, global_pop_density_obj);
     }
     
     //Return statement
@@ -257,9 +265,10 @@
     
     //Declare local instance variables
     let all_cities = Object.keys(stadester_obj);
+    let global_density = population_Stadester_density.getGlobalPopulationDensityObject();
     
     for (let i = 0; i < all_cities.length; i++)
-      stadester_obj[all_cities[i]] = population_Stadester_density.estimateBaselineCityArea(stadester_obj[all_cities[i]]);
+      stadester_obj[all_cities[i]] = population_Stadester_density.estimateBaselineCityArea(stadester_obj[all_cities[i]], global_density);
     
     //Return statement
     return stadester_obj;
@@ -289,7 +298,7 @@
   };
   
   /**
-   * Fixes anomalous or negative areas in city area objects.
+   * Applies GHSL areal anchors (1975-2025) and fixes anomalous or negative city areas.
    * @alias population_Stadester_density.fixCityAreas
    * 
    * @param {Object} arg0_stadester_obj
@@ -305,12 +314,56 @@
     
     for (let i = 0; i < all_cities.length; i++) {
       let city = stadester_obj[all_cities[i]];
-      if (city && city.area) {
+      if (!city) continue;
+      
+      if (city.area) {
         let area_keys = Object.keys(city.area);
         for (let x = 0; x < area_keys.length; x++) {
-          let val = parseFloat(city.area[area_keys[x]]);
-          if (isNaN(val) || val <= 0) city.area[area_keys[x]] = 0.01;
+          let yr = area_keys[x];
+          let pop_val = (city.population && city.population[yr] !== undefined) ?
+            parseFloat(city.population[yr]) : null;
+          let val = parseFloat(city.area[yr]);
+          if (pop_val !== null && (!isNaN(pop_val) && pop_val <= 0)) {
+            city.area[yr] = 0;
+          } else if (isNaN(val) || val <= 0) {
+            city.area[yr] = 0.01;
+          }
         }
+      }
+      
+      if (city._ghsl_area) {
+        if (!city.area) city.area = {};
+        let ghsl_area_keys = Object.keys(city._ghsl_area);
+        for (let x = 0; x < ghsl_area_keys.length; x++) {
+          let yr = ghsl_area_keys[x];
+          let pop_val = (city.population && city.population[yr] !== undefined) ?
+            parseFloat(city.population[yr]) : 0;
+          let g_area = parseFloat(city._ghsl_area[yr]);
+          if (pop_val <= 0) {
+            city.area[yr] = 0;
+          } else if (!isNaN(g_area) && g_area > 0) {
+            city.area[yr] = Math.max(0.01, g_area);
+          }
+        }
+        delete city._ghsl_area;
+      }
+      
+      if (city._ghsl_area_partial) {
+        if (!city.area) city.area = {};
+        let partial_keys = Object.keys(city._ghsl_area_partial);
+        for (let x = 0; x < partial_keys.length; x++) {
+          let yr = partial_keys[x];
+          let p_obj = city._ghsl_area_partial[yr];
+          let pop_val = (city.population && city.population[yr] !== undefined) ?
+            parseFloat(city.population[yr]) : 0;
+          if (pop_val <= 0) {
+            city.area[yr] = 0;
+          } else if (p_obj && p_obj.weight > 0) {
+            let est_area = Math.max(0.01, parseFloat(city.area[yr]) || 0.01);
+            city.area[yr] = Math.max(0.01, (1 - p_obj.weight)*est_area + p_obj.area);
+          }
+        }
+        delete city._ghsl_area_partial;
       }
     }
     

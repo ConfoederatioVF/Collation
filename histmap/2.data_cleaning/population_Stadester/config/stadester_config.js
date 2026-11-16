@@ -258,4 +258,29 @@
       "BREST-France": [48.390394, -4.486076]
     }
   };
+  
+  if (typeof fs !== "undefined" && typeof path !== "undefined") {
+    let json5_lib = (typeof JSON5 !== "undefined") ? JSON5 : null;
+    let partition_cfg;
+    let partition_cfg_candidates = [
+      "./common/stadester/ghs_pop_partition.json5",
+      (typeof __dirname !== "undefined") ? path.resolve(__dirname, "../../../../common/stadester/ghs_pop_partition.json5") : null
+    ];
+    if (!json5_lib && typeof require !== "undefined")
+      try { json5_lib = require("json5"); } catch (e) {}
+    
+    for (let i = 0; i < partition_cfg_candidates.length; i++) {
+      let candidate_path = partition_cfg_candidates[i];
+      if (candidate_path && fs.existsSync(candidate_path) && json5_lib) {
+        try {
+          partition_cfg = json5_lib.parse(fs.readFileSync(candidate_path, "utf8"));
+          global.population_Stadester_config.ghs_pop_partition = partition_cfg;
+          Object.assign(global.population_Stadester_config, partition_cfg);
+          break;
+        } catch (e) {
+          console.warn(`[population_Stadester_config] Failed to parse ${candidate_path}:`, e);
+        }
+      }
+    }
+  }
 }

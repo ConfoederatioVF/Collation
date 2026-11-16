@@ -78,6 +78,34 @@
   };
   
   /**
+   * Returns the canonical HYDE domain years (-10000 to 2025, annual from 1950-2025) for standalone execution.
+   * @alias population_Stadester_uud.getDefaultHYDEYears
+   * 
+   * @returns {Array<number>}
+   */
+  population_Stadester_uud.getDefaultHYDEYears = function () {
+    //Declare local instance variables
+    let default_years = [
+      -10000, -9000, -8000, -7000, -6000, -5000, -4000, -3000, -2000, -1000
+    ];
+    
+    //100-year intervals (0 to 1700 AD)
+    for (let i = 0; i <= 1700; i += 100)
+      default_years.push(i);
+    
+    //10-year intervals (1710 to 1950 AD)
+    for (let i = 1710; i <= 1950; i += 10)
+      default_years.push(i);
+    
+    //1-year intervals (1951 to 2025 AD)
+    for (let i = 1951; i <= 2025; i++)
+      default_years.push(i);
+    
+    //Return statement
+    return default_years;
+  };
+  
+  /**
    * Returns the maximum allowed temporal proximity gap between two benchmark years: +/-200 years or the HYDE interval at that time period, whichever is greater.
    * @alias population_Stadester_uud.getMaxTemporalProximityGap
    * 
@@ -92,15 +120,35 @@
     let y1 = Number(arg1_y1);
     
     //Declare local instance variables
+    let cfg = global.population_Stadester_config;
+    let hyde_years = (typeof landuse_HYDE !== "undefined" && Array.isArray(landuse_HYDE.sorted_hyde_years) && landuse_HYDE.sorted_hyde_years.length > 0) ?
+      landuse_HYDE.sorted_hyde_years : population_Stadester_uud.getDefaultHYDEYears();
+    let max_hyde_step = 0;
     let max_yr = Math.max(y0, y1);
+    let min_hiatus = (cfg && Number.isFinite(cfg.min_hiatus_years)) ? cfg.min_hiatus_years : 200;
     let min_yr = Math.min(y0, y1);
     
-    //Return statement
-    if (min_yr < 0 && max_yr <= 200) {
-      return Math.max(200, population_Stadester_uud.getHydeIntervalAtYear(min_yr));
-    } else {
-      return Math.max(200, population_Stadester_uud.getHydeIntervalAtYear(max_yr));
+    //Guard clauses
+    if (!Number.isFinite(y0) || !Number.isFinite(y1)) return min_hiatus;
+    
+    //Function body
+    if (min_yr < hyde_years[0])
+      max_hyde_step = 1000;
+    
+    for (let i = 0; i < hyde_years.length - 1; i++) {
+      let h_a = hyde_years[i];
+      let h_b = hyde_years[i + 1];
+      let step = h_b - h_a;
+      if (min_yr === max_yr) {
+        if (min_yr >= h_a && min_yr <= h_b && step > max_hyde_step)
+          max_hyde_step = step;
+      } else if (h_b > min_yr && h_a < max_yr && step > max_hyde_step) {
+        max_hyde_step = step;
+      }
     }
+    
+    //Return statement
+    return Math.max(min_hiatus, max_hyde_step);
   };
   
   /**
@@ -666,7 +714,8 @@
           "1990": 4900,
           "2000": 5000,
           "2010": 5200,
-          "2020": 5700
+          "2020": 5700,
+          "2025": 5800
         },
         type: "manual"
       };
@@ -701,7 +750,8 @@
           "1990": 352000,
           "2000": 432000,
           "2010": 540000,
-          "2020": 680000
+          "2020": 680000,
+          "2025": 710000
         },
         type: "manual"
       };
@@ -709,6 +759,19 @@
     //Ensure Lamphun geolocation is fixed to authoritative coordinates
     if (return_obj["Lamphun-Thailand"])
       return_obj["Lamphun-Thailand"].coords = [18.5744357, 99.00369719999999];
+    
+    //Record true pre-interpolation empirical bounds so downstream GHSL/GHS-POP partitioning knows exact census end-years
+    let final_uud_keys = Object.keys(return_obj);
+    for (let i = 0; i < final_uud_keys.length; i++) {
+      let local_city = return_obj[final_uud_keys[i]];
+      if (!local_city || !local_city.population) continue;
+      let all_yrs = Object.keys(local_city.population).map(Number).filter(n => !isNaN(n)).sort((a, b) => a - b);
+      let pos_yrs = all_yrs.filter(y => Number(local_city.population[y]) > 0);
+      local_city._raw_min_year = (pos_yrs.length > 0) ? pos_yrs[0] : null;
+      local_city._raw_max_year = (pos_yrs.length > 0) ? pos_yrs[pos_yrs.length - 1] : null;
+      if (local_city.population["-999"] === 0 || (all_yrs.length > 0 && Number(local_city.population[all_yrs[all_yrs.length - 1]]) <= 0))
+        local_city._raw_lapsed = true;
+    }
     
     //Return statement
     return return_obj;
@@ -733,16 +796,10 @@
     
     //Declare local instance variables
     let all_cities = Object.keys(uud_obj);
-    let hyde_years = (typeof landuse_HYDE !== "undefined" && landuse_HYDE) ? landuse_HYDE.sorted_hyde_years : [
-      -3000, -2500, -2000, -1500, -1000, -900, -800, -700, -600, -500,
-      -400, -300, -200, -100, 0, 100, 200, 300, 400, 500, 600, 700,
-      800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1710,
-      1720, 1730, 1740, 1750, 1760, 1770, 1780, 1790, 1800, 1810, 1820,
-      1830, 1840, 1850, 1860, 1870, 1880, 1890, 1900, 1910, 1920, 1930,
-      1940, 1950, 1960, 1970, 1980, 1990, 2000, 2005, 2010, 2015, 2020
-    ];
+    let hyde_years = (typeof landuse_HYDE !== "undefined" && landuse_HYDE && landuse_HYDE.sorted_hyde_years) ?
+      landuse_HYDE.sorted_hyde_years : population_Stadester_uud.getDefaultHYDEYears();
     let prehistoric_1000y = [-10000, -9000, -8000, -7000, -6000, -5000, -4000];
-    let antiquity_100y = Array.from({ length: 31 }, (_, i) => -3000 + i * 100);
+    let antiquity_100y = Array.from({ length: 31 }, (_, i) => -3000 + i*100);
     let post_1ad = hyde_years.filter(y => y > 0 && y <= 2025);
     let target_years = (options.years) ? options.years.filter(y => y >= -10000 && y <= 2025) : [...prehistoric_1000y, ...antiquity_100y, ...post_1ad];
     
@@ -750,6 +807,16 @@
     for (let i = 0; i < all_cities.length; i++) {
       let local_city = uud_obj[all_cities[i]];
       if (!local_city || !local_city.population) continue;
+      
+      //Record empirical span before interpolation if not already annotated
+      if (local_city._raw_max_year === undefined) {
+        let all_yrs = Object.keys(local_city.population).map(Number).filter(n => !isNaN(n)).sort((a, b) => a - b);
+        let pos_yrs = all_yrs.filter(y => Number(local_city.population[y]) > 0);
+        local_city._raw_min_year = (pos_yrs.length > 0) ? pos_yrs[0] : null;
+        local_city._raw_max_year = (pos_yrs.length > 0) ? pos_yrs[pos_yrs.length - 1] : null;
+        if (local_city.population["-999"] === 0 || (all_yrs.length > 0 && Number(local_city.population[all_yrs[all_yrs.length - 1]]) <= 0))
+          local_city._raw_lapsed = true;
+      }
       
       let valid_keys = Object.keys(local_city.population).filter(k => local_city.population[k] > 0);
       if (valid_keys.length >= 2) {
@@ -764,18 +831,20 @@
       }
     }
     
-    //Pad modern forward
-    for (let i = 0; i < all_cities.length; i++) {
-      let city = uud_obj[all_cities[i]];
-      if (!city || !city.population) continue;
-      let pop_keys = Object.keys(city.population).map(Number).filter(n => !isNaN(n)).sort((a, b) => a - b);
-      if (pop_keys.length > 0) {
-        let max_year = pop_keys[pop_keys.length - 1];
-        let last_val = city.population[max_year];
-        if (max_year >= 1975) {
-          for (let j = 0; j < target_years.length; j++) {
-            if (target_years[j] > max_year && target_years[j] <= 2025)
-              city.population[target_years[j]] = last_val;
+    //Legacy flat forward-padding is disabled by default so GHS-POP gridcell partitioning handles post-empirical tails dynamically
+    if (options.pad_modern_flat === true) {
+      for (let i = 0; i < all_cities.length; i++) {
+        let city = uud_obj[all_cities[i]];
+        if (!city || !city.population) continue;
+        let pop_keys = Object.keys(city.population).map(Number).filter(n => !isNaN(n)).sort((a, b) => a - b);
+        if (pop_keys.length > 0) {
+          let max_year = pop_keys[pop_keys.length - 1];
+          let last_val = city.population[max_year];
+          if (max_year >= 1975) {
+            for (let j = 0; j < target_years.length; j++) {
+              if (target_years[j] > max_year && target_years[j] <= 2025)
+                city.population[target_years[j]] = last_val;
+            }
           }
         }
       }
@@ -895,6 +964,20 @@
                   leader_entry.had_merged_keys = true;
                 }
               }
+              if (Number.isFinite(candidate_city._raw_min_year))
+                leader_city._raw_min_year = Number.isFinite(leader_city._raw_min_year) ?
+                  Math.min(leader_city._raw_min_year, candidate_city._raw_min_year) : candidate_city._raw_min_year;
+              if (Number.isFinite(candidate_city._raw_max_year))
+                leader_city._raw_max_year = Number.isFinite(leader_city._raw_max_year) ?
+                  Math.max(leader_city._raw_max_year, candidate_city._raw_max_year) : candidate_city._raw_max_year;
+              if (Array.isArray(candidate_city._war_displacement_years)) {
+                if (!leader_city._war_displacement_years) leader_city._war_displacement_years = [];
+                for (let w = 0; w < candidate_city._war_displacement_years.length; w++) {
+                  let w_yr = candidate_city._war_displacement_years[w];
+                  if (!leader_city._war_displacement_years.includes(w_yr))
+                    leader_city._war_displacement_years.push(w_yr);
+                }
+              }
               merged_into_cluster = true;
               break;
             }
@@ -995,11 +1078,15 @@
       }
       
       if (metro_match && local_city.population && metro_match.population) {
-        let pop_keys = Object.keys(local_city.population);
+        let local_max_yr = Number.isFinite(local_city._raw_max_year) ? local_city._raw_max_year : -Infinity;
+        let pop_keys = Object.keys(metro_match.population);
         for (let x = 0; x < pop_keys.length; x++) {
           let yr = pop_keys[x];
+          let yr_num = Number(yr);
           let agg_pop = parseFloat(metro_match.population[yr]);
           let city_pop = parseFloat(local_city.population[yr]);
+          if (isNaN(city_pop) && Number.isFinite(local_max_yr) && yr_num > local_max_yr && (yr_num - local_max_yr) <= 30)
+            city_pop = parseFloat(local_city.population[local_max_yr]);
           if (!isNaN(agg_pop) && !isNaN(city_pop)) {
             local_city.metro_key = metro_match.key;
             metro_match.population[yr] = Math.max(0, agg_pop - city_pop);
@@ -1067,8 +1154,11 @@
             "1990": 4900,
             "2000": 5000,
             "2010": 5200,
-            "2020": 5700
+            "2020": 5700,
+            "2025": 5800
           },
+          _raw_min_year: 1400,
+          _raw_max_year: 2025,
           type: "manual"
         };
       
@@ -1103,16 +1193,47 @@
             "1990": 352000,
             "2000": 432000,
             "2010": 540000,
-            "2020": 680000
+            "2020": 680000,
+            "2025": 710000
           },
+          _raw_min_year: 1557,
+          _raw_max_year: 2025,
           type: "manual"
         };
       
+      //Ensure Vaduz and Macau have smooth modern annual entries
+      let manual_entries = [
+        { key: "Vaduz-Liechtenstein", pop_2025: 5800 },
+        { key: "Macau-Macao", pop_2025: 710000 }
+      ];
+      for (let i = 0; i < manual_entries.length; i++) {
+        let m_cfg = manual_entries[i];
+        let m_city = stadester_obj[m_cfg.key];
+        if (!m_city || !m_city.population) continue;
+        if (m_city.population["2025"] === undefined) m_city.population["2025"] = m_cfg.pop_2025;
+        m_city._raw_max_year = 2025;
+        let missing_yrs = [];
+        for (let x = 1950; x <= 2025; x++)
+          if (m_city.population[x] === undefined) missing_yrs.push(x);
+        if (missing_yrs.length > 0)
+          m_city.population = population_Stadester_uud.linearInterpolationObject(m_city.population, { years: missing_yrs });
+      }
+      
       if (stadester_obj["Cardiff-United Kingdom"] && stadester_obj["Rhondda-United Kingdom"]) {
-        let cardiff_pop = JSON.parse(JSON.stringify(stadester_obj["Cardiff-United Kingdom"].population));
-        let rhondda_pop = JSON.parse(JSON.stringify(stadester_obj["Rhondda-United Kingdom"].population));
-        stadester_obj["Cardiff-United Kingdom"].population = rhondda_pop;
-        stadester_obj["Rhondda-United Kingdom"].population = cardiff_pop;
+        let cardiff_city = stadester_obj["Cardiff-United Kingdom"];
+        let rhondda_city = stadester_obj["Rhondda-United Kingdom"];
+        let cardiff_max = cardiff_city._raw_max_year;
+        let cardiff_min = cardiff_city._raw_min_year;
+        let cardiff_pop = JSON.parse(JSON.stringify(cardiff_city.population));
+        let rhondda_max = rhondda_city._raw_max_year;
+        let rhondda_min = rhondda_city._raw_min_year;
+        let rhondda_pop = JSON.parse(JSON.stringify(rhondda_city.population));
+        cardiff_city.population = rhondda_pop;
+        cardiff_city._raw_max_year = rhondda_max;
+        cardiff_city._raw_min_year = rhondda_min;
+        rhondda_city.population = cardiff_pop;
+        rhondda_city._raw_max_year = cardiff_max;
+        rhondda_city._raw_min_year = cardiff_min;
       }
       delete stadester_obj["Minneapolis-United States of America"];
       
@@ -1130,6 +1251,10 @@
                   delete t_city[props[p]][yr_keys[y]];
               }
             }
+          }
+          if (t_city.population) {
+            let pos_yrs = Object.keys(t_city.population).map(Number).filter(n => !isNaN(n) && Number(t_city.population[n]) > 0).sort((a, b) => a - b);
+            t_city._raw_min_year = (pos_yrs.length > 0) ? pos_yrs[0] : null;
           }
         }
       }
@@ -1152,6 +1277,7 @@
           if (m_city.population) {
             m_city.population["-999"] = 0;
           }
+          m_city._raw_lapsed = true;
         }
       }
     } catch (e) {

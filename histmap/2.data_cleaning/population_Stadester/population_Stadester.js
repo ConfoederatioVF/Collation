@@ -9,7 +9,11 @@
         require(path.join(cur_dir, "config", "stadester_config.js"));
       if (!global.population_Stadester_uud && fs.existsSync(path.join(cur_dir, "stadester_uud.js")))
         require(path.join(cur_dir, "stadester_uud.js"));
-      if (!global.population_Stadester_ghsl && fs.existsSync(path.join(cur_dir, "stadester_ghsl.js")))
+      if (!global.population_Stadester_ghsl_helpers && fs.existsSync(path.join(cur_dir, "stadester_ghsl_helpers.js")))
+        require(path.join(cur_dir, "stadester_ghsl_helpers.js"));
+      if (!global.population_Stadester_ghs_pop && fs.existsSync(path.join(cur_dir, "stadester_ghs_pop.js")))
+        require(path.join(cur_dir, "stadester_ghs_pop.js"));
+      if ((!global.population_Stadester_ghsl || !global.population_Stadester_ghsl.integrateGHSLIntoStadester) && fs.existsSync(path.join(cur_dir, "stadester_ghsl.js")))
         require(path.join(cur_dir, "stadester_ghsl.js"));
       if (!global.population_Stadester_density && fs.existsSync(path.join(cur_dir, "stadester_density.js")))
         require(path.join(cur_dir, "stadester_density.js"));
@@ -55,12 +59,26 @@
     static urban_antiquity_years = Array.from({ length: 31 }, (_, i) => -3000 + i * 100);
 
     /**
+     * Resolves canonical HYDE years from landuse_HYDE or standalone UUD fallback.
+     * @returns {Array<number>}
+     */
+    static get resolved_hyde_years () {
+      let default_years = (typeof population_Stadester_uud !== "undefined" && population_Stadester_uud.getDefaultHYDEYears) ?
+        population_Stadester_uud.getDefaultHYDEYears() : [1800];
+      
+      //Return statement
+      return (typeof landuse_HYDE !== "undefined" && landuse_HYDE.sorted_hyde_years) ?
+        landuse_HYDE.sorted_hyde_years : default_years;
+    }
+
+    /**
      * Complete array of urban years: all 100-year antiquity intervals (-10000 to 0) + post-1AD HYDE years.
      * @returns {Array<number>}
      */
     static get all_urban_years () {
-      let post_1ad = (typeof landuse_HYDE !== "undefined" && landuse_HYDE.sorted_hyde_years) ?
-        landuse_HYDE.sorted_hyde_years.filter(y => y > 0) : [];
+      let post_1ad = this.resolved_hyde_years.filter(y => y > 0);
+      
+      //Return statement
       return [...this.antiquity_years, ...post_1ad];
     }
     
@@ -140,11 +158,22 @@
         raw_folder: this.raw_folder,
         ...options
       });
-      fs.writeFileSync(this.file_processed_stadester, JSON.stringify(stadester_obj, null, 2));
+      if (typeof population_Stadester_ghs_pop !== "undefined" && typeof population_Stadester_ghs_pop.cleanTransientMetadata === "function")
+        population_Stadester_ghs_pop.cleanTransientMetadata(stadester_obj);
+      
+      if (typeof population_Stadester_ghs_pop !== "undefined" && typeof population_Stadester_ghs_pop.writeJSONSafe === "function") {
+        population_Stadester_ghs_pop.writeJSONSafe(this.file_processed_stadester, stadester_obj);
+      } else {
+        fs.writeFileSync(this.file_processed_stadester, JSON.stringify(stadester_obj, null, 2));
+      }
       console.log(`- Saved processed Stadestér dataset to ${this.file_processed_stadester}.`);
       
       if (!options.do_not_sync_vis && this.file_stadester_vis && fs.existsSync(path.dirname(path.resolve(this.file_stadester_vis)))) {
-        fs.writeFileSync(this.file_stadester_vis, JSON.stringify(stadester_obj, null, 2));
+        if (typeof population_Stadester_ghs_pop !== "undefined" && typeof population_Stadester_ghs_pop.writeJSONSafe === "function") {
+          population_Stadester_ghs_pop.writeJSONSafe(this.file_stadester_vis, stadester_obj);
+        } else {
+          fs.writeFileSync(this.file_stadester_vis, JSON.stringify(stadester_obj, null, 2));
+        }
         console.log(`- Synchronised processed Stadestér visualisation dataset to ${this.file_stadester_vis}.`);
       }
       
@@ -171,7 +200,13 @@
         raw_folder: this.raw_folder,
         ...options
       });
-      fs.writeFileSync(this.file_stadester_areas, JSON.stringify(stadester_obj, null, 2));
+      if (typeof population_Stadester_ghs_pop !== "undefined" && typeof population_Stadester_ghs_pop.cleanTransientMetadata === "function")
+        population_Stadester_ghs_pop.cleanTransientMetadata(stadester_obj);
+      if (typeof population_Stadester_ghs_pop !== "undefined" && typeof population_Stadester_ghs_pop.writeJSONSafe === "function") {
+        population_Stadester_ghs_pop.writeJSONSafe(this.file_stadester_areas, stadester_obj);
+      } else {
+        fs.writeFileSync(this.file_stadester_areas, JSON.stringify(stadester_obj, null, 2));
+      }
       console.log(`- Saved Stadestér areas to ${this.file_stadester_areas}.`);
       
       //Return statement
@@ -194,13 +229,23 @@
         stadester_obj = JSON.parse(fs.readFileSync(this.file_stadester_areas, "utf8"));
       
       stadester_obj = population_Stadester_density.cacheRadialBuffers(stadester_obj);
-      fs.writeFileSync(this.file_stadester_final, JSON.stringify(stadester_obj, null, 2));
+      if (typeof population_Stadester_ghs_pop !== "undefined" && typeof population_Stadester_ghs_pop.cleanTransientMetadata === "function")
+        population_Stadester_ghs_pop.cleanTransientMetadata(stadester_obj);
+      if (typeof population_Stadester_ghs_pop !== "undefined" && typeof population_Stadester_ghs_pop.writeJSONSafe === "function") {
+        population_Stadester_ghs_pop.writeJSONSafe(this.file_stadester_final, stadester_obj);
+      } else {
+        fs.writeFileSync(this.file_stadester_final, JSON.stringify(stadester_obj, null, 2));
+      }
       console.log(`- Saved final radially-buffered Stadestér dataset to ${this.file_stadester_final}.`);
       
       if (this.file_stadester_vis) {
         let vis_dir = path.dirname(path.resolve(this.file_stadester_vis));
         if (!fs.existsSync(vis_dir)) fs.mkdirSync(vis_dir, { recursive: true });
-        fs.writeFileSync(this.file_stadester_vis, JSON.stringify(stadester_obj, null, 2));
+        if (typeof population_Stadester_ghs_pop !== "undefined" && typeof population_Stadester_ghs_pop.writeJSONSafe === "function") {
+          population_Stadester_ghs_pop.writeJSONSafe(this.file_stadester_vis, stadester_obj);
+        } else {
+          fs.writeFileSync(this.file_stadester_vis, JSON.stringify(stadester_obj, null, 2));
+        }
         console.log(`- Synchronised final Stadestér dataset to ${this.file_stadester_vis}.`);
       }
       
@@ -211,7 +256,11 @@
       for (let i = 0; i < dataview_targets.length; i++) {
         let dv_target = dataview_targets[i];
         if (fs.existsSync(path.dirname(dv_target))) {
-          fs.writeFileSync(dv_target, JSON.stringify(stadester_obj, null, 2));
+          if (typeof population_Stadester_ghs_pop !== "undefined" && typeof population_Stadester_ghs_pop.writeJSONSafe === "function") {
+            population_Stadester_ghs_pop.writeJSONSafe(dv_target, stadester_obj);
+          } else {
+            fs.writeFileSync(dv_target, JSON.stringify(stadester_obj, null, 2));
+          }
           let dv_cache = path.join(path.dirname(dv_target), "cache", "stadester_1.1_lite.json");
           if (fs.existsSync(dv_cache)) try { fs.unlinkSync(dv_cache); } catch (e) {}
           console.log(`- Synchronised final Stadestér dataset to Dataview (${dv_target}).`);
@@ -303,8 +352,7 @@
       let options = (arg0_options) ? arg0_options : {};
       
       //Declare local instance variables
-      let hyde_years = (typeof landuse_HYDE !== "undefined" && landuse_HYDE.sorted_hyde_years) ?
-        landuse_HYDE.sorted_hyde_years : [1800];
+      let hyde_years = this.resolved_hyde_years;
       let years = options.years || hyde_years.filter(y => y >= -10000 && y <= 2025);
       
       this.ensureDirectories();
@@ -329,8 +377,7 @@
       let options = (arg0_options) ? arg0_options : {};
       
       //Declare local instance variables
-      let hyde_years = (typeof landuse_HYDE !== "undefined" && landuse_HYDE.sorted_hyde_years) ?
-        landuse_HYDE.sorted_hyde_years : [1800];
+      let hyde_years = this.resolved_hyde_years;
       let years = options.years || hyde_years.filter(y => y >= -10000 && y <= 2025);
       
       this.ensureDirectories();
@@ -355,8 +402,7 @@
       let options = (arg0_options) ? arg0_options : {};
       
       //Declare local instance variables
-      let hyde_years = (typeof landuse_HYDE !== "undefined" && landuse_HYDE.sorted_hyde_years) ?
-        landuse_HYDE.sorted_hyde_years : [1800];
+      let hyde_years = this.resolved_hyde_years;
       let years = options.years || hyde_years.filter(y => y >= -10000 && y <= 2025);
       
       this.ensureDirectories();
@@ -433,7 +479,7 @@
           console.log(`- Synchronised repaired Stadestér GHSL dataset to Project 2136 (${p2136_target}).`);
         }
         
-        let dataview_target = "D:/Project 1436 - Dataview/data/stadester/stadester_1.1.json";
+        let dataview_target = "D:/Project 1436 - Dataview/data/stadester/stadester_ghsl.json";
         if (fs.existsSync(path.dirname(dataview_target))) {
           fs.writeFileSync(dataview_target, JSON.stringify(result, null, 2));
           console.log(`- Synchronised repaired Stadestér GHSL dataset to Dataview (${dataview_target}).`);

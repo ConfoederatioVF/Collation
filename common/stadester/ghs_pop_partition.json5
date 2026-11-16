@@ -1,0 +1,16 @@
+{
+  //Dynamic Post-Empirical GHS-POP Gridcell Partitioning Configuration for population_Stadester
+  cleaned_2020_plus_y_offset: 0,
+  cleaned_pre_2020_y_offset: -1,
+  coastal_snap_radius_px: 1,
+  cutoff_year: 1975,
+  end_year: 2025,
+  ghs_pop_cleaned_folder: "./histmap/2.data_cleaning/population_GHSL/cleaned_rasters/",
+  ghs_pop_raw_fallback_folder: "./histmap/1.data_raw/population_GHSL/population_rasters/2.rasters/",
+  land_area_raster_path: "./histmap/1.data_raw/metadata_HYDE/general_rasters/land_area.png",
+  min_hiatus_years: 200,
+  preserve_manual_entries: true,
+  preserve_war_displacement_entries: true,
+  raw_fallback_y_offset: -1,
+  ucdb_csv_path: "./histmap/1.data_raw/population_GHSL/GHS_UCDB_MTUC_GLOBE_R2024A.csv"
+}
