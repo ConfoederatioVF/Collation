@@ -58,7 +58,7 @@
     static file_stadester_areas = `${this.transform_stadester_folder}stadester_areas`;
     static file_stadester_final = `${this.transform_stadester_folder}stadester`;
     static file_stadester_ghsl = `${this.transform_stadester_folder}stadester_ghsl`;
-    static file_stadester_vis = `${(typeof h5 !== "undefined") ? h5 : "./histmap/5.data_visualisation/"}stadester/stadester_1.1`;
+    static file_stadester_vis = `${(typeof h5 !== "undefined") ? h5 : "./histmap/5.data_visualisation/"}stadester/stadester_2.0`;
     
     static antiquity_years = Array.from({ length: 101 }, (_, i) => -10000 + i * 100);
     static urban_antiquity_years = Array.from({ length: 31 }, (_, i) => -3000 + i * 100);
@@ -228,28 +228,30 @@
       stadester_obj = population_Stadester_density.cacheRadialBuffers(stadester_obj);
       if (typeof population_Stadester_ghs_pop !== "undefined" && typeof population_Stadester_ghs_pop.cleanTransientMetadata === "function")
         population_Stadester_ghs_pop.cleanTransientMetadata(stadester_obj);
-      StadesterPartitionIO.writePartitionedStadester(this.file_stadester_final, stadester_obj, { version: "1.1" });
+      StadesterPartitionIO.writePartitionedStadester(this.file_stadester_final, stadester_obj, { version: "2.0" });
       console.log(`- Saved final partitioned Stadestér dataset to ${this.file_stadester_final}.`);
       
       if (this.file_stadester_vis) {
         let vis_dir = path.dirname(path.resolve(this.file_stadester_vis));
         if (!fs.existsSync(vis_dir)) fs.mkdirSync(vis_dir, { recursive: true });
-        StadesterPartitionIO.writePartitionedStadester(this.file_stadester_vis, stadester_obj, { version: "1.1" });
+        StadesterPartitionIO.writePartitionedStadester(this.file_stadester_vis, stadester_obj, { version: "2.0" });
         console.log(`- Synchronised final partitioned Stadestér dataset to ${this.file_stadester_vis}.`);
       }
       
       let dataview_targets = [
-        "F:/Active Projects/Project 1436 - Dataview/data/stadester/stadester_1.1",
-        "D:/Project 1436 - Dataview/data/stadester/stadester_1.1"
+        "F:/Active Projects/Project 1436 - Dataview/data/stadester/stadester_2.0",
+        "D:/Project 1436 - Dataview/data/stadester/stadester_2.0"
       ];
       for (let i = 0; i < dataview_targets.length; i++) {
         let dv_target = dataview_targets[i];
         let dv_dir = path.dirname(dv_target);
         if (fs.existsSync(dv_dir)) {
-          StadesterPartitionIO.writePartitionedStadester(dv_target, stadester_obj, { version: "1.1" });
-          let dv_cache = path.join(dv_dir, "cache", "stadester_1.1_lite.json");
+          StadesterPartitionIO.writePartitionedStadester(dv_target, stadester_obj, { version: "2.0" });
+          let dv_cache = path.join(dv_dir, "cache", "stadester_2.0_lite.json");
+          let dv_indexed_cache = path.join(dv_dir, "cache", "stadester_2.0_indexed.json");
           let dv_city_cache = path.join(dv_dir, "cache", "stadester_city_cache.json");
           if (fs.existsSync(dv_cache)) try { fs.unlinkSync(dv_cache); } catch (e) {}
+          if (fs.existsSync(dv_indexed_cache)) try { fs.unlinkSync(dv_indexed_cache); } catch (e) {}
           if (fs.existsSync(dv_city_cache)) try { fs.unlinkSync(dv_city_cache); } catch (e) {}
           this.syncDataviewCityCoords(dv_dir, stadester_obj);
           console.log(`- Synchronised final partitioned Stadestér dataset to Dataview (${dv_target}).`);
@@ -511,7 +513,8 @@
         return 6371*2*Math.asin(Math.sqrt(Math.min(1, hav)));
       };
       let meta_list;
-      let meta_path = path.join(dv_dir, "city_metadata.json");
+      let versioned_meta_path = path.join(dv_dir, "stadester_2.0", "city_metadata.json");
+      let meta_path = fs.existsSync(versioned_meta_path) ? versioned_meta_path : path.join(dv_dir, "city_metadata.json");
       let meta_updated = 0;
       let norm_name = (s) => String(s || "").replace(/ß/gi, "ss").normalize("NFD").replace(/[\u0300-\u036f`'’]/g, "").toLowerCase().replace(/[^a-z0-9]/g, "");
       let reloc_grid = new Map();

@@ -359,7 +359,8 @@
       }
     } catch (e) {}
     try {
-      let p_meta = path.join(dv_dir, "city_metadata.json");
+      let p_meta_versioned = path.join(dv_dir, "stadester_2.0", "city_metadata.json");
+      let p_meta = fs.existsSync(p_meta_versioned) ? p_meta_versioned : path.join(dv_dir, "city_metadata.json");
       if (fs.existsSync(p_meta)) {
         let raw_meta = JSON.parse(fs.readFileSync(p_meta, "utf8"));
         let meta_arr = Array.isArray(raw_meta) ? raw_meta : Object.values(raw_meta);

@@ -2,9 +2,7 @@
 name: population-regional-study
 description: >-
   End-to-end Operation Viscount regional demographic study, settlement gazetteer,
-  non-stationary Matérn kriging substrata, Intellte RMarkdown publishing, and Dataview
-  historical toponymy pipeline. Supersedes the legacy /literature-review-population workflow
-  using POLARIS as the holotype across all 14 canonical macro-regions.
+  non-stationary Matérn kriging substrata, Intellte RMarkdown publishing, and Dataview historical toponymy pipeline. Supersedes the legacy /literature-review-population workflow using POLARIS as the holotype across all 14 canonical macro-regions.
 ---
 
 # Operation Viscount Regional Study (`/population-regional-study`)
@@ -79,15 +77,15 @@ Write authentic academic prose in **non-Oxford British English (EN-GB)**.
    ```
 3. Run `npm run docs:build` after major milestone updates to refresh the VitePress bundle and static `.html` redirect stubs.
 
-### Stage F: Stadestér Export & Gemini Flash Historical Toponymy Sync
+### Stage F: Stadestér 2.0 Export & Gemini Flash Historical Toponymy Sync
 
-1. Export updated UUD (`histmap/2.data_cleaning/population_Stadester/uud/`) and partitioned Stadestér outputs (`histmap/3.data_transform/population_Stadester.transform/stadester/`) and copy shards to Dataview (`F:/Active Projects/Project 1436 - Dataview/data/stadester/`).
-2. Extract unmatched or corrupted regional settlement records into `30`-city batches:
+1. Export updated UUD (`histmap/2.data_cleaning/population_Stadester/uud/`) and partitioned Stadestér 2.0 outputs (`histmap/3.data_transform/population_Stadester.transform/stadester/`) and synchronise shards to `F:/Active Projects/Project 1436 - Dataview/data/stadester/stadester_2.0/` (`stadester_1.1/` and `stadester_1.0/` remain frozen legacy versions with independent `city_metadata.json` files).
+2. Extract unmatched or corrupted regional settlement records into `30`-city batches (defaults to `--dataset=stadester_2.0`, resolving `data/stadester/stadester_2.0/city_metadata.json`):
    ```powershell
    node .agents/skills/population-regional-study/scripts/extract_missing_city_metadata.js --project=<PROJECT_KEY>
    ```
 3. Run the Gemini Flash toponymy workflow (`run_workflow`) over `.agents/skills/population-regional-study/scripts/run_historical_names_swarm.py` with `Args: {"project": "<PROJECT_KEY>", "slug": "<slug>", "model": "flash"}`.
-4. Validate (`isCorruptedCityName`, `/^-?\d+\.\d+\.\d+$/`, `[lat, lng]` -> `[lng, lat]` transpose, non-destructive `capital` preservation) and commit into Dataview `city_metadata.json` + evict stale `*_lite.json` caches:
+4. Validate (`isCorruptedCityName`, `/^-?\d+\.\d+\.\d+$/`, `[lat, lng]` -> `[lng, lat]` transpose, non-destructive `capital` preservation) and commit into Dataview `data/stadester/stadester_2.0/city_metadata.json` while evicting `stadester_2.0_lite.json` and `stadester_2.0_indexed.json`:
    ```powershell
    node .agents/skills/population-regional-study/scripts/merge_city_metadata.js --project=<PROJECT_KEY>
    ```

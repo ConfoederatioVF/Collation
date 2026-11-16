@@ -1,7 +1,7 @@
 config.mapmodes.stadester = {
-	name: "Stadestér 1.1",
+	name: "Stadestér 2.0",
 	icon: "location_city",
-	description: "Displays urban locations from Stadestér 1.1.",
+	description: "Displays urban locations from Stadestér 2.0.",
 	tooltip: "Urban data (3000BC-2025AD).",
 	
 	special_function: () => {
@@ -9,7 +9,12 @@ config.mapmodes.stadester = {
 		let all_geometries = [];
 		let config_obj = config.mapmodes.stadester;
 		if (!config_obj.stadester_obj) {
-			if (typeof StadesterPartitionIO !== "undefined" && StadesterPartitionIO.hasDataset(`${h5}/stadester/stadester_1.1`)) {
+			if (typeof StadesterPartitionIO !== "undefined" && StadesterPartitionIO.hasDataset(`${h5}/stadester/stadester_2.0`)) {
+				config_obj.stadester_obj = StadesterPartitionIO.readPartitionedStadester(`${h5}/stadester/stadester_2.0`);
+			} else if (fs.existsSync(`${h5}/stadester/stadester_2.0/stadester_manifest.json`)) {
+				let partition_mod = require(path.resolve("./histmap/2.data_cleaning/population_Stadester/StadesterPartitionIO.js"));
+				config_obj.stadester_obj = partition_mod.StadesterPartitionIO.readPartitionedStadester(`${h5}/stadester/stadester_2.0`);
+			} else if (typeof StadesterPartitionIO !== "undefined" && StadesterPartitionIO.hasDataset(`${h5}/stadester/stadester_1.1`)) {
 				config_obj.stadester_obj = StadesterPartitionIO.readPartitionedStadester(`${h5}/stadester/stadester_1.1`);
 			} else if (fs.existsSync(`${h5}/stadester/stadester_1.1/stadester_manifest.json`)) {
 				let partition_mod = require(path.resolve("./histmap/2.data_cleaning/population_Stadester/StadesterPartitionIO.js"));

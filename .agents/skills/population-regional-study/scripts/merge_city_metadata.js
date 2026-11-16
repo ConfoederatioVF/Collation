@@ -126,6 +126,7 @@ let path = require("path");
 
       //Declare local instance variables
       let args = {
+        dataset: "stadester_2.0",
         dataview_root: "",
         dry_run: false,
         in_dir: "",
@@ -138,6 +139,8 @@ let path = require("path");
         let tok = String(argv[i] || "");
         if (tok.startsWith("--project="))
           args.project = tok.slice(10).trim().toUpperCase();
+        else if (tok.startsWith("--dataset="))
+          args.dataset = tok.slice(10).trim();
         else if (tok.startsWith("--in-dir="))
           args.in_dir = tok.slice(9).trim();
         else if (tok.startsWith("--svea-root="))
@@ -153,11 +156,12 @@ let path = require("path");
     },
 
     /**
-     * Validates and merges Gemini Flash toponymy outputs into Dataview `city_metadata.json`,
-     * transposing SVEA `[lat, lng]` coordinates to Dataview `[lng, lat]` and clearing stale lite caches.
+     * Validates and merges Gemini Flash toponymy outputs into Dataview per-version `city_metadata.json`,
+     * transposing SVEA `[lat, lng]` coordinates to Dataview `[lng, lat]` and clearing stale caches for that version.
      * @alias city_metadata_merger.runMerge
      *
      * @param {Object} [arg0_options]
+     *  @param {string} [arg0_options.dataset="stadester_2.0"]
      *  @param {string} [arg0_options.dataview_root]
      *  @param {boolean} [arg0_options.dry_run=false]
      *  @param {string} [arg0_options.in_dir]
@@ -178,6 +182,7 @@ let path = require("path");
         rejected_name_entries: 0,
         updated: 0
       };
+      let dataset_id = (options.dataset) ? String(options.dataset).replace(/\.json$/i, "") : "stadester_2.0";
       let date_regex = /^-?\d+\.\d+\.\d+$/;
       let svea_root = (options.svea_root) ? path.resolve(options.svea_root) :
         path.resolve(__dirname, "../../../..");
@@ -200,7 +205,10 @@ let path = require("path");
 
       let in_dir = (options.in_dir) ? path.resolve(options.in_dir) :
         path.join(svea_root, "tests/toponymy_batches", project_slug);
-      let meta_path = path.join(dataview_root, "data/stadester/city_metadata.json");
+      let versioned_meta_dir = path.join(dataview_root, "data/stadester", dataset_id);
+      let meta_path = fs.existsSync(versioned_meta_dir) ?
+        path.join(versioned_meta_dir, "city_metadata.json") :
+        path.join(dataview_root, "data/stadester/city_metadata.json");
       let cache_dir = path.join(dataview_root, "data/stadester/cache");
 
       //Guard clauses
@@ -387,17 +395,22 @@ let path = require("path");
       if (!options.dry_run) {
         fs.writeFileSync(meta_path, JSON.stringify(meta_array, null, 2), "utf8");
         if (fs.existsSync(cache_dir)) {
-          let cache_files = fs.readdirSync(cache_dir);
-          for (let i = 0; i < cache_files.length; i++) {
-            if (/_lite\.json$/i.test(cache_files[i])) {
-              fs.unlinkSync(path.join(cache_dir, cache_files[i]));
+          let stale_names = [
+            `${dataset_id}_lite.json`,
+            `${dataset_id}_indexed.json`,
+            "stadester_city_cache.json"
+          ];
+          for (let i = 0; i < stale_names.length; i++) {
+            let stale_path = path.join(cache_dir, stale_names[i]);
+            if (fs.existsSync(stale_path)) {
+              fs.unlinkSync(stale_path);
               counts.cache_files_removed++;
             }
           }
         }
       }
 
-      console.log(`[merge_city_metadata] Updated ${counts.updated}, inserted ${counts.inserted}, rejected items ${counts.rejected_items}, rejected name entries ${counts.rejected_name_entries}, removed ${counts.cache_files_removed} lite cache file(s).`);
+      console.log(`[merge_city_metadata] Updated ${counts.updated}, inserted ${counts.inserted}, rejected items ${counts.rejected_items}, rejected name entries ${counts.rejected_name_entries}, removed ${counts.cache_files_removed} cache file(s) for ${dataset_id}.`);
 
       //Return statement
       return counts;

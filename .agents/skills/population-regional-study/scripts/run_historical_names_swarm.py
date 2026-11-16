@@ -1,10 +1,10 @@
 """
 Operation Viscount historical toponymy resolution workflow (`run_workflow`).
 
-Fanns out fixed-size batches produced by `extract_missing_city_metadata.js`
+Fans out fixed-size batches produced by `extract_missing_city_metadata.js`
 across Gemini Flash agents (`model="flash"`) to reconstruct chronological Latin-script
 `historical_names` trajectories and clean corrupted ASCII-hacek/mojibake names
-before `merge_city_metadata.js` commits them to Dataview `city_metadata.json`.
+before `merge_city_metadata.js` commits them to Dataview `data/stadester/stadester_2.0/city_metadata.json`.
 """
 
 import json

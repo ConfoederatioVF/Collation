@@ -434,6 +434,14 @@
         };
       }
 
+      let versioned_file = path.join(stem_dir, `${path.basename(stem_dir)}.json`);
+      if (fs.existsSync(versioned_file) && fs.statSync(versioned_file).isFile()) {
+        return {
+          file_path: versioned_file,
+          mode: "legacy_file"
+        };
+      }
+
       if (fs.existsSync(stem_file) && fs.statSync(stem_file).isFile()) {
         return {
           file_path: stem_file,
@@ -574,7 +582,7 @@
      * @param {Object} arg1_stadester_obj
      * @param {Object} [arg2_options]
      *  @param {number} [arg2_options.max_shard_bytes=209715200]
-     *  @param {string} [arg2_options.version="1.1"]
+     *  @param {string} [arg2_options.version="2.0"]
      *
      * @returns {Object} Manifest summary written to `stadester_manifest.json`
      */
@@ -587,12 +595,12 @@
       //Initialise options
       let target_dir = (String(raw_target).endsWith(".json")) ?
         String(raw_target).slice(0, -5) : String(raw_target);
-      let version = (options.version) ? String(options.version) : "1.1";
+      let version = (options.version) ? String(options.version) : "2.0";
 
       //Declare local instance variables
       let all_keys = (stadester_obj && typeof stadester_obj === "object") ? Object.keys(stadester_obj) : [];
       let buckets = new Map();
-      let expected_files = new Set(["stadester_manifest.json"]);
+      let expected_files = new Set(["stadester_manifest.json", "city_metadata.json"]);
       let manifest_obj;
       let max_shard_bytes;
       let region_summaries = [];
@@ -642,7 +650,7 @@
       let existing_entries = fs.readdirSync(target_dir);
       for (let i = 0; i < existing_entries.length; i++) {
         let f_name = existing_entries[i];
-        if (f_name.endsWith(".json") && !expected_files.has(f_name)) {
+        if (/^\d{2}_[a-z0-9_]+(?:\.part\d+)?\.json$/i.test(f_name) && !expected_files.has(f_name)) {
           try {
             fs.unlinkSync(path.join(target_dir, f_name));
           } catch (e) {}

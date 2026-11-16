@@ -115,6 +115,7 @@ let path = require("path");
       //Declare local instance variables
       let args = {
         batch_size: 30,
+        dataset: "stadester_2.0",
         dataview_root: "",
         out_dir: "",
         project: "",
@@ -126,6 +127,8 @@ let path = require("path");
         let tok = String(argv[i] || "");
         if (tok.startsWith("--project="))
           args.project = tok.slice(10).trim().toUpperCase();
+        else if (tok.startsWith("--dataset="))
+          args.dataset = tok.slice(10).trim();
         else if (tok.startsWith("--svea-root="))
           args.svea_root = tok.slice(12).trim();
         else if (tok.startsWith("--dataview-root="))
@@ -141,12 +144,13 @@ let path = require("path");
     },
 
     /**
-     * Resolves repository roots, compares Viscount settlements against Dataview `city_metadata.json`,
+     * Resolves repository roots, compares Viscount settlements against Dataview per-version `city_metadata.json`,
      * and writes fixed-size JSON batches for Gemini Flash historical toponymy resolution.
      * @alias city_metadata_extractor.runExtraction
      *
      * @param {Object} [arg0_options]
-     *  @param {number} [arg0_options.batch_size=75]
+     *  @param {number} [arg0_options.batch_size=30]
+     *  @param {string} [arg0_options.dataset="stadester_2.0"]
      *  @param {string} [arg0_options.dataview_root]
      *  @param {string} [arg0_options.out_dir]
      *  @param {string} [arg0_options.project]
@@ -169,6 +173,7 @@ let path = require("path");
         total_checked: 0,
         up_to_date: 0
       };
+      let dataset_id = (options.dataset) ? String(options.dataset).replace(/\.json$/i, "") : "stadester_2.0";
       let svea_root = (options.svea_root) ? path.resolve(options.svea_root) :
         path.resolve(__dirname, "../../../..");
       let dataview_root = (options.dataview_root) ? path.resolve(options.dataview_root) :
@@ -177,7 +182,9 @@ let path = require("path");
 
       //Guard clauses
       let loader_path = path.join(svea_root, "histmap/2.data_cleaning/population_Stadester/ViscountGazetteerLoader.js");
-      let meta_path = path.join(dataview_root, "data/stadester/city_metadata.json");
+      let versioned_meta_path = path.join(dataview_root, "data/stadester", dataset_id, "city_metadata.json");
+      let legacy_meta_path = path.join(dataview_root, "data/stadester/city_metadata.json");
+      let meta_path = fs.existsSync(versioned_meta_path) ? versioned_meta_path : legacy_meta_path;
       let prec_path = path.join(svea_root, "histmap/2.data_cleaning/population_Stadester/config/viscount_precedence.json5");
 
       if (!fs.existsSync(loader_path)) {
