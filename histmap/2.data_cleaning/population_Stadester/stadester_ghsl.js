@@ -75,11 +75,29 @@
     }
     
     if (ghsl_obj) {
+      if (global.population_Stadester_ghs_pop && typeof population_Stadester_ghs_pop.loadCompleteUCDBMap === "function")
+        population_Stadester_ghs_pop.loadCompleteUCDBMap(ghsl_obj, options);
       all_ghsl_cities = Object.keys(ghsl_obj);
       for (let i = 0; i < all_ghsl_cities.length; i++) {
         let key_str = all_ghsl_cities[i].startsWith("ghsl-") ?
           all_ghsl_cities[i] : `ghsl-${all_ghsl_cities[i]}`;
         let local_city = JSON.parse(JSON.stringify(ghsl_obj[all_ghsl_cities[i]]));
+        if (/[?\uFFFD]/.test(key_str)) {
+          let entry_key = (local_city.key && !/[?\uFFFD]/.test(local_city.key)) ?
+            (local_city.key.startsWith("ghsl-") ? local_city.key : `ghsl-${local_city.key}`) : "";
+          if (entry_key) {
+            key_str = entry_key;
+          } else if (local_city.name && !/[?\uFFFD]/.test(local_city.name)) {
+            key_str = (local_city.country && !/[?\uFFFD]/.test(local_city.country) && local_city.country !== "#N/A") ?
+              `ghsl-${local_city.name}-${local_city.country}` : `ghsl-${local_city.name}`;
+          } else {
+            key_str = `ghsl-${local_city.id}`;
+          }
+          if (return_obj[key_str] && return_obj[key_str].id !== local_city.id)
+            key_str = `ghsl-${local_city.id}`;
+        }
+        if (Array.isArray(local_city.other_names))
+          local_city.other_names = local_city.other_names.filter(n => n && !/[?\uFFFD]/.test(String(n)));
         let pop_interp = (local_city.population) ?
           population_Stadester_ghsl.interpolateGHSLSeries(local_city.population) : null;
         let area_interp = (local_city.area) ?
@@ -429,6 +447,14 @@
     
     //4. Repair all GHSL and historical city display names
     population_Stadester_uud.repairGHSLCityNames(return_obj);
+    all_return_keys = Object.keys(return_obj);
+    for (let i = 0; i < all_return_keys.length; i++) {
+      let rk = all_return_keys[i];
+      if (!rk.startsWith("ghsl-")) continue;
+      let rc = return_obj[rk];
+      if (rc && Array.isArray(rc.other_names))
+        rc.other_names = rc.other_names.filter(n => n && !/[?\uFFFD]/.test(String(n)));
+    }
     
     //Return statement
     return return_obj;

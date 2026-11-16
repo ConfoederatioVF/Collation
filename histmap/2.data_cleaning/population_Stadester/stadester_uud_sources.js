@@ -94,6 +94,15 @@
     let pop_b = arg1_pop_b;
     
     //Declare local instance variables
+    let checkPeakFallback = function () {
+      let peak_a = population_Stadester_uud.getPeakPopulation(pop_a);
+      let peak_b = population_Stadester_uud.getPeakPopulation(pop_b);
+      if (peak_a > 0 && peak_b > 0) {
+        let ratio = peak_a/peak_b;
+        if (ratio < 0.1 || ratio > 10.0) return { valid: false, overlaps: false };
+      }
+      return { valid: true, overlaps: false };
+    };
     let fail_count = 0;
     let keys_a;
     let keys_b;
@@ -109,61 +118,35 @@
     let min_b = keys_b[0], max_b = keys_b[keys_b.length - 1];
     let int_start = Math.max(min_a, min_b);
     let int_end = Math.min(max_a, max_b);
-    
-    if (int_start > int_end) {
-      let peak_a = population_Stadester_uud.getPeakPopulation(pop_a);
-      let peak_b = population_Stadester_uud.getPeakPopulation(pop_b);
-      if (peak_a > 0 && peak_b > 0) {
-        let ratio = peak_a/peak_b;
-        if (ratio < 0.1 || ratio > 10.0) return { valid: false, overlaps: false };
-      }
-      return { valid: true, overlaps: false };
-    }
+    if (int_start > int_end) return checkPeakFallback();
     
     let all_keys = Array.from(new Set([...keys_a, ...keys_b])).sort((a, b) => a - b);
     let check_keys = all_keys.filter(yr => yr >= int_start && yr <= int_end);
-    
-    function getValueAtYear(pop, keys, yr) {
-      if (pop[yr] !== undefined) {
-        let val = Array.isArray(pop[yr]) ? pop[yr][0] : pop[yr];
-        return parseFloat(val);
-      }
+    let getValueAtYear = function (pop, keys, yr) {
+      if (pop[yr] !== undefined) return parseFloat(Array.isArray(pop[yr]) ? pop[yr][0] : pop[yr]);
       let lower = keys[0], upper = keys[keys.length - 1];
       for (let j = 0; j < keys.length; j++) {
         if (keys[j] < yr) lower = keys[j];
         if (keys[j] > yr) { upper = keys[j]; break; }
       }
-      let val_lower = parseFloat(Array.isArray(pop[lower]) ? pop[lower][0] : pop[lower]);
-      let val_upper = parseFloat(Array.isArray(pop[upper]) ? pop[upper][0] : pop[upper]);
-      if (!isNaN(val_lower) && !isNaN(val_upper) && upper !== lower)
-        return val_lower + (val_upper - val_lower)*((yr - lower)/(upper - lower));
-      return isNaN(val_lower) ? val_upper : val_lower;
-    }
+      let vl = parseFloat(Array.isArray(pop[lower]) ? pop[lower][0] : pop[lower]);
+      let vu = parseFloat(Array.isArray(pop[upper]) ? pop[upper][0] : pop[upper]);
+      if (!isNaN(vl) && !isNaN(vu) && upper !== lower) return vl + (vu - vl)*((yr - lower)/(upper - lower));
+      return isNaN(vl) ? vu : vl;
+    };
     
     for (let k = 0; k < check_keys.length; k++) {
       let yr = check_keys[k];
-      let num_a = getValueAtYear(pop_a, keys_a, yr);
-      let num_b = getValueAtYear(pop_b, keys_b, yr);
-      
+      let num_a = getValueAtYear(pop_a, keys_a, yr), num_b = getValueAtYear(pop_b, keys_b, yr);
       if (!isNaN(num_a) && !isNaN(num_b) && num_a > 0 && num_b > 0) {
         valid_checks++;
         let ratio = num_a/num_b;
         if (ratio < 0.25 || ratio > 4.0) fail_count++;
       }
     }
-    
-    if (valid_checks === 0) {
-      let peak_a = population_Stadester_uud.getPeakPopulation(pop_a);
-      let peak_b = population_Stadester_uud.getPeakPopulation(pop_b);
-      if (peak_a > 0 && peak_b > 0) {
-        let ratio = peak_a/peak_b;
-        if (ratio < 0.1 || ratio > 10.0) return { valid: false, overlaps: false };
-      }
-      return { valid: true, overlaps: false };
-    }
-    
-    if (valid_checks > 0 && (fail_count/valid_checks) > 0.5) return { valid: false, overlaps: true };
-    if (valid_checks > 0 && valid_checks <= 2 && fail_count === valid_checks) return { valid: false, overlaps: true };
+    if (valid_checks === 0) return checkPeakFallback();
+    if ((fail_count/valid_checks) > 0.5 || (valid_checks <= 2 && fail_count === valid_checks))
+      return { valid: false, overlaps: true };
     
     //Return statement
     return { valid: true, overlaps: true };
@@ -183,25 +166,18 @@
     
     //Declare local instance variables
     let names = [];
+    let raw_list = [];
     
     //Guard clauses
     if (!city) return [];
     
-    if (city.name) {
-      let proc = population_Stadester_uud.processCityName(city.name);
+    //Function body
+    if (city.name) raw_list.push(city.name);
+    if (Array.isArray(city.other_names)) raw_list = raw_list.concat(city.other_names);
+    if (Array.isArray(city.original_names)) raw_list = raw_list.concat(city.original_names);
+    for (let k = 0; k < raw_list.length; k++) {
+      let proc = population_Stadester_uud.processCityName(raw_list[k]);
       if (proc && !names.includes(proc)) names.push(proc);
-    }
-    if (Array.isArray(city.other_names)) {
-      for (let k = 0; k < city.other_names.length; k++) {
-        let proc = population_Stadester_uud.processCityName(city.other_names[k]);
-        if (proc && !names.includes(proc)) names.push(proc);
-      }
-    }
-    if (Array.isArray(city.original_names)) {
-      for (let k = 0; k < city.original_names.length; k++) {
-        let proc = population_Stadester_uud.processCityName(city.original_names[k]);
-        if (proc && !names.includes(proc)) names.push(proc);
-      }
     }
     
     //Return statement
@@ -257,22 +233,11 @@
         population_obj[all_population_keys[i]] = [population_obj[all_population_keys[i]]];
     
     for (let i = 0; i < all_ot_population_keys.length; i++) {
-      let local_value = ot_population_obj[all_ot_population_keys[i]];
+      let k = all_ot_population_keys[i];
+      let local_value = ot_population_obj[k];
       if (Array.isArray(local_value)) local_value = local_value.flat(Infinity);
-      
-      if (Array.isArray(population_obj[all_ot_population_keys[i]])) {
-        if (!Array.isArray(local_value)) {
-          population_obj[all_ot_population_keys[i]].push(local_value);
-        } else {
-          population_obj[all_ot_population_keys[i]] = population_obj[all_ot_population_keys[i]].concat(local_value);
-        }
-      } else {
-        if (!Array.isArray(local_value)) {
-          population_obj[all_ot_population_keys[i]] = [local_value];
-        } else {
-          population_obj[all_ot_population_keys[i]] = local_value;
-        }
-      }
+      let arr_val = Array.isArray(local_value) ? local_value : [local_value];
+      population_obj[k] = Array.isArray(population_obj[k]) ? population_obj[k].concat(arr_val) : arr_val;
     }
     
     //Return statement
@@ -305,17 +270,12 @@
     
     if (!target_city.original_names) {
       target_city.original_names = [];
-      if (target_city.name) {
-        let proc_n = population_Stadester_uud.processCityName(target_city.name);
-        if (proc_n) target_city.original_names.push(proc_n);
+      let orig_src = (target_city.name ? [target_city.name] : []).concat(Array.isArray(target_city.other_names) ? target_city.other_names : []);
+      for (let i = 0; i < orig_src.length; i++) {
+        let proc_n = population_Stadester_uud.processCityName(orig_src[i]);
+        if (proc_n && !target_city.original_names.includes(proc_n)) target_city.original_names.push(proc_n);
       }
-      if (Array.isArray(target_city.other_names))
-        for (let i = 0; i < target_city.other_names.length; i++) {
-          let proc_n = population_Stadester_uud.processCityName(target_city.other_names[i]);
-          if (proc_n && !target_city.original_names.includes(proc_n)) target_city.original_names.push(proc_n);
-        }
     }
-    
     if (!target_city.name_peaks) {
       target_city.name_peaks = {};
       target_city.name_coords = {};
@@ -324,70 +284,45 @@
         if (target_city.coords) target_city.name_coords[target_city.name] = target_city.coords;
       }
     }
-    
     let source_peak = population_Stadester_uud.getPeakPopulation(source_city.population);
-    if (source_city.name) {
-      let cur_peak = target_city.name_peaks[source_city.name] || 0;
-      if (source_peak >= cur_peak) {
-        target_city.name_peaks[source_city.name] = source_peak;
-        if (source_city.coords) target_city.name_coords[source_city.name] = source_city.coords;
-      }
+    if (source_city.name && source_peak >= (target_city.name_peaks[source_city.name] || 0)) {
+      target_city.name_peaks[source_city.name] = source_peak;
+      if (source_city.coords) target_city.name_coords[source_city.name] = source_city.coords;
     }
-    
     if (source_city.name_peaks) {
       let s_keys = Object.keys(source_city.name_peaks);
       for (let i = 0; i < s_keys.length; i++) {
-        let k = s_keys[i];
-        let p = source_city.name_peaks[k];
-        let cur_peak = target_city.name_peaks[k] || 0;
-        if (p >= cur_peak) {
+        let k = s_keys[i], p = source_city.name_peaks[k];
+        if (p >= (target_city.name_peaks[k] || 0)) {
           target_city.name_peaks[k] = p;
-          if (source_city.name_coords && source_city.name_coords[k]) {
-            target_city.name_coords[k] = source_city.name_coords[k];
-          } else if (source_city.coords) {
-            target_city.name_coords[k] = source_city.coords;
-          }
+          let sc = (source_city.name_coords && source_city.name_coords[k]) ? source_city.name_coords[k] : source_city.coords;
+          if (sc) target_city.name_coords[k] = sc;
         }
       }
     }
-    
-    let max_name_peak = -1;
-    let all_name_keys = Object.keys(target_city.name_peaks);
+    let max_name_peak = -1, all_name_keys = Object.keys(target_city.name_peaks);
     for (let i = 0; i < all_name_keys.length; i++) {
-      let k = all_name_keys[i];
-      let p = target_city.name_peaks[k];
-      if (p > max_name_peak) {
-        max_name_peak = p;
-        best_name = k;
-      }
+      let k = all_name_keys[i], p = target_city.name_peaks[k];
+      if (p > max_name_peak) { max_name_peak = p; best_name = k; }
     }
-    
     if (best_name) {
       target_city.name = best_name;
-      if (target_city.name_coords && target_city.name_coords[best_name])
-        target_city.coords = target_city.name_coords[best_name];
+      if (target_city.name_coords && target_city.name_coords[best_name]) target_city.coords = target_city.name_coords[best_name];
     }
-    
     if (!target_city.other_names) target_city.other_names = [];
     if (old_target_name) candidate_names.push(old_target_name);
     if (source_city.name) candidate_names.push(source_city.name);
     if (Array.isArray(source_city.other_names)) candidate_names = candidate_names.concat(source_city.other_names);
     if (Array.isArray(target_city.other_names)) candidate_names = candidate_names.concat(target_city.other_names);
-    
-    for (let i = 0; i < candidate_names.length; i++) {
-      let cur = candidate_names[i];
-      if (cur && cur !== target_city.name && !target_city.other_names.includes(cur))
-        target_city.other_names.push(cur);
-    }
-    
+    for (let i = 0; i < candidate_names.length; i++)
+      if (candidate_names[i] && candidate_names[i] !== target_city.name && !target_city.other_names.includes(candidate_names[i]))
+        target_city.other_names.push(candidate_names[i]);
     if (source_city.is_agglomeration_of) target_city.is_agglomeration_of = source_city.is_agglomeration_of;
     if (Array.isArray(source_city._war_displacement_years)) {
       if (!target_city._war_displacement_years) target_city._war_displacement_years = [];
-      for (let i = 0; i < source_city._war_displacement_years.length; i++) {
-        let w_yr = source_city._war_displacement_years[i];
-        if (!target_city._war_displacement_years.includes(w_yr))
-          target_city._war_displacement_years.push(w_yr);
-      }
+      for (let i = 0; i < source_city._war_displacement_years.length; i++)
+        if (!target_city._war_displacement_years.includes(source_city._war_displacement_years[i]))
+          target_city._war_displacement_years.push(source_city._war_displacement_years[i]);
     }
     if (source_city.population)
       target_city.population = is_metro ?
@@ -596,15 +531,8 @@
         if (ov && Array.isArray(ov.coords) && ov.coords.length >= 2)
           local_city.coords = ov.coords.slice();
         if (ov && ov.subdivision_override !== undefined) {
-          let sub_updated = false;
-          for (let s = 0; s < sub_fields.length; s++) {
-            if (local_city[sub_fields[s]] !== undefined) {
-              local_city[sub_fields[s]] = ov.subdivision_override;
-              sub_updated = true;
-              break;
-            }
-          }
-          if (!sub_updated) local_city.subdivision = ov.subdivision_override;
+          let sub_field = sub_fields.find(sf => local_city[sf] !== undefined) || "subdivision";
+          local_city[sub_field] = ov.subdivision_override;
         }
         
         if (local_city.population) {
@@ -654,17 +582,13 @@
       if (!entry) continue;
       let ov = wcp_overrides[k] || (entry.country ? wcp_overrides[`${entry.country}.${k}`] : null);
       if (!ov) continue;
-      if (ov.resolution === "non_settlement") {
-        delete wcp_obj[k];
-        continue;
-      }
+      if (ov.resolution === "non_settlement") { delete wcp_obj[k]; continue; }
       if (Array.isArray(ov.coords) && ov.coords.length >= 2) {
         entry.coords = [Number(ov.coords[0]), Number(ov.coords[1])];
-        entry.latitude = Number(ov.coords[0]);
-        entry.longitude = Number(ov.coords[1]);
+        entry.latitude = entry.coords[0];
+        entry.longitude = entry.coords[1];
       }
-      if (ov.country_override)
-        entry.country = ov.country_override;
+      if (ov.country_override) entry.country = ov.country_override;
     }
     
     //Return statement
@@ -711,9 +635,8 @@
     
     //Declare local instance variables
     let district_terms = [
-      "arrondissement", "borough", "county", "district", "locality",
-      "new area", "prefecture", "subdistrict", "subprefecture", "suburb",
-      "township", "ward", "zone"
+      "arrondissement", "borough", "county", "district", "locality", "new area",
+      "prefecture", "subdistrict", "subprefecture", "suburb", "township", "ward", "zone"
     ];
     let lower = name.toLowerCase();
     
@@ -785,13 +708,7 @@
       let is_corrupt = population_Stadester_uud.isCorruptedCityName(cleaned);
       let is_subordinate = population_Stadester_uud.isSubordinateDistrictName(cleaned);
       
-      candidate_records.push({
-        cleanName: cleaned,
-        hasSubordinateTerm: is_subordinate,
-        isCorrupted: is_corrupt,
-        originalText: raw_part,
-        rank: i
-      });
+      candidate_records.push({ cleanName: cleaned, hasSubordinateTerm: is_subordinate, isCorrupted: is_corrupt, originalText: raw_part, rank: i });
     }
     
     //Return statement
@@ -824,19 +741,11 @@
     if (!cand_zero.isCorrupted)
       return cand_zero.cleanName;
     
-    for (let i = 1; i < candidates.length; i++) {
-      let c = candidates[i];
-      if (!c.isCorrupted && !c.hasSubordinateTerm)
-        return c.cleanName;
-    }
-    
-    if (target_pop < 150000) {
-      for (let i = 1; i < candidates.length; i++) {
-        let c = candidates[i];
-        if (!c.isCorrupted)
-          return c.cleanName;
-      }
-    }
+    for (let i = 1; i < candidates.length; i++)
+      if (!candidates[i].isCorrupted && !candidates[i].hasSubordinateTerm) return candidates[i].cleanName;
+    if (target_pop < 150000)
+      for (let i = 1; i < candidates.length; i++)
+        if (!candidates[i].isCorrupted) return candidates[i].cleanName;
     
     //Return statement
     return cand_zero.cleanName || population_Stadester_uud.cleanCandidateCityString(raw_name);
@@ -872,18 +781,14 @@
       resolved_path = csv_path;
     } else {
       candidate_paths = [
+        "F:/Active Projects/Project 1436 - Dataview/data/stadester/GHSL.csv",
         path.join(h1, "population_Stadester", "ghsl", "GHSL.csv"),
         path.join(h1, "population_GHSL", "GHSL.csv"),
         path.join(h1, "population_GHSL", "GHS_UCDB_MTUC_GLOBE_R2024A.csv"),
-        "F:/Active Projects/Project 1436 - Dataview/data/stadester/GHSL.csv",
         "D:/Project 1436 - Dataview/data/stadester/GHSL.csv"
       ];
-      for (let i = 0; i < candidate_paths.length; i++) {
-        if (fs.existsSync(candidate_paths[i])) {
-          resolved_path = candidate_paths[i];
-          break;
-        }
-      }
+      for (let i = 0; i < candidate_paths.length; i++)
+        if (fs.existsSync(candidate_paths[i])) { resolved_path = candidate_paths[i]; break; }
     }
     
     if (!resolved_path || !fs.existsSync(resolved_path)) {
@@ -996,13 +901,7 @@
     
     //Function body
     max_pop = population_Stadester_uud.getPeakPopulation(city.population);
-    resolved_name = population_Stadester_uud.resolveCityDisplayName(
-      city.key || "",
-      city.name || "",
-      city.coords,
-      max_pop,
-      city.id
-    );
+    resolved_name = population_Stadester_uud.resolveCityDisplayName(city.key || "", city.name || "", city.coords, max_pop, city.id);
     
     if (resolved_name && !population_Stadester_uud.isCorruptedCityName(resolved_name)) {
       if (city.name && city.name !== resolved_name) {
@@ -1054,14 +953,21 @@
     return cities_obj;
   };
   
+  /**
+   * Loads Viscount regional settlements via ViscountGazetteerLoader.
+   * @alias population_Stadester_uud.getViscountRegionalObject
+   *
+   * @param {Object} [arg0_options]
+   *
+   * @returns {Object}
+   */
   population_Stadester_uud.getViscountRegionalObject = function (arg0_options) {
     //Convert from parameters
     let options = (arg0_options) ? arg0_options : {};
 
     //Guard clauses
-    if (!global.ViscountGazetteerLoader && typeof require !== "undefined") {
+    if (!global.ViscountGazetteerLoader && typeof require !== "undefined")
       try { require(path.join(__dirname, "ViscountGazetteerLoader.js")); } catch (e) {}
-    }
     if (!global.ViscountGazetteerLoader) {
       console.error("population_Stadester_uud.getViscountRegionalObject: ViscountGazetteerLoader unavailable.");
       return {};
@@ -1074,9 +980,9 @@
   /**
    * Backwards-compatible wrapper loading Project POLARIS settlements via ViscountGazetteerLoader.
    * @alias population_Stadester_uud.getPolarisRussiaObject
-   * 
+   *
    * @param {Object} [arg0_options]
-   * 
+   *
    * @returns {Object}
    */
   population_Stadester_uud.getPolarisRussiaObject = function (arg0_options) {
@@ -1084,9 +990,6 @@
     let options = (arg0_options) ? arg0_options : {};
 
     //Return statement
-    return population_Stadester_uud.getViscountRegionalObject({
-      only_project: "POLARIS",
-      ...options
-    });
+    return population_Stadester_uud.getViscountRegionalObject({ only_project: "POLARIS", ...options });
   };
 }

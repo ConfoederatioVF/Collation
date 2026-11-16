@@ -319,6 +319,7 @@
         "vanuatu": "oceania"
       };
       let pngjs_lib = (typeof pngjs !== "undefined") ? pngjs : (global.pngjs || require("pngjs"));
+      let reloc_entries = [];
       let stad_lookup = new Map();
       let updated_count = 0;
       let voronoi_path = path.join(this.raw_folder, "voronoi_subdivisions.png");
@@ -340,6 +341,21 @@
           let alt_k = `${c.name}-${c.country}`;
           if (!stad_lookup.has(alt_k)) stad_lookup.set(alt_k, c);
         }
+        if (Number.isFinite(Number(c.latitude)) && Number.isFinite(Number(c.longitude))) {
+          let o_lat = Number(c.latitude);
+          let o_lng = Number(c.longitude);
+          let n_lat = Number(c.coords[0]);
+          let n_lng = Number(c.coords[1]);
+          if (Math.abs(o_lat - n_lat) > 0.04 || Math.abs(o_lng - n_lng) > 0.04) {
+            reloc_entries.push({
+              is_centroid: false,
+              names: [c.name, ...(Array.isArray(c.other_names) ? c.other_names : [])].filter(Boolean),
+              new_coords: [n_lat, n_lng],
+              old_coords: [o_lat, o_lng],
+              target_key: k
+            });
+          }
+        }
       }
 
       //Register old-country -> new-city fallback aliases from coord_overrides
@@ -360,6 +376,27 @@
           let target = stadester_obj[k];
           if (target && ov && ov.country_override && target.name)
             stad_lookup.set(`${target.name}-${ov.country_override}`, target);
+        }
+
+        let ov_groups = Object.keys(cfg.coord_overrides);
+        for (let i = 0; i < ov_groups.length; i++) {
+          let grp_obj = cfg.coord_overrides[ov_groups[i]] || {};
+          let grp_keys = Object.keys(grp_obj);
+          for (let x = 0; x < grp_keys.length; x++) {
+            let ov = grp_obj[grp_keys[x]];
+            if (!ov || !ov.note || !Array.isArray(ov.coords) || ov.resolution === "non_settlement") continue;
+            let note_match = String(ov.note).match(/\[(-?\d+\.\d+)\s*,\s*(-?\d+\.\d+)\]/);
+            if (!note_match) continue;
+            let city_part = ov.raw_city_key || grp_keys[x].replace(/-([^-]+)$/, "");
+            let target_obj = stad_lookup.get(grp_keys[x]) || stadester_obj[grp_keys[x]];
+            reloc_entries.push({
+              is_centroid: /centroid/i.test(ov.note),
+              names: [city_part, target_obj && target_obj.name].filter(Boolean),
+              new_coords: (target_obj && Array.isArray(target_obj.coords)) ? target_obj.coords : ov.coords,
+              old_coords: [Number(note_match[1]), Number(note_match[2])],
+              target_key: grp_keys[x]
+            });
+          }
         }
       }
 
@@ -407,6 +444,15 @@
         let item_changed = false;
 
         if (coords_changed) {
+          if (Number.isFinite(old_lat) && Number.isFinite(old_lng)) {
+            reloc_entries.push({
+              is_centroid: false,
+              names: [item.name, match.name, strip_k.split("-")[0]].filter(Boolean),
+              new_coords: [lat, lng],
+              old_coords: [old_lat, old_lng],
+              target_key: strip_k
+            });
+          }
           item.coords = [new_lng, new_lat];
           item_changed = true;
         }
@@ -435,8 +481,153 @@
         console.log(`- Synced ${updated_count} updated records in ${coords_path}.`);
       }
 
+      this.syncDataviewCityMetadata(dv_dir, stad_lookup, reloc_entries);
+
       //Return statement
       return updated_count;
+    }
+
+    /**
+     * Keeps Dataview `city_metadata.json` (`[lng, lat]`) coordinates synchronised with relocated `stadester_obj` entries while preserving legitimate homonyms.
+     * @alias population_Stadester.syncDataviewCityMetadata
+     *
+     * @param {string} arg0_dv_dir
+     * @param {Map<string, Object>} arg1_stad_lookup
+     * @param {Array<Object>} arg2_reloc_entries
+     * @returns {number}
+     */
+    static syncDataviewCityMetadata (arg0_dv_dir, arg1_stad_lookup, arg2_reloc_entries) {
+      //Convert from parameters
+      let dv_dir = arg0_dv_dir;
+      let reloc_entries = Array.isArray(arg2_reloc_entries) ? arg2_reloc_entries : [];
+      let stad_lookup = arg1_stad_lookup;
+
+      //Declare local instance variables
+      let hav_km = (a_lat, a_lng, b_lat, b_lng) => {
+        let to_rad = Math.PI/180;
+        let d_lat = (b_lat - a_lat)*to_rad;
+        let d_lng = (b_lng - a_lng)*to_rad;
+        let hav = Math.sin(d_lat/2)**2 + Math.cos(a_lat*to_rad)*Math.cos(b_lat*to_rad)*Math.sin(d_lng/2)**2;
+        return 6371*2*Math.asin(Math.sqrt(Math.min(1, hav)));
+      };
+      let meta_list;
+      let meta_path = path.join(dv_dir, "city_metadata.json");
+      let meta_updated = 0;
+      let norm_name = (s) => String(s || "").replace(/ß/gi, "ss").normalize("NFD").replace(/[\u0300-\u036f`'’]/g, "").toLowerCase().replace(/[^a-z0-9]/g, "");
+      let reloc_grid = new Map();
+      let stad_grid = new Map();
+
+      //Guard clauses
+      if (!stad_lookup || !fs.existsSync(meta_path)) return 0;
+
+      //Function body
+      for (let entry of stad_lookup.values()) {
+        if (!entry || !Array.isArray(entry.coords) || entry.coords.length < 2) continue;
+        let lat = Number(entry.coords[0]);
+        let lng = Number(entry.coords[1]);
+        if (!Number.isFinite(lat) || !Number.isFinite(lng)) continue;
+        let gk = `${Math.floor(lat)}_${Math.floor(lng)}`;
+        if (!stad_grid.has(gk)) stad_grid.set(gk, []);
+        let names = new Set([norm_name(entry.name), ...(Array.isArray(entry.other_names) ? entry.other_names.map(norm_name) : [])].filter((t) => t.length >= 2));
+        stad_grid.get(gk).push({ key: entry.key, lat, lng, names });
+      }
+      for (let i = 0; i < reloc_entries.length; i++) {
+        let r = reloc_entries[i];
+        if (!r || !Array.isArray(r.old_coords) || !Array.isArray(r.new_coords)) continue;
+        if (hav_km(r.old_coords[0], r.old_coords[1], r.new_coords[0], r.new_coords[1]) <= 5) continue;
+        let gk = `${Math.floor(r.old_coords[0])}_${Math.floor(r.old_coords[1])}`;
+        if (!reloc_grid.has(gk)) reloc_grid.set(gk, []);
+        reloc_grid.get(gk).push({
+          is_centroid: Boolean(r.is_centroid),
+          names: new Set((r.names || []).map(norm_name).filter((t) => t.length >= 2)),
+          new_lat: Number(r.new_coords[0]),
+          new_lng: Number(r.new_coords[1]),
+          old_lat: Number(r.old_coords[0]),
+          old_lng: Number(r.old_coords[1]),
+          target_key: r.target_key
+        });
+      }
+
+      meta_list = JSON.parse(fs.readFileSync(meta_path, "utf8"));
+      for (let i = 0; i < meta_list.length; i++) {
+        let m = meta_list[i];
+        if (!m || !Array.isArray(m.coords) || m.coords.length < 2) continue;
+        let m_lat = Number(m.coords[1]);
+        let m_lng = Number(m.coords[0]);
+        let new_lat = null;
+        let new_lng = null;
+
+        if (m.key) {
+          let direct = stad_lookup.get(String(m.key).replace(/^stadester-/, ""));
+          if (direct && Array.isArray(direct.coords) && direct.coords.length >= 2) {
+            new_lat = Number(direct.coords[0]);
+            new_lng = Number(direct.coords[1]);
+          }
+        }
+        if (new_lat === null && reloc_grid.size > 0) {
+          let m_names = new Set([norm_name(m.name)].filter((t) => t.length >= 2));
+          if (Array.isArray(m.historical_names)) {
+            for (let x = 0; x < m.historical_names.length; x++) {
+              let hn = m.historical_names[x] && norm_name(m.historical_names[x].name);
+              if (hn && hn.length >= 2) m_names.add(hn);
+            }
+          }
+          let best_r = null;
+          let best_d = 9999;
+          for (let x = -1; x <= 1; x++) {
+            for (let y = -1; y <= 1; y++) {
+              let bucket = reloc_grid.get(`${Math.floor(m_lat) + x}_${Math.floor(m_lng) + y}`);
+              if (!bucket) continue;
+              for (let z = 0; z < bucket.length; z++) {
+                let r = bucket[z];
+                let d_old = hav_km(m_lat, m_lng, r.old_lat, r.old_lng);
+                if (d_old > 2.0 || d_old >= best_d) continue;
+                let has_shared = false;
+                for (let n of m_names) if (r.names.has(n)) { has_shared = true; break; }
+                if (has_shared) { best_d = d_old; best_r = r; }
+              }
+            }
+          }
+          if (best_r) {
+            let is_homonym_safe = true;
+            if (!(best_r.is_centroid && best_d <= 0.5)) {
+              for (let x = -1; x <= 1 && is_homonym_safe; x++) {
+                for (let y = -1; y <= 1 && is_homonym_safe; y++) {
+                  let sb = stad_grid.get(`${Math.floor(m_lat) + x}_${Math.floor(m_lng) + y}`);
+                  if (!sb) continue;
+                  for (let z = 0; z < sb.length; z++) {
+                    let s = sb[z];
+                    if (s.key === best_r.target_key) continue;
+                    if (hav_km(s.lat, s.lng, best_r.new_lat, best_r.new_lng) <= 2.0) continue;
+                    if (hav_km(m_lat, m_lng, s.lat, s.lng) <= 15.0) {
+                      for (let n of m_names) {
+                        if (s.names.has(n)) { is_homonym_safe = false; break; }
+                      }
+                    }
+                    if (!is_homonym_safe) break;
+                  }
+                }
+              }
+            }
+            if (is_homonym_safe) {
+              new_lat = best_r.new_lat;
+              new_lng = best_r.new_lng;
+            }
+          }
+        }
+        if (new_lat !== null && new_lng !== null && hav_km(m_lat, m_lng, new_lat, new_lng) > 1.0) {
+          m.coords = [Number(new_lng.toFixed(6)), Number(new_lat.toFixed(6))];
+          meta_updated++;
+        }
+      }
+
+      if (meta_updated > 0) {
+        fs.writeFileSync(meta_path, JSON.stringify(meta_list, null, 2), "utf8");
+        console.log(`- Synced ${meta_updated} relocated metadata coords in ${meta_path}.`);
+      }
+
+      //Return statement
+      return meta_updated;
     }
     
     /**
@@ -646,7 +837,7 @@
         }
         
         let dataview_target = "F:/Active Projects/Project 1436 - Dataview/data/stadester/stadester_ghsl";
-        if (fs.existsSync(path.dirname(dataview_target))) {
+        if (fs.existsSync(dataview_target)) {
           StadesterPartitionIO.writePartitionedStadester(dataview_target, result, { version: "1.1" });
           console.log(`- Synchronised repaired partitioned Stadestér GHSL dataset to Dataview (${dataview_target}).`);
         }
