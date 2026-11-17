@@ -163,6 +163,40 @@
     if (typeof population_Stadester_uud.repairGHSLCityNames === "function")
       population_Stadester_uud.repairGHSLCityNames(stadester_obj);
 
+    let foreign_script_re = /[\u0400-\u04FF\u0600-\u06FF\u4E00-\u9FFF\u3040-\u30FF\uAC00-\uD7AF]/;
+    let latin_centaur_countries = new Set([
+      "Alabama", "Alaska", "American Samoa", "Arizona", "Arkansas", "Bermuda", "California",
+      "Canada", "Colorado", "Connecticut", "Delaware", "District of Columbia", "Florida",
+      "Greenland", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky",
+      "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota",
+      "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire",
+      "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio",
+      "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "Saint Pierre and Miquelon",
+      "South Carolina", "South Dakota", "Tennessee", "Texas", "United States",
+      "United States of America", "Utah", "Vermont", "Virginia", "Washington",
+      "West Virginia", "Wisconsin", "Wyoming"
+    ]);
+    all_cities = Object.keys(stadester_obj);
+    for (let i = 0; i < all_cities.length; i++) {
+      let city = stadester_obj[all_cities[i]];
+      if (!city) continue;
+      let c_name = String(city.country || "").trim();
+      let is_us_georgia = (c_name === "Georgia" && Array.isArray(city.coords) && Number(city.coords[1]) < -30);
+      if (!latin_centaur_countries.has(c_name) && !is_us_georgia) continue;
+      if (Array.isArray(city.other_names)) {
+        city.other_names = city.other_names.filter(function (arg0_a) {
+          let s = String(arg0_a || "").trim();
+          return s && !foreign_script_re.test(s) && !/^Ist\s+Pitc/i.test(s);
+        });
+      }
+      if (Array.isArray(city.original_names)) {
+        city.original_names = city.original_names.filter(function (arg0_a) {
+          let s = String(arg0_a || "").trim();
+          return s && !foreign_script_re.test(s) && !/^ist\s+pitc/i.test(s);
+        });
+      }
+    }
+
     //Return statement
     return stadester_obj;
   };
@@ -299,6 +333,52 @@
 
 
   /**
+   * Checks whether `arg0_city` carries any Viscount regional project attribution (`.viscount_project` or a complete Viscount source tag).
+   * @alias population_Stadester_uud.hasViscountSource
+   *
+   * @param {Object} arg0_city
+   *
+   * @returns {boolean}
+   */
+  population_Stadester_uud.hasViscountSource = function (arg0_city) {
+    //Convert from parameters
+    let city = arg0_city;
+
+    //Guard clauses
+    if (!city || typeof city !== "object") return false;
+
+    //Function body
+    if (typeof city.viscount_project === "string" && city.viscount_project.trim().length > 0)
+      return true;
+    if (
+      population_Stadester_uud.hasCitySource(city, "POLARIS") ||
+      population_Stadester_uud.hasCitySource(city, "CENTAUR")
+    ) {
+      return true;
+    }
+
+    let io_lib = (typeof StadesterPartitionIO !== "undefined") ? StadesterPartitionIO : null;
+    if (!io_lib && typeof require !== "undefined") {
+      try {
+        let mod = require("./StadesterPartitionIO.js");
+        io_lib = (mod && mod.StadesterPartitionIO) ? mod.StadesterPartitionIO : global.StadesterPartitionIO;
+      } catch (e) {}
+    }
+    if (io_lib && typeof io_lib.loadPrecedenceRegistry === "function") {
+      let reg = io_lib.loadPrecedenceRegistry();
+      let projs = Array.isArray(reg && reg.projects) ? reg.projects : [];
+      for (let i = 0; i < projs.length; i++) {
+        if (projs[i].status === "complete" && population_Stadester_uud.hasCitySource(city, projs[i].key))
+          return true;
+      }
+    }
+
+    //Return statement
+    return false;
+  };
+
+
+  /**
    * Injects curated manual city entries (`Vaduz-Liechtenstein`, `Macau-Macao`) into `arg0_stadester_obj` if absent.
    * @alias population_Stadester_uud.injectManualRecords
    *
@@ -340,6 +420,53 @@
 
     //Return statement
     return stadester_obj;
+  };
+
+
+  /**
+   * Checks whether `arg0_country` (or optional `arg1_city` with coordinates) belongs to a Viscount regional project whose status is `"complete"`.
+   * @alias population_Stadester_uud.isCompleteViscountCountry
+   *
+   * @param {string} arg0_country
+   * @param {Object} [arg1_city]
+   *
+   * @returns {boolean}
+   */
+  population_Stadester_uud.isCompleteViscountCountry = function (arg0_country, arg1_city) {
+    //Convert from parameters
+    let city = (arg1_city && typeof arg1_city === "object") ? arg1_city : null;
+    let country = (arg0_country) ? String(arg0_country) : "";
+
+    //Declare local instance variables
+    let io_lib = (typeof StadesterPartitionIO !== "undefined") ? StadesterPartitionIO : null;
+
+    //Function body
+    if (!io_lib && typeof require !== "undefined") {
+      try {
+        let mod = require("./StadesterPartitionIO.js");
+        io_lib = (mod && mod.StadesterPartitionIO) ? mod.StadesterPartitionIO : global.StadesterPartitionIO;
+      } catch (e) {}
+    }
+
+    if (io_lib && typeof io_lib.loadPrecedenceRegistry === "function") {
+      let reg = io_lib.loadPrecedenceRegistry();
+      if (city && typeof io_lib.assignCityToViscountRegion === "function") {
+        let assigned = io_lib.assignCityToViscountRegion(city, city.key || "", reg);
+        if (assigned) {
+          //Return statement
+          return assigned.status === "complete";
+        }
+      }
+      let norm = io_lib.normaliseCountryString(country);
+      let proj = (reg && reg.country_lookup) ? reg.country_lookup[norm] : null;
+      if (proj) {
+        //Return statement
+        return proj.status === "complete";
+      }
+    }
+
+    //Return statement
+    return (country === "Russia" || country === "Ukraine" || country === "Belarus");
   };
 
 

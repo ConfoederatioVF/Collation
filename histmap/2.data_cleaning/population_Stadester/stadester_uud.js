@@ -409,7 +409,13 @@
     let options = (arg0_options) ? arg0_options : {};
     
     //Declare local instance variables
-    let cannot_be_merged = [{ name: "Gibraltar", ot_name: "Línea de la Concepción" }];
+    let cannot_be_merged = [
+      { name: "Gibraltar", ot_name: "Línea de la Concepción" },
+      { name: "Pittsburgh", ot_name: "Allegheny" },
+      { name: "Pittsburgh", ot_name: "Allegheny City" },
+      { name: "St. Louis", ot_name: "Cahokia" },
+      { name: "Saint Louis", ot_name: "Cahokia" }
+    ];
     let city_grid = new Map();
     let max_explicit_precision = 0.1;
     let raw_folder = options.raw_folder ? options.raw_folder : `${h1}/population_Stadester/`;
@@ -648,8 +654,8 @@
           }
           let already_has_polaris = (
             local_db.is_polaris &&
-            typeof population_Stadester_uud.hasCitySource === "function" &&
-            population_Stadester_uud.hasCitySource(actual_city, "POLARIS")
+            typeof population_Stadester_uud.hasViscountSource === "function" &&
+            population_Stadester_uud.hasViscountSource(actual_city)
           );
           let max_pol_yr_for_cut = -Infinity;
           let min_pol_yr_for_cut = Infinity;
@@ -671,7 +677,8 @@
                 !isAgglomeration(actual_city) &&
                 max_pol_yr_for_cut >= 1975 &&
                 Number.isFinite(min_pol_yr_for_cut) &&
-                (actual_city.country === "Russia" || actual_city.country === "Ukraine" || actual_city.country === "Belarus")
+                typeof population_Stadester_uud.isCompleteViscountCountry === "function" &&
+                population_Stadester_uud.isCompleteViscountCountry(actual_city.country, actual_city)
               ) {
                 let cut_pol_yr = Math.min(1897, min_pol_yr_for_cut);
                 let ex_pop_keys = Object.keys(actual_city.population);
@@ -703,14 +710,29 @@
             population_Stadester_uud.mergeCityEntries(actual_city, local_city, local_db.is_metro);
           }
           if (local_db.is_polaris && !isAgglomeration(actual_city) && (!already_has_polaris || (local_city.polaris_priority || 1) >= 3)) {
+            let actual_norm = population_Stadester_uud.processCityName(actual_city.name || "");
+            let local_norm = population_Stadester_uud.processCityName(local_city.name || "");
+            let is_primary_label_same = Boolean(actual_norm && local_norm && actual_norm === local_norm);
+            let act_pop_yrs = Object.keys(actual_city.population || {}).map(Number).filter(function (arg0_n) { return Number.isFinite(arg0_n) && Number(actual_city.population[arg0_n]) > 0; });
+            let loc_pop_yrs = Object.keys(local_city.population || {}).map(Number).filter(function (arg0_n) { return Number.isFinite(arg0_n) && Number(local_city.population[arg0_n]) > 0; });
+            let act_latest_yr = act_pop_yrs.length > 0 ? Math.max.apply(null, act_pop_yrs) : -Infinity;
+            let loc_latest_yr = loc_pop_yrs.length > 0 ? Math.max.apply(null, loc_pop_yrs) : -Infinity;
+            let act_peak = population_Stadester_uud.getPeakPopulation(actual_city.population);
+            let loc_peak = population_Stadester_uud.getPeakPopulation(local_city.population);
+            let can_take_canonical_identity = Boolean(is_primary_label_same || (loc_latest_yr >= act_latest_yr && loc_peak >= act_peak*0.5));
+
             if (local_city.name && actual_city.name !== local_city.name) {
               if (!actual_city.other_names) actual_city.other_names = [];
-              if (!actual_city.other_names.includes(actual_city.name)) actual_city.other_names.push(actual_city.name);
-              actual_city.name = local_city.name;
+              if (can_take_canonical_identity) {
+                if (!actual_city.other_names.includes(actual_city.name)) actual_city.other_names.push(actual_city.name);
+                actual_city.name = local_city.name;
+              } else {
+                if (!actual_city.other_names.includes(local_city.name)) actual_city.other_names.push(local_city.name);
+              }
             }
-            if (actual_city.name_peaks && local_city.name)
-              actual_city.name_peaks[local_city.name] = Infinity;
-            if (Array.isArray(local_city.coords) && local_city.coords.length >= 2) {
+            if (actual_city.name_peaks && local_city.name && can_take_canonical_identity)
+              actual_city.name_peaks[local_city.name] = 1e12;
+            if (can_take_canonical_identity && Array.isArray(local_city.coords) && local_city.coords.length >= 2) {
               actual_city.coords = [Number(local_city.coords[0]), Number(local_city.coords[1])];
               addToGrid(actual_city);
             }
@@ -781,12 +803,19 @@
             (local_city.sources || all_db_keys[i]);
           let target_key = all_local_cities[x];
           if (return_obj[target_key]) {
-            let suffix_idx = 1;
-            target_key = `${all_local_cities[x]}_${all_db_keys[i]}`;
-            while (return_obj[target_key]) {
-              suffix_idx++;
-              target_key = `${all_local_cities[x]}_${all_db_keys[i]}_${suffix_idx}`;
+            let clean_src_tag = local_db.is_polaris ?
+              String(local_city.viscount_project || "viscount").toLowerCase() :
+              all_db_keys[i];
+            let assigned = false;
+            for (let s_idx = 2; s_idx <= 9999; s_idx++) {
+              let cand_k = `${all_local_cities[x]}_${s_idx}`;
+              if (!return_obj[cand_k]) {
+                target_key = cand_k;
+                assigned = true;
+                break;
+              }
             }
+            if (!assigned) target_key = `${all_local_cities[x]}_${clean_src_tag}`;
           }
           local_city.key = target_key;
           if (local_city.type !== undefined) delete local_city.type;

@@ -32,24 +32,26 @@ Unlike `/literature-review-population` (which is restricted to Holocene regional
   - Reference archived PDFs in `<report_stem>.bib` (`note = {Archived PDF: ./papers/<filename>.pdf}`) and link them in prose where appropriate (`[archived PDF](papers/<filename>.pdf)`).
 
 ### 2. Prose, Style and Localisation Rules
-- **British English (`EN-GB`)**: Use non-Oxford British English (`colonisation`, `urbanisation`, `centre`, `programme`, `kilometres`, `analyse`, `modelling`, `catalogue`, `neighbouring`, no serial/Oxford comma).
-- **Plain Academic Prose (Zero Technobabble)**:
-  - Write clear, natural human academic and analytical prose. Strictly forbid inflated AI jargon or pseudo-scientific phrasing:
-    - *Forbidden*: `"Complete Secular Holocene Demographic Trajectory"`, `"Spatiotemporal Paleodemographic Carrying-Capacity Envelope"`, `"Multi-Scalar Techno-Ecological Regime Shift"`, `"Diachronic Nucleation Vector"`, `"Synergistic Telemetry Paradigm"`, `"Epistemic Taxonomic Architecture"`.
-    - *Required*: Plain, direct, descriptive headings and sentences (`Background`, `Data Sources and Methodology`, `Exploratory Data Analysis`, `Empirical Findings`, `Spatial and Temporal Distribution`, `Limitations`, `Conclusion`, `Appendix`).
-- **Compact Dates (`10000BC`, `1897AD`, `2000AD`)**:
-  - Whenever historical `BC` or `AD` dates appear, never put a space before `BC` or `AD` in prose, figure labels or table headers/cells: write `10000BC`, `500BC`, `1AD`, `1200AD`, `1897AD`, `1900AD`, `2000AD` (and ranges such as `1000-1200AD` or `4000-2000BC`).
-- **European Decimals & Semantic Abbreviations**:
-  - Use commas for decimals (`58,88`, `0,84`, `12,5k`, `1,45M`) and full stops for thousands separators (`1.250`, `20.425`). Use semantic abbreviations (`k`, `M`, `B`, `T`) where appropriate.
+- **British English (`EN-GB`)**: Use non-Oxford British English (`colonisation`, `urbanisation`, `centre`, `mediaeval`, `programme`, `kilometres`, `analyse`, `modelling`, `catalogue`, `neighbouring`, no serial/Oxford comma).
+- **Plain Academic Prose (Zero Technobabble & Zero Prose Scripts)**:
+  - Never use Python/R regex scripts to generate or humanise prose; author and refine prose solely via direct reading and editing (`read_file` + `edit_file`).
+  - Forbid inflated AI jargon (`"Complete Secular Holocene Demographic Trajectory"`, `"Spatiotemporal Paleodemographic Carrying-Capacity Envelope"`), leaked JSON/schema keys (`other_names`, `coords`), redundant `word (n=X)` tics (`45 regions`, not `forty-five regions (n=45)`), compound decorator colours (`warm gold` -> `gold`), and unescaped `<Tag>` strings outside code blocks that break VitePress Vue builds.
+  - Required: Plain, direct, descriptive headings and sentences (`Abstract`, `Background`, `Methodology`, `Testing and Validation`, `Results`, `Limitations`, `Conclusion`, `Appendix`, `Sources`).
+- **Compact Dates (`10000BC`, `1897AD`, `AD 1600`)**:
+  - Format historical era labels consistently without dot separators inside attached years (`10000BC`, `500BC`, `1897AD` or `500 BC` / `AD 1600`, never `10.000BC` or `1600 AD`). Omit `AD` on modern month-year dates (`March 1953`).
+- **European Decimals, Dot Thousands & Semantic Abbreviations**:
+  - Use commas for decimals (`58,88`, `0,84`, `12,5k`, `1,45M`) without redundant trailing zeroes (`4,2`, not `4,20`), and full stops (`1.250`, `20.425`) for thousands separators in prose and tables. Promote `>= 1.000k` magnitudes (`2,04M`, never `2.040k`).
 - **Plain Hyphens Only**:
   - Replace all em-dashes (`—`), en-dashes (`–`) and `---`/`--` with plain hyphens (`-` or ` - `).
-- **Minimal Inline Formatting & Script Transliteration**:
-  - Do not mix bold, italics, LaTeX math and inline code backticks (`\texttt{}`) in prose or tables. Reserve `$...$` and `$$...$$` exclusively for genuine mathematical formulas and equations.
-  - Transliterate non-Latin scripts (Cyrillic, Chinese characters, Devanagari, Arabic, Greek) into Latin script inside tables and body text so XeLaTeX (`Karla` 10pt) never renders missing-glyph boxes.
+- **Minimal Inline Formatting & Multi-Script Transliteration**:
+  - Do not overuse bold or mix italics, LaTeX math and inline code backticks (`\texttt{}`) in prose or tables. Reserve `$...$` and `$$...$$` exclusively for genuine mathematical formulas and equations.
+  - Transliterate non-Latin scripts (Cyrillic, Chinese characters, Devanagari, Arabic, Greek, Devanagari/Indic, Thai, Korean, Japanese) into standard scholarly Latin romanisation with preserved diacritics (`Stadestér`, macrons, carons) inside tables and body text so XeLaTeX (`Karla` 10pt) renders `0` replacement boxes (`\ufffd`).
 
 ### 3. Visualisations: Default Matplotlib & Real GIS Maps (`./figures/`)
-- **Default Matplotlib Charts**:
-  - Use the default Python `matplotlib` style (`plt.style.use('default')`, standard Tab10 palette, white background, subtle grid `alpha=0.3`, `dpi=300`).
+- **Default Matplotlib Charts (`plt.rcdefaults()` & MathText)**:
+  - Always reset explicitly to Matplotlib defaults (`plt.rcdefaults(); plt.style.use('default')`, standard `DejaVu Sans` sans-serif typeface, intact 4-sided boxed spines on Cartesian plots, standard Tab10 palette, white background, subtle grid `alpha=0.3`, `dpi=300`). NEVER apply `font.family = 'serif'`, `seaborn` or stripped themes, or hide `spines['top']` / `spines['right']` on standard charts.
+  - Render all mathematical parameters, Greek symbols and exponents via Matplotlib `$...$` MathText (`r"$\nu = 3/2$"`, `r"$\tau_1 = 1{,}41$"`, `r"Pseudo $R^2$"`, `r"$\log_{10}(\mathrm{Sites})$"`), wrapping European decimal commas inside `$...$` in braces (`{,}`) so TeX adds no trailing spacing. Never leave raw ASCII `nu = 3/2`, `tau1=1,41`, `R-squared` or `log10(` in titles, axes or legends.
+  - Format fractional axis ticks with European decimal commas via `FuncFormatter` (`0,75`, never `0.75`), map raw `snake_case` category keys via explicit display dictionaries rather than `.replace('_', ' ').title()` (which corrupts `Pueblo III` into `Pueblo Iii`), avoid technobabble plot titles and choose substantive empirical designs (never zero-variance flat `0,998` bar charts).
   - Select chart designs that best communicate the exploratory data findings: multi-panel `(A)`/`(B)` comparisons, time-series trajectories with shaded uncertainty/interquartile bands, scatter/regression plots with residual or error diagnostics, distribution plots (histograms, KDEs, box/violin plots, Lorentz/ECDF curves), heatmaps or grouped bar/area breakdowns.
   - **No Text/Legend Occlusion**: Never place text annotations over bars, lines, scatter points or legends. Use standard Matplotlib legends (`ax.legend(loc='best', frameon=True)` or outside the axes via `bbox_to_anchor`), add `15-20%` upper `ylim` headroom when legends sit inside the plot and call `fig.tight_layout()`.
 - **Real GIS Cartography (No Schematic Scribbles)**:
@@ -80,8 +82,8 @@ Unlike `/literature-review-population` (which is restricted to Holocene regional
    - For multi-part investigations, multi-region analyses or large on-disk dataset audits, spawn subagents (`invoke_subagent` with `TypeName: "self"`, `Model: "inherit"`) per independent analytical module or sub-topic.
 2. **Self-Contained Subagent Prompts**:
    - Every subagent prompt must explicitly state: (a) the exact on-disk data paths and/or external literature scope to investigate, (b) the `./papers/` PDF archiving requirement when external literature is cited, (c) the British English plain-prose, European decimal (`58,88`), plain hyphen (`-`) and compact `10000BC`/`2000AD` formatting rules, (d) the path to [`references/intellte_setup_and_audit.md`](./references/intellte_setup_and_audit.md) for the mandatory `{r setup, include=FALSE}` block and (e) the requirement to visually check all PNG figures (`read_file`) and audit compiled PDFs (`pymupdf`).
-3. **Incremental File Generation (Preventing Stream Idle Timeouts)**:
-   - Never draft massive datasets or an entire 800-line `.Rmd` inside a single huge `<thought>` block. Instead, write modular Python/R analysis and generator scripts in incremental steps.
+3. **Incremental Data/Figure Scripts Only (Never Prose Scripts)**:
+   - Never draft massive datasets or monolithic prose blocks inside a single huge `<thought>` turn, and NEVER use Python/R scripts to generate or regex-rewrite prose. Use modular scripts strictly for ETL, JSON summary caches and figures; refine `.Rmd` prose directly via read/edit-only passes.
 4. **Directory-Grouped R Markdown Compilation**:
    - Never run `rmarkdown::render()` on two `.Rmd` files in the same folder simultaneously (intermediate `.tex`/`.aux` files collide). Group parallel compilation jobs by directory.
 5. **Handoff Protocol for Stalled Subagents**:
@@ -106,8 +108,8 @@ Unlike `/literature-review-population` (which is restricted to Holocene regional
    - Download and verify source PDFs (`%PDF` header, `> 10 KB`) into `./papers/` and assemble `<report_stem>.bib`.
 
 ### Step 3: Generate Default Matplotlib Figures & Real GIS Maps (`./figures/`)
-1. Generate a hero figure (`figures/<report_stem>_hero.png`, such as a real GIS cartographic basemap or a multi-panel executive summary figure) and 2-4 analytical figures (`figures/fig2_*.png`, `figures/fig3_*.png`, etc.) using default Matplotlib (`plt.style.use('default')`, `dpi=300`) and real GIS vectors/rasters (`geopandas` / `shapely` / Natural Earth / HydroSHEDS / on-disk geometries) where spatial data is involved.
-2. Visually inspect every generated `.png` file using `read_file` to confirm that all labels, legends, axes and borders are crisp, legible and free of occlusion.
+1. Generate a hero figure (`figures/<report_stem>_hero.png`, such as a real GIS cartographic basemap or a multi-panel executive summary figure) and 2-4 analytical figures (`figures/fig2_*.png`, `figures/fig3_*.png`, etc.) using `plt.rcdefaults(); plt.style.use('default')` (`DejaVu Sans`, intact 4-sided boxed spines, `$...$` MathText with `{,}` European decimal commas, `FuncFormatter` comma ticks, `dpi=300`) and real GIS vectors/rasters (`geopandas` / `shapely` / Natural Earth / HydroSHEDS / on-disk geometries) where spatial data is involved.
+2. Visually inspect every generated `.png` file using `read_file` to confirm sans-serif typography, rendered MathText, crisp borders, axes, legends and non-overlapping labels.
 
 ### Step 4: Draft & Compile `<report_stem>.{Rmd,pdf,md}`
 1. Write `<report_stem>.Rmd` using the `{r setup, include=FALSE}` block from [`references/intellte_setup_and_audit.md`](./references/intellte_setup_and_audit.md).
@@ -116,7 +118,7 @@ Unlike `/literature-review-population` (which is restricted to Holocene regional
 4. If the user also requested supplementary machine-readable outputs (e.g. a cleaned `.json`, `.csv` or `.Rmd` data appendix), generate and validate them alongside the main report.
 
 ### Step 5: Automated Verification & Cleanup
-1. Compile `<report_stem>.pdf` and `<report_stem>.md` via `Rscript.exe` and run the automated `pymupdf` verification script in [`references/intellte_setup_and_audit.md`](./references/intellte_setup_and_audit.md) to verify:
+1. Audit any Matplotlib/R figure generator script with `python .agents/skills/population-regional-study/scripts/audit_figure_scripts.py <report_dir>` (`exit 0`), compile `<report_stem>.pdf` and `<report_stem>.md` via `Rscript.exe` and run the automated `pymupdf` verification script in [`references/intellte_setup_and_audit.md`](./references/intellte_setup_and_audit.md) to verify:
    - `max_x1 <= 540.1 pt` across all pages (zero right-margin overflow).
    - `0` unresolved `??` citation or cross-reference tokens.
    - Valid `%PDF` headers (`> 10 KB`) on all archived files in `./papers/` (if present).

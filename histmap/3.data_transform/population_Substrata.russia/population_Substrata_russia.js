@@ -130,7 +130,7 @@
         );
         let r1_path = path.join(
           context.root_dir,
-          "histmap/3.data_transform/population_Substrata.outlier_removal/rasters_1.northern_america",
+          "histmap/3.data_transform/population_Substrata.outlier_removal/rasters_outliers_removed",
           `popc_${year}.png`
         );
         let prior_path = fs.existsSync(ghsl_path) ? ghsl_path : (fs.existsSync(r1_path) ? r1_path : null);
@@ -806,7 +806,7 @@
         let target_png_path = path.join(out_folder, `popc_${yr}.png`);
         let fallback_png_path = path.join(
           context.root_dir,
-          "histmap/3.data_transform/population_Substrata.outlier_removal/rasters_1.northern_america",
+          "histmap/3.data_transform/population_Substrata.outlier_removal/rasters_outliers_removed",
           `popc_${yr}.png`
         );
         let src_png_path = fs.existsSync(target_png_path) ?

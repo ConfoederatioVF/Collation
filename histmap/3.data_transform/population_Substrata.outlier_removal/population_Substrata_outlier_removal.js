@@ -6,7 +6,6 @@ global.population_Substrata_outlier_removal = class {
 	static input_outlier_rasters = `${this.bf}rasters_outliers/`;
 	static input_outlier_rasters_to_scale = `${this.bf}rasters_outliers_to_scale/`;
 	static intermediate_outliers_removed_rasters = `${this.bf}rasters_outliers_removed/`;
-	static intermediate_rasters_northern_america = `${this.bf}rasters_1.northern_america/`;
 	static intermediate_rasters_scaled_to_statista = `${this.bf}rasters_2.scaled_to_regions/`;
 	static intermediate_rasters_scaled_to_global = `${this.bf}rasters_3.scaled_to_global/`;
 	
@@ -281,15 +280,8 @@ global.population_Substrata_outlier_removal = class {
 		// Iterate over all hyde_years
 		for (let i = 0; i < hyde_years.length; i++) {
 			let year = hyde_years[i];
-			let input_path = `${this.intermediate_rasters_northern_america}popc_${year}.png`;
-			let fallback_path = `${this.intermediate_outliers_removed_rasters}popc_${year}.png`;
-			let output_path = `${this.intermediate_rasters_scaled_to_statista}popc_${year}.png`;
-			
-			let source_path = fs.existsSync(input_path)
-				? input_path
-				: fs.existsSync(fallback_path)
-					? fallback_path
-					: null;
+			let source_path = popc_.png;
+			let output_path = popc_.png;
 			
 			if (source_path) {
 				if (year < global_min_year || year > global_max_year) {
@@ -620,7 +612,6 @@ global.population_Substrata_outlier_removal = class {
 		//1. Remove outliers for HYDE
 		if (!options.exclude.includes("A")) await this.A_removeOutliersForHYDE(options);
 		//2. Handle continental regions, i.e. Northern America; Statista regions
-		if (!options.exclude.includes("B1")) await population_Substrata_northern_america.processRasters(options);
 		if (!options.exclude.includes("B2")) await this.B_scaleProcessedHYDEToStatistaRegions(options);
 		if (!options.exclude.includes("B3")) {
 			if (typeof ViscountSubstrataPipeline === "undefined" && typeof require !== "undefined")

@@ -110,6 +110,210 @@
         if (yr % 1000 === 0 || yr === 0)
           console.log(`  - Composited antiquity year ${yr} to Velkscala.`);
       }
+
+      if (!options.exclude_viscount_antiquity)
+        this.overlayViscountAntiquityDomains(target_years, options);
+    }
+
+    /**
+     * Step A2: Overlays calibrated antiquity rasters (`-10000` to `0 AD`) from active Viscount projects
+     * (`rasters_2.scaled_to_regions/popc_*.png`) onto composited Velkscala antiquity rasters using
+     * log-linear temporal interpolation between 1000-year anchors and a 24-px cosine outer seam blend.
+     * @alias population_Velkscala.overlayViscountAntiquityDomains
+     *
+     * @param {Array<number>} arg0_target_years
+     * @param {Object} [arg1_options]
+     */
+    static overlayViscountAntiquityDomains (arg0_target_years, arg1_options) {
+      //Convert from parameters
+      let target_years = Array.isArray(arg0_target_years) ? arg0_target_years : this.antiquity_years;
+      let options = (arg1_options) ? arg1_options : {};
+
+      //Guard clauses
+      if (typeof global.ViscountSubstrataPipeline === "undefined" && typeof require !== "undefined") {
+        let viscount_dir = path.resolve(this.bf, "../../3.data_transform/population_Substrata.viscount");
+
+        try {
+          require(path.join(viscount_dir, "ViscountSubstrataMosaic.js"));
+          require(path.join(viscount_dir, "ViscountSubstrataPipeline.js"));
+        } catch (e) {}
+      }
+      if (typeof global.ViscountSubstrataPipeline === "undefined") return;
+
+      let discovery = global.ViscountSubstrataPipeline.A_discoverActiveViscountContexts(options);
+
+      if (!discovery || !Array.isArray(discovery.contexts) || discovery.contexts.length === 0) return;
+
+      //Declare local instance variables
+      let anchor_cache = new Map();
+      let height = 2160;
+      let land_area_path = (typeof metadata_HYDE !== "undefined" && metadata_HYDE.file_land_area) ?
+        metadata_HYDE.file_land_area : path.join(discovery.root_dir, "histmap/1.data_raw/metadata_HYDE/general_rasters/land_area.png");
+      let owner_grid = discovery.owner_z_grid;
+      let png_cls = (global.pngjs && global.pngjs.PNG) ? global.pngjs.PNG : (global.PNG || require("pngjs").PNG);
+      let r2_dir = path.join(discovery.root_dir, "histmap/3.data_transform/population_Substrata.outlier_removal/rasters_2.scaled_to_regions");
+      let seam_px = 24;
+      let total_px = 4320*2160;
+      let viscount_pixels = [];
+      let width = 4320;
+
+      //Function body
+      let loadFloatGrid = function (arg0_path) {
+        if (!fs.existsSync(arg0_path)) return null;
+        let png_obj = png_cls.sync.read(fs.readFileSync(arg0_path));
+        let dv = new DataView(png_obj.data.buffer, png_obj.data.byteOffset, png_obj.data.byteLength);
+        let out = new Float32Array(total_px);
+
+        for (let i = 0; i < total_px; i++) {
+          let p4 = i*4;
+
+          if ((png_obj.data[p4] | png_obj.data[p4 + 1] | png_obj.data[p4 + 2] | png_obj.data[p4 + 3]) === 0) continue;
+          let v = dv.getFloat32(p4, false);
+
+          out[i] = (Number.isFinite(v) && v > 0) ? v : 0;
+        }
+        return out;
+      };
+      let writeFloatGrid = function (arg0_path, arg1_arr) {
+        let img = new png_cls({ colorType: 6, height: height, width: width });
+        let dv = new DataView(img.data.buffer, img.data.byteOffset, img.data.byteLength);
+
+        for (let i = 0; i < total_px; i++) {
+          let v = arg1_arr[i];
+
+          if (v > 0 && Number.isFinite(v)) dv.setFloat32(i*4, v, false);
+        }
+        fs.writeFileSync(arg0_path, png_cls.sync.write(img, { colorType: 6, deflateLevel: 6 }));
+      };
+      let getAnchor = function (arg0_yr) {
+        if (anchor_cache.has(arg0_yr)) return anchor_cache.get(arg0_yr);
+        let grid = loadFloatGrid(path.join(r2_dir, `popc_${arg0_yr}.png`));
+
+        anchor_cache.set(arg0_yr, grid);
+        return grid;
+      };
+
+      let land_area = new Float32Array(total_px);
+
+      if (fs.existsSync(land_area_path)) {
+        let la_png = png_cls.sync.read(fs.readFileSync(land_area_path));
+
+        for (let i = 0; i < total_px; i++) {
+          let p4 = i*4;
+
+          land_area[i] = ((la_png.data[p4] << 24) | (la_png.data[p4 + 1] << 16) | (la_png.data[p4 + 2] << 8) | la_png.data[p4 + 3]) >>> 0;
+        }
+      }
+
+      //Build 24-px cosine outer boundary belt into non-Viscount c14bazAAR land cells
+      let bfs_dist = new Uint8Array(total_px).fill(255);
+      let bfs_anchor = new Int32Array(total_px).fill(-1);
+      let bfs_q = [];
+
+      for (let i = 0; i < total_px; i++) {
+        if (!owner_grid || owner_grid[i] <= 0) continue;
+        viscount_pixels.push(i);
+        let r = Math.floor(i/width);
+        let c = i % width;
+        let nbrs = [
+          (r > 0) ? i - width : -1,
+          (r + 1 < height) ? i + width : -1,
+          (c > 0) ? i - 1 : -1,
+          (c + 1 < width) ? i + 1 : -1
+        ];
+
+        for (let y = 0; y < 4; y++) {
+          let nb = nbrs[y];
+
+          if (nb >= 0 && owner_grid[nb] === 0 && land_area[nb] > 0) {
+            bfs_dist[i] = 1;
+            bfs_anchor[i] = nb;
+            bfs_q.push(i);
+            break;
+          }
+        }
+      }
+
+      let head = 0;
+
+      while (head < bfs_q.length) {
+        let curr = bfs_q[head++];
+        let d = bfs_dist[curr];
+
+        if (d >= seam_px) continue;
+        let r = Math.floor(curr/width);
+        let c = curr % width;
+        let nbrs = [
+          (r > 0) ? curr - width : -1,
+          (r + 1 < height) ? curr + width : -1,
+          (c > 0) ? curr - 1 : -1,
+          (c + 1 < width) ? curr + 1 : -1
+        ];
+
+        for (let y = 0; y < 4; y++) {
+          let nb = nbrs[y];
+
+          if (nb >= 0 && owner_grid[nb] > 0 && bfs_dist[nb] > d + 1) {
+            bfs_dist[nb] = d + 1;
+            bfs_anchor[nb] = bfs_anchor[curr];
+            bfs_q.push(nb);
+          }
+        }
+      }
+
+      console.log(`[population_Velkscala] Overlaying ${discovery.contexts.length} Viscount antiquity domains (${viscount_pixels.length} px) across ${target_years.length} timesteps...`);
+
+      for (let i = 0; i < target_years.length; i++) {
+        let yr = target_years[i];
+
+        if (yr > 0) continue;
+        let a0 = Math.max(-10000, Math.floor(yr/1000)*1000);
+        let a1 = Math.min(0, a0 + 1000);
+        let grid_a = getAnchor(a0);
+        let grid_b = (a1 !== a0) ? getAnchor(a1) : grid_a;
+
+        if (!grid_a || !grid_b) continue;
+
+        let dst_popc = path.join(this.input_popc_folder, `population_${yr}.png`);
+        let dst_rurc = path.join(this.input_rurc_folder, `population_rural_${yr}.png`);
+        let dst_urbc = path.join(this.input_urbc_folder, `population_urban_${yr}.png`);
+        let dst_popd = path.join(this.intermediate_popd_folder, `population_density_${yr}.png`);
+        let popc_arr = loadFloatGrid(dst_popc);
+        let urbc_arr = loadFloatGrid(dst_urbc) || new Float32Array(total_px);
+        let rurc_arr = loadFloatGrid(dst_rurc) || new Float32Array(total_px);
+        let popd_arr = loadFloatGrid(dst_popd) || new Float32Array(total_px);
+
+        if (!popc_arr) continue;
+
+        let frac = (a1 !== a0) ? (yr - a0)/Math.max(1, a1 - a0) : 0;
+
+        for (let x = 0; x < viscount_pixels.length; x++) {
+          let px = viscount_pixels[x];
+          let va = grid_a[px];
+          let vb = grid_b[px];
+          let v_vis = (va > 1e-4 && vb > 1e-4) ?
+            Math.exp((1 - frac)*Math.log(va) + frac*Math.log(vb)) :
+            ((1 - frac)*va + frac*vb);
+
+          if (bfs_dist[px] <= seam_px && bfs_anchor[px] >= 0) {
+            let w_cos = 0.5*(1 - Math.cos(Math.PI*bfs_dist[px]/seam_px));
+            let v_ext = popc_arr[bfs_anchor[px]];
+
+            if (v_ext > 0) v_vis = w_cos*v_vis + (1 - w_cos)*v_ext;
+          }
+
+          let u_val = urbc_arr[px] || 0;
+          let p_val = Math.max(v_vis, u_val);
+
+          popc_arr[px] = p_val;
+          rurc_arr[px] = Math.max(0, p_val - u_val);
+          popd_arr[px] = (land_area[px] > 0) ? p_val/land_area[px] : 0;
+        }
+
+        writeFloatGrid(dst_popc, popc_arr);
+        writeFloatGrid(dst_rurc, rurc_arr);
+        writeFloatGrid(dst_popd, popd_arr);
+      }
     }
 
     /**

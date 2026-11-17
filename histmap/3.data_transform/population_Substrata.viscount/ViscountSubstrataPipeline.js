@@ -314,7 +314,7 @@ if (!global.population_Substrata_russia && typeof require !== "undefined") {
       for (let t = 0; t < hyde_years.length; t++) {
         let yr = hyde_years[t];
         let dst_path = path.join(out_folder, `popc_${yr}.png`);
-        let fallback_path = path.join(ctx.root_dir, "histmap/3.data_transform/population_Substrata.outlier_removal/rasters_1.northern_america", `popc_${yr}.png`);
+        let fallback_path = path.join(ctx.root_dir, "histmap/3.data_transform/population_Substrata.outlier_removal/rasters_outliers_removed", `popc_${yr}.png`);
         let src_path = fs.existsSync(dst_path) ? dst_path : (fs.existsSync(fallback_path) ? fallback_path : null);
         if (!src_path) continue;
 

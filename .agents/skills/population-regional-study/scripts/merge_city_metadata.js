@@ -2,6 +2,7 @@
 let fs = require("fs");
 let JSON5 = require("json5");
 let path = require("path");
+let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit");
 
 //Initialise functions
 {
@@ -36,10 +37,10 @@ let path = require("path");
      */
     hasArchSiteQualifier (arg0_name) {
       //Convert from parameters
-      let raw_name = String(arg0_name || "");
+      let profiles = viscount_entity_audit.loadSkillProfiles();
 
       //Return statement
-      return /\b(Site|Gorodishche|Kurgan|Mound|Cemetery|Frontier|Ford|Steppe|Approach|Castle|Hillfort|Barrow|Shelter|Complex|Terrace|Bronze|Palaeolithic|Neolithic)\b/i.test(raw_name);
+      return viscount_entity_audit.hasArchSiteQualifier(arg0_name, profiles);
     },
 
     /**
@@ -97,6 +98,32 @@ let path = require("path");
 
       //Return statement
       return false;
+    },
+
+    /**
+     * Returns true when an alias contains non-indigenous foreign-script GeoNames transliteration noise
+     * for predominantly Latin-script settler countries/territories.
+     * @alias city_metadata_merger.isForeignScriptNoiseForCountry
+     *
+     * @param {string} arg0_alias
+     * @param {string} arg1_country
+     *
+     * @returns {boolean}
+     */
+    isForeignScriptNoiseForCountry (arg0_alias, arg1_country, arg2_coords) {
+      //Convert from parameters
+      let alias = String(arg0_alias || "");
+      let coords = Array.isArray(arg2_coords) ? arg2_coords : [];
+      let country = String(arg1_country || "").trim();
+      let profiles = viscount_entity_audit.loadSkillProfiles();
+
+      //Guard clauses
+      if (!country || !viscount_entity_audit.isLatinScriptOnlyCountry(country, coords, profiles))
+        return false;
+
+      //Return statement
+      return /[\u0400-\u04FF\u0600-\u06FF\u4E00-\u9FFF\u3040-\u30FF\uAC00-\uD7AF]/.test(alias) ||
+        /^Ist\s+Pitc/i.test(alias);
     },
 
     /**
@@ -320,6 +347,22 @@ let path = require("path");
             }
           }
 
+          //Terminal Modern Name Anchor: extant modern settlements must terminate at clean_modern
+          let latest_year = Number(rec.latest_year || 0);
+          if (latest_year >= 1950 && !rec.is_renamed_post_1950 && sorted_hist.length > 0) {
+            let last_entry = sorted_hist[sorted_hist.length - 1];
+            if (this.normaliseName(last_entry.name) !== this.normaliseName(clean_modern)) {
+              if (sorted_hist.length === 1 && this.dateSortTuple(last_entry.date)[0] >= 1980) {
+                console.error(`[merge_city_metadata] Rejected single mismatched modern stub (${last_entry.name} vs ${clean_modern}) for ${rec.key}.`);
+                counts.rejected_items++;
+                continue;
+              }
+              let anchor_yr = Math.max(this.dateSortTuple(last_entry.date)[0] + 1, 1950);
+              valid_hist.push({ date: `${anchor_yr}.1.1`, name: clean_modern });
+              sorted_hist = this.sortAndDedupHistoricalNames(valid_hist);
+            }
+          }
+
           let existing_idx = null;
           if (Number.isInteger(rec.existing_meta_index) &&
               rec.existing_meta_index >= 0 &&
@@ -347,7 +390,7 @@ let path = require("path");
                   let c_norm = this.normaliseName(cand.entry.name);
                   let target_is_corrupt_or_arch = this.isCorruptedCityName(cand.entry.name) || this.hasArchSiteQualifier(cand.entry.name);
                   let stems_match = Boolean(rec_norm && c_norm && c_norm === rec_norm);
-                  if ((d <= 2.5 && (target_is_corrupt_or_arch || stems_match)) || (d <= 25.0 && stems_match)) {
+                  if ((d <= 2.5 && target_is_corrupt_or_arch) || (d <= 25.0 && stems_match)) {
                     if (d < best_dist) {
                       best_dist = d;
                       existing_idx = cand.index;
@@ -366,7 +409,8 @@ let path = require("path");
             clean_aliases.push(promoted_site_alias);
           for (let y = 0; y < raw_aliases.length; y++) {
             let a_str = this.stripParenthetical(raw_aliases[y]);
-            if (!this.isCorruptedCityName(a_str) && a_str !== clean_modern) clean_aliases.push(a_str);
+            if (!this.isCorruptedCityName(a_str) && !this.isForeignScriptNoiseForCountry(a_str, rec.country, rec.coords_lat_lng) && a_str !== clean_modern)
+              clean_aliases.push(a_str);
           }
           for (let y = 0; y < valid_hist.length; y++) {
             if (valid_hist[y].name !== clean_modern) clean_aliases.push(valid_hist[y].name);
@@ -390,6 +434,14 @@ let path = require("path");
             for (let y = 0; y < valid_hist.length; y++) combined_hist.push(valid_hist[y]);
 
             target.historical_names = this.sortAndDedupHistoricalNames(combined_hist);
+            if (latest_year >= 1950 && !rec.is_renamed_post_1950 && target.historical_names.length > 0 && target.name) {
+              let t_last = target.historical_names[target.historical_names.length - 1];
+              if (this.normaliseName(t_last.name) !== this.normaliseName(target.name)) {
+                let restore_yr = Math.max(this.dateSortTuple(t_last.date)[0] + 1, 1950);
+                target.historical_names.push({ date: `${restore_yr}.1.1`, name: target.name });
+                target.historical_names = this.sortAndDedupHistoricalNames(target.historical_names);
+              }
+            }
 
             let prev_other = Array.isArray(target.other_names) ? target.other_names : [];
             let merged_other = [];

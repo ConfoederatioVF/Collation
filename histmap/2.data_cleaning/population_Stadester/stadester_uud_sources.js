@@ -24,6 +24,7 @@
 
     //Function body
     let norm = name
+      .replace(/_[A-Za-z]{2}_\d+$/, "")
       .toLowerCase()
       .replace(/[ûŭ]/g, "u")
       .replace(/[ёë]/g, "e")
@@ -34,6 +35,7 @@
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "")
       .replace(/['’`´\-.,\s]/g, "")
+      .replace(/nadonu|ondon|nadone/g, "don")
       .replace(/shch/g, "sc")
       .replace(/szcz/g, "sc")
       .replace(/zh/g, "z")
@@ -383,12 +385,17 @@
         if (target_city.coords) target_city.name_coords[target_city.name] = target_city.coords;
       }
     }
+    let allow_identity_update = (
+      typeof population_Stadester_uud.hasViscountSource !== "function" ||
+      !population_Stadester_uud.hasViscountSource(target_city) ||
+      population_Stadester_uud.hasViscountSource(source_city)
+    );
     let source_peak = population_Stadester_uud.getPeakPopulation(source_city.population);
-    if (source_city.name && source_peak >= (target_city.name_peaks[source_city.name] || 0)) {
+    if (allow_identity_update && source_city.name && source_peak >= (target_city.name_peaks[source_city.name] || 0)) {
       target_city.name_peaks[source_city.name] = source_peak;
       if (source_city.coords) target_city.name_coords[source_city.name] = source_city.coords;
     }
-    if (source_city.name_peaks) {
+    if (allow_identity_update && source_city.name_peaks) {
       let s_keys = Object.keys(source_city.name_peaks);
       for (let i = 0; i < s_keys.length; i++) {
         let k = s_keys[i], p = source_city.name_peaks[k];
@@ -399,14 +406,16 @@
         }
       }
     }
-    let max_name_peak = -1, all_name_keys = Object.keys(target_city.name_peaks);
-    for (let i = 0; i < all_name_keys.length; i++) {
-      let k = all_name_keys[i], p = target_city.name_peaks[k];
-      if (p > max_name_peak) { max_name_peak = p; best_name = k; }
-    }
-    if (best_name) {
-      target_city.name = best_name;
-      if (target_city.name_coords && target_city.name_coords[best_name]) target_city.coords = target_city.name_coords[best_name];
+    if (allow_identity_update) {
+      let max_name_peak = -1, all_name_keys = Object.keys(target_city.name_peaks);
+      for (let i = 0; i < all_name_keys.length; i++) {
+        let k = all_name_keys[i], p = target_city.name_peaks[k];
+        if (p > max_name_peak) { max_name_peak = p; best_name = k; }
+      }
+      if (best_name) {
+        target_city.name = best_name;
+        if (target_city.name_coords && target_city.name_coords[best_name]) target_city.coords = target_city.name_coords[best_name];
+      }
     }
     if (!target_city.other_names) target_city.other_names = [];
     if (old_target_name) candidate_names.push(old_target_name);
@@ -779,8 +788,19 @@
           let pk = pkeys[pk_i];
           let peer = return_obj[pk];
           if (!peer || peer === actual_city || (typeof isAgglomeration === "function" && isAgglomeration(peer))) continue;
-          if (typeof population_Stadester_uud.hasCitySource === "function" && population_Stadester_uud.hasCitySource(peer, "POLARIS")) continue;
-          if (peer.country !== actual_city.country) continue;
+          if (typeof population_Stadester_uud.hasViscountSource === "function" && population_Stadester_uud.hasViscountSource(peer)) continue;
+          let same_or_compat_country = (peer.country === actual_city.country) ||
+            (
+              peer.country === "United States" &&
+              typeof population_Stadester_uud.isCompleteViscountCountry === "function" &&
+              population_Stadester_uud.isCompleteViscountCountry(actual_city.country, actual_city)
+            ) ||
+            (
+              typeof population_Stadester_ghsl !== "undefined" &&
+              typeof population_Stadester_ghsl.areCompatibleTwinCountries === "function" &&
+              population_Stadester_ghsl.areCompatibleTwinCountries(peer.country, actual_city.country)
+            );
+          if (!same_or_compat_country) continue;
           if (!Array.isArray(peer.coords) || population_Stadester_uud.haversineDistance(actual_city.coords, peer.coords) > 5) continue;
           if (!population_Stadester_uud.checkExactNameMatch(actual_city, peer)) continue;
           if (!actual_city.other_names) actual_city.other_names = [];
@@ -825,7 +845,8 @@
 
     //Declare local instance variables
     let all_keys;
-    let former_ussr_core = ["Belarus", "Russia", "Ukraine"];
+    let non_agglom_grid = new Map();
+    let polaris_countries = ["Belarus", "Estonia", "Finland", "Latvia", "Lithuania", "Moldova", "Poland", "Russia", "Ukraine"];
 
     //Guard clauses
     if (!uud_obj || typeof uud_obj !== "object") return uud_obj;
@@ -833,13 +854,57 @@
     //Function body
     all_keys = Object.keys(uud_obj);
     for (let i = 0; i < all_keys.length; i++) {
+      let c_obj = uud_obj[all_keys[i]];
+      if (!c_obj || !Array.isArray(c_obj.coords) || c_obj.coords.length < 2) continue;
+      let k_l = String(all_keys[i] || "").toLowerCase();
+      let n_l = String(c_obj.name || "").toLowerCase();
+      if (Boolean(c_obj.is_agglomeration) || k_l.includes("agglomeration") || n_l.includes("agglomeration")) continue;
+      let in_complete_viscount_c = polaris_countries.includes(c_obj.country) ||
+        (typeof population_Stadester_uud.isCompleteViscountCountry === "function" && population_Stadester_uud.isCompleteViscountCountry(c_obj.country, c_obj));
+      if (!in_complete_viscount_c) continue;
+      let gk = `${Math.floor(Number(c_obj.coords[0]))}_${Math.floor(Number(c_obj.coords[1]))}`;
+      if (!non_agglom_grid.has(gk)) non_agglom_grid.set(gk, []);
+      non_agglom_grid.get(gk).push(c_obj);
+    }
+
+    for (let i = 0; i < all_keys.length; i++) {
       let city = uud_obj[all_keys[i]];
       if (!city || !city.population) continue;
 
       let key_lower = String(all_keys[i] || "").toLowerCase();
       let name_lower = String(city.name || "").toLowerCase();
       let is_agglom = Boolean(city.is_agglomeration) || key_lower.includes("agglomeration") || name_lower.includes("agglomeration");
-      if (is_agglom && former_ussr_core.includes(city.country)) {
+      let in_complete_viscount_city = polaris_countries.includes(city.country) ||
+        (typeof population_Stadester_uud.isCompleteViscountCountry === "function" && population_Stadester_uud.isCompleteViscountCountry(city.country, city));
+      if (is_agglom && in_complete_viscount_city) {
+        let has_core_city = false;
+        if (Array.isArray(city.coords) && city.coords.length >= 2) {
+          let lat0 = Number(city.coords[0]);
+          let lng0 = Number(city.coords[1]);
+          for (let dx = -1; dx <= 1 && !has_core_city; dx++) {
+            for (let dy = -1; dy <= 1 && !has_core_city; dy++) {
+              let bucket = non_agglom_grid.get(`${Math.floor(lat0) + dx}_${Math.floor(lng0) + dy}`);
+              if (!bucket) continue;
+              for (let z = 0; z < bucket.length; z++) {
+                let peer = bucket[z];
+                let peer_compat = (peer.country === city.country) ||
+                  (
+                    typeof population_Stadester_ghsl !== "undefined" &&
+                    typeof population_Stadester_ghsl.areCompatibleTwinCountries === "function" &&
+                    population_Stadester_ghsl.areCompatibleTwinCountries(peer.country, city.country)
+                  );
+                if (peer_compat && population_Stadester_uud.haversineDistance(city.coords, peer.coords) <= 15.0) {
+                  has_core_city = true;
+                  break;
+                }
+              }
+            }
+          }
+        }
+        if (has_core_city) {
+          delete uud_obj[all_keys[i]];
+          continue;
+        }
         let p_keys = Object.keys(city.population);
         for (let x = 0; x < p_keys.length; x++) {
           let yr_num = parseInt(p_keys[x], 10);

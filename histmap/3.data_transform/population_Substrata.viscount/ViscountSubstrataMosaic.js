@@ -133,11 +133,14 @@ let { PNG } = global.pngjs || require("pngjs");
           }
         }
 
+        let base_rural = Float32Array.from(rural_valid);
         let target_groups = [
           context.macro_entry ? [context.macro_entry] : [],
           context.specialist_entries || [],
           context.national_epoch_entries || []
         ];
+        let touched = new Uint8Array(n_valid);
+
         for (let g = 0; g < target_groups.length; g++) {
           let group = target_groups[g];
           for (let x = 0; x < group.length; x++) {
@@ -147,6 +150,7 @@ let { PNG } = global.pngjs || require("pngjs");
             for (let z = 0; z < zones.length; z++) {
               let zone = zones[z];
               if (!zone.pixels || zone.pixels.length === 0) continue;
+              if (zone.domain && (yr < zone.domain[0] || yr > zone.domain[1])) continue;
               let raw_target = this.resolveZoneTargetPopulation(zone.population, yr);
               if (raw_target < 0) continue;
               let target_pop = raw_target*(zone.domain_fraction !== undefined ? zone.domain_fraction : 1.0);
@@ -155,7 +159,7 @@ let { PNG } = global.pngjs || require("pngjs");
               for (let a = 0; a < zone.pixels.length; a++) {
                 let v_idx = context.pixel_to_valid[zone.pixels[a]];
                 if (v_idx >= 0) {
-                  curr_sum += rural_valid[v_idx];
+                  curr_sum += base_rural[v_idx];
                   urb_sum += urban_valid[v_idx];
                 }
               }
@@ -163,10 +167,87 @@ let { PNG } = global.pngjs || require("pngjs");
               let scalar = (curr_sum > 0) ? rural_target/curr_sum : 1.0;
               for (let a = 0; a < zone.pixels.length; a++) {
                 let v_idx = context.pixel_to_valid[zone.pixels[a]];
-                if (v_idx >= 0) rural_valid[v_idx] = Math.max(1e-4, rural_valid[v_idx]*scalar);
+                if (v_idx >= 0) {
+                  rural_valid[v_idx] = Math.max(1e-4, base_rural[v_idx]*scalar);
+                  touched[v_idx] = 1;
+                }
               }
             }
           }
+        }
+
+        //2-pass separable spatial smoothing of log-multipliers within each source domain to prevent state/HUC wall cliffs
+        let blur_r = (context.manifest && context.manifest.smoothing && Number.isFinite(context.manifest.smoothing.interior_multiplier_blur_radius_px)) ?
+          context.manifest.smoothing.interior_multiplier_blur_radius_px : 5;
+        let blur_passes = (context.manifest && context.manifest.smoothing && Number.isFinite(context.manifest.smoothing.interior_multiplier_blur_passes)) ?
+          context.manifest.smoothing.interior_multiplier_blur_passes : 2;
+        let log_mult = new Float32Array(n_valid);
+        let pre_smooth_sum = 0;
+        let tmp_mult = new Float32Array(n_valid);
+
+        for (let v = 0; v < n_valid; v++) {
+          if (touched[v]) {
+            pre_smooth_sum += rural_valid[v];
+            log_mult[v] = Math.log(Math.max(1e-6, rural_valid[v])/Math.max(1e-6, base_rural[v]));
+          } else {
+            log_mult[v] = 0;
+          }
+        }
+
+        for (let pass = 0; pass < blur_passes; pass++) {
+          for (let v = 0; v < n_valid; v++) {
+            if (!touched[v]) { tmp_mult[v] = 0; continue; }
+            let px = context.valid_indices[v];
+            let dom_id = context.pixel_domain[px];
+            let r = Math.floor(px/context.width);
+            let c = px % context.width;
+            let acc = 0;
+            let wt_sum = 0;
+
+            for (let dc = -blur_r; dc <= blur_r; dc++) {
+              let nc = (c + dc + context.width) % context.width;
+              let nv = context.pixel_to_valid[r*context.width + nc];
+              if (nv >= 0 && touched[nv] && context.pixel_domain[context.valid_indices[nv]] === dom_id) {
+                let wt = blur_r + 1 - Math.abs(dc);
+                acc += log_mult[nv]*wt;
+                wt_sum += wt;
+              }
+            }
+            tmp_mult[v] = (wt_sum > 0) ? acc/wt_sum : log_mult[v];
+          }
+          for (let v = 0; v < n_valid; v++) {
+            if (!touched[v]) continue;
+            let px = context.valid_indices[v];
+            let dom_id = context.pixel_domain[px];
+            let r = Math.floor(px/context.width);
+            let c = px % context.width;
+            let acc = 0;
+            let wt_sum = 0;
+
+            for (let dr = -blur_r; dr <= blur_r; dr++) {
+              let nr = r + dr;
+              if (nr < 0 || nr >= context.height) continue;
+              let nv = context.pixel_to_valid[nr*context.width + c];
+              if (nv >= 0 && touched[nv] && context.pixel_domain[context.valid_indices[nv]] === dom_id) {
+                let wt = blur_r + 1 - Math.abs(dr);
+                acc += tmp_mult[nv]*wt;
+                wt_sum += wt;
+              }
+            }
+            log_mult[v] = (wt_sum > 0) ? acc/wt_sum : tmp_mult[v];
+          }
+        }
+
+        let smoothed_sum = 0;
+        for (let v = 0; v < n_valid; v++) {
+          if (!touched[v]) continue;
+          rural_valid[v] = Math.max(1e-4, base_rural[v]*Math.exp(log_mult[v]));
+          smoothed_sum += rural_valid[v];
+        }
+        if (smoothed_sum > 0 && pre_smooth_sum > 0) {
+          let norm_k = pre_smooth_sum/smoothed_sum;
+          for (let v = 0; v < n_valid; v++)
+            if (touched[v]) rural_valid[v] = Math.max(1e-4, rural_valid[v]*norm_k);
         }
 
         calibrated_series.push(rural_valid);
@@ -176,9 +257,11 @@ let { PNG } = global.pngjs || require("pngjs");
       for (let t = 0; t < hyde_years.length; t++) {
         let yr = hyde_years[t];
         let out_png_path = path.join(out_folder, `popc_${yr}.png`);
-        if (!fs.existsSync(out_png_path)) continue;
+        let fallback_path = path.join(context.root_dir, "histmap/3.data_transform/population_Substrata.outlier_removal/rasters_outliers_removed", `popc_${yr}.png`);
+        let read_path = fs.existsSync(out_png_path) ? out_png_path : (fs.existsSync(fallback_path) ? fallback_path : null);
+        if (!read_path) continue;
 
-        let out_png = PNG.sync.read(fs.readFileSync(out_png_path));
+        let out_png = PNG.sync.read(fs.readFileSync(read_path));
         let out_dv = new DataView(out_png.data.buffer, out_png.data.byteOffset, out_png.data.byteLength);
         let cal_arr = calibrated_series[t];
         let u_arr = urban_series[t];
@@ -197,7 +280,7 @@ let { PNG } = global.pngjs || require("pngjs");
         }
 
         this.applyOneSidedSeamBlend(context, out_png.data, out_dv, options);
-        fs.writeFileSync(out_png_path, PNG.sync.write(out_png));
+        fs.writeFileSync(out_png_path, PNG.sync.write(out_png, { colorType: 6, deflateLevel: 3 }));
         year_summaries[yr] = { combined: Math.round(total_pop) };
       }
 
@@ -318,7 +401,7 @@ let { PNG } = global.pngjs || require("pngjs");
             let col = zc.colour || zc.color;
             if (Array.isArray(col) && col.length >= 3) {
               col_map.set(`${col[0]},${col[1]},${col[2]}`, zones.length);
-              zones.push({ colour: col, domain_fraction: 1.0, key: r_keys[x], pixels: [], population: zc.population || {} });
+              zones.push({ colour: col, domain: zc.domain || null, domain_fraction: 1.0, key: r_keys[x], pixels: [], population: zc.population || {} });
             }
           }
           for (let idx = 0; idx < n_pixels; idx++) {

@@ -44,7 +44,7 @@
       for (let i = 0; i < all_keys.length; i++) {
         let city = stadester_obj[all_keys[i]];
         if (!city || city._raw_lapsed !== true || !city.population) continue;
-        if (!population_Stadester_uud.hasCitySource(city, "POLARIS")) continue;
+        if (!population_Stadester_uud.hasViscountSource(city)) continue;
         let bounds = population_Stadester_ghs_pop.getEmpiricalBounds(city);
         if (Number.isFinite(bounds.raw_max_year) && bounds.raw_max_year >= cutoff_year && bounds.raw_max_year < end_year) {
           for (let yr = bounds.raw_max_year + 1; yr <= end_year; yr++)
@@ -57,7 +57,7 @@
     for (let i = 0; i < city_entries.length; i++) {
       let ce = city_entries[i];
       if (!ce || !ce.city || ce.is_suppressed_ucdb_twin || ce.is_suppressed_non_ucdb_twin) continue;
-      if (!population_Stadester_uud.hasCitySource(ce.city, "POLARIS")) continue;
+      if (!population_Stadester_uud.hasViscountSource(ce.city)) continue;
       if (preserve_manual && population_Stadester_uud.hasCitySource(ce.city, "manual")) continue;
       if (!ce.city.population) ce.city.population = {};
       

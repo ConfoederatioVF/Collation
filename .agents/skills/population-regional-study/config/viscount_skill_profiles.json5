@@ -1,0 +1,278 @@
+{
+  // Operation Viscount 14-Region Declarative Skill Profiles
+  // Consumed by Gatekeepers A, A2, C1, D1, D2, E2 and F so no single macro-region is hardcoded.
+  version: "1.0",
+
+  macro_region_defaults: {
+    CENTAUR: {
+      default_border_splice_years: [],
+      default_modern_census_year: 1850,
+      has_micro_islands: true,
+      max_adm2_area_km2: 25000,
+      projection_class: "albers_conic"
+    },
+    POLARIS: {
+      default_border_splice_years: [1918, 1919, 1920, 1921, 1926, 1927, 1939, 1940, 1945, 1991],
+      default_modern_census_year: 1897,
+      has_micro_islands: false,
+      max_adm2_area_km2: 25000,
+      projection_class: "albers_conic"
+    },
+    PRETA: {
+      default_border_splice_years: [1872, 1940, 1950, 1960, 1975],
+      default_modern_census_year: 1872,
+      has_micro_islands: false,
+      max_adm2_area_km2: 25000,
+      projection_class: "lambert_azimuthal"
+    },
+    JADE: {
+      default_border_splice_years: [1912, 1945, 1949, 1953, 1964, 1982],
+      default_modern_census_year: 1953,
+      has_micro_islands: false,
+      max_adm2_area_km2: 25000,
+      projection_class: "albers_conic"
+    },
+    INDUS: {
+      default_border_splice_years: [1947, 1971],
+      default_modern_census_year: 1881,
+      has_micro_islands: true,
+      max_adm2_area_km2: 25000,
+      projection_class: "lambert_azimuthal"
+    },
+    CASTLE: {
+      default_border_splice_years: [1910, 1945, 1953],
+      default_modern_census_year: 1920,
+      has_micro_islands: true,
+      max_adm2_area_km2: 25000,
+      projection_class: "albers_conic"
+    },
+    MANDALA: {
+      default_border_splice_years: [1945, 1949, 1954, 1963, 1965, 1975, 1999],
+      default_modern_census_year: 1960,
+      has_micro_islands: true,
+      max_adm2_area_km2: 25000,
+      projection_class: "lambert_azimuthal"
+    },
+    SARAY: {
+      default_border_splice_years: [1924, 1925, 1936, 1991],
+      default_modern_census_year: 1897,
+      has_micro_islands: false,
+      max_adm2_area_km2: 25000,
+      projection_class: "albers_conic"
+    },
+    HANDBOOK: {
+      default_border_splice_years: [1920, 1923, 1948, 1967, 1990, 1991],
+      default_modern_census_year: 1950,
+      has_micro_islands: false,
+      max_adm2_area_km2: 25000,
+      projection_class: "lambert_azimuthal"
+    },
+    MAGNETIC: {
+      default_border_splice_years: [1918, 1919, 1920, 1938, 1939, 1945, 1990, 1991, 1992],
+      default_modern_census_year: 1871,
+      has_micro_islands: true,
+      max_adm2_area_km2: 25000,
+      projection_class: "albers_conic"
+    },
+    QUIPU: {
+      default_border_splice_years: [1883, 1903, 1938],
+      default_modern_census_year: 1876,
+      has_micro_islands: true,
+      max_adm2_area_km2: 25000,
+      projection_class: "lambert_azimuthal"
+    },
+    JAGUAR: {
+      default_border_splice_years: [1902, 1962, 1973],
+      default_modern_census_year: 1895,
+      has_micro_islands: true,
+      max_adm2_area_km2: 25000,
+      projection_class: "lambert_azimuthal"
+    },
+    AUSTRAL: {
+      default_border_splice_years: [1901, 1949, 1975],
+      default_modern_census_year: 1881,
+      has_micro_islands: true,
+      max_adm2_area_km2: 25000,
+      projection_class: "lambert_azimuthal"
+    },
+    NICETHI: {
+      default_border_splice_years: [1960, 1975, 1993, 2011],
+      default_modern_census_year: 1960,
+      has_micro_islands: true,
+      max_adm2_area_km2: 25000,
+      projection_class: "lambert_azimuthal"
+    }
+  },
+
+  // Countries/jurisdictions across the 14 Viscount regions where indigenous, official or historical
+  // non-Latin script aliases are scholarly (NOTE: "georgia" is disambiguated dynamically via lon < -30).
+  multi_script_countries: [
+    "afghanistan", "afghani", "algeria", "armenia", "azerbaijan", "azerbai",
+    "bahrain", "bangladesh", "banglad", "belarus", "bhutan",
+    "bosnia", "bosnia and herzegovina", "bosnia herzegovina", "bosniah",
+    "bulgaria", "bulgari", "cambodia", "cambodi", "chad", "china",
+    "comores", "comoros", "cyprus", "djibouti", "djibout",
+    "egypt", "eritrea", "estonia", "ethiopia", "ethiopi",
+    "finland", "gambia", "greece", "guinea", "holy land",
+    "hong kong", "hongkon", "india", "iran", "iraq", "israel",
+    "japan", "jordan", "kazakhstan", "kazakhs",
+    "korea", "north korea", "nkorea", "south korea", "skorea",
+    "kuwait", "kyrgyzstan", "kyrgyzs", "laos", "latvia", "lebanon", "libya",
+    "lithuania", "lithuan", "macao", "macau", "macedonia", "macedon", "north macedonia",
+    "maldives", "maldive", "mali", "mauritania", "maurita",
+    "moldova", "mongolia", "mongoli", "montenegro", "montene", "monteng", "morocco", "myanmar",
+    "nepal", "niger", "northern cyprus", "oman",
+    "pakistan", "pakista", "palestine", "palesti", "poland", "qatar", "russia",
+    "saudi arabia", "saudiar", "senegal", "serbia", "somalia",
+    "south sudan", "ssudan", "sri lanka", "srilank", "sudan", "syria",
+    "taiwan", "tajikistan", "tajikis", "thailand", "thailan",
+    "tunisia", "turkey", "turkiye", "turkmenistan", "turkmen",
+    "uae", "united arab emirates", "unarabe", "ukraine", "uzbekistan", "uzbekis",
+    "vietnam", "western sahara", "yemen", "yugoslf"
+  ],
+
+  // Maps Viscount short codes, sub-national states and territories to Natural Earth country properties
+  adm0_canonical_overrides: {
+    "usa": "United States of America", "uniteds": "United States of America", "united states": "United States of America",
+    "alabama": "United States of America", "alaska": "United States of America", "arizona": "United States of America",
+    "arkansas": "United States of America", "california": "United States of America", "colorado": "United States of America",
+    "connecticut": "United States of America", "delaware": "United States of America", "district of columbia": "United States of America",
+    "florida": "United States of America", "hawaii": "United States of America", "idaho": "United States of America",
+    "illinois": "United States of America", "indiana": "United States of America", "iowa": "United States of America",
+    "kansas": "United States of America", "kentucky": "United States of America", "louisiana": "United States of America",
+    "maine": "United States of America", "maryland": "United States of America", "massachusetts": "United States of America",
+    "michigan": "United States of America", "minnesota": "United States of America", "mississippi": "United States of America",
+    "missouri": "United States of America", "montana": "United States of America", "nebraska": "United States of America",
+    "nevada": "United States of America", "new hampshire": "United States of America", "new jersey": "United States of America",
+    "new mexico": "United States of America", "new york": "United States of America", "north carolina": "United States of America",
+    "north dakota": "United States of America", "ohio": "United States of America", "oklahoma": "United States of America",
+    "oregon": "United States of America", "pennsylvania": "United States of America", "rhode island": "United States of America",
+    "south carolina": "United States of America", "south dakota": "United States of America", "tennessee": "United States of America",
+    "texas": "United States of America", "utah": "United States of America", "vermont": "United States of America",
+    "virginia": "United States of America", "washington": "United States of America", "west virginia": "United States of America",
+    "wisconsin": "United States of America", "wyoming": "United States of America",
+    "amsamoa": "American Samoa", "greenld": "Greenland",
+    "frguian": "France", "french guiana": "France", "guadelp": "France", "guadeloupe": "France",
+    "martini": "France", "martinique": "France", "reunion": "France", "mayotte": "France",
+    "surinam": "Suriname", "hongkon": "Hong Kong S.A.R.", "hong kong": "Hong Kong S.A.R.",
+    "macau": "Macao S.A.R", "macao": "Macao S.A.R", "mongoli": "Mongolia",
+    "banglad": "Bangladesh", "srilank": "Sri Lanka", "maldive": "Maldives", "pakista": "Pakistan",
+    "nkorea": "North Korea", "skorea": "South Korea", "korea": "South Korea",
+    "cambodi": "Cambodia", "easttim": "East Timor", "timor-leste": "East Timor", "leste": "East Timor",
+    "indones": "Indonesia", "malaysi": "Malaysia", "philipp": "Philippines", "singapo": "Singapore", "thailan": "Thailand",
+    "kazakhs": "Kazakhstan", "kyrgyzs": "Kyrgyzstan", "tajikis": "Tajikistan", "turkmen": "Turkmenistan", "uzbekis": "Uzbekistan",
+    "afghani": "Afghanistan", "azerbai": "Azerbaijan", "palesti": "Palestine", "holy land": "Israel",
+    "saudiar": "Saudi Arabia", "uae": "United Arab Emirates", "unarabe": "United Arab Emirates", "turkiye": "Turkey",
+    "bosniah": "Bosnia and Herzegovina", "bosnia": "Bosnia and Herzegovina", "bosnia herzegovina": "Bosnia and Herzegovina",
+    "bulgari": "Bulgaria", "czechrp": "Czechia", "czech rep.": "Czechia", "czech republic": "Czechia",
+    "faeroei": "Faroe Islands", "liechte": "Liechtenstein", "lithuan": "Lithuania",
+    "luxembg": "Luxembourg", "luxembu": "Luxembourg", "luxemburg": "Luxembourg",
+    "macedon": "North Macedonia", "macedonia": "North Macedonia",
+    "montene": "Montenegro", "monteng": "Montenegro", "netherl": "Netherlands", "the netherlands": "Netherlands",
+    "portuga": "Portugal", "romenia": "Romania", "sanmari": "San Marino", "smarino": "San Marino",
+    "slovaki": "Slovakia", "sloveni": "Slovenia", "svalbar": "Norway", "svalbard": "Norway", "switzer": "Switzerland",
+    "england and wales": "United Kingdom", "scotland": "United Kingdom", "uk": "United Kingdom", "unkingd": "United Kingdom",
+    "argenti": "Argentina", "colombi": "Colombia", "falklis": "Falkland Islands", "paragua": "Paraguay",
+    "sgeorgs": "South Georgia and the Islands", "south georgia": "South Georgia and the Islands",
+    "south georgia and the south sandwich islands": "South Georgia and the Islands", "venezue": "Venezuela",
+    "anguill": "Anguilla", "antigub": "Antigua and Barbuda", "antigua": "Antigua and Barbuda",
+    "barbado": "Barbados", "brvirgi": "British Virgin Islands", "caymani": "Cayman Islands",
+    "costari": "Costa Rica", "dominic": "Dominica", "dominrp": "Dominican Republic", "domirep": "Dominican Republic",
+    "dominican rep.": "Dominican Republic", "elsalva": "El Salvador", "guatema": "Guatemala", "hondura": "Honduras",
+    "mexicoc": "Mexico", "montser": "Montserrat", "nethant": "Netherlands Antilles", "netherlands antilles": "Netherlands Antilles",
+    "nicarag": "Nicaragua", "puertri": "Puerto Rico", "saint barthelemy": "Saint Barthelemy", "saint-martin": "Saint-Martin",
+    "stkitts": "Saint Kitts and Nevis", "stkittn": "Saint Kitts and Nevis", "stlucia": "Saint Lucia",
+    "stvince": "Saint Vincent and the Grenadines", "stvinct": "Saint Vincent and the Grenadines",
+    "the bahamas": "The Bahamas", "bahamas": "The Bahamas",
+    "trinidt": "Trinidad and Tobago", "trinidad": "Trinidad and Tobago", "trinidad & tobago": "Trinidad and Tobago",
+    "turkcai": "Turks and Caicos Islands", "virgisl": "United States Virgin Islands", "us virgin islands": "United States Virgin Islands",
+    "austral": "Australia", "cookisl": "Cook Islands", "frpolyn": "French Polynesia",
+    "kiribat": "Kiribati", "marshal": "Marshall Islands", "microne": "Federated States of Micronesia",
+    "micronesia": "Federated States of Micronesia", "newcale": "New Caledonia", "newzeal": "New Zealand",
+    "nmarian": "Northern Mariana Islands", "papuane": "Papua New Guinea", "papuang": "Papua New Guinea",
+    "solomon": "Solomon Islands", "wallisf": "Wallis and Futuna", "wsamoa": "Samoa",
+    "botswan": "Botswana", "burkinf": "Burkina Faso", "burkina": "Burkina Faso",
+    "cameroo": "Cameroon", "capever": "Cabo Verde", "cape verde": "Cabo Verde",
+    "car": "Central African Republic", "centraf": "Central African Republic", "central african rep.": "Central African Republic",
+    "comores": "Comoros", "congo": "Republic of the Congo", "congobr": "Republic of the Congo",
+    "congoki": "Democratic Republic of the Congo", "drc": "Democratic Republic of the Congo",
+    "cote d'ivoire": "Ivory Coast", "ivoryco": "Ivory Coast", "djibout": "Djibouti",
+    "eqguine": "Equatorial Guinea", "eswatin": "eSwatini", "swaziland": "eSwatini", "swazila": "eSwatini",
+    "ethiopi": "Ethiopia", "guineab": "Guinea-Bissau", "guinbis": "Guinea-Bissau", "bissau": "Guinea-Bissau",
+    "madagas": "Madagascar", "malegas": "Madagascar", "maurita": "Mauritania", "mauriti": "Mauritius",
+    "mozambi": "Mozambique", "safrica": "South Africa", "southaf": "South Africa",
+    "saotome": "Sao Tome and Principe", "stomepr": "Sao Tome and Principe",
+    "seychel": "Seychelles", "sierleo": "Sierra Leone", "sierral": "Sierra Leone",
+    "ssudan": "South Sudan", "sthelen": "Saint Helena", "tanzani": "United Republic of Tanzania",
+    "tanzania": "United Republic of Tanzania", "zimbabw": "Zimbabwe", "gambia": "Gambia"
+  },
+
+  // Disputed/UN-boundary bounding boxes unioned onto sovereign polygons during spatial bounds checks ([min_lon, min_lat, max_lon, max_lat])
+  polygon_union_bboxes: {
+    "Ukraine": [32.35, 44.30, 36.75, 46.30]
+  },
+
+  // Archaeology/topographic site qualifiers exempt from modern compound " & " municipality splits
+  arch_site_qualifiers: [
+    "Site", "Complex", "Hillfort", "Settlement", "Mound", "Kurgan", "Barrow", "Tumulus",
+    "Kofun", "Tell", "Tepe", "Hoyuk", "Höyük", "Huaca", "Pueblo", "Sambaqui", "Midden",
+    "Shellmound", "Cairn", "Enclosure", "Ruin", "Ruins", "Terrace", "Gorodishche", "Suburb",
+    "Culture", "Shelter", "Cave", "Camp", "Earthwork", "Cemetery", "Necropolis",
+    "Palaeolithic", "Neolithic", "Bronze", "Iron Age", "Ford", "Steppe", "Approach", "Frontier"
+  ],
+
+  // Cross-language historical romanisation & colonial exonym equivalence classes (normalised stems)
+  romanisation_equivalences: [
+    ["beiiing", "peking", "peiping"],
+    ["guangzhou", "kanton"],
+    ["naniing", "nanking"],
+    ["kingdao", "tsingtao"],
+    ["chongking", "khungking"],
+    ["tianiin", "tientsin"],
+    ["sheniang", "mukden"],
+    ["xiamen", "amoi"],
+    ["tokio", "edo", "ieddo"],
+    ["seoul", "keijo", "keio", "hanseong"],
+    ["mumbai", "bombai"],
+    ["kolkata", "kalkutta"],
+    ["khennai", "madras"],
+    ["varanasi", "benares", "banaras"],
+    ["kanpur", "kawnpore"],
+    ["pune", "poona"],
+    ["iakart", "iakarta", "batavia"],
+    ["hochiminhkiti", "saigon"],
+    ["iangon", "rangoon"],
+    ["istanbul", "konstantinople", "bizantium"],
+    ["izmir", "smirna"],
+    ["ankara", "angora"],
+    ["tbilisi", "tiflis"],
+    ["ierevan", "erivan"],
+    ["kaliningrad", "konigsberg"],
+    ["wroklaw", "breslau"],
+    ["gdansk", "danzig"],
+    ["szkzekin", "stettin"],
+    ["lviv", "lemberg", "lwowski", "lwow"],
+    ["vilnius", "wilno", "vilna"],
+    ["tallinn", "reval"],
+    ["tartu", "dorpat", "iuriev"],
+    ["helsinki", "helsingfors"],
+    ["turku", "abo"],
+    ["oslo", "khristiania", "kristiania"],
+    ["harare", "salisburi"],
+    ["maputo", "lourenkomarkes"],
+    ["kinshasa", "leopoldville"],
+    ["lubumbashi", "elizabethville", "elisabethville"],
+    ["ndiamena", "fortlami"],
+    ["newiork", "newamsterdam"],
+    ["toronto", "iork"],
+    ["ottawa", "bitown"],
+    ["saintpetersburg", "petrograd", "leningrad"],
+    ["volgograd", "stalingrad", "tsaritsin", "caricin"],
+    ["iekaterinburg", "sverdlovsk"],
+    ["nizhniinovgorod", "gorki"],
+    ["oskemen", "ustkamenogorsk"],
+    ["almati", "almaata", "verni"],
+    ["bishkek", "frunze", "pishpek"],
+    ["dushanbe", "stalinabad"]
+  ]
+}

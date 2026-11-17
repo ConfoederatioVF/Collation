@@ -11,10 +11,10 @@ This reference file provides:
 
 Use this exact setup block at the top of `<report_stem>.Rmd`. It enforces:
 - Inline `10pt` (`10pt/14pt`) `longtable` rendering (never `\resizebox` or isolated float pages).
-- Top-aligned table headers (`valign=top`) by omitting `\hspace{0pt}` from `col_specs` and placing `\hspace{0pt}` only inside body cells.
-- Compact `10000BC` / `1897AD` year formatting without spaces whenever BC/AD dates appear.
+- Top-aligned table headers (`valign=top`) with zero `\parindent` cell indentation, empty continuation `\endhead` (headers emitted once via `\endfirsthead`), `rownames(df) <- NULL` and captions strictly below tables (`<= 3` lines adding context).
+- Compact `10000BC` / `1897AD` year formatting without dot separators or modern month-year `AD` suffixes.
 - Plain hyphens (`-`) in place of em/en-dashes.
-- Non-overlapping `!htbp` figure placement capped at `0.42\textheight`.
+- Non-overlapping `!htbp` figure placement capped at `0.42\textheight`, and Page 1 hero height `<= 0.52\textheight` so Page 1 is never blank.
 
 *(Note: If the report is a pure on-disk exploratory data analysis with no external `.bib` citations, omit the `bibliography:`, `csl:` and `link-citations:` fields from the YAML frontmatter and omit the `# Sources` / `::: {#refs}` block at the end of the document.)*
 
@@ -143,6 +143,7 @@ sanitize_prose_unicode_for_latex <- function (arg0_line) {
 
 render_table_template <- function (arg0_df, arg1_options = NULL) {
   df <- as.data.frame(arg0_df, stringsAsFactors = FALSE)
+  rownames(df) <- NULL
   options <- if (!is.null(arg1_options)) arg1_options else list()
 
   caption_str <- if (!is.null(options$caption)) as.character(options$caption) else ""
@@ -256,8 +257,6 @@ render_table_template <- function (arg0_df, arg1_options = NULL) {
     paste0("\\begin{longtable}[l]{@{}", align_str, "@{}}"),
     header_line,
     "\\endfirsthead",
-    paste0("\\multicolumn{", n_cols, "}{@{}l@{}}{\\normalfont\\karlalight\\fontsize{9pt}{12pt}\\selectfont (Continued from previous page)} \\\\*[3pt]"),
-    header_line,
     "\\endhead"
   )
 
@@ -301,7 +300,7 @@ render_figure_template <- function (arg0_file_path, arg1_options = NULL) {
   options <- if (!is.null(arg1_options)) arg1_options else list()
   options$placement <- "!htbp"
   if (is.null(options$max_height) || identical(options$max_height, "none")) {
-    options$max_height <- "0.42\\textheight"
+    options$max_height <- "0.52\\textheight"
   }
   return(orig_render_figure_template(arg0_file_path, options))
 }
@@ -333,17 +332,22 @@ fmt_num_eu <- function (arg0_val, arg1_digits = 2L, arg2_semantic = TRUE) {
   if (is.null(arg0_val) || is.na(arg0_val)) return("-")
   v <- as.numeric(arg0_val)
   abs_v <- abs(v)
+  fmt_clean <- function (val, suffix) {
+    s <- sprintf(paste0("%.", arg1_digits, "f"), val)
+    s <- sub("0+$", "", s)
+    s <- sub("\\.$", "", s)
+    paste0(gsub("\\.", ",", s), suffix)
+  }
   if (isTRUE(arg2_semantic)) {
-    if (abs_v >= 1e12) return(gsub("\\.", ",", sprintf(paste0("%.", arg1_digits, "fT"), v / 1e12)))
-    if (abs_v >= 1e9) return(gsub("\\.", ",", sprintf(paste0("%.", arg1_digits, "fB"), v / 1e9)))
-    if (abs_v >= 1e6) return(gsub("\\.", ",", sprintf(paste0("%.", arg1_digits, "fM"), v / 1e6)))
-    if (abs_v >= 1e3) return(gsub("\\.", ",", sprintf(paste0("%.", arg1_digits, "fk"), v / 1e3)))
+    if (abs_v >= 1e12) return(fmt_clean(v / 1e12, "T"))
+    if (abs_v >= 1e9) return(fmt_clean(v / 1e9, "B"))
+    if (abs_v >= 1e6) return(fmt_clean(v / 1e6, "M"))
+    if (abs_v >= 1e3) return(fmt_clean(v / 1e3, "k"))
   }
   if (abs_v == round(abs_v)) {
-    return(format(round(v), big.mark = " ", scientific = FALSE, trim = TRUE))
+    return(format(round(v), big.mark = ".", scientific = FALSE, trim = TRUE))
   }
-  s <- sprintf(paste0("%.", arg1_digits, "f"), v)
-  return(gsub("\\.", ",", s))
+  return(fmt_clean(v, ""))
 }
 
 fmt_year_lbl <- function (arg0_y) {
@@ -377,9 +381,33 @@ emit_crd_footnotes()
 
 ---
 
-## 3. Automated Compilation & Verification Script (`pymupdf` + PDF Archive Validator)
+## 3. Automated Compilation, Figure Audit & Verification Script (`pymupdf` + PDF Archive Validator)
 
-Run this check after compiling `<report_stem>.Rmd` to verify that `.pdf` and `.md` outputs build cleanly, every page satisfies `max_x1 <= 540.1 pt` (zero right-margin overflow), `0` unresolved `??` tokens appear and any archived PDFs in `./papers/` are valid `%PDF` documents `> 10 KB`:
+Run `python .agents/skills/population-regional-study/scripts/audit_figure_scripts.py <report_dir>` before compiling figures and prose to ensure every figure script preserves default Matplotlib styling (`plt.rcdefaults(); plt.style.use("default")`, `DejaVu Sans`, 4-sided spines, rendered `$...$` MathText with `{,}` decimals and `FuncFormatter` comma ticks):
+
+```python
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+import matplotlib.ticker as mticker
+
+def init_default_matplotlib ():
+  mpl.rcdefaults()
+  plt.style.use("default")
+  mpl.rcParams["savefig.dpi"] = 300
+
+def fmt_mathtext_eu (val, digits=2):
+  s = f"{float(val):.{digits}f}".replace(".", ",")
+  if "," in s:
+    s = s.rstrip("0").rstrip(",")
+  return s.replace(",", "{,}")
+
+def euro_tick_formatter (digits=2):
+  return mticker.FuncFormatter(
+    lambda x, _pos: (f"{x:,.{digits}f}".replace(",", "_").replace(".", ",").replace("_", ".").rstrip("0").rstrip(",") if digits > 0 else f"{x:,.0f}".replace(",", "."))
+  )
+```
+
+Then run this check after compiling `<report_stem>.Rmd` to verify that `.pdf` and `.md` outputs build cleanly, every page satisfies `max_x1 <= 540.1 pt` (zero right-margin overflow), `0` unresolved `??` tokens appear and any archived PDFs in `./papers/` are valid `%PDF` documents `> 10 KB`:
 
 ```python
 import pathlib
@@ -399,9 +427,13 @@ def compile_and_verify_report(rmd_path):
   subprocess.run([RSCRIPT, "-e", r_expr], check=True)
   pdf_path = p.with_suffix(".pdf")
   doc = pymupdf.open(str(pdf_path))
+  assert len(doc) >= 1 and len(doc[0].get_text("text").strip()) >= 80, f"Blank Page 1 in {pdf_path.name}"
   max_x1 = 0.0
   qmarks = []
   for i, page in enumerate(doc):
+    pg_txt = page.get_text("text")
+    assert "(Continued from previous page)" not in pg_txt, f"Repeated header in {pdf_path.name} p.{i + 1}"
+    assert "\ufffd" not in pg_txt, f"Replacement glyph U+FFFD in {pdf_path.name} p.{i + 1}"
     for w in page.get_text("words"):
       if w[2] > max_x1:
         max_x1 = w[2]

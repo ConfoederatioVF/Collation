@@ -352,13 +352,15 @@
               uud.checkExactNameMatch(ex_city, candidate_city) : (ex_city.name === candidate_city.name);
 
             if (is_name_match || (is_cross_project && dist_km <= exact_coord_match_km)) {
-              if (!is_cross_project && ex_city.polaris_priority === 3 && candidate_city.polaris_priority === 3 && ex_city.key !== candidate_city.key && dist_km > 0.3)
-                continue;
-              if (dist_km > 1.0 && !this.hasCompatiblePopulationScale(ex_city.population, candidate_city.population))
-                continue;
               let ex_yr_nums = Object.keys(ex_city.population).map(Number).filter(function (arg0_n) { return !isNaN(arg0_n); }).sort(function (arg0_a, arg1_b) { return arg0_a - arg1_b; });
               let ex_max_yr = ex_yr_nums[ex_yr_nums.length - 1];
               let ex_min_yr = ex_yr_nums[0];
+              let is_pre1815_bridge = (Math.min(ex_max_yr, cand_max_yr) <= 1815 && is_name_match);
+
+              if (!is_cross_project && ex_city.polaris_priority === 3 && candidate_city.polaris_priority === 3 && ex_city.key !== candidate_city.key && dist_km > 0.3)
+                continue;
+              if (dist_km > 1.0 && !is_pre1815_bridge && !this.hasCompatiblePopulationScale(ex_city.population, candidate_city.population))
+                continue;
               let is_temporally_compatible = true;
 
               if (ex_min_yr > cand_max_yr || cand_min_yr > ex_max_yr) {
@@ -427,11 +429,15 @@
                 ex_city.sources.push(proj.key);
             }
           } else {
-            let suffix = 2;
             let target_key = city_key;
-            while (return_obj[target_key]) {
-              target_key = `${city_key}_${suffix}`;
-              suffix++;
+            if (return_obj[target_key]) {
+              for (let suffix = 2; suffix <= 9999; suffix++) {
+                let cand_key = `${city_key}_${suffix}`;
+                if (!return_obj[cand_key]) {
+                  target_key = cand_key;
+                  break;
+                }
+              }
             }
             candidate_city.key = target_key;
             return_obj[target_key] = candidate_city;
