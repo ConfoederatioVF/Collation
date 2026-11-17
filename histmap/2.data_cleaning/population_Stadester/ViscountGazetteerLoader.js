@@ -7,6 +7,9 @@
   if (!global.StadesterPartitionIO && typeof require !== "undefined") {
     try { require(path.join(__dirname, "StadesterPartitionIO.js")); } catch (e) {}
   }
+  if ((!global.population_Stadester_uud || !global.population_Stadester_uud.appendCitySources) && typeof require !== "undefined") {
+    try { require(path.join(__dirname, "stadester_uud_fixes.js")); } catch (e) {}
+  }
 
   /**
    * Unified Operation Viscount settlement gazetteer loader and cross-frontier deduplicator.
@@ -185,6 +188,7 @@
             polaris_source: gaz_id,
             population: clean_pop,
             region: raw_city.region || gaz_id,
+            sources: [proj.key],
             viscount_order: proj.order,
             viscount_project: proj.key,
             viscount_z_priority: proj.z_priority
@@ -281,6 +285,13 @@
             for (let y = 0; y < candidate_city.original_names.length; y++)
               if (!ex_city.original_names.includes(candidate_city.original_names[y]))
                 ex_city.original_names.push(candidate_city.original_names[y]);
+            if (typeof uud.appendCitySources === "function") {
+              uud.appendCitySources(ex_city, candidate_city.sources || proj.key);
+            } else {
+              if (!Array.isArray(ex_city.sources)) ex_city.sources = [];
+              if (proj.key && !ex_city.sources.includes(proj.key))
+                ex_city.sources.push(proj.key);
+            }
           } else {
             let suffix = 2;
             let target_key = city_key;

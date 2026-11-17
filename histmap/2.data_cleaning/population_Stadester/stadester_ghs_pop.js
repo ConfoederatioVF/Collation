@@ -3,6 +3,8 @@
   if (!global.population_Stadester_ghs_pop) global.population_Stadester_ghs_pop = {};
   if (!global.population_Stadester_config && typeof require !== "undefined")
     try { require(path.join(__dirname, "config", "stadester_config.js")); } catch (e) {}
+  if ((!global.population_Stadester_uud || !global.population_Stadester_uud.hasCitySource) && typeof require !== "undefined")
+    try { require(path.join(__dirname, "stadester_uud_fixes.js")); } catch (e) {}
   
   /**
    * Builds modern-eligible Stadestér settlement descriptor entries and spatial grid index for GHSL/GHS-POP integration.
@@ -40,7 +42,7 @@
       let found_yr = parseInt(local_city["found.yr"], 10);
       let lat = Number(local_city.coords[0]);
       let lng = Number(local_city.coords[1]);
-      let manual_pop_backup = (local_city.type === "manual" && local_city.population) ? Object.assign({}, local_city.population) : null;
+      let manual_pop_backup = (population_Stadester_uud.hasCitySource(local_city, "manual") && local_city.population) ? Object.assign({}, local_city.population) : null;
       let px = Math.min(4319, Math.max(0, Math.floor(((lng + 180)/360)*4320)));
       let py = Math.min(2159, Math.max(0, Math.floor(((90 - lat)/180)*2160)));
       let cell_key = `${Math.floor(lng)},${Math.floor(lat)}`;
@@ -105,7 +107,8 @@
     let all_keys;
     let transient_keys = [
       "_max_yr", "_min_yr", "_pop_keys", "_pop_keys_sorted", "_px",
-      "_raw_lapsed", "_raw_max_year", "_raw_min_year", "_war_displacement_years"
+      "_raw_lapsed", "_raw_max_year", "_raw_min_year", "_war_displacement_years",
+      "polaris_priority", "polaris_source", "type"
     ];
     
     //Guard clauses
@@ -694,7 +697,7 @@
         
         for (let i = 0; i < active_members.length; i++) {
           let m = active_members[i];
-          if (preserve_manual && m.city.type === "manual") continue;
+          if (preserve_manual && population_Stadester_uud.hasCitySource(m.city, "manual")) continue;
           if (preserve_war && m.war_years_set && m.war_years_set.has(yr)) continue;
           if (!Number.isFinite(m.raw_max_year) || !(yr > m.raw_max_year)) continue;
           
@@ -733,6 +736,14 @@
           rt.ce.city.population[yr] = Math.max(0, Math.round((1 - rt.weight)*even_share + rt.weight*rt.ucdb_pop));
           partitioned_set.add(rt.ce.key);
         }
+      }
+    }
+
+    if (typeof population_Stadester_uud !== "undefined" && typeof population_Stadester_uud.appendCitySources === "function") {
+      for (let i = 0; i < city_entries.length; i++) {
+        let ce = city_entries[i];
+        if (partitioned_set.has(ce.key))
+          population_Stadester_uud.appendCitySources(ce.city, "ghs_pop");
       }
     }
     
@@ -831,7 +842,7 @@
   };
   
   /**
-   * Restores curated manual city trajectories (type === "manual") when preserve_manual_entries is enabled.
+   * Restores curated manual city trajectories (hasCitySource(city, "manual")) when preserve_manual_entries is enabled.
    * @alias population_Stadester_ghs_pop.restoreManualEntries
    * 
    * @param {Array<Object>} arg0_city_entries
@@ -857,7 +868,7 @@
     //Function body
     for (let i = 0; i < city_entries.length; i++) {
       let ce = city_entries[i];
-      if (ce.city && ce.city.type === "manual" && ce.manual_pop_backup) {
+      if (ce.city && population_Stadester_uud.hasCitySource(ce.city, "manual") && ce.manual_pop_backup) {
         ce.city.population = Object.assign({}, ce.manual_pop_backup);
         delete ce.city._ghsl_area;
         delete ce.city._ghsl_area_partial;

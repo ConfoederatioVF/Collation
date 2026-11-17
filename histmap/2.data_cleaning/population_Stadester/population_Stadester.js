@@ -13,6 +13,8 @@
         require(path.join(cur_dir, "ViscountGazetteerLoader.js"));
       if (!global.population_Stadester_uud && fs.existsSync(path.join(cur_dir, "stadester_uud.js")))
         require(path.join(cur_dir, "stadester_uud.js"));
+      if ((!global.population_Stadester_uud || !global.population_Stadester_uud.fixStadesterErrors) && fs.existsSync(path.join(cur_dir, "stadester_uud_fixes.js")))
+        require(path.join(cur_dir, "stadester_uud_fixes.js"));
       if (!global.population_Stadester_ghsl_helpers && fs.existsSync(path.join(cur_dir, "stadester_ghsl_helpers.js")))
         require(path.join(cur_dir, "stadester_ghsl_helpers.js"));
       if (!global.population_Stadester_ghs_pop && fs.existsSync(path.join(cur_dir, "stadester_ghs_pop.js")))
@@ -23,6 +25,8 @@
         require(path.join(cur_dir, "stadester_density.js"));
       if (!global.population_Stadester_rasters && fs.existsSync(path.join(cur_dir, "stadester_rasters.js")))
         require(path.join(cur_dir, "stadester_rasters.js"));
+      if ((!global.population_Stadester_rasters || !global.population_Stadester_rasters.reconcileStadesterDemographics) && fs.existsSync(path.join(cur_dir, "stadester_rasters_reconcile.js")))
+        require(path.join(cur_dir, "stadester_rasters_reconcile.js"));
     } catch (e) {
       console.warn(`[population_Stadester] Failed to load companion modules:`, e);
     }
@@ -55,9 +59,7 @@
     static file_stadester_cities = `${this.bf}uud/stadester_cities.json`;
     static file_flattened_stadester = `${this.bf}uud/flattened_stadester_cities.json`;
     static file_processed_stadester = `${this.bf}uud/processed_stadester_cities.json`;
-    static file_stadester_areas = `${this.transform_stadester_folder}stadester_areas`;
-    static file_stadester_final = `${this.transform_stadester_folder}stadester`;
-    static file_stadester_ghsl = `${this.transform_stadester_folder}stadester_ghsl`;
+    static file_stadester_final = `${this.transform_stadester_folder}`;
     static file_stadester_vis = `${(typeof h5 !== "undefined") ? h5 : "./histmap/5.data_visualisation/"}stadester/stadester_2.0`;
     
     static antiquity_years = Array.from({ length: 101 }, (_, i) => -10000 + i * 100);
@@ -174,7 +176,7 @@
       console.log(`- Saved processed Stadestér dataset to ${this.file_processed_stadester}.`);
       
       if (!options.do_not_sync_vis && this.file_stadester_vis && fs.existsSync(path.dirname(path.resolve(this.file_stadester_vis)))) {
-        StadesterPartitionIO.writePartitionedStadester(this.file_stadester_vis, stadester_obj, { version: "1.1" });
+        StadesterPartitionIO.writePartitionedStadester(this.file_stadester_vis, stadester_obj, { version: "2.0" });
         console.log(`- Synchronised processed Stadestér visualisation shards to ${this.file_stadester_vis}.`);
       }
       
@@ -203,8 +205,8 @@
       });
       if (typeof population_Stadester_ghs_pop !== "undefined" && typeof population_Stadester_ghs_pop.cleanTransientMetadata === "function")
         population_Stadester_ghs_pop.cleanTransientMetadata(stadester_obj);
-      StadesterPartitionIO.writePartitionedStadester(this.file_stadester_areas, stadester_obj, { version: "1.1" });
-      console.log(`- Saved partitioned Stadestér areas to ${this.file_stadester_areas}.`);
+      StadesterPartitionIO.writePartitionedStadester(this.file_stadester_final, stadester_obj, { version: "2.0" });
+      console.log(`- Saved partitioned Stadestér dataset to ${this.file_stadester_final}.`);
       
       //Return statement
       return stadester_obj;
@@ -222,8 +224,8 @@
       
       //Declare local instance variables
       let stadester_obj = options.stadester_obj;
-      if (!stadester_obj && StadesterPartitionIO.hasDataset(this.file_stadester_areas))
-        stadester_obj = StadesterPartitionIO.readPartitionedStadester(this.file_stadester_areas);
+      if (!stadester_obj && StadesterPartitionIO.hasDataset(this.file_stadester_final))
+        stadester_obj = StadesterPartitionIO.readPartitionedStadester(this.file_stadester_final);
       
       stadester_obj = population_Stadester_density.cacheRadialBuffers(stadester_obj);
       if (typeof population_Stadester_ghs_pop !== "undefined" && typeof population_Stadester_ghs_pop.cleanTransientMetadata === "function")
@@ -801,53 +803,11 @@
       if (cities_obj) {
         population_Stadester_uud.repairGHSLCityNames(cities_obj, options);
         if (options.save !== false && target_file)
-          StadesterPartitionIO.writePartitionedStadester(target_file, cities_obj, { version: "1.1" });
+          StadesterPartitionIO.writePartitionedStadester(target_file, cities_obj, { version: options.version || "2.0" });
       }
       
       //Return statement
       return cities_obj;
-    }
-    
-    /**
-     * Builds and saves unified Stadestér GHSL dataset with clean repaired city names.
-     * @param {Object} [arg0_options]
-     *  @param {boolean} [arg0_options.save=true]
-     * 
-     * @returns {Object}
-     */
-    static getStadesterGHSLObject (arg0_options) {
-      //Convert from parameters
-      let options = (arg0_options) ? arg0_options : {};
-      
-      //Declare local instance variables
-      let parent_dir;
-      let result;
-      
-      //Function body
-      result = population_Stadester_uud.getStadesterGHSLObject({
-        raw_folder: this.raw_folder,
-        ...options
-      });
-      
-      if (options.save !== false) {
-        StadesterPartitionIO.writePartitionedStadester(this.file_stadester_ghsl, result, { version: "1.1" });
-        console.log(`- Saved repaired partitioned Stadestér GHSL dataset to ${this.file_stadester_ghsl}.`);
-        
-        let p2136_target = "E:/Active Projects/Project 2136 - Stadestér/output/stadester_ghsl.json";
-        if (fs.existsSync(path.dirname(p2136_target))) {
-          population_Stadester_ghs_pop.writeJSONSafe(p2136_target, result);
-          console.log(`- Synchronised repaired Stadestér GHSL dataset to Project 2136 (${p2136_target}).`);
-        }
-        
-        let dataview_target = "F:/Active Projects/Project 1436 - Dataview/data/stadester/stadester_ghsl";
-        if (fs.existsSync(dataview_target)) {
-          StadesterPartitionIO.writePartitionedStadester(dataview_target, result, { version: "1.1" });
-          console.log(`- Synchronised repaired partitioned Stadestér GHSL dataset to Dataview (${dataview_target}).`);
-        }
-      }
-      
-      //Return statement
-      return result;
     }
     
     /**
@@ -882,7 +842,7 @@
       //Initialise options
       if (!options.exclude) {
         options.exclude = [];
-        if (!options.overwrite && (fs.existsSync(this.file_processed_stadester) || StadesterPartitionIO.hasDataset(this.file_stadester_areas)))
+        if (!options.overwrite && (fs.existsSync(this.file_processed_stadester) || StadesterPartitionIO.hasDataset(this.file_stadester_final)))
           options.exclude = ["A", "B", "C", "D", "E"];
       }
       

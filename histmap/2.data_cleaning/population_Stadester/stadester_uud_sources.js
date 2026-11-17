@@ -324,6 +324,8 @@
         if (!target_city._war_displacement_years.includes(source_city._war_displacement_years[i]))
           target_city._war_displacement_years.push(source_city._war_displacement_years[i]);
     }
+    if (typeof population_Stadester_uud.appendCitySources === "function")
+      population_Stadester_uud.appendCitySources(target_city, source_city.sources || source_city.type);
     if (source_city.population)
       target_city.population = is_metro ?
         population_Stadester_uud.mergeCityPopulations(source_city.population, target_city.population) :
@@ -431,10 +433,7 @@
     all_cities_keys = Object.keys(devries_cities);
     for (let i = 0; i < all_cities_keys.length; i++) {
       let local_city = devries_cities[all_cities_keys[i]];
-      return_obj[all_cities_keys[i]] = {
-        key: all_cities_keys[i],
-        population: {}
-      };
+      return_obj[all_cities_keys[i]] = { key: all_cities_keys[i], population: {} };
       let actual_city = return_obj[all_cities_keys[i]];
       
       if (local_city.year) {
@@ -545,6 +544,7 @@
           }
           local_city.population = normalised_pop;
         }
+        if (local_city.type !== undefined) delete local_city.type;
         local_city.country = eff_country;
         local_city.key = local_key;
         return_obj[local_key] = local_city;
@@ -781,10 +781,8 @@
       resolved_path = csv_path;
     } else {
       candidate_paths = [
-        "F:/Active Projects/Project 1436 - Dataview/data/stadester/GHSL.csv",
-        path.join(h1, "population_Stadester", "ghsl", "GHSL.csv"),
-        path.join(h1, "population_GHSL", "GHSL.csv"),
-        path.join(h1, "population_GHSL", "GHS_UCDB_MTUC_GLOBE_R2024A.csv"),
+        "F:/Active Projects/Project 1436 - Dataview/data/stadester/GHSL.csv", path.join(h1, "population_Stadester", "ghsl", "GHSL.csv"),
+        path.join(h1, "population_GHSL", "GHSL.csv"), path.join(h1, "population_GHSL", "GHS_UCDB_MTUC_GLOBE_R2024A.csv"),
         "D:/Project 1436 - Dataview/data/stadester/GHSL.csv"
       ];
       for (let i = 0; i < candidate_paths.length; i++)

@@ -4,9 +4,7 @@ global.population_Stadester_transform = class {
 	static delta_total_population_folder = `${h3}/delta_total_population/`;
 	static delta_urban_population_folder = `${h3}/delta_urban_population/`;
 	static stadester_root_folder = `${h3}/population_Stadester.transform/stadester/`;
-	static stadester_areas_folder = `${h3}/population_Stadester.transform/stadester/stadester_areas/`;
-	static stadester_final_folder = `${h3}/population_Stadester.transform/stadester/stadester/`;
-	static stadester_ghsl_folder = `${h3}/population_Stadester.transform/stadester/stadester_ghsl/`;
+	static stadester_final_folder = `${h3}/population_Stadester.transform/stadester/`;
 	
 	static async A_generateDeltaRasters () {
 		let hyde_years = landuse_HYDE.sorted_hyde_years;

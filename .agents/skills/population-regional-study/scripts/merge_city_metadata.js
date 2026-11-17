@@ -27,6 +27,22 @@ let path = require("path");
     },
 
     /**
+     * Checks whether a settlement label contains an archaeological or topographic site qualifier.
+     * @alias city_metadata_merger.hasArchSiteQualifier
+     *
+     * @param {string} arg0_name
+     *
+     * @returns {boolean}
+     */
+    hasArchSiteQualifier (arg0_name) {
+      //Convert from parameters
+      let raw_name = String(arg0_name || "");
+
+      //Return statement
+      return /\b(Site|Gorodishche|Kurgan|Mound|Cemetery|Frontier|Ford|Steppe|Approach|Castle|Hillfort|Barrow|Shelter|Complex|Terrace|Bronze|Palaeolithic|Neolithic)\b/i.test(raw_name);
+    },
+
+    /**
      * Computes great-circle Haversine distance in kilometres between two `[lat, lng]` points.
      * @alias city_metadata_merger.haversineKm
      *
@@ -293,6 +309,17 @@ let path = require("path");
             continue;
           }
 
+          let promoted_site_alias = "";
+          let sorted_hist = this.sortAndDedupHistoricalNames(valid_hist);
+          if (sorted_hist.length > 0 && this.hasArchSiteQualifier(clean_modern)) {
+            let last_hist = sorted_hist[sorted_hist.length - 1];
+            let last_year = this.dateSortTuple(last_hist.date)[0];
+            if (last_year >= 1400 && !this.isCorruptedCityName(last_hist.name) && !this.hasArchSiteQualifier(last_hist.name)) {
+              promoted_site_alias = clean_modern;
+              clean_modern = last_hist.name;
+            }
+          }
+
           let existing_idx = null;
           if (Number.isInteger(rec.existing_meta_index) &&
               rec.existing_meta_index >= 0 &&
@@ -318,7 +345,9 @@ let path = require("path");
                   let cand = bucket[y];
                   let d = this.haversineKm(clat, clng, cand.lat, cand.lng);
                   let c_norm = this.normaliseName(cand.entry.name);
-                  if (d <= 2.5 || (d <= 25.0 && rec_norm && c_norm === rec_norm)) {
+                  let target_is_corrupt_or_arch = this.isCorruptedCityName(cand.entry.name) || this.hasArchSiteQualifier(cand.entry.name);
+                  let stems_match = Boolean(rec_norm && c_norm && c_norm === rec_norm);
+                  if ((d <= 2.5 && (target_is_corrupt_or_arch || stems_match)) || (d <= 25.0 && stems_match)) {
                     if (d < best_dist) {
                       best_dist = d;
                       existing_idx = cand.index;
@@ -333,6 +362,8 @@ let path = require("path");
           let raw_aliases = []
             .concat(Array.isArray(rec.known_aliases) ? rec.known_aliases : [])
             .concat(Array.isArray(rec.other_names) ? rec.other_names : []);
+          if (promoted_site_alias && !this.isCorruptedCityName(promoted_site_alias) && promoted_site_alias !== clean_modern)
+            clean_aliases.push(promoted_site_alias);
           for (let y = 0; y < raw_aliases.length; y++) {
             let a_str = this.stripParenthetical(raw_aliases[y]);
             if (!this.isCorruptedCityName(a_str) && a_str !== clean_modern) clean_aliases.push(a_str);
@@ -343,9 +374,9 @@ let path = require("path");
 
           if (existing_idx !== null) {
             let target = meta_array[existing_idx];
-            let is_arch_qualifier = /\b(Site|Gorodishche|Kurgan|Mound|Cemetery)\b/i.test(clean_modern);
+            let is_arch_qualifier = this.hasArchSiteQualifier(clean_modern);
             if (!is_arch_qualifier &&
-                (this.isCorruptedCityName(target.name) || /\b(Site|Gorodishche|Kurgan|Mound|Cemetery)\b/i.test(target.name))) {
+                (this.isCorruptedCityName(target.name) || this.hasArchSiteQualifier(target.name))) {
               target.name = clean_modern;
             }
 

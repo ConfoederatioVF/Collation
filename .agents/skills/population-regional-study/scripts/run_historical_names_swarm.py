@@ -2,9 +2,12 @@
 Operation Viscount historical toponymy resolution workflow (`run_workflow`).
 
 Fans out fixed-size batches produced by `extract_missing_city_metadata.js`
-across Gemini Flash agents (`model="flash"`) to reconstruct chronological Latin-script
-`historical_names` trajectories and clean corrupted ASCII-hacek/mojibake names
-before `merge_city_metadata.js` commits them to Dataview `data/stadester/stadester_2.0/city_metadata.json`.
+primarily across Gemini 3.8 Flash agents (`model="flash"`), with automatic
+per-batch retry via `fallback_model` (and compatible with native `swarm`
+workers pinned to `"gemini-3.8-flash-medium"` -> `"gemini-4-hydrogen-medium"` /
+`"gemini-4-hydrogen-high"` fallback when Flash quota/capacity is exhausted),
+before `merge_city_metadata.js` commits clean Latin chronological names to
+Dataview `data/stadester/stadester_2.0/city_metadata.json`.
 """
 
 import json
@@ -101,7 +104,7 @@ Input settlements ({len(compact_items)} items):
 
 
 async def process_batch(batch_path):
-  """Runs one Flash agent over a single batch JSON and writes `resolved_<filename>`."""
+  """Runs one agent (Gemini 3.8 Flash primary with fallback) over a single batch JSON and writes `resolved_<filename>`."""
   with open(batch_path, "r", encoding="utf-8") as fh:
     raw = json.load(fh)
 
@@ -110,13 +113,31 @@ async def process_batch(batch_path):
   if not items:
     return {"batch_path": batch_path, "count": 0}
 
-  result = await agent(
-    prompt=build_prompt(batch_idx, items),
-    schema=SCHEMA,
-    role=f"Toponymy Flash batch {batch_idx} ({len(items)} cities)",
-    type_name="self",
-    model=args.get("model", "flash")
-  )
+  primary_model = args.get("model", "flash")
+  fallback_model = args.get("fallback_model", "inherit")
+  prompt_text = build_prompt(batch_idx, items)
+  role_label = f"Toponymy Flash batch {batch_idx} ({len(items)} cities)"
+
+  try:
+    result = await agent(
+      prompt=prompt_text,
+      schema=SCHEMA,
+      role=role_label,
+      type_name="self",
+      model=primary_model
+    )
+  except Exception as primary_err:
+    if fallback_model and fallback_model != primary_model:
+      log(f"[fallback] Batch {batch_idx} failed on model={primary_model!r} ({primary_err}); retrying on fallback_model={fallback_model!r}")
+      result = await agent(
+        prompt=prompt_text,
+        schema=SCHEMA,
+        role=f"Toponymy Fallback batch {batch_idx} ({len(items)} cities)",
+        type_name="self",
+        model=fallback_model
+      )
+    else:
+      raise
 
   by_key = {str(it.get("key")): it for it in result.get("settlements", []) if it.get("key")}
   merged_settlements = []

@@ -378,7 +378,8 @@ let path = require("path");
           name: city.name || key,
           reason: reason,
           region: city.region || "",
-          sample_years: sample_years
+          sample_years: sample_years,
+          sources: Array.isArray(city.sources) ? city.sources.slice() : []
         });
       }
 

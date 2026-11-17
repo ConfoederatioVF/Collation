@@ -120,7 +120,9 @@ safeRequire("histmap/2.data_cleaning/population_Stadester/StadesterPartitionIO.j
 safeRequire("histmap/2.data_cleaning/population_Stadester/ViscountGazetteerLoader.js");
 safeRequire("histmap/2.data_cleaning/population_Stadester/stadester_density.js");
 safeRequire("histmap/2.data_cleaning/population_Stadester/stadester_rasters.js");
+safeRequire("histmap/2.data_cleaning/population_Stadester/stadester_rasters_reconcile.js");
 safeRequire("histmap/2.data_cleaning/population_Stadester/stadester_uud.js");
+safeRequire("histmap/2.data_cleaning/population_Stadester/stadester_uud_fixes.js");
 safeRequire("histmap/2.data_cleaning/population_Stadester/stadester_ghs_pop.js");
 safeRequire("histmap/2.data_cleaning/admin_modern/admin_modern.js");
 safeRequire("histmap/2.data_cleaning/professions_Bairoch/professions_Bairoch.js");

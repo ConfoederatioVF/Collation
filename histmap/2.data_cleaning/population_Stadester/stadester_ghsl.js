@@ -10,455 +10,8 @@
     try { require(path.join(__dirname, "stadester_ghsl_helpers.js")); } catch (e) {}
   if (!global.population_Stadester_ghs_pop && typeof require !== "undefined")
     try { require(path.join(__dirname, "stadester_ghs_pop.js")); } catch (e) {}
-  
-  /**
-   * Generates a unified Stadestér GHSL dataset combining historical Stadestér entries and modern GHSL clusters.
-   * All GHSL and historical city names are repaired, and .region strings are assigned via Voronoi sampling.
-   * @alias population_Stadester_ghsl.getStadesterGHSLObject
-   * 
-   * @param {Object} [arg0_options]
-   *  @param {string} [arg0_options.ghsl_file]
-   *  @param {Object} [arg0_options.ghsl_obj]
-   *  @param {string} [arg0_options.raw_folder]
-   *  @param {Object} [arg0_options.stadester_obj]
-   *  @param {string} [arg0_options.voronoi_file]
-   * 
-   * @returns {Object}
-   */
-  population_Stadester_ghsl.getStadesterGHSLObject = function (arg0_options) {
-    //Convert from parameters
-    let options = (arg0_options) ? arg0_options : {};
-    
-    //Declare local instance variables
-    let all_ghsl_cities;
-    let all_region_keys;
-    let all_return_keys;
-    let all_stadester_cities;
-    let colour_to_region = {};
-    let cutoff_year = (global.population_Stadester_config && global.population_Stadester_config.cutoff_year) ?
-      global.population_Stadester_config.cutoff_year : 1975;
-    let ghsl_candidates = [];
-    let ghsl_obj = options.ghsl_obj;
-    let pngjs_lib = (typeof pngjs !== "undefined") ? pngjs : (global.pngjs || require("pngjs"));
-    let raw_folder = options.raw_folder ? options.raw_folder : `${h1}/population_Stadester/`;
-    let region_defines;
-    let return_obj = {};
-    let stadester_candidates = [];
-    let stadester_obj = options.stadester_obj;
-    let voronoi_candidates = [];
-    let voronoi_png = null;
-    
-    //Function body
-    population_Stadester_uud.loadGHSLCsvNames();
-    
-    //1. Load GHSL dataset (modern clusters 1975-2025)
-    if (!ghsl_obj) {
-      ghsl_candidates = [
-        options.ghsl_file,
-        path.join(raw_folder, "ghsl", "ghsl.json"),
-        path.join(h1, "population_GHSL", "ghsl.json"),
-        path.join(h1, "population_Stadester", "ghsl", "ghsl.json"),
-        "E:/Active Projects/Project 2136 - Stadestér/output/ghsl.json",
-        "D:/Project 1436 - Dataview/data/stadester/ghsl.json"
-      ];
-      for (let i = 0; i < ghsl_candidates.length; i++) {
-        if (ghsl_candidates[i] && fs.existsSync(ghsl_candidates[i])) {
-          try {
-            ghsl_obj = JSON.parse(fs.readFileSync(ghsl_candidates[i], "utf8"));
-            console.log(`- Loaded GHSL modern clusters from ${ghsl_candidates[i]}.`);
-            break;
-          } catch (e) {
-            console.warn(`- Failed to read GHSL from ${ghsl_candidates[i]}:`, e);
-          }
-        }
-      }
-    }
-    
-    if (ghsl_obj) {
-      if (global.population_Stadester_ghs_pop && typeof population_Stadester_ghs_pop.loadCompleteUCDBMap === "function")
-        population_Stadester_ghs_pop.loadCompleteUCDBMap(ghsl_obj, options);
-      all_ghsl_cities = Object.keys(ghsl_obj);
-      for (let i = 0; i < all_ghsl_cities.length; i++) {
-        let key_str = all_ghsl_cities[i].startsWith("ghsl-") ?
-          all_ghsl_cities[i] : `ghsl-${all_ghsl_cities[i]}`;
-        let local_city = JSON.parse(JSON.stringify(ghsl_obj[all_ghsl_cities[i]]));
-        if (/[?\uFFFD]/.test(key_str)) {
-          let entry_key = (local_city.key && !/[?\uFFFD]/.test(local_city.key)) ?
-            (local_city.key.startsWith("ghsl-") ? local_city.key : `ghsl-${local_city.key}`) : "";
-          if (entry_key) {
-            key_str = entry_key;
-          } else if (local_city.name && !/[?\uFFFD]/.test(local_city.name)) {
-            key_str = (local_city.country && !/[?\uFFFD]/.test(local_city.country) && local_city.country !== "#N/A") ?
-              `ghsl-${local_city.name}-${local_city.country}` : `ghsl-${local_city.name}`;
-          } else {
-            key_str = `ghsl-${local_city.id}`;
-          }
-          if (return_obj[key_str] && return_obj[key_str].id !== local_city.id)
-            key_str = `ghsl-${local_city.id}`;
-        }
-        if (Array.isArray(local_city.other_names))
-          local_city.other_names = local_city.other_names.filter(n => n && !/[?\uFFFD]/.test(String(n)));
-        let pop_interp = (local_city.population) ?
-          population_Stadester_ghsl.interpolateGHSLSeries(local_city.population) : null;
-        let area_interp = (local_city.area) ?
-          population_Stadester_ghsl.interpolateGHSLSeries(local_city.area) : null;
-        
-        if (pop_interp && pop_interp.first_active_ep !== null) {
-          for (let yr = cutoff_year; yr <= 2025; yr++) {
-            if (pop_interp.values[yr] !== undefined) {
-              local_city.population[yr] = Math.round(pop_interp.values[yr]);
-            } else if (yr < pop_interp.first_active_ep) {
-              local_city.population[yr] = 0;
-            }
-          }
-        }
-        if (area_interp && area_interp.first_active_ep !== null) {
-          for (let yr = cutoff_year; yr <= 2025; yr++) {
-            if (area_interp.values[yr] !== undefined) {
-              local_city.area[yr] = area_interp.values[yr];
-            } else if (yr < area_interp.first_active_ep) {
-              local_city.area[yr] = 0;
-            }
-          }
-        }
-        if (local_city.population && local_city.area) {
-          if (!local_city.density) local_city.density = {};
-          for (let yr = cutoff_year; yr <= 2025; yr++) {
-            let p_val = Number(local_city.population[yr]) || 0;
-            let a_val = Number(local_city.area[yr]) || 0;
-            local_city.density[yr] = (p_val > 0 && a_val > 0) ? (p_val/a_val) : 0;
-          }
-        }
-        
-        local_city.key = key_str;
-        return_obj[key_str] = local_city;
-      }
-      console.log(`- Appended ${all_ghsl_cities.length} modern GHSL entries.`);
-    }
-    
-    //2. Load historical Stadestér dataset
-    if (!stadester_obj) {
-      let transform_base = (typeof h3 !== "undefined") ?
-        path.join(`${h3}/population_Stadester.transform/stadester/`) :
-        path.resolve(__dirname, "../../3.data_transform/population_Stadester.transform/stadester/");
-      let partition_io = global.StadesterPartitionIO;
-      stadester_candidates = [
-        options.stadester_file,
-        path.join(transform_base, "stadester"),
-        path.join(transform_base, "stadester_areas"),
-        path.join(raw_folder, "uud", "stadester.json"),
-        path.join(raw_folder, "uud", "stadester_areas.json"),
-        "E:/Active Projects/Project 2136 - Stadestér/input/uud/stadester.json",
-        "E:/Active Projects/Project 2136 - Stadestér/output/stadester.json"
-      ];
-      
-      for (let i = 0; i < stadester_candidates.length; i++) {
-        let candidate_path = stadester_candidates[i];
-        if (!candidate_path) continue;
-        try {
-          if (partition_io && partition_io.hasDataset(candidate_path)) {
-            let candidate_data = partition_io.readPartitionedStadester(candidate_path);
-            let candidate_count = Object.keys(candidate_data).length;
-            if (candidate_count > 0) {
-              stadester_obj = candidate_data;
-              console.log(`- Loaded historical Stadestér cities from ${candidate_path} (${candidate_count} cities).`);
-              break;
-            }
-          } else if (fs.existsSync(candidate_path) && fs.statSync(candidate_path).isFile()) {
-            let candidate_data = JSON.parse(fs.readFileSync(candidate_path, "utf8"));
-            let candidate_count = Object.keys(candidate_data).length;
-            if (candidate_count > 0) {
-              stadester_obj = candidate_data;
-              console.log(`- Loaded historical Stadestér cities from ${candidate_path} (${candidate_count} cities).`);
-              break;
-            }
-          }
-        } catch (e) {
-          console.warn(`- Failed to read Stadestér cities from ${candidate_path}:`, e);
-        }
-      }
-    }
-    
-    if (stadester_obj) {
-      all_stadester_cities = Object.keys(stadester_obj);
-      for (let i = 0; i < all_stadester_cities.length; i++) {
-        let key_str = all_stadester_cities[i].startsWith("stadester-") ?
-          all_stadester_cities[i] : `stadester-${all_stadester_cities[i]}`;
-        let local_city = JSON.parse(JSON.stringify(stadester_obj[all_stadester_cities[i]]));
-        if (!local_city.coords) continue;
-        
-        let keys_to_truncate = ["area", "density", "population"];
-        for (let x = 0; x < keys_to_truncate.length; x++) {
-          if (local_city[keys_to_truncate[x]]) {
-            let year_keys = Object.keys(local_city[keys_to_truncate[x]]);
-            for (let y = 0; y < year_keys.length; y++) {
-              if (parseInt(year_keys[y]) >= cutoff_year)
-                delete local_city[keys_to_truncate[x]][year_keys[y]];
-            }
-          }
-        }
-        
-        //Lamphun, Thailand geolocation fix
-        if (key_str === "stadester-Lamphun-Thailand" || key_str.toLowerCase().includes("lamphun")) {
-          if (local_city.coords && local_city.coords[0] < 10)
-            local_city.coords = [18.5744357, 99.00369719999999];
-        }
-        
-        //Champotón (Chakanputun), Mexico geolocation fix
-        if (key_str === "stadester-Champotón-Mexico" || key_str.toLowerCase().includes("champot") || key_str.toLowerCase().includes("chakanputun"))
-          local_city.coords = [19.3471645, -90.7200237];
-        
-        //Múgica, Michoacán, Mexico geolocation fix
-        if (key_str === "stadester-Múgica-Mexico" || key_str.toLowerCase().includes("múgica")) {
-          if (local_city.coords && local_city.coords[0] > 20)
-            local_city.coords = [19.01944, -102.10889];
-        }
-        
-        //Regularize Trujillo, Peru historical curve to remove cubic spline vacuum sawtooth
-        if (key_str.toLowerCase().includes("trujillo") && (key_str.includes("Peru") || key_str.includes("peru"))) {
-          if (local_city.population) {
-            let trujillo_anchors = {
-              1200: 20000,
-              1300: 20000,
-              1400: 26666,
-              1791: 9000,
-              1861: 8000,
-              1876: 11000,
-              1890: 14000,
-              1896: 45000,
-              1900: 48372,
-              1910: 56803,
-              1920: 65234,
-              1925: 70000,
-              1930: 73665,
-              1940: 82095,
-              1950: 90526,
-              1961: 99800,
-              1971: 242000,
-              1974: 331100
-            };
-            let anchor_years = Object.keys(trujillo_anchors).map(Number).sort((a, b) => a - b);
-            let pop_years = Object.keys(local_city.population).map(Number).sort((a, b) => a - b);
-            for (let y = 0; y < pop_years.length; y++) {
-              let yr = pop_years[y];
-              if (yr >= cutoff_year) continue;
-              if (trujillo_anchors[yr] !== undefined) {
-                local_city.population[yr] = trujillo_anchors[yr];
-              } else if (yr <= anchor_years[0]) {
-                local_city.population[yr] = trujillo_anchors[anchor_years[0]];
-              } else if (yr >= anchor_years[anchor_years.length - 1]) {
-                local_city.population[yr] = trujillo_anchors[anchor_years[anchor_years.length - 1]];
-              } else {
-                let high = anchor_years[anchor_years.length - 1];
-                let low = anchor_years[0];
-                for (let a = 0; a < anchor_years.length - 1; a++) {
-                  if (yr >= anchor_years[a] && yr <= anchor_years[a + 1]) {
-                    low = anchor_years[a];
-                    high = anchor_years[a + 1];
-                    break;
-                  }
-                }
-                let frac = (yr - low)/(high - low);
-                local_city.population[yr] = Math.round(trujillo_anchors[low] + frac*(trujillo_anchors[high] - trujillo_anchors[low]));
-              }
-            }
-          }
-        }
-        
-        //Remove anachronistic antiquity entries (-500, 0) from Taipei
-        if (key_str.toLowerCase().includes("taipei") || key_str.toLowerCase().includes("t'aipei")) {
-          let taipei_props = ["area", "density", "population", "rni", "radial_buffers", "centre_density"];
-          for (let t = 0; t < taipei_props.length; t++) {
-            if (local_city[taipei_props[t]]) {
-              let yr_keys = Object.keys(local_city[taipei_props[t]]);
-              for (let y = 0; y < yr_keys.length; y++) {
-                if (parseInt(yr_keys[y]) < 1700)
-                  delete local_city[taipei_props[t]][yr_keys[y]];
-              }
-            }
-          }
-        }
-        
-        //Ukrainian archaeological megasites (e.g. Maydanets) lapse after antiquity
-        if (key_str.toLowerCase().includes("maydanets") || key_str.toLowerCase().includes("maidanets")) {
-          let maydanets_props = ["area", "density", "population", "rni", "radial_buffers", "centre_density"];
-          for (let m = 0; m < maydanets_props.length; m++) {
-            if (local_city[maydanets_props[m]]) {
-              let yr_keys = Object.keys(local_city[maydanets_props[m]]);
-              for (let y = 0; y < yr_keys.length; y++) {
-                if (parseInt(yr_keys[y]) >= 0)
-                  delete local_city[maydanets_props[m]][yr_keys[y]];
-              }
-            }
-          }
-          if (local_city.population)
-            local_city.population["-999"] = 0;
-        }
-        
-        local_city.key = key_str;
-        return_obj[key_str] = local_city;
-      }
-      
-      //Inject Vaduz into Stadestér GHSL dataset if not present
-      if (!return_obj["stadester-Vaduz-Liechtenstein"] && (!stadester_obj || !stadester_obj["Vaduz-Liechtenstein"])) {
-        return_obj["stadester-Vaduz-Liechtenstein"] = {
-          name: "Vaduz",
-          country: "Liechtenstein",
-          elevation: 455,
-          key: "stadester-Vaduz-Liechtenstein",
-          coords: [47.141, 9.521],
-          original_names: ["vaduz"],
-          other_names: ["Vaduz"],
-          population: {
-            "1400": 300,
-            "1500": 400,
-            "1600": 500,
-            "1700": 600,
-            "1800": 800,
-            "1900": 1000,
-            "1910": 1300,
-            "1920": 1400,
-            "1930": 1600,
-            "1940": 2000,
-            "1950": 2700,
-            "1960": 3400,
-            "1970": 3900,
-            "1980": 4600,
-            "1990": 4900,
-            "2000": 5000,
-            "2010": 5200,
-            "2020": 5700,
-            "2025": 5800
-          },
-          region: "europe",
-          type: "manual"
-        };
-      }
-      
-      //Inject Macau into Stadestér GHSL dataset if not present
-      if (!return_obj["stadester-Macau-Macao"] && (!stadester_obj || !stadester_obj["Macau-Macao"])) {
-        return_obj["stadester-Macau-Macao"] = {
-          name: "Macau",
-          country: "Macao",
-          elevation: 10,
-          key: "stadester-Macau-Macao",
-          coords: [22.1987, 113.5439],
-          original_names: ["macau", "macao"],
-          other_names: ["Macau", "Macao"],
-          population: {
-            "1557": 500,
-            "1560": 1000,
-            "1600": 5000,
-            "1635": 35000,
-            "1700": 19500,
-            "1750": 24000,
-            "1800": 30000,
-            "1850": 29000,
-            "1900": 63000,
-            "1910": 75000,
-            "1920": 84000,
-            "1930": 120000,
-            "1940": 150000,
-            "1950": 188000,
-            "1960": 169000,
-            "1970": 249000,
-            "1980": 242000,
-            "1990": 352000,
-            "2000": 432000,
-            "2010": 540000,
-            "2020": 680000,
-            "2025": 710000
-          },
-          region: "eastasia",
-          colour: [173, 62, 62],
-          type: "manual"
-        };
-      }
-      
-      console.log(`- Appended ${all_stadester_cities.length} historical Stadestér entries (truncated < ${cutoff_year}).`);
-    }
-    
-    //3. Assign .region (string) and .colour via Voronoi equirectangular raster sampling
-    voronoi_candidates = [
-      options.voronoi_file,
-      path.join(raw_folder, "voronoi_subdivisions.png"),
-      path.join(raw_folder, "regional_subdivisions.png"),
-      path.join(h1, "population_Stadester", "voronoi_subdivisions.png"),
-      "E:/Active Projects/Project 2136 - Stadestér/input/voronoi_subdivisions.png"
-    ];
-    for (let i = 0; i < voronoi_candidates.length; i++) {
-      if (voronoi_candidates[i] && fs.existsSync(voronoi_candidates[i])) {
-        try {
-          voronoi_png = pngjs_lib.PNG.sync.read(fs.readFileSync(voronoi_candidates[i]));
-          console.log(`- Loaded Voronoi regions raster from ${voronoi_candidates[i]} (${voronoi_png.width}x${voronoi_png.height}).`);
-          break;
-        } catch (e) {
-          console.warn(`- Failed to read Voronoi raster from ${voronoi_candidates[i]}:`, e);
-        }
-      }
-    }
-    
-    region_defines = (global.config && global.config.defines && global.config.defines.regions) ?
-      global.config.defines.regions : {
-        northern_america: { colour: [87, 122, 175], name: "Northern America" },
-        latin_america: { colour: [71, 165, 101], name: "Latin America" },
-        europe: { colour: [47, 97, 170], name: "Europe" },
-        eastern_europe_and_russia: { colour: [20, 114, 30], name: "Eastern Europe and Russia" },
-        central_asia: { colour: [41, 193, 175], name: "Central Asia" },
-        middle_east: { colour: [198, 130, 129], name: "Middle East" },
-        maghreb_egypt: { colour: [239, 188, 112], name: "Maghreb and Egypt" },
-        sub_saharan_africa: { colour: [155, 101, 77], name: "Sub-Saharan Africa" },
-        oceania: { colour: [0, 205, 143], name: "Oceania" },
-        indian_subcontinent: { colour: [214, 144, 83], name: "Indian Subcontinent" },
-        southeast_asia: { colour: [97, 144, 163], name: "Southeast Asia" },
-        eastasia: { colour: [173, 62, 62], name: "East Asia" }
-      };
-    
-    all_region_keys = Object.keys(region_defines);
-    for (let i = 0; i < all_region_keys.length; i++) {
-      let reg = region_defines[all_region_keys[i]];
-      if (reg && reg.colour)
-        colour_to_region[reg.colour.join(",")] = { key: all_region_keys[i], colour: reg.colour };
-    }
-    
-    all_return_keys = Object.keys(return_obj);
-    for (let i = 0; i < all_return_keys.length; i++) {
-      let local_city = return_obj[all_return_keys[i]];
-      if (!local_city || !Array.isArray(local_city.coords) || local_city.coords.length < 2) continue;
-      
-      let lat = Number(local_city.coords[0]);
-      let lng = Number(local_city.coords[1]);
-      if (isNaN(lat) || isNaN(lng)) continue;
-      
-      if (voronoi_png) {
-        let x = Math.min(voronoi_png.width - 1, Math.max(0, Math.floor(((lng - (-180))/360)*voronoi_png.width)));
-        let y = Math.min(voronoi_png.height - 1, Math.max(0, Math.floor(((90 - lat)/180)*voronoi_png.height)));
-        local_city.pixel_coords = [x, y];
-        
-        let idx = (y*voronoi_png.width + x)*4;
-        let rgb_key = `${voronoi_png.data[idx]},${voronoi_png.data[idx + 1]},${voronoi_png.data[idx + 2]}`;
-        let reg = colour_to_region[rgb_key];
-        if (reg) {
-          local_city.colour = reg.colour;
-          local_city.region = reg.key;
-        }
-      }
-    }
-    
-    //4. Repair all GHSL and historical city display names
-    population_Stadester_uud.repairGHSLCityNames(return_obj);
-    all_return_keys = Object.keys(return_obj);
-    for (let i = 0; i < all_return_keys.length; i++) {
-      let rk = all_return_keys[i];
-      if (!rk.startsWith("ghsl-")) continue;
-      let rc = return_obj[rk];
-      if (rc && Array.isArray(rc.other_names))
-        rc.other_names = rc.other_names.filter(n => n && !/[?\uFFFD]/.test(String(n)));
-    }
-    
-    //Return statement
-    return return_obj;
-  };
+  if ((!global.population_Stadester_uud.appendCitySources || !global.population_Stadester_uud.hasCitySource) && typeof require !== "undefined")
+    try { require(path.join(__dirname, "stadester_uud_fixes.js")); } catch (e) {}
   
   /**
    * Integrates modern GHSL urban centre populations (1975-2025) into Stadestér by subtracting
@@ -478,11 +31,11 @@
     
     //Declare local instance variables
     let built_entries;
+    let cfg = global.population_Stadester_config;
     let city_entries = [];
     let city_grid = new Map();
     let cluster_members = new Map();
-    let cutoff_year = (global.population_Stadester_config && global.population_Stadester_config.cutoff_year) ?
-      global.population_Stadester_config.cutoff_year : 1975;
+    let cutoff_year = (cfg && cfg.cutoff_year) ? cfg.cutoff_year : 1975;
     let end_year = 2025;
     let epochs = [1975, 1980, 1985, 1990, 1995, 2000, 2005, 2010, 2015, 2020, 2025];
     let ghsl_by_id;
@@ -491,6 +44,9 @@
     let ghsl_obj = options.ghsl_obj;
     let integrated_count = 0;
     let pngjs_lib = (typeof pngjs !== "undefined") ? pngjs : (global.pngjs || require("pngjs"));
+    let preserve_manual = (options.preserve_manual_entries !== undefined) ?
+      options.preserve_manual_entries :
+      ((cfg && cfg.preserve_manual_entries !== undefined) ? cfg.preserve_manual_entries : true);
     let raw_folder = options.raw_folder ? options.raw_folder : `${(typeof h1 !== "undefined") ? h1 : "./histmap/1.data_raw"}/population_Stadester/`;
     
     //Guard clauses
@@ -843,7 +399,11 @@
         for (let x = 0; x < sub_entries.length; x++) {
           let sub_info = sub_entries[x];
           let sub = sub_info.sub;
-          if (sub.city && sub.city.polaris_source === "russian_invasion_of_ukraine" && Number.isFinite(sub.raw_min_year) && yr < sub.raw_min_year)
+          let is_war_city = sub.city && (
+            (Array.isArray(sub.city._war_displacement_years) && sub.city._war_displacement_years.length > 0) ||
+            sub.city.polaris_source === "russian_invasion_of_ukraine"
+          );
+          if (is_war_city && Number.isFinite(sub.raw_min_year) && yr < sub.raw_min_year)
             continue;
           let w0 = (sub.epoch_cluster[e0] === uc_id) ? 1 : 0;
           let w1 = (sub.epoch_cluster[e1] === uc_id) ? 1 : 0;
@@ -928,6 +488,8 @@
         }
       }
       
+      if (primary_entry.has_ucdb && !(preserve_manual && population_Stadester_uud.hasCitySource(primary_entry.city, "manual")))
+        population_Stadester_uud.appendCitySources(primary_entry.city, "ghsl");
       integrated_count++;
     }
     
@@ -936,6 +498,7 @@
       let ce = city_entries[i];
       if (ce.locked_primary_uc_id || !ce.ghsl_w_sum) continue;
       if (!ce.city.population) ce.city.population = {};
+      let did_write_ghsl = false;
       
       for (let yr = cutoff_year; yr <= end_year; yr++) {
         let w_raw_sum = ce.ghsl_w_sum[yr] || 0;
@@ -955,20 +518,25 @@
         
         if (w_tot >= 1 - 1e-9) {
           ce.city.population[yr] = Math.max(0, Math.round(pop_sum));
+          did_write_ghsl = true;
           if (area_sum > 0) {
             if (!ce.city._ghsl_area) ce.city._ghsl_area = {};
             ce.city._ghsl_area[yr] = area_sum;
           }
         } else {
           let out_pop = (1 - w_tot)*population_Stadester_ghsl.getContinuousCityPopulation(ce.raw_pop, yr);
-          if (out_pop > 0)
+          if (out_pop > 0) {
             ce.city.population[yr] = Math.max(0, Math.round(out_pop + pop_sum));
+            did_write_ghsl = true;
+          }
           if (area_sum > 0) {
             if (!ce.city._ghsl_area_partial) ce.city._ghsl_area_partial = {};
             ce.city._ghsl_area_partial[yr] = { area: area_sum, weight: w_tot };
           }
         }
       }
+      if (did_write_ghsl && !(preserve_manual && population_Stadester_uud.hasCitySource(ce.city, "manual")))
+        population_Stadester_uud.appendCitySources(ce.city, "ghsl");
     }
     
     console.log(`- Integrated GHSL (1975-2025) DEGURBA areal mask populations into ${integrated_count} primary Stadestér cities.`);
@@ -983,7 +551,6 @@
   };
   
   //Expose on population_Stadester_uud for pipeline compatibility
-  population_Stadester_uud.getStadesterGHSLObject = population_Stadester_ghsl.getStadesterGHSLObject;
   population_Stadester_uud.integrateGHSLIntoStadester = population_Stadester_ghsl.integrateGHSLIntoStadester;
 }
 
