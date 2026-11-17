@@ -88,15 +88,14 @@ Write authentic academic prose in **non-Oxford British English (EN-GB)**.
 ### Stage E: Intellte Synchronisation & Fast Incremental SSG Build
 
 1. Ensure `E:/Active Projects/Project 1746 - Intellte/common/metadata/viscount/project_<slug>.json5` exists and matches `intellte_concept_id` in `viscount_precedence.json5`.
-2. Synchronise chapter papers and compile incrementally in Intellte:
+2. Synchronise chapter papers, update `project_<slug>.json5` and compile LF-normalised `rmd_dom` caches incrementally in Intellte (`docs/.vitepress/cache/rmd_dom/*.md` are committed for Intellte's `ubuntu-latest` GitHub Actions workflow `.github/workflows/deploy.yml`, which builds without `Rscript`):
    ```powershell
    Set-Location "E:\Active Projects\Project 1746 - Intellte"
-   node core/framework/node/sync_viscount_region.js --project=<PROJECT_KEY>
-   node core/framework/node/run_pipeline.js --only=project_<slug>
+   node core/framework/node/sync_viscount_region.js --project=<PROJECT_KEY> --build
    ```
-3. Run `npm run docs:build` after major milestone updates to refresh the VitePress bundle and static `.html` redirect stubs.
+3. Run `autobuild.bat` / `./autobuild.sh` (`npm run docs:build`) after major milestone updates to refresh the VitePress bundle and static `.html` redirect stubs.
 
-### Stage F: Stadestér 2.0 Export & Historical Toponymy Sync
+### Stage F: Stadestér 2.0 Export, Historical Toponymy Sync & Downstream CI/CD Gatekeeper
 
 1. Export updated UUD (`histmap/2.data_cleaning/population_Stadester/uud/`) and partitioned Stadestér 2.0 outputs (`.sources: string[]` schema) directly into the hoisted `histmap/3.data_transform/population_Stadester.transform/stadester/` directory (no nested `stadester/stadester/`, `stadester_areas/` or `stadester_ghsl/` subdirectories), then synchronise shards to `histmap/5.data_visualisation/stadester/stadester_2.0/` and `F:/Active Projects/Project 1436 - Dataview/data/stadester/stadester_2.0/`. `stadester_1.0/` remains the frozen baseline legacy release whilst `stadester_1.1/` carries the in-situ geolocation fixes backported from `2.0` with its legacy `.type: string` schema preserved (both `1.0/` and `1.1/` retain independent `city_metadata.json` files and legacy optional `.type` support alongside `.sources` in Dataview).
 2. Extract unmatched or corrupted regional settlement records into `30`-city batches (defaults to `--dataset=stadester_2.0`, resolving `data/stadester/stadester_2.0/city_metadata.json`):
@@ -109,3 +108,7 @@ Write authentic academic prose in **non-Oxford British English (EN-GB)**.
    node .agents/skills/population-regional-study/scripts/merge_city_metadata.js --project=<PROJECT_KEY>
    ```
 5. Remove temporary `tests/toponymy_batches/<slug>/` files after verifying `merge_city_metadata.js` output (`0` leftover test artefacts).
+6. Run the cross-repository CI/CD verification gatekeeper from `SVEA` (checks transform/visualisation/Dataview shard parity, `.sources` compliance, Intellte `sync_viscount_region.js --build`, 100% LF-normalised `rmd_dom` GitHub Actions cache coverage, Dataview `stadester_2.0` cache re-warming and `tsc -b` + `vite build`; add `--full-build` on regional milestone completion to also build Intellte's VitePress `dist/` bundle):
+   ```powershell
+   node .agents/skills/population-regional-study/scripts/verify_downstream_ci_cd.js --project=<PROJECT_KEY>
+   ```
