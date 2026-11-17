@@ -278,6 +278,12 @@
     
     key_str = String(key || city.key || "");
     if (key_str.includes("_chandler_modelski") && bounds.raw_max_year < cutoff_year) return false;
+    if (
+      typeof population_Stadester_uud !== "undefined" &&
+      typeof population_Stadester_uud.hasCitySource === "function" &&
+      population_Stadester_uud.hasCitySource(city, "POLARIS") &&
+      bounds.raw_max_year < 1800
+    ) return false;
     if (bounds.raw_max_year >= cutoff_year) return true;
     
     max_gap = (typeof population_Stadester_uud !== "undefined" && typeof population_Stadester_uud.getMaxTemporalProximityGap === "function") ?
@@ -682,24 +688,31 @@
       let dv = new DataView(png_obj.data.buffer, png_obj.data.byteOffset, png_obj.data.byteLength);
       
       for (let cell_entry of cell_map.entries()) {
-        let members = cell_entry[1];
         let active_members = [];
+        let anchor_sample_targets = [];
         let fallback_targets = [];
+        let members = cell_entry[1];
         let ramp_targets = [];
         
         for (let i = 0; i < members.length; i++) {
           let m = members[i];
-          if (Number.isFinite(m.found_yr) && yr < m.found_yr && !(m.raw_pop && Number(m.raw_pop[yr]) > 0))
+          if (Number.isFinite(m.found_yr) && yr < m.found_yr && !(m.raw_pop && Number(m.raw_pop[yr]) > 0)) {
+            if (!m.city.population) m.city.population = {};
+            m.city.population[yr] = 0;
             continue;
+          }
           active_members.push(m);
         }
         if (active_members.length === 0) continue;
         
         for (let i = 0; i < active_members.length; i++) {
           let m = active_members[i];
+          if (Number.isFinite(m.raw_max_year) && m.raw_max_year >= cutoff_year && m.raw_max_year === yr && m.raw_max_year < end_year)
+            anchor_sample_targets.push(m);
           if (preserve_manual && population_Stadester_uud.hasCitySource(m.city, "manual")) continue;
           if (preserve_war && m.war_years_set && m.war_years_set.has(yr)) continue;
           if (!Number.isFinite(m.raw_max_year) || !(yr > m.raw_max_year)) continue;
+          if (m.raw_pop && m.raw_pop[yr] !== undefined && Number(m.raw_pop[yr]) <= 0) continue;
           
           let ucdb_w = (m.ucdb_weight_by_year && m.ucdb_weight_by_year[yr] !== undefined) ?
             m.ucdb_weight_by_year[yr] : 0;
@@ -711,7 +724,7 @@
           }
         }
         
-        if (fallback_targets.length === 0 && ramp_targets.length === 0) continue;
+        if (fallback_targets.length === 0 && ramp_targets.length === 0 && anchor_sample_targets.length === 0) continue;
         
         let eff_px = active_members[0].eff_px;
         let sample_py = Math.min(png_obj.height - 1, Math.max(0, active_members[0].eff_py + y_offset));
@@ -719,21 +732,47 @@
         let cell_pop = (Number.isFinite(raw_val) && raw_val > 0) ? raw_val : 0;
         let n_active = active_members.length;
         
+        for (let i = 0; i < anchor_sample_targets.length; i++)
+          anchor_sample_targets[i]._base_cell_pop = cell_pop;
+        
         if (fallback_targets.length > 0) {
           let alloc_map = population_Stadester_ghs_pop.distributeCellShare(cell_pop, n_active, fallback_targets);
           for (let i = 0; i < fallback_targets.length; i++) {
             let target_ce = fallback_targets[i];
+            let has_modern_anchor = (
+              Number.isFinite(target_ce.raw_max_year) &&
+              target_ce.raw_max_year >= cutoff_year &&
+              Number(target_ce.raw_pop && target_ce.raw_pop[target_ce.raw_max_year]) > 0
+            );
             if (!target_ce.city.population) target_ce.city.population = {};
-            target_ce.city.population[yr] = alloc_map.get(target_ce);
+            if (has_modern_anchor) {
+              let anchor_pop = Number(target_ce.raw_pop[target_ce.raw_max_year]);
+              let cell_ratio = (target_ce._base_cell_pop > 0 && cell_pop > 0) ?
+                Math.min(1.25, Math.max(0.75, cell_pop/target_ce._base_cell_pop)) : 1.0;
+              target_ce.city.population[yr] = Math.max(0, Math.round(anchor_pop*cell_ratio));
+            } else {
+              target_ce.city.population[yr] = alloc_map.get(target_ce);
+            }
             partitioned_set.add(target_ce.key);
           }
         }
         
         for (let i = 0; i < ramp_targets.length; i++) {
           let rt = ramp_targets[i];
-          let even_share = cell_pop/n_active;
+          let base_share = cell_pop/n_active;
+          let has_modern_anchor = (
+            Number.isFinite(rt.ce.raw_max_year) &&
+            rt.ce.raw_max_year >= cutoff_year &&
+            Number(rt.ce.raw_pop && rt.ce.raw_pop[rt.ce.raw_max_year]) > 0
+          );
+          if (has_modern_anchor) {
+            let anchor_pop = Number(rt.ce.raw_pop[rt.ce.raw_max_year]);
+            let cell_ratio = (rt.ce._base_cell_pop > 0 && cell_pop > 0) ?
+              Math.min(1.25, Math.max(0.75, cell_pop/rt.ce._base_cell_pop)) : 1.0;
+            base_share = anchor_pop*cell_ratio;
+          }
           if (!rt.ce.city.population) rt.ce.city.population = {};
-          rt.ce.city.population[yr] = Math.max(0, Math.round((1 - rt.weight)*even_share + rt.weight*rt.ucdb_pop));
+          rt.ce.city.population[yr] = Math.max(0, Math.round((1 - rt.weight)*base_share + rt.weight*rt.ucdb_pop));
           partitioned_set.add(rt.ce.key);
         }
       }
@@ -841,142 +880,8 @@
     return [best_nx, best_ny];
   };
   
-  /**
-   * Restores curated manual city trajectories (hasCitySource(city, "manual")) when preserve_manual_entries is enabled.
-   * @alias population_Stadester_ghs_pop.restoreManualEntries
-   * 
-   * @param {Array<Object>} arg0_city_entries
-   * @param {Object} [arg1_options]
-   * 
-   * @returns {number}
-   */
-  population_Stadester_ghs_pop.restoreManualEntries = function (arg0_city_entries, arg1_options) {
-    //Convert from parameters
-    let city_entries = Array.isArray(arg0_city_entries) ? arg0_city_entries : [];
-    let options = (arg1_options) ? arg1_options : {};
-    
-    //Declare local instance variables
-    let cfg = global.population_Stadester_config;
-    let preserve_manual = (options.preserve_manual_entries !== undefined) ?
-      options.preserve_manual_entries :
-      ((cfg && cfg.preserve_manual_entries !== undefined) ? cfg.preserve_manual_entries : true);
-    let restored_count = 0;
-    
-    //Guard clauses
-    if (!preserve_manual || city_entries.length === 0) return 0;
-    
-    //Function body
-    for (let i = 0; i < city_entries.length; i++) {
-      let ce = city_entries[i];
-      if (ce.city && population_Stadester_uud.hasCitySource(ce.city, "manual") && ce.manual_pop_backup) {
-        ce.city.population = Object.assign({}, ce.manual_pop_backup);
-        delete ce.city._ghsl_area;
-        delete ce.city._ghsl_area_partial;
-        restored_count++;
-      }
-    }
-    
-    //Return statement
-    return restored_count;
-  };
-  
-  /**
-   * Restores explicit war-displacement population entries so GHSL/GHS-POP approximations never overwrite active conflict observations.
-   * @alias population_Stadester_ghs_pop.restoreWarDisplacementYears
-   * 
-   * @param {Array<Object>} arg0_city_entries
-   * @param {Object} [arg1_options]
-   * 
-   * @returns {number}
-   */
-  population_Stadester_ghs_pop.restoreWarDisplacementYears = function (arg0_city_entries, arg1_options) {
-    //Convert from parameters
-    let city_entries = Array.isArray(arg0_city_entries) ? arg0_city_entries : [];
-    let options = (arg1_options) ? arg1_options : {};
-    
-    //Declare local instance variables
-    let cfg = global.population_Stadester_config;
-    let preserve_war = (options.preserve_war_displacement_entries !== undefined) ?
-      options.preserve_war_displacement_entries :
-      ((cfg && cfg.preserve_war_displacement_entries !== undefined) ? cfg.preserve_war_displacement_entries : true);
-    let restored_count = 0;
-    
-    //Guard clauses
-    if (!preserve_war || city_entries.length === 0) return 0;
-    
-    //Function body
-    for (let i = 0; i < city_entries.length; i++) {
-      let ce = city_entries[i];
-      if (!ce.war_years_set || !ce.war_pop_backup) continue;
-      if (!ce.city.population) ce.city.population = {};
-      let did_restore = false;
-      for (let w_yr of ce.war_years_set) {
-        if (ce.war_pop_backup[w_yr] !== undefined) {
-          ce.city.population[w_yr] = ce.war_pop_backup[w_yr];
-          did_restore = true;
-        }
-      }
-      if (did_restore) restored_count++;
-    }
-    
-    //Return statement
-    return restored_count;
-  };
-  
-  /**
-   * Streams a top-level dictionary object to JSON with 2-space indentation, avoiding V8 single-string length limits on huge datasets.
-   * @alias population_Stadester_ghs_pop.writeJSONSafe
-   * 
-   * @param {string} arg0_file_path
-   * @param {Object} arg1_obj
-   */
-  population_Stadester_ghs_pop.writeJSONSafe = function (arg0_file_path, arg1_obj) {
-    //Convert from parameters
-    let file_path = arg0_file_path;
-    let obj = arg1_obj;
-    
-    //Declare local instance variables
-    let all_keys;
-    let buffer = ["{\n"];
-    let buffer_len = 2;
-    let fd;
-    let flush_threshold = 8*1024*1024;
-    let parent_dir = path.dirname(path.resolve(file_path));
-    let wrote_any = false;
-    
-    //Guard clauses
-    if (!file_path || !obj) return;
-    if (!fs.existsSync(parent_dir)) fs.mkdirSync(parent_dir, { recursive: true });
-    
-    //Function body
-    all_keys = Object.keys(obj);
-    fd = fs.openSync(file_path, "w");
-    try {
-      for (let i = 0; i < all_keys.length; i++) {
-        let k = all_keys[i];
-        let val_str = JSON.stringify(obj[k], null, 2);
-        if (val_str === undefined) continue;
-        let prefix = wrote_any ? ",\n  " : "  ";
-        let chunk = `${prefix}${JSON.stringify(k)}: ${val_str.replace(/\n/g, "\n  ")}`;
-        buffer.push(chunk);
-        buffer_len += chunk.length;
-        wrote_any = true;
-        if (buffer_len >= flush_threshold) {
-          fs.writeSync(fd, buffer.join(""), null, "utf8");
-          buffer = [];
-          buffer_len = 0;
-        }
-      }
-      if (!wrote_any) {
-        fs.writeSync(fd, "{}", null, "utf8");
-      } else {
-        buffer.push("\n}");
-        fs.writeSync(fd, buffer.join(""), null, "utf8");
-      }
-    } finally {
-      fs.closeSync(fd);
-    }
-  };
+  if (typeof require !== "undefined" && !global.population_Stadester_ghs_pop_restore_loaded)
+    try { require(path.join(__dirname, "stadester_ghs_pop_restore.js")); } catch (e) {}
   
   global.population_Stadester_ghs_pop_loaded = true;
 }

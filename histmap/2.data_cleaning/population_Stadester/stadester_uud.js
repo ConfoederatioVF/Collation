@@ -565,7 +565,8 @@
                   if (
                     is_exact_name &&
                     (is_same_country || local_distance <= search_radius) &&
-                    local_distance <= semantic_radius
+                    local_distance <= semantic_radius &&
+                    (local_distance <= 0.015 || pop_check.valid)
                   ) {
                     is_match = true;
                   }
@@ -657,6 +658,45 @@
             }
           }
           population_Stadester_uud.mergeCityEntries(actual_city, local_city, local_db.is_metro);
+          if (local_db.is_polaris && !isAgglomeration(actual_city) && local_city.population && actual_city.population) {
+            let pol_yrs = Object.keys(local_city.population).map(Number).filter(function (arg0_n) { return Number.isFinite(arg0_n) && Number(local_city.population[arg0_n]) > 0; }).sort(function (arg0_a, arg1_b) { return arg0_a - arg1_b; });
+            if (pol_yrs.length > 0) {
+              for (let py = 0; py < pol_yrs.length; py++)
+                actual_city.population[pol_yrs[py]] = [local_city.population[pol_yrs[py]]];
+              if (pol_yrs.length >= 2) {
+                let existing_yrs = Object.keys(actual_city.population).map(Number).filter(Number.isFinite);
+                for (let ey = 0; ey < existing_yrs.length; ey++) {
+                  let y = existing_yrs[ey];
+                  if (local_city.population[y] !== undefined) continue;
+                  if (y > pol_yrs[0] && y < pol_yrs[pol_yrs.length - 1]) {
+                    let prev_p = null;
+                    let next_p = null;
+                    for (let k = 0; k < pol_yrs.length - 1; k++) {
+                      if (pol_yrs[k] < y && pol_yrs[k + 1] > y) {
+                        prev_p = pol_yrs[k];
+                        next_p = pol_yrs[k + 1];
+                        break;
+                      }
+                    }
+                    if (prev_p !== null && (next_p - prev_p) <= 15) {
+                      let v_prev = Number(local_city.population[prev_p]) || 0;
+                      let v_next = Number(local_city.population[next_p]) || 0;
+                      let v_interp = v_prev + (v_next - v_prev)*((y - prev_p)/(next_p - prev_p));
+                      let raw_arr = Array.isArray(actual_city.population[y]) ? actual_city.population[y] : [actual_city.population[y]];
+                      let cleaned_arr = raw_arr.filter(function (arg0_v) {
+                        let nv = Number(arg0_v);
+                        return Number.isFinite(nv) && nv > 0 && v_interp > 0 && (nv/v_interp) <= 2.5 && (v_interp/nv) <= 2.5;
+                      });
+                      if (cleaned_arr.length > 0)
+                        actual_city.population[y] = cleaned_arr;
+                      else
+                        delete actual_city.population[y];
+                    }
+                  }
+                }
+              }
+            }
+          }
           if (local_city.viscount_project && (!actual_city.viscount_z_priority || local_city.viscount_z_priority > actual_city.viscount_z_priority)) {
             actual_city.viscount_order = local_city.viscount_order;
             actual_city.viscount_project = local_city.viscount_project;

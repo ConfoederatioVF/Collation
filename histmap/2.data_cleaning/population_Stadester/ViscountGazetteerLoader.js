@@ -112,6 +112,53 @@
 
 
     /**
+     * Checks whether two settlements share compatible population scales before name-based spatial merging,
+     * preventing small homonym villages from overwriting nearby cities.
+     * @alias ViscountGazetteerLoader.hasCompatiblePopulationScale
+     *
+     * @param {Object} arg0_pop_a
+     * @param {Object} arg1_pop_b
+     *
+     * @returns {boolean}
+     */
+    static hasCompatiblePopulationScale (arg0_pop_a, arg1_pop_b) {
+      //Convert from parameters
+      let pop_a = (arg0_pop_a && typeof arg0_pop_a === "object") ? arg0_pop_a : {};
+      let pop_b = (arg1_pop_b && typeof arg1_pop_b === "object") ? arg1_pop_b : {};
+
+      //Declare local instance variables
+      let best_gap = Infinity;
+      let best_pair = null;
+      let yrs_a = Object.keys(pop_a).map(Number).filter(function (arg0_n) { return Number.isFinite(arg0_n) && Number(pop_a[arg0_n]) > 0; });
+      let yrs_b = Object.keys(pop_b).map(Number).filter(function (arg0_n) { return Number.isFinite(arg0_n) && Number(pop_b[arg0_n]) > 0; });
+
+      //Guard clauses
+      if (yrs_a.length === 0 || yrs_b.length === 0) return true;
+
+      //Function body
+      for (let i = 0; i < yrs_a.length; i++) {
+        for (let x = 0; x < yrs_b.length; x++) {
+          let gap = Math.abs(yrs_a[i] - yrs_b[x]);
+          if (gap < best_gap || (gap === best_gap && Math.max(yrs_a[i], yrs_b[x]) <= 2021)) {
+            best_gap = gap;
+            best_pair = [Number(pop_a[yrs_a[i]]), Number(pop_b[yrs_b[x]])];
+          }
+        }
+      }
+
+      if (best_pair && best_gap <= 30) {
+        let p_big = Math.max(best_pair[0], best_pair[1]);
+        let p_small = Math.max(1, Math.min(best_pair[0], best_pair[1]));
+        if (p_big >= 5000 && (p_big/p_small) > 5.0)
+          return false;
+      }
+
+      //Return statement
+      return true;
+    }
+
+
+    /**
      * Merges all sorted gazetteer files for a single Viscount project into `arg0_return_obj` using a spatial index.
      * @alias ViscountGazetteerLoader.mergeProjectGazetteers
      *
@@ -178,6 +225,7 @@
           if (Object.keys(clean_pop).length === 0) continue;
 
           let candidate_city = {
+            _raw_lapsed: Boolean(raw_city._raw_lapsed === true || clean_pop["-999"] === 0),
             coords: [lat, lng],
             country: raw_city.country || gaz_entry.default_country || proj.default_country || "Russia",
             key: city_key,
@@ -193,7 +241,9 @@
             viscount_project: proj.key,
             viscount_z_priority: proj.z_priority
           };
-          if (gaz_id === "russian_invasion_of_ukraine")
+          if (raw_city["found.yr"] !== undefined && Number.isFinite(Number(raw_city["found.yr"])))
+            candidate_city["found.yr"] = parseInt(raw_city["found.yr"], 10);
+          if (gaz_id === "russian_invasion_of_ukraine" && (candidate_city.country === "Ukraine" || raw_city._war_displacement === true))
             candidate_city._war_displacement_years = Object.keys(clean_pop).map(Number).filter(function (arg0_n) { return !isNaN(arg0_n); });
 
           let candidate_names = (typeof uud.getAllCityNames === "function") ? uud.getAllCityNames(candidate_city) : [candidate_city.name];
@@ -232,6 +282,8 @@
               uud.checkExactNameMatch(ex_city, candidate_city) : (ex_city.name === candidate_city.name);
 
             if (is_name_match || (is_cross_project && dist_km <= exact_coord_match_km)) {
+              if (dist_km > 1.0 && !this.hasCompatiblePopulationScale(ex_city.population, candidate_city.population))
+                continue;
               let ex_yr_nums = Object.keys(ex_city.population).map(Number).filter(function (arg0_n) { return !isNaN(arg0_n); }).sort(function (arg0_a, arg1_b) { return arg0_a - arg1_b; });
               let ex_max_yr = ex_yr_nums[ex_yr_nums.length - 1];
               let ex_min_yr = ex_yr_nums[0];
@@ -248,6 +300,7 @@
               }
               if (is_temporally_compatible) {
                 matched_key = ex_key;
+                ex_city._matched_max_yr = ex_max_yr;
                 break;
               }
             }
@@ -270,6 +323,15 @@
                 ex_city.population[yr] = Math.round(Math.sqrt(ex_city.population[yr]*candidate_city.population[yr]));
               }
             }
+
+            let prev_max_yr = Number.isFinite(ex_city._matched_max_yr) ? ex_city._matched_max_yr : -Infinity;
+            delete ex_city._matched_max_yr;
+            if (candidate_city["found.yr"] !== undefined && (ex_city["found.yr"] === undefined || candidate_city["found.yr"] < ex_city["found.yr"]))
+              ex_city["found.yr"] = candidate_city["found.yr"];
+            if (cand_max_yr > prev_max_yr && !candidate_city._raw_lapsed)
+              ex_city._raw_lapsed = false;
+            else if (candidate_city._raw_lapsed && cand_max_yr >= prev_max_yr)
+              ex_city._raw_lapsed = true;
 
             if (Array.isArray(candidate_city._war_displacement_years)) {
               if (!ex_city._war_displacement_years) ex_city._war_displacement_years = [];

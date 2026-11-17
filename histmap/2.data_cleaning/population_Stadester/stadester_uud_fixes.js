@@ -223,9 +223,22 @@
               let agg = aggs[a];
               if (agg.key === local_city.key) continue;
               if (population_Stadester_uud.haversineDistance(agg.coords, local_city.coords) <= 250) {
-                let name_a = population_Stadester_uud.processCityName(local_city.name);
-                let name_b = population_Stadester_uud.processCityName(agg.name);
-                if (name_a && name_b && (name_a === name_b || name_b.includes(name_a) || name_a.includes(name_b))) { metro_match = agg; break; }
+                let is_name_overlap = population_Stadester_uud.checkExactNameMatch(local_city, agg);
+                if (!is_name_overlap) {
+                  let all_a = population_Stadester_uud.getAllCityNames(local_city);
+                  let all_b = population_Stadester_uud.getAllCityNames(agg);
+                  for (let ax = 0; ax < all_a.length && !is_name_overlap; ax++) {
+                    for (let bx = 0; bx < all_b.length; bx++) {
+                      let na = all_a[ax];
+                      let nb = all_b[bx];
+                      if (na.length >= 4 && nb.length >= 4 && (na === nb || nb.includes(na) || na.includes(nb))) {
+                        is_name_overlap = true;
+                        break;
+                      }
+                    }
+                  }
+                }
+                if (is_name_overlap) { metro_match = agg; break; }
               }
             }
           }

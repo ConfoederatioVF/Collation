@@ -7,6 +7,50 @@
     try { require(path.join(__dirname, "config", "stadester_config.js")); } catch (e) {}
   
   /**
+   * Normalises Eastern European / Slavic romanisation variants so Populstat caron backticks
+   * and modern transliterations match reliably within compatible jurisdictions.
+   * @alias population_Stadester_uud.normaliseSlavicName
+   *
+   * @param {string} arg0_name
+   *
+   * @returns {string}
+   */
+  population_Stadester_uud.normaliseSlavicName = function (arg0_name) {
+    //Convert from parameters
+    let name = population_Stadester_uud.processCityName(arg0_name);
+
+    //Guard clauses
+    if (!name) return "";
+
+    //Function body
+    let norm = name
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/['’`´\-.,\s]/g, "")
+      .replace(/shch/g, "sc")
+      .replace(/szcz/g, "sc")
+      .replace(/zh/g, "z")
+      .replace(/sh/g, "s")
+      .replace(/sz/g, "s")
+      .replace(/ch/g, "c")
+      .replace(/cz/g, "c")
+      .replace(/kh/g, "h")
+      .replace(/ts/g, "c")
+      .replace(/j/g, "y")
+      .replace(/yi|iy|yy|ii/g, "i")
+      .replace(/y/g, "i")
+      .replace(/ia/g, "a")
+      .replace(/ie/g, "e")
+      .replace(/io/g, "o")
+      .replace(/iu/g, "u")
+      .replace(/(.)\1+/g, "$1");
+
+    //Return statement
+    return norm;
+  };
+
+
+  /**
    * Normalises and cleans city names for fuzzy semantic matching.
    * @alias population_Stadester_uud.processCityName
    * 
@@ -199,12 +243,26 @@
     let city_b = arg1_city_b;
     
     //Declare local instance variables
+    let c_a = (city_a && city_a.country) ? String(city_a.country).toLowerCase().trim() : "";
+    let c_b = (city_b && city_b.country) ? String(city_b.country).toLowerCase().trim() : "";
     let names_a = population_Stadester_uud.getAllCityNames(city_a);
     let names_b = population_Stadester_uud.getAllCityNames(city_b);
+    let slavic_countries = [
+      "belarus", "bulgaria", "estonia", "finland", "kazakhstan", "latvia",
+      "lithuania", "moldova", "poland", "russia", "serbia", "ukraine", "ussr"
+    ];
     
     for (let x = 0; x < names_a.length; x++)
       for (let y = 0; y < names_b.length; y++)
         if (names_a[x] && names_a[x] === names_b[y]) return true;
+
+    if (c_a && c_a === c_b && slavic_countries.includes(c_a)) {
+      let s_a = names_a.map(population_Stadester_uud.normaliseSlavicName).filter(function (arg0_s) { return arg0_s.length >= 4; });
+      let s_b = names_b.map(population_Stadester_uud.normaliseSlavicName).filter(function (arg0_s) { return arg0_s.length >= 4; });
+      for (let x = 0; x < s_a.length; x++)
+        for (let y = 0; y < s_b.length; y++)
+          if (s_a[x] === s_b[y]) return true;
+    }
     
     //Return statement
     return false;
@@ -318,6 +376,15 @@
       if (candidate_names[i] && candidate_names[i] !== target_city.name && !target_city.other_names.includes(candidate_names[i]))
         target_city.other_names.push(candidate_names[i]);
     if (source_city.is_agglomeration_of) target_city.is_agglomeration_of = source_city.is_agglomeration_of;
+    if (source_city["found.yr"] !== undefined && (target_city["found.yr"] === undefined || Number(source_city["found.yr"]) < Number(target_city["found.yr"])))
+      target_city["found.yr"] = source_city["found.yr"];
+    if (source_city._raw_lapsed === true)
+      target_city._raw_lapsed = true;
+    if (Array.isArray(source_city.original_names)) {
+      for (let i = 0; i < source_city.original_names.length; i++)
+        if (source_city.original_names[i] && !target_city.original_names.includes(source_city.original_names[i]))
+          target_city.original_names.push(source_city.original_names[i]);
+    }
     if (Array.isArray(source_city._war_displacement_years)) {
       if (!target_city._war_displacement_years) target_city._war_displacement_years = [];
       for (let i = 0; i < source_city._war_displacement_years.length; i++)

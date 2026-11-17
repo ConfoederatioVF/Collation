@@ -543,6 +543,8 @@
     
     //3D. Partition 5-arcmin GHS-POP gridcells across post-empirical years for settlements missing GHS-UCDB coverage and restore protected overrides
     population_Stadester_ghs_pop.partitionGHSPopGridcells(stadester_obj, city_entries, options);
+    if (typeof population_Stadester_ghs_pop.restoreEmpiricalPolarisTrajectories === "function")
+      population_Stadester_ghs_pop.restoreEmpiricalPolarisTrajectories(city_entries, options, stadester_obj);
     population_Stadester_ghs_pop.restoreManualEntries(city_entries, options);
     population_Stadester_ghs_pop.restoreWarDisplacementYears(city_entries, options);
     

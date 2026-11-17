@@ -11,19 +11,19 @@
         require(path.join(cur_dir, "StadesterPartitionIO.js"));
       if (!global.ViscountGazetteerLoader && fs.existsSync(path.join(cur_dir, "ViscountGazetteerLoader.js")))
         require(path.join(cur_dir, "ViscountGazetteerLoader.js"));
-      if (!global.population_Stadester_uud && fs.existsSync(path.join(cur_dir, "stadester_uud.js")))
+      if ((!global.population_Stadester_uud || !global.population_Stadester_uud.initialiseUUD) && fs.existsSync(path.join(cur_dir, "stadester_uud.js")))
         require(path.join(cur_dir, "stadester_uud.js"));
       if ((!global.population_Stadester_uud || !global.population_Stadester_uud.fixStadesterErrors) && fs.existsSync(path.join(cur_dir, "stadester_uud_fixes.js")))
         require(path.join(cur_dir, "stadester_uud_fixes.js"));
-      if (!global.population_Stadester_ghsl_helpers && fs.existsSync(path.join(cur_dir, "stadester_ghsl_helpers.js")))
+      if ((!global.population_Stadester_ghsl || !global.population_Stadester_ghsl.getNormalisedCityNames) && fs.existsSync(path.join(cur_dir, "stadester_ghsl_helpers.js")))
         require(path.join(cur_dir, "stadester_ghsl_helpers.js"));
-      if (!global.population_Stadester_ghs_pop && fs.existsSync(path.join(cur_dir, "stadester_ghs_pop.js")))
+      if ((!global.population_Stadester_ghs_pop || !global.population_Stadester_ghs_pop.partitionGHSPopGridcells) && fs.existsSync(path.join(cur_dir, "stadester_ghs_pop.js")))
         require(path.join(cur_dir, "stadester_ghs_pop.js"));
       if ((!global.population_Stadester_ghsl || !global.population_Stadester_ghsl.integrateGHSLIntoStadester) && fs.existsSync(path.join(cur_dir, "stadester_ghsl.js")))
         require(path.join(cur_dir, "stadester_ghsl.js"));
-      if (!global.population_Stadester_density && fs.existsSync(path.join(cur_dir, "stadester_density.js")))
+      if ((!global.population_Stadester_density || !global.population_Stadester_density.processCitiesAreas) && fs.existsSync(path.join(cur_dir, "stadester_density.js")))
         require(path.join(cur_dir, "stadester_density.js"));
-      if (!global.population_Stadester_rasters && fs.existsSync(path.join(cur_dir, "stadester_rasters.js")))
+      if ((!global.population_Stadester_rasters || !global.population_Stadester_rasters.getCoordsPixel) && fs.existsSync(path.join(cur_dir, "stadester_rasters.js")))
         require(path.join(cur_dir, "stadester_rasters.js"));
       if ((!global.population_Stadester_rasters || !global.population_Stadester_rasters.reconcileStadesterDemographics) && fs.existsSync(path.join(cur_dir, "stadester_rasters_reconcile.js")))
         require(path.join(cur_dir, "stadester_rasters_reconcile.js"));
