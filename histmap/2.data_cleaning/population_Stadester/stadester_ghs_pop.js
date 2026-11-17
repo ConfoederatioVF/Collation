@@ -279,10 +279,18 @@
     key_str = String(key || city.key || "");
     if (key_str.includes("_chandler_modelski") && bounds.raw_max_year < cutoff_year) return false;
     if (
+      key_str.toLowerCase().includes("agglomeration") &&
+      (city.country === "Russia" || city.country === "Ukraine" || city.country === "Belarus")
+    ) return false;
+    if (
       typeof population_Stadester_uud !== "undefined" &&
       typeof population_Stadester_uud.hasCitySource === "function" &&
       population_Stadester_uud.hasCitySource(city, "POLARIS") &&
-      bounds.raw_max_year < 1800
+      bounds.raw_max_year < cutoff_year
+    ) return false;
+    if (
+      (city.country === "Russia" || city.country === "Ukraine" || city.country === "Belarus") &&
+      bounds.raw_max_year < cutoff_year
     ) return false;
     if (bounds.raw_max_year >= cutoff_year) return true;
     

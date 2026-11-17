@@ -13,6 +13,8 @@
         require(path.join(cur_dir, "ViscountGazetteerLoader.js"));
       if ((!global.population_Stadester_uud || !global.population_Stadester_uud.initialiseUUD) && fs.existsSync(path.join(cur_dir, "stadester_uud.js")))
         require(path.join(cur_dir, "stadester_uud.js"));
+      if ((!global.population_Stadester_uud || !global.population_Stadester_uud.repairGHSLCityNames) && fs.existsSync(path.join(cur_dir, "stadester_uud_ghsl_names.js")))
+        require(path.join(cur_dir, "stadester_uud_ghsl_names.js"));
       if ((!global.population_Stadester_uud || !global.population_Stadester_uud.fixStadesterErrors) && fs.existsSync(path.join(cur_dir, "stadester_uud_fixes.js")))
         require(path.join(cur_dir, "stadester_uud_fixes.js"));
       if ((!global.population_Stadester_ghsl || !global.population_Stadester_ghsl.getNormalisedCityNames) && fs.existsSync(path.join(cur_dir, "stadester_ghsl_helpers.js")))

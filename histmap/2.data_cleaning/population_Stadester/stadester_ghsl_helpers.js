@@ -498,7 +498,19 @@
     
     is_agglom_pair = raw_key_a.toLowerCase().includes("agglomeration") ||
       raw_key_b.toLowerCase().includes("agglomeration");
-    if (dist_km <= 5 && !is_agglom_pair && population_Stadester_ghsl.matchesAnyGHSLToken(entry_a.norm_names, entry_b.norm_names)) {
+    if (
+      dist_km <= (is_agglom_pair ? 15 : 5) &&
+      population_Stadester_ghsl.matchesAnyGHSLToken(entry_a.norm_names, entry_b.norm_names)
+    ) {
+      //Return statement
+      return true;
+    }
+    if (
+      dist_km <= 15 &&
+      typeof population_Stadester_uud !== "undefined" &&
+      typeof population_Stadester_uud.checkExactNameMatch === "function" &&
+      population_Stadester_uud.checkExactNameMatch(entry_a.city, entry_b.city)
+    ) {
       //Return statement
       return true;
     }

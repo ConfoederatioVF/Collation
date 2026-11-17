@@ -24,6 +24,13 @@
 
     //Function body
     let norm = name
+      .toLowerCase()
+      .replace(/[ûŭ]/g, "u")
+      .replace(/[ёë]/g, "e")
+      .replace(/['’`´]o/g, "e")
+      .replace(/yo|jo/g, "e")
+      .replace(/aw/g, "au")
+      .replace(/ow/g, "ou")
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "")
       .replace(/['’`´\-.,\s]/g, "")
@@ -32,9 +39,7 @@
       .replace(/zh/g, "z")
       .replace(/sh/g, "s")
       .replace(/sz/g, "s")
-      .replace(/ch/g, "c")
-      .replace(/cz/g, "c")
-      .replace(/kh/g, "h")
+      .replace(/kh|ch|cz/g, "c")
       .replace(/ts/g, "c")
       .replace(/j/g, "y")
       .replace(/yi|iy|yy|ii/g, "i")
@@ -257,11 +262,47 @@
         if (names_a[x] && names_a[x] === names_b[y]) return true;
 
     if (c_a && c_a === c_b && slavic_countries.includes(c_a)) {
+      let alias_pairs = [
+        ["Dymytrov", "Myrnohrad"],
+        ["Krasnoarmijs'k", "Pokrovsk"],
+        ["Stachanov", "Kadiivka"],
+        ["Krasnyj Lu`c", "Khrustalnyi"],
+        ["Torez", "Chystiakove"],
+        ["Krasnodon", "Sorokyne"],
+        ["Sverdlovs'k", "Dovzhansk"],
+        ["Kirovsk", "Holubivka"],
+        ["Illi`civs'k", "Chornomorsk"],
+        ["Komsomol's'k", "Horishni Plavni"],
+        ["Atomgrad", "Zheleznogorsk"],
+        ["Ivanovo", "Ivanovo-Voznesensk"],
+        ["Abakan", "Ust-Abakanskoe"],
+        ["Korolev", "Kaliningrad"],
+        ["Rostov", "Rostov Veliky"],
+        ["Mstislaw", "Mscislau"],
+        ["Raha`caû", "Rahachow"],
+        ["Beryozovsky", "Berëzovski"],
+        ["Gus'-Chrustal'nyj", "Gus'-Hrustal'nyj"],
+        ["Charkiv", "Kharkiv"],
+        ["Borovi`'ci", "Borovichi"]
+      ];
+      let has_close_coords = Boolean(
+        city_a && city_b && Array.isArray(city_a.coords) && Array.isArray(city_b.coords) &&
+        typeof population_Stadester_uud.haversineDistance === "function" &&
+        population_Stadester_uud.haversineDistance(city_a.coords, city_b.coords) <= 18
+      );
       let s_a = names_a.map(population_Stadester_uud.normaliseSlavicName).filter(function (arg0_s) { return arg0_s.length >= 4; });
       let s_b = names_b.map(population_Stadester_uud.normaliseSlavicName).filter(function (arg0_s) { return arg0_s.length >= 4; });
       for (let x = 0; x < s_a.length; x++)
         for (let y = 0; y < s_b.length; y++)
           if (s_a[x] === s_b[y]) return true;
+      if (has_close_coords) {
+        for (let i = 0; i < alias_pairs.length; i++) {
+          let p0 = population_Stadester_uud.normaliseSlavicName(alias_pairs[i][0]);
+          let p1 = population_Stadester_uud.normaliseSlavicName(alias_pairs[i][1]);
+          if ((s_a.includes(p0) && s_b.includes(p1)) || (s_a.includes(p1) && s_b.includes(p0)))
+            return true;
+        }
+      }
     }
     
     //Return statement
@@ -662,362 +703,205 @@
     return wcp_obj;
   };
   
-  /**
-   * Checks whether a city name string contains corrupted Unicode replacement characters, question marks, or placeholder text.
-   * @alias population_Stadester_uud.isCorruptedCityName
-   * 
-   * @param {string} arg0_str
-   * 
-   * @returns {boolean}
-   */
-  population_Stadester_uud.isCorruptedCityName = function (arg0_str) {
-    //Convert from parameters
-    let str = (arg0_str !== undefined && arg0_str !== null) ? `${arg0_str}` : "";
-    
-    //Declare local instance variables
-    let trimmed = str.trim();
-    
-    //Guard clauses
-    if (!trimmed) return true;
-    if (trimmed === "0" || trimmed === "Unknown" || trimmed === "Settlement" || /^[?\s\-_.,]+$/.test(trimmed))
-      return true;
-    if (trimmed.includes("?") || trimmed.includes("\uFFFD") || trimmed.includes("\u00EF\u00BF\u00BD"))
-      return true;
-    
-    //Return statement
-    return false;
-  };
+  if (typeof require !== "undefined")
+    try { require(path.join(__dirname, "stadester_uud_ghsl_names.js")); } catch (e) {}
   
   /**
-   * Checks whether a candidate name denotes a subordinate district, prefecture, or borough.
-   * @alias population_Stadester_uud.isSubordinateDistrictName
-   * 
-   * @param {string} arg0_name
-   * 
-   * @returns {boolean}
+   * Re-keys Moscow Oblast Korolev away from Kaliningrad-Russia and absorbs duplicate non-POLARIS twins within 5 km.
+   * @alias population_Stadester_uud.absorbSecondaryNonPolarisTwins
+   *
+   * @param {Object} arg0_return_obj
+   * @param {Map} arg1_city_grid
+   * @param {Object} arg2_actual_city
+   * @param {Object} arg3_local_city
+   * @param {number} arg4_min_pol_yr
+   * @param {Function} arg5_get_grid_cells
+   * @param {Function} arg6_add_to_grid
+   * @param {Function} arg7_is_agglomeration
+   *
+   * @returns {Object}
    */
-  population_Stadester_uud.isSubordinateDistrictName = function (arg0_name) {
+  population_Stadester_uud.absorbSecondaryNonPolarisTwins = function (
+    arg0_return_obj,
+    arg1_city_grid,
+    arg2_actual_city,
+    arg3_local_city,
+    arg4_min_pol_yr,
+    arg5_get_grid_cells,
+    arg6_add_to_grid,
+    arg7_is_agglomeration
+  ) {
     //Convert from parameters
-    let name = (arg0_name !== undefined && arg0_name !== null) ? `${arg0_name}` : "";
-    
+    let return_obj = arg0_return_obj;
+    let city_grid = arg1_city_grid;
+    let actual_city = arg2_actual_city;
+    let local_city = arg3_local_city;
+    let min_pol_yr_for_cut = arg4_min_pol_yr;
+    let getGridCells = arg5_get_grid_cells;
+    let addToGrid = arg6_add_to_grid;
+    let isAgglomeration = arg7_is_agglomeration;
+
     //Declare local instance variables
-    let district_terms = [
-      "arrondissement", "borough", "county", "district", "locality", "new area",
-      "prefecture", "subdistrict", "subprefecture", "suburb", "township", "ward", "zone"
-    ];
-    let lower = name.toLowerCase();
-    
+    let peer_cells;
+
     //Guard clauses
-    if (!name) return false;
-    
-    //Function body
-    for (let i = 0; i < district_terms.length; i++)
-      if (lower.includes(district_terms[i])) return true;
-    
-    //Return statement
-    return false;
-  };
-  
-  /**
-   * Strips parenthetical remarks, dataset prefixes, and delimiters from candidate city name strings.
-   * @alias population_Stadester_uud.cleanCandidateCityString
-   * 
-   * @param {string} arg0_name
-   * 
-   * @returns {string}
-   */
-  population_Stadester_uud.cleanCandidateCityString = function (arg0_name) {
-    //Convert from parameters
-    let name = (arg0_name !== undefined && arg0_name !== null) ? `${arg0_name}` : "";
-    
-    //Declare local instance variables
-    let cleaned;
-    
-    //Guard clauses
-    if (!name) return "";
-    
-    //Function body
-    cleaned = name.replace(/\s*\([^)]*\)/g, "").trim();
-    cleaned = cleaned.replace(/^ghsl-/i, "").replace(/^stadester-/i, "").replace(/^oxford-/i, "").trim();
-    cleaned = cleaned.replace(/^-/, "").trim();
-    
-    //Return statement
-    return cleaned;
-  };
-  
-  /**
-   * Parses a raw semicolon-delimited city name list into cleaned, evaluated candidate objects.
-   * @alias population_Stadester_uud.parseDelimitedCandidates
-   * 
-   * @param {string} arg0_raw_name
-   * 
-   * @returns {Array<Object>}
-   */
-  population_Stadester_uud.parseDelimitedCandidates = function (arg0_raw_name) {
-    //Convert from parameters
-    let raw_name = (arg0_raw_name !== undefined && arg0_raw_name !== null) ? `${arg0_raw_name}` : "";
-    
-    //Declare local instance variables
-    let candidate_records = [];
-    let raw_parts;
-    
-    //Guard clauses
-    if (!raw_name) return [];
-    
-    //Function body
-    raw_parts = raw_name.split(";");
-    
-    for (let i = 0; i < raw_parts.length; i++) {
-      let raw_part = raw_parts[i].trim();
-      if (!raw_part) continue;
-      
-      let cleaned = population_Stadester_uud.cleanCandidateCityString(raw_part);
-      let is_corrupt = population_Stadester_uud.isCorruptedCityName(cleaned);
-      let is_subordinate = population_Stadester_uud.isSubordinateDistrictName(cleaned);
-      
-      candidate_records.push({ cleanName: cleaned, hasSubordinateTerm: is_subordinate, isCorrupted: is_corrupt, originalText: raw_part, rank: i });
+    if (!return_obj || !actual_city || !local_city || !Array.isArray(actual_city.coords)) return actual_city;
+
+    //Function body: 1. Re-key Moscow Oblast Korolev away from Kaliningrad-Russia so Kaliningrad RU.23 keeps its key
+    if (actual_city.key === "Kaliningrad-Russia" && local_city.key === "Korolev-Russia") {
+      let old_cell = `${Math.floor(Number(actual_city.coords[0]))},${Math.floor(Number(actual_city.coords[1]))}`;
+      if (city_grid && city_grid.has(old_cell)) city_grid.get(old_cell).delete("Kaliningrad-Russia");
+      delete return_obj["Kaliningrad-Russia"];
+      if (return_obj["Korolev-Russia"] && return_obj["Korolev-Russia"] !== actual_city) {
+        let kpeer = return_obj["Korolev-Russia"];
+        if (Array.isArray(kpeer.other_names)) {
+          if (!actual_city.other_names) actual_city.other_names = [];
+          for (let kn = 0; kn < kpeer.other_names.length; kn++)
+            if (kpeer.other_names[kn] && !actual_city.other_names.includes(kpeer.other_names[kn]))
+              actual_city.other_names.push(kpeer.other_names[kn]);
+        }
+        population_Stadester_uud.appendCitySources(actual_city, kpeer.sources);
+        if (city_grid && city_grid.has(old_cell)) city_grid.get(old_cell).delete("Korolev-Russia");
+        delete return_obj["Korolev-Russia"];
+      }
+      actual_city.key = "Korolev-Russia";
+      if (typeof addToGrid === "function") addToGrid(actual_city);
     }
-    
-    //Return statement
-    return candidate_records;
-  };
-  
-  /**
-   * Selects the primary non-corrupted, non-subordinate urban core city name from a delimited candidate list.
-   * @alias population_Stadester_uud.getPrimaryCityName
-   * 
-   * @param {string} arg0_raw_name
-   * @param {number} [arg1_target_pop=0]
-   * 
-   * @returns {string}
-   */
-  population_Stadester_uud.getPrimaryCityName = function (arg0_raw_name, arg1_target_pop) {
-    //Convert from parameters
-    let raw_name = (arg0_raw_name !== undefined && arg0_raw_name !== null) ? `${arg0_raw_name}` : "";
-    let target_pop = (arg1_target_pop !== undefined) ? Number(arg1_target_pop) : 0;
-    
-    //Declare local instance variables
-    let cand_zero;
-    let candidates = population_Stadester_uud.parseDelimitedCandidates(raw_name);
-    
-    //Guard clauses
-    if (candidates.length === 0)
-      return population_Stadester_uud.cleanCandidateCityString(raw_name);
-    
-    cand_zero = candidates[0];
-    if (!cand_zero.isCorrupted)
-      return cand_zero.cleanName;
-    
-    for (let i = 1; i < candidates.length; i++)
-      if (!candidates[i].isCorrupted && !candidates[i].hasSubordinateTerm) return candidates[i].cleanName;
-    if (target_pop < 150000)
-      for (let i = 1; i < candidates.length; i++)
-        if (!candidates[i].isCorrupted) return candidates[i].cleanName;
-    
-    //Return statement
-    return cand_zero.cleanName || population_Stadester_uud.cleanCandidateCityString(raw_name);
-  };
-  
-  /**
-   * Loads GHSL source CSV tables into a memory map of ID_UC_G0 / ID_MTUC_G0 to clean city names.
-   * @alias population_Stadester_uud.loadGHSLCsvNames
-   * 
-   * @param {string} [arg0_csv_path]
-   * 
-   * @returns {Map<string, string>}
-   */
-  population_Stadester_uud.loadGHSLCsvNames = function (arg0_csv_path) {
-    //Convert from parameters
-    let csv_path = arg0_csv_path;
-    
-    //Declare local instance variables
-    let candidate_paths = [];
-    let lines;
-    let raw_text;
-    let resolved_path = "";
-    
-    //Guard clauses
-    if (global.population_Stadester_GHSL_map && global.population_Stadester_GHSL_map.size > 0 && !csv_path)
-      return global.population_Stadester_GHSL_map;
-    
-    if (!global.population_Stadester_GHSL_map)
-      global.population_Stadester_GHSL_map = new Map();
-    
-    //Function body
-    if (csv_path && fs.existsSync(csv_path)) {
-      resolved_path = csv_path;
-    } else {
-      candidate_paths = [
-        "F:/Active Projects/Project 1436 - Dataview/data/stadester/GHSL.csv", path.join(h1, "population_Stadester", "ghsl", "GHSL.csv"),
-        path.join(h1, "population_GHSL", "GHSL.csv"), path.join(h1, "population_GHSL", "GHS_UCDB_MTUC_GLOBE_R2024A.csv"),
-        "D:/Project 1436 - Dataview/data/stadester/GHSL.csv"
-      ];
-      for (let i = 0; i < candidate_paths.length; i++)
-        if (fs.existsSync(candidate_paths[i])) { resolved_path = candidate_paths[i]; break; }
-    }
-    
-    if (!resolved_path || !fs.existsSync(resolved_path)) {
-      console.warn(`[population_Stadester_uud] GHSL source file not found.`);
-      return global.population_Stadester_GHSL_map;
-    }
-    
-    try {
-      raw_text = fs.readFileSync(resolved_path, "utf8").replace(/^\uFEFF/, "");
-      lines = raw_text.split(/\r?\n/);
-      
-      for (let i = 1; i < lines.length; i++) {
-        let line = lines[i].trim();
-        if (!line) continue;
-        
-        let parts = line.split(";");
-        if (parts.length >= 2) {
-          let id_str = parts[0].trim();
-          let city_name = parts[1].trim();
-          if (id_str && city_name && city_name !== "0" && !population_Stadester_uud.isCorruptedCityName(city_name))
-            global.population_Stadester_GHSL_map.set(id_str, city_name);
+
+    //2. Absorb duplicate non-POLARIS non-agglomeration same-country twin within 5 km
+    if (typeof getGridCells === "function" && city_grid) {
+      peer_cells = getGridCells(actual_city.coords, 0.15);
+      for (let pc = 0; pc < peer_cells.length; pc++) {
+        let pset = city_grid.get(peer_cells[pc]);
+        if (!pset) continue;
+        let pkeys = Array.from(pset);
+        for (let pk_i = 0; pk_i < pkeys.length; pk_i++) {
+          let pk = pkeys[pk_i];
+          let peer = return_obj[pk];
+          if (!peer || peer === actual_city || (typeof isAgglomeration === "function" && isAgglomeration(peer))) continue;
+          if (typeof population_Stadester_uud.hasCitySource === "function" && population_Stadester_uud.hasCitySource(peer, "POLARIS")) continue;
+          if (peer.country !== actual_city.country) continue;
+          if (!Array.isArray(peer.coords) || population_Stadester_uud.haversineDistance(actual_city.coords, peer.coords) > 5) continue;
+          if (!population_Stadester_uud.checkExactNameMatch(actual_city, peer)) continue;
+          if (!actual_city.other_names) actual_city.other_names = [];
+          if (peer.name && peer.name !== actual_city.name && !actual_city.other_names.includes(peer.name))
+            actual_city.other_names.push(peer.name);
+          if (Array.isArray(peer.other_names)) {
+            for (let pn = 0; pn < peer.other_names.length; pn++)
+              if (peer.other_names[pn] && peer.other_names[pn] !== actual_city.name && !actual_city.other_names.includes(peer.other_names[pn]))
+                actual_city.other_names.push(peer.other_names[pn]);
+          }
+          if (peer.population && Number.isFinite(min_pol_yr_for_cut)) {
+            let cut_p = Math.min(1897, min_pol_yr_for_cut);
+            let pyrs = Object.keys(peer.population);
+            for (let pi = 0; pi < pyrs.length; pi++) {
+              let pyr_n = parseInt(pyrs[pi], 10);
+              if (Number.isFinite(pyr_n) && pyr_n < cut_p && actual_city.population[pyrs[pi]] === undefined)
+                actual_city.population[pyrs[pi]] = peer.population[pyrs[pi]];
+            }
+          }
+          population_Stadester_uud.appendCitySources(actual_city, peer.sources);
+          pset.delete(pk);
+          delete return_obj[pk];
         }
       }
-      console.log(`- Loaded ${global.population_Stadester_GHSL_map.size} clean city names from GHSL source file (${resolved_path}).`);
-    } catch (e) {
-      console.warn(`[population_Stadester_uud] Error loading GHSL source file:`, e);
     }
-    
+
     //Return statement
-    return global.population_Stadester_GHSL_map;
+    return actual_city;
   };
-  
+
   /**
-   * Resolves a city display name, prioritizing GHSL source table lookups for GHSL entries and primary core names.
-   * @alias population_Stadester_uud.resolveCityDisplayName
-   * 
-   * @param {string} arg0_key
-   * @param {string} [arg1_raw_name]
-   * @param {Array<number>} [arg2_coords]
-   * @param {number} [arg3_pop=0]
-   * @param {number|string} [arg4_id]
-   * 
-   * @returns {string}
-   */
-  population_Stadester_uud.resolveCityDisplayName = function (arg0_key, arg1_raw_name, arg2_coords, arg3_pop, arg4_id) {
-    //Convert from parameters
-    let coords = arg2_coords;
-    let id_val = arg4_id;
-    let key = (arg0_key !== undefined && arg0_key !== null) ? `${arg0_key}` : "";
-    let pop = (arg3_pop !== undefined) ? Number(arg3_pop) : 0;
-    let raw_name = (arg1_raw_name !== undefined && arg1_raw_name !== null) ? `${arg1_raw_name}` : "";
-    
-    //Declare local instance variables
-    let ghsl_map = population_Stadester_uud.loadGHSLCsvNames();
-    let key_clean;
-    let lookup_id = "";
-    let primary;
-    
-    //1. If key is ghsl- or id is passed, lookup in GHSL source CSV table
-    if (key.toLowerCase().startsWith("ghsl-") || id_val !== undefined) {
-      if (id_val !== undefined && id_val !== null) lookup_id = String(id_val);
-      if (!lookup_id && key.toLowerCase().startsWith("ghsl-")) {
-        let match = key.match(/\d+/);
-        if (match) lookup_id = match[0];
-      }
-      if (lookup_id && ghsl_map.has(lookup_id)) {
-        let csv_name = ghsl_map.get(lookup_id);
-        if (csv_name && csv_name !== "0" && !population_Stadester_uud.isCorruptedCityName(csv_name))
-          return csv_name;
-      }
-    }
-    
-    //2. Extract primary candidate from raw_name
-    if (raw_name && raw_name !== "0") {
-      primary = population_Stadester_uud.getPrimaryCityName(raw_name, pop);
-      if (primary && primary !== "0" && !population_Stadester_uud.isCorruptedCityName(primary))
-        return primary;
-    }
-    
-    //3. Fallback to clean candidate from key string
-    key_clean = population_Stadester_uud.cleanCandidateCityString(key);
-    if (key_clean && key_clean !== "0" && !population_Stadester_uud.isCorruptedCityName(key_clean))
-      return key_clean;
-    
-    //Return statement
-    return population_Stadester_uud.cleanCandidateCityString(key);
-  };
-  
-  /**
-   * Repairs a single city entry's name using GHSL source table lookups and primary core candidate parsing.
-   * @alias population_Stadester_uud.repairGHSLCityName
-   * 
-   * @param {Object} arg0_city
-   * @param {Object} [arg1_options]
-   * 
+   * Cleans post-merge UUD anomalies: terminates RU/UA/BY agglomerations pre-1975 and scrubs 1-to-2-year post-1975 U/V-spikes.
+   * @alias population_Stadester_uud.cleanPostMergeUUD
+   *
+   * @param {Object} arg0_uud_obj
+   *
    * @returns {Object}
    */
-  population_Stadester_uud.repairGHSLCityName = function (arg0_city, arg1_options) {
+  population_Stadester_uud.cleanPostMergeUUD = function (arg0_uud_obj) {
     //Convert from parameters
-    let city = arg0_city;
-    let options = (arg1_options) ? arg1_options : {};
-    
-    //Declare local instance variables
-    let max_pop = 0;
-    let old_name;
-    let resolved_name;
-    
-    //Guard clauses
-    if (!city) return city;
-    
-    //Function body
-    max_pop = population_Stadester_uud.getPeakPopulation(city.population);
-    resolved_name = population_Stadester_uud.resolveCityDisplayName(city.key || "", city.name || "", city.coords, max_pop, city.id);
-    
-    if (resolved_name && !population_Stadester_uud.isCorruptedCityName(resolved_name)) {
-      if (city.name && city.name !== resolved_name) {
-        old_name = city.name;
-        if (!city.other_names) city.other_names = [];
-        if (!city.other_names.includes(old_name)) city.other_names.push(old_name);
-      }
-      city.name = resolved_name;
-    }
-    
-    //Return statement
-    return city;
-  };
-  
-  /**
-   * Batch repairs all city entries in a Stadestér or UUD dataset using GHSL source table lookups.
-   * @alias population_Stadester_uud.repairGHSLCityNames
-   * 
-   * @param {Object} arg0_cities_obj
-   * @param {Object} [arg1_options]
-   * 
-   * @returns {Object}
-   */
-  population_Stadester_uud.repairGHSLCityNames = function (arg0_cities_obj, arg1_options) {
-    //Convert from parameters
-    let cities_obj = arg0_cities_obj;
-    let options = (arg1_options) ? arg1_options : {};
-    
+    let uud_obj = arg0_uud_obj;
+
     //Declare local instance variables
     let all_keys;
-    let repaired_count = 0;
-    
+    let former_ussr_core = ["Belarus", "Russia", "Ukraine"];
+
     //Guard clauses
-    if (!cities_obj) return {};
-    
+    if (!uud_obj || typeof uud_obj !== "object") return uud_obj;
+
     //Function body
-    all_keys = Object.keys(cities_obj);
+    all_keys = Object.keys(uud_obj);
     for (let i = 0; i < all_keys.length; i++) {
-      let city = cities_obj[all_keys[i]];
-      let prev_name = city ? city.name : "";
-      population_Stadester_uud.repairGHSLCityName(city, options);
-      if (city && city.name !== prev_name) repaired_count++;
+      let city = uud_obj[all_keys[i]];
+      if (!city || !city.population) continue;
+
+      let key_lower = String(all_keys[i] || "").toLowerCase();
+      let name_lower = String(city.name || "").toLowerCase();
+      let is_agglom = Boolean(city.is_agglomeration) || key_lower.includes("agglomeration") || name_lower.includes("agglomeration");
+      if (is_agglom && former_ussr_core.includes(city.country)) {
+        let p_keys = Object.keys(city.population);
+        for (let x = 0; x < p_keys.length; x++) {
+          let yr_num = parseInt(p_keys[x], 10);
+          if (Number.isFinite(yr_num) && yr_num >= 1975)
+            delete city.population[p_keys[x]];
+        }
+        continue;
+      }
+
+      let has_war = Array.isArray(city._war_displacement_years) && city._war_displacement_years.length > 0;
+      for (let pass = 0; pass < 2; pass++) {
+        let yrs = Object.keys(city.population).map(Number).filter(function (arg0_n) {
+          return Number.isFinite(arg0_n) && arg0_n >= 1975 && Number(city.population[arg0_n]) > 0;
+        }).sort(function (arg0_a, arg1_b) { return arg0_a - arg1_b; });
+        let removed = false;
+
+        for (let idx = 1; idx < yrs.length - 1; idx++) {
+          let y_prev = yrs[idx - 1];
+          let y_cur = yrs[idx];
+          let y_next = yrs[idx + 1];
+          if (has_war && y_cur >= 2022) continue;
+          if ((y_next - y_prev) > 6) continue;
+          let v_prev = Number(city.population[y_prev]);
+          let v_cur = Number(city.population[y_cur]);
+          let v_next = Number(city.population[y_next]);
+          if (Math.max(v_prev, v_cur, v_next) < 250) continue;
+          if ((v_prev >= v_cur*2.4 && v_next >= v_cur*2.4) || (v_cur >= v_prev*2.4 && v_cur >= v_next*2.4)) {
+            delete city.population[y_cur];
+            removed = true;
+          }
+        }
+        if (removed) continue;
+
+        for (let idx = 1; idx < yrs.length - 2; idx++) {
+          let y_prev = yrs[idx - 1];
+          let y_a = yrs[idx];
+          let y_b = yrs[idx + 1];
+          let y_next = yrs[idx + 2];
+          if (has_war && y_b >= 2022) continue;
+          if ((y_b - y_a) > 2 || (y_next - y_prev) > 8) continue;
+          let v_prev = Number(city.population[y_prev]);
+          let v_a = Number(city.population[y_a]);
+          let v_b = Number(city.population[y_b]);
+          let v_next = Number(city.population[y_next]);
+          if (Math.max(v_prev, v_next) < 250) continue;
+          if (
+            (v_prev >= v_a*2.4 && v_prev >= v_b*2.4 && v_next >= v_a*2.4 && v_next >= v_b*2.4) ||
+            (v_a >= v_prev*2.4 && v_b >= v_prev*2.4 && v_a >= v_next*2.4 && v_b >= v_next*2.4)
+          ) {
+            delete city.population[y_a];
+            delete city.population[y_b];
+            removed = true;
+          }
+        }
+        if (!removed) break;
+      }
     }
-    
-    if (repaired_count > 0)
-      console.log(`- Repaired ${repaired_count} GHSL city names across dataset using source file.`);
-    
+
     //Return statement
-    return cities_obj;
+    return uud_obj;
   };
-  
+
   /**
    * Loads Viscount regional settlements via ViscountGazetteerLoader.
    * @alias population_Stadester_uud.getViscountRegionalObject

@@ -522,6 +522,8 @@
           
           for (let y = 0; y < candidate_array.length; y++) {
             let local_uud_city = return_obj[candidate_array[y]];
+            if (local_db.is_polaris && !local_db.is_metro && isAgglomeration(local_uud_city))
+              continue;
             if (local_uud_city && local_uud_city.coords && !isBlockedMerge(local_uud_city, local_city)) {
               let local_distance = population_Stadester_uud.getCoordsDistance(local_uud_city.coords, local_city.coords);
               let is_exact_name = population_Stadester_uud.checkExactNameMatch(local_uud_city, local_city);
@@ -556,8 +558,6 @@
                   if (temporal_gap > max_allowed_gap)
                     is_temporally_compatible = false;
                 }
-                if (local_db.is_polaris && Number.isFinite(found_yr) && cand_min_yr < found_yr - 200)
-                  is_temporally_compatible = false;
               }
               
               if (is_temporally_compatible) {
@@ -646,19 +646,87 @@
               }
             }
           }
+          let already_has_polaris = (
+            local_db.is_polaris &&
+            typeof population_Stadester_uud.hasCitySource === "function" &&
+            population_Stadester_uud.hasCitySource(actual_city, "POLARIS")
+          );
+          let max_pol_yr_for_cut = -Infinity;
+          let min_pol_yr_for_cut = Infinity;
           if (local_db.is_polaris) {
             if (!actual_city.population) actual_city.population = {};
             if (local_city.population) {
               let pol_years = Object.keys(local_city.population);
               for (let y = 0; y < pol_years.length; y++) {
                 let yr_num = parseInt(pol_years[y], 10);
-                if (yr_num <= 1900)
+                if (Number.isFinite(yr_num) && Number(local_city.population[pol_years[y]]) > 0) {
+                  if (yr_num < min_pol_yr_for_cut) min_pol_yr_for_cut = yr_num;
+                  if (yr_num > max_pol_yr_for_cut) max_pol_yr_for_cut = yr_num;
+                }
+                if (yr_num <= 1900 && !already_has_polaris)
                   delete actual_city.population[pol_years[y]];
+              }
+              if (
+                !already_has_polaris &&
+                !isAgglomeration(actual_city) &&
+                max_pol_yr_for_cut >= 1975 &&
+                Number.isFinite(min_pol_yr_for_cut) &&
+                (actual_city.country === "Russia" || actual_city.country === "Ukraine" || actual_city.country === "Belarus")
+              ) {
+                let cut_pol_yr = Math.min(1897, min_pol_yr_for_cut);
+                let ex_pop_keys = Object.keys(actual_city.population);
+                for (let ek = 0; ek < ex_pop_keys.length; ek++) {
+                  let eyr = parseInt(ex_pop_keys[ek], 10);
+                  if (Number.isFinite(eyr) && eyr >= cut_pol_yr)
+                    delete actual_city.population[ex_pop_keys[ek]];
+                }
               }
             }
           }
-          population_Stadester_uud.mergeCityEntries(actual_city, local_city, local_db.is_metro);
-          if (local_db.is_polaris && !isAgglomeration(actual_city) && local_city.population && actual_city.population) {
+          if (already_has_polaris && (local_city.polaris_priority || 1) < 3) {
+            if (local_city.population && actual_city.population) {
+              let ex_min = Math.min.apply(null, Object.keys(actual_city.population).map(Number).filter(Number.isFinite));
+              let cand_ks = Object.keys(local_city.population);
+              for (let ck = 0; ck < cand_ks.length; ck++) {
+                let cyr = parseInt(cand_ks[ck], 10);
+                if (Number.isFinite(cyr) && cyr < ex_min && actual_city.population[cand_ks[ck]] === undefined)
+                  actual_city.population[cand_ks[ck]] = local_city.population[cand_ks[ck]];
+              }
+            }
+            if (Array.isArray(local_city.other_names)) {
+              if (!actual_city.other_names) actual_city.other_names = [];
+              for (let on = 0; on < local_city.other_names.length; on++)
+                if (local_city.other_names[on] && !actual_city.other_names.includes(local_city.other_names[on]))
+                  actual_city.other_names.push(local_city.other_names[on]);
+            }
+          } else {
+            population_Stadester_uud.mergeCityEntries(actual_city, local_city, local_db.is_metro);
+          }
+          if (local_db.is_polaris && !isAgglomeration(actual_city) && (!already_has_polaris || (local_city.polaris_priority || 1) >= 3)) {
+            if (local_city.name && actual_city.name !== local_city.name) {
+              if (!actual_city.other_names) actual_city.other_names = [];
+              if (!actual_city.other_names.includes(actual_city.name)) actual_city.other_names.push(actual_city.name);
+              actual_city.name = local_city.name;
+            }
+            if (actual_city.name_peaks && local_city.name)
+              actual_city.name_peaks[local_city.name] = Infinity;
+            if (Array.isArray(local_city.coords) && local_city.coords.length >= 2) {
+              actual_city.coords = [Number(local_city.coords[0]), Number(local_city.coords[1])];
+              addToGrid(actual_city);
+            }
+            if (typeof population_Stadester_uud.absorbSecondaryNonPolarisTwins === "function")
+              population_Stadester_uud.absorbSecondaryNonPolarisTwins(
+                return_obj,
+                city_grid,
+                actual_city,
+                local_city,
+                min_pol_yr_for_cut,
+                getGridCells,
+                addToGrid,
+                isAgglomeration
+              );
+          }
+          if (local_db.is_polaris && !isAgglomeration(actual_city) && (!already_has_polaris || (local_city.polaris_priority || 1) >= 3) && local_city.population && actual_city.population) {
             let pol_yrs = Object.keys(local_city.population).map(Number).filter(function (arg0_n) { return Number.isFinite(arg0_n) && Number(local_city.population[arg0_n]) > 0; }).sort(function (arg0_a, arg1_b) { return arg0_a - arg1_b; });
             if (pol_yrs.length > 0) {
               for (let py = 0; py < pol_yrs.length; py++)
@@ -756,6 +824,10 @@
     //Ensure Lamphun geolocation is fixed to authoritative coordinates
     if (return_obj["Lamphun-Thailand"])
       return_obj["Lamphun-Thailand"].coords = [18.5744357, 99.00369719999999];
+    
+    //Clean RU/UA/BY post-1975 agglomeration tails and 1-2 year Populstat U/V-spikes before recording empirical bounds
+    if (typeof population_Stadester_uud.cleanPostMergeUUD === "function")
+      population_Stadester_uud.cleanPostMergeUUD(return_obj);
     
     //Record true pre-interpolation empirical bounds so downstream GHSL/GHS-POP partitioning knows exact census end-years
     let final_uud_keys = Object.keys(return_obj);

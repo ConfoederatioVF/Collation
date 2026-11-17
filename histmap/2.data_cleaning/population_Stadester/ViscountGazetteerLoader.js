@@ -4,8 +4,16 @@
   let JSON5 = global.JSON5 || require("json5");
   let path = global.path || require("path");
 
+  if (!global.fs) global.fs = fs;
+  if (!global.path) global.path = path;
   if (!global.StadesterPartitionIO && typeof require !== "undefined") {
     try { require(path.join(__dirname, "StadesterPartitionIO.js")); } catch (e) {}
+  }
+  if ((!global.population_Stadester_uud || !global.population_Stadester_uud.checkExactNameMatch) && typeof require !== "undefined") {
+    try { require(path.join(__dirname, "stadester_uud_sources.js")); } catch (e) {}
+  }
+  if ((!global.population_Stadester_uud || !global.population_Stadester_uud.haversineDistance) && typeof require !== "undefined") {
+    try { require(path.join(__dirname, "stadester_uud.js")); } catch (e) {}
   }
   if ((!global.population_Stadester_uud || !global.population_Stadester_uud.appendCitySources) && typeof require !== "undefined") {
     try { require(path.join(__dirname, "stadester_uud_fixes.js")); } catch (e) {}
@@ -99,6 +107,68 @@
           root_dir: root_dir,
           spatial_step_deg: spatial_step_deg
         });
+      }
+
+      //Harmonise standalone Ch. 1-3 pre-modern POLARIS entries so none terminate at a cliff right at 1900
+      let uud_ref = global.population_Stadester_uud || {};
+      let pol_keys = Object.keys(return_obj);
+      for (let i = 0; i < pol_keys.length; i++) {
+        let pk = pol_keys[i];
+        let city = return_obj[pk];
+        if (!city || city.viscount_project !== "POLARIS" || !(city.polaris_priority < 3) || !city.population)
+          continue;
+        let yrs = Object.keys(city.population).map(Number).filter(function (arg0_n) {
+          return Number.isFinite(arg0_n) && Number(city.population[arg0_n]) > 0;
+        }).sort(function (arg0_a, arg1_b) { return arg0_a - arg1_b; });
+        if (yrs.length === 0) continue;
+
+        if (yrs[0] <= 1858) {
+          for (let y = 0; y < yrs.length; y++)
+            if (yrs[y] > 1858) delete city.population[yrs[y]];
+        } else if (yrs[yrs.length - 1] <= 1900 && Array.isArray(city.coords) && city.coords.length >= 2) {
+          let lat = Number(city.coords[0]);
+          let lng = Number(city.coords[1]);
+          let gx = Math.floor(lng/spatial_step_deg);
+          let gy = Math.floor(lat/spatial_step_deg);
+          let best_peer = null;
+          let best_dist = 8.0;
+          for (let dx = -1; dx <= 1; dx++) {
+            for (let dy = -1; dy <= 1; dy++) {
+              let bucket = city_spatial_grid.get(`${gx + dx},${gy + dy}`);
+              if (!bucket) continue;
+              for (let b = 0; b < bucket.length; b++) {
+                let peer = return_obj[bucket[b]];
+                if (!peer || peer === city || peer.viscount_project !== "POLARIS" || peer.polaris_priority !== 3)
+                  continue;
+                if (peer.country !== city.country) continue;
+                let dist_km = (typeof uud_ref.haversineDistance === "function") ?
+                  uud_ref.haversineDistance(city.coords, peer.coords) : 999999;
+                if (dist_km <= best_dist) {
+                  best_dist = dist_km;
+                  best_peer = peer;
+                }
+              }
+            }
+          }
+          if (best_peer) {
+            if (!best_peer.population) best_peer.population = {};
+            for (let y = 0; y < yrs.length; y++)
+              if (yrs[y] < 1897 && best_peer.population[yrs[y]] === undefined)
+                best_peer.population[yrs[y]] = city.population[yrs[y]];
+            if (Array.isArray(city.other_names)) {
+              if (!best_peer.other_names) best_peer.other_names = [];
+              for (let on = 0; on < city.other_names.length; on++)
+                if (city.other_names[on] && !best_peer.other_names.includes(city.other_names[on]))
+                  best_peer.other_names.push(city.other_names[on]);
+            }
+            if (city.name && city.name !== best_peer.name && best_peer.other_names && !best_peer.other_names.includes(city.name))
+              best_peer.other_names.push(city.name);
+            delete return_obj[pk];
+          } else {
+            for (let y = 0; y < yrs.length; y++)
+              if (yrs[y] > 1896) delete city.population[yrs[y]];
+          }
+        }
       }
 
       let proj_summary = Object.keys(loaded_count_by_project)
@@ -282,6 +352,8 @@
               uud.checkExactNameMatch(ex_city, candidate_city) : (ex_city.name === candidate_city.name);
 
             if (is_name_match || (is_cross_project && dist_km <= exact_coord_match_km)) {
+              if (!is_cross_project && ex_city.polaris_priority === 3 && candidate_city.polaris_priority === 3 && ex_city.key !== candidate_city.key && dist_km > 0.3)
+                continue;
               if (dist_km > 1.0 && !this.hasCompatiblePopulationScale(ex_city.population, candidate_city.population))
                 continue;
               let ex_yr_nums = Object.keys(ex_city.population).map(Number).filter(function (arg0_n) { return !isNaN(arg0_n); }).sort(function (arg0_a, arg1_b) { return arg0_a - arg1_b; });
