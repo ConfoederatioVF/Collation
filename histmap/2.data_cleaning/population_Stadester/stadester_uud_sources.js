@@ -78,6 +78,7 @@
 
     //Function body
     norm = name
+      .replace(/,\s*(toronto|montreal|montréal|ottawa|quebec|québec|vancouver|winnipeg|halifax|hamilton|calgary|edmonton|victoria)$/i, "")
       .replace(/-(?:on|qc|nb|ns|pe|pei|nl|mb|sk|ab|bc|yt|nt|nu|kujalleq|kona|kohala|kaua['’ʻ]?i)$/, "")
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "")
@@ -429,11 +430,11 @@
       }
     }
 
-    let has_west_close_coords = Boolean(
+    let west_dist_km = (
       city_a && city_b && Array.isArray(city_a.coords) && Array.isArray(city_b.coords) &&
-      typeof population_Stadester_uud.haversineDistance === "function" &&
-      population_Stadester_uud.haversineDistance(city_a.coords, city_b.coords) <= 25
-    );
+      typeof population_Stadester_uud.haversineDistance === "function"
+    ) ? population_Stadester_uud.haversineDistance(city_a.coords, city_b.coords) : Infinity;
+    let has_west_close_coords = (west_dist_km <= 25);
     let is_compat_west_country = (
       (c_a && c_a === c_b) ||
       c_a === "united states" ||
@@ -454,6 +455,14 @@
       for (let x = 0; x < w_a.length; x++)
         for (let y = 0; y < w_b.length; y++)
           if (w_a[x] === w_b[y]) return true;
+
+      if (west_dist_km <= 2.5) {
+        let comp_a = w_a.map(function (arg0_s) { return arg0_s.replace(/\s+/g, "").replace(/(.)\1+/g, "$1"); }).filter(function (arg0_s) { return arg0_s.length >= 5; });
+        let comp_b = w_b.map(function (arg0_s) { return arg0_s.replace(/\s+/g, "").replace(/(.)\1+/g, "$1"); }).filter(function (arg0_s) { return arg0_s.length >= 5; });
+        for (let x = 0; x < comp_a.length; x++)
+          for (let y = 0; y < comp_b.length; y++)
+            if (comp_a[x] === comp_b[y]) return true;
+      }
     }
     
     //Return statement

@@ -61,6 +61,10 @@ COLONIAL_US_STATES = {
 }
 
 CA_FOREIGN_COUNTRIES = {"Canada", "Greenland", "Saint Pierre and Miquelon"}
+NON_HABITATION_RE = re.compile(
+  r"\b(?:Medicine Wheel|Chert Mine|Flint Quarry|Obsidian Quarry|Quarry|Mine|Cemetery|Ossuary|Buffalo Jump|Head-Smashed-In|Rockshelter|Rock Shelter|Cave)\b",
+  re.I,
+)
 
 
 def haversine_km(lat1, lon1, lat2, lon2):
@@ -255,24 +259,38 @@ def main():
     if not is_canada:
       for x in pack07:
         add_item(x, 1, "CENTAUR-II Colonial America Synthesis")
+      for pf_extra in sorted(PACKS_DIR.glob("pack_1[4-5]*.json")):
+        for x in json.loads(pf_extra.read_text(encoding="utf-8")):
+          if x.get("module_scope", "us") in ("us", "both"):
+            add_item(x, 1, x.get("citation") or "CENTAUR-II Colonial Register & Indigenous Synthesis")
       for x in (wave_a.get("colonial_america_settlements") or []):
         add_item(x, 1, "CENTAUR Colonial Wave A Review")
       # Preserve any existing verified settlements in the module folder
       ex_path = mod.dir / f"{mod.stem}_settlements.json"
       if ex_path.exists():
         for x in json.loads(ex_path.read_text(encoding="utf-8")).values():
-          add_item(x, 1, "CENTAUR Verified Colonial Registry")
+          xc = dict(x)
+          xc["name"] = re.sub(r"\s*\(-?\d+\.\d+,\s*-?\d+\.\d+\)$", "", str(x.get("name") or "")).strip()
+          if not NON_HABITATION_RE.search(xc["name"]):
+            add_item(xc, 1, "CENTAUR Verified Colonial Registry")
       for x in creating_col:
         add_item(x, 2, x["citation"])
     else:
       for x in pack08:
         add_item(x, 1, "CENTAUR-II Colonial Canada & Greenland Synthesis")
+      for pf_extra in sorted(PACKS_DIR.glob("pack_1[4-5]*.json")):
+        for x in json.loads(pf_extra.read_text(encoding="utf-8")):
+          if x.get("module_scope", "ca") in ("ca", "both"):
+            add_item(x, 1, x.get("citation") or "CENTAUR-II Colonial Register & Indigenous Synthesis")
       for x in (wave_b.get("colonial_canada_greenland_settlements") or []):
         add_item(x, 1, "CENTAUR Colonial Wave B Review")
       ex_path = mod.dir / f"{mod.stem}_settlements.json"
       if ex_path.exists():
         for x in json.loads(ex_path.read_text(encoding="utf-8")).values():
-          add_item(x, 1, "CENTAUR Verified Colonial Registry")
+          xc = dict(x)
+          xc["name"] = re.sub(r"\s*\(-?\d+\.\d+,\s*-?\d+\.\d+\)$", "", str(x.get("name") or "")).strip()
+          if not NON_HABITATION_RE.search(xc["name"]):
+            add_item(xc, 1, "CENTAUR Verified Colonial Registry")
       # Include documented 1500-1600 Indigenous towns from Northern Cascadia / Northern Canada / Hudson Bay (covers Pacific & Mackenzie Indigenous subregion in 1500-1763)
       for pc_dir in (
         CENTAUR_DIR / "1.pre_columbian_canada_and_alaska" / "1.northern_cascadia_and_alaska" / "northern_cascadia_and_alaska_settlements.json",
@@ -282,7 +300,8 @@ def main():
       ):
         if pc_dir.exists() and "1763" in mod.stem:
           for x in json.loads(pc_dir.read_text(encoding="utf-8")).values():
-            add_item(x, 2, "CENTAUR Pre-Columbian & Protohistoric Indigenous Registry")
+            if not NON_HABITATION_RE.search(str(x.get("name") or "")):
+              add_item(x, 2, "CENTAUR Pre-Columbian & Protohistoric Indigenous Registry")
     return cands
 
   print("\n--- Colonial Module Assembly Summary ---")
@@ -308,11 +327,16 @@ def main():
         })
         continue
       rid, rr, cc = routed
+      lat, lon = c["coords"]
+      raw_r = min(H - 1, max(0, int((90.0 - lat) * H / 180.0)))
+      raw_c = min(W - 1, max(0, int((lon + 180.0) * W / 360.0)))
+      snap_lat = 90.0 - (rr + 0.5) * 180.0 / H if not mod.mask[raw_r, raw_c] else lat
+      snap_lon = -180.0 + (cc + 0.5) * 360.0 / W if snap_lat != lat else lon
       nk = norm_key(c["name"])
       dup = None
       for ex in kept_list:
-        d = haversine_km(c["coords"][0], c["coords"][1], ex["coords"][0], ex["coords"][1])
-        if d < 2.0 or (norm_key(ex["name"]) == nk and d < 12.0):
+        d = haversine_km(snap_lat, snap_lon, ex["coords"][0], ex["coords"][1])
+        if d < 2.0 or (norm_key(ex["name"]) == nk and d < 35.0):
           dup = ex
           break
       if dup is not None:
@@ -331,17 +355,13 @@ def main():
           "country": c["country"],
           "status": "excluded",
           "reason": "duplicate_alias",
-          "justification": f"Consolidated duplicate coordinate/alias into '{dup['name']}' ({c['citation']}).",
+          "justification": f"Consolidated duplicate coordinate/alias within 2 km into '{dup['name']}' ({c['citation']}).",
         })
         continue
 
-      lat, lon = c["coords"]
-      snap_lat = 90.0 - (rr + 0.5) * 180.0 / H if not mod.mask[min(H - 1, max(0, int((90.0 - lat) * H / 180.0))), min(W - 1, max(0, int((lon + 180.0) * W / 360.0)))] else lat
-      snap_lon = -180.0 + (cc + 0.5) * 360.0 / W if snap_lat != lat else lon
-
       skey = f"{c['name']}-{c['country']}"
       if skey in kept:
-        skey = f"{c['name']} ({lat:.2f},{lon:.2f})-{c['country']}"
+        skey = f"{c['name']} ({snap_lat:.2f},{snap_lon:.2f})-{c['country']}"
 
       entry = {
         "name": c["name"],

@@ -37,6 +37,15 @@ PACKS_DIR = SHARED_DIR / "gazetteer_packs"
 RAW_NA_DIR = SHARED_DIR / "sites_northern_america" / "raw_sources"
 NPZ_PATH = SHARED_DIR / "_gis_cache" / "centaur_pixel_grids.npz"
 
+NON_HABITATION_RE = re.compile(
+  r"\b(?:Medicine Wheel|Chert Mine|Flint Quarry|Obsidian Quarry|Quarry|Mine|Cemetery|Ossuary|Burial Mound Only|Buffalo Jump|Head-Smashed-In|Rockshelter|Rock Shelter|Cave)\b",
+  re.I,
+)
+CLIFF_DWELLING_ALLOW_RE = re.compile(
+  r"\b(?:Cliff Palace|Spruce Tree House|Balcony House|Long House|Mug House|Square Tower House|Step House|Betatakin|Keet Seel|Antelope House|Gila Cliff Dwellings|Montezuma Castle|Tonto|Tyuonyi|Puye|Bandelier|Gila Cliff)\b",
+  re.I,
+)
+
 W, H = 4320, 2160
 
 US_STATE_NAMES = [
@@ -420,8 +429,8 @@ def main():
 
   candidates = []
 
-  # Wave 1a: Literature packs authored by parallel Gemini 3.8 Flash teams (Packs 01-06 ONLY)
-  pack_files = sorted(PACKS_DIR.glob("pack_0[1-6]*.json"))
+  # Wave 1a: Literature packs authored by parallel Gemini 3.8 Flash teams (Packs 01-06 + 10-13)
+  pack_files = sorted(list(PACKS_DIR.glob("pack_0[1-6]*.json")) + list(PACKS_DIR.glob("pack_1[0-3]*.json")))
   for pf in pack_files:
     arr = json.loads(pf.read_text(encoding="utf-8"))
     print(f"  Pack {pf.name}: {len(arr)} entries")
@@ -452,7 +461,8 @@ def main():
       continue
     old = json.loads(sp.read_text(encoding="utf-8"))
     for k, v in old.items():
-      nm = clean_name(v.get("name") or k)
+      nm_raw = clean_name(v.get("name") or k)
+      nm = re.sub(r"\s*\(-?\d+\.\d+,\s*-?\d+\.\d+\)$", "", nm_raw).strip()
       coords = v.get("coords")
       pop = clean_pop_dict(v.get("population"))
       if not nm or not isinstance(coords, list) or len(coords) < 2 or not pop:
@@ -507,10 +517,27 @@ def main():
     nk = norm_key(nm)
     ctry = infer_country(lat, lon, cand["country"], us_state_grid, stem)
 
+    if NON_HABITATION_RE.search(nm) and not CLIFF_DWELLING_ALLOW_RE.search(nm):
+      per_mod_excl[stem].append({
+        "settlement_key": f"{nm}-{ctry}",
+        "name": nm,
+        "country": ctry,
+        "status": "excluded",
+        "reason": "seasonal_encampment_unquantified",
+        "justification": f"Excluded non-habitation archaeological feature (cave/rockshelter/mine/quarry/medicine wheel/cemetery/kill site) from permanent habitation gazetteer ({cand['citation']}).",
+      })
+      continue
+
+    # Snap coordinates inside coastal mask FIRST so post-snap pixel-centre twins are deduplicated cleanly
+    raw_r = min(H - 1, max(0, int((90.0 - lat) * H / 180.0)))
+    raw_c = min(W - 1, max(0, int((lon + 180.0) * W / 360.0)))
+    snap_lat = 90.0 - (rr + 0.5) * 180.0 / H if not mod["mask"][raw_r, raw_c] else lat
+    snap_lon = -180.0 + (cc + 0.5) * 360.0 / W if snap_lat != lat else lon
+
     dup = None
     for ex in per_mod_list[stem]:
-      d_km = haversine_km(lat, lon, ex["coords"][0], ex["coords"][1])
-      if d_km < 2.0 or (norm_key(ex["name"]) == nk and d_km < 15.0):
+      d_km = haversine_km(snap_lat, snap_lon, ex["coords"][0], ex["coords"][1])
+      if d_km < 2.0 or (norm_key(ex["name"]) == nk and d_km < 35.0):
         dup = ex
         break
 
@@ -526,6 +553,7 @@ def main():
           dup["other_names"].append(an)
           ex_alts.add(an)
       per_mod_excl[stem].append({
+        "settlement_key": f"{nm}-{ctry}",
         "name": nm,
         "country": ctry,
         "status": "excluded",
@@ -537,11 +565,7 @@ def main():
     base_skey = f"{nm}-{ctry}"
     skey = base_skey
     if skey in per_mod_kept[stem]:
-      skey = f"{nm} ({lat:.2f},{lon:.2f})-{ctry}"
-
-    # Snap coordinates slightly inside coastal mask if needed so check inside_mask always passes at distance 0
-    snap_lat = 90.0 - (rr + 0.5) * 180.0 / H if not mod["mask"][min(H - 1, max(0, int((90.0 - lat) * H / 180.0))), min(W - 1, max(0, int((lon + 180.0) * W / 360.0)))] else lat
-    snap_lon = -180.0 + (cc + 0.5) * 360.0 / W if snap_lat != lat else lon
+      skey = f"{nm} ({snap_lat:.2f},{snap_lon:.2f})-{ctry}"
 
     entry = {
       "name": nm,

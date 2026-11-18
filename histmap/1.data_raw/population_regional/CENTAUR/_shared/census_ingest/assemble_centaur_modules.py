@@ -10,6 +10,16 @@ from PIL import Image
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CENTAUR_DIR = os.path.abspath(os.path.join(BASE_DIR, "../.."))
 
+MILITARY_INSTALLATION_RE = re.compile(
+    r"\b(?:AFB|Air Force Base|Air Station|Naval Station|Naval Base|Marine Corps|Army Airfield|Army Depot|Proving Ground|Base Housing|Kings Bay Base|Joint Base|CFB|Canadian Forces Base)\b",
+    re.I,
+)
+KNOWN_FOUNDATION_YEARS = {
+    "Olmos Park-Texas": 1927,
+    "Dover Base Housing-Delaware": 1954,
+    "Kings Bay Base-Georgia": 1978,
+}
+
 GREENLAND_DANISH_TO_KALAALLISUT = {
     "godthab": "Nuuk",
     "godthåb": "Nuuk",
@@ -707,14 +717,27 @@ def assemble_all():
             if not yrs or yrs[-1] < 1950:
                 continue
             reg_floor = 1898 if (stem == "united_states_post_independence" and rid in ("usa_hawaii", "usa_american_samoa")) else (1850 if stem == "united_states_post_independence" else 1867)
+            src_city = modern_cities.get(sk, {})
+            f_yr = KNOWN_FOUNDATION_YEARS.get(sk) or src_city.get("foundation_year")
+            if f_yr is not None:
+                p = {k: v for k, v in p.items() if int(k) >= int(f_yr)}
+                sv["population"] = p
+                yrs = sorted(int(y) for y, val in p.items() if float(val) > 0)
+                if not yrs:
+                    continue
             first_y = yrs[0]
-            if first_y <= reg_floor:
+            if MILITARY_INSTALLATION_RE.search(sv.get("name", "")):
+                f_yr = max(int(f_yr or 1940), first_y - 2)
+            elif first_y >= 1920:
+                f_yr = max(int(f_yr or 1900), first_y - 10)
+            eff_floor = max(reg_floor, int(f_yr)) if f_yr is not None else reg_floor
+            if first_y <= eff_floor:
                 continue
             first_v = float(p[str(first_y)])
             reg_p = regions.get(rid, {}).get("population", {})
             reg_first = max(1.0, interp_reg_pop(reg_p, first_y))
             for my in milestones:
-                if my < reg_floor or my >= first_y:
+                if my < eff_floor or my >= first_y:
                     continue
                 if stem == "united_states_post_independence" and rid not in ("usa_hawaii", "usa_american_samoa") and my == 1898:
                     continue
@@ -733,53 +756,60 @@ def assemble_all():
             a_v = math.sin(d_lat * 0.5) ** 2 + math.cos(lat1 * p_rad) * math.cos(lat2 * p_rad) * math.sin(d_lon * 0.5) ** 2
             return 12742.0 * math.asin(min(1.0, math.sqrt(a_v)))
 
-        by_ctry_asm = {}
-        for sk, sv in sett.items():
-            p = sv.get("population") or {}
-            mx_p = max((float(v) for v in p.values()), default=0.0)
-            by_ctry_asm.setdefault(sv["country"], []).append((sk, float(sv["coords"][0]), float(sv["coords"][1]), mx_p, len(p)))
+        for _merge_pass in range(3):
+            by_ctry_asm = {}
+            for sk, sv in sett.items():
+                p = sv.get("population") or {}
+                mx_p = max((float(v) for v in p.values()), default=0.0)
+                by_ctry_asm.setdefault(sv["country"], []).append((sk, float(sv["coords"][0]), float(sv["coords"][1]), mx_p, len(p)))
 
-        rem_asm = set()
-        for ctry, item_lst in by_ctry_asm.items():
-            item_lst.sort(key=lambda it: (-it[3], -it[4], it[0]))
-            accepted = []
-            for sk, la1, lo1, _mx, _np in item_lst:
-                if sk in rem_asm:
-                    continue
-                y1 = {int(y) for y, val in sett[sk]["population"].items() if int(y) >= 1850 and float(val) > 0}
-                target_k = None
-                if y1:
-                    for ak, la2, lo2, y2 in accepted:
-                        if abs(la1 - la2) > 0.025:
-                            continue
-                        if (y1 & y2) and hav_km_asm(la1, lo1, la2, lo2) <= 1.55:
-                            target_k = ak
-                            break
-                if target_k:
-                    canon = sett[target_k]
-                    sub = sett[sk]
-                    for yk, yv in sub["population"].items():
-                        if yk not in canon["population"]:
-                            canon["population"][yk] = yv
-                    canon["population"] = {str(y): canon["population"][str(y)] for y in sorted(int(k) for k in canon["population"].keys())}
-                    alts_set = set(canon.get("other_names") or [])
-                    for cand_a in [sub["name"]] + list(sub.get("other_names") or []):
-                        if cand_a and cand_a != canon["name"] and cand_a not in alts_set:
-                            canon["other_names"].append(cand_a)
-                            alts_set.add(cand_a)
-                    rem_asm.add(sk)
-                    excluded_cands.append({
-                        "settlement_key": sk,
-                        "name": sub["name"],
-                        "country": ctry,
-                        "status": "excluded",
-                        "reason": "subordinate_suburb_merged",
-                        "justification": f"Post-assembly overlap <= 1.55 km with canonical {target_k}; consolidated cleanly."
-                    })
-                else:
-                    accepted.append((sk, la1, lo1, y1))
-        for rk_del in rem_asm:
-            sett.pop(rk_del, None)
+            rem_asm = set()
+            for ctry, item_lst in by_ctry_asm.items():
+                item_lst.sort(key=lambda it: (-it[3], -it[4], it[0]))
+                accepted = []
+                for sk, la1, lo1, _mx, _np in item_lst:
+                    if sk in rem_asm:
+                        continue
+                    y1 = {int(y) for y, val in sett[sk]["population"].items() if int(y) >= 1850 and float(val) > 0}
+                    target_k = None
+                    matched_y2 = None
+                    if y1:
+                        for ak, la2, lo2, y2 in accepted:
+                            if abs(la1 - la2) > 0.025:
+                                continue
+                            if (y1 & y2) and hav_km_asm(la1, lo1, la2, lo2) <= 1.55:
+                                target_k = ak
+                                matched_y2 = y2
+                                break
+                    if target_k:
+                        canon = sett[target_k]
+                        sub = sett[sk]
+                        for yk, yv in sub["population"].items():
+                            if yk not in canon["population"]:
+                                canon["population"][yk] = yv
+                            if int(yk) >= 1850 and float(yv) > 0 and matched_y2 is not None:
+                                matched_y2.add(int(yk))
+                        canon["population"] = {str(y): canon["population"][str(y)] for y in sorted(int(k) for k in canon["population"].keys())}
+                        alts_set = set(canon.get("other_names") or [])
+                        for cand_a in [sub["name"]] + list(sub.get("other_names") or []):
+                            if cand_a and cand_a != canon["name"] and cand_a not in alts_set:
+                                canon["other_names"].append(cand_a)
+                                alts_set.add(cand_a)
+                        rem_asm.add(sk)
+                        excluded_cands.append({
+                            "settlement_key": sk,
+                            "name": sub["name"],
+                            "country": ctry,
+                            "status": "excluded",
+                            "reason": "subordinate_suburb_merged",
+                            "justification": f"Post-assembly overlap <= 1.55 km with canonical {target_k}; consolidated cleanly."
+                        })
+                    else:
+                        accepted.append((sk, la1, lo1, y1))
+            if not rem_asm:
+                break
+            for rk_del in rem_asm:
+                sett.pop(rk_del, None)
 
         # Ensure regional population envelope in <stem>.json5 never drops below 1.0x settlement sum (never inflates real state/province census counts when urban_sum <= total)
         urban_sums = {}

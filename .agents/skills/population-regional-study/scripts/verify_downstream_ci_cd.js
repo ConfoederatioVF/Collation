@@ -310,7 +310,7 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
 
       let cache_script = [
         "import { StadesterService } from './core/server/stadester_service.ts';",
-        "let p = StadesterService.ensureLiteCache('stadester_2.0');",
+        "let ds = StadesterService.loadDataset('stadester_2.0'); let p = StadesterService.ensureLiteCache('stadester_2.0');",
         "console.log('WARM_LITE_CACHE=' + p);"
       ].join(" ");
       let cache_res = child_process.spawnSync(process.execPath, ["--input-type=module", "-e", cache_script], {

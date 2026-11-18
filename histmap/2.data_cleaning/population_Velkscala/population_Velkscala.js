@@ -146,13 +146,14 @@
 
       //Declare local instance variables
       let anchor_cache = new Map();
+      let avail_anchors = [];
       let height = 2160;
       let land_area_path = (typeof metadata_HYDE !== "undefined" && metadata_HYDE.file_land_area) ?
         metadata_HYDE.file_land_area : path.join(discovery.root_dir, "histmap/1.data_raw/metadata_HYDE/general_rasters/land_area.png");
       let owner_grid = discovery.owner_z_grid;
       let png_cls = (global.pngjs && global.pngjs.PNG) ? global.pngjs.PNG : (global.PNG || require("pngjs").PNG);
       let r2_dir = path.join(discovery.root_dir, "histmap/3.data_transform/population_Substrata.outlier_removal/rasters_2.scaled_to_regions");
-      let seam_px = 24;
+      let seam_px = 16;
       let total_px = 4320*2160;
       let viscount_pixels = [];
       let width = 4320;
@@ -193,6 +194,24 @@
         return grid;
       };
 
+      if (fs.existsSync(r2_dir)) {
+        let r2_files = fs.readdirSync(r2_dir);
+
+        for (let i = 0; i < r2_files.length; i++) {
+          let m = /^popc_(-?\d+)\.png$/.exec(r2_files[i]);
+
+          if (m) {
+            let ay = parseInt(m[1], 10);
+
+            if (ay <= 0) avail_anchors.push(ay);
+          }
+        }
+        avail_anchors.sort(function (arg0_a, arg1_b) { return arg0_a - arg1_b; });
+      }
+      if (avail_anchors.length === 0) {
+        for (let ay = -10000; ay <= 0; ay += 1000) avail_anchors.push(ay);
+      }
+
       let land_area = new Float32Array(total_px);
 
       if (fs.existsSync(land_area_path)) {
@@ -205,70 +224,106 @@
         }
       }
 
-      //Build 24-px cosine outer boundary belt into non-Viscount c14bazAAR land cells
-      let bfs_dist = new Uint8Array(total_px).fill(255);
-      let bfs_anchor = new Int32Array(total_px).fill(-1);
-      let bfs_q = [];
+      //Build smooth 8-connected Chamfer distance belt along true external sovereign land frontiers (zero 1-px BFS column striping)
+      let bfs_dist = new Float32Array(total_px).fill(255.0);
+      let ext_seed_pixels = [];
+      let seam_pixels = [];
 
       for (let i = 0; i < total_px; i++) {
         if (!owner_grid || owner_grid[i] <= 0) continue;
         viscount_pixels.push(i);
         let r = Math.floor(i/width);
         let c = i % width;
-        let nbrs = [
-          (r > 0) ? i - width : -1,
-          (r + 1 < height) ? i + width : -1,
-          (c > 0) ? i - 1 : -1,
-          (c + 1 < width) ? i + 1 : -1
-        ];
 
-        for (let y = 0; y < 4; y++) {
-          let nb = nbrs[y];
+        for (let dr = -1; dr <= 1; dr++) {
+          let nr = r + dr;
 
-          if (nb >= 0 && owner_grid[nb] === 0 && land_area[nb] > 0) {
-            bfs_dist[i] = 1;
-            bfs_anchor[i] = nb;
-            bfs_q.push(i);
-            break;
+          if (nr < 0 || nr >= height) continue;
+          for (let dc = -1; dc <= 1; dc++) {
+            if (dr === 0 && dc === 0) continue;
+            let nc = c + dc;
+
+            if (nc < 0 || nc >= width) continue;
+            let nb = nr*width + nc;
+
+            if (owner_grid[nb] === 0 && land_area[nb] > 0) {
+              if (bfs_dist[nb] > 0) {
+                bfs_dist[nb] = 0;
+                ext_seed_pixels.push(nb);
+              }
+              let step_d = (dr !== 0 && dc !== 0) ? 1.414 : 1.0;
+
+              if (step_d < bfs_dist[i]) {
+                if (bfs_dist[i] > 200) seam_pixels.push(i);
+                bfs_dist[i] = step_d;
+              }
+            }
           }
         }
       }
 
-      let head = 0;
+      //Multi-pass isotropic Chamfer distance propagation across narrow seam belt (no single-anchor column copying)
+      for (let pass = 0; pass < seam_px; pass++) {
+        let next_candidates = [];
 
-      while (head < bfs_q.length) {
-        let curr = bfs_q[head++];
-        let d = bfs_dist[curr];
+        for (let s = 0; s < seam_pixels.length; s++) {
+          let curr = seam_pixels[s];
+          let d_curr = bfs_dist[curr];
 
-        if (d >= seam_px) continue;
-        let r = Math.floor(curr/width);
-        let c = curr % width;
-        let nbrs = [
-          (r > 0) ? curr - width : -1,
-          (r + 1 < height) ? curr + width : -1,
-          (c > 0) ? curr - 1 : -1,
-          (c + 1 < width) ? curr + 1 : -1
-        ];
+          if (d_curr >= seam_px) continue;
+          let r = Math.floor(curr/width);
+          let c = curr % width;
 
-        for (let y = 0; y < 4; y++) {
-          let nb = nbrs[y];
+          for (let dr = -1; dr <= 1; dr++) {
+            let nr = r + dr;
 
-          if (nb >= 0 && owner_grid[nb] > 0 && bfs_dist[nb] > d + 1) {
-            bfs_dist[nb] = d + 1;
-            bfs_anchor[nb] = bfs_anchor[curr];
-            bfs_q.push(nb);
+            if (nr < 0 || nr >= height) continue;
+            for (let dc = -1; dc <= 1; dc++) {
+              if (dr === 0 && dc === 0) continue;
+              let nc = c + dc;
+
+              if (nc < 0 || nc >= width) continue;
+              let nb = nr*width + nc;
+
+              if (!owner_grid || owner_grid[nb] <= 0) continue;
+              let nd = d_curr + ((dr !== 0 && dc !== 0) ? 1.414 : 1.0);
+
+              if (nd <= seam_px && nd < bfs_dist[nb] - 1e-3) {
+                if (bfs_dist[nb] > 200) next_candidates.push(nb);
+                bfs_dist[nb] = nd;
+              }
+            }
           }
         }
+        for (let s = 0; s < next_candidates.length; s++) seam_pixels.push(next_candidates[s]);
+        if (next_candidates.length === 0 && pass > 2) break;
       }
 
-      console.log(`[population_Velkscala] Overlaying ${discovery.contexts.length} Viscount antiquity domains (${viscount_pixels.length} px) across ${target_years.length} timesteps...`);
+      let ext_diff_a = new Float32Array(total_px);
+      let ext_diff_b = new Float32Array(total_px);
+
+      console.log(`[population_Velkscala] Overlaying ${discovery.contexts.length} Viscount antiquity domains (${viscount_pixels.length} px, seam=${seam_pixels.length} px) across ${target_years.length} timesteps...`);
 
       for (let i = 0; i < target_years.length; i++) {
         let yr = target_years[i];
 
         if (yr > 0) continue;
-        let a0 = Math.max(-10000, Math.floor(yr/1000)*1000);
-        let a1 = Math.min(0, a0 + 1000);
+        let a0 = avail_anchors[0];
+        let a1 = avail_anchors[avail_anchors.length - 1];
+
+        if (yr <= a0) {
+          a1 = a0;
+        } else if (yr >= a1) {
+          a0 = a1;
+        } else {
+          for (let k = 0; k < avail_anchors.length - 1; k++) {
+            if (yr >= avail_anchors[k] && yr <= avail_anchors[k + 1]) {
+              a0 = avail_anchors[k];
+              a1 = avail_anchors[k + 1];
+              break;
+            }
+          }
+        }
         let grid_a = getAnchor(a0);
         let grid_b = (a1 !== a0) ? getAnchor(a1) : grid_a;
 
@@ -285,6 +340,76 @@
 
         if (!popc_arr) continue;
 
+        //Solve smooth 2D harmonic exterior transition field over seam pixels (eliminates single-pixel BFS barcode stripes)
+        if (seam_pixels.length > 0) {
+          for (let x = 0; x < ext_seed_pixels.length; x++) {
+            let ep = ext_seed_pixels[x];
+
+            ext_diff_a[ep] = popc_arr[ep];
+            ext_diff_b[ep] = popc_arr[ep];
+          }
+          for (let x = 0; x < seam_pixels.length; x++) {
+            let sp = seam_pixels[x];
+            let acc0 = 0;
+            let cnt0 = 0;
+            let sr = Math.floor(sp/width);
+            let sc = sp % width;
+
+            for (let dr = -2; dr <= 2; dr++) {
+              let nr = sr + dr;
+
+              if (nr < 0 || nr >= height) continue;
+              for (let dc = -2; dc <= 2; dc++) {
+                let nc = sc + dc;
+
+                if (nc < 0 || nc >= width) continue;
+                let np = nr*width + nc;
+
+                if (owner_grid[np] === 0 && land_area[np] > 0) {
+                  acc0 += popc_arr[np];
+                  cnt0++;
+                }
+              }
+            }
+            let init_v = (cnt0 > 0) ? acc0/cnt0 : 0;
+
+            ext_diff_a[sp] = init_v;
+            ext_diff_b[sp] = init_v;
+          }
+
+          for (let it = 0; it < seam_px; it++) {
+            let src_g = (it % 2 === 0) ? ext_diff_a : ext_diff_b;
+            let dst_g = (it % 2 === 0) ? ext_diff_b : ext_diff_a;
+
+            for (let x = 0; x < seam_pixels.length; x++) {
+              let sp = seam_pixels[x];
+              let r = Math.floor(sp/width);
+              let c = sp % width;
+              let w_sum = 0;
+              let v_sum = 0;
+              let nbrs = [
+                (r > 0) ? sp - width : -1,
+                (r + 1 < height) ? sp + width : -1,
+                (c > 0) ? sp - 1 : -1,
+                (c + 1 < width) ? sp + 1 : -1
+              ];
+
+              for (let y = 0; y < 4; y++) {
+                let nb = nbrs[y];
+
+                if (nb < 0) continue;
+                if (bfs_dist[nb] <= seam_px && (owner_grid[nb] > 0 || land_area[nb] > 0)) {
+                  let wt = (owner_grid[nb] === 0) ? 2.0 : 1.0;
+
+                  v_sum += wt*src_g[nb];
+                  w_sum += wt;
+                }
+              }
+              dst_g[sp] = (w_sum > 0) ? v_sum/w_sum : src_g[sp];
+            }
+          }
+        }
+        let ext_smooth = (seam_px % 2 === 0) ? ext_diff_a : ext_diff_b;
         let frac = (a1 !== a0) ? (yr - a0)/Math.max(1, a1 - a0) : 0;
 
         for (let x = 0; x < viscount_pixels.length; x++) {
@@ -295,11 +420,10 @@
             Math.exp((1 - frac)*Math.log(va) + frac*Math.log(vb)) :
             ((1 - frac)*va + frac*vb);
 
-          if (bfs_dist[px] <= seam_px && bfs_anchor[px] >= 0) {
+          if (bfs_dist[px] <= seam_px && ext_smooth[px] > 0) {
             let w_cos = 0.5*(1 - Math.cos(Math.PI*bfs_dist[px]/seam_px));
-            let v_ext = popc_arr[bfs_anchor[px]];
 
-            if (v_ext > 0) v_vis = w_cos*v_vis + (1 - w_cos)*v_ext;
+            v_vis = w_cos*v_vis + (1 - w_cos)*ext_smooth[px];
           }
 
           let u_val = urbc_arr[px] || 0;

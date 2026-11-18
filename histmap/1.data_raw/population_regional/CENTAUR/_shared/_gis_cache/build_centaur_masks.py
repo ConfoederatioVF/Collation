@@ -12,7 +12,7 @@ import numpy as np
 from PIL import Image, ImageDraw
 from scipy.spatial import cKDTree
 import shapefile
-from shapely.geometry import Polygon, MultiPolygon, shape, mapping
+from shapely.geometry import Polygon, MultiPolygon, box, shape, mapping
 from shapely.ops import unary_union
 
 sys.stdout.reconfigure(encoding="utf-8")
@@ -527,59 +527,75 @@ def main():
   print("\n=== Generating Organic Pre-Columbian Canada, Alaska & Greenland Masks ===")
   pre_ca_domain = mask_ca | mask_ak | mask_pm | mask_gl
 
-  # Define organic vector boundaries for the 6 macro chapters in Canada/AK/GL
-  m1_geom = u_geoms([us_ak_geom, ca_provs["Yukon"], ca_provs["British Columbia"]])
+  # Define organic vector boundaries for the 6 macro chapters in Canada/AK/GL (100% watershed/ecozone divides, no 60N/120W cuts)
+  m1_ca_pacific = u_geoms([
+    hb_range(hb_ar4, 8110, 8139),
+    hb_range(hb_na4, 7826, 7839),
+    wmo_by_id.get(403),
+    wmo_by_id.get(404),
+    wmo_by_id.get(405),
+    wmo_by_id.get(406),
+    wmo_by_id.get(407),
+    ca_ecozone_by_id.get("CL11"),
+    ca_ecozone_by_id.get("CL12"),
+    ca_ecozone_by_id.get("CL13"),
+    ca_ecozone_by_id.get("CL14"),
+    ca_ecozone_by_id.get("CL16"),
+    ca_ecozone_by_id.get("CL18"),
+  ])
+  m1_geom = u_geoms([us_ak_geom, m1_ca_pacific]).difference(u_geoms([hb_range(hb_ar4, 8224, 8229), hb_na4.get(7129)]))
   m6_geom = u_geoms([ca_provs["Nova Scotia"], ca_provs["New Brunswick"], ca_provs["Prince Edward Island"], ca_provs["Newfoundland and Labrador"], pm_all_geom])
-  # Saint Lawrence: ECCC Mixedwood Plains (CL08) + Great Lakes North / Ottawa / St Lawrence / Saguenay / Gaspe basins (HB 7238..7256 + 7260 inside QC + HUC4 0421..0431 inside CA)
+  # Saint Lawrence: ECCC Mixedwood Plains (CL08) + Great Lakes North / Ottawa / St Lawrence / Saguenay / Gaspe basins (HB 7238..7257 + 7260 inside QC/ON + HUC4 0416..0431 inside CA)
   qc_geom = ca_provs["Québec"]
   on_geom = ca_provs["Ontario"]
   sl_core_on = u_geoms([ca_ecozone_by_id.get("CL08"), hb_na4.get(7254), hb_na4.get(7255), hb_na4.get(7256), hb_na4.get(7257), h4_u(["0416", "0417", "0420", "0421", "0422", "0423", "0425", "0427", "0429"])]).intersection(on_geom)
-  # Keep Hudson Bay 7135..7139 strictly out of Saint Lawrence; add Saguenay / Cote-Nord / St-Maurice / Gaspe (7238..7240, 7251..7254, 7260) in QC
   sl_core_qc = u_geoms([ca_ecozone_by_id.get("CL08"), hb_range(hb_na4, 7238, 7240), hb_range(hb_na4, 7251, 7254), hb_na4.get(7260), h4_u(["0429", "0430", "0431"])]).intersection(qc_geom)
   m5_geom = u_geoms([sl_core_on, sl_core_qc])
 
-  # Prairies: ECCC CL10 Prairies + Boreal Transition / Peace-Athabasca Parkland (7122..7129) inside AB/SK/MB + Lake Winnipeg / Manitoba Plain
-  pr_ecoregs = u_geoms([
-    ca_ecozone_by_id.get("CL10"),
-    ca_ecoreg_by_name.get("Boreal Transition"),
-    ca_ecoreg_by_name.get("Mid-Boreal Uplands"),
-    ca_ecoreg_by_name.get("Mid Boreal Uplands"),
-    ca_ecoreg_by_name.get("Interlake Plain"),
-    ca_ecoreg_by_name.get("Lake of the Woods"),
-  ])
-  # Ensure Prairies stays strictly within Nelson-Saskatchewan (7121..7129) & Red-Rainy (0901..0903) inside AB/SK/MB/W-ON while Lake Winnipegosis/Manitoba join Prairies and Lower Nelson/Churchill Shield stays in Hudson Bay
-  mb_sk_ab = u_geoms([ca_provs["Alberta"], ca_provs["Saskatchewan"], ca_provs["Manitoba"]])
+  # Prairies: ECCC CL10 Prairies + Boreal Transition / Interlake + Nelson-Saskatchewan (7120..7129) & Red-Rainy (0901..0903) inside CA
   m3_geom = u_geoms([
     ca_ecozone_by_id.get("CL10"),
     ca_ecoreg_by_name.get("Interlake Plain"),
     ca_ecoreg_by_name.get("Boreal Transition"),
-    hb_na4.get(7122).intersection(mb_sk_ab),
-  ]).intersection(u_geoms([mb_sk_ab, hb_range(hb_na4, 7124, 7129), h4_u(["0901", "0902", "0903"])]))
-  # Clip northern Churchill/Nelson muskeg out of Prairies using CL09 Boreal Plains vs CL06/CL15 Boreal Shield / Hudson Plains
-  m3_geom = m3_geom.difference(ca_ecozone_by_id.get("CL15", Polygon())).difference(u_geoms([hb_na4.get(7118), hb_na4.get(7121), hb_na4.get(7132)]))
+    hb_na4.get(7120),
+    hb_range(hb_na4, 7122, 7129),
+    h4_u(["0901", "0902", "0903"]),
+  ]).intersection(u_geoms([ca_ecozone_by_id.get("CL10"), ca_ecoreg_by_name.get("Interlake Plain"), ca_ecoreg_by_name.get("Boreal Transition"), ca_ecoreg_by_name.get("Aspen Parkland"), ca_ecozone_by_id.get("CL09"), hb_na4.get(7120), hb_range(hb_na4, 7122, 7129)]))
+  # Clip northern Churchill/Nelson muskeg & boreal shield out of Prairies organically
+  m3_geom = m3_geom.difference(ca_ecozone_by_id.get("CL15", Polygon())).difference(u_geoms([hb_na4.get(7118), hb_na4.get(7121), hb_na4.get(7132), hb_na4.get(7136)]))
 
-  # Hudson Bay: WMOBB 414 + Hudson/James/Ungava draining HydroBASINS (7111..7119, 7121, 7131..7139, 7210..7229, AR 8321..8330) minus m3/m5/m6
+  # Hudson Bay: Organic Hudson/James/Ungava draining HydroBASINS + Hudson Bay islands (Southampton/Coats/Mansel/Ottawa/Sleeper/Belcher)
+  hb_bay_box = box(-87.5, 55.3, -77.8, 66.0).difference(box(-80.5, 63.8, -61.0, 74.0))
+  hb_isl_n = ca_all_geom.intersection(hb_bay_box.intersection(box(-87.5, 61.5, -77.8, 66.0)))
+  hb_isl_s = ca_all_geom.intersection(hb_bay_box.intersection(box(-87.5, 55.3, -77.8, 61.5)))
   m4_geom = u_geoms([
     hb_range(hb_na4, 7111, 7119),
     hb_na4.get(7121),
-    hb_range(hb_na4, 7131, 7139),
+    hb_range(hb_na4, 7130, 7139),
     hb_range(hb_na4, 7210, 7229),
     hb_range(hb_ar4, 8321, 8330),
     wmo_by_id.get(414, Polygon()),
-  ]).intersection(u_geoms([on_geom, qc_geom, ca_provs["Manitoba"], ca_provs["Saskatchewan"], ca_provs["Nunavut"]]))
-  # Keep Churchill headwaters in SK Boreal Shield in Hudson Bay, while Boreal Plains Athabasca/Peace go to Northern Canada (2)
+    hb_isl_n,
+    hb_isl_s,
+  ]).intersection(ca_all_geom)
+  # Keep Peace/Athabasca Boreal Plains (7124..7129) out of Hudson Bay
   m4_geom = m4_geom.difference(u_geoms([hb_na4.get(7124), hb_na4.get(7126), hb_na4.get(7127), hb_na4.get(7128), hb_na4.get(7129)]))
 
-  # Northern Canada & Greenland (2): Everything else in CA + Greenland (Mackenzie 822x, Arctic Archipelago 831x/84xx/85xx/86xx, GL)
+  # Northern Canada & Greenland (2): Mackenzie-Peace-Athabasca (8210..8229), Arctic Archipelago (8230, 831x, 84xx..86xx), ECCC Arctic/Taiga/Boreal Plains & Greenland
   m2_geom = u_geoms([
     gl_all_geom,
-    ca_provs["Northwest Territories"],
-    ca_provs["Nunavut"],
-    ca_provs["Alberta"],
-    ca_provs["Saskatchewan"],
-    hb_range(hb_ar4, 8221, 8230),
-    hb_range(hb_ar4, 8311, 8319),
+    wmo_by_id.get(408),
+    wmo_by_id.get(409),
+    wmo_by_id.get(410),
+    wmo_by_id.get(411),
+    wmo_by_id.get(412),
+    hb_range(hb_ar4, 8210, 8319),
     hb_range(hb_ar4, 8410, 8630),
+    ca_ecozone_by_id.get("CL01"),
+    ca_ecozone_by_id.get("CL02"),
+    ca_ecozone_by_id.get("CL03"),
+    ca_ecozone_by_id.get("CL04"),
+    ca_ecozone_by_id.get("CL09"),
   ])
 
   ca_macro = np.zeros((H, W), dtype=np.int32)
@@ -596,20 +612,21 @@ def main():
 
   pal1 = distinct_palette(30, 0.05)
 
-  # Module 1.1: Northern Cascadia and Alaska
+  # Module 1.1: Northern Cascadia and Alaska (100% HUC4 + HydroBASINS + Ecozone divides)
   m1 = (ca_macro == 1)
-  nc1_g = h4_u(["1902", "1903"])  # South Central & SW Alaska / Aleutians
-  nc2_g = h4_u(["1905", "1906", "1909"])  # Bering Delta, NW & Arctic Alaska
-  nc3_g = u_geoms([h4_u(["1907", "1908"]), ca_provs["Yukon"]])  # Interior Yukon-Tanana & Yukon Territory
+  nc1_g = u_geoms([h4_u(["1902", "1903"]), hb_range(hb_ar4, 8111, 8116)])  # South Central & SW Alaska / Aleutians
+  nc2_g = u_geoms([h4_u(["1905", "1906", "1909"]), hb_range(hb_ar4, 8117, 8121), hb_range(hb_ar4, 8131, 8139)])  # Bering Delta, NW & Arctic Alaska
+  nc3_g = u_geoms([h4_u(["1907", "1908"]), hb_range(hb_ar4, 8122, 8129), wmo_by_id.get(403), ca_ecozone_by_id.get("CL14"), ca_ecozone_by_id.get("CL16")])  # Interior Yukon-Tanana Basin
   nc4_g = u_geoms([
     h4_u(["1901"]),
     wmo_by_id.get(404),
+    hb_na4.get(7830),
     hb_range(hb_na4, 7834, 7839),
     ca_ecoreg_by_name.get("Gwaii Haanas"),
     ca_ecoreg_by_name.get("Nass Ranges"),
     ca_ecoreg_by_name.get("Coastal Gap"),
   ])
-  nc5_g = u_geoms([hb_range(hb_na4, 7826, 7833), ca_provs["British Columbia"]])
+  nc5_g = u_geoms([hb_range(hb_na4, 7826, 7833), wmo_by_id.get(407), ca_ecozone_by_id.get("CL11"), ca_ecozone_by_id.get("CL18")])
   g1 = ordered_raster_partition(m1, [(4, nc4_g), (1, nc1_g), (2, nc2_g), (3, nc3_g), (5, nc5_g)])
   g1_geoms = {1: nc1_g, 2: nc2_g, 3: nc3_g, 4: nc4_g, 5: nc5_g}
   write_mask_and_json5(
@@ -630,7 +647,7 @@ def main():
   m2 = (ca_macro == 2)
   gl_w_g = hb_range(hb_gr4, 9125, 9143)
   gl_e_g = u_geoms([hb_range(hb_gr4, 9111, 9124), hb_range(hb_gr4, 9144, 9149)])
-  mack_g = u_geoms([wmo_by_id.get(408), hb_range(hb_ar4, 8221, 8229), ca_ecozone_by_id.get("CL04"), ca_ecozone_by_id.get("CL09")])
+  mack_g = u_geoms([wmo_by_id.get(408), hb_range(hb_ar4, 8210, 8229), ca_ecozone_by_id.get("CL04"), ca_ecozone_by_id.get("CL09")])
   earc_g = u_geoms([hb_range(hb_ar4, 8430, 8630), ca_ecozone_by_id.get("CL01")])
   warc_g = u_geoms([hb_ar4.get(8230), hb_range(hb_ar4, 8311, 8319), hb_ar4.get(8410), hb_ar4.get(8420), ca_ecozone_by_id.get("CL03"), ca_ecozone_by_id.get("CL02")])
   g2 = ordered_raster_partition(m2, [(4, gl_w_g), (5, gl_e_g), (1, mack_g), (3, earc_g), (2, warc_g)])
@@ -651,13 +668,25 @@ def main():
     g2, land_area_eff, geom_by_gid={1: mack_g, 2: warc_g, 3: earc_g, 4: gl_w_g, 5: gl_e_g}, clip_geom=m2_geom, priority_order=[4, 5, 1, 3, 2]
   )
 
-  # Module 1.3: Prairies (100% ECCC Ecoregions + HydroBASINS)
+  # Module 1.3: Prairies (100% ECCC Ecoregions + HydroBASINS — zero SK/MB/AB longitudinal cuts)
   m3 = (ca_macro == 3)
-  pr1_g = u_geoms([ca_ecoreg_by_name.get("Foothills Fescue"), ca_ecoreg_by_name.get("Foothills Parkland"), ca_ecoreg_by_name.get("Fescue Grass"), ca_ecoreg_by_name.get("Mixedgrass").intersection(ca_provs["Alberta"]) if "Mixedgrass" in ca_ecoreg_by_name else Polygon(), hb_na4.get(7128), hb_na4.get(7129)])
-  pr4_g = u_geoms([ca_ecoreg_by_name.get("Lake Manitoba Plain"), ca_ecoreg_by_name.get("Southwest Manitoba Uplands"), ca_ecoreg_by_name.get("Interlake Plain"), ca_ecoreg_by_name.get("Lake of the Woods"), ca_provs["Manitoba"]])
+  pr1_g = u_geoms([ca_ecoreg_by_name.get("Foothills Fescue"), ca_ecoreg_by_name.get("Foothills Parkland"), ca_ecoreg_by_name.get("Fescue Grass"), hb_na4.get(7128), hb_na4.get(7129)])
+  pr4_g = u_geoms([ca_ecoreg_by_name.get("Lake Manitoba Plain"), ca_ecoreg_by_name.get("Southwest Manitoba Uplands"), ca_ecoreg_by_name.get("Interlake Plain"), ca_ecoreg_by_name.get("Lake of the Woods"), hb_na4.get(7122), hb_na4.get(7123)])
   pr2_g = u_geoms([ca_ecoreg_by_name.get("Aspen Parkland"), ca_ecoreg_by_name.get("Boreal Transition"), hb_na4.get(7124)])
-  pr3_g = u_geoms([ca_ecoreg_by_name.get("Dry Mixedgrass"), ca_ecoreg_by_name.get("Moist Mixed Grassland"), ca_ecoreg_by_name.get("Cypress Hills Montane"), ca_ecoreg_by_name.get("Cypress Mixedgrass"), hb_na4.get(7125), hb_na4.get(7127)])
+  pr3_g = u_geoms([ca_ecoreg_by_name.get("Dry Mixedgrass"), ca_ecoreg_by_name.get("Moist Mixed Grassland"), ca_ecoreg_by_name.get("Mixedgrass"), ca_ecoreg_by_name.get("Cypress Hills Montane"), ca_ecoreg_by_name.get("Cypress Mixedgrass"), hb_na4.get(7120), hb_na4.get(7125), hb_na4.get(7127)])
   g3 = ordered_raster_partition(m3, [(1, pr1_g), (3, pr3_g), (2, pr2_g), (4, pr4_g)])
+  # 1-pass 3x3 majority smoothing over m3 to clean ECCC sliver artefacts at ~51.8N
+  g3_sm = g3.copy()
+  rows3, cols3 = np.where(m3)
+  for rr, cc in zip(rows3, cols3):
+    win = g3[max(0, rr - 1):min(H, rr + 2), max(0, cc - 1):min(W, cc + 2)]
+    vals = win[win > 0]
+    if vals.size >= 4:
+      u_v, c_v = np.unique(vals, return_counts=True)
+      maj_v = int(u_v[np.argmax(c_v)])
+      if np.sum(vals == g3[rr, cc]) <= 2:
+        g3_sm[rr, cc] = maj_v
+  g3 = g3_sm
   write_mask_and_json5(
     CENTAUR_DIR / "1.pre_columbian_canada_and_alaska/3.prairies",
     "prairies",
@@ -671,11 +700,11 @@ def main():
     g3, land_area_eff, geom_by_gid={1: pr1_g, 2: pr2_g, 3: pr3_g, 4: pr4_g}, clip_geom=m3_geom, priority_order=[1, 3, 2, 4]
   )
 
-  # Module 1.4: Hudson Bay
+  # Module 1.4: Hudson Bay (100% HydroBASINS + Ecozone + Hudson Bay islands — zero QC/ON -79.5W or NU 60N cuts)
   m4 = (ca_macro == 4)
-  hb1_g = u_geoms([ca_provs["Nunavut"].intersection(hb_range(hb_ar4, 8321, 8330)), hb_range(hb_ar4, 8321, 8330), hb_range(hb_na4, 7111, 7117), hb_na4.get(7119)])
-  hb3_g = u_geoms([hb_range(hb_na4, 7211, 7229), ca_provs["Québec"]])
-  hb2_g = u_geoms([ca_ecozone_by_id.get("CL15"), hb_na4.get(7118), hb_na4.get(7121), hb_range(hb_na4, 7131, 7139)])
+  hb1_g = u_geoms([hb_range(hb_ar4, 8321, 8330), hb_range(hb_na4, 7111, 7117), hb_na4.get(7119), hb_isl_n])
+  hb3_g = u_geoms([hb_range(hb_na4, 7210, 7229), hb_isl_s])
+  hb2_g = u_geoms([ca_ecozone_by_id.get("CL15"), hb_na4.get(7118), hb_na4.get(7121), hb_range(hb_na4, 7130, 7139)])
   g4 = ordered_raster_partition(m4, [(1, hb1_g), (3, hb3_g), (2, hb2_g)])
   write_mask_and_json5(
     CENTAUR_DIR / "1.pre_columbian_canada_and_alaska/4.hudson_bay",
@@ -1023,7 +1052,7 @@ def main():
   cc1_4_g = u_geoms([sl1_g, sl2_g, h4_u(["0416", "0417", "0420", "0421", "0422", "0423", "0425", "0427", "0429"])]).intersection(ca_provs["Ontario"])
   cc1_5_g = u_geoms([bna1750, m4_geom, wmo_by_id.get(414)])
   cc1_6_g = u_geoms([m3_geom, wmo_by_id.get(413)])
-  cc1_7_g = u_geoms([ca_provs["British Columbia"], ca_provs["Yukon"], ca_provs["Northwest Territories"], mack_g])
+  cc1_7_g = u_geoms([m1_ca_pacific, mack_g, warc_g, earc_g, hb_range(hb_ar4, 8210, 8630), wmo_by_id.get(409), wmo_by_id.get(410), wmo_by_id.get(411), wmo_by_id.get(412)])
   cc1_8_g = gl_all_geom
 
   g11 = ordered_raster_partition(m_ca_all, [
@@ -1053,16 +1082,22 @@ def main():
     priority_order=[8, 2, 3, 1, 4, 5, 6, 7]
   )
 
-  # 4.4 COLONIAL CANADA TO 1867 (Uses exact Red River Colony 5950 polygon from .naissance!)
+  # 4.4 COLONIAL CANADA TO 1867 (Uses exact Red River Colony 5950 + Laurentian-Hudson Bay Charter watershed divide!)
   rr_geom = n1850_id.get("5950", Polygon())
+  dom1867 = n1867_id.get("6578", Polygon())
+  ruperts_ws = u_geoms([wmo_by_id.get(413), wmo_by_id.get(414), m4_geom, m3_geom, ca_ecozone_by_id.get("CL15"), ca_ecozone_by_id.get("CL10")])
+  nw_terr_g = u_geoms([mack_g, warc_g, earc_g, hb_range(hb_ar4, 8110, 8139), hb_range(hb_ar4, 8210, 8630), wmo_by_id.get(403), wmo_by_id.get(408), wmo_by_id.get(409), wmo_by_id.get(410), wmo_by_id.get(411), wmo_by_id.get(412)])
+  bc_col_g = u_geoms([hb_range(hb_na4, 7826, 7839), wmo_by_id.get(404), wmo_by_id.get(405), wmo_by_id.get(406), wmo_by_id.get(407), ca_ecozone_by_id.get("CL11"), ca_ecozone_by_id.get("CL12"), ca_ecozone_by_id.get("CL18")]).intersection(ca_all_geom).difference(u_geoms([hb_range(hb_ar4, 8122, 8139), hb_range(hb_ar4, 8221, 8229)]))
+  qc_1867 = u_geoms([cc1_1_g, sl2_g, sl3_g, sl4_g, dom1867.intersection(ca_provs["Québec"]), m5_geom.intersection(ca_provs["Québec"])]).difference(ruperts_ws)
+  on_1867 = u_geoms([cc1_4_g, sl1_g, sl2_g, h4_u(["0416", "0417", "0420", "0421", "0422", "0423", "0425", "0427", "0429"]), dom1867.intersection(ca_provs["Ontario"])]).difference(ruperts_ws)
   cc2_geoms = {
-    1: ca_provs["Québec"], 2: ca_provs["Ontario"], 3: ca_provs["Nova Scotia"],
+    1: qc_1867, 2: on_1867, 3: ca_provs["Nova Scotia"],
     4: ca_provs["New Brunswick"], 5: ca_provs["Prince Edward Island"],
     6: ca_provs["Newfoundland and Labrador"], 7: pm_all_geom,
     8: rr_geom,
-    9: u_geoms([ca_provs["Manitoba"], ca_provs["Saskatchewan"], ca_provs["Alberta"]]),
-    10: ca_provs["British Columbia"],
-    11: u_geoms([ca_provs["Yukon"], ca_provs["Northwest Territories"], ca_provs["Nunavut"]]),
+    9: ruperts_ws,
+    10: bc_col_g,
+    11: nw_terr_g,
     12: gl_all_geom,
   }
   g12 = ordered_raster_partition(m_ca_all, [

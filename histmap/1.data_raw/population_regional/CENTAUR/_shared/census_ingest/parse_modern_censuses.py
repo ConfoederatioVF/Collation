@@ -50,7 +50,15 @@ AGGLOMERATION_NAME_RE = re.compile(
   re.I,
 )
 
-POPULSTAT_STATE_MAP = {f"usas-{k.lower()}": v for k, v in US_ABBR_TO_NAME.items()}
+MILITARY_INSTALLATION_RE = re.compile(
+  r"\b(?:AFB|Air Force Base|Air Station|Naval Station|Naval Base|Marine Corps|Army Airfield|Army Depot|Proving Ground|Base Housing|Kings Bay Base|Joint Base|CFB|Canadian Forces Base)\b",
+  re.I,
+)
+KNOWN_FOUNDATION_YEARS = {
+  "Olmos Park-Texas": 1927,
+  "Dover Base Housing-Delaware": 1954,
+  "Kings Bay Base-Georgia": 1978,
+}
 
 CA_ADMIN1_TO_REGION = {
   "01": "can_alberta", "02": "can_british_columbia", "03": "can_manitoba",
@@ -1160,129 +1168,8 @@ def build_pack():
         terr_added += 1
   print(f"  GeoNames CA/GL/BM/PM/AS supplementary settlements processed: {terr_added}")
 
-  print("[6/7] Merging SVEA Populstat & Chandler-Modelski Historical Series (overwrite=False)...")
-  pop_raw = json.load(open(os.path.join(SVEA_ROOT, "histmap/1.data_raw/population_Stadester/populstat_cities/populstat_cities.json"), encoding="utf-8"))
-  for p_group, entries in pop_raw.items():
-    if not isinstance(entries, dict):
-      continue
-    target_ctry = (
-      POPULSTAT_STATE_MAP.get(p_group) or
-      ("Canada" if p_group == "canada" else
-       "Greenland" if p_group == "greenld" else
-       "Bermuda" if p_group == "bermuda" else
-       "American Samoa" if p_group == "amsamoa" else
-       ("USA_RESOLVE" if p_group == "usa" else None))
-    )
-    if not target_ctry:
-      continue
-    for _, c_obj in entries.items():
-      nm = re.sub(r"\s*\([^)]*\)\s*", "", str(c_obj.get("name", ""))).strip()
-      coords = c_obj.get("coords")
-      raw_pops = c_obj.get("population") or {}
-      if not nm or not coords or len(coords) < 2 or not raw_pops:
-        continue
-      lat, lon = float(coords[0]), float(coords[1])
-      resolved_ctry = target_ctry
-      if target_ctry == "USA_RESOLVE":
-        st_hint = US_ABBR_TO_NAME.get(str(c_obj.get("state", "")).strip())
-        if st_hint:
-          resolved_ctry = st_hint
-        else:
-          best_g = None
-          best_d = 40.0
-          for cand_st in US_ABBR_TO_NAME.values():
-            gm = lookup_coords(geo_index, cand_st, nm, lat, lon)
-            if gm:
-              d = haversine_km(lat, lon, gm["lat"], gm["lon"])
-              if d < best_d:
-                best_d = d
-                best_g = gm
-          if not best_g:
-            continue
-          resolved_ctry = best_g["country"]
-      if resolved_ctry == "Pennsylvania" and nm in ("Allegheny", "Allegheny City") and haversine_km(lat, lon, 40.4406, -79.9959) < 3.0:
-        continue
-      if resolved_ctry == "Canada":
-        a1 = CA_PROVCODE_TO_ADMIN1.get(str(c_obj.get("province", "")).strip().upper(), "")
-        gm = lookup_coords(geo_index, "Canada", nm, lat, lon)
-        reg = gm["region"] if gm else CA_ADMIN1_TO_REGION.get(a1, "can_ontario")
-      elif resolved_ctry in US_NAME_SET:
-        reg = slug_state(resolved_ctry)
-      elif resolved_ctry == "Greenland":
-        reg = "can_greenland"
-      elif resolved_ctry == "Bermuda":
-        reg = "usa_bermuda"
-      else:
-        reg = "usa_american_samoa"
-
-      scaled_pops = {}
-      for yk, val in raw_pops.items():
-        try:
-          ym = int(re.search(r"-?\d+", str(yk)).group(0))
-          iv = int(round(float(val) * 1000.0))
-          if iv > 0 and -10000 <= ym <= 2026:
-            scaled_pops[str(ym)] = iv
-        except Exception:
-          pass
-      if resolved_ctry == "Canada":
-        # Skip post-1950 Populstat entries for Canada (StatCan CSDs + CANADA_HISTORICAL_CSD provide exact city-proper series without CMA inflation)
-        scaled_pops = {yk: yv for yk, yv in scaled_pops.items() if int(yk) <= 1950}
-      elif resolved_ctry in US_NAME_SET:
-        # Guard against US MSA / urban-agglomeration figures inflating city-proper series when census record already exists
-        ex_k = find_us_match_by_name_coords(resolved_ctry, nm, lat, lon)
-        if ex_k and cities[ex_k]["population"]:
-          ex_p = cities[ex_k]["population"]
-          filtered_sp = {}
-          for yk, yv in scaled_pops.items():
-            yi = int(yk)
-            if yi >= 1950:
-              near_vals = [float(pv) for py, pv in ex_p.items() if abs(int(py) - yi) <= 15 and float(pv) > 0]
-              if near_vals and yv > 1.35 * max(near_vals):
-                continue
-            filtered_sp[yk] = yv
-          scaled_pops = filtered_sp
-      if scaled_pops:
-        register_city(nm, resolved_ctry, lat, lon, reg, scaled_pops, alt_names=c_obj.get("other_names"), overwrite=False)
-
-  ch_raw = json.load(open(os.path.join(SVEA_ROOT, "histmap/1.data_raw/population_Stadester/worldcitypop/chandler_modelski_cities.json"), encoding="utf-8"))
-  for _, c_obj in ch_raw.items():
-    coords = c_obj.get("coords")
-    if not coords or len(coords) < 2:
-      continue
-    lat, lon = float(coords[0]), float(coords[1])
-    ctry = str(c_obj.get("country", "")).strip()
-    if ctry not in ("United States", "USA", "Canada", "Greenland", "Bermuda", "American Samoa"):
-      continue
-    nm = re.sub(r"\s*\([^)]*\)\s*", "", str(c_obj.get("name", ""))).strip()
-    if ctry in ("United States", "USA"):
-      best_g = None
-      best_d = 50.0
-      for cand_st in US_ABBR_TO_NAME.values():
-        gm = lookup_coords(geo_index, cand_st, nm, lat, lon)
-        if gm:
-          d = haversine_km(lat, lon, gm["lat"], gm["lon"])
-          if d < best_d:
-            best_d = d
-            best_g = gm
-      if not best_g:
-        continue
-      resolved_ctry = best_g["country"]
-      reg = slug_state(resolved_ctry)
-    else:
-      resolved_ctry = ctry
-      gm = lookup_coords(geo_index, ctry, nm, lat, lon)
-      reg = gm["region"] if gm else ("can_ontario" if ctry == "Canada" else "can_greenland")
-    pops = {}
-    for k, v in (c_obj.get("population") or {}).items():
-      try:
-        yi = int(k)
-        fv = float(v)
-        if yi < 1850 and fv > 0:
-          pops[str(yi)] = int(round(fv))
-      except Exception:
-        pass
-    if pops:
-      register_city(nm, resolved_ctry, lat, lon, reg, pops, alt_names=c_obj.get("other_names"), overwrite=False)
+  print("[6/7] Verifying canonical municipal foundations & historical splits...")
+  # (Banned Populstat and Chandler-Modelski fallbacks purged in favour of primary US/CA censuses)
 
   # Ensure canonical Saint Louis MO stays cleanly separate from Cahokia and Pittsburgh PA has clean 1754-2026 trajectory
   pitt_k = "Pittsburgh-Pennsylvania"
@@ -1352,6 +1239,16 @@ def build_pack():
     p = cv["population"]
     if not p:
       continue
+    sorted_yrs = sorted(int(k) for k in p.keys())
+    first_obs = sorted_yrs[0]
+    f_yr = KNOWN_FOUNDATION_YEARS.get(ck)
+    if f_yr is None and MILITARY_INSTALLATION_RE.search(cv["name"]):
+      f_yr = max(1940, first_obs - 2)
+    elif f_yr is None and first_obs >= 1920 and cv["country"] in US_NAME_SET:
+      f_yr = first_obs - 10
+    if f_yr is not None:
+      cv["foundation_year"] = int(f_yr)
+      p = {str(y): p[str(y)] for y in sorted_yrs if y >= f_yr}
     cv["population"] = {str(y): p[str(y)] for y in sorted(int(k) for k in p.keys())}
 
   print("[7/7] Parsing US apportionment & StatCan provincial totals and writing modern_census_pack.json...")
