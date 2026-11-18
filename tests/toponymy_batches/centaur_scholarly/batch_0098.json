@@ -1,0 +1,951 @@
+{
+  "batch_index": 98,
+  "project": "CENTAUR",
+  "count": 30,
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        42.2715,
+        -71.7568
+      ],
+      "country": "Massachusetts",
+      "earliest_year": 1200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mishoonash-Massachusetts",
+      "known_aliases": [
+        "Mishoonash",
+        "mishoonash",
+        "lake quinsigamond nipmuc",
+        "nippenet",
+        "Lake Quinsigamond Nipmuc",
+        "Nippenet"
+      ],
+      "latest_year": 1600,
+      "name": "Mishoonash",
+      "reason": "missing_entry",
+      "region": "ne_merrimack_massachusetts_bay",
+      "sample_years": [
+        1200,
+        1400,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.6632,
+        -72.6345
+      ],
+      "country": "Connecticut",
+      "earliest_year": 1100,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Morgan Site-Connecticut",
+      "known_aliases": [
+        "Morgan Site",
+        "morgan site",
+        "6ht120",
+        "rocky hill connecticut river",
+        "6HT120",
+        "Rocky Hill Connecticut River"
+      ],
+      "latest_year": 1400,
+      "name": "Morgan Site",
+      "reason": "missing_entry",
+      "region": "ne_connecticut_narragansett_south",
+      "sample_years": [
+        1100,
+        1300,
+        1400
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.6645,
+        -67.6845
+      ],
+      "country": "Canada",
+      "earliest_year": -4000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mud Lake Stream-Canada",
+      "known_aliases": [
+        "Mud Lake Stream",
+        "mud lake stream",
+        "bkdw-5",
+        "spednic lake st. croix",
+        "BkDw-5",
+        "Spednic Lake St. Croix"
+      ],
+      "latest_year": 1500,
+      "name": "Mud Lake Stream",
+      "reason": "missing_entry",
+      "region": "ne_maine_penobscot_kennebec",
+      "sample_years": [
+        -4000,
+        -1000,
+        1500
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.4031,
+        -69.0247
+      ],
+      "country": "Maine",
+      "earliest_year": -9000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Munsungun-Maine",
+      "known_aliases": [
+        "Munsungun",
+        "munsungun",
+        "munsungan-chase lake thoroughfare",
+        "fluted point quarry",
+        "Munsungan-Chase Lake Thoroughfare",
+        "Fluted Point Quarry"
+      ],
+      "latest_year": 1000,
+      "name": "Munsungun",
+      "reason": "missing_entry",
+      "region": "ne_maine_penobscot_kennebec",
+      "sample_years": [
+        -9000,
+        -6000,
+        -2000,
+        1000
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.761,
+        -71.3915
+      ],
+      "country": "Rhode Island",
+      "earliest_year": 1500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pawtuxet Narragansett Village-Rhode Island",
+      "known_aliases": [
+        "Pawtuxet Narragansett Village",
+        "pawtuxet narragansett village",
+        "pawtuxet river confluence town",
+        "Pawtuxet River Confluence Town"
+      ],
+      "latest_year": 1600,
+      "name": "Pawtuxet Narragansett Village",
+      "reason": "missing_entry",
+      "region": "ne_merrimack_massachusetts_bay",
+      "sample_years": [
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.4842,
+        -71.1865
+      ],
+      "country": "Rhode Island",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Peckham Farm-Rhode Island",
+      "known_aliases": [
+        "Peckham Farm",
+        "peckham farm",
+        "ri-1186",
+        "sakonnet point",
+        "RI-1186",
+        "Sakonnet Point"
+      ],
+      "latest_year": 1100,
+      "name": "Peckham Farm",
+      "reason": "missing_entry",
+      "region": "ne_merrimack_massachusetts_bay",
+      "sample_years": [
+        800,
+        1100
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.7927,
+        -73.2451
+      ],
+      "country": "Connecticut",
+      "earliest_year": -9000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Templeton-Connecticut",
+      "known_aliases": [
+        "Templeton",
+        "templeton",
+        "6lf21",
+        "shepaug river paleoindian",
+        "6LF21",
+        "Shepaug River Paleoindian"
+      ],
+      "latest_year": 1400,
+      "name": "Templeton",
+      "reason": "missing_entry",
+      "region": "ne_connecticut_narragansett_south",
+      "sample_years": [
+        -9000,
+        -8000,
+        1400
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.0167,
+        -70.9667
+      ],
+      "country": "Maine",
+      "earliest_year": -9000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Vail-Maine",
+      "known_aliases": [
+        "Vail",
+        "vail",
+        "vail paleoindian site",
+        "aziscohos lake",
+        "Vail Paleoindian Site",
+        "Aziscohos Lake"
+      ],
+      "latest_year": -8000,
+      "name": "Vail",
+      "reason": "missing_entry",
+      "region": "ne_maine_penobscot_kennebec",
+      "sample_years": [
+        -9000,
+        -8000
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.881,
+        -101.1815
+      ],
+      "country": "Texas",
+      "earliest_year": 1300,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Adobe Walls Habitation Town-Texas",
+      "known_aliases": [
+        "Adobe Walls Habitation Town",
+        "adobe walls habitation town",
+        "41hc5",
+        "adobe walls prehistoric settlement",
+        "41HC5",
+        "Adobe Walls Prehistoric Settlement"
+      ],
+      "latest_year": 1450,
+      "name": "Adobe Walls Habitation Town",
+      "reason": "missing_entry",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "sample_years": [
+        1300,
+        1450
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.5615,
+        -101.651
+      ],
+      "country": "Texas",
+      "earliest_year": 1250,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Alibates 19 Pueblo Town-Texas",
+      "known_aliases": [
+        "Alibates 19 Pueblo Town",
+        "alibates 19 pueblo town",
+        "41pt10",
+        "alibates ruin 19 village",
+        "41PT10",
+        "Alibates Ruin 19 Village"
+      ],
+      "latest_year": 1350,
+      "name": "Alibates 19 Pueblo Town",
+      "reason": "missing_entry",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "sample_years": [
+        1250,
+        1350
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.761,
+        -101.5215
+      ],
+      "country": "Texas",
+      "earliest_year": 1300,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Archambeau Ruins-Texas",
+      "known_aliases": [
+        "Archambeau Ruins",
+        "archambeau ruins",
+        "41hc40",
+        "archambeau antelope creek village",
+        "41HC40",
+        "Archambeau Antelope Creek Village"
+      ],
+      "latest_year": 1400,
+      "name": "Archambeau Ruins",
+      "reason": "missing_entry",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "sample_years": [
+        1300,
+        1400
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.781,
+        -97.2215
+      ],
+      "country": "Oklahoma",
+      "earliest_year": 1250,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Arthur Washita Village-Oklahoma",
+      "known_aliases": [
+        "Arthur Washita Village",
+        "arthur washita village",
+        "34gv32",
+        "arthur earthlodge town",
+        "arthur",
+        "34GV32",
+        "Arthur Earthlodge Town"
+      ],
+      "latest_year": 1450,
+      "name": "Arthur Washita Village",
+      "reason": "missing_entry",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "sample_years": [
+        1250,
+        1350,
+        1450
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.681,
+        -101.4215
+      ],
+      "country": "Texas",
+      "earliest_year": 1300,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Black Dog Village-Texas",
+      "known_aliases": [
+        "Black Dog Village",
+        "black dog village",
+        "41hc8",
+        "black dog antelope creek settlement",
+        "41HC8",
+        "Black Dog Antelope Creek Settlement"
+      ],
+      "latest_year": 1400,
+      "name": "Black Dog Village",
+      "reason": "missing_entry",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "sample_years": [
+        1300,
+        1400
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.745,
+        -101.385
+      ],
+      "country": "Texas",
+      "earliest_year": 1200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Blackdog-Texas",
+      "known_aliases": [
+        "Blackdog",
+        "blackdog",
+        "blackdog antelope creek site",
+        "41hf",
+        "Blackdog Antelope Creek Site",
+        "41HF"
+      ],
+      "latest_year": 1450,
+      "name": "Blackdog",
+      "reason": "missing_entry",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "sample_years": [
+        1200,
+        1350,
+        1450
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.651,
+        -94.1515
+      ],
+      "country": "Arkansas",
+      "earliest_year": 1250,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bowman Caddo Town-Arkansas",
+      "known_aliases": [
+        "Bowman Caddo Town",
+        "bowman caddo town",
+        "3lr46",
+        "bowman mounds habitation",
+        "3LR46",
+        "Bowman Mounds Habitation"
+      ],
+      "latest_year": 1400,
+      "name": "Bowman Caddo Town",
+      "reason": "missing_entry",
+      "region": "cp_arkansas_valley_ozark_spiro",
+      "sample_years": [
+        1250,
+        1400
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.592,
+        -94.395
+      ],
+      "country": "Arkansas",
+      "earliest_year": 1100,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bowman-Arkansas_2",
+      "known_aliases": [
+        "Bowman",
+        "bowman",
+        "bowman site",
+        "3lr46",
+        "Bowman Site",
+        "3LR46"
+      ],
+      "latest_year": 1450,
+      "name": "Bowman",
+      "reason": "missing_entry",
+      "region": "cp_arkansas_valley_ozark_spiro",
+      "sample_years": [
+        1100,
+        1300,
+        1450
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.2515,
+        -97.501
+      ],
+      "country": "Oklahoma",
+      "earliest_year": 1200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Brewer Washita Village-Oklahoma",
+      "known_aliases": [
+        "Brewer Washita Village",
+        "brewer washita village",
+        "34ml3",
+        "brewer settlement",
+        "34ML3",
+        "Brewer Settlement"
+      ],
+      "latest_year": 1300,
+      "name": "Brewer Washita Village",
+      "reason": "missing_entry",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "sample_years": [
+        1200,
+        1300
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.051,
+        -97.9015
+      ],
+      "country": "Oklahoma",
+      "earliest_year": 1250,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Brown Washita Village-Oklahoma",
+      "known_aliases": [
+        "Brown Washita Village",
+        "brown washita village",
+        "34gd1",
+        "brown earthlodge town",
+        "34GD1",
+        "Brown Earthlodge Town"
+      ],
+      "latest_year": 1350,
+      "name": "Brown Washita Village",
+      "reason": "missing_entry",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "sample_years": [
+        1250,
+        1350
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.9215,
+        -97.021
+      ],
+      "country": "Oklahoma",
+      "earliest_year": 1550,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bryson-Paddock Wichita Town-Oklahoma",
+      "known_aliases": [
+        "Bryson-Paddock Wichita Town",
+        "bryson-paddock wichita town",
+        "34ka5",
+        "bryson-paddock earthlodge town",
+        "34KA5",
+        "Bryson-Paddock Earthlodge Town"
+      ],
+      "latest_year": 1550,
+      "name": "Bryson-Paddock Wichita Town",
+      "reason": "missing_entry",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "sample_years": [
+        1550
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.8181,
+        -97.1442
+      ],
+      "country": "Oklahoma",
+      "earliest_year": 1450,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bryson-Paddock-Oklahoma",
+      "known_aliases": [
+        "Bryson-Paddock",
+        "bryson-paddock",
+        "34ka5",
+        "34KA5"
+      ],
+      "latest_year": 1600,
+      "name": "Bryson-Paddock",
+      "reason": "missing_entry",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "sample_years": [
+        1450,
+        1550,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.4152,
+        -95.3643
+      ],
+      "country": "Oklahoma",
+      "earliest_year": -1800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bug Hill-Oklahoma",
+      "known_aliases": [
+        "Bug Hill",
+        "bug hill",
+        "34pu116",
+        "34PU116"
+      ],
+      "latest_year": 1450,
+      "name": "Bug Hill",
+      "reason": "missing_entry",
+      "region": "cp_arkansas_valley_ozark_spiro",
+      "sample_years": [
+        -1800,
+        400,
+        1450
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.8215,
+        -101.551
+      ],
+      "country": "Texas",
+      "earliest_year": 1250,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bugbee Canyon Village-Texas",
+      "known_aliases": [
+        "Bugbee Canyon Village",
+        "bugbee canyon village",
+        "41hc30",
+        "bugbee antelope creek settlement",
+        "41HC30",
+        "Bugbee Antelope Creek Settlement"
+      ],
+      "latest_year": 1350,
+      "name": "Bugbee Canyon Village",
+      "reason": "missing_entry",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "sample_years": [
+        1250,
+        1350
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.3215,
+        -100.751
+      ],
+      "country": "Texas",
+      "earliest_year": 1150,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Buried City Wolf Creek Pueblo-Texas",
+      "known_aliases": [
+        "Buried City Wolf Creek Pueblo",
+        "buried city wolf creek pueblo",
+        "41oc1",
+        "buried city multi-room town",
+        "buried city",
+        "wolf creek ruins",
+        "41OC1",
+        "Buried City Multi-Room Town",
+        "Wolf Creek Ruins"
+      ],
+      "latest_year": 1450,
+      "name": "Buried City Wolf Creek Pueblo",
+      "reason": "missing_entry",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "sample_years": [
+        1150,
+        1200,
+        1300,
+        1350,
+        1450
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.8215,
+        -101.881
+      ],
+      "country": "Texas",
+      "earliest_year": 1300,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Canadian River Mesa Village-Texas",
+      "known_aliases": [
+        "Canadian River Mesa Village",
+        "canadian river mesa village",
+        "41mo1",
+        "moore county slab settlement",
+        "41MO1",
+        "Moore County Slab Settlement"
+      ],
+      "latest_year": 1400,
+      "name": "Canadian River Mesa Village",
+      "reason": "missing_entry",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "sample_years": [
+        1300,
+        1400
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.551,
+        -101.7515
+      ],
+      "country": "Texas",
+      "earliest_year": 1300,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Canadian River Slab Village-Texas",
+      "known_aliases": [
+        "Canadian River Slab Village",
+        "canadian river slab village",
+        "41pt15",
+        "canadian valley antelope creek town",
+        "41PT15",
+        "Canadian Valley Antelope Creek Town"
+      ],
+      "latest_year": 1400,
+      "name": "Canadian River Slab Village",
+      "reason": "missing_entry",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "sample_years": [
+        1300,
+        1400
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.7415,
+        -101.481
+      ],
+      "country": "Texas",
+      "earliest_year": 1250,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Chimney Rock Antelope Creek Village-Texas",
+      "known_aliases": [
+        "Chimney Rock Antelope Creek Village",
+        "chimney rock antelope creek village",
+        "41hc35",
+        "chimney rock masonry village",
+        "41HC35",
+        "Chimney Rock Masonry Village"
+      ],
+      "latest_year": 1350,
+      "name": "Chimney Rock Antelope Creek Village",
+      "reason": "missing_entry",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "sample_years": [
+        1250,
+        1350
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.781,
+        -101.5015
+      ],
+      "country": "Texas",
+      "earliest_year": 1300,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Coeta Creek Pueblo Village-Texas",
+      "known_aliases": [
+        "Coeta Creek Pueblo Village",
+        "coeta creek pueblo village",
+        "41hc25",
+        "coeta creek ruin",
+        "41HC25",
+        "Coeta Creek Ruin"
+      ],
+      "latest_year": 1400,
+      "name": "Coeta Creek Pueblo Village",
+      "reason": "missing_entry",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "sample_years": [
+        1300,
+        1400
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.318,
+        -95.622
+      ],
+      "country": "Texas",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cooper Lake-Texas",
+      "known_aliases": [
+        "Cooper Lake",
+        "cooper lake",
+        "hurricane hill",
+        "cooper reservoir complex",
+        "41hp106",
+        "Hurricane Hill",
+        "Cooper Reservoir Complex",
+        "41HP106"
+      ],
+      "latest_year": 1350,
+      "name": "Cooper Lake",
+      "reason": "missing_entry",
+      "region": "cp_arkansas_valley_ozark_spiro",
+      "sample_years": [
+        -1000,
+        1000,
+        1350
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.851,
+        -100.8515
+      ],
+      "country": "Texas",
+      "earliest_year": 1250,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cottonwood Creek Pueblo Settlement-Texas",
+      "known_aliases": [
+        "Cottonwood Creek Pueblo Settlement",
+        "cottonwood creek pueblo settlement",
+        "41rb1",
+        "roberts county antelope creek pueblo",
+        "41RB1",
+        "Roberts County Antelope Creek Pueblo"
+      ],
+      "latest_year": 1350,
+      "name": "Cottonwood Creek Pueblo Settlement",
+      "reason": "missing_entry",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "sample_years": [
+        1250,
+        1350
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.8015,
+        -101.451
+      ],
+      "country": "Texas",
+      "earliest_year": 1250,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cottonwood Creek Slab Village-Texas",
+      "known_aliases": [
+        "Cottonwood Creek Slab Village",
+        "cottonwood creek slab village",
+        "41hc20",
+        "cottonwood creek antelope creek town",
+        "41HC20",
+        "Cottonwood Creek Antelope Creek Town"
+      ],
+      "latest_year": 1350,
+      "name": "Cottonwood Creek Slab Village",
+      "reason": "missing_entry",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "sample_years": [
+        1250,
+        1350
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

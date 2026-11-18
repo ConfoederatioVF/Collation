@@ -1,0 +1,931 @@
+{
+  "batch_index": 393,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        44.9525,
+        -72.72833
+      ],
+      "country": "Vermont",
+      "earliest_year": 1800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Berkshire-Vermont",
+      "known_aliases": [
+        "Berkshire",
+        "berkshire",
+        "berkshire town",
+        "Berkshire town"
+      ],
+      "latest_year": 2010,
+      "name": "Berkshire",
+      "reason": "missing_entry",
+      "region": "usa_vermont",
+      "sample_years": [
+        1800,
+        1870,
+        1940,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.88389,
+        -72.77111
+      ],
+      "country": "Vermont",
+      "earliest_year": 1800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Enosburgh-Vermont",
+      "known_aliases": [
+        "Enosburgh",
+        "enosburgh",
+        "enosburgh town",
+        "Enosburgh town"
+      ],
+      "latest_year": 2010,
+      "name": "Enosburgh",
+      "reason": "missing_entry",
+      "region": "usa_vermont",
+      "sample_years": [
+        1800,
+        1870,
+        1940,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.93889,
+        -73.04333
+      ],
+      "country": "Vermont",
+      "earliest_year": 1775,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Highgate-Vermont",
+      "known_aliases": [
+        "Highgate",
+        "highgate",
+        "highgate town",
+        "highgate center",
+        "highgate center cdp",
+        "Highgate town",
+        "Highgate Center",
+        "Highgate Center CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Highgate",
+      "reason": "missing_entry",
+      "region": "usa_vermont",
+      "sample_years": [
+        1775,
+        1850,
+        1940,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.71139,
+        -72.54028
+      ],
+      "country": "Vermont",
+      "earliest_year": 1800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Eden-Vermont",
+      "known_aliases": [
+        "Eden",
+        "eden",
+        "eden town",
+        "Eden town"
+      ],
+      "latest_year": 2010,
+      "name": "Eden",
+      "reason": "missing_entry",
+      "region": "usa_vermont",
+      "sample_years": [
+        1800,
+        1870,
+        1940,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.96167,
+        -72.705
+      ],
+      "country": "Vermont",
+      "earliest_year": 1775,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Braintree-Vermont",
+      "known_aliases": [
+        "Braintree",
+        "braintree",
+        "braintree town",
+        "Braintree town"
+      ],
+      "latest_year": 2010,
+      "name": "Braintree",
+      "reason": "missing_entry",
+      "region": "usa_vermont",
+      "sample_years": [
+        1775,
+        1850,
+        1930,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.12861,
+        -72.25667
+      ],
+      "country": "Vermont",
+      "earliest_year": 1775,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Topsham-Vermont",
+      "known_aliases": [
+        "Topsham",
+        "topsham",
+        "topsham town",
+        "Topsham town"
+      ],
+      "latest_year": 2010,
+      "name": "Topsham",
+      "reason": "missing_entry",
+      "region": "usa_vermont",
+      "sample_years": [
+        1775,
+        1850,
+        1930,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.53333,
+        -73.06667
+      ],
+      "country": "Vermont",
+      "earliest_year": 1775,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ira-Vermont",
+      "known_aliases": [
+        "Ira",
+        "ira",
+        "ira town",
+        "Ira town"
+      ],
+      "latest_year": 2010,
+      "name": "Ira",
+      "reason": "missing_entry",
+      "region": "usa_vermont",
+      "sample_years": [
+        1775,
+        1850,
+        1930,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.66472,
+        -72.79333
+      ],
+      "country": "Vermont",
+      "earliest_year": 1775,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Killington-Vermont",
+      "known_aliases": [
+        "Killington",
+        "killington",
+        "killington town",
+        "Killington town"
+      ],
+      "latest_year": 2010,
+      "name": "Killington",
+      "reason": "missing_entry",
+      "region": "usa_vermont",
+      "sample_years": [
+        1775,
+        1850,
+        1930,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.32917,
+        -72.96
+      ],
+      "country": "Vermont",
+      "earliest_year": 1775,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mount Tabor-Vermont",
+      "known_aliases": [
+        "Mount Tabor",
+        "mount tabor",
+        "mount tabor town",
+        "Mount Tabor town"
+      ],
+      "latest_year": 2010,
+      "name": "Mount Tabor",
+      "reason": "missing_entry",
+      "region": "usa_vermont",
+      "sample_years": [
+        1775,
+        1850,
+        1930,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.36333,
+        -72.46639
+      ],
+      "country": "Vermont",
+      "earliest_year": 1800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Calais-Vermont",
+      "known_aliases": [
+        "Calais",
+        "calais",
+        "calais town",
+        "Calais town"
+      ],
+      "latest_year": 2010,
+      "name": "Calais",
+      "reason": "missing_entry",
+      "region": "usa_vermont",
+      "sample_years": [
+        1800,
+        1870,
+        1940,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.21222,
+        -72.86306
+      ],
+      "country": "Vermont",
+      "earliest_year": 1800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fayston-Vermont",
+      "known_aliases": [
+        "Fayston",
+        "fayston",
+        "fayston town",
+        "Fayston town"
+      ],
+      "latest_year": 2010,
+      "name": "Fayston",
+      "reason": "missing_entry",
+      "region": "usa_vermont",
+      "sample_years": [
+        1800,
+        1870,
+        1940,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.43417,
+        -72.4125
+      ],
+      "country": "Vermont",
+      "earliest_year": 1800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Woodbury-Vermont",
+      "known_aliases": [
+        "Woodbury",
+        "woodbury",
+        "woodbury town",
+        "Woodbury town"
+      ],
+      "latest_year": 2010,
+      "name": "Woodbury",
+      "reason": "missing_entry",
+      "region": "usa_vermont",
+      "sample_years": [
+        1800,
+        1870,
+        1940,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.9225,
+        -72.57778
+      ],
+      "country": "Vermont",
+      "earliest_year": 1754,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Dummerston-Vermont",
+      "known_aliases": [
+        "Dummerston",
+        "dummerston",
+        "dummerston town",
+        "fullam",
+        "Dummerston town",
+        "Fullam"
+      ],
+      "latest_year": 2010,
+      "name": "Dummerston",
+      "reason": "missing_entry",
+      "region": "usa_new_hampshire",
+      "sample_years": [
+        1754,
+        1830,
+        1920,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.76639,
+        -72.62639
+      ],
+      "country": "Vermont",
+      "earliest_year": 1754,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Guilford-Vermont",
+      "known_aliases": [
+        "Guilford",
+        "guilford",
+        "guilford town",
+        "guilford vt",
+        "Guilford town",
+        "Guilford VT"
+      ],
+      "latest_year": 2010,
+      "name": "Guilford",
+      "reason": "missing_entry",
+      "region": "usa_vermont",
+      "sample_years": [
+        1754,
+        1830,
+        1920,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.78194,
+        -72.74944
+      ],
+      "country": "Vermont",
+      "earliest_year": 1754,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Halifax-Vermont",
+      "known_aliases": [
+        "Halifax",
+        "halifax",
+        "halifax town",
+        "halifax vt",
+        "Halifax town",
+        "Halifax VT"
+      ],
+      "latest_year": 2010,
+      "name": "Halifax",
+      "reason": "missing_entry",
+      "region": "usa_vermont",
+      "sample_years": [
+        1754,
+        1830,
+        1920,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.06139,
+        -72.90417
+      ],
+      "country": "Vermont",
+      "earliest_year": 1775,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Stratton-Vermont",
+      "known_aliases": [
+        "Stratton",
+        "stratton",
+        "stratton town",
+        "Stratton town"
+      ],
+      "latest_year": 2010,
+      "name": "Stratton",
+      "reason": "missing_entry",
+      "region": "usa_vermont",
+      "sample_years": [
+        1775,
+        1850,
+        1930,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.27278,
+        -72.71806
+      ],
+      "country": "Vermont",
+      "earliest_year": 1775,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Andover-Vermont",
+      "known_aliases": [
+        "Andover",
+        "andover",
+        "andover town",
+        "Andover town"
+      ],
+      "latest_year": 2010,
+      "name": "Andover",
+      "reason": "missing_entry",
+      "region": "usa_vermont",
+      "sample_years": [
+        1775,
+        1850,
+        1930,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.35,
+        -72.56667
+      ],
+      "country": "Vermont",
+      "earliest_year": 1800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Baltimore-Vermont",
+      "known_aliases": [
+        "Baltimore",
+        "baltimore",
+        "baltimore town",
+        "Baltimore town"
+      ],
+      "latest_year": 2010,
+      "name": "Baltimore",
+      "reason": "missing_entry",
+      "region": "usa_vermont",
+      "sample_years": [
+        1800,
+        1870,
+        1940,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.61944,
+        -72.67194
+      ],
+      "country": "Vermont",
+      "earliest_year": 1775,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bridgewater-Vermont",
+      "known_aliases": [
+        "Bridgewater",
+        "bridgewater",
+        "bridgewater town",
+        "Bridgewater town"
+      ],
+      "latest_year": 2010,
+      "name": "Bridgewater",
+      "reason": "missing_entry",
+      "region": "usa_vermont",
+      "sample_years": [
+        1775,
+        1850,
+        1930,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.77361,
+        -72.44389
+      ],
+      "country": "Vermont",
+      "earliest_year": 1775,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sharon-Vermont",
+      "known_aliases": [
+        "Sharon",
+        "sharon",
+        "sharon town",
+        "Sharon town"
+      ],
+      "latest_year": 2010,
+      "name": "Sharon",
+      "reason": "missing_entry",
+      "region": "usa_vermont",
+      "sample_years": [
+        1775,
+        1850,
+        1930,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.38444,
+        -72.4625
+      ],
+      "country": "Vermont",
+      "earliest_year": 1765,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Weathersfield-Vermont",
+      "known_aliases": [
+        "Weathersfield",
+        "weathersfield",
+        "weathersfield town",
+        "weathersfield vt",
+        "Weathersfield town",
+        "Weathersfield VT"
+      ],
+      "latest_year": 2010,
+      "name": "Weathersfield",
+      "reason": "missing_entry",
+      "region": "usa_vermont",
+      "sample_years": [
+        1765,
+        1840,
+        1930,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.05417,
+        -68.67222
+      ],
+      "country": "Maine",
+      "earliest_year": 1830,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Argyle-Maine",
+      "known_aliases": [
+        "Argyle",
+        "argyle"
+      ],
+      "latest_year": 2010,
+      "name": "Argyle",
+      "reason": "missing_entry",
+      "region": "usa_maine",
+      "sample_years": [
+        1830,
+        1890,
+        1950,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.15694,
+        -69.06028
+      ],
+      "country": "Maine",
+      "earliest_year": 1820,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Atkinson-Maine",
+      "known_aliases": [
+        "Atkinson",
+        "atkinson"
+      ],
+      "latest_year": 2010,
+      "name": "Atkinson",
+      "reason": "missing_entry",
+      "region": "usa_maine",
+      "sample_years": [
+        1820,
+        1880,
+        1950,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.82333,
+        -70.72417
+      ],
+      "country": "Maine",
+      "earliest_year": 1775,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Baldwin-Maine",
+      "known_aliases": [
+        "Baldwin",
+        "baldwin"
+      ],
+      "latest_year": 2010,
+      "name": "Baldwin",
+      "reason": "missing_entry",
+      "region": "usa_maine",
+      "sample_years": [
+        1775,
+        1850,
+        1930,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.70861,
+        -67.99917
+      ],
+      "country": "Maine",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bancroft-Maine",
+      "known_aliases": [
+        "Bancroft",
+        "bancroft"
+      ],
+      "latest_year": 2010,
+      "name": "Bancroft",
+      "reason": "missing_entry",
+      "region": "usa_maine",
+      "sample_years": [
+        1850,
+        1900,
+        1960,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.13444,
+        -67.31556
+      ],
+      "country": "Maine",
+      "earliest_year": 1830,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Baring-Maine",
+      "known_aliases": [
+        "Baring",
+        "baring"
+      ],
+      "latest_year": 2010,
+      "name": "Baring",
+      "reason": "missing_entry",
+      "region": "usa_maine",
+      "sample_years": [
+        1830,
+        1890,
+        1950,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.2675,
+        -69.58361
+      ],
+      "country": "Maine",
+      "earliest_year": 1840,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Blanchard-Maine",
+      "known_aliases": [
+        "Blanchard",
+        "blanchard"
+      ],
+      "latest_year": 2010,
+      "name": "Blanchard",
+      "reason": "missing_entry",
+      "region": "usa_maine",
+      "sample_years": [
+        1840,
+        1900,
+        1960,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.04528,
+        -69.69472
+      ],
+      "country": "Maine",
+      "earliest_year": 1830,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Brighton-Maine",
+      "known_aliases": [
+        "Brighton",
+        "brighton"
+      ],
+      "latest_year": 2010,
+      "name": "Brighton",
+      "reason": "missing_entry",
+      "region": "usa_maine",
+      "sample_years": [
+        1830,
+        1890,
+        1950,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.41444,
+        -68.03806
+      ],
+      "country": "Maine",
+      "earliest_year": 1871,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Carroll-Maine",
+      "known_aliases": [
+        "Carroll",
+        "carroll"
+      ],
+      "latest_year": 2010,
+      "name": "Carroll",
+      "reason": "missing_entry",
+      "region": "usa_maine",
+      "sample_years": [
+        1871,
+        1920,
+        1970,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.99528,
+        -67.86194
+      ],
+      "country": "Maine",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cary-Maine",
+      "known_aliases": [
+        "Cary",
+        "cary"
+      ],
+      "latest_year": 2010,
+      "name": "Cary",
+      "reason": "missing_entry",
+      "region": "usa_maine",
+      "sample_years": [
+        1850,
+        1900,
+        1960,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

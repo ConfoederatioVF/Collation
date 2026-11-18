@@ -108,7 +108,7 @@ let { PNG } = global.pngjs || require("pngjs");
         for (let x = 0; x < macro_list.length; x++) {
           let mx = macro_list[x];
 
-          if (mx.is_front || mx.lat >= 54.0) continue;
+          if (mx.is_front || Math.abs(mx.lat) >= 56.0) continue;
           let r2 = mx.radius_km*mx.radius_km;
           let wsum = 0;
           let wz = 0;
@@ -117,7 +117,7 @@ let { PNG } = global.pngjs || require("pngjs");
             if (x === y) continue;
             let my = macro_list[y];
 
-            if (my.lat >= 56.0) continue;
+            if (Math.abs(my.lat) >= 58.0) continue;
             let dot = Math.max(-1, Math.min(1, mx.ux*my.ux + mx.uy*my.uy + mx.uz*my.uz));
             let d2 = earth_radius_km*earth_radius_km*Math.max(0, 2 - 2*dot);
 
@@ -131,7 +131,7 @@ let { PNG } = global.pngjs || require("pngjs");
           let nbr_prior = (wsum > 0) ? wz/wsum : tile_means[x];
 
           if (preserve_dyn) {
-            //Pure same-period spatial-neighbour floor without injecting global all-period total_sites_all_periods
+            //Pure same-period spatial-neighbour floor and zero-hole imputation without injecting global all-period total_sites_all_periods
             if (tile_means[x] < 0.65*nbr_prior && tile_means[x] > 1e-6) {
               let mean_z_tile = Math.max(1e-6, tile_means[x]);
               let target_mean = 0.40*tile_means[x] + 0.60*nbr_prior;
@@ -142,6 +142,15 @@ let { PNG } = global.pngjs || require("pngjs");
                 let z_new = Math.max(z_raw, target_mean*(z_raw/mean_z_tile));
 
                 o.eb_densities[pkey] = z_new*z_new;
+              }
+            } else if (tile_means[x] <= 1e-6 && nbr_prior > 1e-4) {
+              let imp_z = 0.35*nbr_prior;
+
+              for (let y = 0; y < mx.obs.length; y++) {
+                let o = mx.obs[y];
+                let z_raw = z_arr[o._idx];
+
+                o.eb_densities[pkey] = Math.max(z_raw*z_raw, imp_z*imp_z);
               }
             }
           } else {
@@ -220,13 +229,15 @@ let { PNG } = global.pngjs || require("pngjs");
 
         if (field) {
           for (let x = 0; x < bundle.mask_data.valid_cell_count; x++) {
-            let v = Number.isFinite(field[x]) ? Math.max(1e-5, field[x]) : 1e-5;
+            let v = (Number.isFinite(field[x]) && field[x] > 1e-7) ? field[x] : 0;
 
             field[x] = v;
-            if (v > max_val) max_val = v;
-            sum_val += v;
-            active_cells++;
-            sorted_vals.push(v);
+            if (v > 0) {
+              if (v > max_val) max_val = v;
+              sum_val += v;
+              active_cells++;
+              sorted_vals.push(v);
+            }
           }
           sorted_vals.sort(function (arg0_a, arg1_b) { return arg0_a - arg1_b; });
         }
@@ -281,6 +292,7 @@ let { PNG } = global.pngjs || require("pngjs");
         };
       }
 
+      let cov_paths = (cfg.kriging_config && cfg.kriging_config.covariate_paths) ? cfg.kriging_config.covariate_paths : {};
       let diagnostics = {
         active_domestic_catchments: bundle.obs_bundle.active_domestic_catchments || 0,
         adm2_coverage_ratio: bundle.obs_bundle.adm2_coverage_ratio || 0,
@@ -294,6 +306,8 @@ let { PNG } = global.pngjs || require("pngjs");
         residual_kriging_wls_betas: surface.wls_betas_by_period || {},
         tau1_dimensionless: Number(bundle.tau1_dimensionless.toFixed(4)),
         tau2_dimensionless: Number(bundle.tau2_dimensionless.toFixed(4)),
+        urban_mask_applied: true,
+        urban_mask_buffer_radius: (cov_paths.urban_mask_buffer_radius !== undefined) ? Number(cov_paths.urban_mask_buffer_radius) : 2,
         valid_cells: bundle.mask_data.valid_cell_count,
         variogram_models: variogram_models,
         wls_covariates_active: Boolean(surface.wls_covariates_active)

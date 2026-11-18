@@ -15,6 +15,8 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.collections import LineCollection, PatchCollection
 from matplotlib.patches import Polygon as MplPolygon
+from matplotlib.transforms import Bbox
+from PIL import Image
 import shapely
 from shapely.geometry import box, shape
 from shapely.ops import transform as shp_transform, unary_union
@@ -35,7 +37,7 @@ import viscount_plot_utils as vpu
 class AlbersEqualAreaConic:
   """Snyder Equal-Area Conic projection (kilometres) for North America & Polynesia."""
 
-  def __init__ (self, arg0_lon_0, arg1_lat_1, arg2_lat_2, arg3_lat_0, arg4_r_km=6371.0088, arg5_wrap_hi=165.0):
+  def __init__ (self, arg0_lon_0, arg1_lat_1, arg2_lat_2, arg3_lat_0, arg4_r_km=6371.0088, arg5_wrap_hi=150.0):
     self.lon_0 = math.radians(arg0_lon_0)
     self.lat_0 = math.radians(arg3_lat_0)
     p1 = math.radians(arg1_lat_1)
@@ -111,8 +113,8 @@ def clip_and_project (arg0_geom, arg1_proj, arg2_seg_deg=0.35, arg3_clip_box=Non
     gm = g.intersection(clip_b)
     if not gm.is_empty:
       parts.append(gm)
-  if arg1_proj.wrap_hi < 179.0 and maxx > arg1_proj.wrap_hi and maxy > 48.0:
-    gw = g.intersection(box(arg1_proj.wrap_hi, 48.0, 180.0, 86.0))
+  if arg1_proj.wrap_hi < 179.0 and maxx > arg1_proj.wrap_hi and maxy > 44.0:
+    gw = g.intersection(box(arg1_proj.wrap_hi, 44.0, 180.0, 86.0))
     if not gw.is_empty:
       parts.append(shp_transform(_shift_neg_360, gw))
   if not parts:
@@ -280,6 +282,134 @@ def reproject_f32_raster (arg0_raster, arg1_proj, arg2_xlim, arg3_ylim, arg4_wid
   return out
 
 
+def load_f32_raster (arg0_path):
+  """Loads a 4320x2160 big-endian float32 RGBA GeoPNG into a numpy ndarray."""
+  arr = np.asarray(Image.open(arg0_path).convert("RGBA"), dtype=np.uint8)
+  f32 = np.frombuffer(arr.tobytes(), dtype=">f4").reshape(arr.shape[0], arr.shape[1]).copy()
+  f32 = np.where(np.isfinite(f32) & (f32 >= 0.0) & (f32 < 1e12), f32, 0.0)
+  return f32
+
+
+def mute_rgb_hex (arg0_col, arg1_idx=0, arg2_blend=0.46):
+  """Blends vivid mask RGB toward warm parchment for POLARIS cartographic harmony."""
+  fallback = [
+    (91, 143, 185), (129, 178, 126), (221, 154, 102), (168, 134, 186),
+    (204, 118, 114), (108, 174, 168), (195, 174, 105), (138, 152, 194)
+  ]
+  if isinstance(arg0_col, (list, tuple)) and len(arg0_col) >= 3:
+    r0, g0, b0 = int(arg0_col[0]), int(arg0_col[1]), int(arg0_col[2])
+  else:
+    r0, g0, b0 = fallback[arg1_idx % len(fallback)]
+  t = float(arg2_blend)
+  rm = max(0, min(255, int(round((1.0 - t) * r0 + t * 244.0))))
+  gm = max(0, min(255, int(round((1.0 - t) * g0 + t * 241.0))))
+  bm = max(0, min(255, int(round((1.0 - t) * b0 + t * 234.0))))
+  return f"#{rm:02x}{gm:02x}{bm:02x}"
+
+
+def choose_local_albers (arg0_features):
+  """Constructs an upright Albers Equal-Area Conic projection centred on feature polygons."""
+  lon_mins, lon_maxs, lat_mins, lat_maxs = [], [], [], []
+  for f in arg0_features:
+    geom = f.get("geometry")
+    if not geom:
+      continue
+    b0, b1, b2, b3 = shape(geom).bounds
+    lon_mins.append(b0 - 360.0 if b0 > 165.0 else b0)
+    lon_maxs.append(b2 - 360.0 if b2 > 165.0 else b2)
+    lat_mins.append(b1)
+    lat_maxs.append(b3)
+  if not lon_mins:
+    return PROJ_NA
+  lon_0 = 0.5 * (min(lon_mins) + max(lon_maxs))
+  la_min = max(-85.0, min(lat_mins))
+  la_max = min(85.0, max(lat_maxs))
+  span_lat = max(1.0, la_max - la_min)
+  lat_1 = la_min + span_lat * 0.25
+  lat_2 = la_min + span_lat * 0.75
+  lat_0 = 0.5 * (la_min + la_max)
+  return AlbersEqualAreaConic(lon_0, lat_1, lat_2, lat_0)
+
+
+def draw_inline_graticule (arg0_ax, arg1_proj, arg2_xlim, arg3_ylim, arg4_lats, arg5_lons, arg6_show_labels=True):
+  """Draws projected graticule curves with non-colliding inline coordinate labels."""
+  x0, x1 = float(arg2_xlim[0]), float(arg2_xlim[1])
+  y0, y1 = float(arg3_ylim[0]), float(arg3_ylim[1])
+  span_x = max(1e-6, x1 - x0)
+  span_y = max(1e-6, y1 - y0)
+  lon_seq = np.linspace(-205.0, -8.0, 320)
+  lat_seq = np.linspace(-22.0, 84.0, 220)
+  label_xs = x0 + 0.022 * span_x
+  label_ys = y0 + 0.020 * span_y
+
+  avoid_bbs = []
+  rend = None
+  if arg6_show_labels and arg0_ax.figure is not None:
+    arg0_ax.figure.canvas.draw()
+    rend = arg0_ax.figure.canvas.get_renderer()
+    dp_s = max(1.0, float(arg0_ax.figure.dpi) / 100.0)
+    for ch_ax in arg0_ax.child_axes:
+      cbb = ch_ax.get_window_extent(rend)
+      avoid_bbs.append(Bbox.from_extents(cbb.x0 - 18.0 * dp_s, cbb.y0 - 30.0 * dp_s, cbb.x1 + 18.0 * dp_s, cbb.y1 + 22.0 * dp_s))
+    leg = arg0_ax.get_legend()
+    if leg is not None and leg.get_visible():
+      lbb = leg.get_window_extent(rend)
+      avoid_bbs.append(Bbox.from_extents(lbb.x0 - 10.0 * dp_s, lbb.y0 - 10.0 * dp_s, lbb.x1 + 10.0 * dp_s, lbb.y1 + 10.0 * dp_s))
+
+  placed_lat_ys = []
+  placed_lat_bbs = []
+  for lat_v in arg4_lats:
+    px, py = arg1_proj.fwd_xy(lon_seq, np.full_like(lon_seq, float(lat_v)))
+    arg0_ax.plot(px, py, linestyle=":", linewidth=0.38, color="#64748b", alpha=0.44, zorder=4.2)
+    if not arg6_show_labels or rend is None:
+      continue
+    inside = np.where((px >= x0) & (px <= x1) & (py >= y0 + 0.10 * span_y) & (py <= y1 - 0.08 * span_y))[0]
+    if len(inside) == 0:
+      continue
+    idx_k = inside[int(np.argmin(np.abs(px[inside] - label_xs)))]
+    if abs(float(px[idx_k]) - label_xs) > 0.045 * span_x:
+      continue
+    disp_pt = arg0_ax.transData.transform((label_xs, float(py[idx_k])))
+    if any(abs(disp_pt[1] - py_p) < 26.0 for py_p in placed_lat_ys):
+      continue
+    hemi = "N" if lat_v >= 0 else "S"
+    t_obj = arg0_ax.text(label_xs, float(py[idx_k]), f"{abs(int(lat_v))}°{hemi}", fontsize=5.8, color="#475569", alpha=0.72, va="bottom", ha="left", zorder=4.6)
+    arg0_ax.figure.canvas.draw()
+    t_bb = t_obj.get_window_extent(rend).expanded(1.06, 1.14)
+    if any(t_bb.overlaps(ab) for ab in avoid_bbs) or any(t_bb.overlaps(pb) for pb in placed_lat_bbs):
+      t_obj.remove()
+    else:
+      placed_lat_ys.append(float(disp_pt[1]))
+      placed_lat_bbs.append(t_bb)
+
+  placed_lon_xs = []
+  placed_lon_bbs = []
+  for lon_v in arg5_lons:
+    px, py = arg1_proj.fwd_xy(np.full_like(lat_seq, float(lon_v)), lat_seq)
+    arg0_ax.plot(px, py, linestyle=":", linewidth=0.38, color="#64748b", alpha=0.44, zorder=4.2)
+    if not arg6_show_labels or rend is None:
+      continue
+    inside = np.where((py >= y0) & (py <= y1) & (px >= x0 + 0.10 * span_x) & (px <= x1 - 0.08 * span_x))[0]
+    if len(inside) == 0:
+      continue
+    idx_k = inside[int(np.argmin(np.abs(py[inside] - label_ys)))]
+    if abs(float(py[idx_k]) - label_ys) > 0.045 * span_y:
+      continue
+    disp_pt = arg0_ax.transData.transform((float(px[idx_k]), label_ys))
+    if any(abs(disp_pt[0] - px_p) < 52.0 for px_p in placed_lon_xs):
+      continue
+    wval = ((float(lon_v) + 180.0) % 360.0) - 180.0
+    hemi = "W" if wval < 0 else "E"
+    t_obj = arg0_ax.text(float(px[idx_k]), label_ys, f"{abs(int(round(wval)))}°{hemi}", fontsize=5.8, color="#475569", alpha=0.72, va="bottom", ha="center", zorder=4.6)
+    arg0_ax.figure.canvas.draw()
+    t_bb = t_obj.get_window_extent(rend).expanded(1.06, 1.14)
+    if any(t_bb.overlaps(ab) for ab in avoid_bbs) or any(t_bb.overlaps(lb) for lb in placed_lon_bbs) or any(t_bb.overlaps(pb) for pb in placed_lat_bbs):
+      t_obj.remove()
+    else:
+      placed_lon_xs.append(float(disp_pt[0]))
+      placed_lon_bbs.append(t_bb)
+
+
 def place_callout (arg0_ax, arg1_label, arg2_lon, arg3_lat, arg4_dx_frac, arg5_dy_frac, arg6_proj, arg7_xlim, arg8_ylim, **kwargs):
   """Places an in-bounds callout annotation with leader line on projected coordinates."""
   x0, y0 = arg6_proj.fwd_pt(arg2_lon, arg3_lat)
@@ -301,3 +431,129 @@ def place_callout (arg0_ax, arg1_label, arg2_lon, arg3_lat, arg4_dx_frac, arg5_d
     fontsize=fs, color="#111827", ha="center", va="center", zorder=10.0,
     bbox=dict(boxstyle="round,pad=0.14", facecolor="white", edgecolor="#6b7280", alpha=0.94, linewidth=0.45)
   )
+
+
+def place_bbox_callouts (arg0_fig, arg1_ax, arg2_items, arg3_proj, arg4_xlim, arg5_ylim, arg6_max_labels=7, arg7_min_sep_px=38.0, arg8_fontsize=6.4):
+  """Places non-overlapping callouts verified directly via Matplotlib renderer bboxes."""
+  x0_lim, x1_lim = float(arg4_xlim[0]), float(arg4_xlim[1])
+  y0_lim, y1_lim = float(arg5_ylim[0]), float(arg5_ylim[1])
+  in_pts = []
+  for it in arg2_items:
+    lbl, lon, lat = it[0], float(it[1]), float(it[2])
+    px, py = arg3_proj.fwd_pt(lon, lat)
+    if x0_lim <= px <= x1_lim and y0_lim <= py <= y1_lim:
+      in_pts.append((lbl, px, py))
+  if not in_pts:
+    return []
+
+  arg0_fig.canvas.draw()
+  rend = arg0_fig.canvas.get_renderer()
+  ax_bb = arg1_ax.get_window_extent(rend)
+  safe_bb = Bbox.from_extents(ax_bb.x0 + 6.0, ax_bb.y0 + 6.0, ax_bb.x1 - 6.0, ax_bb.y1 - 6.0)
+  occupied = []
+  for child_ax in arg1_ax.child_axes:
+    occupied.append(child_ax.get_window_extent(rend).expanded(1.04, 1.08))
+  leg = arg1_ax.get_legend()
+  if leg is not None and leg.get_visible():
+    occupied.append(leg.get_window_extent(rend).expanded(1.04, 1.06))
+  for t_ex in arg1_ax.texts:
+    occupied.append(t_ex.get_window_extent(rend).expanded(1.05, 1.12))
+
+  dp_s = max(1.0, float(arg0_fig.dpi) / 100.0)
+  min_sep_d = max(float(arg7_min_sep_px), 18.0 * dp_s)
+  disp_pts = []
+  placed_anchors = []
+  for lbl, px, py in in_pts:
+    dx_p, dy_p = arg1_ax.transData.transform((px, py))
+    if any(math.hypot(dx_p - axp, dy_p - ayp) < min_sep_d for axp, ayp in placed_anchors):
+      continue
+    placed_anchors.append((dx_p, dy_p))
+    disp_pts.append((lbl, px, py, dx_p, dy_p))
+    occupied.append(Bbox.from_bounds(dx_p - 3.0 * dp_s, dy_p - 3.0 * dp_s, 6.0 * dp_s, 6.0 * dp_s))
+    if len(disp_pts) >= arg6_max_labels:
+      break
+
+  offsets_px = []
+  for rad in (28.0, 48.0, 74.0, 102.0, 132.0):
+    for ang_deg in (90, 118, 62, 145, 35, 0, 180, 330, 210, 295, 245):
+      ar = math.radians(ang_deg)
+      offsets_px.append((rad * 1.12 * math.cos(ar), rad * 0.90 * math.sin(ar)))
+
+  placed = []
+  inv_trans = arg1_ax.transData.inverted()
+  for lbl, px, py, dx_p, dy_p in disp_pts:
+    t_obj = arg1_ax.text(
+      px, py, lbl, fontsize=arg8_fontsize, color="#0f172a", ha="center", va="center", zorder=10.5,
+      bbox=dict(boxstyle="round,pad=0.16", facecolor="white", edgecolor="#475569", alpha=0.95, linewidth=0.5)
+    )
+    chosen_bb = None
+    chosen_xy = None
+    for ox, oy in offsets_px:
+      tx_d, ty_d = dx_p + ox, dy_p + oy
+      tx_w, ty_w = inv_trans.transform((tx_d, ty_d))
+      t_obj.set_position((tx_w, ty_w))
+      arg0_fig.canvas.draw()
+      bb_cur = t_obj.get_window_extent(rend).expanded(1.06, 1.16)
+      if not (bb_cur.x0 >= safe_bb.x0 and bb_cur.x1 <= safe_bb.x1 and bb_cur.y0 >= safe_bb.y0 and bb_cur.y1 <= safe_bb.y1):
+        continue
+      if any(bb_cur.overlaps(o_bb) for o_bb in occupied):
+        continue
+      crosses = False
+      for t_frac in (0.20, 0.36, 0.52, 0.68, 0.84):
+        sx = dx_p + t_frac * ox
+        sy = dy_p + t_frac * oy
+        if any(o_bb.contains(sx, sy) for o_bb in occupied):
+          crosses = True
+          break
+      if crosses:
+        continue
+      chosen_bb = bb_cur
+      chosen_xy = (tx_w, ty_w)
+      break
+
+    if chosen_xy is None:
+      t_obj.remove()
+      continue
+    arg1_ax.plot([px, chosen_xy[0]], [py, chosen_xy[1]], color="#1e293b", linewidth=0.58, zorder=7.5)
+    arg1_ax.scatter([px], [py], s=24.0, c="#b91c1c", edgecolors="white", linewidths=0.65, zorder=8.8)
+    occupied.append(chosen_bb)
+    placed.append(t_obj)
+  return placed
+
+
+def verify_zero_text_overlaps (arg0_fig, arg1_label=""):
+  """Verifies via renderer bboxes that placed annotations, titles and ticks do not overlap."""
+  arg0_fig.canvas.draw()
+  rend = arg0_fig.canvas.get_renderer()
+  overlaps = 0
+  for ax in arg0_fig.axes:
+    boxes = []
+    for t in ax.texts:
+      if not t.get_visible() or not t.get_text().strip():
+        continue
+      boxes.append((t.get_text().strip(), t.get_window_extent(rend)))
+    for i in range(len(boxes)):
+      nm_i, bb_i = boxes[i]
+      for x in range(i + 1, len(boxes)):
+        nm_x, bb_x = boxes[x]
+        if bb_i.overlaps(bb_x):
+          inter_w = min(bb_i.x1, bb_x.x1) - max(bb_i.x0, bb_x.x0)
+          inter_h = min(bb_i.y1, bb_x.y1) - max(bb_i.y0, bb_x.y0)
+          if inter_w > 2.0 and inter_h > 2.0:
+            overlaps += 1
+            print(f"[OVERLAP WARN] {arg1_label}: '{nm_i}' overlaps '{nm_x}'")
+    xt_boxes = []
+    for xt in ax.get_xticklabels():
+      if xt.get_visible() and xt.get_text().strip() and abs(float(xt.get_rotation())) < 1.0:
+        xt_boxes.append((xt.get_text().strip(), xt.get_window_extent(rend)))
+    for i in range(len(xt_boxes)):
+      nm_i, bb_i = xt_boxes[i]
+      for x in range(i + 1, len(xt_boxes)):
+        nm_x, bb_x = xt_boxes[x]
+        if bb_i.overlaps(bb_x):
+          inter_w = min(bb_i.x1, bb_x.x1) - max(bb_i.x0, bb_x.x0)
+          inter_h = min(bb_i.y1, bb_x.y1) - max(bb_i.y0, bb_x.y0)
+          if inter_w > 1.0 and inter_h > 1.0:
+            overlaps += 1
+            print(f"[OVERLAP WARN] {arg1_label}: tick '{nm_i}' overlaps tick '{nm_x}'")
+  return overlaps

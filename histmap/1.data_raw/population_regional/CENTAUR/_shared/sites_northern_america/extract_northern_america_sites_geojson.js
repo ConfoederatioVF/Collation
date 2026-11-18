@@ -205,49 +205,7 @@ let { NorthernAmericaSiteSources } = require("./NorthernAmericaSiteSources.js");
      * @returns {Array<number>|null}
      */
     static utmToLonLat (arg0_easting, arg1_northing, arg2_zone) {
-      //Convert from parameters
-      let easting = Number(arg0_easting);
-      let northing = Number(arg1_northing);
-      let zone = (arg2_zone !== undefined) ? Number(arg2_zone) : 12;
-
-      //Guard clauses
-      if (!Number.isFinite(easting) || !Number.isFinite(northing)) return null;
-
-      //Declare local instance variables
-      let a = 6378137.0;
-      let f = 1.0/298.257223563;
-      let e2 = f*(2 - f);
-      let ep2 = e2/(1 - e2);
-      let k0 = 0.9996;
-      let lon0 = ((zone - 1)*6 - 180 + 3)*Math.PI/180;
-      let m = northing/k0;
-      let mu = m/(a*(1 - e2/4 - 3*e2*e2/64 - 5*e2*e2*e2/256));
-      let e1 = (1 - Math.sqrt(1 - e2))/(1 + Math.sqrt(1 - e2));
-      let phi1 = mu +
-        (3*e1/2 - 27*e1*e1*e1/32)*Math.sin(2*mu) +
-        (21*e1*e1/16 - 55*e1*e1*e1*e1/32)*Math.sin(4*mu) +
-        (151*e1*e1*e1/96)*Math.sin(6*mu);
-      let sin_p = Math.sin(phi1);
-      let cos_p = Math.cos(phi1);
-      let tan_p = Math.tan(phi1);
-      let n1 = a/Math.sqrt(1 - e2*sin_p*sin_p);
-      let t1 = tan_p*tan_p;
-      let c1 = ep2*cos_p*cos_p;
-      let r1 = a*(1 - e2)/Math.pow(1 - e2*sin_p*sin_p, 1.5);
-      let d = (easting - 500000.0)/(n1*k0);
-      let lat = phi1 - (n1*tan_p/r1)*(
-        d*d/2 -
-        (5 + 3*t1 + 10*c1 - 4*c1*c1 - 9*ep2)*Math.pow(d, 4)/24 +
-        (61 + 90*t1 + 298*c1 + 45*t1*t1 - 252*ep2 - 3*c1*c1)*Math.pow(d, 6)/720
-      );
-      let lon = lon0 + (
-        d -
-        (1 + 2*t1 + c1)*d*d*d/6 +
-        (5 - 2*c1 + 28*t1 - 3*c1*c1 + 8*ep2 + 24*t1*t1)*Math.pow(d, 5)/120
-      )/cos_p;
-
-      //Return statement
-      return [lon*180/Math.PI, lat*180/Math.PI];
+      return NorthernAmericaSiteSources.utmToLonLat(arg0_easting, arg1_northing, arg2_zone);
     }
 
     /**
@@ -334,7 +292,7 @@ let { NorthernAmericaSiteSources } = require("./NorthernAmericaSiteSources.js");
       }
 
       //Return statement
-      return {
+      let res_a = {
         config: config,
         domain_mask: domain_mask,
         gl_ice_mask: gl_ice_mask,
@@ -343,6 +301,9 @@ let { NorthernAmericaSiteSources } = require("./NorthernAmericaSiteSources.js");
         project_root: project_root,
         width: width
       };
+
+      res_a.hyde_hab_mask = NorthernAmericaSiteSources.loadHydeHabitabilityMask(res_a);
+      return res_a;
     }
 
     /**
@@ -397,10 +358,13 @@ let { NorthernAmericaSiteSources } = require("./NorthernAmericaSiteSources.js");
           area_km2: 0,
           counts: new Array(state.config.periods.length).fill(0),
           habitable_area_km2: 0,
+          has_documented_settlement: false,
+          hyde_hab_area_km2: 0,
           is_frontier_buffer: arg4_is_front,
           label: arg5_label,
           lat: arg3_lat,
           lon: arg2_lon,
+          max_settlement_pop: 0,
           pixel_count: 0,
           region_id: arg1_id,
           sample_sites: [],
@@ -473,11 +437,11 @@ let { NorthernAmericaSiteSources } = require("./NorthernAmericaSiteSources.js");
           let norm_c = cname.replace(/\s+(County|Parish|Borough|Census Area|Municipality|City and Borough|City)$/i, "").toLowerCase().replace(/[^a-z0-9]/g, "");
 
           us_county_lookup.set(`${usps}|${norm_c}`, { aland_km2: aland_km2, lat: lat, lon: lon, name: cname });
-          if (insertSeed(domestic, next_dom_id, lon, lat, false, `${cname}, ${usps}`, 18)) next_dom_id++;
+          if (insertSeed(domestic, next_dom_id, lon, lat, false, `${cname}, ${usps}`, 34)) next_dom_id++;
         }
       }
 
-      //3. Seed StatCan 2021 Census Divisions (293 CDs)
+      //3. Seed StatCan 2021 Census Divisions (293 CDs) balanced smoothly across the 49th parallel
       let cd_path = path.join(census_raw_dir, "statcan_2021_cd.geojson");
 
       if (fs.existsSync(cd_path)) {
@@ -490,14 +454,14 @@ let { NorthernAmericaSiteSources } = require("./NorthernAmericaSiteSources.js");
           let cen = this.computePolygonCentroid(ft.geometry);
 
           if (!cen) continue;
-          let min_sep = (cen[1] < 50) ? 22 : 65;
+          let min_sep = (cen[1] < 50) ? 34 : 62;
 
           if (insertSeed(domestic, next_dom_id, cen[0], cen[1], false, `${props.CDNAME || "CD"} (${props.PRUID || ""})`, min_sep))
             next_dom_id++;
         }
       }
 
-      //3b. Seed HydroBASINS Level 4 watershed subbasin centroids across Western US, Canada, Alaska & Greenland (ADM2 x HydroBASINS)
+      //3b. Seed HydroBASINS subbasin centroids strictly within HYDE habitable belts (ADM2 x HydroBASINS)
       let hb_path = path.join(state.project_root, "histmap/1.data_raw/population_regional/CENTAUR/_shared/_gis_cache/hydrobasins_centroids_na_ar_gr.json");
 
       if (fs.existsSync(hb_path)) {
@@ -509,8 +473,8 @@ let { NorthernAmericaSiteSources } = require("./NorthernAmericaSiteSources.js");
           let gy = Math.min(h - 1, Math.max(0, Math.floor((90 - hp.lat)*h/180)));
           let gidx = gy*w + gx;
 
-          if (dom_mask[gidx] === 1 && gl_ice[gidx] === 0 && land_area[gidx] > 0) {
-            let h_sep = (hp.lat < 50) ? 34 : 58;
+          if (hp.lat <= 74.0 && dom_mask[gidx] === 1 && gl_ice[gidx] === 0 && land_area[gidx] > 0 && state.hyde_hab_mask[gidx] === 1) {
+            let h_sep = (hp.lat < 50) ? 38 : 60;
 
             if (insertSeed(domestic, next_dom_id, hp.lon, hp.lat, false, `HB_${hp.pfaf_id}`, h_sep))
               next_dom_id++;
@@ -518,21 +482,20 @@ let { NorthernAmericaSiteSources } = require("./NorthernAmericaSiteSources.js");
         }
       }
 
-      //4. Fill remaining large western/Alaskan counties, Canadian river corridors, and ice-free Greenland fjords stratified by latitude
+      //4. Fill large settled western/Canadian basins strictly inside HYDE habitable terrain (never barren High-Arctic wasteland)
       for (let r = 0; r < h; r++) {
         let lat = 90 - (r + 0.5)*180/h;
 
-        if (lat < 23 || lat > 84) continue;
+        if (lat < 23 || lat > 74) continue;
         for (let c = 0; c < w; c++) {
           let idx = r*w + c;
 
-          if (dom_mask[idx] !== 1 || land_area[idx] <= 0 || gl_ice[idx] === 1) continue;
+          if (dom_mask[idx] !== 1 || land_area[idx] <= 0 || gl_ice[idx] === 1 || state.hyde_hab_mask[idx] !== 1) continue;
           let lon = -180 + (c + 0.5)*360/w;
-          let min_sep = (lon < -100) ? 44 : 58;
+          let min_sep = (lon < -100) ? 46 : 52;
 
-          if (lat >= 50 && lat < 60) min_sep = 88;
-          if (lat >= 60) min_sep = (lon >= -58) ? 120 : 128;
-          if (lat >= 55 && lon >= -170 && lon <= -130) min_sep = 92;
+          if (lat >= 50 && lat < 60) min_sep = 68;
+          if (lat >= 60) min_sep = 110;
 
           if (insertSeed(domestic, next_dom_id, lon, lat, false, `NA_${next_dom_id}`, min_sep))
             next_dom_id++;
@@ -618,6 +581,7 @@ let { NorthernAmericaSiteSources } = require("./NorthernAmericaSiteSources.js");
               target.area_km2 += area;
               if (gl_ice[idx] === 0) {
                 target.habitable_area_km2 += area;
+                if (state.hyde_hab_mask[idx] === 1) target.hyde_hab_area_km2 += area;
                 target.sum_lon += lon*area;
                 target.sum_lat += lat*area;
               }
@@ -707,6 +671,8 @@ let { NorthernAmericaSiteSources } = require("./NorthernAmericaSiteSources.js");
       let periods = state.config.periods;
       let raw_c14_dir = path.join(state.project_root, "histmap/1.data_raw/population_c14bazAAR");
       let raw_na_dir = path.join(this.BASE_DIR, "raw_sources");
+      let seen_doc_pixels = new Set();
+      let documented_site_pixels = [];
       let seen_labs = new Set();
       let seen_site_horizon = new Set();
       let source_counts = {};
@@ -774,7 +740,7 @@ let { NorthernAmericaSiteSources } = require("./NorthernAmericaSiteSources.js");
         return out;
       };
 
-      let recordSitePeriod = (arg0_p_idx, arg1_lon, arg2_lat, arg3_site, arg4_weight, arg5_is_front, arg6_src, arg7_lab) => {
+      let recordSitePeriod = (arg0_p_idx, arg1_lon, arg2_lat, arg3_site, arg4_weight, arg5_is_front, arg6_src, arg7_lab, arg8_sett_pop) => {
         if (arg0_p_idx < 0 || arg0_p_idx >= n_periods) return;
         if (!Number.isFinite(arg1_lon) || !Number.isFinite(arg2_lat)) return;
         let clean_lab = (arg7_lab || "").trim();
@@ -798,6 +764,22 @@ let { NorthernAmericaSiteSources } = require("./NorthernAmericaSiteSources.js");
           catchment.counts[arg0_p_idx] += (arg4_weight || 1.0);
           total_unique_site_periods++;
           source_counts[arg6_src] = (source_counts[arg6_src] || 0) + 1;
+          let s_pop = Number(arg8_sett_pop) || 0;
+
+          if (s_pop >= 150) {
+            catchment.has_documented_settlement = true;
+            if (s_pop > (catchment.max_settlement_pop || 0)) catchment.max_settlement_pop = s_pop;
+          }
+          if (!arg5_is_front && arg2_lat <= 78.5) {
+            let p_col = Math.max(0, Math.min(state.width - 1, Math.floor((arg1_lon + 180)*state.width/360)));
+            let p_row = Math.max(0, Math.min(state.height - 1, Math.floor((90 - arg2_lat)*state.height/180)));
+            let p_key = `${p_col}_${p_row}`;
+
+            if (!seen_doc_pixels.has(p_key)) {
+              seen_doc_pixels.add(p_key);
+              documented_site_pixels.push([p_col, p_row]);
+            }
+          }
           if (catchment.sample_sites.length < 3 && norm_site.length > 1)
             catchment.sample_sites.push({
               coordinates: [Number(arg1_lon.toFixed(4)), Number(arg2_lat.toFixed(4))],
@@ -817,8 +799,10 @@ let { NorthernAmericaSiteSources } = require("./NorthernAmericaSiteSources.js");
         utmToLonLat: this.utmToLonLat.bind(this)
       });
 
+      state.documented_site_pixels = documented_site_pixels;
       state.total_unique_site_periods = total_unique_site_periods;
       state.source_counts = source_counts;
+      NorthernAmericaSiteSources.pruneWastelandCatchments(state);
 
       //Return statement
       return state;
@@ -867,7 +851,9 @@ let { NorthernAmericaSiteSources } = require("./NorthernAmericaSiteSources.js");
               approx_start_year: p_cfg.approx_start_year,
               area_km2: c.area_km2,
               epoch_id: p_cfg.epoch_id,
+              has_documented_settlement: Boolean(c.has_documented_settlement),
               is_frontier_buffer: c.is_frontier_buffer,
+              max_settlement_pop: Math.round(c.max_settlement_pop || 0),
               name_en: c.label,
               period_key: p_cfg.key,
               pixel_count: c.pixel_count,
@@ -901,7 +887,9 @@ let { NorthernAmericaSiteSources } = require("./NorthernAmericaSiteSources.js");
           geometry: ft.geometry,
           properties: {
             area_km2: ft.properties.area_km2,
+            has_documented_settlement: ft.properties.has_documented_settlement,
             is_frontier_buffer: ft.properties.is_frontier_buffer,
+            max_settlement_pop: ft.properties.max_settlement_pop,
             name_en: ft.properties.name_en,
             region_id: ft.properties.region_id,
             total_sites_all_periods: Math.round(all_catchments.find((x) => x.region_id === ft.properties.region_id).counts.reduce((a, b) => a + b, 0))
@@ -951,6 +939,8 @@ let { NorthernAmericaSiteSources } = require("./NorthernAmericaSiteSources.js");
           "Village Ecodynamics Project II (Reese 2021 / Kohler et al.) Central Mesa Verde Habitation Sites",
           "Texas Trinomial Radiocarbon Database (FinalRCDTexas3) & Southern California Radiocarbon Database (SoCaldates)",
           "Milner et al. (2023) Midwest & Southeast Cultural Index Settlement Database",
+          "NPS National Register of Historic Places (NRHP) Indigenous Mound & Pueblo Monuments",
+          "Kohler & Reese (2014) Neolithic Demographic Transition Settlement Series",
           "POLARIS sites_IA_RAS Russian Far East GeoJSON Conditioning Frontier"
         ],
         total_domestic_area_km2: state.domestic_catchments.reduce((a, b) => a + b.area_km2, 0),
@@ -958,6 +948,10 @@ let { NorthernAmericaSiteSources } = require("./NorthernAmericaSiteSources.js");
       };
 
       fs.writeFileSync(out_abs, JSON.stringify(payload, null, 2));
+      NorthernAmericaSiteSources.writeDocumentedSitePixels(
+        state,
+        path.join(this.BASE_DIR, "config/documented_site_pixels.json")
+      );
 
       //Return statement
       return payload;

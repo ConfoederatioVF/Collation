@@ -1,0 +1,944 @@
+{
+  "batch_index": 163,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        44.08567,
+        -87.98112
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1894,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Collins-Wisconsin",
+      "known_aliases": [
+        "Collins",
+        "collins",
+        "collins cdp",
+        "Collins CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Collins",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1894,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.1178,
+        -105.44072
+      ],
+      "country": "Colorado",
+      "earliest_year": 1886,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bark Ranch-Colorado",
+      "known_aliases": [
+        "Bark Ranch",
+        "bark ranch",
+        "bark ranch cdp",
+        "Bark Ranch CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Bark Ranch",
+      "reason": "missing_entry",
+      "region": "usa_colorado",
+      "sample_years": [
+        1886,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.97722,
+        -76.02879
+      ],
+      "country": "Maryland",
+      "earliest_year": 1911,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Smith Island-Maryland",
+      "known_aliases": [
+        "Smith Island",
+        "smith island",
+        "smith island cdp",
+        "Smith Island CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Smith Island",
+      "reason": "missing_entry",
+      "region": "usa_maryland",
+      "sample_years": [
+        1911,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.49444,
+        -84.78178
+      ],
+      "country": "Michigan",
+      "earliest_year": 1935,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Brutus-Michigan",
+      "known_aliases": [
+        "Brutus",
+        "brutus",
+        "brutus cdp",
+        "Brutus CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Brutus",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1935,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.82638,
+        -96.02423
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1886,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Leota-Minnesota",
+      "known_aliases": [
+        "Leota",
+        "leota",
+        "leota cdp",
+        "Leota CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Leota",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1886,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.08024,
+        -97.9789
+      ],
+      "country": "Nebraska",
+      "earliest_year": 1869,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Overland-Nebraska",
+      "known_aliases": [
+        "Overland",
+        "overland",
+        "overland cdp",
+        "Overland CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Overland",
+      "reason": "missing_entry",
+      "region": "usa_nebraska",
+      "sample_years": [
+        1869,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.69869,
+        -119.5416
+      ],
+      "country": "Nevada",
+      "earliest_year": 1905,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Topaz Lake-Nevada",
+      "known_aliases": [
+        "Topaz Lake",
+        "topaz lake",
+        "topaz lake cdp",
+        "Topaz Lake CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Topaz Lake",
+      "reason": "missing_entry",
+      "region": "usa_nevada",
+      "sample_years": [
+        1905,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.79651,
+        -77.06796
+      ],
+      "country": "New York",
+      "earliest_year": 1934,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hall-New York",
+      "known_aliases": [
+        "Hall",
+        "hall",
+        "hall cdp",
+        "Hall CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Hall",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1934,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.8078,
+        -73.78802
+      ],
+      "country": "New York",
+      "earliest_year": 1911,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Salt Point-New York",
+      "known_aliases": [
+        "Salt Point",
+        "salt point",
+        "salt point cdp",
+        "Salt Point CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Salt Point",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1911,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.44672,
+        -83.35941
+      ],
+      "country": "Ohio",
+      "earliest_year": 1867,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Good Hope-Ohio",
+      "known_aliases": [
+        "Good Hope",
+        "good hope",
+        "good hope cdp",
+        "Good Hope CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Good Hope",
+      "reason": "missing_entry",
+      "region": "usa_ohio",
+      "sample_years": [
+        1867,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.42375,
+        -83.88463
+      ],
+      "country": "Ohio",
+      "earliest_year": 1879,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lewistown-Ohio",
+      "known_aliases": [
+        "Lewistown",
+        "lewistown",
+        "lewistown cdp",
+        "Lewistown CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Lewistown",
+      "reason": "missing_entry",
+      "region": "usa_ohio",
+      "sample_years": [
+        1879,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.62397,
+        -97.3147
+      ],
+      "country": "Texas",
+      "earliest_year": 1881,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Myra-Texas",
+      "known_aliases": [
+        "Myra",
+        "myra",
+        "myra cdp",
+        "Myra CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Myra",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1881,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.75612,
+        -106.51751
+      ],
+      "country": "Wyoming",
+      "earliest_year": 1899,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bessemer Bend-Wyoming",
+      "known_aliases": [
+        "Bessemer Bend",
+        "bessemer bend",
+        "bessemer bend cdp",
+        "Bessemer Bend CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Bessemer Bend",
+      "reason": "missing_entry",
+      "region": "usa_wyoming",
+      "sample_years": [
+        1899,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.48568,
+        -119.25569
+      ],
+      "country": "California",
+      "earliest_year": 1927,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Yettem-California",
+      "known_aliases": [
+        "Yettem",
+        "yettem",
+        "yettem cdp",
+        "Yettem CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Yettem",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1927,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.45332,
+        -84.75865
+      ],
+      "country": "Kentucky",
+      "earliest_year": 1958,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "McKinney-Kentucky",
+      "known_aliases": [
+        "McKinney",
+        "mckinney",
+        "mckinney cdp",
+        "McKinney CDP"
+      ],
+      "latest_year": 2020,
+      "name": "McKinney",
+      "reason": "missing_entry",
+      "region": "usa_kentucky",
+      "sample_years": [
+        1958,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.76576,
+        -114.15327
+      ],
+      "country": "Montana",
+      "earliest_year": 1963,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kings Point-Montana",
+      "known_aliases": [
+        "Kings Point",
+        "kings point",
+        "kings point cdp",
+        "Kings Point CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Kings Point",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1963,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.33522,
+        -84.40348
+      ],
+      "country": "Ohio",
+      "earliest_year": 1858,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Olde West Chester-Ohio",
+      "known_aliases": [
+        "Olde West Chester",
+        "olde west chester",
+        "olde west chester cdp",
+        "Olde West Chester CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Olde West Chester",
+      "reason": "missing_entry",
+      "region": "usa_ohio",
+      "sample_years": [
+        1858,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.36384,
+        -79.46949
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1881,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Crabtree-Pennsylvania",
+      "known_aliases": [
+        "Crabtree",
+        "crabtree",
+        "crabtree cdp",
+        "Crabtree CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Crabtree",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1881,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.39394,
+        -79.26377
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1939,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Crown-Pennsylvania",
+      "known_aliases": [
+        "Crown",
+        "crown",
+        "crown cdp",
+        "Crown CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Crown",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1939,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.12351,
+        -84.71673
+      ],
+      "country": "Tennessee",
+      "earliest_year": 1872,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ocoee-Tennessee",
+      "known_aliases": [
+        "Ocoee",
+        "ocoee",
+        "ocoee cdp",
+        "Ocoee CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Ocoee",
+      "reason": "missing_entry",
+      "region": "usa_tennessee",
+      "sample_years": [
+        1872,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.08389,
+        -97.05323
+      ],
+      "country": "Texas",
+      "earliest_year": 1870,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Carl's Corner-Texas",
+      "known_aliases": [
+        "Carl's Corner",
+        "carl's corner",
+        "carl's corner town",
+        "Carl's Corner town"
+      ],
+      "latest_year": 2026,
+      "name": "Carl's Corner",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1870,
+        2000,
+        2013,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        30.60404,
+        -95.88764
+      ],
+      "country": "Texas",
+      "earliest_year": 1942,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Shiro-Texas",
+      "known_aliases": [
+        "Shiro",
+        "shiro",
+        "shiro cdp",
+        "Shiro CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Shiro",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1942,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.20921,
+        -102.20951
+      ],
+      "country": "Texas",
+      "earliest_year": 1923,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Wildorado-Texas",
+      "known_aliases": [
+        "Wildorado",
+        "wildorado",
+        "wildorado cdp",
+        "Wildorado CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Wildorado",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1923,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.40724,
+        -80.4911
+      ],
+      "country": "West Virginia",
+      "earliest_year": 1898,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Wallace-West Virginia",
+      "known_aliases": [
+        "Wallace",
+        "wallace",
+        "wallace cdp",
+        "Wallace CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Wallace",
+      "reason": "missing_entry",
+      "region": "usa_west_virginia",
+      "sample_years": [
+        1898,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.85935,
+        -106.09462
+      ],
+      "country": "Wyoming",
+      "earliest_year": 1946,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Meadow Acres-Wyoming",
+      "known_aliases": [
+        "Meadow Acres",
+        "meadow acres",
+        "meadow acres cdp",
+        "Meadow Acres CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Meadow Acres",
+      "reason": "missing_entry",
+      "region": "usa_wyoming",
+      "sample_years": [
+        1946,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        63.4114,
+        -148.74962
+      ],
+      "country": "Alaska",
+      "earliest_year": 1873,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cantwell-Alaska",
+      "known_aliases": [
+        "Cantwell",
+        "cantwell",
+        "cantwell cdp",
+        "Cantwell CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Cantwell",
+      "reason": "missing_entry",
+      "region": "usa_alaska",
+      "sample_years": [
+        1873,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.56328,
+        -93.97732
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1877,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Inger-Minnesota",
+      "known_aliases": [
+        "Inger",
+        "inger",
+        "inger cdp",
+        "Inger CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Inger",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1877,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.26171,
+        -90.67504
+      ],
+      "country": "Mississippi",
+      "earliest_year": 1875,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Farrell-Mississippi",
+      "known_aliases": [
+        "Farrell",
+        "farrell",
+        "farrell cdp",
+        "Farrell CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Farrell",
+      "reason": "missing_entry",
+      "region": "usa_mississippi",
+      "sample_years": [
+        1875,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.70778,
+        -89.80752
+      ],
+      "country": "Mississippi",
+      "earliest_year": 1880,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Independence-Mississippi",
+      "known_aliases": [
+        "Independence",
+        "independence",
+        "independence cdp",
+        "Independence CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Independence",
+      "reason": "missing_entry",
+      "region": "usa_mississippi",
+      "sample_years": [
+        1880,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.21118,
+        -106.58588
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1937,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Edith Endave-New Mexico",
+      "known_aliases": [
+        "Edith Endave",
+        "edith endave",
+        "edith endave cdp",
+        "Edith Endave CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Edith Endave",
+      "reason": "missing_entry",
+      "region": "usa_new_mexico",
+      "sample_years": [
+        1937,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

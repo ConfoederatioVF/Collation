@@ -1,0 +1,941 @@
+{
+  "batch_index": 273,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        44.49199,
+        -68.32006
+      ],
+      "country": "Maine",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lamoine-Maine",
+      "known_aliases": [
+        "Lamoine",
+        "lamoine",
+        "lamoine town",
+        "Lamoine town"
+      ],
+      "latest_year": 2020,
+      "name": "Lamoine",
+      "reason": "missing_entry",
+      "region": "usa_maine",
+      "sample_years": [
+        1850,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.41978,
+        -76.9386
+      ],
+      "country": "New York",
+      "earliest_year": 1820,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Reading-New York",
+      "known_aliases": [
+        "Reading",
+        "reading",
+        "reading town",
+        "Reading town"
+      ],
+      "latest_year": 2020,
+      "name": "Reading",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1820,
+        1890,
+        1960,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.85334,
+        -95.75249
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1893,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Erie-Minnesota",
+      "known_aliases": [
+        "Erie",
+        "erie",
+        "erie township",
+        "Erie township"
+      ],
+      "latest_year": 2020,
+      "name": "Erie",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1893,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.74561,
+        -74.67634
+      ],
+      "country": "New York",
+      "earliest_year": 1830,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lawrence (St. Lawrence County)-New York",
+      "known_aliases": [
+        "Lawrence (St. Lawrence County)",
+        "lawrence",
+        "lawrence town",
+        "Lawrence town",
+        "Lawrence"
+      ],
+      "latest_year": 2020,
+      "name": "Lawrence (St. Lawrence County)",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1830,
+        1890,
+        1960,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.0797,
+        -84.79635
+      ],
+      "country": "Michigan",
+      "earliest_year": 1924,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Elmira-Michigan",
+      "known_aliases": [
+        "Elmira",
+        "elmira",
+        "elmira township",
+        "Elmira township"
+      ],
+      "latest_year": 2020,
+      "name": "Elmira",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1924,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.29431,
+        -88.78729
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1861,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Caledonia (Waupaca County)-Wisconsin",
+      "known_aliases": [
+        "Caledonia (Waupaca County)",
+        "caledonia",
+        "caledonia town",
+        "Caledonia town"
+      ],
+      "latest_year": 2020,
+      "name": "Caledonia (Waupaca County)",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1861,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.37991,
+        -87.29425
+      ],
+      "country": "Michigan",
+      "earliest_year": 1867,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "West Branch (Marquette County)-Michigan",
+      "known_aliases": [
+        "West Branch (Marquette County)",
+        "west branch",
+        "west branch township",
+        "West Branch township"
+      ],
+      "latest_year": 2020,
+      "name": "West Branch (Marquette County)",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1867,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.2524,
+        -83.43228
+      ],
+      "country": "Michigan",
+      "earliest_year": 1898,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Presque Isle-Michigan",
+      "known_aliases": [
+        "Presque Isle",
+        "presque isle",
+        "presque isle township",
+        "Presque Isle township"
+      ],
+      "latest_year": 2020,
+      "name": "Presque Isle",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1898,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.77802,
+        -84.09696
+      ],
+      "country": "Michigan",
+      "earliest_year": 1873,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Garfield (Bay County)-Michigan",
+      "known_aliases": [
+        "Garfield (Bay County)",
+        "garfield",
+        "garfield township",
+        "Garfield township"
+      ],
+      "latest_year": 2020,
+      "name": "Garfield (Bay County)",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1873,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.2826,
+        -87.94845
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1873,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Morrison-Wisconsin",
+      "known_aliases": [
+        "Morrison",
+        "morrison",
+        "morrison town",
+        "Morrison town"
+      ],
+      "latest_year": 2020,
+      "name": "Morrison",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1873,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.23507,
+        -77.02913
+      ],
+      "country": "New York",
+      "earliest_year": 1830,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hornby-New York",
+      "known_aliases": [
+        "Hornby",
+        "hornby",
+        "hornby town",
+        "Hornby town"
+      ],
+      "latest_year": 2020,
+      "name": "Hornby",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1830,
+        1890,
+        1960,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.03855,
+        -74.56699
+      ],
+      "country": "New York",
+      "earliest_year": 1830,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ephratah-New York",
+      "known_aliases": [
+        "Ephratah",
+        "ephratah",
+        "ephratah town",
+        "Ephratah town"
+      ],
+      "latest_year": 2020,
+      "name": "Ephratah",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1830,
+        1890,
+        1960,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.53464,
+        -79.05907
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1875,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Brush Valley-Pennsylvania",
+      "known_aliases": [
+        "Brush Valley",
+        "brush valley",
+        "brush valley township",
+        "Brush Valley township"
+      ],
+      "latest_year": 2020,
+      "name": "Brush Valley",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1875,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.51074,
+        -93.4498
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1882,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Spencer Brook-Minnesota",
+      "known_aliases": [
+        "Spencer Brook",
+        "spencer brook",
+        "spencer brook township",
+        "Spencer Brook township"
+      ],
+      "latest_year": 2020,
+      "name": "Spencer Brook",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1882,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.97493,
+        -75.77334
+      ],
+      "country": "New York",
+      "earliest_year": 1830,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fenner-New York",
+      "known_aliases": [
+        "Fenner",
+        "fenner",
+        "fenner town",
+        "Fenner town"
+      ],
+      "latest_year": 2020,
+      "name": "Fenner",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1830,
+        1890,
+        1960,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.71853,
+        -77.55859
+      ],
+      "country": "New York",
+      "earliest_year": 1830,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Canadice-New York",
+      "known_aliases": [
+        "Canadice",
+        "canadice",
+        "canadice town",
+        "Canadice town"
+      ],
+      "latest_year": 2020,
+      "name": "Canadice",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1830,
+        1890,
+        1960,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.05028,
+        -77.3944
+      ],
+      "country": "New York",
+      "earliest_year": 1830,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Woodhull-New York",
+      "known_aliases": [
+        "Woodhull",
+        "woodhull",
+        "woodhull town",
+        "Woodhull town"
+      ],
+      "latest_year": 2020,
+      "name": "Woodhull",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1830,
+        1890,
+        1960,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.4365,
+        -87.82091
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1921,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Eaton-Wisconsin",
+      "known_aliases": [
+        "Eaton",
+        "eaton",
+        "eaton town",
+        "Eaton town"
+      ],
+      "latest_year": 2020,
+      "name": "Eaton",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1921,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.25123,
+        -85.26649
+      ],
+      "country": "Michigan",
+      "earliest_year": 1968,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Marion (Charlevoix County)-Michigan",
+      "known_aliases": [
+        "Marion (Charlevoix County)",
+        "marion",
+        "marion township",
+        "Marion township"
+      ],
+      "latest_year": 2020,
+      "name": "Marion (Charlevoix County)",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1968,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.36396,
+        -94.86647
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1933,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Helga-Minnesota",
+      "known_aliases": [
+        "Helga",
+        "helga",
+        "helga township",
+        "Helga township"
+      ],
+      "latest_year": 2020,
+      "name": "Helga",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1933,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.69451,
+        -77.40552
+      ],
+      "country": "New York",
+      "earliest_year": 1840,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "South Bristol-New York",
+      "known_aliases": [
+        "South Bristol",
+        "south bristol",
+        "south bristol town",
+        "South Bristol town"
+      ],
+      "latest_year": 2020,
+      "name": "South Bristol",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1840,
+        1900,
+        1960,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.57959,
+        -84.45242
+      ],
+      "country": "Michigan",
+      "earliest_year": 1898,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "South Branch-Michigan",
+      "known_aliases": [
+        "South Branch",
+        "south branch",
+        "south branch township",
+        "South Branch township"
+      ],
+      "latest_year": 2020,
+      "name": "South Branch",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1898,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.44205,
+        -77.04427
+      ],
+      "country": "New York",
+      "earliest_year": 1830,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tyrone-New York",
+      "known_aliases": [
+        "Tyrone",
+        "tyrone",
+        "tyrone town",
+        "Tyrone town"
+      ],
+      "latest_year": 2020,
+      "name": "Tyrone",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1830,
+        1890,
+        1960,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.04612,
+        -78.24518
+      ],
+      "country": "New York",
+      "earliest_year": 1830,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Genesee-New York",
+      "known_aliases": [
+        "Genesee",
+        "genesee",
+        "genesee town",
+        "Genesee town"
+      ],
+      "latest_year": 2020,
+      "name": "Genesee",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1830,
+        1890,
+        1960,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.06167,
+        -73.71083
+      ],
+      "country": "New York",
+      "earliest_year": 1830,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Gallatin-New York",
+      "known_aliases": [
+        "Gallatin",
+        "gallatin",
+        "gallatin town",
+        "Gallatin town"
+      ],
+      "latest_year": 2020,
+      "name": "Gallatin",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1830,
+        1890,
+        1960,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.91227,
+        -90.02851
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1868,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Germantown (Juneau County)-Wisconsin",
+      "known_aliases": [
+        "Germantown (Juneau County)",
+        "germantown",
+        "germantown town",
+        "Germantown town"
+      ],
+      "latest_year": 2020,
+      "name": "Germantown (Juneau County)",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1868,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.24689,
+        -85.96507
+      ],
+      "country": "Michigan",
+      "earliest_year": 1930,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Moorland-Michigan",
+      "known_aliases": [
+        "Moorland",
+        "moorland",
+        "moorland township",
+        "Moorland township"
+      ],
+      "latest_year": 2020,
+      "name": "Moorland",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1930,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.31511,
+        -73.51842
+      ],
+      "country": "New York",
+      "earliest_year": 1820,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Austerlitz-New York",
+      "known_aliases": [
+        "Austerlitz",
+        "austerlitz",
+        "austerlitz town",
+        "Austerlitz town"
+      ],
+      "latest_year": 2020,
+      "name": "Austerlitz",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1820,
+        1890,
+        1960,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.3749,
+        -92.7354
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1898,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Windemere-Minnesota",
+      "known_aliases": [
+        "Windemere",
+        "windemere",
+        "windemere township",
+        "Windemere township"
+      ],
+      "latest_year": 2020,
+      "name": "Windemere",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1898,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.60521,
+        -75.60497
+      ],
+      "country": "New York",
+      "earliest_year": 1820,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Plymouth-New York",
+      "known_aliases": [
+        "Plymouth",
+        "plymouth",
+        "plymouth town",
+        "Plymouth town"
+      ],
+      "latest_year": 2020,
+      "name": "Plymouth",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1820,
+        1890,
+        1960,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

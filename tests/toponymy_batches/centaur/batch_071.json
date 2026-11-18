@@ -1,0 +1,884 @@
+{
+  "batch_index": 71,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        45.1433,
+        -74.5019
+      ],
+      "country": "Canada",
+      "earliest_year": 1867,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lancaster (ON)-Canada",
+      "known_aliases": [
+        "Lancaster (ON)",
+        "lancaster"
+      ],
+      "latest_year": 1996,
+      "name": "Lancaster (ON)",
+      "reason": "missing_entry",
+      "region": "can_ontario",
+      "sample_years": [
+        1867,
+        1921,
+        1966,
+        1996
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.1789,
+        -86.71
+      ],
+      "country": "Canada",
+      "earliest_year": 1948,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Nakina-Canada",
+      "known_aliases": [
+        "Nakina",
+        "nakina"
+      ],
+      "latest_year": 1996,
+      "name": "Nakina",
+      "reason": "missing_entry",
+      "region": "can_ontario",
+      "sample_years": [
+        1948,
+        1966,
+        1981,
+        1996
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.83306,
+        -80.84667
+      ],
+      "country": "Canada",
+      "earliest_year": 1854,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Palmerston-Canada",
+      "known_aliases": [
+        "Palmerston",
+        "palmerston",
+        "wallace on",
+        "Wallace ON"
+      ],
+      "latest_year": 1996,
+      "name": "Palmerston",
+      "reason": "missing_entry",
+      "region": "can_ontario",
+      "sample_years": [
+        1854,
+        1911,
+        1966,
+        1996
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.385,
+        -74.90556
+      ],
+      "country": "Canada",
+      "earliest_year": 1891,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "St. Isidore-Canada",
+      "known_aliases": [
+        "St. Isidore",
+        "st. isidore"
+      ],
+      "latest_year": 1996,
+      "name": "St. Isidore",
+      "reason": "missing_entry",
+      "region": "can_ontario",
+      "sample_years": [
+        1891,
+        1941,
+        1976,
+        1996
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.35,
+        -84
+      ],
+      "country": "Canada",
+      "earliest_year": 1867,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tarbutt-Canada",
+      "known_aliases": [
+        "Tarbutt",
+        "tarbutt"
+      ],
+      "latest_year": 1996,
+      "name": "Tarbutt",
+      "reason": "missing_entry",
+      "region": "can_ontario",
+      "sample_years": [
+        1867,
+        1921,
+        1966,
+        1996
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.83333,
+        -75.66667
+      ],
+      "country": "Canada",
+      "earliest_year": 1915,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "United Counties of Leeds and Grenville-Canada",
+      "known_aliases": [
+        "United Counties of Leeds and Grenville",
+        "united counties of leeds and grenville"
+      ],
+      "latest_year": 1996,
+      "name": "United Counties of Leeds and Grenville",
+      "reason": "missing_entry",
+      "region": "can_ontario",
+      "sample_years": [
+        1915,
+        1941,
+        1981,
+        1996
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.46667,
+        -74.83333
+      ],
+      "country": "Canada",
+      "earliest_year": 1959,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "United Counties of Prescott and Russell-Canada",
+      "known_aliases": [
+        "United Counties of Prescott and Russell",
+        "united counties of prescott and russell"
+      ],
+      "latest_year": 1996,
+      "name": "United Counties of Prescott and Russell",
+      "reason": "missing_entry",
+      "region": "can_ontario",
+      "sample_years": [
+        1959,
+        1961,
+        1971,
+        1981,
+        1986,
+        1991,
+        1996
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.16667,
+        -74.95
+      ],
+      "country": "Canada",
+      "earliest_year": 1894,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "United Counties of Stormont, Dundas and Glengarry-Canada",
+      "known_aliases": [
+        "United Counties of Stormont, Dundas and Glengarry",
+        "united counties of stormont, dundas and glengarry"
+      ],
+      "latest_year": 1996,
+      "name": "United Counties of Stormont, Dundas and Glengarry",
+      "reason": "missing_entry",
+      "region": "can_ontario",
+      "sample_years": [
+        1894,
+        1931,
+        1971,
+        1996
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.28,
+        -72.78
+      ],
+      "country": "Canada",
+      "earliest_year": 1892,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Adamsville-Canada",
+      "known_aliases": [
+        "Adamsville",
+        "adamsville"
+      ],
+      "latest_year": 1971,
+      "name": "Adamsville",
+      "reason": "missing_entry",
+      "region": "can_quebec",
+      "sample_years": [
+        1892,
+        1921,
+        1951,
+        1971
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.54833,
+        -79.23944
+      ],
+      "country": "Canada",
+      "earliest_year": 1919,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Angliers-Canada",
+      "known_aliases": [
+        "Angliers",
+        "angliers"
+      ],
+      "latest_year": 1996,
+      "name": "Angliers",
+      "reason": "missing_entry",
+      "region": "can_quebec",
+      "sample_years": [
+        1919,
+        1951,
+        1976,
+        1996
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.68889,
+        -71.35833
+      ],
+      "country": "Canada",
+      "earliest_year": 1889,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bernières (Lévis)-Canada",
+      "known_aliases": [
+        "Bernières (Lévis)",
+        "bernières"
+      ],
+      "latest_year": 1991,
+      "name": "Bernières (Lévis)",
+      "reason": "missing_entry",
+      "region": "can_quebec",
+      "sample_years": [
+        1889,
+        1931,
+        1966,
+        1991
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.03333,
+        -71.36667
+      ],
+      "country": "Canada",
+      "earliest_year": 1867,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Black Lake-Canada",
+      "known_aliases": [
+        "Black Lake",
+        "black lake"
+      ],
+      "latest_year": 1996,
+      "name": "Black Lake",
+      "reason": "missing_entry",
+      "region": "can_quebec",
+      "sample_years": [
+        1867,
+        1921,
+        1966,
+        1996
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.60398,
+        -64.32484
+      ],
+      "country": "Canada",
+      "earliest_year": 1908,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bridgeville (Percé)-Canada",
+      "known_aliases": [
+        "Bridgeville (Percé)",
+        "bridgeville"
+      ],
+      "latest_year": 1966,
+      "name": "Bridgeville (Percé)",
+      "reason": "missing_entry",
+      "region": "can_quebec",
+      "sample_years": [
+        1908,
+        1931,
+        1956,
+        1966
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.42833,
+        -64.32889
+      ],
+      "country": "Canada",
+      "earliest_year": 1867,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cap-d'Espoir-Canada",
+      "known_aliases": [
+        "Cap-d'Espoir",
+        "cap-d'espoir"
+      ],
+      "latest_year": 1966,
+      "name": "Cap-d'Espoir",
+      "reason": "missing_entry",
+      "region": "can_quebec",
+      "sample_years": [
+        1867,
+        1901,
+        1941,
+        1966
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52,
+        -76
+      ],
+      "country": "Canada",
+      "earliest_year": 1880,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Eeyou Istchee Baie-James (QC)-Canada",
+      "known_aliases": [
+        "Eeyou Istchee Baie-James (QC)",
+        "eeyou istchee baie-james"
+      ],
+      "latest_year": 1996,
+      "name": "Eeyou Istchee Baie-James (QC)",
+      "reason": "missing_entry",
+      "region": "can_quebec",
+      "sample_years": [
+        1880,
+        1911,
+        1961,
+        1996
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.19333,
+        -79.04278
+      ],
+      "country": "Canada",
+      "earliest_year": 1917,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Granada-Canada",
+      "known_aliases": [
+        "Granada",
+        "granada"
+      ],
+      "latest_year": 1991,
+      "name": "Granada",
+      "reason": "missing_entry",
+      "region": "can_quebec",
+      "sample_years": [
+        1917,
+        1941,
+        1971,
+        1991
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.61667,
+        -72
+      ],
+      "country": "Canada",
+      "earliest_year": 1932,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Grand-Mère-Canada",
+      "known_aliases": [
+        "Grand-Mère",
+        "grand-mère"
+      ],
+      "latest_year": 1996,
+      "name": "Grand-Mère",
+      "reason": "missing_entry",
+      "region": "can_quebec",
+      "sample_years": [
+        1932,
+        1961,
+        1981,
+        1996
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.6111,
+        -72.6324
+      ],
+      "country": "Canada",
+      "earliest_year": 1885,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lac-à-la-Tortue-Canada",
+      "known_aliases": [
+        "Lac-à-la-Tortue",
+        "lac-à-la-tortue"
+      ],
+      "latest_year": 1996,
+      "name": "Lac-à-la-Tortue",
+      "reason": "missing_entry",
+      "region": "can_quebec",
+      "sample_years": [
+        1885,
+        1931,
+        1976,
+        1996
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.5444,
+        -75.4139
+      ],
+      "country": "Canada",
+      "earliest_year": 1890,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Masson-Angers-Canada",
+      "known_aliases": [
+        "Masson-Angers",
+        "masson-angers"
+      ],
+      "latest_year": 1996,
+      "name": "Masson-Angers",
+      "reason": "missing_entry",
+      "region": "can_quebec",
+      "sample_years": [
+        1890,
+        1921,
+        1971,
+        1996
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.465,
+        -57.49611
+      ],
+      "country": "Canada",
+      "earliest_year": 1889,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Middle Bay-Canada",
+      "known_aliases": [
+        "Middle Bay",
+        "middle bay"
+      ],
+      "latest_year": 1991,
+      "name": "Middle Bay",
+      "reason": "missing_entry",
+      "region": "can_quebec",
+      "sample_years": [
+        1889,
+        1931,
+        1966,
+        1991
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.19139,
+        -66.09444
+      ],
+      "country": "Canada",
+      "earliest_year": 1902,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Moisie-Canada",
+      "known_aliases": [
+        "Moisie",
+        "moisie"
+      ],
+      "latest_year": 1996,
+      "name": "Moisie",
+      "reason": "missing_entry",
+      "region": "can_quebec",
+      "sample_years": [
+        1902,
+        1951,
+        1976,
+        1996
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.82805,
+        -72.34111
+      ],
+      "country": "Canada",
+      "earliest_year": 1892,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Montauban-les-Mines-Canada",
+      "known_aliases": [
+        "Montauban-les-Mines",
+        "montauban-les-mines"
+      ],
+      "latest_year": 1991,
+      "name": "Montauban-les-Mines",
+      "reason": "missing_entry",
+      "region": "can_quebec",
+      "sample_years": [
+        1892,
+        1931,
+        1961,
+        1991
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.7736,
+        -59.03
+      ],
+      "country": "Canada",
+      "earliest_year": 1918,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mutton Bay-Canada",
+      "known_aliases": [
+        "Mutton Bay",
+        "mutton bay"
+      ],
+      "latest_year": 1991,
+      "name": "Mutton Bay",
+      "reason": "missing_entry",
+      "region": "can_quebec",
+      "sample_years": [
+        1918,
+        1951,
+        1971,
+        1991
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.60056,
+        -75.62222
+      ],
+      "country": "Canada",
+      "earliest_year": 1883,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Perkins-Canada",
+      "known_aliases": [
+        "Perkins",
+        "perkins"
+      ],
+      "latest_year": 1971,
+      "name": "Perkins",
+      "reason": "missing_entry",
+      "region": "can_quebec",
+      "sample_years": [
+        1883,
+        1921,
+        1956,
+        1971
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.51667,
+        -76.23333
+      ],
+      "country": "Canada",
+      "earliest_year": 1825,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Quyon-Canada",
+      "known_aliases": [
+        "Quyon",
+        "quyon",
+        "onslow",
+        "Onslow"
+      ],
+      "latest_year": 1991,
+      "name": "Quyon",
+      "reason": "missing_entry",
+      "region": "can_quebec",
+      "sample_years": [
+        1825,
+        1931,
+        1966,
+        1991
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.14167,
+        -71.21667
+      ],
+      "country": "Canada",
+      "earliest_year": 1916,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Robertsonville-Canada",
+      "known_aliases": [
+        "Robertsonville",
+        "robertsonville"
+      ],
+      "latest_year": 1925,
+      "name": "Robertsonville",
+      "reason": "missing_entry",
+      "region": "can_quebec",
+      "sample_years": [
+        1916,
+        1921,
+        1925
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.91111,
+        -79.24444
+      ],
+      "country": "Canada",
+      "earliest_year": 1912,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rollet-Canada",
+      "known_aliases": [
+        "Rollet",
+        "rollet"
+      ],
+      "latest_year": 1991,
+      "name": "Rollet",
+      "reason": "missing_entry",
+      "region": "can_quebec",
+      "sample_years": [
+        1912,
+        1951,
+        1971,
+        1991
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.13333,
+        -71.17583
+      ],
+      "country": "Canada",
+      "earliest_year": 1867,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sacré-Cœur-de-Marie-Partie-Sud-Canada",
+      "known_aliases": [
+        "Sacré-Cœur-de-Marie-Partie-Sud",
+        "sacré-cœur-de-marie-partie-sud"
+      ],
+      "latest_year": 1996,
+      "name": "Sacré-Cœur-de-Marie-Partie-Sud",
+      "reason": "missing_entry",
+      "region": "can_quebec",
+      "sample_years": [
+        1867,
+        1921,
+        1966,
+        1996
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.27,
+        -68.92
+      ],
+      "country": "Canada",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Saint-François Parish-Canada",
+      "known_aliases": [
+        "Saint-François Parish",
+        "saint-françois parish"
+      ],
+      "latest_year": 1996,
+      "name": "Saint-François Parish",
+      "reason": "missing_entry",
+      "region": "can_new_brunswick",
+      "sample_years": [
+        1970,
+        1971,
+        1981,
+        1991,
+        1996
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.26667,
+        -70.76667
+      ],
+      "country": "Canada",
+      "earliest_year": 1867,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Saint-François-de-Beauce-Canada",
+      "known_aliases": [
+        "Saint-François-de-Beauce",
+        "saint-françois-de-beauce"
+      ],
+      "latest_year": 1996,
+      "name": "Saint-François-de-Beauce",
+      "reason": "missing_entry",
+      "region": "can_quebec",
+      "sample_years": [
+        1867,
+        1921,
+        1966,
+        1996
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

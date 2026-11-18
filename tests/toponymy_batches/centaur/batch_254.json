@@ -1,0 +1,959 @@
+{
+  "batch_index": 254,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        36.14546,
+        -118.57888
+      ],
+      "country": "California",
+      "earliest_year": 1884,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cedar Slope-California",
+      "known_aliases": [
+        "Cedar Slope",
+        "cedar slope",
+        "cedar slope cdp",
+        "Cedar Slope CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Cedar Slope",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1884,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.19293,
+        -88.62871
+      ],
+      "country": "Illinois",
+      "earliest_year": 1869,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Riley-Illinois",
+      "known_aliases": [
+        "Riley",
+        "riley",
+        "riley cdp",
+        "Riley CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Riley",
+      "reason": "missing_entry",
+      "region": "usa_illinois",
+      "sample_years": [
+        1869,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.4114,
+        -115.51206
+      ],
+      "country": "Montana",
+      "earliest_year": 1899,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Saltese-Montana",
+      "known_aliases": [
+        "Saltese",
+        "saltese",
+        "saltese cdp",
+        "Saltese CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Saltese",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1899,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.03351,
+        -98.98842
+      ],
+      "country": "South Dakota",
+      "earliest_year": 1947,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Gann Valley-South Dakota",
+      "known_aliases": [
+        "Gann Valley",
+        "gann valley",
+        "gann valley cdp",
+        "Gann Valley CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Gann Valley",
+      "reason": "missing_entry",
+      "region": "usa_south_dakota",
+      "sample_years": [
+        1947,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.19365,
+        -103.83294
+      ],
+      "country": "South Dakota",
+      "earliest_year": 1973,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Provo-South Dakota",
+      "known_aliases": [
+        "Provo",
+        "provo",
+        "provo cdp",
+        "Provo CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Provo",
+      "reason": "missing_entry",
+      "region": "usa_south_dakota",
+      "sample_years": [
+        1973,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        60.92308,
+        -150.68884
+      ],
+      "country": "Alaska",
+      "earliest_year": 1928,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Point Possession-Alaska",
+      "known_aliases": [
+        "Point Possession",
+        "point possession",
+        "point possession cdp",
+        "Point Possession CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Point Possession",
+      "reason": "missing_entry",
+      "region": "usa_alaska",
+      "sample_years": [
+        1928,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.58379,
+        -112.92844
+      ],
+      "country": "Montana",
+      "earliest_year": 1943,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Goldcreek-Montana",
+      "known_aliases": [
+        "Goldcreek",
+        "goldcreek",
+        "goldcreek cdp",
+        "Goldcreek CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Goldcreek",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1943,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.92572,
+        -112.29171
+      ],
+      "country": "Montana",
+      "earliest_year": 1892,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Miller Colony-Montana",
+      "known_aliases": [
+        "Miller Colony",
+        "miller colony",
+        "miller colony cdp",
+        "Miller Colony CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Miller Colony",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1892,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.89652,
+        -105.16139
+      ],
+      "country": "Montana",
+      "earliest_year": 1956,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Whitetail-Montana",
+      "known_aliases": [
+        "Whitetail",
+        "whitetail",
+        "whitetail cdp",
+        "Whitetail CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Whitetail",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1956,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.89157,
+        -102.86256
+      ],
+      "country": "North Dakota",
+      "earliest_year": 1904,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Larson-North Dakota",
+      "known_aliases": [
+        "Larson",
+        "larson",
+        "larson cdp",
+        "Larson CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Larson",
+      "reason": "missing_entry",
+      "region": "usa_north_dakota",
+      "sample_years": [
+        1904,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.42326,
+        -96.55617
+      ],
+      "country": "South Dakota",
+      "earliest_year": 1882,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Norfeld Colony-South Dakota",
+      "known_aliases": [
+        "Norfeld Colony",
+        "norfeld colony",
+        "norfeld colony cdp",
+        "Norfeld Colony CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Norfeld Colony",
+      "reason": "missing_entry",
+      "region": "usa_south_dakota",
+      "sample_years": [
+        1882,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.82295,
+        -117.87825
+      ],
+      "country": "California",
+      "earliest_year": 1878,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pearsonville-California",
+      "known_aliases": [
+        "Pearsonville",
+        "pearsonville",
+        "pearsonville cdp",
+        "Pearsonville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Pearsonville",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1878,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.40435,
+        -121.34056
+      ],
+      "country": "California",
+      "earliest_year": 1907,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Warner Valley-California",
+      "known_aliases": [
+        "Warner Valley",
+        "warner valley",
+        "warner valley cdp",
+        "Warner Valley CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Warner Valley",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1907,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.02362,
+        -90.84875
+      ],
+      "country": "Mississippi",
+      "earliest_year": 1963,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Nitta Yuma-Mississippi",
+      "known_aliases": [
+        "Nitta Yuma",
+        "nitta yuma",
+        "nitta yuma cdp",
+        "Nitta Yuma CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Nitta Yuma",
+      "reason": "missing_entry",
+      "region": "usa_mississippi",
+      "sample_years": [
+        1963,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.75186,
+        -109.54659
+      ],
+      "country": "Montana",
+      "earliest_year": 1867,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "East End Colony-Montana",
+      "known_aliases": [
+        "East End Colony",
+        "east end colony",
+        "east end colony cdp",
+        "East End Colony CDP"
+      ],
+      "latest_year": 2020,
+      "name": "East End Colony",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1867,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.17054,
+        -110.33959
+      ],
+      "country": "Montana",
+      "earliest_year": 1899,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Surprise Creek Colony-Montana",
+      "known_aliases": [
+        "Surprise Creek Colony",
+        "surprise creek colony",
+        "surprise creek colony cdp",
+        "Surprise Creek Colony CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Surprise Creek Colony",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1899,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.06352,
+        -104.2715
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1918,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Newkirk-New Mexico",
+      "known_aliases": [
+        "Newkirk",
+        "newkirk",
+        "newkirk cdp",
+        "Newkirk CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Newkirk",
+      "reason": "missing_entry",
+      "region": "usa_new_mexico",
+      "sample_years": [
+        1918,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.60255,
+        -98.82601
+      ],
+      "country": "South Dakota",
+      "earliest_year": 1967,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Long Lake Colony-South Dakota",
+      "known_aliases": [
+        "Long Lake Colony",
+        "long lake colony",
+        "long lake colony cdp",
+        "Long Lake Colony CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Long Lake Colony",
+      "reason": "missing_entry",
+      "region": "usa_south_dakota",
+      "sample_years": [
+        1967,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.42475,
+        -97.81089
+      ],
+      "country": "South Dakota",
+      "earliest_year": 1868,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Milltown-South Dakota",
+      "known_aliases": [
+        "Milltown",
+        "milltown",
+        "milltown cdp",
+        "Milltown CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Milltown",
+      "reason": "missing_entry",
+      "region": "usa_south_dakota",
+      "sample_years": [
+        1868,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.89287,
+        -97.78141
+      ],
+      "country": "South Dakota",
+      "earliest_year": 1876,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Westwood Colony-South Dakota",
+      "known_aliases": [
+        "Westwood Colony",
+        "westwood colony",
+        "westwood colony cdp",
+        "Westwood Colony CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Westwood Colony",
+      "reason": "missing_entry",
+      "region": "usa_south_dakota",
+      "sample_years": [
+        1876,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.04347,
+        -119.25988
+      ],
+      "country": "California",
+      "earliest_year": 1909,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Virginia Lakes-California",
+      "known_aliases": [
+        "Virginia Lakes",
+        "virginia lakes",
+        "virginia lakes cdp",
+        "Virginia Lakes CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Virginia Lakes",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1909,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.32813,
+        -106.65628
+      ],
+      "country": "Colorado",
+      "earliest_year": 1933,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Norrie-Colorado",
+      "known_aliases": [
+        "Norrie",
+        "norrie",
+        "norrie cdp",
+        "Norrie CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Norrie",
+      "reason": "missing_entry",
+      "region": "usa_colorado",
+      "sample_years": [
+        1933,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.98089,
+        -92.0836
+      ],
+      "country": "Missouri",
+      "earliest_year": 1855,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Plevna-Missouri",
+      "known_aliases": [
+        "Plevna",
+        "plevna",
+        "plevna cdp",
+        "Plevna CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Plevna",
+      "reason": "missing_entry",
+      "region": "usa_missouri",
+      "sample_years": [
+        1855,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.44183,
+        -110.02627
+      ],
+      "country": "Montana",
+      "earliest_year": 1968,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Duncan Ranch Colony-Montana",
+      "known_aliases": [
+        "Duncan Ranch Colony",
+        "duncan ranch colony",
+        "duncan ranch colony cdp",
+        "Duncan Ranch Colony CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Duncan Ranch Colony",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1968,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.03622,
+        -108.18926
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1959,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Trout Valley-New Mexico",
+      "known_aliases": [
+        "Trout Valley",
+        "trout valley",
+        "trout valley cdp",
+        "Trout Valley CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Trout Valley",
+      "reason": "missing_entry",
+      "region": "usa_new_mexico",
+      "sample_years": [
+        1959,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.09094,
+        -100.16711
+      ],
+      "country": "North Dakota",
+      "earliest_year": 1967,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Orrin-North Dakota",
+      "known_aliases": [
+        "Orrin",
+        "orrin",
+        "orrin cdp",
+        "Orrin CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Orrin",
+      "reason": "missing_entry",
+      "region": "usa_north_dakota",
+      "sample_years": [
+        1967,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.41659,
+        -103.40587
+      ],
+      "country": "South Dakota",
+      "earliest_year": 1912,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Buffalo Chip-South Dakota",
+      "known_aliases": [
+        "Buffalo Chip",
+        "buffalo chip",
+        "buffalo chip town",
+        "Buffalo Chip town"
+      ],
+      "latest_year": 2020,
+      "name": "Buffalo Chip",
+      "reason": "missing_entry",
+      "region": "usa_south_dakota",
+      "sample_years": [
+        1912,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.86555,
+        -97.60867
+      ],
+      "country": "South Dakota",
+      "earliest_year": 1916,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Silver Lake Colony-South Dakota",
+      "known_aliases": [
+        "Silver Lake Colony",
+        "silver lake colony",
+        "silver lake colony cdp",
+        "Silver Lake Colony CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Silver Lake Colony",
+      "reason": "missing_entry",
+      "region": "usa_south_dakota",
+      "sample_years": [
+        1916,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.19107,
+        -99.26228
+      ],
+      "country": "South Dakota",
+      "earliest_year": 1912,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Thunderbird Colony-South Dakota",
+      "known_aliases": [
+        "Thunderbird Colony",
+        "thunderbird colony",
+        "thunderbird colony cdp",
+        "Thunderbird Colony CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Thunderbird Colony",
+      "reason": "missing_entry",
+      "region": "usa_south_dakota",
+      "sample_years": [
+        1912,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        26.60654,
+        -99.16126
+      ],
+      "country": "Texas",
+      "earliest_year": 1887,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Los Lobos-Texas",
+      "known_aliases": [
+        "Los Lobos",
+        "los lobos",
+        "los lobos cdp",
+        "Los Lobos CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Los Lobos",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1887,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

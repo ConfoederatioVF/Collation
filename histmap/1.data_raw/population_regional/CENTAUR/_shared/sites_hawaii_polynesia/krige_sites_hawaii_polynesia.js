@@ -3,7 +3,9 @@ let fs = require("fs");
 let path = require("path");
 let { PNG } = require("pngjs");
 let { ViscountBiophysicalCovariates } = require(path.resolve(__dirname, "../../../../../3.data_transform/population_Substrata.viscount/ViscountBiophysicalCovariates.js"));
+let { ViscountHUResidualKriging } = require(path.resolve(__dirname, "../../../../../3.data_transform/population_Substrata.viscount/ViscountHUResidualKriging.js"));
 let { ViscountMaternKriging } = require(path.resolve(__dirname, "../../../../../3.data_transform/population_Substrata.viscount/ViscountMaternKriging.js"));
+let { ViscountRuralSuitability } = require(path.resolve(__dirname, "../../../../../3.data_transform/population_Substrata.viscount/ViscountRuralSuitability.js"));
 
 //Initialise functions
 {
@@ -30,6 +32,12 @@ let { ViscountMaternKriging } = require(path.resolve(__dirname, "../../../../../
     static B_generatePopulationRasters (arg0_surface_bundle) {
       //Convert from parameters
       let surface = arg0_surface_bundle;
+
+      //Guard clause: delegate to per-HU residual kriging + census/GHSL engine when active
+      let rk_cfg = (surface && surface.kriging_bundle && surface.kriging_bundle.config) ? surface.kriging_bundle.config : {};
+
+      if (rk_cfg.kriging_config && rk_cfg.kriging_config.residual_kriging_mode === "hu_hyde_residual")
+        return ViscountHUResidualKriging.generateAllBenchmarkPopulationRasters(surface, { is_polynesia: true });
 
       //Declare local instance variables
       let bio_covs = surface.bio_covs;
@@ -182,20 +190,23 @@ let { ViscountMaternKriging } = require(path.resolve(__dirname, "../../../../../
         let arch_sum = 0;
         let out_field = new Float32Array(n_valid);
 
-        for (let i = 0; i < n_valid; i++) {
-          let v = arch_pot[i]*rk.weights[i];
+        for (let i = 0; i < n_valid; i++)
+          arch_field[i] = arch_pot[i]*rk.weights[i];
 
-          arch_field[i] = v;
-          arch_sum += v;
-        }
+        if (yr <= 1780 && bio_covs.uopp_valid)
+          ViscountRuralSuitability.capUrbanCoreFieldToRuralRing(bundle.mask_data, arch_field, bio_covs.uopp_valid, 1.12);
 
+        for (let i = 0; i < n_valid; i++) arch_sum += arch_field[i];
+
+        let hab_mask = bio_covs.hab_mask;
         let target_mass = (yr >= 800) ? Math.max(2e4, Math.round(3e5*Math.exp((yr - 1750)/2500))) : 1e4;
         let arch_scale = (arch_sum > 0) ? target_mass/arch_sum : 1.0;
 
         for (let i = 0; i < n_valid; i++) arch_field[i] *= arch_scale;
 
         if (yr <= 1890) {
-          for (let i = 0; i < n_valid; i++) out_field[i] = Math.max(1e-4, arch_field[i]);
+          for (let i = 0; i < n_valid; i++)
+            out_field[i] = (hab_mask && hab_mask[i] === 0) ? 0 : Math.max(1e-4, arch_field[i]);
         } else {
           let ghs_pop = (yr >= 1900) ? this.readFloatRasterValid(path.join(ghs_pop_dir, `GHS_POP_${yr}.png`), valid_indices) : null;
           let ghsl_urb = (yr >= 1900) ? this.readUintRasterValid(path.join(ghsl_dir, `GHSL_${yr}.png`), valid_indices) : null;
@@ -208,7 +219,7 @@ let { ViscountMaternKriging } = require(path.resolve(__dirname, "../../../../../
 
           for (let i = 0; i < n_valid; i++) {
             let bio_w = 0.45*u_nat[i] + 0.25*u_fluv[i] + 0.20*u_coast[i] + 0.10*u_eco[i];
-            let mr = Math.max(1e-4, u_hab[i])*bio_w;
+            let mr = Math.max(0, u_hab[i])*bio_w;
 
             if (ghs_pop) {
               let u_ghsl = (ghsl_urb && ghsl_urb[i] > 0) ? ghsl_urb[i] : 0;
@@ -224,8 +235,11 @@ let { ViscountMaternKriging } = require(path.resolve(__dirname, "../../../../../
           let mod_scale = (mod_sum > 0 && target_mass > 0) ? target_mass/mod_sum : 1.0;
           let w_mod = Math.min(0.90, 0.90*Math.max(0, (yr - 1890)/60));
 
-          for (let i = 0; i < n_valid; i++)
-            out_field[i] = Math.max(1e-4, arch_field[i]*(1 - w_mod) + (mod_rur[i]*mod_scale)*w_mod);
+          for (let i = 0; i < n_valid; i++) {
+            let v = arch_field[i]*(1 - w_mod) + (mod_rur[i]*mod_scale)*w_mod;
+
+            out_field[i] = (v > 0) ? Math.max(1e-4, v) : 0;
+          }
         }
 
         let f_buf = new ArrayBuffer(4);

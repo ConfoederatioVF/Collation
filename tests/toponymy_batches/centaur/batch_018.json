@@ -1,0 +1,879 @@
+{
+  "batch_index": 18,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        49.09581,
+        -119.75165
+      ],
+      "country": "Canada",
+      "earliest_year": 1952,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Okanagan-Similkameen B-Canada",
+      "known_aliases": [
+        "Okanagan-Similkameen B",
+        "okanagan-similkameen b"
+      ],
+      "latest_year": 2026,
+      "name": "Okanagan-Similkameen B",
+      "reason": "missing_entry",
+      "region": "can_british_columbia",
+      "sample_years": [
+        1952,
+        2004,
+        2015,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.419,
+        -72.85275
+      ],
+      "country": "Canada",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Saint-Barnabé-Canada",
+      "known_aliases": [
+        "Saint-Barnabé",
+        "saint-barnabé",
+        "saint-barnabé-nord",
+        "Saint-Barnabé-Nord"
+      ],
+      "latest_year": 2026,
+      "name": "Saint-Barnabé",
+      "reason": "missing_entry",
+      "region": "can_quebec",
+      "sample_years": [
+        1750,
+        1981,
+        2011,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        59.21583,
+        -105.66775
+      ],
+      "country": "Canada",
+      "earliest_year": 1903,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Chicken 224-Canada",
+      "known_aliases": [
+        "Chicken 224",
+        "chicken 224"
+      ],
+      "latest_year": 2026,
+      "name": "Chicken 224",
+      "reason": "missing_entry",
+      "region": "can_saskatchewan",
+      "sample_years": [
+        1903,
+        2001,
+        2014,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.59488,
+        -64.05906
+      ],
+      "country": "Canada",
+      "earliest_year": 1930,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Central Prince-Canada",
+      "known_aliases": [
+        "Central Prince",
+        "central prince"
+      ],
+      "latest_year": 2026,
+      "name": "Central Prince",
+      "reason": "missing_entry",
+      "region": "can_prince_edward_island",
+      "sample_years": [
+        1930,
+        2002,
+        2014,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        49.34312,
+        -97.8661
+      ],
+      "country": "Canada",
+      "earliest_year": 1905,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Roland-Canada",
+      "known_aliases": [
+        "Roland",
+        "roland"
+      ],
+      "latest_year": 2026,
+      "name": "Roland",
+      "reason": "missing_entry",
+      "region": "can_manitoba",
+      "sample_years": [
+        1905,
+        2001,
+        2014,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.60332,
+        -98.5827
+      ],
+      "country": "Canada",
+      "earliest_year": 1916,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fairford 50-Canada",
+      "known_aliases": [
+        "Fairford 50",
+        "fairford 50"
+      ],
+      "latest_year": 2026,
+      "name": "Fairford 50",
+      "reason": "missing_entry",
+      "region": "can_manitoba",
+      "sample_years": [
+        1916,
+        2001,
+        2014,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        53.01039,
+        -102.65909
+      ],
+      "country": "Canada",
+      "earliest_year": 1954,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hudson Bay No. 394-Canada",
+      "known_aliases": [
+        "Hudson Bay No. 394",
+        "hudson bay no. 394"
+      ],
+      "latest_year": 2026,
+      "name": "Hudson Bay No. 394",
+      "reason": "missing_entry",
+      "region": "can_saskatchewan",
+      "sample_years": [
+        1954,
+        2004,
+        2015,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.2504,
+        -110.62253
+      ],
+      "country": "Canada",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Special Area No. 3-Canada",
+      "known_aliases": [
+        "Special Area No. 3",
+        "special area no. 3"
+      ],
+      "latest_year": 2026,
+      "name": "Special Area No. 3",
+      "reason": "missing_entry",
+      "region": "can_alberta",
+      "sample_years": [
+        1950,
+        2003,
+        2015,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        49.62714,
+        -124.41053
+      ],
+      "country": "Canada",
+      "earliest_year": 1913,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "qathet D-Canada",
+      "known_aliases": [
+        "qathet D",
+        "qathet d"
+      ],
+      "latest_year": 2026,
+      "name": "qathet D",
+      "reason": "missing_entry",
+      "region": "can_british_columbia",
+      "sample_years": [
+        1913,
+        2001,
+        2014,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.2586,
+        -63.31055
+      ],
+      "country": "Canada",
+      "earliest_year": 1962,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kingston (PE)-Canada",
+      "known_aliases": [
+        "Kingston (PE)",
+        "kingston"
+      ],
+      "latest_year": 2026,
+      "name": "Kingston (PE)",
+      "reason": "missing_entry",
+      "region": "can_prince_edward_island",
+      "sample_years": [
+        1962,
+        2005,
+        2016,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.40286,
+        -99.12222
+      ],
+      "country": "Canada",
+      "earliest_year": 1945,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Glenella-Lansdowne-Canada",
+      "known_aliases": [
+        "Glenella-Lansdowne",
+        "glenella-lansdowne"
+      ],
+      "latest_year": 2026,
+      "name": "Glenella-Lansdowne",
+      "reason": "missing_entry",
+      "region": "can_manitoba",
+      "sample_years": [
+        1945,
+        2003,
+        2015,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        55.85625,
+        -92.0909
+      ],
+      "country": "Canada",
+      "earliest_year": 1934,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Shamattawa 1-Canada",
+      "known_aliases": [
+        "Shamattawa 1",
+        "shamattawa 1"
+      ],
+      "latest_year": 2026,
+      "name": "Shamattawa 1",
+      "reason": "missing_entry",
+      "region": "can_manitoba",
+      "sample_years": [
+        1934,
+        2003,
+        2015,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.1567,
+        -82.1982
+      ],
+      "country": "Canada",
+      "earliest_year": 1939,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sagamok-Canada",
+      "known_aliases": [
+        "Sagamok",
+        "sagamok"
+      ],
+      "latest_year": 2026,
+      "name": "Sagamok",
+      "reason": "missing_entry",
+      "region": "can_ontario",
+      "sample_years": [
+        1939,
+        2003,
+        2015,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        49.6769,
+        -122.18451
+      ],
+      "country": "Canada",
+      "earliest_year": 1887,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fraser Valley C-Canada",
+      "known_aliases": [
+        "Fraser Valley C",
+        "fraser valley c"
+      ],
+      "latest_year": 2026,
+      "name": "Fraser Valley C",
+      "reason": "missing_entry",
+      "region": "can_british_columbia",
+      "sample_years": [
+        1887,
+        1996,
+        2013,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.5891,
+        -70.39486
+      ],
+      "country": "Canada",
+      "earliest_year": 1897,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Saint-Hilarion-Canada",
+      "known_aliases": [
+        "Saint-Hilarion",
+        "saint-hilarion"
+      ],
+      "latest_year": 2026,
+      "name": "Saint-Hilarion",
+      "reason": "missing_entry",
+      "region": "can_quebec",
+      "sample_years": [
+        1897,
+        2000,
+        2013,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.48378,
+        -66.14168
+      ],
+      "country": "Canada",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Greenwich-Canada",
+      "known_aliases": [
+        "Greenwich",
+        "greenwich"
+      ],
+      "latest_year": 2026,
+      "name": "Greenwich",
+      "reason": "missing_entry",
+      "region": "can_new_brunswick",
+      "sample_years": [
+        1900,
+        2000,
+        2013,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.29937,
+        -99.82402
+      ],
+      "country": "Canada",
+      "earliest_year": 1957,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Minto-Odanah-Canada",
+      "known_aliases": [
+        "Minto-Odanah",
+        "minto-odanah"
+      ],
+      "latest_year": 2026,
+      "name": "Minto-Odanah",
+      "reason": "missing_entry",
+      "region": "can_manitoba",
+      "sample_years": [
+        1957,
+        2004,
+        2015,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.13177,
+        -63.95826
+      ],
+      "country": "Canada",
+      "earliest_year": 1877,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Botsford-Canada",
+      "known_aliases": [
+        "Botsford",
+        "botsford"
+      ],
+      "latest_year": 2026,
+      "name": "Botsford",
+      "reason": "missing_entry",
+      "region": "can_new_brunswick",
+      "sample_years": [
+        1877,
+        1996,
+        2013,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.89153,
+        -64.1755
+      ],
+      "country": "Canada",
+      "earliest_year": 1891,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Miminegash-Canada",
+      "known_aliases": [
+        "Miminegash",
+        "miminegash"
+      ],
+      "latest_year": 2026,
+      "name": "Miminegash",
+      "reason": "missing_entry",
+      "region": "can_prince_edward_island",
+      "sample_years": [
+        1891,
+        1996,
+        2013,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.76885,
+        -99.97224
+      ],
+      "country": "Canada",
+      "earliest_year": 1912,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mossey River-Canada",
+      "known_aliases": [
+        "Mossey River",
+        "mossey river"
+      ],
+      "latest_year": 2026,
+      "name": "Mossey River",
+      "reason": "missing_entry",
+      "region": "can_manitoba",
+      "sample_years": [
+        1912,
+        2001,
+        2014,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.11362,
+        -60.18642
+      ],
+      "country": "Canada",
+      "earliest_year": 1913,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Membertou 28B-Canada",
+      "known_aliases": [
+        "Membertou 28B",
+        "membertou 28b"
+      ],
+      "latest_year": 2026,
+      "name": "Membertou 28B",
+      "reason": "missing_entry",
+      "region": "can_nova_scotia",
+      "sample_years": [
+        1913,
+        2001,
+        2014,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.6269,
+        -94.0589
+      ],
+      "country": "Canada",
+      "earliest_year": 1892,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Deer Lake (ON)-Canada",
+      "known_aliases": [
+        "Deer Lake (ON)",
+        "deer lake"
+      ],
+      "latest_year": 2026,
+      "name": "Deer Lake (ON)",
+      "reason": "missing_entry",
+      "region": "can_ontario",
+      "sample_years": [
+        1892,
+        2000,
+        2013,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        54.32605,
+        -111.8177
+      ],
+      "country": "Canada",
+      "earliest_year": 1972,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "White Fish Lake 128-Canada",
+      "known_aliases": [
+        "White Fish Lake 128",
+        "white fish lake 128"
+      ],
+      "latest_year": 2026,
+      "name": "White Fish Lake 128",
+      "reason": "missing_entry",
+      "region": "can_alberta",
+      "sample_years": [
+        1972,
+        2005,
+        2016,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.36492,
+        -118.45354
+      ],
+      "country": "Canada",
+      "earliest_year": 1933,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "North Okanagan E-Canada",
+      "known_aliases": [
+        "North Okanagan E",
+        "north okanagan e"
+      ],
+      "latest_year": 2026,
+      "name": "North Okanagan E",
+      "reason": "missing_entry",
+      "region": "can_british_columbia",
+      "sample_years": [
+        1933,
+        2003,
+        2015,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.97433,
+        -104.69944
+      ],
+      "country": "Canada",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Longlaketon No. 219-Canada",
+      "known_aliases": [
+        "Longlaketon No. 219",
+        "longlaketon no. 219"
+      ],
+      "latest_year": 2026,
+      "name": "Longlaketon No. 219",
+      "reason": "missing_entry",
+      "region": "can_saskatchewan",
+      "sample_years": [
+        1970,
+        2005,
+        2016,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        68.53801,
+        -89.83393
+      ],
+      "country": "Canada",
+      "earliest_year": 1911,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kugaaruk-Canada",
+      "known_aliases": [
+        "Kugaaruk",
+        "kugaaruk"
+      ],
+      "latest_year": 2026,
+      "name": "Kugaaruk",
+      "reason": "missing_entry",
+      "region": "can_nunavut",
+      "sample_years": [
+        1911,
+        2000,
+        2013,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.55766,
+        -84.10961
+      ],
+      "country": "Canada",
+      "earliest_year": 1906,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Garden River 14-Canada",
+      "known_aliases": [
+        "Garden River 14",
+        "garden river 14"
+      ],
+      "latest_year": 2026,
+      "name": "Garden River 14",
+      "reason": "missing_entry",
+      "region": "can_ontario",
+      "sample_years": [
+        1906,
+        2001,
+        2014,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        53.81472,
+        -113.95263
+      ],
+      "country": "Canada",
+      "earliest_year": 1928,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Alexander 134-Canada",
+      "known_aliases": [
+        "Alexander 134",
+        "alexander 134"
+      ],
+      "latest_year": 2026,
+      "name": "Alexander 134",
+      "reason": "missing_entry",
+      "region": "can_alberta",
+      "sample_years": [
+        1928,
+        2002,
+        2014,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.24062,
+        -73.02032
+      ],
+      "country": "Canada",
+      "earliest_year": 1888,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sainte-Sabine-Canada",
+      "known_aliases": [
+        "Sainte-Sabine",
+        "sainte-sabine"
+      ],
+      "latest_year": 2026,
+      "name": "Sainte-Sabine",
+      "reason": "missing_entry",
+      "region": "can_quebec",
+      "sample_years": [
+        1888,
+        1996,
+        2013,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.27919,
+        -121.53866
+      ],
+      "country": "Canada",
+      "earliest_year": 1974,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Thompson-Nicola E (Bonaparte Plateau)-Canada",
+      "known_aliases": [
+        "Thompson-Nicola E (Bonaparte Plateau)",
+        "thompson-nicola e"
+      ],
+      "latest_year": 2026,
+      "name": "Thompson-Nicola E (Bonaparte Plateau)",
+      "reason": "missing_entry",
+      "region": "can_british_columbia",
+      "sample_years": [
+        1974,
+        2005,
+        2016,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

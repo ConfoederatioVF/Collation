@@ -1,0 +1,954 @@
+{
+  "batch_index": 118,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        47.09122,
+        -88.57971
+      ],
+      "country": "Michigan",
+      "earliest_year": 1901,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Dodgeville-Michigan",
+      "known_aliases": [
+        "Dodgeville",
+        "dodgeville",
+        "dodgeville cdp",
+        "Dodgeville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Dodgeville",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1901,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.60724,
+        -79.23076
+      ],
+      "country": "North Carolina",
+      "earliest_year": 1969,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Elrod-North Carolina",
+      "known_aliases": [
+        "Elrod",
+        "elrod",
+        "elrod cdp",
+        "Elrod CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Elrod",
+      "reason": "missing_entry",
+      "region": "usa_north_carolina",
+      "sample_years": [
+        1969,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.54546,
+        -120.74291
+      ],
+      "country": "California",
+      "earliest_year": 1938,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "River Pines-California",
+      "known_aliases": [
+        "River Pines",
+        "river pines",
+        "river pines cdp",
+        "River Pines CDP"
+      ],
+      "latest_year": 2020,
+      "name": "River Pines",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1938,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.73718,
+        -114.6378
+      ],
+      "country": "California",
+      "earliest_year": 1897,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Winterhaven-California",
+      "known_aliases": [
+        "Winterhaven",
+        "winterhaven",
+        "winterhaven cdp",
+        "Winterhaven CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Winterhaven",
+      "reason": "missing_entry",
+      "region": "usa_arizona",
+      "sample_years": [
+        1897,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.58777,
+        -74.45452
+      ],
+      "country": "New Jersey",
+      "earliest_year": 1878,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "New Gretna-New Jersey",
+      "known_aliases": [
+        "New Gretna",
+        "new gretna",
+        "new gretna cdp",
+        "New Gretna CDP"
+      ],
+      "latest_year": 2020,
+      "name": "New Gretna",
+      "reason": "missing_entry",
+      "region": "usa_new_jersey",
+      "sample_years": [
+        1878,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.11498,
+        -75.4026
+      ],
+      "country": "New York",
+      "earliest_year": 1800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Westmoreland-New York",
+      "known_aliases": [
+        "Westmoreland",
+        "westmoreland",
+        "westmoreland cdp",
+        "Westmoreland CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Westmoreland",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1800,
+        1870,
+        1950,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.80253,
+        -94.85231
+      ],
+      "country": "Oklahoma",
+      "earliest_year": 1931,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tenkiller-Oklahoma",
+      "known_aliases": [
+        "Tenkiller",
+        "tenkiller",
+        "tenkiller cdp",
+        "Tenkiller CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Tenkiller",
+      "reason": "missing_entry",
+      "region": "usa_oklahoma",
+      "sample_years": [
+        1931,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.34899,
+        -122.78558
+      ],
+      "country": "Oregon",
+      "earliest_year": 1892,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Holley-Oregon",
+      "known_aliases": [
+        "Holley",
+        "holley",
+        "holley cdp",
+        "Holley CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Holley",
+      "reason": "missing_entry",
+      "region": "usa_oregon",
+      "sample_years": [
+        1892,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        29.4067,
+        -96.09053
+      ],
+      "country": "Texas",
+      "earliest_year": 1916,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hungerford-Texas",
+      "known_aliases": [
+        "Hungerford",
+        "hungerford",
+        "hungerford cdp",
+        "Hungerford CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Hungerford",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1916,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.53533,
+        -111.81244
+      ],
+      "country": "Utah",
+      "earliest_year": 1884,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Avon-Utah",
+      "known_aliases": [
+        "Avon",
+        "avon",
+        "avon cdp",
+        "Avon CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Avon",
+      "reason": "missing_entry",
+      "region": "usa_utah",
+      "sample_years": [
+        1884,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.00456,
+        -81.065
+      ],
+      "country": "West Virginia",
+      "earliest_year": 1916,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Gatewood-West Virginia",
+      "known_aliases": [
+        "Gatewood",
+        "gatewood",
+        "gatewood cdp",
+        "Gatewood CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Gatewood",
+      "reason": "missing_entry",
+      "region": "usa_west_virginia",
+      "sample_years": [
+        1916,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.87677,
+        -123.5735
+      ],
+      "country": "California",
+      "earliest_year": 1913,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Salyer-California",
+      "known_aliases": [
+        "Salyer",
+        "salyer",
+        "salyer cdp",
+        "Salyer CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Salyer",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1913,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.80091,
+        -75.34695
+      ],
+      "country": "New Jersey",
+      "earliest_year": 1972,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bridgeport-New Jersey",
+      "known_aliases": [
+        "Bridgeport",
+        "bridgeport",
+        "bridgeport cdp",
+        "Bridgeport CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Bridgeport",
+      "reason": "missing_entry",
+      "region": "usa_new_jersey",
+      "sample_years": [
+        1972,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.01778,
+        -122.18788
+      ],
+      "country": "California",
+      "earliest_year": 1882,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Davenport-California",
+      "known_aliases": [
+        "Davenport",
+        "davenport",
+        "davenport cdp",
+        "Davenport CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Davenport",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1882,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.31019,
+        -88.34466
+      ],
+      "country": "Michigan",
+      "earliest_year": 1872,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mohawk-Michigan",
+      "known_aliases": [
+        "Mohawk",
+        "mohawk",
+        "mohawk cdp",
+        "Mohawk CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Mohawk",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1872,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.2468,
+        -109.73424
+      ],
+      "country": "Montana",
+      "earliest_year": 1923,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Parker School-Montana",
+      "known_aliases": [
+        "Parker School",
+        "parker school",
+        "parker school cdp",
+        "Parker School CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Parker School",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1923,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.13364,
+        -76.00324
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1872,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Goodville-Pennsylvania",
+      "known_aliases": [
+        "Goodville",
+        "goodville",
+        "goodville cdp",
+        "Goodville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Goodville",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1872,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.84708,
+        -76.08338
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1957,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kirkwood-Pennsylvania",
+      "known_aliases": [
+        "Kirkwood",
+        "kirkwood",
+        "kirkwood cdp",
+        "Kirkwood CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Kirkwood",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1957,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.6065,
+        -73.80891
+      ],
+      "country": "New York",
+      "earliest_year": 1865,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Redford-New York",
+      "known_aliases": [
+        "Redford",
+        "redford",
+        "redford cdp",
+        "Redford CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Redford",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1865,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        60.86275,
+        -162.2803
+      ],
+      "country": "Alaska",
+      "earliest_year": 1934,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Atmautluak-Alaska",
+      "known_aliases": [
+        "Atmautluak",
+        "atmautluak",
+        "atmautluak cdp",
+        "Atmautluak CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Atmautluak",
+      "reason": "missing_entry",
+      "region": "usa_alaska",
+      "sample_years": [
+        1934,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.46427,
+        -93.43021
+      ],
+      "country": "Arkansas",
+      "earliest_year": 1891,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Oak Grove-Arkansas",
+      "known_aliases": [
+        "Oak Grove",
+        "oak grove",
+        "oak grove town",
+        "Oak Grove town"
+      ],
+      "latest_year": 2026,
+      "name": "Oak Grove",
+      "reason": "missing_entry",
+      "region": "usa_arkansas",
+      "sample_years": [
+        1891,
+        2001,
+        2014,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        31.58313,
+        -88.69161
+      ],
+      "country": "Mississippi",
+      "earliest_year": 1953,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Clara-Mississippi",
+      "known_aliases": [
+        "Clara",
+        "clara",
+        "clara cdp",
+        "Clara CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Clara",
+      "reason": "missing_entry",
+      "region": "usa_mississippi",
+      "sample_years": [
+        1953,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.83103,
+        -90.14883
+      ],
+      "country": "Mississippi",
+      "earliest_year": 1903,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Eudora-Mississippi",
+      "known_aliases": [
+        "Eudora",
+        "eudora",
+        "eudora cdp",
+        "Eudora CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Eudora",
+      "reason": "missing_entry",
+      "region": "usa_mississippi",
+      "sample_years": [
+        1903,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.20419,
+        -82.81215
+      ],
+      "country": "Ohio",
+      "earliest_year": 1932,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Richmond Dale-Ohio",
+      "known_aliases": [
+        "Richmond Dale",
+        "richmond dale",
+        "richmond dale cdp",
+        "Richmond Dale CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Richmond Dale",
+      "reason": "missing_entry",
+      "region": "usa_ohio",
+      "sample_years": [
+        1932,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.41868,
+        -73.21228
+      ],
+      "country": "Vermont",
+      "earliest_year": 1775,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Wells-Vermont",
+      "known_aliases": [
+        "Wells",
+        "wells",
+        "wells cdp",
+        "wells town",
+        "Wells CDP",
+        "Wells town"
+      ],
+      "latest_year": 2020,
+      "name": "Wells",
+      "reason": "missing_entry",
+      "region": "usa_vermont",
+      "sample_years": [
+        1775,
+        1850,
+        1940,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.25352,
+        -124.25778
+      ],
+      "country": "Washington",
+      "earliest_year": 1937,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Clallam Bay-Washington",
+      "known_aliases": [
+        "Clallam Bay",
+        "clallam bay",
+        "clallam bay cdp",
+        "Clallam Bay CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Clallam Bay",
+      "reason": "missing_entry",
+      "region": "usa_washington",
+      "sample_years": [
+        1937,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.69753,
+        -89.88907
+      ],
+      "country": "Illinois",
+      "earliest_year": 1912,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Trivoli-Illinois",
+      "known_aliases": [
+        "Trivoli",
+        "trivoli",
+        "trivoli cdp",
+        "Trivoli CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Trivoli",
+      "reason": "missing_entry",
+      "region": "usa_illinois",
+      "sample_years": [
+        1912,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.3928,
+        -68.09166
+      ],
+      "country": "Maine",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Winter Harbor-Maine",
+      "known_aliases": [
+        "Winter Harbor",
+        "winter harbor",
+        "winter harbor cdp",
+        "winter harbor town",
+        "Winter Harbor CDP",
+        "Winter Harbor town"
+      ],
+      "latest_year": 2020,
+      "name": "Winter Harbor",
+      "reason": "missing_entry",
+      "region": "usa_maine",
+      "sample_years": [
+        1850,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.81301,
+        -92.23561
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1877,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Soudan-Minnesota",
+      "known_aliases": [
+        "Soudan",
+        "soudan",
+        "soudan cdp",
+        "Soudan CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Soudan",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1877,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.44276,
+        -114.17218
+      ],
+      "country": "Montana",
+      "earliest_year": 1927,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Charlo-Montana",
+      "known_aliases": [
+        "Charlo",
+        "charlo",
+        "charlo cdp",
+        "Charlo CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Charlo",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1927,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

@@ -67,11 +67,38 @@ VUE_ANGLE_PAT = re.compile(r"<[A-Za-z][^>\n]*>")
 MONTH_YEAR_AD_PAT = re.compile(
   r"\b(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+(?:19|20)\d{2}\s*AD\b"
 )
+KNITR_INLINE_R_PAT = re.compile(r"`r\s+[^`\n]+`")
+INLINE_BACKTICK_PAT = re.compile(r"`([^`\n]+)`")
+EXPLICIT_MONO_PAT = re.compile(r"\\texttt\s*\{|\\verb(?![A-Za-z])|<code>", flags=re.IGNORECASE)
+
+
+def _check_no_monospace(arg0_line_no, arg1_text, arg2_errors, arg3_warnings, arg4_legacy_baseline=False):
+  """Rejects non-code inline backticks and explicit LaTeX/HTML monospace spans outside code blocks."""
+  without_r = KNITR_INLINE_R_PAT.sub(" ", arg1_text)
+  backtick_hits = [m.group(1) for m in INLINE_BACKTICK_PAT.finditer(without_r)]
+  explicit_hits = EXPLICIT_MONO_PAT.findall(without_r)
+
+  for token in backtick_hits:
+    msg = (
+      f"Line {arg0_line_no}: Monospace backtick span `{token}` outside code blocks "
+      f"(reserve monospace strictly for code; use plain text or italics in prose/captions/tables)."
+    )
+    if arg4_legacy_baseline and len(token.strip()) <= 3:
+      arg3_warnings.append(msg)
+    else:
+      arg2_errors.append(msg)
+
+  for token in explicit_hits:
+    arg2_errors.append(
+      f"Line {arg0_line_no}: Explicit monospace markup '{token}' outside code blocks "
+      f"(reserve monospace strictly for code)."
+    )
 
 
 def strip_non_prose_spans(arg0_line):
-  """Removes inline backtick code spans, inline LaTeX math, markdown link targets, safe HTML tags and URLs."""
-  text = re.sub(r"`[^`]+`", " ", arg0_line)
+  """Removes knitr inline R calls, inline LaTeX math, markdown link targets, safe HTML tags and URLs while unwrapping stray prose backticks."""
+  text = KNITR_INLINE_R_PAT.sub(" ", arg0_line)
+  text = INLINE_BACKTICK_PAT.sub(r"\1", text)
   text = re.sub(r"\$\$[^$]+\$\$|\$[^$\n]+\$", " ", text)
   text = re.sub(r"\\\[.*?\\\]|\\\(.*?\\\)", " ", text)
   text = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", text)
@@ -105,19 +132,27 @@ def audit_humanise_structure(arg0_rmd_path, arg1_legacy_baseline=False):
   # 1. Audit YAML frontmatter caption fields
   for idx in range(1, yaml_end_idx):
     line_no = idx + 1
-    m = re.match(r"^(hero_caption|subtitle)\s*:\s*(.+)$", lines[idx].strip())
+    stripped_yaml = lines[idx].strip()
+    m = re.match(r"^(hero_caption|subtitle)\s*:\s*(.+)$", stripped_yaml)
     if m:
       field_name = m.group(1)
       val = m.group(2).strip().strip("\"'")
+      _check_no_monospace(line_no, val, errors, warnings, arg1_legacy_baseline)
       clean_val = strip_non_prose_spans(val)
       for kw in ("verified", "validated", "empirical", "complete"):
         if re.search(rf"\b{kw}\b", clean_val, re.IGNORECASE):
           errors.append(f"Line {line_no}: YAML `{field_name}` contains banned badge/hyperbole word `{kw}`.")
       _check_formatting_tokens(line_no, clean_val, errors, warnings, arg1_legacy_baseline)
+      continue
+    title_m = re.match(r"^title\s*:\s*(.+)$", stripped_yaml)
+    if title_m:
+      val = title_m.group(1).strip().strip("\"'")
+      _check_no_monospace(line_no, val, errors, warnings, arg1_legacy_baseline)
 
   # 2. Scan body outside YAML: separate R code chunks from prose/headings
   in_code = False
   in_display_math = False
+  current_h1 = None
   for idx in range(yaml_end_idx + (1 if yaml_end_idx > 0 else 0), len(lines)):
     line_no = idx + 1
     raw_line = lines[idx]
@@ -131,6 +166,7 @@ def audit_humanise_structure(arg0_rmd_path, arg1_legacy_baseline=False):
       # Check viscount_table / viscount_figure caption arguments inside R chunks
       for cap_m in re.finditer(r"(?:viscount_table|viscount_figure|render_table_template)\s*\([^)]*(?:caption\s*=\s*|,\s*)([\"'])((?:\\.|(?!\1).)*)\1", raw_line):
         cap_text = cap_m.group(2)
+        _check_no_monospace(line_no, cap_text, errors, warnings, arg1_legacy_baseline)
         clean_cap = strip_non_prose_spans(cap_text)
         for kw in ("verified", "validated", "empirical", "complete"):
           if re.search(rf"\b{kw}\b", clean_cap, re.IGNORECASE):
@@ -150,8 +186,18 @@ def audit_humanise_structure(arg0_rmd_path, arg1_legacy_baseline=False):
 
     # Headings check
     if stripped.startswith("#"):
-      heading_text = re.sub(r"^#+\s*", "", stripped)
+      level_m = re.match(r"^(#+)\s*(.*)$", stripped)
+      heading_level = len(level_m.group(1)) if level_m else 1
+      heading_text = level_m.group(2) if level_m else stripped.lstrip("#").strip()
+      _check_no_monospace(line_no, heading_text, errors, warnings, arg1_legacy_baseline)
       clean_heading = strip_non_prose_spans(heading_text)
+      if heading_level == 1:
+        current_h1 = clean_heading.strip().lower()
+      elif heading_level >= 2 and current_h1 == "abstract":
+        errors.append(
+          f"Line {line_no}: Sub-heading `{heading_text}` inside `# Abstract` is forbidden "
+          f"(keep `# Abstract` as an undivided prose block so Page 1 never strands an orphaned heading)."
+        )
       for kw in ("verified", "validated", "empirical", "complete"):
         if re.search(rf"\b{kw}\b", clean_heading, re.IGNORECASE):
           if kw == "complete" and is_settlements_file and re.search(r"\bcomplete\s+settlement\b", clean_heading, re.IGNORECASE):
@@ -164,6 +210,7 @@ def audit_humanise_structure(arg0_rmd_path, arg1_legacy_baseline=False):
     # Prose / table / HTML caption lines
     if not stripped or stripped.startswith("<!--"):
       continue
+    _check_no_monospace(line_no, raw_line, errors, warnings, arg1_legacy_baseline)
     raw_no_code = re.sub(r"`[^`]+`|<!--.*?-->|<https?://[^>]+>", " ", raw_line)
     raw_no_code = SAFE_HTML_TAG_PAT.sub(" ", raw_no_code)
     for vm in VUE_ANGLE_PAT.finditer(raw_no_code):
@@ -247,7 +294,8 @@ def strip_non_prose(arg0_text):
       continue
 
     cleaned = re.sub(r"\$\$?.*?\$\$?", " MATH ", line)
-    cleaned = re.sub(r"`[^`]+`", " CODE ", cleaned)
+    cleaned = KNITR_INLINE_R_PAT.sub(" CODE ", cleaned)
+    cleaned = INLINE_BACKTICK_PAT.sub(r"\1", cleaned)
     cleaned = re.sub(r"\[@[^\]]+\]", " CITE ", cleaned)
     cleaned = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", cleaned)
     cleaned = re.sub(r"\\[a-zA-Z]+\{[^}]*\}", " TEX ", cleaned)

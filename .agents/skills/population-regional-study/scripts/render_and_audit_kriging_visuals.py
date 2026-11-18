@@ -11,11 +11,50 @@ import sys
 
 import matplotlib
 matplotlib.use("Agg")
+import matplotlib.colors as mcolors
 import matplotlib.pyplot as plt
+import matplotlib.ticker as mticker
 from matplotlib.collections import LineCollection
 import numpy as np
 from PIL import Image
 from scipy.ndimage import uniform_filter
+
+
+def format_plain_linear_tick(arg0_value, arg1_pos=None):
+  """Formats linear numeric ticks using EN-GB European decimal commas (no scientific notation)."""
+  val = float(arg0_value)
+  if not np.isfinite(val):
+    return ""
+  if abs(val) < 1e-12:
+    return "0"
+  if abs(val) >= 1000.0:
+    return format_plain_log_tick(val)
+  s = f"{val:.2f}".rstrip("0").rstrip(".")
+  return s.replace(".", ",")
+
+
+def format_plain_log_tick(arg0_value, arg1_pos=None):
+  """Formats logarithmic axis or colorbar ticks using plain European numerals (`0,01`, `10`, `1k`, `1M`)."""
+  val = float(arg0_value)
+  if not np.isfinite(val) or val <= 0.0:
+    return ""
+  if val >= 1e9:
+    s = f"{val / 1e9:.2f}".rstrip("0").rstrip(".")
+    return f"{s.replace('.', ',')}B"
+  if val >= 1e6:
+    s = f"{val / 1e6:.2f}".rstrip("0").rstrip(".")
+    return f"{s.replace('.', ',')}M"
+  if val >= 1e3:
+    s = f"{val / 1e3:.1f}".rstrip("0").rstrip(".")
+    return f"{s.replace('.', ',')}k"
+  if val >= 1.0:
+    if abs(val - round(val)) < 1e-6:
+      return str(int(round(val)))
+    return f"{val:.2f}".rstrip("0").rstrip(".").replace(".", ",")
+  if val >= 1e-4:
+    digits = 2 if val >= 0.01 else (3 if val >= 0.001 else 4)
+    return f"{val:.{digits}f}".rstrip("0").rstrip(".").replace(".", ",")
+  return f"{val:.5f}".rstrip("0").rstrip(".").replace(".", ",")
 
 
 def find_svea_root(arg0_start_path):
@@ -172,6 +211,8 @@ def render_overview_sheet(arg0_domain_dir, arg1_krig_path, arg2_pop_path, arg3_o
   lat_max = 90.0 - r0 * 180.0 / 2160.0
   lat_min = 90.0 - r1 * 180.0 / 2160.0
   extent = [lon_min, lon_max, lat_min, lat_max]
+  mid_lat = 0.5 * (lat_min + lat_max)
+  geo_aspect = 1.0 / max(0.25, float(np.cos(np.radians(mid_lat))))
 
   svea_root = find_svea_root(arg0_domain_dir)
   rivers_segs = []
@@ -188,12 +229,16 @@ def render_overview_sheet(arg0_domain_dir, arg1_krig_path, arg2_pop_path, arg3_o
       coast_segs = extract_lines_from_geojson(os.path.join(gcache, "ne_50m_coastline.geojson"), (lon_min, lon_max), (lat_min, lat_max))
 
   fig, axes = plt.subplots(2, 2, figsize=(14, 9), dpi=300)
+  log_fmt = mticker.FuncFormatter(format_plain_log_tick)
+  lin_fmt = mticker.FuncFormatter(format_plain_linear_tick)
+
+  k_raw = np.where(k_valid[r0:r1, c0:c1], np.maximum(1e-4, k_field[r0:r1, c0:c1]), np.nan)
   sub_k = np.where(k_valid[r0:r1, c0:c1], np.log10(np.maximum(1e-6, k_field[r0:r1, c0:c1])), np.nan)
   if arg2_pop_path and os.path.isfile(arg2_pop_path):
     p_field, p_valid = decode_float32_png(arg2_pop_path)
-    sub_p = np.where(p_valid[r0:r1, c0:c1], np.log10(np.maximum(1e-6, p_field[r0:r1, c0:c1])), np.nan)
+    p_raw = np.where(p_valid[r0:r1, c0:c1], np.maximum(1e-3, p_field[r0:r1, c0:c1]), np.nan)
   else:
-    sub_p = sub_k
+    p_raw = k_raw
 
   log_zero = np.nan_to_num(sub_k, nan=float(np.nanmin(sub_k)))
   gy, gx = np.gradient(log_zero)
@@ -209,32 +254,57 @@ def render_overview_sheet(arg0_domain_dir, arg1_krig_path, arg2_pop_path, arg3_o
       ax.add_collection(LineCollection(rivers_segs, colors="#2b6cb0", linewidths=0.40, alpha=0.55))
     ax.set_xlim(lon_min, lon_max)
     ax.set_ylim(lat_min, lat_max)
+    ax.set_aspect(geo_aspect)
+    ax.xaxis.set_major_formatter(lin_fmt)
+    ax.yaxis.set_major_formatter(lin_fmt)
     ax.grid(True, alpha=0.25, linewidth=0.4)
+
+  def apply_plain_log_cbar(cb, vmin_val, vmax_val):
+    decades = [10.0 ** e for e in range(-4, 9) if vmin_val * 0.9 <= (10.0 ** e) <= vmax_val * 1.1]
+    if len(decades) >= 2:
+      cb.set_ticks(decades)
+    cb.ax.yaxis.set_major_formatter(log_fmt)
+    cb.ax.yaxis.set_minor_formatter(mticker.NullFormatter())
 
   # Panel A: Observation sites & catchment density
   add_basemap(ax0)
   if lons:
-    sc = ax0.scatter(lons, lats, c=np.log10(np.maximum(1.0, wts)), s=8, cmap="plasma", alpha=0.85)
-    fig.colorbar(sc, ax=ax0, fraction=0.036, pad=0.02, label=r"$\log_{10}(\mathrm{Sites})$")
+    w_arr = np.maximum(1.0, np.asarray(wts, dtype=float))
+    w_vmax = max(10.0, float(np.nanpercentile(w_arr, 99)))
+    norm_a = mcolors.LogNorm(vmin=1.0, vmax=w_vmax)
+    sc = ax0.scatter(lons, lats, c=w_arr, norm=norm_a, s=8, cmap="plasma", alpha=0.85)
+    cb0 = fig.colorbar(sc, ax=ax0, fraction=0.036, pad=0.02, format=log_fmt, label="Sites per Catchment")
+    apply_plain_log_cbar(cb0, 1.0, w_vmax)
   ax0.set_title(f"(A) Observation Catchments & Rivers (n={len(lons)})")
 
   # Panel B: Kriged surface
-  im1 = ax1.imshow(sub_k, origin="upper", extent=extent, cmap="viridis", aspect="auto")
+  k_fin = k_raw[np.isfinite(k_raw)]
+  vmin_k = max(1e-4, float(np.nanpercentile(k_fin, 2))) if k_fin.size > 0 else 1e-4
+  vmax_k = max(vmin_k * 10.0, float(np.nanpercentile(k_fin, 99.5))) if k_fin.size > 0 else 10.0
+  norm_b = mcolors.LogNorm(vmin=vmin_k, vmax=vmax_k)
+  im1 = ax1.imshow(k_raw, origin="upper", extent=extent, cmap="viridis", norm=norm_b)
   add_basemap(ax1)
-  fig.colorbar(im1, ax=ax1, fraction=0.036, pad=0.02, label=r"$\log_{10}(\mathrm{Intensity})$")
+  cb1 = fig.colorbar(im1, ax=ax1, fraction=0.036, pad=0.02, format=log_fmt, label="Kriged Intensity")
+  apply_plain_log_cbar(cb1, vmin_k, vmax_k)
   ax1.set_title(f"(B) Kriged Surface: {os.path.basename(arg1_krig_path)}")
 
   # Panel C: Population surface
-  im2 = ax2.imshow(sub_p, origin="upper", extent=extent, cmap="magma", aspect="auto")
+  p_fin = p_raw[np.isfinite(p_raw)]
+  vmin_p = max(1e-3, float(np.nanpercentile(p_fin, 2))) if p_fin.size > 0 else 1e-2
+  vmax_p = max(vmin_p * 10.0, float(np.nanpercentile(p_fin, 99.5))) if p_fin.size > 0 else 1000.0
+  norm_c = mcolors.LogNorm(vmin=vmin_p, vmax=vmax_p)
+  im2 = ax2.imshow(p_raw, origin="upper", extent=extent, cmap="magma", norm=norm_c)
   add_basemap(ax2)
-  fig.colorbar(im2, ax=ax2, fraction=0.036, pad=0.02, label=r"$\log_{10}(\mathrm{Inhabitants / Cell})$")
+  cb2 = fig.colorbar(im2, ax=ax2, fraction=0.036, pad=0.02, format=log_fmt, label="Inhabitants per 5' Cell")
+  apply_plain_log_cbar(cb2, vmin_p, vmax_p)
   ax2.set_title(f"(C) Population Benchmark: {os.path.basename(arg2_pop_path) if arg2_pop_path else 'N/A'}")
 
   # Panel D: Fluvial/topographic local sharpness magnitude
   vmax_g = float(np.nanpercentile(grad_mag, 98)) if np.isfinite(grad_mag).any() else 1.0
-  im3 = ax3.imshow(grad_mag, origin="upper", extent=extent, cmap="inferno", vmin=0.0, vmax=max(0.05, vmax_g), aspect="auto")
+  im3 = ax3.imshow(grad_mag, origin="upper", extent=extent, cmap="inferno", vmin=0.0, vmax=max(0.05, vmax_g))
   add_basemap(ax3)
-  fig.colorbar(im3, ax=ax3, fraction=0.036, pad=0.02, label=r"$|\nabla \log_{10}(D)|$")
+  cb3 = fig.colorbar(im3, ax=ax3, fraction=0.036, pad=0.02, format=lin_fmt, label=r"Gradient $|\nabla \log_{10}(D)|$")
+  cb3.ax.yaxis.set_major_formatter(lin_fmt)
   ax3.set_title("(D) Local Spatial Gradient Sharpness")
 
   fig.suptitle(arg4_title, fontsize=12, fontweight="bold")

@@ -1,0 +1,975 @@
+{
+  "batch_index": 443,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        58.375,
+        -62.625
+      ],
+      "country": "Canada",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Nulliak Cove-Canada",
+      "known_aliases": [
+        "Nulliak Cove",
+        "nulliak cove",
+        "northern labrador",
+        "ibcp-20",
+        "nulliak cove 1",
+        "northern labrador maritime archaic",
+        "Northern Labrador",
+        "IbCp-20",
+        "Nulliak Cove 1",
+        "Northern Labrador Maritime Archaic"
+      ],
+      "latest_year": -1000,
+      "name": "Nulliak Cove",
+      "reason": "missing_entry",
+      "region": "mar_labrador_innu_nunatsiavut",
+      "sample_years": [
+        -2500,
+        -2000,
+        -1800,
+        -1200,
+        -1000
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.8645,
+        -64.8945
+      ],
+      "country": "Canada",
+      "earliest_year": 500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Port Joli-Canada",
+      "known_aliases": [
+        "Port Joli",
+        "port joli",
+        "port joli #8",
+        "aldf-8",
+        "queens county shell midden",
+        "Port Joli #8",
+        "AlDf-8",
+        "Queens County Shell Midden"
+      ],
+      "latest_year": 1300,
+      "name": "Port Joli",
+      "reason": "missing_entry",
+      "region": "mar_mikmaki_ns_pei_cape_breton",
+      "sample_years": [
+        500,
+        800,
+        1300
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.6,
+        -65.8
+      ],
+      "country": "Nova Scotia",
+      "earliest_year": 400,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pubnico Harbour Village-Nova Scotia",
+      "known_aliases": [
+        "Pubnico Harbour Village",
+        "pubnico harbour village",
+        "pubnico peninsula settlement",
+        "Pubnico Peninsula Settlement"
+      ],
+      "latest_year": 1480,
+      "name": "Pubnico Harbour Village",
+      "reason": "missing_entry",
+      "region": "mar_mikmaki_ns_pei_cape_breton",
+      "sample_years": [
+        400,
+        1050,
+        1480
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        58.8833,
+        -63.1667
+      ],
+      "country": "Canada",
+      "earliest_year": -4000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ramah Bay-Canada",
+      "known_aliases": [
+        "Ramah Bay",
+        "ramah bay",
+        "ramah chert quarries",
+        "torngat mountains",
+        "ifcv-1",
+        "Ramah Chert Quarries",
+        "Torngat Mountains",
+        "IfCv-1"
+      ],
+      "latest_year": 1300,
+      "name": "Ramah Bay",
+      "reason": "missing_entry",
+      "region": "mar_labrador_innu_nunatsiavut",
+      "sample_years": [
+        -4000,
+        -1500,
+        500,
+        1300
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        58.625,
+        -62.95833
+      ],
+      "country": "Canada",
+      "earliest_year": -2000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rose Island-Canada",
+      "known_aliases": [
+        "Rose Island",
+        "rose island",
+        "saglek bay",
+        "idcq-1",
+        "Saglek Bay",
+        "IdCq-1"
+      ],
+      "latest_year": 1400,
+      "name": "Rose Island",
+      "reason": "missing_entry",
+      "region": "mar_labrador_innu_nunatsiavut",
+      "sample_years": [
+        -2000,
+        -500,
+        600,
+        1400
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.4333,
+        -63.2667
+      ],
+      "country": "Prince Edward Island",
+      "earliest_year": 400,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rustico Island Shell Town-Prince Edward Island",
+      "known_aliases": [
+        "Rustico Island Shell Town",
+        "rustico island shell town",
+        "rustico bay village",
+        "Rustico Bay Village"
+      ],
+      "latest_year": 1400,
+      "name": "Rustico Island Shell Town",
+      "reason": "missing_entry",
+      "region": "mar_mikmaki_ns_pei_cape_breton",
+      "sample_years": [
+        400,
+        950,
+        1400
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.4645,
+        -63.2645
+      ],
+      "country": "Canada",
+      "earliest_year": 300,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rustico Island-Canada",
+      "known_aliases": [
+        "Rustico Island",
+        "rustico island",
+        "ccct-1",
+        "prince edward island north shore",
+        "CcCt-1",
+        "Prince Edward Island North Shore"
+      ],
+      "latest_year": 1600,
+      "name": "Rustico Island",
+      "reason": "missing_entry",
+      "region": "mar_mikmaki_ns_pei_cape_breton",
+      "sample_years": [
+        300,
+        1200,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.1485,
+        -67.1445
+      ],
+      "country": "Canada",
+      "earliest_year": 0,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sand Point-Canada",
+      "known_aliases": [
+        "Sand Point",
+        "sand point",
+        "sandy point",
+        "bgds-6",
+        "st. croix river",
+        "Sandy Point",
+        "BgDs-6",
+        "St. Croix River"
+      ],
+      "latest_year": 600,
+      "name": "Sand Point",
+      "reason": "missing_entry",
+      "region": "mar_wolastoq_new_brunswick_fundy",
+      "sample_years": [
+        0,
+        600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.4,
+        -62.8333
+      ],
+      "country": "Prince Edward Island",
+      "earliest_year": 600,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Savage Harbour Village-Prince Edward Island",
+      "known_aliases": [
+        "Savage Harbour Village",
+        "savage harbour village",
+        "savage harbour settlement",
+        "Savage Harbour Settlement"
+      ],
+      "latest_year": 1450,
+      "name": "Savage Harbour Village",
+      "reason": "missing_entry",
+      "region": "mar_mikmaki_ns_pei_cape_breton",
+      "sample_years": [
+        600,
+        1100,
+        1450
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.1333,
+        -61.9833
+      ],
+      "country": "Nova Scotia",
+      "earliest_year": 300,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sherbrooke St. Marys Capital-Nova Scotia",
+      "known_aliases": [
+        "Sherbrooke St. Marys Capital",
+        "sherbrooke st. marys capital",
+        "st. marys river mouth capital",
+        "St. Marys River Mouth Capital"
+      ],
+      "latest_year": 1450,
+      "name": "Sherbrooke St. Marys Capital",
+      "reason": "missing_entry",
+      "region": "mar_mikmaki_ns_pei_cape_breton",
+      "sample_years": [
+        300,
+        950,
+        1450
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        58.45833,
+        -62.79167
+      ],
+      "country": "Canada",
+      "earliest_year": -1500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Shuldham Island-Canada",
+      "known_aliases": [
+        "Shuldham Island",
+        "shuldham island",
+        "saglek fiord",
+        "idcq-22",
+        "Saglek Fiord",
+        "IdCq-22"
+      ],
+      "latest_year": 1000,
+      "name": "Shuldham Island",
+      "reason": "missing_entry",
+      "region": "mar_labrador_innu_nunatsiavut",
+      "sample_years": [
+        -1500,
+        0,
+        1000
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.9445,
+        -64.0445
+      ],
+      "country": "Canada",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "St. Croix-Canada",
+      "known_aliases": [
+        "St. Croix",
+        "st. croix",
+        "bfdd-1",
+        "hants county avon river",
+        "BfDd-1",
+        "Hants County Avon River"
+      ],
+      "latest_year": 1500,
+      "name": "St. Croix",
+      "reason": "missing_entry",
+      "region": "mar_mikmaki_ns_pei_cape_breton",
+      "sample_years": [
+        -500,
+        500,
+        1500
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.1445,
+        -67.0245
+      ],
+      "country": "Canada",
+      "earliest_year": -100,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Teacher's Cove-Canada",
+      "known_aliases": [
+        "Teacher's Cove",
+        "teacher's cove",
+        "teachers cove",
+        "bgdr-11",
+        "passamaquoddy bay",
+        "Teachers Cove",
+        "BgDr-11",
+        "Passamaquoddy Bay"
+      ],
+      "latest_year": 700,
+      "name": "Teacher's Cove",
+      "reason": "missing_entry",
+      "region": "mar_wolastoq_new_brunswick_fundy",
+      "sample_years": [
+        -100,
+        700
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        57.04167,
+        -61.375
+      ],
+      "country": "Canada",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Thalia Point-Canada",
+      "known_aliases": [
+        "Thalia Point",
+        "thalia point",
+        "port manvers run",
+        "hdcg-2",
+        "Port Manvers Run",
+        "HdCg-2"
+      ],
+      "latest_year": 500,
+      "name": "Thalia Point",
+      "reason": "missing_entry",
+      "region": "mar_labrador_innu_nunatsiavut",
+      "sample_years": [
+        -2500,
+        -1000,
+        500
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.9045,
+        -66.2445
+      ],
+      "country": "Canada",
+      "earliest_year": 200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "The Meadows-Canada",
+      "known_aliases": [
+        "The Meadows",
+        "the meadows",
+        "bldn-26",
+        "grand lake meadows",
+        "BlDn-26",
+        "Grand Lake Meadows"
+      ],
+      "latest_year": 400,
+      "name": "The Meadows",
+      "reason": "missing_entry",
+      "region": "mar_wolastoq_new_brunswick_fundy",
+      "sample_years": [
+        200,
+        400
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.0345,
+        -66.8545
+      ],
+      "country": "Canada",
+      "earliest_year": -800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Weir-Canada",
+      "known_aliases": [
+        "Weir",
+        "weir",
+        "bgdq-6",
+        "bliss islands passamaquoddy",
+        "BgDq-6",
+        "Bliss Islands Passamaquoddy"
+      ],
+      "latest_year": 1500,
+      "name": "Weir",
+      "reason": "missing_entry",
+      "region": "mar_wolastoq_new_brunswick_fundy",
+      "sample_years": [
+        -800,
+        1000,
+        1500
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.45,
+        -66.3333
+      ],
+      "country": "New Brunswick",
+      "earliest_year": 600,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Welsford Nerepis Valley Village-New Brunswick",
+      "known_aliases": [
+        "Welsford Nerepis Valley Village",
+        "welsford nerepis valley village",
+        "upper nerepis stream town",
+        "Upper Nerepis Stream Town"
+      ],
+      "latest_year": 1500,
+      "name": "Welsford Nerepis Valley Village",
+      "reason": "missing_entry",
+      "region": "mar_wolastoq_new_brunswick_fundy",
+      "sample_years": [
+        600,
+        1150,
+        1500
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.4167,
+        -65.9833
+      ],
+      "country": "Nova Scotia",
+      "earliest_year": 400,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Weymouth Sissiboo River Town-Nova Scotia",
+      "known_aliases": [
+        "Weymouth Sissiboo River Town",
+        "weymouth sissiboo river town",
+        "sissiboo river mouth capital",
+        "Sissiboo River Mouth Capital"
+      ],
+      "latest_year": 1480,
+      "name": "Weymouth Sissiboo River Town",
+      "reason": "missing_entry",
+      "region": "mar_mikmaki_ns_pei_cape_breton",
+      "sample_years": [
+        400,
+        1000,
+        1480
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.54301,
+        -109.25313
+      ],
+      "country": "Utah",
+      "earliest_year": 500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "5 Acre Ruin-Utah",
+      "known_aliases": [
+        "5 Acre Ruin",
+        "5 acre ruin",
+        "southeast utah",
+        "coalbed village",
+        "montezuma village north",
+        "Southeast Utah"
+      ],
+      "latest_year": 1450,
+      "name": "5 Acre Ruin",
+      "reason": "missing_entry",
+      "region": "uc_san_juan_four_corners",
+      "sample_years": [
+        500,
+        950,
+        1300,
+        1450
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.508,
+        -108.765
+      ],
+      "country": "Colorado",
+      "earliest_year": 1120,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Albert Porter Pueblo-Colorado",
+      "known_aliases": [
+        "Albert Porter Pueblo",
+        "albert porter pueblo",
+        "5mt123",
+        "5MT123"
+      ],
+      "latest_year": 1230,
+      "name": "Albert Porter Pueblo",
+      "reason": "missing_entry",
+      "region": "uc_san_juan_four_corners",
+      "sample_years": [
+        1120,
+        1230
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.7307,
+        -109.411
+      ],
+      "country": "Utah",
+      "earliest_year": 770,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Alkali Ridge-Utah",
+      "known_aliases": [
+        "Alkali Ridge",
+        "alkali ridge",
+        "42sa13",
+        "alkali ridge site 13",
+        "42SA13",
+        "Alkali Ridge Site 13"
+      ],
+      "latest_year": 1050,
+      "name": "Alkali Ridge",
+      "reason": "missing_entry",
+      "region": "uc_san_juan_four_corners",
+      "sample_years": [
+        770,
+        1050
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.542,
+        -108.652
+      ],
+      "country": "Colorado",
+      "earliest_year": 1150,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ansel Hall Ruin-Colorado",
+      "known_aliases": [
+        "Ansel Hall Ruin",
+        "ansel hall ruin",
+        "5mt1499",
+        "5MT1499"
+      ],
+      "latest_year": 1240,
+      "name": "Ansel Hall Ruin",
+      "reason": "missing_entry",
+      "region": "uc_colorado_headwaters_grand_mesa",
+      "sample_years": [
+        1150,
+        1240
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.656,
+        -108.86723
+      ],
+      "country": "Colorado",
+      "earliest_year": 500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ansell Hall-Colorado",
+      "known_aliases": [
+        "Ansell Hall",
+        "ansell hall",
+        "san juan foothills",
+        "north lowry",
+        "San Juan Foothills"
+      ],
+      "latest_year": 1600,
+      "name": "Ansell Hall",
+      "reason": "missing_entry",
+      "region": "uc_san_juan_four_corners",
+      "sample_years": [
+        500,
+        575,
+        928,
+        1050,
+        1280,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.59585,
+        -109.72365
+      ],
+      "country": "Utah",
+      "earliest_year": 550,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Arch Canyon-Utah",
+      "known_aliases": [
+        "Arch Canyon",
+        "arch canyon",
+        "southeast utah",
+        "Southeast Utah"
+      ],
+      "latest_year": 1600,
+      "name": "Arch Canyon",
+      "reason": "missing_entry",
+      "region": "uc_san_juan_four_corners",
+      "sample_years": [
+        550,
+        1075,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.325,
+        -110.165
+      ],
+      "country": "Wyoming",
+      "earliest_year": 700,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Austin Wash-Wyoming",
+      "known_aliases": [
+        "Austin Wash",
+        "austin wash",
+        "48ut390",
+        "48UT390"
+      ],
+      "latest_year": 850,
+      "name": "Austin Wash",
+      "reason": "missing_entry",
+      "region": "uc_green_river_wyoming_basin",
+      "sample_years": [
+        700,
+        850
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.1886,
+        -108.5345
+      ],
+      "country": "Colorado",
+      "earliest_year": 200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Badger House-Colorado",
+      "known_aliases": [
+        "Badger House",
+        "badger house",
+        "5mv1452",
+        "badger house community",
+        "long house",
+        "5mv1200",
+        "mug house",
+        "5mv1229",
+        "badger valley",
+        "big juniper house",
+        "two raven house",
+        "5mv1645",
+        "step house",
+        "5mv1285",
+        "5MV1452",
+        "Badger House Community",
+        "Long House",
+        "5MV1200",
+        "Mug House",
+        "5MV1229",
+        "Badger Valley",
+        "Big Juniper House",
+        "Two Raven House",
+        "5MV1645",
+        "Step House",
+        "5MV1285"
+      ],
+      "latest_year": 1600,
+      "name": "Badger House",
+      "reason": "missing_entry",
+      "region": "uc_san_juan_four_corners",
+      "sample_years": [
+        200,
+        950,
+        1220,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.86978,
+        -107.45715
+      ],
+      "country": "New Mexico",
+      "earliest_year": 300,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bancos Village-New Mexico",
+      "known_aliases": [
+        "Bancos Village",
+        "bancos village"
+      ],
+      "latest_year": 1060,
+      "name": "Bancos Village",
+      "reason": "missing_entry",
+      "region": "uc_san_juan_four_corners",
+      "sample_years": [
+        300,
+        680,
+        1060
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.46092,
+        -108.81548
+      ],
+      "country": "Colorado",
+      "earliest_year": 575,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bass Complex-Colorado",
+      "known_aliases": [
+        "Bass Complex",
+        "bass complex"
+      ],
+      "latest_year": 1280,
+      "name": "Bass Complex",
+      "reason": "missing_entry",
+      "region": "uc_san_juan_four_corners",
+      "sample_years": [
+        575,
+        928,
+        1280
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.225,
+        -107.875
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1100,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bis sa'ani-New Mexico",
+      "known_aliases": [
+        "Bis sa'ani",
+        "bis sa'ani",
+        "la 17286",
+        "LA 17286"
+      ],
+      "latest_year": 1145,
+      "name": "Bis sa'ani",
+      "reason": "missing_entry",
+      "region": "uc_san_juan_four_corners",
+      "sample_years": [
+        1100,
+        1145
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.80395,
+        -108.90621
+      ],
+      "country": "New Mexico",
+      "earliest_year": 550,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Black Creek Flat-New Mexico",
+      "known_aliases": [
+        "Black Creek Flat",
+        "black creek flat",
+        "chuska slope",
+        "figueredo",
+        "red willow",
+        "la 10954",
+        "Chuska Slope",
+        "LA 10954"
+      ],
+      "latest_year": 1400,
+      "name": "Black Creek Flat",
+      "reason": "missing_entry",
+      "region": "uc_san_juan_four_corners",
+      "sample_years": [
+        550,
+        880,
+        975,
+        1050,
+        1120,
+        1140,
+        1400
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

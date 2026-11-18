@@ -1,0 +1,984 @@
+{
+  "batch_index": 256,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        40.21449,
+        -121.17622
+      ],
+      "country": "California",
+      "earliest_year": 1960,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Almanor-California",
+      "known_aliases": [
+        "Almanor",
+        "almanor",
+        "almanor cdp",
+        "Almanor CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Almanor",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.77354,
+        -89.76139
+      ],
+      "country": "Missouri",
+      "earliest_year": 1927,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Baker-Missouri",
+      "known_aliases": [
+        "Baker",
+        "baker",
+        "baker village",
+        "Baker village"
+      ],
+      "latest_year": 2020,
+      "name": "Baker",
+      "reason": "missing_entry",
+      "region": "usa_missouri",
+      "sample_years": [
+        1927,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.68857,
+        -108.74063
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1915,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Redrock-New Mexico",
+      "known_aliases": [
+        "Redrock",
+        "redrock",
+        "redrock cdp",
+        "Redrock CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Redrock",
+      "reason": "missing_entry",
+      "region": "usa_new_mexico",
+      "sample_years": [
+        1915,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.70872,
+        -118.49674
+      ],
+      "country": "Oregon",
+      "earliest_year": 1887,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Greenhorn-Oregon",
+      "known_aliases": [
+        "Greenhorn",
+        "greenhorn",
+        "greenhorn city",
+        "Greenhorn city"
+      ],
+      "latest_year": 2020,
+      "name": "Greenhorn",
+      "reason": "missing_entry",
+      "region": "usa_oregon",
+      "sample_years": [
+        1887,
+        1920,
+        1960,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        26.88258,
+        -98.89488
+      ],
+      "country": "Texas",
+      "earliest_year": 1966,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Guerra-Texas",
+      "known_aliases": [
+        "Guerra",
+        "guerra",
+        "guerra cdp",
+        "Guerra CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Guerra",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1966,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        27.67616,
+        -99.17771
+      ],
+      "country": "Texas",
+      "earliest_year": 1865,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hillside Acres-Texas",
+      "known_aliases": [
+        "Hillside Acres",
+        "hillside acres",
+        "hillside acres cdp",
+        "las pilas",
+        "las pilas cdp",
+        "pueblo east",
+        "pueblo east cdp",
+        "Hillside Acres CDP",
+        "Las Pilas",
+        "Las Pilas CDP",
+        "Pueblo East",
+        "Pueblo East CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Hillside Acres",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1865,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        62.49655,
+        -143.00743
+      ],
+      "country": "Alaska",
+      "earliest_year": 1878,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Nabesna-Alaska",
+      "known_aliases": [
+        "Nabesna",
+        "nabesna",
+        "nabesna cdp",
+        "Nabesna CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Nabesna",
+      "reason": "missing_entry",
+      "region": "usa_alaska",
+      "sample_years": [
+        1878,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        58.05834,
+        -135.40933
+      ],
+      "country": "Alaska",
+      "earliest_year": 1953,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Whitestone Logging Camp-Alaska",
+      "known_aliases": [
+        "Whitestone Logging Camp",
+        "whitestone logging camp",
+        "whitestone logging camp cdp",
+        "Whitestone Logging Camp CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Whitestone Logging Camp",
+      "reason": "missing_entry",
+      "region": "usa_alaska",
+      "sample_years": [
+        1953,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.80813,
+        -113.44271
+      ],
+      "country": "Arizona",
+      "earliest_year": 1968,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Aztec-Arizona",
+      "known_aliases": [
+        "Aztec",
+        "aztec",
+        "aztec cdp",
+        "Aztec CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Aztec",
+      "reason": "missing_entry",
+      "region": "usa_arizona",
+      "sample_years": [
+        1968,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.71997,
+        -114.47879
+      ],
+      "country": "Arizona",
+      "earliest_year": 1951,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Topock-Arizona",
+      "known_aliases": [
+        "Topock",
+        "topock",
+        "topock cdp",
+        "Topock CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Topock",
+      "reason": "missing_entry",
+      "region": "usa_arizona",
+      "sample_years": [
+        1951,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.70382,
+        -109.93817
+      ],
+      "country": "Arizona",
+      "earliest_year": 1922,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Toyei-Arizona",
+      "known_aliases": [
+        "Toyei",
+        "toyei",
+        "toyei cdp",
+        "Toyei CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Toyei",
+      "reason": "missing_entry",
+      "region": "usa_arizona",
+      "sample_years": [
+        1922,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.38814,
+        -110.70099
+      ],
+      "country": "Arizona",
+      "earliest_year": 1968,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Willow Canyon-Arizona",
+      "known_aliases": [
+        "Willow Canyon",
+        "willow canyon",
+        "willow canyon cdp",
+        "Willow Canyon CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Willow Canyon",
+      "reason": "missing_entry",
+      "region": "usa_arizona",
+      "sample_years": [
+        1968,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.32981,
+        -112.21164
+      ],
+      "country": "Montana",
+      "earliest_year": 1865,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Milford Colony-Montana",
+      "known_aliases": [
+        "Milford Colony",
+        "milford colony",
+        "milford colony cdp",
+        "Milford Colony CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Milford Colony",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1865,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.52848,
+        -99.14386
+      ],
+      "country": "South Dakota",
+      "earliest_year": 1890,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bijou Hills-South Dakota",
+      "known_aliases": [
+        "Bijou Hills",
+        "bijou hills",
+        "bijou hills cdp",
+        "Bijou Hills CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Bijou Hills",
+      "reason": "missing_entry",
+      "region": "usa_south_dakota",
+      "sample_years": [
+        1890,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.82157,
+        -97.19901
+      ],
+      "country": "South Dakota",
+      "earliest_year": 1973,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Orland Colony-South Dakota",
+      "known_aliases": [
+        "Orland Colony",
+        "orland colony",
+        "orland colony cdp",
+        "Orland Colony CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Orland Colony",
+      "reason": "missing_entry",
+      "region": "usa_south_dakota",
+      "sample_years": [
+        1973,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        27.63148,
+        -99.19873
+      ],
+      "country": "Texas",
+      "earliest_year": 1940,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Las Haciendas-Texas",
+      "known_aliases": [
+        "Las Haciendas",
+        "las haciendas",
+        "las haciendas cdp",
+        "Las Haciendas CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Las Haciendas",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1940,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        57.41776,
+        -133.30657
+      ],
+      "country": "Alaska",
+      "earliest_year": 1964,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hobart Bay-Alaska",
+      "known_aliases": [
+        "Hobart Bay",
+        "hobart bay",
+        "hobart bay cdp",
+        "Hobart Bay CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Hobart Bay",
+      "reason": "missing_entry",
+      "region": "usa_alaska",
+      "sample_years": [
+        1964,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        55.9182,
+        -159.4933
+      ],
+      "country": "Alaska",
+      "earliest_year": 1959,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ivanof Bay-Alaska",
+      "known_aliases": [
+        "Ivanof Bay",
+        "ivanof bay",
+        "ivanof bay cdp",
+        "Ivanof Bay CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Ivanof Bay",
+      "reason": "missing_entry",
+      "region": "usa_alaska",
+      "sample_years": [
+        1959,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.07324,
+        -121.16567
+      ],
+      "country": "California",
+      "earliest_year": 1898,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Caribou-California",
+      "known_aliases": [
+        "Caribou",
+        "caribou",
+        "caribou cdp",
+        "Caribou CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Caribou",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1898,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.44437,
+        -120.73603
+      ],
+      "country": "California",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Graniteville-California",
+      "known_aliases": [
+        "Graniteville",
+        "graniteville",
+        "graniteville cdp",
+        "Graniteville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Graniteville",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1850,
+        1860,
+        1870,
+        1880,
+        1890,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.01919,
+        -103.65427
+      ],
+      "country": "South Dakota",
+      "earliest_year": 1906,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ardmore-South Dakota",
+      "known_aliases": [
+        "Ardmore",
+        "ardmore",
+        "ardmore cdp",
+        "Ardmore CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Ardmore",
+      "reason": "missing_entry",
+      "region": "usa_south_dakota",
+      "sample_years": [
+        1906,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.98261,
+        -97.42507
+      ],
+      "country": "South Dakota",
+      "earliest_year": 1968,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Shannon Colony-South Dakota",
+      "known_aliases": [
+        "Shannon Colony",
+        "shannon colony",
+        "shannon colony cdp",
+        "Shannon Colony CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Shannon Colony",
+      "reason": "missing_entry",
+      "region": "usa_south_dakota",
+      "sample_years": [
+        1968,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.67403,
+        -82.91677
+      ],
+      "country": "Michigan",
+      "earliest_year": 1869,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Macomb-Michigan",
+      "known_aliases": [
+        "Macomb",
+        "macomb",
+        "macomb township",
+        "Macomb township"
+      ],
+      "latest_year": 2020,
+      "name": "Macomb",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1869,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.58545,
+        -73.82742
+      ],
+      "country": "New York",
+      "earliest_year": 1810,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bethlehem-New York",
+      "known_aliases": [
+        "Bethlehem",
+        "bethlehem",
+        "bethlehem town",
+        "Bethlehem town"
+      ],
+      "latest_year": 2020,
+      "name": "Bethlehem",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1810,
+        1880,
+        1950,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.24901,
+        -75.15894
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1917,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Warrington-Pennsylvania",
+      "known_aliases": [
+        "Warrington",
+        "warrington",
+        "warrington township",
+        "Warrington township",
+        "Warrington Township"
+      ],
+      "latest_year": 2020,
+      "name": "Warrington",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1917,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.47456,
+        -83.8479
+      ],
+      "country": "Michigan",
+      "earliest_year": 1898,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hamburg-Michigan",
+      "known_aliases": [
+        "Hamburg",
+        "hamburg",
+        "hamburg township",
+        "Hamburg township"
+      ],
+      "latest_year": 2020,
+      "name": "Hamburg",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1898,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.65662,
+        -72.66178
+      ],
+      "country": "Connecticut",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rocky Hill-Connecticut",
+      "known_aliases": [
+        "Rocky Hill",
+        "rocky hill",
+        "rocky hill town",
+        "Rocky Hill town"
+      ],
+      "latest_year": 2020,
+      "name": "Rocky Hill",
+      "reason": "missing_entry",
+      "region": "usa_connecticut",
+      "sample_years": [
+        1850,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.99647,
+        -75.55128
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1911,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "East Goshen-Pennsylvania",
+      "known_aliases": [
+        "East Goshen",
+        "east goshen",
+        "east goshen township",
+        "East Goshen township",
+        "East Goshen Township"
+      ],
+      "latest_year": 2020,
+      "name": "East Goshen",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1911,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.01302,
+        -74.94742
+      ],
+      "country": "New Jersey",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Delran-New Jersey",
+      "known_aliases": [
+        "Delran",
+        "delran",
+        "delran township",
+        "Delran township",
+        "Delran Township"
+      ],
+      "latest_year": 2020,
+      "name": "Delran",
+      "reason": "missing_entry",
+      "region": "usa_new_jersey",
+      "sample_years": [
+        1850,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.37496,
+        -74.17385
+      ],
+      "country": "New Jersey",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Holmdel-New Jersey",
+      "known_aliases": [
+        "Holmdel",
+        "holmdel",
+        "holmdel township",
+        "Holmdel township",
+        "Holmdel Township"
+      ],
+      "latest_year": 2020,
+      "name": "Holmdel",
+      "reason": "missing_entry",
+      "region": "usa_new_jersey",
+      "sample_years": [
+        1850,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

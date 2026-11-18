@@ -3,7 +3,9 @@ let fs = require("fs");
 let path = require("path");
 let { PNG } = require("pngjs");
 let { ViscountBiophysicalCovariates } = require(path.resolve(__dirname, "../../../../../3.data_transform/population_Substrata.viscount/ViscountBiophysicalCovariates.js"));
+let { ViscountHUResidualKriging } = require(path.resolve(__dirname, "../../../../../3.data_transform/population_Substrata.viscount/ViscountHUResidualKriging.js"));
 let { ViscountMaternKriging } = require(path.resolve(__dirname, "../../../../../3.data_transform/population_Substrata.viscount/ViscountMaternKriging.js"));
+let { ViscountRuralSuitability } = require(path.resolve(__dirname, "../../../../../3.data_transform/population_Substrata.viscount/ViscountRuralSuitability.js"));
 
 //Initialise functions
 {
@@ -32,6 +34,12 @@ let { ViscountMaternKriging } = require(path.resolve(__dirname, "../../../../../
     static B_generatePopulationRasters (arg0_surface_bundle) {
       //Convert from parameters
       let surface = arg0_surface_bundle;
+
+      //Guard clause: delegate to per-HU residual kriging + census/GHSL engine when active
+      let rk_cfg = (surface && surface.kriging_bundle && surface.kriging_bundle.config) ? surface.kriging_bundle.config : {};
+
+      if (rk_cfg.kriging_config && rk_cfg.kriging_config.residual_kriging_mode === "hu_hyde_residual")
+        return ViscountHUResidualKriging.generateAllBenchmarkPopulationRasters(surface, { is_polynesia: false });
 
       //Declare local instance variables
       let bio_covs = surface.bio_covs;
@@ -187,14 +195,15 @@ let { ViscountMaternKriging } = require(path.resolve(__dirname, "../../../../../
         let arch_sum = 0;
         let out_field = new Float32Array(n_valid);
 
-        for (let i = 0; i < n_valid; i++) {
-          let v = arch_pot[i]*rk.weights[i];
+        for (let i = 0; i < n_valid; i++)
+          arch_field[i] = arch_pot[i]*rk.weights[i];
 
-          arch_field[i] = v;
-          arch_sum += v;
-        }
+        if (yr <= 1650 && bio_covs.uopp_valid)
+          ViscountRuralSuitability.capUrbanCoreFieldToRuralRing(bundle.mask_data, arch_field, bio_covs.uopp_valid, 1.12);
 
-        //Scale normalised potential to human-scale target sum so downstream Mosaic never hits 1e-4 underflow
+        for (let i = 0; i < n_valid; i++) arch_sum += arch_field[i];
+
+        //Scale normalised potential to human-scale target sum without leaking into uninhabitable wasteland
         let target_mass = (hyde_sum > 5e4) ? hyde_sum : Math.max(2e5, Math.round(6e5*Math.exp((yr - 1500)/3200)));
         let arch_scale = (arch_sum > 0) ? target_mass/arch_sum : 1.0;
 
@@ -215,12 +224,12 @@ let { ViscountMaternKriging } = require(path.resolve(__dirname, "../../../../../
 
           for (let i = 0; i < n_valid; i++) {
             let bio_w = 0.50*u_nat[i] + 0.25*u_fluv[i] + 0.15*u_coast[i] + 0.10*u_eco[i];
-            let mr = perm_ice[i]*Math.max(1e-5, u_hab[i])*bio_w;
+            let mr = perm_ice[i]*Math.max(0, u_hab[i])*bio_w;
 
             if (ghs_pop) {
               let u_ghsl = (ghsl_urb && ghsl_urb[i] > 0) ? ghsl_urb[i] : 0;
               let u_frac = (uopp_vals && yr >= 1950) ? Math.min(0.65, uopp_vals[i]/90.0) : 0;
-              let g_rur = perm_ice[i]*Math.max(0.01, (ghs_pop[i] - Math.min(ghs_pop[i]*0.85, u_ghsl))*(1 - 0.5*u_frac));
+              let g_rur = perm_ice[i]*Math.max(0, (ghs_pop[i] - Math.min(ghs_pop[i]*0.85, u_ghsl))*(1 - 0.5*u_frac));
 
               mr = 0.35*mr + 0.65*g_rur;
             }
@@ -235,16 +244,24 @@ let { ViscountMaternKriging } = require(path.resolve(__dirname, "../../../../../
             out_field[i] = arch_field[i]*(1 - w_mod) + (mod_rur[i]*mod_scale)*w_mod;
         }
 
-        //Preserve strictly uninhabited inland Greenland ice sheet and Bermuda positive density
+        //Preserve strictly uninhabited inland Greenland ice sheet & wasteland as exact 0, keep positive inhabited & Bermuda
+        let hab_mask = bio_covs.hab_mask;
         let perm_ice = bio_covs.perm_ice;
 
-        for (let i = 0; i < n_valid; i++)
-          out_field[i] = (perm_ice[i] <= 0.05) ?
-            Math.max(1e-5, Math.min(1e-4, out_field[i])) :
-            Math.max(1e-5, out_field[i]);
+        for (let i = 0; i < n_valid; i++) {
+          if (perm_ice[i] <= 0.05 || (hab_mask && hab_mask[i] === 0 && out_field[i] <= 0)) {
+            out_field[i] = 0;
+          } else if (yr <= 1650 && hab_mask && hab_mask[i] === 0) {
+            out_field[i] = 0;
+          } else if (out_field[i] > 0) {
+            out_field[i] = Math.max(1e-5, out_field[i]);
+          } else {
+            out_field[i] = 0;
+          }
+        }
 
         if (b_px >= 0) {
-          if (yr < 1609) out_field[b_px] = Math.max(1e-4, out_field[b_px]);
+          if (yr < 1609) out_field[b_px] = 0;
           else out_field[b_px] = Math.max(10, 450 + Math.max(0, yr - 1609)*140);
         }
 

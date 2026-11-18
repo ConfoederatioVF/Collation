@@ -1,0 +1,946 @@
+{
+  "batch_index": 300,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        44.93766,
+        -73.92021
+      ],
+      "country": "New York",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Clinton (Clinton County)-New York",
+      "known_aliases": [
+        "Clinton (Clinton County)",
+        "clinton",
+        "clinton town",
+        "Clinton town",
+        "Clinton"
+      ],
+      "latest_year": 2020,
+      "name": "Clinton (Clinton County)",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1850,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.92089,
+        -95.87265
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1924,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Richwood-Minnesota",
+      "known_aliases": [
+        "Richwood",
+        "richwood",
+        "richwood township",
+        "Richwood township"
+      ],
+      "latest_year": 2020,
+      "name": "Richwood",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1924,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.19285,
+        -69.49419
+      ],
+      "country": "Maine",
+      "earliest_year": 1830,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Abbot-Maine",
+      "known_aliases": [
+        "Abbot",
+        "abbot",
+        "abbot town",
+        "Abbot town"
+      ],
+      "latest_year": 2020,
+      "name": "Abbot",
+      "reason": "missing_entry",
+      "region": "usa_maine",
+      "sample_years": [
+        1830,
+        1890,
+        1960,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.20335,
+        -93.49627
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "East Side-Minnesota",
+      "known_aliases": [
+        "East Side",
+        "east side",
+        "east side township",
+        "East Side township"
+      ],
+      "latest_year": 2020,
+      "name": "East Side",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1950,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.71205,
+        -76.62816
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1906,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Upper Mahanoy-Pennsylvania",
+      "known_aliases": [
+        "Upper Mahanoy",
+        "upper mahanoy",
+        "upper mahanoy township",
+        "Upper Mahanoy township"
+      ],
+      "latest_year": 2020,
+      "name": "Upper Mahanoy",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1906,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.13042,
+        -73.34019
+      ],
+      "country": "Vermont",
+      "earliest_year": 1775,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Panton-Vermont",
+      "known_aliases": [
+        "Panton",
+        "panton",
+        "panton town",
+        "Panton town"
+      ],
+      "latest_year": 2020,
+      "name": "Panton",
+      "reason": "missing_entry",
+      "region": "usa_vermont",
+      "sample_years": [
+        1775,
+        1850,
+        1940,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.50885,
+        -72.69369
+      ],
+      "country": "Vermont",
+      "earliest_year": 1775,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Plymouth-Vermont",
+      "known_aliases": [
+        "Plymouth",
+        "plymouth",
+        "plymouth town",
+        "Plymouth town"
+      ],
+      "latest_year": 2020,
+      "name": "Plymouth",
+      "reason": "missing_entry",
+      "region": "usa_vermont",
+      "sample_years": [
+        1775,
+        1850,
+        1940,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.30356,
+        -90.15316
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1958,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bear Creek (Sauk County)-Wisconsin",
+      "known_aliases": [
+        "Bear Creek (Sauk County)",
+        "bear creek",
+        "bear creek town",
+        "Bear Creek town"
+      ],
+      "latest_year": 2020,
+      "name": "Bear Creek (Sauk County)",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1958,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.75495,
+        -95.24033
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1901,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Runeberg-Minnesota",
+      "known_aliases": [
+        "Runeberg",
+        "runeberg",
+        "runeberg township",
+        "Runeberg township"
+      ],
+      "latest_year": 2020,
+      "name": "Runeberg",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1901,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.41257,
+        -93.81835
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1865,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sharon-Minnesota",
+      "known_aliases": [
+        "Sharon",
+        "sharon",
+        "sharon township",
+        "Sharon township"
+      ],
+      "latest_year": 2020,
+      "name": "Sharon",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1865,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.89613,
+        -71.94124
+      ],
+      "country": "Vermont",
+      "earliest_year": 1810,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Morgan-Vermont",
+      "known_aliases": [
+        "Morgan",
+        "morgan",
+        "morgan town",
+        "Morgan town"
+      ],
+      "latest_year": 2020,
+      "name": "Morgan",
+      "reason": "missing_entry",
+      "region": "usa_vermont",
+      "sample_years": [
+        1810,
+        1880,
+        1950,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.16043,
+        -92.22979
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1943,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Forest (St. Croix County)-Wisconsin",
+      "known_aliases": [
+        "Forest (St. Croix County)",
+        "forest",
+        "forest town",
+        "Forest town"
+      ],
+      "latest_year": 2020,
+      "name": "Forest (St. Croix County)",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1943,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.41097,
+        -95.47022
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1871,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Leaf Lake-Minnesota",
+      "known_aliases": [
+        "Leaf Lake",
+        "leaf lake",
+        "leaf lake township",
+        "Leaf Lake township"
+      ],
+      "latest_year": 2020,
+      "name": "Leaf Lake",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1871,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.95589,
+        -91.43108
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1925,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Richmond (Winona County)-Minnesota",
+      "known_aliases": [
+        "Richmond (Winona County)",
+        "richmond",
+        "richmond township",
+        "Richmond township"
+      ],
+      "latest_year": 2020,
+      "name": "Richmond (Winona County)",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1925,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.0751,
+        -89.4189
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1946,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hewitt (Marathon County)-Wisconsin",
+      "known_aliases": [
+        "Hewitt (Marathon County)",
+        "hewitt",
+        "hewitt town",
+        "Hewitt town"
+      ],
+      "latest_year": 2020,
+      "name": "Hewitt (Marathon County)",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1946,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.19531,
+        -94.43065
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1856,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Forest City-Minnesota",
+      "known_aliases": [
+        "Forest City",
+        "forest city",
+        "forest city township",
+        "Forest City township"
+      ],
+      "latest_year": 2020,
+      "name": "Forest City",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1856,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.64545,
+        -76.72444
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1871,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Leroy-Pennsylvania",
+      "known_aliases": [
+        "Leroy",
+        "leroy",
+        "leroy township",
+        "Leroy township"
+      ],
+      "latest_year": 2020,
+      "name": "Leroy",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1871,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.31443,
+        -89.74271
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1872,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rock Falls (Lincoln County)-Wisconsin",
+      "known_aliases": [
+        "Rock Falls (Lincoln County)",
+        "rock falls",
+        "rock falls town",
+        "Rock Falls town"
+      ],
+      "latest_year": 2020,
+      "name": "Rock Falls (Lincoln County)",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1872,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.90556,
+        -90.13371
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1875,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Frankfort-Wisconsin",
+      "known_aliases": [
+        "Frankfort",
+        "frankfort",
+        "frankfort town",
+        "Frankfort town"
+      ],
+      "latest_year": 2020,
+      "name": "Frankfort",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1875,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.08228,
+        -90.02727
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1855,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Halsey-Wisconsin",
+      "known_aliases": [
+        "Halsey",
+        "halsey",
+        "halsey town",
+        "Halsey town"
+      ],
+      "latest_year": 2020,
+      "name": "Halsey",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1855,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.51235,
+        -72.91867
+      ],
+      "country": "Massachusetts",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Plainfield-Massachusetts",
+      "known_aliases": [
+        "Plainfield",
+        "plainfield",
+        "plainfield town",
+        "Plainfield town"
+      ],
+      "latest_year": 2020,
+      "name": "Plainfield",
+      "reason": "missing_entry",
+      "region": "usa_massachusetts",
+      "sample_years": [
+        1850,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.47752,
+        -85.52586
+      ],
+      "country": "Michigan",
+      "earliest_year": 1906,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Greenwood (Wexford County)-Michigan",
+      "known_aliases": [
+        "Greenwood (Wexford County)",
+        "greenwood",
+        "greenwood township",
+        "Greenwood township"
+      ],
+      "latest_year": 2020,
+      "name": "Greenwood (Wexford County)",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1906,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.69056,
+        -73.54974
+      ],
+      "country": "New York",
+      "earliest_year": 1820,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hague-New York",
+      "known_aliases": [
+        "Hague",
+        "hague",
+        "hague town",
+        "Hague town"
+      ],
+      "latest_year": 2020,
+      "name": "Hague",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1820,
+        1890,
+        1960,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.3366,
+        -90.25126
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1928,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ithaca-Wisconsin",
+      "known_aliases": [
+        "Ithaca",
+        "ithaca",
+        "ithaca town",
+        "Ithaca town"
+      ],
+      "latest_year": 2020,
+      "name": "Ithaca",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1928,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.11463,
+        -84.15378
+      ],
+      "country": "Michigan",
+      "earliest_year": 1918,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Raber-Michigan",
+      "known_aliases": [
+        "Raber",
+        "raber",
+        "raber township",
+        "Raber township"
+      ],
+      "latest_year": 2020,
+      "name": "Raber",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1918,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.06651,
+        -84.56675
+      ],
+      "country": "Michigan",
+      "earliest_year": 1937,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Dover-Michigan",
+      "known_aliases": [
+        "Dover",
+        "dover",
+        "dover township",
+        "Dover township"
+      ],
+      "latest_year": 2020,
+      "name": "Dover",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1937,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.69358,
+        -71.79205
+      ],
+      "country": "New Hampshire",
+      "earliest_year": 1800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hebron-New Hampshire",
+      "known_aliases": [
+        "Hebron",
+        "hebron",
+        "hebron town",
+        "Hebron town"
+      ],
+      "latest_year": 2020,
+      "name": "Hebron",
+      "reason": "missing_entry",
+      "region": "usa_new_hampshire",
+      "sample_years": [
+        1800,
+        1870,
+        1950,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.43928,
+        -91.82336
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1944,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bennett-Wisconsin",
+      "known_aliases": [
+        "Bennett",
+        "bennett",
+        "bennett town",
+        "Bennett town"
+      ],
+      "latest_year": 2020,
+      "name": "Bennett",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1944,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.47304,
+        -84.97732
+      ],
+      "country": "Michigan",
+      "earliest_year": 1887,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Norwich-Michigan",
+      "known_aliases": [
+        "Norwich",
+        "norwich",
+        "norwich township",
+        "Norwich township"
+      ],
+      "latest_year": 2020,
+      "name": "Norwich",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1887,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.98939,
+        -91.41734
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1945,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fall Lake-Minnesota",
+      "known_aliases": [
+        "Fall Lake",
+        "fall lake",
+        "fall lake township",
+        "Fall Lake township"
+      ],
+      "latest_year": 2020,
+      "name": "Fall Lake",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1945,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

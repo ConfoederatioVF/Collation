@@ -1,0 +1,974 @@
+{
+  "batch_index": 229,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        36.30462,
+        -94.90083
+      ],
+      "country": "Oklahoma",
+      "earliest_year": 1938,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bull Hollow-Oklahoma",
+      "known_aliases": [
+        "Bull Hollow",
+        "bull hollow",
+        "bull hollow cdp",
+        "Bull Hollow CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Bull Hollow",
+      "reason": "missing_entry",
+      "region": "usa_oklahoma",
+      "sample_years": [
+        1938,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        27.79477,
+        -99.4695
+      ],
+      "country": "Texas",
+      "earliest_year": 1954,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bonanza Hills-Texas",
+      "known_aliases": [
+        "Bonanza Hills",
+        "bonanza hills",
+        "bonanza hills cdp",
+        "sunset acres",
+        "sunset acres cdp",
+        "four points",
+        "four points cdp",
+        "Bonanza Hills CDP",
+        "Sunset Acres",
+        "Sunset Acres CDP",
+        "Four Points",
+        "Four Points CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Bonanza Hills",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1954,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.64671,
+        -88.17972
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1907,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Dunbar-Wisconsin",
+      "known_aliases": [
+        "Dunbar",
+        "dunbar",
+        "dunbar cdp",
+        "Dunbar CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Dunbar",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1907,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.02451,
+        -91.32207
+      ],
+      "country": "Iowa",
+      "earliest_year": 1918,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Yarmouth-Iowa",
+      "known_aliases": [
+        "Yarmouth",
+        "yarmouth",
+        "yarmouth cdp",
+        "Yarmouth CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Yarmouth",
+      "reason": "missing_entry",
+      "region": "usa_iowa",
+      "sample_years": [
+        1918,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        31.37814,
+        -87.43065
+      ],
+      "country": "Alabama",
+      "earliest_year": 1959,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Megargel-Alabama",
+      "known_aliases": [
+        "Megargel",
+        "megargel",
+        "megargel cdp",
+        "Megargel CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Megargel",
+      "reason": "missing_entry",
+      "region": "usa_alabama",
+      "sample_years": [
+        1959,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        62.59644,
+        -144.94104
+      ],
+      "country": "Alaska",
+      "earliest_year": 1926,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Chistochina-Alaska",
+      "known_aliases": [
+        "Chistochina",
+        "chistochina",
+        "chistochina cdp",
+        "Chistochina CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Chistochina",
+      "reason": "missing_entry",
+      "region": "usa_alaska",
+      "sample_years": [
+        1926,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        59.56958,
+        -151.22376
+      ],
+      "country": "Alaska",
+      "earliest_year": 1923,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Halibut Cove-Alaska",
+      "known_aliases": [
+        "Halibut Cove",
+        "halibut cove",
+        "halibut cove cdp",
+        "Halibut Cove CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Halibut Cove",
+      "reason": "missing_entry",
+      "region": "usa_alaska",
+      "sample_years": [
+        1923,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.33848,
+        -116.69398
+      ],
+      "country": "Idaho",
+      "earliest_year": 1925,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Parkline-Idaho",
+      "known_aliases": [
+        "Parkline",
+        "parkline",
+        "parkline cdp",
+        "Parkline CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Parkline",
+      "reason": "missing_entry",
+      "region": "usa_idaho",
+      "sample_years": [
+        1925,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.3922,
+        -87.63965
+      ],
+      "country": "Illinois",
+      "earliest_year": 1894,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Goodenow-Illinois",
+      "known_aliases": [
+        "Goodenow",
+        "goodenow",
+        "goodenow cdp",
+        "Goodenow CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Goodenow",
+      "reason": "missing_entry",
+      "region": "usa_illinois",
+      "sample_years": [
+        1894,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.7954,
+        -97.75474
+      ],
+      "country": "Kansas",
+      "earliest_year": 1869,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bavaria-Kansas",
+      "known_aliases": [
+        "Bavaria",
+        "bavaria",
+        "bavaria cdp",
+        "Bavaria CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Bavaria",
+      "reason": "missing_entry",
+      "region": "usa_kansas",
+      "sample_years": [
+        1869,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.78499,
+        -97.45682
+      ],
+      "country": "Kansas",
+      "earliest_year": 1925,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kipp-Kansas",
+      "known_aliases": [
+        "Kipp",
+        "kipp",
+        "kipp cdp",
+        "Kipp CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Kipp",
+      "reason": "missing_entry",
+      "region": "usa_kansas",
+      "sample_years": [
+        1925,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.53357,
+        -83.95169
+      ],
+      "country": "Kentucky",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sardis-Kentucky",
+      "known_aliases": [
+        "Sardis",
+        "sardis",
+        "sardis city",
+        "Sardis city"
+      ],
+      "latest_year": 2026,
+      "name": "Sardis",
+      "reason": "missing_entry",
+      "region": "usa_kentucky",
+      "sample_years": [
+        1850,
+        1990,
+        2013,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.45778,
+        -93.45732
+      ],
+      "country": "Missouri",
+      "earliest_year": 1858,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ravanna-Missouri",
+      "known_aliases": [
+        "Ravanna",
+        "ravanna",
+        "ravanna cdp",
+        "Ravanna CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Ravanna",
+      "reason": "missing_entry",
+      "region": "usa_missouri",
+      "sample_years": [
+        1858,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.24084,
+        -91.79762
+      ],
+      "country": "Missouri",
+      "earliest_year": 1929,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Williamstown-Missouri",
+      "known_aliases": [
+        "Williamstown",
+        "williamstown",
+        "williamstown cdp",
+        "Williamstown CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Williamstown",
+      "reason": "missing_entry",
+      "region": "usa_missouri",
+      "sample_years": [
+        1929,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.20143,
+        -96.65885
+      ],
+      "country": "Nebraska",
+      "earliest_year": 1956,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Holmesville-Nebraska",
+      "known_aliases": [
+        "Holmesville",
+        "holmesville",
+        "holmesville cdp",
+        "Holmesville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Holmesville",
+      "reason": "missing_entry",
+      "region": "usa_nebraska",
+      "sample_years": [
+        1956,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.65304,
+        -108.78756
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1921,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lower Frisco-New Mexico",
+      "known_aliases": [
+        "Lower Frisco",
+        "lower frisco",
+        "lower frisco cdp",
+        "Lower Frisco CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Lower Frisco",
+      "reason": "missing_entry",
+      "region": "usa_new_mexico",
+      "sample_years": [
+        1921,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.325,
+        -95.65109
+      ],
+      "country": "Oklahoma",
+      "earliest_year": 1948,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Moyers-Oklahoma",
+      "known_aliases": [
+        "Moyers",
+        "moyers",
+        "moyers cdp",
+        "Moyers CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Moyers",
+      "reason": "missing_entry",
+      "region": "usa_oklahoma",
+      "sample_years": [
+        1948,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.96884,
+        -96.65484
+      ],
+      "country": "Oklahoma",
+      "earliest_year": 1896,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "New Woodville-Oklahoma",
+      "known_aliases": [
+        "New Woodville",
+        "new woodville",
+        "new woodville town",
+        "woodville",
+        "New Woodville town",
+        "Woodville"
+      ],
+      "latest_year": 2020,
+      "name": "New Woodville",
+      "reason": "missing_entry",
+      "region": "usa_oklahoma",
+      "sample_years": [
+        1896,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.44188,
+        -121.2716
+      ],
+      "country": "Oregon",
+      "earliest_year": 1927,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Beatty-Oregon",
+      "known_aliases": [
+        "Beatty",
+        "beatty",
+        "beatty cdp",
+        "Beatty CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Beatty",
+      "reason": "missing_entry",
+      "region": "usa_oregon",
+      "sample_years": [
+        1927,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.93124,
+        -123.12072
+      ],
+      "country": "Oregon",
+      "earliest_year": 1936,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Eola-Oregon",
+      "known_aliases": [
+        "Eola",
+        "eola",
+        "eola cdp",
+        "Eola CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Eola",
+      "reason": "missing_entry",
+      "region": "usa_oregon",
+      "sample_years": [
+        1936,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.87982,
+        -83.01403
+      ],
+      "country": "South Carolina",
+      "earliest_year": 1955,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tamassee-South Carolina",
+      "known_aliases": [
+        "Tamassee",
+        "tamassee",
+        "tamassee cdp",
+        "Tamassee CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Tamassee",
+      "reason": "missing_entry",
+      "region": "usa_south_carolina",
+      "sample_years": [
+        1955,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.01368,
+        -100.27019
+      ],
+      "country": "Texas",
+      "earliest_year": 1964,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Glazier-Texas",
+      "known_aliases": [
+        "Glazier",
+        "glazier",
+        "glazier cdp",
+        "Glazier CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Glazier",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1964,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        26.41082,
+        -99.08188
+      ],
+      "country": "Texas",
+      "earliest_year": 1968,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Guadalupe Guerra-Texas",
+      "known_aliases": [
+        "Guadalupe Guerra",
+        "guadalupe guerra",
+        "guadalupe guerra cdp",
+        "Guadalupe Guerra CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Guadalupe Guerra",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1968,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.98026,
+        -111.43925
+      ],
+      "country": "Utah",
+      "earliest_year": 1882,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Echo-Utah",
+      "known_aliases": [
+        "Echo",
+        "echo",
+        "echo cdp",
+        "Echo CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Echo",
+      "reason": "missing_entry",
+      "region": "usa_utah",
+      "sample_years": [
+        1882,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        60.0921,
+        -147.99458
+      ],
+      "country": "Alaska",
+      "earliest_year": 1941,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Chenega-Alaska",
+      "known_aliases": [
+        "Chenega",
+        "chenega",
+        "chenega cdp",
+        "Chenega CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Chenega",
+      "reason": "missing_entry",
+      "region": "usa_alaska",
+      "sample_years": [
+        1941,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.14047,
+        -118.62962
+      ],
+      "country": "California",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pierpoint-California",
+      "known_aliases": [
+        "Pierpoint",
+        "pierpoint",
+        "pierpoint cdp",
+        "Pierpoint CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Pierpoint",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1900,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.67348,
+        -95.6842
+      ],
+      "country": "Kansas",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kickapoo Site 5-Kansas",
+      "known_aliases": [
+        "Kickapoo Site 5",
+        "kickapoo site 5",
+        "kickapoo site 5 cdp",
+        "Kickapoo Site 5 CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Kickapoo Site 5",
+      "reason": "missing_entry",
+      "region": "usa_kansas",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.49415,
+        -108.09629
+      ],
+      "country": "Montana",
+      "earliest_year": 1880,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Musselshell-Montana",
+      "known_aliases": [
+        "Musselshell",
+        "musselshell",
+        "musselshell cdp",
+        "Musselshell CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Musselshell",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1880,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.44207,
+        -96.62968
+      ],
+      "country": "Oklahoma",
+      "earliest_year": 1967,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Connerville-Oklahoma",
+      "known_aliases": [
+        "Connerville",
+        "connerville",
+        "connerville cdp",
+        "Connerville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Connerville",
+      "reason": "missing_entry",
+      "region": "usa_oklahoma",
+      "sample_years": [
+        1967,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        26.95163,
+        -99.27601
+      ],
+      "country": "Texas",
+      "earliest_year": 1872,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Las Palmas-Texas",
+      "known_aliases": [
+        "Las Palmas",
+        "las palmas",
+        "las palmas cdp",
+        "Las Palmas CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Las Palmas",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1872,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

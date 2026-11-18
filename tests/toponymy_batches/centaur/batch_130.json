@@ -1,0 +1,964 @@
+{
+  "batch_index": 130,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        44.467,
+        -103.86357
+      ],
+      "country": "South Dakota",
+      "earliest_year": 1907,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mountain Plains-South Dakota",
+      "known_aliases": [
+        "Mountain Plains",
+        "mountain plains",
+        "mountain plains cdp",
+        "Mountain Plains CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Mountain Plains",
+      "reason": "missing_entry",
+      "region": "usa_south_dakota",
+      "sample_years": [
+        1907,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.28762,
+        -112.65112
+      ],
+      "country": "Utah",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Deseret-Utah",
+      "known_aliases": [
+        "Deseret",
+        "deseret",
+        "deseret cdp",
+        "Deseret CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Deseret",
+      "reason": "missing_entry",
+      "region": "usa_utah",
+      "sample_years": [
+        1850,
+        1890,
+        1930,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.43676,
+        -89.18882
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1944,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Elcho-Wisconsin",
+      "known_aliases": [
+        "Elcho",
+        "elcho",
+        "elcho cdp",
+        "Elcho CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Elcho",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1944,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.86814,
+        -86.04525
+      ],
+      "country": "Alabama",
+      "earliest_year": 1897,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ray-Alabama",
+      "known_aliases": [
+        "Ray",
+        "ray",
+        "ray cdp",
+        "Ray CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Ray",
+      "reason": "missing_entry",
+      "region": "usa_alabama",
+      "sample_years": [
+        1897,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.33291,
+        -121.55703
+      ],
+      "country": "California",
+      "earliest_year": 1919,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Courtland-California",
+      "known_aliases": [
+        "Courtland",
+        "courtland",
+        "courtland cdp",
+        "Courtland CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Courtland",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1919,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        30.82906,
+        -86.88972
+      ],
+      "country": "Florida",
+      "earliest_year": 1965,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Munson-Florida",
+      "known_aliases": [
+        "Munson",
+        "munson",
+        "munson cdp",
+        "Munson CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Munson",
+      "reason": "missing_entry",
+      "region": "usa_florida",
+      "sample_years": [
+        1965,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.76222,
+        -83.47426
+      ],
+      "country": "Kentucky",
+      "earliest_year": 1888,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pathfork-Kentucky",
+      "known_aliases": [
+        "Pathfork",
+        "pathfork",
+        "pathfork cdp",
+        "Pathfork CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Pathfork",
+      "reason": "missing_entry",
+      "region": "usa_kentucky",
+      "sample_years": [
+        1888,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.67919,
+        -84.12799
+      ],
+      "country": "Kentucky",
+      "earliest_year": 1907,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pleasant View-Kentucky",
+      "known_aliases": [
+        "Pleasant View",
+        "pleasant view",
+        "pleasant view cdp",
+        "Pleasant View CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Pleasant View",
+      "reason": "missing_entry",
+      "region": "usa_kentucky",
+      "sample_years": [
+        1907,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.83244,
+        -77.87575
+      ],
+      "country": "New York",
+      "earliest_year": 1858,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Retsof-New York",
+      "known_aliases": [
+        "Retsof",
+        "retsof",
+        "retsof cdp",
+        "piffard",
+        "piffard cdp",
+        "Retsof CDP",
+        "Piffard",
+        "Piffard CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Retsof",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1858,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.38091,
+        -82.46277
+      ],
+      "country": "Ohio",
+      "earliest_year": 1926,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mitiwanga-Ohio",
+      "known_aliases": [
+        "Mitiwanga",
+        "mitiwanga",
+        "mitiwanga cdp",
+        "Mitiwanga CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Mitiwanga",
+      "reason": "missing_entry",
+      "region": "usa_ohio",
+      "sample_years": [
+        1926,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        28.02124,
+        -97.86764
+      ],
+      "country": "Texas",
+      "earliest_year": 1923,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sandia-Texas",
+      "known_aliases": [
+        "Sandia",
+        "sandia",
+        "sandia cdp",
+        "Sandia CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Sandia",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1923,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.65632,
+        -120.50811
+      ],
+      "country": "California",
+      "earliest_year": 1951,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Whitley Gardens-California",
+      "known_aliases": [
+        "Whitley Gardens",
+        "whitley gardens",
+        "whitley gardens cdp",
+        "Whitley Gardens CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Whitley Gardens",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1951,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.9873,
+        -105.45581
+      ],
+      "country": "Colorado",
+      "earliest_year": 1910,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "St. Ann Highlands-Colorado",
+      "known_aliases": [
+        "St. Ann Highlands",
+        "st. ann highlands",
+        "st. ann highlands cdp",
+        "St. Ann Highlands CDP"
+      ],
+      "latest_year": 2020,
+      "name": "St. Ann Highlands",
+      "reason": "missing_entry",
+      "region": "usa_colorado",
+      "sample_years": [
+        1910,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        21.69898,
+        -157.9989
+      ],
+      "country": "Hawaii",
+      "earliest_year": 1952,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kawela Bay-Hawaii",
+      "known_aliases": [
+        "Kawela Bay",
+        "kawela bay",
+        "kawela bay cdp",
+        "Kawela Bay CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Kawela Bay",
+      "reason": "missing_entry",
+      "region": "usa_hawaii",
+      "sample_years": [
+        1952,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.87278,
+        -76.67282
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Snydertown (Northumberland County)-Pennsylvania",
+      "known_aliases": [
+        "Snydertown (Northumberland County)",
+        "snydertown",
+        "snydertown borough",
+        "Snydertown borough",
+        "Snydertown"
+      ],
+      "latest_year": 2026,
+      "name": "Snydertown (Northumberland County)",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1850,
+        1990,
+        2013,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.80156,
+        -80.69178
+      ],
+      "country": "South Carolina",
+      "earliest_year": 1973,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Unity-South Carolina",
+      "known_aliases": [
+        "Unity",
+        "unity",
+        "unity cdp",
+        "Unity CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Unity",
+      "reason": "missing_entry",
+      "region": "usa_south_carolina",
+      "sample_years": [
+        1973,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        27.96573,
+        -97.99373
+      ],
+      "country": "Texas",
+      "earliest_year": 1912,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Westdale-Texas",
+      "known_aliases": [
+        "Westdale",
+        "westdale",
+        "westdale cdp",
+        "Westdale CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Westdale",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1912,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.21663,
+        -119.99657
+      ],
+      "country": "Washington",
+      "earliest_year": 1902,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Crescent Bar-Washington",
+      "known_aliases": [
+        "Crescent Bar",
+        "crescent bar",
+        "crescent bar cdp",
+        "Crescent Bar CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Crescent Bar",
+      "reason": "missing_entry",
+      "region": "usa_washington",
+      "sample_years": [
+        1902,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.12835,
+        -121.02173
+      ],
+      "country": "California",
+      "earliest_year": 1910,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "San Lucas-California",
+      "known_aliases": [
+        "San Lucas",
+        "san lucas",
+        "san lucas cdp",
+        "San Lucas CDP"
+      ],
+      "latest_year": 2020,
+      "name": "San Lucas",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1910,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.95433,
+        -88.62707
+      ],
+      "country": "Illinois",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mason-Illinois",
+      "known_aliases": [
+        "Mason",
+        "mason",
+        "mason town",
+        "Mason town"
+      ],
+      "latest_year": 2026,
+      "name": "Mason",
+      "reason": "missing_entry",
+      "region": "usa_illinois",
+      "sample_years": [
+        1850,
+        1990,
+        2013,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.14166,
+        -74.77585
+      ],
+      "country": "New York",
+      "earliest_year": 1945,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Salisbury Center-New York",
+      "known_aliases": [
+        "Salisbury Center",
+        "salisbury center",
+        "salisbury center cdp",
+        "Salisbury Center CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Salisbury Center",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1945,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.16265,
+        -84.80406
+      ],
+      "country": "Ohio",
+      "earliest_year": 1957,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Elizabethtown-Ohio",
+      "known_aliases": [
+        "Elizabethtown",
+        "elizabethtown",
+        "elizabethtown cdp",
+        "Elizabethtown CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Elizabethtown",
+      "reason": "missing_entry",
+      "region": "usa_kentucky",
+      "sample_years": [
+        1957,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.93299,
+        -122.84976
+      ],
+      "country": "Oregon",
+      "earliest_year": 1974,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Deer Island-Oregon",
+      "known_aliases": [
+        "Deer Island",
+        "deer island",
+        "deer island cdp",
+        "Deer Island CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Deer Island",
+      "reason": "missing_entry",
+      "region": "usa_oregon",
+      "sample_years": [
+        1974,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.62373,
+        -77.49928
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1852,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Maitland-Pennsylvania",
+      "known_aliases": [
+        "Maitland",
+        "maitland",
+        "maitland cdp",
+        "Maitland CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Maitland",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1852,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.34702,
+        -77.70265
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1853,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "North Bend-Pennsylvania",
+      "known_aliases": [
+        "North Bend",
+        "north bend",
+        "north bend cdp",
+        "North Bend CDP"
+      ],
+      "latest_year": 2020,
+      "name": "North Bend",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1853,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.39444,
+        -121.07517
+      ],
+      "country": "California",
+      "earliest_year": 1928,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Crows Landing-California",
+      "known_aliases": [
+        "Crows Landing",
+        "crows landing",
+        "crows landing cdp",
+        "Crows Landing CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Crows Landing",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1928,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        30.55977,
+        -87.13006
+      ],
+      "country": "Florida",
+      "earliest_year": 1922,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mulat-Florida",
+      "known_aliases": [
+        "Mulat",
+        "mulat",
+        "mulat cdp",
+        "Mulat CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Mulat",
+      "reason": "missing_entry",
+      "region": "usa_florida",
+      "sample_years": [
+        1922,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.07618,
+        -86.98602
+      ],
+      "country": "Kentucky",
+      "earliest_year": 1912,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Dunmor-Kentucky",
+      "known_aliases": [
+        "Dunmor",
+        "dunmor",
+        "dunmor cdp",
+        "Dunmor CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Dunmor",
+      "reason": "missing_entry",
+      "region": "usa_kentucky",
+      "sample_years": [
+        1912,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.43048,
+        -108.86296
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1960,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sanostee-New Mexico",
+      "known_aliases": [
+        "Sanostee",
+        "sanostee",
+        "sanostee cdp",
+        "Sanostee CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Sanostee",
+      "reason": "missing_entry",
+      "region": "usa_new_mexico",
+      "sample_years": [
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.40734,
+        -75.48542
+      ],
+      "country": "New York",
+      "earliest_year": 1820,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Guilford-New York",
+      "known_aliases": [
+        "Guilford",
+        "guilford",
+        "guilford cdp",
+        "Guilford CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Guilford",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1820,
+        1890,
+        1960,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

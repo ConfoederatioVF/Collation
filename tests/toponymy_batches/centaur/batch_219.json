@@ -1,0 +1,958 @@
+{
+  "batch_index": 219,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        43.21506,
+        -121.78501
+      ],
+      "country": "Oregon",
+      "earliest_year": 1920,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Chemult-Oregon",
+      "known_aliases": [
+        "Chemult",
+        "chemult",
+        "chemult cdp",
+        "Chemult CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Chemult",
+      "reason": "missing_entry",
+      "region": "usa_oregon",
+      "sample_years": [
+        1920,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.18781,
+        -97.2627
+      ],
+      "country": "South Dakota",
+      "earliest_year": 1899,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cameron Colony-South Dakota",
+      "known_aliases": [
+        "Cameron Colony",
+        "cameron colony",
+        "cameron colony cdp",
+        "Cameron Colony CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Cameron Colony",
+      "reason": "missing_entry",
+      "region": "usa_south_dakota",
+      "sample_years": [
+        1899,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.00549,
+        -86.20121
+      ],
+      "country": "Tennessee",
+      "earliest_year": 1962,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Greenvale-Tennessee",
+      "known_aliases": [
+        "Greenvale",
+        "greenvale",
+        "greenvale cdp",
+        "Greenvale CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Greenvale",
+      "reason": "missing_entry",
+      "region": "usa_tennessee",
+      "sample_years": [
+        1962,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.77934,
+        -100.20675
+      ],
+      "country": "Texas",
+      "earliest_year": 1906,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "McCaulley-Texas",
+      "known_aliases": [
+        "McCaulley",
+        "mccaulley",
+        "mccaulley cdp",
+        "McCaulley CDP"
+      ],
+      "latest_year": 2020,
+      "name": "McCaulley",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1906,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.97326,
+        -82.74589
+      ],
+      "country": "Virginia",
+      "earliest_year": 1935,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Dunbar-Virginia",
+      "known_aliases": [
+        "Dunbar",
+        "dunbar",
+        "dunbar cdp",
+        "Dunbar CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Dunbar",
+      "reason": "missing_entry",
+      "region": "usa_virginia",
+      "sample_years": [
+        1935,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.02259,
+        -124.16518
+      ],
+      "country": "Washington",
+      "earliest_year": 1869,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Oyehut-Washington",
+      "known_aliases": [
+        "Oyehut",
+        "oyehut",
+        "oyehut cdp",
+        "Oyehut CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Oyehut",
+      "reason": "missing_entry",
+      "region": "usa_washington",
+      "sample_years": [
+        1869,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.42202,
+        -80.65491
+      ],
+      "country": "West Virginia",
+      "earliest_year": 1923,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tioga-West Virginia",
+      "known_aliases": [
+        "Tioga",
+        "tioga",
+        "tioga cdp",
+        "Tioga CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Tioga",
+      "reason": "missing_entry",
+      "region": "usa_west_virginia",
+      "sample_years": [
+        1923,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.24978,
+        -107.61496
+      ],
+      "country": "Wyoming",
+      "earliest_year": 1910,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hyattville-Wyoming",
+      "known_aliases": [
+        "Hyattville",
+        "hyattville",
+        "hyattville cdp",
+        "Hyattville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Hyattville",
+      "reason": "missing_entry",
+      "region": "usa_wyoming",
+      "sample_years": [
+        1910,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        30.87967,
+        -87.12886
+      ],
+      "country": "Florida",
+      "earliest_year": 1904,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cobbtown-Florida",
+      "known_aliases": [
+        "Cobbtown",
+        "cobbtown",
+        "cobbtown cdp",
+        "Cobbtown CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Cobbtown",
+      "reason": "missing_entry",
+      "region": "usa_florida",
+      "sample_years": [
+        1904,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        27.62545,
+        -81.93971
+      ],
+      "country": "Florida",
+      "earliest_year": 1866,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fort Green-Florida",
+      "known_aliases": [
+        "Fort Green",
+        "fort green",
+        "fort green cdp",
+        "Fort Green CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Fort Green",
+      "reason": "missing_entry",
+      "region": "usa_florida",
+      "sample_years": [
+        1866,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.22962,
+        -95.01566
+      ],
+      "country": "Kansas",
+      "earliest_year": 1889,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Centerville-Kansas",
+      "known_aliases": [
+        "Centerville",
+        "centerville",
+        "centerville cdp",
+        "Centerville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Centerville",
+      "reason": "missing_entry",
+      "region": "usa_kansas",
+      "sample_years": [
+        1889,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.02689,
+        -97.25971
+      ],
+      "country": "Kansas",
+      "earliest_year": 1868,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Talmage-Kansas",
+      "known_aliases": [
+        "Talmage",
+        "talmage",
+        "talmage cdp",
+        "Talmage CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Talmage",
+      "reason": "missing_entry",
+      "region": "usa_kansas",
+      "sample_years": [
+        1868,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.62509,
+        -78.01617
+      ],
+      "country": "Maryland",
+      "earliest_year": 1893,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Big Pool-Maryland",
+      "known_aliases": [
+        "Big Pool",
+        "big pool",
+        "big pool cdp",
+        "ernstville",
+        "ernstville cdp",
+        "Big Pool CDP",
+        "Ernstville",
+        "Ernstville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Big Pool",
+      "reason": "missing_entry",
+      "region": "usa_west_virginia",
+      "sample_years": [
+        1893,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.79777,
+        -92.99565
+      ],
+      "country": "Missouri",
+      "earliest_year": 1881,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "St. Catharine-Missouri",
+      "known_aliases": [
+        "St. Catharine",
+        "st. catharine",
+        "st. catharine cdp",
+        "St. Catharine CDP"
+      ],
+      "latest_year": 2020,
+      "name": "St. Catharine",
+      "reason": "missing_entry",
+      "region": "usa_missouri",
+      "sample_years": [
+        1881,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.40006,
+        -111.20916
+      ],
+      "country": "Montana",
+      "earliest_year": 1890,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Big Stone Colony-Montana",
+      "known_aliases": [
+        "Big Stone Colony",
+        "big stone colony",
+        "big stone colony cdp",
+        "Big Stone Colony CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Big Stone Colony",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1890,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.26332,
+        -110.49269
+      ],
+      "country": "Montana",
+      "earliest_year": 1961,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Geyser-Montana",
+      "known_aliases": [
+        "Geyser",
+        "geyser",
+        "geyser cdp",
+        "Geyser CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Geyser",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1961,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.57063,
+        -110.08608
+      ],
+      "country": "Montana",
+      "earliest_year": 1878,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kremlin-Montana",
+      "known_aliases": [
+        "Kremlin",
+        "kremlin",
+        "kremlin cdp",
+        "Kremlin CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Kremlin",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1878,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.45696,
+        -107.72502
+      ],
+      "country": "Montana",
+      "earliest_year": 1941,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "St. Xavier-Montana",
+      "known_aliases": [
+        "St. Xavier",
+        "st. xavier",
+        "st. xavier cdp",
+        "St. Xavier CDP"
+      ],
+      "latest_year": 2020,
+      "name": "St. Xavier",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1941,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.81442,
+        -100.53048
+      ],
+      "country": "North Dakota",
+      "earliest_year": 1930,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Menoken-North Dakota",
+      "known_aliases": [
+        "Menoken",
+        "menoken",
+        "menoken cdp",
+        "Menoken CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Menoken",
+      "reason": "missing_entry",
+      "region": "usa_north_dakota",
+      "sample_years": [
+        1930,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.87874,
+        -96.11975
+      ],
+      "country": "Oklahoma",
+      "earliest_year": 1906,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bowring-Oklahoma",
+      "known_aliases": [
+        "Bowring",
+        "bowring",
+        "bowring cdp",
+        "Bowring CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Bowring",
+      "reason": "missing_entry",
+      "region": "usa_oklahoma",
+      "sample_years": [
+        1906,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.60903,
+        -96.64054
+      ],
+      "country": "Oklahoma",
+      "earliest_year": 1962,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fittstown-Oklahoma",
+      "known_aliases": [
+        "Fittstown",
+        "fittstown",
+        "fittstown cdp",
+        "Fittstown CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Fittstown",
+      "reason": "missing_entry",
+      "region": "usa_oklahoma",
+      "sample_years": [
+        1962,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        26.05662,
+        -97.42361
+      ],
+      "country": "Texas",
+      "earliest_year": 1968,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Del Mar Heights-Texas",
+      "known_aliases": [
+        "Del Mar Heights",
+        "del mar heights",
+        "del mar heights cdp",
+        "Del Mar Heights CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Del Mar Heights",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1968,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.88322,
+        -101.14147
+      ],
+      "country": "Texas",
+      "earliest_year": 1891,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fluvanna-Texas",
+      "known_aliases": [
+        "Fluvanna",
+        "fluvanna",
+        "fluvanna cdp",
+        "Fluvanna CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Fluvanna",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1891,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        29.28713,
+        -103.58341
+      ],
+      "country": "Texas",
+      "earliest_year": 1875,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Terlingua-Texas",
+      "known_aliases": [
+        "Terlingua",
+        "terlingua",
+        "terlingua cdp",
+        "Terlingua CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Terlingua",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1875,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.23366,
+        -81.1878
+      ],
+      "country": "West Virginia",
+      "earliest_year": 1920,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Belva-West Virginia",
+      "known_aliases": [
+        "Belva",
+        "belva",
+        "belva cdp",
+        "Belva CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Belva",
+      "reason": "missing_entry",
+      "region": "usa_west_virginia",
+      "sample_years": [
+        1920,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.87763,
+        -104.78871
+      ],
+      "country": "Wyoming",
+      "earliest_year": 1928,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Slater-Wyoming",
+      "known_aliases": [
+        "Slater",
+        "slater",
+        "slater cdp",
+        "Slater CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Slater",
+      "reason": "missing_entry",
+      "region": "usa_wyoming",
+      "sample_years": [
+        1928,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.34226,
+        -95.74482
+      ],
+      "country": "Iowa",
+      "earliest_year": 1949,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Weston-Iowa",
+      "known_aliases": [
+        "Weston",
+        "weston",
+        "weston cdp",
+        "Weston CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Weston",
+      "reason": "missing_entry",
+      "region": "usa_iowa",
+      "sample_years": [
+        1949,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.86354,
+        -123.72518
+      ],
+      "country": "California",
+      "earliest_year": 1963,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Leggett-California",
+      "known_aliases": [
+        "Leggett",
+        "leggett",
+        "leggett cdp",
+        "Leggett CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Leggett",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1963,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.99144,
+        -90.95689
+      ],
+      "country": "Mississippi",
+      "earliest_year": 1894,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Grace-Mississippi",
+      "known_aliases": [
+        "Grace",
+        "grace",
+        "grace cdp",
+        "Grace CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Grace",
+      "reason": "missing_entry",
+      "region": "usa_mississippi",
+      "sample_years": [
+        1894,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.01869,
+        -109.9119
+      ],
+      "country": "Montana",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cooke City-Montana",
+      "known_aliases": [
+        "Cooke City",
+        "cooke city",
+        "cooke city cdp",
+        "Cooke City CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Cooke City",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

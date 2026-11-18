@@ -1,0 +1,920 @@
+{
+  "batch_index": 15,
+  "project": "CENTAUR",
+  "count": 30,
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        63.67361,
+        -145.88333
+      ],
+      "country": "Alaska",
+      "earliest_year": 1888,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Donnelly-Alaska",
+      "known_aliases": [
+        "Donnelly",
+        "donnelly"
+      ],
+      "latest_year": 1970,
+      "name": "Donnelly",
+      "reason": "missing_entry",
+      "region": "usa_alaska",
+      "sample_years": [
+        1888,
+        1910,
+        1940,
+        1970
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        65.48333,
+        -144.63417
+      ],
+      "country": "Alaska",
+      "earliest_year": 1891,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Circle Hot Springs-Alaska",
+      "known_aliases": [
+        "Circle Hot Springs",
+        "circle hot springs"
+      ],
+      "latest_year": 1990,
+      "name": "Circle Hot Springs",
+      "reason": "missing_entry",
+      "region": "usa_alaska",
+      "sample_years": [
+        1891,
+        1900,
+        1910,
+        1920,
+        1930,
+        1940,
+        1990
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        65.11222,
+        -147.47722
+      ],
+      "country": "Alaska",
+      "earliest_year": 1905,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Chatanika-Alaska",
+      "known_aliases": [
+        "Chatanika",
+        "chatanika"
+      ],
+      "latest_year": 1940,
+      "name": "Chatanika",
+      "reason": "missing_entry",
+      "region": "usa_alaska",
+      "sample_years": [
+        1905,
+        1910,
+        1930,
+        1940
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        57.08944,
+        -134.83306
+      ],
+      "country": "Alaska",
+      "earliest_year": 1886,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Baranof Warm Springs-Alaska",
+      "known_aliases": [
+        "Baranof Warm Springs",
+        "baranof warm springs"
+      ],
+      "latest_year": 1940,
+      "name": "Baranof Warm Springs",
+      "reason": "missing_entry",
+      "region": "usa_alaska",
+      "sample_years": [
+        1886,
+        1890,
+        1900,
+        1910,
+        1920,
+        1930,
+        1940
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        62.54444,
+        -158.09528
+      ],
+      "country": "Alaska",
+      "earliest_year": 1901,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Iditarod-Alaska",
+      "known_aliases": [
+        "Iditarod",
+        "iditarod"
+      ],
+      "latest_year": 1940,
+      "name": "Iditarod",
+      "reason": "missing_entry",
+      "region": "usa_alaska",
+      "sample_years": [
+        1901,
+        1910,
+        1920,
+        1930,
+        1940
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        67.25139,
+        -148.17611
+      ],
+      "country": "Alaska",
+      "earliest_year": 1886,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Chandalar-Alaska",
+      "known_aliases": [
+        "Chandalar",
+        "chandalar"
+      ],
+      "latest_year": 1930,
+      "name": "Chandalar",
+      "reason": "missing_entry",
+      "region": "usa_alaska",
+      "sample_years": [
+        1886,
+        1890,
+        1900,
+        1910,
+        1920,
+        1930
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        54.75,
+        -163.30833
+      ],
+      "country": "Alaska",
+      "earliest_year": 1925,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ikatan-Alaska",
+      "known_aliases": [
+        "Ikatan",
+        "ikatan"
+      ],
+      "latest_year": 1950,
+      "name": "Ikatan",
+      "reason": "missing_entry",
+      "region": "usa_alaska",
+      "sample_years": [
+        1925,
+        1930,
+        1940,
+        1950
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        58.00778,
+        -152.76806
+      ],
+      "country": "Alaska",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Afognak-Alaska",
+      "known_aliases": [
+        "Afognak",
+        "afognak"
+      ],
+      "latest_year": 1980,
+      "name": "Afognak",
+      "reason": "missing_entry",
+      "region": "usa_alaska",
+      "sample_years": [
+        1850,
+        1890,
+        1930,
+        1980
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        61.34139,
+        -155.49083
+      ],
+      "country": "Alaska",
+      "earliest_year": 1910,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lime-Alaska",
+      "known_aliases": [
+        "Lime",
+        "lime",
+        "lime village",
+        "Lime Village"
+      ],
+      "latest_year": 2010,
+      "name": "Lime",
+      "reason": "missing_entry",
+      "region": "usa_alaska",
+      "sample_years": [
+        1910,
+        1940,
+        1980,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        58.80333,
+        -158.55944
+      ],
+      "country": "Alaska",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ekuk-Alaska",
+      "known_aliases": [
+        "Ekuk",
+        "ekuk"
+      ],
+      "latest_year": 2010,
+      "name": "Ekuk",
+      "reason": "missing_entry",
+      "region": "usa_alaska",
+      "sample_years": [
+        1850,
+        1890,
+        1980,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        61.89889,
+        -157.70111
+      ],
+      "country": "Alaska",
+      "earliest_year": 1884,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Georgetown-Alaska",
+      "known_aliases": [
+        "Georgetown",
+        "georgetown"
+      ],
+      "latest_year": 2010,
+      "name": "Georgetown",
+      "reason": "missing_entry",
+      "region": "usa_alaska",
+      "sample_years": [
+        1884,
+        1920,
+        1960,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        61.42167,
+        -150.6
+      ],
+      "country": "Alaska",
+      "earliest_year": 1891,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Alexander Creek-Alaska",
+      "known_aliases": [
+        "Alexander Creek",
+        "alexander creek"
+      ],
+      "latest_year": 1990,
+      "name": "Alexander Creek",
+      "reason": "missing_entry",
+      "region": "usa_alaska",
+      "sample_years": [
+        1891,
+        1920,
+        1960,
+        1990
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        57.46944,
+        -134.56972
+      ],
+      "country": "Alaska",
+      "earliest_year": 1871,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Killisnoo-Alaska",
+      "known_aliases": [
+        "Killisnoo",
+        "killisnoo"
+      ],
+      "latest_year": 1940,
+      "name": "Killisnoo",
+      "reason": "missing_entry",
+      "region": "usa_alaska",
+      "sample_years": [
+        1871,
+        1880,
+        1890,
+        1900,
+        1910,
+        1920,
+        1930,
+        1940
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        65.20972,
+        -161.16556
+      ],
+      "country": "Alaska",
+      "earliest_year": 1879,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Haycock-Alaska",
+      "known_aliases": [
+        "Haycock",
+        "haycock"
+      ],
+      "latest_year": 1940,
+      "name": "Haycock",
+      "reason": "missing_entry",
+      "region": "usa_alaska",
+      "sample_years": [
+        1879,
+        1880,
+        1890,
+        1900,
+        1910,
+        1920,
+        1930,
+        1940
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        62.06611,
+        -142.04083
+      ],
+      "country": "Alaska",
+      "earliest_year": 1897,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Chisana-Alaska",
+      "known_aliases": [
+        "Chisana",
+        "chisana"
+      ],
+      "latest_year": 1940,
+      "name": "Chisana",
+      "reason": "missing_entry",
+      "region": "usa_alaska",
+      "sample_years": [
+        1897,
+        1900,
+        1910,
+        1920,
+        1930,
+        1940
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        64.15417,
+        -141.45972
+      ],
+      "country": "Alaska",
+      "earliest_year": 1910,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Jack Wade-Alaska",
+      "known_aliases": [
+        "Jack Wade",
+        "jack wade"
+      ],
+      "latest_year": 1940,
+      "name": "Jack Wade",
+      "reason": "missing_entry",
+      "region": "usa_alaska",
+      "sample_years": [
+        1910,
+        1920,
+        1930,
+        1940
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        60.195,
+        -144.52111
+      ],
+      "country": "Alaska",
+      "earliest_year": 1865,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Katalla-Alaska",
+      "known_aliases": [
+        "Katalla",
+        "katalla"
+      ],
+      "latest_year": 1940,
+      "name": "Katalla",
+      "reason": "missing_entry",
+      "region": "usa_alaska",
+      "sample_years": [
+        1865,
+        1890,
+        1920,
+        1940
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        55.08889,
+        -162.03056
+      ],
+      "country": "Alaska",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Belkofski-Alaska",
+      "known_aliases": [
+        "Belkofski",
+        "belkofski"
+      ],
+      "latest_year": 1980,
+      "name": "Belkofski",
+      "reason": "missing_entry",
+      "region": "usa_alaska",
+      "sample_years": [
+        1850,
+        1890,
+        1940,
+        1980
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        62.61472,
+        -150.01194
+      ],
+      "country": "Alaska",
+      "earliest_year": 1866,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Curry-Alaska",
+      "known_aliases": [
+        "Curry",
+        "curry"
+      ],
+      "latest_year": 1950,
+      "name": "Curry",
+      "reason": "missing_entry",
+      "region": "usa_alaska",
+      "sample_years": [
+        1866,
+        1890,
+        1920,
+        1950
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        70.32972,
+        -161.87417
+      ],
+      "country": "Alaska",
+      "earliest_year": 1871,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Icy Cape-Alaska",
+      "known_aliases": [
+        "Icy Cape",
+        "icy cape"
+      ],
+      "latest_year": 1890,
+      "name": "Icy Cape",
+      "reason": "missing_entry",
+      "region": "usa_alaska",
+      "sample_years": [
+        1871,
+        1880,
+        1890
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        68.12194,
+        -145.52778
+      ],
+      "country": "Alaska",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Arctic-Alaska",
+      "known_aliases": [
+        "Arctic",
+        "arctic",
+        "arctic village",
+        "Arctic Village"
+      ],
+      "latest_year": 2010,
+      "name": "Arctic",
+      "reason": "missing_entry",
+      "region": "usa_alaska",
+      "sample_years": [
+        1850,
+        1900,
+        1960,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        66.02278,
+        -161.84194
+      ],
+      "country": "Alaska",
+      "earliest_year": 1865,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kiwalik-Alaska",
+      "known_aliases": [
+        "Kiwalik",
+        "kiwalik"
+      ],
+      "latest_year": 1940,
+      "name": "Kiwalik",
+      "reason": "missing_entry",
+      "region": "usa_alaska",
+      "sample_years": [
+        1865,
+        1870,
+        1880,
+        1930,
+        1940
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        65.91361,
+        -161.92539
+      ],
+      "country": "Alaska",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Candle-Alaska",
+      "known_aliases": [
+        "Candle",
+        "candle"
+      ],
+      "latest_year": 1960,
+      "name": "Candle",
+      "reason": "missing_entry",
+      "region": "usa_alaska",
+      "sample_years": [
+        1850,
+        1890,
+        1930,
+        1960
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        59.50444,
+        -135.36
+      ],
+      "country": "Alaska",
+      "earliest_year": 1871,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Dyea-Alaska",
+      "known_aliases": [
+        "Dyea",
+        "dyea"
+      ],
+      "latest_year": 1900,
+      "name": "Dyea",
+      "reason": "missing_entry",
+      "region": "usa_alaska",
+      "sample_years": [
+        1871,
+        1880,
+        1890,
+        1900
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.05333,
+        -109.91056
+      ],
+      "country": "Montana",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lasonston-Montana",
+      "known_aliases": [
+        "Lasonston",
+        "lasonston",
+        "moccasin",
+        "moccasin cdp",
+        "Moccasin",
+        "Moccasin CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Lasonston",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1850,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.61389,
+        -72.7725
+      ],
+      "country": "Connecticut",
+      "earliest_year": 1754,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Berlin-Connecticut",
+      "known_aliases": [
+        "Berlin",
+        "berlin",
+        "kensington",
+        "kensington cdp",
+        "Kensington",
+        "Kensington CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Berlin",
+      "reason": "missing_entry",
+      "region": "usa_connecticut",
+      "sample_years": [
+        1754,
+        1850,
+        1940,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.6325,
+        -72.24
+      ],
+      "country": "Connecticut",
+      "earliest_year": 1710,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lebanon-Connecticut",
+      "known_aliases": [
+        "Lebanon",
+        "lebanon",
+        "five mile purchase",
+        "Five Mile Purchase"
+      ],
+      "latest_year": 2010,
+      "name": "Lebanon",
+      "reason": "missing_entry",
+      "region": "usa_connecticut",
+      "sample_years": [
+        1710,
+        1870,
+        1940,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.86667,
+        -71.98333
+      ],
+      "country": "Connecticut",
+      "earliest_year": 1725,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pomfret-Connecticut",
+      "known_aliases": [
+        "Pomfret",
+        "pomfret",
+        "mashamoquet",
+        "Mashamoquet"
+      ],
+      "latest_year": 2010,
+      "name": "Pomfret",
+      "reason": "missing_entry",
+      "region": "usa_connecticut",
+      "sample_years": [
+        1725,
+        1860,
+        1940,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.30444,
+        -73.39278
+      ],
+      "country": "Connecticut",
+      "earliest_year": 1754,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Redding-Connecticut",
+      "known_aliases": [
+        "Redding",
+        "redding",
+        "redding center",
+        "redding center cdp",
+        "reading ct",
+        "Redding Center",
+        "Redding Center CDP",
+        "Reading CT"
+      ],
+      "latest_year": 2020,
+      "name": "Redding",
+      "reason": "missing_entry",
+      "region": "usa_connecticut",
+      "sample_years": [
+        1754,
+        1830,
+        1930,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.985,
+        -73.42222
+      ],
+      "country": "Connecticut",
+      "earliest_year": 1745,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Salisbury-Connecticut",
+      "known_aliases": [
+        "Salisbury",
+        "salisbury",
+        "weatogue",
+        "Weatogue"
+      ],
+      "latest_year": 2010,
+      "name": "Salisbury",
+      "reason": "missing_entry",
+      "region": "usa_connecticut",
+      "sample_years": [
+        1745,
+        1860,
+        1940,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,978 @@
+{
+  "batch_index": 34,
+  "project": "CENTAUR",
+  "count": 30,
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        51.81,
+        -93.99
+      ],
+      "country": "Canada",
+      "earliest_year": -1500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pikangikum-Canada",
+      "known_aliases": [
+        "Pikangikum",
+        "pikangikum",
+        "berens river shield",
+        "edkm-1",
+        "Berens River Shield",
+        "EdKm-1"
+      ],
+      "latest_year": 1550,
+      "name": "Pikangikum",
+      "reason": "missing_entry",
+      "region": "cc1_ruperts_land_hbc",
+      "sample_years": [
+        -1500,
+        400,
+        1200,
+        1550
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        70.04167,
+        -50.54167
+      ],
+      "country": "Greenland",
+      "earliest_year": 1150,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pisissarfik-Greenland",
+      "known_aliases": [
+        "Pisissarfik",
+        "pisissarfik",
+        "nunniffiit thule",
+        "inussuk",
+        "qeqertarsuit",
+        "illunnguaq",
+        "Nunniffiit Thule",
+        "Inussuk"
+      ],
+      "latest_year": 1600,
+      "name": "Pisissarfik",
+      "reason": "missing_entry",
+      "region": "cc1_greenland_missions_1763",
+      "sample_years": [
+        1150,
+        1350,
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.7051,
+        -65.7851
+      ],
+      "country": "Canada",
+      "earliest_year": 1653,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pobomcoup Acadia-Canada",
+      "known_aliases": [
+        "Pobomcoup Acadia",
+        "pobomcoup acadia",
+        "pubnico",
+        "oldest acadian village",
+        "cap-sable",
+        "pobomcoup",
+        "Pubnico",
+        "Oldest Acadian Village",
+        "Cap-Sable",
+        "Pobomcoup"
+      ],
+      "latest_year": 1861,
+      "name": "Pobomcoup Acadia",
+      "reason": "missing_entry",
+      "region": "cc1_acadia_nova_scotia_ile_royale",
+      "sample_years": [
+        1653,
+        1714,
+        1800,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.28676,
+        -72.68383
+      ],
+      "country": "Canada",
+      "earliest_year": 1681,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pointe-du-Lac-Canada_2",
+      "known_aliases": [
+        "Pointe-du-Lac",
+        "pointe-du-lac",
+        "tonnancourt",
+        "la visitation-de-la-pointe-du-lac",
+        "Tonnancourt",
+        "La Visitation-de-la-Pointe-du-Lac"
+      ],
+      "latest_year": 1861,
+      "name": "Pointe-du-Lac",
+      "reason": "missing_entry",
+      "region": "cc1_new_france_st_lawrence",
+      "sample_years": [
+        1681,
+        1739,
+        1765,
+        1790,
+        1825,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        76.375,
+        -93.79167
+      ],
+      "country": "Canada",
+      "earliest_year": 1200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Porden Point-Canada",
+      "known_aliases": [
+        "Porden Point",
+        "porden point",
+        "grinnell peninsula",
+        "devon island",
+        "rbjr-1",
+        "Grinnell Peninsula",
+        "Devon Island",
+        "RbJr-1"
+      ],
+      "latest_year": 1500,
+      "name": "Porden Point",
+      "reason": "missing_entry",
+      "region": "cc1_pacific_mackenzie_indigenous",
+      "sample_years": [
+        1200,
+        1350,
+        1500
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        76.875,
+        -21.04167
+      ],
+      "country": "Greenland",
+      "earliest_year": 1150,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Port Arthur-Greenland",
+      "known_aliases": [
+        "Port Arthur",
+        "port arthur",
+        "nunniffiit thule",
+        "røde ø",
+        "væderen, sydøst-hjørnet",
+        "Nunniffiit Thule"
+      ],
+      "latest_year": 1600,
+      "name": "Port Arthur",
+      "reason": "missing_entry",
+      "region": "cc1_greenland_missions_1763",
+      "sample_years": [
+        1150,
+        1350,
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.2851,
+        -60.5451
+      ],
+      "country": "Canada",
+      "earliest_year": 1713,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Port-Dauphin Town-Canada",
+      "known_aliases": [
+        "Port-Dauphin Town",
+        "port-dauphin town",
+        "englishtown cape breton",
+        "Englishtown Cape Breton"
+      ],
+      "latest_year": 1750,
+      "name": "Port-Dauphin Town",
+      "reason": "missing_entry",
+      "region": "cc1_acadia_nova_scotia_ile_royale",
+      "sample_years": [
+        1713,
+        1730,
+        1750
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        80.20833,
+        -64.625
+      ],
+      "country": "Greenland",
+      "earliest_year": 1150,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Poulsen Klipper-Greenland",
+      "known_aliases": [
+        "Poulsen Klipper",
+        "poulsen klipper",
+        "nunniffiit thule",
+        "Nunniffiit Thule"
+      ],
+      "latest_year": 1600,
+      "name": "Poulsen Klipper",
+      "reason": "missing_entry",
+      "region": "cc1_greenland_missions_1763",
+      "sample_years": [
+        1150,
+        1350,
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        81.6,
+        -16.6667
+      ],
+      "country": "Greenland",
+      "earliest_year": -2200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Prinsesse Ingeborg Halvo-Greenland",
+      "known_aliases": [
+        "Prinsesse Ingeborg Halvo",
+        "prinsesse ingeborg halvo",
+        "station nord peninsula",
+        "northeast peary",
+        "Station Nord Peninsula",
+        "Northeast Peary"
+      ],
+      "latest_year": 1600,
+      "name": "Prinsesse Ingeborg Halvo",
+      "reason": "missing_entry",
+      "region": "cc1_greenland_missions_1763",
+      "sample_years": [
+        -2200,
+        1450,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        73.5722,
+        -22.6333
+      ],
+      "country": "Greenland",
+      "earliest_year": 1150,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Prospektdal-Greenland",
+      "known_aliases": [
+        "Prospektdal",
+        "prospektdal",
+        "nunniffiit thule",
+        "Nunniffiit Thule"
+      ],
+      "latest_year": 1600,
+      "name": "Prospektdal",
+      "reason": "missing_entry",
+      "region": "cc1_greenland_missions_1763",
+      "sample_years": [
+        1150,
+        1350,
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        53.45,
+        -123.0667
+      ],
+      "country": "Canada",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Punchaw Lake-Canada",
+      "known_aliases": [
+        "Punchaw Lake",
+        "punchaw lake",
+        "blackwater",
+        "dakelh",
+        "firs-1",
+        "Blackwater",
+        "Dakelh",
+        "FiRs-1"
+      ],
+      "latest_year": 1600,
+      "name": "Punchaw Lake",
+      "reason": "missing_entry",
+      "region": "cc1_pacific_mackenzie_indigenous",
+      "sample_years": [
+        -1000,
+        500,
+        1300,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        78.46667,
+        -70.56667
+      ],
+      "country": "Greenland",
+      "earliest_year": 1150,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Qaamarfiit-Greenland",
+      "known_aliases": [
+        "Qaamarfiit",
+        "qaamarfiit",
+        "nunniffiit thule",
+        "Nunniffiit Thule"
+      ],
+      "latest_year": 1600,
+      "name": "Qaamarfiit",
+      "reason": "missing_entry",
+      "region": "cc1_greenland_missions_1763",
+      "sample_years": [
+        1150,
+        1350,
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        76.125,
+        -65.79167
+      ],
+      "country": "Greenland",
+      "earliest_year": 1150,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Qaarusussuaq-Greenland",
+      "known_aliases": [
+        "Qaarusussuaq",
+        "qaarusussuaq",
+        "nunniffiit thule",
+        "qeqertapaluup sallernga",
+        "Nunniffiit Thule",
+        "Qeqertapaluup Sallernga"
+      ],
+      "latest_year": 1600,
+      "name": "Qaarusussuaq",
+      "reason": "missing_entry",
+      "region": "cc1_greenland_missions_1763",
+      "sample_years": [
+        1150,
+        1350,
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        61.125,
+        -47.04167
+      ],
+      "country": "Greenland",
+      "earliest_year": 1150,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Qanilik-Greenland",
+      "known_aliases": [
+        "Qanilik",
+        "qanilik",
+        "nunniffiit thule",
+        "aterliit",
+        "Nunniffiit Thule"
+      ],
+      "latest_year": 1600,
+      "name": "Qanilik",
+      "reason": "missing_entry",
+      "region": "cc1_greenland_missions_1763",
+      "sample_years": [
+        1150,
+        1350,
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        72.1667,
+        -94.15
+      ],
+      "country": "Canada",
+      "earliest_year": 1200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Qariaraqyuk-Canada",
+      "known_aliases": [
+        "Qariaraqyuk",
+        "qariaraqyuk",
+        "hazard inlet",
+        "somerset island",
+        "pajs-4",
+        "Hazard Inlet",
+        "Somerset Island",
+        "PaJs-4"
+      ],
+      "latest_year": 1500,
+      "name": "Qariaraqyuk",
+      "reason": "missing_entry",
+      "region": "cc1_pacific_mackenzie_indigenous",
+      "sample_years": [
+        1200,
+        1350,
+        1500
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        67.14124,
+        -50.80557
+      ],
+      "country": "Greenland",
+      "earliest_year": 1150,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Qarlissuit-Greenland",
+      "known_aliases": [
+        "Qarlissuit",
+        "qarlissuit",
+        "nunniffiit thule",
+        "Nunniffiit Thule"
+      ],
+      "latest_year": 1600,
+      "name": "Qarlissuit",
+      "reason": "missing_entry",
+      "region": "cc1_greenland_missions_1763",
+      "sample_years": [
+        1150,
+        1350,
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        77.375,
+        -71.54167
+      ],
+      "country": "Greenland",
+      "earliest_year": 1150,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Qassisalik-Greenland",
+      "known_aliases": [
+        "Qassisalik",
+        "qassisalik",
+        "nunniffiit thule",
+        "Nunniffiit Thule"
+      ],
+      "latest_year": 1600,
+      "name": "Qassisalik",
+      "reason": "missing_entry",
+      "region": "cc1_greenland_missions_1763",
+      "sample_years": [
+        1150,
+        1350,
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        66.87733,
+        -51.69248
+      ],
+      "country": "Greenland",
+      "earliest_year": 1150,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Qeqertalaap-Greenland",
+      "known_aliases": [
+        "Qeqertalaap",
+        "qeqertalaap",
+        "nunniffiit thule",
+        "Nunniffiit Thule"
+      ],
+      "latest_year": 1600,
+      "name": "Qeqertalaap",
+      "reason": "missing_entry",
+      "region": "cc1_greenland_missions_1763",
+      "sample_years": [
+        1150,
+        1350,
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        66.95833,
+        -53.29167
+      ],
+      "country": "Greenland",
+      "earliest_year": 1150,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Qeqertaq (66.96,-53.29)-Greenland",
+      "known_aliases": [
+        "Qeqertaq",
+        "qeqertaq",
+        "nunniffiit thule",
+        "tatsip ataa",
+        "utoqqaat",
+        "Nunniffiit Thule"
+      ],
+      "latest_year": 1600,
+      "name": "Qeqertaq",
+      "reason": "missing_entry",
+      "region": "cc1_greenland_missions_1763",
+      "sample_years": [
+        1150,
+        1350,
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        76.29167,
+        -61.875
+      ],
+      "country": "Greenland",
+      "earliest_year": 1150,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Qeqertaq (76.29,-61.88)-Greenland",
+      "known_aliases": [
+        "Qeqertaq",
+        "qeqertaq",
+        "nunniffiit thule",
+        "Nunniffiit Thule"
+      ],
+      "latest_year": 1600,
+      "name": "Qeqertaq",
+      "reason": "missing_entry",
+      "region": "cc1_greenland_missions_1763",
+      "sample_years": [
+        1150,
+        1350,
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        77.2167,
+        -67.6583
+      ],
+      "country": "Greenland",
+      "earliest_year": 1150,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Qingartusaassuaq-Greenland",
+      "known_aliases": [
+        "Qingartusaassuaq",
+        "qingartusaassuaq",
+        "nunniffiit thule",
+        "Nunniffiit Thule"
+      ],
+      "latest_year": 1600,
+      "name": "Qingartusaassuaq",
+      "reason": "missing_entry",
+      "region": "cc1_greenland_missions_1763",
+      "sample_years": [
+        1150,
+        1350,
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        64.36466,
+        -51.35681
+      ],
+      "country": "Greenland",
+      "earliest_year": 1150,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Qinngorliit-Greenland",
+      "known_aliases": [
+        "Qinngorliit",
+        "qinngorliit",
+        "nunniffiit thule",
+        "Nunniffiit Thule"
+      ],
+      "latest_year": 1600,
+      "name": "Qinngorliit",
+      "reason": "missing_entry",
+      "region": "cc1_greenland_missions_1763",
+      "sample_years": [
+        1150,
+        1350,
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        71.54167,
+        -54.95833
+      ],
+      "country": "Greenland",
+      "earliest_year": 1150,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Qinnivik-Greenland",
+      "known_aliases": [
+        "Qinnivik",
+        "qinnivik",
+        "nunniffiit thule",
+        "tartuusaq",
+        "Nunniffiit Thule"
+      ],
+      "latest_year": 1600,
+      "name": "Qinnivik",
+      "reason": "missing_entry",
+      "region": "cc1_greenland_missions_1763",
+      "sample_years": [
+        1150,
+        1350,
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        83.10625,
+        -32.89238
+      ],
+      "country": "Greenland",
+      "earliest_year": 1150,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Qissivik-Greenland",
+      "known_aliases": [
+        "Qissivik",
+        "qissivik",
+        "nunniffiit thule",
+        "Nunniffiit Thule"
+      ],
+      "latest_year": 1600,
+      "name": "Qissivik",
+      "reason": "missing_entry",
+      "region": "cc1_greenland_missions_1763",
+      "sample_years": [
+        1150,
+        1350,
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        69.54167,
+        -50.79167
+      ],
+      "country": "Greenland",
+      "earliest_year": 1150,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Qitermiut-Greenland",
+      "known_aliases": [
+        "Qitermiut",
+        "qitermiut",
+        "nunniffiit thule",
+        "Nunniffiit Thule"
+      ],
+      "latest_year": 1600,
+      "name": "Qitermiut",
+      "reason": "missing_entry",
+      "region": "cc1_greenland_missions_1763",
+      "sample_years": [
+        1150,
+        1350,
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.525,
+        -127.6167
+      ],
+      "country": "Canada",
+      "earliest_year": 500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Quatsino-Canada",
+      "known_aliases": [
+        "Quatsino",
+        "quatsino",
+        "quatsino sound",
+        "kwakwaka'wakw",
+        "edsw-1",
+        "Quatsino Sound",
+        "Kwakwaka'wakw",
+        "EdSw-1"
+      ],
+      "latest_year": 1600,
+      "name": "Quatsino",
+      "reason": "missing_entry",
+      "region": "cc1_pacific_mackenzie_indigenous",
+      "sample_years": [
+        500,
+        1200,
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        77.625,
+        -67.70833
+      ],
+      "country": "Greenland",
+      "earliest_year": 1150,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Quinnisut-Greenland",
+      "known_aliases": [
+        "Quinnisut",
+        "quinnisut",
+        "nunniffiit thule",
+        "Nunniffiit Thule"
+      ],
+      "latest_year": 1600,
+      "name": "Quinnisut",
+      "reason": "missing_entry",
+      "region": "cc1_greenland_missions_1763",
+      "sample_years": [
+        1150,
+        1350,
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        61.70833,
+        -42.45833
+      ],
+      "country": "Greenland",
+      "earliest_year": 1500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Qulliit-Greenland",
+      "known_aliases": [
+        "Qulliit",
+        "qulliit",
+        "nunniffiit thule",
+        "Nunniffiit Thule"
+      ],
+      "latest_year": 1600,
+      "name": "Qulliit",
+      "reason": "missing_entry",
+      "region": "cc1_greenland_missions_1763",
+      "sample_years": [
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        70.0334,
+        -52.9313
+      ],
+      "country": "Greenland",
+      "earliest_year": 1150,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Qullissat-Greenland",
+      "known_aliases": [
+        "Qullissat",
+        "qullissat",
+        "nunniffiit thule",
+        "Nunniffiit Thule"
+      ],
+      "latest_year": 1600,
+      "name": "Qullissat",
+      "reason": "missing_entry",
+      "region": "cc1_greenland_missions_1763",
+      "sample_years": [
+        1150,
+        1350,
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        67.55,
+        -138.35
+      ],
+      "country": "Canada",
+      "earliest_year": 0,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rat Indian Creek-Canada",
+      "known_aliases": [
+        "Rat Indian Creek",
+        "rat indian creek",
+        "old crow basin",
+        "porcupine river",
+        "mjvg-1",
+        "Old Crow Basin",
+        "Porcupine River",
+        "MjVg-1"
+      ],
+      "latest_year": 1600,
+      "name": "Rat Indian Creek",
+      "reason": "missing_entry",
+      "region": "cc1_pacific_mackenzie_indigenous",
+      "sample_years": [
+        0,
+        800,
+        1400,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

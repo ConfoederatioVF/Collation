@@ -1,0 +1,957 @@
+{
+  "batch_index": 142,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        45.31214,
+        -110.80801
+      ],
+      "country": "Montana",
+      "earliest_year": 1879,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "South Glastonbury-Montana",
+      "known_aliases": [
+        "South Glastonbury",
+        "south glastonbury",
+        "south glastonbury cdp",
+        "South Glastonbury CDP"
+      ],
+      "latest_year": 2020,
+      "name": "South Glastonbury",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1879,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.83418,
+        -115.58367
+      ],
+      "country": "Montana",
+      "earliest_year": 1870,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Trout Creek-Montana",
+      "known_aliases": [
+        "Trout Creek",
+        "trout creek",
+        "trout creek cdp",
+        "Trout Creek CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Trout Creek",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1870,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.24625,
+        -107.75117
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1947,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Nageezi-New Mexico",
+      "known_aliases": [
+        "Nageezi",
+        "nageezi",
+        "nageezi cdp",
+        "Nageezi CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Nageezi",
+      "reason": "missing_entry",
+      "region": "usa_new_mexico",
+      "sample_years": [
+        1947,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.12492,
+        -105.78446
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1875,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ojo Sarco-New Mexico",
+      "known_aliases": [
+        "Ojo Sarco",
+        "ojo sarco",
+        "ojo sarco cdp",
+        "Ojo Sarco CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Ojo Sarco",
+      "reason": "missing_entry",
+      "region": "usa_new_mexico",
+      "sample_years": [
+        1875,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.43399,
+        -78.01723
+      ],
+      "country": "North Carolina",
+      "earliest_year": 1916,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Long Creek-North Carolina",
+      "known_aliases": [
+        "Long Creek",
+        "long creek",
+        "long creek cdp",
+        "Long Creek CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Long Creek",
+      "reason": "missing_entry",
+      "region": "usa_north_carolina",
+      "sample_years": [
+        1916,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        31.97976,
+        -98.9247
+      ],
+      "country": "Texas",
+      "earliest_year": 1911,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "May-Texas",
+      "known_aliases": [
+        "May",
+        "may",
+        "may cdp",
+        "May CDP"
+      ],
+      "latest_year": 2020,
+      "name": "May",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1911,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.68708,
+        -110.98663
+      ],
+      "country": "Wyoming",
+      "earliest_year": 1880,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fairview-Wyoming",
+      "known_aliases": [
+        "Fairview",
+        "fairview",
+        "fairview cdp",
+        "Fairview CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Fairview",
+      "reason": "missing_entry",
+      "region": "usa_wyoming",
+      "sample_years": [
+        1880,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.4162,
+        -88.66416
+      ],
+      "country": "Illinois",
+      "earliest_year": 1876,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Chemung-Illinois",
+      "known_aliases": [
+        "Chemung",
+        "chemung",
+        "chemung cdp",
+        "Chemung CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Chemung",
+      "reason": "missing_entry",
+      "region": "usa_illinois",
+      "sample_years": [
+        1876,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.44689,
+        -76.61273
+      ],
+      "country": "North Carolina",
+      "earliest_year": 1864,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sunbury-North Carolina",
+      "known_aliases": [
+        "Sunbury",
+        "sunbury",
+        "sunbury cdp",
+        "Sunbury CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Sunbury",
+      "reason": "missing_entry",
+      "region": "usa_north_carolina",
+      "sample_years": [
+        1864,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.12318,
+        -95.17315
+      ],
+      "country": "Oklahoma",
+      "earliest_year": 1890,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cedar Crest-Oklahoma",
+      "known_aliases": [
+        "Cedar Crest",
+        "cedar crest",
+        "cedar crest cdp",
+        "Cedar Crest CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Cedar Crest",
+      "reason": "missing_entry",
+      "region": "usa_oklahoma",
+      "sample_years": [
+        1890,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.01376,
+        -100.57572
+      ],
+      "country": "South Dakota",
+      "earliest_year": 1886,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sicangu Village-South Dakota",
+      "known_aliases": [
+        "Sicangu Village",
+        "sicangu village",
+        "sicangu village cdp",
+        "Sicangu Village CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Sicangu Village",
+      "reason": "missing_entry",
+      "region": "usa_south_dakota",
+      "sample_years": [
+        1886,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.77356,
+        -98.30204
+      ],
+      "country": "Texas",
+      "earliest_year": 1951,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Palo Pinto-Texas",
+      "known_aliases": [
+        "Palo Pinto",
+        "palo pinto",
+        "palo pinto cdp",
+        "Palo Pinto CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Palo Pinto",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1951,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.68323,
+        -77.02976
+      ],
+      "country": "Virginia",
+      "earliest_year": 1952,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "King William-Virginia",
+      "known_aliases": [
+        "King William",
+        "king william",
+        "king william cdp",
+        "King William CDP"
+      ],
+      "latest_year": 2020,
+      "name": "King William",
+      "reason": "missing_entry",
+      "region": "usa_virginia",
+      "sample_years": [
+        1952,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.41683,
+        -118.53911
+      ],
+      "country": "California",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mesa-California",
+      "known_aliases": [
+        "Mesa",
+        "mesa",
+        "mesa cdp",
+        "Mesa CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Mesa",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.32466,
+        -120.84966
+      ],
+      "country": "California",
+      "earliest_year": 1928,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Stevinson-California",
+      "known_aliases": [
+        "Stevinson",
+        "stevinson",
+        "stevinson cdp",
+        "Stevinson CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Stevinson",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1928,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.53713,
+        -93.66041
+      ],
+      "country": "Missouri",
+      "earliest_year": 1947,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Golden-Missouri",
+      "known_aliases": [
+        "Golden",
+        "golden",
+        "golden cdp",
+        "Golden CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Golden",
+      "reason": "missing_entry",
+      "region": "usa_missouri",
+      "sample_years": [
+        1947,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.1328,
+        -74.47379
+      ],
+      "country": "New York",
+      "earliest_year": 1945,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pine Hill-New York",
+      "known_aliases": [
+        "Pine Hill",
+        "pine hill",
+        "pine hill cdp",
+        "Pine Hill CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Pine Hill",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1945,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.41303,
+        -76.31971
+      ],
+      "country": "North Carolina",
+      "earliest_year": 1855,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Swan Quarter-North Carolina",
+      "known_aliases": [
+        "Swan Quarter",
+        "swan quarter",
+        "swan quarter cdp",
+        "Swan Quarter CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Swan Quarter",
+      "reason": "missing_entry",
+      "region": "usa_north_carolina",
+      "sample_years": [
+        1855,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        30.78736,
+        -96.72232
+      ],
+      "country": "Texas",
+      "earliest_year": 1887,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Gause-Texas",
+      "known_aliases": [
+        "Gause",
+        "gause",
+        "gause cdp",
+        "Gause CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Gause",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1887,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.72275,
+        -88.06588
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1884,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sobieski-Wisconsin",
+      "known_aliases": [
+        "Sobieski",
+        "sobieski",
+        "sobieski cdp",
+        "Sobieski CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Sobieski",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1884,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.01887,
+        -105.40767
+      ],
+      "country": "Colorado",
+      "earliest_year": 1960,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sugarloaf-Colorado",
+      "known_aliases": [
+        "Sugarloaf",
+        "sugarloaf",
+        "sugarloaf cdp",
+        "Sugarloaf CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Sugarloaf",
+      "reason": "missing_entry",
+      "region": "usa_colorado",
+      "sample_years": [
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.85517,
+        -87.41934
+      ],
+      "country": "Kentucky",
+      "earliest_year": 1886,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Spottsville-Kentucky",
+      "known_aliases": [
+        "Spottsville",
+        "spottsville",
+        "spottsville cdp",
+        "Spottsville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Spottsville",
+      "reason": "missing_entry",
+      "region": "usa_kentucky",
+      "sample_years": [
+        1886,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.33227,
+        -82.58242
+      ],
+      "country": "Kentucky",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Virgie-Kentucky",
+      "known_aliases": [
+        "Virgie",
+        "virgie",
+        "virgie cdp",
+        "Virgie CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Virgie",
+      "reason": "missing_entry",
+      "region": "usa_kentucky",
+      "sample_years": [
+        1950,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.3883,
+        -95.52437
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1965,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rice Lake (Clearwater County)-Minnesota",
+      "known_aliases": [
+        "Rice Lake (Clearwater County)",
+        "rice lake",
+        "rice lake cdp",
+        "Rice Lake CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Rice Lake (Clearwater County)",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1965,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        31.96685,
+        -88.72394
+      ],
+      "country": "Mississippi",
+      "earliest_year": 1905,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "De Soto-Mississippi",
+      "known_aliases": [
+        "De Soto",
+        "de soto",
+        "de soto cdp",
+        "De Soto CDP"
+      ],
+      "latest_year": 2020,
+      "name": "De Soto",
+      "reason": "missing_entry",
+      "region": "usa_mississippi",
+      "sample_years": [
+        1905,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.58366,
+        -88.60248
+      ],
+      "country": "Mississippi",
+      "earliest_year": 1867,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Wheeler-Mississippi",
+      "known_aliases": [
+        "Wheeler",
+        "wheeler",
+        "wheeler cdp",
+        "Wheeler CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Wheeler",
+      "reason": "missing_entry",
+      "region": "usa_mississippi",
+      "sample_years": [
+        1867,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.56652,
+        -76.13287
+      ],
+      "country": "New York",
+      "earliest_year": 1871,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Blodgett Mills-New York",
+      "known_aliases": [
+        "Blodgett Mills",
+        "blodgett mills",
+        "blodgett mills cdp",
+        "Blodgett Mills CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Blodgett Mills",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1871,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.79274,
+        -80.53595
+      ],
+      "country": "Ohio",
+      "earliest_year": 1891,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Negley-Ohio",
+      "known_aliases": [
+        "Negley",
+        "negley",
+        "negley cdp",
+        "Negley CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Negley",
+      "reason": "missing_entry",
+      "region": "usa_ohio",
+      "sample_years": [
+        1891,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.30073,
+        -80.15832
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1859,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hendersonville-Pennsylvania",
+      "known_aliases": [
+        "Hendersonville",
+        "hendersonville",
+        "hendersonville cdp",
+        "Hendersonville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Hendersonville",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1859,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.87861,
+        -76.40472
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1890,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Numidia-Pennsylvania",
+      "known_aliases": [
+        "Numidia",
+        "numidia",
+        "numidia cdp",
+        "Numidia CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Numidia",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1890,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

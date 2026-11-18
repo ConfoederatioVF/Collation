@@ -1,0 +1,958 @@
+{
+  "batch_index": 102,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        40.91792,
+        -80.60067
+      ],
+      "country": "Ohio",
+      "earliest_year": 1860,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "New Springfield-Ohio",
+      "known_aliases": [
+        "New Springfield",
+        "new springfield",
+        "new springfield cdp",
+        "New Springfield CDP"
+      ],
+      "latest_year": 2020,
+      "name": "New Springfield",
+      "reason": "missing_entry",
+      "region": "usa_ohio",
+      "sample_years": [
+        1860,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.59553,
+        -80.79945
+      ],
+      "country": "South Carolina",
+      "earliest_year": 1882,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sheldon-South Carolina",
+      "known_aliases": [
+        "Sheldon",
+        "sheldon",
+        "sheldon cdp",
+        "Sheldon CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Sheldon",
+      "reason": "missing_entry",
+      "region": "usa_south_carolina",
+      "sample_years": [
+        1882,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.5954,
+        -86.99249
+      ],
+      "country": "Kentucky",
+      "earliest_year": 1892,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pleasant Ridge-Kentucky",
+      "known_aliases": [
+        "Pleasant Ridge",
+        "pleasant ridge",
+        "pleasant ridge cdp",
+        "Pleasant Ridge CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Pleasant Ridge",
+      "reason": "missing_entry",
+      "region": "usa_kentucky",
+      "sample_years": [
+        1892,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.12683,
+        -86.34469
+      ],
+      "country": "Michigan",
+      "earliest_year": 1852,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Millburg-Michigan",
+      "known_aliases": [
+        "Millburg",
+        "millburg",
+        "millburg cdp",
+        "Millburg CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Millburg",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1852,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.79117,
+        -105.9432
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Peak Place-New Mexico",
+      "known_aliases": [
+        "Peak Place",
+        "peak place",
+        "peak place cdp",
+        "Peak Place CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Peak Place",
+      "reason": "missing_entry",
+      "region": "usa_new_mexico",
+      "sample_years": [
+        1950,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.90051,
+        -75.73038
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1873,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Unionville (Chester County)-Pennsylvania",
+      "known_aliases": [
+        "Unionville (Chester County)",
+        "unionville",
+        "unionville cdp",
+        "Unionville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Unionville (Chester County)",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1873,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.10699,
+        -111.73071
+      ],
+      "country": "Utah",
+      "earliest_year": 1922,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Enterprise (Morgan County)-Utah",
+      "known_aliases": [
+        "Enterprise (Morgan County)",
+        "enterprise",
+        "enterprise cdp",
+        "Enterprise CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Enterprise (Morgan County)",
+      "reason": "missing_entry",
+      "region": "usa_utah",
+      "sample_years": [
+        1922,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.34613,
+        -110.80115
+      ],
+      "country": "Arizona",
+      "earliest_year": 1961,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Icehouse Canyon-Arizona",
+      "known_aliases": [
+        "Icehouse Canyon",
+        "icehouse canyon",
+        "icehouse canyon cdp",
+        "Icehouse Canyon CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Icehouse Canyon",
+      "reason": "missing_entry",
+      "region": "usa_arizona",
+      "sample_years": [
+        1961,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        28.00549,
+        -97.55349
+      ],
+      "country": "Texas",
+      "earliest_year": 1883,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Morgan Farm-Texas",
+      "known_aliases": [
+        "Morgan Farm",
+        "morgan farm",
+        "morgan farm cdp",
+        "morgan farm area",
+        "Morgan Farm CDP",
+        "Morgan Farm Area"
+      ],
+      "latest_year": 2020,
+      "name": "Morgan Farm",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1883,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.14143,
+        -77.71619
+      ],
+      "country": "North Carolina",
+      "earliest_year": 1933,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Deep Run-North Carolina",
+      "known_aliases": [
+        "Deep Run",
+        "deep run",
+        "deep run cdp",
+        "Deep Run CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Deep Run",
+      "reason": "missing_entry",
+      "region": "usa_north_carolina",
+      "sample_years": [
+        1933,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.50699,
+        -85.69899
+      ],
+      "country": "Kentucky",
+      "earliest_year": 1901,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Buffalo-Kentucky",
+      "known_aliases": [
+        "Buffalo",
+        "buffalo",
+        "buffalo cdp",
+        "Buffalo CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Buffalo",
+      "reason": "missing_entry",
+      "region": "usa_kentucky",
+      "sample_years": [
+        1901,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.3476,
+        -119.07937
+      ],
+      "country": "California",
+      "earliest_year": 1906,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Olde Stockdale-California",
+      "known_aliases": [
+        "Olde Stockdale",
+        "olde stockdale",
+        "olde stockdale cdp",
+        "Olde Stockdale CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Olde Stockdale",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1906,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.68895,
+        -79.51772
+      ],
+      "country": "North Carolina",
+      "earliest_year": 1892,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Scotch Meadows-North Carolina",
+      "known_aliases": [
+        "Scotch Meadows",
+        "scotch meadows",
+        "scotch meadows cdp",
+        "Scotch Meadows CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Scotch Meadows",
+      "reason": "missing_entry",
+      "region": "usa_north_carolina",
+      "sample_years": [
+        1892,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.13213,
+        -75.57367
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1926,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kimberton-Pennsylvania",
+      "known_aliases": [
+        "Kimberton",
+        "kimberton",
+        "kimberton cdp",
+        "Kimberton CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Kimberton",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1926,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.93425,
+        -75.5306
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1860,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cheyney University-Pennsylvania",
+      "known_aliases": [
+        "Cheyney University",
+        "cheyney university",
+        "cheyney university cdp",
+        "Cheyney University CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Cheyney University",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1860,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        25.76173,
+        -80.14228
+      ],
+      "country": "Florida",
+      "earliest_year": 1917,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fisher Island-Florida",
+      "known_aliases": [
+        "Fisher Island",
+        "fisher island",
+        "fisher island cdp",
+        "Fisher Island CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Fisher Island",
+      "reason": "missing_entry",
+      "region": "usa_florida",
+      "sample_years": [
+        1917,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.3971,
+        -103.60461
+      ],
+      "country": "South Dakota",
+      "earliest_year": 1958,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Boulder Canyon-South Dakota",
+      "known_aliases": [
+        "Boulder Canyon",
+        "boulder canyon",
+        "boulder canyon cdp",
+        "Boulder Canyon CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Boulder Canyon",
+      "reason": "missing_entry",
+      "region": "usa_south_dakota",
+      "sample_years": [
+        1958,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.3319,
+        -85.20005
+      ],
+      "country": "Tennessee",
+      "earliest_year": 1956,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Flat Top Mountain-Tennessee",
+      "known_aliases": [
+        "Flat Top Mountain",
+        "flat top mountain",
+        "flat top mountain cdp",
+        "Flat Top Mountain CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Flat Top Mountain",
+      "reason": "missing_entry",
+      "region": "usa_tennessee",
+      "sample_years": [
+        1956,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.78192,
+        -82.45554
+      ],
+      "country": "North Carolina",
+      "earliest_year": 1879,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Barnardsville-North Carolina",
+      "known_aliases": [
+        "Barnardsville",
+        "barnardsville",
+        "barnardsville cdp",
+        "Barnardsville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Barnardsville",
+      "reason": "missing_entry",
+      "region": "usa_north_carolina",
+      "sample_years": [
+        1879,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.15606,
+        -121.32799
+      ],
+      "country": "Oregon",
+      "earliest_year": 1898,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tumalo-Oregon",
+      "known_aliases": [
+        "Tumalo",
+        "tumalo",
+        "tumalo cdp",
+        "Tumalo CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Tumalo",
+      "reason": "missing_entry",
+      "region": "usa_oregon",
+      "sample_years": [
+        1898,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        31.00125,
+        -87.87393
+      ],
+      "country": "Alabama",
+      "earliest_year": 1972,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Stockton-Alabama",
+      "known_aliases": [
+        "Stockton",
+        "stockton",
+        "stockton cdp",
+        "Stockton CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Stockton",
+      "reason": "missing_entry",
+      "region": "usa_alabama",
+      "sample_years": [
+        1972,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.11054,
+        -80.85708
+      ],
+      "country": "South Carolina",
+      "earliest_year": 1898,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Daufuskie Island-South Carolina",
+      "known_aliases": [
+        "Daufuskie Island",
+        "daufuskie island",
+        "daufuskie island cdp",
+        "Daufuskie Island CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Daufuskie Island",
+      "reason": "missing_entry",
+      "region": "usa_south_carolina",
+      "sample_years": [
+        1898,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.58231,
+        -90.60518
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1864,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kieler-Wisconsin",
+      "known_aliases": [
+        "Kieler",
+        "kieler",
+        "kieler cdp",
+        "Kieler CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Kieler",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1864,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.47094,
+        -110.81614
+      ],
+      "country": "Arizona",
+      "earliest_year": 1927,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Wheatfields-Arizona",
+      "known_aliases": [
+        "Wheatfields",
+        "wheatfields",
+        "wheatfields cdp",
+        "Wheatfields CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Wheatfields",
+      "reason": "missing_entry",
+      "region": "usa_arizona",
+      "sample_years": [
+        1927,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.74644,
+        -120.87381
+      ],
+      "country": "California",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cold Springs-California",
+      "known_aliases": [
+        "Cold Springs",
+        "cold springs",
+        "cold springs cdp",
+        "Cold Springs CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Cold Springs",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1850,
+        1860,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.86698,
+        -108.03314
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1877,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "North Light Plant-New Mexico",
+      "known_aliases": [
+        "North Light Plant",
+        "north light plant",
+        "north light plant cdp",
+        "North Light Plant CDP"
+      ],
+      "latest_year": 2020,
+      "name": "North Light Plant",
+      "reason": "missing_entry",
+      "region": "usa_new_mexico",
+      "sample_years": [
+        1877,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.45453,
+        -98.73919
+      ],
+      "country": "South Dakota",
+      "earliest_year": 1973,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mina-South Dakota",
+      "known_aliases": [
+        "Mina",
+        "mina",
+        "mina cdp",
+        "Mina CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Mina",
+      "reason": "missing_entry",
+      "region": "usa_south_dakota",
+      "sample_years": [
+        1973,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.86185,
+        -84.47714
+      ],
+      "country": "Michigan",
+      "earliest_year": 1871,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pittsford-Michigan",
+      "known_aliases": [
+        "Pittsford",
+        "pittsford",
+        "pittsford cdp",
+        "Pittsford CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Pittsford",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1871,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.35473,
+        -124.094
+      ],
+      "country": "Oregon",
+      "earliest_year": 1882,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "San Marine-Oregon",
+      "known_aliases": [
+        "San Marine",
+        "san marine",
+        "san marine cdp",
+        "San Marine CDP"
+      ],
+      "latest_year": 2020,
+      "name": "San Marine",
+      "reason": "missing_entry",
+      "region": "usa_oregon",
+      "sample_years": [
+        1882,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        30.68151,
+        -83.31095
+      ],
+      "country": "Georgia",
+      "earliest_year": 1892,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Clyattville-Georgia",
+      "known_aliases": [
+        "Clyattville",
+        "clyattville",
+        "clyattville cdp",
+        "Clyattville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Clyattville",
+      "reason": "missing_entry",
+      "region": "usa_georgia",
+      "sample_years": [
+        1892,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

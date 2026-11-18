@@ -1,0 +1,917 @@
+{
+  "batch_index": 38,
+  "project": "CENTAUR",
+  "count": 30,
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        52.83338,
+        -106.50114
+      ],
+      "country": "Canada",
+      "earliest_year": 1810,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fort Carlton-Canada",
+      "known_aliases": [
+        "Fort Carlton",
+        "fort carlton",
+        "carlton house",
+        "Carlton House"
+      ],
+      "latest_year": 1861,
+      "name": "Fort Carlton",
+      "reason": "missing_entry",
+      "region": "cc2_ruperts_land_prairies",
+      "sample_years": [
+        1810,
+        1831,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.4489,
+        -101.30511
+      ],
+      "country": "Canada",
+      "earliest_year": 1831,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fort Ellice-Canada",
+      "known_aliases": [
+        "Fort Ellice",
+        "fort ellice",
+        "beaver creek post",
+        "Beaver Creek Post"
+      ],
+      "latest_year": 1867,
+      "name": "Fort Ellice",
+      "reason": "missing_entry",
+      "region": "cc2_red_river_assiniboia",
+      "sample_years": [
+        1831,
+        1851,
+        1861,
+        1867
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        53.6451,
+        -109.7551
+      ],
+      "country": "Canada",
+      "earliest_year": 1830,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fort Pitt Native Post-Canada",
+      "known_aliases": [
+        "Fort Pitt Native Post",
+        "fort pitt native post",
+        "north saskatchewan river cree settlement",
+        "North Saskatchewan River Cree Settlement"
+      ],
+      "latest_year": 1860,
+      "name": "Fort Pitt Native Post",
+      "reason": "missing_entry",
+      "region": "cc2_ruperts_land_prairies",
+      "sample_years": [
+        1830,
+        1860
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.7021,
+        -127.4081
+      ],
+      "country": "Canada",
+      "earliest_year": 1849,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fort Rupert Native Town-Canada",
+      "known_aliases": [
+        "Fort Rupert Native Town",
+        "fort rupert native town",
+        "tsaxis",
+        "kwakiutl vancouver island center",
+        "Tsaxis",
+        "Kwakiutl Vancouver Island Center"
+      ],
+      "latest_year": 1865,
+      "name": "Fort Rupert Native Town",
+      "reason": "missing_entry",
+      "region": "cc2_british_columbia_vancouver_isl",
+      "sample_years": [
+        1849,
+        1855,
+        1865
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.29167,
+        -83.875
+      ],
+      "country": "Canada",
+      "earliest_year": 1796,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fort St. Joseph-Canada",
+      "known_aliases": [
+        "Fort St. Joseph",
+        "fort st. joseph",
+        "st. joseph island",
+        "michilimackinac successor post",
+        "St. Joseph Island",
+        "Michilimackinac Successor Post"
+      ],
+      "latest_year": 1828,
+      "name": "Fort St. Joseph",
+      "reason": "missing_entry",
+      "region": "cc2_upper_canada_ontario",
+      "sample_years": [
+        1796,
+        1812,
+        1828
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        49.61664,
+        -115.63538
+      ],
+      "country": "Canada",
+      "earliest_year": 1864,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fort Steele-Canada",
+      "known_aliases": [
+        "Fort Steele",
+        "fort steele",
+        "galbraith's ferry",
+        "wild horse creek",
+        "Galbraith's Ferry",
+        "Wild Horse Creek"
+      ],
+      "latest_year": 1867,
+      "name": "Fort Steele",
+      "reason": "missing_entry",
+      "region": "cc2_british_columbia_vancouver_isl",
+      "sample_years": [
+        1864,
+        1867
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        62.83031,
+        -136.58134
+      ],
+      "country": "Canada",
+      "earliest_year": 1848,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fort Yukon-Pelley-Canada",
+      "known_aliases": [
+        "Fort Yukon-Pelley",
+        "fort yukon-pelley",
+        "fort selkirk",
+        "pelly banks",
+        "Fort Selkirk",
+        "Pelly Banks"
+      ],
+      "latest_year": 1861,
+      "name": "Fort Yukon-Pelley",
+      "reason": "missing_entry",
+      "region": "cc2_north_western_territory_arctic",
+      "sample_years": [
+        1848,
+        1852,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.20012,
+        -77.59948
+      ],
+      "country": "Canada",
+      "earliest_year": 1810,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Frankford-Canada",
+      "known_aliases": [
+        "Frankford",
+        "frankford",
+        "sidney",
+        "Sidney"
+      ],
+      "latest_year": 1861,
+      "name": "Frankford",
+      "reason": "missing_entry",
+      "region": "cc2_upper_canada_ontario",
+      "sample_years": [
+        1810,
+        1831,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        55.4451,
+        -128.0851
+      ],
+      "country": "Canada",
+      "earliest_year": 1800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Gitanyow-Canada",
+      "known_aliases": [
+        "Gitanyow",
+        "gitanyow",
+        "kitwancool gitxsan town",
+        "Kitwancool Gitxsan Town"
+      ],
+      "latest_year": 1850,
+      "name": "Gitanyow",
+      "reason": "missing_entry",
+      "region": "cc2_british_columbia_vancouver_isl",
+      "sample_years": [
+        1800,
+        1850
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        55.2151,
+        -129.2851
+      ],
+      "country": "Canada",
+      "earliest_year": 1800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Gitlaxzillkx-Canada",
+      "known_aliases": [
+        "Gitlaxzillkx",
+        "gitlaxzillkx",
+        "nass river nisga'a town",
+        "Nass River Nisga'a Town"
+      ],
+      "latest_year": 1850,
+      "name": "Gitlaxzillkx",
+      "reason": "missing_entry",
+      "region": "cc2_british_columbia_vancouver_isl",
+      "sample_years": [
+        1800,
+        1850
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        55.2351,
+        -129.1851
+      ],
+      "country": "Canada",
+      "earliest_year": 1800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Gitwinksihlkw-Canada",
+      "known_aliases": [
+        "Gitwinksihlkw",
+        "gitwinksihlkw",
+        "canyon city nisga'a town",
+        "Canyon City Nisga'a Town"
+      ],
+      "latest_year": 1850,
+      "name": "Gitwinksihlkw",
+      "reason": "missing_entry",
+      "region": "cc2_british_columbia_vancouver_isl",
+      "sample_years": [
+        1800,
+        1850
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.6051,
+        -77.3851
+      ],
+      "country": "Canada",
+      "earliest_year": 1820,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Golden Lake Native Settlement-Canada",
+      "known_aliases": [
+        "Golden Lake Native Settlement",
+        "golden lake native settlement",
+        "pikwakanagan algonquin settlement",
+        "Pikwakanagan Algonquin Settlement"
+      ],
+      "latest_year": 1861,
+      "name": "Golden Lake Native Settlement",
+      "reason": "missing_entry",
+      "region": "cc2_lower_canada_quebec",
+      "sample_years": [
+        1820,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        55.52028,
+        -116.16111
+      ],
+      "country": "Canada",
+      "earliest_year": 1802,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Grouard-Canada",
+      "known_aliases": [
+        "Grouard",
+        "grouard",
+        "lesser slave lake post",
+        "Lesser Slave Lake Post"
+      ],
+      "latest_year": 1861,
+      "name": "Grouard",
+      "reason": "missing_entry",
+      "region": "cc2_north_western_territory_arctic",
+      "sample_years": [
+        1802,
+        1825,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.96681,
+        -80.04965
+      ],
+      "country": "Canada",
+      "earliest_year": 1840,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hagersville-Canada",
+      "known_aliases": [
+        "Hagersville",
+        "hagersville",
+        "walpole on",
+        "Walpole ON"
+      ],
+      "latest_year": 1861,
+      "name": "Hagersville",
+      "reason": "missing_entry",
+      "region": "cc2_upper_canada_ontario",
+      "sample_years": [
+        1840,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.40012,
+        -76.66611
+      ],
+      "country": "Canada",
+      "earliest_year": 1825,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Harrowsmith-Canada",
+      "known_aliases": [
+        "Harrowsmith",
+        "harrowsmith",
+        "portland frontenac",
+        "Portland Frontenac"
+      ],
+      "latest_year": 1861,
+      "name": "Harrowsmith",
+      "reason": "missing_entry",
+      "region": "cc2_lower_canada_quebec",
+      "sample_years": [
+        1825,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.30013,
+        -77.94951
+      ],
+      "country": "Canada",
+      "earliest_year": 1820,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hastings-Canada",
+      "known_aliases": [
+        "Hastings",
+        "hastings",
+        "crooks' rapids",
+        "Crooks' Rapids"
+      ],
+      "latest_year": 1861,
+      "name": "Hastings",
+      "reason": "missing_entry",
+      "region": "cc2_upper_canada_ontario",
+      "sample_years": [
+        1820,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.43342,
+        -77.88281
+      ],
+      "country": "Canada",
+      "earliest_year": 1851,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Havelock-Canada_2",
+      "known_aliases": [
+        "Havelock",
+        "havelock",
+        "belmont and methuen",
+        "Belmont and Methuen"
+      ],
+      "latest_year": 1867,
+      "name": "Havelock",
+      "reason": "missing_entry",
+      "region": "cc2_upper_canada_ontario",
+      "sample_years": [
+        1851,
+        1861,
+        1867
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        49.45833,
+        -126.45833
+      ],
+      "country": "Canada",
+      "earliest_year": 1790,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hesquiaht Native Town-Canada",
+      "known_aliases": [
+        "Hesquiaht Native Town",
+        "hesquiaht native town",
+        "hesquiaht harbour nuu-chah-nulth center",
+        "Hesquiaht Harbour Nuu-chah-nulth Center"
+      ],
+      "latest_year": 1850,
+      "name": "Hesquiaht Native Town",
+      "reason": "missing_entry",
+      "region": "cc2_british_columbia_vancouver_isl",
+      "sample_years": [
+        1790,
+        1850
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.21679,
+        -80.6997
+      ],
+      "country": "Canada",
+      "earliest_year": 1834,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Innerkip-Canada",
+      "known_aliases": [
+        "Innerkip",
+        "innerkip",
+        "east zorra north",
+        "East Zorra North"
+      ],
+      "latest_year": 1861,
+      "name": "Innerkip",
+      "reason": "missing_entry",
+      "region": "cc2_upper_canada_ontario",
+      "sample_years": [
+        1834,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.8501,
+        -75.31602
+      ],
+      "country": "Canada",
+      "earliest_year": 1784,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Iroquois-Canada",
+      "known_aliases": [
+        "Iroquois",
+        "iroquois",
+        "matilda",
+        "Matilda"
+      ],
+      "latest_year": 1861,
+      "name": "Iroquois",
+      "reason": "missing_entry",
+      "region": "cc2_lower_canada_quebec",
+      "sample_years": [
+        1784,
+        1825,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.1501,
+        -75.64935
+      ],
+      "country": "Canada",
+      "earliest_year": 1825,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kars-Canada_2",
+      "known_aliases": [
+        "Kars",
+        "kars",
+        "wellington rideau",
+        "Wellington Rideau"
+      ],
+      "latest_year": 1861,
+      "name": "Kars",
+      "reason": "missing_entry",
+      "region": "cc2_lower_canada_quebec",
+      "sample_years": [
+        1825,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.25012,
+        -78.16622
+      ],
+      "country": "Canada",
+      "earliest_year": 1825,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Keene-Canada",
+      "known_aliases": [
+        "Keene",
+        "keene",
+        "otonabee",
+        "Otonabee"
+      ],
+      "latest_year": 1861,
+      "name": "Keene",
+      "reason": "missing_entry",
+      "region": "cc2_upper_canada_ontario",
+      "sample_years": [
+        1825,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.79167,
+        -125.125
+      ],
+      "country": "Canada",
+      "earliest_year": 1790,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kiixin-Canada",
+      "known_aliases": [
+        "Kiixin",
+        "kiixin",
+        "barkley sound huu-ay-aht capital",
+        "Barkley Sound Huu-ay-aht Capital"
+      ],
+      "latest_year": 1850,
+      "name": "Kiixin",
+      "reason": "missing_entry",
+      "region": "cc2_british_columbia_vancouver_isl",
+      "sample_years": [
+        1790,
+        1850
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        53.7951,
+        -130.4351
+      ],
+      "country": "Canada",
+      "earliest_year": 1787,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kitkatla-Canada",
+      "known_aliases": [
+        "Kitkatla",
+        "kitkatla",
+        "gitxaala",
+        "dolphin island tsimshian town",
+        "Gitxaala",
+        "Dolphin Island Tsimshian Town"
+      ],
+      "latest_year": 1860,
+      "name": "Kitkatla",
+      "reason": "missing_entry",
+      "region": "cc2_british_columbia_vancouver_isl",
+      "sample_years": [
+        1787,
+        1835,
+        1860
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        54.1751,
+        -133.0251
+      ],
+      "country": "Canada",
+      "earliest_year": 1787,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kiusta Haida Town-Canada",
+      "known_aliases": [
+        "Kiusta Haida Town",
+        "kiusta haida town",
+        "graham island northwest town",
+        "Graham Island Northwest Town"
+      ],
+      "latest_year": 1835,
+      "name": "Kiusta Haida Town",
+      "reason": "missing_entry",
+      "region": "cc2_british_columbia_vancouver_isl",
+      "sample_years": [
+        1787,
+        1835
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        75.08533,
+        -57.22094
+      ],
+      "country": "Greenland",
+      "earliest_year": 1772,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kullorsuaq-Greenland_2",
+      "known_aliases": [
+        "Kullorsuaq",
+        "kullorsuaq",
+        "kuvdlorssuaq",
+        "Kuvdlorssuaq"
+      ],
+      "latest_year": 1860,
+      "name": "Kullorsuaq",
+      "reason": "missing_entry",
+      "region": "cc2_greenland_inspectorates",
+      "sample_years": [
+        1772,
+        1805,
+        1840,
+        1860
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.45,
+        -76.08333
+      ],
+      "country": "Canada",
+      "earliest_year": 1800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lansdowne-Canada",
+      "known_aliases": [
+        "Lansdowne",
+        "lansdowne",
+        "front of leeds",
+        "Front of Leeds"
+      ],
+      "latest_year": 1861,
+      "name": "Lansdowne",
+      "reason": "missing_entry",
+      "region": "cc2_lower_canada_quebec",
+      "sample_years": [
+        1800,
+        1831,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.26681,
+        -79.56633
+      ],
+      "country": "Canada",
+      "earliest_year": 1852,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lefroy-Canada",
+      "known_aliases": [
+        "Lefroy",
+        "lefroy",
+        "belle ewart",
+        "Belle Ewart"
+      ],
+      "latest_year": 1867,
+      "name": "Lefroy",
+      "reason": "missing_entry",
+      "region": "cc2_upper_canada_ontario",
+      "sample_years": [
+        1852,
+        1861,
+        1867
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.36675,
+        -71.86158
+      ],
+      "country": "Canada",
+      "earliest_year": 1819,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lennoxville-Canada",
+      "known_aliases": [
+        "Lennoxville",
+        "lennoxville",
+        "ascot forks",
+        "Ascot Forks"
+      ],
+      "latest_year": 1861,
+      "name": "Lennoxville",
+      "reason": "missing_entry",
+      "region": "cc2_lower_canada_quebec",
+      "sample_years": [
+        1819,
+        1831,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.1151,
+        -96.9351
+      ],
+      "country": "Canada",
+      "earliest_year": 1830,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lower Fort Garry-Canada",
+      "known_aliases": [
+        "Lower Fort Garry",
+        "lower fort garry",
+        "stone fort assiniboia",
+        "Stone Fort Assiniboia"
+      ],
+      "latest_year": 1867,
+      "name": "Lower Fort Garry",
+      "reason": "missing_entry",
+      "region": "cc2_red_river_assiniboia",
+      "sample_years": [
+        1830,
+        1856,
+        1867
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

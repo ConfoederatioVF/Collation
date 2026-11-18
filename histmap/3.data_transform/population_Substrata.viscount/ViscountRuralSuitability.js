@@ -1,7 +1,5 @@
 //Import modules
-let fs = global.fs || require("fs");
-let path = global.path || require("path");
-let { PNG } = global.pngjs || require("pngjs");
+let { ViscountUrbanMask } = global.ViscountUrbanMask ? global : require("./ViscountUrbanMask.js");
 
 //Initialise functions
 {
@@ -12,11 +10,75 @@ let { PNG } = global.pngjs || require("pngjs");
    * @class ViscountRuralSuitability
    */
   global.ViscountRuralSuitability = class {
-    static _uopp_cache = new Map();
+    /**
+     * Caps prehistoric intensity inside modern urban cores (`uopp_2023AD > 8.0`) to a ceiling multiple
+     * of the surrounding non-urban habitable ring (`3..7 px`) so modern CRM metropolitan salvage does not back-project.
+     * @alias ViscountRuralSuitability.capUrbanCoreToRuralRing
+     *
+     * @param {Object} arg0_mask_data
+     * @param {Float32Array} arg1_field
+     * @param {Float32Array} arg2_uopp_valid
+     * @param {number} [arg3_max_mult=1.15]
+     */
+    static capUrbanCoreFieldToRuralRing (arg0_mask_data, arg1_field, arg2_uopp_valid, arg3_max_mult) {
+      //Convert from parameters
+      let mask_data = arg0_mask_data;
+      let field = arg1_field;
+      let uopp_valid = arg2_uopp_valid;
+      let max_mult = (arg3_max_mult !== undefined) ? arg3_max_mult : 1.15;
+
+      //Guard clauses
+      if (!mask_data || !field || !uopp_valid) return;
+
+      //Declare local instance variables
+      let grid_h = mask_data.grid_height;
+      let grid_w = mask_data.grid_width;
+      let n_valid = mask_data.valid_cell_count;
+      let p2v = mask_data.pixel_to_valid_idx;
+      let rural_only = new Float32Array(n_valid);
+      let v_idx = mask_data.valid_indices;
+
+      //Function body
+      for (let i = 0; i < n_valid; i++)
+        if (field[i] > 0 && uopp_valid[i] <= 4.0)
+          rural_only[i] = field[i];
+
+      let rural_mean = this.smoothPositiveFieldOnGrid(mask_data, rural_only, 6);
+
+      for (let i = 0; i < n_valid; i++) {
+        if (field[i] <= 0 || uopp_valid[i] <= 8.0) continue;
+        let gidx = v_idx[i];
+        let cx = gidx % grid_w;
+        let cy = Math.floor(gidx/grid_w);
+        let ring_ref = rural_mean[i];
+
+        if (ring_ref <= 0) {
+          let acc = 0;
+          let cnt = 0;
+
+          for (let dy = -7; dy <= 7; dy++) {
+            let ny = cy + dy;
+
+            if (ny < 0 || ny >= grid_h) continue;
+            for (let dx = -7; dx <= 7; dx++) {
+              let nv = p2v[ny*grid_w + ((cx + dx + grid_w) % grid_w)];
+
+              if (nv >= 0 && field[nv] > 0 && uopp_valid[nv] <= 6.0) {
+                acc += field[nv];
+                cnt++;
+              }
+            }
+          }
+          if (cnt > 0) ring_ref = acc/cnt;
+        }
+        if (ring_ref > 0 && field[i] > ring_ref*max_mult)
+          field[i] = ring_ref*max_mult;
+      }
+    }
+
 
     /**
      * Computes composite de-cliffed urban-masked HYDE rural habitation `u_hab(x)` for a chronological period.
-     * When `preserve_period_dynamics === true` and period end `<= 1650 AD`, returns uniform `1.0` to avoid HYDE leakage.
      * @alias ViscountRuralSuitability.computeCompositeHabitationField
      *
      * @param {Object} arg0_mask_data
@@ -45,14 +107,7 @@ let { PNG } = global.pngjs || require("pngjs");
       let out = new Float32Array(n_valid);
       let p_end = Number.isFinite(period_cfg.approx_end_year) ? period_cfg.approx_end_year : period_cfg.end_year;
       let p_start = Number.isFinite(period_cfg.approx_start_year) ? period_cfg.approx_start_year : period_cfg.start_year;
-      let preserve_dyn = Boolean(config && config.kriging_config && config.kriging_config.preserve_period_dynamics);
       let rep_years = [];
-
-      //Guard clauses
-      if (preserve_dyn && Number.isFinite(p_end) && p_end <= 1650) {
-        out.fill(1.0);
-        return out;
-      }
 
       //Function body
       if (Number.isFinite(p_start) && Number.isFinite(p_end)) {
@@ -94,7 +149,6 @@ let { PNG } = global.pngjs || require("pngjs");
 
     /**
      * Computes within-partition de-cliffed urban-masked HYDE rural habitation `u_hab,t(x)` for year t.
-     * When `preserve_period_dynamics === true` and `year <= 1650`, returns uniform `1.0`.
      * @alias ViscountRuralSuitability.computeDeCliffedHabitationField
      *
      * @param {Object} arg0_mask_data
@@ -115,34 +169,55 @@ let { PNG } = global.pngjs || require("pngjs");
       let config = arg4_config;
       let hab_cache = arg5_hab_cache;
 
-      //Declare local instance variables
-      let cell_area = mask_data.cell_land_area;
-      let n_valid = mask_data.valid_cell_count;
-      let preserve_dyn = Boolean(config && config.kriging_config && config.kriging_config.preserve_period_dynamics);
-
       //Guard clauses
-      if (preserve_dyn && year <= 1650)
-        return new Float32Array(n_valid).fill(1.0);
       if (hab_cache && hab_cache.has(year)) return hab_cache.get(year);
 
-      let hab_ind = new Float32Array(n_valid);
+      //Declare local instance variables
+      let cell_area = mask_data.cell_land_area;
+      let dist_site_px = covs.dist_site_px;
+      let hab_ind = new Float32Array(mask_data.valid_cell_count);
+      let hab_mask = covs.hab_mask;
       let hyde_rur = this.loadUrbanMaskedHYDEPopcRaster(mask_data, year, hab_cache, config);
       let hyde_rur_1900 = covs.hyde_rur_1900;
+      let is_micro_island = (mask_data.valid_cell_count < 2000);
       let min_area = 0.75*mask_data.mean_cell_land_area_km2;
       let n_parts = covs.partition_count;
+      let n_valid = mask_data.valid_cell_count;
       let part_cnt = new Int32Array(n_parts);
       let part_id = covs.part_id;
       let part_sum = new Float64Array(n_parts);
+      let perm_ice = covs.perm_ice;
       let raw_sqrt = new Float32Array(n_valid);
+      let u_coastal = covs.u_coastal;
+      let u_fluvial = covs.u_fluvial;
       let u_hab = new Float32Array(n_valid);
+      let u_nat = covs.u_nat;
 
       //Function body
       for (let i = 0; i < n_valid; i++) {
+        let is_hab = hab_mask ? (hab_mask[i] === 1) : ((perm_ice && perm_ice[i] > 0.05) && (!dist_site_px || dist_site_px[i] <= 5.5));
+
+        if (!is_hab) continue;
         let local_area = Math.max(min_area, cell_area[i]);
         let d = (hyde_rur) ? hyde_rur[i]/local_area : 0;
+        let d_site = dist_site_px ? dist_site_px[i] : 99.0;
 
-        if (d <= 0 && hyde_rur_1900)
-          d = 0.08*(hyde_rur_1900[i]/local_area);
+        if (d < 0.002) {
+          if (is_micro_island) {
+            let r19 = hyde_rur_1900 ? (hyde_rur_1900[i]/local_area) : 0;
+            let bio = (0.55*u_fluvial[i] + 0.45*u_coastal[i])*u_nat[i];
+
+            d = Math.max(d, 0.22*r19 + 0.06*bio + 0.004);
+          } else if (d_site <= 5.5) {
+            let r19 = hyde_rur_1900 ? (hyde_rur_1900[i]/local_area) : 0;
+            let rad_taper = Math.exp(-0.55*d_site);
+            let oasis = Math.max(0.004, 0.10*r19 + 0.018*(0.65*u_fluvial[i] + 0.35*u_coastal[i]));
+
+            d = Math.max(d, rad_taper*oasis);
+          } else {
+            d = 0;
+          }
+        }
 
         if (d > 0) {
           let pid = part_id[i];
@@ -155,11 +230,11 @@ let { PNG } = global.pngjs || require("pngjs");
         }
       }
 
-      let f_smooth = this.smoothValidFieldOnGrid(mask_data, hab_ind, 3);
+      let f_smooth = this.smoothValidFieldOnGrid(mask_data, hab_ind, 2);
       let decliffed = this.smoothWithinPartitionPositive(mask_data, raw_sqrt, part_id, part_sum, part_cnt, 12);
 
       for (let i = 0; i < n_valid; i++)
-        if (decliffed[i] > 0)
+        if (raw_sqrt[i] > 0 && decliffed[i] > 0)
           u_hab[i] = Math.sqrt(Math.max(0, f_smooth[i]))*decliffed[i];
 
       if (hab_cache) hab_cache.set(year, u_hab);
@@ -172,7 +247,6 @@ let { PNG } = global.pngjs || require("pngjs");
     /**
      * Fits constrained NNLS covariates (`u_hab`, `u_nat`, `u_eco`, `u_fluvial`, `u_coastal`) per horizon
      * and computes high-sharpness within-macro contrast weights paired with palaeoglacial & ice-cap envelopes.
-     * When `preserve_period_dynamics === true && rep_year <= 1650`, zeroes HYDE covariate and applies `(m_cell/m_macro)^1.75`.
      * @alias ViscountRuralSuitability.computeResidualKrigingWeights
      *
      * @param {Object} arg0_mask_data
@@ -200,21 +274,21 @@ let { PNG } = global.pngjs || require("pngjs");
       //Declare local instance variables
       let apply_ice = Boolean(config && config.kriging_config && config.kriging_config.apply_ice_sheet_mask);
       let beta = new Float64Array(5);
+      let beta_prior = [0.30, 0.22, 0.12, 0.22, 0.14];
       let cell_area = mask_data.cell_land_area;
       let cell_obs = obs_bundle.cell_nearest_obs;
       let grid_h = mask_data.grid_height;
       let grid_w = mask_data.grid_width;
+      let hab_mask = covs.hab_mask;
       let m_cell = new Float32Array(mask_data.valid_cell_count);
+      let macro_rad = Math.max(7, Math.min(13, Math.round(0.70*meso_px)));
       let n_covs = 5;
       let n_obs = obs_bundle.obs_count;
       let n_valid = mask_data.valid_cell_count;
       let obs_list = obs_bundle.obs_list;
       let perm_ice = covs.perm_ice;
-      let preserve_dyn = Boolean(config && config.kriging_config && config.kriging_config.preserve_period_dynamics);
-      let pre_contact_bio = Boolean(preserve_dyn && rep_year <= 1650);
-      let macro_rad = pre_contact_bio ?
-        Math.max(4, Math.min(8, Math.round(0.45*meso_px))) :
-        Math.max(4, Math.min(10, Math.round(0.60*meso_px)));
+      let pos_u_cnt = 0;
+      let pos_u_sum = 0;
       let r_area = new Float64Array(n_obs);
       let r_covs = [
         new Float64Array(n_obs),
@@ -223,10 +297,12 @@ let { PNG } = global.pngjs || require("pngjs");
         new Float64Array(n_obs),
         new Float64Array(n_obs)
       ];
+      let total_dom_w = 0;
       let u_coastal = covs.u_coastal;
       let u_eco = covs.u_eco;
       let u_fluvial = covs.u_fluvial;
       let u_nat = covs.u_nat;
+      let uopp_valid = covs.uopp_valid;
       let v_idx = mask_data.valid_indices;
       let weights = new Float32Array(n_valid);
       let xtx = new Float64Array(25);
@@ -234,19 +310,28 @@ let { PNG } = global.pngjs || require("pngjs");
 
       //Function body
       for (let i = 0; i < n_valid; i++) {
+        if (u_hab[i] > 0) {
+          pos_u_sum += u_hab[i];
+          pos_u_cnt++;
+        }
+      }
+      let mean_u_hab = Math.max(1e-4, pos_u_sum/Math.max(1, pos_u_cnt));
+
+      for (let i = 0; i < n_valid; i++) {
         let a = cell_area[i]*perm_ice[i];
         let o = cell_obs[i];
 
         if (o < 0 || o >= n_obs || obs_list[o].is_frontier_buffer || a <= 0) continue;
-        let uh = pre_contact_bio ? 0 : u_hab[i];
-        let nat_cov = pre_contact_bio ? u_nat[i] : Math.max(0.12, u_hab[i])*u_nat[i];
+        if (hab_mask && hab_mask[i] === 0) continue;
+        let uh = Math.min(4.0, u_hab[i]/mean_u_hab);
 
+        if (uh <= 0) continue;
         r_area[o] += a;
         r_covs[0][o] += a*uh;
-        r_covs[1][o] += a*nat_cov;
-        r_covs[2][o] += a*u_eco[i];
-        r_covs[3][o] += a*u_fluvial[i];
-        r_covs[4][o] += a*u_coastal[i];
+        r_covs[1][o] += a*uh*u_nat[i];
+        r_covs[2][o] += a*uh*u_eco[i];
+        r_covs[3][o] += a*uh*u_fluvial[i];
+        r_covs[4][o] += a*uh*u_coastal[i];
       }
 
       for (let o = 0; o < n_obs; o++) {
@@ -262,6 +347,7 @@ let { PNG } = global.pngjs || require("pngjs");
         let y = z_obs[o];
         let w = r_area[o];
 
+        total_dom_w += w;
         for (let r = 0; r < n_covs; r++) {
           xty[r] += w*xv[r]*y;
           for (let c = 0; c < n_covs; c++)
@@ -269,32 +355,37 @@ let { PNG } = global.pngjs || require("pngjs");
         }
       }
 
+      //Weak positive Tikhonov shrinkage toward biophysical priors ensures non-zero beta_0_hab under collinearity
+      let ridge_alpha = 0.06*Math.max(1.0, total_dom_w);
+
+      for (let r = 0; r < n_covs; r++) {
+        xtx[r*n_covs + r] += ridge_alpha;
+        xty[r] += ridge_alpha*beta_prior[r];
+      }
+
       for (let iter = 0; iter < 300; iter++) {
         for (let r = 0; r < n_covs; r++) {
-          if (pre_contact_bio && r === 0) {
-            beta[0] = 0;
-            continue;
-          }
           let diag = xtx[r*n_covs + r];
           let rhs = xty[r];
 
           for (let c = 0; c < n_covs; c++)
             if (c !== r) rhs -= xtx[r*n_covs + c]*beta[c];
-          beta[r] = (diag > 1e-12) ? Math.max(1e-4, rhs/diag) : 1e-4;
+          beta[r] = (diag > 1e-12) ? Math.max(1e-3, rhs/diag) : 1e-3;
         }
       }
 
       let b_sum = Math.max(1e-8, beta[0] + beta[1] + beta[2] + beta[3] + beta[4]);
+      let global_m_cnt = 0;
+      let global_m_sum = 0;
       let ice_env_arr = new Float32Array(n_valid);
-      let w0 = pre_contact_bio ? 0.0 : (0.40*(beta[0]/b_sum) + 0.14);
-      let w1 = pre_contact_bio ? (0.45*(beta[1]/b_sum) + 0.20) : (0.40*(beta[1]/b_sum) + 0.14);
-      let w2 = pre_contact_bio ? (0.45*(beta[2]/b_sum) + 0.09) : (0.40*(beta[2]/b_sum) + 0.07);
-      let w3 = pre_contact_bio ? (0.45*(beta[3]/b_sum) + 0.19) : (0.40*(beta[3]/b_sum) + 0.20);
-      let w4 = pre_contact_bio ? (0.45*(beta[4]/b_sum) + 0.07) : (0.40*(beta[4]/b_sum) + 0.05);
+      let w0 = 0.45*(beta[0]/b_sum) + 0.14;
+      let w1 = 0.45*(beta[1]/b_sum) + 0.14;
+      let w2 = 0.45*(beta[2]/b_sum) + 0.06;
+      let w3 = 0.45*(beta[3]/b_sum) + 0.16;
+      let w4 = 0.45*(beta[4]/b_sum) + 0.05;
 
       for (let i = 0; i < n_valid; i++) {
         let ice_env = perm_ice[i];
-        let nat_term = pre_contact_bio ? u_nat[i] : Math.max(0.12, u_hab[i])*u_nat[i];
 
         if (apply_ice && rep_year <= -5500) {
           let gidx = v_idx[i];
@@ -305,21 +396,37 @@ let { PNG } = global.pngjs || require("pngjs");
         }
         ice_env_arr[i] = ice_env;
 
-        let base_suit = w0*u_hab[i] + w1*nat_term + w2*u_eco[i] + w3*u_fluvial[i] + w4*u_coastal[i];
+        if ((hab_mask && hab_mask[i] === 0) || u_hab[i] <= 0 || ice_env <= 0.04) {
+          m_cell[i] = 0;
+          continue;
+        }
 
-        m_cell[i] = Math.max(1e-5, base_suit);
+        let uh_norm = Math.min(4.0, u_hab[i]/mean_u_hab);
+        let mult_env = w0 + w1*u_nat[i] + w2*u_eco[i] + w3*2.40*u_fluvial[i] + w4*1.85*u_coastal[i];
+        let mc = Math.pow(Math.max(0.01, uh_norm), 0.85)*Math.max(1e-4, mult_env);
+
+        m_cell[i] = mc;
+        global_m_sum += mc;
+        global_m_cnt++;
       }
 
+      let global_m_mean = (global_m_cnt > 0) ? (global_m_sum/global_m_cnt) : 1.0;
       let m_macro = this.smoothPositiveFieldOnGrid(mask_data, m_cell, macro_rad);
-      let sharp_exp = pre_contact_bio ? 1.75 : 1.55;
-      let r_min = pre_contact_bio ? 0.12 : 0.18;
-      let r_max = pre_contact_bio ? 3.20 : 2.40;
+      let sharp_exp = 2.15;
 
       for (let i = 0; i < n_valid; i++) {
-        let ratio = (m_macro[i] > 0) ? Math.max(r_min, Math.min(r_max, m_cell[i]/m_macro[i])) : 1.0;
+        if (m_cell[i] <= 0) {
+          weights[i] = 0;
+          continue;
+        }
+        let ref_macro = (m_macro[i] > 0) ? (0.55*m_macro[i] + 0.45*global_m_mean) : global_m_mean;
+        let ratio = Math.max(0.0, Math.min(3.50, m_cell[i]/Math.max(1e-6, ref_macro)));
 
-        weights[i] = Math.max(1e-5, ice_env_arr[i]*Math.pow(ratio, sharp_exp));
+        weights[i] = ice_env_arr[i]*Math.pow(ratio, sharp_exp);
       }
+
+      if (rep_year <= 1650 && uopp_valid)
+        this.capUrbanCoreFieldToRuralRing(mask_data, weights, uopp_valid, 1.15);
 
       //Return statement
       return {
@@ -373,7 +480,60 @@ let { PNG } = global.pngjs || require("pngjs");
 
 
     /**
-     * Loads urban-masked HYDE 3.5 rural population raster over valid cells, inpainting modern urban sprawl pixels via IDW.
+     * Builds or retrieves the cached extended modern urban buffer mask via `ViscountUrbanMask`.
+     * @alias ViscountRuralSuitability.getModernUrbanMask
+     *
+     * @param {Object} arg0_mask_data
+     * @param {Object} [arg1_config]
+     * @param {Map} [arg2_cache]
+     *
+     * @returns {Uint8Array}
+     */
+    static getModernUrbanMask (arg0_mask_data, arg1_config, arg2_cache) {
+      return ViscountUrbanMask.getModernUrbanMask(arg0_mask_data, arg1_config, arg2_cache);
+    }
+
+
+    /**
+     * Inpaints masked urban/spike/reservoir pixels from surrounding rural cells via `ViscountUrbanMask`.
+     * @alias ViscountRuralSuitability.inpaintUrbanMaskGrid
+     *
+     * @param {Float32Array} arg0_popc_grid
+     * @param {Uint8Array} arg1_urban_mask
+     * @param {Float32Array} arg2_land_area_grid
+     * @param {Float32Array|null} arg3_fallback_grid
+     * @param {number} arg4_grid_width
+     * @param {number} arg5_grid_height
+     * @param {number} [arg6_inpaint_radius]
+     * @param {Int32Array} [arg7_target_indices]
+     *
+     * @returns {Float32Array}
+     */
+    static inpaintUrbanMaskGrid (
+      arg0_popc_grid,
+      arg1_urban_mask,
+      arg2_land_area_grid,
+      arg3_fallback_grid,
+      arg4_grid_width,
+      arg5_grid_height,
+      arg6_inpaint_radius,
+      arg7_target_indices
+    ) {
+      return ViscountUrbanMask.inpaintUrbanMaskGrid(
+        arg0_popc_grid,
+        arg1_urban_mask,
+        arg2_land_area_grid,
+        arg3_fallback_grid,
+        arg4_grid_width,
+        arg5_grid_height,
+        arg6_inpaint_radius,
+        arg7_target_indices
+      );
+    }
+
+
+    /**
+     * Loads urban-masked HYDE 3.5 rural population raster over valid cells, inpainting modern urban sprawl pixels via `ViscountUrbanMask`.
      * @alias ViscountRuralSuitability.loadUrbanMaskedHYDEPopcRaster
      *
      * @param {Object} arg0_mask_data
@@ -384,89 +544,12 @@ let { PNG } = global.pngjs || require("pngjs");
      * @returns {Float32Array}
      */
     static loadUrbanMaskedHYDEPopcRaster (arg0_mask_data, arg1_year, arg2_cache, arg3_config) {
-      //Convert from parameters
-      let mask_data = arg0_mask_data;
-      let year = arg1_year;
-      let cache = arg2_cache;
-      let config = arg3_config;
-
-      //Declare local instance variables
-      let ckey = `__hyde_rur_${year}`;
-      let cov_paths = (config && config.kriging_config && config.kriging_config.covariate_paths) ?
-        config.kriging_config.covariate_paths : {};
-      let grid_h = mask_data.grid_height;
-      let grid_w = mask_data.grid_width;
-      let hyde_path = path.resolve(mask_data.project_root, cov_paths.hyde_popc_folder || "histmap/2.data_cleaning/landuse_HYDE/rasters_scaled_to_global", `popc_${year}.png`);
-      let n_valid = mask_data.valid_cell_count;
-      let out = new Float32Array(n_valid);
-      let preserve_dyn = Boolean(config && config.kriging_config && config.kriging_config.preserve_period_dynamics);
-      let total_px = grid_w*grid_h;
-      let uopp_path = path.resolve(mask_data.project_root, cov_paths.hyde_uopp_raster || "histmap/2.data_cleaning/landuse_HYDE/rasters/uopp_2023AD.png");
-
-      //Guard clauses
-      if (preserve_dyn && year <= 1650) return out;
-      if (cache && cache.has(ckey)) return cache.get(ckey);
-
-      //Function body
-      if (!fs.existsSync(hyde_path)) {
-        let lbl = (year < 0) ? `${Math.abs(year)}BC` : `${year}AD`;
-
-        hyde_path = path.resolve(mask_data.project_root, cov_paths.hyde_raw_rasters_folder || "histmap/2.data_cleaning/landuse_HYDE/rasters", `popc_${lbl}.png`);
-      }
-      if (!fs.existsSync(hyde_path)) return out;
-
-      let raw_grid = this.readGlobalFloat32Raster(hyde_path, total_px);
-      let uopp_grid = null;
-
-      if (this._uopp_cache.has(uopp_path)) {
-        uopp_grid = this._uopp_cache.get(uopp_path);
-      } else {
-        uopp_grid = fs.existsSync(uopp_path) ? this.readGlobalFloat32Raster(uopp_path, total_px) : null;
-        this._uopp_cache.set(uopp_path, uopp_grid);
-      }
-      let p2v = mask_data.pixel_to_valid_idx;
-      let v_idx = mask_data.valid_indices;
-
-      for (let i = 0; i < n_valid; i++) {
-        let gidx = v_idx[i];
-        let v = raw_grid[gidx];
-
-        if (uopp_grid && uopp_grid[gidx] > 10.0) {
-          let r = Math.floor(gidx/grid_w);
-          let c = gidx % grid_w;
-          let acc = 0;
-          let w_sum = 0;
-
-          for (let dr = -3; dr <= 3; dr++) {
-            let nr = r + dr;
-
-            if (nr < 0 || nr >= grid_h) continue;
-            for (let dc = -3; dc <= 3; dc++) {
-              let nc = (c + dc + grid_w) % grid_w;
-              let ni = nr*grid_w + nc;
-
-              if (p2v[ni] >= 0 && uopp_grid[ni] <= 10.0) {
-                let wt = 1/Math.max(1, dr*dr + dc*dc);
-
-                acc += raw_grid[ni]*wt;
-                w_sum += wt;
-              }
-            }
-          }
-          v = (w_sum > 0) ? acc/w_sum : 0;
-        }
-        out[i] = Math.max(0, v);
-      }
-
-      if (cache) cache.set(ckey, out);
-
-      //Return statement
-      return out;
+      return ViscountUrbanMask.loadUrbanMaskedHYDEPopcRaster(arg0_mask_data, arg1_year, arg2_cache, arg3_config);
     }
 
 
     /**
-     * Reads a full 4320x2160 big-endian float32 GeoPNG into a flat Float32Array.
+     * Reads a full 4320x2160 big-endian float32 GeoPNG into a flat Float32Array via `ViscountUrbanMask`.
      * @alias ViscountRuralSuitability.readGlobalFloat32Raster
      *
      * @param {string} arg0_file_path
@@ -475,27 +558,7 @@ let { PNG } = global.pngjs || require("pngjs");
      * @returns {Float32Array}
      */
     static readGlobalFloat32Raster (arg0_file_path, arg1_total_pixels) {
-      //Convert from parameters
-      let file_path = arg0_file_path;
-      let total_pixels = arg1_total_pixels;
-
-      //Declare local instance variables
-      let out = new Float32Array(total_pixels);
-      let png_data = PNG.sync.read(fs.readFileSync(file_path)).data;
-      let dv = new DataView(png_data.buffer, png_data.byteOffset, png_data.byteLength);
-
-      //Function body
-      for (let i = 0; i < total_pixels; i++) {
-        let px = i*4;
-
-        if ((png_data[px] | png_data[px + 1] | png_data[px + 2] | png_data[px + 3]) === 0) continue;
-        let v = dv.getFloat32(px, false);
-
-        if (Number.isFinite(v) && v > 0) out[i] = v;
-      }
-
-      //Return statement
-      return out;
+      return ViscountUrbanMask.readGlobalFloat32Raster(arg0_file_path, arg1_total_pixels);
     }
 
 

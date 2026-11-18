@@ -1,0 +1,958 @@
+{
+  "batch_index": 333,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        44.66912,
+        -95.77303
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1911,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Normania-Minnesota",
+      "known_aliases": [
+        "Normania",
+        "normania",
+        "normania township",
+        "Normania township"
+      ],
+      "latest_year": 2020,
+      "name": "Normania",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1911,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.25868,
+        -68.22661
+      ],
+      "country": "Maine",
+      "earliest_year": 1830,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cranberry Isles-Maine",
+      "known_aliases": [
+        "Cranberry Isles",
+        "cranberry isles",
+        "cranberry isles town",
+        "Cranberry Isles town"
+      ],
+      "latest_year": 2020,
+      "name": "Cranberry Isles",
+      "reason": "missing_entry",
+      "region": "usa_maine",
+      "sample_years": [
+        1830,
+        1890,
+        1960,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.09092,
+        -73.4702
+      ],
+      "country": "Massachusetts",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mount Washington-Massachusetts",
+      "known_aliases": [
+        "Mount Washington",
+        "mount washington",
+        "mount washington town",
+        "Mount Washington town"
+      ],
+      "latest_year": 2020,
+      "name": "Mount Washington",
+      "reason": "missing_entry",
+      "region": "usa_massachusetts",
+      "sample_years": [
+        1850,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.15221,
+        -95.40213
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1885,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ann-Minnesota",
+      "known_aliases": [
+        "Ann",
+        "ann",
+        "ann township",
+        "Ann township"
+      ],
+      "latest_year": 2020,
+      "name": "Ann",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1885,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.7095,
+        -94.80207
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1947,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Elm Creek-Minnesota",
+      "known_aliases": [
+        "Elm Creek",
+        "elm creek",
+        "elm creek township",
+        "Elm Creek township"
+      ],
+      "latest_year": 2020,
+      "name": "Elm Creek",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1947,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.71672,
+        -96.54581
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1968,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fairfax (Polk County)-Minnesota",
+      "known_aliases": [
+        "Fairfax (Polk County)",
+        "fairfax",
+        "fairfax township",
+        "Fairfax township"
+      ],
+      "latest_year": 2020,
+      "name": "Fairfax (Polk County)",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1968,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.94739,
+        -88.60322
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1931,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tipler-Wisconsin",
+      "known_aliases": [
+        "Tipler",
+        "tipler",
+        "tipler town",
+        "Tipler town"
+      ],
+      "latest_year": 2020,
+      "name": "Tipler",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1931,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.66259,
+        -94.59077
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1879,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bungo-Minnesota",
+      "known_aliases": [
+        "Bungo",
+        "bungo",
+        "bungo township",
+        "Bungo township"
+      ],
+      "latest_year": 2020,
+      "name": "Bungo",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1879,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.33229,
+        -95.53251
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1935,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Gales-Minnesota",
+      "known_aliases": [
+        "Gales",
+        "gales",
+        "gales township",
+        "Gales township"
+      ],
+      "latest_year": 2020,
+      "name": "Gales",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1935,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.4135,
+        -96.45296
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1889,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "West Valley-Minnesota",
+      "known_aliases": [
+        "West Valley",
+        "west valley",
+        "west valley township",
+        "West Valley township"
+      ],
+      "latest_year": 2020,
+      "name": "West Valley",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1889,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.85161,
+        -96.03616
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1931,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Maxwell-Minnesota",
+      "known_aliases": [
+        "Maxwell",
+        "maxwell",
+        "maxwell township",
+        "Maxwell township"
+      ],
+      "latest_year": 2020,
+      "name": "Maxwell",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1931,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.67319,
+        -94.69064
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1904,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Martinsburg-Minnesota",
+      "known_aliases": [
+        "Martinsburg",
+        "martinsburg",
+        "martinsburg township",
+        "Martinsburg township"
+      ],
+      "latest_year": 2020,
+      "name": "Martinsburg",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1904,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.84302,
+        -95.41791
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1926,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cedarbend-Minnesota",
+      "known_aliases": [
+        "Cedarbend",
+        "cedarbend",
+        "cedarbend township",
+        "Cedarbend township"
+      ],
+      "latest_year": 2020,
+      "name": "Cedarbend",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1926,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.82172,
+        -67.85464
+      ],
+      "country": "Maine",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Orient-Maine",
+      "known_aliases": [
+        "Orient",
+        "orient",
+        "orient town",
+        "Orient town"
+      ],
+      "latest_year": 2020,
+      "name": "Orient",
+      "reason": "missing_entry",
+      "region": "usa_maine",
+      "sample_years": [
+        1850,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.84379,
+        -96.15041
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1951,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Providence-Minnesota",
+      "known_aliases": [
+        "Providence",
+        "providence",
+        "providence township",
+        "Providence township"
+      ],
+      "latest_year": 2020,
+      "name": "Providence",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1951,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.67577,
+        -91.35362
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1866,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Meteor-Wisconsin",
+      "known_aliases": [
+        "Meteor",
+        "meteor",
+        "meteor town",
+        "Meteor town"
+      ],
+      "latest_year": 2020,
+      "name": "Meteor",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1866,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.06211,
+        -92.48023
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1884,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Northland-Minnesota",
+      "known_aliases": [
+        "Northland",
+        "northland",
+        "northland township",
+        "Northland township"
+      ],
+      "latest_year": 2020,
+      "name": "Northland",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1884,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.58708,
+        -96.46693
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1933,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Atherton-Minnesota",
+      "known_aliases": [
+        "Atherton",
+        "atherton",
+        "atherton township",
+        "Atherton township"
+      ],
+      "latest_year": 2020,
+      "name": "Atherton",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1933,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.38362,
+        -77.8812
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1887,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Leidy-Pennsylvania",
+      "known_aliases": [
+        "Leidy",
+        "leidy",
+        "leidy township",
+        "Leidy township",
+        "Leidy Township"
+      ],
+      "latest_year": 2020,
+      "name": "Leidy",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1887,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.21445,
+        -90.36062
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1858,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bear Bluff-Wisconsin",
+      "known_aliases": [
+        "Bear Bluff",
+        "bear bluff",
+        "bear bluff town",
+        "Bear Bluff town"
+      ],
+      "latest_year": 2020,
+      "name": "Bear Bluff",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1858,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.7259,
+        -93.13736
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1954,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Haugen-Minnesota",
+      "known_aliases": [
+        "Haugen",
+        "haugen",
+        "haugen township",
+        "Haugen township"
+      ],
+      "latest_year": 2020,
+      "name": "Haugen",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1954,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.83509,
+        -93.24948
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1871,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Carpenter-Minnesota",
+      "known_aliases": [
+        "Carpenter",
+        "carpenter",
+        "carpenter township",
+        "Carpenter township"
+      ],
+      "latest_year": 2020,
+      "name": "Carpenter",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1871,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.59222,
+        -94.6998
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1852,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Wellington-Minnesota",
+      "known_aliases": [
+        "Wellington",
+        "wellington",
+        "wellington township",
+        "Wellington township"
+      ],
+      "latest_year": 2020,
+      "name": "Wellington",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1852,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.01463,
+        -96.37443
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1901,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Keene-Minnesota",
+      "known_aliases": [
+        "Keene",
+        "keene",
+        "keene township",
+        "Keene township"
+      ],
+      "latest_year": 2020,
+      "name": "Keene",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1901,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.97729,
+        -71.80434
+      ],
+      "country": "Vermont",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Norton-Vermont",
+      "known_aliases": [
+        "Norton",
+        "norton",
+        "norton town",
+        "Norton town"
+      ],
+      "latest_year": 2020,
+      "name": "Norton",
+      "reason": "missing_entry",
+      "region": "usa_vermont",
+      "sample_years": [
+        1850,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.83688,
+        -94.73864
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1902,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Badoura-Minnesota",
+      "known_aliases": [
+        "Badoura",
+        "badoura",
+        "badoura township",
+        "Badoura township"
+      ],
+      "latest_year": 2020,
+      "name": "Badoura",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1902,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.44925,
+        -96.2497
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1972,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sundal-Minnesota",
+      "known_aliases": [
+        "Sundal",
+        "sundal",
+        "sundal township",
+        "Sundal township"
+      ],
+      "latest_year": 2020,
+      "name": "Sundal",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1972,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.14643,
+        -92.62984
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1956,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kelsey-Minnesota",
+      "known_aliases": [
+        "Kelsey",
+        "kelsey",
+        "kelsey township",
+        "Kelsey township"
+      ],
+      "latest_year": 2020,
+      "name": "Kelsey",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1956,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.5401,
+        -88.52019
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1960,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Blackwell-Wisconsin",
+      "known_aliases": [
+        "Blackwell",
+        "blackwell",
+        "blackwell town",
+        "Blackwell town"
+      ],
+      "latest_year": 2020,
+      "name": "Blackwell",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.39351,
+        -90.27687
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1891,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hiles (Wood County)-Wisconsin",
+      "known_aliases": [
+        "Hiles (Wood County)",
+        "hiles",
+        "hiles town",
+        "Hiles town"
+      ],
+      "latest_year": 2020,
+      "name": "Hiles (Wood County)",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1891,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

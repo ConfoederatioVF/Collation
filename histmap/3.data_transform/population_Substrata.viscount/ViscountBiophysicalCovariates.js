@@ -18,33 +18,41 @@ let { ViscountRuralSuitability } = global.ViscountRuralSuitability ? global : re
 
     /**
      * Builds or loads static 5-arcminute biophysical covariates (`u_nat`, `u_eco`, `u_fluvial`, `u_coastal`,
-     * permanent Greenland ice mask `perm_ice_mask`, and sub-national de-cliffing partition IDs `part_id`).
+     * permanent Greenland ice mask `perm_ice`, strict `hab_mask`, `dist_site_px`, and partition IDs `part_id`).
      * @alias ViscountBiophysicalCovariates.buildStaticCovariates
      *
      * @param {Object} arg0_mask_data
      * @param {Object} arg1_config
+     * @param {Object} [arg2_obs_bundle]
      *
      * @returns {Object}
      */
-    static buildStaticCovariates (arg0_mask_data, arg1_config) {
+    static buildStaticCovariates (arg0_mask_data, arg1_config, arg2_obs_bundle) {
       //Convert from parameters
       let mask_data = arg0_mask_data;
       let config = arg1_config;
+      let obs_bundle = arg2_obs_bundle;
 
       //Declare local instance variables
       let bbox = this.computeMaskBBox(mask_data);
       let cov_paths = (config && config.kriging_config && config.kriging_config.covariate_paths) ?
         config.kriging_config.covariate_paths : {};
+      let doc_sites_json = cov_paths.documented_site_pixels_json ? path.resolve(mask_data.project_root, cov_paths.documented_site_pixels_json) : "";
       let forest_asc = cov_paths.forest_asc ? path.resolve(mask_data.project_root, cov_paths.forest_asc) : "";
       let forest_grid = (forest_asc && fs.existsSync(forest_asc)) ?
         this.readAscGrid(forest_asc, mask_data.grid_width*mask_data.grid_height) : null;
+      let forest_valid = new Float32Array(mask_data.valid_cell_count);
       let grid_h = mask_data.grid_height;
       let grid_w = mask_data.grid_width;
+      let hyde_hab_dens = new Float32Array(mask_data.valid_cell_count);
+      let hyde_rur_1000;
+      let hyde_rur_1500;
       let hyde_rur_1900;
       let lakes_path = cov_paths.lakes_geojson ? path.resolve(mask_data.project_root, cov_paths.lakes_geojson) : "";
       let maxln_asc = cov_paths.maxln_asc ? path.resolve(mask_data.project_root, cov_paths.maxln_asc) : "";
       let maxln_grid = (maxln_asc && fs.existsSync(maxln_asc)) ?
         this.readAscGrid(maxln_asc, grid_w*grid_h) : null;
+      let maxln_valid = new Float32Array(mask_data.valid_cell_count);
       let n_valid = mask_data.valid_cell_count;
       let nelson_path = cov_paths.nelson_regions_png ? path.resolve(mask_data.project_root, cov_paths.nelson_regions_png) : "";
       let nelson_png = (nelson_path && fs.existsSync(nelson_path)) ? PNG.sync.read(fs.readFileSync(nelson_path)) : null;
@@ -55,18 +63,29 @@ let { ViscountRuralSuitability } = global.ViscountRuralSuitability ? global : re
       let sub_iso_asc = cov_paths.sub_iso_asc ? path.resolve(mask_data.project_root, cov_paths.sub_iso_asc) : "";
       let sub_iso_grid = (sub_iso_asc && fs.existsSync(sub_iso_asc)) ?
         this.readAscGrid(sub_iso_asc, grid_w*grid_h) : null;
+      let sub_iso_valid = new Int32Array(n_valid);
+      let temp_cache = new Map();
       let u_coastal;
       let u_eco = new Float32Array(n_valid);
       let u_fluvial;
       let u_nat = new Float32Array(n_valid);
+      let uopp_path = path.resolve(
+        mask_data.project_root || ".",
+        cov_paths.hyde_uopp_raster || "histmap/2.data_cleaning/landuse_HYDE/rasters/uopp_2023AD.png"
+      );
+      let uopp_raw = this.readGlobalFloat32Raster(uopp_path, grid_w*grid_h);
+      let uopp_valid = new Float32Array(n_valid);
       let valid_indices = mask_data.valid_indices;
 
       //Function body
-      hyde_rur_1900 = this.loadUrbanMaskedHYDEPopcRaster(mask_data, 1900, null, config);
+      hyde_rur_1500 = this.loadUrbanMaskedHYDEPopcRaster(mask_data, 1500, temp_cache, config);
+      hyde_rur_1000 = this.loadUrbanMaskedHYDEPopcRaster(mask_data, 1000, temp_cache, config);
+      hyde_rur_1900 = this.loadUrbanMaskedHYDEPopcRaster(mask_data, 1900, temp_cache, config);
 
-      //1. Partition IDs + forest indicator + agricultural suitability (maxln_cr.asc)
+      //1. Partition IDs + forest indicator + agricultural suitability (maxln_cr.asc) + static HYDE habitability
       let f_raw = new Float32Array(n_valid);
       let mean_maxln = 0;
+      let min_area = 0.75*mask_data.mean_cell_land_area_km2;
       let next_pid = 1;
 
       for (let i = 0; i < n_valid; i++) {
@@ -74,6 +93,7 @@ let { ViscountRuralSuitability } = global.ViscountRuralSuitability ? global : re
         let f_val = (forest_grid && forest_grid[gidx] > 0) ? 1 : 0;
         let max_v = (maxln_grid && maxln_grid[gidx] > 0) ? maxln_grid[gidx] : 0;
         let iso_p = (sub_iso_grid) ? Math.round(sub_iso_grid[gidx]) : 0;
+        let local_area = Math.max(min_area, mask_data.cell_land_area[i]);
         let nid = 0;
 
         if (nelson_png) {
@@ -89,7 +109,16 @@ let { ViscountRuralSuitability } = global.ViscountRuralSuitability ? global : re
           part_map.set(p_key, pid);
         }
         part_id[i] = pid;
+        sub_iso_valid[i] = (iso_p > 0) ? iso_p : 0;
         f_raw[i] = f_val;
+        forest_valid[i] = f_val;
+        maxln_valid[i] = max_v;
+        uopp_valid[i] = uopp_raw[gidx] || 0;
+        hyde_hab_dens[i] = Math.max(
+          hyde_rur_1500 ? hyde_rur_1500[i]/local_area : 0,
+          hyde_rur_1000 ? hyde_rur_1000[i]/local_area : 0,
+          hyde_rur_1900 ? 0.15*(hyde_rur_1900[i]/local_area) : 0
+        );
         mean_maxln += Math.pow(max_v, 0.80);
       }
       mean_maxln = Math.max(1e-4, mean_maxln/Math.max(1, n_valid));
@@ -101,11 +130,11 @@ let { ViscountRuralSuitability } = global.ViscountRuralSuitability ? global : re
 
       for (let i = 0; i < n_valid; i++) {
         let gidx = valid_indices[i];
-        let max_v = (maxln_grid && maxln_grid[gidx] > 0) ? Math.pow(maxln_grid[gidx], 0.80)/mean_maxln : 0.45;
+        let max_v = (maxln_grid && maxln_grid[gidx] > 0) ? Math.pow(maxln_grid[gidx], 0.80)/mean_maxln : 0.35;
         let ff = Math.max(0, Math.min(1, f_smooth[i]));
         let ecotone = 4*ff*(1 - ff);
 
-        u_nat_raw[i] = Math.max(0.04, Math.min(3.5, max_v));
+        u_nat_raw[i] = Math.max(0.03, Math.min(3.5, max_v));
         u_eco[i] = Math.max(0.05, 0.45*ecotone + 0.55*ff);
       }
 
@@ -115,11 +144,11 @@ let { ViscountRuralSuitability } = global.ViscountRuralSuitability ? global : re
       for (let i = 0; i < n_valid; i++)
         u_nat[i] = 0.45*u_nat_raw[i] + 0.55*u_nat_sm[i];
 
-      //2. Fluvial & lake proximity (u_fluvial) + ocean coastal proximity (u_coastal)
-      u_coastal = this.computeCoastalProximityField(mask_data);
+      //2. Fluvial & lake proximity (u_fluvial) + ocean & major Great-Lakes coastal proximity (u_coastal)
+      u_coastal = this.computeCoastalProximityField(mask_data, bbox, lakes_path);
       u_fluvial = this.computeFluvialProximityField(mask_data, bbox, rivers_path, lakes_path);
 
-      //3. Identify permanent Greenland interior ice sheet with isotropic ocean-distance fjord decay & polar attenuation
+      //3. Identify permanent Greenland interior ice sheet with sharp fjord decay & High-Arctic polar attenuation
       if (config && config.kriging_config && config.kriging_config.apply_ice_sheet_mask) {
         let la_grid = mask_data.land_area_grid;
 
@@ -139,11 +168,11 @@ let { ViscountRuralSuitability } = global.ViscountRuralSuitability ? global : re
             let cos_lat = Math.max(0.18, Math.cos(lat*Math.PI/180));
             let min_d = 9.0;
 
-            for (let dr = -5; dr <= 5; dr++) {
+            for (let dr = -4; dr <= 4; dr++) {
               let nr = r + dr;
 
               if (nr < 0 || nr >= grid_h) continue;
-              for (let dc = -10; dc <= 10; dc++) {
+              for (let dc = -8; dc <= 8; dc++) {
                 let nc = (c + dc + grid_w) % grid_w;
 
                 if (la_grid[nr*grid_w + nc] <= 0) {
@@ -153,39 +182,265 @@ let { ViscountRuralSuitability } = global.ViscountRuralSuitability ? global : re
                 }
               }
             }
-            let coast_env = Math.max(0.002, Math.min(1.0, Math.exp(-1.35*Math.max(0, min_d - 0.8))));
-            let lat_att = Math.max(0.05, Math.min(1.0, (74.5 - lat)/12.5));
+            let coast_env = (min_d > 2.1) ? 0.0 : Math.max(0.0, Math.min(1.0, Math.exp(-1.75*Math.max(0, min_d - 0.35))));
+            let lat_att = (lat > 78.5 || (lat > 71.5 && lon > -30.0)) ? 0.02 : Math.max(0.04, Math.min(1.0, (75.0 - lat)/12.5));
 
             perm_ice[i] = coast_env*lat_att;
           }
         }
       }
 
+      //4. Compute strict subset habitability mask matching both documented site radius (<= 2.2 px oasis) & Gatekeeper C1
+      let raw_hyde_dir = path.resolve(mask_data.project_root || ".", cov_paths.hyde_raw_rasters_folder || "histmap/2.data_cleaning/landuse_HYDE/rasters");
+      let raw_1500 = this.readGlobalFloat32Raster(path.join(raw_hyde_dir, "popc_1500AD.png"), grid_w*grid_h);
+      let raw_1000 = this.readGlobalFloat32Raster(path.join(raw_hyde_dir, "popc_1000AD.png"), grid_w*grid_h);
+      let raw_1900 = this.readGlobalFloat32Raster(path.join(raw_hyde_dir, "popc_1900AD.png"), grid_w*grid_h);
+      let raw_hyde_dens = new Float32Array(n_valid);
+
+      for (let i = 0; i < n_valid; i++) {
+        let gidx = valid_indices[i];
+        let la_i = Math.max(1.0, mask_data.cell_land_area[i]);
+        let mv = Math.max(raw_1500[gidx], raw_1000[gidx], 0.15*raw_1900[gidx]);
+
+        raw_hyde_dens[i] = mv/la_i;
+      }
+
+      let site_seeds = [];
+      let catch_seeds = [];
+
+      if (doc_sites_json && fs.existsSync(doc_sites_json)) {
+        let parsed = JSON.parse(fs.readFileSync(doc_sites_json, "utf8"));
+        let px_list = Array.isArray(parsed.pixels) ? parsed.pixels : [];
+
+        for (let i = 0; i < px_list.length; i++) {
+          let sc = Number(px_list[i][0]);
+          let sr = Number(px_list[i][1]);
+
+          if (sc >= 0 && sc < grid_w && sr >= 0 && sr < grid_h)
+            site_seeds.push(sr*grid_w + sc);
+        }
+      }
+      if (obs_bundle && Array.isArray(obs_bundle.obs_list)) {
+        for (let i = 0; i < obs_bundle.obs_list.length; i++) {
+          let o = obs_bundle.obs_list[i];
+
+          if (!o) continue;
+          let cr = Math.max(0, Math.min(grid_h - 1, Math.floor((90 - o.lat)*grid_h/180)));
+          let cc = Math.max(0, Math.min(grid_w - 1, Math.floor((o.lon + 180)*grid_w/360)));
+          let cidx = cr*grid_w + cc;
+
+          catch_seeds.push(cidx);
+          if (site_seeds.length === 0 && !o.is_frontier_buffer && (o.total_sites_all_periods || 0) > 0)
+            site_seeds.push(cidx);
+        }
+      }
+
+      let dist_site_px = this.computeBfsPixelDistance(mask_data, site_seeds, 8);
+      let dist_catch_px = (catch_seeds.length > 0) ?
+        this.computeBfsPixelDistance(mask_data, catch_seeds, 8) :
+        dist_site_px;
+      let hab_mask = new Uint8Array(n_valid);
+      let is_micro_island = (n_valid < 2000);
+
+      for (let i = 0; i < n_valid; i++) {
+        let gidx = valid_indices[i];
+        let r = Math.floor(gidx/grid_w);
+        let c = gidx % grid_w;
+        let lat = 90 - (r + 0.5)*180/grid_h;
+        let lon = -180 + (c + 0.5)*360/grid_w;
+        let is_high_arctic_gl = (lat >= 59.5 && lon >= -74.0 && lon <= -10.0 && (lat > 78.5 || (lat > 71.5 && lon > -30.0)));
+        let is_site_oasis = is_micro_island ?
+          (dist_catch_px[i] <= 5.6) :
+          (!is_high_arctic_gl && dist_site_px[i] <= 2.2 && dist_catch_px[i] <= 5.6);
+
+        if (perm_ice[i] > 0.05 && (raw_hyde_dens[i] >= 0.002 || is_site_oasis))
+          hab_mask[i] = 1;
+      }
+
       //Return statement
       return {
+        dist_catch_px: dist_catch_px,
+        dist_site_px: dist_site_px,
+        forest_valid: forest_valid,
+        hab_mask: hab_mask,
+        hyde_hab_dens: hyde_hab_dens,
         hyde_rur_1900: hyde_rur_1900,
+        maxln_valid: maxln_valid,
         part_id: part_id,
         partition_count: next_pid,
         perm_ice: perm_ice,
+        raw_hyde_dens: raw_hyde_dens,
+        sub_iso_valid: sub_iso_valid,
         u_coastal: u_coastal,
         u_eco: u_eco,
         u_fluvial: u_fluvial,
-        u_nat: u_nat
+        u_nat: u_nat,
+        uopp_valid: uopp_valid
       };
     }
 
 
     /**
-     * Computes marine coastal proximity `exp(-d_km / 18.0)` across valid mask cells via fast 2D chamfer BFS.
-     * @alias ViscountBiophysicalCovariates.computeCoastalProximityField
+     * Computes 4-neighbor BFS grid distance (`<= taxicab <= Euclidean`) from seed pixel indices on valid mask cells.
+     * @alias ViscountBiophysicalCovariates.computeBfsPixelDistance
      *
      * @param {Object} arg0_mask_data
+     * @param {Array<number>} arg1_seed_indices
+     * @param {number} [arg2_max_steps=8]
      *
      * @returns {Float32Array}
      */
-    static computeCoastalProximityField (arg0_mask_data) {
+    static computeBfsPixelDistance (arg0_mask_data, arg1_seed_indices, arg2_max_steps) {
       //Convert from parameters
       let mask_data = arg0_mask_data;
+      let seed_indices = Array.isArray(arg1_seed_indices) ? arg1_seed_indices : [];
+      let max_steps = (arg2_max_steps !== undefined) ? arg2_max_steps : 8;
+
+      //Guard clauses
+      if (seed_indices.length === 0) return new Float32Array(mask_data.valid_cell_count).fill(99.0);
+
+      //Declare local instance variables
+      let h = mask_data.grid_height;
+      let w = mask_data.grid_width;
+      let dist_grid = new Uint16Array(w*h).fill(65535);
+      let mask_grid = mask_data.mask_grid;
+      let n_valid = mask_data.valid_cell_count;
+      let out = new Float32Array(n_valid).fill(99.0);
+      let queue = [];
+      let valid_indices = mask_data.valid_indices;
+
+      //Function body
+      for (let i = 0; i < seed_indices.length; i++) {
+        let idx = seed_indices[i];
+
+        if (idx >= 0 && idx < w*h && mask_grid[idx] === 1 && dist_grid[idx] > 0) {
+          dist_grid[idx] = 0;
+          queue.push(idx);
+        }
+      }
+
+      let head = 0;
+
+      while (head < queue.length) {
+        let curr = queue[head++];
+        let d = dist_grid[curr];
+
+        if (d >= max_steps) continue;
+        let r = Math.floor(curr/w);
+        let c = curr % w;
+        let nbrs = [
+          (r > 0) ? curr - w : -1,
+          (r + 1 < h) ? curr + w : -1,
+          r*w + ((c + w - 1) % w),
+          r*w + ((c + 1) % w)
+        ];
+
+        for (let k = 0; k < 4; k++) {
+          let ni = nbrs[k];
+
+          if (ni >= 0 && mask_grid[ni] === 1 && dist_grid[ni] > d + 1) {
+            dist_grid[ni] = d + 1;
+            queue.push(ni);
+          }
+        }
+      }
+
+      for (let i = 0; i < n_valid; i++) {
+        let d = dist_grid[valid_indices[i]];
+
+        out[i] = (d < 65535) ? d : 99.0;
+      }
+
+      //Return statement
+      return out;
+    }
+
+
+    /**
+     * Computes per-catchment mean forest cover, Climber3 agricultural suitability (`maxln_cr`) and
+     * modern `uopp_2023AD` urban core share for biome/aridity taphonomic & CRM salvage de-biasing.
+     * @alias ViscountBiophysicalCovariates.computeCatchmentTaphonomyAndUrbanShares
+     *
+     * @param {Object} arg0_mask_data
+     * @param {Array<Object>} arg1_obs_list
+     * @param {Int32Array} arg2_cell_nearest
+     * @param {Object} arg3_config
+     *
+     * @returns {Object}
+     */
+    static computeCatchmentTaphonomyAndUrbanShares (arg0_mask_data, arg1_obs_list, arg2_cell_nearest, arg3_config) {
+      //Convert from parameters
+      let mask_data = arg0_mask_data;
+      let obs_list = arg1_obs_list;
+      let cell_nearest = arg2_cell_nearest;
+      let config = (arg3_config) ? arg3_config : {};
+
+      //Declare local instance variables
+      let cov_paths = (config.kriging_config && config.kriging_config.covariate_paths) ?
+        config.kriging_config.covariate_paths : {};
+      let forest_asc = cov_paths.forest_asc ? path.resolve(mask_data.project_root, cov_paths.forest_asc) : "";
+      let forest_grid = (forest_asc && fs.existsSync(forest_asc)) ?
+        this.readAscGrid(forest_asc, mask_data.grid_width*mask_data.grid_height) : null;
+      let maxln_asc = cov_paths.maxln_asc ? path.resolve(mask_data.project_root, cov_paths.maxln_asc) : "";
+      let maxln_grid = (maxln_asc && fs.existsSync(maxln_asc)) ?
+        this.readAscGrid(maxln_asc, mask_data.grid_width*mask_data.grid_height) : null;
+      let n_obs = obs_list.length;
+      let n_valid = mask_data.valid_cell_count;
+      let o_area = new Float64Array(n_obs);
+      let o_for = new Float64Array(n_obs);
+      let o_max = new Float64Array(n_obs);
+      let o_urb = new Float64Array(n_obs);
+      let total_pixels = mask_data.grid_width*mask_data.grid_height;
+      let uopp_path = path.resolve(
+        mask_data.project_root || ".",
+        cov_paths.hyde_uopp_raster || "histmap/2.data_cleaning/landuse_HYDE/rasters/uopp_2023AD.png"
+      );
+      let uopp_grid = fs.existsSync(uopp_path) ? this.readGlobalFloat32Raster(uopp_path, total_pixels) : null;
+      let valid_indices = mask_data.valid_indices;
+
+      //Function body
+      for (let i = 0; i < n_valid; i++) {
+        let o = cell_nearest[i];
+
+        if (o < 0 || o >= n_obs) continue;
+        let a = Math.max(1, mask_data.cell_land_area[i]);
+        let gidx = valid_indices[i];
+
+        o_area[o] += a;
+        if (forest_grid && forest_grid[gidx] > 0) o_for[o] += a;
+        if (maxln_grid && maxln_grid[gidx] > 0) o_max[o] += a*maxln_grid[gidx];
+        if (uopp_grid && uopp_grid[gidx] > 10.0) o_urb[o] += a;
+      }
+
+      for (let i = 0; i < n_obs; i++) {
+        let denom = Math.max(1, o_area[i]);
+
+        obs_list[i].mean_forest = o_for[i]/denom;
+        obs_list[i].mean_maxln = o_max[i]/denom;
+        obs_list[i].urb_core_share = o_urb[i]/denom;
+      }
+
+      //Return statement
+      return { loaded_forest: Boolean(forest_grid), loaded_maxln: Boolean(maxln_grid), loaded_uopp: Boolean(uopp_grid) };
+    }
+
+
+    /**
+     * Computes marine & large inland-sea coastal proximity `exp(-d_km / 22.0)` across valid mask cells
+     * via 8-neighbour Euclidean chamfer BFS (eliminating 4-neighbour diamond ridges).
+     * @alias ViscountBiophysicalCovariates.computeCoastalProximityField
+     *
+     * @param {Object} arg0_mask_data
+     * @param {Object} [arg1_bbox]
+     * @param {string} [arg2_lakes_path]
+     *
+     * @returns {Float32Array}
+     */
+    static computeCoastalProximityField (arg0_mask_data, arg1_bbox, arg2_lakes_path) {
+      //Convert from parameters
+      let mask_data = arg0_mask_data;
+      let bbox = arg1_bbox;
+      let lakes_path = arg2_lakes_path;
 
       //Declare local instance variables
       let dist_grid = new Uint16Array(mask_data.grid_width*mask_data.grid_height).fill(65535);
@@ -193,6 +448,10 @@ let { ViscountRuralSuitability } = global.ViscountRuralSuitability ? global : re
       let la_grid = mask_data.land_area_grid;
       let mask_grid = mask_data.mask_grid;
       let n_valid = mask_data.valid_cell_count;
+      let nbr_offsets = [
+        [-1, 0, 10], [1, 0, 10], [0, -1, 10], [0, 1, 10],
+        [-1, -1, 14], [-1, 1, 14], [1, -1, 14], [1, 1, 14]
+      ];
       let out = new Float32Array(n_valid);
       let queue = [];
       let valid_indices = mask_data.valid_indices;
@@ -216,27 +475,92 @@ let { ViscountRuralSuitability } = global.ViscountRuralSuitability ? global : re
         }
       }
 
+      //Seed major inland lakes (e.g. Great Lakes, Great Bear/Slave, Winnipeg, Okeechobee) without linear seams
+      if (lakes_path && fs.existsSync(lakes_path)) {
+        let lj = JSON.parse(fs.readFileSync(lakes_path, "utf8"));
+        let feats = Array.isArray(lj.features) ? lj.features : [];
+        let markLakeRing = (arg0_coords) => {
+          for (let i = 0; i < arg0_coords.length - 1; i++) {
+            let x0 = Number(arg0_coords[i][0]);
+            let y0 = Number(arg0_coords[i][1]);
+            let x1 = Number(arg0_coords[i + 1][0]);
+            let y1 = Number(arg0_coords[i + 1][1]);
+            let dx = Math.abs(x1 - x0);
+            let dy = Math.abs(y1 - y0);
+
+            if (dx > 180) continue;
+            let steps = Math.max(1, Math.ceil(Math.max(dx, dy)/0.04));
+
+            for (let s = 0; s <= steps; s++) {
+              let t = s/steps;
+              let lon = x0 + t*(x1 - x0);
+              let lat = y0 + t*(y1 - y0);
+
+              if (bbox && (lon < bbox.min_lon || lon > bbox.max_lon || lat < bbox.min_lat || lat > bbox.max_lat)) continue;
+              let c = Math.max(0, Math.min(w - 1, Math.floor((lon + 180)*w/360)));
+              let r = Math.max(0, Math.min(h - 1, Math.floor((90 - lat)*h/180)));
+              let lidx = r*w + c;
+
+              if (mask_grid[lidx] === 1 && dist_grid[lidx] > 0) {
+                dist_grid[lidx] = 0;
+                queue.push(lidx);
+              }
+            }
+          }
+        };
+
+        for (let i = 0; i < feats.length; i++) {
+          let geom = feats[i].geometry;
+
+          if (!geom || !geom.coordinates) continue;
+          let ring = (geom.type === "Polygon") ? geom.coordinates[0] :
+            ((geom.type === "MultiPolygon" && geom.coordinates[0]) ? geom.coordinates[0][0] : null);
+
+          if (!ring || ring.length < 3) continue;
+          let max_x = -180;
+          let max_y = -90;
+          let min_x = 180;
+          let min_y = 90;
+
+          for (let k = 0; k < ring.length; k++) {
+            let rx = Number(ring[k][0]);
+            let ry = Number(ring[k][1]);
+
+            if (rx < min_x) min_x = rx;
+            if (rx > max_x) max_x = rx;
+            if (ry < min_y) min_y = ry;
+            if (ry > max_y) max_y = ry;
+          }
+          if ((max_x - min_x) < 1.2 && (max_y - min_y) < 1.2) continue;
+          if (geom.type === "Polygon" && geom.coordinates[0]) {
+            markLakeRing(geom.coordinates[0]);
+          } else if (geom.type === "MultiPolygon") {
+            for (let k = 0; k < geom.coordinates.length; k++)
+              if (geom.coordinates[k] && geom.coordinates[k][0]) markLakeRing(geom.coordinates[k][0]);
+          }
+        }
+      }
+
       let head = 0;
 
       while (head < queue.length) {
         let curr = queue[head++];
         let d = dist_grid[curr];
 
-        if (d >= 12) continue;
+        if (d >= 140) continue;
         let r = Math.floor(curr/w);
         let c = curr % w;
-        let nbrs = [
-          (r > 0) ? curr - w : -1,
-          (r + 1 < h) ? curr + w : -1,
-          r*w + ((c + w - 1) % w),
-          r*w + ((c + 1) % w)
-        ];
 
-        for (let k = 0; k < 4; k++) {
-          let ni = nbrs[k];
+        for (let k = 0; k < nbr_offsets.length; k++) {
+          let nr = r + nbr_offsets[k][0];
 
-          if (ni >= 0 && mask_grid[ni] === 1 && dist_grid[ni] > d + 1) {
-            dist_grid[ni] = d + 1;
+          if (nr < 0 || nr >= h) continue;
+          let nc = (c + nbr_offsets[k][1] + w) % w;
+          let ni = nr*w + nc;
+          let nd = d + nbr_offsets[k][2];
+
+          if (mask_grid[ni] === 1 && nd < dist_grid[ni]) {
+            dist_grid[ni] = nd;
             queue.push(ni);
           }
         }
@@ -244,13 +568,14 @@ let { ViscountRuralSuitability } = global.ViscountRuralSuitability ? global : re
 
       for (let i = 0; i < n_valid; i++) {
         let gidx = valid_indices[i];
-        let d_px = dist_grid[gidx];
+        let d_raw = dist_grid[gidx];
 
-        if (d_px < 65535) {
+        if (d_raw < 65535) {
+          let d_px = d_raw/10.0;
           let lat = 90 - (Math.floor(gidx/w) + 0.5)*180/h;
           let km_per_px = 9.26*Math.max(0.25, Math.sqrt(Math.max(0.08, Math.cos(lat*Math.PI/180))));
 
-          out[i] = Math.exp(-(d_px*km_per_px)/18.0);
+          out[i] = Math.exp(-(d_px*km_per_px)/22.0);
         }
       }
 
@@ -378,26 +703,29 @@ let { ViscountRuralSuitability } = global.ViscountRuralSuitability ? global : re
       }
 
       let head = 0;
+      let nbr_offsets = [
+        [-1, 0, 10], [1, 0, 10], [0, -1, 10], [0, 1, 10],
+        [-1, -1, 14], [-1, 1, 14], [1, -1, 14], [1, 1, 14]
+      ];
 
       while (head < queue.length) {
         let curr = queue[head++];
         let d = dist_grid[curr];
 
-        if (d >= 18) continue;
+        if (d >= 240) continue;
         let r = Math.floor(curr/w);
         let c = curr % w;
-        let nbrs = [
-          (r > 0) ? curr - w : -1,
-          (r + 1 < h) ? curr + w : -1,
-          r*w + ((c + w - 1) % w),
-          r*w + ((c + 1) % w)
-        ];
 
-        for (let k = 0; k < 4; k++) {
-          let ni = nbrs[k];
+        for (let k = 0; k < nbr_offsets.length; k++) {
+          let nr = r + nbr_offsets[k][0];
 
-          if (ni >= 0 && mask_grid[ni] === 1 && dist_grid[ni] > d + 1) {
-            dist_grid[ni] = d + 1;
+          if (nr < 0 || nr >= h) continue;
+          let nc = (c + nbr_offsets[k][1] + w) % w;
+          let ni = nr*w + nc;
+          let nd = d + nbr_offsets[k][2];
+
+          if (mask_grid[ni] === 1 && nd < dist_grid[ni]) {
+            dist_grid[ni] = nd;
             queue.push(ni);
           }
         }
@@ -405,13 +733,14 @@ let { ViscountRuralSuitability } = global.ViscountRuralSuitability ? global : re
 
       for (let i = 0; i < n_valid; i++) {
         let gidx = valid_indices[i];
-        let d_px = dist_grid[gidx];
+        let d_raw = dist_grid[gidx];
 
-        if (d_px < 65535) {
+        if (d_raw < 65535) {
+          let d_px = d_raw/10.0;
           let lat = 90 - (Math.floor(gidx/w) + 0.5)*180/h;
           let km_per_px = 9.26*Math.max(0.25, Math.sqrt(Math.max(0.08, Math.cos(lat*Math.PI/180))));
 
-          out[i] = Math.max(0.04, Math.exp(-(d_px*km_per_px)/13.5));
+          out[i] = 0.25 + 0.75*Math.exp(-(d_px*km_per_px)/26.0);
         }
       }
 
@@ -487,6 +816,16 @@ let { ViscountRuralSuitability } = global.ViscountRuralSuitability ? global : re
 
     static getLaurentideCordilleranIceFactor (arg0_lat, arg1_lon, arg2_year) {
       return ViscountRuralSuitability.getLaurentideCordilleranIceFactor(arg0_lat, arg1_lon, arg2_year);
+    }
+
+
+    static getModernUrbanMask (arg0_mask_data, arg1_config, arg2_cache) {
+      return ViscountRuralSuitability.getModernUrbanMask(arg0_mask_data, arg1_config, arg2_cache);
+    }
+
+
+    static inpaintUrbanMaskGrid (arg0_popc_grid, arg1_urban_mask, arg2_land_area_grid, arg3_fallback_grid, arg4_grid_width, arg5_grid_height, arg6_inpaint_radius, arg7_target_indices) {
+      return ViscountRuralSuitability.inpaintUrbanMaskGrid(arg0_popc_grid, arg1_urban_mask, arg2_land_area_grid, arg3_fallback_grid, arg4_grid_width, arg5_grid_height, arg6_inpaint_radius, arg7_target_indices);
     }
 
 

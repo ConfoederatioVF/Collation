@@ -1,0 +1,883 @@
+{
+  "batch_index": 49,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        48.88373,
+        -78.81302
+      ],
+      "country": "Canada",
+      "earliest_year": 1919,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rivière-Ojima-Canada",
+      "known_aliases": [
+        "Rivière-Ojima",
+        "rivière-ojima"
+      ],
+      "latest_year": 2026,
+      "name": "Rivière-Ojima",
+      "reason": "missing_entry",
+      "region": "can_quebec",
+      "sample_years": [
+        1919,
+        2001,
+        2014,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.65385,
+        -121.91352
+      ],
+      "country": "Canada",
+      "earliest_year": 1934,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pashilqua 2-Canada",
+      "known_aliases": [
+        "Pashilqua 2",
+        "pashilqua 2",
+        "mccartney's flat 4",
+        "McCartney's Flat 4"
+      ],
+      "latest_year": 2026,
+      "name": "Pashilqua 2",
+      "reason": "missing_entry",
+      "region": "can_british_columbia",
+      "sample_years": [
+        1934,
+        2003,
+        2015,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        53.42272,
+        -129.2597
+      ],
+      "country": "Canada",
+      "earliest_year": 1914,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kulkayu (Hartley Bay) 4-Canada",
+      "known_aliases": [
+        "Kulkayu (Hartley Bay) 4",
+        "kulkayu 4",
+        "kulkayu 4a",
+        "Kulkayu (Hartley Bay) 4A"
+      ],
+      "latest_year": 2026,
+      "name": "Kulkayu (Hartley Bay) 4",
+      "reason": "missing_entry",
+      "region": "can_british_columbia",
+      "sample_years": [
+        1914,
+        2001,
+        2014,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.37032,
+        -65.71426
+      ],
+      "country": "Canada",
+      "earliest_year": 1895,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rivière-Bonaventure-Canada",
+      "known_aliases": [
+        "Rivière-Bonaventure",
+        "rivière-bonaventure"
+      ],
+      "latest_year": 2026,
+      "name": "Rivière-Bonaventure",
+      "reason": "missing_entry",
+      "region": "can_quebec",
+      "sample_years": [
+        1895,
+        2000,
+        2013,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.19316,
+        -71.18528
+      ],
+      "country": "Canada",
+      "earliest_year": 1955,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lac-Ministuk-Canada",
+      "known_aliases": [
+        "Lac-Ministuk",
+        "lac-ministuk"
+      ],
+      "latest_year": 2026,
+      "name": "Lac-Ministuk",
+      "reason": "missing_entry",
+      "region": "can_quebec",
+      "sample_years": [
+        1955,
+        2011,
+        2020,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.40493,
+        -93.18229
+      ],
+      "country": "Canada",
+      "earliest_year": 1898,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Wabauskang 21-Canada",
+      "known_aliases": [
+        "Wabauskang 21",
+        "wabauskang 21"
+      ],
+      "latest_year": 2026,
+      "name": "Wabauskang 21",
+      "reason": "missing_entry",
+      "region": "can_ontario",
+      "sample_years": [
+        1898,
+        2000,
+        2013,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.46995,
+        -122.15057
+      ],
+      "country": "Canada",
+      "earliest_year": 1914,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Canoe Creek 1-Canada",
+      "known_aliases": [
+        "Canoe Creek 1",
+        "canoe creek 1"
+      ],
+      "latest_year": 2026,
+      "name": "Canoe Creek 1",
+      "reason": "missing_entry",
+      "region": "can_british_columbia",
+      "sample_years": [
+        1914,
+        2001,
+        2014,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.28467,
+        -121.63383
+      ],
+      "country": "Canada",
+      "earliest_year": 1965,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Stryen 9-Canada",
+      "known_aliases": [
+        "Stryen 9",
+        "stryen 9",
+        "halhalaeden",
+        "Halhalaeden"
+      ],
+      "latest_year": 2026,
+      "name": "Stryen 9",
+      "reason": "missing_entry",
+      "region": "can_british_columbia",
+      "sample_years": [
+        1965,
+        2005,
+        2016,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.98622,
+        -120.23848
+      ],
+      "country": "Canada",
+      "earliest_year": 1965,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Whispering Pines 4-Canada",
+      "known_aliases": [
+        "Whispering Pines 4",
+        "whispering pines 4"
+      ],
+      "latest_year": 2026,
+      "name": "Whispering Pines 4",
+      "reason": "missing_entry",
+      "region": "can_british_columbia",
+      "sample_years": [
+        1965,
+        2005,
+        2016,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        54.5625,
+        -128.47298
+      ],
+      "country": "Canada",
+      "earliest_year": 1940,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kshish 4-Canada",
+      "known_aliases": [
+        "Kshish 4",
+        "kshish 4"
+      ],
+      "latest_year": 2010,
+      "name": "Kshish 4",
+      "reason": "missing_entry",
+      "region": "can_british_columbia",
+      "sample_years": [
+        1940,
+        1990,
+        2004,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.28437,
+        -114.84123
+      ],
+      "country": "Canada",
+      "earliest_year": 1886,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Waiparous-Canada",
+      "known_aliases": [
+        "Waiparous",
+        "waiparous"
+      ],
+      "latest_year": 2026,
+      "name": "Waiparous",
+      "reason": "missing_entry",
+      "region": "can_alberta",
+      "sample_years": [
+        1886,
+        1996,
+        2013,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        49.66133,
+        -121.41402
+      ],
+      "country": "Canada",
+      "earliest_year": 1961,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Spuzzum 1-Canada",
+      "known_aliases": [
+        "Spuzzum 1",
+        "spuzzum 1"
+      ],
+      "latest_year": 2026,
+      "name": "Spuzzum 1",
+      "reason": "missing_entry",
+      "region": "can_british_columbia",
+      "sample_years": [
+        1961,
+        2005,
+        2016,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.4758,
+        -99.88776
+      ],
+      "country": "Canada",
+      "earliest_year": 1932,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rolling River 67B-Canada",
+      "known_aliases": [
+        "Rolling River 67B",
+        "rolling river 67b"
+      ],
+      "latest_year": 2026,
+      "name": "Rolling River 67B",
+      "reason": "missing_entry",
+      "region": "can_manitoba",
+      "sample_years": [
+        1932,
+        2003,
+        2015,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.75577,
+        -98.44442
+      ],
+      "country": "Canada",
+      "earliest_year": 1912,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "The Narrows 49-Canada",
+      "known_aliases": [
+        "The Narrows 49",
+        "the narrows 49"
+      ],
+      "latest_year": 2026,
+      "name": "The Narrows 49",
+      "reason": "missing_entry",
+      "region": "can_manitoba",
+      "sample_years": [
+        1912,
+        2001,
+        2014,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        54.74428,
+        -113.5393
+      ],
+      "country": "Canada",
+      "earliest_year": 1921,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sunset Beach-Canada",
+      "known_aliases": [
+        "Sunset Beach",
+        "sunset beach"
+      ],
+      "latest_year": 2026,
+      "name": "Sunset Beach",
+      "reason": "missing_entry",
+      "region": "can_alberta",
+      "sample_years": [
+        1921,
+        2002,
+        2014,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        49.38082,
+        -94.99445
+      ],
+      "country": "Canada",
+      "earliest_year": 1958,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Northwest Angle 33B-Canada",
+      "known_aliases": [
+        "Northwest Angle 33B",
+        "northwest angle 33b"
+      ],
+      "latest_year": 2026,
+      "name": "Northwest Angle 33B",
+      "reason": "missing_entry",
+      "region": "can_ontario",
+      "sample_years": [
+        1958,
+        2004,
+        2015,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.61625,
+        -102.7199
+      ],
+      "country": "Canada",
+      "earliest_year": 1974,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Melville Beach-Canada",
+      "known_aliases": [
+        "Melville Beach",
+        "melville beach"
+      ],
+      "latest_year": 2026,
+      "name": "Melville Beach",
+      "reason": "missing_entry",
+      "region": "can_saskatchewan",
+      "sample_years": [
+        1974,
+        2005,
+        2016,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        54.43677,
+        -113.7678
+      ],
+      "country": "Canada",
+      "earliest_year": 1967,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Larkspur-Canada",
+      "known_aliases": [
+        "Larkspur",
+        "larkspur"
+      ],
+      "latest_year": 2026,
+      "name": "Larkspur",
+      "reason": "missing_entry",
+      "region": "can_alberta",
+      "sample_years": [
+        1967,
+        2005,
+        2016,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        49.1874,
+        -122.69518
+      ],
+      "country": "Canada",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Barnston Island 3-Canada",
+      "known_aliases": [
+        "Barnston Island 3",
+        "barnston island 3"
+      ],
+      "latest_year": 2026,
+      "name": "Barnston Island 3",
+      "reason": "missing_entry",
+      "region": "can_british_columbia",
+      "sample_years": [
+        1950,
+        2003,
+        2015,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.86562,
+        -119.59215
+      ],
+      "country": "Canada",
+      "earliest_year": 1916,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Chum Creek 2-Canada",
+      "known_aliases": [
+        "Chum Creek 2",
+        "chum creek 2"
+      ],
+      "latest_year": 2026,
+      "name": "Chum Creek 2",
+      "reason": "missing_entry",
+      "region": "can_british_columbia",
+      "sample_years": [
+        1916,
+        2001,
+        2014,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.90358,
+        -70.23764
+      ],
+      "country": "Canada",
+      "earliest_year": 1965,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mont-Élie-Canada",
+      "known_aliases": [
+        "Mont-Élie",
+        "mont-élie"
+      ],
+      "latest_year": 2026,
+      "name": "Mont-Élie",
+      "reason": "missing_entry",
+      "region": "can_quebec",
+      "sample_years": [
+        1965,
+        2005,
+        2016,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        49.35023,
+        -94.85257
+      ],
+      "country": "Canada",
+      "earliest_year": 1969,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lake of the Woods 37-Canada",
+      "known_aliases": [
+        "Lake of the Woods 37",
+        "lake of the woods 37"
+      ],
+      "latest_year": 2026,
+      "name": "Lake of the Woods 37",
+      "reason": "missing_entry",
+      "region": "can_ontario",
+      "sample_years": [
+        1969,
+        2005,
+        2016,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        56.12002,
+        -103.74965
+      ],
+      "country": "Canada",
+      "earliest_year": 1886,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Brabant Lake-Canada",
+      "known_aliases": [
+        "Brabant Lake",
+        "brabant lake"
+      ],
+      "latest_year": 2026,
+      "name": "Brabant Lake",
+      "reason": "missing_entry",
+      "region": "can_saskatchewan",
+      "sample_years": [
+        1886,
+        1996,
+        2013,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.0505,
+        -122.53807
+      ],
+      "country": "Canada",
+      "earliest_year": 1957,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Q'alatkú7em-Canada",
+      "known_aliases": [
+        "Q'alatkú7em",
+        "q'alatkú7em"
+      ],
+      "latest_year": 2026,
+      "name": "Q'alatkú7em",
+      "reason": "missing_entry",
+      "region": "can_british_columbia",
+      "sample_years": [
+        1957,
+        2004,
+        2015,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.29402,
+        -121.19773
+      ],
+      "country": "Canada",
+      "earliest_year": 1903,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Shackan 11-Canada",
+      "known_aliases": [
+        "Shackan 11",
+        "shackan 11"
+      ],
+      "latest_year": 2026,
+      "name": "Shackan 11",
+      "reason": "missing_entry",
+      "region": "can_british_columbia",
+      "sample_years": [
+        1903,
+        2001,
+        2014,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.35278,
+        -64.91545
+      ],
+      "country": "Canada",
+      "earliest_year": 1868,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Wildcat 12-Canada",
+      "known_aliases": [
+        "Wildcat 12",
+        "wildcat 12"
+      ],
+      "latest_year": 2026,
+      "name": "Wildcat 12",
+      "reason": "missing_entry",
+      "region": "can_nova_scotia",
+      "sample_years": [
+        1868,
+        1991,
+        2012,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        55.04787,
+        -130.16835
+      ],
+      "country": "Canada",
+      "earliest_year": 1952,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kitimat-Stikine A-Canada",
+      "known_aliases": [
+        "Kitimat-Stikine A",
+        "kitimat-stikine a"
+      ],
+      "latest_year": 2026,
+      "name": "Kitimat-Stikine A",
+      "reason": "missing_entry",
+      "region": "can_british_columbia",
+      "sample_years": [
+        1952,
+        2004,
+        2015,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        53.9446,
+        -125.77484
+      ],
+      "country": "Canada",
+      "earliest_year": 1925,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cheslatta 1-Canada",
+      "known_aliases": [
+        "Cheslatta 1",
+        "cheslatta 1"
+      ],
+      "latest_year": 2026,
+      "name": "Cheslatta 1",
+      "reason": "missing_entry",
+      "region": "can_british_columbia",
+      "sample_years": [
+        1925,
+        2002,
+        2014,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.20332,
+        -63.143
+      ],
+      "country": "Canada",
+      "earliest_year": 1940,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rocky Point 3-Canada",
+      "known_aliases": [
+        "Rocky Point 3",
+        "rocky point 3"
+      ],
+      "latest_year": 2026,
+      "name": "Rocky Point 3",
+      "reason": "missing_entry",
+      "region": "can_prince_edward_island",
+      "sample_years": [
+        1940,
+        2003,
+        2015,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.88915,
+        -121.84283
+      ],
+      "country": "Canada",
+      "earliest_year": 1930,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pavilion 1-Canada",
+      "known_aliases": [
+        "Pavilion 1",
+        "pavilion 1"
+      ],
+      "latest_year": 2026,
+      "name": "Pavilion 1",
+      "reason": "missing_entry",
+      "region": "can_british_columbia",
+      "sample_years": [
+        1930,
+        2002,
+        2014,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

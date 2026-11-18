@@ -1,0 +1,956 @@
+{
+  "batch_index": 334,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        46.5022,
+        -94.71537
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1913,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Byron (Cass County)-Minnesota",
+      "known_aliases": [
+        "Byron (Cass County)",
+        "byron",
+        "byron township",
+        "Byron township"
+      ],
+      "latest_year": 2020,
+      "name": "Byron (Cass County)",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1913,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.02076,
+        -96.62672
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1917,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Morken-Minnesota",
+      "known_aliases": [
+        "Morken",
+        "morken",
+        "morken township",
+        "Morken township"
+      ],
+      "latest_year": 2020,
+      "name": "Morken",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1917,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.46589,
+        -95.70785
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1957,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Heier-Minnesota",
+      "known_aliases": [
+        "Heier",
+        "heier",
+        "heier township",
+        "Heier township"
+      ],
+      "latest_year": 2020,
+      "name": "Heier",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1957,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.06443,
+        -96.95463
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1927,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Northland (Polk County)-Minnesota",
+      "known_aliases": [
+        "Northland (Polk County)",
+        "northland",
+        "northland township",
+        "Northland township"
+      ],
+      "latest_year": 2020,
+      "name": "Northland (Polk County)",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1927,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.10085,
+        -87.29385
+      ],
+      "country": "Michigan",
+      "earliest_year": 1899,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ewing-Michigan",
+      "known_aliases": [
+        "Ewing",
+        "ewing",
+        "ewing township",
+        "Ewing township"
+      ],
+      "latest_year": 2020,
+      "name": "Ewing",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1899,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.56576,
+        -93.02453
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1963,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Automba-Minnesota",
+      "known_aliases": [
+        "Automba",
+        "automba",
+        "automba township",
+        "Automba township"
+      ],
+      "latest_year": 2020,
+      "name": "Automba",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1963,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.02077,
+        -95.55293
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1905,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Havelock-Minnesota",
+      "known_aliases": [
+        "Havelock",
+        "havelock",
+        "havelock township",
+        "Havelock township"
+      ],
+      "latest_year": 2020,
+      "name": "Havelock",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1905,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.0998,
+        -95.67177
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1943,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mandt-Minnesota",
+      "known_aliases": [
+        "Mandt",
+        "mandt",
+        "mandt township",
+        "Mandt township"
+      ],
+      "latest_year": 2020,
+      "name": "Mandt",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1943,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.97393,
+        -95.02934
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1926,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Angle-Minnesota",
+      "known_aliases": [
+        "Angle",
+        "angle",
+        "angle township",
+        "Angle township"
+      ],
+      "latest_year": 2020,
+      "name": "Angle",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1926,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.63068,
+        -92.50942
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1951,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bennington-Minnesota",
+      "known_aliases": [
+        "Bennington",
+        "bennington",
+        "bennington township",
+        "Bennington township"
+      ],
+      "latest_year": 2020,
+      "name": "Bennington",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1951,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.67305,
+        -94.93458
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1925,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Norfolk-Minnesota",
+      "known_aliases": [
+        "Norfolk",
+        "norfolk",
+        "norfolk township",
+        "Norfolk township"
+      ],
+      "latest_year": 2020,
+      "name": "Norfolk",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1925,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.93247,
+        -96.17021
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1892,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hamlin-Minnesota",
+      "known_aliases": [
+        "Hamlin",
+        "hamlin",
+        "hamlin township",
+        "Hamlin township"
+      ],
+      "latest_year": 2020,
+      "name": "Hamlin",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1892,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.07166,
+        -97.05201
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1882,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Esther-Minnesota",
+      "known_aliases": [
+        "Esther",
+        "esther",
+        "esther township",
+        "Esther township"
+      ],
+      "latest_year": 2020,
+      "name": "Esther",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1882,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.94574,
+        -95.94229
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1928,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Dieter-Minnesota",
+      "known_aliases": [
+        "Dieter",
+        "dieter",
+        "dieter township",
+        "Dieter township"
+      ],
+      "latest_year": 2020,
+      "name": "Dieter",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1928,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.78405,
+        -94.20087
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1942,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ardenhurst-Minnesota",
+      "known_aliases": [
+        "Ardenhurst",
+        "ardenhurst",
+        "ardenhurst township",
+        "Ardenhurst township"
+      ],
+      "latest_year": 2020,
+      "name": "Ardenhurst",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1942,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.18585,
+        -95.5463
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1881,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cashel-Minnesota",
+      "known_aliases": [
+        "Cashel",
+        "cashel",
+        "cashel township",
+        "Cashel township"
+      ],
+      "latest_year": 2020,
+      "name": "Cashel",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1881,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.76853,
+        -95.89983
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1963,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tyro-Minnesota",
+      "known_aliases": [
+        "Tyro",
+        "tyro",
+        "tyro township",
+        "Tyro township"
+      ],
+      "latest_year": 2020,
+      "name": "Tyro",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1963,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.67182,
+        -94.75314
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1972,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Walhalla-Minnesota",
+      "known_aliases": [
+        "Walhalla",
+        "walhalla",
+        "walhalla township",
+        "Walhalla township"
+      ],
+      "latest_year": 2020,
+      "name": "Walhalla",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1972,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.887,
+        -95.88227
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1921,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fenton-Minnesota",
+      "known_aliases": [
+        "Fenton",
+        "fenton",
+        "fenton township",
+        "Fenton township"
+      ],
+      "latest_year": 2020,
+      "name": "Fenton",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1921,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.76628,
+        -94.60431
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1960,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bull Moose-Minnesota",
+      "known_aliases": [
+        "Bull Moose",
+        "bull moose",
+        "bull moose township",
+        "Bull Moose township"
+      ],
+      "latest_year": 2020,
+      "name": "Bull Moose",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.97517,
+        -95.16522
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1932,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Dale-Minnesota",
+      "known_aliases": [
+        "Dale",
+        "dale",
+        "dale township",
+        "Dale township"
+      ],
+      "latest_year": 2020,
+      "name": "Dale",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1932,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.05984,
+        -95.92196
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1875,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kratka-Minnesota",
+      "known_aliases": [
+        "Kratka",
+        "kratka",
+        "kratka township",
+        "Kratka township"
+      ],
+      "latest_year": 2020,
+      "name": "Kratka",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1875,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.8033,
+        -96.15964
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1949,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Terrebonne-Minnesota",
+      "known_aliases": [
+        "Terrebonne",
+        "terrebonne",
+        "terrebonne township",
+        "Terrebonne township"
+      ],
+      "latest_year": 2020,
+      "name": "Terrebonne",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1949,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.74741,
+        -92.25272
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1881,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kugler-Minnesota",
+      "known_aliases": [
+        "Kugler",
+        "kugler",
+        "kugler township",
+        "Kugler township"
+      ],
+      "latest_year": 2020,
+      "name": "Kugler",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1881,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.23178,
+        -96.19447
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1924,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Orwell-Minnesota",
+      "known_aliases": [
+        "Orwell",
+        "orwell",
+        "orwell township",
+        "Orwell township"
+      ],
+      "latest_year": 2020,
+      "name": "Orwell",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1924,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.89934,
+        -95.76346
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Equality-Minnesota",
+      "known_aliases": [
+        "Equality",
+        "equality",
+        "equality township",
+        "Equality township"
+      ],
+      "latest_year": 2020,
+      "name": "Equality",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1900,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.76329,
+        -92.88985
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1876,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sturgeon-Minnesota",
+      "known_aliases": [
+        "Sturgeon",
+        "sturgeon",
+        "sturgeon township",
+        "Sturgeon township"
+      ],
+      "latest_year": 2020,
+      "name": "Sturgeon",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1876,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.14403,
+        -95.28456
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1884,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Highwater-Minnesota",
+      "known_aliases": [
+        "Highwater",
+        "highwater",
+        "highwater township",
+        "Highwater township"
+      ],
+      "latest_year": 2020,
+      "name": "Highwater",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1884,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.55079,
+        -94.19789
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1852,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pilot Grove-Minnesota",
+      "known_aliases": [
+        "Pilot Grove",
+        "pilot grove",
+        "pilot grove township",
+        "Pilot Grove township"
+      ],
+      "latest_year": 2020,
+      "name": "Pilot Grove",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1852,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.07252,
+        -95.94907
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1943,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pomme de Terre-Minnesota",
+      "known_aliases": [
+        "Pomme de Terre",
+        "pomme de terre",
+        "pomme de terre township",
+        "Pomme de Terre township"
+      ],
+      "latest_year": 2020,
+      "name": "Pomme de Terre",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1943,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

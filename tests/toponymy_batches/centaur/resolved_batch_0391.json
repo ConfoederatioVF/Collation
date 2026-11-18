@@ -1,0 +1,515 @@
+{
+  "batch_index": 391,
+  "project": "CENTAUR",
+  "count": 13,
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        36.1306,
+        -105.7586
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1751,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Las Trampas-New Mexico",
+      "known_aliases": [
+        "Las Trampas",
+        "santo tomas del rio de las trampas",
+        "san jose de gracia de las trampas"
+      ],
+      "latest_year": 1783,
+      "name": "Las Trampas",
+      "reason": "missing_entry",
+      "region": "ca1_spanish_new_mexico",
+      "sample_years": [
+        1751,
+        1754,
+        1776,
+        1783
+      ],
+      "sources": [
+        "CENTAUR"
+      ],
+      "canonical_name": "Las Trampas",
+      "historical_names": [
+        {
+          "date": "1751.1.1",
+          "name": "Las Trampas"
+        }
+      ],
+      "other_names": [
+        "santo tomas del rio de las trampas",
+        "san jose de gracia de las trampas"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.0151,
+        -94.3151
+      ],
+      "country": "Missouri",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Little Osage Village-Missouri",
+      "known_aliases": [
+        "Little Osage Village",
+        "vernon county little osage town"
+      ],
+      "latest_year": 1750,
+      "name": "Little Osage Village",
+      "reason": "missing_entry",
+      "region": "ca1_plains_indigenous_1754",
+      "sample_years": [
+        1750
+      ],
+      "sources": [
+        "CENTAUR"
+      ],
+      "canonical_name": "Little Osage Village",
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Little Osage Village"
+        }
+      ],
+      "other_names": [
+        "vernon county little osage town"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.5418,
+        -82.5596
+      ],
+      "country": "Georgia",
+      "earliest_year": 1770,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Wrightsboro-Georgia",
+      "known_aliases": [
+        "Wrightsboro",
+        "wrightsborough"
+      ],
+      "latest_year": 1783,
+      "name": "Wrightsboro",
+      "reason": "missing_entry",
+      "region": "ca1_georgia",
+      "sample_years": [
+        1770,
+        1775,
+        1783
+      ],
+      "sources": [
+        "CENTAUR"
+      ],
+      "canonical_name": "Wrightsboro",
+      "historical_names": [
+        {
+          "date": "1770.1.1",
+          "name": "Wrightsboro"
+        }
+      ],
+      "other_names": [
+        "wrightsborough"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.27226,
+        -72.51022
+      ],
+      "country": "Canada",
+      "earliest_year": 1756,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Saint-Grégoire-Canada",
+      "known_aliases": [
+        "Saint-Grégoire",
+        "saint-grégoire-le-grand"
+      ],
+      "latest_year": 1861,
+      "name": "Saint-Grégoire",
+      "reason": "missing_entry",
+      "region": "cc1_new_france_st_lawrence",
+      "sample_years": [
+        1756,
+        1765,
+        1790,
+        1825,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ],
+      "canonical_name": "Saint-Grégoire",
+      "historical_names": [
+        {
+          "date": "1756.1.1",
+          "name": "Saint-Grégoire"
+        }
+      ],
+      "other_names": [
+        "saint-grégoire-le-grand"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.60449,
+        -74.19211
+      ],
+      "country": "Canada",
+      "earliest_year": 1755,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Saint-Hermas-Canada",
+      "known_aliases": [
+        "Saint-Hermas",
+        "côte-saint-hermas"
+      ],
+      "latest_year": 1861,
+      "name": "Saint-Hermas",
+      "reason": "missing_entry",
+      "region": "cc1_new_france_st_lawrence",
+      "sample_years": [
+        1755,
+        1765,
+        1790,
+        1825,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ],
+      "canonical_name": "Saint-Hermas",
+      "historical_names": [
+        {
+          "date": "1755.1.1",
+          "name": "Saint-Hermas"
+        }
+      ],
+      "other_names": [
+        "côte-saint-hermas"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.36531,
+        -97.02983
+      ],
+      "country": "Canada",
+      "earliest_year": 1814,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Berens River-Canada",
+      "known_aliases": [
+        "Berens River",
+        "berens river post"
+      ],
+      "latest_year": 1861,
+      "name": "Berens River",
+      "reason": "missing_entry",
+      "region": "cc2_ruperts_land_prairies",
+      "sample_years": [
+        1814,
+        1831,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ],
+      "canonical_name": "Berens River",
+      "historical_names": [
+        {
+          "date": "1814.1.1",
+          "name": "Berens River"
+        }
+      ],
+      "other_names": [
+        "berens river post"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.63344,
+        -61.01521
+      ],
+      "country": "Canada",
+      "earliest_year": 1785,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Chéticamp-Canada",
+      "known_aliases": [
+        "Chéticamp",
+        "chéticamp-acadien"
+      ],
+      "latest_year": 1861,
+      "name": "Chéticamp",
+      "reason": "missing_entry",
+      "region": "cc2_nova_scotia",
+      "sample_years": [
+        1785,
+        1827,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ],
+      "canonical_name": "Chéticamp",
+      "historical_names": [
+        {
+          "date": "1785.1.1",
+          "name": "Chéticamp"
+        }
+      ],
+      "other_names": [
+        "chéticamp-acadien"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        53.58348,
+        -109.63483
+      ],
+      "country": "Canada",
+      "earliest_year": 1829,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fort Pitt-Canada",
+      "known_aliases": [
+        "Fort Pitt",
+        "fort pitt sk"
+      ],
+      "latest_year": 1867,
+      "name": "Fort Pitt",
+      "reason": "missing_entry",
+      "region": "cc2_ruperts_land_prairies",
+      "sample_years": [
+        1829,
+        1851,
+        1861,
+        1867
+      ],
+      "sources": [
+        "CENTAUR"
+      ],
+      "canonical_name": "Fort Pitt",
+      "historical_names": [
+        {
+          "date": "1829.1.1",
+          "name": "Fort Pitt"
+        }
+      ],
+      "other_names": [
+        "fort pitt sk"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        58.20027,
+        -62.6314
+      ],
+      "country": "Canada",
+      "earliest_year": 1830,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hebron-Canada",
+      "known_aliases": [
+        "Hebron",
+        "hebron mission"
+      ],
+      "latest_year": 1867,
+      "name": "Hebron",
+      "reason": "missing_entry",
+      "region": "cc2_newfoundland_labrador",
+      "sample_years": [
+        1830,
+        1845,
+        1857,
+        1867
+      ],
+      "sources": [
+        "CENTAUR"
+      ],
+      "canonical_name": "Hebron",
+      "historical_names": [
+        {
+          "date": "1830.1.1",
+          "name": "Hebron"
+        }
+      ],
+      "other_names": [
+        "hebron mission"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.38488,
+        -92.40532
+      ],
+      "country": "Canada",
+      "earliest_year": 1803,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lac Seul-Canada_2",
+      "known_aliases": [
+        "Lac Seul",
+        "lac seul house"
+      ],
+      "latest_year": 1861,
+      "name": "Lac Seul",
+      "reason": "missing_entry",
+      "region": "cc2_ruperts_land_prairies",
+      "sample_years": [
+        1803,
+        1825,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ],
+      "canonical_name": "Lac Seul",
+      "historical_names": [
+        {
+          "date": "1803.1.1",
+          "name": "Lac Seul"
+        }
+      ],
+      "other_names": [
+        "lac seul house"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.43344,
+        -61.11521
+      ],
+      "country": "Canada",
+      "earliest_year": 1786,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Margaree-Canada",
+      "known_aliases": [
+        "Margaree",
+        "margaree harbour"
+      ],
+      "latest_year": 1861,
+      "name": "Margaree",
+      "reason": "missing_entry",
+      "region": "cc2_lower_canada_quebec",
+      "sample_years": [
+        1786,
+        1827,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ],
+      "canonical_name": "Margaree",
+      "historical_names": [
+        {
+          "date": "1786.1.1",
+          "name": "Margaree"
+        }
+      ],
+      "other_names": [
+        "margaree harbour"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.81684,
+        -81.51651
+      ],
+      "country": "Canada",
+      "earliest_year": 1794,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mattagami-Canada",
+      "known_aliases": [
+        "Mattagami",
+        "fort mattagami"
+      ],
+      "latest_year": 1861,
+      "name": "Mattagami",
+      "reason": "missing_entry",
+      "region": "cc2_ruperts_land_prairies",
+      "sample_years": [
+        1794,
+        1825,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ],
+      "canonical_name": "Mattagami",
+      "historical_names": [
+        {
+          "date": "1794.1.1",
+          "name": "Mattagami"
+        }
+      ],
+      "other_names": [
+        "fort mattagami"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.33341,
+        -76.28269
+      ],
+      "country": "Canada",
+      "earliest_year": 1823,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pakenham-Canada",
+      "known_aliases": [
+        "Pakenham",
+        "pakenham village"
+      ],
+      "latest_year": 1861,
+      "name": "Pakenham",
+      "reason": "missing_entry",
+      "region": "cc2_lower_canada_quebec",
+      "sample_years": [
+        1823,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ],
+      "canonical_name": "Pakenham",
+      "historical_names": [
+        {
+          "date": "1823.1.1",
+          "name": "Pakenham"
+        }
+      ],
+      "other_names": [
+        "pakenham village"
+      ]
+    }
+  ]
+}

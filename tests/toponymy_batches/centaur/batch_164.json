@@ -1,0 +1,959 @@
+{
+  "batch_index": 164,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        36.98,
+        -107.50728
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1941,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Middle Mesa-New Mexico",
+      "known_aliases": [
+        "Middle Mesa",
+        "middle mesa",
+        "middle mesa cdp",
+        "Middle Mesa CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Middle Mesa",
+      "reason": "missing_entry",
+      "region": "usa_new_mexico",
+      "sample_years": [
+        1941,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.99485,
+        -105.90694
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1927,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio Chiquito-New Mexico",
+      "known_aliases": [
+        "Rio Chiquito",
+        "rio chiquito",
+        "rio chiquito cdp",
+        "Rio Chiquito CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Rio Chiquito",
+      "reason": "missing_entry",
+      "region": "usa_new_mexico",
+      "sample_years": [
+        1927,
+        1950,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.66362,
+        -84.4343
+      ],
+      "country": "Ohio",
+      "earliest_year": 1956,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Alvordton-Ohio",
+      "known_aliases": [
+        "Alvordton",
+        "alvordton",
+        "alvordton cdp",
+        "Alvordton CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Alvordton",
+      "reason": "missing_entry",
+      "region": "usa_ohio",
+      "sample_years": [
+        1956,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.98994,
+        -96.23037
+      ],
+      "country": "Oklahoma",
+      "earliest_year": 1951,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Blue-Oklahoma",
+      "known_aliases": [
+        "Blue",
+        "blue",
+        "blue cdp",
+        "Blue CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Blue",
+      "reason": "missing_entry",
+      "region": "usa_oklahoma",
+      "sample_years": [
+        1951,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.78918,
+        -76.17283
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1931,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Morea-Pennsylvania",
+      "known_aliases": [
+        "Morea",
+        "morea",
+        "morea cdp",
+        "new boston-morea",
+        "Morea CDP",
+        "New Boston-Morea"
+      ],
+      "latest_year": 2020,
+      "name": "Morea",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1931,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        29.33555,
+        -103.54261
+      ],
+      "country": "Texas",
+      "earliest_year": 1871,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Study Butte-Texas",
+      "known_aliases": [
+        "Study Butte",
+        "study butte",
+        "study butte cdp",
+        "Study Butte CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Study Butte",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1871,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.68032,
+        -110.81454
+      ],
+      "country": "Utah",
+      "earliest_year": 1925,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kenilworth-Utah",
+      "known_aliases": [
+        "Kenilworth",
+        "kenilworth",
+        "kenilworth cdp",
+        "Kenilworth CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Kenilworth",
+      "reason": "missing_entry",
+      "region": "usa_utah",
+      "sample_years": [
+        1925,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.31682,
+        -122.01068
+      ],
+      "country": "Washington",
+      "earliest_year": 1865,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lake Cavanaugh-Washington",
+      "known_aliases": [
+        "Lake Cavanaugh",
+        "lake cavanaugh",
+        "lake cavanaugh cdp",
+        "Lake Cavanaugh CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Lake Cavanaugh",
+      "reason": "missing_entry",
+      "region": "usa_washington",
+      "sample_years": [
+        1865,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.32541,
+        -79.55458
+      ],
+      "country": "West Virginia",
+      "earliest_year": 1866,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Aurora-West Virginia",
+      "known_aliases": [
+        "Aurora",
+        "aurora",
+        "aurora cdp",
+        "Aurora CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Aurora",
+      "reason": "missing_entry",
+      "region": "usa_west_virginia",
+      "sample_years": [
+        1866,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.7871,
+        -91.79271
+      ],
+      "country": "Arkansas",
+      "earliest_year": 1918,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bethesda-Arkansas",
+      "known_aliases": [
+        "Bethesda",
+        "bethesda",
+        "bethesda cdp",
+        "Bethesda CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Bethesda",
+      "reason": "missing_entry",
+      "region": "usa_arkansas",
+      "sample_years": [
+        1918,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        27.48296,
+        -81.90973
+      ],
+      "country": "Florida",
+      "earliest_year": 1892,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ona-Florida",
+      "known_aliases": [
+        "Ona",
+        "ona",
+        "ona cdp",
+        "Ona CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Ona",
+      "reason": "missing_entry",
+      "region": "usa_florida",
+      "sample_years": [
+        1892,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.28839,
+        -75.69305
+      ],
+      "country": "Maryland",
+      "earliest_year": 1880,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Allen-Maryland",
+      "known_aliases": [
+        "Allen",
+        "allen",
+        "allen cdp",
+        "Allen CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Allen",
+      "reason": "missing_entry",
+      "region": "usa_maryland",
+      "sample_years": [
+        1880,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.28345,
+        -112.2871
+      ],
+      "country": "Montana",
+      "earliest_year": 1866,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Basin-Montana",
+      "known_aliases": [
+        "Basin",
+        "basin",
+        "basin cdp",
+        "Basin CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Basin",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1866,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.30546,
+        -101.93463
+      ],
+      "country": "Nebraska",
+      "earliest_year": 1962,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Belmar-Nebraska",
+      "known_aliases": [
+        "Belmar",
+        "belmar",
+        "belmar cdp",
+        "Belmar CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Belmar",
+      "reason": "missing_entry",
+      "region": "usa_nebraska",
+      "sample_years": [
+        1962,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.45724,
+        -97.72547
+      ],
+      "country": "Oklahoma",
+      "earliest_year": 1909,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Breckenridge-Oklahoma",
+      "known_aliases": [
+        "Breckenridge",
+        "breckenridge",
+        "breckenridge town",
+        "Breckenridge town"
+      ],
+      "latest_year": 2026,
+      "name": "Breckenridge",
+      "reason": "missing_entry",
+      "region": "usa_oklahoma",
+      "sample_years": [
+        1909,
+        2002,
+        2014,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.72482,
+        -82.91463
+      ],
+      "country": "South Carolina",
+      "earliest_year": 1874,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Newry-South Carolina",
+      "known_aliases": [
+        "Newry",
+        "newry",
+        "newry cdp",
+        "Newry CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Newry",
+      "reason": "missing_entry",
+      "region": "usa_south_carolina",
+      "sample_years": [
+        1874,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.35256,
+        -82.18734
+      ],
+      "country": "Virginia",
+      "earliest_year": 1899,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Big Rock-Virginia",
+      "known_aliases": [
+        "Big Rock",
+        "big rock",
+        "big rock cdp",
+        "Big Rock CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Big Rock",
+      "reason": "missing_entry",
+      "region": "usa_virginia",
+      "sample_years": [
+        1899,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.98358,
+        -85.29231
+      ],
+      "country": "Alabama",
+      "earliest_year": 1904,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fredonia-Alabama",
+      "known_aliases": [
+        "Fredonia",
+        "fredonia",
+        "fredonia cdp",
+        "Fredonia CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Fredonia",
+      "reason": "missing_entry",
+      "region": "usa_alabama",
+      "sample_years": [
+        1904,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        31.69736,
+        -111.0608
+      ],
+      "country": "Arizona",
+      "earliest_year": 1922,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Amado-Arizona",
+      "known_aliases": [
+        "Amado",
+        "amado",
+        "amado cdp",
+        "Amado CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Amado",
+      "reason": "missing_entry",
+      "region": "usa_arizona",
+      "sample_years": [
+        1922,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.37409,
+        -114.67629
+      ],
+      "country": "Arizona",
+      "earliest_year": 1898,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cibola-Arizona",
+      "known_aliases": [
+        "Cibola",
+        "cibola",
+        "cibola cdp",
+        "Cibola CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Cibola",
+      "reason": "missing_entry",
+      "region": "usa_arizona",
+      "sample_years": [
+        1898,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.18035,
+        -111.34303
+      ],
+      "country": "Arizona",
+      "earliest_year": 1907,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Oxbow Estates-Arizona",
+      "known_aliases": [
+        "Oxbow Estates",
+        "oxbow estates",
+        "oxbow estates cdp",
+        "Oxbow Estates CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Oxbow Estates",
+      "reason": "missing_entry",
+      "region": "usa_arizona",
+      "sample_years": [
+        1907,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.98406,
+        -122.70832
+      ],
+      "country": "California",
+      "earliest_year": 1930,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Trinity Center-California",
+      "known_aliases": [
+        "Trinity Center",
+        "trinity center",
+        "trinity center cdp",
+        "Trinity Center CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Trinity Center",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1930,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.93418,
+        -122.05171
+      ],
+      "country": "California",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Vina-California",
+      "known_aliases": [
+        "Vina",
+        "vina",
+        "vina cdp",
+        "vina village",
+        "Vina CDP",
+        "Vina Village"
+      ],
+      "latest_year": 2020,
+      "name": "Vina",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1850,
+        1860,
+        1870,
+        1880,
+        1890,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.06365,
+        -105.36958
+      ],
+      "country": "Colorado",
+      "earliest_year": 1931,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sunshine-Colorado",
+      "known_aliases": [
+        "Sunshine",
+        "sunshine",
+        "sunshine cdp",
+        "Sunshine CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Sunshine",
+      "reason": "missing_entry",
+      "region": "usa_colorado",
+      "sample_years": [
+        1931,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.58363,
+        -78.2517
+      ],
+      "country": "North Carolina",
+      "earliest_year": 1872,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ivanhoe-North Carolina",
+      "known_aliases": [
+        "Ivanhoe",
+        "ivanhoe",
+        "ivanhoe cdp",
+        "Ivanhoe CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Ivanhoe",
+      "reason": "missing_entry",
+      "region": "usa_north_carolina",
+      "sample_years": [
+        1872,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.4611,
+        -81.70594
+      ],
+      "country": "West Virginia",
+      "earliest_year": 1906,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Big Sandy-West Virginia",
+      "known_aliases": [
+        "Big Sandy",
+        "big sandy",
+        "big sandy cdp",
+        "roderfield",
+        "roderfield cdp",
+        "Big Sandy CDP",
+        "Roderfield",
+        "Roderfield CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Big Sandy",
+      "reason": "missing_entry",
+      "region": "usa_west_virginia",
+      "sample_years": [
+        1906,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        31.96095,
+        -83.60064
+      ],
+      "country": "Georgia",
+      "earliest_year": 1875,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Seville-Georgia",
+      "known_aliases": [
+        "Seville",
+        "seville",
+        "seville cdp",
+        "Seville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Seville",
+      "reason": "missing_entry",
+      "region": "usa_georgia",
+      "sample_years": [
+        1875,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.07434,
+        -85.71501
+      ],
+      "country": "Indiana",
+      "earliest_year": 1896,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Scipio-Indiana",
+      "known_aliases": [
+        "Scipio",
+        "scipio",
+        "scipio cdp",
+        "Scipio CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Scipio",
+      "reason": "missing_entry",
+      "region": "usa_indiana",
+      "sample_years": [
+        1896,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.18133,
+        -89.16163
+      ],
+      "country": "Mississippi",
+      "earliest_year": 1903,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Randolph-Mississippi",
+      "known_aliases": [
+        "Randolph",
+        "randolph",
+        "randolph cdp",
+        "Randolph CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Randolph",
+      "reason": "missing_entry",
+      "region": "usa_mississippi",
+      "sample_years": [
+        1903,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.23717,
+        -89.36842
+      ],
+      "country": "Mississippi",
+      "earliest_year": 1884,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tula-Mississippi",
+      "known_aliases": [
+        "Tula",
+        "tula",
+        "tula cdp",
+        "Tula CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Tula",
+      "reason": "missing_entry",
+      "region": "usa_mississippi",
+      "sample_years": [
+        1884,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

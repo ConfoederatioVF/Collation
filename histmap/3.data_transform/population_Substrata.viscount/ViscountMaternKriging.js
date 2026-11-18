@@ -4,6 +4,7 @@ let JSON5 = global.JSON5 || require("json5");
 let path = global.path || require("path");
 let { PNG } = global.pngjs || require("pngjs");
 let { ViscountBiophysicalCovariates } = global.ViscountBiophysicalCovariates ? global : require("./ViscountBiophysicalCovariates.js");
+let { ViscountHUResidualKriging } = global.ViscountHUResidualKriging ? global : require("./ViscountHUResidualKriging.js");
 let { ViscountMaternVariogram } = global.ViscountMaternVariogram ? global : require("./ViscountMaternVariogram.js");
 let { ViscountRuralSuitability } = global.ViscountRuralSuitability ? global : require("./ViscountRuralSuitability.js");
 
@@ -201,10 +202,12 @@ let { ViscountRuralSuitability } = global.ViscountRuralSuitability ? global : re
             obs_map.set(rid, {
               eb_densities: {},
               effective_area_km2: Number(props.area_km2) || 0,
+              has_documented_settlement: Boolean(props.has_documented_settlement),
               id: rid,
               is_frontier_buffer: Boolean(props.is_frontier_buffer),
               lat: lat,
               lon: lon,
+              max_settlement_pop: Number(props.max_settlement_pop) || 0,
               periods: {},
               radius_km: 0,
               total_sites_all_periods: Number(props.total_sites_all_periods) || 0,
@@ -215,6 +218,9 @@ let { ViscountRuralSuitability } = global.ViscountRuralSuitability ? global : re
           }
           let entry = obs_map.get(rid);
           entry.periods[p.key] = (entry.periods[p.key] || 0) + cnt;
+          if (props.has_documented_settlement) entry.has_documented_settlement = true;
+          if ((Number(props.max_settlement_pop) || 0) > (entry.max_settlement_pop || 0))
+            entry.max_settlement_pop = Number(props.max_settlement_pop) || 0;
           if (!entry.is_frontier_buffer)
             period_totals[p.key] += cnt;
         }
@@ -344,14 +350,28 @@ let { ViscountRuralSuitability } = global.ViscountRuralSuitability ? global : re
         tile_map.get(tile_key).push(o);
       }
 
+      //Compute per-catchment biome taphonomy and modern urban CRM salvage shares before spike filtering
+      let apply_taph = Boolean(bundle.config && bundle.config.kriging_config && bundle.config.kriging_config.apply_arid_taphonomic_correction);
+      let apply_urb_debias = Boolean(bundle.config && bundle.config.kriging_config && bundle.config.kriging_config.apply_urban_salvage_debias);
+
+      if (apply_taph || apply_urb_debias) {
+        ViscountBiophysicalCovariates.computeCatchmentTaphonomyAndUrbanShares(
+          bundle.mask_data,
+          obs_list,
+          cell_nearest,
+          bundle.config
+        );
+      }
+
       for (let [tile_key, tile_obs] of tile_map.entries()) {
         let is_front_tile = tile_key.startsWith("F_");
         let tile_area_sum = 0;
 
         for (let i = 0; i < tile_obs.length; i++) {
+          let is_micro_island_catch = (!tile_obs[i].is_frontier_buffer && med_raw >= 1000 && tile_obs[i].voronoi_area_km2 < 0.45*med_raw);
           let raw_v = (tile_obs[i].is_frontier_buffer) ?
             Math.max(bundle.mask_data.mean_cell_land_area_km2, Math.min(q75_raw, tile_obs[i].voronoi_area_km2 || 0.78*med_raw)) :
-            tile_obs[i].voronoi_area_km2;
+            (is_micro_island_catch ? 0.45*med_raw : tile_obs[i].voronoi_area_km2);
 
           tile_obs[i].voronoi_area_km2 = raw_v;
           tile_area_sum += raw_v;
@@ -373,7 +393,7 @@ let { ViscountRuralSuitability } = global.ViscountRuralSuitability ? global : re
         for (let i = 0; i < tile_obs.length; i++)
           tile_obs[i].effective_area_km2 = Math.max(bundle.mask_data.mean_cell_land_area_km2, reg_areas[i]*area_scale);
 
-        //Regularise extreme single-county CRM salvage-excavation spikes within populated tiles (POLARIS SitesIARASObservationUtils L645-658)
+        //Regularise extreme single-county CRM salvage-excavation spikes while sparing verified pre-Columbian hubs
         if (!is_front_tile && tile_obs.length >= 4) {
           for (let i = 0; i < period_configs.length; i++) {
             let pkey = period_configs[i].key;
@@ -391,8 +411,13 @@ let { ViscountRuralSuitability } = global.ViscountRuralSuitability ? global : re
 
               for (let x = 0; x < tile_obs.length; x++) {
                 let s_val = tile_obs[x].reg_periods[pkey] || 0;
+                let is_doc_hub = Boolean(
+                  tile_obs[x].has_documented_settlement &&
+                  (tile_obs[x].max_settlement_pop || 0) >= 400 &&
+                  (tile_obs[x].urb_core_share || 0) < 0.30
+                );
 
-                if (s_val > local_cap) {
+                if (!is_doc_hub && s_val > local_cap) {
                   let ex_val = s_val - local_cap;
 
                   tile_obs[x].reg_periods[pkey] = local_cap + (local_iqr*ex_val)/(local_iqr + ex_val);
@@ -429,15 +454,65 @@ let { ViscountRuralSuitability } = global.ViscountRuralSuitability ? global : re
         eval_radius_km[i] = Math.sqrt(eval_a/Math.PI);
       }
 
-      //Initialise raw catchment intensities S_{k,p} / A_k without short-lag Gaussian blurring
+      //Initialise raw catchment intensities S_{k,p} / A_k with optional arid/humid taphonomic & Greenland survey normalisation
       for (let i = 0; i < period_configs.length; i++) {
         let pkey = period_configs[i].key;
 
         for (let x = 0; x < n_obs; x++) {
-          let sk = obs_list[x].reg_periods[pkey] || 0;
-          let ak = Math.max(1e-6, obs_list[x].effective_area_km2);
+          let o = obs_list[x];
+          let sk = o.reg_periods[pkey] || 0;
+          let ak = Math.max(1e-6, o.effective_area_km2);
+          let taph_mult = 1.0;
 
-          obs_list[x].eb_densities[pkey] = sk/ak;
+          if (apply_taph && !o.is_frontier_buffer && sk > 0) {
+            let mf = o.mean_forest || 0;
+            let mm = o.mean_maxln || 0;
+
+            if (o.lat >= 59.5 && o.lon >= -60.0)
+              taph_mult = 0.25;
+            else if (mm < 0.25 && mf < 0.15)
+              taph_mult = 0.42;
+            else if (mm < 0.40 && mf < 0.28)
+              taph_mult = 0.68;
+            else if (mf >= 0.42 || mm >= 0.48)
+              taph_mult = 1.38;
+          }
+          o.eb_densities[pkey] = (sk/ak)*taph_mult;
+        }
+      }
+
+      //De-spike modern metropolitan CRM salvage hotspots using surrounding non-urban rural catchments
+      if (apply_urb_debias) {
+        for (let i = 0; i < period_configs.length; i++) {
+          let pkey = period_configs[i].key;
+
+          for (let x = 0; x < n_obs; x++) {
+            let ox = obs_list[x];
+            let is_primate_hub = Boolean(ox.has_documented_settlement && (ox.max_settlement_pop || 0) >= 2500);
+
+            if (ox.is_frontier_buffer || (ox.urb_core_share || 0) <= 0.08 || is_primate_hub) continue;
+            let cur_d = ox.eb_densities[pkey] || 0;
+
+            if (cur_d <= 0) continue;
+            let nbr_vals = [];
+
+            for (let y = 0; y < n_obs; y++) {
+              let oy = obs_list[y];
+
+              if (y === x || oy.is_frontier_buffer || (oy.urb_core_share || 0) > 0.06) continue;
+              let dot = Math.max(-1, Math.min(1, obs_ux[x]*obs_ux[y] + obs_uy[x]*obs_uy[y] + obs_uz[x]*obs_uz[y]));
+              let d_km = earth_radius_km*Math.sqrt(Math.max(0, 2 - 2*dot));
+
+              if (d_km <= 160.0 && (oy.eb_densities[pkey] || 0) > 0)
+                nbr_vals.push(oy.eb_densities[pkey]);
+            }
+            if (nbr_vals.length >= 2) {
+              nbr_vals.sort(function (arg0_a, arg1_b) { return arg0_a - arg1_b; });
+              let r_med = nbr_vals[Math.floor(0.50*(nbr_vals.length - 1))];
+
+              if (cur_d > 1.15*r_med) ox.eb_densities[pkey] = 1.15*r_med;
+            }
+          }
         }
       }
 
@@ -511,8 +586,10 @@ let { ViscountRuralSuitability } = global.ViscountRuralSuitability ? global : re
         for (let x = 0; x < n_obs; x++) {
           let sk = obs_list[x].periods[pkey] || 0;
           let tot_s = obs_list[x].total_sites_all_periods || 0;
+          let mm_x = obs_list[x].mean_maxln || 0;
+          let in_settled_biome = (!obs_list[x].is_frontier_buffer && mm_x >= 0.30 && obs_list[x].lat < 55.0);
 
-          if (tot_s === 0 && sk === 0) {
+          if (tot_s === 0 && sk === 0 && !in_settled_biome) {
             new_dens[x] = 0;
             continue;
           }
@@ -533,8 +610,9 @@ let { ViscountRuralSuitability } = global.ViscountRuralSuitability ? global : re
             ((n_obs < 500) ? sk/(sk + 0.8) : sk/(sk + 1.2)) :
             ((n_obs < 500) ? sk/(sk + 1.0) : sk/(sk + 3.5));
           let prior_z = (w_sum > 0) ? (wz_sum/w_sum) : raw_z[x];
+          let zero_bridge = in_settled_biome ? ((tot_s > 0) ? 0.72*prior_z : ((mm_x >= 0.38) ? 0.52*prior_z : 0.25*prior_z)) : ((tot_s > 0) ? 0.22*prior_z : 0);
           let z_post = preserve_dyn ?
-            ((sk > 0) ? (cred*raw_z[x] + (1 - cred)*(0.60*prior_z + 0.40*raw_z[x])) : 0.25*prior_z) :
+            ((sk > 0) ? (cred*raw_z[x] + (1 - cred)*(0.60*prior_z + 0.40*raw_z[x])) : zero_bridge) :
             (cred*raw_z[x] + (1 - cred)*(0.78*prior_z + 0.22*raw_z[x]));
 
           new_dens[x] = z_post*z_post;
@@ -627,7 +705,7 @@ let { ViscountRuralSuitability } = global.ViscountRuralSuitability ? global : re
       let active_periods = [];
       let bio_covs = (options.disable_biophysical_covariates === true) ?
         null :
-        ViscountBiophysicalCovariates.buildStaticCovariates(bundle.mask_data, bundle.config);
+        ViscountBiophysicalCovariates.buildStaticCovariates(bundle.mask_data, bundle.config, bundle.obs_bundle);
       let cell_area = bundle.mask_data.cell_land_area;
       let cell_r = bundle.obs_bundle.cell_radius_km;
       let cell_ux = bundle.mask_data.cell_ux;
@@ -797,60 +875,74 @@ let { ViscountRuralSuitability } = global.ViscountRuralSuitability ? global : re
         }
       }
 
-      for (let p = 0; p < n_active; p++) {
-        let ap = active_periods[p];
-        let p_cfg = ap.cfg;
-        let pkey = ap.pkey;
-        let pot_field = ap.pot;
-        let raw_pot_sum = 0;
-        let target_sites = Math.max(1, (bundle.obs_bundle.period_totals && bundle.obs_bundle.period_totals[pkey]) ? bundle.obs_bundle.period_totals[pkey] : 0);
+      let rk_mode = (bundle.config && bundle.config.kriging_config && bundle.config.kriging_config.residual_kriging_mode) ?
+        bundle.config.kriging_config.residual_kriging_mode : "";
 
-        for (let i = 0; i < n_valid; i++) raw_pot_sum += pot_field[i];
+      if (bio_covs && rk_mode === "hu_hyde_residual") {
+        let hu_out = ViscountHUResidualKriging.evaluateAllPeriodResidualSurfaces(bundle, bio_covs, active_periods, hab_cache);
 
-        if (bio_covs) {
-          let rep_year = Number.isFinite(p_cfg.representative_year) ?
-            p_cfg.representative_year :
-            0.5*((p_cfg.approx_start_year || p_cfg.start_year || 0) + (p_cfg.approx_end_year || p_cfg.end_year || 0));
-          let local_u_hab = ViscountRuralSuitability.computeCompositeHabitationField(
-            bundle.mask_data,
-            bundle.obs_bundle,
-            bio_covs,
-            p_cfg,
-            bundle.config,
-            hab_cache
-          );
-          let local_rk = ViscountRuralSuitability.computeResidualKrigingWeights(
-            bundle.mask_data,
-            bundle.obs_bundle,
-            bio_covs,
-            local_u_hab,
-            ap.model.z_adj,
-            meso_px,
-            rep_year,
-            bundle.config
-          );
-          let coupled_sum = 0;
-          let out_field = new Float32Array(n_valid);
+        fields = hu_out.fields;
+        wls_betas_by_period = hu_out.wls_betas_by_period;
+      } else {
+        for (let p = 0; p < n_active; p++) {
+          let ap = active_periods[p];
+          let p_cfg = ap.cfg;
+          let pkey = ap.pkey;
+          let pot_field = ap.pot;
+          let raw_pot_sum = 0;
+          let target_sites = Math.max(1, (bundle.obs_bundle.period_totals && bundle.obs_bundle.period_totals[pkey]) ? bundle.obs_bundle.period_totals[pkey] : 0);
 
-          wls_betas_by_period[pkey] = {
-            beta_0_hab: local_rk.beta[0],
-            beta_1_nat: local_rk.beta[1],
-            beta_2_eco: local_rk.beta[2],
-            beta_3_fluvial: local_rk.beta[3],
-            beta_4_coastal: local_rk.beta[4]
-          };
-          for (let i = 0; i < n_valid; i++) {
-            out_field[i] = pot_field[i]*local_rk.weights[i];
-            coupled_sum += out_field[i];
+          for (let i = 0; i < n_valid; i++) raw_pot_sum += pot_field[i];
+
+          if (bio_covs) {
+            let rep_year = Number.isFinite(p_cfg.representative_year) ?
+              p_cfg.representative_year :
+              0.5*((p_cfg.approx_start_year || p_cfg.start_year || 0) + (p_cfg.approx_end_year || p_cfg.end_year || 0));
+            let local_u_hab = ViscountRuralSuitability.computeCompositeHabitationField(
+              bundle.mask_data,
+              bundle.obs_bundle,
+              bio_covs,
+              p_cfg,
+              bundle.config,
+              hab_cache
+            );
+            let local_rk = ViscountRuralSuitability.computeResidualKrigingWeights(
+              bundle.mask_data,
+              bundle.obs_bundle,
+              bio_covs,
+              local_u_hab,
+              ap.model.z_adj,
+              meso_px,
+              rep_year,
+              bundle.config
+            );
+            let coupled_sum = 0;
+            let out_field = new Float32Array(n_valid);
+
+            wls_betas_by_period[pkey] = {
+              beta_0_hab: local_rk.beta[0],
+              beta_1_nat: local_rk.beta[1],
+              beta_2_eco: local_rk.beta[2],
+              beta_3_fluvial: local_rk.beta[3],
+              beta_4_coastal: local_rk.beta[4]
+            };
+            for (let i = 0; i < n_valid; i++)
+              out_field[i] = pot_field[i]*local_rk.weights[i];
+
+            if (rep_year <= 1650 && bio_covs.uopp_valid)
+              ViscountRuralSuitability.capUrbanCoreFieldToRuralRing(bundle.mask_data, out_field, bio_covs.uopp_valid, 1.12);
+
+            for (let i = 0; i < n_valid; i++)
+              coupled_sum += out_field[i];
+
+            let ref_mass = Math.max(1, target_sites || raw_pot_sum || 1);
+            let norm_scale = (coupled_sum > 0) ? ref_mass/coupled_sum : 1;
+
+            for (let i = 0; i < n_valid; i++) out_field[i] = out_field[i]*norm_scale;
+            fields[pkey] = out_field;
+          } else {
+            fields[pkey] = pot_field;
           }
-
-          let ref_mass = Math.max(1, target_sites || raw_pot_sum || 1);
-          let norm_scale = (coupled_sum > 0) ? ref_mass/coupled_sum : 1;
-
-          for (let i = 0; i < n_valid; i++) out_field[i] = out_field[i]*norm_scale;
-          fields[pkey] = out_field;
-        } else {
-          fields[pkey] = pot_field;
         }
       }
 

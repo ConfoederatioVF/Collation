@@ -1,0 +1,962 @@
+{
+  "batch_index": 240,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        40.37361,
+        -78.23711
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1962,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Beavertown (Blair County)-Pennsylvania",
+      "known_aliases": [
+        "Beavertown (Blair County)",
+        "beavertown",
+        "beavertown cdp",
+        "Beavertown CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Beavertown (Blair County)",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1962,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.42492,
+        -78.20862
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1904,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Larke-Pennsylvania",
+      "known_aliases": [
+        "Larke",
+        "larke",
+        "larke cdp",
+        "Larke CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Larke",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1904,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.40611,
+        -105.38591
+      ],
+      "country": "Wyoming",
+      "earliest_year": 1938,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Esterbrook-Wyoming",
+      "known_aliases": [
+        "Esterbrook",
+        "esterbrook",
+        "esterbrook cdp",
+        "Esterbrook CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Esterbrook",
+      "reason": "missing_entry",
+      "region": "usa_wyoming",
+      "sample_years": [
+        1938,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.20798,
+        -104.47439
+      ],
+      "country": "Wyoming",
+      "earliest_year": 1914,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hillsdale-Wyoming",
+      "known_aliases": [
+        "Hillsdale",
+        "hillsdale",
+        "hillsdale cdp",
+        "Hillsdale CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Hillsdale",
+      "reason": "missing_entry",
+      "region": "usa_wyoming",
+      "sample_years": [
+        1914,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.95144,
+        -109.20591
+      ],
+      "country": "Arizona",
+      "earliest_year": 1870,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Nutrioso-Arizona",
+      "known_aliases": [
+        "Nutrioso",
+        "nutrioso",
+        "nutrioso cdp",
+        "Nutrioso CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Nutrioso",
+      "reason": "missing_entry",
+      "region": "usa_arizona",
+      "sample_years": [
+        1870,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.2327,
+        -112.15937
+      ],
+      "country": "Arizona",
+      "earliest_year": 1878,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Santa Cruz-Arizona",
+      "known_aliases": [
+        "Santa Cruz",
+        "santa cruz",
+        "santa cruz cdp",
+        "Santa Cruz CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Santa Cruz",
+      "reason": "missing_entry",
+      "region": "usa_arizona",
+      "sample_years": [
+        1878,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.38853,
+        -113.65911
+      ],
+      "country": "Arizona",
+      "earliest_year": 1963,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Valentine-Arizona",
+      "known_aliases": [
+        "Valentine",
+        "valentine",
+        "valentine cdp",
+        "Valentine CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Valentine",
+      "reason": "missing_entry",
+      "region": "usa_arizona",
+      "sample_years": [
+        1963,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.40249,
+        -93.61788
+      ],
+      "country": "Arkansas",
+      "earliest_year": 1875,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Caddo Gap-Arkansas",
+      "known_aliases": [
+        "Caddo Gap",
+        "caddo gap",
+        "caddo gap cdp",
+        "Caddo Gap CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Caddo Gap",
+      "reason": "missing_entry",
+      "region": "usa_arkansas",
+      "sample_years": [
+        1875,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.88007,
+        -97.21187
+      ],
+      "country": "Kansas",
+      "earliest_year": 1892,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Furley-Kansas",
+      "known_aliases": [
+        "Furley",
+        "furley",
+        "furley cdp",
+        "Furley CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Furley",
+      "reason": "missing_entry",
+      "region": "usa_kansas",
+      "sample_years": [
+        1892,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.66068,
+        -91.05183
+      ],
+      "country": "Mississippi",
+      "earliest_year": 1907,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bolivar-Mississippi",
+      "known_aliases": [
+        "Bolivar",
+        "bolivar",
+        "bolivar cdp",
+        "Bolivar CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Bolivar",
+      "reason": "missing_entry",
+      "region": "usa_mississippi",
+      "sample_years": [
+        1907,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.91221,
+        -89.31509
+      ],
+      "country": "Mississippi",
+      "earliest_year": 1870,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lamar-Mississippi",
+      "known_aliases": [
+        "Lamar",
+        "lamar",
+        "lamar cdp",
+        "Lamar CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Lamar",
+      "reason": "missing_entry",
+      "region": "usa_mississippi",
+      "sample_years": [
+        1870,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.4238,
+        -90.92163
+      ],
+      "country": "Mississippi",
+      "earliest_year": 1895,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Stoneville-Mississippi",
+      "known_aliases": [
+        "Stoneville",
+        "stoneville",
+        "stoneville cdp",
+        "Stoneville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Stoneville",
+      "reason": "missing_entry",
+      "region": "usa_mississippi",
+      "sample_years": [
+        1895,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.07057,
+        -111.96799
+      ],
+      "country": "Montana",
+      "earliest_year": 1879,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Craig-Montana",
+      "known_aliases": [
+        "Craig",
+        "craig",
+        "craig cdp",
+        "Craig CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Craig",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1879,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.26479,
+        -113.44594
+      ],
+      "country": "Montana",
+      "earliest_year": 1947,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Snowslip-Montana",
+      "known_aliases": [
+        "Snowslip",
+        "snowslip",
+        "snowslip cdp",
+        "Snowslip CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Snowslip",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1947,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.01685,
+        -111.06978
+      ],
+      "country": "Montana",
+      "earliest_year": 1924,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Twin Hills Colony-Montana",
+      "known_aliases": [
+        "Twin Hills Colony",
+        "twin hills colony",
+        "twin hills colony cdp",
+        "Twin Hills Colony CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Twin Hills Colony",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1924,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.1607,
+        -96.70827
+      ],
+      "country": "Oklahoma",
+      "earliest_year": 1921,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Quay-Oklahoma",
+      "known_aliases": [
+        "Quay",
+        "quay",
+        "quay cdp",
+        "Quay CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Quay",
+      "reason": "missing_entry",
+      "region": "usa_oklahoma",
+      "sample_years": [
+        1921,
+        1950,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.74868,
+        -118.07884
+      ],
+      "country": "Oregon",
+      "earliest_year": 1897,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Juntura-Oregon",
+      "known_aliases": [
+        "Juntura",
+        "juntura",
+        "juntura cdp",
+        "Juntura CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Juntura",
+      "reason": "missing_entry",
+      "region": "usa_oregon",
+      "sample_years": [
+        1897,
+        1920,
+        1960,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.40504,
+        -119.89931
+      ],
+      "country": "Oregon",
+      "earliest_year": 1968,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Plush-Oregon",
+      "known_aliases": [
+        "Plush",
+        "plush",
+        "plush cdp",
+        "Plush CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Plush",
+      "reason": "missing_entry",
+      "region": "usa_oregon",
+      "sample_years": [
+        1968,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.43493,
+        -78.3001
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1861,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Reese-Pennsylvania",
+      "known_aliases": [
+        "Reese",
+        "reese",
+        "reese cdp",
+        "Reese CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Reese",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1861,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.29758,
+        -103.2163
+      ],
+      "country": "South Dakota",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Smithwick-South Dakota",
+      "known_aliases": [
+        "Smithwick",
+        "smithwick",
+        "smithwick cdp",
+        "Smithwick CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Smithwick",
+      "reason": "missing_entry",
+      "region": "usa_south_dakota",
+      "sample_years": [
+        1950,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.76569,
+        -122.19613
+      ],
+      "country": "Washington",
+      "earliest_year": 1910,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Elbe-Washington",
+      "known_aliases": [
+        "Elbe",
+        "elbe",
+        "elbe cdp",
+        "Elbe CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Elbe",
+      "reason": "missing_entry",
+      "region": "usa_washington",
+      "sample_years": [
+        1910,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.0056,
+        -109.69913
+      ],
+      "country": "Wyoming",
+      "earliest_year": 1955,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Washam-Wyoming",
+      "known_aliases": [
+        "Washam",
+        "washam",
+        "washam cdp",
+        "Washam CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Washam",
+      "reason": "missing_entry",
+      "region": "usa_wyoming",
+      "sample_years": [
+        1955,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.02535,
+        -92.80817
+      ],
+      "country": "Iowa",
+      "earliest_year": 1904,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Roseville-Iowa",
+      "known_aliases": [
+        "Roseville",
+        "roseville",
+        "roseville cdp",
+        "Roseville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Roseville",
+      "reason": "missing_entry",
+      "region": "usa_iowa",
+      "sample_years": [
+        1904,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.03024,
+        -110.50416
+      ],
+      "country": "Arizona",
+      "earliest_year": 1951,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hard Rock-Arizona",
+      "known_aliases": [
+        "Hard Rock",
+        "hard rock",
+        "hard rock cdp",
+        "Hard Rock CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Hard Rock",
+      "reason": "missing_entry",
+      "region": "usa_arizona",
+      "sample_years": [
+        1951,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.50252,
+        -120.23886
+      ],
+      "country": "California",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hornitos-California",
+      "known_aliases": [
+        "Hornitos",
+        "hornitos",
+        "hornitos cdp",
+        "Hornitos CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Hornitos",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1850,
+        1890,
+        1940,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.02263,
+        -105.80057
+      ],
+      "country": "Colorado",
+      "earliest_year": 1868,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hartsel-Colorado",
+      "known_aliases": [
+        "Hartsel",
+        "hartsel",
+        "hartsel cdp",
+        "Hartsel CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Hartsel",
+      "reason": "missing_entry",
+      "region": "usa_colorado",
+      "sample_years": [
+        1868,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.93955,
+        -102.30692
+      ],
+      "country": "Colorado",
+      "earliest_year": 1905,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Vernon-Colorado",
+      "known_aliases": [
+        "Vernon",
+        "vernon",
+        "vernon cdp",
+        "Vernon CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Vernon",
+      "reason": "missing_entry",
+      "region": "usa_colorado",
+      "sample_years": [
+        1905,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.27545,
+        -88.51554
+      ],
+      "country": "Illinois",
+      "earliest_year": 1953,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Franklinville-Illinois",
+      "known_aliases": [
+        "Franklinville",
+        "franklinville",
+        "franklinville cdp",
+        "Franklinville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Franklinville",
+      "reason": "missing_entry",
+      "region": "usa_illinois",
+      "sample_years": [
+        1953,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.35841,
+        -87.39681
+      ],
+      "country": "Indiana",
+      "earliest_year": 1913,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Judyville-Indiana",
+      "known_aliases": [
+        "Judyville",
+        "judyville",
+        "judyville cdp",
+        "Judyville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Judyville",
+      "reason": "missing_entry",
+      "region": "usa_indiana",
+      "sample_years": [
+        1913,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.8565,
+        -112.96679
+      ],
+      "country": "Montana",
+      "earliest_year": 1947,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Helmville-Montana",
+      "known_aliases": [
+        "Helmville",
+        "helmville",
+        "helmville cdp",
+        "Helmville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Helmville",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1947,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,899 @@
+{
+  "batch_index": 476,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        35.242,
+        -105.935
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1400,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pueblo Blanco-New Mexico",
+      "known_aliases": [
+        "Pueblo Blanco",
+        "pueblo blanco",
+        "la 40",
+        "tabira galisteo",
+        "LA 40",
+        "Tabira Galisteo"
+      ],
+      "latest_year": 1540,
+      "name": "Pueblo Blanco",
+      "reason": "missing_entry",
+      "region": "rg_san_luis_upper_pueblos",
+      "sample_years": [
+        1400,
+        1480,
+        1540
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.68523,
+        -106.35371
+      ],
+      "country": "New Mexico",
+      "earliest_year": 600,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pueblo Canada-New Mexico",
+      "known_aliases": [
+        "Pueblo Canada",
+        "pueblo canada"
+      ],
+      "latest_year": 1450,
+      "name": "Pueblo Canada",
+      "reason": "missing_entry",
+      "region": "rg_san_luis_upper_pueblos",
+      "sample_years": [
+        600,
+        1025,
+        1450
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.278,
+        -105.835
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1380,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pueblo Colorado-New Mexico",
+      "known_aliases": [
+        "Pueblo Colorado",
+        "pueblo colorado",
+        "la 62",
+        "LA 62"
+      ],
+      "latest_year": 1460,
+      "name": "Pueblo Colorado",
+      "reason": "missing_entry",
+      "region": "rg_san_luis_upper_pueblos",
+      "sample_years": [
+        1380,
+        1460
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.388,
+        -105.932
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1400,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pueblo Galisteo-New Mexico",
+      "known_aliases": [
+        "Pueblo Galisteo",
+        "pueblo galisteo",
+        "la 26",
+        "tano",
+        "LA 26",
+        "Tano"
+      ],
+      "latest_year": 1540,
+      "name": "Pueblo Galisteo",
+      "reason": "missing_entry",
+      "region": "rg_san_luis_upper_pueblos",
+      "sample_years": [
+        1400,
+        1540
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.20964,
+        -105.75374
+      ],
+      "country": "New Mexico",
+      "earliest_year": 550,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pueblo Largo-New Mexico",
+      "known_aliases": [
+        "Pueblo Largo",
+        "pueblo largo",
+        "la 183",
+        "LA 183"
+      ],
+      "latest_year": 1600,
+      "name": "Pueblo Largo",
+      "reason": "missing_entry",
+      "region": "rg_san_luis_upper_pueblos",
+      "sample_years": [
+        550,
+        1075,
+        1350,
+        1450,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.1763,
+        -106.40794
+      ],
+      "country": "New Mexico",
+      "earliest_year": 300,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pueblo Oso Negro-New Mexico",
+      "known_aliases": [
+        "Pueblo Oso Negro",
+        "pueblo oso negro"
+      ],
+      "latest_year": 1600,
+      "name": "Pueblo Oso Negro",
+      "reason": "missing_entry",
+      "region": "rg_san_luis_upper_pueblos",
+      "sample_years": [
+        300,
+        950,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.11291,
+        -105.99475
+      ],
+      "country": "New Mexico",
+      "earliest_year": 300,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pueblo Pardo-New Mexico",
+      "known_aliases": [
+        "Pueblo Pardo",
+        "pueblo pardo",
+        "la 83",
+        "LA 83"
+      ],
+      "latest_year": 1600,
+      "name": "Pueblo Pardo",
+      "reason": "missing_entry",
+      "region": "rg_san_luis_upper_pueblos",
+      "sample_years": [
+        300,
+        950,
+        1350,
+        1480,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.28071,
+        -106.96704
+      ],
+      "country": "New Mexico",
+      "earliest_year": 550,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pueblo San Acacia-New Mexico",
+      "known_aliases": [
+        "Pueblo San Acacia",
+        "pueblo san acacia"
+      ],
+      "latest_year": 1600,
+      "name": "Pueblo San Acacia",
+      "reason": "missing_entry",
+      "region": "rg_san_luis_upper_pueblos",
+      "sample_years": [
+        550,
+        1075,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.97644,
+        -105.78115
+      ],
+      "country": "New Mexico",
+      "earliest_year": 500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pueblo Sarco-New Mexico",
+      "known_aliases": [
+        "Pueblo Sarco",
+        "pueblo sarco"
+      ],
+      "latest_year": 1600,
+      "name": "Pueblo Sarco",
+      "reason": "missing_entry",
+      "region": "rg_san_luis_upper_pueblos",
+      "sample_years": [
+        500,
+        1050,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.295,
+        -105.862
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1380,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pueblo She-New Mexico",
+      "known_aliases": [
+        "Pueblo She",
+        "pueblo she",
+        "la 239",
+        "LA 239"
+      ],
+      "latest_year": 1460,
+      "name": "Pueblo She",
+      "reason": "missing_entry",
+      "region": "rg_san_luis_upper_pueblos",
+      "sample_years": [
+        1380,
+        1460
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.13557,
+        -106.83952
+      ],
+      "country": "New Mexico",
+      "earliest_year": 300,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pueblo de la Presilla-New Mexico",
+      "known_aliases": [
+        "Pueblo de la Presilla",
+        "pueblo de la presilla"
+      ],
+      "latest_year": 1600,
+      "name": "Pueblo de la Presilla",
+      "reason": "missing_entry",
+      "region": "rg_san_luis_upper_pueblos",
+      "sample_years": [
+        300,
+        950,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.58493,
+        -106.28774
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1125,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pueblo del Encierro-New Mexico",
+      "known_aliases": [
+        "Pueblo del Encierro",
+        "pueblo del encierro"
+      ],
+      "latest_year": 1600,
+      "name": "Pueblo del Encierro",
+      "reason": "missing_entry",
+      "region": "rg_san_luis_upper_pueblos",
+      "sample_years": [
+        1125,
+        1362,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.6726,
+        -106.24267
+      ],
+      "country": "New Mexico",
+      "earliest_year": 600,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pueblo del Ojito-New Mexico",
+      "known_aliases": [
+        "Pueblo del Ojito",
+        "pueblo del ojito",
+        "caja del rio south",
+        "Caja del Rio South"
+      ],
+      "latest_year": 1600,
+      "name": "Pueblo del Ojito",
+      "reason": "missing_entry",
+      "region": "rg_san_luis_upper_pueblos",
+      "sample_years": [
+        600,
+        1025,
+        1100,
+        1450,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        31.98205,
+        -106.04785
+      ],
+      "country": "Texas",
+      "earliest_year": 500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Purcell Pueblo; 41EP791-Texas",
+      "known_aliases": [
+        "Purcell Pueblo; 41EP791",
+        "purcell pueblo; 41ep791"
+      ],
+      "latest_year": 1545,
+      "name": "Purcell Pueblo; 41EP791",
+      "reason": "missing_entry",
+      "region": "rg_san_luis_upper_pueblos",
+      "sample_years": [
+        500,
+        1022,
+        1545
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.9756,
+        -106.2275
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1350,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Puye Cliff Dwellings-New Mexico",
+      "known_aliases": [
+        "Puye Cliff Dwellings",
+        "puye cliff dwellings",
+        "la 47",
+        "puyé",
+        "LA 47",
+        "Puyé"
+      ],
+      "latest_year": 1480,
+      "name": "Puye Cliff Dwellings",
+      "reason": "missing_entry",
+      "region": "rg_san_luis_upper_pueblos",
+      "sample_years": [
+        1350,
+        1480
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.895,
+        -106.858
+      ],
+      "country": "New Mexico",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Qualacu-New Mexico",
+      "known_aliases": [
+        "Qualacu",
+        "qualacu",
+        "la 757",
+        "LA 757"
+      ],
+      "latest_year": 1600,
+      "name": "Qualacu",
+      "reason": "missing_entry",
+      "region": "rg_san_luis_upper_pueblos",
+      "sample_years": [
+        800,
+        1200,
+        1400,
+        1540,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.5956,
+        -106.2961
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1350,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Quarai-New Mexico",
+      "known_aliases": [
+        "Quarai",
+        "quarai",
+        "la 95",
+        "cuarac",
+        "LA 95",
+        "Cuarac"
+      ],
+      "latest_year": 1540,
+      "name": "Quarai",
+      "reason": "missing_entry",
+      "region": "rg_san_luis_upper_pueblos",
+      "sample_years": [
+        1350,
+        1480,
+        1540
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.51125,
+        -107.99459
+      ],
+      "country": "New Mexico",
+      "earliest_year": 200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rattail Ruin-New Mexico",
+      "known_aliases": [
+        "Rattail Ruin",
+        "rattail ruin"
+      ],
+      "latest_year": 1600,
+      "name": "Rattail Ruin",
+      "reason": "missing_entry",
+      "region": "rg_san_luis_upper_pueblos",
+      "sample_years": [
+        200,
+        900,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.485,
+        -105.625
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1250,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Robinson Pueblo-New Mexico",
+      "known_aliases": [
+        "Robinson Pueblo",
+        "robinson pueblo",
+        "la 46326",
+        "sierra blanca",
+        "LA 46326",
+        "Sierra Blanca"
+      ],
+      "latest_year": 1350,
+      "name": "Robinson Pueblo",
+      "reason": "missing_entry",
+      "region": "rg_middle_rio_grande_salinas",
+      "sample_years": [
+        1250,
+        1350
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.489,
+        -105.672
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1300,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rowe Pueblo-New Mexico",
+      "known_aliases": [
+        "Rowe Pueblo",
+        "rowe pueblo",
+        "la 108",
+        "LA 108"
+      ],
+      "latest_year": 1380,
+      "name": "Rowe Pueblo",
+      "reason": "missing_entry",
+      "region": "rg_san_luis_upper_pueblos",
+      "sample_years": [
+        1300,
+        1380
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.40267,
+        -105.80053
+      ],
+      "country": "New Mexico",
+      "earliest_year": 500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rowe-New Mexico_2",
+      "known_aliases": [
+        "Rowe",
+        "rowe"
+      ],
+      "latest_year": 1545,
+      "name": "Rowe",
+      "reason": "missing_entry",
+      "region": "rg_san_luis_upper_pueblos",
+      "sample_years": [
+        500,
+        1022,
+        1545
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.04089,
+        -107.96809
+      ],
+      "country": "New Mexico",
+      "earliest_year": 300,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Running Water Site (Graybill 2)-New Mexico",
+      "known_aliases": [
+        "Running Water Site (Graybill 2)",
+        "running water site"
+      ],
+      "latest_year": 1400,
+      "name": "Running Water Site (Graybill 2)",
+      "reason": "missing_entry",
+      "region": "rg_middle_rio_grande_salinas",
+      "sample_years": [
+        300,
+        850,
+        1400
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.85936,
+        -106.30617
+      ],
+      "country": "New Mexico",
+      "earliest_year": 550,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Saltbush Pueblo-New Mexico",
+      "known_aliases": [
+        "Saltbush Pueblo",
+        "saltbush pueblo"
+      ],
+      "latest_year": 1600,
+      "name": "Saltbush Pueblo",
+      "reason": "missing_entry",
+      "region": "rg_san_luis_upper_pueblos",
+      "sample_years": [
+        550,
+        1075,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.01077,
+        -106.47322
+      ],
+      "country": "New Mexico",
+      "earliest_year": 400,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "San Antonio-New Mexico_2",
+      "known_aliases": [
+        "San Antonio",
+        "san antonio"
+      ],
+      "latest_year": 1600,
+      "name": "San Antonio",
+      "reason": "missing_entry",
+      "region": "rg_san_luis_upper_pueblos",
+      "sample_years": [
+        400,
+        1000,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.348,
+        -105.845
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1400,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "San Cristobal-New Mexico_2",
+      "known_aliases": [
+        "San Cristobal",
+        "san cristobal",
+        "la 80",
+        "yam p'hamba",
+        "LA 80",
+        "Yam P'hamba"
+      ],
+      "latest_year": 1540,
+      "name": "San Cristobal",
+      "reason": "missing_entry",
+      "region": "rg_san_luis_upper_pueblos",
+      "sample_years": [
+        1400,
+        1480,
+        1540
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.365,
+        -106.0369
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1400,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "San Lazaro-New Mexico",
+      "known_aliases": [
+        "San Lazaro",
+        "san lazaro",
+        "la 91",
+        "ipiya",
+        "LA 91",
+        "Ipiya"
+      ],
+      "latest_year": 1540,
+      "name": "San Lazaro",
+      "reason": "missing_entry",
+      "region": "rg_san_luis_upper_pueblos",
+      "sample_years": [
+        1400,
+        1480,
+        1540
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.3833,
+        -106.1333
+      ],
+      "country": "New Mexico",
+      "earliest_year": 500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "San Marcos-New Mexico",
+      "known_aliases": [
+        "San Marcos",
+        "san marcos",
+        "la 98",
+        "kua-kaa",
+        "LA 98",
+        "Kua-kaa"
+      ],
+      "latest_year": 1600,
+      "name": "San Marcos",
+      "reason": "missing_entry",
+      "region": "rg_san_luis_upper_pueblos",
+      "sample_years": [
+        500,
+        1050,
+        1400,
+        1480,
+        1540,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.335,
+        -107.642
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1050,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "San Mateo Great House-New Mexico",
+      "known_aliases": [
+        "San Mateo Great House",
+        "san mateo great house",
+        "la 2784",
+        "LA 2784"
+      ],
+      "latest_year": 1125,
+      "name": "San Mateo Great House",
+      "reason": "missing_entry",
+      "region": "rg_san_luis_upper_pueblos",
+      "sample_years": [
+        1050,
+        1125
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.64713,
+        -106.4695
+      ],
+      "country": "New Mexico",
+      "earliest_year": 500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "San Miguel-New Mexico_2",
+      "known_aliases": [
+        "San Miguel",
+        "san miguel"
+      ],
+      "latest_year": 1600,
+      "name": "San Miguel",
+      "reason": "missing_entry",
+      "region": "rg_san_luis_upper_pueblos",
+      "sample_years": [
+        500,
+        1050,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.28075,
+        -106.08902
+      ],
+      "country": "New Mexico",
+      "earliest_year": 500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sandoval Pueblo-New Mexico",
+      "known_aliases": [
+        "Sandoval Pueblo",
+        "sandoval pueblo"
+      ],
+      "latest_year": 1600,
+      "name": "Sandoval Pueblo",
+      "reason": "missing_entry",
+      "region": "rg_san_luis_upper_pueblos",
+      "sample_years": [
+        500,
+        1050,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

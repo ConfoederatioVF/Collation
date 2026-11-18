@@ -1,0 +1,1243 @@
+{
+  "batch_index": 1106,
+  "project": "CENTAUR",
+  "count": 30,
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        41.29167,
+        -124.04167
+      ],
+      "country": "California",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Stone Lagoon-California",
+      "known_aliases": [
+        "tsahpekw",
+        "ca-hum-129"
+      ],
+      "latest_year": 1600,
+      "name": "Stone Lagoon",
+      "reason": "missing_entry",
+      "region": "ca_klamath_north_coast_shasta",
+      "sample_years": [
+        1000,
+        1300,
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ],
+      "canonical_name": "Stone Lagoon",
+      "historical_names": [
+        {
+          "date": "1000.1.1",
+          "name": "Tsahpekw"
+        }
+      ],
+      "other_names": [
+        "Tsahpekw",
+        "CA-HUM-129"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.3617,
+        -121.4833
+      ],
+      "country": "California",
+      "earliest_year": 500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Stone Lake-California",
+      "known_aliases": [
+        "cosumnes floodplain",
+        "ca-sac-145"
+      ],
+      "latest_year": 1600,
+      "name": "Stone Lake",
+      "reason": "missing_entry",
+      "region": "ca_san_joaquin_central_coast",
+      "sample_years": [
+        500,
+        1100,
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ],
+      "canonical_name": "Stone Lake",
+      "historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Stone Lake"
+        }
+      ],
+      "other_names": [
+        "Cosumnes Floodplain",
+        "CA-SAC-145"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.7989,
+        -116.5494
+      ],
+      "country": "California",
+      "earliest_year": 500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tahquitz Canyon-California",
+      "known_aliases": [
+        "andreas canyon",
+        "cahuilla",
+        "ca-riv-45"
+      ],
+      "latest_year": 1600,
+      "name": "Tahquitz Canyon",
+      "reason": "missing_entry",
+      "region": "ca_chumash_channel_southern_cal",
+      "sample_years": [
+        500,
+        1100,
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ],
+      "canonical_name": "Tahquitz Canyon",
+      "historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Tahquitz Canyon"
+        }
+      ],
+      "other_names": [
+        "Andreas Canyon",
+        "Cahuilla",
+        "CA-RIV-45"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.0761,
+        -123.6794
+      ],
+      "country": "California",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Takimilding-California",
+      "known_aliases": [
+        "takimildin",
+        "hoopa valley",
+        "hostler ranch"
+      ],
+      "latest_year": 1600,
+      "name": "Takimilding",
+      "reason": "missing_entry",
+      "region": "ca_klamath_north_coast_shasta",
+      "sample_years": [
+        1000,
+        1300,
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ],
+      "canonical_name": "Takimilding",
+      "historical_names": [
+        {
+          "date": "1000.1.1",
+          "name": "Takimilding"
+        }
+      ],
+      "other_names": [
+        "Takimildin",
+        "Hoopa Valley",
+        "Hostler Ranch"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.875,
+        -118.8917
+      ],
+      "country": "California",
+      "earliest_year": 500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tejon (Kitanemuk)-California",
+      "known_aliases": [
+        "la liebre",
+        "fort tejon",
+        "ca-ker-303"
+      ],
+      "latest_year": 1600,
+      "name": "Tejon (Kitanemuk)",
+      "reason": "missing_entry",
+      "region": "ca_san_joaquin_central_coast",
+      "sample_years": [
+        500,
+        1200,
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ],
+      "canonical_name": "Tejon",
+      "historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Tejon"
+        }
+      ],
+      "other_names": [
+        "Kitanemuk",
+        "La Liebre",
+        "Fort Tejon",
+        "CA-KER-303"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.1917,
+        -122.9167
+      ],
+      "country": "California",
+      "earliest_year": 0,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tomales-California_2",
+      "known_aliases": [
+        "tamal-huye",
+        "tomales bay",
+        "ca-mrn-232"
+      ],
+      "latest_year": 1600,
+      "name": "Tomales",
+      "reason": "missing_entry",
+      "region": "ca_sacramento_sf_bay_delta",
+      "sample_years": [
+        0,
+        1000,
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ],
+      "canonical_name": "Tomales",
+      "historical_names": [
+        {
+          "date": "-1.1.1",
+          "name": "Tamal-Huye"
+        }
+      ],
+      "other_names": [
+        "Tamal-Huye",
+        "Tomales Bay",
+        "CA-MRN-232"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.2961,
+        -117.4453
+      ],
+      "country": "California",
+      "earliest_year": 500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Topome-California",
+      "known_aliases": [
+        "las flores",
+        "santa margarita river",
+        "ca-sdi-812"
+      ],
+      "latest_year": 1600,
+      "name": "Topome",
+      "reason": "missing_entry",
+      "region": "ca_chumash_channel_southern_cal",
+      "sample_years": [
+        500,
+        1200,
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ],
+      "canonical_name": "Topome",
+      "historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Topome"
+        }
+      ],
+      "other_names": [
+        "Las Flores",
+        "Santa Margarita River",
+        "CA-SDI-812"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.2219,
+        -119.3358
+      ],
+      "country": "California",
+      "earliest_year": -5000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tulamniu-California",
+      "known_aliases": [
+        "tulamni",
+        "buena vista west",
+        "ca-ker-116"
+      ],
+      "latest_year": 1600,
+      "name": "Tulamniu",
+      "reason": "missing_entry",
+      "region": "ca_san_joaquin_central_coast",
+      "sample_years": [
+        -5000,
+        -1000,
+        500,
+        1300,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ],
+      "canonical_name": "Tulamniu",
+      "historical_names": [
+        {
+          "date": "-5000.1.1",
+          "name": "Tulamniu"
+        }
+      ],
+      "other_names": [
+        "Tulamni",
+        "Buena Vista West",
+        "CA-KER-116"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.75,
+        -119.35
+      ],
+      "country": "California",
+      "earliest_year": 500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Visalia (Choinimni)-California",
+      "known_aliases": [
+        "kings river foothills",
+        "ca-fre-64"
+      ],
+      "latest_year": 1600,
+      "name": "Visalia (Choinimni)",
+      "reason": "missing_entry",
+      "region": "ca_san_joaquin_central_coast",
+      "sample_years": [
+        500,
+        1200,
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ],
+      "canonical_name": "Visalia",
+      "historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Choinimni"
+        }
+      ],
+      "other_names": [
+        "Choinimni",
+        "Kings River Foothills",
+        "CA-FRE-64"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.2417,
+        -116.7167
+      ],
+      "country": "California",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Warner Basin (Pilcha)-California",
+      "known_aliases": [
+        "mataguay",
+        "san jose valley",
+        "ca-sdi-10156"
+      ],
+      "latest_year": 1600,
+      "name": "Warner Basin (Pilcha)",
+      "reason": "missing_entry",
+      "region": "ca_chumash_channel_southern_cal",
+      "sample_years": [
+        800,
+        1200,
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ],
+      "canonical_name": "Warner Basin",
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Pilcha"
+        }
+      ],
+      "other_names": [
+        "Pilcha",
+        "Mataguay",
+        "San Jose Valley",
+        "CA-SDI-10156"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.1869,
+        -123.7042
+      ],
+      "country": "California",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Weitchpec-California_2",
+      "known_aliases": [
+        "wechpus",
+        "wetspus",
+        "klamath-trinity confluence"
+      ],
+      "latest_year": 1600,
+      "name": "Weitchpec",
+      "reason": "missing_entry",
+      "region": "ca_klamath_north_coast_shasta",
+      "sample_years": [
+        1000,
+        1300,
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ],
+      "canonical_name": "Weitchpec",
+      "historical_names": [
+        {
+          "date": "1000.1.1",
+          "name": "Wechpus"
+        }
+      ],
+      "other_names": [
+        "Wechpus",
+        "Wetspus",
+        "Klamath-Trinity Confluence"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.55,
+        -118.2167
+      ],
+      "country": "California",
+      "earliest_year": 600,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "White Mountains (High Altitude Villages)-California",
+      "known_aliases": [
+        "crooked creek",
+        "ca-mno-2189"
+      ],
+      "latest_year": 1500,
+      "name": "White Mountains (High Altitude Villages)",
+      "reason": "missing_entry",
+      "region": "ca_san_joaquin_central_coast",
+      "sample_years": [
+        600,
+        1000,
+        1300,
+        1500
+      ],
+      "sources": [
+        "CENTAUR"
+      ],
+      "canonical_name": "White Mountains",
+      "historical_names": [
+        {
+          "date": "600.1.1",
+          "name": "White Mountains"
+        }
+      ],
+      "other_names": [
+        "Crooked Creek",
+        "CA-MNO-2189"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.2889,
+        -121.3742
+      ],
+      "country": "California",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Windmiller-California",
+      "known_aliases": [
+        "cosumnes mound",
+        "ca-sac-107"
+      ],
+      "latest_year": 500,
+      "name": "Windmiller",
+      "reason": "missing_entry",
+      "region": "ca_san_joaquin_central_coast",
+      "sample_years": [
+        -2500,
+        -1500,
+        -500,
+        500
+      ],
+      "sources": [
+        "CENTAUR"
+      ],
+      "canonical_name": "Windmiller",
+      "historical_names": [
+        {
+          "date": "-2500.1.1",
+          "name": "Windmiller"
+        }
+      ],
+      "other_names": [
+        "Cosumnes Mound",
+        "CA-SAC-107"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.9167,
+        -119.8667
+      ],
+      "country": "California",
+      "earliest_year": -9000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Witt Site-California",
+      "known_aliases": [
+        "tulare lake mound",
+        "ca-kin-32"
+      ],
+      "latest_year": 1500,
+      "name": "Witt Site",
+      "reason": "missing_entry",
+      "region": "ca_san_joaquin_central_coast",
+      "sample_years": [
+        -9000,
+        -6000,
+        -1000,
+        1000,
+        1500
+      ],
+      "sources": [
+        "CENTAUR"
+      ],
+      "canonical_name": "Witt Site",
+      "historical_names": [
+        {
+          "date": "-9000.1.1",
+          "name": "Witt Site"
+        }
+      ],
+      "other_names": [
+        "Tulare Lake Mound",
+        "CA-KIN-32"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.3833,
+        -119.0267
+      ],
+      "country": "California",
+      "earliest_year": 500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Wukchumni-California",
+      "known_aliases": [
+        "wikchamni",
+        "kaweah river",
+        "lemon cove"
+      ],
+      "latest_year": 1600,
+      "name": "Wukchumni",
+      "reason": "missing_entry",
+      "region": "ca_san_joaquin_central_coast",
+      "sample_years": [
+        500,
+        1200,
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ],
+      "canonical_name": "Wukchumni",
+      "historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Wukchumni"
+        }
+      ],
+      "other_names": [
+        "Wikchamni",
+        "Kaweah River",
+        "Lemon Cove"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.7333,
+        -115.9167
+      ],
+      "country": "California",
+      "earliest_year": -3000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Yuha-California",
+      "known_aliases": [
+        "yuha basin",
+        "ca-imp-24"
+      ],
+      "latest_year": 1400,
+      "name": "Yuha",
+      "reason": "missing_entry",
+      "region": "ca_chumash_channel_southern_cal",
+      "sample_years": [
+        -3000,
+        -1000,
+        1000,
+        1400
+      ],
+      "sources": [
+        "CENTAUR"
+      ],
+      "canonical_name": "Yuha",
+      "historical_names": [
+        {
+          "date": "-3000.1.1",
+          "name": "Yuha"
+        }
+      ],
+      "other_names": [
+        "Yuha Basin",
+        "CA-IMP-24"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.5028,
+        -116.3222
+      ],
+      "country": "Idaho",
+      "earliest_year": -2000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ahsahka-Idaho",
+      "known_aliases": [
+        "north fork clearwater",
+        "10cw5"
+      ],
+      "latest_year": 1500,
+      "name": "Ahsahka",
+      "reason": "missing_entry",
+      "region": "nw_snake_river_klamath_interior",
+      "sample_years": [
+        -2000,
+        0,
+        1000,
+        1500
+      ],
+      "sources": [
+        "CENTAUR"
+      ],
+      "canonical_name": "Ahsahka",
+      "historical_names": [
+        {
+          "date": "-2000.1.1",
+          "name": "Ahsahka"
+        }
+      ],
+      "other_names": [
+        "North Fork Clearwater",
+        "10CW5"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.1,
+        -113.6333
+      ],
+      "country": "Idaho",
+      "earliest_year": 300,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Almo City of Rocks Town-Idaho",
+      "known_aliases": [
+        "city of rocks shoshone metropolis"
+      ],
+      "latest_year": 1350,
+      "name": "Almo City of Rocks Town",
+      "reason": "missing_entry",
+      "region": "nw_snake_river_klamath_interior",
+      "sample_years": [
+        300,
+        850,
+        1350
+      ],
+      "sources": [
+        "CENTAUR"
+      ],
+      "canonical_name": "Almo City of Rocks Town",
+      "historical_names": [
+        {
+          "date": "300.1.1",
+          "name": "Almo City of Rocks Town"
+        }
+      ],
+      "other_names": [
+        "City of Rocks Shoshone Metropolis"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.2055,
+        -117.6336
+      ],
+      "country": "Oregon",
+      "earliest_year": -2000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Birch Creek (Owyhee)-Oregon",
+      "known_aliases": [
+        "35ml181",
+        "owyhee river"
+      ],
+      "latest_year": 1200,
+      "name": "Birch Creek (Owyhee)",
+      "reason": "missing_entry",
+      "region": "nw_snake_river_klamath_interior",
+      "sample_years": [
+        -2000,
+        1200
+      ],
+      "sources": [
+        "CENTAUR"
+      ],
+      "canonical_name": "Birch Creek",
+      "historical_names": [
+        {
+          "date": "-2000.1.1",
+          "name": "Birch Creek"
+        }
+      ],
+      "other_names": [
+        "Owyhee River",
+        "35ML181"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.1667,
+        -112.95
+      ],
+      "country": "Idaho",
+      "earliest_year": -6500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bison and Veratic Rockshelters-Idaho",
+      "known_aliases": [
+        "birch creek valley",
+        "10cl10",
+        "10cl3"
+      ],
+      "latest_year": 1200,
+      "name": "Bison and Veratic Rockshelters",
+      "reason": "missing_entry",
+      "region": "nw_snake_river_klamath_interior",
+      "sample_years": [
+        -6500,
+        -3000,
+        0,
+        1200
+      ],
+      "sources": [
+        "CENTAUR"
+      ],
+      "canonical_name": "Bison and Veratic Rockshelters",
+      "historical_names": [
+        {
+          "date": "-6500.1.1",
+          "name": "Bison and Veratic Rockshelters"
+        }
+      ],
+      "other_names": [
+        "Birch Creek Valley",
+        "10CL10",
+        "10CL3"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.215,
+        -120.735
+      ],
+      "country": "Oregon",
+      "earliest_year": -7500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Buffalo Flat-Oregon",
+      "known_aliases": [
+        "35lk",
+        "christmas valley"
+      ],
+      "latest_year": -3000,
+      "name": "Buffalo Flat",
+      "reason": "missing_entry",
+      "region": "nw_snake_river_klamath_interior",
+      "sample_years": [
+        -7500,
+        -3000
+      ],
+      "sources": [
+        "CENTAUR"
+      ],
+      "canonical_name": "Buffalo Flat",
+      "historical_names": [
+        {
+          "date": "-7500.1.1",
+          "name": "Buffalo Flat"
+        }
+      ],
+      "other_names": [
+        "Christmas Valley",
+        "35LK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.54167,
+        -122.95833
+      ],
+      "country": "Washington",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cattle Point-Washington",
+      "known_aliases": [
+        "san juan island south",
+        "45sj1",
+        "richardson",
+        "lopez island south",
+        "45sj185"
+      ],
+      "latest_year": 1600,
+      "name": "Cattle Point",
+      "reason": "missing_entry",
+      "region": "nw_puget_sound_olympic_coast",
+      "sample_years": [
+        -500,
+        0,
+        500,
+        800,
+        1200,
+        1400,
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ],
+      "canonical_name": "Cattle Point",
+      "historical_names": [
+        {
+          "date": "-500.1.1",
+          "name": "Cattle Point"
+        }
+      ],
+      "other_names": [
+        "San Juan Island South",
+        "Richardson",
+        "Lopez Island South",
+        "45SJ1",
+        "45SJ185"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.752,
+        -122.79
+      ],
+      "country": "Oregon",
+      "earliest_year": 500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Chankawan-Oregon",
+      "known_aliases": [
+        "santiam kalapuya",
+        "north santiam",
+        "35ma64"
+      ],
+      "latest_year": 1600,
+      "name": "Chankawan",
+      "reason": "missing_entry",
+      "region": "nw_lower_columbia_willamette_coast",
+      "sample_years": [
+        500,
+        1200,
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ],
+      "canonical_name": "Chankawan",
+      "historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Chankawan"
+        }
+      ],
+      "other_names": [
+        "Santiam Kalapuya",
+        "North Santiam",
+        "35MA64"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.6833,
+        -120.4333
+      ],
+      "country": "Oregon",
+      "earliest_year": -4000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Chewaucan Marsh-Oregon",
+      "known_aliases": [
+        "lsp-1",
+        "warner-chewaucan",
+        "35lk2846"
+      ],
+      "latest_year": 1400,
+      "name": "Chewaucan Marsh",
+      "reason": "missing_entry",
+      "region": "nw_snake_river_klamath_interior",
+      "sample_years": [
+        -4000,
+        -1000,
+        500,
+        1400
+      ],
+      "sources": [
+        "CENTAUR"
+      ],
+      "canonical_name": "Chewaucan Marsh",
+      "historical_names": [
+        {
+          "date": "-4000.1.1",
+          "name": "Chewaucan Marsh"
+        }
+      ],
+      "other_names": [
+        "LSP-1",
+        "Warner-Chewaucan",
+        "35LK2846"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.0333,
+        -119.5167
+      ],
+      "country": "Washington",
+      "earliest_year": -3000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Chief Joseph (Rufus Woods)-Washington",
+      "known_aliases": [
+        "foster creek",
+        "nespelem",
+        "45ok11"
+      ],
+      "latest_year": 1400,
+      "name": "Chief Joseph (Rufus Woods)",
+      "reason": "missing_entry",
+      "region": "nw_columbia_plateau_yakima_spokane",
+      "sample_years": [
+        -3000,
+        -1000,
+        500,
+        1400
+      ],
+      "sources": [
+        "CENTAUR"
+      ],
+      "canonical_name": "Chief Joseph",
+      "historical_names": [
+        {
+          "date": "-3000.1.1",
+          "name": "Chief Joseph"
+        }
+      ],
+      "other_names": [
+        "Rufus Woods",
+        "Foster Creek",
+        "Nespelem",
+        "45OK11"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.2583,
+        -120.9167
+      ],
+      "country": "Oregon",
+      "earliest_year": -9500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Connley Caves-Oregon",
+      "known_aliases": [
+        "paulina marsh",
+        "35lk50"
+      ],
+      "latest_year": 0,
+      "name": "Connley Caves",
+      "reason": "missing_entry",
+      "region": "nw_snake_river_klamath_interior",
+      "sample_years": [
+        -9500,
+        -9000,
+        -7500,
+        -5000,
+        -3000,
+        0
+      ],
+      "sources": [
+        "CENTAUR"
+      ],
+      "canonical_name": "Connley Caves",
+      "historical_names": [
+        {
+          "date": "-9500.1.1",
+          "name": "Connley Caves"
+        }
+      ],
+      "other_names": [
+        "Paulina Marsh",
+        "35LK50"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.7833,
+        -114.75
+      ],
+      "country": "Nevada",
+      "earliest_year": 500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Contact Salmon Falls Village-Nevada",
+      "known_aliases": [
+        "contact creek settlement"
+      ],
+      "latest_year": 1450,
+      "name": "Contact Salmon Falls Village",
+      "reason": "missing_entry",
+      "region": "nw_snake_river_klamath_interior",
+      "sample_years": [
+        500,
+        1050,
+        1450
+      ],
+      "sources": [
+        "CENTAUR"
+      ],
+      "canonical_name": "Contact Salmon Falls Village",
+      "historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Contact Salmon Falls Village"
+        }
+      ],
+      "other_names": [
+        "Contact Creek Settlement"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.3408,
+        -122.3458
+      ],
+      "country": "Washington",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Conway-Washington_2",
+      "known_aliases": [
+        "south fork skagit",
+        "kikiallus",
+        "45sk46"
+      ],
+      "latest_year": 1600,
+      "name": "Conway",
+      "reason": "missing_entry",
+      "region": "nw_puget_sound_olympic_coast",
+      "sample_years": [
+        800,
+        1200,
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ],
+      "canonical_name": "Conway",
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Conway"
+        }
+      ],
+      "other_names": [
+        "South Fork Skagit",
+        "Kikiallus",
+        "45SK46"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.8819,
+        -116.2989
+      ],
+      "country": "Idaho",
+      "earliest_year": -10000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cooper's Ferry-Idaho",
+      "known_aliases": [
+        "nipéhe",
+        "lower salmon river",
+        "10ih73"
+      ],
+      "latest_year": 500,
+      "name": "Cooper's Ferry",
+      "reason": "missing_entry",
+      "region": "nw_snake_river_klamath_interior",
+      "sample_years": [
+        -10000,
+        -8500,
+        -4000,
+        500
+      ],
+      "sources": [
+        "CENTAUR"
+      ],
+      "canonical_name": "Cooper's Ferry",
+      "historical_names": [
+        {
+          "date": "-10000.1.1",
+          "name": "Cooper's Ferry"
+        }
+      ],
+      "other_names": [
+        "Nipéhe",
+        "Lower Salmon River",
+        "10IH73"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.265,
+        -119.865
+      ],
+      "country": "Oregon",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Crump Lake Village-Oregon",
+      "known_aliases": [
+        "35lk",
+        "warner valley"
+      ],
+      "latest_year": 1200,
+      "name": "Crump Lake Village",
+      "reason": "missing_entry",
+      "region": "nw_snake_river_klamath_interior",
+      "sample_years": [
+        -1000,
+        1200
+      ],
+      "sources": [
+        "CENTAUR"
+      ],
+      "canonical_name": "Crump Lake Village",
+      "historical_names": [
+        {
+          "date": "-1000.1.1",
+          "name": "Crump Lake Village"
+        }
+      ],
+      "other_names": [
+        "Warner Valley",
+        "35LK"
+      ]
+    }
+  ]
+}

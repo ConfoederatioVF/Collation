@@ -1,0 +1,957 @@
+{
+  "batch_index": 166,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        43.784,
+        -84.65839
+      ],
+      "country": "Michigan",
+      "earliest_year": 1865,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Loomis-Michigan",
+      "known_aliases": [
+        "Loomis",
+        "loomis",
+        "loomis cdp",
+        "Loomis CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Loomis",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1865,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.8598,
+        -112.03481
+      ],
+      "country": "Montana",
+      "earliest_year": 1922,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "New Rockport Colony-Montana",
+      "known_aliases": [
+        "New Rockport Colony",
+        "new rockport colony",
+        "new rockport colony cdp",
+        "New Rockport Colony CDP"
+      ],
+      "latest_year": 2020,
+      "name": "New Rockport Colony",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1922,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.21013,
+        -117.06794
+      ],
+      "country": "Nevada",
+      "earliest_year": 1877,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kingston-Nevada",
+      "known_aliases": [
+        "Kingston",
+        "kingston",
+        "kingston cdp",
+        "Kingston CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Kingston",
+      "reason": "missing_entry",
+      "region": "usa_nevada",
+      "sample_years": [
+        1877,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.35483,
+        -104.19536
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1939,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Conchas Dam-New Mexico",
+      "known_aliases": [
+        "Conchas Dam",
+        "conchas dam",
+        "conchas dam cdp",
+        "Conchas Dam CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Conchas Dam",
+      "reason": "missing_entry",
+      "region": "usa_new_mexico",
+      "sample_years": [
+        1939,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.81755,
+        -108.94125
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1879,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Luna-New Mexico",
+      "known_aliases": [
+        "Luna",
+        "luna",
+        "luna cdp",
+        "Luna CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Luna",
+      "reason": "missing_entry",
+      "region": "usa_new_mexico",
+      "sample_years": [
+        1879,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.82097,
+        -100.59948
+      ],
+      "country": "North Dakota",
+      "earliest_year": 1973,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Apple Valley-North Dakota",
+      "known_aliases": [
+        "Apple Valley",
+        "apple valley",
+        "apple valley cdp",
+        "Apple Valley CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Apple Valley",
+      "reason": "missing_entry",
+      "region": "usa_north_dakota",
+      "sample_years": [
+        1973,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.48657,
+        -73.12309
+      ],
+      "country": "Vermont",
+      "earliest_year": 1775,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Middletown Springs-Vermont",
+      "known_aliases": [
+        "Middletown Springs",
+        "middletown springs",
+        "middletown springs cdp",
+        "middletown springs town",
+        "Middletown Springs CDP",
+        "Middletown Springs town"
+      ],
+      "latest_year": 2020,
+      "name": "Middletown Springs",
+      "reason": "missing_entry",
+      "region": "usa_vermont",
+      "sample_years": [
+        1775,
+        1850,
+        1940,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.60125,
+        -81.63628
+      ],
+      "country": "West Virginia",
+      "earliest_year": 1884,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Brenton-West Virginia",
+      "known_aliases": [
+        "Brenton",
+        "brenton",
+        "brenton cdp",
+        "Brenton CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Brenton",
+      "reason": "missing_entry",
+      "region": "usa_west_virginia",
+      "sample_years": [
+        1884,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.63431,
+        -92.02107
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1862,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Arkansaw-Wisconsin",
+      "known_aliases": [
+        "Arkansaw",
+        "arkansaw",
+        "arkansaw cdp",
+        "Arkansaw CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Arkansaw",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1862,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.35233,
+        -121.90772
+      ],
+      "country": "California",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Elmira-California",
+      "known_aliases": [
+        "Elmira",
+        "elmira",
+        "elmira cdp",
+        "Elmira CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Elmira",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1850,
+        1860,
+        1870,
+        1880,
+        1890,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.9172,
+        -116.82608
+      ],
+      "country": "Idaho",
+      "earliest_year": 1877,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Princeton-Idaho",
+      "known_aliases": [
+        "Princeton",
+        "princeton",
+        "princeton cdp",
+        "Princeton CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Princeton",
+      "reason": "missing_entry",
+      "region": "usa_idaho",
+      "sample_years": [
+        1877,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.78939,
+        -89.75427
+      ],
+      "country": "Illinois",
+      "earliest_year": 1863,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Galt-Illinois",
+      "known_aliases": [
+        "Galt",
+        "galt",
+        "galt cdp",
+        "Galt CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Galt",
+      "reason": "missing_entry",
+      "region": "usa_illinois",
+      "sample_years": [
+        1863,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.55406,
+        -93.74364
+      ],
+      "country": "Missouri",
+      "earliest_year": 1875,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Eagle Rock-Missouri",
+      "known_aliases": [
+        "Eagle Rock",
+        "eagle rock",
+        "eagle rock cdp",
+        "Eagle Rock CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Eagle Rock",
+      "reason": "missing_entry",
+      "region": "usa_missouri",
+      "sample_years": [
+        1875,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.13723,
+        -108.99807
+      ],
+      "country": "Montana",
+      "earliest_year": 1928,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Belfry-Montana",
+      "known_aliases": [
+        "Belfry",
+        "belfry",
+        "belfry cdp",
+        "Belfry CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Belfry",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1928,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.40478,
+        -107.08687
+      ],
+      "country": "Montana",
+      "earliest_year": 1865,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hinsdale-Montana",
+      "known_aliases": [
+        "Hinsdale",
+        "hinsdale",
+        "hinsdale cdp",
+        "Hinsdale CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Hinsdale",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1865,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.51867,
+        -108.8713
+      ],
+      "country": "Montana",
+      "earliest_year": 1943,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rockvale-Montana",
+      "known_aliases": [
+        "Rockvale",
+        "rockvale",
+        "rockvale cdp",
+        "Rockvale CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Rockvale",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1943,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.64869,
+        -123.85432
+      ],
+      "country": "Oregon",
+      "earliest_year": 1894,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Barnesdale-Oregon",
+      "known_aliases": [
+        "Barnesdale",
+        "barnesdale",
+        "barnesdale cdp",
+        "Barnesdale CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Barnesdale",
+      "reason": "missing_entry",
+      "region": "usa_oregon",
+      "sample_years": [
+        1894,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.56203,
+        -76.20118
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1862,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Summit Station-Pennsylvania",
+      "known_aliases": [
+        "Summit Station",
+        "summit station",
+        "summit station cdp",
+        "Summit Station CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Summit Station",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1862,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.7193,
+        -122.18599
+      ],
+      "country": "Washington",
+      "earliest_year": 1868,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mineral-Washington",
+      "known_aliases": [
+        "Mineral",
+        "mineral",
+        "mineral cdp",
+        "Mineral CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Mineral",
+      "reason": "missing_entry",
+      "region": "usa_washington",
+      "sample_years": [
+        1868,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.57439,
+        -81.48639
+      ],
+      "country": "West Virginia",
+      "earliest_year": 1953,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "New Richmond-West Virginia",
+      "known_aliases": [
+        "New Richmond",
+        "new richmond",
+        "new richmond cdp",
+        "New Richmond CDP"
+      ],
+      "latest_year": 2020,
+      "name": "New Richmond",
+      "reason": "missing_entry",
+      "region": "usa_west_virginia",
+      "sample_years": [
+        1953,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.57195,
+        -91.73213
+      ],
+      "country": "Iowa",
+      "earliest_year": 1939,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Frytown-Iowa",
+      "known_aliases": [
+        "Frytown",
+        "frytown",
+        "frytown cdp",
+        "Frytown CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Frytown",
+      "reason": "missing_entry",
+      "region": "usa_iowa",
+      "sample_years": [
+        1939,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.38704,
+        -75.29754
+      ],
+      "country": "Maryland",
+      "earliest_year": 1869,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Whaleyville-Maryland",
+      "known_aliases": [
+        "Whaleyville",
+        "whaleyville",
+        "whaleyville cdp",
+        "Whaleyville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Whaleyville",
+      "reason": "missing_entry",
+      "region": "usa_maryland",
+      "sample_years": [
+        1869,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.23075,
+        -94.43613
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1888,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Searles-Minnesota",
+      "known_aliases": [
+        "Searles",
+        "searles",
+        "searles cdp",
+        "Searles CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Searles",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1888,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.21904,
+        -95.64882
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1868,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Twin Lakes-Minnesota",
+      "known_aliases": [
+        "Twin Lakes",
+        "twin lakes",
+        "twin lakes cdp",
+        "Twin Lakes CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Twin Lakes",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1868,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.91053,
+        -114.19487
+      ],
+      "country": "Montana",
+      "earliest_year": 1934,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rollins-Montana",
+      "known_aliases": [
+        "Rollins",
+        "rollins",
+        "rollins cdp",
+        "Rollins CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Rollins",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1934,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.24742,
+        -108.76706
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1940,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sagar-New Mexico",
+      "known_aliases": [
+        "Sagar",
+        "sagar",
+        "sagar cdp",
+        "Sagar CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Sagar",
+      "reason": "missing_entry",
+      "region": "usa_new_mexico",
+      "sample_years": [
+        1940,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.79596,
+        -94.56811
+      ],
+      "country": "Oklahoma",
+      "earliest_year": 1922,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Elm Grove-Oklahoma",
+      "known_aliases": [
+        "Elm Grove",
+        "elm grove",
+        "elm grove cdp",
+        "Elm Grove CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Elm Grove",
+      "reason": "missing_entry",
+      "region": "usa_oklahoma",
+      "sample_years": [
+        1922,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.10474,
+        -96.87077
+      ],
+      "country": "Oklahoma",
+      "earliest_year": 1877,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ingalls-Oklahoma",
+      "known_aliases": [
+        "Ingalls",
+        "ingalls",
+        "ingalls cdp",
+        "Ingalls CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Ingalls",
+      "reason": "missing_entry",
+      "region": "usa_oklahoma",
+      "sample_years": [
+        1877,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.67011,
+        -121.27495
+      ],
+      "country": "Oregon",
+      "earliest_year": 1959,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rowena-Oregon",
+      "known_aliases": [
+        "Rowena",
+        "rowena",
+        "rowena cdp",
+        "Rowena CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Rowena",
+      "reason": "missing_entry",
+      "region": "usa_washington",
+      "sample_years": [
+        1959,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.684,
+        -119.82274
+      ],
+      "country": "California",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Markleeville-California",
+      "known_aliases": [
+        "Markleeville",
+        "markleeville",
+        "markleeville cdp",
+        "Markleeville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Markleeville",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1850,
+        1860,
+        1870,
+        1880,
+        1890,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

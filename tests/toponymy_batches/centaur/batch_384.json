@@ -1,0 +1,953 @@
+{
+  "batch_index": 384,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        40.93333,
+        -76.86639
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1903,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "East Buffalo-Pennsylvania",
+      "known_aliases": [
+        "East Buffalo",
+        "east buffalo",
+        "east buffalo township",
+        "East Buffalo Township"
+      ],
+      "latest_year": 2010,
+      "name": "East Buffalo",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1903,
+        1940,
+        1980,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.61944,
+        -80.02472
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pine (Allegheny County)-Pennsylvania",
+      "known_aliases": [
+        "Pine (Allegheny County)",
+        "pine",
+        "pine township",
+        "Pine Township"
+      ],
+      "latest_year": 2010,
+      "name": "Pine (Allegheny County)",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1850,
+        1900,
+        1960,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.78333,
+        -77.53306
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1890,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Gaines-Pennsylvania",
+      "known_aliases": [
+        "Gaines",
+        "gaines",
+        "gaines township",
+        "Gaines Township"
+      ],
+      "latest_year": 2010,
+      "name": "Gaines",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1890,
+        1930,
+        1970,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.88333,
+        -76.12639
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1858,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Middletown (Susquehanna County)-Pennsylvania",
+      "known_aliases": [
+        "Middletown (Susquehanna County)",
+        "middletown",
+        "middletown township",
+        "Middletown Township"
+      ],
+      "latest_year": 2010,
+      "name": "Middletown (Susquehanna County)",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1858,
+        1900,
+        1960,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.97833,
+        -78.41167
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1879,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Snake Spring-Pennsylvania",
+      "known_aliases": [
+        "Snake Spring",
+        "snake spring",
+        "snake spring township",
+        "Snake Spring Township"
+      ],
+      "latest_year": 2010,
+      "name": "Snake Spring",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1879,
+        1920,
+        1970,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.12444,
+        -75.62611
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1957,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tobyhanna-Pennsylvania",
+      "known_aliases": [
+        "Tobyhanna",
+        "tobyhanna",
+        "tobyhanna township",
+        "Tobyhanna Township"
+      ],
+      "latest_year": 2010,
+      "name": "Tobyhanna",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1957,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.68333,
+        -76.93306
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1895,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Chapman (Snyder County)-Pennsylvania",
+      "known_aliases": [
+        "Chapman (Snyder County)",
+        "chapman",
+        "chapman township",
+        "Chapman Township"
+      ],
+      "latest_year": 2010,
+      "name": "Chapman (Snyder County)",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1895,
+        1930,
+        1970,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.95889,
+        -76.08056
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1856,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Nickel Mines-Pennsylvania",
+      "known_aliases": [
+        "Nickel Mines",
+        "nickel mines"
+      ],
+      "latest_year": 2010,
+      "name": "Nickel Mines",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1856,
+        1900,
+        1960,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.62528,
+        -78.49944
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1906,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Jones-Pennsylvania",
+      "known_aliases": [
+        "Jones",
+        "jones",
+        "jones township",
+        "Jones Township"
+      ],
+      "latest_year": 2010,
+      "name": "Jones",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1906,
+        1940,
+        1980,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.13333,
+        -75.87444
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1942,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Wright-Pennsylvania",
+      "known_aliases": [
+        "Wright",
+        "wright",
+        "wright township",
+        "Wright Township"
+      ],
+      "latest_year": 2010,
+      "name": "Wright",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1942,
+        1950,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.74167,
+        -79.16639
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1972,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pleasant-Pennsylvania",
+      "known_aliases": [
+        "Pleasant",
+        "pleasant",
+        "pleasant township",
+        "Pleasant Township"
+      ],
+      "latest_year": 2010,
+      "name": "Pleasant",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1972,
+        1980,
+        1990,
+        2000,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.41667,
+        -75.78306
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1914,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ransom-Pennsylvania",
+      "known_aliases": [
+        "Ransom",
+        "ransom",
+        "ransom township",
+        "Ransom Township"
+      ],
+      "latest_year": 2010,
+      "name": "Ransom",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1914,
+        1940,
+        1980,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.91667,
+        -77.41639
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1934,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Haines-Pennsylvania",
+      "known_aliases": [
+        "Haines",
+        "haines",
+        "haines township",
+        "Haines Township"
+      ],
+      "latest_year": 2010,
+      "name": "Haines",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1934,
+        1960,
+        1990,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.37667,
+        -75.25139
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1917,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hilltown-Pennsylvania",
+      "known_aliases": [
+        "Hilltown",
+        "hilltown",
+        "hilltown township",
+        "Hilltown Township"
+      ],
+      "latest_year": 2010,
+      "name": "Hilltown",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1917,
+        1940,
+        1980,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.01667,
+        -76.12639
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1904,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sugarloaf-Pennsylvania",
+      "known_aliases": [
+        "Sugarloaf",
+        "sugarloaf",
+        "sugarloaf township",
+        "Sugarloaf Township"
+      ],
+      "latest_year": 2010,
+      "name": "Sugarloaf",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1904,
+        1940,
+        1980,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.03194,
+        -75.74806
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1918,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "East Brandywine-Pennsylvania",
+      "known_aliases": [
+        "East Brandywine",
+        "east brandywine",
+        "east brandywine township",
+        "East Brandywine Township"
+      ],
+      "latest_year": 2010,
+      "name": "East Brandywine",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1918,
+        1940,
+        1980,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.55,
+        -75.69972
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1911,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "North Abington-Pennsylvania",
+      "known_aliases": [
+        "North Abington",
+        "north abington",
+        "north abington township",
+        "North Abington Township"
+      ],
+      "latest_year": 2010,
+      "name": "North Abington",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1911,
+        1940,
+        1980,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.86667,
+        -79.28306
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1852,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Upper Turkeyfoot-Pennsylvania",
+      "known_aliases": [
+        "Upper Turkeyfoot",
+        "upper turkeyfoot",
+        "upper turkeyfoot township",
+        "Upper Turkeyfoot Township"
+      ],
+      "latest_year": 2010,
+      "name": "Upper Turkeyfoot",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1852,
+        1900,
+        1960,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.96667,
+        -77.13306
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1902,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lawrence (Tioga County)-Pennsylvania",
+      "known_aliases": [
+        "Lawrence (Tioga County)",
+        "lawrence",
+        "lawrence township",
+        "Lawrence Township"
+      ],
+      "latest_year": 2010,
+      "name": "Lawrence (Tioga County)",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1902,
+        1940,
+        1980,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.8833,
+        -79.1167
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1868,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "West Mahoning-Pennsylvania",
+      "known_aliases": [
+        "West Mahoning",
+        "west mahoning",
+        "west mahoning township",
+        "West Mahoning Township"
+      ],
+      "latest_year": 2010,
+      "name": "West Mahoning",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1868,
+        1910,
+        1960,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.38333,
+        -76.73306
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1883,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "West Hanover-Pennsylvania",
+      "known_aliases": [
+        "West Hanover",
+        "west hanover",
+        "west hanover township",
+        "West Hanover Township"
+      ],
+      "latest_year": 2010,
+      "name": "West Hanover",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1883,
+        1920,
+        1970,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.95889,
+        -78.32667
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1959,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Boggs-Pennsylvania",
+      "known_aliases": [
+        "Boggs",
+        "boggs",
+        "boggs township",
+        "Boggs Township"
+      ],
+      "latest_year": 2010,
+      "name": "Boggs",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1959,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.66667,
+        -76.76639
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1953,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Jordan (Northumberland County)-Pennsylvania",
+      "known_aliases": [
+        "Jordan (Northumberland County)",
+        "jordan",
+        "jordan township",
+        "Jordan Township"
+      ],
+      "latest_year": 2010,
+      "name": "Jordan (Northumberland County)",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1953,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.61667,
+        -79.24167
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1907,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Armstrong-Pennsylvania",
+      "known_aliases": [
+        "Armstrong",
+        "armstrong",
+        "armstrong township",
+        "Armstrong Township"
+      ],
+      "latest_year": 2010,
+      "name": "Armstrong",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1907,
+        1940,
+        1980,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.32372,
+        -75.05989
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1942,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Buckingham (Bucks County)-Pennsylvania",
+      "known_aliases": [
+        "Buckingham (Bucks County)",
+        "buckingham",
+        "buckingham township",
+        "Buckingham Township"
+      ],
+      "latest_year": 2010,
+      "name": "Buckingham (Bucks County)",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1942,
+        1950,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.24889,
+        -78.44972
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1851,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Greenfield (Bedford County)-Pennsylvania",
+      "known_aliases": [
+        "Greenfield (Bedford County)",
+        "greenfield",
+        "greenfield township",
+        "Greenfield Township"
+      ],
+      "latest_year": 2010,
+      "name": "Greenfield (Bedford County)",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1851,
+        1900,
+        1960,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.70833,
+        -78.26639
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1934,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Snyder-Pennsylvania",
+      "known_aliases": [
+        "Snyder",
+        "snyder",
+        "snyder township",
+        "Snyder Township"
+      ],
+      "latest_year": 2010,
+      "name": "Snyder",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1934,
+        1960,
+        1990,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.21667,
+        -75.19972
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1939,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Barrett-Pennsylvania",
+      "known_aliases": [
+        "Barrett",
+        "barrett",
+        "barrett township",
+        "Barrett Township"
+      ],
+      "latest_year": 2010,
+      "name": "Barrett",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1939,
+        1960,
+        1990,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.38333,
+        -75.88306
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1868,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Franklin (Wyoming County)-Pennsylvania",
+      "known_aliases": [
+        "Franklin (Wyoming County)",
+        "franklin",
+        "franklin township",
+        "Franklin Township"
+      ],
+      "latest_year": 2010,
+      "name": "Franklin (Wyoming County)",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1868,
+        1910,
+        1960,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.94667,
+        -75.64
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1866,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "East Bradford-Pennsylvania",
+      "known_aliases": [
+        "East Bradford",
+        "east bradford",
+        "east bradford township",
+        "East Bradford Township"
+      ],
+      "latest_year": 2010,
+      "name": "East Bradford",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1866,
+        1910,
+        1960,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

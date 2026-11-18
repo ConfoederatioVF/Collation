@@ -1,6 +1,8 @@
 //Import modules
 let fs = require("fs");
 let path = require("path");
+let { PNG } = require("pngjs");
+let { NorthernAmericaSettlementExporter } = require("./NorthernAmericaSettlementExporter.js");
 
 //Initialise functions
 {
@@ -144,7 +146,7 @@ let path = require("path");
           let p_idxs = getPeriodIndicesForSpan(ce, ce + 1);
 
           for (let p = 0; p < p_idxs.length; p++)
-            recordSitePeriod(p_idxs[p], lon, lat, s_id, 1.0, false, "KellyRobinson_L48", cols[i_lab]);
+            recordSitePeriod(p_idxs[p], lon, lat, s_id, 0.65, false, "KellyRobinson_L48", cols[i_lab]);
         }
       }
 
@@ -196,7 +198,7 @@ let path = require("path");
           let snm = (cols[isid] && cols[isid] !== "NA") ? cols[isid] : (cols[isite] || "");
 
           for (let p = 0; p < p_idxs.length; p++)
-            recordSitePeriod(p_idxs[p], lon, lat, snm, 1.0, is_mex || is_carib || is_ruk, cfg.tag, cols[ilab]);
+            recordSitePeriod(p_idxs[p], lon, lat, snm, 0.65, is_mex || is_carib || is_ruk, cfg.tag, cols[ilab]);
         }
       }
 
@@ -323,7 +325,7 @@ let path = require("path");
           let jit_lon = cen[0] + (((i*37) % 100) - 50)*0.0022;
           let jit_lat = cen[1] + (((i*53) % 100) - 50)*0.0018;
           let rb = Math.max(1, Number(cols[i_rb]) || 10);
-          let wt = Math.min(4.0, 1.0 + Math.log10(rb)*0.6);
+          let wt = Math.min(0.65, 0.22 + Math.log10(rb)*0.12);
           let active_h = [];
 
           if (Number(cols[c_x600]) > 0) active_h.push(5);
@@ -334,30 +336,18 @@ let path = require("path");
         }
       }
 
-      //6. Greenland National Museum Nunniffiit (11 Pre-Colonial Cultures + Norse)
+      //6. Greenland National Museum Nunniffiit (Chronology & High-Arctic Geography Normalised)
       let nun_p = path.join(raw_na_dir, "greenland_nunniffiit_cultures.json");
 
       if (fs.existsSync(nun_p)) {
         let nun = JSON.parse(fs.readFileSync(nun_p, "utf8"));
-        let layer_horizons = {
-          "Early Dorset": [3, 4],
-          "Early Paleo Eskimo": [1, 2],
-          "Eskimo Undefined": [5, 6, 8],
-          "Greenlandic Dorset": [4, 5],
-          "Independence I": [2, 3],
-          "Late Dorset": [5, 6],
-          "Late Paleo Eskimo": [4, 5],
-          "Norse": [6, 7, 8],
-          "Paleo Eskimo": [2, 3, 4],
-          "Saqqaq": [2, 3],
-          "Thule": [6, 7, 8, 9]
-        };
-        let layer_keys = Object.keys(layer_horizons);
+        let layer_keys = Object.keys(nun);
 
         for (let l = 0; l < layer_keys.length; l++) {
           let lk = layer_keys[l];
+
+          if (lk === "Colonial" || lk === "Eskimo Undefined") continue;
           let feats = Array.isArray(nun[lk]) ? nun[lk] : [];
-          let targets = layer_horizons[lk];
 
           for (let i = 0; i < feats.length; i++) {
             let ft = feats[i];
@@ -365,14 +355,71 @@ let path = require("path");
             if (!ft || !ft.geometry || !Array.isArray(ft.geometry.coordinates)) continue;
             let lon = Number(ft.geometry.coordinates[0]);
             let lat = Number(ft.geometry.coordinates[1]);
+
+            if (!Number.isFinite(lon) || !Number.isFinite(lat)) continue;
+            let is_peary_ne = (lat > 78.5 || (lat > 71.5 && lon > -32.0));
+            let is_nw_avan = (!is_peary_ne && lat >= 74.5 && lon <= -54.0);
+            let is_sw_gl = (lat >= 59.5 && lat <= 66.2 && lon >= -56.0 && lon <= -41.5);
+            let is_w_gl = (!is_peary_ne && !is_nw_avan && !is_sw_gl && lon <= -43.0);
+            let targets = [];
+            let wt = 0.50;
+
+            if (lk === "Early Paleo Eskimo") {
+              targets = is_peary_ne ? [2] : [1, 2];
+              wt = 0.45;
+            } else if (lk === "Independence I") {
+              targets = [2];
+              wt = 0.45;
+            } else if (lk === "Saqqaq") {
+              targets = is_peary_ne ? [] : [2, 3];
+              wt = 0.55;
+            } else if (lk === "Paleo Eskimo") {
+              targets = is_peary_ne ? [2] : [2, 3];
+              wt = 0.40;
+            } else if (lk === "Early Dorset") {
+              targets = is_peary_ne ? [] : [3, 4];
+              wt = 0.50;
+            } else if (lk === "Greenlandic Dorset") {
+              targets = is_peary_ne ? [3] : [3, 4];
+              wt = 0.45;
+            } else if (lk === "Late Paleo Eskimo") {
+              targets = is_peary_ne ? [] : [4, 5];
+              wt = 0.45;
+            } else if (lk === "Late Dorset") {
+              targets = (is_nw_avan || is_w_gl) ? [5, 6] : [];
+              wt = 0.55;
+            } else if (lk === "Norse") {
+              if (!is_sw_gl) continue;
+              targets = (lat < 62.5) ? [6, 7, 8] : [6, 7];
+              wt = 0.65;
+            } else if (lk === "Thule") {
+              if (is_peary_ne) {
+                if (lat > 78.5) continue;
+                targets = [8];
+                wt = 0.22;
+              } else if (is_nw_avan) {
+                targets = [7, 8, 9];
+                wt = 0.55;
+              } else if (is_w_gl && lat >= 68.0) {
+                targets = [7, 8, 9];
+                wt = 0.55;
+              } else {
+                targets = [8, 9];
+                wt = 0.50;
+              }
+            }
+            if (targets.length === 0) continue;
             let props = ft.properties || {};
             let nm = props.LOCNAME || `NKAH_${props.NKAH || i}`;
 
             for (let p = 0; p < targets.length; p++)
-              recordSitePeriod(targets[p], lon, lat, nm, 1.4, false, "Greenland_Nunniffiit");
+              recordSitePeriod(targets[p], lon, lat, nm, wt, false, "Greenland_Nunniffiit");
           }
         }
       }
+
+      //6b. NPS NRHP Indigenous Monuments + Plains Earthlodge Village Houses + Kohler/Reese NDT
+      this.ingestExtraArchRegistries(state, cb);
 
       //7. Midwest & Southeast Cultural Index sites (Milner 2023 + people3k_Midwest2)
       let mil_p = path.join(raw_na_dir, "people3k_Milner2023CultIndex.csv");
@@ -548,14 +595,17 @@ let path = require("path");
                   }
                 }
                 if (p_pop <= 0) continue;
-                let wt = Math.min(6.0, 1.0 + Math.log10(Math.max(10, p_pop)));
+                let wt = Math.min(48.0, 3.0 + 0.42*Math.pow(Math.max(15, p_pop), 0.55));
 
-                recordSitePeriod(p, lon, lat, sv.name || keys[k], wt, false, "CENTAUR_Gazetteer");
+                recordSitePeriod(p, lon, lat, sv.name || keys[k], wt, false, "CENTAUR_Gazetteer", "", p_pop);
               }
             }
           }
         }
       }
+
+      //9b. Colonial baseline settlements, Plains earthlodges & Southwest VEP II / SWSN dendro series
+      NorthernAmericaSettlementExporter.ingestColonialPlainsAndCollect(state, cb);
 
       //10. Condition Northern Mexico frontier smoothly from US border + direct Mexican counts
       for (let i = 0; i < frontier.length; i++) {
@@ -585,6 +635,269 @@ let path = require("path");
 
       //Return statement
       return state;
+    }
+
+
+    /**
+     * Ingests verified pre-Columbian Indigenous monuments from NPS NRHP Locations (`nps_nrhp_locations.geojson`)
+     * plus Kohler & Reese (2014) Neolithic Demographic Transition regional sites (`kohler_reese2014_ndt.csv`).
+     * @alias NorthernAmericaSiteSources.ingestExtraArchRegistries
+     *
+     * @param {Object} arg0_state
+     * @param {Object} arg1_callbacks
+     */
+    static ingestExtraArchRegistries (arg0_state, arg1_callbacks) {
+      //Convert from parameters
+      let state = arg0_state;
+      let cb = arg1_callbacks;
+
+      //Declare local instance variables
+      let arch_re = /\b(archaeolog\w+|archeolog\w+|mound\s*(?:group|site|complex|park|district)?|mounds\b|earthwork\w*|pueblo\b|cliff dwelling\w*|shell\s*(?:ring|mound|midden|heap)|prehistoric|village\s+site|petroglyph\w*|pictograph\w*|effigy|pithouse\w*|kiva|cahokia|etowah|moundville|chaco|mesa\s+verde|pueblo\s+bonito|aztec\s+ruins|spiro|kincaid|poverty\s+point|angel\s+mounds|ocmulgee|kolomoki|serpent\s+mound|newark\s+earthworks|aztalan|toltec\s+mounds|marksville|crystal\s+river|snaketown|casa\s+grande|hovenweep|wupatki|tuzigoot|bandelier)\b/i;
+      let exc_re = /\b(street|ave|avenue|blvd|building|courthouse|church|chapel|hotel|bank|school|academy|hospital|library|depot|station|mill|factory|theatre|theater|house\b|mansion|cottage|plantation|post\s+office|bridge|dam|canal|federal|mine|smelter|shipwreck|wreck|lighthouse|cemetery\b(?!.*mound)|memorial\b(?!.*(?:mound|archaeolog|archeolog))|statue|monument\s+to|farmstead|ranch|railroad|commercial|residential|civil\s+war|revolutionary|chinese\s+mining|columbus|arcade|garage|dispatch|museum|homestead|spanish)\b/i;
+      let getPeriodIndicesForSpan = cb.getPeriodIndicesForSpan;
+      let nrhp_p = path.join(cb.raw_na_dir, "nps_nrhp_locations.geojson");
+      let recordSitePeriod = cb.recordSitePeriod;
+
+      //Function body
+      if (fs.existsSync(nrhp_p)) {
+        let gj = JSON.parse(fs.readFileSync(nrhp_p, "utf8"));
+        let feats = Array.isArray(gj.features) ? gj.features : [];
+
+        for (let i = 0; i < feats.length; i++) {
+          let ft = feats[i];
+          let pr = ft.properties || {};
+          let nm = String(pr.RESNAME || "");
+          let rt = String(pr.ResType || "").toLowerCase();
+          let st = String(pr.State || "").toUpperCase();
+
+          if (st === "HAWAII" || st === "AMERICAN SAMOA" || st === "PUERTO RICO" || st === "VIRGIN ISLANDS" || st === "GUAM") continue;
+          if (rt !== "site" && rt !== "district") continue;
+          if (!arch_re.test(nm) || exc_re.test(nm)) continue;
+          if (!ft.geometry || !Array.isArray(ft.geometry.coordinates)) continue;
+          let lon = Number(ft.geometry.coordinates[0]);
+          let lat = Number(ft.geometry.coordinates[1]);
+
+          if (!Number.isFinite(lat) || !Number.isFinite(lon)) continue;
+          let is_pueblo = /\b(pueblo|cliff|chaco|mesa verde|snaketown|casa grande|hovenweep|wupatki|tuzigoot|bandelier)\b/i.test(nm);
+          let is_late_archaic = /\b(poverty point|shell\s*(?:mound|ring|midden))\b/i.test(nm);
+          let targets = is_late_archaic ? [2, 3] : (is_pueblo ? [6, 7, 8, 9] : [4, 5, 6, 7, 8]);
+          let wt = /\b(mound|earthwork|pueblo|village|cahokia|etowah|moundville|spiro|poverty point|chaco)\b/i.test(nm) ? 3.2 : 1.8;
+
+          for (let p = 0; p < targets.length; p++)
+            recordSitePeriod(targets[p], lon, lat, nm, wt, false, "NPS_NRHP_Arch");
+        }
+      }
+
+      let ndt_p = path.join(cb.raw_na_dir, "kohler_reese2014_ndt.csv");
+
+      if (fs.existsSync(ndt_p)) {
+        let ndt_centers = {
+          HOH: [-111.0, 32.25],
+          KAY: [-110.35, 36.68],
+          MIM: [-108.05, 32.85],
+          NGR: [-106.10, 35.65],
+          SAN: [-107.95, 36.05]
+        };
+        let lines = fs.readFileSync(ndt_p, "utf8").split(/\r?\n/);
+
+        for (let i = 1; i < lines.length; i++) {
+          if (!lines[i]) continue;
+          let cols = cb.parseDelimitedLine(lines[i]);
+          let reg = (cols[1] || "").trim();
+          let yr = Number(cols[4]);
+          let cen = ndt_centers[reg];
+
+          if (!cen || !Number.isFinite(yr)) continue;
+          let p_idxs = getPeriodIndicesForSpan(yr - 150, yr + 150);
+
+          for (let p = 0; p < p_idxs.length; p++)
+            recordSitePeriod(p_idxs[p], cen[0], cen[1], cols[3] || cols[0], 1.5, false, "KohlerReese_NDT");
+        }
+      }
+    }
+
+
+    /**
+     * Loads HYDE `popc_1500AD`, `popc_1000AD` and `popc_1900AD` rasters to build a binary 5-arcminute
+     * HYDE habitability mask (`density >= 0,002` persons/km²) so synthetic empty catchments are never
+     * placed inside uninhabitable desert, alpine or High-Arctic barrens.
+     * @alias NorthernAmericaSiteSources.loadHydeHabitabilityMask
+     *
+     * @param {Object} arg0_state
+     *
+     * @returns {Uint8Array}
+     */
+    static loadHydeHabitabilityMask (arg0_state) {
+      //Convert from parameters
+      let state = arg0_state;
+
+      //Declare local instance variables
+      let hyde_dir = path.join(state.project_root, "histmap/2.data_cleaning/landuse_HYDE/rasters");
+      let n_px = state.width*state.height;
+      let out = new Uint8Array(n_px);
+      let r10 = path.join(hyde_dir, "popc_1000AD.png");
+      let r15 = path.join(hyde_dir, "popc_1500AD.png");
+      let r19 = path.join(hyde_dir, "popc_1900AD.png");
+      let rasters = [
+        { p: r15, w: 1.0 },
+        { p: r10, w: 1.0 },
+        { p: r19, w: 0.15 }
+      ];
+
+      //Function body
+      for (let i = 0; i < rasters.length; i++) {
+        if (!fs.existsSync(rasters[i].p)) continue;
+        let data = PNG.sync.read(fs.readFileSync(rasters[i].p)).data;
+        let dv = new DataView(data.buffer, data.byteOffset, data.byteLength);
+        let mult = rasters[i].w;
+
+        for (let px = 0; px < n_px; px++) {
+          let la = state.land_area[px];
+
+          if (la <= 0 || out[px] === 1) continue;
+          let off = px*4;
+
+          if ((data[off] | data[off + 1] | data[off + 2] | data[off + 3]) === 0) continue;
+          let v = dv.getFloat32(off, false)*mult;
+
+          if (Number.isFinite(v) && v/la >= 0.002)
+            out[px] = 1;
+        }
+      }
+
+      //Return statement
+      return out;
+    }
+
+
+    /**
+     * Prunes purely empty synthetic wasteland catchments lacking both archaeological evidence and HYDE habitation,
+     * while preserving genuine agrarian catchments for spatial continuity.
+     * @alias NorthernAmericaSiteSources.pruneWastelandCatchments
+     *
+     * @param {Object} arg0_state
+     *
+     * @returns {Object}
+     */
+    static pruneWastelandCatchments (arg0_state) {
+      //Convert from parameters
+      let state = arg0_state;
+
+      //Declare local instance variables
+      let kept_dom = [];
+      let kept_front = [];
+
+      //Function body
+      for (let i = 0; i < state.all_catchments.length; i++) {
+        let c = state.all_catchments[i];
+        let tot = 0;
+
+        for (let p = 0; p < c.counts.length; p++) tot += c.counts[p];
+        if (c.is_frontier_buffer) {
+          kept_front.push(c);
+          continue;
+        }
+        let hab_frac = (c.habitable_area_km2 > 0) ? (c.hyde_hab_area_km2 || 0)/c.habitable_area_km2 : 0;
+
+        if (tot > 0 || hab_frac >= 0.08)
+          kept_dom.push(c);
+      }
+
+      state.domestic_catchments = kept_dom;
+      state.frontier_catchments = kept_front;
+      state.all_catchments = kept_dom.concat(kept_front);
+
+      //Return statement
+      return state;
+    }
+
+
+    /**
+     * Converts UTM NAD83/WGS84 (easting, northing) in given zone to [lon, lat].
+     * @alias NorthernAmericaSiteSources.utmToLonLat
+     *
+     * @param {number} arg0_easting
+     * @param {number} arg1_northing
+     * @param {number} [arg2_zone=12]
+     *
+     * @returns {Array<number>|null}
+     */
+    static utmToLonLat (arg0_easting, arg1_northing, arg2_zone) {
+      //Convert from parameters
+      let easting = Number(arg0_easting);
+      let northing = Number(arg1_northing);
+      let zone = (arg2_zone !== undefined) ? Number(arg2_zone) : 12;
+
+      //Guard clauses
+      if (!Number.isFinite(easting) || !Number.isFinite(northing)) return null;
+
+      //Declare local instance variables
+      let a = 6378137.0;
+      let f = 1.0/298.257223563;
+      let e2 = f*(2 - f);
+      let ep2 = e2/(1 - e2);
+      let k0 = 0.9996;
+      let lon0 = ((zone - 1)*6 - 180 + 3)*Math.PI/180;
+      let m = northing/k0;
+      let mu = m/(a*(1 - e2/4 - 3*e2*e2/64 - 5*e2*e2*e2/256));
+      let e1 = (1 - Math.sqrt(1 - e2))/(1 + Math.sqrt(1 - e2));
+      let phi1 = mu +
+        (3*e1/2 - 27*e1*e1*e1/32)*Math.sin(2*mu) +
+        (21*e1*e1/16 - 55*e1*e1*e1*e1/32)*Math.sin(4*mu) +
+        (151*e1*e1*e1/96)*Math.sin(6*mu);
+      let sin_p = Math.sin(phi1);
+      let cos_p = Math.cos(phi1);
+      let tan_p = Math.tan(phi1);
+      let n1 = a/Math.sqrt(1 - e2*sin_p*sin_p);
+      let t1 = tan_p*tan_p;
+      let c1 = ep2*cos_p*cos_p;
+      let r1 = a*(1 - e2)/Math.pow(1 - e2*sin_p*sin_p, 1.5);
+      let d = (easting - 500000.0)/(n1*k0);
+      let lat = phi1 - (n1*tan_p/r1)*(
+        d*d/2 -
+        (5 + 3*t1 + 10*c1 - 4*c1*c1 - 9*ep2)*Math.pow(d, 4)/24 +
+        (61 + 90*t1 + 298*c1 + 45*t1*t1 - 252*ep2 - 3*c1*c1)*Math.pow(d, 6)/720
+      );
+      let lon = lon0 + (
+        d -
+        (1 + 2*t1 + c1)*d*d*d/6 +
+        (5 - 2*c1 + 28*t1 - 3*c1*c1 + 8*ep2 + 24*t1*t1)*Math.pow(d, 5)/120
+      )/cos_p;
+
+      //Return statement
+      return [lon*180/Math.PI, lat*180/Math.PI];
+    }
+
+
+    /**
+     * Writes deduplicated 5-arcminute pixel coordinates [col, row] of documented archaeological sites/settlements
+     * to `config/documented_site_pixels.json` for pixel-level dasymetric habitability enforcement.
+     * @alias NorthernAmericaSiteSources.writeDocumentedSitePixels
+     *
+     * @param {Object} arg0_state
+     * @param {string} arg1_out_path
+     */
+    static writeDocumentedSitePixels (arg0_state, arg1_out_path) {
+      //Convert from parameters
+      let state = arg0_state;
+      let out_path = arg1_out_path;
+
+      //Declare local instance variables
+      let out_dir = path.dirname(out_path);
+      let pts = Array.isArray(state.documented_site_pixels) ? state.documented_site_pixels : [];
+
+      //Function body
+      if (!fs.existsSync(out_dir)) fs.mkdirSync(out_dir, { recursive: true });
+      fs.writeFileSync(out_path, JSON.stringify({
+        count: pts.length,
+        generated_at_gmt0: new Date().toISOString(),
+        pixels: pts
+      }), "utf8");
+      NorthernAmericaSettlementExporter.writeOutputs(
+        state,
+        path.join(out_dir, "documented_settlements.json"),
+        path.join(out_dir, "dendro_occupation_series.json")
+      );
     }
   };
 }

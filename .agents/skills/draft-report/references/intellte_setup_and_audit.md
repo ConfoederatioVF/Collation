@@ -15,6 +15,8 @@ Use this exact setup block at the top of `<report_stem>.Rmd`. It enforces:
 - Compact `10000BC` / `1897AD` year formatting without dot separators or modern month-year `AD` suffixes.
 - Plain hyphens (`-`) in place of em/en-dashes.
 - Non-overlapping `!htbp` figure placement capped at `0.42\textheight`, and Page 1 hero height `<= 0.52\textheight` so Page 1 is never blank.
+- **No Orphaned Page-1 `Abstract` or Sub-Heading Splits**: Keep `# Abstract` as an undivided prose block (zero `##` sub-headings inside `# Abstract`, which force a premature `needspace` break before the opening paragraph) and add the `\AtBeginDocument` `\crdneedspace{135pt}` + `\abscontent` `\nopagebreak[4]` guard below so `# Abstract` either prints with at least 3 opening lines on Page 1 or moves cleanly onto Page 2 with its paragraph.
+- **Strict Code-Only Monospace**: Never use inline Markdown backticks (outside evaluated knitr `` `r ...` `` calls), `\texttt{}`, `\verb` or `<code>` in YAML captions/titles, headings, prose or table cells.
 
 *(Note: If the report is a pure on-disk exploratory data analysis with no external `.bib` citations, omit the `bibliography:`, `csl:` and `link-citations:` fields from the YAML frontmatter and omit the `# Sources` / `::: {#refs}` block at the end of the document.)*
 
@@ -32,6 +34,18 @@ hero_label: "fig:hero"
 bibliography: <report_stem>.bib
 csl: crd-mla-numeric.csl
 link-citations: true
+header-includes:
+  - |
+    \AtBeginDocument{%
+      \makeatletter
+      \ifdefined\crdneedspace
+        \pretocmd{\section}{\crdneedspace{135pt}}{}{}%
+        \ifdefined\abscontent
+          \pretocmd{\abscontent}{\crdneedspace{90pt}\nopagebreak[4]}{}{}%
+        \fi
+      \fi
+      \makeatother
+    }
 output:
   pdf_document:
     template: template.tex
@@ -383,9 +397,10 @@ emit_crd_footnotes()
 
 ## 3. Automated Compilation, Figure Audit & Verification Script (`pymupdf` + PDF Archive Validator)
 
-Run `python .agents/skills/population-regional-study/scripts/audit_figure_scripts.py <report_dir>` before compiling figures and prose to ensure every figure script preserves default Matplotlib styling (`plt.rcdefaults(); plt.style.use("default")`, `DejaVu Sans`, 4-sided spines, rendered `$...$` MathText with `{,}` decimals and `FuncFormatter` comma ticks):
+Run `python .agents/skills/population-regional-study/scripts/audit_figure_scripts.py <report_dir>` before compiling figures and prose to ensure every figure script preserves default Matplotlib styling (`plt.rcdefaults(); plt.style.use("default")`, `DejaVu Sans`, 4-sided spines, rendered `$...$` MathText with `{,}` decimals, `FuncFormatter` comma ticks, zero `$10^k$` / `1e4` scientific notation on counts or densities via `apply_human_log_ticks()` / `euro_log_formatter()`), renders smooth vector GeoJSON polygons with `set_aspect("equal")` instead of pixelated categorical mask `imshow()` calls, splits distant non-contiguous exclaves into dedicated insets and verifies zero panel-spine bleeds or text overlaps via `verify_panel_bounds_and_overlaps()` before saving (`pdf.mtime >= max(fig.mtime)`):
 
 ```python
+import math
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
@@ -405,9 +420,30 @@ def euro_tick_formatter (digits=2):
   return mticker.FuncFormatter(
     lambda x, _pos: (f"{x:,.{digits}f}".replace(",", "_").replace(".", ",").replace("_", ".").rstrip("0").rstrip(",") if digits > 0 else f"{x:,.0f}".replace(",", "."))
   )
+
+def euro_log_formatter (semantic=True, digits=2):
+  def _fmt (x, _pos):
+    v = float(x)
+    if not math.isfinite(v) or v <= 0.0:
+      return ""
+    if v >= 1e6 and semantic:
+      return f"{v / 1e6:.2f}".rstrip("0").rstrip(".").replace(".", ",") + "M"
+    if v >= 1e3 and semantic:
+      return f"{v / 1e3:.1f}".rstrip("0").rstrip(".").replace(".", ",") + "k"
+    if v >= 1.0:
+      return str(int(round(v))) if abs(v - round(v)) < 1e-6 else f"{v:.{digits}f}".rstrip("0").rstrip(".").replace(".", ",")
+    d = max(digits, 4 if v < 1e-3 else (3 if v < 1e-2 else digits))
+    return f"{v:.{d}f}".rstrip("0").rstrip(".").replace(".", ",")
+  return mticker.FuncFormatter(_fmt)
+
+def apply_human_log_ticks (ax, axes="both", semantic=True):
+  fmt = euro_log_formatter(semantic)
+  for axis_obj in ([ax.xaxis] if axes == "x" else ([ax.yaxis] if axes == "y" else [ax.xaxis, ax.yaxis])):
+    axis_obj.set_major_formatter(fmt)
+    axis_obj.set_minor_formatter(mticker.NullFormatter())
 ```
 
-Then run this check after compiling `<report_stem>.Rmd` to verify that `.pdf` and `.md` outputs build cleanly, every page satisfies `max_x1 <= 540.1 pt` (zero right-margin overflow), `0` unresolved `??` tokens appear and any archived PDFs in `./papers/` are valid `%PDF` documents `> 10 KB`:
+Then run this check after compiling `<report_stem>.Rmd` to verify that `.pdf` and `.md` outputs build cleanly (and were recompiled after every figure PNG update), every page satisfies `max_x1 <= 540.1 pt` (zero right-margin overflow), `0` unresolved `??` tokens appear and any archived PDFs in `./papers/` are valid `%PDF` documents `> 10 KB`:
 
 ```python
 import pathlib
@@ -426,8 +462,41 @@ def compile_and_verify_report(rmd_path):
   )
   subprocess.run([RSCRIPT, "-e", r_expr], check=True)
   pdf_path = p.with_suffix(".pdf")
+  fig_dir = p.parent / "figures"
+  if fig_dir.is_dir():
+    pngs = list(fig_dir.glob("*.png"))
+    if pngs:
+      assert pdf_path.stat().st_mtime + 2.0 >= max(x.stat().st_mtime for x in pngs), f"Stale PDF older than PNG in {p.parent}"
   doc = pymupdf.open(str(pdf_path))
   assert len(doc) >= 1 and len(doc[0].get_text("text").strip()) >= 80, f"Blank Page 1 in {pdf_path.name}"
+  # Guard against orphaned Page-1 Abstract/section headings and non-code monospace fonts
+  p1_dict = doc[0].get_text("dict")
+  p1_lines = []
+  for blk in p1_dict.get("blocks", []):
+    if blk.get("type", 0) != 0:
+      continue
+    for ln in blk.get("lines", []):
+      sp_list = ln.get("spans", [])
+      txt = "".join(sp.get("text", "") for sp in sp_list).strip()
+      if txt:
+        max_sz = max((float(sp.get("size", 0.0)) for sp in sp_list), default=0.0)
+        is_jb = any("jost" in sp.get("font", "").lower() and "bold" in sp.get("font", "").lower() and sp.get("size", 0) >= 10.3 for sp in sp_list)
+        p1_lines.append((float(ln["bbox"][1]), float(ln["bbox"][3]), max_sz, is_jb, txt))
+  for y0, y1, max_sz, is_jb, txt in p1_lines:
+    if (txt.lower() == "abstract" and max_sz >= 10.3) or (is_jb and max_sz <= 14.5 and y0 >= float(doc[0].rect.height) * 0.52):
+      body_below = sum(1 for by0, _, _, b_jb, b_txt in p1_lines if by0 > y1 - 1.0 and not b_jb and len(b_txt) >= 25)
+      assert body_below >= 2, f"Orphaned Page-1 heading {txt!r} in {pdf_path.name} ({body_below} prose lines below)"
+
+  mono_subs = ("lmmono", "courier", "consolas", "inconsolata", "dejavusansmono", "cmtt", "lmtt", "firacode", "jetbrainsmono")
+  mono_pages = [
+    i + 1 for i in range(len(doc))
+    if any(any(sub in str(f[3]).lower() for sub in mono_subs) for f in doc.get_page_fonts(i))
+  ]
+  # When a prose/editorial report displays zero intentional code blocks, forbid embedded monospace fonts
+  assert len(mono_pages) == 0 or "echo=TRUE" in p.read_text(encoding="utf-8", errors="ignore"), (
+    f"Unintended monospace font on pages {mono_pages} in {pdf_path.name}"
+  )
+
   max_x1 = 0.0
   qmarks = []
   for i, page in enumerate(doc):

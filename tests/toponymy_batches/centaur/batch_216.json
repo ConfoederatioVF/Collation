@@ -1,0 +1,959 @@
+{
+  "batch_index": 216,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        38.79512,
+        -85.65272
+      ],
+      "country": "Indiana",
+      "earliest_year": 1906,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Deputy-Indiana",
+      "known_aliases": [
+        "Deputy",
+        "deputy",
+        "deputy cdp",
+        "Deputy CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Deputy",
+      "reason": "missing_entry",
+      "region": "usa_indiana",
+      "sample_years": [
+        1906,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.33896,
+        -87.28508
+      ],
+      "country": "Indiana",
+      "earliest_year": 1864,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kramer-Indiana",
+      "known_aliases": [
+        "Kramer",
+        "kramer",
+        "kramer cdp",
+        "Kramer CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Kramer",
+      "reason": "missing_entry",
+      "region": "usa_indiana",
+      "sample_years": [
+        1864,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.1622,
+        -97.88595
+      ],
+      "country": "Kansas",
+      "earliest_year": 1889,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ada-Kansas",
+      "known_aliases": [
+        "Ada",
+        "ada",
+        "ada cdp",
+        "Ada CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Ada",
+      "reason": "missing_entry",
+      "region": "usa_kansas",
+      "sample_years": [
+        1889,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.07445,
+        -75.85332
+      ],
+      "country": "Maryland",
+      "earliest_year": 1947,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Frenchtown-Rumbly-Maryland",
+      "known_aliases": [
+        "Frenchtown-Rumbly",
+        "frenchtown-rumbly",
+        "frenchtown-rumbly cdp",
+        "Frenchtown-Rumbly CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Frenchtown-Rumbly",
+      "reason": "missing_entry",
+      "region": "usa_maryland",
+      "sample_years": [
+        1947,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.32159,
+        -112.10922
+      ],
+      "country": "Montana",
+      "earliest_year": 1941,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Alder-Montana",
+      "known_aliases": [
+        "Alder",
+        "alder",
+        "alder cdp",
+        "Alder CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Alder",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1941,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.82923,
+        -77.8246
+      ],
+      "country": "North Carolina",
+      "earliest_year": 1867,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Chinquapin-North Carolina",
+      "known_aliases": [
+        "Chinquapin",
+        "chinquapin",
+        "chinquapin cdp",
+        "Chinquapin CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Chinquapin",
+      "reason": "missing_entry",
+      "region": "usa_north_carolina",
+      "sample_years": [
+        1867,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.79024,
+        -79.83807
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1909,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lincolnville-Pennsylvania",
+      "known_aliases": [
+        "Lincolnville",
+        "lincolnville",
+        "lincolnville cdp",
+        "Lincolnville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Lincolnville",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1909,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.0056,
+        -80.28615
+      ],
+      "country": "South Carolina",
+      "earliest_year": 1922,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Oswego-South Carolina",
+      "known_aliases": [
+        "Oswego",
+        "oswego",
+        "oswego cdp",
+        "Oswego CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Oswego",
+      "reason": "missing_entry",
+      "region": "usa_south_carolina",
+      "sample_years": [
+        1922,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.53997,
+        -99.92179
+      ],
+      "country": "South Dakota",
+      "earliest_year": 1949,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ideal-South Dakota",
+      "known_aliases": [
+        "Ideal",
+        "ideal",
+        "ideal cdp",
+        "Ideal CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Ideal",
+      "reason": "missing_entry",
+      "region": "usa_south_dakota",
+      "sample_years": [
+        1949,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.24648,
+        -98.55815
+      ],
+      "country": "South Dakota",
+      "earliest_year": 1895,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mansfield-South Dakota",
+      "known_aliases": [
+        "Mansfield",
+        "mansfield",
+        "mansfield cdp",
+        "Mansfield CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Mansfield",
+      "reason": "missing_entry",
+      "region": "usa_south_dakota",
+      "sample_years": [
+        1895,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        26.36944,
+        -97.58893
+      ],
+      "country": "Texas",
+      "earliest_year": 1867,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Santa Monica-Texas",
+      "known_aliases": [
+        "Santa Monica",
+        "santa monica",
+        "santa monica cdp",
+        "Santa Monica CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Santa Monica",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1867,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.49547,
+        -80.75265
+      ],
+      "country": "West Virginia",
+      "earliest_year": 1891,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Birch River-West Virginia",
+      "known_aliases": [
+        "Birch River",
+        "birch river",
+        "birch river cdp",
+        "Birch River CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Birch River",
+      "reason": "missing_entry",
+      "region": "usa_west_virginia",
+      "sample_years": [
+        1891,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.76548,
+        -88.84472
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1956,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Leopolis-Wisconsin",
+      "known_aliases": [
+        "Leopolis",
+        "leopolis",
+        "leopolis cdp",
+        "Leopolis CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Leopolis",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1956,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.40035,
+        -111.271
+      ],
+      "country": "Arizona",
+      "earliest_year": 1958,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Washington Park-Arizona",
+      "known_aliases": [
+        "Washington Park",
+        "washington park",
+        "washington park cdp",
+        "Washington Park CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Washington Park",
+      "reason": "missing_entry",
+      "region": "usa_arizona",
+      "sample_years": [
+        1958,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.54458,
+        -90.22187
+      ],
+      "country": "Illinois",
+      "earliest_year": 1852,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Joslin-Illinois",
+      "known_aliases": [
+        "Joslin",
+        "joslin",
+        "joslin cdp",
+        "Joslin CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Joslin",
+      "reason": "missing_entry",
+      "region": "usa_illinois",
+      "sample_years": [
+        1852,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.29462,
+        -90.35909
+      ],
+      "country": "Illinois",
+      "earliest_year": 1886,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lynn Center-Illinois",
+      "known_aliases": [
+        "Lynn Center",
+        "lynn center",
+        "lynn center cdp",
+        "Lynn Center CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Lynn Center",
+      "reason": "missing_entry",
+      "region": "usa_illinois",
+      "sample_years": [
+        1886,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.6259,
+        -77.93963
+      ],
+      "country": "Maryland",
+      "earliest_year": 1865,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Big Spring-Maryland",
+      "known_aliases": [
+        "Big Spring",
+        "big spring",
+        "big spring cdp",
+        "Big Spring CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Big Spring",
+      "reason": "missing_entry",
+      "region": "usa_maryland",
+      "sample_years": [
+        1865,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.32305,
+        -110.01766
+      ],
+      "country": "Montana",
+      "earliest_year": 1959,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Box Elder-Montana",
+      "known_aliases": [
+        "Box Elder",
+        "box elder",
+        "box elder cdp",
+        "Box Elder CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Box Elder",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1959,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.95779,
+        -115.04373
+      ],
+      "country": "Montana",
+      "earliest_year": 1971,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Indian Springs-Montana",
+      "known_aliases": [
+        "Indian Springs",
+        "indian springs",
+        "indian springs cdp",
+        "Indian Springs CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Indian Springs",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1971,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.2813,
+        -114.16436
+      ],
+      "country": "Montana",
+      "earliest_year": 1898,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ravalli-Montana",
+      "known_aliases": [
+        "Ravalli",
+        "ravalli",
+        "ravalli cdp",
+        "Ravalli CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Ravalli",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1898,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.17643,
+        -106.41936
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1964,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cañones-New Mexico",
+      "known_aliases": [
+        "Cañones",
+        "cañones",
+        "cañones cdp",
+        "Cañones CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Cañones",
+      "reason": "missing_entry",
+      "region": "usa_new_mexico",
+      "sample_years": [
+        1964,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.28835,
+        -75.62641
+      ],
+      "country": "New York",
+      "earliest_year": 1887,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Oxbow-New York",
+      "known_aliases": [
+        "Oxbow",
+        "oxbow",
+        "oxbow cdp",
+        "Oxbow CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Oxbow",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1887,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.52307,
+        -118.43952
+      ],
+      "country": "Oregon",
+      "earliest_year": 1960,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Meacham-Oregon",
+      "known_aliases": [
+        "Meacham",
+        "meacham",
+        "meacham cdp",
+        "Meacham CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Meacham",
+      "reason": "missing_entry",
+      "region": "usa_oregon",
+      "sample_years": [
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.4067,
+        -89.29704
+      ],
+      "country": "Tennessee",
+      "earliest_year": 1879,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Dancyville-Tennessee",
+      "known_aliases": [
+        "Dancyville",
+        "dancyville",
+        "dancyville cdp",
+        "Dancyville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Dancyville",
+      "reason": "missing_entry",
+      "region": "usa_tennessee",
+      "sample_years": [
+        1879,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.49074,
+        -81.31971
+      ],
+      "country": "West Virginia",
+      "earliest_year": 1971,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Covel-West Virginia",
+      "known_aliases": [
+        "Covel",
+        "covel",
+        "covel cdp",
+        "Covel CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Covel",
+      "reason": "missing_entry",
+      "region": "usa_west_virginia",
+      "sample_years": [
+        1971,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.35838,
+        -110.65933
+      ],
+      "country": "Arizona",
+      "earliest_year": 1931,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cutter-Arizona",
+      "known_aliases": [
+        "Cutter",
+        "cutter",
+        "cutter cdp",
+        "Cutter CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Cutter",
+      "reason": "missing_entry",
+      "region": "usa_arizona",
+      "sample_years": [
+        1931,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.89305,
+        -121.17804
+      ],
+      "country": "California",
+      "earliest_year": 1899,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Little Valley-California",
+      "known_aliases": [
+        "Little Valley",
+        "little valley",
+        "little valley cdp",
+        "Little Valley CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Little Valley",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1899,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.9058,
+        -87.16116
+      ],
+      "country": "Indiana",
+      "earliest_year": 1888,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Collegeville-Indiana",
+      "known_aliases": [
+        "Collegeville",
+        "collegeville",
+        "collegeville cdp",
+        "Collegeville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Collegeville",
+      "reason": "missing_entry",
+      "region": "usa_indiana",
+      "sample_years": [
+        1888,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.47347,
+        -90.79685
+      ],
+      "country": "Mississippi",
+      "earliest_year": 1907,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Redwood-Mississippi",
+      "known_aliases": [
+        "Redwood",
+        "redwood",
+        "redwood cdp",
+        "Redwood CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Redwood",
+      "reason": "missing_entry",
+      "region": "usa_mississippi",
+      "sample_years": [
+        1907,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.0811,
+        -93.68985
+      ],
+      "country": "Missouri",
+      "earliest_year": 1893,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Edinburg-Missouri",
+      "known_aliases": [
+        "Edinburg",
+        "edinburg",
+        "edinburg cdp",
+        "Edinburg CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Edinburg",
+      "reason": "missing_entry",
+      "region": "usa_missouri",
+      "sample_years": [
+        1893,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

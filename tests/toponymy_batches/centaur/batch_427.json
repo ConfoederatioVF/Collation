@@ -1,0 +1,919 @@
+{
+  "batch_index": 427,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        81.5623,
+        -19.3904
+      ],
+      "country": "Greenland",
+      "earliest_year": 1150,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Vimmelskaftet-Greenland",
+      "known_aliases": [
+        "Vimmelskaftet",
+        "vimmelskaftet",
+        "nunniffiit thule",
+        "Nunniffiit Thule"
+      ],
+      "latest_year": 1600,
+      "name": "Vimmelskaftet",
+      "reason": "missing_entry",
+      "region": "cc1_greenland_missions_1763",
+      "sample_years": [
+        1150,
+        1350,
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.0802,
+        -88.9888
+      ],
+      "country": "Canada",
+      "earliest_year": -150,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Wabinosh River-Canada",
+      "known_aliases": [
+        "Wabinosh River",
+        "wabinosh river",
+        "lake nipigon west",
+        "dija-1",
+        "Lake Nipigon West",
+        "DiJa-1"
+      ],
+      "latest_year": 1550,
+      "name": "Wabinosh River",
+      "reason": "missing_entry",
+      "region": "cc1_pays_den_haut_ontario",
+      "sample_years": [
+        -150,
+        500,
+        1200,
+        1550
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.9251,
+        -73.8152
+      ],
+      "country": "Canada",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Weymontachingue-Canada",
+      "known_aliases": [
+        "Weymontachingue",
+        "weymontachingue",
+        "sanmaur atikamekw settlement",
+        "Sanmaur Atikamekw Settlement"
+      ],
+      "latest_year": 1851,
+      "name": "Weymontachingue",
+      "reason": "missing_entry",
+      "region": "cc1_new_france_st_lawrence",
+      "sample_years": [
+        1750,
+        1800,
+        1851
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        74.45833,
+        -20.54167
+      ],
+      "country": "Greenland",
+      "earliest_year": 1150,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Zackenberg-Greenland",
+      "known_aliases": [
+        "Zackenberg",
+        "zackenberg",
+        "nunniffiit thule",
+        "dolomit dal",
+        "Nunniffiit Thule"
+      ],
+      "latest_year": 1600,
+      "name": "Zackenberg",
+      "reason": "missing_entry",
+      "region": "cc1_greenland_missions_1763",
+      "sample_years": [
+        1150,
+        1350,
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        73.125,
+        -27.20833
+      ],
+      "country": "Greenland",
+      "earliest_year": 1150,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "adisdal-Greenland",
+      "known_aliases": [
+        "adisdal",
+        "nunniffiit thule",
+        "Nunniffiit Thule"
+      ],
+      "latest_year": 1600,
+      "name": "adisdal",
+      "reason": "missing_entry",
+      "region": "cc1_greenland_missions_1763",
+      "sample_years": [
+        1150,
+        1350,
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.15142,
+        -81.5365
+      ],
+      "country": "Canada",
+      "earliest_year": 1851,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ailsa Craig-Canada",
+      "known_aliases": [
+        "Ailsa Craig",
+        "ailsa craig",
+        "mcgillivray",
+        "McGillivray"
+      ],
+      "latest_year": 1867,
+      "name": "Ailsa Craig",
+      "reason": "missing_entry",
+      "region": "cc2_upper_canada_ontario",
+      "sample_years": [
+        1851,
+        1861,
+        1867
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.82611,
+        -81.86389
+      ],
+      "country": "Canada",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Alvinston-Canada",
+      "known_aliases": [
+        "Alvinston",
+        "alvinston",
+        "brooke",
+        "Brooke"
+      ],
+      "latest_year": 1867,
+      "name": "Alvinston",
+      "reason": "missing_entry",
+      "region": "cc2_upper_canada_ontario",
+      "sample_years": [
+        1850,
+        1861,
+        1867
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.07591,
+        -81.8351
+      ],
+      "country": "Canada",
+      "earliest_year": 1832,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Arkona-Canada",
+      "known_aliases": [
+        "Arkona",
+        "arkona",
+        "bosanquet south",
+        "Bosanquet South"
+      ],
+      "latest_year": 1861,
+      "name": "Arkona",
+      "reason": "missing_entry",
+      "region": "cc2_upper_canada_ontario",
+      "sample_years": [
+        1832,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.1668,
+        -74.966
+      ],
+      "country": "Canada",
+      "earliest_year": 1825,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Avonmore-Canada",
+      "known_aliases": [
+        "Avonmore",
+        "avonmore",
+        "roxborough",
+        "Roxborough"
+      ],
+      "latest_year": 1861,
+      "name": "Avonmore",
+      "reason": "missing_entry",
+      "region": "cc2_lower_canada_quebec",
+      "sample_years": [
+        1825,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        49.9851,
+        -97.7551
+      ],
+      "country": "Canada",
+      "earliest_year": 1835,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Baie Saint-Paul Metis-Canada",
+      "known_aliases": [
+        "Baie Saint-Paul Metis",
+        "baie saint-paul metis",
+        "st. eustache saulteaux and metis settlement",
+        "St. Eustache Saulteaux and Metis Settlement"
+      ],
+      "latest_year": 1867,
+      "name": "Baie Saint-Paul Metis",
+      "reason": "missing_entry",
+      "region": "cc2_red_river_assiniboia",
+      "sample_years": [
+        1835,
+        1856,
+        1867
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.27408,
+        -55.58594
+      ],
+      "country": "Canada",
+      "earliest_year": 1775,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Battle Harbour-Canada",
+      "known_aliases": [
+        "Battle Harbour",
+        "battle harbour",
+        "battle island",
+        "Battle Island"
+      ],
+      "latest_year": 1857,
+      "name": "Battle Harbour",
+      "reason": "missing_entry",
+      "region": "cc2_newfoundland_labrador",
+      "sample_years": [
+        1775,
+        1800,
+        1836,
+        1857
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.56037,
+        -81.69734
+      ],
+      "country": "Canada",
+      "earliest_year": 1832,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bayfield-Canada_2",
+      "known_aliases": [
+        "Bayfield",
+        "bayfield",
+        "stanley huron",
+        "Stanley Huron"
+      ],
+      "latest_year": 1861,
+      "name": "Bayfield",
+      "reason": "missing_entry",
+      "region": "cc2_upper_canada_ontario",
+      "sample_years": [
+        1832,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.16681,
+        -79.48291
+      ],
+      "country": "Canada",
+      "earliest_year": 1788,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Beamsville-Canada",
+      "known_aliases": [
+        "Beamsville",
+        "beamsville",
+        "clinton on",
+        "Clinton ON"
+      ],
+      "latest_year": 1861,
+      "name": "Beamsville",
+      "reason": "missing_entry",
+      "region": "cc2_upper_canada_ontario",
+      "sample_years": [
+        1788,
+        1825,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.5851,
+        -65.6521
+      ],
+      "country": "Canada",
+      "earliest_year": 1780,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bear River Mi'kmaq Town-Canada",
+      "known_aliases": [
+        "Bear River Mi'kmaq Town",
+        "bear river mi'kmaq town",
+        "l'sitkuk settlement",
+        "L'sitkuk Settlement"
+      ],
+      "latest_year": 1820,
+      "name": "Bear River Mi'kmaq Town",
+      "reason": "missing_entry",
+      "region": "cc2_lower_canada_quebec",
+      "sample_years": [
+        1780,
+        1820
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.36531,
+        -97.02983
+      ],
+      "country": "Canada",
+      "earliest_year": 1814,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Berens River-Canada",
+      "known_aliases": [
+        "Berens River",
+        "berens river",
+        "berens river post",
+        "Berens River Post"
+      ],
+      "latest_year": 1861,
+      "name": "Berens River",
+      "reason": "missing_entry",
+      "region": "cc2_ruperts_land_prairies",
+      "sample_years": [
+        1814,
+        1831,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.33339,
+        -81.99978
+      ],
+      "country": "Canada",
+      "earliest_year": 1835,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Blenheim-Canada",
+      "known_aliases": [
+        "Blenheim",
+        "blenheim",
+        "rond'eau",
+        "Rond'Eau"
+      ],
+      "latest_year": 1861,
+      "name": "Blenheim",
+      "reason": "missing_entry",
+      "region": "cc2_upper_canada_ontario",
+      "sample_years": [
+        1835,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.73339,
+        -81.43306
+      ],
+      "country": "Canada",
+      "earliest_year": 1851,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Blyth-Canada",
+      "known_aliases": [
+        "Blyth",
+        "blyth",
+        "morris",
+        "Morris"
+      ],
+      "latest_year": 1867,
+      "name": "Blyth",
+      "reason": "missing_entry",
+      "region": "cc2_upper_canada_ontario",
+      "sample_years": [
+        1851,
+        1861,
+        1867
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        49.59501,
+        -99.68476
+      ],
+      "country": "Canada",
+      "earliest_year": 1793,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Brandon-House-Canada",
+      "known_aliases": [
+        "Brandon-House",
+        "brandon-house",
+        "brandon house",
+        "souris mouth",
+        "Brandon House",
+        "Souris Mouth"
+      ],
+      "latest_year": 1851,
+      "name": "Brandon-House",
+      "reason": "missing_entry",
+      "region": "cc2_red_river_assiniboia",
+      "sample_years": [
+        1793,
+        1815,
+        1831,
+        1851
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.81678,
+        -82.28312
+      ],
+      "country": "Canada",
+      "earliest_year": 1845,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Brigden-Canada",
+      "known_aliases": [
+        "Brigden",
+        "brigden",
+        "moore",
+        "Moore"
+      ],
+      "latest_year": 1861,
+      "name": "Brigden",
+      "reason": "missing_entry",
+      "region": "cc2_upper_canada_ontario",
+      "sample_years": [
+        1845,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        57.87998,
+        -101.67181
+      ],
+      "country": "Canada",
+      "earliest_year": 1859,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Brochet-Canada",
+      "known_aliases": [
+        "Brochet",
+        "brochet",
+        "lac caribou post",
+        "Lac Caribou Post"
+      ],
+      "latest_year": 1867,
+      "name": "Brochet",
+      "reason": "missing_entry",
+      "region": "cc2_ruperts_land_prairies",
+      "sample_years": [
+        1859,
+        1861,
+        1867
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.4834,
+        -79.98295
+      ],
+      "country": "Canada",
+      "earliest_year": 1825,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Campbellville-Canada",
+      "known_aliases": [
+        "Campbellville",
+        "campbellville",
+        "nassagaweya",
+        "Nassagaweya"
+      ],
+      "latest_year": 1861,
+      "name": "Campbellville",
+      "reason": "missing_entry",
+      "region": "cc2_upper_canada_ontario",
+      "sample_years": [
+        1825,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.35012,
+        -79.03288
+      ],
+      "country": "Canada",
+      "earliest_year": 1835,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cannington-Canada",
+      "known_aliases": [
+        "Cannington",
+        "cannington",
+        "brock township",
+        "Brock Township"
+      ],
+      "latest_year": 1861,
+      "name": "Cannington",
+      "reason": "missing_entry",
+      "region": "cc2_upper_canada_ontario",
+      "sample_years": [
+        1835,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.76681,
+        -75.73265
+      ],
+      "country": "Canada",
+      "earliest_year": 1815,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cardinal-Kemptville-Canada",
+      "known_aliases": [
+        "Cardinal-Kemptville",
+        "cardinal-kemptville",
+        "north augusta",
+        "North Augusta"
+      ],
+      "latest_year": 1861,
+      "name": "Cardinal-Kemptville",
+      "reason": "missing_entry",
+      "region": "cc2_lower_canada_quebec",
+      "sample_years": [
+        1815,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.20009,
+        -81.24974
+      ],
+      "country": "Canada",
+      "earliest_year": 1852,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cargill-Canada",
+      "known_aliases": [
+        "Cargill",
+        "cargill",
+        "greenock",
+        "Greenock"
+      ],
+      "latest_year": 1867,
+      "name": "Cargill",
+      "reason": "missing_entry",
+      "region": "cc2_upper_canada_ontario",
+      "sample_years": [
+        1852,
+        1861,
+        1867
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.63344,
+        -61.01521
+      ],
+      "country": "Canada",
+      "earliest_year": 1785,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Chéticamp-Canada",
+      "known_aliases": [
+        "Chéticamp",
+        "chéticamp",
+        "chéticamp-acadien",
+        "Chéticamp-Acadien"
+      ],
+      "latest_year": 1861,
+      "name": "Chéticamp",
+      "reason": "missing_entry",
+      "region": "cc2_nova_scotia",
+      "sample_years": [
+        1785,
+        1827,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.65889,
+        -78.79778
+      ],
+      "country": "Canada",
+      "earliest_year": 1851,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Coboconk-Canada",
+      "known_aliases": [
+        "Coboconk",
+        "coboconk",
+        "bexley",
+        "Bexley"
+      ],
+      "latest_year": 1867,
+      "name": "Coboconk",
+      "reason": "missing_entry",
+      "region": "cc2_upper_canada_ontario",
+      "sample_years": [
+        1851,
+        1861,
+        1867
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        53.125,
+        -131.625
+      ],
+      "country": "Canada",
+      "earliest_year": 1787,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cumshewa Haida Town-Canada",
+      "known_aliases": [
+        "Cumshewa Haida Town",
+        "cumshewa haida town",
+        "moresby island haida town",
+        "Moresby Island Haida Town"
+      ],
+      "latest_year": 1835,
+      "name": "Cumshewa Haida Town",
+      "reason": "missing_entry",
+      "region": "cc2_british_columbia_vancouver_isl",
+      "sample_years": [
+        1787,
+        1835
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.60843,
+        -76.12255
+      ],
+      "country": "Canada",
+      "earliest_year": 1796,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Delta-Canada_2",
+      "known_aliases": [
+        "Delta",
+        "delta",
+        "bastard",
+        "Bastard"
+      ],
+      "latest_year": 1861,
+      "name": "Delta",
+      "reason": "missing_entry",
+      "region": "cc2_lower_canada_quebec",
+      "sample_years": [
+        1796,
+        1831,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.75455,
+        -80.67151
+      ],
+      "country": "Canada",
+      "earliest_year": 1847,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Drayton-Canada",
+      "known_aliases": [
+        "Drayton",
+        "drayton",
+        "peel wellington",
+        "Peel Wellington"
+      ],
+      "latest_year": 1861,
+      "name": "Drayton",
+      "reason": "missing_entry",
+      "region": "cc2_upper_canada_ontario",
+      "sample_years": [
+        1847,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.58338,
+        -82.1831
+      ],
+      "country": "Canada",
+      "earliest_year": 1841,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Dresden-Canada",
+      "known_aliases": [
+        "Dresden",
+        "dresden",
+        "dawn settlement",
+        "Dawn Settlement"
+      ],
+      "latest_year": 1861,
+      "name": "Dresden",
+      "reason": "missing_entry",
+      "region": "cc2_upper_canada_ontario",
+      "sample_years": [
+        1841,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

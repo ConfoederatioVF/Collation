@@ -1,0 +1,964 @@
+{
+  "batch_index": 137,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        35.54292,
+        -94.55117
+      ],
+      "country": "Oklahoma",
+      "earliest_year": 1962,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Belfonte-Oklahoma",
+      "known_aliases": [
+        "Belfonte",
+        "belfonte",
+        "belfonte cdp",
+        "Belfonte CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Belfonte",
+      "reason": "missing_entry",
+      "region": "usa_oklahoma",
+      "sample_years": [
+        1962,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        29.68802,
+        -91.15105
+      ],
+      "country": "Louisiana",
+      "earliest_year": 1955,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Siracusaville-Louisiana",
+      "known_aliases": [
+        "Siracusaville",
+        "siracusaville",
+        "siracusaville cdp",
+        "Siracusaville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Siracusaville",
+      "reason": "missing_entry",
+      "region": "usa_louisiana",
+      "sample_years": [
+        1955,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.19117,
+        -112.28042
+      ],
+      "country": "Montana",
+      "earliest_year": 1897,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "New Miami Colony-Montana",
+      "known_aliases": [
+        "New Miami Colony",
+        "new miami colony",
+        "new miami colony cdp",
+        "New Miami Colony CDP"
+      ],
+      "latest_year": 2020,
+      "name": "New Miami Colony",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1897,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.51442,
+        -74.59077
+      ],
+      "country": "New Jersey",
+      "earliest_year": 1911,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Germania-New Jersey",
+      "known_aliases": [
+        "Germania",
+        "germania",
+        "germania cdp",
+        "Germania CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Germania",
+      "reason": "missing_entry",
+      "region": "usa_new_jersey",
+      "sample_years": [
+        1911,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.7059,
+        -106.56513
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1875,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tierra Amarilla-New Mexico",
+      "known_aliases": [
+        "Tierra Amarilla",
+        "tierra amarilla",
+        "tierra amarilla cdp",
+        "Tierra Amarilla CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Tierra Amarilla",
+      "reason": "missing_entry",
+      "region": "usa_new_mexico",
+      "sample_years": [
+        1875,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.10918,
+        -80.59196
+      ],
+      "country": "South Carolina",
+      "earliest_year": 1893,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Grover-South Carolina",
+      "known_aliases": [
+        "Grover",
+        "grover",
+        "grover cdp",
+        "Grover CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Grover",
+      "reason": "missing_entry",
+      "region": "usa_south_carolina",
+      "sample_years": [
+        1893,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.06162,
+        -85.03572
+      ],
+      "country": "Tennessee",
+      "earliest_year": 1893,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bowman-Tennessee",
+      "known_aliases": [
+        "Bowman",
+        "bowman",
+        "bowman cdp",
+        "Bowman CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Bowman",
+      "reason": "missing_entry",
+      "region": "usa_tennessee",
+      "sample_years": [
+        1893,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.35707,
+        -82.03559
+      ],
+      "country": "Tennessee",
+      "earliest_year": 1896,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Butler-Tennessee",
+      "known_aliases": [
+        "Butler",
+        "butler",
+        "butler cdp",
+        "Butler CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Butler",
+      "reason": "missing_entry",
+      "region": "usa_tennessee",
+      "sample_years": [
+        1896,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.3284,
+        -84.60906
+      ],
+      "country": "Tennessee",
+      "earliest_year": 1971,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Elgin-Tennessee",
+      "known_aliases": [
+        "Elgin",
+        "elgin",
+        "elgin cdp",
+        "Elgin CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Elgin",
+      "reason": "missing_entry",
+      "region": "usa_tennessee",
+      "sample_years": [
+        1971,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.76556,
+        -72.95206
+      ],
+      "country": "Vermont",
+      "earliest_year": 1775,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Readsboro-Vermont",
+      "known_aliases": [
+        "Readsboro",
+        "readsboro",
+        "readsboro cdp",
+        "readsboro town",
+        "Readsboro CDP",
+        "Readsboro town"
+      ],
+      "latest_year": 2020,
+      "name": "Readsboro",
+      "reason": "missing_entry",
+      "region": "usa_vermont",
+      "sample_years": [
+        1775,
+        1850,
+        1940,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.79552,
+        -117.91777
+      ],
+      "country": "Washington",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "LaCrosse-Washington",
+      "known_aliases": [
+        "LaCrosse",
+        "lacrosse",
+        "lacrosse town",
+        "LaCrosse town"
+      ],
+      "latest_year": 2026,
+      "name": "LaCrosse",
+      "reason": "missing_entry",
+      "region": "usa_washington",
+      "sample_years": [
+        1970,
+        2007,
+        2017,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.34538,
+        -90.76307
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1922,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mission-Wisconsin",
+      "known_aliases": [
+        "Mission",
+        "mission",
+        "mission cdp",
+        "Mission CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Mission",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1922,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.448,
+        -91.38905
+      ],
+      "country": "Iowa",
+      "earliest_year": 1854,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sandusky-Iowa",
+      "known_aliases": [
+        "Sandusky",
+        "sandusky",
+        "sandusky cdp",
+        "Sandusky CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Sandusky",
+      "reason": "missing_entry",
+      "region": "usa_illinois",
+      "sample_years": [
+        1854,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.07415,
+        -121.89878
+      ],
+      "country": "California",
+      "earliest_year": 1937,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Grimes-California",
+      "known_aliases": [
+        "Grimes",
+        "grimes",
+        "grimes cdp",
+        "Grimes CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Grimes",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1937,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.56196,
+        -82.15137
+      ],
+      "country": "Kentucky",
+      "earliest_year": 1946,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Freeburn-Kentucky",
+      "known_aliases": [
+        "Freeburn",
+        "freeburn",
+        "freeburn cdp",
+        "Freeburn CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Freeburn",
+      "reason": "missing_entry",
+      "region": "usa_west_virginia",
+      "sample_years": [
+        1946,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.52751,
+        -91.02466
+      ],
+      "country": "Mississippi",
+      "earliest_year": 1961,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Eagle Bend-Mississippi",
+      "known_aliases": [
+        "Eagle Bend",
+        "eagle bend",
+        "eagle bend cdp",
+        "Eagle Bend CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Eagle Bend",
+      "reason": "missing_entry",
+      "region": "usa_mississippi",
+      "sample_years": [
+        1961,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.84718,
+        -107.32035
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1958,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Arrey-New Mexico",
+      "known_aliases": [
+        "Arrey",
+        "arrey",
+        "arrey cdp",
+        "Arrey CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Arrey",
+      "reason": "missing_entry",
+      "region": "usa_new_mexico",
+      "sample_years": [
+        1958,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.07182,
+        -75.4999
+      ],
+      "country": "New York",
+      "earliest_year": 1921,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Natural Bridge-New York",
+      "known_aliases": [
+        "Natural Bridge",
+        "natural bridge",
+        "natural bridge cdp",
+        "Natural Bridge CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Natural Bridge",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1921,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.81051,
+        -78.23431
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1877,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sandy Ridge-Pennsylvania",
+      "known_aliases": [
+        "Sandy Ridge",
+        "sandy ridge",
+        "sandy ridge cdp",
+        "Sandy Ridge CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Sandy Ridge",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1877,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.24372,
+        -73.00752
+      ],
+      "country": "Vermont",
+      "earliest_year": 1936,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "East Dorset-Vermont",
+      "known_aliases": [
+        "East Dorset",
+        "east dorset",
+        "east dorset cdp",
+        "East Dorset CDP"
+      ],
+      "latest_year": 2020,
+      "name": "East Dorset",
+      "reason": "missing_entry",
+      "region": "usa_vermont",
+      "sample_years": [
+        1936,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.63318,
+        -122.18976
+      ],
+      "country": "California",
+      "earliest_year": 1865,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Artois-California",
+      "known_aliases": [
+        "Artois",
+        "artois",
+        "artois cdp",
+        "Artois CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Artois",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1865,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.06247,
+        -85.59832
+      ],
+      "country": "Michigan",
+      "earliest_year": 1881,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Omena-Michigan",
+      "known_aliases": [
+        "Omena",
+        "omena",
+        "omena cdp",
+        "Omena CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Omena",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1881,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.40113,
+        -88.93402
+      ],
+      "country": "Mississippi",
+      "earliest_year": 1913,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Longview-Mississippi",
+      "known_aliases": [
+        "Longview",
+        "longview",
+        "longview cdp",
+        "Longview CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Longview",
+      "reason": "missing_entry",
+      "region": "usa_mississippi",
+      "sample_years": [
+        1913,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.41664,
+        -72.85747
+      ],
+      "country": "Vermont",
+      "earliest_year": 1966,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bolton Valley-Vermont",
+      "known_aliases": [
+        "Bolton Valley",
+        "bolton valley",
+        "bolton valley cdp",
+        "Bolton Valley CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Bolton Valley",
+      "reason": "missing_entry",
+      "region": "usa_vermont",
+      "sample_years": [
+        1966,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.52082,
+        -90.55546
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1860,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Birch Hill-Wisconsin",
+      "known_aliases": [
+        "Birch Hill",
+        "birch hill",
+        "birch hill cdp",
+        "Birch Hill CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Birch Hill",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1860,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.88393,
+        -85.71193
+      ],
+      "country": "Kentucky",
+      "earliest_year": 1914,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Summer Shade-Kentucky",
+      "known_aliases": [
+        "Summer Shade",
+        "summer shade",
+        "summer shade cdp",
+        "Summer Shade CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Summer Shade",
+      "reason": "missing_entry",
+      "region": "usa_kentucky",
+      "sample_years": [
+        1914,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.02724,
+        -108.55173
+      ],
+      "country": "Montana",
+      "earliest_year": 1973,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lodge Pole-Montana",
+      "known_aliases": [
+        "Lodge Pole",
+        "lodge pole",
+        "lodge pole cdp",
+        "Lodge Pole CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Lodge Pole",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1973,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.81228,
+        -108.17086
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1938,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Becenti-New Mexico",
+      "known_aliases": [
+        "Becenti",
+        "becenti",
+        "becenti cdp",
+        "Becenti CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Becenti",
+      "reason": "missing_entry",
+      "region": "usa_new_mexico",
+      "sample_years": [
+        1938,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.22513,
+        -75.28849
+      ],
+      "country": "New York",
+      "earliest_year": 1885,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Stittville-New York",
+      "known_aliases": [
+        "Stittville",
+        "stittville",
+        "stittville cdp",
+        "Stittville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Stittville",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1885,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        31.26684,
+        -102.69465
+      ],
+      "country": "Texas",
+      "earliest_year": 1953,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Imperial-Texas",
+      "known_aliases": [
+        "Imperial",
+        "imperial",
+        "imperial cdp",
+        "Imperial CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Imperial",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1953,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

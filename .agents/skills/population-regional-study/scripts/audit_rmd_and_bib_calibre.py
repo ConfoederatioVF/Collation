@@ -28,6 +28,18 @@ BANNED_FALLBACK_PATTERNS = [
 
 SKIP_DIRS = {"_shared", "archive", "diagnostics_visual", "papers", ".git", ".Rproj.user", "figures"}
 
+MONO_FONT_SUBSTRINGS = (
+  "lmmono",
+  "courier",
+  "consolas",
+  "inconsolata",
+  "dejavusansmono",
+  "cmtt",
+  "lmtt",
+  "firacode",
+  "jetbrainsmono"
+)
+
 
 def is_valid_pdf_file(arg0_pdf_path):
   """Returns True when the file exceeds 10240 bytes and begins with a `%PDF-` header."""
@@ -41,13 +53,150 @@ def is_valid_pdf_file(arg0_pdf_path):
     return False
 
 
+def rmd_has_visible_code_blocks(arg0_pdf_path):
+  """Returns True if the sibling Rmd intentionally displays fenced code or echo=TRUE chunks."""
+  stem = os.path.splitext(arg0_pdf_path)[0]
+  rmd_path = None
+  for ext in (".Rmd", ".rmd"):
+    cand = stem + ext
+    if os.path.isfile(cand):
+      rmd_path = cand
+      break
+  if not rmd_path:
+    return False
+
+  try:
+    with open(rmd_path, "r", encoding="utf-8", errors="replace") as fh:
+      lines = fh.read().splitlines()
+  except OSError:
+    return False
+
+  idx = 0
+  if lines and lines[0].strip() == "---":
+    for y_idx in range(1, len(lines)):
+      if lines[y_idx].strip() == "---":
+        idx = y_idx + 1
+        break
+
+  global_echo_false = False
+  in_fence = False
+  fence_header = ""
+  chunk_body = []
+
+  while idx < len(lines):
+    stripped = lines[idx].strip()
+    if stripped.startswith("```"):
+      if not in_fence:
+        in_fence = True
+        fence_header = stripped[3:].strip()
+        chunk_body = []
+      else:
+        body_text = "\n".join(chunk_body)
+        if "opts_chunk$set" in body_text and re.search(r"echo\s*=\s*(?:FALSE|F)\b", body_text):
+          global_echo_false = True
+        if "viscount_rmd_helpers.R" in body_text:
+          global_echo_false = True
+
+        has_nonempty_body = any(ln.strip() for ln in chunk_body)
+        if not fence_header.startswith("{="):
+          knitr_m = re.match(r"^\{\s*(?:r|python|bash|sh|stan|sql)\b([^}]*)\}", fence_header, flags=re.IGNORECASE)
+          if knitr_m:
+            opts_str = knitr_m.group(1) or ""
+            is_hidden = bool(re.search(r"\b(?:include|echo)\s*=\s*(?:FALSE|F)\b", opts_str))
+            is_explicit_echo = bool(re.search(r"\becho\s*=\s*(?:TRUE|T)\b", opts_str))
+            if is_explicit_echo and has_nonempty_body:
+              return True
+            if not is_hidden and not global_echo_false and has_nonempty_body:
+              return True
+          elif has_nonempty_body:
+            return True
+        in_fence = False
+        fence_header = ""
+        chunk_body = []
+    elif in_fence:
+      chunk_body.append(lines[idx])
+    idx += 1
+
+  return False
+
+
+def _audit_page1_orphaned_headings(arg0_page, arg1_pdf_path, arg2_label, arg3_errors, arg4_warnings=None):
+  """Flags Page-1 bottom Jost-Bold / Abstract headings stranded with fewer than 2 body prose lines beneath them."""
+  page_dict = arg0_page.get_text("dict")
+  page_h = float(arg0_page.rect.height)
+  visual_lines = []
+
+  for blk in page_dict.get("blocks", []):
+    if blk.get("type", 0) != 0:
+      continue
+    for line in blk.get("lines", []):
+      spans = line.get("spans", [])
+      line_text = "".join(sp.get("text", "") for sp in spans).strip()
+      if not line_text:
+        continue
+      y0 = float(line["bbox"][1])
+      y1 = float(line["bbox"][3])
+      if y0 > page_h - 45.0 and (re.fullmatch(r"\d+", line_text) or len(line_text) < 40):
+        continue
+      max_size = max((float(sp.get("size", 0.0)) for sp in spans), default=0.0)
+      is_jost_bold = any(
+        "jost" in sp.get("font", "").lower() and "bold" in sp.get("font", "").lower() and float(sp.get("size", 0.0)) >= 10.3
+        for sp in spans
+      )
+      is_caption = bool(re.match(r"^(?:Figure|Fig\.?|Table|Note|Source)\s*\d*\s*[:.]", line_text, re.IGNORECASE))
+      visual_lines.append({
+        "is_caption": is_caption,
+        "is_jost_bold": is_jost_bold,
+        "max_size": max_size,
+        "text": line_text,
+        "y0": y0,
+        "y1": y1
+      })
+
+  pdf_name = os.path.basename(arg1_pdf_path)
+  for line_info in visual_lines:
+    if line_info["is_caption"]:
+      continue
+    is_abstract_hdr = (
+      bool(re.fullmatch(r"(?:\d+(?:\.\d+)*\.?\s+)?abstract", line_info["text"], re.IGNORECASE))
+      and line_info["max_size"] >= 10.3
+    )
+    is_bottom_section_hdr = (
+      line_info["is_jost_bold"]
+      and line_info["max_size"] <= 14.5
+      and line_info["y0"] >= page_h * 0.52
+    )
+    if not (is_abstract_hdr or is_bottom_section_hdr):
+      continue
+
+    body_lines_below = 0
+    for below in visual_lines:
+      if below is line_info or below["y0"] <= line_info["y1"] - 1.0:
+        continue
+      if below["is_caption"] or below["is_jost_bold"]:
+        continue
+      if len(below["text"]) >= 25:
+        body_lines_below += 1
+
+    if body_lines_below < 2:
+      arg3_errors.append(
+        f"[{arg2_label}] {pdf_name} p.1: Orphaned Page-1 heading `{line_info['text']}` (y={line_info['y0']:.1f} pt) "
+        f"with only {body_lines_below} prose line(s) beneath it; push heading to Page 2 with its paragraph and forbid sub-headings inside Abstract."
+      )
+    elif body_lines_below == 2 and arg4_warnings is not None:
+      arg4_warnings.append(
+        f"[{arg2_label}] {pdf_name} p.1: Shallow Page-1 heading `{line_info['text']}` (y={line_info['y0']:.1f} pt) "
+        f"with only 2 prose lines beneath it; consider moving to Page 2."
+      )
+
+
 def audit_compiled_pdf(arg0_pdf_path, arg1_label, arg2_errors, arg3_warnings=None):
-  """Inspects a compiled Viscount PDF via PyMuPDF for overflow (`max_x1 > 540.5` pt), blank Page 1, repeated headers, replacement/.notdef glyphs and `??` tokens."""
+  """Inspects a compiled Viscount PDF via PyMuPDF for overflow (`max_x1 > 540.5` pt), blank Page 1, orphaned Page-1 headings, unintended monospace fonts, repeated headers, replacement/.notdef glyphs and `??` tokens."""
   try:
     doc = pymupdf.open(arg0_pdf_path)
   except Exception as exc:
     arg2_errors.append(f"[{arg1_label}] Failed to open compiled PDF {os.path.basename(arg0_pdf_path)}: {exc}")
-    return {"max_x1": None, "pages": 0, "qq_hits": 0}
+    return {"max_x1": None, "pages": 0, "qq_hits": 0, "mono_pages": 0}
 
   max_x1 = 0.0
   qq_hits = 0
@@ -55,47 +204,81 @@ def audit_compiled_pdf(arg0_pdf_path, arg1_label, arg2_errors, arg3_warnings=Non
   qq_pattern = re.compile(r"(?:Table|Figure|Fig\.|Section|Eq\.|\[\s*)\?\?|\?\?\s*\]|(?<![A-Za-z0-9?])\?\?(?![A-Za-z0-9?])")
   repeated_header_hits = 0
   tofu_chars = 0
+  mono_pages = []
+  has_code_blocks = rmd_has_visible_code_blocks(arg0_pdf_path)
 
-  if pages >= 1:
-    p1_text = doc[0].get_text("text").strip()
-    if len(p1_text) < 80:
+  try:
+    if pages >= 1:
+      p1_text = doc[0].get_text("text").strip()
+      if len(p1_text) < 80:
+        arg2_errors.append(
+          f"[{arg1_label}] {os.path.basename(arg0_pdf_path)} p.1: Page 1 appears nearly blank ({len(p1_text)} chars); rescale hero figure <= 0,52\\textheight."
+        )
+      _audit_page1_orphaned_headings(doc[0], arg0_pdf_path, arg1_label, arg2_errors, arg3_warnings)
+
+    for page_idx, page in enumerate(doc):
+      for blk in page.get_text("blocks"):
+        if blk[2] > max_x1:
+          max_x1 = float(blk[2])
+      if not has_code_blocks:
+        page_fonts = doc.get_page_fonts(page_idx)
+        if any(any(sub in str(f_info[3]).lower() for sub in MONO_FONT_SUBSTRINGS) for f_info in page_fonts):
+          mono_pages.append(page_idx + 1)
+      page_text = page.get_text("text")
+      if "(Continued from previous page)" in page_text:
+        repeated_header_hits += 1
+      tofu_chars += page_text.count("\ufffd") + page_text.count("\x00")
+      matches = qq_pattern.findall(page_text)
+      if matches:
+        qq_hits += len(matches)
+        arg2_errors.append(
+          f"[{arg1_label}] {os.path.basename(arg0_pdf_path)} p.{page_idx + 1}: unresolved `??` token(s) ({len(matches)})."
+        )
+
+    if mono_pages and not has_code_blocks:
+      pdf_name = os.path.basename(arg0_pdf_path)
+      is_legacy_settlements = pdf_name.lower().endswith("_settlements.pdf")
+      single_page_spans = 0
+      if is_legacy_settlements and len(mono_pages) == 1:
+        mono_page_dict = doc[mono_pages[0] - 1].get_text("dict")
+        for blk in mono_page_dict.get("blocks", []):
+          if blk.get("type", 0) != 0:
+            continue
+          for line in blk.get("lines", []):
+            for sp in line.get("spans", []):
+              if sp.get("text", "").strip() and any(sub in sp.get("font", "").lower() for sub in MONO_FONT_SUBSTRINGS):
+                single_page_spans += 1
+      if is_legacy_settlements and len(mono_pages) == 1 and single_page_spans <= 2:
+        if arg3_warnings is not None:
+          arg3_warnings.append(
+            f"[{arg1_label}] {pdf_name} p.{mono_pages[0]}: minor legacy monospace font usage ({single_page_spans} span(s)); strip non-code backticks on regeneration."
+          )
+      else:
+        arg2_errors.append(
+          f"[{arg1_label}] {pdf_name}: unexpected monospace font on page(s) {mono_pages} "
+          f"(monospace is reserved strictly for code; strip non-code backticks/\\texttt from captions, headings, prose and tables)."
+        )
+
+    if repeated_header_hits > 0:
       arg2_errors.append(
-        f"[{arg1_label}] {os.path.basename(arg0_pdf_path)} p.1: Page 1 appears nearly blank ({len(p1_text)} chars); rescale hero figure <= 0,52\\textheight."
+        f"[{arg1_label}] {os.path.basename(arg0_pdf_path)}: found `(Continued from previous page)` on {repeated_header_hits} page(s); leave \\endhead empty."
       )
-
-  for page_idx, page in enumerate(doc):
-    for blk in page.get_text("blocks"):
-      if blk[2] > max_x1:
-        max_x1 = float(blk[2])
-    page_text = page.get_text("text")
-    if "(Continued from previous page)" in page_text:
-      repeated_header_hits += 1
-    tofu_chars += page_text.count("\ufffd") + page_text.count("\x00")
-    matches = qq_pattern.findall(page_text)
-    if matches:
-      qq_hits += len(matches)
+    if tofu_chars >= 2:
       arg2_errors.append(
-        f"[{arg1_label}] {os.path.basename(arg0_pdf_path)} p.{page_idx + 1}: unresolved `??` token(s) ({len(matches)})."
+        f"[{arg1_label}] {os.path.basename(arg0_pdf_path)}: found {tofu_chars} missing-glyph/replacement (U+FFFD / .notdef) char(s); transliterate scripts cleanly."
       )
+    elif tofu_chars == 1 and arg3_warnings is not None:
+      arg3_warnings.append(
+        f"[{arg1_label}] {os.path.basename(arg0_pdf_path)}: found 1 .notdef glyph character; verify script romanisation."
+      )
+    if max_x1 > 540.5:
+      arg2_errors.append(
+        f"[{arg1_label}] {os.path.basename(arg0_pdf_path)}: horizontal margin overflow max_x1={max_x1:.2f} pt (> 540.5 pt)."
+      )
+  finally:
+    doc.close()
 
-  if repeated_header_hits > 0:
-    arg2_errors.append(
-      f"[{arg1_label}] {os.path.basename(arg0_pdf_path)}: found `(Continued from previous page)` on {repeated_header_hits} page(s); leave \\endhead empty."
-    )
-  if tofu_chars >= 2:
-    arg2_errors.append(
-      f"[{arg1_label}] {os.path.basename(arg0_pdf_path)}: found {tofu_chars} missing-glyph/replacement (U+FFFD / .notdef) char(s); transliterate scripts cleanly."
-    )
-  elif tofu_chars == 1 and arg3_warnings is not None:
-    arg3_warnings.append(
-      f"[{arg1_label}] {os.path.basename(arg0_pdf_path)}: found 1 .notdef glyph character; verify script romanisation."
-    )
-  if max_x1 > 540.5:
-    arg2_errors.append(
-      f"[{arg1_label}] {os.path.basename(arg0_pdf_path)}: horizontal margin overflow max_x1={max_x1:.2f} pt (> 540.5 pt)."
-    )
-
-  return {"max_x1": round(max_x1, 2), "pages": pages, "qq_hits": qq_hits}
+  return {"max_x1": round(max_x1, 2), "pages": pages, "qq_hits": qq_hits, "mono_pages": len(mono_pages)}
 
 
 def count_unique_bib_keys(arg0_chapter_dir, arg1_bib_names=None):
@@ -163,8 +346,55 @@ def audit_zipf_sample_floor(arg0_chapter_dir, arg1_label, arg2_errors):
               )
 
 
+def audit_figure_and_pdf_freshness(arg0_dir, arg1_root_dir, arg2_label, arg3_require_visual_check, arg4_errors, arg5_warnings):
+  """Verifies mask/GeoJSON -> figure PNG -> compiled PDF mtime synchronisation."""
+  fig_dir = os.path.join(arg0_dir, "figures")
+  pngs = sorted(glob.glob(os.path.join(fig_dir, "*.png"))) if os.path.isdir(fig_dir) else []
+  pdfs = sorted(glob.glob(os.path.join(arg0_dir, "*.pdf")))
+  if not pngs:
+    return
+
+  newest_png_m = max(os.path.getmtime(p) for p in pngs)
+  if pdfs:
+    oldest_pdf_m = min(os.path.getmtime(p) for p in pdfs)
+    if oldest_pdf_m + 2.0 < newest_png_m:
+      arg4_errors.append(
+        f"[{arg2_label}] Compiled PDF is older than regenerated figure PNG(s) in figures/; recompile RMarkdown so PDFs reflect current figures and masks."
+      )
+
+  spatial_re = re.compile(r"(?:^fig1_|spatial|map|hero|zones)", re.IGNORECASE)
+  spatial_pngs = [p for p in pngs if spatial_re.search(os.path.basename(p))]
+  if not spatial_pngs:
+    return
+
+  source_paths = sorted(glob.glob(os.path.join(arg0_dir, "*_areal_mask.png")))
+  subreg_dir = os.path.join(arg1_root_dir, "_shared", "_gis_cache", "chapter_subregions")
+  for mask_p in list(source_paths):
+    stem = re.sub(r"_areal_mask\.png$", "", os.path.basename(mask_p), flags=re.IGNORECASE)
+    vec_p = os.path.join(subreg_dir, f"{stem}_subregions.geojson")
+    if os.path.isfile(vec_p):
+      source_paths.append(vec_p)
+  if os.path.abspath(arg0_dir) == os.path.abspath(arg1_root_dir):
+    source_paths.extend(sorted(glob.glob(os.path.join(arg1_root_dir, "_shared", "_gis_cache", "*_polygons.geojson"))))
+
+  if not source_paths:
+    return
+
+  oldest_spatial_m = min(os.path.getmtime(p) for p in spatial_pngs)
+  newest_src_m = max(os.path.getmtime(s) for s in source_paths)
+  if oldest_spatial_m + 2.0 < newest_src_m:
+    msg = (
+      f"[{arg2_label}] Spatial figure PNG(s) are older than updated areal mask/GeoJSON sources; "
+      "regenerate figures and recompile PDF."
+    )
+    if arg3_require_visual_check:
+      arg4_errors.append(msg)
+    else:
+      arg5_warnings.append(msg)
+
+
 def audit_visual_check_manifest(arg0_chapter_dir, arg1_label, arg2_require_visual_check, arg3_errors, arg4_warnings):
-  """Verifies `figures/visual_check.json` exists and is newer than all PNGs in `figures/`."""
+  """Verifies `figures/visual_check.json` exists, is fresh, covers all PNGs and contains genuine non-duplicated per-figure notes."""
   fig_dir = os.path.join(arg0_chapter_dir, "figures")
   pngs = sorted(glob.glob(os.path.join(fig_dir, "*.png"))) if os.path.isdir(fig_dir) else []
   manifest_path = os.path.join(fig_dir, "visual_check.json")
@@ -184,6 +414,7 @@ def audit_visual_check_manifest(arg0_chapter_dir, arg1_label, arg2_require_visua
     arg3_errors.append(f"[{arg1_label}] Invalid figures/visual_check.json: {exc}")
     return
 
+  top_dict = data if isinstance(data, dict) else {}
   if isinstance(data, dict):
     entries = data.get("figures") or data.get("panels") or data.get("checked") or []
     approved = data.get("approved", True)
@@ -204,6 +435,54 @@ def audit_visual_check_manifest(arg0_chapter_dir, arg1_label, arg2_require_visua
       arg3_errors.append(
         f"[{arg1_label}] figures/visual_check.json is stale (older than newest PNG in figures/); re-inspect rendered figures."
       )
+
+  if arg2_require_visual_check and pngs:
+    recorded_names = set()
+    dict_entries = []
+    for ent in entries:
+      if isinstance(ent, dict):
+        dict_entries.append(ent)
+        fn_e = str(ent.get("file") or ent.get("panel") or "").strip()
+        if fn_e:
+          recorded_names.add(os.path.basename(fn_e))
+      elif isinstance(ent, str) and ent.strip():
+        recorded_names.add(os.path.basename(ent.strip()))
+
+    missing_pngs = [os.path.basename(p) for p in pngs if os.path.basename(p) not in recorded_names]
+    if missing_pngs:
+      arg3_errors.append(
+        f"[{arg1_label}] figures/visual_check.json omits rendered PNG(s): {missing_pngs[:5]}."
+      )
+
+    if len(dict_entries) < len(pngs):
+      arg3_errors.append(
+        f"[{arg1_label}] figures/visual_check.json must contain one dict entry per PNG (`{len(dict_entries)}`/`{len(pngs)}`) with unique figure-specific notes."
+      )
+    else:
+      notes_list = [str(e.get("notes") or "").strip() for e in dict_entries]
+      short_notes = [str(e.get("file", "?")) for e, n in zip(dict_entries, notes_list) if len(n) < 50]
+      if short_notes:
+        arg3_errors.append(
+          f"[{arg1_label}] figures/visual_check.json entries lack >= 50-char figure-specific visual notes: {short_notes[:5]}."
+        )
+      elif len(set(notes_list)) < len(notes_list) and len(notes_list) >= 2:
+        arg3_errors.append(
+          f"[{arg1_label}] figures/visual_check.json contains duplicate boilerplate `notes` across figures; write unique observations per PNG via `read_file`."
+        )
+
+      top_zero = top_dict.get("zero_occlusion_and_in_panel_bounds") is True
+      top_parity = top_dict.get("polaris_visual_parity") is True
+      missing_att = []
+      for ent in dict_entries:
+        fn_e = str(ent.get("file") or ent.get("panel") or "?")
+        if not (top_zero or ent.get("zero_occlusion_and_in_panel_bounds") is True):
+          missing_att.append(f"{fn_e}:zero_occlusion_and_in_panel_bounds")
+        if not (top_parity or ent.get("polaris_visual_parity") is True):
+          missing_att.append(f"{fn_e}:polaris_visual_parity")
+      if missing_att:
+        arg3_errors.append(
+          f"[{arg1_label}] figures/visual_check.json missing required true attestation(s): {missing_att[:5]}."
+        )
 
 
 def audit_chapter_dir(arg0_chapter_dir, arg1_root_dir, arg2_options=None):
@@ -339,6 +618,7 @@ def audit_chapter_dir(arg0_chapter_dir, arg1_root_dir, arg2_options=None):
   for pdf_path in compiled_pdfs:
     pdf_metrics[os.path.basename(pdf_path)] = audit_compiled_pdf(pdf_path, rel_label, errors, warnings)
 
+  audit_figure_and_pdf_freshness(arg0_chapter_dir, arg1_root_dir, rel_label, require_visual, errors, warnings)
   audit_visual_check_manifest(arg0_chapter_dir, rel_label, require_visual, errors, warnings)
 
   metrics = {
@@ -406,6 +686,10 @@ def audit_target(arg0_target_path, arg1_options=None):
     root_pdf = os.path.join(target_abs, "studies_on_population.pdf")
     root_pdf_info = audit_compiled_pdf(root_pdf, "root", all_errors, all_warnings) if os.path.isfile(root_pdf) else None
     root_metrics = {"lines": root_lines, "pdf": root_pdf_info}
+    require_vis_root = bool(opts.get("require_visual_check", False))
+    audit_figure_and_pdf_freshness(target_abs, target_abs, "root", require_vis_root, all_errors, all_warnings)
+    if glob.glob(os.path.join(target_abs, "figures", "*.png")):
+      audit_visual_check_manifest(target_abs, "root", require_vis_root, all_errors, all_warnings)
 
   if not chapter_dirs:
     all_errors.append(f"No Viscount chapter directories containing .Rmd files found under {arg0_target_path}.")

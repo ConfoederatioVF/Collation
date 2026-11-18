@@ -1,0 +1,952 @@
+{
+  "batch_index": 325,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        44.49467,
+        -94.18569
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1892,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sibley-Minnesota",
+      "known_aliases": [
+        "Sibley",
+        "sibley",
+        "sibley township",
+        "Sibley township"
+      ],
+      "latest_year": 2020,
+      "name": "Sibley",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1892,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.09414,
+        -69.10295
+      ],
+      "country": "Maine",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Allagash-Maine",
+      "known_aliases": [
+        "Allagash",
+        "allagash",
+        "allagash town",
+        "Allagash town"
+      ],
+      "latest_year": 2020,
+      "name": "Allagash",
+      "reason": "missing_entry",
+      "region": "usa_maine",
+      "sample_years": [
+        1850,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.06422,
+        -94.66963
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1906,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Nelson (Watonwan County)-Minnesota",
+      "known_aliases": [
+        "Nelson (Watonwan County)",
+        "nelson",
+        "nelson township",
+        "Nelson township"
+      ],
+      "latest_year": 2020,
+      "name": "Nelson (Watonwan County)",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1906,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.20801,
+        -88.14793
+      ],
+      "country": "Michigan",
+      "earliest_year": 1853,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mansfield-Michigan",
+      "known_aliases": [
+        "Mansfield",
+        "mansfield",
+        "mansfield township",
+        "Mansfield township"
+      ],
+      "latest_year": 2020,
+      "name": "Mansfield",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1853,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.46847,
+        -84.42593
+      ],
+      "country": "Michigan",
+      "earliest_year": 1872,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Au Sable (Roscommon County)-Michigan",
+      "known_aliases": [
+        "Au Sable (Roscommon County)",
+        "au sable",
+        "au sable township",
+        "Au Sable township"
+      ],
+      "latest_year": 2020,
+      "name": "Au Sable (Roscommon County)",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1872,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.67619,
+        -94.42732
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1920,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Round Grove-Minnesota",
+      "known_aliases": [
+        "Round Grove",
+        "round grove",
+        "round grove township",
+        "Round Grove township"
+      ],
+      "latest_year": 2020,
+      "name": "Round Grove",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1920,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.89041,
+        -96.16011
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1952,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Gervais-Minnesota",
+      "known_aliases": [
+        "Gervais",
+        "gervais",
+        "gervais township",
+        "Gervais township"
+      ],
+      "latest_year": 2020,
+      "name": "Gervais",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1952,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.71477,
+        -96.23203
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1923,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mound (Rock County)-Minnesota",
+      "known_aliases": [
+        "Mound (Rock County)",
+        "mound",
+        "mound township",
+        "Mound township"
+      ],
+      "latest_year": 2020,
+      "name": "Mound (Rock County)",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1923,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.67694,
+        -70.15476
+      ],
+      "country": "Maine",
+      "earliest_year": 1855,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Long Island-Maine",
+      "known_aliases": [
+        "Long Island",
+        "long island",
+        "long island town",
+        "Long Island town"
+      ],
+      "latest_year": 2020,
+      "name": "Long Island",
+      "reason": "missing_entry",
+      "region": "usa_maine",
+      "sample_years": [
+        1855,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.52298,
+        -88.80744
+      ],
+      "country": "Michigan",
+      "earliest_year": 1880,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Duncan-Michigan",
+      "known_aliases": [
+        "Duncan",
+        "duncan",
+        "duncan township",
+        "Duncan township"
+      ],
+      "latest_year": 2020,
+      "name": "Duncan",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1880,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.74972,
+        -80.34589
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1885,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Gilmore-Pennsylvania",
+      "known_aliases": [
+        "Gilmore",
+        "gilmore",
+        "gilmore township",
+        "Gilmore township"
+      ],
+      "latest_year": 2020,
+      "name": "Gilmore",
+      "reason": "missing_entry",
+      "region": "usa_west_virginia",
+      "sample_years": [
+        1885,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.71998,
+        -91.81087
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1953,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Peru-Wisconsin",
+      "known_aliases": [
+        "Peru",
+        "peru",
+        "peru town",
+        "Peru town"
+      ],
+      "latest_year": 2020,
+      "name": "Peru",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1953,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.06397,
+        -95.4713
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1934,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Round Lake (Becker County)-Minnesota",
+      "known_aliases": [
+        "Round Lake (Becker County)",
+        "round lake",
+        "round lake township",
+        "Round Lake township"
+      ],
+      "latest_year": 2020,
+      "name": "Round Lake (Becker County)",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1934,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.91649,
+        -76.53566
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1929,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mayberry-Pennsylvania",
+      "known_aliases": [
+        "Mayberry",
+        "mayberry",
+        "mayberry township",
+        "Mayberry township"
+      ],
+      "latest_year": 2020,
+      "name": "Mayberry",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1929,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.50457,
+        -76.19284
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1958,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "North Branch-Pennsylvania",
+      "known_aliases": [
+        "North Branch",
+        "north branch",
+        "north branch township",
+        "North Branch township"
+      ],
+      "latest_year": 2020,
+      "name": "North Branch",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1958,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.48988,
+        -94.56706
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1913,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Meadow Brook-Minnesota",
+      "known_aliases": [
+        "Meadow Brook",
+        "meadow brook",
+        "meadow brook township",
+        "Meadow Brook township"
+      ],
+      "latest_year": 2020,
+      "name": "Meadow Brook",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1913,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.62718,
+        -95.08484
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1903,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Raymond (Stearns County)-Minnesota",
+      "known_aliases": [
+        "Raymond (Stearns County)",
+        "raymond",
+        "raymond township",
+        "Raymond township"
+      ],
+      "latest_year": 2020,
+      "name": "Raymond (Stearns County)",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1903,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.70929,
+        -79.27292
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1871,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Watson (Warren County)-Pennsylvania",
+      "known_aliases": [
+        "Watson (Warren County)",
+        "watson",
+        "watson township",
+        "Watson township"
+      ],
+      "latest_year": 2020,
+      "name": "Watson (Warren County)",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1871,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.48023,
+        -90.37554
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1942,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sherwood (Clark County)-Wisconsin",
+      "known_aliases": [
+        "Sherwood (Clark County)",
+        "sherwood",
+        "sherwood town",
+        "Sherwood town"
+      ],
+      "latest_year": 2020,
+      "name": "Sherwood (Clark County)",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1942,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.79577,
+        -68.24864
+      ],
+      "country": "Maine",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Wade-Maine",
+      "known_aliases": [
+        "Wade",
+        "wade",
+        "wade town",
+        "Wade town"
+      ],
+      "latest_year": 2020,
+      "name": "Wade",
+      "reason": "missing_entry",
+      "region": "usa_maine",
+      "sample_years": [
+        1850,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.07702,
+        -69.58645
+      ],
+      "country": "Maine",
+      "earliest_year": 1830,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Wellington-Maine",
+      "known_aliases": [
+        "Wellington",
+        "wellington",
+        "wellington town",
+        "Wellington town"
+      ],
+      "latest_year": 2020,
+      "name": "Wellington",
+      "reason": "missing_entry",
+      "region": "usa_maine",
+      "sample_years": [
+        1830,
+        1890,
+        1960,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.53042,
+        -94.62685
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1930,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sugar Bush (Beltrami County)-Minnesota",
+      "known_aliases": [
+        "Sugar Bush (Beltrami County)",
+        "sugar bush",
+        "sugar bush township",
+        "Sugar Bush township"
+      ],
+      "latest_year": 2020,
+      "name": "Sugar Bush (Beltrami County)",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1930,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.58637,
+        -96.34219
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1937,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Prairie View-Minnesota",
+      "known_aliases": [
+        "Prairie View",
+        "prairie view",
+        "prairie view township",
+        "Prairie View township"
+      ],
+      "latest_year": 2020,
+      "name": "Prairie View",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1937,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.51868,
+        -76.64456
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1908,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rush (Dauphin County)-Pennsylvania",
+      "known_aliases": [
+        "Rush (Dauphin County)",
+        "rush",
+        "rush township",
+        "Rush township"
+      ],
+      "latest_year": 2020,
+      "name": "Rush (Dauphin County)",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1908,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.61192,
+        -77.71399
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1892,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Abbott-Pennsylvania",
+      "known_aliases": [
+        "Abbott",
+        "abbott",
+        "abbott township",
+        "Abbott township"
+      ],
+      "latest_year": 2020,
+      "name": "Abbott",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1892,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.70684,
+        -76.93886
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1873,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ward-Pennsylvania",
+      "known_aliases": [
+        "Ward",
+        "ward",
+        "ward township",
+        "Ward township"
+      ],
+      "latest_year": 2020,
+      "name": "Ward",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1873,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.69393,
+        -94.84199
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1924,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Durand-Minnesota",
+      "known_aliases": [
+        "Durand",
+        "durand",
+        "durand township",
+        "Durand township"
+      ],
+      "latest_year": 2020,
+      "name": "Durand",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1924,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.0791,
+        -93.35149
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1874,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Splithand-Minnesota",
+      "known_aliases": [
+        "Splithand",
+        "splithand",
+        "splithand township",
+        "Splithand township"
+      ],
+      "latest_year": 2020,
+      "name": "Splithand",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1874,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.44116,
+        -76.68052
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1875,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hillsgrove-Pennsylvania",
+      "known_aliases": [
+        "Hillsgrove",
+        "hillsgrove",
+        "hillsgrove township",
+        "Hillsgrove township"
+      ],
+      "latest_year": 2020,
+      "name": "Hillsgrove",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1875,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.1909,
+        -95.74589
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1962,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Oakland (Mahnomen County)-Minnesota",
+      "known_aliases": [
+        "Oakland (Mahnomen County)",
+        "oakland",
+        "oakland township",
+        "Oakland township"
+      ],
+      "latest_year": 2020,
+      "name": "Oakland (Mahnomen County)",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1962,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

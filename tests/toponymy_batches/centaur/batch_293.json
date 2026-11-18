@@ -1,0 +1,957 @@
+{
+  "batch_index": 293,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        44.04033,
+        -73.22278
+      ],
+      "country": "Vermont",
+      "earliest_year": 1775,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Weybridge-Vermont",
+      "known_aliases": [
+        "Weybridge",
+        "weybridge",
+        "weybridge town",
+        "Weybridge town"
+      ],
+      "latest_year": 2020,
+      "name": "Weybridge",
+      "reason": "missing_entry",
+      "region": "usa_vermont",
+      "sample_years": [
+        1775,
+        1850,
+        1940,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.02081,
+        -80.47448
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1903,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "West Finley-Pennsylvania",
+      "known_aliases": [
+        "West Finley",
+        "west finley",
+        "west finley township",
+        "West Finley township"
+      ],
+      "latest_year": 2020,
+      "name": "West Finley",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1903,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.89297,
+        -92.49047
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1924,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Industrial-Minnesota",
+      "known_aliases": [
+        "Industrial",
+        "industrial",
+        "industrial township",
+        "Industrial township"
+      ],
+      "latest_year": 2020,
+      "name": "Industrial",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1924,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.10183,
+        -76.6571
+      ],
+      "country": "New York",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Baldwin (Chemung County)-New York",
+      "known_aliases": [
+        "Baldwin (Chemung County)",
+        "baldwin",
+        "baldwin town",
+        "Baldwin town",
+        "Baldwin"
+      ],
+      "latest_year": 2020,
+      "name": "Baldwin (Chemung County)",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1850,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.60854,
+        -89.42307
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1974,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fort Winnebago-Wisconsin",
+      "known_aliases": [
+        "Fort Winnebago",
+        "fort winnebago",
+        "fort winnebago town",
+        "Fort Winnebago town"
+      ],
+      "latest_year": 2020,
+      "name": "Fort Winnebago",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1974,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.51787,
+        -69.21652
+      ],
+      "country": "Maine",
+      "earliest_year": 1810,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Knox-Maine",
+      "known_aliases": [
+        "Knox",
+        "knox",
+        "knox town",
+        "Knox town"
+      ],
+      "latest_year": 2020,
+      "name": "Knox",
+      "reason": "missing_entry",
+      "region": "usa_maine",
+      "sample_years": [
+        1810,
+        1880,
+        1950,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.94674,
+        -89.53258
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1945,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Springfield (Marquette County)-Wisconsin",
+      "known_aliases": [
+        "Springfield (Marquette County)",
+        "springfield",
+        "springfield town",
+        "Springfield town"
+      ],
+      "latest_year": 2020,
+      "name": "Springfield (Marquette County)",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1945,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.52018,
+        -84.30035
+      ],
+      "country": "Michigan",
+      "earliest_year": 1972,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Grant (Cheboygan County)-Michigan",
+      "known_aliases": [
+        "Grant (Cheboygan County)",
+        "grant",
+        "grant township",
+        "Grant township"
+      ],
+      "latest_year": 2020,
+      "name": "Grant (Cheboygan County)",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1972,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.86089,
+        -85.97949
+      ],
+      "country": "Michigan",
+      "earliest_year": 1891,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lake (Lake County)-Michigan",
+      "known_aliases": [
+        "Lake (Lake County)",
+        "lake",
+        "lake township",
+        "Lake township"
+      ],
+      "latest_year": 2020,
+      "name": "Lake (Lake County)",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1891,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.33445,
+        -87.17304
+      ],
+      "country": "Michigan",
+      "earliest_year": 1865,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Skandia-Michigan",
+      "known_aliases": [
+        "Skandia",
+        "skandia",
+        "skandia township",
+        "Skandia township"
+      ],
+      "latest_year": 2020,
+      "name": "Skandia",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1865,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.82968,
+        -87.76304
+      ],
+      "country": "Michigan",
+      "earliest_year": 1931,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Waucedah-Michigan",
+      "known_aliases": [
+        "Waucedah",
+        "waucedah",
+        "waucedah township",
+        "Waucedah township"
+      ],
+      "latest_year": 2020,
+      "name": "Waucedah",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1931,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.77517,
+        -84.53486
+      ],
+      "country": "Michigan",
+      "earliest_year": 1893,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ransom-Michigan",
+      "known_aliases": [
+        "Ransom",
+        "ransom",
+        "ransom township",
+        "Ransom township"
+      ],
+      "latest_year": 2020,
+      "name": "Ransom",
+      "reason": "missing_entry",
+      "region": "usa_ohio",
+      "sample_years": [
+        1893,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.56178,
+        -74.70971
+      ],
+      "country": "New York",
+      "earliest_year": 1840,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Forestburgh-New York",
+      "known_aliases": [
+        "Forestburgh",
+        "forestburgh",
+        "forestburgh town",
+        "Forestburgh town"
+      ],
+      "latest_year": 2020,
+      "name": "Forestburgh",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1840,
+        1900,
+        1960,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.60212,
+        -89.61603
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1960,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Woodboro-Wisconsin",
+      "known_aliases": [
+        "Woodboro",
+        "woodboro",
+        "woodboro town",
+        "Woodboro town"
+      ],
+      "latest_year": 2020,
+      "name": "Woodboro",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.33425,
+        -77.14546
+      ],
+      "country": "New York",
+      "earliest_year": 1840,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bradford-New York",
+      "known_aliases": [
+        "Bradford",
+        "bradford",
+        "bradford town",
+        "Bradford town"
+      ],
+      "latest_year": 2020,
+      "name": "Bradford",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1840,
+        1900,
+        1960,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.82078,
+        -94.96125
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1957,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kandota-Minnesota",
+      "known_aliases": [
+        "Kandota",
+        "kandota",
+        "kandota township",
+        "Kandota township"
+      ],
+      "latest_year": 2020,
+      "name": "Kandota",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1957,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.20496,
+        -89.68568
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1909,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Presque Isle-Wisconsin",
+      "known_aliases": [
+        "Presque Isle",
+        "presque isle",
+        "presque isle town",
+        "Presque Isle town"
+      ],
+      "latest_year": 2020,
+      "name": "Presque Isle",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1909,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.77362,
+        -85.01886
+      ],
+      "country": "Michigan",
+      "earliest_year": 1920,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Coldwater (Isabella County)-Michigan",
+      "known_aliases": [
+        "Coldwater (Isabella County)",
+        "coldwater",
+        "coldwater township",
+        "Coldwater township"
+      ],
+      "latest_year": 2020,
+      "name": "Coldwater (Isabella County)",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1920,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.41155,
+        -95.97001
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1971,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Friberg-Minnesota",
+      "known_aliases": [
+        "Friberg",
+        "friberg",
+        "friberg township",
+        "Friberg township"
+      ],
+      "latest_year": 2020,
+      "name": "Friberg",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1971,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.81119,
+        -95.55481
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1946,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Holmes City-Minnesota",
+      "known_aliases": [
+        "Holmes City",
+        "holmes city",
+        "holmes city township",
+        "Holmes City township"
+      ],
+      "latest_year": 2020,
+      "name": "Holmes City",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1946,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.40577,
+        -95.21558
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1877,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Compton-Minnesota",
+      "known_aliases": [
+        "Compton",
+        "compton",
+        "compton township",
+        "Compton township"
+      ],
+      "latest_year": 2020,
+      "name": "Compton",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1877,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.50171,
+        -75.72804
+      ],
+      "country": "New York",
+      "earliest_year": 1820,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "McDonough-New York",
+      "known_aliases": [
+        "McDonough",
+        "mcdonough",
+        "mcdonough town",
+        "McDonough town"
+      ],
+      "latest_year": 2020,
+      "name": "McDonough",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1820,
+        1890,
+        1960,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.58577,
+        -94.07723
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1969,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mission-Minnesota",
+      "known_aliases": [
+        "Mission",
+        "mission",
+        "mission township",
+        "Mission township"
+      ],
+      "latest_year": 2020,
+      "name": "Mission",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1969,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.51997,
+        -93.22048
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1962,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Greenvale-Minnesota",
+      "known_aliases": [
+        "Greenvale",
+        "greenvale",
+        "greenvale township",
+        "Greenvale township"
+      ],
+      "latest_year": 2020,
+      "name": "Greenvale",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1962,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.45616,
+        -76.11235
+      ],
+      "country": "New York",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lapeer-New York",
+      "known_aliases": [
+        "Lapeer",
+        "lapeer",
+        "lapeer town",
+        "Lapeer town"
+      ],
+      "latest_year": 2020,
+      "name": "Lapeer",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1850,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.75659,
+        -91.82776
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1871,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Beaver Brook-Wisconsin",
+      "known_aliases": [
+        "Beaver Brook",
+        "beaver brook",
+        "beaver brook town",
+        "Beaver Brook town"
+      ],
+      "latest_year": 2020,
+      "name": "Beaver Brook",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1871,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.46468,
+        -77.47009
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1920,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Spruce Hill-Pennsylvania",
+      "known_aliases": [
+        "Spruce Hill",
+        "spruce hill",
+        "spruce hill township",
+        "Spruce Hill township"
+      ],
+      "latest_year": 2020,
+      "name": "Spruce Hill",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1920,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.90785,
+        -90.72985
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1861,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Reseburg-Wisconsin",
+      "known_aliases": [
+        "Reseburg",
+        "reseburg",
+        "reseburg town",
+        "Reseburg town"
+      ],
+      "latest_year": 2020,
+      "name": "Reseburg",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1861,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.28528,
+        -78.25303
+      ],
+      "country": "New York",
+      "earliest_year": 1840,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "New Hudson-New York",
+      "known_aliases": [
+        "New Hudson",
+        "new hudson",
+        "new hudson town",
+        "New Hudson town"
+      ],
+      "latest_year": 2020,
+      "name": "New Hudson",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1840,
+        1900,
+        1960,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.646,
+        -91.59446
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1946,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Drammen-Wisconsin",
+      "known_aliases": [
+        "Drammen",
+        "drammen",
+        "drammen town",
+        "Drammen town"
+      ],
+      "latest_year": 2020,
+      "name": "Drammen",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1946,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

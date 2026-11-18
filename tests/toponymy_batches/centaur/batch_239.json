@@ -1,0 +1,951 @@
+{
+  "batch_index": 239,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        34.21741,
+        -96.07971
+      ],
+      "country": "Oklahoma",
+      "earliest_year": 1922,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bentley-Oklahoma",
+      "known_aliases": [
+        "Bentley",
+        "bentley",
+        "bentley cdp",
+        "Bentley CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Bentley",
+      "reason": "missing_entry",
+      "region": "usa_oklahoma",
+      "sample_years": [
+        1922,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.59012,
+        -96.27313
+      ],
+      "country": "Oklahoma",
+      "earliest_year": 1884,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pershing-Oklahoma",
+      "known_aliases": [
+        "Pershing",
+        "pershing",
+        "pershing cdp",
+        "Pershing CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Pershing",
+      "reason": "missing_entry",
+      "region": "usa_oklahoma",
+      "sample_years": [
+        1884,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.59698,
+        -123.52103
+      ],
+      "country": "Oregon",
+      "earliest_year": 1922,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Blodgett-Oregon",
+      "known_aliases": [
+        "Blodgett",
+        "blodgett",
+        "blodgett cdp",
+        "Blodgett CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Blodgett",
+      "reason": "missing_entry",
+      "region": "usa_oregon",
+      "sample_years": [
+        1922,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.33455,
+        -98.09387
+      ],
+      "country": "South Dakota",
+      "earliest_year": 1876,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ferney-South Dakota",
+      "known_aliases": [
+        "Ferney",
+        "ferney",
+        "ferney cdp",
+        "Ferney CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Ferney",
+      "reason": "missing_entry",
+      "region": "usa_south_dakota",
+      "sample_years": [
+        1876,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        27.39513,
+        -98.35563
+      ],
+      "country": "Texas",
+      "earliest_year": 1885,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Concepcion-Texas",
+      "known_aliases": [
+        "Concepcion",
+        "concepcion",
+        "concepcion cdp",
+        "Concepcion CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Concepcion",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1885,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        55.83665,
+        -161.6358
+      ],
+      "country": "Alaska",
+      "earliest_year": 1869,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Nelson Lagoon-Alaska",
+      "known_aliases": [
+        "Nelson Lagoon",
+        "nelson lagoon",
+        "nelson lagoon cdp",
+        "Nelson Lagoon CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Nelson Lagoon",
+      "reason": "missing_entry",
+      "region": "usa_alaska",
+      "sample_years": [
+        1869,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.79401,
+        -119.18957
+      ],
+      "country": "California",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Jovista-California",
+      "known_aliases": [
+        "Jovista",
+        "jovista",
+        "jovista cdp",
+        "Jovista CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Jovista",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1900,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.25124,
+        -87.45238
+      ],
+      "country": "Indiana",
+      "earliest_year": 1912,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Marshfield-Indiana",
+      "known_aliases": [
+        "Marshfield",
+        "marshfield",
+        "marshfield cdp",
+        "Marshfield CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Marshfield",
+      "reason": "missing_entry",
+      "region": "usa_indiana",
+      "sample_years": [
+        1912,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.36374,
+        -87.51276
+      ],
+      "country": "Indiana",
+      "earliest_year": 1942,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pence-Indiana",
+      "known_aliases": [
+        "Pence",
+        "pence",
+        "pence cdp",
+        "Pence CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Pence",
+      "reason": "missing_entry",
+      "region": "usa_indiana",
+      "sample_years": [
+        1942,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.85657,
+        -100.95843
+      ],
+      "country": "Kansas",
+      "earliest_year": 1891,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ludell-Kansas",
+      "known_aliases": [
+        "Ludell",
+        "ludell",
+        "ludell cdp",
+        "Ludell CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Ludell",
+      "reason": "missing_entry",
+      "region": "usa_kansas",
+      "sample_years": [
+        1891,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.84619,
+        -113.95748
+      ],
+      "country": "Montana",
+      "earliest_year": 1906,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sula-Montana",
+      "known_aliases": [
+        "Sula",
+        "sula",
+        "sula cdp",
+        "Sula CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Sula",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1906,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.01867,
+        -114.121
+      ],
+      "country": "Nevada",
+      "earliest_year": 1904,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Baker-Nevada",
+      "known_aliases": [
+        "Baker",
+        "baker",
+        "baker cdp",
+        "Baker CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Baker",
+      "reason": "missing_entry",
+      "region": "usa_nevada",
+      "sample_years": [
+        1904,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.80503,
+        -97.43951
+      ],
+      "country": "North Dakota",
+      "earliest_year": 1958,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Embden-North Dakota",
+      "known_aliases": [
+        "Embden",
+        "embden",
+        "embden cdp",
+        "Embden CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Embden",
+      "reason": "missing_entry",
+      "region": "usa_north_dakota",
+      "sample_years": [
+        1958,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.14997,
+        -98.397
+      ],
+      "country": "Oklahoma",
+      "earliest_year": 1886,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Homestead-Oklahoma",
+      "known_aliases": [
+        "Homestead",
+        "homestead",
+        "homestead cdp",
+        "Homestead CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Homestead",
+      "reason": "missing_entry",
+      "region": "usa_oklahoma",
+      "sample_years": [
+        1886,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.40918,
+        -78.21061
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1949,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Shellytown-Pennsylvania",
+      "known_aliases": [
+        "Shellytown",
+        "shellytown",
+        "shellytown cdp",
+        "Shellytown CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Shellytown",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1949,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.65587,
+        -80.21601
+      ],
+      "country": "West Virginia",
+      "earliest_year": 1972,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pickens-West Virginia",
+      "known_aliases": [
+        "Pickens",
+        "pickens",
+        "pickens cdp",
+        "Pickens CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Pickens",
+      "reason": "missing_entry",
+      "region": "usa_west_virginia",
+      "sample_years": [
+        1972,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.06164,
+        -105.06758
+      ],
+      "country": "Wyoming",
+      "earliest_year": 1929,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Westview Circle-Wyoming",
+      "known_aliases": [
+        "Westview Circle",
+        "westview circle",
+        "westview circle cdp",
+        "Westview Circle CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Westview Circle",
+      "reason": "missing_entry",
+      "region": "usa_wyoming",
+      "sample_years": [
+        1929,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.17856,
+        -93.69483
+      ],
+      "country": "Iowa",
+      "earliest_year": 1913,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hayfield-Iowa",
+      "known_aliases": [
+        "Hayfield",
+        "hayfield",
+        "hayfield cdp",
+        "Hayfield CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Hayfield",
+      "reason": "missing_entry",
+      "region": "usa_iowa",
+      "sample_years": [
+        1913,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        58.41514,
+        -135.34546
+      ],
+      "country": "Alaska",
+      "earliest_year": 1926,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Excursion Inlet-Alaska",
+      "known_aliases": [
+        "Excursion Inlet",
+        "excursion inlet",
+        "excursion inlet cdp",
+        "Excursion Inlet CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Excursion Inlet",
+      "reason": "missing_entry",
+      "region": "usa_alaska",
+      "sample_years": [
+        1926,
+        1930,
+        1940,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.75161,
+        -93.10118
+      ],
+      "country": "Arkansas",
+      "earliest_year": 1856,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Reader-Arkansas",
+      "known_aliases": [
+        "Reader",
+        "reader",
+        "reader cdp",
+        "Reader CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Reader",
+      "reason": "missing_entry",
+      "region": "usa_arkansas",
+      "sample_years": [
+        1856,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.89004,
+        -117.38641
+      ],
+      "country": "California",
+      "earliest_year": 1937,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Homewood Canyon-California",
+      "known_aliases": [
+        "Homewood Canyon",
+        "homewood canyon",
+        "homewood canyon cdp",
+        "Homewood Canyon CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Homewood Canyon",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1937,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.0511,
+        -105.10744
+      ],
+      "country": "Colorado",
+      "earliest_year": 1960,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Leyner-Colorado",
+      "known_aliases": [
+        "Leyner",
+        "leyner",
+        "leyner cdp",
+        "Leyner CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Leyner",
+      "reason": "missing_entry",
+      "region": "usa_colorado",
+      "sample_years": [
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.69857,
+        -87.28635
+      ],
+      "country": "Kentucky",
+      "earliest_year": 1904,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "West Louisville-Kentucky",
+      "known_aliases": [
+        "West Louisville",
+        "west louisville",
+        "west louisville cdp",
+        "West Louisville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "West Louisville",
+      "reason": "missing_entry",
+      "region": "usa_kentucky",
+      "sample_years": [
+        1904,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.55399,
+        -89.6245
+      ],
+      "country": "Missouri",
+      "earliest_year": 1920,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "New Wells-Missouri",
+      "known_aliases": [
+        "New Wells",
+        "new wells",
+        "new wells cdp",
+        "New Wells CDP"
+      ],
+      "latest_year": 2020,
+      "name": "New Wells",
+      "reason": "missing_entry",
+      "region": "usa_missouri",
+      "sample_years": [
+        1920,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.73811,
+        -110.22354
+      ],
+      "country": "Montana",
+      "earliest_year": 1928,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Springdale-Montana",
+      "known_aliases": [
+        "Springdale",
+        "springdale",
+        "springdale cdp",
+        "Springdale CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Springdale",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1928,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.6898,
+        -114.44904
+      ],
+      "country": "Nevada",
+      "earliest_year": 1866,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Beaverdam-Nevada",
+      "known_aliases": [
+        "Beaverdam",
+        "beaverdam",
+        "beaverdam cdp",
+        "Beaverdam CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Beaverdam",
+      "reason": "missing_entry",
+      "region": "usa_nevada",
+      "sample_years": [
+        1866,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.06507,
+        -119.92449
+      ],
+      "country": "Nevada",
+      "earliest_year": 1868,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Logan Creek-Nevada",
+      "known_aliases": [
+        "Logan Creek",
+        "logan creek",
+        "logan creek cdp",
+        "Logan Creek CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Logan Creek",
+      "reason": "missing_entry",
+      "region": "usa_nevada",
+      "sample_years": [
+        1868,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.8594,
+        -99.89341
+      ],
+      "country": "North Dakota",
+      "earliest_year": 1966,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Selz-North Dakota",
+      "known_aliases": [
+        "Selz",
+        "selz",
+        "selz cdp",
+        "Selz CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Selz",
+      "reason": "missing_entry",
+      "region": "usa_north_dakota",
+      "sample_years": [
+        1966,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.93383,
+        -98.58997
+      ],
+      "country": "Oklahoma",
+      "earliest_year": 1901,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Eagle City-Oklahoma",
+      "known_aliases": [
+        "Eagle City",
+        "eagle city",
+        "eagle city cdp",
+        "Eagle City CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Eagle City",
+      "reason": "missing_entry",
+      "region": "usa_oklahoma",
+      "sample_years": [
+        1901,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.45157,
+        -118.1863
+      ],
+      "country": "Oregon",
+      "earliest_year": 1912,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Unity-Oregon",
+      "known_aliases": [
+        "Unity",
+        "unity",
+        "unity city",
+        "Unity city"
+      ],
+      "latest_year": 2026,
+      "name": "Unity",
+      "reason": "missing_entry",
+      "region": "usa_oregon",
+      "sample_years": [
+        1912,
+        2003,
+        2015,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

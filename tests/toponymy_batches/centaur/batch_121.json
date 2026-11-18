@@ -1,0 +1,956 @@
+{
+  "batch_index": 121,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        39.91686,
+        -81.52042
+      ],
+      "country": "Ohio",
+      "earliest_year": 1924,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Buffalo-Ohio",
+      "known_aliases": [
+        "Buffalo",
+        "buffalo",
+        "buffalo cdp",
+        "Buffalo CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Buffalo",
+      "reason": "missing_entry",
+      "region": "usa_ohio",
+      "sample_years": [
+        1924,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.12355,
+        -77.22486
+      ],
+      "country": "Virginia",
+      "earliest_year": 1855,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Disputanta-Virginia",
+      "known_aliases": [
+        "Disputanta",
+        "disputanta",
+        "disputanta cdp",
+        "Disputanta CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Disputanta",
+      "reason": "missing_entry",
+      "region": "usa_virginia",
+      "sample_years": [
+        1855,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.33006,
+        -82.21274
+      ],
+      "country": "West Virginia",
+      "earliest_year": 1936,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Salt Rock-West Virginia",
+      "known_aliases": [
+        "Salt Rock",
+        "salt rock",
+        "salt rock cdp",
+        "Salt Rock CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Salt Rock",
+      "reason": "missing_entry",
+      "region": "usa_west_virginia",
+      "sample_years": [
+        1936,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.89139,
+        -110.19569
+      ],
+      "country": "Arizona",
+      "earliest_year": 1967,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cedar Creek-Arizona",
+      "known_aliases": [
+        "Cedar Creek",
+        "cedar creek",
+        "cedar creek cdp",
+        "Cedar Creek CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Cedar Creek",
+      "reason": "missing_entry",
+      "region": "usa_arizona",
+      "sample_years": [
+        1967,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.67324,
+        -119.78772
+      ],
+      "country": "California",
+      "earliest_year": 1899,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "El Portal-California",
+      "known_aliases": [
+        "El Portal",
+        "el portal",
+        "el portal cdp",
+        "El Portal CDP"
+      ],
+      "latest_year": 2020,
+      "name": "El Portal",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1899,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.95182,
+        -121.53097
+      ],
+      "country": "California",
+      "earliest_year": 1901,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio Oso-California",
+      "known_aliases": [
+        "Rio Oso",
+        "rio oso",
+        "rio oso cdp",
+        "Rio Oso CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Rio Oso",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1901,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.8547,
+        -113.85262
+      ],
+      "country": "Montana",
+      "earliest_year": 1956,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Piltzville-Montana",
+      "known_aliases": [
+        "Piltzville",
+        "piltzville",
+        "piltzville cdp",
+        "Piltzville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Piltzville",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1956,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.27171,
+        -71.96182
+      ],
+      "country": "New Hampshire",
+      "earliest_year": 1775,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bradford-New Hampshire",
+      "known_aliases": [
+        "Bradford",
+        "bradford",
+        "bradford cdp",
+        "Bradford CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Bradford",
+      "reason": "missing_entry",
+      "region": "usa_new_hampshire",
+      "sample_years": [
+        1775,
+        1850,
+        1940,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.76083,
+        -74.78343
+      ],
+      "country": "New York",
+      "earliest_year": 1879,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Swan Lake-New York",
+      "known_aliases": [
+        "Swan Lake",
+        "swan lake",
+        "swan lake cdp",
+        "Swan Lake CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Swan Lake",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1879,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.5186,
+        -80.34749
+      ],
+      "country": "North Carolina",
+      "earliest_year": 1915,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Gold Hill-North Carolina",
+      "known_aliases": [
+        "Gold Hill",
+        "gold hill",
+        "gold hill cdp",
+        "Gold Hill CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Gold Hill",
+      "reason": "missing_entry",
+      "region": "usa_north_carolina",
+      "sample_years": [
+        1915,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.90032,
+        -94.60663
+      ],
+      "country": "Oklahoma",
+      "earliest_year": 1882,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Peavine-Oklahoma",
+      "known_aliases": [
+        "Peavine",
+        "peavine",
+        "peavine cdp",
+        "Peavine CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Peavine",
+      "reason": "missing_entry",
+      "region": "usa_oklahoma",
+      "sample_years": [
+        1882,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.36953,
+        -109.35557
+      ],
+      "country": "Utah",
+      "earliest_year": 1905,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Jensen-Utah",
+      "known_aliases": [
+        "Jensen",
+        "jensen",
+        "jensen cdp",
+        "Jensen CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Jensen",
+      "reason": "missing_entry",
+      "region": "usa_utah",
+      "sample_years": [
+        1905,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.081,
+        -77.35632
+      ],
+      "country": "Virginia",
+      "earliest_year": 1910,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Templeton-Virginia",
+      "known_aliases": [
+        "Templeton",
+        "templeton",
+        "templeton cdp",
+        "Templeton CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Templeton",
+      "reason": "missing_entry",
+      "region": "usa_virginia",
+      "sample_years": [
+        1910,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.96839,
+        -122.22295
+      ],
+      "country": "Washington",
+      "earliest_year": 1939,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kapowsin-Washington",
+      "known_aliases": [
+        "Kapowsin",
+        "kapowsin",
+        "kapowsin cdp",
+        "Kapowsin CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Kapowsin",
+      "reason": "missing_entry",
+      "region": "usa_washington",
+      "sample_years": [
+        1939,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.40141,
+        -121.41099
+      ],
+      "country": "Washington",
+      "earliest_year": 1974,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Snoqualmie Pass-Washington",
+      "known_aliases": [
+        "Snoqualmie Pass",
+        "snoqualmie pass",
+        "snoqualmie pass cdp",
+        "Snoqualmie Pass CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Snoqualmie Pass",
+      "reason": "missing_entry",
+      "region": "usa_washington",
+      "sample_years": [
+        1974,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        30.52893,
+        -93.43909
+      ],
+      "country": "Louisiana",
+      "earliest_year": 1875,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Oretta-Louisiana",
+      "known_aliases": [
+        "Oretta",
+        "oretta",
+        "oretta cdp",
+        "Oretta CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Oretta",
+      "reason": "missing_entry",
+      "region": "usa_louisiana",
+      "sample_years": [
+        1875,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.78591,
+        -84.04034
+      ],
+      "country": "Michigan",
+      "earliest_year": 1873,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Jasper-Michigan",
+      "known_aliases": [
+        "Jasper",
+        "jasper",
+        "jasper cdp",
+        "Jasper CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Jasper",
+      "reason": "missing_entry",
+      "region": "usa_ohio",
+      "sample_years": [
+        1873,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.27929,
+        -114.99005
+      ],
+      "country": "Nevada",
+      "earliest_year": 1887,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ruth-Nevada",
+      "known_aliases": [
+        "Ruth",
+        "ruth",
+        "ruth cdp",
+        "Ruth CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Ruth",
+      "reason": "missing_entry",
+      "region": "usa_nevada",
+      "sample_years": [
+        1887,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.29624,
+        -74.86028
+      ],
+      "country": "New Jersey",
+      "earliest_year": 1963,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Washington Crossing-New Jersey",
+      "known_aliases": [
+        "Washington Crossing",
+        "washington crossing",
+        "washington crossing cdp",
+        "Washington Crossing CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Washington Crossing",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1963,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.54902,
+        -108.66432
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1966,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "White Cliffs-New Mexico",
+      "known_aliases": [
+        "White Cliffs",
+        "white cliffs",
+        "white cliffs cdp",
+        "White Cliffs CDP"
+      ],
+      "latest_year": 2020,
+      "name": "White Cliffs",
+      "reason": "missing_entry",
+      "region": "usa_new_mexico",
+      "sample_years": [
+        1966,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.31411,
+        -74.24874
+      ],
+      "country": "New York",
+      "earliest_year": 1820,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Windham-New York",
+      "known_aliases": [
+        "Windham",
+        "windham",
+        "windham cdp",
+        "Windham CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Windham",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1820,
+        1890,
+        1960,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.99379,
+        -83.25293
+      ],
+      "country": "Ohio",
+      "earliest_year": 1890,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "McCutchenville-Ohio",
+      "known_aliases": [
+        "McCutchenville",
+        "mccutchenville",
+        "mccutchenville cdp",
+        "McCutchenville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "McCutchenville",
+      "reason": "missing_entry",
+      "region": "usa_ohio",
+      "sample_years": [
+        1890,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.33414,
+        -85.87029
+      ],
+      "country": "Tennessee",
+      "earliest_year": 1898,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pelham-Tennessee",
+      "known_aliases": [
+        "Pelham",
+        "pelham",
+        "pelham cdp",
+        "Pelham CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Pelham",
+      "reason": "missing_entry",
+      "region": "usa_tennessee",
+      "sample_years": [
+        1898,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        29.66287,
+        -94.68809
+      ],
+      "country": "Texas",
+      "earliest_year": 1858,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Oak Island-Texas",
+      "known_aliases": [
+        "Oak Island",
+        "oak island",
+        "oak island cdp",
+        "Oak Island CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Oak Island",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1858,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.55465,
+        -94.25996
+      ],
+      "country": "Iowa",
+      "earliest_year": 1904,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Diamondhead Lake-Iowa",
+      "known_aliases": [
+        "Diamondhead Lake",
+        "diamondhead lake",
+        "diamondhead lake cdp",
+        "Diamondhead Lake CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Diamondhead Lake",
+      "reason": "missing_entry",
+      "region": "usa_iowa",
+      "sample_years": [
+        1904,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.29016,
+        -68.29085
+      ],
+      "country": "Maine",
+      "earliest_year": 1899,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Northeast Harbor-Maine",
+      "known_aliases": [
+        "Northeast Harbor",
+        "northeast harbor",
+        "northeast harbor cdp",
+        "Northeast Harbor CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Northeast Harbor",
+      "reason": "missing_entry",
+      "region": "usa_maine",
+      "sample_years": [
+        1899,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.1109,
+        -80.17103
+      ],
+      "country": "South Carolina",
+      "earliest_year": 1925,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Elliott-South Carolina",
+      "known_aliases": [
+        "Elliott",
+        "elliott",
+        "elliott cdp",
+        "Elliott CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Elliott",
+      "reason": "missing_entry",
+      "region": "usa_south_carolina",
+      "sample_years": [
+        1925,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.97912,
+        -86.13011
+      ],
+      "country": "Indiana",
+      "earliest_year": 1956,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Freetown-Indiana",
+      "known_aliases": [
+        "Freetown",
+        "freetown",
+        "freetown cdp",
+        "Freetown CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Freetown",
+      "reason": "missing_entry",
+      "region": "usa_indiana",
+      "sample_years": [
+        1956,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.03093,
+        -74.70047
+      ],
+      "country": "New Jersey",
+      "earliest_year": 1887,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Jobstown-New Jersey",
+      "known_aliases": [
+        "Jobstown",
+        "jobstown",
+        "jobstown cdp",
+        "Jobstown CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Jobstown",
+      "reason": "missing_entry",
+      "region": "usa_new_jersey",
+      "sample_years": [
+        1887,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.41283,
+        -78.79766
+      ],
+      "country": "Virginia",
+      "earliest_year": 1872,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Keezletown-Virginia",
+      "known_aliases": [
+        "Keezletown",
+        "keezletown",
+        "keezletown cdp",
+        "Keezletown CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Keezletown",
+      "reason": "missing_entry",
+      "region": "usa_virginia",
+      "sample_years": [
+        1872,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

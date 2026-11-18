@@ -70,6 +70,19 @@ PLOT_CALLS_WITH_LABEL_KW = {
   "step",
 }
 
+MASK_SOURCE_RE = re.compile(r"(?:_areal_mask\.png|_domain_mask\.png|[\"']mask_file[\"']|[\"']mask_path[\"'])")
+
+RASTER_SAFE_VAR_RE = re.compile(r"(?:krig|velk|pop_|_pop\b|f32|heatmap|\bmat\b|sub_[kp])", re.IGNORECASE)
+
+CALLOUT_GUARD_IDENTIFIERS = (
+  "verify_panel_bounds_and_overlaps",
+  "verify_zero_text_overlaps",
+  "place_inbounds_callouts",
+  "place_bbox_callouts",
+  "place_callout_in_bounds",
+  "place_callout",
+)
+
 RAW_GREEK_PARAM_RE = re.compile(
   r"\b(?:nu|tau_?[0-9]*|sigma_?[0-9]*|gamma|alpha|beta|lambda|kappa|rho|theta|chi|mu)\s*(?:=|[<>~])"
   r"|\b(?:tau1|tau2|sigma2)\b"
@@ -97,6 +110,137 @@ TECHNOBABBLE_TITLE_RE = re.compile(
 UNESCAPED_DOLLAR_RE = re.compile(r"(?<!\\)\$")
 US_SHORT_DECIMAL_RE = re.compile(r"(?<!\d)\d+\.\d{1,2}(?!\d)")
 BARE_COMMA_DECIMAL_RE = re.compile(r"\d,\d")
+SCI_FORMAT_SPEC_RE = re.compile(r"^[+\-<>^= 0-9.,_#]*[eE]$")
+
+
+def audit_log_scope_calls (arg0_scope_nodes, arg1_source, arg2_label, arg3_file_has_lognorm, arg4_errors):
+  """Audits a module-level or function-level scope for unformatted log axes, LogNorm colorbars and sci ticks."""
+  calls = []
+  for root_node in arg0_scope_nodes:
+    for node in ast.walk(root_node):
+      if isinstance(node, ast.Call):
+        calls.append(node)
+
+  if not calls:
+    return
+
+  formatted_x = set()
+  formatted_y = set()
+  formatted_cbars = set()
+  has_global_log_fmt = False
+  log_axis_calls = []
+  colorbar_calls = []
+
+  def _target_root (arg0_call_node):
+    if isinstance(arg0_call_node.func, ast.Attribute):
+      raw = (ast.get_source_segment(arg1_source, arg0_call_node.func.value) or "").strip()
+      for suffix in (".xaxis", ".yaxis"):
+        if raw.endswith(suffix):
+          raw = raw[: -len(suffix)].strip()
+      return raw or "__plt__"
+    return "__plt__"
+
+  for cnode in calls:
+    fn_name = get_attr_name(cnode.func)
+    t_root = _target_root(cnode)
+    if fn_name in {"apply_human_log_ticks", "apply_plain_log_cbar"} and cnode.args:
+      ax_ref = (ast.get_source_segment(arg1_source, cnode.args[0]) or "").strip()
+      axes_mode = "both"
+      if len(cnode.args) >= 2 and fn_name == "apply_human_log_ticks":
+        mode_val = extract_ast_text(cnode.args[1])
+        if mode_val:
+          axes_mode = mode_val.lower()
+      for kw in cnode.keywords:
+        if kw.arg == "arg1_axes" or kw.arg == "axes":
+          mode_val = extract_ast_text(kw.value)
+          if mode_val:
+            axes_mode = mode_val.lower()
+      if ax_ref:
+        if axes_mode in {"x", "both"}:
+          formatted_x.add(ax_ref)
+        if axes_mode in {"y", "both"}:
+          formatted_y.add(ax_ref)
+        formatted_cbars.add(ax_ref)
+        if ax_ref.endswith("gca()"):
+          has_global_log_fmt = True
+    elif fn_name == "euro_log_formatter":
+      has_global_log_fmt = True
+    elif fn_name == "set_major_formatter" and isinstance(cnode.func, ast.Attribute):
+      val_src = (ast.get_source_segment(arg1_source, cnode.func.value) or "").strip()
+      if val_src.endswith(".xaxis") or val_src == "xaxis":
+        formatted_x.add(t_root)
+      elif val_src.endswith(".yaxis") or val_src == "yaxis":
+        formatted_y.add(t_root)
+        formatted_cbars.add(t_root)
+      else:
+        formatted_x.add(t_root)
+        formatted_y.add(t_root)
+    elif fn_name in {"set_xticklabels", "xticklabels"}:
+      formatted_x.add(t_root)
+    elif fn_name in {"set_yticklabels", "yticklabels"}:
+      formatted_y.add(t_root)
+    elif fn_name == "set_ticklabels":
+      formatted_cbars.add(t_root)
+
+    if fn_name in {"loglog", "semilogx", "semilogy"}:
+      log_axis_calls.append((cnode.lineno, fn_name, t_root))
+    elif fn_name in {"set_xscale", "set_yscale"} and cnode.args:
+      s_val = extract_ast_text(cnode.args[0])
+      if s_val and "log" in s_val.lower():
+        log_axis_calls.append((cnode.lineno, fn_name, t_root))
+    elif fn_name == "ticklabel_format":
+      for kw in cnode.keywords:
+        if kw.arg == "style":
+          st_val = extract_ast_text(kw.value)
+          if st_val and st_val.lower() in {"sci", "scientific"}:
+            arg4_errors.append(
+              f"[{arg2_label}] line {cnode.lineno}: `ticklabel_format(style='{st_val}')` enables scientific notation on counts/densities; use plain European numerals (`apply_human_log_ticks` / `euro_tick_formatter`)."
+            )
+    elif fn_name == "colorbar" and arg3_file_has_lognorm:
+      has_fmt_kw = any(kw.arg == "format" for kw in cnode.keywords)
+      if not has_fmt_kw:
+        assigned_name = None
+        for root_node in arg0_scope_nodes:
+          for a_node in ast.walk(root_node):
+            if isinstance(a_node, ast.Assign) and a_node.value is cnode and a_node.targets:
+              assigned_name = (ast.get_source_segment(arg1_source, a_node.targets[0]) or "").strip()
+              break
+          if assigned_name:
+            break
+        colorbar_calls.append((cnode.lineno, assigned_name))
+
+  for line_no, fn_name, t_root in log_axis_calls:
+    if fn_name == "loglog":
+      need_x = t_root not in formatted_x and not (t_root == "__plt__" and has_global_log_fmt)
+      need_y = t_root not in formatted_y and not (t_root == "__plt__" and has_global_log_fmt)
+      if need_x or need_y:
+        arg4_errors.append(
+          f"[{arg2_label}] line {line_no}: unformatted `{t_root}.loglog()` defaults to `10^k` scientific notation on counts/densities; apply `apply_human_log_ticks()` or `euro_log_formatter()`."
+        )
+    elif fn_name in {"semilogx", "set_xscale"}:
+      if t_root not in formatted_x and not (t_root == "__plt__" and has_global_log_fmt):
+        arg4_errors.append(
+          f"[{arg2_label}] line {line_no}: unformatted log x-axis `{t_root}.{fn_name}()` defaults to `10^k` scientific notation; apply `apply_human_log_ticks(..., 'x')` or `euro_log_formatter()`."
+        )
+    elif fn_name in {"semilogy", "set_yscale"}:
+      if t_root not in formatted_y and not (t_root == "__plt__" and has_global_log_fmt):
+        arg4_errors.append(
+          f"[{arg2_label}] line {line_no}: unformatted log y-axis `{t_root}.{fn_name}()` defaults to `10^k` scientific notation; apply `apply_human_log_ticks(..., 'y')` or `euro_log_formatter()`."
+        )
+
+  for line_no, cb_name in colorbar_calls:
+    has_cb_fmt = has_global_log_fmt or (
+      cb_name is not None and (
+        cb_name in formatted_cbars
+        or f"{cb_name}.ax" in formatted_cbars
+        or f"{cb_name}.ax" in formatted_y
+        or f"{cb_name}.ax" in formatted_x
+      )
+    )
+    if not has_cb_fmt:
+      arg4_errors.append(
+        f"[{arg2_label}] line {line_no}: `colorbar()` paired with `LogNorm` lacks plain tick formatting (`set_ticklabels` / `format=euro_log_formatter()`), risking `10^k` scientific notation."
+      )
 
 
 def audit_math_string_literal (arg0_text, arg1_label, arg2_line, arg3_is_title, arg4_errors, arg5_warnings):
@@ -175,12 +319,63 @@ def audit_python_source (arg0_source, arg1_label):
   )
   has_subplot_creation = False
   has_fractional_axis_lim = False
+  has_geo_labels = bool(re.search(r"\b(?:Longitude|Latitude)\b", arg0_source))
+  has_layout_guard = any(g in arg0_source for g in CALLOUT_GUARD_IDENTIFIERS)
+  text_annotate_count = 0
+  is_stage_a2_overlay = os.path.basename(arg1_label).lower() == "audit_areal_masks.py"
+
+  # Collect variables originating from categorical mask PNGs (`*_areal_mask.png`, `*_domain_mask.png`)
+  mask_vars = set()
+  for node in ast.walk(tree):
+    if isinstance(node, ast.Assign):
+      rhs_src = ast.get_source_segment(arg0_source, node.value) or ""
+      if MASK_SOURCE_RE.search(rhs_src):
+        for tgt in node.targets:
+          if isinstance(tgt, ast.Name):
+            mask_vars.add(tgt.id)
+  for _hop in range(3):
+    for node in ast.walk(tree):
+      if isinstance(node, ast.Assign):
+        rhs_src = ast.get_source_segment(arg0_source, node.value) or ""
+        if any(t in rhs_src for t in ("unary_union", "PatchCollection", "shape(", "geojson", "adm1", "subregions")):
+          continue
+        rhs_names = {n.id for n in ast.walk(node.value) if isinstance(n, ast.Name)}
+        if rhs_names & mask_vars:
+          for tgt in node.targets:
+            if isinstance(tgt, ast.Name) and not RASTER_SAFE_VAR_RE.search(tgt.id):
+              mask_vars.add(tgt.id)
 
   #Track whether explicit style reset or custom spine stripping appears in AST
   for node in ast.walk(tree):
     if isinstance(node, ast.Call):
       fn_name = get_attr_name(node.func)
       base_chain = get_full_call_chain(node.func)
+
+      if fn_name in {"text", "annotate"}:
+        text_annotate_count += 1
+
+      if fn_name == "set_aspect" and has_geo_labels and node.args:
+        asp_arg = extract_ast_text(node.args[0])
+        if asp_arg == "auto":
+          errors.append(
+            f"[{arg1_label}] line {node.lineno}: `set_aspect('auto')` on geographic axes warps coastlines; use Equal-Area projection with `set_aspect('equal')`."
+          )
+
+      if fn_name == "imshow" and node.args:
+        kw_map = {kw.arg: kw.value for kw in node.keywords if kw.arg}
+        has_extent = "extent" in kw_map
+        asp_kw = extract_ast_text(kw_map["aspect"]) if "aspect" in kw_map else None
+        if has_extent and asp_kw == "auto":
+          errors.append(
+            f"[{arg1_label}] line {node.lineno}: spatial `imshow(..., extent=..., aspect='auto')` warps map geometry; use `ax.set_aspect('equal')`."
+          )
+        if not is_stage_a2_overlay:
+          first_src = ast.get_source_segment(arg0_source, node.args[0]) or ""
+          first_names = {n.id for n in ast.walk(node.args[0]) if isinstance(n, ast.Name)}
+          if (first_names & mask_vars) or re.search(r"(?:areal_mask|domain_mask)", first_src, re.IGNORECASE):
+            errors.append(
+              f"[{arg1_label}] line {node.lineno}: pixelated categorical mask `{first_src}` rendered via `imshow()`; plot smooth vector GeoJSON PatchCollections (reserve `imshow()` for continuous kriging/`Velkscala` rasters or heatmaps)."
+            )
 
       if base_chain == "rcdefaults" or base_chain.endswith(".rcdefaults"):
         has_default_style_reset = True
@@ -228,9 +423,29 @@ def audit_python_source (arg0_source, arg1_label):
               f"[{arg1_label}] line {node.lineno}: forbidden custom font `{fval}`; keep Matplotlib default `DejaVu Sans` (`sans-serif`)."
             )
         if kw.arg == "label" and (fn_name in PLOT_CALLS_WITH_LABEL_KW or fn_name in MATH_TEXT_SINKS):
+          for jnode in ast.walk(kw.value):
+            if isinstance(jnode, ast.JoinedStr):
+              for part in jnode.values:
+                if isinstance(part, ast.FormattedValue) and part.format_spec is not None:
+                  spec_txt = (extract_ast_text(part.format_spec) or "").strip()
+                  if spec_txt and SCI_FORMAT_SPEC_RE.match(spec_txt):
+                    errors.append(
+                      f"[{arg1_label}] line {node.lineno}: scientific format spec `:{spec_txt}` forbidden in figure label; use plain European numerals."
+                    )
           ltxt = extract_ast_text(kw.value)
           if ltxt:
             audit_math_string_literal(ltxt, arg1_label, node.lineno, False, errors, warnings)
+
+      if fn_name == "FuncFormatter":
+        for jnode in ast.walk(node):
+          if isinstance(jnode, ast.JoinedStr):
+            for part in jnode.values:
+              if isinstance(part, ast.FormattedValue) and part.format_spec is not None:
+                spec_txt = (extract_ast_text(part.format_spec) or "").strip()
+                if spec_txt and SCI_FORMAT_SPEC_RE.match(spec_txt):
+                  errors.append(
+                    f"[{arg1_label}] line {node.lineno}: scientific format spec `:{spec_txt}` in FuncFormatter; use plain European ticks."
+                  )
 
       if fn_name == "rc" or base_chain.endswith("rcParams.update"):
         first_arg = extract_ast_text(node.args[0]) if node.args else ""
@@ -244,19 +459,33 @@ def audit_python_source (arg0_source, arg1_label):
                 )
 
       #Inspect positional string arguments to plot text sinks
-      if fn_name in MATH_TEXT_SINKS:
+      if fn_name in MATH_TEXT_SINKS or fn_name == "set_ticklabels":
         is_title_call = fn_name in {"suptitle", "set_title", "title"}
+        arg_nodes = []
         arg_texts = []
         if fn_name in {"text", "figtext"} and len(node.args) >= 3:
-          arg_texts.append(extract_ast_text(node.args[2]))
+          arg_nodes.append(node.args[2])
         elif fn_name == "annotate" and node.args:
-          arg_texts.append(extract_ast_text(node.args[0]))
+          arg_nodes.append(node.args[0])
         elif fn_name in {"set_title", "title", "suptitle", "set_xlabel", "xlabel", "set_ylabel", "ylabel", "set_label"} and node.args:
-          arg_texts.append(extract_ast_text(node.args[0]))
-        elif fn_name in {"set_xticklabels", "xticklabels", "set_yticklabels", "yticklabels"} and node.args:
+          arg_nodes.append(node.args[0])
+        elif fn_name in {"set_xticklabels", "xticklabels", "set_yticklabels", "yticklabels", "set_ticklabels"} and node.args:
           if isinstance(node.args[0], (ast.List, ast.Tuple)):
-            for elt in node.args[0].elts:
-              arg_texts.append(extract_ast_text(elt))
+            arg_nodes.extend(node.args[0].elts)
+          else:
+            arg_nodes.append(node.args[0])
+        for anode in arg_nodes:
+          for jnode in ast.walk(anode):
+            if isinstance(jnode, ast.JoinedStr):
+              for part in jnode.values:
+                if isinstance(part, ast.FormattedValue) and part.format_spec is not None:
+                  spec_txt = (extract_ast_text(part.format_spec) or "").strip()
+                  if spec_txt and SCI_FORMAT_SPEC_RE.match(spec_txt):
+                    errors.append(
+                      f"[{arg1_label}] line {node.lineno}: scientific format spec `:{spec_txt}` forbidden in figure label/tick; use plain European numerals."
+                    )
+          if fn_name in MATH_TEXT_SINKS:
+            arg_texts.append(extract_ast_text(anode))
         for txt in arg_texts:
           if txt:
             audit_math_string_literal(txt, arg1_label, node.lineno, is_title_call, errors, warnings)
@@ -305,6 +534,21 @@ def audit_python_source (arg0_source, arg1_label):
     warnings.append(
       f"[{arg1_label}] fractional [0, 1] axis limits set without European `FuncFormatter` / tick formatting (risks US `0.75` dots)."
     )
+  if text_annotate_count >= 4 and not has_layout_guard and not is_stage_a2_overlay and "render_and_audit_kriging_visuals.py" not in arg1_label:
+    warnings.append(
+      f"[{arg1_label}] places {text_annotate_count} text/annotate labels without calling `verify_panel_bounds_and_overlaps` / `place_inbounds_callouts`."
+    )
+
+  file_has_lognorm = bool(re.search(r"\b(?:LogNorm|SymLogNorm)\b", arg0_source))
+  top_scope_nodes = [
+    st for st in tree.body
+    if not isinstance(st, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef))
+  ]
+  if top_scope_nodes:
+    audit_log_scope_calls(top_scope_nodes, arg0_source, arg1_label, file_has_lognorm, errors)
+  for fn_node in ast.walk(tree):
+    if isinstance(fn_node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+      audit_log_scope_calls(fn_node.body, arg0_source, arg1_label, file_has_lognorm, errors)
 
   #Return statement
   return errors, warnings

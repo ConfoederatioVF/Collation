@@ -1,0 +1,963 @@
+{
+  "batch_index": 385,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        39.73333,
+        -77.25806
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1932,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cumberland (Adams County)-Pennsylvania",
+      "known_aliases": [
+        "Cumberland (Adams County)",
+        "cumberland",
+        "cumberland township",
+        "Cumberland Township"
+      ],
+      "latest_year": 2010,
+      "name": "Cumberland (Adams County)",
+      "reason": "missing_entry",
+      "region": "usa_maryland",
+      "sample_years": [
+        1932,
+        1960,
+        1990,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.86667,
+        -77.01639
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1865,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rutland-Pennsylvania",
+      "known_aliases": [
+        "Rutland",
+        "rutland",
+        "rutland township",
+        "Rutland Township"
+      ],
+      "latest_year": 2010,
+      "name": "Rutland",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1865,
+        1910,
+        1960,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.08333,
+        -76.94972
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1851,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Warrington (York County)-Pennsylvania",
+      "known_aliases": [
+        "Warrington (York County)",
+        "warrington",
+        "warrington township",
+        "Warrington Township"
+      ],
+      "latest_year": 2010,
+      "name": "Warrington (York County)",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1851,
+        1900,
+        1960,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.50833,
+        -75.45806
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1952,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lower Milford-Pennsylvania",
+      "known_aliases": [
+        "Lower Milford",
+        "lower milford",
+        "lower milford township",
+        "Lower Milford Township"
+      ],
+      "latest_year": 2010,
+      "name": "Lower Milford",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1952,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.62667,
+        -76.94972
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1880,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Upper Paxton-Pennsylvania",
+      "known_aliases": [
+        "Upper Paxton",
+        "upper paxton",
+        "upper paxton township",
+        "Upper Paxton Township"
+      ],
+      "latest_year": 2010,
+      "name": "Upper Paxton",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1880,
+        1920,
+        1970,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.45333,
+        -78.99556
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "East Wheatfield-Pennsylvania",
+      "known_aliases": [
+        "East Wheatfield",
+        "east wheatfield",
+        "east wheatfield township",
+        "East Wheatfield Township"
+      ],
+      "latest_year": 2010,
+      "name": "East Wheatfield",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1900,
+        1940,
+        1980,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.73333,
+        -75.98306
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1874,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "East Nottingham-Pennsylvania",
+      "known_aliases": [
+        "East Nottingham",
+        "east nottingham",
+        "east nottingham township",
+        "East Nottingham Township"
+      ],
+      "latest_year": 2010,
+      "name": "East Nottingham",
+      "reason": "missing_entry",
+      "region": "usa_maryland",
+      "sample_years": [
+        1874,
+        1920,
+        1970,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.08333,
+        -75.83306
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1867,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Dennison-Pennsylvania",
+      "known_aliases": [
+        "Dennison",
+        "dennison",
+        "dennison township",
+        "Dennison Township"
+      ],
+      "latest_year": 2010,
+      "name": "Dennison",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1867,
+        1910,
+        1960,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.56667,
+        -77.78306
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1866,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Menno-Pennsylvania",
+      "known_aliases": [
+        "Menno",
+        "menno",
+        "menno township",
+        "Menno Township"
+      ],
+      "latest_year": 2010,
+      "name": "Menno",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1866,
+        1910,
+        1960,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.50444,
+        -76.51639
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1909,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Swatara-Pennsylvania",
+      "known_aliases": [
+        "Swatara",
+        "swatara",
+        "swatara township",
+        "Swatara Township"
+      ],
+      "latest_year": 2010,
+      "name": "Swatara",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1909,
+        1940,
+        1980,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.85833,
+        -76.16639
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1914,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "East Drumore-Pennsylvania",
+      "known_aliases": [
+        "East Drumore",
+        "east drumore",
+        "east drumore township",
+        "East Drumore Township"
+      ],
+      "latest_year": 2010,
+      "name": "East Drumore",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1914,
+        1940,
+        1980,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.33333,
+        -76.44972
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1891,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Davidson-Pennsylvania",
+      "known_aliases": [
+        "Davidson",
+        "davidson",
+        "davidson township",
+        "Davidson Township"
+      ],
+      "latest_year": 2010,
+      "name": "Davidson",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1891,
+        1930,
+        1970,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.87472,
+        -76.25139
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1895,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Providence-Pennsylvania",
+      "known_aliases": [
+        "Providence",
+        "providence",
+        "providence township",
+        "Providence Township"
+      ],
+      "latest_year": 2010,
+      "name": "Providence",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1895,
+        1930,
+        1970,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.8,
+        -76.34972
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1866,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lower Chanceford-Pennsylvania",
+      "known_aliases": [
+        "Lower Chanceford",
+        "lower chanceford",
+        "lower chanceford township",
+        "Lower Chanceford Township"
+      ],
+      "latest_year": 2010,
+      "name": "Lower Chanceford",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1866,
+        1910,
+        1960,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.92583,
+        -79.73361
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1943,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Donegal (Butler County)-Pennsylvania",
+      "known_aliases": [
+        "Donegal (Butler County)",
+        "donegal",
+        "donegal township",
+        "Donegal Township"
+      ],
+      "latest_year": 2010,
+      "name": "Donegal (Butler County)",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1943,
+        1950,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.62667,
+        -77.75806
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1968,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Union (Mifflin County)-Pennsylvania",
+      "known_aliases": [
+        "Union (Mifflin County)",
+        "union",
+        "union township",
+        "Union Township"
+      ],
+      "latest_year": 2010,
+      "name": "Union (Mifflin County)",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1968,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.95,
+        -79.76639
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1957,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Menallen-Pennsylvania",
+      "known_aliases": [
+        "Menallen",
+        "menallen",
+        "menallen township",
+        "Menallen Township"
+      ],
+      "latest_year": 2010,
+      "name": "Menallen",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1957,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.18583,
+        -79.16389
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1886,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Union (Jefferson County)-Pennsylvania",
+      "known_aliases": [
+        "Union (Jefferson County)",
+        "union",
+        "union township",
+        "Union Township"
+      ],
+      "latest_year": 2010,
+      "name": "Union (Jefferson County)",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1886,
+        1920,
+        1970,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.74972,
+        -75.34139
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1967,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bushkill-Pennsylvania",
+      "known_aliases": [
+        "Bushkill",
+        "bushkill",
+        "bushkill township",
+        "Bushkill Township"
+      ],
+      "latest_year": 2010,
+      "name": "Bushkill",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1967,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.96667,
+        -79.50139
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1858,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Freehold-Pennsylvania",
+      "known_aliases": [
+        "Freehold",
+        "freehold",
+        "freehold township",
+        "Freehold Township"
+      ],
+      "latest_year": 2010,
+      "name": "Freehold",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1858,
+        1900,
+        1960,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.43333,
+        -76.63306
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1902,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "East Hanover-Pennsylvania",
+      "known_aliases": [
+        "East Hanover",
+        "east hanover",
+        "east hanover township",
+        "East Hanover Township"
+      ],
+      "latest_year": 2010,
+      "name": "East Hanover",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1902,
+        1940,
+        1980,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.08333,
+        -77.66639
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1905,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Liberty (Clinton County)-Pennsylvania",
+      "known_aliases": [
+        "Liberty (Clinton County)",
+        "liberty",
+        "liberty township",
+        "Liberty Township"
+      ],
+      "latest_year": 2010,
+      "name": "Liberty (Clinton County)",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1905,
+        1940,
+        1980,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.13333,
+        -79.59972
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1942,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Perry (Clarion County)-Pennsylvania",
+      "known_aliases": [
+        "Perry (Clarion County)",
+        "perry",
+        "perry township",
+        "Perry Township"
+      ],
+      "latest_year": 2010,
+      "name": "Perry (Clarion County)",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1942,
+        1950,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.95333,
+        -78.63194
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1934,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Harrison (Bedford County)-Pennsylvania",
+      "known_aliases": [
+        "Harrison (Bedford County)",
+        "harrison",
+        "harrison township",
+        "Harrison Township"
+      ],
+      "latest_year": 2010,
+      "name": "Harrison (Bedford County)",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1934,
+        1960,
+        1990,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.24167,
+        -77.49139
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1974,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Jackson (Cumberland County)-Pennsylvania",
+      "known_aliases": [
+        "Jackson (Cumberland County)",
+        "jackson",
+        "jackson township",
+        "Jackson Township"
+      ],
+      "latest_year": 2010,
+      "name": "Jackson (Cumberland County)",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1974,
+        1980,
+        1990,
+        2000,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.51667,
+        -75.76639
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "West Abington-Pennsylvania",
+      "known_aliases": [
+        "West Abington",
+        "west abington",
+        "west abington township",
+        "West Abington Township"
+      ],
+      "latest_year": 2010,
+      "name": "West Abington",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.7,
+        -75.69972
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1878,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lenox-Pennsylvania",
+      "known_aliases": [
+        "Lenox",
+        "lenox",
+        "lenox township",
+        "Lenox Township"
+      ],
+      "latest_year": 2010,
+      "name": "Lenox",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1878,
+        1920,
+        1970,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.38333,
+        -74.99694
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1703,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Solebury-Pennsylvania",
+      "known_aliases": [
+        "Solebury",
+        "solebury",
+        "solebury township",
+        "upper bucks township",
+        "Solebury Township",
+        "Upper Bucks Township"
+      ],
+      "latest_year": 2010,
+      "name": "Solebury",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1703,
+        1920,
+        1970,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.83333,
+        -75.74944
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1943,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mahoning-Pennsylvania",
+      "known_aliases": [
+        "Mahoning",
+        "mahoning",
+        "mahoning township",
+        "Mahoning Township"
+      ],
+      "latest_year": 2010,
+      "name": "Mahoning",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1943,
+        1950,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.88944,
+        -78.0225
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1911,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ayr-Pennsylvania",
+      "known_aliases": [
+        "Ayr",
+        "ayr",
+        "ayr township",
+        "Ayr Township"
+      ],
+      "latest_year": 2010,
+      "name": "Ayr",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1911,
+        1940,
+        1980,
+        2010
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

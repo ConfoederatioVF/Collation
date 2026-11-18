@@ -1,0 +1,965 @@
+{
+  "batch_index": 61,
+  "project": "CENTAUR",
+  "count": 30,
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        41.1815,
+        -95.921
+      ],
+      "country": "Nebraska",
+      "earliest_year": 1100,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fontenelle Forest Earthlodge Town-Nebraska",
+      "known_aliases": [
+        "Fontenelle Forest Earthlodge Town",
+        "fontenelle forest earthlodge town",
+        "25sy1",
+        "childs point village",
+        "25SY1",
+        "Childs Point Village"
+      ],
+      "latest_year": 1250,
+      "name": "Fontenelle Forest Earthlodge Town",
+      "reason": "missing_entry",
+      "region": "np_lower_missouri_platte_kansas",
+      "sample_years": [
+        1100,
+        1250
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.2531,
+        -101.2781
+      ],
+      "country": "North Dakota",
+      "earliest_year": 1500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fort Clark-North Dakota",
+      "known_aliases": [
+        "Fort Clark",
+        "fort clark",
+        "mih-tutta-hang-kush",
+        "nuptadi-ruhptare",
+        "32me2",
+        "Mih-tutta-hang-kush",
+        "Nuptadi-Ruhptare",
+        "32ME2"
+      ],
+      "latest_year": 1600,
+      "name": "Fort Clark",
+      "reason": "missing_entry",
+      "region": "np_middle_missouri_dakotas",
+      "sample_years": [
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.591,
+        -100.6215
+      ],
+      "country": "South Dakota",
+      "earliest_year": 1480,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fort Sully Earthlodge Village-South Dakota",
+      "known_aliases": [
+        "Fort Sully Earthlodge Village",
+        "fort sully earthlodge village",
+        "39sl4",
+        "sully village site",
+        "sully",
+        "sully county arikara metropolis",
+        "39SL4",
+        "Sully Village Site",
+        "Sully County Arikara Metropolis"
+      ],
+      "latest_year": 1600,
+      "name": "Fort Sully Earthlodge Village",
+      "reason": "missing_entry",
+      "region": "np_middle_missouri_dakotas",
+      "sample_years": [
+        1480,
+        1500,
+        1550,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.591,
+        -100.6415
+      ],
+      "country": "North Dakota",
+      "earliest_year": 1300,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Glencoe Earthlodge Village-North Dakota",
+      "known_aliases": [
+        "Glencoe Earthlodge Village",
+        "glencoe earthlodge village",
+        "32em12",
+        "glencoe mandan site",
+        "32EM12",
+        "Glencoe Mandan Site"
+      ],
+      "latest_year": 1450,
+      "name": "Glencoe Earthlodge Village",
+      "reason": "missing_entry",
+      "region": "np_middle_missouri_dakotas",
+      "sample_years": [
+        1300,
+        1450
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.451,
+        -98.3015
+      ],
+      "country": "North Dakota",
+      "earliest_year": 1300,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Grand Rapids James Village-North Dakota",
+      "known_aliases": [
+        "Grand Rapids James Village",
+        "grand rapids james village",
+        "32lm22",
+        "grand rapids habitation",
+        "32LM22",
+        "Grand Rapids Habitation"
+      ],
+      "latest_year": 1500,
+      "name": "Grand Rapids James Village",
+      "reason": "missing_entry",
+      "region": "np_middle_missouri_dakotas",
+      "sample_years": [
+        1300,
+        1500
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.2815,
+        -93.151
+      ],
+      "country": "Missouri",
+      "earliest_year": 1350,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Guthrey Oneota Village-Missouri",
+      "known_aliases": [
+        "Guthrey Oneota Village",
+        "guthrey oneota village",
+        "23sa131",
+        "guthrey habitation complex",
+        "23SA131",
+        "Guthrey Habitation Complex"
+      ],
+      "latest_year": 1500,
+      "name": "Guthrey Oneota Village",
+      "reason": "missing_entry",
+      "region": "np_lower_missouri_platte_kansas",
+      "sample_years": [
+        1350,
+        1500
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.5833,
+        -107.75
+      ],
+      "country": "Wyoming",
+      "earliest_year": -8700,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hanson-Wyoming",
+      "known_aliases": [
+        "Hanson",
+        "hanson",
+        "48bh329",
+        "bighorn folsom camp",
+        "48BH329",
+        "Bighorn Folsom Camp"
+      ],
+      "latest_year": -8300,
+      "name": "Hanson",
+      "reason": "missing_entry",
+      "region": "np_wyoming_bighorn_powder_plat",
+      "sample_years": [
+        -8700,
+        -8300
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.301,
+        -100.5815
+      ],
+      "country": "North Dakota",
+      "earliest_year": 1200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Havens Earthlodge Village-North Dakota",
+      "known_aliases": [
+        "Havens Earthlodge Village",
+        "havens earthlodge village",
+        "32em1",
+        "havens middle missouri town",
+        "32EM1",
+        "Havens Middle Missouri Town"
+      ],
+      "latest_year": 1350,
+      "name": "Havens Earthlodge Village",
+      "reason": "missing_entry",
+      "region": "np_middle_missouri_dakotas",
+      "sample_years": [
+        1200,
+        1350
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.5015,
+        -100.501
+      ],
+      "country": "South Dakota",
+      "earliest_year": 1450,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Heath Earthlodge Village-South Dakota",
+      "known_aliases": [
+        "Heath Earthlodge Village",
+        "heath earthlodge village",
+        "39st15",
+        "heath extended coalescent site",
+        "39ST15",
+        "Heath Extended Coalescent Site"
+      ],
+      "latest_year": 1550,
+      "name": "Heath Earthlodge Village",
+      "reason": "missing_entry",
+      "region": "np_middle_missouri_dakotas",
+      "sample_years": [
+        1450,
+        1550
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.7215,
+        -100.411
+      ],
+      "country": "South Dakota",
+      "earliest_year": 1100,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Helb Earthlodge Village-South Dakota",
+      "known_aliases": [
+        "Helb Earthlodge Village",
+        "helb earthlodge village",
+        "39ca208",
+        "helb extended middle missouri town",
+        "39CA208",
+        "Helb Extended Middle Missouri Town"
+      ],
+      "latest_year": 1250,
+      "name": "Helb Earthlodge Village",
+      "reason": "missing_entry",
+      "region": "np_middle_missouri_dakotas",
+      "sample_years": [
+        1100,
+        1250
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.885,
+        -100.355
+      ],
+      "country": "South Dakota",
+      "earliest_year": 1050,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Helb-South Dakota",
+      "known_aliases": [
+        "Helb",
+        "helb",
+        "39ca208",
+        "campbell extended middle missouri",
+        "39CA208",
+        "Campbell Extended Middle Missouri"
+      ],
+      "latest_year": 1400,
+      "name": "Helb",
+      "reason": "missing_entry",
+      "region": "np_middle_missouri_dakotas",
+      "sample_years": [
+        1050,
+        1200,
+        1400
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.55,
+        -106.15
+      ],
+      "country": "Montana",
+      "earliest_year": 1100,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Highwalker-Montana",
+      "known_aliases": [
+        "Highwalker",
+        "highwalker",
+        "24pr639",
+        "custer forest bison processing",
+        "24PR639",
+        "Custer Forest Bison Processing"
+      ],
+      "latest_year": 1500,
+      "name": "Highwalker",
+      "reason": "missing_entry",
+      "region": "np_wyoming_bighorn_powder_plat",
+      "sample_years": [
+        1100,
+        1350,
+        1500
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.061,
+        -98.4215
+      ],
+      "country": "Kansas",
+      "earliest_year": 1500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hill Pawnee Earthlodge Town-Kansas",
+      "known_aliases": [
+        "Hill Pawnee Earthlodge Town",
+        "hill pawnee earthlodge town",
+        "25wt5",
+        "pike-pawnee village site",
+        "25WT5",
+        "Pike-Pawnee Village Site"
+      ],
+      "latest_year": 1500,
+      "name": "Hill Pawnee Earthlodge Town",
+      "reason": "missing_entry",
+      "region": "np_lower_missouri_platte_kansas",
+      "sample_years": [
+        1500
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.9501,
+        -98.7103
+      ],
+      "country": "North Dakota",
+      "earliest_year": 1400,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hintz Earthlodge Village-North Dakota",
+      "known_aliases": [
+        "Hintz Earthlodge Village",
+        "hintz earthlodge village",
+        "32sn34",
+        "james river coalescent village",
+        "32SN34",
+        "James River Coalescent Village"
+      ],
+      "latest_year": 1500,
+      "name": "Hintz Earthlodge Village",
+      "reason": "missing_entry",
+      "region": "np_middle_missouri_dakotas",
+      "sample_years": [
+        1400,
+        1500
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.201,
+        -98.7515
+      ],
+      "country": "South Dakota",
+      "earliest_year": 1200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hitchell Earthlodge Village-South Dakota",
+      "known_aliases": [
+        "Hitchell Earthlodge Village",
+        "hitchell earthlodge village",
+        "39ch45",
+        "hitchell multi-component town",
+        "39CH45",
+        "Hitchell Multi-Component Town"
+      ],
+      "latest_year": 1400,
+      "name": "Hitchell Earthlodge Village",
+      "reason": "missing_entry",
+      "region": "np_middle_missouri_dakotas",
+      "sample_years": [
+        1200,
+        1400
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.095,
+        -100.275
+      ],
+      "country": "South Dakota",
+      "earliest_year": 1480,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hosterman-South Dakota",
+      "known_aliases": [
+        "Hosterman",
+        "hosterman",
+        "39po7",
+        "whitlocks crossing stockade",
+        "39PO7",
+        "Whitlocks Crossing Stockade"
+      ],
+      "latest_year": 1600,
+      "name": "Hosterman",
+      "reason": "missing_entry",
+      "region": "np_middle_missouri_dakotas",
+      "sample_years": [
+        1480,
+        1550,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.055,
+        -95.775
+      ],
+      "country": "Iowa",
+      "earliest_year": 1080,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "House III (Glenwood)-Iowa",
+      "known_aliases": [
+        "House III (Glenwood)",
+        "house iii",
+        "13ml12",
+        "mills pony creek earthlodge",
+        "13ML12",
+        "Mills Pony Creek Earthlodge"
+      ],
+      "latest_year": 1330,
+      "name": "House III (Glenwood)",
+      "reason": "missing_entry",
+      "region": "np_lower_missouri_platte_kansas",
+      "sample_years": [
+        1080,
+        1220,
+        1330
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.8659,
+        -98.5024
+      ],
+      "country": "Nebraska",
+      "earliest_year": 1080,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hulme-Nebraska",
+      "known_aliases": [
+        "Hulme",
+        "hulme",
+        "25hl28",
+        "hall county itskari",
+        "25HL28",
+        "Hall County Itskari"
+      ],
+      "latest_year": 1250,
+      "name": "Hulme",
+      "reason": "missing_entry",
+      "region": "np_lower_missouri_platte_kansas",
+      "sample_years": [
+        1080,
+        1150,
+        1250
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.335,
+        -111.585
+      ],
+      "country": "Montana",
+      "earliest_year": -9000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Indian Creek-Montana",
+      "known_aliases": [
+        "Indian Creek",
+        "indian creek",
+        "24bw626",
+        "elkhorn mountains stratified",
+        "24BW626",
+        "Elkhorn Mountains Stratified"
+      ],
+      "latest_year": -200,
+      "name": "Indian Creek",
+      "reason": "missing_entry",
+      "region": "np_upper_missouri_montana",
+      "sample_years": [
+        -9000,
+        -6500,
+        -200
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.775,
+        -100.515
+      ],
+      "country": "South Dakota",
+      "earliest_year": 1200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Jake White Bull-South Dakota",
+      "known_aliases": [
+        "Jake White Bull",
+        "jake white bull",
+        "39co6",
+        "corson middle missouri",
+        "39CO6",
+        "Corson Middle Missouri"
+      ],
+      "latest_year": 1450,
+      "name": "Jake White Bull",
+      "reason": "missing_entry",
+      "region": "np_middle_missouri_dakotas",
+      "sample_years": [
+        1200,
+        1350,
+        1450
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.765,
+        -103.915
+      ],
+      "country": "South Dakota",
+      "earliest_year": -8800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Jim Pitts-South Dakota",
+      "known_aliases": [
+        "Jim Pitts",
+        "jim pitts",
+        "39cu1142",
+        "black hills paleoindian",
+        "39CU1142",
+        "Black Hills Paleoindian"
+      ],
+      "latest_year": -4000,
+      "name": "Jim Pitts",
+      "reason": "missing_entry",
+      "region": "np_middle_missouri_dakotas",
+      "sample_years": [
+        -8800,
+        -7600,
+        -4000
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.295,
+        -107.88
+      ],
+      "country": "Montana",
+      "earliest_year": -1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Johnson Bison Kill-Montana",
+      "known_aliases": [
+        "Johnson Bison Kill",
+        "johnson bison kill",
+        "24ph8",
+        "phillips county milk river",
+        "24PH8",
+        "Phillips County Milk River"
+      ],
+      "latest_year": 1200,
+      "name": "Johnson Bison Kill",
+      "reason": "missing_entry",
+      "region": "np_upper_missouri_montana",
+      "sample_years": [
+        -1900,
+        400,
+        1200
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.865,
+        -100.345
+      ],
+      "country": "South Dakota",
+      "earliest_year": 1050,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Jones Village-South Dakota",
+      "known_aliases": [
+        "Jones Village",
+        "jones village",
+        "39ca3",
+        "campbell initial middle missouri",
+        "39CA3",
+        "Campbell Initial Middle Missouri"
+      ],
+      "latest_year": 1320,
+      "name": "Jones Village",
+      "reason": "missing_entry",
+      "region": "np_middle_missouri_dakotas",
+      "sample_years": [
+        1050,
+        1180,
+        1320
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.195,
+        -99.965
+      ],
+      "country": "South Dakota",
+      "earliest_year": 1200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ketchen-South Dakota",
+      "known_aliases": [
+        "Ketchen",
+        "ketchen",
+        "39st223",
+        "big bend extended middle missouri",
+        "39ST223",
+        "Big Bend Extended Middle Missouri"
+      ],
+      "latest_year": 1480,
+      "name": "Ketchen",
+      "reason": "missing_entry",
+      "region": "np_middle_missouri_dakotas",
+      "sample_years": [
+        1200,
+        1350,
+        1480
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.601,
+        -96.5215
+      ],
+      "country": "South Dakota",
+      "earliest_year": 1020,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kimball Mill Creek Village-South Dakota",
+      "known_aliases": [
+        "Kimball Mill Creek Village",
+        "kimball mill creek village",
+        "13pm4",
+        "kimball fortified town",
+        "kimball",
+        "big sioux mill creek",
+        "13PM4",
+        "Kimball Fortified Town",
+        "Big Sioux Mill Creek"
+      ],
+      "latest_year": 1240,
+      "name": "Kimball Mill Creek Village",
+      "reason": "missing_entry",
+      "region": "np_middle_missouri_dakotas",
+      "sample_years": [
+        1020,
+        1100,
+        1120,
+        1200,
+        1240
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.35,
+        -107.65
+      ],
+      "country": "Montana",
+      "earliest_year": -2300,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "King-Montana",
+      "known_aliases": [
+        "King",
+        "king",
+        "24ph2886",
+        "phillips milk river camp",
+        "24PH2886",
+        "Phillips Milk River Camp"
+      ],
+      "latest_year": 1500,
+      "name": "King",
+      "reason": "missing_entry",
+      "region": "np_upper_missouri_montana",
+      "sample_years": [
+        -2300,
+        200,
+        1500
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.785,
+        -105.245
+      ],
+      "country": "Colorado",
+      "earliest_year": -3500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kinney Spring-Colorado",
+      "known_aliases": [
+        "Kinney Spring",
+        "kinney spring",
+        "5lr144",
+        "livermore foothills",
+        "5LR144",
+        "Livermore Foothills"
+      ],
+      "latest_year": 900,
+      "name": "Kinney Spring",
+      "reason": "missing_entry",
+      "region": "np_lower_missouri_platte_kansas",
+      "sample_years": [
+        -3500,
+        -1000,
+        900
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.225,
+        -106.995
+      ],
+      "country": "Montana",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kobold-Montana",
+      "known_aliases": [
+        "Kobold",
+        "kobold",
+        "24bh406",
+        "rosebud creek buffalo jump",
+        "24BH406",
+        "Rosebud Creek Buffalo Jump"
+      ],
+      "latest_year": 1500,
+      "name": "Kobold",
+      "reason": "missing_entry",
+      "region": "np_wyoming_bighorn_powder_plat",
+      "sample_years": [
+        -2500,
+        200,
+        1000,
+        1500
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.351,
+        -97.1215
+      ],
+      "country": "Kansas",
+      "earliest_year": 1150,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kohls Smoky Hill Village-Kansas",
+      "known_aliases": [
+        "Kohls Smoky Hill Village",
+        "kohls smoky hill village",
+        "14ck1",
+        "kohls earthlodge settlement",
+        "14CK1",
+        "Kohls Earthlodge Settlement"
+      ],
+      "latest_year": 1300,
+      "name": "Kohls Smoky Hill Village",
+      "reason": "missing_entry",
+      "region": "np_lower_missouri_platte_kansas",
+      "sample_years": [
+        1150,
+        1300
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.5706,
+        -110.0861
+      ],
+      "country": "Montana",
+      "earliest_year": 400,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kremlin-Montana_2",
+      "known_aliases": [
+        "Kremlin",
+        "kremlin",
+        "24hl401",
+        "kremlin bison kill",
+        "24HL401",
+        "Kremlin Bison Kill"
+      ],
+      "latest_year": 1100,
+      "name": "Kremlin",
+      "reason": "missing_entry",
+      "region": "np_upper_missouri_montana",
+      "sample_years": [
+        400,
+        800,
+        1100
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,948 @@
+{
+  "batch_index": 440,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        63.6833,
+        -100.4167
+      ],
+      "country": "Canada",
+      "earliest_year": -6000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Migod-Canada",
+      "known_aliases": [
+        "Migod",
+        "migod",
+        "grant lake",
+        "dubawnt river",
+        "kkln-4",
+        "Grant Lake",
+        "Dubawnt River",
+        "KkLn-4"
+      ],
+      "latest_year": 1000,
+      "name": "Migod",
+      "reason": "missing_entry",
+      "region": "hb_keewatin_western_barrens",
+      "sample_years": [
+        -6000,
+        -3000,
+        -500,
+        1000
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        54.825,
+        -100.445
+      ],
+      "country": "Canada",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Morton Lake-Canada",
+      "known_aliases": [
+        "Morton Lake",
+        "morton lake",
+        "hbmn-1",
+        "grass river reed-morton",
+        "HbMn-1",
+        "Grass River Reed-Morton"
+      ],
+      "latest_year": 1300,
+      "name": "Morton Lake",
+      "reason": "missing_entry",
+      "region": "hb_hudson_james_lowlands_cree",
+      "sample_years": [
+        -1000,
+        600,
+        1300
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.1833,
+        -86.7
+      ],
+      "country": "Ontario",
+      "earliest_year": 500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Nakina Ogoki River Settlement-Ontario",
+      "known_aliases": [
+        "Nakina Ogoki River Settlement",
+        "nakina ogoki river settlement",
+        "ogoki headwaters village",
+        "Ogoki Headwaters Village"
+      ],
+      "latest_year": 1450,
+      "name": "Nakina Ogoki River Settlement",
+      "reason": "missing_entry",
+      "region": "hb_hudson_james_lowlands_cree",
+      "sample_years": [
+        500,
+        1050,
+        1450
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        57.04167,
+        -76.54167
+      ],
+      "country": "Quebec",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Nastapoka River Town-Quebec",
+      "known_aliases": [
+        "Nastapoka River Town",
+        "nastapoka river town",
+        "nastapoka coastal settlement",
+        "Nastapoka Coastal Settlement"
+      ],
+      "latest_year": 1500,
+      "name": "Nastapoka River Town",
+      "reason": "missing_entry",
+      "region": "hb_eastmain_nunavik_ungava",
+      "sample_years": [
+        800,
+        1250,
+        1500
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        55.7667,
+        -98.85
+      ],
+      "country": "Manitoba",
+      "earliest_year": 300,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Nelson House Nisichawayasihk Capital-Manitoba",
+      "known_aliases": [
+        "Nelson House Nisichawayasihk Capital",
+        "nelson house nisichawayasihk capital",
+        "footprint lake cree center",
+        "Footprint Lake Cree Center"
+      ],
+      "latest_year": 1350,
+      "name": "Nelson House Nisichawayasihk Capital",
+      "reason": "missing_entry",
+      "region": "hb_hudson_james_lowlands_cree",
+      "sample_years": [
+        300,
+        850,
+        1350
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        57.125,
+        -92.54167
+      ],
+      "country": "Manitoba",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Port Nelson Ancestral Village-Manitoba",
+      "known_aliases": [
+        "Port Nelson Ancestral Village",
+        "port nelson ancestral village",
+        "nelson river mouth settlement",
+        "Nelson River Mouth Settlement"
+      ],
+      "latest_year": 1520,
+      "name": "Port Nelson Ancestral Village",
+      "reason": "missing_entry",
+      "region": "hb_keewatin_western_barrens",
+      "sample_years": [
+        800,
+        1200,
+        1520
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        55.7333,
+        -101.3167
+      ],
+      "country": "Manitoba",
+      "earliest_year": 300,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pukatawagan Churchill River Town-Manitoba",
+      "known_aliases": [
+        "Pukatawagan Churchill River Town",
+        "pukatawagan churchill river town",
+        "pukatawagan cree center",
+        "Pukatawagan Cree Center"
+      ],
+      "latest_year": 1350,
+      "name": "Pukatawagan Churchill River Town",
+      "reason": "missing_entry",
+      "region": "hb_hudson_james_lowlands_cree",
+      "sample_years": [
+        300,
+        850,
+        1350
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        61.3317,
+        -71.5083
+      ],
+      "country": "Canada",
+      "earliest_year": 0,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Qajartalik-Canada",
+      "known_aliases": [
+        "Qajartalik",
+        "qajartalik",
+        "qikertaaluk petroglyphs",
+        "whitley bay",
+        "jhev-1",
+        "Qikertaaluk Petroglyphs",
+        "Whitley Bay",
+        "JhEv-1"
+      ],
+      "latest_year": 900,
+      "name": "Qajartalik",
+      "reason": "missing_entry",
+      "region": "hb_eastmain_nunavik_ungava",
+      "sample_years": [
+        0,
+        500,
+        900
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        59.955,
+        -69.855
+      ],
+      "country": "Canada",
+      "earliest_year": 300,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Qilalugarsiuvik-Canada",
+      "known_aliases": [
+        "Qilalugarsiuvik",
+        "qilalugarsiuvik",
+        "ung.11",
+        "pointe aux bélougas",
+        "Ung.11",
+        "Pointe aux Bélougas"
+      ],
+      "latest_year": 1400,
+      "name": "Qilalugarsiuvik",
+      "reason": "missing_entry",
+      "region": "hb_eastmain_nunavik_ungava",
+      "sample_years": [
+        300,
+        900,
+        1400
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        54.1667,
+        -93.55
+      ],
+      "country": "Manitoba",
+      "earliest_year": 500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Red Sucker Lake Settlement-Manitoba",
+      "known_aliases": [
+        "Red Sucker Lake Settlement",
+        "red sucker lake settlement",
+        "red sucker village",
+        "Red Sucker Village"
+      ],
+      "latest_year": 1450,
+      "name": "Red Sucker Lake Settlement",
+      "reason": "missing_entry",
+      "region": "hb_hudson_james_lowlands_cree",
+      "sample_years": [
+        500,
+        1050,
+        1450
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        59.9819,
+        -69.7586
+      ],
+      "country": "Canada",
+      "earliest_year": 250,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rivière Arnaud-Canada",
+      "known_aliases": [
+        "Rivière Arnaud",
+        "rivière arnaud",
+        "payne river mouth",
+        "ung.11-arnaud",
+        "Payne River Mouth",
+        "Ung.11-Arnaud"
+      ],
+      "latest_year": 1400,
+      "name": "Rivière Arnaud",
+      "reason": "missing_entry",
+      "region": "hb_eastmain_nunavik_ungava",
+      "sample_years": [
+        250,
+        850,
+        1400
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        54.625,
+        -79.625
+      ],
+      "country": "Quebec",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Roggan River Settlement-Quebec",
+      "known_aliases": [
+        "Roggan River Settlement",
+        "roggan river settlement",
+        "roggan river coastal village",
+        "Roggan River Coastal Village"
+      ],
+      "latest_year": 1480,
+      "name": "Roggan River Settlement",
+      "reason": "missing_entry",
+      "region": "hb_eastmain_nunavik_ungava",
+      "sample_years": [
+        800,
+        1200,
+        1480
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        54.255,
+        -85.625
+      ],
+      "country": "Canada",
+      "earliest_year": -2000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Shamattawa Rapids-Canada",
+      "known_aliases": [
+        "Shamattawa Rapids",
+        "shamattawa rapids",
+        "winisk-shamattawa archaic",
+        "faja-1",
+        "Winisk-Shamattawa Archaic",
+        "FaJa-1"
+      ],
+      "latest_year": 800,
+      "name": "Shamattawa Rapids",
+      "reason": "missing_entry",
+      "region": "hb_hudson_james_lowlands_cree",
+      "sample_years": [
+        -2000,
+        -400,
+        800
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        63.70833,
+        -90.125
+      ],
+      "country": "Nunavut",
+      "earliest_year": 1200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Silumiut Whaling Settlement-Nunavut",
+      "known_aliases": [
+        "Silumiut Whaling Settlement",
+        "silumiut whaling settlement",
+        "chesterfield whalebone village",
+        "Chesterfield Whalebone Village"
+      ],
+      "latest_year": 1480,
+      "name": "Silumiut Whaling Settlement",
+      "reason": "missing_entry",
+      "region": "hb_keewatin_western_barrens",
+      "sample_years": [
+        1200,
+        1350,
+        1480
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        56.25,
+        -96.25
+      ],
+      "country": "Manitoba",
+      "earliest_year": 300,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Split Lake Cree Capital-Manitoba",
+      "known_aliases": [
+        "Split Lake Cree Capital",
+        "split lake cree capital",
+        "tataskweyak nelson river town",
+        "Tataskweyak Nelson River Town"
+      ],
+      "latest_year": 1350,
+      "name": "Split Lake Cree Capital",
+      "reason": "missing_entry",
+      "region": "hb_hudson_james_lowlands_cree",
+      "sample_years": [
+        300,
+        850,
+        1350
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        53.8333,
+        -94.85
+      ],
+      "country": "Manitoba",
+      "earliest_year": 400,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "St. Theresa Point Village-Manitoba",
+      "known_aliases": [
+        "St. Theresa Point Village",
+        "st. theresa point village",
+        "island lake southern settlement",
+        "Island Lake Southern Settlement"
+      ],
+      "latest_year": 1400,
+      "name": "St. Theresa Point Village",
+      "reason": "missing_entry",
+      "region": "hb_hudson_james_lowlands_cree",
+      "sample_years": [
+        400,
+        950,
+        1400
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        55.3167,
+        -97.6833
+      ],
+      "country": "Manitoba",
+      "earliest_year": 600,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Thicket Portage Settlement-Manitoba",
+      "known_aliases": [
+        "Thicket Portage Settlement",
+        "thicket portage settlement",
+        "wintering lake village",
+        "Wintering Lake Village"
+      ],
+      "latest_year": 1450,
+      "name": "Thicket Portage Settlement",
+      "reason": "missing_entry",
+      "region": "hb_hudson_james_lowlands_cree",
+      "sample_years": [
+        600,
+        1100,
+        1450
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        58.9,
+        -95.15
+      ],
+      "country": "Canada",
+      "earliest_year": -1500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Thyazzi-Canada",
+      "known_aliases": [
+        "Thyazzi",
+        "thyazzi",
+        "north knife river",
+        "churchill northwest",
+        "hhlv-1",
+        "North Knife River",
+        "Churchill Northwest",
+        "HhLv-1"
+      ],
+      "latest_year": -500,
+      "name": "Thyazzi",
+      "reason": "missing_entry",
+      "region": "hb_keewatin_western_barrens",
+      "sample_years": [
+        -1500,
+        -1000,
+        -500
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        60.875,
+        -70.04167
+      ],
+      "country": "Quebec",
+      "earliest_year": 0,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tuvaaluk Longhouse Metropolis-Quebec",
+      "known_aliases": [
+        "Tuvaaluk Longhouse Metropolis",
+        "tuvaaluk longhouse metropolis",
+        "diana bay dorset winter town",
+        "diana bay",
+        "tuvaaluk west",
+        "dia.1",
+        "jfem-5",
+        "Diana Bay Dorset Winter Town",
+        "Diana Bay",
+        "Tuvaaluk West",
+        "DIA.1",
+        "JfEm-5"
+      ],
+      "latest_year": 1350,
+      "name": "Tuvaaluk Longhouse Metropolis",
+      "reason": "missing_entry",
+      "region": "hb_eastmain_nunavik_ungava",
+      "sample_years": [
+        0,
+        600,
+        700,
+        1050,
+        1300,
+        1350
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        58.6167,
+        -93.8167
+      ],
+      "country": "Canada",
+      "earliest_year": -1500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Twin Lakes (Churchill)-Canada",
+      "known_aliases": [
+        "Twin Lakes (Churchill)",
+        "twin lakes",
+        "churchill pre-dorset",
+        "helu-1",
+        "Churchill Pre-Dorset",
+        "HeLu-1"
+      ],
+      "latest_year": 500,
+      "name": "Twin Lakes (Churchill)",
+      "reason": "missing_entry",
+      "region": "hb_keewatin_western_barrens",
+      "sample_years": [
+        -1500,
+        -1000,
+        500
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        53.7333,
+        -89.5333
+      ],
+      "country": "Canada",
+      "earliest_year": -5100,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Wapekeka-Canada",
+      "known_aliases": [
+        "Wapekeka",
+        "wapekeka",
+        "angling lake archaic",
+        "fljo-1",
+        "Angling Lake Archaic",
+        "FlJo-1"
+      ],
+      "latest_year": 1400,
+      "name": "Wapekeka",
+      "reason": "missing_entry",
+      "region": "hb_hudson_james_lowlands_cree",
+      "sample_years": [
+        -5100,
+        -4600,
+        600,
+        1400
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        53.9,
+        -94.95
+      ],
+      "country": "Manitoba",
+      "earliest_year": 500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Wasagamack Lake Village-Manitoba",
+      "known_aliases": [
+        "Wasagamack Lake Village",
+        "wasagamack lake village",
+        "wasagamack settlement",
+        "Wasagamack Settlement"
+      ],
+      "latest_year": 1450,
+      "name": "Wasagamack Lake Village",
+      "reason": "missing_entry",
+      "region": "hb_hudson_james_lowlands_cree",
+      "sample_years": [
+        500,
+        1050,
+        1450
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.9833,
+        -87.35
+      ],
+      "country": "Ontario",
+      "earliest_year": 400,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Webequie Winisk Lake Capital-Ontario",
+      "known_aliases": [
+        "Webequie Winisk Lake Capital",
+        "webequie winisk lake capital",
+        "winisk lake cree center",
+        "Winisk Lake Cree Center"
+      ],
+      "latest_year": 1400,
+      "name": "Webequie Winisk Lake Capital",
+      "reason": "missing_entry",
+      "region": "hb_hudson_james_lowlands_cree",
+      "sample_years": [
+        400,
+        950,
+        1400
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        53,
+        -78.8333
+      ],
+      "country": "Quebec",
+      "earliest_year": 700,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Wemindji Ancestral Town-Quebec",
+      "known_aliases": [
+        "Wemindji Ancestral Town",
+        "wemindji ancestral town",
+        "paint hills james bay village",
+        "Paint Hills James Bay Village"
+      ],
+      "latest_year": 1520,
+      "name": "Wemindji Ancestral Town",
+      "reason": "missing_entry",
+      "region": "hb_eastmain_nunavik_ungava",
+      "sample_years": [
+        700,
+        1150,
+        1520
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.9167,
+        -89.2833
+      ],
+      "country": "Ontario",
+      "earliest_year": 600,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Wunnumin Lake Settlement-Ontario",
+      "known_aliases": [
+        "Wunnumin Lake Settlement",
+        "wunnumin lake settlement",
+        "wunnumin cree village",
+        "Wunnumin Cree Village"
+      ],
+      "latest_year": 1450,
+      "name": "Wunnumin Lake Settlement",
+      "reason": "missing_entry",
+      "region": "hb_hudson_james_lowlands_cree",
+      "sample_years": [
+        600,
+        1100,
+        1450
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.6245,
+        -79.5985
+      ],
+      "country": "Canada",
+      "earliest_year": 1550,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ball-Canada",
+      "known_aliases": [
+        "Ball",
+        "ball",
+        "bdgv-3",
+        "oro-medonte mount st. louis wendat",
+        "BdGv-3",
+        "Oro-Medonte Mount St. Louis Wendat"
+      ],
+      "latest_year": 1600,
+      "name": "Ball",
+      "reason": "missing_entry",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "sample_years": [
+        1550,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.0167,
+        -75.25
+      ],
+      "country": "Ontario",
+      "earliest_year": 1400,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Beckstead Longhouse Town-Ontario",
+      "known_aliases": [
+        "Beckstead Longhouse Town",
+        "beckstead longhouse town",
+        "williamsburg iroquoian village",
+        "Williamsburg Iroquoian Village"
+      ],
+      "latest_year": 1520,
+      "name": "Beckstead Longhouse Town",
+      "reason": "missing_entry",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "sample_years": [
+        1400,
+        1480,
+        1520
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.9715,
+        -75.2485
+      ],
+      "country": "Canada",
+      "earliest_year": 1450,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Beckstead-Canada",
+      "known_aliases": [
+        "Beckstead",
+        "beckstead",
+        "bfft-1",
+        "williamsburg dundas st. lawrence iroquoian",
+        "BfFt-1",
+        "Williamsburg Dundas St. Lawrence Iroquoian"
+      ],
+      "latest_year": 1520,
+      "name": "Beckstead",
+      "reason": "missing_entry",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "sample_years": [
+        1450,
+        1520
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.5845,
+        -82.1245
+      ],
+      "country": "Canada",
+      "earliest_year": 1300,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bellamy-Canada",
+      "known_aliases": [
+        "Bellamy",
+        "bellamy",
+        "adhn-1",
+        "sydenham river younge tradition",
+        "AdHn-1",
+        "Sydenham River Younge Tradition"
+      ],
+      "latest_year": 1400,
+      "name": "Bellamy",
+      "reason": "missing_entry",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "sample_years": [
+        1300,
+        1400
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.6245,
+        -78.8445
+      ],
+      "country": "Canada",
+      "earliest_year": 1550,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Benson-Canada_2",
+      "known_aliases": [
+        "Benson",
+        "benson",
+        "bdgr-1",
+        "bexley kawartha huron",
+        "BdGr-1",
+        "Bexley Kawartha Huron"
+      ],
+      "latest_year": 1600,
+      "name": "Benson",
+      "reason": "missing_entry",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "sample_years": [
+        1550,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

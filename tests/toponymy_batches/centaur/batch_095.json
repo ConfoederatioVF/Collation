@@ -1,0 +1,962 @@
+{
+  "batch_index": 95,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        40.49226,
+        -80.29699
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1915,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Clinton-Pennsylvania",
+      "known_aliases": [
+        "Clinton",
+        "clinton",
+        "clinton cdp",
+        "Clinton CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Clinton",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1915,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.76381,
+        -82.35164
+      ],
+      "country": "South Carolina",
+      "earliest_year": 1872,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Conestee-South Carolina",
+      "known_aliases": [
+        "Conestee",
+        "conestee",
+        "conestee cdp",
+        "Conestee CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Conestee",
+      "reason": "missing_entry",
+      "region": "usa_south_carolina",
+      "sample_years": [
+        1872,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.04374,
+        -74.54765
+      ],
+      "country": "New Jersey",
+      "earliest_year": 1899,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cookstown-New Jersey",
+      "known_aliases": [
+        "Cookstown",
+        "cookstown",
+        "cookstown cdp",
+        "Cookstown CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Cookstown",
+      "reason": "missing_entry",
+      "region": "usa_new_jersey",
+      "sample_years": [
+        1899,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.93625,
+        -76.54555
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1924,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Greens Landing-Pennsylvania",
+      "known_aliases": [
+        "Greens Landing",
+        "greens landing",
+        "greens landing cdp",
+        "Greens Landing CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Greens Landing",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1924,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.21277,
+        -89.76303
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1866,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lake Camelot-Wisconsin",
+      "known_aliases": [
+        "Lake Camelot",
+        "lake camelot",
+        "lake camelot cdp",
+        "Lake Camelot CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Lake Camelot",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1866,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.86779,
+        -75.42246
+      ],
+      "country": "Delaware",
+      "earliest_year": 1891,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lincoln-Delaware",
+      "known_aliases": [
+        "Lincoln",
+        "lincoln",
+        "lincoln cdp",
+        "Lincoln CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Lincoln",
+      "reason": "missing_entry",
+      "region": "usa_delaware",
+      "sample_years": [
+        1891,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.92227,
+        -122.82766
+      ],
+      "country": "Oregon",
+      "earliest_year": 1903,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Dexter-Oregon",
+      "known_aliases": [
+        "Dexter",
+        "dexter",
+        "dexter cdp",
+        "Dexter CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Dexter",
+      "reason": "missing_entry",
+      "region": "usa_oregon",
+      "sample_years": [
+        1903,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.81467,
+        -85.23887
+      ],
+      "country": "Georgia",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rock Spring-Georgia",
+      "known_aliases": [
+        "Rock Spring",
+        "rock spring",
+        "rock spring cdp",
+        "Rock Spring CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Rock Spring",
+      "reason": "missing_entry",
+      "region": "usa_georgia",
+      "sample_years": [
+        1900,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.20665,
+        -75.72143
+      ],
+      "country": "New York",
+      "earliest_year": 1883,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sylvan Beach-New York",
+      "known_aliases": [
+        "Sylvan Beach",
+        "sylvan beach",
+        "sylvan beach village",
+        "Sylvan Beach village"
+      ],
+      "latest_year": 2026,
+      "name": "Sylvan Beach",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1883,
+        2001,
+        2014,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.41033,
+        -85.3077
+      ],
+      "country": "Indiana",
+      "earliest_year": 1868,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lake Santee-Indiana",
+      "known_aliases": [
+        "Lake Santee",
+        "lake santee",
+        "lake santee cdp",
+        "Lake Santee CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Lake Santee",
+      "reason": "missing_entry",
+      "region": "usa_indiana",
+      "sample_years": [
+        1868,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.25901,
+        -84.93194
+      ],
+      "country": "Michigan",
+      "earliest_year": 1966,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Crystal-Michigan",
+      "known_aliases": [
+        "Crystal",
+        "crystal",
+        "crystal cdp",
+        "Crystal CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Crystal",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1966,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.91482,
+        -85.41858
+      ],
+      "country": "Georgia",
+      "earliest_year": 1852,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "West Brow-Georgia",
+      "known_aliases": [
+        "West Brow",
+        "west brow",
+        "west brow cdp",
+        "West Brow CDP"
+      ],
+      "latest_year": 2020,
+      "name": "West Brow",
+      "reason": "missing_entry",
+      "region": "usa_georgia",
+      "sample_years": [
+        1852,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.63481,
+        -84.25374
+      ],
+      "country": "Tennessee",
+      "earliest_year": 1898,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rarity Bay-Tennessee",
+      "known_aliases": [
+        "Rarity Bay",
+        "rarity bay",
+        "rarity bay cdp",
+        "Rarity Bay CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Rarity Bay",
+      "reason": "missing_entry",
+      "region": "usa_tennessee",
+      "sample_years": [
+        1898,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.97197,
+        -89.38793
+      ],
+      "country": "Tennessee",
+      "earliest_year": 1887,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fowlkes-Tennessee",
+      "known_aliases": [
+        "Fowlkes",
+        "fowlkes",
+        "fowlkes cdp",
+        "Fowlkes CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Fowlkes",
+      "reason": "missing_entry",
+      "region": "usa_tennessee",
+      "sample_years": [
+        1887,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.03612,
+        -88.53074
+      ],
+      "country": "Michigan",
+      "earliest_year": 1915,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Chassell-Michigan",
+      "known_aliases": [
+        "Chassell",
+        "chassell",
+        "chassell cdp",
+        "Chassell CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Chassell",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1915,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.08614,
+        -75.78902
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1954,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Glenmoore-Pennsylvania",
+      "known_aliases": [
+        "Glenmoore",
+        "glenmoore",
+        "glenmoore cdp",
+        "Glenmoore CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Glenmoore",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1954,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.67128,
+        -73.00927
+      ],
+      "country": "Vermont",
+      "earliest_year": 1775,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fairfax-Vermont",
+      "known_aliases": [
+        "Fairfax",
+        "fairfax",
+        "fairfax cdp",
+        "fairfax town",
+        "Fairfax CDP",
+        "Fairfax town"
+      ],
+      "latest_year": 2020,
+      "name": "Fairfax",
+      "reason": "missing_entry",
+      "region": "usa_vermont",
+      "sample_years": [
+        1775,
+        1850,
+        1940,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.83235,
+        -88.91843
+      ],
+      "country": "Mississippi",
+      "earliest_year": 1889,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bogue Chitto-Mississippi",
+      "known_aliases": [
+        "Bogue Chitto",
+        "bogue chitto",
+        "bogue chitto cdp",
+        "Bogue Chitto CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Bogue Chitto",
+      "reason": "missing_entry",
+      "region": "usa_mississippi",
+      "sample_years": [
+        1889,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.92094,
+        -82.28539
+      ],
+      "country": "Ohio",
+      "earliest_year": 1916,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bidwell-Ohio",
+      "known_aliases": [
+        "Bidwell",
+        "bidwell",
+        "bidwell cdp",
+        "Bidwell CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Bidwell",
+      "reason": "missing_entry",
+      "region": "usa_ohio",
+      "sample_years": [
+        1916,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.65054,
+        -72.77842
+      ],
+      "country": "Vermont",
+      "earliest_year": 1941,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Killington Village-Vermont",
+      "known_aliases": [
+        "Killington Village",
+        "killington village",
+        "killington village cdp",
+        "Killington Village CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Killington Village",
+      "reason": "missing_entry",
+      "region": "usa_vermont",
+      "sample_years": [
+        1941,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.68036,
+        -106.75899
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1957,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sausal-New Mexico",
+      "known_aliases": [
+        "Sausal",
+        "sausal",
+        "sausal cdp",
+        "Sausal CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Sausal",
+      "reason": "missing_entry",
+      "region": "usa_new_mexico",
+      "sample_years": [
+        1957,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.27327,
+        -121.87497
+      ],
+      "country": "Oregon",
+      "earliest_year": 1893,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Running Y Ranch-Oregon",
+      "known_aliases": [
+        "Running Y Ranch",
+        "running y ranch",
+        "running y ranch cdp",
+        "Running Y Ranch CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Running Y Ranch",
+      "reason": "missing_entry",
+      "region": "usa_oregon",
+      "sample_years": [
+        1893,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.37055,
+        -79.17576
+      ],
+      "country": "South Carolina",
+      "earliest_year": 1867,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "DeBordieu Colony-South Carolina",
+      "known_aliases": [
+        "DeBordieu Colony",
+        "debordieu colony",
+        "debordieu colony cdp",
+        "DeBordieu Colony CDP"
+      ],
+      "latest_year": 2020,
+      "name": "DeBordieu Colony",
+      "reason": "missing_entry",
+      "region": "usa_south_carolina",
+      "sample_years": [
+        1867,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.36259,
+        -112.22681
+      ],
+      "country": "Arizona",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Maricopa Colony-Arizona",
+      "known_aliases": [
+        "Maricopa Colony",
+        "maricopa colony",
+        "maricopa colony cdp",
+        "Maricopa Colony CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Maricopa Colony",
+      "reason": "missing_entry",
+      "region": "usa_arizona",
+      "sample_years": [
+        1950,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.5054,
+        -74.71202
+      ],
+      "country": "New Jersey",
+      "earliest_year": 1870,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Neshanic-New Jersey",
+      "known_aliases": [
+        "Neshanic",
+        "neshanic",
+        "neshanic cdp",
+        "Neshanic CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Neshanic",
+      "reason": "missing_entry",
+      "region": "usa_new_jersey",
+      "sample_years": [
+        1870,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.03407,
+        -94.95641
+      ],
+      "country": "Oklahoma",
+      "earliest_year": 1882,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Moodys-Oklahoma",
+      "known_aliases": [
+        "Moodys",
+        "moodys",
+        "moodys cdp",
+        "Moodys CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Moodys",
+      "reason": "missing_entry",
+      "region": "usa_oklahoma",
+      "sample_years": [
+        1882,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.4093,
+        -97.95422
+      ],
+      "country": "Oklahoma",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sunray-Oklahoma",
+      "known_aliases": [
+        "Sunray",
+        "sunray",
+        "sunray cdp",
+        "Sunray CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Sunray",
+      "reason": "missing_entry",
+      "region": "usa_oklahoma",
+      "sample_years": [
+        1950,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.15642,
+        -123.65542
+      ],
+      "country": "Oregon",
+      "earliest_year": 1952,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Svensen-Oregon",
+      "known_aliases": [
+        "Svensen",
+        "svensen",
+        "svensen cdp",
+        "Svensen CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Svensen",
+      "reason": "missing_entry",
+      "region": "usa_oregon",
+      "sample_years": [
+        1952,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.17063,
+        -89.86472
+      ],
+      "country": "Illinois",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lake Carroll-Illinois",
+      "known_aliases": [
+        "Lake Carroll",
+        "lake carroll",
+        "lake carroll cdp",
+        "Lake Carroll CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Lake Carroll",
+      "reason": "missing_entry",
+      "region": "usa_illinois",
+      "sample_years": [
+        1900,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.0329,
+        -82.61182
+      ],
+      "country": "Michigan",
+      "earliest_year": 1921,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ruby-Michigan",
+      "known_aliases": [
+        "Ruby",
+        "ruby",
+        "ruby cdp",
+        "Ruby CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Ruby",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1921,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

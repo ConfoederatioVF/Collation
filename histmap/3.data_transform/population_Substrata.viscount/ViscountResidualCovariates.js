@@ -2,6 +2,7 @@
 let fs = global.fs || require("fs");
 let path = global.path || require("path");
 let { PNG } = global.pngjs || require("pngjs");
+let { ViscountUrbanMask } = global.ViscountUrbanMask ? global : require("./ViscountUrbanMask.js");
 
 //Initialise functions
 {
@@ -303,7 +304,7 @@ let { PNG } = global.pngjs || require("pngjs");
           let local_ratio = Math.min(3.2, m_cell[i]/m_macro[i]);
           weights[i] = Math.pow(local_ratio, 2.25);
         } else {
-          weights[i] = 1.0;
+          weights[i] = 0.0;
         }
 
       //Return statement
@@ -320,7 +321,7 @@ let { PNG } = global.pngjs || require("pngjs");
 
 
     /**
-     * Builds the 1-pixel buffered modern urban settlement mask from HYDE 3.5 `uopp_2023AD.png`.
+     * Builds the extended modern urban settlement mask via `ViscountUrbanMask`.
      * @alias ViscountResidualCovariates.getModernUrbanMask
      *
      * @param {Object} arg0_mask_data
@@ -330,61 +331,12 @@ let { PNG } = global.pngjs || require("pngjs");
      * @returns {Uint8Array}
      */
     static getModernUrbanMask (arg0_mask_data, arg1_config, arg2_cache) {
-      //Convert from parameters
-      let mask_data = arg0_mask_data;
-      let config = (arg1_config) ? arg1_config : {};
-      let cache = arg2_cache;
-
-      //Guard clauses
-      if (cache && cache.has("__modern_urban_mask__")) return cache.get("__modern_urban_mask__");
-
-      //Declare local instance variables
-      let cov_paths = (config.kriging_config && config.kriging_config.covariate_paths) ? config.kriging_config.covariate_paths : {};
-      let buffer_radius = (cov_paths.urban_mask_buffer_radius !== undefined) ? cov_paths.urban_mask_buffer_radius : 1;
-      let dilated_mask;
-      let grid_h = mask_data.grid_height;
-      let grid_w = mask_data.grid_width;
-      let raw_mask = new Uint8Array(grid_w*grid_h);
-      let total_pixels = grid_w*grid_h;
-      let uopp_grid;
-      let uopp_path = path.join(
-        mask_data.project_root,
-        cov_paths.hyde_uopp_raster || "histmap/2.data_cleaning/landuse_HYDE/rasters/uopp_2023AD.png"
-      );
-      let uopp_threshold = (cov_paths.urban_uopp_threshold !== undefined) ? cov_paths.urban_uopp_threshold : 10.0;
-
-      //Function body
-      uopp_grid = this.readGlobalFloat32Raster(uopp_path, total_pixels);
-      for (let i = 0; i < total_pixels; i++)
-        if (uopp_grid[i] > uopp_threshold) raw_mask[i] = 1;
-
-      if (buffer_radius <= 0) {
-        if (cache) cache.set("__modern_urban_mask__", raw_mask);
-        return raw_mask;
-      }
-
-      dilated_mask = new Uint8Array(total_pixels);
-      for (let i = 0; i < grid_h; i++)
-        for (let x = 0; x < grid_w; x++)
-          if (raw_mask[i*grid_w + x] === 1)
-            for (let y = -buffer_radius; y <= buffer_radius; y++) {
-              let local_ny = i + y;
-              if (local_ny >= 0 && local_ny < grid_h)
-                for (let z = -buffer_radius; z <= buffer_radius; z++) {
-                  let local_nx = (x + z + grid_w) % grid_w;
-                  dilated_mask[local_ny*grid_w + local_nx] = 1;
-                }
-            }
-
-      if (cache) cache.set("__modern_urban_mask__", dilated_mask);
-
-      //Return statement
-      return dilated_mask;
+      return ViscountUrbanMask.getModernUrbanMask(arg0_mask_data, arg1_config, arg2_cache);
     }
 
 
     /**
-     * Inpaints masked urban settlement cells via inverse-distance weighting from surrounding rural land pixels.
+     * Inpaints masked urban settlement cells via `ViscountUrbanMask`.
      * @alias ViscountResidualCovariates.inpaintUrbanMaskGrid
      *
      * @param {Float32Array} arg0_popc_grid
@@ -393,84 +345,22 @@ let { PNG } = global.pngjs || require("pngjs");
      * @param {Float32Array} arg3_fallback_grid
      * @param {number} arg4_grid_width
      * @param {number} arg5_grid_height
-     * @param {number} [arg6_inpaint_radius=3]
+     * @param {number} [arg6_inpaint_radius=4]
      * @param {Int32Array} [arg7_target_indices]
      *
      * @returns {Float32Array}
      */
     static inpaintUrbanMaskGrid (arg0_popc_grid, arg1_urban_mask, arg2_land_area_grid, arg3_fallback_grid, arg4_grid_width, arg5_grid_height, arg6_inpaint_radius, arg7_target_indices) {
-      //Convert from parameters
-      let popc_grid = arg0_popc_grid;
-      let urban_mask = arg1_urban_mask;
-      let land_area_grid = arg2_land_area_grid;
-      let fallback_grid = arg3_fallback_grid;
-      let grid_w = arg4_grid_width;
-      let grid_h = arg5_grid_height;
-      let radius = (arg6_inpaint_radius !== undefined) ? arg6_inpaint_radius : 3;
-      let target_indices = arg7_target_indices;
-
-      //Declare local instance variables
-      let n_targets = (target_indices) ? target_indices.length : grid_w*grid_h;
-      let out_grid = new Float32Array(popc_grid);
-      let wide_radius = radius*2;
-
-      //Function body
-      for (let i = 0; i < n_targets; i++) {
-        let local_idx = (target_indices) ? target_indices[i] : i;
-        if (urban_mask[local_idx] < 1) continue;
-        if (land_area_grid[local_idx] <= 0) {
-          out_grid[local_idx] = 0;
-          continue;
-        }
-
-        let local_cx = local_idx % grid_w;
-        let local_cy = Math.floor(local_idx/grid_w);
-        let local_val_sum = 0;
-        let local_w_sum = 0;
-
-        for (let x = -radius; x <= radius; x++) {
-          let local_ny = local_cy + x;
-          if (local_ny >= 0 && local_ny < grid_h)
-            for (let y = -radius; y <= radius; y++) {
-              if (x === 0 && y === 0) continue;
-              let local_nx = (local_cx + y + grid_w) % grid_w;
-              let local_nidx = local_ny*grid_w + local_nx;
-              if (urban_mask[local_nidx] === 0 && land_area_grid[local_nidx] > 0) {
-                let local_w = 1/Math.max(1, x*x + y*y);
-                local_val_sum += popc_grid[local_nidx]*local_w;
-                local_w_sum += local_w;
-              }
-            }
-        }
-
-        if (local_w_sum > 0) {
-          out_grid[local_idx] = local_val_sum/local_w_sum;
-        } else {
-          for (let x = -wide_radius; x <= wide_radius; x++) {
-            let local_ny = local_cy + x;
-            if (local_ny >= 0 && local_ny < grid_h)
-              for (let y = -wide_radius; y <= wide_radius; y++) {
-                let local_nx = (local_cx + y + grid_w) % grid_w;
-                let local_nidx = local_ny*grid_w + local_nx;
-                if (urban_mask[local_nidx] === 0 && land_area_grid[local_nidx] > 0) {
-                  let local_w = 1/Math.max(1, x*x + y*y);
-                  local_val_sum += popc_grid[local_nidx]*local_w;
-                  local_w_sum += local_w;
-                }
-              }
-          }
-
-          if (local_w_sum > 0)
-            out_grid[local_idx] = local_val_sum/local_w_sum;
-          else if (popc_grid[local_idx] > 0 && fallback_grid && fallback_grid[local_idx] > 0)
-            out_grid[local_idx] = fallback_grid[local_idx];
-          else
-            out_grid[local_idx] = 0;
-        }
-      }
-
-      //Return statement
-      return out_grid;
+      return ViscountUrbanMask.inpaintUrbanMaskGrid(
+        arg0_popc_grid,
+        arg1_urban_mask,
+        arg2_land_area_grid,
+        arg3_fallback_grid,
+        arg4_grid_width,
+        arg5_grid_height,
+        arg6_inpaint_radius,
+        arg7_target_indices
+      );
     }
 
 
@@ -604,7 +494,7 @@ let { PNG } = global.pngjs || require("pngjs");
 
 
     /**
-     * Loads a benchmark year's HYDE 3.5 `popc` raster and removes urban footprint + 8x isolated spikes via IDW inpainting.
+     * Loads a benchmark year's HYDE 3.5 `popc` raster and removes extended urban footprints + 8x spikes via `ViscountUrbanMask`.
      * @alias ViscountResidualCovariates.loadUrbanMaskedHYDEPopcRaster
      *
      * @param {Object} arg0_mask_data
@@ -615,97 +505,7 @@ let { PNG } = global.pngjs || require("pngjs");
      * @returns {Float32Array}
      */
     static loadUrbanMaskedHYDEPopcRaster (arg0_mask_data, arg1_year, arg2_cache, arg3_config) {
-      //Convert from parameters
-      let mask_data = arg0_mask_data;
-      let year = Number(arg1_year) || 0;
-      let cache = arg2_cache;
-      let config = (arg3_config) ? arg3_config : {};
-
-      //Guard clauses
-      let cache_key = `hyde_urban_masked_${year}`;
-      if (cache && cache.has(cache_key)) return cache.get(cache_key);
-
-      //Declare local instance variables
-      let cov_paths = (config.kriging_config && config.kriging_config.covariate_paths) ? config.kriging_config.covariate_paths : {};
-      let grid_h = mask_data.grid_height;
-      let grid_w = mask_data.grid_width;
-      let inpaint_radius = (cov_paths.urban_mask_inpaint_radius !== undefined) ? cov_paths.urban_mask_inpaint_radius : 4;
-      let kk10_grid = null;
-      let kk10_path;
-      let land_area_grid = mask_data.land_area_grid;
-      let modern_urban_mask;
-      let n_valid = mask_data.valid_cell_count;
-      let out_arr = new Float32Array(n_valid);
-      let popc_grid;
-      let popc_path;
-      let root = mask_data.project_root;
-      let spike_ratio = (cov_paths.urban_outlier_spike_ratio !== undefined) ? cov_paths.urban_outlier_spike_ratio : 8.0;
-      let total_pixels = grid_w*grid_h;
-      let urbc_path;
-      let valid_indices = mask_data.valid_indices;
-      let year_label = (year < 0) ? `${Math.abs(year)}BC` : `${year}AD`;
-      let year_urban_mask;
-
-      //Function body
-      popc_path = path.join(root, cov_paths.hyde_popc_folder || "histmap/2.data_cleaning/landuse_HYDE/rasters_scaled_to_global", `popc_${year}.png`);
-      if (!fs.existsSync(popc_path))
-        popc_path = path.join(root, cov_paths.hyde_raw_rasters_folder || "histmap/2.data_cleaning/landuse_HYDE/rasters", `popc_${year_label}.png`);
-      if (!fs.existsSync(popc_path)) return out_arr;
-
-      popc_grid = this.readGlobalFloat32Raster(popc_path, total_pixels);
-      modern_urban_mask = this.getModernUrbanMask(mask_data, config, cache);
-      year_urban_mask = new Uint8Array(modern_urban_mask);
-
-      urbc_path = path.join(root, cov_paths.hyde_mcevedy_rasters_folder || "histmap/2.data_cleaning/landuse_HYDE/rasters_mcevedy", `urbc_${year}.png`);
-      if (!fs.existsSync(urbc_path))
-        urbc_path = path.join(root, cov_paths.hyde_raw_rasters_folder || "histmap/2.data_cleaning/landuse_HYDE/rasters", `urbc_${year_label}.png`);
-
-      if (fs.existsSync(urbc_path)) {
-        let urbc_grid = this.readGlobalFloat32Raster(urbc_path, total_pixels);
-        for (let i = 0; i < total_pixels; i++)
-          if (urbc_grid[i] > 0) year_urban_mask[i] = 1;
-      }
-
-      for (let i = 0; i < n_valid; i++) {
-        let local_gidx = valid_indices[i];
-        if (year_urban_mask[local_gidx] >= 1 || popc_grid[local_gidx] <= 0) continue;
-
-        let local_cx = local_gidx % grid_w;
-        let local_cy = Math.floor(local_gidx/grid_w);
-        let local_ncnt = 0;
-        let local_nsum = 0;
-
-        for (let x = -1; x <= 1; x++) {
-          let local_ny = local_cy + x;
-          if (local_ny >= 0 && local_ny < grid_h)
-            for (let y = -1; y <= 1; y++) {
-              if (x === 0 && y === 0) continue;
-              let local_nx = (local_cx + y + grid_w) % grid_w;
-              let local_nidx = local_ny*grid_w + local_nx;
-              if (year_urban_mask[local_nidx] === 0 && land_area_grid[local_nidx] > 0 && popc_grid[local_nidx] > 0) {
-                local_nsum += popc_grid[local_nidx];
-                local_ncnt++;
-              }
-            }
-        }
-
-        if (local_ncnt >= 3 && popc_grid[local_gidx] > spike_ratio*(local_nsum/local_ncnt))
-          year_urban_mask[local_gidx] = 1;
-      }
-
-      kk10_path = path.join(root, cov_paths.kk10_fallback_folder || "histmap/2.data_cleaning/population_KK10LUH2/rasters_KK10LUH2_2._global_scaling", `popc_${year}.png`);
-      if (fs.existsSync(kk10_path)) kk10_grid = this.readGlobalFloat32Raster(kk10_path, total_pixels);
-
-      let cleaned_grid = this.inpaintUrbanMaskGrid(popc_grid, year_urban_mask, land_area_grid, kk10_grid, grid_w, grid_h, inpaint_radius, valid_indices);
-      for (let i = 0; i < n_valid; i++) {
-        let local_val = cleaned_grid[valid_indices[i]];
-        if (Number.isFinite(local_val) && local_val > 0) out_arr[i] = local_val;
-      }
-
-      if (cache) cache.set(cache_key, out_arr);
-
-      //Return statement
-      return out_arr;
+      return ViscountUrbanMask.loadUrbanMaskedHYDEPopcRaster(arg0_mask_data, arg1_year, arg2_cache, arg3_config);
     }
 
 

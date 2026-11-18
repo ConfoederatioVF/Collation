@@ -5,13 +5,28 @@ let path = global.path || require("path");
 let { PNG } = global.pngjs || require("pngjs");
 
 if (!global.StadesterPartitionIO && typeof require !== "undefined") {
-  try { require(path.resolve(__dirname, "../../2.data_cleaning/population_Stadester/StadesterPartitionIO.js")); } catch (e) {}
+  try {
+    let part_p = fs.existsSync(path.resolve(__dirname, "../../2.data_cleaning/population_Stadester/StadesterPartitionIO.js")) ?
+      path.resolve(__dirname, "../../2.data_cleaning/population_Stadester/StadesterPartitionIO.js") :
+      path.resolve(process.cwd(), "histmap/2.data_cleaning/population_Stadester/StadesterPartitionIO.js");
+    require(part_p);
+  } catch (e) {}
 }
 if (!global.ViscountSubstrataMosaic && typeof require !== "undefined") {
-  try { require(path.join(__dirname, "ViscountSubstrataMosaic.js")); } catch (e) {}
+  try {
+    let mos_p = fs.existsSync(path.join(__dirname, "ViscountSubstrataMosaic.js")) ?
+      path.join(__dirname, "ViscountSubstrataMosaic.js") :
+      path.resolve(process.cwd(), "histmap/3.data_transform/population_Substrata.viscount/ViscountSubstrataMosaic.js");
+    require(mos_p);
+  } catch (e) {}
 }
 if (!global.population_Substrata_russia && typeof require !== "undefined") {
-  try { require(path.resolve(__dirname, "../population_Substrata.russia/population_Substrata_russia.js")); } catch (e) {}
+  try {
+    let rus_p = fs.existsSync(path.resolve(__dirname, "../population_Substrata.russia/population_Substrata_russia.js")) ?
+      path.resolve(__dirname, "../population_Substrata.russia/population_Substrata_russia.js") :
+      path.resolve(process.cwd(), "histmap/3.data_transform/population_Substrata.russia/population_Substrata_russia.js");
+    require(rus_p);
+  } catch (e) {}
 }
 
 //Initialise functions
@@ -41,13 +56,15 @@ if (!global.population_Substrata_russia && typeof require !== "undefined") {
       let options = (arg0_options) ? arg0_options : {};
 
       //Declare local instance variables
-      let config_dir = path.join(__dirname, "config");
+      let root_dir = (options.project_root) ? options.project_root : ((fs.existsSync("./histmap/1.data_raw")) ?
+        path.resolve(".") : path.resolve(__dirname, "../../.."));
+      let config_dir = fs.existsSync(path.join(__dirname, "config", "centaur.json5")) ?
+        path.join(__dirname, "config") :
+        path.join(root_dir, "histmap/3.data_transform/population_Substrata.viscount/config");
       let contexts = [];
       let lock_result;
       let registry = (global.StadesterPartitionIO) ?
         global.StadesterPartitionIO.loadPrecedenceRegistry(options.precedence_config_path) : { projects_by_key: {} };
-      let root_dir = (options.project_root) ? options.project_root : ((fs.existsSync("./histmap/1.data_raw")) ?
-        path.resolve(".") : path.resolve(__dirname, "../../.."));
 
       //Guard clauses
       if (!fs.existsSync(config_dir)) {

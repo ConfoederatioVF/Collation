@@ -1,0 +1,444 @@
+{
+  "batch_index": 108,
+  "project": "CENTAUR",
+  "count": 13,
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        42.425,
+        -118.925
+      ],
+      "country": "Oregon",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Skull Creek Dunes-Oregon",
+      "known_aliases": [
+        "Skull Creek Dunes",
+        "skull creek dunes",
+        "35ha385",
+        "catlow valley",
+        "35HA385",
+        "Catlow Valley"
+      ],
+      "latest_year": 1000,
+      "name": "Skull Creek Dunes",
+      "reason": "missing_entry",
+      "region": "nw_snake_river_klamath_interior",
+      "sample_years": [
+        -2500,
+        1000
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.0667,
+        -120.0167
+      ],
+      "country": "Washington",
+      "earliest_year": -2000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sunset Creek-Washington",
+      "known_aliases": [
+        "Sunset Creek",
+        "sunset creek",
+        "quilomene bar",
+        "45kt28",
+        "Quilomene Bar",
+        "45KT28"
+      ],
+      "latest_year": 1500,
+      "name": "Sunset Creek",
+      "reason": "missing_entry",
+      "region": "nw_columbia_plateau_yakima_spokane",
+      "sample_years": [
+        -2000,
+        0,
+        1000,
+        1500
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.8017,
+        -124.1517
+      ],
+      "country": "Oregon",
+      "earliest_year": -5500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tahkenitch-Oregon",
+      "known_aliases": [
+        "Tahkenitch",
+        "tahkenitch",
+        "tahkenitch landing",
+        "lower umpqua",
+        "35do130",
+        "Tahkenitch Landing",
+        "Lower Umpqua",
+        "35DO130"
+      ],
+      "latest_year": 1000,
+      "name": "Tahkenitch",
+      "reason": "missing_entry",
+      "region": "nw_lower_columbia_willamette_coast",
+      "sample_years": [
+        -5500,
+        -3000,
+        -1000,
+        1000
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.6917,
+        -124.1667
+      ],
+      "country": "Oregon",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Umpqua Eden-Oregon",
+      "known_aliases": [
+        "Umpqua Eden",
+        "umpqua eden",
+        "winchester bay",
+        "35do83",
+        "Winchester Bay",
+        "35DO83"
+      ],
+      "latest_year": 1500,
+      "name": "Umpqua Eden",
+      "reason": "missing_entry",
+      "region": "nw_lower_columbia_willamette_coast",
+      "sample_years": [
+        -1000,
+        500,
+        1200,
+        1500
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.9467,
+        -119.9833
+      ],
+      "country": "Washington",
+      "earliest_year": -2000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Vantage (Schaake)-Washington",
+      "known_aliases": [
+        "Vantage (Schaake)",
+        "vantage",
+        "wanapum",
+        "schaake site",
+        "45kt17",
+        "Wanapum",
+        "Schaake Site",
+        "45KT17"
+      ],
+      "latest_year": 1500,
+      "name": "Vantage (Schaake)",
+      "reason": "missing_entry",
+      "region": "nw_columbia_plateau_yakima_spokane",
+      "sample_years": [
+        -2000,
+        0,
+        1000,
+        1500
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.6667,
+        -119.8667
+      ],
+      "country": "Washington",
+      "earliest_year": 500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Wahluke-Washington",
+      "known_aliases": [
+        "Wahluke",
+        "wahluke",
+        "hanford reach",
+        "45gr306",
+        "Hanford Reach",
+        "45GR306"
+      ],
+      "latest_year": 1600,
+      "name": "Wahluke",
+      "reason": "missing_entry",
+      "region": "nw_columbia_plateau_yakima_spokane",
+      "sample_years": [
+        500,
+        1200,
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.0667,
+        -118.9167
+      ],
+      "country": "Washington",
+      "earliest_year": 500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Walla Walla (Wallula)-Washington",
+      "known_aliases": [
+        "Walla Walla (Wallula)",
+        "walla walla",
+        "waluula",
+        "45ww1",
+        "Waluula",
+        "45WW1"
+      ],
+      "latest_year": 1600,
+      "name": "Walla Walla (Wallula)",
+      "reason": "missing_entry",
+      "region": "nw_columbia_plateau_yakima_spokane",
+      "sample_years": [
+        500,
+        1200,
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.3333,
+        -117.2167
+      ],
+      "country": "Oregon",
+      "earliest_year": 0,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Wallowa Valley-Oregon",
+      "known_aliases": [
+        "Wallowa Valley",
+        "wallowa valley",
+        "walwama",
+        "wallowa lake",
+        "35wa119",
+        "Walwama",
+        "Wallowa Lake",
+        "35WA119"
+      ],
+      "latest_year": 1600,
+      "name": "Wallowa Valley",
+      "reason": "missing_entry",
+      "region": "nw_snake_river_klamath_interior",
+      "sample_years": [
+        0,
+        800,
+        1400,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.6333,
+        -117.3833
+      ],
+      "country": "Washington",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Wawawai-Washington",
+      "known_aliases": [
+        "Wawawai",
+        "wawawai",
+        "lower granite",
+        "45wt39",
+        "Lower Granite",
+        "45WT39"
+      ],
+      "latest_year": 1600,
+      "name": "Wawawai",
+      "reason": "missing_entry",
+      "region": "nw_snake_river_klamath_interior",
+      "sample_years": [
+        -1000,
+        500,
+        1300,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.6617,
+        -122.435
+      ],
+      "country": "Washington",
+      "earliest_year": -2200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "West Point-Washington",
+      "known_aliases": [
+        "West Point",
+        "west point",
+        "discovery park",
+        "ka'ka'el",
+        "45ki428",
+        "Discovery Park",
+        "Ka'ka'el",
+        "45KI428"
+      ],
+      "latest_year": 1400,
+      "name": "West Point",
+      "reason": "missing_entry",
+      "region": "nw_puget_sound_olympic_coast",
+      "sample_years": [
+        -2200,
+        -1000,
+        500,
+        1400
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.7283,
+        -120.6489
+      ],
+      "country": "Oregon",
+      "earliest_year": -6000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Wildcat Canyon-Oregon",
+      "known_aliases": [
+        "Wildcat Canyon",
+        "wildcat canyon",
+        "john day confluence",
+        "35gm9",
+        "John Day Confluence",
+        "35GM9"
+      ],
+      "latest_year": 1400,
+      "name": "Wildcat Canyon",
+      "reason": "missing_entry",
+      "region": "nw_columbia_plateau_yakima_spokane",
+      "sample_years": [
+        -6000,
+        -2000,
+        500,
+        1400
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.25,
+        -123.9
+      ],
+      "country": "Washington",
+      "earliest_year": 500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Willapa Bay (Chinook Point)-Washington",
+      "known_aliases": [
+        "Willapa Bay (Chinook Point)",
+        "willapa bay",
+        "nusqalst",
+        "chinook",
+        "45pc7",
+        "Nusqalst",
+        "Chinook",
+        "45PC7"
+      ],
+      "latest_year": 1600,
+      "name": "Willapa Bay (Chinook Point)",
+      "reason": "missing_entry",
+      "region": "nw_lower_columbia_willamette_coast",
+      "sample_years": [
+        500,
+        1200,
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.3083,
+        -118.45
+      ],
+      "country": "Washington",
+      "earliest_year": -8500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Windust Caves-Washington",
+      "known_aliases": [
+        "Windust Caves",
+        "windust caves",
+        "ice harbor",
+        "45fr46",
+        "Ice Harbor",
+        "45FR46"
+      ],
+      "latest_year": 500,
+      "name": "Windust Caves",
+      "reason": "missing_entry",
+      "region": "nw_columbia_plateau_yakima_spokane",
+      "sample_years": [
+        -8500,
+        -6000,
+        -2000,
+        500
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

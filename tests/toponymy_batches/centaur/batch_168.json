@@ -1,0 +1,951 @@
+{
+  "batch_index": 168,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        41.08868,
+        -78.05797
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1946,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pine Glen-Pennsylvania",
+      "known_aliases": [
+        "Pine Glen",
+        "pine glen",
+        "pine glen cdp",
+        "Pine Glen CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Pine Glen",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1946,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.26043,
+        -81.65581
+      ],
+      "country": "West Virginia",
+      "earliest_year": 1890,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Berwind-West Virginia",
+      "known_aliases": [
+        "Berwind",
+        "berwind",
+        "berwind cdp",
+        "Berwind CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Berwind",
+      "reason": "missing_entry",
+      "region": "usa_west_virginia",
+      "sample_years": [
+        1890,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.77505,
+        -91.92866
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1904,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Downsville-Wisconsin",
+      "known_aliases": [
+        "Downsville",
+        "downsville",
+        "downsville cdp",
+        "Downsville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Downsville",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1904,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.45661,
+        -90.30028
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1969,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ogema-Wisconsin",
+      "known_aliases": [
+        "Ogema",
+        "ogema",
+        "ogema cdp",
+        "Ogema CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Ogema",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1969,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.63668,
+        -87.99131
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1895,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pembine-Wisconsin",
+      "known_aliases": [
+        "Pembine",
+        "pembine",
+        "pembine cdp",
+        "Pembine CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Pembine",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1895,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.24703,
+        -122.90536
+      ],
+      "country": "California",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tomales-California",
+      "known_aliases": [
+        "Tomales",
+        "tomales",
+        "tomales cdp",
+        "Tomales CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Tomales",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1850,
+        1860,
+        1870,
+        1880,
+        1890,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.9223,
+        -71.98138
+      ],
+      "country": "Connecticut",
+      "earliest_year": 1883,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Quasset Lake-Connecticut",
+      "known_aliases": [
+        "Quasset Lake",
+        "quasset lake",
+        "quasset lake cdp",
+        "Quasset Lake CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Quasset Lake",
+      "reason": "missing_entry",
+      "region": "usa_connecticut",
+      "sample_years": [
+        1883,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        30.48341,
+        -84.02612
+      ],
+      "country": "Florida",
+      "earliest_year": 1873,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lloyd-Florida",
+      "known_aliases": [
+        "Lloyd",
+        "lloyd",
+        "lloyd cdp",
+        "Lloyd CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Lloyd",
+      "reason": "missing_entry",
+      "region": "usa_florida",
+      "sample_years": [
+        1873,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        30.02298,
+        -84.98252
+      ],
+      "country": "Florida",
+      "earliest_year": 1892,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sumatra-Florida",
+      "known_aliases": [
+        "Sumatra",
+        "sumatra",
+        "sumatra cdp",
+        "Sumatra CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Sumatra",
+      "reason": "missing_entry",
+      "region": "usa_florida",
+      "sample_years": [
+        1892,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.19833,
+        -89.59453
+      ],
+      "country": "Illinois",
+      "earliest_year": 1878,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Baileyville-Illinois",
+      "known_aliases": [
+        "Baileyville",
+        "baileyville",
+        "baileyville cdp",
+        "Baileyville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Baileyville",
+      "reason": "missing_entry",
+      "region": "usa_illinois",
+      "sample_years": [
+        1878,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.19413,
+        -85.41368
+      ],
+      "country": "Michigan",
+      "earliest_year": 1869,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Scotts-Michigan",
+      "known_aliases": [
+        "Scotts",
+        "scotts",
+        "scotts cdp",
+        "Scotts CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Scotts",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1869,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        31.42938,
+        -89.28982
+      ],
+      "country": "Mississippi",
+      "earliest_year": 1901,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Eastabuchie-Mississippi",
+      "known_aliases": [
+        "Eastabuchie",
+        "eastabuchie",
+        "eastabuchie cdp",
+        "Eastabuchie CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Eastabuchie",
+      "reason": "missing_entry",
+      "region": "usa_mississippi",
+      "sample_years": [
+        1901,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.40393,
+        -92.60681
+      ],
+      "country": "Missouri",
+      "earliest_year": 1898,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Grovespring-Missouri",
+      "known_aliases": [
+        "Grovespring",
+        "grovespring",
+        "grovespring cdp",
+        "Grovespring CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Grovespring",
+      "reason": "missing_entry",
+      "region": "usa_missouri",
+      "sample_years": [
+        1898,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.4329,
+        -108.33582
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1951,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Continental Divide-New Mexico",
+      "known_aliases": [
+        "Continental Divide",
+        "continental divide",
+        "continental divide cdp",
+        "Continental Divide CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Continental Divide",
+      "reason": "missing_entry",
+      "region": "usa_new_mexico",
+      "sample_years": [
+        1951,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.08488,
+        -76.19749
+      ],
+      "country": "New York",
+      "earliest_year": 1860,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Three Mile Bay-New York",
+      "known_aliases": [
+        "Three Mile Bay",
+        "three mile bay",
+        "three mile bay cdp",
+        "Three Mile Bay CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Three Mile Bay",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1860,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.533,
+        -100.74188
+      ],
+      "country": "South Dakota",
+      "earliest_year": 1918,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Horse Creek-South Dakota",
+      "known_aliases": [
+        "Horse Creek",
+        "horse creek",
+        "horse creek cdp",
+        "Horse Creek CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Horse Creek",
+      "reason": "missing_entry",
+      "region": "usa_south_dakota",
+      "sample_years": [
+        1918,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        26.71362,
+        -98.4479
+      ],
+      "country": "Texas",
+      "earliest_year": 1919,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "San Isidro-Texas",
+      "known_aliases": [
+        "San Isidro",
+        "san isidro",
+        "san isidro cdp",
+        "San Isidro CDP"
+      ],
+      "latest_year": 2020,
+      "name": "San Isidro",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1919,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.1533,
+        -78.55887
+      ],
+      "country": "Virginia",
+      "earliest_year": 1968,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Free Union-Virginia",
+      "known_aliases": [
+        "Free Union",
+        "free union",
+        "free union cdp",
+        "Free Union CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Free Union",
+      "reason": "missing_entry",
+      "region": "usa_virginia",
+      "sample_years": [
+        1968,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.66658,
+        -82.17174
+      ],
+      "country": "West Virginia",
+      "earliest_year": 1882,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Apple Grove-West Virginia",
+      "known_aliases": [
+        "Apple Grove",
+        "apple grove",
+        "apple grove cdp",
+        "Apple Grove CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Apple Grove",
+      "reason": "missing_entry",
+      "region": "usa_west_virginia",
+      "sample_years": [
+        1882,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.25745,
+        -88.6322
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1851,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lebanon-Wisconsin",
+      "known_aliases": [
+        "Lebanon",
+        "lebanon",
+        "lebanon cdp",
+        "Lebanon CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Lebanon",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1851,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.9058,
+        -91.83106
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1879,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Trego-Wisconsin",
+      "known_aliases": [
+        "Trego",
+        "trego",
+        "trego cdp",
+        "Trego CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Trego",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1879,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.84919,
+        -94.06749
+      ],
+      "country": "Iowa",
+      "earliest_year": 1909,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sun Valley Lake-Iowa",
+      "known_aliases": [
+        "Sun Valley Lake",
+        "sun valley lake",
+        "sun valley lake cdp",
+        "Sun Valley Lake CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Sun Valley Lake",
+      "reason": "missing_entry",
+      "region": "usa_iowa",
+      "sample_years": [
+        1909,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        60.15673,
+        -154.33961
+      ],
+      "country": "Alaska",
+      "earliest_year": 1876,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Port Alsworth-Alaska",
+      "known_aliases": [
+        "Port Alsworth",
+        "port alsworth",
+        "port alsworth cdp",
+        "Port Alsworth CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Port Alsworth",
+      "reason": "missing_entry",
+      "region": "usa_alaska",
+      "sample_years": [
+        1876,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.85589,
+        -112.61289
+      ],
+      "country": "Arizona",
+      "earliest_year": 1887,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Morristown-Arizona",
+      "known_aliases": [
+        "Morristown",
+        "morristown",
+        "morristown cdp",
+        "Morristown CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Morristown",
+      "reason": "missing_entry",
+      "region": "usa_arizona",
+      "sample_years": [
+        1887,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.44149,
+        -120.8605
+      ],
+      "country": "California",
+      "earliest_year": 1907,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Drytown-California",
+      "known_aliases": [
+        "Drytown",
+        "drytown",
+        "drytown cdp",
+        "Drytown CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Drytown",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1907,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.55513,
+        -78.87112
+      ],
+      "country": "Maryland",
+      "earliest_year": 1864,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bier-Maryland",
+      "known_aliases": [
+        "Bier",
+        "bier",
+        "bier cdp",
+        "Bier CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Bier",
+      "reason": "missing_entry",
+      "region": "usa_maryland",
+      "sample_years": [
+        1864,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.54704,
+        -114.57262
+      ],
+      "country": "Montana",
+      "earliest_year": 1947,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Olney-Montana",
+      "known_aliases": [
+        "Olney",
+        "olney",
+        "olney cdp",
+        "Olney CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Olney",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1947,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.86278,
+        -117.93214
+      ],
+      "country": "Nevada",
+      "earliest_year": 1894,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Gabbs-Nevada",
+      "known_aliases": [
+        "Gabbs",
+        "gabbs",
+        "gabbs cdp",
+        "Gabbs CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Gabbs",
+      "reason": "missing_entry",
+      "region": "usa_nevada",
+      "sample_years": [
+        1894,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.9793,
+        -74.90253
+      ],
+      "country": "New Jersey",
+      "earliest_year": 1868,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Marksboro-New Jersey",
+      "known_aliases": [
+        "Marksboro",
+        "marksboro",
+        "marksboro cdp",
+        "Marksboro CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Marksboro",
+      "reason": "missing_entry",
+      "region": "usa_new_jersey",
+      "sample_years": [
+        1868,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        26.68515,
+        -98.42307
+      ],
+      "country": "Texas",
+      "earliest_year": 1874,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Delmita-Texas",
+      "known_aliases": [
+        "Delmita",
+        "delmita",
+        "delmita cdp",
+        "Delmita CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Delmita",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1874,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

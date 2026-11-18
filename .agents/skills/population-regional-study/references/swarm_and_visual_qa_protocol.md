@@ -65,8 +65,11 @@ Quantitative CSV/JSON metrics alone cannot confirm cartographic quality or PDF l
    - Run `python .agents/skills/population-regional-study/scripts/render_and_audit_kriging_visuals.py <domain_dir> --render-only`.
    - Call `read_file` on EVERY generated PNG inside `<domain_dir>/diagnostics_visual/` (both raw kriging sheets `01..05` and the compiled `06_velkscala_<project>_verification.png` composite once Stage E Velkscala completes).
    - Confirm visually:
-     - Sharp fluvial corridors, valleys, coasts and elevation ridges (zero blurry Voronoi blobs).
-     - Seamless cross-border continuity (zero hard modern border cliffs or rectangular mosaic tiles).
+     - Sharp fluvial corridors, valleys, coasts and elevation ridges matching `POLARIS` (`0` blurry Voronoi blobs or uniform "samey" carrying-capacity washout).
+     - Genuine dasymetric suppression of uninhabitable deserts, high-alpine ridges, tundra and ice caps (`0` flat non-zero background floors).
+     - Zero backprojection of modern `uopp_2023AD` / `GHSL_2020` metropolitan footprints or suburban rings in pre-industrial sheets, and zero unweighted county-centroid polka-dots or rectangular mosaic tiles.
+     - Plain European human numerals (`0,01`, `1`, `10`, `100`, `1k`, `10k`) on all axes and colorbars (`0` `$10^k$` / `1e4` scientific notation on counts or densities).
+     - Seamless cross-border continuity (`0` hard modern border cliffs).
    - Write `<domain_dir>/config/visual_verification_manifest.json` after reading the PNGs:
      ```json
      {
@@ -85,13 +88,32 @@ Quantitative CSV/JSON metrics alone cannot confirm cartographic quality or PDF l
      }
      ```
    - Re-run `render_and_audit_kriging_visuals.py <domain_dir>` (without `--render-only`) to pass Gatekeeper C3.
-2. **Chapter Figure & Panel-by-Panel Inspection (`figures/visual_check.json`)**:
-   - Crop multi-panel figures into individual panels (`1A..nD`), inspect **every panel** and single PNG in `<chapter_dir>/figures/` via `read_file`, and inspect compiled `.pdf` Page `1` and multi-page tables.
+2. **Figure-by-Figure Visual Confirmation, Repair Loop & Auditor Sign-Off (`figures/visual_check.json`)**:
+   - Never treat `visual_check.json` as a script-generated formality or copy boilerplate notes across figures (`Gatekeeper D2` fails on duplicate or `< 50`-char notes).
+   - Crop multi-panel figures into individual panels (`1A..nD`), inspect **every figure and cropped panel one by one** via `read_file`, and inspect compiled `.pdf` Page `1` (`abstract` continuity with Page 2 if pushed by the cover hero) and multi-page tables. If ANY defect is found (pixelated mask tiles, warped/overextended ocean frame, stale pre-revision boundaries, occluded callout/legend, label crossing outside a panel spine, serif override, raw ASCII math, an orphaned Page-1 `Abstract` heading stranded without prose, or `LMMono`/monospace typography outside code), **fix the script or `.Rmd` / LaTeX headroom, regenerate that figure/PDF and re-open it via `read_file` in a loop until spotless** before proceeding.
    - Verify optically on every panel:
-     - Default Matplotlib theme: `DejaVu Sans` sans-serif typography (`0` serif or custom theme overrides) and intact 4-sided boxed spines on Cartesian plots.
-     - Properly typeset MathText (`$\nu$`, `$\tau_1$`, `$R^2$`, `$\log_{10}$`, never raw ASCII `nu = 3/2`, `tau1=1,41`, or `Pseudo R-squared`) with European `{,}` decimals.
-     - European decimal comma axis ticks (`0,75`, never `0.75`), intact Roman numerals and acronyms (`Pueblo III`, `SSR`, never `Pueblo Iii` or `Ssr`), plain titles (zero technobabble) and informative data series (never degenerate flat `0,998` bar charts).
-     - Uncrossed `zorder=6/10` callouts, top colorbar titles, `vmax` ceiling match and `Stadestér` diacritic.
-   - Save `<chapter_dir>/figures/visual_check.json` recording all inspected filenames/panels AFTER final PNG generation (`visual_check.json` `mtime >= max(png.mtime)`).
+     - **Mask & Vector Fidelity**: Smooth projected vector sub-region polygons (`0` pixelated `*_areal_mask.png` `imshow()` blocks except continuous kriging/`Velkscala` surfaces) matching current masks and `.naissance` borders.
+     - **Unwarped Equal-Area Framing**: Crisp `set_aspect("equal")` shapes with dedicated side-panels or insets for distant islands/exclaves (`0` stretched coastlines or empty-ocean frames).
+     - **Strict In-Panel Bounds & Zero Occlusion**: All callouts, bar-end values, axis labels and interior legends stay completely inside panel spines and canvas bounds (`0` overlapping text boxes or clipped labels).
+     - **Default Matplotlib Theme & Typography**: `DejaVu Sans` sans-serif typography (`0` serif or `seaborn` overrides), intact 4-sided boxed spines, rendered MathText (`$\nu$`, `$\tau_1$`, `$R^2$`, `$\log_{10}$`, never raw `nu = 3/2`, `tau1=1,41`, or `Pseudo R-squared`) with European `{,}` decimals, comma axis ticks (`0,75`), plain human log ticks (`0,01..1k..1,5M`, never `$10^k$` or `1e4` scientific notation on counts, sites, inhabitants or densities), intact Roman numerals (`Pueblo III`, never `Pueblo Iii`), plain titles and informative non-degenerate plots.
+     - **Geographic & Demographic Sense**: Sub-regions, rivers, cities, uninhabitable wasteland voids, suppressed modern urban footprints and trajectories make clear historical and cartographic sense to independent `@verifier` / auditor agents.
+     - **PDF Page-1 Typesetting & Font Purity**: Confirm visually on compiled PDF pages that `# Abstract` is never orphaned at the bottom of Page `1` (move `Abstract` onto Page `2` together with its opening paragraph whenever Page `1` hero spacing is tight) and that `0` monospace (`LMMono`/typewriter) spans appear in captions, headings, prose or tables.
+   - Recompile affected `.pdf` and Intellte `.md` outputs **after** final PNG fixes (`pdf.mtime >= fig.mtime >= mask.mtime`), then save `<chapter_dir>/figures/visual_check.json` and `<project_dir>/figures/visual_check.json` containing one dict per PNG with unique figure-specific `notes` (`>= 50` chars) and explicit `zero_occlusion_and_in_panel_bounds: true` plus `polaris_visual_parity: true` attestations (`manifest.mtime >= max(png.mtime)`):
+     ```json
+     {
+       "approved": true,
+       "verified_at_gmt0": "2026-11-18T07:30:00Z",
+       "zero_occlusion_and_in_panel_bounds": true,
+       "polaris_visual_parity": true,
+       "figures": [
+         {
+           "file": "fig1_example_spatial.png",
+           "zero_occlusion_and_in_panel_bounds": true,
+           "polaris_visual_parity": true,
+           "notes": "Inspected full panel and cropped inset: smooth vector sub-regions in Equal-Area Albers with mainland/island insets, 7 in-bounds callouts clear of river lines and legend."
+         }
+       ]
+     }
+     ```
 3. **Note on Intellte Sync**:
    - `sync_viscount_region.js` skips `diagnostics_visual/` and Stage C intermediate grids during web sync so high-DPI inspection sheets remain local QA artefacts rather than bloating VitePress static assets.

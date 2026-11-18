@@ -1,0 +1,967 @@
+{
+  "batch_index": 148,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        37.78119,
+        -85.68724
+      ],
+      "country": "Kentucky",
+      "earliest_year": 1862,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Boston-Kentucky",
+      "known_aliases": [
+        "Boston",
+        "boston",
+        "boston cdp",
+        "Boston CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Boston",
+      "reason": "missing_entry",
+      "region": "usa_kentucky",
+      "sample_years": [
+        1862,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.4918,
+        -85.47213
+      ],
+      "country": "Kentucky",
+      "earliest_year": 1911,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Westport-Kentucky",
+      "known_aliases": [
+        "Westport",
+        "westport",
+        "westport cdp",
+        "Westport CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Westport",
+      "reason": "missing_entry",
+      "region": "usa_kentucky",
+      "sample_years": [
+        1911,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.39839,
+        -105.95718
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1932,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Galisteo-New Mexico",
+      "known_aliases": [
+        "Galisteo",
+        "galisteo",
+        "galisteo cdp",
+        "Galisteo CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Galisteo",
+      "reason": "missing_entry",
+      "region": "usa_new_mexico",
+      "sample_years": [
+        1932,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.27313,
+        -108.12638
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1919,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Las Tusas-New Mexico",
+      "known_aliases": [
+        "Las Tusas",
+        "las tusas",
+        "las tusas cdp",
+        "Las Tusas CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Las Tusas",
+      "reason": "missing_entry",
+      "region": "usa_new_mexico",
+      "sample_years": [
+        1919,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.87292,
+        -107.62322
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1967,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Navajo Dam-New Mexico",
+      "known_aliases": [
+        "Navajo Dam",
+        "navajo dam",
+        "navajo dam cdp",
+        "Navajo Dam CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Navajo Dam",
+      "reason": "missing_entry",
+      "region": "usa_new_mexico",
+      "sample_years": [
+        1967,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.74552,
+        -83.61027
+      ],
+      "country": "Ohio",
+      "earliest_year": 1895,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bentonville-Ohio",
+      "known_aliases": [
+        "Bentonville",
+        "bentonville",
+        "bentonville cdp",
+        "Bentonville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Bentonville",
+      "reason": "missing_entry",
+      "region": "usa_ohio",
+      "sample_years": [
+        1895,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.91798,
+        -79.46011
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1931,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Templeton-Pennsylvania",
+      "known_aliases": [
+        "Templeton",
+        "templeton",
+        "templeton cdp",
+        "Templeton CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Templeton",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1931,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.77094,
+        -80.55022
+      ],
+      "country": "South Carolina",
+      "earliest_year": 1854,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tradesville-South Carolina",
+      "known_aliases": [
+        "Tradesville",
+        "tradesville",
+        "tradesville cdp",
+        "Tradesville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Tradesville",
+      "reason": "missing_entry",
+      "region": "usa_south_carolina",
+      "sample_years": [
+        1854,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.62075,
+        -123.95318
+      ],
+      "country": "Washington",
+      "earliest_year": 1942,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bay Center-Washington",
+      "known_aliases": [
+        "Bay Center",
+        "bay center",
+        "bay center cdp",
+        "Bay Center CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Bay Center",
+      "reason": "missing_entry",
+      "region": "usa_washington",
+      "sample_years": [
+        1942,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        31.32896,
+        -81.95398
+      ],
+      "country": "Georgia",
+      "earliest_year": 1895,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hortense-Georgia",
+      "known_aliases": [
+        "Hortense",
+        "hortense",
+        "hortense cdp",
+        "Hortense CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Hortense",
+      "reason": "missing_entry",
+      "region": "usa_georgia",
+      "sample_years": [
+        1895,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.51977,
+        -83.84614
+      ],
+      "country": "Kentucky",
+      "earliest_year": 1921,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mays Lick-Kentucky",
+      "known_aliases": [
+        "Mays Lick",
+        "mays lick",
+        "mays lick cdp",
+        "Mays Lick CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Mays Lick",
+      "reason": "missing_entry",
+      "region": "usa_kentucky",
+      "sample_years": [
+        1921,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.79546,
+        -78.69761
+      ],
+      "country": "Virginia",
+      "earliest_year": 1879,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Schuyler-Virginia",
+      "known_aliases": [
+        "Schuyler",
+        "schuyler",
+        "schuyler cdp",
+        "Schuyler CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Schuyler",
+      "reason": "missing_entry",
+      "region": "usa_virginia",
+      "sample_years": [
+        1879,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.72661,
+        -91.99853
+      ],
+      "country": "Iowa",
+      "earliest_year": 1863,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Conroy-Iowa",
+      "known_aliases": [
+        "Conroy",
+        "conroy",
+        "conroy cdp",
+        "Conroy CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Conroy",
+      "reason": "missing_entry",
+      "region": "usa_iowa",
+      "sample_years": [
+        1863,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.08681,
+        -88.51165
+      ],
+      "country": "Illinois",
+      "earliest_year": 1869,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "White Heath-Illinois",
+      "known_aliases": [
+        "White Heath",
+        "white heath",
+        "white heath cdp",
+        "White Heath CDP"
+      ],
+      "latest_year": 2020,
+      "name": "White Heath",
+      "reason": "missing_entry",
+      "region": "usa_illinois",
+      "sample_years": [
+        1869,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.67009,
+        -114.0857
+      ],
+      "country": "Montana",
+      "earliest_year": 1878,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Turtle Lake-Montana",
+      "known_aliases": [
+        "Turtle Lake",
+        "turtle lake",
+        "turtle lake cdp",
+        "Turtle Lake CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Turtle Lake",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1878,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.38917,
+        -75.34439
+      ],
+      "country": "New Jersey",
+      "earliest_year": 1675,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Greenwich (Salem County)-New Jersey",
+      "known_aliases": [
+        "Greenwich (Salem County)",
+        "greenwich",
+        "greenwich cdp",
+        "greenwich township",
+        "cohansey",
+        "greenwich cumberland",
+        "cohansey port",
+        "greenwich township cumberland",
+        "cohansey river port",
+        "Greenwich CDP",
+        "Greenwich Township",
+        "Cohansey",
+        "Greenwich Cumberland",
+        "Cohansey Port",
+        "Greenwich Township Cumberland",
+        "Cohansey River Port"
+      ],
+      "latest_year": 2020,
+      "name": "Greenwich (Salem County)",
+      "reason": "missing_entry",
+      "region": "usa_new_jersey",
+      "sample_years": [
+        1675,
+        1830,
+        1930,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.96015,
+        -96.57105
+      ],
+      "country": "Oklahoma",
+      "earliest_year": 1937,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sand Point-Oklahoma",
+      "known_aliases": [
+        "Sand Point",
+        "sand point",
+        "sand point cdp",
+        "Sand Point CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Sand Point",
+      "reason": "missing_entry",
+      "region": "usa_oklahoma",
+      "sample_years": [
+        1937,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.44931,
+        -121.64961
+      ],
+      "country": "Oregon",
+      "earliest_year": 1952,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Camp Sherman-Oregon",
+      "known_aliases": [
+        "Camp Sherman",
+        "camp sherman",
+        "camp sherman cdp",
+        "Camp Sherman CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Camp Sherman",
+      "reason": "missing_entry",
+      "region": "usa_oregon",
+      "sample_years": [
+        1952,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.50048,
+        -76.21861
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1967,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Schubert-Pennsylvania",
+      "known_aliases": [
+        "Schubert",
+        "schubert",
+        "schubert cdp",
+        "Schubert CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Schubert",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1967,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        27.42816,
+        -98.83221
+      ],
+      "country": "Texas",
+      "earliest_year": 1917,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bruni-Texas",
+      "known_aliases": [
+        "Bruni",
+        "bruni",
+        "bruni cdp",
+        "Bruni CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Bruni",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1917,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.57138,
+        -114.39263
+      ],
+      "country": "Arizona",
+      "earliest_year": 1877,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Crystal Beach-Arizona",
+      "known_aliases": [
+        "Crystal Beach",
+        "crystal beach",
+        "crystal beach cdp",
+        "Crystal Beach CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Crystal Beach",
+      "reason": "missing_entry",
+      "region": "usa_arizona",
+      "sample_years": [
+        1877,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.71019,
+        -111.49419
+      ],
+      "country": "Arizona",
+      "earliest_year": 1959,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Picacho-Arizona",
+      "known_aliases": [
+        "Picacho",
+        "picacho",
+        "picacho cdp",
+        "Picacho CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Picacho",
+      "reason": "missing_entry",
+      "region": "usa_arizona",
+      "sample_years": [
+        1959,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.81133,
+        -123.50826
+      ],
+      "country": "California",
+      "earliest_year": 1913,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Burnt Ranch-California",
+      "known_aliases": [
+        "Burnt Ranch",
+        "burnt ranch",
+        "burnt ranch cdp",
+        "Burnt Ranch CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Burnt Ranch",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1913,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.99233,
+        -121.23487
+      ],
+      "country": "California",
+      "earliest_year": 1880,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fort Hunter Liggett-California",
+      "known_aliases": [
+        "Fort Hunter Liggett",
+        "fort hunter liggett",
+        "fort hunter liggett cdp",
+        "Fort Hunter Liggett CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Fort Hunter Liggett",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1880,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.4928,
+        -89.48787
+      ],
+      "country": "Mississippi",
+      "earliest_year": 1893,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Harperville-Mississippi",
+      "known_aliases": [
+        "Harperville",
+        "harperville",
+        "harperville cdp",
+        "Harperville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Harperville",
+      "reason": "missing_entry",
+      "region": "usa_mississippi",
+      "sample_years": [
+        1893,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.95076,
+        -94.20527
+      ],
+      "country": "Missouri",
+      "earliest_year": 1883,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tarsney Lakes-Missouri",
+      "known_aliases": [
+        "Tarsney Lakes",
+        "tarsney lakes",
+        "tarsney lakes cdp",
+        "Tarsney Lakes CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Tarsney Lakes",
+      "reason": "missing_entry",
+      "region": "usa_missouri",
+      "sample_years": [
+        1883,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.15367,
+        -106.01466
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1957,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lyden-New Mexico",
+      "known_aliases": [
+        "Lyden",
+        "lyden",
+        "lyden cdp",
+        "Lyden CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Lyden",
+      "reason": "missing_entry",
+      "region": "usa_new_mexico",
+      "sample_years": [
+        1957,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.56651,
+        -78.85113
+      ],
+      "country": "North Carolina",
+      "earliest_year": 1916,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Butters-North Carolina",
+      "known_aliases": [
+        "Butters",
+        "butters",
+        "butters cdp",
+        "Butters CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Butters",
+      "reason": "missing_entry",
+      "region": "usa_north_carolina",
+      "sample_years": [
+        1916,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.5216,
+        -78.63535
+      ],
+      "country": "West Virginia",
+      "earliest_year": 1859,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Green Spring-West Virginia",
+      "known_aliases": [
+        "Green Spring",
+        "green spring",
+        "green spring cdp",
+        "Green Spring CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Green Spring",
+      "reason": "missing_entry",
+      "region": "usa_maryland",
+      "sample_years": [
+        1859,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.42981,
+        -111.26492
+      ],
+      "country": "Arizona",
+      "earliest_year": 1883,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Nelson-Arizona",
+      "known_aliases": [
+        "Nelson",
+        "nelson",
+        "nelson cdp",
+        "Nelson CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Nelson",
+      "reason": "missing_entry",
+      "region": "usa_arizona",
+      "sample_years": [
+        1883,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,953 @@
+{
+  "batch_index": 84,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        41.47427,
+        -74.41152
+      ],
+      "country": "New York",
+      "earliest_year": 1908,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Washington Heights-New York",
+      "known_aliases": [
+        "Washington Heights",
+        "washington heights",
+        "washington heights cdp",
+        "Washington Heights CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Washington Heights",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1908,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.08082,
+        -74.17412
+      ],
+      "country": "New Jersey",
+      "earliest_year": 1874,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ramapo College of New Jersey-New Jersey",
+      "known_aliases": [
+        "Ramapo College of New Jersey",
+        "ramapo college of new jersey",
+        "ramapo college of new jersey cdp",
+        "Ramapo College of New Jersey CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Ramapo College of New Jersey",
+      "reason": "missing_entry",
+      "region": "usa_new_jersey",
+      "sample_years": [
+        1874,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.02687,
+        -74.38004
+      ],
+      "country": "New Jersey",
+      "earliest_year": 1861,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Macopin-New Jersey",
+      "known_aliases": [
+        "Macopin",
+        "macopin",
+        "macopin cdp",
+        "Macopin CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Macopin",
+      "reason": "missing_entry",
+      "region": "usa_new_jersey",
+      "sample_years": [
+        1861,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        61.88696,
+        -149.62023
+      ],
+      "country": "Alaska",
+      "earliest_year": 1934,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Willow-Alaska",
+      "known_aliases": [
+        "Willow",
+        "willow",
+        "willow cdp",
+        "Willow CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Willow",
+      "reason": "missing_entry",
+      "region": "usa_alaska",
+      "sample_years": [
+        1934,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.30749,
+        -78.32522
+      ],
+      "country": "Virginia",
+      "earliest_year": 1853,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lake Holiday-Virginia",
+      "known_aliases": [
+        "Lake Holiday",
+        "lake holiday",
+        "lake holiday cdp",
+        "Lake Holiday CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Lake Holiday",
+      "reason": "missing_entry",
+      "region": "usa_virginia",
+      "sample_years": [
+        1853,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        30.42637,
+        -86.71929
+      ],
+      "country": "Florida",
+      "earliest_year": 1941,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hurlburt Field-Florida",
+      "known_aliases": [
+        "Hurlburt Field",
+        "hurlburt field",
+        "hurlburt field cdp",
+        "Hurlburt Field CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Hurlburt Field",
+      "reason": "missing_entry",
+      "region": "usa_florida",
+      "sample_years": [
+        1941,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.60197,
+        -82.59577
+      ],
+      "country": "North Carolina",
+      "earliest_year": 1863,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Emma-North Carolina",
+      "known_aliases": [
+        "Emma",
+        "emma",
+        "emma cdp",
+        "Emma CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Emma",
+      "reason": "missing_entry",
+      "region": "usa_north_carolina",
+      "sample_years": [
+        1863,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.99528,
+        -78.37884
+      ],
+      "country": "Virginia",
+      "earliest_year": 1867,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rivanna-Virginia",
+      "known_aliases": [
+        "Rivanna",
+        "rivanna",
+        "rivanna cdp",
+        "Rivanna CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Rivanna",
+      "reason": "missing_entry",
+      "region": "usa_virginia",
+      "sample_years": [
+        1867,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.37433,
+        -85.20821
+      ],
+      "country": "Indiana",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Dunkirk-Indiana",
+      "known_aliases": [
+        "Dunkirk",
+        "dunkirk",
+        "dunkirk city",
+        "Dunkirk city"
+      ],
+      "latest_year": 2026,
+      "name": "Dunkirk",
+      "reason": "missing_entry",
+      "region": "usa_indiana",
+      "sample_years": [
+        1850,
+        1990,
+        2013,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.83479,
+        -120.01856
+      ],
+      "country": "California",
+      "earliest_year": 1899,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Meyers-California",
+      "known_aliases": [
+        "Meyers",
+        "meyers",
+        "meyers cdp",
+        "Meyers CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Meyers",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1899,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.22487,
+        -75.63429
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1923,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kenilworth-Pennsylvania",
+      "known_aliases": [
+        "Kenilworth",
+        "kenilworth",
+        "kenilworth cdp",
+        "Kenilworth CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Kenilworth",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1923,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        56.18078,
+        -132.02679
+      ],
+      "country": "Alaska",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Wrangell-Alaska",
+      "known_aliases": [
+        "Wrangell",
+        "wrangell",
+        "wrangell city and borough",
+        "Wrangell city and borough"
+      ],
+      "latest_year": 2026,
+      "name": "Wrangell",
+      "reason": "missing_entry",
+      "region": "usa_alaska",
+      "sample_years": [
+        1850,
+        1990,
+        2013,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.67982,
+        -106.03986
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1964,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tres Arroyos-New Mexico",
+      "known_aliases": [
+        "Tres Arroyos",
+        "tres arroyos",
+        "tres arroyos cdp",
+        "Tres Arroyos CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Tres Arroyos",
+      "reason": "missing_entry",
+      "region": "usa_new_mexico",
+      "sample_years": [
+        1964,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.89681,
+        -81.3322
+      ],
+      "country": "Ohio",
+      "earliest_year": 1859,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Middlebranch-Ohio",
+      "known_aliases": [
+        "Middlebranch",
+        "middlebranch",
+        "middlebranch cdp",
+        "Middlebranch CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Middlebranch",
+      "reason": "missing_entry",
+      "region": "usa_ohio",
+      "sample_years": [
+        1859,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.90878,
+        -81.86358
+      ],
+      "country": "South Carolina",
+      "earliest_year": 1949,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Camp Croft-South Carolina",
+      "known_aliases": [
+        "Camp Croft",
+        "camp croft",
+        "camp croft cdp",
+        "Camp Croft CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Camp Croft",
+      "reason": "missing_entry",
+      "region": "usa_south_carolina",
+      "sample_years": [
+        1949,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.5429,
+        -122.4645
+      ],
+      "country": "California",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Centerville-California",
+      "known_aliases": [
+        "Centerville",
+        "centerville",
+        "centerville cdp",
+        "Centerville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Centerville",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1850,
+        1860,
+        1870,
+        1880,
+        1950,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.978,
+        -76.14165
+      ],
+      "country": "New York",
+      "earliest_year": 1889,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Nedrow-New York",
+      "known_aliases": [
+        "Nedrow",
+        "nedrow",
+        "nedrow cdp",
+        "Nedrow CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Nedrow",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1889,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.33131,
+        -80.80926
+      ],
+      "country": "Virginia",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Narrows-Virginia",
+      "known_aliases": [
+        "Narrows",
+        "narrows",
+        "narrows town",
+        "Narrows town"
+      ],
+      "latest_year": 2026,
+      "name": "Narrows",
+      "reason": "missing_entry",
+      "region": "usa_virginia",
+      "sample_years": [
+        1850,
+        1990,
+        2013,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.38291,
+        -122.71199
+      ],
+      "country": "Washington",
+      "earliest_year": 1973,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Stansberry Lake-Washington",
+      "known_aliases": [
+        "Stansberry Lake",
+        "stansberry lake",
+        "stansberry lake cdp",
+        "Stansberry Lake CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Stansberry Lake",
+      "reason": "missing_entry",
+      "region": "usa_washington",
+      "sample_years": [
+        1973,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.56912,
+        -70.3862
+      ],
+      "country": "Maine",
+      "earliest_year": 1965,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Dunstan-Maine",
+      "known_aliases": [
+        "Dunstan",
+        "dunstan",
+        "dunstan cdp",
+        "Dunstan CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Dunstan",
+      "reason": "missing_entry",
+      "region": "usa_maine",
+      "sample_years": [
+        1965,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.05071,
+        -76.11974
+      ],
+      "country": "New York",
+      "earliest_year": 1968,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tioga Terrace-New York",
+      "known_aliases": [
+        "Tioga Terrace",
+        "tioga terrace",
+        "tioga terrace cdp",
+        "Tioga Terrace CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Tioga Terrace",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1968,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        31.55913,
+        -97.29606
+      ],
+      "country": "Texas",
+      "earliest_year": 1899,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Willow Grove-Texas",
+      "known_aliases": [
+        "Willow Grove",
+        "willow grove",
+        "willow grove cdp",
+        "Willow Grove CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Willow Grove",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1899,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.10072,
+        -117.13799
+      ],
+      "country": "California",
+      "earliest_year": 1969,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Harmony Grove-California",
+      "known_aliases": [
+        "Harmony Grove",
+        "harmony grove",
+        "harmony grove cdp",
+        "Harmony Grove CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Harmony Grove",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1969,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.46649,
+        -91.05686
+      ],
+      "country": "Iowa",
+      "earliest_year": 1935,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kent Estates-Iowa",
+      "known_aliases": [
+        "Kent Estates",
+        "kent estates",
+        "kent estates cdp",
+        "Kent Estates CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Kent Estates",
+      "reason": "missing_entry",
+      "region": "usa_iowa",
+      "sample_years": [
+        1935,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.49039,
+        -96.73155
+      ],
+      "country": "Texas",
+      "earliest_year": 1901,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Gunter-Texas",
+      "known_aliases": [
+        "Gunter",
+        "gunter",
+        "gunter city",
+        "Gunter city"
+      ],
+      "latest_year": 2026,
+      "name": "Gunter",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1901,
+        2002,
+        2014,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        26.72271,
+        -81.55411
+      ],
+      "country": "Florida",
+      "earliest_year": 1930,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fort Denaud-Florida",
+      "known_aliases": [
+        "Fort Denaud",
+        "fort denaud",
+        "fort denaud cdp",
+        "Fort Denaud CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Fort Denaud",
+      "reason": "missing_entry",
+      "region": "usa_florida",
+      "sample_years": [
+        1930,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.32087,
+        -74.38626
+      ],
+      "country": "New Jersey",
+      "earliest_year": 1873,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Regency at Monroe-New Jersey",
+      "known_aliases": [
+        "Regency at Monroe",
+        "regency at monroe",
+        "regency at monroe cdp",
+        "Regency at Monroe CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Regency at Monroe",
+      "reason": "missing_entry",
+      "region": "usa_new_jersey",
+      "sample_years": [
+        1873,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.27725,
+        -82.17279
+      ],
+      "country": "Tennessee",
+      "earliest_year": 1879,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hampton-Tennessee",
+      "known_aliases": [
+        "Hampton",
+        "hampton",
+        "hampton cdp",
+        "Hampton CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Hampton",
+      "reason": "missing_entry",
+      "region": "usa_tennessee",
+      "sample_years": [
+        1879,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.65101,
+        -77.17052
+      ],
+      "country": "Virginia",
+      "earliest_year": 1902,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mason Neck-Virginia",
+      "known_aliases": [
+        "Mason Neck",
+        "mason neck",
+        "mason neck cdp",
+        "Mason Neck CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Mason Neck",
+      "reason": "missing_entry",
+      "region": "usa_virginia",
+      "sample_years": [
+        1902,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.01346,
+        -102.35962
+      ],
+      "country": "Texas",
+      "earliest_year": 1917,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Gardendale-Texas",
+      "known_aliases": [
+        "Gardendale",
+        "gardendale",
+        "gardendale cdp",
+        "Gardendale CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Gardendale",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1917,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,955 @@
+{
+  "batch_index": 160,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        42.32452,
+        -76.5334
+      ],
+      "country": "New York",
+      "earliest_year": 1855,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "West Danby-New York",
+      "known_aliases": [
+        "West Danby",
+        "west danby",
+        "west danby cdp",
+        "West Danby CDP"
+      ],
+      "latest_year": 2020,
+      "name": "West Danby",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1855,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.22943,
+        -124.19846
+      ],
+      "country": "Washington",
+      "earliest_year": 1931,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Moclips-Washington",
+      "known_aliases": [
+        "Moclips",
+        "moclips",
+        "moclips cdp",
+        "Moclips CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Moclips",
+      "reason": "missing_entry",
+      "region": "usa_washington",
+      "sample_years": [
+        1931,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.42611,
+        -121.35419
+      ],
+      "country": "California",
+      "earliest_year": 1941,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rackerby-California",
+      "known_aliases": [
+        "Rackerby",
+        "rackerby",
+        "rackerby cdp",
+        "Rackerby CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Rackerby",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1941,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.3949,
+        -89.94073
+      ],
+      "country": "Illinois",
+      "earliest_year": 1915,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Goofy Ridge-Illinois",
+      "known_aliases": [
+        "Goofy Ridge",
+        "goofy ridge",
+        "goofy ridge cdp",
+        "Goofy Ridge CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Goofy Ridge",
+      "reason": "missing_entry",
+      "region": "usa_illinois",
+      "sample_years": [
+        1915,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.27071,
+        -88.362
+      ],
+      "country": "Illinois",
+      "earliest_year": 1909,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ridgefield-Illinois",
+      "known_aliases": [
+        "Ridgefield",
+        "ridgefield",
+        "ridgefield cdp",
+        "Ridgefield CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Ridgefield",
+      "reason": "missing_entry",
+      "region": "usa_illinois",
+      "sample_years": [
+        1909,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.38863,
+        -79.46847
+      ],
+      "country": "Maryland",
+      "earliest_year": 1962,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Crellin-Maryland",
+      "known_aliases": [
+        "Crellin",
+        "crellin",
+        "crellin cdp",
+        "Crellin CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Crellin",
+      "reason": "missing_entry",
+      "region": "usa_maryland",
+      "sample_years": [
+        1962,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.6371,
+        -85.84792
+      ],
+      "country": "Michigan",
+      "earliest_year": 1957,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bendon-Michigan",
+      "known_aliases": [
+        "Bendon",
+        "bendon",
+        "bendon cdp",
+        "Bendon CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Bendon",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1957,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.70399,
+        -90.7974
+      ],
+      "country": "Mississippi",
+      "earliest_year": 1890,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Skene-Mississippi",
+      "known_aliases": [
+        "Skene",
+        "skene",
+        "skene cdp",
+        "Skene CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Skene",
+      "reason": "missing_entry",
+      "region": "usa_mississippi",
+      "sample_years": [
+        1890,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.65804,
+        -118.14402
+      ],
+      "country": "Nevada",
+      "earliest_year": 1932,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Imlay-Nevada",
+      "known_aliases": [
+        "Imlay",
+        "imlay",
+        "imlay cdp",
+        "Imlay CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Imlay",
+      "reason": "missing_entry",
+      "region": "usa_nevada",
+      "sample_years": [
+        1932,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.48548,
+        -105.88629
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1958,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lamy-New Mexico",
+      "known_aliases": [
+        "Lamy",
+        "lamy",
+        "lamy cdp",
+        "Lamy CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Lamy",
+      "reason": "missing_entry",
+      "region": "usa_new_mexico",
+      "sample_years": [
+        1958,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.80645,
+        -73.55931
+      ],
+      "country": "New York",
+      "earliest_year": 1938,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Wassaic-New York",
+      "known_aliases": [
+        "Wassaic",
+        "wassaic",
+        "wassaic cdp",
+        "Wassaic CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Wassaic",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1938,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.67789,
+        -84.72593
+      ],
+      "country": "Ohio",
+      "earliest_year": 1872,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Nettle Lake-Ohio",
+      "known_aliases": [
+        "Nettle Lake",
+        "nettle lake",
+        "nettle lake cdp",
+        "Nettle Lake CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Nettle Lake",
+      "reason": "missing_entry",
+      "region": "usa_ohio",
+      "sample_years": [
+        1872,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.97174,
+        -96.92384
+      ],
+      "country": "Oklahoma",
+      "earliest_year": 1869,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lebanon-Oklahoma",
+      "known_aliases": [
+        "Lebanon",
+        "lebanon",
+        "lebanon cdp",
+        "Lebanon CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Lebanon",
+      "reason": "missing_entry",
+      "region": "usa_oklahoma",
+      "sample_years": [
+        1869,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.86608,
+        -77.46386
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1893,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Coburn-Pennsylvania",
+      "known_aliases": [
+        "Coburn",
+        "coburn",
+        "coburn cdp",
+        "Coburn CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Coburn",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1893,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.35891,
+        -117.83719
+      ],
+      "country": "Washington",
+      "earliest_year": 1955,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Addy-Washington",
+      "known_aliases": [
+        "Addy",
+        "addy",
+        "addy cdp",
+        "Addy CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Addy",
+      "reason": "missing_entry",
+      "region": "usa_washington",
+      "sample_years": [
+        1955,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        60.93507,
+        -164.64568
+      ],
+      "country": "Alaska",
+      "earliest_year": 1929,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Newtok-Alaska",
+      "known_aliases": [
+        "Newtok",
+        "newtok",
+        "newtok cdp",
+        "Newtok CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Newtok",
+      "reason": "missing_entry",
+      "region": "usa_alaska",
+      "sample_years": [
+        1929,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.31981,
+        -111.13931
+      ],
+      "country": "Arizona",
+      "earliest_year": 1931,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tonto Village-Arizona",
+      "known_aliases": [
+        "Tonto Village",
+        "tonto village",
+        "tonto village cdp",
+        "Tonto Village CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Tonto Village",
+      "reason": "missing_entry",
+      "region": "usa_arizona",
+      "sample_years": [
+        1931,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.8914,
+        -83.44353
+      ],
+      "country": "Kentucky",
+      "earliest_year": 1919,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ezel-Kentucky",
+      "known_aliases": [
+        "Ezel",
+        "ezel",
+        "ezel cdp",
+        "Ezel CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Ezel",
+      "reason": "missing_entry",
+      "region": "usa_kentucky",
+      "sample_years": [
+        1919,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.26549,
+        -75.88697
+      ],
+      "country": "Maryland",
+      "earliest_year": 1889,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Nanticoke-Maryland",
+      "known_aliases": [
+        "Nanticoke",
+        "nanticoke",
+        "nanticoke cdp",
+        "Nanticoke CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Nanticoke",
+      "reason": "missing_entry",
+      "region": "usa_maryland",
+      "sample_years": [
+        1889,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.85564,
+        -85.85726
+      ],
+      "country": "Michigan",
+      "earliest_year": 1867,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Maple City-Michigan",
+      "known_aliases": [
+        "Maple City",
+        "maple city",
+        "maple city cdp",
+        "Maple City CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Maple City",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1867,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.00475,
+        -89.52635
+      ],
+      "country": "Missouri",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Blodgett-Missouri",
+      "known_aliases": [
+        "Blodgett",
+        "blodgett",
+        "blodgett village",
+        "Blodgett village"
+      ],
+      "latest_year": 2026,
+      "name": "Blodgett",
+      "reason": "missing_entry",
+      "region": "usa_missouri",
+      "sample_years": [
+        1850,
+        1990,
+        2013,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.92681,
+        -77.51859
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1910,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Madisonburg-Pennsylvania",
+      "known_aliases": [
+        "Madisonburg",
+        "madisonburg",
+        "madisonburg cdp",
+        "Madisonburg CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Madisonburg",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1910,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.40829,
+        -80.43821
+      ],
+      "country": "South Carolina",
+      "earliest_year": 1866,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Harbor Island-South Carolina",
+      "known_aliases": [
+        "Harbor Island",
+        "harbor island",
+        "harbor island cdp",
+        "Harbor Island CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Harbor Island",
+      "reason": "missing_entry",
+      "region": "usa_south_carolina",
+      "sample_years": [
+        1866,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.83426,
+        -81.86631
+      ],
+      "country": "South Carolina",
+      "earliest_year": 1867,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pauline-South Carolina",
+      "known_aliases": [
+        "Pauline",
+        "pauline",
+        "pauline cdp",
+        "Pauline CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Pauline",
+      "reason": "missing_entry",
+      "region": "usa_south_carolina",
+      "sample_years": [
+        1867,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        31.88979,
+        -106.61351
+      ],
+      "country": "Texas",
+      "earliest_year": 1919,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Prado Verde-Texas",
+      "known_aliases": [
+        "Prado Verde",
+        "prado verde",
+        "prado verde cdp",
+        "Prado Verde CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Prado Verde",
+      "reason": "missing_entry",
+      "region": "usa_new_mexico",
+      "sample_years": [
+        1919,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.64225,
+        -79.79189
+      ],
+      "country": "Virginia",
+      "earliest_year": 1904,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Eagle Rock-Virginia",
+      "known_aliases": [
+        "Eagle Rock",
+        "eagle rock",
+        "eagle rock cdp",
+        "Eagle Rock CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Eagle Rock",
+      "reason": "missing_entry",
+      "region": "usa_virginia",
+      "sample_years": [
+        1904,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.91879,
+        -88.68948
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1859,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hebron-Wisconsin",
+      "known_aliases": [
+        "Hebron",
+        "hebron",
+        "hebron cdp",
+        "Hebron CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Hebron",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1859,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.06838,
+        -87.29434
+      ],
+      "country": "Alabama",
+      "earliest_year": 1967,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Boykin-Alabama",
+      "known_aliases": [
+        "Boykin",
+        "boykin",
+        "boykin cdp",
+        "Boykin CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Boykin",
+      "reason": "missing_entry",
+      "region": "usa_alabama",
+      "sample_years": [
+        1967,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.54492,
+        -122.92096
+      ],
+      "country": "California",
+      "earliest_year": 1922,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Greenview-California",
+      "known_aliases": [
+        "Greenview",
+        "greenview",
+        "greenview cdp",
+        "Greenview CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Greenview",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1922,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.39727,
+        -76.34439
+      ],
+      "country": "New York",
+      "earliest_year": 1928,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Slaterville Springs-New York",
+      "known_aliases": [
+        "Slaterville Springs",
+        "slaterville springs",
+        "slaterville springs cdp",
+        "Slaterville Springs CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Slaterville Springs",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1928,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

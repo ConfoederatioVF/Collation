@@ -1,0 +1,974 @@
+{
+  "batch_index": 175,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        36.94774,
+        -78.93326
+      ],
+      "country": "Virginia",
+      "earliest_year": 1898,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Nathalie-Virginia",
+      "known_aliases": [
+        "Nathalie",
+        "nathalie",
+        "nathalie cdp",
+        "Nathalie CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Nathalie",
+      "reason": "missing_entry",
+      "region": "usa_virginia",
+      "sample_years": [
+        1898,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.19088,
+        -86.7919
+      ],
+      "country": "Alabama",
+      "earliest_year": 1868,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "East Point-Alabama",
+      "known_aliases": [
+        "East Point",
+        "east point",
+        "east point cdp",
+        "East Point CDP"
+      ],
+      "latest_year": 2020,
+      "name": "East Point",
+      "reason": "missing_entry",
+      "region": "usa_alabama",
+      "sample_years": [
+        1868,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.01808,
+        -88.03306
+      ],
+      "country": "Alabama",
+      "earliest_year": 1888,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Putnam-Alabama",
+      "known_aliases": [
+        "Putnam",
+        "putnam",
+        "putnam cdp",
+        "Putnam CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Putnam",
+      "reason": "missing_entry",
+      "region": "usa_alabama",
+      "sample_years": [
+        1888,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.17606,
+        -108.41251
+      ],
+      "country": "Colorado",
+      "earliest_year": 1932,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Redvale-Colorado",
+      "known_aliases": [
+        "Redvale",
+        "redvale",
+        "redvale cdp",
+        "Redvale CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Redvale",
+      "reason": "missing_entry",
+      "region": "usa_colorado",
+      "sample_years": [
+        1932,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.55894,
+        -88.23031
+      ],
+      "country": "Mississippi",
+      "earliest_year": 1972,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Dennis-Mississippi",
+      "known_aliases": [
+        "Dennis",
+        "dennis",
+        "dennis cdp",
+        "Dennis CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Dennis",
+      "reason": "missing_entry",
+      "region": "usa_mississippi",
+      "sample_years": [
+        1972,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.92193,
+        -74.994
+      ],
+      "country": "New Jersey",
+      "earliest_year": 1863,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mount Hermon-New Jersey",
+      "known_aliases": [
+        "Mount Hermon",
+        "mount hermon",
+        "mount hermon cdp",
+        "Mount Hermon CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Mount Hermon",
+      "reason": "missing_entry",
+      "region": "usa_new_jersey",
+      "sample_years": [
+        1863,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.03148,
+        -108.69439
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1897,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Buckhorn-New Mexico",
+      "known_aliases": [
+        "Buckhorn",
+        "buckhorn",
+        "buckhorn cdp",
+        "Buckhorn CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Buckhorn",
+      "reason": "missing_entry",
+      "region": "usa_new_mexico",
+      "sample_years": [
+        1897,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.33569,
+        -108.67094
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1969,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pinehaven-New Mexico",
+      "known_aliases": [
+        "Pinehaven",
+        "pinehaven",
+        "pinehaven cdp",
+        "Pinehaven CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Pinehaven",
+      "reason": "missing_entry",
+      "region": "usa_new_mexico",
+      "sample_years": [
+        1969,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.5659,
+        -75.46548
+      ],
+      "country": "North Carolina",
+      "earliest_year": 1860,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Waves-North Carolina",
+      "known_aliases": [
+        "Waves",
+        "waves",
+        "waves cdp",
+        "Waves CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Waves",
+      "reason": "missing_entry",
+      "region": "usa_north_carolina",
+      "sample_years": [
+        1860,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.7047,
+        -94.8735
+      ],
+      "country": "Oklahoma",
+      "earliest_year": 1971,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Whitesboro-Oklahoma",
+      "known_aliases": [
+        "Whitesboro",
+        "whitesboro",
+        "whitesboro cdp",
+        "Whitesboro CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Whitesboro",
+      "reason": "missing_entry",
+      "region": "usa_oklahoma",
+      "sample_years": [
+        1971,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.31033,
+        -78.28616
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1969,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fredericksburg (Blair County)-Pennsylvania",
+      "known_aliases": [
+        "Fredericksburg (Blair County)",
+        "fredericksburg",
+        "fredericksburg cdp",
+        "Fredericksburg CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Fredericksburg (Blair County)",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1969,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        26.42553,
+        -99.07607
+      ],
+      "country": "Texas",
+      "earliest_year": 1955,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fronton-Texas",
+      "known_aliases": [
+        "Fronton",
+        "fronton",
+        "fronton cdp",
+        "sunset",
+        "sunset cdp",
+        "sandoval",
+        "sandoval cdp",
+        "Fronton CDP",
+        "Sunset (Starr County)",
+        "Sunset CDP",
+        "Sandoval",
+        "Sandoval CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Fronton",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1955,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.47644,
+        -120.39733
+      ],
+      "country": "Washington",
+      "earliest_year": 1892,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Donald-Washington",
+      "known_aliases": [
+        "Donald",
+        "donald",
+        "donald cdp",
+        "Donald CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Donald",
+      "reason": "missing_entry",
+      "region": "usa_washington",
+      "sample_years": [
+        1892,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.28376,
+        -121.91624
+      ],
+      "country": "Washington",
+      "earliest_year": 1895,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Oso-Washington",
+      "known_aliases": [
+        "Oso",
+        "oso",
+        "oso cdp",
+        "Oso CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Oso",
+      "reason": "missing_entry",
+      "region": "usa_washington",
+      "sample_years": [
+        1895,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.03516,
+        -104.92297
+      ],
+      "country": "Wyoming",
+      "earliest_year": 1884,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Y-O Ranch-Wyoming",
+      "known_aliases": [
+        "Y-O Ranch",
+        "y-o ranch",
+        "y-o ranch cdp",
+        "Y-O Ranch CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Y-O Ranch",
+      "reason": "missing_entry",
+      "region": "usa_wyoming",
+      "sample_years": [
+        1884,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.54109,
+        -123.25879
+      ],
+      "country": "California",
+      "earliest_year": 1915,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Timber Cove-California",
+      "known_aliases": [
+        "Timber Cove",
+        "timber cove",
+        "timber cove cdp",
+        "Timber Cove CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Timber Cove",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1915,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.72092,
+        -94.70835
+      ],
+      "country": "Kansas",
+      "earliest_year": 1914,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bucyrus-Kansas",
+      "known_aliases": [
+        "Bucyrus",
+        "bucyrus",
+        "bucyrus cdp",
+        "Bucyrus CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Bucyrus",
+      "reason": "missing_entry",
+      "region": "usa_kansas",
+      "sample_years": [
+        1914,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.58308,
+        -75.05173
+      ],
+      "country": "New York",
+      "earliest_year": 1858,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mount Vision-New York",
+      "known_aliases": [
+        "Mount Vision",
+        "mount vision",
+        "mount vision cdp",
+        "Mount Vision CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Mount Vision",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1858,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.11119,
+        -77.70422
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1886,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Monument-Pennsylvania",
+      "known_aliases": [
+        "Monument",
+        "monument",
+        "monument cdp",
+        "Monument CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Monument",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1886,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.61836,
+        -78.26182
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1897,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Skelp-Pennsylvania",
+      "known_aliases": [
+        "Skelp",
+        "skelp",
+        "skelp cdp",
+        "Skelp CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Skelp",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1897,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.45798,
+        -91.86193
+      ],
+      "country": "Iowa",
+      "earliest_year": 1874,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Burr Oak-Iowa",
+      "known_aliases": [
+        "Burr Oak",
+        "burr oak",
+        "burr oak cdp",
+        "Burr Oak CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Burr Oak",
+      "reason": "missing_entry",
+      "region": "usa_iowa",
+      "sample_years": [
+        1874,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.47454,
+        -87.86168
+      ],
+      "country": "Alabama",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Belgreen-Alabama",
+      "known_aliases": [
+        "Belgreen",
+        "belgreen",
+        "belgreen cdp",
+        "Belgreen CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Belgreen",
+      "reason": "missing_entry",
+      "region": "usa_alabama",
+      "sample_years": [
+        1850,
+        1860,
+        1870,
+        1880,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        30.37967,
+        -83.81338
+      ],
+      "country": "Florida",
+      "earliest_year": 1951,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lamont-Florida",
+      "known_aliases": [
+        "Lamont",
+        "lamont",
+        "lamont cdp",
+        "Lamont CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Lamont",
+      "reason": "missing_entry",
+      "region": "usa_florida",
+      "sample_years": [
+        1951,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.44257,
+        -77.68735
+      ],
+      "country": "Maryland",
+      "earliest_year": 1891,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mount Briar-Maryland",
+      "known_aliases": [
+        "Mount Briar",
+        "mount briar",
+        "mount briar cdp",
+        "Mount Briar CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Mount Briar",
+      "reason": "missing_entry",
+      "region": "usa_maryland",
+      "sample_years": [
+        1891,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.21314,
+        -86.27311
+      ],
+      "country": "Michigan",
+      "earliest_year": 1964,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Stronach-Michigan",
+      "known_aliases": [
+        "Stronach",
+        "stronach",
+        "stronach cdp",
+        "stronach township",
+        "filer city",
+        "filer city cdp",
+        "Stronach CDP",
+        "Stronach township",
+        "Filer City",
+        "Filer City CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Stronach",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1964,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.93268,
+        -88.87055
+      ],
+      "country": "Mississippi",
+      "earliest_year": 1891,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Chalybeate-Mississippi",
+      "known_aliases": [
+        "Chalybeate",
+        "chalybeate",
+        "chalybeate cdp",
+        "Chalybeate CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Chalybeate",
+      "reason": "missing_entry",
+      "region": "usa_mississippi",
+      "sample_years": [
+        1891,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.31714,
+        -107.93508
+      ],
+      "country": "Montana",
+      "earliest_year": 1906,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fort Smith-Montana",
+      "known_aliases": [
+        "Fort Smith",
+        "fort smith",
+        "fort smith cdp",
+        "Fort Smith CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Fort Smith",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1906,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.22483,
+        -95.37688
+      ],
+      "country": "Oklahoma",
+      "earliest_year": 1878,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Enterprise-Oklahoma",
+      "known_aliases": [
+        "Enterprise",
+        "enterprise",
+        "enterprise cdp",
+        "Enterprise CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Enterprise",
+      "reason": "missing_entry",
+      "region": "usa_oklahoma",
+      "sample_years": [
+        1878,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.70436,
+        -97.3558
+      ],
+      "country": "South Dakota",
+      "earliest_year": 1866,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Clear Lake (Marshall County)-South Dakota",
+      "known_aliases": [
+        "Clear Lake (Marshall County)",
+        "clear lake",
+        "clear lake cdp",
+        "Clear Lake CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Clear Lake (Marshall County)",
+      "reason": "missing_entry",
+      "region": "usa_south_dakota",
+      "sample_years": [
+        1866,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.54575,
+        -103.71986
+      ],
+      "country": "South Dakota",
+      "earliest_year": 1910,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "St. Onge-South Dakota",
+      "known_aliases": [
+        "St. Onge",
+        "st. onge",
+        "st. onge cdp",
+        "St. Onge CDP"
+      ],
+      "latest_year": 2020,
+      "name": "St. Onge",
+      "reason": "missing_entry",
+      "region": "usa_south_dakota",
+      "sample_years": [
+        1910,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

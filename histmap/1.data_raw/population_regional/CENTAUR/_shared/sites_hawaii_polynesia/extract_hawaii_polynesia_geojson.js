@@ -427,12 +427,75 @@ let { PNG } = require("pngjs");
         let curve = regime_curves[c.regime] || regime_curves.mixed;
         let ahu_weight = Math.max(1.5, c.ahupuaa_n)*Math.pow(Math.max(1, c.area_km2)/120, 0.25) + 1.2*c.arch_registry_hits;
 
+        c.has_documented_settlement = false;
+        c.max_settlement_pop = 0;
         for (let p = 0; p < state.config.periods.length; p++) {
           let val = Math.max(1, Math.round(ahu_weight*curve[p]));
 
           c.counts[p] = val;
         }
       }
+
+      //Ingest documented Hawaiian & American Samoan settlements (`hawaii_and_american_polynesia_settlements.json`)
+      let hp_sett_p = path.join(
+        state.project_root,
+        "histmap/1.data_raw/population_regional/CENTAUR/3.hawaii_and_american_polynesia/1.hawaii_and_american_polynesia/hawaii_and_american_polynesia_settlements.json"
+      );
+      let exported_settlements = [];
+
+      if (fs.existsSync(hp_sett_p)) {
+        let s_obj = JSON.parse(fs.readFileSync(hp_sett_p, "utf8"));
+        let s_keys = Object.keys(s_obj);
+
+        for (let i = 0; i < s_keys.length; i++) {
+          let sv = s_obj[s_keys[i]];
+
+          if (!sv || !Array.isArray(sv.coords) || !sv.population) continue;
+          let lat = Number(sv.coords[0]);
+          let lon = Number(sv.coords[1]);
+          let pts = Object.keys(sv.population)
+            .map(function (arg0_y) { return [Number(arg0_y), Number(sv.population[arg0_y])]; })
+            .filter(function (arg0_pair) { return Number.isFinite(arg0_pair[0]) && arg0_pair[0] <= 1900 && Number.isFinite(arg0_pair[1]) && arg0_pair[1] > 0; })
+            .sort(function (arg0_a, arg1_b) { return arg0_a[0] - arg1_b[0]; });
+
+          if (pts.length === 0 || !Number.isFinite(lat) || !Number.isFinite(lon)) continue;
+          exported_settlements.push({
+            lat: Number(lat.toFixed(4)),
+            lon: Number(lon.toFixed(4)),
+            name: String(sv.name || s_keys[i]).slice(0, 48),
+            series: pts
+          });
+          let best_c = null;
+          let best_d = 45.0;
+
+          for (let x = 0; x < state.all_catchments.length; x++) {
+            let c = state.all_catchments[x];
+
+            if (c.is_frontier_buffer) continue;
+            let d = this.haversineKm(lon, lat, c.lon, c.lat);
+
+            if (d < best_d) {
+              best_d = d;
+              best_c = c;
+            }
+          }
+          if (!best_c) continue;
+          for (let p = 0; p < state.config.periods.length; p++) {
+            let p_cfg = state.config.periods[p];
+            let p_pop = 0;
+
+            for (let x = 0; x < pts.length; x++)
+              if (pts[x][0] >= p_cfg.approx_start_year - 80 && pts[x][0] <= p_cfg.approx_end_year + 80 && pts[x][1] > p_pop)
+                p_pop = pts[x][1];
+            if (p_pop > 0) {
+              best_c.counts[p] += Math.round(Math.min(28.0, 2.0 + 0.30*Math.pow(p_pop, 0.50)));
+              if (p_pop >= 150) best_c.has_documented_settlement = true;
+              if (p_pop > best_c.max_settlement_pop) best_c.max_settlement_pop = p_pop;
+            }
+          }
+        }
+      }
+      state.exported_settlements = exported_settlements;
 
       //Return statement
       return state;
@@ -482,7 +545,9 @@ let { PNG } = require("pngjs");
               approx_start_year: p_cfg.approx_start_year,
               area_km2: Math.round(c.area_km2),
               epoch_id: p_cfg.epoch_id,
+              has_documented_settlement: Boolean(c.has_documented_settlement),
               is_frontier_buffer: c.is_frontier_buffer,
+              max_settlement_pop: Math.round(c.max_settlement_pop || 0),
               mokupuni: c.isl,
               moku: c.moku,
               name_en: c.label,
@@ -518,7 +583,9 @@ let { PNG } = require("pngjs");
           geometry: ft.geometry,
           properties: {
             area_km2: ft.properties.area_km2,
+            has_documented_settlement: ft.properties.has_documented_settlement,
             is_frontier_buffer: ft.properties.is_frontier_buffer,
+            max_settlement_pop: ft.properties.max_settlement_pop,
             name_en: ft.properties.name_en,
             region_id: ft.properties.region_id,
             total_sites_all_periods: all_catchments.find((x) => x.region_id === ft.properties.region_id).counts.reduce((a, b) => a + b, 0)
@@ -570,6 +637,15 @@ let { PNG } = require("pngjs");
       };
 
       fs.writeFileSync(out_abs, JSON.stringify(payload, null, 2));
+      fs.writeFileSync(
+        path.join(this.BASE_DIR, "config/documented_settlements.json"),
+        JSON.stringify({
+          count: (state.exported_settlements || []).length,
+          generated_at_gmt0: new Date().toISOString(),
+          settlements: state.exported_settlements || []
+        }),
+        "utf8"
+      );
 
       //Return statement
       return payload;

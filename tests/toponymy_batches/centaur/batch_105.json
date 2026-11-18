@@ -1,0 +1,967 @@
+{
+  "batch_index": 105,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        45.70808,
+        -87.60717
+      ],
+      "country": "Michigan",
+      "earliest_year": 1947,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hermansville-Michigan",
+      "known_aliases": [
+        "Hermansville",
+        "hermansville",
+        "hermansville cdp",
+        "Hermansville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Hermansville",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1947,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.3439,
+        -119.70747
+      ],
+      "country": "California",
+      "earliest_year": 1934,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Grangeville-California",
+      "known_aliases": [
+        "Grangeville",
+        "grangeville",
+        "grangeville cdp",
+        "Grangeville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Grangeville",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1934,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.19696,
+        -84.03306
+      ],
+      "country": "Tennessee",
+      "earliest_year": 1857,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Andersonville-Tennessee",
+      "known_aliases": [
+        "Andersonville",
+        "andersonville",
+        "andersonville cdp",
+        "Andersonville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Andersonville",
+      "reason": "missing_entry",
+      "region": "usa_tennessee",
+      "sample_years": [
+        1857,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.5657,
+        -88.20998
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1892,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lily Lake-Wisconsin",
+      "known_aliases": [
+        "Lily Lake",
+        "lily lake",
+        "lily lake cdp",
+        "Lily Lake CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Lily Lake",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1892,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        30.51505,
+        -96.77338
+      ],
+      "country": "Texas",
+      "earliest_year": 1954,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cade Lakes-Texas",
+      "known_aliases": [
+        "Cade Lakes",
+        "cade lakes",
+        "cade lakes cdp",
+        "Cade Lakes CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Cade Lakes",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1954,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.61026,
+        -122.32928
+      ],
+      "country": "Washington",
+      "earliest_year": 1961,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Alger-Washington",
+      "known_aliases": [
+        "Alger",
+        "alger",
+        "alger cdp",
+        "Alger CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Alger",
+      "reason": "missing_entry",
+      "region": "usa_washington",
+      "sample_years": [
+        1961,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        30.90196,
+        -89.16565
+      ],
+      "country": "Mississippi",
+      "earliest_year": 1948,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bond-Mississippi",
+      "known_aliases": [
+        "Bond",
+        "bond",
+        "bond cdp",
+        "Bond CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Bond",
+      "reason": "missing_entry",
+      "region": "usa_mississippi",
+      "sample_years": [
+        1948,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.35659,
+        -76.46682
+      ],
+      "country": "New York",
+      "earliest_year": 1820,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Danby-New York",
+      "known_aliases": [
+        "Danby",
+        "danby",
+        "danby cdp",
+        "Danby CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Danby",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1820,
+        1890,
+        1960,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.91122,
+        -109.47467
+      ],
+      "country": "Arizona",
+      "earliest_year": 1964,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Nazlini-Arizona",
+      "known_aliases": [
+        "Nazlini",
+        "nazlini",
+        "nazlini cdp",
+        "Nazlini CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Nazlini",
+      "reason": "missing_entry",
+      "region": "usa_arizona",
+      "sample_years": [
+        1964,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.26526,
+        -69.97303
+      ],
+      "country": "Massachusetts",
+      "earliest_year": 1968,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Siasconset-Massachusetts",
+      "known_aliases": [
+        "Siasconset",
+        "siasconset",
+        "siasconset cdp",
+        "Siasconset CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Siasconset",
+      "reason": "missing_entry",
+      "region": "usa_massachusetts",
+      "sample_years": [
+        1968,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.12471,
+        -71.95776
+      ],
+      "country": "New Hampshire",
+      "earliest_year": 1884,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mountain Lakes-New Hampshire",
+      "known_aliases": [
+        "Mountain Lakes",
+        "mountain lakes",
+        "mountain lakes cdp",
+        "Mountain Lakes CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Mountain Lakes",
+      "reason": "missing_entry",
+      "region": "usa_new_hampshire",
+      "sample_years": [
+        1884,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.75546,
+        -99.08101
+      ],
+      "country": "Nebraska",
+      "earliest_year": 1897,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Glenwood-Nebraska",
+      "known_aliases": [
+        "Glenwood",
+        "glenwood",
+        "glenwood cdp",
+        "Glenwood CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Glenwood",
+      "reason": "missing_entry",
+      "region": "usa_nebraska",
+      "sample_years": [
+        1897,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.4507,
+        -123.24813
+      ],
+      "country": "Oregon",
+      "earliest_year": 1955,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cherry Grove-Oregon",
+      "known_aliases": [
+        "Cherry Grove",
+        "cherry grove",
+        "cherry grove cdp",
+        "Cherry Grove CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Cherry Grove",
+      "reason": "missing_entry",
+      "region": "usa_oregon",
+      "sample_years": [
+        1955,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.46482,
+        -100.34491
+      ],
+      "country": "South Dakota",
+      "earliest_year": 1922,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Oahe Acres-South Dakota",
+      "known_aliases": [
+        "Oahe Acres",
+        "oahe acres",
+        "oahe acres cdp",
+        "Oahe Acres CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Oahe Acres",
+      "reason": "missing_entry",
+      "region": "usa_south_dakota",
+      "sample_years": [
+        1922,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.59162,
+        -76.92929
+      ],
+      "country": "Virginia",
+      "earliest_year": 1921,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Southampton Meadows-Virginia",
+      "known_aliases": [
+        "Southampton Meadows",
+        "southampton meadows",
+        "southampton meadows cdp",
+        "Southampton Meadows CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Southampton Meadows",
+      "reason": "missing_entry",
+      "region": "usa_virginia",
+      "sample_years": [
+        1921,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.25828,
+        -88.12973
+      ],
+      "country": "Illinois",
+      "earliest_year": 1899,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rest Haven-Illinois",
+      "known_aliases": [
+        "Rest Haven",
+        "rest haven",
+        "rest haven cdp",
+        "ritchie",
+        "ritchie cdp",
+        "Rest Haven CDP",
+        "Ritchie",
+        "Ritchie CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Rest Haven",
+      "reason": "missing_entry",
+      "region": "usa_illinois",
+      "sample_years": [
+        1899,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.88553,
+        -124.03251
+      ],
+      "country": "Washington",
+      "earliest_year": 1969,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ocosta-Washington",
+      "known_aliases": [
+        "Ocosta",
+        "ocosta",
+        "ocosta cdp",
+        "Ocosta CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Ocosta",
+      "reason": "missing_entry",
+      "region": "usa_washington",
+      "sample_years": [
+        1969,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.40729,
+        -84.5833
+      ],
+      "country": "Michigan",
+      "earliest_year": 1899,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Brimley-Michigan",
+      "known_aliases": [
+        "Brimley",
+        "brimley",
+        "brimley cdp",
+        "Brimley CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Brimley",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1899,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.61579,
+        -81.98279
+      ],
+      "country": "North Carolina",
+      "earliest_year": 1855,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Glenwood-North Carolina",
+      "known_aliases": [
+        "Glenwood",
+        "glenwood",
+        "glenwood cdp",
+        "Glenwood CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Glenwood",
+      "reason": "missing_entry",
+      "region": "usa_north_carolina",
+      "sample_years": [
+        1855,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.57246,
+        -97.10843
+      ],
+      "country": "South Dakota",
+      "earliest_year": 1926,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lake Poinsett-South Dakota",
+      "known_aliases": [
+        "Lake Poinsett",
+        "lake poinsett",
+        "lake poinsett cdp",
+        "Lake Poinsett CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Lake Poinsett",
+      "reason": "missing_entry",
+      "region": "usa_south_dakota",
+      "sample_years": [
+        1926,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.50005,
+        -120.31636
+      ],
+      "country": "California",
+      "earliest_year": 1888,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cantua Creek-California",
+      "known_aliases": [
+        "Cantua Creek",
+        "cantua creek",
+        "cantua creek cdp",
+        "Cantua Creek CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Cantua Creek",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1888,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.22587,
+        -76.16633
+      ],
+      "country": "Maryland",
+      "earliest_year": 1904,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fairlee-Maryland",
+      "known_aliases": [
+        "Fairlee",
+        "fairlee",
+        "fairlee cdp",
+        "Fairlee CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Fairlee",
+      "reason": "missing_entry",
+      "region": "usa_maryland",
+      "sample_years": [
+        1904,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.94796,
+        -75.67712
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1913,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Marshallton (Chester County)-Pennsylvania",
+      "known_aliases": [
+        "Marshallton (Chester County)",
+        "marshallton",
+        "marshallton cdp",
+        "Marshallton CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Marshallton (Chester County)",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1913,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        62.41536,
+        -150.40784
+      ],
+      "country": "Alaska",
+      "earliest_year": 1947,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Trapper Creek-Alaska",
+      "known_aliases": [
+        "Trapper Creek",
+        "trapper creek",
+        "trapper creek cdp",
+        "Trapper Creek CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Trapper Creek",
+      "reason": "missing_entry",
+      "region": "usa_alaska",
+      "sample_years": [
+        1947,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.27722,
+        -112.76534
+      ],
+      "country": "Arizona",
+      "earliest_year": 1943,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Peeples Valley-Arizona",
+      "known_aliases": [
+        "Peeples Valley",
+        "peeples valley",
+        "peeples valley cdp",
+        "Peeples Valley CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Peeples Valley",
+      "reason": "missing_entry",
+      "region": "usa_arizona",
+      "sample_years": [
+        1943,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.35878,
+        -73.26716
+      ],
+      "country": "Connecticut",
+      "earliest_year": 1927,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Botsford-Connecticut",
+      "known_aliases": [
+        "Botsford",
+        "botsford",
+        "botsford cdp",
+        "Botsford CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Botsford",
+      "reason": "missing_entry",
+      "region": "usa_connecticut",
+      "sample_years": [
+        1927,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        29.75628,
+        -91.42563
+      ],
+      "country": "Louisiana",
+      "earliest_year": 1875,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Centerville-Louisiana",
+      "known_aliases": [
+        "Centerville",
+        "centerville",
+        "centerville cdp",
+        "Centerville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Centerville",
+      "reason": "missing_entry",
+      "region": "usa_louisiana",
+      "sample_years": [
+        1875,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        30.17506,
+        -94.03525
+      ],
+      "country": "Texas",
+      "earliest_year": 1892,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pine Forest-Texas",
+      "known_aliases": [
+        "Pine Forest",
+        "pine forest",
+        "pine forest city",
+        "Pine Forest city"
+      ],
+      "latest_year": 2026,
+      "name": "Pine Forest",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1892,
+        2001,
+        2014,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.45833,
+        -123.79259
+      ],
+      "country": "Oregon",
+      "earliest_year": 1952,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fairview (Tillamook County)-Oregon",
+      "known_aliases": [
+        "Fairview (Tillamook County)",
+        "fairview",
+        "fairview cdp",
+        "Fairview CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Fairview (Tillamook County)",
+      "reason": "missing_entry",
+      "region": "usa_oregon",
+      "sample_years": [
+        1952,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.37974,
+        -73.13156
+      ],
+      "country": "Vermont",
+      "earliest_year": 1775,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "St. George-Vermont",
+      "known_aliases": [
+        "St. George",
+        "st. george",
+        "st. george cdp",
+        "st. george town",
+        "St. George CDP",
+        "St. George town"
+      ],
+      "latest_year": 2020,
+      "name": "St. George",
+      "reason": "missing_entry",
+      "region": "usa_vermont",
+      "sample_years": [
+        1775,
+        1850,
+        1940,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

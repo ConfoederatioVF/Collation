@@ -1,0 +1,943 @@
+{
+  "batch_index": 316,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        47.73627,
+        -94.7509
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1939,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hagali-Minnesota",
+      "known_aliases": [
+        "Hagali",
+        "hagali",
+        "hagali township",
+        "Hagali township"
+      ],
+      "latest_year": 2020,
+      "name": "Hagali",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1939,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.5793,
+        -95.22444
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1971,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Blowers-Minnesota",
+      "known_aliases": [
+        "Blowers",
+        "blowers",
+        "blowers township",
+        "Blowers township"
+      ],
+      "latest_year": 2020,
+      "name": "Blowers",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1971,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.51206,
+        -76.70294
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1852,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Jefferson (Dauphin County)-Pennsylvania",
+      "known_aliases": [
+        "Jefferson (Dauphin County)",
+        "jefferson",
+        "jefferson township",
+        "Jefferson township"
+      ],
+      "latest_year": 2020,
+      "name": "Jefferson (Dauphin County)",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1852,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.33469,
+        -91.23665
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1866,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Washington (Rusk County)-Wisconsin",
+      "known_aliases": [
+        "Washington (Rusk County)",
+        "washington",
+        "washington town",
+        "Washington town"
+      ],
+      "latest_year": 2020,
+      "name": "Washington (Rusk County)",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1866,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.78686,
+        -68.4929
+      ],
+      "country": "Maine",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Portage Lake-Maine",
+      "known_aliases": [
+        "Portage Lake",
+        "portage lake",
+        "portage lake town",
+        "Portage Lake town"
+      ],
+      "latest_year": 2020,
+      "name": "Portage Lake",
+      "reason": "missing_entry",
+      "region": "usa_maine",
+      "sample_years": [
+        1850,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.81621,
+        -71.93442
+      ],
+      "country": "New Hampshire",
+      "earliest_year": 1775,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sharon-New Hampshire",
+      "known_aliases": [
+        "Sharon",
+        "sharon",
+        "sharon town",
+        "Sharon town"
+      ],
+      "latest_year": 2020,
+      "name": "Sharon",
+      "reason": "missing_entry",
+      "region": "usa_new_hampshire",
+      "sample_years": [
+        1775,
+        1850,
+        1940,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.90541,
+        -72.91833
+      ],
+      "country": "Vermont",
+      "earliest_year": 1775,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hancock-Vermont",
+      "known_aliases": [
+        "Hancock",
+        "hancock",
+        "hancock town",
+        "Hancock town"
+      ],
+      "latest_year": 2020,
+      "name": "Hancock",
+      "reason": "missing_entry",
+      "region": "usa_vermont",
+      "sample_years": [
+        1775,
+        1850,
+        1940,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.79931,
+        -88.98647
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1860,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hiles-Wisconsin",
+      "known_aliases": [
+        "Hiles",
+        "hiles",
+        "hiles town",
+        "Hiles town"
+      ],
+      "latest_year": 2020,
+      "name": "Hiles",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1860,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.84355,
+        -94.85911
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1856,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Crow Wing Lake-Minnesota",
+      "known_aliases": [
+        "Crow Wing Lake",
+        "crow wing lake",
+        "crow wing lake township",
+        "Crow Wing Lake township"
+      ],
+      "latest_year": 2020,
+      "name": "Crow Wing Lake",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1856,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.77252,
+        -72.69039
+      ],
+      "country": "Vermont",
+      "earliest_year": 1810,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Belvidere-Vermont",
+      "known_aliases": [
+        "Belvidere",
+        "belvidere",
+        "belvidere town",
+        "Belvidere town"
+      ],
+      "latest_year": 2020,
+      "name": "Belvidere",
+      "reason": "missing_entry",
+      "region": "usa_vermont",
+      "sample_years": [
+        1810,
+        1880,
+        1950,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.72768,
+        -89.5476
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1868,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Guenther-Wisconsin",
+      "known_aliases": [
+        "Guenther",
+        "guenther",
+        "guenther town",
+        "Guenther town"
+      ],
+      "latest_year": 2020,
+      "name": "Guenther",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1868,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.63385,
+        -93.11161
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1938,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Oakland-Minnesota",
+      "known_aliases": [
+        "Oakland",
+        "oakland",
+        "oakland township",
+        "Oakland township"
+      ],
+      "latest_year": 2020,
+      "name": "Oakland",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1938,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.76603,
+        -71.99711
+      ],
+      "country": "Vermont",
+      "earliest_year": 1810,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Westmore-Vermont",
+      "known_aliases": [
+        "Westmore",
+        "westmore",
+        "westmore town",
+        "Westmore town"
+      ],
+      "latest_year": 2020,
+      "name": "Westmore",
+      "reason": "missing_entry",
+      "region": "usa_vermont",
+      "sample_years": [
+        1810,
+        1890,
+        1960,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.80879,
+        -90.73063
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1940,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mead-Wisconsin",
+      "known_aliases": [
+        "Mead",
+        "mead",
+        "mead town",
+        "Mead town"
+      ],
+      "latest_year": 2020,
+      "name": "Mead",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1940,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.19299,
+        -68.59478
+      ],
+      "country": "Maine",
+      "earliest_year": 1830,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Passadumkeag-Maine",
+      "known_aliases": [
+        "Passadumkeag",
+        "passadumkeag",
+        "passadumkeag town",
+        "Passadumkeag town"
+      ],
+      "latest_year": 2020,
+      "name": "Passadumkeag",
+      "reason": "missing_entry",
+      "region": "usa_maine",
+      "sample_years": [
+        1830,
+        1890,
+        1960,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.12739,
+        -68.44117
+      ],
+      "country": "Maine",
+      "earliest_year": 1810,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Swans Island-Maine",
+      "known_aliases": [
+        "Swans Island",
+        "swans island",
+        "swans island town",
+        "Swans Island town"
+      ],
+      "latest_year": 2020,
+      "name": "Swans Island",
+      "reason": "missing_entry",
+      "region": "usa_maine",
+      "sample_years": [
+        1810,
+        1890,
+        1960,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.84175,
+        -94.56194
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1896,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Boon Lake-Minnesota",
+      "known_aliases": [
+        "Boon Lake",
+        "boon lake",
+        "boon lake township",
+        "Boon Lake township"
+      ],
+      "latest_year": 2020,
+      "name": "Boon Lake",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1896,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.72227,
+        -74.71447
+      ],
+      "country": "New York",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Inlet-New York",
+      "known_aliases": [
+        "Inlet",
+        "inlet",
+        "inlet town",
+        "Inlet town"
+      ],
+      "latest_year": 2020,
+      "name": "Inlet",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1850,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.90828,
+        -73.07837
+      ],
+      "country": "Vermont",
+      "earliest_year": 1775,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Woodford-Vermont",
+      "known_aliases": [
+        "Woodford",
+        "woodford",
+        "woodford town",
+        "Woodford town"
+      ],
+      "latest_year": 2020,
+      "name": "Woodford",
+      "reason": "missing_entry",
+      "region": "usa_vermont",
+      "sample_years": [
+        1775,
+        1850,
+        1940,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.77542,
+        -91.11937
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1883,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bell-Wisconsin",
+      "known_aliases": [
+        "Bell",
+        "bell",
+        "bell town",
+        "Bell town"
+      ],
+      "latest_year": 2020,
+      "name": "Bell",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1883,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.72581,
+        -83.80209
+      ],
+      "country": "Michigan",
+      "earliest_year": 1854,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mitchell-Michigan",
+      "known_aliases": [
+        "Mitchell",
+        "mitchell",
+        "mitchell township",
+        "Mitchell township",
+        "Mitchell Township"
+      ],
+      "latest_year": 2020,
+      "name": "Mitchell",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1854,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.57557,
+        -72.90079
+      ],
+      "country": "Massachusetts",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hawley-Massachusetts",
+      "known_aliases": [
+        "Hawley",
+        "hawley",
+        "hawley town",
+        "Hawley town"
+      ],
+      "latest_year": 2020,
+      "name": "Hawley",
+      "reason": "missing_entry",
+      "region": "usa_massachusetts",
+      "sample_years": [
+        1850,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.37011,
+        -93.50458
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1901,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Malmo-Minnesota",
+      "known_aliases": [
+        "Malmo",
+        "malmo",
+        "malmo township",
+        "Malmo township"
+      ],
+      "latest_year": 2020,
+      "name": "Malmo",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1901,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.93693,
+        -94.62695
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1967,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hiram-Minnesota",
+      "known_aliases": [
+        "Hiram",
+        "hiram",
+        "hiram township",
+        "Hiram township"
+      ],
+      "latest_year": 2020,
+      "name": "Hiram",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1967,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.36717,
+        -71.08712
+      ],
+      "country": "New Hampshire",
+      "earliest_year": 1775,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Shelburne-New Hampshire",
+      "known_aliases": [
+        "Shelburne",
+        "shelburne",
+        "shelburne town",
+        "Shelburne town"
+      ],
+      "latest_year": 2020,
+      "name": "Shelburne",
+      "reason": "missing_entry",
+      "region": "usa_new_hampshire",
+      "sample_years": [
+        1775,
+        1850,
+        1940,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.49835,
+        -89.34049
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1907,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Enterprise-Wisconsin",
+      "known_aliases": [
+        "Enterprise",
+        "enterprise",
+        "enterprise town",
+        "Enterprise town"
+      ],
+      "latest_year": 2020,
+      "name": "Enterprise",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1907,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.98017,
+        -82.82569
+      ],
+      "country": "Michigan",
+      "earliest_year": 1892,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Huron-Michigan",
+      "known_aliases": [
+        "Huron",
+        "huron",
+        "huron township",
+        "Huron township"
+      ],
+      "latest_year": 2020,
+      "name": "Huron",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1892,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.27545,
+        -83.93105
+      ],
+      "country": "Michigan",
+      "earliest_year": 1888,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bismarck-Michigan",
+      "known_aliases": [
+        "Bismarck",
+        "bismarck",
+        "bismarck township",
+        "Bismarck township"
+      ],
+      "latest_year": 2020,
+      "name": "Bismarck",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1888,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.80778,
+        -95.19156
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1897,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Orange-Minnesota",
+      "known_aliases": [
+        "Orange",
+        "orange",
+        "orange township",
+        "Orange township"
+      ],
+      "latest_year": 2020,
+      "name": "Orange",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1897,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.0338,
+        -92.47702
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1896,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ogema (Pine County)-Minnesota",
+      "known_aliases": [
+        "Ogema (Pine County)",
+        "ogema",
+        "ogema township",
+        "Ogema township"
+      ],
+      "latest_year": 2020,
+      "name": "Ogema (Pine County)",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1896,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

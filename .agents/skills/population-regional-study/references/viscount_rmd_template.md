@@ -19,6 +19,7 @@ All Operation Viscount deliverables (`studies_on_population.Rmd` at project root
    - Never run Python or regex scripts to generate or rewrite `.Rmd` prose. Edit prose solely via direct `read_file` + `edit_file` passes followed by reading compiled PDF pages: regional sub-chapters adopt **Colin McEvedy & Richard Jones** plain demographic narrative, and root `studies_on_population.Rmd` adopts **Kees Klein Goldewijk (HYDE)** comparative synthesis.
 4. **Canonical Section Hierarchy (`/humanise` Order)**:
    - Unnumbered headings (`\setcounter{secnumdepth}{-2}`): `Abstract`, `Background`, `Methodology`, `Testing and Validation` (or `Validation`), `Results`, `Limitations`, `Conclusion`, `Appendix`, `Sources` (`[FAIL]` on `# References`), `Footnotes` (suppressed automatically when empty).
+   - Keep `# Abstract` as a single undivided prose block (zero `##` sub-headings inside `# Abstract`). Use the `\AtBeginDocument` `\crdneedspace{135pt}` + `\abscontent` `\nopagebreak[4]` headroom guard in YAML `header-includes:` (or tune hero figure height) so `# Abstract` moves onto Page 2 together with its opening paragraph whenever Page 1 cannot accommodate at least `3` lines beneath it.
    - Zero self-congratulatory badge words (`verified`, `validated`, `empirical`, `complete`) in YAML `hero_caption:`/`subtitle:`, captions or `#` headings.
 
 ---
@@ -38,7 +39,7 @@ All Operation Viscount deliverables (`studies_on_population.Rmd` at project root
 - **Multi-Script Romanisation & Diacritics**:
   - Transliterate non-Latin scripts into scholarly Latin romanisation (Pinyin, Hepburn/Revised Romanization, IAST, ALA-LC, BGN/PCGN) with Latin diacritics preserved (`Stadestér`, macrons, carons) across body text, legends and tables (`0` `.notdef` / `U+FFFD` replacement glyphs in `10pt` `Karla` XeLaTeX PDFs).
 - **Anti-AI & Anti-Schema Leakage Discipline (`/humanise`)**:
-  - Zero tortured AI clichés, zero prose ` -> ` arrows (`to`), zero space-padded slashes `' / '`, zero leaked JSON schema names (`other_names`, `coords`, `positive integer population series`), zero leaked `snake_case` folder/code tokens (`sites_...`), zero `"the <PROJECT> synthesis/framework/model"` wrappers (write bare `<PROJECT>`), zero redundant `word (n=X)` tics (`45 regions`, not `forty-five regions (n=45)`), zero prose bullet/label lists, zero compound decorator colour adjectives (`warm gold` -> `gold`), zero geopolitical/demographic euphemisms, and zero unescaped `<Tag>` strings breaking Intellte VitePress Vue builds.
+  - Zero tortured AI clichés, zero prose ` -> ` arrows (`to`), zero space-padded slashes `' / '`, **zero non-code monospace** (forbid inline backticks outside evaluated knitr `` `r ...` `` calls, `\texttt{}`, `\verb` or `<code>` in YAML metadata, `#` headings, body prose, figure/table captions and table cells — write `10000BC`, `km²`, `n=18`, settlement names and dataset names in plain text or italics), zero leaked JSON schema names (`other_names`, `coords`, `positive integer population series`), zero leaked `snake_case` folder/code tokens (`sites_...`), zero `"the <PROJECT> synthesis/framework/model"` wrappers (write bare `<PROJECT>`), zero redundant `word (n=X)` tics (`45 regions`, not `forty-five regions (n=45)`), zero prose bullet/label lists, zero compound decorator colour adjectives (`warm gold` -> `gold`), zero geopolitical/demographic euphemisms, and zero unescaped `<Tag>` strings breaking Intellte VitePress Vue builds.
   - **Minimum Zipf Sample Floor**: Never plot or compute Zipf / rank-size regressions where `n < 25` (`[FAIL]` in `D2`).
 
 ---
@@ -51,13 +52,15 @@ All Operation Viscount deliverables (`studies_on_population.Rmd` at project root
 - **Default Matplotlib Theme, Sans-Serif Typography & MathText (`$...$`) Specification (`audit_figure_scripts.py`)**:
   - Always reset Matplotlib explicitly (`plt.rcdefaults(); plt.style.use("default")` or `apply_viscount_style(ax)` from [viscount_plot_utils.py](file:///F:/Active%20Projects/Project%201509%20-%20SVEA/histmap/1.data_raw/population_regional/_shared/viscount_plot_utils.py)). NEVER set `font.family = "serif"` (`Times`, `Georgia`, `Palatino`), NEVER apply `seaborn` or stripped themes (`theme_classic`), and NEVER strip `spines["top"]` or `spines["right"]` on standard Cartesian axes.
   - Render all mathematical parameters, Greek symbols, subscripts, fractions and exponents inside Matplotlib `$...$` MathText rather than raw ASCII (`r"Matérn $\nu = 3/2$ fit ($\tau_1 = 1{,}06$, $R^2 = 0{,}94$)"` and `r"Normalised semivariance $\gamma(u) / \sigma^2$"`, never `"nu = 3/2"`, `"tau1=1,41"`, `"Pseudo R-squared"`, or `"log10(Sites)"`). Wrap European decimal commas inside `$...$` in braces (`{,}`, or call `format_mathtext_euro()`) so TeX renders zero trailing space after the comma.
-  - Format fractional numerical axes with European decimal commas (`euro_tick_formatter()` / `FuncFormatter`, e.g. `0,75`, never `0.75`).
+  - Format fractional numerical axes with European decimal commas (`euro_tick_formatter()` / `FuncFormatter`, e.g. `0,75`, never `0.75`). On `loglog`, `semilog`, `set_xscale('log')` / `set_yscale('log')` and `LogNorm` plots/colorbars showing empirical counts, archaeological sites, inhabitants or densities, NEVER allow `$10^k$` scientific notation, `1e4` offset strings or raw `log10` exponents: apply `apply_human_log_ticks()` or `euro_log_formatter()` (`0,01`, `0,1`, `1`, `10`, `100`, `1k`, `1,5M`) and set `mticker.NullFormatter()` on minor log ticks.
   - Map machine `snake_case` horizon or region keys through explicit human display-name dictionaries (`REGION_DISPLAY_NAMES`, `epochs_order`), NEVER `.replace("_", " ").title()` (which corrupts `"pueblo_iii"` into `"Pueblo Iii"`).
   - Plot substantive diagnostic graphics (empirical semivariograms $\gamma(u)/\sigma^2$ vs dimensionless catchment lag $u_{ij}$ with fitted Matérn models, trajectories with empirical uncertainty intervals, rank-size distributions for `n >= 25`) under plain titles, NEVER degenerate flat `0,998` bar charts or technobabble headers such as `"Non-Stationary Matérn Residual Kriging Fit Summary"`.
 
   ```python
   import matplotlib.pyplot as plt
-  from viscount_plot_utils import apply_viscount_style, euro_tick_formatter, format_mathtext_euro
+  from viscount_plot_utils import (
+    apply_human_log_ticks, apply_viscount_style, euro_log_formatter, euro_tick_formatter, format_mathtext_euro
+  )
 
   HORIZON_LABELS = {"03_middle_mississippian_pueblo_iii": "Middle Mississippian (Pueblo III)"}
   apply_viscount_style(ax)
@@ -65,8 +68,31 @@ All Operation Viscount deliverables (`studies_on_population.Rmd` at project root
   ax.set_xlabel(r"Dimensionless Voronoi geodesic lag $u_{ij}$")
   ax.set_ylabel(r"Normalised semivariance $\gamma(u) / \sigma^2$ ($R^2 = " + format_mathtext_euro(r2) + r"$)")
   ax.xaxis.set_major_formatter(euro_tick_formatter(2))
+  # On log-scale count/density axes or LogNorm colorbars:
+  # apply_human_log_ticks(ax_log)
+  # cb = fig.colorbar(im, ax=ax_map, format=euro_log_formatter())
   ```
 - **Provenance Discipline**: NEVER cite `@McEvedy`, `@KleinGoldewijk`, `Populstat`, `Chandler 1987`, `Modelski 2003`, `Maddison` or internal SVEA workspace `histmap/` / `population_Substrata` / `population_Velkscala` paths in sub-chapter files. Only root `studies_on_population.{Rmd,bib}` may compare macro totals against global baselines.
 - **Compiled PDF Layout (`pymupdf`)**:
-  - Page `1` non-blank with scaled hero figure (`height <= 0,52\textheight`), **`max_x1 <= 540,5 pt`**, **`0` unresolved `??`**, **`0` `(Continued from previous page)`**, and **`0` `\ufffd` replacement glyphs**.
-- **Chapter Visual Inspection**: Crop every multi-panel PNG into individual panels (`1A..nD`), inspect every panel via `read_file`, sign `<chapter_dir>/figures/visual_check.json` (`mtime >= max(png.mtime)`), and run `audit_academic_prose.py` (`D1`), `audit_figure_scripts.py` plus `audit_rmd_and_bib_calibre.py --require-visual-check` (`D2`).
+  - Page `1` non-blank with scaled hero figure (`height <= 0,52\textheight`), **`0` orphaned Page-1 `Abstract` / bottom `Jost-Bold` headings** (push `Abstract` onto Page 2 with its paragraph if `< 3` lines fit on Page 1), **`0` unintended monospace font pages** (`LMMono`, `Courier`, etc. forbidden unless `.Rmd` contains visible code blocks), **`max_x1 <= 540,5 pt`**, **`0` unresolved `??`**, **`0` `(Continued from previous page)`**, and **`0` `\ufffd` replacement glyphs**.
+- **Chapter Visual Inspection**: Crop every multi-panel PNG into individual panels (`1A..nD`), inspect every panel via `read_file`, sign `<chapter_dir>/figures/visual_check.json` and `<project_dir>/figures/visual_check.json` (`mtime >= max(png.mtime)` with unique `>= 50`-char notes per PNG), and run `audit_academic_prose.py` (`D1`), `audit_figure_scripts.py` plus `audit_rmd_and_bib_calibre.py --require-visual-check` (`D2`).
+
+---
+
+## 4. `POLARIS` Vector Cartography, Multi-Panel Equal-Area Projections, In-Panel Bounds & Freshness Law
+
+Follow these mandatory cartographic and layout rules across all `14` macro-regions (codified in [viscount_plot_utils.py](file:///F:/Active%20Projects/Project%201509%20-%20SVEA/histmap/1.data_raw/population_regional/_shared/viscount_plot_utils.py), [audit_figure_scripts.py](file:///F:/Active%20Projects/Project%201509%20-%20SVEA/.agents/skills/population-regional-study/scripts/audit_figure_scripts.py) and `Gatekeeper D2`):
+
+1. **Vector Polygon Maps vs Continuous Surface Rasters (`0` Pixelated Masks)**:
+   - Spatial coverage, sub-regional and settlement maps MUST draw smooth projected vector `PatchCollection` polygons loaded from GeoJSON (`_shared/_gis_cache/chapter_subregions/<stem>_subregions.geojson` or `<epoch>_polygons.geojson`), softly parchment-blended via `mute_rgb_hex(..., arg2_blend=0.45)`, surrounded by a bold `#111827` dissolved union outline, Natural Earth land, rivers (`#2b6cb0`) and `.naissance` dashed historical borders.
+   - NEVER call `imshow()` on categorical `4320x2160` `*_areal_mask.png` or `*_domain_mask.png` pipeline rasters in chapter or root figures (`audit_figure_scripts.py` fails `[FAIL]` on pixelated mask rendering). Reserve `imshow()` strictly for continuous `1.kriged_rasters` or `population_Velkscala` `float32` surfaces (reprojected cleanly onto the equal-area canvas via `inv_xy` bilinear/grid sampling and verified for genuine urban-masked dasymetric habitability: `0` illuminated uninhabitable wastelands, `0` backprojected modern metropolitan halos and `0` county polka-dots) and non-spatial matrix heatmaps.
+2. **Equal-Area Multi-Panel Framing & Distant Outlier Splitting (`0` Warping / Ocean Overextension)**:
+   - Always render geographic axes in upright equal-area metres/kilometres (`AlbersEqualAreaConic` for mid-latitude bands; `Lambert Azimuthal Equal-Area` for equatorial, polar, continental or broad oceanic basins) with `ax.set_aspect("equal", adjustable="box")`, NEVER equirectangular `imshow(..., extent=..., aspect="auto")`.
+   - Whenever a region includes exclaves, polar/sub-polar islands or remote archipelagos separated by `> 1.500 km` of open sea or spanning `> 90°` of longitude (across any of the `14` macro-regions, whether Alaska/Hawai'i/Samoa, Greenland/Caribbean overseas departments, Kamchatka/Chukotka, Okinawa/Kurils, Andaman/Nicobar, Tasmania/Polynesia or Patagonian channels), split them into dedicated `GridSpec` panels or `inset_axes` centred on their own local central meridian and standard parallels, clipping and wrapping geometries cleanly at `±360°` around the antimeridian before `shapely.segmentize()`.
+   - Pad projected bounds symmetrically via `pad_projected_bounds()` to keep panel aspect ratios crisp without vast empty ocean margins.
+3. **Strict Renderer-`Bbox` In-Panel Containment & Zero Occlusion**:
+   - Place city/site callouts via `place_inbounds_callouts()` (or `place_bbox_callouts()`), testing radial pixel offsets against the panel frame shrunk by `6 px`, active `child_axes` (insets/colorbars) and legend boxes.
+   - Give bar charts and trajectory axes `1,18x` to `1,25x` upper/right axis headroom so bar-end numeric labels and legend boxes remain comfortably inside panel spines (`wspace >= 0,38` beside horizontal bar charts with long settlement y-tick labels; dynamic `bottom` margin for multi-row figure legends below subplots).
+   - Call `verify_panel_bounds_and_overlaps(fig, label, {"strict": True})` before saving (`save_viscount_figure(..., arg3_options={"verify_layout": True, "strict_layout": True})`) to prove `0` interior text/legend panel-spine bleeds, `0` canvas overflows and `0` pairwise text overlaps.
+4. **Strict Mask to Figure to PDF Synchronisation**:
+   - Whenever areal masks, vector GeoJSONs, settlement JSONs or Stage C rasters are edited, agents MUST regenerate all affected chapter and root PNGs FIRST, re-run figure-by-figure `read_file` visual confirmation, sign updated `visual_check.json` files and recompile every affected `.Rmd` to `.pdf` and `.md` AFTER figure generation (`pdf.mtime >= fig.mtime >= mask.mtime`).

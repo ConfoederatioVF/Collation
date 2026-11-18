@@ -1,0 +1,927 @@
+{
+  "batch_index": 101,
+  "project": "CENTAUR",
+  "count": 30,
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        37.431,
+        -77.3815
+      ],
+      "country": "Virginia",
+      "earliest_year": 1500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Arrohateck James River Town-Virginia",
+      "known_aliases": [
+        "Arrohateck James River Town",
+        "arrohateck james river town",
+        "henrico powhatan village",
+        "Henrico Powhatan Village"
+      ],
+      "latest_year": 1500,
+      "name": "Arrohateck James River Town",
+      "reason": "missing_entry",
+      "region": "ma_chesapeake_potomac_james_powhatan",
+      "sample_years": [
+        1500
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.2985,
+        -74.8015
+      ],
+      "country": "New Jersey",
+      "earliest_year": 1100,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bell-Philhower-New Jersey",
+      "known_aliases": [
+        "Bell-Philhower",
+        "bell-philhower",
+        "28sx29",
+        "minisink montague",
+        "ahaloking",
+        "28SX29",
+        "Minisink Montague",
+        "Ahaloking"
+      ],
+      "latest_year": 1600,
+      "name": "Bell-Philhower",
+      "reason": "missing_entry",
+      "region": "ma_delaware_susquehanna_lenape",
+      "sample_years": [
+        1100,
+        1400,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.0815,
+        -76.621
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1550,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Billmyer Susquehannock Town-Pennsylvania",
+      "known_aliases": [
+        "Billmyer Susquehannock Town",
+        "billmyer susquehannock town",
+        "36la40",
+        "billmyer palisaded village",
+        "locust grove",
+        "36LA40",
+        "Billmyer Palisaded Village",
+        "Locust Grove"
+      ],
+      "latest_year": 1600,
+      "name": "Billmyer Susquehannock Town",
+      "reason": "missing_entry",
+      "region": "ma_delaware_susquehanna_lenape",
+      "sample_years": [
+        1550,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.3715,
+        -75.6385
+      ],
+      "country": "Delaware",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Blackbird Creek-Delaware",
+      "known_aliases": [
+        "Blackbird Creek",
+        "blackbird creek",
+        "7nc-j-195d",
+        "new castle coastal plain",
+        "7NC-J-195D",
+        "New Castle Coastal Plain"
+      ],
+      "latest_year": 1000,
+      "name": "Blackbird Creek",
+      "reason": "missing_entry",
+      "region": "ma_delaware_susquehanna_lenape",
+      "sample_years": [
+        -1000,
+        400,
+        1000
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.0015,
+        -74.4315
+      ],
+      "country": "New York",
+      "earliest_year": 1450,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cayadutta-New York",
+      "known_aliases": [
+        "Cayadutta",
+        "cayadutta",
+        "sammonsville mohawk",
+        "cayadutta creek",
+        "Sammonsville Mohawk",
+        "Cayadutta Creek"
+      ],
+      "latest_year": 1540,
+      "name": "Cayadutta",
+      "reason": "missing_entry",
+      "region": "ma_hudson_mohawk_champlain",
+      "sample_years": [
+        1450,
+        1540
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.3715,
+        -76.781
+      ],
+      "country": "Maryland",
+      "earliest_year": 1450,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Chaptico Yaocomico Town-Maryland",
+      "known_aliases": [
+        "Chaptico Yaocomico Town",
+        "chaptico yaocomico town",
+        "chaptico bay indian village",
+        "Chaptico Bay Indian Village"
+      ],
+      "latest_year": 1450,
+      "name": "Chaptico Yaocomico Town",
+      "reason": "missing_entry",
+      "region": "ma_chesapeake_potomac_james_powhatan",
+      "sample_years": [
+        1450
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.2593,
+        -74.2246
+      ],
+      "country": "New Jersey",
+      "earliest_year": -3000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Crine Woods-New Jersey",
+      "known_aliases": [
+        "Crine Woods",
+        "crine woods",
+        "28mo43",
+        "monmouth county coastal plain",
+        "28MO43",
+        "Monmouth County Coastal Plain"
+      ],
+      "latest_year": 1500,
+      "name": "Crine Woods",
+      "reason": "missing_entry",
+      "region": "ma_hudson_mohawk_champlain",
+      "sample_years": [
+        -3000,
+        0,
+        1500
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.5674,
+        -74.9124
+      ],
+      "country": "New Jersey",
+      "earliest_year": -6000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Derewal-New Jersey",
+      "known_aliases": [
+        "Derewal",
+        "derewal",
+        "28hu530",
+        "hunterdon delaware terrace",
+        "28HU530",
+        "Hunterdon Delaware Terrace"
+      ],
+      "latest_year": 1400,
+      "name": "Derewal",
+      "reason": "missing_entry",
+      "region": "ma_hudson_mohawk_champlain",
+      "sample_years": [
+        -6000,
+        -2000,
+        1400
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.9215,
+        -74.6645
+      ],
+      "country": "New York",
+      "earliest_year": 1450,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Elwood-New York_2",
+      "known_aliases": [
+        "Elwood",
+        "elwood",
+        "minden mohawk",
+        "montgomery county",
+        "Minden Mohawk",
+        "Montgomery County"
+      ],
+      "latest_year": 1520,
+      "name": "Elwood",
+      "reason": "missing_entry",
+      "region": "ma_hudson_mohawk_champlain",
+      "sample_years": [
+        1450,
+        1520
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.2594,
+        -76.0386
+      ],
+      "country": "Maryland",
+      "earliest_year": -3000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fairlee Neck Shell Midden-Maryland",
+      "known_aliases": [
+        "Fairlee Neck Shell Midden",
+        "fairlee neck shell midden",
+        "18ke17",
+        "kent county upper chesapeake",
+        "18KE17",
+        "Kent County Upper Chesapeake"
+      ],
+      "latest_year": -2000,
+      "name": "Fairlee Neck Shell Midden",
+      "reason": "missing_entry",
+      "region": "ma_chesapeake_potomac_james_powhatan",
+      "sample_years": [
+        -3000,
+        -2000
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.7345,
+        -79.7765
+      ],
+      "country": "Virginia",
+      "earliest_year": 900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Gala-Virginia",
+      "known_aliases": [
+        "Gala",
+        "gala",
+        "44bo48",
+        "botetourt upper james",
+        "44BO48",
+        "Botetourt Upper James"
+      ],
+      "latest_year": 1500,
+      "name": "Gala",
+      "reason": "missing_entry",
+      "region": "ma_chesapeake_potomac_james_powhatan",
+      "sample_years": [
+        900,
+        1200,
+        1500
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.885,
+        -76.042
+      ],
+      "country": "Virginia",
+      "earliest_year": 400,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Great Neck-Virginia",
+      "known_aliases": [
+        "Great Neck",
+        "great neck"
+      ],
+      "latest_year": 1550,
+      "name": "Great Neck",
+      "reason": "missing_entry",
+      "region": "ma_chesapeake_potomac_james_powhatan",
+      "sample_years": [
+        400,
+        1200,
+        1550
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.508,
+        -75.862
+      ],
+      "country": "Maryland",
+      "earliest_year": 1500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Handsell-Nanticoke-Maryland",
+      "known_aliases": [
+        "Handsell-Nanticoke",
+        "handsell-nanticoke"
+      ],
+      "latest_year": 1600,
+      "name": "Handsell-Nanticoke",
+      "reason": "missing_entry",
+      "region": "ma_chesapeake_potomac_james_powhatan",
+      "sample_years": [
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.1868,
+        -77.2212
+      ],
+      "country": "Virginia",
+      "earliest_year": 400,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hatch-Virginia",
+      "known_aliases": [
+        "Hatch",
+        "hatch",
+        "weyanoke old town",
+        "44pg51",
+        "Weyanoke Old Town",
+        "44PG51"
+      ],
+      "latest_year": 1500,
+      "name": "Hatch",
+      "reason": "missing_entry",
+      "region": "ma_chesapeake_potomac_james_powhatan",
+      "sample_years": [
+        400,
+        1100,
+        1500
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.0462,
+        -75.3896
+      ],
+      "country": "Delaware",
+      "earliest_year": 600,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Island Field-Delaware",
+      "known_aliases": [
+        "Island Field",
+        "island field",
+        "7k-f-17",
+        "murderkill river cemetery",
+        "7K-F-17",
+        "Murderkill River Cemetery"
+      ],
+      "latest_year": 1100,
+      "name": "Island Field",
+      "reason": "missing_entry",
+      "region": "ma_delaware_susquehanna_lenape",
+      "sample_years": [
+        600,
+        900,
+        1100
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.312,
+        -77.225
+      ],
+      "country": "Virginia",
+      "earliest_year": 900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Jordan Point-Virginia",
+      "known_aliases": [
+        "Jordan Point",
+        "jordan point",
+        "44pg302",
+        "44PG302"
+      ],
+      "latest_year": 1550,
+      "name": "Jordan Point",
+      "reason": "missing_entry",
+      "region": "ma_chesapeake_potomac_james_powhatan",
+      "sample_years": [
+        900,
+        1350,
+        1550
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.372,
+        -75.1116
+      ],
+      "country": "New Jersey",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Martelli-New Jersey",
+      "known_aliases": [
+        "Martelli",
+        "martelli",
+        "28cu161",
+        "cumberland maurice river",
+        "28CU161",
+        "Cumberland Maurice River"
+      ],
+      "latest_year": 1500,
+      "name": "Martelli",
+      "reason": "missing_entry",
+      "region": "ma_delaware_susquehanna_lenape",
+      "sample_years": [
+        -1000,
+        1000,
+        1500
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.5815,
+        -76.981
+      ],
+      "country": "Virginia",
+      "earliest_year": 1500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Menapucunt Pamunkey Seat-Virginia",
+      "known_aliases": [
+        "Menapucunt Pamunkey Seat",
+        "menapucunt pamunkey seat",
+        "opechancanough royal town",
+        "Opechancanough Royal Town"
+      ],
+      "latest_year": 1500,
+      "name": "Menapucunt Pamunkey Seat",
+      "reason": "missing_entry",
+      "region": "ma_chesapeake_potomac_james_powhatan",
+      "sample_years": [
+        1500
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.3212,
+        -74.781
+      ],
+      "country": "New Jersey",
+      "earliest_year": 1350,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Minisink Munsee Capital-New Jersey",
+      "known_aliases": [
+        "Minisink Munsee Capital",
+        "minisink munsee capital",
+        "minisink island delaware river metropolis",
+        "Minisink Island Delaware River Metropolis"
+      ],
+      "latest_year": 1500,
+      "name": "Minisink Munsee Capital",
+      "reason": "missing_entry",
+      "region": "ma_delaware_susquehanna_lenape",
+      "sample_years": [
+        1350,
+        1500
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.8385,
+        -79.3765
+      ],
+      "country": "West Virginia",
+      "earliest_year": -2000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mouth of Seneca-West Virginia",
+      "known_aliases": [
+        "Mouth of Seneca",
+        "mouth of seneca",
+        "46pd1",
+        "pendleton north fork potomac",
+        "46PD1",
+        "Pendleton North Fork Potomac"
+      ],
+      "latest_year": 1500,
+      "name": "Mouth of Seneca",
+      "reason": "missing_entry",
+      "region": "ma_chesapeake_potomac_james_powhatan",
+      "sample_years": [
+        -2000,
+        500,
+        1500
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.571,
+        -77.7815
+      ],
+      "country": "Virginia",
+      "earliest_year": 1400,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mowhemencho Monacan Town-Virginia",
+      "known_aliases": [
+        "Mowhemencho Monacan Town",
+        "mowhemencho monacan town",
+        "44po1",
+        "powhatan county monacan village",
+        "44PO1",
+        "Powhatan County Monacan Village"
+      ],
+      "latest_year": 1400,
+      "name": "Mowhemencho Monacan Town",
+      "reason": "missing_entry",
+      "region": "ma_chesapeake_potomac_james_powhatan",
+      "sample_years": [
+        1400
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.4515,
+        -77.151
+      ],
+      "country": "Maryland",
+      "earliest_year": 1450,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Nanjemoy Conoy Town-Maryland",
+      "known_aliases": [
+        "Nanjemoy Conoy Town",
+        "nanjemoy conoy town",
+        "nanjemoy creek potomac village",
+        "Nanjemoy Creek Potomac Village"
+      ],
+      "latest_year": 1450,
+      "name": "Nanjemoy Conoy Town",
+      "reason": "missing_entry",
+      "region": "ma_chesapeake_potomac_james_powhatan",
+      "sample_years": [
+        1450
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.228,
+        -75.471
+      ],
+      "country": "Maryland",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Nassawango-Maryland",
+      "known_aliases": [
+        "Nassawango",
+        "nassawango",
+        "18wo23",
+        "nassawango creek adena mound",
+        "18WO23",
+        "Nassawango Creek Adena Mound"
+      ],
+      "latest_year": 800,
+      "name": "Nassawango",
+      "reason": "missing_entry",
+      "region": "ma_chesapeake_potomac_james_powhatan",
+      "sample_years": [
+        -500,
+        0,
+        800
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.6015,
+        -77.181
+      ],
+      "country": "Virginia",
+      "earliest_year": 1500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Orapaks Forest Capital Town-Virginia",
+      "known_aliases": [
+        "Orapaks Forest Capital Town",
+        "orapaks forest capital town",
+        "hanover powhatan stronghold village",
+        "Hanover Powhatan Stronghold Village"
+      ],
+      "latest_year": 1500,
+      "name": "Orapaks Forest Capital Town",
+      "reason": "missing_entry",
+      "region": "ma_chesapeake_potomac_james_powhatan",
+      "sample_years": [
+        1500
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.5147,
+        -77.2043
+      ],
+      "country": "Virginia",
+      "earliest_year": 1400,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Orapax-Virginia",
+      "known_aliases": [
+        "Orapax",
+        "orapax",
+        "orapakes",
+        "upper chickahominy powhatan",
+        "Orapakes",
+        "Upper Chickahominy Powhatan"
+      ],
+      "latest_year": 1600,
+      "name": "Orapax",
+      "reason": "missing_entry",
+      "region": "ma_chesapeake_potomac_james_powhatan",
+      "sample_years": [
+        1400,
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.5415,
+        -75.1285
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1100,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Overpeck-Pennsylvania",
+      "known_aliases": [
+        "Overpeck",
+        "overpeck",
+        "36bu5",
+        "upper black eddy delaware",
+        "36BU5",
+        "Upper Black Eddy Delaware"
+      ],
+      "latest_year": 1500,
+      "name": "Overpeck",
+      "reason": "missing_entry",
+      "region": "ma_delaware_susquehanna_lenape",
+      "sample_years": [
+        1100,
+        1300,
+        1500
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.2615,
+        -76.871
+      ],
+      "country": "Virginia",
+      "earliest_year": 1500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Paspahegh Confluence Town-Virginia",
+      "known_aliases": [
+        "Paspahegh Confluence Town",
+        "paspahegh confluence town",
+        "chickahominy river mouth village",
+        "Chickahominy River Mouth Village"
+      ],
+      "latest_year": 1500,
+      "name": "Paspahegh Confluence Town",
+      "reason": "missing_entry",
+      "region": "ma_chesapeake_potomac_james_powhatan",
+      "sample_years": [
+        1500
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.7025,
+        -76.9825
+      ],
+      "country": "Maryland",
+      "earliest_year": 1300,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Piscataway Fort-Maryland",
+      "known_aliases": [
+        "Piscataway Fort",
+        "piscataway fort",
+        "coyaough",
+        "piscataway creek",
+        "18pr7",
+        "Coyaough",
+        "Piscataway Creek",
+        "18PR7"
+      ],
+      "latest_year": 1600,
+      "name": "Piscataway Fort",
+      "reason": "missing_entry",
+      "region": "ma_chesapeake_potomac_james_powhatan",
+      "sample_years": [
+        1300,
+        1500,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.7165,
+        -78.6785
+      ],
+      "country": "Virginia",
+      "earliest_year": 1400,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Quicksburg-Virginia",
+      "known_aliases": [
+        "Quicksburg",
+        "quicksburg",
+        "44sh3",
+        "shenandoah valley late woodland",
+        "44SH3",
+        "Shenandoah Valley Late Woodland"
+      ],
+      "latest_year": 1600,
+      "name": "Quicksburg",
+      "reason": "missing_entry",
+      "region": "ma_chesapeake_potomac_james_powhatan",
+      "sample_years": [
+        1400,
+        1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.7712,
+        -78.0815
+      ],
+      "country": "Virginia",
+      "earliest_year": 1350,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rassawek Monacan Capital-Virginia",
+      "known_aliases": [
+        "Rassawek Monacan Capital",
+        "rassawek monacan capital",
+        "44or1",
+        "james-rivanna confluence metropolis",
+        "44OR1",
+        "James-Rivanna Confluence Metropolis"
+      ],
+      "latest_year": 1500,
+      "name": "Rassawek Monacan Capital",
+      "reason": "missing_entry",
+      "region": "ma_chesapeake_potomac_james_powhatan",
+      "sample_years": [
+        1350,
+        1500
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

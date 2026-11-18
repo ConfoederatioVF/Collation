@@ -1,0 +1,957 @@
+{
+  "batch_index": 104,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        30.89415,
+        -87.21502
+      ],
+      "country": "Florida",
+      "earliest_year": 1971,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Brownsdale-Florida",
+      "known_aliases": [
+        "Brownsdale",
+        "brownsdale",
+        "brownsdale cdp",
+        "Brownsdale CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Brownsdale",
+      "reason": "missing_entry",
+      "region": "usa_florida",
+      "sample_years": [
+        1971,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.7668,
+        -70.14303
+      ],
+      "country": "Maine",
+      "earliest_year": 1858,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cousins Island-Maine",
+      "known_aliases": [
+        "Cousins Island",
+        "cousins island",
+        "cousins island cdp",
+        "littlejohn island",
+        "littlejohn island cdp",
+        "Cousins Island CDP",
+        "Littlejohn Island",
+        "Littlejohn Island CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Cousins Island",
+      "reason": "missing_entry",
+      "region": "usa_maine",
+      "sample_years": [
+        1858,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.00853,
+        -111.75064
+      ],
+      "country": "Utah",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Spring Lake-Utah",
+      "known_aliases": [
+        "Spring Lake",
+        "spring lake",
+        "spring lake cdp",
+        "Spring Lake CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Spring Lake",
+      "reason": "missing_entry",
+      "region": "usa_utah",
+      "sample_years": [
+        1850,
+        1890,
+        1940,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.56393,
+        -95.02405
+      ],
+      "country": "Oklahoma",
+      "earliest_year": 1914,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Redbird Smith-Oklahoma",
+      "known_aliases": [
+        "Redbird Smith",
+        "redbird smith",
+        "redbird smith cdp",
+        "Redbird Smith CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Redbird Smith",
+      "reason": "missing_entry",
+      "region": "usa_oklahoma",
+      "sample_years": [
+        1914,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.98025,
+        -90.33174
+      ],
+      "country": "Missouri",
+      "earliest_year": 1885,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Goose Creek Lake-Missouri",
+      "known_aliases": [
+        "Goose Creek Lake",
+        "goose creek lake",
+        "goose creek lake cdp",
+        "Goose Creek Lake CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Goose Creek Lake",
+      "reason": "missing_entry",
+      "region": "usa_missouri",
+      "sample_years": [
+        1885,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        26.87056,
+        -99.29173
+      ],
+      "country": "Texas",
+      "earliest_year": 1905,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Falcon Mesa-Texas",
+      "known_aliases": [
+        "Falcon Mesa",
+        "falcon mesa",
+        "falcon mesa cdp",
+        "Falcon Mesa CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Falcon Mesa",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1905,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.81488,
+        -112.58099
+      ],
+      "country": "Arizona",
+      "earliest_year": 1905,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Circle City-Arizona",
+      "known_aliases": [
+        "Circle City",
+        "circle city",
+        "circle city cdp",
+        "Circle City CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Circle City",
+      "reason": "missing_entry",
+      "region": "usa_arizona",
+      "sample_years": [
+        1905,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.28859,
+        -85.52403
+      ],
+      "country": "Michigan",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sand Lake (Kent County)-Michigan",
+      "known_aliases": [
+        "Sand Lake (Kent County)",
+        "sand lake",
+        "sand lake village",
+        "Sand Lake village",
+        "Sand Lake"
+      ],
+      "latest_year": 2026,
+      "name": "Sand Lake (Kent County)",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1850,
+        1990,
+        2013,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        31.25238,
+        -92.20996
+      ],
+      "country": "Louisiana",
+      "earliest_year": 1891,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Center Point-Louisiana",
+      "known_aliases": [
+        "Center Point",
+        "center point",
+        "center point cdp",
+        "Center Point CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Center Point",
+      "reason": "missing_entry",
+      "region": "usa_louisiana",
+      "sample_years": [
+        1891,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.62675,
+        -97.08123
+      ],
+      "country": "Oklahoma",
+      "earliest_year": 1961,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "White Eagle-Oklahoma",
+      "known_aliases": [
+        "White Eagle",
+        "white eagle",
+        "white eagle cdp",
+        "White Eagle CDP"
+      ],
+      "latest_year": 2020,
+      "name": "White Eagle",
+      "reason": "missing_entry",
+      "region": "usa_oklahoma",
+      "sample_years": [
+        1961,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.79659,
+        -95.05512
+      ],
+      "country": "Oklahoma",
+      "earliest_year": 1870,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Zeb-Oklahoma",
+      "known_aliases": [
+        "Zeb",
+        "zeb",
+        "zeb cdp",
+        "Zeb CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Zeb",
+      "reason": "missing_entry",
+      "region": "usa_oklahoma",
+      "sample_years": [
+        1870,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        29.51133,
+        -96.67298
+      ],
+      "country": "Texas",
+      "earliest_year": 1928,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sheridan-Texas",
+      "known_aliases": [
+        "Sheridan",
+        "sheridan",
+        "sheridan cdp",
+        "Sheridan CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Sheridan",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1928,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.74186,
+        -74.67536
+      ],
+      "country": "New York",
+      "earliest_year": 1896,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hurleyville-New York",
+      "known_aliases": [
+        "Hurleyville",
+        "hurleyville",
+        "hurleyville cdp",
+        "Hurleyville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Hurleyville",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1896,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.78898,
+        -94.68533
+      ],
+      "country": "Oklahoma",
+      "earliest_year": 1932,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lyons Switch-Oklahoma",
+      "known_aliases": [
+        "Lyons Switch",
+        "lyons switch",
+        "lyons switch cdp",
+        "Lyons Switch CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Lyons Switch",
+      "reason": "missing_entry",
+      "region": "usa_oklahoma",
+      "sample_years": [
+        1932,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.91285,
+        -122.63699
+      ],
+      "country": "Washington",
+      "earliest_year": 1919,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Custer-Washington",
+      "known_aliases": [
+        "Custer",
+        "custer",
+        "custer cdp",
+        "Custer CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Custer",
+      "reason": "missing_entry",
+      "region": "usa_washington",
+      "sample_years": [
+        1919,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.69558,
+        -121.28053
+      ],
+      "country": "Washington",
+      "earliest_year": 1946,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lyle-Washington",
+      "known_aliases": [
+        "Lyle",
+        "lyle",
+        "lyle cdp",
+        "Lyle CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Lyle",
+      "reason": "missing_entry",
+      "region": "usa_washington",
+      "sample_years": [
+        1946,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.77693,
+        -76.98994
+      ],
+      "country": "Virginia",
+      "earliest_year": 1927,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sedley-Virginia",
+      "known_aliases": [
+        "Sedley",
+        "sedley",
+        "sedley cdp",
+        "Sedley CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Sedley",
+      "reason": "missing_entry",
+      "region": "usa_virginia",
+      "sample_years": [
+        1927,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.59068,
+        -110.84198
+      ],
+      "country": "Wyoming",
+      "earliest_year": 1920,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Teton Village-Wyoming",
+      "known_aliases": [
+        "Teton Village",
+        "teton village",
+        "teton village cdp",
+        "Teton Village CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Teton Village",
+      "reason": "missing_entry",
+      "region": "usa_wyoming",
+      "sample_years": [
+        1920,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.34997,
+        -90.73793
+      ],
+      "country": "Mississippi",
+      "earliest_year": 1890,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bovina-Mississippi",
+      "known_aliases": [
+        "Bovina",
+        "bovina",
+        "bovina cdp",
+        "Bovina CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Bovina",
+      "reason": "missing_entry",
+      "region": "usa_mississippi",
+      "sample_years": [
+        1890,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.11479,
+        -88.25823
+      ],
+      "country": "Tennessee",
+      "earliest_year": 1866,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Nixon-Tennessee",
+      "known_aliases": [
+        "Nixon",
+        "nixon",
+        "nixon cdp",
+        "Nixon CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Nixon",
+      "reason": "missing_entry",
+      "region": "usa_tennessee",
+      "sample_years": [
+        1866,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        30.48766,
+        -94.76765
+      ],
+      "country": "Texas",
+      "earliest_year": 1860,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Big Thicket Lake Estates-Texas",
+      "known_aliases": [
+        "Big Thicket Lake Estates",
+        "big thicket lake estates",
+        "big thicket lake estates cdp",
+        "Big Thicket Lake Estates CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Big Thicket Lake Estates",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1860,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        19.40672,
+        -154.92145
+      ],
+      "country": "Hawaii",
+      "earliest_year": 1940,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Seaview-Hawaii",
+      "known_aliases": [
+        "Seaview",
+        "seaview",
+        "seaview cdp",
+        "Seaview CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Seaview",
+      "reason": "missing_entry",
+      "region": "usa_hawaii",
+      "sample_years": [
+        1940,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.41978,
+        -116.57531
+      ],
+      "country": "Nevada",
+      "earliest_year": 1949,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Crescent Valley-Nevada",
+      "known_aliases": [
+        "Crescent Valley",
+        "crescent valley",
+        "crescent valley cdp",
+        "Crescent Valley CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Crescent Valley",
+      "reason": "missing_entry",
+      "region": "usa_nevada",
+      "sample_years": [
+        1949,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.2099,
+        -80.12634
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1884,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Wylandville-Pennsylvania",
+      "known_aliases": [
+        "Wylandville",
+        "wylandville",
+        "wylandville cdp",
+        "Wylandville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Wylandville",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1884,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.73293,
+        -118.66821
+      ],
+      "country": "Washington",
+      "earliest_year": 1951,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Curlew Lake-Washington",
+      "known_aliases": [
+        "Curlew Lake",
+        "curlew lake",
+        "curlew lake cdp",
+        "Curlew Lake CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Curlew Lake",
+      "reason": "missing_entry",
+      "region": "usa_washington",
+      "sample_years": [
+        1951,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.58396,
+        -105.76288
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1920,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Glorieta-New Mexico",
+      "known_aliases": [
+        "Glorieta",
+        "glorieta",
+        "glorieta cdp",
+        "Glorieta CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Glorieta",
+      "reason": "missing_entry",
+      "region": "usa_new_mexico",
+      "sample_years": [
+        1920,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        30.39156,
+        -84.99133
+      ],
+      "country": "Florida",
+      "earliest_year": 1953,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lake Mystic-Florida",
+      "known_aliases": [
+        "Lake Mystic",
+        "lake mystic",
+        "lake mystic cdp",
+        "Lake Mystic CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Lake Mystic",
+      "reason": "missing_entry",
+      "region": "usa_florida",
+      "sample_years": [
+        1953,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.32185,
+        -85.34987
+      ],
+      "country": "Michigan",
+      "earliest_year": 1885,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Trufant-Michigan",
+      "known_aliases": [
+        "Trufant",
+        "trufant",
+        "trufant cdp",
+        "Trufant CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Trufant",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1885,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        29.44146,
+        -96.41341
+      ],
+      "country": "Texas",
+      "earliest_year": 1876,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Garwood-Texas",
+      "known_aliases": [
+        "Garwood",
+        "garwood",
+        "garwood cdp",
+        "Garwood CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Garwood",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1876,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.31814,
+        -73.52982
+      ],
+      "country": "Connecticut",
+      "earliest_year": 1970,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mamanasco Lake-Connecticut",
+      "known_aliases": [
+        "Mamanasco Lake",
+        "mamanasco lake",
+        "mamanasco lake cdp",
+        "Mamanasco Lake CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Mamanasco Lake",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

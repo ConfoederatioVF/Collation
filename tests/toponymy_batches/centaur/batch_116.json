@@ -1,0 +1,947 @@
+{
+  "batch_index": 116,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        40.70104,
+        -83.97508
+      ],
+      "country": "Ohio",
+      "earliest_year": 1905,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Westminster-Ohio",
+      "known_aliases": [
+        "Westminster",
+        "westminster",
+        "westminster cdp",
+        "Westminster CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Westminster",
+      "reason": "missing_entry",
+      "region": "usa_ohio",
+      "sample_years": [
+        1905,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.63764,
+        -122.90595
+      ],
+      "country": "Oregon",
+      "earliest_year": 1946,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Crabtree-Oregon",
+      "known_aliases": [
+        "Crabtree",
+        "crabtree",
+        "crabtree cdp",
+        "Crabtree CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Crabtree",
+      "reason": "missing_entry",
+      "region": "usa_oregon",
+      "sample_years": [
+        1946,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.779,
+        -76.10867
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1940,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Little Britain-Pennsylvania",
+      "known_aliases": [
+        "Little Britain",
+        "little britain",
+        "little britain cdp",
+        "Little Britain CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Little Britain",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1940,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.03339,
+        -77.1552
+      ],
+      "country": "New York",
+      "earliest_year": 1870,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Port Gibson-New York",
+      "known_aliases": [
+        "Port Gibson",
+        "port gibson",
+        "port gibson cdp",
+        "Port Gibson CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Port Gibson",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1870,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.90997,
+        -80.53355
+      ],
+      "country": "Ohio",
+      "earliest_year": 1873,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Petersburg-Ohio",
+      "known_aliases": [
+        "Petersburg",
+        "petersburg",
+        "petersburg cdp",
+        "Petersburg CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Petersburg",
+      "reason": "missing_entry",
+      "region": "usa_ohio",
+      "sample_years": [
+        1873,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.50397,
+        -94.66679
+      ],
+      "country": "Oklahoma",
+      "earliest_year": 1927,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Akins-Oklahoma",
+      "known_aliases": [
+        "Akins",
+        "akins",
+        "akins cdp",
+        "Akins CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Akins",
+      "reason": "missing_entry",
+      "region": "usa_oklahoma",
+      "sample_years": [
+        1927,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.96373,
+        -119.3508
+      ],
+      "country": "Washington",
+      "earliest_year": 1871,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Marine View-Washington",
+      "known_aliases": [
+        "Marine View",
+        "marine view",
+        "marine view cdp",
+        "Marine View CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Marine View",
+      "reason": "missing_entry",
+      "region": "usa_washington",
+      "sample_years": [
+        1871,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.67771,
+        -110.94076
+      ],
+      "country": "Wyoming",
+      "earliest_year": 1925,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Osmond-Wyoming",
+      "known_aliases": [
+        "Osmond",
+        "osmond",
+        "osmond cdp",
+        "Osmond CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Osmond",
+      "reason": "missing_entry",
+      "region": "usa_wyoming",
+      "sample_years": [
+        1925,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.85631,
+        -86.99364
+      ],
+      "country": "Kentucky",
+      "earliest_year": 1910,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Maceo-Kentucky",
+      "known_aliases": [
+        "Maceo",
+        "maceo",
+        "maceo cdp",
+        "Maceo CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Maceo",
+      "reason": "missing_entry",
+      "region": "usa_kentucky",
+      "sample_years": [
+        1910,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.26103,
+        -109.7748
+      ],
+      "country": "Montana",
+      "earliest_year": 1902,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rocky Boy's Agency-Montana",
+      "known_aliases": [
+        "Rocky Boy's Agency",
+        "rocky boy's agency",
+        "rocky boy's agency cdp",
+        "agency",
+        "Rocky Boy's Agency CDP",
+        "Agency"
+      ],
+      "latest_year": 2020,
+      "name": "Rocky Boy's Agency",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1902,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.2399,
+        -82.69079
+      ],
+      "country": "Ohio",
+      "earliest_year": 1840,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hartford (Croton)-Ohio",
+      "known_aliases": [
+        "Hartford (Croton)",
+        "hartford",
+        "hartford village",
+        "Hartford (Croton) village",
+        "Hartford"
+      ],
+      "latest_year": 2026,
+      "name": "Hartford (Croton)",
+      "reason": "missing_entry",
+      "region": "usa_ohio",
+      "sample_years": [
+        1840,
+        1980,
+        2012,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.427,
+        -98.19301
+      ],
+      "country": "Oklahoma",
+      "earliest_year": 1947,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cedar Lake-Oklahoma",
+      "known_aliases": [
+        "Cedar Lake",
+        "cedar lake",
+        "cedar lake cdp",
+        "Cedar Lake CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Cedar Lake",
+      "reason": "missing_entry",
+      "region": "usa_oklahoma",
+      "sample_years": [
+        1947,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.51622,
+        -76.10014
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1923,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Shartlesville-Pennsylvania",
+      "known_aliases": [
+        "Shartlesville",
+        "shartlesville",
+        "shartlesville cdp",
+        "Shartlesville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Shartlesville",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1923,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.96066,
+        -114.5714
+      ],
+      "country": "Arizona",
+      "earliest_year": 1943,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mesquite Creek-Arizona",
+      "known_aliases": [
+        "Mesquite Creek",
+        "mesquite creek",
+        "mesquite creek cdp",
+        "Mesquite Creek CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Mesquite Creek",
+      "reason": "missing_entry",
+      "region": "usa_arizona",
+      "sample_years": [
+        1943,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.94658,
+        -87.16967
+      ],
+      "country": "Indiana",
+      "earliest_year": 1917,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Richland-Indiana",
+      "known_aliases": [
+        "Richland",
+        "richland",
+        "richland town",
+        "Richland town"
+      ],
+      "latest_year": 2026,
+      "name": "Richland",
+      "reason": "missing_entry",
+      "region": "usa_indiana",
+      "sample_years": [
+        1917,
+        2003,
+        2015,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.80073,
+        -88.79367
+      ],
+      "country": "Kentucky",
+      "earliest_year": 1949,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fancy Farm-Kentucky",
+      "known_aliases": [
+        "Fancy Farm",
+        "fancy farm",
+        "fancy farm cdp",
+        "Fancy Farm CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Fancy Farm",
+      "reason": "missing_entry",
+      "region": "usa_kentucky",
+      "sample_years": [
+        1949,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.29244,
+        -75.0075
+      ],
+      "country": "New Jersey",
+      "earliest_year": 1906,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mauricetown-New Jersey",
+      "known_aliases": [
+        "Mauricetown",
+        "mauricetown",
+        "mauricetown cdp",
+        "Mauricetown CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Mauricetown",
+      "reason": "missing_entry",
+      "region": "usa_new_jersey",
+      "sample_years": [
+        1906,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.41934,
+        -121.54162
+      ],
+      "country": "California",
+      "earliest_year": 1877,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Clarksburg-California",
+      "known_aliases": [
+        "Clarksburg",
+        "clarksburg",
+        "clarksburg cdp",
+        "Clarksburg CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Clarksburg",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1877,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.58559,
+        -87.47448
+      ],
+      "country": "Indiana",
+      "earliest_year": 1966,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "New Goshen-Indiana",
+      "known_aliases": [
+        "New Goshen",
+        "new goshen",
+        "new goshen cdp",
+        "New Goshen CDP"
+      ],
+      "latest_year": 2020,
+      "name": "New Goshen",
+      "reason": "missing_entry",
+      "region": "usa_indiana",
+      "sample_years": [
+        1966,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.93143,
+        -86.72766
+      ],
+      "country": "Indiana",
+      "earliest_year": 1867,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Owensburg-Indiana",
+      "known_aliases": [
+        "Owensburg",
+        "owensburg",
+        "owensburg cdp",
+        "Owensburg CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Owensburg",
+      "reason": "missing_entry",
+      "region": "usa_indiana",
+      "sample_years": [
+        1867,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.96564,
+        -82.40983
+      ],
+      "country": "Ohio",
+      "earliest_year": 1891,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Jacksontown-Ohio",
+      "known_aliases": [
+        "Jacksontown",
+        "jacksontown",
+        "jacksontown cdp",
+        "Jacksontown CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Jacksontown",
+      "reason": "missing_entry",
+      "region": "usa_ohio",
+      "sample_years": [
+        1891,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.75911,
+        -80.22489
+      ],
+      "country": "South Carolina",
+      "earliest_year": 1917,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Alcolu-South Carolina",
+      "known_aliases": [
+        "Alcolu",
+        "alcolu",
+        "alcolu cdp",
+        "Alcolu CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Alcolu",
+      "reason": "missing_entry",
+      "region": "usa_south_carolina",
+      "sample_years": [
+        1917,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.54212,
+        -77.92708
+      ],
+      "country": "Virginia",
+      "earliest_year": 1863,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Powhatan-Virginia",
+      "known_aliases": [
+        "Powhatan",
+        "powhatan",
+        "powhatan cdp",
+        "Powhatan CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Powhatan",
+      "reason": "missing_entry",
+      "region": "usa_virginia",
+      "sample_years": [
+        1863,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.97876,
+        -105.84405
+      ],
+      "country": "Colorado",
+      "earliest_year": 1908,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tabernash-Colorado",
+      "known_aliases": [
+        "Tabernash",
+        "tabernash",
+        "tabernash cdp",
+        "Tabernash CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Tabernash",
+      "reason": "missing_entry",
+      "region": "usa_colorado",
+      "sample_years": [
+        1908,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.26811,
+        -75.28864
+      ],
+      "country": "Maryland",
+      "earliest_year": 1853,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Newark-Maryland",
+      "known_aliases": [
+        "Newark",
+        "newark",
+        "newark cdp",
+        "Newark CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Newark",
+      "reason": "missing_entry",
+      "region": "usa_maryland",
+      "sample_years": [
+        1853,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.24912,
+        -118.84415
+      ],
+      "country": "California",
+      "earliest_year": 1928,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Di Giorgio-California",
+      "known_aliases": [
+        "Di Giorgio",
+        "di giorgio",
+        "di giorgio cdp",
+        "Di Giorgio CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Di Giorgio",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1928,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.14811,
+        -74.84615
+      ],
+      "country": "New Jersey",
+      "earliest_year": 1856,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Goshen-New Jersey",
+      "known_aliases": [
+        "Goshen",
+        "goshen",
+        "goshen cdp",
+        "Goshen CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Goshen",
+      "reason": "missing_entry",
+      "region": "usa_new_jersey",
+      "sample_years": [
+        1856,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.39116,
+        -94.85224
+      ],
+      "country": "Oklahoma",
+      "earliest_year": 1871,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "New Eucha-Oklahoma",
+      "known_aliases": [
+        "New Eucha",
+        "new eucha",
+        "new eucha cdp",
+        "New Eucha CDP"
+      ],
+      "latest_year": 2020,
+      "name": "New Eucha",
+      "reason": "missing_entry",
+      "region": "usa_oklahoma",
+      "sample_years": [
+        1871,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.8555,
+        -85.6691
+      ],
+      "country": "Alabama",
+      "earliest_year": 1952,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Nances Creek-Alabama",
+      "known_aliases": [
+        "Nances Creek",
+        "nances creek",
+        "nances creek cdp",
+        "Nances Creek CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Nances Creek",
+      "reason": "missing_entry",
+      "region": "usa_alabama",
+      "sample_years": [
+        1952,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.81381,
+        -109.62893
+      ],
+      "country": "Arizona",
+      "earliest_year": 1901,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Solomon-Arizona",
+      "known_aliases": [
+        "Solomon",
+        "solomon",
+        "solomon cdp",
+        "Solomon CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Solomon",
+      "reason": "missing_entry",
+      "region": "usa_arizona",
+      "sample_years": [
+        1901,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

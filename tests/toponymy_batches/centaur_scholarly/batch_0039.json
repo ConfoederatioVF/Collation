@@ -1,0 +1,920 @@
+{
+  "batch_index": 39,
+  "project": "CENTAUR",
+  "count": 30,
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        45.2168,
+        -75.68265
+      ],
+      "country": "Canada",
+      "earliest_year": 1830,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Manotick-Canada",
+      "known_aliases": [
+        "Manotick",
+        "manotick",
+        "long island rideau",
+        "Long Island Rideau"
+      ],
+      "latest_year": 1861,
+      "name": "Manotick",
+      "reason": "missing_entry",
+      "region": "cc2_lower_canada_quebec",
+      "sample_years": [
+        1830,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        54.98596,
+        -123.04225
+      ],
+      "country": "Canada",
+      "earliest_year": 1805,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "McLeod Lake-Canada",
+      "known_aliases": [
+        "McLeod Lake",
+        "mcleod lake",
+        "fort mcleod bc",
+        "Fort McLeod BC"
+      ],
+      "latest_year": 1867,
+      "name": "McLeod Lake",
+      "reason": "missing_entry",
+      "region": "cc2_north_western_territory_arctic",
+      "sample_years": [
+        1805,
+        1851,
+        1861,
+        1867
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.18835,
+        -66.16167
+      ],
+      "country": "Canada",
+      "earliest_year": 1768,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Meteghan-Canada",
+      "known_aliases": [
+        "Meteghan",
+        "meteghan",
+        "baie-sainte-marie",
+        "Baie-Sainte-Marie"
+      ],
+      "latest_year": 1861,
+      "name": "Meteghan",
+      "reason": "missing_entry",
+      "region": "cc2_lower_canada_quebec",
+      "sample_years": [
+        1768,
+        1827,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.5668,
+        -80.91643
+      ],
+      "country": "Canada",
+      "earliest_year": 1853,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Milverton-Canada",
+      "known_aliases": [
+        "Milverton",
+        "milverton",
+        "mornington",
+        "Mornington"
+      ],
+      "latest_year": 1867,
+      "name": "Milverton",
+      "reason": "missing_entry",
+      "region": "cc2_upper_canada_ontario",
+      "sample_years": [
+        1853,
+        1861,
+        1867
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.46679,
+        -81.19974
+      ],
+      "country": "Canada",
+      "earliest_year": 1836,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mitchell-Canada",
+      "known_aliases": [
+        "Mitchell",
+        "mitchell",
+        "logan",
+        "Logan"
+      ],
+      "latest_year": 1861,
+      "name": "Mitchell",
+      "reason": "missing_entry",
+      "region": "cc2_upper_canada_ontario",
+      "sample_years": [
+        1836,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.4168,
+        -75.43263
+      ],
+      "country": "Canada",
+      "earliest_year": 1842,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Navan-Canada",
+      "known_aliases": [
+        "Navan",
+        "navan",
+        "cumberland on",
+        "Cumberland ON"
+      ],
+      "latest_year": 1861,
+      "name": "Navan",
+      "reason": "missing_entry",
+      "region": "cc2_lower_canada_quebec",
+      "sample_years": [
+        1842,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.31682,
+        -76.86613
+      ],
+      "country": "Canada",
+      "earliest_year": 1824,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Newburgh-Canada",
+      "known_aliases": [
+        "Newburgh",
+        "newburgh",
+        "camden east",
+        "Camden East"
+      ],
+      "latest_year": 1861,
+      "name": "Newburgh",
+      "reason": "missing_entry",
+      "region": "cc2_upper_canada_ontario",
+      "sample_years": [
+        1824,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        75.08533,
+        -57.05962
+      ],
+      "country": "Greenland",
+      "earliest_year": 1772,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Nuussuaq-Greenland_3",
+      "known_aliases": [
+        "Nuussuaq",
+        "nuussuaq",
+        "kraulshavn",
+        "Kraulshavn"
+      ],
+      "latest_year": 1860,
+      "name": "Nuussuaq",
+      "reason": "missing_entry",
+      "region": "cc2_greenland_inspectorates",
+      "sample_years": [
+        1772,
+        1805,
+        1840,
+        1860
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.27694,
+        -76.7225
+      ],
+      "country": "Canada",
+      "earliest_year": 1816,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Odessa-Canada_2",
+      "known_aliases": [
+        "Odessa",
+        "odessa",
+        "mill creek on",
+        "Mill Creek ON"
+      ],
+      "latest_year": 1861,
+      "name": "Odessa",
+      "reason": "missing_entry",
+      "region": "cc2_upper_canada_ontario",
+      "sample_years": [
+        1816,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        57.55025,
+        -61.96477
+      ],
+      "country": "Canada",
+      "earliest_year": -1500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Okak-Canada",
+      "known_aliases": [
+        "Okak",
+        "okak",
+        "okak bay",
+        "kivalekh",
+        "hjcl-1",
+        "Okak Bay",
+        "Kivalekh",
+        "HjCl-1"
+      ],
+      "latest_year": 1867,
+      "name": "Okak",
+      "reason": "missing_entry",
+      "region": "cc2_newfoundland_labrador",
+      "sample_years": [
+        -1500,
+        1600,
+        1836,
+        1867
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.97503,
+        -78.61267
+      ],
+      "country": "Canada",
+      "earliest_year": 1832,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Orono-Canada",
+      "known_aliases": [
+        "Orono",
+        "orono",
+        "clarke north",
+        "Clarke North"
+      ],
+      "latest_year": 1861,
+      "name": "Orono",
+      "reason": "missing_entry",
+      "region": "cc2_upper_canada_ontario",
+      "sample_years": [
+        1832,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.13341,
+        -90.26686
+      ],
+      "country": "Canada",
+      "earliest_year": 1786,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Osnaburgh House-Canada",
+      "known_aliases": [
+        "Osnaburgh House",
+        "osnaburgh house",
+        "lake st. joseph post",
+        "Lake St. Joseph Post"
+      ],
+      "latest_year": 1861,
+      "name": "Osnaburgh House",
+      "reason": "missing_entry",
+      "region": "cc2_ruperts_land_prairies",
+      "sample_years": [
+        1786,
+        1821,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.7834,
+        -80.252
+      ],
+      "country": "Canada",
+      "earliest_year": 1794,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Port Dover-Canada",
+      "known_aliases": [
+        "Port Dover",
+        "port dover",
+        "dover mills",
+        "Dover Mills"
+      ],
+      "latest_year": 1861,
+      "name": "Port Dover",
+      "reason": "missing_entry",
+      "region": "cc2_upper_canada_ontario",
+      "sample_years": [
+        1794,
+        1825,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.1668,
+        -80.53298
+      ],
+      "country": "Canada",
+      "earliest_year": 1830,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Princeton-Canada_2",
+      "known_aliases": [
+        "Princeton",
+        "princeton",
+        "blenheim east",
+        "Blenheim East"
+      ],
+      "latest_year": 1861,
+      "name": "Princeton",
+      "reason": "missing_entry",
+      "region": "cc2_upper_canada_ontario",
+      "sample_years": [
+        1830,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.125,
+        -79.125
+      ],
+      "country": "Canada",
+      "earliest_year": 1790,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Queenston Town-Canada",
+      "known_aliases": [
+        "Queenston Town",
+        "queenston town",
+        "niagara portage town",
+        "Niagara Portage Town"
+      ],
+      "latest_year": 1851,
+      "name": "Queenston Town",
+      "reason": "missing_entry",
+      "region": "cc2_upper_canada_ontario",
+      "sample_years": [
+        1790,
+        1812,
+        1825,
+        1851
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.06679,
+        -81.58307
+      ],
+      "country": "Canada",
+      "earliest_year": 1851,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ripley-Canada",
+      "known_aliases": [
+        "Ripley",
+        "ripley",
+        "huron bruce",
+        "Huron Bruce"
+      ],
+      "latest_year": 1867,
+      "name": "Ripley",
+      "reason": "missing_entry",
+      "region": "cc2_upper_canada_ontario",
+      "sample_years": [
+        1851,
+        1861,
+        1867
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.6851,
+        -127.2551
+      ],
+      "country": "Canada",
+      "earliest_year": 1800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rivers Inlet Native Town-Canada",
+      "known_aliases": [
+        "Rivers Inlet Native Town",
+        "rivers inlet native town",
+        "oweekeno",
+        "wuikinuxv village",
+        "Oweekeno",
+        "Wuikinuxv Village"
+      ],
+      "latest_year": 1840,
+      "name": "Rivers Inlet Native Town",
+      "reason": "missing_entry",
+      "region": "cc2_british_columbia_vancouver_isl",
+      "sample_years": [
+        1800,
+        1840
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.56679,
+        -81.68306
+      ],
+      "country": "Canada",
+      "earliest_year": 1820,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rodney-Canada",
+      "known_aliases": [
+        "Rodney",
+        "rodney",
+        "aldborough",
+        "Aldborough"
+      ],
+      "latest_year": 1861,
+      "name": "Rodney",
+      "reason": "missing_entry",
+      "region": "cc2_upper_canada_ontario",
+      "sample_years": [
+        1820,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        49.5551,
+        -97.1851
+      ],
+      "country": "Canada",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sainte-Agathe Metis-Canada",
+      "known_aliases": [
+        "Sainte-Agathe Metis",
+        "sainte-agathe metis",
+        "red river south metis settlement",
+        "Red River South Metis Settlement"
+      ],
+      "latest_year": 1867,
+      "name": "Sainte-Agathe Metis",
+      "reason": "missing_entry",
+      "region": "cc2_red_river_assiniboia",
+      "sample_years": [
+        1850,
+        1867
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        49.6751,
+        -96.7051
+      ],
+      "country": "Canada",
+      "earliest_year": 1856,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sainte-Anne-des-Chenes Metis-Canada",
+      "known_aliases": [
+        "Sainte-Anne-des-Chenes Metis",
+        "sainte-anne-des-chenes metis",
+        "pointe-des-chenes metis settlement",
+        "Pointe-des-Chenes Metis Settlement"
+      ],
+      "latest_year": 1867,
+      "name": "Sainte-Anne-des-Chenes Metis",
+      "reason": "missing_entry",
+      "region": "cc2_red_river_assiniboia",
+      "sample_years": [
+        1856,
+        1867
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.40611,
+        -81.06056
+      ],
+      "country": "Canada",
+      "earliest_year": 1835,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sebringville-Canada",
+      "known_aliases": [
+        "Sebringville",
+        "sebringville",
+        "ellice",
+        "Ellice"
+      ],
+      "latest_year": 1861,
+      "name": "Sebringville",
+      "reason": "missing_entry",
+      "region": "cc2_upper_canada_ontario",
+      "sample_years": [
+        1835,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.48342,
+        -76.23268
+      ],
+      "country": "Canada",
+      "earliest_year": 1828,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Seeley's Bay-Canada",
+      "known_aliases": [
+        "Seeley's Bay",
+        "seeley's bay",
+        "leeds north",
+        "Leeds North"
+      ],
+      "latest_year": 1861,
+      "name": "Seeley's Bay",
+      "reason": "missing_entry",
+      "region": "cc2_lower_canada_quebec",
+      "sample_years": [
+        1828,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.36679,
+        -80.81641
+      ],
+      "country": "Canada",
+      "earliest_year": 1832,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Shakespeare-Canada",
+      "known_aliases": [
+        "Shakespeare",
+        "shakespeare",
+        "south easthope",
+        "South Easthope"
+      ],
+      "latest_year": 1861,
+      "name": "Shakespeare",
+      "reason": "missing_entry",
+      "region": "cc2_upper_canada_ontario",
+      "sample_years": [
+        1832,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.21527,
+        -77.20557
+      ],
+      "country": "Canada",
+      "earliest_year": 1800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Shannonville-Canada",
+      "known_aliases": [
+        "Shannonville",
+        "shannonville",
+        "tyendinaga west",
+        "Tyendinaga West"
+      ],
+      "latest_year": 1861,
+      "name": "Shannonville",
+      "reason": "missing_entry",
+      "region": "cc2_upper_canada_ontario",
+      "sample_years": [
+        1800,
+        1831,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.9834,
+        -75.44933
+      ],
+      "country": "Canada",
+      "earliest_year": 1825,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "South Mountain-Canada",
+      "known_aliases": [
+        "South Mountain",
+        "south mountain",
+        "mountain on",
+        "Mountain ON"
+      ],
+      "latest_year": 1861,
+      "name": "South Mountain",
+      "reason": "missing_entry",
+      "region": "cc2_lower_canada_quebec",
+      "sample_years": [
+        1825,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        56.24556,
+        -96.09432
+      ],
+      "country": "Canada",
+      "earliest_year": 1790,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Split Lake-Canada",
+      "known_aliases": [
+        "Split Lake",
+        "split lake",
+        "tataskweyak",
+        "Tataskweyak"
+      ],
+      "latest_year": 1861,
+      "name": "Split Lake",
+      "reason": "missing_entry",
+      "region": "cc2_ruperts_land_prairies",
+      "sample_years": [
+        1790,
+        1831,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.0451,
+        -96.9951
+      ],
+      "country": "Canada",
+      "earliest_year": 1830,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "St. Andrew's Parish-Canada",
+      "known_aliases": [
+        "St. Andrew's Parish",
+        "st. andrew's parish",
+        "red river rapids parish",
+        "Red River Rapids Parish"
+      ],
+      "latest_year": 1867,
+      "name": "St. Andrew's Parish",
+      "reason": "missing_entry",
+      "region": "cc2_red_river_assiniboia",
+      "sample_years": [
+        1830,
+        1845,
+        1856,
+        1867
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.26361,
+        -79.06556
+      ],
+      "country": "Canada",
+      "earliest_year": 1835,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sunderland-Canada",
+      "known_aliases": [
+        "Sunderland",
+        "sunderland",
+        "brock on",
+        "Brock ON"
+      ],
+      "latest_year": 1861,
+      "name": "Sunderland",
+      "reason": "missing_entry",
+      "region": "cc2_upper_canada_ontario",
+      "sample_years": [
+        1835,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.40861,
+        -76.59583
+      ],
+      "country": "Canada",
+      "earliest_year": 1816,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sydenham-Canada_2",
+      "known_aliases": [
+        "Sydenham",
+        "sydenham",
+        "loughborough",
+        "Loughborough"
+      ],
+      "latest_year": 1861,
+      "name": "Sydenham",
+      "reason": "missing_entry",
+      "region": "cc2_lower_canada_quebec",
+      "sample_years": [
+        1816,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.48685,
+        -76.99543
+      ],
+      "country": "Canada",
+      "earliest_year": 1828,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tamworth-Canada",
+      "known_aliases": [
+        "Tamworth",
+        "tamworth",
+        "sheffield",
+        "Sheffield"
+      ],
+      "latest_year": 1861,
+      "name": "Tamworth",
+      "reason": "missing_entry",
+      "region": "cc2_upper_canada_ontario",
+      "sample_years": [
+        1828,
+        1851,
+        1861
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

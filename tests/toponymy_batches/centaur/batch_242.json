@@ -1,0 +1,952 @@
+{
+  "batch_index": 242,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        38.32751,
+        -107.77931
+      ],
+      "country": "Colorado",
+      "earliest_year": 1871,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Colona-Colorado",
+      "known_aliases": [
+        "Colona",
+        "colona",
+        "colona cdp",
+        "Colona CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Colona",
+      "reason": "missing_entry",
+      "region": "usa_colorado",
+      "sample_years": [
+        1871,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.41493,
+        -87.47723
+      ],
+      "country": "Indiana",
+      "earliest_year": 1898,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tab-Indiana",
+      "known_aliases": [
+        "Tab",
+        "tab",
+        "tab cdp",
+        "Tab CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Tab",
+      "reason": "missing_entry",
+      "region": "usa_indiana",
+      "sample_years": [
+        1898,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.65598,
+        -96.53181
+      ],
+      "country": "Kansas",
+      "earliest_year": 1922,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Beaumont-Kansas",
+      "known_aliases": [
+        "Beaumont",
+        "beaumont",
+        "beaumont cdp",
+        "Beaumont CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Beaumont",
+      "reason": "missing_entry",
+      "region": "usa_kansas",
+      "sample_years": [
+        1922,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.36789,
+        -113.40968
+      ],
+      "country": "Montana",
+      "earliest_year": 1870,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Jackson-Montana",
+      "known_aliases": [
+        "Jackson",
+        "jackson",
+        "jackson cdp",
+        "Jackson CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Jackson",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1870,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.22021,
+        -110.92627
+      ],
+      "country": "Montana",
+      "earliest_year": 1940,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Riceville-Montana",
+      "known_aliases": [
+        "Riceville",
+        "riceville",
+        "riceville cdp",
+        "Riceville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Riceville",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1940,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.05757,
+        -103.0821
+      ],
+      "country": "Nebraska",
+      "earliest_year": 1916,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lorenzo-Nebraska",
+      "known_aliases": [
+        "Lorenzo",
+        "lorenzo",
+        "lorenzo cdp",
+        "Lorenzo CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Lorenzo",
+      "reason": "missing_entry",
+      "region": "usa_nebraska",
+      "sample_years": [
+        1916,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.39118,
+        -97.90383
+      ],
+      "country": "North Dakota",
+      "earliest_year": 1943,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Englevale-North Dakota",
+      "known_aliases": [
+        "Englevale",
+        "englevale",
+        "englevale cdp",
+        "Englevale CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Englevale",
+      "reason": "missing_entry",
+      "region": "usa_north_dakota",
+      "sample_years": [
+        1943,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.61915,
+        -78.31967
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1887,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fostoria-Pennsylvania",
+      "known_aliases": [
+        "Fostoria",
+        "fostoria",
+        "fostoria cdp",
+        "Fostoria CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Fostoria",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1887,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        27.64119,
+        -99.55748
+      ],
+      "country": "Texas",
+      "earliest_year": 1949,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Los Corralitos-Texas",
+      "known_aliases": [
+        "Los Corralitos",
+        "los corralitos",
+        "los corralitos cdp",
+        "Los Corralitos CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Los Corralitos",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1949,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.15444,
+        -90.90581
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1892,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Clam Lake-Wisconsin",
+      "known_aliases": [
+        "Clam Lake",
+        "clam lake",
+        "clam lake cdp",
+        "Clam Lake CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Clam Lake",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1892,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.01288,
+        -94.19572
+      ],
+      "country": "Iowa",
+      "earliest_year": 1873,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Irvington-Iowa",
+      "known_aliases": [
+        "Irvington",
+        "irvington",
+        "irvington cdp",
+        "Irvington CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Irvington",
+      "reason": "missing_entry",
+      "region": "usa_iowa",
+      "sample_years": [
+        1873,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.49702,
+        -95.89022
+      ],
+      "country": "Iowa",
+      "earliest_year": 1874,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Loveland-Iowa",
+      "known_aliases": [
+        "Loveland",
+        "loveland",
+        "loveland cdp",
+        "Loveland CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Loveland",
+      "reason": "missing_entry",
+      "region": "usa_iowa",
+      "sample_years": [
+        1874,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        66.26833,
+        -145.87658
+      ],
+      "country": "Alaska",
+      "earliest_year": 1925,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Birch Creek-Alaska",
+      "known_aliases": [
+        "Birch Creek",
+        "birch creek",
+        "birch creek cdp",
+        "Birch Creek CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Birch Creek",
+      "reason": "missing_entry",
+      "region": "usa_alaska",
+      "sample_years": [
+        1925,
+        1930,
+        1940,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.21963,
+        -110.97143
+      ],
+      "country": "Arizona",
+      "earliest_year": 1951,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Haigler Creek-Arizona",
+      "known_aliases": [
+        "Haigler Creek",
+        "haigler creek",
+        "haigler creek cdp",
+        "Haigler Creek CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Haigler Creek",
+      "reason": "missing_entry",
+      "region": "usa_arizona",
+      "sample_years": [
+        1951,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.35943,
+        -90.04693
+      ],
+      "country": "Illinois",
+      "earliest_year": 1860,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Paderborn-Illinois",
+      "known_aliases": [
+        "Paderborn",
+        "paderborn",
+        "paderborn cdp",
+        "Paderborn CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Paderborn",
+      "reason": "missing_entry",
+      "region": "usa_illinois",
+      "sample_years": [
+        1860,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.27873,
+        -112.86061
+      ],
+      "country": "Montana",
+      "earliest_year": 1901,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Argenta-Montana",
+      "known_aliases": [
+        "Argenta",
+        "argenta",
+        "argenta cdp",
+        "Argenta CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Argenta",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1901,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.42021,
+        -104.53695
+      ],
+      "country": "Montana",
+      "earliest_year": 1898,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Homestead-Montana",
+      "known_aliases": [
+        "Homestead",
+        "homestead",
+        "homestead cdp",
+        "Homestead CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Homestead",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1898,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.19022,
+        -108.20452
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1960,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Gila Hot Springs-New Mexico",
+      "known_aliases": [
+        "Gila Hot Springs",
+        "gila hot springs",
+        "gila hot springs cdp",
+        "Gila Hot Springs CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Gila Hot Springs",
+      "reason": "missing_entry",
+      "region": "usa_new_mexico",
+      "sample_years": [
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.38929,
+        -106.10851
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1922,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Orogrande-New Mexico",
+      "known_aliases": [
+        "Orogrande",
+        "orogrande",
+        "orogrande cdp",
+        "Orogrande CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Orogrande",
+      "reason": "missing_entry",
+      "region": "usa_new_mexico",
+      "sample_years": [
+        1922,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.42417,
+        -108.02627
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1957,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Red Rock Ranch-New Mexico",
+      "known_aliases": [
+        "Red Rock Ranch",
+        "red rock ranch",
+        "red rock ranch cdp",
+        "Red Rock Ranch CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Red Rock Ranch",
+      "reason": "missing_entry",
+      "region": "usa_new_mexico",
+      "sample_years": [
+        1957,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.3183,
+        -97.11793
+      ],
+      "country": "Oklahoma",
+      "earliest_year": 1901,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sumner-Oklahoma",
+      "known_aliases": [
+        "Sumner",
+        "sumner",
+        "sumner cdp",
+        "Sumner CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Sumner",
+      "reason": "missing_entry",
+      "region": "usa_oklahoma",
+      "sample_years": [
+        1901,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        61.19086,
+        -151.18424
+      ],
+      "country": "Alaska",
+      "earliest_year": 1896,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Beluga-Alaska",
+      "known_aliases": [
+        "Beluga",
+        "beluga",
+        "beluga cdp",
+        "Beluga CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Beluga",
+      "reason": "missing_entry",
+      "region": "usa_alaska",
+      "sample_years": [
+        1896,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        67.24745,
+        -150.10805
+      ],
+      "country": "Alaska",
+      "earliest_year": 1902,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Coldfoot-Alaska",
+      "known_aliases": [
+        "Coldfoot",
+        "coldfoot",
+        "coldfoot cdp",
+        "Coldfoot CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Coldfoot",
+      "reason": "missing_entry",
+      "region": "usa_alaska",
+      "sample_years": [
+        1902,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.3093,
+        -111.33473
+      ],
+      "country": "Arizona",
+      "earliest_year": 1907,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Flowing Springs-Arizona",
+      "known_aliases": [
+        "Flowing Springs",
+        "flowing springs",
+        "flowing springs cdp",
+        "Flowing Springs CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Flowing Springs",
+      "reason": "missing_entry",
+      "region": "usa_arizona",
+      "sample_years": [
+        1907,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.32309,
+        -95.47878
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1899,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "South End-Minnesota",
+      "known_aliases": [
+        "South End",
+        "south end",
+        "south end cdp",
+        "South End CDP"
+      ],
+      "latest_year": 2020,
+      "name": "South End",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1899,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.68543,
+        -88.47127
+      ],
+      "country": "Mississippi",
+      "earliest_year": 1909,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Porterville-Mississippi",
+      "known_aliases": [
+        "Porterville",
+        "porterville",
+        "porterville cdp",
+        "Porterville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Porterville",
+      "reason": "missing_entry",
+      "region": "usa_mississippi",
+      "sample_years": [
+        1909,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.98886,
+        -118.63748
+      ],
+      "country": "Nevada",
+      "earliest_year": 1871,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Denio-Nevada",
+      "known_aliases": [
+        "Denio",
+        "denio",
+        "denio cdp",
+        "Denio CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Denio",
+      "reason": "missing_entry",
+      "region": "usa_nevada",
+      "sample_years": [
+        1871,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.92467,
+        -79.15746
+      ],
+      "country": "North Carolina",
+      "earliest_year": 1920,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Dundarrach-North Carolina",
+      "known_aliases": [
+        "Dundarrach",
+        "dundarrach",
+        "dundarrach cdp",
+        "Dundarrach CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Dundarrach",
+      "reason": "missing_entry",
+      "region": "usa_north_carolina",
+      "sample_years": [
+        1920,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.45947,
+        -94.74681
+      ],
+      "country": "Oklahoma",
+      "earliest_year": 1935,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Deer Lick-Oklahoma",
+      "known_aliases": [
+        "Deer Lick",
+        "deer lick",
+        "deer lick cdp",
+        "Deer Lick CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Deer Lick",
+      "reason": "missing_entry",
+      "region": "usa_oklahoma",
+      "sample_years": [
+        1935,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.04583,
+        -96.94013
+      ],
+      "country": "Oklahoma",
+      "earliest_year": 1943,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mehan-Oklahoma",
+      "known_aliases": [
+        "Mehan",
+        "mehan",
+        "mehan cdp",
+        "Mehan CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Mehan",
+      "reason": "missing_entry",
+      "region": "usa_oklahoma",
+      "sample_years": [
+        1943,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

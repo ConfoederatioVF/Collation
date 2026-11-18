@@ -1,0 +1,941 @@
+{
+  "batch_index": 437,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        60.8167,
+        -45.3833
+      ],
+      "country": "Greenland",
+      "earliest_year": 1050,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Vatnahverfi-Greenland",
+      "known_aliases": [
+        "Vatnahverfi",
+        "vatnahverfi",
+        "russip kuua",
+        "e71",
+        "e167",
+        "Russip Kuua",
+        "E71",
+        "E167"
+      ],
+      "latest_year": 1400,
+      "name": "Vatnahverfi",
+      "reason": "missing_entry",
+      "region": "ncan_greenland_west_norse_kalaallit",
+      "sample_years": [
+        1050,
+        1250,
+        1400
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        82.79167,
+        -23.125
+      ],
+      "country": "Greenland",
+      "earliest_year": -2400,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Wyckoff Land-Greenland",
+      "known_aliases": [
+        "Wyckoff Land",
+        "wyckoff land",
+        "nunniffiit independence i",
+        "Nunniffiit Independence I"
+      ],
+      "latest_year": -1700,
+      "name": "Wyckoff Land",
+      "reason": "missing_entry",
+      "region": "ncan_greenland_east_high_north",
+      "sample_years": [
+        -2400,
+        -2000,
+        -1700
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.5833,
+        -99.3
+      ],
+      "country": "Manitoba",
+      "earliest_year": 700,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Aschkibokahn Lacustrine Town-Manitoba",
+      "known_aliases": [
+        "Aschkibokahn Lacustrine Town",
+        "aschkibokahn lacustrine town",
+        "moosehorn bay laurel village",
+        "Moosehorn Bay Laurel Village"
+      ],
+      "latest_year": 1400,
+      "name": "Aschkibokahn Lacustrine Town",
+      "reason": "missing_entry",
+      "region": "pr_red_assiniboine_winnipeg_basin",
+      "sample_years": [
+        700,
+        1050,
+        1400
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.20833,
+        -100.20833
+      ],
+      "country": "Canada",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Aschkibokahn-Canada",
+      "known_aliases": [
+        "Aschkibokahn",
+        "aschkibokahn",
+        "fbmb-1",
+        "duck river island fishing village",
+        "duck bay",
+        "fbmb-2",
+        "lake winnipegosis duck bay",
+        "FbMb-1",
+        "Duck River Island Fishing Village",
+        "Duck Bay",
+        "FbMb-2",
+        "Lake Winnipegosis Duck Bay"
+      ],
+      "latest_year": 1400,
+      "name": "Aschkibokahn",
+      "reason": "missing_entry",
+      "region": "pr_red_assiniboine_winnipeg_basin",
+      "sample_years": [
+        800,
+        1100,
+        1150,
+        1350,
+        1400
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.1833,
+        -98.35
+      ],
+      "country": "Manitoba",
+      "earliest_year": 500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ashern Lacustrine Village-Manitoba",
+      "known_aliases": [
+        "Ashern Lacustrine Village",
+        "ashern lacustrine village",
+        "ashern interlake town",
+        "Ashern Interlake Town"
+      ],
+      "latest_year": 1450,
+      "name": "Ashern Lacustrine Village",
+      "reason": "missing_entry",
+      "region": "pr_red_assiniboine_winnipeg_basin",
+      "sample_years": [
+        500,
+        1050,
+        1450
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        54.6833,
+        -101.65
+      ],
+      "country": "Manitoba",
+      "earliest_year": 600,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Baker's Narrows Village-Manitoba",
+      "known_aliases": [
+        "Baker's Narrows Village",
+        "baker's narrows village",
+        "lake athapapuskow settlement",
+        "Lake Athapapuskow Settlement"
+      ],
+      "latest_year": 1450,
+      "name": "Baker's Narrows Village",
+      "reason": "missing_entry",
+      "region": "pr_red_assiniboine_winnipeg_basin",
+      "sample_years": [
+        600,
+        1100,
+        1450
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        53.235,
+        -105.085
+      ],
+      "country": "Canada",
+      "earliest_year": -4200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Below Forks-Canada",
+      "known_aliases": [
+        "Below Forks",
+        "below forks",
+        "fhng-25",
+        "saskatchewan forks early archaic",
+        "FhNg-25",
+        "Saskatchewan Forks Early Archaic"
+      ],
+      "latest_year": -1600,
+      "name": "Below Forks",
+      "reason": "missing_entry",
+      "region": "pr_south_saskatchewan_palliser_steppe",
+      "sample_years": [
+        -4200,
+        -2000,
+        -1600
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.8833,
+        -110.2833
+      ],
+      "country": "Alberta",
+      "earliest_year": 500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bindloss River Village-Alberta",
+      "known_aliases": [
+        "Bindloss River Village",
+        "bindloss river village",
+        "bindloss south saskatchewan settlement",
+        "Bindloss South Saskatchewan Settlement"
+      ],
+      "latest_year": 1450,
+      "name": "Bindloss River Village",
+      "reason": "missing_entry",
+      "region": "pr_south_saskatchewan_palliser_steppe",
+      "sample_years": [
+        500,
+        1000,
+        1450
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.455,
+        -112.955
+      ],
+      "country": "Canada",
+      "earliest_year": -6100,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Boss Hill-Canada",
+      "known_aliases": [
+        "Boss Hill",
+        "boss hill",
+        "fdpe-4",
+        "buffalo lake early archaic",
+        "FdPe-4",
+        "Buffalo Lake Early Archaic"
+      ],
+      "latest_year": -200,
+      "name": "Boss Hill",
+      "reason": "missing_entry",
+      "region": "pr_central_parkland_north_saskatchewan",
+      "sample_years": [
+        -6100,
+        -5800,
+        -200
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.4167,
+        -111.1667
+      ],
+      "country": "Alberta",
+      "earliest_year": 500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "British Block Village-Alberta",
+      "known_aliases": [
+        "British Block Village",
+        "british block village",
+        "suffield reserve settlement",
+        "Suffield Reserve Settlement"
+      ],
+      "latest_year": 1400,
+      "name": "British Block Village",
+      "reason": "missing_entry",
+      "region": "pr_foothills_bow_upper_saskatchewan",
+      "sample_years": [
+        500,
+        1000,
+        1400
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        49.1667,
+        -101.0333
+      ],
+      "country": "Manitoba",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Brockinton Souris Town-Manitoba",
+      "known_aliases": [
+        "Brockinton Souris Town",
+        "brockinton souris town",
+        "brockinton settlement",
+        "Brockinton Settlement"
+      ],
+      "latest_year": 1500,
+      "name": "Brockinton Souris Town",
+      "reason": "missing_entry",
+      "region": "pr_central_parkland_north_saskatchewan",
+      "sample_years": [
+        800,
+        1200,
+        1500
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.25,
+        -110.8833
+      ],
+      "country": "Alberta",
+      "earliest_year": -1500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cactus Flower Habitation-Alberta",
+      "known_aliases": [
+        "Cactus Flower Habitation",
+        "cactus flower habitation",
+        "suffield south saskatchewan village",
+        "Suffield South Saskatchewan Village"
+      ],
+      "latest_year": 800,
+      "name": "Cactus Flower Habitation",
+      "reason": "missing_entry",
+      "region": "pr_south_saskatchewan_palliser_steppe",
+      "sample_years": [
+        -1500,
+        -500,
+        800
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.315,
+        -110.855
+      ],
+      "country": "Canada",
+      "earliest_year": -2300,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cactus Flower-Canada",
+      "known_aliases": [
+        "Cactus Flower",
+        "cactus flower",
+        "ebop-16",
+        "suffield mckean camp",
+        "EbOp-16",
+        "Suffield McKean Camp"
+      ],
+      "latest_year": -300,
+      "name": "Cactus Flower",
+      "reason": "missing_entry",
+      "region": "pr_south_saskatchewan_palliser_steppe",
+      "sample_years": [
+        -2300,
+        -1600,
+        -300
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        49.715,
+        -113.685
+      ],
+      "country": "Canada",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Calderwood-Canada",
+      "known_aliases": [
+        "Calderwood",
+        "calderwood",
+        "dkpj-27",
+        "porcupine hills jump",
+        "DkPj-27",
+        "Porcupine Hills Jump"
+      ],
+      "latest_year": 1300,
+      "name": "Calderwood",
+      "reason": "missing_entry",
+      "region": "pr_foothills_bow_upper_saskatchewan",
+      "sample_years": [
+        -1000,
+        400,
+        1300
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        49.2167,
+        -98.3833
+      ],
+      "country": "Manitoba",
+      "earliest_year": 850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Calf Mountain Village-Manitoba",
+      "known_aliases": [
+        "Calf Mountain Village",
+        "calf mountain village",
+        "darlingford valley settlement",
+        "Darlingford Valley Settlement"
+      ],
+      "latest_year": 1450,
+      "name": "Calf Mountain Village",
+      "reason": "missing_entry",
+      "region": "pr_central_parkland_north_saskatchewan",
+      "sample_years": [
+        850,
+        1200,
+        1450
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.1067,
+        -114.9083
+      ],
+      "country": "Canada",
+      "earliest_year": -6000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Chiniki Lake-Canada",
+      "known_aliases": [
+        "Chiniki Lake",
+        "chiniki lake",
+        "iyarhe nakoda",
+        "bow valley foothills",
+        "egps-48",
+        "Iyarhe Nakoda",
+        "Bow Valley Foothills",
+        "EgPs-48"
+      ],
+      "latest_year": 1400,
+      "name": "Chiniki Lake",
+      "reason": "missing_entry",
+      "region": "pr_foothills_bow_upper_saskatchewan",
+      "sample_years": [
+        -6000,
+        -2000,
+        500,
+        1400
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        49.815,
+        -112.245
+      ],
+      "country": "Canada",
+      "earliest_year": -600,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cranford-Canada",
+      "known_aliases": [
+        "Cranford",
+        "cranford",
+        "dlpb-2",
+        "oldman river tipi rings",
+        "DlPb-2",
+        "Oldman River Tipi Rings"
+      ],
+      "latest_year": 1200,
+      "name": "Cranford",
+      "reason": "missing_entry",
+      "region": "pr_foothills_bow_upper_saskatchewan",
+      "sample_years": [
+        -600,
+        400,
+        1200
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.6,
+        -102.75
+      ],
+      "country": "Saskatchewan",
+      "earliest_year": 600,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Crooked Lake Valley Village-Saskatchewan",
+      "known_aliases": [
+        "Crooked Lake Valley Village",
+        "crooked lake valley village",
+        "crooked lake settlement",
+        "Crooked Lake Settlement"
+      ],
+      "latest_year": 1450,
+      "name": "Crooked Lake Valley Village",
+      "reason": "missing_entry",
+      "region": "pr_central_parkland_north_saskatchewan",
+      "sample_years": [
+        600,
+        1100,
+        1450
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.9667,
+        -98.05
+      ],
+      "country": "Manitoba",
+      "earliest_year": 400,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Dauphin River Lake Town-Manitoba",
+      "known_aliases": [
+        "Dauphin River Lake Town",
+        "dauphin river lake town",
+        "lake winnipegosis outlet town",
+        "Lake Winnipegosis Outlet Town"
+      ],
+      "latest_year": 1400,
+      "name": "Dauphin River Lake Town",
+      "reason": "missing_entry",
+      "region": "pr_red_assiniboine_winnipeg_basin",
+      "sample_years": [
+        400,
+        950,
+        1400
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        49.1333,
+        -97.15
+      ],
+      "country": "Manitoba",
+      "earliest_year": 500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Dominion City Roseau Village-Manitoba",
+      "known_aliases": [
+        "Dominion City Roseau Village",
+        "dominion city roseau village",
+        "roseau river confluence town",
+        "Roseau River Confluence Town"
+      ],
+      "latest_year": 1450,
+      "name": "Dominion City Roseau Village",
+      "reason": "missing_entry",
+      "region": "pr_red_assiniboine_winnipeg_basin",
+      "sample_years": [
+        500,
+        1050,
+        1450
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        49,
+        -97.2167
+      ],
+      "country": "Manitoba",
+      "earliest_year": 400,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Emerson Red River Village-Manitoba",
+      "known_aliases": [
+        "Emerson Red River Village",
+        "emerson red river village",
+        "red river border settlement",
+        "Red River Border Settlement"
+      ],
+      "latest_year": 1450,
+      "name": "Emerson Red River Village",
+      "reason": "missing_entry",
+      "region": "pr_red_assiniboine_winnipeg_basin",
+      "sample_years": [
+        400,
+        950,
+        1450
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.8333,
+        -109.75
+      ],
+      "country": "Canada",
+      "earliest_year": 700,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Estuary Bison Pound-Canada",
+      "known_aliases": [
+        "Estuary Bison Pound",
+        "estuary bison pound",
+        "efok-16",
+        "red deer-south saskatchewan pound",
+        "EfOk-16",
+        "Red Deer-South Saskatchewan Pound"
+      ],
+      "latest_year": 1200,
+      "name": "Estuary Bison Pound",
+      "reason": "missing_entry",
+      "region": "pr_south_saskatchewan_palliser_steppe",
+      "sample_years": [
+        700,
+        1000,
+        1200
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.9167,
+        -113.8833
+      ],
+      "country": "Alberta",
+      "earliest_year": 400,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "FM Ranch Village-Alberta",
+      "known_aliases": [
+        "FM Ranch Village",
+        "fm ranch village",
+        "bow river fm ranch settlement",
+        "Bow River FM Ranch Settlement"
+      ],
+      "latest_year": 1350,
+      "name": "FM Ranch Village",
+      "reason": "missing_entry",
+      "region": "pr_foothills_bow_upper_saskatchewan",
+      "sample_years": [
+        400,
+        900,
+        1350
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.5833,
+        -98.7167
+      ],
+      "country": "Manitoba",
+      "earliest_year": 300,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fairford River Town-Manitoba",
+      "known_aliases": [
+        "Fairford River Town",
+        "fairford river town",
+        "lake st. martin outlet capital",
+        "Lake St. Martin Outlet Capital"
+      ],
+      "latest_year": 1350,
+      "name": "Fairford River Town",
+      "reason": "missing_entry",
+      "region": "pr_red_assiniboine_winnipeg_basin",
+      "sample_years": [
+        300,
+        850,
+        1350
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        53.35,
+        -104.05
+      ],
+      "country": "Saskatchewan",
+      "earliest_year": 900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Finlay Saskatchewan Town-Saskatchewan",
+      "known_aliases": [
+        "Finlay Saskatchewan Town",
+        "finlay saskatchewan town",
+        "francois le blanc habitation",
+        "Francois Le Blanc Habitation"
+      ],
+      "latest_year": 1500,
+      "name": "Finlay Saskatchewan Town",
+      "reason": "missing_entry",
+      "region": "pr_central_parkland_north_saskatchewan",
+      "sample_years": [
+        900,
+        1250,
+        1500
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.0833,
+        -97.55
+      ],
+      "country": "Manitoba",
+      "earliest_year": 500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fisher Branch Settlement-Manitoba",
+      "known_aliases": [
+        "Fisher Branch Settlement",
+        "fisher branch settlement",
+        "fisher river valley village",
+        "Fisher River Valley Village"
+      ],
+      "latest_year": 1450,
+      "name": "Fisher Branch Settlement",
+      "reason": "missing_entry",
+      "region": "pr_red_assiniboine_winnipeg_basin",
+      "sample_years": [
+        500,
+        1050,
+        1450
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.965,
+        -106.715
+      ],
+      "country": "Canada",
+      "earliest_year": 400,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fitzgerald-Canada",
+      "known_aliases": [
+        "Fitzgerald",
+        "fitzgerald",
+        "elnp-8",
+        "moose woods besant",
+        "ElNp-8",
+        "Moose Woods Besant"
+      ],
+      "latest_year": 800,
+      "name": "Fitzgerald",
+      "reason": "missing_entry",
+      "region": "pr_south_saskatchewan_palliser_steppe",
+      "sample_years": [
+        400,
+        650,
+        800
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        49.785,
+        -111.95
+      ],
+      "country": "Canada",
+      "earliest_year": -7800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fletcher-Canada",
+      "known_aliases": [
+        "Fletcher",
+        "fletcher",
+        "djow-1",
+        "chin coulee paleoindian",
+        "DjOw-1",
+        "Chin Coulee Paleoindian"
+      ],
+      "latest_year": -7000,
+      "name": "Fletcher",
+      "reason": "missing_entry",
+      "region": "pr_foothills_bow_upper_saskatchewan",
+      "sample_years": [
+        -7800,
+        -7000
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.2167,
+        -114.7333
+      ],
+      "country": "Alberta",
+      "earliest_year": 200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ghost Reservoir Habitation-Alberta",
+      "known_aliases": [
+        "Ghost Reservoir Habitation",
+        "ghost reservoir habitation",
+        "upper bow river valley village",
+        "Upper Bow River Valley Village"
+      ],
+      "latest_year": 1300,
+      "name": "Ghost Reservoir Habitation",
+      "reason": "missing_entry",
+      "region": "pr_foothills_bow_upper_saskatchewan",
+      "sample_years": [
+        200,
+        800,
+        1300
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.5667,
+        -96.5833
+      ],
+      "country": "Manitoba",
+      "earliest_year": 500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Grand Beach Shore Village-Manitoba",
+      "known_aliases": [
+        "Grand Beach Shore Village",
+        "grand beach shore village",
+        "lake winnipeg shore settlement",
+        "Lake Winnipeg Shore Settlement"
+      ],
+      "latest_year": 1450,
+      "name": "Grand Beach Shore Village",
+      "reason": "missing_entry",
+      "region": "pr_red_assiniboine_winnipeg_basin",
+      "sample_years": [
+        500,
+        1050,
+        1450
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

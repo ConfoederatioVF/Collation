@@ -1,0 +1,965 @@
+{
+  "batch_index": 92,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        32.36323,
+        -95.69904
+      ],
+      "country": "Texas",
+      "earliest_year": 1965,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Callender Lake-Texas",
+      "known_aliases": [
+        "Callender Lake",
+        "callender lake",
+        "callender lake cdp",
+        "Callender Lake CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Callender Lake",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1965,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.22815,
+        -92.83993
+      ],
+      "country": "Missouri",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Glasgow-Missouri",
+      "known_aliases": [
+        "Glasgow",
+        "glasgow",
+        "glasgow city",
+        "Glasgow city"
+      ],
+      "latest_year": 2026,
+      "name": "Glasgow",
+      "reason": "missing_entry",
+      "region": "usa_missouri",
+      "sample_years": [
+        1850,
+        1990,
+        2013,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.97388,
+        -81.03612
+      ],
+      "country": "South Carolina",
+      "earliest_year": 1972,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Olympia-South Carolina",
+      "known_aliases": [
+        "Olympia",
+        "olympia",
+        "olympia cdp",
+        "Olympia CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Olympia",
+      "reason": "missing_entry",
+      "region": "usa_south_carolina",
+      "sample_years": [
+        1972,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.96479,
+        -75.88286
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1876,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pomeroy-Pennsylvania",
+      "known_aliases": [
+        "Pomeroy",
+        "pomeroy",
+        "pomeroy cdp",
+        "Pomeroy CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Pomeroy",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1876,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.40631,
+        -83.18353
+      ],
+      "country": "Ohio",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Frankfort-Ohio",
+      "known_aliases": [
+        "Frankfort",
+        "frankfort",
+        "frankfort village",
+        "Frankfort village"
+      ],
+      "latest_year": 2026,
+      "name": "Frankfort",
+      "reason": "missing_entry",
+      "region": "usa_ohio",
+      "sample_years": [
+        1850,
+        1990,
+        2013,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        26.06706,
+        -97.63499
+      ],
+      "country": "Texas",
+      "earliest_year": 1907,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Palmer (Cameron County)-Texas",
+      "known_aliases": [
+        "Palmer (Cameron County)",
+        "palmer",
+        "palmer cdp",
+        "rice tracts",
+        "rice tracts cdp",
+        "Palmer CDP",
+        "Rice Tracts",
+        "Rice Tracts CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Palmer (Cameron County)",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1907,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.20275,
+        -73.79305
+      ],
+      "country": "New York",
+      "earliest_year": 1886,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Millwood-New York",
+      "known_aliases": [
+        "Millwood",
+        "millwood",
+        "millwood cdp",
+        "Millwood CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Millwood",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1886,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.54402,
+        -121.68517
+      ],
+      "country": "California",
+      "earliest_year": 1951,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "El Macero-California",
+      "known_aliases": [
+        "El Macero",
+        "el macero",
+        "el macero cdp",
+        "El Macero CDP"
+      ],
+      "latest_year": 2020,
+      "name": "El Macero",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1951,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.22362,
+        -77.63327
+      ],
+      "country": "North Carolina",
+      "earliest_year": 1951,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Jackson Heights-North Carolina",
+      "known_aliases": [
+        "Jackson Heights",
+        "jackson heights",
+        "jackson heights cdp",
+        "Jackson Heights CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Jackson Heights",
+      "reason": "missing_entry",
+      "region": "usa_north_carolina",
+      "sample_years": [
+        1951,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.97997,
+        -93.18718
+      ],
+      "country": "Iowa",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rockwell-Iowa",
+      "known_aliases": [
+        "Rockwell",
+        "rockwell",
+        "rockwell city",
+        "Rockwell city"
+      ],
+      "latest_year": 2026,
+      "name": "Rockwell",
+      "reason": "missing_entry",
+      "region": "usa_iowa",
+      "sample_years": [
+        1850,
+        1990,
+        2013,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.81472,
+        -120.68733
+      ],
+      "country": "California",
+      "earliest_year": 1913,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Orange Blossom-California",
+      "known_aliases": [
+        "Orange Blossom",
+        "orange blossom",
+        "orange blossom cdp",
+        "Orange Blossom CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Orange Blossom",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1913,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.28739,
+        -81.78637
+      ],
+      "country": "North Carolina",
+      "earliest_year": 1952,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cove Creek-North Carolina",
+      "known_aliases": [
+        "Cove Creek",
+        "cove creek",
+        "cove creek cdp",
+        "Cove Creek CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Cove Creek",
+      "reason": "missing_entry",
+      "region": "usa_north_carolina",
+      "sample_years": [
+        1952,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.40027,
+        -84.47916
+      ],
+      "country": "Ohio",
+      "earliest_year": 1902,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Maria Stein-Ohio",
+      "known_aliases": [
+        "Maria Stein",
+        "maria stein",
+        "maria stein cdp",
+        "Maria Stein CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Maria Stein",
+      "reason": "missing_entry",
+      "region": "usa_ohio",
+      "sample_years": [
+        1902,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.839,
+        -89.61542
+      ],
+      "country": "Mississippi",
+      "earliest_year": 1852,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Victoria-Mississippi",
+      "known_aliases": [
+        "Victoria",
+        "victoria",
+        "victoria cdp",
+        "Victoria CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Victoria",
+      "reason": "missing_entry",
+      "region": "usa_mississippi",
+      "sample_years": [
+        1852,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.54336,
+        -116.4839
+      ],
+      "country": "Nevada",
+      "earliest_year": 1971,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Amargosa Valley-Nevada",
+      "known_aliases": [
+        "Amargosa Valley",
+        "amargosa valley",
+        "amargosa valley cdp",
+        "Amargosa Valley CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Amargosa Valley",
+      "reason": "missing_entry",
+      "region": "usa_nevada",
+      "sample_years": [
+        1971,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        29.95948,
+        -94.03559
+      ],
+      "country": "Texas",
+      "earliest_year": 1965,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Beauxart Gardens-Texas",
+      "known_aliases": [
+        "Beauxart Gardens",
+        "beauxart gardens",
+        "beauxart gardens cdp",
+        "Beauxart Gardens CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Beauxart Gardens",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1965,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.9418,
+        -76.08115
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1870,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Georgetown (Lancaster County)-Pennsylvania",
+      "known_aliases": [
+        "Georgetown (Lancaster County)",
+        "georgetown",
+        "georgetown cdp",
+        "Georgetown CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Georgetown (Lancaster County)",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1870,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.68804,
+        -75.35626
+      ],
+      "country": "New Jersey",
+      "earliest_year": 1877,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Auburn-New Jersey",
+      "known_aliases": [
+        "Auburn",
+        "auburn",
+        "auburn cdp",
+        "Auburn CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Auburn",
+      "reason": "missing_entry",
+      "region": "usa_new_jersey",
+      "sample_years": [
+        1877,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.40434,
+        -74.83197
+      ],
+      "country": "New Jersey",
+      "earliest_year": 1876,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Dorothy-New Jersey",
+      "known_aliases": [
+        "Dorothy",
+        "dorothy",
+        "dorothy cdp",
+        "Dorothy CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Dorothy",
+      "reason": "missing_entry",
+      "region": "usa_new_jersey",
+      "sample_years": [
+        1876,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.51968,
+        -124.21174
+      ],
+      "country": "Oregon",
+      "earliest_year": 1973,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Saunders Lake-Oregon",
+      "known_aliases": [
+        "Saunders Lake",
+        "saunders lake",
+        "saunders lake cdp",
+        "Saunders Lake CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Saunders Lake",
+      "reason": "missing_entry",
+      "region": "usa_oregon",
+      "sample_years": [
+        1973,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.63291,
+        -84.78845
+      ],
+      "country": "Georgia",
+      "earliest_year": 1888,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ellerslie-Georgia",
+      "known_aliases": [
+        "Ellerslie",
+        "ellerslie",
+        "ellerslie cdp",
+        "Ellerslie CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Ellerslie",
+      "reason": "missing_entry",
+      "region": "usa_georgia",
+      "sample_years": [
+        1888,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.63546,
+        -73.56994
+      ],
+      "country": "New York",
+      "earliest_year": 1928,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Wingdale-New York",
+      "known_aliases": [
+        "Wingdale",
+        "wingdale",
+        "wingdale cdp",
+        "Wingdale CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Wingdale",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1928,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.86704,
+        -80.87911
+      ],
+      "country": "Ohio",
+      "earliest_year": 1939,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Saybrook-on-the-Lake-Ohio",
+      "known_aliases": [
+        "Saybrook-on-the-Lake",
+        "saybrook-on-the-lake",
+        "saybrook-on-the-lake cdp",
+        "Saybrook-on-the-Lake CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Saybrook-on-the-Lake",
+      "reason": "missing_entry",
+      "region": "usa_ohio",
+      "sample_years": [
+        1939,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.71971,
+        -105.4349
+      ],
+      "country": "Colorado",
+      "earliest_year": 1916,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Floyd Hill-Colorado",
+      "known_aliases": [
+        "Floyd Hill",
+        "floyd hill",
+        "floyd hill cdp",
+        "Floyd Hill CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Floyd Hill",
+      "reason": "missing_entry",
+      "region": "usa_colorado",
+      "sample_years": [
+        1916,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        30.42603,
+        -84.54266
+      ],
+      "country": "Florida",
+      "earliest_year": 1919,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fort Braden-Florida",
+      "known_aliases": [
+        "Fort Braden",
+        "fort braden",
+        "fort braden cdp",
+        "Fort Braden CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Fort Braden",
+      "reason": "missing_entry",
+      "region": "usa_florida",
+      "sample_years": [
+        1919,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.93003,
+        -84.88508
+      ],
+      "country": "Michigan",
+      "earliest_year": 1923,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lakes of the North-Michigan",
+      "known_aliases": [
+        "Lakes of the North",
+        "lakes of the north",
+        "lakes of the north cdp",
+        "Lakes of the North CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Lakes of the North",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1923,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.29715,
+        -109.99184
+      ],
+      "country": "Montana",
+      "earliest_year": 1929,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rocky Boy West-Montana",
+      "known_aliases": [
+        "Rocky Boy West",
+        "rocky boy west",
+        "rocky boy west cdp",
+        "Rocky Boy West CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Rocky Boy West",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1929,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.2748,
+        -112.49854
+      ],
+      "country": "Arizona",
+      "earliest_year": 1939,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kaibab Estates West-Arizona",
+      "known_aliases": [
+        "Kaibab Estates West",
+        "kaibab estates west",
+        "kaibab estates west cdp",
+        "Kaibab Estates West CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Kaibab Estates West",
+      "reason": "missing_entry",
+      "region": "usa_arizona",
+      "sample_years": [
+        1939,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.66651,
+        -75.20404
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1855,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Morgan Hill-Pennsylvania",
+      "known_aliases": [
+        "Morgan Hill",
+        "morgan hill",
+        "morgan hill cdp",
+        "Morgan Hill CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Morgan Hill",
+      "reason": "missing_entry",
+      "region": "usa_new_jersey",
+      "sample_years": [
+        1855,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.92176,
+        -94.87852
+      ],
+      "country": "Oklahoma",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Briggs-Oklahoma",
+      "known_aliases": [
+        "Briggs",
+        "briggs",
+        "briggs cdp",
+        "Briggs CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Briggs",
+      "reason": "missing_entry",
+      "region": "usa_oklahoma",
+      "sample_years": [
+        1900,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

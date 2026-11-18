@@ -809,4 +809,137 @@
     //Return statement
     return result;
   };
+
+
+  /**
+   * Absorbs co-located (`<= 1,5 km`) same-country overlapping `>= 1850 AD` CENTAUR twin records
+   * cleanly into the higher-ranking primary city so compiled Stadestér 2.0 shards contain zero `[TWINS]`.
+   * @alias population_Stadester_uud.reconcileCloseSameCountryTwins
+   *
+   * @param {Object} arg0_stadester_obj
+   *
+   * @returns {Object}
+   */
+  population_Stadester_uud.reconcileCloseSameCountryTwins = function (arg0_stadester_obj) {
+    //Convert from parameters
+    let stadester_obj = arg0_stadester_obj;
+
+    //Guard clauses
+    if (!stadester_obj || typeof stadester_obj !== "object") return stadester_obj;
+
+    //Declare local instance variables
+    let all_keys = Object.keys(stadester_obj);
+    let by_country = {};
+    let merged_count = 0;
+
+    let haversineKm = function (arg0_c1, arg1_c2) {
+      let la1 = Number(arg0_c1[0])*Math.PI/180;
+      let lo1 = Number(arg0_c1[1])*Math.PI/180;
+      let la2 = Number(arg1_c2[0])*Math.PI/180;
+      let lo2 = Number(arg1_c2[1])*Math.PI/180;
+      let d_la = la2 - la1;
+      let d_lo = lo2 - lo1;
+      let h = Math.sin(d_la*0.5)*Math.sin(d_la*0.5) +
+        Math.cos(la1)*Math.cos(la2)*Math.sin(d_lo*0.5)*Math.sin(d_lo*0.5);
+
+      return 12742*Math.asin(Math.min(1, Math.sqrt(h)));
+    };
+
+    //Function body
+    for (let i = 0; i < all_keys.length; i++) {
+      let key = all_keys[i];
+      let city = stadester_obj[key];
+
+      if (!city || !Array.isArray(city.coords) || !city.population) continue;
+      let ctry = city.country || "";
+      let active_ge1850 = new Set();
+      let max_pop = 0;
+      let yr_keys = Object.keys(city.population);
+
+      for (let x = 0; x < yr_keys.length; x++) {
+        let yr = Number(yr_keys[x]);
+        let val = Number(city.population[yr_keys[x]]);
+
+        if (Number.isFinite(yr) && val > 0) {
+          if (yr >= 1850) active_ge1850.add(yr);
+          if (val > max_pop) max_pop = val;
+        }
+      }
+      if (active_ge1850.size === 0) continue;
+      let srcs = Array.isArray(city.sources) ? city.sources : (city.type ? [city.type] : []);
+      let score = (srcs.includes("populstat") ? 1e8 : 0) +
+        (srcs.includes("chandler_modelski") ? 5e7 : 0) +
+        (srcs.some(function (arg0_s) { return arg0_s !== "CENTAUR"; }) ? 1e7 : 0) +
+        max_pop;
+
+      if (!by_country[ctry]) by_country[ctry] = [];
+      by_country[ctry].push({
+        active_ge1850: active_ge1850,
+        city: city,
+        dropped: false,
+        key: key,
+        score: score
+      });
+    }
+
+    let countries = Object.keys(by_country);
+
+    for (let c = 0; c < countries.length; c++) {
+      let arr = by_country[countries[c]];
+
+      if (arr.length < 2) continue;
+      arr.sort(function (arg0_a, arg1_b) { return arg1_b.score - arg0_a.score; });
+
+      for (let i = 0; i < arr.length; i++) {
+        let a = arr[i];
+
+        if (a.dropped) continue;
+        for (let x = i + 1; x < arr.length; x++) {
+          let b = arr[x];
+
+          if (b.dropped) continue;
+          let touches_centaur = (a.city.viscount_project === "CENTAUR" || b.city.viscount_project === "CENTAUR");
+
+          if (!touches_centaur) continue;
+          if (Math.abs(a.city.coords[0] - b.city.coords[0]) > 0.02 || Math.abs(a.city.coords[1] - b.city.coords[1]) > 0.03) continue;
+          let overlaps = false;
+
+          b.active_ge1850.forEach(function (arg0_yr) {
+            if (a.active_ge1850.has(arg0_yr)) overlaps = true;
+          });
+          if (!overlaps) continue;
+          if (haversineKm(a.city.coords, b.city.coords) > 1.5) continue;
+
+          if (!Array.isArray(a.city.other_names)) a.city.other_names = [];
+          if (b.city.name && !a.city.other_names.includes(b.city.name)) a.city.other_names.push(b.city.name);
+          if (Array.isArray(b.city.other_names)) {
+            for (let k = 0; k < b.city.other_names.length; k++)
+              if (b.city.other_names[k] && !a.city.other_names.includes(b.city.other_names[k]))
+                a.city.other_names.push(b.city.other_names[k]);
+          }
+          let b_yrs = Object.keys(b.city.population);
+
+          for (let y = 0; y < b_yrs.length; y++) {
+            let yk = b_yrs[y];
+            let yv = Number(b.city.population[yk]);
+            let yi = Number(yk);
+
+            if (Number.isFinite(yv) && yv > 0 && !(Number(a.city.population[yk]) > 0)) {
+              a.city.population[yk] = yv;
+              if (Number.isFinite(yi) && yi >= 1850) a.active_ge1850.add(yi);
+            }
+          }
+          population_Stadester_uud.appendCitySources(a.city, b.city.sources || b.city.type);
+          delete stadester_obj[b.key];
+          b.dropped = true;
+          merged_count++;
+        }
+      }
+    }
+    if (merged_count > 0)
+      console.log(`- Reconciled ${merged_count} close same-country CENTAUR twin record(s).`);
+
+    //Return statement
+    return stadester_obj;
+  };
 }

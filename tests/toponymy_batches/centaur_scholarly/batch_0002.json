@@ -1,0 +1,955 @@
+{
+  "batch_index": 2,
+  "project": "CENTAUR",
+  "count": 30,
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        48.03535,
+        -69.1914
+      ],
+      "country": "Canada",
+      "earliest_year": 1755,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Saint-Éloi-Canada",
+      "known_aliases": [
+        "Saint-Éloi",
+        "saint-éloi",
+        "isle-verte-intérieur",
+        "Isle-Verte-Intérieur"
+      ],
+      "latest_year": 2026,
+      "name": "Saint-Éloi",
+      "reason": "missing_entry",
+      "region": "can_quebec",
+      "sample_years": [
+        1755,
+        1961,
+        2009,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.9833,
+        -113.9552
+      ],
+      "country": "Canada",
+      "earliest_year": 1957,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pigeon Lake 138A-Canada",
+      "known_aliases": [
+        "Pigeon Lake 138A",
+        "pigeon lake 138a",
+        "ma-me-o beach",
+        "Ma-Me-O Beach"
+      ],
+      "latest_year": 2026,
+      "name": "Pigeon Lake 138A",
+      "reason": "missing_entry",
+      "region": "can_alberta",
+      "sample_years": [
+        1957,
+        2004,
+        2015,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        67.5695,
+        -139.80995
+      ],
+      "country": "Canada",
+      "earliest_year": 500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Old Crow-Canada",
+      "known_aliases": [
+        "Old Crow",
+        "old crow",
+        "rampart house-yt",
+        "vuntut gwitchin",
+        "rampart house",
+        "old crow native town",
+        "vuntut gwitchin porcupine settlement",
+        "klo-kut",
+        "porcupine river",
+        "mjvl-1",
+        "Vuntut Gwitchin",
+        "Rampart House",
+        "Old Crow Native Town",
+        "Vuntut Gwitchin Porcupine Settlement",
+        "Porcupine River",
+        "MjVl-1"
+      ],
+      "latest_year": 2026,
+      "name": "Old Crow",
+      "reason": "missing_entry",
+      "region": "can_yukon",
+      "sample_years": [
+        500,
+        1865,
+        1996,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        49.84295,
+        -102.63893
+      ],
+      "country": "Canada",
+      "earliest_year": 1967,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hazelwood No. 94-Canada",
+      "known_aliases": [
+        "Hazelwood No. 94",
+        "hazelwood no. 94",
+        "pheasant rump nakota 68",
+        "Pheasant Rump Nakota 68"
+      ],
+      "latest_year": 2026,
+      "name": "Hazelwood No. 94",
+      "reason": "missing_entry",
+      "region": "can_saskatchewan",
+      "sample_years": [
+        1967,
+        2005,
+        2016,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.69215,
+        -105.57335
+      ],
+      "country": "Canada",
+      "earliest_year": 1969,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "South Lake-Canada",
+      "known_aliases": [
+        "South Lake",
+        "south lake",
+        "north grove",
+        "North Grove"
+      ],
+      "latest_year": 2026,
+      "name": "South Lake",
+      "reason": "missing_entry",
+      "region": "can_saskatchewan",
+      "sample_years": [
+        1969,
+        2005,
+        2016,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.95475,
+        -82.89503
+      ],
+      "country": "Canada",
+      "earliest_year": 1898,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Manitoulin, Unorganized, West Part-Canada",
+      "known_aliases": [
+        "Manitoulin, Unorganized, West Part",
+        "manitoulin, unorganized, west part",
+        "zhiibaahaasing 19a",
+        "Zhiibaahaasing 19A"
+      ],
+      "latest_year": 2026,
+      "name": "Manitoulin, Unorganized, West Part",
+      "reason": "missing_entry",
+      "region": "can_ontario",
+      "sample_years": [
+        1898,
+        2000,
+        2013,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        55.0318,
+        -127.3152
+      ],
+      "country": "Canada",
+      "earliest_year": 1938,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bulkley River 19-Canada",
+      "known_aliases": [
+        "Bulkley River 19",
+        "bulkley river 19",
+        "babine 17",
+        "Babine 17"
+      ],
+      "latest_year": 2026,
+      "name": "Bulkley River 19",
+      "reason": "missing_entry",
+      "region": "can_british_columbia",
+      "sample_years": [
+        1938,
+        2003,
+        2015,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.31954,
+        -63.3319
+      ],
+      "country": "Canada",
+      "earliest_year": 1952,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "North River (PE)-Canada",
+      "known_aliases": [
+        "North River (PE)",
+        "north river",
+        "darlington",
+        "Darlington"
+      ],
+      "latest_year": 2026,
+      "name": "North River (PE)",
+      "reason": "missing_entry",
+      "region": "can_prince_edward_island",
+      "sample_years": [
+        1952,
+        2004,
+        2015,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        49.33895,
+        -121.60323
+      ],
+      "country": "Canada",
+      "earliest_year": 1928,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ohamil 1-Canada",
+      "known_aliases": [
+        "Ohamil 1",
+        "ohamil 1",
+        "lukseetsissum 9",
+        "Lukseetsissum 9"
+      ],
+      "latest_year": 2026,
+      "name": "Ohamil 1",
+      "reason": "missing_entry",
+      "region": "can_british_columbia",
+      "sample_years": [
+        1928,
+        2002,
+        2014,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        57.9036,
+        -131.1746
+      ],
+      "country": "Canada",
+      "earliest_year": 1780,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Guhthe Tah 12-Canada",
+      "known_aliases": [
+        "Guhthe Tah 12",
+        "guhthe tah 12",
+        "telegraph creek",
+        "stikine post",
+        "Telegraph Creek",
+        "Stikine Post"
+      ],
+      "latest_year": 2026,
+      "name": "Guhthe Tah 12",
+      "reason": "missing_entry",
+      "region": "can_british_columbia",
+      "sample_years": [
+        1780,
+        2003,
+        2015,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.25958,
+        -121.58953
+      ],
+      "country": "Canada",
+      "earliest_year": 1956,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Nuuautin 2-Canada",
+      "known_aliases": [
+        "Nuuautin 2",
+        "nuuautin 2",
+        "kleetlekut 22",
+        "nohomeen 23",
+        "Kleetlekut 22",
+        "Nohomeen 23"
+      ],
+      "latest_year": 2026,
+      "name": "Nuuautin 2",
+      "reason": "missing_entry",
+      "region": "can_british_columbia",
+      "sample_years": [
+        1956,
+        2004,
+        2015,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.92835,
+        -105.16625
+      ],
+      "country": "Canada",
+      "earliest_year": 1916,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Alice Beach-Canada",
+      "known_aliases": [
+        "Alice Beach",
+        "alice beach",
+        "wee too beach",
+        "Wee Too Beach"
+      ],
+      "latest_year": 2026,
+      "name": "Alice Beach",
+      "reason": "missing_entry",
+      "region": "can_saskatchewan",
+      "sample_years": [
+        1916,
+        2001,
+        2014,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        55.3269,
+        -126.62168
+      ],
+      "country": "Canada",
+      "earliest_year": 1938,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Babine 6-Canada",
+      "known_aliases": [
+        "Babine 6",
+        "babine 6",
+        "babine 16",
+        "Babine 16"
+      ],
+      "latest_year": 2026,
+      "name": "Babine 6",
+      "reason": "missing_entry",
+      "region": "can_british_columbia",
+      "sample_years": [
+        1938,
+        2003,
+        2015,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        54.28148,
+        -101.81522
+      ],
+      "country": "Canada",
+      "earliest_year": 1909,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sturgeon Weir 205-Canada",
+      "known_aliases": [
+        "Sturgeon Weir 205",
+        "sturgeon weir 205",
+        "sturgeon weir 184f",
+        "Sturgeon Weir 184F"
+      ],
+      "latest_year": 2026,
+      "name": "Sturgeon Weir 205",
+      "reason": "missing_entry",
+      "region": "can_manitoba",
+      "sample_years": [
+        1909,
+        2001,
+        2014,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.10703,
+        -121.55438
+      ],
+      "country": "Canada",
+      "earliest_year": 1903,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Nekliptum 1-Canada",
+      "known_aliases": [
+        "Nekliptum 1",
+        "nekliptum 1",
+        "kanaka bar",
+        "Kanaka Bar"
+      ],
+      "latest_year": 2026,
+      "name": "Nekliptum 1",
+      "reason": "missing_entry",
+      "region": "can_british_columbia",
+      "sample_years": [
+        1903,
+        2001,
+        2014,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        53.21187,
+        -107.13013
+      ],
+      "country": "Canada",
+      "earliest_year": 1924,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Echo Bay-Canada",
+      "known_aliases": [
+        "Echo Bay",
+        "echo bay",
+        "big shell",
+        "Big Shell"
+      ],
+      "latest_year": 2026,
+      "name": "Echo Bay",
+      "reason": "missing_entry",
+      "region": "can_saskatchewan",
+      "sample_years": [
+        1924,
+        2001,
+        2014,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        49.7425,
+        -123.13932
+      ],
+      "country": "Canada",
+      "earliest_year": 1906,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kowtain 17-Canada",
+      "known_aliases": [
+        "Kowtain 17",
+        "kowtain 17",
+        "seaichem 16",
+        "Seaichem 16"
+      ],
+      "latest_year": 2026,
+      "name": "Kowtain 17",
+      "reason": "missing_entry",
+      "region": "can_british_columbia",
+      "sample_years": [
+        1906,
+        2001,
+        2014,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.65385,
+        -121.91352
+      ],
+      "country": "Canada",
+      "earliest_year": 1934,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pashilqua 2-Canada",
+      "known_aliases": [
+        "Pashilqua 2",
+        "pashilqua 2",
+        "mccartney's flat 4",
+        "McCartney's Flat 4"
+      ],
+      "latest_year": 2026,
+      "name": "Pashilqua 2",
+      "reason": "missing_entry",
+      "region": "can_british_columbia",
+      "sample_years": [
+        1934,
+        2003,
+        2015,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.28467,
+        -121.63383
+      ],
+      "country": "Canada",
+      "earliest_year": 1965,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Stryen 9-Canada",
+      "known_aliases": [
+        "Stryen 9",
+        "stryen 9",
+        "halhalaeden",
+        "Halhalaeden"
+      ],
+      "latest_year": 2026,
+      "name": "Stryen 9",
+      "reason": "missing_entry",
+      "region": "can_british_columbia",
+      "sample_years": [
+        1965,
+        2005,
+        2016,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.8181,
+        -103.56142
+      ],
+      "country": "Canada",
+      "earliest_year": 1926,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Leslie Beach-Canada",
+      "known_aliases": [
+        "Leslie Beach",
+        "leslie beach",
+        "chorney beach",
+        "Chorney Beach"
+      ],
+      "latest_year": 2026,
+      "name": "Leslie Beach",
+      "reason": "missing_entry",
+      "region": "can_saskatchewan",
+      "sample_years": [
+        1926,
+        2002,
+        2014,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        55.54795,
+        -116.14347
+      ],
+      "country": "Canada",
+      "earliest_year": 1929,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kapawe'no First Nation 150B-Canada",
+      "known_aliases": [
+        "Kapawe'no First Nation 150B",
+        "kapawe'no first nation 150b",
+        "kapawe'no first nation 229",
+        "Kapawe'no First Nation 229"
+      ],
+      "latest_year": 2026,
+      "name": "Kapawe'no First Nation 150B",
+      "reason": "missing_entry",
+      "region": "can_alberta",
+      "sample_years": [
+        1929,
+        2002,
+        2014,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        49.8382,
+        -121.43117
+      ],
+      "country": "Canada",
+      "earliest_year": 1903,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tuckkwiowhum 1-Canada",
+      "known_aliases": [
+        "Tuckkwiowhum 1",
+        "tuckkwiowhum 1",
+        "boston bar 1a",
+        "Boston Bar 1A"
+      ],
+      "latest_year": 2026,
+      "name": "Tuckkwiowhum 1",
+      "reason": "missing_entry",
+      "region": "can_british_columbia",
+      "sample_years": [
+        1903,
+        2001,
+        2014,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.1919,
+        -121.57633
+      ],
+      "country": "Canada",
+      "earliest_year": 1939,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Inklyuhkinatko 2-Canada",
+      "known_aliases": [
+        "Inklyuhkinatko 2",
+        "inklyuhkinatko 2",
+        "kitzowit 20",
+        "skwayaynope 26",
+        "Kitzowit 20",
+        "Skwayaynope 26"
+      ],
+      "latest_year": 2026,
+      "name": "Inklyuhkinatko 2",
+      "reason": "missing_entry",
+      "region": "can_british_columbia",
+      "sample_years": [
+        1939,
+        2003,
+        2015,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        53.54702,
+        -114.4475
+      ],
+      "country": "Canada",
+      "earliest_year": 1922,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kapasiwin-Canada",
+      "known_aliases": [
+        "Kapasiwin",
+        "kapasiwin",
+        "wabamun 133b",
+        "Wabamun 133B"
+      ],
+      "latest_year": 2026,
+      "name": "Kapasiwin",
+      "reason": "missing_entry",
+      "region": "can_alberta",
+      "sample_years": [
+        1922,
+        2002,
+        2014,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.70463,
+        -122.27995
+      ],
+      "country": "Canada",
+      "earliest_year": 1915,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mission 5-Canada",
+      "known_aliases": [
+        "Mission 5",
+        "mission 5",
+        "necait 6",
+        "Necait 6"
+      ],
+      "latest_year": 2026,
+      "name": "Mission 5",
+      "reason": "missing_entry",
+      "region": "can_british_columbia",
+      "sample_years": [
+        1915,
+        2001,
+        2014,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.36138,
+        -103.93267
+      ],
+      "country": "Canada",
+      "earliest_year": 1940,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Muskowekwan 85-8-Canada",
+      "known_aliases": [
+        "Muskowekwan 85-8",
+        "muskowekwan 85-8",
+        "muskowekwan 85-15",
+        "Muskowekwan 85-15"
+      ],
+      "latest_year": 2020,
+      "name": "Muskowekwan 85-8",
+      "reason": "missing_entry",
+      "region": "can_saskatchewan",
+      "sample_years": [
+        1940,
+        2001,
+        2013,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.44758,
+        -121.7008
+      ],
+      "country": "Canada",
+      "earliest_year": 1938,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Nickel Palm 4-Canada",
+      "known_aliases": [
+        "Nickel Palm 4",
+        "nickel palm 4",
+        "lytton 4a",
+        "Lytton 4A"
+      ],
+      "latest_year": 2026,
+      "name": "Nickel Palm 4",
+      "reason": "missing_entry",
+      "region": "can_british_columbia",
+      "sample_years": [
+        1938,
+        2003,
+        2015,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.34457,
+        -121.67177
+      ],
+      "country": "Canada",
+      "earliest_year": 1965,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Yawaucht 11-Canada",
+      "known_aliases": [
+        "Yawaucht 11",
+        "yawaucht 11",
+        "nkaih 10",
+        "Nkaih 10"
+      ],
+      "latest_year": 2026,
+      "name": "Yawaucht 11",
+      "reason": "missing_entry",
+      "region": "can_british_columbia",
+      "sample_years": [
+        1965,
+        2005,
+        2016,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.42199,
+        -121.34726
+      ],
+      "country": "Canada",
+      "earliest_year": 1940,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Spences Bridge-Canada",
+      "known_aliases": [
+        "Spences Bridge",
+        "spences bridge",
+        "shawniken 4b",
+        "Shawniken 4B"
+      ],
+      "latest_year": 2026,
+      "name": "Spences Bridge",
+      "reason": "missing_entry",
+      "region": "can_british_columbia",
+      "sample_years": [
+        1940,
+        2003,
+        2015,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        53.986,
+        -126.48555
+      ],
+      "country": "Canada",
+      "earliest_year": 1960,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tatla't East 2-Canada",
+      "known_aliases": [
+        "Tatla't East 2",
+        "tatla't east 2",
+        "tatla west 11",
+        "Tatla West 11"
+      ],
+      "latest_year": 2020,
+      "name": "Tatla't East 2",
+      "reason": "missing_entry",
+      "region": "can_british_columbia",
+      "sample_years": [
+        1960,
+        2002,
+        2011,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

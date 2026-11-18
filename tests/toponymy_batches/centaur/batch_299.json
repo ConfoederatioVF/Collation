@@ -1,0 +1,943 @@
+{
+  "batch_index": 299,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        44.06511,
+        -72.72962
+      ],
+      "country": "Vermont",
+      "earliest_year": 1800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Roxbury-Vermont",
+      "known_aliases": [
+        "Roxbury",
+        "roxbury",
+        "roxbury town",
+        "Roxbury town"
+      ],
+      "latest_year": 2020,
+      "name": "Roxbury",
+      "reason": "missing_entry",
+      "region": "usa_vermont",
+      "sample_years": [
+        1800,
+        1870,
+        1950,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.94945,
+        -84.67538
+      ],
+      "country": "Michigan",
+      "earliest_year": 1891,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Arthur-Michigan",
+      "known_aliases": [
+        "Arthur",
+        "arthur",
+        "arthur township",
+        "Arthur township"
+      ],
+      "latest_year": 2020,
+      "name": "Arthur",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1891,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.9854,
+        -76.79119
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1909,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "East Chillisquaque-Pennsylvania",
+      "known_aliases": [
+        "East Chillisquaque",
+        "east chillisquaque",
+        "east chillisquaque township",
+        "East Chillisquaque township"
+      ],
+      "latest_year": 2020,
+      "name": "East Chillisquaque",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1909,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.4688,
+        -91.11419
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1879,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Northfield-Wisconsin",
+      "known_aliases": [
+        "Northfield",
+        "northfield",
+        "northfield town",
+        "Northfield town"
+      ],
+      "latest_year": 2020,
+      "name": "Northfield",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1879,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.06434,
+        -70.27275
+      ],
+      "country": "Maine",
+      "earliest_year": 1907,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Carrabassett Valley-Maine",
+      "known_aliases": [
+        "Carrabassett Valley",
+        "carrabassett valley",
+        "carrabassett valley town",
+        "Carrabassett Valley town"
+      ],
+      "latest_year": 2020,
+      "name": "Carrabassett Valley",
+      "reason": "missing_entry",
+      "region": "usa_maine",
+      "sample_years": [
+        1907,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.16601,
+        -92.09543
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1878,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "New Haven-Wisconsin",
+      "known_aliases": [
+        "New Haven",
+        "new haven",
+        "new haven town",
+        "New Haven town"
+      ],
+      "latest_year": 2020,
+      "name": "New Haven",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1878,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.07209,
+        -92.4262
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1874,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Erin Prairie-Wisconsin",
+      "known_aliases": [
+        "Erin Prairie",
+        "erin prairie",
+        "erin prairie town",
+        "Erin Prairie town"
+      ],
+      "latest_year": 2020,
+      "name": "Erin Prairie",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1874,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.95676,
+        -72.32654
+      ],
+      "country": "Vermont",
+      "earliest_year": 1775,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Vershire-Vermont",
+      "known_aliases": [
+        "Vershire",
+        "vershire",
+        "vershire town",
+        "Vershire town"
+      ],
+      "latest_year": 2020,
+      "name": "Vershire",
+      "reason": "missing_entry",
+      "region": "usa_vermont",
+      "sample_years": [
+        1775,
+        1850,
+        1940,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.15818,
+        -84.80003
+      ],
+      "country": "Michigan",
+      "earliest_year": 1881,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hudson (Charlevoix County)-Michigan",
+      "known_aliases": [
+        "Hudson (Charlevoix County)",
+        "hudson",
+        "hudson township",
+        "Hudson township"
+      ],
+      "latest_year": 2020,
+      "name": "Hudson (Charlevoix County)",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1881,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.97323,
+        -95.085
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1949,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Leslie-Minnesota",
+      "known_aliases": [
+        "Leslie",
+        "leslie",
+        "leslie township",
+        "Leslie township"
+      ],
+      "latest_year": 2020,
+      "name": "Leslie",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1949,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.32653,
+        -94.7378
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1865,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Villard (Todd County)-Minnesota",
+      "known_aliases": [
+        "Villard (Todd County)",
+        "villard",
+        "villard township",
+        "Villard township"
+      ],
+      "latest_year": 2020,
+      "name": "Villard (Todd County)",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1865,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.58758,
+        -75.82796
+      ],
+      "country": "New York",
+      "earliest_year": 1830,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pitcher-New York",
+      "known_aliases": [
+        "Pitcher",
+        "pitcher",
+        "pitcher town",
+        "Pitcher town"
+      ],
+      "latest_year": 2020,
+      "name": "Pitcher",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1830,
+        1890,
+        1960,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.11377,
+        -89.41735
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1949,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Deerfield (Waushara County)-Wisconsin",
+      "known_aliases": [
+        "Deerfield (Waushara County)",
+        "deerfield",
+        "deerfield town",
+        "Deerfield town"
+      ],
+      "latest_year": 2020,
+      "name": "Deerfield (Waushara County)",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1949,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.2936,
+        -83.59794
+      ],
+      "country": "Michigan",
+      "earliest_year": 1944,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Krakow-Michigan",
+      "known_aliases": [
+        "Krakow",
+        "krakow",
+        "krakow township",
+        "Krakow township"
+      ],
+      "latest_year": 2020,
+      "name": "Krakow",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1944,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.68899,
+        -90.13269
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1865,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Summit (Juneau County)-Wisconsin",
+      "known_aliases": [
+        "Summit (Juneau County)",
+        "summit",
+        "summit town",
+        "Summit town"
+      ],
+      "latest_year": 2020,
+      "name": "Summit (Juneau County)",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1865,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.89196,
+        -92.73912
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1905,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Vernon-Minnesota",
+      "known_aliases": [
+        "Vernon",
+        "vernon",
+        "vernon township",
+        "Vernon township"
+      ],
+      "latest_year": 2020,
+      "name": "Vernon",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1905,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.03391,
+        -94.2757
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1933,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Belle Prairie-Minnesota",
+      "known_aliases": [
+        "Belle Prairie",
+        "belle prairie",
+        "belle prairie township",
+        "Belle Prairie township"
+      ],
+      "latest_year": 2020,
+      "name": "Belle Prairie",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1933,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.40646,
+        -95.85195
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1974,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Maine-Minnesota",
+      "known_aliases": [
+        "Maine",
+        "maine",
+        "maine township",
+        "Maine township"
+      ],
+      "latest_year": 2020,
+      "name": "Maine",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1974,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.97942,
+        -84.06981
+      ],
+      "country": "Michigan",
+      "earliest_year": 1878,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Avery-Michigan",
+      "known_aliases": [
+        "Avery",
+        "avery",
+        "avery township",
+        "Avery township"
+      ],
+      "latest_year": 2020,
+      "name": "Avery",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1878,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.88339,
+        -95.06823
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1905,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Gordon-Minnesota",
+      "known_aliases": [
+        "Gordon",
+        "gordon",
+        "gordon township",
+        "Gordon township"
+      ],
+      "latest_year": 2020,
+      "name": "Gordon",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1905,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.05554,
+        -78.84452
+      ],
+      "country": "New York",
+      "earliest_year": 1840,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Coldspring-New York",
+      "known_aliases": [
+        "Coldspring",
+        "coldspring",
+        "coldspring town",
+        "Coldspring town"
+      ],
+      "latest_year": 2020,
+      "name": "Coldspring",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1840,
+        1900,
+        1960,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.27381,
+        -74.757
+      ],
+      "country": "New York",
+      "earliest_year": 1820,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bovina-New York",
+      "known_aliases": [
+        "Bovina",
+        "bovina",
+        "bovina town",
+        "Bovina town"
+      ],
+      "latest_year": 2020,
+      "name": "Bovina",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1820,
+        1890,
+        1960,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.93214,
+        -77.27349
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1892,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Farmington (Tioga County)-Pennsylvania",
+      "known_aliases": [
+        "Farmington (Tioga County)",
+        "farmington",
+        "farmington township",
+        "Farmington township"
+      ],
+      "latest_year": 2020,
+      "name": "Farmington (Tioga County)",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1892,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.98558,
+        -83.17047
+      ],
+      "country": "Michigan",
+      "earliest_year": 1873,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lake (Huron County)-Michigan",
+      "known_aliases": [
+        "Lake (Huron County)",
+        "lake",
+        "lake township",
+        "Lake township"
+      ],
+      "latest_year": 2020,
+      "name": "Lake (Huron County)",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1873,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.78556,
+        -85.11525
+      ],
+      "country": "Michigan",
+      "earliest_year": 1889,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Gilead-Michigan",
+      "known_aliases": [
+        "Gilead",
+        "gilead",
+        "gilead township",
+        "Gilead township"
+      ],
+      "latest_year": 2020,
+      "name": "Gilead",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1889,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.66876,
+        -79.4695
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1917,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Burrell-Pennsylvania",
+      "known_aliases": [
+        "Burrell",
+        "burrell",
+        "burrell township",
+        "Burrell township"
+      ],
+      "latest_year": 2020,
+      "name": "Burrell",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1917,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.09211,
+        -86.46578
+      ],
+      "country": "Michigan",
+      "earliest_year": 1884,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Inwood-Michigan",
+      "known_aliases": [
+        "Inwood",
+        "inwood",
+        "inwood township",
+        "Inwood township"
+      ],
+      "latest_year": 2020,
+      "name": "Inwood",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1884,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.43284,
+        -84.20244
+      ],
+      "country": "Michigan",
+      "earliest_year": 1903,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sugar Island-Michigan",
+      "known_aliases": [
+        "Sugar Island",
+        "sugar island",
+        "sugar island township",
+        "Sugar Island township"
+      ],
+      "latest_year": 2020,
+      "name": "Sugar Island",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1903,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.46247,
+        -78.66722
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1951,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Munster-Pennsylvania",
+      "known_aliases": [
+        "Munster",
+        "munster",
+        "munster township",
+        "Munster township"
+      ],
+      "latest_year": 2020,
+      "name": "Munster",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1951,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.31952,
+        -87.77036
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1858,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Wagner-Wisconsin",
+      "known_aliases": [
+        "Wagner",
+        "wagner",
+        "wagner town",
+        "Wagner town"
+      ],
+      "latest_year": 2020,
+      "name": "Wagner",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1858,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

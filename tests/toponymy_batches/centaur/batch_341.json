@@ -1,0 +1,965 @@
+{
+  "batch_index": 341,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        47.89092,
+        -96.67614
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1886,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fanny-Minnesota",
+      "known_aliases": [
+        "Fanny",
+        "fanny",
+        "fanny township",
+        "Fanny township"
+      ],
+      "latest_year": 2020,
+      "name": "Fanny",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1886,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.58709,
+        -96.59292
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1878,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Deerhorn-Minnesota",
+      "known_aliases": [
+        "Deerhorn",
+        "deerhorn",
+        "deerhorn township",
+        "Deerhorn township"
+      ],
+      "latest_year": 2020,
+      "name": "Deerhorn",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1878,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.7723,
+        -95.27951
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1911,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Clover (Clearwater County)-Minnesota",
+      "known_aliases": [
+        "Clover (Clearwater County)",
+        "clover",
+        "clover township",
+        "Clover township"
+      ],
+      "latest_year": 2020,
+      "name": "Clover (Clearwater County)",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1911,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.71962,
+        -71.66982
+      ],
+      "country": "Vermont",
+      "earliest_year": 1775,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Brunswick-Vermont",
+      "known_aliases": [
+        "Brunswick",
+        "brunswick",
+        "brunswick town",
+        "Brunswick town"
+      ],
+      "latest_year": 2020,
+      "name": "Brunswick",
+      "reason": "missing_entry",
+      "region": "usa_vermont",
+      "sample_years": [
+        1775,
+        1850,
+        1940,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.19368,
+        -90.11596
+      ],
+      "country": "Wisconsin",
+      "earliest_year": 1878,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Finley-Wisconsin",
+      "known_aliases": [
+        "Finley",
+        "finley",
+        "finley town",
+        "Finley town"
+      ],
+      "latest_year": 2020,
+      "name": "Finley",
+      "reason": "missing_entry",
+      "region": "usa_wisconsin",
+      "sample_years": [
+        1878,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.77996,
+        -93.86379
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1952,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Little Pine-Minnesota",
+      "known_aliases": [
+        "Little Pine",
+        "little pine",
+        "little pine township",
+        "Little Pine township"
+      ],
+      "latest_year": 2020,
+      "name": "Little Pine",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1952,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.84885,
+        -96.27679
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Freeland-Minnesota",
+      "known_aliases": [
+        "Freeland",
+        "freeland",
+        "freeland township",
+        "Freeland township"
+      ],
+      "latest_year": 2020,
+      "name": "Freeland",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1950,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.84909,
+        -96.20663
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1876,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Soler-Minnesota",
+      "known_aliases": [
+        "Soler",
+        "soler",
+        "soler township",
+        "Soler township"
+      ],
+      "latest_year": 2020,
+      "name": "Soler",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1876,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.88201,
+        -71.58029
+      ],
+      "country": "Vermont",
+      "earliest_year": 1775,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lemington-Vermont",
+      "known_aliases": [
+        "Lemington",
+        "lemington",
+        "lemington town",
+        "Lemington town"
+      ],
+      "latest_year": 2020,
+      "name": "Lemington",
+      "reason": "missing_entry",
+      "region": "usa_vermont",
+      "sample_years": [
+        1775,
+        1850,
+        1940,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.10783,
+        -92.36019
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1851,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Arna-Minnesota",
+      "known_aliases": [
+        "Arna",
+        "arna",
+        "arna township",
+        "Arna township"
+      ],
+      "latest_year": 2020,
+      "name": "Arna",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1851,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.225,
+        -92.43599
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1896,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "New Dosey-Minnesota",
+      "known_aliases": [
+        "New Dosey",
+        "new dosey",
+        "new dosey township",
+        "New Dosey township"
+      ],
+      "latest_year": 2020,
+      "name": "New Dosey",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1896,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.36093,
+        -95.79982
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1943,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tara-Minnesota",
+      "known_aliases": [
+        "Tara",
+        "tara",
+        "tara township",
+        "Tara township"
+      ],
+      "latest_year": 2020,
+      "name": "Tara",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1943,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.56152,
+        -93.10861
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1855,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Salo-Minnesota",
+      "known_aliases": [
+        "Salo",
+        "salo",
+        "salo township",
+        "Salo township"
+      ],
+      "latest_year": 2020,
+      "name": "Salo",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1855,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.08769,
+        -93.14289
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1974,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Wawina-Minnesota",
+      "known_aliases": [
+        "Wawina",
+        "wawina",
+        "wawina township",
+        "Wawina township"
+      ],
+      "latest_year": 2020,
+      "name": "Wawina",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1974,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.67335,
+        -94.88331
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1961,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Potamo-Minnesota",
+      "known_aliases": [
+        "Potamo",
+        "potamo",
+        "potamo township",
+        "Potamo township"
+      ],
+      "latest_year": 2020,
+      "name": "Potamo",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1961,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.37603,
+        -96.4081
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1974,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Green Meadow-Minnesota",
+      "known_aliases": [
+        "Green Meadow",
+        "green meadow",
+        "green meadow township",
+        "Green Meadow township"
+      ],
+      "latest_year": 2020,
+      "name": "Green Meadow",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1974,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.95573,
+        -92.65173
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1903,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Crosby (Pine County)-Minnesota",
+      "known_aliases": [
+        "Crosby (Pine County)",
+        "crosby",
+        "crosby township",
+        "Crosby township"
+      ],
+      "latest_year": 2020,
+      "name": "Crosby (Pine County)",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1903,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.71032,
+        -96.18039
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1883,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Eldorado-Minnesota",
+      "known_aliases": [
+        "Eldorado",
+        "eldorado",
+        "eldorado township",
+        "Eldorado township"
+      ],
+      "latest_year": 2020,
+      "name": "Eldorado",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1883,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.10502,
+        -94.08374
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1852,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rogers (Cass County)-Minnesota",
+      "known_aliases": [
+        "Rogers (Cass County)",
+        "rogers",
+        "rogers township",
+        "Rogers township"
+      ],
+      "latest_year": 2020,
+      "name": "Rogers (Cass County)",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1852,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.97897,
+        -96.48026
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1923,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Taylor (Traverse County)-Minnesota",
+      "known_aliases": [
+        "Taylor (Traverse County)",
+        "taylor",
+        "taylor township",
+        "Taylor township"
+      ],
+      "latest_year": 2020,
+      "name": "Taylor (Traverse County)",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1923,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.97639,
+        -94.61182
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1894,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Woodrow (Beltrami County)-Minnesota",
+      "known_aliases": [
+        "Woodrow (Beltrami County)",
+        "woodrow",
+        "woodrow township",
+        "Woodrow township"
+      ],
+      "latest_year": 2020,
+      "name": "Woodrow (Beltrami County)",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1894,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.14416,
+        -97.07451
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1942,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Higdem-Minnesota",
+      "known_aliases": [
+        "Higdem",
+        "higdem",
+        "higdem township",
+        "Higdem township"
+      ],
+      "latest_year": 2020,
+      "name": "Higdem",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1942,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.44809,
+        -96.31196
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1968,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Malta-Minnesota",
+      "known_aliases": [
+        "Malta",
+        "malta",
+        "malta township",
+        "Malta township"
+      ],
+      "latest_year": 2020,
+      "name": "Malta",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1968,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.29866,
+        -94.40062
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1853,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Otter Tail Peninsula-Minnesota",
+      "known_aliases": [
+        "Otter Tail Peninsula",
+        "otter tail peninsula",
+        "otter tail peninsula township",
+        "Otter Tail Peninsula township"
+      ],
+      "latest_year": 2020,
+      "name": "Otter Tail Peninsula",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1853,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.06478,
+        -96.69524
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1906,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Angus-Minnesota",
+      "known_aliases": [
+        "Angus",
+        "angus",
+        "angus township",
+        "Angus township"
+      ],
+      "latest_year": 2020,
+      "name": "Angus",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1906,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.21239,
+        -69.90343
+      ],
+      "country": "Maine",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Caratunk-Maine",
+      "known_aliases": [
+        "Caratunk",
+        "caratunk",
+        "caratunk town",
+        "Caratunk town"
+      ],
+      "latest_year": 2020,
+      "name": "Caratunk",
+      "reason": "missing_entry",
+      "region": "usa_maine",
+      "sample_years": [
+        1850,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.58022,
+        -96.38885
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1968,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hansonville-Minnesota",
+      "known_aliases": [
+        "Hansonville",
+        "hansonville",
+        "hansonville township",
+        "Hansonville township"
+      ],
+      "latest_year": 2020,
+      "name": "Hansonville",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1968,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.58458,
+        -95.93898
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1955,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Poplar Grove-Minnesota",
+      "known_aliases": [
+        "Poplar Grove",
+        "poplar grove",
+        "poplar grove township",
+        "Poplar Grove township"
+      ],
+      "latest_year": 2020,
+      "name": "Poplar Grove",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1955,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.59873,
+        -71.74716
+      ],
+      "country": "Vermont",
+      "earliest_year": 1800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Granby-Vermont",
+      "known_aliases": [
+        "Granby",
+        "granby",
+        "granby town",
+        "Granby town"
+      ],
+      "latest_year": 2020,
+      "name": "Granby",
+      "reason": "missing_entry",
+      "region": "usa_vermont",
+      "sample_years": [
+        1800,
+        1870,
+        1950,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.85027,
+        -96.38854
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1960,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Manfred-Minnesota",
+      "known_aliases": [
+        "Manfred",
+        "manfred",
+        "manfred township",
+        "Manfred township"
+      ],
+      "latest_year": 2020,
+      "name": "Manfred",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

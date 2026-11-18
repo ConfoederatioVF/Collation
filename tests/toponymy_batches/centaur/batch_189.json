@@ -1,0 +1,960 @@
+{
+  "batch_index": 189,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        46.46741,
+        -94.17463
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1907,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Merrifield-Minnesota",
+      "known_aliases": [
+        "Merrifield",
+        "merrifield",
+        "merrifield cdp",
+        "Merrifield CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Merrifield",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1907,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.35711,
+        -92.40195
+      ],
+      "country": "Missouri",
+      "earliest_year": 1925,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Eugene-Missouri",
+      "known_aliases": [
+        "Eugene",
+        "eugene",
+        "eugene cdp",
+        "Eugene CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Eugene",
+      "reason": "missing_entry",
+      "region": "usa_missouri",
+      "sample_years": [
+        1925,
+        1950,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.92183,
+        -107.57717
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1903,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hillsboro-New Mexico",
+      "known_aliases": [
+        "Hillsboro",
+        "hillsboro",
+        "hillsboro cdp",
+        "Hillsboro CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Hillsboro",
+      "reason": "missing_entry",
+      "region": "usa_new_mexico",
+      "sample_years": [
+        1903,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.37668,
+        -106.04317
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1936,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "La Madera (Taos County)-New Mexico",
+      "known_aliases": [
+        "La Madera (Taos County)",
+        "la madera",
+        "la madera cdp",
+        "La Madera CDP"
+      ],
+      "latest_year": 2020,
+      "name": "La Madera (Taos County)",
+      "reason": "missing_entry",
+      "region": "usa_new_mexico",
+      "sample_years": [
+        1936,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.3308,
+        -81.73863
+      ],
+      "country": "Ohio",
+      "earliest_year": 1892,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fresno-Ohio",
+      "known_aliases": [
+        "Fresno",
+        "fresno",
+        "fresno cdp",
+        "Fresno CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Fresno",
+      "reason": "missing_entry",
+      "region": "usa_ohio",
+      "sample_years": [
+        1892,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.1341,
+        -95.24137
+      ],
+      "country": "Oklahoma",
+      "earliest_year": 1957,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Murphy-Oklahoma",
+      "known_aliases": [
+        "Murphy",
+        "murphy",
+        "murphy cdp",
+        "Murphy CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Murphy",
+      "reason": "missing_entry",
+      "region": "usa_oklahoma",
+      "sample_years": [
+        1957,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        28.64835,
+        -98.00828
+      ],
+      "country": "Texas",
+      "earliest_year": 1932,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pawnee-Texas",
+      "known_aliases": [
+        "Pawnee",
+        "pawnee",
+        "pawnee cdp",
+        "Pawnee CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Pawnee",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1932,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.60541,
+        -95.80342
+      ],
+      "country": "Texas",
+      "earliest_year": 1952,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Petty-Texas",
+      "known_aliases": [
+        "Petty",
+        "petty",
+        "petty cdp",
+        "Petty CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Petty",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1952,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.2851,
+        -111.47237
+      ],
+      "country": "Utah",
+      "earliest_year": 1916,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Teasdale-Utah",
+      "known_aliases": [
+        "Teasdale",
+        "teasdale",
+        "teasdale cdp",
+        "Teasdale CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Teasdale",
+      "reason": "missing_entry",
+      "region": "usa_utah",
+      "sample_years": [
+        1916,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.0847,
+        -118.90559
+      ],
+      "country": "Washington",
+      "earliest_year": 1954,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Wallula-Washington",
+      "known_aliases": [
+        "Wallula",
+        "wallula",
+        "wallula cdp",
+        "Wallula CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Wallula",
+      "reason": "missing_entry",
+      "region": "usa_washington",
+      "sample_years": [
+        1954,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.80846,
+        -91.96554
+      ],
+      "country": "Iowa",
+      "earliest_year": 1893,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "West Amana-Iowa",
+      "known_aliases": [
+        "West Amana",
+        "west amana",
+        "west amana cdp",
+        "West Amana CDP"
+      ],
+      "latest_year": 2020,
+      "name": "West Amana",
+      "reason": "missing_entry",
+      "region": "usa_iowa",
+      "sample_years": [
+        1893,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.45035,
+        -91.84955
+      ],
+      "country": "Arkansas",
+      "earliest_year": 1862,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lacey-Arkansas",
+      "known_aliases": [
+        "Lacey",
+        "lacey",
+        "lacey cdp",
+        "Lacey CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Lacey",
+      "reason": "missing_entry",
+      "region": "usa_arkansas",
+      "sample_years": [
+        1862,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.56938,
+        -118.67584
+      ],
+      "country": "California",
+      "earliest_year": 1919,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sunny Slopes-California",
+      "known_aliases": [
+        "Sunny Slopes",
+        "sunny slopes",
+        "sunny slopes cdp",
+        "Sunny Slopes CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Sunny Slopes",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1919,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.28558,
+        -83.00072
+      ],
+      "country": "Georgia",
+      "earliest_year": 1867,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Eagle Grove-Georgia",
+      "known_aliases": [
+        "Eagle Grove",
+        "eagle grove",
+        "eagle grove cdp",
+        "Eagle Grove CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Eagle Grove",
+      "reason": "missing_entry",
+      "region": "usa_georgia",
+      "sample_years": [
+        1867,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        30.91018,
+        -83.07418
+      ],
+      "country": "Georgia",
+      "earliest_year": 1946,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Naylor-Georgia",
+      "known_aliases": [
+        "Naylor",
+        "naylor",
+        "naylor cdp",
+        "Naylor CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Naylor",
+      "reason": "missing_entry",
+      "region": "usa_georgia",
+      "sample_years": [
+        1946,
+        1950,
+        1960,
+        1970,
+        1980,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.62605,
+        -85.50395
+      ],
+      "country": "Kentucky",
+      "earliest_year": 1863,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "New Hope-Kentucky",
+      "known_aliases": [
+        "New Hope",
+        "new hope",
+        "new hope cdp",
+        "New Hope CDP"
+      ],
+      "latest_year": 2020,
+      "name": "New Hope",
+      "reason": "missing_entry",
+      "region": "usa_kentucky",
+      "sample_years": [
+        1863,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.33806,
+        -107.64609
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1954,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "San Mateo-New Mexico",
+      "known_aliases": [
+        "San Mateo",
+        "san mateo",
+        "san mateo cdp",
+        "San Mateo CDP"
+      ],
+      "latest_year": 2020,
+      "name": "San Mateo",
+      "reason": "missing_entry",
+      "region": "usa_new_mexico",
+      "sample_years": [
+        1954,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.76551,
+        -75.95222
+      ],
+      "country": "New York",
+      "earliest_year": 1820,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lorraine-New York",
+      "known_aliases": [
+        "Lorraine",
+        "lorraine",
+        "lorraine cdp",
+        "Lorraine CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Lorraine",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1820,
+        1890,
+        1960,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.53315,
+        -94.89168
+      ],
+      "country": "Oklahoma",
+      "earliest_year": 1915,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pinhook Corner-Oklahoma",
+      "known_aliases": [
+        "Pinhook Corner",
+        "pinhook corner",
+        "pinhook corner cdp",
+        "Pinhook Corner CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Pinhook Corner",
+      "reason": "missing_entry",
+      "region": "usa_oklahoma",
+      "sample_years": [
+        1915,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        30.38851,
+        -96.34493
+      ],
+      "country": "Texas",
+      "earliest_year": 1879,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Clay-Texas",
+      "known_aliases": [
+        "Clay",
+        "clay",
+        "clay cdp",
+        "Clay CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Clay",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1879,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.59868,
+        -122.53232
+      ],
+      "country": "California",
+      "earliest_year": 1867,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Elk Creek-California",
+      "known_aliases": [
+        "Elk Creek",
+        "elk creek",
+        "elk creek cdp",
+        "Elk Creek CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Elk Creek",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1867,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.55048,
+        -103.2746
+      ],
+      "country": "Colorado",
+      "earliest_year": 1927,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Atwood-Colorado",
+      "known_aliases": [
+        "Atwood",
+        "atwood",
+        "atwood cdp",
+        "Atwood CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Atwood",
+      "reason": "missing_entry",
+      "region": "usa_colorado",
+      "sample_years": [
+        1927,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.86421,
+        -73.36079
+      ],
+      "country": "Connecticut",
+      "earliest_year": 1882,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "West Cornwall-Connecticut",
+      "known_aliases": [
+        "West Cornwall",
+        "west cornwall",
+        "west cornwall cdp",
+        "West Cornwall CDP"
+      ],
+      "latest_year": 2020,
+      "name": "West Cornwall",
+      "reason": "missing_entry",
+      "region": "usa_connecticut",
+      "sample_years": [
+        1882,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.47602,
+        -116.84399
+      ],
+      "country": "Idaho",
+      "earliest_year": 1937,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Coolin-Idaho",
+      "known_aliases": [
+        "Coolin",
+        "coolin",
+        "coolin cdp",
+        "Coolin CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Coolin",
+      "reason": "missing_entry",
+      "region": "usa_idaho",
+      "sample_years": [
+        1937,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.56137,
+        -87.43933
+      ],
+      "country": "Kentucky",
+      "earliest_year": 1899,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Onton-Kentucky",
+      "known_aliases": [
+        "Onton",
+        "onton",
+        "onton cdp",
+        "Onton CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Onton",
+      "reason": "missing_entry",
+      "region": "usa_kentucky",
+      "sample_years": [
+        1899,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.32438,
+        -92.58236
+      ],
+      "country": "Missouri",
+      "earliest_year": 1885,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Aurora Springs-Missouri",
+      "known_aliases": [
+        "Aurora Springs",
+        "aurora springs",
+        "aurora springs cdp",
+        "Aurora Springs CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Aurora Springs",
+      "reason": "missing_entry",
+      "region": "usa_missouri",
+      "sample_years": [
+        1885,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.73371,
+        -92.85627
+      ],
+      "country": "Missouri",
+      "earliest_year": 1893,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bennett Springs-Missouri",
+      "known_aliases": [
+        "Bennett Springs",
+        "bennett springs",
+        "bennett springs cdp",
+        "Bennett Springs CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Bennett Springs",
+      "reason": "missing_entry",
+      "region": "usa_missouri",
+      "sample_years": [
+        1893,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.4533,
+        -108.57411
+      ],
+      "country": "Montana",
+      "earliest_year": 1959,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Camp Three-Montana",
+      "known_aliases": [
+        "Camp Three",
+        "camp three",
+        "camp three cdp",
+        "Camp Three CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Camp Three",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1959,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.47613,
+        -113.23538
+      ],
+      "country": "Montana",
+      "earliest_year": 1884,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Maxville-Montana",
+      "known_aliases": [
+        "Maxville",
+        "maxville",
+        "maxville cdp",
+        "Maxville CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Maxville",
+      "reason": "missing_entry",
+      "region": "usa_montana",
+      "sample_years": [
+        1884,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.44779,
+        -82.84193
+      ],
+      "country": "Ohio",
+      "earliest_year": 1907,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Crystal Rock-Ohio",
+      "known_aliases": [
+        "Crystal Rock",
+        "crystal rock",
+        "crystal rock cdp",
+        "Crystal Rock CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Crystal Rock",
+      "reason": "missing_entry",
+      "region": "usa_ohio",
+      "sample_years": [
+        1907,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,955 @@
+{
+  "batch_index": 77,
+  "count": 30,
+  "project": "CENTAUR",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        40.39029,
+        -122.31563
+      ],
+      "country": "California",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cottonwood-California",
+      "known_aliases": [
+        "Cottonwood",
+        "cottonwood",
+        "cottonwood cdp",
+        "Cottonwood CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Cottonwood",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1850,
+        1880,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        30.18853,
+        -97.98452
+      ],
+      "country": "Texas",
+      "earliest_year": 1881,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Belterra-Texas",
+      "known_aliases": [
+        "Belterra",
+        "belterra",
+        "belterra cdp",
+        "Belterra CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Belterra",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1881,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.72976,
+        -82.79704
+      ],
+      "country": "Michigan",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "New Haven-Michigan",
+      "known_aliases": [
+        "New Haven",
+        "new haven",
+        "new haven village",
+        "New Haven village"
+      ],
+      "latest_year": 2026,
+      "name": "New Haven",
+      "reason": "missing_entry",
+      "region": "usa_michigan",
+      "sample_years": [
+        1850,
+        1990,
+        2013,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.3958,
+        -72.78318
+      ],
+      "country": "Connecticut",
+      "earliest_year": 1871,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Northford-Connecticut",
+      "known_aliases": [
+        "Northford",
+        "northford",
+        "northford cdp",
+        "Northford CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Northford",
+      "reason": "missing_entry",
+      "region": "usa_connecticut",
+      "sample_years": [
+        1871,
+        1920,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        64.7943,
+        -148.03288
+      ],
+      "country": "Alaska",
+      "earliest_year": 1893,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Chena Ridge-Alaska",
+      "known_aliases": [
+        "Chena Ridge",
+        "chena ridge",
+        "chena ridge cdp",
+        "Chena Ridge CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Chena Ridge",
+      "reason": "missing_entry",
+      "region": "usa_alaska",
+      "sample_years": [
+        1893,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.82497,
+        -117.36834
+      ],
+      "country": "California",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lake Mathews-California",
+      "known_aliases": [
+        "Lake Mathews",
+        "lake mathews",
+        "lake mathews cdp",
+        "Lake Mathews CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Lake Mathews",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1900,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.26565,
+        -111.51903
+      ],
+      "country": "Arizona",
+      "earliest_year": 1886,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Doney Park-Arizona",
+      "known_aliases": [
+        "Doney Park",
+        "doney park",
+        "doney park cdp",
+        "Doney Park CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Doney Park",
+      "reason": "missing_entry",
+      "region": "usa_arizona",
+      "sample_years": [
+        1886,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.02082,
+        -75.31617
+      ],
+      "country": "Pennsylvania",
+      "earliest_year": 1959,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bryn Mawr-Pennsylvania",
+      "known_aliases": [
+        "Bryn Mawr",
+        "bryn mawr",
+        "bryn mawr cdp",
+        "rosemont",
+        "rosemont cdp",
+        "Bryn Mawr CDP",
+        "Rosemont",
+        "Rosemont CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Bryn Mawr",
+      "reason": "missing_entry",
+      "region": "usa_pennsylvania",
+      "sample_years": [
+        1959,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.12617,
+        -77.33748
+      ],
+      "country": "New York",
+      "earliest_year": 1902,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Gananda-New York",
+      "known_aliases": [
+        "Gananda",
+        "gananda",
+        "gananda cdp",
+        "Gananda CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Gananda",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1902,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.57746,
+        -72.61979
+      ],
+      "country": "Connecticut",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Portland-Connecticut",
+      "known_aliases": [
+        "Portland",
+        "portland",
+        "portland cdp",
+        "Portland CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Portland",
+      "reason": "missing_entry",
+      "region": "usa_connecticut",
+      "sample_years": [
+        1850,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.58635,
+        -93.40774
+      ],
+      "country": "Minnesota",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "International Falls-Minnesota",
+      "known_aliases": [
+        "International Falls",
+        "international falls",
+        "international falls city",
+        "south international falls",
+        "International Falls city",
+        "South International Falls"
+      ],
+      "latest_year": 2026,
+      "name": "International Falls",
+      "reason": "missing_entry",
+      "region": "usa_minnesota",
+      "sample_years": [
+        1850,
+        1990,
+        2013,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.11615,
+        -122.17888
+      ],
+      "country": "Washington",
+      "earliest_year": 1919,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tehaleh-Washington",
+      "known_aliases": [
+        "Tehaleh",
+        "tehaleh",
+        "tehaleh cdp",
+        "Tehaleh CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Tehaleh",
+      "reason": "missing_entry",
+      "region": "usa_washington",
+      "sample_years": [
+        1919,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.8699,
+        -74.34424
+      ],
+      "country": "New Jersey",
+      "earliest_year": 1889,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pine Brook-New Jersey",
+      "known_aliases": [
+        "Pine Brook",
+        "pine brook",
+        "pine brook cdp",
+        "Pine Brook CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Pine Brook",
+      "reason": "missing_entry",
+      "region": "usa_new_jersey",
+      "sample_years": [
+        1889,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.92692,
+        -74.34244
+      ],
+      "country": "New Jersey",
+      "earliest_year": 1855,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Towaco-New Jersey",
+      "known_aliases": [
+        "Towaco",
+        "towaco",
+        "towaco cdp",
+        "Towaco CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Towaco",
+      "reason": "missing_entry",
+      "region": "usa_new_jersey",
+      "sample_years": [
+        1855,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.11005,
+        -110.68888
+      ],
+      "country": "Arizona",
+      "earliest_year": 1908,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rincon Valley-Arizona",
+      "known_aliases": [
+        "Rincon Valley",
+        "rincon valley",
+        "rincon valley cdp",
+        "Rincon Valley CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Rincon Valley",
+      "reason": "missing_entry",
+      "region": "usa_arizona",
+      "sample_years": [
+        1908,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.46858,
+        -74.65702
+      ],
+      "country": "New Jersey",
+      "earliest_year": 1928,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Belle Mead-New Jersey",
+      "known_aliases": [
+        "Belle Mead",
+        "belle mead",
+        "belle mead cdp",
+        "Belle Mead CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Belle Mead",
+      "reason": "missing_entry",
+      "region": "usa_new_jersey",
+      "sample_years": [
+        1928,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.96881,
+        -119.89278
+      ],
+      "country": "California",
+      "earliest_year": 1951,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bonadelle Ranchos-California",
+      "known_aliases": [
+        "Bonadelle Ranchos",
+        "bonadelle ranchos",
+        "bonadelle ranchos cdp",
+        "Bonadelle Ranchos CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Bonadelle Ranchos",
+      "reason": "missing_entry",
+      "region": "usa_california",
+      "sample_years": [
+        1951,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.73211,
+        -73.91239
+      ],
+      "country": "New York",
+      "earliest_year": 1912,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fairview-New York",
+      "known_aliases": [
+        "Fairview",
+        "fairview",
+        "fairview cdp",
+        "Fairview CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Fairview",
+      "reason": "missing_entry",
+      "region": "usa_new_york",
+      "sample_years": [
+        1912,
+        1950,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        30.4881,
+        -91.04473
+      ],
+      "country": "Louisiana",
+      "earliest_year": 1866,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Monticello-Louisiana",
+      "known_aliases": [
+        "Monticello",
+        "monticello",
+        "monticello cdp",
+        "Monticello CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Monticello",
+      "reason": "missing_entry",
+      "region": "usa_louisiana",
+      "sample_years": [
+        1866,
+        1910,
+        1970,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.82853,
+        -117.603
+      ],
+      "country": "Washington",
+      "earliest_year": 1943,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Suncrest-Washington",
+      "known_aliases": [
+        "Suncrest",
+        "suncrest",
+        "suncrest cdp",
+        "Suncrest CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Suncrest",
+      "reason": "missing_entry",
+      "region": "usa_washington",
+      "sample_years": [
+        1943,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.72984,
+        -92.87203
+      ],
+      "country": "Iowa",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Centerville-Iowa",
+      "known_aliases": [
+        "Centerville",
+        "centerville",
+        "centerville city",
+        "Centerville city"
+      ],
+      "latest_year": 2026,
+      "name": "Centerville",
+      "reason": "missing_entry",
+      "region": "usa_iowa",
+      "sample_years": [
+        1850,
+        1990,
+        2013,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        28.51913,
+        -81.2612
+      ],
+      "country": "Florida",
+      "earliest_year": 1907,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio Pinar-Florida",
+      "known_aliases": [
+        "Rio Pinar",
+        "rio pinar",
+        "rio pinar cdp",
+        "Rio Pinar CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Rio Pinar",
+      "reason": "missing_entry",
+      "region": "usa_florida",
+      "sample_years": [
+        1907,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.36812,
+        -74.59082
+      ],
+      "country": "New Jersey",
+      "earliest_year": 1908,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bargaintown-New Jersey",
+      "known_aliases": [
+        "Bargaintown",
+        "bargaintown",
+        "bargaintown cdp",
+        "Bargaintown CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Bargaintown",
+      "reason": "missing_entry",
+      "region": "usa_new_jersey",
+      "sample_years": [
+        1908,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.68077,
+        -74.54844
+      ],
+      "country": "New Jersey",
+      "earliest_year": 1906,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lyons-New Jersey",
+      "known_aliases": [
+        "Lyons",
+        "lyons",
+        "lyons cdp",
+        "Lyons CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Lyons",
+      "reason": "missing_entry",
+      "region": "usa_new_jersey",
+      "sample_years": [
+        1906,
+        1940,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.04537,
+        -76.9981
+      ],
+      "country": "North Carolina",
+      "earliest_year": 1953,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "James City-North Carolina",
+      "known_aliases": [
+        "James City",
+        "james city",
+        "james city cdp",
+        "James City CDP"
+      ],
+      "latest_year": 2020,
+      "name": "James City",
+      "reason": "missing_entry",
+      "region": "usa_north_carolina",
+      "sample_years": [
+        1953,
+        1960,
+        1970,
+        1980,
+        1990,
+        2000,
+        2010,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.74804,
+        -108.08528
+      ],
+      "country": "New Mexico",
+      "earliest_year": 1948,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Crouch Mesa-New Mexico",
+      "known_aliases": [
+        "Crouch Mesa",
+        "crouch mesa",
+        "crouch mesa cdp",
+        "Crouch Mesa CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Crouch Mesa",
+      "reason": "missing_entry",
+      "region": "usa_new_mexico",
+      "sample_years": [
+        1948,
+        1970,
+        2000,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.52827,
+        -74.73544
+      ],
+      "country": "New Jersey",
+      "earliest_year": 1888,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Neshanic Station-New Jersey",
+      "known_aliases": [
+        "Neshanic Station",
+        "neshanic station",
+        "neshanic station cdp",
+        "Neshanic Station CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Neshanic Station",
+      "reason": "missing_entry",
+      "region": "usa_new_jersey",
+      "sample_years": [
+        1888,
+        1930,
+        1980,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        31.79309,
+        -94.18029
+      ],
+      "country": "Texas",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Center-Texas",
+      "known_aliases": [
+        "Center",
+        "center",
+        "center city",
+        "Center city"
+      ],
+      "latest_year": 2026,
+      "name": "Center",
+      "reason": "missing_entry",
+      "region": "usa_texas",
+      "sample_years": [
+        1850,
+        2000,
+        2013,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.85753,
+        -105.03909
+      ],
+      "country": "Colorado",
+      "earliest_year": 1936,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Shaw Heights-Colorado",
+      "known_aliases": [
+        "Shaw Heights",
+        "shaw heights",
+        "shaw heights cdp",
+        "Shaw Heights CDP"
+      ],
+      "latest_year": 2020,
+      "name": "Shaw Heights",
+      "reason": "missing_entry",
+      "region": "usa_colorado",
+      "sample_years": [
+        1936,
+        1960,
+        1990,
+        2020
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.61006,
+        -83.4827
+      ],
+      "country": "Ohio",
+      "earliest_year": 1897,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Northwood-Ohio",
+      "known_aliases": [
+        "Northwood",
+        "northwood",
+        "northwood city",
+        "Northwood city"
+      ],
+      "latest_year": 2026,
+      "name": "Northwood",
+      "reason": "missing_entry",
+      "region": "usa_ohio",
+      "sample_years": [
+        1897,
+        2001,
+        2014,
+        2026
+      ],
+      "sources": [
+        "CENTAUR"
+      ]
+    }
+  ]
+}

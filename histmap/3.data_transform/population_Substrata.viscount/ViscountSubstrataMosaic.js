@@ -115,8 +115,21 @@ let { PNG } = global.pngjs || require("pngjs");
           for (let x = 0; x < n_valid; x++)
             urban_valid[x] = this.readPositiveFloat32(u_png.data, u_dv, context.valid_indices[x]*4);
         }
+        if (global.population_Stadester_rasters && typeof global.population_Stadester_rasters.getSubUrbanSettlementsData === "function") {
+          let sub_urb = global.population_Stadester_rasters.getSubUrbanSettlementsData(yr, {
+            stadester_file_path: path.join(context.root_dir, "histmap/3.data_transform/population_Stadester.transform/stadester")
+          });
 
-        let rural_valid = new Float32Array(n_valid).fill(1e-4);
+          if (sub_urb) {
+            for (let x = 0; x < n_valid; x++) {
+              let sv = sub_urb[context.valid_indices[x]];
+
+              if (sv > 0) urban_valid[x] += sv;
+            }
+          }
+        }
+
+        let rural_valid = new Float32Array(n_valid);
         for (let s = 0; s < source_keys.length; s++) {
           let src_cfg = context.manifest.substrata_sources[source_keys[s]];
           let src_dom = (src_cfg.domain_code !== undefined) ? src_cfg.domain_code : (s + 1);
@@ -141,6 +154,9 @@ let { PNG } = global.pngjs || require("pngjs");
         ];
         let touched = new Uint8Array(n_valid);
 
+        let active_zone_of_v = new Int32Array(n_valid).fill(-1);
+        let zone_targets_by_id = [];
+
         for (let g = 0; g < target_groups.length; g++) {
           let group = target_groups[g];
           for (let x = 0; x < group.length; x++) {
@@ -155,38 +171,73 @@ let { PNG } = global.pngjs || require("pngjs");
               if (raw_target < 0) continue;
               let target_pop = raw_target*(zone.domain_fraction !== undefined ? zone.domain_fraction : 1.0);
               let curr_sum = 0;
+              let hab_cnt = 0;
               let urb_sum = 0;
               for (let a = 0; a < zone.pixels.length; a++) {
                 let v_idx = context.pixel_to_valid[zone.pixels[a]];
                 if (v_idx >= 0) {
-                  curr_sum += base_rural[v_idx];
+                  if (base_rural[v_idx] > 0) {
+                    curr_sum += base_rural[v_idx];
+                    hab_cnt++;
+                  }
                   urb_sum += urban_valid[v_idx];
                 }
               }
-              let rural_target = Math.max(zone.pixels.length*0.05, target_pop - urb_sum);
-              let scalar = (curr_sum > 0) ? rural_target/curr_sum : 1.0;
-              for (let a = 0; a < zone.pixels.length; a++) {
-                let v_idx = context.pixel_to_valid[zone.pixels[a]];
-                if (v_idx >= 0) {
-                  rural_valid[v_idx] = Math.max(1e-4, base_rural[v_idx]*scalar);
-                  touched[v_idx] = 1;
+              let rural_target = Math.max(Math.max(1, hab_cnt)*0.05, target_pop - urb_sum);
+              let z_id = zone_targets_by_id.length;
+
+              zone_targets_by_id.push({ pixels: [], target_pop: rural_target });
+              if (curr_sum > 0) {
+                let scalar = rural_target/curr_sum;
+                for (let a = 0; a < zone.pixels.length; a++) {
+                  let v_idx = context.pixel_to_valid[zone.pixels[a]];
+                  if (v_idx >= 0 && base_rural[v_idx] > 0) {
+                    rural_valid[v_idx] = Math.max(1e-4, base_rural[v_idx]*scalar);
+                    touched[v_idx] = 1;
+                    active_zone_of_v[v_idx] = z_id;
+                  }
+                }
+              } else if (rural_target > 0) {
+                let target_px = [];
+
+                if (zone.pixels.length > 25 && context.fallback_hab_mask) {
+                  for (let a = 0; a < zone.pixels.length; a++) {
+                    let px = zone.pixels[a];
+
+                    if (context.pixel_to_valid[px] >= 0 && context.fallback_hab_mask[px] === 1)
+                      target_px.push(px);
+                  }
+                }
+                if (target_px.length === 0 && zone.pixels.length <= 25) target_px = zone.pixels;
+                if (target_px.length > 0) {
+                  let per_px = rural_target/target_px.length;
+
+                  for (let a = 0; a < target_px.length; a++) {
+                    let v_idx = context.pixel_to_valid[target_px[a]];
+                    if (v_idx >= 0) {
+                      rural_valid[v_idx] = Math.max(1e-4, per_px);
+                      base_rural[v_idx] = rural_valid[v_idx];
+                      touched[v_idx] = 1;
+                      active_zone_of_v[v_idx] = z_id;
+                    }
+                  }
                 }
               }
             }
           }
         }
 
-        //2-pass separable spatial smoothing of log-multipliers within each source domain to prevent state/HUC wall cliffs
+        //3-pass separable tent smoothing of log-multipliers within each source domain (zero uninhabited leakage)
         let blur_r = (context.manifest && context.manifest.smoothing && Number.isFinite(context.manifest.smoothing.interior_multiplier_blur_radius_px)) ?
           context.manifest.smoothing.interior_multiplier_blur_radius_px : 5;
         let blur_passes = (context.manifest && context.manifest.smoothing && Number.isFinite(context.manifest.smoothing.interior_multiplier_blur_passes)) ?
-          context.manifest.smoothing.interior_multiplier_blur_passes : 2;
+          Math.max(3, context.manifest.smoothing.interior_multiplier_blur_passes) : 3;
         let log_mult = new Float32Array(n_valid);
         let pre_smooth_sum = 0;
         let tmp_mult = new Float32Array(n_valid);
 
         for (let v = 0; v < n_valid; v++) {
-          if (touched[v]) {
+          if (touched[v] && base_rural[v] > 0) {
             pre_smooth_sum += rural_valid[v];
             log_mult[v] = Math.log(Math.max(1e-6, rural_valid[v])/Math.max(1e-6, base_rural[v]));
           } else {
@@ -196,7 +247,7 @@ let { PNG } = global.pngjs || require("pngjs");
 
         for (let pass = 0; pass < blur_passes; pass++) {
           for (let v = 0; v < n_valid; v++) {
-            if (!touched[v]) { tmp_mult[v] = 0; continue; }
+            if (!touched[v] || base_rural[v] <= 0) { tmp_mult[v] = 0; continue; }
             let px = context.valid_indices[v];
             let dom_id = context.pixel_domain[px];
             let r = Math.floor(px/context.width);
@@ -207,7 +258,7 @@ let { PNG } = global.pngjs || require("pngjs");
             for (let dc = -blur_r; dc <= blur_r; dc++) {
               let nc = (c + dc + context.width) % context.width;
               let nv = context.pixel_to_valid[r*context.width + nc];
-              if (nv >= 0 && touched[nv] && context.pixel_domain[context.valid_indices[nv]] === dom_id) {
+              if (nv >= 0 && touched[nv] && base_rural[nv] > 0 && context.pixel_domain[context.valid_indices[nv]] === dom_id) {
                 let wt = blur_r + 1 - Math.abs(dc);
                 acc += log_mult[nv]*wt;
                 wt_sum += wt;
@@ -216,7 +267,7 @@ let { PNG } = global.pngjs || require("pngjs");
             tmp_mult[v] = (wt_sum > 0) ? acc/wt_sum : log_mult[v];
           }
           for (let v = 0; v < n_valid; v++) {
-            if (!touched[v]) continue;
+            if (!touched[v] || base_rural[v] <= 0) continue;
             let px = context.valid_indices[v];
             let dom_id = context.pixel_domain[px];
             let r = Math.floor(px/context.width);
@@ -228,7 +279,7 @@ let { PNG } = global.pngjs || require("pngjs");
               let nr = r + dr;
               if (nr < 0 || nr >= context.height) continue;
               let nv = context.pixel_to_valid[nr*context.width + c];
-              if (nv >= 0 && touched[nv] && context.pixel_domain[context.valid_indices[nv]] === dom_id) {
+              if (nv >= 0 && touched[nv] && base_rural[nv] > 0 && context.pixel_domain[context.valid_indices[nv]] === dom_id) {
                 let wt = blur_r + 1 - Math.abs(dr);
                 acc += tmp_mult[nv]*wt;
                 wt_sum += wt;
@@ -239,15 +290,26 @@ let { PNG } = global.pngjs || require("pngjs");
         }
 
         let smoothed_sum = 0;
+        let z_sums = new Float64Array(zone_targets_by_id.length);
+
         for (let v = 0; v < n_valid; v++) {
-          if (!touched[v]) continue;
+          if (!touched[v] || base_rural[v] <= 0) {
+            if (rural_valid[v] <= 0) rural_valid[v] = 0;
+            continue;
+          }
           rural_valid[v] = Math.max(1e-4, base_rural[v]*Math.exp(log_mult[v]));
           smoothed_sum += rural_valid[v];
+          let az = active_zone_of_v[v];
+
+          if (az >= 0) z_sums[az] += rural_valid[v];
         }
-        if (smoothed_sum > 0 && pre_smooth_sum > 0) {
-          let norm_k = pre_smooth_sum/smoothed_sum;
-          for (let v = 0; v < n_valid; v++)
-            if (touched[v]) rural_valid[v] = Math.max(1e-4, rural_valid[v]*norm_k);
+        for (let v = 0; v < n_valid; v++) {
+          let az = active_zone_of_v[v];
+
+          if (az >= 0 && z_sums[az] > 0 && zone_targets_by_id[az].target_pop > 0)
+            rural_valid[v] = Math.max(1e-4, rural_valid[v]*(zone_targets_by_id[az].target_pop/z_sums[az]));
+          else if (touched[v] && base_rural[v] > 0 && smoothed_sum > 0 && pre_smooth_sum > 0)
+            rural_valid[v] = Math.max(1e-4, rural_valid[v]*(pre_smooth_sum/smoothed_sum));
         }
 
         calibrated_series.push(rural_valid);
@@ -269,14 +331,29 @@ let { PNG } = global.pngjs || require("pngjs");
 
         for (let i = 0; i < n_valid; i++) {
           let idx = context.valid_indices[i];
-          let prev_v = (t > 0) ? calibrated_series[t - 1][i] : cal_arr[i];
-          let next_v = (t + 1 < hyde_years.length) ? calibrated_series[t + 1][i] : cal_arr[i];
-          let smoothed_r = (cal_arr[i] > 0 && prev_v > 0 && next_v > 0) ?
-            Math.exp((1 - temp_weight)*Math.log(cal_arr[i]) + 0.5*temp_weight*(Math.log(prev_v) + Math.log(next_v))) :
-            cal_arr[i];
-          let val = u_arr[i] + Math.max(1e-4, smoothed_r);
-          out_dv.setFloat32(idx*4, val, false);
-          total_pop += val;
+          let smoothed_r = 0;
+
+          if (cal_arr[i] > 0) {
+            let prev_v = (t > 0 && calibrated_series[t - 1][i] > 0) ? calibrated_series[t - 1][i] : cal_arr[i];
+            let next_v = (t + 1 < hyde_years.length && calibrated_series[t + 1][i] > 0) ? calibrated_series[t + 1][i] : cal_arr[i];
+
+            smoothed_r = Math.max(
+              1e-4,
+              Math.exp((1 - temp_weight)*Math.log(cal_arr[i]) + 0.5*temp_weight*(Math.log(prev_v) + Math.log(next_v)))
+            );
+          }
+          let val = u_arr[i] + smoothed_r;
+          let p4 = idx*4;
+
+          if (val > 0) {
+            out_dv.setFloat32(p4, val, false);
+            total_pop += val;
+          } else {
+            out_png.data[p4] = 0;
+            out_png.data[p4 + 1] = 0;
+            out_png.data[p4 + 2] = 0;
+            out_png.data[p4 + 3] = 0;
+          }
         }
 
         this.applyOneSidedSeamBlend(context, out_png.data, out_dv, options);
@@ -360,6 +437,7 @@ let { PNG } = global.pngjs || require("pngjs");
       if (!manifest_abs || !fs.existsSync(manifest_abs)) return null;
 
       //Function body
+      let fallback_hab_mask = new Uint8Array(n_pixels);
       let manifest_obj = JSON5.parse(fs.readFileSync(manifest_abs, "utf8"));
       let n_pixels = width*height;
       let pixel_domain = new Uint8Array(n_pixels);
@@ -369,16 +447,58 @@ let { PNG } = global.pngjs || require("pngjs");
       for (let i = 0; i < src_keys.length; i++) {
         let src = sources[src_keys[i]];
         let dom_code = (src.domain_code !== undefined) ? src.domain_code : (i + 1);
+        let domain_mask_abs = src.domain_mask_png ? path.resolve(root_dir, src.domain_mask_png) : "";
         let sample_yr = (src.sample_year !== undefined) ? src.sample_year : 1000;
         let sample_path = path.join(root_dir, src.rasters_folder || "", `popc_${sample_yr}.png`);
-        if (!fs.existsSync(sample_path)) continue;
 
-        let s_png = PNG.sync.read(fs.readFileSync(sample_path));
+        if (domain_mask_abs && fs.existsSync(domain_mask_abs)) {
+          let dm_png = PNG.sync.read(fs.readFileSync(domain_mask_abs));
+
+          for (let idx = 0; idx < n_pixels; idx++) {
+            if (pixel_domain[idx] !== 0) continue;
+            let p4 = idx*4;
+
+            if (dm_png.data[p4 + 3] > 0 && (dm_png.data[p4] | dm_png.data[p4 + 1] | dm_png.data[p4 + 2]) !== 0)
+              pixel_domain[idx] = dom_code;
+          }
+        }
+        if (fs.existsSync(sample_path)) {
+          let s_png = PNG.sync.read(fs.readFileSync(sample_path));
+          for (let idx = 0; idx < n_pixels; idx++) {
+            if (pixel_domain[idx] !== 0) continue;
+            let p4 = idx*4;
+            if ((s_png.data[p4] | s_png.data[p4 + 1] | s_png.data[p4 + 2] | s_png.data[p4 + 3]) !== 0)
+              pixel_domain[idx] = dom_code;
+          }
+        }
+        let doc_px_abs = src.documented_site_pixels_json ? path.resolve(root_dir, src.documented_site_pixels_json) : "";
+
+        if (doc_px_abs && fs.existsSync(doc_px_abs)) {
+          let doc_obj = JSON.parse(fs.readFileSync(doc_px_abs, "utf8"));
+          let px_list = Array.isArray(doc_obj.pixels) ? doc_obj.pixels : [];
+
+          for (let p = 0; p < px_list.length; p++) {
+            let sc = Math.max(0, Math.min(width - 1, Math.round(Number(px_list[p][0]))));
+            let sr = Math.max(0, Math.min(height - 1, Math.round(Number(px_list[p][1]))));
+            let lat = 90 - (sr + 0.5)*180/height;
+
+            if (lat <= 74.0) fallback_hab_mask[sr*width + sc] = 1;
+          }
+        }
+      }
+
+      let hyde_1900_abs = path.resolve(root_dir, "histmap/2.data_cleaning/landuse_HYDE/rasters_scaled_to_global/popc_1900.png");
+
+      if (fs.existsSync(hyde_1900_abs)) {
+        let h19_png = PNG.sync.read(fs.readFileSync(hyde_1900_abs));
+        let h19_dv = new DataView(h19_png.data.buffer, h19_png.data.byteOffset, h19_png.data.byteLength);
+
         for (let idx = 0; idx < n_pixels; idx++) {
-          if (pixel_domain[idx] !== 0) continue;
-          let p4 = idx*4;
-          if ((s_png.data[p4] | s_png.data[p4 + 1] | s_png.data[p4 + 2] | s_png.data[p4 + 3]) !== 0)
-            pixel_domain[idx] = dom_code;
+          if (pixel_domain[idx] === 0) continue;
+          let lat = 90 - (Math.floor(idx/width) + 0.5)*180/height;
+
+          if (lat <= 74.0 && this.readPositiveFloat32(h19_png.data, h19_dv, idx*4) > 0)
+            fallback_hab_mask[idx] = 1;
         }
       }
 
@@ -427,6 +547,7 @@ let { PNG } = global.pngjs || require("pngjs");
 
       //Return statement
       return {
+        fallback_hab_mask: fallback_hab_mask,
         height: height,
         hyde_years: manifest_obj.hyde_years || [],
         key: proj_cfg.key,

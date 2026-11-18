@@ -1,0 +1,1325 @@
+{
+  "totals": {
+    "modules": 31,
+    "settlements_included": 53439,
+    "ledger_candidates": 62870,
+    "ledger_excluded": 9431
+  },
+  "kriging_na": {
+    "domestic_catchments": 5530,
+    "buffer_catchments": null,
+    "unique_site_periods": null,
+    "baseline_multiplier": null,
+    "tau1_mean": 1.2423199999999999,
+    "tau2_mean": 2.6709799999999997
+  },
+  "kriging_hi": {
+    "domestic_catchments": 156,
+    "tau1_mean": 1.2974333333333334,
+    "tau2_mean": 2.789483333333333
+  },
+  "chapters": {
+    "northern_cascadia_and_alaska": {
+      "rel_dir": "1.pre_columbian_canada_and_alaska/1.northern_cascadia_and_alaska",
+      "settlements_count": 225,
+      "ledger_candidates": 461,
+      "ledger_included": 225,
+      "ledger_excluded": 236,
+      "regions_count": 5,
+      "headline_start": [
+        -10000,
+        1350
+      ],
+      "headline_end": [
+        1600,
+        181500
+      ],
+      "headline_peak": [
+        182000.0,
+        1550
+      ],
+      "top5_settlements": [
+        {
+          "name": "Marpole",
+          "peak": 1450.0
+        },
+        {
+          "name": "Keatley Creek",
+          "peak": 1400.0
+        },
+        {
+          "name": "Yuquot",
+          "peak": 1200.0
+        },
+        {
+          "name": "Bridge River Pithouse Metropolis",
+          "peak": 1100.0
+        },
+        {
+          "name": "Keatley Creek Pithouse Town",
+          "peak": 950.0
+        }
+      ]
+    },
+    "northern_canada": {
+      "rel_dir": "1.pre_columbian_canada_and_alaska/2.northern_canada",
+      "settlements_count": 926,
+      "ledger_candidates": 2213,
+      "ledger_included": 926,
+      "ledger_excluded": 1287,
+      "regions_count": 5,
+      "headline_start": [
+        -10000,
+        0
+      ],
+      "headline_end": [
+        1600,
+        35550
+      ],
+      "headline_peak": [
+        36300.0,
+        1300
+      ],
+      "top5_settlements": [
+        {
+          "name": "Kittigazuit",
+          "peak": 1000.0
+        },
+        {
+          "name": "Kuukpak Sod Metropolis",
+          "peak": 920.0
+        },
+        {
+          "name": "Alarnerk Ridge Metropolis",
+          "peak": 720.0
+        },
+        {
+          "name": "Qassiarsuk",
+          "peak": 620.0
+        },
+        {
+          "name": "Qeqertat Island Town",
+          "peak": 620.0
+        }
+      ]
+    },
+    "prairies": {
+      "rel_dir": "1.pre_columbian_canada_and_alaska/3.prairies",
+      "settlements_count": 192,
+      "ledger_candidates": 407,
+      "ledger_included": 192,
+      "ledger_excluded": 215,
+      "regions_count": 4,
+      "headline_start": [
+        -10000,
+        150
+      ],
+      "headline_end": [
+        1600,
+        45300
+      ],
+      "headline_peak": [
+        46000.0,
+        1550
+      ],
+      "top5_settlements": [
+        {
+          "name": "Lockport",
+          "peak": 680.0
+        },
+        {
+          "name": "Estipah-skikikini-kots",
+          "peak": 650.0
+        },
+        {
+          "name": "Sagkeeng Fort Alexander Village",
+          "peak": 560.0
+        },
+        {
+          "name": "Cluny Earthlodge Town",
+          "peak": 520.0
+        },
+        {
+          "name": "Cumberland House Ancestral Town",
+          "peak": 520.0
+        }
+      ]
+    },
+    "hudson_bay": {
+      "rel_dir": "1.pre_columbian_canada_and_alaska/4.hudson_bay",
+      "settlements_count": 130,
+      "ledger_candidates": 259,
+      "ledger_included": 130,
+      "ledger_excluded": 129,
+      "regions_count": 3,
+      "headline_start": [
+        -10000,
+        0
+      ],
+      "headline_end": [
+        1600,
+        22650
+      ],
+      "headline_peak": [
+        23000.0,
+        1550
+      ],
+      "top5_settlements": [
+        {
+          "name": "Norway House Playgreen Capital",
+          "peak": 620.0
+        },
+        {
+          "name": "Southern Indian Lake Town",
+          "peak": 550.0
+        },
+        {
+          "name": "Garden Hill Island Town",
+          "peak": 530.0
+        },
+        {
+          "name": "Split Lake Cree Capital",
+          "peak": 510.0
+        },
+        {
+          "name": "Cross Lake Pimicikamak Town",
+          "peak": 480.0
+        }
+      ]
+    },
+    "saint_lawrence": {
+      "rel_dir": "1.pre_columbian_canada_and_alaska/5.saint_lawrence",
+      "settlements_count": 172,
+      "ledger_candidates": 351,
+      "ledger_included": 172,
+      "ledger_excluded": 179,
+      "regions_count": 4,
+      "headline_start": [
+        -10000,
+        0
+      ],
+      "headline_end": [
+        1600,
+        74900
+      ],
+      "headline_peak": [
+        92000.0,
+        1500
+      ],
+      "top5_settlements": [
+        {
+          "name": "Warminster",
+          "peak": 3500.0
+        },
+        {
+          "name": "Hochelaga",
+          "peak": 2600.0
+        },
+        {
+          "name": "Draper",
+          "peak": 1950.0
+        },
+        {
+          "name": "Walker",
+          "peak": 1950.0
+        },
+        {
+          "name": "Mantle",
+          "peak": 1800.0
+        }
+      ]
+    },
+    "maritimes": {
+      "rel_dir": "1.pre_columbian_canada_and_alaska/6.maritimes",
+      "settlements_count": 159,
+      "ledger_candidates": 332,
+      "ledger_included": 159,
+      "ledger_excluded": 173,
+      "regions_count": 4,
+      "headline_start": [
+        -10000,
+        0
+      ],
+      "headline_end": [
+        1600,
+        27800
+      ],
+      "headline_peak": [
+        36000.0,
+        1500
+      ],
+      "top5_settlements": [
+        {
+          "name": "Saint John Reversing Falls Capital",
+          "peak": 890.0
+        },
+        {
+          "name": "Truro Cobequid Capital",
+          "peak": 810.0
+        },
+        {
+          "name": "Annapolis Royal Equille Capital",
+          "peak": 760.0
+        },
+        {
+          "name": "Fredericton Saint John River Town",
+          "peak": 740.0
+        },
+        {
+          "name": "Bridgewater LaHave Capital",
+          "peak": 730.0
+        }
+      ]
+    },
+    "upper_colorado": {
+      "rel_dir": "2.united_states_hydrological_units/01.upper_colorado",
+      "settlements_count": 241,
+      "ledger_candidates": 576,
+      "ledger_included": 241,
+      "ledger_excluded": 335,
+      "regions_count": 3,
+      "headline_start": [
+        -10000,
+        750
+      ],
+      "headline_end": [
+        1600,
+        27000
+      ],
+      "headline_peak": [
+        62300.0,
+        800
+      ],
+      "top5_settlements": [
+        {
+          "name": "Tsé Bíyó' Áshkhii",
+          "peak": 3200.0
+        },
+        {
+          "name": "Cliff Palace",
+          "peak": 1850.0
+        },
+        {
+          "name": "Aztec Ruins",
+          "peak": 1450.0
+        },
+        {
+          "name": "Yellow Jacket Pueblo",
+          "peak": 1350.0
+        },
+        {
+          "name": "Aztec",
+          "peak": 1060.0
+        }
+      ]
+    },
+    "extreme_northern_plains": {
+      "rel_dir": "2.united_states_hydrological_units/02.extreme_northern_plains",
+      "settlements_count": 100,
+      "ledger_candidates": 202,
+      "ledger_included": 100,
+      "ledger_excluded": 102,
+      "regions_count": 3,
+      "headline_start": [
+        -10000,
+        0
+      ],
+      "headline_end": [
+        1600,
+        19400
+      ],
+      "headline_peak": [
+        26700.0,
+        800
+      ],
+      "top5_settlements": [
+        {
+          "name": "Biesterfeldt",
+          "peak": 480.0
+        },
+        {
+          "name": "Biesterfeldt Earthlodge Town",
+          "peak": 450.0
+        },
+        {
+          "name": "Arvilla",
+          "peak": 360.0
+        },
+        {
+          "name": "McKinstry",
+          "peak": 360.0
+        },
+        {
+          "name": "Grand Mound",
+          "peak": 320.0
+        }
+      ]
+    },
+    "northern_plains": {
+      "rel_dir": "2.united_states_hydrological_units/03.northern_plains",
+      "settlements_count": 295,
+      "ledger_candidates": 625,
+      "ledger_included": 295,
+      "ledger_excluded": 330,
+      "regions_count": 4,
+      "headline_start": [
+        -10000,
+        1400
+      ],
+      "headline_end": [
+        1600,
+        177500
+      ],
+      "headline_peak": [
+        236500.0,
+        1200
+      ],
+      "top5_settlements": [
+        {
+          "name": "Blood Run",
+          "peak": 3500.0
+        },
+        {
+          "name": "Sully",
+          "peak": 2650.0
+        },
+        {
+          "name": "Utz",
+          "peak": 2600.0
+        },
+        {
+          "name": "Mitchell",
+          "peak": 2200.0
+        },
+        {
+          "name": "Double Ditch",
+          "peak": 1850.0
+        }
+      ]
+    },
+    "arizona": {
+      "rel_dir": "2.united_states_hydrological_units/04.arizona",
+      "settlements_count": 588,
+      "ledger_candidates": 1324,
+      "ledger_included": 588,
+      "ledger_excluded": 736,
+      "regions_count": 4,
+      "headline_start": [
+        -10000,
+        800
+      ],
+      "headline_end": [
+        1600,
+        76000
+      ],
+      "headline_peak": [
+        156900.0,
+        1100
+      ],
+      "top5_settlements": [
+        {
+          "name": "S-Kiukchu'k",
+          "peak": 3200.0
+        },
+        {
+          "name": "Pueblo Grande",
+          "peak": 3100.0
+        },
+        {
+          "name": "Sivan Vah'ki",
+          "peak": 2600.0
+        },
+        {
+          "name": "Orayvi",
+          "peak": 2100.0
+        },
+        {
+          "name": "Hawikku",
+          "peak": 1650.0
+        }
+      ]
+    },
+    "great_basin": {
+      "rel_dir": "2.united_states_hydrological_units/05.great_basin",
+      "settlements_count": 146,
+      "ledger_candidates": 326,
+      "ledger_included": 146,
+      "ledger_excluded": 180,
+      "regions_count": 3,
+      "headline_start": [
+        -10000,
+        750
+      ],
+      "headline_end": [
+        1600,
+        60500
+      ],
+      "headline_peak": [
+        64300.0,
+        1100
+      ],
+      "top5_settlements": [
+        {
+          "name": "Lovelock Big Meadow Capital",
+          "peak": 1200.0
+        },
+        {
+          "name": "Fallon Carson Sink Capital",
+          "peak": 1150.0
+        },
+        {
+          "name": "Provo River Timpanogos Capital",
+          "peak": 1150.0
+        },
+        {
+          "name": "Backhoe Village",
+          "peak": 1060.0
+        },
+        {
+          "name": "Five Finger Ridge",
+          "peak": 1060.0
+        }
+      ]
+    },
+    "upper_mississippi": {
+      "rel_dir": "2.united_states_hydrological_units/06.upper_mississippi",
+      "settlements_count": 159,
+      "ledger_candidates": 329,
+      "ledger_included": 159,
+      "ledger_excluded": 170,
+      "regions_count": 3,
+      "headline_start": [
+        -10000,
+        900
+      ],
+      "headline_end": [
+        1600,
+        150000
+      ],
+      "headline_peak": [
+        290000.0,
+        1100
+      ],
+      "top5_settlements": [
+        {
+          "name": "Cahokia",
+          "peak": 18000.0
+        },
+        {
+          "name": "East St. Louis Mound Center",
+          "peak": 5200.0
+        },
+        {
+          "name": "St. Louis Mound Group",
+          "peak": 2600.0
+        },
+        {
+          "name": "Zimmerman",
+          "peak": 1800.0
+        },
+        {
+          "name": "Emerald Acropolis",
+          "peak": 1600.0
+        }
+      ]
+    },
+    "rio_grande": {
+      "rel_dir": "2.united_states_hydrological_units/07.rio_grande",
+      "settlements_count": 258,
+      "ledger_candidates": 572,
+      "ledger_included": 258,
+      "ledger_excluded": 314,
+      "regions_count": 3,
+      "headline_start": [
+        -10000,
+        800
+      ],
+      "headline_end": [
+        1600,
+        96000
+      ],
+      "headline_peak": [
+        155500.0,
+        1100
+      ],
+      "top5_settlements": [
+        {
+          "name": "Cicuye",
+          "peak": 2200.0
+        },
+        {
+          "name": "Sapawe",
+          "peak": 2100.0
+        },
+        {
+          "name": "Tə̂otho",
+          "peak": 1800.0
+        },
+        {
+          "name": "Haaku",
+          "peak": 1650.0
+        },
+        {
+          "name": "Posi-ouinge",
+          "peak": 1650.0
+        }
+      ]
+    },
+    "cumberland": {
+      "rel_dir": "2.united_states_hydrological_units/08.cumberland",
+      "settlements_count": 90,
+      "ledger_candidates": 186,
+      "ledger_included": 90,
+      "ledger_excluded": 96,
+      "regions_count": 3,
+      "headline_start": [
+        -10000,
+        750
+      ],
+      "headline_end": [
+        1600,
+        65500
+      ],
+      "headline_peak": [
+        157000.0,
+        1200
+      ],
+      "top5_settlements": [
+        {
+          "name": "Kincaid Mounds",
+          "peak": 2400.0
+        },
+        {
+          "name": "Hiwassee Island Town",
+          "peak": 1300.0
+        },
+        {
+          "name": "Hiwassee Island",
+          "peak": 1200.0
+        },
+        {
+          "name": "Toqua Dallas Town",
+          "peak": 1200.0
+        },
+        {
+          "name": "Jonathan Creek Palisaded Town",
+          "peak": 1100.0
+        }
+      ]
+    },
+    "southeast": {
+      "rel_dir": "2.united_states_hydrological_units/09.southeast",
+      "settlements_count": 115,
+      "ledger_candidates": 220,
+      "ledger_included": 115,
+      "ledger_excluded": 105,
+      "regions_count": 4,
+      "headline_start": [
+        -10000,
+        3150
+      ],
+      "headline_end": [
+        1600,
+        336000
+      ],
+      "headline_peak": [
+        707000.0,
+        1200
+      ],
+      "top5_settlements": [
+        {
+          "name": "Etowah",
+          "peak": 4200.0
+        },
+        {
+          "name": "Moundville",
+          "peak": 3500.0
+        },
+        {
+          "name": "Mound Key",
+          "peak": 2400.0
+        },
+        {
+          "name": "Coosa",
+          "peak": 2200.0
+        },
+        {
+          "name": "Mabila",
+          "peak": 2200.0
+        }
+      ]
+    },
+    "lower_mississippi": {
+      "rel_dir": "2.united_states_hydrological_units/10.lower_mississippi",
+      "settlements_count": 107,
+      "ledger_candidates": 208,
+      "ledger_included": 107,
+      "ledger_excluded": 101,
+      "regions_count": 3,
+      "headline_start": [
+        -10000,
+        1400
+      ],
+      "headline_end": [
+        1600,
+        106000
+      ],
+      "headline_peak": [
+        326000.0,
+        1200
+      ],
+      "top5_settlements": [
+        {
+          "name": "Parkin",
+          "peak": 2800.0
+        },
+        {
+          "name": "Emerald Mound",
+          "peak": 2400.0
+        },
+        {
+          "name": "Winterville",
+          "peak": 2400.0
+        },
+        {
+          "name": "Bradley",
+          "peak": 2200.0
+        },
+        {
+          "name": "Carson Mounds Mega-Town",
+          "peak": 2200.0
+        }
+      ]
+    },
+    "southern_plains": {
+      "rel_dir": "2.united_states_hydrological_units/11.southern_plains",
+      "settlements_count": 102,
+      "ledger_candidates": 205,
+      "ledger_included": 102,
+      "ledger_excluded": 103,
+      "regions_count": 3,
+      "headline_start": [
+        -10000,
+        850
+      ],
+      "headline_end": [
+        1600,
+        95000
+      ],
+      "headline_peak": [
+        160000.0,
+        1300
+      ],
+      "top5_settlements": [
+        {
+          "name": "George C. Davis",
+          "peak": 1650.0
+        },
+        {
+          "name": "Washington Square Mound",
+          "peak": 950.0
+        },
+        {
+          "name": "Waco-Wichita Village",
+          "peak": 780.0
+        },
+        {
+          "name": "Oso Dune Karankawa Village",
+          "peak": 750.0
+        },
+        {
+          "name": "Barton Springs Village",
+          "peak": 700.0
+        }
+      ]
+    },
+    "ohio_river": {
+      "rel_dir": "2.united_states_hydrological_units/12.ohio_river",
+      "settlements_count": 164,
+      "ledger_candidates": 307,
+      "ledger_included": 164,
+      "ledger_excluded": 143,
+      "regions_count": 4,
+      "headline_start": [
+        -10000,
+        950
+      ],
+      "headline_end": [
+        1600,
+        151000
+      ],
+      "headline_peak": [
+        264000.0,
+        1300
+      ],
+      "top5_settlements": [
+        {
+          "name": "Angel Mounds",
+          "peak": 3200.0
+        },
+        {
+          "name": "Newark Earthworks",
+          "peak": 1850.0
+        },
+        {
+          "name": "Hopewell Mound Group",
+          "peak": 1650.0
+        },
+        {
+          "name": "Mound Bottom",
+          "peak": 1600.0
+        },
+        {
+          "name": "Mound Bottom Paramount Town",
+          "peak": 1200.0
+        }
+      ]
+    },
+    "new_england": {
+      "rel_dir": "2.united_states_hydrological_units/13.new_england",
+      "settlements_count": 99,
+      "ledger_candidates": 202,
+      "ledger_included": 99,
+      "ledger_excluded": 103,
+      "regions_count": 3,
+      "headline_start": [
+        -10000,
+        150
+      ],
+      "headline_end": [
+        1600,
+        86500
+      ],
+      "headline_peak": [
+        116500.0,
+        1400
+      ],
+      "top5_settlements": [
+        {
+          "name": "Great Swamp Fortified Metropolis",
+          "peak": 2500.0
+        },
+        {
+          "name": "RI-1000",
+          "peak": 1850.0
+        },
+        {
+          "name": "Mystic",
+          "peak": 1550.0
+        },
+        {
+          "name": "Patuxet",
+          "peak": 1450.0
+        },
+        {
+          "name": "Sowams",
+          "peak": 1400.0
+        }
+      ]
+    },
+    "central_plains": {
+      "rel_dir": "2.united_states_hydrological_units/14.central_plains",
+      "settlements_count": 143,
+      "ledger_candidates": 298,
+      "ledger_included": 143,
+      "ledger_excluded": 155,
+      "regions_count": 3,
+      "headline_start": [
+        -10000,
+        1000
+      ],
+      "headline_end": [
+        1600,
+        125000
+      ],
+      "headline_peak": [
+        160000.0,
+        1500
+      ],
+      "top5_settlements": [
+        {
+          "name": "Etzanoa",
+          "peak": 14000.0
+        },
+        {
+          "name": "Tobias-Quivira",
+          "peak": 3600.0
+        },
+        {
+          "name": "Spiro",
+          "peak": 3100.0
+        },
+        {
+          "name": "Tobias Great Bend Town",
+          "peak": 2000.0
+        },
+        {
+          "name": "Battle Mound",
+          "peak": 1650.0
+        }
+      ]
+    },
+    "mid_atlantic": {
+      "rel_dir": "2.united_states_hydrological_units/15.mid_atlantic",
+      "settlements_count": 115,
+      "ledger_candidates": 232,
+      "ledger_included": 115,
+      "ledger_excluded": 117,
+      "regions_count": 3,
+      "headline_start": [
+        -10000,
+        850
+      ],
+      "headline_end": [
+        1600,
+        173000
+      ],
+      "headline_peak": [
+        198000.0,
+        1500
+      ],
+      "top5_settlements": [
+        {
+          "name": "Schultz-Funk",
+          "peak": 2900.0
+        },
+        {
+          "name": "Caughnawaga-Mohawk",
+          "peak": 1650.0
+        },
+        {
+          "name": "Billmyer Susquehannock Town",
+          "peak": 1500.0
+        },
+        {
+          "name": "Murry",
+          "peak": 1500.0
+        },
+        {
+          "name": "Werowocomoco",
+          "peak": 1450.0
+        }
+      ]
+    },
+    "great_lakes": {
+      "rel_dir": "2.united_states_hydrological_units/16.great_lakes",
+      "settlements_count": 105,
+      "ledger_candidates": 214,
+      "ledger_included": 105,
+      "ledger_excluded": 109,
+      "regions_count": 3,
+      "headline_start": [
+        -10000,
+        250
+      ],
+      "headline_end": [
+        1600,
+        153500
+      ],
+      "headline_peak": [
+        164000.0,
+        1500
+      ],
+      "top5_settlements": [
+        {
+          "name": "Ganondagan",
+          "peak": 2600.0
+        },
+        {
+          "name": "Indian Hill (Onondaga)",
+          "peak": 2400.0
+        },
+        {
+          "name": "Onondaga",
+          "peak": 2400.0
+        },
+        {
+          "name": "Ripley",
+          "peak": 1650.0
+        },
+        {
+          "name": "Factory Hollow",
+          "peak": 1450.0
+        }
+      ]
+    },
+    "california": {
+      "rel_dir": "2.united_states_hydrological_units/17.california",
+      "settlements_count": 351,
+      "ledger_candidates": 730,
+      "ledger_included": 351,
+      "ledger_excluded": 379,
+      "regions_count": 4,
+      "headline_start": [
+        -10000,
+        1450
+      ],
+      "headline_end": [
+        1600,
+        336000
+      ],
+      "headline_peak": [
+        336000.0,
+        1600
+      ],
+      "top5_settlements": [
+        {
+          "name": "Tulare-Telamni",
+          "peak": 1800.0
+        },
+        {
+          "name": "Syuxtun",
+          "peak": 1550.0
+        },
+        {
+          "name": "Patwin-Koru",
+          "peak": 1300.0
+        },
+        {
+          "name": "Emeryville Shellmound",
+          "peak": 1200.0
+        },
+        {
+          "name": "Fairfield Suisun Marsh Capital",
+          "peak": 1080.0
+        }
+      ]
+    },
+    "northwest": {
+      "rel_dir": "2.united_states_hydrological_units/18.northwest",
+      "settlements_count": 198,
+      "ledger_candidates": 426,
+      "ledger_included": 198,
+      "ledger_excluded": 228,
+      "regions_count": 4,
+      "headline_start": [
+        -10000,
+        850
+      ],
+      "headline_end": [
+        1600,
+        209500
+      ],
+      "headline_peak": [
+        209500.0,
+        1600
+      ],
+      "top5_settlements": [
+        {
+          "name": "Oregon City Falls Capital",
+          "peak": 1820.0
+        },
+        {
+          "name": "Everett Port Gardner Metropolis",
+          "peak": 1780.0
+        },
+        {
+          "name": "Lapwai Council Capital",
+          "peak": 1780.0
+        },
+        {
+          "name": "Portland Willamette Capital",
+          "peak": 1720.0
+        },
+        {
+          "name": "Lewiston Clearwater Capital",
+          "peak": 1620.0
+        }
+      ]
+    },
+    "hawaii_and_american_polynesia": {
+      "rel_dir": "3.hawaii_and_american_polynesia/1.hawaii_and_american_polynesia",
+      "settlements_count": 216,
+      "ledger_candidates": 477,
+      "ledger_included": 216,
+      "ledger_excluded": 261,
+      "regions_count": 5,
+      "headline_start": [
+        -10000,
+        0
+      ],
+      "headline_end": [
+        1898,
+        130060
+      ],
+      "headline_peak": [
+        382200.0,
+        1778
+      ],
+      "top5_settlements": [
+        {
+          "name": "Honolulu",
+          "peak": 34200.0
+        },
+        {
+          "name": "Waikīkī",
+          "peak": 8500.0
+        },
+        {
+          "name": "Waipi'o Valley",
+          "peak": 6800.0
+        },
+        {
+          "name": "Kailua-Kona",
+          "peak": 6500.0
+        },
+        {
+          "name": "Lāhainā",
+          "peak": 6200.0
+        }
+      ]
+    },
+    "colonial_america_to_1754": {
+      "rel_dir": "4.colonial_america_and_canada/1.colonial_america_to_1754",
+      "settlements_count": 1225,
+      "ledger_candidates": 1524,
+      "ledger_included": 1225,
+      "ledger_excluded": 299,
+      "regions_count": 22,
+      "headline_start": [
+        1500,
+        2803500
+      ],
+      "headline_end": [
+        1754,
+        2433616
+      ],
+      "headline_peak": [
+        2803500.0,
+        1500
+      ],
+      "top5_settlements": [
+        {
+          "name": "New York",
+          "peak": 22000.0
+        },
+        {
+          "name": "Philadelphia",
+          "peak": 20500.0
+        },
+        {
+          "name": "Nanih Waiya",
+          "peak": 20000.0
+        },
+        {
+          "name": "Boston",
+          "peak": 17000.0
+        },
+        {
+          "name": "Charleston",
+          "peak": 7800.0
+        }
+      ]
+    },
+    "colonial_america_to_1783": {
+      "rel_dir": "4.colonial_america_and_canada/2.colonial_america_to_1783",
+      "settlements_count": 1485,
+      "ledger_candidates": 1791,
+      "ledger_included": 1485,
+      "ledger_excluded": 306,
+      "regions_count": 26,
+      "headline_start": [
+        1754,
+        2433616
+      ],
+      "headline_end": [
+        1783,
+        4074302
+      ],
+      "headline_peak": [
+        4074302.0,
+        1783
+      ],
+      "top5_settlements": [
+        {
+          "name": "Philadelphia",
+          "peak": 36000.0
+        },
+        {
+          "name": "New York",
+          "peak": 25000.0
+        },
+        {
+          "name": "Boston",
+          "peak": 16000.0
+        },
+        {
+          "name": "Litchfield",
+          "peak": 15053.0
+        },
+        {
+          "name": "Charleston",
+          "peak": 12500.0
+        }
+      ]
+    },
+    "colonial_canada_to_1763": {
+      "rel_dir": "4.colonial_america_and_canada/3.colonial_canada_to_1763",
+      "settlements_count": 1352,
+      "ledger_candidates": 1484,
+      "ledger_included": 1352,
+      "ledger_excluded": 132,
+      "regions_count": 8,
+      "headline_start": [
+        1500,
+        346500
+      ],
+      "headline_end": [
+        1763,
+        330512
+      ],
+      "headline_peak": [
+        346500.0,
+        1500
+      ],
+      "top5_settlements": [
+        {
+          "name": "Québec",
+          "peak": 9000.0
+        },
+        {
+          "name": "Montréal",
+          "peak": 6000.0
+        },
+        {
+          "name": "Louisbourg",
+          "peak": 5200.0
+        },
+        {
+          "name": "Halifax City NS",
+          "peak": 4000.0
+        },
+        {
+          "name": "Louisbourg Fortress Town",
+          "peak": 4000.0
+        }
+      ]
+    },
+    "colonial_canada_to_1867": {
+      "rel_dir": "4.colonial_america_and_canada/4.colonial_canada_to_1867",
+      "settlements_count": 1149,
+      "ledger_candidates": 1380,
+      "ledger_included": 1149,
+      "ledger_excluded": 231,
+      "regions_count": 12,
+      "headline_start": [
+        1763,
+        330312
+      ],
+      "headline_end": [
+        1867,
+        3644650
+      ],
+      "headline_peak": [
+        3644650.0,
+        1867
+      ],
+      "top5_settlements": [
+        {
+          "name": "Montréal",
+          "peak": 90300.0
+        },
+        {
+          "name": "Québec",
+          "peak": 51100.0
+        },
+        {
+          "name": "York Upper Canada",
+          "peak": 44821.0
+        },
+        {
+          "name": "Toronto",
+          "peak": 44800.0
+        },
+        {
+          "name": "St. John's",
+          "peak": 27500.0
+        }
+      ]
+    },
+    "canada_post_confederation": {
+      "rel_dir": "5.modern_canada_and_united_states/1.canada_post_confederation",
+      "settlements_count": 5882,
+      "ledger_candidates": 6040,
+      "ledger_included": 5882,
+      "ledger_excluded": 158,
+      "regions_count": 15,
+      "headline_start": [
+        1867,
+        3648350
+      ],
+      "headline_end": [
+        2026,
+        41860707
+      ],
+      "headline_peak": [
+        41860707.0,
+        2026
+      ],
+      "top5_settlements": [
+        {
+          "name": "Toronto",
+          "peak": 3342996.0
+        },
+        {
+          "name": "Montréal",
+          "peak": 1952063.0
+        },
+        {
+          "name": "Calgary",
+          "peak": 1661219.0
+        },
+        {
+          "name": "Edmonton",
+          "peak": 1275444.0
+        },
+        {
+          "name": "Ottawa",
+          "peak": 1223757.0
+        }
+      ]
+    },
+    "united_states_post_independence": {
+      "rel_dir": "5.modern_canada_and_united_states/2.united_states_post_independence",
+      "settlements_count": 36950,
+      "ledger_candidates": 38969,
+      "ledger_included": 36950,
+      "ledger_excluded": 2019,
+      "regions_count": 53,
+      "headline_start": [
+        1783,
+        4375088
+      ],
+      "headline_end": [
+        2026,
+        344674486
+      ],
+      "headline_peak": [
+        344674486.0,
+        2026
+      ],
+      "top5_settlements": [
+        {
+          "name": "New York",
+          "peak": 8740306.0
+        },
+        {
+          "name": "Los Angeles",
+          "peak": 3982885.0
+        },
+        {
+          "name": "Chicago",
+          "peak": 3620962.0
+        },
+        {
+          "name": "Houston",
+          "peak": 2468479.0
+        },
+        {
+          "name": "Philadelphia",
+          "peak": 2071605.0
+        }
+      ]
+    }
+  }
+}
