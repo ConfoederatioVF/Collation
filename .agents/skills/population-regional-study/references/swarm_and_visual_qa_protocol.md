@@ -41,12 +41,14 @@ Never waste LLM tokens on bulk deterministic parsing, and never skip human-knowl
 Before mutating `Dataview/data/stadester/stadester_2.0/city_metadata.json` (remember `stadester_1.0` and `stadester_1.1` keep their own isolated `city_metadata.json`!):
 
 1. **Foreign-Script Spam Guard (`merge_city_metadata.js` & `viscount_skill_profiles.json5`)**:
-   - Exclude non-local Cyrillic, Arabic, Indic, Thai or CJK `other_names` spam on cities in purely Latin-script jurisdictions across all `14` macro-regions (configured in [viscount_skill_profiles.json5](file:///F:/Active%20Projects/Project%201509%20-%20SVEA/.agents/skills/population-regional-study/config/viscount_skill_profiles.json5)), whilst preserving authentic indigenous, multi-script and colonial exonyms where jurisdictions are multi-script.
-2. **Entity Identity Protection against Suburb & Annex Hijacks**:
+   - Exclude non-local Cyrillic, Arabic, Indic, Thai or CJK `other_names` spam on cities in purely Latin-script jurisdictions across all `14` macro-regions (configured in [viscount_skill_profiles.json5](file:///F:/Active%20Projects/Project%201509%20-%20SVEA/.agents/skills/population-regional-study/config/viscount_skill_profiles.json5)), including US border towns below `32,4°N`, whilst preserving authentic Russian Chukotka Cyrillic records (`lng < -168,98, lat > 64,0`) as well as indigenous, multi-script and colonial exonyms in multi-script jurisdictions.
+2. **Entity Identity Protection against Suburb, Annex & Intra-Project Self-Merges**:
    - Never rename an active modern primary city after a smaller merged/subordinate suburb or annexed municipality (`Pittsburgh -> Allegheny`, `Watsonville -> Pajaro`):
+     - In `stadester_uud.js` (`initialiseUUD`), NEVER merge two distinct settlements already belonging to the same `viscount_project` (`ViscountGazetteerLoader` handles intra-project deduplication; cross-radius UUD merges would otherwise collapse neighbouring towns like `Provincetown -> Truro` across township aliases).
+     - Harmonise `*-United States` `populstat` duplicates onto canonical `<Name>-<State>` keys (except `Washington-United States`).
      - Primary `.name` overwrites when stems differ require `<= 1,0 km` tolerance AND an explicitly corrupted source name.
-     - Cross-language historical romanisation equivalences (`Peking <-> Beijing`, `Bombay <-> Mumbai`, `Constantinople <-> Istanbul`, `Oskemen <-> Ust-Kamenogorsk`) are whitelisted in `viscount_skill_profiles.json5` so legitimate historical re-romanisations never trigger false hijack failures.
-     - Terminal Modern Name Anchor (`>= 1950` / `>= 1995`): preserve the canonical base primary `.name` rather than retrofitting a merged locality name or appending `_viscount_regional`.
+     - Cross-language historical romanisation equivalences (`Peking <-> Beijing`, `Bombay <-> Mumbai`, `Constantinople <-> Istanbul`, `Oskemen <-> Ust-Kamenogorsk`, `Alluitsoq <-> Lichtenau`) are whitelisted in `viscount_skill_profiles.json5` so legitimate historical re-romanisations never trigger false hijack failures.
+     - Terminal Modern Name Anchor (`>= 1950` / `>= 1995`): whenever an Indigenous settlement temporarily carried a colonial name (`Port Simpson` -> `Lax Kw'alaams`, `Friendly Cove` -> `Yuquot`, `Godthåb` -> `Nuuk`, `Barrow` -> `Utqiaġvik`), record the modern Indigenous restoration entry (`>= 1950` date) at the end of `historical_names` so Dataview's `stadester_metadata.ts` resolves the modern endonym cleanly without Signature B reversion. Preserve canonical base primary `.name` without `_viscount_regional`.
 3. **Post-Index Integrity & Annual Continuity Check (`Gatekeeper F`)**:
    - `verify_downstream_ci_cd.js --project=<KEY>` inspects both `stadester_2.0_indexed.json` AND annual `getCitiesAtYear(yr)` coverage across the region's `annual_continuity_span` (`<= 3,0%` YoY step outside `border_splice_years`), verifying:
      - `0` `_viscount_regional` keys and `0` orphaned explicitly-tagged `city_metadata.json` records.
@@ -61,7 +63,7 @@ Quantitative CSV/JSON metrics alone cannot confirm cartographic quality or PDF l
 
 1. **Kriging & Population Surface Verification (`Gatekeeper C3`)**:
    - Run `python .agents/skills/population-regional-study/scripts/render_and_audit_kriging_visuals.py <domain_dir> --render-only`.
-   - Call `read_file` on EVERY generated PNG inside `<domain_dir>/diagnostics_visual/`.
+   - Call `read_file` on EVERY generated PNG inside `<domain_dir>/diagnostics_visual/` (both raw kriging sheets `01..05` and the compiled `06_velkscala_<project>_verification.png` composite once Stage E Velkscala completes).
    - Confirm visually:
      - Sharp fluvial corridors, valleys, coasts and elevation ridges (zero blurry Voronoi blobs).
      - Seamless cross-border continuity (zero hard modern border cliffs or rectangular mosaic tiles).

@@ -76,6 +76,11 @@
     try {
       if (stadester_obj["Washington-United States"])
         stadester_obj["Washington-United States"].coords = [38.906727075772245, -77.0366352170292];
+      if (stadester_obj["New York-New York"]) {
+        stadester_obj["New York-New York"].coords = [40.7128, -74.0060];
+        if (Array.isArray(stadester_obj["New York-New York"].other_names))
+          stadester_obj["New York-New York"].other_names = stadester_obj["New York-New York"].other_names.filter(function (arg0_n) { return arg0_n !== "Brooklyn"; });
+      }
 
       //Aachen, Germany geolocation fix (Buringh raw coords point to Bergisch Gladbach)
       if (stadester_obj["Aachen-Germany"])
@@ -147,6 +152,91 @@
         if (m_city.population) m_city.population["-999"] = 0;
         m_city._raw_lapsed = true;
       }
+
+      if (stadester_obj["Kahului-Hawaii"])
+        stadester_obj["Kahului-Hawaii"].coords = [20.8893, -156.4729];
+
+      if (stadester_obj["Merrimack-New Hampshire"] && stadester_obj["East Merrimack-New Hampshire"]) {
+        let merr = stadester_obj["Merrimack-New Hampshire"];
+        let emerr = stadester_obj["East Merrimack-New Hampshire"];
+        if (!Array.isArray(merr.other_names)) merr.other_names = [];
+        if (!merr.other_names.includes("East Merrimack")) merr.other_names.push("East Merrimack");
+        if (Array.isArray(emerr.other_names)) {
+          for (let ei = 0; ei < emerr.other_names.length; ei++)
+            if (emerr.other_names[ei] && !merr.other_names.includes(emerr.other_names[ei]))
+              merr.other_names.push(emerr.other_names[ei]);
+        }
+        delete stadester_obj["East Merrimack-New Hampshire"];
+      }
+
+      if (stadester_obj["Allegheny-Pennsylvania"]) {
+        let all_pa = stadester_obj["Allegheny-Pennsylvania"];
+        all_pa.coords = [40.4564, -80.0088];
+        truncateCityYears(all_pa, (yr) => yr > 1907);
+        if (all_pa.population) {
+          let all_yrs = Object.keys(all_pa.population).map(Number).filter(n => !isNaN(n) && Number(all_pa.population[n]) > 0).sort((a, b) => a - b);
+          all_pa._raw_max_year = (all_yrs.length > 0) ? all_yrs[all_yrs.length - 1] : null;
+        }
+      }
+
+      if (stadester_obj["Allegheny Center (Pittsburgh)-Pennsylvania"]) {
+        let ac_pa = stadester_obj["Allegheny Center (Pittsburgh)-Pennsylvania"];
+        let target_pa = stadester_obj["Allegheny-Pennsylvania"] || stadester_obj["Pittsburgh-Pennsylvania"];
+        if (target_pa) {
+          if (!Array.isArray(target_pa.other_names)) target_pa.other_names = [];
+          if (!target_pa.other_names.includes("Allegheny Center")) target_pa.other_names.push("Allegheny Center");
+          if (Array.isArray(ac_pa.other_names)) {
+            for (let ai = 0; ai < ac_pa.other_names.length; ai++)
+              if (ac_pa.other_names[ai] && !target_pa.other_names.includes(ac_pa.other_names[ai]))
+                target_pa.other_names.push(ac_pa.other_names[ai]);
+          }
+        }
+        delete stadester_obj["Allegheny Center (Pittsburgh)-Pennsylvania"];
+      }
+
+      //POLARIS: Clean up Murmansk-Russia empty-population UUD ghost onto Romanov-on-Murman-Russia
+      if (stadester_obj["Murmansk-Russia"] && stadester_obj["Romanov-on-Murman-Russia"]) {
+        let mur_empty = stadester_obj["Murmansk-Russia"];
+        let mur_pop = mur_empty.population || {};
+        let has_pos_mur = Object.keys(mur_pop).some(function (arg0_y) { return Number(mur_pop[arg0_y]) > 0; });
+        if (!has_pos_mur) {
+          let rom_mur = stadester_obj["Romanov-on-Murman-Russia"];
+          if (!Array.isArray(rom_mur.other_names)) rom_mur.other_names = [];
+          if (!rom_mur.other_names.includes("Murmansk")) rom_mur.other_names.push("Murmansk");
+          delete stadester_obj["Murmansk-Russia"];
+        }
+      }
+
+      //POLARIS: Separate Khazar capital Samandar/Semender (<=1050AD) from modern Makhachkala suburb Semender-Russia (>=1648AD)
+      if (stadester_obj["Semender-Russia"] && stadester_obj["Semender-Russia"].population) {
+        let sem_mod = stadester_obj["Semender-Russia"];
+        if (Number(sem_mod.population["1648"]) > 0 && Number(sem_mod.population["700"]) > 5000) {
+          if (!stadester_obj["Semender Khazar Capital-Russia"]) {
+            let kh_pop = {};
+            let sem_yrs = Object.keys(sem_mod.population);
+            for (let sy = 0; sy < sem_yrs.length; sy++) {
+              let yr_n = parseInt(sem_yrs[sy], 10);
+              if (Number.isFinite(yr_n) && yr_n <= 1050 && Number(sem_mod.population[sem_yrs[sy]]) > 0)
+                kh_pop[sem_yrs[sy]] = Math.round(Number(sem_mod.population[sem_yrs[sy]]));
+            }
+            if (Object.keys(kh_pop).length >= 2) {
+              stadester_obj["Semender Khazar Capital-Russia"] = {
+                coords: [42.94423, 47.49527],
+                country: "Russia",
+                key: "Semender Khazar Capital-Russia",
+                name: "Semender (Khazar Capital)",
+                other_names: ["Samandar", "Khazar Samandar"],
+                population: kh_pop,
+                sources: ["POLARIS"],
+                viscount_project: "POLARIS"
+              };
+            }
+          }
+          truncateCityYears(sem_mod, function (arg0_yr) { return arg0_yr < 1648; });
+          sem_mod["found.yr"] = 1648;
+          sem_mod.foundation_year = 1648;
+        }
+      }
     } catch (e) {
       console.warn(e);
     }
@@ -194,6 +284,132 @@
           let s = String(arg0_a || "").trim();
           return s && !foreign_script_re.test(s) && !/^ist\s+pitc/i.test(s);
         });
+      }
+    }
+
+    //Post-merge sweep across stadester_obj to eliminate remaining *-United States duplicates
+    let cur_keys = Object.keys(stadester_obj);
+    let viscount_state_entries = [];
+
+    for (let i = 0; i < cur_keys.length; i++) {
+      let v_city = stadester_obj[cur_keys[i]];
+      if (!v_city || typeof v_city !== "object" || !Array.isArray(v_city.coords) || v_city.coords.length < 2) continue;
+      if (!population_Stadester_uud.hasViscountSource(v_city)) continue;
+      if (v_city.country === "United States" || v_city.country === "United States of America") continue;
+      if (typeof population_Stadester_uud.isUSCountryOrState === "function" && population_Stadester_uud.isUSCountryOrState(v_city.country))
+        viscount_state_entries.push(v_city);
+    }
+
+    for (let i = 0; i < cur_keys.length; i++) {
+      let c_key = cur_keys[i];
+      let city = stadester_obj[c_key];
+      if (!city || typeof city !== "object" || !Array.isArray(city.coords) || city.coords.length < 2) continue;
+      if (c_key === "Washington-United States") continue;
+      if (city.country !== "United States" && city.country !== "United States of America") continue;
+      if (population_Stadester_uud.hasViscountSource(city)) continue;
+
+      let best_dist = 30.0;
+      let best_target = null;
+      let city_name_prim = (typeof population_Stadester_uud.processCityName === "function") ?
+        population_Stadester_uud.processCityName(city.name) : String(city.name || "").toLowerCase();
+
+      for (let x = 0; x < viscount_state_entries.length; x++) {
+        let v_entry = viscount_state_entries[x];
+        let v_name_prim = (typeof population_Stadester_uud.processCityName === "function") ?
+          population_Stadester_uud.processCityName(v_entry.name) : String(v_entry.name || "").toLowerCase();
+        if (
+          (city_name_prim === "brooklyn" && (v_name_prim === "new york" || v_name_prim === "new york city")) ||
+          (v_name_prim === "brooklyn" && (city_name_prim === "new york" || city_name_prim === "new york city"))
+        ) {
+          continue;
+        }
+        let d_km = population_Stadester_uud.haversineDistance(city.coords, v_entry.coords);
+        if (d_km <= best_dist) {
+          let is_match = (typeof population_Stadester_uud.checkExactNameMatch === "function") ?
+            population_Stadester_uud.checkExactNameMatch(city, v_entry) : (city.name === v_entry.name);
+          if (is_match) {
+            best_dist = d_km;
+            best_target = v_entry;
+          }
+        }
+      }
+
+      if (best_target) {
+        let v_yrs = Object.keys(best_target.population || {}).map(Number).filter(function (arg0_n) {
+          return Number.isFinite(arg0_n) && Number(best_target.population[arg0_n]) > 0;
+        }).sort(function (arg0_a, arg1_b) { return arg0_a - arg1_b; });
+        let min_viscount_yr = (v_yrs.length > 0) ? v_yrs[0] : Infinity;
+        let found_yr = Number(best_target["found.yr"] !== undefined ? best_target["found.yr"] : (best_target.foundation_year !== undefined ? best_target.foundation_year : (city["found.yr"] !== undefined ? city["found.yr"] : city.foundation_year)));
+        if (!Number.isFinite(found_yr)) found_yr = -Infinity;
+
+        if (city.population) {
+          if (!best_target.population) best_target.population = {};
+          let c_yrs = Object.keys(city.population);
+          for (let y = 0; y < c_yrs.length; y++) {
+            let yr_num = parseInt(c_yrs[y], 10);
+            let val = Number(city.population[c_yrs[y]]);
+            if (Number.isFinite(yr_num) && Number.isFinite(val) && val > 0) {
+              if (yr_num >= found_yr && yr_num < min_viscount_yr && best_target.population[c_yrs[y]] === undefined)
+                best_target.population[c_yrs[y]] = val;
+            }
+          }
+        }
+
+        if (!best_target.other_names) best_target.other_names = [];
+        if (city.name && city.name !== best_target.name && !best_target.other_names.includes(city.name))
+          best_target.other_names.push(city.name);
+        if (Array.isArray(city.other_names)) {
+          for (let on = 0; on < city.other_names.length; on++) {
+            let on_name = city.other_names[on];
+            if (on_name && on_name !== best_target.name && !best_target.other_names.includes(on_name))
+              best_target.other_names.push(on_name);
+          }
+        }
+
+        if (Number.isFinite(found_yr) && (best_target["found.yr"] === undefined || found_yr < Number(best_target["found.yr"]))) {
+          best_target["found.yr"] = found_yr;
+          best_target.foundation_year = found_yr;
+        }
+
+        population_Stadester_uud.appendCitySources(best_target, city.sources || city.type);
+        if (best_target.name === "New York" && best_target.country === "New York") {
+          best_target.coords = [40.7128, -74.0060];
+          if (Array.isArray(best_target.other_names))
+            best_target.other_names = best_target.other_names.filter(function (arg0_n) { return arg0_n !== "Brooklyn"; });
+        }
+        delete stadester_obj[c_key];
+      }
+    }
+
+    //Enforce foundation_year pruning: delete every population key with Number(yr) < found_yr
+    all_cities = Object.keys(stadester_obj);
+    for (let i = 0; i < all_cities.length; i++) {
+      let city = stadester_obj[all_cities[i]];
+      if (!city || !city.population) continue;
+      let found_yr = Number(city["found.yr"] !== undefined ? city["found.yr"] : city.foundation_year);
+      if (Number.isFinite(found_yr) && found_yr > 2026) {
+        found_yr = (found_yr >= 100000 && found_yr <= 202699) ? Math.floor(found_yr/100) : NaN;
+        if (Number.isFinite(found_yr)) {
+          city["found.yr"] = found_yr;
+          city.foundation_year = found_yr;
+        } else {
+          delete city["found.yr"];
+          delete city.foundation_year;
+        }
+      }
+      if (Number.isFinite(found_yr)) {
+        let p_keys = Object.keys(city.population);
+        for (let x = 0; x < p_keys.length; x++) {
+          let yr_num = parseInt(p_keys[x], 10);
+          if (Number.isFinite(yr_num) && yr_num < found_yr)
+            delete city.population[p_keys[x]];
+        }
+        if (Number.isFinite(city._raw_min_year) && city._raw_min_year < found_yr) {
+          let rem_yrs = Object.keys(city.population).map(Number).filter(function (arg0_n) {
+            return Number.isFinite(arg0_n) && Number(city.population[arg0_n]) > 0;
+          }).sort(function (arg0_a, arg1_b) { return arg0_a - arg1_b; });
+          city._raw_min_year = (rem_yrs.length > 0) ? rem_yrs[0] : null;
+        }
       }
     }
 
@@ -520,6 +736,16 @@
         for (let c = 0; c < clusters_in_cell.length; c++) {
           let leader_entry = clusters_in_cell[c];
           let leader_city = leader_entry.city;
+          let name_lead_prim = (typeof population_Stadester_uud.processCityName === "function") ?
+            population_Stadester_uud.processCityName(leader_city.name || "") : String(leader_city.name || "").toLowerCase();
+          let name_cand_prim = (typeof population_Stadester_uud.processCityName === "function") ?
+            population_Stadester_uud.processCityName(candidate_city.name || "") : String(candidate_city.name || "").toLowerCase();
+          if (
+            (name_cand_prim === "brooklyn" && (name_lead_prim === "new york" || name_lead_prim === "new york city")) ||
+            (name_lead_prim === "brooklyn" && (name_cand_prim === "new york" || name_cand_prim === "new york city"))
+          ) {
+            continue;
+          }
           let is_same_name = population_Stadester_uud.checkExactNameMatch(leader_city, candidate_city);
           if (is_same_name) {
             let lead_yrs = Object.keys(leader_city.population).map(Number).filter(n => !isNaN(n) && Number(leader_city.population[n]) > 0).sort((a, b) => a - b);

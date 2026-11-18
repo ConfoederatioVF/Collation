@@ -58,6 +58,113 @@
 
 
   /**
+   * Normalises Western European and North American city names (punctuation, accents,
+   * Saint/St./Sainte abbreviations, and trailing province/district tags).
+   * @alias population_Stadester_uud.normaliseWesternName
+   *
+   * @param {string} arg0_name
+   *
+   * @returns {string}
+   */
+  population_Stadester_uud.normaliseWesternName = function (arg0_name) {
+    //Convert from parameters
+    let name = population_Stadester_uud.processCityName(arg0_name);
+
+    //Declare local instance variables
+    let norm;
+
+    //Guard clauses
+    if (!name) return "";
+
+    //Function body
+    norm = name
+      .replace(/-(?:on|qc|nb|ns|pe|pei|nl|mb|sk|ab|bc|yt|nt|nu|kujalleq|kona|kohala|kaua['’ʻ]?i)$/, "")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/['’`´ʻʼ]/g, "")
+      .replace(/[-.,/]/g, " ")
+      .replace(/\bste\b/g, "sainte")
+      .replace(/\bst\b/g, "saint")
+      .replace(/\s+/g, " ")
+      .trim();
+
+    //Return statement
+    return norm;
+  };
+
+
+  population_Stadester_uud.us_states = [
+    "Alabama", "Alaska", "American Samoa", "Arizona", "Arkansas", "California",
+    "Colorado", "Connecticut", "Delaware", "District of Columbia", "Florida",
+    "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas",
+    "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan",
+    "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada",
+    "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina",
+    "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Puerto Rico",
+    "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas",
+    "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"
+  ];
+
+
+  /**
+   * Checks whether a given country string represents the United States (country-level) or a US state/territory.
+   * @alias population_Stadester_uud.isUSCountryOrState
+   *
+   * @param {string} arg0_country
+   *
+   * @returns {boolean}
+   */
+  population_Stadester_uud.isUSCountryOrState = function (arg0_country) {
+    //Convert from parameters
+    let country = (arg0_country) ? String(arg0_country).toLowerCase().trim() : "";
+
+    //Declare local instance variables
+    let us_aliases = ["united states", "united states of america", "usa", "uniteds"];
+
+    //Guard clauses
+    if (!country) return false;
+    if (us_aliases.includes(country)) return true;
+
+    //Function body
+    for (let i = 0; i < population_Stadester_uud.us_states.length; i++)
+      if (country === population_Stadester_uud.us_states[i].toLowerCase()) return true;
+
+    //Return statement
+    return false;
+  };
+
+
+  /**
+   * Checks whether two jurisdictions are compatible US entities (e.g. "United States" and "New York").
+   * @alias population_Stadester_uud.areCompatibleUSCountries
+   *
+   * @param {string} arg0_country_a
+   * @param {string} arg1_country_b
+   *
+   * @returns {boolean}
+   */
+  population_Stadester_uud.areCompatibleUSCountries = function (arg0_country_a, arg1_country_b) {
+    //Convert from parameters
+    let c_a = (arg0_country_a) ? String(arg0_country_a).toLowerCase().trim() : "";
+    let c_b = (arg1_country_b) ? String(arg1_country_b).toLowerCase().trim() : "";
+
+    //Guard clauses
+    if (!c_a || !c_b) return false;
+    if (c_a === c_b) return true;
+
+    //Function body
+    let is_us_a = (c_a === "united states" || c_a === "united states of america" || c_a === "usa" || c_a === "uniteds");
+    let is_us_b = (c_b === "united states" || c_b === "united states of america" || c_b === "usa" || c_b === "uniteds");
+
+    if (is_us_a && population_Stadester_uud.isUSCountryOrState(c_b)) return true;
+    if (is_us_b && population_Stadester_uud.isUSCountryOrState(c_a)) return true;
+
+    //Return statement
+    return false;
+  };
+
+
+  /**
    * Normalises and cleans city names for fuzzy semantic matching.
    * @alias population_Stadester_uud.processCityName
    * 
@@ -252,13 +359,28 @@
     //Declare local instance variables
     let c_a = (city_a && city_a.country) ? String(city_a.country).toLowerCase().trim() : "";
     let c_b = (city_b && city_b.country) ? String(city_b.country).toLowerCase().trim() : "";
+    let key_a = (city_a && city_a.key) ? String(city_a.key).toLowerCase() : "";
+    let key_b = (city_b && city_b.key) ? String(city_b.key).toLowerCase() : "";
+    let name_a_prim = (city_a && city_a.name) ? population_Stadester_uud.processCityName(city_a.name) : "";
+    let name_b_prim = (city_b && city_b.name) ? population_Stadester_uud.processCityName(city_b.name) : "";
     let names_a = population_Stadester_uud.getAllCityNames(city_a);
     let names_b = population_Stadester_uud.getAllCityNames(city_b);
     let slavic_countries = [
       "belarus", "bulgaria", "estonia", "finland", "kazakhstan", "latvia",
       "lithuania", "moldova", "poland", "russia", "serbia", "ukraine", "ussr"
     ];
+
+    //Guard clauses: Brooklyn-New York is a distinct historical entity before 1898 and must NEVER match New York
+    if (
+      (name_a_prim === "brooklyn" && (name_b_prim === "new york" || name_b_prim === "new york city")) ||
+      (name_b_prim === "brooklyn" && (name_a_prim === "new york" || name_a_prim === "new york city")) ||
+      (key_a.startsWith("brooklyn-") && key_b.startsWith("new york-")) ||
+      (key_b.startsWith("brooklyn-") && key_a.startsWith("new york-"))
+    ) {
+      return false;
+    }
     
+    //Function body
     for (let x = 0; x < names_a.length; x++)
       for (let y = 0; y < names_b.length; y++)
         if (names_a[x] && names_a[x] === names_b[y]) return true;
@@ -305,6 +427,33 @@
             return true;
         }
       }
+    }
+
+    let has_west_close_coords = Boolean(
+      city_a && city_b && Array.isArray(city_a.coords) && Array.isArray(city_b.coords) &&
+      typeof population_Stadester_uud.haversineDistance === "function" &&
+      population_Stadester_uud.haversineDistance(city_a.coords, city_b.coords) <= 25
+    );
+    let is_compat_west_country = (
+      (c_a && c_a === c_b) ||
+      c_a === "united states" ||
+      c_b === "united states" ||
+      c_a === "united states of america" ||
+      c_b === "united states of america" ||
+      (typeof population_Stadester_uud.areCompatibleUSCountries === "function" &&
+        population_Stadester_uud.areCompatibleUSCountries(c_a, c_b)) ||
+      (
+        typeof population_Stadester_ghsl !== "undefined" &&
+        typeof population_Stadester_ghsl.areCompatibleTwinCountries === "function" &&
+        population_Stadester_ghsl.areCompatibleTwinCountries(city_a && city_a.country, city_b && city_b.country)
+      )
+    );
+    if (has_west_close_coords && is_compat_west_country) {
+      let w_a = names_a.map(population_Stadester_uud.normaliseWesternName).filter(function (arg0_s) { return arg0_s.length >= 3; });
+      let w_b = names_b.map(population_Stadester_uud.normaliseWesternName).filter(function (arg0_s) { return arg0_s.length >= 3; });
+      for (let x = 0; x < w_a.length; x++)
+        for (let y = 0; y < w_b.length; y++)
+          if (w_a[x] === w_b[y]) return true;
     }
     
     //Return statement
@@ -777,9 +926,9 @@
       if (typeof addToGrid === "function") addToGrid(actual_city);
     }
 
-    //2. Absorb duplicate non-POLARIS non-agglomeration same-country twin within 5 km
+    //2. Absorb duplicate non-POLARIS non-agglomeration same-country twin within 5 km (25 km for US entities)
     if (typeof getGridCells === "function" && city_grid) {
-      peer_cells = getGridCells(actual_city.coords, 0.15);
+      peer_cells = getGridCells(actual_city.coords, 0.28);
       for (let pc = 0; pc < peer_cells.length; pc++) {
         let pset = city_grid.get(peer_cells[pc]);
         if (!pset) continue;
@@ -789,7 +938,17 @@
           let peer = return_obj[pk];
           if (!peer || peer === actual_city || (typeof isAgglomeration === "function" && isAgglomeration(peer))) continue;
           if (typeof population_Stadester_uud.hasViscountSource === "function" && population_Stadester_uud.hasViscountSource(peer)) continue;
+          let is_us_pair = Boolean(
+            (typeof population_Stadester_uud.areCompatibleUSCountries === "function" &&
+              population_Stadester_uud.areCompatibleUSCountries(peer.country, actual_city.country)) ||
+            (
+              (peer.country === "United States" || peer.country === "United States of America") &&
+              typeof population_Stadester_uud.isUSCountryOrState === "function" &&
+              population_Stadester_uud.isUSCountryOrState(actual_city.country)
+            )
+          );
           let same_or_compat_country = (peer.country === actual_city.country) ||
+            is_us_pair ||
             (
               peer.country === "United States" &&
               typeof population_Stadester_uud.isCompleteViscountCountry === "function" &&
@@ -801,7 +960,18 @@
               population_Stadester_ghsl.areCompatibleTwinCountries(peer.country, actual_city.country)
             );
           if (!same_or_compat_country) continue;
-          if (!Array.isArray(peer.coords) || population_Stadester_uud.haversineDistance(actual_city.coords, peer.coords) > 5) continue;
+          let max_twin_dist = is_us_pair ? 25 : 5;
+          if (!Array.isArray(peer.coords) || population_Stadester_uud.haversineDistance(actual_city.coords, peer.coords) > max_twin_dist) continue;
+          let name_act_prim = (typeof population_Stadester_uud.processCityName === "function") ?
+            population_Stadester_uud.processCityName(actual_city.name || "") : String(actual_city.name || "").toLowerCase();
+          let name_peer_prim = (typeof population_Stadester_uud.processCityName === "function") ?
+            population_Stadester_uud.processCityName(peer.name || "") : String(peer.name || "").toLowerCase();
+          if (
+            (name_act_prim === "brooklyn" && (name_peer_prim === "new york" || name_peer_prim === "new york city")) ||
+            (name_peer_prim === "brooklyn" && (name_act_prim === "new york" || name_act_prim === "new york city"))
+          ) {
+            continue;
+          }
           if (!population_Stadester_uud.checkExactNameMatch(actual_city, peer)) continue;
           if (!actual_city.other_names) actual_city.other_names = [];
           if (peer.name && peer.name !== actual_city.name && !actual_city.other_names.includes(peer.name))
@@ -811,16 +981,23 @@
               if (peer.other_names[pn] && peer.other_names[pn] !== actual_city.name && !actual_city.other_names.includes(peer.other_names[pn]))
                 actual_city.other_names.push(peer.other_names[pn]);
           }
+          let act_found_yr = Number(actual_city["found.yr"] !== undefined ? actual_city["found.yr"] : actual_city.foundation_year);
+          if (!Number.isFinite(act_found_yr)) act_found_yr = -Infinity;
           if (peer.population && Number.isFinite(min_pol_yr_for_cut)) {
             let cut_p = Math.min(1897, min_pol_yr_for_cut);
             let pyrs = Object.keys(peer.population);
             for (let pi = 0; pi < pyrs.length; pi++) {
               let pyr_n = parseInt(pyrs[pi], 10);
-              if (Number.isFinite(pyr_n) && pyr_n < cut_p && actual_city.population[pyrs[pi]] === undefined)
+              if (Number.isFinite(pyr_n) && pyr_n >= act_found_yr && pyr_n < cut_p && actual_city.population[pyrs[pi]] === undefined)
                 actual_city.population[pyrs[pi]] = peer.population[pyrs[pi]];
             }
           }
           population_Stadester_uud.appendCitySources(actual_city, peer.sources);
+          if (actual_city.name === "New York" && (actual_city.country === "New York" || actual_city.country === "United States")) {
+            actual_city.coords = [40.7128, -74.0060];
+            if (Array.isArray(actual_city.other_names))
+              actual_city.other_names = actual_city.other_names.filter(function (arg0_n) { return arg0_n !== "Brooklyn"; });
+          }
           pset.delete(pk);
           delete return_obj[pk];
         }

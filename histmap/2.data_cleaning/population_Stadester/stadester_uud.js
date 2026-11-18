@@ -414,7 +414,9 @@
       { name: "Pittsburgh", ot_name: "Allegheny" },
       { name: "Pittsburgh", ot_name: "Allegheny City" },
       { name: "St. Louis", ot_name: "Cahokia" },
-      { name: "Saint Louis", ot_name: "Cahokia" }
+      { name: "Saint Louis", ot_name: "Cahokia" },
+      { name: "New York", ot_name: "Brooklyn" },
+      { name: "New York City", ot_name: "Brooklyn" }
     ];
     let city_grid = new Map();
     let max_explicit_precision = 0.1;
@@ -459,6 +461,22 @@
     }
     
     function isBlockedMerge(city_a, city_b) {
+      let name_a_prim = population_Stadester_uud.processCityName(city_a.name || "");
+      let name_b_prim = population_Stadester_uud.processCityName(city_b.name || "");
+      if (
+        (name_a_prim === "brooklyn" && (name_b_prim === "new york" || name_b_prim === "new york city")) ||
+        (name_b_prim === "brooklyn" && (name_a_prim === "new york" || name_a_prim === "new york city"))
+      ) {
+        return true;
+      }
+      let key_a = (city_a && city_a.key) ? String(city_a.key).toLowerCase() : "";
+      let key_b = (city_b && city_b.key) ? String(city_b.key).toLowerCase() : "";
+      if (
+        (key_a.startsWith("brooklyn-") && key_b.startsWith("new york-")) ||
+        (key_b.startsWith("brooklyn-") && key_a.startsWith("new york-"))
+      ) {
+        return true;
+      }
       let names_a = population_Stadester_uud.getAllCityNames(city_a);
       let names_b = population_Stadester_uud.getAllCityNames(city_b);
       for (let i = 0; i < cannot_be_merged.length; i++) {
@@ -530,14 +548,31 @@
             let local_uud_city = return_obj[candidate_array[y]];
             if (local_db.is_polaris && !local_db.is_metro && isAgglomeration(local_uud_city))
               continue;
+            if (
+              local_db.is_polaris &&
+              local_uud_city &&
+              local_uud_city.viscount_project &&
+              local_city.viscount_project &&
+              local_uud_city.viscount_project === local_city.viscount_project &&
+              local_uud_city.key !== local_city.key
+            )
+              continue;
             if (local_uud_city && local_uud_city.coords && !isBlockedMerge(local_uud_city, local_city)) {
               let local_distance = population_Stadester_uud.getCoordsDistance(local_uud_city.coords, local_city.coords);
               let is_exact_name = population_Stadester_uud.checkExactNameMatch(local_uud_city, local_city);
+              let dist_km = (Array.isArray(local_uud_city.coords) && Array.isArray(local_city.coords)) ?
+                population_Stadester_uud.haversineDistance(local_uud_city.coords, local_city.coords) : Infinity;
+              let is_us_compat = (
+                dist_km <= 25 &&
+                typeof population_Stadester_uud.areCompatibleUSCountries === "function" &&
+                population_Stadester_uud.areCompatibleUSCountries(local_uud_city.country, local_city.country)
+              );
               let is_same_country = Boolean(
                 local_uud_city.country &&
                 local_city.country &&
                 (
                   local_uud_city.country === local_city.country ||
+                  is_us_compat ||
                   (typeof population_Stadester_ghsl !== "undefined" && typeof population_Stadester_ghsl.areCompatibleTwinCountries === "function" &&
                     population_Stadester_ghsl.areCompatibleTwinCountries(local_uud_city.country, local_city.country))
                 )
@@ -712,7 +747,14 @@
           if (local_db.is_polaris && !isAgglomeration(actual_city) && (!already_has_polaris || (local_city.polaris_priority || 1) >= 3)) {
             let actual_norm = population_Stadester_uud.processCityName(actual_city.name || "");
             let local_norm = population_Stadester_uud.processCityName(local_city.name || "");
-            let is_primary_label_same = Boolean(actual_norm && local_norm && actual_norm === local_norm);
+            let actual_west = (typeof population_Stadester_uud.normaliseWesternName === "function") ?
+              population_Stadester_uud.normaliseWesternName(actual_city.name || "") : actual_norm;
+            let local_west = (typeof population_Stadester_uud.normaliseWesternName === "function") ?
+              population_Stadester_uud.normaliseWesternName(local_city.name || "") : local_norm;
+            let is_primary_label_same = Boolean(
+              (actual_norm && local_norm && actual_norm === local_norm) ||
+              (actual_west && local_west && actual_west === local_west)
+            );
             let act_pop_yrs = Object.keys(actual_city.population || {}).map(Number).filter(function (arg0_n) { return Number.isFinite(arg0_n) && Number(actual_city.population[arg0_n]) > 0; });
             let loc_pop_yrs = Object.keys(local_city.population || {}).map(Number).filter(function (arg0_n) { return Number.isFinite(arg0_n) && Number(local_city.population[arg0_n]) > 0; });
             let act_latest_yr = act_pop_yrs.length > 0 ? Math.max.apply(null, act_pop_yrs) : -Infinity;
@@ -735,6 +777,37 @@
             if (can_take_canonical_identity && Array.isArray(local_city.coords) && local_city.coords.length >= 2) {
               actual_city.coords = [Number(local_city.coords[0]), Number(local_city.coords[1])];
               addToGrid(actual_city);
+            }
+            let is_us_rekey = Boolean(
+              (actual_city.country === "United States" || actual_city.country === "United States of America") &&
+              local_city.country &&
+              local_city.country !== actual_city.country &&
+              typeof population_Stadester_uud.isUSCountryOrState === "function" &&
+              population_Stadester_uud.isUSCountryOrState(local_city.country)
+            );
+            if (is_us_rekey) {
+              let is_washington = (actual_city.name === "Washington" || local_city.name === "Washington");
+              if (!is_washington) {
+                let old_key = actual_city.key;
+                let new_key = local_city.key;
+                actual_city.country = local_city.country;
+                if (old_key !== new_key) {
+                  delete return_obj[old_key];
+                  if (city_grid && Array.isArray(actual_city.coords)) {
+                    let old_cell = `${Math.floor(Number(actual_city.coords[0]))},${Math.floor(Number(actual_city.coords[1]))}`;
+                    if (city_grid.has(old_cell)) city_grid.get(old_cell).delete(old_key);
+                  }
+                  actual_city.key = new_key;
+                  return_obj[new_key] = actual_city;
+                  addToGrid(actual_city);
+                }
+              }
+            }
+            if (actual_city.name === "New York" && (actual_city.country === "New York" || actual_city.country === "United States")) {
+              actual_city.coords = [40.7128, -74.0060];
+              addToGrid(actual_city);
+              if (Array.isArray(actual_city.other_names))
+                actual_city.other_names = actual_city.other_names.filter(function (arg0_n) { return arg0_n !== "Brooklyn"; });
             }
             if (typeof population_Stadester_uud.absorbSecondaryNonPolarisTwins === "function")
               population_Stadester_uud.absorbSecondaryNonPolarisTwins(
@@ -907,6 +980,26 @@
       if (!local_city || !local_city.population) continue;
       
       //Record empirical span before interpolation if not already annotated
+      let found_yr = Number(local_city["found.yr"] !== undefined ? local_city["found.yr"] : local_city.foundation_year);
+      if (Number.isFinite(found_yr) && found_yr > 2026) {
+        found_yr = (found_yr >= 100000 && found_yr <= 202699) ? Math.floor(found_yr/100) : NaN;
+        if (Number.isFinite(found_yr)) {
+          local_city["found.yr"] = found_yr;
+          local_city.foundation_year = found_yr;
+        } else {
+          delete local_city["found.yr"];
+          delete local_city.foundation_year;
+        }
+      }
+      if (Number.isFinite(found_yr)) {
+        let ex_pop_keys = Object.keys(local_city.population);
+        for (let py = 0; py < ex_pop_keys.length; py++) {
+          let yr_n = parseInt(ex_pop_keys[py], 10);
+          if (Number.isFinite(yr_n) && yr_n < found_yr)
+            delete local_city.population[ex_pop_keys[py]];
+        }
+      }
+
       if (local_city._raw_max_year === undefined) {
         let all_yrs = Object.keys(local_city.population).map(Number).filter(n => !isNaN(n)).sort((a, b) => a - b);
         let pos_yrs = all_yrs.filter(y => Number(local_city.population[y]) > 0);
@@ -918,12 +1011,24 @@
       
       let valid_keys = Object.keys(local_city.population).filter(k => local_city.population[k] > 0);
       if (valid_keys.length >= 2) {
-        let missing_years = target_years.filter(y => local_city.population[y] === undefined);
+        let missing_years = target_years.filter(function (arg0_y) {
+          if (local_city.population[arg0_y] !== undefined) return false;
+          if (Number.isFinite(found_yr) && arg0_y < found_yr) return false;
+          return true;
+        });
         if (missing_years.length > 0) {
           if (options.mode === "cubic") {
             local_city.population = population_Stadester_uud.cubicSplineInterpolationObject(local_city.population, { years: missing_years });
           } else {
             local_city.population = population_Stadester_uud.linearInterpolationObject(local_city.population, { years: missing_years });
+          }
+        }
+        if (Number.isFinite(found_yr)) {
+          let post_keys = Object.keys(local_city.population);
+          for (let py = 0; py < post_keys.length; py++) {
+            let yr_n = parseInt(post_keys[py], 10);
+            if (Number.isFinite(yr_n) && yr_n < found_yr)
+              delete local_city.population[post_keys[py]];
           }
         }
       }

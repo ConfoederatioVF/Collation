@@ -170,7 +170,9 @@ def audit_single_mask(arg0_mask_path, arg1_opts=None):
   rs, cs = np.where(valid)
   bbox_area = int((int(rs.max()) - int(rs.min()) + 1) * (int(cs.max()) - int(cs.min()) + 1))
   bbox_fill = float(active_px) / max(1, bbox_area)
-  if active_px >= 100 and not has_micro_islands and bbox_fill > 0.96:
+  is_micro_sheet = has_micro_islands and active_px < 1500
+  is_admin1 = bool(opts.get("is_admin1", False))
+  if active_px >= 100 and not is_micro_sheet and not is_admin1 and bbox_fill > 0.96:
     errors.append(
       f"[GEOMETRY] Mask {os.path.basename(arg0_mask_path)} has rectangular box fill ratio {bbox_fill:.3f} (> 0.96); "
       "natural/conflict masks must follow watersheds, contours, ecotone boundaries or real GIS layers."
@@ -183,25 +185,29 @@ def audit_single_mask(arg0_mask_path, arg1_opts=None):
     cfg = load_json_or_json5(cfg_path)
     sub_list = []
     for k in ("regions", "subregions", "sub_regions", "zones"):
-      if isinstance(cfg.get(k), list):
-        sub_list = cfg.get(k)
+      val_k = cfg.get(k)
+      if isinstance(val_k, list):
+        sub_list = val_k
+        break
+      if isinstance(val_k, dict):
+        sub_list = [{"id": rk, **rv} for rk, rv in val_k.items() if isinstance(rv, dict)]
         break
     for sub in sub_list:
       if not isinstance(sub, dict):
         continue
-      rgb = sub.get("rgb") or sub.get("color")
+      rgb = sub.get("rgb") or sub.get("color") or sub.get("colour")
       if isinstance(rgb, list) and len(rgb) >= 3:
         m_sub = valid & (arr[:, :, 0] == int(rgb[0])) & (arr[:, :, 1] == int(rgb[1])) & (arr[:, :, 2] == int(rgb[2]))
         sub_px = int(m_sub.sum())
         if sub_px == 0:
           zero_rgb_regions.append(sub.get("id") or sub.get("name") or str(rgb))
-        elif sub_px >= 100 and not has_micro_islands:
+        elif sub_px >= 150 and not is_micro_sheet and not is_admin1:
           srs, scs = np.where(m_sub)
           sub_fill = float(sub_px) / max(1, int((srs.max() - srs.min() + 1) * (scs.max() - scs.min() + 1)))
-          if sub_fill > 0.96:
+          if sub_fill > 0.92:
             errors.append(
               f"[GEOMETRY] Sub-region {sub.get('id', rgb)!r} in {os.path.basename(arg0_mask_path)} "
-              f"has synthetic box fill ratio {sub_fill:.3f} (> 0.96)."
+              f"has synthetic box fill ratio {sub_fill:.3f} (> 0.92)."
             )
     if zero_rgb_regions:
       errors.append(
@@ -276,19 +282,23 @@ def audit_manifest(arg0_manifest_path, arg1_opts=None):
             f"[REGIME] {rname}: pre_admin_end ({rcfg['pre_admin_end']}) exceeds contemporary_start ({rcfg['contemporary_start']})."
           )
 
-  # Ordered compositing across specialist_masks + macro_mask
+  # Ordered compositing across specialist_masks + macro_mask + national_epoch_masks
   mask_items = list(manifest.get("specialist_masks") or [])
+  nat_items = list(manifest.get("national_epoch_masks") or [])
   macro = manifest.get("macro_mask")
-  ordered = [(m, False) for m in mask_items if isinstance(m, dict)]
+  ordered = [(m, False, "specialist") for m in mask_items if isinstance(m, dict)]
+  for m in nat_items:
+    if isinstance(m, dict):
+      ordered.append((m, True, "national"))
   if isinstance(macro, dict):
-    ordered.append((macro, True))
+    ordered.append((macro, True, "macro"))
 
   if not ordered:
     return ["Manifest defines neither specialist_masks nor macro_mask."], warnings, {}
 
   mask_summaries = []
   child_opts = {**opts, "has_micro_islands": has_micro_islands}
-  for item, is_macro in ordered:
+  for item, is_macro, layer_kind in ordered:
     mid = item.get("id") or os.path.basename(str(item.get("mask_path", "")))
     dom = item.get("domain")
     if isinstance(dom, list) and len(dom) >= 2 and int(dom[0]) > int(dom[1]):
@@ -299,13 +309,14 @@ def audit_manifest(arg0_manifest_path, arg1_opts=None):
       errors.append(f"Mask {mid!r} is missing `mask_path`.")
       continue
     m_abs = m_rel if os.path.isabs(m_rel) else os.path.join(svea_root or os.path.dirname(arg0_manifest_path), m_rel)
-    sub_e, sub_w, sub_s = audit_single_mask(m_abs, child_opts)
+    item_opts = {**child_opts, "is_admin1": bool(item.get("is_admin1", False))}
+    sub_e, sub_w, sub_s = audit_single_mask(m_abs, item_opts)
     errors.extend(sub_e)
     warnings.extend(sub_w)
     if os.path.isfile(m_abs):
       arr = np.asarray(Image.open(m_abs).convert("RGBA"), dtype=np.uint8)
       valid = (arr[:, :, 3] > 0) & (arr[:, :, :3].sum(axis=2) > 0)
-      if not is_macro:
+      if layer_kind == "specialist":
         eff_px = int((valid & ~claimed).sum())
         claimed |= valid
         if eff_px == 0:
@@ -313,13 +324,13 @@ def audit_manifest(arg0_manifest_path, arg1_opts=None):
             f"[STARVATION] Specialist mask {mid!r} retains 0 unclaimed pixels after higher-priority masks; fix manifest ordering or mask geometry."
           )
       else:
-        eff_px = int((valid & ~claimed).sum())
+        eff_px = int(valid.sum()) if layer_kind == "national" else int((valid & ~claimed).sum())
       union_all |= valid
       mask_summaries.append({"id": mid, "effective_px": eff_px, **sub_s})
 
   # Project-union + 250 km frontier conditioning belt containment check
   belt = binary_dilation(union_all, iterations=(48 if has_micro_islands else 32))
-  for item, _is_macro in ordered:
+  for item, _is_macro, _lk in ordered:
     m_rel = item.get("mask_path")
     if not m_rel:
       continue
