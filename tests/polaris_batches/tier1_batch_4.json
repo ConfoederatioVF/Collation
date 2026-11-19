@@ -1,0 +1,7359 @@
+[
+  {
+    "cluster_id": "C0537",
+    "min_dist_km": 7.29,
+    "max_dist_km": 7.29,
+    "reasons": [
+      "disp_ovlp:7.287km"
+    ],
+    "nodes": [
+      {
+        "key": "Gluhov-Ukraine",
+        "raw_name": "Hlukhiv",
+        "country": "Ukraine",
+        "coords": [
+          51.6782,
+          33.9162
+        ],
+        "min_y": 1000,
+        "max_y": 2026,
+        "n_yrs": 150,
+        "peak": 36600,
+        "other_names": [
+          "Hlukhiv",
+          "Gluhov",
+          "Glukhov",
+          "Глухів",
+          "Hlukhiv (Glukhov, 1152AD Chronicle Town & 1247AD Capital 3389)",
+          "Глухов"
+        ],
+        "sources": [
+          "buringh",
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 7994,
+            "key": null,
+            "name": "Hlukhiv",
+            "has_cap": true,
+            "hnames": [
+              "700.1.1:Glukhov",
+              "1618.1.1:Gluchow",
+              "1654.1.1:Glukhov",
+              "1991.8.24:Hlukhiv"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Istorychnyy tsentr mista Hlukhova KhII-XVIII st. Late Mediaeval Settlement-Ukraine",
+        "raw_name": "Istorychnyy tsentr mista Hlukhova KhII-XVIII st. Late Mediaeval Settlement",
+        "country": "Ukraine",
+        "coords": [
+          51.65463,
+          34.01479
+        ],
+        "min_y": 1350,
+        "max_y": 1400,
+        "n_yrs": 2,
+        "peak": 150,
+        "other_names": [],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 77439,
+            "key": "Istorychnyy tsentr mista Hlukhova KhII-XVIII st. Late Mediaeval Settlement-Ukraine",
+            "name": "Hlukhiv",
+            "has_cap": false,
+            "hnames": [
+              "1350.1.1:Hlukhiv"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0539",
+    "min_dist_km": 0.28,
+    "max_dist_km": 0.28,
+    "reasons": [
+      "disp_gap_le250:0.28km"
+    ],
+    "nodes": [
+      {
+        "key": "Kacherychi-Belarus",
+        "raw_name": "Kacherychi",
+        "country": "Belarus",
+        "coords": [
+          53.2689,
+          29.4744
+        ],
+        "min_y": 900,
+        "max_y": 1300,
+        "n_yrs": 8,
+        "peak": 900,
+        "other_names": [
+          "Kacherychi (Berezina-Drut Watershed)",
+          "Kirovsk"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 37815,
+            "key": "Kacherychi-Belarus",
+            "name": "Kacherychi",
+            "has_cap": false,
+            "hnames": [
+              "900.1.1:Kacherychi"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Kirovsk-Belarus",
+        "raw_name": "Kirovsk",
+        "country": "Belarus",
+        "coords": [
+          53.27003,
+          29.47064
+        ],
+        "min_y": 1550,
+        "max_y": 2026,
+        "n_yrs": 136,
+        "peak": 9000,
+        "other_names": [
+          "Кіраўск",
+          "Kiraŭsk",
+          "Кировск"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 73112,
+            "key": "Kirovsk-Belarus",
+            "name": "Kacherychi",
+            "has_cap": false,
+            "hnames": [
+              "1550.1.1:Kacherychi"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0540",
+    "min_dist_km": 26.56,
+    "max_dist_km": 26.56,
+    "reasons": [
+      "disp_ovlp:26.557km"
+    ],
+    "nodes": [
+      {
+        "key": "Kairshak I-Russia",
+        "raw_name": "Kairshak I",
+        "country": "Russia",
+        "coords": [
+          46.78,
+          48.54
+        ],
+        "min_y": -6800,
+        "max_y": -6000,
+        "n_yrs": 4,
+        "peak": 55,
+        "other_names": [
+          "Каиршак I",
+          "Каиршак III"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 36734,
+            "key": "Kairshak I-Russia",
+            "name": "Kairshak",
+            "has_cap": false,
+            "hnames": [
+              "-6800.1.1:Kairshak"
+            ]
+          },
+          {
+            "idx": 36735,
+            "key": null,
+            "name": "Kairshak III",
+            "has_cap": false,
+            "hnames": [
+              "-6700.1.1:Kairshak III"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Kairshak III Mesolithic Settlement-Russia",
+        "raw_name": "Kairshak III Mesolithic Settlement",
+        "country": "Russia",
+        "coords": [
+          46.6667,
+          48.2333
+        ],
+        "min_y": -6086,
+        "max_y": -5384,
+        "n_yrs": 4,
+        "peak": 25,
+        "other_names": [],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 74107,
+            "key": "Kairshak III Mesolithic Settlement-Russia",
+            "name": "Kairshak",
+            "has_cap": false,
+            "hnames": [
+              "-6086.1.1:Kairshak"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0542",
+    "min_dist_km": 2.43,
+    "max_dist_km": 2.43,
+    "reasons": [
+      "disp_gap_le250:2.432km"
+    ],
+    "nodes": [
+      {
+        "key": "Hatka Migration Period Settlement-Ukraine",
+        "raw_name": "Hatka Migration Period Settlement",
+        "country": "Ukraine",
+        "coords": [
+          51.51515,
+          31.11397
+        ],
+        "min_y": 250,
+        "max_y": 700,
+        "n_yrs": 6,
+        "peak": 150,
+        "other_names": [],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 75903,
+            "key": "Hatka Migration Period Settlement-Ukraine",
+            "name": "Lhivka",
+            "has_cap": false,
+            "hnames": [
+              "250.1.1:Lhivka"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Kaliky Rus Settlement-Ukraine",
+        "raw_name": "Kaliky Rus Settlement",
+        "country": "Ukraine",
+        "coords": [
+          51.51985,
+          31.1483
+        ],
+        "min_y": 900,
+        "max_y": 1300,
+        "n_yrs": 5,
+        "peak": 150,
+        "other_names": [],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 75956,
+            "key": "Kaliky Rus Settlement-Ukraine",
+            "name": "Lhivka",
+            "has_cap": false,
+            "hnames": [
+              "900.1.1:Lhivka"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0544",
+    "min_dist_km": 25.81,
+    "max_dist_km": 25.81,
+    "reasons": [
+      "disp_ovlp:25.808km"
+    ],
+    "nodes": [
+      {
+        "key": "Kamen Bronze Age Settlement-Belarus",
+        "raw_name": "Kamen Bronze Age Settlement",
+        "country": "Belarus",
+        "coords": [
+          52.31184,
+          26.39104
+        ],
+        "min_y": -2200,
+        "max_y": -1000,
+        "n_yrs": 13,
+        "peak": 397,
+        "other_names": [],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 74978,
+            "key": "Kamen Bronze Age Settlement-Belarus",
+            "name": "Kamen",
+            "has_cap": false,
+            "hnames": [
+              "-2200.1.1:Kamen"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Kamen-Belarus",
+        "raw_name": "Kamen",
+        "country": "Belarus",
+        "coords": [
+          52.3125,
+          26.0114
+        ],
+        "min_y": -1200,
+        "max_y": -900,
+        "n_yrs": 4,
+        "peak": 230,
+        "other_names": [
+          "Kamen (Polesian Mesolithic-Neolithic Settlement)",
+          "Kamen Pinsk",
+          "Kamen Bobrik"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 37705,
+            "key": null,
+            "name": "Kamen",
+            "has_cap": false,
+            "hnames": [
+              "-5000.1.1:Kamen"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0545",
+    "min_dist_km": 13.23,
+    "max_dist_km": 13.23,
+    "reasons": [
+      "disp_ovlp:13.226km"
+    ],
+    "nodes": [
+      {
+        "key": "Kamenets bashnya-donzhon Mediaeval Hillfort-Belarus",
+        "raw_name": "Kamenets bashnya-donzhon Mediaeval Hillfort",
+        "country": "Belarus",
+        "coords": [
+          52.38757,
+          23.61617
+        ],
+        "min_y": 850,
+        "max_y": 1350,
+        "n_yrs": 11,
+        "peak": 340,
+        "other_names": [],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 74982,
+            "key": "Kamenets bashnya-donzhon Mediaeval Hillfort-Belarus",
+            "name": "Kamenets",
+            "has_cap": false,
+            "hnames": [
+              "850.1.1:Kamenets"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Kamenets-Belarus",
+        "raw_name": "Kamenets",
+        "country": "Belarus",
+        "coords": [
+          52.40013,
+          23.81
+        ],
+        "min_y": 1300,
+        "max_y": 2026,
+        "n_yrs": 141,
+        "peak": 8800,
+        "other_names": [
+          "Камянец",
+          "Kamianiec",
+          "Каменец",
+          "Каменец-Литовск",
+          "Kamyanets",
+          "Belaya Vezha"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 37761,
+            "key": null,
+            "name": "Kamenets",
+            "has_cap": false,
+            "hnames": [
+              "1276.1.1:Kamenets",
+              "1569.1.1:Kamieniec Litewski",
+              "1795.1.1:Kamenets-Litovsk",
+              "1921.3.18:Kamieniec Litewski",
+              "1939.9.17:Kamenets"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0547",
+    "min_dist_km": 1.44,
+    "max_dist_km": 1.44,
+    "reasons": [
+      "close2km_diffdisp:1.436km"
+    ],
+    "nodes": [
+      {
+        "key": "Kam'janec'-Podil's'kyj-Ukraine",
+        "raw_name": "Kamenets-Podolsky",
+        "country": "Ukraine",
+        "coords": [
+          48.6844,
+          26.5856
+        ],
+        "min_y": 1100,
+        "max_y": 2026,
+        "n_yrs": 148,
+        "peak": 118000,
+        "other_names": [
+          "Kam'yanets'-Podil's'kyy",
+          "Kamenec-Podolskij",
+          "Kamenez-Podolski",
+          "Kamianets Podilskyi",
+          "Kamyanets-Podilsky",
+          "Kam'janec'-Podil's'kyj"
+        ],
+        "sources": [
+          "populstat",
+          "chandler_modelski",
+          "buringh",
+          "POLARIS",
+          "ghsl"
+        ],
+        "meta": []
+      },
+      {
+        "key": "Kamianets Iron Age Site-Ukraine",
+        "raw_name": "Kamianets Iron Age Site",
+        "country": "Ukraine",
+        "coords": [
+          48.674,
+          26.574
+        ],
+        "min_y": 300,
+        "max_y": 1400,
+        "n_yrs": 21,
+        "peak": 1000,
+        "other_names": [
+          "Kamianets Iron Age Site"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 76500,
+            "key": "Kamianets Iron Age Site-Ukraine",
+            "name": "Kamianets",
+            "has_cap": false,
+            "hnames": [
+              "300.1.1:Kamianets"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0548",
+    "min_dist_km": 306.26,
+    "max_dist_km": 306.26,
+    "reasons": [
+      "far_suffix:306.3km"
+    ],
+    "nodes": [
+      {
+        "key": "Kamyane-Ukraine",
+        "raw_name": "Kamyane",
+        "country": "Ukraine",
+        "coords": [
+          47.87528,
+          35.39651
+        ],
+        "min_y": 1795,
+        "max_y": 2026,
+        "n_yrs": 118,
+        "peak": 1617,
+        "other_names": [
+          "Кам'яне",
+          "Kam`jane",
+          "smt Kam`jane"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": []
+      },
+      {
+        "key": "Kamyane-Ukraine_2",
+        "raw_name": "Kamyane",
+        "country": "Ukraine",
+        "coords": [
+          50.55,
+          34.39
+        ],
+        "min_y": 500,
+        "max_y": 1300,
+        "n_yrs": 11,
+        "peak": 1150,
+        "other_names": [
+          "Kamyane (Psyol Romny Kievan Rus Hillfort Complex)",
+          "Kamiane",
+          "Kamyane",
+          "Kamennoe"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": []
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0549",
+    "min_dist_km": 17.22,
+    "max_dist_km": 17.22,
+    "reasons": [
+      "disp_ovlp:17.218km"
+    ],
+    "nodes": [
+      {
+        "key": "Hoty 914 Chernyakhov Settlement-Ukraine",
+        "raw_name": "Hoty 914 Chernyakhov Settlement",
+        "country": "Ukraine",
+        "coords": [
+          47.54274,
+          34.22234
+        ],
+        "min_y": 200,
+        "max_y": 420,
+        "n_yrs": 4,
+        "peak": 140,
+        "other_names": [],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 77037,
+            "key": "Hoty 914 Chernyakhov Settlement-Ukraine",
+            "name": "Kapulivka",
+            "has_cap": false,
+            "hnames": [
+              "200.1.1:Kapulivka"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Kapulovka Classical Polis-Ukraine",
+        "raw_name": "Kapulovka Classical Polis",
+        "country": "Ukraine",
+        "coords": [
+          47.62989,
+          34.03257
+        ],
+        "min_y": -500,
+        "max_y": 400,
+        "n_yrs": 10,
+        "peak": 150,
+        "other_names": [],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 77047,
+            "key": "Kapulovka Classical Polis-Ukraine",
+            "name": "Kapulivka",
+            "has_cap": false,
+            "hnames": [
+              "-500.1.1:Kapulivka"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0551",
+    "min_dist_km": 13.21,
+    "max_dist_km": 13.21,
+    "reasons": [
+      "disp_ovlp:13.208km"
+    ],
+    "nodes": [
+      {
+        "key": "Karaidel'skij-Russia",
+        "raw_name": "Karaidel'skij",
+        "country": "Russia",
+        "coords": [
+          55.82183,
+          57.10616
+        ],
+        "min_y": 1795,
+        "max_y": 2026,
+        "n_yrs": 118,
+        "peak": 1355,
+        "other_names": [
+          "Караидельский"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 40635,
+            "key": "Karaidel'skij-Russia",
+            "name": "Karaidel",
+            "has_cap": false,
+            "hnames": [
+              "1795.1.1:Karaidel"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Karaidel-Russia",
+        "raw_name": "Karaidel",
+        "country": "Russia",
+        "coords": [
+          55.84201,
+          56.89774
+        ],
+        "min_y": 1762,
+        "max_y": 2026,
+        "n_yrs": 124,
+        "peak": 6170,
+        "other_names": [
+          "Караидель"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 42654,
+            "key": null,
+            "name": "Karaidel",
+            "has_cap": false,
+            "hnames": [
+              "2002.1.1:Karaidel"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0552",
+    "min_dist_km": 3.07,
+    "max_dist_km": 3.07,
+    "reasons": [
+      "disp_ovlp:3.07km"
+    ],
+    "nodes": [
+      {
+        "key": "Chernyi Klobuk-Ukraine",
+        "raw_name": "Chernyi Klobuk",
+        "country": "Ukraine",
+        "coords": [
+          49.635,
+          30.815
+        ],
+        "min_y": 1100,
+        "max_y": 1300,
+        "n_yrs": 6,
+        "peak": 1150,
+        "other_names": [
+          "Karapyschi"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 37401,
+            "key": "Chernyi Klobuk-Ukraine",
+            "name": "Karapyshi",
+            "has_cap": false,
+            "hnames": [
+              "1100.1.1:Karapyshi"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Karapyshi-Ukraine",
+        "raw_name": "Karapyshi",
+        "country": "Ukraine",
+        "coords": [
+          49.65222,
+          30.78167
+        ],
+        "min_y": 1050,
+        "max_y": 1400,
+        "n_yrs": 7,
+        "peak": 1849,
+        "other_names": [],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 78310,
+            "key": "Karapyshi-Ukraine",
+            "name": "Karapyshi",
+            "has_cap": false,
+            "hnames": [
+              "1050.1.1:Karapyshi"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0556",
+    "min_dist_km": 0.22,
+    "max_dist_km": 0.22,
+    "reasons": [
+      "disp_ovlp:0.218km"
+    ],
+    "nodes": [
+      {
+        "key": "Kayukovo 1-Russia",
+        "raw_name": "Kayukovo 1",
+        "country": "Russia",
+        "coords": [
+          60.582,
+          72.182
+        ],
+        "min_y": -6000,
+        "max_y": -5500,
+        "n_yrs": 2,
+        "peak": 30,
+        "other_names": [
+          "Каюково 1"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 36972,
+            "key": "Kayukovo 1-Russia",
+            "name": "Kayukovo",
+            "has_cap": false,
+            "hnames": [
+              "-6000.1.1:Kayukovo"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Kayukovo 2-Russia",
+        "raw_name": "Kayukovo 2",
+        "country": "Russia",
+        "coords": [
+          60.5833,
+          72.185
+        ],
+        "min_y": -6000,
+        "max_y": -5500,
+        "n_yrs": 2,
+        "peak": 50,
+        "other_names": [
+          "Каюково 2",
+          "Kayukovo Fort"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 36973,
+            "key": "Kayukovo 2-Russia",
+            "name": "Kayukovo",
+            "has_cap": false,
+            "hnames": [
+              "-6000.1.1:Kayukovo"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0558",
+    "min_dist_km": 0.52,
+    "max_dist_km": 0.52,
+    "reasons": [
+      "disp_ovlp:0.52km"
+    ],
+    "nodes": [
+      {
+        "key": "Kazanskaya-Don-Russia",
+        "raw_name": "Kazanskaya-Don",
+        "country": "Russia",
+        "coords": [
+          49.795,
+          41.145
+        ],
+        "min_y": 1690,
+        "max_y": 1850,
+        "n_yrs": 17,
+        "peak": 5200,
+        "other_names": [
+          "Казанская станица"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 36934,
+            "key": "Kazanskaya-Don-Russia",
+            "name": "Kazanskaya",
+            "has_cap": false,
+            "hnames": [
+              "1690.1.1:Kazanskaya"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Kazanskaya_RU_61-Russia",
+        "raw_name": "Kazanskaya",
+        "country": "Russia",
+        "coords": [
+          49.7906,
+          41.14744
+        ],
+        "min_y": 1648,
+        "max_y": 2026,
+        "n_yrs": 134,
+        "peak": 5219,
+        "other_names": [
+          "Казанская"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 78314,
+            "key": "Kazanskaya_RU_61-Russia",
+            "name": "Kazanskaya",
+            "has_cap": false,
+            "hnames": [
+              "1648.1.1:Kazanskaya"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0559",
+    "min_dist_km": 1.15,
+    "max_dist_km": 1.15,
+    "reasons": [
+      "close2km_diffdisp:1.15km"
+    ],
+    "nodes": [
+      {
+        "key": "Kazanskaya Iron Age Site-Russia",
+        "raw_name": "Kazanskaya Iron Age Site",
+        "country": "Russia",
+        "coords": [
+          45.4207,
+          40.4373
+        ],
+        "min_y": -300,
+        "max_y": 1,
+        "n_yrs": 5,
+        "peak": 1250,
+        "other_names": [
+          "Kazanskaya Iron Age Site"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 73911,
+            "key": "Kazanskaya Iron Age Site-Russia",
+            "name": "Kazanskoye",
+            "has_cap": false,
+            "hnames": [
+              "-300.1.1:Kazanskoye"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Kazanskoye-Maeotian-Russia",
+        "raw_name": "Kazanskoye-Maeotian",
+        "country": "Russia",
+        "coords": [
+          45.415,
+          40.425
+        ],
+        "min_y": -250,
+        "max_y": 150,
+        "n_yrs": 7,
+        "peak": 1200,
+        "other_names": [
+          "Казанское меотское городище"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 36531,
+            "key": "Kazanskoye-Maeotian-Russia",
+            "name": "Podlesny",
+            "has_cap": false,
+            "hnames": [
+              "-250.1.1:Podlesny"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0561",
+    "min_dist_km": 1.56,
+    "max_dist_km": 1.56,
+    "reasons": [
+      "close2km_diffdisp:1.557km",
+      "disp_ovlp:1.557km"
+    ],
+    "nodes": [
+      {
+        "key": "Kemi-Oba Kurgan Sanctuary Settlement-Ukraine",
+        "raw_name": "Kemi-Oba Kurgan Sanctuary Settlement",
+        "country": "Ukraine",
+        "coords": [
+          45.068,
+          34.595
+        ],
+        "min_y": -3000,
+        "max_y": -2000,
+        "n_yrs": 11,
+        "peak": 320,
+        "other_names": [
+          "Kemi-Oba Type Site",
+          "Biyuk-Karasu Eneolithic"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 77654,
+            "key": "Kemi-Oba Kurgan Sanctuary Settlement-Ukraine",
+            "name": "Kemi-Oba",
+            "has_cap": false,
+            "hnames": [
+              "-3000.1.1:Kemi-Oba"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Kemi-Oba-Ukraine",
+        "raw_name": "Kemi-Oba",
+        "country": "Ukraine",
+        "coords": [
+          45.082,
+          34.595
+        ],
+        "min_y": -4000,
+        "max_y": -2000,
+        "n_yrs": 12,
+        "peak": 750,
+        "other_names": [
+          "Biyuk-Karasu Bronze Site"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 37832,
+            "key": null,
+            "name": "Kemi-Oba",
+            "has_cap": false,
+            "hnames": [
+              "-4000.1.1:Kemi-Oba"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0562",
+    "min_dist_km": 0.42,
+    "max_dist_km": 0.42,
+    "reasons": [
+      "disp_gap_le250:0.419km"
+    ],
+    "nodes": [
+      {
+        "key": "Charkiv-Ukraine",
+        "raw_name": "Kharkov",
+        "country": "Ukraine",
+        "coords": [
+          49.9935,
+          36.2304
+        ],
+        "min_y": 1600,
+        "max_y": 2026,
+        "n_yrs": 138,
+        "peak": 1621600,
+        "other_names": [
+          "Charkov",
+          "Kharkov",
+          "Charkiv",
+          "Kharkiv",
+          "Sloboda Capital",
+          "Харків"
+        ],
+        "sources": [
+          "populstat",
+          "POLARIS",
+          "ghsl"
+        ],
+        "meta": [
+          {
+            "idx": 8741,
+            "key": null,
+            "name": "Kharkiv",
+            "has_cap": true,
+            "hnames": [
+              "1650.1.1:Kharkiv",
+              "1765.7.28:Kharkov",
+              "1991.8.24:Kharkiv"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Kharkov Fortress-Ukraine",
+        "raw_name": "Kharkov Fortress",
+        "country": "Ukraine",
+        "coords": [
+          49.98978,
+          36.23136
+        ],
+        "min_y": 1350,
+        "max_y": 1400,
+        "n_yrs": 2,
+        "peak": 150,
+        "other_names": [
+          "Kharkov Fortress",
+          "Kharkivska fortetsya",
+          "Kharkovskaya krepost"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 77221,
+            "key": "Kharkov Fortress-Ukraine",
+            "name": "Kharkiv",
+            "has_cap": false,
+            "hnames": [
+              "1350.1.1:Kharkiv"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0563",
+    "min_dist_km": 2.9,
+    "max_dist_km": 2.9,
+    "reasons": [
+      "disp_ovlp:2.895km"
+    ],
+    "nodes": [
+      {
+        "key": "Khimoi Historical and Architectural Complex-Russia",
+        "raw_name": "Khimoi Historical and Architectural Complex",
+        "country": "Russia",
+        "coords": [
+          42.65548,
+          45.85135
+        ],
+        "min_y": 800,
+        "max_y": 1300,
+        "n_yrs": 6,
+        "peak": 1200,
+        "other_names": [
+          "Khimoi Historical and Architectural Complex"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 74493,
+            "key": "Khimoi Historical and Architectural Complex-Russia",
+            "name": "Khimoy",
+            "has_cap": false,
+            "hnames": [
+              "800.1.1:Khimoy"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Khimoy-Russia",
+        "raw_name": "Khimoy",
+        "country": "Russia",
+        "coords": [
+          42.6667,
+          45.8833
+        ],
+        "min_y": 1200,
+        "max_y": 1800,
+        "n_yrs": 17,
+        "peak": 1015,
+        "other_names": [
+          "Химой"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 36428,
+            "key": null,
+            "name": "Khimoy",
+            "has_cap": false,
+            "hnames": [
+              "1200.1.1:Khimoy"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0567",
+    "min_dist_km": 5.17,
+    "max_dist_km": 5.17,
+    "reasons": [
+      "disp_ovlp:5.172km"
+    ],
+    "nodes": [
+      {
+        "key": "Kholki-Russia",
+        "raw_name": "Kholki",
+        "country": "Russia",
+        "coords": [
+          50.83,
+          37.71
+        ],
+        "min_y": 750,
+        "max_y": 1200,
+        "n_yrs": 6,
+        "peak": 980,
+        "other_names": [
+          "Kholki",
+          "Kholkinskoe gorodishche"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 36156,
+            "key": null,
+            "name": "Kholki",
+            "has_cap": false,
+            "hnames": [
+              "750.1.1:Kholki"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Kholky site of ancient settlement-Russia",
+        "raw_name": "Kholky site of ancient settlement",
+        "country": "Russia",
+        "coords": [
+          50.86571,
+          37.75721
+        ],
+        "min_y": 600,
+        "max_y": 1240,
+        "n_yrs": 8,
+        "peak": 420,
+        "other_names": [
+          "Kholky site of ancient settlement",
+          "Kholkovskoe gorodishche"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 73872,
+            "key": "Kholky site of ancient settlement-Russia",
+            "name": "Kholki",
+            "has_cap": false,
+            "hnames": [
+              "600.1.1:Kholki"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0569",
+    "min_dist_km": 0.34,
+    "max_dist_km": 0.34,
+    "reasons": [
+      "disp_gap_le250:0.342km"
+    ],
+    "nodes": [
+      {
+        "key": "Khorol Headwaters Romny Rus Hillfort-Ukraine",
+        "raw_name": "Khorol Headwaters Romny Rus Hillfort",
+        "country": "Ukraine",
+        "coords": [
+          50.56,
+          33.79
+        ],
+        "min_y": 700,
+        "max_y": 1300,
+        "n_yrs": 11,
+        "peak": 814,
+        "other_names": [
+          "Khorol Headwaters Romny Rus Hillfort (Lypova Dolyna)",
+          "Khorol Headwaters",
+          "Lypova Dolyna horodyshche"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 37528,
+            "key": "Khorol Headwaters Romny Rus Hillfort-Ukraine",
+            "name": "Lypova Dolyna",
+            "has_cap": false,
+            "hnames": [
+              "700.1.1:Lypova Dolyna"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Lypova Dolyna-Ukraine",
+        "raw_name": "Lypova Dolyna",
+        "country": "Ukraine",
+        "coords": [
+          50.56292,
+          33.79154
+        ],
+        "min_y": 1550,
+        "max_y": 2026,
+        "n_yrs": 136,
+        "peak": 5700,
+        "other_names": [
+          "Липова Долина",
+          "smt Lypova Dolyna",
+          "Липовая Долина"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 78322,
+            "key": "Lypova Dolyna-Ukraine",
+            "name": "Lypova Dolyna",
+            "has_cap": false,
+            "hnames": [
+              "1550.1.1:Lipovaya Dolina",
+              "1991.8.24:Lypova Dolyna"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0572",
+    "min_dist_km": 2.97,
+    "max_dist_km": 2.97,
+    "reasons": [
+      "disp_gap_le250:2.967km"
+    ],
+    "nodes": [
+      {
+        "key": "Khosta Fortress-Russia",
+        "raw_name": "Khosta Fortress",
+        "country": "Russia",
+        "coords": [
+          43.5398,
+          39.88126
+        ],
+        "min_y": 800,
+        "max_y": 1300,
+        "n_yrs": 6,
+        "peak": 1200,
+        "other_names": [
+          "Khosta Fortress"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 73914,
+            "key": "Khosta Fortress-Russia",
+            "name": "Khosta",
+            "has_cap": false,
+            "hnames": [
+              "800.1.1:Khosta"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Khosta-Russia",
+        "raw_name": "Khosta",
+        "country": "Russia",
+        "coords": [
+          43.51484,
+          39.86825
+        ],
+        "min_y": 1400,
+        "max_y": 1939,
+        "n_yrs": 58,
+        "peak": 7111,
+        "other_names": [
+          "Хоста",
+          "Hosta"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 38585,
+            "key": null,
+            "name": "Khosta",
+            "has_cap": false,
+            "hnames": [
+              "1897.1.1:Khosta"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0573",
+    "min_dist_km": 2.38,
+    "max_dist_km": 2.38,
+    "reasons": [
+      "disp_gap_le250:2.384km"
+    ],
+    "nodes": [
+      {
+        "key": "Khotin Bronze Age Settlement-Ukraine",
+        "raw_name": "Khotin Bronze Age Settlement",
+        "country": "Ukraine",
+        "coords": [
+          51.07549,
+          34.82005
+        ],
+        "min_y": -2200,
+        "max_y": -900,
+        "n_yrs": 14,
+        "peak": 150,
+        "other_names": [],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 77454,
+            "key": "Khotin Bronze Age Settlement-Ukraine",
+            "name": "Khotin",
+            "has_cap": false,
+            "hnames": [
+              "-2200.1.1:Khotin"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Khotin Iron Age Hillfort-Ukraine",
+        "raw_name": "Khotin Iron Age Hillfort",
+        "country": "Ukraine",
+        "coords": [
+          51.0743,
+          34.78598
+        ],
+        "min_y": -700,
+        "max_y": -100,
+        "n_yrs": 7,
+        "peak": 600,
+        "other_names": [],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 77455,
+            "key": "Khotin Iron Age Hillfort-Ukraine",
+            "name": "Khotin",
+            "has_cap": false,
+            "hnames": [
+              "-700.1.1:Khotin"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0576",
+    "min_dist_km": 0.12,
+    "max_dist_km": 0.12,
+    "reasons": [
+      "disp_gap_le250:0.121km"
+    ],
+    "nodes": [
+      {
+        "key": "Khram Svyatoy Troitsy Mediaeval Hillfort-Belarus",
+        "raw_name": "Khram Svyatoy Troitsy Mediaeval Hillfort",
+        "country": "Belarus",
+        "coords": [
+          54.71324,
+          27.29049
+        ],
+        "min_y": 850,
+        "max_y": 1350,
+        "n_yrs": 11,
+        "peak": 367,
+        "other_names": [],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 75376,
+            "key": "Khram Svyatoy Troitsy Mediaeval Hillfort-Belarus",
+            "name": "Kryvichy",
+            "has_cap": false,
+            "hnames": [
+              "850.1.1:Kryvichy"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Kryvichy-Belarus",
+        "raw_name": "Kryvichy",
+        "country": "Belarus",
+        "coords": [
+          54.7132,
+          27.2886
+        ],
+        "min_y": 1500,
+        "max_y": 2026,
+        "n_yrs": 137,
+        "peak": 3501,
+        "other_names": [
+          "Крывічы",
+          "Kryvičy"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 39515,
+            "key": null,
+            "name": "Kryvichy",
+            "has_cap": false,
+            "hnames": [
+              "1897.1.1:Kryvichy"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0582",
+    "min_dist_km": 3.48,
+    "max_dist_km": 3.48,
+    "reasons": [
+      "disp_ovlp:3.476km"
+    ],
+    "nodes": [
+      {
+        "key": "Khyzhky Iron Age Hillfort-Ukraine",
+        "raw_name": "Khyzhky Iron Age Hillfort",
+        "country": "Ukraine",
+        "coords": [
+          51.36771,
+          33.61507
+        ],
+        "min_y": -700,
+        "max_y": -100,
+        "n_yrs": 7,
+        "peak": 600,
+        "other_names": [],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 77458,
+            "key": "Khyzhky Iron Age Hillfort-Ukraine",
+            "name": "Khyzhky",
+            "has_cap": false,
+            "hnames": [
+              "-700.1.1:Khyzhky"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Khyzhky-4 Iron Age Hillfort-Ukraine",
+        "raw_name": "Khyzhky-4 Iron Age Hillfort",
+        "country": "Ukraine",
+        "coords": [
+          51.37232,
+          33.56555
+        ],
+        "min_y": -700,
+        "max_y": -100,
+        "n_yrs": 7,
+        "peak": 600,
+        "other_names": [],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 77459,
+            "key": "Khyzhky-4 Iron Age Hillfort-Ukraine",
+            "name": "Khyzhky",
+            "has_cap": false,
+            "hnames": [
+              "-700.1.1:Khyzhky"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0584",
+    "min_dist_km": 1.03,
+    "max_dist_km": 1.03,
+    "reasons": [
+      "close2km_diffdisp:1.03km",
+      "disp_ovlp:1.03km"
+    ],
+    "nodes": [
+      {
+        "key": "Kiev Iron Age Site-Ukraine",
+        "raw_name": "Kiev Iron Age Site",
+        "country": "Ukraine",
+        "coords": [
+          50.458,
+          30.531
+        ],
+        "min_y": -500,
+        "max_y": 1400,
+        "n_yrs": 34,
+        "peak": 5000,
+        "other_names": [
+          "Kiev Iron Age Site"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 76193,
+            "key": "Kiev Iron Age Site-Ukraine",
+            "name": "Kyiv",
+            "has_cap": false,
+            "hnames": [
+              "-500.1.1:Kyiv"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Kyjiv-Ukraine",
+        "raw_name": "Kyiv",
+        "country": "Ukraine",
+        "coords": [
+          50.4501,
+          30.5234
+        ],
+        "min_y": 600,
+        "max_y": 2026,
+        "n_yrs": 154,
+        "peak": 3100000,
+        "other_names": [
+          "Kiev",
+          "Kiïv",
+          "Kyyiv",
+          "Kyjiv",
+          "Kijev",
+          "Kiyev"
+        ],
+        "sources": [
+          "populstat",
+          "chandler_modelski",
+          "buringh",
+          "POLARIS",
+          "ghsl"
+        ],
+        "meta": [
+          {
+            "idx": 7161,
+            "key": null,
+            "name": "Kyiv",
+            "has_cap": true,
+            "hnames": [
+              "-500.1.1:Kiev",
+              "482.1.1:Kyiv",
+              "1569.1.1:Kijow",
+              "1654.1.1:Kiev",
+              "1991.8.24:Kyiv"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0585",
+    "min_dist_km": 18.46,
+    "max_dist_km": 18.46,
+    "reasons": [
+      "disp_ovlp:18.463km"
+    ],
+    "nodes": [
+      {
+        "key": "Kil'mez'-Russia",
+        "raw_name": "Kil'mez'",
+        "country": "Russia",
+        "coords": [
+          57.01384,
+          51.34056
+        ],
+        "min_y": 1648,
+        "max_y": 2026,
+        "n_yrs": 134,
+        "peak": 4143,
+        "other_names": [
+          "Кильмезь"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 74173,
+            "key": "Kil'mez'-Russia",
+            "name": "Kilmez",
+            "has_cap": false,
+            "hnames": [
+              "1648.1.1:Kilmez"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Kil'mez'_RU_33-Russia",
+        "raw_name": "Kil'mez'",
+        "country": "Russia",
+        "coords": [
+          56.94459,
+          51.06363
+        ],
+        "min_y": 1550,
+        "max_y": 2026,
+        "n_yrs": 136,
+        "peak": 6299,
+        "other_names": [
+          "Кильмезь"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 39940,
+            "key": null,
+            "name": "Kilmez",
+            "has_cap": false,
+            "hnames": [
+              "1897.1.1:Kilmez"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0586",
+    "min_dist_km": 1.8,
+    "max_dist_km": 1.8,
+    "reasons": [
+      "close2km_diffdisp:1.797km"
+    ],
+    "nodes": [
+      {
+        "key": "Gusinyy 1 (poselenie)-Russia",
+        "raw_name": "Gusinyy 1",
+        "country": "Russia",
+        "coords": [
+          69.30122,
+          34.12851
+        ],
+        "min_y": 800,
+        "max_y": 1300,
+        "n_yrs": 6,
+        "peak": 650,
+        "other_names": [
+          "Gusinyy 1 (poselenie)"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 72894,
+            "key": "Gusinyy 1 (poselenie)-Russia",
+            "name": "Zarubikha",
+            "has_cap": false,
+            "hnames": [
+              "800.1.1:Zarubikha"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Kildinskiy proliv 1 (masterskaya)-Russia",
+        "raw_name": "Kildinskiy proliv 1",
+        "country": "Russia",
+        "coords": [
+          69.30049,
+          34.17418
+        ],
+        "min_y": 800,
+        "max_y": 1300,
+        "n_yrs": 6,
+        "peak": 650,
+        "other_names": [
+          "Kildinskiy proliv 1 (masterskaya)"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 72903,
+            "key": "Kildinskiy proliv 1 (masterskaya)-Russia",
+            "name": "Ruchyi",
+            "has_cap": false,
+            "hnames": [
+              "800.1.1:Ruchyi"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0587",
+    "min_dist_km": 1.23,
+    "max_dist_km": 1.23,
+    "reasons": [
+      "close2km_diffdisp:1.227km"
+    ],
+    "nodes": [
+      {
+        "key": "Kilia Fortress-Ukraine",
+        "raw_name": "Kilia Fortress",
+        "country": "Ukraine",
+        "coords": [
+          45.43385,
+          29.26834
+        ],
+        "min_y": 800,
+        "max_y": 1300,
+        "n_yrs": 6,
+        "peak": 350,
+        "other_names": [
+          "Kilia Fortress",
+          "Fortetsya Kiliya"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 77950,
+            "key": "Kilia Fortress-Ukraine",
+            "name": "Kiliya",
+            "has_cap": false,
+            "hnames": [
+              "800.1.1:Chilia",
+              "1300.1.1:Kiliya"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Kiliya-Ukraine",
+        "raw_name": "Kiliya",
+        "country": "Ukraine",
+        "coords": [
+          45.44445,
+          29.26396
+        ],
+        "min_y": 1200,
+        "max_y": 2026,
+        "n_yrs": 140,
+        "peak": 26400,
+        "other_names": [
+          "Кілія",
+          "Kilija",
+          "Килия",
+          "Kiliya",
+          "Chilia Noua",
+          "Lycostomo"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": []
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0589",
+    "min_dist_km": 3.99,
+    "max_dist_km": 3.99,
+    "reasons": [
+      "disp_ovlp:3.991km"
+    ],
+    "nodes": [
+      {
+        "key": "Kingisepp-Russia",
+        "raw_name": "Kingisepp",
+        "country": "Russia",
+        "coords": [
+          59.37627,
+          28.61409
+        ],
+        "min_y": 1384,
+        "max_y": 2026,
+        "n_yrs": 142,
+        "peak": 50295,
+        "other_names": [
+          "Jamburg",
+          "Jama",
+          "Yamburg",
+          "Yama",
+          "Кингисепп",
+          "Yam"
+        ],
+        "sources": [
+          "populstat",
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 11785,
+            "key": null,
+            "name": "Kingisepp",
+            "has_cap": false,
+            "hnames": [
+              "1384.1.1:Yama",
+              "1703.1.1:Yamburg",
+              "1922.5.17:Kingisepp"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Kingiseppskiy-Russia",
+        "raw_name": "Kingiseppskiy",
+        "country": "Russia",
+        "coords": [
+          59.40197,
+          28.56488
+        ],
+        "min_y": 1400,
+        "max_y": 2026,
+        "n_yrs": 138,
+        "peak": 5179,
+        "other_names": [
+          "Кингисеппский"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 72873,
+            "key": "Kingiseppskiy-Russia",
+            "name": "Kingisepp",
+            "has_cap": false,
+            "hnames": [
+              "1400.1.1:Yam",
+              "1703.1.1:Yamburg",
+              "1922.1.1:Kingisepp"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0592",
+    "min_dist_km": 0.14,
+    "max_dist_km": 0.14,
+    "reasons": [
+      "close2km_diffdisp:0.136km",
+      "disp_ovlp:0.136km"
+    ],
+    "nodes": [
+      {
+        "key": "Kizil-Koba Settlement-Ukraine",
+        "raw_name": "Kizil-Koba Settlement",
+        "country": "Ukraine",
+        "coords": [
+          44.868,
+          34.342
+        ],
+        "min_y": -1000,
+        "max_y": 0,
+        "n_yrs": 11,
+        "peak": 450,
+        "other_names": [
+          "Kizil-Koba Type Site",
+          "Red Cave Taurian Village"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 77659,
+            "key": "Kizil-Koba Settlement-Ukraine",
+            "name": "Kizil-Koba",
+            "has_cap": false,
+            "hnames": [
+              "-1000.1.1:Kizil-Koba"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Kizil-Koba-Ukraine",
+        "raw_name": "Kizil-Koba",
+        "country": "Ukraine",
+        "coords": [
+          44.869,
+          34.343
+        ],
+        "min_y": -2000,
+        "max_y": -500,
+        "n_yrs": 16,
+        "peak": 1100,
+        "other_names": [
+          "Krasnaya Peshchera Settlement",
+          "Tauri Kizil-Koba Type-Site"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 38120,
+            "key": null,
+            "name": "Kizil-Koba",
+            "has_cap": false,
+            "hnames": [
+              "-2000.1.1:Kizil-Koba"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0594",
+    "min_dist_km": 17.12,
+    "max_dist_km": 17.12,
+    "reasons": [
+      "disp_ovlp:17.115km"
+    ],
+    "nodes": [
+      {
+        "key": "Kletsk kostel Troitskiy farnyy /sokhr. chast steny/ Late Mediaeval Hillfort-Belarus",
+        "raw_name": "Kletsk kostel Troitskiy farnyy /sokhr. chast steny/ Late Mediaeval Hillfort",
+        "country": "Belarus",
+        "coords": [
+          52.91358,
+          26.69504
+        ],
+        "min_y": 1250,
+        "max_y": 1350,
+        "n_yrs": 3,
+        "peak": 380,
+        "other_names": [],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 75379,
+            "key": "Kletsk kostel Troitskiy farnyy /sokhr. chast steny/ Late Mediaeval Hillfort-Belarus",
+            "name": "Kletsk",
+            "has_cap": false,
+            "hnames": [
+              "1250.1.1:Kletsk"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Kletsk-Belarus",
+        "raw_name": "Kletsk",
+        "country": "Belarus",
+        "coords": [
+          53.06379,
+          26.63922
+        ],
+        "min_y": 800,
+        "max_y": 2026,
+        "n_yrs": 149,
+        "peak": 11462,
+        "other_names": [
+          "Клецк",
+          "Kleck",
+          "Клецкъ"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 34692,
+            "key": null,
+            "name": "Kletsk",
+            "has_cap": true,
+            "hnames": [
+              "1127.1.1:Klechesk",
+              "1569.1.1:Kleck",
+              "1793.1.1:Kletsk",
+              "1921.3.18:Kleck",
+              "1939.9.17:Kletsk"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0597",
+    "min_dist_km": 2.45,
+    "max_dist_km": 2.45,
+    "reasons": [
+      "close2km_diffdisp:2.452km"
+    ],
+    "nodes": [
+      {
+        "key": "Barsuki kamennyy krest Mediaeval Hillfort-Belarus",
+        "raw_name": "Barsuki kamennyy krest Mediaeval Hillfort",
+        "country": "Belarus",
+        "coords": [
+          53.68419,
+          27.17051
+        ],
+        "min_y": 850,
+        "max_y": 1350,
+        "n_yrs": 11,
+        "peak": 506,
+        "other_names": [],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 75293,
+            "key": "Barsuki kamennyy krest Mediaeval Hillfort-Belarus",
+            "name": "Barsuki",
+            "has_cap": false,
+            "hnames": [
+              "850.1.1:Barsuki"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Koidanovo-Belarus",
+        "raw_name": "Koidanovo",
+        "country": "Belarus",
+        "coords": [
+          53.6833,
+          27.1333
+        ],
+        "min_y": 900,
+        "max_y": 1300,
+        "n_yrs": 8,
+        "peak": 1350,
+        "other_names": [
+          "Koidanovo (Krutogorye Hillfort)",
+          "Krutogorye",
+          "Dzerzhinsk",
+          "Kaydanava"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 37750,
+            "key": "Koidanovo-Belarus",
+            "name": "Koydanava",
+            "has_cap": false,
+            "hnames": [
+              "900.1.1:Krutogorye",
+              "1146.1.1:Koydanava"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0598",
+    "min_dist_km": 23.53,
+    "max_dist_km": 23.53,
+    "reasons": [
+      "disp_ovlp:23.532km"
+    ],
+    "nodes": [
+      {
+        "key": "Kok-Pash-Russia",
+        "raw_name": "Kok-Pash",
+        "country": "Russia",
+        "coords": [
+          51.02,
+          87.72
+        ],
+        "min_y": 100,
+        "max_y": 500,
+        "n_yrs": 5,
+        "peak": 220,
+        "other_names": [
+          "Кок-Паш",
+          "Kok-Pash Lower Chulyshman"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 36291,
+            "key": null,
+            "name": "Kok-Pash",
+            "has_cap": false,
+            "hnames": [
+              "100.1.1:Kok-Pash"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Kok-Pash-Russia_2",
+        "raw_name": "Kok-Pash",
+        "country": "Russia",
+        "coords": [
+          50.85,
+          87.92
+        ],
+        "min_y": 100,
+        "max_y": 900,
+        "n_yrs": 13,
+        "peak": 410,
+        "other_names": [
+          "Kok-Pash",
+          "Kok-Pashskiy kompleks v doline Chulyshmana"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 74623,
+            "key": "Kok-Pash-Russia_2",
+            "name": "Kok-Pash",
+            "has_cap": false,
+            "hnames": [
+              "100.1.1:Kok-Pash"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0600",
+    "min_dist_km": 7.33,
+    "max_dist_km": 7.33,
+    "reasons": [
+      "disp_ovlp:7.332km"
+    ],
+    "nodes": [
+      {
+        "key": "Bulganak-Ukraine",
+        "raw_name": "Bulganak",
+        "country": "Ukraine",
+        "coords": [
+          44.928,
+          33.882
+        ],
+        "min_y": 0,
+        "max_y": 300,
+        "n_yrs": 4,
+        "peak": 2300,
+        "other_names": [
+          "Khaboi",
+          "Pozharskoye Gorodishche",
+          "Western Bulganak"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 38015,
+            "key": null,
+            "name": "Bulganak",
+            "has_cap": false,
+            "hnames": [
+              "1.1.1:Bulganak"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Kolchugino Scythian-Ukraine",
+        "raw_name": "Kolchugino Scythian",
+        "country": "Ukraine",
+        "coords": [
+          44.945,
+          33.792
+        ],
+        "min_y": 0,
+        "max_y": 300,
+        "n_yrs": 4,
+        "peak": 1196,
+        "other_names": [
+          "Bulganak Estuary Fort",
+          "Kolchugino Settlement"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 38026,
+            "key": "Kolchugino Scythian-Ukraine",
+            "name": "Bulganak",
+            "has_cap": false,
+            "hnames": [
+              "0.1.1:Bulganak"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0603",
+    "min_dist_km": 0.1,
+    "max_dist_km": 0.1,
+    "reasons": [
+      "close2km_diffdisp:0.104km",
+      "disp_ovlp:0.104km"
+    ],
+    "nodes": [
+      {
+        "key": "Kola-Russia",
+        "raw_name": "Kola",
+        "country": "Russia",
+        "coords": [
+          68.88138,
+          33.01769
+        ],
+        "min_y": 1400,
+        "max_y": 2026,
+        "n_yrs": 138,
+        "peak": 16541,
+        "other_names": [
+          "Кола",
+          "Kola Ostrog",
+          "Murman Port"
+        ],
+        "sources": [
+          "POLARIS",
+          "ghsl"
+        ],
+        "meta": [
+          {
+            "idx": 37977,
+            "key": null,
+            "name": "Kola",
+            "has_cap": false,
+            "hnames": [
+              "1517.1.1:Kola"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Kolskiy ostrog-Russia",
+        "raw_name": "Kolskiy ostrog",
+        "country": "Russia",
+        "coords": [
+          68.88173,
+          33.02009
+        ],
+        "min_y": 1583,
+        "max_y": 1858,
+        "n_yrs": 21,
+        "peak": 650,
+        "other_names": [
+          "Kolskiy ostrog"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 72905,
+            "key": "Kolskiy ostrog-Russia",
+            "name": "Kola",
+            "has_cap": false,
+            "hnames": [
+              "1583.1.1:Kola"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0605",
+    "min_dist_km": 179.62,
+    "max_dist_km": 179.62,
+    "reasons": [
+      "far_suffix:179.6km"
+    ],
+    "nodes": [
+      {
+        "key": "Kondinskoye-Russia",
+        "raw_name": "Kondinskoye",
+        "country": "Russia",
+        "coords": [
+          59.64806,
+          67.41
+        ],
+        "min_y": 1858,
+        "max_y": 2026,
+        "n_yrs": 108,
+        "peak": 5125,
+        "other_names": [
+          "Кондинское",
+          "Kondinskoje"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": []
+      },
+      {
+        "key": "Kondinskoye-Russia_2",
+        "raw_name": "Kondinskoye",
+        "country": "Russia",
+        "coords": [
+          60.35,
+          64.5
+        ],
+        "min_y": 1000,
+        "max_y": 1800,
+        "n_yrs": 20,
+        "peak": 1150,
+        "other_names": [
+          "Кондинское",
+          "Кonda",
+          "Kondinsky Gorodok"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": []
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0609",
+    "min_dist_km": 3.1,
+    "max_dist_km": 3.1,
+    "reasons": [
+      "disp_ovlp:3.098km"
+    ],
+    "nodes": [
+      {
+        "key": "Kapyl Rus Hillfort-Belarus",
+        "raw_name": "Kapyl Rus Hillfort",
+        "country": "Belarus",
+        "coords": [
+          53.1477,
+          27.138
+        ],
+        "min_y": 900,
+        "max_y": 1300,
+        "n_yrs": 5,
+        "peak": 344,
+        "other_names": [],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 75375,
+            "key": "Kapyl Rus Hillfort-Belarus",
+            "name": "Kopyl",
+            "has_cap": false,
+            "hnames": [
+              "900.1.1:Kopyl"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Kopyl-Belarus",
+        "raw_name": "Kopyl",
+        "country": "Belarus",
+        "coords": [
+          53.15,
+          27.0917
+        ],
+        "min_y": 900,
+        "max_y": 1300,
+        "n_yrs": 8,
+        "peak": 2500,
+        "other_names": [
+          "Kapyl",
+          "Kopyl Zamchishche"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 37762,
+            "key": null,
+            "name": "Kopyl",
+            "has_cap": false,
+            "hnames": [
+              "1274.1.1:Kopyl"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0615",
+    "min_dist_km": 1.56,
+    "max_dist_km": 1.56,
+    "reasons": [
+      "close2km_diffdisp:1.563km"
+    ],
+    "nodes": [
+      {
+        "key": "Davnoruske horodyshche Hillfort-Ukraine_2",
+        "raw_name": "Davnoruske horodyshche Hillfort",
+        "country": "Ukraine",
+        "coords": [
+          49.40678,
+          31.23919
+        ],
+        "min_y": 800,
+        "max_y": 1400,
+        "n_yrs": 13,
+        "peak": 1950,
+        "other_names": [],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 75684,
+            "key": "Davnoruske horodyshche Hillfort-Ukraine_2",
+            "name": "Korsun",
+            "has_cap": false,
+            "hnames": [
+              "800.1.1:Korsun"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Korsun-Shevchenkivskyi-Ukraine",
+        "raw_name": "Korsun-Shevchenkivskyi",
+        "country": "Ukraine",
+        "coords": [
+          49.41822,
+          31.25174
+        ],
+        "min_y": 1100,
+        "max_y": 2026,
+        "n_yrs": 146,
+        "peak": 23200,
+        "other_names": [
+          "Корсунь-Шевченківський",
+          "Korsuń-Ševčenkivśkyj",
+          "Корсунь-Шевченкивський",
+          "Korsun-Shevchenkivskiy",
+          "Корсунь-Шевченковский",
+          "Korsun-on-Ros"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": []
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0616",
+    "min_dist_km": 2.33,
+    "max_dist_km": 2.33,
+    "reasons": [
+      "close2km_diffdisp:2.335km"
+    ],
+    "nodes": [
+      {
+        "key": "Dyatlovo-Belarus",
+        "raw_name": "Dyatlovo",
+        "country": "Belarus",
+        "coords": [
+          53.46215,
+          25.40757
+        ],
+        "min_y": 900,
+        "max_y": 2026,
+        "n_yrs": 146,
+        "peak": 8400,
+        "other_names": [
+          "Дзятлава",
+          "Dziatłava",
+          "Дятлово",
+          "Dyatlovo (Zditovo Molchad Corridor)",
+          "Dzyatlava"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": []
+      },
+      {
+        "key": "Korytsa Late Mediaeval Hillfort-Belarus",
+        "raw_name": "Korytsa Late Mediaeval Hillfort",
+        "country": "Belarus",
+        "coords": [
+          53.4418,
+          25.41625
+        ],
+        "min_y": 1250,
+        "max_y": 1350,
+        "n_yrs": 3,
+        "peak": 391,
+        "other_names": [],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 75139,
+            "key": "Korytsa Late Mediaeval Hillfort-Belarus",
+            "name": "Korytsa",
+            "has_cap": false,
+            "hnames": [
+              "1250.1.1:Korytsa"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0617",
+    "min_dist_km": 2.41,
+    "max_dist_km": 2.41,
+    "reasons": [
+      "disp_gap_le250:2.409km"
+    ],
+    "nodes": [
+      {
+        "key": "Kosava Castle-Belarus",
+        "raw_name": "Kosava Castle",
+        "country": "Belarus",
+        "coords": [
+          52.76556,
+          25.12167
+        ],
+        "min_y": 800,
+        "max_y": 1300,
+        "n_yrs": 7,
+        "peak": 620,
+        "other_names": [],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 74988,
+            "key": "Kosava Castle-Belarus",
+            "name": "Kosava",
+            "has_cap": false,
+            "hnames": [
+              "800.1.1:Kosava"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Kosava-Belarus",
+        "raw_name": "Kosava",
+        "country": "Belarus",
+        "coords": [
+          52.7583,
+          25.1554
+        ],
+        "min_y": 1500,
+        "max_y": 2026,
+        "n_yrs": 137,
+        "peak": 3277,
+        "other_names": [
+          "Косава",
+          "Коссово"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 39454,
+            "key": null,
+            "name": "Kosava",
+            "has_cap": false,
+            "hnames": [
+              "1897.1.1:Kosava"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0618",
+    "min_dist_km": 3.34,
+    "max_dist_km": 3.34,
+    "reasons": [
+      "disp_ovlp:3.339km"
+    ],
+    "nodes": [
+      {
+        "key": "Kosenivka-Ukraine",
+        "raw_name": "Kosenivka",
+        "country": "Ukraine",
+        "coords": [
+          48.835,
+          30.445
+        ],
+        "min_y": -3600,
+        "max_y": -2000,
+        "n_yrs": 12,
+        "peak": 4000,
+        "other_names": [
+          "Kosenovka"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 37327,
+            "key": null,
+            "name": "Kosenivka",
+            "has_cap": false,
+            "hnames": [
+              "-3700.1.1:Kosenivka",
+              "1793.1.1:Kosenovka",
+              "1991.8.24:Kosenivka"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Kosenovka Eneolithic Hillfort-Ukraine",
+        "raw_name": "Kosenovka Eneolithic Hillfort",
+        "country": "Ukraine",
+        "coords": [
+          48.82077,
+          30.40483
+        ],
+        "min_y": -4500,
+        "max_y": -3000,
+        "n_yrs": 4,
+        "peak": 600,
+        "other_names": [],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 75758,
+            "key": "Kosenovka Eneolithic Hillfort-Ukraine",
+            "name": "Kosenivka",
+            "has_cap": false,
+            "hnames": [
+              "-4500.1.1:Kosenivka"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0621",
+    "min_dist_km": 1.44,
+    "max_dist_km": 1.44,
+    "reasons": [
+      "disp_gap_le250:1.443km"
+    ],
+    "nodes": [
+      {
+        "key": "Kostyukovichi-Belarus",
+        "raw_name": "Kostyukovichi",
+        "country": "Belarus",
+        "coords": [
+          53.35488,
+          32.05128
+        ],
+        "min_y": 1550,
+        "max_y": 2026,
+        "n_yrs": 136,
+        "peak": 17200,
+        "other_names": [
+          "Касцюковічы",
+          "Kasciukovičy",
+          "Костюковичи"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 73118,
+            "key": "Kostyukovichi-Belarus",
+            "name": "Kostyukovichi",
+            "has_cap": false,
+            "hnames": [
+              "1550.1.1:Kostyukovichi"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Kostyukovichi-Belarus_2",
+        "raw_name": "Kostyukovichi",
+        "country": "Belarus",
+        "coords": [
+          53.3419,
+          32.0511
+        ],
+        "min_y": 900,
+        "max_y": 1300,
+        "n_yrs": 8,
+        "peak": 950,
+        "other_names": [
+          "Kostyukovichi (Zhadunka-Besed Settlement)",
+          "Kastsyukovichy"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 37812,
+            "key": null,
+            "name": "Kostyukovichi",
+            "has_cap": false,
+            "hnames": [
+              "900.1.1:Kostyukovichi",
+              "1508.1.1:Kościukowicze",
+              "1772.1.1:Kostyukovichi"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0626",
+    "min_dist_km": 0.28,
+    "max_dist_km": 0.28,
+    "reasons": [
+      "disp_gap_le250:0.282km"
+    ],
+    "nodes": [
+      {
+        "key": "Kozova castle-Ukraine",
+        "raw_name": "Kozova castle",
+        "country": "Ukraine",
+        "coords": [
+          49.43192,
+          25.14936
+        ],
+        "min_y": 800,
+        "max_y": 1300,
+        "n_yrs": 6,
+        "peak": 150,
+        "other_names": [
+          "Kozova castle",
+          "Zamek w Kozowej",
+          "Kozivskyy zamok"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 76851,
+            "key": "Kozova castle-Ukraine",
+            "name": "Kozova",
+            "has_cap": false,
+            "hnames": [
+              "800.1.1:Kozova"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Kozova-Ukraine",
+        "raw_name": "Kozova",
+        "country": "Ukraine",
+        "coords": [
+          49.43206,
+          25.14547
+        ],
+        "min_y": 1440,
+        "max_y": 2026,
+        "n_yrs": 139,
+        "peak": 9420,
+        "other_names": [
+          "Козова",
+          "smt Kozova"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 39375,
+            "key": null,
+            "name": "Kozova",
+            "has_cap": false,
+            "hnames": [
+              "1897.1.1:Kozowa",
+              "1939.9.17:Kozova"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0627",
+    "min_dist_km": 0.2,
+    "max_dist_km": 0.2,
+    "reasons": [
+      "disp_gap_le250:0.196km"
+    ],
+    "nodes": [
+      {
+        "key": "Krapivenskaya krepost-Russia",
+        "raw_name": "Krapivenskaya krepost",
+        "country": "Russia",
+        "coords": [
+          53.94075,
+          37.15618
+        ],
+        "min_y": 800,
+        "max_y": 1300,
+        "n_yrs": 6,
+        "peak": 420,
+        "other_names": [
+          "Krapivenskaya krepost"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 73586,
+            "key": "Krapivenskaya krepost-Russia",
+            "name": "Krapivna",
+            "has_cap": false,
+            "hnames": [
+              "800.1.1:Krapivna"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Krapivna-Russia",
+        "raw_name": "Krapivna",
+        "country": "Russia",
+        "coords": [
+          53.94235,
+          37.15744
+        ],
+        "min_y": 1400,
+        "max_y": 2026,
+        "n_yrs": 138,
+        "peak": 6146,
+        "other_names": [
+          "Крапивна"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 38304,
+            "key": null,
+            "name": "Krapivna",
+            "has_cap": false,
+            "hnames": [
+              "1897.1.1:Krapivna"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0630",
+    "min_dist_km": 2.79,
+    "max_dist_km": 2.79,
+    "reasons": [
+      "disp_ovlp:2.786km"
+    ],
+    "nodes": [
+      {
+        "key": "Dibrivka Eneolithic Hillfort-Ukraine",
+        "raw_name": "Dibrivka Eneolithic Hillfort",
+        "country": "Ukraine",
+        "coords": [
+          49.17526,
+          30.75626
+        ],
+        "min_y": -4500,
+        "max_y": -3000,
+        "n_yrs": 4,
+        "peak": 600,
+        "other_names": [],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 75691,
+            "key": "Dibrivka Eneolithic Hillfort-Ukraine",
+            "name": "Dibrivka",
+            "has_cap": false,
+            "hnames": [
+              "-4500.1.1:Dibrivka"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Krasnostavka Neolithic Settlement-Ukraine",
+        "raw_name": "Krasnostavka Neolithic Settlement",
+        "country": "Ukraine",
+        "coords": [
+          49.177,
+          30.7945
+        ],
+        "min_y": -4383,
+        "max_y": -3883,
+        "n_yrs": 3,
+        "peak": 150,
+        "other_names": [],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 75763,
+            "key": "Krasnostavka Neolithic Settlement-Ukraine",
+            "name": "Dibrivka",
+            "has_cap": false,
+            "hnames": [
+              "-4383.1.1:Dibrivka"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0631",
+    "min_dist_km": 0.0,
+    "max_dist_km": 0.0,
+    "reasons": [
+      "disp_gap_le250:0.0km"
+    ],
+    "nodes": [
+      {
+        "key": "Krasnoyarskoye Gorodishche-Russia",
+        "raw_name": "Krasnoyarskoye Gorodishche",
+        "country": "Russia",
+        "coords": [
+          46.5333,
+          48.35
+        ],
+        "min_y": 1280,
+        "max_y": 1500,
+        "n_yrs": 9,
+        "peak": 6000,
+        "other_names": [
+          "Красноярское городище"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 74111,
+            "key": "Krasnoyarskoye Gorodishche-Russia",
+            "name": "Krasny Yar",
+            "has_cap": false,
+            "hnames": [
+              "1280.1.1:Shahr-i Jadid",
+              "1396.1.1:Krasny Yar"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Krasny Yar-Russia",
+        "raw_name": "Krasny Yar",
+        "country": "Russia",
+        "coords": [
+          46.5333,
+          48.35
+        ],
+        "min_y": 1650,
+        "max_y": 2026,
+        "n_yrs": 135,
+        "peak": 12254,
+        "other_names": [
+          "Krasny Yar Delta",
+          "Buzan Fortress",
+          "Красный Яр",
+          "Krasnyy Yar",
+          "Krasnyj Jar"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 36782,
+            "key": null,
+            "name": "Krasny Yar",
+            "has_cap": false,
+            "hnames": [
+              "1280.1.1:Krasnoyarskoye",
+              "1667.1.1:Krasny Yar"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0632",
+    "min_dist_km": 1.3,
+    "max_dist_km": 1.3,
+    "reasons": [
+      "disp_ovlp:1.304km"
+    ],
+    "nodes": [
+      {
+        "key": "Krasnogorodsk-Russia",
+        "raw_name": "Krasnogorodsk",
+        "country": "Russia",
+        "coords": [
+          56.83388,
+          28.29873
+        ],
+        "min_y": 1464,
+        "max_y": 2026,
+        "n_yrs": 138,
+        "peak": 5295,
+        "other_names": [
+          "Красногородск",
+          "Красный",
+          "Красное",
+          "Красногородское"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 37737,
+            "key": null,
+            "name": "Krasnogorodsk",
+            "has_cap": false,
+            "hnames": [
+              "1464.1.1:Krasny Gorodets",
+              "1772.1.1:Krasnogorodskoye",
+              "1995.1.1:Krasnogorodsk"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Krasnyi Gorodets-Russia",
+        "raw_name": "Krasnyi Gorodets",
+        "country": "Russia",
+        "coords": [
+          56.8305,
+          28.2782
+        ],
+        "min_y": 1464,
+        "max_y": 1764,
+        "n_yrs": 11,
+        "peak": 750,
+        "other_names": [
+          "Krasnyi Gorodets",
+          "Krasnyy Gorodets"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 72983,
+            "key": "Krasnyi Gorodets-Russia",
+            "name": "Krasnogorodsk",
+            "has_cap": false,
+            "hnames": [
+              "1464.1.1:Krasny Gorodets",
+              "1650.1.1:Krasnogorodsk"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0633",
+    "min_dist_km": 0.66,
+    "max_dist_km": 0.66,
+    "reasons": [
+      "close2km_diffdisp:0.659km"
+    ],
+    "nodes": [
+      {
+        "key": "Krasnoyarskaya Fortress-Russia",
+        "raw_name": "Krasnoyarskaya Fortress",
+        "country": "Russia",
+        "coords": [
+          53.49694,
+          50.40194
+        ],
+        "min_y": 1732,
+        "max_y": 1858,
+        "n_yrs": 16,
+        "peak": 400,
+        "other_names": [
+          "Krasnoyarskaya Fortress",
+          "Krasnoyarskaya krepost"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 74250,
+            "key": "Krasnoyarskaya Fortress-Russia",
+            "name": "Krasny Yar",
+            "has_cap": false,
+            "hnames": [
+              "1732.1.1:Krasny Yar"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Krasnyy Yar_RU_65-Russia",
+        "raw_name": "Krasnyy Yar",
+        "country": "Russia",
+        "coords": [
+          53.4978,
+          50.39209
+        ],
+        "min_y": 1744,
+        "max_y": 2026,
+        "n_yrs": 126,
+        "peak": 8185,
+        "other_names": [
+          "Красный Яр"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": []
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0635",
+    "min_dist_km": 2.22,
+    "max_dist_km": 2.22,
+    "reasons": [
+      "close2km_diffdisp:2.221km",
+      "disp_ovlp:2.221km"
+    ],
+    "nodes": [
+      {
+        "key": "Krichev Castle-Belarus",
+        "raw_name": "Krichev Castle",
+        "country": "Belarus",
+        "coords": [
+          53.69286,
+          31.72006
+        ],
+        "min_y": 800,
+        "max_y": 1300,
+        "n_yrs": 6,
+        "peak": 578,
+        "other_names": [],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 73125,
+            "key": "Krichev Castle-Belarus",
+            "name": "Krichev",
+            "has_cap": false,
+            "hnames": [
+              "800.1.1:Krichev"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Krichev-Belarus",
+        "raw_name": "Krichev",
+        "country": "Belarus",
+        "coords": [
+          53.7125,
+          31.7139
+        ],
+        "min_y": 900,
+        "max_y": 1400,
+        "n_yrs": 11,
+        "peak": 2900,
+        "other_names": [],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 37802,
+            "key": null,
+            "name": "Krichev",
+            "has_cap": false,
+            "hnames": [
+              "1136.1.1:Krechut",
+              "1569.1.1:Krzyczew",
+              "1772.1.1:Krichev"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0636",
+    "min_dist_km": 0.21,
+    "max_dist_km": 0.21,
+    "reasons": [
+      "disp_gap_le250:0.206km"
+    ],
+    "nodes": [
+      {
+        "key": "Kromskoy kreml-Russia",
+        "raw_name": "Kromskoy kreml",
+        "country": "Russia",
+        "coords": [
+          52.68778,
+          35.76969
+        ],
+        "min_y": 800,
+        "max_y": 1300,
+        "n_yrs": 6,
+        "peak": 420,
+        "other_names": [
+          "Kromskoy kreml"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 73988,
+            "key": "Kromskoy kreml-Russia",
+            "name": "Kromy",
+            "has_cap": false,
+            "hnames": [
+              "800.1.1:Kromy"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Kromy-Russia",
+        "raw_name": "Kromy",
+        "country": "Russia",
+        "coords": [
+          52.68762,
+          35.76665
+        ],
+        "min_y": 1400,
+        "max_y": 2026,
+        "n_yrs": 138,
+        "peak": 8288,
+        "other_names": [
+          "Кромы"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 38292,
+            "key": null,
+            "name": "Kromy",
+            "has_cap": false,
+            "hnames": [
+              "1897.1.1:Kromy"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0637",
+    "min_dist_km": 1.26,
+    "max_dist_km": 1.26,
+    "reasons": [
+      "close2km_diffdisp:1.26km",
+      "disp_ovlp:1.26km"
+    ],
+    "nodes": [
+      {
+        "key": "Kron`'stadt-Russia",
+        "raw_name": "Kronstadt",
+        "country": "Russia",
+        "coords": [
+          59.9917,
+          29.7667
+        ],
+        "min_y": 1703,
+        "max_y": 2026,
+        "n_yrs": 134,
+        "peak": 74500,
+        "other_names": [
+          "Kronshtadt",
+          "Cronstadt",
+          "Kronshlot",
+          "Kronslot",
+          "Kronstadt",
+          "Kron`'stadt"
+        ],
+        "sources": [
+          "populstat",
+          "buringh",
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 8860,
+            "key": null,
+            "name": "Kronstadt",
+            "has_cap": false,
+            "hnames": [
+              "1704.5.18:Kronstadt"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Kronstadt Fortress-Russia",
+        "raw_name": "Kronstadt Fortress",
+        "country": "Russia",
+        "coords": [
+          59.9937,
+          29.789
+        ],
+        "min_y": 1704,
+        "max_y": 1858,
+        "n_yrs": 19,
+        "peak": 750,
+        "other_names": [
+          "Kronstadt Fortress",
+          "Kroonlinna kindlus",
+          "Kronshtadtskaya krepost",
+          "Kronshtadtska fortetsya"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 72797,
+            "key": "Kronstadt Fortress-Russia",
+            "name": "Kronstadt",
+            "has_cap": false,
+            "hnames": [
+              "1704.1.1:Kronshlot",
+              "1723.1.1:Kronstadt"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0638",
+    "min_dist_km": 0.41,
+    "max_dist_km": 0.41,
+    "reasons": [
+      "disp_gap_le250:0.414km"
+    ],
+    "nodes": [
+      {
+        "key": "Krugloye-Belarus",
+        "raw_name": "Krugloye",
+        "country": "Belarus",
+        "coords": [
+          54.2531,
+          29.79567
+        ],
+        "min_y": 1550,
+        "max_y": 2026,
+        "n_yrs": 136,
+        "peak": 7800,
+        "other_names": [
+          "Круглае",
+          "Kruhłaje",
+          "Круглое"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 73127,
+            "key": "Krugloye-Belarus",
+            "name": "Krugloye",
+            "has_cap": false,
+            "hnames": [
+              "1550.1.1:Krugloye"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Krugloye-Belarus_2",
+        "raw_name": "Krugloye",
+        "country": "Belarus",
+        "coords": [
+          54.2494,
+          29.795
+        ],
+        "min_y": 900,
+        "max_y": 1300,
+        "n_yrs": 8,
+        "peak": 1050,
+        "other_names": [
+          "Krugloye (Upper Drut Gorodishche)",
+          "Kruhlaye"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 37745,
+            "key": null,
+            "name": "Krugloye",
+            "has_cap": false,
+            "hnames": [
+              "900.1.1:Krugloye",
+              "1524.1.1:Krugłe",
+              "1772.1.1:Krugloye"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0640",
+    "min_dist_km": 1.74,
+    "max_dist_km": 1.74,
+    "reasons": [
+      "close2km_diffdisp:1.742km"
+    ],
+    "nodes": [
+      {
+        "key": "Kulbachyna Rus Hillfort-Belarus",
+        "raw_name": "Kulbachyna Rus Hillfort",
+        "country": "Belarus",
+        "coords": [
+          53.72424,
+          24.5939
+        ],
+        "min_y": 900,
+        "max_y": 1300,
+        "n_yrs": 5,
+        "peak": 418,
+        "other_names": [],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 75154,
+            "key": "Kulbachyna Rus Hillfort-Belarus",
+            "name": "Vyalikiya Byarozawtsy",
+            "has_cap": false,
+            "hnames": [
+              "900.1.1:Vyalikiya Byarozawtsy"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Kulbachyna-Belarus",
+        "raw_name": "Kulbachyna",
+        "country": "Belarus",
+        "coords": [
+          53.7197,
+          24.56856
+        ],
+        "min_y": 600,
+        "max_y": 1200,
+        "n_yrs": 7,
+        "peak": 582,
+        "other_names": [],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 75153,
+            "key": "Kulbachyna-Belarus",
+            "name": "Kulbachyno",
+            "has_cap": false,
+            "hnames": [
+              "600.1.1:Kulbachyno"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0641",
+    "min_dist_km": 5.23,
+    "max_dist_km": 5.23,
+    "reasons": [
+      "disp_ovlp:5.234km"
+    ],
+    "nodes": [
+      {
+        "key": "Kulchuk Settlement-Ukraine",
+        "raw_name": "Kulchuk Settlement",
+        "country": "Ukraine",
+        "coords": [
+          45.36667,
+          32.86389
+        ],
+        "min_y": -400,
+        "max_y": 0,
+        "n_yrs": 5,
+        "peak": 150,
+        "other_names": [
+          "Kulchuk Settlement",
+          "Kulchukskoe horodyshche",
+          "Kulchutske horodyshche"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 77662,
+            "key": "Kulchuk Settlement-Ukraine",
+            "name": "Kulchuk",
+            "has_cap": false,
+            "hnames": [
+              "-400.1.1:Kulchuk"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Kulchuk-Ukraine",
+        "raw_name": "Kulchuk",
+        "country": "Ukraine",
+        "coords": [
+          45.405,
+          32.825
+        ],
+        "min_y": -500,
+        "max_y": 200,
+        "n_yrs": 8,
+        "peak": 1380,
+        "other_names": [
+          "Kulchukskoye Gorodishche",
+          "Hromovka Fortress"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 37980,
+            "key": null,
+            "name": "Kulchuk",
+            "has_cap": false,
+            "hnames": [
+              "-500.1.1:Kulchuk"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0642",
+    "min_dist_km": 1.51,
+    "max_dist_km": 1.51,
+    "reasons": [
+      "disp_gap_le250:1.515km"
+    ],
+    "nodes": [
+      {
+        "key": "Kulturnyy sloy g. Maloyaroslavets (Maloyaroslavets)-Russia",
+        "raw_name": "Kulturnyy sloy g. Maloyaroslavets",
+        "country": "Russia",
+        "coords": [
+          55.01444,
+          36.44809
+        ],
+        "min_y": 800,
+        "max_y": 1300,
+        "n_yrs": 6,
+        "peak": 420,
+        "other_names": [
+          "Kulturnyy sloy g. Maloyaroslavets (Maloyaroslavets)"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 73340,
+            "key": "Kulturnyy sloy g. Maloyaroslavets (Maloyaroslavets)-Russia",
+            "name": "Maloyaroslavets",
+            "has_cap": false,
+            "hnames": [
+              "800.1.1:Maloyaroslavets"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Maloyaroslavets-Russia",
+        "raw_name": "Maloyaroslavets",
+        "country": "Russia",
+        "coords": [
+          55.01457,
+          36.47185
+        ],
+        "min_y": 1400,
+        "max_y": 2026,
+        "n_yrs": 142,
+        "peak": 43169,
+        "other_names": [
+          "Малоярославец",
+          "Malojaroslavec",
+          "Maloyaroslavets 1812",
+          "Yaroslavets"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 36355,
+            "key": null,
+            "name": "Maloyaroslavets",
+            "has_cap": false,
+            "hnames": [
+              "-500.1.1:Luzha",
+              "1402.1.1:Yaroslavets Maly",
+              "1776.1.1:Maloyaroslavets"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0643",
+    "min_dist_km": 0.19,
+    "max_dist_km": 0.19,
+    "reasons": [
+      "close2km_diffdisp:0.188km",
+      "disp_ovlp:0.188km"
+    ],
+    "nodes": [
+      {
+        "key": "Kazan'-Russia",
+        "raw_name": "Kazan",
+        "country": "Russia",
+        "coords": [
+          55.7887,
+          49.1221
+        ],
+        "min_y": 1000,
+        "max_y": 2026,
+        "n_yrs": 152,
+        "peak": 1322000,
+        "other_names": [
+          "Kasan",
+          "Kazan",
+          "Ozon",
+          "Kazan'",
+          "Qazan",
+          "Kazan University Hub"
+        ],
+        "sources": [
+          "populstat",
+          "buringh",
+          "POLARIS",
+          "ghsl"
+        ],
+        "meta": [
+          {
+            "idx": 7415,
+            "key": null,
+            "name": "Kazan",
+            "has_cap": true,
+            "hnames": [
+              "1005.1.1:Iske Qazan",
+              "1370.1.1:Kazan"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Kulturnyy sloy istoricheskogo tsentra goroda Kazani XI - XVIII vekov-Russia",
+        "raw_name": "Kulturnyy sloy istoricheskogo tsentra goroda Kazani XI - XVIII vekov",
+        "country": "Russia",
+        "coords": [
+          55.78795,
+          49.12479
+        ],
+        "min_y": 1350,
+        "max_y": 1650,
+        "n_yrs": 5,
+        "peak": 750,
+        "other_names": [
+          "Kulturnyy sloy istoricheskogo tsentra goroda Kazani XI - XVIII vekov"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 74339,
+            "key": "Kulturnyy sloy istoricheskogo tsentra goroda Kazani XI - XVIII vekov-Russia",
+            "name": "Kazan",
+            "has_cap": false,
+            "hnames": [
+              "1350.1.1:Kazan"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0644",
+    "min_dist_km": 1.0,
+    "max_dist_km": 1.0,
+    "reasons": [
+      "disp_gap_le250:1.004km"
+    ],
+    "nodes": [
+      {
+        "key": "Kulturnyy sloy na territorii Makarevo-Unzhenskogo monastyrya (Makarev)-Russia",
+        "raw_name": "Kulturnyy sloy na territorii Makarevo-Unzhenskogo monastyrya",
+        "country": "Russia",
+        "coords": [
+          57.87642,
+          43.81157
+        ],
+        "min_y": 800,
+        "max_y": 1300,
+        "n_yrs": 6,
+        "peak": 420,
+        "other_names": [
+          "Kulturnyy sloy na territorii Makarevo-Unzhenskogo monastyrya (Makarev)"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 74184,
+            "key": "Kulturnyy sloy na territorii Makarevo-Unzhenskogo monastyrya (Makarev)-Russia",
+            "name": "Makaryev",
+            "has_cap": false,
+            "hnames": [
+              "800.1.1:Makaryev"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Makar'jev-Russia",
+        "raw_name": "Makar'jev",
+        "country": "Russia",
+        "coords": [
+          57.88502,
+          43.80637
+        ],
+        "min_y": 1439,
+        "max_y": 2026,
+        "n_yrs": 138,
+        "peak": 10076,
+        "other_names": [
+          "Макарьев"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 38255,
+            "key": "Makar'jev-Russia",
+            "name": "Makaryev",
+            "has_cap": false,
+            "hnames": [
+              "1439.1.1:Makaryev"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0645",
+    "min_dist_km": 0.33,
+    "max_dist_km": 0.33,
+    "reasons": [
+      "disp_gap_le250:0.334km"
+    ],
+    "nodes": [
+      {
+        "key": "Kulturnyy sloy sela Pestyaki. Uchastok 1-Russia",
+        "raw_name": "Kulturnyy sloy sela Pestyaki. Uchastok 1",
+        "country": "Russia",
+        "coords": [
+          56.70633,
+          42.67146
+        ],
+        "min_y": 800,
+        "max_y": 1300,
+        "n_yrs": 6,
+        "peak": 420,
+        "other_names": [
+          "Kulturnyy sloy sela Pestyaki. Uchastok 1"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 74154,
+            "key": "Kulturnyy sloy sela Pestyaki. Uchastok 1-Russia",
+            "name": "Pestyaki",
+            "has_cap": false,
+            "hnames": [
+              "800.1.1:Pestyaki"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Pestyaki-Russia",
+        "raw_name": "Pestyaki",
+        "country": "Russia",
+        "coords": [
+          56.70914,
+          42.66952
+        ],
+        "min_y": 1400,
+        "max_y": 2026,
+        "n_yrs": 139,
+        "peak": 4903,
+        "other_names": [
+          "Пестяки",
+          "Pestjaki"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 39878,
+            "key": null,
+            "name": "Pestyaki",
+            "has_cap": false,
+            "hnames": [
+              "1897.1.1:Pestyaki"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0647",
+    "min_dist_km": 1.27,
+    "max_dist_km": 1.27,
+    "reasons": [
+      "disp_gap_le250:1.274km"
+    ],
+    "nodes": [
+      {
+        "key": "Kurgannaya gruppa Pavlovskaya Sloboda 2 (19 kurganov) (Pavlovskaya Sloboda)-Russia",
+        "raw_name": "Kurgannaya gruppa Pavlovskaya Sloboda 2",
+        "country": "Russia",
+        "coords": [
+          55.80517,
+          37.09241
+        ],
+        "min_y": 800,
+        "max_y": 1300,
+        "n_yrs": 6,
+        "peak": 420,
+        "other_names": [
+          "Kurgannaya gruppa Pavlovskaya Sloboda 2 (19 kurganov) (Pavlovskaya Sloboda)"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 73467,
+            "key": "Kurgannaya gruppa Pavlovskaya Sloboda 2 (19 kurganov) (Pavlovskaya Sloboda)-Russia",
+            "name": "Pavlovskaya Sloboda",
+            "has_cap": false,
+            "hnames": [
+              "800.1.1:Pavlovskaya Sloboda"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Pavlovskaya Sloboda-Russia",
+        "raw_name": "Pavlovskaya Sloboda",
+        "country": "Russia",
+        "coords": [
+          55.81517,
+          37.08246
+        ],
+        "min_y": 1550,
+        "max_y": 2026,
+        "n_yrs": 136,
+        "peak": 8668,
+        "other_names": [
+          "Павловская Слобода",
+          "Pavlovskaja Sloboda"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 38864,
+            "key": null,
+            "name": "Pavlovskaya Sloboda",
+            "has_cap": false,
+            "hnames": [
+              "1897.1.1:Pavlovskaya Sloboda"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0652",
+    "min_dist_km": 2.5,
+    "max_dist_km": 2.5,
+    "reasons": [
+      "close2km_diffdisp:2.496km"
+    ],
+    "nodes": [
+      {
+        "key": "Kulturnyy sloy Kizicheskoy slobody goroda Kazani XVII - XVIII vekov-Russia",
+        "raw_name": "Kulturnyy sloy Kizicheskoy slobody goroda Kazani XVII - XVIII vekov",
+        "country": "Russia",
+        "coords": [
+          55.81805,
+          49.09765
+        ],
+        "min_y": 1350,
+        "max_y": 1650,
+        "n_yrs": 5,
+        "peak": 750,
+        "other_names": [
+          "Kulturnyy sloy Kizicheskoy slobody goroda Kazani XVII - XVIII vekov"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 74337,
+            "key": "Kulturnyy sloy Kizicheskoy slobody goroda Kazani XVII - XVIII vekov-Russia",
+            "name": "Kizicheskaya Sloboda",
+            "has_cap": false,
+            "hnames": [
+              "1350.1.1:Kizik",
+              "1550.1.1:Kizicheskaya Sloboda"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Kvartal No 19-Russia",
+        "raw_name": "Kvartal No 19",
+        "country": "Russia",
+        "coords": [
+          55.83911,
+          49.11146
+        ],
+        "min_y": 1590,
+        "max_y": 1750,
+        "n_yrs": 8,
+        "peak": 750,
+        "other_names": [
+          "Kvartal No 19"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 74343,
+            "key": "Kvartal No 19-Russia",
+            "name": "Novo-Savinovo",
+            "has_cap": false,
+            "hnames": [
+              "1590.1.1:Novo-Savinovo"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0654",
+    "min_dist_km": 535.81,
+    "max_dist_km": 535.81,
+    "reasons": [
+      "far_suffix:535.8km"
+    ],
+    "nodes": [
+      {
+        "key": "Kyselivka-Ukraine",
+        "raw_name": "Kyselivka",
+        "country": "Ukraine",
+        "coords": [
+          46.75571,
+          32.40898
+        ],
+        "min_y": 1637,
+        "max_y": 2026,
+        "n_yrs": 132,
+        "peak": 5189,
+        "other_names": [
+          "Киселевка"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": []
+      },
+      {
+        "key": "Kyselivka-Ukraine_2",
+        "raw_name": "Kyselivka",
+        "country": "Ukraine",
+        "coords": [
+          51.53,
+          31.41
+        ],
+        "min_y": 700,
+        "max_y": 1300,
+        "n_yrs": 11,
+        "peak": 989,
+        "other_names": [
+          "Kyselivka (Desna Terrace Severian Rus Complex)",
+          "Kiselevka",
+          "Kyselivka"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": []
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0656",
+    "min_dist_km": 0.83,
+    "max_dist_km": 0.83,
+    "reasons": [
+      "close2km_diffdisp:0.831km"
+    ],
+    "nodes": [
+      {
+        "key": "Ladozhskaya Iron Age Site-Russia",
+        "raw_name": "Ladozhskaya Iron Age Site",
+        "country": "Russia",
+        "coords": [
+          45.3123,
+          39.9373
+        ],
+        "min_y": -300,
+        "max_y": 1,
+        "n_yrs": 5,
+        "peak": 1300,
+        "other_names": [
+          "Ladozhskaya Iron Age Site"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 73917,
+            "key": "Ladozhskaya Iron Age Site-Russia",
+            "name": "Ladozhskoye",
+            "has_cap": false,
+            "hnames": [
+              "-300.1.1:Ladozhskoye"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Ladozhskoye-Maeotian-Russia",
+        "raw_name": "Ladozhskoye-Maeotian",
+        "country": "Russia",
+        "coords": [
+          45.305,
+          39.935
+        ],
+        "min_y": -300,
+        "max_y": 150,
+        "n_yrs": 7,
+        "peak": 1300,
+        "other_names": [
+          "Ладожское городище"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 36529,
+            "key": "Ladozhskoye-Maeotian-Russia",
+            "name": "Vimovets",
+            "has_cap": false,
+            "hnames": [
+              "-300.1.1:Vimovets"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0657",
+    "min_dist_km": 2.17,
+    "max_dist_km": 2.17,
+    "reasons": [
+      "close2km_diffdisp:2.169km",
+      "disp_ovlp:2.169km"
+    ],
+    "nodes": [
+      {
+        "key": "Lagoyskae garadzishcha-Belarus",
+        "raw_name": "Lagoyskae garadzishcha",
+        "country": "Belarus",
+        "coords": [
+          54.20398,
+          27.81811
+        ],
+        "min_y": 600,
+        "max_y": 1200,
+        "n_yrs": 7,
+        "peak": 585,
+        "other_names": [],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 75389,
+            "key": "Lagoyskae garadzishcha-Belarus",
+            "name": "Logoysk",
+            "has_cap": false,
+            "hnames": [
+              "600.1.1:Logoysk"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Logoysk-Belarus",
+        "raw_name": "Logoysk",
+        "country": "Belarus",
+        "coords": [
+          54.2064,
+          27.8512
+        ],
+        "min_y": 900,
+        "max_y": 2026,
+        "n_yrs": 146,
+        "peak": 15567,
+        "other_names": [
+          "Лагойск",
+          "Łahojsk",
+          "Логойскъ",
+          "Логойск",
+          "Logozhsk",
+          "Lahoysk"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 37740,
+            "key": null,
+            "name": "Logoisk",
+            "has_cap": false,
+            "hnames": [
+              "1078.1.1:Logozhsk",
+              "1569.1.1:Łohojsk",
+              "1793.1.1:Logoisk"
+            ]
+          },
+          {
+            "idx": 75395,
+            "key": "Logoysk-Belarus",
+            "name": "Logoysk",
+            "has_cap": false,
+            "hnames": [
+              "900.1.1:Logozhsk",
+              "1500.1.1:Łohojsk",
+              "1795.1.1:Logoysk",
+              "1921.1.1:Łohojsk",
+              "1945.1.1:Logoysk"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0658",
+    "min_dist_km": 2.42,
+    "max_dist_km": 2.42,
+    "reasons": [
+      "disp_gap_le250:2.423km"
+    ],
+    "nodes": [
+      {
+        "key": "Laishevo-Russia",
+        "raw_name": "Laishevo",
+        "country": "Russia",
+        "coords": [
+          55.40559,
+          49.5521
+        ],
+        "min_y": 1400,
+        "max_y": 2026,
+        "n_yrs": 139,
+        "peak": 9076,
+        "other_names": [
+          "Лаишево",
+          "Laiševo",
+          "Лаишев",
+          "Chalma",
+          "Laish"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 36382,
+            "key": null,
+            "name": "Laishevo",
+            "has_cap": false,
+            "hnames": [
+              "950.1.1:Chakma",
+              "1557.1.1:Laishev",
+              "1950.1.1:Laishevo"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Laishevskoe selishche II-Russia",
+        "raw_name": "Laishevskoe selishche II",
+        "country": "Russia",
+        "coords": [
+          55.39595,
+          49.58651
+        ],
+        "min_y": 800,
+        "max_y": 1300,
+        "n_yrs": 6,
+        "peak": 420,
+        "other_names": [
+          "Laishevskoe selishche II"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 74345,
+            "key": "Laishevskoe selishche II-Russia",
+            "name": "Laishevo",
+            "has_cap": false,
+            "hnames": [
+              "800.1.1:Laishevo"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0660",
+    "min_dist_km": 1.59,
+    "max_dist_km": 1.59,
+    "reasons": [
+      "close2km_diffdisp:1.587km"
+    ],
+    "nodes": [
+      {
+        "key": "Dvor-Toronkovichi kamennye kresty Mediaeval Hillfort-Belarus",
+        "raw_name": "Dvor-Toronkovichi kamennye kresty Mediaeval Hillfort",
+        "country": "Belarus",
+        "coords": [
+          54.87556,
+          28.67636
+        ],
+        "min_y": 850,
+        "max_y": 1350,
+        "n_yrs": 11,
+        "peak": 597,
+        "other_names": [],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 72566,
+            "key": "Dvor-Toronkovichi kamennye kresty Mediaeval Hillfort-Belarus",
+            "name": "Toronkovichi",
+            "has_cap": false,
+            "hnames": [
+              "850.1.1:Toronkovichi"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Lepel'-Belarus",
+        "raw_name": "Lepel",
+        "country": "Belarus",
+        "coords": [
+          54.8814,
+          28.699
+        ],
+        "min_y": 900,
+        "max_y": 2026,
+        "n_yrs": 147,
+        "peak": 19600,
+        "other_names": [
+          "Lepel'",
+          "Лепель",
+          "Lepiel",
+          "Stary Lepel",
+          "Novy Lepel",
+          "Starolepel (Lake Lepel Island Gorodishche)"
+        ],
+        "sources": [
+          "populstat",
+          "POLARIS"
+        ],
+        "meta": []
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0661",
+    "min_dist_km": 8.78,
+    "max_dist_km": 8.78,
+    "reasons": [
+      "disp_ovlp:8.784km"
+    ],
+    "nodes": [
+      {
+        "key": "Lesosibirsk-Russia",
+        "raw_name": "Lesosibirsk",
+        "country": "Russia",
+        "coords": [
+          58.23544,
+          92.48351
+        ],
+        "min_y": 1979,
+        "max_y": 2026,
+        "n_yrs": 48,
+        "peak": 68349,
+        "other_names": [
+          "Лесосибирск",
+          "Новомаклаково",
+          "Novomaklakovo"
+        ],
+        "sources": [
+          "populstat",
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 74793,
+            "key": "Lesosibirsk-Russia",
+            "name": "Lesosibirsk",
+            "has_cap": false,
+            "hnames": [
+              "1979.1.1:Lesosibirsk"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Lesosibirsk_RU_91-Russia",
+        "raw_name": "Lesosibirsk",
+        "country": "Russia",
+        "coords": [
+          58.2938,
+          92.3823
+        ],
+        "min_y": 1705,
+        "max_y": 2026,
+        "n_yrs": 132,
+        "peak": 18181,
+        "other_names": [
+          "Новоенисейск",
+          "Novojenisejsk"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 31475,
+            "key": null,
+            "name": "Lesosibirsk",
+            "has_cap": false,
+            "hnames": [
+              "1950.1.1:Lesosibirsk"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0662",
+    "min_dist_km": 0.67,
+    "max_dist_km": 0.67,
+    "reasons": [
+      "close2km_diffdisp:0.67km",
+      "disp_ovlp:0.67km"
+    ],
+    "nodes": [
+      {
+        "key": "Letychiv Fortress-Ukraine",
+        "raw_name": "Letychiv Fortress",
+        "country": "Ukraine",
+        "coords": [
+          49.38503,
+          27.62422
+        ],
+        "min_y": 800,
+        "max_y": 1400,
+        "n_yrs": 8,
+        "peak": 652,
+        "other_names": [
+          "Letychiv Fortress",
+          "Zamek w Latyczowie",
+          "Letychivskyy zamok"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 76505,
+            "key": "Letychiv Fortress-Ukraine",
+            "name": "Letychiv",
+            "has_cap": false,
+            "hnames": [
+              "800.1.1:Letychiv"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Letychiv-Ukraine",
+        "raw_name": "Letychiv",
+        "country": "Ukraine",
+        "coords": [
+          49.3801,
+          27.61889
+        ],
+        "min_y": 1400,
+        "max_y": 2026,
+        "n_yrs": 140,
+        "peak": 12100,
+        "other_names": [
+          "Летичів",
+          "Letyčiv",
+          "Летичив",
+          "smt Letyčiv",
+          "Летичев"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 38334,
+            "key": null,
+            "name": "Letychiv",
+            "has_cap": false,
+            "hnames": [
+              "1897.1.1:Letychiv"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0663",
+    "min_dist_km": 1.4,
+    "max_dist_km": 1.4,
+    "reasons": [
+      "close2km_diffdisp:1.403km"
+    ],
+    "nodes": [
+      {
+        "key": "Dostoprimechatelnoe mesto Lipetskoe gorodishche i ul. Sapyornaya i R. Lyuksemburg (Lipetsk)-Russia",
+        "raw_name": "Dostoprimechatelnoe mesto Lipetskoe gorodishche i ul. Sapyornaya i R. Lyuksemburg",
+        "country": "Russia",
+        "coords": [
+          52.60844,
+          39.58963
+        ],
+        "min_y": 800,
+        "max_y": 1300,
+        "n_yrs": 6,
+        "peak": 420,
+        "other_names": [
+          "Dostoprimechatelnoe mesto Lipetskoe gorodishche i ul. Sapyornaya i R. Lyuksemburg (Lipetsk)"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 73965,
+            "key": "Dostoprimechatelnoe mesto Lipetskoe gorodishche i ul. Sapyornaya i R. Lyuksemburg (Lipetsk)-Russia",
+            "name": "Lipovetsk",
+            "has_cap": false,
+            "hnames": [
+              "800.1.1:Lipovetsk"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Lipeck-Russia",
+        "raw_name": "Lipetsk",
+        "country": "Russia",
+        "coords": [
+          52.6031,
+          39.5708
+        ],
+        "min_y": 1300,
+        "max_y": 2026,
+        "n_yrs": 141,
+        "peak": 510439,
+        "other_names": [
+          "Lipetsk",
+          "Lipetsk Ironworks",
+          "Lipetsk Spa",
+          "Липецк",
+          "Lipetskiye Zavody",
+          "Novolipetsk"
+        ],
+        "sources": [
+          "populstat",
+          "chandler_modelski",
+          "buringh",
+          "POLARIS",
+          "ghsl"
+        ],
+        "meta": [
+          {
+            "idx": 8265,
+            "key": null,
+            "name": "Lipetsk",
+            "has_cap": false,
+            "hnames": [
+              "1200.1.1:Lipetskoye Borisoglebskoye",
+              "1703.1.1:Lipskiye Zheleznye Zavody",
+              "1779.9.16:Lipetsk"
+            ]
+          },
+          {
+            "idx": 24813,
+            "key": null,
+            "name": "Lipetsk",
+            "has_cap": false,
+            "hnames": [
+              "1200.1.1:Lipetskoye Borisoglebskoye",
+              "1703.1.1:Lipskiye Zheleznye Zavody",
+              "1779.9.16:Lipetsk"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0664",
+    "min_dist_km": 0.98,
+    "max_dist_km": 0.98,
+    "reasons": [
+      "close2km_diffdisp:0.985km"
+    ],
+    "nodes": [
+      {
+        "key": "Karatayevo Fortress-Russia",
+        "raw_name": "Karatayevo Fortress",
+        "country": "Russia",
+        "coords": [
+          47.219,
+          39.558
+        ],
+        "min_y": -2000,
+        "max_y": -1700,
+        "n_yrs": 4,
+        "peak": 190,
+        "other_names": [
+          "Каратаевская крепость",
+          "Каратаево"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": []
+      },
+      {
+        "key": "Liventsovka-Russia",
+        "raw_name": "Liventsovka",
+        "country": "Russia",
+        "coords": [
+          47.2147,
+          39.5694
+        ],
+        "min_y": -2100,
+        "max_y": -1700,
+        "n_yrs": 5,
+        "peak": 280,
+        "other_names": [
+          "Ливенцовская крепость",
+          "Ливенцовка I"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": []
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0669",
+    "min_dist_km": 837.43,
+    "max_dist_km": 837.43,
+    "reasons": [
+      "far_suffix:837.4km"
+    ],
+    "nodes": [
+      {
+        "key": "Lugovoye-Russia",
+        "raw_name": "Lugovoye",
+        "country": "Russia",
+        "coords": [
+          49.91057,
+          40.33342
+        ],
+        "min_y": 1648,
+        "max_y": 2026,
+        "n_yrs": 134,
+        "peak": 2201,
+        "other_names": [
+          "Загребайловка",
+          "Расковка"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": []
+      },
+      {
+        "key": "Lugovoye-Russia_2",
+        "raw_name": "Lugovoye",
+        "country": "Russia",
+        "coords": [
+          43.1,
+          45.0167
+        ],
+        "min_y": 1700,
+        "max_y": 1800,
+        "n_yrs": 11,
+        "peak": 620,
+        "other_names": [
+          "Луговое",
+          "Мужичи",
+          "Muzichi"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": []
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0671",
+    "min_dist_km": 0.66,
+    "max_dist_km": 0.66,
+    "reasons": [
+      "disp_gap_le250:0.662km"
+    ],
+    "nodes": [
+      {
+        "key": "Lukh Fortress-Russia",
+        "raw_name": "Lukh Fortress",
+        "country": "Russia",
+        "coords": [
+          57.00701,
+          42.24958
+        ],
+        "min_y": 800,
+        "max_y": 1300,
+        "n_yrs": 6,
+        "peak": 420,
+        "other_names": [
+          "Lukh Fortress",
+          "Zemlyanye valy (gorodishche Lukhskoe) (Lukh)"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 74155,
+            "key": "Lukh Fortress-Russia",
+            "name": "Lukh",
+            "has_cap": false,
+            "hnames": [
+              "800.1.1:Lukh"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Lukh-Russia",
+        "raw_name": "Lukh",
+        "country": "Russia",
+        "coords": [
+          57.01036,
+          42.25861
+        ],
+        "min_y": 1500,
+        "max_y": 2026,
+        "n_yrs": 137,
+        "peak": 3965,
+        "other_names": [
+          "Лух",
+          "Luh"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 38242,
+            "key": null,
+            "name": "Lukh",
+            "has_cap": false,
+            "hnames": [
+              "1897.1.1:Lukh"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0672",
+    "min_dist_km": 1.98,
+    "max_dist_km": 1.98,
+    "reasons": [
+      "close2km_diffdisp:1.981km"
+    ],
+    "nodes": [
+      {
+        "key": "Antychne poselennya Lupareve III Classical Polis-Ukraine",
+        "raw_name": "Antychne poselennya Lupareve III Classical Polis",
+        "country": "Ukraine",
+        "coords": [
+          46.67865,
+          31.97468
+        ],
+        "min_y": -500,
+        "max_y": 400,
+        "n_yrs": 10,
+        "peak": 150,
+        "other_names": [],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 77784,
+            "key": "Antychne poselennya Lupareve III Classical Polis-Ukraine",
+            "name": "Lupareve",
+            "has_cap": false,
+            "hnames": [
+              "-500.1.1:Lupareve"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Luparevo Chora-Ukraine",
+        "raw_name": "Luparevo Chora",
+        "country": "Ukraine",
+        "coords": [
+          46.695,
+          31.985
+        ],
+        "min_y": -500,
+        "max_y": 200,
+        "n_yrs": 8,
+        "peak": 650,
+        "other_names": [
+          "Luparevo",
+          "Left-Bank Bug Estuary Settlement"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": []
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0673",
+    "min_dist_km": 2.44,
+    "max_dist_km": 2.44,
+    "reasons": [
+      "close2km_diffdisp:2.443km"
+    ],
+    "nodes": [
+      {
+        "key": "Lipsk Mediaeval Hillfort-Belarus",
+        "raw_name": "Lipsk Mediaeval Hillfort",
+        "country": "Belarus",
+        "coords": [
+          53.02037,
+          26.28161
+        ],
+        "min_y": 850,
+        "max_y": 1350,
+        "n_yrs": 11,
+        "peak": 440,
+        "other_names": [],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 74991,
+            "key": "Lipsk Mediaeval Hillfort-Belarus",
+            "name": "Lipsk",
+            "has_cap": false,
+            "hnames": [
+              "850.1.1:Lipsk"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Lyakhovichi-Belarus",
+        "raw_name": "Lyakhovichi",
+        "country": "Belarus",
+        "coords": [
+          53.03931,
+          26.26311
+        ],
+        "min_y": 900,
+        "max_y": 2026,
+        "n_yrs": 146,
+        "peak": 11560,
+        "other_names": [
+          "Ляхавічы",
+          "Lachavičy",
+          "Ляховичи",
+          "Lyakhovichi (Vedma River Fortress)",
+          "Lyakhavichy"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": []
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0675",
+    "min_dist_km": 3.95,
+    "max_dist_km": 3.95,
+    "reasons": [
+      "disp_ovlp:3.948km"
+    ],
+    "nodes": [
+      {
+        "key": "Lytvynovychi Bronze Age Settlement-Ukraine",
+        "raw_name": "Lytvynovychi Bronze Age Settlement",
+        "country": "Ukraine",
+        "coords": [
+          51.40542,
+          33.64795
+        ],
+        "min_y": -2200,
+        "max_y": -900,
+        "n_yrs": 14,
+        "peak": 150,
+        "other_names": [],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 77476,
+            "key": "Lytvynovychi Bronze Age Settlement-Ukraine",
+            "name": "Lytvynovychi",
+            "has_cap": false,
+            "hnames": [
+              "-2200.1.1:Lytvynovychi"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Lytvynovychi-2 Bronze Age Settlement-Ukraine",
+        "raw_name": "Lytvynovychi-2 Bronze Age Settlement",
+        "country": "Ukraine",
+        "coords": [
+          51.42284,
+          33.69756
+        ],
+        "min_y": -2200,
+        "max_y": -900,
+        "n_yrs": 14,
+        "peak": 150,
+        "other_names": [],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 77477,
+            "key": "Lytvynovychi-2 Bronze Age Settlement-Ukraine",
+            "name": "Lytvynovychi",
+            "has_cap": false,
+            "hnames": [
+              "-2200.1.1:Lytvynovychi"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0680",
+    "min_dist_km": 2.48,
+    "max_dist_km": 2.48,
+    "reasons": [
+      "close2km_diffdisp:2.481km"
+    ],
+    "nodes": [
+      {
+        "key": "Magil Mediaeval Hillfort-Belarus",
+        "raw_name": "Magil Mediaeval Hillfort",
+        "country": "Belarus",
+        "coords": [
+          53.8937,
+          30.36735
+        ],
+        "min_y": 850,
+        "max_y": 1350,
+        "n_yrs": 11,
+        "peak": 454,
+        "other_names": [],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 73142,
+            "key": "Magil Mediaeval Hillfort-Belarus",
+            "name": "Mahilyow",
+            "has_cap": false,
+            "hnames": [
+              "850.1.1:Mahilyow"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Mahilëu-Belarus",
+        "raw_name": "Mogilev",
+        "country": "Belarus",
+        "coords": [
+          53.9007,
+          30.3314
+        ],
+        "min_y": 1300,
+        "max_y": 2026,
+        "n_yrs": 142,
+        "peak": 381353,
+        "other_names": [
+          "Mahilou",
+          "Mahiljow",
+          "Mahilëv",
+          "Mogilev",
+          "Mahiljou",
+          "Mogiljow"
+        ],
+        "sources": [
+          "populstat",
+          "chandler_modelski",
+          "buringh",
+          "POLARIS",
+          "ghsl"
+        ],
+        "meta": []
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0681",
+    "min_dist_km": 3.59,
+    "max_dist_km": 3.59,
+    "reasons": [
+      "disp_ovlp:3.589km"
+    ],
+    "nodes": [
+      {
+        "key": "Makazhoy Historical and Architectural Complex-Russia",
+        "raw_name": "Makazhoy Historical and Architectural Complex",
+        "country": "Russia",
+        "coords": [
+          42.74,
+          46.05861
+        ],
+        "min_y": 800,
+        "max_y": 1300,
+        "n_yrs": 6,
+        "peak": 1200,
+        "other_names": [
+          "Makazhoy Historical and Architectural Complex"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 74496,
+            "key": "Makazhoy Historical and Architectural Complex-Russia",
+            "name": "Makazhoy",
+            "has_cap": false,
+            "hnames": [
+              "800.1.1:Makazhoy"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Makazhoy-Russia",
+        "raw_name": "Makazhoy",
+        "country": "Russia",
+        "coords": [
+          42.7667,
+          46.0833
+        ],
+        "min_y": 1200,
+        "max_y": 1800,
+        "n_yrs": 17,
+        "peak": 1192,
+        "other_names": [
+          "Макажой"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 36425,
+            "key": null,
+            "name": "Makazhoy",
+            "has_cap": false,
+            "hnames": [
+              "1200.1.1:Makazhoy"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0685",
+    "min_dist_km": 29.1,
+    "max_dist_km": 29.1,
+    "reasons": [
+      "disp_ovlp:29.101km"
+    ],
+    "nodes": [
+      {
+        "key": "Malta-Latvia",
+        "raw_name": "Malta",
+        "country": "Latvia",
+        "coords": [
+          56.34675,
+          27.16155
+        ],
+        "min_y": 1858,
+        "max_y": 2025,
+        "n_yrs": 107,
+        "peak": 3680,
+        "other_names": [],
+        "sources": [
+          "POLARIS",
+          "ghs_pop"
+        ],
+        "meta": [
+          {
+            "idx": 42466,
+            "key": null,
+            "name": "Malta",
+            "has_cap": false,
+            "hnames": [
+              "1897.1.1:Borovaja",
+              "1936.1.1:Malta"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Malta_LV_24-Latvia",
+        "raw_name": "Malta",
+        "country": "Latvia",
+        "coords": [
+          56.57083,
+          26.91685
+        ],
+        "min_y": 1500,
+        "max_y": 2025,
+        "n_yrs": 136,
+        "peak": 3680,
+        "other_names": [],
+        "sources": [
+          "POLARIS",
+          "ghs_pop"
+        ],
+        "meta": [
+          {
+            "idx": 75478,
+            "key": "Malta_LV_24-Latvia",
+            "name": "Malta",
+            "has_cap": false,
+            "hnames": [
+              "1500.1.1:Borovaja",
+              "1937.1.1:Malta"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0687",
+    "min_dist_km": 12.86,
+    "max_dist_km": 12.86,
+    "reasons": [
+      "disp_ovlp:12.856km"
+    ],
+    "nodes": [
+      {
+        "key": "Malyshkauskae garadzishcha-Belarus",
+        "raw_name": "Malyshkauskae garadzishcha",
+        "country": "Belarus",
+        "coords": [
+          54.65161,
+          27.3015
+        ],
+        "min_y": 600,
+        "max_y": 1200,
+        "n_yrs": 7,
+        "peak": 591,
+        "other_names": [],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 75397,
+            "key": "Malyshkauskae garadzishcha-Belarus",
+            "name": "Malyshki",
+            "has_cap": false,
+            "hnames": [
+              "600.1.1:Malyshki"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Malyshki-Belarus",
+        "raw_name": "Malyshki",
+        "country": "Belarus",
+        "coords": [
+          54.5819,
+          27.1422
+        ],
+        "min_y": 500,
+        "max_y": 600,
+        "n_yrs": 2,
+        "peak": 290,
+        "other_names": [
+          "Malyshki (Brushed Pottery Culture Hillfort)",
+          "Malyshki Vileyka"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 37712,
+            "key": null,
+            "name": "Malyshki",
+            "has_cap": false,
+            "hnames": [
+              "-500.1.1:Malyshki"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0688",
+    "min_dist_km": 1.13,
+    "max_dist_km": 1.13,
+    "reasons": [
+      "close2km_diffdisp:1.133km",
+      "disp_ovlp:1.133km"
+    ],
+    "nodes": [
+      {
+        "key": "Mayatskoye Gorodishche-Russia",
+        "raw_name": "Mayatskoye Gorodishche",
+        "country": "Russia",
+        "coords": [
+          50.975,
+          39.295
+        ],
+        "min_y": 800,
+        "max_y": 950,
+        "n_yrs": 4,
+        "peak": 1800,
+        "other_names": [
+          "Маяцкое городище",
+          "Дивногорье"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 36152,
+            "key": "Mayatskoye Gorodishche-Russia",
+            "name": "Mayatskoye",
+            "has_cap": false,
+            "hnames": [
+              "800.1.1:Mayatskoye"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Mayatskoye-Russia",
+        "raw_name": "Mayatskoye",
+        "country": "Russia",
+        "coords": [
+          50.985,
+          39.2981
+        ],
+        "min_y": 750,
+        "max_y": 1000,
+        "n_yrs": 4,
+        "peak": 1600,
+        "other_names": [
+          "Mayaki Khazar Fortress",
+          "Mayatskoe gorodishche",
+          "Divnogore"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 78324,
+            "key": "Mayatskoye-Russia",
+            "name": "Mayatskoye",
+            "has_cap": false,
+            "hnames": [
+              "750.1.1:Mayatskoye"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0692",
+    "min_dist_km": 2.26,
+    "max_dist_km": 2.26,
+    "reasons": [
+      "close2km_diffdisp:2.257km"
+    ],
+    "nodes": [
+      {
+        "key": "Garadzishcha Rus Hillfort-Belarus",
+        "raw_name": "Garadzishcha Rus Hillfort",
+        "country": "Belarus",
+        "coords": [
+          53.81851,
+          27.29983
+        ],
+        "min_y": 900,
+        "max_y": 1300,
+        "n_yrs": 5,
+        "peak": 629,
+        "other_names": [],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 75315,
+            "key": "Garadzishcha Rus Hillfort-Belarus",
+            "name": "Orekhovskaya",
+            "has_cap": false,
+            "hnames": [
+              "900.1.1:Orekhovskaya"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Menka-Belarus",
+        "raw_name": "Menka",
+        "country": "Belarus",
+        "coords": [
+          53.8314,
+          27.3264
+        ],
+        "min_y": 800,
+        "max_y": 1300,
+        "n_yrs": 9,
+        "peak": 2400,
+        "other_names": [
+          "Menka (Stroganets / Gorodishche on the Menka — Early Mensk)",
+          "Mensk on the Menka",
+          "Gorodishche na Menke"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": []
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0693",
+    "min_dist_km": 0.4,
+    "max_dist_km": 0.4,
+    "reasons": [
+      "disp_ovlp:0.402km"
+    ],
+    "nodes": [
+      {
+        "key": "Mergen 3-Russia",
+        "raw_name": "Mergen 3",
+        "country": "Russia",
+        "coords": [
+          56.081,
+          69.345
+        ],
+        "min_y": -5500,
+        "max_y": -4500,
+        "n_yrs": 3,
+        "peak": 40,
+        "other_names": [
+          "Мергень 3",
+          "Lake Mergen III"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 36974,
+            "key": "Mergen 3-Russia",
+            "name": "Mergen",
+            "has_cap": false,
+            "hnames": [
+              "-5500.1.1:Mergen"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Mergen 6-Russia",
+        "raw_name": "Mergen 6",
+        "country": "Russia",
+        "coords": [
+          56.0833,
+          69.35
+        ],
+        "min_y": -6000,
+        "max_y": -4500,
+        "n_yrs": 4,
+        "peak": 65,
+        "other_names": [
+          "Мергень 6",
+          "Lake Mergen VI"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 36975,
+            "key": "Mergen 6-Russia",
+            "name": "Mergen",
+            "has_cap": false,
+            "hnames": [
+              "-6000.1.1:Mergen"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0694",
+    "min_dist_km": 0.42,
+    "max_dist_km": 0.42,
+    "reasons": [
+      "disp_gap_le250:0.423km"
+    ],
+    "nodes": [
+      {
+        "key": "Meshchovsk Medieval Gorodishche-Russia",
+        "raw_name": "Meshchovsk Medieval Gorodishche",
+        "country": "Russia",
+        "coords": [
+          54.325,
+          35.287
+        ],
+        "min_y": 350,
+        "max_y": 1200,
+        "n_yrs": 13,
+        "peak": 950,
+        "other_names": [
+          "Meshchovsk Medieval Gorodishche"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 73342,
+            "key": "Meshchovsk Medieval Gorodishche-Russia",
+            "name": "Meshchovsk",
+            "has_cap": false,
+            "hnames": [
+              "350.1.1:Meshchovsk"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Meshchovsk-Russia",
+        "raw_name": "Meshchovsk",
+        "country": "Russia",
+        "coords": [
+          54.32148,
+          35.28453
+        ],
+        "min_y": 1238,
+        "max_y": 2026,
+        "n_yrs": 145,
+        "peak": 5385,
+        "other_names": [
+          "Мещовск",
+          "Meščovsk",
+          "Meschovsk",
+          "Meshchovsk",
+          "Meshchovskoe gorodishche"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 35646,
+            "key": null,
+            "name": "Meshchovsk",
+            "has_cap": true,
+            "hnames": [
+              "350.1.1:Mezetsk",
+              "1238.1.1:Meshchovsk"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0695",
+    "min_dist_km": 6.88,
+    "max_dist_km": 6.88,
+    "reasons": [
+      "disp_ovlp:6.875km"
+    ],
+    "nodes": [
+      {
+        "key": "Messer-Russia",
+        "raw_name": "Messer",
+        "country": "Russia",
+        "coords": [
+          50.925,
+          45.605
+        ],
+        "min_y": 1767,
+        "max_y": 1850,
+        "n_yrs": 10,
+        "peak": 3100,
+        "other_names": [
+          "Усть-Золиха",
+          "Мессер"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 36833,
+            "key": null,
+            "name": "Ust-Zolikha",
+            "has_cap": false,
+            "hnames": [
+              "1766.1.1:Messer",
+              "1768.2.26:Ust-Zolikha",
+              "1926.1.1:Messer",
+              "1942.1.1:Ust-Zolikha"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Ust-Zalikha-Russia",
+        "raw_name": "Ust-Zalikha",
+        "country": "Russia",
+        "coords": [
+          50.97437,
+          45.54592
+        ],
+        "min_y": 1782,
+        "max_y": 2026,
+        "n_yrs": 120,
+        "peak": 3890,
+        "other_names": [
+          "Усть-Залиха"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 74279,
+            "key": "Ust-Zalikha-Russia",
+            "name": "Ust-Zolikha",
+            "has_cap": false,
+            "hnames": [
+              "1782.1.1:Messer",
+              "1942.1.1:Ust-Zolikha"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0696",
+    "min_dist_km": 2.04,
+    "max_dist_km": 2.04,
+    "reasons": [
+      "disp_gap_le250:2.041km"
+    ],
+    "nodes": [
+      {
+        "key": "Barvikha-Russia",
+        "raw_name": "Barvikha",
+        "country": "Russia",
+        "coords": [
+          55.74212,
+          37.27926
+        ],
+        "min_y": 1500,
+        "max_y": 2026,
+        "n_yrs": 137,
+        "peak": 4560,
+        "other_names": [
+          "Барвиха"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 43389,
+            "key": null,
+            "name": "Barvikha",
+            "has_cap": false,
+            "hnames": [
+              "1897.1.1:Barvikha"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Meyendorff Castle-Russia",
+        "raw_name": "Meyendorff Castle",
+        "country": "Russia",
+        "coords": [
+          55.7242,
+          37.2722
+        ],
+        "min_y": 800,
+        "max_y": 1300,
+        "n_yrs": 6,
+        "peak": 420,
+        "other_names": [
+          "Meyendorff Castle",
+          "Mayendorf"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 73472,
+            "key": "Meyendorff Castle-Russia",
+            "name": "Barvikha",
+            "has_cap": false,
+            "hnames": [
+              "800.1.1:Barvikha"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0697",
+    "min_dist_km": 1.41,
+    "max_dist_km": 1.41,
+    "reasons": [
+      "close2km_diffdisp:1.414km"
+    ],
+    "nodes": [
+      {
+        "key": "Hoty 933 Chernyakhov Settlement-Ukraine",
+        "raw_name": "Hoty 933 Chernyakhov Settlement",
+        "country": "Ukraine",
+        "coords": [
+          48.02496,
+          30.93332
+        ],
+        "min_y": 200,
+        "max_y": 420,
+        "n_yrs": 4,
+        "peak": 140,
+        "other_names": [],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 77819,
+            "key": "Hoty 933 Chernyakhov Settlement-Ukraine",
+            "name": "Hrushivka",
+            "has_cap": false,
+            "hnames": [
+              "200.1.1:Hrushivka"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Migeya Bug Rapids-Ukraine",
+        "raw_name": "Migeya Bug Rapids",
+        "country": "Ukraine",
+        "coords": [
+          48.035,
+          30.945
+        ],
+        "min_y": -5000,
+        "max_y": 1300,
+        "n_yrs": 69,
+        "peak": 800,
+        "other_names": [
+          "Migiya",
+          "Bug-Tashlyk Confluence Settlement"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": []
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0698",
+    "min_dist_km": 0.14,
+    "max_dist_km": 0.14,
+    "reasons": [
+      "close2km_diffdisp:0.144km"
+    ],
+    "nodes": [
+      {
+        "key": "Mikhailov Medieval Gorodishche-Russia",
+        "raw_name": "Mikhailov Medieval Gorodishche",
+        "country": "Russia",
+        "coords": [
+          54.2332,
+          39.0307
+        ],
+        "min_y": 1137,
+        "max_y": 1500,
+        "n_yrs": 10,
+        "peak": 1100,
+        "other_names": [
+          "Mikhailov Medieval Gorodishche"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 73547,
+            "key": "Mikhailov Medieval Gorodishche-Russia",
+            "name": "Mikhaylov",
+            "has_cap": false,
+            "hnames": [
+              "1137.1.1:Mikhaylov"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Mikhaylov-Russia",
+        "raw_name": "Mikhaylov",
+        "country": "Russia",
+        "coords": [
+          54.23227,
+          39.02915
+        ],
+        "min_y": 1400,
+        "max_y": 2026,
+        "n_yrs": 142,
+        "peak": 15302,
+        "other_names": [
+          "Mikhaylov",
+          "Ryazan Oblast",
+          "Mikhaylov, Ryazan Oblast",
+          "Михайлов",
+          "Mihajlov"
+        ],
+        "sources": [
+          "chandler_modelski",
+          "buringh",
+          "POLARIS"
+        ],
+        "meta": []
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0699",
+    "min_dist_km": 9.15,
+    "max_dist_km": 9.15,
+    "reasons": [
+      "disp_ovlp:9.152km"
+    ],
+    "nodes": [
+      {
+        "key": "Mikhaylovsk_RU_71-Russia",
+        "raw_name": "Mikhaylovsk",
+        "country": "Russia",
+        "coords": [
+          56.43583,
+          59.12
+        ],
+        "min_y": 1805,
+        "max_y": 2026,
+        "n_yrs": 117,
+        "peak": 12955,
+        "other_names": [
+          "Михайловск",
+          "Mihajlovsk",
+          "Михайловский"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 38971,
+            "key": null,
+            "name": "Mikhaylovsk",
+            "has_cap": false,
+            "hnames": [
+              "1897.1.1:Mikhaylovskiy",
+              "1961.1.9:Mikhaylovsk"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Mikhaylovskiy Zavod-Russia",
+        "raw_name": "Mikhaylovskiy Zavod",
+        "country": "Russia",
+        "coords": [
+          56.40222,
+          59.25583
+        ],
+        "min_y": 1811,
+        "max_y": 2026,
+        "n_yrs": 115,
+        "peak": 5765,
+        "other_names": [
+          "Михайловский завод"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 74289,
+            "key": "Mikhaylovskiy Zavod-Russia",
+            "name": "Mikhaylovsk",
+            "has_cap": false,
+            "hnames": [
+              "1811.1.1:Mikhaylovsky Zavod",
+              "1961.1.1:Mikhaylovsk"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0700",
+    "min_dist_km": 1.44,
+    "max_dist_km": 1.44,
+    "reasons": [
+      "close2km_diffdisp:1.437km",
+      "disp_ovlp:1.437km"
+    ],
+    "nodes": [
+      {
+        "key": "Baranovichi-Mysh-Belarus",
+        "raw_name": "Baranovichi-Mysh",
+        "country": "Belarus",
+        "coords": [
+          53.1819,
+          25.9144
+        ],
+        "min_y": 900,
+        "max_y": 1300,
+        "n_yrs": 8,
+        "peak": 960,
+        "other_names": [
+          "Baranovichi-Mysh (Starye Myshy Shchara Hillfort)",
+          "Mysh",
+          "Staryya Myshy"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 74947,
+            "key": "Baranovichi-Mysh-Belarus",
+            "name": "Staraya Mysh",
+            "has_cap": false,
+            "hnames": [
+              "900.1.1:Mysh",
+              "1200.1.1:Staraya Mysh"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Mish Castle-Belarus",
+        "raw_name": "Mish Castle",
+        "country": "Belarus",
+        "coords": [
+          53.18224,
+          25.89284
+        ],
+        "min_y": 800,
+        "max_y": 1300,
+        "n_yrs": 7,
+        "peak": 620,
+        "other_names": [],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 74994,
+            "key": "Mish Castle-Belarus",
+            "name": "Staraya Mysh",
+            "has_cap": false,
+            "hnames": [
+              "800.1.1:Mysh",
+              "1200.1.1:Staraya Mysh"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0704",
+    "min_dist_km": 445.61,
+    "max_dist_km": 445.61,
+    "reasons": [
+      "far_suffix:445.6km"
+    ],
+    "nodes": [
+      {
+        "key": "Mokraya Balka-Russia",
+        "raw_name": "Mokraya Balka",
+        "country": "Russia",
+        "coords": [
+          47.34,
+          39.88
+        ],
+        "min_y": -1600,
+        "max_y": -1150,
+        "n_yrs": 6,
+        "peak": 185,
+        "other_names": [
+          "Мокрая Балка"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": []
+      },
+      {
+        "key": "Mokraya Balka-Russia_2",
+        "raw_name": "Mokraya Balka",
+        "country": "Russia",
+        "coords": [
+          43.865,
+          42.735
+        ],
+        "min_y": 450,
+        "max_y": 900,
+        "n_yrs": 7,
+        "peak": 420,
+        "other_names": [
+          "Mokraya Balka",
+          "Krepost Mokraya Balka"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": []
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0705",
+    "min_dist_km": 4.8,
+    "max_dist_km": 4.8,
+    "reasons": [
+      "disp_ovlp:4.8km"
+    ],
+    "nodes": [
+      {
+        "key": "Monastyryska Castle-Ukraine",
+        "raw_name": "Monastyryska Castle",
+        "country": "Ukraine",
+        "coords": [
+          49.06667,
+          25.11667
+        ],
+        "min_y": 800,
+        "max_y": 1300,
+        "n_yrs": 6,
+        "peak": 150,
+        "other_names": [
+          "Monastyryska Castle",
+          "Zamek w Monasterzyskach",
+          "Zamok Monastyryshcha"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 76858,
+            "key": "Monastyryska Castle-Ukraine",
+            "name": "Monastyryska",
+            "has_cap": false,
+            "hnames": [
+              "800.1.1:Monastyryska"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Monastyryska-Ukraine",
+        "raw_name": "Monastyryska",
+        "country": "Ukraine",
+        "coords": [
+          49.09063,
+          25.17149
+        ],
+        "min_y": 1000,
+        "max_y": 2026,
+        "n_yrs": 143,
+        "peak": 7234,
+        "other_names": [
+          "Монастириська",
+          "Monastyryśka",
+          "Monastiriska",
+          "Monastyriska"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 37623,
+            "key": null,
+            "name": "Monastyryska",
+            "has_cap": false,
+            "hnames": [
+              "1000.1.1:Monastyryska",
+              "1349.1.1:Monasterzyska",
+              "1939.9.17:Monastyriska",
+              "1991.8.24:Monastyryska"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0706",
+    "min_dist_km": 4.12,
+    "max_dist_km": 4.12,
+    "reasons": [
+      "disp_ovlp:4.124km"
+    ],
+    "nodes": [
+      {
+        "key": "Moshchiny Gorodishche-Russia",
+        "raw_name": "Moshchiny Gorodishche",
+        "country": "Russia",
+        "coords": [
+          54.455,
+          35.1289
+        ],
+        "min_y": 200,
+        "max_y": 700,
+        "n_yrs": 7,
+        "peak": 180,
+        "other_names": [
+          "Moschiny Hillfort"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 73343,
+            "key": "Moshchiny Gorodishche-Russia",
+            "name": "Moshchiny",
+            "has_cap": false,
+            "hnames": [
+              "200.1.1:Moshchiny"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Moshchiny-Russia",
+        "raw_name": "Moshchiny",
+        "country": "Russia",
+        "coords": [
+          54.42,
+          35.15
+        ],
+        "min_y": 250,
+        "max_y": 900,
+        "n_yrs": 11,
+        "peak": 220,
+        "other_names": [
+          "Moshchiny",
+          "Moshchinskoe gorodishche"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 36171,
+            "key": null,
+            "name": "Moshchiny",
+            "has_cap": false,
+            "hnames": [
+              "250.1.1:Moshchiny"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0709",
+    "min_dist_km": 1.84,
+    "max_dist_km": 1.84,
+    "reasons": [
+      "disp_gap_le250:1.843km"
+    ],
+    "nodes": [
+      {
+        "key": "Murom Oksky Gorodishche-Russia",
+        "raw_name": "Murom Oksky Gorodishche",
+        "country": "Russia",
+        "coords": [
+          55.579,
+          42.0466
+        ],
+        "min_y": 450,
+        "max_y": 750,
+        "n_yrs": 5,
+        "peak": 450,
+        "other_names": [
+          "Murom Oksky Gorodishche"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 73625,
+            "key": "Murom Oksky Gorodishche-Russia",
+            "name": "Murom",
+            "has_cap": false,
+            "hnames": [
+              "450.1.1:Murom"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Murom-Russia",
+        "raw_name": "Murom",
+        "country": "Russia",
+        "coords": [
+          55.56853,
+          42.02388
+        ],
+        "min_y": 800,
+        "max_y": 2026,
+        "n_yrs": 150,
+        "peak": 126901,
+        "other_names": [
+          "Муром",
+          "Муромъ",
+          "Oka River Port",
+          "Chaadaevo",
+          "Turom",
+          "Kremlevskoe gorodishche"
+        ],
+        "sources": [
+          "populstat",
+          "chandler_modelski",
+          "buringh",
+          "POLARIS",
+          "ghsl"
+        ],
+        "meta": [
+          {
+            "idx": 24977,
+            "key": null,
+            "name": "Murom",
+            "has_cap": true,
+            "hnames": [
+              "450.1.1:Chaadaevo",
+              "862.1.1:Murom"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0710",
+    "min_dist_km": 22.24,
+    "max_dist_km": 22.24,
+    "reasons": [
+      "disp_ovlp:22.245km"
+    ],
+    "nodes": [
+      {
+        "key": "Khram Rozhdestva Presvyatoy Bogoroditsy Mediaeval Hillfort-Belarus",
+        "raw_name": "Khram Rozhdestva Presvyatoy Bogoroditsy Mediaeval Hillfort",
+        "country": "Belarus",
+        "coords": [
+          53.69764,
+          25.00001
+        ],
+        "min_y": 850,
+        "max_y": 1350,
+        "n_yrs": 11,
+        "peak": 366,
+        "other_names": [],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 75129,
+            "key": "Khram Rozhdestva Presvyatoy Bogoroditsy Mediaeval Hillfort-Belarus",
+            "name": "Murovanka",
+            "has_cap": false,
+            "hnames": [
+              "850.1.1:Murovanka"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Murovanka tserkov Rozhdestva Bogoroditsy Late Mediaeval Hillfort-Belarus",
+        "raw_name": "Murovanka tserkov Rozhdestva Bogoroditsy Late Mediaeval Hillfort",
+        "country": "Belarus",
+        "coords": [
+          53.71782,
+          24.66375
+        ],
+        "min_y": 1250,
+        "max_y": 1350,
+        "n_yrs": 3,
+        "peak": 510,
+        "other_names": [],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 75171,
+            "key": "Murovanka tserkov Rozhdestva Bogoroditsy Late Mediaeval Hillfort-Belarus",
+            "name": "Murovanka",
+            "has_cap": false,
+            "hnames": [
+              "1250.1.1:Murovanka"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0711",
+    "min_dist_km": 1.62,
+    "max_dist_km": 1.62,
+    "reasons": [
+      "close2km_diffdisp:1.621km"
+    ],
+    "nodes": [
+      {
+        "key": "Miadziel Castle-Belarus",
+        "raw_name": "Miadziel Castle",
+        "country": "Belarus",
+        "coords": [
+          54.87079,
+          26.91518
+        ],
+        "min_y": 800,
+        "max_y": 1300,
+        "n_yrs": 6,
+        "peak": 596,
+        "other_names": [],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 75403,
+            "key": "Miadziel Castle-Belarus",
+            "name": "Novyy Myadel",
+            "has_cap": false,
+            "hnames": [
+              "800.1.1:Novyy Myadel"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Myadzyel-Belarus",
+        "raw_name": "Myadzyel",
+        "country": "Belarus",
+        "coords": [
+          54.87894,
+          26.93619
+        ],
+        "min_y": 900,
+        "max_y": 2026,
+        "n_yrs": 146,
+        "peak": 7800,
+        "other_names": [
+          "Мядзель",
+          "Miadziel",
+          "Staromyadel (Lake Myastro Island Fortress)",
+          "Myadzel",
+          "Stary Myadel"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 37735,
+            "key": null,
+            "name": "Myadel",
+            "has_cap": false,
+            "hnames": [
+              "900.1.1:Staromyadel",
+              "1324.1.1:Miadzioł",
+              "1793.1.1:Myadel",
+              "1921.3.18:Miadzioł",
+              "1939.9.17:Myadel"
+            ]
+          },
+          {
+            "idx": 75411,
+            "key": "Myadzyel-Belarus",
+            "name": "Myadel",
+            "has_cap": false,
+            "hnames": [
+              "900.1.1:Myadel",
+              "1500.1.1:Miadziel",
+              "1795.1.1:Myadel",
+              "1921.1.1:Miadziel",
+              "1945.1.1:Myadel"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0714",
+    "min_dist_km": 1170.7,
+    "max_dist_km": 1170.7,
+    "reasons": [
+      "far_suffix:1170.7km"
+    ],
+    "nodes": [
+      {
+        "key": "Nadezhda-Russia",
+        "raw_name": "Nadezhda",
+        "country": "Russia",
+        "coords": [
+          44.1,
+          44.6
+        ],
+        "min_y": 1782,
+        "max_y": 2026,
+        "n_yrs": 120,
+        "peak": 12006,
+        "other_names": [
+          "Надежда"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": []
+      },
+      {
+        "key": "Nadezhda-Russia_2",
+        "raw_name": "Nadezhda",
+        "country": "Russia",
+        "coords": [
+          52.95113,
+          35.94525
+        ],
+        "min_y": 600,
+        "max_y": 1240,
+        "n_yrs": 8,
+        "peak": 420,
+        "other_names": [
+          "Nadezhda"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 73990,
+            "key": "Nadezhda-Russia_2",
+            "name": "Zvyaginki",
+            "has_cap": false,
+            "hnames": [
+              "600.1.1:Zvyaginki"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0721",
+    "min_dist_km": 0.48,
+    "max_dist_km": 0.48,
+    "reasons": [
+      "close2km_diffdisp:0.48km",
+      "disp_ovlp:0.48km"
+    ],
+    "nodes": [
+      {
+        "key": "Naukan Medieval Gorodishche-Russia",
+        "raw_name": "Naukan Medieval Gorodishche",
+        "country": "Russia",
+        "coords": [
+          66.0207,
+          -169.7127
+        ],
+        "min_y": 1100,
+        "max_y": 1650,
+        "n_yrs": 10,
+        "peak": 220,
+        "other_names": [
+          "Naukan Medieval Gorodishche"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 72785,
+            "key": "Naukan Medieval Gorodishche-Russia",
+            "name": "Naukan",
+            "has_cap": false,
+            "hnames": [
+              "1100.1.1:Naukan"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Naukan-Russia",
+        "raw_name": "Naukan",
+        "country": "Russia",
+        "coords": [
+          66.0167,
+          -169.7167
+        ],
+        "min_y": 1650,
+        "max_y": 1800,
+        "n_yrs": 12,
+        "peak": 280,
+        "other_names": [
+          "Наукан",
+          "Nuvuqaq"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 37308,
+            "key": null,
+            "name": "Naukan",
+            "has_cap": false,
+            "hnames": [
+              "1200.1.1:Nuvuqaq",
+              "1897.1.1:Naukan"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0724",
+    "min_dist_km": 0.1,
+    "max_dist_km": 0.1,
+    "reasons": [
+      "disp_gap_le250:0.104km"
+    ],
+    "nodes": [
+      {
+        "key": "Gavrilov Posad-Russia",
+        "raw_name": "Gavrilov Posad",
+        "country": "Russia",
+        "coords": [
+          56.55894,
+          40.12039
+        ],
+        "min_y": 1434,
+        "max_y": 2026,
+        "n_yrs": 138,
+        "peak": 8492,
+        "other_names": [
+          "Гаврилов Посад"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 38725,
+            "key": null,
+            "name": "Gavrilov Posad",
+            "has_cap": false,
+            "hnames": [
+              "1434.1.1:Gavrilovskoye",
+              "1600.1.1:Gavrilovskaya Sloboda",
+              "1789.5.14:Gavrilov Posad"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Nekropol goroda Gavrilov-Posad (Gavrilov Posad)-Russia",
+        "raw_name": "Nekropol goroda Gavrilov-Posad",
+        "country": "Russia",
+        "coords": [
+          56.55867,
+          40.12202
+        ],
+        "min_y": 800,
+        "max_y": 1300,
+        "n_yrs": 6,
+        "peak": 420,
+        "other_names": [
+          "Nekropol goroda Gavrilov-Posad (Gavrilov Posad)"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 74156,
+            "key": "Nekropol goroda Gavrilov-Posad (Gavrilov Posad)-Russia",
+            "name": "Gavrilov Posad",
+            "has_cap": false,
+            "hnames": [
+              "800.1.1:Gavrilov Posad"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0725",
+    "min_dist_km": 0.58,
+    "max_dist_km": 0.58,
+    "reasons": [
+      "disp_ovlp:0.579km"
+    ],
+    "nodes": [
+      {
+        "key": "Nev'jansk-Russia",
+        "raw_name": "Nev'jansk",
+        "country": "Russia",
+        "coords": [
+          57.49233,
+          60.21415
+        ],
+        "min_y": 1678,
+        "max_y": 2026,
+        "n_yrs": 133,
+        "peak": 32361,
+        "other_names": [
+          "Невьянск"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 74290,
+            "key": "Nev'jansk-Russia",
+            "name": "Nevyansk",
+            "has_cap": false,
+            "hnames": [
+              "1678.1.1:Fedotovo",
+              "1701.1.1:Nevyansky Zavod",
+              "1920.1.1:Nevyansk"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Nevyansk-Russia",
+        "raw_name": "Nevyansk",
+        "country": "Russia",
+        "coords": [
+          57.4892,
+          60.2219
+        ],
+        "min_y": 1700,
+        "max_y": 1720,
+        "n_yrs": 3,
+        "peak": 6500,
+        "other_names": [
+          "Nevyansky Zavod",
+          "Demidov Ironworks"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 37893,
+            "key": null,
+            "name": "Nevyansk",
+            "has_cap": false,
+            "hnames": [
+              "1701.12.15:Nevyansky Zavod",
+              "1919.1.1:Nevyansk"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0730",
+    "min_dist_km": 11.25,
+    "max_dist_km": 11.25,
+    "reasons": [
+      "disp_ovlp:11.255km"
+    ],
+    "nodes": [
+      {
+        "key": "Garadzishcha peryyadu rannyaga zhaleznaga veku 30-Belarus",
+        "raw_name": "Garadzishcha peryyadu rannyaga zhaleznaga veku",
+        "country": "Belarus",
+        "coords": [
+          52.93903,
+          31.17634
+        ],
+        "min_y": 600,
+        "max_y": 1240,
+        "n_yrs": 8,
+        "peak": 142,
+        "other_names": [
+          "Haradzishcha peryyadu rannyaha zhaleznaha veku"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 73707,
+            "key": "Garadzishcha peryyadu rannyaga zhaleznaga veku 30-Belarus",
+            "name": "Nisimkavichy",
+            "has_cap": false,
+            "hnames": [
+              "600.1.1:Nisimkavichy"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Nisimkovichi-Belarus",
+        "raw_name": "Nisimkovichi",
+        "country": "Belarus",
+        "coords": [
+          52.88,
+          31.04
+        ],
+        "min_y": 700,
+        "max_y": 1300,
+        "n_yrs": 11,
+        "peak": 865,
+        "other_names": [
+          "Nisimkovichi (Chechera-Sozh Excavated Radimichi Complex)",
+          "Nisimkovichy",
+          "Nysymkovychy"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 37547,
+            "key": null,
+            "name": "Nisimkavichy",
+            "has_cap": false,
+            "hnames": [
+              "700.1.1:Nisimkovichi",
+              "1991.8.25:Nisimkavichy"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0731",
+    "min_dist_km": 2.56,
+    "max_dist_km": 2.56,
+    "reasons": [
+      "disp_gap_le250:2.559km"
+    ],
+    "nodes": [
+      {
+        "key": "Kandalak`'sa-Russia",
+        "raw_name": "Kandalaksha",
+        "country": "Russia",
+        "coords": [
+          67.15123,
+          32.41284
+        ],
+        "min_y": 1526,
+        "max_y": 2026,
+        "n_yrs": 137,
+        "peak": 54080,
+        "other_names": [
+          "Kandalaksha",
+          "Kandalax",
+          "Kannanlahti",
+          "Kandalak`'sa",
+          "Кандалакша",
+          "Kandalakša"
+        ],
+        "sources": [
+          "populstat",
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 16942,
+            "key": null,
+            "name": "Kandalaksha",
+            "has_cap": false,
+            "hnames": [
+              "1926.1.1:Kandalaksha"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Niva 14 (poselenie)-Russia",
+        "raw_name": "Niva 14",
+        "country": "Russia",
+        "coords": [
+          67.12969,
+          32.4337
+        ],
+        "min_y": 800,
+        "max_y": 1300,
+        "n_yrs": 6,
+        "peak": 650,
+        "other_names": [
+          "Niva 14 (poselenie)"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 72919,
+            "key": "Niva 14 (poselenie)-Russia",
+            "name": "Kandalaksha",
+            "has_cap": false,
+            "hnames": [
+              "800.1.1:Kandalaksha"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0733",
+    "min_dist_km": 0.48,
+    "max_dist_km": 0.48,
+    "reasons": [
+      "disp_ovlp:0.481km"
+    ],
+    "nodes": [
+      {
+        "key": "Nizhne-Chirskaya-Russia",
+        "raw_name": "Nizhne-Chirskaya",
+        "country": "Russia",
+        "coords": [
+          48.36,
+          43.08
+        ],
+        "min_y": 1637,
+        "max_y": 1850,
+        "n_yrs": 17,
+        "peak": 8500,
+        "other_names": [
+          "Нижне-Чирская станица"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 36920,
+            "key": null,
+            "name": "Nizhny Chir",
+            "has_cap": false,
+            "hnames": [
+              "1637.1.1:Nizhniy Chir",
+              "1700.1.1:Nizhne-Chirskaya",
+              "1960.1.1:Nizhny Chir"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Nizhniy Chir-Russia",
+        "raw_name": "Nizhniy Chir",
+        "country": "Russia",
+        "coords": [
+          48.35973,
+          43.0865
+        ],
+        "min_y": 1637,
+        "max_y": 2026,
+        "n_yrs": 137,
+        "peak": 8817,
+        "other_names": [
+          "Нижний Чир",
+          "Nižnij Čir",
+          "Нижне-Чирская"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 74406,
+            "key": "Nizhniy Chir-Russia",
+            "name": "Nizhny Chir",
+            "has_cap": false,
+            "hnames": [
+              "1637.1.1:Nizhne-Chirskaya",
+              "1920.1.1:Nizhny Chir"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0734",
+    "min_dist_km": 5.49,
+    "max_dist_km": 5.49,
+    "reasons": [
+      "disp_ovlp:5.493km"
+    ],
+    "nodes": [
+      {
+        "key": "Ni`'znij Novgorod-Russia",
+        "raw_name": "Nizhny Novgorod",
+        "country": "Russia",
+        "coords": [
+          56.2965,
+          43.9361
+        ],
+        "min_y": 1300,
+        "max_y": 2026,
+        "n_yrs": 145,
+        "peak": 1445000,
+        "other_names": [
+          "Ni`'znij Novgorod",
+          "Makaryev Fair",
+          "Nizhegorodskaya Yarmarka",
+          "Нижний Новгород",
+          "Nizhniy Novgorod",
+          "Горький"
+        ],
+        "sources": [
+          "populstat",
+          "POLARIS",
+          "ghsl"
+        ],
+        "meta": [
+          {
+            "idx": 8286,
+            "key": null,
+            "name": "Nizhny Novgorod",
+            "has_cap": true,
+            "hnames": [
+              "1221.1.1:Nizhny Novgorod",
+              "1932.10.7:Gorky",
+              "1990.10.22:Nizhny Novgorod"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Nizhny Novgorod prison-Russia",
+        "raw_name": "Nizhny Novgorod prison",
+        "country": "Russia",
+        "coords": [
+          56.31722,
+          44.01694
+        ],
+        "min_y": 1820,
+        "max_y": 1858,
+        "n_yrs": 5,
+        "peak": 750,
+        "other_names": [
+          "Nizhny Novgorod prison",
+          "Nizhegorodskiy ostrog"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 74204,
+            "key": "Nizhny Novgorod prison-Russia",
+            "name": "Nizhny Novgorod",
+            "has_cap": false,
+            "hnames": [
+              "1820.1.1:Nizhny Novgorod"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0742",
+    "min_dist_km": 0.22,
+    "max_dist_km": 0.22,
+    "reasons": [
+      "disp_gap_le250:0.224km"
+    ],
+    "nodes": [
+      {
+        "key": "Novosil'-Russia",
+        "raw_name": "Novosil'",
+        "country": "Russia",
+        "coords": [
+          52.97277,
+          37.03958
+        ],
+        "min_y": 1400,
+        "max_y": 2026,
+        "n_yrs": 139,
+        "peak": 4800,
+        "other_names": [
+          "Новосиль"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 35432,
+            "key": null,
+            "name": "Novosil",
+            "has_cap": true,
+            "hnames": [
+              "1247.1.1:Novosil"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Novosilskoe gorodishche-Russia",
+        "raw_name": "Novosilskoe gorodishche",
+        "country": "Russia",
+        "coords": [
+          52.9708,
+          37.0403
+        ],
+        "min_y": 800,
+        "max_y": 1300,
+        "n_yrs": 6,
+        "peak": 420,
+        "other_names": [
+          "Novosilskoe gorodishche"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 73991,
+            "key": "Novosilskoe gorodishche-Russia",
+            "name": "Novosil",
+            "has_cap": false,
+            "hnames": [
+              "800.1.1:Novosil"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0745",
+    "min_dist_km": 0.35,
+    "max_dist_km": 0.35,
+    "reasons": [
+      "disp_gap_le250:0.351km"
+    ],
+    "nodes": [
+      {
+        "key": "Obesta-Kleven Gorodishche-Ukraine",
+        "raw_name": "Obesta-Kleven Gorodishche",
+        "country": "Ukraine",
+        "coords": [
+          51.57,
+          34.12
+        ],
+        "min_y": 700,
+        "max_y": 1300,
+        "n_yrs": 11,
+        "peak": 876,
+        "other_names": [
+          "Obesta-Kleven Gorodishche (Shalyhyne Hlukhiv Principality)",
+          "Obesta",
+          "Shalyhyne",
+          "Obesta horodyshche"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 37527,
+            "key": "Obesta-Kleven Gorodishche-Ukraine",
+            "name": "Shalyhyne",
+            "has_cap": false,
+            "hnames": [
+              "700.1.1:Shalyhyne"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Shalyhyne-Ukraine",
+        "raw_name": "Shalyhyne",
+        "country": "Ukraine",
+        "coords": [
+          51.56988,
+          34.12507
+        ],
+        "min_y": 1550,
+        "max_y": 2026,
+        "n_yrs": 136,
+        "peak": 6652,
+        "other_names": [
+          "Шалигине",
+          "Šalyhyne",
+          "smt Šalyhyne"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 78337,
+            "key": "Shalyhyne-Ukraine",
+            "name": "Shalyhyne",
+            "has_cap": false,
+            "hnames": [
+              "1550.1.1:Shalygino",
+              "1991.8.24:Shalyhyne"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cluster_id": "C0746",
+    "min_dist_km": 4.48,
+    "max_dist_km": 4.48,
+    "reasons": [
+      "disp_ovlp:4.483km"
+    ],
+    "nodes": [
+      {
+        "key": "10-12 vv. Mediaeval Hillfort-Belarus",
+        "raw_name": "10-12 vv. Mediaeval Hillfort",
+        "country": "Belarus",
+        "coords": [
+          54.5984,
+          29.8333
+        ],
+        "min_y": 850,
+        "max_y": 1350,
+        "n_yrs": 11,
+        "peak": 475,
+        "other_names": [],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 72506,
+            "key": "10-12 vv. Mediaeval Hillfort-Belarus",
+            "name": "Oboltsy",
+            "has_cap": false,
+            "hnames": [
+              "850.1.1:Oboltsy"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Oboltsy-Belarus",
+        "raw_name": "Oboltsy",
+        "country": "Belarus",
+        "coords": [
+          54.5581,
+          29.8314
+        ],
+        "min_y": 900,
+        "max_y": 1300,
+        "n_yrs": 8,
+        "peak": 1400,
+        "other_names": [
+          "Aboltsy",
+          "Oboltsy Tolochin"
+        ],
+        "sources": [
+          "POLARIS"
+        ],
+        "meta": [
+          {
+            "idx": 37742,
+            "key": null,
+            "name": "Oboltsy",
+            "has_cap": false,
+            "hnames": [
+              "900.1.1:Oboltsy",
+              "1387.1.1:Obolce",
+              "1772.1.1:Oboltsy"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

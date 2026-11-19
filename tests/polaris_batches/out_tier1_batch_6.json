@@ -1,0 +1,1682 @@
+[
+  {
+    "cluster_id": "C0948",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Taganrog Fortress-Russia",
+        "target_key": "Taganrog-Russia",
+        "reason": "Taganrog Fortress (Troitskaya fortress on cape Tagan-Rog) is the founding citadel of the continuous port city of Taganrog."
+      }
+    ],
+    "clean_names": {
+      "Taganrog-Russia": "Taganrog"
+    }
+  },
+  {
+    "cluster_id": "C0949",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Takmykskaya sloboda - odno iz pervykh osnovannykh russkimi poseleniy Priobya (Takmyk)-Russia",
+        "target_key": "Takmyk-Russia",
+        "reason": "Scraped verbose title twin of the continuous Siberian settlement Takmyk on the Irtysh."
+      }
+    ],
+    "clean_names": {
+      "Takmyk-Russia": "Takmyk"
+    }
+  },
+  {
+    "cluster_id": "C0950",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Tamatarkha (17001900)-Russia",
+        "target_key": "Taman-Russia",
+        "reason": "Overlapping chronological slice of continuous settlement at Taman (ancient Tamatarkha / Tmutarakan)."
+      }
+    ],
+    "clean_names": {
+      "Taman-Russia": "Taman"
+    }
+  },
+  {
+    "cluster_id": "C0952",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Terekhovo-Russia_2",
+        "new_name": "Terekhovo (Archaeological Complex)",
+        "reason": "Distinct 1st millennium AD archaeological complex on the Oka river in Ryazan Oblast, 360 km from Terekhovo village in Voronezh Oblast."
+      }
+    ],
+    "clean_names": {
+      "Terekhovo-Russia": "Terekhovo",
+      "Terekhovo-Russia_2": "Terekhovo (Archaeological Complex)"
+    }
+  },
+  {
+    "cluster_id": "C0953",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Golyshev Eneolithic Hillfort-Ukraine",
+        "new_name": "Holyshiv",
+        "reason": "Distinct Eneolithic hillfort settlement at Holyshiv, separate from nearby Teremne."
+      }
+    ],
+    "clean_names": {
+      "Golyshev Eneolithic Hillfort-Ukraine": "Holyshiv",
+      "Teremne-Ukraine": "Teremne"
+    }
+  },
+  {
+    "cluster_id": "C0954",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Teriberka 1 (stoyanka)-Russia",
+        "reason": "Heritage registry campsite scrape inside Arctic Teriberka with fabricated medieval dates 800..1300 and dummy population peak."
+      }
+    ],
+    "clean_names": {
+      "Teriberka-Russia": "Teriberka"
+    }
+  },
+  {
+    "cluster_id": "C0957",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Territoriya kulturnogo sloya Danilovskoy slobody (Danilovskiy)-Russia",
+        "reason": "Heritage registry cultural layer polygon in Moscow with fabricated medieval dates 800..1300 and dummy population peak."
+      },
+      {
+        "op": "DROP_JUNK",
+        "key": "Territoriya kulturnogo sloya Selishcha v Neskuchnom sadu-Russia",
+        "reason": "Heritage registry cultural layer polygon in Moscow with fabricated medieval dates 800..1300 and dummy population peak."
+      }
+    ],
+    "clean_names": {}
+  },
+  {
+    "cluster_id": "C0961",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Tokari Bronze Age Settlement-Ukraine",
+        "new_name": "Tokari (Bronze Age)",
+        "reason": "Distinct Bronze Age settlement at Tokari, preceding the Iron Age hillfort across a hiatus."
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Tokari Iron Age Hillfort-Ukraine",
+        "new_name": "Tokari (Iron Age)",
+        "reason": "Distinct Iron Age hillfort settlement at Tokari."
+      }
+    ],
+    "clean_names": {
+      "Tokari Bronze Age Settlement-Ukraine": "Tokari (Bronze Age)",
+      "Tokari Iron Age Hillfort-Ukraine": "Tokari (Iron Age)"
+    }
+  },
+  {
+    "cluster_id": "C0962",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Tomakovka-Ukraine",
+        "target_key": "Tomakivka-Ukraine",
+        "reason": "Historic island and Cossack refuge settlement continuous with modern town of Tomakivka across a 200-year transitional gap."
+      }
+    ],
+    "clean_names": {
+      "Tomakivka-Ukraine": "Tomakivka"
+    }
+  },
+  {
+    "cluster_id": "C0963",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Tomsk-Russia_2",
+        "target_key": "Tomsk-Russia",
+        "reason": "Duplicate coordinate twin for the continuous city and ostrog of Tomsk."
+      }
+    ],
+    "clean_names": {
+      "Tomsk-Russia": "Tomsk"
+    }
+  },
+  {
+    "cluster_id": "C0966",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Trepol Bronze Age Site-Ukraine",
+        "target_key": "Trypillia-Ukraine",
+        "reason": "Ancient and medieval fortified precursor (Trepol) overlapping continuously with the historic settlement of Trypillia."
+      }
+    ],
+    "clean_names": {
+      "Trypillia-Ukraine": "Trypillia"
+    }
+  },
+  {
+    "cluster_id": "C0968",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Troitskoye-Russia_2",
+        "new_name": "Troitskoye (Mohe)",
+        "reason": "Distinct Mohe cultural archaeological site on the Amur river in Khabarovsk Krai, 3554 km from Troitskoye in Altai Krai."
+      }
+    ],
+    "clean_names": {
+      "Troitskoye-Russia": "Troitskoye",
+      "Troitskoye-Russia_2": "Troitskoye (Mohe)"
+    }
+  },
+  {
+    "cluster_id": "C0971",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Tsarevokokshaysk Kremlin-Russia",
+        "target_key": "Jo`'skar-Ola-Russia",
+        "reason": "Tsarevokokshaysk Kremlin is the founding 1584 fortress of Tsarevokokshaysk / Yoshkar-Ola."
+      }
+    ],
+    "clean_names": {
+      "Jo`'skar-Ola-Russia": "Yoshkar-Ola"
+    }
+  },
+  {
+    "cluster_id": "C0974",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Tsaryne Rus Hillfort-Ukraine",
+        "target_key": "Mayaki-Tsaritsyno-Ukraine",
+        "reason": "Medieval Rus hillfort phase overlapping the Saltovo-Mayaki fortified complex at Mayaki on the Donets."
+      }
+    ],
+    "clean_names": {
+      "Mayaki-Tsaritsyno-Ukraine": "Mayaki-Tsaritsyno"
+    }
+  },
+  {
+    "cluster_id": "C0976",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Tuapse Circassian Aul-Russia",
+        "target_key": "Tuapse-Russia",
+        "reason": "Circassian aul predecessor continuous with modern Tuapse across a 38-year gap."
+      }
+    ],
+    "clean_names": {
+      "Tuapse-Russia": "Tuapse"
+    }
+  },
+  {
+    "cluster_id": "C0977",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Hoty 1024 Chernyakhov Settlement-Ukraine",
+        "new_name": "Hoty",
+        "reason": "Distinct Chernyakhov culture archaeological settlement, separate from the Rus hillfort Tumash."
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Tumasch-Ukraine",
+        "new_name": "Tumash",
+        "reason": "Clean display name for the medieval Rus hillfort on the Krasna river."
+      }
+    ],
+    "clean_names": {
+      "Hoty 1024 Chernyakhov Settlement-Ukraine": "Hoty",
+      "Tumasch-Ukraine": "Tumash"
+    }
+  },
+  {
+    "cluster_id": "C0978",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Minsk monastyr bernardinok zhiloy korpus Late Mediaeval Hillfort-Belarus",
+        "reason": "Monastery building registry scrape co-located in Minsk with fabricated hillfort classification and dummy population peak."
+      },
+      {
+        "op": "DROP_JUNK",
+        "key": "Turov kamennyy krest Mediaeval Hillfort-Belarus",
+        "reason": "Stone cross monument scrape in Minsk with fabricated hillfort classification and dummy population peak."
+      }
+    ],
+    "clean_names": {}
+  },
+  {
+    "cluster_id": "C0980",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Tushemlya-Russia",
+        "target_key": "Gorodishche Tushemlya-Russia",
+        "reason": "Overlapping archaeological duplicate for the eponymous Tushemlya culture hillfort in Smolensk Oblast."
+      }
+    ],
+    "clean_names": {
+      "Gorodishche Tushemlya-Russia": "Tushemlya"
+    }
+  },
+  {
+    "cluster_id": "C0981",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Tushino-Russia",
+        "target_key": "Tu`'sino-Russia",
+        "reason": "Historical village and camp continuous with the 20th-century city of Tushino across a 16-year gap."
+      }
+    ],
+    "clean_names": {
+      "Tu`'sino-Russia": "Tushino"
+    }
+  },
+  {
+    "cluster_id": "C0983",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Tri Gori' village archaeological site-Russia",
+        "reason": "Heritage registry cultural layer polygon in central Moscow with fabricated medieval dates 800..1300 and dummy population peak."
+      },
+      {
+        "op": "DROP_JUNK",
+        "key": "Tverskaya yamskaya sloboda-Russia",
+        "reason": "Heritage registry cultural layer polygon in central Moscow with fabricated medieval dates 800..1300 and dummy population peak."
+      }
+    ],
+    "clean_names": {}
+  },
+  {
+    "cluster_id": "C0984",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Tyahin Fortress-Ukraine",
+        "target_key": "Tyagin-Ukraine",
+        "reason": "Medieval fortress and Lithuanian customs castle contiguous with the historic Dnieper crossing settlement of Tyagin."
+      }
+    ],
+    "clean_names": {
+      "Tyagin-Ukraine": "Tyagin"
+    }
+  },
+  {
+    "cluster_id": "C0985",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Uelen Medieval Gorodishche-Russia",
+        "target_key": "Uelen-Russia",
+        "reason": "Prehistoric and medieval Old Bering Sea settlement contiguous with the continuous historic settlement of Uelen on Chukotka."
+      }
+    ],
+    "clean_names": {
+      "Uelen-Russia": "Uelen"
+    }
+  },
+  {
+    "cluster_id": "C0986",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Simbirskiy kreml-Russia",
+        "target_key": "Ul'janovsk-Russia",
+        "reason": "Simbirsk Kremlin is the founding 1648 citadel of Simbirsk / Ulyanovsk."
+      }
+    ],
+    "clean_names": {
+      "Ul'janovsk-Russia": "Ulyanovsk"
+    }
+  },
+  {
+    "cluster_id": "C0990",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Unzha-Russia_2",
+        "new_name": "Unzha (Archaeological Complex)",
+        "reason": "Distinct 1st millennium AD archaeological complex in Ryazan Oblast, 338 km from the historic town of Unzha in Kostroma Oblast."
+      }
+    ],
+    "clean_names": {
+      "Unzha-Russia": "Unzha",
+      "Unzha-Russia_2": "Unzha (Archaeological Complex)"
+    }
+  },
+  {
+    "cluster_id": "C0991",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Urkarakh Medieval Gorodishche-Russia",
+        "target_key": "Urkarakh-Russia",
+        "reason": "Medieval gorodishche predecessor continuous with modern Urkarakh in Dagestan across a 200-year transitional gap."
+      }
+    ],
+    "clean_names": {
+      "Urkarakh-Russia": "Urkarakh"
+    }
+  },
+  {
+    "cluster_id": "C0992",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Urus-Martan Medieval Gorodishche-Russia",
+        "target_key": "Urus-Martan-Russia",
+        "reason": "Medieval Alanic/Chechen gorodishche continuous with modern Urus-Martan across a 121-year transitional gap."
+      }
+    ],
+    "clean_names": {
+      "Urus-Martan-Russia": "Urus-Martan"
+    }
+  },
+  {
+    "cluster_id": "C0993",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Ushachi-Belarus_2",
+        "new_name": "Ushachi (Rus)",
+        "reason": "Medieval Rus hillfort on the Ushacha river, separated by a 250-year hiatus from early modern Ushachi."
+      }
+    ],
+    "clean_names": {
+      "Ushachi-Belarus": "Ushachi",
+      "Ushachi-Belarus_2": "Ushachi (Rus)"
+    }
+  },
+  {
+    "cluster_id": "C0994",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Krivaya Luka Donets-Ukraine",
+        "new_name": "Kryva Luka",
+        "reason": "Distinct multi-period archaeological settlement at the Kryva Luka meander on the Donets."
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Usovo Ozero Iron Age Hillfort-Ukraine",
+        "new_name": "Usovo Ozero",
+        "reason": "Distinct Bronze and Iron Age lake settlement at Usovo Ozero near Ozerne."
+      }
+    ],
+    "clean_names": {
+      "Krivaya Luka Donets-Ukraine": "Kryva Luka",
+      "Usovo Ozero Iron Age Hillfort-Ukraine": "Usovo Ozero"
+    }
+  },
+  {
+    "cluster_id": "C0996",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Ordzhonikidze-Kurgan 3 Eneolithic Hillfort-Ukraine",
+        "new_name": "Ordzhonikidze Kurgan 3",
+        "reason": "Distinct Eneolithic kurgan and fortified site, separate from Neolithic Ust-Kamyanka."
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Ust-Kamyanka Neolithic Settlement-Ukraine",
+        "new_name": "Ust-Kamyanka",
+        "reason": "Distinct Neolithic settlement on the Bazavluk river at Ust-Kamyanka."
+      }
+    ],
+    "clean_names": {
+      "Ordzhonikidze-Kurgan 3 Eneolithic Hillfort-Ukraine": "Ordzhonikidze Kurgan 3",
+      "Ust-Kamyanka Neolithic Settlement-Ukraine": "Ust-Kamyanka"
+    }
+  },
+  {
+    "cluster_id": "C0999",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Uzhhorod Castle-Ukraine",
+        "target_key": "U`zhorod-Ukraine",
+        "reason": "Ancient hillfort and castle of Ungvar / Uzhhorod continuous with the historic town across a 100-year transitional gap."
+      }
+    ],
+    "clean_names": {
+      "U`zhorod-Ukraine": "Uzhhorod"
+    }
+  },
+  {
+    "cluster_id": "C1002",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Varvarivka Iron Age Hillfort-Ukraine",
+        "target_key": "Varvarovka Classical Polis-Ukraine",
+        "reason": "Overlapping archaeological records for the Olbian chora settlement and hillfort at Varvarivka on the Southern Bug."
+      }
+    ],
+    "clean_names": {
+      "Varvarovka Classical Polis-Ukraine": "Varvarivka"
+    }
+  },
+  {
+    "cluster_id": "C1003",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Kosoe gorodishche (nezavershyonnoe stroitelstvom ukreplenie-ubezhishche)-Russia",
+        "reason": "Heritage registry scrape on the Kola Peninsula with fabricated medieval dates 800..1300 and dummy population peak."
+      },
+      {
+        "op": "DROP_JUNK",
+        "key": "Varzuga VII (ctoyanka)-Russia",
+        "reason": "Heritage registry campsite scrape on the Kola Peninsula with fabricated medieval dates 800..1300 and dummy population peak."
+      }
+    ],
+    "clean_names": {}
+  },
+  {
+    "cluster_id": "C1006",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Velikoselsky Kremiln-Russia",
+        "reason": "Co-located fabricated medieval kremlin scrape inside Velikoye with dummy dates 800..1300 and dummy population peak."
+      }
+    ],
+    "clean_names": {
+      "Velikoye-Russia": "Velikoye"
+    }
+  },
+  {
+    "cluster_id": "C1007",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Vel'e hillfort-Russia",
+        "new_name": "Velye",
+        "reason": "Clean display name for the prominent Pskov border fortress on Lake Velye in Pushkinogorsky District."
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Velye Medieval Gorodishche-Russia",
+        "new_name": "Velye Gorodishche",
+        "reason": "Distinct early medieval gorodishche located 21.5 km east of Velye fortress in Novorzhevsky District."
+      }
+    ],
+    "clean_names": {
+      "Vel'e hillfort-Russia": "Velye",
+      "Velye Medieval Gorodishche-Russia": "Velye Gorodishche"
+    }
+  },
+  {
+    "cluster_id": "C1015",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Verevkinskie khutora 14 Stone Age Hillfort-Ukraine",
+        "target_key": "Verevkino Stone Age Hillfort-Ukraine",
+        "reason": "Duplicate archaeological record for the Mesolithic / Neolithic flint workshop complex at Verevkino."
+      }
+    ],
+    "clean_names": {
+      "Verevkino Stone Age Hillfort-Ukraine": "Verevkino"
+    }
+  },
+  {
+    "cluster_id": "C1017",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Verkhniy Chir-Yurt-Russia_2",
+        "target_key": "Verkhniy Chir-Yurt Medieval Gorodishche-Russia",
+        "reason": "Overlapping archaeological duplicate for the prominent Khazar city and fortress of Belendzher / Chir-Yurt in Dagestan."
+      }
+    ],
+    "clean_names": {
+      "Verkhniy Chir-Yurt Medieval Gorodishche-Russia": "Verkhniy Chiryurt"
+    }
+  },
+  {
+    "cluster_id": "C1019",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Verkhne-Turinskiy-Russia",
+        "target_key": "Verkhnyaya Tura-Russia",
+        "reason": "Verkhne-Turinskiy zavod is the historic ironworks settlement identical with the continuous town of Verkhnyaya Tura."
+      }
+    ],
+    "clean_names": {
+      "Verkhnyaya Tura-Russia": "Verkhnyaya Tura"
+    }
+  },
+  {
+    "cluster_id": "C1020",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Verkhoturye-Russia",
+        "target_key": "Verhotur'je-Russia",
+        "reason": "Duplicate twin for the continuous historic Ural town and customs outpost of Verkhoturye."
+      }
+    ],
+    "clean_names": {
+      "Verhotur'je-Russia": "Verkhoturye"
+    }
+  },
+  {
+    "cluster_id": "C1021",
+    "actions": [
+      {
+        "op": "KEEP_HOMONYM",
+        "key": "Vetlyanka-Russia",
+        "reason": "Distinct historic village of Vetlyanka in Samara Oblast, 703 km from Vetlyanskaya stanitsa in Astrakhan Oblast."
+      },
+      {
+        "op": "KEEP_HOMONYM",
+        "key": "Vetlyanka-Russia_2",
+        "reason": "Distinct historic Cossack stanitsa of Vetlyanka in Astrakhan Oblast, 703 km from Vetlyanka in Samara Oblast."
+      }
+    ],
+    "clean_names": {
+      "Vetlyanka-Russia": "Vetlyanka",
+      "Vetlyanka-Russia_2": "Vetlyanka"
+    }
+  },
+  {
+    "cluster_id": "C1023",
+    "actions": [
+      {
+        "op": "KEEP_HOMONYM",
+        "key": "Viktorove Iron Age Hillfort-Ukraine",
+        "reason": "Distinct Iron Age hillfort at Viktorove in Hlukhiv district, Sumy Oblast, 360 km from the Kharkiv Oblast site."
+      },
+      {
+        "op": "KEEP_HOMONYM",
+        "key": "Viktorove Iron Age Hillfort-Ukraine_2",
+        "reason": "Distinct Iron Age hillfort near Viktorivka in Kharkiv Oblast, 360 km from the Sumy Oblast hillfort."
+      }
+    ],
+    "clean_names": {
+      "Viktorove Iron Age Hillfort-Ukraine": "Viktorove",
+      "Viktorove Iron Age Hillfort-Ukraine_2": "Viktorove"
+    }
+  },
+  {
+    "cluster_id": "C1025",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Vinnytsia Castle-Ukraine",
+        "target_key": "Vynnyky-Ukraine",
+        "reason": "Vynnykivskyy zamok (castle at Vynnyky, misnamed Vinnytsia) continuous with the historic town of Vynnyky across a 100-year transitional gap."
+      }
+    ],
+    "clean_names": {
+      "Vynnyky-Ukraine": "Vynnyky"
+    }
+  },
+  {
+    "cluster_id": "C1028",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Staroe Zaponne (arkhealagichny pomnik)-Belarus",
+        "new_name": "Stare Zaponye",
+        "reason": "Distinct early medieval hillfort settlement at Stare Zaponye."
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Vitunichy Mediaeval Hillfort-Belarus",
+        "new_name": "Vitunichi",
+        "reason": "Distinct medieval hillfort settlement at Vitunichi."
+      }
+    ],
+    "clean_names": {
+      "Staroe Zaponne (arkhealagichny pomnik)-Belarus": "Stare Zaponye",
+      "Vitunichy Mediaeval Hillfort-Belarus": "Vitunichi"
+    }
+  },
+  {
+    "cluster_id": "C1032",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Vodyanskoe gorodishche-Russia",
+        "target_key": "Beldzhamen-Russia",
+        "reason": "Vodyanskoe gorodishche is the archaeological site of the major Golden Horde Volga city of Beldzhamen."
+      }
+    ],
+    "clean_names": {
+      "Beldzhamen-Russia": "Beldzhamen"
+    }
+  },
+  {
+    "cluster_id": "C1033",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Garadzishcha peryyadu rannyaga syarednyavechcha Site 105-Belarus",
+        "target_key": "Volkovysk-Belarus",
+        "reason": "Site 105 (Shvedskaya Gora) is the early medieval founding hillfort of the continuous historic city of Vawkavysk / Volkovysk."
+      }
+    ],
+    "clean_names": {
+      "Volkovysk-Belarus": "Volkovysk"
+    }
+  },
+  {
+    "cluster_id": "C1034",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Volodymyrivka-Ukraine_2",
+        "new_name": "Volodymyrivka (Archaeological Site)",
+        "reason": "Distinct Trypillia mega-site / medieval archaeological complex in Kirovohrad Oblast, 500 km from Volodymyrivka in Donetsk Oblast."
+      }
+    ],
+    "clean_names": {
+      "Volodymyrivka-Ukraine": "Volodymyrivka",
+      "Volodymyrivka-Ukraine_2": "Volodymyrivka (Archaeological Site)"
+    }
+  },
+  {
+    "cluster_id": "C1035",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Vologda Hillfort-Russia",
+        "target_key": "Vologda-Russia",
+        "reason": "Vologda Hillfort (Vologodskoe gorodishche) is the founding fortified settlement of the continuous city of Vologda."
+      }
+    ],
+    "clean_names": {
+      "Vologda-Russia": "Vologda"
+    }
+  },
+  {
+    "cluster_id": "C1036",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Komsomol'skij_RU_34-Russia",
+        "new_name": "Komsomolsky",
+        "reason": "Distinct mining settlement near Vorkuta wrongly bound to Vorgashor metadata."
+      }
+    ],
+    "clean_names": {
+      "Komsomol'skij_RU_34-Russia": "Komsomolsky",
+      "Vorgashor-Russia": "Vorgashor"
+    }
+  },
+  {
+    "cluster_id": "C1037",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Demidiv-Ukraine",
+        "new_name": "Demydiv",
+        "reason": "Distinct historic settlement on the Irpin river in Kyiv Oblast."
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Vorobiev-Ukraine",
+        "new_name": "Vorobiev",
+        "reason": "Distinct historic village located 13.5 km southwest of Demydiv."
+      }
+    ],
+    "clean_names": {
+      "Demidiv-Ukraine": "Demydiv",
+      "Vorobiev-Ukraine": "Vorobiev"
+    }
+  },
+  {
+    "cluster_id": "C1039",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Voronovitsy Mesolithic Settlement-Ukraine",
+        "target_key": "Voronovitsa-Ukraine",
+        "reason": "Dated Mesolithic archaeological site overlapping the broader Stone Age camp complex at Voronovytsia on the Dniester."
+      }
+    ],
+    "clean_names": {
+      "Voronovitsa-Ukraine": "Voronovytsia"
+    }
+  },
+  {
+    "cluster_id": "C1042",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Vovnigi-Levoberechnaya Stoyanka Stone Age Hillfort-Ukraine",
+        "target_key": "Gadyucha Stone Age Hillfort-Ukraine",
+        "reason": "Overlapping archaeological duplicate records of the Dnieper Rapids Stone Age camp complex at Vovnihy."
+      }
+    ],
+    "clean_names": {
+      "Gadyucha Stone Age Hillfort-Ukraine": "Vovnihy"
+    }
+  },
+  {
+    "cluster_id": "C1043",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Voznesenka archaeological complex-Ukraine",
+        "target_key": "Voznesenka Camp-Ukraine",
+        "reason": "Overlapping archaeological duplicate for the prominent Early Medieval / Khazar princely complex at Voznesenka in Zaporizhzhia."
+      }
+    ],
+    "clean_names": {
+      "Voznesenka Camp-Ukraine": "Voznesenka"
+    }
+  },
+  {
+    "cluster_id": "C1046",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Vsekhsvyatskoye-Russia_2",
+        "reason": "Heritage registry cultural layer polygon in Moscow with fabricated medieval dates 800..1300 and dummy population peak."
+      }
+    ],
+    "clean_names": {
+      "Vsekhsvyatskoye-Russia": "Vsekhsvyatskoye"
+    }
+  },
+  {
+    "cluster_id": "C1047",
+    "actions": [
+      {
+        "op": "KEEP_HOMONYM",
+        "key": "Vsevolozh-Ukraine",
+        "reason": "Distinct historic Rus city of Vsevolozh on the Desna / Oster in Chernihiv land, destroyed in 1239."
+      },
+      {
+        "op": "KEEP_HOMONYM",
+        "key": "Vsevolozh-Ukraine_2",
+        "reason": "Distinct historic Rus city of Vsevolozh mentioned in 1097, located at modern Lytovezh in Volhynia, 576 km from the Chernihiv city."
+      }
+    ],
+    "clean_names": {
+      "Vsevolozh-Ukraine": "Vsevolozh",
+      "Vsevolozh-Ukraine_2": "Vsevolozh"
+    }
+  },
+  {
+    "cluster_id": "C1048",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Vyazma-Russia",
+        "target_key": "Vjaz'ma-Russia",
+        "reason": "Duplicate entry for the continuous historic fortress and city of Vyazma in Smolensk Oblast."
+      }
+    ],
+    "clean_names": {
+      "Vjaz'ma-Russia": "Vyazma"
+    }
+  },
+  {
+    "cluster_id": "C1049",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Blacksmith's yard of Vyborg Castle-Russia",
+        "reason": "Heritage registry architectural courtyard scrape inside Vyborg Castle with fabricated medieval dates 800..1400 and dummy population peak."
+      }
+    ],
+    "clean_names": {
+      "Vyborg-Russia": "Vyborg"
+    }
+  },
+  {
+    "cluster_id": "C1051",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Vyshnivets Palace-Ukraine",
+        "reason": "Heritage registry palace building scrape co-located inside the continuous settlement of Vyshnivets."
+      }
+    ],
+    "clean_names": {
+      "Vyshnivets-Ukraine": "Vyshnivets"
+    }
+  },
+  {
+    "cluster_id": "C1054",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Yana RHS-Russia",
+        "target_key": "Yana Rhinoceros Horn Site-Russia",
+        "reason": "Duplicate acronym twin for the renowned Arctic Upper Palaeolithic site on the Yana river."
+      }
+    ],
+    "clean_names": {
+      "Yana Rhinoceros Horn Site-Russia": "Yana Rhinoceros Horn Site"
+    }
+  },
+  {
+    "cluster_id": "C1055",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Yaroslavl Kremlin-Russia",
+        "target_key": "Jaroslavl'-Russia",
+        "reason": "Yaroslavl Kremlin (Rublenyy gorod) is the founding citadel of the continuous Volga city of Yaroslavl."
+      }
+    ],
+    "clean_names": {
+      "Jaroslavl'-Russia": "Yaroslavl"
+    }
+  },
+  {
+    "cluster_id": "C1056",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "1 perioda rannego zheleznogo veka Iron Age Hillfort-Belarus",
+        "target_key": "Yasenets-1 Iron Age Hillfort-Belarus",
+        "reason": "Verbose scraped duplicate of the Iron Age hillfort complex at Yasenets in Homel Region."
+      }
+    ],
+    "clean_names": {
+      "Yasenets-1 Iron Age Hillfort-Belarus": "Yasenets"
+    }
+  },
+  {
+    "cluster_id": "C1057",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Yelabuga Medieval Gorodishche-Russia",
+        "target_key": "Yelabuga-Russia",
+        "reason": "Volga Bulgar Chortovo Gorodishche predecessor continuous with modern Yelabuga across a 200-year transitional gap."
+      }
+    ],
+    "clean_names": {
+      "Yelabuga-Russia": "Yelabuga"
+    }
+  },
+  {
+    "cluster_id": "C1058",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Litvin Stone Age Hillfort-Belarus",
+        "target_key": "Yurevichi-Belarus",
+        "reason": "Overlapping archaeological site record for the Upper Palaeolithic mammoth hunters camp complex at Yurevichi."
+      }
+    ],
+    "clean_names": {
+      "Yurevichi-Belarus": "Yurevichi"
+    }
+  },
+  {
+    "cluster_id": "C1062",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Zamchishche Mediaeval Hillfort-Belarus",
+        "target_key": "Sverzhen-Belarus",
+        "reason": "Medieval castle hillfort (Zamchishche) of the continuous historic settlement of Sverzhen / Novy Sverzhen."
+      }
+    ],
+    "clean_names": {
+      "Sverzhen-Belarus": "Sverzhen"
+    }
+  },
+  {
+    "cluster_id": "C1063",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Stoyanka Zamoste 2-Russia",
+        "target_key": "Zamostje 2-Russia",
+        "reason": "Duplicate record for the renowned waterlogged prehistoric site Zamostye 2."
+      }
+    ],
+    "clean_names": {
+      "Zamostje 2-Russia": "Zamostye 2"
+    }
+  },
+  {
+    "cluster_id": "C1065",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Zapadnaya i yugo-zapadnye chasti (vne ogrady) istoricheskogo kulturnogo sloya Bogoroditse-Rozhdestvenskogo Bobrenyova monastyrya (Staroe Bobrenevo)-Russia",
+        "reason": "Heritage registry monastery boundary cultural layer polygon with fabricated medieval dates 800..1300 and dummy population peak."
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Gorodishche Blyudechko-Russia",
+        "new_name": "Blyudechko",
+        "reason": "Clean display name for the Iron Age and medieval hillfort Blyudechko near Kolomna."
+      }
+    ],
+    "clean_names": {
+      "Gorodishche Blyudechko-Russia": "Blyudechko"
+    }
+  },
+  {
+    "cluster_id": "C1069",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Zarubikha 1 (kamennaya nasyp)-Russia",
+        "reason": "Stone mound heritage feature scrape on the Kola coast with fabricated medieval dates 800..1300 and dummy population peak."
+      },
+      {
+        "op": "DROP_JUNK",
+        "key": "Zarubikha 10 (stoyanka)-Russia",
+        "reason": "Campsite heritage feature scrape on the Kola coast with fabricated medieval dates 800..1300 and dummy population peak."
+      }
+    ],
+    "clean_names": {}
+  },
+  {
+    "cluster_id": "C1070",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Zazony-Belarus",
+        "target_key": "Zazony (garadzishcha)-Belarus",
+        "reason": "Consecutive phases of the fortified settlement tradition at Zazony in Braslav district."
+      }
+    ],
+    "clean_names": {
+      "Zazony (garadzishcha)-Belarus": "Zazony"
+    }
+  },
+  {
+    "cluster_id": "C1071",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Staryi Zbarazh Castle-Ukraine",
+        "target_key": "Zbarazh-Ukraine",
+        "reason": "Staryi Zbarazh Castle is the medieval citadel and precursor of the continuous town of Zbarazh."
+      }
+    ],
+    "clean_names": {
+      "Zbarazh-Ukraine": "Zbarazh"
+    }
+  },
+  {
+    "cluster_id": "C1072",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Sanniki Late Mediaeval Hillfort-Belarus",
+        "target_key": "Zditovo-on-Molchad-Belarus",
+        "reason": "Late medieval fortified complex at Sanniki contiguous with the historic settlement of Zditovo on the Molchad."
+      }
+    ],
+    "clean_names": {
+      "Zditovo-on-Molchad-Belarus": "Zditovo"
+    }
+  },
+  {
+    "cluster_id": "C1074",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Zheleznoye-Ukraine",
+        "target_key": "Zalizne-Ukraine",
+        "reason": "Russian transliteration duplicate for the continuous settlement of Zalizne in Donetsk Oblast."
+      }
+    ],
+    "clean_names": {
+      "Zalizne-Ukraine": "Zalizne"
+    }
+  },
+  {
+    "cluster_id": "C1075",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Zhevakova Classical Polis-Ukraine",
+        "target_key": "Zhevacova Gora-Ukraine",
+        "reason": "Overlapping archaeological duplicate for the ancient sanctuary and Greek settlement on Zhevakhova Hora overlooking Odesa Bay."
+      }
+    ],
+    "clean_names": {
+      "Zhevacova Gora-Ukraine": "Zhevakhova Hora"
+    }
+  },
+  {
+    "cluster_id": "C1076",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Zhovkva Castle-Ukraine",
+        "target_key": "Zhovkva-Ukraine",
+        "reason": "Medieval castle continuous with the historic town of Zhovkva across a 100-year transitional gap."
+      }
+    ],
+    "clean_names": {
+      "Zhovkva-Ukraine": "Zhovkva"
+    }
+  },
+  {
+    "cluster_id": "C1078",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Zhydachiv Castle-Ukraine",
+        "target_key": "Zhydachiv-Ukraine",
+        "reason": "Early medieval hillfort and castle continuous with the continuous historic town of Zhydachiv."
+      }
+    ],
+    "clean_names": {
+      "Zhydachiv-Ukraine": "Zhydachiv"
+    }
+  },
+  {
+    "cluster_id": "C1081",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Znamenskoye Classical Polis-Ukraine",
+        "target_key": "Znamenskoye-Ukraine",
+        "reason": "Overlapping archaeological duplicate for the Late Scythian citadel and settlement at Znamianka on the lower Dnieper."
+      }
+    ],
+    "clean_names": {
+      "Znamenskoye-Ukraine": "Znamianka"
+    }
+  },
+  {
+    "cluster_id": "C1083",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Zolotnyky castle-Ukraine",
+        "target_key": "Zolotnyky-Ukraine",
+        "reason": "Medieval castle precursor continuous with the historic settlement of Zolotnyky across a 185-year transitional gap."
+      }
+    ],
+    "clean_names": {
+      "Zolotnyky-Ukraine": "Zolotnyky"
+    }
+  },
+  {
+    "cluster_id": "C1085",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Gorodishche dyakovskoy kultury Svyazist-Russia",
+        "new_name": "Svyazist",
+        "reason": "Distinct Dyakovo culture Iron Age hillfort at Savvinskaya Sloboda near Zvenigorod."
+      }
+    ],
+    "clean_names": {
+      "Gorodishche dyakovskoy kultury Svyazist-Russia": "Svyazist",
+      "Zvenigorod-Russia": "Zvenigorod"
+    }
+  },
+  {
+    "cluster_id": "C1090",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "antychnoho chasu Classical Polis-Ukraine",
+        "target_key": "Luzanovka Classical-Ukraine",
+        "reason": "Generic scraped classical record overlapping the ancient Greek harbor settlement at Luzanivka on Odesa Bay."
+      }
+    ],
+    "clean_names": {
+      "Luzanovka Classical-Ukraine": "Luzanivka"
+    }
+  },
+  {
+    "cluster_id": "C1091",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "antychnoho chasu Lyubopil IV Classical Polis-Ukraine",
+        "new_name": "Lyubopil IV",
+        "reason": "Distinct ancient settlement of the Olbian chora along the Tiligul Estuary."
+      },
+      {
+        "op": "RENAME_META",
+        "key": "antychnoho chasu Lyubopil V Classical Polis-Ukraine",
+        "new_name": "Lyubopil V",
+        "reason": "Distinct ancient settlement located 7.7 km northeast along the Tiligul Estuary."
+      }
+    ],
+    "clean_names": {
+      "antychnoho chasu Lyubopil IV Classical Polis-Ukraine": "Lyubopil IV",
+      "antychnoho chasu Lyubopil V Classical Polis-Ukraine": "Lyubopil V"
+    }
+  },
+  {
+    "cluster_id": "C1092",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "antychnoho chasu Ovidiopol I Classical Polis-Ukraine",
+        "new_name": "Ovidiopol I",
+        "reason": "Distinct ancient classical settlement of the Niconium chora on the Dniester Liman."
+      },
+      {
+        "op": "RENAME_META",
+        "key": "antychnoho chasu Ovidiopol VIII Classical Polis-Ukraine",
+        "new_name": "Ovidiopol VIII",
+        "reason": "Distinct ancient classical settlement located 3.3 km south along the Dniester Liman."
+      }
+    ],
+    "clean_names": {
+      "antychnoho chasu Ovidiopol I Classical Polis-Ukraine": "Ovidiopol I",
+      "antychnoho chasu Ovidiopol VIII Classical Polis-Ukraine": "Ovidiopol VIII"
+    }
+  },
+  {
+    "cluster_id": "C1093",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "bahatosharove bilozerske Bronze Age Settlement-Ukraine",
+        "new_name": "Topolyne I",
+        "reason": "Distinct Bilozerka / Bronze Age settlement on Lake Yalpuh."
+      },
+      {
+        "op": "RENAME_META",
+        "key": "bahatosharove doby piznoyi bronzy Bronze Age Settlement II-Ukraine",
+        "new_name": "Topolyne II",
+        "reason": "Distinct Late Bronze Age settlement located 2.5 km south along Lake Yalpuh."
+      }
+    ],
+    "clean_names": {
+      "bahatosharove bilozerske Bronze Age Settlement-Ukraine": "Topolyne I",
+      "bahatosharove doby piznoyi bronzy Bronze Age Settlement II-Ukraine": "Topolyne II"
+    }
+  },
+  {
+    "cluster_id": "C1094",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "bahatosharove humelnytske Chernyakhov Settlement-Ukraine",
+        "new_name": "Novosilske (Chernyakhov)",
+        "reason": "Distinct prehistoric Gumelnita and Chernyakhov multi-layer settlement 5.5 km south of the historic Danube crossing at Novosilske."
+      }
+    ],
+    "clean_names": {
+      "Novoselskoye Danube Crossing-Ukraine": "Novosilske",
+      "bahatosharove humelnytske Chernyakhov Settlement-Ukraine": "Novosilske (Chernyakhov)"
+    }
+  },
+  {
+    "cluster_id": "C1095",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Dmytrivka Migration Period Settlement-Ukraine",
+        "new_name": "Dmytrivka (Migration Period)",
+        "reason": "Distinct Migration Period settlement near Voznesensk, 29.7 km north of the coastal Dmytrivka site."
+      },
+      {
+        "op": "RENAME_META",
+        "key": "chernyakhivske Dmytrivka Chernyakhov Settlement II-Ukraine",
+        "new_name": "Dmytrivka (Chernyakhov)",
+        "reason": "Distinct Chernyakhov culture settlement near the Black Sea coast at Dmytrivka."
+      }
+    ],
+    "clean_names": {
+      "Dmytrivka Migration Period Settlement-Ukraine": "Dmytrivka (Migration Period)",
+      "chernyakhivske Dmytrivka Chernyakhov Settlement II-Ukraine": "Dmytrivka (Chernyakhov)"
+    }
+  },
+  {
+    "cluster_id": "C1098",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "chernyakhivske Veselyy Kut Chernyakhov Settlement-Ukraine",
+        "new_name": "Veselyy Kut",
+        "reason": "Distinct Chernyakhov culture settlement at Veselyy Kut."
+      },
+      {
+        "op": "RENAME_META",
+        "key": "chernyakhivske Veselyy Kut I Chernyakhov Settlement-Ukraine",
+        "new_name": "Veselyy Kut I",
+        "reason": "Distinct Chernyakhov culture settlement located 10.1 km north of Veselyy Kut."
+      }
+    ],
+    "clean_names": {
+      "chernyakhivske Veselyy Kut Chernyakhov Settlement-Ukraine": "Veselyy Kut",
+      "chernyakhivske Veselyy Kut I Chernyakhov Settlement-Ukraine": "Veselyy Kut I"
+    }
+  },
+  {
+    "cluster_id": "C1099",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "bahatosharove humelnytske Chernyakhov Settlement II-Ukraine",
+        "new_name": "Vynohradivka II",
+        "reason": "Distinct multi-layer Gumelnita / Chernyakhov settlement located 7.5 km north of Vynohradivka."
+      },
+      {
+        "op": "RENAME_META",
+        "key": "chernyakhivske Vynohradivka Chernyakhov Settlement-Ukraine",
+        "new_name": "Vynohradivka",
+        "reason": "Distinct Chernyakhov culture settlement at Vynohradivka on Lake Yalpuh."
+      }
+    ],
+    "clean_names": {
+      "bahatosharove humelnytske Chernyakhov Settlement II-Ukraine": "Vynohradivka II",
+      "chernyakhivske Vynohradivka Chernyakhov Settlement-Ukraine": "Vynohradivka"
+    }
+  },
+  {
+    "cluster_id": "C1100",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "chernyakhivskoyi kultury Chernyakhov Settlement II-Ukraine",
+        "target_key": "chernyakhivskoyi kultury Af Chernyakhov Settlement-Ukraine",
+        "reason": "Overlapping duplicate archaeological records for the Chernyakhov settlement complex at Afanasiyivka on the Inhulets."
+      }
+    ],
+    "clean_names": {
+      "chernyakhivskoyi kultury Af Chernyakhov Settlement-Ukraine": "Afanasiyivka"
+    }
+  },
+  {
+    "cluster_id": "C1101",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Rybakovka Classical Polis-Ukraine",
+        "new_name": "Rybakivka (Classical)",
+        "reason": "Distinct ancient Greek settlement of the Olbian chora at Rybakivka."
+      },
+      {
+        "op": "RENAME_META",
+        "key": "chernyakhivskoyi kultury Chernyakhov Settlement III-Ukraine",
+        "new_name": "Rybakivka III (Chernyakhov)",
+        "reason": "Distinct Chernyakhov culture settlement located 5 km south along the coast."
+      }
+    ],
+    "clean_names": {
+      "Rybakovka Classical Polis-Ukraine": "Rybakivka (Classical)",
+      "chernyakhivskoyi kultury Chernyakhov Settlement III-Ukraine": "Rybakivka III (Chernyakhov)"
+    }
+  },
+  {
+    "cluster_id": "C1109",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "dvosharove doby piznoyi bronzy ta chernyakhivske Vynohradne II Bronze Age Settlement-Ukraine",
+        "new_name": "Vynohradne II",
+        "reason": "Distinct multi-layer Late Bronze Age and Chernyakhov settlement at Vynohradne."
+      },
+      {
+        "op": "RENAME_META",
+        "key": "dvosharove doby piznoyi bronzy ta chernyakhivske Vynohradne V Bronze Age Settlement-Ukraine",
+        "new_name": "Vynohradne V",
+        "reason": "Distinct multi-layer settlement located 6.7 km south of Vynohradne II."
+      }
+    ],
+    "clean_names": {
+      "dvosharove doby piznoyi bronzy ta chernyakhivske Vynohradne II Bronze Age Settlement-Ukraine": "Vynohradne II",
+      "dvosharove doby piznoyi bronzy ta chernyakhivske Vynohradne V Bronze Age Settlement-Ukraine": "Vynohradne V"
+    }
+  },
+  {
+    "cluster_id": "C1110",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "dvosharove doby piznoyi bronzy ta chernyakhivske Kotlovyna V Bronze Age Settlement-Ukraine",
+        "new_name": "Kotlovyna V",
+        "reason": "Distinct Late Bronze Age and Chernyakhov settlement at Kotlovyna on Lake Yalpuh."
+      },
+      {
+        "op": "RENAME_META",
+        "key": "dvosharove doby piznoyi bronzy ta rymskoho chasu Kotlovyna Bronze Age Settlement-Ukraine",
+        "new_name": "Kotlovyna",
+        "reason": "Distinct multi-layer Bronze Age and Roman-period settlement located 4.5 km north along Lake Yalpuh."
+      }
+    ],
+    "clean_names": {
+      "dvosharove doby piznoyi bronzy ta chernyakhivske Kotlovyna V Bronze Age Settlement-Ukraine": "Kotlovyna V",
+      "dvosharove doby piznoyi bronzy ta rymskoho chasu Kotlovyna Bronze Age Settlement-Ukraine": "Kotlovyna"
+    }
+  },
+  {
+    "cluster_id": "C1111",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "dvosharove doby piznoyi bronzy ta chernyakhivske Oleksandrivka Bronze Age Settlement-Ukraine",
+        "new_name": "Oleksandrivka I",
+        "reason": "Distinct Late Bronze Age and Chernyakhov settlement at Oleksandrivka."
+      },
+      {
+        "op": "RENAME_META",
+        "key": "dvosharove doby piznoyi bronzy ta rymskoho chasu Oleksandrivka Bronze Age Settlement-Ukraine",
+        "new_name": "Oleksandrivka II",
+        "reason": "Distinct Late Bronze Age and Roman-period settlement located 2.9 km south of Oleksandrivka I."
+      }
+    ],
+    "clean_names": {
+      "dvosharove doby piznoyi bronzy ta chernyakhivske Oleksandrivka Bronze Age Settlement-Ukraine": "Oleksandrivka I",
+      "dvosharove doby piznoyi bronzy ta rymskoho chasu Oleksandrivka Bronze Age Settlement-Ukraine": "Oleksandrivka II"
+    }
+  },
+  {
+    "cluster_id": "C1112",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "dvosharove Orikhivka IV doby piznoyi bronzy ta rymskoho chasu Bronze Age Settlement-Ukraine",
+        "new_name": "Orikhivka IV",
+        "reason": "Distinct Late Bronze Age and Roman-period settlement at Orikhivka."
+      },
+      {
+        "op": "RENAME_META",
+        "key": "dvosharove doby piznoyi bronzy ta rymskoho chasu Orikhivka Bronze Age Settlement-Ukraine",
+        "new_name": "Orikhivka",
+        "reason": "Distinct Late Bronze Age settlement located 7.6 km southeast of Orikhivka IV."
+      }
+    ],
+    "clean_names": {
+      "dvosharove Orikhivka IV doby piznoyi bronzy ta rymskoho chasu Bronze Age Settlement-Ukraine": "Orikhivka IV",
+      "dvosharove doby piznoyi bronzy ta rymskoho chasu Orikhivka Bronze Age Settlement-Ukraine": "Orikhivka"
+    }
+  },
+  {
+    "cluster_id": "C1114",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "dvosharove doby piznoyi bronzy ta rymskoho chasu Vyshnyaky I Bronze Age Settlement-Ukraine",
+        "new_name": "Vyshnyaky I",
+        "reason": "Distinct Late Bronze Age and Roman-period settlement at Vyshnyaky."
+      },
+      {
+        "op": "RENAME_META",
+        "key": "dvosharove piznobronzovoyi doby ta rymskoho chasu Vyshnyaky II Bronze Age Settlement-Ukraine",
+        "new_name": "Vyshnyaky II",
+        "reason": "Distinct Late Bronze Age settlement located 3.3 km south of Vyshnyaky I."
+      }
+    ],
+    "clean_names": {
+      "dvosharove doby piznoyi bronzy ta rymskoho chasu Vyshnyaky I Bronze Age Settlement-Ukraine": "Vyshnyaky I",
+      "dvosharove piznobronzovoyi doby ta rymskoho chasu Vyshnyaky II Bronze Age Settlement-Ukraine": "Vyshnyaky II"
+    }
+  },
+  {
+    "cluster_id": "C1115",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "antychnoho chasu Kosivka Classical Polis-Ukraine",
+        "new_name": "Kosivka",
+        "reason": "Distinct ancient classical settlement of the Tyras chora at Kosivka on the Black Sea coast."
+      },
+      {
+        "op": "RENAME_META",
+        "key": "dvosharove sabatynivske Chernyakhov Settlement-Ukraine",
+        "new_name": "Vilne",
+        "reason": "Distinct Sabatynivka / Chernyakhov multi-layer settlement at Vilne, 2 km inland."
+      }
+    ],
+    "clean_names": {
+      "antychnoho chasu Kosivka Classical Polis-Ukraine": "Kosivka",
+      "dvosharove sabatynivske Chernyakhov Settlement-Ukraine": "Vilne"
+    }
+  },
+  {
+    "cluster_id": "C1119",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "historical quarter, Petrozavodsk-Russia",
+        "reason": "Heritage registry urban historic quarter scrape co-located in Petrozavodsk with anachronistic dates."
+      }
+    ],
+    "clean_names": {
+      "Petrozavodsk-Russia": "Petrozavodsk"
+    }
+  },
+  {
+    "cluster_id": "C1122",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Institut fiziki imeni B. I. Stepanova NAN Belarusi Mediaeval Hillfort-Belarus",
+        "reason": "Scientific institute building scrape in Minsk with fabricated medieval dates 850..1350 and dummy population peak."
+      },
+      {
+        "op": "DROP_JUNK",
+        "key": "kvartal pa vul. Valgagradskay Ya. Kolasa-Belarus",
+        "reason": "Urban residential block scrape in Minsk with fabricated medieval dates 800..1300 and dummy population peak."
+      }
+    ],
+    "clean_names": {}
+  },
+  {
+    "cluster_id": "C1123",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "mezolitychna Baraboy IV Mesolithic Camp-Ukraine",
+        "new_name": "Baraboi IV",
+        "reason": "Distinct Mesolithic campsite on the Baraboi river."
+      },
+      {
+        "op": "RENAME_META",
+        "key": "mezolitychna Baraboy Mesolithic Camp-Ukraine",
+        "new_name": "Baraboi",
+        "reason": "Distinct Mesolithic campsite located 2.4 km southeast on the Baraboi river."
+      }
+    ],
+    "clean_names": {
+      "mezolitychna Baraboy IV Mesolithic Camp-Ukraine": "Baraboi IV",
+      "mezolitychna Baraboy Mesolithic Camp-Ukraine": "Baraboi"
+    }
+  },
+  {
+    "cluster_id": "C1126",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Pamyatky_piznoho_mezolitu 144 Mesolithic Camp-Ukraine",
+        "new_name": "Tsarychanka 144",
+        "reason": "Distinct Late Mesolithic campsite 144 at Tsarychanka."
+      },
+      {
+        "op": "RENAME_META",
+        "key": "mezolitychna Tsarychanka Mesolithic Camp-Ukraine",
+        "new_name": "Tsarychanka",
+        "reason": "Distinct Mesolithic camp located 3.6 km north at Tsarychanka."
+      }
+    ],
+    "clean_names": {
+      "Pamyatky_piznoho_mezolitu 144 Mesolithic Camp-Ukraine": "Tsarychanka 144",
+      "mezolitychna Tsarychanka Mesolithic Camp-Ukraine": "Tsarychanka"
+    }
+  },
+  {
+    "cluster_id": "C1127",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "dvosharova piznopaleolitychna ta mezolitychna Vasylivka II Palaeolithic Camp-Ukraine",
+        "new_name": "Vasylivka II (Palaeolithic)",
+        "reason": "Distinct Upper Palaeolithic and Mesolithic campsite at Vasylivka II."
+      },
+      {
+        "op": "RENAME_META",
+        "key": "mezolitychna Vasylivka Mesolithic Camp-Ukraine",
+        "new_name": "Vasylivka (Mesolithic)",
+        "reason": "Distinct Mesolithic campsite located 3 km south at Vasylivka."
+      }
+    ],
+    "clean_names": {
+      "dvosharova piznopaleolitychna ta mezolitychna Vasylivka II Palaeolithic Camp-Ukraine": "Vasylivka II (Palaeolithic)",
+      "mezolitychna Vasylivka Mesolithic Camp-Ukraine": "Vasylivka (Mesolithic)"
+    }
+  },
+  {
+    "cluster_id": "C1129",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Karpove Mesolithic Camp Hillfort-Ukraine",
+        "new_name": "Karpove (Mesolithic)",
+        "reason": "Distinct Mesolithic campsite at Karpove."
+      },
+      {
+        "op": "RENAME_META",
+        "key": "piznopaleolitychna Karpove Palaeolithic Camp-Ukraine",
+        "new_name": "Karpove (Palaeolithic)",
+        "reason": "Distinct Upper Palaeolithic campsite located 10.7 km northwest at Karpove."
+      }
+    ],
+    "clean_names": {
+      "Karpove Mesolithic Camp Hillfort-Ukraine": "Karpove (Mesolithic)",
+      "piznopaleolitychna Karpove Palaeolithic Camp-Ukraine": "Karpove (Palaeolithic)"
+    }
+  },
+  {
+    "cluster_id": "C1130",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "dvosharove Blahodatne IV sabatynivske ta chernyakhivske Chernyakhov Settlement-Ukraine",
+        "new_name": "Blahodatne IV",
+        "reason": "Distinct multi-layer Sabatynivka and Chernyakhov settlement at Blahodatne."
+      },
+      {
+        "op": "RENAME_META",
+        "key": "rymskoho chasu Dzhylayir II Classical Polis-Ukraine",
+        "new_name": "Dzhylayir II",
+        "reason": "Distinct Roman-period classical settlement at Dzhylayir / Krasna Kosa."
+      }
+    ],
+    "clean_names": {
+      "dvosharove Blahodatne IV sabatynivske ta chernyakhivske Chernyakhov Settlement-Ukraine": "Blahodatne IV",
+      "rymskoho chasu Dzhylayir II Classical Polis-Ukraine": "Dzhylayir II"
+    }
+  },
+  {
+    "cluster_id": "C1131",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "dvosharove Komyshivka I sabatynivske ta chernyakhivske Chernyakhov Settlement-Ukraine",
+        "new_name": "Komyshivka I",
+        "reason": "Distinct Sabatynivka and Chernyakhov settlement at Komyshivka."
+      },
+      {
+        "op": "RENAME_META",
+        "key": "rymskoho chasu Nadyarne Classical Polis-Ukraine",
+        "new_name": "Nadyarne",
+        "reason": "Distinct Roman-period classical settlement at Nadyarne, 2.4 km east."
+      }
+    ],
+    "clean_names": {
+      "dvosharove Komyshivka I sabatynivske ta chernyakhivske Chernyakhov Settlement-Ukraine": "Komyshivka I",
+      "rymskoho chasu Nadyarne Classical Polis-Ukraine": "Nadyarne"
+    }
+  },
+  {
+    "cluster_id": "C1133",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "chernyakhivske Vesela Dolyna II Chernyakhov Settlement-Ukraine",
+        "new_name": "Vesela Dolyna II",
+        "reason": "Distinct Chernyakhov culture settlement at Vesela Dolyna."
+      },
+      {
+        "op": "RENAME_META",
+        "key": "rymskoho chasu Vesela Dolyna I Classical Polis-Ukraine",
+        "new_name": "Vesela Dolyna I",
+        "reason": "Distinct Roman-period classical settlement located 3.5 km northwest at Vesela Dolyna."
+      }
+    ],
+    "clean_names": {
+      "chernyakhivske Vesela Dolyna II Chernyakhov Settlement-Ukraine": "Vesela Dolyna II",
+      "rymskoho chasu Vesela Dolyna I Classical Polis-Ukraine": "Vesela Dolyna I"
+    }
+  },
+  {
+    "cluster_id": "C1136",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "sabatynivske Bronze Age Settlement III-Ukraine",
+        "new_name": "Novodmytrivka III",
+        "reason": "Distinct Sabatynivka Bronze Age settlement located 22.1 km south of Novodmytrivka."
+      },
+      {
+        "op": "RENAME_META",
+        "key": "sabatynivske Novodmytrivka Bronze Age Settlement-Ukraine",
+        "new_name": "Novodmytrivka",
+        "reason": "Distinct Sabatynivka Bronze Age settlement at Novodmytrivka."
+      }
+    ],
+    "clean_names": {
+      "sabatynivske Bronze Age Settlement III-Ukraine": "Novodmytrivka III",
+      "sabatynivske Novodmytrivka Bronze Age Settlement-Ukraine": "Novodmytrivka"
+    }
+  },
+  {
+    "cluster_id": "C1138",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "obyekt Bronze Age Settlement-Ukraine",
+        "new_name": "Mykolaivka (Settlement)",
+        "reason": "Distinct Bronze Age settlement at Mykolaivka."
+      },
+      {
+        "op": "RENAME_META",
+        "key": "svyatylyshche Bronze Age Settlement-Ukraine",
+        "new_name": "Mykolaivka (Sanctuary)",
+        "reason": "Distinct Bronze Age sanctuary site located 3.7 km east at Mykolaivka."
+      }
+    ],
+    "clean_names": {
+      "obyekt Bronze Age Settlement-Ukraine": "Mykolaivka (Settlement)",
+      "svyatylyshche Bronze Age Settlement-Ukraine": "Mykolaivka (Sanctuary)"
+    }
+  },
+  {
+    "cluster_id": "C1140",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Shlisselburg-Russia",
+        "target_key": "Šlissel'burg-Russia",
+        "reason": "Duplicate entry for the continuous historic fortress (Oreshek / Noteborg) and town of Shlisselburg on Lake Ladoga."
+      }
+    ],
+    "clean_names": {
+      "Šlissel'burg-Russia": "Shlisselburg"
+    }
+  }
+]

@@ -23,6 +23,7 @@ import numpy as np
 import pandas as pd
 from PIL import Image
 
+from jade_frontier_gazetteer import load_frontier_archaeological_candidates
 from jade_source_loaders import (
   CENSUS_DIR,
   JADE,
@@ -200,26 +201,21 @@ def dedup_and_emit_chapter(arg0_chapter_rel, arg1_stem, arg2_domain, arg3_countr
       })
       continue
 
-    # Disambiguate homonyms in same country by appending region/subregion tag cleanly
+    # Disambiguate homonyms strictly in skey (rec["key"]) while ALWAYS keeping rec["name"] clean!
     base_key = f"{name}-{country}"
+    display_name = name
     if base_key in included:
       reg_short = re.sub(r"[^A-Za-z]", "", j5["regions"][rid]["name"].split(".", 1)[-1].strip().split()[0]) or rid[:6]
-      alt_name = f"{name} {reg_short}"
-      skey = f"{alt_name}-{country}"
+      skey = f"{name}_{reg_short}-{country}"
       if skey in included:
-        # Append directional/cardinal or parent-county hint if available
         hint = re.sub(r"[^A-Za-z]", "", str(c.get("parent_hint") or ""))[:10]
-        if hint and f"{name} {hint}-{country}" not in included:
-          alt_name = f"{name} {hint}"
-          skey = f"{alt_name}-{country}"
+        if hint and f"{name}_{hint}-{country}" not in included:
+          skey = f"{name}_{hint}-{country}"
         else:
-          # Distinguish distant same-province homonyms by grid suffix (e.g. N/S/E/W)
           skey_found = None
           for tag in ("North", "South", "East", "West", "Upper", "Lower", "Central", "Inner", "Outer"):
-            cand_nm = f"{name} {reg_short} {tag}"
-            cand_k = f"{cand_nm}-{country}"
+            cand_k = f"{name}_{reg_short}_{tag}-{country}"
             if cand_k not in included:
-              alt_name = cand_nm
               skey_found = cand_k
               break
           if not skey_found:
@@ -233,10 +229,8 @@ def dedup_and_emit_chapter(arg0_chapter_rel, arg1_stem, arg2_domain, arg3_countr
             })
             continue
           skey = skey_found
-      display_name = alt_name
     else:
       skey = base_key
-      display_name = name
 
     other_names = []
     for on in (c.get("other_names") or []):
@@ -557,32 +551,13 @@ def main():
     {"name": "Ulaanzuukh", "other_names": ["Улаанзуух"], "country": "Mongolia", "lat": 46.500, "lon": 111.300, "foundation_year": -1500, "population": {-1400: 1100, -1000: 1400, -500: 1300}, "priority": 8},
     {"name": "Khermen Denzh", "other_names": ["Хэрмэн дэнж"], "country": "Mongolia", "lat": 47.920, "lon": 104.700, "foundation_year": 950, "population": {1000: 4800, 1100: 5500}, "priority": 8},
   ]
-  df_a = pd.read_csv(os.path.join(RAW_ARCH, "aadr_v66.p1_HO.aadr.PUB.anno"), sep="\t", low_memory=False)
-  lat_c = [c for c in df_a.columns if "lat" in c.lower()][0]
-  lon_c = [c for c in df_a.columns if "long" in c.lower()][0]
-  pol_c = [c for c in df_a.columns if "political" in c.lower() or "country" in c.lower()][0]
-  loc_c = [c for c in df_a.columns if "localit" in c.lower()][0]
-  date_c = [c for c in df_a.columns if "date mean" in c.lower()][0]
-  mn_aadr = df_a[df_a[pol_c].astype(str).str.contains("Mongol", case=False, na=False)]
-  for loc_nm, grp in mn_aadr.groupby(loc_c):
-    try:
-      la = float(pd.to_numeric(grp[lat_c], errors="coerce").dropna().iloc[0])
-      lo = float(pd.to_numeric(grp[lon_c], errors="coerce").dropna().iloc[0])
-      bps = pd.to_numeric(grp[date_c], errors="coerce").dropna().values
-    except Exception:
-      continue
-    yrs = [int(round(1950 - bp)) for bp in bps if 744 < bp < 12000]
-    nm_c = clean_name(str(loc_nm).split(",")[0])
-    if yrs and len(nm_c) >= 3:
-      pdict = {y: min(2200, 450 + 180 * len(grp)) for y in sorted(set([min(yrs), max(yrs)])) if -10000 <= y <= 1206}
-      if pdict:
-        mn1_cands.append({"name": nm_c, "other_names": [str(loc_nm)], "country": "Mongolia", "lat": la, "lon": lo, "population": pdict, "priority": 5})
+  mn1_cands.extend(load_frontier_archaeological_candidates(-10000, 1206, "Mongolia"))
   mn1_cands.extend(xronos_mn)
 
   dedup_and_emit_chapter(
     os.path.join("1.mongolia_pre_1912", "1.steppe_prehistory_and_nomadic_empires"),
     "steppe_prehistory_and_nomadic_empires", [-10000, 1206], "Mongolia", mn1_cands,
-    [{"name": "AADR_v66_Mongolia_Radiocarbon", "total_rows_in_bounds": len(mn_aadr), "rows_processed": len(mn_aadr)},
+    [{"name": "AADR_v66_And_ArchAtlas_Mongolia_Radiocarbon", "total_rows_in_bounds": len(mn1_cands), "rows_processed": len(mn1_cands)},
      {"name": "XRONOS_Mongolia_C14_And_Steppe_Walled_Towns", "total_rows_in_bounds": len(xronos_mn) + 20, "rows_processed": len(xronos_mn) + 20}],
     arg6_min_spacing_km=6.0,
   )
@@ -612,6 +587,8 @@ def main():
         "lat": r["lat"], "lon": r["lon"], "foundation_year": 1691,
         "population": {1720: 900, 1820: 1350, 1911: 1800}, "priority": 4,
       })
+
+  mn2_cands.extend(load_frontier_archaeological_candidates(1206, 1912, "Mongolia"))
 
   dedup_and_emit_chapter(
     os.path.join("1.mongolia_pre_1912", "2.mongol_empire_and_qing_mongolia"),
@@ -715,6 +692,8 @@ def main():
     if sub:
       cn1_cands.append(dict(xr, population=sub, priority=4))
 
+  cn1_cands.extend(load_frontier_archaeological_candidates(-10000, 589, "China"))
+
   dedup_and_emit_chapter(
     os.path.join("2.china_zhongguo_renkou_shi", "1.pre_qin_to_northern_southern_dynasties"),
     "pre_qin_to_northern_southern_dynasties", [-10000, 589], "China", cn1_cands,
@@ -734,9 +713,9 @@ def main():
   )
   # Bohai Five Capitals, Nanzhao, Tibet/Kham early monasteries, Silk Road Anxi/Beiting, RelicsAtlas Sui-Tang
   for nm, alts, ctry, la, lo, fy, pd_ in [
-    ("Shangjing Longquanfu", ["Bohai Supreme Capital", "上京龙泉府"], "China", 44.113, 129.136, 755, {755: 55000, 820: 75000, 900: 60000}),
-    ("Zhongjing Xiandefu", ["Bohai Central Capital", "中京显德府"], "China", 42.540, 129.010, 742, {742: 28000, 820: 35000, 900: 30000}),
-    ("Dongjing Longyuanfu", ["Bohai Eastern Capital", "东京龙原府"], "China", 42.860, 130.360, 785, {820: 25000, 900: 22000}),
+    ("Shangjing", ["Shangjing Longquanfu", "Bohai Supreme Capital", "上京龙泉府"], "China", 44.113, 129.136, 755, {755: 55000, 820: 75000, 900: 60000}),
+    ("Xiande", ["Zhongjing Xiandefu", "Bohai Central Capital", "中京显德府"], "China", 42.540, 129.010, 742, {742: 28000, 820: 35000, 900: 30000}),
+    ("Longyuan", ["Dongjing Longyuanfu", "Bohai Eastern Capital", "东京龙原府"], "China", 42.860, 130.360, 785, {820: 25000, 900: 22000}),
     ("Liaoyang", ["Xiangping", "Dongjing", "辽阳"], "China", 41.267, 123.173, -300, {609: 32000, 742: 45000, 820: 40000, 900: 55000}),
     ("Yingzhou", ["Chaoyang", "营州"], "China", 41.573, 120.450, 444, {609: 28000, 742: 38000, 820: 30000, 900: 32000}),
     ("Beiting", ["Beshbalik", "Jimsar", "北庭"], "China", 44.095, 89.205, 702, {742: 32000, 820: 28000, 900: 24000}),
@@ -764,6 +743,8 @@ def main():
           "population": {742: 2400, 752: 2500, 820: 2600, 900: 2900}, "priority": 2, "parent_hint": tw["pref_py"],
           "justification": f"Tang-Five Dynasties regional caoshi/zhen market node ({tw['ch']})."
         })
+
+  cn2_cands.extend(load_frontier_archaeological_candidates(589, 960, "China"))
 
   dedup_and_emit_chapter(
     os.path.join("2.china_zhongguo_renkou_shi", "2.sui_tang_and_five_dynasties"),
@@ -809,9 +790,9 @@ def main():
       })
   for nm, alts, ctry, la, lo, fy, pd_ in [
     ("Shangdu", ["Xanadu", "Kaiping", "上都"], "China", 42.360, 116.181, 1256, {1270: 110000, 1290: 145000, 1330: 155000}),
-    ("Shangjing Linhuangfu", ["Liao Supreme Capital", "林潢府"], "China", 43.963, 119.383, 918, {980: 95000, 1080: 115000, 1102: 120000}),
-    ("Zhongjing Dadingfu", ["Liao Central Capital", "宁城", "中京大定府"], "China", 41.588, 119.160, 1007, {1080: 85000, 1102: 95000, 1207: 75000}),
-    ("Huiningfu", ["Jin Supreme Capital", "Acheng", "会宁府"], "China", 45.517, 126.970, 1115, {1135: 110000, 1207: 85000, 1290: 45000}),
+    ("Linhuang", ["Shangjing Linhuangfu", "Liao Supreme Capital", "林潢府"], "China", 43.963, 119.383, 918, {980: 95000, 1080: 115000, 1102: 120000}),
+    ("Dading", ["Zhongjing Dadingfu", "Liao Central Capital", "宁城", "中京大定府"], "China", 41.588, 119.160, 1007, {1080: 85000, 1102: 95000, 1207: 75000}),
+    ("Huining", ["Huiningfu", "Jin Supreme Capital", "Acheng", "会宁府"], "China", 45.517, 126.970, 1115, {1135: 110000, 1207: 85000, 1290: 45000}),
     ("Magong", ["Penghu Xunjiansi", "馬公", "澎湖"], "Taiwan", 23.569, 119.566, 1171, {1223: 3500, 1290: 6500, 1330: 5500}),
     ("Shisanhang", ["十三行"], "Taiwan", 25.158, 121.406, 200, {980: 5500, 1102: 6500, 1290: 7000}),
   ]:
@@ -834,6 +815,8 @@ def main():
           "priority": 2, "parent_hint": tw["pref_py"],
           "justification": f"Song-Jin-Yuan commercial market town ({tw['ch']}, shangshui/zhen network per Vol. 3 Ch. 13)."
         })
+
+  cn3_cands.extend(load_frontier_archaeological_candidates(960, 1368, "China"))
 
   dedup_and_emit_chapter(
     os.path.join("2.china_zhongguo_renkou_shi", "3.liao_song_jin_and_yuan"),
@@ -886,6 +869,8 @@ def main():
         "priority": 2, "parent_hint": tw["pref_py"],
         "justification": f"Ming commercial market town/garrison ({tw['ch']}) calibrated to Shuji Cao Appendix 4 & Cambridge EHC Ch. 16."
       })
+
+  cn4_cands.extend(load_frontier_archaeological_candidates(1368, 1644, "China"))
 
   dedup_and_emit_chapter(
     os.path.join("2.china_zhongguo_renkou_shi", "4.ming_dynasty"),
@@ -941,6 +926,8 @@ def main():
       if nm and nm.lower() not in ("taipei", "taibei", "new taipei", "taiwan", "tainan"):
         p1910 = max(2500, min(28000, int(r["pop"] * 0.045)))
         cn5_cands.append({"name": nm, "other_names": r["alts"][:4], "country": "Taiwan", "lat": r["lat"], "lon": r["lon"], "foundation_year": 1684, "population": {1776: max(1500, int(p1910 * 0.42)), 1820: max(2000, int(p1910 * 0.62)), 1880: max(2200, int(p1910 * 0.85)), 1910: p1910}, "priority": 4})
+
+  cn5_cands.extend(load_frontier_archaeological_candidates(1644, 1911, "China"))
 
   dedup_and_emit_chapter(
     os.path.join("2.china_zhongguo_renkou_shi", "5.qing_dynasty"),
@@ -1021,6 +1008,8 @@ def main():
       if nm and nm.lower() not in ("taipei", "taibei", "new taipei", "taiwan", "tainan", "kaohsiung", "taichung", "keelung", "chiayi", "hsinchu"):
         p53 = max(2500, min(42000, int(round(r["pop"] * 0.08))))
         cn6_cands.append({"name": nm, "other_names": r["alts"][:4], "country": "Taiwan", "lat": r["lat"], "lon": r["lon"], "population": {1910: int(p53 * 0.42), 1918: int(p53 * 0.50), 1928: int(p53 * 0.62), 1936: int(p53 * 0.74), 1947: int(p53 * 0.88), 1953: p53}, "priority": 4})
+
+  cn6_cands.extend(load_frontier_archaeological_candidates(1910, 1953, "China"))
 
   dedup_and_emit_chapter(
     os.path.join("2.china_zhongguo_renkou_shi", "6.republican_and_transitional_era"),
@@ -1133,6 +1122,20 @@ def main():
   urb_mult_rel2010 = {1953: 0.24, 1964: 0.31, 1982: 0.44, 1990: 0.56, 2000: 0.76}
   cnty_mult_rel2010 = {1953: 0.44, 1964: 0.52, 1982: 0.75, 1990: 0.85, 2000: 0.94}
 
+  # Build exact city-centre lookup from IMPERIAL_ANCHORS + FRONTIER_HISTORICAL_CITIES so PRC prefecture cities NEVER snap to ADM2 polygon centroids!
+  from jade_frontier_gazetteer import FRONTIER_HISTORICAL_CITIES
+  exact_city_coords = {}
+  for a_nm, a_alts, a_ctry, a_la, a_lo, _, _ in IMPERIAL_ANCHORS:
+    if a_ctry == "China":
+      exact_city_coords[a_nm.lower()] = (a_nm, a_la, a_lo)
+      for al in a_alts:
+        exact_city_coords[str(al).lower()] = (a_nm, a_la, a_lo)
+  for f_nm, f_alts, f_ctry, f_la, f_lo, _, _, _ in FRONTIER_HISTORICAL_CITIES:
+    if f_ctry == "China":
+      exact_city_coords.setdefault(f_nm.lower(), (f_nm, f_la, f_lo))
+      for al in f_alts:
+        exact_city_coords.setdefault(str(al).lower(), (f_nm, f_la, f_lo))
+
   df_city = pd.read_csv(os.path.join(CENSUS_DIR, "leiii_census_city_2010-2020_v1.csv"))
   for row in df_city.itertuples(index=False):
     cname_zh, prov_zh = str(row.city).strip(), str(row.province).strip()
@@ -1147,12 +1150,25 @@ def main():
     hits = gn_cn_idx.get(cname_zh.lower()) or gn_cn_idx.get(stem_zh.lower())
     if not hits:
       continue
-    best = sorted(hits, key=lambda h: (1 if h["ascii"].lower().endswith(("cun", "xiang", "zhen", "municipality")) else 0, {"PPLC": 0, "PPLA": 1, "PPLA2": 2, "PPLA3": 3, "PPL": 4}.get(h["fcode"], 6), -h["pop"]))[0]
+    # ALWAYS prefer populated-place city centres (fclass == "P") over ADM2 polygon centroids!
+    best = sorted(
+      hits,
+      key=lambda h: (
+        0 if h["fclass"] == "P" else 1,
+        1 if h["ascii"].lower().endswith(("cun", "xiang", "zhen", "municipality")) else 0,
+        {"PPLC": 0, "PPLA": 1, "PPLA2": 2, "PPLA3": 3, "PPL": 4}.get(h["fcode"], 6),
+        -h["pop"],
+      ),
+    )[0]
     nm_en = clean_name(re.sub(r"\s+(?:Municipality|Autonomous Prefecture|Prefecture|Shi|City)$", "", best["ascii"] or best["name"], flags=re.I))
     if nm_en.lower() == "shenzhencun":
       nm_en = "Shenzhen"
     if not nm_en:
       continue
+    la_c, lo_c = best["lat"], best["lon"]
+    anchor_hit = exact_city_coords.get(stem_zh.lower()) or exact_city_coords.get(cname_zh.lower()) or exact_city_coords.get(nm_en.lower())
+    if anchor_hit:
+      nm_en, la_c, lo_c = anchor_hit
     fy = prc_found_years.get(nm_en.lower())
     pdict = {2010: u10, 2020: u20, 2025: int(round(u20 * (1.0 + max(-0.04, min(0.06, 0.35 * (u20 / max(1, u10) - 1.0))))))}
     anchor_1953 = next((a_pd[1953] for a_nm, _, _, _, _, _, a_pd in IMPERIAL_ANCHORS if a_nm.lower() == nm_en.lower() and 1953 in a_pd), None)
@@ -1160,7 +1176,7 @@ def main():
       if fy is not None and hy < fy:
         continue
       pdict[hy] = anchor_1953 if (hy == 1953 and anchor_1953) else max(5000, int(round(u10 * mult)))
-    prc_cands.append({"name": nm_en, "other_names": list(set([cname_zh, stem_zh, prov_zh] + best["alts"][:5])), "country": "China", "lat": best["lat"], "lon": best["lon"], "foundation_year": fy, "population": pdict, "priority": 10})
+    prc_cands.append({"name": nm_en, "other_names": list(set([cname_zh, stem_zh, prov_zh] + best["alts"][:5])), "country": "China", "lat": la_c, "lon": lo_c, "foundation_year": fy, "population": pdict, "priority": 10})
 
   df_cnty = pd.read_csv(os.path.join(CENSUS_DIR, "leiii_census_county_2010-2020_v1.csv"))
   for row in df_cnty.itertuples(index=False):
@@ -1182,9 +1198,13 @@ def main():
       continue
     best = sorted([h for h in hits if h["fclass"] == "P"] or hits, key=lambda x: -x["pop"])[0]
     nm_en = clean_name(re.sub(r"\s+(?:Shi|Xian|Qi|City|County|Banner)$", "", best["ascii"] or best["name"], flags=re.I))
+    la_c, lo_c = best["lat"], best["lon"]
+    cnty_anchor = exact_city_coords.get(stem_zh.lower()) or exact_city_coords.get(cty_zh.lower())
+    if cnty_anchor:
+      nm_en, la_c, lo_c = cnty_anchor
     # Guard Jiangxi Xiushui County seat (Yining Zhen) from colliding with Xinjiang Yining-China!
-    if cty_zh == "修水县" or (nm_en.lower() == "yining" and best["lat"] < 32.0):
-      nm_en = "Xiushui Jiangxi"
+    if cty_zh == "修水县" or (nm_en.lower() == "yining" and la_c < 32.0):
+      nm_en = "Xiushui"
     if not nm_en or len(nm_en) < 2:
       continue
     fy = prc_found_years.get(nm_en.lower())
@@ -1193,7 +1213,7 @@ def main():
       if fy is not None and hy < fy:
         continue
       pdict[hy] = max(1200, int(round(u10 * mult)))
-    prc_cands.append({"name": nm_en, "other_names": list(set([cty_zh, stem_zh] + best["alts"][:4])), "country": "China", "lat": best["lat"], "lon": best["lon"], "foundation_year": fy, "population": pdict, "priority": 8})
+    prc_cands.append({"name": nm_en, "other_names": list(set([cty_zh, stem_zh] + best["alts"][:4])), "country": "China", "lat": la_c, "lon": lo_c, "foundation_year": fy, "population": pdict, "priority": 8})
 
   # ALL 12,497 GeoNames CN PPLA4 towns (zhen/xiang/jiedao) carrying forward modern township/market-town network!
   for r in gn_cn:

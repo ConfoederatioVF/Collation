@@ -36,17 +36,44 @@ ZGRKS_DIR = os.path.join(CENSUS_DIR, "zgrks_extracted")
 RAW_ARCH = os.path.join(JADE, "_shared", "sites_east_asia", "0.raw_data")
 
 
+ETHNIC_BUREAU_RE = re.compile(
+  r"\b(?:Hanizu|Yizu|Bouyeizu|Buyizu|Miaozu|Chaoxianzu|Baizu|Zhuangzu|Huizu|Daizu|Jingpozu|"
+  r"Mengguzu|Mongolzu|Zangzu|Qiangzu|Lisuzu|Yaozu|Tujiazu|Dongzu|Manzu|Lahuzu|Wazu|Shezu|"
+  r"Shuizu|Mulamzu|Maonanzu|Hasaikezu|Kazakzu|Kirgizzu|Tajikzu|Uygurzu|Uyghurzu|Weiwuerzu|"
+  r"Xibozu|Tujiuzu|Salazu|Salarzu|Bonanzu|Vazu|Blangzu|Dongxiangzu|Baoanzu|Yuguzu|Nuzu|Dulongzu|"
+  r"Achangzu|Pumizu|Jinuozu|Deangzu|Bulangzu|Gelaozu|Zizhizhou|Zizhixian|Zizhiqi|Zizhiqu|Zizhixiang|"
+  r"Chengguanzhen|Chengguan|Zhangguansi|Zhanggruansi|Changguansi|Manyiguansi|Manyichangguansi|"
+  r"Xuanfusi|Xuanweisi|Anfusi|Zongguanfu|Junminfu|Duhufu|Xunjiansi|Zhaotaoshisi|"
+  r"Shoubeisi|Shouyuqianhusuo|Qianhusuo|Baihusuo|Tunwei|Manyi|Tusi|Diqu|Jiedaoban|Jiedao|"
+  r"Autonomous|Prefecture|Municipality)\b"
+  r"|\s+(?:Miao|Buyei|Bai|Dong|Pumi|Yi|Dai|Hani|Lisu|Hui|Tu|Salar|Tibetan|Qiang|Tujia|Yao|Zhuang)\s+and\s+(?:Dong|Miao|Pumi|Yi|Dai|Hani|Lisu|Hui|Tu|Salar|Tibetan|Qiang|Tujia|Yao|Zhuang)\b",
+  flags=re.I,
+)
+
+
 def clean_name(arg0_s):
   if not arg0_s:
     return ""
   s = str(arg0_s)
+  if "aboriginal" in s.lower() or "tribal lands" in s.lower():
+    return ""
   s = re.sub(r"\s*\([^)]*\)\s*", " ", s)
+  s = re.sub(r"\s*\([^)]*$", "", s)
   s = re.sub(r"[\u4e00-\u9fff()\[\]{}]+", "", s)
   s = s.replace("&", "and").replace("/", " ").replace("?", "").replace("`", "").replace("\ufffd", "").strip()
-  s = re.sub(r"\s+", " ", s)
+  s = ETHNIC_BUREAU_RE.sub(" ", s)
+  # Strip attached trailing bureaucratic/ethnic tokens stuck to a single word
+  s = re.sub(
+    r"(?:zizhizhou|zizhixian|zizhiqi|chengguanzhen|zhangguansi|zhanggruansi|changguansi|manyiguansi|manyichangguansi|"
+    r"xuanfusi|xuanweisi|anfusi|zongguanfu|junminfu|duhufu|xunjiansi|zhaotaoshisi|shouyuqianhusuo|tunwei|manyi|xiancheng)$",
+    "",
+    s,
+    flags=re.I,
+  )
+  s = re.sub(r"\s+", " ", s).strip(" -_,;.")
   if s and s[0].islower():
     s = s[0].upper() + s[1:]
-  if s.lower() in ("unknown", "unnamed", "none", "null", "n/a", "shi", "xian", "zhen", "cun", "settlement", "0"):
+  if s.lower() in ("unknown", "unnamed", "none", "null", "n/a", "shi", "xian", "zhen", "cun", "settlement", "0", "chengguan", "chengguanzhen", "tibet", "china", "mongolia"):
     return ""
   return s
 
@@ -62,8 +89,12 @@ def zh_to_pinyin(arg0_zh):
   s = str(arg0_zh or "").strip()
   if not s:
     return ""
-  # Strip heritage suffixes so names are clean place names
-  s = re.sub(r"(?:古遗址|遗址|故城遗址|古城遗址|城址|故城|古城|古镇|古建筑群|古村落|古墓群|摩崖造像)$", "", s).strip()
+  # Strip heritage & bureaucratic suffixes so names are clean place names
+  s = re.sub(
+    r"(?:古遗址|遗址|故城遗址|古城遗址|城址|故城|古城|土城子|土城|城子|古镇|古建筑群|古村落|古墓群|摩崖造像|总管府|宣抚司|宣慰司|长官司|安抚司|都护府|护府|卫城|所城)$",
+    "",
+    s,
+  ).strip()
   if not s:
     s = str(arg0_zh).strip()
   toks = lazy_pinyin(s)
@@ -359,9 +390,17 @@ def load_chgis_time_seats():
         ty = str(rec[ity] or "").strip()
         if not nm_py:
           continue
-        base_nm = re.sub(r"\s+(?:Fu|Zhou|Xian|Jun|Ting|Wei|Suo|Zhilizhou|Zhiliting|Lu|Guo|Houguo)$", "", nm_py, flags=re.I).strip()
+        base_nm = re.sub(
+          r"\s+(?:Fu|Zhou|Xian|Jun|Ting|Wei|Suo|Zhilizhou|Zhiliting|Lu|Guo|Houguo|"
+          r"Zhangguansi|Zhanggruansi|Xuanfusi|Xuanweisi|Anfusi|Zongguanfu|Junminfu|Duhufu|Xunjiansi|Weisuo|Qianhusuo|Manyi|Tusi)$",
+          "",
+          nm_py,
+          flags=re.I,
+        ).strip()
         if not base_nm or len(base_nm) < 2:
           base_nm = nm_py
+        if len(base_nm) > 20:
+          continue
         seats.append({
           "name": base_nm,
           "full_py": nm_py,
@@ -524,9 +563,18 @@ def load_chgis_towns_and_stations():
 
 
 def load_relicsatlas_by_era():
-  """Loads RelicsAtlas National Key Cultural Relics (5,060) filtered to ancient settlements/walled cities by dynasty."""
+  """Loads RelicsAtlas National Key Cultural Relics (5,060) strictly filtered to genuine walled cities & settlements by dynasty."""
   ra = json.load(open(os.path.join(RAW_ARCH, "cn_relicsatlas_heritage_sites.json"), encoding="utf-8"))
   sett_kw = ("故城", "古城", "城址", "遗址", "古镇", "古村", "卫城", "所城", "堡", "都城", "王城", "宫城", "皇城", "关", "寨", "驿")
+  # Strictly reject non-settlement monuments (kilns, temples, pagodas, tombs, bridges, rock carvings, walls, shrines, mines)
+  reject_kw = (
+    "旧石器", "革命", "烈士", "故居", "旧址", "窑", "佛寺", "寺", "庙", "观", "塔",
+    "石刻", "石窟", "摩崖", "皇陵", "陵", "墓", "桥", "碑", "长城", "矿", "宫",
+    "殿", "祠", "会馆", "书院", "牌坊", "造像", "岩画", "崖画", "盐井", "水库",
+    "水利", "渠", "堰", "闸", "灯塔", "炮台", "教堂", "清真寺", "衙署", "府第",
+    "宅", "庄园", "石桥", "古塔", "千佛", "会盟", "办事处", "司令部", "指挥部",
+    "讲习所", "总管府", "宣抚司", "长官司", "石经", "铁塔", "木塔", "佛像",
+  )
   era_map = [
     ("preqin", ("新石器", "夏", "商", "周", "春秋", "战国", "青铜")),
     ("han_jin", ("秦", "汉", "三国", "晋", "南北朝", "北魏", "东魏", "西魏", "北齐", "北周", "十六国", "南朝")),
@@ -540,7 +588,7 @@ def load_relicsatlas_by_era():
     nm_zh = str(r.get("name") or "").strip()
     era_s = str(r.get("era") or "")
     ty = str(r.get("type") or "")
-    if "旧石器" in era_s or "革命" in nm_zh or "烈士" in nm_zh or "故居" in nm_zh:
+    if any(rk in era_s or rk in nm_zh for rk in reject_kw):
       continue
     if ty != "古遗址" and not any(k in nm_zh for k in sett_kw):
       continue
@@ -551,7 +599,8 @@ def load_relicsatlas_by_era():
     if not (73.0 <= lo <= 135.5 and 18.0 <= la <= 54.0):
       continue
     nm_py = clean_name(zh_to_pinyin(nm_zh))
-    if not nm_py or len(nm_py) < 3:
+    # Reject smashed multi-word descriptive titles (keep concise real place names <= 15 chars!)
+    if not nm_py or len(nm_py) < 3 or len(nm_py) > 15:
       continue
     is_walled = any(k in nm_zh for k in ("故城", "古城", "城址", "都城", "王城", "卫城", "所城", "古镇"))
     rec = {"name": nm_py, "zh": nm_zh, "era": era_s, "addr": str(r.get("address") or ""), "lat": la, "lon": lo, "is_walled": is_walled}
@@ -693,8 +742,16 @@ def load_kham_monasteries():
       continue
     if not (78.0 <= lo <= 105.0 and 24.0 <= la <= 39.0) or math.isnan(la) or math.isnan(lo):
       continue
-    nm = clean_name(getattr(row, "MapName", "") or getattr(row, "NamePinyin", ""))
-    if not nm or len(nm) < 3:
+    raw_nm = str(getattr(row, "MapName", "") or getattr(row, "NamePinyin", "") or "").strip()
+    # Strip verbose Tibetan liturgical monastery suffixes so settlements show concise real toponyms
+    raw_nm = re.sub(
+      r"\s+(?:gön|gon|gönpa|gonpa|gompa|ling|tibet|monastery|temple|chöling|choling|dargyé|dargye|püntsok|puntsok|namgyal|shedrub|norbü|norbu|kagyü|gelug|nyingma|sakya|bon|si)\b.*$",
+      "",
+      raw_nm,
+      flags=re.I,
+    ).strip()
+    nm = clean_name(raw_nm)
+    if not nm or len(nm) < 3 or len(nm) > 18 or len(nm.split()) > 2:
       continue
     zh = str(getattr(row, "NameChinese", "") or "").strip()
     tib = str(getattr(row, "SN_TibetanWylie", "") or "").strip()

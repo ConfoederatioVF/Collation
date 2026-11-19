@@ -1,0 +1,3005 @@
+[
+  {
+    "cluster_id": "C0001",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Alkhan-Kala-Russia_2",
+        "target_key": "Alkhan-Kala Medieval Gorodishche-Russia",
+        "reason": "Alkhan-Kala-Russia_2 represents the same Alanic-Khazar fortified gorodishche as Alkhan-Kala Medieval Gorodishche"
+      },
+      {
+        "op": "MERGE",
+        "source_key": "Alkhan-Yurt Iron Age Site-Russia",
+        "target_key": "Alkhan-Yurt Medieval Gorodishche-Russia",
+        "reason": "Same multi-period archaeological settlement complex at Alkhan-Yurt"
+      },
+      {
+        "op": "MERGE",
+        "source_key": "Alkhan-Yurt Medieval Gorodishche-Russia",
+        "target_key": "Alkhan-Yurt-Russia",
+        "reason": "Alkhan-Yurt-Russia already encompasses the continuous settlement trajectory spanning -300 to modern"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Alkhan-Kala Medieval Gorodishche-Russia",
+        "new_name": "Alkhan-Kala (Medieval)",
+        "reason": "Pre-hiatus medieval fortified settlement separated by >600 years from 19th-century stanitsa"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Alkhan-Kala Iron Age Site-Russia",
+        "new_name": "Alkhan-Kala (Iron Age)",
+        "reason": "Pre-hiatus Iron Age site at Alkhan-Kala"
+      }
+    ],
+    "clean_names": {
+      "Alkhan-Kala-Russia": "Alkhan-Kala",
+      "Alkhan-Kala Medieval Gorodishche-Russia": "Alkhan-Kala (Medieval)",
+      "Alkhan-Kala Iron Age Site-Russia": "Alkhan-Kala (Iron Age)",
+      "Alkhan-Yurt-Russia": "Alkhan-Yurt"
+    }
+  },
+  {
+    "cluster_id": "C0002",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Nemirov Hillfort Iron Age Site 2-Ukraine",
+        "target_key": "Nemyriv Hillfort Iron Age Site 2-Ukraine",
+        "reason": "Duplicate transliteration twin of Roman-period hillfort phase"
+      },
+      {
+        "op": "MERGE",
+        "source_key": "Nemirov Hillfort Iron Age Site-Ukraine",
+        "target_key": "Nemyriv Hillfort Iron Age Site-Ukraine",
+        "reason": "Duplicate transliteration twin of Scythian rampart hillfort phase"
+      },
+      {
+        "op": "MERGE",
+        "source_key": "Nemirov Hillfort-Ukraine",
+        "target_key": "Nemyriv-Ukraine",
+        "reason": "Old Rus medieval hillfort continuous with modern town of Nemyriv"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Nemyriv Hillfort Bronze Age Site-Ukraine",
+        "new_name": "Nemyriv (Bronze Age)",
+        "reason": "Pre-hiatus Bronze Age settlement phase at Nemyriv hillfort"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Nemyriv Hillfort Iron Age Site-Ukraine",
+        "new_name": "Nemyriv (Iron Age)",
+        "reason": "Scythian-era Great Hillfort rampart complex at Nemyriv"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Nemyriv Hillfort Iron Age Site 2-Ukraine",
+        "new_name": "Nemyriv (Roman Period)",
+        "reason": "Chernyakhov / Roman-period settlement phase at Nemyriv hillfort"
+      }
+    ],
+    "clean_names": {
+      "Nemyriv-Ukraine": "Nemyriv",
+      "Nemyriv Hillfort Bronze Age Site-Ukraine": "Nemyriv (Bronze Age)",
+      "Nemyriv Hillfort Iron Age Site-Ukraine": "Nemyriv (Iron Age)",
+      "Nemyriv Hillfort Iron Age Site 2-Ukraine": "Nemyriv (Roman Period)"
+    }
+  },
+  {
+    "cluster_id": "C0003",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Arkheolohichnyy obyekt Mediaeval Hillfort II-Ukraine",
+        "target_key": "Svyatohirsk-Ukraine",
+        "reason": "Medieval hillfort at Svyatohirsk continuous within 171-year gap of modern settlement series"
+      },
+      {
+        "op": "KEEP_HOMONYM",
+        "key": "Teplinskoye-Ukraine",
+        "reason": "Distinct modern settlement in Luhansk Oblast 175 km away legitimately sharing name"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Teplinskoye-Ukraine_2",
+        "new_name": "Teplinske",
+        "reason": "Saltovo-Mayaki fortress and gorodishche near Bogorodichnoye on Seversky Donets"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Novoselovka Donets-Ukraine",
+        "new_name": "Novoselivka (Saltovo)",
+        "reason": "Early medieval Saltovo metallurgical settlement on Seversky Donets"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Svyatohorske Iron Age Hillfort-Ukraine",
+        "new_name": "Svyatohirsk (Iron Age)",
+        "reason": "Pre-hiatus Iron Age hillfort site at Svyatohirsk"
+      }
+    ],
+    "clean_names": {
+      "Svyatohirsk-Ukraine": "Svyatohirsk",
+      "Novoselivka-Ukraine": "Novoselivka",
+      "Teplinskoye-Ukraine": "Teplinskoye",
+      "Teplinskoye-Ukraine_2": "Teplinske",
+      "Novoselovka Donets-Ukraine": "Novoselivka (Saltovo)",
+      "Svyatohorske Iron Age Hillfort-Ukraine": "Svyatohirsk (Iron Age)"
+    }
+  },
+  {
+    "cluster_id": "C0004",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Ushki I-Russia",
+        "new_name": "Ushki I (Medieval)",
+        "reason": "Medieval Itelmen archaeological layer at Ushki Lake site I"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Ushki I Iron Age Site-Russia",
+        "new_name": "Ushki I (Iron Age)",
+        "reason": "Iron Age cultural layer at Ushki Lake site I"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Ushki I Bronze Age Site-Russia",
+        "new_name": "Ushki I (Bronze Age)",
+        "reason": "Bronze Age cultural layer at Ushki Lake site I"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Ushki I Stone Age Site 2-Russia",
+        "new_name": "Ushki I (Neolithic)",
+        "reason": "Neolithic cultural layer at Ushki Lake site I"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Ushki I Stone Age Site-Russia",
+        "new_name": "Ushki I (Palaeolithic)",
+        "reason": "Terminal Palaeolithic cultural layer at Ushki Lake site I"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Ushki V Palaeolithic Camp-Russia",
+        "new_name": "Ushki V",
+        "reason": "Distinct archaeological site complex V at Ushki Lake"
+      }
+    ],
+    "clean_names": {
+      "Ushki I-Russia": "Ushki I (Medieval)",
+      "Ushki I Iron Age Site-Russia": "Ushki I (Iron Age)",
+      "Ushki I Bronze Age Site-Russia": "Ushki I (Bronze Age)",
+      "Ushki I Stone Age Site 2-Russia": "Ushki I (Neolithic)",
+      "Ushki I Stone Age Site-Russia": "Ushki I (Palaeolithic)",
+      "Ushki V Palaeolithic Camp-Russia": "Ushki V"
+    }
+  },
+  {
+    "cluster_id": "C0005",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Vasil evka, Vasilyevka III Palaeolithic Camp-Ukraine",
+        "new_name": "Vasylivka III",
+        "reason": "Epipalaeolithic/Mesolithic cemetery and campsite Vasylivka III on Dnieper Rapids"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Vasilyevka II Mesolithic Settlement-Ukraine",
+        "new_name": "Vasylivka II",
+        "reason": "Mesolithic cemetery and settlement Vasylivka II on Dnieper Rapids"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Vasilievka 2 Stone Age Hillfort-Ukraine",
+        "new_name": "Vasylivka 2",
+        "reason": "Stone Age settlement site Vasylivka 2"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Vasilyevka 5 Mesolithic Settlement-Ukraine",
+        "new_name": "Vasylivka 5",
+        "reason": "Mesolithic settlement site Vasylivka 5"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Vasylivka Neolithic Settlement-Ukraine",
+        "new_name": "Vasylivka (Neolithic)",
+        "reason": "Neolithic settlement site near Vasylivka on Dnieper Rapids"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Paleolitychna stoyanka Palaeolithic Camp-Ukraine",
+        "new_name": "Vasylivka (Palaeolithic)",
+        "reason": "Palaeolithic campsite near Voroniy island at Vasylivka"
+      }
+    ],
+    "clean_names": {
+      "Vasil evka, Vasilyevka III Palaeolithic Camp-Ukraine": "Vasylivka III",
+      "Vasilyevka II Mesolithic Settlement-Ukraine": "Vasylivka II",
+      "Vasilievka 2 Stone Age Hillfort-Ukraine": "Vasylivka 2",
+      "Vasilyevka 5 Mesolithic Settlement-Ukraine": "Vasylivka 5",
+      "Vasylivka Neolithic Settlement-Ukraine": "Vasylivka (Neolithic)",
+      "Paleolitychna stoyanka Palaeolithic Camp-Ukraine": "Vasylivka (Palaeolithic)"
+    }
+  },
+  {
+    "cluster_id": "C0006",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Surskij ostrov 1 1 Mesolithic Camp Hillfort-Ukraine",
+        "target_key": "Surskoy Island-Ukraine",
+        "reason": "Duplicate scrape of Sursky Island Mesolithic-Neolithic site on Dnieper Rapids"
+      },
+      {
+        "op": "MERGE",
+        "source_key": "Surskij ostrov I Mesolithic Settlement-Ukraine",
+        "target_key": "Surskoy Island-Ukraine",
+        "reason": "Duplicate scrape of Sursky Island Mesolithic-Neolithic type-site"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Surskoy Island-Ukraine",
+        "new_name": "Surskyi Ostriv",
+        "reason": "Standard Ukrainian archaeological toponym for Sursky Island type-site"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Voloshskoye Penkovka-Ukraine",
+        "new_name": "Voloske (Penkovka)",
+        "reason": "Early Slavic Penkovka-culture settlement at Voloske with >900-year hiatus to modern village"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Voloske Mesolithic-Ukraine",
+        "new_name": "Voloske (Mesolithic)",
+        "reason": "Pre-hiatus Mesolithic burial and campsite on Dnieper Rapids at Voloske"
+      }
+    ],
+    "clean_names": {
+      "Voloske-Ukraine": "Voloske",
+      "Surskoy Island-Ukraine": "Surskyi Ostriv",
+      "Voloshskoye Penkovka-Ukraine": "Voloske (Penkovka)",
+      "Voloske Mesolithic-Ukraine": "Voloske (Mesolithic)"
+    }
+  },
+  {
+    "cluster_id": "C0007",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "dvosharove doby piznoyi bronzy ta rymskoho chasu Kalcheva IV Bronze Age Settlement-Ukraine",
+        "new_name": "Kalcheva IV",
+        "reason": "Numbered multi-period archaeological settlement site IV at Kalcheva"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "dvosharove doby piznoyi bronzy ta rymskoho chasu Kalcheva VI Bronze Age Settlement-Ukraine",
+        "new_name": "Kalcheva VI",
+        "reason": "Numbered multi-period archaeological settlement site VI at Kalcheva"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "dvosharove doby piznoyi bronzy ta balkano-dunayskoyi k-ry Kalcheva VIII Bronze Age Settlement-Ukraine",
+        "new_name": "Kalcheva VIII",
+        "reason": "Numbered multi-period archaeological settlement site VIII at Kalcheva"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "dvosharove doby piznoyi bronzy ta chernyakhivske Kalcheva KhII Bronze Age Settlement-Ukraine",
+        "new_name": "Kalcheva XII",
+        "reason": "Numbered multi-period archaeological settlement site XII at Kalcheva"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "dvosharove doby piznoyi bronzy ta chernyakhivske Kalcheva Bronze Age Settlement II-Ukraine",
+        "new_name": "Kalcheva II",
+        "reason": "Numbered multi-period archaeological settlement site II at Kalcheva"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "bahatosharove doby piznoyi bronzy Bronze Age Settlement-Ukraine",
+        "new_name": "Kalcheva (Bronze Age)",
+        "reason": "Late Bronze Age settlement site near Kalcheva"
+      }
+    ],
+    "clean_names": {
+      "dvosharove doby piznoyi bronzy ta rymskoho chasu Kalcheva IV Bronze Age Settlement-Ukraine": "Kalcheva IV",
+      "dvosharove doby piznoyi bronzy ta rymskoho chasu Kalcheva VI Bronze Age Settlement-Ukraine": "Kalcheva VI",
+      "dvosharove doby piznoyi bronzy ta balkano-dunayskoyi k-ry Kalcheva VIII Bronze Age Settlement-Ukraine": "Kalcheva VIII",
+      "dvosharove doby piznoyi bronzy ta chernyakhivske Kalcheva KhII Bronze Age Settlement-Ukraine": "Kalcheva XII",
+      "dvosharove doby piznoyi bronzy ta chernyakhivske Kalcheva Bronze Age Settlement II-Ukraine": "Kalcheva II",
+      "bahatosharove doby piznoyi bronzy Bronze Age Settlement-Ukraine": "Kalcheva (Bronze Age)"
+    }
+  },
+  {
+    "cluster_id": "C0008",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "mezolitychna Vasylivka Mesolithic Camp II-Ukraine",
+        "target_key": "Vasylivka Stone Age Hillfort-Ukraine",
+        "reason": "Duplicate scrape of prehistoric campsite near Kiliya/Danube"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Vasylivka Stone Age Hillfort-Ukraine",
+        "new_name": "Vasylivka (Stone Age)",
+        "reason": "Stone Age campsite near Kiliya, 26 km southeast of Vasylivka village"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "dvosharove doby piznoyi bronzy ta chernyakhivske Vasylivka Bronze Age Settlement-Ukraine",
+        "new_name": "Vasylivka (Bronze Age)",
+        "reason": "Late Bronze Age and Chernyakhov settlement site at Vasylivka"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "dvosharove doby piznoyi bronzy ta chernyakhivske Vasylivka VIII Bronze Age Settlement-Ukraine",
+        "new_name": "Vasylivka VIII",
+        "reason": "Numbered archaeological settlement site VIII at Vasylivka"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "dvosharove rymskoho chasu ta balkano-dunayskoyi kultury pivdennykh slovyan Vasylivka VI Classical Polis-Ukraine",
+        "new_name": "Vasylivka VI",
+        "reason": "Numbered Roman-period and early Slavic settlement site VI at Vasylivka"
+      }
+    ],
+    "clean_names": {
+      "Vasylivka_UA_17-Ukraine": "Vasylivka",
+      "Vasylivka Stone Age Hillfort-Ukraine": "Vasylivka (Stone Age)",
+      "dvosharove doby piznoyi bronzy ta chernyakhivske Vasylivka Bronze Age Settlement-Ukraine": "Vasylivka (Bronze Age)",
+      "dvosharove doby piznoyi bronzy ta chernyakhivske Vasylivka VIII Bronze Age Settlement-Ukraine": "Vasylivka VIII",
+      "dvosharove rymskoho chasu ta balkano-dunayskoyi kultury pivdennykh slovyan Vasylivka VI Classical Polis-Ukraine": "Vasylivka VI"
+    }
+  },
+  {
+    "cluster_id": "C0009",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Suvorovo Katlabukh-Ukraine",
+        "new_name": "Katlabukh",
+        "reason": "Ancient and medieval multi-period settlement on Lake Katlabukh"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "balkano-dunayske pivdennykh slovyan Suvorove Mediaeval Hillfort-Ukraine",
+        "new_name": "Suvorove (Medieval)",
+        "reason": "Balkan-Danubian South Slavic medieval hillfort near Suvorove"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "dvosharove sabatynivske ta chernyakhivske Suvorove VII Chernyakhov Settlement-Ukraine",
+        "new_name": "Suvorove VII",
+        "reason": "Numbered Sabatynivka and Chernyakhov settlement site VII at Suvorove"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "sabatynivske Suvorove VIII Bronze Age Settlement-Ukraine",
+        "new_name": "Suvorove VIII",
+        "reason": "Numbered Bronze Age Sabatynivka settlement site VIII at Suvorove"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "dvosharove sabatynivske ta rymskoho chasu Katlabukh Bronze Age Settlement-Ukraine",
+        "new_name": "Katlabukh (Bronze Age)",
+        "reason": "Sabatynivka Bronze Age settlement on Lake Katlabukh"
+      }
+    ],
+    "clean_names": {
+      "Katlabuh-Ukraine": "Katlabuh",
+      "Suvorovo Katlabukh-Ukraine": "Katlabukh",
+      "balkano-dunayske pivdennykh slovyan Suvorove Mediaeval Hillfort-Ukraine": "Suvorove (Medieval)",
+      "dvosharove sabatynivske ta chernyakhivske Suvorove VII Chernyakhov Settlement-Ukraine": "Suvorove VII",
+      "sabatynivske Suvorove VIII Bronze Age Settlement-Ukraine": "Suvorove VIII",
+      "dvosharove sabatynivske ta rymskoho chasu Katlabukh Bronze Age Settlement-Ukraine": "Katlabukh (Bronze Age)"
+    }
+  },
+  {
+    "cluster_id": "C0010",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Andreyaul-Russia",
+        "target_key": "Endirey-Russia",
+        "reason": "Andreyaul is the historical Russian name and earlier series of the town Endirey"
+      },
+      {
+        "op": "MERGE",
+        "source_key": "Andreyaul-Russia_2",
+        "target_key": "Andreyaul Medieval Gorodishche-Russia",
+        "reason": "Duplicate node of early medieval Andreyaul gorodishche complex"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Andreyaul Medieval Gorodishche-Russia",
+        "new_name": "Endirey (Early Medieval)",
+        "reason": "Pre-hiatus Khazar-period fortified centre with >400-year hiatus to modern Endirey"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Andreyaul Iron Age Site-Russia",
+        "new_name": "Endirey (Iron Age)",
+        "reason": "Pre-hiatus Iron Age settlement phase at Endirey"
+      }
+    ],
+    "clean_names": {
+      "Endirey-Russia": "Endirey",
+      "Andreyaul Medieval Gorodishche-Russia": "Endirey (Early Medieval)",
+      "Andreyaul Iron Age Site-Russia": "Endirey (Iron Age)"
+    }
+  },
+  {
+    "cluster_id": "C0012",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Ground wall of Ryazan Kremlin-Russia",
+        "reason": "Defensive earthwork wall heritage registry feature inside Ryazan kremlin with fabricated dates"
+      },
+      {
+        "op": "MERGE",
+        "source_key": "Pereyaslavl-Ryazansky Gorodishche-Russia",
+        "target_key": "R'azan'-Russia",
+        "reason": "Pereyaslavl-Ryazansky is the historic fortified core and historic name of Ryazan"
+      },
+      {
+        "op": "MERGE",
+        "source_key": "Borki-Oka-Russia",
+        "target_key": "Borki-Ryazan Gorodishche-Russia",
+        "reason": "Duplicate coordinate scrape of Borki archaeological complex near Ryazan"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Borki-Ryazan Gorodishche-Russia",
+        "new_name": "Borki (Ryazan)",
+        "reason": "Oka-Ryazan culture early medieval gorodishche and burial ground at Borki"
+      }
+    ],
+    "clean_names": {
+      "R'azan'-Russia": "Ryazan",
+      "Borki-Ryazan Gorodishche-Russia": "Borki (Ryazan)"
+    }
+  },
+  {
+    "cluster_id": "C0013",
+    "actions": [
+      {
+        "op": "KEEP_HOMONYM",
+        "key": "Horodnytsia-Ukraine",
+        "reason": "Distinct modern urban settlement in Zhytomyr Oblast 269 km away legitimately sharing name"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Horodenka-Ukraine_2",
+        "new_name": "Horodenka (Medieval)",
+        "reason": "Old Rus fortress of Horodenka separated by >370-year hiatus from modern town records"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Horodnytsia-Ukraine_2",
+        "new_name": "Horodnytsia-on-Dniester",
+        "reason": "Medieval Old Rus hillfort at Horodnytsia village on Dniester, Ivano-Frankivsk Oblast"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Horodnytsia Bronze Age Site-Ukraine",
+        "new_name": "Horodnytsia (Bronze Age)",
+        "reason": "Bronze Age / Trypillia settlement site at Horodnytsia on Dniester"
+      }
+    ],
+    "clean_names": {
+      "Horodenka-Ukraine": "Horodenka",
+      "Horodenka-Ukraine_2": "Horodenka (Medieval)",
+      "Horodnytsia-Ukraine": "Horodnytsia",
+      "Horodnytsia-Ukraine_2": "Horodnytsia-on-Dniester",
+      "Horodnytsia Bronze Age Site-Ukraine": "Horodnytsia (Bronze Age)"
+    }
+  },
+  {
+    "cluster_id": "C0014",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Lysaya Gora Stone Age Hillfort-Ukraine",
+        "target_key": "Lysaya Gora Neolithic-Ukraine",
+        "reason": "Overlapping Stone Age settlement phase at Lysa Hora Vasylivka"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Balky Iron Age Hillfort-Ukraine",
+        "new_name": "Balky (Iron Age)",
+        "reason": "Pre-hiatus Scythian Iron Age hillfort at Balky village"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Lysaya Gora Classical Polis-Ukraine",
+        "new_name": "Lysa Hora (Classical)",
+        "reason": "Classical / Roman-period settlement site at Lysa Hora on Kakhovka Reservoir"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Lysaya Gora Neolithic-Ukraine",
+        "new_name": "Lysa Hora (Neolithic)",
+        "reason": "Famous Azov-Dnieper culture Neolithic type-site at Lysa Hora"
+      }
+    ],
+    "clean_names": {
+      "Balky-Ukraine": "Balky",
+      "Balky Iron Age Hillfort-Ukraine": "Balky (Iron Age)",
+      "Lysaya Gora Classical Polis-Ukraine": "Lysa Hora (Classical)",
+      "Lysaya Gora Neolithic-Ukraine": "Lysa Hora (Neolithic)"
+    }
+  },
+  {
+    "cluster_id": "C0015",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Marianivka Neolithic Bronze Age Type-Site-Ukraine",
+        "new_name": "Marianivka (Neolithic)",
+        "reason": "Famous Marianivka culture Neolithic-Bronze Age type-site on Seym river"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Marianivka Bronze Age Site-Ukraine",
+        "new_name": "Marianivka (Bronze Age)",
+        "reason": "Bronze Age settlement site at Marianivka"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Marianivka Iron Age Site-Ukraine",
+        "new_name": "Marianivka (Iron Age)",
+        "reason": "Early Iron Age Scythian-era settlement at Marianivka"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Marianivka Iron Age Site 2-Ukraine",
+        "new_name": "Marianivka (Roman Period)",
+        "reason": "Late Iron Age / Roman-period Chernyakhov settlement at Marianivka"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Marianivka Medieval Settlement-Ukraine",
+        "new_name": "Marianivka (Medieval)",
+        "reason": "Early medieval Slavic / Old Rus settlement at Marianivka"
+      }
+    ],
+    "clean_names": {
+      "Marianivka Neolithic Bronze Age Type-Site-Ukraine": "Marianivka (Neolithic)",
+      "Marianivka Bronze Age Site-Ukraine": "Marianivka (Bronze Age)",
+      "Marianivka Iron Age Site-Ukraine": "Marianivka (Iron Age)",
+      "Marianivka Iron Age Site 2-Ukraine": "Marianivka (Roman Period)",
+      "Marianivka Medieval Settlement-Ukraine": "Marianivka (Medieval)"
+    }
+  },
+  {
+    "cluster_id": "C0016",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Mezin Stone Age Site-Ukraine",
+        "new_name": "Mezyn (Palaeolithic)",
+        "reason": "World-famous Mezyn Upper Palaeolithic mammoth-bone campsite"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Mezin Iron Age Site-Ukraine",
+        "new_name": "Mezyn (Iron Age)",
+        "reason": "Early Iron Age settlement at Mezyn on Desna river"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Mezin Iron Age Site 2-Ukraine",
+        "new_name": "Mezyn (Roman Period)",
+        "reason": "Roman-period / late antique settlement phase at Mezyn"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Khoromky Iron Age Hillfort-Ukraine",
+        "new_name": "Khoromky",
+        "reason": "Distinct Yukhnovo culture Iron Age hillfort at Khoromky near Mezyn"
+      }
+    ],
+    "clean_names": {
+      "Mezin-Ukraine": "Mezyn",
+      "Mezin Stone Age Site-Ukraine": "Mezyn (Palaeolithic)",
+      "Mezin Iron Age Site-Ukraine": "Mezyn (Iron Age)",
+      "Mezin Iron Age Site 2-Ukraine": "Mezyn (Roman Period)",
+      "Khoromky Iron Age Hillfort-Ukraine": "Khoromky"
+    }
+  },
+  {
+    "cluster_id": "C0017",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Rakushecnyj Jar Neolithic Settlement-Russia",
+        "target_key": "Rakushechny Yar-Russia",
+        "reason": "Duplicate scrape of Rakushechny Yar Neolithic shell-mound type-site"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Rakushechny Yar-Russia",
+        "new_name": "Rakushechny Yar",
+        "reason": "World-famous Neolithic shell-mound type-site on Porechny island"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Razdorskaya-1-Russia",
+        "new_name": "Razdorskaya I",
+        "reason": "Multi-stratum Neolithic and Eneolithic settlement Razdorskaya I"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Razdorskaya-2-Russia",
+        "new_name": "Razdorskaya 2",
+        "reason": "Mesolithic settlement and campsite Razdorskaya 2 on Don river"
+      }
+    ],
+    "clean_names": {
+      "Razdorskaya-Russia": "Razdorskaya",
+      "Rakushechny Yar-Russia": "Rakushechny Yar",
+      "Razdorskaya-1-Russia": "Razdorskaya I",
+      "Razdorskaya-2-Russia": "Razdorskaya 2"
+    }
+  },
+  {
+    "cluster_id": "C0021",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Berezyne Eneolithic Hillfort-Ukraine",
+        "new_name": "Berezyne (Eneolithic)",
+        "reason": "Pre-hiatus Eneolithic / Usatovo hillfort site at Berezyne"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "dvosharove Berezyne VII doby piznoyi bronzy ta chernyakhivske Bronze Age Settlement-Ukraine",
+        "new_name": "Berezyne VII",
+        "reason": "Numbered Late Bronze Age and Chernyakhov settlement site VII at Berezyne"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "rymskoho chasu Berezyne IV Classical Polis-Ukraine",
+        "new_name": "Berezyne IV",
+        "reason": "Numbered Roman-period settlement site IV at Berezyne"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "chernyakhivske Berezyne I Chernyakhov Settlement-Ukraine",
+        "new_name": "Berezyne I",
+        "reason": "Numbered Chernyakhov settlement site I at Berezyne"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "chernyakhivske Berezyne-Pivnichne Chernyakhov Settlement-Ukraine",
+        "new_name": "Berezyne Pivnichne",
+        "reason": "Northern Chernyakhov settlement site at Berezyne"
+      }
+    ],
+    "clean_names": {
+      "Berezyne Eneolithic Hillfort-Ukraine": "Berezyne (Eneolithic)",
+      "dvosharove Berezyne VII doby piznoyi bronzy ta chernyakhivske Bronze Age Settlement-Ukraine": "Berezyne VII",
+      "rymskoho chasu Berezyne IV Classical Polis-Ukraine": "Berezyne IV",
+      "chernyakhivske Berezyne I Chernyakhov Settlement-Ukraine": "Berezyne I",
+      "chernyakhivske Berezyne-Pivnichne Chernyakhov Settlement-Ukraine": "Berezyne Pivnichne"
+    }
+  },
+  {
+    "cluster_id": "C0022",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "balkano-dunayskoyi k-ry pivdennykh slovyan Stari Troyany Rus Hillfort-Ukraine",
+        "new_name": "Stari Troyany (Rus)",
+        "reason": "Balkan-Danubian early medieval South Slavic hillfort at Stari Troyany"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "bahatosharove sabatynivske Chernyakhov Settlement II-Ukraine",
+        "new_name": "Stari Troyany (Chernyakhov)",
+        "reason": "Multi-period Sabatynivka and Chernyakhov settlement at Stari Troyany"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "rymskoho chasu Stari Troyany Classical Polis-Ukraine",
+        "new_name": "Stari Troyany (Classical)",
+        "reason": "Roman-era settlement site near Stari Troyany"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "bahatosharove sabatynivske Rus Hillfort-Ukraine",
+        "new_name": "Pryozerne (Rus)",
+        "reason": "Multi-period Sabatynivka and Rus hillfort near Pryozerne village"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "dvosharove sabatynivske ta chernyakhivske Pryozerne Chernyakhov Settlement-Ukraine",
+        "new_name": "Pryozerne (Chernyakhov)",
+        "reason": "Two-layer Sabatynivka and Chernyakhov settlement near Pryozerne"
+      }
+    ],
+    "clean_names": {
+      "balkano-dunayskoyi k-ry pivdennykh slovyan Stari Troyany Rus Hillfort-Ukraine": "Stari Troyany (Rus)",
+      "bahatosharove sabatynivske Chernyakhov Settlement II-Ukraine": "Stari Troyany (Chernyakhov)",
+      "rymskoho chasu Stari Troyany Classical Polis-Ukraine": "Stari Troyany (Classical)",
+      "bahatosharove sabatynivske Rus Hillfort-Ukraine": "Pryozerne (Rus)",
+      "dvosharove sabatynivske ta chernyakhivske Pryozerne Chernyakhov Settlement-Ukraine": "Pryozerne (Chernyakhov)"
+    }
+  },
+  {
+    "cluster_id": "C0024",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Barsova Gora Iron Age Site 2-Russia",
+        "target_key": "Barsova Gora 2-Russia",
+        "reason": "Overlapping cultural layer of archaeological site Barsova Gora 2"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Barsova Gora 2-Russia",
+        "new_name": "Barsova Gora (Medieval)",
+        "reason": "Early medieval fortified centre at Barsova Gora on Ob river"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Barsova Gora Iron Age Site-Russia",
+        "new_name": "Barsova Gora (Iron Age)",
+        "reason": "Early Iron Age Kulay culture fortified settlement at Barsova Gora"
+      }
+    ],
+    "clean_names": {
+      "Barsovo-Russia": "Barsovo",
+      "Barsova Gora 2-Russia": "Barsova Gora (Medieval)",
+      "Barsova Gora Iron Age Site-Russia": "Barsova Gora (Iron Age)"
+    }
+  },
+  {
+    "cluster_id": "C0025",
+    "actions": [
+      {
+        "op": "KEEP_HOMONYM",
+        "key": "Belgatoy-Russia",
+        "reason": "Distinct modern village in Shali Raion 18 km north of Belgatoy in Vedeno Raion"
+      },
+      {
+        "op": "KEEP_HOMONYM",
+        "key": "Belgatoy-Russia_2",
+        "reason": "Historical highland village Belgatoy in Vedeno Raion"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Belgatoy Medieval Gorodishche-Russia",
+        "new_name": "Belgatoy (Medieval)",
+        "reason": "Medieval highland hillfort near Belgatoy in Vedeno Raion"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Belgatoy Bronze Age Site-Russia",
+        "new_name": "Belgatoy (Bronze Age)",
+        "reason": "Koban Bronze Age settlement site near Belgatoy in Vedeno Raion"
+      }
+    ],
+    "clean_names": {
+      "Belgatoy-Russia": "Belgatoy",
+      "Belgatoy-Russia_2": "Belgatoy",
+      "Belgatoy Medieval Gorodishche-Russia": "Belgatoy (Medieval)",
+      "Belgatoy Bronze Age Site-Russia": "Belgatoy (Bronze Age)"
+    }
+  },
+  {
+    "cluster_id": "C0026",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Belynichi kamennyy krest Mediaeval Hillfort-Belarus",
+        "reason": "Memorial stone cross monument with fabricated hillfort label"
+      },
+      {
+        "op": "MERGE",
+        "source_key": "Beragavy (arkhealagichnyya pomniki)-Belarus",
+        "target_key": "Beragavy Mediaeval Hillfort-Belarus",
+        "reason": "Duplicate coordinate scrape of medieval fortified site at Beragavy"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Beragavy Mediaeval Hillfort-Belarus",
+        "new_name": "Beragavy",
+        "reason": "Medieval hillfort site at Beragavy on Neman river"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Shchachynova Bronze Age Settlement-Belarus",
+        "new_name": "Shchechinovo",
+        "reason": "Bronze Age settlement site near Shchechinovo"
+      }
+    ],
+    "clean_names": {
+      "Beragavy Mediaeval Hillfort-Belarus": "Beragavy",
+      "Shchachynova Bronze Age Settlement-Belarus": "Shchechinovo"
+    }
+  },
+  {
+    "cluster_id": "C0027",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Bilozerka Eneolithic Hillfort-Ukraine",
+        "new_name": "Bilozirka (Trypillia)",
+        "reason": "Distinct Trypillia culture settlement at Bilozirka in Vinnytsia Oblast, 443 km away"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Bilozerske poselennya Bronze Age Settlement-Ukraine",
+        "new_name": "Bilozerka (Bronze Age)",
+        "reason": "Famous Belozerka culture Late Bronze Age type-site on Lake Bilozerka, Kherson Oblast"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Bilozerka Eneolithic Hillfort-Ukraine_2",
+        "new_name": "Bilozerka (Eneolithic)",
+        "reason": "Pre-hiatus Eneolithic settlement on Lake Bilozerka, Kherson Oblast"
+      }
+    ],
+    "clean_names": {
+      "Bilozerka-Ukraine": "Bilozerka",
+      "Bilozerske poselennya Bronze Age Settlement-Ukraine": "Bilozerka (Bronze Age)",
+      "Bilozerka Eneolithic Hillfort-Ukraine_2": "Bilozerka (Eneolithic)",
+      "Bilozerka Eneolithic Hillfort-Ukraine": "Bilozirka (Trypillia)"
+    }
+  },
+  {
+    "cluster_id": "C0028",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Chirkey Medieval Gorodishche-Russia",
+        "target_key": "Chirkey-Russia",
+        "reason": "Medieval fortified settlement continuous with Chirkey settlement series"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Chirkey Bronze Age Site 2-Russia",
+        "new_name": "Chirkey (Late Bronze Age)",
+        "reason": "Late Bronze Age settlement site at Chirkey"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Chirkey Bronze Age Site-Russia",
+        "new_name": "Chirkey (Bronze Age)",
+        "reason": "Middle Bronze Age settlement site at Chirkey"
+      }
+    ],
+    "clean_names": {
+      "Chirkey-Russia": "Chirkey",
+      "Chirkey Bronze Age Site 2-Russia": "Chirkey (Late Bronze Age)",
+      "Chirkey Bronze Age Site-Russia": "Chirkey (Bronze Age)"
+    }
+  },
+  {
+    "cluster_id": "C0029",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Gagatli Medieval Gorodishche-Russia",
+        "new_name": "Gagatli (Medieval)",
+        "reason": "Medieval mountain hillfort at Gagatli with >400-year hiatus to modern aul"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Gagatli Bronze Age Site 2-Russia",
+        "new_name": "Gagatli (Late Bronze Age)",
+        "reason": "Late Bronze Age settlement site at Gagatli"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Gagatli Bronze Age Site-Russia",
+        "new_name": "Gagatli (Bronze Age)",
+        "reason": "Middle Bronze Age settlement site at Gagatli"
+      }
+    ],
+    "clean_names": {
+      "Gagatli-Russia": "Gagatli",
+      "Gagatli Medieval Gorodishche-Russia": "Gagatli (Medieval)",
+      "Gagatli Bronze Age Site 2-Russia": "Gagatli (Late Bronze Age)",
+      "Gagatli Bronze Age Site-Russia": "Gagatli (Bronze Age)"
+    }
+  },
+  {
+    "cluster_id": "C0030",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Gazi-Yurt Medieval Gorodishche-Russia",
+        "target_key": "Gazi-Yurt-Russia",
+        "reason": "Duplicate node of early medieval Alanic gorodishche at Gazi-Yurt"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Gazi-Yurt-Russia",
+        "new_name": "Gazi-Yurt",
+        "reason": "Alanic early medieval fortified town centre of Gazi-Yurt"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Ekazhevo Medieval Gorodishche-Russia",
+        "new_name": "Ekazhevo (Medieval)",
+        "reason": "Medieval fortified gorodishche with >500-year hiatus to modern Ekazhevo"
+      }
+    ],
+    "clean_names": {
+      "Ekazhevo-Russia": "Ekazhevo",
+      "Ekazhevo Medieval Gorodishche-Russia": "Ekazhevo (Medieval)",
+      "Gazi-Yurt-Russia": "Gazi-Yurt"
+    }
+  },
+  {
+    "cluster_id": "C0031",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Igren Mesolithic Settlement-Ukraine",
+        "target_key": "Igren VIII-Ukraine",
+        "reason": "Duplicate scrape of Igren VIII Mesolithic campsite on Samara-Dnieper confluence"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Igren VIII-Ukraine",
+        "new_name": "Igren VIII",
+        "reason": "Famous multi-period Mesolithic-Neolithic campsite Igren VIII"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Ihren Neolithic Settlement-Ukraine",
+        "new_name": "Ihren (Neolithic)",
+        "reason": "Neolithic settlement site at Ihren"
+      }
+    ],
+    "clean_names": {
+      "Ihren-Ukraine": "Ihren",
+      "Igren VIII-Ukraine": "Igren VIII",
+      "Ihren Neolithic Settlement-Ukraine": "Ihren (Neolithic)"
+    }
+  },
+  {
+    "cluster_id": "C0032",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Irganay Medieval Gorodishche-Russia",
+        "new_name": "Irganay (Medieval)",
+        "reason": "Medieval fortified mountain settlement with >400-year hiatus to modern aul"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Irganay Bronze Age Site 2-Russia",
+        "new_name": "Irganay (Late Bronze Age)",
+        "reason": "Late Bronze Age settlement site at Irganay"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Irganay Bronze Age Site-Russia",
+        "new_name": "Irganay (Bronze Age)",
+        "reason": "Middle Bronze Age settlement site at Irganay"
+      }
+    ],
+    "clean_names": {
+      "Irganay-Russia": "Irganay",
+      "Irganay Medieval Gorodishche-Russia": "Irganay (Medieval)",
+      "Irganay Bronze Age Site 2-Russia": "Irganay (Late Bronze Age)",
+      "Irganay Bronze Age Site-Russia": "Irganay (Bronze Age)"
+    }
+  },
+  {
+    "cluster_id": "C0033",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Kayakent Gorodishche-Russia",
+        "new_name": "Kayakent (Early Medieval)",
+        "reason": "Khazar-era early medieval gorodishche with >900-year hiatus to modern town"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Kayakent Bronze Age Site 2-Russia",
+        "new_name": "Kayakent (Late Bronze Age)",
+        "reason": "Kayakent-Khorochoi Late Bronze Age type-site phase 2"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Kayakent Bronze Age Site-Russia",
+        "new_name": "Kayakent (Bronze Age)",
+        "reason": "Early Bronze Age settlement site at Kayakent"
+      }
+    ],
+    "clean_names": {
+      "Kayakent-Russia": "Kayakent",
+      "Kayakent Gorodishche-Russia": "Kayakent (Early Medieval)",
+      "Kayakent Bronze Age Site 2-Russia": "Kayakent (Late Bronze Age)",
+      "Kayakent Bronze Age Site-Russia": "Kayakent (Bronze Age)"
+    }
+  },
+  {
+    "cluster_id": "C0034",
+    "actions": [
+      {
+        "op": "KEEP_HOMONYM",
+        "key": "Kazachka-Russia",
+        "reason": "Distinct modern settlement in Tula Oblast 3407 km away from Siberian Yenisei sites"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Kazachka-Russia_2",
+        "new_name": "Kazachka (Late Bronze Age)",
+        "reason": "Late Bronze Age Kan-Yenisei settlement on Kazachka river, Siberia"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Kazachka Bronze Age Site-Russia",
+        "new_name": "Kazachka (Bronze Age)",
+        "reason": "Early Bronze Age settlement site on Kazachka river, Siberia"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Kazachka Stone Age Site-Russia",
+        "new_name": "Kazachka (Stone Age)",
+        "reason": "Neolithic stone age campsite on Kazachka river, Siberia"
+      }
+    ],
+    "clean_names": {
+      "Kazachka-Russia": "Kazachka",
+      "Kazachka-Russia_2": "Kazachka (Late Bronze Age)",
+      "Kazachka Bronze Age Site-Russia": "Kazachka (Bronze Age)",
+      "Kazachka Stone Age Site-Russia": "Kazachka (Stone Age)"
+    }
+  },
+  {
+    "cluster_id": "C0035",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Bolgary Village-Russia",
+        "target_key": "Bolgary-Russia",
+        "reason": "Russian settlement Bolgary continuous with Bolgar historic town complex"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Balymery-Russia",
+        "new_name": "Balymery",
+        "reason": "Distinct early medieval Bulgar gorodishche and burial ground at Balymery"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Kuybyshevskoe gorodishche-Russia",
+        "new_name": "Kuybyshevskoe Gorodishche",
+        "reason": "Distinct medieval Volga Bulgarian fortified settlement 23 km away"
+      }
+    ],
+    "clean_names": {
+      "Bolgary-Russia": "Bolgar",
+      "Balymery-Russia": "Balymery",
+      "Kuybyshevskoe gorodishche-Russia": "Kuybyshevskoe Gorodishche"
+    }
+  },
+  {
+    "cluster_id": "C0037",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Kalmius Porto Pisano Approach-Ukraine",
+        "target_key": "Mariupol'-Ukraine",
+        "reason": "Medieval Kalmius mouth anchorage and Cossack outpost continuous with Mariupol"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Mariupol Bronze Age Settlement-Ukraine",
+        "new_name": "Mariupol (Bronze Age)",
+        "reason": "Bronze Age settlement site on Kalmius river near Mariupol"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Mariupol Stone Age Hillfort-Ukraine",
+        "new_name": "Mariupol (Stone Age)",
+        "reason": "World-famous Neolithic cemetery and Stone Age site at Mariupol"
+      }
+    ],
+    "clean_names": {
+      "Mariupol'-Ukraine": "Mariupol",
+      "Mariupol Bronze Age Settlement-Ukraine": "Mariupol (Bronze Age)",
+      "Mariupol Stone Age Hillfort-Ukraine": "Mariupol (Stone Age)"
+    }
+  },
+  {
+    "cluster_id": "C0038",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Mayaki Eneolithic Hillfort-Ukraine",
+        "target_key": "Mayaki Eneolithic-Ukraine",
+        "reason": "Duplicate scrape of Usatovo culture fortified ditched settlement at Mayaky"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Mayaki Eneolithic-Ukraine",
+        "new_name": "Mayaky (Eneolithic)",
+        "reason": "Famous Usatovo-culture Eneolithic fortified settlement on Dniester"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Mayaky-Ukraine_2",
+        "new_name": "Mayaky (Medieval)",
+        "reason": "Medieval town and crossing on Dniester with >390-year hiatus to modern settlement"
+      }
+    ],
+    "clean_names": {
+      "Mayaky-Ukraine": "Mayaky",
+      "Mayaki Eneolithic-Ukraine": "Mayaky (Eneolithic)",
+      "Mayaky-Ukraine_2": "Mayaky (Medieval)"
+    }
+  },
+  {
+    "cluster_id": "C0039",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Mikhailovka-Ukraine",
+        "new_name": "Mykhailivka (Yamnaya)",
+        "reason": "World-famous Lower Dnieper Yamnaya-culture fortified citadel type-site"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Mihajlovka Bronze Age Settlement-Ukraine",
+        "new_name": "Mykhailivka (Bronze Age)",
+        "reason": "Late Bronze Age settlement site near Mykhailivka"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Mikhaylovka Classical Polis-Ukraine",
+        "new_name": "Mykhailivka (Classical)",
+        "reason": "Classical / Roman-period settlement site near Mykhailivka"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Hoty 911 Chernyakhov Settlement-Ukraine",
+        "new_name": "Mykhailivka (Chernyakhov)",
+        "reason": "Chernyakhov culture settlement site near Mykhailivka"
+      }
+    ],
+    "clean_names": {
+      "Mikhailovka-Ukraine": "Mykhailivka (Yamnaya)",
+      "Mihajlovka Bronze Age Settlement-Ukraine": "Mykhailivka (Bronze Age)",
+      "Mikhaylovka Classical Polis-Ukraine": "Mykhailivka (Classical)",
+      "Hoty 911 Chernyakhov Settlement-Ukraine": "Mykhailivka (Chernyakhov)"
+    }
+  },
+  {
+    "cluster_id": "C0040",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Mogokh Medieval Gorodishche-Russia",
+        "new_name": "Mogokh (Medieval)",
+        "reason": "Medieval mountain hillfort at Mogokh with >370-year hiatus to modern aul"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Mogokh Bronze Age Site 2-Russia",
+        "new_name": "Mogokh (Late Bronze Age)",
+        "reason": "Late Bronze Age settlement site at Mogokh"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Mogokh Bronze Age Site-Russia",
+        "new_name": "Mogokh (Bronze Age)",
+        "reason": "Middle Bronze Age settlement site at Mogokh"
+      }
+    ],
+    "clean_names": {
+      "Mogokh-Russia": "Mogokh",
+      "Mogokh Medieval Gorodishche-Russia": "Mogokh (Medieval)",
+      "Mogokh Bronze Age Site 2-Russia": "Mogokh (Late Bronze Age)",
+      "Mogokh Bronze Age Site-Russia": "Mogokh (Bronze Age)"
+    }
+  },
+  {
+    "cluster_id": "C0041",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Lida zamok Gedimina Mediaeval Hillfort-Belarus",
+        "reason": "Historic castle ruin building inside Lida with fabricated early medieval dates"
+      },
+      {
+        "op": "MERGE",
+        "source_key": "Garadzishcha i selishcha Myto-Belarus",
+        "target_key": "Myto Mediaeval Hillfort-Belarus",
+        "reason": "Duplicate archaeological scrape of medieval hillfort and settlement at Myto"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Myto Mediaeval Hillfort-Belarus",
+        "new_name": "Myto",
+        "reason": "Distinct medieval hillfort and settlement at Myto village in Lida Raion"
+      }
+    ],
+    "clean_names": {
+      "Lida-Belarus": "Lida",
+      "Myto Mediaeval Hillfort-Belarus": "Myto"
+    }
+  },
+  {
+    "cluster_id": "C0042",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Novgorod-Seversk Iron Age Site-Ukraine",
+        "target_key": "Novhorod-Siverskyi-Ukraine",
+        "reason": "Continuous early settlement phase overlapping with historic Novhorod-Siverskyi"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Novgorod-Seversky Bronze Age Site-Ukraine",
+        "new_name": "Novhorod-Siverskyi (Bronze Age)",
+        "reason": "Sosnitsa Bronze Age settlement site at Novhorod-Siverskyi"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Novgorod-Seversky Palaeolithic Cliff Shelter-Ukraine",
+        "new_name": "Novhorod-Siverskyi (Palaeolithic)",
+        "reason": "Famous Desna cliff shelter Upper Palaeolithic campsite"
+      }
+    ],
+    "clean_names": {
+      "Novhorod-Siverskyi-Ukraine": "Novhorod-Siverskyi",
+      "Novgorod-Seversky Bronze Age Site-Ukraine": "Novhorod-Siverskyi (Bronze Age)",
+      "Novgorod-Seversky Palaeolithic Cliff Shelter-Ukraine": "Novhorod-Siverskyi (Palaeolithic)"
+    }
+  },
+  {
+    "cluster_id": "C0043",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Bip Fortress-Russia",
+        "reason": "Pavilion-fortress folly architectural building in Pavlovsk palace park"
+      },
+      {
+        "op": "DROP_JUNK",
+        "key": "Novoe Shale-Russia",
+        "reason": "Chalet pavilion architectural feature in Pavlovsk palace park"
+      },
+      {
+        "op": "DROP_JUNK",
+        "key": "Pavilon Khram Rozy bez shipov-Russia",
+        "reason": "Temple of the Rose without Thorns park pavilion in Pavlovsk palace park"
+      }
+    ],
+    "clean_names": {
+      "Pavlovsk_RU_66-Russia": "Pavlovsk"
+    }
+  },
+  {
+    "cluster_id": "C0044",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Kursk Kremlin-Russia",
+        "target_key": "Kursk-Russia",
+        "reason": "Citadel kremlin fortress of Kursk"
+      },
+      {
+        "op": "MERGE",
+        "source_key": "Old Kursk Gorodishche-Russia",
+        "target_key": "Kursk-Russia",
+        "reason": "Old Rus fortified core of Kursk"
+      },
+      {
+        "op": "MERGE",
+        "source_key": "Kursk Romny Gorodishche-Russia",
+        "target_key": "Kursk-Russia",
+        "reason": "Continuous Romny culture early Slav settlement phase at Kursk"
+      }
+    ],
+    "clean_names": {
+      "Kursk-Russia": "Kursk"
+    }
+  },
+  {
+    "cluster_id": "C0045",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Pastyrske Hill Fort-Ukraine",
+        "new_name": "Pastyrske",
+        "reason": "Famous early medieval Slavic hillfort and Pastyr culture type-site"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Dva skifskykh horodyshcha Iron Age Hillfort-Ukraine",
+        "new_name": "Pastyrske (Iron Age)",
+        "reason": "Pre-hiatus Scythian Iron Age twin hillforts at Pastyrske"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Pastyrskoye Iron Age Site-Ukraine",
+        "new_name": "Pastyrske (Scythian)",
+        "reason": "Scythian-era settlement site near Pastyrske"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Pastyrskoye Iron Age Site 2-Ukraine",
+        "new_name": "Pastyrske (Roman Period)",
+        "reason": "Roman-period Chernyakhov settlement site near Pastyrske"
+      }
+    ],
+    "clean_names": {
+      "Pastyrske Hill Fort-Ukraine": "Pastyrske",
+      "Dva skifskykh horodyshcha Iron Age Hillfort-Ukraine": "Pastyrske (Iron Age)",
+      "Pastyrskoye Iron Age Site-Ukraine": "Pastyrske (Scythian)",
+      "Pastyrskoye Iron Age Site 2-Ukraine": "Pastyrske (Roman Period)"
+    }
+  },
+  {
+    "cluster_id": "C0046",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Ostatki Setunskogo kirpichnogo zavoda-Russia",
+        "reason": "Remains of Setun brick factory in Moscow with fabricated medieval dates"
+      },
+      {
+        "op": "DROP_JUNK",
+        "key": "Selishche 1-e u Leninskikh gor (nizhnee) (Ramenki)-Russia",
+        "reason": "Heritage registry cultural layer zone in Moscow with fabricated medieval dates"
+      },
+      {
+        "op": "DROP_JUNK",
+        "key": "Selishche Kamennaya plotina (zona kulturnogo sloya) (Ramenki)-Russia",
+        "reason": "Heritage registry cultural layer zone in Moscow with fabricated medieval dates"
+      },
+      {
+        "op": "DROP_JUNK",
+        "key": "Selo Troitskoe-Golenishchevo (mesto drevnego poseleniya s zonoy kulturnogo sloya) (Ramenki)-Russia",
+        "reason": "Heritage registry cultural layer zone in Moscow with fabricated medieval dates"
+      }
+    ],
+    "clean_names": {}
+  },
+  {
+    "cluster_id": "C0047",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Snigirevka Eneolithic Hillfort-Ukraine",
+        "new_name": "Snihurivka (Eneolithic)",
+        "reason": "Pre-hiatus Eneolithic / Usatovo hillfort site on Ingulets river at Snihurivka"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Snihurivka Ingulets-Ukraine",
+        "new_name": "Snihurivka (Iron Age)",
+        "reason": "Scythian-Chernyakhov multi-period settlement on Ingulets-Visun confluence"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Aleksandrovka Chernyakhov-Ukraine",
+        "new_name": "Oleksandrivka (Chernyakhov)",
+        "reason": "Chernyakhov culture settlement at Oleksandrivka near Snihurivka"
+      }
+    ],
+    "clean_names": {
+      "Snihurivka-Ukraine": "Snihurivka",
+      "Snigirevka Eneolithic Hillfort-Ukraine": "Snihurivka (Eneolithic)",
+      "Snihurivka Ingulets-Ukraine": "Snihurivka (Iron Age)",
+      "Aleksandrovka Chernyakhov-Ukraine": "Oleksandrivka (Chernyakhov)"
+    }
+  },
+  {
+    "cluster_id": "C0048",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Sosnytsia Medieval Settlement-Ukraine",
+        "target_key": "Sosnytsia-Ukraine",
+        "reason": "Old Rus medieval settlement continuous with historic town of Sosnytsia"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Sosnytsia Iron Age Site-Ukraine",
+        "new_name": "Sosnytsia (Iron Age)",
+        "reason": "Early Iron Age Yukhnovo culture settlement site at Sosnytsia"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Sosnytsia Bronze Age Site-Ukraine",
+        "new_name": "Sosnytsia (Bronze Age)",
+        "reason": "Famous Sosnitsa culture Bronze Age type-site on Ubid river"
+      }
+    ],
+    "clean_names": {
+      "Sosnytsia-Ukraine": "Sosnytsia",
+      "Sosnytsia Iron Age Site-Ukraine": "Sosnytsia (Iron Age)",
+      "Sosnytsia Bronze Age Site-Ukraine": "Sosnytsia (Bronze Age)"
+    }
+  },
+  {
+    "cluster_id": "C0049",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Suzgun-Russia_2",
+        "target_key": "Suzgun Medieval Gorodishche-Russia",
+        "reason": "Duplicate early medieval phase of Suzgun fortified centre near Tobolsk"
+      },
+      {
+        "op": "MERGE",
+        "source_key": "Suzgun Medieval Gorodishche-Russia",
+        "target_key": "Suzgun-Russia",
+        "reason": "Medieval fortified settlement continuous within 150-year gap of Siberian Tatar town Suzgun"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Suzgun Bronze Age Site-Russia",
+        "new_name": "Suzgun (Bronze Age)",
+        "reason": "Famous Suzgun culture Late Bronze Age type-site near Tobolsk"
+      }
+    ],
+    "clean_names": {
+      "Suzgun-Russia": "Suzgun",
+      "Suzgun Bronze Age Site-Russia": "Suzgun (Bronze Age)"
+    }
+  },
+  {
+    "cluster_id": "C0050",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Targay Iron Age Site-Russia",
+        "target_key": "Targay-Russia",
+        "reason": "Iron Age cultural layer continuous with Tarya pit-village settlement series"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Targay Bronze Age Site 2-Russia",
+        "new_name": "Targay (Late Bronze Age)",
+        "reason": "Late Bronze Age settlement site at Targay in Avacha Bay"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Targay Bronze Age Site-Russia",
+        "new_name": "Targay (Bronze Age)",
+        "reason": "Early Bronze Age settlement site at Targay in Avacha Bay"
+      }
+    ],
+    "clean_names": {
+      "Targay-Russia": "Targay",
+      "Targay Bronze Age Site 2-Russia": "Targay (Late Bronze Age)",
+      "Targay Bronze Age Site-Russia": "Targay (Bronze Age)"
+    }
+  },
+  {
+    "cluster_id": "C0051",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Podvarantsy usadba usadebnyy dom Late Mediaeval Hillfort-Belarus",
+        "reason": "Manor house estate building ruin with fabricated medieval hillfort label"
+      },
+      {
+        "op": "DROP_JUNK",
+        "key": "Turets kamennyy krest Mediaeval Hillfort-Belarus",
+        "reason": "Memorial stone cross monument with fabricated medieval hillfort label"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Selishcha Site 326-Belarus",
+        "new_name": "Selishcha (Irditsa)",
+        "reason": "Medieval unfortified settlement site near Irditsa"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Stayanka peryyadu mezalitu seleshcha zhaleznaga veku-Belarus",
+        "new_name": "Zayachenye",
+        "reason": "Mesolithic camp and Iron Age settlement near Zayachenye"
+      }
+    ],
+    "clean_names": {
+      "Selishcha Site 326-Belarus": "Selishcha (Irditsa)",
+      "Stayanka peryyadu mezalitu seleshcha zhaleznaga veku-Belarus": "Zayachenye"
+    }
+  },
+  {
+    "cluster_id": "C0052",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Usatove Eneolithic Hillfort-Ukraine",
+        "target_key": "Usatovo-Ukraine",
+        "reason": "Duplicate scrape of Usatovo culture fortified hillfort type-site"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Usatovo-Ukraine",
+        "new_name": "Usatove (Eneolithic)",
+        "reason": "World-famous Usatovo culture Eneolithic fortified type-site"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Usatove Neolithic Settlement-Ukraine",
+        "new_name": "Usatove (Neolithic)",
+        "reason": "Neolithic settlement site near Usatove"
+      }
+    ],
+    "clean_names": {
+      "Usatove-Ukraine": "Usatove",
+      "Usatovo-Ukraine": "Usatove (Eneolithic)",
+      "Usatove Neolithic Settlement-Ukraine": "Usatove (Neolithic)"
+    }
+  },
+  {
+    "cluster_id": "C0054",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Utamysh Gorodishche-Russia",
+        "new_name": "Utamysh (Early Medieval)",
+        "reason": "Khazar-era early medieval gorodishche with >700-year hiatus to modern aul"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Utamysh Bronze Age Site 2-Russia",
+        "new_name": "Utamysh (Late Bronze Age)",
+        "reason": "Kayakent-Khorochoi Late Bronze Age settlement site at Utamysh"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Utamysh Bronze Age Site-Russia",
+        "new_name": "Utamysh (Bronze Age)",
+        "reason": "Middle Bronze Age settlement site at Utamysh"
+      }
+    ],
+    "clean_names": {
+      "Utamysh-Russia": "Utamysh",
+      "Utamysh Gorodishche-Russia": "Utamysh (Early Medieval)",
+      "Utamysh Bronze Age Site 2-Russia": "Utamysh (Late Bronze Age)",
+      "Utamysh Bronze Age Site-Russia": "Utamysh (Bronze Age)"
+    }
+  },
+  {
+    "cluster_id": "C0055",
+    "actions": [
+      {
+        "op": "KEEP_HOMONYM",
+        "key": "Novyi Svit-Ukraine",
+        "reason": "Distinct modern urban settlement in Donetsk Oblast 408 km away"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Novyi Svit-Ukraine_2",
+        "new_name": "Novy Svet (Crimea)",
+        "reason": "Historic Genoese/Crimean coastal settlement Paradiso at Novy Svet"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Karaul-Oba Archeological Complex-Ukraine",
+        "new_name": "Karaul-Oba",
+        "reason": "Taurian fortified refuge and archaeological complex on Mount Karaul-Oba"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Veseloye-Sudak-Ukraine",
+        "new_name": "Kutlak",
+        "reason": "Ancient Bosporan fortress of Kutlak / Athenaion near Veseloye, Sudak"
+      }
+    ],
+    "clean_names": {
+      "Novyi Svit-Ukraine": "Novyi Svit",
+      "Novyi Svit-Ukraine_2": "Novy Svet (Crimea)",
+      "Karaul-Oba Archeological Complex-Ukraine": "Karaul-Oba",
+      "Veseloye-Sudak-Ukraine": "Kutlak"
+    }
+  },
+  {
+    "cluster_id": "C0056",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Pustoviitivka Aksyntsi Sula Scythian Rus Complex Iron Age Site-Ukraine",
+        "new_name": "Pustoviitivka (Iron Age)",
+        "reason": "Scythian-era settlement and kurgan complex on Sula river at Pustoviitivka"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Vovkivtsi Iron Age Site-Ukraine",
+        "new_name": "Vovkivtsi (Iron Age)",
+        "reason": "Scythian-era settlement on Sula river at Vovkivtsi"
+      }
+    ],
+    "clean_names": {
+      "Pustoviitivka Aksyntsi Sula Scythian Rus Complex-Ukraine": "Pustoviitivka",
+      "Vovkivtsi-Ukraine": "Vovkivtsi",
+      "Pustoviitivka Aksyntsi Sula Scythian Rus Complex Iron Age Site-Ukraine": "Pustoviitivka (Iron Age)",
+      "Vovkivtsi Iron Age Site-Ukraine": "Vovkivtsi (Iron Age)"
+    }
+  },
+  {
+    "cluster_id": "C0057",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Delyatyn XVII Hillfort-Ukraine",
+        "target_key": "Delyatyn-Ukraine",
+        "reason": "Medieval Old Rus hillfort continuous with settlement series of Delyatyn"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Delyatyn Bronze Age Settlement 2-Ukraine",
+        "new_name": "Delyatyn (Bronze Age)",
+        "reason": "Bronze Age Komariv-culture settlement site near Delyatyn"
+      }
+    ],
+    "clean_names": {
+      "Delyatyn-Ukraine": "Delyatyn",
+      "Zarichchia-Ukraine": "Zarichchia",
+      "Delyatyn Bronze Age Settlement 2-Ukraine": "Delyatyn (Bronze Age)"
+    }
+  },
+  {
+    "cluster_id": "C0058",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Pereshchepyne Iron Age Hillfort-Ukraine",
+        "new_name": "Pereshchepyne (Iron Age)",
+        "reason": "Pre-hiatus Scythian Iron Age hillfort site on Orel river"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Perescepino Bronze Age Settlement-Ukraine",
+        "new_name": "Pereshchepyne (Bronze Age)",
+        "reason": "Late Bronze Age settlement site near Pereshchepyne"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Zasukha 1 Stone Age Hillfort-Ukraine",
+        "new_name": "Zasukha 1",
+        "reason": "Mesolithic/Neolithic stone age campsite at Zasukha near Pereshchepyne"
+      }
+    ],
+    "clean_names": {
+      "Pereshchepyne-Ukraine": "Pereshchepyne",
+      "Pereshchepyne Iron Age Hillfort-Ukraine": "Pereshchepyne (Iron Age)",
+      "Perescepino Bronze Age Settlement-Ukraine": "Pereshchepyne (Bronze Age)",
+      "Zasukha 1 Stone Age Hillfort-Ukraine": "Zasukha 1"
+    }
+  },
+  {
+    "cluster_id": "C0059",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Slonim sinagoga Glavnaya Late Mediaeval Hillfort-Belarus",
+        "reason": "Great Synagogue heritage building in Slonim with fabricated medieval hillfort label"
+      },
+      {
+        "op": "DROP_JUNK",
+        "key": "Zhirovichi monastyr zhiloy korpus Late Mediaeval Hillfort-Belarus",
+        "reason": "Monastery residential building in Zhirovichi with fabricated medieval hillfort label"
+      },
+      {
+        "op": "MERGE",
+        "source_key": "Garadzishcha Slonim-Kosauski trakt-1-Belarus",
+        "target_key": "Slonim-Belarus",
+        "reason": "Early medieval hillfort continuous with historic town of Slonim"
+      }
+    ],
+    "clean_names": {
+      "Slonim-Belarus": "Slonim"
+    }
+  },
+  {
+    "cluster_id": "C0060",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Zatoka Classical Polis-Ukraine",
+        "target_key": "Zatoka Tyras Spit-Ukraine",
+        "reason": "Duplicate scrape of Classical / Roman-era anchorage settlement on Zatoka spit"
+      },
+      {
+        "op": "MERGE",
+        "source_key": "antychnoho chasu Zatoka I Classical Polis-Ukraine",
+        "target_key": "Zatoka Tyras Spit-Ukraine",
+        "reason": "Duplicate scrape of antique settlement Zatoka I on Dniester Liman mouth"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Zatoka Tyras Spit-Ukraine",
+        "new_name": "Tyras Spit",
+        "reason": "Ancient and medieval anchorage and settlement on Tyras / Zatoka spit"
+      }
+    ],
+    "clean_names": {
+      "Zatoka-Ukraine": "Zatoka",
+      "Zatoka Tyras Spit-Ukraine": "Tyras Spit"
+    }
+  },
+  {
+    "cluster_id": "C0062",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "chernyakhovskoyi kultury Chernyakhov Settlement-Ukraine",
+        "target_key": "Kamyanka III Migration Period Settlement-Ukraine",
+        "reason": "Overlapping Chernyakhov / Migration Period settlement site at Kamyanka"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Kamyanka III Migration Period Settlement-Ukraine",
+        "new_name": "Kamyanka III",
+        "reason": "Numbered Chernyakhov and Migration Period settlement site III at Kamyanka"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Kamenka Classical Polis-Ukraine",
+        "new_name": "Kamyanka (Classical)",
+        "reason": "Classical / Roman-period settlement site near Kamyanka"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Kamyanka Bronze Age Settlement-Ukraine",
+        "new_name": "Kamyanka (Bronze Age)",
+        "reason": "Bronze Age settlement site near Kamyanka"
+      }
+    ],
+    "clean_names": {
+      "Kamyanka III Migration Period Settlement-Ukraine": "Kamyanka III",
+      "Kamenka Classical Polis-Ukraine": "Kamyanka (Classical)",
+      "Kamyanka Bronze Age Settlement-Ukraine": "Kamyanka (Bronze Age)"
+    }
+  },
+  {
+    "cluster_id": "C0063",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "dvosharove Plakhtiyivka doby piznoyi bronzy ta rymskoho chasu Bronze Age Settlement-Ukraine",
+        "target_key": "dvosharove Plakhtiyivka I doby piznoyi bronzy ta rymskoho chasu Bronze Age Settlement-Ukraine",
+        "reason": "Duplicate coordinate scrape of Bronze Age settlement Plakhtiyivka I"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "dvosharove Plakhtiyivka I doby piznoyi bronzy ta rymskoho chasu Bronze Age Settlement-Ukraine",
+        "new_name": "Plakhtiyivka I",
+        "reason": "Numbered Late Bronze Age and Roman-period settlement site I at Plakhtiyivka"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "chernyakhivske Plakhtiyivka II Chernyakhov Settlement-Ukraine",
+        "new_name": "Plakhtiyivka II",
+        "reason": "Numbered Chernyakhov settlement site II at Plakhtiyivka"
+      }
+    ],
+    "clean_names": {
+      "Plakhtiyivka-Ukraine": "Plakhtiyivka",
+      "dvosharove Plakhtiyivka I doby piznoyi bronzy ta rymskoho chasu Bronze Age Settlement-Ukraine": "Plakhtiyivka I",
+      "chernyakhivske Plakhtiyivka II Chernyakhov Settlement-Ukraine": "Plakhtiyivka II"
+    }
+  },
+  {
+    "cluster_id": "C0065",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Kubei Karakurt-Ukraine",
+        "new_name": "Kubey Karakurt",
+        "reason": "Ancient and medieval steppe settlement complex on Yalpug river near Kubey"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "bahatosharove bilozerske Chernyakhov Settlement-Ukraine",
+        "new_name": "Kubey (Chernyakhov)",
+        "reason": "Multi-period Belozerka and Chernyakhov settlement near Kubey"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "dvosharove rymskoho chasu ta balkano-dunayske pivdennykh slovyan Chervonoarmiyske Classical Polis-Ukraine",
+        "new_name": "Chervonoarmiyske",
+        "reason": "Roman-period and South Slavic medieval settlement at Chervonoarmiyske"
+      }
+    ],
+    "clean_names": {
+      "Kubey-Ukraine": "Kubey",
+      "Kubei Karakurt-Ukraine": "Kubey Karakurt",
+      "bahatosharove bilozerske Chernyakhov Settlement-Ukraine": "Kubey (Chernyakhov)",
+      "dvosharove rymskoho chasu ta balkano-dunayske pivdennykh slovyan Chervonoarmiyske Classical Polis-Ukraine": "Chervonoarmiyske"
+    }
+  },
+  {
+    "cluster_id": "C0066",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Halytsynivka Bronze Age Settlement-Ukraine",
+        "new_name": "Halytsynove (Bronze Age)",
+        "reason": "Bronze Age settlement site on Bug Liman near Halytsynove"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Halytsynivka IV Bronze Age Settlement-Ukraine",
+        "new_name": "Halytsynove IV",
+        "reason": "Numbered Bronze Age settlement site IV at Halytsynove"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "katakombnoyi kultury Bronze Age Settlement-Ukraine",
+        "new_name": "Halytsynove (Catacomb)",
+        "reason": "Catacomb culture settlement site near Halytsynove"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Antychne poselennya Classical Polis-Ukraine",
+        "new_name": "Halytsynove (Classical)",
+        "reason": "Classical Olbian chora settlement site on Bug Liman near Halytsynove"
+      }
+    ],
+    "clean_names": {
+      "Halytsynivka Bronze Age Settlement-Ukraine": "Halytsynove (Bronze Age)",
+      "Halytsynivka IV Bronze Age Settlement-Ukraine": "Halytsynove IV",
+      "katakombnoyi kultury Bronze Age Settlement-Ukraine": "Halytsynove (Catacomb)",
+      "Antychne poselennya Classical Polis-Ukraine": "Halytsynove (Classical)"
+    }
+  },
+  {
+    "cluster_id": "C0067",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "piznopaleolitychna Bilyayivka Palaeolithic Camp-Ukraine",
+        "new_name": "Bilyayivka (Palaeolithic)",
+        "reason": "Upper Palaeolithic campsite on Dniester at Bilyayivka"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "antychnoho chasu Bilyayivka Classical Polis-Ukraine",
+        "new_name": "Bilyayivka (Classical)",
+        "reason": "Classical / Roman-period settlement site near Bilyayivka"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "antychnoho chasu Bilyayivka IV Classical Polis II-Ukraine",
+        "new_name": "Bilyayivka IV",
+        "reason": "Numbered Classical-era settlement site IV at Bilyayivka"
+      }
+    ],
+    "clean_names": {
+      "Bilyayivka-Ukraine": "Bilyayivka",
+      "piznopaleolitychna Bilyayivka Palaeolithic Camp-Ukraine": "Bilyayivka (Palaeolithic)",
+      "antychnoho chasu Bilyayivka Classical Polis-Ukraine": "Bilyayivka (Classical)",
+      "antychnoho chasu Bilyayivka IV Classical Polis II-Ukraine": "Bilyayivka IV"
+    }
+  },
+  {
+    "cluster_id": "C0068",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "ellinistychne ta rymske Moloha I Classical Polis-Ukraine",
+        "target_key": "Mologa Dniester Liman-Ukraine",
+        "reason": "Overlapping Hellenistic and Roman-era settlement phase on Dniester Liman at Moloha"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Mologa Dniester Liman-Ukraine",
+        "new_name": "Moloha (Dniester Liman)",
+        "reason": "Ancient and medieval multi-period coastal settlement on Dniester Liman"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "piznopaleolitychna Moloha Palaeolithic Camp-Ukraine",
+        "new_name": "Moloha (Palaeolithic)",
+        "reason": "Upper Palaeolithic campsite near Moloha"
+      }
+    ],
+    "clean_names": {
+      "Moloha-Ukraine": "Moloha",
+      "Mologa Dniester Liman-Ukraine": "Moloha (Dniester Liman)",
+      "piznopaleolitychna Moloha Palaeolithic Camp-Ukraine": "Moloha (Palaeolithic)"
+    }
+  },
+  {
+    "cluster_id": "C0069",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "chernyakhivske Zadunayivka I Chernyakhov Settlement-Ukraine",
+        "new_name": "Zadunayivka I",
+        "reason": "Numbered Chernyakhov settlement site I at Zadunayivka"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "chernyakhivske Zadunayivka IV Chernyakhov Settlement-Ukraine",
+        "new_name": "Zadunayivka IV",
+        "reason": "Numbered Chernyakhov settlement site IV at Zadunayivka"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "dvosharove Zadunayivka V doby piznoyi bronzy ta rymskoho chasu Bronze Age Settlement-Ukraine",
+        "new_name": "Zadunayivka V",
+        "reason": "Numbered Late Bronze Age settlement site V at Zadunayivka"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "piznoyi bronzy Zadunayivka Kh Bronze Age Settlement-Ukraine",
+        "new_name": "Zadunayivka X",
+        "reason": "Numbered Late Bronze Age settlement site X at Zadunayivka"
+      }
+    ],
+    "clean_names": {
+      "chernyakhivske Zadunayivka I Chernyakhov Settlement-Ukraine": "Zadunayivka I",
+      "chernyakhivske Zadunayivka IV Chernyakhov Settlement-Ukraine": "Zadunayivka IV",
+      "dvosharove Zadunayivka V doby piznoyi bronzy ta rymskoho chasu Bronze Age Settlement-Ukraine": "Zadunayivka V",
+      "piznoyi bronzy Zadunayivka Kh Bronze Age Settlement-Ukraine": "Zadunayivka X"
+    }
+  },
+  {
+    "cluster_id": "C0070",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "dvosharove Kyrhyzh-Kytay I sabatynivske ta chernyakhivske Chernyakhov Settlement-Ukraine",
+        "new_name": "Kyrhyzh-Kytay I",
+        "reason": "Numbered Sabatynivka and Chernyakhov settlement site I on Kyrhyzh-Kytay river"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "chernyakhivske Nova Ivanivka VI Chernyakhov Settlement-Ukraine",
+        "new_name": "Nova Ivanivka VI",
+        "reason": "Numbered Chernyakhov settlement site VI at Nova Ivanivka"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "dvosharove Nova Ivanivka V sabatynivske ta chernyakhivske Chernyakhov Settlement-Ukraine",
+        "new_name": "Nova Ivanivka V",
+        "reason": "Numbered Sabatynivka and Chernyakhov settlement site V at Nova Ivanivka"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "rymskoho chasu Nova Ivanivka III Classical Polis-Ukraine",
+        "new_name": "Nova Ivanivka III",
+        "reason": "Numbered Roman-period settlement site III at Nova Ivanivka"
+      }
+    ],
+    "clean_names": {
+      "dvosharove Kyrhyzh-Kytay I sabatynivske ta chernyakhivske Chernyakhov Settlement-Ukraine": "Kyrhyzh-Kytay I",
+      "chernyakhivske Nova Ivanivka VI Chernyakhov Settlement-Ukraine": "Nova Ivanivka VI",
+      "dvosharove Nova Ivanivka V sabatynivske ta chernyakhivske Chernyakhov Settlement-Ukraine": "Nova Ivanivka V",
+      "rymskoho chasu Nova Ivanivka III Classical Polis-Ukraine": "Nova Ivanivka III"
+    }
+  },
+  {
+    "cluster_id": "C0071",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Afontova Gora 2 Palaeolithic Camp-Russia",
+        "target_key": "Afontova Gora-Russia",
+        "reason": "Duplicate scrape of world-famous Afontova Gora Upper Palaeolithic site on Yenisei"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Afontova Gora-Russia",
+        "new_name": "Afontova Gora",
+        "reason": "World-famous Upper Palaeolithic campsite complex on Yenisei at Krasnoyarsk"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Afontova Gora 2-Russia",
+        "new_name": "Afontova Gora (Medieval)",
+        "reason": "Medieval kurgan and settlement site at Afontova Gora"
+      }
+    ],
+    "clean_names": {
+      "Afontova Gora-Russia": "Afontova Gora",
+      "Afontova Gora 2-Russia": "Afontova Gora (Medieval)"
+    }
+  },
+  {
+    "cluster_id": "C0072",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "BOROMLYa Iron Age Hillfort-Ukraine",
+        "new_name": "Boromlia (Iron Age)",
+        "reason": "Pre-hiatus Scythian Iron Age hillfort site on Boromlya river"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "1 Boromlya Bronze Age Settlement-Ukraine",
+        "new_name": "Boromlia (Bronze Age)",
+        "reason": "Bronze Age settlement site near Boromlia"
+      }
+    ],
+    "clean_names": {
+      "Boromlia-Ukraine": "Boromlia",
+      "BOROMLYa Iron Age Hillfort-Ukraine": "Boromlia (Iron Age)",
+      "1 Boromlya Bronze Age Settlement-Ukraine": "Boromlia (Bronze Age)"
+    }
+  },
+  {
+    "cluster_id": "C0073",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Balaklava-Ukraine_2",
+        "target_key": "Balaklava Symbolon-Ukraine",
+        "reason": "Duplicate node of Genoese fortress Cembalo at Balaklava bay"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Balaklava Symbolon-Ukraine",
+        "new_name": "Symbolon",
+        "reason": "Ancient Greek port Symbolon and medieval fortress Cembalo at Balaklava"
+      }
+    ],
+    "clean_names": {
+      "Balaklava-Ukraine": "Balaklava",
+      "Balaklava Symbolon-Ukraine": "Symbolon"
+    }
+  },
+  {
+    "cluster_id": "C0076",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Bilche-Zolote Hillfort-Ukraine",
+        "target_key": "Bilche-Zolote-Ukraine",
+        "reason": "Old Rus medieval hillfort continuous with settlement at Bilche-Zolote"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Bilche-Zolote-Ukraine",
+        "new_name": "Bilche-Zolote",
+        "reason": "Historic settlement and Old Rus centre at Bilche-Zolote"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Bilche-Zolote Bronze Age Site-Ukraine",
+        "new_name": "Bilche-Zolote (Trypillia)",
+        "reason": "World-famous Verteba Cave Trypillia settlement at Bilche-Zolote"
+      }
+    ],
+    "clean_names": {
+      "Bilche-Zolote-Ukraine": "Bilche-Zolote",
+      "Bilche-Zolote Bronze Age Site-Ukraine": "Bilche-Zolote (Trypillia)"
+    }
+  },
+  {
+    "cluster_id": "C0078",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Bilyarskoe selishche I-Russia",
+        "target_key": "Bilyar-Russia",
+        "reason": "Unfortified suburban settlement part of Great City of Bilyar complex"
+      },
+      {
+        "op": "MERGE",
+        "source_key": "Bilyarsk Village-Russia",
+        "target_key": "Bilyar-Russia",
+        "reason": "Modern Russian village Bilyarsk continuous with historic Bilyar city complex"
+      }
+    ],
+    "clean_names": {
+      "Bilyar-Russia": "Bilyar"
+    }
+  },
+  {
+    "cluster_id": "C0079",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Bokhmach Rus Settlement-Ukraine",
+        "target_key": "Bakhmach-Ukraine",
+        "reason": "Old Rus chronicle settlement continuous with historic town of Bakhmach"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Bakhmach-2 Bronze Age Settlement-Ukraine",
+        "new_name": "Bakhmach (Bronze Age)",
+        "reason": "Pre-hiatus Bronze Age settlement site near Bakhmach"
+      }
+    ],
+    "clean_names": {
+      "Bakhmach-Ukraine": "Bakhmach",
+      "Bakhmach-2 Bronze Age Settlement-Ukraine": "Bakhmach (Bronze Age)"
+    }
+  },
+  {
+    "cluster_id": "C0080",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Borisovka Sasyk-Ukraine",
+        "new_name": "Borysivka (Sasyk)",
+        "reason": "Multi-period Eneolithic to Byzantine settlement on Sasyk Lagoon"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Borysivka Bronze Age Settlement-Ukraine",
+        "new_name": "Borysivka (Bronze Age)",
+        "reason": "Late Bronze Age settlement site at Borysivka"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Borysivka Eneolithic Hillfort-Ukraine",
+        "new_name": "Borysivka (Eneolithic)",
+        "reason": "Usatovo-culture Eneolithic hillfort near Borysivka"
+      }
+    ],
+    "clean_names": {
+      "Borisovka Sasyk-Ukraine": "Borysivka (Sasyk)",
+      "Borysivka Bronze Age Settlement-Ukraine": "Borysivka (Bronze Age)",
+      "Borysivka Eneolithic Hillfort-Ukraine": "Borysivka (Eneolithic)"
+    }
+  },
+  {
+    "cluster_id": "C0081",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Buzhanka 2 Palaeolithic Camp-Ukraine",
+        "target_key": "Buzhany Desna Terrace Palaeolithic Camp-Ukraine",
+        "reason": "Duplicate scrape of Desna terrace Upper Palaeolithic campsite at Buzhanka"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Buzhany Desna Terrace Palaeolithic Camp-Ukraine",
+        "new_name": "Buzhanka (Palaeolithic)",
+        "reason": "Desna terrace Upper Palaeolithic campsite near Buzhanka"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Buzhany Medieval Settlement-Ukraine",
+        "new_name": "Buzhanka (Medieval)",
+        "reason": "Early medieval Slavic settlement site near Buzhanka"
+      }
+    ],
+    "clean_names": {
+      "Buzhany Desna Terrace Palaeolithic Camp-Ukraine": "Buzhanka (Palaeolithic)",
+      "Buzhany Medieval Settlement-Ukraine": "Buzhanka (Medieval)"
+    }
+  },
+  {
+    "cluster_id": "C0082",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Chulatovo 1 - Khulatovo 1 - Tchoulatovo 1 Palaeolithic Camp-Ukraine",
+        "target_key": "Chulatovo I-II-Ukraine",
+        "reason": "Duplicate scrape of famous Chulatovo Upper Palaeolithic site on Desna"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Chulatovo I-II-Ukraine",
+        "new_name": "Chulatovo (Palaeolithic)",
+        "reason": "Famous Chulatovo I-II Upper Palaeolithic mammoth-hunting site on Desna"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Chulatovo I-II Iron Age Site-Ukraine",
+        "new_name": "Chulatovo (Iron Age)",
+        "reason": "Yukhnovo culture Iron Age settlement site at Chulatovo"
+      }
+    ],
+    "clean_names": {
+      "Chulatovo I-II-Ukraine": "Chulatovo (Palaeolithic)",
+      "Chulatovo I-II Iron Age Site-Ukraine": "Chulatovo (Iron Age)"
+    }
+  },
+  {
+    "cluster_id": "C0083",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Deriyivka Neolithic Settlement-Ukraine",
+        "target_key": "Dereivka-Ukraine",
+        "reason": "Duplicate scrape of world-famous Dereivka Neolithic / Sredny Stog type-site"
+      },
+      {
+        "op": "MERGE",
+        "source_key": "Dereivka Neolithic Settlement II-Ukraine",
+        "target_key": "Dereivka-Ukraine",
+        "reason": "Duplicate scrape of Dereivka archaeological settlement complex on Dnieper"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Dereivka-Ukraine",
+        "new_name": "Deriivka",
+        "reason": "World-famous Sredny Stog culture horse-domestication type-site on Dnieper"
+      }
+    ],
+    "clean_names": {
+      "Dereivka-Ukraine": "Deriivka"
+    }
+  },
+  {
+    "cluster_id": "C0084",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "1 Dukhanivka Iron Age Hillfort-Ukraine",
+        "new_name": "Dukhanivka (Iron Age)",
+        "reason": "Pre-hiatus Yukhnovo Iron Age hillfort site at Dukhanivka"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "2 Dukhanivka Bronze Age Settlement-Ukraine",
+        "new_name": "Dukhanivka 2",
+        "reason": "Numbered Sosnitsa Bronze Age settlement site 2 at Dukhanivka"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Dukhanivka Bronze Age Settlement 2-Ukraine",
+        "new_name": "Dukhanivka (Bronze Age)",
+        "reason": "Bronze Age settlement site near Dukhanivka"
+      }
+    ],
+    "clean_names": {
+      "1 Dukhanivka Iron Age Hillfort-Ukraine": "Dukhanivka (Iron Age)",
+      "2 Dukhanivka Bronze Age Settlement-Ukraine": "Dukhanivka 2",
+      "Dukhanivka Bronze Age Settlement 2-Ukraine": "Dukhanivka (Bronze Age)"
+    }
+  },
+  {
+    "cluster_id": "C0085",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Drevnee zakhoronenie u mesta byvshey tserkvi Paraskevy Pyatnitsy (Chekalin)-Russia",
+        "reason": "Church cemetery burial ground heritage site with fabricated medieval dates"
+      },
+      {
+        "op": "MERGE",
+        "source_key": "Duna-Russia",
+        "target_key": "Gorodishche Duna (Chekalin)-Russia",
+        "reason": "Duplicate coordinate scrape of Dunskoe gorodishche near Chekalin"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Gorodishche Duna (Chekalin)-Russia",
+        "new_name": "Duna",
+        "reason": "Famous Moschiny and Vyatichi early medieval hillfort on Oka river"
+      }
+    ],
+    "clean_names": {
+      "Gorodishche Duna (Chekalin)-Russia": "Duna"
+    }
+  },
+  {
+    "cluster_id": "C0088",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Gorgippia-Russia",
+        "target_key": "Gorgippia-Anapa-Russia",
+        "reason": "Duplicate node of ancient Bosporan city Gorgippia at modern Anapa"
+      },
+      {
+        "op": "MERGE",
+        "source_key": "Gorgippia Iron Age Site-Russia",
+        "target_key": "Gorgippia-Anapa-Russia",
+        "reason": "Duplicate scrape of Sindike and Gorgippia archaeological site"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Gorgippia-Anapa-Russia",
+        "new_name": "Gorgippia",
+        "reason": "Ancient Bosporan trade city and port of Gorgippia at Anapa"
+      }
+    ],
+    "clean_names": {
+      "Gorgippia-Anapa-Russia": "Gorgippia"
+    }
+  },
+  {
+    "cluster_id": "C0093",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Hoty 1021 Chernyakhov Hillfort-Ukraine",
+        "target_key": "Bashmachka-Ukraine",
+        "reason": "Duplicate scrape of fortified Chernyakhov citadel at Bashmachka"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Bashmachka-Ukraine",
+        "new_name": "Bashmachka (Chernyakhov)",
+        "reason": "Famous Chernyakhov-culture stone-built citadel and fortress on Dnieper"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Hill fort in Bashmachka-Ukraine",
+        "new_name": "Bashmachka (Medieval)",
+        "reason": "Early medieval Slavic hillfort at Bashmachka"
+      }
+    ],
+    "clean_names": {
+      "Bashmachka-Ukraine": "Bashmachka (Chernyakhov)",
+      "Hill fort in Bashmachka-Ukraine": "Bashmachka (Medieval)"
+    }
+  },
+  {
+    "cluster_id": "C0095",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Ivye-Belarus",
+        "target_key": "Iwye-Belarus",
+        "reason": "Early medieval Gavya settlement continuous within 100-year gap of Iwye"
+      },
+      {
+        "op": "MERGE",
+        "source_key": "Chyrvonaya Gorka Hillfort-Belarus",
+        "target_key": "Iwye-Belarus",
+        "reason": "Chyrvonaya Gorka medieval hillfort continuous with settlement history of Iwye"
+      }
+    ],
+    "clean_names": {
+      "Iwye-Belarus": "Iwye"
+    }
+  },
+  {
+    "cluster_id": "C0097",
+    "actions": [
+      {
+        "op": "KEEP_HOMONYM",
+        "key": "Kamenka-Russia",
+        "reason": "Distinct modern town in Penza Oblast"
+      },
+      {
+        "op": "KEEP_HOMONYM",
+        "key": "Kamenka-Russia_2",
+        "reason": "Distinct settlement in Primorsky Krai 6399 km to the east"
+      },
+      {
+        "op": "KEEP_HOMONYM",
+        "key": "Kamenka-Russia_2_2",
+        "reason": "Distinct historic Volga German colony Bähr / Kamenka in Saratov region 306 km away"
+      }
+    ],
+    "clean_names": {
+      "Kamenka-Russia": "Kamenka",
+      "Kamenka-Russia_2": "Kamenka",
+      "Kamenka-Russia_2_2": "Kamenka"
+    }
+  },
+  {
+    "cluster_id": "C0098",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Kamennomostskoye-Russia_2",
+        "target_key": "Kamennomostskoye-Russia",
+        "reason": "Historic Karmovo village continuous with Kamennomostskoye modern settlement series"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Kamennomostskoye Bronze Age Site-Russia",
+        "new_name": "Kamennomostskoye (Bronze Age)",
+        "reason": "Pre-hiatus Koban Bronze Age settlement site at Kamennomostskoye"
+      }
+    ],
+    "clean_names": {
+      "Kamennomostskoye-Russia": "Kamennomostskoye",
+      "Kamennomostskoye Bronze Age Site-Russia": "Kamennomostskoye (Bronze Age)"
+    }
+  },
+  {
+    "cluster_id": "C0099",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Kamin-1 Iron Age Hillfort-Ukraine",
+        "new_name": "Kamin 1",
+        "reason": "Numbered Yukhnovo culture Iron Age hillfort site 1 at Kamin"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Kamin-2 Iron Age Hillfort-Ukraine",
+        "new_name": "Kamin 2",
+        "reason": "Numbered Yukhnovo culture Iron Age hillfort site 2 at Kamin"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Kamin-3 Bronze Age Settlement-Ukraine",
+        "new_name": "Kamin 3",
+        "reason": "Numbered Sosnitsa Bronze Age settlement site 3 at Kamin"
+      }
+    ],
+    "clean_names": {
+      "Kamin-1 Iron Age Hillfort-Ukraine": "Kamin 1",
+      "Kamin-2 Iron Age Hillfort-Ukraine": "Kamin 2",
+      "Kamin-3 Bronze Age Settlement-Ukraine": "Kamin 3"
+    }
+  },
+  {
+    "cluster_id": "C0101",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Katanda Iron Age Site 2-Russia",
+        "target_key": "Katanda-Russia",
+        "reason": "Iron Age cultural layer continuous with Katanda valley settlement series"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Katanda Iron Age Site-Russia",
+        "new_name": "Katanda (Iron Age)",
+        "reason": "Pazyryk culture Iron Age kurgan and settlement site at Katanda"
+      }
+    ],
+    "clean_names": {
+      "Katanda-Russia": "Katanda",
+      "Katanda Iron Age Site-Russia": "Katanda (Iron Age)"
+    }
+  },
+  {
+    "cluster_id": "C0102",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Demidov Eneolithic Hillfort-Ukraine",
+        "new_name": "Demydiv (Trypillia)",
+        "reason": "Trypillia-culture Eneolithic fortified settlement at Demydiv on Irpin river"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Kazarovichi 1 Eneolithic Hillfort-Ukraine",
+        "new_name": "Kozarovychi (Trypillia)",
+        "reason": "Trypillia-culture Eneolithic settlement at Kozarovychi on Kyiv Reservoir"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Hoty 1026 Chernyakhov Settlement-Ukraine",
+        "new_name": "Kozarovychi (Chernyakhov)",
+        "reason": "Chernyakhov culture settlement site at Kozarovychi"
+      }
+    ],
+    "clean_names": {
+      "Demidov Eneolithic Hillfort-Ukraine": "Demydiv (Trypillia)",
+      "Kazarovichi 1 Eneolithic Hillfort-Ukraine": "Kozarovychi (Trypillia)",
+      "Hoty 1026 Chernyakhov Settlement-Ukraine": "Kozarovychi (Chernyakhov)"
+    }
+  },
+  {
+    "cluster_id": "C0103",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Kharachoy Bronze Age Site 2-Russia",
+        "new_name": "Kharachoy (Late Bronze Age)",
+        "reason": "Kayakent-Khorochoi Late Bronze Age type-site phase 2"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Kharachoy Bronze Age Site-Russia",
+        "new_name": "Kharachoy (Bronze Age)",
+        "reason": "Middle Bronze Age settlement site at Kharachoy"
+      }
+    ],
+    "clean_names": {
+      "Kharachoy-Russia": "Kharachoy",
+      "Kharachoy Bronze Age Site 2-Russia": "Kharachoy (Late Bronze Age)",
+      "Kharachoy Bronze Age Site-Russia": "Kharachoy (Bronze Age)"
+    }
+  },
+  {
+    "cluster_id": "C0104",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Belgorod Medieval Gorodishche-Russia",
+        "new_name": "Belgorod (Medieval)",
+        "reason": "Early medieval Romny-period and Old Rus gorodishche with >340-year hiatus to modern fortress city"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Khitrovka-Russia",
+        "new_name": "Khitrovka",
+        "reason": "Distinct early medieval settlement at Khitrovka on Seversky Donets"
+      }
+    ],
+    "clean_names": {
+      "Belgorod-Russia": "Belgorod",
+      "Belgorod Medieval Gorodishche-Russia": "Belgorod (Medieval)",
+      "Khitrovka-Russia": "Khitrovka"
+    }
+  },
+  {
+    "cluster_id": "C0105",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Great Khodosivka hill fort-Ukraine",
+        "target_key": "Khodosivka-Ukraine",
+        "reason": "Great Khodosivka hillfort overlapping continuous medieval settlement of Khodosivka"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Khodosivka Iron Age Site-Ukraine",
+        "new_name": "Khodosivka (Iron Age)",
+        "reason": "Pre-hiatus Roman-period / Chernyakhov settlement site at Khodosivka"
+      }
+    ],
+    "clean_names": {
+      "Khodosivka-Ukraine": "Khodosivka",
+      "Khodosivka Iron Age Site-Ukraine": "Khodosivka (Iron Age)"
+    }
+  },
+  {
+    "cluster_id": "C0106",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Khumara-Russia_2",
+        "target_key": "Khumara Medieval Gorodishche-Russia",
+        "reason": "Duplicate node of early medieval Khumarinskoe gorodishche"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Khumara Medieval Gorodishche-Russia",
+        "new_name": "Khumara (Medieval)",
+        "reason": "Famous early medieval Saltovo-Khazar stone fortress on Kuban river with >500-year hiatus to modern aul"
+      }
+    ],
+    "clean_names": {
+      "Khumara-Russia": "Khumara",
+      "Khumara Medieval Gorodishche-Russia": "Khumara (Medieval)"
+    }
+  },
+  {
+    "cluster_id": "C0107",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Klimavichy Mediaeval Hillfort-Belarus",
+        "target_key": "Klimovichi-Belarus_2",
+        "reason": "Duplicate coordinate scrape of early medieval Old Rus fortified settlement at Klimavichy"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Klimovichi-Belarus_2",
+        "new_name": "Klimovichi (Rus)",
+        "reason": "Old Rus Ostyor basin medieval fortified settlement with >250-year hiatus to modern town"
+      }
+    ],
+    "clean_names": {
+      "Klimavicy-Belarus": "Klimovichi",
+      "Klimovichi-Belarus_2": "Klimovichi (Rus)"
+    }
+  },
+  {
+    "cluster_id": "C0108",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Klin-Yar-Russia",
+        "new_name": "Klin-Yar (Early Medieval)",
+        "reason": "Early medieval Alanic fortified settlement and cemetery at Klin-Yar"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Klin-Yar Iron Age Site 2-Russia",
+        "new_name": "Klin-Yar (Sarmatian)",
+        "reason": "Sarmatian-era settlement and cemetery phase at Klin-Yar"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Klin-Yar Iron Age Site-Russia",
+        "new_name": "Klin-Yar (Iron Age)",
+        "reason": "Koban culture Late Bronze and Early Iron Age settlement phase at Klin-Yar"
+      }
+    ],
+    "clean_names": {
+      "Klin-Yar-Russia": "Klin-Yar (Early Medieval)",
+      "Klin-Yar Iron Age Site 2-Russia": "Klin-Yar (Sarmatian)",
+      "Klin-Yar Iron Age Site-Russia": "Klin-Yar (Iron Age)"
+    }
+  },
+  {
+    "cluster_id": "C0109",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Klishchiv-Ukraine",
+        "new_name": "Klishchiv (Iron Age)",
+        "reason": "Scythian Early Iron Age settlement on Southern Bug at Klishchiv"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Klishchiv Bronze Age Site-Ukraine",
+        "new_name": "Klishchiv (Trypillia)",
+        "reason": "Eneolithic Trypillia culture settlement site at Klishchiv"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "KliAciv Neolithic Settlement-Ukraine",
+        "new_name": "Klishchiv (Neolithic)",
+        "reason": "Neolithic settlement site near Klishchiv"
+      }
+    ],
+    "clean_names": {
+      "Klishchiv-Ukraine": "Klishchiv (Iron Age)",
+      "Klishchiv Bronze Age Site-Ukraine": "Klishchiv (Trypillia)",
+      "KliAciv Neolithic Settlement-Ukraine": "Klishchiv (Neolithic)"
+    }
+  },
+  {
+    "cluster_id": "C0110",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Kobyakovo Gorodishche Iron Age Site-Russia",
+        "target_key": "Kobyakovo Gorodishche-Russia",
+        "reason": "Duplicate Iron Age phase within continuous Kobyakovo gorodishche sequence"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Kobyakovo Gorodishche-Russia",
+        "new_name": "Kobyakovo",
+        "reason": "Famous multi-period Meotian and medieval hillfort on Don river"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Kislyakovskoye-Russia",
+        "new_name": "Kislyakovskoye",
+        "reason": "Distinct Meotian fortified settlement on Don river near Aksay"
+      }
+    ],
+    "clean_names": {
+      "Kobyakovo Gorodishche-Russia": "Kobyakovo",
+      "Kislyakovskoye-Russia": "Kislyakovskoye"
+    }
+  },
+  {
+    "cluster_id": "C0111",
+    "actions": [
+      {
+        "op": "KEEP_HOMONYM",
+        "key": "Komariv-Ukraine",
+        "reason": "Distinct modern village in Kelmentsi Raion, Chernivtsi Oblast 181 km away on Dniester"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Komariv Bronze Age Site-Ukraine",
+        "new_name": "Komariv (Bronze Age)",
+        "reason": "World-famous Komariv culture Middle Bronze Age type-site in Ivano-Frankivsk Oblast"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Komariv-Ukraine_2",
+        "new_name": "Komariv (Roman Period)",
+        "reason": "Famous Roman-era glass-manufacturing settlement and workshop at Komariv"
+      }
+    ],
+    "clean_names": {
+      "Komariv-Ukraine": "Komariv",
+      "Komariv Bronze Age Site-Ukraine": "Komariv (Bronze Age)",
+      "Komariv-Ukraine_2": "Komariv (Roman Period)"
+    }
+  },
+  {
+    "cluster_id": "C0112",
+    "actions": [
+      {
+        "op": "KEEP_HOMONYM",
+        "key": "Konstantinovskoye-Russia",
+        "reason": "Distinct settlement in Stavropol Krai 280 km away"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Konstantinovskoye-Russia_2",
+        "new_name": "Konstantinovsk (Eneolithic)",
+        "reason": "Famous Konstantinovskoye Eneolithic settlement on Lower Don"
+      }
+    ],
+    "clean_names": {
+      "Konstantinovsk-Russia": "Konstantinovsk",
+      "Konstantinovskoye-Russia": "Konstantinovskoye",
+      "Konstantinovskoye-Russia_2": "Konstantinovsk (Eneolithic)"
+    }
+  },
+  {
+    "cluster_id": "C0113",
+    "actions": [
+      {
+        "op": "KEEP_HOMONYM",
+        "key": "Gorodishche-Russia",
+        "reason": "Distinct modern urban locality in Volgograd Oblast 1022 km away"
+      },
+      {
+        "op": "MERGE",
+        "source_key": "Gorodishche-Russia_2",
+        "target_key": "Kostroma-Russia",
+        "reason": "Old Kostroma / Gorodishche early medieval fortified centre continuous with Kostroma"
+      }
+    ],
+    "clean_names": {
+      "Kostroma-Russia": "Kostroma",
+      "Gorodishche-Russia": "Gorodishche"
+    }
+  },
+  {
+    "cluster_id": "C0114",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Kotelva II Iron Age Hillfort-Ukraine",
+        "new_name": "Kotelva II",
+        "reason": "Numbered Scythian-era Iron Age hillfort site II at Kotelva"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Kotelevske horodyshche Iron Age Hillfort-Ukraine",
+        "new_name": "Kotelevske",
+        "reason": "Major Scythian-era fortified centre Kotelevske horodyshche on Vorskla river"
+      }
+    ],
+    "clean_names": {
+      "Kotelva-Ukraine": "Kotelva",
+      "Kotelva II Iron Age Hillfort-Ukraine": "Kotelva II",
+      "Kotelevske horodyshche Iron Age Hillfort-Ukraine": "Kotelevske"
+    }
+  },
+  {
+    "cluster_id": "C0115",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Horodyshche Hillfort 3-Ukraine",
+        "new_name": "Kovchyn (Rus)",
+        "reason": "Old Rus medieval hillfort on Desna river near Kovchyn"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Bor Bronze Age Hillfort-Ukraine",
+        "new_name": "Bor (Kovchyn)",
+        "reason": "Bronze Age fortified settlement at Bor near Kovchyn"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Kovchyn-3 Bronze Age Settlement-Ukraine",
+        "new_name": "Kovchyn 3",
+        "reason": "Numbered Sosnitsa Bronze Age settlement site 3 at Kovchyn"
+      }
+    ],
+    "clean_names": {
+      "Horodyshche Hillfort 3-Ukraine": "Kovchyn (Rus)",
+      "Bor Bronze Age Hillfort-Ukraine": "Bor (Kovchyn)",
+      "Kovchyn-3 Bronze Age Settlement-Ukraine": "Kovchyn 3"
+    }
+  },
+  {
+    "cluster_id": "C0116",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Kozyrka XII-Ukraine",
+        "target_key": "Kozyrka-Ukraine",
+        "reason": "Late Scythian and Roman-era fortified outpost of Olbian chora at Kozyrka"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Kozirske gorodishche-Ukraine",
+        "new_name": "Kozyrka (Medieval)",
+        "reason": "Early medieval Slavic hillfort on Bug Liman at Kozyrka"
+      }
+    ],
+    "clean_names": {
+      "Kozyrka-Ukraine": "Kozyrka",
+      "Kozirske gorodishche-Ukraine": "Kozyrka (Medieval)"
+    }
+  },
+  {
+    "cluster_id": "C0117",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Gnidava-Ukraine",
+        "new_name": "Hnidava",
+        "reason": "Trypillia-culture Eneolithic settlement at Hnidava on Styr river, Lutsk"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Kichkarivka-Ukraine",
+        "new_name": "Kichkarivka",
+        "reason": "Trypillia-culture Eneolithic settlement at Kichkarivka, Lutsk"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Krasne-Ukraine_2",
+        "new_name": "Krasne (Lutsk)",
+        "reason": "Trypillia-culture Eneolithic settlement at Krasne, Lutsk"
+      }
+    ],
+    "clean_names": {
+      "Gnidava-Ukraine": "Hnidava",
+      "Kichkarivka-Ukraine": "Kichkarivka",
+      "Krasne-Ukraine_2": "Krasne (Lutsk)"
+    }
+  },
+  {
+    "cluster_id": "C0118",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Kreva Late Mediaeval Hillfort-Belarus",
+        "reason": "Kreva Castle ruin building with fabricated medieval hillfort label"
+      },
+      {
+        "op": "MERGE",
+        "source_key": "Krevskoe gorodishche Mediaeval Hillfort-Belarus",
+        "target_key": "Kreva-Belarus",
+        "reason": "Early medieval fortified centre continuous with Kreva settlement series"
+      }
+    ],
+    "clean_names": {
+      "Kreva-Belarus": "Kreva"
+    }
+  },
+  {
+    "cluster_id": "C0120",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Kudymkarskoe gorodishche-Russia",
+        "target_key": "Kudymkar-Russia",
+        "reason": "Ancestral Komi-Permyak fortified centre continuous with historic Kudymkar"
+      },
+      {
+        "op": "MERGE",
+        "source_key": "Kudymkarskoye (17001900)-Russia",
+        "target_key": "Kudymkar-Russia",
+        "reason": "Historic settlement period continuous with Kudymkar series"
+      }
+    ],
+    "clean_names": {
+      "Kudymkar-Russia": "Kudymkar"
+    }
+  },
+  {
+    "cluster_id": "C0123",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Kuntsevo settlement-Russia",
+        "target_key": "Kun`'cevo-Russia",
+        "reason": "Famous Dyakovo culture hillfort at Kuntsevo continuous with Kuntsevo settlement series"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Krylatskoe-Russia",
+        "new_name": "Krylatskoye",
+        "reason": "Historic village and archaeological site of Krylatskoye on Moskva river"
+      }
+    ],
+    "clean_names": {
+      "Kun`'cevo-Russia": "Kuntsevo",
+      "Krylatskoe-Russia": "Krylatskoye"
+    }
+  },
+  {
+    "cluster_id": "C0124",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Burshtyn-Ukraine_2",
+        "new_name": "Burshtyn (Medieval)",
+        "reason": "Old Rus medieval gorodishche with >250-year hiatus to modern town of Burshtyn"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Kuropatnyky-Ukraine",
+        "new_name": "Kuropatnyky",
+        "reason": "Distinct medieval settlement at Kuropatnyky 3 km north of Burshtyn"
+      }
+    ],
+    "clean_names": {
+      "Burshtyn-Ukraine": "Burshtyn",
+      "Burshtyn-Ukraine_2": "Burshtyn (Medieval)",
+      "Kuropatnyky-Ukraine": "Kuropatnyky"
+    }
+  },
+  {
+    "cluster_id": "C0125",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Laszki Murowane Castle-Ukraine",
+        "reason": "Historic castle ruin building at Murovane with fabricated medieval dates"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Castle Felsztynie-Ukraine",
+        "new_name": "Felsztyn",
+        "reason": "Historic fortified settlement and castle of Felsztyn / Skelivka"
+      }
+    ],
+    "clean_names": {
+      "Murovane-Ukraine": "Murovane",
+      "Castle Felsztynie-Ukraine": "Felsztyn"
+    }
+  },
+  {
+    "cluster_id": "C0126",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Garadzishcha rannyaga zhaleznaga veku i terytoryya byloga syarednyavechnaga gorada Loeva Mediaeval Hillfort-Belarus",
+        "target_key": "Loyev-Ukraine",
+        "reason": "Territory of medieval fortress town of Loyev continuous across Dnieper-Sozh confluence"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Loyev Iron Age Site-Ukraine",
+        "new_name": "Loyev (Iron Age)",
+        "reason": "Pre-hiatus Early Iron Age Milograd-culture hillfort site at Loyev"
+      }
+    ],
+    "clean_names": {
+      "Loyev-Ukraine": "Loyev",
+      "Loyev Iron Age Site-Ukraine": "Loyev (Iron Age)"
+    }
+  },
+  {
+    "cluster_id": "C0128",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Lyubimovskoye Classical Polis-Ukraine",
+        "target_key": "Lyubimovka Left-Bank Fort-Ukraine",
+        "reason": "Overlapping Late Scythian / Roman-period fortified settlement phase at Lyubymivka"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Lyubimovka Left-Bank Fort-Ukraine",
+        "new_name": "Lyubymivka (Late Scythian)",
+        "reason": "Famous Late Scythian fortified fortress settlement on Dnieper left bank at Lyubymivka"
+      }
+    ],
+    "clean_names": {
+      "Lyubymivka_UA_08-Ukraine": "Lyubymivka",
+      "Lyubimovka Left-Bank Fort-Ukraine": "Lyubymivka (Late Scythian)"
+    }
+  },
+  {
+    "cluster_id": "C0129",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Gruppa iz 4 sopok (odna iz nikh Polaya sopka Khodakovskogo) (Staraya Ladoga)-Russia",
+        "reason": "Group of 4 burial mound barrows (sopki) at Staraya Ladoga with fabricated settlement population"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Lyubsha Fortress-Russia",
+        "new_name": "Lyubsha",
+        "reason": "Pre-Viking early medieval stone-and-timber fortress at mouth of Volkhov river"
+      }
+    ],
+    "clean_names": {
+      "Staraya Ladoga-Russia": "Staraya Ladoga",
+      "Lyubsha Fortress-Russia": "Lyubsha"
+    }
+  }
+]

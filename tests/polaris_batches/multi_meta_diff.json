@@ -1,0 +1,3074 @@
+[
+  {
+    "shard": {
+      "key": "Amnya I-Russia",
+      "raw_name": "Amnya I",
+      "country": "Russia",
+      "coords": [
+        63.5042,
+        67.3118
+      ],
+      "min_y": -6000,
+      "max_y": -5000,
+      "n_yrs": 3,
+      "peak": 34,
+      "other_names": [
+        "Амня I",
+        "Amnya Promontory Fort",
+        "Амня II",
+        "Amnya Outer Village"
+      ],
+      "sources": [
+        "POLARIS"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 36970,
+        "key": "Amnya I-Russia",
+        "name": "Amnya",
+        "dist_km": 0.0,
+        "how": "key",
+        "has_cap": false,
+        "hnames": [
+          "-6000.1.1:Amnya"
+        ],
+        "other_names": [
+          "Амня I",
+          "Amnya Promontory Fort",
+          "Амня",
+          "Amnya I",
+          "amnya i"
+        ]
+      },
+      {
+        "idx": 36971,
+        "key": null,
+        "name": "Amnya II",
+        "dist_km": 0.098,
+        "how": "alias_match",
+        "has_cap": false,
+        "hnames": [
+          "-6000.1.1:Amnya II"
+        ],
+        "other_names": [
+          "Амня II",
+          "Amnya Outer Village"
+        ]
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Andriyivka_UA_05-Ukraine",
+      "raw_name": "Andriyivka",
+      "country": "Ukraine",
+      "coords": [
+        47.46044,
+        37.65542
+      ],
+      "min_y": 1795,
+      "max_y": 2026,
+      "n_yrs": 118,
+      "peak": 3606,
+      "other_names": [
+        "Карань"
+      ],
+      "sources": [
+        "POLARIS"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 40336,
+        "key": null,
+        "name": "Andriyivka",
+        "dist_km": 0.0,
+        "how": "prim_match",
+        "has_cap": false,
+        "hnames": [
+          "1897.1.1:Karan",
+          "1945.8.15:Andriyivka"
+        ],
+        "other_names": [
+          "Андріївка",
+          "Karan",
+          "Карань"
+        ]
+      },
+      {
+        "idx": 40372,
+        "key": null,
+        "name": "Sukhanivka",
+        "dist_km": 0.0,
+        "how": "alias_match",
+        "has_cap": false,
+        "hnames": [
+          "1897.1.1:Sukhanivka",
+          "1926.1.1:Andriyivka",
+          "2024.9.26:Sukhanivka"
+        ],
+        "other_names": [
+          "Andriyivka",
+          "Суханівка",
+          "Андріївка"
+        ]
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Astrachan'-Russia",
+      "raw_name": "Astrakhan",
+      "country": "Russia",
+      "coords": [
+        46.3497,
+        48.0408
+      ],
+      "min_y": 1000,
+      "max_y": 2026,
+      "n_yrs": 153,
+      "peak": 534241,
+      "other_names": [
+        "Astrakhan",
+        "Khadzhi-Tarkhan",
+        "Astrachan'",
+        "Astrakan",
+        "Astrachan",
+        "Atilia"
+      ],
+      "sources": [
+        "populstat",
+        "chandler_modelski",
+        "buringh",
+        "POLARIS",
+        "ghsl"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 7101,
+        "key": null,
+        "name": "Astrakhan",
+        "dist_km": 0.0,
+        "how": "prim_match",
+        "has_cap": true,
+        "hnames": [
+          "1300.1.1:Xacitarxan",
+          "1556.1.1:Astrakhan"
+        ],
+        "other_names": [
+          "Xacitarxan",
+          "Zayachiy Ostrov",
+          "Ashtar-Khan",
+          "Hacitarxan",
+          "Астрахань",
+          "Заячий остров"
+        ]
+      },
+      {
+        "idx": 36767,
+        "key": null,
+        "name": "Xacitarxan",
+        "dist_km": 8.393,
+        "how": "alias_match",
+        "has_cap": false,
+        "hnames": [
+          "1290.1.1:Hajji-Tarkhan",
+          "1459.1.1:Xacitarxan"
+        ],
+        "other_names": [
+          "Hajji-Tarkhan",
+          "Hadji-Tarkhan",
+          "Khadzhi-Tarkhan",
+          "Shareny Bugor",
+          "Ashtar-Khan",
+          "Хаджи-Тархан"
+        ]
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Cherniiv-Ukraine",
+      "raw_name": "Cherniiv",
+      "country": "Ukraine",
+      "coords": [
+        48.85589,
+        24.71557
+      ],
+      "min_y": 1387,
+      "max_y": 2026,
+      "n_yrs": 141,
+      "peak": 3871,
+      "other_names": [
+        "Черниїв",
+        "Cherniyiv"
+      ],
+      "sources": [
+        "POLARIS",
+        "ghsl"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 37599,
+        "key": null,
+        "name": "Cherniyiv",
+        "dist_km": 1.242,
+        "how": "alias_match",
+        "has_cap": false,
+        "hnames": [
+          "1000.1.1:Cherniev",
+          "1349.1.1:Czerniejów",
+          "1939.9.17:Cherniyev",
+          "1991.8.24:Cherniyiv"
+        ],
+        "other_names": [
+          "Cherniev",
+          "Czerniejów",
+          "Cherniyev"
+        ]
+      },
+      {
+        "idx": 76391,
+        "key": "Cherniiv-Ukraine",
+        "name": "Cherniiv",
+        "dist_km": 0.0,
+        "how": "key",
+        "has_cap": false,
+        "hnames": [
+          "1387.1.1:Czerniejow",
+          "1944.1.1:Cherniiv"
+        ],
+        "other_names": [
+          "Czerniejow",
+          "Cherniev",
+          "Черніїв",
+          "Cherniiv",
+          "cherniiv"
+        ]
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Cherny Yar-Russia",
+      "raw_name": "Cherny Yar",
+      "country": "Russia",
+      "coords": [
+        48.0619,
+        46.1092
+      ],
+      "min_y": 1627,
+      "max_y": 2026,
+      "n_yrs": 135,
+      "peak": 8100,
+      "other_names": [
+        "Chyorny Yar",
+        "Cherny Yar Volga",
+        "Чёрный Яр",
+        "Chyornyy Yar",
+        "Черный Яр",
+        "Черноярская крепость"
+      ],
+      "sources": [
+        "POLARIS"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 36781,
+        "key": null,
+        "name": "Chyorny Yar",
+        "dist_km": 0.111,
+        "how": "alias_match",
+        "has_cap": false,
+        "hnames": [
+          "1627.1.1:Chyorny Ostrog",
+          "1634.1.1:Chyorny Yar"
+        ],
+        "other_names": [
+          "Chyornyy Yar",
+          "Chernoyarskaya Krepost",
+          "Chyorny Ostrog",
+          "Чёрный Яр",
+          "Черноярская крепость"
+        ]
+      },
+      {
+        "idx": 74106,
+        "key": "Cherny Yar-Russia",
+        "name": "Cherny Yar",
+        "dist_km": 0.0,
+        "how": "key",
+        "has_cap": false,
+        "hnames": [
+          "1627.1.1:Cherny Ostrov",
+          "1634.1.1:Chorny Yar",
+          "1920.1.1:Cherny Yar"
+        ],
+        "other_names": [
+          "Чёрный Яр",
+          "Черный Яр",
+          "Чёрный Остров",
+          "Cherny Yar",
+          "cherny yar"
+        ]
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Gudermes-Russia",
+      "raw_name": "Gudermes",
+      "country": "Russia",
+      "coords": [
+        43.35,
+        46.1
+      ],
+      "min_y": 1700,
+      "max_y": 2026,
+      "n_yrs": 130,
+      "peak": 66352,
+      "other_names": [
+        "Umachan Jurt",
+        "Chechen-Ingush ASSR Rail Junction (Feb 1944 Deportation)",
+        "Гудермес",
+        "ГIуьмсе",
+        "Chechen-Ingush ASSR Railway Junction",
+        "Gümse"
+      ],
+      "sources": [
+        "populstat",
+        "POLARIS"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 30821,
+        "key": null,
+        "name": "Gudermes",
+        "dist_km": 0.858,
+        "how": "prim_match",
+        "has_cap": false,
+        "hnames": [
+          "1200.1.1:Gudermes",
+          "1700.1.1:Gums-Evl",
+          "1800.1.1:Gudermes"
+        ],
+        "other_names": [
+          "Gudermes Medieval Gorodishche",
+          "Гудермесское городище",
+          "Гудермес",
+          "ГIуьмсе",
+          "Gums-Evl"
+        ]
+      },
+      {
+        "idx": 36468,
+        "key": null,
+        "name": "Tsotsi-Yurt",
+        "dist_km": 15.28,
+        "how": "alias_match",
+        "has_cap": false,
+        "hnames": [
+          "1700.1.1:Tsotsi-Yurt"
+        ],
+        "other_names": [
+          "Цоци-Юрт",
+          "ЦIоцин-Эвла"
+        ]
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Hamina-Finland",
+      "raw_name": "Hamina",
+      "country": "Finland",
+      "coords": [
+        60.56974,
+        27.19794
+      ],
+      "min_y": 1678,
+      "max_y": 2025,
+      "n_yrs": 127,
+      "peak": 11100,
+      "other_names": [
+        "Frederikshamn",
+        "Fredrikshamn",
+        "Vehkalahti",
+        "Veckelax",
+        "Fridrikhsgam"
+      ],
+      "sources": [
+        "populstat",
+        "POLARIS",
+        "ghs_pop"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 13208,
+        "key": null,
+        "name": "Hamina",
+        "dist_km": 0.467,
+        "how": "prim_match",
+        "has_cap": false,
+        "hnames": [
+          "1900.1.1:Hamina"
+        ],
+        "other_names": []
+      },
+      {
+        "idx": 20281,
+        "key": null,
+        "name": "Vehkalahti",
+        "dist_km": 3.127,
+        "how": "alias_match",
+        "has_cap": false,
+        "hnames": [
+          "1952.1.1:Vehkalahti"
+        ],
+        "other_names": []
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Innokent'jevskij-Russia",
+      "raw_name": "Innokent'jevskij",
+      "country": "Russia",
+      "coords": [
+        48.60416,
+        140.16585
+      ],
+      "min_y": 1870,
+      "max_y": 2026,
+      "n_yrs": 106,
+      "peak": 1300,
+      "other_names": [
+        "Иннокентьевский"
+      ],
+      "sources": [
+        "POLARIS"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 38635,
+        "key": "Innokent'jevskij-Russia",
+        "name": "Innokentyevka",
+        "dist_km": 0.0,
+        "how": "key",
+        "has_cap": false,
+        "hnames": [
+          "1870.1.1:Innokentyevka"
+        ],
+        "other_names": [
+          "Innokentyevskiy",
+          "Иннокентьевка",
+          "Innokentevka",
+          "Innokent’yevskiy",
+          "Innokent'yevskiy",
+          "Innokent'jevskij"
+        ]
+      },
+      {
+        "idx": 39810,
+        "key": null,
+        "name": "Innokentyevskiy",
+        "dist_km": 0.0,
+        "how": "exact_0.1km",
+        "has_cap": false,
+        "hnames": [
+          "1897.1.1:Innokentyevskiy"
+        ],
+        "other_names": [
+          "Иннокентьевский",
+          "Innokentevskiy",
+          "Innokent’yevskiy",
+          "Innokent'yevskiy"
+        ]
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Ivyanyets-Belarus",
+      "raw_name": "Ivyanyets",
+      "country": "Belarus",
+      "coords": [
+        53.8864,
+        26.7432
+      ],
+      "min_y": 900,
+      "max_y": 2026,
+      "n_yrs": 146,
+      "peak": 5000,
+      "other_names": [
+        "Івянец",
+        "Ivianiec",
+        "Ивенецъ",
+        "Ivenets (Volma River Hillfort)",
+        "Ivyanets"
+      ],
+      "sources": [
+        "POLARIS"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 37755,
+        "key": null,
+        "name": "Ivenets",
+        "dist_km": 0.627,
+        "how": "alias_match",
+        "has_cap": false,
+        "hnames": [
+          "900.1.1:Ivenets",
+          "1444.1.1:Iwieniec",
+          "1793.1.1:Ivenets",
+          "1921.3.18:Iwieniec",
+          "1939.9.17:Ivenets"
+        ],
+        "other_names": [
+          "Ivenets (Volma River Hillfort)",
+          "Ivyanets",
+          "Iwieniec"
+        ]
+      },
+      {
+        "idx": 75368,
+        "key": "Ivyanyets-Belarus",
+        "name": "Ivyanyets",
+        "dist_km": 0.0,
+        "how": "key",
+        "has_cap": false,
+        "hnames": [
+          "900.1.1:Iwieniec",
+          "1795.1.1:Ivenets",
+          "1921.1.1:Iwieniec",
+          "1945.1.1:Ivyanyets"
+        ],
+        "other_names": [
+          "Iwieniec",
+          "Ivenets",
+          "Івянец",
+          "Ивенец",
+          "Ivyanyets",
+          "ivyanyets"
+        ]
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Jenakijeve-Ukraine",
+      "raw_name": "Yenakiieve",
+      "country": "Ukraine",
+      "coords": [
+        48.2314,
+        38.2053
+      ],
+      "min_y": 1782,
+      "max_y": 2026,
+      "n_yrs": 117,
+      "peak": 120332,
+      "other_names": [
+        "Yenakiyeve",
+        "Jenakijevo",
+        "Enakieve",
+        "Ord`zonikidze (?)",
+        "Jenakijeve",
+        "Ordzhonikidze Donbas"
+      ],
+      "sources": [
+        "populstat",
+        "POLARIS",
+        "ghsl"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 16940,
+        "key": null,
+        "name": "Jenakijeve",
+        "dist_km": 0.649,
+        "how": "alias_match",
+        "has_cap": false,
+        "hnames": [
+          "1926.1.1:Jenakijeve"
+        ],
+        "other_names": []
+      },
+      {
+        "idx": 25662,
+        "key": null,
+        "name": "Yenakiieve",
+        "dist_km": 3.53,
+        "how": "prim_match",
+        "has_cap": false,
+        "hnames": [
+          "1858.1.1:Sofievka",
+          "1898.1.1:Yenakiyevo",
+          "1928.7.10:Rykovo",
+          "1937.1.1:Ordzhonikidze",
+          "1944.6.12:Yenakiyevo",
+          "1991.8.24:Yenakiieve"
+        ],
+        "other_names": [
+          "Ordzhonikidze Donbas",
+          "Rykovo",
+          "Yenakiyevo",
+          "Sofievka",
+          "Ordzhonikidze",
+          "Enakievo"
+        ]
+      },
+      {
+        "idx": 77186,
+        "key": "Jenakijeve-Ukraine",
+        "name": "Yenakiieve",
+        "dist_km": 0.0,
+        "how": "key",
+        "has_cap": false,
+        "hnames": [
+          "1782.1.1:Sofievka",
+          "1898.1.1:Yenakiyevo",
+          "1928.7.10:Rykovo",
+          "1937.1.1:Ordzhonikidze",
+          "1944.6.12:Yenakiyevo",
+          "1991.8.24:Yenakiieve"
+        ],
+        "other_names": [
+          "Sofievka",
+          "Rykovo",
+          "Ordzhonikidze",
+          "Yenakiyevo",
+          "Yenakiieve",
+          "yenakiieve"
+        ]
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Jékabpils-Latvia",
+      "raw_name": "Jékabpils",
+      "country": "Latvia",
+      "coords": [
+        56.50276,
+        25.86751
+      ],
+      "min_y": 1400,
+      "max_y": 2025,
+      "n_yrs": 140,
+      "peak": 31900,
+      "other_names": [
+        "Jakobstadt",
+        "Yekabpils",
+        "Jekabpils",
+        "Yakobshtadt",
+        "Jēkabpils",
+        "Yakovlev"
+      ],
+      "sources": [
+        "populstat",
+        "POLARIS",
+        "ghs_pop"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 11771,
+        "key": null,
+        "name": "Jēkabpils",
+        "dist_km": 0.0,
+        "how": "prim_match",
+        "has_cap": false,
+        "hnames": [
+          "1211.1.1:Asote",
+          "1670.1.1:Jakobstadt",
+          "1920.1.1:Jēkabpils"
+        ],
+        "other_names": [
+          "Asote",
+          "Asote (Latgalian-Polotsk Tributary Hillfort)",
+          "Asote Jekabpils",
+          "Jakobstadt",
+          "Jékabpils"
+        ]
+      },
+      {
+        "idx": 16914,
+        "key": null,
+        "name": "Krustpils",
+        "dist_km": 1.626,
+        "how": "alias_match",
+        "has_cap": false,
+        "hnames": [
+          "1925.1.1:Krustpils"
+        ],
+        "other_names": []
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Kairshak I-Russia",
+      "raw_name": "Kairshak I",
+      "country": "Russia",
+      "coords": [
+        46.78,
+        48.54
+      ],
+      "min_y": -6800,
+      "max_y": -6000,
+      "n_yrs": 4,
+      "peak": 55,
+      "other_names": [
+        "Каиршак I",
+        "Каиршак III"
+      ],
+      "sources": [
+        "POLARIS"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 36734,
+        "key": "Kairshak I-Russia",
+        "name": "Kairshak",
+        "dist_km": 0.0,
+        "how": "key",
+        "has_cap": false,
+        "hnames": [
+          "-6800.1.1:Kairshak"
+        ],
+        "other_names": [
+          "Kairshak",
+          "Каиршак I",
+          "Kairshak I",
+          "kairshak i"
+        ]
+      },
+      {
+        "idx": 36735,
+        "key": null,
+        "name": "Kairshak III",
+        "dist_km": 0.845,
+        "how": "alias_match",
+        "has_cap": false,
+        "hnames": [
+          "-6700.1.1:Kairshak III"
+        ],
+        "other_names": [
+          "Каиршак III"
+        ]
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Kamennaya Balka I-Russia",
+      "raw_name": "Kamennaya Balka I",
+      "country": "Russia",
+      "coords": [
+        47.281,
+        39.248
+      ],
+      "min_y": -10000,
+      "max_y": -8000,
+      "n_yrs": 7,
+      "peak": 35,
+      "other_names": [
+        "Каменная Балка I",
+        "Каменная Балка II"
+      ],
+      "sources": [
+        "POLARIS"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 36851,
+        "key": "Kamennaya Balka I-Russia",
+        "name": "Mertvy Donets",
+        "dist_km": 0.0,
+        "how": "key",
+        "has_cap": false,
+        "hnames": [
+          "-10000.1.1:Mertvy Donets"
+        ],
+        "other_names": [
+          "Каменная Балка I",
+          "Morskoy Chulek",
+          "Sinyavskoye",
+          "Kamennaya Balka I",
+          "kamennaya balka i"
+        ]
+      },
+      {
+        "idx": 36852,
+        "key": null,
+        "name": "Kamennaya Balka II",
+        "dist_km": 0.806,
+        "how": "alias_match",
+        "has_cap": false,
+        "hnames": [
+          "-10000.1.1:Kamennaya Balka II"
+        ],
+        "other_names": [
+          "Каменная Балка II"
+        ]
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Kamyanka-Buzka-Ukraine",
+      "raw_name": "Kamyanka-Buzka",
+      "country": "Ukraine",
+      "coords": [
+        50.10655,
+        24.34451
+      ],
+      "min_y": 1500,
+      "max_y": 2026,
+      "n_yrs": 138,
+      "peak": 11674,
+      "other_names": [
+        "Кам'янка-Бузька",
+        "Kam`janka-Buźka",
+        "Kam'Yanka-Buzka",
+        "Dimoshin",
+        "Kamianka-Strumylova"
+      ],
+      "sources": [
+        "POLARIS"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 37644,
+        "key": null,
+        "name": "Kamianka-Buzka",
+        "dist_km": 0.827,
+        "how": "alias_match",
+        "has_cap": false,
+        "hnames": [
+          "1000.1.1:Dimoshin",
+          "1411.1.1:Kamionka Strumiłowa",
+          "1939.9.17:Kamenka-Strumilovskaya",
+          "1944.8.15:Kamenka-Bugskaya",
+          "1991.8.24:Kamianka-Buzka"
+        ],
+        "other_names": [
+          "Dimoshin",
+          "Kamianka-Strumylova",
+          "Kamionka Strumiłowa",
+          "Kamenka-Bugskaya",
+          "Kamenka-Strumilovskaya"
+        ]
+      },
+      {
+        "idx": 76572,
+        "key": "Kamyanka-Buzka-Ukraine",
+        "name": "Kamyanka-Buzka",
+        "dist_km": 0.0,
+        "how": "key",
+        "has_cap": false,
+        "hnames": [
+          "1500.1.1:Kamionka",
+          "1944.1.1:Kamyanka-Buzka"
+        ],
+        "other_names": [
+          "Kamionka Strumilowa",
+          "Kamionka",
+          "Кам'янка-Бузька",
+          "Kamyanka-Buzka",
+          "kamyanka-buzka",
+          "Kamyanka"
+        ]
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Kobeliaky-Ukraine",
+      "raw_name": "Kobelyaky",
+      "country": "Ukraine",
+      "coords": [
+        49.14936,
+        34.20193
+      ],
+      "min_y": 1600,
+      "max_y": 2026,
+      "n_yrs": 136,
+      "peak": 13100,
+      "other_names": [
+        "Kobeliaky",
+        "Kobeliaki",
+        "Kobeljaki",
+        "Кобеляки",
+        "Kobeljaky",
+        "Kobelyaki"
+      ],
+      "sources": [
+        "chandler_modelski",
+        "buringh",
+        "POLARIS"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 8663,
+        "key": null,
+        "name": "Kobeljaki",
+        "dist_km": 2.043,
+        "how": "alias_match",
+        "has_cap": false,
+        "hnames": [
+          "1600.1.1:Kobeljaki"
+        ],
+        "other_names": []
+      },
+      {
+        "idx": 76242,
+        "key": "Kobeliaky-Ukraine",
+        "name": "Kobeliaky",
+        "dist_km": 0.0,
+        "how": "key",
+        "has_cap": false,
+        "hnames": [
+          "1600.1.1:Kobeliaky"
+        ],
+        "other_names": [
+          "Kobelyaki",
+          "Кобеляки",
+          "Kobelyaky",
+          "kobelyaky",
+          "Kobeliaky",
+          "kobeliaky"
+        ]
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Korolev-Russia",
+      "raw_name": "Korolev",
+      "country": "Russia",
+      "coords": [
+        55.9222,
+        37.8256
+      ],
+      "min_y": 1939,
+      "max_y": 2026,
+      "n_yrs": 81,
+      "peak": 228095,
+      "other_names": [
+        "Podlipki",
+        "Kalininski",
+        "Korolyov",
+        "Korolev",
+        "Kaliningrad",
+        "Kaliningrad (Moscow Obl.)"
+      ],
+      "sources": [
+        "populstat",
+        "buringh",
+        "POLARIS",
+        "ghsl"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 13498,
+        "key": null,
+        "name": "Korolyov",
+        "dist_km": 0.935,
+        "how": "alias_match",
+        "has_cap": false,
+        "hnames": [
+          "1900.1.1:Korolyov"
+        ],
+        "other_names": []
+      },
+      {
+        "idx": 73463,
+        "key": "Korolev-Russia",
+        "name": "Korolev",
+        "dist_km": 0.0,
+        "how": "key",
+        "has_cap": false,
+        "hnames": [
+          "1939.1.1:Korolev"
+        ],
+        "other_names": [
+          "Korolyov",
+          "Kaliningrad",
+          "Podlipki",
+          "Korolev",
+          "korolev"
+        ]
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Kuraniec-Belarus",
+      "raw_name": "Kuraniec",
+      "country": "Belarus",
+      "coords": [
+        54.561,
+        26.9585
+      ],
+      "min_y": 900,
+      "max_y": 2026,
+      "n_yrs": 146,
+      "peak": 20673,
+      "other_names": [
+        "Куренецъ",
+        "Kurenets (Vileyka Viliya Complex)",
+        "Kuranets",
+        "Vileyka Gorodishche"
+      ],
+      "sources": [
+        "POLARIS"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 37753,
+        "key": null,
+        "name": "Kurenets",
+        "dist_km": 1.079,
+        "how": "alias_match",
+        "has_cap": false,
+        "hnames": [
+          "900.1.1:Kurenets",
+          "1355.1.1:Kurzeniec",
+          "1793.1.1:Kurenets",
+          "1921.3.18:Kurzeniec",
+          "1939.9.17:Kurenets"
+        ],
+        "other_names": [
+          "Kurenets (Vileyka Viliya Complex)",
+          "Kuranets",
+          "Vileyka Gorodishche",
+          "Kurzeniec"
+        ]
+      },
+      {
+        "idx": 75387,
+        "key": "Kuraniec-Belarus",
+        "name": "Kuraniec",
+        "dist_km": 0.0,
+        "how": "key",
+        "has_cap": false,
+        "hnames": [
+          "900.1.1:Kureniec",
+          "1795.1.1:Kurenets",
+          "1921.1.1:Kureniec",
+          "1945.1.1:Kuraniec"
+        ],
+        "other_names": [
+          "Kurenets",
+          "Kureniec",
+          "Куранец",
+          "Куренец",
+          "Kuraniec",
+          "kuraniec"
+        ]
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Likino-Dulevo-Russia",
+      "raw_name": "Likino-Dulevo",
+      "country": "Russia",
+      "coords": [
+        55.7083,
+        38.9542
+      ],
+      "min_y": 1897,
+      "max_y": 1926,
+      "n_yrs": 16,
+      "peak": 5556,
+      "other_names": [
+        "Ликино-Дулёво",
+        "Likino-Duljovo",
+        "Ликино",
+        "Дулёво",
+        "Duljovo",
+        "Likino"
+      ],
+      "sources": [
+        "POLARIS"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 38832,
+        "key": null,
+        "name": "Dulyovo",
+        "dist_km": 0.0,
+        "how": "alias_match",
+        "has_cap": false,
+        "hnames": [
+          "1897.1.1:Dulyovo"
+        ],
+        "other_names": [
+          "Likino-Dulevo",
+          "Дулёво"
+        ]
+      },
+      {
+        "idx": 38833,
+        "key": null,
+        "name": "Likino",
+        "dist_km": 2.796,
+        "how": "alias_match",
+        "has_cap": false,
+        "hnames": [
+          "1897.1.1:Likino"
+        ],
+        "other_names": [
+          "Ликино"
+        ]
+      },
+      {
+        "idx": 40008,
+        "key": null,
+        "name": "Likino-Dulevo",
+        "dist_km": 0.0,
+        "how": "prim_match",
+        "has_cap": false,
+        "hnames": [
+          "1897.1.1:Likino and Dulyovo",
+          "1930.11.20:Likino-Dulevo"
+        ],
+        "other_names": [
+          "Ликино-Дулёво",
+          "Likino-Dulyovo",
+          "Ликино + Дулёво",
+          "Likino and Dulyovo"
+        ]
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Logoysk-Belarus",
+      "raw_name": "Logoysk",
+      "country": "Belarus",
+      "coords": [
+        54.2064,
+        27.8512
+      ],
+      "min_y": 900,
+      "max_y": 2026,
+      "n_yrs": 146,
+      "peak": 15567,
+      "other_names": [
+        "Лагойск",
+        "Łahojsk",
+        "Логойскъ",
+        "Логойск",
+        "Logozhsk",
+        "Lahoysk"
+      ],
+      "sources": [
+        "POLARIS"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 37740,
+        "key": null,
+        "name": "Logoisk",
+        "dist_km": 0.662,
+        "how": "alias_match",
+        "has_cap": false,
+        "hnames": [
+          "1078.1.1:Logozhsk",
+          "1569.1.1:Łohojsk",
+          "1793.1.1:Logoisk"
+        ],
+        "other_names": [
+          "Logozhsk",
+          "Lahoysk",
+          "Łohojsk"
+        ]
+      },
+      {
+        "idx": 75395,
+        "key": "Logoysk-Belarus",
+        "name": "Logoysk",
+        "dist_km": 0.0,
+        "how": "key",
+        "has_cap": false,
+        "hnames": [
+          "900.1.1:Logozhsk",
+          "1500.1.1:Łohojsk",
+          "1795.1.1:Logoysk",
+          "1921.1.1:Łohojsk",
+          "1945.1.1:Logoysk"
+        ],
+        "other_names": [
+          "Łohojsk",
+          "Lahoysk",
+          "Logozhsk",
+          "Лагойск",
+          "Логойск",
+          "Logoysk"
+        ]
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Lyubimovka Left-Bank Fort-Ukraine",
+      "raw_name": "Lyubimovka Left-Bank Fort",
+      "country": "Ukraine",
+      "coords": [
+        46.812,
+        33.568
+      ],
+      "min_y": -100,
+      "max_y": 300,
+      "n_yrs": 5,
+      "peak": 1600,
+      "other_names": [
+        "Lyubimovskoye Gorodishche",
+        "Kakhovka Left Bank"
+      ],
+      "sources": [
+        "POLARIS"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 37355,
+        "key": null,
+        "name": "Liubymivka",
+        "dist_km": 0.404,
+        "how": "alias_match",
+        "has_cap": false,
+        "hnames": [
+          "-200.1.1:Lyubimovka",
+          "1991.8.24:Liubymivka"
+        ],
+        "other_names": [
+          "Lyubimovka Iron Age Site",
+          "Lyubimovka",
+          "Lyubimovskoye Gorodishche"
+        ]
+      },
+      {
+        "idx": 77734,
+        "key": "Lyubimovka Left-Bank Fort-Ukraine",
+        "name": "Lyubymivka",
+        "dist_km": 0.0,
+        "how": "key",
+        "has_cap": false,
+        "hnames": [
+          "-100.1.1:Lyubymivka"
+        ],
+        "other_names": [
+          "Lyubimovka",
+          "Любимівка",
+          "Любимовка",
+          "Lyubimovka Left-Bank Fort",
+          "lyubimovka left-bank fort",
+          "Lyubimovka Left"
+        ]
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Mankhay I-Russia",
+      "raw_name": "Mankhay I",
+      "country": "Russia",
+      "coords": [
+        52.7833,
+        104.9333
+      ],
+      "min_y": 450,
+      "max_y": 1000,
+      "n_yrs": 10,
+      "peak": 620,
+      "other_names": [
+        "Манхай I",
+        "Mankhayskoye Gorodishche",
+        "Манхай II",
+        "Mankhay I",
+        "Mankhayskoe gorodishche (Kudinskaya dolina)"
+      ],
+      "sources": [
+        "POLARIS"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 36294,
+        "key": "Mankhay I-Russia",
+        "name": "Mankhay",
+        "dist_km": 0.0,
+        "how": "key",
+        "has_cap": false,
+        "hnames": [
+          "450.1.1:Mankhay"
+        ],
+        "other_names": [
+          "Манхай I",
+          "Манхайское городище (Кудинская долина)",
+          "Mankhayskoye Gorodishche",
+          "Kurykan Mankhay",
+          "Манхай",
+          "Mankhay I"
+        ]
+      },
+      {
+        "idx": 37135,
+        "key": null,
+        "name": "Mankhay II",
+        "dist_km": 1.348,
+        "how": "alias_match",
+        "has_cap": false,
+        "hnames": [
+          "650.1.1:Mankhay II"
+        ],
+        "other_names": [
+          "Манхай II"
+        ]
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Mykhailo-Kotsiubynske-Ukraine",
+      "raw_name": "Mykhailo-Kotsiubynske",
+      "country": "Ukraine",
+      "coords": [
+        51.4512,
+        31.07822
+      ],
+      "min_y": 1078,
+      "max_y": 2026,
+      "n_yrs": 144,
+      "peak": 3600,
+      "other_names": [
+        "Михайло-Коцюбинське",
+        "Mychajlo-Kocjubynśke",
+        "smt Mychajlo-Kocjubynśke",
+        "Kovchyn Pakul-Bilous Gorodishche (West of Chernigov)",
+        "Mykhailo-Kotsyubynske",
+        "Kovchyn"
+      ],
+      "sources": [
+        "POLARIS"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 37474,
+        "key": null,
+        "name": "Kovchyn",
+        "dist_km": 0.986,
+        "how": "alias_match",
+        "has_cap": false,
+        "hnames": [
+          "700.1.1:Kovchin",
+          "1991.8.24:Kovchyn"
+        ],
+        "other_names": [
+          "Kovchyn / Pakul-Bilous Gorodishche",
+          "Kovchyn / Pakul-Bilous",
+          "Kovchin",
+          "Pakul",
+          "Kovchyn / Pakul-Bilous Gorodishche (West of Chernigov)",
+          "Mykhailo-Kotsyubynske"
+        ]
+      },
+      {
+        "idx": 76030,
+        "key": "Mykhailo-Kotsiubynske-Ukraine",
+        "name": "Mykhailo-Kotsiubynske",
+        "dist_km": 0.0,
+        "how": "key",
+        "has_cap": false,
+        "hnames": [
+          "1078.1.1:Kozel",
+          "1935.1.1:Mykhailo-Kotsiubynske"
+        ],
+        "other_names": [
+          "Kozel",
+          "Mikhaylo-Kotsyubinskoye",
+          "Михайло-Коцюбинське",
+          "Mykhailo-Kotsiubynske",
+          "mykhailo-kotsiubynske",
+          "Mykhailo"
+        ]
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Myrhorod-Ukraine",
+      "raw_name": "Myrhorod",
+      "country": "Ukraine",
+      "coords": [
+        49.9658,
+        33.6114
+      ],
+      "min_y": 1200,
+      "max_y": 2026,
+      "n_yrs": 145,
+      "peak": 47600,
+      "other_names": [
+        "Myrhorod",
+        "Mirgorod",
+        "Миргород"
+      ],
+      "sources": [
+        "chandler_modelski",
+        "buringh",
+        "POLARIS"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 8058,
+        "key": null,
+        "name": "Mirgorod",
+        "dist_km": 1.695,
+        "how": "alias_match",
+        "has_cap": false,
+        "hnames": [
+          "1200.1.1:Mirgorod"
+        ],
+        "other_names": []
+      },
+      {
+        "idx": 76246,
+        "key": "Myrhorod-Ukraine",
+        "name": "Myrhorod",
+        "dist_km": 0.0,
+        "how": "key",
+        "has_cap": false,
+        "hnames": [
+          "1200.1.1:Myrhorod"
+        ],
+        "other_names": [
+          "Mirgorod",
+          "Миргород",
+          "Myrhorod",
+          "myrhorod"
+        ]
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Navapolack-Belarus",
+      "raw_name": "Novopolotsk",
+      "country": "Belarus",
+      "coords": [
+        55.5318,
+        28.5987
+      ],
+      "min_y": 1958,
+      "max_y": 2026,
+      "n_yrs": 69,
+      "peak": 105600,
+      "other_names": [
+        "Novopolozk. Novopolotsk",
+        "Navapolack",
+        "Navapolatsk Petrochemical City",
+        "Наваполацк",
+        "Navapolatsk",
+        "Połacki"
+      ],
+      "sources": [
+        "populstat",
+        "POLARIS"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 23513,
+        "key": null,
+        "name": "Navapolack",
+        "dist_km": 3.807,
+        "how": "alias_match",
+        "has_cap": false,
+        "hnames": [
+          "1970.1.1:Navapolack"
+        ],
+        "other_names": []
+      },
+      {
+        "idx": 37988,
+        "key": null,
+        "name": "Navapolatsk",
+        "dist_km": 0.0,
+        "how": "alias_match",
+        "has_cap": false,
+        "hnames": [
+          "1958.6.7:Polotskiy",
+          "1963.12.14:Novopolotsk",
+          "1991.9.19:Navapolatsk"
+        ],
+        "other_names": [
+          "Novopolotsk",
+          "Navapolatsk Petrochemical City",
+          "Polotskiy",
+          "Polacki",
+          "Nowopołock",
+          "Наваполацк"
+        ]
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Novgorod-Russia",
+      "raw_name": "Novgorod",
+      "country": "Russia",
+      "coords": [
+        58.5215,
+        31.2755
+      ],
+      "min_y": 800,
+      "max_y": 2026,
+      "n_yrs": 156,
+      "peak": 234000,
+      "other_names": [
+        "Velikij Novgorod",
+        "Holmgard",
+        "Veliky Novgorod",
+        "Novgorod the Great",
+        "Novgorod Veliky",
+        "Novgorod Governorate"
+      ],
+      "sources": [
+        "populstat",
+        "chandler_modelski",
+        "buringh",
+        "POLARIS",
+        "ghsl"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 7196,
+        "key": null,
+        "name": "Veliky Novgorod",
+        "dist_km": 0.459,
+        "how": "alias_match",
+        "has_cap": true,
+        "hnames": [
+          "750.1.1:Holmgard",
+          "900.1.1:Novgorod",
+          "1999.6.11:Veliky Novgorod"
+        ],
+        "other_names": [
+          "Великий Новгород",
+          "Новгород",
+          "Novgorod",
+          "Holmgard",
+          "Господин Великий Новгород",
+          "Gospodin Velikiy Novgorod"
+        ]
+      },
+      {
+        "idx": 36199,
+        "key": null,
+        "name": "Rurikovo Gorodishche",
+        "dist_km": 3.325,
+        "how": "alias_match",
+        "has_cap": false,
+        "hnames": [
+          "750.1.1:Holmgard",
+          "950.1.1:Rurikovo Gorodishche"
+        ],
+        "other_names": [
+          "Rurikovo",
+          "Рюриково городище",
+          "Городище на Волхове",
+          "Holmgardr",
+          "Новгородское городище",
+          "Holmgard"
+        ]
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Perlovka-Russia",
+      "raw_name": "Perlovka",
+      "country": "Russia",
+      "coords": [
+        55.9,
+        37.75
+      ],
+      "min_y": 1500,
+      "max_y": 1926,
+      "n_yrs": 51,
+      "peak": 3544,
+      "other_names": [
+        "Перловка"
+      ],
+      "sources": [
+        "POLARIS"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 38835,
+        "key": null,
+        "name": "Perlovka",
+        "dist_km": 0.0,
+        "how": "prim_match",
+        "has_cap": false,
+        "hnames": [
+          "1897.1.1:Perlovka"
+        ],
+        "other_names": [
+          "Перловка"
+        ]
+      },
+      {
+        "idx": 38837,
+        "key": null,
+        "name": "Tayninka",
+        "dist_km": 0.0,
+        "how": "exact_0.1km",
+        "has_cap": false,
+        "hnames": [
+          "1897.1.1:Tayninka"
+        ],
+        "other_names": [
+          "Тайнинка"
+        ]
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Petrova Dubrava-Russia",
+      "raw_name": "Petrova Dubrava",
+      "country": "Russia",
+      "coords": [
+        53.3,
+        50.36667
+      ],
+      "min_y": 1897,
+      "max_y": 2026,
+      "n_yrs": 102,
+      "peak": 7228,
+      "other_names": [
+        "Петра Дубрава",
+        "Petra Dubrava"
+      ],
+      "sources": [
+        "POLARIS"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 41670,
+        "key": null,
+        "name": "Petra-Dubrava",
+        "dist_km": 0.437,
+        "how": "alias_match",
+        "has_cap": false,
+        "hnames": [
+          "1897.1.1:Petra-Dubrava"
+        ],
+        "other_names": [
+          "Петра Дубрава",
+          "Petra Dubrava"
+        ]
+      },
+      {
+        "idx": 74255,
+        "key": "Petrova Dubrava-Russia",
+        "name": "Petrova Dubrava",
+        "dist_km": 0.0,
+        "how": "key",
+        "has_cap": false,
+        "hnames": [
+          "1897.1.1:Petrova Dubrava"
+        ],
+        "other_names": [
+          "Петра Дубрава",
+          "Петрова Дубрава",
+          "Petrova Dubrava",
+          "petrova dubrava"
+        ]
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Pidhaytsi-Ukraine",
+      "raw_name": "Pidhaytsi",
+      "country": "Ukraine",
+      "coords": [
+        49.2678,
+        25.12766
+      ],
+      "min_y": 1000,
+      "max_y": 2026,
+      "n_yrs": 143,
+      "peak": 5750,
+      "other_names": [
+        "Підгайці",
+        "Pidhajci",
+        "Пидгайци",
+        "Pidgaytsi",
+        "Podgaytsy"
+      ],
+      "sources": [
+        "POLARIS"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 37622,
+        "key": null,
+        "name": "Pidhaitsi",
+        "dist_km": 0.298,
+        "how": "alias_match",
+        "has_cap": false,
+        "hnames": [
+          "1000.1.1:Pidhaitsi",
+          "1397.1.1:Podhajce",
+          "1939.9.17:Podgaytsy",
+          "1991.8.24:Pidhaitsi"
+        ],
+        "other_names": [
+          "Podgaytsy",
+          "Podhajce"
+        ]
+      },
+      {
+        "idx": 76864,
+        "key": "Pidhaytsi-Ukraine",
+        "name": "Pidhaytsi",
+        "dist_km": 0.0,
+        "how": "key",
+        "has_cap": false,
+        "hnames": [
+          "1000.1.1:Podhajce",
+          "1944.1.1:Pidhaytsi"
+        ],
+        "other_names": [
+          "Podhajce",
+          "Підгайці",
+          "Pidhaytsi",
+          "pidhaytsi"
+        ]
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Pietersaari-Finland",
+      "raw_name": "Pietersaari",
+      "country": "Finland",
+      "coords": [
+        63.6744,
+        22.69661
+      ],
+      "min_y": 1678,
+      "max_y": 2025,
+      "n_yrs": 127,
+      "peak": 22425,
+      "other_names": [
+        "Jakobstad",
+        "Pedersore",
+        "Pietarsaari",
+        "Pedersöre",
+        "Pedersören kunta"
+      ],
+      "sources": [
+        "populstat",
+        "POLARIS",
+        "ghs_pop"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 14119,
+        "key": null,
+        "name": "Pietersaari",
+        "dist_km": 0.0,
+        "how": "prim_match",
+        "has_cap": false,
+        "hnames": [
+          "1900.1.1:Pietersaari"
+        ],
+        "other_names": []
+      },
+      {
+        "idx": 32132,
+        "key": null,
+        "name": "Pedersören kunta",
+        "dist_km": 9.577,
+        "how": "alias_match",
+        "has_cap": false,
+        "hnames": [
+          "1950.1.1:Pedersören kunta"
+        ],
+        "other_names": []
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Pochayiv-Ukraine",
+      "raw_name": "Pochayiv",
+      "country": "Ukraine",
+      "coords": [
+        50.00412,
+        25.5093
+      ],
+      "min_y": 1450,
+      "max_y": 2026,
+      "n_yrs": 138,
+      "peak": 10300,
+      "other_names": [
+        "Почаїв",
+        "Počajiv",
+        "Pochayiv",
+        "Pochayev"
+      ],
+      "sources": [
+        "POLARIS"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 37663,
+        "key": null,
+        "name": "Pochaiv",
+        "dist_km": 0.461,
+        "how": "alias_match",
+        "has_cap": false,
+        "hnames": [
+          "1240.1.1:Pochayev",
+          "1569.1.1:Poczajów",
+          "1795.1.1:Pochayev",
+          "1921.3.18:Poczajów",
+          "1939.9.17:Pochayev",
+          "1991.8.24:Pochaiv"
+        ],
+        "other_names": [
+          "Pochayev",
+          "Poczajów"
+        ]
+      },
+      {
+        "idx": 76866,
+        "key": "Pochayiv-Ukraine",
+        "name": "Pochayiv",
+        "dist_km": 0.0,
+        "how": "key",
+        "has_cap": false,
+        "hnames": [
+          "1450.1.1:Poczajow",
+          "1944.1.1:Pochayiv"
+        ],
+        "other_names": [
+          "Poczajow",
+          "Почаїв",
+          "Pochayiv",
+          "pochayiv"
+        ]
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Raha`caû-Belarus",
+      "raw_name": "Rahachow",
+      "country": "Belarus",
+      "coords": [
+        53.09255,
+        30.04862
+      ],
+      "min_y": 1400,
+      "max_y": 2026,
+      "n_yrs": 138,
+      "peak": 37000,
+      "other_names": [
+        "Raha`cav",
+        "Rahachaû",
+        "Roga`cev",
+        "Rogachev",
+        "Rahachaeu",
+        "Raha`caû"
+      ],
+      "sources": [
+        "populstat",
+        "POLARIS"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 37760,
+        "key": null,
+        "name": "Rogachev",
+        "dist_km": 1.033,
+        "how": "alias_match",
+        "has_cap": false,
+        "hnames": [
+          "1142.1.1:Rogachev",
+          "1569.1.1:Rohaczów",
+          "1772.1.1:Rogachev"
+        ],
+        "other_names": [
+          "Rahachou",
+          "Rogachev Dnieper-Drut",
+          "Rohaczów"
+        ]
+      },
+      {
+        "idx": 73807,
+        "key": "Raha`caû-Belarus",
+        "name": "Rahachow",
+        "dist_km": 0.0,
+        "how": "key",
+        "has_cap": false,
+        "hnames": [
+          "1400.1.1:Rogachyov",
+          "1991.1.1:Rahachow"
+        ],
+        "other_names": [
+          "Rogachev",
+          "Rahachow",
+          "rahachow",
+          "Rahacaû",
+          "rahacaû"
+        ]
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Shagonar I-Russia",
+      "raw_name": "Shagonar I",
+      "country": "Russia",
+      "coords": [
+        51.53,
+        92.78
+      ],
+      "min_y": 750,
+      "max_y": 840,
+      "n_yrs": 3,
+      "peak": 1691,
+      "other_names": [
+        "Шагонар I",
+        "Шагонар III"
+      ],
+      "sources": [
+        "POLARIS"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 37167,
+        "key": "Shagonar I-Russia",
+        "name": "Shagonar",
+        "dist_km": 0.0,
+        "how": "key",
+        "has_cap": false,
+        "hnames": [
+          "750.1.1:Shagonar"
+        ],
+        "other_names": [
+          "Шагонар I",
+          "Uyghur Shagonar I",
+          "Шагонар",
+          "Shagonar I",
+          "shagonar i"
+        ]
+      },
+      {
+        "idx": 37168,
+        "key": null,
+        "name": "Shagonar III",
+        "dist_km": 2.148,
+        "how": "alias_match",
+        "has_cap": false,
+        "hnames": [
+          "750.1.1:Shagonar III"
+        ],
+        "other_names": [
+          "Шагонар III",
+          "Uyghur Shagonar III"
+        ]
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Simferopol'-Ukraine",
+      "raw_name": "Simferopol",
+      "country": "Ukraine",
+      "coords": [
+        44.9521,
+        34.1024
+      ],
+      "min_y": 1300,
+      "max_y": 2026,
+      "n_yrs": 138,
+      "peak": 374000,
+      "other_names": [
+        "Akme`cet",
+        "Akmechet",
+        "Simferopol",
+        "Simferopol'",
+        "Scythian Neapolis",
+        "Aqmescit"
+      ],
+      "sources": [
+        "populstat",
+        "chandler_modelski",
+        "buringh",
+        "POLARIS",
+        "ghsl"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 8315,
+        "key": null,
+        "name": "Simferopol",
+        "dist_km": 1.778,
+        "how": "prim_match",
+        "has_cap": true,
+        "hnames": [
+          "1300.1.1:Simferopol"
+        ],
+        "other_names": []
+      },
+      {
+        "idx": 35766,
+        "key": null,
+        "name": "Scythian Neapolis",
+        "dist_km": 1.931,
+        "how": "alias_match",
+        "has_cap": true,
+        "hnames": [
+          "-799.1.1:Scythian Neapolis"
+        ],
+        "other_names": [
+          "Neapolis Scythica",
+          "Kermen-Chuk",
+          "Petrovskaya Balka",
+          "Neapolis",
+          "Νεάπολις",
+          "Скіфський Неаполь"
+        ]
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Soborne-Ukraine",
+      "raw_name": "Soborne",
+      "country": "Ukraine",
+      "coords": [
+        46.22514,
+        29.20016
+      ],
+      "min_y": 1816,
+      "max_y": 2026,
+      "n_yrs": 114,
+      "peak": 4926,
+      "other_names": [
+        "Соборне (Березине)",
+        "Soborne (Berezyne)",
+        "Березине",
+        "smt Berezyne"
+      ],
+      "sources": [
+        "POLARIS"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 39638,
+        "key": null,
+        "name": "Berezne",
+        "dist_km": 0.0,
+        "how": "alias_match",
+        "has_cap": false,
+        "hnames": [
+          "1897.1.1:Berezne"
+        ],
+        "other_names": [
+          "Soborne",
+          "Bereźne",
+          "Березне"
+        ]
+      },
+      {
+        "idx": 40492,
+        "key": null,
+        "name": "Soborne",
+        "dist_km": 0.0,
+        "how": "prim_match",
+        "has_cap": false,
+        "hnames": [
+          "1816.1.1:Rotunda",
+          "1818.1.1:Berezyne",
+          "2024.9.26:Soborne"
+        ],
+        "other_names": [
+          "Соборне",
+          "Березине",
+          "Berezyne",
+          "Rotunda"
+        ]
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Solnechnyy_RU_30-Russia",
+      "raw_name": "Solnechnyy",
+      "country": "Russia",
+      "coords": [
+        50.72498,
+        136.63562
+      ],
+      "min_y": 1897,
+      "max_y": 2026,
+      "n_yrs": 102,
+      "peak": 3207,
+      "other_names": [
+        "Горный",
+        "Gornyj",
+        "Солнечный"
+      ],
+      "sources": [
+        "POLARIS"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 41086,
+        "key": null,
+        "name": "Gornyy",
+        "dist_km": 13.776,
+        "how": "alias_match",
+        "has_cap": false,
+        "hnames": [
+          "1958.1.1:Solnechnyy",
+          "1964.1.1:Gornyy"
+        ],
+        "other_names": [
+          "Горный",
+          "Солнечный",
+          "Solnechnyy"
+        ]
+      },
+      {
+        "idx": 41103,
+        "key": null,
+        "name": "Solnechnyy",
+        "dist_km": 0.0,
+        "how": "prim_match",
+        "has_cap": false,
+        "hnames": [
+          "1897.1.1:Solnechnyy"
+        ],
+        "other_names": [
+          "Солнечный"
+        ]
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Sovetskaja Gavan-Russia",
+      "raw_name": "Sovetskaja Gavan'",
+      "country": "Russia",
+      "coords": [
+        48.97215,
+        140.28881
+      ],
+      "min_y": 1853,
+      "max_y": 2026,
+      "n_yrs": 110,
+      "peak": 37414,
+      "other_names": [
+        "Sovetskaya Gavan",
+        "Konstantinovsk",
+        "Sovetskaja Gavan",
+        "Советская Гавань",
+        "Императорская"
+      ],
+      "sources": [
+        "populstat",
+        "POLARIS"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 22922,
+        "key": null,
+        "name": "Sovetskaja Gavan",
+        "dist_km": 1.753,
+        "how": "prim_match",
+        "has_cap": false,
+        "hnames": [
+          "1967.1.1:Sovetskaja Gavan"
+        ],
+        "other_names": []
+      },
+      {
+        "idx": 74749,
+        "key": "Sovetskaja Gavan-Russia",
+        "name": "Konstantinovsk",
+        "dist_km": 0.0,
+        "how": "key",
+        "has_cap": false,
+        "hnames": [
+          "1853.1.1:Konstantinovsk"
+        ],
+        "other_names": [
+          "Sovetskaya Gavan",
+          "Post Konstantinovsky",
+          "Константиновск",
+          "Советская Гавань",
+          "Императорская Гавань",
+          "Sovetskaja Gavan'"
+        ]
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Sverdlovs'k-Ukraine",
+      "raw_name": "Dovzhansk",
+      "country": "Ukraine",
+      "coords": [
+        48.07615,
+        39.64744
+      ],
+      "min_y": 1701,
+      "max_y": 2026,
+      "n_yrs": 132,
+      "peak": 83800,
+      "other_names": [
+        "Sverdlovs'k",
+        "Довжанськ (Свердловськ)",
+        "Dovžanśk (Sverdlovśk)",
+        "Довжанськ"
+      ],
+      "sources": [
+        "populstat",
+        "POLARIS",
+        "ghsl"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 16983,
+        "key": null,
+        "name": "Sverdlovsk",
+        "dist_km": 1.637,
+        "how": "alias_match",
+        "has_cap": false,
+        "hnames": [
+          "1926.1.1:Sverdlovsk"
+        ],
+        "other_names": []
+      },
+      {
+        "idx": 77315,
+        "key": "Sverdlovs'k-Ukraine",
+        "name": "Dovzhansk",
+        "dist_km": 0.0,
+        "how": "key",
+        "has_cap": false,
+        "hnames": [
+          "1701.1.1:Sharapkino",
+          "1938.1.1:Sverdlovsk",
+          "2016.5.12:Dovzhansk"
+        ],
+        "other_names": [
+          "Sharapkino",
+          "Sverdlovsk",
+          "Dovzhansk",
+          "dovzhansk",
+          "Sverdlovs'k",
+          "sverdlovs'k"
+        ]
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Timiryazevskiy-Russia",
+      "raw_name": "Timiryazevskiy",
+      "country": "Russia",
+      "coords": [
+        54.92917,
+        60.7625
+      ],
+      "min_y": 1782,
+      "max_y": 2026,
+      "n_yrs": 120,
+      "peak": 10449,
+      "other_names": [
+        "Тимирязевское",
+        "Timirjazevskoje",
+        "Тимирязевский",
+        "Timirjazevskij"
+      ],
+      "sources": [
+        "POLARIS"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 41805,
+        "key": null,
+        "name": "Timiryazevskoye",
+        "dist_km": 0.515,
+        "how": "alias_match",
+        "has_cap": false,
+        "hnames": [
+          "1930.1.1:Opytnyy",
+          "1976.1.1:Timiryazevskiy",
+          "1992.1.1:Timiryazevskoye"
+        ],
+        "other_names": [
+          "Timiryazevskiy",
+          "Тимирязевское",
+          "Timiryazevskoe",
+          "Тимирязевский",
+          "Opytnyy"
+        ]
+      },
+      {
+        "idx": 41913,
+        "key": null,
+        "name": "Timiryazevskiy",
+        "dist_km": 0.0,
+        "how": "prim_match",
+        "has_cap": false,
+        "hnames": [
+          "1930.1.1:Opytnyy",
+          "1976.1.1:Timiryazevskiy"
+        ],
+        "other_names": [
+          "Тимирязевский",
+          "Opytnyy"
+        ]
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Tomsk-Russia",
+      "raw_name": "Tomsk",
+      "country": "Russia",
+      "coords": [
+        56.4977,
+        84.9744
+      ],
+      "min_y": 1604,
+      "max_y": 2026,
+      "n_yrs": 138,
+      "peak": 576624,
+      "other_names": [
+        "Tomsk Governorate",
+        "Siberian University City",
+        "Томск",
+        "Томский острог",
+        "Tomsk Ostrog",
+        "Tomsk Governorate Seat 1804"
+      ],
+      "sources": [
+        "populstat",
+        "chandler_modelski",
+        "POLARIS",
+        "ghsl"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 36282,
+        "key": null,
+        "name": "Toyanov Gorodok",
+        "dist_km": 4.416,
+        "how": "alias_match",
+        "has_cap": false,
+        "hnames": [
+          "350.1.1:Eushta",
+          "1400.1.1:Toyanov Gorodok"
+        ],
+        "other_names": [
+          "Тоянов Городок",
+          "Toiyanov Gorodok"
+        ]
+      },
+      {
+        "idx": 37048,
+        "key": null,
+        "name": "Eushta",
+        "dist_km": 3.608,
+        "how": "alias_match",
+        "has_cap": false,
+        "hnames": [
+          "900.1.1:Eushta",
+          "1580.1.1:Toiyanov Gorodok",
+          "1646.1.1:Eushta"
+        ],
+        "other_names": [
+          "Тоянов городок",
+          "Toyanov Gorodok",
+          "Эушта",
+          "Toiyanov Gorodok",
+          "Эуштинский городок",
+          "Eushtinskiy gorodok"
+        ]
+      },
+      {
+        "idx": 74911,
+        "key": "Tomsk-Russia",
+        "name": "Tomsk",
+        "dist_km": 0.0,
+        "how": "key",
+        "has_cap": false,
+        "hnames": [
+          "1604.1.1:Tomsk"
+        ],
+        "other_names": [
+          "Томск",
+          "Том",
+          "Tomsk",
+          "tomsk"
+        ]
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Torez-Ukraine",
+      "raw_name": "Chystyakove",
+      "country": "Ukraine",
+      "coords": [
+        48.03876,
+        38.59685
+      ],
+      "min_y": 1600,
+      "max_y": 2026,
+      "n_yrs": 136,
+      "peak": 92897,
+      "other_names": [
+        "Thorez",
+        "`Cistjakovo",
+        "Chistyakovo",
+        "Torez",
+        "Чистякове (Торез)",
+        "Čystjakove (Torez)"
+      ],
+      "sources": [
+        "populstat",
+        "POLARIS"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 17402,
+        "key": null,
+        "name": "Torez",
+        "dist_km": 4.762,
+        "how": "alias_match",
+        "has_cap": false,
+        "hnames": [
+          "1933.1.1:Torez"
+        ],
+        "other_names": []
+      },
+      {
+        "idx": 43516,
+        "key": null,
+        "name": "Chystyakove",
+        "dist_km": 0.0,
+        "how": "prim_match",
+        "has_cap": false,
+        "hnames": [
+          "1867.1.1:Chystyakove",
+          "1964.1.1:Torez",
+          "2016.5.12:Chystyakove"
+        ],
+        "other_names": [
+          "chystyakove",
+          "чистякове",
+          "čystjakove",
+          "chistyakove",
+          "Чистякове",
+          "Čystjakove"
+        ]
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Troitskoye Gorodishche-Russia",
+      "raw_name": "Troitskoye Gorodishche",
+      "country": "Russia",
+      "coords": [
+        55.5319,
+        35.9669
+      ],
+      "min_y": -400,
+      "max_y": 500,
+      "n_yrs": 13,
+      "peak": 165,
+      "other_names": [
+        "Troitskoe Hillfort",
+        "Mozhaisk Iron Age"
+      ],
+      "sources": [
+        "POLARIS"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 36164,
+        "key": null,
+        "name": "Troitskoye",
+        "dist_km": 5.826,
+        "how": "alias_match",
+        "has_cap": false,
+        "hnames": [
+          "-400.1.1:Troitskoye"
+        ],
+        "other_names": [
+          "Троицкое городище",
+          "Троицкое на Москве-реке",
+          "Troitskoye Gorodishche",
+          "Troitskoe Hillfort",
+          "Mozhaisk Iron Age"
+        ]
+      },
+      {
+        "idx": 73528,
+        "key": "Troitskoye Gorodishche-Russia",
+        "name": "Marfin Brod",
+        "dist_km": 0.0,
+        "how": "key",
+        "has_cap": false,
+        "hnames": [
+          "-400.1.1:Marfin Brod"
+        ],
+        "other_names": [
+          "Troitskoye",
+          "Marfin Brod",
+          "Troitskoye Gorodishche",
+          "troitskoye gorodishche"
+        ]
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Udinsky ostrog-Russia",
+      "raw_name": "Udinsky ostrog",
+      "country": "Russia",
+      "coords": [
+        51.82083,
+        107.59611
+      ],
+      "min_y": 800,
+      "max_y": 1300,
+      "n_yrs": 6,
+      "peak": 150,
+      "other_names": [
+        "Udinsky ostrog",
+        "Удинский острог"
+      ],
+      "sources": [
+        "POLARIS"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 35262,
+        "key": null,
+        "name": "Ulan-Ude",
+        "dist_km": 2.099,
+        "how": "alias_match",
+        "has_cap": true,
+        "hnames": [
+          "1666.1.1:Udinskoye",
+          "1678.1.1:Udinsky Ostrog",
+          "1775.1.1:Verkhneudinsk",
+          "1934.7.27:Ulan-Ude"
+        ],
+        "other_names": [
+          "Verkhneudinsk",
+          "Верхнеудинск",
+          "Udinskiy Ostrog",
+          "Улан-Удэ",
+          "Улаан-Үдэ",
+          "Ulan Udè"
+        ]
+      },
+      {
+        "idx": 74467,
+        "key": "Udinsky ostrog-Russia",
+        "name": "Udinsk",
+        "dist_km": 0.0,
+        "how": "key",
+        "has_cap": false,
+        "hnames": [
+          "800.1.1:Udinsk"
+        ],
+        "other_names": [
+          "Udinsky Ostrog",
+          "Ulan-Ude",
+          "Удинский острог",
+          "Улан-Удэ",
+          "Udinsky ostrog",
+          "udinsky ostrog"
+        ]
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Ugol'nyje Kopi-Russia",
+      "raw_name": "Ugol'nyje Kopi",
+      "country": "Russia",
+      "coords": [
+        64.74504,
+        177.68948
+      ],
+      "min_y": 1795,
+      "max_y": 2026,
+      "n_yrs": 118,
+      "peak": 12357,
+      "other_names": [
+        "Угольные Копи"
+      ],
+      "sources": [
+        "POLARIS"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 41946,
+        "key": "Ugol'nyje Kopi-Russia",
+        "name": "Ugolnye Kopi",
+        "dist_km": 0.0,
+        "how": "key",
+        "has_cap": false,
+        "hnames": [
+          "1795.1.1:Ugolnye Kopi"
+        ],
+        "other_names": [
+          "Угольные Копи",
+          "Ugolnye Kopi",
+          "Ugol’nyye Kopi",
+          "Ugol'nyje Kopi",
+          "ugol'nyje kopi"
+        ]
+      },
+      {
+        "idx": 41947,
+        "key": null,
+        "name": "Shakhtyorskiy",
+        "dist_km": 0.0,
+        "how": "exact_0.1km",
+        "has_cap": false,
+        "hnames": [
+          "1897.1.1:Kombinat",
+          "1960.1.1:Shakhtyorskiy"
+        ],
+        "other_names": [
+          "Ugolnyye Kopi",
+          "Шахтёрский",
+          "Ugol’nyye Kopi",
+          "Шахтерский",
+          "Комбинат",
+          "Kombinat"
+        ]
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Uybatskiy chaatas-Russia",
+      "raw_name": "Uybatskiy chaatas",
+      "country": "Russia",
+      "coords": [
+        53.66667,
+        90.41667
+      ],
+      "min_y": 250,
+      "max_y": 1300,
+      "n_yrs": 18,
+      "peak": 1200,
+      "other_names": [
+        "Уйбатский чаатас",
+        "Uybatskiy chaatas",
+        "Уйбатский городок",
+        "Uybatskiy Chaatas",
+        "Uybatskiy zamok i poselenie"
+      ],
+      "sources": [
+        "POLARIS"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 36287,
+        "key": null,
+        "name": "Uybatskiy Chaatas",
+        "dist_km": 6.403,
+        "how": "prim_match",
+        "has_cap": false,
+        "hnames": [
+          "250.1.1:Uybatskiy Chaatas"
+        ],
+        "other_names": [
+          "Уйбатский чаатас",
+          "Уйбатский замок и поселение"
+        ]
+      },
+      {
+        "idx": 37170,
+        "key": null,
+        "name": "Uybatsky Gorodok",
+        "dist_km": 14.359,
+        "how": "alias_match",
+        "has_cap": false,
+        "hnames": [
+          "650.1.1:Uybatsky Gorodok"
+        ],
+        "other_names": [
+          "Уйбатский городок",
+          "Uybatskiy Chaatas"
+        ]
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Verkhnyaya Teberda-Russia",
+      "raw_name": "Verkhnyaya Teberda",
+      "country": "Russia",
+      "coords": [
+        43.54054,
+        41.78237
+      ],
+      "min_y": 1700,
+      "max_y": 2026,
+      "n_yrs": 125,
+      "peak": 9058,
+      "other_names": [
+        "Теберда",
+        "Teberda"
+      ],
+      "sources": [
+        "POLARIS"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 36553,
+        "key": null,
+        "name": "Teberda",
+        "dist_km": 10.818,
+        "how": "alias_match",
+        "has_cap": false,
+        "hnames": [
+          "1700.1.1:Teberda"
+        ],
+        "other_names": [
+          "Теберда",
+          "Теберди",
+          "Бийберди"
+        ]
+      },
+      {
+        "idx": 74738,
+        "key": "Verkhnyaya Teberda-Russia",
+        "name": "Verkhnyaya Teberda",
+        "dist_km": 0.0,
+        "how": "key",
+        "has_cap": false,
+        "hnames": [
+          "1700.1.1:Verkhnyaya Teberda"
+        ],
+        "other_names": [
+          "Верхняя Теберда",
+          "Verkhnyaya Teberda",
+          "verkhnyaya teberda"
+        ]
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Yelabuga-Russia",
+      "raw_name": "Yelabuga",
+      "country": "Russia",
+      "coords": [
+        55.76232,
+        52.04425
+      ],
+      "min_y": 1400,
+      "max_y": 2026,
+      "n_yrs": 139,
+      "peak": 74658,
+      "other_names": [
+        "Елабуга",
+        "Jelabuga",
+        "Alabuga",
+        "Chortovo Gorodishche",
+        "Elabuga"
+      ],
+      "sources": [
+        "POLARIS"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 36219,
+        "key": null,
+        "name": "Chortovo Gorodishche",
+        "dist_km": 1.795,
+        "how": "alias_match",
+        "has_cap": false,
+        "hnames": [
+          "100.1.1:Chortovo Gorodishche"
+        ],
+        "other_names": [
+          "Chortovo",
+          "Чертово городище",
+          "Елабужское городище",
+          "Шайтан каласы"
+        ]
+      },
+      {
+        "idx": 36220,
+        "key": null,
+        "name": "Yelabuga",
+        "dist_km": 0.588,
+        "how": "prim_match",
+        "has_cap": false,
+        "hnames": [
+          "600.1.1:Alabuga",
+          "1552.1.1:Trekhsvyatskoye",
+          "1557.1.1:Tryokhsvyatskoye",
+          "1780.1.1:Yelabuga"
+        ],
+        "other_names": [
+          "Yelabuga Medieval Gorodishche",
+          "Alabuga",
+          "Алабуга",
+          "Елабужское городище",
+          "Елабуга",
+          "Трёхсвятское"
+        ]
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Zapolyarnyy_RU_49-Russia",
+      "raw_name": "Zapolyarnyy",
+      "country": "Russia",
+      "coords": [
+        69.426,
+        30.811
+      ],
+      "min_y": 1897,
+      "max_y": 2026,
+      "n_yrs": 102,
+      "peak": 23564,
+      "other_names": [
+        "Заполярный",
+        "Zapoljarnyj",
+        "Ждановск"
+      ],
+      "sources": [
+        "POLARIS"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 41517,
+        "key": "Zapolyarnyy_RU_49-Russia",
+        "name": "Zapolyarnyy",
+        "dist_km": 0.0,
+        "how": "key",
+        "has_cap": false,
+        "hnames": [
+          "1897.1.1:Puskakyla",
+          "1955.1.1:Zapolyarnyy"
+        ],
+        "other_names": [
+          "Заполярный",
+          "Ждановск",
+          "Zhdanovsk",
+          "Puskakylä",
+          "Zapolyarnyy",
+          "zapolyarnyy"
+        ]
+      },
+      {
+        "idx": 42581,
+        "key": null,
+        "name": "Zapolyarny",
+        "dist_km": 0.374,
+        "how": "alias_match",
+        "has_cap": false,
+        "hnames": [
+          "1897.1.1:Zapolyarny"
+        ],
+        "other_names": [
+          "Заполярный",
+          "Zapolyarnyy"
+        ]
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Zelenogorsk_RU_66-Russia",
+      "raw_name": "Zelenogorsk",
+      "country": "Russia",
+      "coords": [
+        60.19968,
+        29.70183
+      ],
+      "min_y": 1550,
+      "max_y": 2026,
+      "n_yrs": 136,
+      "peak": 16206,
+      "other_names": [
+        "Зеленогорск",
+        "Terijoki"
+      ],
+      "sources": [
+        "POLARIS"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 35264,
+        "key": null,
+        "name": "Terijoki",
+        "dist_km": 0.107,
+        "how": "alias_match",
+        "has_cap": true,
+        "hnames": [
+          "1939.11.30:Terijoki"
+        ],
+        "other_names": []
+      },
+      {
+        "idx": 72814,
+        "key": "Zelenogorsk_RU_66-Russia",
+        "name": "Zelenogorsk",
+        "dist_km": 0.0,
+        "how": "key",
+        "has_cap": false,
+        "hnames": [
+          "1550.1.1:Terijoki",
+          "1948.1.1:Zelenogorsk"
+        ],
+        "other_names": [
+          "Териоки",
+          "Зеленогорск",
+          "Terijoki",
+          "Zelenogorsk",
+          "zelenogorsk",
+          "Zelenogorsk_RU_66"
+        ]
+      }
+    ]
+  },
+  {
+    "shard": {
+      "key": "Zinkiv-Ukraine",
+      "raw_name": "Zinkiv",
+      "country": "Ukraine",
+      "coords": [
+        50.20987,
+        34.35952
+      ],
+      "min_y": 1404,
+      "max_y": 2026,
+      "n_yrs": 139,
+      "peak": 11604,
+      "other_names": [
+        "Zinkiv",
+        "Zen'kov",
+        "Зіньків",
+        "Zińkiv",
+        "Зинькив",
+        "Зеньков"
+      ],
+      "sources": [
+        "chandler_modelski",
+        "buringh",
+        "POLARIS"
+      ]
+    },
+    "meta_entries": [
+      {
+        "idx": 8720,
+        "key": null,
+        "name": "Zen'kov",
+        "dist_km": 3.404,
+        "how": "alias_match",
+        "has_cap": false,
+        "hnames": [
+          "1600.1.1:Zen'kov"
+        ],
+        "other_names": []
+      },
+      {
+        "idx": 44762,
+        "key": null,
+        "name": "Zinkiv",
+        "dist_km": 0.0,
+        "how": "prim_match",
+        "has_cap": false,
+        "hnames": [
+          "1604.1.1:Zinkiv",
+          "1796.1.1:Zenkov",
+          "1991.8.24:Zinkiv"
+        ],
+        "other_names": [
+          "zinkiv",
+          "зіньків",
+          "zińkiv",
+          "зинькив",
+          "зеньков",
+          "Зіньків"
+        ]
+      }
+    ]
+  }
+]

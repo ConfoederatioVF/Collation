@@ -1,0 +1,1565 @@
+[
+  {
+    "cluster_id": "C0537",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Istorychnyy tsentr mista Hlukhova KhII-XVIII st. Late Mediaeval Settlement-Ukraine",
+        "reason": "Heritage registry cultural layer entry co-located inside the historic city of Hlukhiv"
+      }
+    ],
+    "clean_names": {
+      "Gluhov-Ukraine": "Hlukhiv"
+    }
+  },
+  {
+    "cluster_id": "C0539",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Kacherychi-Belarus",
+        "target_key": "Kirovsk-Belarus",
+        "reason": "Continuous historical settlement sequence; Kirovsk was established directly on the historical village and estate of Kacherychy (Kocherichi)"
+      }
+    ],
+    "clean_names": {
+      "Kirovsk-Belarus": "Kirovsk"
+    }
+  },
+  {
+    "cluster_id": "C0540",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Kairshak I-Russia",
+        "new_name": "Kairshak I",
+        "reason": "Distinct Mesolithic settlement site 26.6 km from Kairshak III"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Kairshak III Mesolithic Settlement-Russia",
+        "new_name": "Kairshak III",
+        "reason": "Distinct Mesolithic settlement site 26.6 km from Kairshak I"
+      }
+    ],
+    "clean_names": {
+      "Kairshak I-Russia": "Kairshak I",
+      "Kairshak III Mesolithic Settlement-Russia": "Kairshak III"
+    }
+  },
+  {
+    "cluster_id": "C0542",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Hatka Migration Period Settlement-Ukraine",
+        "new_name": "Hatka",
+        "reason": "Distinct Migration Period settlement near Lhivka with distinct toponym"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Kaliky Rus Settlement-Ukraine",
+        "new_name": "Kaliky",
+        "reason": "Distinct Kievan Rus settlement near Lhivka with distinct toponym"
+      }
+    ],
+    "clean_names": {
+      "Hatka Migration Period Settlement-Ukraine": "Hatka",
+      "Kaliky Rus Settlement-Ukraine": "Kaliky"
+    }
+  },
+  {
+    "cluster_id": "C0544",
+    "actions": [
+      {
+        "op": "KEEP_HOMONYM",
+        "key": "Kamen Bronze Age Settlement-Belarus",
+        "reason": "Distinct Bronze Age settlement in Luninets district 25.8 km from Kamen in Pinsk district"
+      },
+      {
+        "op": "KEEP_HOMONYM",
+        "key": "Kamen-Belarus",
+        "reason": "Distinct prehistoric settlement in Pinsk district 25.8 km away"
+      }
+    ],
+    "clean_names": {
+      "Kamen Bronze Age Settlement-Belarus": "Kamen (Luninets)",
+      "Kamen-Belarus": "Kamen (Pinsk)"
+    }
+  },
+  {
+    "cluster_id": "C0545",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Kamenets bashnya-donzhon Mediaeval Hillfort-Belarus",
+        "target_key": "Kamenets-Belarus",
+        "reason": "Kamenets Tower (donjon / Belaya Vezha) is the founding defensive citadel and historic core of Kamenets"
+      }
+    ],
+    "clean_names": {
+      "Kamenets-Belarus": "Kamenets"
+    }
+  },
+  {
+    "cluster_id": "C0547",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Kamianets Iron Age Site-Ukraine",
+        "target_key": "Kam'janec'-Podil's'kyj-Ukraine",
+        "reason": "Overlapping multi-period predecessor settlement on the Smotrych loop merged into the primary continuous city"
+      }
+    ],
+    "clean_names": {
+      "Kam'janec'-Podil's'kyj-Ukraine": "Kamianets-Podilskyi"
+    }
+  },
+  {
+    "cluster_id": "C0548",
+    "actions": [
+      {
+        "op": "KEEP_HOMONYM",
+        "key": "Kamyane-Ukraine",
+        "reason": "Modern settlement in Zaporizhia Oblast 306 km from the Sumy Oblast site"
+      },
+      {
+        "op": "KEEP_HOMONYM",
+        "key": "Kamyane-Ukraine_2",
+        "reason": "Medieval Romny-Rus hillfort complex on Psyol river in Sumy Oblast 306 km away"
+      }
+    ],
+    "clean_names": {
+      "Kamyane-Ukraine": "Kamyane",
+      "Kamyane-Ukraine_2": "Kamyane (Sumy)"
+    }
+  },
+  {
+    "cluster_id": "C0549",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Hoty 914 Chernyakhov Settlement-Ukraine",
+        "new_name": "Hoty 914",
+        "reason": "Distinct Chernyakhov archaeological site 17.2 km from Kapulovka polis"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Kapulovka Classical Polis-Ukraine",
+        "new_name": "Kapulivka",
+        "reason": "Distinct Classical-era settlement site on the Dnieper at Kapulivka"
+      }
+    ],
+    "clean_names": {
+      "Hoty 914 Chernyakhov Settlement-Ukraine": "Hoty 914",
+      "Kapulovka Classical Polis-Ukraine": "Kapulivka"
+    }
+  },
+  {
+    "cluster_id": "C0551",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Karaidel'skij-Russia",
+        "new_name": "Karaidelsky",
+        "reason": "Distinct settlement 13.2 km from district centre Karaidel wrongly conflated in metadata"
+      }
+    ],
+    "clean_names": {
+      "Karaidel'skij-Russia": "Karaidelsky",
+      "Karaidel-Russia": "Karaidel"
+    }
+  },
+  {
+    "cluster_id": "C0552",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Chernyi Klobuk-Ukraine",
+        "target_key": "Karapyshi-Ukraine",
+        "reason": "Medieval nomadic Black Klobuks settlement at Karapyshi represents the same historical site"
+      }
+    ],
+    "clean_names": {
+      "Karapyshi-Ukraine": "Karapyshi"
+    }
+  },
+  {
+    "cluster_id": "C0556",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Kayukovo 1-Russia",
+        "new_name": "Kayukovo 1",
+        "reason": "Distinct fortified Neolithic site 1 in the Kayukovo complex"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Kayukovo 2-Russia",
+        "new_name": "Kayukovo 2",
+        "reason": "Distinct fortified Neolithic site 2 in the Kayukovo complex"
+      }
+    ],
+    "clean_names": {
+      "Kayukovo 1-Russia": "Kayukovo 1",
+      "Kayukovo 2-Russia": "Kayukovo 2"
+    }
+  },
+  {
+    "cluster_id": "C0558",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Kazanskaya-Don-Russia",
+        "target_key": "Kazanskaya_RU_61-Russia",
+        "reason": "Duplicate settlement series for the Don Cossack stanitsa of Kazanskaya (Rostov Oblast)"
+      }
+    ],
+    "clean_names": {
+      "Kazanskaya_RU_61-Russia": "Kazanskaya"
+    }
+  },
+  {
+    "cluster_id": "C0559",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Kazanskaya Iron Age Site-Russia",
+        "target_key": "Kazanskoye-Maeotian-Russia",
+        "reason": "Overlapping Maeotian Iron Age hillfort site complex on the Kuban river at stanitsa Kazanskaya"
+      }
+    ],
+    "clean_names": {
+      "Kazanskoye-Maeotian-Russia": "Kazanskoye (Maeotian)"
+    }
+  },
+  {
+    "cluster_id": "C0561",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Kemi-Oba Kurgan Sanctuary Settlement-Ukraine",
+        "target_key": "Kemi-Oba-Ukraine",
+        "reason": "Sanctuary settlement and type-site of the Bronze Age Kemi-Oba culture near Bilohirsk"
+      }
+    ],
+    "clean_names": {
+      "Kemi-Oba-Ukraine": "Kemi-Oba"
+    }
+  },
+  {
+    "cluster_id": "C0562",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Kharkov Fortress-Ukraine",
+        "reason": "Heritage fortress entry co-located inside Kharkiv with fabricated 14th-century dates"
+      }
+    ],
+    "clean_names": {
+      "Charkiv-Ukraine": "Kharkiv"
+    }
+  },
+  {
+    "cluster_id": "C0563",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Khimoi Historical and Architectural Complex-Russia",
+        "target_key": "Khimoy-Russia",
+        "reason": "Medieval tower complex and fortified settlement of the Chechen aul Khimoy"
+      }
+    ],
+    "clean_names": {
+      "Khimoy-Russia": "Khimoy"
+    }
+  },
+  {
+    "cluster_id": "C0567",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Kholky site of ancient settlement-Russia",
+        "target_key": "Kholki-Russia",
+        "reason": "Duplicate archaeological settlement entries for the Saltov-Mayaki / Severian hillfort complex at Kholki"
+      }
+    ],
+    "clean_names": {
+      "Kholki-Russia": "Kholki"
+    }
+  },
+  {
+    "cluster_id": "C0569",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Khorol Headwaters Romny Rus Hillfort-Ukraine",
+        "new_name": "Khorol Headwaters",
+        "reason": "Pre-hiatus medieval Romny-Rus hillfort with distinct toponym at the Khorol headwaters separated by >200y from modern town"
+      }
+    ],
+    "clean_names": {
+      "Khorol Headwaters Romny Rus Hillfort-Ukraine": "Khorol Headwaters",
+      "Lypova Dolyna-Ukraine": "Lypova Dolyna"
+    }
+  },
+  {
+    "cluster_id": "C0572",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Khosta Fortress-Russia",
+        "target_key": "Khosta-Russia",
+        "reason": "Medieval defensive fortress and citadel of Khosta continuous with the settlement"
+      }
+    ],
+    "clean_names": {
+      "Khosta-Russia": "Khosta"
+    }
+  },
+  {
+    "cluster_id": "C0573",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Khotin Bronze Age Settlement-Ukraine",
+        "new_name": "Khotin (Bronze Age)",
+        "reason": "Distinct pre-hiatus Bronze Age settlement phase at Khotin"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Khotin Iron Age Hillfort-Ukraine",
+        "new_name": "Khotin (Iron Age)",
+        "reason": "Distinct pre-hiatus Iron Age hillfort phase at Khotin"
+      }
+    ],
+    "clean_names": {
+      "Khotin Bronze Age Settlement-Ukraine": "Khotin (Bronze Age)",
+      "Khotin Iron Age Hillfort-Ukraine": "Khotin (Iron Age)"
+    }
+  },
+  {
+    "cluster_id": "C0576",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Khram Svyatoy Troitsy Mediaeval Hillfort-Belarus",
+        "reason": "Church building (Holy Trinity Church) scraped as a mediaeval hillfort inside Kryvichy"
+      }
+    ],
+    "clean_names": {
+      "Kryvichy-Belarus": "Kryvichy"
+    }
+  },
+  {
+    "cluster_id": "C0582",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Khyzhky Iron Age Hillfort-Ukraine",
+        "new_name": "Khyzhky 1",
+        "reason": "Numbered Scythian/Iron Age hillfort 1 in the Khyzhky complex"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Khyzhky-4 Iron Age Hillfort-Ukraine",
+        "new_name": "Khyzhky 4",
+        "reason": "Numbered Scythian/Iron Age hillfort 4 in the Khyzhky complex"
+      }
+    ],
+    "clean_names": {
+      "Khyzhky Iron Age Hillfort-Ukraine": "Khyzhky 1",
+      "Khyzhky-4 Iron Age Hillfort-Ukraine": "Khyzhky 4"
+    }
+  },
+  {
+    "cluster_id": "C0584",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Kiev Iron Age Site-Ukraine",
+        "target_key": "Kyjiv-Ukraine",
+        "reason": "Archaeological predecessor settlement complex on the hills of Kyiv merged into the canonical capital city"
+      }
+    ],
+    "clean_names": {
+      "Kyjiv-Ukraine": "Kyiv"
+    }
+  },
+  {
+    "cluster_id": "C0585",
+    "actions": [
+      {
+        "op": "KEEP_HOMONYM",
+        "key": "Kil'mez'-Russia",
+        "reason": "Genuinely distinct settlement (Kilmez in Udmurtia) 18.5 km from Kilmez in Kirov Oblast"
+      },
+      {
+        "op": "KEEP_HOMONYM",
+        "key": "Kil'mez'_RU_33-Russia",
+        "reason": "Genuinely distinct settlement (Kilmez in Kirov Oblast) 18.5 km from Kilmez in Udmurtia"
+      }
+    ],
+    "clean_names": {
+      "Kil'mez'-Russia": "Kilmez (Udmurtia)",
+      "Kil'mez'_RU_33-Russia": "Kilmez (Kirov)"
+    }
+  },
+  {
+    "cluster_id": "C0586",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Gusinyy 1 (poselenie)-Russia",
+        "new_name": "Gusiny 1",
+        "reason": "Distinct prehistoric coastal settlement on Kola Peninsula near Zarubikha"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Kildinskiy proliv 1 (masterskaya)-Russia",
+        "new_name": "Kildinskiy Proliv 1",
+        "reason": "Distinct prehistoric workshop site at Kildin Strait"
+      }
+    ],
+    "clean_names": {
+      "Gusinyy 1 (poselenie)-Russia": "Gusiny 1",
+      "Kildinskiy proliv 1 (masterskaya)-Russia": "Kildinskiy Proliv 1"
+    }
+  },
+  {
+    "cluster_id": "C0587",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Kilia Fortress-Ukraine",
+        "target_key": "Kiliya-Ukraine",
+        "reason": "Danubian fortress of Kiliya represents the historical citadel of the town of Kiliya"
+      }
+    ],
+    "clean_names": {
+      "Kiliya-Ukraine": "Kiliya"
+    }
+  },
+  {
+    "cluster_id": "C0589",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Kingiseppskiy-Russia",
+        "new_name": "Kingiseppskiy",
+        "reason": "Distinct settlement adjacent to Kingisepp wrongly renamed to Kingisepp in metadata"
+      }
+    ],
+    "clean_names": {
+      "Kingisepp-Russia": "Kingisepp",
+      "Kingiseppskiy-Russia": "Kingiseppskiy"
+    }
+  },
+  {
+    "cluster_id": "C0592",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Kizil-Koba Settlement-Ukraine",
+        "target_key": "Kizil-Koba-Ukraine",
+        "reason": "Duplicate archaeological settlement entries for the Kizil-Koba type-site in Crimea"
+      }
+    ],
+    "clean_names": {
+      "Kizil-Koba-Ukraine": "Kizil-Koba"
+    }
+  },
+  {
+    "cluster_id": "C0594",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Kletsk kostel Troitskiy farnyy /sokhr. chast steny/ Late Mediaeval Hillfort-Belarus",
+        "reason": "Church architectural ruin (Holy Trinity parish church wall) scraped as a mediaeval hillfort inside Kletsk"
+      }
+    ],
+    "clean_names": {
+      "Kletsk-Belarus": "Kletsk"
+    }
+  },
+  {
+    "cluster_id": "C0597",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Barsuki kamennyy krest Mediaeval Hillfort-Belarus",
+        "reason": "Stone cross monument scraped as a mediaeval hillfort"
+      }
+    ],
+    "clean_names": {
+      "Koidanovo-Belarus": "Koydanava"
+    }
+  },
+  {
+    "cluster_id": "C0598",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Kok-Pash-Russia_2",
+        "target_key": "Kok-Pash-Russia",
+        "reason": "Displaced twin duplicate entry for Kok-Pash archaeological complex in the Chulyshman valley"
+      }
+    ],
+    "clean_names": {
+      "Kok-Pash-Russia": "Kok-Pash"
+    }
+  },
+  {
+    "cluster_id": "C0600",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Kolchugino Scythian-Ukraine",
+        "new_name": "Kolchugino",
+        "reason": "Distinct Late Scythian settlement 7.3 km from Pozharskoye/Bulganak gorodishche wrongly assigned Bulganak in metadata"
+      }
+    ],
+    "clean_names": {
+      "Bulganak-Ukraine": "Bulganak",
+      "Kolchugino Scythian-Ukraine": "Kolchugino"
+    }
+  },
+  {
+    "cluster_id": "C0603",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Kolskiy ostrog-Russia",
+        "target_key": "Kola-Russia",
+        "reason": "Historical ostrog citadel of Kola represents the continuous core of the town of Kola"
+      }
+    ],
+    "clean_names": {
+      "Kola-Russia": "Kola"
+    }
+  },
+  {
+    "cluster_id": "C0605",
+    "actions": [
+      {
+        "op": "KEEP_HOMONYM",
+        "key": "Kondinskoye-Russia",
+        "reason": "Modern urban-type settlement on Konda river 180 km from historical Kondinsky Gorodok"
+      },
+      {
+        "op": "KEEP_HOMONYM",
+        "key": "Kondinskoye-Russia_2",
+        "reason": "Historical Kondinsky Gorodok / monastery site on Konda river 180 km away"
+      }
+    ],
+    "clean_names": {
+      "Kondinskoye-Russia": "Kondinskoye",
+      "Kondinskoye-Russia_2": "Kondinskoye (Gorodok)"
+    }
+  },
+  {
+    "cluster_id": "C0609",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Kapyl Rus Hillfort-Belarus",
+        "target_key": "Kopyl-Belarus",
+        "reason": "Kievan Rus hillfort of Kopyl (Kapyl zamchyshcha) is the direct historical core of the town of Kopyl"
+      }
+    ],
+    "clean_names": {
+      "Kopyl-Belarus": "Kopyl"
+    }
+  },
+  {
+    "cluster_id": "C0615",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Davnoruske horodyshche Hillfort-Ukraine_2",
+        "target_key": "Korsun-Shevchenkivskyi-Ukraine",
+        "reason": "Old Rus defensive hillfort on the Ros river is the historic citadel of Korsun-Shevchenkivskyi"
+      }
+    ],
+    "clean_names": {
+      "Korsun-Shevchenkivskyi-Ukraine": "Korsun-Shevchenkivskyi"
+    }
+  },
+  {
+    "cluster_id": "C0616",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Korytsa Late Mediaeval Hillfort-Belarus",
+        "new_name": "Korytsa",
+        "reason": "Distinct medieval hillfort at the village of Korytsa 2.3 km south of Dyatlovo"
+      }
+    ],
+    "clean_names": {
+      "Dyatlovo-Belarus": "Dyatlovo",
+      "Korytsa Late Mediaeval Hillfort-Belarus": "Korytsa"
+    }
+  },
+  {
+    "cluster_id": "C0617",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Kosava Castle-Belarus",
+        "reason": "Puslowski Palace at Kosava (built 1838) with fabricated 9th-century medieval dates"
+      }
+    ],
+    "clean_names": {
+      "Kosava-Belarus": "Kosava"
+    }
+  },
+  {
+    "cluster_id": "C0618",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Kosenovka Eneolithic Hillfort-Ukraine",
+        "target_key": "Kosenivka-Ukraine",
+        "reason": "Duplicate Trypillia Eneolithic mega-settlement entries for Kosenivka in Cherkasy Oblast"
+      }
+    ],
+    "clean_names": {
+      "Kosenivka-Ukraine": "Kosenivka"
+    }
+  },
+  {
+    "cluster_id": "C0621",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Kostyukovichi-Belarus_2",
+        "target_key": "Kostyukovichi-Belarus",
+        "reason": "Medieval Radimichi predecessor settlement on Zhadunka river continuous with Kostyukovichi"
+      }
+    ],
+    "clean_names": {
+      "Kostyukovichi-Belarus": "Kostyukovichi"
+    }
+  },
+  {
+    "cluster_id": "C0626",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Kozova castle-Ukraine",
+        "reason": "16th-century castle building with fabricated 9th-century dates co-located inside Kozova"
+      }
+    ],
+    "clean_names": {
+      "Kozova-Ukraine": "Kozova"
+    }
+  },
+  {
+    "cluster_id": "C0627",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Krapivenskaya krepost-Russia",
+        "target_key": "Krapivna-Russia",
+        "reason": "Medieval defensive fortress and citadel of Krapivna continuous with the historic town"
+      }
+    ],
+    "clean_names": {
+      "Krapivna-Russia": "Krapivna"
+    }
+  },
+  {
+    "cluster_id": "C0630",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Krasnostavka Neolithic Settlement-Ukraine",
+        "new_name": "Krasnostavka",
+        "reason": "Distinct prehistoric settlement near Krasnostavka wrongly assigned Dibrivka in metadata"
+      }
+    ],
+    "clean_names": {
+      "Dibrivka Eneolithic Hillfort-Ukraine": "Dibrivka",
+      "Krasnostavka Neolithic Settlement-Ukraine": "Krasnostavka"
+    }
+  },
+  {
+    "cluster_id": "C0631",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Krasnoyarskoye Gorodishche-Russia",
+        "target_key": "Krasny Yar-Russia",
+        "reason": "Golden Horde city of Shahr-i Jadid / Krasnoyarskoye Gorodishche is the direct predecessor of Krasny Yar at the identical coordinates"
+      }
+    ],
+    "clean_names": {
+      "Krasny Yar-Russia": "Krasny Yar"
+    }
+  },
+  {
+    "cluster_id": "C0632",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Krasnyi Gorodets-Russia",
+        "target_key": "Krasnogorodsk-Russia",
+        "reason": "Pskov frontier fortress Krasny Gorodets is the historical name and founding core of Krasnogorodsk"
+      }
+    ],
+    "clean_names": {
+      "Krasnogorodsk-Russia": "Krasnogorodsk"
+    }
+  },
+  {
+    "cluster_id": "C0633",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Krasnoyarskaya Fortress-Russia",
+        "target_key": "Krasnyy Yar_RU_65-Russia",
+        "reason": "18th-century Trans-Kama defence line fortress Krasnoyarskaya is the historical core of Krasny Yar (Samara Oblast)"
+      }
+    ],
+    "clean_names": {
+      "Krasnyy Yar_RU_65-Russia": "Krasny Yar"
+    }
+  },
+  {
+    "cluster_id": "C0635",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Krichev Castle-Belarus",
+        "target_key": "Krichev-Belarus",
+        "reason": "Medieval castle on the Sozh river is the founding citadel of Krichev (Krechut)"
+      }
+    ],
+    "clean_names": {
+      "Krichev-Belarus": "Krichev"
+    }
+  },
+  {
+    "cluster_id": "C0636",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Kromskoy kreml-Russia",
+        "target_key": "Kromy-Russia",
+        "reason": "Chronicle kremlin of Kromy on the Kroma river represents the continuous core of Kromy"
+      }
+    ],
+    "clean_names": {
+      "Kromy-Russia": "Kromy"
+    }
+  },
+  {
+    "cluster_id": "C0637",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Kronstadt Fortress-Russia",
+        "target_key": "Kron`'stadt-Russia",
+        "reason": "Naval fortress Kronslot / Kronstadt represents the defensive complex of the town of Kronstadt"
+      }
+    ],
+    "clean_names": {
+      "Kron`'stadt-Russia": "Kronstadt"
+    }
+  },
+  {
+    "cluster_id": "C0638",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Krugloye-Belarus_2",
+        "target_key": "Krugloye-Belarus",
+        "reason": "Upper Drut Rus hillfort is the historical medieval predecessor of Krugloye"
+      }
+    ],
+    "clean_names": {
+      "Krugloye-Belarus": "Krugloye"
+    }
+  },
+  {
+    "cluster_id": "C0640",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Kulbachyna Rus Hillfort-Belarus",
+        "target_key": "Kulbachyna-Belarus",
+        "reason": "Rus hillfort at Kulbachyno represents the same medieval archaeological complex on the Kotra river"
+      }
+    ],
+    "clean_names": {
+      "Kulbachyna-Belarus": "Kulbachyna"
+    }
+  },
+  {
+    "cluster_id": "C0641",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Kulchuk Settlement-Ukraine",
+        "target_key": "Kulchuk-Ukraine",
+        "reason": "Duplicate settlement series for the Late Scythian / Greek fortified site of Kulchuk on the Tarkhankut Peninsula"
+      }
+    ],
+    "clean_names": {
+      "Kulchuk-Ukraine": "Kulchuk"
+    }
+  },
+  {
+    "cluster_id": "C0642",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Kulturnyy sloy g. Maloyaroslavets (Maloyaroslavets)-Russia",
+        "reason": "Heritage registry cultural layer entry co-located inside the town of Maloyaroslavets"
+      }
+    ],
+    "clean_names": {
+      "Maloyaroslavets-Russia": "Maloyaroslavets"
+    }
+  },
+  {
+    "cluster_id": "C0643",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Kulturnyy sloy istoricheskogo tsentra goroda Kazani XI - XVIII vekov-Russia",
+        "reason": "Heritage registry cultural layer entry co-located inside Kazan"
+      }
+    ],
+    "clean_names": {
+      "Kazan'-Russia": "Kazan"
+    }
+  },
+  {
+    "cluster_id": "C0644",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Kulturnyy sloy na territorii Makarevo-Unzhenskogo monastyrya (Makarev)-Russia",
+        "reason": "Heritage registry cultural layer of a 15th-century monastery with fabricated early medieval dates co-located at Makaryev"
+      }
+    ],
+    "clean_names": {
+      "Makar'jev-Russia": "Makaryev"
+    }
+  },
+  {
+    "cluster_id": "C0645",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Kulturnyy sloy sela Pestyaki. Uchastok 1-Russia",
+        "reason": "Heritage registry cultural layer parcel inside the settlement of Pestyaki"
+      }
+    ],
+    "clean_names": {
+      "Pestyaki-Russia": "Pestyaki"
+    }
+  },
+  {
+    "cluster_id": "C0647",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Kurgannaya gruppa Pavlovskaya Sloboda 2 (19 kurganov) (Pavlovskaya Sloboda)-Russia",
+        "reason": "Heritage registry burial mound group (19 kurgans) inside Pavlovskaya Sloboda"
+      }
+    ],
+    "clean_names": {
+      "Pavlovskaya Sloboda-Russia": "Pavlovskaya Sloboda"
+    }
+  },
+  {
+    "cluster_id": "C0652",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Kulturnyy sloy Kizicheskoy slobody goroda Kazani XVII - XVIII vekov-Russia",
+        "reason": "Heritage registry cultural layer scrape inside Kazan with fabricated medieval dates"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Kvartal No 19-Russia",
+        "new_name": "Novo-Savinovo",
+        "reason": "Clean historical toponym for the Novo-Savinovo quarter in Kazan"
+      }
+    ],
+    "clean_names": {
+      "Kvartal No 19-Russia": "Novo-Savinovo"
+    }
+  },
+  {
+    "cluster_id": "C0654",
+    "actions": [
+      {
+        "op": "KEEP_HOMONYM",
+        "key": "Kyselivka-Ukraine",
+        "reason": "Modern settlement in Kherson Oblast 535 km from the Chernihiv Oblast site"
+      },
+      {
+        "op": "KEEP_HOMONYM",
+        "key": "Kyselivka-Ukraine_2",
+        "reason": "Medieval Severian Rus hillfort complex on the Desna terrace in Chernihiv Oblast 535 km away"
+      }
+    ],
+    "clean_names": {
+      "Kyselivka-Ukraine": "Kyselivka",
+      "Kyselivka-Ukraine_2": "Kyselivka (Chernihiv)"
+    }
+  },
+  {
+    "cluster_id": "C0656",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Ladozhskaya Iron Age Site-Russia",
+        "target_key": "Ladozhskoye-Maeotian-Russia",
+        "reason": "Duplicate archaeological records for the Maeotian Iron Age hillfort site at stanitsa Ladozhskaya on the Kuban"
+      }
+    ],
+    "clean_names": {
+      "Ladozhskoye-Maeotian-Russia": "Ladozhskoye (Maeotian)"
+    }
+  },
+  {
+    "cluster_id": "C0657",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Lagoyskae garadzishcha-Belarus",
+        "target_key": "Logoysk-Belarus",
+        "reason": "Early medieval chronicle hillfort of Lahoysk (Logozhsk) is the founding core of Logoysk"
+      }
+    ],
+    "clean_names": {
+      "Logoysk-Belarus": "Lahoysk"
+    }
+  },
+  {
+    "cluster_id": "C0658",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Laishevskoe selishche II-Russia",
+        "target_key": "Laishevo-Russia",
+        "reason": "Volga Bulgar settlement predecessor of Laishevo (historical Chakma / Laish) continuous with the modern town"
+      }
+    ],
+    "clean_names": {
+      "Laishevo-Russia": "Laishevo"
+    }
+  },
+  {
+    "cluster_id": "C0660",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Dvor-Toronkovichi kamennye kresty Mediaeval Hillfort-Belarus",
+        "reason": "Stone crosses monument scraped as a mediaeval hillfort near Lepel"
+      }
+    ],
+    "clean_names": {
+      "Lepel'-Belarus": "Lepel"
+    }
+  },
+  {
+    "cluster_id": "C0661",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Lesosibirsk_RU_91-Russia",
+        "target_key": "Lesosibirsk-Russia",
+        "reason": "Displaced coordinate duplicate entry for the Yenisei city of Lesosibirsk (Novomaklakovo)"
+      }
+    ],
+    "clean_names": {
+      "Lesosibirsk-Russia": "Lesosibirsk"
+    }
+  },
+  {
+    "cluster_id": "C0662",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Letychiv Fortress-Ukraine",
+        "target_key": "Letychiv-Ukraine",
+        "reason": "Historic castle of Letychiv on the Volk river continuous with the town of Letychiv"
+      }
+    ],
+    "clean_names": {
+      "Letychiv-Ukraine": "Letychiv"
+    }
+  },
+  {
+    "cluster_id": "C0663",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Dostoprimechatelnoe mesto Lipetskoe gorodishche i ul. Sapyornaya i R. Lyuksemburg (Lipetsk)-Russia",
+        "reason": "Heritage registry landmark and street parcel co-located inside Lipetsk"
+      }
+    ],
+    "clean_names": {
+      "Lipeck-Russia": "Lipetsk"
+    }
+  },
+  {
+    "cluster_id": "C0664",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Karatayevo Fortress-Russia",
+        "target_key": "Liventsovka-Russia",
+        "reason": "Karatayevo fortress is part of the Bronze Age Liventsovka fortified settlement complex on the Dead Donets"
+      }
+    ],
+    "clean_names": {
+      "Liventsovka-Russia": "Liventsovka"
+    }
+  },
+  {
+    "cluster_id": "C0669",
+    "actions": [
+      {
+        "op": "KEEP_HOMONYM",
+        "key": "Lugovoye-Russia",
+        "reason": "Modern settlement in Voronezh Oblast 837 km from the Ingushetia settlement"
+      },
+      {
+        "op": "KEEP_HOMONYM",
+        "key": "Lugovoye-Russia_2",
+        "reason": "Historical settlement of Lugovoye (Muzichi) in Ingushetia 837 km away"
+      }
+    ],
+    "clean_names": {
+      "Lugovoye-Russia": "Lugovoye",
+      "Lugovoye-Russia_2": "Lugovoye (Ingushetia)"
+    }
+  },
+  {
+    "cluster_id": "C0671",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Lukh Fortress-Russia",
+        "target_key": "Lukh-Russia",
+        "reason": "Earthen ramparts and chronicle fortress of Lukh continuous with the town of Lukh"
+      }
+    ],
+    "clean_names": {
+      "Lukh-Russia": "Lukh"
+    }
+  },
+  {
+    "cluster_id": "C0672",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Antychne poselennya Lupareve III Classical Polis-Ukraine",
+        "target_key": "Luparevo Chora-Ukraine",
+        "reason": "Olbian chora settlement complex at Luparevo on the Bug Estuary represents the same archaeological site"
+      }
+    ],
+    "clean_names": {
+      "Luparevo Chora-Ukraine": "Luparevo"
+    }
+  },
+  {
+    "cluster_id": "C0673",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Lipsk Mediaeval Hillfort-Belarus",
+        "new_name": "Lipsk",
+        "reason": "Distinct medieval hillfort settlement at the village of Lipsk 2.4 km south of Lyakhovichi"
+      }
+    ],
+    "clean_names": {
+      "Lipsk Mediaeval Hillfort-Belarus": "Lipsk",
+      "Lyakhovichi-Belarus": "Lyakhovichi"
+    }
+  },
+  {
+    "cluster_id": "C0675",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Lytvynovychi Bronze Age Settlement-Ukraine",
+        "new_name": "Lytvynovychi 1",
+        "reason": "Numbered Bronze Age settlement 1 in the Lytvynovychi complex"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Lytvynovychi-2 Bronze Age Settlement-Ukraine",
+        "new_name": "Lytvynovychi 2",
+        "reason": "Numbered Bronze Age settlement 2 in the Lytvynovychi complex"
+      }
+    ],
+    "clean_names": {
+      "Lytvynovychi Bronze Age Settlement-Ukraine": "Lytvynovychi 1",
+      "Lytvynovychi-2 Bronze Age Settlement-Ukraine": "Lytvynovychi 2"
+    }
+  },
+  {
+    "cluster_id": "C0680",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Magil Mediaeval Hillfort-Belarus",
+        "target_key": "Mahilëu-Belarus",
+        "reason": "Early medieval hillfort of Mogilev (Mahil / Horki) is the legendary and archaeological founding site of Mogilev"
+      }
+    ],
+    "clean_names": {
+      "Mahilëu-Belarus": "Mogilev"
+    }
+  },
+  {
+    "cluster_id": "C0681",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Makazhoy Historical and Architectural Complex-Russia",
+        "target_key": "Makazhoy-Russia",
+        "reason": "Medieval tower complex and settlement of the Chechen aul Makazhoy near Lake Kezenoyam"
+      }
+    ],
+    "clean_names": {
+      "Makazhoy-Russia": "Makazhoy"
+    }
+  },
+  {
+    "cluster_id": "C0685",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Malta_LV_24-Latvia",
+        "target_key": "Malta-Latvia",
+        "reason": "Displaced duplicate twin entry for the settlement of Malta (historical Borovaja) in Latgale, Latvia"
+      }
+    ],
+    "clean_names": {
+      "Malta-Latvia": "Malta"
+    }
+  },
+  {
+    "cluster_id": "C0687",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Malyshki-Belarus",
+        "target_key": "Malyshkauskae garadzishcha-Belarus",
+        "reason": "Contiguous developmental phases of the Brushed Pottery and early medieval hillfort at Malyshki"
+      }
+    ],
+    "clean_names": {
+      "Malyshkauskae garadzishcha-Belarus": "Malyshki"
+    }
+  },
+  {
+    "cluster_id": "C0688",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Mayatskoye Gorodishche-Russia",
+        "target_key": "Mayatskoye-Russia",
+        "reason": "Duplicate archaeological series for the Saltov-Mayaki / Khazar fortress type-site of Mayatskoye at Divnogorye"
+      }
+    ],
+    "clean_names": {
+      "Mayatskoye-Russia": "Mayatskoye"
+    }
+  },
+  {
+    "cluster_id": "C0692",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Garadzishcha Rus Hillfort-Belarus",
+        "target_key": "Menka-Belarus",
+        "reason": "Rus hillfort at Gorodishche on the Menka river is the proto-urban core of early Minsk (Mensk on the Menka)"
+      }
+    ],
+    "clean_names": {
+      "Menka-Belarus": "Menka"
+    }
+  },
+  {
+    "cluster_id": "C0693",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Mergen 3-Russia",
+        "new_name": "Mergen 3",
+        "reason": "Distinct Neolithic fortified settlement site 3 on Lake Mergen"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Mergen 6-Russia",
+        "new_name": "Mergen 6",
+        "reason": "Distinct Neolithic fortified settlement site 6 on Lake Mergen"
+      }
+    ],
+    "clean_names": {
+      "Mergen 3-Russia": "Mergen 3",
+      "Mergen 6-Russia": "Mergen 6"
+    }
+  },
+  {
+    "cluster_id": "C0694",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Meshchovsk Medieval Gorodishche-Russia",
+        "target_key": "Meshchovsk-Russia",
+        "reason": "Chronicle Vyatichi / Rus hillfort of Mezetsk is the continuous historical core of Meshchovsk"
+      }
+    ],
+    "clean_names": {
+      "Meshchovsk-Russia": "Meshchovsk"
+    }
+  },
+  {
+    "cluster_id": "C0695",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Messer-Russia",
+        "target_key": "Ust-Zalikha-Russia",
+        "reason": "Duplicate settlement series for the Volga German colony Ust-Zolikha (Messer)"
+      }
+    ],
+    "clean_names": {
+      "Ust-Zalikha-Russia": "Ust-Zolikha"
+    }
+  },
+  {
+    "cluster_id": "C0696",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Meyendorff Castle-Russia",
+        "reason": "19th-century private romantic chateau (built 1885) with fabricated 9th-century dates co-located at Barvikha"
+      }
+    ],
+    "clean_names": {
+      "Barvikha-Russia": "Barvikha"
+    }
+  },
+  {
+    "cluster_id": "C0697",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Hoty 933 Chernyakhov Settlement-Ukraine",
+        "new_name": "Hoty 933",
+        "reason": "Distinct numbered Chernyakhov culture archaeological settlement near Hrushivka / Migeya rapids"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Migeya Bug Rapids-Ukraine",
+        "new_name": "Migeya",
+        "reason": "Clean historical toponym for the multi-period Southern Bug rapids settlement site"
+      }
+    ],
+    "clean_names": {
+      "Hoty 933 Chernyakhov Settlement-Ukraine": "Hoty 933",
+      "Migeya Bug Rapids-Ukraine": "Migeya"
+    }
+  },
+  {
+    "cluster_id": "C0698",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Mikhailov Medieval Gorodishche-Russia",
+        "target_key": "Mikhaylov-Russia",
+        "reason": "Medieval hillfort on the Pronya river is the chronicle citadel and continuous core of Mikhaylov"
+      }
+    ],
+    "clean_names": {
+      "Mikhaylov-Russia": "Mikhaylov"
+    }
+  },
+  {
+    "cluster_id": "C0699",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Mikhaylovskiy Zavod-Russia",
+        "target_key": "Mikhaylovsk_RU_71-Russia",
+        "reason": "Displaced twin duplicate entry for the ironworks town of Mikhaylovsk (historical Mikhaylovsky Zavod in Sverdlovsk Oblast)"
+      }
+    ],
+    "clean_names": {
+      "Mikhaylovsk_RU_71-Russia": "Mikhaylovsk"
+    }
+  },
+  {
+    "cluster_id": "C0700",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Mish Castle-Belarus",
+        "target_key": "Baranovichi-Mysh-Belarus",
+        "reason": "Medieval castle and hillfort of Mysh (Staraya Mysh) on the Myshanka river represents the same historical site"
+      }
+    ],
+    "clean_names": {
+      "Baranovichi-Mysh-Belarus": "Staraya Mysh"
+    }
+  },
+  {
+    "cluster_id": "C0704",
+    "actions": [
+      {
+        "op": "KEEP_HOMONYM",
+        "key": "Mokraya Balka-Russia",
+        "reason": "Bronze Age settlement in Rostov Oblast 445 km from North Caucasus site"
+      },
+      {
+        "op": "KEEP_HOMONYM",
+        "key": "Mokraya Balka-Russia_2",
+        "reason": "Early medieval Alanic fortress near Kislovodsk in North Caucasus 445 km away"
+      }
+    ],
+    "clean_names": {
+      "Mokraya Balka-Russia": "Mokraya Balka (Don)",
+      "Mokraya Balka-Russia_2": "Mokraya Balka (Caucasus)"
+    }
+  },
+  {
+    "cluster_id": "C0705",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Monastyryska Castle-Ukraine",
+        "target_key": "Monastyryska-Ukraine",
+        "reason": "Historic castle of Monastyryska is the defensive core continuous with the town of Monastyryska"
+      }
+    ],
+    "clean_names": {
+      "Monastyryska-Ukraine": "Monastyryska"
+    }
+  },
+  {
+    "cluster_id": "C0706",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Moshchiny Gorodishche-Russia",
+        "target_key": "Moshchiny-Russia",
+        "reason": "Duplicate archaeological series for the Moshchiny culture type-site on the Popolta river"
+      }
+    ],
+    "clean_names": {
+      "Moshchiny-Russia": "Moshchiny"
+    }
+  },
+  {
+    "cluster_id": "C0709",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Murom Oksky Gorodishche-Russia",
+        "target_key": "Murom-Russia",
+        "reason": "Pre-urban Volga-Finnic / Muromian hillfort on the Oka (Chaadaevo) is the continuous predecessor of Murom"
+      }
+    ],
+    "clean_names": {
+      "Murom-Russia": "Murom"
+    }
+  },
+  {
+    "cluster_id": "C0710",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Murovanka tserkov Rozhdestva Bogoroditsy Late Mediaeval Hillfort-Belarus",
+        "target_key": "Khram Rozhdestva Presvyatoy Bogoroditsy Mediaeval Hillfort-Belarus",
+        "reason": "Displaced twin duplicate records for the fortified church settlement of Murovanka"
+      }
+    ],
+    "clean_names": {
+      "Khram Rozhdestva Presvyatoy Bogoroditsy Mediaeval Hillfort-Belarus": "Murovanka"
+    }
+  },
+  {
+    "cluster_id": "C0711",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Miadziel Castle-Belarus",
+        "target_key": "Myadzyel-Belarus",
+        "reason": "Medieval castle on Lake Myastro is the historical citadel continuous with the town of Myadzyel"
+      }
+    ],
+    "clean_names": {
+      "Myadzyel-Belarus": "Myadzyel"
+    }
+  },
+  {
+    "cluster_id": "C0714",
+    "actions": [
+      {
+        "op": "KEEP_HOMONYM",
+        "key": "Nadezhda-Russia",
+        "reason": "Modern settlement in Stavropol Krai 1170 km from Oryol Oblast site"
+      },
+      {
+        "op": "KEEP_HOMONYM",
+        "key": "Nadezhda-Russia_2",
+        "reason": "Early medieval settlement site near Zvyaginki in Oryol Oblast 1170 km away"
+      }
+    ],
+    "clean_names": {
+      "Nadezhda-Russia": "Nadezhda",
+      "Nadezhda-Russia_2": "Nadezhda (Oryol)"
+    }
+  },
+  {
+    "cluster_id": "C0721",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Naukan Medieval Gorodishche-Russia",
+        "target_key": "Naukan-Russia",
+        "reason": "Continuous chronological phases of the historic Yupik settlement of Naukan (Nuvuqaq) at Cape Dezhnev"
+      }
+    ],
+    "clean_names": {
+      "Naukan-Russia": "Naukan"
+    }
+  },
+  {
+    "cluster_id": "C0724",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Nekropol goroda Gavrilov-Posad (Gavrilov Posad)-Russia",
+        "reason": "Town necropolis / cemetery scrape inside Gavrilov Posad with fabricated 9th-century medieval dates"
+      }
+    ],
+    "clean_names": {
+      "Gavrilov Posad-Russia": "Gavrilov Posad"
+    }
+  },
+  {
+    "cluster_id": "C0725",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Nevyansk-Russia",
+        "target_key": "Nev'jansk-Russia",
+        "reason": "Duplicate settlement series for the Demidov ironworks town of Nevyansk"
+      }
+    ],
+    "clean_names": {
+      "Nev'jansk-Russia": "Nevyansk"
+    }
+  },
+  {
+    "cluster_id": "C0730",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Garadzishcha peryyadu rannyaga zhaleznaga veku 30-Belarus",
+        "target_key": "Nisimkovichi-Belarus",
+        "reason": "Early Iron Age and early medieval Radimichi hillfort complex on the Pokot / Sozh river at Nisimkovichi"
+      }
+    ],
+    "clean_names": {
+      "Nisimkovichi-Belarus": "Nisimkovichi"
+    }
+  },
+  {
+    "cluster_id": "C0731",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Niva 14 (poselenie)-Russia",
+        "new_name": "Niva 14",
+        "reason": "Pre-hiatus archaeological settlement on Niva river separated by >200y from Kandalaksha with distinct toponym"
+      }
+    ],
+    "clean_names": {
+      "Kandalak`'sa-Russia": "Kandalaksha",
+      "Niva 14 (poselenie)-Russia": "Niva 14"
+    }
+  },
+  {
+    "cluster_id": "C0733",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Nizhne-Chirskaya-Russia",
+        "target_key": "Nizhniy Chir-Russia",
+        "reason": "Duplicate settlement series for the Don Cossack stanitsa of Nizhne-Chirskaya (Nizhny Chir)"
+      }
+    ],
+    "clean_names": {
+      "Nizhniy Chir-Russia": "Nizhny Chir"
+    }
+  },
+  {
+    "cluster_id": "C0734",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Nizhny Novgorod prison-Russia",
+        "reason": "19th-century prison castle building (Nizhegorodsky ostrog) co-located inside Nizhny Novgorod"
+      }
+    ],
+    "clean_names": {
+      "Ni`'znij Novgorod-Russia": "Nizhny Novgorod"
+    }
+  },
+  {
+    "cluster_id": "C0742",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "Novosilskoe gorodishche-Russia",
+        "target_key": "Novosil'-Russia",
+        "reason": "Chronicle citadel of the Principality of Novosil on the Neruch river continuous with the town of Novosil"
+      }
+    ],
+    "clean_names": {
+      "Novosil'-Russia": "Novosil"
+    }
+  },
+  {
+    "cluster_id": "C0745",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Obesta-Kleven Gorodishche-Ukraine",
+        "new_name": "Obesta",
+        "reason": "Pre-hiatus Romny-Rus hillfort at confluence of Obesta and Kleven rivers separated by >200y from modern town"
+      }
+    ],
+    "clean_names": {
+      "Obesta-Kleven Gorodishche-Ukraine": "Obesta",
+      "Shalyhyne-Ukraine": "Shalyhyne"
+    }
+  },
+  {
+    "cluster_id": "C0746",
+    "actions": [
+      {
+        "op": "MERGE",
+        "source_key": "10-12 vv. Mediaeval Hillfort-Belarus",
+        "target_key": "Oboltsy-Belarus",
+        "reason": "10th-12th century medieval chronicle hillfort of Oboltsy (Aboltsy) is the historical core of Oboltsy"
+      }
+    ],
+    "clean_names": {
+      "Oboltsy-Belarus": "Oboltsy"
+    }
+  }
+]

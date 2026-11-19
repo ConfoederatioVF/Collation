@@ -1,0 +1,2213 @@
+[
+  {
+    "cluster_id": "C0873",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Shagonar I-Russia",
+        "new_name": "Shagonar I",
+        "reason": "8th-century Uyghur fortified settlement distinct from modern town"
+      }
+    ],
+    "clean_names": {
+      "Shagonar I-Russia": "Shagonar I",
+      "Shagonar-Russia": "Shagonar"
+    }
+  },
+  {
+    "cluster_id": "C0874",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Shakhtarsk Neolithic Settlement-Ukraine",
+        "new_name": "Shakhtarsk (Neolithic)",
+        "reason": "Prehistoric Neolithic settlement distinct from modern city"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "`Sachtars'k-Ukraine",
+        "new_name": "Shakhtarsk",
+        "reason": "Clean modern display name for primary city"
+      }
+    ],
+    "clean_names": {
+      "Shakhtarsk Neolithic Settlement-Ukraine": "Shakhtarsk (Neolithic)",
+      "`Sachtars'k-Ukraine": "Shakhtarsk"
+    }
+  },
+  {
+    "cluster_id": "C0875",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Shalazhi Bronze Age Site-Russia",
+        "new_name": "Shalazhi (Bronze Age)",
+        "reason": "Bronze Age settlement distinct from modern town"
+      }
+    ],
+    "clean_names": {
+      "Shalazhi Bronze Age Site-Russia": "Shalazhi (Bronze Age)",
+      "Shalazhi-Russia": "Shalazhi"
+    }
+  },
+  {
+    "cluster_id": "C0878",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Sharpivka Iron Age Site-Ukraine",
+        "new_name": "Sharpivka (Iron Age)",
+        "reason": "Scythian Iron Age settlement"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Sharpivka-Ukraine",
+        "new_name": "Sharpivka (Chernyakhov)",
+        "reason": "Chernyakhov migration-period settlement"
+      }
+    ],
+    "clean_names": {
+      "Sharpivka Iron Age Site-Ukraine": "Sharpivka (Iron Age)",
+      "Sharpivka-Ukraine": "Sharpivka (Chernyakhov)"
+    }
+  },
+  {
+    "cluster_id": "C0879",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Dolina 1 Eneolithic Hillfort-Ukraine",
+        "new_name": "Dolina 1",
+        "reason": "Trypillia Eneolithic hillfort"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Shcherbanivka-Ukraine",
+        "new_name": "Shcherbanivka",
+        "reason": "Medieval settlement distinct from prehistoric hillfort"
+      }
+    ],
+    "clean_names": {
+      "Dolina 1 Eneolithic Hillfort-Ukraine": "Dolina 1",
+      "Shcherbanivka-Ukraine": "Shcherbanivka"
+    }
+  },
+  {
+    "cluster_id": "C0881",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Shepsi Bronze Age Site-Russia",
+        "new_name": "Shepsi (Bronze Age)",
+        "reason": "Bronze Age dolmen and settlement site distinct from modern town"
+      }
+    ],
+    "clean_names": {
+      "Shepsi Bronze Age Site-Russia": "Shepsi (Bronze Age)",
+      "Shepsi-Russia": "Shepsi"
+    }
+  },
+  {
+    "cluster_id": "C0883",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Shilovo-Russia_2",
+        "new_name": "Shilovo (Early Medieval)",
+        "reason": "Ryazan-Oka culture settlement distinct from modern town"
+      }
+    ],
+    "clean_names": {
+      "Shilovo-Russia_2": "Shilovo (Early Medieval)",
+      "Shilovo-Russia": "Shilovo"
+    }
+  },
+  {
+    "cluster_id": "C0884",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Shinaz Medieval Gorodishche-Russia",
+        "new_name": "Shinaz (Medieval)",
+        "reason": "Medieval Dagestani fortified site distinct from modern village"
+      }
+    ],
+    "clean_names": {
+      "Shinaz Medieval Gorodishche-Russia": "Shinaz (Medieval)",
+      "Shinaz-Russia": "Shinaz"
+    }
+  },
+  {
+    "cluster_id": "C0886",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Shypyntsi Bronze Age Site-Ukraine",
+        "new_name": "Shypyntsi (Eneolithic)",
+        "reason": "Cucuteni-Trypillia settlement site"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Shypyntsi-Ukraine",
+        "new_name": "Shypyntsi (Rus)",
+        "reason": "Medieval Rus settlement"
+      }
+    ],
+    "clean_names": {
+      "Shypyntsi Bronze Age Site-Ukraine": "Shypyntsi (Eneolithic)",
+      "Shypyntsi-Ukraine": "Shypyntsi (Rus)"
+    }
+  },
+  {
+    "cluster_id": "C0888",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Skadovsk Karkinit-Ukraine",
+        "new_name": "Karkinit",
+        "reason": "Classical coastal chora settlement distinct from modern port"
+      }
+    ],
+    "clean_names": {
+      "Skadovsk Karkinit-Ukraine": "Karkinit",
+      "Skadovsk-Ukraine": "Skadovsk"
+    }
+  },
+  {
+    "cluster_id": "C0891",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Selishcha Kavaltsy-4 Mediaeval Hillfort-Belarus",
+        "new_name": "Kavaltsy-4",
+        "reason": "Medieval hillfort site"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Slavichy Stone Age Settlement Site 1023-Belarus",
+        "new_name": "Slavichi (Stone Age)",
+        "reason": "Stone age campsite"
+      }
+    ],
+    "clean_names": {
+      "Selishcha Kavaltsy-4 Mediaeval Hillfort-Belarus": "Kavaltsy-4",
+      "Slavichy Stone Age Settlement Site 1023-Belarus": "Slavichi (Stone Age)"
+    }
+  },
+  {
+    "cluster_id": "C0892",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Sleptsovskaya Medieval Gorodishche-Russia",
+        "new_name": "Sunzha (Medieval)",
+        "reason": "Early medieval Alanic fortified settlement distinct from modern city"
+      }
+    ],
+    "clean_names": {
+      "Sleptsovskaya Medieval Gorodishche-Russia": "Sunzha (Medieval)",
+      "Sunzha-Russia": "Sunzha"
+    }
+  },
+  {
+    "cluster_id": "C0894",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Smotrych-Ukraine_2",
+        "new_name": "Smotrych (Rus)",
+        "reason": "Medieval chronicle Rus town distinct from modern settlement"
+      }
+    ],
+    "clean_names": {
+      "Smotrych-Ukraine_2": "Smotrych (Rus)",
+      "Smotrych-Ukraine": "Smotrych"
+    }
+  },
+  {
+    "cluster_id": "C0895",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Klochkiv-1 Rus Settlement-Ukraine",
+        "new_name": "Klochkiv (Rus)",
+        "reason": "Medieval Rus settlement"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Snovsk Iron Age Site 2-Ukraine",
+        "new_name": "Snovsk (Iron Age)",
+        "reason": "Iron Age settlement"
+      }
+    ],
+    "clean_names": {
+      "Klochkiv-1 Rus Settlement-Ukraine": "Klochkiv (Rus)",
+      "Snovsk Iron Age Site 2-Ukraine": "Snovsk (Iron Age)"
+    }
+  },
+  {
+    "cluster_id": "C0897",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Sobych Bronze Age Settlement-Ukraine",
+        "new_name": "Sobych (Bronze Age)",
+        "reason": "Bronze Age settlement distinct from modern village"
+      }
+    ],
+    "clean_names": {
+      "Sobych Bronze Age Settlement-Ukraine": "Sobych (Bronze Age)",
+      "Sobych-Ukraine": "Sobych"
+    }
+  },
+  {
+    "cluster_id": "C0901",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Sokol-on-Dniester Iron Age Site-Ukraine",
+        "new_name": "Sokil (Iron Age)",
+        "reason": "Chernyakhov iron age settlement"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Sokol-on-Dniester-Ukraine",
+        "new_name": "Sokil (Rus)",
+        "reason": "Medieval Rus settlement on Dniester"
+      }
+    ],
+    "clean_names": {
+      "Sokol-on-Dniester Iron Age Site-Ukraine": "Sokil (Iron Age)",
+      "Sokol-on-Dniester-Ukraine": "Sokil (Rus)"
+    }
+  },
+  {
+    "cluster_id": "C0905",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Sosnytsia Bronze Age Type-Site-Ukraine",
+        "new_name": "Sosnytsia (Bronze Age)",
+        "reason": "Sosnytsia culture Bronze Age type-site"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Sosnytsia Iron Age Site 2-Ukraine",
+        "new_name": "Sosnytsia (Iron Age)",
+        "reason": "Iron Age settlement"
+      }
+    ],
+    "clean_names": {
+      "Sosnytsia Bronze Age Type-Site-Ukraine": "Sosnytsia (Bronze Age)",
+      "Sosnytsia Iron Age Site 2-Ukraine": "Sosnytsia (Iron Age)"
+    }
+  },
+  {
+    "cluster_id": "C0906",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Sosnytsia Bronze Age Site 2-Ukraine",
+        "new_name": "Sosnytsia II (Bronze Age)",
+        "reason": "Bronze Age settlement site 2"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Sosnytsia Iron Age Site 3-Ukraine",
+        "new_name": "Sosnytsia III (Iron Age)",
+        "reason": "Iron Age settlement site 3"
+      }
+    ],
+    "clean_names": {
+      "Sosnytsia Bronze Age Site 2-Ukraine": "Sosnytsia II (Bronze Age)",
+      "Sosnytsia Iron Age Site 3-Ukraine": "Sosnytsia III (Iron Age)"
+    }
+  },
+  {
+    "cluster_id": "C0908",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Sozh Terrace Bronze Age Site-Belarus",
+        "new_name": "Vetka (Bronze Age)",
+        "reason": "Bronze Age river terrace settlement distinct from modern town"
+      }
+    ],
+    "clean_names": {
+      "Sozh Terrace Bronze Age Site-Belarus": "Vetka (Bronze Age)",
+      "Vetka-Belarus": "Vetka"
+    }
+  },
+  {
+    "cluster_id": "C0909",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Spiridonovka IV Bronze Age Settlement-Russia",
+        "new_name": "Spiridonovka IV",
+        "reason": "Bronze Age settlement distinct from modern village"
+      }
+    ],
+    "clean_names": {
+      "Spiridonovka IV Bronze Age Settlement-Russia": "Spiridonovka IV",
+      "Spiridonovka-Russia": "Spiridonovka"
+    }
+  },
+  {
+    "cluster_id": "C0910",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Stanislav Classical Polis-Ukraine",
+        "new_name": "Stanislav (Ancient)",
+        "reason": "Classical coastal settlement distinct from modern village"
+      }
+    ],
+    "clean_names": {
+      "Stanislav Classical Polis-Ukraine": "Stanislav (Ancient)",
+      "Stanislav-Ukraine": "Stanislav"
+    }
+  },
+  {
+    "cluster_id": "C0912",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Staraya Poltavka-Bronze-Russia",
+        "new_name": "Staraya Poltavka (Bronze Age)",
+        "reason": "Bronze Age settlement distinct from modern village"
+      }
+    ],
+    "clean_names": {
+      "Staraya Poltavka-Bronze-Russia": "Staraya Poltavka (Bronze Age)",
+      "Staraya Poltavka-Russia": "Staraya Poltavka"
+    }
+  },
+  {
+    "cluster_id": "C0913",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Starobin-Belarus_2",
+        "new_name": "Starobin (Rus)",
+        "reason": "Medieval Rus settlement distinct from modern town"
+      }
+    ],
+    "clean_names": {
+      "Starobin-Belarus_2": "Starobin (Rus)",
+      "Starobin-Belarus": "Starobin"
+    }
+  },
+  {
+    "cluster_id": "C0917",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Staryye Atagi Medieval Gorodishche-Russia",
+        "new_name": "Staryye Atagi (Medieval)",
+        "reason": "Medieval fortified settlement distinct from modern town"
+      }
+    ],
+    "clean_names": {
+      "Staryye Atagi Medieval Gorodishche-Russia": "Staryye Atagi (Medieval)",
+      "Staryye Atagi-Russia": "Staryye Atagi"
+    }
+  },
+  {
+    "cluster_id": "C0920",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Garadzishcha peryyadu rannyaga syarednyavechcha Site 106-Belarus",
+        "new_name": "Zagoriny (Early Medieval)",
+        "reason": "Early medieval hillfort"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Stayanka peryyadu mezalitu nealitu bronzavaga veku-Belarus",
+        "new_name": "Zagoriny (Bronze Age)",
+        "reason": "Stone and Bronze Age settlement"
+      }
+    ],
+    "clean_names": {
+      "Garadzishcha peryyadu rannyaga syarednyavechcha Site 106-Belarus": "Zagoriny (Early Medieval)",
+      "Stayanka peryyadu mezalitu nealitu bronzavaga veku-Belarus": "Zagoriny (Bronze Age)"
+    }
+  },
+  {
+    "cluster_id": "C0927",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Stetskivka Iron Age Hillfort-Ukraine",
+        "new_name": "Stetskivka (Iron Age)",
+        "reason": "Scythian Iron Age hillfort distinct from modern village"
+      }
+    ],
+    "clean_names": {
+      "Stetskivka Iron Age Hillfort-Ukraine": "Stetskivka (Iron Age)",
+      "Stetskivka-Ukraine": "Stetskivka"
+    }
+  },
+  {
+    "cluster_id": "C0928",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Stina Bronze Age Site-Ukraine",
+        "new_name": "Stina (Bronze Age)",
+        "reason": "Bronze Age settlement"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Stina-Ukraine",
+        "new_name": "Stina (Iron Age)",
+        "reason": "Iron Age settlement"
+      }
+    ],
+    "clean_names": {
+      "Stina Bronze Age Site-Ukraine": "Stina (Bronze Age)",
+      "Stina-Ukraine": "Stina (Iron Age)"
+    }
+  },
+  {
+    "cluster_id": "C0930",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Stoyanka 1 u s. Borovoe-Russia",
+        "new_name": "Borovoe 1",
+        "reason": "Medieval campsite at Borovoe distinct from Somovo"
+      }
+    ],
+    "clean_names": {
+      "Stoyanka 1 u s. Borovoe-Russia": "Borovoe 1",
+      "Somovo-Russia": "Somovo"
+    }
+  },
+  {
+    "cluster_id": "C0932",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Stoyanka Tavatuy-VI (Kalinovo)-Russia",
+        "new_name": "Tavatuy-VI",
+        "reason": "Medieval campsite on Lake Tavatuy distinct from modern town"
+      }
+    ],
+    "clean_names": {
+      "Stoyanka Tavatuy-VI (Kalinovo)-Russia": "Tavatuy-VI",
+      "Kalinovo-Russia": "Kalinovo"
+    }
+  },
+  {
+    "cluster_id": "C0934",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Strilcha Skelya 1 Stone Age Hillfort-Ukraine",
+        "new_name": "Strilcha Skelya (Mesolithic)",
+        "reason": "Mesolithic stone age site"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Strilcha Skelya Neolithic Settlement-Ukraine",
+        "new_name": "Strilcha Skelya (Neolithic)",
+        "reason": "Neolithic settlement"
+      }
+    ],
+    "clean_names": {
+      "Strilcha Skelya 1 Stone Age Hillfort-Ukraine": "Strilcha Skelya (Mesolithic)",
+      "Strilcha Skelya Neolithic Settlement-Ukraine": "Strilcha Skelya (Neolithic)"
+    }
+  },
+  {
+    "cluster_id": "C0936",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Subotiv-Ukraine_2",
+        "new_name": "Subotiv (Chernyakhov)",
+        "reason": "Chernyakhov migration-period settlement distinct from Cossack town"
+      }
+    ],
+    "clean_names": {
+      "Subotiv-Ukraine_2": "Subotiv (Chernyakhov)",
+      "Subotiv-Ukraine": "Subotiv"
+    }
+  },
+  {
+    "cluster_id": "C0937",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Sudislavskiy kreml-Russia",
+        "reason": "Fabricated medieval date (600..1240) on 1536 wooden kremlin"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Sudislavl'-Russia",
+        "new_name": "Sudislavl",
+        "reason": "Clean display name for historic town"
+      }
+    ],
+    "clean_names": {
+      "Sudislavl'-Russia": "Sudislavl"
+    }
+  },
+  {
+    "cluster_id": "C0938",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Sudzha-Russia_2",
+        "new_name": "Sudzha (Medieval)",
+        "reason": "Early medieval Severian hillfort distinct from modern city"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Sudza-Russia",
+        "new_name": "Sudzha",
+        "reason": "Clean modern display name for primary city"
+      }
+    ],
+    "clean_names": {
+      "Sudzha-Russia_2": "Sudzha (Medieval)",
+      "Sudza-Russia": "Sudzha"
+    }
+  },
+  {
+    "cluster_id": "C0939",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Sumka Valley Severian Settlement-Ukraine",
+        "new_name": "Sumka (Severian)",
+        "reason": "Severian settlement in Sumka valley distinct from modern town"
+      }
+    ],
+    "clean_names": {
+      "Sumka Valley Severian Settlement-Ukraine": "Sumka (Severian)",
+      "Stepanivka-Ukraine": "Stepanivka"
+    }
+  },
+  {
+    "cluster_id": "C0940",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Surazh-on-Dvina-Belarus",
+        "new_name": "Surazh (Rus)",
+        "reason": "Medieval Rus fortified settlement on Dvina distinct from modern town"
+      }
+    ],
+    "clean_names": {
+      "Surazh-on-Dvina-Belarus": "Surazh (Rus)",
+      "Surazh-Belarus": "Surazh"
+    }
+  },
+  {
+    "cluster_id": "C0941",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Surkhakhi Medieval Gorodishche-Russia",
+        "new_name": "Surkhakhi (Medieval)",
+        "reason": "Early medieval Alanic fortified settlement distinct from modern town"
+      }
+    ],
+    "clean_names": {
+      "Surkhakhi Medieval Gorodishche-Russia": "Surkhakhi (Medieval)",
+      "Surkhakhi-Russia": "Surkhakhi"
+    }
+  },
+  {
+    "cluster_id": "C0942",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Susuya Iron Age Site-Russia",
+        "new_name": "Susuya (Iron Age)",
+        "reason": "Iron Age settlement on Sakhalin"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Susuya-Russia",
+        "new_name": "Susuya (Okhotsk)",
+        "reason": "Okhotsk culture shell-midden settlement on Sakhalin"
+      }
+    ],
+    "clean_names": {
+      "Susuya Iron Age Site-Russia": "Susuya (Iron Age)",
+      "Susuya-Russia": "Susuya (Okhotsk)"
+    }
+  },
+  {
+    "cluster_id": "C0951",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Konstantinovka-Tashlik 2 Eneolithic Hillfort-Ukraine",
+        "new_name": "Tashlyk (Eneolithic)",
+        "reason": "Trypillia Eneolithic hillfort"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Tashlyk Bronze-Ukraine",
+        "new_name": "Tashlyk (Bronze Age)",
+        "reason": "Sabatinovka Bronze Age settlement"
+      }
+    ],
+    "clean_names": {
+      "Konstantinovka-Tashlik 2 Eneolithic Hillfort-Ukraine": "Tashlyk (Eneolithic)",
+      "Tashlyk Bronze-Ukraine": "Tashlyk (Bronze Age)"
+    }
+  },
+  {
+    "cluster_id": "C0955",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Ternopil Castle-Ukraine",
+        "reason": "Fabricated prehistoric date (-3000..-2500) on 1540 castle"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Ternopil'-Ukraine",
+        "new_name": "Ternopil",
+        "reason": "Clean modern display name for regional centre"
+      }
+    ],
+    "clean_names": {
+      "Ternopil'-Ukraine": "Ternopil"
+    }
+  },
+  {
+    "cluster_id": "C0956",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Ternovka Bronze Age Settlement-Russia",
+        "new_name": "Ternovka (Bronze Age)",
+        "reason": "Bronze Age settlement distinct from modern village"
+      }
+    ],
+    "clean_names": {
+      "Ternovka Bronze Age Settlement-Russia": "Ternovka (Bronze Age)",
+      "Ternovka-Russia": "Ternovka"
+    }
+  },
+  {
+    "cluster_id": "C0958",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Tindi Bronze Age Site-Russia",
+        "new_name": "Tindi (Bronze Age)",
+        "reason": "Bronze Age settlement in Dagestan distinct from modern village"
+      }
+    ],
+    "clean_names": {
+      "Tindi Bronze Age Site-Russia": "Tindi (Bronze Age)",
+      "Tindi-Russia": "Tindi"
+    }
+  },
+  {
+    "cluster_id": "C0959",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Tinit Medieval Gorodishche-Russia",
+        "new_name": "Tinit (Medieval)",
+        "reason": "Medieval fortified mountain settlement distinct from modern village"
+      }
+    ],
+    "clean_names": {
+      "Tinit Medieval Gorodishche-Russia": "Tinit (Medieval)",
+      "Tinit-Russia": "Tinit"
+    }
+  },
+  {
+    "cluster_id": "C0960",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Tiraspol Fortress-Moldova",
+        "reason": "Fabricated medieval date (800..1300) on 1792 modern fortress"
+      }
+    ],
+    "clean_names": {
+      "Tiraspol-Moldova": "Tiraspol"
+    }
+  },
+  {
+    "cluster_id": "C0964",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Torpakh-Kala Bronze Age Site-Russia",
+        "new_name": "Torpakh-Kala (Bronze Age)",
+        "reason": "Early Bronze Age settlement"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Torpakh-Kala-Russia",
+        "new_name": "Torpakh-Kala (Early Medieval)",
+        "reason": "Sasanian-Khazar period fortified city"
+      }
+    ],
+    "clean_names": {
+      "Torpakh-Kala Bronze Age Site-Russia": "Torpakh-Kala (Bronze Age)",
+      "Torpakh-Kala-Russia": "Torpakh-Kala (Early Medieval)"
+    }
+  },
+  {
+    "cluster_id": "C0965",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Trakhtemyriv Iron Age Site-Ukraine",
+        "new_name": "Trakhtemyriv (Iron Age)",
+        "reason": "Scythian Iron Age hillfort"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Trakhtemyriv-Ukraine",
+        "new_name": "Trakhtemyriv (Chernyakhov)",
+        "reason": "Chernyakhov migration-period settlement"
+      }
+    ],
+    "clean_names": {
+      "Trakhtemyriv Iron Age Site-Ukraine": "Trakhtemyriv (Iron Age)",
+      "Trakhtemyriv-Ukraine": "Trakhtemyriv (Chernyakhov)"
+    }
+  },
+  {
+    "cluster_id": "C0967",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Troitskaya Medieval Gorodishche-Russia",
+        "new_name": "Troitskaya (Medieval)",
+        "reason": "Medieval Alanic fortified site distinct from modern stanitsa"
+      }
+    ],
+    "clean_names": {
+      "Troitskaya Medieval Gorodishche-Russia": "Troitskaya (Medieval)",
+      "Troitskaya-Russia": "Troitskaya"
+    }
+  },
+  {
+    "cluster_id": "C0969",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Troyitske Bronze Age Settlement-Ukraine",
+        "new_name": "Troitske (Bronze Age)",
+        "reason": "Bronze Age settlement distinct from modern town"
+      }
+    ],
+    "clean_names": {
+      "Troyitske Bronze Age Settlement-Ukraine": "Troitske (Bronze Age)",
+      "Troitske-Ukraine": "Troitske"
+    }
+  },
+  {
+    "cluster_id": "C0970",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Trudy Iron Age Hillfort-Belarus",
+        "new_name": "Trudy (Iron Age)",
+        "reason": "Iron Age hillfort distinct from modern village"
+      }
+    ],
+    "clean_names": {
+      "Trudy Iron Age Hillfort-Belarus": "Trudy (Iron Age)",
+      "Trudy-Belarus": "Trudy"
+    }
+  },
+  {
+    "cluster_id": "C0972",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Tsarevskoe gorodishche-Russia",
+        "new_name": "Tsarevskoe Gorodishche",
+        "reason": "Pre-hiatus medieval archaeological city distinct from modern village"
+      }
+    ],
+    "clean_names": {
+      "Tsarevskoe gorodishche-Russia": "Tsarevskoe Gorodishche",
+      "Tsarev-Russia": "Tsarev"
+    }
+  },
+  {
+    "cluster_id": "C0973",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Tsarichanka Orel-Ukraine",
+        "new_name": "Tsarychanka (Pre-modern)",
+        "reason": "Bronze Age and medieval river settlement distinct from modern town"
+      }
+    ],
+    "clean_names": {
+      "Tsarichanka Orel-Ukraine": "Tsarychanka (Pre-modern)",
+      "Tsarychanka-Ukraine": "Tsarychanka"
+    }
+  },
+  {
+    "cluster_id": "C0975",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Tsepan Iron Age Site-Russia",
+        "new_name": "Tsepan (Iron Age)",
+        "reason": "Ananyino Iron Age settlement"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Tsepan-Russia",
+        "new_name": "Tsepan (Mazunino)",
+        "reason": "Mazunino migration-period settlement"
+      }
+    ],
+    "clean_names": {
+      "Tsepan Iron Age Site-Russia": "Tsepan (Iron Age)",
+      "Tsepan-Russia": "Tsepan (Mazunino)"
+    }
+  },
+  {
+    "cluster_id": "C0979",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Turysk-Ukraine",
+        "new_name": "Turiisk (Rus)",
+        "reason": "Medieval chronicle Rus town distinct from modern settlement"
+      }
+    ],
+    "clean_names": {
+      "Turysk-Ukraine": "Turiisk (Rus)",
+      "Turiisk-Ukraine": "Turiisk"
+    }
+  },
+  {
+    "cluster_id": "C0982",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Tuzly Burnas Liman-Ukraine",
+        "new_name": "Burnas (Tuzly)",
+        "reason": "Pre-modern lagoon settlement distinct from modern village"
+      }
+    ],
+    "clean_names": {
+      "Tuzly Burnas Liman-Ukraine": "Burnas (Tuzly)",
+      "Tuzly-Ukraine": "Tuzly"
+    }
+  },
+  {
+    "cluster_id": "C0987",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Ulla-Belarus_2",
+        "new_name": "Ulla (Rus)",
+        "reason": "Medieval Rus hillfort at Ulla-Dvina confluence distinct from modern town"
+      }
+    ],
+    "clean_names": {
+      "Ulla-Belarus_2": "Ulla (Rus)",
+      "Ulla-Belarus": "Ulla"
+    }
+  },
+  {
+    "cluster_id": "C0988",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Unava-Fastovets-Ukraine",
+        "new_name": "Unava (Fastivets)",
+        "reason": "Medieval Rus settlement on Unava distinct from modern village"
+      }
+    ],
+    "clean_names": {
+      "Unava-Fastovets-Ukraine": "Unava (Fastivets)",
+      "Fastivets-Ukraine": "Fastivets"
+    }
+  },
+  {
+    "cluster_id": "C0989",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Untsukul Medieval Gorodishche-Russia",
+        "new_name": "Untsukul (Medieval)",
+        "reason": "Medieval fortified mountain settlement distinct from modern town"
+      }
+    ],
+    "clean_names": {
+      "Untsukul Medieval Gorodishche-Russia": "Untsukul (Medieval)",
+      "Untsukul-Russia": "Untsukul"
+    }
+  },
+  {
+    "cluster_id": "C0995",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Ust-Belaia Palaeolithic Camp-Russia",
+        "new_name": "Ust-Belaya (Palaeolithic)",
+        "reason": "Upper Palaeolithic campsite"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Ust-Belaia-Russia",
+        "new_name": "Ust-Belaya (Neolithic)",
+        "reason": "Holocene Neolithic stratified campsite"
+      }
+    ],
+    "clean_names": {
+      "Ust-Belaia Palaeolithic Camp-Russia": "Ust-Belaya (Palaeolithic)",
+      "Ust-Belaia-Russia": "Ust-Belaya (Neolithic)"
+    }
+  },
+  {
+    "cluster_id": "C0997",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Ust-Mil II Stone Age Site-Russia",
+        "new_name": "Ust-Mil II (Stone Age)",
+        "reason": "Neolithic stone age site on Aldan"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Ust-Mil II-Russia",
+        "new_name": "Ust-Mil II (Bronze Age)",
+        "reason": "Bronze Age Ust-Mil culture type-site"
+      }
+    ],
+    "clean_names": {
+      "Ust-Mil II Stone Age Site-Russia": "Ust-Mil II (Stone Age)",
+      "Ust-Mil II-Russia": "Ust-Mil II (Bronze Age)"
+    }
+  },
+  {
+    "cluster_id": "C0998",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Ust-Polui-Russia",
+        "new_name": "Ust-Polui",
+        "reason": "Famous Iron Age archaeological site distinct from modern city"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Salechard-Russia",
+        "new_name": "Salekhard",
+        "reason": "Clean modern display name for regional centre"
+      }
+    ],
+    "clean_names": {
+      "Ust-Polui-Russia": "Ust-Polui",
+      "Salechard-Russia": "Salekhard"
+    }
+  },
+  {
+    "cluster_id": "C1000",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Valentin-Peresheyek Bronze Age Site-Russia",
+        "new_name": "Valentin-Peresheyek",
+        "reason": "Bronze Age archaeological site distinct from modern village"
+      }
+    ],
+    "clean_names": {
+      "Valentin-Peresheyek Bronze Age Site-Russia": "Valentin-Peresheyek",
+      "Valentin-Russia": "Valentin"
+    }
+  },
+  {
+    "cluster_id": "C1001",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Valuyskaya krepost-Russia",
+        "reason": "Fabricated medieval date (800..1300) on 1593 modern frontier fortress"
+      }
+    ],
+    "clean_names": {
+      "Valuyki-Russia": "Valuyki"
+    }
+  },
+  {
+    "cluster_id": "C1004",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Vasilishki-Belarus_2",
+        "new_name": "Vasilishki (Rus)",
+        "reason": "Medieval Rus settlement on Lebeda distinct from modern town"
+      }
+    ],
+    "clean_names": {
+      "Vasilishki-Belarus_2": "Vasilishki (Rus)",
+      "Vasilishki-Belarus": "Vasilishki"
+    }
+  },
+  {
+    "cluster_id": "C1005",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Velikaya Lepetikha Eneolithic Hillfort-Ukraine",
+        "new_name": "Velyka Lepetykha (Eneolithic)",
+        "reason": "Trypillia Eneolithic hillfort distinct from modern town"
+      }
+    ],
+    "clean_names": {
+      "Velikaya Lepetikha Eneolithic Hillfort-Ukraine": "Velyka Lepetykha (Eneolithic)",
+      "Velyka Lepetykha-Ukraine": "Velyka Lepetykha"
+    }
+  },
+  {
+    "cluster_id": "C1008",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Velyka Bilozerka Iron Age Hillfort-Ukraine",
+        "new_name": "Velyka Bilozerka (Iron Age)",
+        "reason": "Scythian Iron Age hillfort distinct from modern town"
+      }
+    ],
+    "clean_names": {
+      "Velyka Bilozerka Iron Age Hillfort-Ukraine": "Velyka Bilozerka (Iron Age)",
+      "Velyka Bilozerka-Ukraine": "Velyka Bilozerka"
+    }
+  },
+  {
+    "cluster_id": "C1009",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Velyka Oleksandrivka Iron Age Hillfort-Ukraine",
+        "new_name": "Velyka Oleksandrivka (Iron Age)",
+        "reason": "Scythian Iron Age hillfort distinct from modern town"
+      }
+    ],
+    "clean_names": {
+      "Velyka Oleksandrivka Iron Age Hillfort-Ukraine": "Velyka Oleksandrivka (Iron Age)",
+      "Velyka Oleksandrivka-Ukraine": "Velyka Oleksandrivka"
+    }
+  },
+  {
+    "cluster_id": "C1010",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Velyka Pysarivka Iron Age Hillfort-Ukraine",
+        "new_name": "Velyka Pysarivka (Iron Age)",
+        "reason": "Scythian Iron Age hillfort distinct from modern town"
+      }
+    ],
+    "clean_names": {
+      "Velyka Pysarivka Iron Age Hillfort-Ukraine": "Velyka Pysarivka (Iron Age)",
+      "Velyka Pysarivka-Ukraine": "Velyka Pysarivka"
+    }
+  },
+  {
+    "cluster_id": "C1011",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "5/Velyka Rybytsya Early Rus Settlement-Ukraine",
+        "new_name": "Velyka Rybytsia (Early Rus)",
+        "reason": "Severian early Rus settlement"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Velyka Rybytsya Iron Age Hillfort-Ukraine",
+        "new_name": "Velyka Rybytsia (Iron Age)",
+        "reason": "Scythian Iron Age hillfort"
+      }
+    ],
+    "clean_names": {
+      "5/Velyka Rybytsya Early Rus Settlement-Ukraine": "Velyka Rybytsia (Early Rus)",
+      "Velyka Rybytsya Iron Age Hillfort-Ukraine": "Velyka Rybytsia (Iron Age)"
+    }
+  },
+  {
+    "cluster_id": "C1012",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Velyki Budky Bronze Age Settlement-Ukraine",
+        "new_name": "Velyki Budky (Bronze Age)",
+        "reason": "Bronze Age settlement"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Velyki Budky Khmeliv-Ukraine",
+        "new_name": "Velyki Budky (Rus)",
+        "reason": "Romny-Rus hillfort complex"
+      }
+    ],
+    "clean_names": {
+      "Velyki Budky Bronze Age Settlement-Ukraine": "Velyki Budky (Bronze Age)",
+      "Velyki Budky Khmeliv-Ukraine": "Velyki Budky (Rus)"
+    }
+  },
+  {
+    "cluster_id": "C1013",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Velykodolynske Bronze Age Settlement-Ukraine",
+        "new_name": "Velykodolynske (Bronze Age)",
+        "reason": "Bronze Age settlement distinct from modern town"
+      }
+    ],
+    "clean_names": {
+      "Velykodolynske Bronze Age Settlement-Ukraine": "Velykodolynske (Bronze Age)",
+      "Velykodolynske-Ukraine": "Velykodolynske"
+    }
+  },
+  {
+    "cluster_id": "C1014",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Velykonovosilkivskyy rayon Bronze Age Settlement-Ukraine",
+        "new_name": "Velyka Novosilka (Bronze Age)",
+        "reason": "Bronze Age settlement distinct from modern town"
+      }
+    ],
+    "clean_names": {
+      "Velykonovosilkivskyy rayon Bronze Age Settlement-Ukraine": "Velyka Novosilka (Bronze Age)",
+      "Velyka Novosilka-Ukraine": "Velyka Novosilka"
+    }
+  },
+  {
+    "cluster_id": "C1016",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Verkhniy Baksan Medieval Gorodishche-Russia",
+        "new_name": "Verkhniy Baksan (Medieval)",
+        "reason": "Medieval Alanic fortified site distinct from modern village"
+      }
+    ],
+    "clean_names": {
+      "Verkhniy Baksan Medieval Gorodishche-Russia": "Verkhniy Baksan (Medieval)",
+      "Verkhniy Baksan-Russia": "Verkhniy Baksan"
+    }
+  },
+  {
+    "cluster_id": "C1018",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Verkhniy Koban Iron Age Site-Russia",
+        "new_name": "Koban (Iron Age)",
+        "reason": "Koban culture type-site distinct from modern village"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Verkhniy Koban-Russia",
+        "new_name": "Verkhniy Koban",
+        "reason": "Clean display name for historic Ossetian village"
+      }
+    ],
+    "clean_names": {
+      "Verkhniy Koban Iron Age Site-Russia": "Koban (Iron Age)",
+      "Verkhniy Koban-Russia": "Verkhniy Koban"
+    }
+  },
+  {
+    "cluster_id": "C1022",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Viazniki Medieval Gorodishche-Russia",
+        "new_name": "Yaropolch-Zalesskiy",
+        "reason": "Medieval chronicle Rus city distinct from modern Vyazniki"
+      }
+    ],
+    "clean_names": {
+      "Viazniki Medieval Gorodishche-Russia": "Yaropolch-Zalesskiy",
+      "Vyazniki-Russia": "Vyazniki"
+    }
+  },
+  {
+    "cluster_id": "C1024",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Vilshana Bronze Age Settlement-Ukraine",
+        "new_name": "Vilshana (Bronze Age)",
+        "reason": "Bronze Age settlement distinct from modern town"
+      }
+    ],
+    "clean_names": {
+      "Vilshana Bronze Age Settlement-Ukraine": "Vilshana (Bronze Age)",
+      "Vilshana_UA_21-Ukraine": "Vilshana"
+    }
+  },
+  {
+    "cluster_id": "C1026",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Vitsebsk Iron Age Hillfort-Belarus",
+        "new_name": "Vitebsk (Iron Age)",
+        "reason": "Dnieper-Dvina Iron Age hillfort distinct from historic city"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Vicebsk-Belarus",
+        "new_name": "Vitebsk",
+        "reason": "Clean modern display name for regional centre"
+      }
+    ],
+    "clean_names": {
+      "Vitsebsk Iron Age Hillfort-Belarus": "Vitebsk (Iron Age)",
+      "Vicebsk-Belarus": "Vitebsk"
+    }
+  },
+  {
+    "cluster_id": "C1027",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Vitskhi Medieval Gorodishche-Russia",
+        "new_name": "Vitskhi (Medieval)",
+        "reason": "Medieval fortified mountain site distinct from modern village"
+      }
+    ],
+    "clean_names": {
+      "Vitskhi Medieval Gorodishche-Russia": "Vitskhi (Medieval)",
+      "Vitskhi-Russia": "Vitskhi"
+    }
+  },
+  {
+    "cluster_id": "C1029",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Dzaudzhikau Alanic Settlement-Russia",
+        "new_name": "Vladikavkaz (Alanic)",
+        "reason": "Medieval Alanic settlement"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Vladikavkaz Koban Site-Russia",
+        "new_name": "Vladikavkaz (Koban)",
+        "reason": "Koban culture Iron Age site"
+      }
+    ],
+    "clean_names": {
+      "Dzaudzhikau Alanic Settlement-Russia": "Vladikavkaz (Alanic)",
+      "Vladikavkaz Koban Site-Russia": "Vladikavkaz (Koban)"
+    }
+  },
+  {
+    "cluster_id": "C1030",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Vodiane Ancient Gord-Ukraine",
+        "new_name": "Vodiane (Medieval)",
+        "reason": "Early medieval Saltovo / Rus hillfort"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Vodyane Iron Age Hillfort-Ukraine",
+        "new_name": "Vodiane (Iron Age)",
+        "reason": "Scythian Iron Age hillfort"
+      }
+    ],
+    "clean_names": {
+      "Vodiane Ancient Gord-Ukraine": "Vodiane (Medieval)",
+      "Vodyane Iron Age Hillfort-Ukraine": "Vodiane (Iron Age)"
+    }
+  },
+  {
+    "cluster_id": "C1031",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Vodyanoye Classical Polis-Ukraine",
+        "new_name": "Vodiane (Ancient)",
+        "reason": "Classical coastal settlement distinct from modern village"
+      }
+    ],
+    "clean_names": {
+      "Vodyanoye Classical Polis-Ukraine": "Vodiane (Ancient)",
+      "Vodiane-Ukraine": "Vodiane"
+    }
+  },
+  {
+    "cluster_id": "C1038",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Voronizh-Ukraine_2",
+        "new_name": "Voronizh (Rus)",
+        "reason": "Medieval 1177 chronicle Rus town distinct from modern settlement"
+      }
+    ],
+    "clean_names": {
+      "Voronizh-Ukraine_2": "Voronizh (Rus)",
+      "Voronizh-Ukraine": "Voronizh"
+    }
+  },
+  {
+    "cluster_id": "C1040",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Vorozhba-Ukraine_2",
+        "new_name": "Vorozhba (Rus)",
+        "reason": "Medieval Rus portage settlement distinct from modern town"
+      }
+    ],
+    "clean_names": {
+      "Vorozhba-Ukraine_2": "Vorozhba (Rus)",
+      "Vorozhba-Ukraine": "Vorozhba"
+    }
+  },
+  {
+    "cluster_id": "C1041",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Vorzel-Irpin-Ukraine",
+        "new_name": "Vorzel-Irpin",
+        "reason": "Medieval Rus settlement on Irpin distinct from modern Bucha"
+      }
+    ],
+    "clean_names": {
+      "Vorzel-Irpin-Ukraine": "Vorzel-Irpin",
+      "Bucha-Ukraine": "Bucha"
+    }
+  },
+  {
+    "cluster_id": "C1044",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Voznesensk Bug Ford-Ukraine",
+        "new_name": "Voznesensk (Bug Ford)",
+        "reason": "Pre-modern river crossing settlement distinct from modern city"
+      }
+    ],
+    "clean_names": {
+      "Voznesensk Bug Ford-Ukraine": "Voznesensk (Bug Ford)",
+      "Voznesensk-Ukraine": "Voznesensk"
+    }
+  },
+  {
+    "cluster_id": "C1045",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Vradiyivka-V Bronze Age Settlement-Ukraine",
+        "new_name": "Vradiyivka (Bronze Age)",
+        "reason": "Bronze Age settlement distinct from modern town"
+      }
+    ],
+    "clean_names": {
+      "Vradiyivka-V Bronze Age Settlement-Ukraine": "Vradiyivka (Bronze Age)",
+      "Vradiyivka-Ukraine": "Vradiyivka"
+    }
+  },
+  {
+    "cluster_id": "C1050",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Vinogradnyy Sad Bronze Age Settlement-Ukraine",
+        "new_name": "Vynohradny Sad (Bronze Age)",
+        "reason": "Sabatinovka Bronze Age settlement"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Vynohradnyy Sad VIII Migration Period Settlement-Ukraine",
+        "new_name": "Vynohradny Sad (Migration Period)",
+        "reason": "Chernyakhov migration-period settlement"
+      }
+    ],
+    "clean_names": {
+      "Vinogradnyy Sad Bronze Age Settlement-Ukraine": "Vynohradny Sad (Bronze Age)",
+      "Vynohradnyy Sad VIII Migration Period Settlement-Ukraine": "Vynohradny Sad (Migration Period)"
+    }
+  },
+  {
+    "cluster_id": "C1052",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Vysunsk Iron Age Hillfort-Ukraine",
+        "new_name": "Vysunsk (Iron Age)",
+        "reason": "Scythian Iron Age hillfort distinct from modern village"
+      }
+    ],
+    "clean_names": {
+      "Vysunsk Iron Age Hillfort-Ukraine": "Vysunsk (Iron Age)",
+      "Vysunsk-Ukraine": "Vysunsk"
+    }
+  },
+  {
+    "cluster_id": "C1053",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Yampil-Ivot Wooded Terrace Settlement-Ukraine",
+        "new_name": "Ivot (Medieval)",
+        "reason": "Medieval Severian settlement at Ivot distinct from modern town"
+      }
+    ],
+    "clean_names": {
+      "Yampil-Ivot Wooded Terrace Settlement-Ukraine": "Ivot (Medieval)",
+      "Yampil_UA_21-Ukraine": "Yampil"
+    }
+  },
+  {
+    "cluster_id": "C1059",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Zalishchyky Bronze Age Site-Ukraine",
+        "new_name": "Zalishchyky (Bronze Age)",
+        "reason": "Trypillia and Bronze Age settlement on Dniester distinct from modern town"
+      }
+    ],
+    "clean_names": {
+      "Zalishchyky Bronze Age Site-Ukraine": "Zalishchyky (Bronze Age)",
+      "Zalishchyky-Ukraine": "Zalishchyky"
+    }
+  },
+  {
+    "cluster_id": "C1060",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Zaliztsi Castle-Ukraine",
+        "reason": "Fabricated prehistoric date (-3000..-2500) on 1516 castle"
+      }
+    ],
+    "clean_names": {
+      "Zaliztsi-Ukraine": "Zaliztsi"
+    }
+  },
+  {
+    "cluster_id": "C1061",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Zalukokoazhskoe gorodishche Chernaya gora-Russia",
+        "new_name": "Chernaya Gora",
+        "reason": "Medieval hillfort Chernaya Gora distinct from modern town"
+      }
+    ],
+    "clean_names": {
+      "Zalukokoazhskoe gorodishche Chernaya gora-Russia": "Chernaya Gora",
+      "Zalukokoazhe-Russia": "Zalukokoazhe"
+    }
+  },
+  {
+    "cluster_id": "C1064",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Zandak Iron Age Site-Russia",
+        "new_name": "Zandak (Iron Age)",
+        "reason": "Iron Age settlement in Chechnya distinct from modern village"
+      }
+    ],
+    "clean_names": {
+      "Zandak Iron Age Site-Russia": "Zandak (Iron Age)",
+      "Zandak-Russia": "Zandak"
+    }
+  },
+  {
+    "cluster_id": "C1066",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Zaraysk Palaeolithic-Russia",
+        "new_name": "Zaraysk (Palaeolithic)",
+        "reason": "Famous Upper Palaeolithic site distinct from historic city"
+      }
+    ],
+    "clean_names": {
+      "Zaraysk Palaeolithic-Russia": "Zaraysk (Palaeolithic)",
+      "Zaraysk-Russia": "Zaraysk"
+    }
+  },
+  {
+    "cluster_id": "C1067",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Zarichne-Bogodukhov Trostyanets Vorskla Hillfort Iron Age Site-Ukraine",
+        "new_name": "Zarichne (Iron Age)",
+        "reason": "Scythian Iron Age hillfort on Vorskla"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Zarichne-Bogodukhov Trostyanets Vorskla Hillfort-Ukraine",
+        "new_name": "Zarichne (Rus)",
+        "reason": "Severian / Rus hillfort"
+      }
+    ],
+    "clean_names": {
+      "Zarichne-Bogodukhov Trostyanets Vorskla Hillfort Iron Age Site-Ukraine": "Zarichne (Iron Age)",
+      "Zarichne-Bogodukhov Trostyanets Vorskla Hillfort-Ukraine": "Zarichne (Rus)"
+    }
+  },
+  {
+    "cluster_id": "C1068",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Zarub Iron Age Site-Ukraine",
+        "new_name": "Zarub (Chernyakhov)",
+        "reason": "Chernyakhov Iron Age settlement"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Zarub-Ukraine",
+        "new_name": "Zarub (Rus)",
+        "reason": "Medieval Rus chronicle town on Dnieper"
+      }
+    ],
+    "clean_names": {
+      "Zarub Iron Age Site-Ukraine": "Zarub (Chernyakhov)",
+      "Zarub-Ukraine": "Zarub (Rus)"
+    }
+  },
+  {
+    "cluster_id": "C1073",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Stayanka-1 peryyadu nealitu-Belarus_3",
+        "new_name": "Zdzitava (Rus)",
+        "reason": "Medieval Rus settlement at Zdzitava"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Zdzitava Bronze Age Settlement-Belarus",
+        "new_name": "Zdzitava (Bronze Age)",
+        "reason": "Bronze Age settlement"
+      }
+    ],
+    "clean_names": {
+      "Stayanka-1 peryyadu nealitu-Belarus_3": "Zdzitava (Rus)",
+      "Zdzitava Bronze Age Settlement-Belarus": "Zdzitava (Bronze Age)"
+    }
+  },
+  {
+    "cluster_id": "C1077",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Zhvaniets Neolithic Settlement-Ukraine",
+        "new_name": "Zhvanets (Neolithic)",
+        "reason": "Trypillia Neolithic settlement distinct from historic town"
+      }
+    ],
+    "clean_names": {
+      "Zhvaniets Neolithic Settlement-Ukraine": "Zhvanets (Neolithic)",
+      "Zhvanets-Ukraine": "Zhvanets"
+    }
+  },
+  {
+    "cluster_id": "C1079",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Zmeyskaya Medieval Gorodishche-Russia",
+        "new_name": "Zmeyskaya (Alanic)",
+        "reason": "Alanic medieval city and necropolis distinct from modern stanitsa"
+      }
+    ],
+    "clean_names": {
+      "Zmeyskaya Medieval Gorodishche-Russia": "Zmeyskaya (Alanic)",
+      "Zmeyskaya-Russia": "Zmeyskaya"
+    }
+  },
+  {
+    "cluster_id": "C1080",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Mokhnach-Ukraine",
+        "new_name": "Mokhnach",
+        "reason": "Saltovo and Rus frontier hillfort"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Zmiyinets Bronze Age Settlement-Ukraine",
+        "new_name": "Zmiyinets",
+        "reason": "Bronze Age settlement distinct from Mokhnach"
+      }
+    ],
+    "clean_names": {
+      "Mokhnach-Ukraine": "Mokhnach",
+      "Zmiyinets Bronze Age Settlement-Ukraine": "Zmiyinets"
+    }
+  },
+  {
+    "cluster_id": "C1082",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Zolotarevskoe settlement-Russia",
+        "new_name": "Zolotarevskoe Gorodishche",
+        "reason": "Famous medieval fortified city distinct from modern settlement"
+      }
+    ],
+    "clean_names": {
+      "Zolotarevskoe settlement-Russia": "Zolotarevskoe Gorodishche",
+      "Zolotaryovka-Russia": "Zolotaryovka"
+    }
+  },
+  {
+    "cluster_id": "C1084",
+    "actions": [
+      {
+        "op": "DROP_JUNK",
+        "key": "Zolotyy Potik Castle-Ukraine",
+        "reason": "Fabricated prehistoric date (-3000..-2500) on 1608 castle"
+      }
+    ],
+    "clean_names": {
+      "Zolotyi Potik-Ukraine": "Zolotyi Potik"
+    }
+  },
+  {
+    "cluster_id": "C1086",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Zymne Bronze Age Site-Ukraine",
+        "new_name": "Zymne (Eneolithic)",
+        "reason": "Early agricultural Eneolithic settlement"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "Zymne-Ukraine",
+        "new_name": "Zymne (Early Slavic)",
+        "reason": "Famous early Slavic fortified hillfort"
+      }
+    ],
+    "clean_names": {
+      "Zymne Bronze Age Site-Ukraine": "Zymne (Eneolithic)",
+      "Zymne-Ukraine": "Zymne (Early Slavic)"
+    }
+  },
+  {
+    "cluster_id": "C1087",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Zymohirya Iron Age Hillfort-Ukraine",
+        "new_name": "Zymohirya (Iron Age)",
+        "reason": "Scythian Iron Age hillfort distinct from modern city"
+      }
+    ],
+    "clean_names": {
+      "Zymohirya Iron Age Hillfort-Ukraine": "Zymohirya (Iron Age)",
+      "Zymohirya-Ukraine": "Zymohirya"
+    }
+  },
+  {
+    "cluster_id": "C1088",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Karolino-Bugaz 1 Eneolithic Hillfort-Ukraine",
+        "new_name": "Karolino-Buhaz (Eneolithic)",
+        "reason": "Usatove Eneolithic hillfort"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "antychnoho chasu Buhaz V Classical Polis-Ukraine",
+        "new_name": "Buhaz V",
+        "reason": "Classical Greek settlement on Dniester Liman"
+      }
+    ],
+    "clean_names": {
+      "Karolino-Bugaz 1 Eneolithic Hillfort-Ukraine": "Karolino-Buhaz (Eneolithic)",
+      "antychnoho chasu Buhaz V Classical Polis-Ukraine": "Buhaz V"
+    }
+  },
+  {
+    "cluster_id": "C1089",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "antychnoho chasu Classical Polis II-Ukraine",
+        "new_name": "Serhiyivka (Ancient)",
+        "reason": "Classical Greek settlement distinct from modern resort town"
+      }
+    ],
+    "clean_names": {
+      "antychnoho chasu Classical Polis II-Ukraine": "Serhiyivka (Ancient)",
+      "Serhiyivka-Ukraine": "Serhiyivka"
+    }
+  },
+  {
+    "cluster_id": "C1096",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "chernyakhivske Dmytrivka Chernyakhov Settlement-Ukraine",
+        "new_name": "Dmytrivka (Chernyakhov)",
+        "reason": "Chernyakhov settlement distinct from modern village"
+      }
+    ],
+    "clean_names": {
+      "chernyakhivske Dmytrivka Chernyakhov Settlement-Ukraine": "Dmytrivka (Chernyakhov)",
+      "Dmytrivka_UA_17-Ukraine": "Dmytrivka"
+    }
+  },
+  {
+    "cluster_id": "C1097",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Khadzhyder Neolithic Settlement-Ukraine",
+        "new_name": "Hadzhyder (Neolithic)",
+        "reason": "Neolithic settlement"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "chernyakhivske Khadzhyder I Chernyakhov Settlement-Ukraine",
+        "new_name": "Hadzhyder (Chernyakhov)",
+        "reason": "Chernyakhov settlement"
+      }
+    ],
+    "clean_names": {
+      "Khadzhyder Neolithic Settlement-Ukraine": "Hadzhyder (Neolithic)",
+      "chernyakhivske Khadzhyder I Chernyakhov Settlement-Ukraine": "Hadzhyder (Chernyakhov)"
+    }
+  },
+  {
+    "cluster_id": "C1102",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "chernyakhivskoyi kultury Chernyakhov Settlement-Ukraine_2",
+        "new_name": "Yaruha (Chernyakhov)",
+        "reason": "Chernyakhov settlement distinct from modern village"
+      }
+    ],
+    "clean_names": {
+      "chernyakhivskoyi kultury Chernyakhov Settlement-Ukraine_2": "Yaruha (Chernyakhov)",
+      "Yaruha-Ukraine": "Yaruha"
+    }
+  },
+  {
+    "cluster_id": "C1103",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "chernyakhivske Chervone II-a Chernyakhov Settlement-Ukraine",
+        "new_name": "Chervone (Chernyakhov)",
+        "reason": "Chernyakhov settlement"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "dvosharove Chervone II doby bronzy ta rymskoho chasu Bronze Age Settlement-Ukraine",
+        "new_name": "Chervone (Bronze Age)",
+        "reason": "Bronze Age settlement"
+      }
+    ],
+    "clean_names": {
+      "chernyakhivske Chervone II-a Chernyakhov Settlement-Ukraine": "Chervone (Chernyakhov)",
+      "dvosharove Chervone II doby bronzy ta rymskoho chasu Bronze Age Settlement-Ukraine": "Chervone (Bronze Age)"
+    }
+  },
+  {
+    "cluster_id": "C1104",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "chernyakhivske Delen IV Chernyakhov Settlement-Ukraine",
+        "new_name": "Delen (Chernyakhov)",
+        "reason": "Chernyakhov settlement"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "dvosharove Delen I doby piznoyi bronzy ta piznorymskoho chasu Bronze Age Settlement-Ukraine",
+        "new_name": "Delen (Bronze Age)",
+        "reason": "Bronze Age settlement"
+      }
+    ],
+    "clean_names": {
+      "chernyakhivske Delen IV Chernyakhov Settlement-Ukraine": "Delen (Chernyakhov)",
+      "dvosharove Delen I doby piznoyi bronzy ta piznorymskoho chasu Bronze Age Settlement-Ukraine": "Delen (Bronze Age)"
+    }
+  },
+  {
+    "cluster_id": "C1105",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "chernyakhivske Mykolayivka-Novorosiyska V Chernyakhov Settlement-Ukraine",
+        "new_name": "Mykolayivka-Novorosiyska (Chernyakhov)",
+        "reason": "Chernyakhov settlement"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "dvosharove Mykolayivka-Novorosiyska I doby piznoyi bronzy ta chernyakhivske Bronze Age Settlement-Ukraine",
+        "new_name": "Mykolayivka-Novorosiyska (Bronze Age)",
+        "reason": "Bronze Age settlement"
+      }
+    ],
+    "clean_names": {
+      "chernyakhivske Mykolayivka-Novorosiyska V Chernyakhov Settlement-Ukraine": "Mykolayivka-Novorosiyska (Chernyakhov)",
+      "dvosharove Mykolayivka-Novorosiyska I doby piznoyi bronzy ta chernyakhivske Bronze Age Settlement-Ukraine": "Mykolayivka-Novorosiyska (Bronze Age)"
+    }
+  },
+  {
+    "cluster_id": "C1106",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "chernyakhivske Myrnopillya Chernyakhov Settlement-Ukraine",
+        "new_name": "Myrnopillya (Chernyakhov)",
+        "reason": "Chernyakhov settlement"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "dvosharove Myrnopillya II sabatynivske ta rymskoho chasu Bronze Age Settlement-Ukraine",
+        "new_name": "Myrnopillya (Bronze Age)",
+        "reason": "Sabatinovka Bronze Age settlement"
+      }
+    ],
+    "clean_names": {
+      "chernyakhivske Myrnopillya Chernyakhov Settlement-Ukraine": "Myrnopillya (Chernyakhov)",
+      "dvosharove Myrnopillya II sabatynivske ta rymskoho chasu Bronze Age Settlement-Ukraine": "Myrnopillya (Bronze Age)"
+    }
+  },
+  {
+    "cluster_id": "C1107",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "chernyakhivske Bannivka I Chernyakhov Settlement-Ukraine",
+        "new_name": "Bannivka (Chernyakhov)",
+        "reason": "Chernyakhov settlement"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "dvosharove doby piznoyi bronzy ta chernyakhivske Bannivka VII Bronze Age Settlement-Ukraine",
+        "new_name": "Bannivka (Bronze Age)",
+        "reason": "Bronze Age settlement"
+      }
+    ],
+    "clean_names": {
+      "chernyakhivske Bannivka I Chernyakhov Settlement-Ukraine": "Bannivka (Chernyakhov)",
+      "dvosharove doby piznoyi bronzy ta chernyakhivske Bannivka VII Bronze Age Settlement-Ukraine": "Bannivka (Bronze Age)"
+    }
+  },
+  {
+    "cluster_id": "C1108",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Novokamyanka Eneolithic Hillfort-Ukraine",
+        "new_name": "Novokamyanka (Eneolithic)",
+        "reason": "Usatove Eneolithic hillfort"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "dvosharove doby piznoyi bronzy ta chernyakhivske Novokamyanka Bronze Age Settlement II-Ukraine",
+        "new_name": "Novokamyanka (Bronze Age)",
+        "reason": "Bronze Age settlement"
+      }
+    ],
+    "clean_names": {
+      "Novokamyanka Eneolithic Hillfort-Ukraine": "Novokamyanka (Eneolithic)",
+      "dvosharove doby piznoyi bronzy ta chernyakhivske Novokamyanka Bronze Age Settlement II-Ukraine": "Novokamyanka (Bronze Age)"
+    }
+  },
+  {
+    "cluster_id": "C1113",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "chernyakhivske Yosypivka I Chernyakhov Settlement-Ukraine",
+        "new_name": "Yosypivka (Chernyakhov)",
+        "reason": "Chernyakhov settlement"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "dvosharove doby piznoyi bronzy ta rymskoho chasu Yosypivka Bronze Age Settlement-Ukraine",
+        "new_name": "Yosypivka (Bronze Age)",
+        "reason": "Bronze Age settlement"
+      }
+    ],
+    "clean_names": {
+      "chernyakhivske Yosypivka I Chernyakhov Settlement-Ukraine": "Yosypivka (Chernyakhov)",
+      "dvosharove doby piznoyi bronzy ta rymskoho chasu Yosypivka Bronze Age Settlement-Ukraine": "Yosypivka (Bronze Age)"
+    }
+  },
+  {
+    "cluster_id": "C1116",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Kyslytsya Eneolithic Hillfort-Ukraine",
+        "new_name": "Kyslytsya (Eneolithic)",
+        "reason": "Gumelnita Eneolithic hillfort"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "dvosharove sabatynivske ta balkano-dunayske pivdennykh slovyan Kyslytsya Bronze Age Settlement-Ukraine",
+        "new_name": "Kyslytsya (Bronze Age)",
+        "reason": "Sabatinovka Bronze Age settlement"
+      }
+    ],
+    "clean_names": {
+      "Kyslytsya Eneolithic Hillfort-Ukraine": "Kyslytsya (Eneolithic)",
+      "dvosharove sabatynivske ta balkano-dunayske pivdennykh slovyan Kyslytsya Bronze Age Settlement-Ukraine": "Kyslytsya (Bronze Age)"
+    }
+  },
+  {
+    "cluster_id": "C1117",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "chernyakhivske Hrybivka III Chernyakhov Settlement-Ukraine",
+        "new_name": "Hrybivka (Chernyakhov)",
+        "reason": "Chernyakhov settlement"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "dvosharove sabatynivske ta skifske Hrybivka II Iron Age Hillfort-Ukraine",
+        "new_name": "Hrybivka (Iron Age)",
+        "reason": "Scythian Iron Age hillfort"
+      }
+    ],
+    "clean_names": {
+      "chernyakhivske Hrybivka III Chernyakhov Settlement-Ukraine": "Hrybivka (Chernyakhov)",
+      "dvosharove sabatynivske ta skifske Hrybivka II Iron Age Hillfort-Ukraine": "Hrybivka (Iron Age)"
+    }
+  },
+  {
+    "cluster_id": "C1118",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "dvosharove skifske ta chernyakhivske Troyitske III Iron Age Hillfort-Ukraine",
+        "new_name": "Troyitske (Iron Age)",
+        "reason": "Scythian Iron Age hillfort distinct from modern village"
+      }
+    ],
+    "clean_names": {
+      "dvosharove skifske ta chernyakhivske Troyitske III Iron Age Hillfort-Ukraine": "Troyitske (Iron Age)",
+      "Troyitske-Ukraine": "Troyitske"
+    }
+  },
+  {
+    "cluster_id": "C1120",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "kamyanoho viku Kominternivske II Stone Age Settlement-Ukraine",
+        "new_name": "Dobroslav (Stone Age)",
+        "reason": "Stone Age settlement distinct from modern town"
+      }
+    ],
+    "clean_names": {
+      "kamyanoho viku Kominternivske II Stone Age Settlement-Ukraine": "Dobroslav (Stone Age)",
+      "Dobroslav-Ukraine": "Dobroslav"
+    }
+  },
+  {
+    "cluster_id": "C1121",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "kurahn Bronze Age Settlement-Ukraine",
+        "new_name": "Staryi Krym (Bronze Age)",
+        "reason": "Bronze Age settlement distinct from modern town"
+      }
+    ],
+    "clean_names": {
+      "kurahn Bronze Age Settlement-Ukraine": "Staryi Krym (Bronze Age)",
+      "Staryi Krym-Ukraine": "Staryi Krym"
+    }
+  },
+  {
+    "cluster_id": "C1124",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "chernyakhivske Kostyantynivka IV Chernyakhov Settlement-Ukraine",
+        "new_name": "Kostyantynivka (Chernyakhov)",
+        "reason": "Chernyakhov settlement"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "mezolitychna Kostyantynivka III Mesolithic Camp-Ukraine",
+        "new_name": "Kostyantynivka (Mesolithic)",
+        "reason": "Mesolithic campsite"
+      }
+    ],
+    "clean_names": {
+      "chernyakhivske Kostyantynivka IV Chernyakhov Settlement-Ukraine": "Kostyantynivka (Chernyakhov)",
+      "mezolitychna Kostyantynivka III Mesolithic Camp-Ukraine": "Kostyantynivka (Mesolithic)"
+    }
+  },
+  {
+    "cluster_id": "C1125",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "dvosharove sabatynivske ta chernyakhivske Markivka Chernyakhov Settlement-Ukraine",
+        "new_name": "Markivka (Chernyakhov)",
+        "reason": "Chernyakhov settlement"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "mezolitychna Markivka Mesolithic Camp-Ukraine",
+        "new_name": "Markivka (Mesolithic)",
+        "reason": "Mesolithic campsite"
+      }
+    ],
+    "clean_names": {
+      "dvosharove sabatynivske ta chernyakhivske Markivka Chernyakhov Settlement-Ukraine": "Markivka (Chernyakhov)",
+      "mezolitychna Markivka Mesolithic Camp-Ukraine": "Markivka (Mesolithic)"
+    }
+  },
+  {
+    "cluster_id": "C1128",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "mistseznakhodzhennya paleolitu KhKh-Kh tys do. n.e Palaeolithic Camp-Ukraine",
+        "new_name": "Kuriachivka (Palaeolithic)",
+        "reason": "Palaeolithic campsite distinct from modern village"
+      }
+    ],
+    "clean_names": {
+      "mistseznakhodzhennya paleolitu KhKh-Kh tys do. n.e Palaeolithic Camp-Ukraine": "Kuriachivka (Palaeolithic)",
+      "Kuriachivka-Ukraine": "Kuriachivka"
+    }
+  },
+  {
+    "cluster_id": "C1132",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "dvosharove Valya-Perzhey I doby piznoyi bronzy ta chernyakhivske Bronze Age Settlement-Ukraine",
+        "new_name": "Valya-Perzhey (Bronze Age)",
+        "reason": "Late Bronze Age settlement"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "rymskoho chasu Valya-Perzhey-Stavky II Classical Polis-Ukraine",
+        "new_name": "Valya-Perzhey (Classical)",
+        "reason": "Classical / Roman era settlement"
+      }
+    ],
+    "clean_names": {
+      "dvosharove Valya-Perzhey I doby piznoyi bronzy ta chernyakhivske Bronze Age Settlement-Ukraine": "Valya-Perzhey (Bronze Age)",
+      "rymskoho chasu Valya-Perzhey-Stavky II Classical Polis-Ukraine": "Valya-Perzhey (Classical)"
+    }
+  },
+  {
+    "cluster_id": "C1134",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "piznopaleolitychna Kamyanka II Palaeolithic Camp-Ukraine",
+        "new_name": "Kamyanka (Palaeolithic)",
+        "reason": "Late Palaeolithic campsite"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "sabatynivske Kamyanka II Bronze Age Settlement-Ukraine",
+        "new_name": "Kamyanka (Bronze Age)",
+        "reason": "Sabatinovka Bronze Age settlement"
+      }
+    ],
+    "clean_names": {
+      "piznopaleolitychna Kamyanka II Palaeolithic Camp-Ukraine": "Kamyanka (Palaeolithic)",
+      "sabatynivske Kamyanka II Bronze Age Settlement-Ukraine": "Kamyanka (Bronze Age)"
+    }
+  },
+  {
+    "cluster_id": "C1135",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "rymskoho chasu Kolisne III Classical Polis-Ukraine",
+        "new_name": "Kolisne (Classical)",
+        "reason": "Classical / Roman era settlement"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "sabatynivske Kolisne II Bronze Age Settlement-Ukraine",
+        "new_name": "Kolisne (Bronze Age)",
+        "reason": "Sabatinovka Bronze Age settlement"
+      }
+    ],
+    "clean_names": {
+      "rymskoho chasu Kolisne III Classical Polis-Ukraine": "Kolisne (Classical)",
+      "sabatynivske Kolisne II Bronze Age Settlement-Ukraine": "Kolisne (Bronze Age)"
+    }
+  },
+  {
+    "cluster_id": "C1137",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Mistseznakhodzhennya paleolitu. Poselennya Palaeolithic Camp-Ukraine",
+        "new_name": "Oleksapil (Palaeolithic)",
+        "reason": "Palaeolithic campsite"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "selyshche Mediaeval Hillfort-Ukraine",
+        "new_name": "Oleksapil (Medieval)",
+        "reason": "Early medieval Slavic settlement"
+      }
+    ],
+    "clean_names": {
+      "Mistseznakhodzhennya paleolitu. Poselennya Palaeolithic Camp-Ukraine": "Oleksapil (Palaeolithic)",
+      "selyshche Mediaeval Hillfort-Ukraine": "Oleksapil (Medieval)"
+    }
+  },
+  {
+    "cluster_id": "C1139",
+    "actions": [
+      {
+        "op": "RENAME_META",
+        "key": "Gomolsha Scythian-Ukraine",
+        "new_name": "Gomolsha (Hillfort)",
+        "reason": "Scythian and Saltovo hillfort"
+      },
+      {
+        "op": "RENAME_META",
+        "key": "ta kurhannyy mohylnyk Bronze Age Hillfort-Ukraine",
+        "new_name": "Gomolsha (Bronze Age)",
+        "reason": "Bronze Age settlement"
+      }
+    ],
+    "clean_names": {
+      "Gomolsha Scythian-Ukraine": "Gomolsha (Hillfort)",
+      "ta kurhannyy mohylnyk Bronze Age Hillfort-Ukraine": "Gomolsha (Bronze Age)"
+    }
+  }
+]
