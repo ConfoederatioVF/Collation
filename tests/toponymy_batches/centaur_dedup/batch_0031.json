@@ -1,0 +1,703 @@
+{
+  "batch_index": 31,
+  "clusters": [
+    "homolovi",
+    "kahokiaki",
+    "kaskinampo",
+    "kulwicasa"
+  ],
+  "countries": [
+    "Arizona",
+    "Illinois",
+    "South Dakota",
+    "Tennessee"
+  ],
+  "count": 24,
+  "forbidden_already_used_in_region": [
+    "'Aha Kwahwat",
+    "'Aha Makhav",
+    "'Onk Akimel",
+    "Abangkuyivi",
+    "Aberdeen",
+    "Adahiilíní",
+    "Agar",
+    "Aghaałą́",
+    "Ahagaskiaywa",
+    "Akaska",
+    "Akimel O'odham",
+    "Akičhita Wakpála",
+    "Akwałina",
+    "Albee",
+    "Alcester",
+    "Alexandria",
+    "Algonquin",
+    "Ali Waipia",
+    "Allentown",
+    "Alpena",
+    "Altamont",
+    "Amaquon",
+    "Amayeli",
+    "Amehkwani",
+    "Amogayunyi",
+    "Amoyi",
+    "Andover",
+    "Angostura",
+    "Anikituwagi",
+    "Aniyunwiya",
+    "Anéʼé Tséyiʼ",
+    "Apache Junction",
+    "Ardmore",
+    "Armour",
+    "Artas",
+    "Ashland Heights",
+    "Ashton",
+    "Astoria",
+    "Aurora",
+    "Aurora Center",
+    "Avon",
+    "Awat'ovi",
+    "Awatovi",
+    "Awatʼovi",
+    "Ayuhwasi",
+    "Babad Do'ag",
+    "Babocomari",
+    "Badger",
+    "Baltic",
+    "Bancroft",
+    "Bde Hdakíŋyaŋ",
+    "Belle Fourche",
+    "Belvidere",
+    "Beresford",
+    "Besh-Ba-Gowah",
+    "Beʼekʼid Baa Ahoodzání",
+    "Bidaʼhóóchiiʼ",
+    "Bideʼyóó",
+    "Big Stone",
+    "Big Stone City",
+    "Bijou Hills",
+    "Bison",
+    "Blackhawk",
+    "Bledsoe's Lick",
+    "Blue Mound",
+    "Blunt",
+    "Bon Homme Colony",
+    "Bonesteel",
+    "Bowdle",
+    "Box Elder",
+    "Bradley",
+    "Brandon",
+    "Brandt",
+    "Brant Lake South",
+    "Brentford",
+    "Brentwood Colony",
+    "Bridgewater",
+    "Bristol",
+    "Britton",
+    "Broadland",
+    "Brookings",
+    "Bryant",
+    "Buffalo",
+    "Buffalo Chip",
+    "Buffalo Gap",
+    "Burbank",
+    "Burke",
+    "Bushnell",
+    "Butler",
+    "Béésh Baa Gowah",
+    "Cahokia",
+    "Cameron Colony",
+    "Camp Crook",
+    "Camrose Colony",
+    "Canistota",
+    "Canova",
+    "Canton",
+    "Caputa",
+    "Carthage",
+    "Castlewood",
+    "Cavour",
+    "Cemamagi Du'ag",
+    "Centerville",
+    "Central",
+    "Chakpahu",
+    "Chamberlain",
+    "Chancellor",
+    "Channahon",
+    "Chelsea",
+    "Chezhinchotah",
+    "Chikasha",
+    "Chikashsha",
+    "Chiricahui",
+    "Chiwi Kawi",
+    "Chodistaas",
+    "Chokonen",
+    "Chucalissa",
+    "Chʼilwózh",
+    "Citico",
+    "Claire"
+  ],
+  "settlements": [
+    {
+      "key": "Homol'ovi II-Arizona",
+      "shard_name": "Homol'ovi II",
+      "country": "Arizona",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        35.17951,
+        -110.71457
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [
+        "AZ J:14:15"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Homol'ovi"
+        }
+      ],
+      "duplicate_name_flagged": "Homol'ovi"
+    },
+    {
+      "key": "Cottonwood Creek Ruin-Arizona",
+      "shard_name": "Cottonwood Creek Ruin",
+      "country": "Arizona",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        35.065,
+        -110.515
+      ],
+      "min_year": 1300,
+      "max_year": 1375,
+      "other_names": [
+        "AZ J:14:2",
+        "Homolovi Area"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1300.1.1",
+          "name": "Homol'ovi"
+        }
+      ],
+      "duplicate_name_flagged": "Homol'ovi"
+    },
+    {
+      "key": "Homol'ovi-Arizona",
+      "shard_name": "Homol'ovi",
+      "country": "Arizona",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        35.06,
+        -110.6542
+      ],
+      "min_year": 1300,
+      "max_year": 1400,
+      "other_names": [
+        "Homolovi",
+        "Winslow Hopi"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1300.1.1",
+          "name": "Homol'ovi"
+        }
+      ],
+      "duplicate_name_flagged": "Homol'ovi"
+    },
+    {
+      "key": "Chevelon-Arizona",
+      "shard_name": "Chevelon",
+      "country": "Arizona",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        35.04834,
+        -110.61602
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [
+        "Middle Little Colorado",
+        "AZ J:14:3"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Homol'ovi"
+        }
+      ],
+      "duplicate_name_flagged": "Homol'ovi"
+    },
+    {
+      "key": "Adobe Pueblo-Arizona",
+      "shard_name": "Adobe Pueblo",
+      "country": "Arizona",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        35.04136,
+        -110.7431
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Homol'ovi"
+        }
+      ],
+      "duplicate_name_flagged": "Homol'ovi"
+    },
+    {
+      "key": "Homol'ovi III-Arizona",
+      "shard_name": "Homol'ovi III",
+      "country": "Arizona",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        35.018,
+        -110.662
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [
+        "AZ J:14:14"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Homol'ovi"
+        }
+      ],
+      "duplicate_name_flagged": "Homol'ovi"
+    },
+    {
+      "key": "Mitchell-Illinois_2",
+      "shard_name": "Mitchell",
+      "country": "Illinois",
+      "region": "np_lower_missouri_platte_kansas",
+      "coords_lat_lng": [
+        38.7636,
+        -90.0889
+      ],
+      "min_year": 1050,
+      "max_year": 1250,
+      "other_names": [
+        "Mitchell Mound Center",
+        "Long Lake",
+        "11MS30"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1050.1.1",
+          "name": "Kaahokiaki"
+        }
+      ],
+      "duplicate_name_flagged": "Kaahokiaki"
+    },
+    {
+      "key": "BBB Motor-Illinois",
+      "shard_name": "BBB Motor",
+      "country": "Illinois",
+      "region": "um_american_bottom_lower_il",
+      "coords_lat_lng": [
+        38.685,
+        -90.025
+      ],
+      "min_year": 900,
+      "max_year": 1150,
+      "other_names": [
+        "11MS595",
+        "Cahokia North Ritual Precinct"
+      ],
+      "current_historical_names": [
+        {
+          "date": "900.1.1",
+          "name": "Kahokiaki"
+        }
+      ],
+      "duplicate_name_flagged": "Kahokiaki"
+    },
+    {
+      "key": "East St. Louis Mound Center-Illinois",
+      "shard_name": "East St. Louis Mound Center",
+      "country": "Illinois",
+      "region": "um_american_bottom_lower_il",
+      "coords_lat_lng": [
+        38.6258,
+        -90.1508
+      ],
+      "min_year": -300,
+      "max_year": 1300,
+      "other_names": [
+        "East St. Louis Mississippian",
+        "11S706",
+        "Florence Street",
+        "Florence St.",
+        "11S458"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-300.1.1",
+          "name": "Kaahokiaki"
+        }
+      ],
+      "duplicate_name_flagged": "Kaahokiaki"
+    },
+    {
+      "key": "Lohmann-Illinois",
+      "shard_name": "Lohmann",
+      "country": "Illinois",
+      "region": "um_american_bottom_lower_il",
+      "coords_lat_lng": [
+        38.5833,
+        -90.1333
+      ],
+      "min_year": 950,
+      "max_year": 1150,
+      "other_names": [
+        "Lohmann Site",
+        "11S49"
+      ],
+      "current_historical_names": [
+        {
+          "date": "950.1.1",
+          "name": "Kaahokiaki"
+        }
+      ],
+      "duplicate_name_flagged": "Kaahokiaki"
+    },
+    {
+      "key": "Dohack-Illinois",
+      "shard_name": "Dohack",
+      "country": "Illinois",
+      "region": "um_american_bottom_lower_il",
+      "coords_lat_lng": [
+        38.5708,
+        -90.19
+      ],
+      "min_year": 700,
+      "max_year": 1100,
+      "other_names": [
+        "11S642",
+        "Bluff-Base Late Woodland"
+      ],
+      "current_historical_names": [
+        {
+          "date": "700.1.1",
+          "name": "Kaahokiaki"
+        }
+      ],
+      "duplicate_name_flagged": "Kaahokiaki"
+    },
+    {
+      "key": "Julien-Illinois",
+      "shard_name": "Julien",
+      "country": "Illinois",
+      "region": "um_american_bottom_lower_il",
+      "coords_lat_lng": [
+        38.532,
+        -90.185
+      ],
+      "min_year": 950,
+      "max_year": 1350,
+      "other_names": [
+        "11S63",
+        "Southern American Bottom Stirling-Sand Prairie"
+      ],
+      "current_historical_names": [
+        {
+          "date": "950.1.1",
+          "name": "Kaahokiaki"
+        }
+      ],
+      "duplicate_name_flagged": "Kaahokiaki"
+    },
+    {
+      "key": "Beasley Mounds Settlement-Tennessee",
+      "shard_name": "Beasley Mounds Settlement",
+      "country": "Tennessee",
+      "region": "oh_kentucky_cumberland_green",
+      "coords_lat_lng": [
+        36.381,
+        -86.0515
+      ],
+      "min_year": 1100,
+      "max_year": 1400,
+      "other_names": [
+        "40SM43",
+        "Dixon Springs Cumberland Village",
+        "Dixon Springs Mound"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1100.1.1",
+          "name": "Kaskinampo"
+        }
+      ],
+      "duplicate_name_flagged": "Kaskinampo"
+    },
+    {
+      "key": "Ashland City Cumberland Town-Tennessee",
+      "shard_name": "Ashland City Cumberland Town",
+      "country": "Tennessee",
+      "region": "oh_kentucky_cumberland_green",
+      "coords_lat_lng": [
+        36.281,
+        -87.0615
+      ],
+      "min_year": 1200,
+      "max_year": 1350,
+      "other_names": [
+        "40CH25",
+        "Cheatham Cumberland River Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Kaskinampo"
+        }
+      ],
+      "duplicate_name_flagged": "Kaskinampo"
+    },
+    {
+      "key": "Johnsonville Town-Tennessee",
+      "shard_name": "Johnsonville Town",
+      "country": "Tennessee",
+      "region": "cu_lower_tennessee_kentucky_confluence",
+      "coords_lat_lng": [
+        36.0315,
+        -87.981
+      ],
+      "min_year": 1200,
+      "max_year": 1350,
+      "other_names": [
+        "40HS20",
+        "Duck-Tennessee Confluence Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Kaskinampo"
+        }
+      ],
+      "duplicate_name_flagged": "Kaskinampo"
+    },
+    {
+      "key": "Link Duck River Town-Tennessee",
+      "shard_name": "Link Duck River Town",
+      "country": "Tennessee",
+      "region": "cu_lower_tennessee_kentucky_confluence",
+      "coords_lat_lng": [
+        35.981,
+        -87.7815
+      ],
+      "min_year": 1250,
+      "max_year": 1350,
+      "other_names": [
+        "40HS6",
+        "Duck River Cache Mississippian City"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Kaskinampo"
+        }
+      ],
+      "duplicate_name_flagged": "Kaskinampo"
+    },
+    {
+      "key": "Cuba Landing Village-Tennessee",
+      "shard_name": "Cuba Landing Village",
+      "country": "Tennessee",
+      "region": "cu_lower_tennessee_kentucky_confluence",
+      "coords_lat_lng": [
+        35.881,
+        -87.8815
+      ],
+      "min_year": 1250,
+      "max_year": 1350,
+      "other_names": [
+        "40HS1",
+        "Humphreys County River Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Kaskinampo"
+        }
+      ],
+      "duplicate_name_flagged": "Kaskinampo"
+    },
+    {
+      "key": "Clifton River Town-Tennessee",
+      "shard_name": "Clifton River Town",
+      "country": "Tennessee",
+      "region": "cu_lower_tennessee_kentucky_confluence",
+      "coords_lat_lng": [
+        35.381,
+        -87.9915
+      ],
+      "min_year": 1250,
+      "max_year": 1350,
+      "other_names": [
+        "40WY1",
+        "Wayne County River Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Kaskinampo"
+        }
+      ],
+      "duplicate_name_flagged": "Kaskinampo"
+    },
+    {
+      "key": "Langdeau Earthlodge Village-South Dakota",
+      "shard_name": "Langdeau Earthlodge Village",
+      "country": "South Dakota",
+      "region": "np_middle_missouri_dakotas",
+      "coords_lat_lng": [
+        44.151,
+        -99.6015
+      ],
+      "min_year": 1050,
+      "max_year": 1150,
+      "other_names": [
+        "39LM209",
+        "Langdeau Initial Middle Missouri Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1050.1.1",
+          "name": "Kul Wičháša"
+        }
+      ],
+      "duplicate_name_flagged": "Kul Wičháša"
+    },
+    {
+      "key": "Jandreau-South Dakota",
+      "shard_name": "Jandreau",
+      "country": "South Dakota",
+      "region": "np_middle_missouri_dakotas",
+      "coords_lat_lng": [
+        44.135,
+        -99.785
+      ],
+      "min_year": 1050,
+      "max_year": 1380,
+      "other_names": [
+        "39LM225",
+        "Lyman Initial Middle Missouri",
+        "39LM209",
+        "Jiggs Thompson",
+        "39LM208",
+        "Lower Brule Earthlodge"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1050.1.1",
+          "name": "Kul Wičháša"
+        }
+      ],
+      "duplicate_name_flagged": "Kul Wičháša"
+    },
+    {
+      "key": "Black Partizan Fortified Village-South Dakota",
+      "shard_name": "Black Partizan Fortified Village",
+      "country": "South Dakota",
+      "region": "np_middle_missouri_dakotas",
+      "coords_lat_lng": [
+        44.1215,
+        -99.551
+      ],
+      "min_year": 1250,
+      "max_year": 1520,
+      "other_names": [
+        "39LM218",
+        "Black Partizan Earthlodge Town",
+        "Big Bend Fortified Village",
+        "Hickey Brothers",
+        "39LM4",
+        "Big Bend Extended Middle Missouri"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Kul Wičháša"
+        }
+      ],
+      "duplicate_name_flagged": "Kul Wičháša"
+    },
+    {
+      "key": "Dinehart-South Dakota",
+      "shard_name": "Dinehart",
+      "country": "South Dakota",
+      "region": "np_middle_missouri_dakotas",
+      "coords_lat_lng": [
+        44.095,
+        -99.535
+      ],
+      "min_year": 1050,
+      "max_year": 1350,
+      "other_names": [
+        "39LM33",
+        "Lyman Missouri Terrace"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1050.1.1",
+          "name": "Kul Wičháša"
+        }
+      ],
+      "duplicate_name_flagged": "Kul Wičháša"
+    },
+    {
+      "key": "Pretty Head-South Dakota",
+      "shard_name": "Pretty Head",
+      "country": "South Dakota",
+      "region": "np_middle_missouri_dakotas",
+      "coords_lat_lng": [
+        44.075,
+        -99.495
+      ],
+      "min_year": 950,
+      "max_year": 1180,
+      "other_names": [
+        "39LM232",
+        "Fort Thompson Initial Middle Missouri"
+      ],
+      "current_historical_names": [
+        {
+          "date": "950.1.1",
+          "name": "Kul Wičháša"
+        }
+      ],
+      "duplicate_name_flagged": "Kul Wičháša"
+    },
+    {
+      "key": "Lower Brule-South Dakota",
+      "shard_name": "Lower Brule",
+      "country": "South Dakota",
+      "region": "usa_south_dakota",
+      "coords_lat_lng": [
+        44.07413,
+        -99.58375
+      ],
+      "min_year": 1908,
+      "max_year": 2025,
+      "other_names": [
+        "Lower Brule CDP"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1908.1.1",
+          "name": "Kul Wičháša"
+        },
+        {
+          "date": "1964.1.1",
+          "name": "Lower Brule"
+        }
+      ],
+      "duplicate_name_flagged": "Kul Wičháša"
+    }
+  ]
+}

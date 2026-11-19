@@ -143,6 +143,145 @@ let { PNG } = global.pngjs || require("pngjs");
 
 
     /**
+     * Harmonises persistent HYDE 3.5 `sub_iso` state/province multiplier cliffs in pure multiplicative log-density space via a step-10 interior cross-border median-jump Graph-Laplacian solver with light Tikhonov ridge regularisation.
+     * @alias ViscountUrbanMask.harmoniseSubIsoStateOffsets
+     *
+     * @param {Object} arg0_mask_data - Land-mask bundle containing grid dimensions and valid-cell lookup arrays.
+     * @param {Float32Array} arg1_field - Raw positive density/land-use raster over valid land cells.
+     * @param {Uint32Array|Int32Array} arg2_sub_iso - Sub-national ISO code array aligned with valid land cells.
+     * @param {Float32Array} [arg3_dist_b] - Distance-to-subdivision-border array (`>= 2,0` excludes border halos).
+     * @returns {Float32Array} Multiplicatively state-harmonised positive density array (or original field if skipped).
+     */
+    static harmoniseSubIsoStateOffsets (arg0_mask_data, arg1_field, arg2_sub_iso, arg3_dist_b) {
+      //Convert from parameters
+      let mask_data = arg0_mask_data;
+      let field = arg1_field;
+      let sub_iso = arg2_sub_iso;
+      let dist_b = arg3_dist_b;
+
+      if (!mask_data || !field || !sub_iso) return field;
+      if (!mask_data.pixel_to_valid_idx || !mask_data.valid_indices || !mask_data.valid_cell_count) return field;
+
+      //Declare local instance variables.
+      let edge_map = new Map();
+      let grid_h = mask_data.grid_height;
+      let grid_w = mask_data.grid_width;
+      let log_pure = new Float32Array(mask_data.valid_cell_count);
+      let n_st = 0;
+      let n_valid = mask_data.valid_cell_count;
+      let out_field = new Float32Array(mask_data.valid_cell_count);
+      let p2v = mask_data.pixel_to_valid_idx;
+      let s2i = new Map();
+      let st_idx = new Int32Array(mask_data.valid_cell_count).fill(-1);
+      let step = 10;
+      let v_idx = mask_data.valid_indices;
+
+
+      for (let i = 0; i < n_valid; i++) {
+        if (field[i] <= 0) continue;
+        log_pure[i] = Math.log(Math.max(1e-5, field[i]));
+        if (sub_iso[i] <= 0) continue;
+        let local_idx_s = s2i.get(sub_iso[i]);
+
+        if (local_idx_s === undefined) {
+          local_idx_s = s2i.size;
+          s2i.set(sub_iso[i], local_idx_s);
+        }
+        st_idx[i] = local_idx_s;
+      }
+      n_st = s2i.size;
+
+      if (n_st > 1) {
+        for (let i = 0; i < n_valid; i++) {
+          let local_ia = st_idx[i];
+
+          if (local_ia < 0 || (dist_b && dist_b[i] < 2.0)) continue;
+          let local_cx = v_idx[i] % grid_w;
+          let local_cy = Math.floor(v_idx[i]/grid_w);
+          let local_nb_h = p2v[local_cy*grid_w + ((local_cx + step) % grid_w)];
+          let local_nb_v = -1;
+
+          if (local_cy + step < grid_h) local_nb_v = p2v[(local_cy + step)*grid_w + local_cx];
+
+          for (let x = 0; x < 2; x++) {
+            let local_nb = local_nb_v;
+
+            if (x === 0) local_nb = local_nb_h;
+            if (local_nb < 0 || st_idx[local_nb] < 0 || st_idx[local_nb] === local_ia) continue;
+            if (dist_b && dist_b[local_nb] < 2.0) continue;
+            let local_ib = st_idx[local_nb];
+            let local_diff = log_pure[local_nb] - log_pure[i];
+            let local_hi = local_ia;
+            let local_lo = local_ib;
+
+            if (local_ia < local_ib) {
+              local_diff = log_pure[i] - log_pure[local_nb];
+              local_hi = local_ib;
+              local_lo = local_ia;
+            }
+            let local_key = local_lo*n_st + local_hi;
+            let local_list = edge_map.get(local_key);
+
+            if (!local_list) {
+              local_list = [];
+              edge_map.set(local_key, local_list);
+            }
+            local_list.push(local_diff);
+          }
+        }
+
+        let local_c_st = new Float64Array(n_st);
+        let local_deg = new Float64Array(n_st);
+        let local_nbr_i = Array.from({ length: n_st }, function () { return []; });
+        let local_nbr_w = Array.from({ length: n_st }, function () { return []; });
+        let local_rhs = new Float64Array(n_st);
+
+        edge_map.forEach(function (arg0_vals, arg1_key) {
+          if (arg0_vals.length < 6) return;
+          arg0_vals.sort(function (arg0_a, arg1_b) { return arg0_a - arg1_b; });
+          let local_ia = Math.floor(arg1_key/n_st);
+          let local_ib = arg1_key % n_st;
+          let local_med = arg0_vals[arg0_vals.length >> 1];
+          let local_w_e = Math.min(400, arg0_vals.length);
+
+          local_deg[local_ia] += local_w_e;
+          local_deg[local_ib] += local_w_e;
+          local_rhs[local_ia] += local_w_e*local_med;
+          local_rhs[local_ib] -= local_w_e*local_med;
+          local_nbr_i[local_ia].push(local_ib);
+          local_nbr_w[local_ia].push(local_w_e);
+          local_nbr_i[local_ib].push(local_ia);
+          local_nbr_w[local_ib].push(local_w_e);
+        });
+
+        for (let i = 0; i < 160; i++)
+          for (let x = 0; x < n_st; x++) {
+            if (local_deg[x] <= 0) continue;
+            let local_acc = local_rhs[x];
+
+            for (let y = 0; y < local_nbr_i[x].length; y++)
+              local_acc += local_nbr_w[x][y]*local_c_st[local_nbr_i[x][y]];
+            local_c_st[x] = local_acc/(local_deg[x] + 0.03*Math.max(10.0, local_deg[x]));
+          }
+
+        for (let i = 0; i < n_st; i++)
+          local_c_st[i] = Math.max(-3.0, Math.min(3.0, local_c_st[i]));
+
+        for (let i = 0; i < n_valid; i++) {
+          if (field[i] <= 0) continue;
+          let local_u = st_idx[i];
+
+          out_field[i] = field[i];
+          if (local_u >= 0) out_field[i] = field[i]*Math.exp(-local_c_st[local_u]);
+        }
+      }
+
+      //Return statement
+      return (n_st > 1) ? out_field : field;
+    }
+
+
+    /**
      * Inpaints masked urban/spike/reservoir pixels from surrounding unmasked rural land via 3-tier IDW (`r`, `2r`, `4r`)
      * with optional `KK10LUH2` deep-core fallback.
      * @alias ViscountUrbanMask.inpaintUrbanMaskGrid

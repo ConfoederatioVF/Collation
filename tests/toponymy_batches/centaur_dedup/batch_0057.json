@@ -1,0 +1,710 @@
+{
+  "batch_index": 57,
+  "clusters": [
+    "listuguj",
+    "lokahntel",
+    "lsitkuk",
+    "makopina",
+    "minidoka",
+    "minitni",
+    "misaskwatominihk",
+    "miskwagamiwizibi"
+  ],
+  "countries": [
+    "Alberta",
+    "Arizona",
+    "Canada",
+    "Idaho",
+    "Illinois",
+    "Minnesota",
+    "New Brunswick",
+    "North Dakota",
+    "Nova Scotia",
+    "Quebec",
+    "Saskatchewan"
+  ],
+  "count": 24,
+  "forbidden_already_used_in_region": [
+    "'Aha Kwahwat",
+    "'Aha Makhav",
+    "'Onk Akimel",
+    "'Yalis",
+    "Aazhoodenaang",
+    "Abangkuyivi",
+    "Achelacy",
+    "Adahiilíní",
+    "Adams",
+    "Addison",
+    "Agaideka",
+    "Agaidika",
+    "Aghaałą́",
+    "Agnes",
+    "Ahagaskiaywa",
+    "Ahjimsek",
+    "Ahkwesáhsne",
+    "Ahousaht",
+    "Ahwendoe",
+    "Ajijaako-zaaga'igan",
+    "Ajoasté",
+    "Akaamaschii",
+    "Akigwitegw",
+    "Akimel O'odham",
+    "Akpatordjuark",
+    "Akulivik",
+    "Akwałina",
+    "Akwesasne",
+    "Alamo",
+    "Alarnerk",
+    "Alexander",
+    "Algonquin",
+    "Ali Waipia",
+    "Alice",
+    "Almont",
+    "Alsen",
+    "Alámex",
+    "Amaquon",
+    "Ambrose",
+    "Amehkwani",
+    "Amenia",
+    "Amidon",
+    "Amiskwaciy",
+    "Amiskwaciya",
+    "Amistustikwach",
+    "Amlamkuk",
+    "Anamoose",
+    "Anepeminan",
+    "Aneta",
+    "Aniibiminani-ziibi",
+    "Animikii-waajiing",
+    "Annikcooek",
+    "Antler",
+    "Anéʼé Tséyiʼ",
+    "Aondironon",
+    "Apache Junction",
+    "Apakosîsi-sîpiy",
+    "Apakosîsihk",
+    "Apitipi",
+    "Apitipik",
+    "Apji'jkmujue'katik",
+    "Apvitok",
+    "Ardoch",
+    "Arendarhonon",
+    "Argentenay",
+    "Argenteuil",
+    "Argusville",
+    "Arnegard",
+    "Arthur",
+    "Arvia'juaq",
+    "Arviat",
+    "Arviligjuaq",
+    "Asabiikone-zaaga'igan",
+    "Aschkibokahn",
+    "Ashley",
+    "Asiniskaw Sîpîsis",
+    "Asinîwi-sîpîsis",
+    "Asinīpwāt-sīpiy",
+    "Asáaqa",
+    "Ataronchronon",
+    "Atim-sîpiy",
+    "Attawapiskat",
+    "Attignawantan",
+    "Attigneenongnahac",
+    "Aujuittuq",
+    "Aulatsivik",
+    "Aulavik",
+    "Aupaluk",
+    "Avayalik",
+    "Avonlea",
+    "Avvajja",
+    "Awadi Aguraawi",
+    "Awat'ovi",
+    "Awatixa",
+    "Awatovi",
+    "Awatíxa",
+    "Awatʼovi",
+    "Awaxawi",
+    "Awaxáawi",
+    "Awigaxa",
+    "Awokun",
+    "Awáati",
+    "Awígaxa",
+    "Ayr",
+    "Baawingashing",
+    "Babad Do'ag",
+    "Babocomari",
+    "Baie-Rouge",
+    "Baie-Saint-Paul",
+    "Baie-du-Febvre",
+    "Balfour",
+    "Balta",
+    "Bantry",
+    "Barney",
+    "Bartlett",
+    "Barton",
+    "Bathgate",
+    "Batiscan",
+    "Bay Roberts",
+    "Bay de Verde"
+  ],
+  "settlements": [
+    {
+      "key": "Listuguj-Canada",
+      "shard_name": "Listuguj",
+      "country": "Canada",
+      "region": "can_quebec",
+      "coords_lat_lng": [
+        48.05992,
+        -66.72858
+      ],
+      "min_year": 1700,
+      "max_year": 2026,
+      "other_names": [
+        "Pointe-à-la-Croix",
+        "Listuguj Chaleur Bay Center",
+        "Listuguj",
+        "Restigouche Mission",
+        "Restigouche Mi'kmaq Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1700.1.1",
+          "name": "Listuguj"
+        },
+        {
+          "date": "1745.1.1",
+          "name": "Restigouche"
+        },
+        {
+          "date": "1994.1.1",
+          "name": "Listuguj"
+        }
+      ],
+      "duplicate_name_flagged": "Listuguj"
+    },
+    {
+      "key": "Campbellton Restigouche Town-New Brunswick",
+      "shard_name": "Campbellton Restigouche Town",
+      "country": "New Brunswick",
+      "region": "mar_wolastoq_new_brunswick_fundy",
+      "coords_lat_lng": [
+        47.9833,
+        -66.6833
+      ],
+      "min_year": 500,
+      "max_year": 1500,
+      "other_names": [
+        "Restigouche South Shore Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Listuguj"
+        }
+      ],
+      "duplicate_name_flagged": "Listuguj"
+    },
+    {
+      "key": "Restigouche Listuguj Capital-Quebec",
+      "shard_name": "Restigouche Listuguj Capital",
+      "country": "Quebec",
+      "region": "sl_saguenay_north_shore_gaspe",
+      "coords_lat_lng": [
+        48.0167,
+        -66.7
+      ],
+      "min_year": 300,
+      "max_year": 1450,
+      "other_names": [
+        "Restigouche River Mouth Capital"
+      ],
+      "current_historical_names": [
+        {
+          "date": "300.1.1",
+          "name": "Listuguj"
+        }
+      ],
+      "duplicate_name_flagged": "Listuguj"
+    },
+    {
+      "key": "Navajo Nation Park Ruin-Arizona",
+      "shard_name": "Navajo Nation Park Ruin",
+      "country": "Arizona",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        35.755,
+        -109.525
+      ],
+      "min_year": 500,
+      "max_year": 1600,
+      "other_names": [
+        "Wide Reed Ruin",
+        "AZ E:14:1",
+        "Kayenta/Tusayan"
+      ],
+      "current_historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Lókʼaahnteel"
+        }
+      ],
+      "duplicate_name_flagged": "Lókʼaahnteel"
+    },
+    {
+      "key": "Ganado-Arizona",
+      "shard_name": "Ganado",
+      "country": "Arizona",
+      "region": "usa_arizona",
+      "coords_lat_lng": [
+        35.69188,
+        -109.55573
+      ],
+      "min_year": 1900,
+      "max_year": 2025,
+      "other_names": [
+        "Ganado CDP"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Lókʼaahnteel"
+        },
+        {
+          "date": "1901.1.1",
+          "name": "Ganado"
+        }
+      ],
+      "duplicate_name_flagged": "Lókʼaahnteel"
+    },
+    {
+      "key": "Ganado-Arizona_2",
+      "shard_name": "Ganado",
+      "country": "Arizona",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        35.62969,
+        -109.6712
+      ],
+      "min_year": 500,
+      "max_year": 1400,
+      "other_names": [
+        "Defiance Plateau"
+      ],
+      "current_historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Lókʼaahnteel"
+        }
+      ],
+      "duplicate_name_flagged": "Lókʼaahnteel"
+    },
+    {
+      "key": "Bear River-Canada",
+      "shard_name": "Bear River",
+      "country": "Canada",
+      "region": "mar_mikmaki_ns_pei_cape_breton",
+      "coords_lat_lng": [
+        44.6145,
+        -65.6745
+      ],
+      "min_year": -200,
+      "max_year": 300,
+      "other_names": [
+        "BdDk-1",
+        "Annapolis Basin Shell Midden"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-200.1.1",
+          "name": "L'sitkuk"
+        }
+      ],
+      "duplicate_name_flagged": "L'sitkuk"
+    },
+    {
+      "key": "Bear River Mi'kmaq Town-Canada",
+      "shard_name": "Bear River Mi'kmaq Town",
+      "country": "Canada",
+      "region": "cc2_lower_canada_quebec",
+      "coords_lat_lng": [
+        44.5851,
+        -65.6521
+      ],
+      "min_year": 1780,
+      "max_year": 1820,
+      "other_names": [
+        "L'sitkuk Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1780.1.1",
+          "name": "L'sitkuk"
+        }
+      ],
+      "duplicate_name_flagged": "L'sitkuk"
+    },
+    {
+      "key": "Bear River Annapolis Town-Nova Scotia",
+      "shard_name": "Bear River Annapolis Town",
+      "country": "Nova Scotia",
+      "region": "mar_mikmaki_ns_pei_cape_breton",
+      "coords_lat_lng": [
+        44.6333,
+        -65.65
+      ],
+      "min_year": 200,
+      "max_year": 1400,
+      "other_names": [
+        "Bear River Basin Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "L'sitkuk"
+        }
+      ],
+      "duplicate_name_flagged": "L'sitkuk"
+    },
+    {
+      "key": "Helton-Illinois",
+      "shard_name": "Helton",
+      "country": "Illinois",
+      "region": "um_american_bottom_lower_il",
+      "coords_lat_lng": [
+        39.1911,
+        -90.3687
+      ],
+      "min_year": 200,
+      "max_year": 1150,
+      "other_names": [
+        "11GE540",
+        "Lower Illinois Archaic-Woodland"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Makopina"
+        }
+      ],
+      "duplicate_name_flagged": "Makopina"
+    },
+    {
+      "key": "Audrey-Illinois",
+      "shard_name": "Audrey",
+      "country": "Illinois",
+      "region": "um_des_moines_rock_iowa",
+      "coords_lat_lng": [
+        39.1575,
+        -90.6283
+      ],
+      "min_year": 900,
+      "max_year": 1300,
+      "other_names": [
+        "11GE20",
+        "Greene County Mississippian"
+      ],
+      "current_historical_names": [
+        {
+          "date": "900.1.1",
+          "name": "Makoopina"
+        }
+      ],
+      "duplicate_name_flagged": "Makoopina"
+    },
+    {
+      "key": "Peisker-Illinois",
+      "shard_name": "Peisker",
+      "country": "Illinois",
+      "region": "um_des_moines_rock_iowa",
+      "coords_lat_lng": [
+        39.115,
+        -90.618
+      ],
+      "min_year": -600,
+      "max_year": 300,
+      "other_names": [
+        "Peisker Mounds",
+        "11C135"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-600.1.1",
+          "name": "Makoopina"
+        }
+      ],
+      "duplicate_name_flagged": "Makoopina"
+    },
+    {
+      "key": "Rupert Minidoka Basin Town-Idaho",
+      "shard_name": "Rupert Minidoka Basin Town",
+      "country": "Idaho",
+      "region": "nw_snake_river_klamath_interior",
+      "coords_lat_lng": [
+        42.6167,
+        -113.6667
+      ],
+      "min_year": 350,
+      "max_year": 1350,
+      "other_names": [
+        "Rupert Agricultural Center"
+      ],
+      "current_historical_names": [
+        {
+          "date": "350.1.1",
+          "name": "Minidoka"
+        }
+      ],
+      "duplicate_name_flagged": "Minidoka"
+    },
+    {
+      "key": "Paul Snake River North Village-Idaho",
+      "shard_name": "Paul Snake River North Village",
+      "country": "Idaho",
+      "region": "nw_snake_river_klamath_interior",
+      "coords_lat_lng": [
+        42.6,
+        -113.7667
+      ],
+      "min_year": 500,
+      "max_year": 1450,
+      "other_names": [
+        "Paul Basin Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Minidoka"
+        }
+      ],
+      "duplicate_name_flagged": "Minidoka"
+    },
+    {
+      "key": "Burley Snake River Marsh Capital-Idaho",
+      "shard_name": "Burley Snake River Marsh Capital",
+      "country": "Idaho",
+      "region": "nw_snake_river_klamath_interior",
+      "coords_lat_lng": [
+        42.5333,
+        -113.7833
+      ],
+      "min_year": 200,
+      "max_year": 1350,
+      "other_names": [
+        "Minidoka Marsh Shoshone Capital"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Minidoka"
+        }
+      ],
+      "duplicate_name_flagged": "Minidoka"
+    },
+    {
+      "key": "Ghost Reservoir Habitation-Alberta",
+      "shard_name": "Ghost Reservoir Habitation",
+      "country": "Alberta",
+      "region": "pr_foothills_bow_upper_saskatchewan",
+      "coords_lat_lng": [
+        51.2167,
+        -114.7333
+      ],
+      "min_year": 200,
+      "max_year": 1300,
+      "other_names": [
+        "Upper Bow River Valley Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Mînî Thnî"
+        }
+      ],
+      "duplicate_name_flagged": "Mînî Thnî"
+    },
+    {
+      "key": "Stoney 142, 143, 144-Canada",
+      "shard_name": "Stoney 142, 143, 144",
+      "country": "Canada",
+      "region": "can_alberta",
+      "coords_lat_lng": [
+        51.18876,
+        -114.83367
+      ],
+      "min_year": 1942,
+      "max_year": 2026,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "1879.1.1",
+          "name": "Mînî Thnî"
+        },
+        {
+          "date": "2020.1.1",
+          "name": "Mînî Thnî"
+        }
+      ],
+      "duplicate_name_flagged": "Mînî Thnî"
+    },
+    {
+      "key": "Chiniki Lake-Canada",
+      "shard_name": "Chiniki Lake",
+      "country": "Canada",
+      "region": "pr_foothills_bow_upper_saskatchewan",
+      "coords_lat_lng": [
+        51.1067,
+        -114.9083
+      ],
+      "min_year": -6000,
+      "max_year": 1400,
+      "other_names": [
+        "Iyarhe Nakoda",
+        "Bow Valley Foothills",
+        "EgPs-48"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-6000.1.1",
+          "name": "Mînî Thnî"
+        }
+      ],
+      "duplicate_name_flagged": "Mînî Thnî"
+    },
+    {
+      "key": "Norby-Canada",
+      "shard_name": "Norby",
+      "country": "Canada",
+      "region": "pr_south_saskatchewan_palliser_steppe",
+      "coords_lat_lng": [
+        52.125,
+        -106.665
+      ],
+      "min_year": -5100,
+      "max_year": -3800,
+      "other_names": [
+        "FbNp-56",
+        "Saskatoon Mummy Cave Bison"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-5100.1.1",
+          "name": "Misâskwatôminihk"
+        }
+      ],
+      "duplicate_name_flagged": "Misâskwatôminihk"
+    },
+    {
+      "key": "Gowen-Canada",
+      "shard_name": "Gowen",
+      "country": "Canada",
+      "region": "pr_south_saskatchewan_palliser_steppe",
+      "coords_lat_lng": [
+        52.105,
+        -106.715
+      ],
+      "min_year": -4300,
+      "max_year": -3200,
+      "other_names": [
+        "FbNp-25",
+        "Saskatoon Early Archaic Gowen 1-2"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-4300.1.1",
+          "name": "Misâskwatôminihk"
+        }
+      ],
+      "duplicate_name_flagged": "Misâskwatôminihk"
+    },
+    {
+      "key": "Gowen Archaic Village-Saskatchewan",
+      "shard_name": "Gowen Archaic Village",
+      "country": "Saskatchewan",
+      "region": "pr_south_saskatchewan_palliser_steppe",
+      "coords_lat_lng": [
+        52.0833,
+        -106.7
+      ],
+      "min_year": -2500,
+      "max_year": 0,
+      "other_names": [
+        "Gowen Saskatoon Habitation"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-2500.1.1",
+          "name": "Misâskwatôminihk"
+        }
+      ],
+      "duplicate_name_flagged": "Misâskwatôminihk"
+    },
+    {
+      "key": "Lake Bronson-Minnesota_2",
+      "shard_name": "Lake Bronson",
+      "country": "Minnesota",
+      "region": "enp_red_river_north",
+      "coords_lat_lng": [
+        48.725,
+        -96.655
+      ],
+      "min_year": 500,
+      "max_year": 1100,
+      "other_names": [
+        "21KT1",
+        "Kittson Arvilla Mounds"
+      ],
+      "current_historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Miskwaagamiiwi-ziibi"
+        }
+      ],
+      "duplicate_name_flagged": "Miskwaagamiiwi-ziibi"
+    },
+    {
+      "key": "Agassiz Mosbeck-Minnesota",
+      "shard_name": "Agassiz Mosbeck",
+      "country": "Minnesota",
+      "region": "enp_red_river_north",
+      "coords_lat_lng": [
+        48.0654,
+        -96.0356
+      ],
+      "min_year": -8000,
+      "max_year": -2000,
+      "other_names": [
+        "21RL-AM",
+        "Red Lake Beach Ridge"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-8000.1.1",
+          "name": "Miskwaagamiiwi-ziibi"
+        }
+      ],
+      "duplicate_name_flagged": "Miskwaagamiiwi-ziibi"
+    },
+    {
+      "key": "St. Vincent River Village-North Dakota",
+      "shard_name": "St. Vincent River Village",
+      "country": "North Dakota",
+      "region": "pr_red_assiniboine_winnipeg_basin",
+      "coords_lat_lng": [
+        48.9715,
+        -97.231
+      ],
+      "min_year": 1250,
+      "max_year": 1450,
+      "other_names": [
+        "21KT5",
+        "Pembina Red River Confluence Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Miskwaagamiiwi-ziibi"
+        }
+      ],
+      "duplicate_name_flagged": "Miskwaagamiiwi-ziibi"
+    }
+  ]
+}

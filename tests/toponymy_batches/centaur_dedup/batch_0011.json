@@ -1,0 +1,532 @@
+{
+  "batch_index": 11,
+  "clusters": [
+    "wendat"
+  ],
+  "countries": [
+    "Canada"
+  ],
+  "count": 17,
+  "forbidden_already_used_in_region": [
+    "'Yalis",
+    "Aazhoodenaang",
+    "Achelacy",
+    "Ahjimsek",
+    "Ahkwesáhsne",
+    "Ahousaht",
+    "Ajoasté",
+    "Akaamaschii",
+    "Akpatordjuark",
+    "Akulivik",
+    "Akwesasne",
+    "Alarnerk",
+    "Alexander",
+    "Alámex",
+    "Amiskwaciya",
+    "Aondironon",
+    "Apitipi",
+    "Apitipik",
+    "Apvitok",
+    "Arendarhonon",
+    "Argentenay",
+    "Argenteuil",
+    "Arvia'juaq",
+    "Arviat",
+    "Arviligjuaq",
+    "Aschkibokahn",
+    "Asinīpwāt-sīpiy",
+    "Ataronchronon",
+    "Attawapiskat",
+    "Attignawantan",
+    "Attigneenongnahac",
+    "Aujuittuq",
+    "Aulatsivik",
+    "Aulavik",
+    "Aupaluk",
+    "Avayalik",
+    "Avonlea",
+    "Avvajja",
+    "Baawingashing",
+    "Baie-Rouge",
+    "Baie-Saint-Paul",
+    "Baie-du-Febvre",
+    "Batiscan",
+    "Bay Roberts",
+    "Bay de Verde",
+    "Bayfield",
+    "Beaumont",
+    "Beauport",
+    "Beaupré",
+    "Beloeil",
+    "Benson",
+    "Beothuk",
+    "Berthier",
+    "Berthier-en-Bas",
+    "Biigtigong",
+    "Binaawaan",
+    "Bird Cove",
+    "Bkejwanong",
+    "Blackfoot",
+    "Blanc-Sablon",
+    "Bonavista",
+    "Boucherville",
+    "Bourg-Royal",
+    "Boyd's Cove",
+    "Brigus",
+    "Bunibonibee",
+    "Burlington Heights",
+    "Bytown",
+    "Bécancour",
+    "C'imo'ca",
+    "Cahiagué",
+    "Cap-Rouge",
+    "Cap-Saint-Ignace",
+    "Cap-Santé",
+    "Cap-de-la-Madeleine",
+    "Carbonear",
+    "Carcross",
+    "Catalina",
+    "Central Huron",
+    "Ceǧa Kin",
+    "Ch'oodeenjik",
+    "Champlain",
+    "Cheejil Niik",
+    "Chemonda",
+    "Chibougamau",
+    "Chicoutimi",
+    "Chinlac",
+    "Chinook",
+    "Chipoudy",
+    "Chisasibi",
+    "Chonnonton",
+    "Château-Richer",
+    "Châteauguay",
+    "Cleveland",
+    "Clyde River",
+    "Comox",
+    "Contarea",
+    "Contrecoeur",
+    "Contrecœur",
+    "Cow Head",
+    "Cowichan Valley B",
+    "Cowichan Valley C",
+    "Cowichan Valley I",
+    "Cuper's Cove",
+    "C̓uumaʕas",
+    "Dease Lake",
+    "Debert",
+    "Deshkan Ziibi",
+    "Deshkan Ziibiing",
+    "Desmaures",
+    "Dombourg",
+    "Délı̨nę",
+    "Désdélé Méne'",
+    "Ebytown",
+    "Echaot'įe Kų́ę́",
+    "Edziza",
+    "Eeyou Istchee",
+    "Ekuanitshit",
+    "Elsipogtog",
+    "Emsuk"
+  ],
+  "settlements": [
+    {
+      "key": "Lite-Canada",
+      "shard_name": "Lite",
+      "country": "Canada",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "coords_lat_lng": [
+        44.2245,
+        -77.3845
+      ],
+      "min_year": 1450,
+      "max_year": 1520,
+      "other_names": [
+        "BbGi-1",
+        "Belleville Moira River Wendat"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1450.1.1",
+          "name": "Wendat"
+        }
+      ],
+      "duplicate_name_flagged": "Wendat"
+    },
+    {
+      "key": "Aurora-Canada_2",
+      "shard_name": "Aurora",
+      "country": "Canada",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "coords_lat_lng": [
+        43.9885,
+        -79.4245
+      ],
+      "min_year": 1500,
+      "max_year": 1550,
+      "other_names": [
+        "BaGu-2",
+        "Old Fort Aurora Wendat"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1500.1.1",
+          "name": "Wendat"
+        }
+      ],
+      "duplicate_name_flagged": "Wendat"
+    },
+    {
+      "key": "Ratcliff-Canada",
+      "shard_name": "Ratcliff",
+      "country": "Canada",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "coords_lat_lng": [
+        43.9745,
+        -79.2815
+      ],
+      "min_year": 1450,
+      "max_year": 1520,
+      "other_names": [
+        "AlGt-157",
+        "Whitchurch-Stouffville Wendat"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1450.1.1",
+          "name": "Wendat"
+        }
+      ],
+      "duplicate_name_flagged": "Wendat"
+    },
+    {
+      "key": "Mantle-Canada",
+      "shard_name": "Mantle",
+      "country": "Canada",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "coords_lat_lng": [
+        43.9631,
+        -79.2264
+      ],
+      "min_year": 1500,
+      "max_year": 1550,
+      "other_names": [
+        "Jean-Baptiste Lainé",
+        "AlGt-334",
+        "Stouffville Wendat"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1500.1.1",
+          "name": "Wendat"
+        }
+      ],
+      "duplicate_name_flagged": "Wendat"
+    },
+    {
+      "key": "Draper-Canada",
+      "shard_name": "Draper",
+      "country": "Canada",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "coords_lat_lng": [
+        43.9242,
+        -79.1678
+      ],
+      "min_year": 1400,
+      "max_year": 1500,
+      "other_names": [
+        "AlGt-2",
+        "Duffins Creek Wendat",
+        "Draper Site",
+        "White",
+        "AlGt-32",
+        "Pickering Duffins Creek"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1400.1.1",
+          "name": "Wendat"
+        }
+      ],
+      "duplicate_name_flagged": "Wendat"
+    },
+    {
+      "key": "Spang-Canada",
+      "shard_name": "Spang",
+      "country": "Canada",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "coords_lat_lng": [
+        43.9145,
+        -79.2185
+      ],
+      "min_year": 1400,
+      "max_year": 1500,
+      "other_names": [
+        "AlGt-66",
+        "Markham Duffins Creek Wendat"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1400.1.1",
+          "name": "Wendat"
+        }
+      ],
+      "duplicate_name_flagged": "Wendat"
+    },
+    {
+      "key": "Best-Canada",
+      "shard_name": "Best",
+      "country": "Canada",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "coords_lat_lng": [
+        43.8985,
+        -79.1345
+      ],
+      "min_year": 1350,
+      "max_year": 1450,
+      "other_names": [
+        "AlGt-18",
+        "Pickering Duffins Creek Wendat"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1350.1.1",
+          "name": "Wendat"
+        }
+      ],
+      "duplicate_name_flagged": "Wendat"
+    },
+    {
+      "key": "Damiani-Canada",
+      "shard_name": "Damiani",
+      "country": "Canada",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "coords_lat_lng": [
+        43.8545,
+        -79.5285
+      ],
+      "min_year": 1450,
+      "max_year": 1500,
+      "other_names": [
+        "AlGv-231",
+        "Vaughan East Humber Wendat"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1450.1.1",
+          "name": "Wendat"
+        }
+      ],
+      "duplicate_name_flagged": "Wendat"
+    },
+    {
+      "key": "Millers-Canada",
+      "shard_name": "Millers",
+      "country": "Canada",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "coords_lat_lng": [
+        43.8445,
+        -79.1045
+      ],
+      "min_year": 1050,
+      "max_year": 1150,
+      "other_names": [
+        "Miller Site",
+        "AlGt-1",
+        "Pickering Early Iroquoian"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1050.1.1",
+          "name": "Wendat"
+        }
+      ],
+      "duplicate_name_flagged": "Wendat"
+    },
+    {
+      "key": "Seed-Barker-Canada",
+      "shard_name": "Seed-Barker",
+      "country": "Canada",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "coords_lat_lng": [
+        43.8345,
+        -79.5985
+      ],
+      "min_year": 1500,
+      "max_year": 1550,
+      "other_names": [
+        "AkGv-1",
+        "Vaughan Humber River Wendat"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1500.1.1",
+          "name": "Wendat"
+        }
+      ],
+      "duplicate_name_flagged": "Wendat"
+    },
+    {
+      "key": "Boyd-Canada",
+      "shard_name": "Boyd",
+      "country": "Canada",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "coords_lat_lng": [
+        43.8245,
+        -79.6245
+      ],
+      "min_year": 1550,
+      "max_year": 1600,
+      "other_names": [
+        "AkGv-3",
+        "Woodbridge Kleinburg Ossuary"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1550.1.1",
+          "name": "Wendat"
+        }
+      ],
+      "duplicate_name_flagged": "Wendat"
+    },
+    {
+      "key": "Alexander-Canada_2",
+      "shard_name": "Alexander",
+      "country": "Canada",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "coords_lat_lng": [
+        43.8165,
+        -79.2345
+      ],
+      "min_year": 1350,
+      "max_year": 1400,
+      "other_names": [
+        "Alexandra",
+        "AkGt-53",
+        "Scarborough Rouge-Highland Wendat"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1350.1.1",
+          "name": "Wendat"
+        }
+      ],
+      "duplicate_name_flagged": "Wendat"
+    },
+    {
+      "key": "Keffer-Canada",
+      "shard_name": "Keffer",
+      "country": "Canada",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "coords_lat_lng": [
+        43.8115,
+        -79.4715
+      ],
+      "min_year": 1450,
+      "max_year": 1500,
+      "other_names": [
+        "AkGv-14",
+        "Vaughan Don River Wendat"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1450.1.1",
+          "name": "Wendat"
+        }
+      ],
+      "duplicate_name_flagged": "Wendat"
+    },
+    {
+      "key": "Mackenzie-Woodbridge-Canada",
+      "shard_name": "Mackenzie-Woodbridge",
+      "country": "Canada",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "coords_lat_lng": [
+        43.7885,
+        -79.5915
+      ],
+      "min_year": 1500,
+      "max_year": 1540,
+      "other_names": [
+        "AkGv-2",
+        "Woodbridge Humber Wendat"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1500.1.1",
+          "name": "Wendat"
+        }
+      ],
+      "duplicate_name_flagged": "Wendat"
+    },
+    {
+      "key": "Thomson-Walker-Canada",
+      "shard_name": "Thomson-Walker",
+      "country": "Canada",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "coords_lat_lng": [
+        43.7785,
+        -79.2545
+      ],
+      "min_year": 1300,
+      "max_year": 1400,
+      "other_names": [
+        "Thompson-Walker",
+        "Markham Highland Creek"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1300.1.1",
+          "name": "Wendat"
+        }
+      ],
+      "duplicate_name_flagged": "Wendat"
+    },
+    {
+      "key": "Parsons-Canada",
+      "shard_name": "Parsons",
+      "country": "Canada",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "coords_lat_lng": [
+        43.7745,
+        -79.4885
+      ],
+      "min_year": 1450,
+      "max_year": 1500,
+      "other_names": [
+        "AkGv-8",
+        "Black Creek Humber Wendat"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1450.1.1",
+          "name": "Wendat"
+        }
+      ],
+      "duplicate_name_flagged": "Wendat"
+    },
+    {
+      "key": "Moatfield-Canada",
+      "shard_name": "Moatfield",
+      "country": "Canada",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "coords_lat_lng": [
+        43.7655,
+        -79.3545
+      ],
+      "min_year": 1280,
+      "max_year": 1320,
+      "other_names": [
+        "AkGu-65",
+        "North York Don River Ossuary"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1280.1.1",
+          "name": "Wendat"
+        }
+      ],
+      "duplicate_name_flagged": "Wendat"
+    }
+  ]
+}

@@ -1,0 +1,692 @@
+{
+  "batch_index": 59,
+  "clusters": [
+    "okakapasa",
+    "omahknitahta",
+    "onondage",
+    "onontcataronon",
+    "owastanong",
+    "pahatsi",
+    "panaiti",
+    "panaka"
+  ],
+  "countries": [
+    "Alabama",
+    "Alberta",
+    "Idaho",
+    "Michigan",
+    "Missouri",
+    "Nevada",
+    "New York",
+    "Ontario"
+  ],
+  "count": 24,
+  "forbidden_already_used_in_region": [
+    "Aga'idökadö",
+    "Aga'ipanadokado",
+    "Aga'ipañinadökadö",
+    "Agai-dika-a",
+    "Agaideka",
+    "Agaidika",
+    "Agaidüka",
+    "Agaipah",
+    "Aibapaa",
+    "Akwesasne",
+    "Amayeli Egwa",
+    "Amiskwaciy",
+    "Andagoron",
+    "Apafalaya",
+    "Asiniskaw Sîpîsis",
+    "Asáaqa",
+    "Atonontrataronon",
+    "Atsakudokwa",
+    "Baawitigong",
+    "Bawating",
+    "Bia Ogwaide",
+    "Biidaawewe",
+    "Biiwaanagoonh",
+    "Blackfoot",
+    "Bloomfield",
+    "Boa Ogoi",
+    "Boise",
+    "Breuckelen",
+    "Burke",
+    "Burnetsfield",
+    "Báxoje",
+    "Capaha",
+    "Carson City",
+    "Carthage",
+    "Cascade",
+    "Casconchiagon",
+    "Caughnawaga",
+    "Cayadutta",
+    "Cherokee",
+    "Chickasaw",
+    "Chikasha",
+    "Choctaw Corner",
+    "Chugnut",
+    "Clayton",
+    "Copper Harbor",
+    "Dageanogaunt",
+    "Dagunahi",
+    "Dayoitgao",
+    "Eabametoong",
+    "Eaton",
+    "Elwood",
+    "Esopus",
+    "Fort Louis de la Louisiane",
+    "Fort Nassau",
+    "Gaa-baagwaashing",
+    "Gandawague",
+    "Ganeasos",
+    "Ganondagan",
+    "Garoga",
+    "Gaʼniyáʼdiyoʼ",
+    "Gaʼnoʼwáʼgës",
+    "Gewauga",
+    "Ginoogaaming",
+    "Ginoogaamiziing",
+    "Goiogouen",
+    "Grant",
+    "Hanalelti",
+    "Hapdütekadü",
+    "Hatwai",
+    "Haʼnyáʼyëh",
+    "Hukundika",
+    "Hunters Point",
+    "Huron",
+    "Iiníí",
+    "Ingacom",
+    "Ispitsisaahta",
+    "Itombi Ikbi",
+    "Itsikáámi",
+    "Kagunyi",
+    "Kahkwa",
+    "Kahuahgo",
+    "Kallamuchee",
+    "Kammedeka",
+    "Kammitikka",
+    "Kamödkadö",
+    "Kanatsiohareke",
+    "Kanatsyohare",
+    "Kanaweola",
+    "Kaniatarowanenneh",
+    "Kanonwalohale",
+    "Karoka",
+    "Kasabonika",
+    "Kawita",
+    "Keskaechqueren",
+    "Kichesipirini",
+    "Kichi Sìbì",
+    "Kikanamaso",
+    "Kinodjiwan",
+    "Kitchawan",
+    "Kitchenuhmaykoosib",
+    "Kkánze",
+    "Kosipatuwiwagaiyu",
+    "Kowasati",
+    "Kuiyudika",
+    "Kupadökadö",
+    "Kusa",
+    "Kusiutta",
+    "Kutsipiuti",
+    "Kuyuidika-a",
+    "Kuyuidökadö",
+    "Káamya",
+    "Káínaa",
+    "Kínaáksisaahta",
+    "Kúuskúuski",
+    "Küpadökadö",
+    "Laaphawachking",
+    "Lake",
+    "Lam'áta",
+    "Las Vegas",
+    "Las Vegas Army Airfield"
+  ],
+  "settlements": [
+    {
+      "key": "Mulberry Creek Town-Alabama",
+      "shard_name": "Mulberry Creek Town",
+      "country": "Alabama",
+      "region": "cu_middle_tennessee_muscle_shoals",
+      "coords_lat_lng": [
+        34.7815,
+        -87.981
+      ],
+      "min_year": 1200,
+      "max_year": 1350,
+      "other_names": [
+        "1CT27",
+        "Colbert Pickwick Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Oka Kapassa"
+        }
+      ],
+      "duplicate_name_flagged": "Oka Kapassa"
+    },
+    {
+      "key": "Stanfield-Worley Bluff Shelter-Alabama",
+      "shard_name": "Stanfield-Worley Bluff Shelter",
+      "country": "Alabama",
+      "region": "cu_middle_tennessee_muscle_shoals",
+      "coords_lat_lng": [
+        34.675,
+        -87.648
+      ],
+      "min_year": -8000,
+      "max_year": -2000,
+      "other_names": [
+        "1CT125"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-8000.1.1",
+          "name": "Oka Kapassa"
+        }
+      ],
+      "duplicate_name_flagged": "Oka Kapassa"
+    },
+    {
+      "key": "Cane Creek Town-Alabama",
+      "shard_name": "Cane Creek Town",
+      "country": "Alabama",
+      "region": "cu_middle_tennessee_muscle_shoals",
+      "coords_lat_lng": [
+        34.651,
+        -87.7515
+      ],
+      "min_year": 1150,
+      "max_year": 1300,
+      "other_names": [
+        "Colbert Cane Creek Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1150.1.1",
+          "name": "Oka Kapassa"
+        }
+      ],
+      "duplicate_name_flagged": "Oka Kapassa"
+    },
+    {
+      "key": "Empress Confluence Town-Alberta",
+      "shard_name": "Empress Confluence Town",
+      "country": "Alberta",
+      "region": "pr_south_saskatchewan_palliser_steppe",
+      "coords_lat_lng": [
+        50.95,
+        -110.0167
+      ],
+      "min_year": 700,
+      "max_year": 1480,
+      "other_names": [
+        "Red Deer South Saskatchewan Confluence"
+      ],
+      "current_historical_names": [
+        {
+          "date": "700.1.1",
+          "name": "Omahk-niitahtaa"
+        }
+      ],
+      "duplicate_name_flagged": "Omahk-niitahtaa"
+    },
+    {
+      "key": "British Block Village-Alberta",
+      "shard_name": "British Block Village",
+      "country": "Alberta",
+      "region": "pr_foothills_bow_upper_saskatchewan",
+      "coords_lat_lng": [
+        50.4167,
+        -111.1667
+      ],
+      "min_year": 500,
+      "max_year": 1400,
+      "other_names": [
+        "Suffield Reserve Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Omahk-niitahtaa"
+        }
+      ],
+      "duplicate_name_flagged": "Omahk-niitahtaa"
+    },
+    {
+      "key": "Cactus Flower Habitation-Alberta",
+      "shard_name": "Cactus Flower Habitation",
+      "country": "Alberta",
+      "region": "pr_south_saskatchewan_palliser_steppe",
+      "coords_lat_lng": [
+        50.25,
+        -110.8833
+      ],
+      "min_year": -1500,
+      "max_year": 800,
+      "other_names": [
+        "Suffield South Saskatchewan Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-1500.1.1",
+          "name": "Omahk-niitahtaa"
+        }
+      ],
+      "duplicate_name_flagged": "Omahk-niitahtaa"
+    },
+    {
+      "key": "Bloody Hill-New York",
+      "shard_name": "Bloody Hill",
+      "country": "New York",
+      "region": "ca1_trans_appalachian_indigenous",
+      "coords_lat_lng": [
+        42.9981,
+        -76.0252
+      ],
+      "min_year": 1400,
+      "max_year": 1630,
+      "other_names": [
+        "Manlius Onondaga Town",
+        "Tly005",
+        "Onondaga Valley"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1400.1.1",
+          "name": "Onoñdaʼgeʼ"
+        }
+      ],
+      "duplicate_name_flagged": "Onoñdaʼgeʼ"
+    },
+    {
+      "key": "Indian Hill-New York",
+      "shard_name": "Indian Hill",
+      "country": "New York",
+      "region": "ca1_trans_appalachian_indigenous",
+      "coords_lat_lng": [
+        42.9491,
+        -76.0121
+      ],
+      "min_year": 1500,
+      "max_year": 1670,
+      "other_names": [
+        "Pompey Onondaga Town 1654-1682",
+        "Pompey Onondaga Capital",
+        "Tly001"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1500.1.1",
+          "name": "Onoñdaʼgeʼ"
+        }
+      ],
+      "duplicate_name_flagged": "Onoñdaʼgeʼ"
+    },
+    {
+      "key": "Burke-New York_2",
+      "shard_name": "Burke",
+      "country": "New York",
+      "region": "gl_huron_erie_finger_lakes_ny",
+      "coords_lat_lng": [
+        42.9315,
+        -76.0285
+      ],
+      "min_year": 1450,
+      "max_year": 1530,
+      "other_names": [
+        "Tly006",
+        "Pompey Onondaga"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1450.1.1",
+          "name": "Onoñdaʼgeʼ"
+        }
+      ],
+      "duplicate_name_flagged": "Onoñdaʼgeʼ"
+    },
+    {
+      "key": "Casselman High Falls Village-Ontario",
+      "shard_name": "Casselman High Falls Village",
+      "country": "Ontario",
+      "region": "sl_ottawa_rideau_upper_st_lawrence",
+      "coords_lat_lng": [
+        45.3167,
+        -75.0833
+      ],
+      "min_year": 1350,
+      "max_year": 1520,
+      "other_names": [
+        "Casselman Rapids Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1350.1.1",
+          "name": "Onontchataronon"
+        }
+      ],
+      "duplicate_name_flagged": "Onontchataronon"
+    },
+    {
+      "key": "Crysler Nation River Town-Ontario",
+      "shard_name": "Crysler Nation River Town",
+      "country": "Ontario",
+      "region": "sl_ottawa_rideau_upper_st_lawrence",
+      "coords_lat_lng": [
+        45.2167,
+        -75.15
+      ],
+      "min_year": 1380,
+      "max_year": 1520,
+      "other_names": [
+        "Crysler Iroquoian Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1380.1.1",
+          "name": "Onontchataronon"
+        }
+      ],
+      "duplicate_name_flagged": "Onontchataronon"
+    },
+    {
+      "key": "Chesterville River Settlement-Ontario",
+      "shard_name": "Chesterville River Settlement",
+      "country": "Ontario",
+      "region": "sl_ottawa_rideau_upper_st_lawrence",
+      "coords_lat_lng": [
+        45.1,
+        -75.2333
+      ],
+      "min_year": 1400,
+      "max_year": 1530,
+      "other_names": [
+        "South Nation Chesterville Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1400.1.1",
+          "name": "Onontchataronon"
+        }
+      ],
+      "duplicate_name_flagged": "Onontchataronon"
+    },
+    {
+      "key": "Prison Farm-Michigan",
+      "shard_name": "Prison Farm",
+      "country": "Michigan",
+      "region": "gl_michigan_fox_winnebago",
+      "coords_lat_lng": [
+        42.9715,
+        -85.0845
+      ],
+      "min_year": 0,
+      "max_year": 400,
+      "other_names": [
+        "20IA58",
+        "Ionia Grand River"
+      ],
+      "current_historical_names": [
+        {
+          "date": "0.1.1",
+          "name": "Owashtanong"
+        }
+      ],
+      "duplicate_name_flagged": "Owashtanong"
+    },
+    {
+      "key": "Grand River Odawa Town-Michigan",
+      "shard_name": "Grand River Odawa Town",
+      "country": "Michigan",
+      "region": "ca1_trans_appalachian_indigenous",
+      "coords_lat_lng": [
+        42.9631,
+        -85.6681
+      ],
+      "min_year": 1780,
+      "max_year": 1780,
+      "other_names": [
+        "Owashtanong",
+        "Grand Rapids Native Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1780.1.1",
+          "name": "Owashtanong"
+        }
+      ],
+      "duplicate_name_flagged": "Owashtanong"
+    },
+    {
+      "key": "Converse-Michigan",
+      "shard_name": "Converse",
+      "country": "Michigan",
+      "region": "gl_michigan_fox_winnebago",
+      "coords_lat_lng": [
+        42.9615,
+        -85.6785
+      ],
+      "min_year": 0,
+      "max_year": 800,
+      "other_names": [
+        "Converse Mounds",
+        "20KT2",
+        "Grand Rapids Hopewell",
+        "20KT1",
+        "Wyoming Mounds"
+      ],
+      "current_historical_names": [
+        {
+          "date": "0.1.1",
+          "name": "Owashtanong"
+        }
+      ],
+      "duplicate_name_flagged": "Owashtanong"
+    },
+    {
+      "key": "Grand Osage-Missouri",
+      "shard_name": "Grand Osage",
+      "country": "Missouri",
+      "region": "ca1_plains_indigenous_1754",
+      "coords_lat_lng": [
+        37.9886,
+        -94.4608
+      ],
+      "min_year": 1700,
+      "max_year": 1783,
+      "other_names": [
+        "Little Osage",
+        "Vernon County Osage"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1700.1.1",
+          "name": "Pahatsi"
+        }
+      ],
+      "duplicate_name_flagged": "Pahatsi"
+    },
+    {
+      "key": "Great Osage Village-Missouri",
+      "shard_name": "Great Osage Village",
+      "country": "Missouri",
+      "region": "ca1_plains_indigenous_1754",
+      "coords_lat_lng": [
+        37.9851,
+        -94.2851
+      ],
+      "min_year": 1700,
+      "max_year": 1750,
+      "other_names": [
+        "Carondelet Site",
+        "Vernon County Osage Center"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1700.1.1",
+          "name": "Pahatsi"
+        }
+      ],
+      "duplicate_name_flagged": "Pahatsi"
+    },
+    {
+      "key": "Big Osage Earthlodge Town-Missouri",
+      "shard_name": "Big Osage Earthlodge Town",
+      "country": "Missouri",
+      "region": "np_lower_missouri_platte_kansas",
+      "coords_lat_lng": [
+        37.9515,
+        -94.301
+      ],
+      "min_year": 1500,
+      "max_year": 1600,
+      "other_names": [
+        "23VE1",
+        "Brown Village",
+        "Big Osage Type Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1500.1.1",
+          "name": "Pahatsi"
+        }
+      ],
+      "duplicate_name_flagged": "Pahatsi"
+    },
+    {
+      "key": "St. Anthony Henrys Fork Capital-Idaho",
+      "shard_name": "St. Anthony Henrys Fork Capital",
+      "country": "Idaho",
+      "region": "nw_snake_river_klamath_interior",
+      "coords_lat_lng": [
+        43.9667,
+        -111.6833
+      ],
+      "min_year": 300,
+      "max_year": 1350,
+      "other_names": [
+        "Henrys Fork Snake River Capital"
+      ],
+      "current_historical_names": [
+        {
+          "date": "300.1.1",
+          "name": "Panaiti"
+        }
+      ],
+      "duplicate_name_flagged": "Panaiti"
+    },
+    {
+      "key": "Rexburg Teton Confluence Town-Idaho",
+      "shard_name": "Rexburg Teton Confluence Town",
+      "country": "Idaho",
+      "region": "nw_snake_river_klamath_interior",
+      "coords_lat_lng": [
+        43.8167,
+        -111.7833
+      ],
+      "min_year": 300,
+      "max_year": 1350,
+      "other_names": [
+        "Teton River Confluence Center"
+      ],
+      "current_historical_names": [
+        {
+          "date": "300.1.1",
+          "name": "Panaiti"
+        }
+      ],
+      "duplicate_name_flagged": "Panaiti"
+    },
+    {
+      "key": "Rigby Clark Snake River Center-Idaho",
+      "shard_name": "Rigby Clark Snake River Center",
+      "country": "Idaho",
+      "region": "nw_snake_river_klamath_interior",
+      "coords_lat_lng": [
+        43.6667,
+        -111.9167
+      ],
+      "min_year": 400,
+      "max_year": 1400,
+      "other_names": [
+        "Rigby Alluvial Fan Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "400.1.1",
+          "name": "Panaiti"
+        }
+      ],
+      "duplicate_name_flagged": "Panaiti"
+    },
+    {
+      "key": "Panaca Meadow Valley Town-Nevada",
+      "shard_name": "Panaca Meadow Valley Town",
+      "country": "Nevada",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        37.7833,
+        -114.3833
+      ],
+      "min_year": 300,
+      "max_year": 1400,
+      "other_names": [
+        "Panaca Spring Center"
+      ],
+      "current_historical_names": [
+        {
+          "date": "300.1.1",
+          "name": "Panaka"
+        }
+      ],
+      "duplicate_name_flagged": "Panaka"
+    },
+    {
+      "key": "Barclay Meadow Valley Village-Nevada",
+      "shard_name": "Barclay Meadow Valley Village",
+      "country": "Nevada",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        37.5167,
+        -114.25
+      ],
+      "min_year": 400,
+      "max_year": 1450,
+      "other_names": [
+        "Clover Creek Confluence Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "400.1.1",
+          "name": "Panáka"
+        }
+      ],
+      "duplicate_name_flagged": "Panáka"
+    },
+    {
+      "key": "Carp Meadow Valley Wash Village-Nevada",
+      "shard_name": "Carp Meadow Valley Wash Village",
+      "country": "Nevada",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        37.1167,
+        -114.5833
+      ],
+      "min_year": 500,
+      "max_year": 1450,
+      "other_names": [
+        "Lower Meadow Valley Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Panáka"
+        }
+      ],
+      "duplicate_name_flagged": "Panáka"
+    }
+  ]
+}

@@ -1,0 +1,678 @@
+{
+  "batch_index": 30,
+  "clusters": [
+    "cawi",
+    "dilze",
+    "discibikoh",
+    "hocak"
+  ],
+  "countries": [
+    "Arizona",
+    "Kansas",
+    "Nebraska",
+    "Wisconsin"
+  ],
+  "count": 24,
+  "forbidden_already_used_in_region": [
+    "'Aha Kwahwat",
+    "'Aha Makhav",
+    "'Onk Akimel",
+    "Abangkuyivi",
+    "Adahiilíní",
+    "Adikamegong",
+    "Aghaałą́",
+    "Ahagaskiaywa",
+    "Akimel O'odham",
+    "Akwałina",
+    "Ali Waipia",
+    "Anéʼé Tséyiʼ",
+    "Apache Junction",
+    "Awat'ovi",
+    "Awatovi",
+    "Awatʼovi",
+    "Aztalan",
+    "Babad Do'ag",
+    "Babocomari",
+    "Baxoje",
+    "Bdéwákhathuŋwaŋ",
+    "Besh-Ba-Gowah",
+    "Beʼekʼid Baa Ahoodzání",
+    "Bidaʼhóóchiiʼ",
+    "Bideʼyóó",
+    "Blue Mound",
+    "Báxoje",
+    "Béésh Baa Gowah",
+    "Cemamagi Du'ag",
+    "Chakpahu",
+    "Chaticks si Chaticks",
+    "Cherokee",
+    "Chetolah",
+    "Chezhinchotah",
+    "Chiricahui",
+    "Chiwi Kawi",
+    "Chodistaas",
+    "Chokonen",
+    "Chʼilwózh",
+    "Ckíri",
+    "Ckírikiickatuus",
+    "Cuk Ṣon",
+    "Diamond Bluff",
+    "Dził Nchaa Síʼan",
+    "Dził Nnilchʼi Diyiléé",
+    "Dził Nteel",
+    "Dził Łigai Si’án",
+    "Dziłghą́ʼé",
+    "Dziłíjiin",
+    "Dáʼákʼeh Halání",
+    "Elk Mound",
+    "Etzanoa",
+    "Fort Apache",
+    "Gaadisóh",
+    "Geʼe Wawhi",
+    "Gu Achi",
+    "Hakanyacha",
+    "Hatalacva",
+    "Hawúʼishįįhé",
+    "Hila Wi:n",
+    "Hogay",
+    "Homol'ovi",
+    "Honanki",
+    "Hotóá'eó'he'e",
+    "Hovi'itstuyqa",
+    "Hoyapi",
+    "Huachuca",
+    "Huchassahpatch",
+    "Huron",
+    "Hvehasahpatch",
+    "Hákʼayé",
+    "Hé Mni Čháŋ",
+    "Hóyééʼ",
+    "Ichʼįʼ Nahiłtį́į́",
+    "Itskari",
+    "Jiaspi",
+    "Jíwere",
+    "K'ya:dul Łana",
+    "K'yawan' A:honanne",
+    "Kawaika-a",
+    "Kawayka'a",
+    "Kawestima",
+    "Keečąk",
+    "Keli Akimel",
+    "Kiatuthlanna",
+    "Kiet Siel",
+    "Kiicawiicaku",
+    "Kiikaapoa",
+    "Kiiqöwala",
+    "Kin Klethla",
+    "Kin Níteel",
+    "Kin Tiel",
+    "Kin Łitso",
+    "Kiniiʼ Naʼígai",
+    "Kinishba",
+    "Kinlichee",
+    "Kinteel",
+    "Kiowa",
+    "Kiqötsmovi",
+    "Kirikirʔi꞉s",
+    "Kitikiti'sh",
+    "Kitkahahki",
+    "Kitkaháxki",
+    "Kitkehahki",
+    "Kits'iil",
+    "Klagetoh",
+    "Komatk",
+    "Komaḍk",
+    "Komkcʼeḍ ʼe-Wa:ʼosidk",
+    "Kookopngyamuy",
+    "Koonina",
+    "Kooškųnąk",
+    "Koshkonong",
+    "Kuchaptuvela",
+    "Kukotsomo",
+    "Kukupur Nyivash",
+    "Kwa'ák Mát",
+    "Kwatsáan",
+    "Kwevkepaya",
+    "Káaⁿze"
+  ],
+  "settlements": [
+    {
+      "key": "Twelve Mile Creek Smoky Hill Village-Kansas",
+      "shard_name": "Twelve Mile Creek Smoky Hill Village",
+      "country": "Kansas",
+      "region": "np_lower_missouri_platte_kansas",
+      "coords_lat_lng": [
+        39.401,
+        -98.7015
+      ],
+      "min_year": 1200,
+      "max_year": 1350,
+      "other_names": [
+        "14OB1",
+        "Twelve Mile Osborne Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Cáawi"
+        }
+      ],
+      "duplicate_name_flagged": "Cáawi"
+    },
+    {
+      "key": "Linwood Pawnee Earthlodge Town-Nebraska",
+      "shard_name": "Linwood Pawnee Earthlodge Town",
+      "country": "Nebraska",
+      "region": "np_lower_missouri_platte_kansas",
+      "coords_lat_lng": [
+        41.4415,
+        -96.951
+      ],
+      "min_year": 1450,
+      "max_year": 1600,
+      "other_names": [
+        "25BU1",
+        "Linwood Type Village",
+        "Skull Creek Butler Pawnee"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1450.1.1",
+          "name": "Chawi"
+        }
+      ],
+      "duplicate_name_flagged": "Chawi"
+    },
+    {
+      "key": "Linwood-Nebraska",
+      "shard_name": "Linwood",
+      "country": "Nebraska",
+      "region": "usa_nebraska",
+      "coords_lat_lng": [
+        41.41234,
+        -96.93235
+      ],
+      "min_year": 1850,
+      "max_year": 2026,
+      "other_names": [
+        "Linwood village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1850.1.1",
+          "name": "Cháwi"
+        },
+        {
+          "date": "1870.1.1",
+          "name": "Linwood"
+        }
+      ],
+      "duplicate_name_flagged": "Cháwi"
+    },
+    {
+      "key": "Bellwood Site-Nebraska",
+      "shard_name": "Bellwood Site",
+      "country": "Nebraska",
+      "region": "ca1_plains_indigenous_1754",
+      "coords_lat_lng": [
+        41.3521,
+        -97.2351
+      ],
+      "min_year": 1700,
+      "max_year": 1750,
+      "other_names": [
+        "Butler County Pawnee Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1700.1.1",
+          "name": "Cawí"
+        }
+      ],
+      "duplicate_name_flagged": "Cawí"
+    },
+    {
+      "key": "Clarks-Nebraska",
+      "shard_name": "Clarks",
+      "country": "Nebraska",
+      "region": "usa_nebraska",
+      "coords_lat_lng": [
+        41.21627,
+        -97.83949
+      ],
+      "min_year": 1850,
+      "max_year": 2026,
+      "other_names": [
+        "Clarks village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1850.1.1",
+          "name": "Cháwi"
+        },
+        {
+          "date": "1866.1.1",
+          "name": "Clarks"
+        }
+      ],
+      "duplicate_name_flagged": "Cháwi"
+    },
+    {
+      "key": "Clarks-Nebraska_2",
+      "shard_name": "Clarks",
+      "country": "Nebraska",
+      "region": "np_lower_missouri_platte_kansas",
+      "coords_lat_lng": [
+        41.2133,
+        -97.8389
+      ],
+      "min_year": 1520,
+      "max_year": 1600,
+      "other_names": [
+        "25PK1",
+        "Polk County Platte Pawnee"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1520.1.1",
+          "name": "Chawi"
+        }
+      ],
+      "duplicate_name_flagged": "Chawi"
+    },
+    {
+      "key": "Rye Creek Ruin-Arizona",
+      "shard_name": "Rye Creek Ruin",
+      "country": "Arizona",
+      "region": "az_salt_verde_phoenix_hohokam",
+      "coords_lat_lng": [
+        34.118,
+        -111.305
+      ],
+      "min_year": 1275,
+      "max_year": 1350,
+      "other_names": [
+        "AZ O:15:1"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1275.1.1",
+          "name": "Dilzhę́’é"
+        }
+      ],
+      "duplicate_name_flagged": "Dilzhę́’é"
+    },
+    {
+      "key": "Q Ranch Pueblo-Arizona",
+      "shard_name": "Q Ranch Pueblo",
+      "country": "Arizona",
+      "region": "az_salt_verde_phoenix_hohokam",
+      "coords_lat_lng": [
+        34.045,
+        -110.765
+      ],
+      "min_year": 1280,
+      "max_year": 1360,
+      "other_names": [
+        "AZ P:13:13"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1280.1.1",
+          "name": "Dilzhę́’é"
+        }
+      ],
+      "duplicate_name_flagged": "Dilzhę́’é"
+    },
+    {
+      "key": "Behrend Capture-Arizona",
+      "shard_name": "Behrend Capture",
+      "country": "Arizona",
+      "region": "az_salt_verde_phoenix_hohokam",
+      "coords_lat_lng": [
+        33.93724,
+        -111.16762
+      ],
+      "min_year": 400,
+      "max_year": 1600,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "400.1.1",
+          "name": "Dilzhę́’é"
+        }
+      ],
+      "duplicate_name_flagged": "Dilzhę́’é"
+    },
+    {
+      "key": "Corner Creek Ruin-Arizona",
+      "shard_name": "Corner Creek Ruin",
+      "country": "Arizona",
+      "region": "az_salt_verde_phoenix_hohokam",
+      "coords_lat_lng": [
+        33.76422,
+        -111.08562
+      ],
+      "min_year": 400,
+      "max_year": 1600,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "400.1.1",
+          "name": "Dilzhę́ʼé"
+        }
+      ],
+      "duplicate_name_flagged": "Dilzhę́ʼé"
+    },
+    {
+      "key": "Armer Gulch Ruin-Arizona",
+      "shard_name": "Armer Gulch Ruin",
+      "country": "Arizona",
+      "region": "az_salt_verde_phoenix_hohokam",
+      "coords_lat_lng": [
+        33.75477,
+        -111.13756
+      ],
+      "min_year": 400,
+      "max_year": 1600,
+      "other_names": [
+        "Central Arizona Highlands"
+      ],
+      "current_historical_names": [
+        {
+          "date": "400.1.1",
+          "name": "Dilzhę́ʼé"
+        }
+      ],
+      "duplicate_name_flagged": "Dilzhę́ʼé"
+    },
+    {
+      "key": "Meddler Point Mound-Arizona",
+      "shard_name": "Meddler Point Mound",
+      "country": "Arizona",
+      "region": "az_salt_verde_phoenix_hohokam",
+      "coords_lat_lng": [
+        33.68646,
+        -111.08521
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Dilzhę́ʼé"
+        }
+      ],
+      "duplicate_name_flagged": "Dilzhę́ʼé"
+    },
+    {
+      "key": "Blue House Mountain-Arizona",
+      "shard_name": "Blue House Mountain",
+      "country": "Arizona",
+      "region": "az_salt_verde_phoenix_hohokam",
+      "coords_lat_lng": [
+        34.09717,
+        -110.67446
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [
+        "Central Arizona Highlands"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Dishchíí’ Bikoh"
+        }
+      ],
+      "duplicate_name_flagged": "Dishchíí’ Bikoh"
+    },
+    {
+      "key": "Blue Springs Ruin-Arizona",
+      "shard_name": "Blue Springs Ruin",
+      "country": "Arizona",
+      "region": "az_salt_verde_phoenix_hohokam",
+      "coords_lat_lng": [
+        34.04849,
+        -110.44407
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [
+        "Central Arizona Highlands"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Dishchíí’ Bikoh"
+        }
+      ],
+      "duplicate_name_flagged": "Dishchíí’ Bikoh"
+    },
+    {
+      "key": "Red Rock House-Arizona",
+      "shard_name": "Red Rock House",
+      "country": "Arizona",
+      "region": "az_salt_verde_phoenix_hohokam",
+      "coords_lat_lng": [
+        33.97599,
+        -110.59849
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Dishchíí’ Bikoh"
+        }
+      ],
+      "duplicate_name_flagged": "Dishchíí’ Bikoh"
+    },
+    {
+      "key": "Cibecue Creek Ruin-Arizona",
+      "shard_name": "Cibecue Creek Ruin",
+      "country": "Arizona",
+      "region": "az_salt_verde_phoenix_hohokam",
+      "coords_lat_lng": [
+        33.95697,
+        -110.44423
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Dishchíí’ Bikoh"
+        }
+      ],
+      "duplicate_name_flagged": "Dishchíí’ Bikoh"
+    },
+    {
+      "key": "Canyon Creek Ruin-Arizona",
+      "shard_name": "Canyon Creek Ruin",
+      "country": "Arizona",
+      "region": "az_salt_verde_phoenix_hohokam",
+      "coords_lat_lng": [
+        33.915,
+        -110.765
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [
+        "AZ V:2:1",
+        "Cooper Forks Cliff Dwelling",
+        "Central Arizona Highlands",
+        "Red Canyon Pueblo"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Dishchíí’ Bikoh"
+        }
+      ],
+      "duplicate_name_flagged": "Dishchíí’ Bikoh"
+    },
+    {
+      "key": "Black Mountain Pueblo-Arizona",
+      "shard_name": "Black Mountain Pueblo",
+      "country": "Arizona",
+      "region": "az_salt_verde_phoenix_hohokam",
+      "coords_lat_lng": [
+        33.90576,
+        -110.42633
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [
+        "Central Arizona Highlands"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Dishchíí’ Bikoh"
+        }
+      ],
+      "duplicate_name_flagged": "Dishchíí’ Bikoh"
+    },
+    {
+      "key": "Overhead-Wisconsin",
+      "shard_name": "Overhead",
+      "country": "Wisconsin",
+      "region": "um_minnesota_driftless_north",
+      "coords_lat_lng": [
+        43.771,
+        -91.212
+      ],
+      "min_year": 200,
+      "max_year": 1550,
+      "other_names": [
+        "Overhead Site",
+        "47LC20"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Hoocąk"
+        }
+      ],
+      "duplicate_name_flagged": "Hoocąk"
+    },
+    {
+      "key": "Gottschall-Wisconsin",
+      "shard_name": "Gottschall",
+      "country": "Wisconsin",
+      "region": "um_minnesota_driftless_north",
+      "coords_lat_lng": [
+        43.133,
+        -90.302
+      ],
+      "min_year": -1000,
+      "max_year": 1300,
+      "other_names": [
+        "Gottschall Rockshelter",
+        "47IA80"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-1000.1.1",
+          "name": "Hoocąk"
+        }
+      ],
+      "duplicate_name_flagged": "Hoocąk"
+    },
+    {
+      "key": "Silver Creek-Wisconsin",
+      "shard_name": "Silver Creek",
+      "country": "Wisconsin",
+      "region": "um_minnesota_driftless_north",
+      "coords_lat_lng": [
+        43.126,
+        -90.112
+      ],
+      "min_year": 100,
+      "max_year": 1000,
+      "other_names": [
+        "47MO1",
+        "Clyde-Spring Green Woodland"
+      ],
+      "current_historical_names": [
+        {
+          "date": "100.1.1",
+          "name": "Hoocąk"
+        }
+      ],
+      "duplicate_name_flagged": "Hoocąk"
+    },
+    {
+      "key": "Aztalan-Wisconsin_2",
+      "shard_name": "Aztalan",
+      "country": "Wisconsin",
+      "region": "um_des_moines_rock_iowa",
+      "coords_lat_lng": [
+        43.0681,
+        -88.8617
+      ],
+      "min_year": 1000,
+      "max_year": 1200,
+      "other_names": [
+        "Crawfish River Mississippian",
+        "47JE1"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1000.1.1",
+          "name": "Hoocąk"
+        }
+      ],
+      "duplicate_name_flagged": "Hoocąk"
+    },
+    {
+      "key": "Tillmont-Wisconsin",
+      "shard_name": "Tillmont",
+      "country": "Wisconsin",
+      "region": "um_des_moines_rock_iowa",
+      "coords_lat_lng": [
+        43.0517,
+        -91.1414
+      ],
+      "min_year": -550,
+      "max_year": 300,
+      "other_names": [
+        "47CR460",
+        "Prairie du Chien Hopewell"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-550.1.1",
+          "name": "Hoocąk"
+        }
+      ],
+      "duplicate_name_flagged": "Hoocąk"
+    },
+    {
+      "key": "Fred Edwards-Wisconsin",
+      "shard_name": "Fred Edwards",
+      "country": "Wisconsin",
+      "region": "um_des_moines_rock_iowa",
+      "coords_lat_lng": [
+        42.735,
+        -90.718
+      ],
+      "min_year": 1000,
+      "max_year": 1200,
+      "other_names": [
+        "47GT377"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1000.1.1",
+          "name": "Hoocąk"
+        }
+      ],
+      "duplicate_name_flagged": "Hoocąk"
+    }
+  ]
+}

@@ -1,0 +1,745 @@
+{
+  "batch_index": 86,
+  "clusters": [
+    "susitnu",
+    "swegatci",
+    "taci",
+    "tamalhuye",
+    "tamatli",
+    "tampacoa",
+    "taputuitn",
+    "taskigi",
+    "tatcan",
+    "teloel",
+    "tenanh",
+    "tetawdlen"
+  ],
+  "countries": [
+    "Alabama",
+    "Alaska",
+    "California",
+    "Canada",
+    "Mississippi",
+    "New Mexico",
+    "North Carolina",
+    "Ontario",
+    "Prince Edward Island",
+    "Tennessee"
+  ],
+  "count": 24,
+  "forbidden_already_used_in_region": [
+    "'Aha Makhav",
+    "'Avi Melyehw",
+    "'Iipay",
+    "'Yalis",
+    "A'ts'in'a",
+    "A'ts'ina",
+    "A:shiwi",
+    "Aalaakkaakk'et",
+    "Aangoon",
+    "Aangóon",
+    "Aazhoodenaang",
+    "Abó",
+    "Achasta",
+    "Achelacy",
+    "Achiya: Dek'yapbow'a",
+    "Acjachemen",
+    "Adaax",
+    "Adak",
+    "Adamagan",
+    "Ag'waneq",
+    "Aguasto",
+    "Agunalaksh",
+    "Ahha' Kwe'maca",
+    "Ahjimsek",
+    "Ahkwesáhsne",
+    "Ahousaht",
+    "Ahteut",
+    "Ahwahnee",
+    "Ajoasté",
+    "Ajumawi",
+    "Akaamaschii",
+    "Akiacuaq",
+    "Akiaq",
+    "Akoroa",
+    "Akpatordjuark",
+    "Akulivik",
+    "Akutanax̂",
+    "Akwałina",
+    "Akwesasne",
+    "Alaasuq",
+    "Alamo",
+    "Alamogordo Army Airfield",
+    "Alarneq",
+    "Alarnerk",
+    "Alaxsxa",
+    "Alexander",
+    "Alexandrovsk",
+    "Alturas",
+    "Alámex",
+    "Amalahta",
+    "Amax̂nax̂",
+    "Amayeli",
+    "Amayeli Egwa",
+    "Amiskwaciya",
+    "Amogayunyi",
+    "Amoxiumqua",
+    "Amoyi",
+    "Amuctac",
+    "Anangula",
+    "Angagkitaqnuwu",
+    "Anikituwagi",
+    "Aniyunwiya",
+    "Anyapax",
+    "Aondironon",
+    "Apafalaya",
+    "Apilua",
+    "Apitipi",
+    "Apitipik",
+    "Aptos",
+    "Apvitok",
+    "Arendarhonon",
+    "Argentenay",
+    "Argenteuil",
+    "Arvia'juaq",
+    "Arviat",
+    "Arviiq",
+    "Arviligjuaq",
+    "Asaacaryaraq",
+    "Aschkibokahn",
+    "Ashishik",
+    "Asinīpwāt-sīpiy",
+    "Askupinong",
+    "Astialakwa",
+    "Ataronchronon",
+    "Atchash",
+    "Athithuf",
+    "Atonontrataronon",
+    "Atripuy",
+    "Atsee Nitsaa",
+    "Atsinna",
+    "Atsuge",
+    "Attawapiskat",
+    "Attignawantan",
+    "Attigneenongnahac",
+    "Atx̂ax̂",
+    "Auburn",
+    "Aujuittuq",
+    "Aulatsivik",
+    "Aulavik",
+    "Aulintac",
+    "Aupaluk",
+    "Avayalik",
+    "Avonlea",
+    "Avvajja",
+    "Awani-wi",
+    "Awha'y",
+    "Ayuhwasi",
+    "Aztec",
+    "Baawingashing",
+    "Baie-Rouge",
+    "Baie-Saint-Paul",
+    "Baie-du-Febvre",
+    "Bakersfield",
+    "Baranof Warm Springs",
+    "Batiklechawi",
+    "Batiscan",
+    "Batsi'",
+    "Batza Tena",
+    "Bay Roberts",
+    "Bay de Verde"
+  ],
+  "settlements": [
+    {
+      "key": "Chase-Alaska",
+      "shard_name": "Chase",
+      "country": "Alaska",
+      "region": "usa_alaska",
+      "coords_lat_lng": [
+        62.41824,
+        -149.93617
+      ],
+      "min_year": 1869,
+      "max_year": 2025,
+      "other_names": [
+        "Chase CDP"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1869.1.1",
+          "name": "Susitnu"
+        },
+        {
+          "date": "1920.1.1",
+          "name": "Chase"
+        }
+      ],
+      "duplicate_name_flagged": "Susitnu"
+    },
+    {
+      "key": "Y-Alaska",
+      "shard_name": "Y",
+      "country": "Alaska",
+      "region": "usa_alaska",
+      "coords_lat_lng": [
+        62.0368,
+        -149.98715
+      ],
+      "min_year": 1889,
+      "max_year": 2025,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "1889.1.1",
+          "name": "Susitnu"
+        },
+        {
+          "date": "1971.1.1",
+          "name": "Y"
+        }
+      ],
+      "duplicate_name_flagged": "Susitnu"
+    },
+    {
+      "key": "McKeown-Canada",
+      "shard_name": "McKeown",
+      "country": "Canada",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "coords_lat_lng": [
+        44.8285,
+        -75.5685
+      ],
+      "min_year": 1480,
+      "max_year": 1520,
+      "other_names": [
+        "Maynard-McKeown",
+        "BeFv-1",
+        "Spencerville St. Lawrence Iroquoian"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1480.1.1",
+          "name": "Swegatchi"
+        }
+      ],
+      "duplicate_name_flagged": "Swegatchi"
+    },
+    {
+      "key": "Crystal Rock Iroquoian Town-Ontario",
+      "shard_name": "Crystal Rock Iroquoian Town",
+      "country": "Ontario",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "coords_lat_lng": [
+        44.7333,
+        -75.5333
+      ],
+      "min_year": 1400,
+      "max_year": 1520,
+      "other_names": [
+        "Prescott St. Lawrence Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1400.1.1",
+          "name": "Swegatchi"
+        }
+      ],
+      "duplicate_name_flagged": "Swegatchi"
+    },
+    {
+      "key": "Lemoore (Tachi)-California",
+      "shard_name": "Lemoore",
+      "country": "California",
+      "region": "ca_san_joaquin_central_coast",
+      "coords_lat_lng": [
+        36.3008,
+        -119.7828
+      ],
+      "min_year": 0,
+      "max_year": 1600,
+      "other_names": [
+        "Kings River Lower",
+        "CA-KIN-30",
+        "Lemoore (Tachi)"
+      ],
+      "current_historical_names": [
+        {
+          "date": "0.1.1",
+          "name": "Tachi"
+        }
+      ],
+      "duplicate_name_flagged": "Tachi"
+    },
+    {
+      "key": "Coalinga (Los Gatos Creek)-California",
+      "shard_name": "Coalinga",
+      "country": "California",
+      "region": "ca_san_joaquin_central_coast",
+      "coords_lat_lng": [
+        36.1397,
+        -120.3603
+      ],
+      "min_year": -1000,
+      "max_year": 1600,
+      "other_names": [
+        "Tachi West",
+        "CA-FRE-364",
+        "Coalinga (Los Gatos Creek)"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-1000.1.1",
+          "name": "Tachi"
+        }
+      ],
+      "duplicate_name_flagged": "Tachi"
+    },
+    {
+      "key": "Tomales-California_2",
+      "shard_name": "Tomales",
+      "country": "California",
+      "region": "ca_sacramento_sf_bay_delta",
+      "coords_lat_lng": [
+        38.1917,
+        -122.9167
+      ],
+      "min_year": 0,
+      "max_year": 1600,
+      "other_names": [
+        "Tamal-Huye",
+        "Tomales Bay",
+        "CA-MRN-232"
+      ],
+      "current_historical_names": [
+        {
+          "date": "0.1.1",
+          "name": "Tamal-Huye"
+        }
+      ],
+      "duplicate_name_flagged": "Tamal-Huye"
+    },
+    {
+      "key": "McClure Site-California",
+      "shard_name": "McClure Site",
+      "country": "California",
+      "region": "ca_sacramento_sf_bay_delta",
+      "coords_lat_lng": [
+        38.1833,
+        -122.95
+      ],
+      "min_year": -1500,
+      "max_year": 1400,
+      "other_names": [
+        "Tomales Point",
+        "CA-MRN-266"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-1500.1.1",
+          "name": "Tamal-huye"
+        }
+      ],
+      "duplicate_name_flagged": "Tamal-huye"
+    },
+    {
+      "key": "Tomatly Valley-North Carolina",
+      "shard_name": "Tomatly Valley",
+      "country": "North Carolina",
+      "region": "ca1_trans_appalachian_indigenous",
+      "coords_lat_lng": [
+        35.1581,
+        -83.9312
+      ],
+      "min_year": 1720,
+      "max_year": 1775,
+      "other_names": [
+        "Valley River Cherokee Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1720.1.1",
+          "name": "Tamatli"
+        }
+      ],
+      "duplicate_name_flagged": "Tamatli"
+    },
+    {
+      "key": "Tomotley Overhill Town-Tennessee",
+      "shard_name": "Tomotley Overhill Town",
+      "country": "Tennessee",
+      "region": "cu_upper_east_tennessee_ridge",
+      "coords_lat_lng": [
+        35.581,
+        -84.1515
+      ],
+      "min_year": 1500,
+      "max_year": 1500,
+      "other_names": [
+        "Tomotley Village Site"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1500.1.1",
+          "name": "Tamatli"
+        }
+      ],
+      "duplicate_name_flagged": "Tamatli"
+    },
+    {
+      "key": "Dona Ana Pueblo-New Mexico",
+      "shard_name": "Dona Ana Pueblo",
+      "country": "New Mexico",
+      "region": "rg_middle_rio_grande_salinas",
+      "coords_lat_lng": [
+        32.388,
+        -106.815
+      ],
+      "min_year": 1250,
+      "max_year": 1350,
+      "other_names": [
+        "LA 500"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Tampachoa"
+        }
+      ],
+      "duplicate_name_flagged": "Tampachoa"
+    },
+    {
+      "key": "Los Tules-New Mexico",
+      "shard_name": "Los Tules",
+      "country": "New Mexico",
+      "region": "rg_middle_rio_grande_salinas",
+      "coords_lat_lng": [
+        32.28293,
+        -106.76266
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Tampachoa"
+        }
+      ],
+      "duplicate_name_flagged": "Tampachoa"
+    },
+    {
+      "key": "Rustico Island-Canada",
+      "shard_name": "Rustico Island",
+      "country": "Canada",
+      "region": "mar_mikmaki_ns_pei_cape_breton",
+      "coords_lat_lng": [
+        46.4645,
+        -63.2645
+      ],
+      "min_year": 300,
+      "max_year": 1600,
+      "other_names": [
+        "CcCt-1",
+        "Prince Edward Island North Shore"
+      ],
+      "current_historical_names": [
+        {
+          "date": "300.1.1",
+          "name": "Tapu Tuitn"
+        }
+      ],
+      "duplicate_name_flagged": "Tapu Tuitn"
+    },
+    {
+      "key": "Rustico Island Shell Town-Prince Edward Island",
+      "shard_name": "Rustico Island Shell Town",
+      "country": "Prince Edward Island",
+      "region": "mar_mikmaki_ns_pei_cape_breton",
+      "coords_lat_lng": [
+        46.4333,
+        -63.2667
+      ],
+      "min_year": 400,
+      "max_year": 1400,
+      "other_names": [
+        "Rustico Bay Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "400.1.1",
+          "name": "Tapu Tuitn"
+        }
+      ],
+      "duplicate_name_flagged": "Tapu Tuitn"
+    },
+    {
+      "key": "Taskigi-Alabama",
+      "shard_name": "Taskigi",
+      "country": "Alabama",
+      "region": "ca1_trans_appalachian_indigenous",
+      "coords_lat_lng": [
+        32.5021,
+        -86.2521
+      ],
+      "min_year": 1250,
+      "max_year": 1763,
+      "other_names": [
+        "Fort Toulouse Creek Town Site",
+        "Pakana",
+        "Coosa/Tallapoosa Confluence Town",
+        "Fort Toulouse",
+        "Fort Jackson AL",
+        "Poste des Alibamous",
+        "Fort Toulouse Mound",
+        "1EE1"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Taskigi"
+        },
+        {
+          "date": "1717.1.1",
+          "name": "Fort Toulouse"
+        }
+      ],
+      "duplicate_name_flagged": "Taskigi"
+    },
+    {
+      "key": "Fort Loudoun Overhill Village-Tennessee",
+      "shard_name": "Fort Loudoun Overhill Village",
+      "country": "Tennessee",
+      "region": "cu_upper_east_tennessee_ridge",
+      "coords_lat_lng": [
+        35.5915,
+        -84.231
+      ],
+      "min_year": 1450,
+      "max_year": 1600,
+      "other_names": [
+        "40MR20",
+        "Little Tennessee River Habitation"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1450.1.1",
+          "name": "Taskigi"
+        }
+      ],
+      "duplicate_name_flagged": "Taskigi"
+    },
+    {
+      "key": "Alamo (San Ramon)-California",
+      "shard_name": "Alamo",
+      "country": "California",
+      "region": "ca_sacramento_sf_bay_delta",
+      "coords_lat_lng": [
+        37.85,
+        -122.0333
+      ],
+      "min_year": -1500,
+      "max_year": 1400,
+      "other_names": [
+        "Tatcan",
+        "Diablo Valley",
+        "CA-CCO-308",
+        "Alamo (San Ramon)"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-1500.1.1",
+          "name": "Tatcan"
+        }
+      ],
+      "duplicate_name_flagged": "Tatcan"
+    },
+    {
+      "key": "Danville San Ramon Village-California",
+      "shard_name": "Danville San Ramon Village",
+      "country": "California",
+      "region": "ca_sacramento_sf_bay_delta",
+      "coords_lat_lng": [
+        37.8167,
+        -122.0
+      ],
+      "min_year": 400,
+      "max_year": 1450,
+      "other_names": [
+        "San Ramon Valley Foothill Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "400.1.1",
+          "name": "Tatcan"
+        }
+      ],
+      "duplicate_name_flagged": "Tatcan"
+    },
+    {
+      "key": "Emerald Mound-Mississippi",
+      "shard_name": "Emerald Mound",
+      "country": "Mississippi",
+      "region": "lm_natchez_atchafalaya_delta",
+      "coords_lat_lng": [
+        31.6364,
+        -91.2489
+      ],
+      "min_year": 1200,
+      "max_year": 1600,
+      "other_names": [
+        "Emerald Mound (Natchez)",
+        "22AD504",
+        "Selsertown",
+        "Stanton Plaquemine"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Theloel"
+        }
+      ],
+      "duplicate_name_flagged": "Theloel"
+    },
+    {
+      "key": "Natchez-Mississippi",
+      "shard_name": "Natchez",
+      "country": "Mississippi",
+      "region": "",
+      "coords_lat_lng": [
+        31.54244,
+        -91.38565
+      ],
+      "min_year": 1200,
+      "max_year": 2026,
+      "other_names": [
+        "Natchez city",
+        "Fort Rosalie",
+        "Grand Village of the Natchez",
+        "22AD501",
+        "Fatherland Site"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Théloël"
+        },
+        {
+          "date": "1716.8.3",
+          "name": "Fort Rosalie"
+        },
+        {
+          "date": "1790.1.1",
+          "name": "Natchez"
+        }
+      ],
+      "duplicate_name_flagged": "Théloël"
+    },
+    {
+      "key": "Deltana-Alaska",
+      "shard_name": "Deltana",
+      "country": "Alaska",
+      "region": "usa_alaska",
+      "coords_lat_lng": [
+        63.78934,
+        -145.35163
+      ],
+      "min_year": 1886,
+      "max_year": 2025,
+      "other_names": [
+        "Deltana CDP"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1886.1.1",
+          "name": "Tenanh"
+        },
+        {
+          "date": "1942.1.1",
+          "name": "Deltana"
+        }
+      ],
+      "duplicate_name_flagged": "Tenanh"
+    },
+    {
+      "key": "Donnelly-Alaska",
+      "shard_name": "Donnelly",
+      "country": "Alaska",
+      "region": "usa_alaska",
+      "coords_lat_lng": [
+        63.67361,
+        -145.88333
+      ],
+      "min_year": 1888,
+      "max_year": 1970,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "1888.1.1",
+          "name": "Tenanh"
+        },
+        {
+          "date": "1905.1.1",
+          "name": "Donnelly"
+        }
+      ],
+      "duplicate_name_flagged": "Tenanh"
+    },
+    {
+      "key": "Eagle-Alaska",
+      "shard_name": "Eagle",
+      "country": "Alaska",
+      "region": "usa_alaska",
+      "coords_lat_lng": [
+        64.78126,
+        -141.19783
+      ],
+      "min_year": 1850,
+      "max_year": 2026,
+      "other_names": [
+        "Eagle city",
+        "Eagle Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1850.1.1",
+          "name": "Tthee T'äwdlen"
+        },
+        {
+          "date": "1874.1.1",
+          "name": "Belle Isle"
+        },
+        {
+          "date": "1898.1.1",
+          "name": "Eagle"
+        }
+      ],
+      "duplicate_name_flagged": "Tthee T'äwdlen"
+    },
+    {
+      "key": "Eagle Village-Alaska",
+      "shard_name": "Eagle Village",
+      "country": "Alaska",
+      "region": "usa_alaska",
+      "coords_lat_lng": [
+        64.74339,
+        -141.11383
+      ],
+      "min_year": 1867,
+      "max_year": 2025,
+      "other_names": [
+        "Eagle Village CDP"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1867.1.1",
+          "name": "Tthee T'äwdlen"
+        },
+        {
+          "date": "1899.1.1",
+          "name": "Eagle Village"
+        }
+      ],
+      "duplicate_name_flagged": "Tthee T'äwdlen"
+    }
+  ]
+}

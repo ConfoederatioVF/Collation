@@ -3,7 +3,6 @@ let fs = global.fs || require("fs");
 let JSON5 = global.JSON5 || require("json5");
 let path = global.path || require("path");
 let { PNG } = global.pngjs || require("pngjs");
-let { ViscountCountyCensusFrontier } = global.ViscountCountyCensusFrontier ? global : require("./ViscountCountyCensusFrontier.js");
 
 //Initialise functions
 {
@@ -91,8 +90,9 @@ let { ViscountCountyCensusFrontier } = global.ViscountCountyCensusFrontier ? glo
         return { elapsed_seconds: 0, year_summaries: {} };
 
       //Declare local instance variables
-      let hyde_years = (options.years) ? options.years : ((options.hyde_years) ? options.hyde_years : context.hyde_years);
       let ccf_cfg = (context.manifest && context.manifest.county_census_frontier && context.manifest.county_census_frontier.enabled) ? context.manifest.county_census_frontier : null;
+      let ccf_cls = global.ViscountCountyCensusFrontier || null;
+      let hyde_years = (options.years) ? options.years : ((options.hyde_years) ? options.hyde_years : context.hyde_years);
       let n_valid = context.n_valid;
       let out_folder = (options.output_folder) ? options.output_folder :
         path.join(context.root_dir, "histmap/3.data_transform/population_Substrata.outlier_removal/rasters_2.scaled_to_regions");
@@ -103,6 +103,10 @@ let { ViscountCountyCensusFrontier } = global.ViscountCountyCensusFrontier ? glo
 
       //Function body
       if (!fs.existsSync(out_folder)) fs.mkdirSync(out_folder, { recursive: true });
+      if (ccf_cfg && !ccf_cls) {
+        let ccf_p = path.resolve(context.root_dir || process.cwd(), ccf_cfg.module_path || "histmap/3.data_transform/population_Substrata.viscount/centaur/ViscountCountyCensusFrontier.js");
+        if (fs.existsSync(ccf_p)) ccf_cls = require(ccf_p).ViscountCountyCensusFrontier;
+      }
       let active_zone_series = [];
       let border_wt_series = [];
       let calibrated_series = [];
@@ -158,7 +162,6 @@ let { ViscountCountyCensusFrontier } = global.ViscountCountyCensusFrontier ? glo
           let src_dom = (src_cfg.domain_code !== undefined) ? src_cfg.domain_code : (s + 1);
           let src_file = path.join(context.root_dir, src_cfg.rasters_folder, `popc_${yr}.png`);
           if (!fs.existsSync(src_file)) continue;
-
           let s_png = PNG.sync.read(fs.readFileSync(src_file));
           let s_dv = new DataView(s_png.data.buffer, s_png.data.byteOffset, s_png.data.byteLength);
           for (let x = 0; x < n_valid; x++) {
@@ -168,7 +171,6 @@ let { ViscountCountyCensusFrontier } = global.ViscountCountyCensusFrontier ? glo
             if (val > 0) rural_valid[x] = val;
           }
         }
-
         let base_rural = Float32Array.from(rural_valid);
         let target_groups = [
           context.macro_entry ? [context.macro_entry] : [],
@@ -177,10 +179,9 @@ let { ViscountCountyCensusFrontier } = global.ViscountCountyCensusFrontier ? glo
         ];
         let touched = new Uint8Array(n_valid);
         let active_zone_of_v = new Int32Array(n_valid).fill(-1);
-        let ccf_active = Boolean(ccf_cfg && yr >= ccf_cfg.start_year && yr <= ccf_cfg.end_year);
-        let county_mask = ccf_active ? ViscountCountyCensusFrontier.D_loadMosaicCountyMaskForYear(context, yr, ccf_cfg) : null;
+        let ccf_active = Boolean(ccf_cfg && ccf_cls && yr >= ccf_cfg.start_year && yr <= ccf_cfg.end_year);
+        let county_mask = ccf_active ? ccf_cls.D_loadMosaicCountyMaskForYear(context, yr, ccf_cfg) : null;
         let zone_targets_by_id = [];
-
         for (let g = 0; g < target_groups.length; g++) {
           let group = target_groups[g];
           for (let x = 0; x < group.length; x++) {
@@ -197,9 +198,8 @@ let { ViscountCountyCensusFrontier } = global.ViscountCountyCensusFrontier ? glo
               let curr_sum = 0;
               let settled_sum = 0;
               let z_id = zone_targets_by_id.length;
-              let ccf_res = county_mask ? ViscountCountyCensusFrontier.E_calibrateZoneWithCountyFrontier(context, zone, county_mask, base_rural, urban_valid, rural_valid, touched, active_zone_of_v, z_id, target_pop, ccf_cfg) : null;
+              let ccf_res = county_mask ? ccf_cls.E_calibrateZoneWithCountyFrontier(context, zone, county_mask, base_rural, urban_valid, rural_valid, touched, active_zone_of_v, z_id, target_pop, ccf_cfg) : null;
               if (ccf_res && ccf_res.handled) { zone_targets_by_id.push(ccf_res); continue; }
-
               for (let a = 0; a < zone.pixels.length; a++) {
                 let v_idx = context.pixel_to_valid[zone.pixels[a]];
                 if (v_idx >= 0) {

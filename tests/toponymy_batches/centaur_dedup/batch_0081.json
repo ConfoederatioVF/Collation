@@ -1,0 +1,712 @@
+{
+  "batch_index": 81,
+  "clusters": [
+    "nuvuk",
+    "ocaneci",
+    "ogwepi",
+    "oiaur",
+    "ojio",
+    "okobozi",
+    "okwewanaskozibing",
+    "oljeto",
+    "olomoni",
+    "ongtupqa",
+    "orayvi",
+    "oskenonto"
+  ],
+  "countries": [
+    "Alaska",
+    "Arizona",
+    "Canada",
+    "Iowa",
+    "Manitoba",
+    "Minnesota",
+    "Nevada",
+    "North Carolina",
+    "Ohio",
+    "Virginia"
+  ],
+  "count": 24,
+  "forbidden_already_used_in_region": [
+    "'Aha Kwahwat",
+    "'Aha Makhav",
+    "'Onk Akimel",
+    "'Yalis",
+    "Aalaakkaakk'et",
+    "Aangoon",
+    "Aangóon",
+    "Aazhoodenaang",
+    "Abangkuyivi",
+    "Achelacy",
+    "Adaax",
+    "Adahiilíní",
+    "Adak",
+    "Adamagan",
+    "Ag'waneq",
+    "Aga'idökadö",
+    "Aga'ipanadokado",
+    "Aga'ipañinadökadö",
+    "Agai-dika-a",
+    "Agaidika",
+    "Agaidüka",
+    "Agaipah",
+    "Aghaałą́",
+    "Agunalaksh",
+    "Ahagaskiaywa",
+    "Ahjimsek",
+    "Ahkwesáhsne",
+    "Ahousaht",
+    "Ahsenisiipi",
+    "Ahteut",
+    "Aibapaa",
+    "Ajijaako-zaaga'igan",
+    "Ajoasté",
+    "Akaamaschii",
+    "Akiacuaq",
+    "Akiaq",
+    "Akimel O'odham",
+    "Akpatordjuark",
+    "Akulivik",
+    "Akutanax̂",
+    "Akwałina",
+    "Akwesasne",
+    "Alaasuq",
+    "Alamonitheepi",
+    "Alarneq",
+    "Alarnerk",
+    "Alaxsxa",
+    "Alexander",
+    "Alexandrovsk",
+    "Ali Waipia",
+    "Alámex",
+    "Amax̂nax̂",
+    "Amiskwaciya",
+    "Anangula",
+    "Angagkitaqnuwu",
+    "Anibiminan",
+    "Aniibiminani-ziibi",
+    "Animikii-waajiing",
+    "Animo-ziibiing",
+    "Anéʼé Tséyiʼ",
+    "Aondironon",
+    "Apache Junction",
+    "Apakosis Sipi",
+    "Apitipi",
+    "Apitipik",
+    "Appamattuck",
+    "Apvitok",
+    "Arendarhonon",
+    "Argentenay",
+    "Argenteuil",
+    "Arrohateck",
+    "Arvia'juaq",
+    "Arviat",
+    "Arviiq",
+    "Arviligjuaq",
+    "Asaacaryaraq",
+    "Asabiikone-zaaga'igan",
+    "Aschkibokahn",
+    "Ashishik",
+    "Asiniibwaan-ziibi",
+    "Asinipwat Sipi",
+    "Asinipwât-sîpiy",
+    "Asinīpwāt-sīpiy",
+    "Askik Pawistik",
+    "Askupinong",
+    "Ataronchronon",
+    "Athapapuskow",
+    "Atsakudokwa",
+    "Attawapiskat",
+    "Attignawantan",
+    "Attigneenongnahac",
+    "Atx̂ax̂",
+    "Aujuittuq",
+    "Aulatsivik",
+    "Aulavik",
+    "Aupaluk",
+    "Avayalik",
+    "Avonlea",
+    "Avvajja",
+    "Awat'ovi",
+    "Awatovi",
+    "Awatʼovi",
+    "Ayuhwasi",
+    "Baaskaandibewi-ziibiing",
+    "Baawingashing",
+    "Babad Do'ag",
+    "Babocomari",
+    "Baie-Rouge",
+    "Baie-Saint-Paul",
+    "Baie-du-Febvre",
+    "Baranof Warm Springs",
+    "Batiscan",
+    "Batza Tena",
+    "Bay Roberts",
+    "Bay de Verde",
+    "Bayfield",
+    "Bde Hdakíŋyaŋ",
+    "Bde Íŋyaŋ Tȟáŋka",
+    "Bdehdakinyan",
+    "Bdé Wakháŋ"
+  ],
+  "settlements": [
+    {
+      "key": "Nuvuk-Alaska",
+      "shard_name": "Nuvuk",
+      "country": "Alaska",
+      "region": "nc_yupik_inupiat_arctic_alaska",
+      "coords_lat_lng": [
+        71.29167,
+        -156.54167
+      ],
+      "min_year": 500,
+      "max_year": 1600,
+      "other_names": [
+        "Point Barrow Tip",
+        "BAR-004",
+        "Birnirk",
+        "Pigniq",
+        "Point Barrow South",
+        "BAR-001"
+      ],
+      "current_historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Nuvuk"
+        }
+      ],
+      "duplicate_name_flagged": "Nuvuk"
+    },
+    {
+      "key": "Lady Franklin Point-Canada",
+      "shard_name": "Lady Franklin Point",
+      "country": "Canada",
+      "region": "cc1_pacific_mackenzie_indigenous",
+      "coords_lat_lng": [
+        68.625,
+        -113.04167
+      ],
+      "min_year": -1000,
+      "max_year": 1600,
+      "other_names": [
+        "Nuvuk",
+        "Dolphin and Union Strait",
+        "Victoria Island",
+        "NgNc-1"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-1000.1.1",
+          "name": "Nuvuk"
+        }
+      ],
+      "duplicate_name_flagged": "Nuvuk"
+    },
+    {
+      "key": "Occaneechi Island Fortified Town-North Carolina",
+      "shard_name": "Occaneechi Island Fortified Town",
+      "country": "North Carolina",
+      "region": "se_carolina_piedmont_santee",
+      "coords_lat_lng": [
+        36.071,
+        -79.1015
+      ],
+      "min_year": 1450,
+      "max_year": 1600,
+      "other_names": [
+        "31OR18",
+        "Roanoke River Trade Metropolis"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1450.1.1",
+          "name": "Occaneechi"
+        }
+      ],
+      "duplicate_name_flagged": "Occaneechi"
+    },
+    {
+      "key": "Wade Site-Virginia",
+      "shard_name": "Wade Site",
+      "country": "Virginia",
+      "region": "se_carolina_piedmont_santee",
+      "coords_lat_lng": [
+        36.8872,
+        -78.7045
+      ],
+      "min_year": 1100,
+      "max_year": 1400,
+      "other_names": [
+        "44CH62"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1100.1.1",
+          "name": "Occaneechi"
+        }
+      ],
+      "duplicate_name_flagged": "Occaneechi"
+    },
+    {
+      "key": "Oasis Valley Shoshone Center-Nevada",
+      "shard_name": "Oasis Valley Shoshone Center",
+      "country": "Nevada",
+      "region": "ca_san_joaquin_central_coast",
+      "coords_lat_lng": [
+        37.0333,
+        -116.7167
+      ],
+      "min_year": 400,
+      "max_year": 1450,
+      "other_names": [
+        "Oasis Valley Springs Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "400.1.1",
+          "name": "Ogwe'pi"
+        }
+      ],
+      "duplicate_name_flagged": "Ogwe'pi"
+    },
+    {
+      "key": "Beatty Amargosa River Town-Nevada",
+      "shard_name": "Beatty Amargosa River Town",
+      "country": "Nevada",
+      "region": "ca_san_joaquin_central_coast",
+      "coords_lat_lng": [
+        36.9,
+        -116.75
+      ],
+      "min_year": 300,
+      "max_year": 1400,
+      "other_names": [
+        "Beatty Shoshone Center"
+      ],
+      "current_historical_names": [
+        {
+          "date": "300.1.1",
+          "name": "Ogwe'pi"
+        }
+      ],
+      "duplicate_name_flagged": "Ogwe'pi"
+    },
+    {
+      "key": "Los Morteros-Arizona",
+      "shard_name": "Los Morteros",
+      "country": "Arizona",
+      "region": "az_salt_verde_phoenix_hohokam",
+      "coords_lat_lng": [
+        32.345,
+        -111.092
+      ],
+      "min_year": -1200,
+      "max_year": 1600,
+      "other_names": [
+        "AZ AA:12:57",
+        "Las Capas",
+        "AZ AA:12:111",
+        "Early Agricultural",
+        "Los Morteros",
+        "Tucson Basin Marana",
+        "AZ AA:12:746"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-1200.1.1",
+          "name": "Oiaur"
+        }
+      ],
+      "duplicate_name_flagged": "Oiaur"
+    },
+    {
+      "key": "Hodges Ruin-Arizona",
+      "shard_name": "Hodges Ruin",
+      "country": "Arizona",
+      "region": "az_salt_verde_phoenix_hohokam",
+      "coords_lat_lng": [
+        32.302,
+        -111.045
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [
+        "AZ AA:12:18",
+        "Rabid Ruin",
+        "Santa Cruz"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Oiaur"
+        }
+      ],
+      "duplicate_name_flagged": "Oiaur"
+    },
+    {
+      "key": "Ash Terrace-Arizona",
+      "shard_name": "Ash Terrace",
+      "country": "Arizona",
+      "region": "az_salt_verde_phoenix_hohokam",
+      "coords_lat_lng": [
+        32.80411,
+        -110.80833
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [
+        "San Pedro",
+        "AZ BB:2:7"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Ojío"
+        }
+      ],
+      "duplicate_name_flagged": "Ojío"
+    },
+    {
+      "key": "Buzan-Arizona",
+      "shard_name": "Buzan",
+      "country": "Arizona",
+      "region": "az_salt_verde_phoenix_hohokam",
+      "coords_lat_lng": [
+        32.75793,
+        -110.7315
+      ],
+      "min_year": 400,
+      "max_year": 1600,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "400.1.1",
+          "name": "Ojío"
+        }
+      ],
+      "duplicate_name_flagged": "Ojío"
+    },
+    {
+      "key": "Wittrock Fortified Mill Creek Village-Iowa",
+      "shard_name": "Wittrock Fortified Mill Creek Village",
+      "country": "Iowa",
+      "region": "np_lower_missouri_platte_kansas",
+      "coords_lat_lng": [
+        42.9815,
+        -95.581
+      ],
+      "min_year": 1000,
+      "max_year": 1250,
+      "other_names": [
+        "13OB4",
+        "Wittrock National Historic Landmark Town",
+        "Waterman Creek Mill Creek NHL"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1000.1.1",
+          "name": "Okóboži"
+        }
+      ],
+      "duplicate_name_flagged": "Okóboži"
+    },
+    {
+      "key": "Simonsen-Iowa",
+      "shard_name": "Simonsen",
+      "country": "Iowa",
+      "region": "np_lower_missouri_platte_kansas",
+      "coords_lat_lng": [
+        42.6333,
+        -95.6667
+      ],
+      "min_year": -6600,
+      "max_year": -6200,
+      "other_names": [
+        "13CK61",
+        "Quimby Early Archaic Kill"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-6600.1.1",
+          "name": "Okóboži"
+        }
+      ],
+      "duplicate_name_flagged": "Okóboži"
+    },
+    {
+      "key": "Dominion City Roseau Village-Manitoba",
+      "shard_name": "Dominion City Roseau Village",
+      "country": "Manitoba",
+      "region": "pr_red_assiniboine_winnipeg_basin",
+      "coords_lat_lng": [
+        49.1333,
+        -97.15
+      ],
+      "min_year": 500,
+      "max_year": 1450,
+      "other_names": [
+        "Roseau River Confluence Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Okwewanashko-ziibiing"
+        }
+      ],
+      "duplicate_name_flagged": "Okwewanashko-ziibiing"
+    },
+    {
+      "key": "Roseau River-Minnesota",
+      "shard_name": "Roseau River",
+      "country": "Minnesota",
+      "region": "enp_red_river_north",
+      "coords_lat_lng": [
+        48.8467,
+        -95.7608
+      ],
+      "min_year": -800,
+      "max_year": 1500,
+      "other_names": [
+        "21RO1",
+        "Roseau Agassiz Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-800.1.1",
+          "name": "Okwewanashko-ziibiing"
+        }
+      ],
+      "duplicate_name_flagged": "Okwewanashko-ziibiing"
+    },
+    {
+      "key": "NA 8820-Arizona",
+      "shard_name": "NA 8820",
+      "country": "Arizona",
+      "region": "uc_san_juan_four_corners",
+      "coords_lat_lng": [
+        36.90956,
+        -110.53018
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Ooljééʼ Tó"
+        }
+      ],
+      "duplicate_name_flagged": "Ooljééʼ Tó"
+    },
+    {
+      "key": "NA 8895-Arizona",
+      "shard_name": "NA 8895",
+      "country": "Arizona",
+      "region": "uc_san_juan_four_corners",
+      "coords_lat_lng": [
+        36.8955,
+        -110.51218
+      ],
+      "min_year": 825,
+      "max_year": 1320,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "825.1.1",
+          "name": "Ooljééʼ Tó"
+        }
+      ],
+      "duplicate_name_flagged": "Ooljééʼ Tó"
+    },
+    {
+      "key": "Baum Fort Ancient Village-Ohio",
+      "shard_name": "Baum Fort Ancient Village",
+      "country": "Ohio",
+      "region": "oh_scioto_miami_hopewell_core",
+      "coords_lat_lng": [
+        39.2715,
+        -83.221
+      ],
+      "min_year": 1200,
+      "max_year": 1300,
+      "other_names": [
+        "33RO15",
+        "Paint Creek Fort Ancient Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Olomoni"
+        }
+      ],
+      "duplicate_name_flagged": "Olomoni"
+    },
+    {
+      "key": "Fort Hill-Ohio",
+      "shard_name": "Fort Hill",
+      "country": "Ohio",
+      "region": "oh_scioto_miami_hopewell_core",
+      "coords_lat_lng": [
+        39.1131,
+        -83.4063
+      ],
+      "min_year": 100,
+      "max_year": 400,
+      "other_names": [
+        "Fort Hill State Memorial",
+        "33HI1"
+      ],
+      "current_historical_names": [
+        {
+          "date": "100.1.1",
+          "name": "Olomoni"
+        }
+      ],
+      "duplicate_name_flagged": "Olomoni"
+    },
+    {
+      "key": "Bright Angel Pueblo-Arizona",
+      "shard_name": "Bright Angel Pueblo",
+      "country": "Arizona",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        36.105,
+        -112.092
+      ],
+      "min_year": 1050,
+      "max_year": 1130,
+      "other_names": [
+        "GC 505"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1050.1.1",
+          "name": "Öngtupqa"
+        }
+      ],
+      "duplicate_name_flagged": "Öngtupqa"
+    },
+    {
+      "key": "Tusayan Ruin-Arizona",
+      "shard_name": "Tusayan Ruin",
+      "country": "Arizona",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        36.0131,
+        -111.8658
+      ],
+      "min_year": 1185,
+      "max_year": 1210,
+      "other_names": [
+        "GC 104"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1185.1.1",
+          "name": "Öngtupqa"
+        }
+      ],
+      "duplicate_name_flagged": "Öngtupqa"
+    },
+    {
+      "key": "Megalith Site-Arizona",
+      "shard_name": "Megalith Site",
+      "country": "Arizona",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        36.03688,
+        -110.62114
+      ],
+      "min_year": 400,
+      "max_year": 950,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "400.1.1",
+          "name": "Orayvi"
+        }
+      ],
+      "duplicate_name_flagged": "Orayvi"
+    },
+    {
+      "key": "Oraibi-Arizona",
+      "shard_name": "Oraibi",
+      "country": "Arizona",
+      "region": "usa_arizona",
+      "coords_lat_lng": [
+        35.8764,
+        -110.6404
+      ],
+      "min_year": 200,
+      "max_year": 1783,
+      "other_names": [
+        "Orayvi",
+        "Hopi",
+        "Oraibi",
+        "Old Oraibi",
+        "Hopi Old Oraibi",
+        "Third Mesa Hopi Town",
+        "Third Mesa Hopi",
+        "Matsonpi"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Orayvi"
+        }
+      ],
+      "duplicate_name_flagged": "Orayvi"
+    },
+    {
+      "key": "O.C. Voss Mound and Village-Ohio",
+      "shard_name": "O.C. Voss Mound and Village",
+      "country": "Ohio",
+      "region": "oh_scioto_miami_hopewell_core",
+      "coords_lat_lng": [
+        39.9697,
+        -83.0098
+      ],
+      "min_year": -900,
+      "max_year": 1500,
+      "other_names": [
+        "Voss Site",
+        "33FR52",
+        "Toepfner Mound",
+        "33FR43"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-900.1.1",
+          "name": "Oskenonto"
+        }
+      ],
+      "duplicate_name_flagged": "Oskenonto"
+    },
+    {
+      "key": "Adena Mound-Ohio",
+      "shard_name": "Adena Mound",
+      "country": "Ohio",
+      "region": "oh_scioto_miami_hopewell_core",
+      "coords_lat_lng": [
+        39.354,
+        -83.012
+      ],
+      "min_year": -500,
+      "max_year": 100,
+      "other_names": [
+        "Adena Pipe Mound",
+        "33RO1",
+        "Story Mound",
+        "Story Mound State Memorial",
+        "33RO33"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-500.1.1",
+          "name": "Oskenonto"
+        }
+      ],
+      "duplicate_name_flagged": "Oskenonto"
+    }
+  ]
+}

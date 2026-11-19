@@ -1,0 +1,713 @@
+{
+  "batch_index": 80,
+  "clusters": [
+    "nisoze",
+    "nitaga",
+    "niubtata",
+    "nizozibi",
+    "noke",
+    "nukasusutok",
+    "numa",
+    "numu",
+    "nunavanarleq",
+    "nuptadi",
+    "nusuaq",
+    "nuvatukyaovi"
+  ],
+  "countries": [
+    "Arizona",
+    "California",
+    "Canada",
+    "Greenland",
+    "Kentucky",
+    "Michigan",
+    "Minnesota",
+    "Missouri",
+    "Nebraska",
+    "Nevada",
+    "North Dakota",
+    "Oregon",
+    "Wisconsin"
+  ],
+  "count": 24,
+  "forbidden_already_used_in_region": [
+    "'Aha Kwahwat",
+    "'Aha Makhav",
+    "'Avi Melyehw",
+    "'Iipay",
+    "'Onk Akimel",
+    "'Yalis",
+    "Aappalaaqqissak",
+    "Aappi",
+    "Aappilattoq",
+    "Aasiaat",
+    "Aazhoodenaang",
+    "Abangkuyivi",
+    "Achasta",
+    "Achelacy",
+    "Acjachemen",
+    "Adahiilíní",
+    "Adams",
+    "Addison",
+    "Adikamegong",
+    "Aga'idökadö",
+    "Aga'ipanadokado",
+    "Aga'ipañinadökadö",
+    "Agai-dika-a",
+    "Agaidika",
+    "Agaidüka",
+    "Agaipah",
+    "Aghaałą́",
+    "Agnes",
+    "Aguasto",
+    "Ahagaskiaywa",
+    "Ahha' Kwe'maca",
+    "Ahjimsek",
+    "Ahkwesáhsne",
+    "Ahousaht",
+    "Ahwahnee",
+    "Aibapaa",
+    "Ajijaako-zaaga'igan",
+    "Ajoasté",
+    "Ajumawi",
+    "Akaamaschii",
+    "Akia",
+    "Akimel O'odham",
+    "Akpatordjuark",
+    "Akulivik",
+    "Akunnaaq",
+    "Akunneq",
+    "Akwałina",
+    "Akwesasne",
+    "Alamo",
+    "Alarnerk",
+    "Alexander",
+    "Ali Waipia",
+    "Alice",
+    "Alluitsoq",
+    "Alluitsup Paa",
+    "Almont",
+    "Alsen",
+    "Alsíya",
+    "Alturas",
+    "Alámex",
+    "Ambrose",
+    "Amenia",
+    "Amidon",
+    "Amiskwaciya",
+    "Amuctac",
+    "Anamoose",
+    "Anavik",
+    "Anepeminan",
+    "Aneta",
+    "Angisoq",
+    "Aniibiminani-ziibi",
+    "Animikii-waajiing",
+    "Annertusoq",
+    "Antler",
+    "Anyapax",
+    "Anéʼé Tséyiʼ",
+    "Aondironon",
+    "Apache Junction",
+    "Apitipi",
+    "Apitipik",
+    "Appannguit",
+    "Aptos",
+    "Apvitok",
+    "Aqajamerngit",
+    "Ardoch",
+    "Arendarhonon",
+    "Argentenay",
+    "Argenteuil",
+    "Argusville",
+    "Arnegard",
+    "Arpiup Nuua",
+    "Arsuk",
+    "Arthur",
+    "Arvia'juaq",
+    "Arviat",
+    "Arviligjuaq",
+    "Asabiikone-zaaga'igan",
+    "Aschkibokahn",
+    "Ashley",
+    "Asinīpwāt-sīpiy",
+    "Atammik",
+    "Ataronchronon",
+    "Atchash",
+    "Athithuf",
+    "Atsakudokwa",
+    "Atsuge",
+    "Attawapiskat",
+    "Attignawantan",
+    "Attigneenongnahac",
+    "Attu",
+    "Auburn",
+    "Aujuittuq",
+    "Aulatsivik",
+    "Aulavik",
+    "Aulintac",
+    "Aupaluk",
+    "Austmannadal",
+    "Avanersuaq",
+    "Avayalik",
+    "Avonlea"
+  ],
+  "settlements": [
+    {
+      "key": "Nebo Hill-Missouri",
+      "shard_name": "Nebo Hill",
+      "country": "Missouri",
+      "region": "np_lower_missouri_platte_kansas",
+      "coords_lat_lng": [
+        39.245,
+        -94.415
+      ],
+      "min_year": -2600,
+      "max_year": -800,
+      "other_names": [
+        "23CL11",
+        "Liberty Late Archaic"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-2600.1.1",
+          "name": "Nįšóže"
+        }
+      ],
+      "duplicate_name_flagged": "Nįšóže"
+    },
+    {
+      "key": "Sohn-Missouri",
+      "shard_name": "Sohn",
+      "country": "Missouri",
+      "region": "np_lower_missouri_platte_kansas",
+      "coords_lat_lng": [
+        39.015,
+        -94.285
+      ],
+      "min_year": -1000,
+      "max_year": 650,
+      "other_names": [
+        "23JA110",
+        "Little Blue Archaic-Woodland"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-1000.1.1",
+          "name": "Nįšóže"
+        }
+      ],
+      "duplicate_name_flagged": "Nįšóže"
+    },
+    {
+      "key": "Crosno Fortified Village-Kentucky",
+      "shard_name": "Crosno Fortified Village",
+      "country": "Kentucky",
+      "region": "lm_st_francis_st_memphis_parkin",
+      "coords_lat_lng": [
+        36.721,
+        -89.1515
+      ],
+      "min_year": 1200,
+      "max_year": 1350,
+      "other_names": [
+        "23MI1",
+        "Crosno Mississippian Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Ni Tąga"
+        }
+      ],
+      "duplicate_name_flagged": "Ni Tąga"
+    },
+    {
+      "key": "Burkemper-Missouri",
+      "shard_name": "Burkemper",
+      "country": "Missouri",
+      "region": "um_des_moines_rock_iowa",
+      "coords_lat_lng": [
+        38.9972,
+        -90.7383
+      ],
+      "min_year": -70,
+      "max_year": 700,
+      "other_names": [
+        "23LN104",
+        "Cuivre-Mississippi Hopewell"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-70.1.1",
+          "name": "Ní Thaⁿga"
+        }
+      ],
+      "duplicate_name_flagged": "Ní Thaⁿga"
+    },
+    {
+      "key": "Tramp Deep-Nebraska",
+      "shard_name": "Tramp Deep",
+      "country": "Nebraska",
+      "region": "np_middle_missouri_dakotas",
+      "coords_lat_lng": [
+        42.6344,
+        -97.8807
+      ],
+      "min_year": -1000,
+      "max_year": -700,
+      "other_names": [
+        "25KX204",
+        "Knox Niobrara Archaic"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-1000.1.1",
+          "name": "Ní Ubthátha"
+        }
+      ],
+      "duplicate_name_flagged": "Ní Ubthátha"
+    },
+    {
+      "key": "McIntosh-Nebraska",
+      "shard_name": "McIntosh",
+      "country": "Nebraska",
+      "region": "np_middle_missouri_dakotas",
+      "coords_lat_lng": [
+        42.4448,
+        -99.9342
+      ],
+      "min_year": 1200,
+      "max_year": 1450,
+      "other_names": [
+        "25BW15",
+        "Enders Lake Initial Coalescent"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Níubthátha"
+        }
+      ],
+      "duplicate_name_flagged": "Níubthátha"
+    },
+    {
+      "key": "Lake Bronson-Minnesota",
+      "shard_name": "Lake Bronson",
+      "country": "Minnesota",
+      "region": "usa_minnesota",
+      "coords_lat_lng": [
+        48.73243,
+        -96.66493
+      ],
+      "min_year": 1850,
+      "max_year": 2026,
+      "other_names": [
+        "Lake Bronson city"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1850.1.1",
+          "name": "Niizho-ziibi"
+        },
+        {
+          "date": "1904.1.1",
+          "name": "Bronson"
+        },
+        {
+          "date": "1938.1.1",
+          "name": "Lake Bronson"
+        }
+      ],
+      "duplicate_name_flagged": "Niizho-ziibi"
+    },
+    {
+      "key": "Robbin Habitation Site-Minnesota",
+      "shard_name": "Robbin Habitation Site",
+      "country": "Minnesota",
+      "region": "enp_red_river_north",
+      "coords_lat_lng": [
+        48.651,
+        -97.1515
+      ],
+      "min_year": 1300,
+      "max_year": 1500,
+      "other_names": [
+        "21KT2",
+        "Two Rivers Red River Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1300.1.1",
+          "name": "Niizhoo-ziibi"
+        }
+      ],
+      "duplicate_name_flagged": "Niizhoo-ziibi"
+    },
+    {
+      "key": "Summer Island-Michigan",
+      "shard_name": "Summer Island",
+      "country": "Michigan",
+      "region": "gl_superior_upper_peninsula",
+      "coords_lat_lng": [
+        45.5667,
+        -86.6333
+      ],
+      "min_year": 200,
+      "max_year": 1500,
+      "other_names": [
+        "20DE4",
+        "Delta County Garden Peninsula"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Nooke"
+        }
+      ],
+      "duplicate_name_flagged": "Nooke"
+    },
+    {
+      "key": "Rock Island II-Wisconsin",
+      "shard_name": "Rock Island II",
+      "country": "Wisconsin",
+      "region": "gl_superior_upper_peninsula",
+      "coords_lat_lng": [
+        45.4153,
+        -86.8208
+      ],
+      "min_year": -500,
+      "max_year": 1600,
+      "other_names": [
+        "47DR128",
+        "Potawatomi-Odawa Island"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-500.1.1",
+          "name": "Nōkē"
+        }
+      ],
+      "duplicate_name_flagged": "Nōkē"
+    },
+    {
+      "key": "Nukasusutok-Canada",
+      "shard_name": "Nukasusutok",
+      "country": "Canada",
+      "region": "mar_labrador_innu_nunatsiavut",
+      "coords_lat_lng": [
+        56.45833,
+        -61.29167
+      ],
+      "min_year": -3500,
+      "max_year": 1400,
+      "other_names": [
+        "Nain Archipelago",
+        "HcCh-5"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-3500.1.1",
+          "name": "Nukasusutok"
+        }
+      ],
+      "duplicate_name_flagged": "Nukasusutok"
+    },
+    {
+      "key": "Nukasusutok (56.12,-61.46)-Canada",
+      "shard_name": "Nukasusutok",
+      "country": "Canada",
+      "region": "mar_labrador_innu_nunatsiavut",
+      "coords_lat_lng": [
+        56.125,
+        -61.45833
+      ],
+      "min_year": -3500,
+      "max_year": 1400,
+      "other_names": [
+        "Nain Archipelago",
+        "HcCh-5"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-3500.1.1",
+          "name": "Nukasusutok"
+        }
+      ],
+      "duplicate_name_flagged": "Nukasusutok"
+    },
+    {
+      "key": "Lubkin Creek-California",
+      "shard_name": "Lubkin Creek",
+      "country": "California",
+      "region": "ca_san_joaquin_central_coast",
+      "coords_lat_lng": [
+        36.5667,
+        -118.05
+      ],
+      "min_year": -1000,
+      "max_year": 1500,
+      "other_names": [
+        "Lone Pine",
+        "CA-INY-30"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-1000.1.1",
+          "name": "Numa"
+        }
+      ],
+      "duplicate_name_flagged": "Numa"
+    },
+    {
+      "key": "Fish Lake Valley Capital-Nevada",
+      "shard_name": "Fish Lake Valley Capital",
+      "country": "Nevada",
+      "region": "gb_central_nevada_owens_mojave",
+      "coords_lat_lng": [
+        37.75,
+        -118.0667
+      ],
+      "min_year": 100,
+      "max_year": 1350,
+      "other_names": [
+        "Fish Lake Valley Paiute Metropolis"
+      ],
+      "current_historical_names": [
+        {
+          "date": "100.1.1",
+          "name": "Nüma"
+        }
+      ],
+      "duplicate_name_flagged": "Nüma"
+    },
+    {
+      "key": "Mina Soda Spring Village-Nevada",
+      "shard_name": "Mina Soda Spring Village",
+      "country": "Nevada",
+      "region": "gb_central_nevada_owens_mojave",
+      "coords_lat_lng": [
+        38.3833,
+        -118.1
+      ],
+      "min_year": 500,
+      "max_year": 1450,
+      "other_names": [
+        "Soda Spring Valley Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Numu"
+        }
+      ],
+      "duplicate_name_flagged": "Numu"
+    },
+    {
+      "key": "Skull Creek Dunes-Oregon",
+      "shard_name": "Skull Creek Dunes",
+      "country": "Oregon",
+      "region": "nw_snake_river_klamath_interior",
+      "coords_lat_lng": [
+        42.425,
+        -118.925
+      ],
+      "min_year": -2500,
+      "max_year": 1000,
+      "other_names": [
+        "35HA385",
+        "Catlow Valley"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-2500.1.1",
+          "name": "Nümü"
+        }
+      ],
+      "duplicate_name_flagged": "Nümü"
+    },
+    {
+      "key": "Frigg Fjord-Greenland",
+      "shard_name": "Frigg Fjord",
+      "country": "Greenland",
+      "region": "ncan_greenland_east_high_north",
+      "coords_lat_lng": [
+        83.1486,
+        -33.49872
+      ],
+      "min_year": -2400,
+      "max_year": -1700,
+      "other_names": [
+        "Nunniffiit Independence I"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-2400.1.1",
+          "name": "Nuna Avannarleq"
+        }
+      ],
+      "duplicate_name_flagged": "Nuna Avannarleq"
+    },
+    {
+      "key": "Uranienborg-Greenland",
+      "shard_name": "Uranienborg",
+      "country": "Greenland",
+      "region": "cc1_greenland_missions_1763",
+      "coords_lat_lng": [
+        82.1731,
+        -37.7871
+      ],
+      "min_year": 1150,
+      "max_year": 1600,
+      "other_names": [
+        "Nunniffiit Thule"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1150.1.1",
+          "name": "Nuna Avannarleq"
+        }
+      ],
+      "duplicate_name_flagged": "Nuna Avannarleq"
+    },
+    {
+      "key": "Double Ditch-North Dakota",
+      "shard_name": "Double Ditch",
+      "country": "North Dakota",
+      "region": "ca1_plains_indigenous_1754",
+      "coords_lat_lng": [
+        47.0511,
+        -100.8981
+      ],
+      "min_year": 1490,
+      "max_year": 1783,
+      "other_names": [
+        "Passigukan",
+        "Upper Missouri Mandan Town",
+        "Double Ditch",
+        "Heart River Mandan",
+        "32BL8",
+        "Yellow Earth Village",
+        "Double Ditch Earthlodge",
+        "Nuptadi"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1490.1.1",
+          "name": "Nuptadi"
+        }
+      ],
+      "duplicate_name_flagged": "Nuptadi"
+    },
+    {
+      "key": "Chief Looking's Village-North Dakota",
+      "shard_name": "Chief Looking's Village",
+      "country": "North Dakota",
+      "region": "np_middle_missouri_dakotas",
+      "coords_lat_lng": [
+        46.8439,
+        -100.8194
+      ],
+      "min_year": 1400,
+      "max_year": 1600,
+      "other_names": [
+        "32BL3",
+        "Ward Earthlodge Village",
+        "Ward Mandan Village Site"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1400.1.1",
+          "name": "Núptadi"
+        }
+      ],
+      "duplicate_name_flagged": "Núptadi"
+    },
+    {
+      "key": "Nuussuaq (Uummannaq)-Greenland",
+      "shard_name": "Nuussuaq",
+      "country": "Greenland",
+      "region": "cc1_greenland_missions_1763",
+      "coords_lat_lng": [
+        70.70833,
+        -53.95833
+      ],
+      "min_year": 1200,
+      "max_year": 1600,
+      "other_names": [
+        "Nugssuaq",
+        "Niaqornat West",
+        "Nuussuaq (Uummannaq)"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Nuussuaq"
+        }
+      ],
+      "duplicate_name_flagged": "Nuussuaq"
+    },
+    {
+      "key": "Nuussuaq-Greenland_2",
+      "shard_name": "Nuussuaq",
+      "country": "Greenland",
+      "region": "cc1_greenland_missions_1763",
+      "coords_lat_lng": [
+        68.54167,
+        -52.625
+      ],
+      "min_year": 1150,
+      "max_year": 1600,
+      "other_names": [
+        "Nunniffiit Thule"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1150.1.1",
+          "name": "Nuussuaq"
+        }
+      ],
+      "duplicate_name_flagged": "Nuussuaq"
+    },
+    {
+      "key": "NA 680-Arizona",
+      "shard_name": "NA 680",
+      "country": "Arizona",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        35.55238,
+        -111.486
+      ],
+      "min_year": 775,
+      "max_year": 1400,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "775.1.1",
+          "name": "Nuvaʼtukyaʼovi"
+        }
+      ],
+      "duplicate_name_flagged": "Nuvaʼtukyaʼovi"
+    },
+    {
+      "key": "Three Courts Pueblo-Arizona",
+      "shard_name": "Three Courts Pueblo",
+      "country": "Arizona",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        35.48424,
+        -111.60899
+      ],
+      "min_year": 775,
+      "max_year": 1300,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "775.1.1",
+          "name": "Nuvaʼtukyaʼovi"
+        }
+      ],
+      "duplicate_name_flagged": "Nuvaʼtukyaʼovi"
+    }
+  ]
+}

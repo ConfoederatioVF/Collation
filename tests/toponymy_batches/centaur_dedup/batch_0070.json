@@ -1,0 +1,751 @@
+{
+  "batch_index": 70,
+  "clusters": [
+    "dloiyazi",
+    "dzilnaodili",
+    "elem",
+    "esedeik",
+    "esepanasipiwi",
+    "eskisoqnik",
+    "estipahskikikinikots",
+    "etzanoa",
+    "fortsaintlouis",
+    "gidutikado",
+    "gojijing",
+    "gunacquenesink"
+  ],
+  "countries": [
+    "California",
+    "Canada",
+    "Iowa",
+    "Kansas",
+    "Minnesota",
+    "New Brunswick",
+    "New Mexico",
+    "Pennsylvania"
+  ],
+  "count": 24,
+  "forbidden_already_used_in_region": [
+    "'Aha Makhav",
+    "'Avi Melyehw",
+    "'Iipay",
+    "'Yalis",
+    "A'ts'in'a",
+    "A'ts'ina",
+    "A:shiwi",
+    "Aazhoodenaang",
+    "Abó",
+    "Achasta",
+    "Achelacy",
+    "Achiya: Dek'yapbow'a",
+    "Acjachemen",
+    "Aguasto",
+    "Ahha' Kwe'maca",
+    "Ahjimsek",
+    "Ahkwesáhsne",
+    "Ahousaht",
+    "Ahwahnee",
+    "Ajijaako-zaaga'igan",
+    "Ajoasté",
+    "Ajumawi",
+    "Akaamaschii",
+    "Akpatordjuark",
+    "Akulivik",
+    "Akwałina",
+    "Akwesasne",
+    "Alamo",
+    "Alamogordo Army Airfield",
+    "Alarnerk",
+    "Alexander",
+    "Allegheny",
+    "Alturas",
+    "Alámex",
+    "Amiskwaciya",
+    "Amlamkuk",
+    "Amoxiumqua",
+    "Amuctac",
+    "Animikii-waajiing",
+    "Annikcooek",
+    "Anyapax",
+    "Aondironon",
+    "Apitipi",
+    "Apitipik",
+    "Aptos",
+    "Apvitok",
+    "Arendarhonon",
+    "Argentenay",
+    "Argenteuil",
+    "Arvia'juaq",
+    "Arviat",
+    "Arviligjuaq",
+    "Asabiikone-zaaga'igan",
+    "Aschkibokahn",
+    "Asinīpwāt-sīpiy",
+    "Assunepachla",
+    "Astialakwa",
+    "Ataronchronon",
+    "Atchash",
+    "Athithuf",
+    "Atripuy",
+    "Atsee Nitsaa",
+    "Atsinna",
+    "Atsuge",
+    "Attawapiskat",
+    "Attignawantan",
+    "Attigneenongnahac",
+    "Auburn",
+    "Aughwick",
+    "Aujuittuq",
+    "Aulatsivik",
+    "Aulavik",
+    "Aulintac",
+    "Aupaluk",
+    "Avayalik",
+    "Avonlea",
+    "Avvajja",
+    "Awani-wi",
+    "Awha'y",
+    "Aztec",
+    "Baawingashing",
+    "Baie-Rouge",
+    "Baie-Saint-Paul",
+    "Baie-du-Febvre",
+    "Bakersfield",
+    "Batiklechawi",
+    "Batiscan",
+    "Batsi'",
+    "Bay Roberts",
+    "Bay de Verde",
+    "Bayfield",
+    "Bde Hdakíŋyaŋ",
+    "Bde Íŋyaŋ Tȟáŋka",
+    "Bdehdakinyan",
+    "Bdé Wakháŋ",
+    "Bdéze Wakpá",
+    "Beaumont",
+    "Beauport",
+    "Beaupré",
+    "Beloeil",
+    "Benson",
+    "Beothuk",
+    "Berthier",
+    "Berthier-en-Bas",
+    "Beʼekʼid Hóteelí",
+    "Bidanku",
+    "Big Bear",
+    "Biigtigong",
+    "Binaawaan",
+    "Bird Cove",
+    "Bis Dah Łitso",
+    "Bis Saaʼáanii",
+    "Bis sa'ani",
+    "Bitłʼááh Bitoʼ",
+    "Bkejwanong",
+    "Blackfoot",
+    "Blanc-Sablon",
+    "Blue Mound",
+    "Bodega Bay",
+    "Bonavista"
+  ],
+  "settlements": [
+    {
+      "key": "Coyotes Sing Here-New Mexico",
+      "shard_name": "Coyotes Sing Here",
+      "country": "New Mexico",
+      "region": "rg_san_luis_upper_pueblos",
+      "coords_lat_lng": [
+        35.48841,
+        -108.1198
+      ],
+      "min_year": 550,
+      "max_year": 1400,
+      "other_names": [
+        "Lobo Mesa/Red Mesa Valley"
+      ],
+      "current_historical_names": [
+        {
+          "date": "550.1.1",
+          "name": "Dlǫ́ʼí Yázhí"
+        }
+      ],
+      "duplicate_name_flagged": "Dlǫ́ʼí Yázhí"
+    },
+    {
+      "key": "Coolidge-New Mexico",
+      "shard_name": "Coolidge",
+      "country": "New Mexico",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        35.47481,
+        -108.30632
+      ],
+      "min_year": 500,
+      "max_year": 1400,
+      "other_names": [
+        "Rio Puerco of the West"
+      ],
+      "current_historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Dlǫ́ʼí Yázhí"
+        }
+      ],
+      "duplicate_name_flagged": "Dlǫ́ʼí Yázhí"
+    },
+    {
+      "key": "Pierre's Site-New Mexico",
+      "shard_name": "Pierre's Site",
+      "country": "New Mexico",
+      "region": "uc_san_juan_four_corners",
+      "coords_lat_lng": [
+        36.385,
+        -107.942
+      ],
+      "min_year": 1070,
+      "max_year": 1120,
+      "other_names": [
+        "LA 16508",
+        "El Huerfano Community"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1070.1.1",
+          "name": "Dził Náʼoodiłii"
+        }
+      ],
+      "duplicate_name_flagged": "Dził Náʼoodiłii"
+    },
+    {
+      "key": "Pierre's House A-New Mexico",
+      "shard_name": "Pierre's House A",
+      "country": "New Mexico",
+      "region": "uc_san_juan_four_corners",
+      "coords_lat_lng": [
+        36.30611,
+        -107.94843
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [
+        "Central San Juan Basin",
+        "Pierre's House B/C"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Dził Náʼoodiłii"
+        }
+      ],
+      "duplicate_name_flagged": "Dził Náʼoodiłii"
+    },
+    {
+      "key": "Elem-California",
+      "shard_name": "Elem",
+      "country": "California",
+      "region": "ca1_far_west_indigenous_1754",
+      "coords_lat_lng": [
+        39.0018,
+        -122.6658
+      ],
+      "min_year": -1000,
+      "max_year": 1783,
+      "other_names": [
+        "Clear Lake Pomo",
+        "Sulphur Bank",
+        "Rattlesnake Island",
+        "Sulfur Bank",
+        "CA-LAK-7"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-1000.1.1",
+          "name": "Elem"
+        }
+      ],
+      "duplicate_name_flagged": "Elem"
+    },
+    {
+      "key": "Borax Lake-California",
+      "shard_name": "Borax Lake",
+      "country": "California",
+      "region": "ca_sacramento_sf_bay_delta",
+      "coords_lat_lng": [
+        38.9833,
+        -122.6417
+      ],
+      "min_year": -9000,
+      "max_year": 500,
+      "other_names": [
+        "Clear Lake Basin",
+        "CA-LAK-36"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-9000.1.1",
+          "name": "Elem"
+        }
+      ],
+      "duplicate_name_flagged": "Elem"
+    },
+    {
+      "key": "Skull Island-Canada",
+      "shard_name": "Skull Island",
+      "country": "Canada",
+      "region": "mar_wolastoq_new_brunswick_fundy",
+      "coords_lat_lng": [
+        46.2385,
+        -64.5445
+      ],
+      "min_year": 1100,
+      "max_year": 1500,
+      "other_names": [
+        "Indian Island",
+        "Shediac Bay Mi'kmaq Burial"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1100.1.1",
+          "name": "Esedeiik"
+        }
+      ],
+      "duplicate_name_flagged": "Esedeiik"
+    },
+    {
+      "key": "Shediac Bay Oyster Town-New Brunswick",
+      "shard_name": "Shediac Bay Oyster Town",
+      "country": "New Brunswick",
+      "region": "mar_wolastoq_new_brunswick_fundy",
+      "coords_lat_lng": [
+        46.2167,
+        -64.5333
+      ],
+      "min_year": 400,
+      "max_year": 1480,
+      "other_names": [
+        "Shediac Harbour Center"
+      ],
+      "current_historical_names": [
+        {
+          "date": "400.1.1",
+          "name": "Esedeiik"
+        }
+      ],
+      "duplicate_name_flagged": "Esedeiik"
+    },
+    {
+      "key": "Arthur Great Oasis Village-Iowa",
+      "shard_name": "Arthur Great Oasis Village",
+      "country": "Iowa",
+      "region": "um_des_moines_rock_iowa",
+      "coords_lat_lng": [
+        41.651,
+        -94.0515
+      ],
+      "min_year": 1050,
+      "max_year": 1200,
+      "other_names": [
+        "13DA27",
+        "Arthur Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1050.1.1",
+          "name": "Ēsēpana-sīpīwi"
+        }
+      ],
+      "duplicate_name_flagged": "Ēsēpana-sīpīwi"
+    },
+    {
+      "key": "West Des Moines Habitation-Iowa",
+      "shard_name": "West Des Moines Habitation",
+      "country": "Iowa",
+      "region": "um_des_moines_rock_iowa",
+      "coords_lat_lng": [
+        41.5815,
+        -93.751
+      ],
+      "min_year": 1150,
+      "max_year": 1300,
+      "other_names": [
+        "13PK1",
+        "Raccoon River Confluence Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1150.1.1",
+          "name": "Ēsēpana-sīpīwi"
+        }
+      ],
+      "duplicate_name_flagged": "Ēsēpana-sīpīwi"
+    },
+    {
+      "key": "Eskasoni Mi'kmaq Town-Canada",
+      "shard_name": "Eskasoni Mi'kmaq Town",
+      "country": "Canada",
+      "region": "cc1_acadia_nova_scotia_ile_royale",
+      "coords_lat_lng": [
+        45.9521,
+        -60.6121
+      ],
+      "min_year": 1750,
+      "max_year": 1850,
+      "other_names": [
+        "Bras d'Or Lake Cape Breton Center"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Eskisoqnik"
+        }
+      ],
+      "duplicate_name_flagged": "Eskisoqnik"
+    },
+    {
+      "key": "Eskasoni-Canada",
+      "shard_name": "Eskasoni",
+      "country": "Canada",
+      "region": "cc1_acadia_nova_scotia_ile_royale",
+      "coords_lat_lng": [
+        45.93277,
+        -60.64384
+      ],
+      "min_year": 600,
+      "max_year": 1861,
+      "other_names": [
+        "Bras d'Or Mi'kmaq",
+        "Cape Breton Bras d'Or",
+        "Eskasoni"
+      ],
+      "current_historical_names": [
+        {
+          "date": "600.1.1",
+          "name": "Eskisoqnik"
+        },
+        {
+          "date": "1832.1.1",
+          "name": "Eskasoni"
+        }
+      ],
+      "duplicate_name_flagged": "Eskisoqnik"
+    },
+    {
+      "key": "Calderwood-Canada",
+      "shard_name": "Calderwood",
+      "country": "Canada",
+      "region": "pr_foothills_bow_upper_saskatchewan",
+      "coords_lat_lng": [
+        49.715,
+        -113.685
+      ],
+      "min_year": -1000,
+      "max_year": 1300,
+      "other_names": [
+        "DkPj-27",
+        "Porcupine Hills Jump"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-1000.1.1",
+          "name": "Estipah-skikikini-kots"
+        }
+      ],
+      "duplicate_name_flagged": "Estipah-skikikini-kots"
+    },
+    {
+      "key": "Estipah-skikikini-kots-Canada",
+      "shard_name": "Estipah-skikikini-kots",
+      "country": "Canada",
+      "region": "cc1_western_prairies_verendrye",
+      "coords_lat_lng": [
+        49.7058,
+        -113.6531
+      ],
+      "min_year": -3500,
+      "max_year": 1500,
+      "other_names": [
+        "Head-Smashed-In Buffalo Jump",
+        "Estipah-Sikikini-kots",
+        "DkPj-1",
+        "Head-Smashed-In",
+        "Head-Shed-In",
+        "Buffalo Jump"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-3500.1.1",
+          "name": "Estipah-skikikini-kots"
+        }
+      ],
+      "duplicate_name_flagged": "Estipah-skikikini-kots"
+    },
+    {
+      "key": "Arkansas City Wichita Town-Kansas",
+      "shard_name": "Arkansas City Wichita Town",
+      "country": "Kansas",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "coords_lat_lng": [
+        37.061,
+        -97.0515
+      ],
+      "min_year": 1200,
+      "max_year": 1600,
+      "other_names": [
+        "14CO3",
+        "Arkansas City Protohistoric Village",
+        "Arkansas City Wichita",
+        "Great Settlement",
+        "Arkansas City Country Club",
+        "Arkansas City Walnut River",
+        "Larcom-Haggard",
+        "14CO1",
+        "Cowley Great Bend",
+        "Radio Lane"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Etzanoa"
+        }
+      ],
+      "duplicate_name_flagged": "Etzanoa"
+    },
+    {
+      "key": "Silverdale Walnut Town-Kansas",
+      "shard_name": "Silverdale Walnut Town",
+      "country": "Kansas",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "coords_lat_lng": [
+        37.0215,
+        -96.921
+      ],
+      "min_year": 1450,
+      "max_year": 1550,
+      "other_names": [
+        "14CO10",
+        "Silverdale Great Bend Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1450.1.1",
+          "name": "Etzanoa"
+        }
+      ],
+      "duplicate_name_flagged": "Etzanoa"
+    },
+    {
+      "key": "Chambly-Canada",
+      "shard_name": "Chambly",
+      "country": "Canada",
+      "region": "",
+      "coords_lat_lng": [
+        45.43295,
+        -73.29143
+      ],
+      "min_year": 1665,
+      "max_year": 2026,
+      "other_names": [
+        "Fort Chambly",
+        "Chambly-Bassin",
+        "Carignan",
+        "Fort Saint-Louis de Chambly",
+        "Saint-Joseph-de-Chambly",
+        "Île aux Lièvres-Chambly",
+        "Chambly Basin QC",
+        "Fort Chambly Richelieu",
+        "Chambly Parish"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1665.8.25",
+          "name": "Fort Saint-Louis"
+        },
+        {
+          "date": "1672.1.1",
+          "name": "Fort Chambly"
+        },
+        {
+          "date": "1848.1.1",
+          "name": "Chambly"
+        }
+      ],
+      "duplicate_name_flagged": "Fort Saint-Louis"
+    },
+    {
+      "key": "Guysborough-Canada_2",
+      "shard_name": "Guysborough",
+      "country": "Canada",
+      "region": "cc1_acadia_nova_scotia_ile_royale",
+      "coords_lat_lng": [
+        45.38345,
+        -61.49854
+      ],
+      "min_year": 1686,
+      "max_year": 1861,
+      "other_names": [
+        "Chedabucto",
+        "Fort Saint-Louis"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1686.1.1",
+          "name": "Fort Saint-Louis"
+        },
+        {
+          "date": "1713.1.1",
+          "name": "Chedabucto"
+        },
+        {
+          "date": "1784.1.1",
+          "name": "Guysborough"
+        }
+      ],
+      "duplicate_name_flagged": "Fort Saint-Louis"
+    },
+    {
+      "key": "King's Dog Site-California",
+      "shard_name": "King's Dog Site",
+      "country": "California",
+      "region": "ca_klamath_north_coast_shasta",
+      "coords_lat_lng": [
+        41.585,
+        -120.135
+      ],
+      "min_year": -3500,
+      "max_year": 1000,
+      "other_names": [
+        "CA-MOD-204",
+        "Surprise Valley",
+        "Kings Dog"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-3500.1.1",
+          "name": "Gidütikadö"
+        }
+      ],
+      "duplicate_name_flagged": "Gidütikadö"
+    },
+    {
+      "key": "Menlo Baths-California",
+      "shard_name": "Menlo Baths",
+      "country": "California",
+      "region": "ca_klamath_north_coast_shasta",
+      "coords_lat_lng": [
+        41.3167,
+        -120.0667
+      ],
+      "min_year": -3500,
+      "max_year": 1400,
+      "other_names": [
+        "Eagleville",
+        "Surprise Valley",
+        "CA-MOD-197",
+        "Bare Creek",
+        "CA-LAS-194"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-3500.1.1",
+          "name": "Gidütikadö"
+        }
+      ],
+      "duplicate_name_flagged": "Gidütikadö"
+    },
+    {
+      "key": "Hannaford-Minnesota",
+      "shard_name": "Hannaford",
+      "country": "Minnesota",
+      "region": "enp_rainy_lake_of_the_woods",
+      "coords_lat_lng": [
+        48.54,
+        -93.3
+      ],
+      "min_year": 300,
+      "max_year": 1400,
+      "other_names": [
+        "21KC25",
+        "Little Fork-Rainy River"
+      ],
+      "current_historical_names": [
+        {
+          "date": "300.1.1",
+          "name": "Goojijiing"
+        }
+      ],
+      "duplicate_name_flagged": "Goojijiing"
+    },
+    {
+      "key": "Grand Mound-Minnesota",
+      "shard_name": "Grand Mound",
+      "country": "Minnesota",
+      "region": "pr_red_assiniboine_winnipeg_basin",
+      "coords_lat_lng": [
+        48.5133,
+        -93.7065
+      ],
+      "min_year": -200,
+      "max_year": 1200,
+      "other_names": [
+        "21KC3",
+        "Smith Mounds",
+        "Rainy River Laurel",
+        "Laurel Grand Mound",
+        "Smith",
+        "Rainy River",
+        "Laurel Mounds"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-200.1.1",
+          "name": "Goojijiing"
+        }
+      ],
+      "duplicate_name_flagged": "Goojijiing"
+    },
+    {
+      "key": "Bonnie Brook-Pennsylvania",
+      "shard_name": "Bonnie Brook",
+      "country": "Pennsylvania",
+      "region": "oh_upper_ohio_allegheny_kanawha",
+      "coords_lat_lng": [
+        40.8625,
+        -79.8445
+      ],
+      "min_year": 1300,
+      "max_year": 1600,
+      "other_names": [
+        "36BT43",
+        "Butler Connoquenessing"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1300.1.1",
+          "name": "Gunachquenesink"
+        }
+      ],
+      "duplicate_name_flagged": "Gunachquenesink"
+    },
+    {
+      "key": "Connoquenessing-Pennsylvania_2",
+      "shard_name": "Connoquenessing",
+      "country": "Pennsylvania",
+      "region": "oh_upper_ohio_allegheny_kanawha",
+      "coords_lat_lng": [
+        40.6858,
+        -80.3523
+      ],
+      "min_year": -3000,
+      "max_year": 500,
+      "other_names": [
+        "36BV292"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-3000.1.1",
+          "name": "Gunachquenesink"
+        }
+      ],
+      "duplicate_name_flagged": "Gunachquenesink"
+    }
+  ]
+}

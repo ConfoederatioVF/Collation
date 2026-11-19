@@ -1,0 +1,745 @@
+{
+  "batch_index": 63,
+  "clusters": [
+    "soyohpawahko",
+    "spalawatipi",
+    "staxhen",
+    "suisun",
+    "talurutit",
+    "tamien",
+    "tampacoas",
+    "tanakbi"
+  ],
+  "countries": [
+    "Alaska",
+    "Alberta",
+    "California",
+    "Canada",
+    "Indiana",
+    "Kentucky",
+    "Texas"
+  ],
+  "count": 24,
+  "forbidden_already_used_in_region": [
+    "'Aha Makhav",
+    "'Avi Melyehw",
+    "'Iipay",
+    "'Yalis",
+    "Aalaakkaakk'et",
+    "Aangoon",
+    "Aangóon",
+    "Aazhoodenaang",
+    "Achasta",
+    "Achelacy",
+    "Acjachemen",
+    "Adaax",
+    "Adak",
+    "Adamagan",
+    "Ag'waneq",
+    "Aguasto",
+    "Agunalaksh",
+    "Ahha' Kwe'maca",
+    "Ahjimsek",
+    "Ahkwesáhsne",
+    "Ahousaht",
+    "Ahteut",
+    "Ahwahnee",
+    "Ajoasté",
+    "Ajumawi",
+    "Akaamaschii",
+    "Akiacuaq",
+    "Akiaq",
+    "Akokisa",
+    "Akpatordjuark",
+    "Akulivik",
+    "Akutanax̂",
+    "Akwesasne",
+    "Alaasuq",
+    "Alamo",
+    "Alarneq",
+    "Alarnerk",
+    "Alaxsxa",
+    "Alexander",
+    "Alexandrovsk",
+    "Alturas",
+    "Alámex",
+    "Amax̂nax̂",
+    "Amiskwaciy",
+    "Amiskwaciya",
+    "Amuctac",
+    "Anangula",
+    "Angagkitaqnuwu",
+    "Anyapax",
+    "Aondironon",
+    "Apitipi",
+    "Apitipik",
+    "Aptos",
+    "Apvitok",
+    "Aranama",
+    "Arendarhonon",
+    "Argentenay",
+    "Argenteuil",
+    "Arvia'juaq",
+    "Arviat",
+    "Arviiq",
+    "Arviligjuaq",
+    "Asaacaryaraq",
+    "Aschkibokahn",
+    "Ashishik",
+    "Asiniskaw Sîpîsis",
+    "Asinīpwāt-sīpiy",
+    "Ataronchronon",
+    "Atchash",
+    "Athithuf",
+    "Atsuge",
+    "Attawapiskat",
+    "Attignawantan",
+    "Attigneenongnahac",
+    "Atx̂ax̂",
+    "Aubrey",
+    "Auburn",
+    "Auia",
+    "Aujuittuq",
+    "Aulatsivik",
+    "Aulavik",
+    "Aulintac",
+    "Aupaluk",
+    "Avayalik",
+    "Avonlea",
+    "Avvajja",
+    "Awani-wi",
+    "Awha'y",
+    "Baawingashing",
+    "Bah'hatteno",
+    "Baie-Rouge",
+    "Baie-Saint-Paul",
+    "Baie-du-Febvre",
+    "Bakersfield",
+    "Baranof Warm Springs",
+    "Batiklechawi",
+    "Batiscan",
+    "Batsi'",
+    "Batza Tena",
+    "Bay Roberts",
+    "Bay de Verde",
+    "Bayfield",
+    "Beaumont",
+    "Beauport",
+    "Beaupré",
+    "Beloeil",
+    "Benson",
+    "Benteh",
+    "Beothuk",
+    "Berthier",
+    "Berthier-en-Bas",
+    "Big Bear",
+    "Biigtigong",
+    "Binaawaan",
+    "Bird Cove",
+    "Bkejwanong",
+    "Blackfoot",
+    "Blanc-Sablon",
+    "Blue Mound",
+    "Bodega Bay"
+  ],
+  "settlements": [
+    {
+      "key": "Cluny Earthlodge Town-Alberta",
+      "shard_name": "Cluny Earthlodge Town",
+      "country": "Alberta",
+      "region": "pr_foothills_bow_upper_saskatchewan",
+      "coords_lat_lng": [
+        50.7833,
+        -112.8667
+      ],
+      "min_year": 1300,
+      "max_year": 1550,
+      "other_names": [
+        "Blackfoot Crossing Fortified Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1300.1.1",
+          "name": "Soyóóhpawahko"
+        }
+      ],
+      "duplicate_name_flagged": "Soyóóhpawahko"
+    },
+    {
+      "key": "Cluny Fortified Village-Canada",
+      "shard_name": "Cluny Fortified Village",
+      "country": "Canada",
+      "region": "cc1_ruperts_land_hbc",
+      "coords_lat_lng": [
+        50.7667,
+        -112.8833
+      ],
+      "min_year": 1400,
+      "max_year": 1600,
+      "other_names": [
+        "Blackfoot Crossing",
+        "EePf-1",
+        "Cluny Earthlodge Village",
+        "Cluny"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1400.1.1",
+          "name": "Soyohpawahko"
+        }
+      ],
+      "duplicate_name_flagged": "Soyohpawahko"
+    },
+    {
+      "key": "Sundial Hill-Canada",
+      "shard_name": "Sundial Hill",
+      "country": "Canada",
+      "region": "pr_foothills_bow_upper_saskatchewan",
+      "coords_lat_lng": [
+        50.145,
+        -113.105
+      ],
+      "min_year": -1000,
+      "max_year": 1200,
+      "other_names": [
+        "EdPc-2",
+        "Carmangay Medicine Wheel"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-1000.1.1",
+          "name": "Soyóóhpawahko"
+        }
+      ],
+      "duplicate_name_flagged": "Soyóóhpawahko"
+    },
+    {
+      "key": "Mexico Bottoms-Indiana",
+      "shard_name": "Mexico Bottoms",
+      "country": "Indiana",
+      "region": "oh_scioto_miami_hopewell_core",
+      "coords_lat_lng": [
+        38.8244,
+        -85.0273
+      ],
+      "min_year": -3200,
+      "max_year": 900,
+      "other_names": [
+        "12SW99"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-3200.1.1",
+          "name": "Spalawathiipi"
+        }
+      ],
+      "duplicate_name_flagged": "Spalawathiipi"
+    },
+    {
+      "key": "Bluegrass-Indiana",
+      "shard_name": "Bluegrass",
+      "country": "Indiana",
+      "region": "oh_wabash_white_lower_ohio_kincaid",
+      "coords_lat_lng": [
+        38.0984,
+        -87.2715
+      ],
+      "min_year": -5000,
+      "max_year": -4000,
+      "other_names": [
+        "Bluegrass Site",
+        "12W162"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-5000.1.1",
+          "name": "Spalawathiipi"
+        }
+      ],
+      "duplicate_name_flagged": "Spalawathiipi"
+    },
+    {
+      "key": "Angel Mounds-Indiana",
+      "shard_name": "Angel Mounds",
+      "country": "Indiana",
+      "region": "oh_kentucky_cumberland_green",
+      "coords_lat_lng": [
+        37.9431,
+        -87.4561
+      ],
+      "min_year": 1100,
+      "max_year": 1400,
+      "other_names": [
+        "Angel Site",
+        "12VG1",
+        "Evansville Angel Site"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1100.1.1",
+          "name": "Spalawathiipi"
+        }
+      ],
+      "duplicate_name_flagged": "Spalawathiipi"
+    },
+    {
+      "key": "Wrangell-Alaska_2_2",
+      "shard_name": "Wrangell",
+      "country": "Alaska",
+      "region": "nc_tlingit_haida_outer_coast",
+      "coords_lat_lng": [
+        56.4708,
+        -132.3767
+      ],
+      "min_year": 500,
+      "max_year": 1600,
+      "other_names": [
+        "Shtax'heen",
+        "Kiks.adi",
+        "Shakes Island",
+        "PET-002"
+      ],
+      "current_historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Shtax'heen"
+        }
+      ],
+      "duplicate_name_flagged": "Shtax'heen"
+    },
+    {
+      "key": "Wrangell-Alaska",
+      "shard_name": "Wrangell",
+      "country": "Alaska",
+      "region": "",
+      "coords_lat_lng": [
+        56.47061,
+        -132.38153
+      ],
+      "min_year": 1920,
+      "max_year": 2025,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "1700.1.1",
+          "name": "Shtax'heen"
+        },
+        {
+          "date": "1834.1.1",
+          "name": "Redoubt Saint Dionysius"
+        },
+        {
+          "date": "1840.6.1",
+          "name": "Fort Stikine"
+        },
+        {
+          "date": "1867.10.18",
+          "name": "Wrangell"
+        }
+      ],
+      "duplicate_name_flagged": "Shtax'heen"
+    },
+    {
+      "key": "Wrangell-Alaska_2",
+      "shard_name": "Wrangell",
+      "country": "Alaska",
+      "region": "usa_alaska",
+      "coords_lat_lng": [
+        56.18078,
+        -132.02679
+      ],
+      "min_year": 1850,
+      "max_year": 2026,
+      "other_names": [
+        "Wrangell city and borough"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1800.1.1",
+          "name": "Shtax'heen"
+        },
+        {
+          "date": "1834.1.1",
+          "name": "Redoubt St. Dionysius"
+        },
+        {
+          "date": "1840.1.1",
+          "name": "Fort Stikine"
+        },
+        {
+          "date": "1868.5.1",
+          "name": "Fort Wrangell"
+        },
+        {
+          "date": "1903.1.1",
+          "name": "Wrangell"
+        }
+      ],
+      "duplicate_name_flagged": "Shtax'heen"
+    },
+    {
+      "key": "Fairfield Suisun Marsh Capital-California",
+      "shard_name": "Fairfield Suisun Marsh Capital",
+      "country": "California",
+      "region": "ca_sacramento_sf_bay_delta",
+      "coords_lat_lng": [
+        38.25,
+        -122.05
+      ],
+      "min_year": 100,
+      "max_year": 1350,
+      "other_names": [
+        "Suisun Marsh Patwin Capital"
+      ],
+      "current_historical_names": [
+        {
+          "date": "100.1.1",
+          "name": "Suisun"
+        }
+      ],
+      "duplicate_name_flagged": "Suisun"
+    },
+    {
+      "key": "Suisun City Slough Village-California",
+      "shard_name": "Suisun City Slough Village",
+      "country": "California",
+      "region": "ca_sacramento_sf_bay_delta",
+      "coords_lat_lng": [
+        38.2333,
+        -122.0333
+      ],
+      "min_year": 300,
+      "max_year": 1400,
+      "other_names": [
+        "Suisun Slough Midden Center"
+      ],
+      "current_historical_names": [
+        {
+          "date": "300.1.1",
+          "name": "Suisun"
+        }
+      ],
+      "duplicate_name_flagged": "Suisun"
+    },
+    {
+      "key": "Pacheco (Suisun)-California",
+      "shard_name": "Pacheco",
+      "country": "California",
+      "region": "ca_sacramento_sf_bay_delta",
+      "coords_lat_lng": [
+        38.1833,
+        -122.05
+      ],
+      "min_year": 500,
+      "max_year": 1600,
+      "other_names": [
+        "Solano Suisun",
+        "CA-SOL-2",
+        "Pacheco (Suisun)"
+      ],
+      "current_historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Suisun"
+        }
+      ],
+      "duplicate_name_flagged": "Suisun"
+    },
+    {
+      "key": "Porden Point-Canada",
+      "shard_name": "Porden Point",
+      "country": "Canada",
+      "region": "cc1_pacific_mackenzie_indigenous",
+      "coords_lat_lng": [
+        76.375,
+        -93.79167
+      ],
+      "min_year": 1200,
+      "max_year": 1500,
+      "other_names": [
+        "Grinnell Peninsula",
+        "Devon Island",
+        "RbJr-1"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Tallurutit"
+        }
+      ],
+      "duplicate_name_flagged": "Tallurutit"
+    },
+    {
+      "key": "Port Refuge-Canada",
+      "shard_name": "Port Refuge",
+      "country": "Canada",
+      "region": "ncan_eastern_high_arctic_baffin",
+      "coords_lat_lng": [
+        76.2833,
+        -94.7
+      ],
+      "min_year": -2000,
+      "max_year": -500,
+      "other_names": [
+        "Devon Island West",
+        "Cold Component",
+        "RbJu-1"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-2000.1.1",
+          "name": "Tallurutit"
+        }
+      ],
+      "duplicate_name_flagged": "Tallurutit"
+    },
+    {
+      "key": "Maxwell Bay-Canada",
+      "shard_name": "Maxwell Bay",
+      "country": "Canada",
+      "region": "ncan_eastern_high_arctic_baffin",
+      "coords_lat_lng": [
+        74.6667,
+        -88.8333
+      ],
+      "min_year": 1150,
+      "max_year": 1450,
+      "other_names": [
+        "Devon Island South",
+        "OkLe-1"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1150.1.1",
+          "name": "Tallurutit"
+        }
+      ],
+      "duplicate_name_flagged": "Tallurutit"
+    },
+    {
+      "key": "Santa Clara-California",
+      "shard_name": "Santa Clara",
+      "country": "California",
+      "region": "",
+      "coords_lat_lng": [
+        37.36462,
+        -121.96797
+      ],
+      "min_year": 1777,
+      "max_year": 2026,
+      "other_names": [
+        "Santa Clara city",
+        "Mission Santa Clara de Asis",
+        "Santa Clara de Asis",
+        "Thamien",
+        "Mission Santa Clara de Asis Town",
+        "Tamien Ohlone Mission Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1777.1.1",
+          "name": "Thamien"
+        },
+        {
+          "date": "1777.1.12",
+          "name": "Mission Santa Clara de Asís"
+        },
+        {
+          "date": "1852.7.5",
+          "name": "Santa Clara"
+        }
+      ],
+      "duplicate_name_flagged": "Thamien"
+    },
+    {
+      "key": "Santa Clara Coyote Town-California",
+      "shard_name": "Santa Clara Coyote Town",
+      "country": "California",
+      "region": "ca_sacramento_sf_bay_delta",
+      "coords_lat_lng": [
+        37.35,
+        -121.95
+      ],
+      "min_year": 200,
+      "max_year": 1350,
+      "other_names": [
+        "Coyote Creek Tamien Center"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Tamien"
+        }
+      ],
+      "duplicate_name_flagged": "Tamien"
+    },
+    {
+      "key": "San Jose-California",
+      "shard_name": "San Jose",
+      "country": "California",
+      "region": "",
+      "coords_lat_lng": [
+        37.29601,
+        -121.81455
+      ],
+      "min_year": 1777,
+      "max_year": 2026,
+      "other_names": [
+        "San Jose city",
+        "Pueblo de San Jose de Guadalupe",
+        "Guadalupe River",
+        "CA-SCL-128"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1777.1.1",
+          "name": "Thamien"
+        },
+        {
+          "date": "1777.11.29",
+          "name": "Pueblo de San José de Guadalupe"
+        },
+        {
+          "date": "1850.3.27",
+          "name": "San Jose"
+        }
+      ],
+      "duplicate_name_flagged": "Thamien"
+    },
+    {
+      "key": "North Hills I-Texas",
+      "shard_name": "North Hills I",
+      "country": "Texas",
+      "region": "rg_san_luis_upper_pueblos",
+      "coords_lat_lng": [
+        31.97937,
+        -106.36586
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Tampachoas"
+        }
+      ],
+      "duplicate_name_flagged": "Tampachoas"
+    },
+    {
+      "key": "Hot Well Pueblo-Texas",
+      "shard_name": "Hot Well Pueblo",
+      "country": "Texas",
+      "region": "rg_san_luis_upper_pueblos",
+      "coords_lat_lng": [
+        31.925,
+        -106.15
+      ],
+      "min_year": 1275,
+      "max_year": 1360,
+      "other_names": [
+        "41EP60",
+        "Hueco Bolson"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1275.1.1",
+          "name": "Tampachoas"
+        }
+      ],
+      "duplicate_name_flagged": "Tampachoas"
+    },
+    {
+      "key": "Firecracker Pueblo-Texas",
+      "shard_name": "Firecracker Pueblo",
+      "country": "Texas",
+      "region": "rg_pecos_big_bend_lower_rg",
+      "coords_lat_lng": [
+        31.9,
+        -106.3667
+      ],
+      "min_year": 1250,
+      "max_year": 1350,
+      "other_names": [
+        "41EP25",
+        "LA 666"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Tampachoas"
+        }
+      ],
+      "duplicate_name_flagged": "Tampachoas"
+    },
+    {
+      "key": "Chambers-Kentucky",
+      "shard_name": "Chambers",
+      "country": "Kentucky",
+      "region": "cu_lower_tennessee_kentucky_confluence",
+      "coords_lat_lng": [
+        36.8807,
+        -88.3352
+      ],
+      "min_year": 900,
+      "max_year": 1500,
+      "other_names": [
+        "15ML109"
+      ],
+      "current_historical_names": [
+        {
+          "date": "900.1.1",
+          "name": "Tanakbi"
+        }
+      ],
+      "duplicate_name_flagged": "Tanakbi"
+    },
+    {
+      "key": "Roach Kentucky Lake Village-Kentucky",
+      "shard_name": "Roach Kentucky Lake Village",
+      "country": "Kentucky",
+      "region": "cu_lower_tennessee_kentucky_confluence",
+      "coords_lat_lng": [
+        36.7815,
+        -88.081
+      ],
+      "min_year": 1250,
+      "max_year": 1350,
+      "other_names": [
+        "15TR10",
+        "Roach Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Tanakbi"
+        }
+      ],
+      "duplicate_name_flagged": "Tanakbi"
+    },
+    {
+      "key": "Jonathan Creek Palisaded Town-Kentucky",
+      "shard_name": "Jonathan Creek Palisaded Town",
+      "country": "Kentucky",
+      "region": "cu_lower_tennessee_kentucky_confluence",
+      "coords_lat_lng": [
+        36.751,
+        -88.2215
+      ],
+      "min_year": 1100,
+      "max_year": 1350,
+      "other_names": [
+        "15ML4",
+        "Jonathan Creek Mississippian City",
+        "Kentucky Lake Mississippian"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1100.1.1",
+          "name": "Tanakbi"
+        }
+      ],
+      "duplicate_name_flagged": "Tanakbi"
+    }
+  ]
+}

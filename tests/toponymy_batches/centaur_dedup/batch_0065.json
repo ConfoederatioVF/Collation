@@ -1,0 +1,723 @@
+{
+  "batch_index": 65,
+  "clusters": [
+    "toquima",
+    "tsekoh",
+    "tseyikan",
+    "tsikamagi",
+    "tsionhiakwata",
+    "tsoyaha",
+    "tunit",
+    "umanaq"
+  ],
+  "countries": [
+    "Canada",
+    "Greenland",
+    "Kentucky",
+    "Nevada",
+    "New Mexico",
+    "Quebec",
+    "South Carolina",
+    "Tennessee",
+    "Utah"
+  ],
+  "count": 24,
+  "forbidden_already_used_in_region": [
+    "'Yalis",
+    "A'ts'in'a",
+    "A'ts'ina",
+    "A:shiwi",
+    "Aappalaaqqissak",
+    "Aappi",
+    "Aappilattoq",
+    "Aasiaat",
+    "Aazhoodenaang",
+    "Abó",
+    "Achelacy",
+    "Achiya: Dek'yapbow'a",
+    "Aga'idökadö",
+    "Aga'ipanadokado",
+    "Aga'ipañinadökadö",
+    "Agai-dika-a",
+    "Agaidika",
+    "Agaidüka",
+    "Agaipah",
+    "Ahjimsek",
+    "Ahkwesáhsne",
+    "Ahousaht",
+    "Ahwendoe",
+    "Aibapaa",
+    "Ainga Wia Dintso'ahni'i",
+    "Ajoasté",
+    "Akaamaschii",
+    "Akia",
+    "Akigwitegw",
+    "Akpatordjuark",
+    "Akulivik",
+    "Akunnaaq",
+    "Akunneq",
+    "Akwałina",
+    "Akwesasne",
+    "Alamogordo Army Airfield",
+    "Alarnerk",
+    "Alexander",
+    "Alluitsoq",
+    "Alluitsup Paa",
+    "Alámex",
+    "Amayeli",
+    "Amiskwaciya",
+    "Amistustikwach",
+    "Amogayunyi",
+    "Amoxiumqua",
+    "Amoyi",
+    "Anavik",
+    "Angapuni",
+    "Angisoq",
+    "Anikituwagi",
+    "Aniyunwiya",
+    "Annertusoq",
+    "Ansh An Lashokdiwe",
+    "Aondironon",
+    "Apitipi",
+    "Apitipik",
+    "Appannguit",
+    "Apvitok",
+    "Aqajamerngit",
+    "Arendarhonon",
+    "Argentenay",
+    "Argenteuil",
+    "Arpiup Nuua",
+    "Arsuk",
+    "Arvia'juaq",
+    "Arviat",
+    "Arviligjuaq",
+    "Aschkibokahn",
+    "Asinīpwāt-sīpiy",
+    "Astialakwa",
+    "Atammik",
+    "Ataronchronon",
+    "Atripuy",
+    "Atsakudokwa",
+    "Atsee Nitsaa",
+    "Atsinna",
+    "Attawapiskat",
+    "Attignawantan",
+    "Attigneenongnahac",
+    "Attu",
+    "Aujuittuq",
+    "Aulatsivik",
+    "Aulavik",
+    "Aupaluk",
+    "Austmannadal",
+    "Avanersuaq",
+    "Avayalik",
+    "Avonlea",
+    "Avvajja",
+    "Ayuhwasi",
+    "Aztec",
+    "Baawingashing",
+    "Baie-Rouge",
+    "Baie-Saint-Paul",
+    "Baie-du-Febvre",
+    "Batiscan",
+    "Bay Roberts",
+    "Bay de Verde",
+    "Bayfield",
+    "Beaumont",
+    "Beauport",
+    "Beaupré",
+    "Beloeil",
+    "Benson",
+    "Beothuk",
+    "Berthier",
+    "Berthier-en-Bas",
+    "Beʼekʼid Hóteelí",
+    "Bidanku",
+    "Biigtigong",
+    "Binaawaan",
+    "Bird Cove",
+    "Bis Dah Łitso",
+    "Bis Saaʼáanii",
+    "Bis sa'ani",
+    "Bitłʼááh Bitoʼ",
+    "Bjørnedal",
+    "Bkejwanong",
+    "Blackfoot"
+  ],
+  "settlements": [
+    {
+      "key": "Gatecliff Shelter-Nevada",
+      "shard_name": "Gatecliff Shelter",
+      "country": "Nevada",
+      "region": "gb_central_nevada_owens_mojave",
+      "coords_lat_lng": [
+        39.0069,
+        -116.7786
+      ],
+      "min_year": -3500,
+      "max_year": 1200,
+      "other_names": [
+        "26NY301"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-3500.1.1",
+          "name": "Toquima"
+        }
+      ],
+      "duplicate_name_flagged": "Toquima"
+    },
+    {
+      "key": "Belmont Toquima Range Capital-Nevada",
+      "shard_name": "Belmont Toquima Range Capital",
+      "country": "Nevada",
+      "region": "gb_central_nevada_owens_mojave",
+      "coords_lat_lng": [
+        38.5833,
+        -116.8667
+      ],
+      "min_year": 200,
+      "max_year": 1400,
+      "other_names": [
+        "Belmont Shoshone Metropolis"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Toquima"
+        }
+      ],
+      "duplicate_name_flagged": "Toquima"
+    },
+    {
+      "key": "Manhattan Toquima Town-Nevada",
+      "shard_name": "Manhattan Toquima Town",
+      "country": "Nevada",
+      "region": "gb_central_nevada_owens_mojave",
+      "coords_lat_lng": [
+        38.5333,
+        -117.0667
+      ],
+      "min_year": 400,
+      "max_year": 1450,
+      "other_names": [
+        "Manhattan Canyon Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "400.1.1",
+          "name": "Toquima"
+        }
+      ],
+      "duplicate_name_flagged": "Toquima"
+    },
+    {
+      "key": "Great Bend House B-New Mexico",
+      "shard_name": "Great Bend House B",
+      "country": "New Mexico",
+      "region": "uc_san_juan_four_corners",
+      "coords_lat_lng": [
+        36.17928,
+        -108.57457
+      ],
+      "min_year": 550,
+      "max_year": 1400,
+      "other_names": [
+        "Central San Juan Basin"
+      ],
+      "current_historical_names": [
+        {
+          "date": "550.1.1",
+          "name": "Tsékooh"
+        }
+      ],
+      "duplicate_name_flagged": "Tsékooh"
+    },
+    {
+      "key": "Great Bend House A-New Mexico",
+      "shard_name": "Great Bend House A",
+      "country": "New Mexico",
+      "region": "uc_san_juan_four_corners",
+      "coords_lat_lng": [
+        36.15061,
+        -108.39399
+      ],
+      "min_year": 550,
+      "max_year": 1600,
+      "other_names": [
+        "Central San Juan Basin"
+      ],
+      "current_historical_names": [
+        {
+          "date": "550.1.1",
+          "name": "Tsékooh"
+        }
+      ],
+      "duplicate_name_flagged": "Tsékooh"
+    },
+    {
+      "key": "Whirlwind Lake-New Mexico",
+      "shard_name": "Whirlwind Lake",
+      "country": "New Mexico",
+      "region": "uc_san_juan_four_corners",
+      "coords_lat_lng": [
+        36.135,
+        -108.342
+      ],
+      "min_year": 1040,
+      "max_year": 1110,
+      "other_names": [
+        "LA 18242"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1040.1.1",
+          "name": "Tsékooh"
+        }
+      ],
+      "duplicate_name_flagged": "Tsékooh"
+    },
+    {
+      "key": "Cottonwood Falls (37.37,-109.78)-Utah",
+      "shard_name": "Cottonwood Falls",
+      "country": "Utah",
+      "region": "uc_san_juan_four_corners",
+      "coords_lat_lng": [
+        37.37,
+        -109.78
+      ],
+      "min_year": 1080,
+      "max_year": 1130,
+      "other_names": [
+        "42SA5222"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1080.1.1",
+          "name": "Tséyíkʼáán"
+        }
+      ],
+      "duplicate_name_flagged": "Tséyíkʼáán"
+    },
+    {
+      "key": "Butler Wash Great House-Utah",
+      "shard_name": "Butler Wash Great House",
+      "country": "Utah",
+      "region": "uc_san_juan_four_corners",
+      "coords_lat_lng": [
+        37.335,
+        -109.615
+      ],
+      "min_year": 1080,
+      "max_year": 1130,
+      "other_names": [
+        "42SA2078"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1080.1.1",
+          "name": "Tséyíkʼáán"
+        }
+      ],
+      "duplicate_name_flagged": "Tséyíkʼáán"
+    },
+    {
+      "key": "Comb Wash Great House-Utah",
+      "shard_name": "Comb Wash Great House",
+      "country": "Utah",
+      "region": "uc_san_juan_four_corners",
+      "coords_lat_lng": [
+        37.275,
+        -109.665
+      ],
+      "min_year": 1075,
+      "max_year": 1130,
+      "other_names": [
+        "42SA22585"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1075.1.1",
+          "name": "Tséyíkʼáán"
+        }
+      ],
+      "duplicate_name_flagged": "Tséyíkʼáán"
+    },
+    {
+      "key": "Dallas-Tennessee",
+      "shard_name": "Dallas",
+      "country": "Tennessee",
+      "region": "cu_upper_east_tennessee_ridge",
+      "coords_lat_lng": [
+        35.162,
+        -85.158
+      ],
+      "min_year": 1300,
+      "max_year": 1550,
+      "other_names": [
+        "Dallas Type Site",
+        "40HA1"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1300.1.1",
+          "name": "Tsikamagi"
+        }
+      ],
+      "duplicate_name_flagged": "Tsikamagi"
+    },
+    {
+      "key": "Hixon Dallas Town-Tennessee",
+      "shard_name": "Hixon Dallas Town",
+      "country": "Tennessee",
+      "region": "cu_upper_east_tennessee_ridge",
+      "coords_lat_lng": [
+        35.151,
+        -85.2215
+      ],
+      "min_year": 1250,
+      "max_year": 1350,
+      "other_names": [
+        "40HA3",
+        "Hixon Tennessee River Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Tsikamagi"
+        }
+      ],
+      "duplicate_name_flagged": "Tsikamagi"
+    },
+    {
+      "key": "Davis-Tennessee",
+      "shard_name": "Davis",
+      "country": "Tennessee",
+      "region": "cu_upper_east_tennessee_ridge",
+      "coords_lat_lng": [
+        35.135,
+        -85.168
+      ],
+      "min_year": 1100,
+      "max_year": 1500,
+      "other_names": [
+        "Davis Site (Chickamauga)",
+        "40HA2"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1100.1.1",
+          "name": "Tsikamagi"
+        }
+      ],
+      "duplicate_name_flagged": "Tsikamagi"
+    },
+    {
+      "key": "McDonald-Canada",
+      "shard_name": "McDonald",
+      "country": "Canada",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "coords_lat_lng": [
+        45.1045,
+        -74.3415
+      ],
+      "min_year": 1350,
+      "max_year": 1420,
+      "other_names": [
+        "BgFo-18",
+        "Saint-Anicet MacDonald Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1350.1.1",
+          "name": "Tsiionhiakwatha"
+        }
+      ],
+      "duplicate_name_flagged": "Tsiionhiakwatha"
+    },
+    {
+      "key": "Droulers-Tsiionhiakwatha-Canada",
+      "shard_name": "Droulers-Tsiionhiakwatha",
+      "country": "Canada",
+      "region": "sl_montreal_trois_rivieres_quebec",
+      "coords_lat_lng": [
+        45.0829,
+        -74.3148
+      ],
+      "min_year": 1450,
+      "max_year": 1540,
+      "other_names": [
+        "BgFo-1",
+        "Saint-Anicet St. Lawrence Iroquoian",
+        "Mailhot-Curran",
+        "BgFo-2",
+        "Saint-Anicet Highland Iroquoian"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1450.1.1",
+          "name": "Tsiionhiakwatha"
+        }
+      ],
+      "duplicate_name_flagged": "Tsiionhiakwatha"
+    },
+    {
+      "key": "Mailhot-Curran Longhouse Town-Quebec",
+      "shard_name": "Mailhot-Curran Longhouse Town",
+      "country": "Quebec",
+      "region": "sl_montreal_trois_rivieres_quebec",
+      "coords_lat_lng": [
+        45.0667,
+        -74.2833
+      ],
+      "min_year": 1400,
+      "max_year": 1530,
+      "other_names": [
+        "Saint-Anicet Mailhot Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1400.1.1",
+          "name": "Tsiionhiakwatha"
+        }
+      ],
+      "duplicate_name_flagged": "Tsiionhiakwatha"
+    },
+    {
+      "key": "Indian Knoll-Kentucky",
+      "shard_name": "Indian Knoll",
+      "country": "Kentucky",
+      "region": "oh_kentucky_cumberland_green",
+      "coords_lat_lng": [
+        37.2747,
+        -86.9936
+      ],
+      "min_year": -3000,
+      "max_year": -1000,
+      "other_names": [
+        "Green River Shell Mound",
+        "Green River Shell Midden",
+        "15OH2"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-3000.1.1",
+          "name": "Tsoyaha"
+        }
+      ],
+      "duplicate_name_flagged": "Tsoyaha"
+    },
+    {
+      "key": "Topper-South Carolina",
+      "shard_name": "Topper",
+      "country": "South Carolina",
+      "region": "se_georgia_savannah_ocmulgee_etowah",
+      "coords_lat_lng": [
+        33.005,
+        -81.488
+      ],
+      "min_year": -10000,
+      "max_year": -4000,
+      "other_names": [
+        "38AL23"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-10000.1.1",
+          "name": "Tsoyaha"
+        }
+      ],
+      "duplicate_name_flagged": "Tsoyaha"
+    },
+    {
+      "key": "Gainesboro Cumberland Village-Tennessee",
+      "shard_name": "Gainesboro Cumberland Village",
+      "country": "Tennessee",
+      "region": "oh_kentucky_cumberland_green",
+      "coords_lat_lng": [
+        36.361,
+        -85.6515
+      ],
+      "min_year": 1250,
+      "max_year": 1350,
+      "other_names": [
+        "40JK1",
+        "Roaring River Confluence Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Tsoyaha"
+        }
+      ],
+      "duplicate_name_flagged": "Tsoyaha"
+    },
+    {
+      "key": "Port au Choix-Canada_2",
+      "shard_name": "Port au Choix",
+      "country": "Canada",
+      "region": "mar_newfoundland_beothuk_st_pierre",
+      "coords_lat_lng": [
+        50.7167,
+        -57.3667
+      ],
+      "min_year": -2000,
+      "max_year": 1200,
+      "other_names": [
+        "Phillip's Garden",
+        "Newfoundland",
+        "EeBi-1",
+        "Phillips Garden",
+        "Port au Choix Dorset Palaeo-Eskimo",
+        "EeBi-2",
+        "Port au Choix 3 Maritime Archaic"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-2000.1.1",
+          "name": "Tuniit"
+        }
+      ],
+      "duplicate_name_flagged": "Tuniit"
+    },
+    {
+      "key": "Pointe Riche-Canada",
+      "shard_name": "Pointe Riche",
+      "country": "Canada",
+      "region": "mar_newfoundland_beothuk_st_pierre",
+      "coords_lat_lng": [
+        50.7015,
+        -57.4085
+      ],
+      "min_year": 100,
+      "max_year": 400,
+      "other_names": [
+        "EeBi-20",
+        "Port au Choix Dorset"
+      ],
+      "current_historical_names": [
+        {
+          "date": "100.1.1",
+          "name": "Tuniit"
+        }
+      ],
+      "duplicate_name_flagged": "Tuniit"
+    },
+    {
+      "key": "Cow Head-Canada_2",
+      "shard_name": "Cow Head",
+      "country": "Canada",
+      "region": "mar_newfoundland_beothuk_st_pierre",
+      "coords_lat_lng": [
+        49.9167,
+        -57.8
+      ],
+      "min_year": -1500,
+      "max_year": 1400,
+      "other_names": [
+        "Gros Morne",
+        "DlBk-1",
+        "Gros Morne Palaeo-Eskimo"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-1500.1.1",
+          "name": "Tuniit"
+        }
+      ],
+      "duplicate_name_flagged": "Tuniit"
+    },
+    {
+      "key": "Comer's Midden-Greenland",
+      "shard_name": "Comer's Midden",
+      "country": "Greenland",
+      "region": "cc1_greenland_missions_1763",
+      "coords_lat_lng": [
+        76.5667,
+        -68.8333
+      ],
+      "min_year": 1150,
+      "max_year": 1600,
+      "other_names": [
+        "Uummannaq Pituffik",
+        "Thule Harbor",
+        "North Star Bay",
+        "Illut",
+        "Nunniffiit Thule"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1150.1.1",
+          "name": "Uummannaq"
+        }
+      ],
+      "duplicate_name_flagged": "Uummannaq"
+    },
+    {
+      "key": "Uummannaq Colony-Greenland",
+      "shard_name": "Uummannaq Colony",
+      "country": "Greenland",
+      "region": "cc1_greenland_missions_1763",
+      "coords_lat_lng": [
+        70.875,
+        -52.125
+      ],
+      "min_year": 1150,
+      "max_year": 1860,
+      "other_names": [
+        "North Greenland District",
+        "Qasigissat",
+        "Nunniffiit Thule"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1150.1.1",
+          "name": "Uummannaq"
+        },
+        {
+          "date": "1763.1.1",
+          "name": "Umanak"
+        }
+      ],
+      "duplicate_name_flagged": "Uummannaq"
+    },
+    {
+      "key": "Umanak-Greenland",
+      "shard_name": "Uummannaq",
+      "country": "Greenland",
+      "region": "",
+      "coords_lat_lng": [
+        70.67442,
+        -52.12545
+      ],
+      "min_year": 1150,
+      "max_year": 2025,
+      "other_names": [
+        "Uummanaq",
+        "Umanak",
+        "UMD",
+        "Umanakas",
+        "Umanaks",
+        "Ummannaq",
+        "Pooruseq",
+        "Nunniffiit Thule",
+        "Qasigissat"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1150.1.1",
+          "name": "Uummannaq"
+        },
+        {
+          "date": "1763.1.1",
+          "name": "Umanak"
+        },
+        {
+          "date": "1979.5.1",
+          "name": "Uummannaq"
+        }
+      ],
+      "duplicate_name_flagged": "Uummannaq"
+    }
+  ]
+}

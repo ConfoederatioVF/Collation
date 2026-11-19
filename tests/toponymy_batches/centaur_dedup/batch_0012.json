@@ -1,0 +1,502 @@
+{
+  "batch_index": 12,
+  "clusters": [
+    "kadohadaco"
+  ],
+  "countries": [
+    "Arkansas",
+    "Louisiana",
+    "Oklahoma",
+    "Texas"
+  ],
+  "count": 16,
+  "forbidden_already_used_in_region": [
+    "Adai",
+    "Akokisa",
+    "Akoroa",
+    "Aminoya",
+    "Aquixo",
+    "Aranama",
+    "Aubrey",
+    "Auia",
+    "Avoyel",
+    "Bah' hatínu",
+    "Bah'hatteno",
+    "Bahʼhatteno",
+    "Bayougoula",
+    "Belcher",
+    "Blue Mound",
+    "Bowman",
+    "Bradley",
+    "Bulbancha",
+    "Caddo Gap",
+    "Caddo Mills",
+    "Caddo Valley",
+    "Cahinnio",
+    "Camp Hood",
+    "Canocanayest",
+    "Canocanayestatetlo",
+    "Cantona",
+    "Casqui",
+    "Catahoula",
+    "Cayas",
+    "Chahta Yakni",
+    "Chaouacha",
+    "Cherokee City",
+    "Cherokee Village",
+    "Cherry Valley",
+    "Choctaw",
+    "Coapite",
+    "Coaque",
+    "Coco",
+    "Columbia",
+    "Copane",
+    "Cotoname",
+    "Dacate",
+    "El Paso del Norte",
+    "Ervipiame",
+    "Grant",
+    "Guachoya",
+    "Guapite",
+    "Guthrie",
+    "Gúlvàu",
+    "Hainai",
+    "Hasinai",
+    "Hillside Acres",
+    "Hinono'ei",
+    "Houma",
+    "Houston",
+    "Hóma'éóhe",
+    "Iscani",
+    "Ishak",
+    "Iskuli",
+    "Istrouma",
+    "Isà-hunu'bi",
+    "Iti Humma",
+    "Jumano",
+    "Karankawa",
+    "Kirikirʼiːs",
+    "Kitikiti'sh",
+    "Kitikitiʼsh",
+    "Kitsai",
+    "Kitsash",
+    "Kopano",
+    "Koroa",
+    "Kwahadi",
+    "Kyle",
+    "Káyántinu",
+    "La Bahía",
+    "Lake Cherokee",
+    "Lake Kiowa",
+    "Lakeside City",
+    "Lipscomb",
+    "Malaquite",
+    "Mariame",
+    "Marksville",
+    "Mayeye",
+    "Miami",
+    "Mineral Springs",
+    "Mission Nuestra Señora de la Purísima Concepción de Acuña",
+    "Mission Nuestra Señora del Rosario",
+    "Mission San José y San Miguel de Aguayo",
+    "Mission San Juan Capistrano",
+    "Morristown",
+    "Mound",
+    "Mugulasha",
+    "Mvskoke",
+    "Naa'dańde",
+    "Nabedache",
+    "Nacao",
+    "Nacogdoche",
+    "Naconiche",
+    "Nadaco",
+    "Nadako",
+    "Naishan Dene",
+    "Nakohodochi",
+    "Nanatsoho",
+    "Nasoni",
+    "Natahe",
+    "Ndee",
+    "Nechawi",
+    "Nolanville",
+    "Náshit'ush",
+    "Nʉmʉnʉʉ",
+    "Nʉmʉnʉʉ Sookobitʉ",
+    "Ogáxpa",
+    "Okelousa",
+    "Okwata",
+    "Omaha",
+    "Orcoquisac",
+    "Osotouy",
+    "Otomoaco",
+    "Ouacha",
+    "Ouachita"
+  ],
+  "settlements": [
+    {
+      "key": "Mineral Springs-Arkansas_2",
+      "shard_name": "Mineral Springs",
+      "country": "Arkansas",
+      "region": "cp_arkansas_valley_ozark_spiro",
+      "coords_lat_lng": [
+        33.875,
+        -93.918
+      ],
+      "min_year": 1050,
+      "max_year": 1400,
+      "other_names": [
+        "3HO1"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1050.1.1",
+          "name": "Kadohadacho"
+        }
+      ],
+      "duplicate_name_flagged": "Kadohadacho"
+    },
+    {
+      "key": "Cedar Grove-Arkansas",
+      "shard_name": "Cedar Grove",
+      "country": "Arkansas",
+      "region": "cp_arkansas_valley_ozark_spiro",
+      "coords_lat_lng": [
+        33.255,
+        -93.775
+      ],
+      "min_year": 1500,
+      "max_year": 1600,
+      "other_names": [
+        "3LA97"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1500.1.1",
+          "name": "Kadohadacho"
+        }
+      ],
+      "duplicate_name_flagged": "Kadohadacho"
+    },
+    {
+      "key": "Battle Mound Caddo City-Arkansas",
+      "shard_name": "Battle Mound Caddo City",
+      "country": "Arkansas",
+      "region": "cp_arkansas_valley_ozark_spiro",
+      "coords_lat_lng": [
+        33.151,
+        -93.6515
+      ],
+      "min_year": 1200,
+      "max_year": 1600,
+      "other_names": [
+        "3LA1",
+        "Great Battle Mound Town",
+        "Red River Great Bend Caddo"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Kadohadacho"
+        }
+      ],
+      "duplicate_name_flagged": "Kadohadacho"
+    },
+    {
+      "key": "Belcher-Louisiana_2",
+      "shard_name": "Belcher",
+      "country": "Louisiana",
+      "region": "cp_arkansas_valley_ozark_spiro",
+      "coords_lat_lng": [
+        32.7514,
+        -93.8242
+      ],
+      "min_year": 1100,
+      "max_year": 1550,
+      "other_names": [
+        "Belcher Mound",
+        "16CD13"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1100.1.1",
+          "name": "Kadohadácho"
+        }
+      ],
+      "duplicate_name_flagged": "Kadohadácho"
+    },
+    {
+      "key": "Lundy-Oklahoma",
+      "shard_name": "Lundy",
+      "country": "Oklahoma",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "coords_lat_lng": [
+        36.712,
+        -95.145
+      ],
+      "min_year": 1150,
+      "max_year": 1400,
+      "other_names": [
+        "34CG15"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1150.1.1",
+          "name": "Kadohadacho"
+        }
+      ],
+      "duplicate_name_flagged": "Kadohadacho"
+    },
+    {
+      "key": "Reed-Oklahoma",
+      "shard_name": "Reed",
+      "country": "Oklahoma",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "coords_lat_lng": [
+        36.605,
+        -94.758
+      ],
+      "min_year": 1050,
+      "max_year": 1350,
+      "other_names": [
+        "Reed Mounds",
+        "34DL1"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1050.1.1",
+          "name": "Kadohadacho"
+        }
+      ],
+      "duplicate_name_flagged": "Kadohadacho"
+    },
+    {
+      "key": "Norman-Oklahoma_2",
+      "shard_name": "Norman",
+      "country": "Oklahoma",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "coords_lat_lng": [
+        35.892,
+        -95.285
+      ],
+      "min_year": 950,
+      "max_year": 1300,
+      "other_names": [
+        "Norman Mounds",
+        "34WG2"
+      ],
+      "current_historical_names": [
+        {
+          "date": "950.1.1",
+          "name": "Kadohadacho"
+        }
+      ],
+      "duplicate_name_flagged": "Kadohadacho"
+    },
+    {
+      "key": "Hughes-Oklahoma",
+      "shard_name": "Hughes",
+      "country": "Oklahoma",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "coords_lat_lng": [
+        35.785,
+        -95.302
+      ],
+      "min_year": 1050,
+      "max_year": 1400,
+      "other_names": [
+        "Bill Hughes",
+        "34MS4"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1050.1.1",
+          "name": "Kadohadacho"
+        }
+      ],
+      "duplicate_name_flagged": "Kadohadacho"
+    },
+    {
+      "key": "Spiro-Oklahoma_2",
+      "shard_name": "Spiro",
+      "country": "Oklahoma",
+      "region": "cp_arkansas_valley_ozark_spiro",
+      "coords_lat_lng": [
+        35.3131,
+        -94.5711
+      ],
+      "min_year": 900,
+      "max_year": 1450,
+      "other_names": [
+        "Spiro Mounds",
+        "Craig Mound",
+        "34LF40",
+        "Arkansas River Mound Center"
+      ],
+      "current_historical_names": [
+        {
+          "date": "900.1.1",
+          "name": "Kadohadacho"
+        }
+      ],
+      "duplicate_name_flagged": "Kadohadacho"
+    },
+    {
+      "key": "Scott-Oklahoma",
+      "shard_name": "Scott",
+      "country": "Oklahoma",
+      "region": "cp_arkansas_valley_ozark_spiro",
+      "coords_lat_lng": [
+        34.903,
+        -94.7011
+      ],
+      "min_year": -3200,
+      "max_year": 1100,
+      "other_names": [
+        "34LF11"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-3200.1.1",
+          "name": "Kadohadacho"
+        }
+      ],
+      "duplicate_name_flagged": "Kadohadacho"
+    },
+    {
+      "key": "McCutchan-McLaughlin-Oklahoma",
+      "shard_name": "McCutchan-McLaughlin",
+      "country": "Oklahoma",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "coords_lat_lng": [
+        34.87,
+        -95.2417
+      ],
+      "min_year": -1200,
+      "max_year": 850,
+      "other_names": [
+        "34LT11"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-1200.1.1",
+          "name": "Kadohadacho"
+        }
+      ],
+      "duplicate_name_flagged": "Kadohadacho"
+    },
+    {
+      "key": "Bug Hill-Oklahoma",
+      "shard_name": "Bug Hill",
+      "country": "Oklahoma",
+      "region": "cp_arkansas_valley_ozark_spiro",
+      "coords_lat_lng": [
+        34.4152,
+        -95.3643
+      ],
+      "min_year": -1800,
+      "max_year": 1450,
+      "other_names": [
+        "34PU116"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-1800.1.1",
+          "name": "Kadohadacho"
+        }
+      ],
+      "duplicate_name_flagged": "Kadohadacho"
+    },
+    {
+      "key": "Holdeman-Texas",
+      "shard_name": "Holdeman",
+      "country": "Texas",
+      "region": "cp_arkansas_valley_ozark_spiro",
+      "coords_lat_lng": [
+        33.852,
+        -95.035
+      ],
+      "min_year": 1150,
+      "max_year": 1550,
+      "other_names": [
+        "Dan Holdeman",
+        "41RR11"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1150.1.1",
+          "name": "Kadohadacho"
+        }
+      ],
+      "duplicate_name_flagged": "Kadohadacho"
+    },
+    {
+      "key": "Kadohadacho Grand Village-Texas",
+      "shard_name": "Kadohadacho Grand Village",
+      "country": "Texas",
+      "region": "ca1_plains_indigenous_1754",
+      "coords_lat_lng": [
+        33.5521,
+        -94.1521
+      ],
+      "min_year": 1690,
+      "max_year": 1775,
+      "other_names": [
+        "Red River Caddo Center"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1690.1.1",
+          "name": "Kadohadacho"
+        }
+      ],
+      "duplicate_name_flagged": "Kadohadacho"
+    },
+    {
+      "key": "Cooper Lake-Texas",
+      "shard_name": "Cooper Lake",
+      "country": "Texas",
+      "region": "cp_arkansas_valley_ozark_spiro",
+      "coords_lat_lng": [
+        33.318,
+        -95.622
+      ],
+      "min_year": -1000,
+      "max_year": 1350,
+      "other_names": [
+        "Hurricane Hill",
+        "Cooper Reservoir Complex",
+        "41HP106"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-1000.1.1",
+          "name": "Kadohadacho"
+        }
+      ],
+      "duplicate_name_flagged": "Kadohadacho"
+    },
+    {
+      "key": "Rookery Ridge-Texas",
+      "shard_name": "Rookery Ridge",
+      "country": "Texas",
+      "region": "sp_neches_sabine_trinity_caddo",
+      "coords_lat_lng": [
+        32.7356,
+        -94.9415
+      ],
+      "min_year": -700,
+      "max_year": 1550,
+      "other_names": [
+        "41UR133",
+        "Big Cypress Caddo"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-700.1.1",
+          "name": "Kadohadacho"
+        }
+      ],
+      "duplicate_name_flagged": "Kadohadacho"
+    }
+  ]
+}

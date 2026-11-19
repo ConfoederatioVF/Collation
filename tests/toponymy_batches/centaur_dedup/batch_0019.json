@@ -1,0 +1,579 @@
+{
+  "batch_index": 19,
+  "clusters": [
+    "kyawana",
+    "pahvant"
+  ],
+  "countries": [
+    "Arizona",
+    "New Mexico",
+    "Utah"
+  ],
+  "count": 20,
+  "forbidden_already_used_in_region": [
+    "'Aha Kwahwat",
+    "'Aha Makhav",
+    "'Onk Akimel",
+    "A'ts'in'a",
+    "A'ts'ina",
+    "A:shiwi",
+    "Abangkuyivi",
+    "Abó",
+    "Achiya: Dek'yapbow'a",
+    "Adahiilíní",
+    "Aghaałą́",
+    "Ahagaskiaywa",
+    "Ainga Wia Dintso'ahni'i",
+    "Akimel O'odham",
+    "Akwałina",
+    "Alamogordo Army Airfield",
+    "Ali Waipia",
+    "Amoxiumqua",
+    "Angapuni",
+    "Ansh An Lashokdiwe",
+    "Anéʼé Tséyiʼ",
+    "Apache Junction",
+    "Astialakwa",
+    "Atripuy",
+    "Atsee Nitsaa",
+    "Atsinna",
+    "Awat'ovi",
+    "Awatovi",
+    "Awatʼovi",
+    "Aztec",
+    "Babad Do'ag",
+    "Babocomari",
+    "Besh-Ba-Gowah",
+    "Beʼekʼid Baa Ahoodzání",
+    "Beʼekʼid Hóteelí",
+    "Bidanku",
+    "Bidaʼhóóchiiʼ",
+    "Bideʼyóó",
+    "Bis Dah Łitso",
+    "Bis Saaʼáanii",
+    "Bis sa'ani",
+    "Bitłʼááh Bitoʼ",
+    "Boa Ogoi",
+    "Bohogue",
+    "Bááh Háálį́",
+    "Béésh Baa Gowah",
+    "Carnué",
+    "Cemamagi Du'ag",
+    "Ch'laandé",
+    "Ch'úk'ánén",
+    "Chakpahu",
+    "Chezhinchotah",
+    "Chililí",
+    "Chiricahui",
+    "Chiwi Kawi",
+    "Chodistaas",
+    "Chokonen",
+    "Chíhéne",
+    "Chíhéńde",
+    "Chʼilwózh",
+    "Chʼínílį́",
+    "Chʼóshgai",
+    "Chʼóshgaii",
+    "Cicuye",
+    "Cochiti Lake",
+    "Cuarac",
+    "Cueloce",
+    "Cueloze",
+    "Cuk Ṣon",
+    "Cumumba",
+    "Cundiyo",
+    "Cuyamungue",
+    "Dilzhę́ʼé",
+    "Dilzhę́’é",
+    "Dinétah",
+    "Dishchíí’ Bikoh",
+    "Dlǫ́ʼí Yázhí",
+    "Doso Doyabi",
+    "Dził Ditłʼooí",
+    "Dził Diłhił",
+    "Dził Nchaa Síʼan",
+    "Dził Nnilchʼi Diyiléé",
+    "Dził Nteel",
+    "Dził Náʼoodiłii",
+    "Dził Łigai",
+    "Dził Łigai Si’án",
+    "Dziłditcole",
+    "Dziłghą́ʼé",
+    "Dziłíjiin",
+    "Dáʼákʼeh Halání",
+    "Díwózhii Bikooh",
+    "El Rito",
+    "Flora Vista",
+    "Folsom",
+    "Fort Apache",
+    "Fort Wingate",
+    "Gaadisóh",
+    "Genobey",
+    "Geʼe Wawhi",
+    "Giusewa",
+    "Gu Achi",
+    "Gułgahéńde",
+    "Gúlkahén",
+    "Ha'ga'a Wogobi",
+    "Ha'ga'a Wogobi Na'h Na",
+    "Haakʼu",
+    "Hakanyacha",
+    "Halona Idiwanʼa",
+    "Hanáádlį́",
+    "Hatalacva",
+    "Hawikku",
+    "Hawúʼishįįhé",
+    "Haystack",
+    "Heshoda A'ts'ina",
+    "Heshoda Ts'ina",
+    "Heshoda Yałta",
+    "Heshodan Imk'osk'wa",
+    "Heshota",
+    "Heshotauthla",
+    "Hila Wi:n"
+  ],
+  "settlements": [
+    {
+      "key": "Mineral Creek-Arizona",
+      "shard_name": "Mineral Creek",
+      "country": "Arizona",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        34.43527,
+        -109.61866
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [
+        "Hardscrabble/ULC"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Kʼyawa:na"
+        }
+      ],
+      "duplicate_name_flagged": "Kʼyawa:na"
+    },
+    {
+      "key": "Mineral Creek Pueblo-Arizona",
+      "shard_name": "Mineral Creek Pueblo",
+      "country": "Arizona",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        34.29716,
+        -109.93617
+      ],
+      "min_year": 1150,
+      "max_year": 1380,
+      "other_names": [
+        "Vernon Area"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1150.1.1",
+          "name": "Kʼyawa:na"
+        }
+      ],
+      "duplicate_name_flagged": "Kʼyawa:na"
+    },
+    {
+      "key": "Table Rock Pueblo (34.25,-109.30)-Arizona",
+      "shard_name": "Table Rock Pueblo",
+      "country": "Arizona",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        34.25,
+        -109.3
+      ],
+      "min_year": 1330,
+      "max_year": 1380,
+      "other_names": [
+        "AZ Q:11:1"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1330.1.1",
+          "name": "Kʼyawa:na"
+        }
+      ],
+      "duplicate_name_flagged": "Kʼyawa:na"
+    },
+    {
+      "key": "Raven Site Ruin-Arizona",
+      "shard_name": "Raven Site Ruin",
+      "country": "Arizona",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        34.235,
+        -109.345
+      ],
+      "min_year": 1050,
+      "max_year": 1250,
+      "other_names": [
+        "AZ Q:11:48"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1050.1.1",
+          "name": "Kʼyawa:na"
+        }
+      ],
+      "duplicate_name_flagged": "Kʼyawa:na"
+    },
+    {
+      "key": "Greenwood-Arizona",
+      "shard_name": "Greenwood",
+      "country": "Arizona",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        34.199,
+        -109.35815
+      ],
+      "min_year": 300,
+      "max_year": 1600,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "300.1.1",
+          "name": "Kʼyawa:na"
+        }
+      ],
+      "duplicate_name_flagged": "Kʼyawa:na"
+    },
+    {
+      "key": "Casa Malpais-Arizona",
+      "shard_name": "Casa Malpais",
+      "country": "Arizona",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        34.1597,
+        -109.29
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [
+        "AZ Q:15:3",
+        "Upper Little Colorado",
+        "AZ Q:15:6"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Kʼyawa:na"
+        }
+      ],
+      "duplicate_name_flagged": "Kʼyawa:na"
+    },
+    {
+      "key": "Rudd Creek Ruin-Arizona",
+      "shard_name": "Rudd Creek Ruin",
+      "country": "Arizona",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        33.97354,
+        -109.17476
+      ],
+      "min_year": 1150,
+      "max_year": 1380,
+      "other_names": [
+        "Upper Little Colorado"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1150.1.1",
+          "name": "Kʼyawa:na"
+        }
+      ],
+      "duplicate_name_flagged": "Kʼyawa:na"
+    },
+    {
+      "key": "Rudd Creek Pueblo-Arizona",
+      "shard_name": "Rudd Creek Pueblo",
+      "country": "Arizona",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        33.9645,
+        -109.13582
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Kʼyawa:na"
+        }
+      ],
+      "duplicate_name_flagged": "Kʼyawa:na"
+    },
+    {
+      "key": "Hinkson Ranch-New Mexico",
+      "shard_name": "Hinkson Ranch",
+      "country": "New Mexico",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        34.8237,
+        -108.90307
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Kʼyawanʼa"
+        }
+      ],
+      "duplicate_name_flagged": "Kʼyawanʼa"
+    },
+    {
+      "key": "Hinkson-New Mexico",
+      "shard_name": "Hinkson",
+      "country": "New Mexico",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        34.80489,
+        -109.0627
+      ],
+      "min_year": 550,
+      "max_year": 1450,
+      "other_names": [
+        "West Zuni"
+      ],
+      "current_historical_names": [
+        {
+          "date": "550.1.1",
+          "name": "Kʼyawanʼa"
+        }
+      ],
+      "duplicate_name_flagged": "Kʼyawanʼa"
+    },
+    {
+      "key": "Lynndyl Sevier River Town-Utah",
+      "shard_name": "Lynndyl Sevier River Town",
+      "country": "Utah",
+      "region": "gb_bonneville_wasatch_fremont",
+      "coords_lat_lng": [
+        39.5167,
+        -112.3667
+      ],
+      "min_year": 800,
+      "max_year": 1220,
+      "other_names": [
+        "Sevier River North Bend Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Pahvant"
+        }
+      ],
+      "duplicate_name_flagged": "Pahvant"
+    },
+    {
+      "key": "Oak City Oak Creek Village-Utah",
+      "shard_name": "Oak City Oak Creek Village",
+      "country": "Utah",
+      "region": "gb_bonneville_wasatch_fremont",
+      "coords_lat_lng": [
+        39.3667,
+        -112.3333
+      ],
+      "min_year": 850,
+      "max_year": 1220,
+      "other_names": [
+        "Oak Creek Fremont Foothill Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "850.1.1",
+          "name": "Pahvant"
+        }
+      ],
+      "duplicate_name_flagged": "Pahvant"
+    },
+    {
+      "key": "Delta Sevier River Capital-Utah",
+      "shard_name": "Delta Sevier River Capital",
+      "country": "Utah",
+      "region": "gb_bonneville_wasatch_fremont",
+      "coords_lat_lng": [
+        39.35,
+        -112.5667
+      ],
+      "min_year": 750,
+      "max_year": 1250,
+      "other_names": [
+        "Lower Sevier Agricultural Metropolis"
+      ],
+      "current_historical_names": [
+        {
+          "date": "750.1.1",
+          "name": "Pahvant"
+        }
+      ],
+      "duplicate_name_flagged": "Pahvant"
+    },
+    {
+      "key": "Hinckley Sevier Desert Town-Utah",
+      "shard_name": "Hinckley Sevier Desert Town",
+      "country": "Utah",
+      "region": "gb_bonneville_wasatch_fremont",
+      "coords_lat_lng": [
+        39.3333,
+        -112.6667
+      ],
+      "min_year": 850,
+      "max_year": 1220,
+      "other_names": [
+        "Hinckley Fremont Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "850.1.1",
+          "name": "Pahvant"
+        }
+      ],
+      "duplicate_name_flagged": "Pahvant"
+    },
+    {
+      "key": "Deseret Sevier Bend Village-Utah",
+      "shard_name": "Deseret Sevier Bend Village",
+      "country": "Utah",
+      "region": "gb_bonneville_wasatch_fremont",
+      "coords_lat_lng": [
+        39.2833,
+        -112.65
+      ],
+      "min_year": 800,
+      "max_year": 1240,
+      "other_names": [
+        "Sevier River South Bend Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Pahvant"
+        }
+      ],
+      "duplicate_name_flagged": "Pahvant"
+    },
+    {
+      "key": "Scipio Round Valley Town-Utah",
+      "shard_name": "Scipio Round Valley Town",
+      "country": "Utah",
+      "region": "gb_bonneville_wasatch_fremont",
+      "coords_lat_lng": [
+        39.25,
+        -112.1
+      ],
+      "min_year": 800,
+      "max_year": 1220,
+      "other_names": [
+        "Round Valley Fremont Center"
+      ],
+      "current_historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Pahvant"
+        }
+      ],
+      "duplicate_name_flagged": "Pahvant"
+    },
+    {
+      "key": "Pharo Village (39.22,-112.11)-Utah",
+      "shard_name": "Pharo Village",
+      "country": "Utah",
+      "region": "gb_bonneville_wasatch_fremont",
+      "coords_lat_lng": [
+        39.215,
+        -112.112
+      ],
+      "min_year": 1120,
+      "max_year": 1200,
+      "other_names": [
+        "42MD180"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1120.1.1",
+          "name": "Pahvant"
+        }
+      ],
+      "duplicate_name_flagged": "Pahvant"
+    },
+    {
+      "key": "Holden Pioneer Creek Town-Utah",
+      "shard_name": "Holden Pioneer Creek Town",
+      "country": "Utah",
+      "region": "gb_bonneville_wasatch_fremont",
+      "coords_lat_lng": [
+        39.1,
+        -112.2667
+      ],
+      "min_year": 850,
+      "max_year": 1220,
+      "other_names": [
+        "Pioneer Creek Fremont Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "850.1.1",
+          "name": "Pahvant"
+        }
+      ],
+      "duplicate_name_flagged": "Pahvant"
+    },
+    {
+      "key": "Fillmore Chalk Creek Center-Utah",
+      "shard_name": "Fillmore Chalk Creek Center",
+      "country": "Utah",
+      "region": "gb_bonneville_wasatch_fremont",
+      "coords_lat_lng": [
+        38.9667,
+        -112.3333
+      ],
+      "min_year": 800,
+      "max_year": 1240,
+      "other_names": [
+        "Chalk Creek Fremont Metropolis"
+      ],
+      "current_historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Pahvant"
+        }
+      ],
+      "duplicate_name_flagged": "Pahvant"
+    },
+    {
+      "key": "Five Finger Ridge-Utah",
+      "shard_name": "Five Finger Ridge",
+      "country": "Utah",
+      "region": "gb_bonneville_wasatch_fremont",
+      "coords_lat_lng": [
+        38.5744,
+        -112.3378
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [
+        "42SV1686",
+        "Clear Creek Canyon",
+        "Icicle Bench",
+        "42SV1382",
+        "Clear Creek",
+        "Lonesome George",
+        "42SV1680"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Pahvant"
+        }
+      ],
+      "duplicate_name_flagged": "Pahvant"
+    }
+  ]
+}

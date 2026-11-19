@@ -1,0 +1,700 @@
+{
+  "batch_index": 84,
+  "clusters": [
+    "sahiyenaozupi",
+    "sakwavayu",
+    "samatawa",
+    "sana",
+    "sanirut",
+    "sanpitc",
+    "santan",
+    "sasbito",
+    "sawawaktodo",
+    "sawomet",
+    "scwan",
+    "seberetc"
+  ],
+  "countries": [
+    "Arizona",
+    "Canada",
+    "Nevada",
+    "New Mexico",
+    "North Dakota",
+    "Nunavut",
+    "Rhode Island",
+    "Texas",
+    "Utah"
+  ],
+  "count": 24,
+  "forbidden_already_used_in_region": [
+    "'Aha Kwahwat",
+    "'Aha Makhav",
+    "'Onk Akimel",
+    "'Yalis",
+    "A'ts'in'a",
+    "A'ts'ina",
+    "A:shiwi",
+    "Aazhoodenaang",
+    "Abangkuyivi",
+    "Abó",
+    "Achelacy",
+    "Achiya: Dek'yapbow'a",
+    "Adahiilíní",
+    "Adams",
+    "Addison",
+    "Aga'idökadö",
+    "Aga'ipanadokado",
+    "Aga'ipañinadökadö",
+    "Agai-dika-a",
+    "Agaidika",
+    "Agaidüka",
+    "Agaipah",
+    "Aghaałą́",
+    "Agnes",
+    "Ahagaskiaywa",
+    "Ahjimsek",
+    "Ahkwesáhsne",
+    "Ahousaht",
+    "Aibapaa",
+    "Ainga Wia Dintso'ahni'i",
+    "Ajoasté",
+    "Akaamaschii",
+    "Akimel O'odham",
+    "Akokisa",
+    "Akpatordjuark",
+    "Akulivik",
+    "Akwałina",
+    "Akwesasne",
+    "Alamo",
+    "Alamogordo Army Airfield",
+    "Alarnerk",
+    "Alexander",
+    "Ali Waipia",
+    "Alice",
+    "Almont",
+    "Alsen",
+    "Alámex",
+    "Ambrose",
+    "Amenia",
+    "Amidon",
+    "Amiskwaciya",
+    "Amoxiumqua",
+    "Anamoose",
+    "Anepeminan",
+    "Aneta",
+    "Angapuni",
+    "Aniibiminani-ziibi",
+    "Ansh An Lashokdiwe",
+    "Antler",
+    "Anéʼé Tséyiʼ",
+    "Aondironon",
+    "Apache Junction",
+    "Apitipi",
+    "Apitipik",
+    "Apvitok",
+    "Aranama",
+    "Ardoch",
+    "Arendarhonon",
+    "Argentenay",
+    "Argenteuil",
+    "Argusville",
+    "Arnegard",
+    "Arthur",
+    "Arvia'juaq",
+    "Arviat",
+    "Arviligjuaq",
+    "Aschkibokahn",
+    "Ashley",
+    "Asinīpwāt-sīpiy",
+    "Astialakwa",
+    "Ataronchronon",
+    "Atripuy",
+    "Atsakudokwa",
+    "Atsee Nitsaa",
+    "Atsinna",
+    "Attawapiskat",
+    "Attignawantan",
+    "Attigneenongnahac",
+    "Aubrey",
+    "Auia",
+    "Aujuittuq",
+    "Aulatsivik",
+    "Aulavik",
+    "Aupaluk",
+    "Avayalik",
+    "Avonlea",
+    "Avvajja",
+    "Awadi Aguraawi",
+    "Awat'ovi",
+    "Awatixa",
+    "Awatovi",
+    "Awatíxa",
+    "Awatʼovi",
+    "Awaxawi",
+    "Awaxáawi",
+    "Awigaxa",
+    "Awáati",
+    "Awígaxa",
+    "Ayr",
+    "Aztec",
+    "Baawingashing",
+    "Babad Do'ag",
+    "Babocomari",
+    "Bah'hatteno",
+    "Baie-Rouge",
+    "Baie-Saint-Paul",
+    "Baie-du-Febvre",
+    "Balfour",
+    "Balta",
+    "Bantry"
+  ],
+  "settlements": [
+    {
+      "key": "Mose Sheyenne Settlement-North Dakota",
+      "shard_name": "Mose Sheyenne Settlement",
+      "country": "North Dakota",
+      "region": "enp_souris_devils_lake",
+      "coords_lat_lng": [
+        47.5512,
+        -98.251
+      ],
+      "min_year": 1300,
+      "max_year": 1500,
+      "other_names": [
+        "32GG22",
+        "Mose River Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1300.1.1",
+          "name": "Šahíyena Ožúpi"
+        }
+      ],
+      "duplicate_name_flagged": "Šahíyena Ožúpi"
+    },
+    {
+      "key": "Kindred Sheyenne-North Dakota",
+      "shard_name": "Kindred Sheyenne",
+      "country": "North Dakota",
+      "region": "enp_souris_devils_lake",
+      "coords_lat_lng": [
+        46.6495,
+        -97.0168
+      ],
+      "min_year": -1000,
+      "max_year": 1500,
+      "other_names": [
+        "32CS-KN",
+        "Sheyenne Delta Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-1000.1.1",
+          "name": "Šahíyena Ožúpi"
+        }
+      ],
+      "duplicate_name_flagged": "Šahíyena Ožúpi"
+    },
+    {
+      "key": "Montezuma Castle-Arizona",
+      "shard_name": "Montezuma Castle",
+      "country": "Arizona",
+      "region": "az_salt_verde_phoenix_hohokam",
+      "coords_lat_lng": [
+        34.611,
+        -111.8366
+      ],
+      "min_year": 1200,
+      "max_year": 1350,
+      "other_names": [
+        "NA1278"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Sakwavayu"
+        }
+      ],
+      "duplicate_name_flagged": "Sakwavayu"
+    },
+    {
+      "key": "Polles Pueblo-Arizona",
+      "shard_name": "Polles Pueblo",
+      "country": "Arizona",
+      "region": "az_salt_verde_phoenix_hohokam",
+      "coords_lat_lng": [
+        34.16571,
+        -111.61821
+      ],
+      "min_year": 550,
+      "max_year": 1600,
+      "other_names": [
+        "Verde/New River"
+      ],
+      "current_historical_names": [
+        {
+          "date": "550.1.1",
+          "name": "Sakwavayu"
+        }
+      ],
+      "duplicate_name_flagged": "Sakwavayu"
+    },
+    {
+      "key": "Shamattawa Manitoba-Canada",
+      "shard_name": "Shamattawa Manitoba",
+      "country": "Canada",
+      "region": "cc1_ruperts_land_hbc",
+      "coords_lat_lng": [
+        55.8583,
+        -92.0961
+      ],
+      "min_year": -800,
+      "max_year": 1580,
+      "other_names": [
+        "Gods River Confluence",
+        "HdLb-1"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-800.1.1",
+          "name": "Shamattawa"
+        }
+      ],
+      "duplicate_name_flagged": "Shamattawa"
+    },
+    {
+      "key": "Shamattawa Rapids-Canada",
+      "shard_name": "Shamattawa Rapids",
+      "country": "Canada",
+      "region": "hb_hudson_james_lowlands_cree",
+      "coords_lat_lng": [
+        54.255,
+        -85.625
+      ],
+      "min_year": -2000,
+      "max_year": 800,
+      "other_names": [
+        "Winisk-Shamattawa Archaic",
+        "FaJa-1"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-2000.1.1",
+          "name": "Shamattawa"
+        }
+      ],
+      "duplicate_name_flagged": "Shamattawa"
+    },
+    {
+      "key": "Flatrock Road-Texas",
+      "shard_name": "Flatrock Road",
+      "country": "Texas",
+      "region": "sp_gulf_coast_nueces_karankawa",
+      "coords_lat_lng": [
+        30.48,
+        -99.78
+      ],
+      "min_year": -600,
+      "max_year": 1550,
+      "other_names": [
+        "41KM69",
+        "Junction South Llano"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-600.1.1",
+          "name": "Sana"
+        }
+      ],
+      "duplicate_name_flagged": "Sana"
+    },
+    {
+      "key": "Santa Maria Creek-Texas",
+      "shard_name": "Santa Maria Creek",
+      "country": "Texas",
+      "region": "sp_gulf_coast_nueces_karankawa",
+      "coords_lat_lng": [
+        29.73,
+        -97.62
+      ],
+      "min_year": 750,
+      "max_year": 1550,
+      "other_names": [
+        "41CW104",
+        "Plum Creek Caldwell"
+      ],
+      "current_historical_names": [
+        {
+          "date": "750.1.1",
+          "name": "Sana"
+        }
+      ],
+      "duplicate_name_flagged": "Sana"
+    },
+    {
+      "key": "Button Point-Canada",
+      "shard_name": "Button Point",
+      "country": "Canada",
+      "region": "ncan_eastern_high_arctic_baffin",
+      "coords_lat_lng": [
+        72.875,
+        -76.20833
+      ],
+      "min_year": 0,
+      "max_year": 1300,
+      "other_names": [
+        "Bylot Island",
+        "Mittimatalik East",
+        "PfFm-1"
+      ],
+      "current_historical_names": [
+        {
+          "date": "0.1.1",
+          "name": "Sannirut"
+        }
+      ],
+      "duplicate_name_flagged": "Sannirut"
+    },
+    {
+      "key": "Button Point Settlement-Nunavut",
+      "shard_name": "Button Point Settlement",
+      "country": "Nunavut",
+      "region": "ncan_eastern_high_arctic_baffin",
+      "coords_lat_lng": [
+        72.875,
+        -76.45833
+      ],
+      "min_year": 400,
+      "max_year": 1150,
+      "other_names": [
+        "Bylot Island Dorset Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "400.1.1",
+          "name": "Sannirut"
+        }
+      ],
+      "duplicate_name_flagged": "Sannirut"
+    },
+    {
+      "key": "Coyote Wash Community-Utah",
+      "shard_name": "Coyote Wash Community",
+      "country": "Utah",
+      "region": "uc_green_river_wyoming_basin",
+      "coords_lat_lng": [
+        38.945,
+        -110.985
+      ],
+      "min_year": 950,
+      "max_year": 1100,
+      "other_names": [
+        "42EM",
+        "San Rafael Swell"
+      ],
+      "current_historical_names": [
+        {
+          "date": "950.1.1",
+          "name": "Sanpitch"
+        }
+      ],
+      "duplicate_name_flagged": "Sanpitch"
+    },
+    {
+      "key": "Snake Rock Village-Utah",
+      "shard_name": "Snake Rock Village",
+      "country": "Utah",
+      "region": "uc_colorado_headwaters_grand_mesa",
+      "coords_lat_lng": [
+        38.685,
+        -111.425
+      ],
+      "min_year": 550,
+      "max_year": 1285,
+      "other_names": [
+        "42SV5"
+      ],
+      "current_historical_names": [
+        {
+          "date": "550.1.1",
+          "name": "Sanpitch"
+        }
+      ],
+      "duplicate_name_flagged": "Sanpitch"
+    },
+    {
+      "key": "Germann Site-Arizona",
+      "shard_name": "Germann Site",
+      "country": "Arizona",
+      "region": "az_salt_verde_phoenix_hohokam",
+      "coords_lat_lng": [
+        33.28383,
+        -111.59324
+      ],
+      "min_year": 300,
+      "max_year": 1600,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "300.1.1",
+          "name": "Santan"
+        }
+      ],
+      "duplicate_name_flagged": "Santan"
+    },
+    {
+      "key": "El Polvoron-Arizona",
+      "shard_name": "El Polvoron",
+      "country": "Arizona",
+      "region": "az_salt_verde_phoenix_hohokam",
+      "coords_lat_lng": [
+        33.26202,
+        -111.61003
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Santan"
+        }
+      ],
+      "duplicate_name_flagged": "Santan"
+    },
+    {
+      "key": "Fort Wingate Great House-New Mexico",
+      "shard_name": "Fort Wingate Great House",
+      "country": "New Mexico",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        35.465,
+        -108.545
+      ],
+      "min_year": 1050,
+      "max_year": 1120,
+      "other_names": [
+        "LA 2690"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1050.1.1",
+          "name": "Shash Bitooʼ"
+        }
+      ],
+      "duplicate_name_flagged": "Shash Bitooʼ"
+    },
+    {
+      "key": "Noes Site-New Mexico",
+      "shard_name": "Noes Site",
+      "country": "New Mexico",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        35.44455,
+        -108.67275
+      ],
+      "min_year": 550,
+      "max_year": 1600,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "550.1.1",
+          "name": "Shash Bitooʼ"
+        }
+      ],
+      "duplicate_name_flagged": "Shash Bitooʼ"
+    },
+    {
+      "key": "Winnemucca Humboldt Town-Nevada",
+      "shard_name": "Winnemucca Humboldt Town",
+      "country": "Nevada",
+      "region": "gb_humboldt_lahontan_west",
+      "coords_lat_lng": [
+        40.9667,
+        -117.7333
+      ],
+      "min_year": 400,
+      "max_year": 1450,
+      "other_names": [
+        "Humboldt River Winnemucca Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "400.1.1",
+          "name": "Sawawaktödö"
+        }
+      ],
+      "duplicate_name_flagged": "Sawawaktödö"
+    },
+    {
+      "key": "Golconda Hot Springs Capital-Nevada",
+      "shard_name": "Golconda Hot Springs Capital",
+      "country": "Nevada",
+      "region": "gb_humboldt_lahontan_west",
+      "coords_lat_lng": [
+        40.95,
+        -117.4833
+      ],
+      "min_year": 200,
+      "max_year": 1350,
+      "other_names": [
+        "Golconda Shoshone Hot Springs Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Sawawaktödö"
+        }
+      ],
+      "duplicate_name_flagged": "Sawawaktödö"
+    },
+    {
+      "key": "Warwick-Rhode Island",
+      "shard_name": "Warwick",
+      "country": "Rhode Island",
+      "region": "",
+      "coords_lat_lng": [
+        41.70308,
+        -71.42031
+      ],
+      "min_year": 1300,
+      "max_year": 2026,
+      "other_names": [
+        "Warwick Neck",
+        "Warwick city",
+        "Shawomet",
+        "Samuel Gorton's Settlement",
+        "Warwick Town",
+        "Old Warwick Narragansett"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1300.1.1",
+          "name": "Shawomet"
+        },
+        {
+          "date": "1648.1.1",
+          "name": "Warwick"
+        }
+      ],
+      "duplicate_name_flagged": "Shawomet"
+    },
+    {
+      "key": "Shawomet Narragansett Town-Rhode Island",
+      "shard_name": "Shawomet Narragansett Town",
+      "country": "Rhode Island",
+      "region": "ne_merrimack_massachusetts_bay",
+      "coords_lat_lng": [
+        41.7015,
+        -71.411
+      ],
+      "min_year": 1500,
+      "max_year": 1600,
+      "other_names": [
+        "Warwick Cove Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1500.1.1",
+          "name": "Shawomet"
+        }
+      ],
+      "duplicate_name_flagged": "Shawomet"
+    },
+    {
+      "key": "Tsawwassen-Canada_2",
+      "shard_name": "Tsawwassen",
+      "country": "Canada",
+      "region": "cc1_pacific_mackenzie_indigenous",
+      "coords_lat_lng": [
+        49.125,
+        -123.125
+      ],
+      "min_year": -2000,
+      "max_year": 1600,
+      "other_names": [
+        "sc̓əwaθən",
+        "DgRs-2"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-2000.1.1",
+          "name": "sc̓əwaθən"
+        }
+      ],
+      "duplicate_name_flagged": "sc̓əwaθən"
+    },
+    {
+      "key": "Whalen Farm-Canada",
+      "shard_name": "Whalen Farm",
+      "country": "Canada",
+      "region": "nc_salish_fraser_bc_plateau",
+      "coords_lat_lng": [
+        49.0056,
+        -123.0417
+      ],
+      "min_year": -500,
+      "max_year": 1400,
+      "other_names": [
+        "Boundary Bay",
+        "Tsawwassen South",
+        "DfRs-3"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-500.1.1",
+          "name": "sc̓əwaθən"
+        }
+      ],
+      "duplicate_name_flagged": "sc̓əwaθən"
+    },
+    {
+      "key": "Turner-Look-Utah",
+      "shard_name": "Turner-Look",
+      "country": "Utah",
+      "region": "uc_colorado_headwaters_grand_mesa",
+      "coords_lat_lng": [
+        39.20267,
+        -109.31076
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [
+        "42GR314",
+        "Cisco Inferno House",
+        "42GR1548",
+        "Cisco Fremont"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Sheberetch"
+        }
+      ],
+      "duplicate_name_flagged": "Sheberetch"
+    },
+    {
+      "key": "Bull Creek-Utah",
+      "shard_name": "Bull Creek",
+      "country": "Utah",
+      "region": "uc_colorado_headwaters_grand_mesa",
+      "coords_lat_lng": [
+        38.315,
+        -110.725
+      ],
+      "min_year": 1050,
+      "max_year": 1180,
+      "other_names": [
+        "42GA",
+        "Bull Creek Archaeological District"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1050.1.1",
+          "name": "Sheberetch"
+        }
+      ],
+      "duplicate_name_flagged": "Sheberetch"
+    }
+  ]
+}

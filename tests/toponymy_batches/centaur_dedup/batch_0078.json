@@ -1,0 +1,739 @@
+{
+  "batch_index": 78,
+  "clusters": [
+    "moingona",
+    "mosotapiskan",
+    "moundcity",
+    "moyaone",
+    "moyinkwena",
+    "muwu",
+    "myamionki",
+    "nabedace",
+    "nadako",
+    "nalakihu",
+    "nanatsoho",
+    "nanrantsouak"
+  ],
+  "countries": [
+    "Arizona",
+    "Arkansas",
+    "California",
+    "Canada",
+    "Illinois",
+    "Indiana",
+    "Iowa",
+    "Maine",
+    "Maryland",
+    "Missouri",
+    "Ohio",
+    "Saskatchewan",
+    "Texas"
+  ],
+  "count": 24,
+  "forbidden_already_used_in_region": [
+    "'Aha Kwahwat",
+    "'Aha Makhav",
+    "'Avi Melyehw",
+    "'Iipay",
+    "'Onk Akimel",
+    "'Yalis",
+    "Aazhoodenaang",
+    "Abangkuyivi",
+    "Achasta",
+    "Achelacy",
+    "Acjachemen",
+    "Adahiilíní",
+    "Aghaałą́",
+    "Aguasto",
+    "Ahagaskiaywa",
+    "Ahha' Kwe'maca",
+    "Ahjimsek",
+    "Ahkwesáhsne",
+    "Ahousaht",
+    "Ahsenisiipi",
+    "Ahwahnee",
+    "Ajoasté",
+    "Ajumawi",
+    "Akaamaschii",
+    "Akimel O'odham",
+    "Akokisa",
+    "Akpatordjuark",
+    "Akulivik",
+    "Akwałina",
+    "Akwesasne",
+    "Alamo",
+    "Alamonitheepi",
+    "Alarnerk",
+    "Alexander",
+    "Algonquin",
+    "Ali Waipia",
+    "Alturas",
+    "Alámex",
+    "Amaquon",
+    "Amehkwani",
+    "Amiskwaciya",
+    "Amuctac",
+    "Annapolis",
+    "Anyapax",
+    "Anéʼé Tséyiʼ",
+    "Aondironon",
+    "Apache Junction",
+    "Apakosîsi-sîpiy",
+    "Apakosîsihk",
+    "Apitipi",
+    "Apitipik",
+    "Aptos",
+    "Apvitok",
+    "Aquixo",
+    "Aranama",
+    "Arendarhonon",
+    "Argentenay",
+    "Argenteuil",
+    "Arvia'juaq",
+    "Arviat",
+    "Arviligjuaq",
+    "Aschkibokahn",
+    "Asinîwi-sîpîsis",
+    "Asinīpwāt-sīpiy",
+    "Ataronchronon",
+    "Atchash",
+    "Athithuf",
+    "Atim-sîpiy",
+    "Atsuge",
+    "Attawapiskat",
+    "Attignawantan",
+    "Attigneenongnahac",
+    "Aubrey",
+    "Auburn",
+    "Auia",
+    "Aujuittuq",
+    "Aulatsivik",
+    "Aulavik",
+    "Aulintac",
+    "Aupaluk",
+    "Avayalik",
+    "Avonlea",
+    "Avvajja",
+    "Awani-wi",
+    "Awat'ovi",
+    "Awatovi",
+    "Awatʼovi",
+    "Awha'y",
+    "Aziscohos",
+    "Baawingashing",
+    "Babad Do'ag",
+    "Babocomari",
+    "Bah'hatteno",
+    "Bahʼhatteno",
+    "Baie-Rouge",
+    "Baie-Saint-Paul",
+    "Baie-du-Febvre",
+    "Baileyville",
+    "Bakersfield",
+    "Baltimore",
+    "Batiklechawi",
+    "Batiscan",
+    "Batsi'",
+    "Bay Roberts",
+    "Bay de Verde",
+    "Bayfield",
+    "Beaumont",
+    "Beauport",
+    "Beaupré",
+    "Beloeil",
+    "Benson",
+    "Beothuk",
+    "Berthier",
+    "Berthier-en-Bas",
+    "Besh-Ba-Gowah",
+    "Beʼekʼid Baa Ahoodzání",
+    "Bidaʼhóóchiiʼ",
+    "Bideʼyóó",
+    "Big Bear",
+    "Biigtigong"
+  ],
+  "settlements": [
+    {
+      "key": "Low Lewis Great Oasis Village-Iowa",
+      "shard_name": "Low Lewis Great Oasis Village",
+      "country": "Iowa",
+      "region": "um_des_moines_rock_iowa",
+      "coords_lat_lng": [
+        42.0815,
+        -94.181
+      ],
+      "min_year": 1000,
+      "max_year": 1150,
+      "other_names": [
+        "13MB1",
+        "Low Lewis Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1000.1.1",
+          "name": "Moingona"
+        }
+      ],
+      "duplicate_name_flagged": "Moingona"
+    },
+    {
+      "key": "The Palace-Iowa",
+      "shard_name": "The Palace",
+      "country": "Iowa",
+      "region": "um_des_moines_rock_iowa",
+      "coords_lat_lng": [
+        41.6832,
+        -93.5713
+      ],
+      "min_year": -4200,
+      "max_year": -3800,
+      "other_names": [
+        "13PK966",
+        "Des Moines Middle Archaic"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-4200.1.1",
+          "name": "Moingona"
+        }
+      ],
+      "duplicate_name_flagged": "Moingona"
+    },
+    {
+      "key": "Mortlach-Canada_2",
+      "shard_name": "Mortlach",
+      "country": "Canada",
+      "region": "cc1_ruperts_land_hbc",
+      "coords_lat_lng": [
+        50.4667,
+        -106.3167
+      ],
+      "min_year": -500,
+      "max_year": 1580,
+      "other_names": [
+        "EcNl-1",
+        "Besant Valley Mortlach Type"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-500.1.1",
+          "name": "Môso-tâpiskan"
+        }
+      ],
+      "duplicate_name_flagged": "Môso-tâpiskan"
+    },
+    {
+      "key": "Avonlea Creek Capital-Saskatchewan",
+      "shard_name": "Avonlea Creek Capital",
+      "country": "Saskatchewan",
+      "region": "pr_red_assiniboine_winnipeg_basin",
+      "coords_lat_lng": [
+        49.9833,
+        -105.05
+      ],
+      "min_year": 450,
+      "max_year": 1250,
+      "other_names": [
+        "Avonlea Type Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "450.1.1",
+          "name": "Môsotâpiskan"
+        }
+      ],
+      "duplicate_name_flagged": "Môsotâpiskan"
+    },
+    {
+      "key": "Mound-Illinois",
+      "shard_name": "Mound",
+      "country": "Illinois",
+      "region": "usa_illinois",
+      "coords_lat_lng": [
+        37.08562,
+        -89.16305
+      ],
+      "min_year": 1850,
+      "max_year": 2026,
+      "other_names": [
+        "Mound City",
+        "Mound City city"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1850.1.1",
+          "name": "Mound City"
+        },
+        {
+          "date": "1950.1.1",
+          "name": "Mound"
+        }
+      ],
+      "duplicate_name_flagged": "Mound City"
+    },
+    {
+      "key": "Mound-Missouri",
+      "shard_name": "Mound",
+      "country": "Missouri",
+      "region": "usa_missouri",
+      "coords_lat_lng": [
+        40.13472,
+        -95.23083
+      ],
+      "min_year": 1850,
+      "max_year": 2026,
+      "other_names": [
+        "Mound City",
+        "Mound City city"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1850.1.1",
+          "name": "Mound City"
+        },
+        {
+          "date": "1950.1.1",
+          "name": "Mound"
+        }
+      ],
+      "duplicate_name_flagged": "Mound City"
+    },
+    {
+      "key": "Moyaone Fortified Capital Town-Maryland",
+      "shard_name": "Moyaone Fortified Capital Town",
+      "country": "Maryland",
+      "region": "ma_chesapeake_potomac_james_powhatan",
+      "coords_lat_lng": [
+        38.7012,
+        -77.021
+      ],
+      "min_year": 1350,
+      "max_year": 1500,
+      "other_names": [
+        "Accokeek Creek Palisaded Metropolis"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1350.1.1",
+          "name": "Moyaone"
+        }
+      ],
+      "duplicate_name_flagged": "Moyaone"
+    },
+    {
+      "key": "Piscataway Town-Maryland",
+      "shard_name": "Piscataway Town",
+      "country": "Maryland",
+      "region": "ca1_maryland",
+      "coords_lat_lng": [
+        38.6951,
+        -77.0551
+      ],
+      "min_year": 400,
+      "max_year": 1680,
+      "other_names": [
+        "Moyaone",
+        "Tayac's Capital",
+        "18PR8",
+        "Piscataway Park",
+        "Piscataway Potomac",
+        "Mockley Point"
+      ],
+      "current_historical_names": [
+        {
+          "date": "400.1.1",
+          "name": "Moyaone"
+        }
+      ],
+      "duplicate_name_flagged": "Moyaone"
+    },
+    {
+      "key": "Baehr-Gust-Illinois",
+      "shard_name": "Baehr-Gust",
+      "country": "Illinois",
+      "region": "um_american_bottom_lower_il",
+      "coords_lat_lng": [
+        39.958,
+        -90.7504
+      ],
+      "min_year": -50,
+      "max_year": 500,
+      "other_names": [
+        "11BR2",
+        "Brown County Hopewell Center"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-50.1.1",
+          "name": "Mooyiinkweena"
+        }
+      ],
+      "duplicate_name_flagged": "Mooyiinkweena"
+    },
+    {
+      "key": "Sugar Creek-Missouri_2",
+      "shard_name": "Sugar Creek",
+      "country": "Missouri",
+      "region": "um_des_moines_rock_iowa",
+      "coords_lat_lng": [
+        40.4106,
+        -91.7402
+      ],
+      "min_year": 400,
+      "max_year": 800,
+      "other_names": [
+        "23CK57",
+        "Des Moines Confluence Woodland"
+      ],
+      "current_historical_names": [
+        {
+          "date": "400.1.1",
+          "name": "Mooyiinkweena"
+        }
+      ],
+      "duplicate_name_flagged": "Mooyiinkweena"
+    },
+    {
+      "key": "Mu'wu Lagoon (Calleguas)-California",
+      "shard_name": "Mu'wu Lagoon",
+      "country": "California",
+      "region": "ca_chumash_channel_southern_cal",
+      "coords_lat_lng": [
+        34.1189,
+        -119.0519
+      ],
+      "min_year": -1000,
+      "max_year": 1500,
+      "other_names": [
+        "Calleguas Creek",
+        "CA-VEN-110",
+        "Mu'wu Lagoon (Calleguas)"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-1000.1.1",
+          "name": "Mu'wu"
+        }
+      ],
+      "duplicate_name_flagged": "Mu'wu"
+    },
+    {
+      "key": "Muwu-California",
+      "shard_name": "Muwu",
+      "country": "California",
+      "region": "ca_chumash_channel_southern_cal",
+      "coords_lat_lng": [
+        34.0936,
+        -119.0764
+      ],
+      "min_year": -500,
+      "max_year": 1600,
+      "other_names": [
+        "Point Mugu",
+        "Simomo",
+        "CA-VEN-11",
+        "Muwa",
+        "Point Mugu Chumash"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-500.1.1",
+          "name": "Muwu"
+        }
+      ],
+      "duplicate_name_flagged": "Muwu"
+    },
+    {
+      "key": "Nowlin Mound-Indiana",
+      "shard_name": "Nowlin Mound",
+      "country": "Indiana",
+      "region": "oh_scioto_miami_hopewell_core",
+      "coords_lat_lng": [
+        39.146,
+        -84.918
+      ],
+      "min_year": -400,
+      "max_year": 100,
+      "other_names": [
+        "12D1"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-400.1.1",
+          "name": "Myaamionki"
+        }
+      ],
+      "duplicate_name_flagged": "Myaamionki"
+    },
+    {
+      "key": "SunWatch-Ohio",
+      "shard_name": "SunWatch",
+      "country": "Ohio",
+      "region": "oh_scioto_miami_hopewell_core",
+      "coords_lat_lng": [
+        39.7133,
+        -84.2286
+      ],
+      "min_year": 1150,
+      "max_year": 1320,
+      "other_names": [
+        "Incinerator Site",
+        "33MY57",
+        "Dayton Fort Ancient"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1150.1.1",
+          "name": "Myaamionki"
+        }
+      ],
+      "duplicate_name_flagged": "Myaamionki"
+    },
+    {
+      "key": "Lang Pasture-Texas",
+      "shard_name": "Lang Pasture",
+      "country": "Texas",
+      "region": "sp_neches_sabine_trinity_caddo",
+      "coords_lat_lng": [
+        31.8127,
+        -95.6499
+      ],
+      "min_year": -800,
+      "max_year": 1500,
+      "other_names": [
+        "41AN38",
+        "Upper Neches Caddo"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-800.1.1",
+          "name": "Nabedache"
+        }
+      ],
+      "duplicate_name_flagged": "Nabedache"
+    },
+    {
+      "key": "Mission San Francisco de los Tejas-Texas",
+      "shard_name": "Mission San Francisco de los Tejas",
+      "country": "Texas",
+      "region": "ca1_spanish_texas",
+      "coords_lat_lng": [
+        31.5281,
+        -95.2151
+      ],
+      "min_year": 1690,
+      "max_year": 1716,
+      "other_names": [
+        "Weches Hasinai Caddo Mission"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1690.1.1",
+          "name": "Nabedache"
+        },
+        {
+          "date": "1690.6.1",
+          "name": "San Francisco de los Tejas"
+        },
+        {
+          "date": "1693.10.25",
+          "name": "Nabedache"
+        },
+        {
+          "date": "1716.7.5",
+          "name": "Nuestro Padre San Francisco de los Tejas"
+        }
+      ],
+      "duplicate_name_flagged": "Nabedache"
+    },
+    {
+      "key": "Hudnall-Pirtle-Texas",
+      "shard_name": "Hudnall-Pirtle",
+      "country": "Texas",
+      "region": "sp_neches_sabine_trinity_caddo",
+      "coords_lat_lng": [
+        32.345,
+        -94.825
+      ],
+      "min_year": 900,
+      "max_year": 1400,
+      "other_names": [
+        "41RK4",
+        "Sabine Early Caddo Mound Center"
+      ],
+      "current_historical_names": [
+        {
+          "date": "900.1.1",
+          "name": "Nadako"
+        }
+      ],
+      "duplicate_name_flagged": "Nadako"
+    },
+    {
+      "key": "Murvaul Creek-Texas",
+      "shard_name": "Murvaul Creek",
+      "country": "Texas",
+      "region": "sp_neches_sabine_trinity_caddo",
+      "coords_lat_lng": [
+        32.1626,
+        -94.3063
+      ],
+      "min_year": -1000,
+      "max_year": 1550,
+      "other_names": [
+        "41PN175",
+        "Panola Sabine Caddo"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-1000.1.1",
+          "name": "Nadako"
+        }
+      ],
+      "duplicate_name_flagged": "Nadako"
+    },
+    {
+      "key": "Citadel Pueblo-Arizona",
+      "shard_name": "Citadel Pueblo",
+      "country": "Arizona",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        35.558,
+        -111.425
+      ],
+      "min_year": 1140,
+      "max_year": 1190,
+      "other_names": [
+        "NA355",
+        "Nalakihu",
+        "NA358"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1140.1.1",
+          "name": "Nalakihu"
+        }
+      ],
+      "duplicate_name_flagged": "Nalakihu"
+    },
+    {
+      "key": "Citadel/Nalakihu-Arizona",
+      "shard_name": "Citadel/Nalakihu",
+      "country": "Arizona",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        35.48526,
+        -111.39711
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Nalakihu"
+        }
+      ],
+      "duplicate_name_flagged": "Nalakihu"
+    },
+    {
+      "key": "Bowman-Arkansas_2",
+      "shard_name": "Bowman",
+      "country": "Arkansas",
+      "region": "cp_arkansas_valley_ozark_spiro",
+      "coords_lat_lng": [
+        33.592,
+        -94.395
+      ],
+      "min_year": 1100,
+      "max_year": 1450,
+      "other_names": [
+        "Bowman Site",
+        "3LR46"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1100.1.1",
+          "name": "Nanatsoho"
+        }
+      ],
+      "duplicate_name_flagged": "Nanatsoho"
+    },
+    {
+      "key": "T.M. Sanders-Texas",
+      "shard_name": "T.M. Sanders",
+      "country": "Texas",
+      "region": "cp_arkansas_valley_ozark_spiro",
+      "coords_lat_lng": [
+        33.868,
+        -95.735
+      ],
+      "min_year": 1100,
+      "max_year": 1450,
+      "other_names": [
+        "A.C. Sanders",
+        "Sanders Site",
+        "41LR2"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1100.1.1",
+          "name": "Nanatsoho"
+        }
+      ],
+      "duplicate_name_flagged": "Nanatsoho"
+    },
+    {
+      "key": "Norridgewock Fortified Capital-Maine",
+      "shard_name": "Norridgewock Fortified Capital",
+      "country": "Maine",
+      "region": "ne_maine_penobscot_kennebec",
+      "coords_lat_lng": [
+        44.751,
+        -69.8615
+      ],
+      "min_year": 1500,
+      "max_year": 1600,
+      "other_names": [
+        "Kennebec River Abenaki Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1500.1.1",
+          "name": "Nanrantsouak"
+        }
+      ],
+      "duplicate_name_flagged": "Nanrantsouak"
+    },
+    {
+      "key": "Norridgewock-Maine",
+      "shard_name": "Norridgewock",
+      "country": "Maine",
+      "region": "usa_maine",
+      "coords_lat_lng": [
+        44.72282,
+        -69.76307
+      ],
+      "min_year": 1200,
+      "max_year": 2025,
+      "other_names": [
+        "Norridgewock CDP",
+        "Nanrantsouak",
+        "Father Rale's Mission",
+        "Kennebec Old Point",
+        "Kennebec Abenaki"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Nanrantsouak"
+        },
+        {
+          "date": "1724.8.23",
+          "name": "Norridgewock"
+        }
+      ],
+      "duplicate_name_flagged": "Nanrantsouak"
+    }
+  ]
+}

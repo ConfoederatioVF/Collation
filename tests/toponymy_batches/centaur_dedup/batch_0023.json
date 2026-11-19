@@ -1,0 +1,545 @@
+{
+  "batch_index": 23,
+  "clusters": [
+    "tukudeka",
+    "wasioto"
+  ],
+  "countries": [
+    "Idaho",
+    "Kentucky",
+    "Tennessee"
+  ],
+  "count": 18,
+  "forbidden_already_used_in_region": [
+    "Agaideka",
+    "Agaidika",
+    "Amayeli",
+    "Amogayunyi",
+    "Amoyi",
+    "Anikituwagi",
+    "Aniyunwiya",
+    "Asáaqa",
+    "Ayuhwasi",
+    "Bia Ogwaide",
+    "Blackfoot",
+    "Bledsoe's Lick",
+    "Boa Ogoi",
+    "Boise",
+    "Boonesborough",
+    "Buckner",
+    "Cascade",
+    "Chikasha",
+    "Chikashsha",
+    "Chucagoa",
+    "Chucalissa",
+    "Citico",
+    "Corn Island",
+    "Dakwa'i",
+    "Eskippakithiki",
+    "Eva",
+    "Ganasagi",
+    "Hatwai",
+    "Hogohegee",
+    "Hukundika",
+    "Huron",
+    "Ingacom",
+    "Itsati",
+    "Kallamuchee",
+    "Kammedeka",
+    "Kammitikka",
+    "Kaskinampo",
+    "Kentaake",
+    "Kentaaki",
+    "Knoxville",
+    "Koasati",
+    "Kuttawa",
+    "Káamya",
+    "Kúuskúuski",
+    "Lam'áta",
+    "Lewiston",
+    "Lynchburg",
+    "Léepwey",
+    "McDonald",
+    "Mialoquo",
+    "Middletown",
+    "Minidoka",
+    "Nampa",
+    "Nepepenine",
+    "Nepernine",
+    "Newe",
+    "Ni Tąga",
+    "Nipéhe",
+    "Obion",
+    "Obyon",
+    "Ouasioto",
+    "Pacaha",
+    "Paguiyua",
+    "Painkwitikka",
+    "Panaiti",
+    "Pelewa thiipi",
+    "Pengwideka",
+    "Pengwidika",
+    "Pia Ogwai",
+    "Pia Okwait",
+    "Pia Paa",
+    "Pohogwe",
+    "Qapqape'",
+    "Ql̓ispé",
+    "Qéemes",
+    "Salmon",
+    "Satapo",
+    "Seuhubeogoi",
+    "Shaawanooki",
+    "Shaawanwaki",
+    "Simíinekem",
+    "Site X",
+    "Sonnioto",
+    "Spaylaywitheepi",
+    "Sq'wt'u",
+    "Talikwa",
+    "Talisi",
+    "Tamatli",
+    "Tanakbi",
+    "Tanasi",
+    "Taskigi",
+    "Tepáhlwam",
+    "Teweepu",
+    "Tolu",
+    "Tongigua",
+    "Toqua",
+    "Tosoiba",
+    "Totteroy",
+    "Tsalagi",
+    "Tsatanugi",
+    "Tsikamagi",
+    "Tsistetsi'yi",
+    "Tsistuyi",
+    "Tsoyaha",
+    "Tsulunwe'i",
+    "Waapaahšiiki",
+    "Wahmuza",
+    "Warioto",
+    "Weiser",
+    "White Bird",
+    "Windy Hills",
+    "Woodland Mills",
+    "Wuda Ogwa",
+    "Yahandeka",
+    "Yambadika",
+    "Yufatse",
+    "Šaawanwaki",
+    "ʔaq̓anqmi"
+  ],
+  "settlements": [
+    {
+      "key": "Cascade (Long Valley)-Idaho",
+      "shard_name": "Cascade",
+      "country": "Idaho",
+      "region": "nw_snake_river_klamath_interior",
+      "coords_lat_lng": [
+        44.5167,
+        -116.0333
+      ],
+      "min_year": -2000,
+      "max_year": 1500,
+      "other_names": [
+        "Payette River Upper",
+        "10VY31",
+        "Cascade (Long Valley)"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-2000.1.1",
+          "name": "Tukudeka"
+        }
+      ],
+      "duplicate_name_flagged": "Tukudeka"
+    },
+    {
+      "key": "Bison and Veratic Rockshelters-Idaho",
+      "shard_name": "Bison and Veratic Rockshelters",
+      "country": "Idaho",
+      "region": "nw_snake_river_klamath_interior",
+      "coords_lat_lng": [
+        44.1667,
+        -112.95
+      ],
+      "min_year": -6500,
+      "max_year": 1200,
+      "other_names": [
+        "Birch Creek Valley",
+        "10CL10",
+        "10CL3"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-6500.1.1",
+          "name": "Tukudeka"
+        }
+      ],
+      "duplicate_name_flagged": "Tukudeka"
+    },
+    {
+      "key": "Redfish Overhang-Idaho",
+      "shard_name": "Redfish Overhang",
+      "country": "Idaho",
+      "region": "nw_snake_river_klamath_interior",
+      "coords_lat_lng": [
+        44.1417,
+        -114.9167
+      ],
+      "min_year": -8000,
+      "max_year": 1000,
+      "other_names": [
+        "Sawtooth Basin",
+        "10CR201"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-8000.1.1",
+          "name": "Tukudeka"
+        }
+      ],
+      "duplicate_name_flagged": "Tukudeka"
+    },
+    {
+      "key": "Ashton Henrys Fork Upper Town-Idaho",
+      "shard_name": "Ashton Henrys Fork Upper Town",
+      "country": "Idaho",
+      "region": "nw_snake_river_klamath_interior",
+      "coords_lat_lng": [
+        44.0667,
+        -111.45
+      ],
+      "min_year": 400,
+      "max_year": 1400,
+      "other_names": [
+        "Ashton Basin Shoshone Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "400.1.1",
+          "name": "Tukudeka"
+        }
+      ],
+      "duplicate_name_flagged": "Tukudeka"
+    },
+    {
+      "key": "Mackay Big Lost Valley Capital-Idaho",
+      "shard_name": "Mackay Big Lost Valley Capital",
+      "country": "Idaho",
+      "region": "nw_snake_river_klamath_interior",
+      "coords_lat_lng": [
+        43.9167,
+        -113.6167
+      ],
+      "min_year": 300,
+      "max_year": 1350,
+      "other_names": [
+        "Mackay Valley Shoshone Metropolis"
+      ],
+      "current_historical_names": [
+        {
+          "date": "300.1.1",
+          "name": "Tukudeka"
+        }
+      ],
+      "duplicate_name_flagged": "Tukudeka"
+    },
+    {
+      "key": "Moore Big Lost River Village-Idaho",
+      "shard_name": "Moore Big Lost River Village",
+      "country": "Idaho",
+      "region": "nw_snake_river_klamath_interior",
+      "coords_lat_lng": [
+        43.7333,
+        -113.3667
+      ],
+      "min_year": 500,
+      "max_year": 1450,
+      "other_names": [
+        "Moore Valley Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Tukudeka"
+        }
+      ],
+      "duplicate_name_flagged": "Tukudeka"
+    },
+    {
+      "key": "Ketchum Upper Wood River Town-Idaho",
+      "shard_name": "Ketchum Upper Wood River Town",
+      "country": "Idaho",
+      "region": "nw_snake_river_klamath_interior",
+      "coords_lat_lng": [
+        43.6833,
+        -114.3667
+      ],
+      "min_year": 400,
+      "max_year": 1400,
+      "other_names": [
+        "Sawtooth Foothill Shoshone Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "400.1.1",
+          "name": "Tukudeka"
+        }
+      ],
+      "duplicate_name_flagged": "Tukudeka"
+    },
+    {
+      "key": "Arco Big Lost River Town-Idaho",
+      "shard_name": "Arco Big Lost River Town",
+      "country": "Idaho",
+      "region": "nw_snake_river_klamath_interior",
+      "coords_lat_lng": [
+        43.6333,
+        -113.3
+      ],
+      "min_year": 300,
+      "max_year": 1350,
+      "other_names": [
+        "Big Lost River Shoshone Center"
+      ],
+      "current_historical_names": [
+        {
+          "date": "300.1.1",
+          "name": "Tukudeka"
+        }
+      ],
+      "duplicate_name_flagged": "Tukudeka"
+    },
+    {
+      "key": "Hailey Wood River Center-Idaho",
+      "shard_name": "Hailey Wood River Center",
+      "country": "Idaho",
+      "region": "nw_snake_river_klamath_interior",
+      "coords_lat_lng": [
+        43.5167,
+        -114.3167
+      ],
+      "min_year": 350,
+      "max_year": 1350,
+      "other_names": [
+        "Hailey Basin Shoshone Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "350.1.1",
+          "name": "Tukudeka"
+        }
+      ],
+      "duplicate_name_flagged": "Tukudeka"
+    },
+    {
+      "key": "Burnside Cumberland River Town-Kentucky",
+      "shard_name": "Burnside Cumberland River Town",
+      "country": "Kentucky",
+      "region": "oh_kentucky_cumberland_green",
+      "coords_lat_lng": [
+        36.991,
+        -84.6015
+      ],
+      "min_year": 1250,
+      "max_year": 1350,
+      "other_names": [
+        "15PU1",
+        "South Fork Cumberland Confluence Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Wasioto"
+        }
+      ],
+      "duplicate_name_flagged": "Wasioto"
+    },
+    {
+      "key": "Rowena Cumberland Village-Kentucky",
+      "shard_name": "Rowena Cumberland Village",
+      "country": "Kentucky",
+      "region": "oh_kentucky_cumberland_green",
+      "coords_lat_lng": [
+        36.9815,
+        -85.081
+      ],
+      "min_year": 1200,
+      "max_year": 1350,
+      "other_names": [
+        "15RU1",
+        "Wolf Creek Cumberland Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Wasioto"
+        }
+      ],
+      "duplicate_name_flagged": "Wasioto"
+    },
+    {
+      "key": "Harlan Cumberland Headwaters Village-Kentucky",
+      "shard_name": "Harlan Cumberland Headwaters Village",
+      "country": "Kentucky",
+      "region": "oh_kentucky_cumberland_green",
+      "coords_lat_lng": [
+        36.8415,
+        -83.321
+      ],
+      "min_year": 1200,
+      "max_year": 1350,
+      "other_names": [
+        "15HL1",
+        "Poor Fork Cumberland Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Wasioto"
+        }
+      ],
+      "duplicate_name_flagged": "Wasioto"
+    },
+    {
+      "key": "Canton Cumberland River Village-Kentucky",
+      "shard_name": "Canton Cumberland River Village",
+      "country": "Kentucky",
+      "region": "oh_kentucky_cumberland_green",
+      "coords_lat_lng": [
+        36.801,
+        -87.9515
+      ],
+      "min_year": 1200,
+      "max_year": 1350,
+      "other_names": [
+        "15TR1",
+        "Trigg County Cumberland Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Wasioto"
+        }
+      ],
+      "duplicate_name_flagged": "Wasioto"
+    },
+    {
+      "key": "Williamsburg Cumberland Village-Kentucky",
+      "shard_name": "Williamsburg Cumberland Village",
+      "country": "Kentucky",
+      "region": "oh_kentucky_cumberland_green",
+      "coords_lat_lng": [
+        36.7415,
+        -84.161
+      ],
+      "min_year": 1200,
+      "max_year": 1350,
+      "other_names": [
+        "15WH1",
+        "Whitley Upper Cumberland Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Wasioto"
+        }
+      ],
+      "duplicate_name_flagged": "Wasioto"
+    },
+    {
+      "key": "Celina Obey Confluence Town-Tennessee",
+      "shard_name": "Celina Obey Confluence Town",
+      "country": "Tennessee",
+      "region": "oh_kentucky_cumberland_green",
+      "coords_lat_lng": [
+        36.5515,
+        -85.501
+      ],
+      "min_year": 1200,
+      "max_year": 1350,
+      "other_names": [
+        "40CY1",
+        "Obey River Mouth Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Wasioto"
+        }
+      ],
+      "duplicate_name_flagged": "Wasioto"
+    },
+    {
+      "key": "Castalian Springs-Tennessee_2",
+      "shard_name": "Castalian Springs",
+      "country": "Tennessee",
+      "region": "oh_kentucky_cumberland_green",
+      "coords_lat_lng": [
+        36.3942,
+        -86.3164
+      ],
+      "min_year": 1150,
+      "max_year": 1450,
+      "other_names": [
+        "Bledsoe's Lick Mounds",
+        "40SU14"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1150.1.1",
+          "name": "Wasioto"
+        }
+      ],
+      "duplicate_name_flagged": "Wasioto"
+    },
+    {
+      "key": "Rutherford-Kizer Fortified Village-Tennessee",
+      "shard_name": "Rutherford-Kizer Fortified Village",
+      "country": "Tennessee",
+      "region": "oh_kentucky_cumberland_green",
+      "coords_lat_lng": [
+        36.3215,
+        -86.581
+      ],
+      "min_year": 1250,
+      "max_year": 1450,
+      "other_names": [
+        "40SU15",
+        "Drakes Creek Palisaded Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Wasioto"
+        }
+      ],
+      "duplicate_name_flagged": "Wasioto"
+    },
+    {
+      "key": "Carthage Cumberland Village-Tennessee",
+      "shard_name": "Carthage Cumberland Village",
+      "country": "Tennessee",
+      "region": "oh_kentucky_cumberland_green",
+      "coords_lat_lng": [
+        36.2515,
+        -85.951
+      ],
+      "min_year": 1200,
+      "max_year": 1350,
+      "other_names": [
+        "40SM1",
+        "Caney Fork Confluence Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Wasioto"
+        }
+      ],
+      "duplicate_name_flagged": "Wasioto"
+    }
+  ]
+}

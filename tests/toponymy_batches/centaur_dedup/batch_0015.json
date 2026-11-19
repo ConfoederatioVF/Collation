@@ -1,0 +1,680 @@
+{
+  "batch_index": 15,
+  "clusters": [
+    "siwina",
+    "cononton"
+  ],
+  "countries": [
+    "Canada",
+    "New Mexico"
+  ],
+  "count": 25,
+  "forbidden_already_used_in_region": [
+    "'Yalis",
+    "A'ts'in'a",
+    "A'ts'ina",
+    "A:shiwi",
+    "Aazhoodenaang",
+    "Abó",
+    "Achelacy",
+    "Achiya: Dek'yapbow'a",
+    "Ahjimsek",
+    "Ahkwesáhsne",
+    "Ahousaht",
+    "Ajoasté",
+    "Akaamaschii",
+    "Akpatordjuark",
+    "Akulivik",
+    "Akwałina",
+    "Akwesasne",
+    "Alamogordo Army Airfield",
+    "Alarnerk",
+    "Alexander",
+    "Alámex",
+    "Amiskwaciya",
+    "Amoxiumqua",
+    "Aondironon",
+    "Apitipi",
+    "Apitipik",
+    "Apvitok",
+    "Arendarhonon",
+    "Argentenay",
+    "Argenteuil",
+    "Arvia'juaq",
+    "Arviat",
+    "Arviligjuaq",
+    "Aschkibokahn",
+    "Asinīpwāt-sīpiy",
+    "Astialakwa",
+    "Ataronchronon",
+    "Atripuy",
+    "Atsee Nitsaa",
+    "Atsinna",
+    "Attawapiskat",
+    "Attignawantan",
+    "Attigneenongnahac",
+    "Aujuittuq",
+    "Aulatsivik",
+    "Aulavik",
+    "Aupaluk",
+    "Avayalik",
+    "Avonlea",
+    "Avvajja",
+    "Aztec",
+    "Baawingashing",
+    "Baie-Rouge",
+    "Baie-Saint-Paul",
+    "Baie-du-Febvre",
+    "Batiscan",
+    "Bay Roberts",
+    "Bay de Verde",
+    "Bayfield",
+    "Beaumont",
+    "Beauport",
+    "Beaupré",
+    "Beloeil",
+    "Benson",
+    "Beothuk",
+    "Berthier",
+    "Berthier-en-Bas",
+    "Beʼekʼid Hóteelí",
+    "Bidanku",
+    "Biigtigong",
+    "Binaawaan",
+    "Bird Cove",
+    "Bis Dah Łitso",
+    "Bis Saaʼáanii",
+    "Bis sa'ani",
+    "Bitłʼááh Bitoʼ",
+    "Bkejwanong",
+    "Blackfoot",
+    "Blanc-Sablon",
+    "Bonavista",
+    "Boucherville",
+    "Bourg-Royal",
+    "Boyd's Cove",
+    "Brigus",
+    "Bunibonibee",
+    "Burlington Heights",
+    "Bytown",
+    "Bááh Háálį́",
+    "Bécancour",
+    "C'imo'ca",
+    "Cahiagué",
+    "Cap-Rouge",
+    "Cap-Saint-Ignace",
+    "Cap-Santé",
+    "Cap-de-la-Madeleine",
+    "Carbonear",
+    "Carcross",
+    "Carnué",
+    "Catalina",
+    "Central Huron",
+    "Ceǧa Kin",
+    "Ch'laandé",
+    "Ch'oodeenjik",
+    "Ch'úk'ánén",
+    "Champlain",
+    "Cheejil Niik",
+    "Chemonda",
+    "Chibougamau",
+    "Chicoutimi",
+    "Chililí",
+    "Chinlac",
+    "Chinook",
+    "Chipoudy",
+    "Chisasibi",
+    "Château-Richer",
+    "Châteauguay",
+    "Chíhéne",
+    "Chíhéńde",
+    "Chʼóshgai",
+    "Chʼóshgaii"
+  ],
+  "settlements": [
+    {
+      "key": "LZ0797-New Mexico",
+      "shard_name": "LZ0797",
+      "country": "New Mexico",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        35.17977,
+        -108.74942
+      ],
+      "min_year": 550,
+      "max_year": 1450,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "550.1.1",
+          "name": "Shiwinna"
+        }
+      ],
+      "duplicate_name_flagged": "Shiwinna"
+    },
+    {
+      "key": "FSOP13-New Mexico",
+      "shard_name": "FSOP13",
+      "country": "New Mexico",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        34.96326,
+        -108.49093
+      ],
+      "min_year": 550,
+      "max_year": 1600,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "550.1.1",
+          "name": "Shiwina"
+        }
+      ],
+      "duplicate_name_flagged": "Shiwina"
+    },
+    {
+      "key": "FSOP02 Great Kiva-New Mexico",
+      "shard_name": "FSOP02 Great Kiva",
+      "country": "New Mexico",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        34.93749,
+        -108.50873
+      ],
+      "min_year": 550,
+      "max_year": 1450,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "550.1.1",
+          "name": "Shiwina"
+        }
+      ],
+      "duplicate_name_flagged": "Shiwina"
+    },
+    {
+      "key": "FSOP14-New Mexico",
+      "shard_name": "FSOP14",
+      "country": "New Mexico",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        34.92061,
+        -108.65412
+      ],
+      "min_year": 550,
+      "max_year": 1600,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "550.1.1",
+          "name": "Shiwina"
+        }
+      ],
+      "duplicate_name_flagged": "Shiwina"
+    },
+    {
+      "key": "Fort Site-New Mexico",
+      "shard_name": "Fort Site",
+      "country": "New Mexico",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        34.89526,
+        -108.55091
+      ],
+      "min_year": 300,
+      "max_year": 1600,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "300.1.1",
+          "name": "Shiwina"
+        }
+      ],
+      "duplicate_name_flagged": "Shiwina"
+    },
+    {
+      "key": "FSOP15-New Mexico",
+      "shard_name": "FSOP15",
+      "country": "New Mexico",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        34.86758,
+        -108.45944
+      ],
+      "min_year": 550,
+      "max_year": 1600,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "550.1.1",
+          "name": "Shiwina"
+        }
+      ],
+      "duplicate_name_flagged": "Shiwina"
+    },
+    {
+      "key": "H Spear-New Mexico",
+      "shard_name": "H Spear",
+      "country": "New Mexico",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        34.84518,
+        -108.89237
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [
+        "Cibola"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Shiwinna"
+        }
+      ],
+      "duplicate_name_flagged": "Shiwinna"
+    },
+    {
+      "key": "LZ1076-1-New Mexico",
+      "shard_name": "LZ1076-1",
+      "country": "New Mexico",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        34.78664,
+        -108.91939
+      ],
+      "min_year": 550,
+      "max_year": 1400,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "550.1.1",
+          "name": "Shiwina"
+        }
+      ],
+      "duplicate_name_flagged": "Shiwina"
+    },
+    {
+      "key": "Woodbury V-1-New Mexico",
+      "shard_name": "Woodbury V-1",
+      "country": "New Mexico",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        34.77691,
+        -108.60273
+      ],
+      "min_year": 550,
+      "max_year": 1450,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "550.1.1",
+          "name": "Shiwina"
+        }
+      ],
+      "duplicate_name_flagged": "Shiwina"
+    },
+    {
+      "key": "LZ1103-New Mexico",
+      "shard_name": "LZ1103",
+      "country": "New Mexico",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        34.75975,
+        -108.87923
+      ],
+      "min_year": 550,
+      "max_year": 1450,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "550.1.1",
+          "name": "Shiwina"
+        }
+      ],
+      "duplicate_name_flagged": "Shiwina"
+    },
+    {
+      "key": "Horse Camp Mill-New Mexico",
+      "shard_name": "Horse Camp Mill",
+      "country": "New Mexico",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        34.62868,
+        -108.41756
+      ],
+      "min_year": 300,
+      "max_year": 1450,
+      "other_names": [
+        "Zuni",
+        "Mariana Mesa"
+      ],
+      "current_historical_names": [
+        {
+          "date": "300.1.1",
+          "name": "Shiwinna"
+        }
+      ],
+      "duplicate_name_flagged": "Shiwinna"
+    },
+    {
+      "key": "Largo Gap-New Mexico",
+      "shard_name": "Largo Gap",
+      "country": "New Mexico",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        34.34032,
+        -108.48562
+      ],
+      "min_year": 300,
+      "max_year": 1400,
+      "other_names": [
+        "Mariana Mesa/Quemado"
+      ],
+      "current_historical_names": [
+        {
+          "date": "300.1.1",
+          "name": "Shiwinna"
+        }
+      ],
+      "duplicate_name_flagged": "Shiwinna"
+    },
+    {
+      "key": "Goesling-New Mexico",
+      "shard_name": "Goesling",
+      "country": "New Mexico",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        34.32917,
+        -109.04025
+      ],
+      "min_year": 550,
+      "max_year": 1325,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "550.1.1",
+          "name": "Shiwinna"
+        }
+      ],
+      "duplicate_name_flagged": "Shiwinna"
+    },
+    {
+      "key": "Crawford Lake-Canada",
+      "shard_name": "Crawford Lake",
+      "country": "Canada",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "coords_lat_lng": [
+        43.4681,
+        -79.9486
+      ],
+      "min_year": 1350,
+      "max_year": 1450,
+      "other_names": [
+        "AiGx-6",
+        "Milton Halton Middleport Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1350.1.1",
+          "name": "Chonnonton"
+        }
+      ],
+      "duplicate_name_flagged": "Chonnonton"
+    },
+    {
+      "key": "Hamilton-Canada_2",
+      "shard_name": "Hamilton",
+      "country": "Canada",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "coords_lat_lng": [
+        43.3945,
+        -80.0445
+      ],
+      "min_year": 1580,
+      "max_year": 1600,
+      "other_names": [
+        "AiHa-5",
+        "Freelton Neutral Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1580.1.1",
+          "name": "Chonnonton"
+        }
+      ],
+      "duplicate_name_flagged": "Chonnonton"
+    },
+    {
+      "key": "Myers Road-Canada",
+      "shard_name": "Myers Road",
+      "country": "Canada",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "coords_lat_lng": [
+        43.3445,
+        -80.2815
+      ],
+      "min_year": 1280,
+      "max_year": 1350,
+      "other_names": [
+        "AiHb-13",
+        "Cambridge Grand River Iroquoian"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1280.1.1",
+          "name": "Chonnonton"
+        }
+      ],
+      "duplicate_name_flagged": "Chonnonton"
+    },
+    {
+      "key": "Cleveland-Canada_2",
+      "shard_name": "Cleveland",
+      "country": "Canada",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "coords_lat_lng": [
+        43.1845,
+        -80.1745
+      ],
+      "min_year": 1520,
+      "max_year": 1560,
+      "other_names": [
+        "AhHb-7",
+        "Brantford Fairchild Creek Neutral"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1520.1.1",
+          "name": "Chonnonton"
+        }
+      ],
+      "duplicate_name_flagged": "Chonnonton"
+    },
+    {
+      "key": "Middleport-Canada",
+      "shard_name": "Middleport",
+      "country": "Canada",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "coords_lat_lng": [
+        43.1045,
+        -80.0645
+      ],
+      "min_year": 1350,
+      "max_year": 1420,
+      "other_names": [
+        "AgHb-2",
+        "Grand River Caledonia Middleport"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1350.1.1",
+          "name": "Chonnonton"
+        }
+      ],
+      "duplicate_name_flagged": "Chonnonton"
+    },
+    {
+      "key": "Lawson-Canada",
+      "shard_name": "Lawson",
+      "country": "Canada",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "coords_lat_lng": [
+        43.0134,
+        -81.3056
+      ],
+      "min_year": 1480,
+      "max_year": 1530,
+      "other_names": [
+        "AgHh-1",
+        "London Medway Creek Neutral"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1480.1.1",
+          "name": "Chonnonton"
+        }
+      ],
+      "duplicate_name_flagged": "Chonnonton"
+    },
+    {
+      "key": "Calvert-Canada",
+      "shard_name": "Calvert",
+      "country": "Canada",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "coords_lat_lng": [
+        42.9845,
+        -81.0245
+      ],
+      "min_year": 1100,
+      "max_year": 1200,
+      "other_names": [
+        "AfHg-1",
+        "Dorchester Thames River Glen Meyer"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1100.1.1",
+          "name": "Chonnonton"
+        }
+      ],
+      "duplicate_name_flagged": "Chonnonton"
+    },
+    {
+      "key": "Pond Mills-Canada",
+      "shard_name": "Pond Mills",
+      "country": "Canada",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "coords_lat_lng": [
+        42.9485,
+        -81.2145
+      ],
+      "min_year": 1250,
+      "max_year": 1350,
+      "other_names": [
+        "AfHh-2",
+        "London Kettle Creek Neutral"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Chonnonton"
+        }
+      ],
+      "duplicate_name_flagged": "Chonnonton"
+    },
+    {
+      "key": "Praying Mantis-Canada",
+      "shard_name": "Praying Mantis",
+      "country": "Canada",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "coords_lat_lng": [
+        42.9345,
+        -81.2945
+      ],
+      "min_year": 1150,
+      "max_year": 1250,
+      "other_names": [
+        "AfHh-162",
+        "London Early Iroquoian"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1150.1.1",
+          "name": "Chonnonton"
+        }
+      ],
+      "duplicate_name_flagged": "Chonnonton"
+    },
+    {
+      "key": "Uren-Canada",
+      "shard_name": "Uren",
+      "country": "Canada",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "coords_lat_lng": [
+        42.9345,
+        -80.5845
+      ],
+      "min_year": 1280,
+      "max_year": 1330,
+      "other_names": [
+        "AfHd-3",
+        "Otterville Norwich Uren Phase"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1280.1.1",
+          "name": "Chonnonton"
+        }
+      ],
+      "duplicate_name_flagged": "Chonnonton"
+    },
+    {
+      "key": "Tillsonburg-Canada_2",
+      "shard_name": "Tillsonburg",
+      "country": "Canada",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "coords_lat_lng": [
+        42.8645,
+        -80.7445
+      ],
+      "min_year": 1350,
+      "max_year": 1420,
+      "other_names": [
+        "AfHe-38",
+        "Tillsonburg Village Site",
+        "Otter Creek"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1350.1.1",
+          "name": "Chonnonton"
+        }
+      ],
+      "duplicate_name_flagged": "Chonnonton"
+    },
+    {
+      "key": "Southwold Earthworks-Canada",
+      "shard_name": "Southwold Earthworks",
+      "country": "Canada",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "coords_lat_lng": [
+        42.6743,
+        -81.3596
+      ],
+      "min_year": 1450,
+      "max_year": 1520,
+      "other_names": [
+        "AdHl-1",
+        "Elgin County Neutral Double Ring"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1450.1.1",
+          "name": "Chonnonton"
+        }
+      ],
+      "duplicate_name_flagged": "Chonnonton"
+    }
+  ]
+}

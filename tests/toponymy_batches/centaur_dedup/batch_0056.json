@@ -1,0 +1,717 @@
+{
+  "batch_index": 56,
+  "clusters": [
+    "kitkahki",
+    "kotyit",
+    "kotyiti",
+    "kowasati",
+    "kucuntika",
+    "kugjuaq",
+    "kukpak",
+    "kusa"
+  ],
+  "countries": [
+    "Alabama",
+    "Canada",
+    "Georgia",
+    "Kansas",
+    "Manitoba",
+    "Mississippi",
+    "New Mexico",
+    "Northwest Territories",
+    "Wyoming"
+  ],
+  "count": 24,
+  "forbidden_already_used_in_region": [
+    "'Yalis",
+    "A'ts'in'a",
+    "A'ts'ina",
+    "A:shiwi",
+    "Aazhoodenaang",
+    "Abó",
+    "Achelacy",
+    "Achiya: Dek'yapbow'a",
+    "Ahjimsek",
+    "Ahkwesáhsne",
+    "Ahousaht",
+    "Ajoasté",
+    "Akaamaschii",
+    "Akoroa",
+    "Akpatordjuark",
+    "Akulivik",
+    "Akwałina",
+    "Akwesasne",
+    "Alamogordo Army Airfield",
+    "Alarnerk",
+    "Alatuna",
+    "Alexander",
+    "Altamaha",
+    "Alámex",
+    "Amalahta",
+    "Amayeli Egwa",
+    "Amiskwaciya",
+    "Amoxiumqua",
+    "Anibiminan",
+    "Aniibiminani-ziibi",
+    "Animo-ziibiing",
+    "Aondironon",
+    "Apafalaya",
+    "Apakosis Sipi",
+    "Apilua",
+    "Apitipi",
+    "Apitipik",
+    "Apvitok",
+    "Arendarhonon",
+    "Argentenay",
+    "Argenteuil",
+    "Arvia'juaq",
+    "Arviat",
+    "Arviligjuaq",
+    "Aschkibokahn",
+    "Ashalahó",
+    "Asiniibwaan-ziibi",
+    "Asinipwat Sipi",
+    "Asinipwât-sîpiy",
+    "Asinīpwāt-sīpiy",
+    "Askik Pawistik",
+    "Astialakwa",
+    "Ataronchronon",
+    "Athapapuskow",
+    "Atlanta",
+    "Atripuy",
+    "Atsee Nitsaa",
+    "Atsinna",
+    "Attawapiskat",
+    "Attignawantan",
+    "Attigneenongnahac",
+    "Aujuittuq",
+    "Aulatsivik",
+    "Aulavik",
+    "Aupaluk",
+    "Avayalik",
+    "Avonlea",
+    "Avvajja",
+    "Avvaq",
+    "Aztec",
+    "Baaskaandibewi-ziibiing",
+    "Baawingashing",
+    "Baie-Rouge",
+    "Baie-Saint-Paul",
+    "Baie-du-Febvre",
+    "Batiscan",
+    "Bay Roberts",
+    "Bay de Verde",
+    "Bayfield",
+    "Beaumont",
+    "Beauport",
+    "Beaupré",
+    "Beloeil",
+    "Benson",
+    "Beothuk",
+    "Berthier",
+    "Berthier-en-Bas",
+    "Bes Des",
+    "Beʼekʼid Hóteelí",
+    "Bia-ogwai",
+    "Bidanku",
+    "Biigtigong",
+    "Binaawaan",
+    "Bird Cove",
+    "Bis Dah Łitso",
+    "Bis Saaʼáanii",
+    "Bis sa'ani",
+    "Bitłʼááh Bitoʼ",
+    "Bkejwanong",
+    "Blackfoot",
+    "Blanc-Sablon",
+    "Blue Mound",
+    "Bok Chito",
+    "Bonavista",
+    "Boucherville",
+    "Bourg-Royal",
+    "Boyd's Cove",
+    "Brigus",
+    "Bunibonibee",
+    "Burlington Heights",
+    "Bytown",
+    "Báxoje",
+    "Bááh Háálį́",
+    "Bécancour",
+    "C'imo'ca",
+    "Cahiagué",
+    "Cap-Rouge",
+    "Cap-Saint-Ignace",
+    "Cap-Santé",
+    "Cap-de-la-Madeleine"
+  ],
+  "settlements": [
+    {
+      "key": "Republican City Village-Kansas",
+      "shard_name": "Republican City Village",
+      "country": "Kansas",
+      "region": "np_lower_missouri_platte_kansas",
+      "coords_lat_lng": [
+        40.0815,
+        -99.221
+      ],
+      "min_year": 1200,
+      "max_year": 1350,
+      "other_names": [
+        "25HN5",
+        "Republican Valley Habitation"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Kítkaahki"
+        }
+      ],
+      "duplicate_name_flagged": "Kítkaahki"
+    },
+    {
+      "key": "Hill Pawnee Earthlodge Town-Kansas",
+      "shard_name": "Hill Pawnee Earthlodge Town",
+      "country": "Kansas",
+      "region": "np_lower_missouri_platte_kansas",
+      "coords_lat_lng": [
+        40.061,
+        -98.4215
+      ],
+      "min_year": 1500,
+      "max_year": 1500,
+      "other_names": [
+        "25WT5",
+        "Pike-Pawnee Village Site"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1500.1.1",
+          "name": "Kítkaahki"
+        }
+      ],
+      "duplicate_name_flagged": "Kítkaahki"
+    },
+    {
+      "key": "Schultz (Kansas)-Kansas",
+      "shard_name": "Schultz",
+      "country": "Kansas",
+      "region": "np_lower_missouri_platte_kansas",
+      "coords_lat_lng": [
+        39.295,
+        -97.085
+      ],
+      "min_year": 200,
+      "max_year": 800,
+      "other_names": [
+        "14CY102",
+        "Lower Republican Floyd Schultz",
+        "Schultz (Kansas)"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Kítkaahki"
+        }
+      ],
+      "duplicate_name_flagged": "Kítkaahki"
+    },
+    {
+      "key": "Bandelier Boundary-New Mexico",
+      "shard_name": "Bandelier Boundary",
+      "country": "New Mexico",
+      "region": "rg_san_luis_upper_pueblos",
+      "coords_lat_lng": [
+        35.76368,
+        -106.4274
+      ],
+      "min_year": 500,
+      "max_year": 1600,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Kotyit"
+        }
+      ],
+      "duplicate_name_flagged": "Kotyit"
+    },
+    {
+      "key": "Kiva of Tears-New Mexico",
+      "shard_name": "Kiva of Tears",
+      "country": "New Mexico",
+      "region": "rg_san_luis_upper_pueblos",
+      "coords_lat_lng": [
+        35.71662,
+        -106.38742
+      ],
+      "min_year": 500,
+      "max_year": 1600,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Kotyit"
+        }
+      ],
+      "duplicate_name_flagged": "Kotyit"
+    },
+    {
+      "key": "Pueblo del Ojito-New Mexico",
+      "shard_name": "Pueblo del Ojito",
+      "country": "New Mexico",
+      "region": "rg_san_luis_upper_pueblos",
+      "coords_lat_lng": [
+        35.6726,
+        -106.24267
+      ],
+      "min_year": 600,
+      "max_year": 1600,
+      "other_names": [
+        "Caja del Rio South"
+      ],
+      "current_historical_names": [
+        {
+          "date": "600.1.1",
+          "name": "Kotyit"
+        }
+      ],
+      "duplicate_name_flagged": "Kotyit"
+    },
+    {
+      "key": "Pueblo Canada-New Mexico",
+      "shard_name": "Pueblo Canada",
+      "country": "New Mexico",
+      "region": "rg_san_luis_upper_pueblos",
+      "coords_lat_lng": [
+        35.68523,
+        -106.35371
+      ],
+      "min_year": 600,
+      "max_year": 1450,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "600.1.1",
+          "name": "Kotyiti"
+        }
+      ],
+      "duplicate_name_flagged": "Kotyiti"
+    },
+    {
+      "key": "Cochiti-New Mexico",
+      "shard_name": "Cochiti",
+      "country": "New Mexico",
+      "region": "usa_new_mexico",
+      "coords_lat_lng": [
+        35.61035,
+        -106.35014
+      ],
+      "min_year": 1350,
+      "max_year": 2025,
+      "other_names": [
+        "Cochiti CDP",
+        "Kotyiti",
+        "Cochiti Pueblo",
+        "Kotyit",
+        "Cochiti"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Kotyiti"
+        },
+        {
+          "date": "1628.1.1",
+          "name": "San Buenaventura de Cochiti"
+        },
+        {
+          "date": "1848.2.2",
+          "name": "Cochiti"
+        }
+      ],
+      "duplicate_name_flagged": "Kotyiti"
+    },
+    {
+      "key": "Alfred Herrera-New Mexico",
+      "shard_name": "Alfred Herrera",
+      "country": "New Mexico",
+      "region": "rg_san_luis_upper_pueblos",
+      "coords_lat_lng": [
+        35.60653,
+        -106.31861
+      ],
+      "min_year": 600,
+      "max_year": 1600,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "600.1.1",
+          "name": "Kotyiti"
+        }
+      ],
+      "duplicate_name_flagged": "Kotyiti"
+    },
+    {
+      "key": "Cox Mound Town-Alabama",
+      "shard_name": "Cox Mound Town",
+      "country": "Alabama",
+      "region": "cu_middle_tennessee_muscle_shoals",
+      "coords_lat_lng": [
+        34.7215,
+        -85.951
+      ],
+      "min_year": 1250,
+      "max_year": 1400,
+      "other_names": [
+        "1JA176",
+        "Cox Mississippian Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Kowasati"
+        }
+      ],
+      "duplicate_name_flagged": "Kowasati"
+    },
+    {
+      "key": "Pine Island Town-Alabama",
+      "shard_name": "Pine Island Town",
+      "country": "Alabama",
+      "region": "cu_middle_tennessee_muscle_shoals",
+      "coords_lat_lng": [
+        34.4215,
+        -86.251
+      ],
+      "min_year": 1250,
+      "max_year": 1400,
+      "other_names": [
+        "1MS50",
+        "Pine Island Habitation Complex"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Kowasati"
+        }
+      ],
+      "duplicate_name_flagged": "Kowasati"
+    },
+    {
+      "key": "Murphy Hill-Alabama",
+      "shard_name": "Murphy Hill",
+      "country": "Alabama",
+      "region": "cu_middle_tennessee_muscle_shoals",
+      "coords_lat_lng": [
+        34.3652,
+        -86.3131
+      ],
+      "min_year": 0,
+      "max_year": 1350,
+      "other_names": [
+        "1MS300"
+      ],
+      "current_historical_names": [
+        {
+          "date": "0.1.1",
+          "name": "Kowasati"
+        }
+      ],
+      "duplicate_name_flagged": "Kowasati"
+    },
+    {
+      "key": "Glenrock-Wyoming_2",
+      "shard_name": "Glenrock",
+      "country": "Wyoming",
+      "region": "np_wyoming_bighorn_powder_plat",
+      "coords_lat_lng": [
+        42.8614,
+        -105.8719
+      ],
+      "min_year": 1400,
+      "max_year": 1600,
+      "other_names": [
+        "48CO304",
+        "Glenrock Buffalo Jump"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1400.1.1",
+          "name": "Kuccuntikka"
+        }
+      ],
+      "duplicate_name_flagged": "Kuccuntikka"
+    },
+    {
+      "key": "Wardell-Wyoming",
+      "shard_name": "Wardell",
+      "country": "Wyoming",
+      "region": "uc_green_river_wyoming_basin",
+      "coords_lat_lng": [
+        42.56,
+        -110.11
+      ],
+      "min_year": 550,
+      "max_year": 780,
+      "other_names": [
+        "48SU301",
+        "Wardell Buffalo Trap"
+      ],
+      "current_historical_names": [
+        {
+          "date": "550.1.1",
+          "name": "Kuccuntikka"
+        }
+      ],
+      "duplicate_name_flagged": "Kuccuntikka"
+    },
+    {
+      "key": "Eden-Farson-Wyoming",
+      "shard_name": "Eden-Farson",
+      "country": "Wyoming",
+      "region": "uc_green_river_wyoming_basin",
+      "coords_lat_lng": [
+        42.095,
+        -109.435
+      ],
+      "min_year": 1500,
+      "max_year": 1580,
+      "other_names": [
+        "48SW304"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1500.1.1",
+          "name": "Kuccuntikka"
+        }
+      ],
+      "duplicate_name_flagged": "Kuccuntikka"
+    },
+    {
+      "key": "Churchill-Canada",
+      "shard_name": "Churchill",
+      "country": "Canada",
+      "region": "can_manitoba",
+      "coords_lat_lng": [
+        58.74934,
+        -94.13174
+      ],
+      "min_year": -1000,
+      "max_year": 2026,
+      "other_names": [
+        "Fort Prince of Wales",
+        "Churchill Factory",
+        "Prince of Wales Fort",
+        "Fort Churchill",
+        "Churchill-Seahorse Gully",
+        "Seahorse Gully",
+        "Dorset-Thule Point",
+        "Churchill River Mouth",
+        "IaLp-1",
+        "Churchill Native Post"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-1000.1.1",
+          "name": "Kuugjuaq"
+        },
+        {
+          "date": "1717.1.1",
+          "name": "Fort Churchill"
+        },
+        {
+          "date": "1731.1.1",
+          "name": "Fort Prince of Wales"
+        },
+        {
+          "date": "1782.8.1",
+          "name": "Churchill"
+        }
+      ],
+      "duplicate_name_flagged": "Kuugjuaq"
+    },
+    {
+      "key": "Twin Lakes (Churchill)-Canada",
+      "shard_name": "Twin Lakes",
+      "country": "Canada",
+      "region": "hb_keewatin_western_barrens",
+      "coords_lat_lng": [
+        58.6167,
+        -93.8167
+      ],
+      "min_year": -1500,
+      "max_year": 500,
+      "other_names": [
+        "Churchill Pre-Dorset",
+        "HeLu-1",
+        "Twin Lakes (Churchill)"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-1500.1.1",
+          "name": "Kuugjuaq"
+        }
+      ],
+      "duplicate_name_flagged": "Kuugjuaq"
+    },
+    {
+      "key": "Seahorse Gully Village-Manitoba",
+      "shard_name": "Seahorse Gully Village",
+      "country": "Manitoba",
+      "region": "hb_keewatin_western_barrens",
+      "coords_lat_lng": [
+        58.7667,
+        -94.1833
+      ],
+      "min_year": -800,
+      "max_year": 800,
+      "other_names": [
+        "Churchill Pre-Dorset Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-800.1.1",
+          "name": "Kuugjuaq"
+        }
+      ],
+      "duplicate_name_flagged": "Kuugjuaq"
+    },
+    {
+      "key": "Kuukpak-Canada",
+      "shard_name": "Kuukpak",
+      "country": "Canada",
+      "region": "cc1_pacific_mackenzie_indigenous",
+      "coords_lat_lng": [
+        69.2583,
+        -134.1833
+      ],
+      "min_year": 1300,
+      "max_year": 1600,
+      "other_names": [
+        "Kugmallit Bay West",
+        "NiTs-1"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1300.1.1",
+          "name": "Kuukpak"
+        }
+      ],
+      "duplicate_name_flagged": "Kuukpak"
+    },
+    {
+      "key": "Kuukpak Sod Metropolis-Northwest Territories",
+      "shard_name": "Kuukpak Sod Metropolis",
+      "country": "Northwest Territories",
+      "region": "ncan_western_central_arctic",
+      "coords_lat_lng": [
+        69.3667,
+        -134.15
+      ],
+      "min_year": 1250,
+      "max_year": 1550,
+      "other_names": [
+        "Kuukpak Winter Town",
+        "Richards Island Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Kuukpak"
+        }
+      ],
+      "duplicate_name_flagged": "Kuukpak"
+    },
+    {
+      "key": "Cache Point Town-Northwest Territories",
+      "shard_name": "Cache Point Town",
+      "country": "Northwest Territories",
+      "region": "ncan_mackenzie_dene_subarctic",
+      "coords_lat_lng": [
+        68.8667,
+        -136.2333
+      ],
+      "min_year": 1200,
+      "max_year": 1500,
+      "other_names": [
+        "Cache Point Inuvialuit Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Kuukpak"
+        }
+      ],
+      "duplicate_name_flagged": "Kuukpak"
+    },
+    {
+      "key": "Coosa Creek Town-Alabama",
+      "shard_name": "Coosa Creek Town",
+      "country": "Alabama",
+      "region": "ca1_trans_appalachian_indigenous",
+      "coords_lat_lng": [
+        33.2812,
+        -86.3551
+      ],
+      "min_year": 1540,
+      "max_year": 1775,
+      "other_names": [
+        "Old Coosa",
+        "Childersburg Upper Creek Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1540.1.1",
+          "name": "Kusa"
+        }
+      ],
+      "duplicate_name_flagged": "Kusa"
+    },
+    {
+      "key": "Little Egypt Coosa Capital-Georgia",
+      "shard_name": "Little Egypt Coosa Capital",
+      "country": "Georgia",
+      "region": "se_alabama_tombigbee_moundville",
+      "coords_lat_lng": [
+        34.6815,
+        -84.801
+      ],
+      "min_year": 1400,
+      "max_year": 1540,
+      "other_names": [
+        "9MU102",
+        "Coosa Paramount Chiefdom Capital"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1400.1.1",
+          "name": "Kusa"
+        }
+      ],
+      "duplicate_name_flagged": "Kusa"
+    },
+    {
+      "key": "Coosha-Mississippi",
+      "shard_name": "Coosha",
+      "country": "Mississippi",
+      "region": "ca1_trans_appalachian_indigenous",
+      "coords_lat_lng": [
+        32.4851,
+        -88.7521
+      ],
+      "min_year": 1750,
+      "max_year": 1775,
+      "other_names": [
+        "Kusha",
+        "Lauderdale County Choctaw Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Kusha"
+        }
+      ],
+      "duplicate_name_flagged": "Kusha"
+    }
+  ]
+}

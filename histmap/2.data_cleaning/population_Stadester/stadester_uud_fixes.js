@@ -256,14 +256,15 @@
     let foreign_script_re = /[\u0400-\u04FF\u0600-\u06FF\u0900-\u097F\u0E00-\u0E7F\u3040-\u30FF\u4E00-\u9FFF\uAC00-\uD7AF]/;
     let latin_centaur_countries = new Set([
       "Alabama", "Alaska", "American Samoa", "Arizona", "Arkansas", "Bermuda", "Bolivia", "Brazil",
-      "California", "Canada", "Colorado", "Connecticut", "Delaware", "District of Columbia", "Florida",
-      "French Guiana", "Greenland", "Guyana", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas",
-      "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota",
-      "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey",
-      "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon",
-      "Paraguay", "Pennsylvania", "Rhode Island", "Saint Pierre and Miquelon", "South Carolina",
-      "South Dakota", "Suriname", "Tennessee", "Texas", "United States", "United States of America",
-      "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"
+      "California", "Canada", "Colombia", "Colorado", "Connecticut", "Delaware", "District of Columbia",
+      "Ecuador", "Florida", "French Guiana", "Greenland", "Guyana", "Hawaii", "Idaho", "Illinois",
+      "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts",
+      "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada",
+      "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota",
+      "Ohio", "Oklahoma", "Oregon", "Paraguay", "Pennsylvania", "Peru", "Rhode Island",
+      "Saint Pierre and Miquelon", "South Carolina", "South Dakota", "Suriname", "Tennessee", "Texas",
+      "United States", "United States of America", "Utah", "Vermont", "Virginia", "Washington",
+      "West Virginia", "Wisconsin", "Wyoming"
     ]);
     all_cities = Object.keys(stadester_obj);
     for (let i = 0; i < all_cities.length; i++) {
@@ -845,15 +846,17 @@
     };
 
     //Drop or merge legacy Populstat `(agglomeration)` ghost records inside PRETA/CENTAUR into their base city
+    let preta_countries = new Set(["Bolivia", "Brazil", "Paraguay", "Guyana", "Suriname", "French Guiana", "Colombia", "Peru", "Ecuador"]);
     let agglom_keys = Object.keys(stadester_obj).filter(function (arg0_k) {
       let c = stadester_obj[arg0_k];
-      return c && /\(agglomeration\)/i.test(String(c.name || arg0_k));
+      return c && /\(agglomeration\)/i.test(`${arg0_k} ${c.name || ""}`);
     });
     for (let i = 0; i < agglom_keys.length; i++) {
       let ak = agglom_keys[i];
       let ac = stadester_obj[ak];
       if (!ac) continue;
       let a_proj = String(ac.viscount_project || "").toUpperCase();
+      if (!a_proj && preta_countries.has(String(ac.country || "").trim())) a_proj = "PRETA";
       if (!a_proj && typeof global.StadesterPartitionIO !== "undefined" && typeof global.StadesterPartitionIO.assignCityToViscountRegion === "function") {
         let rd = global.StadesterPartitionIO.assignCityToViscountRegion(ac, ak);
         if (rd && rd.key) a_proj = String(rd.key).toUpperCase();

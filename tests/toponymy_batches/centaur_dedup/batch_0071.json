@@ -1,0 +1,754 @@
+{
+  "batch_index": 71,
+  "clusters": [
+    "haiku",
+    "hanadli",
+    "hangwite",
+    "hawi",
+    "hemnican",
+    "hinonoei",
+    "hogay",
+    "huciun",
+    "iginiarfik",
+    "ilorsuit",
+    "inyanwoslalhan",
+    "iqaluktuq"
+  ],
+  "countries": [
+    "Arizona",
+    "California",
+    "Canada",
+    "Greenland",
+    "Hawaii",
+    "Minnesota",
+    "New Mexico",
+    "North Dakota",
+    "Nunavut",
+    "Oklahoma",
+    "Wisconsin",
+    "Wyoming"
+  ],
+  "count": 24,
+  "forbidden_already_used_in_region": [
+    "'Aha Kwahwat",
+    "'Aha Makhav",
+    "'Avi Melyehw",
+    "'Iipay",
+    "'Onk Akimel",
+    "'Yalis",
+    "A'ts'in'a",
+    "A'ts'ina",
+    "A:shiwi",
+    "Aappalaaqqissak",
+    "Aappi",
+    "Aappilattoq",
+    "Aasiaat",
+    "Aazhoodenaang",
+    "Abangkuyivi",
+    "Abó",
+    "Achasta",
+    "Achelacy",
+    "Achiya: Dek'yapbow'a",
+    "Acjachemen",
+    "Adahiilíní",
+    "Adams",
+    "Addison",
+    "Adikamegong",
+    "Aghaałą́",
+    "Agnes",
+    "Aguasto",
+    "Ahagaskiaywa",
+    "Ahha' Kwe'maca",
+    "Ahjimsek",
+    "Ahkwesáhsne",
+    "Ahousaht",
+    "Ahwahnee",
+    "Ajijaako-zaaga'igan",
+    "Ajoasté",
+    "Ajumawi",
+    "Akaamaschii",
+    "Akia",
+    "Akimel O'odham",
+    "Akpatordjuark",
+    "Akulivik",
+    "Akunnaaq",
+    "Akunneq",
+    "Akwałina",
+    "Akwesasne",
+    "Alamo",
+    "Alamogordo Army Airfield",
+    "Alarnerk",
+    "Alexander",
+    "Ali Waipia",
+    "Alice",
+    "Alluitsoq",
+    "Alluitsup Paa",
+    "Almont",
+    "Alsen",
+    "Alturas",
+    "Alámex",
+    "Ambrose",
+    "Amenia",
+    "Amidon",
+    "Amiskwaciya",
+    "Amoxiumqua",
+    "Amuctac",
+    "Anahola",
+    "Anamoose",
+    "Anavik",
+    "Anepeminan",
+    "Aneta",
+    "Angisoq",
+    "Aniibiminani-ziibi",
+    "Animikii-waajiing",
+    "Annertusoq",
+    "Antler",
+    "Anyapax",
+    "Anéʼé Tséyiʼ",
+    "Aondironon",
+    "Apache Junction",
+    "Apitipi",
+    "Apitipik",
+    "Appannguit",
+    "Aptos",
+    "Apvitok",
+    "Aqajamerngit",
+    "Ardoch",
+    "Arendarhonon",
+    "Argentenay",
+    "Argenteuil",
+    "Argusville",
+    "Arnegard",
+    "Arpiup Nuua",
+    "Arsuk",
+    "Arthur",
+    "Arvia'juaq",
+    "Arviat",
+    "Arviligjuaq",
+    "Asabiikone-zaaga'igan",
+    "Aschkibokahn",
+    "Ashalahó",
+    "Ashley",
+    "Asinīpwāt-sīpiy",
+    "Astialakwa",
+    "Atammik",
+    "Ataronchronon",
+    "Atchash",
+    "Athithuf",
+    "Atripuy",
+    "Atsee Nitsaa",
+    "Atsinna",
+    "Atsuge",
+    "Attawapiskat",
+    "Attignawantan",
+    "Attigneenongnahac",
+    "Attu",
+    "Auburn",
+    "Aujuittuq",
+    "Aulatsivik",
+    "Aulavik",
+    "Aulintac",
+    "Aupaluk",
+    "Austmannadal"
+  ],
+  "settlements": [
+    {
+      "key": "Haiku-Pauwela-Hawaii",
+      "shard_name": "Haiku-Pauwela",
+      "country": "Hawaii",
+      "region": "usa_hawaii",
+      "coords_lat_lng": [
+        20.92087,
+        -156.30187
+      ],
+      "min_year": 1878,
+      "max_year": 2025,
+      "other_names": [
+        "Haiku-Pauwela CDP"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1878.1.1",
+          "name": "Haʻikū"
+        },
+        {
+          "date": "1898.8.12",
+          "name": "Haiku"
+        },
+        {
+          "date": "1990.1.1",
+          "name": "Haiku-Pauwela"
+        }
+      ],
+      "duplicate_name_flagged": "Haʻikū"
+    },
+    {
+      "key": "Ha'ikū-Hawaii",
+      "shard_name": "Ha'ikū",
+      "country": "Hawaii",
+      "region": "hp_maui_nui",
+      "coords_lat_lng": [
+        20.91547,
+        -156.32185
+      ],
+      "min_year": 1200,
+      "max_year": 1896,
+      "other_names": [
+        "Haiku",
+        "Hāmākualoa-Ha'ikū",
+        "Haʻikū"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1000.1.1",
+          "name": "Haʻikū"
+        },
+        {
+          "date": "1898.8.12",
+          "name": "Ha'ikū"
+        }
+      ],
+      "duplicate_name_flagged": "Haʻikū"
+    },
+    {
+      "key": "Twin Angels-New Mexico",
+      "shard_name": "Twin Angels",
+      "country": "New Mexico",
+      "region": "uc_san_juan_four_corners",
+      "coords_lat_lng": [
+        36.735,
+        -107.898
+      ],
+      "min_year": 500,
+      "max_year": 1600,
+      "other_names": [
+        "LA 5665",
+        "Central San Juan Basin"
+      ],
+      "current_historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Hanáádlį́"
+        }
+      ],
+      "duplicate_name_flagged": "Hanáádlį́"
+    },
+    {
+      "key": "Halfway House-New Mexico",
+      "shard_name": "Halfway House",
+      "country": "New Mexico",
+      "region": "uc_san_juan_four_corners",
+      "coords_lat_lng": [
+        36.43119,
+        -107.80559
+      ],
+      "min_year": 550,
+      "max_year": 1400,
+      "other_names": [
+        "Central San Juan Basin"
+      ],
+      "current_historical_names": [
+        {
+          "date": "550.1.1",
+          "name": "Hanáádlį́"
+        }
+      ],
+      "duplicate_name_flagged": "Hanáádlį́"
+    },
+    {
+      "key": "Auburn (American River North)-California",
+      "shard_name": "Auburn",
+      "country": "California",
+      "region": "ca_sacramento_sf_bay_delta",
+      "coords_lat_lng": [
+        38.8967,
+        -121.0769
+      ],
+      "min_year": 500,
+      "max_year": 1600,
+      "other_names": [
+        "Nisenan Uplands",
+        "CA-PLA-101",
+        "Auburn (American River North)"
+      ],
+      "current_historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Hangwite"
+        }
+      ],
+      "duplicate_name_flagged": "Hangwite"
+    },
+    {
+      "key": "Sonora (Jamestown)-California",
+      "shard_name": "Sonora",
+      "country": "California",
+      "region": "ca_san_joaquin_central_coast",
+      "coords_lat_lng": [
+        37.95,
+        -120.4167
+      ],
+      "min_year": 500,
+      "max_year": 1600,
+      "other_names": [
+        "Southern Sierra Miwok",
+        "CA-TUO-300",
+        "Sonora (Jamestown)"
+      ],
+      "current_historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Hangwite"
+        }
+      ],
+      "duplicate_name_flagged": "Hangwite"
+    },
+    {
+      "key": "Anza-Borrego (Indian Gorge)-California",
+      "shard_name": "Anza-Borrego",
+      "country": "California",
+      "region": "ca_chumash_channel_southern_cal",
+      "coords_lat_lng": [
+        32.8667,
+        -116.2167
+      ],
+      "min_year": 500,
+      "max_year": 1600,
+      "other_names": [
+        "Borrego Springs",
+        "CA-SDI-956",
+        "Anza-Borrego (Indian Gorge)"
+      ],
+      "current_historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Hawi"
+        }
+      ],
+      "duplicate_name_flagged": "Hawi"
+    },
+    {
+      "key": "Hawi-Hawaii",
+      "shard_name": "Hawi",
+      "country": "Hawaii",
+      "region": "usa_hawaii",
+      "coords_lat_lng": [
+        20.22741,
+        -155.8396
+      ],
+      "min_year": 1400,
+      "max_year": 2025,
+      "other_names": [
+        "Hawi CDP",
+        "Hawi"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1400.1.1",
+          "name": "Hāwī"
+        },
+        {
+          "date": "1898.8.12",
+          "name": "Hawi"
+        }
+      ],
+      "duplicate_name_flagged": "Hāwī"
+    },
+    {
+      "key": "Bryan Fortified Oneota Town-Minnesota",
+      "shard_name": "Bryan Fortified Oneota Town",
+      "country": "Minnesota",
+      "region": "um_minnesota_driftless_north",
+      "coords_lat_lng": [
+        44.5715,
+        -92.651
+      ],
+      "min_year": 1000,
+      "max_year": 1350,
+      "other_names": [
+        "21GD4",
+        "Cannon River Oneota Town",
+        "Bryan Site",
+        "Bryan (Minnesota)",
+        "Cannon River Red Wing Oneota"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1000.1.1",
+          "name": "He Mni Caŋ"
+        }
+      ],
+      "duplicate_name_flagged": "He Mni Caŋ"
+    },
+    {
+      "key": "Diamond Bluff-Wisconsin_2",
+      "shard_name": "Diamond Bluff",
+      "country": "Wisconsin",
+      "region": "um_minnesota_driftless_north",
+      "coords_lat_lng": [
+        44.6506,
+        -92.6292
+      ],
+      "min_year": 950,
+      "max_year": 1400,
+      "other_names": [
+        "47PI2",
+        "Mero Silvernale-Oneota Complex",
+        "Diamond Bluff"
+      ],
+      "current_historical_names": [
+        {
+          "date": "950.1.1",
+          "name": "Hé Mni Čháŋ"
+        }
+      ],
+      "duplicate_name_flagged": "Hé Mni Čháŋ"
+    },
+    {
+      "key": "Arapaho-Oklahoma",
+      "shard_name": "Arapaho",
+      "country": "Oklahoma",
+      "region": "usa_oklahoma",
+      "coords_lat_lng": [
+        35.5778,
+        -98.95935
+      ],
+      "min_year": 1850,
+      "max_year": 2026,
+      "other_names": [
+        "Arapaho town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1850.1.1",
+          "name": "Hinono'ei"
+        },
+        {
+          "date": "1892.4.19",
+          "name": "Arapaho"
+        }
+      ],
+      "duplicate_name_flagged": "Hinono'ei"
+    },
+    {
+      "key": "James Allen-Wyoming",
+      "shard_name": "James Allen",
+      "country": "Wyoming",
+      "region": "np_wyoming_bighorn_powder_plat",
+      "coords_lat_lng": [
+        41.185,
+        -105.615
+      ],
+      "min_year": -6200,
+      "max_year": -5800,
+      "other_names": [
+        "48AB4",
+        "Laramie Basin Jimmy Allen"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-6200.1.1",
+          "name": "Hinóno'éí"
+        }
+      ],
+      "duplicate_name_flagged": "Hinóno'éí"
+    },
+    {
+      "key": "White Rock-Arizona",
+      "shard_name": "White Rock",
+      "country": "Arizona",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        35.83642,
+        -109.89573
+      ],
+      "min_year": 400,
+      "max_year": 1600,
+      "other_names": [
+        "Hogay"
+      ],
+      "current_historical_names": [
+        {
+          "date": "400.1.1",
+          "name": "Hogay"
+        }
+      ],
+      "duplicate_name_flagged": "Hogay"
+    },
+    {
+      "key": "Hogay Ruin-Arizona",
+      "shard_name": "Hogay Ruin",
+      "country": "Arizona",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        35.80234,
+        -109.90277
+      ],
+      "min_year": 550,
+      "max_year": 1320,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "550.1.1",
+          "name": "Hogay"
+        }
+      ],
+      "duplicate_name_flagged": "Hogay"
+    },
+    {
+      "key": "Ellis Landing-California",
+      "shard_name": "Ellis Landing",
+      "country": "California",
+      "region": "ca_sacramento_sf_bay_delta",
+      "coords_lat_lng": [
+        37.9117,
+        -122.3536
+      ],
+      "min_year": -1500,
+      "max_year": 1400,
+      "other_names": [
+        "Richmond Shellmound",
+        "CA-CCO-295"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-1500.1.1",
+          "name": "Huchiun"
+        }
+      ],
+      "duplicate_name_flagged": "Huchiun"
+    },
+    {
+      "key": "Emeryville Shellmound-California",
+      "shard_name": "Emeryville Shellmound",
+      "country": "California",
+      "region": "ca_sacramento_sf_bay_delta",
+      "coords_lat_lng": [
+        37.835,
+        -122.2917
+      ],
+      "min_year": -1000,
+      "max_year": 1600,
+      "other_names": [
+        "Temescal Creek Ohlone",
+        "Temescal Creek",
+        "CA-ALA-309"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-1000.1.1",
+          "name": "Huchiun"
+        }
+      ],
+      "duplicate_name_flagged": "Huchiun"
+    },
+    {
+      "key": "Iginniarfik-Greenland",
+      "shard_name": "Iginniarfik",
+      "country": "Greenland",
+      "region": "can_greenland",
+      "coords_lat_lng": [
+        68.1489,
+        -53.1756
+      ],
+      "min_year": 1913,
+      "max_year": 2025,
+      "other_names": [
+        "Iginiarfik",
+        "Igíniarfik",
+        "QFI"
+      ],
+      "current_historical_names": [
+        {
+          "date": "2020.1.1",
+          "name": "Iginniarfik"
+        }
+      ],
+      "duplicate_name_flagged": "Iginniarfik"
+    },
+    {
+      "key": "Iginniarfik-Greenland_2",
+      "shard_name": "Iginniarfik",
+      "country": "Greenland",
+      "region": "cc1_greenland_missions_1763",
+      "coords_lat_lng": [
+        67.998,
+        -53.1716
+      ],
+      "min_year": 1150,
+      "max_year": 1860,
+      "other_names": [
+        "Igíniarfik",
+        "Kangâtsiaq",
+        "Iginniarfik",
+        "Tununngasoq",
+        "Nunniffiit Thule"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1150.1.1",
+          "name": "Iginniarfik"
+        }
+      ],
+      "duplicate_name_flagged": "Iginniarfik"
+    },
+    {
+      "key": "Illorsuit (72.21,-55.54)-Greenland",
+      "shard_name": "Illorsuit",
+      "country": "Greenland",
+      "region": "cc1_greenland_missions_1763",
+      "coords_lat_lng": [
+        72.20833,
+        -55.54167
+      ],
+      "min_year": 1150,
+      "max_year": 1600,
+      "other_names": [
+        "Nunniffiit Thule",
+        "Ingiullisoq",
+        "Qasigiannguit Iterlaat"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1150.1.1",
+          "name": "Illorsuit"
+        }
+      ],
+      "duplicate_name_flagged": "Illorsuit"
+    },
+    {
+      "key": "Illorsuit havn-Greenland",
+      "shard_name": "Illorsuit havn",
+      "country": "Greenland",
+      "region": "cc1_greenland_missions_1763",
+      "coords_lat_lng": [
+        60.18271,
+        -44.06805
+      ],
+      "min_year": 985,
+      "max_year": 1600,
+      "other_names": [
+        "Nunniffiit Thule",
+        "Qasigissat 1",
+        "Nunniffiit Norse",
+        "Kangia",
+        "Sorllaat",
+        "Syd for Kangerluk",
+        "Kangerluatsiakasik"
+      ],
+      "current_historical_names": [
+        {
+          "date": "985.1.1",
+          "name": "Illorsuit"
+        }
+      ],
+      "duplicate_name_flagged": "Illorsuit"
+    },
+    {
+      "key": "Fort Yates-North Dakota",
+      "shard_name": "Fort Yates",
+      "country": "North Dakota",
+      "region": "usa_north_dakota",
+      "coords_lat_lng": [
+        46.08659,
+        -100.63008
+      ],
+      "min_year": 1850,
+      "max_year": 2026,
+      "other_names": [
+        "Fort Yates city"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1850.1.1",
+          "name": "Íŋyaŋ Woslál Háŋ"
+        },
+        {
+          "date": "1874.1.1",
+          "name": "Standing Rock"
+        },
+        {
+          "date": "1878.1.1",
+          "name": "Fort Yates"
+        }
+      ],
+      "duplicate_name_flagged": "Íŋyaŋ Woslál Háŋ"
+    },
+    {
+      "key": "Selfridge-North Dakota",
+      "shard_name": "Selfridge",
+      "country": "North Dakota",
+      "region": "usa_north_dakota",
+      "coords_lat_lng": [
+        46.04168,
+        -100.92436
+      ],
+      "min_year": 1850,
+      "max_year": 2026,
+      "other_names": [
+        "Selfridge city"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1850.1.1",
+          "name": "Íŋyaŋ Woslál Háŋ"
+        },
+        {
+          "date": "1910.1.1",
+          "name": "Selfridge"
+        }
+      ],
+      "duplicate_name_flagged": "Íŋyaŋ Woslál Háŋ"
+    },
+    {
+      "key": "Ekalluk River (Bell Site)-Canada",
+      "shard_name": "Ekalluk River",
+      "country": "Canada",
+      "region": "cc1_pacific_mackenzie_indigenous",
+      "coords_lat_lng": [
+        69.45833,
+        -106.29167
+      ],
+      "min_year": -1500,
+      "max_year": 1500,
+      "other_names": [
+        "Iqaluktuuq",
+        "Cambridge Bay",
+        "NiNg-2",
+        "Buchanan Site",
+        "Ekalluk River North",
+        "NiNg-1",
+        "Ekalluk River (Bell Site)"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-1500.1.1",
+          "name": "Iqaluktuuq"
+        }
+      ],
+      "duplicate_name_flagged": "Iqaluktuuq"
+    },
+    {
+      "key": "Bell Ekalluk Settlement-Nunavut",
+      "shard_name": "Bell Ekalluk Settlement",
+      "country": "Nunavut",
+      "region": "ncan_western_central_arctic",
+      "coords_lat_lng": [
+        69.4,
+        -106.2
+      ],
+      "min_year": 200,
+      "max_year": 1300,
+      "other_names": [
+        "Ekalluk River Dorset/Thule Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Iqaluktuuq"
+        }
+      ],
+      "duplicate_name_flagged": "Iqaluktuuq"
+    }
+  ]
+}

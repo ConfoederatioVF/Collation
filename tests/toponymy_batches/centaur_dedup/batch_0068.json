@@ -1,0 +1,727 @@
+{
+  "batch_index": 68,
+  "clusters": [
+    "awatixa",
+    "benteh",
+    "besbagowah",
+    "biaogwai",
+    "bigtigong",
+    "bisani",
+    "bisdahlitso",
+    "boaogoi",
+    "cahtayakni",
+    "cakimiyamitipi",
+    "cakpahu",
+    "calon"
+  ],
+  "countries": [
+    "Alaska",
+    "Arizona",
+    "California",
+    "Canada",
+    "Idaho",
+    "New Mexico",
+    "North Dakota",
+    "Ohio",
+    "Oklahoma",
+    "Utah",
+    "Wyoming"
+  ],
+  "count": 24,
+  "forbidden_already_used_in_region": [
+    "'Aha Kwahwat",
+    "'Aha Makhav",
+    "'Avi Melyehw",
+    "'Iipay",
+    "'Onk Akimel",
+    "'Yalis",
+    "A'ts'in'a",
+    "A'ts'ina",
+    "A:shiwi",
+    "Aalaakkaakk'et",
+    "Aangoon",
+    "Aangóon",
+    "Aazhoodenaang",
+    "Abangkuyivi",
+    "Abó",
+    "Achasta",
+    "Achelacy",
+    "Achiya: Dek'yapbow'a",
+    "Acjachemen",
+    "Adaax",
+    "Adahiilíní",
+    "Adak",
+    "Adamagan",
+    "Adams",
+    "Addison",
+    "Ag'waneq",
+    "Agaideka",
+    "Agaidika",
+    "Aghaałą́",
+    "Agnes",
+    "Aguasto",
+    "Agunalaksh",
+    "Ahagaskiaywa",
+    "Ahha' Kwe'maca",
+    "Ahjimsek",
+    "Ahkwesáhsne",
+    "Ahousaht",
+    "Ahsenisiipi",
+    "Ahteut",
+    "Ahwahnee",
+    "Ainga Wia Dintso'ahni'i",
+    "Ajoasté",
+    "Ajumawi",
+    "Akaamaschii",
+    "Akiacuaq",
+    "Akiaq",
+    "Akimel O'odham",
+    "Akpatordjuark",
+    "Akulivik",
+    "Akutanax̂",
+    "Akwałina",
+    "Akwesasne",
+    "Alaasuq",
+    "Alamo",
+    "Alamogordo Army Airfield",
+    "Alamonitheepi",
+    "Alarneq",
+    "Alarnerk",
+    "Alaxsxa",
+    "Alexander",
+    "Alexandrovsk",
+    "Ali Waipia",
+    "Alice",
+    "Almont",
+    "Alsen",
+    "Alturas",
+    "Alámex",
+    "Amax̂nax̂",
+    "Ambrose",
+    "Amenia",
+    "Amidon",
+    "Amiskwaciya",
+    "Amoxiumqua",
+    "Amuctac",
+    "Anamoose",
+    "Anangula",
+    "Anepeminan",
+    "Aneta",
+    "Angagkitaqnuwu",
+    "Angapuni",
+    "Aniibiminani-ziibi",
+    "Ansh An Lashokdiwe",
+    "Antler",
+    "Anyapax",
+    "Anéʼé Tséyiʼ",
+    "Aondironon",
+    "Apache Junction",
+    "Apitipi",
+    "Apitipik",
+    "Aptos",
+    "Apvitok",
+    "Ardoch",
+    "Arendarhonon",
+    "Argentenay",
+    "Argenteuil",
+    "Argusville",
+    "Arnegard",
+    "Arthur",
+    "Arvia'juaq",
+    "Arviat",
+    "Arviiq",
+    "Arviligjuaq",
+    "Asaacaryaraq",
+    "Aschkibokahn",
+    "Ashalahó",
+    "Ashishik",
+    "Ashley",
+    "Asinīpwāt-sīpiy",
+    "Astialakwa",
+    "Asáaqa",
+    "Ataronchronon",
+    "Atchash",
+    "Athithuf",
+    "Atripuy",
+    "Atsee Nitsaa",
+    "Atsinna",
+    "Atsuge",
+    "Attawapiskat",
+    "Attignawantan",
+    "Attigneenongnahac"
+  ],
+  "settlements": [
+    {
+      "key": "Rock Village-North Dakota",
+      "shard_name": "Rock Village",
+      "country": "North Dakota",
+      "region": "np_middle_missouri_dakotas",
+      "coords_lat_lng": [
+        47.565,
+        -102.075
+      ],
+      "min_year": 1520,
+      "max_year": 1600,
+      "other_names": [
+        "32ME15",
+        "Garrison Hidatsa"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1520.1.1",
+          "name": "Awatíxa"
+        }
+      ],
+      "duplicate_name_flagged": "Awatíxa"
+    },
+    {
+      "key": "Awatixa-North Dakota",
+      "shard_name": "Awatixa",
+      "country": "North Dakota",
+      "region": "ca1_plains_indigenous_1754",
+      "coords_lat_lng": [
+        47.3358,
+        -101.3853
+      ],
+      "min_year": 1520,
+      "max_year": 1783,
+      "other_names": [
+        "Knife River Hidatsa",
+        "Sakakawea Village",
+        "Knife River Hidatsa Settlement",
+        "32ME8"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1520.1.1",
+          "name": "Awatixa"
+        }
+      ],
+      "duplicate_name_flagged": "Awatixa"
+    },
+    {
+      "key": "South Lakes-Alaska",
+      "shard_name": "South Lakes",
+      "country": "Alaska",
+      "region": "usa_alaska",
+      "coords_lat_lng": [
+        61.58756,
+        -149.31554
+      ],
+      "min_year": 1890,
+      "max_year": 2025,
+      "other_names": [
+        "South Lakes CDP"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1890.1.1",
+          "name": "Benteh"
+        },
+        {
+          "date": "1935.1.1",
+          "name": "Lakes"
+        },
+        {
+          "date": "2010.1.1",
+          "name": "South Lakes"
+        }
+      ],
+      "duplicate_name_flagged": "Benteh"
+    },
+    {
+      "key": "Wasilla-Alaska",
+      "shard_name": "Wasilla",
+      "country": "Alaska",
+      "region": "",
+      "coords_lat_lng": [
+        61.58114,
+        -149.46079
+      ],
+      "min_year": 1893,
+      "max_year": 2026,
+      "other_names": [
+        "Wasilla city"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1893.1.1",
+          "name": "Benteh"
+        },
+        {
+          "date": "1917.1.1",
+          "name": "Wasilla"
+        }
+      ],
+      "duplicate_name_flagged": "Benteh"
+    },
+    {
+      "key": "Besh-Ba-Gowah-Arizona",
+      "shard_name": "Besh-Ba-Gowah",
+      "country": "Arizona",
+      "region": "az_salt_verde_phoenix_hohokam",
+      "coords_lat_lng": [
+        33.3821,
+        -110.7728
+      ],
+      "min_year": 1250,
+      "max_year": 1360,
+      "other_names": [
+        "AZ V:9:11"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Besh-Ba-Gowah"
+        }
+      ],
+      "duplicate_name_flagged": "Besh-Ba-Gowah"
+    },
+    {
+      "key": "Gila Pueblo-Arizona",
+      "shard_name": "Gila Pueblo",
+      "country": "Arizona",
+      "region": "az_salt_verde_phoenix_hohokam",
+      "coords_lat_lng": [
+        33.3647,
+        -110.6669
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [
+        "AZ V:9:52",
+        "Tonto Basin"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Béésh Baa Gowah"
+        }
+      ],
+      "duplicate_name_flagged": "Béésh Baa Gowah"
+    },
+    {
+      "key": "Louden Site-Wyoming",
+      "shard_name": "Louden Site",
+      "country": "Wyoming",
+      "region": "uc_green_river_wyoming_basin",
+      "coords_lat_lng": [
+        42.685,
+        -110.065
+      ],
+      "min_year": 400,
+      "max_year": 1500,
+      "other_names": [
+        "48SU",
+        "Upper Green River",
+        "Wardell Bison Trap"
+      ],
+      "current_historical_names": [
+        {
+          "date": "400.1.1",
+          "name": "Bia-ogwai"
+        }
+      ],
+      "duplicate_name_flagged": "Bia-ogwai"
+    },
+    {
+      "key": "Firehole Basin-Wyoming",
+      "shard_name": "Firehole Basin",
+      "country": "Wyoming",
+      "region": "uc_green_river_wyoming_basin",
+      "coords_lat_lng": [
+        41.365,
+        -109.435
+      ],
+      "min_year": 1250,
+      "max_year": 1450,
+      "other_names": [
+        "48SW1217"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Bia-ogwai"
+        }
+      ],
+      "duplicate_name_flagged": "Bia-ogwai"
+    },
+    {
+      "key": "Heron Bay-Canada",
+      "shard_name": "Heron Bay",
+      "country": "Canada",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "coords_lat_lng": [
+        48.6443,
+        -86.3258
+      ],
+      "min_year": 150,
+      "max_year": 700,
+      "other_names": [
+        "Pic-Heron Bay Laurel",
+        "DdIn-1"
+      ],
+      "current_historical_names": [
+        {
+          "date": "150.1.1",
+          "name": "Biigtigong"
+        }
+      ],
+      "duplicate_name_flagged": "Biigtigong"
+    },
+    {
+      "key": "Pic River-Canada",
+      "shard_name": "Pic River",
+      "country": "Canada",
+      "region": "cc1_pays_den_haut_ontario",
+      "coords_lat_lng": [
+        48.6167,
+        -86.2833
+      ],
+      "min_year": 500,
+      "max_year": 1600,
+      "other_names": [
+        "Biigtigong",
+        "Marathon",
+        "DdIn-2"
+      ],
+      "current_historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Biigtigong"
+        }
+      ],
+      "duplicate_name_flagged": "Biigtigong"
+    },
+    {
+      "key": "Bis sa'ani-New Mexico",
+      "shard_name": "Bis sa'ani",
+      "country": "New Mexico",
+      "region": "uc_san_juan_four_corners",
+      "coords_lat_lng": [
+        36.225,
+        -107.875
+      ],
+      "min_year": 1100,
+      "max_year": 1145,
+      "other_names": [
+        "LA 17286"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1100.1.1",
+          "name": "Bis sa'ani"
+        }
+      ],
+      "duplicate_name_flagged": "Bis sa'ani"
+    },
+    {
+      "key": "Bis'saani East-New Mexico",
+      "shard_name": "Bis'saani East",
+      "country": "New Mexico",
+      "region": "uc_san_juan_four_corners",
+      "coords_lat_lng": [
+        36.15634,
+        -107.85678
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [
+        "Central San Juan Basin",
+        "LA 15386"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Bis Saaʼáanii"
+        }
+      ],
+      "duplicate_name_flagged": "Bis Saaʼáanii"
+    },
+    {
+      "key": "Crumbled House-New Mexico",
+      "shard_name": "Crumbled House",
+      "country": "New Mexico",
+      "region": "uc_san_juan_four_corners",
+      "coords_lat_lng": [
+        36.205,
+        -108.842
+      ],
+      "min_year": 550,
+      "max_year": 1600,
+      "other_names": [
+        "LA 7070",
+        "Chuska Slope",
+        "LA 7000"
+      ],
+      "current_historical_names": [
+        {
+          "date": "550.1.1",
+          "name": "Bis Dah Łitso"
+        }
+      ],
+      "duplicate_name_flagged": "Bis Dah Łitso"
+    },
+    {
+      "key": "Grey Hill Spring-New Mexico",
+      "shard_name": "Grey Hill Spring",
+      "country": "New Mexico",
+      "region": "uc_san_juan_four_corners",
+      "coords_lat_lng": [
+        35.95562,
+        -108.43412
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [
+        "Central San Juan Basin"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Bis Dah Łitso"
+        }
+      ],
+      "duplicate_name_flagged": "Bis Dah Łitso"
+    },
+    {
+      "key": "Preston Bear River Capital-Idaho",
+      "shard_name": "Preston Bear River Capital",
+      "country": "Idaho",
+      "region": "gb_bonneville_wasatch_fremont",
+      "coords_lat_lng": [
+        42.0833,
+        -111.8667
+      ],
+      "min_year": 500,
+      "max_year": 1350,
+      "other_names": [
+        "Bear River Shoshone Capital"
+      ],
+      "current_historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Boa Ogoi"
+        }
+      ],
+      "duplicate_name_flagged": "Boa Ogoi"
+    },
+    {
+      "key": "Bear River No. 2-Utah",
+      "shard_name": "Bear River No. 2",
+      "country": "Utah",
+      "region": "gb_bonneville_wasatch_fremont",
+      "coords_lat_lng": [
+        41.54167,
+        -112.20833
+      ],
+      "min_year": 885,
+      "max_year": 1100,
+      "other_names": [
+        "42BO57",
+        "Bear River No. 3",
+        "42BO98",
+        "Bear River No. 1",
+        "42BO55"
+      ],
+      "current_historical_names": [
+        {
+          "date": "885.1.1",
+          "name": "Boa Ogoi"
+        }
+      ],
+      "duplicate_name_flagged": "Boa Ogoi"
+    },
+    {
+      "key": "Kiowa-Oklahoma",
+      "shard_name": "Kiowa",
+      "country": "Oklahoma",
+      "region": "usa_oklahoma",
+      "coords_lat_lng": [
+        34.72329,
+        -95.9029
+      ],
+      "min_year": 1850,
+      "max_year": 2026,
+      "other_names": [
+        "Kiowa town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1850.1.1",
+          "name": "Chahta Yakni"
+        },
+        {
+          "date": "1872.1.1",
+          "name": "Kiowa"
+        }
+      ],
+      "duplicate_name_flagged": "Chahta Yakni"
+    },
+    {
+      "key": "Caddo-Oklahoma",
+      "shard_name": "Caddo",
+      "country": "Oklahoma",
+      "region": "usa_oklahoma",
+      "coords_lat_lng": [
+        34.12561,
+        -96.26364
+      ],
+      "min_year": 1850,
+      "max_year": 2026,
+      "other_names": [
+        "Caddo town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1850.1.1",
+          "name": "Chahta Yakni"
+        },
+        {
+          "date": "1872.1.1",
+          "name": "Caddo"
+        }
+      ],
+      "duplicate_name_flagged": "Chahta Yakni"
+    },
+    {
+      "key": "Madisonville-Ohio",
+      "shard_name": "Madisonville",
+      "country": "Ohio",
+      "region": "oh_scioto_miami_hopewell_core",
+      "coords_lat_lng": [
+        39.1408,
+        -84.3792
+      ],
+      "min_year": 1350,
+      "max_year": 1600,
+      "other_names": [
+        "Madisonville Site",
+        "33HA36"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1350.1.1",
+          "name": "Cakimiyamithiipi"
+        }
+      ],
+      "duplicate_name_flagged": "Cakimiyamithiipi"
+    },
+    {
+      "key": "Oberschlake #1-Ohio",
+      "shard_name": "Oberschlake #1",
+      "country": "Ohio",
+      "region": "oh_scioto_miami_hopewell_core",
+      "coords_lat_lng": [
+        39.0523,
+        -84.1505
+      ],
+      "min_year": -3000,
+      "max_year": 1200,
+      "other_names": [
+        "33CT648"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-3000.1.1",
+          "name": "Cakimiyamithiipi"
+        }
+      ],
+      "duplicate_name_flagged": "Cakimiyamithiipi"
+    },
+    {
+      "key": "Chakpahu-Arizona",
+      "shard_name": "Chakpahu",
+      "country": "Arizona",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        35.752,
+        -110.195
+      ],
+      "min_year": 1320,
+      "max_year": 1420,
+      "other_names": [
+        "NA1039"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1320.1.1",
+          "name": "Chakpahu"
+        }
+      ],
+      "duplicate_name_flagged": "Chakpahu"
+    },
+    {
+      "key": "Chevelon Ruin-Arizona",
+      "shard_name": "Chevelon Ruin",
+      "country": "Arizona",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        34.956,
+        -110.525
+      ],
+      "min_year": 1300,
+      "max_year": 1380,
+      "other_names": [
+        "AZ P:2:11",
+        "Chakpahu-Chevelon"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1300.1.1",
+          "name": "Chakpahu"
+        }
+      ],
+      "duplicate_name_flagged": "Chakpahu"
+    },
+    {
+      "key": "Pinnacles (Chalone)-California",
+      "shard_name": "Pinnacles",
+      "country": "California",
+      "region": "ca_san_joaquin_central_coast",
+      "coords_lat_lng": [
+        36.4833,
+        -121.1833
+      ],
+      "min_year": 0,
+      "max_year": 1600,
+      "other_names": [
+        "Chalon",
+        "Soledad",
+        "CA-MNT-108",
+        "Pinnacles (Chalone)"
+      ],
+      "current_historical_names": [
+        {
+          "date": "0.1.1",
+          "name": "Chalon"
+        }
+      ],
+      "duplicate_name_flagged": "Chalon"
+    },
+    {
+      "key": "Soledad (Chalon)-California",
+      "shard_name": "Soledad",
+      "country": "California",
+      "region": "ca_san_joaquin_central_coast",
+      "coords_lat_lng": [
+        36.4167,
+        -121.3333
+      ],
+      "min_year": 500,
+      "max_year": 1600,
+      "other_names": [
+        "Salinas River",
+        "CA-MNT-238",
+        "Soledad (Chalon)"
+      ],
+      "current_historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Chalon"
+        }
+      ],
+      "duplicate_name_flagged": "Chalon"
+    }
+  ]
+}

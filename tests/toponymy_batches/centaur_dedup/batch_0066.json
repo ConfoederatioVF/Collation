@@ -1,0 +1,740 @@
+{
+  "batch_index": 66,
+  "clusters": [
+    "wasita",
+    "wazaze",
+    "wazihe",
+    "wenuce",
+    "yahandeka",
+    "yanaguana",
+    "zaging",
+    "akokisa",
+    "alarnerk"
+  ],
+  "countries": [
+    "Alberta",
+    "Arkansas",
+    "Canada",
+    "Colorado",
+    "Idaho",
+    "Louisiana",
+    "Michigan",
+    "Missouri",
+    "Nunavut",
+    "Oklahoma",
+    "Saskatchewan",
+    "Texas",
+    "Utah"
+  ],
+  "count": 25,
+  "forbidden_already_used_in_region": [
+    "'Yalis",
+    "Aazhoodenaang",
+    "Achelacy",
+    "Adai",
+    "Agaideka",
+    "Agaidika",
+    "Ahjimsek",
+    "Ahkwesáhsne",
+    "Ahousaht",
+    "Ainga Wia Dintso'ahni'i",
+    "Ajoasté",
+    "Akaamaschii",
+    "Akoroa",
+    "Akpatordjuark",
+    "Akulivik",
+    "Akwesasne",
+    "Alexander",
+    "Alámex",
+    "Aminoya",
+    "Amiskwaciy",
+    "Amiskwaciya",
+    "Angapuni",
+    "Ansh An Lashokdiwe",
+    "Aondironon",
+    "Apakosîsi-sîpiy",
+    "Apakosîsihk",
+    "Apishapa",
+    "Apitipi",
+    "Apitipik",
+    "Apvitok",
+    "Aquixo",
+    "Aranama",
+    "Arendarhonon",
+    "Argentenay",
+    "Argenteuil",
+    "Arvia'juaq",
+    "Arviat",
+    "Arviligjuaq",
+    "Aschkibokahn",
+    "Asiniskaw Sîpîsis",
+    "Asinîwi-sîpîsis",
+    "Asinīpwāt-sīpiy",
+    "Asáaqa",
+    "Ataronchronon",
+    "Atim-sîpiy",
+    "Attawapiskat",
+    "Attignawantan",
+    "Attigneenongnahac",
+    "Aubrey",
+    "Auia",
+    "Aujuittuq",
+    "Aulatsivik",
+    "Aulavik",
+    "Aupaluk",
+    "Avayalik",
+    "Avonlea",
+    "Avoyel",
+    "Avvajja",
+    "Baawingashing",
+    "Baawitigong",
+    "Bah' hatínu",
+    "Bah'hatteno",
+    "Bahʼhatteno",
+    "Baie-Rouge",
+    "Baie-Saint-Paul",
+    "Baie-du-Febvre",
+    "Batiscan",
+    "Bawating",
+    "Bay Roberts",
+    "Bay de Verde",
+    "Bayfield",
+    "Bayougoula",
+    "Beaumont",
+    "Beauport",
+    "Beaupré",
+    "Belcher",
+    "Beloeil",
+    "Benson",
+    "Beothuk",
+    "Berthier",
+    "Berthier-en-Bas",
+    "Bia Ogwaide",
+    "Biigtigong",
+    "Biiniiniicie",
+    "Biiwaanagoonh",
+    "Binaawaan",
+    "Bird Cove",
+    "Bkejwanong",
+    "Blackfoot",
+    "Blanc-Sablon",
+    "Bloomfield",
+    "Blue Mound",
+    "Boa Ogoi",
+    "Bohogue",
+    "Boise",
+    "Bonavista",
+    "Boucherville",
+    "Bourg-Royal",
+    "Bowman",
+    "Boyd's Cove",
+    "Bradley",
+    "Brigus",
+    "Bulbancha",
+    "Bunibonibee",
+    "Burlington Heights",
+    "Bytown",
+    "Báxoje",
+    "Bécancour",
+    "C'imo'ca",
+    "Caddo Gap",
+    "Caddo Mills",
+    "Caddo Valley",
+    "Cahiagué",
+    "Cahinnio",
+    "Camp Hood",
+    "Canocanayest",
+    "Canocanayestatetlo",
+    "Cantona",
+    "Cap-Rouge",
+    "Cap-Saint-Ignace"
+  ],
+  "settlements": [
+    {
+      "key": "Paw-Paw Mounds-Arkansas",
+      "shard_name": "Paw-Paw Mounds",
+      "country": "Arkansas",
+      "region": "lm_yazoo_ouachita_poverty_point",
+      "coords_lat_lng": [
+        33.5911,
+        -92.8793
+      ],
+      "min_year": -5000,
+      "max_year": 1200,
+      "other_names": [
+        "3OU22"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-5000.1.1",
+          "name": "Washita"
+        }
+      ],
+      "duplicate_name_flagged": "Washita"
+    },
+    {
+      "key": "Bangs Slough-Arkansas",
+      "shard_name": "Bangs Slough",
+      "country": "Arkansas",
+      "region": "lm_yazoo_ouachita_poverty_point",
+      "coords_lat_lng": [
+        33.5542,
+        -92.4971
+      ],
+      "min_year": 350,
+      "max_year": 1300,
+      "other_names": [
+        "3CA3"
+      ],
+      "current_historical_names": [
+        {
+          "date": "350.1.1",
+          "name": "Washita"
+        }
+      ],
+      "duplicate_name_flagged": "Washita"
+    },
+    {
+      "key": "Kirk Plantation Village-Louisiana",
+      "shard_name": "Kirk Plantation Village",
+      "country": "Louisiana",
+      "region": "lm_yazoo_ouachita_poverty_point",
+      "coords_lat_lng": [
+        31.6215,
+        -91.881
+      ],
+      "min_year": 1100,
+      "max_year": 1250,
+      "other_names": [
+        "16CT10",
+        "Kirk Mounds Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1100.1.1",
+          "name": "Washita"
+        }
+      ],
+      "duplicate_name_flagged": "Washita"
+    },
+    {
+      "key": "Rodger's Shelter-Missouri",
+      "shard_name": "Rodger's Shelter",
+      "country": "Missouri",
+      "region": "np_lower_missouri_platte_kansas",
+      "coords_lat_lng": [
+        38.075,
+        -93.315
+      ],
+      "min_year": -9500,
+      "max_year": 1400,
+      "other_names": [
+        "23BE125",
+        "Pomme de Terre Stratified",
+        "Rodgers Shelter"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-9500.1.1",
+          "name": "Wažáže"
+        }
+      ],
+      "duplicate_name_flagged": "Wažáže"
+    },
+    {
+      "key": "Phillips Spring-Missouri",
+      "shard_name": "Phillips Spring",
+      "country": "Missouri",
+      "region": "np_lower_missouri_platte_kansas",
+      "coords_lat_lng": [
+        37.942,
+        -93.319
+      ],
+      "min_year": -6200,
+      "max_year": 500,
+      "other_names": [
+        "23HI216"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-6200.1.1",
+          "name": "Wažáže"
+        }
+      ],
+      "duplicate_name_flagged": "Wažáže"
+    },
+    {
+      "key": "Osage-Oklahoma",
+      "shard_name": "Osage",
+      "country": "Oklahoma",
+      "region": "usa_oklahoma",
+      "coords_lat_lng": [
+        36.2957,
+        -96.41721
+      ],
+      "min_year": 1895,
+      "max_year": 2026,
+      "other_names": [
+        "Osage town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1895.1.1",
+          "name": "Wažáže"
+        },
+        {
+          "date": "1904.1.1",
+          "name": "Osage"
+        }
+      ],
+      "duplicate_name_flagged": "Wažáže"
+    },
+    {
+      "key": "Stampede Valley Village-Alberta",
+      "shard_name": "Stampede Valley Village",
+      "country": "Alberta",
+      "region": "pr_south_saskatchewan_palliser_steppe",
+      "coords_lat_lng": [
+        49.65,
+        -110.25
+      ],
+      "min_year": -1000,
+      "max_year": 1000,
+      "other_names": [
+        "Cypress Hills Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-1000.1.1",
+          "name": "Wazîhe"
+        }
+      ],
+      "duplicate_name_flagged": "Wazîhe"
+    },
+    {
+      "key": "Stampede-Canada",
+      "shard_name": "Stampede",
+      "country": "Canada",
+      "region": "pr_south_saskatchewan_palliser_steppe",
+      "coords_lat_lng": [
+        49.665,
+        -110.225
+      ],
+      "min_year": -5500,
+      "max_year": 1200,
+      "other_names": [
+        "DjOn-26",
+        "Cypress Hills Elkwater"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-5500.1.1",
+          "name": "Wazíȟe"
+        }
+      ],
+      "duplicate_name_flagged": "Wazíȟe"
+    },
+    {
+      "key": "Piapot Valley Village-Saskatchewan",
+      "shard_name": "Piapot Valley Village",
+      "country": "Saskatchewan",
+      "region": "pr_south_saskatchewan_palliser_steppe",
+      "coords_lat_lng": [
+        49.9833,
+        -109.2833
+      ],
+      "min_year": 500,
+      "max_year": 1450,
+      "other_names": [
+        "Piapot Creek Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Wazíȟe"
+        }
+      ],
+      "duplicate_name_flagged": "Wazíȟe"
+    },
+    {
+      "key": "Spruce Tree Point-Colorado",
+      "shard_name": "Spruce Tree Point",
+      "country": "Colorado",
+      "region": "uc_san_juan_four_corners",
+      "coords_lat_lng": [
+        37.412,
+        -108.768
+      ],
+      "min_year": 1150,
+      "max_year": 1250,
+      "other_names": [
+        "5MT10690"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1150.1.1",
+          "name": "Weenuche"
+        }
+      ],
+      "duplicate_name_flagged": "Weenuche"
+    },
+    {
+      "key": "Three Kiva Ruin-Utah",
+      "shard_name": "Three Kiva Ruin",
+      "country": "Utah",
+      "region": "uc_san_juan_four_corners",
+      "coords_lat_lng": [
+        37.45607,
+        -109.37809
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Weenuche"
+        }
+      ],
+      "duplicate_name_flagged": "Weenuche"
+    },
+    {
+      "key": "Gravel Pit Ruin-Utah",
+      "shard_name": "Gravel Pit Ruin",
+      "country": "Utah",
+      "region": "uc_san_juan_four_corners",
+      "coords_lat_lng": [
+        37.42281,
+        -109.36736
+      ],
+      "min_year": 575,
+      "max_year": 1280,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "575.1.1",
+          "name": "Weenuche"
+        }
+      ],
+      "duplicate_name_flagged": "Weenuche"
+    },
+    {
+      "key": "Weiser (Mann Creek)-Idaho",
+      "shard_name": "Weiser",
+      "country": "Idaho",
+      "region": "nw_snake_river_klamath_interior",
+      "coords_lat_lng": [
+        44.2833,
+        -116.9167
+      ],
+      "min_year": -1000,
+      "max_year": 1600,
+      "other_names": [
+        "Lower Payette-Weiser",
+        "10WN30",
+        "Weiser (Mann Creek)"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-1000.1.1",
+          "name": "Yahandeka"
+        }
+      ],
+      "duplicate_name_flagged": "Yahandeka"
+    },
+    {
+      "key": "Nampa (Deer Flat)-Idaho",
+      "shard_name": "Nampa",
+      "country": "Idaho",
+      "region": "nw_snake_river_klamath_interior",
+      "coords_lat_lng": [
+        43.5667,
+        -116.65
+      ],
+      "min_year": 0,
+      "max_year": 1600,
+      "other_names": [
+        "Boise River Lower",
+        "10CN5",
+        "Nampa (Deer Flat)"
+      ],
+      "current_historical_names": [
+        {
+          "date": "0.1.1",
+          "name": "Yahandeka"
+        }
+      ],
+      "duplicate_name_flagged": "Yahandeka"
+    },
+    {
+      "key": "Givens Hot Springs-Idaho",
+      "shard_name": "Givens Hot Springs",
+      "country": "Idaho",
+      "region": "nw_snake_river_klamath_interior",
+      "coords_lat_lng": [
+        43.4083,
+        -116.6917
+      ],
+      "min_year": -3500,
+      "max_year": 1200,
+      "other_names": [
+        "Middle Snake River",
+        "10OE1689",
+        "Snake River"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-3500.1.1",
+          "name": "Yahandeka"
+        }
+      ],
+      "duplicate_name_flagged": "Yahandeka"
+    },
+    {
+      "key": "Higgins-Texas_2",
+      "shard_name": "Higgins",
+      "country": "Texas",
+      "region": "sp_gulf_coast_nueces_karankawa",
+      "coords_lat_lng": [
+        29.56,
+        -98.51
+      ],
+      "min_year": 0,
+      "max_year": 1580,
+      "other_names": [
+        "41BX184",
+        "Salado Creek Burned Rock"
+      ],
+      "current_historical_names": [
+        {
+          "date": "0.1.1",
+          "name": "Yanaguana"
+        }
+      ],
+      "duplicate_name_flagged": "Yanaguana"
+    },
+    {
+      "key": "Olmos Dam-Texas",
+      "shard_name": "Olmos Dam",
+      "country": "Texas",
+      "region": "sp_gulf_coast_nueces_karankawa",
+      "coords_lat_lng": [
+        29.47,
+        -98.48
+      ],
+      "min_year": -800,
+      "max_year": 1400,
+      "other_names": [
+        "41BX1",
+        "Olmos Creek Cemetery"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-800.1.1",
+          "name": "Yanaguana"
+        }
+      ],
+      "duplicate_name_flagged": "Yanaguana"
+    },
+    {
+      "key": "San Antonio-Texas",
+      "shard_name": "San Antonio",
+      "country": "Texas",
+      "region": "",
+      "coords_lat_lng": [
+        29.46341,
+        -98.52429
+      ],
+      "min_year": 1718,
+      "max_year": 2026,
+      "other_names": [
+        "San Antonio da Bexar",
+        "San Antonio city",
+        "San Antonio de Bexar",
+        "Villa de San Fernando",
+        "Valero",
+        "Mission San Antonio de Valero",
+        "Yanaguana",
+        "Villa de San Fernando de Bexar",
+        "Capital of Spanish Texas",
+        "The Alamo Coahuiltecan Mission Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1718.1.1",
+          "name": "Yanaguana"
+        },
+        {
+          "date": "1718.5.1",
+          "name": "San Antonio de Béxar"
+        },
+        {
+          "date": "1837.6.5",
+          "name": "San Antonio"
+        }
+      ],
+      "duplicate_name_flagged": "Yanaguana"
+    },
+    {
+      "key": "Donaldson-Canada",
+      "shard_name": "Donaldson",
+      "country": "Canada",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "coords_lat_lng": [
+        44.5045,
+        -81.3245
+      ],
+      "min_year": -300,
+      "max_year": 700,
+      "other_names": [
+        "BdHi-1",
+        "Saugeen River Southampton"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-300.1.1",
+          "name": "Zaagiing"
+        }
+      ],
+      "duplicate_name_flagged": "Zaagiing"
+    },
+    {
+      "key": "Inverhuron-Canada",
+      "shard_name": "Inverhuron",
+      "country": "Canada",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "coords_lat_lng": [
+        44.2945,
+        -81.5945
+      ],
+      "min_year": -1000,
+      "max_year": 400,
+      "other_names": [
+        "BbHj-16",
+        "Bruce County Lake Huron Archaic"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-1000.1.1",
+          "name": "Zaagiing"
+        }
+      ],
+      "duplicate_name_flagged": "Zaagiing"
+    },
+    {
+      "key": "Fletcher-Michigan",
+      "shard_name": "Fletcher",
+      "country": "Michigan",
+      "region": "gl_huron_erie_finger_lakes_ny",
+      "coords_lat_lng": [
+        43.6045,
+        -83.8845
+      ],
+      "min_year": -1000,
+      "max_year": 1100,
+      "other_names": [
+        "20BY28",
+        "Bay City Saginaw River"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-1000.1.1",
+          "name": "Zaagiing"
+        }
+      ],
+      "duplicate_name_flagged": "Zaagiing"
+    },
+    {
+      "key": "Eagle's Ridge-Texas",
+      "shard_name": "Eagle's Ridge",
+      "country": "Texas",
+      "region": "sp_neches_sabine_trinity_caddo",
+      "coords_lat_lng": [
+        29.86,
+        -94.71
+      ],
+      "min_year": -1700,
+      "max_year": 1000,
+      "other_names": [
+        "41CH252",
+        "Wallisville Trinity Delta"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-1700.1.1",
+          "name": "Akokisa"
+        }
+      ],
+      "duplicate_name_flagged": "Akokisa"
+    },
+    {
+      "key": "Park Row South-Texas",
+      "shard_name": "Park Row South",
+      "country": "Texas",
+      "region": "sp_gulf_coast_nueces_karankawa",
+      "coords_lat_lng": [
+        29.79,
+        -95.63
+      ],
+      "min_year": 800,
+      "max_year": 1550,
+      "other_names": [
+        "41HR184",
+        "Buffalo Bayou Upper Coast"
+      ],
+      "current_historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Akokisa"
+        }
+      ],
+      "duplicate_name_flagged": "Akokisa"
+    },
+    {
+      "key": "Alarnerk-Canada",
+      "shard_name": "Alarnerk",
+      "country": "Canada",
+      "region": "ncan_western_central_arctic",
+      "coords_lat_lng": [
+        69.1833,
+        -82.0667
+      ],
+      "min_year": -1500,
+      "max_year": 900,
+      "other_names": [
+        "Igloolik Mainland",
+        "Melville Peninsula",
+        "NhHd-1"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-1500.1.1",
+          "name": "Alarnerk"
+        }
+      ],
+      "duplicate_name_flagged": "Alarnerk"
+    },
+    {
+      "key": "Alarnerk Ridge Metropolis-Nunavut",
+      "shard_name": "Alarnerk Ridge Metropolis",
+      "country": "Nunavut",
+      "region": "ncan_western_central_arctic",
+      "coords_lat_lng": [
+        69.3167,
+        -82.3333
+      ],
+      "min_year": -500,
+      "max_year": 1400,
+      "other_names": [
+        "Alarnerk Prehistoric City"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-500.1.1",
+          "name": "Alarnerk"
+        }
+      ],
+      "duplicate_name_flagged": "Alarnerk"
+    }
+  ]
+}

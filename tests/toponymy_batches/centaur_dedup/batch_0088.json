@@ -1,0 +1,702 @@
+{
+  "batch_index": 88,
+  "clusters": [
+    "totouskak",
+    "tsah",
+    "tsatanugi",
+    "tsealnaozti",
+    "tsebiyi",
+    "tsecizi",
+    "tseiahi",
+    "tselani",
+    "tsenoltlizn",
+    "tsesiani",
+    "tsirege",
+    "tsistetsiyi"
+  ],
+  "countries": [
+    "Arizona",
+    "Canada",
+    "New Mexico",
+    "Tennessee",
+    "Utah"
+  ],
+  "count": 24,
+  "forbidden_already_used_in_region": [
+    "'Aha Kwahwat",
+    "'Aha Makhav",
+    "'Onk Akimel",
+    "'Yalis",
+    "A'ts'in'a",
+    "A'ts'ina",
+    "A:shiwi",
+    "Aazhoodenaang",
+    "Abangkuyivi",
+    "Abó",
+    "Achelacy",
+    "Achiya: Dek'yapbow'a",
+    "Adahiilíní",
+    "Aghaałą́",
+    "Ahagaskiaywa",
+    "Ahjimsek",
+    "Ahkwesáhsne",
+    "Ahousaht",
+    "Ainga Wia Dintso'ahni'i",
+    "Ajoasté",
+    "Akaamaschii",
+    "Akimel O'odham",
+    "Akpatordjuark",
+    "Akulivik",
+    "Akwałina",
+    "Akwesasne",
+    "Alamogordo Army Airfield",
+    "Alarnerk",
+    "Alexander",
+    "Ali Waipia",
+    "Alámex",
+    "Amayeli",
+    "Amiskwaciya",
+    "Amogayunyi",
+    "Amoxiumqua",
+    "Amoyi",
+    "Angapuni",
+    "Anikituwagi",
+    "Aniyunwiya",
+    "Ansh An Lashokdiwe",
+    "Anéʼé Tséyiʼ",
+    "Aondironon",
+    "Apache Junction",
+    "Apitipi",
+    "Apitipik",
+    "Apvitok",
+    "Arendarhonon",
+    "Argentenay",
+    "Argenteuil",
+    "Arvia'juaq",
+    "Arviat",
+    "Arviligjuaq",
+    "Aschkibokahn",
+    "Asinīpwāt-sīpiy",
+    "Astialakwa",
+    "Ataronchronon",
+    "Atripuy",
+    "Atsee Nitsaa",
+    "Atsinna",
+    "Attawapiskat",
+    "Attignawantan",
+    "Attigneenongnahac",
+    "Aujuittuq",
+    "Aulatsivik",
+    "Aulavik",
+    "Aupaluk",
+    "Avayalik",
+    "Avonlea",
+    "Avvajja",
+    "Awat'ovi",
+    "Awatovi",
+    "Awatʼovi",
+    "Ayuhwasi",
+    "Aztec",
+    "Baawingashing",
+    "Babad Do'ag",
+    "Babocomari",
+    "Baie-Rouge",
+    "Baie-Saint-Paul",
+    "Baie-du-Febvre",
+    "Batiscan",
+    "Bay Roberts",
+    "Bay de Verde",
+    "Bayfield",
+    "Beaumont",
+    "Beauport",
+    "Beaupré",
+    "Beloeil",
+    "Benson",
+    "Beothuk",
+    "Berthier",
+    "Berthier-en-Bas",
+    "Besh-Ba-Gowah",
+    "Beʼekʼid Baa Ahoodzání",
+    "Beʼekʼid Hóteelí",
+    "Bidanku",
+    "Bidaʼhóóchiiʼ",
+    "Bideʼyóó",
+    "Biigtigong",
+    "Binaawaan",
+    "Bird Cove",
+    "Bis Dah Łitso",
+    "Bis Saaʼáanii",
+    "Bis sa'ani",
+    "Bitłʼááh Bitoʼ",
+    "Bkejwanong",
+    "Blackfoot",
+    "Blanc-Sablon",
+    "Bledsoe's Lick",
+    "Boa Ogoi",
+    "Bohogue",
+    "Bonavista",
+    "Boucherville",
+    "Bourg-Royal",
+    "Boyd's Cove",
+    "Brigus",
+    "Bunibonibee",
+    "Burlington Heights",
+    "Bytown",
+    "Bááh Háálį́"
+  ],
+  "settlements": [
+    {
+      "key": "Tadoussac Native Encampment-Canada",
+      "shard_name": "Tadoussac Native Encampment",
+      "country": "Canada",
+      "region": "cc1_new_france_st_lawrence",
+      "coords_lat_lng": [
+        48.1451,
+        -69.7152
+      ],
+      "min_year": 1600,
+      "max_year": 1750,
+      "other_names": [
+        "Innu/Montagnais Trading Post and Mission"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1600.1.1",
+          "name": "Totouskak"
+        },
+        {
+          "date": "1641.1.1",
+          "name": "Tadoussac"
+        }
+      ],
+      "duplicate_name_flagged": "Totouskak"
+    },
+    {
+      "key": "Tadoussac-Canada",
+      "shard_name": "Tadoussac",
+      "country": "Canada",
+      "region": "can_quebec",
+      "coords_lat_lng": [
+        48.13022,
+        -69.63642
+      ],
+      "min_year": -3000,
+      "max_year": 2026,
+      "other_names": [
+        "Tadousac",
+        "Tadussak",
+        "tadousakku",
+        "tadwsak",
+        "Poste de Tadoussac",
+        "Sainte-Croix-de-Tadoussac",
+        "DbEj-7",
+        "Saguenay-St. Lawrence Confluence",
+        "Totouskak",
+        "Saguenay Confluence"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-3000.1.1",
+          "name": "Totouskak"
+        },
+        {
+          "date": "1600.1.1",
+          "name": "Tadoussac"
+        }
+      ],
+      "duplicate_name_flagged": "Totouskak"
+    },
+    {
+      "key": "Cottonwood Wash Great House-Utah",
+      "shard_name": "Cottonwood Wash Great House",
+      "country": "Utah",
+      "region": "uc_san_juan_four_corners",
+      "coords_lat_lng": [
+        37.515,
+        -109.565
+      ],
+      "min_year": 1080,
+      "max_year": 1130,
+      "other_names": [
+        "42SA12209"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1080.1.1",
+          "name": "Tsʼah"
+        }
+      ],
+      "duplicate_name_flagged": "Tsʼah"
+    },
+    {
+      "key": "Parker Site-Utah",
+      "shard_name": "Parker Site",
+      "country": "Utah",
+      "region": "uc_san_juan_four_corners",
+      "coords_lat_lng": [
+        37.46235,
+        -109.54725
+      ],
+      "min_year": 575,
+      "max_year": 1280,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "575.1.1",
+          "name": "Tsʼah"
+        }
+      ],
+      "duplicate_name_flagged": "Tsʼah"
+    },
+    {
+      "key": "Williams Island Town-Tennessee",
+      "shard_name": "Williams Island Town",
+      "country": "Tennessee",
+      "region": "cu_upper_east_tennessee_ridge",
+      "coords_lat_lng": [
+        35.0815,
+        -85.371
+      ],
+      "min_year": 1300,
+      "max_year": 1450,
+      "other_names": [
+        "40HA60",
+        "Williams Island Dallas Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1300.1.1",
+          "name": "Tsatanugi"
+        }
+      ],
+      "duplicate_name_flagged": "Tsatanugi"
+    },
+    {
+      "key": "Moccasin Bend Habitation Town-Tennessee",
+      "shard_name": "Moccasin Bend Habitation Town",
+      "country": "Tennessee",
+      "region": "cu_upper_east_tennessee_ridge",
+      "coords_lat_lng": [
+        35.051,
+        -85.3415
+      ],
+      "min_year": 1150,
+      "max_year": 1350,
+      "other_names": [
+        "40HA63",
+        "Moccasin Bend National Archeological District"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1150.1.1",
+          "name": "Tsatanugi"
+        }
+      ],
+      "duplicate_name_flagged": "Tsatanugi"
+    },
+    {
+      "key": "Sanostee-New Mexico_2",
+      "shard_name": "Sanostee",
+      "country": "New Mexico",
+      "region": "uc_san_juan_four_corners",
+      "coords_lat_lng": [
+        36.50816,
+        -108.44872
+      ],
+      "min_year": 550,
+      "max_year": 1400,
+      "other_names": [
+        "Central San Juan Basin"
+      ],
+      "current_historical_names": [
+        {
+          "date": "550.1.1",
+          "name": "Tséʼałnáoztʼiʼí"
+        }
+      ],
+      "duplicate_name_flagged": "Tséʼałnáoztʼiʼí"
+    },
+    {
+      "key": "Sanostee (36.42,-108.86)-New Mexico",
+      "shard_name": "Sanostee",
+      "country": "New Mexico",
+      "region": "uc_san_juan_four_corners",
+      "coords_lat_lng": [
+        36.425,
+        -108.855
+      ],
+      "min_year": 1050,
+      "max_year": 1150,
+      "other_names": [
+        "LA 7292"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1050.1.1",
+          "name": "Tséʼałnáoztʼiʼí"
+        }
+      ],
+      "duplicate_name_flagged": "Tséʼałnáoztʼiʼí"
+    },
+    {
+      "key": "Penasco Blanco-New Mexico",
+      "shard_name": "Penasco Blanco",
+      "country": "New Mexico",
+      "region": "uc_san_juan_four_corners",
+      "coords_lat_lng": [
+        36.07562,
+        -108.02961
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [
+        "Central San Juan Basin",
+        "LA 225",
+        "White Rock Point",
+        "Kin Nahasbas",
+        "Chaco Canyon",
+        "Penasco Blanco",
+        "Pueblo Bonito",
+        "Chaco Culture",
+        "LA 226",
+        "Tse Biyi'i'"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Tsé Biyiʼ"
+        }
+      ],
+      "duplicate_name_flagged": "Tsé Biyiʼ"
+    },
+    {
+      "key": "Chaco East Community-New Mexico",
+      "shard_name": "Chaco East Community",
+      "country": "New Mexico",
+      "region": "uc_san_juan_four_corners",
+      "coords_lat_lng": [
+        36.012,
+        -107.825
+      ],
+      "min_year": 1050,
+      "max_year": 1120,
+      "other_names": [
+        "LA 42600"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1050.1.1",
+          "name": "Tsé Biyiʼ"
+        }
+      ],
+      "duplicate_name_flagged": "Tsé Biyiʼ"
+    },
+    {
+      "key": "Tse Chizzi-Arizona",
+      "shard_name": "Tse Chizzi",
+      "country": "Arizona",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        35.93433,
+        -110.05838
+      ],
+      "min_year": 700,
+      "max_year": 1300,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "700.1.1",
+          "name": "Tse Chizzi"
+        }
+      ],
+      "duplicate_name_flagged": "Tse Chizzi"
+    },
+    {
+      "key": "Vidal Canyon-New Mexico",
+      "shard_name": "Vidal Canyon",
+      "country": "New Mexico",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        35.64015,
+        -108.82371
+      ],
+      "min_year": 550,
+      "max_year": 1600,
+      "other_names": [
+        "Rio Puerco of the West"
+      ],
+      "current_historical_names": [
+        {
+          "date": "550.1.1",
+          "name": "Tséchʼízhí"
+        }
+      ],
+      "duplicate_name_flagged": "Tséchʼízhí"
+    },
+    {
+      "key": "Standing Rock Great House-New Mexico",
+      "shard_name": "Standing Rock Great House",
+      "country": "New Mexico",
+      "region": "uc_san_juan_four_corners",
+      "coords_lat_lng": [
+        35.815,
+        -108.355
+      ],
+      "min_year": 1050,
+      "max_year": 1120,
+      "other_names": [
+        "LA 18205"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1050.1.1",
+          "name": "Tsé'íí'ahí"
+        }
+      ],
+      "duplicate_name_flagged": "Tsé'íí'ahí"
+    },
+    {
+      "key": "Standing Rock-New Mexico",
+      "shard_name": "Standing Rock",
+      "country": "New Mexico",
+      "region": "uc_san_juan_four_corners",
+      "coords_lat_lng": [
+        35.78651,
+        -108.51391
+      ],
+      "min_year": 550,
+      "max_year": 1400,
+      "other_names": [
+        "Central San Juan Basin"
+      ],
+      "current_historical_names": [
+        {
+          "date": "550.1.1",
+          "name": "Tsé Ííʼáhí"
+        }
+      ],
+      "duplicate_name_flagged": "Tsé Ííʼáhí"
+    },
+    {
+      "key": "Cottonwood (Apache County)-Arizona",
+      "shard_name": "Cottonwood",
+      "country": "Arizona",
+      "region": "usa_arizona",
+      "coords_lat_lng": [
+        36.07238,
+        -109.89024
+      ],
+      "min_year": 1940,
+      "max_year": 2025,
+      "other_names": [
+        "Cottonwood CDP",
+        "Cottonwood (Apache County)"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1940.1.1",
+          "name": "Tsé Lání"
+        },
+        {
+          "date": "1958.3.1",
+          "name": "Cottonwood"
+        }
+      ],
+      "duplicate_name_flagged": "Tsé Lání"
+    },
+    {
+      "key": "Salina Springs-Arizona",
+      "shard_name": "Salina Springs",
+      "country": "Arizona",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        35.93394,
+        -109.94253
+      ],
+      "min_year": 500,
+      "max_year": 1400,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Tsé Łání"
+        }
+      ],
+      "duplicate_name_flagged": "Tsé Łání"
+    },
+    {
+      "key": "Las Tortugas-Arizona",
+      "shard_name": "Las Tortugas",
+      "country": "Arizona",
+      "region": "az_salt_verde_phoenix_hohokam",
+      "coords_lat_lng": [
+        33.87409,
+        -111.34778
+      ],
+      "min_year": 300,
+      "max_year": 1600,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "300.1.1",
+          "name": "Tsé Nołtłʼizhn"
+        }
+      ],
+      "duplicate_name_flagged": "Tsé Nołtłʼizhn"
+    },
+    {
+      "key": "Cline Terrace Mound, Monster Ruin-Arizona",
+      "shard_name": "Cline Terrace Mound, Monster Ruin",
+      "country": "Arizona",
+      "region": "az_salt_verde_phoenix_hohokam",
+      "coords_lat_lng": [
+        33.80234,
+        -111.33523
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [
+        "Tonto Basin"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Tsé Nołtłʼizhn"
+        }
+      ],
+      "duplicate_name_flagged": "Tsé Nołtłʼizhn"
+    },
+    {
+      "key": "Allantown-Arizona",
+      "shard_name": "Allantown",
+      "country": "Arizona",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        35.335,
+        -109.125
+      ],
+      "min_year": 850,
+      "max_year": 1050,
+      "other_names": [
+        "AZ K:15:1",
+        "Whitewater District"
+      ],
+      "current_historical_names": [
+        {
+          "date": "850.1.1",
+          "name": "Tsé Siʼání"
+        }
+      ],
+      "duplicate_name_flagged": "Tsé Siʼání"
+    },
+    {
+      "key": "Allentown-Arizona",
+      "shard_name": "Allentown",
+      "country": "Arizona",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        35.23251,
+        -109.12597
+      ],
+      "min_year": 400,
+      "max_year": 1400,
+      "other_names": [
+        "Rio Puerco of the West"
+      ],
+      "current_historical_names": [
+        {
+          "date": "400.1.1",
+          "name": "Tsé Siʼání"
+        }
+      ],
+      "duplicate_name_flagged": "Tsé Siʼání"
+    },
+    {
+      "key": "Tsirege-New Mexico",
+      "shard_name": "Tsirege",
+      "country": "New Mexico",
+      "region": "rg_san_luis_upper_pueblos",
+      "coords_lat_lng": [
+        35.86095,
+        -106.15909
+      ],
+      "min_year": 500,
+      "max_year": 1600,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Tsirege"
+        }
+      ],
+      "duplicate_name_flagged": "Tsirege"
+    },
+    {
+      "key": "Burnt Mesa-New Mexico",
+      "shard_name": "Burnt Mesa",
+      "country": "New Mexico",
+      "region": "rg_san_luis_upper_pueblos",
+      "coords_lat_lng": [
+        35.83061,
+        -106.22675
+      ],
+      "min_year": 500,
+      "max_year": 1600,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Tsirege"
+        }
+      ],
+      "duplicate_name_flagged": "Tsirege"
+    },
+    {
+      "key": "Mouse Creek Village-Tennessee",
+      "shard_name": "Mouse Creek Village",
+      "country": "Tennessee",
+      "region": "cu_upper_east_tennessee_ridge",
+      "coords_lat_lng": [
+        35.3015,
+        -84.751
+      ],
+      "min_year": 1350,
+      "max_year": 1450,
+      "other_names": [
+        "40MN3",
+        "Mouse Creek Phase Type Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1350.1.1",
+          "name": "Tsistetsi'yi"
+        }
+      ],
+      "duplicate_name_flagged": "Tsistetsi'yi"
+    },
+    {
+      "key": "Rymer Fortified Village-Tennessee",
+      "shard_name": "Rymer Fortified Village",
+      "country": "Tennessee",
+      "region": "cu_upper_east_tennessee_ridge",
+      "coords_lat_lng": [
+        35.2215,
+        -84.851
+      ],
+      "min_year": 1350,
+      "max_year": 1600,
+      "other_names": [
+        "40BY11",
+        "Rymer Mouse Creek Town",
+        "Rymer Mouse Creek Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1350.1.1",
+          "name": "Tsistetsi'yi"
+        }
+      ],
+      "duplicate_name_flagged": "Tsistetsi'yi"
+    }
+  ]
+}

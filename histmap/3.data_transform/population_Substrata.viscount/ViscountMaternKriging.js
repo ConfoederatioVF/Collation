@@ -4,7 +4,6 @@ let JSON5 = global.JSON5 || require("json5");
 let path = global.path || require("path");
 let { PNG } = global.pngjs || require("pngjs");
 let { ViscountBiophysicalCovariates } = global.ViscountBiophysicalCovariates ? global : require("./ViscountBiophysicalCovariates.js");
-let { ViscountHUResidualKriging } = global.ViscountHUResidualKriging ? global : require("./ViscountHUResidualKriging.js");
 let { ViscountMaternVariogram } = global.ViscountMaternVariogram ? global : require("./ViscountMaternVariogram.js");
 let { ViscountRuralSuitability } = global.ViscountRuralSuitability ? global : require("./ViscountRuralSuitability.js");
 
@@ -880,11 +879,25 @@ let { ViscountRuralSuitability } = global.ViscountRuralSuitability ? global : re
       let residual_fields = null;
 
       if (bio_covs && rk_mode === "hu_hyde_residual") {
-        let hu_out = ViscountHUResidualKriging.evaluateAllPeriodResidualSurfaces(bundle, bio_covs, active_periods, hab_cache);
+        let hu_rk = global.ViscountHUResidualKriging || null;
 
-        fields = hu_out.fields;
-        residual_fields = hu_out.residual_fields || null;
-        wls_betas_by_period = hu_out.wls_betas_by_period;
+        if (!hu_rk) {
+          let rk_rel = (bundle.config && bundle.config.kriging_config && bundle.config.kriging_config.residual_kriging_module) ?
+            bundle.config.kriging_config.residual_kriging_module :
+            "histmap/3.data_transform/population_Substrata.viscount/centaur/ViscountHUResidualKriging.js";
+          let rk_abs = path.resolve(bundle.mask_data.project_root || process.cwd(), rk_rel);
+
+          if (fs.existsSync(rk_abs)) hu_rk = require(rk_abs).ViscountHUResidualKriging;
+        }
+        if (!hu_rk) {
+          console.error("[ViscountMaternKriging] Missing ViscountHUResidualKriging module for hu_hyde_residual mode.");
+        } else {
+          let hu_out = hu_rk.evaluateAllPeriodResidualSurfaces(bundle, bio_covs, active_periods, hab_cache);
+
+          fields = hu_out.fields;
+          residual_fields = hu_out.residual_fields || null;
+          wls_betas_by_period = hu_out.wls_betas_by_period;
+        }
       } else {
         for (let p = 0; p < n_active; p++) {
           let ap = active_periods[p];

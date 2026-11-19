@@ -1,0 +1,681 @@
+{
+  "batch_index": 42,
+  "clusters": [
+    "asiwi",
+    "atripuy",
+    "atsina",
+    "bahateno",
+    "calusa",
+    "cankasdata"
+  ],
+  "countries": [
+    "Arkansas",
+    "Florida",
+    "Iowa",
+    "New Mexico",
+    "South Dakota",
+    "Texas"
+  ],
+  "count": 24,
+  "forbidden_already_used_in_region": [
+    "Aberdeen",
+    "Abó",
+    "Achiya: Dek'yapbow'a",
+    "Acuera",
+    "Agar",
+    "Ais",
+    "Akaska",
+    "Akičhita Wakpála",
+    "Akokisa",
+    "Akwałina",
+    "Alamogordo Army Airfield",
+    "Albee",
+    "Alcester",
+    "Alexandria",
+    "Allentown",
+    "Alpena",
+    "Altamont",
+    "Amoxiumqua",
+    "Andover",
+    "Angostura",
+    "Anhaica",
+    "Apalache",
+    "Aquixo",
+    "Aranama",
+    "Ardmore",
+    "Armour",
+    "Artas",
+    "Ashland Heights",
+    "Ashton",
+    "Asile",
+    "Astialakwa",
+    "Astoria",
+    "Atsee Nitsaa",
+    "Aubrey",
+    "Auia",
+    "Aurora",
+    "Aurora Center",
+    "Avon",
+    "Aztec",
+    "Badger",
+    "Baltic",
+    "Bancroft",
+    "Bde Hdakíŋyaŋ",
+    "Belle Fourche",
+    "Belvidere",
+    "Beresford",
+    "Beʼekʼid Hóteelí",
+    "Bidanku",
+    "Big Stone",
+    "Big Stone City",
+    "Bijou Hills",
+    "Bis Dah Łitso",
+    "Bis Saaʼáanii",
+    "Bis sa'ani",
+    "Bison",
+    "Bitłʼááh Bitoʼ",
+    "Blackhawk",
+    "Blue Mound",
+    "Blunt",
+    "Bon Homme Colony",
+    "Bonesteel",
+    "Bowdle",
+    "Bowman",
+    "Box Elder",
+    "Bradley",
+    "Brandon",
+    "Brandt",
+    "Brant Lake South",
+    "Brentford",
+    "Brentwood Colony",
+    "Bridgewater",
+    "Bristol",
+    "Britton",
+    "Broadland",
+    "Brookings",
+    "Bryant",
+    "Buffalo",
+    "Buffalo Chip",
+    "Buffalo Gap",
+    "Burbank",
+    "Burke",
+    "Bushnell",
+    "Butler",
+    "Báxoje",
+    "Bááh Háálį́",
+    "Caddo Gap",
+    "Caddo Mills",
+    "Caddo Valley",
+    "Cahinnio",
+    "Calos",
+    "Cameron Colony",
+    "Camp Crook",
+    "Camp Hood",
+    "Camrose Colony",
+    "Canistota",
+    "Canocanayest",
+    "Canocanayestatetlo",
+    "Canova",
+    "Canton",
+    "Cantona",
+    "Caparaca",
+    "Caputa",
+    "Carnué",
+    "Carthage",
+    "Casqui",
+    "Castlewood",
+    "Cavour",
+    "Cayas",
+    "Centerville",
+    "Central",
+    "Ch'laandé",
+    "Ch'úk'ánén",
+    "Chamberlain",
+    "Chan-ya-ta",
+    "Chancellor",
+    "Chelsea",
+    "Cherokee",
+    "Cherokee City",
+    "Cherokee Village",
+    "Cherry Valley"
+  ],
+  "settlements": [
+    {
+      "key": "LZ0219-New Mexico",
+      "shard_name": "LZ0219",
+      "country": "New Mexico",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        34.8269,
+        -108.97632
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "A:shiwi"
+        }
+      ],
+      "duplicate_name_flagged": "A:shiwi"
+    },
+    {
+      "key": "LZ0025-New Mexico",
+      "shard_name": "LZ0025",
+      "country": "New Mexico",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        34.75015,
+        -109.03817
+      ],
+      "min_year": 550,
+      "max_year": 1400,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "550.1.1",
+          "name": "A:shiwi"
+        }
+      ],
+      "duplicate_name_flagged": "A:shiwi"
+    },
+    {
+      "key": "LZ0341-New Mexico",
+      "shard_name": "LZ0341",
+      "country": "New Mexico",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        34.74704,
+        -108.93719
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "A:shiwi"
+        }
+      ],
+      "duplicate_name_flagged": "A:shiwi"
+    },
+    {
+      "key": "Rattail Ruin-New Mexico",
+      "shard_name": "Rattail Ruin",
+      "country": "New Mexico",
+      "region": "rg_san_luis_upper_pueblos",
+      "coords_lat_lng": [
+        34.51125,
+        -107.99459
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "A:shiwi"
+        }
+      ],
+      "duplicate_name_flagged": "A:shiwi"
+    },
+    {
+      "key": "Magdalena Pueblo-New Mexico",
+      "shard_name": "Magdalena Pueblo",
+      "country": "New Mexico",
+      "region": "rg_san_luis_upper_pueblos",
+      "coords_lat_lng": [
+        34.115,
+        -107.245
+      ],
+      "min_year": 1350,
+      "max_year": 1480,
+      "other_names": [
+        "LA 286",
+        "Pueblo Magdalena"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1350.1.1",
+          "name": "Atripuy"
+        }
+      ],
+      "duplicate_name_flagged": "Atripuy"
+    },
+    {
+      "key": "Arcillo-New Mexico",
+      "shard_name": "Arcillo",
+      "country": "New Mexico",
+      "region": "rg_san_luis_upper_pueblos",
+      "coords_lat_lng": [
+        34.10449,
+        -106.56047
+      ],
+      "min_year": 300,
+      "max_year": 1600,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "300.1.1",
+          "name": "Atripuy"
+        }
+      ],
+      "duplicate_name_flagged": "Atripuy"
+    },
+    {
+      "key": "Pueblito de Pasto-New Mexico",
+      "shard_name": "Pueblito de Pasto",
+      "country": "New Mexico",
+      "region": "rg_san_luis_upper_pueblos",
+      "coords_lat_lng": [
+        34.02973,
+        -106.43399
+      ],
+      "min_year": 300,
+      "max_year": 1600,
+      "other_names": [
+        "Arenoso"
+      ],
+      "current_historical_names": [
+        {
+          "date": "300.1.1",
+          "name": "Atripuy"
+        }
+      ],
+      "duplicate_name_flagged": "Atripuy"
+    },
+    {
+      "key": "Las Huertas-New Mexico",
+      "shard_name": "Las Huertas",
+      "country": "New Mexico",
+      "region": "rg_san_luis_upper_pueblos",
+      "coords_lat_lng": [
+        33.93066,
+        -107.005
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Atripuy"
+        }
+      ],
+      "duplicate_name_flagged": "Atripuy"
+    },
+    {
+      "key": "Cienega-New Mexico",
+      "shard_name": "Cienega",
+      "country": "New Mexico",
+      "region": "rg_san_luis_upper_pueblos",
+      "coords_lat_lng": [
+        35.19919,
+        -108.1958
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [
+        "Zuni"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "A'ts'in'a"
+        }
+      ],
+      "duplicate_name_flagged": "A'ts'in'a"
+    },
+    {
+      "key": "Atsinna-New Mexico",
+      "shard_name": "Atsinna",
+      "country": "New Mexico",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        35.0378,
+        -108.3472
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [
+        "LA 99",
+        "El Morro",
+        "Zuni",
+        "El Morro Valley",
+        "LZ1245",
+        "LA 1585",
+        "Mirabal Ruin",
+        "LA 426",
+        "Cienega Site",
+        "LA 425"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Atsinna"
+        }
+      ],
+      "duplicate_name_flagged": "Atsinna"
+    },
+    {
+      "key": "CS142-New Mexico",
+      "shard_name": "CS142",
+      "country": "New Mexico",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        35.01066,
+        -108.2999
+      ],
+      "min_year": 550,
+      "max_year": 1400,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "550.1.1",
+          "name": "A'ts'ina"
+        }
+      ],
+      "duplicate_name_flagged": "A'ts'ina"
+    },
+    {
+      "key": "LZ1307-New Mexico",
+      "shard_name": "LZ1307",
+      "country": "New Mexico",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        34.99053,
+        -108.43114
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "A'ts'ina"
+        }
+      ],
+      "duplicate_name_flagged": "A'ts'ina"
+    },
+    {
+      "key": "Foster-Arkansas",
+      "shard_name": "Foster",
+      "country": "Arkansas",
+      "region": "cp_arkansas_valley_ozark_spiro",
+      "coords_lat_lng": [
+        33.368,
+        -93.742
+      ],
+      "min_year": 1300,
+      "max_year": 1550,
+      "other_names": [
+        "Foster Place Mounds",
+        "3LA27"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1300.1.1",
+          "name": "Bahʼhatteno"
+        }
+      ],
+      "duplicate_name_flagged": "Bahʼhatteno"
+    },
+    {
+      "key": "Haley Caddo Village Town-Arkansas",
+      "shard_name": "Haley Caddo Village Town",
+      "country": "Arkansas",
+      "region": "cp_arkansas_valley_ozark_spiro",
+      "coords_lat_lng": [
+        33.251,
+        -93.9815
+      ],
+      "min_year": 1200,
+      "max_year": 1350,
+      "other_names": [
+        "3MI1",
+        "Haley Mounds Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Bahʼhatteno"
+        }
+      ],
+      "duplicate_name_flagged": "Bahʼhatteno"
+    },
+    {
+      "key": "Roitsch-Texas",
+      "shard_name": "Roitsch",
+      "country": "Texas",
+      "region": "cp_arkansas_valley_ozark_spiro",
+      "coords_lat_lng": [
+        33.875,
+        -94.962
+      ],
+      "min_year": 1100,
+      "max_year": 1600,
+      "other_names": [
+        "Sam Kaufman",
+        "41RR16"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1100.1.1",
+          "name": "Bah'hatteno"
+        }
+      ],
+      "duplicate_name_flagged": "Bah'hatteno"
+    },
+    {
+      "key": "Whitesboro Red River Village-Texas",
+      "shard_name": "Whitesboro Red River Village",
+      "country": "Texas",
+      "region": "sp_neches_sabine_trinity_caddo",
+      "coords_lat_lng": [
+        33.6515,
+        -96.901
+      ],
+      "min_year": 1250,
+      "max_year": 1400,
+      "other_names": [
+        "41GS10",
+        "Whitesboro Plains Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Bah'hatteno"
+        }
+      ],
+      "duplicate_name_flagged": "Bah'hatteno"
+    },
+    {
+      "key": "Little Salt Spring-Florida",
+      "shard_name": "Little Salt Spring",
+      "country": "Florida",
+      "region": "se_peninsular_florida_apalachicola",
+      "coords_lat_lng": [
+        27.0747,
+        -82.2333
+      ],
+      "min_year": -9500,
+      "max_year": -3000,
+      "other_names": [
+        "8SO18"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-9500.1.1",
+          "name": "Calusa"
+        }
+      ],
+      "duplicate_name_flagged": "Calusa"
+    },
+    {
+      "key": "Warm Mineral Springs-Florida_2",
+      "shard_name": "Warm Mineral Springs",
+      "country": "Florida",
+      "region": "se_peninsular_florida_apalachicola",
+      "coords_lat_lng": [
+        27.0589,
+        -82.2608
+      ],
+      "min_year": -9500,
+      "max_year": -7000,
+      "other_names": [
+        "8SO19"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-9500.1.1",
+          "name": "Calusa"
+        }
+      ],
+      "duplicate_name_flagged": "Calusa"
+    },
+    {
+      "key": "Useppa Island-Florida",
+      "shard_name": "Useppa Island",
+      "country": "Florida",
+      "region": "se_peninsular_florida_apalachicola",
+      "coords_lat_lng": [
+        26.625,
+        -82.125
+      ],
+      "min_year": -4000,
+      "max_year": 850,
+      "other_names": [
+        "8LL51"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-4000.1.1",
+          "name": "Calusa"
+        }
+      ],
+      "duplicate_name_flagged": "Calusa"
+    },
+    {
+      "key": "Wightman-Florida",
+      "shard_name": "Wightman",
+      "country": "Florida",
+      "region": "se_peninsular_florida_apalachicola",
+      "coords_lat_lng": [
+        26.54167,
+        -82.125
+      ],
+      "min_year": -1500,
+      "max_year": 800,
+      "other_names": [
+        "8LL54"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-1500.1.1",
+          "name": "Calusa"
+        }
+      ],
+      "duplicate_name_flagged": "Calusa"
+    },
+    {
+      "key": "Broken Kettle-Iowa",
+      "shard_name": "Broken Kettle",
+      "country": "Iowa",
+      "region": "np_lower_missouri_platte_kansas",
+      "coords_lat_lng": [
+        42.7367,
+        -96.2161
+      ],
+      "min_year": 100,
+      "max_year": 1200,
+      "other_names": [
+        "13PM1",
+        "Rainbow",
+        "Rainbow Site",
+        "13PM91",
+        "Broken Kettle Creek Mill Creek",
+        "Broken Kettle West",
+        "13PM25",
+        "Big Sioux Great Oasis",
+        "Plymouth Woodland"
+      ],
+      "current_historical_names": [
+        {
+          "date": "100.1.1",
+          "name": "Čhaŋkásdata"
+        }
+      ],
+      "duplicate_name_flagged": "Čhaŋkásdata"
+    },
+    {
+      "key": "Broken Kettle West-Iowa",
+      "shard_name": "Broken Kettle West",
+      "country": "Iowa",
+      "region": "np_middle_missouri_dakotas",
+      "coords_lat_lng": [
+        42.708,
+        -96.564
+      ],
+      "min_year": 900,
+      "max_year": 1100,
+      "other_names": [
+        "13PM25",
+        "Big Sioux Great Oasis"
+      ],
+      "current_historical_names": [
+        {
+          "date": "900.1.1",
+          "name": "Čhaŋkásdata"
+        }
+      ],
+      "duplicate_name_flagged": "Čhaŋkásdata"
+    },
+    {
+      "key": "Split Rock Creek Village-South Dakota",
+      "shard_name": "Split Rock Creek Village",
+      "country": "South Dakota",
+      "region": "np_middle_missouri_dakotas",
+      "coords_lat_lng": [
+        43.621,
+        -96.5515
+      ],
+      "min_year": 1150,
+      "max_year": 1300,
+      "other_names": [
+        "39MH2",
+        "Split Rock Habitation Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1150.1.1",
+          "name": "Čhaŋkásdata"
+        }
+      ],
+      "duplicate_name_flagged": "Čhaŋkásdata"
+    },
+    {
+      "key": "Brandon-South Dakota_2",
+      "shard_name": "Brandon",
+      "country": "South Dakota",
+      "region": "np_middle_missouri_dakotas",
+      "coords_lat_lng": [
+        43.5883,
+        -96.5908
+      ],
+      "min_year": 1100,
+      "max_year": 1300,
+      "other_names": [
+        "39MH1",
+        "Split Rock Creek Brandon Phase"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1100.1.1",
+          "name": "Čhaŋkásdata"
+        }
+      ],
+      "duplicate_name_flagged": "Čhaŋkásdata"
+    }
+  ]
+}

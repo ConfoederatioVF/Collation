@@ -65,9 +65,9 @@ let preloaded_viscount = [
   "histmap/3.data_transform/population_Substrata.viscount/ViscountRuralSuitability.js",
   "histmap/3.data_transform/population_Substrata.viscount/ViscountMaternVariogram.js",
   "histmap/3.data_transform/population_Substrata.viscount/ViscountBiophysicalCovariates.js",
-  "histmap/3.data_transform/population_Substrata.viscount/ViscountHUResidualHelpers.js",
-  "histmap/3.data_transform/population_Substrata.viscount/ViscountCountyCensusFrontier.js",
-  "histmap/3.data_transform/population_Substrata.viscount/ViscountHUResidualKriging.js",
+  "histmap/3.data_transform/population_Substrata.viscount/centaur/ViscountHUResidualHelpers.js",
+  "histmap/3.data_transform/population_Substrata.viscount/centaur/ViscountCountyCensusFrontier.js",
+  "histmap/3.data_transform/population_Substrata.viscount/centaur/ViscountHUResidualKriging.js",
   "histmap/3.data_transform/population_Substrata.viscount/ViscountMaternKriging.js",
   "histmap/3.data_transform/population_Substrata.viscount/ViscountSubstrataMosaic.js",
   "histmap/3.data_transform/population_Substrata.viscount/ViscountSubstrataPipeline.js"

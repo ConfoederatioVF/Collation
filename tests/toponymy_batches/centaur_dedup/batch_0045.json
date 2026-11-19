@@ -1,0 +1,709 @@
+{
+  "batch_index": 45,
+  "clusters": [
+    "itskari",
+    "kawaika",
+    "kisiskaciwan",
+    "kitkahaxki",
+    "kopahawakenam",
+    "kwevkepaya"
+  ],
+  "countries": [
+    "Arizona",
+    "Canada",
+    "Colorado",
+    "Nebraska",
+    "New Mexico"
+  ],
+  "count": 24,
+  "forbidden_already_used_in_region": [
+    "'Aha Kwahwat",
+    "'Aha Makhav",
+    "'Onk Akimel",
+    "'Yalis",
+    "A'ts'in'a",
+    "A'ts'ina",
+    "A:shiwi",
+    "Aazhoodenaang",
+    "Abangkuyivi",
+    "Abó",
+    "Achelacy",
+    "Achiya: Dek'yapbow'a",
+    "Adahiilíní",
+    "Aghaałą́",
+    "Ahagaskiaywa",
+    "Ahjimsek",
+    "Ahkwesáhsne",
+    "Ahousaht",
+    "Ajoasté",
+    "Akaamaschii",
+    "Akimel O'odham",
+    "Akpatordjuark",
+    "Akulivik",
+    "Akwałina",
+    "Akwesasne",
+    "Alamogordo Army Airfield",
+    "Alarnerk",
+    "Alexander",
+    "Ali Waipia",
+    "Alámex",
+    "Amiskwaciya",
+    "Amoxiumqua",
+    "Anéʼé Tséyiʼ",
+    "Aondironon",
+    "Apache Junction",
+    "Apishapa",
+    "Apitipi",
+    "Apitipik",
+    "Apvitok",
+    "Arendarhonon",
+    "Argentenay",
+    "Argenteuil",
+    "Arvia'juaq",
+    "Arviat",
+    "Arviligjuaq",
+    "Aschkibokahn",
+    "Asinīpwāt-sīpiy",
+    "Astialakwa",
+    "Ataronchronon",
+    "Atripuy",
+    "Atsee Nitsaa",
+    "Atsinna",
+    "Attawapiskat",
+    "Attignawantan",
+    "Attigneenongnahac",
+    "Aujuittuq",
+    "Aulatsivik",
+    "Aulavik",
+    "Aupaluk",
+    "Avayalik",
+    "Avonlea",
+    "Avvajja",
+    "Awat'ovi",
+    "Awatovi",
+    "Awatʼovi",
+    "Aztec",
+    "Baawingashing",
+    "Babad Do'ag",
+    "Babocomari",
+    "Baie-Rouge",
+    "Baie-Saint-Paul",
+    "Baie-du-Febvre",
+    "Batiscan",
+    "Bay Roberts",
+    "Bay de Verde",
+    "Bayfield",
+    "Beaumont",
+    "Beauport",
+    "Beaupré",
+    "Beloeil",
+    "Benson",
+    "Beothuk",
+    "Berthier",
+    "Berthier-en-Bas",
+    "Besh-Ba-Gowah",
+    "Beʼekʼid Baa Ahoodzání",
+    "Beʼekʼid Hóteelí",
+    "Bidanku",
+    "Bidaʼhóóchiiʼ",
+    "Bideʼyóó",
+    "Biigtigong",
+    "Biiniiniicie",
+    "Binaawaan",
+    "Bird Cove",
+    "Bis Dah Łitso",
+    "Bis Saaʼáanii",
+    "Bis sa'ani",
+    "Bitłʼááh Bitoʼ",
+    "Bkejwanong",
+    "Blackfoot",
+    "Blanc-Sablon",
+    "Bonavista",
+    "Boucherville",
+    "Bourg-Royal",
+    "Boyd's Cove",
+    "Brigus",
+    "Bunibonibee",
+    "Burlington Heights",
+    "Bytown",
+    "Bááh Háálį́",
+    "Bécancour",
+    "Béésh Baa Gowah",
+    "C'imo'ca",
+    "Cahiagué",
+    "Cap-Rouge",
+    "Cap-Saint-Ignace",
+    "Cap-Santé",
+    "Cap-de-la-Madeleine",
+    "Carbonear",
+    "Carcross"
+  ],
+  "settlements": [
+    {
+      "key": "Royel Goodenow-Nebraska",
+      "shard_name": "Royel Goodenow",
+      "country": "Nebraska",
+      "region": "np_lower_missouri_platte_kansas",
+      "coords_lat_lng": [
+        41.9331,
+        -99.4472
+      ],
+      "min_year": 800,
+      "max_year": 1600,
+      "other_names": [
+        "25LP8",
+        "Loup County Protohistoric"
+      ],
+      "current_historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Itskari"
+        }
+      ],
+      "duplicate_name_flagged": "Itskari"
+    },
+    {
+      "key": "Schultz-Nebraska",
+      "shard_name": "Schultz",
+      "country": "Nebraska",
+      "region": "np_lower_missouri_platte_kansas",
+      "coords_lat_lng": [
+        41.5701,
+        -98.9774
+      ],
+      "min_year": 100,
+      "max_year": 550,
+      "other_names": [
+        "25VY1",
+        "Mira Creek Valley Focus"
+      ],
+      "current_historical_names": [
+        {
+          "date": "100.1.1",
+          "name": "Itskari"
+        }
+      ],
+      "duplicate_name_flagged": "Itskari"
+    },
+    {
+      "key": "Burkett Earthlodge Town-Nebraska",
+      "shard_name": "Burkett Earthlodge Town",
+      "country": "Nebraska",
+      "region": "np_lower_missouri_platte_kansas",
+      "coords_lat_lng": [
+        41.3815,
+        -97.851
+      ],
+      "min_year": 1450,
+      "max_year": 1600,
+      "other_names": [
+        "25NC1",
+        "Burkett Lower Loup Paramount Town",
+        "Nance Lower Loup"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1450.1.1",
+          "name": "Itskari"
+        }
+      ],
+      "duplicate_name_flagged": "Itskari"
+    },
+    {
+      "key": "Sweetwater-Nebraska",
+      "shard_name": "Sweetwater",
+      "country": "Nebraska",
+      "region": "np_lower_missouri_platte_kansas",
+      "coords_lat_lng": [
+        41.035,
+        -98.985
+      ],
+      "min_year": 1480,
+      "max_year": 1600,
+      "other_names": [
+        "25BF4",
+        "Buffalo County Itskari"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1480.1.1",
+          "name": "Itskari"
+        }
+      ],
+      "duplicate_name_flagged": "Itskari"
+    },
+    {
+      "key": "Kawaika-a-Arizona",
+      "shard_name": "Kawaika-a",
+      "country": "Arizona",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        35.735,
+        -110.228
+      ],
+      "min_year": 1300,
+      "max_year": 1480,
+      "other_names": [
+        "NA1001",
+        "Antelope Mesa",
+        "Pink Arrow",
+        "NA1048"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1300.1.1",
+          "name": "Kawaika-a"
+        }
+      ],
+      "duplicate_name_flagged": "Kawaika-a"
+    },
+    {
+      "key": "Lester Ruin-Colorado",
+      "shard_name": "Lester Ruin",
+      "country": "Colorado",
+      "region": "uc_san_juan_four_corners",
+      "coords_lat_lng": [
+        37.392,
+        -108.845
+      ],
+      "min_year": 1200,
+      "max_year": 1260,
+      "other_names": [
+        "5MT4450"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Kawai'ka"
+        }
+      ],
+      "duplicate_name_flagged": "Kawai'ka"
+    },
+    {
+      "key": "Hummingbird-New Mexico",
+      "shard_name": "Hummingbird",
+      "country": "New Mexico",
+      "region": "rg_san_luis_upper_pueblos",
+      "coords_lat_lng": [
+        35.07095,
+        -107.03165
+      ],
+      "min_year": 550,
+      "max_year": 1600,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "550.1.1",
+          "name": "Kawaika"
+        }
+      ],
+      "duplicate_name_flagged": "Kawaika"
+    },
+    {
+      "key": "Laguna-New Mexico",
+      "shard_name": "Laguna",
+      "country": "New Mexico",
+      "region": "usa_new_mexico",
+      "coords_lat_lng": [
+        35.04738,
+        -107.40174
+      ],
+      "min_year": 1400,
+      "max_year": 2025,
+      "other_names": [
+        "Laguna CDP",
+        "Ka'waika",
+        "Laguna",
+        "Kawaika",
+        "San Jose de la Laguna"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1400.1.1",
+          "name": "Kawaikʼa"
+        },
+        {
+          "date": "1699.7.4",
+          "name": "San José de la Laguna"
+        },
+        {
+          "date": "1848.2.2",
+          "name": "Laguna"
+        }
+      ],
+      "duplicate_name_flagged": "Kawaikʼa"
+    },
+    {
+      "key": "St. Louis-Canada_2",
+      "shard_name": "St. Louis",
+      "country": "Canada",
+      "region": "pr_south_saskatchewan_palliser_steppe",
+      "coords_lat_lng": [
+        52.925,
+        -105.795
+      ],
+      "min_year": -7200,
+      "max_year": -5900,
+      "other_names": [
+        "FfNk-7",
+        "South Saskatchewan Paleoindian"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-7200.1.1",
+          "name": "Kisiskâciwan"
+        }
+      ],
+      "duplicate_name_flagged": "Kisiskâciwan"
+    },
+    {
+      "key": "Tschetter-Canada",
+      "shard_name": "Tschetter",
+      "country": "Canada",
+      "region": "pr_south_saskatchewan_palliser_steppe",
+      "coords_lat_lng": [
+        52.195,
+        -107.015
+      ],
+      "min_year": 850,
+      "max_year": 1100,
+      "other_names": [
+        "FbNr-1",
+        "Dunfermline Prairie Side-Notched"
+      ],
+      "current_historical_names": [
+        {
+          "date": "850.1.1",
+          "name": "Kisiskâciwan"
+        }
+      ],
+      "duplicate_name_flagged": "Kisiskâciwan"
+    },
+    {
+      "key": "Sjovold-Canada",
+      "shard_name": "Sjovold",
+      "country": "Canada",
+      "region": "pr_south_saskatchewan_palliser_steppe",
+      "coords_lat_lng": [
+        51.4167,
+        -107.0833
+      ],
+      "min_year": -2000,
+      "max_year": 1400,
+      "other_names": [
+        "EiNs-4",
+        "Outlook South Saskatchewan River"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-2000.1.1",
+          "name": "Kisiskâciwan"
+        }
+      ],
+      "duplicate_name_flagged": "Kisiskâciwan"
+    },
+    {
+      "key": "Gray Burial Site-Canada",
+      "shard_name": "Gray Burial Site",
+      "country": "Canada",
+      "region": "pr_south_saskatchewan_palliser_steppe",
+      "coords_lat_lng": [
+        50.3333,
+        -107.7833
+      ],
+      "min_year": -3000,
+      "max_year": -1000,
+      "other_names": [
+        "Swift Current",
+        "EcNx-1a"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-3000.1.1",
+          "name": "Kisiskâciwan"
+        }
+      ],
+      "duplicate_name_flagged": "Kisiskâciwan"
+    },
+    {
+      "key": "Allen-Nebraska_2",
+      "shard_name": "Allen",
+      "country": "Nebraska",
+      "region": "np_lower_missouri_platte_kansas",
+      "coords_lat_lng": [
+        40.378,
+        -100.232
+      ],
+      "min_year": -8400,
+      "max_year": 1300,
+      "other_names": [
+        "25FT50",
+        "Medicine Creek Paleoindian Camp",
+        "Lime Creek",
+        "25FT41",
+        "Medicine Creek Scottsbluff",
+        "Mowry Bluff",
+        "25FT35",
+        "Medicine Creek Bluff Hamlet",
+        "Lime Creek Habitation",
+        "25FT3"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-8400.1.1",
+          "name": "Kitkaháxki"
+        }
+      ],
+      "duplicate_name_flagged": "Kitkaháxki"
+    },
+    {
+      "key": "Lost Creek Earthlodge Site-Nebraska",
+      "shard_name": "Lost Creek Earthlodge Site",
+      "country": "Nebraska",
+      "region": "np_lower_missouri_platte_kansas",
+      "coords_lat_lng": [
+        40.3515,
+        -100.251
+      ],
+      "min_year": 1200,
+      "max_year": 1300,
+      "other_names": [
+        "25FT15",
+        "Lost Creek Habitation"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Kitkaháxki"
+        }
+      ],
+      "duplicate_name_flagged": "Kitkaháxki"
+    },
+    {
+      "key": "Shipman-Nebraska",
+      "shard_name": "Shipman",
+      "country": "Nebraska",
+      "region": "np_lower_missouri_platte_kansas",
+      "coords_lat_lng": [
+        40.1781,
+        -98.4978
+      ],
+      "min_year": 1140,
+      "max_year": 1450,
+      "other_names": [
+        "25WT7",
+        "Webster Upper Republican"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1140.1.1",
+          "name": "Kitkaháxki"
+        }
+      ],
+      "duplicate_name_flagged": "Kitkaháxki"
+    },
+    {
+      "key": "Alma Upper Republican Village-Nebraska",
+      "shard_name": "Alma Upper Republican Village",
+      "country": "Nebraska",
+      "region": "np_lower_missouri_platte_kansas",
+      "coords_lat_lng": [
+        40.101,
+        -99.3615
+      ],
+      "min_year": 1150,
+      "max_year": 1300,
+      "other_names": [
+        "25HN1",
+        "Harlan Reservoir Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1150.1.1",
+          "name": "Kitkaháxki"
+        }
+      ],
+      "duplicate_name_flagged": "Kitkaháxki"
+    },
+    {
+      "key": "Flying Dust First Nation 105E-Canada",
+      "shard_name": "Flying Dust First Nation 105E",
+      "country": "Canada",
+      "region": "can_saskatchewan",
+      "coords_lat_lng": [
+        54.17153,
+        -108.54962
+      ],
+      "min_year": 1949,
+      "max_year": 2025,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "1949.1.1",
+          "name": "Kōpahāwakēnam"
+        },
+        {
+          "date": "1990.1.1",
+          "name": "Flying Dust First Nation 105E"
+        }
+      ],
+      "duplicate_name_flagged": "Kōpahāwakēnam"
+    },
+    {
+      "key": "Flying Dust First Nation 105-Canada",
+      "shard_name": "Flying Dust First Nation 105",
+      "country": "Canada",
+      "region": "can_saskatchewan",
+      "coords_lat_lng": [
+        54.16345,
+        -108.3928
+      ],
+      "min_year": 1945,
+      "max_year": 2026,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "1945.1.1",
+          "name": "Kōpahāwakēnam"
+        },
+        {
+          "date": "1990.1.1",
+          "name": "Flying Dust First Nation 105"
+        }
+      ],
+      "duplicate_name_flagged": "Kōpahāwakēnam"
+    },
+    {
+      "key": "Flying Dust First Nation 105D-Canada",
+      "shard_name": "Flying Dust First Nation 105D",
+      "country": "Canada",
+      "region": "can_saskatchewan",
+      "coords_lat_lng": [
+        54.1489,
+        -108.22585
+      ],
+      "min_year": 1910,
+      "max_year": 2025,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "1910.1.1",
+          "name": "Kōpahāwakēnam"
+        },
+        {
+          "date": "1990.1.1",
+          "name": "Flying Dust First Nation 105D"
+        }
+      ],
+      "duplicate_name_flagged": "Kōpahāwakēnam"
+    },
+    {
+      "key": "Flying Dust First Nation 105F-Canada",
+      "shard_name": "Flying Dust First Nation 105F",
+      "country": "Canada",
+      "region": "can_saskatchewan",
+      "coords_lat_lng": [
+        54.04946,
+        -108.07519
+      ],
+      "min_year": 1950,
+      "max_year": 2025,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "1950.1.1",
+          "name": "Kōpahāwakēnam"
+        },
+        {
+          "date": "1990.1.1",
+          "name": "Flying Dust First Nation 105F"
+        }
+      ],
+      "duplicate_name_flagged": "Kōpahāwakēnam"
+    },
+    {
+      "key": "Pueblo Pato-Arizona",
+      "shard_name": "Pueblo Pato",
+      "country": "Arizona",
+      "region": "az_lower_colorado_sonoran",
+      "coords_lat_lng": [
+        34.18682,
+        -112.06193
+      ],
+      "min_year": 400,
+      "max_year": 1600,
+      "other_names": [
+        "Verde/New River"
+      ],
+      "current_historical_names": [
+        {
+          "date": "400.1.1",
+          "name": "Kwevkepaya"
+        }
+      ],
+      "duplicate_name_flagged": "Kwevkepaya"
+    },
+    {
+      "key": "Brooklyn Basin-Arizona",
+      "shard_name": "Brooklyn Basin",
+      "country": "Arizona",
+      "region": "az_salt_verde_phoenix_hohokam",
+      "coords_lat_lng": [
+        34.08696,
+        -111.89464
+      ],
+      "min_year": 400,
+      "max_year": 1600,
+      "other_names": [
+        "Verde/New River"
+      ],
+      "current_historical_names": [
+        {
+          "date": "400.1.1",
+          "name": "Kwevkepaya"
+        }
+      ],
+      "duplicate_name_flagged": "Kwevkepaya"
+    },
+    {
+      "key": "Los Hermanos-Arizona",
+      "shard_name": "Los Hermanos",
+      "country": "Arizona",
+      "region": "az_salt_verde_phoenix_hohokam",
+      "coords_lat_lng": [
+        33.96845,
+        -111.20989
+      ],
+      "min_year": 400,
+      "max_year": 1600,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "400.1.1",
+          "name": "Kwevkepaya"
+        }
+      ],
+      "duplicate_name_flagged": "Kwevkepaya"
+    },
+    {
+      "key": "Casa Bandolero Complex-Arizona",
+      "shard_name": "Casa Bandolero Complex",
+      "country": "Arizona",
+      "region": "az_salt_verde_phoenix_hohokam",
+      "coords_lat_lng": [
+        33.7692,
+        -111.22672
+      ],
+      "min_year": 400,
+      "max_year": 1600,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "400.1.1",
+          "name": "Kwevkepaya"
+        }
+      ],
+      "duplicate_name_flagged": "Kwevkepaya"
+    }
+  ]
+}

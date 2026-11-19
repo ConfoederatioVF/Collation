@@ -1,0 +1,626 @@
+{
+  "batch_index": 18,
+  "clusters": [
+    "mnisose",
+    "beotuk"
+  ],
+  "countries": [
+    "Canada",
+    "Newfoundland and Labrador",
+    "South Dakota"
+  ],
+  "count": 21,
+  "forbidden_already_used_in_region": [
+    "'Yalis",
+    "Aazhoodenaang",
+    "Aberdeen",
+    "Achelacy",
+    "Agar",
+    "Ahjimsek",
+    "Ahkwesáhsne",
+    "Ahousaht",
+    "Ajoasté",
+    "Akaamaschii",
+    "Akaska",
+    "Akičhita Wakpála",
+    "Akpatordjuark",
+    "Akulivik",
+    "Akwesasne",
+    "Alarnerk",
+    "Albee",
+    "Alcester",
+    "Alexander",
+    "Alexandria",
+    "Allentown",
+    "Alpena",
+    "Altamont",
+    "Alámex",
+    "Amiskwaciya",
+    "Andover",
+    "Angostura",
+    "Aondironon",
+    "Apitipi",
+    "Apitipik",
+    "Apvitok",
+    "Ardmore",
+    "Arendarhonon",
+    "Argentenay",
+    "Argenteuil",
+    "Armour",
+    "Artas",
+    "Arvia'juaq",
+    "Arviat",
+    "Arviligjuaq",
+    "Aschkibokahn",
+    "Ashland Heights",
+    "Ashton",
+    "Asinīpwāt-sīpiy",
+    "Astoria",
+    "Ataronchronon",
+    "Attawapiskat",
+    "Attignawantan",
+    "Attigneenongnahac",
+    "Aujuittuq",
+    "Aulatsivik",
+    "Aulavik",
+    "Aupaluk",
+    "Aurora",
+    "Aurora Center",
+    "Avayalik",
+    "Avon",
+    "Avonlea",
+    "Avvajja",
+    "Baawingashing",
+    "Badger",
+    "Baie-Rouge",
+    "Baie-Saint-Paul",
+    "Baie-du-Febvre",
+    "Baltic",
+    "Bancroft",
+    "Batiscan",
+    "Bay Roberts",
+    "Bay de Verde",
+    "Bayfield",
+    "Bde Hdakíŋyaŋ",
+    "Beaumont",
+    "Beauport",
+    "Beaupré",
+    "Belle Fourche",
+    "Beloeil",
+    "Belvidere",
+    "Benson",
+    "Beresford",
+    "Berthier",
+    "Berthier-en-Bas",
+    "Big Stone",
+    "Big Stone City",
+    "Biigtigong",
+    "Bijou Hills",
+    "Binaawaan",
+    "Bird Cove",
+    "Bison",
+    "Bkejwanong",
+    "Blackfoot",
+    "Blackhawk",
+    "Blanc-Sablon",
+    "Blunt",
+    "Bon Homme Colony",
+    "Bonavista",
+    "Bonesteel",
+    "Boucherville",
+    "Bourg-Royal",
+    "Bowdle",
+    "Box Elder",
+    "Boyd's Cove",
+    "Bradley",
+    "Brandon",
+    "Brandt",
+    "Brant Lake South",
+    "Brentford",
+    "Brentwood Colony",
+    "Bridgewater",
+    "Brigus",
+    "Bristol",
+    "Britton",
+    "Broadland",
+    "Brookings",
+    "Bryant",
+    "Buffalo",
+    "Buffalo Chip",
+    "Buffalo Gap",
+    "Bunibonibee",
+    "Burbank",
+    "Burke"
+  ],
+  "settlements": [
+    {
+      "key": "Walth Bay-South Dakota",
+      "shard_name": "Walth Bay",
+      "country": "South Dakota",
+      "region": "np_middle_missouri_dakotas",
+      "coords_lat_lng": [
+        45.485,
+        -100.375
+      ],
+      "min_year": -6000,
+      "max_year": 1520,
+      "other_names": [
+        "39WW203",
+        "Walworth Multi-Component"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-6000.1.1",
+          "name": "Mníšoše"
+        },
+        {
+          "date": "1450.1.1",
+          "name": "Sahnish"
+        }
+      ],
+      "duplicate_name_flagged": "Mníšoše"
+    },
+    {
+      "key": "Stelzer-South Dakota",
+      "shard_name": "Stelzer",
+      "country": "South Dakota",
+      "region": "np_middle_missouri_dakotas",
+      "coords_lat_lng": [
+        45.435,
+        -100.385
+      ],
+      "min_year": 150,
+      "max_year": 450,
+      "other_names": [
+        "39DW242",
+        "Dewey Sonota-Woodland"
+      ],
+      "current_historical_names": [
+        {
+          "date": "150.1.1",
+          "name": "Mníšoše"
+        }
+      ],
+      "duplicate_name_flagged": "Mníšoše"
+    },
+    {
+      "key": "Chapelle Creek Village-South Dakota",
+      "shard_name": "Chapelle Creek Village",
+      "country": "South Dakota",
+      "region": "np_middle_missouri_dakotas",
+      "coords_lat_lng": [
+        44.2815,
+        -99.881
+      ],
+      "min_year": 1400,
+      "max_year": 1550,
+      "other_names": [
+        "39HU60",
+        "Chapelle Creek Coalescent Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1400.1.1",
+          "name": "Mníšoše"
+        }
+      ],
+      "duplicate_name_flagged": "Mníšoše"
+    },
+    {
+      "key": "Whistling Elk-South Dakota",
+      "shard_name": "Whistling Elk",
+      "country": "South Dakota",
+      "region": "np_middle_missouri_dakotas",
+      "coords_lat_lng": [
+        44.235,
+        -99.945
+      ],
+      "min_year": 1250,
+      "max_year": 1450,
+      "other_names": [
+        "39HU242",
+        "Lake Sharpe Initial Coalescent"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Mníšoše"
+        }
+      ],
+      "duplicate_name_flagged": "Mníšoše"
+    },
+    {
+      "key": "Sommers-South Dakota",
+      "shard_name": "Sommers",
+      "country": "South Dakota",
+      "region": "np_middle_missouri_dakotas",
+      "coords_lat_lng": [
+        44.215,
+        -100.015
+      ],
+      "min_year": 1000,
+      "max_year": 1300,
+      "other_names": [
+        "39ST56",
+        "Stanley Initial Middle Missouri"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1000.1.1",
+          "name": "Mníšoše"
+        }
+      ],
+      "duplicate_name_flagged": "Mníšoše"
+    },
+    {
+      "key": "Over's La Roche-South Dakota",
+      "shard_name": "Over's La Roche",
+      "country": "South Dakota",
+      "region": "np_middle_missouri_dakotas",
+      "coords_lat_lng": [
+        44.205,
+        -99.855
+      ],
+      "min_year": 1460,
+      "max_year": 1600,
+      "other_names": [
+        "39ST9",
+        "La Roche Extended Coalescent"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1460.1.1",
+          "name": "Mníšoše"
+        }
+      ],
+      "duplicate_name_flagged": "Mníšoše"
+    },
+    {
+      "key": "Ketchen-South Dakota",
+      "shard_name": "Ketchen",
+      "country": "South Dakota",
+      "region": "np_middle_missouri_dakotas",
+      "coords_lat_lng": [
+        44.195,
+        -99.965
+      ],
+      "min_year": 1200,
+      "max_year": 1480,
+      "other_names": [
+        "39ST223",
+        "Big Bend Extended Middle Missouri"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Mníšoše"
+        }
+      ],
+      "duplicate_name_flagged": "Mníšoše"
+    },
+    {
+      "key": "Durkin-South Dakota",
+      "shard_name": "Durkin",
+      "country": "South Dakota",
+      "region": "np_middle_missouri_dakotas",
+      "coords_lat_lng": [
+        44.185,
+        -99.935
+      ],
+      "min_year": 1200,
+      "max_year": 1420,
+      "other_names": [
+        "39ST238",
+        "Stanley Extended Middle Missouri"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Mníšoše"
+        }
+      ],
+      "duplicate_name_flagged": "Mníšoše"
+    },
+    {
+      "key": "Swanson-South Dakota",
+      "shard_name": "Swanson",
+      "country": "South Dakota",
+      "region": "np_middle_missouri_dakotas",
+      "coords_lat_lng": [
+        43.845,
+        -99.345
+      ],
+      "min_year": 900,
+      "max_year": 1200,
+      "other_names": [
+        "39BR16",
+        "Chamberlain Initial Middle Missouri"
+      ],
+      "current_historical_names": [
+        {
+          "date": "900.1.1",
+          "name": "Mníšoše"
+        }
+      ],
+      "duplicate_name_flagged": "Mníšoše"
+    },
+    {
+      "key": "Chamberlain River Village-South Dakota",
+      "shard_name": "Chamberlain River Village",
+      "country": "South Dakota",
+      "region": "np_middle_missouri_dakotas",
+      "coords_lat_lng": [
+        43.8115,
+        -99.331
+      ],
+      "min_year": 1400,
+      "max_year": 1550,
+      "other_names": [
+        "39BR1",
+        "Chamberlain Terrace Earthlodge Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1400.1.1",
+          "name": "Mníšoše"
+        }
+      ],
+      "duplicate_name_flagged": "Mníšoše"
+    },
+    {
+      "key": "Arp-South Dakota",
+      "shard_name": "Arp",
+      "country": "South Dakota",
+      "region": "np_middle_missouri_dakotas",
+      "coords_lat_lng": [
+        43.655,
+        -99.325
+      ],
+      "min_year": 400,
+      "max_year": 1150,
+      "other_names": [
+        "39BR101",
+        "Brule Woodland-Plains Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "400.1.1",
+          "name": "Mníšoše"
+        }
+      ],
+      "duplicate_name_flagged": "Mníšoše"
+    },
+    {
+      "key": "Gould-Canada",
+      "shard_name": "Gould",
+      "country": "Canada",
+      "region": "mar_newfoundland_beothuk_st_pierre",
+      "coords_lat_lng": [
+        50.6985,
+        -57.3415
+      ],
+      "min_year": -3000,
+      "max_year": 500,
+      "other_names": [
+        "EeBi-42",
+        "Port au Choix Recent Indian"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-3000.1.1",
+          "name": "Beothuk"
+        }
+      ],
+      "duplicate_name_flagged": "Beothuk"
+    },
+    {
+      "key": "Curtis-Canada",
+      "shard_name": "Curtis",
+      "country": "Canada",
+      "region": "mar_newfoundland_beothuk_st_pierre",
+      "coords_lat_lng": [
+        49.6545,
+        -54.7645
+      ],
+      "min_year": -2000,
+      "max_year": -1500,
+      "other_names": [
+        "DjAq-1",
+        "Twillingate Maritime Archaic"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-2000.1.1",
+          "name": "Beothuk"
+        }
+      ],
+      "duplicate_name_flagged": "Beothuk"
+    },
+    {
+      "key": "Boyd's Cove-Canada_2",
+      "shard_name": "Boyd's Cove",
+      "country": "Canada",
+      "region": "mar_newfoundland_beothuk_st_pierre",
+      "coords_lat_lng": [
+        49.4433,
+        -54.6575
+      ],
+      "min_year": 1000,
+      "max_year": 1600,
+      "other_names": [
+        "DiAp-3",
+        "Notre Dame Bay Beothuk",
+        "Notre Dame Bay",
+        "Beothuk"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1000.1.1",
+          "name": "Beothuk"
+        }
+      ],
+      "duplicate_name_flagged": "Beothuk"
+    },
+    {
+      "key": "Exploits-Canada",
+      "shard_name": "Exploits",
+      "country": "Canada",
+      "region": "cc1_newfoundland_labrador_st_pierre",
+      "coords_lat_lng": [
+        49.14994,
+        -55.34819
+      ],
+      "min_year": 1650,
+      "max_year": 1857,
+      "other_names": [
+        "Exploits River",
+        "Beothuk Exploits"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1650.1.1",
+          "name": "Beothuk"
+        },
+        {
+          "date": "1829.1.1",
+          "name": "Exploits"
+        }
+      ],
+      "duplicate_name_flagged": "Beothuk"
+    },
+    {
+      "key": "Beaches-Canada",
+      "shard_name": "Beaches",
+      "country": "Canada",
+      "region": "mar_newfoundland_beothuk_st_pierre",
+      "coords_lat_lng": [
+        48.6497,
+        -53.1144
+      ],
+      "min_year": -3000,
+      "max_year": 1400,
+      "other_names": [
+        "DeAk-1",
+        "Bonavista Bay Beothuk and Archaic"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-3000.1.1",
+          "name": "Beothuk"
+        }
+      ],
+      "duplicate_name_flagged": "Beothuk"
+    },
+    {
+      "key": "Ferryland Pre-Contact-Canada",
+      "shard_name": "Ferryland Pre-Contact",
+      "country": "Canada",
+      "region": "mar_newfoundland_beothuk_st_pierre",
+      "coords_lat_lng": [
+        47.0245,
+        -52.8785
+      ],
+      "min_year": 1400,
+      "max_year": 1600,
+      "other_names": [
+        "CgAf-2",
+        "Avalon Peninsula Pre-Contact Beothuk"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1400.1.1",
+          "name": "Beothuk"
+        }
+      ],
+      "duplicate_name_flagged": "Beothuk"
+    },
+    {
+      "key": "Cape Cove Fogo Town-Newfoundland and Labrador",
+      "shard_name": "Cape Cove Fogo Town",
+      "country": "Newfoundland and Labrador",
+      "region": "mar_newfoundland_beothuk_st_pierre",
+      "coords_lat_lng": [
+        49.7167,
+        -54.2
+      ],
+      "min_year": 1300,
+      "max_year": 1580,
+      "other_names": [
+        "Fogo Island Beothuk Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1300.1.1",
+          "name": "Beothuk"
+        }
+      ],
+      "duplicate_name_flagged": "Beothuk"
+    },
+    {
+      "key": "Boyd's Cove Beothuk Capital-Newfoundland and Labrador",
+      "shard_name": "Boyd's Cove Beothuk Capital",
+      "country": "Newfoundland and Labrador",
+      "region": "mar_newfoundland_beothuk_st_pierre",
+      "coords_lat_lng": [
+        49.4667,
+        -54.65
+      ],
+      "min_year": 1200,
+      "max_year": 1580,
+      "other_names": [
+        "Boyd's Cove Oval Pit Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Beothuk"
+        }
+      ],
+      "duplicate_name_flagged": "Beothuk"
+    },
+    {
+      "key": "Beaches Caribou House Town-Newfoundland and Labrador",
+      "shard_name": "Beaches Caribou House Town",
+      "country": "Newfoundland and Labrador",
+      "region": "mar_newfoundland_beothuk_st_pierre",
+      "coords_lat_lng": [
+        48.6667,
+        -53.8667
+      ],
+      "min_year": 200,
+      "max_year": 1300,
+      "other_names": [
+        "Bonavista Bay Recent Indian Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Beothuk"
+        }
+      ],
+      "duplicate_name_flagged": "Beothuk"
+    },
+    {
+      "key": "Russell's Point Winter Town-Newfoundland and Labrador",
+      "shard_name": "Russell's Point Winter Town",
+      "country": "Newfoundland and Labrador",
+      "region": "mar_newfoundland_beothuk_st_pierre",
+      "coords_lat_lng": [
+        47.5833,
+        -53.5667
+      ],
+      "min_year": 1250,
+      "max_year": 1580,
+      "other_names": [
+        "Trinity Bay Beothuk Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Beothuk"
+        }
+      ],
+      "duplicate_name_flagged": "Beothuk"
+    }
+  ]
+}

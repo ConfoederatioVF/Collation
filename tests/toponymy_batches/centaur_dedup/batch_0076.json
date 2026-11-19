@@ -1,0 +1,697 @@
+{
+  "batch_index": 76,
+  "clusters": [
+    "makabn",
+    "makizitawakpa",
+    "makotcidedontipi",
+    "makpak",
+    "makuhadokado",
+    "makyaya",
+    "mancaug",
+    "manomet",
+    "matagami",
+    "matah",
+    "mayaimi",
+    "mayeye"
+  ],
+  "countries": [
+    "Alberta",
+    "Canada",
+    "Florida",
+    "Massachusetts",
+    "Nevada",
+    "New Mexico",
+    "North Dakota",
+    "Ontario",
+    "Prince Edward Island",
+    "South Dakota",
+    "Texas"
+  ],
+  "count": 24,
+  "forbidden_already_used_in_region": [
+    "'Yalis",
+    "A'ts'in'a",
+    "A'ts'ina",
+    "A:shiwi",
+    "Aazhoodenaang",
+    "Aberdeen",
+    "Abó",
+    "Achelacy",
+    "Achiya: Dek'yapbow'a",
+    "Acuera",
+    "Adams",
+    "Addison",
+    "Aga'idökadö",
+    "Aga'ipanadokado",
+    "Aga'ipañinadökadö",
+    "Agai-dika-a",
+    "Agaidika",
+    "Agaidüka",
+    "Agaipah",
+    "Agar",
+    "Agawam",
+    "Agnes",
+    "Ahjimsek",
+    "Ahkwesáhsne",
+    "Ahousaht",
+    "Aibapaa",
+    "Ais",
+    "Ajoasté",
+    "Akaamaschii",
+    "Akaska",
+    "Akičhita Wakpála",
+    "Akokisa",
+    "Akpatordjuark",
+    "Akulivik",
+    "Akwałina",
+    "Akwesasne",
+    "Alamo",
+    "Alamogordo Army Airfield",
+    "Alarnerk",
+    "Albee",
+    "Alcester",
+    "Alexander",
+    "Alexandria",
+    "Alice",
+    "Allentown",
+    "Almont",
+    "Alpena",
+    "Alsen",
+    "Altamont",
+    "Alámex",
+    "Ambrose",
+    "Amenia",
+    "Amidon",
+    "Amiskwaciy",
+    "Amiskwaciya",
+    "Amoxiumqua",
+    "Anamoose",
+    "Andover",
+    "Anepeminan",
+    "Aneta",
+    "Angostura",
+    "Anhaica",
+    "Aniibiminani-ziibi",
+    "Annasnappet",
+    "Antler",
+    "Aondironon",
+    "Apalache",
+    "Apitipi",
+    "Apitipik",
+    "Aptucxet",
+    "Apvitok",
+    "Aquinnah",
+    "Aranama",
+    "Ardmore",
+    "Ardoch",
+    "Arendarhonon",
+    "Argentenay",
+    "Argenteuil",
+    "Argusville",
+    "Armour",
+    "Arnegard",
+    "Artas",
+    "Arthur",
+    "Arvia'juaq",
+    "Arviat",
+    "Arviligjuaq",
+    "Aschkibokahn",
+    "Ashland Heights",
+    "Ashley",
+    "Ashton",
+    "Asile",
+    "Asiniskaw Sîpîsis",
+    "Asinīpwāt-sīpiy",
+    "Astialakwa",
+    "Astoria",
+    "Ataronchronon",
+    "Atonontrataronon",
+    "Atripuy",
+    "Atsakudokwa",
+    "Atsee Nitsaa",
+    "Atsinna",
+    "Attawapiskat",
+    "Attignawantan",
+    "Attigneenongnahac",
+    "Aubrey",
+    "Auia",
+    "Aujuittuq",
+    "Aulatsivik",
+    "Aulavik",
+    "Aupaluk",
+    "Aurora",
+    "Aurora Center",
+    "Avayalik",
+    "Avon",
+    "Avonlea",
+    "Avvajja",
+    "Awadi Aguraawi",
+    "Awatixa",
+    "Awatíxa",
+    "Awaxawi"
+  ],
+  "settlements": [
+    {
+      "key": "Majorville River Village-Alberta",
+      "shard_name": "Majorville River Village",
+      "country": "Alberta",
+      "region": "pr_foothills_bow_upper_saskatchewan",
+      "coords_lat_lng": [
+        50.5333,
+        -112.4333
+      ],
+      "min_year": -800,
+      "max_year": 1100,
+      "other_names": [
+        "Majorville Bow River Habitation"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-800.1.1",
+          "name": "Makhabn"
+        }
+      ],
+      "duplicate_name_flagged": "Makhabn"
+    },
+    {
+      "key": "Bow Island Valley Village-Alberta",
+      "shard_name": "Bow Island Valley Village",
+      "country": "Alberta",
+      "region": "pr_south_saskatchewan_palliser_steppe",
+      "coords_lat_lng": [
+        49.8667,
+        -111.3667
+      ],
+      "min_year": 400,
+      "max_year": 1400,
+      "other_names": [
+        "Bow Island Confluence Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "400.1.1",
+          "name": "Makhabn"
+        }
+      ],
+      "duplicate_name_flagged": "Makhabn"
+    },
+    {
+      "key": "White River Mouth Village-South Dakota",
+      "shard_name": "White River Mouth Village",
+      "country": "South Dakota",
+      "region": "np_middle_missouri_dakotas",
+      "coords_lat_lng": [
+        43.761,
+        -99.3215
+      ],
+      "min_year": 1350,
+      "max_year": 1500,
+      "other_names": [
+        "39LM23",
+        "White River Confluence Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1350.1.1",
+          "name": "Makȟízita Wakpá"
+        }
+      ],
+      "duplicate_name_flagged": "Makȟízita Wakpá"
+    },
+    {
+      "key": "White River-South Dakota",
+      "shard_name": "White River",
+      "country": "South Dakota",
+      "region": "usa_south_dakota",
+      "coords_lat_lng": [
+        43.56707,
+        -100.74487
+      ],
+      "min_year": 1886,
+      "max_year": 2026,
+      "other_names": [
+        "White River city"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1886.1.1",
+          "name": "Makȟízita Wakpá"
+        },
+        {
+          "date": "1911.1.1",
+          "name": "White River"
+        }
+      ],
+      "duplicate_name_flagged": "Makȟízita Wakpá"
+    },
+    {
+      "key": "Twin Fawns-Canada",
+      "shard_name": "Twin Fawns",
+      "country": "Canada",
+      "region": "cc1_western_prairies_verendrye",
+      "coords_lat_lng": [
+        49.425,
+        -100.705
+      ],
+      "min_year": 1480,
+      "max_year": 1600,
+      "other_names": [
+        "DiMe-23",
+        "Lauder Sandhills Mortlach"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1480.1.1",
+          "name": "Makotchi-Ded Dontipi"
+        }
+      ],
+      "duplicate_name_flagged": "Makotchi-Ded Dontipi"
+    },
+    {
+      "key": "Jackson-Canada",
+      "shard_name": "Jackson",
+      "country": "Canada",
+      "region": "cc1_western_prairies_verendrye",
+      "coords_lat_lng": [
+        49.405,
+        -100.685
+      ],
+      "min_year": 1450,
+      "max_year": 1600,
+      "other_names": [
+        "DiMe-17",
+        "Lauder Sandhills Vickers"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1450.1.1",
+          "name": "Makotchi-Ded Dontipi"
+        }
+      ],
+      "duplicate_name_flagged": "Makotchi-Ded Dontipi"
+    },
+    {
+      "key": "Malpeque-Canada",
+      "shard_name": "Malpeque",
+      "country": "Canada",
+      "region": "mar_mikmaki_ns_pei_cape_breton",
+      "coords_lat_lng": [
+        46.54167,
+        -63.875
+      ],
+      "min_year": 500,
+      "max_year": 1500,
+      "other_names": [
+        "Epektwik",
+        "Hog Island Pitawelkek"
+      ],
+      "current_historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Makpaak"
+        }
+      ],
+      "duplicate_name_flagged": "Makpaak"
+    },
+    {
+      "key": "Malpeque Bay Capital-Prince Edward Island",
+      "shard_name": "Malpeque Bay Capital",
+      "country": "Prince Edward Island",
+      "region": "mar_mikmaki_ns_pei_cape_breton",
+      "coords_lat_lng": [
+        46.5333,
+        -63.7
+      ],
+      "min_year": 500,
+      "max_year": 1480,
+      "other_names": [
+        "Princetown Mi'kmaw Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Makpaak"
+        }
+      ],
+      "duplicate_name_flagged": "Makpaak"
+    },
+    {
+      "key": "Mill City Humboldt Center-Nevada",
+      "shard_name": "Mill City Humboldt Center",
+      "country": "Nevada",
+      "region": "gb_humboldt_lahontan_west",
+      "coords_lat_lng": [
+        40.6833,
+        -118.0667
+      ],
+      "min_year": 300,
+      "max_year": 1400,
+      "other_names": [
+        "Mill City Valley Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "300.1.1",
+          "name": "Makuhadökadö"
+        }
+      ],
+      "duplicate_name_flagged": "Makuhadökadö"
+    },
+    {
+      "key": "Rye Patch Humboldt Town-Nevada",
+      "shard_name": "Rye Patch Humboldt Town",
+      "country": "Nevada",
+      "region": "gb_humboldt_lahontan_west",
+      "coords_lat_lng": [
+        40.4667,
+        -118.3167
+      ],
+      "min_year": 200,
+      "max_year": 1350,
+      "other_names": [
+        "Rye Patch Reservoir Prehistoric Center"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Makuhadökadö"
+        }
+      ],
+      "duplicate_name_flagged": "Makuhadökadö"
+    },
+    {
+      "key": "Tom's Rock-New Mexico",
+      "shard_name": "Tom's Rock",
+      "country": "New Mexico",
+      "region": "rg_san_luis_upper_pueblos",
+      "coords_lat_lng": [
+        34.5003,
+        -108.24203
+      ],
+      "min_year": 300,
+      "max_year": 1600,
+      "other_names": [
+        "Mariana Mesa/Quemado"
+      ],
+      "current_historical_names": [
+        {
+          "date": "300.1.1",
+          "name": "Ma'k'yay'a"
+        }
+      ],
+      "duplicate_name_flagged": "Ma'k'yay'a"
+    },
+    {
+      "key": "Cerro Pomo-New Mexico",
+      "shard_name": "Cerro Pomo",
+      "country": "New Mexico",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        34.45246,
+        -108.79808
+      ],
+      "min_year": 300,
+      "max_year": 1400,
+      "other_names": [
+        "Mariana Mesa/Quemado"
+      ],
+      "current_historical_names": [
+        {
+          "date": "300.1.1",
+          "name": "Maʼkʼyayʼa"
+        }
+      ],
+      "duplicate_name_flagged": "Maʼkʼyayʼa"
+    },
+    {
+      "key": "Manchaug Nipmuc Village-Massachusetts",
+      "shard_name": "Manchaug Nipmuc Village",
+      "country": "Massachusetts",
+      "region": "ne_merrimack_massachusetts_bay",
+      "coords_lat_lng": [
+        42.1215,
+        -71.781
+      ],
+      "min_year": 1500,
+      "max_year": 1600,
+      "other_names": [
+        "Sutton Lake Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1500.1.1",
+          "name": "Manchaug"
+        }
+      ],
+      "duplicate_name_flagged": "Manchaug"
+    },
+    {
+      "key": "Manchaug-Massachusetts",
+      "shard_name": "Manchaug",
+      "country": "Massachusetts",
+      "region": "ne_merrimack_massachusetts_bay",
+      "coords_lat_lng": [
+        42.1045,
+        -71.7512
+      ],
+      "min_year": 1300,
+      "max_year": 1600,
+      "other_names": [
+        "Maanexit",
+        "Sutton Nipmuc"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1300.1.1",
+          "name": "Manchaug"
+        }
+      ],
+      "duplicate_name_flagged": "Manchaug"
+    },
+    {
+      "key": "Manomet Wampanoag Town-Massachusetts",
+      "shard_name": "Manomet Wampanoag Town",
+      "country": "Massachusetts",
+      "region": "ca1_massachusetts_bay_maine",
+      "coords_lat_lng": [
+        41.9151,
+        -70.5551
+      ],
+      "min_year": 1620,
+      "max_year": 1675,
+      "other_names": [
+        "Plymouth County Wampanoag Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1620.1.1",
+          "name": "Manomet"
+        }
+      ],
+      "duplicate_name_flagged": "Manomet"
+    },
+    {
+      "key": "Manomet Wampanoag Town-Massachusetts_2",
+      "shard_name": "Manomet Wampanoag Town",
+      "country": "Massachusetts",
+      "region": "ne_merrimack_massachusetts_bay",
+      "coords_lat_lng": [
+        41.751,
+        -70.5815
+      ],
+      "min_year": 1500,
+      "max_year": 1600,
+      "other_names": [
+        "Bourne Wampanoag Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1500.1.1",
+          "name": "Manomet"
+        }
+      ],
+      "duplicate_name_flagged": "Manomet"
+    },
+    {
+      "key": "Matagami-Canada_2",
+      "shard_name": "Matagami",
+      "country": "Canada",
+      "region": "cc1_ruperts_land_hbc",
+      "coords_lat_lng": [
+        49.7583,
+        -77.6219
+      ],
+      "min_year": -1200,
+      "max_year": 1550,
+      "other_names": [
+        "Bell-Nottaway Confluence",
+        "DcGi-1"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-1200.1.1",
+          "name": "Matagami"
+        }
+      ],
+      "duplicate_name_flagged": "Matagami"
+    },
+    {
+      "key": "Smooth Rock Falls Mattagami Town-Ontario",
+      "shard_name": "Smooth Rock Falls Mattagami Town",
+      "country": "Ontario",
+      "region": "hb_hudson_james_lowlands_cree",
+      "coords_lat_lng": [
+        49.2833,
+        -81.6333
+      ],
+      "min_year": 400,
+      "max_year": 1400,
+      "other_names": [
+        "Mattagami River Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "400.1.1",
+          "name": "Mattagami"
+        }
+      ],
+      "duplicate_name_flagged": "Mattagami"
+    },
+    {
+      "key": "Cross Ranch Hendrickson III-North Dakota",
+      "shard_name": "Cross Ranch Hendrickson III",
+      "country": "North Dakota",
+      "region": "np_middle_missouri_dakotas",
+      "coords_lat_lng": [
+        47.217,
+        -101.005
+      ],
+      "min_year": 1250,
+      "max_year": 1450,
+      "other_names": [
+        "32OL83",
+        "Cross Ranch Extended Middle Missouri"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Mátąh"
+        }
+      ],
+      "duplicate_name_flagged": "Mátąh"
+    },
+    {
+      "key": "Shermer Earthlodge Village-North Dakota",
+      "shard_name": "Shermer Earthlodge Village",
+      "country": "North Dakota",
+      "region": "np_middle_missouri_dakotas",
+      "coords_lat_lng": [
+        46.5115,
+        -100.571
+      ],
+      "min_year": 1250,
+      "max_year": 1350,
+      "other_names": [
+        "32EM10",
+        "Shermer Middle Missouri Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Mátąh"
+        }
+      ],
+      "duplicate_name_flagged": "Mátąh"
+    },
+    {
+      "key": "Fort Center-Florida",
+      "shard_name": "Fort Center",
+      "country": "Florida",
+      "region": "se_peninsular_florida_apalachicola",
+      "coords_lat_lng": [
+        26.9507,
+        -81.1364
+      ],
+      "min_year": -400,
+      "max_year": 1400,
+      "other_names": [
+        "8GL13"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-400.1.1",
+          "name": "Mayaimi"
+        }
+      ],
+      "duplicate_name_flagged": "Mayaimi"
+    },
+    {
+      "key": "Big Mound City-Florida",
+      "shard_name": "Big Mound City",
+      "country": "Florida",
+      "region": "se_peninsular_florida_apalachicola",
+      "coords_lat_lng": [
+        26.942,
+        -80.491
+      ],
+      "min_year": 600,
+      "max_year": 1000,
+      "other_names": [
+        "Big Mound City"
+      ],
+      "current_historical_names": [
+        {
+          "date": "600.1.1",
+          "name": "Mayaimi"
+        }
+      ],
+      "duplicate_name_flagged": "Mayaimi"
+    },
+    {
+      "key": "Loeve-Fox-Texas",
+      "shard_name": "Loeve-Fox",
+      "country": "Texas",
+      "region": "sp_brazos_colorado_edwards",
+      "coords_lat_lng": [
+        30.66,
+        -97.41
+      ],
+      "min_year": -6500,
+      "max_year": 1100,
+      "other_names": [
+        "41WM133",
+        "San Gabriel River Cemetery"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-6500.1.1",
+          "name": "Mayeye"
+        }
+      ],
+      "duplicate_name_flagged": "Mayeye"
+    },
+    {
+      "key": "Berdoll-Texas",
+      "shard_name": "Berdoll",
+      "country": "Texas",
+      "region": "sp_gulf_coast_nueces_karankawa",
+      "coords_lat_lng": [
+        30.18,
+        -97.63
+      ],
+      "min_year": -7400,
+      "max_year": 700,
+      "other_names": [
+        "41TV2125",
+        "Colorado River Terrace"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-7400.1.1",
+          "name": "Mayeye"
+        }
+      ],
+      "duplicate_name_flagged": "Mayeye"
+    }
+  ]
+}

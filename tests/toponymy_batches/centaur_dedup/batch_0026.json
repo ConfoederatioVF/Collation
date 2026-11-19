@@ -1,0 +1,693 @@
+{
+  "batch_index": 26,
+  "clusters": [
+    "tsalagi",
+    "tseyi",
+    "wawabiganojizibi"
+  ],
+  "countries": [
+    "Arizona",
+    "Colorado",
+    "North Dakota",
+    "Oklahoma",
+    "Tennessee"
+  ],
+  "count": 24,
+  "forbidden_already_used_in_region": [
+    "'Aha Kwahwat",
+    "'Aha Makhav",
+    "'Onk Akimel",
+    "Abangkuyivi",
+    "Adahiilíní",
+    "Adams",
+    "Addison",
+    "Aghaałą́",
+    "Agnes",
+    "Ahagaskiaywa",
+    "Akimel O'odham",
+    "Akwałina",
+    "Alamo",
+    "Alexander",
+    "Ali Waipia",
+    "Alice",
+    "Almont",
+    "Alsen",
+    "Amayeli",
+    "Ambrose",
+    "Amenia",
+    "Amidon",
+    "Amogayunyi",
+    "Amoyi",
+    "Anamoose",
+    "Anepeminan",
+    "Aneta",
+    "Aniibiminani-ziibi",
+    "Anikituwagi",
+    "Aniyunwiya",
+    "Antler",
+    "Anéʼé Tséyiʼ",
+    "Apache Junction",
+    "Apishapa",
+    "Ardoch",
+    "Argusville",
+    "Arnegard",
+    "Arthur",
+    "Ashley",
+    "Awadi Aguraawi",
+    "Awat'ovi",
+    "Awatixa",
+    "Awatovi",
+    "Awatíxa",
+    "Awatʼovi",
+    "Awaxawi",
+    "Awaxáawi",
+    "Awigaxa",
+    "Awáati",
+    "Awígaxa",
+    "Ayr",
+    "Ayuhwasi",
+    "Babad Do'ag",
+    "Babocomari",
+    "Balfour",
+    "Balta",
+    "Bantry",
+    "Barney",
+    "Bartlett",
+    "Barton",
+    "Bathgate",
+    "Bde Psíŋ",
+    "Beach",
+    "Belfield",
+    "Benedict",
+    "Bentinck",
+    "Bergen",
+    "Berlin",
+    "Berthold",
+    "Berwick",
+    "Besh-Ba-Gowah",
+    "Beulah",
+    "Beʼekʼid Baa Ahoodzání",
+    "Bidaʼhóóchiiʼ",
+    "Bideʼyóó",
+    "Biiniiniicie",
+    "Binford",
+    "Bisbee",
+    "Blacktail",
+    "Blaine",
+    "Bledsoe's Lick",
+    "Bottineau",
+    "Bowbells",
+    "Bowdon",
+    "Bowman",
+    "Braddock",
+    "Briarwood",
+    "Brinsmade",
+    "Brocket",
+    "Buchanan",
+    "Bucyrus",
+    "Buffalo",
+    "Burlington",
+    "Buxton",
+    "Béésh Baa Gowah",
+    "Caledonia",
+    "Calio",
+    "Calvin",
+    "Cando",
+    "Cannon Ball",
+    "Canton",
+    "Captain's Landing",
+    "Carpio",
+    "Carrington",
+    "Carson",
+    "Casselton",
+    "Cathay",
+    "Cavalier",
+    "Cayuga",
+    "Cemamagi Du'ag",
+    "Center",
+    "Central City",
+    "Chahta Yakni",
+    "Chakpahu",
+    "Chezhinchotah",
+    "Chikasha",
+    "Chikashsha",
+    "Chiricahui",
+    "Chiwi Kawi",
+    "Chodistaas"
+  ],
+  "settlements": [
+    {
+      "key": "Deer Creek-Oklahoma",
+      "shard_name": "Deer Creek",
+      "country": "Oklahoma",
+      "region": "usa_oklahoma",
+      "coords_lat_lng": [
+        36.80668,
+        -97.51948
+      ],
+      "min_year": 1850,
+      "max_year": 2026,
+      "other_names": [
+        "Deer Creek town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1850.1.1",
+          "name": "Tsalagi"
+        },
+        {
+          "date": "1899.1.1",
+          "name": "Deer Creek"
+        }
+      ],
+      "duplicate_name_flagged": "Tsalagi"
+    },
+    {
+      "key": "Cherokee-Oklahoma",
+      "shard_name": "Cherokee",
+      "country": "Oklahoma",
+      "region": "usa_oklahoma",
+      "coords_lat_lng": [
+        36.75068,
+        -98.35773
+      ],
+      "min_year": 1850,
+      "max_year": 2026,
+      "other_names": [
+        "Cherokee city"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1850.1.1",
+          "name": "Tsalagi"
+        },
+        {
+          "date": "1901.1.1",
+          "name": "Cherokee"
+        }
+      ],
+      "duplicate_name_flagged": "Tsalagi"
+    },
+    {
+      "key": "Ponca City-Oklahoma",
+      "shard_name": "Ponca City",
+      "country": "Oklahoma",
+      "region": "",
+      "coords_lat_lng": [
+        36.72104,
+        -97.06844
+      ],
+      "min_year": 1850,
+      "max_year": 2026,
+      "other_names": [
+        "Ponca City city"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1850.1.1",
+          "name": "Tsalagi"
+        },
+        {
+          "date": "1878.1.1",
+          "name": "Páⁿka"
+        },
+        {
+          "date": "1893.9.16",
+          "name": "Ponca City"
+        }
+      ],
+      "duplicate_name_flagged": "Tsalagi"
+    },
+    {
+      "key": "Pawnee-Oklahoma",
+      "shard_name": "Pawnee",
+      "country": "Oklahoma",
+      "region": "usa_oklahoma",
+      "coords_lat_lng": [
+        36.35148,
+        -96.8005
+      ],
+      "min_year": 1850,
+      "max_year": 2026,
+      "other_names": [
+        "Pawnee city"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1850.1.1",
+          "name": "Tsalagi"
+        },
+        {
+          "date": "1875.1.1",
+          "name": "Chaticks si Chaticks"
+        },
+        {
+          "date": "1893.9.16",
+          "name": "Pawnee"
+        }
+      ],
+      "duplicate_name_flagged": "Tsalagi"
+    },
+    {
+      "key": "Sparta Calfkiller Town-Tennessee",
+      "shard_name": "Sparta Calfkiller Town",
+      "country": "Tennessee",
+      "region": "oh_kentucky_cumberland_green",
+      "coords_lat_lng": [
+        35.931,
+        -85.4615
+      ],
+      "min_year": 1250,
+      "max_year": 1350,
+      "other_names": [
+        "40WH2",
+        "Calfkiller River Habitation Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Tsalagi"
+        }
+      ],
+      "duplicate_name_flagged": "Tsalagi"
+    },
+    {
+      "key": "Woodbury Stones River Village-Tennessee",
+      "shard_name": "Woodbury Stones River Village",
+      "country": "Tennessee",
+      "region": "oh_kentucky_cumberland_green",
+      "coords_lat_lng": [
+        35.8315,
+        -86.071
+      ],
+      "min_year": 1200,
+      "max_year": 1350,
+      "other_names": [
+        "40CN1",
+        "Cannon County Stones River Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Tsalagi"
+        }
+      ],
+      "duplicate_name_flagged": "Tsalagi"
+    },
+    {
+      "key": "Rock Island Caney Fork Village-Tennessee",
+      "shard_name": "Rock Island Caney Fork Village",
+      "country": "Tennessee",
+      "region": "oh_kentucky_cumberland_green",
+      "coords_lat_lng": [
+        35.8015,
+        -85.621
+      ],
+      "min_year": 1200,
+      "max_year": 1350,
+      "other_names": [
+        "40WR1",
+        "Great Falls Caney Fork Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Tsalagi"
+        }
+      ],
+      "duplicate_name_flagged": "Tsalagi"
+    },
+    {
+      "key": "McMinnville Barren Fork Town-Tennessee",
+      "shard_name": "McMinnville Barren Fork Town",
+      "country": "Tennessee",
+      "region": "oh_kentucky_cumberland_green",
+      "coords_lat_lng": [
+        35.681,
+        -85.7715
+      ],
+      "min_year": 1250,
+      "max_year": 1350,
+      "other_names": [
+        "40WR10",
+        "Barren Fork Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Tsalagi"
+        }
+      ],
+      "duplicate_name_flagged": "Tsalagi"
+    },
+    {
+      "key": "Twin Caves Pueblo-Arizona",
+      "shard_name": "Twin Caves Pueblo",
+      "country": "Arizona",
+      "region": "uc_san_juan_four_corners",
+      "coords_lat_lng": [
+        36.77864,
+        -110.47355
+      ],
+      "min_year": 825,
+      "max_year": 1320,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "825.1.1",
+          "name": "Tséyiʼ"
+        }
+      ],
+      "duplicate_name_flagged": "Tséyiʼ"
+    },
+    {
+      "key": "Tower House-Arizona",
+      "shard_name": "Tower House",
+      "country": "Arizona",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        36.71168,
+        -110.52358
+      ],
+      "min_year": 550,
+      "max_year": 1600,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "550.1.1",
+          "name": "Tséyiʼ"
+        }
+      ],
+      "duplicate_name_flagged": "Tséyiʼ"
+    },
+    {
+      "key": "Otherside-Arizona",
+      "shard_name": "Otherside",
+      "country": "Arizona",
+      "region": "uc_san_juan_four_corners",
+      "coords_lat_lng": [
+        36.65195,
+        -110.48044
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Tséyiʼ"
+        }
+      ],
+      "duplicate_name_flagged": "Tséyiʼ"
+    },
+    {
+      "key": "Fireside-Arizona",
+      "shard_name": "Fireside",
+      "country": "Arizona",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        36.54461,
+        -110.46727
+      ],
+      "min_year": 550,
+      "max_year": 1600,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "550.1.1",
+          "name": "Tséyiʼ"
+        }
+      ],
+      "duplicate_name_flagged": "Tséyiʼ"
+    },
+    {
+      "key": "Sliding Rock Ruin-Arizona",
+      "shard_name": "Sliding Rock Ruin",
+      "country": "Arizona",
+      "region": "uc_san_juan_four_corners",
+      "coords_lat_lng": [
+        36.148,
+        -109.442
+      ],
+      "min_year": 1150,
+      "max_year": 1240,
+      "other_names": [
+        "AZ E:12:11"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1150.1.1",
+          "name": "Tséyiʼ"
+        }
+      ],
+      "duplicate_name_flagged": "Tséyiʼ"
+    },
+    {
+      "key": "Canyon de Chelly-Arizona",
+      "shard_name": "Canyon de Chelly",
+      "country": "Arizona",
+      "region": "ca1_far_west_indigenous_1754",
+      "coords_lat_lng": [
+        36.1442,
+        -109.0683
+      ],
+      "min_year": 1754,
+      "max_year": 1783,
+      "other_names": [
+        "Tseyi",
+        "Dinetah Navajo"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1754.1.1",
+          "name": "Tséyiʼ"
+        }
+      ],
+      "duplicate_name_flagged": "Tséyiʼ"
+    },
+    {
+      "key": "Three Turkey House-Arizona",
+      "shard_name": "Three Turkey House",
+      "country": "Arizona",
+      "region": "uc_san_juan_four_corners",
+      "coords_lat_lng": [
+        36.11116,
+        -109.37925
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Tséyiʼ"
+        }
+      ],
+      "duplicate_name_flagged": "Tséyiʼ"
+    },
+    {
+      "key": "Seven Towers-Colorado",
+      "shard_name": "Seven Towers",
+      "country": "Colorado",
+      "region": "uc_san_juan_four_corners",
+      "coords_lat_lng": [
+        37.52191,
+        -109.05755
+      ],
+      "min_year": 920,
+      "max_year": 1280,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "920.1.1",
+          "name": "Tséyiʼ"
+        }
+      ],
+      "duplicate_name_flagged": "Tséyiʼ"
+    },
+    {
+      "key": "Bowbells Habitation Site-North Dakota",
+      "shard_name": "Bowbells Habitation Site",
+      "country": "North Dakota",
+      "region": "enp_souris_devils_lake",
+      "coords_lat_lng": [
+        48.8015,
+        -102.241
+      ],
+      "min_year": 1250,
+      "max_year": 1450,
+      "other_names": [
+        "32BK1",
+        "Burke County Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Waawaabiganoojii-ziibi"
+        }
+      ],
+      "duplicate_name_flagged": "Waawaabiganoojii-ziibi"
+    },
+    {
+      "key": "Willow Creek Souris Village-North Dakota",
+      "shard_name": "Willow Creek Souris Village",
+      "country": "North Dakota",
+      "region": "enp_souris_devils_lake",
+      "coords_lat_lng": [
+        48.601,
+        -100.4015
+      ],
+      "min_year": 1250,
+      "max_year": 1450,
+      "other_names": [
+        "32BT10",
+        "Willow City Habitation"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Waawaabiganoojii-ziibi"
+        }
+      ],
+      "duplicate_name_flagged": "Waawaabiganoojii-ziibi"
+    },
+    {
+      "key": "Carpio Des Lacs Village-North Dakota",
+      "shard_name": "Carpio Des Lacs Village",
+      "country": "North Dakota",
+      "region": "enp_souris_devils_lake",
+      "coords_lat_lng": [
+        48.4415,
+        -101.711
+      ],
+      "min_year": 1200,
+      "max_year": 1400,
+      "other_names": [
+        "32WD25",
+        "Carpio Valley Habitation"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Waawaabiganoojii-ziibi"
+        }
+      ],
+      "duplicate_name_flagged": "Waawaabiganoojii-ziibi"
+    },
+    {
+      "key": "Souris River Bend Village-North Dakota",
+      "shard_name": "Souris River Bend Village",
+      "country": "North Dakota",
+      "region": "enp_souris_devils_lake",
+      "coords_lat_lng": [
+        48.3512,
+        -100.551
+      ],
+      "min_year": 1300,
+      "max_year": 1500,
+      "other_names": [
+        "32MH10",
+        "Mouse River Loop Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1300.1.1",
+          "name": "Waawaabiganoojii-ziibi"
+        }
+      ],
+      "duplicate_name_flagged": "Waawaabiganoojii-ziibi"
+    },
+    {
+      "key": "Towner Souris Settlement-North Dakota",
+      "shard_name": "Towner Souris Settlement",
+      "country": "North Dakota",
+      "region": "enp_souris_devils_lake",
+      "coords_lat_lng": [
+        48.3415,
+        -100.521
+      ],
+      "min_year": 1300,
+      "max_year": 1500,
+      "other_names": [
+        "32MH1",
+        "Towner Sandhills Habitation"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1300.1.1",
+          "name": "Waawaabiganoojii-ziibi"
+        }
+      ],
+      "duplicate_name_flagged": "Waawaabiganoojii-ziibi"
+    },
+    {
+      "key": "Burlington Souris Village-North Dakota",
+      "shard_name": "Burlington Souris Village",
+      "country": "North Dakota",
+      "region": "enp_souris_devils_lake",
+      "coords_lat_lng": [
+        48.271,
+        -101.4215
+      ],
+      "min_year": 1250,
+      "max_year": 1450,
+      "other_names": [
+        "32WD12",
+        "Des Lacs Confluence Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Waawaabiganoojii-ziibi"
+        }
+      ],
+      "duplicate_name_flagged": "Waawaabiganoojii-ziibi"
+    },
+    {
+      "key": "Granville Souris Village-North Dakota",
+      "shard_name": "Granville Souris Village",
+      "country": "North Dakota",
+      "region": "enp_souris_devils_lake",
+      "coords_lat_lng": [
+        48.261,
+        -100.8415
+      ],
+      "min_year": 1200,
+      "max_year": 1400,
+      "other_names": [
+        "32MH18",
+        "Granville Basin Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Waawaabiganoojii-ziibi"
+        }
+      ],
+      "duplicate_name_flagged": "Waawaabiganoojii-ziibi"
+    },
+    {
+      "key": "Minot Souris Terrace-North Dakota",
+      "shard_name": "Minot Souris Terrace",
+      "country": "North Dakota",
+      "region": "enp_souris_devils_lake",
+      "coords_lat_lng": [
+        48.2376,
+        -101.279
+      ],
+      "min_year": -1500,
+      "max_year": 1450,
+      "other_names": [
+        "32WT-MN",
+        "Mouse River Crossing"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-1500.1.1",
+          "name": "Waawaabiganoojii-ziibi"
+        }
+      ],
+      "duplicate_name_flagged": "Waawaabiganoojii-ziibi"
+    }
+  ]
+}

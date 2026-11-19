@@ -1,0 +1,715 @@
+{
+  "batch_index": 2,
+  "clusters": [
+    "kitikitis (part 2)"
+  ],
+  "countries": [
+    "Oklahoma",
+    "Texas"
+  ],
+  "count": 25,
+  "forbidden_already_used_in_region": [
+    "Akokisa",
+    "Aranama",
+    "Aubrey",
+    "Auia",
+    "Bah'hatteno",
+    "Blue Mound",
+    "Caddo Mills",
+    "Camp Hood",
+    "Canocanayest",
+    "Canocanayestatetlo",
+    "Cantona",
+    "Chahta Yakni",
+    "Coapite",
+    "Coaque",
+    "Coco",
+    "Columbia",
+    "Copane",
+    "Cotoname",
+    "Dacate",
+    "El Paso del Norte",
+    "Ervipiame",
+    "Grant",
+    "Guapite",
+    "Guthrie",
+    "Gúlvàu",
+    "Hainai",
+    "Hasinai",
+    "Hillside Acres",
+    "Hinono'ei",
+    "Houston",
+    "Hóma'éóhe",
+    "Iscani",
+    "Ishak",
+    "Iskuli",
+    "Isà-hunu'bi",
+    "Jumano",
+    "Kadohadacho",
+    "Karankawa",
+    "Kirikirʼiːs",
+    "Kitsai",
+    "Kitsash",
+    "Kopano",
+    "Kwahadi",
+    "Kyle",
+    "Káyántinu",
+    "La Bahía",
+    "Lake Cherokee",
+    "Lake Kiowa",
+    "Lakeside City",
+    "Lipscomb",
+    "Malaquite",
+    "Mariame",
+    "Mayeye",
+    "Miami",
+    "Mission Nuestra Señora de la Purísima Concepción de Acuña",
+    "Mission Nuestra Señora del Rosario",
+    "Mission San José y San Miguel de Aguayo",
+    "Mission San Juan Capistrano",
+    "Morristown",
+    "Mound",
+    "Mvskoke",
+    "Naa'dańde",
+    "Nabedache",
+    "Nacao",
+    "Nacogdoche",
+    "Naconiche",
+    "Nadaco",
+    "Nadako",
+    "Naishan Dene",
+    "Nakohodochi",
+    "Nanatsoho",
+    "Nasoni",
+    "Natahe",
+    "Ndee",
+    "Nechawi",
+    "Nolanville",
+    "Nʉmʉnʉʉ",
+    "Nʉmʉnʉʉ Sookobitʉ",
+    "Orcoquisac",
+    "Otomoaco",
+    "Pacoa",
+    "Pacuache",
+    "Pamaque",
+    "Pampopa",
+    "Paslápaane",
+    "Patiri",
+    "Pawnee",
+    "Payaya",
+    "Pilabó",
+    "Presidio San Luis de las Amarillas",
+    "San Antonio Aviation Cadet Center",
+    "San Elceario",
+    "Sana",
+    "Seminole",
+    "Shepherd",
+    "Shiewhibak",
+    "Suma",
+    "Tahlequah",
+    "Tamique",
+    "Tampachoas",
+    "Taovaya",
+    "Taovayas",
+    "Tawakoni",
+    "Tawehash",
+    "Tawéhash",
+    "Teya",
+    "Teyas",
+    "Tickanwa",
+    "Tickanwa·tic",
+    "Tilpacopal",
+    "Titskan",
+    "Titskanwatits",
+    "Tokonohono",
+    "Tsalagi",
+    "Tso-doi-gyata-de-dee",
+    "Tsétsêhéstâhese",
+    "Tza wan pupako",
+    "Villa de San Agustín de Laredo",
+    "Wažáže",
+    "Wehko"
+  ],
+  "settlements": [
+    {
+      "key": "Max Thomas Village-Oklahoma",
+      "shard_name": "Max Thomas Village",
+      "country": "Oklahoma",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "coords_lat_lng": [
+        35.021,
+        -97.8515
+      ],
+      "min_year": 1250,
+      "max_year": 1350,
+      "other_names": [
+        "34GD4",
+        "Max Thomas Washita Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Kitikitiʼsh"
+        }
+      ],
+      "duplicate_name_flagged": "Kitikitiʼsh"
+    },
+    {
+      "key": "Lee Washita Village-Oklahoma",
+      "shard_name": "Lee Washita Village",
+      "country": "Oklahoma",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "coords_lat_lng": [
+        34.801,
+        -97.2515
+      ],
+      "min_year": 1250,
+      "max_year": 1350,
+      "other_names": [
+        "34GV3",
+        "Lee Site"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Kitikitiʼsh"
+        }
+      ],
+      "duplicate_name_flagged": "Kitikitiʼsh"
+    },
+    {
+      "key": "Arthur Washita Village-Oklahoma",
+      "shard_name": "Arthur Washita Village",
+      "country": "Oklahoma",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "coords_lat_lng": [
+        34.781,
+        -97.2215
+      ],
+      "min_year": 1250,
+      "max_year": 1450,
+      "other_names": [
+        "34GV32",
+        "Arthur Earthlodge Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Kitikitiʼsh"
+        }
+      ],
+      "duplicate_name_flagged": "Kitikitiʼsh"
+    },
+    {
+      "key": "Grant Washita Village-Oklahoma",
+      "shard_name": "Grant Washita Village",
+      "country": "Oklahoma",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "coords_lat_lng": [
+        34.7515,
+        -97.201
+      ],
+      "min_year": 1200,
+      "max_year": 1450,
+      "other_names": [
+        "34GV2",
+        "Grant Site"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Kitikitiʼsh"
+        }
+      ],
+      "duplicate_name_flagged": "Kitikitiʼsh"
+    },
+    {
+      "key": "Patton Washita Village-Oklahoma",
+      "shard_name": "Patton Washita Village",
+      "country": "Oklahoma",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "coords_lat_lng": [
+        34.7415,
+        -97.231
+      ],
+      "min_year": 1200,
+      "max_year": 1300,
+      "other_names": [
+        "34GV6",
+        "Patton Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Kitikitiʼsh"
+        }
+      ],
+      "duplicate_name_flagged": "Kitikitiʼsh"
+    },
+    {
+      "key": "Lacy Washita Village-Oklahoma",
+      "shard_name": "Lacy Washita Village",
+      "country": "Oklahoma",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "coords_lat_lng": [
+        34.7215,
+        -97.181
+      ],
+      "min_year": 1200,
+      "max_year": 1300,
+      "other_names": [
+        "34GV5",
+        "Lacy Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Kitikitiʼsh"
+        }
+      ],
+      "duplicate_name_flagged": "Kitikitiʼsh"
+    },
+    {
+      "key": "Williams-Storey Village-Oklahoma",
+      "shard_name": "Williams-Storey Village",
+      "country": "Oklahoma",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "coords_lat_lng": [
+        34.721,
+        -97.2815
+      ],
+      "min_year": 1250,
+      "max_year": 1350,
+      "other_names": [
+        "34GV90",
+        "Williams-Storey Washita Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Kitikitiʼsh"
+        }
+      ],
+      "duplicate_name_flagged": "Kitikitiʼsh"
+    },
+    {
+      "key": "Lowrance Washita Village-Oklahoma",
+      "shard_name": "Lowrance Washita Village",
+      "country": "Oklahoma",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "coords_lat_lng": [
+        34.451,
+        -96.9515
+      ],
+      "min_year": 1300,
+      "max_year": 1450,
+      "other_names": [
+        "34MR10",
+        "Lowrance Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1300.1.1",
+          "name": "Kitikitiʼsh"
+        }
+      ],
+      "duplicate_name_flagged": "Kitikitiʼsh"
+    },
+    {
+      "key": "Blackdog-Texas",
+      "shard_name": "Blackdog",
+      "country": "Texas",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "coords_lat_lng": [
+        35.745,
+        -101.385
+      ],
+      "min_year": 1200,
+      "max_year": 1450,
+      "other_names": [
+        "Blackdog Antelope Creek Site",
+        "41HF"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Kitikiti'sh"
+        }
+      ],
+      "duplicate_name_flagged": "Kitikiti'sh"
+    },
+    {
+      "key": "Chimney Rock Antelope Creek Village-Texas",
+      "shard_name": "Chimney Rock Antelope Creek Village",
+      "country": "Texas",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "coords_lat_lng": [
+        35.7415,
+        -101.481
+      ],
+      "min_year": 1250,
+      "max_year": 1350,
+      "other_names": [
+        "41HC35",
+        "Chimney Rock Masonry Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Kitikiti'sh"
+        }
+      ],
+      "duplicate_name_flagged": "Kitikiti'sh"
+    },
+    {
+      "key": "Medford Ranch Slab Village-Texas",
+      "shard_name": "Medford Ranch Slab Village",
+      "country": "Texas",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "coords_lat_lng": [
+        35.7215,
+        -101.381
+      ],
+      "min_year": 1250,
+      "max_year": 1350,
+      "other_names": [
+        "41HC10",
+        "Medford Ranch Ruin"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Kitikiti'sh"
+        }
+      ],
+      "duplicate_name_flagged": "Kitikiti'sh"
+    },
+    {
+      "key": "Sanford Dam Habitation Village-Texas",
+      "shard_name": "Sanford Dam Habitation Village",
+      "country": "Texas",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "coords_lat_lng": [
+        35.721,
+        -101.5515
+      ],
+      "min_year": 1250,
+      "max_year": 1350,
+      "other_names": [
+        "41MO5",
+        "Sanford Basin Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Kitikiti'sh"
+        }
+      ],
+      "duplicate_name_flagged": "Kitikiti'sh"
+    },
+    {
+      "key": "Spring Canyon Pueblo-Texas",
+      "shard_name": "Spring Canyon Pueblo",
+      "country": "Texas",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "coords_lat_lng": [
+        35.7115,
+        -101.521
+      ],
+      "min_year": 1250,
+      "max_year": 1350,
+      "other_names": [
+        "41HC12",
+        "Spring Canyon Antelope Creek Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Kitikiti'sh"
+        }
+      ],
+      "duplicate_name_flagged": "Kitikiti'sh"
+    },
+    {
+      "key": "Black Dog Village-Texas",
+      "shard_name": "Black Dog Village",
+      "country": "Texas",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "coords_lat_lng": [
+        35.681,
+        -101.4215
+      ],
+      "min_year": 1300,
+      "max_year": 1400,
+      "other_names": [
+        "41HC8",
+        "Black Dog Antelope Creek Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1300.1.1",
+          "name": "Kitikiti'sh"
+        }
+      ],
+      "duplicate_name_flagged": "Kitikiti'sh"
+    },
+    {
+      "key": "Borger Habitation Complex-Texas",
+      "shard_name": "Borger Habitation Complex",
+      "country": "Texas",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "coords_lat_lng": [
+        35.671,
+        -101.3915
+      ],
+      "min_year": 1300,
+      "max_year": 1400,
+      "other_names": [
+        "41HC15",
+        "Borger Slab Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1300.1.1",
+          "name": "Kitikiti'sh"
+        }
+      ],
+      "duplicate_name_flagged": "Kitikiti'sh"
+    },
+    {
+      "key": "Antelope Creek Ruin 22-Texas",
+      "shard_name": "Antelope Creek Ruin 22",
+      "country": "Texas",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "coords_lat_lng": [
+        35.652,
+        -101.618
+      ],
+      "min_year": 1200,
+      "max_year": 1450,
+      "other_names": [
+        "41HC23",
+        "41HC4",
+        "Antelope Creek Village 22"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Kitikiti'sh"
+        }
+      ],
+      "duplicate_name_flagged": "Kitikiti'sh"
+    },
+    {
+      "key": "Roper Slab Village-Texas",
+      "shard_name": "Roper Slab Village",
+      "country": "Texas",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "coords_lat_lng": [
+        35.6515,
+        -101.351
+      ],
+      "min_year": 1250,
+      "max_year": 1350,
+      "other_names": [
+        "41HC1",
+        "Roper Antelope Creek Pueblo"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Kitikiti'sh"
+        }
+      ],
+      "duplicate_name_flagged": "Kitikiti'sh"
+    },
+    {
+      "key": "Footprint-Texas",
+      "shard_name": "Footprint",
+      "country": "Texas",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "coords_lat_lng": [
+        35.612,
+        -101.652
+      ],
+      "min_year": 1200,
+      "max_year": 1450,
+      "other_names": [
+        "41PT25"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Kitikiti'sh"
+        }
+      ],
+      "duplicate_name_flagged": "Kitikiti'sh"
+    },
+    {
+      "key": "Lake Creek Slab Village-Texas",
+      "shard_name": "Lake Creek Slab Village",
+      "country": "Texas",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "coords_lat_lng": [
+        35.611,
+        -101.4215
+      ],
+      "min_year": 1300,
+      "max_year": 1400,
+      "other_names": [
+        "41HC4B",
+        "Lake Creek Antelope Creek Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1300.1.1",
+          "name": "Kitikiti'sh"
+        }
+      ],
+      "duplicate_name_flagged": "Kitikiti'sh"
+    },
+    {
+      "key": "Antelope Creek-Alibates-Texas",
+      "shard_name": "Antelope Creek-Alibates",
+      "country": "Texas",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "coords_lat_lng": [
+        35.5819,
+        -101.6744
+      ],
+      "min_year": -8000,
+      "max_year": 1500,
+      "other_names": [
+        "Alibates Flint Quarries",
+        "Panhandle",
+        "Alibates Ruin",
+        "41PT11",
+        "Footprint Masonry Village",
+        "41PT9",
+        "Footprint Antelope Creek Site"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-8000.1.1",
+          "name": "Kitikiti'sh"
+        }
+      ],
+      "duplicate_name_flagged": "Kitikiti'sh"
+    },
+    {
+      "key": "Alibates 19 Pueblo Town-Texas",
+      "shard_name": "Alibates 19 Pueblo Town",
+      "country": "Texas",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "coords_lat_lng": [
+        35.5615,
+        -101.651
+      ],
+      "min_year": 1250,
+      "max_year": 1350,
+      "other_names": [
+        "41PT10",
+        "Alibates Ruin 19 Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Kitikiti'sh"
+        }
+      ],
+      "duplicate_name_flagged": "Kitikiti'sh"
+    },
+    {
+      "key": "Canadian River Slab Village-Texas",
+      "shard_name": "Canadian River Slab Village",
+      "country": "Texas",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "coords_lat_lng": [
+        35.551,
+        -101.7515
+      ],
+      "min_year": 1300,
+      "max_year": 1400,
+      "other_names": [
+        "41PT15",
+        "Canadian Valley Antelope Creek Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1300.1.1",
+          "name": "Kitikiti'sh"
+        }
+      ],
+      "duplicate_name_flagged": "Kitikiti'sh"
+    },
+    {
+      "key": "Plum Creek Canadian Village-Texas",
+      "shard_name": "Plum Creek Canadian Village",
+      "country": "Texas",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "coords_lat_lng": [
+        35.521,
+        -101.7815
+      ],
+      "min_year": 1250,
+      "max_year": 1350,
+      "other_names": [
+        "41PT25",
+        "Plum Creek Antelope Creek Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Kitikiti'sh"
+        }
+      ],
+      "duplicate_name_flagged": "Kitikiti'sh"
+    },
+    {
+      "key": "Saddleback Mesa Pueblo-Texas",
+      "shard_name": "Saddleback Mesa Pueblo",
+      "country": "Texas",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "coords_lat_lng": [
+        35.4815,
+        -102.451
+      ],
+      "min_year": 1250,
+      "max_year": 1350,
+      "other_names": [
+        "41OL1",
+        "Saddleback Antelope Creek Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Kitikiti'sh"
+        }
+      ],
+      "duplicate_name_flagged": "Kitikiti'sh"
+    },
+    {
+      "key": "John Ray Creek Pueblo-Texas",
+      "shard_name": "John Ray Creek Pueblo",
+      "country": "Texas",
+      "region": "cp_neosho_verdigris_washita_prairies",
+      "coords_lat_lng": [
+        35.481,
+        -101.8515
+      ],
+      "min_year": 1300,
+      "max_year": 1400,
+      "other_names": [
+        "41PT1",
+        "John Ray Masonry Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1300.1.1",
+          "name": "Kitikiti'sh"
+        }
+      ],
+      "duplicate_name_flagged": "Kitikiti'sh"
+    }
+  ]
+}

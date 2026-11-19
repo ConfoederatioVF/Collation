@@ -1,0 +1,708 @@
+{
+  "batch_index": 58,
+  "clusters": [
+    "muyva",
+    "nanihwaiya",
+    "niahane",
+    "nibratge",
+    "nibtaska",
+    "nisude",
+    "nitasinan",
+    "notinikewisipiy"
+  ],
+  "countries": [
+    "Alberta",
+    "Arizona",
+    "Canada",
+    "Iowa",
+    "Mississippi",
+    "Missouri",
+    "Nebraska",
+    "New Mexico",
+    "Saskatchewan",
+    "USA"
+  ],
+  "count": 24,
+  "forbidden_already_used_in_region": [
+    "'Aha Kwahwat",
+    "'Aha Makhav",
+    "'Onk Akimel",
+    "'Yalis",
+    "A'ts'in'a",
+    "A'ts'ina",
+    "A:shiwi",
+    "Aazhoodenaang",
+    "Abangkuyivi",
+    "Abó",
+    "Achelacy",
+    "Achiya: Dek'yapbow'a",
+    "Adahiilíní",
+    "Aghaałą́",
+    "Ahagaskiaywa",
+    "Ahjimsek",
+    "Ahkwesáhsne",
+    "Ahousaht",
+    "Ajoasté",
+    "Akaamaschii",
+    "Akimel O'odham",
+    "Akoroa",
+    "Akpatordjuark",
+    "Akulivik",
+    "Akwałina",
+    "Akwesasne",
+    "Alamogordo Army Airfield",
+    "Alarnerk",
+    "Alexander",
+    "Ali Waipia",
+    "Alámex",
+    "Amalahta",
+    "Amiskwaciy",
+    "Amiskwaciya",
+    "Amoxiumqua",
+    "Anéʼé Tséyiʼ",
+    "Aondironon",
+    "Apache Junction",
+    "Apakosîsi-sîpiy",
+    "Apakosîsihk",
+    "Apilua",
+    "Apitipi",
+    "Apitipik",
+    "Apvitok",
+    "Arendarhonon",
+    "Argentenay",
+    "Argenteuil",
+    "Arvia'juaq",
+    "Arviat",
+    "Arviligjuaq",
+    "Aschkibokahn",
+    "Asiniskaw Sîpîsis",
+    "Asinîwi-sîpîsis",
+    "Asinīpwāt-sīpiy",
+    "Astialakwa",
+    "Ataronchronon",
+    "Atim-sîpiy",
+    "Atripuy",
+    "Atsee Nitsaa",
+    "Atsinna",
+    "Attawapiskat",
+    "Attignawantan",
+    "Attigneenongnahac",
+    "Aujuittuq",
+    "Aulatsivik",
+    "Aulavik",
+    "Aupaluk",
+    "Avayalik",
+    "Avonlea",
+    "Avvajja",
+    "Awat'ovi",
+    "Awatovi",
+    "Awatʼovi",
+    "Aztec",
+    "Baawingashing",
+    "Babad Do'ag",
+    "Babocomari",
+    "Baie-Rouge",
+    "Baie-Saint-Paul",
+    "Baie-du-Febvre",
+    "Batiscan",
+    "Bay Roberts",
+    "Bay de Verde",
+    "Bayfield",
+    "Beaumont",
+    "Beauport",
+    "Beaupré",
+    "Beloeil",
+    "Benson",
+    "Beothuk",
+    "Berthier",
+    "Berthier-en-Bas",
+    "Besh-Ba-Gowah",
+    "Beʼekʼid Baa Ahoodzání",
+    "Beʼekʼid Hóteelí",
+    "Bidanku",
+    "Bidaʼhóóchiiʼ",
+    "Bideʼyóó",
+    "Biigtigong",
+    "Binaawaan",
+    "Bird Cove",
+    "Bis Dah Łitso",
+    "Bis Saaʼáanii",
+    "Bis sa'ani",
+    "Bitłʼááh Bitoʼ",
+    "Bkejwanong",
+    "Blackfoot",
+    "Blanc-Sablon",
+    "Bok Chito",
+    "Bonavista",
+    "Boucherville",
+    "Bourg-Royal",
+    "Boyd's Cove",
+    "Brigus",
+    "Bunibonibee",
+    "Burlington Heights",
+    "Bytown",
+    "Báxoje",
+    "Bááh Háálį́",
+    "Bécancour"
+  ],
+  "settlements": [
+    {
+      "key": "Curtis-Arizona",
+      "shard_name": "Curtis",
+      "country": "Arizona",
+      "region": "az_salt_verde_phoenix_hohokam",
+      "coords_lat_lng": [
+        32.40391,
+        -110.34929
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [
+        "San Pedro",
+        "AZ BB:11:36",
+        "AZ BB:11:26",
+        "Elliott Site"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Muyva"
+        }
+      ],
+      "duplicate_name_flagged": "Muyva"
+    },
+    {
+      "key": "Second Canyon Ruin-Arizona",
+      "shard_name": "Second Canyon Ruin",
+      "country": "Arizona",
+      "region": "az_salt_verde_phoenix_hohokam",
+      "coords_lat_lng": [
+        32.358,
+        -110.295
+      ],
+      "min_year": 1250,
+      "max_year": 1350,
+      "other_names": [
+        "AZ BB:11:20"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Muyva"
+        }
+      ],
+      "duplicate_name_flagged": "Muyva"
+    },
+    {
+      "key": "Jose Solas Ruin-Arizona",
+      "shard_name": "Jose Solas Ruin",
+      "country": "Arizona",
+      "region": "az_salt_verde_phoenix_hohokam",
+      "coords_lat_lng": [
+        32.33642,
+        -110.49692
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [
+        "San Pedro"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Muyva"
+        }
+      ],
+      "duplicate_name_flagged": "Muyva"
+    },
+    {
+      "key": "Nanih Waiya-Mississippi_2",
+      "shard_name": "Nanih Waiya",
+      "country": "Mississippi",
+      "region": "se_alabama_tombigbee_moundville",
+      "coords_lat_lng": [
+        32.9214,
+        -88.9486
+      ],
+      "min_year": 100,
+      "max_year": 1200,
+      "other_names": [
+        "22WI500",
+        "Choctaw Mother Mound"
+      ],
+      "current_historical_names": [
+        {
+          "date": "100.1.1",
+          "name": "Nanih Waiya"
+        }
+      ],
+      "duplicate_name_flagged": "Nanih Waiya"
+    },
+    {
+      "key": "Nanih Waiya Town-Mississippi",
+      "shard_name": "Nanih Waiya Town",
+      "country": "Mississippi",
+      "region": "ca1_trans_appalachian_indigenous",
+      "coords_lat_lng": [
+        32.9151,
+        -89.0152
+      ],
+      "min_year": 1600,
+      "max_year": 1750,
+      "other_names": [
+        "Sacred Mother Mound and Town",
+        "Winston County Choctaw Center"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1600.1.1",
+          "name": "Nanih Waiya"
+        }
+      ],
+      "duplicate_name_flagged": "Nanih Waiya"
+    },
+    {
+      "key": "Nanih Waiya-USA",
+      "shard_name": "Nanih Waiya",
+      "country": "USA",
+      "region": "",
+      "coords_lat_lng": [
+        32.9215,
+        -88.9487
+      ],
+      "min_year": 1500,
+      "max_year": 1783,
+      "other_names": [
+        "Choctaw Mother Mound"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1500.1.1",
+          "name": "Nanih Waiya"
+        }
+      ],
+      "duplicate_name_flagged": "Nanih Waiya"
+    },
+    {
+      "key": "Bonnell Site-New Mexico",
+      "shard_name": "Bonnell Site",
+      "country": "New Mexico",
+      "region": "rg_middle_rio_grande_salinas",
+      "coords_lat_lng": [
+        33.51713,
+        -105.36722
+      ],
+      "min_year": 500,
+      "max_year": 1600,
+      "other_names": [
+        "LA 612",
+        "Ruidoso Valley"
+      ],
+      "current_historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Ni'ahane"
+        }
+      ],
+      "duplicate_name_flagged": "Ni'ahane"
+    },
+    {
+      "key": "Double Crossing-New Mexico",
+      "shard_name": "Double Crossing",
+      "country": "New Mexico",
+      "region": "rg_middle_rio_grande_salinas",
+      "coords_lat_lng": [
+        33.48816,
+        -105.51298
+      ],
+      "min_year": 500,
+      "max_year": 1600,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Ni'ahane"
+        }
+      ],
+      "duplicate_name_flagged": "Ni'ahane"
+    },
+    {
+      "key": "Alamogordo Site 1-New Mexico",
+      "shard_name": "Alamogordo Site 1",
+      "country": "New Mexico",
+      "region": "rg_san_luis_upper_pueblos",
+      "coords_lat_lng": [
+        32.885,
+        -105.965
+      ],
+      "min_year": 1250,
+      "max_year": 1350,
+      "other_names": [
+        "LA 4922"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Ni'ahane"
+        }
+      ],
+      "duplicate_name_flagged": "Ni'ahane"
+    },
+    {
+      "key": "Shepard Mound-Missouri",
+      "shard_name": "Shepard Mound",
+      "country": "Missouri",
+      "region": "np_lower_missouri_platte_kansas",
+      "coords_lat_lng": [
+        39.355,
+        -94.79
+      ],
+      "min_year": 1050,
+      "max_year": 1300,
+      "other_names": [
+        "23PL2",
+        "Platte River Steed-Kisker Mound"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1050.1.1",
+          "name": "Ni Brathge"
+        }
+      ],
+      "duplicate_name_flagged": "Ni Brathge"
+    },
+    {
+      "key": "Vandiver Steed-Kisker Village-Missouri",
+      "shard_name": "Vandiver Steed-Kisker Village",
+      "country": "Missouri",
+      "region": "np_lower_missouri_platte_kansas",
+      "coords_lat_lng": [
+        39.3515,
+        -94.721
+      ],
+      "min_year": 1150,
+      "max_year": 1300,
+      "other_names": [
+        "23PL6",
+        "Vandiver Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1150.1.1",
+          "name": "Ni Brathge"
+        }
+      ],
+      "duplicate_name_flagged": "Ni Brathge"
+    },
+    {
+      "key": "Yutan Earthlodge Town-Nebraska",
+      "shard_name": "Yutan Earthlodge Town",
+      "country": "Nebraska",
+      "region": "np_lower_missouri_platte_kansas",
+      "coords_lat_lng": [
+        41.2415,
+        -96.401
+      ],
+      "min_year": 1450,
+      "max_year": 1600,
+      "other_names": [
+        "25SD1",
+        "Yutan Oto Earthlodge Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1450.1.1",
+          "name": "Níbráthge"
+        }
+      ],
+      "duplicate_name_flagged": "Níbráthge"
+    },
+    {
+      "key": "Pony Creek (Glenwood)-Iowa",
+      "shard_name": "Pony Creek",
+      "country": "Iowa",
+      "region": "np_lower_missouri_platte_kansas",
+      "coords_lat_lng": [
+        41.0711,
+        -95.7867
+      ],
+      "min_year": 1000,
+      "max_year": 1380,
+      "other_names": [
+        "13ML126",
+        "Kuhl 1 Glenwood Earthlodge",
+        "Johnson Farm 3",
+        "13ML130",
+        "Mills Glenwood Earthlodge",
+        "Pony Creek (Glenwood)"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1000.1.1",
+          "name": "Ní Btháska"
+        }
+      ],
+      "duplicate_name_flagged": "Ní Btháska"
+    },
+    {
+      "key": "Patterson Earthlodge Village-Nebraska",
+      "shard_name": "Patterson Earthlodge Village",
+      "country": "Nebraska",
+      "region": "np_lower_missouri_platte_kansas",
+      "coords_lat_lng": [
+        41.1512,
+        -96.251
+      ],
+      "min_year": 1050,
+      "max_year": 1450,
+      "other_names": [
+        "25SY31",
+        "Patterson Nebraska Phase Village",
+        "Sarpy Nebraska Phase"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1050.1.1",
+          "name": "Níbtháska"
+        }
+      ],
+      "duplicate_name_flagged": "Níbtháska"
+    },
+    {
+      "key": "Cornish Earthlodge Village-Nebraska",
+      "shard_name": "Cornish Earthlodge Village",
+      "country": "Nebraska",
+      "region": "np_lower_missouri_platte_kansas",
+      "coords_lat_lng": [
+        40.981,
+        -95.9015
+      ],
+      "min_year": 1150,
+      "max_year": 1300,
+      "other_names": [
+        "25CS30",
+        "Cornish Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1150.1.1",
+          "name": "Níbtháska"
+        }
+      ],
+      "duplicate_name_flagged": "Níbtháska"
+    },
+    {
+      "key": "Glenwood-Iowa_2",
+      "shard_name": "Glenwood",
+      "country": "Iowa",
+      "region": "np_lower_missouri_platte_kansas",
+      "coords_lat_lng": [
+        41.0288,
+        -95.7444
+      ],
+      "min_year": 800,
+      "max_year": 1480,
+      "other_names": [
+        "Glenwood Archaeological State Preserve",
+        "13ML",
+        "Wall Ridge",
+        "13ML176",
+        "Mills Glenwood Household"
+      ],
+      "current_historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Ní Šúde"
+        }
+      ],
+      "duplicate_name_flagged": "Ní Šúde"
+    },
+    {
+      "key": "South Sioux City-Nebraska",
+      "shard_name": "South Sioux City",
+      "country": "Nebraska",
+      "region": "",
+      "coords_lat_lng": [
+        42.46305,
+        -96.41325
+      ],
+      "min_year": 1850,
+      "max_year": 2026,
+      "other_names": [
+        "South Sioux City city"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1850.1.1",
+          "name": "Ní Shúde"
+        },
+        {
+          "date": "1856.1.1",
+          "name": "Covington"
+        },
+        {
+          "date": "1887.1.1",
+          "name": "South Sioux City"
+        }
+      ],
+      "duplicate_name_flagged": "Ní Shúde"
+    },
+    {
+      "key": "Walker Gilmore-Nebraska",
+      "shard_name": "Walker Gilmore",
+      "country": "Nebraska",
+      "region": "np_lower_missouri_platte_kansas",
+      "coords_lat_lng": [
+        40.815,
+        -95.885
+      ],
+      "min_year": -4000,
+      "max_year": 1450,
+      "other_names": [
+        "25CC28",
+        "Sterns Creek Plains Woodland"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-4000.1.1",
+          "name": "Níshúde"
+        }
+      ],
+      "duplicate_name_flagged": "Níshúde"
+    },
+    {
+      "key": "Lac Delorme-Canada",
+      "shard_name": "Lac Delorme",
+      "country": "Canada",
+      "region": "cc1_ruperts_land_hbc",
+      "coords_lat_lng": [
+        54.5167,
+        -69.8664
+      ],
+      "min_year": -1150,
+      "max_year": 1550,
+      "other_names": [
+        "Caniapiscau North",
+        "GdEk-1"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-1150.1.1",
+          "name": "Nitassinan"
+        }
+      ],
+      "duplicate_name_flagged": "Nitassinan"
+    },
+    {
+      "key": "Pinware Hill-Canada",
+      "shard_name": "Pinware Hill",
+      "country": "Canada",
+      "region": "mar_labrador_innu_nunatsiavut",
+      "coords_lat_lng": [
+        51.8045,
+        -56.6945
+      ],
+      "min_year": -7000,
+      "max_year": -5000,
+      "other_names": [
+        "EjBe-10",
+        "Southern Labrador Maritime Archaic"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-7000.1.1",
+          "name": "Nitassinan"
+        }
+      ],
+      "duplicate_name_flagged": "Nitassinan"
+    },
+    {
+      "key": "Port-Cartier-Canada_2",
+      "shard_name": "Port-Cartier",
+      "country": "Canada",
+      "region": "cc1_new_france_st_lawrence",
+      "coords_lat_lng": [
+        50.03339,
+        -66.91867
+      ],
+      "min_year": 1670,
+      "max_year": 1861,
+      "other_names": [
+        "Rivière-aux-Rochers"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1670.1.1",
+          "name": "Nitassinan"
+        }
+      ],
+      "duplicate_name_flagged": "Nitassinan"
+    },
+    {
+      "key": "Castor Beaverdam Settlement-Alberta",
+      "shard_name": "Castor Beaverdam Settlement",
+      "country": "Alberta",
+      "region": "pr_south_saskatchewan_palliser_steppe",
+      "coords_lat_lng": [
+        52.2167,
+        -111.9
+      ],
+      "min_year": 400,
+      "max_year": 1400,
+      "other_names": [
+        "Paintearth Creek Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "400.1.1",
+          "name": "Nôtinikewi-sîpiy"
+        }
+      ],
+      "duplicate_name_flagged": "Nôtinikewi-sîpiy"
+    },
+    {
+      "key": "Coronation Valley Habitation-Alberta",
+      "shard_name": "Coronation Valley Habitation",
+      "country": "Alberta",
+      "region": "pr_south_saskatchewan_palliser_steppe",
+      "coords_lat_lng": [
+        52.0833,
+        -111.45
+      ],
+      "min_year": 500,
+      "max_year": 1450,
+      "other_names": [
+        "Coronation Parkland Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Nôtinikewi-sîpiy"
+        }
+      ],
+      "duplicate_name_flagged": "Nôtinikewi-sîpiy"
+    },
+    {
+      "key": "North Battleford Confluence Town-Saskatchewan",
+      "shard_name": "North Battleford Confluence Town",
+      "country": "Saskatchewan",
+      "region": "pr_central_parkland_north_saskatchewan",
+      "coords_lat_lng": [
+        52.7667,
+        -108.2833
+      ],
+      "min_year": 200,
+      "max_year": 1350,
+      "other_names": [
+        "Battle River Confluence Capital"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Nôtinikêwi-sîpiy"
+        }
+      ],
+      "duplicate_name_flagged": "Nôtinikêwi-sîpiy"
+    }
+  ]
+}

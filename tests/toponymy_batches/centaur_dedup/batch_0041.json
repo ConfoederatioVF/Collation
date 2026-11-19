@@ -1,0 +1,690 @@
+{
+  "batch_index": 41,
+  "clusters": [
+    "aciyadekyapbowa",
+    "agaidika",
+    "akwesasne",
+    "aliwaipia",
+    "apakosisipiy",
+    "apilatoq"
+  ],
+  "countries": [
+    "Arizona",
+    "Canada",
+    "Greenland",
+    "Idaho",
+    "Nevada",
+    "New Mexico",
+    "North Dakota",
+    "Ontario"
+  ],
+  "count": 24,
+  "forbidden_already_used_in_region": [
+    "'Aha Kwahwat",
+    "'Aha Makhav",
+    "'Onk Akimel",
+    "'Yalis",
+    "A'ts'in'a",
+    "A'ts'ina",
+    "A:shiwi",
+    "Aappalaaqqissak",
+    "Aappi",
+    "Aasiaat",
+    "Aazhoodenaang",
+    "Abangkuyivi",
+    "Abó",
+    "Achelacy",
+    "Adahiilíní",
+    "Adams",
+    "Addison",
+    "Aga'idökadö",
+    "Aga'ipanadokado",
+    "Aga'ipañinadökadö",
+    "Agaideka",
+    "Agaidüka",
+    "Agaipah",
+    "Aghaałą́",
+    "Agnes",
+    "Ahagaskiaywa",
+    "Ahjimsek",
+    "Ahkwesáhsne",
+    "Ahousaht",
+    "Aibapaa",
+    "Ajoasté",
+    "Akaamaschii",
+    "Akia",
+    "Akimel O'odham",
+    "Akpatordjuark",
+    "Akulivik",
+    "Akunnaaq",
+    "Akunneq",
+    "Akwałina",
+    "Alamo",
+    "Alamogordo Army Airfield",
+    "Alarnerk",
+    "Alexander",
+    "Alice",
+    "Alluitsoq",
+    "Alluitsup Paa",
+    "Almont",
+    "Alsen",
+    "Alámex",
+    "Ambrose",
+    "Amenia",
+    "Amidon",
+    "Amiskwaciya",
+    "Amoxiumqua",
+    "Anamoose",
+    "Anavik",
+    "Anepeminan",
+    "Aneta",
+    "Angisoq",
+    "Aniibiminani-ziibi",
+    "Annertusoq",
+    "Antler",
+    "Anéʼé Tséyiʼ",
+    "Aondironon",
+    "Apache Junction",
+    "Apitipi",
+    "Apitipik",
+    "Appannguit",
+    "Apvitok",
+    "Aqajamerngit",
+    "Ardoch",
+    "Arendarhonon",
+    "Argentenay",
+    "Argenteuil",
+    "Argusville",
+    "Arnegard",
+    "Arpiup Nuua",
+    "Arsuk",
+    "Arthur",
+    "Arvia'juaq",
+    "Arviat",
+    "Arviligjuaq",
+    "Aschkibokahn",
+    "Ashley",
+    "Asinīpwāt-sīpiy",
+    "Astialakwa",
+    "Asáaqa",
+    "Atammik",
+    "Ataronchronon",
+    "Atonontrataronon",
+    "Atripuy",
+    "Atsakudokwa",
+    "Atsee Nitsaa",
+    "Atsinna",
+    "Attawapiskat",
+    "Attignawantan",
+    "Attigneenongnahac",
+    "Attu",
+    "Aujuittuq",
+    "Aulatsivik",
+    "Aulavik",
+    "Aupaluk",
+    "Austmannadal",
+    "Avanersuaq",
+    "Avayalik",
+    "Avonlea",
+    "Avvajja",
+    "Awadi Aguraawi",
+    "Awat'ovi",
+    "Awatixa",
+    "Awatovi",
+    "Awatíxa",
+    "Awatʼovi",
+    "Awaxawi",
+    "Awaxáawi",
+    "Awigaxa",
+    "Awáati",
+    "Awígaxa",
+    "Ayr",
+    "Aztec"
+  ],
+  "settlements": [
+    {
+      "key": "Jack's Lake-New Mexico",
+      "shard_name": "Jack's Lake",
+      "country": "New Mexico",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        35.10867,
+        -108.63084
+      ],
+      "min_year": 550,
+      "max_year": 1450,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "550.1.1",
+          "name": "Achiya: Dek'yapbow'a"
+        }
+      ],
+      "duplicate_name_flagged": "Achiya: Dek'yapbow'a"
+    },
+    {
+      "key": "LZ0808-New Mexico",
+      "shard_name": "LZ0808",
+      "country": "New Mexico",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        35.1061,
+        -108.67388
+      ],
+      "min_year": 550,
+      "max_year": 1400,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "550.1.1",
+          "name": "Achiya: Dek'yapbow'a"
+        }
+      ],
+      "duplicate_name_flagged": "Achiya: Dek'yapbow'a"
+    },
+    {
+      "key": "Archeotekopa II-New Mexico",
+      "shard_name": "Archeotekopa II",
+      "country": "New Mexico",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        35.08866,
+        -108.69842
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [
+        "LZ0560",
+        "LZ0589"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Achiya: Dek'yapbow'a"
+        }
+      ],
+      "duplicate_name_flagged": "Achiya: Dek'yapbow'a"
+    },
+    {
+      "key": "LZ0545-New Mexico",
+      "shard_name": "LZ0545",
+      "country": "New Mexico",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        35.07,
+        -108.70345
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [
+        "LZ0561"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Achiya: Dek'yapbow'a"
+        }
+      ],
+      "duplicate_name_flagged": "Achiya: Dek'yapbow'a"
+    },
+    {
+      "key": "Salmon (Lemhi)-Idaho",
+      "shard_name": "Salmon",
+      "country": "Idaho",
+      "region": "nw_snake_river_klamath_interior",
+      "coords_lat_lng": [
+        45.0167,
+        -113.7167
+      ],
+      "min_year": 0,
+      "max_year": 1600,
+      "other_names": [
+        "Agaidika",
+        "Lemhi River",
+        "10LH124",
+        "Salmon (Lemhi)"
+      ],
+      "current_historical_names": [
+        {
+          "date": "0.1.1",
+          "name": "Agaidika"
+        }
+      ],
+      "duplicate_name_flagged": "Agaidika"
+    },
+    {
+      "key": "Lemhi-Idaho",
+      "shard_name": "Lemhi",
+      "country": "Idaho",
+      "region": "ca1_far_west_indigenous_1754",
+      "coords_lat_lng": [
+        44.8724,
+        -113.6358
+      ],
+      "min_year": 1700,
+      "max_year": 1783,
+      "other_names": [
+        "Agaidika Shoshone",
+        "Tendoy"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1700.1.1",
+          "name": "Agaidika"
+        }
+      ],
+      "duplicate_name_flagged": "Agaidika"
+    },
+    {
+      "key": "Contact Salmon Falls Village-Nevada",
+      "shard_name": "Contact Salmon Falls Village",
+      "country": "Nevada",
+      "region": "nw_snake_river_klamath_interior",
+      "coords_lat_lng": [
+        41.7833,
+        -114.75
+      ],
+      "min_year": 500,
+      "max_year": 1450,
+      "other_names": [
+        "Contact Creek Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Agaidika"
+        }
+      ],
+      "duplicate_name_flagged": "Agaidika"
+    },
+    {
+      "key": "Walker Lake Paiute Village-Nevada",
+      "shard_name": "Walker Lake Paiute Village",
+      "country": "Nevada",
+      "region": "gb_humboldt_lahontan_west",
+      "coords_lat_lng": [
+        38.948,
+        -118.815
+      ],
+      "min_year": 1000,
+      "max_year": 1550,
+      "other_names": [
+        "Agai-dika-a",
+        "Schurz"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1000.1.1",
+          "name": "Agai-dika-a"
+        }
+      ],
+      "duplicate_name_flagged": "Agai-dika-a"
+    },
+    {
+      "key": "Glenbrook-Canada",
+      "shard_name": "Glenbrook",
+      "country": "Canada",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "coords_lat_lng": [
+        45.1085,
+        -74.5845
+      ],
+      "min_year": 1500,
+      "max_year": 1550,
+      "other_names": [
+        "BgFp-1",
+        "Glengarry St. Lawrence Iroquoian"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1500.1.1",
+          "name": "Akwesasne"
+        }
+      ],
+      "duplicate_name_flagged": "Akwesasne"
+    },
+    {
+      "key": "Salem-Canada",
+      "shard_name": "Salem",
+      "country": "Canada",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "coords_lat_lng": [
+        45.0845,
+        -74.5585
+      ],
+      "min_year": 1480,
+      "max_year": 1540,
+      "other_names": [
+        "BgFp-4",
+        "Summerstown Glengarry St. Lawrence Iroquoian"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1480.1.1",
+          "name": "Akwesasne"
+        }
+      ],
+      "duplicate_name_flagged": "Akwesasne"
+    },
+    {
+      "key": "Grays Creek-Canada",
+      "shard_name": "Grays Creek",
+      "country": "Canada",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "coords_lat_lng": [
+        45.0515,
+        -74.6145
+      ],
+      "min_year": 1450,
+      "max_year": 1520,
+      "other_names": [
+        "BgFp-5",
+        "Cornwall Charlottenburgh"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1450.1.1",
+          "name": "Akwesasne"
+        }
+      ],
+      "duplicate_name_flagged": "Akwesasne"
+    },
+    {
+      "key": "Grays Creek Village-Ontario",
+      "shard_name": "Grays Creek Village",
+      "country": "Ontario",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "coords_lat_lng": [
+        45.0333,
+        -74.6833
+      ],
+      "min_year": 1390,
+      "max_year": 1510,
+      "other_names": [
+        "Cornwall St. Lawrence Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1390.1.1",
+          "name": "Akwesasne"
+        }
+      ],
+      "duplicate_name_flagged": "Akwesasne"
+    },
+    {
+      "key": "Flieger-Arizona",
+      "shard_name": "Flieger",
+      "country": "Arizona",
+      "region": "az_salt_verde_phoenix_hohokam",
+      "coords_lat_lng": [
+        32.93582,
+        -110.69558
+      ],
+      "min_year": 400,
+      "max_year": 1600,
+      "other_names": [
+        "San Pedro",
+        "Bajada Site",
+        "Adobe Hill"
+      ],
+      "current_historical_names": [
+        {
+          "date": "400.1.1",
+          "name": "Ali Waipia"
+        }
+      ],
+      "duplicate_name_flagged": "Ali Waipia"
+    },
+    {
+      "key": "Rattlesnake Mesa-Arizona",
+      "shard_name": "Rattlesnake Mesa",
+      "country": "Arizona",
+      "region": "az_salt_verde_phoenix_hohokam",
+      "coords_lat_lng": [
+        32.76918,
+        -110.37209
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [
+        "Safford"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Ali Waipia"
+        }
+      ],
+      "duplicate_name_flagged": "Ali Waipia"
+    },
+    {
+      "key": "Big Pot-Arizona",
+      "shard_name": "Big Pot",
+      "country": "Arizona",
+      "region": "az_salt_verde_phoenix_hohokam",
+      "coords_lat_lng": [
+        32.7527,
+        -110.56107
+      ],
+      "min_year": 400,
+      "max_year": 1600,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "400.1.1",
+          "name": "Ali Waipia"
+        }
+      ],
+      "duplicate_name_flagged": "Ali Waipia"
+    },
+    {
+      "key": "Crescent Site-Arizona",
+      "shard_name": "Crescent Site",
+      "country": "Arizona",
+      "region": "az_salt_verde_phoenix_hohokam",
+      "coords_lat_lng": [
+        32.64998,
+        -110.25908
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [
+        "Safford"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Ali Waipia"
+        }
+      ],
+      "duplicate_name_flagged": "Ali Waipia"
+    },
+    {
+      "key": "Oxbow Dam-Canada",
+      "shard_name": "Oxbow Dam",
+      "country": "Canada",
+      "region": "pr_central_parkland_north_saskatchewan",
+      "coords_lat_lng": [
+        49.225,
+        -102.165
+      ],
+      "min_year": -3200,
+      "max_year": 0,
+      "other_names": [
+        "DhMn-1",
+        "Souris River Oxbow Type Site",
+        "Souris River"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-3200.1.1",
+          "name": "Âpakosîs-sîpiy"
+        }
+      ],
+      "duplicate_name_flagged": "Âpakosîs-sîpiy"
+    },
+    {
+      "key": "Kenmare Souris Camp-North Dakota",
+      "shard_name": "Kenmare Souris Camp",
+      "country": "North Dakota",
+      "region": "enp_souris_devils_lake",
+      "coords_lat_lng": [
+        48.6728,
+        -102.0719
+      ],
+      "min_year": -2000,
+      "max_year": 1400,
+      "other_names": [
+        "32WT-KM",
+        "Upper Des Lacs"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-2000.1.1",
+          "name": "Āpakosīs-sīpiy"
+        }
+      ],
+      "duplicate_name_flagged": "Āpakosīs-sīpiy"
+    },
+    {
+      "key": "Towner Mouse River-North Dakota",
+      "shard_name": "Towner Mouse River",
+      "country": "North Dakota",
+      "region": "enp_souris_devils_lake",
+      "coords_lat_lng": [
+        48.3472,
+        -100.4069
+      ],
+      "min_year": -1000,
+      "max_year": 1500,
+      "other_names": [
+        "32MH-TW",
+        "J. Clark Salyer Crossing"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-1000.1.1",
+          "name": "Āpakosīs-sīpiy"
+        }
+      ],
+      "duplicate_name_flagged": "Āpakosīs-sīpiy"
+    },
+    {
+      "key": "Denbigh Dune Field-North Dakota",
+      "shard_name": "Denbigh Dune Field",
+      "country": "North Dakota",
+      "region": "enp_souris_devils_lake",
+      "coords_lat_lng": [
+        48.3153,
+        -100.5869
+      ],
+      "min_year": 500,
+      "max_year": 1550,
+      "other_names": [
+        "32MH-DB",
+        "Denbigh Bison Camp"
+      ],
+      "current_historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Āpakosīs-sīpiy"
+        }
+      ],
+      "duplicate_name_flagged": "Āpakosīs-sīpiy"
+    },
+    {
+      "key": "Aappilattoq (73.46,-55.71)-Greenland",
+      "shard_name": "Aappilattoq",
+      "country": "Greenland",
+      "region": "cc1_greenland_missions_1763",
+      "coords_lat_lng": [
+        73.45833,
+        -55.70833
+      ],
+      "min_year": 1150,
+      "max_year": 1600,
+      "other_names": [
+        "Nunniffiit Thule",
+        "Innaarsuit",
+        "Tasiusaq"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1150.1.1",
+          "name": "Aappilattoq"
+        }
+      ],
+      "duplicate_name_flagged": "Aappilattoq"
+    },
+    {
+      "key": "Aappilattoq-Greenland",
+      "shard_name": "Aappilattoq",
+      "country": "Greenland",
+      "region": "can_greenland",
+      "coords_lat_lng": [
+        72.88333,
+        -55.6
+      ],
+      "min_year": 1896,
+      "max_year": 2025,
+      "other_names": [
+        "AOQ",
+        "Aapilatok",
+        "Aappilattok"
+      ],
+      "current_historical_names": [
+        {
+          "date": "2020.1.1",
+          "name": "Aappilattoq"
+        }
+      ],
+      "duplicate_name_flagged": "Aappilattoq"
+    },
+    {
+      "key": "Aappilattoq-Upernavik-Greenland",
+      "shard_name": "Aappilattoq-Upernavik",
+      "country": "Greenland",
+      "region": "cc2_greenland_inspectorates",
+      "coords_lat_lng": [
+        72.748,
+        -55.58133
+      ],
+      "min_year": 1772,
+      "max_year": 1860,
+      "other_names": [
+        "Augpilagtoq North"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1772.1.1",
+          "name": "Aappilattoq"
+        }
+      ],
+      "duplicate_name_flagged": "Aappilattoq"
+    },
+    {
+      "key": "Aappilattoq (72.71,-55.54)-Greenland",
+      "shard_name": "Aappilattoq",
+      "country": "Greenland",
+      "region": "cc1_greenland_missions_1763",
+      "coords_lat_lng": [
+        72.70833,
+        -55.54167
+      ],
+      "min_year": 1150,
+      "max_year": 1600,
+      "other_names": [
+        "Nunniffiit Thule",
+        "Ammaasaq",
+        "Ikerasaap Illutaa"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1150.1.1",
+          "name": "Aappilattoq"
+        }
+      ],
+      "duplicate_name_flagged": "Aappilattoq"
+    }
+  ]
+}

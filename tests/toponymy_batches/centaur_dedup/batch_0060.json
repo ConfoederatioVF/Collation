@@ -1,0 +1,712 @@
+{
+  "batch_index": 60,
+  "clusters": [
+    "pani",
+    "pari",
+    "parowan",
+    "pekowi",
+    "petkotkweak",
+    "peyankihsiaki",
+    "piapa",
+    "pimiteoui"
+  ],
+  "countries": [
+    "Canada",
+    "Idaho",
+    "Illinois",
+    "Indiana",
+    "Kansas",
+    "Nebraska",
+    "New Brunswick",
+    "Ohio",
+    "Pennsylvania",
+    "Utah"
+  ],
+  "count": 24,
+  "forbidden_already_used_in_region": [
+    "'Yalis",
+    "Aazhoodenaang",
+    "Achelacy",
+    "Agaideka",
+    "Agaidika",
+    "Ahjimsek",
+    "Ahkwesáhsne",
+    "Ahousaht",
+    "Ahsenisiipi",
+    "Ainga Wia Dintso'ahni'i",
+    "Ajoasté",
+    "Akaamaschii",
+    "Akpatordjuark",
+    "Akulivik",
+    "Akwesasne",
+    "Alamonitheepi",
+    "Alarnerk",
+    "Alexander",
+    "Algonquin",
+    "Allegheny",
+    "Alámex",
+    "Amaquon",
+    "Amehkwani",
+    "Amiskwaciya",
+    "Amlamkuk",
+    "Angapuni",
+    "Annikcooek",
+    "Ansh An Lashokdiwe",
+    "Aondironon",
+    "Apitipi",
+    "Apitipik",
+    "Apvitok",
+    "Arendarhonon",
+    "Argentenay",
+    "Argenteuil",
+    "Arvia'juaq",
+    "Arviat",
+    "Arviligjuaq",
+    "Aschkibokahn",
+    "Asinīpwāt-sīpiy",
+    "Assunepachla",
+    "Asáaqa",
+    "Ataronchronon",
+    "Attawapiskat",
+    "Attignawantan",
+    "Attigneenongnahac",
+    "Aughwick",
+    "Aujuittuq",
+    "Aulatsivik",
+    "Aulavik",
+    "Aupaluk",
+    "Avayalik",
+    "Avonlea",
+    "Avvajja",
+    "Baawingashing",
+    "Baie-Rouge",
+    "Baie-Saint-Paul",
+    "Baie-du-Febvre",
+    "Batiscan",
+    "Bay Roberts",
+    "Bay de Verde",
+    "Bayfield",
+    "Beaumont",
+    "Beauport",
+    "Beaupré",
+    "Beloeil",
+    "Benson",
+    "Beothuk",
+    "Berthier",
+    "Berthier-en-Bas",
+    "Bia Ogwaide",
+    "Biigtigong",
+    "Binaawaan",
+    "Bird Cove",
+    "Bkejwanong",
+    "Blackfoot",
+    "Blanc-Sablon",
+    "Blue Mound",
+    "Boa Ogoi",
+    "Bohogue",
+    "Boise",
+    "Bonavista",
+    "Boucherville",
+    "Bourg-Royal",
+    "Boyd's Cove",
+    "Brigus",
+    "Bunibonibee",
+    "Burlington Heights",
+    "Bytown",
+    "Báxoje",
+    "Bécancour",
+    "C'imo'ca",
+    "Cahiagué",
+    "Cahokia",
+    "Cakimiyamithiipi",
+    "Canesadooharie",
+    "Cap-Rouge",
+    "Cap-Saint-Ignace",
+    "Cap-Santé",
+    "Cap-de-la-Madeleine",
+    "Carbonear",
+    "Carcross",
+    "Cascade",
+    "Catalina",
+    "Cawí",
+    "Central Huron",
+    "Ceǧa Kin",
+    "Ch'oodeenjik",
+    "Chalahgawtha",
+    "Chalakaatha",
+    "Champlain",
+    "Channahon",
+    "Chaticks si Chaticks",
+    "Chawi",
+    "Cheejil Niik",
+    "Chemonda",
+    "Cherokee",
+    "Chetolah",
+    "Chibougamau",
+    "Chickasaw"
+  ],
+  "settlements": [
+    {
+      "key": "Red Smoke Earthlodge Village-Nebraska",
+      "shard_name": "Red Smoke Earthlodge Village",
+      "country": "Nebraska",
+      "region": "np_lower_missouri_platte_kansas",
+      "coords_lat_lng": [
+        40.401,
+        -100.3115
+      ],
+      "min_year": 1100,
+      "max_year": 1250,
+      "other_names": [
+        "25FT42",
+        "Red Smoke Habitation Complex"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1100.1.1",
+          "name": "Pááni"
+        }
+      ],
+      "duplicate_name_flagged": "Pááni"
+    },
+    {
+      "key": "Beatrice Big Blue Village-Nebraska",
+      "shard_name": "Beatrice Big Blue Village",
+      "country": "Nebraska",
+      "region": "np_lower_missouri_platte_kansas",
+      "coords_lat_lng": [
+        40.261,
+        -96.7515
+      ],
+      "min_year": 1250,
+      "max_year": 1400,
+      "other_names": [
+        "25GA5",
+        "Beatrice Habitation Complex"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Pááni"
+        }
+      ],
+      "duplicate_name_flagged": "Pááni"
+    },
+    {
+      "key": "Franklin Earthlodge Settlement-Nebraska",
+      "shard_name": "Franklin Earthlodge Settlement",
+      "country": "Nebraska",
+      "region": "np_lower_missouri_platte_kansas",
+      "coords_lat_lng": [
+        40.091,
+        -98.9515
+      ],
+      "min_year": 1150,
+      "max_year": 1300,
+      "other_names": [
+        "25FR1",
+        "Franklin County Habitation"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1150.1.1",
+          "name": "Pááni"
+        }
+      ],
+      "duplicate_name_flagged": "Pááni"
+    },
+    {
+      "key": "Kirwin Earthlodge Settlement-Kansas",
+      "shard_name": "Kirwin Earthlodge Settlement",
+      "country": "Kansas",
+      "region": "np_lower_missouri_platte_kansas",
+      "coords_lat_lng": [
+        39.6715,
+        -99.121
+      ],
+      "min_year": 1150,
+      "max_year": 1300,
+      "other_names": [
+        "14PL1",
+        "North Fork Solomon River Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1150.1.1",
+          "name": "Paári"
+        }
+      ],
+      "duplicate_name_flagged": "Paári"
+    },
+    {
+      "key": "Albert Bell-Kansas",
+      "shard_name": "Albert Bell",
+      "country": "Kansas",
+      "region": "np_lower_missouri_platte_kansas",
+      "coords_lat_lng": [
+        39.3505,
+        -100.4409
+      ],
+      "min_year": 1200,
+      "max_year": 1380,
+      "other_names": [
+        "14SD305",
+        "Sheridan Upper Republican"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Paári"
+        }
+      ],
+      "duplicate_name_flagged": "Paári"
+    },
+    {
+      "key": "Root Smoky Hill Village-Kansas",
+      "shard_name": "Root Smoky Hill Village",
+      "country": "Kansas",
+      "region": "np_lower_missouri_platte_kansas",
+      "coords_lat_lng": [
+        39.1515,
+        -97.681
+      ],
+      "min_year": 1200,
+      "max_year": 1300,
+      "other_names": [
+        "14OT1",
+        "Root Earthlodge Site"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Paári"
+        }
+      ],
+      "duplicate_name_flagged": "Paári"
+    },
+    {
+      "key": "Parowan Gap-Utah",
+      "shard_name": "Parowan Gap",
+      "country": "Utah",
+      "region": "gb_bonneville_wasatch_fremont",
+      "coords_lat_lng": [
+        37.9103,
+        -112.9856
+      ],
+      "min_year": 950,
+      "max_year": 1100,
+      "other_names": [
+        "42IN218"
+      ],
+      "current_historical_names": [
+        {
+          "date": "950.1.1",
+          "name": "Paroowan"
+        }
+      ],
+      "duplicate_name_flagged": "Paroowan"
+    },
+    {
+      "key": "Evans Mound-Utah",
+      "shard_name": "Evans Mound",
+      "country": "Utah",
+      "region": "gb_bonneville_wasatch_fremont",
+      "coords_lat_lng": [
+        37.868,
+        -112.825
+      ],
+      "min_year": 1050,
+      "max_year": 1150,
+      "other_names": [
+        "42IN40"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1050.1.1",
+          "name": "Paroowan"
+        }
+      ],
+      "duplicate_name_flagged": "Paroowan"
+    },
+    {
+      "key": "Median Village-Utah",
+      "shard_name": "Median Village",
+      "country": "Utah",
+      "region": "gb_bonneville_wasatch_fremont",
+      "coords_lat_lng": [
+        37.848,
+        -112.842
+      ],
+      "min_year": 700,
+      "max_year": 1300,
+      "other_names": [
+        "42IN124"
+      ],
+      "current_historical_names": [
+        {
+          "date": "700.1.1",
+          "name": "Paroowan"
+        }
+      ],
+      "duplicate_name_flagged": "Paroowan"
+    },
+    {
+      "key": "Piqua Shawnee Town-Ohio",
+      "shard_name": "Piqua Shawnee Town",
+      "country": "Ohio",
+      "region": "ca1_trans_appalachian_indigenous",
+      "coords_lat_lng": [
+        39.8821,
+        -83.9051
+      ],
+      "min_year": 1768,
+      "max_year": 1780,
+      "other_names": [
+        "Upper Piqua",
+        "Tecumseh's Birthplace Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1768.1.1",
+          "name": "Pekowi"
+        }
+      ],
+      "duplicate_name_flagged": "Pekowi"
+    },
+    {
+      "key": "Enon Mound-Ohio",
+      "shard_name": "Enon Mound",
+      "country": "Ohio",
+      "region": "oh_scioto_miami_hopewell_core",
+      "coords_lat_lng": [
+        39.8797,
+        -83.9317
+      ],
+      "min_year": -400,
+      "max_year": 100,
+      "other_names": [
+        "Knob Prairie Mound",
+        "33CL1"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-400.1.1",
+          "name": "Pekoowi"
+        }
+      ],
+      "duplicate_name_flagged": "Pekoowi"
+    },
+    {
+      "key": "Frey-Haverstick Shenks Village-Pennsylvania",
+      "shard_name": "Frey-Haverstick Shenks Village",
+      "country": "Pennsylvania",
+      "region": "ma_delaware_susquehanna_lenape",
+      "coords_lat_lng": [
+        39.9915,
+        -76.441
+      ],
+      "min_year": 1400,
+      "max_year": 1500,
+      "other_names": [
+        "36LA6",
+        "Pequea Creek Habitation Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1400.1.1",
+          "name": "Pekowi"
+        }
+      ],
+      "duplicate_name_flagged": "Pekowi"
+    },
+    {
+      "key": "Moncton-Canada",
+      "shard_name": "Moncton",
+      "country": "Canada",
+      "region": "",
+      "coords_lat_lng": [
+        46.11241,
+        -64.78406
+      ],
+      "min_year": 1700,
+      "max_year": 2026,
+      "other_names": [
+        "Le Coude",
+        "The Bend",
+        "The Bend Settlement",
+        "Moncton Town",
+        "The Bend on Petitcodiac",
+        "Petitcodiac Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1700.1.1",
+          "name": "Petkootkweak"
+        },
+        {
+          "date": "1733.1.1",
+          "name": "Le Coude"
+        },
+        {
+          "date": "1766.1.1",
+          "name": "The Bend"
+        },
+        {
+          "date": "1855.1.1",
+          "name": "Moncton"
+        }
+      ],
+      "duplicate_name_flagged": "Petkootkweak"
+    },
+    {
+      "key": "Moncton Petitcodiac Bend Town-New Brunswick",
+      "shard_name": "Moncton Petitcodiac Bend Town",
+      "country": "New Brunswick",
+      "region": "mar_wolastoq_new_brunswick_fundy",
+      "coords_lat_lng": [
+        46.0833,
+        -64.7833
+      ],
+      "min_year": 300,
+      "max_year": 1450,
+      "other_names": [
+        "Petitcodiac River Bend Center"
+      ],
+      "current_historical_names": [
+        {
+          "date": "300.1.1",
+          "name": "Petkootkweak"
+        }
+      ],
+      "duplicate_name_flagged": "Petkootkweak"
+    },
+    {
+      "key": "Petitcodiac River Valley Village-New Brunswick",
+      "shard_name": "Petitcodiac River Valley Village",
+      "country": "New Brunswick",
+      "region": "mar_wolastoq_new_brunswick_fundy",
+      "coords_lat_lng": [
+        45.9333,
+        -65.1833
+      ],
+      "min_year": 600,
+      "max_year": 1480,
+      "other_names": [
+        "Petitcodiac Headwaters Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "600.1.1",
+          "name": "Petkootkweak"
+        }
+      ],
+      "duplicate_name_flagged": "Petkootkweak"
+    },
+    {
+      "key": "Mann Site-Indiana",
+      "shard_name": "Mann Site",
+      "country": "Indiana",
+      "region": "oh_wabash_white_lower_ohio_kincaid",
+      "coords_lat_lng": [
+        37.9167,
+        -87.8333
+      ],
+      "min_year": 200,
+      "max_year": 400,
+      "other_names": [
+        "Posey County Hopewell",
+        "Wabash Confluence",
+        "Mann Hopewell",
+        "12PO2"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Peeyankihšiaki"
+        }
+      ],
+      "duplicate_name_flagged": "Peeyankihšiaki"
+    },
+    {
+      "key": "Welborn-Indiana",
+      "shard_name": "Welborn",
+      "country": "Indiana",
+      "region": "oh_wabash_white_lower_ohio_kincaid",
+      "coords_lat_lng": [
+        37.912,
+        -87.968
+      ],
+      "min_year": 1400,
+      "max_year": 1600,
+      "other_names": [
+        "Welborn Village",
+        "12PO19"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1400.1.1",
+          "name": "Peeyankihšiaki"
+        }
+      ],
+      "duplicate_name_flagged": "Peeyankihšiaki"
+    },
+    {
+      "key": "Hovey Lake-Indiana",
+      "shard_name": "Hovey Lake",
+      "country": "Indiana",
+      "region": "oh_wabash_white_lower_ohio_kincaid",
+      "coords_lat_lng": [
+        37.8304,
+        -87.9537
+      ],
+      "min_year": 1400,
+      "max_year": 1600,
+      "other_names": [
+        "Hovey Lake-Klein",
+        "12PO10"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1400.1.1",
+          "name": "Peeyankihšiaki"
+        }
+      ],
+      "duplicate_name_flagged": "Peeyankihšiaki"
+    },
+    {
+      "key": "Montpelier Bear Lake North Town-Idaho",
+      "shard_name": "Montpelier Bear Lake North Town",
+      "country": "Idaho",
+      "region": "gb_bonneville_wasatch_fremont",
+      "coords_lat_lng": [
+        42.3167,
+        -111.3
+      ],
+      "min_year": 500,
+      "max_year": 1400,
+      "other_names": [
+        "Bear Lake North Shore Center"
+      ],
+      "current_historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Pia Paa"
+        }
+      ],
+      "duplicate_name_flagged": "Pia Paa"
+    },
+    {
+      "key": "Kaysville Haights Creek Town-Utah",
+      "shard_name": "Kaysville Haights Creek Town",
+      "country": "Utah",
+      "region": "gb_bonneville_wasatch_fremont",
+      "coords_lat_lng": [
+        41.0333,
+        -111.9333
+      ],
+      "min_year": 800,
+      "max_year": 1220,
+      "other_names": [
+        "Haights Creek Fremont Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Pia-pa"
+        }
+      ],
+      "duplicate_name_flagged": "Pia-pa"
+    },
+    {
+      "key": "Bountiful Mill Creek Town-Utah",
+      "shard_name": "Bountiful Mill Creek Town",
+      "country": "Utah",
+      "region": "gb_bonneville_wasatch_fremont",
+      "coords_lat_lng": [
+        40.8833,
+        -111.8833
+      ],
+      "min_year": 700,
+      "max_year": 1250,
+      "other_names": [
+        "Mill Creek Great Salt Lake Center"
+      ],
+      "current_historical_names": [
+        {
+          "date": "700.1.1",
+          "name": "Piapaa"
+        }
+      ],
+      "duplicate_name_flagged": "Piapaa"
+    },
+    {
+      "key": "Rench-Illinois",
+      "shard_name": "Rench",
+      "country": "Illinois",
+      "region": "um_american_bottom_lower_il",
+      "coords_lat_lng": [
+        40.852,
+        -89.567
+      ],
+      "min_year": -3000,
+      "max_year": 1200,
+      "other_names": [
+        "Rench Site",
+        "11P4"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-3000.1.1",
+          "name": "Pimiteoui"
+        }
+      ],
+      "duplicate_name_flagged": "Pimiteoui"
+    },
+    {
+      "key": "Lonza-Caterpillar-Illinois",
+      "shard_name": "Lonza-Caterpillar",
+      "country": "Illinois",
+      "region": "um_american_bottom_lower_il",
+      "coords_lat_lng": [
+        40.7892,
+        -89.7595
+      ],
+      "min_year": -420,
+      "max_year": 1450,
+      "other_names": [
+        "11P351",
+        "Peoria Middle-Late Woodland"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-420.1.1",
+          "name": "Pimiteoui"
+        }
+      ],
+      "duplicate_name_flagged": "Pimiteoui"
+    },
+    {
+      "key": "Kingston Lake Mississippian Village-Illinois",
+      "shard_name": "Kingston Lake Mississippian Village",
+      "country": "Illinois",
+      "region": "um_american_bottom_lower_il",
+      "coords_lat_lng": [
+        40.5115,
+        -89.791
+      ],
+      "min_year": 1150,
+      "max_year": 1250,
+      "other_names": [
+        "11P11",
+        "Kingston Bluff Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1150.1.1",
+          "name": "Pimiteoui"
+        }
+      ],
+      "duplicate_name_flagged": "Pimiteoui"
+    }
+  ]
+}

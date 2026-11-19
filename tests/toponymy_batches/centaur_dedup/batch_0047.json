@@ -1,0 +1,723 @@
+{
+  "batch_index": 47,
+  "clusters": [
+    "numakaki",
+    "okoni",
+    "ola",
+    "ouacita",
+    "ouentironk",
+    "pasiwvi"
+  ],
+  "countries": [
+    "Arizona",
+    "Canada",
+    "Georgia",
+    "Hawaii",
+    "Iowa",
+    "Louisiana",
+    "North Dakota",
+    "South Dakota"
+  ],
+  "count": 24,
+  "forbidden_already_used_in_region": [
+    "'Aha Kwahwat",
+    "'Aha Makhav",
+    "'Onk Akimel",
+    "'Yalis",
+    "Aazhoodenaang",
+    "Abangkuyivi",
+    "Aberdeen",
+    "Achelacy",
+    "Adahiilíní",
+    "Adai",
+    "Adams",
+    "Addison",
+    "Agar",
+    "Aghaałą́",
+    "Agnes",
+    "Ahagaskiaywa",
+    "Ahjimsek",
+    "Ahkwesáhsne",
+    "Ahousaht",
+    "Ajoasté",
+    "Akaamaschii",
+    "Akaska",
+    "Akimel O'odham",
+    "Akičhita Wakpála",
+    "Akoroa",
+    "Akpatordjuark",
+    "Akulivik",
+    "Akwałina",
+    "Akwesasne",
+    "Alamo",
+    "Alarnerk",
+    "Alatuna",
+    "Albee",
+    "Alcester",
+    "Alexander",
+    "Alexandria",
+    "Ali Waipia",
+    "Alice",
+    "Allentown",
+    "Almont",
+    "Alpena",
+    "Alsen",
+    "Altamaha",
+    "Altamont",
+    "Alámex",
+    "Ambrose",
+    "Amenia",
+    "Amidon",
+    "Aminoya",
+    "Amiskwaciya",
+    "Anahola",
+    "Anamoose",
+    "Andover",
+    "Anepeminan",
+    "Aneta",
+    "Angostura",
+    "Aniibiminani-ziibi",
+    "Antler",
+    "Anéʼé Tséyiʼ",
+    "Aondironon",
+    "Apache Junction",
+    "Apitipi",
+    "Apitipik",
+    "Apvitok",
+    "Ardmore",
+    "Ardoch",
+    "Arendarhonon",
+    "Argentenay",
+    "Argenteuil",
+    "Argusville",
+    "Armour",
+    "Arnegard",
+    "Artas",
+    "Arthur",
+    "Arvia'juaq",
+    "Arviat",
+    "Arviligjuaq",
+    "Aschkibokahn",
+    "Ashland Heights",
+    "Ashley",
+    "Ashton",
+    "Asinīpwāt-sīpiy",
+    "Astoria",
+    "Ataronchronon",
+    "Atlanta",
+    "Attawapiskat",
+    "Attignawantan",
+    "Attigneenongnahac",
+    "Aujuittuq",
+    "Aulatsivik",
+    "Aulavik",
+    "Aupaluk",
+    "Aurora",
+    "Aurora Center",
+    "Avayalik",
+    "Avon",
+    "Avonlea",
+    "Avoyel",
+    "Avvajja",
+    "Awadi Aguraawi",
+    "Awat'ovi",
+    "Awatixa",
+    "Awatovi",
+    "Awatíxa",
+    "Awatʼovi",
+    "Awaxawi",
+    "Awaxáawi",
+    "Awigaxa",
+    "Awáati",
+    "Awígaxa",
+    "Ayr",
+    "Baawingashing",
+    "Babad Do'ag",
+    "Babocomari",
+    "Badger",
+    "Bah' hatínu",
+    "Baie-Rouge",
+    "Baie-Saint-Paul",
+    "Baie-du-Febvre",
+    "Balfour"
+  ],
+  "settlements": [
+    {
+      "key": "Lange-Iowa",
+      "shard_name": "Lange",
+      "country": "Iowa",
+      "region": "np_lower_missouri_platte_kansas",
+      "coords_lat_lng": [
+        42.995,
+        -95.445
+      ],
+      "min_year": 1050,
+      "max_year": 1240,
+      "other_names": [
+        "13OB7",
+        "O'Brien Mill Creek Fortified"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1050.1.1",
+          "name": "Numakaki"
+        }
+      ],
+      "duplicate_name_flagged": "Numakaki"
+    },
+    {
+      "key": "Sperry Earthlodge Village-North Dakota",
+      "shard_name": "Sperry Earthlodge Village",
+      "country": "North Dakota",
+      "region": "np_middle_missouri_dakotas",
+      "coords_lat_lng": [
+        46.9815,
+        -100.841
+      ],
+      "min_year": 1450,
+      "max_year": 1600,
+      "other_names": [
+        "32BL4",
+        "Sperry Mandan Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1450.1.1",
+          "name": "Numakaki"
+        }
+      ],
+      "duplicate_name_flagged": "Numakaki"
+    },
+    {
+      "key": "Glencoe Earthlodge Village-North Dakota",
+      "shard_name": "Glencoe Earthlodge Village",
+      "country": "North Dakota",
+      "region": "np_middle_missouri_dakotas",
+      "coords_lat_lng": [
+        46.591,
+        -100.6415
+      ],
+      "min_year": 1300,
+      "max_year": 1450,
+      "other_names": [
+        "32EM12",
+        "Glencoe Mandan Site"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1300.1.1",
+          "name": "Numakaki"
+        }
+      ],
+      "duplicate_name_flagged": "Numakaki"
+    },
+    {
+      "key": "Broken Kettle Mill Creek Town-South Dakota",
+      "shard_name": "Broken Kettle Mill Creek Town",
+      "country": "South Dakota",
+      "region": "np_middle_missouri_dakotas",
+      "coords_lat_lng": [
+        42.6515,
+        -96.551
+      ],
+      "min_year": 1050,
+      "max_year": 1250,
+      "other_names": [
+        "13PM1",
+        "Broken Kettle West Fortified Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1050.1.1",
+          "name": "Numakaki"
+        }
+      ],
+      "duplicate_name_flagged": "Numakaki"
+    },
+    {
+      "key": "Dyar-Georgia",
+      "shard_name": "Dyar",
+      "country": "Georgia",
+      "region": "se_georgia_savannah_ocmulgee_etowah",
+      "coords_lat_lng": [
+        33.545,
+        -83.258
+      ],
+      "min_year": 1200,
+      "max_year": 1550,
+      "other_names": [
+        "Dyar Mound",
+        "9GE5"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Okoni"
+        }
+      ],
+      "duplicate_name_flagged": "Okoni"
+    },
+    {
+      "key": "Little River-Georgia",
+      "shard_name": "Little River",
+      "country": "Georgia",
+      "region": "se_georgia_savannah_ocmulgee_etowah",
+      "coords_lat_lng": [
+        33.541,
+        -83.394
+      ],
+      "min_year": 1350,
+      "max_year": 1450,
+      "other_names": [
+        "Little River"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1350.1.1",
+          "name": "Okoni"
+        }
+      ],
+      "duplicate_name_flagged": "Okoni"
+    },
+    {
+      "key": "Rock Eagle-Georgia",
+      "shard_name": "Rock Eagle",
+      "country": "Georgia",
+      "region": "se_georgia_savannah_ocmulgee_etowah",
+      "coords_lat_lng": [
+        33.4167,
+        -83.3853
+      ],
+      "min_year": 100,
+      "max_year": 400,
+      "other_names": [
+        "Rock Eagle Effigy Mound",
+        "9PM1"
+      ],
+      "current_historical_names": [
+        {
+          "date": "100.1.1",
+          "name": "Okoni"
+        }
+      ],
+      "duplicate_name_flagged": "Okoni"
+    },
+    {
+      "key": "Cold Springs-Georgia",
+      "shard_name": "Cold Springs",
+      "country": "Georgia",
+      "region": "se_georgia_savannah_ocmulgee_etowah",
+      "coords_lat_lng": [
+        33.392,
+        -83.188
+      ],
+      "min_year": 500,
+      "max_year": 700,
+      "other_names": [
+        "Cold Springs"
+      ],
+      "current_historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Okoni"
+        }
+      ],
+      "duplicate_name_flagged": "Okoni"
+    },
+    {
+      "key": "'Ōla'a-Hawaii",
+      "shard_name": "'Ōla'a",
+      "country": "Hawaii",
+      "region": "hp_hawaii_island",
+      "coords_lat_lng": [
+        19.50636,
+        -155.15055
+      ],
+      "min_year": 1400,
+      "max_year": 1896,
+      "other_names": [
+        "Olaa",
+        "Kurtistown-'Ōla'a",
+        "ʻŌlaʻa"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1000.1.1",
+          "name": "ʻŌlaʻa"
+        },
+        {
+          "date": "1898.8.12",
+          "name": "'Ōla'a"
+        }
+      ],
+      "duplicate_name_flagged": "ʻŌlaʻa"
+    },
+    {
+      "key": "Eden Roc-Hawaii",
+      "shard_name": "Eden Roc",
+      "country": "Hawaii",
+      "region": "usa_hawaii",
+      "coords_lat_lng": [
+        19.49175,
+        -155.09578
+      ],
+      "min_year": 1881,
+      "max_year": 2025,
+      "other_names": [
+        "Eden Roc CDP"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1881.1.1",
+          "name": "ʻŌlaʻa"
+        },
+        {
+          "date": "1898.8.12",
+          "name": "Olaa"
+        },
+        {
+          "date": "1960.1.1",
+          "name": "Eden Roc"
+        }
+      ],
+      "duplicate_name_flagged": "ʻŌlaʻa"
+    },
+    {
+      "key": "Volcano-Hawaii",
+      "shard_name": "Volcano",
+      "country": "Hawaii",
+      "region": "usa_hawaii",
+      "coords_lat_lng": [
+        19.48641,
+        -155.27741
+      ],
+      "min_year": 1887,
+      "max_year": 2025,
+      "other_names": [
+        "Volcano CDP"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1887.1.1",
+          "name": "ʻŌlaʻa"
+        },
+        {
+          "date": "1898.8.12",
+          "name": "Volcano"
+        }
+      ],
+      "duplicate_name_flagged": "ʻŌlaʻa"
+    },
+    {
+      "key": "Fern Forest-Hawaii",
+      "shard_name": "Fern Forest",
+      "country": "Hawaii",
+      "region": "usa_hawaii",
+      "coords_lat_lng": [
+        19.46472,
+        -155.13238
+      ],
+      "min_year": 1892,
+      "max_year": 2025,
+      "other_names": [
+        "Fern Forest CDP"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1892.1.1",
+          "name": "ʻŌlaʻa"
+        },
+        {
+          "date": "1898.8.12",
+          "name": "Olaa"
+        },
+        {
+          "date": "1960.1.1",
+          "name": "Fern Forest"
+        }
+      ],
+      "duplicate_name_flagged": "ʻŌlaʻa"
+    },
+    {
+      "key": "Frenchman's Bend-Louisiana",
+      "shard_name": "Frenchman's Bend",
+      "country": "Louisiana",
+      "region": "lm_yazoo_ouachita_poverty_point",
+      "coords_lat_lng": [
+        32.582,
+        -92.054
+      ],
+      "min_year": -4200,
+      "max_year": -2800,
+      "other_names": [
+        "16OU259"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-4200.1.1",
+          "name": "Ouachita"
+        }
+      ],
+      "duplicate_name_flagged": "Ouachita"
+    },
+    {
+      "key": "Watson Brake-Louisiana",
+      "shard_name": "Watson Brake",
+      "country": "Louisiana",
+      "region": "lm_yazoo_ouachita_poverty_point",
+      "coords_lat_lng": [
+        32.3539,
+        -92.1431
+      ],
+      "min_year": -4000,
+      "max_year": -3000,
+      "other_names": [
+        "16OU175",
+        "Ouachita Middle Archaic"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-4000.1.1",
+          "name": "Ouachita"
+        }
+      ],
+      "duplicate_name_flagged": "Ouachita"
+    },
+    {
+      "key": "Caney Mounds Ouachita Village-Louisiana",
+      "shard_name": "Caney Mounds Ouachita Village",
+      "country": "Louisiana",
+      "region": "lm_yazoo_ouachita_poverty_point",
+      "coords_lat_lng": [
+        31.751,
+        -91.9515
+      ],
+      "min_year": 1000,
+      "max_year": 1200,
+      "other_names": [
+        "16CT5",
+        "Caney Mounds Habitation"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1000.1.1",
+          "name": "Ouachita"
+        }
+      ],
+      "duplicate_name_flagged": "Ouachita"
+    },
+    {
+      "key": "Hedgeland-Louisiana",
+      "shard_name": "Hedgeland",
+      "country": "Louisiana",
+      "region": "lm_yazoo_ouachita_poverty_point",
+      "coords_lat_lng": [
+        31.6664,
+        -91.8456
+      ],
+      "min_year": -1800,
+      "max_year": 1250,
+      "other_names": [
+        "16CT19",
+        "McGuffee Mounds",
+        "16CT17"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-1800.1.1",
+          "name": "Ouachita"
+        }
+      ],
+      "duplicate_name_flagged": "Ouachita"
+    },
+    {
+      "key": "Harvie-Canada",
+      "shard_name": "Harvie",
+      "country": "Canada",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "coords_lat_lng": [
+        44.5445,
+        -79.4845
+      ],
+      "min_year": 1400,
+      "max_year": 1500,
+      "other_names": [
+        "BdGu-21",
+        "Alex Harvie Simcoe"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1400.1.1",
+          "name": "Ouentironk"
+        }
+      ],
+      "duplicate_name_flagged": "Ouentironk"
+    },
+    {
+      "key": "Dunsmore-Canada",
+      "shard_name": "Dunsmore",
+      "country": "Canada",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "coords_lat_lng": [
+        44.4015,
+        -79.6945
+      ],
+      "min_year": 1280,
+      "max_year": 1480,
+      "other_names": [
+        "BcGw-10",
+        "Barrie Willow Creek Wendat",
+        "Barrie",
+        "BcGw-18",
+        "Barrie Uren-Middleport"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1280.1.1",
+          "name": "Ouentironk"
+        }
+      ],
+      "duplicate_name_flagged": "Ouentironk"
+    },
+    {
+      "key": "Wiacek-Canada",
+      "shard_name": "Wiacek",
+      "country": "Canada",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "coords_lat_lng": [
+        44.3485,
+        -79.6445
+      ],
+      "min_year": 1350,
+      "max_year": 1420,
+      "other_names": [
+        "BcGw-26",
+        "Barrie Lovers Creek"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1350.1.1",
+          "name": "Ouentironk"
+        }
+      ],
+      "duplicate_name_flagged": "Ouentironk"
+    },
+    {
+      "key": "Udora-Canada",
+      "shard_name": "Udora",
+      "country": "Canada",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "coords_lat_lng": [
+        44.2645,
+        -79.1645
+      ],
+      "min_year": -9000,
+      "max_year": -8000,
+      "other_names": [
+        "BbGt-4",
+        "Lake Simcoe Gainey Paleoindian"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-9000.1.1",
+          "name": "Ouentironk"
+        }
+      ],
+      "duplicate_name_flagged": "Ouentironk"
+    },
+    {
+      "key": "Old Caves Pueblo-Arizona",
+      "shard_name": "Old Caves Pueblo",
+      "country": "Arizona",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        35.248,
+        -111.532
+      ],
+      "min_year": 1220,
+      "max_year": 1280,
+      "other_names": [
+        "NA72"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1220.1.1",
+          "name": "Pasiwvi"
+        }
+      ],
+      "duplicate_name_flagged": "Pasiwvi"
+    },
+    {
+      "key": "Elden Pueblo-Arizona",
+      "shard_name": "Elden Pueblo",
+      "country": "Arizona",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        35.244,
+        -111.5665
+      ],
+      "min_year": 300,
+      "max_year": 1600,
+      "other_names": [
+        "NA142",
+        "NA660",
+        "Lizard Man Village",
+        "NA17957",
+        "Sinagua",
+        "Elden Pueblo"
+      ],
+      "current_historical_names": [
+        {
+          "date": "300.1.1",
+          "name": "Pasiwvi"
+        }
+      ],
+      "duplicate_name_flagged": "Pasiwvi"
+    },
+    {
+      "key": "Winona Village-Arizona",
+      "shard_name": "Winona Village",
+      "country": "Arizona",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        35.215,
+        -111.408
+      ],
+      "min_year": 1080,
+      "max_year": 1140,
+      "other_names": [
+        "NA2133"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1080.1.1",
+          "name": "Pasiwvi"
+        }
+      ],
+      "duplicate_name_flagged": "Pasiwvi"
+    },
+    {
+      "key": "Ridge Ruin-Arizona",
+      "shard_name": "Ridge Ruin",
+      "country": "Arizona",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        35.198,
+        -111.385
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [
+        "NA1785",
+        "Flagstaff"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Pasiwvi"
+        }
+      ],
+      "duplicate_name_flagged": "Pasiwvi"
+    }
+  ]
+}

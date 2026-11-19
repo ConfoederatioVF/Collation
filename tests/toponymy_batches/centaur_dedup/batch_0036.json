@@ -1,0 +1,713 @@
+{
+  "batch_index": 36,
+  "clusters": [
+    "calakata",
+    "cansansan",
+    "dziligaisian",
+    "hiraca",
+    "kalamuce"
+  ],
+  "countries": [
+    "Alabama",
+    "Arizona",
+    "Montana",
+    "North Dakota",
+    "Ohio",
+    "South Dakota",
+    "Tennessee"
+  ],
+  "count": 25,
+  "forbidden_already_used_in_region": [
+    "'Aha Kwahwat",
+    "'Aha Makhav",
+    "'Onk Akimel",
+    "A'aninin",
+    "Aamsskáápipikani",
+    "Aaniiih",
+    "Abangkuyivi",
+    "Aberdeen",
+    "Adahiilíní",
+    "Adams",
+    "Addison",
+    "Agar",
+    "Aghaałą́",
+    "Agnes",
+    "Ahagaskiaywa",
+    "Ahsenisiipi",
+    "Akaska",
+    "Akimel O'odham",
+    "Akičhita Wakpála",
+    "Akwałina",
+    "Alamo",
+    "Alamonitheepi",
+    "Albee",
+    "Alcester",
+    "Alexander",
+    "Alexandria",
+    "Ali Waipia",
+    "Alice",
+    "Allentown",
+    "Almont",
+    "Alpena",
+    "Alsen",
+    "Altamont",
+    "Amayeli",
+    "Amayeli Egwa",
+    "Ambrose",
+    "Amenia",
+    "Amidon",
+    "Amogayunyi",
+    "Amoyi",
+    "Anamoose",
+    "Andover",
+    "Anepeminan",
+    "Aneta",
+    "Angostura",
+    "Aniibiminani-ziibi",
+    "Anikituwagi",
+    "Aniyunwiya",
+    "Antler",
+    "Anéʼé Tséyiʼ",
+    "Apache Junction",
+    "Apafalaya",
+    "Apsáalooke",
+    "Ardmore",
+    "Ardoch",
+    "Argusville",
+    "Armour",
+    "Arnegard",
+    "Artas",
+    "Arthur",
+    "Ashland Heights",
+    "Ashley",
+    "Ashton",
+    "Astoria",
+    "Aurora",
+    "Aurora Center",
+    "Avon",
+    "Awadi Aguraawi",
+    "Awat'ovi",
+    "Awatixa",
+    "Awatovi",
+    "Awatíxa",
+    "Awatʼovi",
+    "Awaxawi",
+    "Awaxáawi",
+    "Awigaxa",
+    "Awáati",
+    "Awígaxa",
+    "Ayr",
+    "Ayuhwasi",
+    "Babad Do'ag",
+    "Babocomari",
+    "Badger",
+    "Balfour",
+    "Balta",
+    "Baltic",
+    "Bancroft",
+    "Bantry",
+    "Barney",
+    "Bartlett",
+    "Barton",
+    "Bathgate",
+    "Bde Hdakíŋyaŋ",
+    "Bde Psíŋ",
+    "Beach",
+    "Belfield",
+    "Belle Fourche",
+    "Belvidere",
+    "Benedict",
+    "Bentinck",
+    "Beresford",
+    "Bergen",
+    "Berlin",
+    "Berthold",
+    "Berwick",
+    "Besh-Ba-Gowah",
+    "Beulah",
+    "Beʼekʼid Baa Ahoodzání",
+    "Bichkaashíshe",
+    "Bidaʼhóóchiiʼ",
+    "Bideʼyóó",
+    "Big Stone",
+    "Big Stone City",
+    "Bijou Hills",
+    "Binford",
+    "Bisbee",
+    "Bison",
+    "Blackhawk",
+    "Blacktail",
+    "Blaine"
+  ],
+  "settlements": [
+    {
+      "key": "Williamson Mound-Ohio",
+      "shard_name": "Williamson Mound",
+      "country": "Ohio",
+      "region": "oh_scioto_miami_hopewell_core",
+      "coords_lat_lng": [
+        39.745,
+        -83.8268
+      ],
+      "min_year": -400,
+      "max_year": 100,
+      "other_names": [
+        "Williamson Mound State Memorial",
+        "33GR1"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-400.1.1",
+          "name": "Chalakaatha"
+        }
+      ],
+      "duplicate_name_flagged": "Chalakaatha"
+    },
+    {
+      "key": "Pollock Works-Ohio",
+      "shard_name": "Pollock Works",
+      "country": "Ohio",
+      "region": "oh_scioto_miami_hopewell_core",
+      "coords_lat_lng": [
+        39.6946,
+        -83.8865
+      ],
+      "min_year": -300,
+      "max_year": 400,
+      "other_names": [
+        "33GR5"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-300.1.1",
+          "name": "Chalakaatha"
+        }
+      ],
+      "duplicate_name_flagged": "Chalakaatha"
+    },
+    {
+      "key": "Anderson Fort Ancient Village-Ohio",
+      "shard_name": "Anderson Fort Ancient Village",
+      "country": "Ohio",
+      "region": "oh_scioto_miami_hopewell_core",
+      "coords_lat_lng": [
+        39.521,
+        -84.0515
+      ],
+      "min_year": 1250,
+      "max_year": 1350,
+      "other_names": [
+        "33WA4",
+        "Caesar Creek Settlement"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Chalakaatha"
+        }
+      ],
+      "duplicate_name_flagged": "Chalakaatha"
+    },
+    {
+      "key": "Gartner-Ohio",
+      "shard_name": "Gartner",
+      "country": "Ohio",
+      "region": "oh_scioto_miami_hopewell_core",
+      "coords_lat_lng": [
+        39.428,
+        -83.028
+      ],
+      "min_year": 1100,
+      "max_year": 1350,
+      "other_names": [
+        "Gartner Mound and Village",
+        "33RO19"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1100.1.1",
+          "name": "Chalakaatha"
+        }
+      ],
+      "duplicate_name_flagged": "Chalakaatha"
+    },
+    {
+      "key": "Hopewell Mound Group-Ohio",
+      "shard_name": "Hopewell Mound Group",
+      "country": "Ohio",
+      "region": "oh_scioto_miami_hopewell_core",
+      "coords_lat_lng": [
+        39.3547,
+        -83.1031
+      ],
+      "min_year": 0,
+      "max_year": 400,
+      "other_names": [
+        "Mound City",
+        "Chillicothe Scioto",
+        "Hopewell Type Site",
+        "33RO27",
+        "Mound City Group",
+        "Hopewell Culture NHP",
+        "33RO32"
+      ],
+      "current_historical_names": [
+        {
+          "date": "0.1.1",
+          "name": "Chalakaatha"
+        }
+      ],
+      "duplicate_name_flagged": "Chalakaatha"
+    },
+    {
+      "key": "Grand Rapids James Village-North Dakota",
+      "shard_name": "Grand Rapids James Village",
+      "country": "North Dakota",
+      "region": "np_middle_missouri_dakotas",
+      "coords_lat_lng": [
+        46.451,
+        -98.3015
+      ],
+      "min_year": 1300,
+      "max_year": 1500,
+      "other_names": [
+        "32LM22",
+        "Grand Rapids Habitation"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1300.1.1",
+          "name": "Čhaŋsáŋsaŋ"
+        }
+      ],
+      "duplicate_name_flagged": "Čhaŋsáŋsaŋ"
+    },
+    {
+      "key": "Bloom-South Dakota",
+      "shard_name": "Bloom",
+      "country": "South Dakota",
+      "region": "np_middle_missouri_dakotas",
+      "coords_lat_lng": [
+        43.625,
+        -97.815
+      ],
+      "min_year": 1000,
+      "max_year": 1200,
+      "other_names": [
+        "39HS1",
+        "Bloom Fortified Village NHL"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1000.1.1",
+          "name": "Čhaŋsáŋsaŋ"
+        }
+      ],
+      "duplicate_name_flagged": "Čhaŋsáŋsaŋ"
+    },
+    {
+      "key": "Twelve Mile Creek (Hutchinson)-South Dakota",
+      "shard_name": "Twelve Mile Creek",
+      "country": "South Dakota",
+      "region": "np_middle_missouri_dakotas",
+      "coords_lat_lng": [
+        43.425,
+        -97.815
+      ],
+      "min_year": 1050,
+      "max_year": 1250,
+      "other_names": [
+        "39HT3",
+        "James River Mill Creek",
+        "Twelve Mile Creek (Hutchinson)"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1050.1.1",
+          "name": "Čhaŋsáŋsaŋ"
+        }
+      ],
+      "duplicate_name_flagged": "Čhaŋsáŋsaŋ"
+    },
+    {
+      "key": "Twelve Mile Creek Village-South Dakota",
+      "shard_name": "Twelve Mile Creek Village",
+      "country": "South Dakota",
+      "region": "np_middle_missouri_dakotas",
+      "coords_lat_lng": [
+        43.401,
+        -97.8015
+      ],
+      "min_year": 1150,
+      "max_year": 1250,
+      "other_names": [
+        "39HT1",
+        "Twelve Mile Creek Middle Missouri Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1150.1.1",
+          "name": "Čhaŋsáŋsaŋ"
+        }
+      ],
+      "duplicate_name_flagged": "Čhaŋsáŋsaŋ"
+    },
+    {
+      "key": "Bloom Fortified Village-South Dakota",
+      "shard_name": "Bloom Fortified Village",
+      "country": "South Dakota",
+      "region": "np_middle_missouri_dakotas",
+      "coords_lat_lng": [
+        43.3515,
+        -98.121
+      ],
+      "min_year": 1100,
+      "max_year": 1250,
+      "other_names": [
+        "39HS1",
+        "Bloom Initial Middle Missouri Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1100.1.1",
+          "name": "Čhaŋsáŋsaŋ"
+        }
+      ],
+      "duplicate_name_flagged": "Čhaŋsáŋsaŋ"
+    },
+    {
+      "key": "Roundy Ruin-Arizona",
+      "shard_name": "Roundy Ruin",
+      "country": "Arizona",
+      "region": "az_salt_verde_phoenix_hohokam",
+      "coords_lat_lng": [
+        34.22664,
+        -110.18791
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Dził Łigai Si’án"
+        }
+      ],
+      "duplicate_name_flagged": "Dził Łigai Si’án"
+    },
+    {
+      "key": "Pottery Hill--Silver Creek-Arizona",
+      "shard_name": "Pottery Hill--Silver Creek",
+      "country": "Arizona",
+      "region": "az_salt_verde_phoenix_hohokam",
+      "coords_lat_lng": [
+        34.18396,
+        -110.16412
+      ],
+      "min_year": 400,
+      "max_year": 1450,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "400.1.1",
+          "name": "Dził Łigai Si’án"
+        }
+      ],
+      "duplicate_name_flagged": "Dził Łigai Si’án"
+    },
+    {
+      "key": "Patty Alsenay Site-Arizona",
+      "shard_name": "Patty Alsenay Site",
+      "country": "Arizona",
+      "region": "az_salt_verde_phoenix_hohokam",
+      "coords_lat_lng": [
+        34.01017,
+        -109.81411
+      ],
+      "min_year": 500,
+      "max_year": 1450,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Dził Łigai Si’án"
+        }
+      ],
+      "duplicate_name_flagged": "Dził Łigai Si’án"
+    },
+    {
+      "key": "Amos Spring Pueblo-Arizona",
+      "shard_name": "Amos Spring Pueblo",
+      "country": "Arizona",
+      "region": "az_salt_verde_phoenix_hohokam",
+      "coords_lat_lng": [
+        33.88858,
+        -110.10485
+      ],
+      "min_year": 200,
+      "max_year": 1600,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Dził Łigai Si’án"
+        }
+      ],
+      "duplicate_name_flagged": "Dził Łigai Si’án"
+    },
+    {
+      "key": "Sedillo Pueblo-Arizona",
+      "shard_name": "Sedillo Pueblo",
+      "country": "Arizona",
+      "region": "az_salt_verde_phoenix_hohokam",
+      "coords_lat_lng": [
+        33.88609,
+        -110.06969
+      ],
+      "min_year": 500,
+      "max_year": 1450,
+      "other_names": [],
+      "current_historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Dził Łigai Si’án"
+        }
+      ],
+      "duplicate_name_flagged": "Dził Łigai Si’án"
+    },
+    {
+      "key": "Ash Coulee-Montana",
+      "shard_name": "Ash Coulee",
+      "country": "Montana",
+      "region": "np_upper_missouri_montana",
+      "coords_lat_lng": [
+        47.25,
+        -105.68
+      ],
+      "min_year": 1100,
+      "max_year": 1500,
+      "other_names": [
+        "24MC201",
+        "McCone-Fallon WPA Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1100.1.1",
+          "name": "Hiraacá"
+        }
+      ],
+      "duplicate_name_flagged": "Hiraacá"
+    },
+    {
+      "key": "Mouse River Earthlodge Town-North Dakota",
+      "shard_name": "Mouse River Earthlodge Town",
+      "country": "North Dakota",
+      "region": "enp_souris_devils_lake",
+      "coords_lat_lng": [
+        48.052,
+        -100.9215
+      ],
+      "min_year": 1400,
+      "max_year": 1550,
+      "other_names": [
+        "32MH25",
+        "Velva Souris Habitation"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1400.1.1",
+          "name": "Hiraacá"
+        }
+      ],
+      "duplicate_name_flagged": "Hiraacá"
+    },
+    {
+      "key": "Big Hidatsa Village-North Dakota",
+      "shard_name": "Big Hidatsa Village",
+      "country": "North Dakota",
+      "region": "ca1_plains_indigenous_1754",
+      "coords_lat_lng": [
+        47.3621,
+        -101.3981
+      ],
+      "min_year": 1740,
+      "max_year": 1780,
+      "other_names": [
+        "Knife River Hidatsa Capital"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1740.1.1",
+          "name": "Hiraaca"
+        }
+      ],
+      "duplicate_name_flagged": "Hiraaca"
+    },
+    {
+      "key": "Big Hidatsa-North Dakota",
+      "shard_name": "Big Hidatsa",
+      "country": "North Dakota",
+      "region": "np_middle_missouri_dakotas",
+      "coords_lat_lng": [
+        47.3525,
+        -101.3837
+      ],
+      "min_year": 1450,
+      "max_year": 1600,
+      "other_names": [
+        "32ME12",
+        "Hiraaca Village",
+        "Lower Hidatsa",
+        "32ME10",
+        "Awatixa Xi'e",
+        "Sakakawea",
+        "32ME11",
+        "Awatixa Hidatsa"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1450.1.1",
+          "name": "Hiraacá"
+        }
+      ],
+      "duplicate_name_flagged": "Hiraacá"
+    },
+    {
+      "key": "Hintz Earthlodge Village-North Dakota",
+      "shard_name": "Hintz Earthlodge Village",
+      "country": "North Dakota",
+      "region": "np_middle_missouri_dakotas",
+      "coords_lat_lng": [
+        46.9501,
+        -98.7103
+      ],
+      "min_year": 1400,
+      "max_year": 1500,
+      "other_names": [
+        "32SN34",
+        "James River Coalescent Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1400.1.1",
+          "name": "Hiraacá"
+        }
+      ],
+      "duplicate_name_flagged": "Hiraacá"
+    },
+    {
+      "key": "Perry Pickwick Village-Alabama",
+      "shard_name": "Perry Pickwick Village",
+      "country": "Alabama",
+      "region": "cu_middle_tennessee_muscle_shoals",
+      "coords_lat_lng": [
+        34.841,
+        -87.9015
+      ],
+      "min_year": 1200,
+      "max_year": 1350,
+      "other_names": [
+        "1LU25",
+        "Perry Pickwick Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Kallamuchee"
+        }
+      ],
+      "duplicate_name_flagged": "Kallamuchee"
+    },
+    {
+      "key": "Kogers Island Village-Alabama",
+      "shard_name": "Kogers Island Village",
+      "country": "Alabama",
+      "region": "cu_middle_tennessee_muscle_shoals",
+      "coords_lat_lng": [
+        34.8215,
+        -87.851
+      ],
+      "min_year": 1150,
+      "max_year": 1500,
+      "other_names": [
+        "1LU92",
+        "Kogers Island Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1150.1.1",
+          "name": "Kallamuchee"
+        }
+      ],
+      "duplicate_name_flagged": "Kallamuchee"
+    },
+    {
+      "key": "Sycamore Mound Village-Alabama",
+      "shard_name": "Sycamore Mound Village",
+      "country": "Alabama",
+      "region": "cu_middle_tennessee_muscle_shoals",
+      "coords_lat_lng": [
+        34.7515,
+        -87.251
+      ],
+      "min_year": 1200,
+      "max_year": 1350,
+      "other_names": [
+        "1LA15",
+        "Lawrence County River Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Kallamuchee"
+        }
+      ],
+      "duplicate_name_flagged": "Kallamuchee"
+    },
+    {
+      "key": "Decatur River Village-Alabama",
+      "shard_name": "Decatur River Village",
+      "country": "Alabama",
+      "region": "cu_middle_tennessee_muscle_shoals",
+      "coords_lat_lng": [
+        34.611,
+        -86.9815
+      ],
+      "min_year": 1250,
+      "max_year": 1400,
+      "other_names": [
+        "1MG1",
+        "Morgan County Tennessee Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Kallamuchee"
+        }
+      ],
+      "duplicate_name_flagged": "Kallamuchee"
+    },
+    {
+      "key": "McDonald-Tennessee_2",
+      "shard_name": "McDonald",
+      "country": "Tennessee",
+      "region": "cu_upper_east_tennessee_ridge",
+      "coords_lat_lng": [
+        35.6086,
+        -84.9181
+      ],
+      "min_year": 800,
+      "max_year": 1300,
+      "other_names": [
+        "40RH7"
+      ],
+      "current_historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Kallamuchee"
+        }
+      ],
+      "duplicate_name_flagged": "Kallamuchee"
+    }
+  ]
+}

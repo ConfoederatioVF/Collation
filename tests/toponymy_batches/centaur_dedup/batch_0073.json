@@ -1,0 +1,701 @@
+{
+  "batch_index": 73,
+  "clusters": [
+    "karkin",
+    "kaskaskia",
+    "kawita",
+    "kaze",
+    "kecak",
+    "kenosewun",
+    "kentake",
+    "kente",
+    "kicisibi",
+    "kikialus",
+    "kinlitsosinil",
+    "kinodjiwan"
+  ],
+  "countries": [
+    "Alabama",
+    "California",
+    "Canada",
+    "Illinois",
+    "Kansas",
+    "Kentucky",
+    "Manitoba",
+    "New Mexico",
+    "North Carolina",
+    "Ontario",
+    "Quebec",
+    "Washington",
+    "Wisconsin"
+  ],
+  "count": 24,
+  "forbidden_already_used_in_region": [
+    "'Aha Makhav",
+    "'Avi Melyehw",
+    "'Iipay",
+    "'Yalis",
+    "A'ts'in'a",
+    "A'ts'ina",
+    "A:shiwi",
+    "Aazhoodenaang",
+    "Abó",
+    "Achasta",
+    "Achelacy",
+    "Achiya: Dek'yapbow'a",
+    "Acjachemen",
+    "Adikamegong",
+    "Aguasto",
+    "Ahha' Kwe'maca",
+    "Ahjimsek",
+    "Ahkwesáhsne",
+    "Ahousaht",
+    "Ahwahnee",
+    "Ahwendoe",
+    "Ajoasté",
+    "Ajumawi",
+    "Akaamaschii",
+    "Akigwitegw",
+    "Akpatordjuark",
+    "Akulivik",
+    "Akwałina",
+    "Akwesasne",
+    "Alamo",
+    "Alamogordo Army Airfield",
+    "Alarnerk",
+    "Alexander",
+    "Algonquin",
+    "Alpowai",
+    "Alturas",
+    "Alámex",
+    "Amaquon",
+    "Amayeli Egwa",
+    "Amehkwani",
+    "Amiskwaciya",
+    "Amistustikwach",
+    "Amoxiumqua",
+    "Amuctac",
+    "Anibiminan",
+    "Aniibiminani-ziibi",
+    "Animo-ziibiing",
+    "Anyapax",
+    "Aondironon",
+    "Apafalaya",
+    "Apakosis Sipi",
+    "Apitipi",
+    "Apitipik",
+    "Aptos",
+    "Apvitok",
+    "Arendarhonon",
+    "Argentenay",
+    "Argenteuil",
+    "Arvia'juaq",
+    "Arviat",
+    "Arviligjuaq",
+    "Aschkibokahn",
+    "Asiniibwaan-ziibi",
+    "Asinipwat Sipi",
+    "Asinipwât-sîpiy",
+    "Asinīpwāt-sīpiy",
+    "Askik Pawistik",
+    "Askupinong",
+    "Astialakwa",
+    "Ataronchronon",
+    "Atchash",
+    "Athapapuskow",
+    "Athithuf",
+    "Atonontrataronon",
+    "Atripuy",
+    "Atsee Nitsaa",
+    "Atsinna",
+    "Atsuge",
+    "Attawapiskat",
+    "Attignawantan",
+    "Attigneenongnahac",
+    "Auburn",
+    "Aujuittuq",
+    "Aulatsivik",
+    "Aulavik",
+    "Aulintac",
+    "Aupaluk",
+    "Avayalik",
+    "Avonlea",
+    "Avvajja",
+    "Awani-wi",
+    "Awha'y",
+    "Ayuhwasi",
+    "Aztalan",
+    "Aztec",
+    "Baaskaandibewi-ziibiing",
+    "Baawingashing",
+    "Baie-Rouge",
+    "Baie-Saint-Paul",
+    "Baie-du-Febvre",
+    "Bakersfield",
+    "Batiklechawi",
+    "Batiscan",
+    "Batsi'",
+    "Baxoje",
+    "Bay Roberts",
+    "Bay de Verde",
+    "Bayfield",
+    "Bdéwákhathuŋwaŋ",
+    "Beaumont",
+    "Beauport",
+    "Beaupré",
+    "Beloeil",
+    "Benson",
+    "Beothuk",
+    "Berthier",
+    "Berthier-en-Bas",
+    "Bes Des",
+    "Beʼekʼid Hóteelí",
+    "Bidanku"
+  ],
+  "settlements": [
+    {
+      "key": "Benicia Carquinez Strait Town-California",
+      "shard_name": "Benicia Carquinez Strait Town",
+      "country": "California",
+      "region": "ca_sacramento_sf_bay_delta",
+      "coords_lat_lng": [
+        38.05,
+        -122.15
+      ],
+      "min_year": 100,
+      "max_year": 1350,
+      "other_names": [
+        "Carquinez Strait North Shore Capital"
+      ],
+      "current_historical_names": [
+        {
+          "date": "100.1.1",
+          "name": "Karkin"
+        }
+      ],
+      "duplicate_name_flagged": "Karkin"
+    },
+    {
+      "key": "Martinez Alhambra Valley Town-California",
+      "shard_name": "Martinez Alhambra Valley Town",
+      "country": "California",
+      "region": "ca_sacramento_sf_bay_delta",
+      "coords_lat_lng": [
+        38.0167,
+        -122.1333
+      ],
+      "min_year": 200,
+      "max_year": 1350,
+      "other_names": [
+        "Carquinez South Shore Center"
+      ],
+      "current_historical_names": [
+        {
+          "date": "200.1.1",
+          "name": "Karkin"
+        }
+      ],
+      "duplicate_name_flagged": "Karkin"
+    },
+    {
+      "key": "Kaesberg-Schaudt-Illinois",
+      "shard_name": "Kaesberg-Schaudt",
+      "country": "Illinois",
+      "region": "um_american_bottom_lower_il",
+      "coords_lat_lng": [
+        38.075,
+        -89.845
+      ],
+      "min_year": 620,
+      "max_year": 1000,
+      "other_names": [
+        "11R594",
+        "Kaskaskia Valley Late Woodland"
+      ],
+      "current_historical_names": [
+        {
+          "date": "620.1.1",
+          "name": "Kaaskaaskia"
+        }
+      ],
+      "duplicate_name_flagged": "Kaaskaaskia"
+    },
+    {
+      "key": "Twenhafel-Illinois",
+      "shard_name": "Twenhafel",
+      "country": "Illinois",
+      "region": "um_american_bottom_lower_il",
+      "coords_lat_lng": [
+        37.7751,
+        -89.445
+      ],
+      "min_year": -1500,
+      "max_year": 1400,
+      "other_names": [
+        "11J12",
+        "Big Muddy Hopewell-Mississippian"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-1500.1.1",
+          "name": "Kaaskaaskia"
+        }
+      ],
+      "duplicate_name_flagged": "Kaaskaaskia"
+    },
+    {
+      "key": "Coweta-Alabama",
+      "shard_name": "Coweta",
+      "country": "Alabama",
+      "region": "usa_alabama",
+      "coords_lat_lng": [
+        32.461,
+        -85.002
+      ],
+      "min_year": 1500,
+      "max_year": 1783,
+      "other_names": [
+        "Coweta Town",
+        "Kawita",
+        "Coweta Tallahassee",
+        "Principal War Town of the Creek Nation"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1500.1.1",
+          "name": "Kawita"
+        }
+      ],
+      "duplicate_name_flagged": "Kawita"
+    },
+    {
+      "key": "Coweeta Creek-North Carolina",
+      "shard_name": "Coweeta Creek",
+      "country": "North Carolina",
+      "region": "cu_upper_east_tennessee_ridge",
+      "coords_lat_lng": [
+        35.092,
+        -83.412
+      ],
+      "min_year": 1350,
+      "max_year": 1600,
+      "other_names": [
+        "31MA34"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1350.1.1",
+          "name": "Kawita"
+        }
+      ],
+      "duplicate_name_flagged": "Kawita"
+    },
+    {
+      "key": "Doniphan-Kansas",
+      "shard_name": "Doniphan",
+      "country": "Kansas",
+      "region": "np_lower_missouri_platte_kansas",
+      "coords_lat_lng": [
+        39.635,
+        -95.075
+      ],
+      "min_year": 1500,
+      "max_year": 1600,
+      "other_names": [
+        "14DP2",
+        "Independence Creek Kansa"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1500.1.1",
+          "name": "Káaⁿze"
+        }
+      ],
+      "duplicate_name_flagged": "Káaⁿze"
+    },
+    {
+      "key": "Trowbridge-Kansas",
+      "shard_name": "Trowbridge",
+      "country": "Kansas",
+      "region": "np_lower_missouri_platte_kansas",
+      "coords_lat_lng": [
+        39.135,
+        -94.715
+      ],
+      "min_year": 100,
+      "max_year": 500,
+      "other_names": [
+        "14WY1",
+        "Kansas City Hopewell Wyandotte"
+      ],
+      "current_historical_names": [
+        {
+          "date": "100.1.1",
+          "name": "Káaⁿze"
+        }
+      ],
+      "duplicate_name_flagged": "Káaⁿze"
+    },
+    {
+      "key": "Beattie Park Mound Group-Illinois",
+      "shard_name": "Beattie Park Mound Group",
+      "country": "Illinois",
+      "region": "um_des_moines_rock_iowa",
+      "coords_lat_lng": [
+        42.2746,
+        -89.0919
+      ],
+      "min_year": 600,
+      "max_year": 900,
+      "other_names": [
+        "Turtle Effigy Mound",
+        "11WO"
+      ],
+      "current_historical_names": [
+        {
+          "date": "600.1.1",
+          "name": "Keečąk"
+        }
+      ],
+      "duplicate_name_flagged": "Keečąk"
+    },
+    {
+      "key": "Rock River Beloit Village-Wisconsin",
+      "shard_name": "Rock River Beloit Village",
+      "country": "Wisconsin",
+      "region": "um_des_moines_rock_iowa",
+      "coords_lat_lng": [
+        42.5015,
+        -89.031
+      ],
+      "min_year": 1250,
+      "max_year": 1450,
+      "other_names": [
+        "Turtle Creek Confluence Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Keečąk"
+        }
+      ],
+      "duplicate_name_flagged": "Keečąk"
+    },
+    {
+      "key": "Lockport-Canada",
+      "shard_name": "Lockport",
+      "country": "Canada",
+      "region": "cc1_western_prairies_verendrye",
+      "coords_lat_lng": [
+        50.0883,
+        -96.9422
+      ],
+      "min_year": -1000,
+      "max_year": 1550,
+      "other_names": [
+        "EaLf-1",
+        "Red River Rapids Horticultural",
+        "Kenosewun",
+        "Red River Maize Village",
+        "Red River North"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-1000.1.1",
+          "name": "Kenosewun"
+        }
+      ],
+      "duplicate_name_flagged": "Kenosewun"
+    },
+    {
+      "key": "Fidler Red River Settlement-Manitoba",
+      "shard_name": "Fidler Red River Settlement",
+      "country": "Manitoba",
+      "region": "pr_red_assiniboine_winnipeg_basin",
+      "coords_lat_lng": [
+        50.1333,
+        -96.8833
+      ],
+      "min_year": 900,
+      "max_year": 1500,
+      "other_names": [
+        "Selkirk River Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "900.1.1",
+          "name": "Kenosewun"
+        }
+      ],
+      "duplicate_name_flagged": "Kenosewun"
+    },
+    {
+      "key": "Peter Village-Kentucky",
+      "shard_name": "Peter Village",
+      "country": "Kentucky",
+      "region": "oh_kentucky_cumberland_green",
+      "coords_lat_lng": [
+        38.152,
+        -84.428
+      ],
+      "min_year": -400,
+      "max_year": -150,
+      "other_names": [
+        "15FA166"
+      ],
+      "current_historical_names": [
+        {
+          "date": "-400.1.1",
+          "name": "Kentaake"
+        }
+      ],
+      "duplicate_name_flagged": "Kentaake"
+    },
+    {
+      "key": "La Prairie Saint-Laurent Town-Quebec",
+      "shard_name": "La Prairie Saint-Laurent Town",
+      "country": "Quebec",
+      "region": "sl_montreal_trois_rivieres_quebec",
+      "coords_lat_lng": [
+        45.4167,
+        -73.5
+      ],
+      "min_year": 1250,
+      "max_year": 1520,
+      "other_names": [
+        "La Prairie Basin Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Kentake"
+        }
+      ],
+      "duplicate_name_flagged": "Kentake"
+    },
+    {
+      "key": "Kente-Canada",
+      "shard_name": "Kente",
+      "country": "Canada",
+      "region": "cc1_pays_den_haut_ontario",
+      "coords_lat_lng": [
+        44.1521,
+        -77.3821
+      ],
+      "min_year": 1668,
+      "max_year": 1680,
+      "other_names": [
+        "Quinte Cayuga Mission"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1668.1.1",
+          "name": "Kente"
+        }
+      ],
+      "duplicate_name_flagged": "Kente"
+    },
+    {
+      "key": "Payne-Canada",
+      "shard_name": "Payne",
+      "country": "Canada",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "coords_lat_lng": [
+        43.9645,
+        -77.1845
+      ],
+      "min_year": 1450,
+      "max_year": 1520,
+      "other_names": [
+        "AlGh-2",
+        "Prince Edward County St. Lawrence Iroquoian"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1450.1.1",
+          "name": "Kente"
+        }
+      ],
+      "duplicate_name_flagged": "Kente"
+    },
+    {
+      "key": "Deep River Ottawa Settlement-Ontario",
+      "shard_name": "Deep River Ottawa Settlement",
+      "country": "Ontario",
+      "region": "sl_ottawa_rideau_upper_st_lawrence",
+      "coords_lat_lng": [
+        46.1,
+        -77.4833
+      ],
+      "min_year": 1100,
+      "max_year": 1480,
+      "other_names": [
+        "Deep River Upper Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1100.1.1",
+          "name": "Kichi Sìbì"
+        }
+      ],
+      "duplicate_name_flagged": "Kichi Sìbì"
+    },
+    {
+      "key": "Rigaud River Mouth Settlement-Quebec",
+      "shard_name": "Rigaud River Mouth Settlement",
+      "country": "Quebec",
+      "region": "sl_huronia_simcoe_ontario_peninsula",
+      "coords_lat_lng": [
+        45.4833,
+        -74.3
+      ],
+      "min_year": 1250,
+      "max_year": 1510,
+      "other_names": [
+        "Rigaud Ottawa River Village"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1250.1.1",
+          "name": "Kichi Sibi"
+        }
+      ],
+      "duplicate_name_flagged": "Kichi Sibi"
+    },
+    {
+      "key": "Conway-Washington_2",
+      "shard_name": "Conway",
+      "country": "Washington",
+      "region": "nw_puget_sound_olympic_coast",
+      "coords_lat_lng": [
+        48.3408,
+        -122.3458
+      ],
+      "min_year": 800,
+      "max_year": 1600,
+      "other_names": [
+        "South Fork Skagit",
+        "Kikiallus",
+        "45SK46"
+      ],
+      "current_historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Kikiallus"
+        }
+      ],
+      "duplicate_name_flagged": "Kikiallus"
+    },
+    {
+      "key": "Cama Beach-Washington",
+      "shard_name": "Cama Beach",
+      "country": "Washington",
+      "region": "nw_puget_sound_olympic_coast",
+      "coords_lat_lng": [
+        48.1433,
+        -122.5133
+      ],
+      "min_year": 500,
+      "max_year": 1600,
+      "other_names": [
+        "Camano Island",
+        "45IS2"
+      ],
+      "current_historical_names": [
+        {
+          "date": "500.1.1",
+          "name": "Kikiallus"
+        }
+      ],
+      "duplicate_name_flagged": "Kikiallus"
+    },
+    {
+      "key": "Church Rock-New Mexico_2",
+      "shard_name": "Church Rock",
+      "country": "New Mexico",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        35.54866,
+        -108.52288
+      ],
+      "min_year": 400,
+      "max_year": 1600,
+      "other_names": [
+        "Rio Puerco of the West"
+      ],
+      "current_historical_names": [
+        {
+          "date": "400.1.1",
+          "name": "Kinłitsosinil"
+        }
+      ],
+      "duplicate_name_flagged": "Kinłitsosinil"
+    },
+    {
+      "key": "Navajo Church Rock-New Mexico",
+      "shard_name": "Navajo Church Rock",
+      "country": "New Mexico",
+      "region": "az_little_colorado_plateau",
+      "coords_lat_lng": [
+        35.535,
+        -108.605
+      ],
+      "min_year": 1050,
+      "max_year": 1125,
+      "other_names": [
+        "LA 11635"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1050.1.1",
+          "name": "Kinłitsosinil"
+        }
+      ],
+      "duplicate_name_flagged": "Kinłitsosinil"
+    },
+    {
+      "key": "Hawkesbury Long Sault Village-Ontario",
+      "shard_name": "Hawkesbury Long Sault Village",
+      "country": "Ontario",
+      "region": "sl_ottawa_rideau_upper_st_lawrence",
+      "coords_lat_lng": [
+        45.6,
+        -74.6
+      ],
+      "min_year": 1200,
+      "max_year": 1510,
+      "other_names": [
+        "Long Sault South Shore Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Kinodjiwan"
+        }
+      ],
+      "duplicate_name_flagged": "Kinodjiwan"
+    },
+    {
+      "key": "Grenville Long Sault North Town-Quebec",
+      "shard_name": "Grenville Long Sault North Town",
+      "country": "Quebec",
+      "region": "sl_ottawa_rideau_upper_st_lawrence",
+      "coords_lat_lng": [
+        45.6333,
+        -74.6
+      ],
+      "min_year": 1200,
+      "max_year": 1500,
+      "other_names": [
+        "Long Sault North Rapids Town"
+      ],
+      "current_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Kinodjiwan"
+        }
+      ],
+      "duplicate_name_flagged": "Kinodjiwan"
+    }
+  ]
+}
