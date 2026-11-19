@@ -44,7 +44,7 @@ let path = global.path || require("path");
       let elev_barrier_m = Number(
         (hu_ctx && hu_ctx.elevation_barrier_m) || k_cfg.elevation_barrier_m || 650.0
       );
-      let eta = 0.05;
+      let eta = 0.10;
       let tau1_eff = Math.max(0.72, Math.min(1.15, 0.78*(bundle.tau1_dimensionless || 1.30)));
       let tau2_eff = Math.max(1.50, Math.min(2.25, 0.74*(bundle.tau2_dimensionless || 2.80)));
       let inv_tau1 = 1/tau1_eff;
@@ -179,61 +179,79 @@ let path = global.path || require("path");
       let perm_ice = (bundle._bio_covs && bundle._bio_covs.perm_ice) ? bundle._bio_covs.perm_ice : null;
       let prior_dens = prior_bundle.prior_dens;
       let r_area = new Float64Array(n_obs);
+      let r_hab_area = new Float64Array(n_obs);
       let r_prior_sum = new Float64Array(n_obs);
+      let r_set_sum = new Float64Array(n_obs);
       let sp_ctx = this.A_getOrBuildSparseMaternMatrix(bundle);
+      let u_set = prior_bundle.u_set || null;
 
       //Function body
       for (let i = 0; i < n_valid; i++) {
         let o = cell_obs[i];
 
-        if (o < 0 || o >= n_obs || prior_dens[i] <= 0) continue;
+        if (o < 0 || o >= n_obs) continue;
         let a = cell_area[i]*(perm_ice ? perm_ice[i] : 1.0);
 
         if (a <= 0) continue;
         r_area[o] += a;
-        r_prior_sum[o] += a*prior_dens[i];
+        if (prior_dens[i] > 0) {
+          r_hab_area[o] += a;
+          r_prior_sum[o] += a*prior_dens[i];
+          if (u_set) r_set_sum[o] += a*u_set[i];
+        }
       }
 
       let obs_prior_z = new Float64Array(n_obs);
       let p_z_sum = 0;
+      let tot_r_area = 0;
       let z_o_sum = 0;
 
       for (let o = 0; o < n_obs; o++) {
-        if (obs_list[o].is_frontier_buffer || r_area[o] <= 0) continue;
-        let pz = Math.sqrt(Math.max(1e-7, r_prior_sum[o]/r_area[o]));
+        if (obs_list[o].is_frontier_buffer || r_hab_area[o] <= 0 || r_prior_sum[o] <= 0) continue;
+        //Pycnophylactic catchment-area denominator (capped at 10x habitable area to avoid Arctic/desert single-pixel blowups)
+        let eff_area = Math.min(r_area[o], 10.0*r_hab_area[o]);
+        let pz = Math.sqrt(Math.max(1e-7, r_prior_sum[o]/eff_area));
 
         obs_prior_z[o] = pz;
-        p_z_sum += r_area[o]*pz;
-        z_o_sum += r_area[o]*z_obs[o];
+        p_z_sum += eff_area*pz;
+        tot_r_area += eff_area;
+        z_o_sum += eff_area*z_obs[o];
       }
+      let mean_z_obs = (tot_r_area > 0) ? (z_o_sum/tot_r_area) : 0.05;
       let scale_p2z = (p_z_sum > 1e-8) ? (z_o_sum/p_z_sum) : 1.0;
 
       for (let o = 0; o < n_obs; o++) {
-        if (r_area[o] > 0)
-          obs_prior_z[o] = Math.sqrt(Math.max(1e-7, r_prior_sum[o]/r_area[o]))*scale_p2z;
+        if (r_hab_area[o] > 0 && r_prior_sum[o] > 0) {
+          let eff_area = Math.min(r_area[o], 10.0*r_hab_area[o]);
+
+          obs_prior_z[o] = Math.sqrt(Math.max(1e-7, r_prior_sum[o]/eff_area))*scale_p2z;
+        }
       }
 
       let hu_ctx = bundle._hu_ctx || {};
-      let r_lo = Number.isFinite(hu_ctx.residual_clamp_min) ? Number(hu_ctx.residual_clamp_min) : -2.60;
-      let r_hi = Number.isFinite(hu_ctx.residual_clamp_max) ? Number(hu_ctx.residual_clamp_max) : 2.60;
-      let delta_z = Math.max(0.012, 0.08*(z_o_sum/Math.max(1, n_obs)));
+      let r_lo = Number.isFinite(hu_ctx.residual_clamp_min) ? Number(hu_ctx.residual_clamp_min) : -2.10;
+      let r_hi = Number.isFinite(hu_ctx.residual_clamp_max) ? Number(hu_ctx.residual_clamp_max) : 2.10;
+      let delta_z = Math.max(1e-4, 0.12*mean_z_obs);
       let r_vec = new Float64Array(n_obs);
 
       for (let o = 0; o < n_obs; o++) {
-        if (r_area[o] <= 0) continue;
+        if (r_hab_area[o] <= 0 || r_prior_sum[o] <= 0) continue;
         let raw_s = Math.max(0, (s_obs && Number.isFinite(s_obs[o])) ? s_obs[o] : 0);
         let tot_s = Math.max(0, Number(obs_list[o].total_sites_all_periods) || 0);
         let eff_s = raw_s;
 
-        if (obs_list[o].has_documented_settlement) eff_s = Math.max(eff_s, 18.0);
+        if (raw_s > 0 && obs_list[o].has_documented_settlement) eff_s = Math.max(eff_s, 6.0);
         //Surveyed catchment with zero sites in this specific epoch carries genuine negative residual evidence
         if (eff_s <= 0 && tot_s > 0 && !obs_list[o].is_frontier_buffer)
           eff_s = Math.min(8.0, 0.35*tot_s);
         if (eff_s <= 0) continue;
-        let shrink = eff_s/(eff_s + 2.0);
+        let shrink = eff_s/(eff_s + 2.5);
         //Exact density-space log-residual: log(D_arch / P_prior) = 2 * log(sqrt(D_arch) / sqrt(P_prior))
         let lr = 2.0*Math.log((z_obs[o] + delta_z)/(obs_prior_z[o] + delta_z));
 
+        //Guard against sparse cross-border survey bias falsely erasing active contemporary Stadestér towns (e.g. Tiwanaku/Cusco/Lhasa)
+        if (lr < 0 && u_set && (r_set_sum[o]/Math.max(1.0, r_hab_area[o])) > 0.10)
+          lr *= 0.25;
         r_vec[o] = shrink*Math.max(r_lo, Math.min(r_hi, lr));
       }
 
@@ -569,7 +587,7 @@ let path = global.path || require("path");
         raw_sum += v;
       }
       if (yr <= 1850 && bio_covs.uopp_valid)
-        ViscountHUResidualHelpers.capUrbanCoreSmooth(bundle.mask_data, out_field, bio_covs.uopp_valid, 0.88);
+        ViscountHUResidualHelpers.capUrbanCoreSmooth(bundle.mask_data, out_field, bio_covs.uopp_valid, 0.94);
       if (hab_mask)
         ViscountHUResidualHelpers.closeZeroPinholes(bundle.mask_data, out_field, hab_mask, 5, 0.45, 2, 1e-4);
 
@@ -586,6 +604,60 @@ let path = global.path || require("path");
 
       //Return statement
       return out_field;
+    }
+
+
+    /**
+     * Step F: Builds elevation- and latitude-gated lowland Terra Preta (ADE) weights and normalised spatial
+     * mass density (`tp_lat_w`, `tp_norm`) restricted strictly below the Andean cordillera (`<= 650..1150 m`).
+     * @alias ViscountDasymetricResidualSolver.F_prepareTerraPretaWeights
+     *
+     * @param {Object} arg0_mask_data
+     * @param {Object} arg1_bio_covs
+     * @param {Float32Array} arg2_tp_src
+     *
+     * @returns {Object}
+     */
+    static F_prepareTerraPretaWeights (arg0_mask_data, arg1_bio_covs, arg2_tp_src) {
+      //Convert from parameters
+      let mask_data = arg0_mask_data;
+      let bio_covs = arg1_bio_covs || {};
+      let tp_src = arg2_tp_src;
+
+      //Guard clauses
+      if (!mask_data || !tp_src) return { tp_lat_w: null, tp_norm: null };
+
+      //Declare local instance variables
+      let elev_valid = bio_covs.elev_valid || null;
+      let grid_h = mask_data.grid_height;
+      let grid_w = mask_data.grid_width;
+      let hab_mask = bio_covs.hab_mask || null;
+      let n_valid = mask_data.valid_cell_count;
+      let tp_lat_w = new Float32Array(n_valid);
+      let tp_norm = new Float32Array(n_valid);
+      let tp_sum = 0;
+      let valid_indices = mask_data.valid_indices;
+
+      //Function body
+      for (let i = 0; i < n_valid; i++) {
+        let e_i = elev_valid ? elev_valid[i] : 150.0;
+        let lat = 90 - (Math.floor(valid_indices[i]/grid_w) + 0.5)*180/grid_h;
+        let we = (e_i <= 650.0) ? 1.0 : ((e_i >= 1150.0) ? 0.0 : (1150.0 - e_i)/500.0);
+        let wl = we*((lat >= -14.0) ? 1.0 : ((lat <= -19.0) ? 0.0 : (lat + 19.0)/5.0));
+
+        tp_lat_w[i] = wl;
+        if (wl > 0 && (!hab_mask || hab_mask[i] === 1)) {
+          let v = Math.max(0, tp_src[i])*wl;
+
+          tp_norm[i] = v;
+          tp_sum += v;
+        }
+      }
+      if (tp_sum > 0)
+        for (let i = 0; i < n_valid; i++) tp_norm[i] /= tp_sum;
+
+      //Return statement
+      return { tp_lat_w: tp_lat_w, tp_norm: tp_norm };
     }
   };
 }

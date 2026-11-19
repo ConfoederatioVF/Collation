@@ -330,8 +330,8 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
         lu_raw[i] = Math.max(0, (crp_grid[gidx] + 1.5*irr_grid[gidx] + 0.60*rice_v + 0.25*grz_grid[gidx])/local_a);
       }
 
-      let dc_rad = remove_state_offsets ? 12 : 6;
-      let dc_sig = remove_state_offsets ? 5.0 : 3.2;
+      let dc_rad = remove_state_offsets ? 12 : 10;
+      let dc_sig = remove_state_offsets ? 5.0 : 4.8;
       let d_decliff = (n_valid >= 2000 && bio_covs.sub_iso_valid && year < 1850) ?
         ViscountHUResidualHelpers.removeSubIsoCliffs(mask_data, d_raw, bio_covs.sub_iso_valid, 0.004, dc_rad, 0.02, dc_sig, remove_state_offsets, elev_valid) :
         d_raw;
@@ -406,6 +406,7 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
       let w = mask_data.grid_width;
       let wf_steppe = Boolean(hu_ctx.wild_fields_steppe_suppression);
       let wf_w = wf_steppe ? ((year <= 1600) ? 1.0 : ((year >= 1800) ? 0.0 : (1800 - year)/200.0)) : 0.0;
+      let open_steppe = (wf_w > 0) ? ViscountHUResidualHelpers.getSmoothOpenSteppeField(mask_data, bio_covs) : null;
 
       //Function body
       //Compact terrain-barrier-aware documented Stadestér settlement kernels (crisp valley footprints, no 80 km blobs)
@@ -537,30 +538,30 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
         let us_i = u_slope ? u_slope[i] : 1.0;
         let terr_mult = Math.pow(Math.max(0.015, ue_i*us_i), terr_pow);
 
-        if (terr_mult < 0.78 && (set_norm > 0.04 || lu_decliff[i] > 0.010)) {
-          let terr_ev = Math.min(1.0, 0.75*set_norm + 5.5*lu_decliff[i]);
+        if (terr_mult < 0.90 && (set_norm > 0.03 || lu_decliff[i] > 0.008)) {
+          let terr_ev = Math.min(1.0, 0.85*set_norm + 6.5*lu_decliff[i]);
 
-          terr_mult = Math.max(terr_mult, 0.80*terr_ev);
+          terr_mult = Math.max(terr_mult, 0.92*terr_ev);
         }
 
-        //Optional POLARIS Wild Fields pre-1700 open-steppe suppression with smooth boundary tapers (preserving Crimea & river valleys)
+        //Smooth ecological forest-steppe ecotone suppression for POLARIS Wild Fields (zero abrupt binary cliff)
         let steppe_mult = 1.0;
 
-        if (wf_w > 0 && forest_valid && forest_valid[i] === 0) {
+        if (wf_w > 0 && open_steppe && open_steppe[i] > 0.01) {
           let gidx = valid_indices[i];
           let lat = 90 - (Math.floor(gidx/w) + 0.5)*180/h;
           let lon = -180 + ((gidx % w) + 0.5)*360/w;
           let is_crimea = (lat < 46.23 && lon >= 32.45 && lon <= 36.68);
 
-          if (!is_crimea && lat >= 45.2 && lat <= 52.8 && lon >= 27.5 && lon <= 49.0) {
+          if (!is_crimea && lat >= 45.2 && lat <= 53.2 && lon >= 27.5 && lon <= 49.5) {
             let ws = Math.max(0, Math.min(1, (lat - 45.2)/1.8));
-            let wn = Math.max(0, Math.min(1, (52.8 - lat)/1.6));
-            let ww = Math.max(0, Math.min(1, (lon - 27.5)/1.5));
-            let we = Math.max(0, Math.min(1, (49.0 - lon)/2.5));
-            let fl_taper = u_fluv ? Math.max(0, Math.min(1, (0.55 - u_fluv[i])/0.35)) : 1.0;
-            let env = (ws*ws*(3 - 2*ws))*(wn*wn*(3 - 2*wn))*(ww*ww*(3 - 2*ww))*(we*we*(3 - 2*we))*fl_taper;
+            let wn = Math.max(0, Math.min(1, (53.2 - lat)/2.2));
+            let ww = Math.max(0, Math.min(1, (lon - 27.5)/1.8));
+            let we = Math.max(0, Math.min(1, (49.5 - lon)/2.8));
+            let fl_taper = u_fluv ? (0.76 + 0.24*Math.max(0, Math.min(1, 1.0 - 1.10*u_fluv[i]))) : 1.0;
+            let env = open_steppe[i]*(ws*ws*(3 - 2*ws))*(wn*wn*(3 - 2*wn))*(ww*ww*(3 - 2*ww))*(we*we*(3 - 2*we))*fl_taper;
 
-            steppe_mult = 1.0 - 0.68*wf_w*env;
+            steppe_mult = 1.0 - 0.55*wf_w*env;
           }
         }
 
@@ -752,25 +753,10 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
         }
       }
       if (tp_key && surface.fields && surface.fields[tp_key]) {
-        let tp_src = surface.fields[tp_key];
-        let tp_sum = 0;
+        let tp_prep = ViscountDasymetricResidualSolver.F_prepareTerraPretaWeights(bundle.mask_data, bio_covs, surface.fields[tp_key]);
 
-        tp_lat_w = new Float32Array(n_valid);
-        tp_norm = new Float32Array(n_valid);
-        for (let i = 0; i < n_valid; i++) {
-          let lat = 90 - (Math.floor(valid_indices[i]/grid_w) + 0.5)*180/grid_h;
-          let wl = (lat >= -14.0) ? 1.0 : ((lat <= -19.0) ? 0.0 : (lat + 19.0)/5.0);
-
-          tp_lat_w[i] = wl;
-          if (wl > 0 && (!hab_mask || hab_mask[i] === 1)) {
-            let v = Math.max(0, tp_src[i])*wl;
-
-            tp_norm[i] = v;
-            tp_sum += v;
-          }
-        }
-        if (tp_sum > 0)
-          for (let i = 0; i < n_valid; i++) tp_norm[i] /= tp_sum;
+        tp_lat_w = tp_prep.tp_lat_w;
+        tp_norm = tp_prep.tp_norm;
       }
 
       let h_r_list = [];

@@ -21,9 +21,8 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
    */
   global.ViscountHUResidualHelpers = class {
     /**
-     * Applies smooth circular-Gaussian urban-core capping (`max_mult * ring_mean`) on both areal density and
-     * raw cell population for pre-industrial horizons, normalising over clean `uopp <= 2.0` rural cells across
-     * metro belts (`Boston-NYC`, Narragansett Bay, Cape Cod).
+     * Applies smooth harmonic Laplacian log-density infill and soft-knee capping on pre-industrial urban-core
+     * footprints (`uopp > 3.5`), eliminating both modern megacity spikes and flat-top urban mask plateaus/edges.
      * @alias ViscountHUResidualHelpers.capUrbanCoreSmooth
      */
     static capUrbanCoreSmooth (arg0_mask_data, arg1_field, arg2_uopp_valid, arg3_max_mult) {
@@ -31,52 +30,110 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
       let mask_data = arg0_mask_data;
       let field = arg1_field;
       let uopp = arg2_uopp_valid;
-      let max_mult = (arg3_max_mult !== undefined) ? arg3_max_mult : 0.85;
+      let max_mult = (arg3_max_mult !== undefined) ? arg3_max_mult : 0.88;
 
       //Guard clauses
       if (!mask_data || !field || !uopp) return;
 
       //Declare local instance variables
       let cell_area = mask_data.cell_land_area;
+      let grid_h = mask_data.grid_height;
+      let grid_w = mask_data.grid_width;
       let n_valid = mask_data.valid_cell_count;
+      let p2v = mask_data.pixel_to_valid_idx;
       let rural_dens_in = new Float32Array(n_valid);
-      let rural_pop_in = new Float32Array(n_valid);
       let rural_wt_in = new Float32Array(n_valid);
+      let urb_list = [];
+      let v_idx = mask_data.valid_indices;
 
       //Function body
       for (let i = 0; i < n_valid; i++) {
+        if (field[i] <= 0) continue;
         let local_a = (cell_area && cell_area[i] > 1.0) ? cell_area[i] : 1.0;
 
-        if (field[i] > 0 && uopp[i] <= 4.5) {
+        if (uopp[i] <= 3.5) {
           rural_dens_in[i] = field[i]/local_a;
-          rural_pop_in[i] = field[i];
           rural_wt_in[i] = 1.0;
+        } else {
+          urb_list.push(i);
         }
       }
+      if (urb_list.length === 0) return;
+
       let r_dens = this.smoothGaussianGrid(mask_data, rural_dens_in, 8, 3, null, false);
-      let r_pop = this.smoothGaussianGrid(mask_data, rural_pop_in, 8, 3, null, false);
       let r_wt = this.smoothGaussianGrid(mask_data, rural_wt_in, 8, 3, null, false);
-      let r_dens_wide = this.smoothGaussianGrid(mask_data, rural_dens_in, 14, 3, null, false);
-      let r_pop_wide = this.smoothGaussianGrid(mask_data, rural_pop_in, 14, 3, null, false);
-      let r_wt_wide = this.smoothGaussianGrid(mask_data, rural_wt_in, 14, 3, null, false);
+      let r_dens_wide = this.smoothGaussianGrid(mask_data, rural_dens_in, 15, 3, null, false);
+      let r_wt_wide = this.smoothGaussianGrid(mask_data, rural_wt_in, 15, 3, null, false);
+      let log_dens = new Float32Array(n_valid);
+      let has_val = new Uint8Array(n_valid);
 
       for (let i = 0; i < n_valid; i++) {
-        if (field[i] <= 0 || uopp[i] <= 4.5) continue;
-        let use_wide = (r_wt[i] <= 0.12 || uopp[i] > 10.0) && (r_wt_wide[i] > 1e-4);
-        let wt_u = use_wide ? r_wt_wide[i] : r_wt[i];
-
-        if (wt_u <= 1e-4) continue;
+        if (field[i] <= 0) continue;
         let local_a = (cell_area && cell_area[i] > 1.0) ? cell_area[i] : 1.0;
-        let rd_u = use_wide ? r_dens_wide[i] : r_dens[i];
-        let rp_u = use_wide ? r_pop_wide[i] : r_pop[i];
-        let eff_mult = (uopp[i] > 10.0) ? Math.min(max_mult, 0.80) : max_mult;
-        let cap_d = (rd_u/wt_u)*local_a*eff_mult;
-        let cap_p = (rp_u/wt_u)*eff_mult;
-        let cap_v = Math.min(cap_d, cap_p);
-        let t_ramp = Math.max(0, Math.min(1, (uopp[i] - 4.5)/4.0));
 
-        if (cap_v > 0 && field[i] > cap_v)
-          field[i] = field[i]*(1.0 - t_ramp) + cap_v*t_ramp;
+        has_val[i] = 1;
+        if (uopp[i] <= 3.5) {
+          log_dens[i] = Math.log(Math.max(1e-7, field[i]/local_a));
+        } else {
+          //Initialise interior from smooth rural-ring blend so harmonic infill converges rapidly
+          let w_loc = Math.max(0, Math.min(1, (r_wt[i] - 0.04)/0.26));
+          let d_loc = (r_wt[i] > 1e-4) ? (r_dens[i]/r_wt[i]) : 0;
+          let d_wid = (r_wt_wide[i] > 1e-4) ? (r_dens_wide[i]/r_wt_wide[i]) : d_loc;
+          let d_init = (d_loc > 0 && d_wid > 0) ? (w_loc*d_loc + (1.0 - w_loc)*d_wid) : (d_loc || d_wid || (field[i]/local_a));
+
+          log_dens[i] = Math.log(Math.max(1e-7, d_init));
+        }
+      }
+
+      //28-pass Gauss-Seidel harmonic Laplacian infill on log-density inside urban footprints (C^1 boundary continuity, zero flat mesas)
+      for (let iter = 0; iter < 28; iter++) {
+        for (let k = 0; k < urb_list.length; k++) {
+          let i = urb_list[k];
+          let g = v_idx[i];
+          let cx = g % grid_w;
+          let cy = Math.floor(g/grid_w);
+          let acc = 0;
+          let wt_s = 0;
+
+          for (let dy = -1; dy <= 1; dy++) {
+            let nr = cy + dy;
+
+            if (nr < 0 || nr >= grid_h) continue;
+            for (let dx = -1; dx <= 1; dx++) {
+              if (dx === 0 && dy === 0) continue;
+              let nv = p2v[nr*grid_w + ((cx + dx + grid_w) % grid_w)];
+
+              if (nv >= 0 && has_val[nv] === 1) {
+                let w_n = (dx === 0 || dy === 0) ? 1.0 : 0.5;
+
+                acc += w_n*log_dens[nv];
+                wt_s += w_n;
+              }
+            }
+          }
+          if (wt_s > 0) log_dens[i] = acc/wt_s;
+        }
+      }
+
+      //Soft-knee harmonic blend preserving surrounding gradients & micro-texture without flat urban mesas or boundary cliffs
+      let eff_ceil = Math.min(1.04, Math.max(0.55, max_mult));
+      let knee = 0.94*eff_ceil;
+
+      for (let k = 0; k < urb_list.length; k++) {
+        let i = urb_list[k];
+        let local_a = (cell_area && cell_area[i] > 1.0) ? cell_area[i] : 1.0;
+        let harm_pop = Math.exp(log_dens[i])*local_a;
+
+        if (!(harm_pop > 0)) continue;
+        let u_t = Math.max(0, Math.min(1, (uopp[i] - 3.5)/6.0));
+        let t_ramp = u_t*u_t*(3.0 - 2.0*u_t);
+        let ratio = field[i]/harm_pop;
+        let soft_ratio = (ratio <= knee) ?
+          (0.65*ratio + 0.35*Math.min(1.0, eff_ceil)) :
+          (knee + 0.14*eff_ceil*Math.tanh((ratio - knee)/(0.35*eff_ceil)));
+        let target_pop = harm_pop*soft_ratio;
+
+        field[i] = field[i]*(1.0 - t_ramp) + target_pop*t_ramp;
       }
     }
 
@@ -520,6 +577,43 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
 
       //Return statement
       return dist;
+    }
+
+
+    /**
+     * Builds and caches a smooth ecological forest-steppe ecotone weight (`0` in forest, `1` in open steppe,
+     * feathered across ~110 km with `rad = 12, passes = 3`) so Wild Fields suppression never creates an abrupt
+     * binary cliff along the forest-steppe boundary.
+     * @alias ViscountHUResidualHelpers.getSmoothOpenSteppeField
+     *
+     * @param {Object} arg0_mask_data
+     * @param {Object} arg1_bio_covs
+     *
+     * @returns {Float32Array}
+     */
+    static getSmoothOpenSteppeField (arg0_mask_data, arg1_bio_covs) {
+      //Convert from parameters
+      let mask_data = arg0_mask_data;
+      let bio_covs = arg1_bio_covs;
+
+      //Guard clauses
+      if (!mask_data || !bio_covs || !bio_covs.forest_valid) return null;
+      if (bio_covs._smooth_open_steppe) return bio_covs._smooth_open_steppe;
+
+      //Declare local instance variables
+      let forest_valid = bio_covs.forest_valid;
+      let n_valid = mask_data.valid_cell_count;
+      let raw_open = new Float32Array(n_valid);
+
+      //Function body
+      for (let i = 0; i < n_valid; i++)
+        raw_open[i] = (forest_valid[i] === 0) ? 1.0 : 0.0;
+      let smooth_open = this.smoothGaussianGrid(mask_data, raw_open, 12, 3, null, false);
+
+      bio_covs._smooth_open_steppe = smooth_open;
+
+      //Return statement
+      return smooth_open;
     }
 
 

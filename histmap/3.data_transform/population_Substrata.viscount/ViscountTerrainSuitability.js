@@ -227,35 +227,44 @@ let { ViscountUrbanMask } = global.ViscountUrbanMask ? global : require("./Visco
       let u_fluv = new Float32Array(n_valid);
 
       //Function body
-      //Legacy computeFluvialProximityField encoded 0.25 + 0.75*exp(-d_km/26.0); invert to d_km and re-band crisply
+      //Legacy computeFluvialProximityField encoded 0.25 + 0.75*exp(-d_km/26.0); invert to d_km and re-band
+      //Slope-adaptive: crisp valley-floor catchment breaks on sloped terrain, gentle floodplain diffusion on flat plains/steppe
       for (let i = 0; i < n_valid; i++) {
         let f_in = u_fluv_raw ? u_fluv_raw[i] : 0.05;
         let c_in = u_coast_raw ? u_coast_raw[i] : 0.05;
+        let us_i = tb ? tb.u_slope[i] : 1.0;
+        let flat_w = Math.max(0.0, Math.min(1.0, (us_i - 0.55)/0.35));
         let f_step = 0.06;
         let c_step = 0.05;
 
         if (f_in > 0.26) {
           let frac = Math.max(1e-4, Math.min(1.0, (f_in - 0.25)/0.75));
           let d_km = -26.0*Math.log(frac);
+          let f_crisp = 0.06;
 
-          if (d_km <= 5.5) f_step = 1.00;
-          else if (d_km <= 12.5) f_step = 0.50;
-          else if (d_km <= 21.0) f_step = 0.20;
-          else f_step = 0.06;
+          if (d_km <= 5.5) f_crisp = 1.00;
+          else if (d_km <= 12.5) f_crisp = 0.50;
+          else if (d_km <= 21.0) f_crisp = 0.20;
+          let f_flat = 0.06 + 0.58*Math.exp(-d_km/22.0);
+
+          f_step = (1.0 - flat_w)*f_crisp + flat_w*f_flat;
         }
         if (c_in > 0.11) {
           let frac = Math.max(1e-4, Math.min(1.0, (c_in - 0.10)/0.90));
           let d_km = -32.0*Math.log(frac);
+          let c_crisp = 0.05;
 
-          if (d_km <= 6.5) c_step = 1.00;
-          else if (d_km <= 15.0) c_step = 0.48;
-          else if (d_km <= 25.0) c_step = 0.16;
-          else c_step = 0.05;
+          if (d_km <= 6.5) c_crisp = 1.00;
+          else if (d_km <= 15.0) c_crisp = 0.48;
+          else if (d_km <= 25.0) c_crisp = 0.16;
+          let c_flat = 0.05 + 0.72*Math.exp(-d_km/24.0);
+
+          c_step = (1.0 - flat_w)*c_crisp + flat_w*c_flat;
         }
 
         //Gate river bonus by terrain suitability so gorge/alpine/permafrost canyon rivers never glow
         let terr_gate = tb ? Math.min(1.0, 1.40*tb.u_terrain[i]) : 1.0;
-        let slope_gate = tb ? Math.min(1.0, 1.35*tb.u_slope[i]) : 1.0;
+        let slope_gate = tb ? Math.min(1.0, 1.35*us_i) : 1.0;
 
         u_fluv[i] = 0.06 + (f_step - 0.06)*terr_gate;
         u_coast[i] = 0.05 + (c_step - 0.05)*slope_gate;
