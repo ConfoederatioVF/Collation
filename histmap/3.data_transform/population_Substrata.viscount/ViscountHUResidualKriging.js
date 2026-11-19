@@ -704,6 +704,8 @@ let { ViscountUrbanMask } = global.ViscountUrbanMask ? global : require("./Visco
       let hu_ctx = bundle._hu_ctx || this.A_buildHUAdmixtureAndSettlementContext(bundle.mask_data, bio_covs, cfg);
       let hyde_years = cfg.kriging_config.all_hyde_years || [];
       let is_samoa = options.is_polynesia ? new Uint8Array(bundle.mask_data.valid_cell_count) : null;
+      let only_years = (options && Array.isArray(options.only_years) && options.only_years.length > 0) ?
+        new Set(options.only_years) : null;
       let n_obs = bundle.obs_bundle.obs_count;
       let n_valid = bundle.mask_data.valid_cell_count;
       let out_dir = path.join(bundle.mask_data.domain_dir, cfg.output_population_rasters_subfolder || "2.population_rasters");
@@ -779,6 +781,7 @@ let { ViscountUrbanMask } = global.ViscountUrbanMask ? global : require("./Visco
 
       for (let y_idx = 0; y_idx < hyde_years.length; y_idx++) {
         let yr = hyde_years[y_idx];
+        if (only_years && !only_years.has(yr)) continue;
         let ccf_cfg = hu_ctx.county_census_frontier || null;
         let use_county_frontier = Boolean(
           !options.is_polynesia &&

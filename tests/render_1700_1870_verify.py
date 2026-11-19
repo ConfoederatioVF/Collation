@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """Temporary QA renderer for CENTAUR-II 1700-1790 & 1790-1870 county census + bleeding frontier surfaces."""
 
+import json
 import pathlib
 import sys
 
@@ -15,7 +16,7 @@ SVEA_ROOT = pathlib.Path(__file__).resolve().parents[1]
 CENTAUR_DIR = SVEA_ROOT / "histmap/1.data_raw/population_regional/CENTAUR"
 SHARED_DIR = CENTAUR_DIR.parent / "_shared"
 GIS_DIR = CENTAUR_DIR / "_shared/_gis_cache"
-VELK_DIR = SVEA_ROOT / "histmap/2.data_cleaning/population_Velkscala/population_rasters"
+NA_RASTERS_DIR = CENTAUR_DIR / "_shared/sites_northern_america/2.population_rasters"
 HYDE_DIR = SVEA_ROOT / "histmap/2.data_cleaning/landuse_HYDE/rasters"
 
 for p_s in (str(SHARED_DIR), str(GIS_DIR)):
@@ -44,17 +45,22 @@ def lonlat_slice(f32_grid, lon_w, lon_e, lat_s, lat_n):
 def print_diagnostics(area_grid):
   c0, c1 = int((-95 + 180) * 12), int((-65 + 180) * 12)
   r0, r1 = int((90 - 50) * 12), int((90 - 25) * 12)
-  print("=== Sharpness & Frontier Diagnostics (Velkscala vs raw HYDE) ===")
+  sc0, sc1 = int((-85 + 180) * 12), int((-70 + 180) * 12)
+  sr0, sr1 = int((90 - 44) * 12), int((90 - 36) * 12)
+  print("=== Sharpness Diagnostics (CENTAUR sites_northern_america/2.population_rasters vs raw HYDE rurc) ===")
   for yr in [1600, 1700, 1720, 1750, 1770, 1790, 1800, 1820, 1850, 1860, 1870, 1880, 1890, 1900]:
-    vp = VELK_DIR / f"population_{yr}.png"
-    hp = HYDE_DIR / f"popc_{yr}AD.png"
+    vp = NA_RASTERS_DIR / f"popc_{yr}.png"
+    hp = HYDE_DIR / f"rurc_{yr}AD.png"
+    if not hp.exists():
+      hp = HYDE_DIR / f"popc_{yr}AD.png"
     if not vp.exists():
       continue
-    v_arr = cmh.load_f32_raster(vp)[r0:r1, c0:c1] / np.maximum(1.0, area_grid[r0:r1, c0:c1])
-    h_arr = cmh.load_f32_raster(hp)[r0:r1, c0:c1] / np.maximum(1.0, area_grid[r0:r1, c0:c1]) if hp.exists() else None
+    eff_a = np.where(np.isfinite(area_grid) & (area_grid > 1.0), area_grid, 50.0)
+    full_v = cmh.load_f32_raster(vp) / eff_a
+    full_h = cmh.load_f32_raster(hp) / eff_a if hp.exists() else None
 
     def grad_norm(g):
-      m = g > 0.05
+      m = g > 0.1
       if m.sum() < 50:
         return 0.0
       lg = np.log10(np.maximum(1e-4, g))
@@ -62,9 +68,21 @@ def print_diagnostics(area_grid):
       dy = np.abs(lg[1:, :] - lg[:-1, :])[m[1:, :] & m[:-1, :]]
       return float(0.5 * (dx.mean() + dy.mean()))
 
-    vg = grad_norm(v_arr)
-    hg = grad_norm(h_arr) if h_arr is not None else 0.0
-    print(f"  yr={yr:4d} | Velk_grad={vg:.3f} | HYDE_grad={hg:.3f} | ratio={(vg / hg if hg > 0 else 0):.2f}x")
+    vg = grad_norm(full_v[r0:r1, c0:c1])
+    hg = grad_norm(full_h[r0:r1, c0:c1]) if full_h is not None else 0.0
+    cvg = grad_norm(full_v[sr0:sr1, sc0:sc1])
+    chg = grad_norm(full_h[sr0:sr1, sc0:sc1]) if full_h is not None else 0.0
+    print(f"  yr={yr:4d} | ENA grad={vg:.3f} vs {hg:.3f} ({(vg/hg if hg>0 else 0):.2f}x) | Settled Core={cvg:.3f} vs {chg:.3f} ({(cvg/chg if chg>0 else 0):.2f}x)")
+
+  us_mask = np.asarray(Image.open(CENTAUR_DIR / "5.modern_canada_and_united_states/2.united_states_post_independence/united_states_post_independence_areal_mask.png").convert("RGBA"), dtype=np.uint8)
+  us_j5 = json.loads((CENTAUR_DIR / "5.modern_canada_and_united_states/2.united_states_post_independence/united_states_post_independence.json5").read_text(encoding="utf-8"))["regions"]
+  p_map = {y: cmh.load_f32_raster(NA_RASTERS_DIR / f"popc_{y}.png") for y in [1750, 1800, 1850, 1870] if (NA_RASTERS_DIR / f"popc_{y}.png").exists()}
+  print("=== Raw Substrata Regional Sums ===")
+  for rk in ["usa_michigan", "usa_indiana", "usa_illinois", "usa_alabama", "usa_mississippi", "usa_virginia", "usa_new_york", "usa_california", "usa_minnesota", "usa_washington", "usa_arizona"]:
+    col = us_j5[rk]["colour"]
+    m = (us_mask[...,0]==col[0]) & (us_mask[...,1]==col[1]) & (us_mask[...,2]==col[2]) & (us_mask[...,3]>0)
+    vals = {y: round(float(p_map[y][m].sum())) for y in sorted(p_map)}
+    print(f"  {rk:18s}: {vals}")
 
 
 def render_sheet_lonlat(panels, out_path, title, bbox_default, vmax_dens=120.0, area_grid=None):
@@ -77,19 +95,21 @@ def render_sheet_lonlat(panels, out_path, title, bbox_default, vmax_dens=120.0, 
     lon_w, lon_e, lat_s, lat_n = bbox
     ax = axes[idx // 3, idx % 3]
     ax.set_facecolor("#0f172a")
-    rp = VELK_DIR / f"population_{yr}.png"
+    rp = NA_RASTERS_DIR / f"popc_{yr}.png"
     if rp.exists():
       f32 = cmh.load_f32_raster(rp)
       sub_p, ext = lonlat_slice(f32, lon_w, lon_e, lat_s, lat_n)
       sub_a, _ = lonlat_slice(area_grid, lon_w, lon_e, lat_s, lat_n)
-      dens = np.where(np.isfinite(sub_a) & (sub_p > 0), sub_p / np.maximum(1.0, sub_a), np.nan)
+      eff_a = np.where(np.isfinite(sub_a), sub_a, 50.0)
+      land_or_pop = np.isfinite(sub_a) | (sub_p > 0)
+      dens = np.where(land_or_pop & (sub_p > 0), sub_p / np.maximum(1.0, eff_a), np.nan)
       last_im = ax.imshow(
-        np.ma.masked_invalid(np.clip(dens, 1e-3, vmax_dens)),
+        np.ma.masked_invalid(np.clip(dens, 0.005, vmax_dens)),
         extent=ext, origin="upper", cmap="magma",
         norm=LogNorm(vmin=0.005, vmax=vmax_dens), aspect="auto", interpolation="nearest"
       )
-      ocean = np.where(~np.isfinite(sub_a), 1.0, np.nan)
-      ax.imshow(ocean, extent=ext, origin="upper", cmap="Blues_r", vmin=0, vmax=3, aspect="auto", alpha=0.35)
+      ocean = np.where(~land_or_pop, 1.0, np.nan)
+      ax.imshow(ocean, extent=ext, origin="upper", cmap="Blues_r", vmin=0, vmax=3, aspect="auto", alpha=0.40)
     ax.set_title(plbl, fontsize=10.0, pad=5, fontweight="bold")
     ax.set_xlabel("Longitude", fontsize=7.5)
     ax.set_ylabel("Latitude", fontsize=7.5)
@@ -134,7 +154,7 @@ def main():
     out2,
     "CENTAUR-II United States & Canada County Census + Bleeding Frontier (1790-1870AD)",
     (-126.0, -60.0, 24.0, 53.0),
-    vmax_dens=120.0, area_grid=area_grid
+    vmax_dens=250.0, area_grid=area_grid
   )
 
   out3 = SVEA_ROOT / "tests/verify_1700_1870_closeups.png"
@@ -148,7 +168,7 @@ def main():
     out3,
     "CENTAUR-II High-Resolution 5-Arcminute County Sharpness & Frontier Continuity Close-ups",
     (-92.0, -68.0, 35.0, 48.0),
-    vmax_dens=160.0, area_grid=area_grid
+    vmax_dens=280.0, area_grid=area_grid
   )
 
 

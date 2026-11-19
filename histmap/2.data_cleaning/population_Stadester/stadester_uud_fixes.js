@@ -253,18 +253,17 @@
     if (typeof population_Stadester_uud.repairGHSLCityNames === "function")
       population_Stadester_uud.repairGHSLCityNames(stadester_obj);
 
-    let foreign_script_re = /[\u0400-\u04FF\u0600-\u06FF\u4E00-\u9FFF\u3040-\u30FF\uAC00-\uD7AF]/;
+    let foreign_script_re = /[\u0400-\u04FF\u0600-\u06FF\u0900-\u097F\u0E00-\u0E7F\u3040-\u30FF\u4E00-\u9FFF\uAC00-\uD7AF]/;
     let latin_centaur_countries = new Set([
-      "Alabama", "Alaska", "American Samoa", "Arizona", "Arkansas", "Bermuda", "California",
-      "Canada", "Colorado", "Connecticut", "Delaware", "District of Columbia", "Florida",
-      "Greenland", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky",
-      "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota",
-      "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire",
-      "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio",
-      "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "Saint Pierre and Miquelon",
-      "South Carolina", "South Dakota", "Tennessee", "Texas", "United States",
-      "United States of America", "Utah", "Vermont", "Virginia", "Washington",
-      "West Virginia", "Wisconsin", "Wyoming"
+      "Alabama", "Alaska", "American Samoa", "Arizona", "Arkansas", "Bermuda", "Bolivia", "Brazil",
+      "California", "Canada", "Colorado", "Connecticut", "Delaware", "District of Columbia", "Florida",
+      "French Guiana", "Greenland", "Guyana", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas",
+      "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota",
+      "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey",
+      "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon",
+      "Paraguay", "Pennsylvania", "Rhode Island", "Saint Pierre and Miquelon", "South Carolina",
+      "South Dakota", "Suriname", "Tennessee", "Texas", "United States", "United States of America",
+      "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"
     ]);
     all_cities = Object.keys(stadester_obj);
     for (let i = 0; i < all_cities.length; i++) {
@@ -845,7 +844,53 @@
       return 12742*Math.asin(Math.min(1, Math.sqrt(h)));
     };
 
+    //Drop or merge legacy Populstat `(agglomeration)` ghost records inside PRETA/CENTAUR into their base city
+    let agglom_keys = Object.keys(stadester_obj).filter(function (arg0_k) {
+      let c = stadester_obj[arg0_k];
+      return c && /\(agglomeration\)/i.test(String(c.name || arg0_k));
+    });
+    for (let i = 0; i < agglom_keys.length; i++) {
+      let ak = agglom_keys[i];
+      let ac = stadester_obj[ak];
+      if (!ac) continue;
+      let a_proj = String(ac.viscount_project || "").toUpperCase();
+      if (!a_proj && typeof global.StadesterPartitionIO !== "undefined" && typeof global.StadesterPartitionIO.assignCityToViscountRegion === "function") {
+        let rd = global.StadesterPartitionIO.assignCityToViscountRegion(ac, ak);
+        if (rd && rd.key) a_proj = String(rd.key).toUpperCase();
+      }
+      if (a_proj !== "PRETA" && a_proj !== "CENTAUR") continue;
+      let base_name = String(ac.name || "").replace(/\s*\(agglomeration\)\s*/gi, "").trim();
+      let base_key = `${base_name}-${ac.country}`;
+      let target = stadester_obj[base_key];
+      if (!target && Array.isArray(ac.coords)) {
+        let cand_keys = Object.keys(stadester_obj);
+        for (let x = 0; x < cand_keys.length; x++) {
+          let ck = cand_keys[x];
+          if (ck === ak) continue;
+          let cc = stadester_obj[ck];
+          if (!cc || cc.country !== ac.country || !Array.isArray(cc.coords)) continue;
+          if (String(cc.name || "").trim().toLowerCase() === base_name.toLowerCase() && haversineKm(ac.coords, cc.coords) <= 25.0) {
+            target = cc;
+            break;
+          }
+        }
+      }
+      if (target && target.population && ac.population) {
+        let a_yrs = Object.keys(ac.population);
+        for (let y = 0; y < a_yrs.length; y++) {
+          let yk = a_yrs[y];
+          let yv = Number(ac.population[yk]);
+          if (Number.isFinite(yv) && yv > 0 && !(Number(target.population[yk]) > 0))
+            target.population[yk] = yv;
+        }
+        population_Stadester_uud.appendCitySources(target, ac.sources || ac.type);
+      }
+      delete stadester_obj[ak];
+      merged_count++;
+    }
+
     //Function body
+    all_keys = Object.keys(stadester_obj);
     for (let i = 0; i < all_keys.length; i++) {
       let key = all_keys[i];
       let city = stadester_obj[key];
@@ -906,9 +951,12 @@
           let b = arr[x];
 
           if (b.dropped) continue;
-          let touches_centaur = (a.proj_key === "CENTAUR" || b.proj_key === "CENTAUR");
+          let touches_viscount = (
+            a.proj_key === "CENTAUR" || b.proj_key === "CENTAUR" ||
+            a.proj_key === "PRETA" || b.proj_key === "PRETA"
+          );
 
-          if (!touches_centaur) continue;
+          if (!touches_viscount) continue;
           if (Math.abs(a.city.coords[0] - b.city.coords[0]) > 0.02 || Math.abs(a.city.coords[1] - b.city.coords[1]) > 0.06) continue;
           let overlaps = false;
 

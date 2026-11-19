@@ -152,16 +152,17 @@ let { PNG } = global.pngjs || require("pngjs");
       let sett_boost_giant = new Float32Array(n_valid);
       let sett_pop_at_v = new Float32Array(n_valid);
       let settlements = (hu_ctx && Array.isArray(hu_ctx.settlements)) ? hu_ctx.settlements : [];
-      let sigma_c = Number(ccf_cfg.settlement_sigma_compact_px) || 2.0;
-      let sigma_g = Number(ccf_cfg.settlement_sigma_giant_px) || 4.5;
+      let sigma_c = Number(ccf_cfg.settlement_sigma_compact_px) || 1.5;
+      let sigma_g = Number(ccf_cfg.settlement_sigma_giant_px) || 2.2;
       let total_px = grid_w*grid_h;
       let valid_indices = mask_data.valid_indices;
 
       //Function body
-      let rur_path = path.join(hyde_raw_dir, `rurc${hyde_lbl}.png`);
-      let pop_path = path.join(hyde_raw_dir, `popc${hyde_lbl}.png`);
+      let rur_path = path.join(hyde_raw_dir, `rurc_${hyde_lbl}.png`);
+      let pop_path = path.join(hyde_raw_dir, `popc_${hyde_lbl}.png`);
       let raw_path = fs.existsSync(rur_path) ? rur_path : pop_path;
       let raw_grid = fs.existsSync(raw_path) ? helpers.readCachedGlobalFloat(raw_path, total_px, cache) : null;
+      if (!raw_grid) console.error(`[ViscountCountyCensusFrontier] Missing raw HYDE raster for year=${year}: ${rur_path}`);
       let u_coast = (bio_covs && bio_covs.u_coastal) ? bio_covs.u_coastal : null;
       let u_fluv = (bio_covs && bio_covs.u_fluvial) ? bio_covs.u_fluvial : null;
       let u_maxln = (bio_covs && bio_covs.maxln_valid) ? bio_covs.maxln_valid : null;
@@ -182,8 +183,8 @@ let { PNG } = global.pngjs || require("pngjs");
       //Accumulate documented settlements at exact target year
       let inv_2s2_c = 0.5/(sigma_c*sigma_c);
       let inv_2s2_g = 0.5/(sigma_g*sigma_g);
-      let rc_win = Math.ceil(2.2*sigma_c);
-      let rg_win = Math.ceil(2.4*sigma_g);
+      let rc_win = Math.ceil(2.6*sigma_c);
+      let rg_win = Math.ceil(2.6*sigma_g);
 
       for (let i = 0; i < settlements.length; i++) {
         let s = settlements[i];
@@ -244,9 +245,10 @@ let { PNG } = global.pngjs || require("pngjs");
             let dx_m = dc*cos_l;
             let d2 = dr*dr + dx_m*dx_m;
 
-            if (Math.abs(dr) <= rc_win && Math.abs(dx_m) <= rc_win)
+            if (d2 <= rc_win*rc_win)
               sett_boost_compact[nv] += wt_pull*Math.exp(-d2*inv_2s2_c);
-            sett_boost_giant[nv] += wt_pull*Math.exp(-d2*inv_2s2_g);
+            if (d2 <= rg_win*rg_win)
+              sett_boost_giant[nv] += wt_pull*Math.exp(-d2*inv_2s2_g)*(0.35 + 0.65*bio_suit[nv]);
           }
         }
       }
@@ -306,8 +308,8 @@ let { PNG } = global.pngjs || require("pngjs");
       let p2v = mask_data.pixel_to_valid_idx;
       let perm_ice = (bio_covs && bio_covs.perm_ice) ? bio_covs.perm_ice : null;
       let pioneer_cap = Number(ccf_cfg.frontier_pioneer_density_cap_km2) || 3.2;
-      let seam_passes = Number(ccf_cfg.county_seam_blur_passes) || 2;
-      let seam_r = Number(ccf_cfg.county_seam_blur_radius_px) || 2;
+      let seam_passes = Number.isFinite(ccf_cfg.county_seam_blur_passes) ? Number(ccf_cfg.county_seam_blur_passes) : 0;
+      let seam_r = Number.isFinite(ccf_cfg.county_seam_blur_radius_px) ? Number(ccf_cfg.county_seam_blur_radius_px) : 0;
       let snap = this.A_loadCountySnapshotForYear(mask_data, year, ccf_cfg, cache);
       let valid_indices = mask_data.valid_indices;
 
@@ -418,15 +420,15 @@ let { PNG } = global.pngjs || require("pngjs");
         let w_i = 0;
 
         if (!is_giant[i]) {
-          let h_term = Math.pow(h_d + 0.06*c_mean_dens, compact_exp);
+          let h_term = Math.pow(h_d + 0.005*c_mean_dens, compact_exp);
 
-          w_i = cell_area[i]*h_term*(0.55 + 0.45*bio_suit[i])*(1.0 + 1.8*wts.sett_boost_compact[i]);
+          w_i = cell_area[i]*h_term*(0.30 + 0.70*bio_suit[i])*(1.0 + 1.5*wts.sett_boost_compact[i]);
         } else {
           let d_px = dist_t[i]*0.1;
-          let h_term = Math.pow(h_d + 0.004*c_mean_dens, giant_exp);
+          let h_term = Math.pow(h_d + 0.002*c_mean_dens, giant_exp);
           let prox_c = 0.65 + 0.35*Math.exp(-d_px/14.0);
 
-          w_i = cell_area[i]*h_term*(0.20 + 0.80*bio_suit[i])*(0.25 + 4.5*wts.sett_boost_giant[i])*prox_c;
+          w_i = cell_area[i]*h_term*Math.pow(bio_suit[i], 1.35)*(0.55 + 1.6*wts.sett_boost_giant[i])*prox_c;
         }
         w_i = Math.max(1e-6, w_i);
         raw_w[i] = w_i;
@@ -461,10 +463,11 @@ let { PNG } = global.pngjs || require("pngjs");
 
       for (let i = 0; i < n_valid; i++) {
         if (perm_ice && perm_ice[i] <= 0.05) continue;
+        let bio_floor = 0.018*bio_suit[i]*cell_area[i];
         let rv = (rk_pop && rk_pop[i] > 0) ? rk_pop[i]*rk_sc : 0;
         let hd = (bio_covs && bio_covs.hyde_hab_dens) ? bio_covs.hyde_hab_dens[i]*cell_area[i]*0.35 : 0;
 
-        rk_unenum[i] = Math.max(rv, 0.5*hyde_raw_dens[i]*cell_area[i], hd);
+        rk_unenum[i] = Math.max(rv, 0.5*hyde_raw_dens[i]*cell_area[i], hd, bio_floor);
       }
 
       //5. Combine Regime 1 & Regime 2 + Bleeding Frontier spillover plume
@@ -494,52 +497,37 @@ let { PNG } = global.pngjs || require("pngjs");
         }
       }
 
-      //6. Micro-seam (2 px) county-multiplier smoothing leaving intra-county HYDE/fluvial detail unblurred
+      //6. Skip smoothing completely when disabled so compact settled counties have 0% blur
+      if (seam_r <= 0 || seam_passes <= 0) {
+        let direct_field = new Float32Array(n_valid);
+
+        for (let i = 0; i < n_valid; i++) {
+          if (perm_ice && perm_ice[i] <= 0.05) continue;
+          direct_field[i] = Math.max(1e-5, combine_field[i]);
+        }
+
+        //Return statement
+        return direct_field;
+      }
+
+      //Micro-seam frontier smoothing restricted strictly outside compact settled counties
       let baseline_tex = new Float32Array(n_valid);
-      let is_border = new Uint8Array(n_valid);
       let log_mult = new Float32Array(n_valid);
       let tmp_mult = new Float32Array(n_valid);
 
       for (let i = 0; i < n_valid; i++) {
         if (perm_ice && perm_ice[i] <= 0.05) continue;
         let la_i = Math.max(1.0, cell_area[i]);
-        let tex_d = (0.015 + Math.pow(Math.max(0, hyde_raw_dens[i]), 0.85))*(0.55 + 0.45*bio_suit[i]);
+        let tex_d = (0.004 + Math.max(0, hyde_raw_dens[i]))*(0.40 + 0.60*bio_suit[i]);
 
         baseline_tex[i] = tex_d;
-        let eff_d = Math.max(1e-5, combine_field[i]/la_i);
-
-        log_mult[i] = Math.log(eff_d/Math.max(1e-5, tex_d));
-
-        if (p2v && county_id[i] > 0) {
-          let gidx = valid_indices[i];
-          let cy = Math.floor(gidx/grid_w);
-          let cx = gidx % grid_w;
-          let cid_i = county_id[i];
-
-          for (let dy = -2; dy <= 2 && !is_border[i]; dy++) {
-            let nr = cy + dy;
-
-            if (nr < 0 || nr >= grid_h) continue;
-            for (let dx = -2; dx <= 2; dx++) {
-              let nv = p2v[nr*grid_w + ((cx + dx + grid_w) % grid_w)];
-
-              if (nv >= 0 && county_id[nv] !== cid_i) {
-                is_border[i] = 1;
-                break;
-              }
-            }
-          }
-        }
+        log_mult[i] = Math.log(Math.max(1e-5, combine_field[i]/la_i)/Math.max(1e-5, tex_d));
       }
 
-      if (p2v && seam_r > 0 && seam_passes > 0) {
+      if (p2v) {
         for (let pass = 0; pass < seam_passes; pass++) {
           for (let i = 0; i < n_valid; i++) {
-            if (perm_ice && perm_ice[i] <= 0.05) {
-              tmp_mult[i] = log_mult[i];
-              continue;
-            }
-            if (county_id[i] > 0 && !is_giant[i] && !is_border[i]) {
+            if ((perm_ice && perm_ice[i] <= 0.05) || (county_id[i] > 0 && !is_giant[i])) {
               tmp_mult[i] = log_mult[i];
               continue;
             }
@@ -562,8 +550,7 @@ let { PNG } = global.pngjs || require("pngjs");
             tmp_mult[i] = (wsum > 0) ? acc/wsum : log_mult[i];
           }
           for (let i = 0; i < n_valid; i++) {
-            if (perm_ice && perm_ice[i] <= 0.05) continue;
-            if (county_id[i] > 0 && !is_giant[i] && !is_border[i]) continue;
+            if ((perm_ice && perm_ice[i] <= 0.05) || (county_id[i] > 0 && !is_giant[i])) continue;
             let gidx = valid_indices[i];
             let cy = Math.floor(gidx/grid_w);
             let cx = gidx % grid_w;
@@ -588,31 +575,17 @@ let { PNG } = global.pngjs || require("pngjs");
         }
       }
 
-      //7. Reconstruct field & re-conserve compact counties cleanly
+      //7. Reconstruct frontier field leaving compact counties untouched
       let out_field = new Float32Array(n_valid);
-      let c_recons_sum = new Map();
 
       for (let i = 0; i < n_valid; i++) {
         if (perm_ice && perm_ice[i] <= 0.05) continue;
-        let la_i = Math.max(1.0, cell_area[i]);
-        let val = la_i*baseline_tex[i]*Math.exp(log_mult[i]);
+        if (county_id[i] > 0 && !is_giant[i]) {
+          out_field[i] = Math.max(1e-5, combine_field[i]);
+        } else {
+          let la_i = Math.max(1.0, cell_area[i]);
 
-        out_field[i] = Math.max(1e-5, val);
-        let cid = county_id[i];
-
-        if (cid > 0 && !is_giant[i])
-          c_recons_sum.set(cid, (c_recons_sum.get(cid) || 0) + out_field[i]);
-      }
-
-      for (let i = 0; i < n_valid; i++) {
-        let cid = county_id[i];
-
-        if (cid > 0 && !is_giant[i] && out_field[i] > 0) {
-          let rur_t = c_rural_target.get(cid) || 0;
-          let cur_s = c_recons_sum.get(cid) || 1;
-          let sc = rur_t/cur_s;
-
-          out_field[i] *= (is_border[i] ? (0.4 + 0.6*sc) : sc);
+          out_field[i] = Math.max(1e-5, la_i*baseline_tex[i]*Math.exp(log_mult[i]));
         }
       }
 
@@ -640,6 +613,7 @@ let { PNG } = global.pngjs || require("pngjs");
 
       //Declare local instance variables.
       let end_yr = Number(ccf_cfg.end_year) || 1870;
+      let meta_path;
       let n_valid = context.n_valid;
       let png_path;
       let rasters_rel = ccf_cfg.rasters_folder || "histmap/1.data_raw/population_regional/CENTAUR/_shared/census_counties/rasters";
@@ -647,18 +621,34 @@ let { PNG } = global.pngjs || require("pngjs");
       let valid_indices = context.valid_indices;
 
       //Guard clauses
+      meta_path = path.resolve(context.root_dir || ".", rasters_rel, `county_meta_${snap_yr}.json`);
       png_path = path.resolve(context.root_dir || ".", rasters_rel, `county_id_${snap_yr}.png`);
       if (!fs.existsSync(png_path)) return null;
 
       //Function body
       let county_mask = new Uint8Array(n_valid);
+      let giant_ids = new Set();
       let png = PNG.sync.read(fs.readFileSync(png_path));
+
+      if (fs.existsSync(meta_path)) {
+        let counties_obj = JSON.parse(fs.readFileSync(meta_path, "utf8")).counties || {};
+        let c_keys = Object.keys(counties_obj);
+
+        for (let k = 0; k < c_keys.length; k++) {
+          let m = counties_obj[c_keys[k]];
+
+          if (m && m.is_giant_frontier) giant_ids.add(Number(m.id));
+        }
+      }
 
       for (let v = 0; v < n_valid; v++) {
         let p4 = valid_indices[v]*4;
 
-        if (png.data[p4 + 3] > 0 && ((png.data[p4] << 8) | png.data[p4 + 1]) > 0)
-          county_mask[v] = 1;
+        if (png.data[p4 + 3] > 0) {
+          let cid = (png.data[p4] << 8) | png.data[p4 + 1];
+
+          if (cid > 0) county_mask[v] = giant_ids.has(cid) ? 2 : 1;
+        }
       }
 
       //Return statement
@@ -668,7 +658,7 @@ let { PNG } = global.pngjs || require("pngjs");
 
     /**
      * Step E: Calibrates frontier-state/territory zones in `ViscountSubstrataMosaic` without crushing
-     * unenumerated Indigenous homelands when federal census targets cover only settled county enclaves.
+     * unenumerated Indigenous homelands when federal census targets cover only settled or frontier enclaves.
      * @alias ViscountCountyCensusFrontier.E_calibrateZoneWithCountyFrontier
      *
      * @param {Object} arg0_context
@@ -715,15 +705,15 @@ let { PNG } = global.pngjs || require("pngjs");
       if (!county_mask || target_pop <= 0) return { handled: false };
 
       //Declare local instance variables.
-      let county_px = 0;
-      let county_rur_sum = 0;
-      let county_urb_sum = 0;
+      let cands = [];
+      let compact_px = 0;
+      let giant_px = 0;
       let p2v = context.pixel_to_valid;
       let share_max = Number(ccf_cfg.frontier_county_share_max) || 0.85;
-      let share_min = Number(ccf_cfg.frontier_county_share_min) || 0.005;
       let total_px = 0;
-      let unenum_rur_sum = 0;
-      let unenum_urb_sum = 0;
+      let valid_cells = [];
+      let zone_rur_sum = 0;
+      let zone_urb_sum = 0;
 
       //Function body
       for (let a = 0; a < zone.pixels.length; a++) {
@@ -731,40 +721,105 @@ let { PNG } = global.pngjs || require("pngjs");
 
         if (v_idx < 0) continue;
         total_px++;
-        if (county_mask[v_idx] === 1) {
-          county_px++;
-          if (base_rural[v_idx] > 0) county_rur_sum += base_rural[v_idx];
-          if (urban_valid[v_idx] > 0) county_urb_sum += urban_valid[v_idx];
-        } else {
-          if (base_rural[v_idx] > 0) unenum_rur_sum += base_rural[v_idx];
-          if (urban_valid[v_idx] > 0) unenum_urb_sum += urban_valid[v_idx];
+        valid_cells.push(v_idx);
+        if (base_rural[v_idx] > 0) zone_rur_sum += base_rural[v_idx];
+        if (urban_valid[v_idx] > 0) zone_urb_sum += urban_valid[v_idx];
+        if (county_mask[v_idx] === 1) compact_px++;
+        else if (county_mask[v_idx] === 2) {
+          giant_px++;
+          cands.push(v_idx);
         }
       }
 
-      let c_share = (total_px > 0) ? county_px/total_px : 0;
+      let compact_share = (total_px > 0) ? compact_px/total_px : 0;
+      let any_county_px = compact_px + giant_px;
+      let is_sparse_uncountied = (any_county_px < 10 && target_pop < 0.85*zone_rur_sum && target_pop < 0.55*total_px*70);
 
-      if (c_share < share_min || c_share >= share_max || county_rur_sum <= 0)
+      if (compact_share >= share_max)
+        return { handled: false };
+      if (any_county_px === 0 && !is_sparse_uncountied)
         return { handled: false };
 
-      let county_rur_target = 0;
-      let settled_scale = 0;
+      //Unorganised white-only early frontier territories (<10 county pixels & sparse target < Indigenous floor): preserve Regime 2 base cleanly
+      if (is_sparse_uncountied) {
+        for (let i = 0; i < valid_cells.length; i++) {
+          let v_idx = valid_cells[i];
 
-      if (county_urb_sum < 0.90*target_pop) {
-        county_rur_target = target_pop - county_urb_sum;
-        settled_scale = 1.0;
-      } else {
-        county_rur_target = 0.10*target_pop;
-        settled_scale = 0.90*target_pop/county_urb_sum;
+          active_zone_of_v[v_idx] = z_id;
+          if (base_rural[v_idx] > 0) {
+            rural_valid[v_idx] = Math.max(1e-4, base_rural[v_idx]);
+            touched[v_idx] = 1;
+          }
+        }
+
+        //Return statement
+        return {
+          handled: true,
+          rural_target_pop: zone_rur_sum,
+          settled_scale: 1.0,
+          target_pop: zone_rur_sum + zone_urb_sum
+        };
       }
 
-      let scalar = county_rur_target/county_rur_sum;
+      let core_set = new Set();
 
-      for (let a = 0; a < zone.pixels.length; a++) {
-        let v_idx = p2v[zone.pixels[a]];
+      if (compact_share >= 0.03) {
+        for (let i = 0; i < valid_cells.length; i++) {
+          let v_idx = valid_cells[i];
 
-        if (v_idx < 0) continue;
+          if (county_mask[v_idx] === 1) core_set.add(v_idx);
+        }
+      } else {
+        for (let i = 0; i < valid_cells.length; i++) {
+          let v_idx = valid_cells[i];
+
+          if (county_mask[v_idx] === 1) core_set.add(v_idx);
+        }
+        cands.sort(function (arg0_a, arg1_b) { return base_rural[arg1_b] - base_rural[arg0_a]; });
+        let n_take = Math.max(8, Math.ceil(0.10*any_county_px));
+
+        for (let i = 0; i < cands.length && core_set.size < n_take; i++)
+          core_set.add(cands[i]);
+      }
+
+      let core_rur_sum = 0;
+      let core_urb_sum = 0;
+      let noncore_rur_sum = 0;
+      let noncore_urb_sum = 0;
+
+      for (let i = 0; i < valid_cells.length; i++) {
+        let v_idx = valid_cells[i];
+
+        if (core_set.has(v_idx)) {
+          if (base_rural[v_idx] > 0) core_rur_sum += base_rural[v_idx];
+          if (urban_valid[v_idx] > 0) core_urb_sum += urban_valid[v_idx];
+        } else {
+          if (base_rural[v_idx] > 0) noncore_rur_sum += base_rural[v_idx];
+          if (urban_valid[v_idx] > 0) noncore_urb_sum += urban_valid[v_idx];
+        }
+      }
+
+      if (core_rur_sum <= 0)
+        return { handled: false };
+
+      let core_rur_target = 0;
+      let settled_scale = 0;
+
+      if (core_urb_sum < 0.90*target_pop) {
+        core_rur_target = target_pop - core_urb_sum;
+        settled_scale = 1.0;
+      } else {
+        core_rur_target = 0.10*target_pop;
+        settled_scale = 0.90*target_pop/core_urb_sum;
+      }
+
+      let scalar = core_rur_target/core_rur_sum;
+
+      for (let i = 0; i < valid_cells.length; i++) {
+        let v_idx = valid_cells[i];
+
         active_zone_of_v[v_idx] = z_id;
-        if (county_mask[v_idx] === 1) {
+        if (core_set.has(v_idx)) {
           if (base_rural[v_idx] > 0) {
             rural_valid[v_idx] = Math.max(1e-4, base_rural[v_idx]*scalar);
             touched[v_idx] = 1;
@@ -780,9 +835,9 @@ let { PNG } = global.pngjs || require("pngjs");
       //Return statement
       return {
         handled: true,
-        rural_target_pop: county_rur_target + unenum_rur_sum,
+        rural_target_pop: core_rur_target + noncore_rur_sum,
         settled_scale: settled_scale,
-        target_pop: target_pop + unenum_rur_sum + unenum_urb_sum*settled_scale
+        target_pop: target_pop + noncore_rur_sum + noncore_urb_sum*settled_scale
       };
     }
   };

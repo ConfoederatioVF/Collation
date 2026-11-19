@@ -729,7 +729,7 @@ def run_build():
         area_k = items[k]["geom_area_km2"]
         age = max(2.0, float(yr - items[k]["founded_year"] + 5))
         age_f = min(1.0, math.pow(age / 45.0, 0.70))
-        giant_pen = math.exp(-max(0.0, area_k - 10000.0) / 28000.0) if yr <= 1770 else 1.0
+        giant_pen = (1.0 / (1.0 + max(0.0, area_k - 8000.0) / 25000.0)) if yr <= 1770 else 1.0
         d_term = (desc_1790_sum[k + 1] / (1.0 + area_k / 6000.0)) / sum_d
         w = (
           0.52 * (hyde_sum[k + 1] / sum_h)

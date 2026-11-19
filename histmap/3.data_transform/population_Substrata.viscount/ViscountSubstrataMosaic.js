@@ -273,8 +273,8 @@ let { ViscountCountyCensusFrontier } = global.ViscountCountyCensusFrontier ? glo
           context.manifest.smoothing.interior_multiplier_blur_radius_px : 5;
         let blur_passes = (context.manifest && context.manifest.smoothing && Number.isFinite(context.manifest.smoothing.interior_multiplier_blur_passes)) ?
           Math.max(3, context.manifest.smoothing.interior_multiplier_blur_passes) : 3;
-        if (ccf_active) blur_r = Number(ccf_cfg.interior_multiplier_blur_radius_px) || 2;
-        if (ccf_active) blur_passes = Number(ccf_cfg.interior_multiplier_blur_passes) || 2;
+        if (ccf_active && Number.isFinite(ccf_cfg.interior_multiplier_blur_radius_px)) blur_r = Number(ccf_cfg.interior_multiplier_blur_radius_px);
+        if (ccf_active && Number.isFinite(ccf_cfg.interior_multiplier_blur_passes)) blur_passes = Number(ccf_cfg.interior_multiplier_blur_passes);
         let log_mult = new Float32Array(n_valid);
         let tmp_mult = new Float32Array(n_valid);
 
@@ -283,7 +283,7 @@ let { ViscountCountyCensusFrontier } = global.ViscountCountyCensusFrontier ? glo
             Math.log(Math.max(1e-6, rural_valid[v])/Math.max(1e-6, base_rural[v])) : 0;
         }
 
-        for (let pass = 0; pass < blur_passes; pass++) {
+        for (let pass = 0; blur_r > 0 && pass < blur_passes; pass++) {
           for (let v = 0; v < n_valid; v++) {
             if (!touched[v] || base_rural[v] <= 0) { tmp_mult[v] = 0; continue; }
             let px = context.valid_indices[v];

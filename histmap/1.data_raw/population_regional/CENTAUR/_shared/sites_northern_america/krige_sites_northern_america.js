@@ -31,15 +31,16 @@ let { ViscountRuralSuitability } = require(path.resolve(__dirname, "../../../../
      *
      * @returns {Object}
      */
-    static B_generatePopulationRasters (arg0_surface_bundle) {
+    static B_generatePopulationRasters (arg0_surface_bundle, arg1_options) {
       //Convert from parameters
       let surface = arg0_surface_bundle;
+      let options = (arg1_options) ? arg1_options : {};
 
       //Guard clause: delegate to per-HU residual kriging + census/GHSL engine when active
       let rk_cfg = (surface && surface.kriging_bundle && surface.kriging_bundle.config) ? surface.kriging_bundle.config : {};
 
       if (rk_cfg.kriging_config && rk_cfg.kriging_config.residual_kriging_mode === "hu_hyde_residual")
-        return ViscountHUResidualKriging.generateAllBenchmarkPopulationRasters(surface, { is_polynesia: false });
+        return ViscountHUResidualKriging.generateAllBenchmarkPopulationRasters(surface, { is_polynesia: false, only_years: options.only_years || null });
 
       //Declare local instance variables
       let bio_covs = surface.bio_covs;
@@ -355,14 +356,15 @@ let { ViscountRuralSuitability } = require(path.resolve(__dirname, "../../../../
      *
      * @returns {Object}
      */
-    static run () {
+    static run (arg0_options) {
+      let options = (arg0_options) ? arg0_options : {};
       let t0 = Date.now();
       let domain = ViscountMaternKriging.A_loadDomainConfigAndSites(this.CONFIG_REL, { project_root: this.PROJECT_ROOT });
       let obs = ViscountMaternKriging.B_computeEmpiricalBayesIntensities(domain);
       let krig = ViscountMaternKriging.C_fitTwoScaleNonStationaryMatern(obs);
       let surface = ViscountMaternKriging.E_fitCarryCapacityResidualSurface(krig);
       let diag = ViscountMaternKriging.F_exportBenchmarkRastersAndDiagnostics(surface);
-      let raster_meta = this.B_generatePopulationRasters(surface);
+      let raster_meta = this.B_generatePopulationRasters(surface, options);
 
       //Return statement
       return {
@@ -375,7 +377,9 @@ let { ViscountRuralSuitability } = require(path.resolve(__dirname, "../../../../
 }
 
 if (require.main === module) {
-  let res = global.NorthAmericaKrigingRunner.run();
+  let y_arg = process.argv.find(function (arg0_a) { return arg0_a.indexOf("--years=") === 0; });
+  let only_years = y_arg ? y_arg.slice(8).split(",").map(Number).filter(Number.isFinite) : null;
+  let res = global.NorthAmericaKrigingRunner.run({ only_years: only_years });
 
   console.log(JSON.stringify({
     elapsed_seconds: res.elapsed_seconds,
