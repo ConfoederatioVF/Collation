@@ -851,7 +851,14 @@
       let city = stadester_obj[key];
 
       if (!city || !Array.isArray(city.coords) || !city.population) continue;
-      let ctry = city.country || "";
+      let ctry = String(city.country || "").trim().toLowerCase();
+      let proj_key = String(city.viscount_project || "").toUpperCase();
+
+      if (!proj_key && typeof global.StadesterPartitionIO !== "undefined" && typeof global.StadesterPartitionIO.assignCityToViscountRegion === "function") {
+        let reg_desc = global.StadesterPartitionIO.assignCityToViscountRegion(city, key);
+
+        if (reg_desc && reg_desc.key) proj_key = String(reg_desc.key).toUpperCase();
+      }
       let active_ge1850 = new Set();
       let max_pop = 0;
       let yr_keys = Object.keys(city.population);
@@ -878,6 +885,7 @@
         city: city,
         dropped: false,
         key: key,
+        proj_key: proj_key,
         score: score
       });
     }
@@ -898,10 +906,10 @@
           let b = arr[x];
 
           if (b.dropped) continue;
-          let touches_centaur = (a.city.viscount_project === "CENTAUR" || b.city.viscount_project === "CENTAUR");
+          let touches_centaur = (a.proj_key === "CENTAUR" || b.proj_key === "CENTAUR");
 
           if (!touches_centaur) continue;
-          if (Math.abs(a.city.coords[0] - b.city.coords[0]) > 0.02 || Math.abs(a.city.coords[1] - b.city.coords[1]) > 0.03) continue;
+          if (Math.abs(a.city.coords[0] - b.city.coords[0]) > 0.02 || Math.abs(a.city.coords[1] - b.city.coords[1]) > 0.06) continue;
           let overlaps = false;
 
           b.active_ge1850.forEach(function (arg0_yr) {

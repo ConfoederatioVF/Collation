@@ -65,6 +65,9 @@ let preloaded_viscount = [
   "histmap/3.data_transform/population_Substrata.viscount/ViscountRuralSuitability.js",
   "histmap/3.data_transform/population_Substrata.viscount/ViscountMaternVariogram.js",
   "histmap/3.data_transform/population_Substrata.viscount/ViscountBiophysicalCovariates.js",
+  "histmap/3.data_transform/population_Substrata.viscount/ViscountHUResidualHelpers.js",
+  "histmap/3.data_transform/population_Substrata.viscount/ViscountCountyCensusFrontier.js",
+  "histmap/3.data_transform/population_Substrata.viscount/ViscountHUResidualKriging.js",
   "histmap/3.data_transform/population_Substrata.viscount/ViscountMaternKriging.js",
   "histmap/3.data_transform/population_Substrata.viscount/ViscountSubstrataMosaic.js",
   "histmap/3.data_transform/population_Substrata.viscount/ViscountSubstrataPipeline.js"
@@ -116,21 +119,30 @@ for (let i = 0; i < files.length; i++) {
     let t0 = Date.now();
     console.log(`[StageE-Fast] Bootstrapped ${files.length} files cleanly.`);
 
+    let skip_shards = process.argv.includes("--skip-shards");
     let skip_substrata = process.argv.includes("--skip-substrata");
-    if (!skip_substrata) {
-      console.log("[StageE-Fast] 1/4 Running ViscountSubstrataPipeline + global scaling + GHSL interpolation...");
-      await population_Substrata_outlier_removal.processRasters({ exclude: ["A", "B2"] });
+
+    if (!skip_shards) {
+      console.log("[StageE-Fast] 1/5 Refreshing Stadestér shards, Dataview shards & base urban rasters (A–F)...");
+      await population_Stadester.processRasters({ exclude: ["G", "H", "I", "J"], overwrite: true });
     } else {
-      console.log("[StageE-Fast] 1/4 Skipped ViscountSubstrataPipeline (--skip-substrata).");
+      console.log("[StageE-Fast] 1/5 Skipped Stadestér A–F (--skip-shards).");
     }
 
-    console.log("[StageE-Fast] 2/4 Reconciling full Stadestér dataset, Dataview shards & rasters (A–J)...");
-    await population_Stadester.processRasters({ overwrite: true });
+    if (!skip_substrata) {
+      console.log("[StageE-Fast] 2/5 Running ViscountSubstrataPipeline (CENTAUR) + global scaling + GHSL interpolation...");
+      await population_Substrata_outlier_removal.processRasters({ exclude: ["A", "B2"], only_projects: ["CENTAUR"] });
+    } else {
+      console.log("[StageE-Fast] 2/5 Skipped ViscountSubstrataPipeline (--skip-substrata).");
+    }
 
-    console.log("[StageE-Fast] 3/4 Running population_Velkscala (Viscount antiquity + 2D harmonic diffusion)...");
+    console.log("[StageE-Fast] 3/5 Reconciling Stadestér urban/rural/total rasters (G–J)...");
+    await population_Stadester.processRasters({ exclude: ["A", "B", "C", "D", "E", "F"] });
+
+    console.log("[StageE-Fast] 4/5 Running population_Velkscala (Viscount antiquity + 2D harmonic diffusion)...");
     await population_Velkscala.processRasters();
 
-    console.log("[StageE-Fast] 4/4 Refreshing population_Stadester_transform deltas...");
+    console.log("[StageE-Fast] 5/5 Refreshing population_Stadester_transform deltas...");
     await population_Stadester_transform.processRasters();
 
     if (global.GeoPNG && typeof GeoPNG.terminateAllWorkers === "function")

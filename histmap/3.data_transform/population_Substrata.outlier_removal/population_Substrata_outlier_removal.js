@@ -280,8 +280,9 @@ global.population_Substrata_outlier_removal = class {
 		// Iterate over all hyde_years
 		for (let i = 0; i < hyde_years.length; i++) {
 			let year = hyde_years[i];
-			let source_path = popc_.png;
-			let output_path = popc_.png;
+			let fallback_path = `${this.intermediate_outliers_removed_rasters}popc_${year}.png`;
+			let output_path = `${this.intermediate_rasters_scaled_to_statista}popc_${year}.png`;
+			let source_path = fs.existsSync(fallback_path) ? fallback_path : null;
 			
 			if (source_path) {
 				if (year < global_min_year || year > global_max_year) {

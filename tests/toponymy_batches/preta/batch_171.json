@@ -1,0 +1,901 @@
+{
+  "batch_index": 171,
+  "count": 30,
+  "project": "PRETA",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        -20.10272,
+        -65.1334
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1825,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "San Lucas-Bolivia",
+      "known_aliases": [
+        "San Lucas",
+        "san lucas"
+      ],
+      "latest_year": 2026,
+      "name": "San Lucas",
+      "reason": "missing_entry",
+      "region": "bol_chuquisaca",
+      "sample_years": [
+        1825,
+        1910,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -17.25505,
+        -58.82335
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1825,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "San Matías-Bolivia",
+      "known_aliases": [
+        "San Matías",
+        "san matías"
+      ],
+      "latest_year": 2026,
+      "name": "San Matías",
+      "reason": "missing_entry",
+      "region": "bol_santa_cruz",
+      "sample_years": [
+        1825,
+        1910,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -16.84311,
+        -61.27233
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1825,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "San Miguel-Bolivia",
+      "known_aliases": [
+        "San Miguel",
+        "san miguel"
+      ],
+      "latest_year": 2026,
+      "name": "San Miguel",
+      "reason": "missing_entry",
+      "region": "bol_santa_cruz",
+      "sample_years": [
+        1825,
+        1910,
+        1980,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -22.17713,
+        -67.23416
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1825,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "San Pablo-Bolivia",
+      "known_aliases": [
+        "San Pablo",
+        "san pablo",
+        "san pablo de lípez",
+        "San Pablo de Lípez"
+      ],
+      "latest_year": 2026,
+      "name": "San Pablo",
+      "reason": "missing_entry",
+      "region": "bol_potosi",
+      "sample_years": [
+        1825,
+        1910,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -16.21795,
+        -68.8428
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "San Pablo de Tiquina-Bolivia",
+      "known_aliases": [
+        "San Pablo de Tiquina",
+        "san pablo de tiquina",
+        "san pablo",
+        "san pawlu tikina",
+        "San Pablo",
+        "San Pawlu Tikina"
+      ],
+      "latest_year": 2024,
+      "name": "San Pablo de Tiquina",
+      "reason": "missing_entry",
+      "region": "bol_la_paz",
+      "sample_years": [
+        1850,
+        1940,
+        1990,
+        2024
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -11.02552,
+        -66.59077
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1825,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "San Pedro-Bolivia",
+      "known_aliases": [
+        "San Pedro",
+        "san pedro"
+      ],
+      "latest_year": 2026,
+      "name": "San Pedro",
+      "reason": "missing_entry",
+      "region": "bol_pando",
+      "sample_years": [
+        1825,
+        1910,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -18.28691,
+        -59.81742
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1650,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "San Pedro (Santa Cruz)-Bolivia",
+      "known_aliases": [
+        "San Pedro",
+        "san pedro"
+      ],
+      "latest_year": 2024,
+      "name": "San Pedro",
+      "reason": "missing_entry",
+      "region": "bol_santa_cruz",
+      "sample_years": [
+        1650,
+        1870,
+        1970,
+        2024
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -17.65436,
+        -68.0484
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1825,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "San Pedro de Curahuara-Bolivia",
+      "known_aliases": [
+        "San Pedro de Curahuara",
+        "san pedro de curahuara"
+      ],
+      "latest_year": 2026,
+      "name": "San Pedro de Curahuara",
+      "reason": "missing_entry",
+      "region": "bol_la_paz",
+      "sample_years": [
+        1825,
+        1910,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -18.87764,
+        -66.05518
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1825,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "San Pedro de Macha-Bolivia",
+      "known_aliases": [
+        "San Pedro de Macha",
+        "san pedro de macha"
+      ],
+      "latest_year": 2026,
+      "name": "San Pedro de Macha",
+      "reason": "missing_entry",
+      "region": "bol_potosi",
+      "sample_years": [
+        1825,
+        1910,
+        1980,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -20.74744,
+        -68.04986
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1825,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "San Pedro de Quemes-Bolivia",
+      "known_aliases": [
+        "San Pedro de Quemes",
+        "san pedro de quemes",
+        "villa san pedro de quemes",
+        "Villa San Pedro de Quemes"
+      ],
+      "latest_year": 2026,
+      "name": "San Pedro de Quemes",
+      "reason": "missing_entry",
+      "region": "bol_potosi",
+      "sample_years": [
+        1825,
+        1910,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -16.23717,
+        -68.85063
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1825,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "San Pedro de Tiquina-Bolivia",
+      "known_aliases": [
+        "San Pedro de Tiquina",
+        "san pedro de tiquina"
+      ],
+      "latest_year": 2026,
+      "name": "San Pedro de Tiquina",
+      "reason": "missing_entry",
+      "region": "bol_la_paz",
+      "sample_years": [
+        1825,
+        1910,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -16.81549,
+        -60.14093
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1825,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "San Rafael-Bolivia",
+      "known_aliases": [
+        "San Rafael",
+        "san rafael"
+      ],
+      "latest_year": 2026,
+      "name": "San Rafael",
+      "reason": "missing_entry",
+      "region": "bol_santa_cruz",
+      "sample_years": [
+        1825,
+        1910,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -14.2446,
+        -65.98407
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1825,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Santa Ana-Bolivia",
+      "known_aliases": [
+        "Santa Ana",
+        "santa ana",
+        "santa ana de yacuma",
+        "Santa Ana de Yacuma"
+      ],
+      "latest_year": 2026,
+      "name": "Santa Ana",
+      "reason": "missing_entry",
+      "region": "bol_el_beni",
+      "sample_years": [
+        1825,
+        1910,
+        1980,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -20.91667,
+        -66.05
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Santa Bárbara-Bolivia",
+      "known_aliases": [
+        "Santa Bárbara",
+        "santa bárbara",
+        "santa barbara",
+        "Santa Barbara"
+      ],
+      "latest_year": 2024,
+      "name": "Santa Bárbara",
+      "reason": "missing_entry",
+      "region": "bol_potosi",
+      "sample_years": [
+        1850,
+        1940,
+        1990,
+        2024
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -10.73133,
+        -67.27869
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1825,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Santa Rosa-Bolivia",
+      "known_aliases": [
+        "Santa Rosa",
+        "santa rosa"
+      ],
+      "latest_year": 2026,
+      "name": "Santa Rosa",
+      "reason": "missing_entry",
+      "region": "bol_pando",
+      "sample_years": [
+        1825,
+        1910,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -14.07719,
+        -66.79349
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Santa Rosa de Yacuma-Bolivia",
+      "known_aliases": [
+        "Santa Rosa de Yacuma",
+        "santa rosa de yacuma",
+        "srb",
+        "santa rosa",
+        "SRB",
+        "Santa Rosa"
+      ],
+      "latest_year": 2024,
+      "name": "Santa Rosa de Yacuma",
+      "reason": "missing_entry",
+      "region": "bol_el_beni",
+      "sample_years": [
+        1850,
+        1940,
+        1990,
+        2024
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -17.10805,
+        -63.59967
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1650,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Santa Rosa del Sara-Bolivia",
+      "known_aliases": [
+        "Santa Rosa del Sara",
+        "santa rosa del sara",
+        "santa rosa",
+        "Santa Rosa"
+      ],
+      "latest_year": 2024,
+      "name": "Santa Rosa del Sara",
+      "reason": "missing_entry",
+      "region": "bol_santa_cruz",
+      "sample_years": [
+        1650,
+        1870,
+        1970,
+        2024
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -17.47946,
+        -68.35597
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1825,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Santiago de Callapa-Bolivia",
+      "known_aliases": [
+        "Santiago de Callapa",
+        "santiago de callapa"
+      ],
+      "latest_year": 2026,
+      "name": "Santiago de Callapa",
+      "reason": "missing_entry",
+      "region": "bol_la_paz",
+      "sample_years": [
+        1825,
+        1910,
+        1980,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -16.1,
+        -68.88333
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1825,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Santiago de Huata-Bolivia",
+      "known_aliases": [
+        "Santiago de Huata",
+        "santiago de huata"
+      ],
+      "latest_year": 2026,
+      "name": "Santiago de Huata",
+      "reason": "missing_entry",
+      "region": "bol_la_paz",
+      "sample_years": [
+        1825,
+        1910,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -17.83789,
+        -67.94284
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1825,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Santiago de Huayllamarca-Bolivia",
+      "known_aliases": [
+        "Santiago de Huayllamarca",
+        "santiago de huayllamarca"
+      ],
+      "latest_year": 2026,
+      "name": "Santiago de Huayllamarca",
+      "reason": "missing_entry",
+      "region": "bol_oruro",
+      "sample_years": [
+        1825,
+        1910,
+        1980,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -17.06605,
+        -69.19212
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1825,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Santiago de Machaca-Bolivia",
+      "known_aliases": [
+        "Santiago de Machaca",
+        "santiago de machaca"
+      ],
+      "latest_year": 2026,
+      "name": "Santiago de Machaca",
+      "reason": "missing_entry",
+      "region": "bol_la_paz",
+      "sample_years": [
+        1825,
+        1910,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -17.54598,
+        -66.2461
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1825,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Santiváñez-Bolivia",
+      "known_aliases": [
+        "Santiváñez",
+        "santiváñez",
+        "villa santivañez",
+        "Villa Santivañez"
+      ],
+      "latest_year": 2026,
+      "name": "Santiváñez",
+      "reason": "missing_entry",
+      "region": "bol_cochabamba",
+      "sample_years": [
+        1825,
+        1910,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -9.95,
+        -66.61667
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1825,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Santos Mercado-Bolivia",
+      "known_aliases": [
+        "Santos Mercado",
+        "santos mercado"
+      ],
+      "latest_year": 2026,
+      "name": "Santos Mercado",
+      "reason": "missing_entry",
+      "region": "bol_pando",
+      "sample_years": [
+        1825,
+        1910,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -19.13016,
+        -66.93577
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1825,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Santuario de Quillacas-Bolivia",
+      "known_aliases": [
+        "Santuario de Quillacas",
+        "santuario de quillacas"
+      ],
+      "latest_year": 2026,
+      "name": "Santuario de Quillacas",
+      "reason": "missing_entry",
+      "region": "bol_oruro",
+      "sample_years": [
+        1825,
+        1910,
+        1980,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -16.88854,
+        -67.94949
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1825,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sapahaqui-Bolivia",
+      "known_aliases": [
+        "Sapahaqui",
+        "sapahaqui"
+      ],
+      "latest_year": 2026,
+      "name": "Sapahaqui",
+      "reason": "missing_entry",
+      "region": "bol_la_paz",
+      "sample_years": [
+        1825,
+        1910,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -11.48668,
+        -67.24735
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1825,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sena-Bolivia",
+      "known_aliases": [
+        "Sena",
+        "sena"
+      ],
+      "latest_year": 2026,
+      "name": "Sena",
+      "reason": "missing_entry",
+      "region": "bol_pando",
+      "sample_years": [
+        1825,
+        1910,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -17.33273,
+        -67.73921
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1825,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sicasica-Bolivia",
+      "known_aliases": [
+        "Sicasica",
+        "sicasica",
+        "villa aroma",
+        "Villa Aroma"
+      ],
+      "latest_year": 2026,
+      "name": "Sicasica",
+      "reason": "missing_entry",
+      "region": "bol_la_paz",
+      "sample_years": [
+        1825,
+        1910,
+        1980,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -17.79964,
+        -66.33421
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1825,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sicaya-Bolivia",
+      "known_aliases": [
+        "Sicaya",
+        "sicaya"
+      ],
+      "latest_year": 2026,
+      "name": "Sicaya",
+      "reason": "missing_entry",
+      "region": "bol_cochabamba",
+      "sample_years": [
+        1825,
+        1910,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -19.48655,
+        -64.47368
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1825,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sopachuy-Bolivia",
+      "known_aliases": [
+        "Sopachuy",
+        "sopachuy",
+        "villa de sopachui",
+        "Villa de Sopachui"
+      ],
+      "latest_year": 2026,
+      "name": "Sopachuy",
+      "reason": "missing_entry",
+      "region": "bol_chuquisaca",
+      "sample_years": [
+        1825,
+        1910,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -15.77305,
+        -68.64973
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1825,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sorata-Bolivia",
+      "known_aliases": [
+        "Sorata",
+        "sorata"
+      ],
+      "latest_year": 2026,
+      "name": "Sorata",
+      "reason": "missing_entry",
+      "region": "bol_la_paz",
+      "sample_years": [
+        1825,
+        1910,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    }
+  ]
+}

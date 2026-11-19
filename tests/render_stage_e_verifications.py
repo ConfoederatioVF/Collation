@@ -30,6 +30,8 @@ def _load_active_setts_for_year (arg0_yr):
   yr_i = int(arg0_yr)
   out = []
   for p in sorted(CENTAUR_DIR.rglob("*_settlements.json")):
+    if "_shared" in str(p):
+      continue
     if yr_i <= 1600 and "4.colonial_america" in str(p):
       continue
     if yr_i < 1783 and "5.modern_canada" in str(p):
@@ -37,6 +39,8 @@ def _load_active_setts_for_year (arg0_yr):
     data = json.loads(p.read_text(encoding="utf-8"))
     items = data.values() if isinstance(data, dict) else data
     for s in items:
+      if not isinstance(s, dict):
+        continue
       coords = s.get("coords")
       if not isinstance(coords, list) or len(coords) < 2:
         continue

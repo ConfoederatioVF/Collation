@@ -1,0 +1,917 @@
+{
+  "batch_index": 158,
+  "count": 30,
+  "project": "PRETA",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        -26.762,
+        -52.8541
+      ],
+      "country": "Brazil",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "União do Oeste-Brazil",
+      "known_aliases": [
+        "União do Oeste",
+        "união do oeste",
+        "União do Oeste (SC)"
+      ],
+      "latest_year": 2026,
+      "name": "União do Oeste",
+      "reason": "missing_entry",
+      "region": "bra_santa_catarina",
+      "sample_years": [
+        1950,
+        1980,
+        2010,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -11.53306,
+        -54.35333
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "União do Sul-Brazil",
+      "known_aliases": [
+        "União do Sul",
+        "união do sul"
+      ],
+      "latest_year": 2026,
+      "name": "União do Sul",
+      "reason": "missing_entry",
+      "region": "bra_mato_grosso",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -5.64194,
+        -37.25778
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Upanema-Brazil",
+      "known_aliases": [
+        "Upanema",
+        "upanema"
+      ],
+      "latest_year": 2026,
+      "name": "Upanema",
+      "reason": "missing_entry",
+      "region": "bra_rio_grande_do_norte",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -14.7678,
+        -42.6498
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Urandi-Brazil",
+      "known_aliases": [
+        "Urandi",
+        "urandi",
+        "Urandi (BA)"
+      ],
+      "latest_year": 2026,
+      "name": "Urandi",
+      "reason": "missing_entry",
+      "region": "bra_bahia",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -23.2,
+        -50.7939
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Uraí-Brazil",
+      "known_aliases": [
+        "Uraí",
+        "uraí",
+        "Uraí (PR)"
+      ],
+      "latest_year": 2026,
+      "name": "Uraí",
+      "reason": "missing_entry",
+      "region": "bra_parana",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -3.20778,
+        -43.40361
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Urbano Santos-Brazil",
+      "known_aliases": [
+        "Urbano Santos",
+        "urbano santos"
+      ],
+      "latest_year": 2026,
+      "name": "Urbano Santos",
+      "reason": "missing_entry",
+      "region": "bra_maranhao",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -21.7866,
+        -49.2848
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Uru-Brazil",
+      "known_aliases": [
+        "Uru",
+        "uru",
+        "Uru (SP)"
+      ],
+      "latest_year": 2026,
+      "name": "Uru",
+      "reason": "missing_entry",
+      "region": "bra_sao_paulo",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -15.5036,
+        -49.68266
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Uruana-Brazil",
+      "known_aliases": [
+        "Uruana",
+        "uruana"
+      ],
+      "latest_year": 2026,
+      "name": "Uruana",
+      "reason": "missing_entry",
+      "region": "bra_goias",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -16.06417,
+        -46.25417
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Uruana de Minas-Brazil",
+      "known_aliases": [
+        "Uruana de Minas",
+        "uruana de minas"
+      ],
+      "latest_year": 2026,
+      "name": "Uruana de Minas",
+      "reason": "missing_entry",
+      "region": "bra_minas_gerais",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -28.015,
+        -49.59167
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Urubici-Brazil",
+      "known_aliases": [
+        "Urubici",
+        "urubici",
+        "urubicy",
+        "urubioly",
+        "urubuci",
+        "Urubicy",
+        "Urubioly",
+        "Urubuci"
+      ],
+      "latest_year": 2026,
+      "name": "Urubici",
+      "reason": "missing_entry",
+      "region": "bra_santa_catarina",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -3.62316,
+        -39.5107
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Uruburetama-Brazil",
+      "known_aliases": [
+        "Uruburetama",
+        "uruburetama",
+        "Uruburetama (CE)"
+      ],
+      "latest_year": 2026,
+      "name": "Uruburetama",
+      "reason": "missing_entry",
+      "region": "bra_ceara",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -2.52936,
+        -57.7538
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Urucará-Brazil",
+      "known_aliases": [
+        "Urucará",
+        "urucará",
+        "Urucará (AM)"
+      ],
+      "latest_year": 2026,
+      "name": "Urucará",
+      "reason": "missing_entry",
+      "region": "bra_amazonas",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -16.1325,
+        -45.74222
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Urucuia-Brazil",
+      "known_aliases": [
+        "Urucuia",
+        "urucuia"
+      ],
+      "latest_year": 2026,
+      "name": "Urucuia",
+      "reason": "missing_entry",
+      "region": "bra_minas_gerais",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -3.12873,
+        -58.15501
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Urucurituba-Brazil",
+      "known_aliases": [
+        "Urucurituba",
+        "urucurituba"
+      ],
+      "latest_year": 2026,
+      "name": "Urucurituba",
+      "reason": "missing_entry",
+      "region": "bra_amazonas",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -20.35083,
+        -42.73944
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Urucânia-Brazil",
+      "known_aliases": [
+        "Urucânia",
+        "urucânia"
+      ],
+      "latest_year": 2026,
+      "name": "Urucânia",
+      "reason": "missing_entry",
+      "region": "bra_minas_gerais",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -3.31389,
+        -40.55667
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Uruoca-Brazil",
+      "known_aliases": [
+        "Uruoca",
+        "uruoca",
+        "riachao",
+        "riachão",
+        "Riachao",
+        "Riachão"
+      ],
+      "latest_year": 2026,
+      "name": "Uruoca",
+      "reason": "missing_entry",
+      "region": "bra_ceara",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -27.95278,
+        -49.87306
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Urupema-Brazil",
+      "known_aliases": [
+        "Urupema",
+        "urupema",
+        "santana",
+        "santanna",
+        "Santana",
+        "Santanna"
+      ],
+      "latest_year": 2026,
+      "name": "Urupema",
+      "reason": "missing_entry",
+      "region": "bra_santa_catarina",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -11.1261,
+        -62.3639
+      ],
+      "country": "Brazil",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Urupá-Brazil",
+      "known_aliases": [
+        "Urupá",
+        "urupá",
+        "Urupá (RO)"
+      ],
+      "latest_year": 2026,
+      "name": "Urupá",
+      "reason": "missing_entry",
+      "region": "bra_rondonia",
+      "sample_years": [
+        1950,
+        1980,
+        2010,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -21.20167,
+        -49.29
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Urupês-Brazil",
+      "known_aliases": [
+        "Urupês",
+        "urupês",
+        "mundo novo",
+        "Mundo Novo"
+      ],
+      "latest_year": 2026,
+      "name": "Urupês",
+      "reason": "missing_entry",
+      "region": "bra_sao_paulo",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -28.518,
+        -49.3238
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Urussanga-Brazil",
+      "known_aliases": [
+        "Urussanga",
+        "urussanga",
+        "Urussanga (SC)"
+      ],
+      "latest_year": 2026,
+      "name": "Urussanga",
+      "reason": "missing_entry",
+      "region": "bra_santa_catarina",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -17.46361,
+        -48.20167
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Urutaí-Brazil",
+      "known_aliases": [
+        "Urutaí",
+        "urutaí",
+        "urutahy",
+        "Urutahy"
+      ],
+      "latest_year": 2026,
+      "name": "Urutaí",
+      "reason": "missing_entry",
+      "region": "bra_goias",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -14.5963,
+        -39.2851
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Uruçuca-Brazil",
+      "known_aliases": [
+        "Uruçuca",
+        "uruçuca",
+        "Uruçuca (BA)"
+      ],
+      "latest_year": 2026,
+      "name": "Uruçuca",
+      "reason": "missing_entry",
+      "region": "bra_bahia",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -7.23944,
+        -44.5577
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Uruçuí-Brazil",
+      "known_aliases": [
+        "Uruçuí",
+        "uruçuí",
+        "Uruçuí (PI)"
+      ],
+      "latest_year": 2026,
+      "name": "Uruçuí",
+      "reason": "missing_entry",
+      "region": "bra_maranhao",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -20.2455,
+        -50.6455
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Urânia-Brazil",
+      "known_aliases": [
+        "Urânia",
+        "urânia",
+        "Urânia (SP)"
+      ],
+      "latest_year": 2026,
+      "name": "Urânia",
+      "reason": "missing_entry",
+      "region": "bra_sao_paulo",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -12.08167,
+        -41.09444
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Utinga-Brazil",
+      "known_aliases": [
+        "Utinga",
+        "utinga",
+        "bela vista",
+        "bella vista",
+        "Bela Vista",
+        "Bella Vista"
+      ],
+      "latest_year": 2026,
+      "name": "Utinga",
+      "reason": "missing_entry",
+      "region": "bra_bahia",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -29.39833,
+        -51.25361
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Vale Real-Brazil",
+      "known_aliases": [
+        "Vale Real",
+        "vale real"
+      ],
+      "latest_year": 2026,
+      "name": "Vale Real",
+      "reason": "missing_entry",
+      "region": "bra_rio_grande_do_sul",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -29.78384,
+        -52.18433
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Vale Verde-Brazil",
+      "known_aliases": [
+        "Vale Verde",
+        "vale verde",
+        "melos",
+        "Melos"
+      ],
+      "latest_year": 2026,
+      "name": "Vale Verde",
+      "reason": "missing_entry",
+      "region": "bra_rio_grande_do_sul",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -15.29781,
+        -59.067
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Vale de São Domingos-Brazil",
+      "known_aliases": [
+        "Vale de São Domingos",
+        "vale de são domingos"
+      ],
+      "latest_year": 2026,
+      "name": "Vale de São Domingos",
+      "reason": "missing_entry",
+      "region": "bra_mato_grosso",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -9.85744,
+        -62.17576
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Vale do Anari-Brazil",
+      "known_aliases": [
+        "Vale do Anari",
+        "vale do anari",
+        "bom futuro",
+        "vista alegre",
+        "Bom Futuro",
+        "Vista Alegre"
+      ],
+      "latest_year": 2026,
+      "name": "Vale do Anari",
+      "reason": "missing_entry",
+      "region": "bra_rondonia",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -10.4465,
+        -62.1352
+      ],
+      "country": "Brazil",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Vale do Paraíso-Brazil",
+      "known_aliases": [
+        "Vale do Paraíso",
+        "vale do paraíso",
+        "Vale do Paraíso (RO)"
+      ],
+      "latest_year": 2026,
+      "name": "Vale do Paraíso",
+      "reason": "missing_entry",
+      "region": "bra_rondonia",
+      "sample_years": [
+        1950,
+        1980,
+        2010,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    }
+  ]
+}

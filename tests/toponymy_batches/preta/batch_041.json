@@ -1,0 +1,911 @@
+{
+  "batch_index": 41,
+  "count": 30,
+  "project": "PRETA",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        -6.24974,
+        -38.4441
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Coronel João Pessoa-Brazil",
+      "known_aliases": [
+        "Coronel João Pessoa",
+        "coronel joão pessoa",
+        "Coronel João Pessoa (RN)"
+      ],
+      "latest_year": 2026,
+      "name": "Coronel João Pessoa",
+      "reason": "missing_entry",
+      "region": "bra_rio_grande_do_norte",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -10.2847,
+        -37.9198
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Coronel João Sá-Brazil",
+      "known_aliases": [
+        "Coronel João Sá",
+        "coronel joão sá",
+        "Coronel João Sá (BA)"
+      ],
+      "latest_year": 2026,
+      "name": "Coronel João Sá",
+      "reason": "missing_entry",
+      "region": "bra_bahia",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -23.6261,
+        -49.31
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Coronel Macedo-Brazil",
+      "known_aliases": [
+        "Coronel Macedo",
+        "coronel macedo",
+        "Coronel Macedo (SP)"
+      ],
+      "latest_year": 2026,
+      "name": "Coronel Macedo",
+      "reason": "missing_entry",
+      "region": "bra_sao_paulo",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -26.51222,
+        -52.66917
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Coronel Martins-Brazil",
+      "known_aliases": [
+        "Coronel Martins",
+        "coronel martins"
+      ],
+      "latest_year": 2026,
+      "name": "Coronel Martins",
+      "reason": "missing_entry",
+      "region": "bra_santa_catarina",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -16.6148,
+        -42.184
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Coronel Murta-Brazil",
+      "known_aliases": [
+        "Coronel Murta",
+        "coronel murta",
+        "Coronel Murta (MG)"
+      ],
+      "latest_year": 2026,
+      "name": "Coronel Murta",
+      "reason": "missing_entry",
+      "region": "bra_minas_gerais",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -21.5898,
+        -43.256
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Coronel Pacheco-Brazil",
+      "known_aliases": [
+        "Coronel Pacheco",
+        "coronel pacheco",
+        "Coronel Pacheco (MG)"
+      ],
+      "latest_year": 2026,
+      "name": "Coronel Pacheco",
+      "reason": "missing_entry",
+      "region": "bra_minas_gerais",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -29.2695,
+        -51.6847
+      ],
+      "country": "Brazil",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Coronel Pilar-Brazil",
+      "known_aliases": [
+        "Coronel Pilar",
+        "coronel pilar",
+        "Coronel Pilar (RS)"
+      ],
+      "latest_year": 2026,
+      "name": "Coronel Pilar",
+      "reason": "missing_entry",
+      "region": "bra_rio_grande_do_sul",
+      "sample_years": [
+        1950,
+        1980,
+        2010,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -23.2724,
+        -55.5278
+      ],
+      "country": "Brazil",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Coronel Sapucaia-Brazil",
+      "known_aliases": [
+        "Coronel Sapucaia",
+        "coronel sapucaia",
+        "Coronel Sapucaia (MS)"
+      ],
+      "latest_year": 2026,
+      "name": "Coronel Sapucaia",
+      "reason": "missing_entry",
+      "region": "bra_mato_grosso_do_sul",
+      "sample_years": [
+        1950,
+        1980,
+        2010,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -25.9767,
+        -52.5641
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Coronel Vivida-Brazil",
+      "known_aliases": [
+        "Coronel Vivida",
+        "coronel vivida",
+        "Coronel Vivida (PR)"
+      ],
+      "latest_year": 2026,
+      "name": "Coronel Vivida",
+      "reason": "missing_entry",
+      "region": "bra_parana",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -21.02444,
+        -44.2233
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Coronel Xavier Chaves-Brazil",
+      "known_aliases": [
+        "Coronel Xavier Chaves",
+        "coronel xavier chaves",
+        "coroas",
+        "Coroas"
+      ],
+      "latest_year": 2026,
+      "name": "Coronel Xavier Chaves",
+      "reason": "missing_entry",
+      "region": "bra_minas_gerais",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -27.60141,
+        -48.50593
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Corrego Grande-Brazil",
+      "known_aliases": [
+        "Corrego Grande",
+        "corrego grande"
+      ],
+      "latest_year": 2026,
+      "name": "Corrego Grande",
+      "reason": "missing_entry",
+      "region": "bra_santa_catarina",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -27.58472,
+        -50.36111
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Correia Pinto-Brazil",
+      "known_aliases": [
+        "Correia Pinto",
+        "correia pinto",
+        "correa pinto",
+        "eea",
+        "Correa Pinto",
+        "EEA"
+      ],
+      "latest_year": 2026,
+      "name": "Correia Pinto",
+      "reason": "missing_entry",
+      "region": "bra_santa_catarina",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -10.44333,
+        -45.16222
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Corrente-Brazil",
+      "known_aliases": [
+        "Corrente",
+        "corrente"
+      ],
+      "latest_year": 2026,
+      "name": "Corrente",
+      "reason": "missing_entry",
+      "region": "bra_piaui",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -9.12117,
+        -36.3244
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Correntes-Brazil",
+      "known_aliases": [
+        "Correntes",
+        "correntes",
+        "Correntes (PE)"
+      ],
+      "latest_year": 2026,
+      "name": "Correntes",
+      "reason": "missing_entry",
+      "region": "bra_alagoas",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -13.3477,
+        -44.6333
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Correntina-Brazil",
+      "known_aliases": [
+        "Correntina",
+        "correntina",
+        "Correntina (BA)"
+      ],
+      "latest_year": 2026,
+      "name": "Correntina",
+      "reason": "missing_entry",
+      "region": "bra_bahia",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -8.47443,
+        -35.5468
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cortês-Brazil",
+      "known_aliases": [
+        "Cortês",
+        "cortês",
+        "Cortês (PE)"
+      ],
+      "latest_year": 2026,
+      "name": "Cortês",
+      "reason": "missing_entry",
+      "region": "bra_pernambuco",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -22.22,
+        -47.62583
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Corumbataí-Brazil",
+      "known_aliases": [
+        "Corumbataí",
+        "corumbataí",
+        "corumbatahy",
+        "Corumbatahy"
+      ],
+      "latest_year": 2026,
+      "name": "Corumbataí",
+      "reason": "missing_entry",
+      "region": "bra_sao_paulo",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -24.101,
+        -52.1177
+      ],
+      "country": "Brazil",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Corumbataí do Sul-Brazil",
+      "known_aliases": [
+        "Corumbataí do Sul",
+        "corumbataí do sul",
+        "Corumbataí do Sul (PR)"
+      ],
+      "latest_year": 2026,
+      "name": "Corumbataí do Sul",
+      "reason": "missing_entry",
+      "region": "bra_parana",
+      "sample_years": [
+        1950,
+        1980,
+        2010,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -18.1425,
+        -48.56139
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Corumbaíba-Brazil",
+      "known_aliases": [
+        "Corumbaíba",
+        "corumbaíba",
+        "corumbahyba",
+        "Corumbahyba"
+      ],
+      "latest_year": 2026,
+      "name": "Corumbaíba",
+      "reason": "missing_entry",
+      "region": "bra_goias",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -12.9551,
+        -60.8947
+      ],
+      "country": "Brazil",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Corumbiara-Brazil",
+      "known_aliases": [
+        "Corumbiara",
+        "corumbiara",
+        "Corumbiara (RO)"
+      ],
+      "latest_year": 2026,
+      "name": "Corumbiara",
+      "reason": "missing_entry",
+      "region": "bra_rondonia",
+      "sample_years": [
+        1950,
+        1980,
+        2010,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -15.9245,
+        -48.8117
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Corumbá de Goiás-Brazil",
+      "known_aliases": [
+        "Corumbá de Goiás",
+        "corumbá de goiás",
+        "Corumbá de Goiás (GO)"
+      ],
+      "latest_year": 2026,
+      "name": "Corumbá de Goiás",
+      "reason": "missing_entry",
+      "region": "bra_goias",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -26.42528,
+        -49.24306
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Corupá-Brazil",
+      "known_aliases": [
+        "Corupá",
+        "corupá",
+        "hansa",
+        "Hansa"
+      ],
+      "latest_year": 2026,
+      "name": "Corupá",
+      "reason": "missing_entry",
+      "region": "bra_santa_catarina",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -20.4755,
+        -49.7827
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cosmorama-Brazil",
+      "known_aliases": [
+        "Cosmorama",
+        "cosmorama",
+        "Cosmorama (SP)"
+      ],
+      "latest_year": 2026,
+      "name": "Cosmorama",
+      "reason": "missing_entry",
+      "region": "bra_sao_paulo",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -12.445,
+        -64.22722
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Costa Marques-Brazil",
+      "known_aliases": [
+        "Costa Marques",
+        "costa marques",
+        "cqs",
+        "CQS"
+      ],
+      "latest_year": 2026,
+      "name": "Costa Marques",
+      "reason": "missing_entry",
+      "region": "bra_rondonia",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -18.54389,
+        -53.12917
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Costa Rica-Brazil",
+      "known_aliases": [
+        "Costa Rica",
+        "costa rica"
+      ],
+      "latest_year": 2026,
+      "name": "Costa Rica",
+      "reason": "missing_entry",
+      "region": "bra_mato_grosso_do_sul",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -23.41667,
+        -54.65
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Costa Rica (Mato Grosso do Sul)-Brazil",
+      "known_aliases": [
+        "Costa Rica",
+        "costa rica",
+        "silvino aquino",
+        "Silvino Aquino"
+      ],
+      "latest_year": 2026,
+      "name": "Costa Rica",
+      "reason": "missing_entry",
+      "region": "bra_mato_grosso_do_sul",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -27.63586,
+        -48.5212
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Costeira do Pirajubae-Brazil",
+      "known_aliases": [
+        "Costeira do Pirajubae",
+        "costeira do pirajubae"
+      ],
+      "latest_year": 2026,
+      "name": "Costeira do Pirajubae",
+      "reason": "missing_entry",
+      "region": "bra_santa_catarina",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -12.0228,
+        -44.2566
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cotegipe-Brazil",
+      "known_aliases": [
+        "Cotegipe",
+        "cotegipe",
+        "Cotegipe (BA)"
+      ],
+      "latest_year": 2026,
+      "name": "Cotegipe",
+      "reason": "missing_entry",
+      "region": "bra_bahia",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -28.9891,
+        -51.6971
+      ],
+      "country": "Brazil",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cotiporã-Brazil",
+      "known_aliases": [
+        "Cotiporã",
+        "cotiporã",
+        "Cotiporã (RS)"
+      ],
+      "latest_year": 2026,
+      "name": "Cotiporã",
+      "reason": "missing_entry",
+      "region": "bra_rio_grande_do_sul",
+      "sample_years": [
+        1950,
+        1980,
+        2010,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -9.85656,
+        -58.4192
+      ],
+      "country": "Brazil",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cotriguaçu-Brazil",
+      "known_aliases": [
+        "Cotriguaçu",
+        "cotriguaçu",
+        "Cotriguaçu (MT)"
+      ],
+      "latest_year": 2026,
+      "name": "Cotriguaçu",
+      "reason": "missing_entry",
+      "region": "bra_mato_grosso",
+      "sample_years": [
+        1950,
+        1980,
+        2010,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    }
+  ]
+}

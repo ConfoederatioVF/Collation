@@ -1,0 +1,934 @@
+{
+  "batch_index": 138,
+  "count": 30,
+  "project": "PRETA",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        -4.91408,
+        -41.73194
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sigefredo Pacheco-Brazil",
+      "known_aliases": [
+        "Sigefredo Pacheco",
+        "sigefredo pacheco",
+        "conceicao",
+        "conceição",
+        "Conceicao",
+        "Conceição"
+      ],
+      "latest_year": 2026,
+      "name": "Sigefredo Pacheco",
+      "reason": "missing_entry",
+      "region": "bra_piaui",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -22.65083,
+        -42.39167
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Silva Jardim-Brazil",
+      "known_aliases": [
+        "Silva Jardim",
+        "silva jardim",
+        "capivari",
+        "capivary",
+        "Capivari",
+        "Capivary"
+      ],
+      "latest_year": 2026,
+      "name": "Silva Jardim",
+      "reason": "missing_entry",
+      "region": "bra_rio_de_janeiro",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -11.14667,
+        -48.16917
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Silvanópolis-Brazil",
+      "known_aliases": [
+        "Silvanópolis",
+        "silvanópolis"
+      ],
+      "latest_year": 2026,
+      "name": "Silvanópolis",
+      "reason": "missing_entry",
+      "region": "bra_tocantins",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -29.6467,
+        -53.591
+      ],
+      "country": "Brazil",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Silveira Martins-Brazil",
+      "known_aliases": [
+        "Silveira Martins",
+        "silveira martins",
+        "Silveira Martins (RS)"
+      ],
+      "latest_year": 2026,
+      "name": "Silveira Martins",
+      "reason": "missing_entry",
+      "region": "bra_rio_grande_do_sul",
+      "sample_years": [
+        1950,
+        1980,
+        2010,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -22.6638,
+        -44.8522
+      ],
+      "country": "Brazil",
+      "earliest_year": 1650,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Silveiras-Brazil",
+      "known_aliases": [
+        "Silveiras",
+        "silveiras",
+        "Silveiras (SP)"
+      ],
+      "latest_year": 2026,
+      "name": "Silveiras",
+      "reason": "missing_entry",
+      "region": "bra_sao_paulo",
+      "sample_years": [
+        1650,
+        1872,
+        1960,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -21.1615,
+        -43.2128
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Silveirânia-Brazil",
+      "known_aliases": [
+        "Silveirânia",
+        "silveirânia",
+        "Silveirânia (MG)"
+      ],
+      "latest_year": 2026,
+      "name": "Silveirânia",
+      "reason": "missing_entry",
+      "region": "bra_minas_gerais",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -2.81748,
+        -58.248
+      ],
+      "country": "Brazil",
+      "earliest_year": 1700,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Silves-Brazil",
+      "known_aliases": [
+        "Silves",
+        "silves",
+        "Silves (AM)"
+      ],
+      "latest_year": 2026,
+      "name": "Silves",
+      "reason": "missing_entry",
+      "region": "bra_amazonas",
+      "sample_years": [
+        1700,
+        1880,
+        1970,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -2.83889,
+        -58.20917
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Silves (Amazonas)-Brazil",
+      "known_aliases": [
+        "Silves",
+        "silves"
+      ],
+      "latest_year": 2026,
+      "name": "Silves",
+      "reason": "missing_entry",
+      "region": "bra_amazonas",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -22.0274,
+        -45.8385
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Silvianópolis-Brazil",
+      "known_aliases": [
+        "Silvianópolis",
+        "silvianópolis",
+        "Silvianópolis (MG)"
+      ],
+      "latest_year": 2026,
+      "name": "Silvianópolis",
+      "reason": "missing_entry",
+      "region": "bra_minas_gerais",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -16.66663,
+        -48.61252
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Silvânia-Brazil",
+      "known_aliases": [
+        "Silvânia",
+        "silvânia",
+        "bonfim",
+        "silvania",
+        "Bonfim",
+        "Silvania"
+      ],
+      "latest_year": 2026,
+      "name": "Silvânia",
+      "reason": "missing_entry",
+      "region": "bra_goias",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -20.12389,
+        -42.00139
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Simonésia-Brazil",
+      "known_aliases": [
+        "Simonésia",
+        "simonésia",
+        "sao simao",
+        "são simão",
+        "Sao Simao",
+        "São Simão"
+      ],
+      "latest_year": 2026,
+      "name": "Simonésia",
+      "reason": "missing_entry",
+      "region": "bra_minas_gerais",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -7.85294,
+        -41.9075
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Simplício Mendes-Brazil",
+      "known_aliases": [
+        "Simplício Mendes",
+        "simplício mendes",
+        "Simplício Mendes (PI)"
+      ],
+      "latest_year": 2026,
+      "name": "Simplício Mendes",
+      "reason": "missing_entry",
+      "region": "bra_piaui",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -10.73833,
+        -37.81111
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Simão Dias-Brazil",
+      "known_aliases": [
+        "Simão Dias",
+        "simão dias",
+        "anapolis",
+        "annapolis",
+        "anápolis",
+        "Anapolis",
+        "Annapolis",
+        "Anápolis"
+      ],
+      "latest_year": 2026,
+      "name": "Simão Dias",
+      "reason": "missing_entry",
+      "region": "bra_bahia",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -21.96361,
+        -43.31194
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Simão Pereira-Brazil",
+      "known_aliases": [
+        "Simão Pereira",
+        "simão pereira",
+        "sao pedro de alcantara",
+        "são pedro de alcantara",
+        "Sao Pedro de Alcantara",
+        "São Pedro de Alcantara"
+      ],
+      "latest_year": 2026,
+      "name": "Simão Pereira",
+      "reason": "missing_entry",
+      "region": "bra_minas_gerais",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -7.59109,
+        -40.8137
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Simões-Brazil",
+      "known_aliases": [
+        "Simões",
+        "simões",
+        "Simões (PI)"
+      ],
+      "latest_year": 2026,
+      "name": "Simões",
+      "reason": "missing_entry",
+      "region": "bra_piaui",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -29.5357,
+        -52.5304
+      ],
+      "country": "Brazil",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sinimbu-Brazil",
+      "known_aliases": [
+        "Sinimbu",
+        "sinimbu",
+        "Sinimbu (RS)"
+      ],
+      "latest_year": 2026,
+      "name": "Sinimbu",
+      "reason": "missing_entry",
+      "region": "bra_rio_grande_do_sul",
+      "sample_years": [
+        1950,
+        1980,
+        2010,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -23.68889,
+        -49.83389
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Siqueira Campos-Brazil",
+      "known_aliases": [
+        "Siqueira Campos",
+        "siqueira campos",
+        "colonia mineira",
+        "Colonia Mineira"
+      ],
+      "latest_year": 2026,
+      "name": "Siqueira Campos",
+      "reason": "missing_entry",
+      "region": "bra_parana",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -8.59083,
+        -35.11611
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sirinhaém-Brazil",
+      "known_aliases": [
+        "Sirinhaém",
+        "sirinhaém",
+        "serinhaem",
+        "sirinhaem",
+        "Serinhaem",
+        "Sirinhaem"
+      ],
+      "latest_year": 2026,
+      "name": "Sirinhaém",
+      "reason": "missing_entry",
+      "region": "bra_pernambuco",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -10.60389,
+        -37.11278
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Siriri-Brazil",
+      "known_aliases": [
+        "Siriri",
+        "siriri"
+      ],
+      "latest_year": 2026,
+      "name": "Siriri",
+      "reason": "missing_entry",
+      "region": "bra_sergipe",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -29.4194,
+        -53.0326
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sobradinho (RS)-Brazil",
+      "known_aliases": [
+        "Sobradinho",
+        "sobradinho",
+        "Sobradinho (RS)"
+      ],
+      "latest_year": 2026,
+      "name": "Sobradinho",
+      "reason": "missing_entry",
+      "region": "bra_rio_grande_do_sul",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -9.45024,
+        -40.8145
+      ],
+      "country": "Brazil",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sobradinho (BA)-Brazil",
+      "known_aliases": [
+        "Sobradinho",
+        "sobradinho",
+        "Sobradinho (BA)"
+      ],
+      "latest_year": 2026,
+      "name": "Sobradinho",
+      "reason": "missing_entry",
+      "region": "bra_bahia",
+      "sample_years": [
+        1950,
+        1980,
+        2010,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -9.47184,
+        -40.80155
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sobradinho (Bahia)-Brazil",
+      "known_aliases": [
+        "Sobradinho",
+        "sobradinho"
+      ],
+      "latest_year": 2026,
+      "name": "Sobradinho",
+      "reason": "missing_entry",
+      "region": "bra_bahia",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -9.29636,
+        -40.81871
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sobrado-Brazil",
+      "known_aliases": [
+        "Sobrado",
+        "sobrado",
+        "riacho do sobrado",
+        "Riacho do Sobrado"
+      ],
+      "latest_year": 2026,
+      "name": "Sobrado",
+      "reason": "missing_entry",
+      "region": "bra_bahia",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -7.14528,
+        -35.23639
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sobrado (Paraíba)-Brazil",
+      "known_aliases": [
+        "Sobrado",
+        "sobrado"
+      ],
+      "latest_year": 2026,
+      "name": "Sobrado",
+      "reason": "missing_entry",
+      "region": "bra_paraiba",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -19.2345,
+        -42.0998
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sobrália-Brazil",
+      "known_aliases": [
+        "Sobrália",
+        "sobrália",
+        "Sobrália (MG)"
+      ],
+      "latest_year": 2026,
+      "name": "Sobrália",
+      "reason": "missing_entry",
+      "region": "bra_minas_gerais",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -23.68528,
+        -46.71372
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Socorro (São Paulo)-Brazil",
+      "known_aliases": [
+        "Socorro",
+        "socorro",
+        "soc",
+        "SOC"
+      ],
+      "latest_year": 2026,
+      "name": "Socorro",
+      "reason": "missing_entry",
+      "region": "bra_sao_paulo",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -7.86773,
+        -42.4922
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Socorro do Piauí-Brazil",
+      "known_aliases": [
+        "Socorro do Piauí",
+        "socorro do piauí",
+        "Socorro do Piauí (PI)"
+      ],
+      "latest_year": 2026,
+      "name": "Socorro do Piauí",
+      "reason": "missing_entry",
+      "region": "bra_piaui",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -7.05722,
+        -36.36278
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Soledade (Paraíba)-Brazil",
+      "known_aliases": [
+        "Soledade",
+        "soledade",
+        "ibiapinopolis",
+        "ibiapinópolis",
+        "Ibiapinopolis",
+        "Ibiapinópolis"
+      ],
+      "latest_year": 2026,
+      "name": "Soledade",
+      "reason": "missing_entry",
+      "region": "bra_paraiba",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -22.06,
+        -45.045
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Soledade de Minas-Brazil",
+      "known_aliases": [
+        "Soledade de Minas",
+        "soledade de minas",
+        "ibatuba",
+        "soledade",
+        "Ibatuba",
+        "Soledade"
+      ],
+      "latest_year": 2026,
+      "name": "Soledade de Minas",
+      "reason": "missing_entry",
+      "region": "bra_minas_gerais",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -7.59472,
+        -37.6445
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Solidão-Brazil",
+      "known_aliases": [
+        "Solidão",
+        "solidão",
+        "Solidão (PE)"
+      ],
+      "latest_year": 2026,
+      "name": "Solidão",
+      "reason": "missing_entry",
+      "region": "bra_pernambuco",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    }
+  ]
+}

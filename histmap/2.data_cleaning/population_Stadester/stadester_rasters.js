@@ -7,6 +7,209 @@
     try { require(path.join(__dirname, "StadesterPartitionIO.js")); } catch (e) {}
   
   /**
+   * Builds the joined valid land mask combining HYDE land area (`y_offset = 0`), cleaned 2020+ GHS-POP inhabited pixels (`y_offset = 0`),
+   * and pre-2020/JRC GHS-POP island pixels omitted by HYDE (`y_offset = -1`).
+   * @alias population_Stadester_rasters.buildJoinedValidLandMask
+   * 
+   * @param {Object} [arg0_options]
+   *  @param {boolean} [arg0_options.force_rebuild=false]
+   *  @param {string} [arg0_options.ghs_pop_cleaned_folder]
+   *  @param {string} [arg0_options.ghs_pop_raw_fallback_folder]
+   *  @param {number} [arg0_options.height=2160]
+   *  @param {string} [arg0_options.hyde_land_path]
+   *  @param {number} [arg0_options.width=4320]
+   * 
+   * @returns {Uint8Array} Binary valid land mask (`1` = land/inhabited, `0` = water)
+   */
+  population_Stadester_rasters.buildJoinedValidLandMask = function (arg0_options) {
+    //Convert from parameters
+    let options = (arg0_options) ? arg0_options : {};
+    
+    //Declare local instance variables
+    let cfg = global.population_Stadester_config;
+    let cleaned_folder = options.ghs_pop_cleaned_folder || (cfg && cfg.ghs_pop_cleaned_folder) ||
+      path.join((typeof h2 !== "undefined") ? h2 : "./histmap/2.data_cleaning", "population_GHSL", "cleaned_rasters");
+    let force_rebuild = Boolean(options.force_rebuild);
+    let height = options.height || 2160;
+    let hyde_land_path = options.hyde_land_path || path.join(
+      (typeof h1 !== "undefined") ? h1 : "./histmap/1.data_raw",
+      "metadata_HYDE",
+      "general_rasters",
+      "land_area.png"
+    );
+    let hyde_mask;
+    let joined_mask;
+    let jrc_years = [1975, 1980, 1985, 1990, 1995, 2000, 2005, 2010, 2015, 2020, 2025];
+    let pngjs_lib = (typeof pngjs !== "undefined") ? pngjs : (global.pngjs || require("pngjs"));
+    let raw_fallback_folder = options.ghs_pop_raw_fallback_folder || (cfg && cfg.ghs_pop_raw_fallback_folder) ||
+      path.join((typeof h1 !== "undefined") ? h1 : "./histmap/1.data_raw", "population_GHSL", "population_rasters", "2.rasters");
+    let raw_y_offset = (cfg && cfg.raw_fallback_y_offset !== undefined) ? cfg.raw_fallback_y_offset : -1;
+    let total_px = 0;
+    let width = options.width || 4320;
+    
+    //Guard clauses
+    if (!force_rebuild && population_Stadester_rasters._cached_joined_land_mask)
+      return population_Stadester_rasters._cached_joined_land_mask;
+    
+    //Function body
+    total_px = width*height;
+    hyde_mask = new Uint8Array(total_px);
+    joined_mask = new Uint8Array(total_px);
+    
+    //1. HYDE land_area (uint32 big-endian > 0, y_offset = 0)
+    if (fs.existsSync(hyde_land_path)) {
+      let hyde_png = pngjs_lib.PNG.sync.read(fs.readFileSync(hyde_land_path));
+      let hyde_dv = new DataView(hyde_png.data.buffer, hyde_png.data.byteOffset, hyde_png.data.byteLength);
+      for (let i = 0; i < total_px; i++) {
+        if (hyde_dv.getUint32(i*4, false) > 0) {
+          hyde_mask[i] = 1;
+          joined_mask[i] = 1;
+        }
+      }
+    }
+    
+    //2. Cleaned 2020..2025 GHS-POP inhabited pixels (float32 big-endian > 0, y_offset = 0)
+    for (let i = 2020; i <= 2025; i++) {
+      let cleaned_path = path.join(cleaned_folder, `GHS_POP_${i}.png`);
+      if (!fs.existsSync(cleaned_path)) continue;
+      let pop_png = pngjs_lib.PNG.sync.read(fs.readFileSync(cleaned_path));
+      let pop_dv = new DataView(pop_png.data.buffer, pop_png.data.byteOffset, pop_png.data.byteLength);
+      for (let x = 0; x < total_px; x++) {
+        let val = pop_dv.getFloat32(x*4, false);
+        if (Number.isFinite(val) && val > 0)
+          joined_mask[x] = 1;
+      }
+    }
+    
+    //3. JRC / pre-2020 GHS-POP island & coastal pixels omitted by HYDE (float32 big-endian > 0, raw_fallback_y_offset = -1)
+    for (let i = 0; i < jrc_years.length; i++) {
+      let raw_path = path.join(raw_fallback_folder, `GHS_POP_${jrc_years[i]}.png`);
+      if (!fs.existsSync(raw_path)) continue;
+      let jrc_png = pngjs_lib.PNG.sync.read(fs.readFileSync(raw_path));
+      let jrc_dv = new DataView(jrc_png.data.buffer, jrc_png.data.byteOffset, jrc_png.data.byteLength);
+      for (let y = 0; y < height; y++) {
+        let sy = Math.min(height - 1, Math.max(0, y + raw_y_offset));
+        for (let x = 0; x < width; x++) {
+          let s_idx = sy*width + x;
+          if (hyde_mask[s_idx] > 0) continue;
+          let val = jrc_dv.getFloat32(s_idx*4, false);
+          if (Number.isFinite(val) && val > 0)
+            joined_mask[y*width + x] = 1;
+        }
+      }
+    }
+    
+    population_Stadester_rasters._cached_joined_land_mask = joined_mask;
+    
+    //Return statement
+    return joined_mask;
+  };
+  
+  /**
+   * Detects settlements whose `[lat, lng]` coordinates fall outside the joined GHS-POP + HYDE valid land mask.
+   * @alias population_Stadester_rasters.detectOutOfMaskSettlements
+   * 
+   * @param {Object} arg0_cities_obj
+   * @param {Object} [arg1_options]
+   *  @param {number} [arg1_options.height=2160]
+   *  @param {Uint8Array} [arg1_options.joined_mask]
+   *  @param {number} [arg1_options.max_search_px=12]
+   *  @param {number} [arg1_options.width=4320]
+   * 
+   * @returns {{actionable: Array<Object>, all_out_of_mask: Array<Object>, subpixel_islands: Array<Object>, valid_pixel_count: number}}
+   */
+  population_Stadester_rasters.detectOutOfMaskSettlements = function (arg0_cities_obj, arg1_options) {
+    //Convert from parameters
+    let cities_obj = arg0_cities_obj;
+    let options = (arg1_options) ? arg1_options : {};
+    
+    //Declare local instance variables
+    let actionable = [];
+    let all_keys;
+    let all_out_of_mask = [];
+    let height = options.height || 2160;
+    let joined_mask = options.joined_mask || population_Stadester_rasters.buildJoinedValidLandMask(options);
+    let max_search_px = (options.max_search_px !== undefined) ? options.max_search_px : 12;
+    let subpixel_islands = [];
+    let valid_pixel_count = 0;
+    let width = options.width || 4320;
+    
+    //Guard clauses
+    if (!cities_obj || !joined_mask) return { actionable: [], all_out_of_mask: [], subpixel_islands: [], valid_pixel_count: 0 };
+    
+    //Function body
+    for (let i = 0; i < joined_mask.length; i++)
+      if (joined_mask[i] > 0) valid_pixel_count++;
+    
+    all_keys = Object.keys(cities_obj);
+    for (let i = 0; i < all_keys.length; i++) {
+      let key = all_keys[i];
+      let city = cities_obj[key];
+      if (!city || !Array.isArray(city.coords) || city.coords.length < 2) continue;
+      let px_pair = population_Stadester_rasters.getCoordsPixel(city.coords, options);
+      let px = px_pair[0];
+      let py = px_pair[1];
+      if (joined_mask[py*width + px] > 0) continue;
+      
+      let best_dist_sq = Infinity;
+      let best_nx = -1;
+      let best_ny = -1;
+      for (let r = 1; r <= max_search_px; r++) {
+        let found_in_ring = false;
+        for (let x = -r; x <= r; x++) {
+          let ny = py + x;
+          if (ny < 0 || ny >= height) continue;
+          for (let y = -r; y <= r; y++) {
+            if (Math.max(Math.abs(x), Math.abs(y)) !== r) continue;
+            let nx = ((px + y) % width + width) % width;
+            if (joined_mask[ny*width + nx] > 0) {
+              let dist_sq = x*x + y*y;
+              if (dist_sq < best_dist_sq) {
+                best_dist_sq = dist_sq;
+                best_nx = nx;
+                best_ny = ny;
+                found_in_ring = true;
+              }
+            }
+          }
+        }
+        if (found_in_ring) break;
+      }
+      
+      let is_subpixel = (best_dist_sq === Infinity);
+      let nearest_px = null;
+      let nearest_px_dist = Infinity;
+      nearest_px = (is_subpixel) ? null : [best_nx, best_ny];
+      nearest_px_dist = (is_subpixel) ? Infinity : Math.sqrt(best_dist_sq);
+      let entry = {
+        coords: [Number(city.coords[0]), Number(city.coords[1])],
+        country: city.country || "",
+        is_subpixel_unrepresented_island: is_subpixel,
+        key: key,
+        name: city.name || key,
+        nearest_px: nearest_px,
+        nearest_px_dist: nearest_px_dist,
+        px: [px, py],
+        sources: Array.isArray(city.sources) ? city.sources.slice() : []
+      };
+      all_out_of_mask.push(entry);
+      if (is_subpixel) {
+        subpixel_islands.push(entry);
+      } else {
+        actionable.push(entry);
+      }
+    }
+    
+    //Return statement
+    return {
+      actionable: actionable,
+      all_out_of_mask: all_out_of_mask,
+      subpixel_islands: subpixel_islands,
+      valid_pixel_count: valid_pixel_count
+    };
+  };
+  
+  /**
    * Converts decimal coordinates [lat, lng] to equirectangular pixel coordinates.
    * @alias population_Stadester_rasters.getCoordsPixel
    * 

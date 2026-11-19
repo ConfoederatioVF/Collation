@@ -1,0 +1,847 @@
+{
+  "batch_index": 273,
+  "count": 30,
+  "project": "PRETA",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        -25.4451,
+        -54.6029
+      ],
+      "country": "Brazil",
+      "earliest_year": 1500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Foz do Bela Vista 1-Brazil",
+      "known_aliases": [
+        "Foz do Bela Vista 1",
+        "foz do bela vista 1",
+        "tupiguarani",
+        "Tupiguarani (Guarani)"
+      ],
+      "latest_year": 1500,
+      "name": "Foz do Bela Vista 1",
+      "reason": "missing_entry",
+      "region": "sbr_tiete_paranapanema_iguacu",
+      "sample_years": [
+        1500
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -26.26475,
+        -52.37585
+      ],
+      "country": "Brazil",
+      "earliest_year": 400,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Foz do Curucaca V-Brazil",
+      "known_aliases": [
+        "Foz do Curucaca V",
+        "foz do curucaca v"
+      ],
+      "latest_year": 1450,
+      "name": "Foz do Curucaca V",
+      "reason": "missing_entry",
+      "region": "sbr_tiete_paranapanema_iguacu",
+      "sample_years": [
+        400,
+        1000,
+        1450
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -26.275,
+        -52.33116
+      ],
+      "country": "Brazil",
+      "earliest_year": 400,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Foz do Curucaca VI-Brazil",
+      "known_aliases": [
+        "Foz do Curucaca VI",
+        "foz do curucaca vi"
+      ],
+      "latest_year": 1450,
+      "name": "Foz do Curucaca VI",
+      "reason": "missing_entry",
+      "region": "sbr_tiete_paranapanema_iguacu",
+      "sample_years": [
+        400,
+        1000,
+        1450
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -25.78787,
+        -52.10074
+      ],
+      "country": "Brazil",
+      "earliest_year": 600,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Foz do Jordão 02-Brazil",
+      "known_aliases": [
+        "Foz do Jordão 02",
+        "foz do jordão 02"
+      ],
+      "latest_year": 1450,
+      "name": "Foz do Jordão 02",
+      "reason": "missing_entry",
+      "region": "sbr_tiete_paranapanema_iguacu",
+      "sample_years": [
+        600,
+        1100,
+        1450
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -17.3604,
+        -48.5931
+      ],
+      "country": "Brazil",
+      "earliest_year": 218,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "GO-CA-21-Brazil",
+      "known_aliases": [
+        "GO-CA-21",
+        "go-ca-21",
+        "aratu",
+        "Aratu"
+      ],
+      "latest_year": 418,
+      "name": "GO-CA-21",
+      "reason": "missing_entry",
+      "region": "sbr_upper_parana_cerrado",
+      "sample_years": [
+        218,
+        418
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -17.38105,
+        -48.66763
+      ],
+      "country": "Brazil",
+      "earliest_year": -444,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "GO-CA-25-Brazil",
+      "known_aliases": [
+        "GO-CA-25",
+        "go-ca-25"
+      ],
+      "latest_year": -144,
+      "name": "GO-CA-25",
+      "reason": "missing_entry",
+      "region": "sbr_upper_parana_cerrado",
+      "sample_years": [
+        -444,
+        -144
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -18.28639,
+        -52.0477
+      ],
+      "country": "Brazil",
+      "earliest_year": -5815,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "GO-JA-01-Brazil",
+      "known_aliases": [
+        "GO-JA-01",
+        "go-ja-01"
+      ],
+      "latest_year": -5515,
+      "name": "GO-JA-01",
+      "reason": "missing_entry",
+      "region": "sbr_upper_parana_cerrado",
+      "sample_years": [
+        -5815,
+        -5515
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -18.44472,
+        -52.0004
+      ],
+      "country": "Brazil",
+      "earliest_year": -4056,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "GO-JA-03-Brazil",
+      "known_aliases": [
+        "GO-JA-03",
+        "go-ja-03"
+      ],
+      "latest_year": -3756,
+      "name": "GO-JA-03",
+      "reason": "missing_entry",
+      "region": "sbr_upper_parana_cerrado",
+      "sample_years": [
+        -4056,
+        -3756
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -18.44472,
+        -52.0369
+      ],
+      "country": "Brazil",
+      "earliest_year": -6838,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "GO-JA-26-Brazil",
+      "known_aliases": [
+        "GO-JA-26",
+        "go-ja-26"
+      ],
+      "latest_year": -6538,
+      "name": "GO-JA-26",
+      "reason": "missing_entry",
+      "region": "sbr_upper_parana_cerrado",
+      "sample_years": [
+        -6838,
+        -6538
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -16.47,
+        -47.98
+      ],
+      "country": "Brazil",
+      "earliest_year": 806,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "GO-RV-02-Brazil",
+      "known_aliases": [
+        "GO-RV-02",
+        "go-rv-02",
+        "aratu",
+        "Aratu (Mossâmedes)"
+      ],
+      "latest_year": 1006,
+      "name": "GO-RV-02",
+      "reason": "missing_entry",
+      "region": "sbr_upper_parana_cerrado",
+      "sample_years": [
+        806,
+        1006
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -28.5551,
+        -48.7888
+      ],
+      "country": "Brazil",
+      "earliest_year": 522,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Galheta IV-Brazil",
+      "known_aliases": [
+        "Galheta IV",
+        "galheta iv",
+        "taquara/itararé",
+        "Taquara/Itararé"
+      ],
+      "latest_year": 952,
+      "name": "Galheta IV",
+      "reason": "missing_entry",
+      "region": "sbr_south_atlantic_sambaqui",
+      "sample_years": [
+        522,
+        952
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -26.36783,
+        -48.63396
+      ],
+      "country": "Brazil",
+      "earliest_year": -2000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Gamboa I-Brazil",
+      "known_aliases": [
+        "Gamboa I",
+        "gamboa i"
+      ],
+      "latest_year": 500,
+      "name": "Gamboa I",
+      "reason": "missing_entry",
+      "region": "sbr_south_atlantic_sambaqui",
+      "sample_years": [
+        -2000,
+        -500,
+        500
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -28.02347,
+        -48.64408
+      ],
+      "country": "Brazil",
+      "earliest_year": 600,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Garopaba 6-Brazil",
+      "known_aliases": [
+        "Garopaba 6",
+        "garopaba 6"
+      ],
+      "latest_year": 1450,
+      "name": "Garopaba 6",
+      "reason": "missing_entry",
+      "region": "sbr_south_atlantic_sambaqui",
+      "sample_years": [
+        600,
+        1100,
+        1450
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -22.09766,
+        -41.40365
+      ],
+      "country": "Brazil",
+      "earliest_year": 600,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Gascab-Brazil",
+      "known_aliases": [
+        "Gascab",
+        "gascab"
+      ],
+      "latest_year": 1450,
+      "name": "Gascab",
+      "reason": "missing_entry",
+      "region": "sbr_southeast_atlantic_sambaqui",
+      "sample_years": [
+        600,
+        1100,
+        1450
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -27.46541,
+        -51.26437
+      ],
+      "country": "Brazil",
+      "earliest_year": 600,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Gentil Camargo Costa-Brazil",
+      "known_aliases": [
+        "Gentil Camargo Costa",
+        "gentil camargo costa"
+      ],
+      "latest_year": 1450,
+      "name": "Gentil Camargo Costa",
+      "reason": "missing_entry",
+      "region": "sbr_uruguay_pampa",
+      "sample_years": [
+        600,
+        1100,
+        1450
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -23.3249,
+        -52.6019
+      ],
+      "country": "Brazil",
+      "earliest_year": 832,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Geraldo-Brazil",
+      "known_aliases": [
+        "Geraldo",
+        "geraldo",
+        "tupiguarani",
+        "Tupiguarani (Guarani)"
+      ],
+      "latest_year": 1310,
+      "name": "Geraldo",
+      "reason": "missing_entry",
+      "region": "sbr_tiete_paranapanema_iguacu",
+      "sample_years": [
+        832,
+        1310
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -26.61781,
+        -53.42821
+      ],
+      "country": "Brazil",
+      "earliest_year": 600,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Giaretta 1-Brazil",
+      "known_aliases": [
+        "Giaretta 1",
+        "giaretta 1"
+      ],
+      "latest_year": 1450,
+      "name": "Giaretta 1",
+      "reason": "missing_entry",
+      "region": "sbr_uruguay_pampa",
+      "sample_years": [
+        600,
+        1100,
+        1450
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -27.57461,
+        -48.44408
+      ],
+      "country": "Brazil",
+      "earliest_year": -2000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Girassóis-Brazil",
+      "known_aliases": [
+        "Girassóis",
+        "girassóis"
+      ],
+      "latest_year": 500,
+      "name": "Girassóis",
+      "reason": "missing_entry",
+      "region": "sbr_south_atlantic_sambaqui",
+      "sample_years": [
+        -2000,
+        -500,
+        500
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -30.43333,
+        -50.5
+      ],
+      "country": "Brazil",
+      "earliest_year": -1179,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Godo-Brazil",
+      "known_aliases": [
+        "Godo",
+        "godo"
+      ],
+      "latest_year": -879,
+      "name": "Godo",
+      "reason": "missing_entry",
+      "region": "sbr_south_atlantic_sambaqui",
+      "sample_years": [
+        -1179,
+        -879
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -24.22718,
+        -50.9204
+      ],
+      "country": "Brazil",
+      "earliest_year": 600,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Godoy 1-Brazil",
+      "known_aliases": [
+        "Godoy 1",
+        "godoy 1"
+      ],
+      "latest_year": 1450,
+      "name": "Godoy 1",
+      "reason": "missing_entry",
+      "region": "sbr_tiete_paranapanema_iguacu",
+      "sample_years": [
+        600,
+        1100,
+        1450
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -16.46833,
+        -49.39069
+      ],
+      "country": "Brazil",
+      "earliest_year": 600,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Goianira I-Brazil",
+      "known_aliases": [
+        "Goianira I",
+        "goianira i"
+      ],
+      "latest_year": 1450,
+      "name": "Goianira I",
+      "reason": "missing_entry",
+      "region": "sbr_upper_parana_cerrado",
+      "sample_years": [
+        600,
+        1100,
+        1450
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -27.21542,
+        -53.32496
+      ],
+      "country": "Brazil",
+      "earliest_year": 600,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Goj Vêso I-Brazil",
+      "known_aliases": [
+        "Goj Vêso I",
+        "goj vêso i"
+      ],
+      "latest_year": 1450,
+      "name": "Goj Vêso I",
+      "reason": "missing_entry",
+      "region": "sbr_uruguay_pampa",
+      "sample_years": [
+        600,
+        1100,
+        1450
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -27.36782,
+        -48.53252
+      ],
+      "country": "Brazil",
+      "earliest_year": -2000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Governador Celso Ramos IV-Brazil",
+      "known_aliases": [
+        "Governador Celso Ramos IV",
+        "governador celso ramos iv"
+      ],
+      "latest_year": 500,
+      "name": "Governador Celso Ramos IV",
+      "reason": "missing_entry",
+      "region": "sbr_south_atlantic_sambaqui",
+      "sample_years": [
+        -2000,
+        -500,
+        500
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -22.7211,
+        -42.01
+      ],
+      "country": "Brazil",
+      "earliest_year": 832,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Grande do Una-Brazil",
+      "known_aliases": [
+        "Grande do Una",
+        "grande do una",
+        "una",
+        "Una"
+      ],
+      "latest_year": 1500,
+      "name": "Grande do Una",
+      "reason": "missing_entry",
+      "region": "sbr_southeast_atlantic_sambaqui",
+      "sample_years": [
+        832,
+        1500
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -19.71481,
+        -42.9878
+      ],
+      "country": "Brazil",
+      "earliest_year": -2649,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Gruta das Oncas-Brazil",
+      "known_aliases": [
+        "Gruta das Oncas",
+        "gruta das oncas"
+      ],
+      "latest_year": -2349,
+      "name": "Gruta das Oncas",
+      "reason": "missing_entry",
+      "region": "sbr_southeast_atlantic_sambaqui",
+      "sample_years": [
+        -2649,
+        -2349
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -24.46323,
+        -51.54765
+      ],
+      "country": "Brazil",
+      "earliest_year": 600,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Gruta de Wobeto-Brazil",
+      "known_aliases": [
+        "Gruta de Wobeto",
+        "gruta de wobeto"
+      ],
+      "latest_year": 1450,
+      "name": "Gruta de Wobeto",
+      "reason": "missing_entry",
+      "region": "sbr_tiete_paranapanema_iguacu",
+      "sample_years": [
+        600,
+        1100,
+        1450
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -18.14,
+        -49.95
+      ],
+      "country": "Brazil",
+      "earliest_year": 658,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Gruta do Salitre-Brazil",
+      "known_aliases": [
+        "Gruta do Salitre",
+        "gruta do salitre",
+        "una",
+        "Una"
+      ],
+      "latest_year": 858,
+      "name": "Gruta do Salitre",
+      "reason": "missing_entry",
+      "region": "sbr_upper_parana_cerrado",
+      "sample_years": [
+        658,
+        858
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -22.82288,
+        -49.41708
+      ],
+      "country": "Brazil",
+      "earliest_year": 600,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Guacho-Brazil",
+      "known_aliases": [
+        "Guacho",
+        "guacho"
+      ],
+      "latest_year": 1450,
+      "name": "Guacho",
+      "reason": "missing_entry",
+      "region": "sbr_tiete_paranapanema_iguacu",
+      "sample_years": [
+        600,
+        1100,
+        1450
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -19.97166,
+        -41.08639
+      ],
+      "country": "Brazil",
+      "earliest_year": 600,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Guandu 1-Brazil",
+      "known_aliases": [
+        "Guandu 1",
+        "guandu 1"
+      ],
+      "latest_year": 1450,
+      "name": "Guandu 1",
+      "reason": "missing_entry",
+      "region": "sbr_southeast_atlantic_sambaqui",
+      "sample_years": [
+        600,
+        1100,
+        1450
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -24.70536,
+        -48.67226
+      ],
+      "country": "Brazil",
+      "earliest_year": 600,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Guaracuí-Brazil",
+      "known_aliases": [
+        "Guaracuí",
+        "guaracuí"
+      ],
+      "latest_year": 1450,
+      "name": "Guaracuí",
+      "reason": "missing_entry",
+      "region": "sbr_south_atlantic_sambaqui",
+      "sample_years": [
+        600,
+        1100,
+        1450
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    }
+  ]
+}

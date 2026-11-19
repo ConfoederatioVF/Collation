@@ -3,6 +3,7 @@ let fs = global.fs || require("fs");
 let JSON5 = global.JSON5 || require("json5");
 let path = require("path");
 let { PNG } = global.pngjs || require("pngjs");
+let { ViscountCountyCensusFrontier } = global.ViscountCountyCensusFrontier ? global : require("./ViscountCountyCensusFrontier.js");
 let { ViscountHUResidualHelpers } = global.ViscountHUResidualHelpers ? global : require("./ViscountHUResidualHelpers.js");
 let { ViscountUrbanMask } = global.ViscountUrbanMask ? global : require("./ViscountUrbanMask.js");
 
@@ -99,14 +100,13 @@ let { ViscountUrbanMask } = global.ViscountUrbanMask ? global : require("./Visco
 
       //Fill any coastal/edge valid pixels lacking specialist paint via 8-neighbour multi-source BFS
       let queue = [];
-      let q_head = 0;
       let step_dirs = [[-1, 0], [1, 0], [0, -1], [0, 1], [-1, -1], [-1, 1], [1, -1], [1, 1]];
 
       for (let i = 0; i < n_valid; i++)
         if (hu_assign[i] >= 0) queue.push(i);
 
-      while (q_head < queue.length) {
-        let curr = queue[q_head++];
+      for (let q_head = 0; q_head < queue.length; q_head++) {
+        let curr = queue[q_head];
         let gidx = valid_indices[curr];
         let r = Math.floor(gidx/w);
         let c = gidx % w;
@@ -205,6 +205,7 @@ let { ViscountUrbanMask } = global.ViscountUrbanMask ? global : require("./Visco
 
       //Return statement
       return {
+        county_census_frontier: adm_obj.county_census_frontier || null,
         dendro_regions: dendro_regions,
         settlements: settlements,
         t0_arr: t0_arr,
@@ -280,8 +281,6 @@ let { ViscountUrbanMask } = global.ViscountUrbanMask ? global : require("./Visco
             d = Math.max(d, 0.22*r19 + 0.004);
           } else if (d_s <= 3.0 && d_c <= 5.6) {
             d = Math.max(d, Math.exp(-0.55*d_s)*Math.max(0.004, 0.08*r19));
-          } else if (year <= 1650) {
-            d = 0;
           }
         }
         d_raw[i] = d;
@@ -289,10 +288,20 @@ let { ViscountUrbanMask } = global.ViscountUrbanMask ? global : require("./Visco
       }
 
       let d_decliff = (n_valid >= 2000 && bio_covs.sub_iso_valid && year < 1850) ?
-        ViscountHUResidualHelpers.removeSubIsoCliffs(mask_data, d_raw, bio_covs.sub_iso_valid, 0.004, 6) :
+        ViscountHUResidualHelpers.removeSubIsoCliffs(mask_data, d_raw, bio_covs.sub_iso_valid, 0.004, 16) :
         d_raw;
+      let elig_hab = new Uint8Array(n_valid);
+
+      for (let i = 0; i < n_valid; i++) {
+        let is_hab = (year <= 1650) ?
+          (hab_mask ? (hab_mask[i] === 1) : (perm_ice[i] > 0.05)) :
+          (perm_ice[i] > 0.05);
+
+        if (is_hab) elig_hab[i] = 1;
+      }
+      ViscountHUResidualHelpers.closeZeroPinholes(mask_data, d_decliff, elig_hab, 4, 0.45, 2, 0);
       let lu_decliff = (n_valid >= 2000 && bio_covs.sub_iso_valid && year < 1850) ?
-        ViscountHUResidualHelpers.removeSubIsoCliffs(mask_data, lu_raw, bio_covs.sub_iso_valid, 0.002, 6) :
+        ViscountHUResidualHelpers.removeSubIsoCliffs(mask_data, lu_raw, bio_covs.sub_iso_valid, 0.002, 16) :
         lu_raw;
       let out = { d_decliff: d_decliff, lu_decliff: lu_decliff };
 
@@ -343,6 +352,7 @@ let { ViscountUrbanMask } = global.ViscountUrbanMask ? global : require("./Visco
       //Function body
       let setts = hu_ctx.settlements || [];
       let s_rad_y = is_micro ? 4 : 9;
+      let s_max_km = is_micro ? 35.0 : 80.0;
 
       for (let i = 0; i < setts.length; i++) {
         let s = setts[i];
@@ -359,12 +369,13 @@ let { ViscountUrbanMask } = global.ViscountUrbanMask ? global : require("./Visco
           for (let dx = -max_dx; dx <= max_dx; dx++) {
             let d_km = 9.26*Math.sqrt(dy*dy + (dx*s.cos_lat)*(dx*s.cos_lat));
 
-            if (d_km > 80.0) continue;
+            if (d_km >= s_max_km) continue;
             let nx = (s.gx + dx + w) % w;
             let nv = p2v[ny*w + nx];
 
             if (nv >= 0) {
-              let k = 0.72*Math.exp(-(d_km*d_km)/(2*18.0*18.0)) + 0.28*Math.exp(-(d_km*d_km)/(2*45.0*45.0));
+              let taper = 0.5*(1 + Math.cos(Math.PI*d_km/s_max_km));
+              let k = taper*(0.74*Math.exp(-(d_km*d_km)/(2*14.0*14.0)) + 0.26*Math.exp(-(d_km*d_km)/(2*28.0*28.0)));
 
               u_set[nv] += amp*k;
             }
@@ -468,129 +479,61 @@ let { ViscountUrbanMask } = global.ViscountUrbanMask ? global : require("./Visco
 
 
     /**
-     * Step D: Solves shrinkage-weighted signed residual Matérn (`nu = 3/2`) kriging around `prior_dens`
-     * plus fits constrained NNLS `beta` for C1 diagnostic auditability.
-     * @alias ViscountHUResidualKriging.D_solveSignedResidualMaternSurface
+     * Evaluates signed residual Matérn (`nu = 3/2`) fields across 1 or more dual-weight vectors in a single shared pass.
+     * @alias ViscountHUResidualKriging.D_evaluateMultiDualMaternFields
      */
-    static D_solveSignedResidualMaternSurface (arg0_kriging_bundle, arg1_prior_bundle, arg2_z_obs, arg3_s_obs, arg4_year, arg5_hu_ctx) {
+    static D_evaluateMultiDualMaternFields (arg0_kriging_bundle, arg1_prior_bundles, arg2_v_vecs, arg3_years) {
       //Convert from parameters
       let bundle = arg0_kriging_bundle;
-      let prior_bundle = arg1_prior_bundle;
-      let z_obs = arg2_z_obs;
-      let s_obs = arg3_s_obs;
-      let year = Number(arg4_year) || 0;
+      let prior_bundles = arg1_prior_bundles;
+      let v_vecs = arg2_v_vecs;
+      let years = arg3_years;
 
       //Declare local instance variables
       let cell_area = bundle.mask_data.cell_land_area;
-      let cell_obs = bundle.obs_bundle.cell_nearest_obs;
-      let mask_data = bundle.mask_data;
-      let n_obs = bundle.obs_bundle.obs_count;
-      let n_valid = mask_data.valid_cell_count;
-      let obs_list = bundle.obs_bundle.obs_list;
-      let perm_ice = (bundle._bio_covs && bundle._bio_covs.perm_ice) ? bundle._bio_covs.perm_ice : null;
-      let prior_dens = prior_bundle.prior_dens;
-      let r_area = new Float64Array(n_obs);
-      let r_prior_sum = new Float64Array(n_obs);
-      let sp_ctx = ViscountHUResidualHelpers.getOrBuildSparseMaternMatrix(bundle);
-
-      //Function body
-      for (let i = 0; i < n_valid; i++) {
-        let o = cell_obs[i];
-
-        if (o < 0 || o >= n_obs || prior_dens[i] <= 0) continue;
-        let a = cell_area[i]*(perm_ice ? perm_ice[i] : 1.0);
-
-        if (a <= 0) continue;
-        r_area[o] += a;
-        r_prior_sum[o] += a*prior_dens[i];
-      }
-
-      let obs_prior_z = new Float64Array(n_obs);
-      let p_z_sum = 0;
-      let z_o_sum = 0;
-
-      for (let o = 0; o < n_obs; o++) {
-        if (obs_list[o].is_frontier_buffer || r_area[o] <= 0) continue;
-        let pz = Math.sqrt(Math.max(1e-7, r_prior_sum[o]/r_area[o]));
-
-        obs_prior_z[o] = pz;
-        p_z_sum += r_area[o]*pz;
-        z_o_sum += r_area[o]*z_obs[o];
-      }
-      let scale_p2z = (p_z_sum > 1e-8) ? (z_o_sum/p_z_sum) : 1.0;
-
-      for (let o = 0; o < n_obs; o++) {
-        if (r_area[o] > 0)
-          obs_prior_z[o] = Math.sqrt(Math.max(1e-7, r_prior_sum[o]/r_area[o]))*scale_p2z;
-      }
-
-      let delta_z = Math.max(0.015, 0.12*(z_o_sum/Math.max(1, n_obs)));
-      let r_vec = new Float64Array(n_obs);
-
-      for (let o = 0; o < n_obs; o++) {
-        if (r_area[o] <= 0) continue;
-        let eff_s = Math.max(0, (s_obs && Number.isFinite(s_obs[o])) ? s_obs[o] : 0);
-
-        if (obs_list[o].has_documented_settlement) eff_s = Math.max(eff_s, 18.0);
-        if (eff_s <= 0) continue;
-        let shrink = eff_s/(eff_s + 3.0);
-        let lr = Math.log((z_obs[o] + delta_z)/(obs_prior_z[o] + delta_z));
-
-        r_vec[o] = shrink*Math.max(-1.25, Math.min(1.45, lr));
-      }
-
-      let diag = sp_ctx.diag;
-      let n_nbr = sp_ctx.nbr_idx;
-      let n_val = sp_ctx.nbr_val;
-      let v_vec = new Float64Array(n_obs);
-
-      for (let o = 0; o < n_obs; o++) v_vec[o] = r_vec[o]/diag[o];
-      for (let iter = 0; iter < 80; iter++) {
-        for (let o = 0; o < n_obs; o++) {
-          let idxs = n_nbr[o];
-          let rhs = r_vec[o];
-          let vals = n_val[o];
-
-          for (let k = 0; k < idxs.length; k++)
-            rhs -= vals[k]*v_vec[idxs[k]];
-          v_vec[o] = rhs/diag[o];
-        }
-      }
-
-      let c1 = sp_ctx.c1;
-      let c2 = sp_ctx.c2;
       let cell_r = bundle.obs_bundle.cell_radius_km;
-      let cell_ux = mask_data.cell_ux;
-      let cell_uy = mask_data.cell_uy;
-      let cell_uz = mask_data.cell_uz;
-      let earth_r = mask_data.earth_radius_km || 6371;
-      let inv_tau1 = sp_ctx.inv_tau1;
-      let inv_tau2 = sp_ctx.inv_tau2;
+      let cell_ux = bundle.mask_data.cell_ux;
+      let cell_uy = bundle.mask_data.cell_uy;
+      let cell_uz = bundle.mask_data.cell_uz;
+      let earth_r = bundle.mask_data.earth_radius_km || 6371;
       let lut = bundle.matern_lut;
       let lut_scale = 8191/8;
-      let min_dot = sp_ctx.min_dot;
+      let mask_data = bundle.mask_data;
+      let n_obs = bundle.obs_bundle.obs_count;
+      let n_p = v_vecs.length;
+      let n_valid = mask_data.valid_cell_count;
       let obs_r = bundle.obs_bundle.obs_radius_km;
       let obs_ux = bundle.obs_bundle.obs_ux;
       let obs_uy = bundle.obs_bundle.obs_uy;
       let obs_uz = bundle.obs_bundle.obs_uz;
-      let out_pop = new Float32Array(n_valid);
+      let pop_fields = new Array(n_p);
+      let r_acc = new Float64Array(n_p);
+      let r_fields = new Array(n_p);
+      let sp_ctx = ViscountHUResidualHelpers.getOrBuildSparseMaternMatrix(bundle);
+
+      //Function body
+      let c1 = sp_ctx.c1;
+      let c2 = sp_ctx.c2;
+      let inv_tau1 = sp_ctx.inv_tau1;
+      let inv_tau2 = sp_ctx.inv_tau2;
+      let min_dot = sp_ctx.min_dot;
+
+      for (let p = 0; p < n_p; p++) {
+        pop_fields[p] = new Float32Array(n_valid);
+        r_fields[p] = new Float32Array(n_valid);
+      }
 
       for (let i = 0; i < n_valid; i++) {
-        if (prior_dens[i] <= 0) {
-          out_pop[i] = 0;
-          continue;
-        }
+        let a_i = cell_area[i];
         let cx = cell_ux[i];
         let cy = cell_uy[i];
         let cz = cell_uz[i];
-        let r_hat = 0;
         let ri = cell_r[i];
         let ri2 = ri*ri;
 
-        for (let x = 0; x < n_obs; x++) {
-          let vx = v_vec[x];
+        for (let p = 0; p < n_p; p++) r_acc[p] = 0;
 
-          if (vx === 0) continue;
+        for (let x = 0; x < n_obs; x++) {
           let dot = cx*obs_ux[x] + cy*obs_uy[x] + cz*obs_uz[x];
 
           if (dot <= min_dot[x]) continue;
@@ -617,22 +560,123 @@ let { ViscountUrbanMask } = global.ViscountUrbanMask ? global : require("./Visco
           let i2 = (v2*lut_scale) | 0;
           let f2 = v2*lut_scale - i2;
           let m2 = pref*(lut[i2]*(1 - f2) + lut[i2 + 1]*f2);
+          let kern = c1*m1 + c2*m2;
 
-          r_hat += vx*(c1*m1 + c2*m2);
+          for (let p = 0; p < n_p; p++) {
+            let vx = v_vecs[p][x];
+
+            if (vx !== 0) r_acc[p] += vx*kern;
+          }
         }
-        let res_mult = Math.exp(Math.max(-1.15, Math.min(1.25, 0.85*r_hat)));
 
-        out_pop[i] = cell_area[i]*prior_dens[i]*res_mult;
+        for (let p = 0; p < n_p; p++) {
+          let r_val = r_acc[p];
+
+          r_fields[p][i] = r_val;
+          if (prior_bundles[p].prior_dens[i] > 0)
+            pop_fields[p][i] = a_i*prior_bundles[p].prior_dens[i]*Math.exp(Math.max(-1.15, Math.min(1.25, 0.85*r_val)));
+        }
       }
 
-      if (year <= 1650 && bundle._bio_covs && bundle._bio_covs.uopp_valid)
-        ViscountHUResidualHelpers.capUrbanCoreSmooth(mask_data, out_pop, bundle._bio_covs.uopp_valid, 1.25);
+      if (bundle._bio_covs && bundle._bio_covs.uopp_valid) {
+        for (let p = 0; p < n_p; p++) {
+          if (years[p] <= 1650)
+            ViscountHUResidualHelpers.capUrbanCoreSmooth(mask_data, pop_fields[p], bundle._bio_covs.uopp_valid, 1.05);
+        }
+      }
+
+      //Return statement
+      return { pop_fields: pop_fields, r_fields: r_fields };
+    }
+
+
+    /**
+     * Step D: Solves shrinkage-weighted signed residual Matérn (`nu = 3/2`) kriging around `prior_dens`
+     * plus fits constrained NNLS `beta` for C1 diagnostic auditability.
+     * @alias ViscountHUResidualKriging.D_solveSignedResidualMaternSurface
+     */
+    static D_solveSignedResidualMaternSurface (arg0_kriging_bundle, arg1_prior_bundle, arg2_z_obs, arg3_s_obs, arg4_year) {
+      let bundle = arg0_kriging_bundle;
+      let prior_bundle = arg1_prior_bundle;
+      let s_obs = arg3_s_obs;
+      let year = Number(arg4_year) || 0;
+      let z_obs = arg2_z_obs;
+      let v_vec = ViscountHUResidualHelpers.solveResidualDualWeights(bundle, prior_bundle, z_obs, s_obs);
+      let multi_res = this.D_evaluateMultiDualMaternFields(bundle, [prior_bundle], [v_vec], [year]);
 
       //Return statement
       return {
         beta: ViscountHUResidualHelpers.fitDiagnosticsWLSBetas(bundle, prior_bundle.d_decliff, z_obs),
-        pop_field: out_pop
+        pop_field: multi_res.pop_fields[0],
+        r_field: multi_res.r_fields[0]
       };
+    }
+
+
+    /**
+     * Evaluates residual kriging period surfaces (`fields[pkey]` + `residual_fields[pkey]`)
+     * across all active periods in a single shared Matérn kernel pass.
+     * @alias ViscountHUResidualKriging.evaluateAllPeriodResidualSurfaces
+     */
+    static evaluateAllPeriodResidualSurfaces (arg0_kriging_bundle, arg1_bio_covs, arg2_active_periods, arg3_hab_cache) {
+      //Convert from parameters
+      let bundle = arg0_kriging_bundle;
+      let bio_covs = arg1_bio_covs;
+      let active_periods = arg2_active_periods;
+      let hab_cache = arg3_hab_cache || new Map();
+
+      //Declare local instance variables
+      let cfg = bundle.config;
+      let fields = {};
+      let hu_ctx = this.A_buildHUAdmixtureAndSettlementContext(bundle.mask_data, bio_covs, cfg);
+      let n_valid = bundle.mask_data.valid_cell_count;
+      let pkeys = [];
+      let prior_bundles = [];
+      let rep_years = [];
+      let residual_fields = {};
+      let v_vecs = [];
+      let wls_betas_by_period = {};
+
+      //Function body
+      bundle._bio_covs = bio_covs;
+      bundle._hu_ctx = hu_ctx;
+      for (let p = 0; p < active_periods.length; p++) {
+        let ap = active_periods[p];
+        let p_cfg = ap.cfg;
+        let pkey = ap.pkey;
+        let rep_year = Number.isFinite(p_cfg.representative_year) ?
+          p_cfg.representative_year :
+          0.5*((p_cfg.approx_start_year || p_cfg.start_year || 0) + (p_cfg.approx_end_year || p_cfg.end_year || 0));
+        let prior_b = this.C_evaluatePriorTrendField(bundle.mask_data, bio_covs, hu_ctx, rep_year, cfg, hab_cache);
+        let v_vec = ViscountHUResidualHelpers.solveResidualDualWeights(bundle, prior_b, ap.model.z_adj, ap.model.s_obs);
+
+        pkeys.push(pkey);
+        prior_bundles.push(prior_b);
+        rep_years.push(rep_year);
+        v_vecs.push(v_vec);
+        wls_betas_by_period[pkey] = ViscountHUResidualHelpers.fitDiagnosticsWLSBetas(bundle, prior_b.d_decliff, ap.model.z_adj);
+      }
+      let multi = this.D_evaluateMultiDualMaternFields(bundle, prior_bundles, v_vecs, rep_years);
+
+      for (let p = 0; p < pkeys.length; p++) {
+        let field = multi.pop_fields[p];
+        let pkey = pkeys[p];
+        let sum = 0;
+        let target_sites = Math.max(1, (bundle.obs_bundle.period_totals && bundle.obs_bundle.period_totals[pkey]) ?
+          bundle.obs_bundle.period_totals[pkey] : 1);
+
+        if (rep_years[p] <= 1650 && bio_covs.uopp_valid && n_valid >= 2000)
+          ViscountHUResidualHelpers.capUrbanCoreSmooth(bundle.mask_data, field, bio_covs.uopp_valid, 0.85);
+        for (let i = 0; i < n_valid; i++) sum += field[i];
+        let scale = (sum > 0) ? (target_sites/sum) : 1.0;
+
+        for (let i = 0; i < n_valid; i++) field[i] *= scale;
+        fields[pkey] = field;
+        residual_fields[pkey] = multi.r_fields[p];
+      }
+
+      //Return statement
+      return { fields: fields, residual_fields: residual_fields, wls_betas_by_period: wls_betas_by_period };
     }
 
 
@@ -649,8 +693,9 @@ let { ViscountUrbanMask } = global.ViscountUrbanMask ? global : require("./Visco
       //Declare local instance variables
       let bio_covs = surface.bio_covs;
       let bundle = surface.kriging_bundle;
-      let cfg = bundle.config;
       let cache = surface.hab_cache || new Map();
+      let cell_area = bundle.mask_data.cell_land_area;
+      let cfg = bundle.config;
       let grid_h = bundle.mask_data.grid_height;
       let grid_w = bundle.mask_data.grid_width;
       let hab_mask = bio_covs.hab_mask;
@@ -663,6 +708,7 @@ let { ViscountUrbanMask } = global.ViscountUrbanMask ? global : require("./Visco
       let n_valid = bundle.mask_data.valid_cell_count;
       let out_dir = path.join(bundle.mask_data.domain_dir, cfg.output_population_rasters_subfolder || "2.population_rasters");
       let perm_ice = bio_covs.perm_ice;
+      let period_res_fields = surface.residual_fields || null;
       let valid_indices = bundle.mask_data.valid_indices;
       let b_px = (cfg.kriging_config.bermuda_pixel) ?
         bundle.mask_data.pixel_to_valid_idx[cfg.kriging_config.bermuda_pixel.row*grid_w + cfg.kriging_config.bermuda_pixel.col] : -1;
@@ -679,34 +725,69 @@ let { ViscountUrbanMask } = global.ViscountUrbanMask ? global : require("./Visco
         }
       }
 
+      let h_r_list = [];
       let h_z_list = [];
 
       for (let i = 0; i < horizons_cfg.length; i++) {
         let active_p = Array.isArray(horizons_cfg[i].active_periods) ? horizons_cfg[i].active_periods : [];
-        let z_h = new Float64Array(n_obs);
-        let s_h = new Float64Array(n_obs);
 
-        for (let x = 0; x < n_obs; x++) {
-          let d2 = 0;
-          let sc = 0;
+        if (period_res_fields) {
+          let r_h = new Float32Array(n_valid);
+          let w_sum = 0;
 
           for (let y = 0; y < active_p.length; y++) {
-            let model = bundle.kriging_models[active_p[y]];
+            let pkey = active_p[y];
+            let rf = period_res_fields[pkey];
 
-            if (model) {
-              if (model.z_adj) d2 += model.z_adj[x]*model.z_adj[x];
-              if (model.s_obs) sc += model.s_obs[x];
-            }
+            if (!rf) continue;
+            let wt = Math.max(1, (bundle.obs_bundle.period_totals && bundle.obs_bundle.period_totals[pkey]) ?
+              bundle.obs_bundle.period_totals[pkey] : 1);
+
+            for (let x = 0; x < n_valid; x++) r_h[x] += wt*rf[x];
+            w_sum += wt;
           }
-          z_h[x] = Math.sqrt(d2);
-          s_h[x] = sc;
+          if (w_sum > 0) {
+            let inv_w = 1.0/w_sum;
+
+            for (let x = 0; x < n_valid; x++) r_h[x] *= inv_w;
+          }
+          h_r_list.push({ r: r_h, year: horizons_cfg[i].year });
+        } else {
+          let s_h = new Float64Array(n_obs);
+          let z_h = new Float64Array(n_obs);
+
+          for (let x = 0; x < n_obs; x++) {
+            let d2 = 0;
+            let sc = 0;
+
+            for (let y = 0; y < active_p.length; y++) {
+              let model = bundle.kriging_models[active_p[y]];
+
+              if (model) {
+                if (model.z_adj) d2 += model.z_adj[x]*model.z_adj[x];
+                if (model.s_obs) sc += model.s_obs[x];
+              }
+            }
+            z_h[x] = Math.sqrt(d2);
+            s_h[x] = sc;
+          }
+          h_z_list.push({ s: s_h, year: horizons_cfg[i].year, z: z_h });
         }
-        h_z_list.push({ s: s_h, year: horizons_cfg[i].year, z: z_h });
       }
+      h_r_list.sort(function (arg0_a, arg1_b) { return arg0_a.year - arg1_b.year; });
       h_z_list.sort(function (arg0_a, arg1_b) { return arg0_a.year - arg1_b.year; });
 
       for (let y_idx = 0; y_idx < hyde_years.length; y_idx++) {
         let yr = hyde_years[y_idx];
+        let ccf_cfg = hu_ctx.county_census_frontier || null;
+        let use_county_frontier = Boolean(
+          !options.is_polynesia &&
+          n_valid >= 2000 &&
+          ccf_cfg &&
+          ccf_cfg.enabled &&
+          yr >= Number(ccf_cfg.start_year || 1700) &&
+          yr <= Number(ccf_cfg.end_year || 1870)
+        );
         let w_krig_max = 0;
         let w_krig = new Float32Array(n_valid);
 
@@ -719,7 +800,10 @@ let { ViscountUrbanMask } = global.ViscountUrbanMask ? global : require("./Visco
           if (wk > w_krig_max) w_krig_max = wk;
         }
 
-        let hyde_rur_raw = ViscountUrbanMask.loadUrbanMaskedHYDEPopcRaster(bundle.mask_data, yr, cache, cfg);
+        ViscountHUResidualHelpers.trimRasterCache(cache, 20, 14);
+        let need_hyde_popc = (w_krig_max > 0.001) || use_county_frontier || (yr < 1975);
+        let hyde_rur_raw = need_hyde_popc ?
+          ViscountUrbanMask.loadUrbanMaskedHYDEPopcRaster(bundle.mask_data, yr, cache, cfg) : null;
         let hyde_sum = 0;
 
         if (hyde_rur_raw)
@@ -730,53 +814,84 @@ let { ViscountUrbanMask } = global.ViscountUrbanMask ? global : require("./Visco
 
         let rk_pop = null;
 
-        if (w_krig_max > 0.001) {
-          let z_a = h_z_list[0].z;
-          let z_b = h_z_list[0].z;
-          let s_a = h_z_list[0].s;
-          let s_b = h_z_list[0].s;
-          let alpha = 0;
+        if (w_krig_max > 0.001 || use_county_frontier) {
+          let prior_b = this.C_evaluatePriorTrendField(bundle.mask_data, bio_covs, hu_ctx, yr, cfg, cache);
 
-          if (yr >= h_z_list[h_z_list.length - 1].year) {
-            let last_h = h_z_list[h_z_list.length - 1];
+          if (h_r_list.length > 0) {
+            let alpha = 0;
+            let r_a = h_r_list[0].r;
+            let r_b = h_r_list[0].r;
 
-            z_a = last_h.z;
-            z_b = last_h.z;
-            s_a = last_h.s;
-            s_b = last_h.s;
-          } else if (yr > h_z_list[0].year) {
-            for (let k = 0; k < h_z_list.length - 1; k++) {
-              if (yr >= h_z_list[k].year && yr <= h_z_list[k + 1].year) {
-                z_a = h_z_list[k].z;
-                z_b = h_z_list[k + 1].z;
-                s_a = h_z_list[k].s;
-                s_b = h_z_list[k + 1].s;
-                alpha = (yr - h_z_list[k].year)/Math.max(1, h_z_list[k + 1].year - h_z_list[k].year);
-                break;
+            if (yr >= h_r_list[h_r_list.length - 1].year) {
+              r_a = h_r_list[h_r_list.length - 1].r;
+              r_b = r_a;
+            } else if (yr > h_r_list[0].year) {
+              for (let k = 0; k < h_r_list.length - 1; k++) {
+                if (yr >= h_r_list[k].year && yr <= h_r_list[k + 1].year) {
+                  r_a = h_r_list[k].r;
+                  r_b = h_r_list[k + 1].r;
+                  alpha = (yr - h_r_list[k].year)/Math.max(1, h_r_list[k + 1].year - h_r_list[k].year);
+                  break;
+                }
               }
             }
-          }
-          let z_yr = new Float64Array(n_obs);
-          let s_yr = new Float64Array(n_obs);
+            rk_pop = new Float32Array(n_valid);
+            for (let i = 0; i < n_valid; i++) {
+              if (prior_b.prior_dens[i] <= 0) continue;
+              let r_val = (1 - alpha)*r_a[i] + alpha*r_b[i];
+              let res_mult = Math.exp(Math.max(-1.15, Math.min(1.25, 0.85*r_val)));
 
-          for (let i = 0; i < n_obs; i++) {
-            z_yr[i] = (1 - alpha)*z_a[i] + alpha*z_b[i];
-            s_yr[i] = (1 - alpha)*s_a[i] + alpha*s_b[i];
-          }
-          let prior_b = this.C_evaluatePriorTrendField(bundle.mask_data, bio_covs, hu_ctx, yr, cfg, cache);
-          let rk_res = this.D_solveSignedResidualMaternSurface(bundle, prior_b, z_yr, s_yr, yr, hu_ctx);
+              rk_pop[i] = cell_area[i]*prior_b.prior_dens[i]*res_mult;
+            }
+            if (yr <= 1650 && bio_covs.uopp_valid)
+              ViscountHUResidualHelpers.capUrbanCoreSmooth(bundle.mask_data, rk_pop, bio_covs.uopp_valid, 0.85);
+          } else if (h_z_list.length > 0) {
+            let alpha = 0;
+            let s_a = h_z_list[0].s;
+            let s_b = h_z_list[0].s;
+            let z_a = h_z_list[0].z;
+            let z_b = h_z_list[0].z;
 
-          rk_pop = rk_res.pop_field;
-          if (is_samoa) {
-            let sam_sc = (yr < 950) ? ((yr <= -1000) ? 0.08 : (0.15 + 0.85*Math.max(0, (yr + 1000)/1950))) : 1.0;
+            if (yr >= h_z_list[h_z_list.length - 1].year) {
+              let last_h = h_z_list[h_z_list.length - 1];
+
+              z_a = last_h.z;
+              z_b = last_h.z;
+              s_a = last_h.s;
+              s_b = last_h.s;
+            } else if (yr > h_z_list[0].year) {
+              for (let k = 0; k < h_z_list.length - 1; k++) {
+                if (yr >= h_z_list[k].year && yr <= h_z_list[k + 1].year) {
+                  z_a = h_z_list[k].z;
+                  z_b = h_z_list[k + 1].z;
+                  s_a = h_z_list[k].s;
+                  s_b = h_z_list[k + 1].s;
+                  alpha = (yr - h_z_list[k].year)/Math.max(1, h_z_list[k + 1].year - h_z_list[k].year);
+                  break;
+                }
+              }
+            }
+            let s_yr = new Float64Array(n_obs);
+            let z_yr = new Float64Array(n_obs);
+
+            for (let i = 0; i < n_obs; i++) {
+              z_yr[i] = (1 - alpha)*z_a[i] + alpha*z_b[i];
+              s_yr[i] = (1 - alpha)*s_a[i] + alpha*s_b[i];
+            }
+            rk_pop = this.D_solveSignedResidualMaternSurface(bundle, prior_b, z_yr, s_yr, yr, hu_ctx).pop_field;
+          }
+
+          if (rk_pop && is_samoa) {
             let hi_sc = (yr < 950) ? ((yr < 800) ? 0.001 : (0.05 + 0.95*Math.max(0, (yr - 800)/150))) : 1.0;
+            let sam_sc = (yr < 950) ? ((yr <= -1000) ? 0.08 : (0.15 + 0.85*Math.max(0, (yr + 1000)/1950))) : 1.0;
 
             for (let i = 0; i < n_valid; i++) rk_pop[i] *= (is_samoa[i] ? sam_sc : hi_sc);
           }
           let rk_sum = 0;
 
-          for (let i = 0; i < n_valid; i++) rk_sum += rk_pop[i];
-          if (rk_sum > 0 && target_mass > 0) {
+          if (rk_pop)
+            for (let i = 0; i < n_valid; i++) rk_sum += rk_pop[i];
+          if (rk_pop && rk_sum > 0 && target_mass > 0) {
             let k_sc = target_mass/rk_sum;
 
             for (let i = 0; i < n_valid; i++) rk_pop[i] *= k_sc;
@@ -785,7 +900,7 @@ let { ViscountUrbanMask } = global.ViscountUrbanMask ? global : require("./Visco
 
         let census_pop = null;
 
-        if (w_krig_max < 0.999) {
+        if (!use_county_frontier && w_krig_max < 0.999) {
           let c_min = 1.0;
 
           for (let i = 0; i < n_valid; i++)
@@ -803,20 +918,30 @@ let { ViscountUrbanMask } = global.ViscountUrbanMask ? global : require("./Visco
           }
         }
 
+        let ccf_field = use_county_frontier ?
+          ViscountCountyCensusFrontier.C_evaluateCensusCountyAndFrontierSurface(bundle, bio_covs, hu_ctx, rk_pop, yr, ccf_cfg, cache) : null;
+        let elig_out = new Uint8Array(n_valid);
         let out_field = new Float32Array(n_valid);
 
         for (let i = 0; i < n_valid; i++) {
           let wk = w_krig[i];
           let v_rk = rk_pop ? rk_pop[i] : 0;
           let v_cn = census_pop ? census_pop[i] : v_rk;
-          let v = (census_pop && rk_pop) ? (wk*v_rk + (1 - wk)*v_cn) : (rk_pop ? v_rk : v_cn);
+          let v = 0;
+
+          if (ccf_field) v = ccf_field[i];
+          else if (census_pop && rk_pop) v = wk*v_rk + (1 - wk)*v_cn;
+          else v = rk_pop ? v_rk : v_cn;
 
           if (perm_ice[i] <= 0.05) v = 0;
           else if (yr <= 1650 && hab_mask && hab_mask[i] === 0) v = 0;
-          else if (v > 0) v = Math.max(1e-5, v);
-          else v = 0;
+          else {
+            elig_out[i] = 1;
+            v = (v > 0) ? Math.max(1e-5, v) : 0;
+          }
           out_field[i] = v;
         }
+        ViscountHUResidualHelpers.closeZeroPinholes(bundle.mask_data, out_field, elig_out, 5, 0.45, 2, 1e-4);
 
         if (b_px >= 0)
           out_field[b_px] = (yr < 1609) ? 0 : Math.max(10, 450 + Math.max(0, yr - 1609)*140);
@@ -841,54 +966,6 @@ let { ViscountUrbanMask } = global.ViscountUrbanMask ? global : require("./Visco
 
       //Return statement
       return { generated_years: hyde_years.length, out_dir: out_dir };
-    }
-
-
-    /**
-     * Evaluates residual kriging period surfaces (`fields[pkey]`) for `ViscountMaternKriging.E_fitCarryCapacityResidualSurface`.
-     * @alias ViscountHUResidualKriging.evaluateAllPeriodResidualSurfaces
-     */
-    static evaluateAllPeriodResidualSurfaces (arg0_kriging_bundle, arg1_bio_covs, arg2_active_periods, arg3_hab_cache) {
-      //Convert from parameters
-      let bundle = arg0_kriging_bundle;
-      let bio_covs = arg1_bio_covs;
-      let active_periods = arg2_active_periods;
-      let hab_cache = arg3_hab_cache || new Map();
-
-      //Declare local instance variables
-      let cfg = bundle.config;
-      let fields = {};
-      let hu_ctx = this.A_buildHUAdmixtureAndSettlementContext(bundle.mask_data, bio_covs, cfg);
-      let n_valid = bundle.mask_data.valid_cell_count;
-      let wls_betas_by_period = {};
-
-      //Function body
-      bundle._bio_covs = bio_covs;
-      bundle._hu_ctx = hu_ctx;
-      for (let p = 0; p < active_periods.length; p++) {
-        let ap = active_periods[p];
-        let p_cfg = ap.cfg;
-        let pkey = ap.pkey;
-        let rep_year = Number.isFinite(p_cfg.representative_year) ?
-          p_cfg.representative_year :
-          0.5*((p_cfg.approx_start_year || p_cfg.start_year || 0) + (p_cfg.approx_end_year || p_cfg.end_year || 0));
-        let prior_b = this.C_evaluatePriorTrendField(bundle.mask_data, bio_covs, hu_ctx, rep_year, cfg, hab_cache);
-        let rk = this.D_solveSignedResidualMaternSurface(bundle, prior_b, ap.model.z_adj, ap.model.s_obs, rep_year, hu_ctx);
-        let field = rk.pop_field;
-        let sum = 0;
-        let target_sites = Math.max(1, (bundle.obs_bundle.period_totals && bundle.obs_bundle.period_totals[pkey]) ?
-          bundle.obs_bundle.period_totals[pkey] : 1);
-
-        for (let i = 0; i < n_valid; i++) sum += field[i];
-        let scale = (sum > 0) ? (target_sites/sum) : 1.0;
-
-        for (let i = 0; i < n_valid; i++) field[i] *= scale;
-        fields[pkey] = field;
-        wls_betas_by_period[pkey] = rk.beta;
-      }
-
-      //Return statement
-      return { fields: fields, wls_betas_by_period: wls_betas_by_period };
     }
   };
 }

@@ -170,6 +170,8 @@ if (!global.population_Substrata_russia && typeof require !== "undefined") {
       //Function body
       for (let i = 0; i < discovery.contexts.length; i++) {
         let ctx = discovery.contexts[i];
+
+        if (Array.isArray(options.only_projects) && !options.only_projects.includes(ctx.key)) continue;
         console.log(`[ViscountSubstrataPipeline] Resolving ${ctx.key} (order=${ctx.order}, z_priority=${ctx.z_priority}, active_pixels=${ctx.n_valid}, superseded=${ctx.superseded_pixel_count || 0})...`);
 
         if (ctx.pipeline_mode === "polaris_russia_delegate" && typeof global.population_Substrata_russia !== "undefined") {
@@ -316,6 +318,7 @@ if (!global.population_Substrata_russia && typeof require !== "undefined") {
       let start_ms = Date.now();
       let urban_series = [];
       let year_summaries = {};
+      let zone_targets_series = [];
 
       //Function body
       for (let i = 0; i < hyde_years.length; i++) {
@@ -325,6 +328,7 @@ if (!global.population_Substrata_russia && typeof require !== "undefined") {
         let cal_obj = rus.C_computeCalibratedFieldForYear(ctx, mosaic_valid, yr, urban_valid);
         calibrated_series.push(cal_obj.calibrated_rural);
         urban_series.push(urban_valid);
+        zone_targets_series.push(cal_obj.zone_targets || []);
       }
 
       if (!fs.existsSync(out_folder)) fs.mkdirSync(out_folder, { recursive: true });
@@ -338,14 +342,50 @@ if (!global.population_Substrata_russia && typeof require !== "undefined") {
         let base_png = PNG.sync.read(fs.readFileSync(src_path));
         let base_dv = new DataView(base_png.data.buffer, base_png.data.byteOffset, base_png.data.byteLength);
         let cal_arr = calibrated_series[t];
-        let u_arr = urban_series[t];
+        let comb_arr = new Float32Array(ctx.n_valid);
         let sum_val = 0;
+        let u_arr = urban_series[t];
+        let z_targets = zone_targets_series[t] || [];
+
+        for (let i = 0; i < ctx.n_valid; i++) {
+          let r_v = (cal_arr[i] > 0) ? cal_arr[i] : 0;
+
+          comb_arr[i] = (yr <= 0) ? Math.max(r_v, u_arr[i]) : r_v;
+        }
+
+        if (ctx.pixel_to_valid) {
+          for (let z_idx = 0; z_idx < z_targets.length; z_idx++) {
+            let zt = z_targets[z_idx];
+            let z_comb = 0;
+
+            for (let x = 0; x < zt.pixels.length; x++) {
+              let v_idx = ctx.pixel_to_valid[zt.pixels[x]];
+              if (v_idx >= 0) z_comb += comb_arr[v_idx];
+            }
+            if (z_comb > 0 && zt.target_pop >= 0) {
+              let z_sc = zt.target_pop/z_comb;
+              for (let x = 0; x < zt.pixels.length; x++) {
+                let v_idx = ctx.pixel_to_valid[zt.pixels[x]];
+                if (v_idx >= 0) comb_arr[v_idx] *= z_sc;
+              }
+            }
+          }
+        }
 
         for (let i = 0; i < ctx.n_valid; i++) {
           let idx = ctx.valid_indices[i];
-          let val = u_arr[i] + Math.max(1e-4, cal_arr[i]);
-          base_dv.setFloat32(idx*4, val, false);
-          sum_val += val;
+          let p4 = idx*4;
+          let val = comb_arr[i];
+
+          if (val > 0) {
+            base_dv.setFloat32(p4, val, false);
+            sum_val += val;
+          } else {
+            base_png.data[p4] = 0;
+            base_png.data[p4 + 1] = 0;
+            base_png.data[p4 + 2] = 0;
+            base_png.data[p4 + 3] = 0;
+          }
         }
 
         global.ViscountSubstrataMosaic.applyOneSidedSeamBlend(ctx, base_png.data, base_dv, options);

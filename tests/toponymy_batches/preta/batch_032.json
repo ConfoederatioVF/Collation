@@ -1,0 +1,921 @@
+{
+  "batch_index": 32,
+  "count": 30,
+  "project": "PRETA",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        -3.47583,
+        -41.84306
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Caraúbas do Piauí-Brazil",
+      "known_aliases": [
+        "Caraúbas do Piauí",
+        "caraúbas do piauí"
+      ],
+      "latest_year": 2026,
+      "name": "Caraúbas do Piauí",
+      "reason": "missing_entry",
+      "region": "bra_piaui",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -17.52694,
+        -43.01583
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Carbonita-Brazil",
+      "known_aliases": [
+        "Carbonita",
+        "carbonita",
+        "barreiras",
+        "Barreiras"
+      ],
+      "latest_year": 2026,
+      "name": "Carbonita",
+      "reason": "missing_entry",
+      "region": "bra_minas_gerais",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -11.9472,
+        -37.9469
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cardeal da Silva-Brazil",
+      "known_aliases": [
+        "Cardeal da Silva",
+        "cardeal da silva",
+        "Cardeal da Silva (BA)"
+      ],
+      "latest_year": 2026,
+      "name": "Cardeal da Silva",
+      "reason": "missing_entry",
+      "region": "bra_bahia",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -20.08,
+        -49.9183
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cardoso-Brazil",
+      "known_aliases": [
+        "Cardoso",
+        "cardoso",
+        "Cardoso (SP)"
+      ],
+      "latest_year": 2026,
+      "name": "Cardoso",
+      "reason": "missing_entry",
+      "region": "bra_sao_paulo",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -21.48833,
+        -41.61556
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cardoso Moreira-Brazil",
+      "known_aliases": [
+        "Cardoso Moreira",
+        "cardoso moreira",
+        "cardoso moreiro",
+        "Cardoso Moreiro"
+      ],
+      "latest_year": 2026,
+      "name": "Cardoso Moreira",
+      "reason": "missing_entry",
+      "region": "bra_rio_de_janeiro",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -22.04306,
+        -45.69917
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Careaçu-Brazil",
+      "known_aliases": [
+        "Careaçu",
+        "careaçu",
+        "care-assu",
+        "cariacu",
+        "cariaçu",
+        "Care-Assu",
+        "Cariacu",
+        "Cariaçu"
+      ],
+      "latest_year": 2026,
+      "name": "Careaçu",
+      "reason": "missing_entry",
+      "region": "bra_minas_gerais",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -3.76803,
+        -60.369
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Careiro-Brazil",
+      "known_aliases": [
+        "Careiro",
+        "careiro",
+        "Careiro (AM)"
+      ],
+      "latest_year": 2026,
+      "name": "Careiro",
+      "reason": "missing_entry",
+      "region": "bra_amazonas",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -3.19695,
+        -59.82674
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Careiro da Várzea-Brazil",
+      "known_aliases": [
+        "Careiro da Várzea",
+        "careiro da várzea",
+        "careiro",
+        "Careiro"
+      ],
+      "latest_year": 2026,
+      "name": "Careiro da Várzea",
+      "reason": "missing_entry",
+      "region": "bra_amazonas",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -3.314,
+        -59.5557
+      ],
+      "country": "Brazil",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Careiro da Várzea (AM)-Brazil",
+      "known_aliases": [
+        "Careiro da Várzea",
+        "careiro da várzea",
+        "Careiro da Várzea (AM)"
+      ],
+      "latest_year": 2026,
+      "name": "Careiro da Várzea",
+      "reason": "missing_entry",
+      "region": "bra_amazonas",
+      "sample_years": [
+        1950,
+        1980,
+        2010,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -27.66088,
+        -48.54318
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Carianos-Brazil",
+      "known_aliases": [
+        "Carianos",
+        "carianos"
+      ],
+      "latest_year": 2026,
+      "name": "Carianos",
+      "reason": "missing_entry",
+      "region": "bra_santa_catarina",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -4.22514,
+        -39.1912
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Caridade-Brazil",
+      "known_aliases": [
+        "Caridade",
+        "caridade",
+        "Caridade (CE)"
+      ],
+      "latest_year": 2026,
+      "name": "Caridade",
+      "reason": "missing_entry",
+      "region": "bra_ceara",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -7.73435,
+        -40.9848
+      ],
+      "country": "Brazil",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Caridade do Piauí-Brazil",
+      "known_aliases": [
+        "Caridade do Piauí",
+        "caridade do piauí",
+        "Caridade do Piauí (PI)"
+      ],
+      "latest_year": 2026,
+      "name": "Caridade do Piauí",
+      "reason": "missing_entry",
+      "region": "bra_piaui",
+      "sample_years": [
+        1950,
+        1980,
+        2010,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -14.30472,
+        -43.765
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Carinhanha-Brazil",
+      "known_aliases": [
+        "Carinhanha",
+        "carinhanha"
+      ],
+      "latest_year": 2026,
+      "name": "Carinhanha",
+      "reason": "missing_entry",
+      "region": "bra_bahia",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -10.36083,
+        -37.70111
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Carira-Brazil",
+      "known_aliases": [
+        "Carira",
+        "carira"
+      ],
+      "latest_year": 2026,
+      "name": "Carira",
+      "reason": "missing_entry",
+      "region": "bra_bahia",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -11.89083,
+        -49.16111
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cariri do Tocantins-Brazil",
+      "known_aliases": [
+        "Cariri do Tocantins",
+        "cariri do tocantins",
+        "cairiri",
+        "Cairiri"
+      ],
+      "latest_year": 2026,
+      "name": "Cariri do Tocantins",
+      "reason": "missing_entry",
+      "region": "bra_tocantins",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -7.04222,
+        -39.28361
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Caririaçu-Brazil",
+      "known_aliases": [
+        "Caririaçu",
+        "caririaçu",
+        "sao pedro",
+        "sao pedro do cariri",
+        "são pedro",
+        "Sao Pedro",
+        "Sao Pedro do Cariri",
+        "São Pedro"
+      ],
+      "latest_year": 2026,
+      "name": "Caririaçu",
+      "reason": "missing_entry",
+      "region": "bra_ceara",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -3.95056,
+        -40.47333
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cariré-Brazil",
+      "known_aliases": [
+        "Cariré",
+        "cariré"
+      ],
+      "latest_year": 2026,
+      "name": "Cariré",
+      "reason": "missing_entry",
+      "region": "bra_ceara",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -6.53722,
+        -39.49667
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cariús-Brazil",
+      "known_aliases": [
+        "Cariús",
+        "cariús",
+        "carios",
+        "Carios"
+      ],
+      "latest_year": 2026,
+      "name": "Cariús",
+      "reason": "missing_entry",
+      "region": "bra_ceara",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -9.95806,
+        -55.83222
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Carlinda-Brazil",
+      "known_aliases": [
+        "Carlinda",
+        "carlinda"
+      ],
+      "latest_year": 2026,
+      "name": "Carlinda",
+      "reason": "missing_entry",
+      "region": "bra_mato_grosso",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -29.2975,
+        -51.50361
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Carlos Barbosa-Brazil",
+      "known_aliases": [
+        "Carlos Barbosa",
+        "carlos barbosa"
+      ],
+      "latest_year": 2026,
+      "name": "Carlos Barbosa",
+      "reason": "missing_entry",
+      "region": "bra_rio_grande_do_sul",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -17.6973,
+        -40.7723
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Carlos Chagas-Brazil",
+      "known_aliases": [
+        "Carlos Chagas",
+        "carlos chagas",
+        "Carlos Chagas (MG)"
+      ],
+      "latest_year": 2026,
+      "name": "Carlos Chagas",
+      "reason": "missing_entry",
+      "region": "bra_minas_gerais",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -27.7167,
+        -51.9121
+      ],
+      "country": "Brazil",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Carlos Gomes-Brazil",
+      "known_aliases": [
+        "Carlos Gomes",
+        "carlos gomes",
+        "Carlos Gomes (RS)"
+      ],
+      "latest_year": 2026,
+      "name": "Carlos Gomes",
+      "reason": "missing_entry",
+      "region": "bra_rio_grande_do_sul",
+      "sample_years": [
+        1950,
+        1980,
+        2010,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -23.4269,
+        -49.7235
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Carlópolis-Brazil",
+      "known_aliases": [
+        "Carlópolis",
+        "carlópolis",
+        "Carlópolis (PR)"
+      ],
+      "latest_year": 2026,
+      "name": "Carlópolis",
+      "reason": "missing_entry",
+      "region": "bra_parana",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -21.93361,
+        -42.60861
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Carmo-Brazil",
+      "known_aliases": [
+        "Carmo",
+        "carmo"
+      ],
+      "latest_year": 2026,
+      "name": "Carmo",
+      "reason": "missing_entry",
+      "region": "bra_rio_de_janeiro",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -21.46083,
+        -45.22361
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Carmo da Cachoeira-Brazil",
+      "known_aliases": [
+        "Carmo da Cachoeira",
+        "carmo da cachoeira"
+      ],
+      "latest_year": 2026,
+      "name": "Carmo da Cachoeira",
+      "reason": "missing_entry",
+      "region": "bra_minas_gerais",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -20.55778,
+        -44.87056
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Carmo da Mata-Brazil",
+      "known_aliases": [
+        "Carmo da Mata",
+        "carmo da mata",
+        "carmo da matta",
+        "carmo do mata",
+        "Carmo da Matta",
+        "Carmo do Mata"
+      ],
+      "latest_year": 2026,
+      "name": "Carmo da Mata",
+      "reason": "missing_entry",
+      "region": "bra_minas_gerais",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -22.12222,
+        -45.12917
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Carmo de Minas-Brazil",
+      "known_aliases": [
+        "Carmo de Minas",
+        "carmo de minas",
+        "silvestre-ferraz",
+        "sylvestre ferraz",
+        "Silvestre-Ferraz",
+        "Sylvestre Ferraz"
+      ],
+      "latest_year": 2026,
+      "name": "Carmo de Minas",
+      "reason": "missing_entry",
+      "region": "bra_minas_gerais",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -20.18417,
+        -44.77111
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Carmo do Cajuru-Brazil",
+      "known_aliases": [
+        "Carmo do Cajuru",
+        "carmo do cajuru",
+        "carmo de cajuru",
+        "carmo de cajurú",
+        "Carmo de Cajuru",
+        "Carmo de Cajurú"
+      ],
+      "latest_year": 2026,
+      "name": "Carmo do Cajuru",
+      "reason": "missing_entry",
+      "region": "bra_minas_gerais",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -20.97194,
+        -46.11889
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Carmo do Rio Claro-Brazil",
+      "known_aliases": [
+        "Carmo do Rio Claro",
+        "carmo do rio claro"
+      ],
+      "latest_year": 2026,
+      "name": "Carmo do Rio Claro",
+      "reason": "missing_entry",
+      "region": "bra_minas_gerais",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -15.3549,
+        -49.708
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Carmo do Rio Verde-Brazil",
+      "known_aliases": [
+        "Carmo do Rio Verde",
+        "carmo do rio verde",
+        "Carmo do Rio Verde (GO)"
+      ],
+      "latest_year": 2026,
+      "name": "Carmo do Rio Verde",
+      "reason": "missing_entry",
+      "region": "bra_goias",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    }
+  ]
+}

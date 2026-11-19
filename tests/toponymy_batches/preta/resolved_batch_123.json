@@ -1,0 +1,1213 @@
+{
+  "batch_index": 123,
+  "project": "PRETA",
+  "count": 30,
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        -15.2483,
+        -58.1259
+      ],
+      "country": "Brazil",
+      "earliest_year": 1890,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio Branco (MT)-Brazil",
+      "known_aliases": [
+        "Rio Branco",
+        "rio branco",
+        "Rio Branco (MT)"
+      ],
+      "latest_year": 2026,
+      "name": "Rio Branco",
+      "reason": "missing_entry",
+      "region": "bra_mato_grosso",
+      "sample_years": [
+        1890,
+        1940,
+        1991,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ],
+      "canonical_name": "Rio Branco",
+      "historical_names": [
+        {
+          "date": "1890.1.1",
+          "name": "Rio Branco"
+        }
+      ],
+      "other_names": []
+    },
+    {
+      "coords_lat_lng": [
+        -24.32417,
+        -51.3125
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio Branco do Ivaí-Brazil",
+      "known_aliases": [
+        "Rio Branco do Ivaí",
+        "rio branco do ivaí"
+      ],
+      "latest_year": 2026,
+      "name": "Rio Branco do Ivaí",
+      "reason": "missing_entry",
+      "region": "bra_parana",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ],
+      "canonical_name": "Rio Branco do Ivaí",
+      "historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Rio Branco do Ivaí"
+        }
+      ],
+      "other_names": []
+    },
+    {
+      "coords_lat_lng": [
+        -21.80194,
+        -54.54639
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio Brilhante-Brazil",
+      "known_aliases": [
+        "Rio Brilhante",
+        "rio brilhante",
+        "caiuas",
+        "caiuás",
+        "entre rios",
+        "Caiuas",
+        "Caiuás",
+        "Entre Rios"
+      ],
+      "latest_year": 2026,
+      "name": "Rio Brilhante",
+      "reason": "missing_entry",
+      "region": "bra_mato_grosso_do_sul",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ],
+      "canonical_name": "Rio Brilhante",
+      "historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Entre Rios"
+        },
+        {
+          "date": "1943.12.31",
+          "name": "Caiuás"
+        },
+        {
+          "date": "1948.9.30",
+          "name": "Rio Brilhante"
+        }
+      ],
+      "other_names": [
+        "Entre Rios",
+        "Entre-Rios",
+        "Caiuás"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -20.2285,
+        -42.6462
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio Casca-Brazil",
+      "known_aliases": [
+        "Rio Casca",
+        "rio casca",
+        "Rio Casca (MG)"
+      ],
+      "latest_year": 2026,
+      "name": "Rio Casca",
+      "reason": "missing_entry",
+      "region": "bra_minas_gerais",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ],
+      "canonical_name": "Rio Casca",
+      "historical_names": [
+        {
+          "date": "1850.1.1",
+          "name": "Rio Casca"
+        }
+      ],
+      "other_names": []
+    },
+    {
+      "coords_lat_lng": [
+        -22.72306,
+        -44.13556
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio Claro (Rio de Janeiro)-Brazil",
+      "known_aliases": [
+        "Rio Claro",
+        "rio claro",
+        "itavera",
+        "itaverá",
+        "Itavera",
+        "Itaverá"
+      ],
+      "latest_year": 2026,
+      "name": "Rio Claro",
+      "reason": "missing_entry",
+      "region": "bra_rio_de_janeiro",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ],
+      "canonical_name": "Rio Claro",
+      "historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Rio Claro"
+        }
+      ],
+      "other_names": [
+        "Itaverá"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -9.705,
+        -62.89972
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio Crespo-Brazil",
+      "known_aliases": [
+        "Rio Crespo",
+        "rio crespo"
+      ],
+      "latest_year": 2026,
+      "name": "Rio Crespo",
+      "reason": "missing_entry",
+      "region": "bra_rondonia",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ],
+      "canonical_name": "Rio Crespo",
+      "historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Rio Crespo"
+        }
+      ],
+      "other_names": []
+    },
+    {
+      "coords_lat_lng": [
+        -20.2412,
+        -42.8995
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio Doce-Brazil",
+      "known_aliases": [
+        "Rio Doce",
+        "rio doce",
+        "Rio Doce (MG)"
+      ],
+      "latest_year": 2026,
+      "name": "Rio Doce",
+      "reason": "missing_entry",
+      "region": "bra_minas_gerais",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ],
+      "canonical_name": "Rio Doce",
+      "historical_names": [
+        {
+          "date": "1850.1.1",
+          "name": "Rio Doce"
+        }
+      ],
+      "other_names": []
+    },
+    {
+      "coords_lat_lng": [
+        -20.855,
+        -43.4721
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio Espera-Brazil",
+      "known_aliases": [
+        "Rio Espera",
+        "rio espera",
+        "Rio Espera (MG)"
+      ],
+      "latest_year": 2026,
+      "name": "Rio Espera",
+      "reason": "missing_entry",
+      "region": "bra_minas_gerais",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ],
+      "canonical_name": "Rio Espera",
+      "historical_names": [
+        {
+          "date": "1850.1.1",
+          "name": "Rio Espera"
+        }
+      ],
+      "other_names": []
+    },
+    {
+      "coords_lat_lng": [
+        -8.6592,
+        -35.1532
+      ],
+      "country": "Brazil",
+      "earliest_year": 1650,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio Formoso-Brazil",
+      "known_aliases": [
+        "Rio Formoso",
+        "rio formoso",
+        "Rio Formoso (PE)"
+      ],
+      "latest_year": 2026,
+      "name": "Rio Formoso",
+      "reason": "missing_entry",
+      "region": "bra_pernambuco",
+      "sample_years": [
+        1650,
+        1872,
+        1960,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ],
+      "canonical_name": "Rio Formoso",
+      "historical_names": [
+        {
+          "date": "1650.1.1",
+          "name": "Rio Formoso"
+        }
+      ],
+      "other_names": []
+    },
+    {
+      "coords_lat_lng": [
+        -28.13111,
+        -49.10528
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio Fortuna-Brazil",
+      "known_aliases": [
+        "Rio Fortuna",
+        "rio fortuna"
+      ],
+      "latest_year": 2026,
+      "name": "Rio Fortuna",
+      "reason": "missing_entry",
+      "region": "bra_santa_catarina",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ],
+      "canonical_name": "Rio Fortuna",
+      "historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Rio Fortuna"
+        }
+      ],
+      "other_names": []
+    },
+    {
+      "coords_lat_lng": [
+        -7.78029,
+        -43.1369
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio Grande do Piauí-Brazil",
+      "known_aliases": [
+        "Rio Grande do Piauí",
+        "rio grande do piauí",
+        "Rio Grande do Piauí (PI)"
+      ],
+      "latest_year": 2026,
+      "name": "Rio Grande do Piauí",
+      "reason": "missing_entry",
+      "region": "bra_piaui",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ],
+      "canonical_name": "Rio Grande do Piauí",
+      "historical_names": [
+        {
+          "date": "1850.1.1",
+          "name": "Rio Grande do Piauí"
+        }
+      ],
+      "other_names": []
+    },
+    {
+      "coords_lat_lng": [
+        -20.26528,
+        -44.30778
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio Manso-Brazil",
+      "known_aliases": [
+        "Rio Manso",
+        "rio manso"
+      ],
+      "latest_year": 2026,
+      "name": "Rio Manso",
+      "reason": "missing_entry",
+      "region": "bra_minas_gerais",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ],
+      "canonical_name": "Rio Manso",
+      "historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Rio Manso"
+        }
+      ],
+      "other_names": []
+    },
+    {
+      "coords_lat_lng": [
+        -7.31236,
+        -50.0379
+      ],
+      "country": "Brazil",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio Maria-Brazil",
+      "known_aliases": [
+        "Rio Maria",
+        "rio maria",
+        "Rio Maria (PA)"
+      ],
+      "latest_year": 2026,
+      "name": "Rio Maria",
+      "reason": "missing_entry",
+      "region": "bra_para",
+      "sample_years": [
+        1950,
+        1980,
+        2010,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ],
+      "canonical_name": "Rio Maria",
+      "historical_names": [
+        {
+          "date": "1950.1.1",
+          "name": "Rio Maria"
+        }
+      ],
+      "other_names": []
+    },
+    {
+      "coords_lat_lng": [
+        -19.447,
+        -54.9859
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio Negro-Brazil",
+      "known_aliases": [
+        "Rio Negro",
+        "rio negro",
+        "Rio Negro (MS)"
+      ],
+      "latest_year": 2026,
+      "name": "Rio Negro",
+      "reason": "missing_entry",
+      "region": "bra_mato_grosso_do_sul",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ],
+      "canonical_name": "Rio Negro",
+      "historical_names": [
+        {
+          "date": "1850.1.1",
+          "name": "Rio Negro"
+        }
+      ],
+      "other_names": []
+    },
+    {
+      "coords_lat_lng": [
+        -21.4649,
+        -43.1168
+      ],
+      "country": "Brazil",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio Novo-Brazil",
+      "known_aliases": [
+        "Rio Novo",
+        "rio novo",
+        "Rio Novo (MG)"
+      ],
+      "latest_year": 2026,
+      "name": "Rio Novo",
+      "reason": "missing_entry",
+      "region": "bra_minas_gerais",
+      "sample_years": [
+        1750,
+        1880,
+        1970,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ],
+      "canonical_name": "Rio Novo",
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Rio Novo"
+        }
+      ],
+      "other_names": []
+    },
+    {
+      "coords_lat_lng": [
+        -20.8625,
+        -40.93639
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio Novo do Sul-Brazil",
+      "known_aliases": [
+        "Rio Novo do Sul",
+        "rio novo do sul",
+        "itapoama",
+        "rio novo",
+        "Itapoama",
+        "Rio Novo"
+      ],
+      "latest_year": 2026,
+      "name": "Rio Novo do Sul",
+      "reason": "missing_entry",
+      "region": "bra_espirito_santo",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ],
+      "canonical_name": "Rio Novo do Sul",
+      "historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Rio Novo do Sul"
+        }
+      ],
+      "other_names": [
+        "Itapoama",
+        "Rio Novo"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -19.19361,
+        -46.24722
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio Paranaíba-Brazil",
+      "known_aliases": [
+        "Rio Paranaíba",
+        "rio paranaíba",
+        "rio paranahyba",
+        "sao francisco das chagas",
+        "são francisco das chagas",
+        "Rio Paranahyba",
+        "Sao Francisco das Chagas",
+        "São Francisco das Chagas"
+      ],
+      "latest_year": 2026,
+      "name": "Rio Paranaíba",
+      "reason": "missing_entry",
+      "region": "bra_minas_gerais",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ],
+      "canonical_name": "Rio Paranaíba",
+      "historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Rio Paranaíba"
+        }
+      ],
+      "other_names": [
+        "Rio Paranahyba",
+        "São Francisco das Chagas",
+        "São Francisco das Chagas do Campo Grande"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -15.616,
+        -42.5405
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio Pardo de Minas-Brazil",
+      "known_aliases": [
+        "Rio Pardo de Minas",
+        "rio pardo de minas",
+        "Rio Pardo de Minas (MG)"
+      ],
+      "latest_year": 2026,
+      "name": "Rio Pardo de Minas",
+      "reason": "missing_entry",
+      "region": "bra_minas_gerais",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ],
+      "canonical_name": "Rio Pardo de Minas",
+      "historical_names": [
+        {
+          "date": "1850.1.1",
+          "name": "Rio Pardo de Minas"
+        }
+      ],
+      "other_names": []
+    },
+    {
+      "coords_lat_lng": [
+        -23.57139,
+        -46.75887
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio Pequeno-Brazil",
+      "known_aliases": [
+        "Rio Pequeno",
+        "rio pequeno",
+        "rpe",
+        "rio pekeno",
+        "рио пекено",
+        "RPE",
+        "Rio Pekeno",
+        "Рио Пекено"
+      ],
+      "latest_year": 2026,
+      "name": "Rio Pequeno",
+      "reason": "missing_entry",
+      "region": "bra_sao_paulo",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ],
+      "canonical_name": "Rio Pequeno",
+      "historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Rio Pequeno"
+        }
+      ],
+      "other_names": [
+        "Рио Пекено"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -19.92917,
+        -43.17417
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio Piracicaba-Brazil",
+      "known_aliases": [
+        "Rio Piracicaba",
+        "rio piracicaba"
+      ],
+      "latest_year": 2026,
+      "name": "Rio Piracicaba",
+      "reason": "missing_entry",
+      "region": "bra_minas_gerais",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ],
+      "canonical_name": "Rio Piracicaba",
+      "historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Rio Piracicaba"
+        }
+      ],
+      "other_names": []
+    },
+    {
+      "coords_lat_lng": [
+        -21.27472,
+        -43.17917
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio Pomba-Brazil",
+      "known_aliases": [
+        "Rio Pomba",
+        "rio pomba",
+        "pomba",
+        "Pomba"
+      ],
+      "latest_year": 2026,
+      "name": "Rio Pomba",
+      "reason": "missing_entry",
+      "region": "bra_minas_gerais",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ],
+      "canonical_name": "Rio Pomba",
+      "historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Rio Pomba"
+        }
+      ],
+      "other_names": [
+        "Pomba",
+        "São Manuel do Pomba"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -22.0861,
+        -43.8293
+      ],
+      "country": "Brazil",
+      "earliest_year": 1650,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio Preto-Brazil",
+      "known_aliases": [
+        "Rio Preto",
+        "rio preto",
+        "Rio Preto (MG)"
+      ],
+      "latest_year": 2026,
+      "name": "Rio Preto",
+      "reason": "missing_entry",
+      "region": "bra_rio_de_janeiro",
+      "sample_years": [
+        1650,
+        1872,
+        1960,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ],
+      "canonical_name": "Rio Preto",
+      "historical_names": [
+        {
+          "date": "1650.1.1",
+          "name": "Rio Preto"
+        }
+      ],
+      "other_names": [
+        "Rio Preto do Presídio",
+        "Senhor dos Passos do Rio Preto",
+        "Senhor dos Passos do Presídio"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -2.69795,
+        -59.70172
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio Preto da Eva-Brazil",
+      "known_aliases": [
+        "Rio Preto da Eva",
+        "rio preto da eva"
+      ],
+      "latest_year": 2026,
+      "name": "Rio Preto da Eva",
+      "reason": "missing_entry",
+      "region": "bra_amazonas",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ],
+      "canonical_name": "Rio Preto da Eva",
+      "historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Rio Preto da Eva"
+        }
+      ],
+      "other_names": []
+    },
+    {
+      "coords_lat_lng": [
+        -17.77417,
+        -48.7725
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio Quente-Brazil",
+      "known_aliases": [
+        "Rio Quente",
+        "rio quente"
+      ],
+      "latest_year": 2026,
+      "name": "Rio Quente",
+      "reason": "missing_entry",
+      "region": "bra_goias",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ],
+      "canonical_name": "Rio Quente",
+      "historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Rio Quente"
+        }
+      ],
+      "other_names": []
+    },
+    {
+      "coords_lat_lng": [
+        -27.86056,
+        -49.77917
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio Rufino-Brazil",
+      "known_aliases": [
+        "Rio Rufino",
+        "rio rufino",
+        "rufino",
+        "Rufino"
+      ],
+      "latest_year": 2026,
+      "name": "Rio Rufino",
+      "reason": "missing_entry",
+      "region": "bra_santa_catarina",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ],
+      "canonical_name": "Rio Rufino",
+      "historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Rio Rufino"
+        }
+      ],
+      "other_names": [
+        "Rufino"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -9.35002,
+        -47.888
+      ],
+      "country": "Brazil",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio Sono-Brazil",
+      "known_aliases": [
+        "Rio Sono",
+        "rio sono",
+        "Rio Sono (TO)"
+      ],
+      "latest_year": 2026,
+      "name": "Rio Sono",
+      "reason": "missing_entry",
+      "region": "bra_tocantins",
+      "sample_years": [
+        1950,
+        1980,
+        2010,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ],
+      "canonical_name": "Rio Sono",
+      "historical_names": [
+        {
+          "date": "1950.1.1",
+          "name": "Rio Sono"
+        }
+      ],
+      "other_names": []
+    },
+    {
+      "coords_lat_lng": [
+        -27.64529,
+        -48.47486
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio Tavares-Brazil",
+      "known_aliases": [
+        "Rio Tavares",
+        "rio tavares"
+      ],
+      "latest_year": 2026,
+      "name": "Rio Tavares",
+      "reason": "missing_entry",
+      "region": "bra_santa_catarina",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ],
+      "canonical_name": "Rio Tavares",
+      "historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Rio Tavares"
+        }
+      ],
+      "other_names": []
+    },
+    {
+      "coords_lat_lng": [
+        -6.80383,
+        -35.0776
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio Tinto-Brazil",
+      "known_aliases": [
+        "Rio Tinto",
+        "rio tinto",
+        "Rio Tinto (PB)"
+      ],
+      "latest_year": 2026,
+      "name": "Rio Tinto",
+      "reason": "missing_entry",
+      "region": "bra_paraiba",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ],
+      "canonical_name": "Rio Tinto",
+      "historical_names": [
+        {
+          "date": "1850.1.1",
+          "name": "Rio Tinto"
+        }
+      ],
+      "other_names": []
+    },
+    {
+      "coords_lat_lng": [
+        -18.91806,
+        -54.84417
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio Verde de Mato Grosso-Brazil",
+      "known_aliases": [
+        "Rio Verde de Mato Grosso",
+        "rio verde de mato grosso",
+        "coronel galvao",
+        "coronel galvão",
+        "fazenda rio verde",
+        "Coronel Galvao",
+        "Coronel Galvão",
+        "Fazenda Rio Verde"
+      ],
+      "latest_year": 2026,
+      "name": "Rio Verde de Mato Grosso",
+      "reason": "missing_entry",
+      "region": "bra_mato_grosso_do_sul",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ],
+      "canonical_name": "Rio Verde de Mato Grosso",
+      "historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Fazenda Rio Verde"
+        },
+        {
+          "date": "1943.12.31",
+          "name": "Coronel Galvão"
+        },
+        {
+          "date": "1953.12.1",
+          "name": "Rio Verde de Mato Grosso"
+        }
+      ],
+      "other_names": [
+        "Fazenda Rio Verde",
+        "Coronel Galvão"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -18.2922,
+        -43.0018
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio Vermelho-Brazil",
+      "known_aliases": [
+        "Rio Vermelho",
+        "rio vermelho",
+        "Rio Vermelho (MG)"
+      ],
+      "latest_year": 2026,
+      "name": "Rio Vermelho",
+      "reason": "missing_entry",
+      "region": "bra_minas_gerais",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ],
+      "canonical_name": "Rio Vermelho",
+      "historical_names": [
+        {
+          "date": "1850.1.1",
+          "name": "Rio Vermelho"
+        }
+      ],
+      "other_names": [
+        "Nossa Senhora da Pena do Rio Vermelho",
+        "Nossa Senhora da Penha"
+      ]
+    }
+  ]
+}

@@ -234,6 +234,10 @@
       stadester_obj = population_Stadester_density.cacheRadialBuffers(stadester_obj);
       if (typeof population_Stadester_ghs_pop !== "undefined" && typeof population_Stadester_ghs_pop.cleanTransientMetadata === "function")
         population_Stadester_ghs_pop.cleanTransientMetadata(stadester_obj);
+      if (typeof population_Stadester_rasters !== "undefined" && typeof population_Stadester_rasters.detectOutOfMaskSettlements === "function") {
+        let mask_audit = population_Stadester_rasters.detectOutOfMaskSettlements(stadester_obj);
+        console.log(`- [Stadestér Land Mask] Actionable out-of-mask settlements: ${mask_audit.actionable.length} (${mask_audit.subpixel_islands.length} sub-pixel remote islands).`);
+      }
       StadesterPartitionIO.writePartitionedStadester(this.file_stadester_final, stadester_obj, { version: "2.0" });
       console.log(`- Saved final partitioned Stadestér dataset to ${this.file_stadester_final}.`);
       

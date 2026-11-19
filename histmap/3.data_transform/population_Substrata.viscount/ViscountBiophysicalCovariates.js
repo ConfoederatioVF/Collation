@@ -253,8 +253,43 @@ let { ViscountRuralSuitability } = global.ViscountRuralSuitability ? global : re
           (dist_catch_px[i] <= 5.6) :
           (!is_high_arctic_gl && dist_site_px[i] <= 2.2 && dist_catch_px[i] <= 5.6);
 
-        if (perm_ice[i] > 0.05 && (raw_hyde_dens[i] >= 0.002 || is_site_oasis))
+        if (lat >= 59.5 && lat <= 78.0 && lon >= -74.0 && lon <= -10.0 && dist_site_px[i] <= 1.5) {
+          perm_ice[i] = Math.max(perm_ice[i], 0.25);
           hab_mask[i] = 1;
+        } else if (perm_ice[i] > 0.05 && (raw_hyde_dens[i] >= 0.002 || is_site_oasis)) {
+          hab_mask[i] = 1;
+        }
+      }
+
+      //3-pass morphological pinhole closing on hab_mask to prevent inland Swiss-cheese zero holes
+      let p2v = mask_data.pixel_to_valid_idx;
+
+      if (p2v) {
+        for (let pass = 0; pass < 3; pass++) {
+          let hab_next = Uint8Array.from(hab_mask);
+
+          for (let i = 0; i < n_valid; i++) {
+            if (hab_mask[i] === 1 || perm_ice[i] <= 0.05) continue;
+            let gidx = valid_indices[i];
+            let cy = Math.floor(gidx/grid_w);
+            let cx = gidx % grid_w;
+            let nbr_hab = 0;
+
+            for (let dy = -1; dy <= 1; dy++) {
+              let nr = cy + dy;
+
+              if (nr < 0 || nr >= grid_h) continue;
+              for (let dx = -1; dx <= 1; dx++) {
+                if (dx === 0 && dy === 0) continue;
+                let nv = p2v[nr*grid_w + ((cx + dx + grid_w) % grid_w)];
+
+                if (nv >= 0 && hab_mask[nv] === 1) nbr_hab++;
+              }
+            }
+            if (nbr_hab >= 5) hab_next[i] = 1;
+          }
+          hab_mask = hab_next;
+        }
       }
 
       //Return statement

@@ -1,0 +1,934 @@
+{
+  "batch_index": 124,
+  "count": 30,
+  "project": "PRETA",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        -11.40028,
+        -46.88333
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio da Conceição-Brazil",
+      "known_aliases": [
+        "Rio da Conceição",
+        "rio da conceição",
+        "conceicao",
+        "conceicao do norte",
+        "conceicão",
+        "Conceicao",
+        "Conceicao do Norte",
+        "Conceicão"
+      ],
+      "latest_year": 2026,
+      "name": "Rio da Conceição",
+      "reason": "missing_entry",
+      "region": "bra_tocantins",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -26.89861,
+        -51.07444
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio das Antas-Brazil",
+      "known_aliases": [
+        "Rio das Antas",
+        "rio das antas"
+      ],
+      "latest_year": 2026,
+      "name": "Rio das Antas",
+      "reason": "missing_entry",
+      "region": "bra_santa_catarina",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -22.1675,
+        -43.58556
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio das Flores-Brazil",
+      "known_aliases": [
+        "Rio das Flores",
+        "rio das flores",
+        "santa teresa",
+        "santa thereza",
+        "Santa Teresa",
+        "Santa Thereza"
+      ],
+      "latest_year": 2026,
+      "name": "Rio das Flores",
+      "reason": "missing_entry",
+      "region": "bra_rio_de_janeiro",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -13.5852,
+        -41.8048
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio de Contas-Brazil",
+      "known_aliases": [
+        "Rio de Contas",
+        "rio de contas",
+        "Rio de Contas (BA)"
+      ],
+      "latest_year": 2026,
+      "name": "Rio de Contas",
+      "reason": "missing_entry",
+      "region": "bra_bahia",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -14.41139,
+        -42.07556
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio do Antônio-Brazil",
+      "known_aliases": [
+        "Rio do Antônio",
+        "rio do antônio"
+      ],
+      "latest_year": 2026,
+      "name": "Rio do Antônio",
+      "reason": "missing_entry",
+      "region": "bra_bahia",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -26.94889,
+        -50.14139
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio do Campo-Brazil",
+      "known_aliases": [
+        "Rio do Campo",
+        "rio do campo"
+      ],
+      "latest_year": 2026,
+      "name": "Rio do Campo",
+      "reason": "missing_entry",
+      "region": "bra_santa_catarina",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -5.27278,
+        -35.38306
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio do Fogo-Brazil",
+      "known_aliases": [
+        "Rio do Fogo",
+        "rio do fogo"
+      ],
+      "latest_year": 2026,
+      "name": "Rio do Fogo",
+      "reason": "missing_entry",
+      "region": "bra_rio_grande_do_norte",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -27.1925,
+        -49.79667
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio do Oeste-Brazil",
+      "known_aliases": [
+        "Rio do Oeste",
+        "rio do oeste",
+        "adolpho condor",
+        "barra das pombas",
+        "Adolpho Condor",
+        "Barra das Pombas"
+      ],
+      "latest_year": 2026,
+      "name": "Rio do Oeste",
+      "reason": "missing_entry",
+      "region": "bra_santa_catarina",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -13.12778,
+        -42.29194
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio do Pires-Brazil",
+      "known_aliases": [
+        "Rio do Pires",
+        "rio do pires",
+        "barra",
+        "barra do pires",
+        "Barra",
+        "Barra do Pires"
+      ],
+      "latest_year": 2026,
+      "name": "Rio do Pires",
+      "reason": "missing_entry",
+      "region": "bra_bahia",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -16.6056,
+        -40.5714
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio do Prado-Brazil",
+      "known_aliases": [
+        "Rio do Prado",
+        "rio do prado",
+        "Rio do Prado (MG)"
+      ],
+      "latest_year": 2026,
+      "name": "Rio do Prado",
+      "reason": "missing_entry",
+      "region": "bra_minas_gerais",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -9.345,
+        -48.53528
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio dos Bois-Brazil",
+      "known_aliases": [
+        "Rio dos Bois",
+        "rio dos bois"
+      ],
+      "latest_year": 2026,
+      "name": "Rio dos Bois",
+      "reason": "missing_entry",
+      "region": "bra_tocantins",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -26.73833,
+        -49.27417
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio dos Cedros-Brazil",
+      "known_aliases": [
+        "Rio dos Cedros",
+        "rio dos cedros",
+        "arrozeira",
+        "encruzilhada",
+        "Arrozeira",
+        "Encruzilhada"
+      ],
+      "latest_year": 2026,
+      "name": "Rio dos Cedros",
+      "reason": "missing_entry",
+      "region": "bra_santa_catarina",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -27.2973,
+        -52.8417
+      ],
+      "country": "Brazil",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rio dos Índios-Brazil",
+      "known_aliases": [
+        "Rio dos Índios",
+        "rio dos índios",
+        "Rio dos Índios (RS)"
+      ],
+      "latest_year": 2026,
+      "name": "Rio dos Índios",
+      "reason": "missing_entry",
+      "region": "bra_rio_grande_do_sul",
+      "sample_years": [
+        1950,
+        1980,
+        2010,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -19.98083,
+        -49.68194
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Riolândia-Brazil",
+      "known_aliases": [
+        "Riolândia",
+        "riolândia",
+        "veadinho",
+        "veadinho do porto",
+        "veadinho do pôrto",
+        "Veadinho",
+        "Veadinho do Porto",
+        "Veadinho do Pôrto"
+      ],
+      "latest_year": 2026,
+      "name": "Riolândia",
+      "reason": "missing_entry",
+      "region": "bra_minas_gerais",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -29.64111,
+        -50.4525
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Riozinho-Brazil",
+      "known_aliases": [
+        "Riozinho",
+        "riozinho",
+        "riosinho",
+        "Riosinho"
+      ],
+      "latest_year": 2026,
+      "name": "Riozinho",
+      "reason": "missing_entry",
+      "region": "bra_rio_grande_do_sul",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -27.06694,
+        -53.32167
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Riqueza-Brazil",
+      "known_aliases": [
+        "Riqueza",
+        "riqueza"
+      ],
+      "latest_year": 2026,
+      "name": "Riqueza",
+      "reason": "missing_entry",
+      "region": "bra_santa_catarina",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -21.0276,
+        -44.3204
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ritápolis-Brazil",
+      "known_aliases": [
+        "Ritápolis",
+        "ritápolis",
+        "Ritápolis (MG)"
+      ],
+      "latest_year": 2026,
+      "name": "Ritápolis",
+      "reason": "missing_entry",
+      "region": "bra_minas_gerais",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -23.829,
+        -49.429
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Riversul-Brazil",
+      "known_aliases": [
+        "Riversul",
+        "riversul",
+        "Riversul (SP)"
+      ],
+      "latest_year": 2026,
+      "name": "Riversul",
+      "reason": "missing_entry",
+      "region": "bra_sao_paulo",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -29.28417,
+        -51.8675
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Roca Sales-Brazil",
+      "known_aliases": [
+        "Roca Sales",
+        "roca sales",
+        "rocca salles",
+        "Rocca Salles"
+      ],
+      "latest_year": 2026,
+      "name": "Roca Sales",
+      "reason": "missing_entry",
+      "region": "bra_rio_grande_do_sul",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -19.95306,
+        -54.8925
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rochedo-Brazil",
+      "known_aliases": [
+        "Rochedo",
+        "rochedo",
+        "taveira",
+        "Taveira"
+      ],
+      "latest_year": 2026,
+      "name": "Rochedo",
+      "reason": "missing_entry",
+      "region": "bra_mato_grosso_do_sul",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -21.62972,
+        -43.01972
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rochedo de Minas-Brazil",
+      "known_aliases": [
+        "Rochedo de Minas",
+        "rochedo de minas",
+        "japaraiba",
+        "japaraíba",
+        "rochedo",
+        "Japaraiba",
+        "Japaraíba",
+        "Rochedo"
+      ],
+      "latest_year": 2026,
+      "name": "Rochedo de Minas",
+      "reason": "missing_entry",
+      "region": "bra_minas_gerais",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -22.98887,
+        -43.24934
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rocinha-Brazil",
+      "known_aliases": [
+        "Rocinha",
+        "rocinha",
+        "rosin'ja",
+        "luo xi ni ya",
+        "Rosin'ja"
+      ],
+      "latest_year": 2026,
+      "name": "Rocinha",
+      "reason": "missing_entry",
+      "region": "bra_rio_de_janeiro",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -26.9243,
+        -49.3649
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rodeio-Brazil",
+      "known_aliases": [
+        "Rodeio",
+        "rodeio",
+        "Rodeio (SC)"
+      ],
+      "latest_year": 2026,
+      "name": "Rodeio",
+      "reason": "missing_entry",
+      "region": "bra_santa_catarina",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -27.4742,
+        -53.1706
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rodeio Bonito-Brazil",
+      "known_aliases": [
+        "Rodeio Bonito",
+        "rodeio bonito",
+        "Rodeio Bonito (RS)"
+      ],
+      "latest_year": 2026,
+      "name": "Rodeio Bonito",
+      "reason": "missing_entry",
+      "region": "bra_rio_grande_do_sul",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -21.2,
+        -42.865
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rodeiro-Brazil",
+      "known_aliases": [
+        "Rodeiro",
+        "rodeiro"
+      ],
+      "latest_year": 2026,
+      "name": "Rodeiro",
+      "reason": "missing_entry",
+      "region": "bra_minas_gerais",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -8.85021,
+        -38.78
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rodelas-Brazil",
+      "known_aliases": [
+        "Rodelas",
+        "rodelas",
+        "Rodelas (BA)"
+      ],
+      "latest_year": 2026,
+      "name": "Rodelas",
+      "reason": "missing_entry",
+      "region": "bra_bahia",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -5.78393,
+        -38.0579
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rodolfo Fernandes-Brazil",
+      "known_aliases": [
+        "Rodolfo Fernandes",
+        "rodolfo fernandes",
+        "Rodolfo Fernandes (RN)"
+      ],
+      "latest_year": 2026,
+      "name": "Rodolfo Fernandes",
+      "reason": "missing_entry",
+      "region": "bra_ceara",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -7.7356,
+        -72.65135
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rodrigues Alves-Brazil",
+      "known_aliases": [
+        "Rodrigues Alves",
+        "rodrigues alves",
+        "colonia rodrigues alves",
+        "colônia rodrigues alves",
+        "Colonia Rodrigues Alves",
+        "Colônia Rodrigues Alves"
+      ],
+      "latest_year": 2026,
+      "name": "Rodrigues Alves",
+      "reason": "missing_entry",
+      "region": "bra_acre",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -28.2566,
+        -54.8186
+      ],
+      "country": "Brazil",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rolador-Brazil",
+      "known_aliases": [
+        "Rolador",
+        "rolador",
+        "Rolador (RS)"
+      ],
+      "latest_year": 2026,
+      "name": "Rolador",
+      "reason": "missing_entry",
+      "region": "bra_rio_grande_do_sul",
+      "sample_years": [
+        1950,
+        1980,
+        2010,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -29.65056,
+        -50.57583
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rolante-Brazil",
+      "known_aliases": [
+        "Rolante",
+        "rolante"
+      ],
+      "latest_year": 2026,
+      "name": "Rolante",
+      "reason": "missing_entry",
+      "region": "bra_rio_grande_do_sul",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    }
+  ]
+}

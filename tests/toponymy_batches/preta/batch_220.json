@@ -1,0 +1,852 @@
+{
+  "batch_index": 220,
+  "count": 30,
+  "project": "PRETA",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        4.10538,
+        -60.91721
+      ],
+      "country": "Brazil",
+      "earliest_year": 600,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fazenda Araguari-Brazil",
+      "known_aliases": [
+        "Fazenda Araguari",
+        "fazenda araguari"
+      ],
+      "latest_year": 1450,
+      "name": "Fazenda Araguari",
+      "reason": "missing_entry",
+      "region": "wamz_central_amazon_rio_negro",
+      "sample_years": [
+        600,
+        1100,
+        1450
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -9.8744,
+        -67.53
+      ],
+      "country": "Brazil",
+      "earliest_year": 0,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fazenda Colorada-Brazil",
+      "known_aliases": [
+        "Fazenda Colorada",
+        "fazenda colorada"
+      ],
+      "latest_year": 1200,
+      "name": "Fazenda Colorada",
+      "reason": "missing_entry",
+      "region": "wamz_purus_jurua_acre",
+      "sample_years": [
+        0,
+        400,
+        800,
+        1000,
+        1200
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -3.22301,
+        -60.70101
+      ],
+      "country": "Brazil",
+      "earliest_year": 600,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fazenda Conceição-Brazil",
+      "known_aliases": [
+        "Fazenda Conceição",
+        "fazenda conceição"
+      ],
+      "latest_year": 1450,
+      "name": "Fazenda Conceição",
+      "reason": "missing_entry",
+      "region": "wamz_central_amazon_rio_negro",
+      "sample_years": [
+        600,
+        1100,
+        1450
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -10.45212,
+        -67.44796
+      ],
+      "country": "Brazil",
+      "earliest_year": 400,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fazenda Correia-Brazil",
+      "known_aliases": [
+        "Fazenda Correia",
+        "fazenda correia"
+      ],
+      "latest_year": 1450,
+      "name": "Fazenda Correia",
+      "reason": "missing_entry",
+      "region": "wamz_madeira_guapore",
+      "sample_years": [
+        400,
+        1000,
+        1450
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -10.59515,
+        -67.68762
+      ],
+      "country": "Brazil",
+      "earliest_year": 400,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fazenda Crixá-Brazil",
+      "known_aliases": [
+        "Fazenda Crixá",
+        "fazenda crixá"
+      ],
+      "latest_year": 1450,
+      "name": "Fazenda Crixá",
+      "reason": "missing_entry",
+      "region": "wamz_madeira_guapore",
+      "sample_years": [
+        400,
+        1000,
+        1450
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -10.3782,
+        -67.41936
+      ],
+      "country": "Brazil",
+      "earliest_year": 400,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fazenda Cumaru-Brazil",
+      "known_aliases": [
+        "Fazenda Cumaru",
+        "fazenda cumaru"
+      ],
+      "latest_year": 1450,
+      "name": "Fazenda Cumaru",
+      "reason": "missing_entry",
+      "region": "wamz_madeira_guapore",
+      "sample_years": [
+        400,
+        1000,
+        1450
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -15.21671,
+        -59.01071
+      ],
+      "country": "Brazil",
+      "earliest_year": 600,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fazenda Divino-Brazil",
+      "known_aliases": [
+        "Fazenda Divino",
+        "fazenda divino"
+      ],
+      "latest_year": 1450,
+      "name": "Fazenda Divino",
+      "reason": "missing_entry",
+      "region": "wamz_llanos_de_moxos",
+      "sample_years": [
+        600,
+        1100,
+        1450
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -5.7666,
+        -61.2792
+      ],
+      "country": "Brazil",
+      "earliest_year": 832,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fazenda I-Brazil",
+      "known_aliases": [
+        "Fazenda I",
+        "fazenda i",
+        "incised rim",
+        "Incised Rim (Axinim)"
+      ],
+      "latest_year": 1032,
+      "name": "Fazenda I",
+      "reason": "missing_entry",
+      "region": "wamz_madeira_guapore",
+      "sample_years": [
+        832,
+        1032
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -10.0713,
+        -67.4103
+      ],
+      "country": "Brazil",
+      "earliest_year": 122,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fazenda Iquiri II-Brazil",
+      "known_aliases": [
+        "Fazenda Iquiri II",
+        "fazenda iquiri ii",
+        "quinari",
+        "Quinari"
+      ],
+      "latest_year": 1500,
+      "name": "Fazenda Iquiri II",
+      "reason": "missing_entry",
+      "region": "wamz_madeira_guapore",
+      "sample_years": [
+        122,
+        1500
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -10.06647,
+        -67.18974
+      ],
+      "country": "Brazil",
+      "earliest_year": 400,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fazenda Santo Antônio-Brazil",
+      "known_aliases": [
+        "Fazenda Santo Antônio",
+        "fazenda santo antônio"
+      ],
+      "latest_year": 1450,
+      "name": "Fazenda Santo Antônio",
+      "reason": "missing_entry",
+      "region": "wamz_madeira_guapore",
+      "sample_years": [
+        400,
+        1000,
+        1450
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -10.0285,
+        -67.72842
+      ],
+      "country": "Brazil",
+      "earliest_year": 400,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fazenda Soberana-Brazil",
+      "known_aliases": [
+        "Fazenda Soberana",
+        "fazenda soberana"
+      ],
+      "latest_year": 1450,
+      "name": "Fazenda Soberana",
+      "reason": "missing_entry",
+      "region": "wamz_purus_jurua_acre",
+      "sample_years": [
+        400,
+        1000,
+        1450
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -10.29484,
+        -67.91958
+      ],
+      "country": "Brazil",
+      "earliest_year": 400,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fazenda Sorriso-Brazil",
+      "known_aliases": [
+        "Fazenda Sorriso",
+        "fazenda sorriso"
+      ],
+      "latest_year": 1450,
+      "name": "Fazenda Sorriso",
+      "reason": "missing_entry",
+      "region": "wamz_purus_jurua_acre",
+      "sample_years": [
+        400,
+        1000,
+        1450
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        3.96001,
+        -60.44201
+      ],
+      "country": "Brazil",
+      "earliest_year": 600,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fazenda Tatu-Brazil",
+      "known_aliases": [
+        "Fazenda Tatu",
+        "fazenda tatu"
+      ],
+      "latest_year": 1450,
+      "name": "Fazenda Tatu",
+      "reason": "missing_entry",
+      "region": "wamz_central_amazon_rio_negro",
+      "sample_years": [
+        600,
+        1100,
+        1450
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -9.8953,
+        -67.1792
+      ],
+      "country": "Brazil",
+      "earliest_year": 1299,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fazenda Tocantins-Brazil",
+      "known_aliases": [
+        "Fazenda Tocantins",
+        "fazenda tocantins",
+        "unclassified",
+        "Unclassified"
+      ],
+      "latest_year": 1499,
+      "name": "Fazenda Tocantins",
+      "reason": "missing_entry",
+      "region": "wamz_purus_jurua_acre",
+      "sample_years": [
+        1299,
+        1499
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        2.18398,
+        -60.95753
+      ],
+      "country": "Brazil",
+      "earliest_year": 600,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fazenda do Cromildo-Brazil",
+      "known_aliases": [
+        "Fazenda do Cromildo",
+        "fazenda do cromildo"
+      ],
+      "latest_year": 1450,
+      "name": "Fazenda do Cromildo",
+      "reason": "missing_entry",
+      "region": "wamz_central_amazon_rio_negro",
+      "sample_years": [
+        600,
+        1100,
+        1450
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        0.58417,
+        -67.50113
+      ],
+      "country": "Brazil",
+      "earliest_year": -1368,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fortaleza Uaupes-Brazil",
+      "known_aliases": [
+        "Fortaleza Uaupes",
+        "fortaleza uaupes"
+      ],
+      "latest_year": -1068,
+      "name": "Fortaleza Uaupes",
+      "reason": "missing_entry",
+      "region": "wamz_central_amazon_rio_negro",
+      "sample_years": [
+        -1368,
+        -1068
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -11.95199,
+        -62.41388
+      ],
+      "country": "Brazil",
+      "earliest_year": 600,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Francisco Janoski-Brazil",
+      "known_aliases": [
+        "Francisco Janoski",
+        "francisco janoski"
+      ],
+      "latest_year": 1450,
+      "name": "Francisco Janoski",
+      "reason": "missing_entry",
+      "region": "wamz_llanos_de_moxos",
+      "sample_years": [
+        600,
+        1100,
+        1450
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -16.1859,
+        -59.3757
+      ],
+      "country": "Brazil",
+      "earliest_year": 600,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Furnas (Jardim das Pedras)-Brazil",
+      "known_aliases": [
+        "Furnas (Jardim das Pedras)",
+        "furnas"
+      ],
+      "latest_year": 1450,
+      "name": "Furnas (Jardim das Pedras)",
+      "reason": "missing_entry",
+      "region": "wamz_llanos_de_moxos",
+      "sample_years": [
+        600,
+        1100,
+        1450
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -14.41,
+        -60.09
+      ],
+      "country": "Brazil",
+      "earliest_year": 837,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Galera 1-Brazil",
+      "known_aliases": [
+        "Galera 1",
+        "galera 1",
+        "bacabal",
+        "Bacabal (Galera)"
+      ],
+      "latest_year": 1120,
+      "name": "Galera 1",
+      "reason": "missing_entry",
+      "region": "wamz_llanos_de_moxos",
+      "sample_years": [
+        837,
+        1120
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -10.4016,
+        -59.85258
+      ],
+      "country": "Brazil",
+      "earliest_year": 600,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Gente Boa-Brazil",
+      "known_aliases": [
+        "Gente Boa",
+        "gente boa"
+      ],
+      "latest_year": 1450,
+      "name": "Gente Boa",
+      "reason": "missing_entry",
+      "region": "wamz_madeira_guapore",
+      "sample_years": [
+        600,
+        1100,
+        1450
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -12.1332,
+        -62.02603
+      ],
+      "country": "Brazil",
+      "earliest_year": 600,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Gentil-Brazil_2",
+      "known_aliases": [
+        "Gentil",
+        "gentil"
+      ],
+      "latest_year": 1450,
+      "name": "Gentil",
+      "reason": "missing_entry",
+      "region": "wamz_llanos_de_moxos",
+      "sample_years": [
+        600,
+        1100,
+        1450
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -8.88777,
+        -67.25174
+      ],
+      "country": "Brazil",
+      "earliest_year": 400,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Geoglifo-Brazil",
+      "known_aliases": [
+        "Geoglifo",
+        "geoglifo"
+      ],
+      "latest_year": 1450,
+      "name": "Geoglifo",
+      "reason": "missing_entry",
+      "region": "wamz_purus_jurua_acre",
+      "sample_years": [
+        400,
+        1000,
+        1450
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -8.72005,
+        -67.17607
+      ],
+      "country": "Brazil",
+      "earliest_year": 400,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Geoglifo 3-Brazil",
+      "known_aliases": [
+        "Geoglifo",
+        "geoglifo"
+      ],
+      "latest_year": 1450,
+      "name": "Geoglifo",
+      "reason": "missing_entry",
+      "region": "wamz_purus_jurua_acre",
+      "sample_years": [
+        400,
+        1000,
+        1450
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -8.96646,
+        -67.24023
+      ],
+      "country": "Brazil",
+      "earliest_year": 400,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Geoglifo 1-Brazil",
+      "known_aliases": [
+        "Geoglifo 1",
+        "geoglifo 1"
+      ],
+      "latest_year": 1450,
+      "name": "Geoglifo 1",
+      "reason": "missing_entry",
+      "region": "wamz_purus_jurua_acre",
+      "sample_years": [
+        400,
+        1000,
+        1450
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -9.09662,
+        -67.24921
+      ],
+      "country": "Brazil",
+      "earliest_year": 400,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Geoglifo 2 (wamz_purus_jurua_acre)-Brazil",
+      "known_aliases": [
+        "Geoglifo 2",
+        "geoglifo 2"
+      ],
+      "latest_year": 1450,
+      "name": "Geoglifo 2",
+      "reason": "missing_entry",
+      "region": "wamz_purus_jurua_acre",
+      "sample_years": [
+        400,
+        1000,
+        1450
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -9.12722,
+        -67.28189
+      ],
+      "country": "Brazil",
+      "earliest_year": 400,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Geoglifo 3 (wamz_purus_jurua_acre)-Brazil",
+      "known_aliases": [
+        "Geoglifo 3",
+        "geoglifo 3"
+      ],
+      "latest_year": 1450,
+      "name": "Geoglifo 3",
+      "reason": "missing_entry",
+      "region": "wamz_purus_jurua_acre",
+      "sample_years": [
+        400,
+        1000,
+        1450
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -9.18706,
+        -67.28396
+      ],
+      "country": "Brazil",
+      "earliest_year": 400,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Geoglifo 7-Brazil",
+      "known_aliases": [
+        "Geoglifo 7",
+        "geoglifo 7"
+      ],
+      "latest_year": 1450,
+      "name": "Geoglifo 7",
+      "reason": "missing_entry",
+      "region": "wamz_purus_jurua_acre",
+      "sample_years": [
+        400,
+        1000,
+        1450
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -9.23201,
+        -67.28225
+      ],
+      "country": "Brazil",
+      "earliest_year": 400,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Geoglifo 8-Brazil",
+      "known_aliases": [
+        "Geoglifo 8",
+        "geoglifo 8"
+      ],
+      "latest_year": 1450,
+      "name": "Geoglifo 8",
+      "reason": "missing_entry",
+      "region": "wamz_purus_jurua_acre",
+      "sample_years": [
+        400,
+        1000,
+        1450
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -12.41672,
+        -64.42064
+      ],
+      "country": "Brazil",
+      "earliest_year": 400,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Geoglifo Aeroporto-Brazil",
+      "known_aliases": [
+        "Geoglifo Aeroporto",
+        "geoglifo aeroporto"
+      ],
+      "latest_year": 1450,
+      "name": "Geoglifo Aeroporto",
+      "reason": "missing_entry",
+      "region": "wamz_llanos_de_moxos",
+      "sample_years": [
+        400,
+        1000,
+        1450
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -9.49306,
+        -67.63333
+      ],
+      "country": "Brazil",
+      "earliest_year": 400,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Geoglifo Andirá 1-Brazil",
+      "known_aliases": [
+        "Geoglifo Andirá 1",
+        "geoglifo andirá 1"
+      ],
+      "latest_year": 1450,
+      "name": "Geoglifo Andirá 1",
+      "reason": "missing_entry",
+      "region": "wamz_purus_jurua_acre",
+      "sample_years": [
+        400,
+        1000,
+        1450
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    }
+  ]
+}

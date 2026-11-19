@@ -877,11 +877,13 @@ let { ViscountRuralSuitability } = global.ViscountRuralSuitability ? global : re
 
       let rk_mode = (bundle.config && bundle.config.kriging_config && bundle.config.kriging_config.residual_kriging_mode) ?
         bundle.config.kriging_config.residual_kriging_mode : "";
+      let residual_fields = null;
 
       if (bio_covs && rk_mode === "hu_hyde_residual") {
         let hu_out = ViscountHUResidualKriging.evaluateAllPeriodResidualSurfaces(bundle, bio_covs, active_periods, hab_cache);
 
         fields = hu_out.fields;
+        residual_fields = hu_out.residual_fields || null;
         wls_betas_by_period = hu_out.wls_betas_by_period;
       } else {
         for (let p = 0; p < n_active; p++) {
@@ -955,22 +957,13 @@ let { ViscountRuralSuitability } = global.ViscountRuralSuitability ? global : re
         meso_px: meso_px,
         r_squared_by_period: r_squared_by_period,
         raw_potentials: raw_potentials,
+        residual_fields: residual_fields,
         wls_betas_by_period: wls_betas_by_period,
         wls_covariates_active: Boolean(bio_covs)
       };
     }
 
 
-    /**
-     * Step F: Exports GeoPNG rasters and diagnostics JSON (`tau1`, `nugget_to_sill_ratio`, `r_squared`)
-     * consumable by `audit_kriging_sharpness.py`.
-     * @alias ViscountMaternKriging.F_exportBenchmarkRastersAndDiagnostics
-     *
-     * @param {Object} arg0_surface_bundle
-     * @param {Object} [arg1_options]
-     *
-     * @returns {Object}
-     */
     /**
      * Step F delegate: invokes `ViscountMaternVariogram.F_exportBenchmarkRastersAndDiagnostics`.
      * @alias ViscountMaternKriging.F_exportBenchmarkRastersAndDiagnostics

@@ -256,7 +256,7 @@
             for (let y = 0; y < z_pixels.length; y++) {
               let p_idx = z_pixels[y];
               let p4 = p_idx*4;
-              if (eco_png.data[p4 + 3] > 0) {
+              if (eco_png.data[p4 + 3] !== 0) {
                 let mod = eco_col_to_mod.get(`${eco_png.data[p4]},${eco_png.data[p4 + 1]},${eco_png.data[p4 + 2]}`);
                 if (mod !== undefined)
                   pixel_sub_weight.set(p_idx, Math.max(0.35, Math.min(3.0, Math.pow(mod, 0.35))));

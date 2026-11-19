@@ -135,6 +135,452 @@
 
 
   /**
+   * Caches active Viscount areal mask definitions and returns a flat pixel index to areal mask label mapping for a given year,
+   * falling back to ISO3 country geocodes outside active Viscount masks.
+   * @alias population_Stadester_rasters.getPixelToArealMaskMapping
+   *
+   * @param {number} arg0_year
+   * @param {Object} [arg1_options]
+   *
+   * @returns {Array<string|null>|null}
+   */
+  population_Stadester_rasters.getPixelToArealMaskMapping = function (arg0_year, arg1_options) {
+    //Convert from parameters
+    let year = parseInt(arg0_year);
+    let options = (arg1_options) ? arg1_options : {};
+
+    //Declare local instance variables
+    let best_dist_sq;
+    let config_dir = "";
+    let height = 2160;
+    let is_viscount_px;
+    let json5_lib = global.JSON5 || ((typeof require !== "undefined") ? require("json5") : null);
+    let mask_map;
+    let n_pixels = 4320*2160;
+    let pixel_to_geocode = population_Stadester_rasters.getPixelToGeocodeMapping();
+    let png_cls = (global.pngjs && global.pngjs.PNG) ? global.pngjs.PNG : (global.PNG || require("pngjs").PNG);
+    let projects;
+    let raw_land_mask = global._cached_stadester_raw_land_mask || null;
+    let root_dir = "";
+    let stamped_any = false;
+    let width = 4320;
+
+    //Guard clauses
+    if (!pixel_to_geocode) return null;
+    if (global._cached_stadester_areal_mask_year === year && global._cached_stadester_areal_mask_map && !options.viscount_config_dir && !options.project_root)
+      return global._cached_stadester_areal_mask_map;
+
+    //Function body
+    if (!global._cached_stadester_viscount_masks || options.viscount_config_dir || options.project_root) {
+      let candidate_dirs = [];
+
+      if (options.viscount_config_dir) candidate_dirs.push(options.viscount_config_dir);
+      if (typeof h3 !== "undefined") candidate_dirs.push(path.join(h3, "population_Substrata.viscount/config"));
+      candidate_dirs.push(path.resolve(__dirname, "../../3.data_transform/population_Substrata.viscount/config"));
+      for (let i = 0; i < candidate_dirs.length; i++) {
+        if (candidate_dirs[i] && fs.existsSync(candidate_dirs[i])) { config_dir = candidate_dirs[i]; break; }
+      }
+
+      if (options.project_root) {
+        root_dir = options.project_root;
+      } else if (config_dir) {
+        let up_root = path.resolve(config_dir, "../../../..");
+        root_dir = fs.existsSync(path.join(up_root, "histmap")) ? up_root : process.cwd();
+      } else {
+        root_dir = process.cwd();
+      }
+
+      let cached_list = [];
+
+      if (config_dir && fs.existsSync(config_dir) && json5_lib) {
+        let cfg_files = fs.readdirSync(config_dir).filter((arg0_f) => arg0_f.endsWith(".json5") || arg0_f.endsWith(".json"));
+        let descriptors = [];
+        let owner_z_grid = new Uint8Array(n_pixels);
+        let registry = (global.StadesterPartitionIO) ?
+          global.StadesterPartitionIO.loadPrecedenceRegistry(options.precedence_config_path) : { projects_by_key: {} };
+
+        for (let i = 0; i < cfg_files.length; i++) {
+          let abs_cfg = path.join(config_dir, cfg_files[i]);
+          try {
+            let raw = json5_lib.parse(fs.readFileSync(abs_cfg, "utf8"));
+            let proj_key = String(raw.key || "").toUpperCase();
+            let reg_proj = (registry.projects_by_key && registry.projects_by_key[proj_key]) ? registry.projects_by_key[proj_key] : {};
+
+            descriptors.push({
+              ...reg_proj,
+              ...raw,
+              key: proj_key,
+              order: Number(raw.order || reg_proj.order || 1),
+              z_priority: Number(raw.z_priority || reg_proj.z_priority || raw.order || reg_proj.order || 1)
+            });
+          } catch (e) {}
+        }
+        descriptors.sort((arg0_a, arg1_b) => (arg1_b.z_priority || arg1_b.order || 0) - (arg0_a.z_priority || arg0_a.order || 0));
+
+        for (let i = 0; i < descriptors.length; i++) {
+          let desc = descriptors[i];
+          let manifest_abs = desc.areal_masks_manifest ? path.resolve(root_dir, desc.areal_masks_manifest) : "";
+
+          if (!manifest_abs || !fs.existsSync(manifest_abs)) continue;
+          let is_polaris = (desc.pipeline_mode === "polaris_russia_delegate");
+          let manifest_obj = json5_lib.parse(fs.readFileSync(manifest_abs, "utf8"));
+          let proj_domain = new Uint8Array(n_pixels);
+          let proj_z = Number(desc.z_priority || desc.order || 1);
+          let sources = manifest_obj.substrata_sources || {};
+          let src_keys = Object.keys(sources);
+
+          for (let x = 0; x < src_keys.length; x++) {
+            let src = sources[src_keys[x]];
+            let dom_code = (src.domain_code !== undefined) ? src.domain_code : (x + 1);
+            let domain_mask_abs = src.domain_mask_png ? path.resolve(root_dir, src.domain_mask_png) : "";
+            let sample_yr = (src.sample_year !== undefined) ? src.sample_year : 1000;
+            let sample_path = path.join(root_dir, src.rasters_folder || "", `popc_${sample_yr}.png`);
+
+            if (domain_mask_abs && fs.existsSync(domain_mask_abs)) {
+              let dm_png = png_cls.sync.read(fs.readFileSync(domain_mask_abs));
+              for (let idx = 0; idx < n_pixels; idx++) {
+                if (proj_domain[idx] !== 0) continue;
+                let p4 = idx*4;
+                if (dm_png.data[p4 + 3] > 0 && (dm_png.data[p4] | dm_png.data[p4 + 1] | dm_png.data[p4 + 2]) !== 0)
+                  proj_domain[idx] = dom_code;
+              }
+              dm_png = null;
+            }
+            if (fs.existsSync(sample_path)) {
+              let s_png = png_cls.sync.read(fs.readFileSync(sample_path));
+              for (let idx = 0; idx < n_pixels; idx++) {
+                if (proj_domain[idx] !== 0) continue;
+                let p4 = idx*4;
+                if ((s_png.data[p4] | s_png.data[p4 + 1] | s_png.data[p4 + 2] | s_png.data[p4 + 3]) !== 0)
+                  proj_domain[idx] = dom_code;
+              }
+              s_png = null;
+            }
+          }
+
+          if (is_polaris && manifest_obj.macro_mask) {
+            let asc_path = path.join(root_dir, "histmap/1.data_raw/metadata_HYDE/general_files/sub_iso_cr.asc");
+            let is_rus_iso = new Uint8Array(n_pixels);
+            let m_png_abs = path.resolve(root_dir, manifest_obj.macro_mask.mask_path || "");
+
+            if (fs.existsSync(asc_path)) {
+              let asc_buf = fs.readFileSync(asc_path);
+              let buf_len = asc_buf.length;
+              let idx = 0;
+              let pos = 0;
+              let tok_count = 0;
+
+              while (pos < buf_len && idx < n_pixels) {
+                while (pos < buf_len && asc_buf[pos] <= 32) pos++;
+                if (pos >= buf_len) break;
+                if (tok_count < 12) {
+                  while (pos < buf_len && asc_buf[pos] > 32) pos++;
+                  tok_count++;
+                  continue;
+                }
+                let neg = (asc_buf[pos] === 45);
+                if (neg) pos++;
+                let int_val = 0;
+                while (pos < buf_len && asc_buf[pos] >= 48 && asc_buf[pos] <= 57) {
+                  int_val = int_val*10 + (asc_buf[pos] - 48);
+                  pos++;
+                }
+                if (pos < buf_len && asc_buf[pos] === 46) {
+                  pos++;
+                  if (pos < buf_len && asc_buf[pos] >= 53 && asc_buf[pos] <= 57) int_val++;
+                }
+                while (pos < buf_len && asc_buf[pos] > 32) pos++;
+                let v = neg ? -int_val : int_val;
+                if (v > 0) {
+                  let iso_num = Math.floor(v/1000);
+                  if (iso_num === 643 || iso_num === 999) is_rus_iso[idx] = 1;
+                }
+                idx++;
+              }
+              asc_buf = null;
+            }
+            if (fs.existsSync(m_png_abs)) {
+              let mm_png = png_cls.sync.read(fs.readFileSync(m_png_abs));
+              for (let idx = 0; idx < n_pixels; idx++) {
+                let p4 = idx*4;
+                if (mm_png.data[p4 + 3] === 0) {
+                  if (Math.floor(idx/width) <= 130 && proj_domain[idx] === 1) proj_domain[idx] = 0;
+                } else if (proj_domain[idx] === 0 && is_rus_iso[idx]) {
+                  proj_domain[idx] = 1;
+                }
+              }
+              mm_png = null;
+            }
+          }
+
+          let has_domain = false;
+          for (let idx = 0; idx < n_pixels; idx++) {
+            if (proj_domain[idx] > 0 && owner_z_grid[idx] === 0) {
+              owner_z_grid[idx] = proj_z;
+              has_domain = true;
+            }
+          }
+          if (!has_domain) continue;
+
+          let polaris_spec_mask = is_polaris ? new Int16Array(n_pixels).fill(-1) : null;
+          let polaris_spec_zone = is_polaris ? new Int16Array(n_pixels).fill(-1) : null;
+          let loadMaskGroup = function (arg0_list, arg1_polaris_spec) {
+            let list = Array.isArray(arg0_list) ? arg0_list : [];
+            let out = [];
+
+            for (let x = 0; x < list.length; x++) {
+              let meta = list[x];
+              let cfg_abs = path.resolve(root_dir, meta.json5_path || "");
+              let png_abs = path.resolve(root_dir, meta.mask_path || "");
+
+              if (!fs.existsSync(cfg_abs) || !fs.existsSync(png_abs)) continue;
+              let col_map = new Map();
+              let dom_code = (meta.domain_group === "belarus_ukraine") ? 2 : 1;
+              let e_idx = out.length;
+              let m_json = json5_lib.parse(fs.readFileSync(cfg_abs, "utf8"));
+              let m_png = png_cls.sync.read(fs.readFileSync(png_abs));
+              let r_keys = Object.keys(m_json.regions || {});
+              let zones = [];
+
+              for (let y = 0; y < r_keys.length; y++) {
+                let zc = m_json.regions[r_keys[y]];
+                let col = zc.colour || zc.color;
+                if (Array.isArray(col) && col.length >= 3) {
+                  col_map.set(`${col[0]},${col[1]},${col[2]}`, zones.length);
+                  zones.push({ domain: zc.domain || null, key: r_keys[y], pixels: [] });
+                }
+              }
+
+              for (let idx = 0; idx < n_pixels; idx++) {
+                if (proj_domain[idx] === 0 || owner_z_grid[idx] !== proj_z) continue;
+                if (arg1_polaris_spec && (proj_domain[idx] !== dom_code || polaris_spec_mask[idx] >= 0)) continue;
+                let p4 = idx*4;
+                if (m_png.data[p4 + 3] === 0) continue;
+                let r = m_png.data[p4], g = m_png.data[p4 + 1], b = m_png.data[p4 + 2];
+                if ((r | g | b) === 0) continue;
+                let z_idx = col_map.get(`${r},${g},${b}`);
+
+                if (z_idx !== undefined) {
+                  zones[z_idx].pixels.push(idx);
+                  if (arg1_polaris_spec) {
+                    polaris_spec_mask[idx] = e_idx;
+                    polaris_spec_zone[idx] = z_idx;
+                  }
+                }
+              }
+              m_png = null;
+              out.push({ domain: meta.domain || m_json.domain || null, id: meta.id || path.basename(cfg_abs, path.extname(cfg_abs)), zones: zones });
+            }
+            return out;
+          };
+
+          let macro_list = manifest_obj.macro_mask ? loadMaskGroup([manifest_obj.macro_mask], false) : [];
+          let nat_list = loadMaskGroup(manifest_obj.national_epoch_masks, false);
+          let spec_list = loadMaskGroup(manifest_obj.specialist_masks, is_polaris);
+
+          if (is_polaris && spec_list.length > 0) {
+            let bfs_dist = new Uint8Array(n_pixels).fill(255);
+            let bfs_q = [];
+            let s_head = 0;
+
+            for (let idx = 0; idx < n_pixels; idx++) {
+              if (proj_domain[idx] > 0 && owner_z_grid[idx] === proj_z && polaris_spec_mask[idx] >= 0) {
+                let lon = -180 + (((idx % width) + 0.5)/width)*360;
+
+                if (proj_domain[idx] === 2 || lon < 42.5) {
+                  bfs_dist[idx] = 0;
+                  bfs_q.push(idx);
+                }
+              }
+            }
+            while (s_head < bfs_q.length) {
+              let curr_idx = bfs_q[s_head++];
+              let d = bfs_dist[curr_idx];
+
+              if (d >= 120) continue;
+              let c = curr_idx % width;
+              let dom = proj_domain[curr_idx];
+              let nbrs = [
+                (Math.floor(curr_idx/width) > 0) ? curr_idx - width : -1,
+                (Math.floor(curr_idx/width) + 1 < height) ? curr_idx + width : -1,
+                (c > 0) ? curr_idx - 1 : -1,
+                (c + 1 < width) ? curr_idx + 1 : -1
+              ];
+              let sm = polaris_spec_mask[curr_idx];
+              let sz = polaris_spec_zone[curr_idx];
+
+              for (let x = 0; x < 4; x++) {
+                let n_idx = nbrs[x];
+
+                if (n_idx >= 0 && proj_domain[n_idx] === dom && owner_z_grid[n_idx] === proj_z && polaris_spec_mask[n_idx] < 0) {
+                  let n_lon = -180 + (((n_idx % width) + 0.5)/width)*360;
+
+                  if (dom === 2 || n_lon < 42.0) {
+                    polaris_spec_mask[n_idx] = sm;
+                    polaris_spec_zone[n_idx] = sz;
+                    bfs_dist[n_idx] = d + 1;
+                    spec_list[sm].zones[sz].pixels.push(n_idx);
+                    bfs_q.push(n_idx);
+                  }
+                }
+              }
+            }
+          }
+
+          let compactGroup = function (arg0_entries) {
+            for (let x = 0; x < arg0_entries.length; x++) {
+              let zones = arg0_entries[x].zones;
+
+              for (let y = 0; y < zones.length; y++)
+                zones[y].pixels = Int32Array.from(zones[y].pixels);
+            }
+            return arg0_entries;
+          };
+
+          cached_list.push({
+            key: desc.key,
+            macro_entry: compactGroup(macro_list)[0] || null,
+            national_epoch_entries: compactGroup(nat_list),
+            pipeline_mode: desc.pipeline_mode || "generic_viscount_mosaic",
+            specialist_entries: compactGroup(spec_list)
+          });
+        }
+      }
+
+      if (!options.viscount_config_dir && !options.project_root)
+        global._cached_stadester_viscount_masks = cached_list;
+      projects = cached_list;
+    } else {
+      projects = global._cached_stadester_viscount_masks;
+    }
+
+    if (!projects || projects.length === 0) return pixel_to_geocode;
+
+    let active_stamps = [];
+
+    for (let i = 0; i < projects.length; i++) {
+      let entries = [];
+      let proj = projects[i];
+
+      if (proj.pipeline_mode === "polaris_russia_delegate") {
+        if (proj.macro_entry && year <= 1900) entries.push(proj.macro_entry);
+        for (let x = 0; x < proj.specialist_entries.length; x++) {
+          let sp = proj.specialist_entries[x];
+
+          if (!sp.domain || (year >= sp.domain[0] && year <= sp.domain[1])) entries.push(sp);
+        }
+        if (year >= 1400) {
+          for (let x = 0; x < proj.national_epoch_entries.length; x++) {
+            let ne = proj.national_epoch_entries[x];
+
+            if (!ne.domain || (year >= ne.domain[0] && year <= ne.domain[1])) entries.push(ne);
+          }
+        }
+      } else {
+        let groups = [
+          proj.macro_entry ? [proj.macro_entry] : [],
+          proj.specialist_entries || [],
+          proj.national_epoch_entries || []
+        ];
+
+        for (let g = 0; g < groups.length; g++) {
+          for (let x = 0; x < groups[g].length; x++) {
+            let entry = groups[g][x];
+
+            if (!entry.domain || (year >= entry.domain[0] && year <= entry.domain[1]))
+              entries.push(entry);
+          }
+        }
+      }
+
+      for (let x = 0; x < entries.length; x++) {
+        let entry = entries[x];
+
+        for (let y = 0; y < entry.zones.length; y++) {
+          let zone = entry.zones[y];
+
+          if (zone.pixels.length === 0) continue;
+          if (zone.domain && (year < zone.domain[0] || year > zone.domain[1])) continue;
+          active_stamps.push({
+            label: `V:${proj.key}:${entry.id}:${zone.key}`,
+            pixels: zone.pixels
+          });
+        }
+      }
+    }
+
+    if (active_stamps.length === 0) return pixel_to_geocode;
+
+    is_viscount_px = new Uint8Array(n_pixels);
+    mask_map = pixel_to_geocode.slice();
+
+    for (let i = 0; i < active_stamps.length; i++) {
+      let lbl = active_stamps[i].label;
+      let px_arr = active_stamps[i].pixels;
+
+      for (let x = 0; x < px_arr.length; x++) {
+        let idx = px_arr[x];
+
+        mask_map[idx] = lbl;
+        is_viscount_px[idx] = 1;
+        stamped_any = true;
+      }
+    }
+
+    if (stamped_any) {
+      best_dist_sq = new Uint8Array(n_pixels).fill(255);
+
+      for (let i = 0; i < height; i++) {
+        let row_offset = i*width;
+
+        for (let x = 0; x < width; x++) {
+          let idx = row_offset + x;
+
+          if (is_viscount_px[idx] === 0) continue;
+          let left_v = is_viscount_px[row_offset + ((x + width - 1) % width)];
+          let right_v = is_viscount_px[row_offset + ((x + 1) % width)];
+          let up_v = (i > 0) ? is_viscount_px[idx - width] : 1;
+          let down_v = (i < height - 1) ? is_viscount_px[idx + width] : 1;
+
+          if (left_v && right_v && up_v && down_v) continue;
+          let lbl = mask_map[idx];
+
+          for (let y = -2; y <= 2; y++) {
+            let ny = i + y;
+
+            if (ny < 0 || ny >= height) continue;
+            let n_row = ny*width;
+
+            for (let z = -2; z <= 2; z++) {
+              if (y === 0 && z === 0) continue;
+              let nx = (x + z + width) % width;
+              let n_idx = n_row + nx;
+
+              if (is_viscount_px[n_idx] === 0 && (!raw_land_mask || raw_land_mask[n_idx] === 0)) {
+                let dist_sq = y*y + z*z;
+
+                if (dist_sq < best_dist_sq[n_idx]) {
+                  best_dist_sq[n_idx] = dist_sq;
+                  mask_map[n_idx] = lbl;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    if (!options.viscount_config_dir && !options.project_root) {
+      global._cached_stadester_areal_mask_year = year;
+      global._cached_stadester_areal_mask_map = mask_map;
+    }
+
+    //Return statement
+    return mask_map;
+  };
+
+
+  /**
    * Caches and returns a flat pixel index to ISO3 country code mapping.
    * @alias population_Stadester_rasters.getPixelToGeocodeMapping
    *
@@ -148,6 +594,7 @@
     let geocode_path;
     let land_map;
     let pixel_map;
+    let raw_land_mask;
     let rgb_to_iso3;
 
     //Guard clauses
@@ -183,6 +630,9 @@
     //Assign 2-pixel coastal fringe so harbour/island cities map to nearest land ISO3 geocode
     best_dist_sq = new Uint8Array(4320*2160);
     land_map = pixel_map.slice();
+    raw_land_mask = new Uint8Array(4320*2160);
+    for (let i = 0; i < 4320*2160; i++)
+      if (land_map[i]) raw_land_mask[i] = 1;
     best_dist_sq.fill(255);
     for (let i = 0; i < 2160; i++) {
       let row_offset = i*4320;
@@ -218,6 +668,7 @@
     }
 
     global._cached_stadester_pixel_to_geocode = pixel_map;
+    global._cached_stadester_raw_land_mask = raw_land_mask;
 
     //Return statement
     return pixel_map;
@@ -327,9 +778,9 @@
 
 
   /**
-   * Reconciles Rural and Total Population rasters using national dasymetric rural scaling in float32.
-   * Preserves exact urban city populations (`>= 5,000`) and sub-urban settlement populations (`< 5,000`) from `stadester`,
-   * anchoring `< 5,000` settlements inside the rural raster so no settlement gridcell ever has less population than the settlement itself.
+   * Reconciles Rural, Urban, and Total Population rasters using direct top-down areal scaling in float32.
+   * Sums combined `rural + urban` per areal mask (active Viscount mask or ISO3 country) and scales all pixels
+   * in the mask uniformly to satisfy the top-down substrata constraint without zeroing out rural pixels.
    * @alias population_Stadester_rasters.reconcileStadesterDemographics
    *
    * @param {number} arg0_year
@@ -343,26 +794,20 @@
     let options = (arg1_options) ? arg1_options : {};
 
     //Declare local instance variables
-    let country_raw_rur = {};
-    let country_scalar_r = {};
-    let country_scalar_u = {};
-    let country_sub = {};
-    let country_sub_urb = {};
-    let country_urb = {};
-    let fallback_scalar_r = 1;
-    let fallback_scalar_u = 1;
-    let global_raw_rur = 0;
-    let global_settled = 0;
+    let base_file_path = null;
+    let default_urb_folder = `${h2}/population_Stadester/stadester_urban_rasters/`;
+    let fallback_scalar = 1;
+    let global_comb = 0;
     let global_sub = 0;
-    let global_sub_urb = 0;
-    let global_urb = 0;
-    let min_rural_ratio = (options.min_rural_hinterland_ratio !== undefined) ?
-      options.min_rural_hinterland_ratio : 0.05;
-    let pixel_to_geocode = (options.pixel_to_geocode) ?
-      options.pixel_to_geocode : population_Stadester_rasters.getPixelToGeocodeMapping();
+    let mask_comb = {};
+    let mask_scalar = {};
+    let mask_sub = {};
+    let pixel_to_mask = (options.pixel_to_geocode) ?
+      options.pixel_to_geocode : population_Stadester_rasters.getPixelToArealMaskMapping(year, options);
     let pop_file_path = path.join(options.input_popc_folder || `${h2}/population_Stadester/stadester_population_rasters/`, `stadester_population_${year}.png`);
     let pop_folder = path.dirname(pop_file_path);
     let raw_rural_data = new Float32Array(4320*2160);
+    let raw_urban_data = new Float32Array(4320*2160);
     let rural_data = new Float32Array(4320*2160);
     let rural_file_path = path.join(options.input_rurc_folder || `${h2}/population_Stadester/stadester_rural_rasters/`, `stadester_rural_${year}.png`);
     let rural_folder = path.dirname(rural_file_path);
@@ -372,7 +817,7 @@
     let total_data = new Float32Array(4320*2160);
     let total_pixels = 4320*2160;
     let urban_data = new Float32Array(4320*2160);
-    let urban_file_path = path.join(options.input_urbc_folder || `${h2}/population_Stadester/stadester_urban_rasters/`, `stadester_urban_${year}.png`);
+    let urban_file_path = path.join(options.input_urbc_folder || default_urb_folder, `stadester_urban_${year}.png`);
     let urban_folder = path.dirname(urban_file_path);
     let urban_raster = null;
 
@@ -398,8 +843,16 @@
       substrata_raster = GeoPNG.loadNumberRasterImage(substrata_file_path, { format: "float32" });
     }
 
+    if (options.intermediate_base_folder) {
+      base_file_path = path.join(options.intermediate_base_folder, `stadester_base_${year}.png`);
+    } else if (!options.input_urbc_folder || path.resolve(options.input_urbc_folder) === path.resolve(default_urb_folder)) {
+      base_file_path = path.join(`${h2}/population_Stadester/stadester_base_rasters/`, `stadester_base_${year}.png`);
+    }
+
     if (options.urban_raster) {
       urban_raster = options.urban_raster;
+    } else if (base_file_path && fs.existsSync(base_file_path)) {
+      urban_raster = GeoPNG.loadNumberRasterImage(base_file_path, { format: "float32" });
     } else if (fs.existsSync(urban_file_path)) {
       urban_raster = GeoPNG.loadNumberRasterImage(urban_file_path, { format: "float32" });
     } else {
@@ -413,76 +866,66 @@
       options.sub_urban_data :
       population_Stadester_rasters.getSubUrbanSettlementsData(year, options);
 
-    //Pass 1: Accumulate Substrata target, Urban (5k+) ground truth, Sub-Urban (<5k) settlement ground truth, and Raw Rural hinterland per country
+    //Pass 1: Accumulate Substrata target, unscaled Urban (5k+), unscaled Rural (incl. <5k), and combined totals per areal mask
     for (let i = 0; i < total_pixels; i++) {
       let s = (substrata_raster && substrata_raster.data[i]) ? substrata_raster.data[i] : 0;
       let sub_u = (sub_urban_data && sub_urban_data[i]) ? sub_urban_data[i] : 0;
-      let u = (urban_raster && urban_raster.data[i]) ? urban_raster.data[i] : 0;
+      let u_raw = (urban_raster && urban_raster.data[i]) ? urban_raster.data[i] : 0;
+      let u = (u_raw >= 0.01) ? u_raw : 0;
       let settled = u + sub_u;
-      let rr = (s > settled) ? (s - settled) : ((s > 0 || settled > 0) ? Math.max(1e-4, ((s > 0) ? s : settled)*0.05) : 0);
+      let rr = sub_u + Math.max(0, s - settled);
+      let comb = rr + u;
+
       raw_rural_data[i] = rr;
+      raw_urban_data[i] = u;
 
+      global_comb += comb;
       global_sub += s;
-      global_urb += u;
-      global_sub_urb += sub_u;
-      global_raw_rur += rr;
 
-      if (pixel_to_geocode) {
-        let c = pixel_to_geocode[i];
-        if (c) {
-          country_sub[c] = (country_sub[c] || 0) + s;
-          country_urb[c] = (country_urb[c] || 0) + u;
-          country_sub_urb[c] = (country_sub_urb[c] || 0) + sub_u;
-          country_raw_rur[c] = (country_raw_rur[c] || 0) + rr;
+      if (pixel_to_mask) {
+        let m = pixel_to_mask[i];
+
+        if (m) {
+          mask_comb[m] = (mask_comb[m] || 0) + comb;
+          mask_sub[m] = (mask_sub[m] || 0) + s;
         }
       }
     }
 
-    //Compute per-country scalars
-    if (pixel_to_geocode) {
-      let all_countries = Object.keys(country_sub);
-      for (let i = 0; i < all_countries.length; i++) {
-        let c = all_countries[i];
-        let raw_r = country_raw_rur[c] || 0;
-        let s = country_sub[c];
-        let sub_u = country_sub_urb[c] || 0;
-        let u = country_urb[c] || 0;
-        let settled = u + sub_u;
+    //Compute uniform areal scalars per mask
+    fallback_scalar = (global_comb > 0 && global_sub > 0) ? (global_sub/global_comb) : 1;
+    if (pixel_to_mask) {
+      let all_masks = Object.keys(mask_comb);
 
-        if (settled < s) {
-          let target_r = s - settled;
-          country_scalar_r[c] = (raw_r > 0) ? (target_r/raw_r) : 0;
-          country_scalar_u[c] = 1;
+      for (let i = 0; i < all_masks.length; i++) {
+        let m = all_masks[i];
+        let c_sum = mask_comb[m] || 0;
+        let s_sum = mask_sub[m] || 0;
+
+        if (s_sum > 0 && c_sum > 0) {
+          mask_scalar[m] = s_sum/c_sum;
+        } else if (s_sum <= 0 && c_sum > 0) {
+          mask_scalar[m] = fallback_scalar;
         } else {
-          let target_r = Math.min(raw_r, settled*min_rural_ratio);
-          country_scalar_r[c] = (raw_r > 0) ? (target_r/raw_r) : 0;
-          country_scalar_u[c] = 1;
+          mask_scalar[m] = 1;
         }
       }
     }
 
-    global_settled = global_urb + global_sub_urb;
-    if (global_settled < global_sub) {
-      let fallback_target_r = global_sub - global_settled;
-      fallback_scalar_r = (global_raw_rur > 0) ? (fallback_target_r/global_raw_rur) : 1;
-      fallback_scalar_u = 1;
-    } else {
-      let fallback_target_r = Math.min(global_raw_rur, global_settled*min_rural_ratio);
-      fallback_scalar_r = (global_raw_rur > 0) ? (fallback_target_r/global_raw_rur) : 0;
-      fallback_scalar_u = 1;
-    }
-
-    //Pass 2: Apply scalars and construct strictly consistent Rural = SubU + Hinterland and Total = Urban + Rural
+    //Pass 2: Multiply both rural and urban pixels in each areal mask by its scalar so Rural + Urban matches top-down target
     for (let i = 0; i < total_pixels; i++) {
-      let c = pixel_to_geocode ? pixel_to_geocode[i] : null;
-      let sc_r = (c && country_scalar_r[c] !== undefined) ? country_scalar_r[c] : fallback_scalar_r;
-      let sc_u = (c && country_scalar_u[c] !== undefined) ? country_scalar_u[c] : fallback_scalar_u;
-      let sub_u = (sub_urban_data && sub_urban_data[i]) ? sub_urban_data[i] : 0;
-      let r = sub_u + raw_rural_data[i]*sc_r;
-      let u = (urban_raster && urban_raster.data[i]) ? urban_raster.data[i]*sc_u : 0;
+      let m = pixel_to_mask ? pixel_to_mask[i] : null;
+      let sc = (m && mask_scalar[m] !== undefined) ? mask_scalar[m] : fallback_scalar;
+      let r = raw_rural_data[i]*sc;
+      let u = raw_urban_data[i]*sc;
+
+      if (u > 0 && u < 0.01) {
+        r += u;
+        u = 0;
+      }
 
       rural_data[i] = (r >= 1e-6) ? r : 0;
-      urban_data[i] = (u >= 0.01) ? u : 0;
+      urban_data[i] = u;
       let tot = urban_data[i] + rural_data[i];
       total_data[i] = (tot >= 1e-6) ? tot : 0;
     }
@@ -511,6 +954,15 @@
       width: 4320,
       function: function (local_index) { return urban_data[local_index]; }
     });
+
+    raw_rural_data = null;
+    raw_urban_data = null;
+    rural_data = null;
+    sub_urban_data = null;
+    substrata_raster = null;
+    total_data = null;
+    urban_data = null;
+    urban_raster = null;
 
     console.log(`- Saved reconciled Stadestér Urban, Rural & Pop rasters for ${year}: Total=${pop_file_path}`);
 

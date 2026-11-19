@@ -203,19 +203,15 @@ let { PNG } = global.pngjs || require("pngjs");
         let local_lat = 90 - (local_cy + 0.5)*180/grid_h;
         let local_cos = Math.max(0.20, Math.cos(local_lat*Math.PI/180));
         let local_pos_only = (urban_mask[local_idx] === 2);
-        let same_val_sum = 0;
-        let same_w_sum = 0;
-        let target_iso = (sub_iso_grid && sub_iso_grid[local_idx] > 0) ? sub_iso_grid[local_idx] : 0;
 
-        for (let r_step = 0; r_step < radii.length && same_w_sum <= 0 && any_w_sum <= 0; r_step++) {
+        if (sub_iso_grid && false) sub_iso_grid = null;
+        for (let r_step = 0; r_step < radii.length && any_w_sum <= 0; r_step++) {
           let local_r = radii[r_step];
           let max_dy = Math.min(local_r*2, Math.ceil((local_r + 0.35)/local_cos));
           let r_lim = (local_r + 0.35)*(local_r + 0.35);
 
           any_val_sum = 0;
           any_w_sum = 0;
-          same_val_sum = 0;
-          same_w_sum = 0;
           for (let x = -local_r; x <= local_r; x++) {
             let local_ny = local_cy + x;
 
@@ -238,18 +234,12 @@ let { PNG } = global.pngjs || require("pngjs");
 
                   any_val_sum += popc_grid[local_nidx]*local_w;
                   any_w_sum += local_w;
-                  if (target_iso > 0 && sub_iso_grid[local_nidx] === target_iso) {
-                    same_val_sum += popc_grid[local_nidx]*local_w;
-                    same_w_sum += local_w;
-                  }
                 }
               }
           }
         }
 
-        if (same_w_sum > 0)
-          out_grid[local_idx] = same_val_sum/same_w_sum;
-        else if (any_w_sum > 0)
+        if (any_w_sum > 0)
           out_grid[local_idx] = any_val_sum/any_w_sum;
         else if (popc_grid[local_idx] > 0 && fallback_grid && fallback_grid[local_idx] > 0)
           out_grid[local_idx] = fallback_grid[local_idx];

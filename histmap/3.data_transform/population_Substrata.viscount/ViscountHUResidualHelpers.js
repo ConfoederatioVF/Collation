@@ -13,7 +13,9 @@ let { ViscountUrbanMask } = global.ViscountUrbanMask ? global : require("./Visco
    */
   global.ViscountHUResidualHelpers = class {
     /**
-     * Applies smooth circular-Gaussian urban-core capping (`max_mult * ring_mean`) for pre-industrial horizons.
+     * Applies smooth circular-Gaussian urban-core capping (`max_mult * ring_mean`) on both areal density and
+     * raw cell population for pre-industrial horizons, normalising over clean `uopp <= 2.0` rural cells across
+     * metro belts (`Boston-NYC`, Narragansett Bay, Cape Cod).
      * @alias ViscountHUResidualHelpers.capUrbanCoreSmooth
      */
     static capUrbanCoreSmooth (arg0_mask_data, arg1_field, arg2_uopp_valid, arg3_max_mult) {
@@ -21,27 +23,94 @@ let { ViscountUrbanMask } = global.ViscountUrbanMask ? global : require("./Visco
       let mask_data = arg0_mask_data;
       let field = arg1_field;
       let uopp = arg2_uopp_valid;
-      let max_mult = (arg3_max_mult !== undefined) ? arg3_max_mult : 1.25;
+      let max_mult = (arg3_max_mult !== undefined) ? arg3_max_mult : 0.85;
 
       //Guard clauses
       if (!mask_data || !field || !uopp) return;
 
       //Declare local instance variables
+      let cell_area = mask_data.cell_land_area;
       let n_valid = mask_data.valid_cell_count;
-      let rural_only = new Float32Array(n_valid);
+      let rural_dens_in = new Float32Array(n_valid);
+      let rural_pop_in = new Float32Array(n_valid);
+      let rural_wt_in = new Float32Array(n_valid);
 
       //Function body
-      for (let i = 0; i < n_valid; i++)
-        if (field[i] > 0 && uopp[i] <= 4.0) rural_only[i] = field[i];
-      let ring_mean = this.smoothGaussianGrid(mask_data, rural_only, 4, 3, null, true);
+      for (let i = 0; i < n_valid; i++) {
+        let local_a = (cell_area && cell_area[i] > 1.0) ? cell_area[i] : 1.0;
+
+        if (field[i] > 0 && uopp[i] <= 2.0) {
+          rural_dens_in[i] = field[i]/local_a;
+          rural_pop_in[i] = field[i];
+          rural_wt_in[i] = 1.0;
+        }
+      }
+      let r_dens = this.smoothGaussianGrid(mask_data, rural_dens_in, 7, 3, null, false);
+      let r_pop = this.smoothGaussianGrid(mask_data, rural_pop_in, 7, 3, null, false);
+      let r_wt = this.smoothGaussianGrid(mask_data, rural_wt_in, 7, 3, null, false);
 
       for (let i = 0; i < n_valid; i++) {
-        if (field[i] <= 0 || uopp[i] <= 5.0 || ring_mean[i] <= 0) continue;
-        let t_ramp = Math.max(0, Math.min(1, (uopp[i] - 5.0)/7.0));
-        let cap_v = ring_mean[i]*max_mult;
+        if (field[i] <= 0 || uopp[i] <= 2.0 || r_wt[i] <= 1e-4) continue;
+        let local_a = (cell_area && cell_area[i] > 1.0) ? cell_area[i] : 1.0;
+        let cap_d = (r_dens[i]/r_wt[i])*local_a*max_mult;
+        let cap_p = (r_pop[i]/r_wt[i])*max_mult;
+        let cap_v = Math.min(cap_d, cap_p);
+        let t_ramp = Math.max(0, Math.min(1, (uopp[i] - 2.0)/4.5));
 
-        if (field[i] > cap_v)
-          field[i] = field[i]*(1 - t_ramp) + cap_v*t_ramp;
+        if (cap_v > 0 && field[i] > cap_v)
+          field[i] = field[i]*(1.0 - t_ramp) + cap_v*t_ramp;
+      }
+    }
+
+
+    /**
+     * Fills isolated zero-pinholes on eligible valid land cells surrounded by positive Moore neighbours.
+     * @alias ViscountHUResidualHelpers.closeZeroPinholes
+     */
+    static closeZeroPinholes (arg0_mask_data, arg1_field, arg2_eligible_mask, arg3_min_nbrs, arg4_scale, arg5_passes, arg6_floor) {
+      let mask_data = arg0_mask_data;
+      let field = arg1_field;
+      let eligible = arg2_eligible_mask;
+      let min_nbrs = (arg3_min_nbrs !== undefined) ? arg3_min_nbrs : 5;
+      let scale = (arg4_scale !== undefined) ? arg4_scale : 0.45;
+      let passes = (arg5_passes !== undefined) ? arg5_passes : 2;
+      let min_floor = (arg6_floor !== undefined) ? arg6_floor : 0;
+      let h = mask_data.grid_height;
+      let n_valid = mask_data.valid_cell_count;
+      let p2v = mask_data.pixel_to_valid_idx;
+      let v_idx = mask_data.valid_indices;
+      let w = mask_data.grid_width;
+
+      for (let p = 0; p < passes; p++) {
+        let updates = [];
+
+        for (let i = 0; i < n_valid; i++) {
+          if (field[i] > 0 || (eligible && eligible[i] === 0)) continue;
+          let g = v_idx[i];
+          let cx = g % w;
+          let cy = Math.floor(g/w);
+          let cnt = 0;
+          let sum = 0;
+
+          for (let dy = -1; dy <= 1; dy++) {
+            let nr = cy + dy;
+
+            if (nr < 0 || nr >= h) continue;
+            for (let dx = -1; dx <= 1; dx++) {
+              if (dx === 0 && dy === 0) continue;
+              let nv = p2v[nr*w + ((cx + dx + w) % w)];
+
+              if (nv >= 0 && field[nv] > 0) {
+                cnt++;
+                sum += field[nv];
+              }
+            }
+          }
+          if (cnt >= min_nbrs)
+            updates.push([i, Math.max(min_floor, scale*(sum/cnt))]);
+        }
+        for (let u = 0; u < updates.length; u++)
+          field[updates[u][0]] = updates[u][1];
       }
     }
 
@@ -119,22 +188,34 @@ let { ViscountUrbanMask } = global.ViscountUrbanMask ? global : require("./Visco
       //Function body
       let hyde_rur_grid = fs.existsSync(hyde_rur_path) ?
         this.readCachedGlobalFloat(hyde_rur_path, total_px, cache) : null;
+      let popc_masked = (year < 1975) ?
+        ViscountUrbanMask.loadUrbanMaskedHYDEPopcRaster(mask_data, year, cache, config) : null;
       let hyde_dens = new Float32Array(n_valid);
 
-      if (hyde_rur_grid) {
+      if (hyde_rur_grid || popc_masked) {
         for (let i = 0; i < n_valid; i++) {
           if (perm_ice[i] <= 0.05) continue;
           let gidx = valid_indices[i];
+          let r_raw = hyde_rur_grid ? hyde_rur_grid[gidx] : 0;
 
-          hyde_dens[i] = Math.max(0, hyde_rur_grid[gidx])/Math.max(1.0, cell_area[i]);
+          if (popc_masked && popc_masked[i] > 0 && (r_raw <= 0 || (uopp && uopp[i] > 3.5 && r_raw < 0.45*popc_masked[i])))
+            r_raw = popc_masked[i];
+          hyde_dens[i] = Math.max(0, r_raw)/Math.max(1.0, cell_area[i]);
         }
-        if (year < 1850 && n_valid >= 2000 && bio_covs.sub_iso_valid)
-          hyde_dens = this.removeSubIsoCliffs(mask_data, hyde_dens, bio_covs.sub_iso_valid, 0.005, 5);
+        if (year <= 1890 && n_valid >= 2000 && bio_covs.sub_iso_valid) {
+          if (year > 1870)
+            hyde_dens = this.removeSubIsoCliffs(mask_data, hyde_dens, bio_covs.sub_iso_valid, 0.005, 4, 0.02, 2.5);
+          else
+            hyde_dens = this.removeSubIsoCliffs(mask_data, hyde_dens, bio_covs.sub_iso_valid, 0.005, 8, 0.06);
+        }
       }
 
-      if (year <= 1850) {
-        for (let i = 0; i < n_valid; i++)
-          out_rur[i] = perm_ice[i]*hyde_dens[i]*cell_area[i];
+      let h_pop_arr = new Float32Array(n_valid);
+
+      for (let i = 0; i < n_valid; i++)
+        h_pop_arr[i] = perm_ice[i]*hyde_dens[i]*cell_area[i];
+      if (year <= 1780) {
+        for (let i = 0; i < n_valid; i++) out_rur[i] = h_pop_arr[i];
 
         //Return statement
         return out_rur;
@@ -179,13 +260,30 @@ let { ViscountUrbanMask } = global.ViscountUrbanMask ? global : require("./Visco
           ghsl_rur[i] = perm_ice[i]*Math.max(0, clean_ghsl[valid_indices[i]]);
       }
 
-      let w_sat = (year >= 1975) ? 1.0 : Math.pow(Math.max(0, Math.min(1, (year - 1850)/125.0)), 1.15);
+      let macro_rad = (year > 1870 && year <= 1890) ? 6 : 12;
+      let macro_pass = (year > 1870 && year <= 1890) ? 2 : 3;
+      let g_macro = (ghs_pop_grid && year <= 1890) ?
+        this.smoothGaussianGrid(mask_data, ghsl_rur, macro_rad, macro_pass, null, false) : null;
+      let h_macro = (ghs_pop_grid && year <= 1890) ?
+        this.smoothGaussianGrid(mask_data, h_pop_arr, macro_rad, macro_pass, null, false) : null;
+      let w_sat = 0.0;
 
-      if (!ghs_pop_grid) w_sat = 0.0;
+      if (ghs_pop_grid) {
+        if (year >= 1975) w_sat = 1.0;
+        else if (year <= 1850) w_sat = 0.18*(year - 1780)/70.0;
+        else w_sat = 0.18 + 0.82*Math.pow((year - 1850)/125.0, 1.15);
+      }
       for (let i = 0; i < n_valid; i++) {
-        let h_pop = perm_ice[i]*hyde_dens[i]*cell_area[i];
+        let h_pop = h_pop_arr[i];
+
+        if (h_pop <= 0 && year < 1900) {
+          out_rur[i] = 0;
+          continue;
+        }
         let g_pop = ghsl_rur[i];
 
+        if (year <= 1890 && g_macro && h_macro)
+          g_pop = (g_macro[i] > 1e-4 && h_macro[i] > 0) ? (ghsl_rur[i]*(h_macro[i]/g_macro[i])) : h_pop;
         if (w_sat >= 0.999) {
           out_rur[i] = g_pop;
         } else if (h_pop > 0 && g_pop > 0) {
@@ -383,6 +481,107 @@ let { ViscountUrbanMask } = global.ViscountUrbanMask ? global : require("./Visco
 
 
     /**
+     * Computes cached 8-neighbour chamfer distance in pixels from valid cells to the nearest `sub_iso` border.
+     * @alias ViscountHUResidualHelpers.getOrComputeSubIsoBorderDist
+     *
+     * @param {Object} arg0_mask_data
+     * @param {Uint16Array|Uint32Array|Int32Array} arg1_sub_iso
+     *
+     * @returns {Float32Array}
+     */
+    static getOrComputeSubIsoBorderDist (arg0_mask_data, arg1_sub_iso) {
+      //Convert from parameters
+      let mask_data = arg0_mask_data;
+      let sub_iso = arg1_sub_iso;
+
+      //Guard clauses
+      if (!mask_data || !sub_iso) return null;
+      if (mask_data._sub_iso_border_dist && mask_data._sub_iso_border_dist.length === mask_data.valid_cell_count)
+        return mask_data._sub_iso_border_dist;
+
+      //Declare local instance variables
+      let buckets = [];
+      let d_max = 72;
+      let h = mask_data.grid_height;
+      let n_valid = mask_data.valid_cell_count;
+      let p2v = mask_data.pixel_to_valid_idx;
+      let tent = new Uint8Array(n_valid).fill(d_max);
+      let v_idx = mask_data.valid_indices;
+      let w = mask_data.grid_width;
+
+      //Function body
+      for (let d = 0; d < d_max; d++) buckets.push([]);
+      for (let i = 0; i < n_valid; i++) {
+        let pid = sub_iso[i];
+
+        if (pid <= 0) continue;
+        let g = v_idx[i];
+        let cx = g % w;
+        let cy = Math.floor(g/w);
+        let is_border = false;
+        let nbs = [
+          p2v[cy*w + ((cx + w - 1) % w)],
+          p2v[cy*w + ((cx + 1) % w)],
+          (cy > 0) ? p2v[(cy - 1)*w + cx] : -1,
+          (cy + 1 < h) ? p2v[(cy + 1)*w + cx] : -1
+        ];
+
+        for (let k = 0; k < 4; k++) {
+          let nv = nbs[k];
+
+          if (nv >= 0 && sub_iso[nv] > 0 && sub_iso[nv] !== pid) {
+            is_border = true;
+            break;
+          }
+        }
+        if (is_border) {
+          tent[i] = 0;
+          buckets[0].push(i);
+        }
+      }
+
+      for (let d = 0; d < d_max; d++) {
+        let q = buckets[d];
+
+        for (let q_i = 0; q_i < q.length; q_i++) {
+          let cur = q[q_i];
+
+          if (d > tent[cur]) continue;
+          let g = v_idx[cur];
+          let cx = g % w;
+          let cy = Math.floor(g/w);
+
+          for (let dy = -1; dy <= 1; dy++) {
+            let nr = cy + dy;
+
+            if (nr < 0 || nr >= h) continue;
+            for (let dx = -1; dx <= 1; dx++) {
+              if (dx === 0 && dy === 0) continue;
+              let nv = p2v[nr*w + ((cx + dx + w) % w)];
+
+              if (nv < 0 || sub_iso[nv] <= 0) continue;
+              let nd = d + ((dx === 0 || dy === 0) ? 3 : 4);
+
+              if (nd < d_max && nd < tent[nv]) {
+                tent[nv] = nd;
+                buckets[nd].push(nv);
+              }
+            }
+          }
+        }
+      }
+
+      let dist = new Float32Array(n_valid);
+
+      for (let i = 0; i < n_valid; i++) dist[i] = tent[i]/3.0;
+      mask_data._sub_iso_border_dist = dist;
+
+      //Return statement
+      return dist;
+    }
+
+
+    /**
      * Interpolates a sorted `[[year, value], ...]` series cleanly with endpoint taper across `tail_years`.
      * @alias ViscountHUResidualHelpers.interpolateSeries
      */
@@ -435,7 +634,10 @@ let { ViscountUrbanMask } = global.ViscountUrbanMask ? global : require("./Visco
       if (arg2_cache && arg2_cache.has(ckey)) return arg2_cache.get(ckey);
       let arr = ViscountUrbanMask.readGlobalFloat32Raster(arg0_path, arg1_total_px);
 
-      if (arg2_cache) arg2_cache.set(ckey, arr);
+      if (arg2_cache) {
+        this.trimRasterCache(arg2_cache, 20, 14);
+        arg2_cache.set(ckey, arr);
+      }
 
       //Return statement
       return arr;
@@ -452,7 +654,10 @@ let { ViscountUrbanMask } = global.ViscountUrbanMask ? global : require("./Visco
       if (arg2_cache && arg2_cache.has(ckey)) return arg2_cache.get(ckey);
       let arr = ViscountUrbanMask.readGlobalUint32Raster(arg0_path, arg1_total_px);
 
-      if (arg2_cache) arg2_cache.set(ckey, arr);
+      if (arg2_cache) {
+        this.trimRasterCache(arg2_cache, 20, 14);
+        arg2_cache.set(ckey, arr);
+      }
 
       //Return statement
       return arr;
@@ -460,29 +665,37 @@ let { ViscountUrbanMask } = global.ViscountUrbanMask ? global : require("./Visco
 
 
     /**
-     * Removes straight `sub_iso` state/province cliffs using log-space local-vs-global Gaussian decomposition
-     * whilst preserving 100% of macro regional carrying capacity and 5-arcminute local terrain detail.
+     * Removes straight `sub_iso` state/province cliffs using isotropic cross-border Gaussian smoothing
+     * feathered by chamfer distance from internal borders (`w_b = 1,0` right on every border) without
+     * subtracting state interiors, preventing inverted border steps and urban-inpaint tier spikes.
      * @alias ViscountHUResidualHelpers.removeSubIsoCliffs
      */
-    static removeSubIsoCliffs (arg0_mask_data, arg1_field, arg2_sub_iso, arg3_eps, arg4_rad_px) {
+    static removeSubIsoCliffs (arg0_mask_data, arg1_field, arg2_sub_iso, arg3_eps, arg4_rad_px, arg5_interior_weight, arg6_border_sigma) {
+      let border_sigma = (arg6_border_sigma !== undefined) ? arg6_border_sigma : 6.0;
       let mask_data = arg0_mask_data;
       let field = arg1_field;
       let sub_iso = arg2_sub_iso;
-      let eps = (arg3_eps !== undefined) ? arg3_eps : 0.004;
-      let rad_px = (arg4_rad_px !== undefined) ? arg4_rad_px : 6;
+      let eps_cap = (arg3_eps !== undefined) ? arg3_eps : 0.004;
+      let rad_px = (arg4_rad_px !== undefined) ? arg4_rad_px : 14;
+      let w_int_base = (arg5_interior_weight !== undefined) ? arg5_interior_weight : 0.08;
       let n_valid = mask_data.valid_cell_count;
       let log_f = new Float32Array(n_valid);
       let out = new Float32Array(n_valid);
-      let has_val = false;
+      let pos_cnt = 0;
+      let pos_sum = 0;
 
       for (let i = 0; i < n_valid; i++) {
         if (field[i] > 0) {
-          log_f[i] = Math.log(field[i] + eps);
-          has_val = true;
+          pos_sum += field[i];
+          pos_cnt++;
         }
       }
-      if (!has_val) return field;
-      let l_in = this.smoothGaussianGrid(mask_data, log_f, rad_px, 4, sub_iso, false, field);
+      if (pos_cnt === 0) return field;
+      let dist_b = this.getOrComputeSubIsoBorderDist(mask_data, sub_iso);
+      let eps_eff = Math.max(1e-5, Math.min(eps_cap, 0.06*(pos_sum/pos_cnt)));
+
+      for (let i = 0; i < n_valid; i++)
+        if (field[i] > 0) log_f[i] = Math.log(field[i] + eps_eff);
       let l_iso = this.smoothGaussianGrid(mask_data, log_f, rad_px, 4, null, false, field);
 
       for (let i = 0; i < n_valid; i++) {
@@ -490,9 +703,11 @@ let { ViscountUrbanMask } = global.ViscountUrbanMask ? global : require("./Visco
           out[i] = 0;
           continue;
         }
-        let l_corr = l_iso[i] + 0.85*(log_f[i] - l_in[i]);
+        let d_b = dist_b ? dist_b[i] : 24.0;
+        let w_b = w_int_base + (1.0 - w_int_base)*Math.exp(-(d_b*d_b)/(2.0*border_sigma*border_sigma));
+        let l_corr = w_b*l_iso[i] + (1.0 - w_b)*log_f[i];
 
-        out[i] = Math.max(0, Math.exp(Math.max(-10, Math.min(12, l_corr))) - eps);
+        out[i] = Math.max(0, Math.exp(Math.max(-14, Math.min(12, l_corr))) - eps_eff);
       }
 
       //Return statement
@@ -603,6 +818,119 @@ let { ViscountUrbanMask } = global.ViscountUrbanMask ? global : require("./Visco
 
       //Return statement
       return cur;
+    }
+
+
+    /**
+     * Solves shrinkage-weighted signed residual dual weights (`v_vec`) around `prior_dens` via sparse Gauss-Seidel.
+     * @alias ViscountHUResidualHelpers.solveResidualDualWeights
+     */
+    static solveResidualDualWeights (arg0_kriging_bundle, arg1_prior_bundle, arg2_z_obs, arg3_s_obs) {
+      //Convert from parameters
+      let bundle = arg0_kriging_bundle;
+      let prior_bundle = arg1_prior_bundle;
+      let z_obs = arg2_z_obs;
+      let s_obs = arg3_s_obs;
+
+      //Declare local instance variables
+      let cell_area = bundle.mask_data.cell_land_area;
+      let cell_obs = bundle.obs_bundle.cell_nearest_obs;
+      let mask_data = bundle.mask_data;
+      let n_obs = bundle.obs_bundle.obs_count;
+      let n_valid = mask_data.valid_cell_count;
+      let obs_list = bundle.obs_bundle.obs_list;
+      let perm_ice = (bundle._bio_covs && bundle._bio_covs.perm_ice) ? bundle._bio_covs.perm_ice : null;
+      let prior_dens = prior_bundle.prior_dens;
+      let r_area = new Float64Array(n_obs);
+      let r_prior_sum = new Float64Array(n_obs);
+      let sp_ctx = this.getOrBuildSparseMaternMatrix(bundle);
+
+      //Function body
+      for (let i = 0; i < n_valid; i++) {
+        let o = cell_obs[i];
+
+        if (o < 0 || o >= n_obs || prior_dens[i] <= 0) continue;
+        let a = cell_area[i]*(perm_ice ? perm_ice[i] : 1.0);
+
+        if (a <= 0) continue;
+        r_area[o] += a;
+        r_prior_sum[o] += a*prior_dens[i];
+      }
+
+      let obs_prior_z = new Float64Array(n_obs);
+      let p_z_sum = 0;
+      let z_o_sum = 0;
+
+      for (let o = 0; o < n_obs; o++) {
+        if (obs_list[o].is_frontier_buffer || r_area[o] <= 0) continue;
+        let pz = Math.sqrt(Math.max(1e-7, r_prior_sum[o]/r_area[o]));
+
+        obs_prior_z[o] = pz;
+        p_z_sum += r_area[o]*pz;
+        z_o_sum += r_area[o]*z_obs[o];
+      }
+      let scale_p2z = (p_z_sum > 1e-8) ? (z_o_sum/p_z_sum) : 1.0;
+
+      for (let o = 0; o < n_obs; o++) {
+        if (r_area[o] > 0)
+          obs_prior_z[o] = Math.sqrt(Math.max(1e-7, r_prior_sum[o]/r_area[o]))*scale_p2z;
+      }
+
+      let delta_z = Math.max(0.015, 0.12*(z_o_sum/Math.max(1, n_obs)));
+      let r_vec = new Float64Array(n_obs);
+
+      for (let o = 0; o < n_obs; o++) {
+        if (r_area[o] <= 0) continue;
+        let eff_s = Math.max(0, (s_obs && Number.isFinite(s_obs[o])) ? s_obs[o] : 0);
+
+        if (obs_list[o].has_documented_settlement) eff_s = Math.max(eff_s, 18.0);
+        if (eff_s <= 0) continue;
+        let shrink = eff_s/(eff_s + 3.0);
+        let lr = Math.log((z_obs[o] + delta_z)/(obs_prior_z[o] + delta_z));
+
+        r_vec[o] = shrink*Math.max(-1.25, Math.min(1.45, lr));
+      }
+
+      let diag = sp_ctx.diag;
+      let n_nbr = sp_ctx.nbr_idx;
+      let n_val = sp_ctx.nbr_val;
+      let v_vec = new Float64Array(n_obs);
+
+      for (let o = 0; o < n_obs; o++) v_vec[o] = r_vec[o]/diag[o];
+      for (let iter = 0; iter < 80; iter++) {
+        for (let o = 0; o < n_obs; o++) {
+          let idxs = n_nbr[o];
+          let rhs = r_vec[o];
+          let vals = n_val[o];
+
+          for (let k = 0; k < idxs.length; k++)
+            rhs -= vals[k]*v_vec[idxs[k]];
+          v_vec[o] = rhs/diag[o];
+        }
+      }
+
+      //Return statement
+      return v_vec;
+    }
+
+
+    /**
+     * Evicts oldest transient raster buffers from the shared cache whilst preserving `__modern_urban_mask__`.
+     * @alias ViscountHUResidualHelpers.trimRasterCache
+     */
+    static trimRasterCache (arg0_cache, arg1_max_size, arg2_target_size) {
+      let cache = arg0_cache;
+      let max_size = (arg1_max_size !== undefined) ? arg1_max_size : 20;
+      let target_size = (arg2_target_size !== undefined) ? arg2_target_size : 14;
+
+      if (!cache || cache.size <= max_size) return;
+      let keys = Array.from(cache.keys());
+
+      for (let i = 0; i < keys.length; i++) {
+        if (cache.size <= target_size) break;
+        if (keys[i] !== "__modern_urban_mask__")
+          cache.delete(keys[i]);
+      }
     }
   };
 }

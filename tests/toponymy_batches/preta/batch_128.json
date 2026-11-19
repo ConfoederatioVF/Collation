@@ -1,0 +1,914 @@
+{
+  "batch_index": 128,
+  "count": 30,
+  "project": "PRETA",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        -20.09,
+        -50.9491
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Santa Clara d'Oeste-Brazil",
+      "known_aliases": [
+        "Santa Clara d'Oeste",
+        "santa clara d'oeste",
+        "Santa Clara d'Oeste (SP)"
+      ],
+      "latest_year": 2026,
+      "name": "Santa Clara d'Oeste",
+      "reason": "missing_entry",
+      "region": "bra_mato_grosso_do_sul",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -20.09389,
+        -50.92639
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Santa Clara d'Oeste (Mato Grosso do Sul)-Brazil",
+      "known_aliases": [
+        "Santa Clara d'Oeste",
+        "santa clara d'oeste"
+      ],
+      "latest_year": 2026,
+      "name": "Santa Clara d'Oeste",
+      "reason": "missing_entry",
+      "region": "bra_mato_grosso_do_sul",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -29.46889,
+        -52.0875
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Santa Clara do Sul-Brazil",
+      "known_aliases": [
+        "Santa Clara do Sul",
+        "santa clara do sul",
+        "inhuvera",
+        "inhuverá",
+        "santa clara",
+        "Inhuvera",
+        "Inhuverá",
+        "Santa Clara"
+      ],
+      "latest_year": 2026,
+      "name": "Santa Clara do Sul",
+      "reason": "missing_entry",
+      "region": "bra_rio_grande_do_sul",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -8.24153,
+        -40.3434
+      ],
+      "country": "Brazil",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Santa Cruz (PE)-Brazil",
+      "known_aliases": [
+        "Santa Cruz",
+        "santa cruz",
+        "Santa Cruz (PE)"
+      ],
+      "latest_year": 2026,
+      "name": "Santa Cruz",
+      "reason": "missing_entry",
+      "region": "bra_pernambuco",
+      "sample_years": [
+        1950,
+        1980,
+        2010,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -6.5237,
+        -38.0617
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Santa Cruz (PB)-Brazil",
+      "known_aliases": [
+        "Santa Cruz",
+        "santa cruz",
+        "Santa Cruz (PB)"
+      ],
+      "latest_year": 2026,
+      "name": "Santa Cruz",
+      "reason": "missing_entry",
+      "region": "bra_paraiba",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -16.2825,
+        -39.0295
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Santa Cruz Cabrália-Brazil",
+      "known_aliases": [
+        "Santa Cruz Cabrália",
+        "santa cruz cabrália",
+        "Santa Cruz Cabrália (BA)"
+      ],
+      "latest_year": 2026,
+      "name": "Santa Cruz Cabrália",
+      "reason": "missing_entry",
+      "region": "bra_bahia",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -10.15556,
+        -52.39444
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Santa Cruz Do Xingu-Brazil",
+      "known_aliases": [
+        "Santa Cruz Do Xingu",
+        "santa cruz do xingu"
+      ],
+      "latest_year": 2026,
+      "name": "Santa Cruz Do Xingu",
+      "reason": "missing_entry",
+      "region": "bra_mato_grosso",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -7.82056,
+        -38.15278
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Santa Cruz da Baixa Verde-Brazil",
+      "known_aliases": [
+        "Santa Cruz da Baixa Verde",
+        "santa cruz da baixa verde",
+        "baixa verde",
+        "brocato",
+        "brocató",
+        "Baixa Verde",
+        "Brocato",
+        "Brocató"
+      ],
+      "latest_year": 2026,
+      "name": "Santa Cruz da Baixa Verde",
+      "reason": "missing_entry",
+      "region": "bra_paraiba",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -22.14028,
+        -47.45194
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Santa Cruz da Conceição-Brazil",
+      "known_aliases": [
+        "Santa Cruz da Conceição",
+        "santa cruz da conceição"
+      ],
+      "latest_year": 2026,
+      "name": "Santa Cruz da Conceição",
+      "reason": "missing_entry",
+      "region": "bra_sao_paulo",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -21.29083,
+        -47.42972
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Santa Cruz da Esperança-Brazil",
+      "known_aliases": [
+        "Santa Cruz da Esperança",
+        "santa cruz da esperança",
+        "santa cruz da esperanca",
+        "Santa Cruz da Esperanca"
+      ],
+      "latest_year": 2026,
+      "name": "Santa Cruz da Esperança",
+      "reason": "missing_entry",
+      "region": "bra_sao_paulo",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -14.964,
+        -39.8115
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Santa Cruz da Vitória-Brazil",
+      "known_aliases": [
+        "Santa Cruz da Vitória",
+        "santa cruz da vitória",
+        "Santa Cruz da Vitória (BA)"
+      ],
+      "latest_year": 2026,
+      "name": "Santa Cruz da Vitória",
+      "reason": "missing_entry",
+      "region": "bra_bahia",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -17.31583,
+        -48.48167
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Santa Cruz de Goiás-Brazil",
+      "known_aliases": [
+        "Santa Cruz de Goiás",
+        "santa cruz de goiás",
+        "corumbalina",
+        "santa cruz",
+        "Corumbalina",
+        "Santa Cruz"
+      ],
+      "latest_year": 2026,
+      "name": "Santa Cruz de Goiás",
+      "reason": "missing_entry",
+      "region": "bra_goias",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -21.11972,
+        -44.22333
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Santa Cruz de Minas-Brazil",
+      "known_aliases": [
+        "Santa Cruz de Minas",
+        "santa cruz de minas"
+      ],
+      "latest_year": 2026,
+      "name": "Santa Cruz de Minas",
+      "reason": "missing_entry",
+      "region": "bra_minas_gerais",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -22.9582,
+        -53.2949
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Santa Cruz de Monte Castelo-Brazil",
+      "known_aliases": [
+        "Santa Cruz de Monte Castelo",
+        "santa cruz de monte castelo",
+        "Santa Cruz de Monte Castelo (PR)"
+      ],
+      "latest_year": 2026,
+      "name": "Santa Cruz de Monte Castelo",
+      "reason": "missing_entry",
+      "region": "bra_parana",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -16.0967,
+        -41.7418
+      ],
+      "country": "Brazil",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Santa Cruz de Salinas-Brazil",
+      "known_aliases": [
+        "Santa Cruz de Salinas",
+        "santa cruz de salinas",
+        "Santa Cruz de Salinas (MG)"
+      ],
+      "latest_year": 2026,
+      "name": "Santa Cruz de Salinas",
+      "reason": "missing_entry",
+      "region": "bra_minas_gerais",
+      "sample_years": [
+        1950,
+        1980,
+        2010,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -0.66333,
+        -49.175
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Santa Cruz do Arari-Brazil",
+      "known_aliases": [
+        "Santa Cruz do Arari",
+        "santa cruz do arari",
+        "santa cruz",
+        "Santa Cruz"
+      ],
+      "latest_year": 2026,
+      "name": "Santa Cruz do Arari",
+      "reason": "missing_entry",
+      "region": "bra_para",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -20.2372,
+        -42.8169
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Santa Cruz do Escalvado-Brazil",
+      "known_aliases": [
+        "Santa Cruz do Escalvado",
+        "santa cruz do escalvado",
+        "Santa Cruz do Escalvado (MG)"
+      ],
+      "latest_year": 2026,
+      "name": "Santa Cruz do Escalvado",
+      "reason": "missing_entry",
+      "region": "bra_minas_gerais",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -7.1785,
+        -41.7609
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Santa Cruz do Piauí-Brazil",
+      "known_aliases": [
+        "Santa Cruz do Piauí",
+        "santa cruz do piauí",
+        "Santa Cruz do Piauí (PI)"
+      ],
+      "latest_year": 2026,
+      "name": "Santa Cruz do Piauí",
+      "reason": "missing_entry",
+      "region": "bra_piaui",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -5.80581,
+        -41.9506
+      ],
+      "country": "Brazil",
+      "earliest_year": 1950,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Santa Cruz dos Milagres-Brazil",
+      "known_aliases": [
+        "Santa Cruz dos Milagres",
+        "santa cruz dos milagres",
+        "Santa Cruz dos Milagres (PI)"
+      ],
+      "latest_year": 2026,
+      "name": "Santa Cruz dos Milagres",
+      "reason": "missing_entry",
+      "region": "bra_piaui",
+      "sample_years": [
+        1950,
+        1980,
+        2010,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -18.8235,
+        -42.4388
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Santa Efigênia de Minas-Brazil",
+      "known_aliases": [
+        "Santa Efigênia de Minas",
+        "santa efigênia de minas",
+        "Santa Efigênia de Minas (MG)"
+      ],
+      "latest_year": 2026,
+      "name": "Santa Efigênia de Minas",
+      "reason": "missing_entry",
+      "region": "bra_minas_gerais",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -21.46278,
+        -48.39083
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Santa Ernestina-Brazil",
+      "known_aliases": [
+        "Santa Ernestina",
+        "santa ernestina"
+      ],
+      "latest_year": 2026,
+      "name": "Santa Ernestina",
+      "reason": "missing_entry",
+      "region": "bra_sao_paulo",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -8.1625,
+        -40.61556
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Santa Filomena-Brazil",
+      "known_aliases": [
+        "Santa Filomena",
+        "santa filomena"
+      ],
+      "latest_year": 2026,
+      "name": "Santa Filomena",
+      "reason": "missing_entry",
+      "region": "bra_pernambuco",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -5.49783,
+        -44.559
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Santa Filomena do Maranhão-Brazil",
+      "known_aliases": [
+        "Santa Filomena do Maranhão",
+        "santa filomena do maranhão",
+        "santa filomena",
+        "santa filomena do maranhao",
+        "Santa Filomena",
+        "Santa Filomena do Maranhao"
+      ],
+      "latest_year": 2026,
+      "name": "Santa Filomena do Maranhão",
+      "reason": "missing_entry",
+      "region": "bra_maranhao",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -23.0375,
+        -51.80528
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Santa Fé-Brazil",
+      "known_aliases": [
+        "Santa Fé",
+        "santa fé"
+      ],
+      "latest_year": 2026,
+      "name": "Santa Fé",
+      "reason": "missing_entry",
+      "region": "bra_parana",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -15.76917,
+        -51.10556
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Santa Fé de Goiás-Brazil",
+      "known_aliases": [
+        "Santa Fé de Goiás",
+        "santa fé de goiás"
+      ],
+      "latest_year": 2026,
+      "name": "Santa Fé de Goiás",
+      "reason": "missing_entry",
+      "region": "bra_goias",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -16.6859,
+        -45.4102
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Santa Fé de Minas-Brazil",
+      "known_aliases": [
+        "Santa Fé de Minas",
+        "santa fé de minas",
+        "Santa Fé de Minas (MG)"
+      ],
+      "latest_year": 2026,
+      "name": "Santa Fé de Minas",
+      "reason": "missing_entry",
+      "region": "bra_minas_gerais",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -7.15583,
+        -48.70278
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Santa Fé do Araguaia-Brazil",
+      "known_aliases": [
+        "Santa Fé do Araguaia",
+        "santa fé do araguaia"
+      ],
+      "latest_year": 2026,
+      "name": "Santa Fé do Araguaia",
+      "reason": "missing_entry",
+      "region": "bra_tocantins",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -22.45667,
+        -47.53028
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Santa Gertrudes-Brazil",
+      "known_aliases": [
+        "Santa Gertrudes",
+        "santa gertrudes"
+      ],
+      "latest_year": 2026,
+      "name": "Santa Gertrudes",
+      "reason": "missing_entry",
+      "region": "bra_sao_paulo",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -2.23111,
+        -45.3
+      ],
+      "country": "Brazil",
+      "earliest_year": 1900,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Santa Helena-Brazil",
+      "known_aliases": [
+        "Santa Helena",
+        "santa helena"
+      ],
+      "latest_year": 2026,
+      "name": "Santa Helena",
+      "reason": "missing_entry",
+      "region": "bra_maranhao",
+      "sample_years": [
+        1900,
+        1960,
+        2000,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -24.8585,
+        -54.336
+      ],
+      "country": "Brazil",
+      "earliest_year": 1850,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Santa Helena (PR)-Brazil",
+      "known_aliases": [
+        "Santa Helena",
+        "santa helena",
+        "Santa Helena (PR)"
+      ],
+      "latest_year": 2026,
+      "name": "Santa Helena",
+      "reason": "missing_entry",
+      "region": "bra_parana",
+      "sample_years": [
+        1850,
+        1920,
+        1990,
+        2026
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    }
+  ]
+}

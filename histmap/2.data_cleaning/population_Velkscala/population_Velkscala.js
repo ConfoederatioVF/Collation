@@ -420,20 +420,23 @@
             Math.exp((1 - frac)*Math.log(va) + frac*Math.log(vb)) :
             ((1 - frac)*va + frac*vb);
 
-          if (bfs_dist[px] <= seam_px && ext_smooth[px] > 0) {
+          if (v_vis > 0 && bfs_dist[px] <= seam_px && ext_smooth[px] > 0) {
             let w_cos = 0.5*(1 - Math.cos(Math.PI*bfs_dist[px]/seam_px));
 
             v_vis = w_cos*v_vis + (1 - w_cos)*ext_smooth[px];
           }
 
           let u_val = urbc_arr[px] || 0;
-          let p_val = Math.max(v_vis, u_val);
+          let p_val = Math.max(0, v_vis);
+          let u_eff = Math.min(u_val, p_val);
 
+          urbc_arr[px] = u_eff;
           popc_arr[px] = p_val;
-          rurc_arr[px] = Math.max(0, p_val - u_val);
+          rurc_arr[px] = Math.max(0, p_val - u_eff);
           popd_arr[px] = (land_area[px] > 0) ? p_val/land_area[px] : 0;
         }
 
+        writeFloatGrid(dst_urbc, urbc_arr);
         writeFloatGrid(dst_popc, popc_arr);
         writeFloatGrid(dst_rurc, rurc_arr);
         writeFloatGrid(dst_popd, popd_arr);

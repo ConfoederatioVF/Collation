@@ -14,6 +14,18 @@
       "resolution": "updated",
       "source_ref": "Aalborg South / Hasseris-Skalborg urban core inside Aalborg UCDB, Denmark"
     },
+    "Acireale-Italy": {
+      "confidence": "high",
+      "coords": [
+        37.6078,
+        15.1667
+      ],
+      "note": "Corrected Buringh [37.62, 15.25] (offshore in the Ionian Sea) to Acireale urban core, Sicily.",
+      "raw_city_key": "Acireale-Italy",
+      "raw_country_key": "Italy",
+      "resolution": "updated",
+      "source_ref": "Acireale, Catania, Sicily, Italy"
+    },
     "Acquaviva-Italy": {
       "confidence": "medium",
       "coords": [
@@ -289,6 +301,18 @@
       "raw_country_key": "Greece",
       "resolution": "updated",
       "source_ref": "populstat.greece.Larissa"
+    },
+    "Licata-Italy": {
+      "confidence": "high",
+      "coords": [
+        37.1017,
+        13.9376
+      ],
+      "note": "Corrected Buringh [37.08, 13.93] (offshore in the Mediterranean Sea) to Licata urban core, Sicily.",
+      "raw_city_key": "Licata-Italy",
+      "raw_country_key": "Italy",
+      "resolution": "updated",
+      "source_ref": "Licata, Agrigento, Sicily, Italy"
     },
     "Maladsetschna-Belarus": {
       "confidence": "high",
@@ -4483,6 +4507,78 @@
       "resolution": "non_settlement",
       "source_ref": "Non-settlement summary row"
     },
+    "frpolyn.Anaa": {
+      "confidence": "high",
+      "coords": [
+        -17.3522,
+        -145.5094
+      ],
+      "note": "Moved from Anaa Atoll lagoon/southern reef [-17.4102, -145.4932] to Tukuhora village on northern rim of Anaa Atoll, Tuamotus, French Polynesia.",
+      "raw_city_key": "Anaa",
+      "raw_country_key": "frpolyn",
+      "resolution": "updated",
+      "source_ref": "Tukuhora, Anaa Atoll (Wikipedia/GHS-POP)"
+    },
+    "frpolyn.Fakarava": {
+      "confidence": "high",
+      "coords": [
+        -16.0558,
+        -145.6175
+      ],
+      "note": "Moved from Fakarava Atoll central lagoon [-16.3103, -145.6246] (offshore) to Rotoava village on northern rim of Fakarava Atoll, Tuamotus, French Polynesia.",
+      "raw_city_key": "Fakarava",
+      "raw_country_key": "frpolyn",
+      "resolution": "updated",
+      "source_ref": "Rotoava, Fakarava Atoll (Wikipedia/GHS-POP)"
+    },
+    "frpolyn.Makemo": {
+      "confidence": "high",
+      "coords": [
+        -16.615,
+        -143.56
+      ],
+      "note": "Moved from Makemo Atoll western lagoon [-16.5396, -143.8672] (offshore) to Pouheva village on eastern Makemo Atoll, Tuamotus, French Polynesia.",
+      "raw_city_key": "Makemo",
+      "raw_country_key": "frpolyn",
+      "resolution": "updated",
+      "source_ref": "Pouheva, Makemo Atoll (Wikipedia/GHS-POP)"
+    },
+    "frpolyn.Manihi": {
+      "confidence": "high",
+      "coords": [
+        -14.458,
+        -145.958
+      ],
+      "note": "Moved from Manihi Atoll northern lagoon [-14.4029, -145.9581] (offshore) to Paeua / Turipaoa village at southern pass of Manihi Atoll, Tuamotus, French Polynesia.",
+      "raw_city_key": "Manihi",
+      "raw_country_key": "frpolyn",
+      "resolution": "updated",
+      "source_ref": "Paeua / Turipaoa, Manihi Atoll (Wikipedia/GHS-POP)"
+    },
+    "frpolyn.Rangiroa": {
+      "confidence": "high",
+      "coords": [
+        -14.945,
+        -147.65
+      ],
+      "note": "Moved from Rangiroa Atoll central lagoon [-15.1162, -147.6513] (offshore) to Avatoru / Tiputa village on northern rim of Rangiroa Atoll, Tuamotus, French Polynesia.",
+      "raw_city_key": "Rangiroa",
+      "raw_country_key": "frpolyn",
+      "resolution": "updated",
+      "source_ref": "Avatoru / Tiputa, Rangiroa Atoll (Wikipedia/GHS-POP)"
+    },
+    "frpolyn.Reao": {
+      "confidence": "high",
+      "coords": [
+        -18.474,
+        -136.441
+      ],
+      "note": "Moved from Reao Atoll eastern lagoon [-18.5549, -136.3337] to Rapuarava village at NW tip of Reao Atoll, Tuamotus, French Polynesia.",
+      "raw_city_key": "Reao",
+      "raw_country_key": "frpolyn",
+      "resolution": "updated",
+      "source_ref": "Rapuarava, Reao Atoll (Wikipedia/GHS-POP)"
+    },
     "frpolyn.Taputapuatea": {
       "confidence": "high",
       "coords": [
@@ -7622,6 +7718,18 @@
       "resolution": "updated",
       "source_ref": "Wikipedia Karazhal"
     },
+    "kiribat.Ijaki": {
+      "confidence": "high",
+      "coords": [
+        -1.922,
+        175.567
+      ],
+      "note": "Moved from offshore east of reef [-1.916715, 175.609197] onto Aiaki / Ijaki village on Onotoa Atoll main southern islet, Gilbert Islands, Kiribati.",
+      "raw_city_key": "Ijaki",
+      "raw_country_key": "kiribat",
+      "resolution": "updated",
+      "source_ref": "Aiaki / Ijaki, Onotoa Atoll (Wikipedia/GHS-POP)"
+    },
     "kiribat.Pyramid Point": {
       "confidence": "high",
       "coords": [
@@ -7697,14 +7805,14 @@
     "kuwait.Port Saud": {
       "confidence": "high",
       "coords": [
-        28.7667,
-        48.4667
+        28.7408,
+        48.3903
       ],
-      "note": "Mina Saud (Port Saud), southern coast, Al Ahmadi, Kuwait",
+      "note": "Updated from offshore Persian Gulf [28.7667, 48.4667] to Mina Saud (Al Zour / Port Saud) on southern coast, Al Ahmadi, Kuwait.",
       "raw_city_key": "Port Saud",
       "raw_country_key": "kuwait",
       "resolution": "updated",
-      "source_ref": "UN/LOCODE"
+      "source_ref": "Mina Saud / Al Zour, Kuwait (Wikipedia/UN/LOCODE)"
     },
     "kuwait.Qalib ash-Shuyukh": {
       "confidence": "high",
@@ -11222,6 +11330,42 @@
       "raw_country_key": "sudan",
       "resolution": "updated",
       "source_ref": "GeoNames"
+    },
+    "svalbar.Hornsund": {
+      "confidence": "high",
+      "coords": [
+        77.0003,
+        15.541
+      ],
+      "note": "Moved from Hornsund fjord water [76.9718, 15.7844] (offshore) to Polish Polar Station Hornsund at Isbjørnhamna on north shore, Spitsbergen, Svalbard.",
+      "raw_city_key": "Hornsund",
+      "raw_country_key": "svalbar",
+      "resolution": "updated",
+      "source_ref": "Polish Polar Station Hornsund, Isbjørnhamna (Wikipedia/HYDE)"
+    },
+    "svalbar.Isfjord Radio": {
+      "confidence": "high",
+      "coords": [
+        78.062,
+        13.68
+      ],
+      "note": "Moved slightly east from offshore tip [78.0620, 13.6167] onto valid Kapp Linné / Isfjord Radio shore pixel, Spitsbergen, Svalbard.",
+      "raw_city_key": "Isfjord Radio",
+      "raw_country_key": "svalbar",
+      "resolution": "updated",
+      "source_ref": "Isfjord Radio, Kapp Linné, Svalbard (Wikipedia/HYDE)"
+    },
+    "svalbar.Ny Ålesund": {
+      "confidence": "high",
+      "coords": [
+        79.005,
+        11.922
+      ],
+      "note": "Adjusted slightly north from Ny-Ålesund on Brøggerhalvøya [78.9235, 11.9099] onto nearest valid 5-arcmin Svalbard land pixel in joined HYDE/GHS mask.",
+      "raw_city_key": "Ny Ålesund",
+      "raw_country_key": "svalbar",
+      "resolution": "updated",
+      "source_ref": "Ny-Ålesund, Brøggerhalvøya, Svalbard (Wikipedia/HYDE)"
     },
     "svalbar.Olonkinbyen": {
       "confidence": "high",

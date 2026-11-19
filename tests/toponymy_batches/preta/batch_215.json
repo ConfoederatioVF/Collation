@@ -1,0 +1,826 @@
+{
+  "batch_index": 215,
+  "count": 30,
+  "project": "PRETA",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        -18.01039,
+        -64.44662
+      ],
+      "country": "Bolivia",
+      "earliest_year": 218,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "El Tambo-Bolivia",
+      "known_aliases": [
+        "El Tambo",
+        "el tambo"
+      ],
+      "latest_year": 518,
+      "name": "El Tambo",
+      "reason": "missing_entry",
+      "region": "wamz_llanos_de_moxos",
+      "sample_years": [
+        218,
+        518
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -11.1814,
+        -66.1839
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1451,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Estancia Girasol-Bolivia",
+      "known_aliases": [
+        "Estancia Girasol",
+        "estancia girasol",
+        "tumichucua",
+        "Tumichucua"
+      ],
+      "latest_year": 1500,
+      "name": "Estancia Girasol",
+      "reason": "missing_entry",
+      "region": "wamz_llanos_de_moxos",
+      "sample_years": [
+        1451,
+        1500
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -14.9,
+        -66.74
+      ],
+      "country": "Bolivia",
+      "earliest_year": -1022,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Estancia Suárez-Bolivia",
+      "known_aliases": [
+        "Estancia Suárez",
+        "estancia suárez",
+        "unclassified",
+        "filones",
+        "Unclassified"
+      ],
+      "latest_year": 1500,
+      "name": "Estancia Suárez",
+      "reason": "missing_entry",
+      "region": "wamz_llanos_de_moxos",
+      "sample_years": [
+        -1022,
+        848,
+        1320,
+        1500
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -15.51507,
+        -65.11476
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1414,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Gondunovia-Bolivia",
+      "known_aliases": [
+        "Gondunovia",
+        "gondunovia"
+      ],
+      "latest_year": 1500,
+      "name": "Gondunovia",
+      "reason": "missing_entry",
+      "region": "wamz_llanos_de_moxos",
+      "sample_years": [
+        1414,
+        1500
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -17.771,
+        -63.1632
+      ],
+      "country": "Bolivia",
+      "earliest_year": -583,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Grigotá-Bolivia",
+      "known_aliases": [
+        "Grigotá",
+        "grigotá"
+      ],
+      "latest_year": -71,
+      "name": "Grigotá",
+      "reason": "missing_entry",
+      "region": "wamz_llanos_de_moxos",
+      "sample_years": [
+        -583,
+        -71
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -18.57389,
+        -65.63333
+      ],
+      "country": "Bolivia",
+      "earliest_year": -1368,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Huancarani-Bolivia",
+      "known_aliases": [
+        "Huancarani",
+        "huancarani"
+      ],
+      "latest_year": -1118,
+      "name": "Huancarani",
+      "reason": "missing_entry",
+      "region": "wamz_llanos_de_moxos",
+      "sample_years": [
+        -1368,
+        -1118
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -13.73039,
+        -66.10903
+      ],
+      "country": "Bolivia",
+      "earliest_year": -4219,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Isla 421-Bolivia",
+      "known_aliases": [
+        "Isla 421",
+        "isla 421"
+      ],
+      "latest_year": -3919,
+      "name": "Isla 421",
+      "reason": "missing_entry",
+      "region": "wamz_llanos_de_moxos",
+      "sample_years": [
+        -4219,
+        -3919
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -13.69927,
+        -66.06549
+      ],
+      "country": "Bolivia",
+      "earliest_year": -2633,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Isla 423-Bolivia",
+      "known_aliases": [
+        "Isla 423",
+        "isla 423"
+      ],
+      "latest_year": -2333,
+      "name": "Isla 423",
+      "reason": "missing_entry",
+      "region": "wamz_llanos_de_moxos",
+      "sample_years": [
+        -2633,
+        -2333
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -13.70368,
+        -66.03544
+      ],
+      "country": "Bolivia",
+      "earliest_year": -4767,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Isla 430-Bolivia",
+      "known_aliases": [
+        "Isla 430",
+        "isla 430"
+      ],
+      "latest_year": -4467,
+      "name": "Isla 430",
+      "reason": "missing_entry",
+      "region": "wamz_llanos_de_moxos",
+      "sample_years": [
+        -4767,
+        -4467
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -13.67545,
+        -62.84885
+      ],
+      "country": "Bolivia",
+      "earliest_year": -2036,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Isla 490 Lapiz-Bolivia",
+      "known_aliases": [
+        "Isla 490 Lapiz",
+        "isla 490 lapiz"
+      ],
+      "latest_year": -1736,
+      "name": "Isla 490 Lapiz",
+      "reason": "missing_entry",
+      "region": "wamz_llanos_de_moxos",
+      "sample_years": [
+        -2036,
+        -1736
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -13.70917,
+        -62.82035
+      ],
+      "country": "Bolivia",
+      "earliest_year": -7416,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Isla 493 Lapiz-Bolivia",
+      "known_aliases": [
+        "Isla 493 Lapiz",
+        "isla 493 lapiz"
+      ],
+      "latest_year": -7116,
+      "name": "Isla 493 Lapiz",
+      "reason": "missing_entry",
+      "region": "wamz_llanos_de_moxos",
+      "sample_years": [
+        -7416,
+        -7116
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -14.49178,
+        -64.69679
+      ],
+      "country": "Bolivia",
+      "earliest_year": -2633,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Isla 502-Bolivia",
+      "known_aliases": [
+        "Isla 502",
+        "isla 502"
+      ],
+      "latest_year": -2333,
+      "name": "Isla 502",
+      "reason": "missing_entry",
+      "region": "wamz_llanos_de_moxos",
+      "sample_years": [
+        -2633,
+        -2333
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -13.48541,
+        -63.8411
+      ],
+      "country": "Bolivia",
+      "earliest_year": -513,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Isla 521-Bolivia",
+      "known_aliases": [
+        "Isla 521",
+        "isla 521"
+      ],
+      "latest_year": -213,
+      "name": "Isla 521",
+      "reason": "missing_entry",
+      "region": "wamz_llanos_de_moxos",
+      "sample_years": [
+        -513,
+        -213
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -13.44291,
+        -63.78463
+      ],
+      "country": "Bolivia",
+      "earliest_year": -3654,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Isla 527-Bolivia",
+      "known_aliases": [
+        "Isla 527",
+        "isla 527"
+      ],
+      "latest_year": -3354,
+      "name": "Isla 527",
+      "reason": "missing_entry",
+      "region": "wamz_llanos_de_moxos",
+      "sample_years": [
+        -3654,
+        -3354
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -13.49099,
+        -63.80466
+      ],
+      "country": "Bolivia",
+      "earliest_year": -567,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Isla 530-Bolivia",
+      "known_aliases": [
+        "Isla 530",
+        "isla 530"
+      ],
+      "latest_year": -267,
+      "name": "Isla 530",
+      "reason": "missing_entry",
+      "region": "wamz_llanos_de_moxos",
+      "sample_years": [
+        -567,
+        -267
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -13.43808,
+        -63.83363
+      ],
+      "country": "Bolivia",
+      "earliest_year": -3294,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Isla 536-Bolivia",
+      "known_aliases": [
+        "Isla 536",
+        "isla 536"
+      ],
+      "latest_year": -2994,
+      "name": "Isla 536",
+      "reason": "missing_entry",
+      "region": "wamz_llanos_de_moxos",
+      "sample_years": [
+        -3294,
+        -2994
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -13.67919,
+        -66.02062
+      ],
+      "country": "Bolivia",
+      "earliest_year": -3842,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Isla 574-Bolivia",
+      "known_aliases": [
+        "Isla 574",
+        "isla 574"
+      ],
+      "latest_year": -3542,
+      "name": "Isla 574",
+      "reason": "missing_entry",
+      "region": "wamz_llanos_de_moxos",
+      "sample_years": [
+        -3842,
+        -3542
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -14.1158,
+        -66.77762
+      ],
+      "country": "Bolivia",
+      "earliest_year": -7341,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Isla 575 Hotel Caracoles-Bolivia",
+      "known_aliases": [
+        "Isla 575 Hotel Caracoles",
+        "isla 575 hotel caracoles"
+      ],
+      "latest_year": -7041,
+      "name": "Isla 575 Hotel Caracoles",
+      "reason": "missing_entry",
+      "region": "wamz_llanos_de_moxos",
+      "sample_years": [
+        -7341,
+        -7041
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -14.46189,
+        -64.65919
+      ],
+      "country": "Bolivia",
+      "earliest_year": -2347,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Isla FIN12-Bolivia",
+      "known_aliases": [
+        "Isla FIN12",
+        "isla fin12"
+      ],
+      "latest_year": -2047,
+      "name": "Isla FIN12",
+      "reason": "missing_entry",
+      "region": "wamz_llanos_de_moxos",
+      "sample_years": [
+        -2347,
+        -2047
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -14.35865,
+        -64.7428
+      ],
+      "country": "Bolivia",
+      "earliest_year": -6447,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Isla FIN15-Bolivia",
+      "known_aliases": [
+        "Isla FIN15",
+        "isla fin15"
+      ],
+      "latest_year": -6147,
+      "name": "Isla FIN15",
+      "reason": "missing_entry",
+      "region": "wamz_llanos_de_moxos",
+      "sample_years": [
+        -6447,
+        -6147
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -14.44525,
+        -64.69879
+      ],
+      "country": "Bolivia",
+      "earliest_year": -5361,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Isla FIN5-Bolivia",
+      "known_aliases": [
+        "Isla FIN5",
+        "isla fin5"
+      ],
+      "latest_year": -5061,
+      "name": "Isla FIN5",
+      "reason": "missing_entry",
+      "region": "wamz_llanos_de_moxos",
+      "sample_years": [
+        -5361,
+        -5061
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -14.38139,
+        -64.71194
+      ],
+      "country": "Bolivia",
+      "earliest_year": -7165,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Isla FIN8-Bolivia",
+      "known_aliases": [
+        "Isla FIN8",
+        "isla fin8"
+      ],
+      "latest_year": -6865,
+      "name": "Isla FIN8",
+      "reason": "missing_entry",
+      "region": "wamz_llanos_de_moxos",
+      "sample_years": [
+        -7165,
+        -6865
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -13.76799,
+        -66.11156
+      ],
+      "country": "Bolivia",
+      "earliest_year": -1218,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Isla Manechi-Bolivia",
+      "known_aliases": [
+        "Isla Manechi",
+        "isla manechi"
+      ],
+      "latest_year": -918,
+      "name": "Isla Manechi",
+      "reason": "missing_entry",
+      "region": "wamz_llanos_de_moxos",
+      "sample_years": [
+        -1218,
+        -918
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -15.11,
+        -65.49
+      ],
+      "country": "Bolivia",
+      "earliest_year": 989,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Isla Rodeo-Bolivia",
+      "known_aliases": [
+        "Isla Rodeo",
+        "isla rodeo",
+        "casarabe",
+        "Casarabe"
+      ],
+      "latest_year": 1189,
+      "name": "Isla Rodeo",
+      "reason": "missing_entry",
+      "region": "wamz_llanos_de_moxos",
+      "sample_years": [
+        989,
+        1189
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -13.98,
+        -65.18
+      ],
+      "country": "Bolivia",
+      "earliest_year": -6000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Isla del Tesoro-Bolivia",
+      "known_aliases": [
+        "Isla del Tesoro",
+        "isla del tesoro"
+      ],
+      "latest_year": -2000,
+      "name": "Isla del Tesoro",
+      "reason": "missing_entry",
+      "region": "wamz_llanos_de_moxos",
+      "sample_years": [
+        -6000,
+        -4000,
+        -2000
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -14.96299,
+        -64.64172
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Isla del Tesoro SM1-Bolivia",
+      "known_aliases": [
+        "Isla del Tesoro SM1",
+        "isla del tesoro sm1"
+      ],
+      "latest_year": 1500,
+      "name": "Isla del Tesoro SM1",
+      "reason": "missing_entry",
+      "region": "wamz_llanos_de_moxos",
+      "sample_years": [
+        1500
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -13.7214,
+        -63.7411
+      ],
+      "country": "Bolivia",
+      "earliest_year": 237,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Jasiaquiri-Bolivia",
+      "known_aliases": [
+        "Jasiaquiri",
+        "jasiaquiri"
+      ],
+      "latest_year": 1484,
+      "name": "Jasiaquiri",
+      "reason": "missing_entry",
+      "region": "wamz_llanos_de_moxos",
+      "sample_years": [
+        237,
+        1484
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -18.03582,
+        -64.96767
+      ],
+      "country": "Bolivia",
+      "earliest_year": 1016,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Karaparial-Bolivia",
+      "known_aliases": [
+        "Karaparial",
+        "karaparial"
+      ],
+      "latest_year": 1316,
+      "name": "Karaparial",
+      "reason": "missing_entry",
+      "region": "wamz_llanos_de_moxos",
+      "sample_years": [
+        1016,
+        1316
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -17.47667,
+        -65.51972
+      ],
+      "country": "Bolivia",
+      "earliest_year": -586,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kayarani-Bolivia",
+      "known_aliases": [
+        "Kayarani",
+        "kayarani"
+      ],
+      "latest_year": -286,
+      "name": "Kayarani",
+      "reason": "missing_entry",
+      "region": "wamz_llanos_de_moxos",
+      "sample_years": [
+        -586,
+        -286
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        -17.67783,
+        -65.34575
+      ],
+      "country": "Bolivia",
+      "earliest_year": -696,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Khopi-Bolivia",
+      "known_aliases": [
+        "Khopi",
+        "khopi"
+      ],
+      "latest_year": -396,
+      "name": "Khopi",
+      "reason": "missing_entry",
+      "region": "wamz_llanos_de_moxos",
+      "sample_years": [
+        -696,
+        -396
+      ],
+      "sources": [
+        "PRETA"
+      ]
+    }
+  ]
+}

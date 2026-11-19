@@ -3,6 +3,7 @@ let fs = global.fs || require("fs");
 let JSON5 = global.JSON5 || require("json5");
 let path = global.path || require("path");
 let { PNG } = global.pngjs || require("pngjs");
+let { ViscountCountyCensusFrontier } = global.ViscountCountyCensusFrontier ? global : require("./ViscountCountyCensusFrontier.js");
 
 //Initialise functions
 {
@@ -91,6 +92,7 @@ let { PNG } = global.pngjs || require("pngjs");
 
       //Declare local instance variables
       let hyde_years = (options.years) ? options.years : ((options.hyde_years) ? options.hyde_years : context.hyde_years);
+      let ccf_cfg = (context.manifest && context.manifest.county_census_frontier && context.manifest.county_census_frontier.enabled) ? context.manifest.county_census_frontier : null;
       let n_valid = context.n_valid;
       let out_folder = (options.output_folder) ? options.output_folder :
         path.join(context.root_dir, "histmap/3.data_transform/population_Substrata.outlier_removal/rasters_2.scaled_to_regions");
@@ -101,19 +103,40 @@ let { PNG } = global.pngjs || require("pngjs");
 
       //Function body
       if (!fs.existsSync(out_folder)) fs.mkdirSync(out_folder, { recursive: true });
-      let source_keys = Object.keys((context.manifest && context.manifest.substrata_sources) ? context.manifest.substrata_sources : {});
+      let active_zone_series = [];
+      let border_wt_series = [];
       let calibrated_series = [];
+      let source_keys = Object.keys((context.manifest && context.manifest.substrata_sources) ? context.manifest.substrata_sources : {});
       let urban_series = [];
+      let zone_targets_series = [];
 
       for (let i = 0; i < hyde_years.length; i++) {
         let yr = hyde_years[i];
         let urban_valid = new Float32Array(n_valid);
+        let base_path = path.join(context.root_dir, "histmap/2.data_cleaning/population_Stadester/stadester_base_rasters", `stadester_base_${yr}.png`);
         let urban_path = path.join(context.root_dir, "histmap/2.data_cleaning/population_Stadester/stadester_urban_rasters", `stadester_urban_${yr}.png`);
-        if (fs.existsSync(urban_path)) {
-          let u_png = PNG.sync.read(fs.readFileSync(urban_path));
+        let u_read_path = fs.existsSync(base_path) ? base_path : urban_path;
+
+        if (fs.existsSync(u_read_path)) {
+          let u_png = PNG.sync.read(fs.readFileSync(u_read_path));
           let u_dv = new DataView(u_png.data.buffer, u_png.data.byteOffset, u_png.data.byteLength);
-          for (let x = 0; x < n_valid; x++)
-            urban_valid[x] = this.readPositiveFloat32(u_png.data, u_dv, context.valid_indices[x]*4);
+          for (let x = 0; x < n_valid; x++) {
+            let u_val = this.readPositiveFloat32(u_png.data, u_dv, context.valid_indices[x]*4);
+
+            urban_valid[x] = (u_val >= 0.01) ? u_val : 0;
+          }
+        }
+        if (yr <= 0) {
+          let c14_urb_path = path.join(context.root_dir, "histmap/2.data_cleaning/population_c14bazAAR/3.rasters_urban", `urbc_${yr}.png`);
+          if (fs.existsSync(c14_urb_path)) {
+            let c14_png = PNG.sync.read(fs.readFileSync(c14_urb_path));
+            let c14_dv = new DataView(c14_png.data.buffer, c14_png.data.byteOffset, c14_png.data.byteLength);
+            for (let x = 0; x < n_valid; x++) {
+              let c14_val = this.readPositiveFloat32(c14_png.data, c14_dv, context.valid_indices[x]*4);
+
+              if (c14_val > urban_valid[x]) urban_valid[x] = c14_val;
+            }
+          }
         }
         if (global.population_Stadester_rasters && typeof global.population_Stadester_rasters.getSubUrbanSettlementsData === "function") {
           let sub_urb = global.population_Stadester_rasters.getSubUrbanSettlementsData(yr, {
@@ -153,8 +176,9 @@ let { PNG } = global.pngjs || require("pngjs");
           context.national_epoch_entries || []
         ];
         let touched = new Uint8Array(n_valid);
-
         let active_zone_of_v = new Int32Array(n_valid).fill(-1);
+        let ccf_active = Boolean(ccf_cfg && yr >= ccf_cfg.start_year && yr <= ccf_cfg.end_year);
+        let county_mask = ccf_active ? ViscountCountyCensusFrontier.D_loadMosaicCountyMaskForYear(context, yr, ccf_cfg) : null;
         let zone_targets_by_id = [];
 
         for (let g = 0; g < target_groups.length; g++) {
@@ -171,33 +195,43 @@ let { PNG } = global.pngjs || require("pngjs");
               if (raw_target < 0) continue;
               let target_pop = raw_target*(zone.domain_fraction !== undefined ? zone.domain_fraction : 1.0);
               let curr_sum = 0;
-              let hab_cnt = 0;
-              let urb_sum = 0;
+              let settled_sum = 0;
+              let z_id = zone_targets_by_id.length;
+              let ccf_res = county_mask ? ViscountCountyCensusFrontier.E_calibrateZoneWithCountyFrontier(context, zone, county_mask, base_rural, urban_valid, rural_valid, touched, active_zone_of_v, z_id, target_pop, ccf_cfg) : null;
+              if (ccf_res && ccf_res.handled) { zone_targets_by_id.push(ccf_res); continue; }
+
               for (let a = 0; a < zone.pixels.length; a++) {
                 let v_idx = context.pixel_to_valid[zone.pixels[a]];
                 if (v_idx >= 0) {
-                  if (base_rural[v_idx] > 0) {
-                    curr_sum += base_rural[v_idx];
-                    hab_cnt++;
-                  }
-                  urb_sum += urban_valid[v_idx];
+                  active_zone_of_v[v_idx] = z_id;
+                  if (base_rural[v_idx] > 0) curr_sum += base_rural[v_idx];
+                  if (urban_valid[v_idx] > 0) settled_sum += urban_valid[v_idx];
                 }
               }
-              let rural_target = Math.max(Math.max(1, hab_cnt)*0.05, target_pop - urb_sum);
-              let z_id = zone_targets_by_id.length;
 
-              zone_targets_by_id.push({ pixels: [], target_pop: rural_target });
-              if (curr_sum > 0) {
-                let scalar = rural_target/curr_sum;
+              let rural_target_pop = 0;
+              let settled_scale = 0;
+
+              if (target_pop > 0) {
+                if (settled_sum < 0.90*target_pop) {
+                  rural_target_pop = target_pop - settled_sum;
+                  settled_scale = 1.0;
+                } else {
+                  rural_target_pop = 0.10*target_pop;
+                  settled_scale = 0.90*target_pop/settled_sum;
+                }
+              }
+              zone_targets_by_id.push({ rural_target_pop: rural_target_pop, settled_scale: settled_scale, target_pop: target_pop });
+              if (curr_sum > 0 && rural_target_pop > 0) {
+                let scalar = rural_target_pop/curr_sum;
                 for (let a = 0; a < zone.pixels.length; a++) {
                   let v_idx = context.pixel_to_valid[zone.pixels[a]];
                   if (v_idx >= 0 && base_rural[v_idx] > 0) {
                     rural_valid[v_idx] = Math.max(1e-4, base_rural[v_idx]*scalar);
                     touched[v_idx] = 1;
-                    active_zone_of_v[v_idx] = z_id;
                   }
                 }
-              } else if (rural_target > 0) {
+              } else if (curr_sum === 0 && rural_target_pop > 0) {
                 let target_px = [];
 
                 if (zone.pixels.length > 25 && context.fallback_hab_mask) {
@@ -210,7 +244,7 @@ let { PNG } = global.pngjs || require("pngjs");
                 }
                 if (target_px.length === 0 && zone.pixels.length <= 25) target_px = zone.pixels;
                 if (target_px.length > 0) {
-                  let per_px = rural_target/target_px.length;
+                  let per_px = rural_target_pop/target_px.length;
 
                   for (let a = 0; a < target_px.length; a++) {
                     let v_idx = context.pixel_to_valid[target_px[a]];
@@ -218,8 +252,15 @@ let { PNG } = global.pngjs || require("pngjs");
                       rural_valid[v_idx] = Math.max(1e-4, per_px);
                       base_rural[v_idx] = rural_valid[v_idx];
                       touched[v_idx] = 1;
-                      active_zone_of_v[v_idx] = z_id;
                     }
+                  }
+                }
+              } else if (target_pop === 0) {
+                for (let a = 0; a < zone.pixels.length; a++) {
+                  let v_idx = context.pixel_to_valid[zone.pixels[a]];
+                  if (v_idx >= 0) {
+                    rural_valid[v_idx] = 0;
+                    touched[v_idx] = 0;
                   }
                 }
               }
@@ -232,17 +273,14 @@ let { PNG } = global.pngjs || require("pngjs");
           context.manifest.smoothing.interior_multiplier_blur_radius_px : 5;
         let blur_passes = (context.manifest && context.manifest.smoothing && Number.isFinite(context.manifest.smoothing.interior_multiplier_blur_passes)) ?
           Math.max(3, context.manifest.smoothing.interior_multiplier_blur_passes) : 3;
+        if (ccf_active) blur_r = Number(ccf_cfg.interior_multiplier_blur_radius_px) || 2;
+        if (ccf_active) blur_passes = Number(ccf_cfg.interior_multiplier_blur_passes) || 2;
         let log_mult = new Float32Array(n_valid);
-        let pre_smooth_sum = 0;
         let tmp_mult = new Float32Array(n_valid);
 
         for (let v = 0; v < n_valid; v++) {
-          if (touched[v] && base_rural[v] > 0) {
-            pre_smooth_sum += rural_valid[v];
-            log_mult[v] = Math.log(Math.max(1e-6, rural_valid[v])/Math.max(1e-6, base_rural[v]));
-          } else {
-            log_mult[v] = 0;
-          }
+          log_mult[v] = (touched[v] && base_rural[v] > 0) ?
+            Math.log(Math.max(1e-6, rural_valid[v])/Math.max(1e-6, base_rural[v])) : 0;
         }
 
         for (let pass = 0; pass < blur_passes; pass++) {
@@ -289,31 +327,22 @@ let { PNG } = global.pngjs || require("pngjs");
           }
         }
 
-        let smoothed_sum = 0;
-        let z_sums = new Float64Array(zone_targets_by_id.length);
-
         for (let v = 0; v < n_valid; v++) {
           if (!touched[v] || base_rural[v] <= 0) {
             if (rural_valid[v] <= 0) rural_valid[v] = 0;
             continue;
           }
           rural_valid[v] = Math.max(1e-4, base_rural[v]*Math.exp(log_mult[v]));
-          smoothed_sum += rural_valid[v];
-          let az = active_zone_of_v[v];
-
-          if (az >= 0) z_sums[az] += rural_valid[v];
         }
-        for (let v = 0; v < n_valid; v++) {
-          let az = active_zone_of_v[v];
+        let w_int = this.computeZoneInteriorWeights(context, active_zone_of_v);
 
-          if (az >= 0 && z_sums[az] > 0 && zone_targets_by_id[az].target_pop > 0)
-            rural_valid[v] = Math.max(1e-4, rural_valid[v]*(zone_targets_by_id[az].target_pop/z_sums[az]));
-          else if (touched[v] && base_rural[v] > 0 && smoothed_sum > 0 && pre_smooth_sum > 0)
-            rural_valid[v] = Math.max(1e-4, rural_valid[v]*(pre_smooth_sum/smoothed_sum));
-        }
+        this.conserveZoneTargetsInteriorPinned(rural_valid, active_zone_of_v, w_int, zone_targets_by_id);
 
+        active_zone_series.push(active_zone_of_v);
+        border_wt_series.push(w_int);
         calibrated_series.push(rural_valid);
         urban_series.push(urban_valid);
+        zone_targets_series.push(zone_targets_by_id);
       }
 
       for (let t = 0; t < hyde_years.length; t++) {
@@ -323,27 +352,56 @@ let { PNG } = global.pngjs || require("pngjs");
         let read_path = fs.existsSync(out_png_path) ? out_png_path : (fs.existsSync(fallback_path) ? fallback_path : null);
         if (!read_path) continue;
 
+        let active_zones = active_zone_series[t];
+        let cal_arr = calibrated_series[t];
         let out_png = PNG.sync.read(fs.readFileSync(read_path));
         let out_dv = new DataView(out_png.data.buffer, out_png.data.byteOffset, out_png.data.byteLength);
-        let cal_arr = calibrated_series[t];
-        let u_arr = urban_series[t];
+        let smoothed_r = new Float32Array(n_valid);
         let total_pop = 0;
+        let u_arr = urban_series[t];
+        let w_int = border_wt_series[t];
+        let z_targets = zone_targets_series[t];
+        let t_w = (ccf_cfg && yr >= ccf_cfg.start_year && yr <= ccf_cfg.end_year && Number.isFinite(ccf_cfg.temporal_log_Laplacian_weight)) ? Number(ccf_cfg.temporal_log_Laplacian_weight) : temp_weight;
 
         for (let i = 0; i < n_valid; i++) {
-          let idx = context.valid_indices[i];
-          let smoothed_r = 0;
-
           if (cal_arr[i] > 0) {
             let prev_v = (t > 0 && calibrated_series[t - 1][i] > 0) ? calibrated_series[t - 1][i] : cal_arr[i];
             let next_v = (t + 1 < hyde_years.length && calibrated_series[t + 1][i] > 0) ? calibrated_series[t + 1][i] : cal_arr[i];
 
-            smoothed_r = Math.max(
-              1e-4,
-              Math.exp((1 - temp_weight)*Math.log(cal_arr[i]) + 0.5*temp_weight*(Math.log(prev_v) + Math.log(next_v)))
-            );
+            smoothed_r[i] = Math.max(1e-4, Math.exp((1 - t_w)*Math.log(cal_arr[i]) + 0.5*t_w*(Math.log(prev_v) + Math.log(next_v))));
           }
-          let val = u_arr[i] + smoothed_r;
+        }
+        this.conserveZoneTargetsInteriorPinned(smoothed_r, active_zones, w_int, z_targets);
+
+        //Fill isolated inland zero pinholes surrounded by 8 neighbours > 5,0
+        let ph_updates = [];
+        for (let i = 0; i < n_valid; i++) {
+          let az = active_zones[i];
+          if (smoothed_r[i] > 0 || (az >= 0 && z_targets[az].target_pop === 0)) continue;
+          let g = context.valid_indices[i];
+          let cy = Math.floor(g/context.width);
+          let cx = g % context.width;
+          if (cy <= 0 || cy >= context.height - 1) continue;
+          let acc = 0;
+          let cnt = 0;
+
+          for (let dy = -1; dy <= 1; dy++) {
+            for (let dx = -1; dx <= 1; dx++) {
+              if (dx === 0 && dy === 0) continue;
+              let nv = context.pixel_to_valid[(cy + dy)*context.width + ((cx + dx + context.width) % context.width)];
+              if (nv >= 0 && smoothed_r[nv] > 5.0) { acc += smoothed_r[nv]; cnt++; }
+            }
+          }
+          if (cnt === 8) ph_updates.push([i, 0.25*(acc/8.0)]);
+        }
+        for (let p = 0; p < ph_updates.length; p++) smoothed_r[ph_updates[p][0]] = ph_updates[p][1];
+
+        for (let i = 0; i < n_valid; i++) {
+          let az = active_zones[i];
+          let idx = context.valid_indices[i];
           let p4 = idx*4;
+          let u_sc = (az >= 0 && z_targets[az]) ? z_targets[az].settled_scale : 1.0;
+          let val = (az >= 0 && z_targets[az].target_pop === 0) ? 0 : (smoothed_r[i] + u_arr[i]*u_sc);
 
           if (val > 0) {
             out_dv.setFloat32(p4, val, false);
@@ -366,6 +424,147 @@ let { PNG } = global.pngjs || require("pngjs");
         elapsed_seconds: Number(((Date.now() - start_ms)/1000).toFixed(2)),
         year_summaries: year_summaries
       };
+    }
+
+
+    /**
+     * Computes cached boundary-pinned interior weights `w_int` (`0` on zone borders, approaching `1` inside)
+     * using an 8-neighbour chamfer distance transform so zone conservation never injects 1-px border steps.
+     * @alias ViscountSubstrataMosaic.computeZoneInteriorWeights
+     */
+    static computeZoneInteriorWeights (arg0_context, arg1_active_zones) {
+      let context = arg0_context;
+      let az = arg1_active_zones;
+      let n_valid = context.n_valid;
+      let sig = 2166136261;
+
+      for (let s_i = 0; s_i < n_valid; s_i += 8)
+        sig = Math.imul(sig ^ (az[s_i] + 2), 16777619) >>> 0;
+
+      if (context._last_zone_sig === sig && context._last_zone_w_int)
+        return context._last_zone_w_int;
+
+      let buckets = [];
+      let d_max = 30;
+      let h = context.height;
+      let p2v = context.pixel_to_valid;
+      let tent = new Uint8Array(n_valid).fill(d_max);
+      let v_idx = context.valid_indices;
+      let w = context.width;
+
+      for (let d = 0; d < d_max; d++) buckets.push([]);
+      for (let i = 0; i < n_valid; i++) {
+        if (az[i] < 0) continue;
+        let g = v_idx[i];
+        let cx = g % w;
+        let cy = Math.floor(g/w);
+        let nbs = [
+          p2v[cy*w + ((cx + w - 1) % w)],
+          p2v[cy*w + ((cx + 1) % w)],
+          (cy > 0) ? p2v[(cy - 1)*w + cx] : -1,
+          (cy + 1 < h) ? p2v[(cy + 1)*w + cx] : -1
+        ];
+
+        for (let k = 0; k < 4; k++) {
+          let nv = nbs[k];
+
+          if (nv >= 0 && az[nv] >= 0 && az[nv] !== az[i]) {
+            tent[i] = 0;
+            buckets[0].push(i);
+            break;
+          }
+        }
+      }
+
+      for (let d = 0; d < d_max; d++) {
+        let q = buckets[d];
+
+        for (let qi = 0; qi < q.length; qi++) {
+          let cur = q[qi];
+
+          if (d > tent[cur]) continue;
+          let g = v_idx[cur];
+          let cx = g % w;
+          let cy = Math.floor(g/w);
+
+          for (let dy = -1; dy <= 1; dy++) {
+            let nr = cy + dy;
+
+            if (nr < 0 || nr >= h) continue;
+            for (let dx = -1; dx <= 1; dx++) {
+              if (dx === 0 && dy === 0) continue;
+              let nv = p2v[nr*w + ((cx + dx + w) % w)];
+
+              if (nv < 0 || az[nv] < 0) continue;
+              let nd = d + ((dx === 0 || dy === 0) ? 3 : 4);
+
+              if (nd < d_max && nd < tent[nv]) {
+                tent[nv] = nd;
+                buckets[nd].push(nv);
+              }
+            }
+          }
+        }
+      }
+
+      let w_int = new Float32Array(n_valid);
+
+      for (let i = 0; i < n_valid; i++) {
+        let db = tent[i]/3.0;
+
+        w_int[i] = 1.0 - Math.exp(-(db*db)/32.0);
+      }
+      context._last_zone_sig = sig;
+      context._last_zone_w_int = w_int;
+
+      //Return statement
+      return w_int;
+    }
+
+
+    /**
+     * Re-normalises zone rural targets onto zone interiors while holding border pixels continuous (`w_int = 0`).
+     * @alias ViscountSubstrataMosaic.conserveZoneTargetsInteriorPinned
+     */
+    static conserveZoneTargetsInteriorPinned (arg0_field, arg1_active_zones, arg2_w_int, arg3_zone_targets) {
+      let f = arg0_field;
+      let az = arg1_active_zones;
+      let w_int = arg2_w_int;
+      let z_targets = arg3_zone_targets;
+      let fixed_s = new Float64Array(z_targets.length);
+      let free_s = new Float64Array(z_targets.length);
+      let mult = new Float64Array(z_targets.length).fill(1.0);
+
+      for (let i = 0; i < f.length; i++) {
+        if (f[i] <= 0 || az[i] < 0) continue;
+        let wi = w_int[i];
+
+        fixed_s[az[i]] += f[i]*(1.0 - wi);
+        free_s[az[i]] += f[i]*wi;
+      }
+      for (let z = 0; z < z_targets.length; z++) {
+        let tgt = z_targets[z].rural_target_pop;
+
+        if (tgt > 0 && free_s[z] > 1e-6) {
+          let m_val = (tgt - fixed_s[z])/free_s[z];
+
+          mult[z] = (m_val >= 0.15 && m_val <= 6.0) ? m_val : -(tgt/(fixed_s[z] + free_s[z]));
+        }
+      }
+      for (let i = 0; i < f.length; i++) {
+        let zid = az[i];
+
+        if (f[i] <= 0 || zid < 0) continue;
+        let mv = mult[zid];
+
+        if (mv < 0) {
+          f[i] = Math.max(1e-4, f[i]*(-mv));
+        } else {
+          let wi = w_int[i];
+
+          f[i] = Math.max(1e-4, f[i]*((1.0 - wi) + wi*mv));
+        }
+      }
     }
 
 
@@ -437,7 +636,7 @@ let { PNG } = global.pngjs || require("pngjs");
       if (!manifest_abs || !fs.existsSync(manifest_abs)) return null;
 
       //Function body
-      let fallback_hab_mask = new Uint8Array(n_pixels);
+      let fallback_hab_mask = new Uint8Array(width*height);
       let manifest_obj = JSON5.parse(fs.readFileSync(manifest_abs, "utf8"));
       let n_pixels = width*height;
       let pixel_domain = new Uint8Array(n_pixels);

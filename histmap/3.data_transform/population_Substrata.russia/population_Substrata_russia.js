@@ -156,8 +156,9 @@
         let m1900 = context._cached_mosaic_1900;
         for (let i = 0; i < context.n_valid; i++) {
           let u_sub = (urban_valid && urban_valid[i] > 0) ? urban_valid[i]*0.85 : 0;
-          let mod_rur = Math.max(1e-4, prior_valid[i] - u_sub);
-          mosaic_valid[i] = Math.max(1e-4, (1 - w_modern)*m1900[i] + w_modern*mod_rur);
+          let mod_rur = (prior_valid[i] > 0) ? Math.max(1e-4, prior_valid[i] - u_sub) : 0;
+          let blended = (1 - w_modern)*m1900[i] + w_modern*mod_rur;
+          mosaic_valid[i] = (blended > 0) ? blended : 0;
         }
       }
 
@@ -202,7 +203,7 @@
 
       //Function body
       for (let i = 0; i < n_valid; i++)
-        calibrated[i] = Math.max(1e-4, mosaic_valid[i]);
+        calibrated[i] = (mosaic_valid[i] > 0) ? mosaic_valid[i] : 0;
 
       //1. Priority 2 Specialist Masks calibration (subtracting urban settlement sum per zone with rural hinterland floor)
       for (let i = 0; i < context.specialist_entries.length; i++) {
@@ -218,26 +219,22 @@
           let target_pop = raw_target_pop*(z.domain_fraction !== undefined ? z.domain_fraction : 1.0);
 
           let current_sum = 0;
-          let urban_sum = 0;
           for (let y = 0; y < z.pixels.length; y++) {
             let p_idx = z.pixels[y];
             let v_idx = px_to_valid[p_idx];
-            if (v_idx >= 0) {
+            if (v_idx >= 0 && calibrated[v_idx] > 0) {
               let w = (sub_weights && sub_weights.has(p_idx)) ? sub_weights.get(p_idx) : 1.0;
               current_sum += calibrated[v_idx]*w;
-              urban_sum += urban_valid[v_idx];
             }
           }
 
-          let min_rural_pop = Math.max(z.pixels.length*0.05, Math.min(target_pop*0.35, current_sum*0.45));
-          let rural_target_pop = Math.max(min_rural_pop, target_pop - urban_sum);
-          let scalar = (current_sum > 0) ? (rural_target_pop/current_sum) : 1.0;
+          let scalar = (current_sum > 0 && target_pop >= 0) ? (target_pop/current_sum) : 1.0;
           for (let y = 0; y < z.pixels.length; y++) {
             let p_idx = z.pixels[y];
             let v_idx = px_to_valid[p_idx];
-            if (v_idx >= 0) {
+            if (v_idx >= 0 && calibrated[v_idx] > 0) {
               let w = (sub_weights && sub_weights.has(p_idx)) ? sub_weights.get(p_idx) : 1.0;
-              let eff_s = Math.max(1e-4, Math.min(1e4, scalar*w));
+              let eff_s = Math.max(1e-6, Math.min(1e6, scalar*w));
               log_mult[v_idx] = Math.log(eff_s);
             }
           }
@@ -246,7 +243,7 @@
             domain_code: s_entry.domain_code,
             max_year: s_entry.domain[1],
             pixels: z.pixels,
-            target_pop: rural_target_pop
+            target_pop: target_pop
           });
         }
       }
@@ -263,28 +260,27 @@
 
           let covered_raw_sum = 0;
           let covered_rural_sum = 0;
-          let covered_urban_sum = 0;
           let uncovered_pixels = [];
           let uncovered_raw_sum = 0;
-          let uncovered_urban_sum = 0;
 
           for (let y = 0; y < mz.pixels.length; y++) {
             let p_idx = mz.pixels[y];
             let v_idx = px_to_valid[p_idx];
             if (v_idx < 0) continue;
             if (context.pixel_spec_mask[p_idx] >= 0) {
-              covered_raw_sum += calibrated[v_idx];
-              covered_rural_sum += calibrated[v_idx]*Math.exp(log_mult[v_idx]);
-              covered_urban_sum += urban_valid[v_idx];
+              if (calibrated[v_idx] > 0) {
+                covered_raw_sum += calibrated[v_idx];
+                covered_rural_sum += calibrated[v_idx]*Math.exp(log_mult[v_idx]);
+              }
             } else {
-              uncovered_raw_sum += calibrated[v_idx];
-              uncovered_urban_sum += urban_valid[v_idx];
+              if (calibrated[v_idx] > 0)
+                uncovered_raw_sum += calibrated[v_idx];
               uncovered_pixels.push(p_idx);
             }
           }
 
           if (uncovered_pixels.length > 0 && uncovered_raw_sum > 0) {
-            let covered_total_sum = covered_rural_sum + covered_urban_sum;
+            let covered_total_sum = covered_rural_sum;
             let residual_total_target;
             if (year >= m_entry.domain[0]) {
               residual_total_target = Math.max(uncovered_raw_sum*0.45, macro_target - covered_total_sum);
@@ -319,21 +315,18 @@
                 ((covered_raw_sum > 0) ? (covered_total_sum/covered_raw_sum) : 1.0);
               residual_total_target = Math.max(uncovered_raw_sum*0.40, res_100*ratio_pre);
             }
-            let residual_rural_target = Math.max(
-              uncovered_raw_sum*0.35,
-              residual_total_target - uncovered_urban_sum
-            );
+            let residual_rural_target = residual_total_target;
             let res_scalar = Math.max(0.35, Math.min(6.0, residual_rural_target/uncovered_raw_sum));
             let res_log = Math.log(res_scalar);
             for (let y = 0; y < uncovered_pixels.length; y++) {
               let v_idx = px_to_valid[uncovered_pixels[y]];
-              if (v_idx >= 0) log_mult[v_idx] = res_log;
+              if (v_idx >= 0 && calibrated[v_idx] > 0) log_mult[v_idx] = res_log;
             }
             zone_targets.push({
               domain_code: 1,
               max_year: 1900,
               pixels: uncovered_pixels,
-              target_pop: residual_rural_target
+              target_pop: Math.min(residual_rural_target, res_scalar*uncovered_raw_sum)
             });
           }
         }
@@ -343,7 +336,7 @@
       if (year >= 1400 && context.national_epoch_entries && context.national_epoch_entries.length > 0) {
         if (year <= 1900) {
           for (let i = 0; i < n_valid; i++)
-            calibrated[i] = Math.max(1e-4, calibrated[i]*Math.exp(log_mult[i]));
+            calibrated[i] = (calibrated[i] > 0) ? calibrated[i]*Math.exp(log_mult[i]) : 0;
           log_mult.fill(0);
           zone_targets = [];
         }
@@ -365,13 +358,11 @@
 
             let current_sum = 0;
             let spec_px_count = 0;
-            let urban_sum = 0;
             for (let y = 0; y < nz.pixels.length; y++) {
               let p_idx = nz.pixels[y];
               let v_idx = px_to_valid[p_idx];
               if (v_idx >= 0) {
-                current_sum += calibrated[v_idx];
-                urban_sum += urban_valid[v_idx];
+                if (calibrated[v_idx] > 0) current_sum += calibrated[v_idx];
                 if (year <= 1900) {
                   let sm = context.pixel_spec_mask[p_idx];
                   if (sm >= 0) {
@@ -387,24 +378,22 @@
             if (year <= 1900 && spec_px_count > 0) {
               let spec_frac = spec_px_count/nz.pixels.length;
               let w_p3 = 1.0 - 0.35*spec_frac;
-              target_pop = w_p3*p3_target_pop + (1 - w_p3)*(current_sum + urban_sum);
+              target_pop = w_p3*p3_target_pop + (1 - w_p3)*current_sum;
             }
 
-            let min_rural_pop = Math.max(nz.pixels.length*0.02, Math.min(target_pop*0.06, current_sum*0.20));
-            let rural_target_pop = Math.max(min_rural_pop, target_pop - urban_sum);
-            let scalar = (current_sum > 0) ? (rural_target_pop/current_sum) : 1.0;
-            let eff_log = Math.log(Math.max(1e-4, Math.min(1e4, scalar)));
+            let scalar = (current_sum > 0 && target_pop >= 0) ? (target_pop/current_sum) : 1.0;
+            let eff_log = Math.log(Math.max(1e-6, Math.min(1e6, scalar)));
 
             for (let y = 0; y < nz.pixels.length; y++) {
               let v_idx = px_to_valid[nz.pixels[y]];
-              if (v_idx >= 0) log_mult[v_idx] = eff_log;
+              if (v_idx >= 0 && calibrated[v_idx] > 0) log_mult[v_idx] = eff_log;
             }
 
             zone_targets.push({
               domain_code: (nz.dom2_pixels.length > nz.dom1_pixels.length) ? 2 : 1,
               max_year: active_nat_entry.domain[1],
               pixels: nz.pixels,
-              target_pop: rural_target_pop
+              target_pop: target_pop
             });
           }
         }
@@ -414,6 +403,7 @@
       for (let p = 0; p < blur_passes; p++) {
         let horiz = new Float32Array(n_valid);
         for (let i = 0; i < n_valid; i++) {
+          if (calibrated[i] <= 0) { horiz[i] = 0; continue; }
           let idx = valid_indices[i];
           let row_start = Math.floor(idx/width)*width;
           let c = idx % width;
@@ -425,7 +415,7 @@
             let n_idx = row_start + cx;
             if (pixel_domain[n_idx] > 0) {
               let nv = px_to_valid[n_idx];
-              if (nv >= 0) {
+              if (nv >= 0 && calibrated[nv] > 0) {
                 sum += log_mult[nv];
                 cnt++;
               }
@@ -435,6 +425,7 @@
         }
 
         for (let i = 0; i < n_valid; i++) {
+          if (calibrated[i] <= 0) { log_mult[i] = 0; continue; }
           let idx = valid_indices[i];
           let r = Math.floor(idx/width);
           let c = idx % width;
@@ -446,7 +437,7 @@
             let n_idx = ry*width + c;
             if (pixel_domain[n_idx] > 0) {
               let nv = px_to_valid[n_idx];
-              if (nv >= 0) {
+              if (nv >= 0 && calibrated[nv] > 0) {
                 sum += horiz[nv];
                 cnt++;
               }
@@ -458,7 +449,7 @@
 
       //4. Apply smoothed multipliers and re-normalise each zone so regional rural totals are conserved
       for (let i = 0; i < n_valid; i++)
-        calibrated[i] = Math.max(1e-4, calibrated[i]*Math.exp(log_mult[i]));
+        calibrated[i] = (calibrated[i] > 0) ? calibrated[i]*Math.exp(log_mult[i]) : 0;
 
       for (let i = 0; i < zone_targets.length; i++) {
         let zt = zone_targets[i];
@@ -471,7 +462,7 @@
           let corr = zt.target_pop/z_sum;
           for (let x = 0; x < zt.pixels.length; x++) {
             let v_idx = px_to_valid[zt.pixels[x]];
-            if (v_idx >= 0) calibrated[v_idx] = Math.max(1e-4, calibrated[v_idx]*corr);
+            if (v_idx >= 0 && calibrated[v_idx] > 0) calibrated[v_idx] = calibrated[v_idx]*corr;
           }
         }
       }
@@ -510,7 +501,7 @@
             let blend_w = 0.65*(1 - (cd - 1)/6.0);
             let log_orig = Math.log(seam_copy[i]);
             let log_smooth = log_sum/w_sum;
-            calibrated[i] = Math.max(1e-4, Math.exp((1 - blend_w)*log_orig + blend_w*log_smooth));
+            calibrated[i] = Math.exp((1 - blend_w)*log_orig + blend_w*log_smooth);
           }
         }
       }
@@ -566,7 +557,6 @@
           let r2_dv = new DataView(r2_png.data.buffer, r2_png.data.byteOffset, r2_png.data.byteLength);
           let r3_png = PNG.sync.read(fs.readFileSync(r3_path));
           let r3_dv = new DataView(r3_png.data.buffer, r3_png.data.byteOffset, r3_png.data.byteLength);
-          let u_valid = this.loadUrbanValidForYear(context, yr);
 
           if (context.foreign_spillover_pairs && context.foreign_spillover_pairs.length > 0) {
             for (let s = 0; s < context.foreign_spillover_pairs.length; s++) {
@@ -587,7 +577,7 @@
             let idx = context.valid_indices[x];
             let p4 = idx*4;
             let v2 = this.readPositiveFloat32(r2_png.data, r2_dv, p4);
-            let v_out = Math.max(u_valid[x] + 1e-4, v2);
+            let v_out = v2;
             if (v_out > 0) {
               r3_dv.setFloat32(p4, v_out, false);
             } else {
@@ -614,22 +604,21 @@
         let r3_dv = new DataView(r3_png.data.buffer, r3_png.data.byteOffset, r3_png.data.byteLength);
         let r4_png = PNG.sync.read(fs.readFileSync(r4_path));
         let r4_dv = new DataView(r4_png.data.buffer, r4_png.data.byteOffset, r4_png.data.byteLength);
-        let u_valid = this.loadUrbanValidForYear(context, yr);
 
         for (let x = 0; x < context.n_valid; x++) {
           let idx = context.valid_indices[x];
           let p4 = idx*4;
           let v3 = this.readPositiveFloat32(r3_png.data, r3_dv, p4);
           let w_feather = context.feather_weights[x];
-          if (w_feather < 0.999 && context.foreign_anchor_idx[x] >= 0) {
+          if (v3 > 0 && w_feather < 0.999 && context.foreign_anchor_idx[x] >= 0) {
             let f_idx = context.foreign_anchor_idx[x];
             let f_val = this.readPositiveFloat32(r4_png.data, r4_dv, f_idx*4);
-            if (f_val > 0 && v3 > 0) {
+            if (f_val > 0) {
               let f_clamped = Math.max(v3*0.55, Math.min(v3*1.45, f_val));
               v3 = w_feather*v3 + (1 - w_feather)*f_clamped;
             }
           }
-          let v_out = Math.max(u_valid[x] + 1e-4, v3);
+          let v_out = v3;
           if (v_out > 0) {
             r4_dv.setFloat32(p4, v_out, false);
           } else {
@@ -662,6 +651,16 @@
       let year = Number(arg1_year);
 
       //Declare local instance variables
+      let base_path = path.join(
+        context.root_dir,
+        "histmap/2.data_cleaning/population_Stadester/stadester_base_rasters",
+        `stadester_base_${year}.png`
+      );
+      let c14_urb_path = path.join(
+        context.root_dir,
+        "histmap/2.data_cleaning/population_c14bazAAR/3.rasters_urban",
+        `urbc_${year}.png`
+      );
       let stadester_dump_path = path.join(
         context.root_dir,
         "histmap/3.data_transform/population_Stadester.transform/stadester"
@@ -672,16 +671,27 @@
         "histmap/2.data_cleaning/population_Stadester/stadester_urban_rasters",
         `stadester_urban_${year}.png`
       );
+      let u_read_path = fs.existsSync(base_path) ? base_path : urban_path;
       let urban_valid = new Float32Array(context.n_valid);
 
       //Function body
-      if (fs.existsSync(urban_path)) {
-        let u_png = PNG.sync.read(fs.readFileSync(urban_path));
+      if (fs.existsSync(u_read_path)) {
+        let u_png = PNG.sync.read(fs.readFileSync(u_read_path));
         let u_dv = new DataView(u_png.data.buffer, u_png.data.byteOffset, u_png.data.byteLength);
         for (let i = 0; i < context.n_valid; i++) {
           let idx = context.valid_indices[i];
           let val = this.readPositiveFloat32(u_png.data, u_dv, idx*4);
-          if (val > 0) urban_valid[i] = val;
+          if (val >= 0.01) urban_valid[i] = val;
+        }
+      }
+
+      if (year <= 0 && fs.existsSync(c14_urb_path)) {
+        let c14_png = PNG.sync.read(fs.readFileSync(c14_urb_path));
+        let c14_dv = new DataView(c14_png.data.buffer, c14_png.data.byteOffset, c14_png.data.byteLength);
+        for (let i = 0; i < context.n_valid; i++) {
+          let idx = context.valid_indices[i];
+          let val = this.readPositiveFloat32(c14_png.data, c14_dv, idx*4);
+          if (val >= 0.01 && val > urban_valid[i]) urban_valid[i] = val;
         }
       }
 
@@ -775,7 +785,7 @@
           if (v_curr > 0 && v_prev > 0 && v_next > 0) {
             let log_interp = (1 - alpha_t)*Math.log(v_prev) + alpha_t*Math.log(v_next);
             let log_curr = Math.log(v_curr);
-            out_arr[i] = Math.max(1e-4, Math.exp((1 - temp_weight)*log_curr + temp_weight*log_interp));
+            out_arr[i] = Math.exp((1 - temp_weight)*log_curr + temp_weight*log_interp);
           }
         }
 
@@ -791,7 +801,7 @@
             let corr = zt.target_pop/z_sum;
             for (let x = 0; x < zt.pixels.length; x++) {
               let v_idx = px_to_valid[zt.pixels[x]];
-              if (v_idx >= 0) out_arr[v_idx] = Math.max(1e-4, out_arr[v_idx]*corr);
+              if (v_idx >= 0 && out_arr[v_idx] > 0) out_arr[v_idx] = out_arr[v_idx]*corr;
             }
           }
         }
@@ -837,26 +847,47 @@
           }
         }
 
+        let comb_arr = new Float32Array(n_valid);
         for (let i = 0; i < n_valid; i++) {
-          let idx = context.valid_indices[i];
-          let dom = context.pixel_domain[idx];
-          let p4 = idx*4;
-
           let u_val = u_arr[i];
           let w_feather = context.feather_weights[i];
-          let r_val = Math.max(1e-4, cal_arr[i]);
+          let r_val = (cal_arr[i] > 0) ? cal_arr[i] : 0;
           let r_feathered = r_val;
 
-          if (w_feather < 0.999 && context.foreign_anchor_idx[i] >= 0) {
+          if (r_val > 0 && w_feather < 0.999 && context.foreign_anchor_idx[i] >= 0) {
             let f_idx = context.foreign_anchor_idx[i];
             let f_val = this.readPositiveFloat32(base_png.data, base_dv, f_idx*4);
             if (f_val > 0) {
               let f_clamped = Math.max(r_val*0.55, Math.min(r_val*1.45, f_val));
-              r_feathered = Math.max(1e-4, w_feather*r_val + (1 - w_feather)*f_clamped);
+              r_feathered = w_feather*r_val + (1 - w_feather)*f_clamped;
             }
           }
+          comb_arr[i] = (yr <= 0) ? Math.max(r_feathered, u_val) : r_feathered;
+        }
 
-          let final_val = u_val + r_feathered;
+        let z_targets = zone_targets_series[t];
+        for (let z_idx = 0; z_idx < z_targets.length; z_idx++) {
+          let zt = z_targets[z_idx];
+          let z_comb = 0;
+          for (let x = 0; x < zt.pixels.length; x++) {
+            let v_idx = px_to_valid[zt.pixels[x]];
+            if (v_idx >= 0) z_comb += comb_arr[v_idx];
+          }
+          if (z_comb > 0 && zt.target_pop >= 0) {
+            let z_sc = zt.target_pop/z_comb;
+            for (let x = 0; x < zt.pixels.length; x++) {
+              let v_idx = px_to_valid[zt.pixels[x]];
+              if (v_idx >= 0) comb_arr[v_idx] *= z_sc;
+            }
+          }
+        }
+
+        for (let i = 0; i < n_valid; i++) {
+          let idx = context.valid_indices[i];
+          let dom = context.pixel_domain[idx];
+          let p4 = idx*4;
+          let final_val = comb_arr[i];
+
           if (final_val > 0) {
             base_dv.setFloat32(p4, final_val, false);
           } else {
