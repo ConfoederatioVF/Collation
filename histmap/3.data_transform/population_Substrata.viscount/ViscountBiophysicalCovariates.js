@@ -3,6 +3,7 @@ let fs = global.fs || require("fs");
 let path = global.path || require("path");
 let { PNG } = global.pngjs || require("pngjs");
 let { ViscountRuralSuitability } = global.ViscountRuralSuitability ? global : require("./ViscountRuralSuitability.js");
+let { ViscountTerrainSuitability } = global.ViscountTerrainSuitability ? global : require("./ViscountTerrainSuitability.js");
 
 //Initialise functions
 {
@@ -144,11 +145,24 @@ let { ViscountRuralSuitability } = global.ViscountRuralSuitability ? global : re
       for (let i = 0; i < n_valid; i++)
         u_nat[i] = 0.45*u_nat_raw[i] + 0.55*u_nat_sm[i];
 
-      //2. Fluvial & lake proximity (u_fluvial) + ocean & major Great-Lakes coastal proximity (u_coastal)
-      u_coastal = this.computeCoastalProximityField(mask_data, bbox, lakes_path);
-      u_fluvial = this.computeFluvialProximityField(mask_data, bbox, rivers_path, lakes_path);
+      //2. Load 5-arcminute terrain (elevation, Horn macro-slope, TRI) and compute crisp contour step-bands
+      let terrain_raw = ViscountTerrainSuitability.A_loadTerrainArrays(mask_data, config);
+      let terrain_bands = ViscountTerrainSuitability.B_computeTerrainStepBands(mask_data, terrain_raw, config);
 
-      //3. Identify permanent Greenland interior ice sheet with sharp fjord decay & High-Arctic polar attenuation
+      //3. Fluvial & coastal proximity tightened into crisp terrain-gated valley/coastal step bands
+      let u_coastal_raw = this.computeCoastalProximityField(mask_data, bbox, lakes_path);
+      let u_fluvial_raw = this.computeFluvialProximityField(mask_data, bbox, rivers_path, lakes_path);
+      let tight_hydro = ViscountTerrainSuitability.C_tightenFluvialAndCoastalFields(
+        mask_data,
+        u_fluvial_raw,
+        u_coastal_raw,
+        terrain_bands
+      );
+
+      u_coastal = tight_hydro.u_coastal;
+      u_fluvial = tight_hydro.u_fluvial;
+
+      //4. Identify permanent Greenland interior ice sheet with sharp fjord decay & High-Arctic polar attenuation
       if (config && config.kriging_config && config.kriging_config.apply_ice_sheet_mask) {
         let la_grid = mask_data.land_area_grid;
 
@@ -190,7 +204,7 @@ let { ViscountRuralSuitability } = global.ViscountRuralSuitability ? global : re
         }
       }
 
-      //4. Compute strict subset habitability mask matching both documented site radius (<= 2.2 px oasis) & Gatekeeper C1
+      //5. Compute strict union habitability mask (Documented Stadestér Settlements Proximity + HYDE 3.5 Inhabited Areas)
       let raw_hyde_dir = path.resolve(mask_data.project_root || ".", cov_paths.hyde_raw_rasters_folder || "histmap/2.data_cleaning/landuse_HYDE/rasters");
       let raw_1500 = this.readGlobalFloat32Raster(path.join(raw_hyde_dir, "popc_1500AD.png"), grid_w*grid_h);
       let raw_1000 = this.readGlobalFloat32Raster(path.join(raw_hyde_dir, "popc_1000AD.png"), grid_w*grid_h);
@@ -205,99 +219,31 @@ let { ViscountRuralSuitability } = global.ViscountRuralSuitability ? global : re
         raw_hyde_dens[i] = mv/la_i;
       }
 
-      let site_seeds = [];
-      let catch_seeds = [];
-
-      if (doc_sites_json && fs.existsSync(doc_sites_json)) {
-        let parsed = JSON.parse(fs.readFileSync(doc_sites_json, "utf8"));
-        let px_list = Array.isArray(parsed.pixels) ? parsed.pixels : [];
-
-        for (let i = 0; i < px_list.length; i++) {
-          let sc = Number(px_list[i][0]);
-          let sr = Number(px_list[i][1]);
-
-          if (sc >= 0 && sc < grid_w && sr >= 0 && sr < grid_h)
-            site_seeds.push(sr*grid_w + sc);
-        }
-      }
-      if (obs_bundle && Array.isArray(obs_bundle.obs_list)) {
-        for (let i = 0; i < obs_bundle.obs_list.length; i++) {
-          let o = obs_bundle.obs_list[i];
-
-          if (!o) continue;
-          let cr = Math.max(0, Math.min(grid_h - 1, Math.floor((90 - o.lat)*grid_h/180)));
-          let cc = Math.max(0, Math.min(grid_w - 1, Math.floor((o.lon + 180)*grid_w/360)));
-          let cidx = cr*grid_w + cc;
-
-          catch_seeds.push(cidx);
-          if (site_seeds.length === 0 && !o.is_frontier_buffer && (o.total_sites_all_periods || 0) > 0)
-            site_seeds.push(cidx);
-        }
-      }
-
-      let dist_site_px = this.computeBfsPixelDistance(mask_data, site_seeds, 8);
-      let dist_catch_px = (catch_seeds.length > 0) ?
-        this.computeBfsPixelDistance(mask_data, catch_seeds, 8) :
-        dist_site_px;
-      let hab_mask = new Uint8Array(n_valid);
-      let is_micro_island = (n_valid < 2000);
-
-      for (let i = 0; i < n_valid; i++) {
-        let gidx = valid_indices[i];
-        let r = Math.floor(gidx/grid_w);
-        let c = gidx % grid_w;
-        let lat = 90 - (r + 0.5)*180/grid_h;
-        let lon = -180 + (c + 0.5)*360/grid_w;
-        let is_high_arctic_gl = (lat >= 59.5 && lon >= -74.0 && lon <= -10.0 && (lat > 78.5 || (lat > 71.5 && lon > -30.0)));
-        let is_site_oasis = is_micro_island ?
-          (dist_catch_px[i] <= 5.6) :
-          (!is_high_arctic_gl && dist_site_px[i] <= 2.2 && dist_catch_px[i] <= 5.6);
-
-        if (lat >= 59.5 && lat <= 78.0 && lon >= -74.0 && lon <= -10.0 && dist_site_px[i] <= 1.5) {
-          perm_ice[i] = Math.max(perm_ice[i], 0.25);
-          hab_mask[i] = 1;
-        } else if (perm_ice[i] > 0.05 && (raw_hyde_dens[i] >= 0.002 || is_site_oasis)) {
-          hab_mask[i] = 1;
-        }
-      }
-
-      //3-pass morphological pinhole closing on hab_mask to prevent inland Swiss-cheese zero holes
-      let p2v = mask_data.pixel_to_valid_idx;
-
-      if (p2v) {
-        for (let pass = 0; pass < 3; pass++) {
-          let hab_next = Uint8Array.from(hab_mask);
-
-          for (let i = 0; i < n_valid; i++) {
-            if (hab_mask[i] === 1 || perm_ice[i] <= 0.05) continue;
-            let gidx = valid_indices[i];
-            let cy = Math.floor(gidx/grid_w);
-            let cx = gidx % grid_w;
-            let nbr_hab = 0;
-
-            for (let dy = -1; dy <= 1; dy++) {
-              let nr = cy + dy;
-
-              if (nr < 0 || nr >= grid_h) continue;
-              for (let dx = -1; dx <= 1; dx++) {
-                if (dx === 0 && dy === 0) continue;
-                let nv = p2v[nr*grid_w + ((cx + dx + grid_w) % grid_w)];
-
-                if (nv >= 0 && hab_mask[nv] === 1) nbr_hab++;
-              }
-            }
-            if (nbr_hab >= 5) hab_next[i] = 1;
-          }
-          hab_mask = hab_next;
-        }
-      }
+      let hab_bundle = ViscountTerrainSuitability.D_buildUnionHabitabilityMask(
+        mask_data,
+        {
+          elev_valid: terrain_raw.elev_valid,
+          forest_valid: forest_valid,
+          maxln_valid: maxln_valid,
+          perm_ice: perm_ice,
+          raw_hyde_dens: raw_hyde_dens,
+          u_elev: terrain_bands.u_elev,
+          u_terrain: terrain_bands.u_terrain,
+          uopp_valid: uopp_valid
+        },
+        config,
+        obs_bundle,
+        this.computeBfsPixelDistance.bind(this)
+      );
 
       //Return statement
       return {
-        dist_catch_px: dist_catch_px,
-        dist_site_px: dist_site_px,
+        dist_catch_px: hab_bundle.dist_catch_px,
+        dist_site_px: hab_bundle.dist_site_px,
+        dist_stadester_px: hab_bundle.dist_stadester_px,
+        elev_valid: terrain_raw.elev_valid,
         forest_valid: forest_valid,
-        hab_mask: hab_mask,
+        hab_mask: hab_bundle.hab_mask,
         hyde_hab_dens: hyde_hab_dens,
         hyde_rur_1900: hyde_rur_1900,
         maxln_valid: maxln_valid,
@@ -305,11 +251,16 @@ let { ViscountRuralSuitability } = global.ViscountRuralSuitability ? global : re
         partition_count: next_pid,
         perm_ice: perm_ice,
         raw_hyde_dens: raw_hyde_dens,
+        slope_valid: terrain_raw.slope_valid,
         sub_iso_valid: sub_iso_valid,
+        tri_valid: terrain_raw.tri_valid,
         u_coastal: u_coastal,
         u_eco: u_eco,
+        u_elev: terrain_bands.u_elev,
         u_fluvial: u_fluvial,
         u_nat: u_nat,
+        u_slope: terrain_bands.u_slope,
+        u_terrain: terrain_bands.u_terrain,
         uopp_valid: uopp_valid
       };
     }

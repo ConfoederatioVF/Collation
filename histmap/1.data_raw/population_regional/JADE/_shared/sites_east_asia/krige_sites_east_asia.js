@@ -3,6 +3,7 @@ let fs = require("fs");
 let path = require("path");
 let { PNG } = require("pngjs");
 let { ViscountBiophysicalCovariates } = require(path.resolve(__dirname, "../../../../../3.data_transform/population_Substrata.viscount/ViscountBiophysicalCovariates.js"));
+let { ViscountHUResidualKriging } = require(path.resolve(__dirname, "../../../../../3.data_transform/population_Substrata.viscount/centaur/ViscountHUResidualKriging.js"));
 let { ViscountMaternKriging } = require(path.resolve(__dirname, "../../../../../3.data_transform/population_Substrata.viscount/ViscountMaternKriging.js"));
 let { ViscountRuralSuitability } = require(path.resolve(__dirname, "../../../../../3.data_transform/population_Substrata.viscount/ViscountRuralSuitability.js"));
 
@@ -32,6 +33,11 @@ let { ViscountRuralSuitability } = require(path.resolve(__dirname, "../../../../
     static B_generatePopulationRasters (arg0_surface_bundle) {
       //Convert from parameters
       let surface = arg0_surface_bundle;
+      let rk_cfg = (surface && surface.kriging_bundle && surface.kriging_bundle.config) ? surface.kriging_bundle.config : {};
+
+      //Guard clause: delegate to unified Viscount dasymetric residual kriging engine when active
+      if (rk_cfg.kriging_config && rk_cfg.kriging_config.residual_kriging_mode === "hu_hyde_residual")
+        return ViscountHUResidualKriging.generateAllBenchmarkPopulationRasters(surface, { is_polynesia: false });
 
       //Declare local instance variables
       let bio_covs = surface.bio_covs;
@@ -409,48 +415,11 @@ let { ViscountRuralSuitability } = require(path.resolve(__dirname, "../../../../
       let krig = ViscountMaternKriging.C_fitTwoScaleNonStationaryMatern(obs);
       let surface = ViscountMaternKriging.E_fitCarryCapacityResidualSurface(krig);
 
-      //Enforce strict dasymetric habitability masking (dist_catchment <= 6 px OR hyde_dens >= 0.002) and urban-core suppression
+      //Enforce strict union habitability mask (documented Stadestér settlements + HYDE 3.5 inhabited areas) & mega-delta urban caps
       let bio_covs = surface.bio_covs;
       let mask_data = surface.kriging_bundle.mask_data;
-      let obs_list = surface.kriging_bundle.obs_bundle.obs_list || [];
-      let n_valid = mask_data.valid_cell_count;
-      let grid_w = mask_data.grid_width;
-      let grid_h = mask_data.grid_height;
-      let v_idx = mask_data.valid_indices;
-      let p2v = mask_data.pixel_to_valid_idx;
-      let strict_hab = new Uint8Array(n_valid);
+      let strict_hab = (bio_covs && bio_covs.hab_mask) ? bio_covs.hab_mask : null;
 
-      //Mark cells within Euclidean radius 6 px of any observation catchment centroid
-      for (let i = 0; i < obs_list.length; i++) {
-        let cr = Math.min(grid_h - 1, Math.max(0, Math.floor((90.0 - obs_list[i].lat)*grid_h/180.0)));
-        let cc = Math.min(grid_w - 1, Math.max(0, Math.floor((obs_list[i].lon + 180.0)*grid_w/360.0)));
-
-        for (let dy = -6; dy <= 6; dy++) {
-          let nr = cr + dy;
-
-          if (nr < 0 || nr >= grid_h) continue;
-          for (let dx = -6; dx <= 6; dx++) {
-            if (dx*dx + dy*dy > 36) continue;
-            let nc = (cc + dx + grid_w) % grid_w;
-            let vi = p2v[nr*grid_w + nc];
-
-            if (vi >= 0) strict_hab[vi] = 1;
-          }
-        }
-      }
-
-      //Union with HYDE baseline carrying capacity >= 0.002 inh/km2 (max(1500AD, 1000AD, 0.15*1900AD) / land_area)
-      let hyde_raw_dir = path.join(this.PROJECT_ROOT, "histmap/2.data_cleaning/landuse_HYDE/rasters");
-      let h15 = this.readFloatRasterValid(path.join(hyde_raw_dir, "popc_1500AD.png"), v_idx);
-      let h10 = this.readFloatRasterValid(path.join(hyde_raw_dir, "popc_1000AD.png"), v_idx);
-      let h19 = this.readFloatRasterValid(path.join(hyde_raw_dir, "popc_1900AD.png"), v_idx);
-
-      for (let i = 0; i < n_valid; i++) {
-        let la_i = Math.max(1.0, mask_data.cell_land_area[i] || 1.0);
-        let m_pop = Math.max(h15 ? h15[i] : 0, h10 ? h10[i] : 0, h19 ? 0.15*h19[i] : 0);
-
-        if (m_pop/la_i >= 0.002) strict_hab[i] = 1;
-      }
       surface.strict_hab_mask = strict_hab;
 
       let uopp_valid = (bio_covs && bio_covs.uopp_valid) ? bio_covs.uopp_valid : null;
@@ -460,12 +429,12 @@ let { ViscountRuralSuitability } = require(path.resolve(__dirname, "../../../../
         let f_arr = surface.fields[field_keys[i]];
 
         if (!f_arr) continue;
-        if (uopp_valid) {
-          ViscountRuralSuitability.capUrbanCoreFieldToRuralRing(mask_data, f_arr, uopp_valid, 0.95);
+        if (uopp_valid)
           this.capMegaDeltaUrbanCores(mask_data, f_arr, uopp_valid, 0.88);
-        }
-        for (let x = 0; x < f_arr.length; x++) {
-          if (strict_hab[x] === 0) f_arr[x] = 0;
+        if (strict_hab) {
+          for (let x = 0; x < f_arr.length; x++) {
+            if (strict_hab[x] === 0) f_arr[x] = 0;
+          }
         }
       }
 

@@ -1,9 +1,14 @@
 //Import modules
 let fs = global.fs || require("fs");
 let path = global.path || require("path");
+let { PNG } = global.pngjs || require("pngjs");
+let drs_p = (typeof __dirname !== "undefined" && fs.existsSync(path.resolve(__dirname, "../ViscountDasymetricResidualSolver.js"))) ?
+  path.resolve(__dirname, "../ViscountDasymetricResidualSolver.js") :
+  path.resolve(process.cwd(), "histmap/3.data_transform/population_Substrata.viscount/ViscountDasymetricResidualSolver.js");
 let um_p = (typeof __dirname !== "undefined" && fs.existsSync(path.resolve(__dirname, "../ViscountUrbanMask.js"))) ?
   path.resolve(__dirname, "../ViscountUrbanMask.js") :
   path.resolve(process.cwd(), "histmap/3.data_transform/population_Substrata.viscount/ViscountUrbanMask.js");
+let ViscountDasymetricResidualSolver = global.ViscountDasymetricResidualSolver || require(drs_p).ViscountDasymetricResidualSolver;
 let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanMask;
 
 //Initialise functions
@@ -42,23 +47,33 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
       for (let i = 0; i < n_valid; i++) {
         let local_a = (cell_area && cell_area[i] > 1.0) ? cell_area[i] : 1.0;
 
-        if (field[i] > 0 && uopp[i] <= 2.0) {
+        if (field[i] > 0 && uopp[i] <= 4.5) {
           rural_dens_in[i] = field[i]/local_a;
           rural_pop_in[i] = field[i];
           rural_wt_in[i] = 1.0;
         }
       }
-      let r_dens = this.smoothGaussianGrid(mask_data, rural_dens_in, 7, 3, null, false);
-      let r_pop = this.smoothGaussianGrid(mask_data, rural_pop_in, 7, 3, null, false);
-      let r_wt = this.smoothGaussianGrid(mask_data, rural_wt_in, 7, 3, null, false);
+      let r_dens = this.smoothGaussianGrid(mask_data, rural_dens_in, 8, 3, null, false);
+      let r_pop = this.smoothGaussianGrid(mask_data, rural_pop_in, 8, 3, null, false);
+      let r_wt = this.smoothGaussianGrid(mask_data, rural_wt_in, 8, 3, null, false);
+      let r_dens_wide = this.smoothGaussianGrid(mask_data, rural_dens_in, 14, 3, null, false);
+      let r_pop_wide = this.smoothGaussianGrid(mask_data, rural_pop_in, 14, 3, null, false);
+      let r_wt_wide = this.smoothGaussianGrid(mask_data, rural_wt_in, 14, 3, null, false);
 
       for (let i = 0; i < n_valid; i++) {
-        if (field[i] <= 0 || uopp[i] <= 2.0 || r_wt[i] <= 1e-4) continue;
+        if (field[i] <= 0 || uopp[i] <= 4.5) continue;
+        let use_wide = (r_wt[i] <= 0.12 || uopp[i] > 10.0) && (r_wt_wide[i] > 1e-4);
+        let wt_u = use_wide ? r_wt_wide[i] : r_wt[i];
+
+        if (wt_u <= 1e-4) continue;
         let local_a = (cell_area && cell_area[i] > 1.0) ? cell_area[i] : 1.0;
-        let cap_d = (r_dens[i]/r_wt[i])*local_a*max_mult;
-        let cap_p = (r_pop[i]/r_wt[i])*max_mult;
+        let rd_u = use_wide ? r_dens_wide[i] : r_dens[i];
+        let rp_u = use_wide ? r_pop_wide[i] : r_pop[i];
+        let eff_mult = (uopp[i] > 10.0) ? Math.min(max_mult, 0.80) : max_mult;
+        let cap_d = (rd_u/wt_u)*local_a*eff_mult;
+        let cap_p = (rp_u/wt_u)*eff_mult;
         let cap_v = Math.min(cap_d, cap_p);
-        let t_ramp = Math.max(0, Math.min(1, (uopp[i] - 2.0)/4.5));
+        let t_ramp = Math.max(0, Math.min(1, (uopp[i] - 4.5)/4.0));
 
         if (cap_v > 0 && field[i] > cap_v)
           field[i] = field[i]*(1.0 - t_ramp) + cap_v*t_ramp;
@@ -399,87 +414,11 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
 
 
     /**
-     * Builds & caches sparse Matérn (`nu = 3/2`) covariance matrix for fast signed Gauss-Seidel residual kriging.
+     * Delegate: invokes `ViscountDasymetricResidualSolver.A_getOrBuildSparseMaternMatrix`.
      * @alias ViscountHUResidualHelpers.getOrBuildSparseMaternMatrix
      */
     static getOrBuildSparseMaternMatrix (arg0_bundle) {
-      let bundle = arg0_bundle;
-
-      if (bundle._sparse_matern_ctx) return bundle._sparse_matern_ctx;
-      let c1 = 0.72;
-      let c2 = 0.28;
-      let earth_r = bundle.mask_data.earth_radius_km || 6371;
-      let eta = 0.08;
-      let inv_tau1 = 1/Math.max(0.4, bundle.tau1_dimensionless || 1.35);
-      let inv_tau2 = 1/Math.max(0.8, bundle.tau2_dimensionless || 2.90);
-      let n_obs = bundle.obs_bundle.obs_count;
-      let obs_r = bundle.obs_bundle.obs_radius_km;
-      let obs_ux = bundle.obs_bundle.obs_ux;
-      let obs_uy = bundle.obs_bundle.obs_uy;
-      let obs_uz = bundle.obs_bundle.obs_uz;
-      let sqrt3 = Math.sqrt(3);
-      let max_cell_r = 0;
-
-      for (let i = 0; i < bundle.mask_data.valid_cell_count; i++)
-        if (bundle.obs_bundle.cell_radius_km[i] > max_cell_r) max_cell_r = bundle.obs_bundle.cell_radius_km[i];
-
-      let min_dot = new Float64Array(n_obs);
-
-      for (let x = 0; x < n_obs; x++) {
-        let h_max = 7.99/inv_tau2*Math.sqrt(0.5*(max_cell_r*max_cell_r + obs_r[x]*obs_r[x]));
-
-        min_dot[x] = (h_max >= Math.PI*earth_r) ? -2.0 : (Math.cos(h_max/earth_r) - 1e-4);
-      }
-
-      let diag = new Float64Array(n_obs);
-      let nbr_idx = new Array(n_obs);
-      let nbr_val = new Array(n_obs);
-
-      for (let i = 0; i < n_obs; i++) {
-        diag[i] = 1.0 + eta;
-        nbr_idx[i] = [];
-        nbr_val[i] = [];
-      }
-
-      for (let i = 0; i < n_obs; i++) {
-        let ri = obs_r[i];
-
-        for (let j = i + 1; j < n_obs; j++) {
-          let dot = Math.max(-1, Math.min(1, obs_ux[i]*obs_ux[j] + obs_uy[i]*obs_uy[j] + obs_uz[i]*obs_uz[j]));
-          let c2_c = Math.max(0, 2 - 2*dot);
-          let h = earth_r*Math.sqrt(c2_c)*(1 + c2_c/24);
-          let rj = obs_r[j];
-          let r2_sum = ri*ri + rj*rj;
-          let u = h/Math.sqrt(0.5*r2_sum);
-          let v2 = u*inv_tau2;
-
-          if (v2 >= 7.99) continue;
-          let pref = (2*ri*rj)/Math.max(1e-8, r2_sum);
-          let s1 = sqrt3*u*inv_tau1;
-          let s2 = sqrt3*v2;
-          let kval = pref*(c1*(1 + s1)*Math.exp(-s1) + c2*(1 + s2)*Math.exp(-s2));
-
-          if (kval >= 0.001) {
-            nbr_idx[i].push(j);
-            nbr_val[i].push(kval);
-            nbr_idx[j].push(i);
-            nbr_val[j].push(kval);
-          }
-        }
-      }
-      bundle._sparse_matern_ctx = {
-        c1: c1,
-        c2: c2,
-        diag: diag,
-        inv_tau1: inv_tau1,
-        inv_tau2: inv_tau2,
-        min_dot: min_dot,
-        nbr_idx: nbr_idx,
-        nbr_val: nbr_val
-      };
-
-      //Return statement
-      return bundle._sparse_matern_ctx;
+      return ViscountDasymetricResidualSolver.A_getOrBuildSparseMaternMatrix(arg0_bundle);
     }
 
 
@@ -673,15 +612,16 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
      * subtracting state interiors, preventing inverted border steps and urban-inpaint tier spikes.
      * @alias ViscountHUResidualHelpers.removeSubIsoCliffs
      */
-    static removeSubIsoCliffs (arg0_mask_data, arg1_field, arg2_sub_iso, arg3_eps, arg4_rad_px, arg5_interior_weight, arg6_border_sigma, arg7_remove_state_offsets) {
+    static removeSubIsoCliffs (arg0_mask_data, arg1_field, arg2_sub_iso, arg3_eps, arg4_rad_px, arg5_interior_weight, arg6_border_sigma, arg7_remove_state_offsets, arg8_elev_valid) {
       let border_sigma = (arg6_border_sigma !== undefined) ? arg6_border_sigma : 6.0;
+      let elev_valid = arg8_elev_valid || null;
       let eps_cap = (arg3_eps !== undefined) ? arg3_eps : 0.004;
       let field = arg1_field;
       let mask_data = arg0_mask_data;
       let rad_px = (arg4_rad_px !== undefined) ? arg4_rad_px : 14;
       let remove_offsets = (arg7_remove_state_offsets !== undefined) ? Boolean(arg7_remove_state_offsets) : true;
       let sub_iso = arg2_sub_iso;
-      let w_int_base = (arg5_interior_weight !== undefined) ? arg5_interior_weight : 0.08;
+      let w_int_base = (arg5_interior_weight !== undefined) ? arg5_interior_weight : 0.04;
       let n_valid = mask_data.valid_cell_count;
       let log_f = new Float32Array(n_valid);
       let out = new Float32Array(n_valid);
@@ -713,7 +653,7 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
 
       for (let i = 0; i < n_valid; i++)
         if (work_field[i] > 0) log_f[i] = Math.log(work_field[i] + eps_eff);
-      let l_iso = this.smoothGaussianGrid(mask_data, log_f, rad_px, 4, null, false, work_field);
+      let l_iso = this.smoothGaussianGrid(mask_data, log_f, rad_px, 3, null, false, work_field, elev_valid);
 
       for (let i = 0; i < n_valid; i++) {
         if (work_field[i] <= 0) {
@@ -766,13 +706,14 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
      * Separable multi-pass tent filter (`C^2` isotropic Gaussian approximation) eliminating rectilinear Mach bands.
      * @alias ViscountHUResidualHelpers.smoothGaussianGrid
      */
-    static smoothGaussianGrid (arg0_mask_data, arg1_field, arg2_rad_px, arg3_passes, arg4_part_ids, arg5_pos_only, arg6_active_gate) {
+    static smoothGaussianGrid (arg0_mask_data, arg1_field, arg2_rad_px, arg3_passes, arg4_part_ids, arg5_pos_only, arg6_active_gate, arg7_elev_valid) {
       let mask_data = arg0_mask_data;
       let rad = Math.max(1, arg2_rad_px || 4);
       let passes = Math.max(1, arg3_passes || 3);
       let part_ids = arg4_part_ids;
       let pos_only = Boolean(arg5_pos_only);
       let gate = arg6_active_gate;
+      let elev_v = arg7_elev_valid || null;
       let h = mask_data.grid_height;
       let n_valid = mask_data.valid_cell_count;
       let p2v = mask_data.pixel_to_valid_idx;
@@ -786,6 +727,7 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
           if (gate && gate[i] <= 0) { tmp[i] = cur[i]; continue; }
           if (pos_only && cur[i] <= 0) { tmp[i] = 0; continue; }
           let cx = v_idx[i] % w;
+          let ei = elev_v ? elev_v[i] : 0;
           let row = Math.floor(v_idx[i]/w)*w;
           let pid = part_ids ? part_ids[i] : 0;
           let acc = 0;
@@ -800,6 +742,11 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
             if (part_ids && pid > 0 && part_ids[nv] !== pid) continue;
             let wt = rad + 1 - Math.abs(dx);
 
+            if (elev_v) {
+              let de = Math.abs(ei - elev_v[nv]);
+
+              if (de > 450.0) wt *= Math.exp(-(de - 450.0)/220.0);
+            }
             acc += cur[nv]*wt;
             wsum += wt;
           }
@@ -810,6 +757,7 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
           if (pos_only && arg1_field[i] <= 0) { cur[i] = 0; continue; }
           let cx = v_idx[i] % w;
           let cy = Math.floor(v_idx[i]/w);
+          let ei = elev_v ? elev_v[i] : 0;
           let pid = part_ids ? part_ids[i] : 0;
           let acc = 0;
           let wsum = 0;
@@ -826,6 +774,11 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
             if (part_ids && pid > 0 && part_ids[nv] !== pid) continue;
             let wt = rad + 1 - Math.abs(dy);
 
+            if (elev_v) {
+              let de = Math.abs(ei - elev_v[nv]);
+
+              if (de > 450.0) wt *= Math.exp(-(de - 450.0)/220.0);
+            }
             acc += tmp[nv]*wt;
             wsum += wt;
           }
@@ -839,95 +792,71 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
 
 
     /**
-     * Solves shrinkage-weighted signed residual dual weights (`v_vec`) around `prior_dens` via sparse Gauss-Seidel.
+     * Delegate: invokes `ViscountDasymetricResidualSolver.B_solveResidualDualWeights`.
      * @alias ViscountHUResidualHelpers.solveResidualDualWeights
      */
     static solveResidualDualWeights (arg0_kriging_bundle, arg1_prior_bundle, arg2_z_obs, arg3_s_obs) {
-      //Convert from parameters
-      let bundle = arg0_kriging_bundle;
-      let prior_bundle = arg1_prior_bundle;
-      let z_obs = arg2_z_obs;
-      let s_obs = arg3_s_obs;
+      return ViscountDasymetricResidualSolver.B_solveResidualDualWeights(arg0_kriging_bundle, arg1_prior_bundle, arg2_z_obs, arg3_s_obs);
+    }
 
-      //Declare local instance variables
-      let cell_area = bundle.mask_data.cell_land_area;
-      let cell_obs = bundle.obs_bundle.cell_nearest_obs;
-      let mask_data = bundle.mask_data;
-      let n_obs = bundle.obs_bundle.obs_count;
-      let n_valid = mask_data.valid_cell_count;
-      let obs_list = bundle.obs_bundle.obs_list;
-      let perm_ice = (bundle._bio_covs && bundle._bio_covs.perm_ice) ? bundle._bio_covs.perm_ice : null;
-      let prior_dens = prior_bundle.prior_dens;
-      let r_area = new Float64Array(n_obs);
-      let r_prior_sum = new Float64Array(n_obs);
-      let sp_ctx = this.getOrBuildSparseMaternMatrix(bundle);
 
-      //Function body
-      for (let i = 0; i < n_valid; i++) {
-        let o = cell_obs[i];
+    /**
+     * Blends precomputed Terra Preta (ADE) anthropogenic dark-earth density into tropical Amazonia/Guianas
+     * (`-5000..1750 AD`, `lat >= -19`), strictly conserving Amazonian mass within `hab_mask`.
+     * @alias ViscountHUResidualHelpers.blendTerraPretaSurface
+     */
+    static blendTerraPretaSurface (arg0_rk_pop, arg1_tp_norm, arg2_tp_lat_w, arg3_year) {
+      let rk_pop = arg0_rk_pop;
+      let tp_norm = arg1_tp_norm;
+      let tp_lat_w = arg2_tp_lat_w;
+      let yr = Number(arg3_year) || 0;
 
-        if (o < 0 || o >= n_obs || prior_dens[i] <= 0) continue;
-        let a = cell_area[i]*(perm_ice ? perm_ice[i] : 1.0);
+      if (!rk_pop || !tp_norm || !tp_lat_w || yr < -5000 || yr > 1750) return;
+      let w_tp = 0.0;
 
-        if (a <= 0) continue;
-        r_area[o] += a;
-        r_prior_sum[o] += a*prior_dens[i];
+      if (yr < -1000) w_tp = 0.14*(yr + 5000)/4000;
+      else if (yr < 1000) w_tp = 0.14 + 0.22*(yr + 1000)/2000;
+      else if (yr <= 1550) w_tp = 0.36;
+      else w_tp = 0.36*Math.max(0, (1750 - yr)/200);
+      if (w_tp <= 0) return;
+
+      let amz_sum = 0;
+
+      for (let i = 0; i < rk_pop.length; i++)
+        if (tp_lat_w[i] > 0) amz_sum += rk_pop[i]*tp_lat_w[i];
+      if (amz_sum <= 0) return;
+      for (let i = 0; i < rk_pop.length; i++) {
+        let wl = tp_lat_w[i];
+
+        if (wl > 0) rk_pop[i] = rk_pop[i]*(1 - w_tp*wl) + tp_norm[i]*amz_sum*w_tp;
       }
+    }
 
-      let obs_prior_z = new Float64Array(n_obs);
-      let p_z_sum = 0;
-      let z_o_sum = 0;
 
-      for (let o = 0; o < n_obs; o++) {
-        if (obs_list[o].is_frontier_buffer || r_area[o] <= 0) continue;
-        let pz = Math.sqrt(Math.max(1e-7, r_prior_sum[o]/r_area[o]));
+    /**
+     * Writes a valid-cell Float32Array to a big-endian IEEE-754 float32 RGBA GeoPNG.
+     * @alias ViscountHUResidualHelpers.writeFloat32GeoPNG
+     */
+    static writeFloat32GeoPNG (arg0_mask_data, arg1_field, arg2_out_path) {
+      let mask_data = arg0_mask_data;
+      let field = arg1_field;
+      let f_buf = new ArrayBuffer(4);
+      let f_dv = new DataView(f_buf);
+      let img = new PNG({ colorType: 6, height: mask_data.grid_height, width: mask_data.grid_width });
+      let valid_indices = mask_data.valid_indices;
 
-        obs_prior_z[o] = pz;
-        p_z_sum += r_area[o]*pz;
-        z_o_sum += r_area[o]*z_obs[o];
-      }
-      let scale_p2z = (p_z_sum > 1e-8) ? (z_o_sum/p_z_sum) : 1.0;
+      for (let i = 0; i < mask_data.valid_cell_count; i++) {
+        if (field[i] > 0) {
+          let px = valid_indices[i]*4;
 
-      for (let o = 0; o < n_obs; o++) {
-        if (r_area[o] > 0)
-          obs_prior_z[o] = Math.sqrt(Math.max(1e-7, r_prior_sum[o]/r_area[o]))*scale_p2z;
-      }
-
-      let delta_z = Math.max(0.015, 0.12*(z_o_sum/Math.max(1, n_obs)));
-      let r_vec = new Float64Array(n_obs);
-
-      for (let o = 0; o < n_obs; o++) {
-        if (r_area[o] <= 0) continue;
-        let eff_s = Math.max(0, (s_obs && Number.isFinite(s_obs[o])) ? s_obs[o] : 0);
-
-        if (obs_list[o].has_documented_settlement) eff_s = Math.max(eff_s, 18.0);
-        if (eff_s <= 0) continue;
-        let shrink = eff_s/(eff_s + 3.0);
-        let lr = Math.log((z_obs[o] + delta_z)/(obs_prior_z[o] + delta_z));
-
-        r_vec[o] = shrink*Math.max(-1.25, Math.min(1.45, lr));
-      }
-
-      let diag = sp_ctx.diag;
-      let n_nbr = sp_ctx.nbr_idx;
-      let n_val = sp_ctx.nbr_val;
-      let v_vec = new Float64Array(n_obs);
-
-      for (let o = 0; o < n_obs; o++) v_vec[o] = r_vec[o]/diag[o];
-      for (let iter = 0; iter < 80; iter++) {
-        for (let o = 0; o < n_obs; o++) {
-          let idxs = n_nbr[o];
-          let rhs = r_vec[o];
-          let vals = n_val[o];
-
-          for (let k = 0; k < idxs.length; k++)
-            rhs -= vals[k]*v_vec[idxs[k]];
-          v_vec[o] = rhs/diag[o];
+          f_dv.setFloat32(0, field[i], false);
+          img.data[px] = f_dv.getUint8(0);
+          img.data[px + 1] = f_dv.getUint8(1);
+          img.data[px + 2] = f_dv.getUint8(2);
+          img.data[px + 3] = f_dv.getUint8(3);
         }
       }
-
-      //Return statement
-      return v_vec;
+      fs.writeFileSync(arg2_out_path, PNG.sync.write(img, { colorType: 6, deflateLevel: 6 }));
     }
 
 

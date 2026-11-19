@@ -13,7 +13,8 @@ let { PNG } = global.pngjs || require("pngjs");
    */
   global.ViscountMaternVariogram = class {
     /**
-     * Step B2: Applies upward-only Cauchy spatial-neighbourhood macro-tile survey-completeness harmonisation.
+     * Step B2: Applies upward-only continuous geodesic Cauchy spatial-neighbourhood survey-completeness
+     * harmonisation per catchment (eliminating rectangular 3,5° lat/lon tile-boundary seams).
      * When `preserve_period_dynamics` is true, uses strictly same-period spatial neighbours without all-period injection.
      * @alias ViscountMaternVariogram.B2_harmoniseMacroTiles
      *
@@ -22,7 +23,7 @@ let { PNG } = global.pngjs || require("pngjs");
      * @param {Array<Object>} arg0_options.obs_list
      * @param {Array<Object>} arg0_options.period_configs
      * @param {boolean} [arg0_options.preserve_dyn=false]
-     * @param {Map} arg0_options.tile_map
+     * @param {Map} [arg0_options.tile_map]
      */
     static B2_harmoniseMacroTiles (arg0_options) {
       //Convert from parameters
@@ -30,148 +31,96 @@ let { PNG } = global.pngjs || require("pngjs");
 
       //Declare local instance variables
       let earth_radius_km = options.earth_radius_km || 6371.0;
-      let macro_list = [];
       let n_obs = options.obs_list.length;
+      let obs_all_z = new Float64Array(n_obs);
       let obs_list = options.obs_list;
       let period_configs = options.period_configs;
       let preserve_dyn = Boolean(options.preserve_dyn);
-      let tile_map = options.tile_map;
 
       //Function body
-      for (let [tile_key, tile_obs] of tile_map.entries()) {
-        let all_s = 0;
-        let area_s = 0;
-        let lat_s = 0;
-        let lon_s = 0;
-        let ux_s = 0;
-        let uy_s = 0;
-        let uz_s = 0;
+      //Precompute continuous geodesic Cauchy neighbourhood indices within 650 km (no rectangular tile boxes)
+      let nbr_idx = new Array(n_obs);
+      let nbr_w = new Array(n_obs);
+      let r_scale_km = 240.0;
+      let r2_scale = r_scale_km*r_scale_km;
+      let max_d2 = 650.0*650.0;
 
-        for (let i = 0; i < tile_obs.length; i++) {
-          let o = tile_obs[i];
-          let a = o.effective_area_km2;
+      for (let i = 0; i < n_obs; i++) {
+        let oi = obs_list[i];
 
-          area_s += a;
-          all_s += (o.total_sites_all_periods || 0);
-          lat_s += a*o.lat;
-          lon_s += a*o.lon;
-          ux_s += a*o.ux;
-          uy_s += a*o.uy;
-          uz_s += a*o.uz;
+        obs_all_z[i] = Math.sqrt(Math.max(0, (oi.total_sites_all_periods || 0)/Math.max(1, oi.effective_area_km2)));
+        nbr_idx[i] = [];
+        nbr_w[i] = [];
+      }
+
+      for (let i = 0; i < n_obs; i++) {
+        let oi = obs_list[i];
+
+        if (oi.is_frontier_buffer || Math.abs(oi.lat) >= 56.0) continue;
+        for (let j = 0; j < n_obs; j++) {
+          if (i === j) continue;
+          let oj = obs_list[j];
+
+          if (Math.abs(oj.lat) >= 58.0) continue;
+          let dot = Math.max(-1, Math.min(1, oi.ux*oj.ux + oi.uy*oj.uy + oi.uz*oj.uz));
+          let d2 = earth_radius_km*earth_radius_km*Math.max(0, 2 - 2*dot);
+
+          if (d2 > max_d2) continue;
+          nbr_idx[i].push(j);
+          nbr_w[i].push(oj.effective_area_km2/(d2 + r2_scale));
         }
-        let nrm = Math.sqrt(ux_s*ux_s + uy_s*uy_s + uz_s*uz_s) || 1;
-
-        macro_list.push({
-          all_z: Math.sqrt(Math.max(0, all_s/Math.max(1, area_s))),
-          area_km2: area_s,
-          is_front: tile_key.startsWith("F_"),
-          lat: lat_s/Math.max(1, area_s),
-          lon: lon_s/Math.max(1, area_s),
-          obs: tile_obs,
-          radius_km: Math.sqrt(area_s/Math.PI),
-          ux: ux_s/nrm,
-          uy: uy_s/nrm,
-          uz: uz_s/nrm
-        });
       }
 
       for (let i = 0; i < period_configs.length; i++) {
         let all_z_sum = 0;
         let per_z_sum = 0;
         let pkey = period_configs[i].key;
-        let tile_means = new Float64Array(macro_list.length);
         let z_arr = new Float64Array(n_obs);
 
-        for (let x = 0; x < n_obs; x++)
-          z_arr[x] = Math.sqrt(Math.max(0, obs_list[x].eb_densities[pkey] || 0));
+        for (let x = 0; x < n_obs; x++) {
+          let o = obs_list[x];
 
-        for (let x = 0; x < macro_list.length; x++) {
-          let asum = 0;
-          let mc = macro_list[x];
-          let zsum = 0;
-
-          for (let y = 0; y < mc.obs.length; y++) {
-            let o = mc.obs[y];
-            let a = o.effective_area_km2;
-
-            asum += a;
-            zsum += a*z_arr[o._idx];
-          }
-          tile_means[x] = (asum > 0) ? zsum/asum : 0;
-          if (!mc.is_front && mc.lat < 54.0 && mc.all_z > 0) {
-            all_z_sum += mc.area_km2*mc.all_z;
-            per_z_sum += mc.area_km2*tile_means[x];
+          z_arr[x] = Math.sqrt(Math.max(0, o.eb_densities[pkey] || 0));
+          if (!o.is_frontier_buffer && Math.abs(o.lat) < 54.0 && obs_all_z[x] > 0) {
+            all_z_sum += o.effective_area_km2*obs_all_z[x];
+            per_z_sum += o.effective_area_km2*z_arr[x];
           }
         }
         let per_ratio = (all_z_sum > 1e-6) ? per_z_sum/all_z_sum : 0;
 
-        for (let x = 0; x < macro_list.length; x++) {
-          let mx = macro_list[x];
+        for (let x = 0; x < n_obs; x++) {
+          let ox = obs_list[x];
+          let idxs = nbr_idx[x];
 
-          if (mx.is_front || Math.abs(mx.lat) >= 56.0) continue;
-          let r2 = mx.radius_km*mx.radius_km;
+          if (idxs.length === 0) continue;
           let wsum = 0;
           let wz = 0;
+          let wts = nbr_w[x];
 
-          for (let y = 0; y < macro_list.length; y++) {
-            if (x === y) continue;
-            let my = macro_list[y];
-
-            if (Math.abs(my.lat) >= 58.0) continue;
-            let dot = Math.max(-1, Math.min(1, mx.ux*my.ux + mx.uy*my.uy + mx.uz*my.uz));
-            let d2 = earth_radius_km*earth_radius_km*Math.max(0, 2 - 2*dot);
-
-            if (d2 > 640000) continue;
-            let w = my.area_km2/(d2 + r2);
-
-            wsum += w;
-            wz += w*tile_means[y];
+          for (let k = 0; k < idxs.length; k++) {
+            wsum += wts[k];
+            wz += wts[k]*z_arr[idxs[k]];
           }
-
-          let nbr_prior = (wsum > 0) ? wz/wsum : tile_means[x];
+          let nbr_prior = (wsum > 0) ? wz/wsum : z_arr[x];
+          let z_raw = z_arr[x];
 
           if (preserve_dyn) {
-            //Pure same-period spatial-neighbour floor and zero-hole imputation without injecting global all-period total_sites_all_periods
-            if (tile_means[x] < 0.65*nbr_prior && tile_means[x] > 1e-6) {
-              let mean_z_tile = Math.max(1e-6, tile_means[x]);
-              let target_mean = 0.40*tile_means[x] + 0.60*nbr_prior;
+            if (z_raw > 1e-6 && z_raw < 0.55*nbr_prior) {
+              let z_new = 0.55*z_raw + 0.45*nbr_prior;
 
-              for (let y = 0; y < mx.obs.length; y++) {
-                let o = mx.obs[y];
-                let z_raw = z_arr[o._idx];
-                let z_new = Math.max(z_raw, target_mean*(z_raw/mean_z_tile));
+              ox.eb_densities[pkey] = z_new*z_new;
+            } else if (z_raw <= 1e-6 && nbr_prior > 1e-4 && (ox.total_sites_all_periods || 0) > 0) {
+              let imp_z = 0.28*nbr_prior;
 
-                o.eb_densities[pkey] = z_new*z_new;
-              }
-            } else if (tile_means[x] <= 1e-6 && nbr_prior > 1e-4) {
-              let imp_z = 0.35*nbr_prior;
-
-              for (let y = 0; y < mx.obs.length; y++) {
-                let o = mx.obs[y];
-                let z_raw = z_arr[o._idx];
-
-                o.eb_densities[pkey] = Math.max(z_raw*z_raw, imp_z*imp_z);
-              }
+              ox.eb_densities[pkey] = imp_z*imp_z;
             }
           } else {
-            let cap_prior = Math.max(nbr_prior, 0.85*mx.all_z*per_ratio);
+            let cap_prior = Math.max(nbr_prior, 0.80*obs_all_z[x]*per_ratio);
 
-            if (tile_means[x] < 0.72*cap_prior) {
-              let all_z_tile = Math.max(1e-6, mx.all_z);
-              let mean_z_tile = Math.max(1e-6, tile_means[x]);
-              let target_mean = 0.45*tile_means[x] + 0.55*cap_prior;
+            if (z_raw < 0.65*cap_prior && (obs_all_z[x] > 0 || nbr_prior > 1e-4)) {
+              let z_new = Math.max(z_raw, 0.50*z_raw + 0.50*cap_prior*0.82);
 
-              for (let y = 0; y < mx.obs.length; y++) {
-                let o = mx.obs[y];
-                let o_all_z = Math.sqrt(Math.max(0, (o.total_sites_all_periods || 0)/Math.max(1, o.effective_area_km2)));
-                let z_raw = z_arr[o._idx];
-                let rel_shape = (tile_means[x] > 1e-6) ?
-                  (0.55*(z_raw/mean_z_tile) + 0.45*(o_all_z/all_z_tile)) :
-                  (o_all_z/all_z_tile);
-                let z_new = Math.max(z_raw, target_mean*Math.max(0.18, rel_shape));
-
-                o.eb_densities[pkey] = z_new*z_new;
-              }
+              ox.eb_densities[pkey] = z_new*z_new;
             }
           }
         }

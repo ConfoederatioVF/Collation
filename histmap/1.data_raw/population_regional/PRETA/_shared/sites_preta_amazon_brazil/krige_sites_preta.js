@@ -2,6 +2,7 @@
 let fs = require("fs");
 let path = require("path");
 let { PNG } = require("pngjs");
+let { ViscountHUResidualKriging } = require(path.resolve(__dirname, "../../../../../3.data_transform/population_Substrata.viscount/centaur/ViscountHUResidualKriging.js"));
 let { ViscountMaternKriging } = require(path.resolve(__dirname, "../../../../../3.data_transform/population_Substrata.viscount/ViscountMaternKriging.js"));
 let { ViscountRuralSuitability } = require(path.resolve(__dirname, "../../../../../3.data_transform/population_Substrata.viscount/ViscountRuralSuitability.js"));
 let { ViscountUrbanMask } = require(path.resolve(__dirname, "../../../../../3.data_transform/population_Substrata.viscount/ViscountUrbanMask.js"));
@@ -132,6 +133,11 @@ let { ViscountUrbanMask } = require(path.resolve(__dirname, "../../../../../3.da
     static B_generatePopulationRasters (arg0_surface_bundle) {
       //Convert from parameters
       let surface = arg0_surface_bundle;
+      let rk_cfg = (surface && surface.kriging_bundle && surface.kriging_bundle.config) ? surface.kriging_bundle.config : {};
+
+      //Guard clause: delegate to unified Viscount dasymetric residual kriging engine when active
+      if (rk_cfg.kriging_config && rk_cfg.kriging_config.residual_kriging_mode === "hu_hyde_residual")
+        return ViscountHUResidualKriging.generateAllBenchmarkPopulationRasters(surface, { is_polynesia: false });
 
       //Declare local instance variables
       let bio_covs = surface.bio_covs;
@@ -384,11 +390,10 @@ let { ViscountUrbanMask } = require(path.resolve(__dirname, "../../../../../3.da
               hyde_1900 ? 0.15*hyde_1900[i] : 0
             )/Math.max(1.0, cell_area[i]);
 
-            //Smooth Michaelis-Menten carrying-capacity taper: full strength in inhabited river/coastal corridors,
-            //organic decay to ~0.002-0.01 in uninhabited interfluvial rainforest, Boreal Chaco & Andean snowpeaks
-            let hab_taper = (h_dens > 0) ? Math.pow(h_dens/(h_dens + 0.008), 1.35) : 0.0;
-            if (hab_m && hab_m[i] === 0) hab_taper *= 0.01;
-
+            if (hab_m && hab_m[i] === 0) {
+              fld[i] = 0;
+              continue;
+            }
             if (is_tp) {
               let row = Math.floor(g_px/gw);
               let col = g_px % gw;
@@ -397,12 +402,11 @@ let { ViscountUrbanMask } = require(path.resolve(__dirname, "../../../../../3.da
               //Smooth C1 cosine taper restricting Terra Preta anthrosols to tropical Amazonia, Llanos de Moxos & Guianas
               let lat_w = (lat >= -16.5) ? 1.0 : ((lat <= -19.0) ? 0.0 : 0.5*(1.0 + Math.cos(Math.PI*(-16.5 - lat)/2.5)));
               let lon_w = (lon <= -46.5) ? 1.0 : ((lon >= -44.0) ? 0.0 : 0.5*(1.0 + Math.cos(Math.PI*(lon + 46.5)/2.5)));
-              let tp_w = lat_w*lon_w*Math.pow(Math.max(0.0, hab_taper), 0.35);
+              let tp_w = lat_w*lon_w;
               fld[i] = fld[i]*tp_w;
-              if (fld[i] < 0.006) fld[i] = 0;
+              if (fld[i] < 0.004) fld[i] = 0;
               kept_sum += fld[i];
             } else {
-              fld[i] = fld[i]*hab_taper;
               kept_sum += fld[i];
             }
           }

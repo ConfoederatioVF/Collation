@@ -4,9 +4,11 @@ let JSON5 = global.JSON5 || require("json5");
 let path = global.path || require("path");
 let { PNG } = global.pngjs || require("pngjs");
 let ccf_p = (typeof __dirname !== "undefined" && fs.existsSync(path.join(__dirname, "ViscountCountyCensusFrontier.js"))) ? path.join(__dirname, "ViscountCountyCensusFrontier.js") : path.join(process.cwd(), "histmap/3.data_transform/population_Substrata.viscount/centaur/ViscountCountyCensusFrontier.js");
+let drs_p = (typeof __dirname !== "undefined" && fs.existsSync(path.resolve(__dirname, "../ViscountDasymetricResidualSolver.js"))) ? path.resolve(__dirname, "../ViscountDasymetricResidualSolver.js") : path.join(process.cwd(), "histmap/3.data_transform/population_Substrata.viscount/ViscountDasymetricResidualSolver.js");
 let hlp_p = (typeof __dirname !== "undefined" && fs.existsSync(path.join(__dirname, "ViscountHUResidualHelpers.js"))) ? path.join(__dirname, "ViscountHUResidualHelpers.js") : path.join(process.cwd(), "histmap/3.data_transform/population_Substrata.viscount/centaur/ViscountHUResidualHelpers.js");
 let um_p = (typeof __dirname !== "undefined" && fs.existsSync(path.resolve(__dirname, "../ViscountUrbanMask.js"))) ? path.resolve(__dirname, "../ViscountUrbanMask.js") : path.join(process.cwd(), "histmap/3.data_transform/population_Substrata.viscount/ViscountUrbanMask.js");
 let ViscountCountyCensusFrontier = global.ViscountCountyCensusFrontier || require(ccf_p).ViscountCountyCensusFrontier;
+let ViscountDasymetricResidualSolver = global.ViscountDasymetricResidualSolver || require(drs_p).ViscountDasymetricResidualSolver;
 let ViscountHUResidualHelpers = global.ViscountHUResidualHelpers || require(hlp_p).ViscountHUResidualHelpers;
 let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanMask;
 
@@ -44,27 +46,35 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
       let adm_cfg_abs = path.resolve(mask_data.project_root || ".", adm_cfg_rel);
       let adm_obj = fs.existsSync(adm_cfg_abs) ? JSON5.parse(fs.readFileSync(adm_cfg_abs, "utf8")) : {};
       let bbox = ViscountHUResidualHelpers.computeMaskBBox(mask_data);
+      let cov_paths = (config.kriging_config && config.kriging_config.covariate_paths) ?
+        config.kriging_config.covariate_paths : {};
       let def_p = adm_obj.default_admixture || {
-        census_taper_end: 1850,
+        census_taper_end: 1880,
         census_taper_start: 1800,
-        w_coastal: 0.08,
-        w_dendro: 0.04,
-        w_fluvial: 0.10,
-        w_hyde: 0.38,
-        w_landuse: 0.16,
-        w_settlement: 0.24
+        w_coastal: 0.06,
+        w_dendro: 0.00,
+        w_fluvial: 0.08,
+        w_hyde: 0.42,
+        w_landuse: 0.22,
+        w_settlement: 0.22
       };
       let dendro_path = path.join(mask_data.domain_dir || "", "config/dendro_occupation_series.json");
       let dendro_regions = [];
+      let elev_valid = (bio_covs && bio_covs.elev_valid) ? bio_covs.elev_valid : null;
       let h = mask_data.grid_height;
       let hu_assign = new Int16Array(mask_data.valid_cell_count).fill(-1);
       let hu_id_list = ["default"];
       let hu_profiles = adm_obj.hu_profiles || {};
-      let manifest_abs = path.resolve(mask_data.project_root || ".", "histmap/1.data_raw/population_regional/CENTAUR/centaur_areal_masks.json5");
+      let manifest_rel = adm_obj.areal_masks_manifest ||
+        (config.kriging_config && config.kriging_config.areal_masks_manifest) ||
+        (adm_cfg_rel.includes("centaur") ? "histmap/1.data_raw/population_regional/CENTAUR/centaur_areal_masks.json5" : "");
+      let manifest_abs = manifest_rel ? path.resolve(mask_data.project_root || ".", manifest_rel) : "";
       let n_valid = mask_data.valid_cell_count;
       let p2v = mask_data.pixel_to_valid_idx;
       let prof_list = [def_p];
-      let sett_path = path.join(mask_data.domain_dir || "", "config/documented_settlements.json");
+      let sett_path = cov_paths.documented_settlements_json ?
+        path.resolve(mask_data.project_root || ".", cov_paths.documented_settlements_json) :
+        path.join(mask_data.domain_dir || "", "config/documented_settlements.json");
       let settlements = [];
       let valid_indices = mask_data.valid_indices;
       let w = mask_data.grid_width;
@@ -175,9 +185,12 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
           if (s.lon < bbox.min_lon || s.lon > bbox.max_lon || s.lat < bbox.min_lat || s.lat > bbox.max_lat) continue;
           let gx = Math.max(0, Math.min(w - 1, Math.floor((s.lon + 180)*w/360)));
           let gy = Math.max(0, Math.min(h - 1, Math.floor((90 - s.lat)*h/180)));
+          let sv = p2v ? p2v[gy*w + gx] : -1;
+          let s_elev = (sv >= 0 && elev_valid) ? elev_valid[sv] : 150.0;
 
           settlements.push({
             cos_lat: Math.max(0.18, Math.cos(s.lat*Math.PI/180)),
+            elev_m: s_elev,
             gx: gx,
             gy: gy,
             series: s.series || []
@@ -209,35 +222,54 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
       //Return statement
       return {
         county_census_frontier: adm_obj.county_census_frontier || null,
+        cross_catchment_attenuation: Number.isFinite(adm_obj.cross_catchment_attenuation) ? Number(adm_obj.cross_catchment_attenuation) : 0.82,
         dendro_regions: dendro_regions,
+        elevation_barrier_m: Number.isFinite(adm_obj.elevation_barrier_m) ? Number(adm_obj.elevation_barrier_m) : 650.0,
+        hyde_prior_exponent: Number.isFinite(adm_obj.hyde_prior_exponent) ? Number(adm_obj.hyde_prior_exponent) : 0.30,
+        remove_sub_iso_state_offsets: (adm_obj.remove_sub_iso_state_offsets !== undefined) ?
+          Boolean(adm_obj.remove_sub_iso_state_offsets) : false,
+        residual_clamp_max: Number.isFinite(adm_obj.residual_clamp_max) ? Number(adm_obj.residual_clamp_max) : 2.60,
+        residual_clamp_min: Number.isFinite(adm_obj.residual_clamp_min) ? Number(adm_obj.residual_clamp_min) : -2.60,
+        residual_gain: Number.isFinite(adm_obj.residual_gain) ? Number(adm_obj.residual_gain) : 0.90,
+        settlement_max_km: Number.isFinite(adm_obj.settlement_max_km) ? Number(adm_obj.settlement_max_km) : 42.0,
+        settlement_sigma1_km: Number.isFinite(adm_obj.settlement_sigma1_km) ? Number(adm_obj.settlement_sigma1_km) : 8.0,
+        settlement_sigma2_km: Number.isFinite(adm_obj.settlement_sigma2_km) ? Number(adm_obj.settlement_sigma2_km) : 18.0,
         settlements: settlements,
+        strict_hab_cutoff_year: Number.isFinite(adm_obj.strict_hab_cutoff_year) ? Number(adm_obj.strict_hab_cutoff_year) : 1650,
         t0_arr: t0_arr,
         t1_arr: t1_arr,
+        terra_preta_period_key: adm_obj.terra_preta_period_key || null,
+        terrain_weight_power: Number.isFinite(adm_obj.terrain_weight_power) ? Number(adm_obj.terrain_weight_power) : 0.85,
+        urban_core_cap_mult: Number.isFinite(adm_obj.urban_core_cap_mult) ? Number(adm_obj.urban_core_cap_mult) : 0.78,
         w_coastal: w_coast,
         w_dendro: w_den,
         w_fluvial: w_fluv,
         w_hyde: w_hyde,
         w_landuse: w_lu,
-        w_settlement: w_set
+        w_settlement: w_set,
+        wild_fields_steppe_suppression: Boolean(adm_obj.wild_fields_steppe_suppression)
       };
     }
 
 
     /**
-     * Step B: Computes macro-preserving cross-`sub_iso` de-cliffed urban-masked HYDE 3.5 rural population density
-     * and HYDE land-use intensity (`cropland + 1,5*tot_irri + 0,35*grazing`) for year `t`.
+     * Step B: Computes macro-preserving cross-`sub_iso` terrain-aware de-cliffed urban-masked HYDE 3.5 rural
+     * population density and HYDE land-use carrying capacity (`cropland + 1,5*tot_irri + 0,6*tot_rice + 0,25*grazing`)
+     * for year `t`.
      * @alias ViscountHUResidualKriging.B_computeMacroPreservingDeCliffedHYDE
      */
-    static B_computeMacroPreservingDeCliffedHYDE (arg0_mask_data, arg1_bio_covs, arg2_year, arg3_config, arg4_cache) {
+    static B_computeMacroPreservingDeCliffedHYDE (arg0_mask_data, arg1_bio_covs, arg2_year, arg3_config, arg4_cache, arg5_strict_cut, arg6_remove_state_offsets) {
       //Convert from parameters
       let mask_data = arg0_mask_data;
       let bio_covs = arg1_bio_covs;
       let year = Number(arg2_year) || 0;
       let config = (arg3_config) ? arg3_config : {};
       let cache = arg4_cache;
+      let strict_cut = Number.isFinite(arg5_strict_cut) ? Number(arg5_strict_cut) : 1650;
+      let remove_state_offsets = Boolean(arg6_remove_state_offsets);
 
       //Guard clauses
-      let ckey = `hu_hyde_decliff_${year}`;
+      let ckey = `hu_hyde_decliff_${year}_${strict_cut}_${remove_state_offsets ? 1 : 0}`;
       if (cache && cache.has(ckey)) return cache.get(ckey);
 
       //Declare local instance variables
@@ -247,6 +279,7 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
       let d_raw = new Float32Array(mask_data.valid_cell_count);
       let dist_catch = bio_covs.dist_catch_px;
       let dist_site = bio_covs.dist_site_px;
+      let elev_valid = bio_covs.elev_valid || null;
       let hab_mask = bio_covs.hab_mask;
       let hyde_lbl = ViscountHUResidualHelpers.resolveHYDEYearLabel(year);
       let hyde_raw_dir = path.resolve(mask_data.project_root || ".", cov_paths.hyde_raw_rasters_folder || "histmap/2.data_cleaning/landuse_HYDE/rasters");
@@ -263,11 +296,13 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
       //Function body
       let crp_grid = ViscountHUResidualHelpers.readCachedGlobalFloat(path.join(hyde_raw_dir, `cropland${hyde_lbl}.png`), total_px, cache);
       let irr_grid = ViscountHUResidualHelpers.readCachedGlobalFloat(path.join(hyde_raw_dir, `tot_irri${hyde_lbl}.png`), total_px, cache);
+      let rice_path = path.join(hyde_raw_dir, `tot_rice${hyde_lbl}.png`);
+      let rice_grid = fs.existsSync(rice_path) ? ViscountHUResidualHelpers.readCachedGlobalFloat(rice_path, total_px, cache) : null;
       let grz_grid = ViscountHUResidualHelpers.readCachedGlobalFloat(path.join(hyde_raw_dir, `grazing${hyde_lbl}.png`), total_px, cache);
 
       for (let i = 0; i < n_valid; i++) {
         let gidx = valid_indices[i];
-        let is_hab = (year <= 1650) ?
+        let is_hab = (year <= strict_cut) ?
           (hab_mask ? (hab_mask[i] === 1) : (perm_ice[i] > 0.05)) :
           (perm_ice[i] > 0.05);
 
@@ -279,32 +314,39 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
 
         if (d < 0.002) {
           let r19 = hyde_rur_1900 ? (hyde_rur_1900[i]/local_a) : 0;
+          let hb = (bio_covs.hyde_hab_dens && bio_covs.hyde_hab_dens[i] >= 0.002) ? bio_covs.hyde_hab_dens[i] : 0;
 
+          if (hb > 0)
+            d = Math.max(d, 0.12*hb);
           if (is_micro_island && d_c <= 5.6) {
             d = Math.max(d, 0.22*r19 + 0.004);
-          } else if (d_s <= 3.0 && d_c <= 5.6) {
-            d = Math.max(d, Math.exp(-0.55*d_s)*Math.max(0.004, 0.08*r19));
+          } else if (d_s <= 2.4 && d_c <= 5.6) {
+            d = Math.max(d, Math.exp(-0.65*d_s)*Math.max(0.004, 0.08*r19));
           }
         }
         d_raw[i] = d;
-        lu_raw[i] = Math.max(0, (crp_grid[gidx] + 1.5*irr_grid[gidx] + 0.35*grz_grid[gidx])/local_a);
+        let rice_v = rice_grid ? rice_grid[gidx] : 0;
+
+        lu_raw[i] = Math.max(0, (crp_grid[gidx] + 1.5*irr_grid[gidx] + 0.60*rice_v + 0.25*grz_grid[gidx])/local_a);
       }
 
+      let dc_rad = remove_state_offsets ? 12 : 6;
+      let dc_sig = remove_state_offsets ? 5.0 : 3.2;
       let d_decliff = (n_valid >= 2000 && bio_covs.sub_iso_valid && year < 1850) ?
-        ViscountHUResidualHelpers.removeSubIsoCliffs(mask_data, d_raw, bio_covs.sub_iso_valid, 0.004, 16) :
+        ViscountHUResidualHelpers.removeSubIsoCliffs(mask_data, d_raw, bio_covs.sub_iso_valid, 0.004, dc_rad, 0.02, dc_sig, remove_state_offsets, elev_valid) :
         d_raw;
       let elig_hab = new Uint8Array(n_valid);
 
       for (let i = 0; i < n_valid; i++) {
-        let is_hab = (year <= 1650) ?
+        let is_hab = (year <= strict_cut) ?
           (hab_mask ? (hab_mask[i] === 1) : (perm_ice[i] > 0.05)) :
           (perm_ice[i] > 0.05);
 
         if (is_hab) elig_hab[i] = 1;
       }
-      ViscountHUResidualHelpers.closeZeroPinholes(mask_data, d_decliff, elig_hab, 4, 0.45, 2, 0);
+      ViscountHUResidualHelpers.closeZeroPinholes(mask_data, d_decliff, elig_hab, 4, 0.48, 2, 0);
       let lu_decliff = (n_valid >= 2000 && bio_covs.sub_iso_valid && year < 1850) ?
-        ViscountHUResidualHelpers.removeSubIsoCliffs(mask_data, lu_raw, bio_covs.sub_iso_valid, 0.002, 16) :
+        ViscountHUResidualHelpers.removeSubIsoCliffs(mask_data, lu_raw, bio_covs.sub_iso_valid, 0.002, dc_rad, 0.02, dc_sig, remove_state_offsets, elev_valid) :
         lu_raw;
       let out = { d_decliff: d_decliff, lu_decliff: lu_decliff };
 
@@ -316,8 +358,9 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
 
 
     /**
-     * Step C: Evaluates per-HU weighted HYDE 3.5 + landuse + documented settlements + dendrochronology
-     * prior carrying-capacity density across valid cells.
+     * Step C: Evaluates HYDE-inspired dasymetric prior carrying-capacity density combining de-cliffed HYDE 3.5,
+     * arable/irrigated/paddy land use, contour elevation & slope step-bands, terrain-gated fluvial/coastal corridors,
+     * compact terrain-barrier-aware Stadestér settlements and optional dendrochronology / steppe envelopes.
      * @alias ViscountHUResidualKriging.C_evaluatePriorTrendField
      */
     static C_evaluatePriorTrendField (arg0_mask_data, arg1_bio_covs, arg2_hu_ctx, arg3_year, arg4_config, arg5_cache, arg6_options) {
@@ -332,13 +375,16 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
 
       //Declare local instance variables
       let hyde_yr = Number.isFinite(options.hyde_year) ? Number(options.hyde_year) : year;
-      let strict_hab = Boolean(year <= 1650 || options.strict_hab);
-      let ckey = (hyde_yr === year && !options.strict_hab) ? `hu_prior_${year}` : `hu_prior_${year}_h${hyde_yr}_${strict_hab ? 1 : 0}`;
+      let strict_cut = Number.isFinite(hu_ctx.strict_hab_cutoff_year) ? Number(hu_ctx.strict_hab_cutoff_year) : 1650;
+      let strict_hab = Boolean(year <= strict_cut || options.strict_hab);
+      let ckey = (hyde_yr === year && !options.strict_hab) ? `hu_prior_${year}_${strict_cut}` : `hu_prior_${year}_h${hyde_yr}_${strict_hab ? 1 : 0}`;
 
       if (cache && cache.has(ckey)) return cache.get(ckey);
-      let d_obj = this.B_computeMacroPreservingDeCliffedHYDE(mask_data, bio_covs, hyde_yr, config, cache);
+      let d_obj = this.B_computeMacroPreservingDeCliffedHYDE(mask_data, bio_covs, hyde_yr, config, cache, strict_cut, Boolean(hu_ctx.remove_sub_iso_state_offsets));
       let d_decliff = d_obj.d_decliff;
       let dist_site = bio_covs.dist_site_px;
+      let elev_valid = bio_covs.elev_valid || null;
+      let forest_valid = bio_covs.forest_valid || null;
       let h = mask_data.grid_height;
       let hab_mask = bio_covs.hab_mask;
       let is_micro = (mask_data.valid_cell_count < 2000);
@@ -347,26 +393,38 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
       let p2v = mask_data.pixel_to_valid_idx;
       let perm_ice = bio_covs.perm_ice;
       let prior_dens = new Float32Array(n_valid);
+      let terr_pow = Number.isFinite(hu_ctx.terrain_weight_power) ? Number(hu_ctx.terrain_weight_power) : 0.85;
       let u_coast = bio_covs.u_coastal;
       let u_den = new Float32Array(n_valid);
       let u_eco = bio_covs.u_eco;
+      let u_elev = bio_covs.u_elev || null;
       let u_fluv = bio_covs.u_fluvial;
       let u_nat = bio_covs.u_nat;
       let u_set = new Float32Array(n_valid);
+      let u_slope = bio_covs.u_slope || null;
+      let valid_indices = mask_data.valid_indices;
       let w = mask_data.grid_width;
+      let wf_steppe = Boolean(hu_ctx.wild_fields_steppe_suppression);
+      let wf_w = wf_steppe ? ((year <= 1600) ? 1.0 : ((year >= 1800) ? 0.0 : (1800 - year)/200.0)) : 0.0;
 
       //Function body
+      //Compact terrain-barrier-aware documented Stadestér settlement kernels (crisp valley footprints, no 80 km blobs)
       let setts = hu_ctx.settlements || [];
-      let s_rad_y = is_micro ? 4 : 9;
-      let s_max_km = is_micro ? 35.0 : 80.0;
+      let s_sig1 = Number.isFinite(hu_ctx.settlement_sigma1_km) ? Number(hu_ctx.settlement_sigma1_km) : 8.0;
+      let s_sig2 = Number.isFinite(hu_ctx.settlement_sigma2_km) ? Number(hu_ctx.settlement_sigma2_km) : 18.0;
+      let s_max_km = is_micro ? 28.0 : (Number.isFinite(hu_ctx.settlement_max_km) ? Number(hu_ctx.settlement_max_km) : 42.0);
+      let s_rad_y = Math.max(2, Math.min(6, Math.ceil(s_max_km/9.26)));
+      let inv_2s1 = 1.0/(2.0*s_sig1*s_sig1);
+      let inv_2s2 = 1.0/(2.0*s_sig2*s_sig2);
 
       for (let i = 0; i < setts.length; i++) {
         let s = setts[i];
         let pop = ViscountHUResidualHelpers.interpolateSeries(s.series, year, 80);
 
         if (pop <= 0) continue;
-        let amp = Math.pow(pop, 0.68)/65.0;
+        let amp = Math.pow(pop, 0.62)/65.0;
         let max_dx = Math.min(s_rad_y*3, Math.ceil((s_rad_y + 0.5)/s.cos_lat));
+        let s_elev = Number.isFinite(s.elev_m) ? s.elev_m : 150.0;
 
         for (let dy = -s_rad_y; dy <= s_rad_y; dy++) {
           let ny = s.gy + dy;
@@ -380,8 +438,15 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
             let nv = p2v[ny*w + nx];
 
             if (nv >= 0) {
+              let e_att = 1.0;
+
+              if (elev_valid) {
+                let de = Math.abs(elev_valid[nv] - s_elev);
+
+                if (de > 120.0) e_att = Math.exp(-Math.pow((de - 120.0)/520.0, 1.5));
+              }
               let taper = 0.5*(1 + Math.cos(Math.PI*d_km/s_max_km));
-              let k = taper*(0.74*Math.exp(-(d_km*d_km)/(2*14.0*14.0)) + 0.26*Math.exp(-(d_km*d_km)/(2*28.0*28.0)));
+              let k = e_att*taper*(0.78*Math.exp(-d_km*d_km*inv_2s1) + 0.22*Math.exp(-d_km*d_km*inv_2s2));
 
               u_set[nv] += amp*k;
             }
@@ -421,12 +486,13 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
 
       let d_cnt = 0;
       let d_sum = 0;
+      let hyde_exp = Number.isFinite(hu_ctx.hyde_prior_exponent) ? Number(hu_ctx.hyde_prior_exponent) : 0.30;
       let lu_cnt = 0;
       let lu_sum = 0;
 
       for (let i = 0; i < n_valid; i++) {
         if (d_decliff[i] > 0) {
-          d_sum += Math.pow(d_decliff[i], 0.85);
+          d_sum += Math.pow(d_decliff[i], hyde_exp);
           d_cnt++;
         }
         if (lu_decliff[i] > 0) {
@@ -434,13 +500,13 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
           lu_cnt++;
         }
       }
-      let mean_d85 = Math.max(0.015, d_sum/Math.max(1, d_cnt));
+      let mean_d_base = Math.max(0.015, d_sum/Math.max(1, d_cnt));
       let mean_lu = Math.max(0.005, lu_sum/Math.max(1, lu_cnt));
 
       for (let i = 0; i < n_valid; i++) {
         let is_hab = hab_mask ? (hab_mask[i] === 1) : (perm_ice[i] > 0.05);
 
-        if (!is_hab && strict_hab && (year <= 1650 || u_set[i] <= 0.02)) {
+        if (!is_hab && strict_hab && (year <= strict_cut || u_set[i] <= 0.02)) {
           prior_dens[i] = 0;
           continue;
         }
@@ -448,13 +514,13 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
           prior_dens[i] = 0;
           continue;
         }
-        let d_base = Math.pow(Math.max(0, d_decliff[i]), 0.85);
-        let u_nat_c = Math.max(0.10, Math.min(2.2, u_nat[i]));
+        let d_base = (d_decliff[i] > 0) ? Math.pow(d_decliff[i], hyde_exp) : 0;
+        let u_nat_c = Math.max(0.06, Math.min(2.2, u_nat[i]));
         let lu_val = lu_decliff[i] > 0 ?
-          (0.68*Math.pow(lu_decliff[i]/mean_lu, 0.55) + 0.32*(0.75*u_nat_c + 0.25*u_eco[i])) :
-          (0.75*u_nat_c + 0.25*u_eco[i]);
-        let fluv_val = u_fluv ? (0.35 + 0.65*u_fluv[i]) : 1.0;
-        let coast_val = u_coast ? (0.30 + 0.70*u_coast[i]) : 1.0;
+          (0.65*Math.pow(lu_decliff[i]/mean_lu, 0.50) + 0.35*(0.78*u_nat_c + 0.22*u_eco[i])) :
+          (0.78*u_nat_c + 0.22*u_eco[i]);
+        let fluv_val = u_fluv ? (0.55 + 0.45*u_fluv[i]) : 1.0;
+        let coast_val = u_coast ? (0.55 + 0.45*u_coast[i]) : 1.0;
         let den_val = 0.50*(0.7*u_nat_c + 0.3*u_eco[i]) + 0.85*Math.min(2.0, u_den[i]);
         let set_norm = Math.min(2.8, u_set[i]);
         let ice_env = (config.kriging_config && config.kriging_config.apply_ice_sheet_mask && year <= -5500) ?
@@ -464,21 +530,55 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
           prior_dens[i] = 0;
           continue;
         }
-        let phi_hu = hu_ctx.w_hyde[i]*1.15 +
+
+        //HYDE-inspired elevation & slope contour step-band multiplier with empirical montane-valley override
+        //(honours documented Andean/Caucasus/Yunnan terraced valleys without lifting empty high plateaus like Changtang)
+        let ue_i = u_elev ? u_elev[i] : 1.0;
+        let us_i = u_slope ? u_slope[i] : 1.0;
+        let terr_mult = Math.pow(Math.max(0.015, ue_i*us_i), terr_pow);
+
+        if (terr_mult < 0.78 && (set_norm > 0.04 || lu_decliff[i] > 0.010)) {
+          let terr_ev = Math.min(1.0, 0.75*set_norm + 5.5*lu_decliff[i]);
+
+          terr_mult = Math.max(terr_mult, 0.80*terr_ev);
+        }
+
+        //Optional POLARIS Wild Fields pre-1700 open-steppe suppression with smooth boundary tapers (preserving Crimea & river valleys)
+        let steppe_mult = 1.0;
+
+        if (wf_w > 0 && forest_valid && forest_valid[i] === 0) {
+          let gidx = valid_indices[i];
+          let lat = 90 - (Math.floor(gidx/w) + 0.5)*180/h;
+          let lon = -180 + ((gidx % w) + 0.5)*360/w;
+          let is_crimea = (lat < 46.23 && lon >= 32.45 && lon <= 36.68);
+
+          if (!is_crimea && lat >= 45.2 && lat <= 52.8 && lon >= 27.5 && lon <= 49.0) {
+            let ws = Math.max(0, Math.min(1, (lat - 45.2)/1.8));
+            let wn = Math.max(0, Math.min(1, (52.8 - lat)/1.6));
+            let ww = Math.max(0, Math.min(1, (lon - 27.5)/1.5));
+            let we = Math.max(0, Math.min(1, (49.0 - lon)/2.5));
+            let fl_taper = u_fluv ? Math.max(0, Math.min(1, (0.55 - u_fluv[i])/0.35)) : 1.0;
+            let env = (ws*ws*(3 - 2*ws))*(wn*wn*(3 - 2*wn))*(ww*ww*(3 - 2*ww))*(we*we*(3 - 2*we))*fl_taper;
+
+            steppe_mult = 1.0 - 0.68*wf_w*env;
+          }
+        }
+
+        let phi_hu = hu_ctx.w_hyde[i]*1.05 +
           hu_ctx.w_landuse[i]*lu_val +
           hu_ctx.w_dendro[i]*den_val +
           hu_ctx.w_fluvial[i]*fluv_val +
           hu_ctx.w_coastal[i]*coast_val +
           hu_ctx.w_settlement[i]*0.30;
-        let sett_add = hu_ctx.w_settlement[i]*mean_d85*1.65*set_norm*(0.40 + 0.60*Math.min(1.5, u_nat_c));
-        let dendro_add = (u_den[i] > 0) ? (hu_ctx.w_dendro[i]*mean_d85*1.15*Math.min(2.0, u_den[i])*(0.40 + 0.60*lu_val)) : 0;
+        let sett_add = hu_ctx.w_settlement[i]*mean_d_base*1.85*set_norm*(0.45 + 0.55*Math.min(1.5, u_nat_c));
+        let dendro_add = (u_den[i] > 0) ? (hu_ctx.w_dendro[i]*mean_d_base*1.25*Math.min(2.0, u_den[i])*(0.40 + 0.60*lu_val)) : 0;
         let d_s = dist_site ? dist_site[i] : 99.0;
-        let hab_gate = (d_decliff[i] > 0 || set_norm > 0.02 || (d_s <= 2.2)) ? 1.0 : 0.0;
+        let hab_gate = (d_decliff[i] > 0 || set_norm > 0.02 || (d_s <= 2.0)) ? 1.0 : 0.0;
 
-        if (!strict_hab && year > 1650 && !is_hab) hab_gate = (d_decliff[i] > 0 || set_norm > 0.02) ? 0.55 : 0.08;
-        if (!strict_hab && year > 1650 && is_hab && hab_gate === 0) hab_gate = 0.25;
+        if (!strict_hab && year > strict_cut && !is_hab) hab_gate = (d_decliff[i] > 0 || set_norm > 0.02) ? 0.55 : 0.08;
+        if (!strict_hab && year > strict_cut && is_hab && hab_gate === 0) hab_gate = 0.25;
 
-        prior_dens[i] = perm_ice[i]*ice_env*hab_gate*(d_base*phi_hu + sett_add + dendro_add);
+        prior_dens[i] = perm_ice[i]*ice_env*hab_gate*steppe_mult*terr_mult*(d_base*phi_hu + sett_add + dendro_add);
       }
 
       let res = { d_decliff: d_decliff, lu_decliff: lu_decliff, prior_dens: prior_dens, u_set: u_set };
@@ -491,114 +591,18 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
 
 
     /**
-     * Evaluates signed residual Matérn (`nu = 3/2`) fields across 1 or more dual-weight vectors in a single shared pass.
+     * Step D delegate: evaluates terrain-barrier-aware signed residual Matérn (`nu = 3/2`) fields
+     * via `ViscountDasymetricResidualSolver.C_evaluateMultiDualMaternFields`.
      * @alias ViscountHUResidualKriging.D_evaluateMultiDualMaternFields
      */
     static D_evaluateMultiDualMaternFields (arg0_kriging_bundle, arg1_prior_bundles, arg2_v_vecs, arg3_years) {
-      //Convert from parameters
-      let bundle = arg0_kriging_bundle;
-      let prior_bundles = arg1_prior_bundles;
-      let v_vecs = arg2_v_vecs;
-      let years = arg3_years;
-
-      //Declare local instance variables
-      let cell_area = bundle.mask_data.cell_land_area;
-      let cell_r = bundle.obs_bundle.cell_radius_km;
-      let cell_ux = bundle.mask_data.cell_ux;
-      let cell_uy = bundle.mask_data.cell_uy;
-      let cell_uz = bundle.mask_data.cell_uz;
-      let earth_r = bundle.mask_data.earth_radius_km || 6371;
-      let lut = bundle.matern_lut;
-      let lut_scale = 8191/8;
-      let mask_data = bundle.mask_data;
-      let n_obs = bundle.obs_bundle.obs_count;
-      let n_p = v_vecs.length;
-      let n_valid = mask_data.valid_cell_count;
-      let obs_r = bundle.obs_bundle.obs_radius_km;
-      let obs_ux = bundle.obs_bundle.obs_ux;
-      let obs_uy = bundle.obs_bundle.obs_uy;
-      let obs_uz = bundle.obs_bundle.obs_uz;
-      let pop_fields = new Array(n_p);
-      let r_acc = new Float64Array(n_p);
-      let r_fields = new Array(n_p);
-      let sp_ctx = ViscountHUResidualHelpers.getOrBuildSparseMaternMatrix(bundle);
-
-      //Function body
-      let c1 = sp_ctx.c1;
-      let c2 = sp_ctx.c2;
-      let inv_tau1 = sp_ctx.inv_tau1;
-      let inv_tau2 = sp_ctx.inv_tau2;
-      let min_dot = sp_ctx.min_dot;
-
-      for (let p = 0; p < n_p; p++) {
-        pop_fields[p] = new Float32Array(n_valid);
-        r_fields[p] = new Float32Array(n_valid);
-      }
-
-      for (let i = 0; i < n_valid; i++) {
-        let a_i = cell_area[i];
-        let cx = cell_ux[i];
-        let cy = cell_uy[i];
-        let cz = cell_uz[i];
-        let ri = cell_r[i];
-        let ri2 = ri*ri;
-
-        for (let p = 0; p < n_p; p++) r_acc[p] = 0;
-
-        for (let x = 0; x < n_obs; x++) {
-          let dot = cx*obs_ux[x] + cy*obs_uy[x] + cz*obs_uz[x];
-
-          if (dot <= min_dot[x]) continue;
-          if (dot > 1) dot = 1;
-          else if (dot < -1) dot = -1;
-          let c2_c = Math.max(0, 2 - 2*dot);
-          let h = earth_r*Math.sqrt(c2_c)*(1 + c2_c/24);
-          let rx = obs_r[x];
-          let r2_sum = ri2 + rx*rx;
-          let u = h/Math.sqrt(0.5*r2_sum);
-          let v2 = u*inv_tau2;
-
-          if (v2 >= 7.99) continue;
-          let pref = (2*ri*rx)/Math.max(1e-8, r2_sum);
-          let m1 = 0;
-          let v1 = u*inv_tau1;
-
-          if (v1 < 7.99) {
-            let i1 = (v1*lut_scale) | 0;
-            let f1 = v1*lut_scale - i1;
-
-            m1 = pref*(lut[i1]*(1 - f1) + lut[i1 + 1]*f1);
-          }
-          let i2 = (v2*lut_scale) | 0;
-          let f2 = v2*lut_scale - i2;
-          let m2 = pref*(lut[i2]*(1 - f2) + lut[i2 + 1]*f2);
-          let kern = c1*m1 + c2*m2;
-
-          for (let p = 0; p < n_p; p++) {
-            let vx = v_vecs[p][x];
-
-            if (vx !== 0) r_acc[p] += vx*kern;
-          }
-        }
-
-        for (let p = 0; p < n_p; p++) {
-          let r_val = r_acc[p];
-
-          r_fields[p][i] = r_val;
-          if (prior_bundles[p].prior_dens[i] > 0)
-            pop_fields[p][i] = a_i*prior_bundles[p].prior_dens[i]*Math.exp(Math.max(-1.15, Math.min(1.25, 0.85*r_val)));
-        }
-      }
-
-      if (bundle._bio_covs && bundle._bio_covs.uopp_valid) {
-        for (let p = 0; p < n_p; p++) {
-          if (years[p] <= 1650)
-            ViscountHUResidualHelpers.capUrbanCoreSmooth(mask_data, pop_fields[p], bundle._bio_covs.uopp_valid, 1.05);
-        }
-      }
-
-      //Return statement
-      return { pop_fields: pop_fields, r_fields: r_fields };
+      return ViscountDasymetricResidualSolver.C_evaluateMultiDualMaternFields(
+        arg0_kriging_bundle,
+        arg1_prior_bundles,
+        arg2_v_vecs,
+        arg3_years,
+        ViscountHUResidualHelpers.capUrbanCoreSmooth.bind(ViscountHUResidualHelpers)
+      );
     }
 
 
@@ -670,6 +674,8 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
       }
       let multi = this.D_evaluateMultiDualMaternFields(bundle, prior_bundles, v_vecs, rep_years);
 
+      let strict_cut = Number.isFinite(hu_ctx.strict_hab_cutoff_year) ? Number(hu_ctx.strict_hab_cutoff_year) : 1650;
+
       for (let p = 0; p < pkeys.length; p++) {
         let field = multi.pop_fields[p];
         let pkey = pkeys[p];
@@ -677,7 +683,7 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
         let target_sites = Math.max(1, (bundle.obs_bundle.period_totals && bundle.obs_bundle.period_totals[pkey]) ?
           bundle.obs_bundle.period_totals[pkey] : 1);
 
-        if (rep_years[p] <= 1650 && bio_covs.uopp_valid && n_valid >= 2000)
+        if (rep_years[p] <= strict_cut && bio_covs.uopp_valid && n_valid >= 2000)
           ViscountHUResidualHelpers.capUrbanCoreSmooth(bundle.mask_data, field, bio_covs.uopp_valid, 0.85);
         for (let i = 0; i < n_valid; i++) sum += field[i];
         let scale = (sum > 0) ? (target_sites/sum) : 1.0;
@@ -723,6 +729,13 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
       let out_dir = path.join(bundle.mask_data.domain_dir, cfg.output_population_rasters_subfolder || "2.population_rasters");
       let perm_ice = bio_covs.perm_ice;
       let period_res_fields = surface.residual_fields || null;
+      let r_clamp_max = Number.isFinite(hu_ctx.residual_clamp_max) ? Number(hu_ctx.residual_clamp_max) : 1.30;
+      let r_clamp_min = Number.isFinite(hu_ctx.residual_clamp_min) ? Number(hu_ctx.residual_clamp_min) : -1.20;
+      let r_gain = Number.isFinite(hu_ctx.residual_gain) ? Number(hu_ctx.residual_gain) : 0.88;
+      let strict_cut = Number.isFinite(hu_ctx.strict_hab_cutoff_year) ? Number(hu_ctx.strict_hab_cutoff_year) : 1650;
+      let tp_key = hu_ctx.terra_preta_period_key || null;
+      let tp_norm = null;
+      let tp_lat_w = null;
       let valid_indices = bundle.mask_data.valid_indices;
       let b_px = (cfg.kriging_config.bermuda_pixel) ?
         bundle.mask_data.pixel_to_valid_idx[cfg.kriging_config.bermuda_pixel.row*grid_w + cfg.kriging_config.bermuda_pixel.col] : -1;
@@ -737,6 +750,27 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
 
           if (lat < 0) is_samoa[i] = 1;
         }
+      }
+      if (tp_key && surface.fields && surface.fields[tp_key]) {
+        let tp_src = surface.fields[tp_key];
+        let tp_sum = 0;
+
+        tp_lat_w = new Float32Array(n_valid);
+        tp_norm = new Float32Array(n_valid);
+        for (let i = 0; i < n_valid; i++) {
+          let lat = 90 - (Math.floor(valid_indices[i]/grid_w) + 0.5)*180/grid_h;
+          let wl = (lat >= -14.0) ? 1.0 : ((lat <= -19.0) ? 0.0 : (lat + 19.0)/5.0);
+
+          tp_lat_w[i] = wl;
+          if (wl > 0 && (!hab_mask || hab_mask[i] === 1)) {
+            let v = Math.max(0, tp_src[i])*wl;
+
+            tp_norm[i] = v;
+            tp_sum += v;
+          }
+        }
+        if (tp_sum > 0)
+          for (let i = 0; i < n_valid; i++) tp_norm[i] /= tp_sum;
       }
 
       let h_r_list = [];
@@ -855,12 +889,12 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
             for (let i = 0; i < n_valid; i++) {
               if (prior_b.prior_dens[i] <= 0) continue;
               let r_val = (1 - alpha)*r_a[i] + alpha*r_b[i];
-              let res_mult = Math.exp(Math.max(-1.15, Math.min(1.25, 0.85*r_val)));
+              let res_mult = Math.exp(Math.max(r_clamp_min, Math.min(r_clamp_max, r_gain*r_val)));
 
               rk_pop[i] = cell_area[i]*prior_b.prior_dens[i]*res_mult;
             }
-            if (yr <= 1650 && bio_covs.uopp_valid)
-              ViscountHUResidualHelpers.capUrbanCoreSmooth(bundle.mask_data, rk_pop, bio_covs.uopp_valid, 0.85);
+            if (yr <= strict_cut && bio_covs.uopp_valid)
+              ViscountHUResidualHelpers.capUrbanCoreSmooth(bundle.mask_data, rk_pop, bio_covs.uopp_valid, hu_ctx.urban_core_cap_mult || 0.78);
           } else if (h_z_list.length > 0) {
             let alpha = 0;
             let s_a = h_z_list[0].s;
@@ -903,6 +937,8 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
 
             for (let i = 0; i < n_valid; i++) rk_pop[i] *= (is_samoa[i] ? sam_sc : hi_sc);
           }
+          if (rk_pop && tp_norm)
+            ViscountHUResidualHelpers.blendTerraPretaSurface(rk_pop, tp_norm, tp_lat_w, yr);
           let rk_sum = 0;
 
           if (rk_pop)
@@ -950,7 +986,7 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
           else v = rk_pop ? v_rk : v_cn;
 
           if (perm_ice[i] <= 0.05) v = 0;
-          else if (yr <= 1650 && hab_mask && hab_mask[i] === 0) v = 0;
+          else if (yr <= strict_cut && hab_mask && hab_mask[i] === 0) v = 0;
           else if (ccf_field && v <= 0) v = 0;
           else {
             elig_out[i] = 1;
@@ -962,23 +998,7 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
 
         if (b_px >= 0)
           out_field[b_px] = (yr < 1609) ? 0 : Math.max(10, 450 + Math.max(0, yr - 1609)*140);
-
-        let f_buf = new ArrayBuffer(4);
-        let f_dv = new DataView(f_buf);
-        let img = new PNG({ colorType: 6, height: grid_h, width: grid_w });
-
-        for (let i = 0; i < n_valid; i++) {
-          let px = valid_indices[i]*4;
-
-          if (out_field[i] > 0) {
-            f_dv.setFloat32(0, out_field[i], false);
-            img.data[px] = f_dv.getUint8(0);
-            img.data[px + 1] = f_dv.getUint8(1);
-            img.data[px + 2] = f_dv.getUint8(2);
-            img.data[px + 3] = f_dv.getUint8(3);
-          }
-        }
-        fs.writeFileSync(path.join(out_dir, `popc_${yr}.png`), PNG.sync.write(img, { colorType: 6, deflateLevel: 6 }));
+        ViscountHUResidualHelpers.writeFloat32GeoPNG(bundle.mask_data, out_field, path.join(out_dir, `popc_${yr}.png`));
       }
 
       //Return statement
