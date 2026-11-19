@@ -119,6 +119,7 @@ for (let i = 0; i < files.length; i++) {
     let t0 = Date.now();
     console.log(`[StageE-Fast] Bootstrapped ${files.length} files cleanly.`);
 
+    let skip_deltas = process.argv.includes("--skip-deltas");
     let skip_shards = process.argv.includes("--skip-shards");
     let skip_substrata = process.argv.includes("--skip-substrata");
 
@@ -142,8 +143,12 @@ for (let i = 0; i < files.length; i++) {
     console.log("[StageE-Fast] 4/5 Running population_Velkscala (Viscount antiquity + 2D harmonic diffusion)...");
     await population_Velkscala.processRasters();
 
-    console.log("[StageE-Fast] 5/5 Refreshing population_Stadester_transform deltas...");
-    await population_Stadester_transform.processRasters();
+    if (!skip_deltas) {
+      console.log("[StageE-Fast] 5/5 Refreshing population_Stadester_transform deltas...");
+      await population_Stadester_transform.processRasters();
+    } else {
+      console.log("[StageE-Fast] 5/5 Skipped population_Stadester_transform (--skip-deltas).");
+    }
 
     if (global.GeoPNG && typeof GeoPNG.terminateAllWorkers === "function")
       GeoPNG.terminateAllWorkers();

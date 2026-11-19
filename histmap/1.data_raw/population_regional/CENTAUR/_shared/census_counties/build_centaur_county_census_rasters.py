@@ -723,17 +723,20 @@ def run_build():
       raw_w = []
       sum_h = sum(hyde_sum[k + 1] for k in k_list) + 1e-6
       sum_s = sum(sett_sum[k + 1] for k in k_list) + 1e-6
-      sum_d = sum(desc_1790_sum[k + 1] for k in k_list) + 1e-6
+      sum_d = sum(desc_1790_sum[k + 1] / (1.0 + items[k]["geom_area_km2"] / 6000.0) for k in k_list) + 1e-6
       sum_a = sum(items[k]["geom_area_km2"] for k in k_list) + 1e-6
       for k in k_list:
+        area_k = items[k]["geom_area_km2"]
         age = max(2.0, float(yr - items[k]["founded_year"] + 5))
-        age_f = min(1.0, math.pow(age / 35.0, 0.45))
+        age_f = min(1.0, math.pow(age / 45.0, 0.70))
+        giant_pen = math.exp(-max(0.0, area_k - 10000.0) / 28000.0) if yr <= 1770 else 1.0
+        d_term = (desc_1790_sum[k + 1] / (1.0 + area_k / 6000.0)) / sum_d
         w = (
-          0.55 * (desc_1790_sum[k + 1] / sum_d)
-          + 0.25 * (hyde_sum[k + 1] / sum_h)
-          + 0.15 * (sett_sum[k + 1] / sum_s)
-          + 0.05 * (items[k]["geom_area_km2"] / sum_a)
-        ) * age_f
+          0.52 * (hyde_sum[k + 1] / sum_h)
+          + 0.23 * d_term
+          + 0.20 * (sett_sum[k + 1] / sum_s)
+          + 0.05 * (area_k / sum_a)
+        ) * age_f * giant_pen
         raw_w.append(max(1e-6, w))
       w_tot = sum(raw_w)
       for idx_sub, k in enumerate(k_list):
