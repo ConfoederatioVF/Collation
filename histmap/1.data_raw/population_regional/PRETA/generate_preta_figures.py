@@ -63,10 +63,12 @@ CHAPTER_META = [
   ("1.pre_columbian/3.northeastern_brazil", "northeastern_brazil", "Pre-Columbian North-Eastern Brazil"),
   ("1.pre_columbian/4.southern_brazil", "southern_brazil", "Pre-Columbian Southern Brazil"),
   ("1.pre_columbian/5.guyana", "guyana", "Pre-Columbian Guianas"),
+  ("1.pre_columbian/6.bolivian_highlands", "bolivian_highlands", "Pre-Columbian Bolivian Highlands"),
   ("2.colonial/1.colonial_brazil", "colonial_brazil", "Colonial Brazil"),
   ("2.colonial/2.colonial_guyana", "colonial_guyana", "Colonial Guianas"),
   ("2.colonial/3.colonial_paraguay", "colonial_paraguay", "Colonial Paraguay"),
   ("2.colonial/4.colonial_spanish_amazon", "colonial_spanish_amazon", "Colonial Spanish Amazon"),
+  ("2.colonial/5.colonial_upper_peru_charcas", "colonial_upper_peru_charcas", "Colonial Bolivian Highlands (Charcas)"),
   ("3.post_independence/1.brazil_after_independence", "brazil_after_independence", "Brazil after Independence"),
   ("3.post_independence/2.bolivia_after_independence", "bolivia_after_independence", "Bolivia after Independence"),
   ("3.post_independence/3.paraguay_after_independence", "paraguay_after_independence", "Paraguay after Independence"),
@@ -319,11 +321,24 @@ def render_chapter_figures(arg0_rel_dir, arg1_stem, arg2_title, arg3_sa_geoms, a
 
   # Panel A: Total population trajectory + empirical uncertainty band
   hl = mod_data["summary"]["headline_population_by_benchmark"]
-  yrs = sorted(int(y) for y in hl.keys())
-  tots = np.array([float(hl[str(y)]) for y in yrs], dtype=float)
+  reg_vals = list(mod_data["regions"].values())
+  all_reg_year_sets = [set(int(k) for k in r["population"].keys()) for r in reg_vals]
+  has_staggered_censuses = len(all_reg_year_sets) > 1 and any(ys != all_reg_year_sets[0] for ys in all_reg_year_sets[1:])
+  if has_staggered_censuses:
+    dom_min = min(min(ys) for ys in all_reg_year_sets)
+    dom_max = max(max(ys) for ys in all_reg_year_sets)
+    yrs = sorted({dom_min, dom_max} | {y for y in (1815, 1840, 1850, 1870, 1890, 1910, 1920, 1930, 1950, 1960, 1970, 1980, 1990, 2000, 2012, 2020, 2026) if dom_min <= y <= dom_max})
+    tots = np.zeros(len(yrs), dtype=float)
+    for rinfo in reg_vals:
+      r_yrs = sorted(int(k) for k in rinfo["population"].keys())
+      r_pop = [float(rinfo["population"][str(k)]) for k in r_yrs]
+      tots += np.interp(yrs, r_yrs, r_pop)
+  else:
+    yrs = sorted(int(y) for y in hl.keys())
+    tots = np.array([float(hl[str(y)]) for y in yrs], dtype=float)
   lo_tot = np.zeros_like(tots)
   hi_tot = np.zeros_like(tots)
-  for rinfo in mod_data["regions"].values():
+  for rinfo in reg_vals:
     bnds = rinfo.get("population_bounds") or {}
     r_yrs = sorted(int(k) for k in rinfo["population"].keys())
     r_lo = [float(bnds[str(k)][0]) if str(k) in bnds and len(bnds[str(k)]) >= 2 else float(rinfo["population"][str(k)]) * 0.9 for k in r_yrs]
@@ -391,6 +406,7 @@ def render_root_figures(arg0_sa_geoms, arg1_riv_lines):
   precol_stems = [
     ("eastern_amazon_basin", "#15803d", "Eastern Amazon Basin"),
     ("western_amazon_basin", "#0d9488", "Western Amazon Basin"),
+    ("bolivian_highlands", "#dc2626", "Bolivian Highlands"),
     ("northeastern_brazil", "#d97706", "North-Eastern Brazil"),
     ("southern_brazil", "#2563eb", "Southern Brazil"),
     ("guyana", "#9333ea", "Guianas"),
@@ -550,8 +566,9 @@ def render_root_figures(arg0_sa_geoms, arg1_riv_lines):
 
   # Panel A: Pre-Columbian Holocene expansion (-10000 to 1500)
   pre_cols = [
-    ("1.pre_columbian/2.western_amazon_basin", "western_amazon_basin", "Western Amazon", "#0d9488"),
+    ("1.pre_columbian/2.western_amazon_basin", "western_amazon_basin", "Western Amazon & Peru Sierra", "#0d9488"),
     ("1.pre_columbian/1.eastern_amazon_basin", "eastern_amazon_basin", "Eastern Amazon", "#15803d"),
+    ("1.pre_columbian/6.bolivian_highlands", "bolivian_highlands", "Bolivian Highlands", "#dc2626"),
     ("1.pre_columbian/4.southern_brazil", "southern_brazil", "Southern Brazil", "#2563eb"),
     ("1.pre_columbian/3.northeastern_brazil", "northeastern_brazil", "North-Eastern Brazil", "#d97706"),
     ("1.pre_columbian/5.guyana", "guyana", "Guianas", "#9333ea"),
@@ -581,9 +598,23 @@ def render_root_figures(arg0_sa_geoms, arg1_riv_lines):
   ]
   for rdir, stem, lbl, col in mod_cols:
     md = json.loads((PRETA_DIR / rdir / f"{stem}.json5").read_text(encoding="utf-8"))
-    hl = md["summary"]["headline_population_by_benchmark"]
-    ys = sorted(int(y) for y in hl.keys())
-    vs = [float(hl[str(y)]) for y in ys]
+    reg_vals = list(md["regions"].values())
+    yr_sets = [set(int(k) for k in r["population"].keys()) for r in reg_vals]
+    staggered = len(yr_sets) > 1 and any(s != yr_sets[0] for s in yr_sets[1:])
+    if staggered:
+      d_min = min(min(s) for s in yr_sets)
+      d_max = max(max(s) for s in yr_sets)
+      ys = sorted({d_min, d_max} | {y for y in (1815, 1850, 1870, 1890, 1910, 1920, 1930, 1950, 1960, 1970, 1980, 1990, 2000, 2012, 2020, 2026) if d_min <= y <= d_max})
+      vs = np.zeros(len(ys), dtype=float)
+      for rinfo in reg_vals:
+        r_yrs = sorted(int(k) for k in rinfo["population"].keys())
+        r_pop = [float(rinfo["population"][str(k)]) for k in r_yrs]
+        vs += np.interp(ys, r_yrs, r_pop)
+      vs = vs.tolist()
+    else:
+      hl = md["summary"]["headline_population_by_benchmark"]
+      ys = sorted(int(y) for y in hl.keys())
+      vs = [float(hl[str(y)]) for y in ys]
     ax2.semilogy(ys, vs, linewidth=1.9, marker="o", markersize=2.6, color=col, label=lbl)
   ax2.set_ylim(1e5, 4e8)
   apply_human_log_ticks(ax2, arg1_axes="y", arg2_semantic=True)

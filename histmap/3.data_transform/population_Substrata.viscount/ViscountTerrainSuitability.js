@@ -113,15 +113,19 @@ let { ViscountUrbanMask } = global.ViscountUrbanMask ? global : require("./Visco
       };
 
       //Function body
+      let is_tropical_andes_cfg = Boolean(config.kriging_config && config.kriging_config.tropical_andean_elevation_profile);
+
       for (let i = 0; i < n_valid; i++) {
         let gidx = valid_indices[i];
         let lat = 90 - (Math.floor(gidx/grid_w) + 0.5)*180/grid_h;
+        let lon = -180 + ((gidx % grid_w) + 0.5)*360/grid_w;
         let abs_lat = Math.abs(lat);
         let e_m = elev[i];
         let s_deg = slope[i];
         let t_m = tri[i];
+        let is_tropical_andes = is_tropical_andes_cfg && (lat >= -23.5 && lat <= 8.5 && lon <= -63.0);
 
-        //Latitude-adapted elevation thresholds (tropical inter-Andean valleys up to 4100m vs mid-latitude Tibet/Rockies)
+        //Latitude-adapted elevation thresholds (tropical inter-Andean valleys up to 4350m vs mid-latitude Tibet/Rockies)
         let e_low = 800.0;
         let e_mid = 2400.0;
         let e_high = 3950.0;
@@ -130,7 +134,16 @@ let { ViscountUrbanMask } = global.ViscountUrbanMask ? global : require("./Visco
         let b3_w = 0.42;
         let b4_w = 0.16;
 
-        if (is_micro_island && abs_lat < 25.0) {
+        if (is_tropical_andes) {
+          //Central Andean vertical-archipelago agro-pastoral profile: Quechua maize valleys (2400-3950m) & Suni/Titicaca Altiplano (3950-4350m)
+          e_low = 2600.0;
+          e_mid = 3950.0;
+          e_high = 4350.0;
+          e_alp = 4750.0;
+          b2_w = 0.96;
+          b3_w = 0.86;
+          b4_w = 0.30;
+        } else if (is_micro_island && abs_lat < 25.0) {
           //Volcanic oceanic islands (e.g. Hawai'i): coastal/lowland belts habitable; >2300m lava shields uninhabitable
           e_low = 450.0;
           e_mid = 1150.0;
@@ -179,13 +192,16 @@ let { ViscountUrbanMask } = global.ViscountUrbanMask ? global : require("./Visco
         let b5 = smoothStep(e_m, e_alp*0.94, e_alp*1.06);
         let ue = 1.00*b1 + b2_w*b2 + b3_w*b3 + b4_w*b4 + 0.02*b5;
 
-        //Crisp 4-tier macro-slope & TRI ruggedness step bands (preserving 9 km pixels containing inter-montane valleys)
+        //Crisp 4-tier macro-slope & TRI ruggedness step bands (preserving 9 km pixels containing inter-montane terraced valleys)
         let rug = Math.max(s_deg/0.38, t_m/75.0);
         let r1 = 1.0 - smoothStep(rug, 0.90, 1.15);
         let r2 = smoothStep(rug, 0.90, 1.15)*(1.0 - smoothStep(rug, 2.05, 2.40));
         let r3 = smoothStep(rug, 2.05, 2.40)*(1.0 - smoothStep(rug, 3.60, 4.15));
         let r4 = smoothStep(rug, 3.60, 4.15);
         let us = 1.00*r1 + 0.70*r2 + 0.38*r3 + 0.14*r4;
+
+        if (is_tropical_andes && e_m <= 4250.0)
+          us = 0.55 + 0.45*us;
 
         u_elev[i] = ue;
         u_slope[i] = us;

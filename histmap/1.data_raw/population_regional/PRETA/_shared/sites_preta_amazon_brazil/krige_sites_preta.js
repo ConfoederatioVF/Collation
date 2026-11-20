@@ -120,10 +120,61 @@ let { ViscountUrbanMask } = require(path.resolve(__dirname, "../../../../../3.da
     }
 
     /**
+     * Computes normalised chronological Terra Preta (ADE) anthropogenic population multiplier schedule (`0..1`).
+     * Captures the multi-century sedentary biomass required to form deep Terra Preta anthrosols across
+     * Formative-to-Contact Amazonia (-3000 to 1550 AD) before tapering smoothly to 0 by 1750 AD during colonial collapse.
+     * @alias PretaKrigingRunner.getTerraPretaEpochFactor
+     *
+     * @param {number} arg0_year
+     *
+     * @returns {number}
+     */
+    static getTerraPretaEpochFactor (arg0_year) {
+      let yr = Number(arg0_year);
+      if (yr <= -3000 || yr >= 1750) return 0.0;
+      if (yr < -500) return 0.35*(yr + 3000)/2500;
+      if (yr < 500) return 0.35 + 0.50*(yr + 500)/1000;
+      if (yr < 900) return 0.85 + 0.15*(yr - 500)/400;
+      if (yr <= 1550) return 1.00;
+      return Math.max(0.0, (1750 - yr)/200);
+    }
+
+    /**
+     * Computes smooth C1-continuous normalised Terra Preta (ADE) anthropogenic intensity index (`0..2.8`)
+     * over valid pixels from the already lowland-tapered `09_terra_preta_ade_anthrosol` surface.
+     * @alias PretaKrigingRunner.computeTerraPretaIntensityIndex
+     *
+     * @param {Float32Array} arg0_tp_field
+     *
+     * @returns {Float32Array}
+     */
+    static computeTerraPretaIntensityIndex (arg0_tp_field) {
+      let tp = arg0_tp_field;
+      let out = new Float32Array(tp ? tp.length : 0);
+      if (!tp || tp.length === 0) return out;
+
+      let pos = [];
+      for (let i = 0; i < tp.length; i++) {
+        if (tp[i] > 1e-4) pos.push(tp[i]);
+      }
+      if (pos.length === 0) return out;
+      pos.sort(function (arg0_a, arg1_b) { return arg0_a - arg1_b; });
+      let p90 = Math.max(1e-4, pos[Math.min(pos.length - 1, Math.floor(pos.length*0.90))]);
+
+      for (let i = 0; i < tp.length; i++) {
+        if (tp[i] > 1e-4) {
+          let rel = tp[i]/p90;
+          out[i] = Math.min(2.0, Math.pow(rel, 0.72));
+        }
+      }
+      return out;
+    }
+
+    /**
      * Step B: Synthesises all 128 HYDE benchmark population suitability rasters (`2.population_rasters/popc_<yr>.png`)
      * by interpolating calibrated Matérn archaeological surfaces, coupling the dedicated Terra Preta (ADE) surface
-     * in tropical Amazonia/Guianas (`lat >= -18`), and transitioning smoothly across 1650-1950 AD into urban-masked
-     * rural carrying capacity & GHSL census footprints.
+     * in tropical Amazonia/Guianas (`lat >= -18`, `elev < 1250 m`), and transitioning smoothly across 1650-1950 AD into
+     * urban-masked rural carrying capacity & GHSL census footprints.
      * @alias PretaKrigingRunner.B_generatePopulationRasters
      *
      * @param {Object} arg0_surface_bundle
@@ -135,9 +186,67 @@ let { ViscountUrbanMask } = require(path.resolve(__dirname, "../../../../../3.da
       let surface = arg0_surface_bundle;
       let rk_cfg = (surface && surface.kriging_bundle && surface.kriging_bundle.config) ? surface.kriging_bundle.config : {};
 
-      //Guard clause: delegate to unified Viscount dasymetric residual kriging engine when active
-      if (rk_cfg.kriging_config && rk_cfg.kriging_config.residual_kriging_mode === "hu_hyde_residual")
-        return ViscountHUResidualKriging.generateAllBenchmarkPopulationRasters(surface, { is_polynesia: false });
+      //Delegate to unified Viscount dasymetric residual kriging engine when active, then couple lowland Terra Preta (ADE) anthropogenic biomass in pre-contact epochs
+      if (rk_cfg.kriging_config && rk_cfg.kriging_config.residual_kriging_mode === "hu_hyde_residual") {
+        let base_res = ViscountHUResidualKriging.generateAllBenchmarkPopulationRasters(surface, { is_polynesia: false });
+        let tp_fld = (surface && surface.fields) ? surface.fields["09_terra_preta_ade_anthrosol"] : null;
+        if (tp_fld && surface.kriging_bundle && surface.kriging_bundle.mask_data) {
+          let tp_idx = this.computeTerraPretaIntensityIndex(tp_fld);
+          let v_idx = surface.kriging_bundle.mask_data.valid_indices;
+          let hab_m = (surface.bio_covs && surface.bio_covs.hab_mask) ? surface.bio_covs.hab_mask : null;
+          let hyde_years = rk_cfg.kriging_config.all_hyde_years || [];
+          let out_dir = path.join(surface.kriging_bundle.mask_data.domain_dir, rk_cfg.output_population_rasters_subfolder || "2.population_rasters");
+          let boosted_cnt = 0;
+
+          for (let h = 0; h < hyde_years.length; h++) {
+            let yr = Number(hyde_years[h]);
+            let w_ep = this.getTerraPretaEpochFactor(yr);
+            if (w_ep <= 0) continue;
+            let fp = path.join(out_dir, `popc_${yr}.png`);
+            if (!fs.existsSync(fp)) continue;
+
+            let png = PNG.sync.read(fs.readFileSync(fp));
+            let dv = new DataView(png.data.buffer, png.data.byteOffset, png.data.byteLength);
+            let sum_before = 0;
+            let sum_after = 0;
+            let tmp = new Float32Array(v_idx.length);
+            let alpha_ade = 0.55*w_ep;
+
+            for (let i = 0; i < v_idx.length; i++) {
+              let px = v_idx[i]*4;
+              let val = dv.getFloat32(px, false);
+              if (!Number.isFinite(val) || val <= 0 || (hab_m && yr <= 1650 && hab_m[i] === 0)) {
+                tmp[i] = 0;
+                continue;
+              }
+              sum_before += val;
+              let mult = 1.0 + alpha_ade*tp_idx[i];
+              let nv = val*mult;
+              tmp[i] = nv;
+              sum_after += nv;
+            }
+            if (sum_before > 0 && sum_after > 0) {
+              let norm_sc = sum_before/sum_after;
+              for (let i = 0; i < v_idx.length; i++) {
+                let px = v_idx[i]*4;
+                let nv = tmp[i]*norm_sc;
+                if (nv > 0) {
+                  dv.setFloat32(px, nv, false);
+                } else {
+                  png.data[px] = 0;
+                  png.data[px + 1] = 0;
+                  png.data[px + 2] = 0;
+                  png.data[px + 3] = 0;
+                }
+              }
+              fs.writeFileSync(fp, PNG.sync.write(png, { colorType: 6, deflateLevel: 6 }));
+              boosted_cnt++;
+            }
+          }
+          console.log(`[PRETA Terra Preta Coupling] Applied anthropogenic ADE biomass boost to ${boosted_cnt} pre-contact/early-contact benchmark popc rasters.`);
+        }
+        return base_res;
+      }
 
       //Declare local instance variables
       let bio_covs = surface.bio_covs;
@@ -359,6 +468,7 @@ let { ViscountUrbanMask } = require(path.resolve(__dirname, "../../../../../3.da
         let gw = surface.kriging_bundle.mask_data.grid_width;
         let gh = surface.kriging_bundle.mask_data.grid_height;
         let cell_area = surface.kriging_bundle.mask_data.cell_land_area;
+        let elev_v = surface.bio_covs ? surface.bio_covs.elev_valid : null;
         let hab_m = surface.bio_covs ? surface.bio_covs.hab_mask : null;
         let hyde_1000 = this.readFloatRasterValid(
           path.join(this.PROJECT_ROOT, "histmap/2.data_cleaning/landuse_HYDE/rasters/popc_1000AD.png"),
@@ -399,10 +509,12 @@ let { ViscountUrbanMask } = require(path.resolve(__dirname, "../../../../../3.da
               let col = g_px % gw;
               let lat = 90.0 - (row + 0.5)*(180.0/gh);
               let lon = -180.0 + (col + 0.5)*(360.0/gw);
-              //Smooth C1 cosine taper restricting Terra Preta anthrosols to tropical Amazonia, Llanos de Moxos & Guianas
+              let e_m = elev_v ? elev_v[i] : 150.0;
+              //Smooth C1 cosine taper restricting Terra Preta anthrosols to tropical lowland Amazonia, Llanos de Moxos & Guianas (elev < 1250m)
               let lat_w = (lat >= -16.5) ? 1.0 : ((lat <= -19.0) ? 0.0 : 0.5*(1.0 + Math.cos(Math.PI*(-16.5 - lat)/2.5)));
               let lon_w = (lon <= -46.5) ? 1.0 : ((lon >= -44.0) ? 0.0 : 0.5*(1.0 + Math.cos(Math.PI*(lon + 46.5)/2.5)));
-              let tp_w = lat_w*lon_w;
+              let elev_w = (e_m <= 650.0) ? 1.0 : ((e_m >= 1250.0) ? 0.0 : 0.5*(1.0 + Math.cos(Math.PI*(e_m - 650.0)/600.0)));
+              let tp_w = lat_w*lon_w*elev_w;
               fld[i] = fld[i]*tp_w;
               if (fld[i] < 0.004) fld[i] = 0;
               kept_sum += fld[i];
@@ -413,6 +525,39 @@ let { ViscountUrbanMask } = require(path.resolve(__dirname, "../../../../../3.da
           if (kept_sum > 0 && raw_sum > 0) {
             let sc = raw_sum/kept_sum;
             for (let i = 0; i < fld.length; i++) fld[i] *= sc;
+          }
+        }
+
+        //Upweight pre-contact horizons (04..08) along lowland Terra Preta (ADE) corridors to reflect the high sedentary
+        //anthropogenic biomass required to form deep dark-earth anthrosols, overcoming IPHAN Eastern Brazil CRM survey bias
+        let tp_tapered = surface.fields["09_terra_preta_ade_anthrosol"];
+        if (tp_tapered) {
+          let tp_idx = this.computeTerraPretaIntensityIndex(tp_tapered);
+          let horizon_tp_weights = {
+            "04_formative_early_ade": 0.35,
+            "05_classic_amazonian_ade_expansion": 0.75,
+            "06_polychrome_mound_chiefdoms": 0.95,
+            "07_late_precolumbian_chiefdoms": 1.00,
+            "08_contact_horizon": 1.00
+          };
+          let h_keys = Object.keys(horizon_tp_weights);
+          for (let h_i = 0; h_i < h_keys.length; h_i++) {
+            let hk = h_keys[h_i];
+            let h_fld = surface.fields[hk];
+            if (!h_fld) continue;
+            let hw = horizon_tp_weights[hk];
+            let s0 = 0;
+            let s1 = 0;
+            for (let i = 0; i < h_fld.length; i++) {
+              s0 += h_fld[i];
+              if (h_fld[i] > 0 && tp_idx[i] > 0)
+                h_fld[i] = h_fld[i]*(1.0 + 0.65*hw*tp_idx[i]);
+              s1 += h_fld[i];
+            }
+            if (s0 > 0 && s1 > 0) {
+              let norm_s = s0/s1;
+              for (let i = 0; i < h_fld.length; i++) h_fld[i] *= norm_s;
+            }
           }
         }
       }

@@ -41,6 +41,7 @@ LAND_AREA_PNG = SVEA_ROOT / "histmap/1.data_raw/metadata_HYDE/general_rasters/la
 NE10_ADM1_JSON = SVEA_ROOT / "histmap/1.data_raw/population_regional/CENTAUR/_shared/_gis_cache/ne_10m_admin_1_states_provinces.geojson"
 NE10_ADM0_JSON = SVEA_ROOT / "histmap/1.data_raw/population_regional/_shared/_gis_cache/ne_10m_admin_0_countries.geojson"
 HYBAS_L5_SHP = HB_DIR / "hybas_sa_lev05_v1c.shp"
+HYBAS_L6_SHP = HB_DIR / "hybas_sa_lev06_v1c.shp"
 
 HYDE_YEARS = [
   -10000, -9000, -8000, -7000, -6000, -5000, -4000, -3000, -2000, -1000,
@@ -184,7 +185,7 @@ def load_gis_sources():
 
   country_geom = {iso: clean_geom(unary_union(gs)) for iso, gs in by_iso.items()}
 
-  # Load HydroBASINS SA Level 5
+  # Load HydroBASINS SA Level 5 & Level 6
   sf = shapefile.Reader(str(HYBAS_L5_SHP))
   flds = [f[0] for f in sf.fields[1:]]
   hybas = []
@@ -194,12 +195,26 @@ def load_gis_sources():
     if g is not None:
       hybas.append((str(d["PFAF_ID"]), int(d["HYBAS_ID"]), g))
 
-  return adm1, country_geom, hybas
+  sf6 = shapefile.Reader(str(HYBAS_L6_SHP))
+  flds6 = [f[0] for f in sf6.fields[1:]]
+  hybas6 = []
+  for i, rec in enumerate(sf6.records()):
+    d = dict(zip(flds6, rec))
+    g = clean_geom(shape(sf6.shape(i).__geo_interface__))
+    if g is not None:
+      hybas6.append((str(d["PFAF_ID"]), int(d["HYBAS_ID"]), g))
+
+  return adm1, country_geom, hybas, hybas6
 
 
-def union_hybas(arg0_hybas, arg1_prefixes, arg2_clip_geom=None):
-  """Unions all HydroBASINS L5 polygons matching any Pfafstetter prefix, optionally clipped."""
-  matched = [g for pfaf, _, g in arg0_hybas if any(pfaf.startswith(pref) for pref in arg1_prefixes)]
+def union_hybas(arg0_hybas, arg1_prefixes, arg2_clip_geom=None, arg3_exclude_prefixes=None):
+  """Unions all HydroBASINS polygons matching any Pfafstetter prefix, optionally excluding prefixes and clipping."""
+  excl = tuple(arg3_exclude_prefixes) if arg3_exclude_prefixes else ()
+  matched = [
+    g for pfaf, _, g in arg0_hybas
+    if any(pfaf.startswith(pref) for pref in arg1_prefixes)
+    and (not excl or not pfaf.startswith(excl))
+  ]
   if not matched:
     return None
   u = clean_geom(unary_union(matched))
@@ -277,6 +292,27 @@ def scale_holocene_curve(arg0_peak_1500, arg1_profile="amazon_varzea"):
       0: 0.390, 200: 0.455, 400: 0.540, 600: 0.640, 800: 0.750,
       1000: 0.860, 1100: 0.915, 1200: 0.955, 1300: 0.980, 1400: 0.995,
       1500: 1.000, 1595: 0.920
+    },
+    "andean_central_sierra": {
+      -10000: 0.005, -9000: 0.008, -8000: 0.012, -7000: 0.018, -6000: 0.028,
+      -5000: 0.042, -4000: 0.062, -3000: 0.090, -2000: 0.135, -1000: 0.210,
+      0: 0.360, 200: 0.440, 400: 0.540, 600: 0.660, 800: 0.760,
+      1000: 0.790, 1100: 0.815, 1200: 0.855, 1300: 0.905, 1400: 0.955,
+      1500: 1.000, 1542: 0.780
+    },
+    "bolivian_tiwanaku_altiplano": {
+      -10000: 0.005, -9000: 0.008, -8000: 0.012, -7000: 0.018, -6000: 0.028,
+      -5000: 0.042, -4000: 0.064, -3000: 0.095, -2000: 0.145, -1000: 0.235,
+      0: 0.420, 200: 0.520, 400: 0.660, 600: 0.840, 800: 0.960,
+      1000: 0.950, 1100: 0.860, 1200: 0.880, 1300: 0.925, 1400: 0.965,
+      1500: 1.000, 1535: 0.887
+    },
+    "bolivian_cordillera_valleys": {
+      -10000: 0.005, -9000: 0.008, -8000: 0.012, -7000: 0.018, -6000: 0.027,
+      -5000: 0.040, -4000: 0.060, -3000: 0.088, -2000: 0.132, -1000: 0.205,
+      0: 0.350, 200: 0.435, 400: 0.545, 600: 0.680, 800: 0.790,
+      1000: 0.820, 1100: 0.840, 1200: 0.875, 1300: 0.915, 1400: 0.960,
+      1500: 1.000, 1535: 0.887
     },
   }
   c = curves[arg1_profile]
@@ -410,9 +446,9 @@ def build_chapter(arg0_spec, arg1_land_area):
 
 
 def main():
-  print("Loading land_area.png, NE 10m Admin-1, and HydroBASINS SA Level 5...")
+  print("Loading land_area.png, NE 10m Admin-1, and HydroBASINS SA Level 5 & 6...")
   land_area = load_land_area()
-  adm1, country_geom, hybas = load_gis_sources()
+  adm1, country_geom, hybas, hybas6 = load_gis_sources()
 
   bra = country_geom["BRA"]
   bol = country_geom["BOL"]
@@ -476,12 +512,37 @@ def main():
     ],
   })
 
-  # 2. Pre-Columbian Western Amazon Basin
+  # 2. Pre-Columbian Western Amazon Basin (including Peruvian-Ecuadorian Andean Headwaters; Bolivian Highlands isolated in Ch. 6!)
+  bol_hi_depts = union_adm1(adm1, [
+    ("BOL", "La Paz"), ("BOL", "Oruro"), ("BOL", "Cochabamba"),
+    ("BOL", "Chuquisaca"), ("BOL", "Potosí"), ("BOL", "Tarija")
+  ])
+  bolhi_titicaca_l6 = ["664054", "664055", "664056", "664058", "664059"]
+  bolhi_lapaz_l6 = ["622666", "622667", "622668", "622669"]
+  bolhi_oruro_l6 = ["664052", "664053"]
+  bolhi_cbba_l6 = ["622694", "622696", "622699"]
+  bolhi_charcas_l6 = ["642444", "642445", "642446", "642447", "642448", "642449"]
+  bolhi_south_l6 = [
+    "662809", "664027", "664028", "664041", "664042", "664043", "664044",
+    "642424", "642438", "642443", "642456", "642457", "642468"
+  ]
+  g_bolhi_titicaca = union_hybas(hybas6, bolhi_titicaca_l6, bol)
+  g_bolhi_lapaz = union_hybas(hybas6, bolhi_lapaz_l6, bol)
+  g_bolhi_oruro = union_hybas(hybas6, bolhi_oruro_l6, bol)
+  g_bolhi_cbba = union_hybas(hybas6, bolhi_cbba_l6, bol_hi_depts)
+  g_bolhi_charcas = union_hybas(hybas6, bolhi_charcas_l6, bol)
+  g_bolhi_south = union_hybas(hybas6, bolhi_south_l6, bol)
+  bolhi_union = clean_geom(unary_union([
+    g for g in [g_bolhi_titicaca, g_bolhi_lapaz, g_bolhi_oruro, g_bolhi_cbba, g_bolhi_charcas, g_bolhi_south] if g is not None
+  ]))
+
   wamz_clip = clean_geom(unary_union([bra, bol, country_geom["PER"], country_geom["COL"], country_geom["ECU"]]))
+  wamz_low_clip = clean_geom(wamz_clip.difference(bolhi_union))
+  per_andes_l6 = ["622988", "622989", "622996", "622997", "622998", "622999"]
   chapters.append({
     "rel_dir": "1.pre_columbian/2.western_amazon_basin",
     "stem": "western_amazon_basin",
-    "title": "Pre-Columbian Western Amazon Basin: Central Amazon Terra Preta, Acre Geoglyphs, Llanos de Moxos and Upper Amazon Chiefdoms (10000BC-1542AD)",
+    "title": "Pre-Columbian Western Amazon Basin and Peruvian-Ecuadorian Andean Headwaters: Central Amazon Terra Preta, Llanos de Moxos and Sierra Polities (10000BC-1542AD)",
     "domain": [-10000, 1542],
     "manifest_group": "specialist_masks",
     "priority": 1,
@@ -490,38 +551,44 @@ def main():
       {
         "id": "wamz_central_amazon_rio_negro",
         "name": "1. Central Amazon & Rio Negro-Branco",
-        "geom": union_hybas(hybas, ["62270", "6228", "62291"], wamz_clip),
+        "geom": union_hybas(hybas, ["62270", "6228", "62291"], wamz_low_clip),
         "population": scale_holocene_curve(420000, "amazon_varzea"),
       },
       {
         "id": "wamz_madeira_guapore",
         "name": "2. Lower & Middle Madeira-Guaporé",
-        "geom": union_hybas(hybas, ["62261", "62262", "62263", "62264", "62265"], wamz_clip),
+        "geom": union_hybas(hybas, ["62261", "62262", "62263", "62264", "62265"], wamz_low_clip),
         "population": scale_holocene_curve(310000, "amazon_varzea"),
       },
       {
         "id": "wamz_llanos_de_moxos",
-        "name": "3. Llanos de Moxos, Beni & Mamoré (Casarabe)",
-        "geom": union_hybas(hybas, ["62266", "62267", "62268", "62269"], wamz_clip),
+        "name": "3. Llanos de Moxos, Beni & Madre de Dios (Casarabe)",
+        "geom": union_hybas(hybas6, ["62266", "62267", "62268", "62269"], wamz_low_clip, bolhi_lapaz_l6),
         "population": scale_holocene_curve(380000, "amazon_moxos_earthwork"),
       },
       {
         "id": "wamz_purus_jurua_acre",
         "name": "4. Purus, Juruá & Acre Geoglyph Belt",
-        "geom": union_hybas(hybas, ["62292", "62293", "62295", "62296"], wamz_clip),
+        "geom": union_hybas(hybas, ["62292", "62293", "62295", "62296"], wamz_low_clip),
         "population": scale_holocene_curve(340000, "amazon_moxos_earthwork"),
       },
       {
         "id": "wamz_caqueta_putumayo_napo",
-        "name": "5. Solimões, Caquetá-Putumayo & Napo-Upano",
-        "geom": union_hybas(hybas, ["62294", "62297"], wamz_clip),
+        "name": "5. Solimões, Caquetá-Putumayo & Napo",
+        "geom": union_hybas(hybas, ["62294", "62297"], wamz_low_clip),
         "population": scale_holocene_curve(520000, "amazon_varzea"),
       },
       {
         "id": "wamz_maranon_ucayali",
-        "name": "6. Marañón, Huallaga & Ucayali Lowlands",
-        "geom": union_hybas(hybas, ["62298", "62299"], wamz_clip),
-        "population": scale_holocene_curve(540000, "amazon_varzea"),
+        "name": "6. Lower Marañón, Huallaga & Ucayali Lowlands",
+        "geom": union_hybas(hybas6, ["62298", "62299"], wamz_low_clip, per_andes_l6),
+        "population": scale_holocene_curve(680000, "amazon_varzea"),
+      },
+      {
+        "id": "wamz_peruvian_andean_sierra",
+        "name": "7. Peruvian-Ecuadorian Andean Sierra (Cusco, Wari, Mantaro, Huánuco, Chavín, Cajamarca & Chachapoyas)",
+        "geom": union_hybas(hybas6, per_andes_l6, wamz_low_clip),
+        "population": scale_holocene_curve(3650000, "andean_central_sierra"),
       },
     ],
   })
@@ -679,6 +746,55 @@ def main():
           union_hybas(hybas, ["622"], guf),
         ])),
         "population": scale_holocene_curve(48000, "guiana_raised_fields"),
+      },
+    ],
+  })
+
+  # 6. Pre-Columbian Bolivian Highlands: Tiwanaku, Lake Titicaca, Aymara Señoríos & Qullasuyu (10000BC - 1535AD)
+  chapters.append({
+    "rel_dir": "1.pre_columbian/6.bolivian_highlands",
+    "stem": "bolivian_highlands",
+    "title": "Pre-Columbian Bolivian Highlands: Tiwanaku, Lake Titicaca, Aymara Señoríos and Inca Qullasuyu (10000BC-1535AD)",
+    "domain": [-10000, 1535],
+    "manifest_group": "specialist_masks",
+    "priority": 1,
+    "palette_seed": 0.83,
+    "regions": [
+      {
+        "id": "bolhi_titicaca_tiwanaku",
+        "name": "1. Lake Titicaca Basin & Tiwanaku Core (Lukurmata, Chiripa & Copacabana)",
+        "geom": g_bolhi_titicaca,
+        "population": scale_holocene_curve(320000, "bolivian_tiwanaku_altiplano"),
+      },
+      {
+        "id": "bolhi_la_paz_yungas_larecaja",
+        "name": "2. Chuquiabo (La Paz), Larecaja (Iskanwaya) & Yungas Valleys",
+        "geom": g_bolhi_lapaz,
+        "population": scale_holocene_curve(250000, "bolivian_cordillera_valleys"),
+      },
+      {
+        "id": "bolhi_oruro_poopo_carangas",
+        "name": "3. Central Altiplano: Wankarani, Paria (Oruro), Poopó & Carangas",
+        "geom": g_bolhi_oruro,
+        "population": scale_holocene_curve(185000, "bolivian_tiwanaku_altiplano"),
+      },
+      {
+        "id": "bolhi_cochabamba_mizque_valleys",
+        "name": "4. Cochabamba, Incallajta & Mizque Inter-Andean Valleys",
+        "geom": g_bolhi_cbba,
+        "population": scale_holocene_curve(295000, "bolivian_cordillera_valleys"),
+      },
+      {
+        "id": "bolhi_charcas_potosi_chuquisaca",
+        "name": "5. Charcas, Qaraqara, Yampara, Chuquisaca, Porco & Potosí Sierra",
+        "geom": g_bolhi_charcas,
+        "population": scale_holocene_curve(250000, "bolivian_cordillera_valleys"),
+      },
+      {
+        "id": "bolhi_southern_altiplano_tarija",
+        "name": "6. Southern Altiplano (Uyuni/Lípez), Cinti & Tarija Valleys",
+        "geom": g_bolhi_south,
+        "population": scale_holocene_curve(110000, "bolivian_cordillera_valleys"),
       },
     ],
   })
@@ -843,6 +959,57 @@ def main():
         "name": "4. Moxos, Chiquitos & Santa Cruz de la Sierra (Bolivian Lowlands)",
         "geom": union_adm1(adm1, [("BOL", "El Beni"), ("BOL", "Pando"), ("BOL", "Santa Cruz")]),
         "population": {1542: 390000, 1600: 275000, 1650: 215000, 1700: 185000, 1750: 178000, 1780: 170000, 1800: 175000, 1825: 188000},
+      },
+    ],
+  })
+
+  # 10. Colonial Bolivian Highlands / Real Audiencia de Charcas (Alto Perú, 1535 - 1825 AD)
+  # Seamlessly bridges 1535AD (1.25M) from 6.bolivian_highlands to 1825AD (998k) into 2.bolivia_after_independence!
+  chapters.append({
+    "rel_dir": "2.colonial/5.colonial_upper_peru_charcas",
+    "stem": "colonial_upper_peru_charcas",
+    "title": "Colonial Bolivian Highlands (Real Audiencia de Charcas): Potosí Silver Mita, Toledo Reducciones and Alto Perú Censuses (1535-1825AD)",
+    "domain": [1535, 1825],
+    "manifest_group": "national_epoch_masks",
+    "priority": 2,
+    "palette_seed": 0.91,
+    "rel_unc": 0.14,
+    "regions": [
+      {
+        "id": "cup_la_paz",
+        "name": "1. Intendencia de La Paz (Titicaca, Pacajes, Omasuyos & Yungas)",
+        "geom": adm1[("BOL", "La Paz")],
+        "population": {1535: 430000, 1575: 365000, 1610: 325000, 1650: 295000, 1700: 255000, 1750: 275000, 1780: 295000, 1800: 305000, 1825: 320000},
+      },
+      {
+        "id": "cup_oruro",
+        "name": "2. Corregimiento de Oruro, Paria & Carangas",
+        "geom": adm1[("BOL", "Oruro")],
+        "population": {1535: 145000, 1575: 118000, 1610: 122000, 1650: 115000, 1700: 82000, 1750: 78000, 1780: 76000, 1800: 75000, 1825: 76000},
+      },
+      {
+        "id": "cup_cochabamba",
+        "name": "3. Intendencia de Cochabamba & Mizque Granary",
+        "geom": adm1[("BOL", "Cochabamba")],
+        "population": {1535: 255000, 1575: 215000, 1610: 195000, 1650: 185000, 1700: 170000, 1750: 192000, 1780: 210000, 1800: 218000, 1825: 225000},
+      },
+      {
+        "id": "cup_chuquisaca_la_plata",
+        "name": "4. Intendencia de Charcas (La Plata / Chuquisaca & Yamparáez)",
+        "geom": adm1[("BOL", "Chuquisaca")],
+        "population": {1535: 155000, 1575: 132000, 1610: 124000, 1650: 115000, 1700: 98000, 1750: 105000, 1780: 112000, 1800: 115000, 1825: 118000},
+      },
+      {
+        "id": "cup_potosi_charcas",
+        "name": "5. Intendencia de Potosí (Villa Imperial, Porco, Chayanta & Chichas)",
+        "geom": adm1[("BOL", "Potosí")],
+        "population": {1535: 210000, 1575: 225000, 1610: 315000, 1650: 285000, 1700: 185000, 1750: 195000, 1780: 205000, 1800: 210000, 1825: 215000},
+      },
+      {
+        "id": "cup_tarija_cinti",
+        "name": "6. Villa de Tarija & Southern Cordillera Frontier",
+        "geom": adm1[("BOL", "Tarija")],
+        "population": {1535: 55000, 1575: 45000, 1610: 42000, 1650: 39000, 1700: 36000, 1750: 38000, 1780: 41000, 1800: 42000, 1825: 44000},
       },
     ],
   })
@@ -1063,6 +1230,7 @@ def main():
       "guianas": {"pre_admin_end": 1595, "colonial_start": 1595, "contemporary_start": 1815},
       "paraguay": {"pre_admin_end": 1537, "colonial_start": 1537, "contemporary_start": 1811},
       "bolivia_spanish_amazon": {"pre_admin_end": 1542, "colonial_start": 1542, "contemporary_start": 1825},
+      "bolivia_highlands": {"pre_admin_end": 1535, "colonial_start": 1535, "contemporary_start": 1825},
     },
     "geography_profile": {
       "projection_class": "lambert_azimuthal",
