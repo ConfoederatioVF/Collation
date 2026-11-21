@@ -60,6 +60,57 @@
 		
 		if (delta_items.length === 0) return [];
 		
+		//GPU-accelerated fast path on NVIDIA OpenCL with consecutive-pair buffer reuse (halves PNG reads)
+		if (options.use_gpu !== false && GeoPNG.gpu && GeoPNG.gpu.isAvailable() && typeof GeoPNG.loadRawRGBAAsync === "function") {
+			if (typeof GeoPNG.applyBackgroundProcessPriority === "function")
+				GeoPNG.applyBackgroundProcessPriority();
+			
+			console.log(`- [Delta Timeseries (${options.prefix || "delta"})] Running GPU-accelerated pipeline over ${delta_items.length} pairs on ${GeoPNG.gpu._device_info ? GeoPNG.gpu._device_info.device : "GPU"} ..`);
+			
+			let cached_path = null;
+			let cached_raw = null;
+			let results = new Array(delta_items.length);
+			let yield_ms = (GeoPNG.compute_limits && GeoPNG.compute_limits.cpu && GeoPNG.compute_limits.cpu.cooperative_yield_ms !== undefined) ?
+				Number(GeoPNG.compute_limits.cpu.cooperative_yield_ms) : 4;
+			
+			for (let i = 0; i < delta_items.length; i++) {
+				let item = delta_items[i];
+				let prev_raw = (cached_path === item.previous_file_path && cached_raw) ?
+					cached_raw : await GeoPNG.loadRawRGBAAsync(item.previous_file_path);
+				let curr_raw = await GeoPNG.loadRawRGBAAsync(item.current_file_path);
+				
+				if (prev_raw && curr_raw && prev_raw.data.byteLength === curr_raw.data.byteLength) {
+					let out_rgba = await GeoPNG.gpu.binaryOpRGBA(curr_raw.data, prev_raw.data, "slope", {
+						format_1: options.input_format,
+						format_2: options.input_format,
+						scalar: 1/item.year_diff
+					});
+					if (out_rgba) {
+						await GeoPNG.saveRawRGBAAsync({
+							data: out_rgba,
+							file_path: item.output_file_path,
+							height: curr_raw.height,
+							width: curr_raw.width
+						});
+						results[i] = item.output_file_path;
+					}
+					cached_path = item.current_file_path;
+					cached_raw = curr_raw;
+				}
+				
+				if ((i + 1) % 10 === 0 || i + 1 === delta_items.length)
+					console.log(`- [Delta Timeseries (${options.prefix || "delta"})] [${i + 1}/${delta_items.length}] Processed ${item.current_year} (${Math.floor(((i + 1)/delta_items.length)*100)}%)`);
+				if ((i + 1) % 8 === 0 && typeof GeoPNG.enforceMemoryBudget === "function")
+					GeoPNG.enforceMemoryBudget();
+				if (yield_ms > 0)
+					await new Promise((resolve) => setTimeout(resolve, yield_ms));
+			}
+			cached_raw = null;
+			
+			//Return statement
+			return results;
+		}
+		
 		//Return statement
 		return GeoPNG.processTimeseriesParallel({
 			concurrency: options.concurrency,
@@ -74,7 +125,8 @@
 				op: "slope",
 				output_path: item.output_file_path,
 				scalar: 1/item.year_diff,
-				type: "raster_operation"
+				type: "raster_operation",
+				use_gpu: options.use_gpu
 			}),
 			handler: async (item) => {
 				let current_raster = GeoPNG.loadNumberRasterImage(item.current_file_path, {

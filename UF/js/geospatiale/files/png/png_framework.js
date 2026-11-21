@@ -588,21 +588,26 @@
 		if (!png || !png.data || png.width <= 0 || png.height <= 0) return null;
 		
 		//Float64Array is safe for scaling calculations
-		let pixel_values = new Float64Array(png.width * png.height);
-		
-		for (let i = 0; i < png.width * png.height; i++) {
-			let colour_index = i * 4;
-			let local_rgba = [
-				png.data[colour_index],
-				png.data[colour_index + 1],
-				png.data[colour_index + 2],
-				png.data[colour_index + 3],
-			];
-			
-			if (options.format === "greyscale") {
-				pixel_values[i] = local_rgba[0]/255;
+		let pixel_values;
+		if (typeof GeoPNG.decodeRGBABufferFast === "function") {
+			pixel_values = GeoPNG.decodeRGBABufferFast(png.data, options);
+		} else {
+			let pixel_count = png.width*png.height;
+			let dv = new DataView(png.data.buffer, png.data.byteOffset, png.data.byteLength);
+			pixel_values = new Float64Array(pixel_count);
+			if (options.format === "float32") {
+				for (let i = 0; i < pixel_count; i++) {
+					let p4 = i*4;
+					if ((png.data[p4] | png.data[p4 + 1] | png.data[p4 + 2] | png.data[p4 + 3]) === 0) continue;
+					let v = dv.getFloat32(p4, false);
+					pixel_values[i] = Number.isFinite(v) ? v : 0;
+				}
+			} else if (options.format === "greyscale") {
+				for (let i = 0; i < pixel_count; i++)
+					pixel_values[i] = png.data[i*4]/255;
 			} else {
-				pixel_values[i] = Colour.decodeRGBAAsNumber(local_rgba, options);
+				for (let i = 0; i < pixel_count; i++)
+					pixel_values[i] = dv.getUint32(i*4, false);
 			}
 		}
 		
@@ -657,20 +662,39 @@
 		if (!options.format) options.format = "int32";
 		
 		//Declare local instance variables
-		let filter_type = (options.filterType !== undefined) ? options.filterType : -1;
+		let default_filter = (GeoPNG.compute_limits && GeoPNG.compute_limits.io && GeoPNG.compute_limits.io.png_filter_type !== undefined) ?
+			GeoPNG.compute_limits.io.png_filter_type : 0;
+		let filter_type = (options.filterType !== undefined) ? options.filterType : default_filter;
 		let png = new pngjs.PNG({
 			height: options.height,
 			width: options.width,
 			filterType: filter_type
 		});
+		let dv = new DataView(png.data.buffer, png.data.byteOffset, png.data.byteLength);
+		let total_pixels = options.width*options.height;
+		let fn = options.function;
 		
-		//Iterate over options.height; options.width
-		for (let i = 0; i < options.height; i++)
-			for (let x = 0; x < options.width; x++) {
-				let local_index = (i*options.width + x); //RGBA index to be multiplied by 4
-				
-				GeoPNG.saveNumberToPixel(png, local_index, options.function(local_index), options);
+		//Fast zero-allocation encode path
+		if (options.format === "float32") {
+			for (let i = 0; i < total_pixels; i++) {
+				let v = fn(i);
+				if (v && Number.isFinite(v)) dv.setFloat32(i*4, v, false);
 			}
+		} else if (options.format === "greyscale") {
+			for (let i = 0; i < total_pixels; i++) {
+				let g = Math.max(0, Math.min(255, Math.floor((fn(i) || 0)*255)));
+				let p4 = i*4;
+				png.data[p4] = g;
+				png.data[p4 + 1] = g;
+				png.data[p4 + 2] = g;
+				png.data[p4 + 3] = 255;
+			}
+		} else {
+			for (let i = 0; i < total_pixels; i++) {
+				let v = fn(i);
+				if (v && Number.isFinite(v)) dv.setUint32(i*4, Math.ceil(v) >>> 0, false);
+			}
+		}
 		
 		//Ensure destination directory exists
 		let parent_dir = path.dirname(path.resolve(options.file_path));

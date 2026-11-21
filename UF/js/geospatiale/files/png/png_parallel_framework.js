@@ -37,6 +37,25 @@
 		}
 		
 		//Declare local instance variables
+		let raw_rgba = null;
+		let height = 0;
+		let pixel_values = null;
+		let width = 0;
+		
+		if (typeof GeoPNG.loadRawRGBAAsync === "function") {
+			raw_rgba = await GeoPNG.loadRawRGBAAsync(file_path);
+		}
+		if (raw_rgba && raw_rgba.data && raw_rgba.width > 0 && raw_rgba.height > 0) {
+			height = raw_rgba.height;
+			width = raw_rgba.width;
+			pixel_values = (typeof GeoPNG.decodeRGBABufferFast === "function") ?
+				GeoPNG.decodeRGBABufferFast(raw_rgba.data, options) : new Float64Array(width*height);
+			raw_rgba = null;
+			
+			//Return statement
+			return { width: width, height: height, data: pixel_values };
+		}
+		
 		let buffer;
 		let png;
 		
@@ -58,26 +77,26 @@
 		
 		if (!png || !png.data || png.width <= 0 || png.height <= 0) return null;
 		
-		let height = png.height;
+		height = png.height;
 		let pixel_count = png.width*png.height;
-		let pixel_values = new Float64Array(pixel_count);
-		let width = png.width;
+		let dv = new DataView(png.data.buffer, png.data.byteOffset, png.data.byteLength);
+		pixel_values = new Float64Array(pixel_count);
+		width = png.width;
 		
-		//Decode pixel values
-		for (let i = 0; i < pixel_count; i++) {
-			let colour_index = i*4;
-			let local_rgba = [
-				png.data[colour_index],
-				png.data[colour_index + 1],
-				png.data[colour_index + 2],
-				png.data[colour_index + 3]
-			];
-			
-			if (options.format === "greyscale") {
-				pixel_values[i] = local_rgba[0]/255;
-			} else {
-				pixel_values[i] = Colour.decodeRGBAAsNumber(local_rgba, options);
+		//Zero-allocation decode
+		if (options.format === "float32") {
+			for (let i = 0; i < pixel_count; i++) {
+				let p4 = i*4;
+				if ((png.data[p4] | png.data[p4 + 1] | png.data[p4 + 2] | png.data[p4 + 3]) === 0) continue;
+				let v = dv.getFloat32(p4, false);
+				pixel_values[i] = Number.isFinite(v) ? v : 0;
 			}
+		} else if (options.format === "greyscale") {
+			for (let i = 0; i < pixel_count; i++)
+				pixel_values[i] = png.data[i*4]/255;
+		} else {
+			for (let i = 0; i < pixel_count; i++)
+				pixel_values[i] = dv.getUint32(i*4, false);
 		}
 		
 		//Explicitly dereference png to assist garbage collection
@@ -111,39 +130,69 @@
 		if (!options.format) options.format = "int32";
 		
 		//Declare local instance variables
-		let filter_type = (options.filterType !== undefined) ? options.filterType : -1;
 		let height = options.height;
-		let png = new pngjs.PNG({
-			filterType: filter_type,
-			height: height,
-			width: options.width
-		});
+		let pixel_count = options.width*height;
+		let rgba_buf = null;
 		let width = options.width;
 		
-		//Ensure destination directory exists
+		if (options.data && typeof GeoPNG.encodeNumberBufferFast === "function") {
+			rgba_buf = GeoPNG.encodeNumberBufferFast(options.data, options);
+		} else {
+			rgba_buf = Buffer.alloc(pixel_count*4);
+			let dv = new DataView(rgba_buf.buffer, rgba_buf.byteOffset, rgba_buf.byteLength);
+			let fn = options.function;
+			let src_arr = options.data;
+			
+			if (options.format === "float32") {
+				for (let i = 0; i < pixel_count; i++) {
+					let v = src_arr ? src_arr[i] : (fn ? fn(i) : 0);
+					if (v && Number.isFinite(v)) dv.setFloat32(i*4, v, false);
+				}
+			} else if (options.format === "greyscale") {
+				for (let i = 0; i < pixel_count; i++) {
+					let g = Math.max(0, Math.min(255, Math.floor(((src_arr ? src_arr[i] : (fn ? fn(i) : 0)) || 0)*255)));
+					let p4 = i*4;
+					rgba_buf[p4] = g;
+					rgba_buf[p4 + 1] = g;
+					rgba_buf[p4 + 2] = g;
+					rgba_buf[p4 + 3] = 255;
+				}
+			} else {
+				for (let i = 0; i < pixel_count; i++) {
+					let v = src_arr ? src_arr[i] : (fn ? fn(i) : 0);
+					if (v && Number.isFinite(v)) dv.setUint32(i*4, Math.ceil(v) >>> 0, false);
+				}
+			}
+		}
+		
+		if (typeof GeoPNG.saveRawRGBAAsync === "function") {
+			await GeoPNG.saveRawRGBAAsync({
+				data: rgba_buf,
+				file_path: options.file_path,
+				height: height,
+				width: width
+			});
+			
+			//Return statement
+			return {
+				data: (options.return_data !== false) ? rgba_buf : undefined,
+				height: height,
+				width: width
+			};
+		}
+		
+		//Fallback pngjs write (filterType 0 for low CPU overhead)
+		let filter_type = (options.filterType !== undefined) ? options.filterType : 0;
+		let node_fs = (typeof fs !== "undefined") ? fs : require("fs");
 		let node_path = (typeof path !== "undefined") ? path : require("path");
 		let parent_dir = node_path.dirname(node_path.resolve(options.file_path));
-		let node_fs = (typeof fs !== "undefined") ? fs : require("fs");
 		if (!node_fs.existsSync(parent_dir))
 			await node_fs.promises.mkdir(parent_dir, { recursive: true });
 		
-		if (options.data) {
-			let buffer_data = options.data;
-			let pixel_count = width*height;
-			
-			for (let i = 0; i < pixel_count; i++)
-				GeoPNG.saveNumberToPixel(png, i, buffer_data[i], options);
-		} else if (options.function) {
-			for (let i = 0; i < height; i++)
-				for (let x = 0; x < width; x++) {
-					let local_index = i*width + x;
-					GeoPNG.saveNumberToPixel(png, local_index, options.function(local_index), options);
-				}
-		}
-		
-		//Pack and write asynchronously
+		let png = new pngjs.PNG({ filterType: filter_type, height: height, width: width });
+		png.data.set(rgba_buf);
 		let output_buffer = pngjs.PNG.sync.write(png, { filterType: filter_type });
-		await fs.promises.writeFile(options.file_path, output_buffer);
+		await node_fs.promises.writeFile(options.file_path, output_buffer);
 		output_buffer = null;
 		
 		//Return statement
@@ -278,10 +327,13 @@
 		//Convert from parameters
 		let options = (arg0_options) ? arg0_options : {};
 		
-		//Initialise options
+		//Initialise options (bounded by GeoPNG.compute_limits.cpu.max_workers to prevent CPU starvation & FPS drops)
 		let cpu_count = (typeof require !== "undefined") ? require("os").cpus().length : 4;
-		let default_concurrency = Math.max(1, Math.min(cpu_count - 2, 16));
-		let max_workers = Math.returnSafeNumber(options.concurrency, default_concurrency);
+		let cfg_cap = (GeoPNG.compute_limits && GeoPNG.compute_limits.cpu && GeoPNG.compute_limits.cpu.max_workers) ?
+			Number(GeoPNG.compute_limits.cpu.max_workers) : 4;
+		let default_concurrency = Math.max(1, Math.min(cpu_count - 2, cfg_cap));
+		let requested_workers = Math.returnSafeNumber(options.concurrency, default_concurrency);
+		let max_workers = Math.max(1, Math.min(requested_workers, cfg_cap));
 		
 		//Declare local instance variables
 		let child_process = (typeof require !== "undefined") ? require("child_process") : null;
@@ -433,6 +485,8 @@
 			GeoPNG._pending_tasks.clear();
 		}
 		if (GeoPNG._worker_pool) GeoPNG._worker_pool = [];
+		if (GeoPNG.gpu && typeof GeoPNG.gpu.shutdown === "function")
+			GeoPNG.gpu.shutdown();
 	};
 	
 	/**
@@ -495,10 +549,17 @@
 		//Convert from parameters
 		let options = (arg0_options) ? arg0_options : {};
 		
-		//Initialise options
+		//Initialise options (enforcing GeoPNG.compute_limits CPU & RAM bounds)
 		let cpu_count = (typeof require !== "undefined") ? require("os").cpus().length : 4;
-		let default_concurrency = Math.max(1, Math.min(cpu_count - 2, 16));
-		let concurrency = Math.returnSafeNumber(options.concurrency || options.concurrecy, default_concurrency);
+		let cfg_cap = (GeoPNG.compute_limits && GeoPNG.compute_limits.cpu && GeoPNG.compute_limits.cpu.max_workers) ?
+			Number(GeoPNG.compute_limits.cpu.max_workers) : 4;
+		let default_concurrency = Math.max(1, Math.min(cpu_count - 2, cfg_cap));
+		let requested_conc = Math.returnSafeNumber(options.concurrency || options.concurrecy, default_concurrency);
+		let concurrency = Math.max(1, Math.min(requested_conc, cfg_cap));
+		let yield_ms = (GeoPNG.compute_limits && GeoPNG.compute_limits.cpu && GeoPNG.compute_limits.cpu.cooperative_yield_ms !== undefined) ?
+			Number(GeoPNG.compute_limits.cpu.cooperative_yield_ms) : 4;
+		if (typeof GeoPNG.applyBackgroundProcessPriority === "function")
+			GeoPNG.applyBackgroundProcessPriority();
 		let context = (options.context) ? options.context : {};
 		let handler = options.handler;
 		let items = (options.items) ? options.items : [];
@@ -622,9 +683,14 @@
 					} catch (e) {}
 				}
 				
-				//Yield to the event loop between queue items to maintain 60 FPS and prevent DevTools disconnect
-				if (typeof Blacktraffic !== "undefined" && Blacktraffic.yield)
-					await Blacktraffic.yield(0);
+				//Enforce RAM ceiling periodically and yield to preserve 60 FPS
+				if (completed_count % 8 === 0 && typeof GeoPNG.enforceMemoryBudget === "function")
+					GeoPNG.enforceMemoryBudget();
+				if (typeof Blacktraffic !== "undefined" && Blacktraffic.yield) {
+					await Blacktraffic.yield(yield_ms);
+				} else if (yield_ms > 0) {
+					await new Promise((resolve) => setTimeout(resolve, yield_ms));
+				}
 			}
 		};
 		

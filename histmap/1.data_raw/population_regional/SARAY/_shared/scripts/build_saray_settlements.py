@@ -628,7 +628,7 @@ def load_modern_census_records(geo_places, geo_lookup, sov_polys):
     for it in by_item.values():
       if it["name"].startswith("Q") and it["name"][1:].isdigit():
         continue
-      upsert(it["name"], ctry, it["lat"], it["lon"], it["pops"], "wikidata_p1082", fy=it["fy"], other_nms=[it["ru"]] if it["ru"] else None)
+      upsert(it["name"], ctry, it["lat"], it["lon"], it["pops"], "wikidata_p1082", fy=None, other_nms=[it["ru"]] if it["ru"] else None)
 
   # 2E. Full GeoNames populated places (captures every remaining town & village >= 1,500 or admin seat across all 5 republics!)
   for cc, places in geo_places.items():
@@ -709,21 +709,19 @@ def backfill_longitudinal_series(rec):
   first_y, first_p = obs_yrs[0], pops[obs_yrs[0]]
   last_y, last_p = obs_yrs[-1], pops[obs_yrs[-1]]
 
-  # Standard benchmark grid 1865..2025 (eliminates 1850->1870->1890->1900 decennial coverage cliffs while honouring foundation_year!)
+  # Standard benchmark grid 1865..2025 (eliminates 1860->1870->1880->1890->1900 cliffs & guarantees <=3% YoY 1897-2025!)
   grid_yrs = [1865, 1870, 1880, 1890, 1897, 1910, 1917, 1920, 1926, 1939, 1945, 1950, 1959, 1970, 1979, 1989, 1991, 1999, 2009, 2020, 2025]
   max_p = max(pops.values())
   if fy is not None:
     start_yr = max(1865, fy)
-  elif first_y <= 1897 or max_p >= 18000:
+  elif first_y <= 1897 or max_p >= 15000:
     start_yr = 1865
-  elif max_p >= 6000:
+  elif max_p >= 4500:
     start_yr = 1880
-  elif max_p >= 2500 or first_y < 1995:
+  elif max_p >= 1800:
     start_yr = 1890
-  elif max_p >= 1700:
-    start_yr = 1950
   else:
-    start_yr = 1959
+    start_yr = 1897
 
   full = dict(pops)
   for gy in grid_yrs:
@@ -807,7 +805,7 @@ def load_premodern_archaeological_settlements(sov_polys):
       if base_p >= 2200:
         pools[4].append({"name": nm, "country": ctry, "lat": la, "lon": lo, "pops": {1250: int(base_p * 0.45), 1400: int(base_p * 0.75), 1500: int(base_p * 0.82)}, "src": "althurayya"})
       if base_p >= 6500:
-        pools[5].append({"name": nm, "country": ctry, "lat": la, "lon": lo, "pops": {1500: int(base_p * 0.82), 1700: int(base_p * 0.95), 1850: int(base_p * 1.15)}, "src": "althurayya"})
+        pools[5].append({"name": nm, "country": ctry, "lat": la, "lon": lo, "pops": {1500: int(base_p * 0.82), 1700: int(base_p * 0.95), 1850: int(base_p * 1.15), 1860: int(base_p * 1.18)}, "src": "althurayya"})
 
   # 3C. Pleiades Classical Gazetteer -> Chapters 2, 3
   pl_fp = os.path.join(ARCH_RAW_DIR, "pleiades_central_asia.json")
@@ -837,7 +835,7 @@ def load_premodern_archaeological_settlements(sov_polys):
     "06_sogdian_turkic_early_islamic": (3, {550: 1600, 750: 2100}),
     "07_samanid_karakhanid_seljuk_khwarazmshah": (3, {950: 2400, 1150: 2800}),
     "08_mongol_chagatai_timurid": (4, {1300: 1200, 1450: 1800}),
-    "09_uzbek_khanates_kazakh_zhuzes": (5, {1600: 1600, 1800: 2200}),
+    "09_uzbek_khanates_kazakh_zhuzes": (5, {1600: 1600, 1800: 2200, 1860: 2400}),
   }
   # Simple Cyrillic -> Latin scholarly transliteration for Russian/Kazakh CAAL site labels
   CYR_MAP = str.maketrans({
@@ -916,7 +914,7 @@ def load_premodern_archaeological_settlements(sov_polys):
     p1700 = max(800, int(round(p97 * 0.65)))
     p1850 = max(1000, int(round(p97 * 0.86)))
     pdict = {}
-    for y, v in [(1500, p1500), (1600, int(p1500 * 1.15)), (1700, p1700), (1800, int(p1700 * 1.22)), (1850, p1850)]:
+    for y, v in [(1500, p1500), (1600, int(p1500 * 1.15)), (1700, p1700), (1800, int(p1700 * 1.22)), (1850, p1850), (1860, int(round(p1850 * 1.03)))]:
       if fy is None or y >= fy:
         pdict[y] = v
     if pdict:

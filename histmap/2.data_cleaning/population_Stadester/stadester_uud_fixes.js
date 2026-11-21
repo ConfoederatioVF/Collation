@@ -866,7 +866,7 @@
         let rd = global.StadesterPartitionIO.assignCityToViscountRegion(ac, ak);
         if (rd && rd.key) a_proj = String(rd.key).toUpperCase();
       }
-      if (a_proj !== "PRETA" && a_proj !== "CENTAUR" && a_proj !== "INDUS" && a_proj !== "CASTLE" && a_proj !== "JADE" && a_proj !== "SARAY") continue;
+      if (a_proj !== "PRETA" && a_proj !== "CENTAUR" && a_proj !== "INDUS" && a_proj !== "CASTLE" && a_proj !== "JADE" && a_proj !== "SARAY" && a_proj !== "MANDALA") continue;
       let base_name = String(ac.name || "").replace(/\s*\(agglomeration\)\s*/gi, "").trim();
       let base_key = `${base_name}-${ac.country}`;
       let target = stadester_obj[base_key];
@@ -965,7 +965,8 @@
             a.proj_key === "INDUS" || b.proj_key === "INDUS" ||
             a.proj_key === "CASTLE" || b.proj_key === "CASTLE" ||
             a.proj_key === "JADE" || b.proj_key === "JADE" ||
-            a.proj_key === "SARAY" || b.proj_key === "SARAY"
+            a.proj_key === "SARAY" || b.proj_key === "SARAY" ||
+            a.proj_key === "MANDALA" || b.proj_key === "MANDALA"
           );
 
           if (!touches_viscount) continue;
@@ -995,6 +996,8 @@
             if (Number.isFinite(yv) && yv > 0 && !(Number(a.city.population[yk]) > 0)) {
               a.city.population[yk] = yv;
               if (Number.isFinite(yi) && yi >= 1850) a.active_ge1850.add(yi);
+              if (Number.isFinite(yi) && Number.isFinite(Number(a.city.foundation_year)) && yi < Number(a.city.foundation_year))
+                delete a.city.foundation_year;
             }
           }
           population_Stadester_uud.appendCitySources(a.city, b.city.sources || b.city.type);

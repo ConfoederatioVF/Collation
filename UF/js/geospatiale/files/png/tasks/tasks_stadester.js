@@ -114,6 +114,29 @@ if (!global.GeoPNG.tasks) global.GeoPNG.tasks = {};
     //Guard clause
     if (!input_path || !fs.existsSync(input_path)) return null;
 
+    //GPU-accelerated float32 fast path
+    if (format === "float32" && task.use_gpu !== false && GeoPNG.gpu && GeoPNG.gpu.isAvailable() && typeof GeoPNG.loadRawRGBAAsync === "function") {
+      let raw_img = await GeoPNG.loadRawRGBAAsync(input_path);
+      if (raw_img && raw_img.data) {
+        let gpu_sum = await GeoPNG.gpu.sumRGBA(raw_img.data, { format: "float32", positive_only: true });
+        if (gpu_sum !== null) {
+          let gpu_scalar = (gpu_sum > 0 && target > 0) ? (target/gpu_sum) : 1;
+          let scaled_rgba = await GeoPNG.gpu.scaleRGBA(raw_img.data, gpu_scalar);
+          if (scaled_rgba) {
+            await GeoPNG.saveRawRGBAAsync({
+              data: scaled_rgba,
+              file_path: output_path,
+              height: raw_img.height,
+              width: raw_img.width
+            });
+
+            //Return statement
+            return { output_path: output_path, scalar: gpu_scalar, sum: gpu_sum, success: true };
+          }
+        }
+      }
+    }
+
     let raster = await GeoPNG.loadNumberRasterImageAsync(input_path, { format: format });
     let total_pixels = raster.data.length;
     let sum = 0;
@@ -183,23 +206,89 @@ if (!global.GeoPNG.tasks) global.GeoPNG.tasks = {};
     let geocode_raster = global._cached_geocodes_raster;
     if (!geocode_raster) return null;
 
+    //Build packed 24-bit integer RGB -> compact region ID table (eliminates 18,6M string allocations per raster)
+    let total_pixels = geocode_raster.width*geocode_raster.height;
+    let rgb_to_code_id = new Map();
+    let code_list = [];
+    let code_to_id = new Map();
+    let gmap_keys = Object.keys(geocode_map);
+
+    for (let i = 0; i < gmap_keys.length; i++) {
+      let parts = gmap_keys[i].split(",");
+      if (parts.length < 3) continue;
+      let rgb_int = ((parseInt(parts[0], 10) & 255) << 16) | ((parseInt(parts[1], 10) & 255) << 8) | (parseInt(parts[2], 10) & 255);
+      let codes = geocode_map[gmap_keys[i]];
+      if (!Array.isArray(codes) || codes.length === 0) continue;
+      let chosen_code = codes[0];
+      for (let x = 0; x < codes.length; x++) {
+        if (target_gdp_map[codes[x]] !== undefined) {
+          chosen_code = codes[x];
+          break;
+        }
+      }
+      if (!code_to_id.has(chosen_code)) {
+        code_to_id.set(chosen_code, code_list.length);
+        code_list.push(chosen_code);
+      }
+      rgb_to_code_id.set(rgb_int, code_to_id.get(chosen_code));
+    }
+
+    //GPU-accelerated national scaling when float32 & GPU available
+    if (format === "float32" && task.use_gpu !== false && GeoPNG.gpu && GeoPNG.gpu.isAvailable() && typeof GeoPNG.loadRawRGBAAsync === "function" && code_list.length > 0) {
+      let region_ids = new Int32Array(total_pixels);
+      region_ids.fill(-1);
+      for (let i = 0; i < total_pixels; i++) {
+        let b = i*4;
+        let rgb_int = (geocode_raster.data[b] << 16) | (geocode_raster.data[b + 1] << 8) | geocode_raster.data[b + 2];
+        let rid = rgb_to_code_id.get(rgb_int);
+        if (rid !== undefined) region_ids[i] = rid;
+      }
+
+      let raw_img = await GeoPNG.loadRawRGBAAsync(input_path);
+      if (raw_img && raw_img.data) {
+        let region_sums = await GeoPNG.gpu.regionalSumRGBA(raw_img.data, region_ids, code_list.length, { positive_only: true });
+        if (region_sums) {
+          let region_scalars = new Float32Array(code_list.length);
+          for (let x = 0; x < code_list.length; x++) {
+            let code = code_list[x];
+            let target_val = target_gdp_map[code];
+            let sum_val = region_sums[x];
+            region_scalars[x] = (target_val !== undefined && sum_val > 0) ? (target_val/sum_val) : 1;
+          }
+          let out_rgba = await GeoPNG.gpu.regionalScaleRGBA(raw_img.data, region_ids, region_scalars, 1);
+          if (out_rgba) {
+            await GeoPNG.saveRawRGBAAsync({
+              data: out_rgba,
+              file_path: output_path,
+              height: raw_img.height,
+              width: raw_img.width
+            });
+
+            //Return statement
+            return { output_path: output_path, success: true };
+          }
+        }
+      }
+    }
+
     let raster = await GeoPNG.loadNumberRasterImageAsync(input_path, { format: format });
-    let total_pixels = raster.data.length;
+    total_pixels = raster.data.length;
     let local_gdp_scalars = {};
     let local_gdp_sums = {};
 
-    //Pass 1: Sum per geocode
+    //Pass 1: Sum per geocode (fast packed integer RGB lookup fallback)
+    let region_ids_cpu = new Int32Array(total_pixels);
+    region_ids_cpu.fill(-1);
     for (let i = 0; i < total_pixels; i++) {
       let val = raster.data[i];
       if (val > 0 && isFinite(val)) {
-        let byte_idx = i * 4;
-        let colour_key = `${geocode_raster.data[byte_idx]},${geocode_raster.data[byte_idx + 1]},${geocode_raster.data[byte_idx + 2]}`;
-        let geocodes = geocode_map[colour_key];
-        if (geocodes) {
-          for (let x = 0; x < geocodes.length; x++) {
-            let code = geocodes[x];
-            local_gdp_sums[code] = (local_gdp_sums[code] || 0) + val;
-          }
+        let byte_idx = i*4;
+        let rgb_int = (geocode_raster.data[byte_idx] << 16) | (geocode_raster.data[byte_idx + 1] << 8) | geocode_raster.data[byte_idx + 2];
+        let rid = rgb_to_code_id.get(rgb_int);
+        if (rid !== undefined) {
+          region_ids_cpu[i] = rid;
+          let code = code_list[rid];
+          local_gdp_sums[code] = (local_gdp_sums[code] || 0) + val;
         }
       }
     }
@@ -222,21 +311,13 @@ if (!global.GeoPNG.tasks) global.GeoPNG.tasks = {};
     for (let i = 0; i < total_pixels; i++) {
       let val = raster.data[i];
       if (val > 0 && isFinite(val)) {
-        let byte_idx = i * 4;
-        let colour_key = `${geocode_raster.data[byte_idx]},${geocode_raster.data[byte_idx + 1]},${geocode_raster.data[byte_idx + 2]}`;
-        let geocodes = geocode_map[colour_key];
-        let scaled = false;
-        if (geocodes) {
-          for (let x = 0; x < geocodes.length; x++) {
-            let code = geocodes[x];
-            if (target_gdp_map[code] !== undefined) {
-              output_data[i] = val * (local_gdp_scalars[code] || 1);
-              scaled = true;
-              break;
-            }
-          }
+        let rid = region_ids_cpu[i];
+        if (rid >= 0) {
+          let code = code_list[rid];
+          output_data[i] = (target_gdp_map[code] !== undefined) ? (val*(local_gdp_scalars[code] || 1)) : val;
+        } else {
+          output_data[i] = val;
         }
-        if (!scaled) output_data[i] = val;
       } else {
         output_data[i] = 0;
       }

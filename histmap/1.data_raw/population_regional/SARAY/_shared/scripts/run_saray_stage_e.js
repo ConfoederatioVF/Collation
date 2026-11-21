@@ -119,29 +119,35 @@ for (let i = 0; i < files.length; i++) {
     let t0 = Date.now();
     console.log(`[SARAY StageE] Bootstrapped ${files.length} files cleanly.`);
 
+    let shards_only = process.argv.includes("--shards-only");
     let skip_deltas = process.argv.includes("--skip-deltas");
     let skip_shards = process.argv.includes("--skip-shards");
     let skip_substrata = process.argv.includes("--skip-substrata");
 
-    if (!skip_shards) {
-      console.log("[SARAY StageE] 1/5 Refreshing Stadestér 2.0 shards & base urban rasters (A-F)...");
-      await population_Stadester.processRasters({ exclude: ["G", "H", "I", "J"], overwrite: true, concurrency: 4 });
-    }
+    if (shards_only) {
+      console.log("[SARAY StageE] Shards-only refresh (Steps A-E) -> SVEA + Dataview...");
+      await population_Stadester.processRasters({ exclude: ["F", "G", "H", "I", "J"], overwrite: true, concurrency: 4 });
+    } else {
+      if (!skip_shards) {
+        console.log("[SARAY StageE] 1/5 Refreshing Stadestér 2.0 shards & base urban rasters (A-F)...");
+        await population_Stadester.processRasters({ exclude: ["G", "H", "I", "J"], overwrite: true, concurrency: 4 });
+      }
 
-    if (!skip_substrata) {
-      console.log("[SARAY StageE] 2/5 Running ViscountSubstrataPipeline (only_projects: ['SARAY']) + global scaling + GHSL interpolation...");
-      await population_Substrata_outlier_removal.processRasters({ exclude: ["A", "B2"], only_projects: ["SARAY"], concurrency: 4 });
-    }
+      if (!skip_substrata) {
+        console.log("[SARAY StageE] 2/5 Running ViscountSubstrataPipeline (only_projects: ['SARAY']) + global scaling + GHSL interpolation...");
+        await population_Substrata_outlier_removal.processRasters({ exclude: ["A", "B2"], only_projects: ["SARAY"], concurrency: 4 });
+      }
 
-    console.log("[SARAY StageE] 3/5 Reconciling Stadestér urban/rural/total/density rasters (G-J)...");
-    await population_Stadester.processRasters({ exclude: ["A", "B", "C", "D", "E", "F"], concurrency: 4 });
+      console.log("[SARAY StageE] 3/5 Reconciling Stadestér urban/rural/total/density rasters (G-J)...");
+      await population_Stadester.processRasters({ exclude: ["A", "B", "C", "D", "E", "F"], concurrency: 4 });
 
-    console.log("[SARAY StageE] 4/5 Running population_Velkscala (218 timesteps + Viscount antiquity)...");
-    await population_Velkscala.processRasters({ concurrency: 4 });
+      console.log("[SARAY StageE] 4/5 Running population_Velkscala (218 timesteps + Viscount antiquity)...");
+      await population_Velkscala.processRasters({ concurrency: 4 });
 
-    if (!skip_deltas) {
-      console.log("[SARAY StageE] 5/5 Refreshing population_Stadester_transform deltas...");
-      await population_Stadester_transform.processRasters();
+      if (!skip_deltas) {
+        console.log("[SARAY StageE] 5/5 Refreshing population_Stadester_transform deltas...");
+        await population_Stadester_transform.processRasters();
+      }
     }
 
     //Mirror Stadestér 2.0 shards + manifest to Dataview/data/stadester/stadester_2.0/ (preserving stadester_1.0 and 1.1)

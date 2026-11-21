@@ -1,5 +1,6 @@
 //Import modules
 let path = require("path");
+let { SarayPolarisFrontierHarmoniser } = require(path.join(__dirname, "SarayPolarisFrontierHarmoniser.js"));
 let { ViscountHUResidualKriging } = require(path.resolve(__dirname, "../../../../../3.data_transform/population_Substrata.viscount/centaur/ViscountHUResidualKriging.js"));
 let { ViscountMaternKriging } = require(path.resolve(__dirname, "../../../../../3.data_transform/population_Substrata.viscount/ViscountMaternKriging.js"));
 let { ViscountRuralSuitability } = require(path.resolve(__dirname, "../../../../../3.data_transform/population_Substrata.viscount/ViscountRuralSuitability.js"));
@@ -117,13 +118,17 @@ let { ViscountRuralSuitability } = require(path.resolve(__dirname, "../../../../
         }
       }
 
-      let diag = ViscountMaternKriging.F_exportBenchmarkRastersAndDiagnostics(surface);
       let raster_meta = ViscountHUResidualKriging.generateAllBenchmarkPopulationRasters(surface, { is_polynesia: false });
+
+      if (surface.hab_cache && typeof surface.hab_cache.clear === "function") surface.hab_cache.clear();
+      let frontier_meta = SarayPolarisFrontierHarmoniser.D_harmoniseAllRasters(surface, { project_root: this.PROJECT_ROOT });
+      let diag = ViscountMaternKriging.F_exportBenchmarkRastersAndDiagnostics(surface);
 
       //Return statement
       return {
         diag: diag,
         elapsed_seconds: Number(((Date.now() - t0)/1000).toFixed(2)),
+        frontier_meta: frontier_meta,
         raster_meta: raster_meta
       };
     }
@@ -135,6 +140,8 @@ if (require.main === module) {
 
   console.log(JSON.stringify({
     elapsed_seconds: res.elapsed_seconds,
+    frontier_elapsed_seconds: res.frontier_meta ? res.frontier_meta.elapsed_seconds : 0,
+    frontier_harmonised_years: res.frontier_meta ? res.frontier_meta.harmonised_years : 0,
     generated_years: res.raster_meta.generated_years,
     tau1_dimensionless: res.diag.tau1_dimensionless,
     tau2_dimensionless: res.diag.tau2_dimensionless,

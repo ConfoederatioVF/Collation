@@ -1,0 +1,61 @@
+{
+  //GeoPNG & Raster Pipeline Resource Constraints (CPU, GPU, RAM)
+  //Prevents background geospatial pipelines from starving desktop/Electron FPS or over-allocating VRAM/RAM.
+
+  cpu: {
+    //Yield between raster items (ms) to keep desktop compositor & Electron event loop smooth
+    cooperative_yield_ms: 4,
+
+    //Cap background worker_threads / child processes so CPU never hits 100% across all cores
+    max_workers: 4,
+
+    //Drop Node worker process scheduling priority to BELOW_NORMAL when running background pipelines
+    priority_below_normal: true,
+
+    //Cap libvips/sharp native PNG codec threads so native I/O stays fast without CPU saturation
+    sharp_concurrency: 2
+  },
+
+  gpu: {
+    //Enable NVIDIA / OpenCL GPU acceleration for GeoPNG raster maths
+    enabled: true,
+
+    //Maximum pixels per single GPU kernel wave (4320x2160 / 4 = 2.332.800 px = 25% of frame per wave)
+    //Wave-slicing prevents WDDM GPU preemption stalls and keeps desktop FPS locked at 60+ FPS.
+    max_dispatch_pixels: 2332800,
+
+    //Maximum VRAM pool & active GPU allocation ceiling in MiB (RTX 4080 SUPER has 16.376 MiB; 2.048 MiB = 12,5% cap)
+    max_vram_mb: 2048,
+
+    //Minimum pixel count required to offload to GPU (tiny rasters stay on fast typed-array CPU)
+    min_pixels: 65536,
+
+    //Inter-wave / inter-job micro-pacing in ms to cap GPU duty cycle for desktop/display responsiveness
+    pacing_ms: 2,
+
+    //Preferred OpenCL GPU platform vendor substring
+    preferred_vendor: "NVIDIA",
+
+    //OpenCL workgroup size (multiple of 32 warp size on NVIDIA)
+    workgroup_size: 256
+  },
+
+  io: {
+    //Lossless PNG compression level for sharp (1 = ~65 ms/4K frame vs ~500 ms for pngjs filter -1)
+    png_compression_level: 1,
+
+    //Fallback pngjs filterType (0 = None, ~115 ms vs ~500 ms for -1)
+    png_filter_type: 0,
+
+    //Use native sharp (libvips/libpng) for fast lossless RGBA PNG decode/encode when available
+    use_sharp: true
+  },
+
+  ram: {
+    //Maximum cached anchor/mask rasters retained in memory per pipeline stage
+    max_cached_rasters: 8,
+
+    //Soft RSS memory ceiling in MiB; exceeding triggers buffer pool eviction & optional GC
+    max_ram_mb: 4096
+  }
+}

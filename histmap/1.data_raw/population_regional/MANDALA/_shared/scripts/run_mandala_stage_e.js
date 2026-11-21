@@ -119,35 +119,39 @@ for (let i = 0; i < files.length; i++) {
     let t0 = Date.now();
     console.log(`[MANDALA StageE] Bootstrapped ${files.length} files cleanly.`);
 
+    let shards_only = process.argv.includes("--shards-only");
     let skip_deltas = process.argv.includes("--skip-deltas");
     let skip_shards = process.argv.includes("--skip-shards");
     let skip_substrata = process.argv.includes("--skip-substrata");
 
     if (!skip_shards) {
-      console.log("[MANDALA StageE] 1/5 Refreshing Stadestér 2.0 shards & base urban rasters (A-F)...");
-      await population_Stadester.processRasters({ exclude: ["G", "H", "I", "J"], overwrite: true, concurrency: 4 });
+      let excl = shards_only ? ["E", "F", "G", "H", "I", "J"] : ["G", "H", "I", "J"];
+      console.log(`[MANDALA StageE] 1/5 Refreshing Stadestér 2.0 shards (${shards_only ? "A-D shards-only" : "A-F"})...`);
+      await population_Stadester.processRasters({ exclude: excl, overwrite: true, concurrency: 4 });
     } else {
       console.log("[MANDALA StageE] 1/5 Skipped Stadestér A-F (--skip-shards).");
     }
 
-    if (!skip_substrata) {
+    if (!shards_only && !skip_substrata) {
       console.log("[MANDALA StageE] 2/5 Running ViscountSubstrataPipeline (only_projects: ['MANDALA']) + global scaling + GHSL interpolation...");
       await population_Substrata_outlier_removal.processRasters({ exclude: ["A", "B2"], only_projects: ["MANDALA"], concurrency: 4 });
     } else {
-      console.log("[MANDALA StageE] 2/5 Skipped ViscountSubstrataPipeline (--skip-substrata).");
+      console.log("[MANDALA StageE] 2/5 Skipped ViscountSubstrataPipeline.");
     }
 
-    console.log("[MANDALA StageE] 3/5 Reconciling Stadestér urban/rural/total/density rasters (G-J)...");
-    await population_Stadester.processRasters({ exclude: ["A", "B", "C", "D", "E", "F"], concurrency: 4 });
+    if (!shards_only) {
+      console.log("[MANDALA StageE] 3/5 Reconciling Stadestér urban/rural/total/density rasters (G-J)...");
+      await population_Stadester.processRasters({ exclude: ["A", "B", "C", "D", "E", "F"], concurrency: 4 });
 
-    console.log("[MANDALA StageE] 4/5 Running population_Velkscala (218 timesteps + Viscount antiquity)...");
-    await population_Velkscala.processRasters({ concurrency: 4 });
+      console.log("[MANDALA StageE] 4/5 Running population_Velkscala (218 timesteps + Viscount antiquity)...");
+      await population_Velkscala.processRasters({ concurrency: 4 });
 
-    if (!skip_deltas) {
-      console.log("[MANDALA StageE] 5/5 Refreshing population_Stadester_transform deltas...");
-      await population_Stadester_transform.processRasters();
-    } else {
-      console.log("[MANDALA StageE] 5/5 Skipped population_Stadester_transform (--skip-deltas).");
+      if (!skip_deltas) {
+        console.log("[MANDALA StageE] 5/5 Refreshing population_Stadester_transform deltas...");
+        await population_Stadester_transform.processRasters();
+      } else {
+        console.log("[MANDALA StageE] 5/5 Skipped population_Stadester_transform (--skip-deltas).");
+      }
     }
 
     //Mirror Stadestér 2.0 shards + manifest to Dataview/data/stadester/stadester_2.0/ (preserving stadester_1.0 and 1.1)

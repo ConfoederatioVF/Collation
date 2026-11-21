@@ -112,19 +112,20 @@
       }
 
       if (!options.exclude_viscount_antiquity)
-        this.overlayViscountAntiquityDomains(target_years, options);
+        await this.overlayViscountAntiquityDomains(target_years, options);
     }
 
     /**
      * Step A2: Overlays calibrated antiquity rasters (`-10000` to `0 AD`) from active Viscount projects
      * (`rasters_2.scaled_to_regions/popc_*.png`) onto composited Velkscala antiquity rasters using
-     * log-linear temporal interpolation between 1000-year anchors and a 24-px cosine outer seam blend.
+     * log-linear temporal interpolation between 1000-year anchors and a 16-px cosine outer seam blend.
+     * Accelerated on NVIDIA OpenCL via GeoPNG.gpu when available.
      * @alias population_Velkscala.overlayViscountAntiquityDomains
      *
      * @param {Array<number>} arg0_target_years
      * @param {Object} [arg1_options]
      */
-    static overlayViscountAntiquityDomains (arg0_target_years, arg1_options) {
+    static async overlayViscountAntiquityDomains (arg0_target_years, arg1_options) {
       //Convert from parameters
       let target_years = Array.isArray(arg0_target_years) ? arg0_target_years : this.antiquity_years;
       let options = (arg1_options) ? arg1_options : {};
@@ -301,6 +302,118 @@
 
       let ext_diff_a = new Float32Array(total_px);
       let ext_diff_b = new Float32Array(total_px);
+      let max_cached_anchors = (typeof GeoPNG !== "undefined" && GeoPNG.compute_limits && GeoPNG.compute_limits.ram && GeoPNG.compute_limits.ram.max_cached_rasters) ?
+        Math.max(2, Number(GeoPNG.compute_limits.ram.max_cached_rasters)) : 8;
+      let use_gpu = (options.use_gpu !== false && typeof GeoPNG !== "undefined" && GeoPNG.gpu && GeoPNG.gpu.isAvailable() && typeof GeoPNG.loadRawRGBAAsync === "function");
+
+      if (use_gpu) {
+        if (typeof GeoPNG.applyBackgroundProcessPriority === "function")
+          GeoPNG.applyBackgroundProcessPriority();
+
+        let raw_anchor_cache = new Map();
+        let getAnchorRaw = async function (arg0_yr) {
+          if (raw_anchor_cache.has(arg0_yr)) {
+            let val = raw_anchor_cache.get(arg0_yr);
+            raw_anchor_cache.delete(arg0_yr);
+            raw_anchor_cache.set(arg0_yr, val);
+            return val;
+          }
+          let p = path.join(r2_dir, `popc_${arg0_yr}.png`);
+          let loaded = fs.existsSync(p) ? await GeoPNG.loadRawRGBAAsync(p) : null;
+          let buf = (loaded && loaded.data) ? loaded.data : null;
+          raw_anchor_cache.set(arg0_yr, buf);
+          while (raw_anchor_cache.size > max_cached_anchors) {
+            let oldest_key = raw_anchor_cache.keys().next().value;
+            raw_anchor_cache.delete(oldest_key);
+          }
+          return buf;
+        };
+
+        let seam_pixels_u32 = Uint32Array.from(seam_pixels);
+        let static_key = `velk_${discovery.contexts.length}_${viscount_pixels.length}_${seam_pixels.length}`;
+        let yield_ms = (GeoPNG.compute_limits && GeoPNG.compute_limits.cpu && GeoPNG.compute_limits.cpu.cooperative_yield_ms !== undefined) ?
+          Number(GeoPNG.compute_limits.cpu.cooperative_yield_ms) : 4;
+        let zero_rgba = Buffer.alloc(total_px*4, 0);
+
+        console.log(`[population_Velkscala] Overlaying ${discovery.contexts.length} Viscount antiquity domains [GPU] (${viscount_pixels.length} px, seam=${seam_pixels.length} px) across ${target_years.length} timesteps...`);
+
+        for (let i = 0; i < target_years.length; i++) {
+          let yr = target_years[i];
+
+          if (yr > 0) continue;
+          let a0 = avail_anchors[0];
+          let a1 = avail_anchors[avail_anchors.length - 1];
+
+          if (yr <= a0) {
+            a1 = a0;
+          } else if (yr >= a1) {
+            a0 = a1;
+          } else {
+            for (let k = 0; k < avail_anchors.length - 1; k++) {
+              if (yr >= avail_anchors[k] && yr <= avail_anchors[k + 1]) {
+                a0 = avail_anchors[k];
+                a1 = avail_anchors[k + 1];
+                break;
+              }
+            }
+          }
+          let ga_rgba = await getAnchorRaw(a0);
+          let gb_rgba = (a1 !== a0) ? await getAnchorRaw(a1) : ga_rgba;
+
+          if (!ga_rgba || !gb_rgba) continue;
+
+          let dst_popc = path.join(this.input_popc_folder, `population_${yr}.png`);
+          let dst_rurc = path.join(this.input_rurc_folder, `population_rural_${yr}.png`);
+          let dst_urbc = path.join(this.input_urbc_folder, `population_urban_${yr}.png`);
+          let dst_popd = path.join(this.intermediate_popd_folder, `population_density_${yr}.png`);
+          if (!fs.existsSync(dst_popc)) continue;
+
+          let [popc_raw, urbc_raw, rurc_raw, popd_raw] = await Promise.all([
+            GeoPNG.loadRawRGBAAsync(dst_popc),
+            fs.existsSync(dst_urbc) ? GeoPNG.loadRawRGBAAsync(dst_urbc) : Promise.resolve(null),
+            fs.existsSync(dst_rurc) ? GeoPNG.loadRawRGBAAsync(dst_rurc) : Promise.resolve(null),
+            fs.existsSync(dst_popd) ? GeoPNG.loadRawRGBAAsync(dst_popd) : Promise.resolve(null)
+          ]);
+          if (!popc_raw || !popc_raw.data) continue;
+
+          let frac = (a1 !== a0) ? (yr - a0)/Math.max(1, a1 - a0) : 0;
+          let gpu_res = await GeoPNG.gpu.velkscalaAntiquityOverlayRGBA({
+            bfs_dist: bfs_dist,
+            frac: frac,
+            grid_a_rgba: ga_rgba,
+            grid_b_rgba: gb_rgba,
+            height: height,
+            land_area: land_area,
+            owner_grid: owner_grid,
+            popc_rgba: popc_raw.data,
+            popd_rgba: (popd_raw && popd_raw.data) ? popd_raw.data : zero_rgba,
+            rurc_rgba: (rurc_raw && rurc_raw.data) ? rurc_raw.data : zero_rgba,
+            seam_pixels: seam_pixels_u32,
+            seam_px: seam_px,
+            static_key: static_key,
+            urbc_rgba: (urbc_raw && urbc_raw.data) ? urbc_raw.data : zero_rgba,
+            width: width
+          });
+
+          if (gpu_res) {
+            await Promise.all([
+              GeoPNG.saveRawRGBAAsync({ data: gpu_res.urbc_rgba, file_path: dst_urbc, height: height, width: width }),
+              GeoPNG.saveRawRGBAAsync({ data: gpu_res.popc_rgba, file_path: dst_popc, height: height, width: width }),
+              GeoPNG.saveRawRGBAAsync({ data: gpu_res.rurc_rgba, file_path: dst_rurc, height: height, width: width }),
+              GeoPNG.saveRawRGBAAsync({ data: gpu_res.popd_rgba, file_path: dst_popd, height: height, width: width })
+            ]);
+            gpu_res = null;
+          }
+
+          if ((i + 1) % 10 === 0 && typeof GeoPNG.enforceMemoryBudget === "function")
+            GeoPNG.enforceMemoryBudget();
+          if (yield_ms > 0)
+            await new Promise((resolve) => setTimeout(resolve, yield_ms));
+        }
+
+        raw_anchor_cache.clear();
+        return;
+      }
 
       console.log(`[population_Velkscala] Overlaying ${discovery.contexts.length} Viscount antiquity domains (${viscount_pixels.length} px, seam=${seam_pixels.length} px) across ${target_years.length} timesteps...`);
 
@@ -514,40 +627,60 @@
         if (!options.do_not_recompute_antiquity && fs.existsSync(geocode_path) && typeof admin_modern !== "undefined" && typeof admin_modern.getISO3ColourcodesObject === "function") {
           geocode_obj = admin_modern.getISO3ColourcodesObject();
           geocode_img = GeoPNG.loadImage(geocode_path);
+          let iso_list = [];
+          let iso_to_id = new Map();
+          let rgb_int_to_id = new Map();
           for (let local_col in geocode_obj) {
             let local_codes = geocode_obj[local_col];
-            if (local_codes && local_codes.length > 0)
-              rgb_to_iso3[local_col.split(",").slice(0, 3).join(",")] = local_codes[0];
+            if (local_codes && local_codes.length > 0) {
+              let parts = local_col.split(",");
+              if (parts.length < 3) continue;
+              let rgb_int = ((parseInt(parts[0], 10) & 255) << 16) | ((parseInt(parts[1], 10) & 255) << 8) | (parseInt(parts[2], 10) & 255);
+              let iso3 = local_codes[0];
+              let id = iso_to_id.get(iso3);
+              if (id === undefined) {
+                id = iso_list.length;
+                iso_to_id.set(iso3, id);
+                iso_list.push(iso3);
+              }
+              rgb_int_to_id.set(rgb_int, id);
+            }
           }
 
           let local_total_px = geocode_img.width*geocode_img.height;
-          let local_px_codes = new Array(local_total_px);
+          let local_px_ids = new Int32Array(local_total_px);
+          local_px_ids.fill(-1);
           for (let i = 0; i < local_total_px; i++) {
             let local_b = i*4;
-            let local_rgb = `${geocode_img.data[local_b]},${geocode_img.data[local_b + 1]},${geocode_img.data[local_b + 2]}`;
-            local_px_codes[i] = rgb_to_iso3[local_rgb] || null;
+            let rgb_int = (geocode_img.data[local_b] << 16) | (geocode_img.data[local_b + 1] << 8) | geocode_img.data[local_b + 2];
+            let id = rgb_int_to_id.get(rgb_int);
+            if (id !== undefined) local_px_ids[i] = id;
           }
 
+          let local_yr_sums = new Float64Array(iso_list.length);
           for (let i = 0; i < anchor_years.length; i++) {
             let local_yr = anchor_years[i];
             let local_pop_path = path.join(this.input_popc_folder, `population_${local_yr}.png`);
             if (!fs.existsSync(local_pop_path)) continue;
 
             let local_pop_r = GeoPNG.loadNumberRasterImage(local_pop_path, { format: "float32" });
-            let local_yr_sums = {};
+            local_yr_sums.fill(0);
             for (let x = 0; x < local_total_px; x++) {
-              let local_c = local_px_codes[x];
+              let local_id = local_px_ids[x];
               let local_v = local_pop_r.data[x] || 0;
-              if (local_c && local_v > 0)
-                local_yr_sums[local_c] = (local_yr_sums[local_c] || 0) + local_v;
+              if (local_id >= 0 && local_v > 0)
+                local_yr_sums[local_id] += local_v;
             }
 
-            let local_sorted_codes = Object.keys(local_yr_sums).sort();
-            let local_yr_entry = {};
-            for (let x = 0; x < local_sorted_codes.length; x++) {
-              let local_c = local_sorted_codes[x];
-              local_yr_entry[local_c] = Number(local_yr_sums[local_c].toFixed(2));
+            let local_yr_map = {};
+            for (let x = 0; x < iso_list.length; x++) {
+              if (local_yr_sums[x] > 0)
+                local_yr_map[iso_list[x]] = Number(local_yr_sums[x].toFixed(2));
             }
+            let local_sorted_codes = Object.keys(local_yr_map).sort();
+            let local_yr_entry = {};
+            for (let x = 0; x < local_sorted_codes.length; x++)
+              local_yr_entry[local_sorted_codes[x]] = local_yr_map[local_sorted_codes[x]];
             national_pops_obj[local_yr] = local_yr_entry;
           }
         }
@@ -557,6 +690,111 @@
         fs.writeFileSync(this.file_stadester_national_populations, local_json_str, "utf8");
         fs.writeFileSync(legacy_pop, local_json_str, "utf8");
         console.log(`[population_Velkscala] Step C: Synchronised national populations to ${this.file_national_populations}.`);
+      }
+    }
+
+    /**
+     * Step C (GPU-accelerated async): Computes national population sums across all anchor years on NVIDIA OpenCL.
+     * Falls back cleanly to synchronous C_syncMetadata if GPU is unavailable.
+     * @param {Object} [arg0_options]
+     */
+    static async C_syncMetadataGPU (arg0_options) {
+      //Convert from parameters
+      let options = (arg0_options) ? arg0_options : {};
+
+      //Guard clause
+      if (options.use_gpu === false || typeof GeoPNG === "undefined" || !GeoPNG.gpu || !GeoPNG.gpu.isAvailable() || typeof GeoPNG.loadRawRGBAAsync !== "function") {
+        this.C_syncMetadata(options);
+        return;
+      }
+
+      //Declare local instance variables
+      let anchor_years = [-10000, -9000, -8000, -7000, -6000, -5000, -4000, -3000, -2000, -1000, 0, ...this.post_1ad_years];
+      let geocode_path = (typeof admin_modern !== "undefined" && admin_modern.input_geocodes_raster) ?
+        admin_modern.input_geocodes_raster : `${h1}/admin_modern/geocodes.png`;
+      let legacy_ndi = path.join(this.bf, "velkscala_national_development_index.json");
+      let legacy_pop = path.join(this.bf, "velkscala_national_populations.json");
+
+      this.ensureDirectories();
+      if (fs.existsSync(this.file_stadester_national_development_index)) {
+        fs.copyFileSync(this.file_stadester_national_development_index, this.file_national_development_index);
+        fs.copyFileSync(this.file_stadester_national_development_index, legacy_ndi);
+        console.log(`[population_Velkscala] Step C: Synchronised national development index to ${this.file_national_development_index}.`);
+      }
+
+      if (fs.existsSync(this.file_stadester_national_populations)) {
+        let national_pops_obj = JSON.parse(fs.readFileSync(this.file_stadester_national_populations, "utf8"));
+
+        if (!options.do_not_recompute_antiquity && fs.existsSync(geocode_path) && typeof admin_modern !== "undefined" && typeof admin_modern.getISO3ColourcodesObject === "function") {
+          let geocode_obj = admin_modern.getISO3ColourcodesObject();
+          let geocode_raw = await GeoPNG.loadRawRGBAAsync(geocode_path);
+          if (geocode_raw && geocode_raw.data) {
+            let iso_list = [];
+            let iso_to_id = new Map();
+            let rgb_int_to_id = new Map();
+
+            for (let local_col in geocode_obj) {
+              let local_codes = geocode_obj[local_col];
+              if (local_codes && local_codes.length > 0) {
+                let parts = local_col.split(",");
+                if (parts.length < 3) continue;
+                let rgb_int = ((parseInt(parts[0], 10) & 255) << 16) | ((parseInt(parts[1], 10) & 255) << 8) | (parseInt(parts[2], 10) & 255);
+                let iso3 = local_codes[0];
+                let id = iso_to_id.get(iso3);
+                if (id === undefined) {
+                  id = iso_list.length;
+                  iso_to_id.set(iso3, id);
+                  iso_list.push(iso3);
+                }
+                rgb_int_to_id.set(rgb_int, id);
+              }
+            }
+
+            let total_px = geocode_raw.width*geocode_raw.height;
+            let region_ids = new Int32Array(total_px);
+            region_ids.fill(-1);
+            for (let i = 0; i < total_px; i++) {
+              let b = i*4;
+              let rgb_int = (geocode_raw.data[b] << 16) | (geocode_raw.data[b + 1] << 8) | geocode_raw.data[b + 2];
+              let id = rgb_int_to_id.get(rgb_int);
+              if (id !== undefined) region_ids[i] = id;
+            }
+
+            let yield_ms = (GeoPNG.compute_limits && GeoPNG.compute_limits.cpu && GeoPNG.compute_limits.cpu.cooperative_yield_ms !== undefined) ?
+              Number(GeoPNG.compute_limits.cpu.cooperative_yield_ms) : 4;
+
+            for (let i = 0; i < anchor_years.length; i++) {
+              let local_yr = anchor_years[i];
+              let local_pop_path = path.join(this.input_popc_folder, `population_${local_yr}.png`);
+              if (!fs.existsSync(local_pop_path)) continue;
+
+              let raw_pop = await GeoPNG.loadRawRGBAAsync(local_pop_path);
+              if (!raw_pop || !raw_pop.data) continue;
+              let sums = await GeoPNG.gpu.regionalSumRGBA(raw_pop.data, region_ids, iso_list.length, { positive_only: true });
+              if (!sums) continue;
+
+              let local_yr_map = {};
+              for (let x = 0; x < iso_list.length; x++) {
+                if (sums[x] > 0)
+                  local_yr_map[iso_list[x]] = Number(sums[x].toFixed(2));
+              }
+              let local_sorted_codes = Object.keys(local_yr_map).sort();
+              let local_yr_entry = {};
+              for (let x = 0; x < local_sorted_codes.length; x++)
+                local_yr_entry[local_sorted_codes[x]] = local_yr_map[local_sorted_codes[x]];
+              national_pops_obj[local_yr] = local_yr_entry;
+
+              if (yield_ms > 0)
+                await new Promise((resolve) => setTimeout(resolve, yield_ms));
+            }
+          }
+        }
+
+        let local_json_str = JSON.stringify(national_pops_obj, null, 2);
+        fs.writeFileSync(this.file_national_populations, local_json_str, "utf8");
+        fs.writeFileSync(this.file_stadester_national_populations, local_json_str, "utf8");
+        fs.writeFileSync(legacy_pop, local_json_str, "utf8");
+        console.log(`[population_Velkscala] Step C [GPU]: Synchronised national populations to ${this.file_national_populations}.`);
       }
     }
 
@@ -707,7 +945,7 @@
 
       if (!options.exclude.includes("A")) await this.A_compositeAntiquityRasters(options);
       if (!options.exclude.includes("B")) await this.B_compositePost1ADRasters(options);
-      if (!options.exclude.includes("C")) this.C_syncMetadata(options);
+      if (!options.exclude.includes("C")) await this.C_syncMetadataGPU(options);
       if (!options.exclude.includes("D")) this.D_validateCompositing(options);
 
       console.log(`=== Successfully completed population_Velkscala pipeline in ${((Date.now() - start_time) / 1000).toFixed(1)}s ===`);

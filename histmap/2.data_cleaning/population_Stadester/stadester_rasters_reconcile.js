@@ -21,22 +21,26 @@
     let options = (arg1_options) ? arg1_options : {};
 
     //Declare local instance variables
-    let default_concurrency = (typeof require !== "undefined") ? Math.min(8, require("os").cpus().length || 4) : 4;
+    let cfg_cap = (GeoPNG.compute_limits && GeoPNG.compute_limits.cpu && GeoPNG.compute_limits.cpu.max_workers) ?
+      Number(GeoPNG.compute_limits.cpu.max_workers) : 4;
+    let default_concurrency = (typeof require !== "undefined") ? Math.min(cfg_cap, require("os").cpus().length || 4) : 4;
+    let use_gpu_local = (options.use_gpu !== false && GeoPNG.gpu && GeoPNG.gpu.isAvailable());
     let worker_options = (population_Stadester_rasters.buildWorkerOptions) ?
       population_Stadester_rasters.buildWorkerOptions(options) : Object.assign({}, options);
 
     //Return statement
     return GeoPNG.processTimeseriesParallel({
-      concurrency: options.concurrency || default_concurrency,
+      concurrency: use_gpu_local ? 1 : Math.min(options.concurrency || default_concurrency, cfg_cap),
       items: years,
-      name: "Stadester Population Rasters",
-      task_generator: (year) => {
+      name: use_gpu_local ? "Stadester Population Rasters [GPU]" : "Stadester Population Rasters",
+      use_workers: use_gpu_local ? false : options.use_workers,
+      task_generator: use_gpu_local ? null : ((year) => {
         return {
           type: "stadester_population_raster",
           options: worker_options,
           year: year
         };
-      },
+      }),
       handler: async (year) => population_Stadester_rasters.generateStadesterPopulationRaster(year, options)
     });
   };
@@ -57,16 +61,20 @@
     let options = (arg1_options) ? arg1_options : {};
 
     //Declare local instance variables
-    let default_concurrency = (typeof require !== "undefined") ? Math.min(8, require("os").cpus().length || 4) : 4;
+    let cfg_cap = (GeoPNG.compute_limits && GeoPNG.compute_limits.cpu && GeoPNG.compute_limits.cpu.max_workers) ?
+      Number(GeoPNG.compute_limits.cpu.max_workers) : 4;
+    let default_concurrency = (typeof require !== "undefined") ? Math.min(cfg_cap, require("os").cpus().length || 4) : 4;
+    let use_gpu_local = (options.use_gpu !== false && GeoPNG.gpu && GeoPNG.gpu.isAvailable());
     let worker_options = (population_Stadester_rasters.buildWorkerOptions) ?
       population_Stadester_rasters.buildWorkerOptions(options) : Object.assign({}, options);
 
     //Return statement
     return GeoPNG.processTimeseriesParallel({
-      concurrency: options.concurrency || default_concurrency,
+      concurrency: use_gpu_local ? 1 : Math.min(options.concurrency || default_concurrency, cfg_cap),
       items: years,
-      name: "Stadester Rural Rasters",
-      task_generator: (year) => {
+      name: use_gpu_local ? "Stadester Rural Rasters [GPU]" : "Stadester Rural Rasters",
+      use_workers: use_gpu_local ? false : options.use_workers,
+      task_generator: use_gpu_local ? null : ((year) => {
         if (year < -10000) {
           let rural_folder = options.input_rurc_folder || `${h2}/population_Stadester/stadester_rural_rasters/`;
           let output_file_path = path.join(rural_folder, `stadester_rural_${year}.png`);
@@ -84,7 +92,7 @@
           options: worker_options,
           year: year
         };
-      },
+      }),
       handler: async (year) => population_Stadester_rasters.generateStadesterRuralRaster(year, options)
     });
   };
@@ -573,10 +581,63 @@
     if (!options.viscount_config_dir && !options.project_root) {
       global._cached_stadester_areal_mask_year = year;
       global._cached_stadester_areal_mask_map = mask_map;
+      global._cached_stadester_compact_mask = null;
     }
 
     //Return statement
     return mask_map;
+  };
+
+
+  /**
+   * Returns a GPU-ready compact Int32Array mask ID grid (`-1` for unmasked) for a given year.
+   * @alias population_Stadester_rasters.getCompactArealMaskMapping
+   *
+   * @param {number} arg0_year
+   * @param {Object} [arg1_options]
+   *
+   * @returns {{id_grid: Int32Array, labels: Array<string>, num_masks: number}|null}
+   */
+  population_Stadester_rasters.getCompactArealMaskMapping = function (arg0_year, arg1_options) {
+    //Convert from parameters
+    let year = parseInt(arg0_year);
+    let options = (arg1_options) ? arg1_options : {};
+
+    //Guard clause
+    if (!options.pixel_to_geocode && !options.viscount_config_dir && !options.project_root &&
+      global._cached_stadester_compact_mask && global._cached_stadester_compact_mask.year === year)
+      return global._cached_stadester_compact_mask;
+
+    //Declare local instance variables
+    let pixel_to_mask = (options.pixel_to_geocode) ?
+      options.pixel_to_geocode : population_Stadester_rasters.getPixelToArealMaskMapping(year, options);
+    if (!pixel_to_mask) return null;
+
+    let id_grid = new Int32Array(pixel_to_mask.length);
+    let label_to_id = new Map();
+    let labels = [];
+
+    for (let i = 0; i < pixel_to_mask.length; i++) {
+      let lbl = pixel_to_mask[i];
+      if (!lbl) {
+        id_grid[i] = -1;
+        continue;
+      }
+      let mid = label_to_id.get(lbl);
+      if (mid === undefined) {
+        mid = labels.length;
+        label_to_id.set(lbl, mid);
+        labels.push(lbl);
+      }
+      id_grid[i] = mid;
+    }
+
+    let compact = { id_grid: id_grid, labels: labels, num_masks: Math.max(1, labels.length), year: year };
+    if (!options.pixel_to_geocode && !options.viscount_config_dir && !options.project_root)
+      global._cached_stadester_compact_mask = compact;
+
+    //Return statement
+    return compact;
   };
 
 
@@ -613,18 +674,22 @@
     pixel_map = new Array(4320*2160);
     rgb_to_iso3 = {};
 
+    let rgb_int_to_iso3 = new Map();
     for (let colour in colourcodes) {
       let codes = colourcodes[colour];
       if (codes && codes.length > 0) {
-        let rgb = colour.split(",").slice(0, 3).join(",");
-        rgb_to_iso3[rgb] = codes[0];
+        let parts = colour.split(",");
+        if (parts.length >= 3) {
+          let rgb_int = ((parseInt(parts[0], 10) & 255) << 16) | ((parseInt(parts[1], 10) & 255) << 8) | (parseInt(parts[2], 10) & 255);
+          rgb_int_to_iso3.set(rgb_int, codes[0]);
+        }
       }
     }
 
     for (let i = 0; i < 4320*2160; i++) {
       let b = i*4;
-      let rgb = `${geocode_img.data[b]},${geocode_img.data[b + 1]},${geocode_img.data[b + 2]}`;
-      pixel_map[i] = rgb_to_iso3[rgb] || null;
+      let rgb_int = (geocode_img.data[b] << 16) | (geocode_img.data[b + 1] << 8) | geocode_img.data[b + 2];
+      pixel_map[i] = rgb_int_to_iso3.get(rgb_int) || null;
     }
 
     //Assign 2-pixel coastal fringe so harbour/island cities map to nearest land ISO3 geocode
@@ -699,24 +764,61 @@
     let pop_file_path = path.join(options.input_popc_folder || `${h2}/population_Stadester/stadester_population_rasters/`, `stadester_population_${year}.png`);
     let pop_raster = null;
 
-    //Function body
-    if (fs.existsSync(landarea_file))
-      landarea_raster = GeoPNG.loadNumberRasterImage(landarea_file, { format: "int32" });
-    if (fs.existsSync(pop_file_path))
-      pop_raster = GeoPNG.loadNumberRasterImage(pop_file_path, { format: "float32" });
+    //GPU-accelerated direct BE-RGBA density calculation on NVIDIA OpenCL
+    if (options.use_gpu !== false && fs.existsSync(pop_file_path) && fs.existsSync(landarea_file) && GeoPNG.gpu && GeoPNG.gpu.isAvailable() && typeof GeoPNG.loadRawRGBAAsync === "function") {
+      if (!global._cached_landarea_raw_rgba || global._cached_landarea_raw_path !== landarea_file) {
+        global._cached_landarea_raw_rgba = await GeoPNG.loadRawRGBAAsync(landarea_file);
+        global._cached_landarea_raw_path = landarea_file;
+      }
+      let pop_raw = await GeoPNG.loadRawRGBAAsync(pop_file_path);
+      let land_raw = global._cached_landarea_raw_rgba;
+      if (pop_raw && pop_raw.data && land_raw && land_raw.data && pop_raw.data.byteLength === land_raw.data.byteLength) {
+        let dens_rgba = await GeoPNG.gpu.binaryOpRGBA(pop_raw.data, land_raw.data, "density_stadester", {
+          format_1: "float32",
+          format_2: "int32"
+        });
+        if (dens_rgba) {
+          await GeoPNG.saveRawRGBAAsync({
+            data: dens_rgba,
+            file_path: output_file_path,
+            height: pop_raw.height,
+            width: pop_raw.width
+          });
+          console.log(`- Saved Stadestér Density raster for ${year} [GPU]: ${output_file_path}`);
 
-    GeoPNG.saveNumberRasterImage({
+          //Return statement
+          return output_file_path;
+        }
+      }
+    }
+
+    //Function body (fast async CPU fallback)
+    if (fs.existsSync(landarea_file)) {
+      if (!global._cached_landarea_raster || global._cached_landarea_raster_path !== landarea_file) {
+        global._cached_landarea_raster = await GeoPNG.loadNumberRasterImageAsync(landarea_file, { format: "int32" });
+        global._cached_landarea_raster_path = landarea_file;
+      }
+      landarea_raster = global._cached_landarea_raster;
+    }
+    if (fs.existsSync(pop_file_path))
+      pop_raster = await GeoPNG.loadNumberRasterImageAsync(pop_file_path, { format: "float32" });
+
+    let dens_data = new Float32Array(4320*2160);
+    for (let i = 0; i < dens_data.length; i++) {
+      let km2 = (landarea_raster && landarea_raster.data[i]) ? landarea_raster.data[i] : 0;
+      let p = (pop_raster && pop_raster.data[i]) ? pop_raster.data[i] : 0;
+      if (km2 <= 0 || p < 0.01) continue;
+      let val = p/km2;
+      if (isFinite(val)) dens_data[i] = val;
+    }
+
+    await GeoPNG.saveNumberRasterImageAsync({
+      data: dens_data,
       file_path: output_file_path,
       format: "float32",
       height: 2160,
-      width: 4320,
-      function: function (local_index) {
-        let km2 = (landarea_raster && landarea_raster.data[local_index]) ? landarea_raster.data[local_index] : 0;
-        let p = (pop_raster && pop_raster.data[local_index]) ? pop_raster.data[local_index] : 0;
-        if (km2 <= 0 || p < 0.01) return 0;
-        let val = p/km2;
-        return isFinite(val) ? val : 0;
-      }
+      return_data: false,
+      width: 4320
     });
 
     console.log(`- Saved Stadestér Density raster for ${year}: ${output_file_path}`);
@@ -741,21 +843,25 @@
     let options = (arg1_options) ? arg1_options : {};
 
     //Declare local instance variables
-    let default_concurrency = (typeof require !== "undefined") ? Math.min(8, require("os").cpus().length || 4) : 4;
+    let cfg_cap = (GeoPNG.compute_limits && GeoPNG.compute_limits.cpu && GeoPNG.compute_limits.cpu.max_workers) ?
+      Number(GeoPNG.compute_limits.cpu.max_workers) : 4;
+    let default_concurrency = (typeof require !== "undefined") ? Math.min(cfg_cap, require("os").cpus().length || 4) : 4;
     let input_popc = options.input_popc_folder || `${h2}/population_Stadester/stadester_population_rasters/`;
     let intermediate_popd = options.intermediate_popd_folder || `${h2}/population_Stadester/stadester_density_rasters/`;
     let landarea_file = (typeof metadata_HYDE !== "undefined" && metadata_HYDE.input_raster_land_area) ?
       metadata_HYDE.input_raster_land_area : `${h1}/metadata_HYDE/general_rasters/land_area.png`;
+    let use_gpu_local = (options.use_gpu !== false && GeoPNG.gpu && GeoPNG.gpu.isAvailable());
 
     //Function body
     if (!fs.existsSync(intermediate_popd)) fs.mkdirSync(intermediate_popd, { recursive: true });
 
     //Return statement
     return GeoPNG.processTimeseriesParallel({
-      concurrency: options.concurrency || default_concurrency,
+      concurrency: use_gpu_local ? 1 : Math.min(options.concurrency || default_concurrency, cfg_cap),
       items: years,
-      name: "Stadester Density Rasters",
-      task_generator: (year) => {
+      name: use_gpu_local ? "Stadester Density Rasters [GPU]" : "Stadester Density Rasters",
+      use_workers: use_gpu_local ? false : options.use_workers,
+      task_generator: use_gpu_local ? null : ((year) => {
         let output_file_path = path.join(intermediate_popd, `stadester_density_${year}.png`);
         let pop_file_path = path.join(input_popc, `stadester_population_${year}.png`);
         if (!fs.existsSync(pop_file_path) || !fs.existsSync(landarea_file)) return null;
@@ -767,11 +873,11 @@
           format_2: "int32",
           input_path_1: pop_file_path,
           input_path_2: landarea_file,
-          op: "divide",
-          operation: "divide",
+          op: "density_stadester",
+          operation: "density_stadester",
           output_path: output_file_path
         };
-      },
+      }),
       handler: async (year) => population_Stadester_rasters.prepareDensityRaster(year, options)
     });
   };
@@ -837,28 +943,74 @@
     }
 
     //Function body
-    if (options.substrata_raster) {
-      substrata_raster = options.substrata_raster;
-    } else if (fs.existsSync(substrata_file_path)) {
-      substrata_raster = GeoPNG.loadNumberRasterImage(substrata_file_path, { format: "float32" });
-    }
-
     if (options.intermediate_base_folder) {
       base_file_path = path.join(options.intermediate_base_folder, `stadester_base_${year}.png`);
     } else if (!options.input_urbc_folder || path.resolve(options.input_urbc_folder) === path.resolve(default_urb_folder)) {
       base_file_path = path.join(`${h2}/population_Stadester/stadester_base_rasters/`, `stadester_base_${year}.png`);
     }
 
+    //GPU-accelerated direct BE-RGBA two-pass reconciliation on NVIDIA OpenCL
+    if (options.use_gpu !== false && !options.substrata_raster && !options.urban_raster && GeoPNG.gpu && GeoPNG.gpu.isAvailable() && typeof GeoPNG.loadRawRGBAAsync === "function") {
+      let compact_mask = population_Stadester_rasters.getCompactArealMaskMapping(year, options);
+      let resolved_urb_path = (base_file_path && fs.existsSync(base_file_path)) ? base_file_path : urban_file_path;
+      if (!fs.existsSync(resolved_urb_path)) {
+        await population_Stadester_rasters.generateStadesterUrbanRaster(year, options);
+        resolved_urb_path = urban_file_path;
+      }
+
+      let [sub_raw, urb_raw] = await Promise.all([
+        fs.existsSync(substrata_file_path) ? GeoPNG.loadRawRGBAAsync(substrata_file_path) : Promise.resolve(null),
+        fs.existsSync(resolved_urb_path) ? GeoPNG.loadRawRGBAAsync(resolved_urb_path) : Promise.resolve(null)
+      ]);
+      let zero_rgba = Buffer.alloc(total_pixels*4, 0);
+      let substrata_rgba = (sub_raw && sub_raw.data) ? sub_raw.data : zero_rgba;
+      let urban_rgba = (urb_raw && urb_raw.data) ? urb_raw.data : zero_rgba;
+      let mask_ids = (compact_mask && compact_mask.id_grid) ? compact_mask.id_grid : new Int32Array(total_pixels).fill(-1);
+      let num_masks = (compact_mask && compact_mask.num_masks) ? compact_mask.num_masks : 1;
+
+      sub_urban_data = (options.sub_urban_data) ?
+        options.sub_urban_data :
+        population_Stadester_rasters.getSubUrbanSettlementsData(year, options);
+
+      let gpu_res = await GeoPNG.gpu.reconcileDemographicsRGBA({
+        mask_ids: mask_ids,
+        num_masks: num_masks,
+        sub_urban_f32: sub_urban_data,
+        substrata_rgba: substrata_rgba,
+        urban_rgba: urban_rgba
+      });
+
+      if (gpu_res) {
+        await Promise.all([
+          GeoPNG.saveRawRGBAAsync({ data: gpu_res.rural_rgba, file_path: rural_file_path, height: 2160, width: 4320 }),
+          GeoPNG.saveRawRGBAAsync({ data: gpu_res.total_rgba, file_path: pop_file_path, height: 2160, width: 4320 }),
+          GeoPNG.saveRawRGBAAsync({ data: gpu_res.urban_rgba, file_path: urban_file_path, height: 2160, width: 4320 })
+        ]);
+        gpu_res = null;
+        sub_urban_data = null;
+        console.log(`- Saved reconciled Stadestér Urban, Rural & Pop rasters for ${year} [GPU]: Total=${pop_file_path}`);
+
+        //Return statement
+        return { pop_file_path: pop_file_path, rural_file_path: rural_file_path, urban_file_path: urban_file_path };
+      }
+    }
+
+    if (options.substrata_raster) {
+      substrata_raster = options.substrata_raster;
+    } else if (fs.existsSync(substrata_file_path)) {
+      substrata_raster = await GeoPNG.loadNumberRasterImageAsync(substrata_file_path, { format: "float32" });
+    }
+
     if (options.urban_raster) {
       urban_raster = options.urban_raster;
     } else if (base_file_path && fs.existsSync(base_file_path)) {
-      urban_raster = GeoPNG.loadNumberRasterImage(base_file_path, { format: "float32" });
+      urban_raster = await GeoPNG.loadNumberRasterImageAsync(base_file_path, { format: "float32" });
     } else if (fs.existsSync(urban_file_path)) {
-      urban_raster = GeoPNG.loadNumberRasterImage(urban_file_path, { format: "float32" });
+      urban_raster = await GeoPNG.loadNumberRasterImageAsync(urban_file_path, { format: "float32" });
     } else {
       await population_Stadester_rasters.generateStadesterUrbanRaster(year, options);
       if (fs.existsSync(urban_file_path))
-        urban_raster = GeoPNG.loadNumberRasterImage(urban_file_path, { format: "float32" });
+        urban_raster = await GeoPNG.loadNumberRasterImageAsync(urban_file_path, { format: "float32" });
     }
 
     //Load sub-5k settlement populations from stadester so small settlements are anchored in rural & total rasters
@@ -930,30 +1082,33 @@
       total_data[i] = (tot >= 1e-6) ? tot : 0;
     }
 
-    //Save Rural, Total Population, and synchronised Urban rasters
-    GeoPNG.saveNumberRasterImage({
-      file_path: rural_file_path,
-      format: "float32",
-      height: 2160,
-      width: 4320,
-      function: function (local_index) { return rural_data[local_index]; }
-    });
-
-    GeoPNG.saveNumberRasterImage({
-      file_path: pop_file_path,
-      format: "float32",
-      height: 2160,
-      width: 4320,
-      function: function (local_index) { return total_data[local_index]; }
-    });
-
-    GeoPNG.saveNumberRasterImage({
-      file_path: urban_file_path,
-      format: "float32",
-      height: 2160,
-      width: 4320,
-      function: function (local_index) { return urban_data[local_index]; }
-    });
+    //Save Rural, Total Population, and synchronised Urban rasters via fast async native PNG encoder
+    await Promise.all([
+      GeoPNG.saveNumberRasterImageAsync({
+        data: rural_data,
+        file_path: rural_file_path,
+        format: "float32",
+        height: 2160,
+        return_data: false,
+        width: 4320
+      }),
+      GeoPNG.saveNumberRasterImageAsync({
+        data: total_data,
+        file_path: pop_file_path,
+        format: "float32",
+        height: 2160,
+        return_data: false,
+        width: 4320
+      }),
+      GeoPNG.saveNumberRasterImageAsync({
+        data: urban_data,
+        file_path: urban_file_path,
+        format: "float32",
+        height: 2160,
+        return_data: false,
+        width: 4320
+      })
+    ]);
 
     raw_rural_data = null;
     raw_urban_data = null;

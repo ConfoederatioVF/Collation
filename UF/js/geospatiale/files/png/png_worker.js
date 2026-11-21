@@ -93,6 +93,12 @@ loadDirectory("UF/js/geospatiale/operations");
 loadDirectory("UF/js/geospatiale/files");
 loadDirectory("UF/js/geospatiale/files/png");
 
+//Apply background CPU priority and prevent CPU worker threads from duplicating GPU contexts
+if (global.GeoPNG && typeof global.GeoPNG.applyBackgroundProcessPriority === "function")
+  global.GeoPNG.applyBackgroundProcessPriority();
+if (global.GeoPNG && global.GeoPNG.compute_limits && global.GeoPNG.compute_limits.gpu)
+  global.GeoPNG.compute_limits.gpu.enabled = false;
+
 //Define Histmap paths on global for stage modules
 global.h1 = path.join(root_dir, "histmap/1.data_raw/");
 global.h2 = path.join(root_dir, "histmap/2.data_cleaning/");

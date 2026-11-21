@@ -106,6 +106,42 @@ if (!global.GeoPNG.tasks) global.GeoPNG.tasks = {};
     //Guard clause
     if (!input_path_1 || !fs.existsSync(input_path_1)) return null;
 
+    //GPU-accelerated float32 fast path (direct big-endian RGBA -> GPU -> big-endian RGBA)
+    if (format === "float32" && task.use_gpu !== false && GeoPNG.gpu && GeoPNG.gpu.isAvailable() && typeof GeoPNG.loadRawRGBAAsync === "function") {
+      let raw_1 = await GeoPNG.loadRawRGBAAsync(input_path_1);
+      if (raw_1 && raw_1.data) {
+        let gpu_out = null;
+        if (input_path_2 && fs.existsSync(input_path_2)) {
+          let raw_2 = await GeoPNG.loadRawRGBAAsync(input_path_2);
+          if (raw_2 && raw_2.data && raw_2.data.byteLength === raw_1.data.byteLength) {
+            gpu_out = await GeoPNG.gpu.binaryOpRGBA(raw_1.data, raw_2.data, op, {
+              clamp_alpha: task.clamp_alpha,
+              format_1: format_1,
+              format_2: format_2,
+              log_compression_threshold: task.log_compression_threshold,
+              max_val: task.max_val,
+              min_denominator: task.min_denominator,
+              scalar: task.scalar
+            });
+          }
+        } else if (task.scalar !== undefined) {
+          gpu_out = await GeoPNG.gpu.scaleRGBA(raw_1.data, task.scalar);
+        }
+
+        if (gpu_out) {
+          await GeoPNG.saveRawRGBAAsync({
+            data: gpu_out,
+            file_path: output_path,
+            height: raw_1.height,
+            width: raw_1.width
+          });
+
+          //Return statement
+          return output_path;
+        }
+      }
+    }
+
     let raster1 = await GeoPNG.loadNumberRasterImageAsync(input_path_1, { format: format_1 });
     let total_pixels = raster1.data.length;
     let output_data = new Float32Array(total_pixels);

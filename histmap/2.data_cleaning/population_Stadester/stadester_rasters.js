@@ -681,11 +681,12 @@
     //Guard clauses
     if (year < -10000) {
       if (!fs.existsSync(base_folder)) fs.mkdirSync(base_folder, { recursive: true });
-      GeoPNG.saveNumberRasterImage({
+      await GeoPNG.saveNumberRasterImageAsync({
+        data: base_raster_data,
         file_path: output_file_path,
         format: "float32",
-        function: function (local_index) { return 0; },
         height: 2160,
+        return_data: false,
         width: 4320
       });
       console.log(`- Saved blank Stadestér Base raster for ${year}: ${output_file_path}`);
@@ -698,12 +699,13 @@
     substrata_file_path = population_Stadester_rasters.getSubstrataRasterPath(year, options);
     
     if (fs.existsSync(substrata_file_path))
-      substrata_raster = GeoPNG.loadNumberRasterImage(substrata_file_path, { format: "float32" });
+      substrata_raster = await GeoPNG.loadNumberRasterImageAsync(substrata_file_path, { format: "float32" });
     
     if (!stadester_obj) return output_file_path;
     all_city_keys = Object.keys(stadester_obj);
     
-    //Bin cities by pixel
+    //Bin cities by integer pixel index (avoids string key allocation & split)
+    let pixel_map = new Map();
     for (let i = 0; i < all_city_keys.length; i++) {
       let city = stadester_obj[all_city_keys[i]];
       if (!city || !city.coords || !city.population) continue;
@@ -714,17 +716,18 @@
       
       if ((year >= min_yr && year <= max_yr) || (max_yr >= 1975 && year >= 1975)) {
         let px = city._px || (city._px = population_Stadester_rasters.getCoordsPixel(city.coords));
-        let key = `${px[0]},${px[1]}`;
-        if (!pixel_dictionary[key]) pixel_dictionary[key] = [];
-        pixel_dictionary[key].push(city);
+        let p_idx = px[1]*4320 + px[0];
+        let bucket = pixel_map.get(p_idx);
+        if (!bucket) {
+          bucket = [];
+          pixel_map.set(p_idx, bucket);
+        }
+        bucket.push(city);
       }
     }
     
-    let all_pixel_keys = Object.keys(pixel_dictionary);
-    for (let i = 0; i < all_pixel_keys.length; i++) {
-      let center_coords = all_pixel_keys[i].split(",").map(Number);
-      let center_idx = center_coords[1]*4320 + center_coords[0];
-      let local_cities = pixel_dictionary[all_pixel_keys[i]];
+    for (let [center_idx, local_cities] of pixel_map.entries()) {
+      let center_coords = [center_idx % 4320, Math.floor(center_idx/4320)];
       if (local_cities.length === 0) continue;
       
       for (let x = 0; x < local_cities.length; x++) {
@@ -793,15 +796,14 @@
       }
     }
     
-    //Save Base raster in float32 format
-    GeoPNG.saveNumberRasterImage({
+    //Save Base raster in float32 format via fast native async sharp/GeoPNG encoder
+    await GeoPNG.saveNumberRasterImageAsync({
+      data: base_raster_data,
       file_path: output_file_path,
       format: "float32",
       height: 2160,
-      width: 4320,
-      function: function (local_index) {
-        return base_raster_data[local_index];
-      }
+      return_data: false,
+      width: 4320
     });
     
     console.log(`- Saved Stadestér Base raster for ${year}: ${output_file_path}`);
@@ -833,11 +835,12 @@
     //Guard clauses
     if (year < -10000) {
       if (!fs.existsSync(urban_folder)) fs.mkdirSync(urban_folder, { recursive: true });
-      GeoPNG.saveNumberRasterImage({
+      await GeoPNG.saveNumberRasterImageAsync({
+        data: new Float32Array(4320*2160),
         file_path: output_file_path,
         format: "float32",
-        function: function (local_index) { return 0; },
         height: 2160,
+        return_data: false,
         width: 4320
       });
       console.log(`- Saved blank Stadestér Urban raster for ${year}: ${output_file_path}`);
@@ -846,24 +849,49 @@
       return output_file_path;
     }
     
+    if (!fs.existsSync(urban_folder)) fs.mkdirSync(urban_folder, { recursive: true });
+
+    //GPU-accelerated direct BE-RGBA threshold clamp on NVIDIA OpenCL
+    if (!options.base_raster && options.use_gpu !== false && fs.existsSync(base_file_path) && GeoPNG.gpu && GeoPNG.gpu.isAvailable() && typeof GeoPNG.loadRawRGBAAsync === "function") {
+      let raw_base = await GeoPNG.loadRawRGBAAsync(base_file_path);
+      if (raw_base && raw_base.data) {
+        let clamped_rgba = await GeoPNG.gpu.thresholdClampRGBA(raw_base.data, 0.01);
+        if (clamped_rgba) {
+          await GeoPNG.saveRawRGBAAsync({
+            data: clamped_rgba,
+            file_path: output_file_path,
+            height: raw_base.height,
+            width: raw_base.width
+          });
+          console.log(`- Saved Stadestér Urban raster for ${year} [GPU]: ${output_file_path}`);
+          
+          //Return statement
+          return output_file_path;
+        }
+      }
+    }
+    
     if (options.base_raster) {
       base_raster = options.base_raster;
     } else if (fs.existsSync(base_file_path)) {
-      base_raster = GeoPNG.loadNumberRasterImage(base_file_path, { format: "float32" });
+      base_raster = await GeoPNG.loadNumberRasterImageAsync(base_file_path, { format: "float32" });
     }
     
-    if (!fs.existsSync(urban_folder)) fs.mkdirSync(urban_folder, { recursive: true });
-    
     //Stadestér Base preserves exact city numbers from stadester.json
-    GeoPNG.saveNumberRasterImage({
+    let out_f32 = new Float32Array(4320*2160);
+    if (base_raster && base_raster.data) {
+      for (let i = 0; i < out_f32.length; i++) {
+        let base_val = base_raster.data[i];
+        out_f32[i] = (base_val >= 0.01) ? base_val : 0;
+      }
+    }
+    await GeoPNG.saveNumberRasterImageAsync({
+      data: out_f32,
       file_path: output_file_path,
       format: "float32",
       height: 2160,
-      width: 4320,
-      function: function (local_index) {
-        let base_val = (base_raster && base_raster.data[local_index]) ? base_raster.data[local_index] : 0;
-        return (base_val >= 0.01) ? base_val : 0;
-      }
+      return_data: false,
+      width: 4320
     });
     
     console.log(`- Saved Stadestér Urban raster for ${year}: ${output_file_path}`);
@@ -908,12 +936,14 @@
     let options = (arg1_options) ? arg1_options : {};
     
     //Declare local instance variables
-    let default_concurrency = (typeof require !== "undefined") ? Math.min(8, require("os").cpus().length || 4) : 4;
+    let cfg_cap = (GeoPNG.compute_limits && GeoPNG.compute_limits.cpu && GeoPNG.compute_limits.cpu.max_workers) ?
+      Number(GeoPNG.compute_limits.cpu.max_workers) : 4;
+    let default_concurrency = (typeof require !== "undefined") ? Math.min(cfg_cap, require("os").cpus().length || 4) : 4;
     let worker_options = population_Stadester_rasters.buildWorkerOptions(options);
     
     //Return statement
     return GeoPNG.processTimeseriesParallel({
-      concurrency: options.concurrency || default_concurrency,
+      concurrency: Math.min(options.concurrency || default_concurrency, cfg_cap),
       items: years,
       name: "Stadester Base Rasters",
       task_generator: (year) => {
@@ -944,15 +974,19 @@
     let options = (arg1_options) ? arg1_options : {};
     
     //Declare local instance variables
-    let default_concurrency = (typeof require !== "undefined") ? Math.min(8, require("os").cpus().length || 4) : 4;
+    let cfg_cap = (GeoPNG.compute_limits && GeoPNG.compute_limits.cpu && GeoPNG.compute_limits.cpu.max_workers) ?
+      Number(GeoPNG.compute_limits.cpu.max_workers) : 4;
+    let default_concurrency = (typeof require !== "undefined") ? Math.min(cfg_cap, require("os").cpus().length || 4) : 4;
+    let use_gpu_local = (options.use_gpu !== false && GeoPNG.gpu && GeoPNG.gpu.isAvailable());
     let worker_options = population_Stadester_rasters.buildWorkerOptions(options);
     
     //Return statement
     return GeoPNG.processTimeseriesParallel({
-      concurrency: options.concurrency || default_concurrency,
+      concurrency: use_gpu_local ? 1 : Math.min(options.concurrency || default_concurrency, cfg_cap),
       items: years,
-      name: "Stadester Urban Rasters",
-      task_generator: (year) => {
+      name: use_gpu_local ? "Stadester Urban Rasters [GPU]" : "Stadester Urban Rasters",
+      use_workers: use_gpu_local ? false : options.use_workers,
+      task_generator: use_gpu_local ? null : ((year) => {
         if (year < -10000) {
           let urban_folder = options.input_urbc_folder || `${h2}/population_Stadester/stadester_urban_rasters/`;
           let output_file_path = path.join(urban_folder, `stadester_urban_${year}.png`);
@@ -969,7 +1003,7 @@
           options: worker_options,
           year: year
         };
-      },
+      }),
       handler: async (year) => population_Stadester_rasters.generateStadesterUrbanRaster(year, options)
     });
   };
