@@ -1,6 +1,7 @@
 //Import modules
 let fs = global.fs || require("fs");
 let path = global.path || require("path");
+let { ViscountKrigingGPU } = global.ViscountKrigingGPU ? global : require("./ViscountKrigingGPU.js");
 
 //Initialise functions
 {
@@ -346,7 +347,17 @@ let path = global.path || require("path");
         r_fields[p] = new Float32Array(n_valid);
       }
 
-      for (let i = 0; i < n_valid; i++) {
+      let used_gpu_res = (hu_ctx.use_gpu !== false && global.ViscountKrigingGPU) ? ViscountKrigingGPU.evaluateResidualMaternMulti({
+        c1: c1, c2: c2, cell_area: cell_area, cell_obs: cell_obs, cell_r: cell_r,
+        cell_ux: cell_ux, cell_uy: cell_uy, cell_uz: cell_uz, cross_catch_mult: cross_catch_mult,
+        earth_r: earth_r, elev_valid: elev_valid, inv_eb: inv_eb, inv_tau1: inv_tau1, inv_tau2: inv_tau2,
+        lut: lut, min_dot: min_dot, n_obs: n_obs, n_p: n_p, n_valid: n_valid,
+        obs_elev_m: obs_elev_m, obs_r: obs_r, obs_ux: obs_ux, obs_uy: obs_uy, obs_uz: obs_uz,
+        pop_fields: pop_fields, prior_bundles: prior_bundles, r_clamp_max: r_clamp_max,
+        r_clamp_min: r_clamp_min, r_fields: r_fields, r_gain: r_gain, v_vecs: v_vecs
+      }) : false;
+
+      if (!used_gpu_res) for (let i = 0; i < n_valid; i++) {
         let a_i = cell_area[i];
         let cx = cell_ux[i];
         let cy = cell_uy[i];

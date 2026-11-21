@@ -2,6 +2,7 @@
 let fs = global.fs || require("fs");
 let path = global.path || require("path");
 let { PNG } = global.pngjs || require("pngjs");
+let { ViscountKrigingGPU } = global.ViscountKrigingGPU ? global : require("./ViscountKrigingGPU.js");
 
 //Initialise functions
 {
@@ -209,7 +210,8 @@ let { PNG } = global.pngjs || require("pngjs");
               img.data[px + 3] = fdv.getUint8(3);
             }
           }
-          fs.writeFileSync(png_out, PNG.sync.write(img, { colorType: 6, deflateLevel: 6 }));
+          let png_opts = global.ViscountKrigingGPU ? ViscountKrigingGPU.getFastPNGWriteOptions() : { colorType: 6, deflateLevel: 1, filterType: 0 };
+          fs.writeFileSync(png_out, PNG.sync.write(img, png_opts));
         }
 
         kriged_raster_stats[pkey] = {
@@ -401,43 +403,78 @@ let { PNG } = global.pngjs || require("pngjs");
         matern_lut[i] = (1 + local_s)*Math.exp(-local_s);
       }
 
-      for (let i = 0; i < n_obs; i++) {
-        scale_pref_mat[i*n_obs + i] = 1;
-        u_matrix[i*n_obs + i] = 0;
-        for (let x = i + 1; x < n_obs; x++) {
-          let dot = Math.max(-1, Math.min(1,
-            obs_bundle.obs_ux[i]*obs_bundle.obs_ux[x] +
-            obs_bundle.obs_uy[i]*obs_bundle.obs_uy[x] +
-            obs_bundle.obs_uz[i]*obs_bundle.obs_uz[x]
-          ));
-          let c2 = Math.max(0, 2 - 2*dot);
-          let h = earth_radius_km*Math.sqrt(c2)*(1 + c2/24 + (3*c2*c2)/640);
+      let gpu_pw = (options.use_gpu !== false && global.ViscountKrigingGPU) ?
+        ViscountKrigingGPU.computePairwiseUPref(obs_bundle.obs_ux, obs_bundle.obs_uy, obs_bundle.obs_uz, obs_r, earth_radius_km) : null;
+
+      if (gpu_pw) {
+        scale_pref_mat = gpu_pw.scale_pref_mat;
+        u_matrix = gpu_pw.u_matrix;
+        let max_bin_u = dim_lag_bins[n_bins - 1];
+        let check_ocean = (obs_bundle.median_radius_km < 15.0);
+
+        for (let i = 0; i < n_obs; i++) {
+          if (obs_list[i].is_frontier_buffer) continue;
+          let i_empty_arc = ((obs_list[i].total_sites_all_periods || 0) === 0 && obs_list[i].lat > 52.0);
           let ri = obs_r[i];
-          let rx = obs_r[x];
-          let r_eff = Math.sqrt(0.5*(ri*ri + rx*rx));
-          let pref = (2*ri*rx)/Math.max(1e-8, ri*ri + rx*rx);
-          let u = h/Math.max(1e-6, r_eff);
 
-          scale_pref_mat[i*n_obs + x] = pref;
-          scale_pref_mat[x*n_obs + i] = pref;
-          u_matrix[i*n_obs + x] = u;
-          u_matrix[x*n_obs + i] = u;
+          for (let x = i + 1; x < n_obs; x++) {
+            if (obs_list[x].is_frontier_buffer) continue;
+            let u = u_matrix[i*n_obs + x];
+            if (u > max_bin_u) continue;
+            if (i_empty_arc && (obs_list[x].total_sites_all_periods || 0) === 0 && obs_list[x].lat > 52.0) continue;
+            if (check_ocean) {
+              let rx = obs_r[x];
+              let h_est = u*Math.sqrt(0.5*(ri*ri + rx*rx));
+              if (h_est > 140.0) continue;
+            }
+            for (let y = 0; y < n_bins; y++) {
+              if (u <= dim_lag_bins[y]) {
+                pair_bins[y].push(i, x, u);
+                total_dom_pairs++;
+                break;
+              }
+            }
+          }
+        }
+      } else {
+        for (let i = 0; i < n_obs; i++) {
+          scale_pref_mat[i*n_obs + i] = 1;
+          u_matrix[i*n_obs + i] = 0;
+          for (let x = i + 1; x < n_obs; x++) {
+            let dot = Math.max(-1, Math.min(1,
+              obs_bundle.obs_ux[i]*obs_bundle.obs_ux[x] +
+              obs_bundle.obs_uy[i]*obs_bundle.obs_uy[x] +
+              obs_bundle.obs_uz[i]*obs_bundle.obs_uz[x]
+            ));
+            let c2 = Math.max(0, 2 - 2*dot);
+            let h = earth_radius_km*Math.sqrt(c2)*(1 + c2/24 + (3*c2*c2)/640);
+            let ri = obs_r[i];
+            let rx = obs_r[x];
+            let r_eff = Math.sqrt(0.5*(ri*ri + rx*rx));
+            let pref = (2*ri*rx)/Math.max(1e-8, ri*ri + rx*rx);
+            let u = h/Math.max(1e-6, r_eff);
 
-          if (!obs_list[i].is_frontier_buffer && !obs_list[x].is_frontier_buffer && u <= dim_lag_bins[n_bins - 1]) {
-            let both_empty_arctic = (
-              (obs_list[i].total_sites_all_periods || 0) === 0 &&
-              (obs_list[x].total_sites_all_periods || 0) === 0 &&
-              obs_list[i].lat > 52.0 &&
-              obs_list[x].lat > 52.0
-            );
-            let skip_ocean_gap = (obs_bundle.median_radius_km < 15.0 && h > 140.0);
+            scale_pref_mat[i*n_obs + x] = pref;
+            scale_pref_mat[x*n_obs + i] = pref;
+            u_matrix[i*n_obs + x] = u;
+            u_matrix[x*n_obs + i] = u;
 
-            if (!both_empty_arctic && !skip_ocean_gap) {
-              for (let y = 0; y < n_bins; y++) {
-                if (u <= dim_lag_bins[y]) {
-                  pair_bins[y].push(i, x, u);
-                  total_dom_pairs++;
-                  break;
+            if (!obs_list[i].is_frontier_buffer && !obs_list[x].is_frontier_buffer && u <= dim_lag_bins[n_bins - 1]) {
+              let both_empty_arctic = (
+                (obs_list[i].total_sites_all_periods || 0) === 0 &&
+                (obs_list[x].total_sites_all_periods || 0) === 0 &&
+                obs_list[i].lat > 52.0 &&
+                obs_list[x].lat > 52.0
+              );
+              let skip_ocean_gap = (obs_bundle.median_radius_km < 15.0 && h > 140.0);
+
+              if (!both_empty_arctic && !skip_ocean_gap) {
+                for (let y = 0; y < n_bins; y++) {
+                  if (u <= dim_lag_bins[y]) {
+                    pair_bins[y].push(i, x, u);
+                    total_dom_pairs++;
+                    break;
+                  }
                 }
               }
             }
@@ -610,6 +647,10 @@ let { PNG } = global.pngjs || require("pngjs");
       let m1_mat = new Float64Array(n_obs*n_obs);
       let m2_mat = new Float64Array(n_obs*n_obs);
       let fillKernels = function (arg0_t1, arg1_t2) {
+        if (options.use_gpu !== false && global.ViscountKrigingGPU &&
+          ViscountKrigingGPU.fillMaternKernels(u_matrix, scale_pref_mat, n_obs, arg0_t1, arg1_t2, m1_mat, m2_mat)) {
+          return;
+        }
         for (let i = 0; i < n_obs; i++) {
           m1_mat[i*n_obs + i] = 1;
           m2_mat[i*n_obs + i] = 1;

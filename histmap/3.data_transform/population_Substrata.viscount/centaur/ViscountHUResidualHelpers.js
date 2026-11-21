@@ -8,7 +8,11 @@ let drs_p = (typeof __dirname !== "undefined" && fs.existsSync(path.resolve(__di
 let um_p = (typeof __dirname !== "undefined" && fs.existsSync(path.resolve(__dirname, "../ViscountUrbanMask.js"))) ?
   path.resolve(__dirname, "../ViscountUrbanMask.js") :
   path.resolve(process.cwd(), "histmap/3.data_transform/population_Substrata.viscount/ViscountUrbanMask.js");
+let vk_p = (typeof __dirname !== "undefined" && fs.existsSync(path.resolve(__dirname, "../ViscountKrigingGPU.js"))) ?
+  path.resolve(__dirname, "../ViscountKrigingGPU.js") :
+  path.resolve(process.cwd(), "histmap/3.data_transform/population_Substrata.viscount/ViscountKrigingGPU.js");
 let ViscountDasymetricResidualSolver = global.ViscountDasymetricResidualSolver || require(drs_p).ViscountDasymetricResidualSolver;
+let ViscountKrigingGPU = global.ViscountKrigingGPU || require(vk_p).ViscountKrigingGPU;
 let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanMask;
 
 //Initialise functions
@@ -808,6 +812,10 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
       let pos_only = Boolean(arg5_pos_only);
       let gate = arg6_active_gate;
       let elev_v = arg7_elev_valid || null;
+      if (global._viscount_force_cpu_smooth !== true && global.ViscountKrigingGPU) {
+        let gpu_sm = ViscountKrigingGPU.smoothGaussianGrid(mask_data, arg1_field, rad, passes, part_ids, pos_only, gate, elev_v);
+        if (gpu_sm) return gpu_sm;
+      }
       let h = mask_data.grid_height;
       let n_valid = mask_data.valid_cell_count;
       let p2v = mask_data.pixel_to_valid_idx;
@@ -950,7 +958,8 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
           img.data[px + 3] = f_dv.getUint8(3);
         }
       }
-      fs.writeFileSync(arg2_out_path, PNG.sync.write(img, { colorType: 6, deflateLevel: 6 }));
+      let png_opts = global.ViscountKrigingGPU ? ViscountKrigingGPU.getFastPNGWriteOptions() : { colorType: 6, deflateLevel: 1, filterType: 0 };
+      fs.writeFileSync(arg2_out_path, PNG.sync.write(img, png_opts));
     }
 
 
@@ -960,9 +969,12 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
      */
     static trimRasterCache (arg0_cache, arg1_max_size, arg2_target_size) {
       let cache = arg0_cache;
-      let max_size = (arg1_max_size !== undefined) ? arg1_max_size : 20;
-      let target_size = (arg2_target_size !== undefined) ? arg2_target_size : 14;
+      let lim_max = (global.GeoPNG && GeoPNG.compute_limits && GeoPNG.compute_limits.ram) ?
+        Number(GeoPNG.compute_limits.ram.max_cached_rasters) || 8 : 20;
+      let max_size = Math.min((arg1_max_size !== undefined) ? arg1_max_size : 20, Math.max(8, lim_max));
+      let target_size = Math.min((arg2_target_size !== undefined) ? arg2_target_size : 14, Math.max(4, max_size - 2));
 
+      if (global.GeoPNG && typeof GeoPNG.enforceMemoryBudget === "function") GeoPNG.enforceMemoryBudget();
       if (!cache || cache.size <= max_size) return;
       let keys = Array.from(cache.keys());
 

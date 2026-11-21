@@ -4,6 +4,7 @@ let JSON5 = global.JSON5 || require("json5");
 let path = global.path || require("path");
 let { PNG } = global.pngjs || require("pngjs");
 let { ViscountBiophysicalCovariates } = global.ViscountBiophysicalCovariates ? global : require("./ViscountBiophysicalCovariates.js");
+let { ViscountKrigingGPU } = global.ViscountKrigingGPU ? global : require("./ViscountKrigingGPU.js");
 let { ViscountMaternVariogram } = global.ViscountMaternVariogram ? global : require("./ViscountMaternVariogram.js");
 let { ViscountRuralSuitability } = global.ViscountRuralSuitability ? global : require("./ViscountRuralSuitability.js");
 
@@ -54,6 +55,7 @@ let { ViscountRuralSuitability } = global.ViscountRuralSuitability ? global : re
         path.resolve(".") : path.resolve(__dirname, "../../.."));
 
       //Function body
+      if (global.GeoPNG && typeof GeoPNG.applyBackgroundProcessPriority === "function") GeoPNG.applyBackgroundProcessPriority();
       if (typeof config_input === "string") {
         let abs_cfg = path.resolve(root_dir, config_input);
         if (!fs.existsSync(abs_cfg)) {
@@ -279,22 +281,21 @@ let { ViscountRuralSuitability } = global.ViscountRuralSuitability ? global : re
         obs_uz[i] = obs_list[i].uz;
       }
 
-      for (let i = 0; i < n_valid; i++) {
-        let best_dot = -2;
-        let best_idx = 0;
-        let cx = cell_ux[i];
-        let cy = cell_uy[i];
-        let cz = cell_uz[i];
-
-        for (let x = 0; x < n_obs; x++) {
-          let d = cx*obs_ux[x] + cy*obs_uy[x] + cz*obs_uz[x];
-          if (d > best_dot) {
-            best_dot = d;
-            best_idx = x;
+      let gpu_nearest = (options.use_gpu !== false && global.ViscountKrigingGPU) ?
+        ViscountKrigingGPU.computeVoronoiNearest(cell_ux, cell_uy, cell_uz, obs_ux, obs_uy, obs_uz) : null;
+      if (gpu_nearest) {
+        cell_nearest = gpu_nearest;
+        for (let i = 0; i < n_valid; i++) raw_areas[cell_nearest[i]] += bundle.mask_data.cell_land_area[i];
+      } else {
+        for (let i = 0; i < n_valid; i++) {
+          let best_dot = -2, best_idx = 0, cx = cell_ux[i], cy = cell_uy[i], cz = cell_uz[i];
+          for (let x = 0; x < n_obs; x++) {
+            let d = cx*obs_ux[x] + cy*obs_uy[x] + cz*obs_uz[x];
+            if (d > best_dot) { best_dot = d; best_idx = x; }
           }
+          cell_nearest[i] = best_idx;
+          raw_areas[best_idx] += bundle.mask_data.cell_land_area[i];
         }
-        cell_nearest[i] = best_idx;
-        raw_areas[best_idx] += bundle.mask_data.cell_land_area[i];
       }
 
       let active_domestic_catchments = 0;
@@ -794,84 +795,57 @@ let { ViscountRuralSuitability } = global.ViscountRuralSuitability ? global : re
       let inv_tau2_shared = (n_active > 0) ? active_periods[0].inv_tau2 : 1/bundle.tau2_dimensionless;
       let z_acc = new Float64Array(n_active);
 
-      for (let i = 0; i < n_valid; i++) {
-        let a_i = cell_area[i];
-        let cx = cell_ux[i];
-        let cy = cell_uy[i];
-        let cz = cell_uz[i];
-        let ri = cell_r[i];
-        let ri2 = ri*ri;
+      let used_gpu_pot = (options.use_gpu !== false && global.ViscountKrigingGPU) ? ViscountKrigingGPU.evaluateMaternPotentials({
+        active_periods: active_periods, cell_area: cell_area, cell_r: cell_r, cell_ux: cell_ux, cell_uy: cell_uy, cell_uz: cell_uz,
+        earth_r: earth_r, lut: lut, min_dot_per_obs: min_dot_per_obs, n_obs: n_obs, n_valid: n_valid,
+        obs_r: obs_r, obs_ux: obs_ux, obs_uy: obs_uy, obs_uz: obs_uz, shared_tau: shared_tau
+      }) : false;
 
+      if (!used_gpu_pot) for (let i = 0; i < n_valid; i++) {
+        let a_i = cell_area[i], cx = cell_ux[i], cy = cell_uy[i], cz = cell_uz[i], ri = cell_r[i], ri2 = ri*ri;
         for (let p = 0; p < n_active; p++) z_acc[p] = 0;
-
         for (let x = 0; x < n_obs; x++) {
           let dot = cx*obs_ux[x] + cy*obs_uy[x] + cz*obs_uz[x];
-
           if (dot <= min_dot_per_obs[x]) continue;
-          if (dot > 1) dot = 1;
-          else if (dot < -1) dot = -1;
-
+          dot = Math.max(-1, Math.min(1, dot));
           let c2 = Math.max(0, 2 - 2*dot);
           let h = earth_r*Math.sqrt(c2)*(1 + c2/24);
-          let rx = obs_r[x];
-          let r2_sum = ri2 + rx*rx;
+          let rx = obs_r[x], r2_sum = ri2 + rx*rx;
           let u = h/Math.sqrt(0.5*r2_sum);
           let pref = (2*ri*rx)/Math.max(1e-8, r2_sum);
-
           if (shared_tau) {
             let v2 = u*inv_tau2_shared;
-
             if (v2 >= 7.99) continue;
-            let m1 = 0;
-            let v1 = u*inv_tau1_shared;
-
+            let m1 = 0, v1 = u*inv_tau1_shared;
             if (v1 < 7.99) {
-              let idx1 = (v1*lut_scale) | 0;
-              let frac1 = v1*lut_scale - idx1;
-
+              let idx1 = (v1*lut_scale) | 0, frac1 = v1*lut_scale - idx1;
               m1 = pref*(lut[idx1]*(1 - frac1) + lut[idx1 + 1]*frac1);
             }
-            let idx2 = (v2*lut_scale) | 0;
-            let frac2 = v2*lut_scale - idx2;
+            let idx2 = (v2*lut_scale) | 0, frac2 = v2*lut_scale - idx2;
             let m2 = pref*(lut[idx2]*(1 - frac2) + lut[idx2 + 1]*frac2);
-
             for (let p = 0; p < n_active; p++) {
               let ap = active_periods[p];
-
               z_acc[p] += ap.w[x]*(ap.c1*m1 + ap.c2*m2);
             }
           } else {
             for (let p = 0; p < n_active; p++) {
-              let ap = active_periods[p];
-              let wp = ap.w[x];
-
+              let ap = active_periods[p], wp = ap.w[x];
               if (wp <= 0) continue;
               let v2 = u*ap.inv_tau2;
-
               if (v2 >= 7.99) continue;
-              let m1 = 0;
-              let v1 = u*ap.inv_tau1;
-
+              let m1 = 0, v1 = u*ap.inv_tau1;
               if (v1 < 7.99) {
-                let idx1 = (v1*lut_scale) | 0;
-                let frac1 = v1*lut_scale - idx1;
-
+                let idx1 = (v1*lut_scale) | 0, frac1 = v1*lut_scale - idx1;
                 m1 = pref*(lut[idx1]*(1 - frac1) + lut[idx1 + 1]*frac1);
               }
-              let idx2 = (v2*lut_scale) | 0;
-              let frac2 = v2*lut_scale - idx2;
+              let idx2 = (v2*lut_scale) | 0, frac2 = v2*lut_scale - idx2;
               let m2 = pref*(lut[idx2]*(1 - frac2) + lut[idx2 + 1]*frac2);
-
               z_acc[p] += wp*(ap.c1*m1 + ap.c2*m2);
             }
           }
         }
-
-        for (let p = 0; p < n_active; p++) {
-          let z_val = Math.max(0, active_periods[p].var_restore*z_acc[p]);
-
-          active_periods[p].pot[i] = a_i*Math.pow(z_val, 2.25);
-        }
+        for (let p = 0; p < n_active; p++)
+          active_periods[p].pot[i] = a_i*Math.pow(Math.max(0, active_periods[p].var_restore*z_acc[p]), 2.25);
       }
 
       let rk_mode = (bundle.config && bundle.config.kriging_config && bundle.config.kriging_config.residual_kriging_mode) ?

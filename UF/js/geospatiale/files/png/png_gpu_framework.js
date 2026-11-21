@@ -401,7 +401,8 @@
     _opencl_kernel_source: preserved_kernel_src,
     _program: null,
     _queue: null,
-    _ready: false
+    _ready: false,
+    _shutdown_hooks: []
   };
 
   /**
@@ -578,6 +579,8 @@
         clReleaseMemObject: ocl.func("int clReleaseMemObject(void*)"),
         clReleaseProgram: ocl.func("int clReleaseProgram(void*)"),
         clSetKernelArgF32: ocl.func("int clSetKernelArg(void*, uint32_t, size_t, float*)"),
+        clSetKernelArgF64: ocl.func("int clSetKernelArg(void*, uint32_t, size_t, double*)"),
+        clSetKernelArgI32: ocl.func("int clSetKernelArg(void*, uint32_t, size_t, int32_t*)"),
         clSetKernelArgMem: ocl.func("int clSetKernelArg(void*, uint32_t, size_t, void**)"),
         clSetKernelArgU32: ocl.func("int clSetKernelArg(void*, uint32_t, size_t, uint32_t*)")
       };
@@ -814,6 +817,11 @@
     //Declare local instance variables
     let cl = GeoPNG.gpu._cl;
     if (!cl) return;
+
+    let hooks = GeoPNG.gpu._shutdown_hooks || [];
+    for (let i = 0; i < hooks.length; i++) {
+      try { hooks[i](cl); } catch (e) {}
+    }
 
     GeoPNG.gpu.trimPools(true);
 

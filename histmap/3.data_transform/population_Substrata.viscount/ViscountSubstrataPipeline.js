@@ -264,7 +264,7 @@ if (!global.population_Substrata_russia && typeof require !== "undefined") {
               }
             }
           }
-          fs.writeFileSync(dst_path, PNG.sync.write(dst_png));
+          fs.writeFileSync(dst_path, PNG.sync.write(dst_png, { colorType: 6, deflateLevel: 1, filterType: 0 }));
         }
       }
     }
@@ -286,6 +286,7 @@ if (!global.population_Substrata_russia && typeof require !== "undefined") {
       let discovery = this.A_discoverActiveViscountContexts(options);
 
       //Function body
+      if (global.GeoPNG && typeof GeoPNG.applyBackgroundProcessPriority === "function") GeoPNG.applyBackgroundProcessPriority();
       options._viscount_discovery = discovery;
 
       //Return statement
@@ -389,7 +390,7 @@ if (!global.population_Substrata_russia && typeof require !== "undefined") {
         }
 
         global.ViscountSubstrataMosaic.applyOneSidedSeamBlend(ctx, base_png.data, base_dv, options);
-        fs.writeFileSync(dst_path, PNG.sync.write(base_png));
+        fs.writeFileSync(dst_path, PNG.sync.write(base_png, { colorType: 6, deflateLevel: 1, filterType: 0 }));
         year_summaries[yr] = { combined: Math.round(sum_val) };
       }
 

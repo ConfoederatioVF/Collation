@@ -416,7 +416,7 @@ let { PNG } = global.pngjs || require("pngjs");
         }
 
         this.applyOneSidedSeamBlend(context, out_png.data, out_dv, options);
-        fs.writeFileSync(out_png_path, PNG.sync.write(out_png, { colorType: 6, deflateLevel: 3 }));
+        fs.writeFileSync(out_png_path, PNG.sync.write(out_png, { colorType: 6, deflateLevel: 1, filterType: 0 }));
         year_summaries[yr] = { combined: Math.round(total_pop) };
       }
 
