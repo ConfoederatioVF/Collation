@@ -90,6 +90,76 @@
       if (stadester_obj["Lamphun-Thailand"])
         stadester_obj["Lamphun-Thailand"].coords = [18.5744357, 99.00369719999999];
 
+      //MANDALA: Normalise legacy Populstat Vietnamese Mojibake keys, Thai/Lao/Khmer exonym keys & Ban-prefix twins
+      let sea_mojibake_renames = [
+        ["Ha nôi-Vietnam", "Hanoi-Vietnam", "Hanoi", null],
+        ["-Dà Nãng-Vietnam", "Da Nang-Vietnam", "Da Nang", null],
+        ["Hãi Phong-Vietnam", "Hai Phong-Vietnam", "Hai Phong", null],
+        ["Krung Thep-Thailand", "Bangkok-Thailand", "Bangkok", "Krung Thep"],
+        ["Ban Pak Phanang-Thailand", "Pak Phanang-Thailand", "Pak Phanang", "Ban Pak Phanang"],
+        ["Krâchéh-Cambodia", "Kratie-Cambodia", "Kratie", "Krâchéh"],
+        ["Viangchan-Laos", "Vientiane-Laos", "Vientiane", "Viangchan"]
+      ];
+      for (let sm = 0; sm < sea_mojibake_renames.length; sm++) {
+        let [bad_k, good_k, good_nm, keep_alias] = sea_mojibake_renames[sm];
+        let bad_c = stadester_obj[bad_k];
+        if (!bad_c) continue;
+        let good_c = stadester_obj[good_k];
+        if (good_c && good_c.population && bad_c.population) {
+          let byrs = Object.keys(bad_c.population);
+          for (let by = 0; by < byrs.length; by++) {
+            let yk = byrs[by];
+            let bv = Number(bad_c.population[yk]) || 0;
+            let gv = Number(good_c.population[yk]) || 0;
+            if (bv > gv && gv === 0) good_c.population[yk] = bv;
+          }
+          if (!Array.isArray(good_c.other_names)) good_c.other_names = [];
+          if (keep_alias && !good_c.other_names.includes(keep_alias))
+            good_c.other_names.push(keep_alias);
+          population_Stadester_uud.appendCitySources(good_c, bad_c.sources || bad_c.type);
+          delete stadester_obj[bad_k];
+        } else {
+          bad_c.key = good_k;
+          bad_c.name = good_nm;
+          if (keep_alias) {
+            if (!Array.isArray(bad_c.other_names)) bad_c.other_names = [];
+            if (!bad_c.other_names.includes(keep_alias)) bad_c.other_names.push(keep_alias);
+          }
+          stadester_obj[good_k] = bad_c;
+          delete stadester_obj[bad_k];
+        }
+      }
+
+      //MANDALA: Disambiguate legacy Simpang Empat-Malaysia at Sitiawan coords (4.22N, 100.70E) from Simpang Empat (Perak 4.95N)
+      if (stadester_obj["Simpang Empat-Malaysia"] && Array.isArray(stadester_obj["Simpang Empat-Malaysia"].coords) && Number(stadester_obj["Simpang Empat-Malaysia"].coords[0]) < 4.5) {
+        let se_sit = stadester_obj["Simpang Empat-Malaysia"];
+        let sit_existing = stadester_obj["Sitiawan-Malaysia"];
+        if (sit_existing && sit_existing.population && se_sit.population) {
+          let syrs = Object.keys(se_sit.population);
+          for (let sy = 0; sy < syrs.length; sy++) {
+            let yk = syrs[sy];
+            let sv = Number(se_sit.population[yk]) || 0;
+            let gv = Number(sit_existing.population[yk]) || 0;
+            if (sv > gv) sit_existing.population[yk] = sv;
+          }
+          population_Stadester_uud.appendCitySources(sit_existing, se_sit.sources || se_sit.type);
+          delete stadester_obj["Simpang Empat-Malaysia"];
+        } else {
+          se_sit.key = "Sitiawan-Malaysia";
+          se_sit.name = "Sitiawan";
+          if (!Array.isArray(se_sit.other_names)) se_sit.other_names = [];
+          if (!se_sit.other_names.includes("Simpang Empat")) se_sit.other_names.push("Simpang Empat");
+          stadester_obj["Sitiawan-Malaysia"] = se_sit;
+          delete stadester_obj["Simpang Empat-Malaysia"];
+        }
+        if (stadester_obj["Simpang Empat-Malaysia_2"] && !stadester_obj["Simpang Empat-Malaysia"]) {
+          let se_real = stadester_obj["Simpang Empat-Malaysia_2"];
+          se_real.key = "Simpang Empat-Malaysia";
+          stadester_obj["Simpang Empat-Malaysia"] = se_real;
+          delete stadester_obj["Simpang Empat-Malaysia_2"];
+        }
+      }
+
       //Inject curated manual records if missing
       population_Stadester_uud.injectManualRecords(stadester_obj);
       all_cities = Object.keys(stadester_obj);
@@ -932,12 +1002,14 @@
         (srcs.some(function (arg0_s) { return arg0_s !== "CENTAUR"; }) ? 1e7 : 0) +
         max_pop;
 
+      let norm_nm = String(city.name || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]/g, "");
       if (!by_country[ctry]) by_country[ctry] = [];
       by_country[ctry].push({
         active_ge1850: active_ge1850,
         city: city,
         dropped: false,
         key: key,
+        norm_name: norm_nm,
         proj_key: proj_key,
         score: score
       });
@@ -951,59 +1023,81 @@
       if (arr.length < 2) continue;
       arr.sort(function (arg0_a, arg1_b) { return arg1_b.score - arg0_a.score; });
 
+      let grid = new Map();
+      for (let i = 0; i < arr.length; i++) {
+        let gx = Math.floor(arr[i].city.coords[0]*5);
+        let gy = Math.floor(arr[i].city.coords[1]*5);
+        let gk = `${gx},${gy}`;
+        if (!grid.has(gk)) grid.set(gk, []);
+        grid.get(gk).push(i);
+      }
+
       for (let i = 0; i < arr.length; i++) {
         let a = arr[i];
-
         if (a.dropped) continue;
-        for (let x = i + 1; x < arr.length; x++) {
-          let b = arr[x];
+        let gx = Math.floor(a.city.coords[0]*5);
+        let gy = Math.floor(a.city.coords[1]*5);
 
-          if (b.dropped) continue;
-          let touches_viscount = (
-            a.proj_key === "CENTAUR" || b.proj_key === "CENTAUR" ||
-            a.proj_key === "PRETA" || b.proj_key === "PRETA" ||
-            a.proj_key === "INDUS" || b.proj_key === "INDUS" ||
-            a.proj_key === "CASTLE" || b.proj_key === "CASTLE" ||
-            a.proj_key === "JADE" || b.proj_key === "JADE" ||
-            a.proj_key === "SARAY" || b.proj_key === "SARAY" ||
-            a.proj_key === "MANDALA" || b.proj_key === "MANDALA"
-          );
+        for (let dx = -1; dx <= 1; dx++) {
+          for (let dy = -1; dy <= 1; dy++) {
+            let bucket = grid.get(`${gx + dx},${gy + dy}`);
+            if (!bucket) continue;
+            for (let bi = 0; bi < bucket.length; bi++) {
+              let x = bucket[bi];
+              if (x <= i) continue;
+              let b = arr[x];
+              if (b.dropped) continue;
+              let touches_viscount = (
+                a.proj_key === "CENTAUR" || b.proj_key === "CENTAUR" ||
+                a.proj_key === "PRETA" || b.proj_key === "PRETA" ||
+                a.proj_key === "INDUS" || b.proj_key === "INDUS" ||
+                a.proj_key === "CASTLE" || b.proj_key === "CASTLE" ||
+                a.proj_key === "JADE" || b.proj_key === "JADE" ||
+                a.proj_key === "SARAY" || b.proj_key === "SARAY" ||
+                a.proj_key === "MANDALA" || b.proj_key === "MANDALA"
+              );
 
-          if (!touches_viscount) continue;
-          if (Math.abs(a.city.coords[0] - b.city.coords[0]) > 0.02 || Math.abs(a.city.coords[1] - b.city.coords[1]) > 0.06) continue;
-          let overlaps = false;
+              if (!touches_viscount) continue;
+              let same_exact_name = Boolean(a.norm_name && a.norm_name === b.norm_name);
+              let max_lat_d = same_exact_name ? 0.16 : 0.02;
+              let max_lng_d = same_exact_name ? 0.20 : 0.06;
+              if (Math.abs(a.city.coords[0] - b.city.coords[0]) > max_lat_d || Math.abs(a.city.coords[1] - b.city.coords[1]) > max_lng_d) continue;
+              let max_twin_km = same_exact_name ? 15.0 : 1.5;
+              let overlaps = false;
 
-          b.active_ge1850.forEach(function (arg0_yr) {
-            if (a.active_ge1850.has(arg0_yr)) overlaps = true;
-          });
-          if (!overlaps) continue;
-          if (haversineKm(a.city.coords, b.city.coords) > 1.5) continue;
+              b.active_ge1850.forEach(function (arg0_yr) {
+                if (a.active_ge1850.has(arg0_yr)) overlaps = true;
+              });
+              if (!overlaps) continue;
+              if (haversineKm(a.city.coords, b.city.coords) > max_twin_km) continue;
 
-          if (!Array.isArray(a.city.other_names)) a.city.other_names = [];
-          if (b.city.name && !a.city.other_names.includes(b.city.name)) a.city.other_names.push(b.city.name);
-          if (Array.isArray(b.city.other_names)) {
-            for (let k = 0; k < b.city.other_names.length; k++)
-              if (b.city.other_names[k] && !a.city.other_names.includes(b.city.other_names[k]))
-                a.city.other_names.push(b.city.other_names[k]);
-          }
-          let b_yrs = Object.keys(b.city.population);
+              if (!Array.isArray(a.city.other_names)) a.city.other_names = [];
+              if (b.city.name && !a.city.other_names.includes(b.city.name)) a.city.other_names.push(b.city.name);
+              if (Array.isArray(b.city.other_names)) {
+                for (let k = 0; k < b.city.other_names.length; k++)
+                  if (b.city.other_names[k] && !a.city.other_names.includes(b.city.other_names[k]))
+                    a.city.other_names.push(b.city.other_names[k]);
+              }
+              let b_yrs = Object.keys(b.city.population);
 
-          for (let y = 0; y < b_yrs.length; y++) {
-            let yk = b_yrs[y];
-            let yv = Number(b.city.population[yk]);
-            let yi = Number(yk);
+              for (let y = 0; y < b_yrs.length; y++) {
+                let yk = b_yrs[y];
+                let yv = Number(b.city.population[yk]);
+                let yi = Number(yk);
 
-            if (Number.isFinite(yv) && yv > 0 && !(Number(a.city.population[yk]) > 0)) {
-              a.city.population[yk] = yv;
-              if (Number.isFinite(yi) && yi >= 1850) a.active_ge1850.add(yi);
-              if (Number.isFinite(yi) && Number.isFinite(Number(a.city.foundation_year)) && yi < Number(a.city.foundation_year))
-                delete a.city.foundation_year;
+                if (Number.isFinite(yv) && yv > 0 && !(Number(a.city.population[yk]) > 0)) {
+                  a.city.population[yk] = yv;
+                  if (Number.isFinite(yi) && yi >= 1850) a.active_ge1850.add(yi);
+                  if (Number.isFinite(yi) && Number.isFinite(Number(a.city.foundation_year)) && yi < Number(a.city.foundation_year))
+                    delete a.city.foundation_year;
+                }
+              }
+              population_Stadester_uud.appendCitySources(a.city, b.city.sources || b.city.type);
+              delete stadester_obj[b.key];
+              b.dropped = true;
+              merged_count++;
             }
           }
-          population_Stadester_uud.appendCitySources(a.city, b.city.sources || b.city.type);
-          delete stadester_obj[b.key];
-          b.dropped = true;
-          merged_count++;
         }
       }
     }

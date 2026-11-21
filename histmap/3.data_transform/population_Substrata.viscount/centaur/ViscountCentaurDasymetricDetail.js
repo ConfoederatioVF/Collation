@@ -202,9 +202,12 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
       let rough_abs_gain = Number.isFinite(detail_cfg.roughness_abs_gain) ? Number(detail_cfg.roughness_abs_gain) : 0.18;
       let rough_rel_gain = Number.isFinite(detail_cfg.roughness_rel_gain) ? Number(detail_cfg.roughness_rel_gain) : 0.48;
       let slope = bio_covs.slope_valid || null;
+      let slope_rel_floor = Number.isFinite(detail_cfg.slope_rel_floor) ? Number(detail_cfg.slope_rel_floor) : 0.02;
       let slope_rel_gain = Number.isFinite(detail_cfg.slope_rel_gain) ? Number(detail_cfg.slope_rel_gain) : 0.38;
       let tpi_gain = Number.isFinite(detail_cfg.tpi_valley_gain) ? Number(detail_cfg.tpi_valley_gain) : 0.56;
+      let tpi_min_relief = Number.isFinite(detail_cfg.tpi_min_relief_m) ? Number(detail_cfg.tpi_min_relief_m) : 7.5;
       let tri = bio_covs.tri_valid || null;
+      let tri_rel_floor = Number.isFinite(detail_cfg.tri_rel_floor_m) ? Number(detail_cfg.tri_rel_floor_m) : 2.5;
       let u_coast = bio_covs.u_coastal || null;
       let u_fluv = bio_covs.u_fluvial || null;
       let v_idx = mask_data.valid_indices;
@@ -289,7 +292,7 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
           let dt2 = elev[i] - elev_sm2[i];
           let dt6 = elev[i] - elev_sm6[i];
           let tri_i = tri ? tri[i] : 14.0;
-          let rel_scale = Math.max(7.5, 0.50*tri_i + 5.0);
+          let rel_scale = Math.max(tpi_min_relief, 0.50*tri_i + 5.0);
           let tpi_z = Math.max(-2.4, Math.min(2.4, (0.48*dt1 + 0.34*dt2 + 0.18*dt6)/rel_scale));
 
           m_tpi = Math.exp(-tpi_gain*hu_tpi_sc[i]*tpi_z);
@@ -299,15 +302,15 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
 
         if (tri && tri_sm3) {
           let t_nb_mean = (nb_cnt > 0) ? (t_nb_sum/nb_cnt) : tri_sm3[i];
-          let tri_loc = Math.max(-1.2, Math.min(1.2, Math.log((tri[i] + 2.5)/(t_nb_mean + 2.5))));
-          let tri_meso = Math.max(-1.2, Math.min(1.2, Math.log((tri[i] + 4.0)/(tri_sm3[i] + 4.0))));
+          let tri_loc = Math.max(-1.2, Math.min(1.2, Math.log((tri[i] + tri_rel_floor)/(t_nb_mean + tri_rel_floor))));
+          let tri_meso = Math.max(-1.2, Math.min(1.2, Math.log((tri[i] + tri_rel_floor*1.6)/(tri_sm3[i] + tri_rel_floor*1.6))));
           let tri_abs = Math.max(0, Math.log1p(tri[i]/14.0) - 0.45);
           let s_term = 0;
 
           if (slope && nb_cnt > 0) {
             let s_nb_mean = s_nb_sum/nb_cnt;
 
-            s_term = Math.max(-1.2, Math.min(1.2, Math.log((slope[i] + 0.02)/(s_nb_mean + 0.02))));
+            s_term = Math.max(-1.2, Math.min(1.2, Math.log((slope[i] + slope_rel_floor)/(s_nb_mean + slope_rel_floor))));
           }
           let r_sc = hu_rough_sc[i];
 

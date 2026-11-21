@@ -158,9 +158,9 @@
       cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_sub.mem, 0, 0, bytes, substrata_rgba, 0, null, null);
       cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_urb.mem, 0, 0, bytes, urban_rgba, 0, null, null);
       cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_sub_u.mem, 0, 0, bytes, new Uint8Array(sub_urban_f32.buffer, sub_urban_f32.byteOffset, bytes), 0, null, null);
-      if (GeoPNG.gpu._last_rec_mask_ref !== mask_ids) {
+      if (d_mask_ids._cache_ref !== mask_ids) {
         cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_mask_ids.mem, 0, 0, bytes, new Uint8Array(mask_ids.buffer, mask_ids.byteOffset, bytes), 0, null, null);
-        GeoPNG.gpu._last_rec_mask_ref = mask_ids;
+        d_mask_ids._cache_ref = mask_ids;
       }
 
       cl.clEnqueueFillBuffer(GeoPNG.gpu._queue, d_mask_sub.mem, zero_pattern, 8, 0, num_masks*8, 0, null, null);
@@ -276,9 +276,9 @@
       if (!d_in || !d_out || !d_rids || !d_sc || !kernel) return null;
 
       cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_in.mem, 0, 0, bytes, in_rgba, 0, null, null);
-      if (GeoPNG.gpu._last_rscale_ids_ref !== region_ids) {
+      if (d_rids._cache_ref !== region_ids) {
         cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_rids.mem, 0, 0, bytes, new Uint8Array(region_ids.buffer, region_ids.byteOffset, bytes), 0, null, null);
-        GeoPNG.gpu._last_rscale_ids_ref = region_ids;
+        d_rids._cache_ref = region_ids;
       }
       cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_sc.mem, 0, 0, region_scalars.byteLength, new Uint8Array(region_scalars.buffer, region_scalars.byteOffset, region_scalars.byteLength), 0, null, null);
 
@@ -337,9 +337,9 @@
       if (!d_in || !d_rids || !d_sums || !kernel) return null;
 
       cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_in.mem, 0, 0, bytes, in_rgba, 0, null, null);
-      if (GeoPNG.gpu._last_rsum_ids_ref !== region_ids) {
+      if (d_rids._cache_ref !== region_ids) {
         cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_rids.mem, 0, 0, bytes, new Uint8Array(region_ids.buffer, region_ids.byteOffset, bytes), 0, null, null);
-        GeoPNG.gpu._last_rsum_ids_ref = region_ids;
+        d_rids._cache_ref = region_ids;
       }
       cl.clEnqueueFillBuffer(GeoPNG.gpu._queue, d_sums.mem, zero_pattern, 8, 0, num_regions*8, 0, null, null);
 
@@ -419,22 +419,30 @@
       if (!d_bfs || !d_ext_a || !d_ext_b || !d_ga || !d_gb || !d_la || !d_owner || !d_popc || !d_popd || !d_rurc || !d_urbc)
         return null;
 
-      if (GeoPNG.gpu._last_velk_static_key !== static_key) {
+      if (d_owner._cache_key !== static_key) {
         cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_owner.mem, 0, 0, total_px, owner_grid, 0, null, null);
+        d_owner._cache_key = static_key;
+      }
+      if (d_la._cache_key !== static_key) {
         cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_la.mem, 0, 0, bytes, new Uint8Array(land_area.buffer, land_area.byteOffset, bytes), 0, null, null);
+        d_la._cache_key = static_key;
+      }
+      if (d_bfs._cache_key !== static_key) {
         cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_bfs.mem, 0, 0, bytes, new Uint8Array(bfs_dist.buffer, bfs_dist.byteOffset, bytes), 0, null, null);
-        if (d_seam && seam_pixels && seam_pixels.length > 0)
-          cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_seam.mem, 0, 0, seam_pixels.byteLength, new Uint8Array(seam_pixels.buffer, seam_pixels.byteOffset, seam_pixels.byteLength), 0, null, null);
-        GeoPNG.gpu._last_velk_static_key = static_key;
+        d_bfs._cache_key = static_key;
+      }
+      if (d_seam && seam_pixels && seam_pixels.length > 0 && d_seam._cache_key !== static_key) {
+        cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_seam.mem, 0, 0, seam_pixels.byteLength, new Uint8Array(seam_pixels.buffer, seam_pixels.byteOffset, seam_pixels.byteLength), 0, null, null);
+        d_seam._cache_key = static_key;
       }
 
-      if (GeoPNG.gpu._last_velk_ga_ref !== grid_a_rgba) {
+      if (d_ga._cache_ref !== grid_a_rgba) {
         cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_ga.mem, 0, 0, bytes, grid_a_rgba, 0, null, null);
-        GeoPNG.gpu._last_velk_ga_ref = grid_a_rgba;
+        d_ga._cache_ref = grid_a_rgba;
       }
-      if (GeoPNG.gpu._last_velk_gb_ref !== grid_b_rgba) {
+      if (d_gb._cache_ref !== grid_b_rgba) {
         cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_gb.mem, 0, 0, bytes, grid_b_rgba, 0, null, null);
-        GeoPNG.gpu._last_velk_gb_ref = grid_b_rgba;
+        d_gb._cache_ref = grid_b_rgba;
       }
 
       cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_popc.mem, 0, 0, bytes, popc_rgba, 0, null, null);
@@ -476,6 +484,10 @@
           cl.clEnqueueNDRangeKernel(GeoPNG.gpu._queue, k_harm, 1, null, [seam_global], [local_size], 0, null, null);
         }
         cl.clFinish(GeoPNG.gpu._queue);
+      } else {
+        let zero_f32 = Buffer.alloc(4, 0);
+        cl.clEnqueueFillBuffer(GeoPNG.gpu._queue, d_ext_a.mem, zero_f32, 4, 0, bytes, 0, null, null);
+        cl.clEnqueueFillBuffer(GeoPNG.gpu._queue, d_ext_b.mem, zero_f32, 4, 0, bytes, 0, null, null);
       }
 
       let ext_smooth_mem = (seam_px % 2 === 0) ? d_ext_a.mem : d_ext_b.mem;
@@ -514,6 +526,51 @@
         rurc_rgba: out_rurc,
         urbc_rgba: out_urbc
       };
+    });
+  };
+
+  /**
+   * Converts a big-endian float32 RGBA raster to big-endian uint32 RGBA on the NVIDIA GPU.
+   * @alias GeoPNG.gpu.convertF32ToU32RGBA
+   *
+   * @param {Buffer|Uint8Array} arg0_in_rgba
+   * @param {string} [arg1_rounding_method="round"] - "ceil" or "round"
+   *
+   * @returns {Promise<Buffer|null>}
+   */
+  GeoPNG.gpu.convertF32ToU32RGBA = async function (arg0_in_rgba, arg1_rounding_method) {
+    //Convert from parameters
+    let in_rgba = arg0_in_rgba;
+    let mode = (arg1_rounding_method === "ceil") ? 0 : 1;
+
+    //Guard clauses
+    if (!in_rgba) return null;
+    let pixel_count = Math.floor(in_rgba.byteLength/4);
+    if (!GeoPNG.gpu.shouldUseGPU(pixel_count)) return null;
+
+    //Return statement
+    return GeoPNG.gpu.runSerialised(async function () {
+      let bytes = pixel_count*4;
+      let cl = GeoPNG.gpu._cl;
+      let d_in = GeoPNG.gpu.acquireBuffer("conv_in", bytes, 4n);
+      let d_out = GeoPNG.gpu.acquireBuffer("conv_out", bytes, 2n);
+      let kernel = GeoPNG.gpu._kernels.convert_f32_to_u32_be_rgba;
+      let out_buf = Buffer.allocUnsafe(bytes);
+
+      if (!d_in || !d_out || !kernel) return null;
+
+      cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_in.mem, 0, 0, bytes, in_rgba, 0, null, null);
+      await GeoPNG.gpu.dispatchWaves(pixel_count, function (arg0_offset, arg1_count, arg2_global, arg3_local) {
+        cl.clSetKernelArgMem(kernel, 0, 8, [d_in.mem]);
+        cl.clSetKernelArgMem(kernel, 1, 8, [d_out.mem]);
+        cl.clSetKernelArgU32(kernel, 2, 4, [arg0_offset]);
+        cl.clSetKernelArgU32(kernel, 3, 4, [arg1_count]);
+        cl.clSetKernelArgU32(kernel, 4, 4, [mode]);
+        cl.clEnqueueNDRangeKernel(GeoPNG.gpu._queue, kernel, 1, null, [arg2_global], [arg3_local], 0, null, null);
+      });
+
+      cl.clEnqueueReadBuffer(GeoPNG.gpu._queue, d_out.mem, 1, 0, bytes, out_buf, 0, null, null);
+      return out_buf;
     });
   };
 }

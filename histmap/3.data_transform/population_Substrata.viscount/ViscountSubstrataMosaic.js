@@ -3,6 +3,10 @@ let fs = global.fs || require("fs");
 let JSON5 = global.JSON5 || require("json5");
 let path = global.path || require("path");
 let { PNG } = global.pngjs || require("pngjs");
+let seam_mod_p = (typeof __dirname !== "undefined" && fs.existsSync(path.join(__dirname, "ViscountSubstrataSeamBlend.js"))) ?
+  path.join(__dirname, "ViscountSubstrataSeamBlend.js") :
+  path.join(process.cwd(), "histmap/3.data_transform/population_Substrata.viscount/ViscountSubstrataSeamBlend.js");
+let ViscountSubstrataSeamBlend = global.ViscountSubstrataSeamBlend || require(seam_mod_p).ViscountSubstrataSeamBlend;
 
 //Initialise functions
 {
@@ -17,8 +21,9 @@ let { PNG } = global.pngjs || require("pngjs");
    */
   global.ViscountSubstrataMosaic = class {
     /**
-     * Applies one-sided $C^1$ raised-cosine exterior seam feathering strictly onto a lower-order project's
-     * frontier belt (`z_seam_blend`), reading locked higher-order densities from the active composed raster.
+     * Applies one-sided isotropic harmonic multiplicative log-ratio seam feathering strictly onto a
+     * lower-order project's frontier belt (`z_seam_blend`), reading locked higher-order densities from
+     * the active composed raster without single-pixel directional streaking or fine-detail blurring.
      * @alias ViscountSubstrataMosaic.applyOneSidedSeamBlend
      *
      * @param {Object} arg0_lower_context
@@ -35,38 +40,8 @@ let { PNG } = global.pngjs || require("pngjs");
       let png_dv = arg2_png_dv;
       let options = (arg3_options) ? arg3_options : {};
 
-      //Guard clauses
-      if (!context || !context.z_seam_blend || !png_data || !png_dv) return 0;
-
-      //Declare local instance variables
-      let anchor_pixels = context.z_seam_blend.anchor_pixel;
-      let blended_count = 0;
-      let max_ratio = Number(options.max_seam_ratio) || 2.25;
-      let min_ratio = Number(options.min_seam_ratio) || 0.45;
-      let valid_indices = context.valid_indices;
-      let weights = context.z_seam_blend.weights;
-
-      //Function body
-      for (let i = 0; i < valid_indices.length; i++) {
-        let w = weights[i];
-        if (w >= 0.999) continue;
-
-        let anchor_idx = anchor_pixels[i];
-        if (anchor_idx < 0) continue;
-
-        let idx = valid_indices[i];
-        let a_val = this.readPositiveFloat32(png_data, png_dv, anchor_idx*4);
-        let l_val = this.readPositiveFloat32(png_data, png_dv, idx*4);
-        if (a_val <= 0 || l_val <= 0) continue;
-
-        let clamped_anchor = Math.max(l_val*min_ratio, Math.min(l_val*max_ratio, a_val));
-        let blended = Math.max(1e-4, w*l_val + (1 - w)*clamped_anchor);
-        png_dv.setFloat32(idx*4, blended, false);
-        blended_count++;
-      }
-
       //Return statement
-      return blended_count;
+      return ViscountSubstrataSeamBlend.applyOneSidedSeamBlend(context, png_data, png_dv, options);
     }
 
 
@@ -860,77 +835,17 @@ let { PNG } = global.pngjs || require("pngjs");
           this.filterMaskEntriesByOwnership(ctx.national_epoch_entries, owner_z_grid, proj_z);
         }
 
-        //Construct one-sided C^1 raised-cosine seam feather belt exclusively inside lower-order exterior buffer
+        //Construct isotropic 8-neighbour Euclidean chamfer seam belt exclusively inside lower-order exterior buffer
         let seam_px = Number(options.seam_feather_px || ctx.seam_feather_px || 24);
-        let anchor_grid = new Int32Array(n_pixels).fill(-1);
-        let bfs_dist = new Uint16Array(n_pixels).fill(65535);
-        let bfs_q = [];
-        let head = 0;
-
-        for (let x = 0; x < kept_valid.length; x++) {
-          let idx = kept_valid[x];
-          let r = Math.floor(idx/width);
-          let c = idx % width;
-          let nbrs = [
-            (r > 0) ? idx - width : -1,
-            (r + 1 < height) ? idx + width : -1,
-            (c > 0) ? idx - 1 : -1,
-            (c + 1 < width) ? idx + 1 : -1
-          ];
-          for (let y = 0; y < 4; y++) {
-            let n_idx = nbrs[y];
-            if (n_idx >= 0 && owner_z_grid[n_idx] > proj_z) {
-              bfs_dist[idx] = 1;
-              anchor_grid[idx] = n_idx;
-              bfs_q.push(idx);
-              break;
-            }
-          }
-        }
-
-        while (head < bfs_q.length) {
-          let curr = bfs_q[head++];
-          let d = bfs_dist[curr];
-          if (d >= seam_px) continue;
-          let r = Math.floor(curr/width);
-          let c = curr % width;
-          let nbrs = [
-            (r > 0) ? curr - width : -1,
-            (r + 1 < height) ? curr + width : -1,
-            (c > 0) ? curr - 1 : -1,
-            (c + 1 < width) ? curr + 1 : -1
-          ];
-          for (let y = 0; y < 4; y++) {
-            let n_idx = nbrs[y];
-            if (n_idx >= 0 && owner_z_grid[n_idx] === proj_z && bfs_dist[n_idx] > d + 1) {
-              bfs_dist[n_idx] = d + 1;
-              anchor_grid[n_idx] = anchor_grid[curr];
-              bfs_q.push(n_idx);
-            }
-          }
-        }
-
-        let seam_anchors = new Int32Array(kept_valid.length).fill(-1);
-        let seam_weights = new Float32Array(kept_valid.length).fill(1.0);
-        for (let x = 0; x < kept_valid.length; x++) {
-          let idx = kept_valid[x];
-          let d = bfs_dist[idx];
-          if (d <= seam_px) {
-            seam_anchors[x] = anchor_grid[idx];
-            seam_weights[x] = 0.5*(1 - Math.cos(Math.PI*d/Math.max(1, seam_px)));
-          }
-        }
+        let seam_belt = ViscountSubstrataSeamBlend.buildChamferSeamBelt(ctx, owner_z_grid, proj_z, seam_px);
 
         ctx.superseded_pixel_count = superseded_count;
-        ctx.z_seam_blend = {
-          anchor_pixel: seam_anchors,
-          weights: seam_weights
-        };
+        ctx.z_seam_blend = seam_belt;
 
         stats.push({
           kept_pixels: kept_valid.length,
           key: ctx.key,
-          seam_belt_pixels: bfs_q.length,
+          seam_belt_pixels: seam_belt.belt_v_indices.length,
           superseded_pixels: superseded_count,
           z_priority: proj_z
         });

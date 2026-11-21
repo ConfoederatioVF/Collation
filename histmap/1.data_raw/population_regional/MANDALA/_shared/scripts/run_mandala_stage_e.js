@@ -61,6 +61,12 @@ global.h5 = "./histmap/5.data_visualisation/";
 require(path.resolve(process.cwd(), "UF/js/vercengen/startup/vercengen_startup.js"));
 
 let preloaded_viscount = [
+  "UF/js/geospatiale/files/png/png_gpu_kernels.js",
+  "UF/js/geospatiale/files/png/png_gpu_framework.js",
+  "UF/js/geospatiale/files/png/png_gpu_pipelines.js",
+  "histmap/3.data_transform/population_Substrata.viscount/ViscountKrigingGPUKernels.js",
+  "histmap/3.data_transform/population_Substrata.viscount/ViscountKrigingGPU.js",
+  "histmap/3.data_transform/population_Substrata.viscount/ViscountDasymetricResidualSolver.js",
   "histmap/3.data_transform/population_Substrata.viscount/ViscountUrbanMask.js",
   "histmap/3.data_transform/population_Substrata.viscount/ViscountRuralSuitability.js",
   "histmap/3.data_transform/population_Substrata.viscount/ViscountMaternVariogram.js",
@@ -119,22 +125,45 @@ for (let i = 0; i < files.length; i++) {
     let t0 = Date.now();
     console.log(`[MANDALA StageE] Bootstrapped ${files.length} files cleanly.`);
 
+    let resume_from_d = process.argv.includes("--resume-from-d");
     let shards_only = process.argv.includes("--shards-only");
+    let skip_b3 = process.argv.includes("--skip-b3");
     let skip_deltas = process.argv.includes("--skip-deltas");
     let skip_shards = process.argv.includes("--skip-shards");
     let skip_substrata = process.argv.includes("--skip-substrata");
+    let velkscala_antiquity_only = process.argv.includes("--velkscala-antiquity-only");
+
+    if (velkscala_antiquity_only) {
+      console.log("[MANDALA StageE] Refreshing population_Velkscala antiquity (A + C + D) [GPU]...");
+      await population_Velkscala.processRasters({ exclude: ["B"], concurrency: 4 });
+      if (global.GeoPNG && typeof GeoPNG.terminateAllWorkers === "function")
+        GeoPNG.terminateAllWorkers();
+      console.log(`[MANDALA StageE] VELKSCALA ANTIQUITY COMPLETE in ${((Date.now() - t0)/1000).toFixed(1)}s`);
+      process.exit(0);
+    }
 
     if (!skip_shards) {
       let excl = shards_only ? ["E", "F", "G", "H", "I", "J"] : ["G", "H", "I", "J"];
-      console.log(`[MANDALA StageE] 1/5 Refreshing Stadestér 2.0 shards (${shards_only ? "A-D shards-only" : "A-F"})...`);
+      if (resume_from_d) excl = ["A", "B", "C"].concat(excl);
+      console.log(`[MANDALA StageE] 1/5 Refreshing Stadestér 2.0 shards (${resume_from_d ? "D-F resume" : (shards_only ? "A-D shards-only" : "A-F")})...`);
       await population_Stadester.processRasters({ exclude: excl, overwrite: true, concurrency: 4 });
+      //Release giant cached Stadestér UUD object before raster/GPU stages so RAM drops by ~10 GB
+      global._cached_stadester_obj = null;
+      global._cached_stadester_path = null;
+      global._cached_stadester_mtime = 0;
+      if (global.GeoPNG && typeof GeoPNG.enforceMemoryBudget === "function") GeoPNG.enforceMemoryBudget();
     } else {
       console.log("[MANDALA StageE] 1/5 Skipped Stadestér A-F (--skip-shards).");
     }
 
     if (!shards_only && !skip_substrata) {
-      console.log("[MANDALA StageE] 2/5 Running ViscountSubstrataPipeline (only_projects: ['MANDALA']) + global scaling + GHSL interpolation...");
-      await population_Substrata_outlier_removal.processRasters({ exclude: ["A", "B2"], only_projects: ["MANDALA"], concurrency: 4 });
+      let sub_excl = skip_b3 ? ["A", "B2", "B3"] : ["A", "B2"];
+      console.log(`[MANDALA StageE] 2/5 Running Substrata (${skip_b3 ? "GPU global scaling + GHSL interp + GPU int32" : "ViscountSubstrataPipeline + GPU scaling + GHSL interp"})...`);
+      await population_Substrata_outlier_removal.processRasters({ exclude: sub_excl, only_projects: ["MANDALA"], concurrency: 2 });
+      if (skip_b3 && typeof ViscountSubstrataPipeline !== "undefined" && typeof ViscountSubstrataPipeline.E_preserveAllViscountDomainsInGlobalRasters === "function") {
+        console.log("[MANDALA StageE] 2b/5 Preserving MANDALA domain in rasters_3 & rasters_4...");
+        ViscountSubstrataPipeline.E_preserveAllViscountDomainsInGlobalRasters({ only_projects: ["MANDALA"] });
+      }
     } else {
       console.log("[MANDALA StageE] 2/5 Skipped ViscountSubstrataPipeline.");
     }

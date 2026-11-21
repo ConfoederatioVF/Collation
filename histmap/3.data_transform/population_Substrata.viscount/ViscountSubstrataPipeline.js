@@ -250,6 +250,7 @@ if (!global.population_Substrata_russia && typeof require !== "undefined") {
 
           for (let i = 0; i < discovery.contexts.length; i++) {
             let ctx = discovery.contexts[i];
+            if (Array.isArray(options.only_projects) && !options.only_projects.includes(ctx.key)) continue;
             for (let x = 0; x < ctx.valid_indices.length; x++) {
               let idx = ctx.valid_indices[x];
               let val = global.ViscountSubstrataMosaic.readPositiveFloat32(r2_png.data, r2_dv, idx*4);
@@ -314,10 +315,14 @@ if (!global.population_Substrata_russia && typeof require !== "undefined") {
       let options = (arg3_options) ? arg3_options : {};
 
       //Declare local instance variables
+      let active_zones_series = [];
       let calibrated_series = [];
       let hyde_years = (options.years) ? options.years : ((options.hyde_years) ? options.hyde_years : ctx.hyde_years);
       let start_ms = Date.now();
+      let temp_weight = (ctx.manifest && ctx.manifest.smoothing && Number.isFinite(ctx.manifest.smoothing.temporal_log_Laplacian_weight)) ?
+        ctx.manifest.smoothing.temporal_log_Laplacian_weight : 0.15;
       let urban_series = [];
+      let w_int_series = [];
       let year_summaries = {};
       let zone_targets_series = [];
 
@@ -327,9 +332,40 @@ if (!global.population_Substrata_russia && typeof require !== "undefined") {
         let urban_valid = rus.loadUrbanValidForYear(ctx, yr);
         let mosaic_valid = rus.B_mosaicKrigedSubstrataForYear(ctx, yr, urban_valid);
         let cal_obj = rus.C_computeCalibratedFieldForYear(ctx, mosaic_valid, yr, urban_valid);
+
+        active_zones_series.push(cal_obj.active_zone_of_v || null);
         calibrated_series.push(cal_obj.calibrated_rural);
         urban_series.push(urban_valid);
+        w_int_series.push(cal_obj.w_int || null);
         zone_targets_series.push(cal_obj.zone_targets || []);
+      }
+
+      //Temporal log-Laplacian smoothing with interior-pinned zone conservation (zero border cliffs)
+      let temporally_smoothed = calibrated_series.map(function (arg0_arr) { return new Float32Array(arg0_arr); });
+
+      for (let t = 1; t < hyde_years.length - 1; t++) {
+        let yr = hyde_years[t];
+        let prev_arr = calibrated_series[t - 1];
+        let curr_arr = calibrated_series[t];
+        let next_arr = calibrated_series[t + 1];
+        let out_arr = temporally_smoothed[t];
+        let dt_prev = Math.max(1, yr - hyde_years[t - 1]);
+        let dt_next = Math.max(1, hyde_years[t + 1] - yr);
+        let alpha_t = dt_prev/(dt_prev + dt_next);
+
+        for (let i = 0; i < ctx.n_valid; i++) {
+          let v_curr = curr_arr[i];
+          let v_prev = prev_arr[i];
+          let v_next = next_arr[i];
+
+          if (v_curr > 0 && v_prev > 0 && v_next > 0) {
+            let log_interp = (1 - alpha_t)*Math.log(v_prev) + alpha_t*Math.log(v_next);
+
+            out_arr[i] = Math.exp((1 - temp_weight)*Math.log(v_curr) + temp_weight*log_interp);
+          }
+        }
+        if (active_zones_series[t] && w_int_series[t])
+          global.ViscountSubstrataMosaic.conserveZoneTargetsInteriorPinned(out_arr, active_zones_series[t], w_int_series[t], zone_targets_series[t]);
       }
 
       if (!fs.existsSync(out_folder)) fs.mkdirSync(out_folder, { recursive: true });
@@ -342,36 +378,18 @@ if (!global.population_Substrata_russia && typeof require !== "undefined") {
 
         let base_png = PNG.sync.read(fs.readFileSync(src_path));
         let base_dv = new DataView(base_png.data.buffer, base_png.data.byteOffset, base_png.data.byteLength);
-        let cal_arr = calibrated_series[t];
+        let cal_arr = temporally_smoothed[t];
         let comb_arr = new Float32Array(ctx.n_valid);
         let sum_val = 0;
         let u_arr = urban_series[t];
-        let z_targets = zone_targets_series[t] || [];
 
         for (let i = 0; i < ctx.n_valid; i++) {
           let r_v = (cal_arr[i] > 0) ? cal_arr[i] : 0;
 
           comb_arr[i] = (yr <= 0) ? Math.max(r_v, u_arr[i]) : r_v;
         }
-
-        if (ctx.pixel_to_valid) {
-          for (let z_idx = 0; z_idx < z_targets.length; z_idx++) {
-            let zt = z_targets[z_idx];
-            let z_comb = 0;
-
-            for (let x = 0; x < zt.pixels.length; x++) {
-              let v_idx = ctx.pixel_to_valid[zt.pixels[x]];
-              if (v_idx >= 0) z_comb += comb_arr[v_idx];
-            }
-            if (z_comb > 0 && zt.target_pop >= 0) {
-              let z_sc = zt.target_pop/z_comb;
-              for (let x = 0; x < zt.pixels.length; x++) {
-                let v_idx = ctx.pixel_to_valid[zt.pixels[x]];
-                if (v_idx >= 0) comb_arr[v_idx] *= z_sc;
-              }
-            }
-          }
-        }
+        if (yr <= 0 && active_zones_series[t] && w_int_series[t])
+          global.ViscountSubstrataMosaic.conserveZoneTargetsInteriorPinned(comb_arr, active_zones_series[t], w_int_series[t], zone_targets_series[t]);
 
         for (let i = 0; i < ctx.n_valid; i++) {
           let idx = ctx.valid_indices[i];

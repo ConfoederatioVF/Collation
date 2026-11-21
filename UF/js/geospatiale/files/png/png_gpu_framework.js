@@ -667,6 +667,7 @@
         "accumulate_positive_f32",
         "binary_op_be_rgba",
         "clamp_cohort_be_rgba",
+        "convert_f32_to_u32_be_rgba",
         "reconcile_pass1_be_rgba",
         "reconcile_pass2_be_rgba",
         "reduce_sum_be_rgba",
@@ -850,6 +851,8 @@
     GeoPNG.gpu._last_rec_mask_ref = null;
     GeoPNG.gpu._last_rscale_ids_ref = null;
     GeoPNG.gpu._last_rsum_ids_ref = null;
+    GeoPNG.gpu._last_velk_ga_ref = null;
+    GeoPNG.gpu._last_velk_gb_ref = null;
     GeoPNG.gpu._last_velk_static_key = null;
   };
 
@@ -971,12 +974,12 @@
       GeoPNG.gpu._buffer_pool.delete(key);
     }
 
-    if (include_pinned) {
-      GeoPNG.gpu._last_rec_mask_ref = null;
-      GeoPNG.gpu._last_rscale_ids_ref = null;
-      GeoPNG.gpu._last_rsum_ids_ref = null;
-      GeoPNG.gpu._last_velk_static_key = null;
-    }
+    GeoPNG.gpu._last_rec_mask_ref = null;
+    GeoPNG.gpu._last_rscale_ids_ref = null;
+    GeoPNG.gpu._last_rsum_ids_ref = null;
+    GeoPNG.gpu._last_velk_ga_ref = null;
+    GeoPNG.gpu._last_velk_gb_ref = null;
+    GeoPNG.gpu._last_velk_static_key = null;
   };
 
   if (typeof require !== "undefined" && !GeoPNG.gpu.reconcileDemographicsRGBA) {

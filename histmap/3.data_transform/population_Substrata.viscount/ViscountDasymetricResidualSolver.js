@@ -543,12 +543,16 @@ let { ViscountKrigingGPU } = global.ViscountKrigingGPU ? global : require("./Vis
       let target_mass = Number(arg3_target_mass) || 0;
 
       //Declare local instance variables
+      let { ViscountCentaurDasymetricDetail } = global.ViscountCentaurDasymetricDetail ?
+        global : require(path.join(__dirname, "centaur/ViscountCentaurDasymetricDetail.js"));
       let { ViscountHUResidualHelpers } = global.ViscountHUResidualHelpers ?
         global : require(path.join(__dirname, "centaur/ViscountHUResidualHelpers.js"));
       let { ViscountHUResidualKriging } = global.ViscountHUResidualKriging ?
         global : require(path.join(__dirname, "centaur/ViscountHUResidualKriging.js"));
       let bio_covs = surface.bio_covs;
       let bundle = surface.kriging_bundle;
+      let cdd_cfg = (surface.hu_ctx && surface.hu_ctx.centaur_dasymetric_detail && surface.hu_ctx.centaur_dasymetric_detail.enabled) ?
+        surface.hu_ctx.centaur_dasymetric_detail : null;
       let cell_area = bundle.mask_data.cell_land_area;
       let hab_mask = bio_covs.hab_mask;
       let hu_ctx = surface.hu_ctx;
@@ -597,6 +601,8 @@ let { ViscountKrigingGPU } = global.ViscountKrigingGPU ? global : require("./Vis
         out_field[i] = v;
         raw_sum += v;
       }
+      if (cdd_cfg)
+        ViscountCentaurDasymetricDetail.D_applyPycnophylacticDasymetricSharpening(bundle.mask_data, bio_covs, hu_ctx, out_field, prior_b.d_decliff, cdd_cfg);
       if (yr <= 1850 && bio_covs.uopp_valid)
         ViscountHUResidualHelpers.capUrbanCoreSmooth(bundle.mask_data, out_field, bio_covs.uopp_valid, 0.94);
       if (hab_mask)

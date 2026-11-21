@@ -189,11 +189,14 @@
       let urban_valid = (arg3_urban_valid) ? arg3_urban_valid : new Float32Array(context.n_valid);
 
       //Declare local instance variables
-      let blur_passes = (context.manifest.smoothing && context.manifest.smoothing.interior_multiplier_blur_passes) || 2;
-      let blur_radius = (context.manifest.smoothing && context.manifest.smoothing.interior_multiplier_blur_radius_px) || 4;
+      let active_zone_of_v = new Int32Array(context.n_valid).fill(-1);
+      let blur_passes = (context.manifest.smoothing && context.manifest.smoothing.interior_multiplier_blur_passes) || 3;
+      let blur_radius = (context.manifest.smoothing && context.manifest.smoothing.interior_multiplier_blur_radius_px) || 10;
       let calibrated = new Float32Array(context.n_valid);
+      let has_mult = new Uint8Array(context.n_valid);
       let height = context.height;
       let log_mult = new Float32Array(context.n_valid);
+      let mosaic_mod = global.ViscountSubstrataMosaic || require(path.resolve(__dirname, "../population_Substrata.viscount/ViscountSubstrataMosaic.js")).ViscountSubstrataMosaic;
       let n_valid = context.n_valid;
       let pixel_domain = context.pixel_domain;
       let px_to_valid = context.pixel_to_valid;
@@ -205,7 +208,7 @@
       for (let i = 0; i < n_valid; i++)
         calibrated[i] = (mosaic_valid[i] > 0) ? mosaic_valid[i] : 0;
 
-      //1. Priority 2 Specialist Masks calibration (subtracting urban settlement sum per zone with rural hinterland floor)
+      //1. Priority 2 Specialist Masks calibration
       for (let i = 0; i < context.specialist_entries.length; i++) {
         let s_entry = context.specialist_entries[i];
         if (year < s_entry.domain[0] || year > s_entry.domain[1]) continue;
@@ -217,6 +220,7 @@
           let raw_target_pop = this.resolveZoneTargetPopulation(z.population, year);
           if (raw_target_pop < 0) continue;
           let target_pop = raw_target_pop*(z.domain_fraction !== undefined ? z.domain_fraction : 1.0);
+          let z_id = zone_targets.length;
 
           let current_sum = 0;
           for (let y = 0; y < z.pixels.length; y++) {
@@ -236,6 +240,8 @@
               let w = (sub_weights && sub_weights.has(p_idx)) ? sub_weights.get(p_idx) : 1.0;
               let eff_s = Math.max(1e-6, Math.min(1e6, scalar*w));
               log_mult[v_idx] = Math.log(eff_s);
+              has_mult[v_idx] = 1;
+              active_zone_of_v[v_idx] = z_id;
             }
           }
 
@@ -243,12 +249,13 @@
             domain_code: s_entry.domain_code,
             max_year: s_entry.domain[1],
             pixels: z.pixels,
+            rural_target_pop: target_pop,
             target_pop: target_pop
           });
         }
       }
 
-      //2. Priority 1 Macro-Mask (`migration_period`) residual calibration on uncovered Russia pixels
+      //2. Priority 1 Macro-Mask (`migration_period`) residual calibration on genuinely uncovered macro-zones (skipping narrow inter-mask gap slivers < 22%)
       if (context.macro_entry) {
         let m_entry = context.macro_entry;
         let m_year = Math.max(m_entry.domain[0], Math.min(m_entry.domain[1], year));
@@ -279,7 +286,8 @@
             }
           }
 
-          if (uncovered_pixels.length > 0 && uncovered_raw_sum > 0) {
+          let uncov_frac = uncovered_pixels.length/Math.max(1, mz.pixels.length);
+          if (uncovered_pixels.length > 0 && uncovered_raw_sum > 0 && uncov_frac >= 0.22) {
             let covered_total_sum = covered_rural_sum;
             let residual_total_target;
             if (year >= m_entry.domain[0]) {
@@ -316,16 +324,22 @@
               residual_total_target = Math.max(uncovered_raw_sum*0.40, res_100*ratio_pre);
             }
             let residual_rural_target = residual_total_target;
-            let res_scalar = Math.max(0.35, Math.min(6.0, residual_rural_target/uncovered_raw_sum));
+            let res_scalar = Math.max(0.40, Math.min(2.50, residual_rural_target/uncovered_raw_sum));
             let res_log = Math.log(res_scalar);
+            let z_id = zone_targets.length;
             for (let y = 0; y < uncovered_pixels.length; y++) {
               let v_idx = px_to_valid[uncovered_pixels[y]];
-              if (v_idx >= 0 && calibrated[v_idx] > 0) log_mult[v_idx] = res_log;
+              if (v_idx >= 0 && calibrated[v_idx] > 0) {
+                log_mult[v_idx] = res_log;
+                has_mult[v_idx] = 1;
+                active_zone_of_v[v_idx] = z_id;
+              }
             }
             zone_targets.push({
               domain_code: 1,
               max_year: 1900,
               pixels: uncovered_pixels,
+              rural_target_pop: Math.min(residual_rural_target, res_scalar*uncovered_raw_sum),
               target_pop: Math.min(residual_rural_target, res_scalar*uncovered_raw_sum)
             });
           }
@@ -335,9 +349,14 @@
       //2b. Priority 3 National Epoch Masks (`1400..2026 AD`) calibration across both `dom === 1` and `dom === 2`
       if (year >= 1400 && context.national_epoch_entries && context.national_epoch_entries.length > 0) {
         if (year <= 1900) {
+          //Smooth Priority 1+2 log-multipliers FIRST (including harmonic fill of inter-mask gaps) before baking into `calibrated`
+          population_Substrata_russia_masks.fillUnsetLogMultHarmonic(context, log_mult, has_mult, calibrated);
+          population_Substrata_russia_masks.smoothLogMultTent(context, log_mult, calibrated, Math.max(8, blur_radius), Math.max(3, blur_passes));
           for (let i = 0; i < n_valid; i++)
             calibrated[i] = (calibrated[i] > 0) ? calibrated[i]*Math.exp(log_mult[i]) : 0;
           log_mult.fill(0);
+          has_mult.fill(0);
+          active_zone_of_v.fill(-1);
           zone_targets = [];
         }
 
@@ -355,6 +374,7 @@
             let raw_target_pop = this.resolveZoneTargetPopulation(nz.population, year);
             if (raw_target_pop < 0) continue;
             let p3_target_pop = raw_target_pop*(nz.domain_fraction !== undefined ? nz.domain_fraction : 1.0);
+            let z_id = zone_targets.length;
 
             let current_sum = 0;
             let spec_px_count = 0;
@@ -386,88 +406,66 @@
 
             for (let y = 0; y < nz.pixels.length; y++) {
               let v_idx = px_to_valid[nz.pixels[y]];
-              if (v_idx >= 0 && calibrated[v_idx] > 0) log_mult[v_idx] = eff_log;
+              if (v_idx >= 0 && calibrated[v_idx] > 0) {
+                log_mult[v_idx] = eff_log;
+                has_mult[v_idx] = 1;
+                active_zone_of_v[v_idx] = z_id;
+              }
             }
 
             zone_targets.push({
               domain_code: (nz.dom2_pixels.length > nz.dom1_pixels.length) ? 2 : 1,
               max_year: active_nat_entry.domain[1],
               pixels: nz.pixels,
+              rural_target_pop: target_pop,
               target_pop: target_pop
             });
           }
         }
       }
 
-      //3. Spatially smooth `log_mult` across internal and cross-domain (`dom 1 <-> dom 2`) boundaries
-      for (let p = 0; p < blur_passes; p++) {
-        let horiz = new Float32Array(n_valid);
-        for (let i = 0; i < n_valid; i++) {
-          if (calibrated[i] <= 0) { horiz[i] = 0; continue; }
-          let idx = valid_indices[i];
-          let row_start = Math.floor(idx/width)*width;
-          let c = idx % width;
-          let c0 = Math.max(0, c - blur_radius);
-          let c1 = Math.min(width - 1, c + blur_radius);
-          let sum = 0;
-          let cnt = 0;
-          for (let cx = c0; cx <= c1; cx++) {
-            let n_idx = row_start + cx;
-            if (pixel_domain[n_idx] > 0) {
-              let nv = px_to_valid[n_idx];
-              if (nv >= 0 && calibrated[nv] > 0) {
-                sum += log_mult[nv];
-                cnt++;
-              }
-            }
-          }
-          horiz[i] = (cnt > 0) ? (sum/cnt) : log_mult[i];
-        }
+      //3. Iterative C^2 separable-tent Gaussian log-multiplier calibration across internal & cross-domain boundaries
+      let base_cal = Float32Array.from(calibrated);
+
+      population_Substrata_russia_masks.fillUnsetLogMultHarmonic(context, log_mult, has_mult, base_cal);
+      population_Substrata_russia_masks.smoothLogMultTent(context, log_mult, base_cal, blur_radius, blur_passes);
+
+      for (let iter = 0; iter < 3; iter++) {
+        let iter_rad = (iter === 0) ? blur_radius : Math.max(6, Math.round(blur_radius*0.75));
+        let iter_passes = (iter === 0) ? blur_passes : 2;
+        let zone_sums = new Float64Array(zone_targets.length);
 
         for (let i = 0; i < n_valid; i++) {
-          if (calibrated[i] <= 0) { log_mult[i] = 0; continue; }
-          let idx = valid_indices[i];
-          let r = Math.floor(idx/width);
-          let c = idx % width;
-          let r0 = Math.max(0, r - blur_radius);
-          let r1 = Math.min(height - 1, r + blur_radius);
-          let sum = 0;
-          let cnt = 0;
-          for (let ry = r0; ry <= r1; ry++) {
-            let n_idx = ry*width + c;
-            if (pixel_domain[n_idx] > 0) {
-              let nv = px_to_valid[n_idx];
-              if (nv >= 0 && calibrated[nv] > 0) {
-                sum += horiz[nv];
-                cnt++;
-              }
+          let zid = active_zone_of_v[i];
+
+          if (zid >= 0 && base_cal[i] > 0)
+            zone_sums[zid] += base_cal[i]*Math.exp(log_mult[i]);
+        }
+        for (let z = 0; z < zone_targets.length; z++) {
+          let zt = zone_targets[z];
+
+          if (zone_sums[z] > 0 && zt.target_pop > 0) {
+            let dz = Math.max(-1.8, Math.min(1.8, 0.80*Math.log(zt.target_pop/zone_sums[z])));
+
+            for (let x = 0; x < zt.pixels.length; x++) {
+              let v_idx = px_to_valid[zt.pixels[x]];
+
+              if (v_idx >= 0 && base_cal[v_idx] > 0) log_mult[v_idx] += dz;
             }
           }
-          log_mult[i] = (cnt > 0) ? (sum/cnt) : horiz[i];
         }
+        population_Substrata_russia_masks.smoothLogMultTent(context, log_mult, base_cal, iter_rad, iter_passes);
       }
 
-      //4. Apply smoothed multipliers and re-normalise each zone so regional rural totals are conserved
+      //4. Apply C^2-smooth multipliers and conserve residual zone mass strictly in zone interiors (zero border cliffs)
       for (let i = 0; i < n_valid; i++)
-        calibrated[i] = (calibrated[i] > 0) ? calibrated[i]*Math.exp(log_mult[i]) : 0;
+        calibrated[i] = (base_cal[i] > 0) ? Math.max(1e-4, base_cal[i]*Math.exp(log_mult[i])) : 0;
 
-      for (let i = 0; i < zone_targets.length; i++) {
-        let zt = zone_targets[i];
-        let z_sum = 0;
-        for (let x = 0; x < zt.pixels.length; x++) {
-          let v_idx = px_to_valid[zt.pixels[x]];
-          if (v_idx >= 0) z_sum += calibrated[v_idx];
-        }
-        if (z_sum > 0 && zt.target_pop >= 0) {
-          let corr = zt.target_pop/z_sum;
-          for (let x = 0; x < zt.pixels.length; x++) {
-            let v_idx = px_to_valid[zt.pixels[x]];
-            if (v_idx >= 0 && calibrated[v_idx] > 0) calibrated[v_idx] = calibrated[v_idx]*corr;
-          }
-        }
-      }
+      let w_int = mosaic_mod.computeZoneInteriorWeights(context, active_zone_of_v);
 
-      //5. Cross-domain (`dom 1 <-> dom 2`) seam blending within 6 pixels of internal borders
+      mosaic_mod.conserveZoneTargetsInteriorPinned(calibrated, active_zone_of_v, w_int, zone_targets);
+
+      //5. Cross-domain (`dom 1 <-> dom 2`) smooth multiplicative log-ratio seam blend within 8 pixels of internal borders
       {
         let seam_copy = new Float32Array(calibrated);
         for (let i = 0; i < n_valid; i++) {
@@ -476,9 +474,12 @@
           let idx = valid_indices[i];
           let r = Math.floor(idx/width);
           let c = idx % width;
-          let rad = 4;
-          let log_sum = 0;
-          let w_sum = 0;
+          let rad = 5;
+          let dom_i = pixel_domain[idx];
+          let own_sum = 0;
+          let own_w = 0;
+          let jnt_sum = 0;
+          let jnt_w = 0;
           for (let dy = -rad; dy <= rad; dy++) {
             let ry = r + dy;
             if (ry < 0 || ry >= height) continue;
@@ -490,25 +491,31 @@
                 let nv = px_to_valid[n_idx];
                 if (nv >= 0 && seam_copy[nv] > 0) {
                   let d2 = dx*dx + dy*dy;
-                  let w = Math.exp(-d2/8.0);
-                  log_sum += w*Math.log(seam_copy[nv]);
-                  w_sum += w;
+                  let w = Math.exp(-d2/10.0);
+                  let lv = Math.log(seam_copy[nv]);
+                  jnt_sum += w*lv;
+                  jnt_w += w;
+                  if (pixel_domain[n_idx] === dom_i) {
+                    own_sum += w*lv;
+                    own_w += w;
+                  }
                 }
               }
             }
           }
-          if (w_sum > 0 && seam_copy[i] > 0) {
-            let blend_w = 0.65*(1 - (cd - 1)/6.0);
-            let log_orig = Math.log(seam_copy[i]);
-            let log_smooth = log_sum/w_sum;
-            calibrated[i] = Math.exp((1 - blend_w)*log_orig + blend_w*log_smooth);
+          if (jnt_w > 0 && own_w > 0 && seam_copy[i] > 0) {
+            let blend_w = 0.75*(1 - (cd - 1)/6.0);
+            let delta_log = Math.max(-0.85, Math.min(0.85, (jnt_sum/jnt_w) - (own_sum/own_w)));
+            calibrated[i] = Math.max(1e-4, seam_copy[i]*Math.exp(blend_w*delta_log));
           }
         }
       }
 
       //Return statement
       return {
+        active_zone_of_v: active_zone_of_v,
         calibrated_rural: calibrated,
+        w_int: w_int,
         zone_targets: zone_targets
       };
     }
@@ -738,9 +745,11 @@
       let options = (arg0_options) ? arg0_options : {};
 
       //Declare local instance variables
+      let active_zones_series = [];
       let calibrated_series = [];
       let context = this.A_loadManifestAndMasks(options);
       let hyde_years = (options.years) ? options.years : ((options.hyde_years) ? options.hyde_years : context.hyde_years);
+      let mosaic_mod = global.ViscountSubstrataMosaic || require(path.resolve(__dirname, "../population_Substrata.viscount/ViscountSubstrataMosaic.js")).ViscountSubstrataMosaic;
       let n_valid = context.n_valid;
       let n_years = hyde_years.length;
       let out_folder = options.output_folder ?
@@ -751,6 +760,7 @@
       let temp_weight = (context.manifest.smoothing && Number.isFinite(context.manifest.smoothing.temporal_log_Laplacian_weight)) ?
         context.manifest.smoothing.temporal_log_Laplacian_weight : 0.15;
       let urban_series = [];
+      let w_int_series = [];
       let year_summaries = {};
       let zone_targets_series = [];
 
@@ -762,8 +772,10 @@
         let urban_valid = this.loadUrbanValidForYear(context, yr);
         let mosaic_valid = this.B_mosaicKrigedSubstrataForYear(context, yr, urban_valid);
         let cal_obj = this.C_computeCalibratedFieldForYear(context, mosaic_valid, yr, urban_valid);
+        active_zones_series.push(cal_obj.active_zone_of_v || null);
         calibrated_series.push(cal_obj.calibrated_rural);
         urban_series.push(urban_valid);
+        w_int_series.push(cal_obj.w_int || null);
         zone_targets_series.push(cal_obj.zone_targets);
       }
 
@@ -789,22 +801,8 @@
           }
         }
 
-        let z_targets = zone_targets_series[t];
-        for (let z_idx = 0; z_idx < z_targets.length; z_idx++) {
-          let zt = z_targets[z_idx];
-          let z_sum = 0;
-          for (let x = 0; x < zt.pixels.length; x++) {
-            let v_idx = px_to_valid[zt.pixels[x]];
-            if (v_idx >= 0) z_sum += out_arr[v_idx];
-          }
-          if (z_sum > 0 && zt.target_pop >= 0) {
-            let corr = zt.target_pop/z_sum;
-            for (let x = 0; x < zt.pixels.length; x++) {
-              let v_idx = px_to_valid[zt.pixels[x]];
-              if (v_idx >= 0 && out_arr[v_idx] > 0) out_arr[v_idx] = out_arr[v_idx]*corr;
-            }
-          }
-        }
+        if (active_zones_series[t] && w_int_series[t])
+          mosaic_mod.conserveZoneTargetsInteriorPinned(out_arr, active_zones_series[t], w_int_series[t], zone_targets_series[t]);
       }
 
       if (!fs.existsSync(out_folder)) fs.mkdirSync(out_folder, { recursive: true });
@@ -865,22 +863,8 @@
           comb_arr[i] = (yr <= 0) ? Math.max(r_feathered, u_val) : r_feathered;
         }
 
-        let z_targets = zone_targets_series[t];
-        for (let z_idx = 0; z_idx < z_targets.length; z_idx++) {
-          let zt = z_targets[z_idx];
-          let z_comb = 0;
-          for (let x = 0; x < zt.pixels.length; x++) {
-            let v_idx = px_to_valid[zt.pixels[x]];
-            if (v_idx >= 0) z_comb += comb_arr[v_idx];
-          }
-          if (z_comb > 0 && zt.target_pop >= 0) {
-            let z_sc = zt.target_pop/z_comb;
-            for (let x = 0; x < zt.pixels.length; x++) {
-              let v_idx = px_to_valid[zt.pixels[x]];
-              if (v_idx >= 0) comb_arr[v_idx] *= z_sc;
-            }
-          }
-        }
+        if (active_zones_series[t] && w_int_series[t])
+          mosaic_mod.conserveZoneTargetsInteriorPinned(comb_arr, active_zones_series[t], w_int_series[t], zone_targets_series[t]);
 
         for (let i = 0; i < n_valid; i++) {
           let idx = context.valid_indices[i];

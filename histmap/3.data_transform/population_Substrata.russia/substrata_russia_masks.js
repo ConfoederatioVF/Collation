@@ -670,6 +670,150 @@
       width: width
     };
   };
+
+
+  /**
+   * Harmonically relaxes unset log-multiplier pixels (e.g. narrow inter-mask gaps) from neighbouring
+   * calibrated pixels using 8-neighbour Laplace diffusion so zero-multiplier trenches never form.
+   * @alias population_Substrata_russia_masks.fillUnsetLogMultHarmonic
+   *
+   * @param {Object} arg0_context
+   * @param {Float32Array} arg1_log_mult
+   * @param {Uint8Array} arg2_has_mult
+   * @param {Float32Array} arg3_active_arr
+   */
+  global.population_Substrata_russia_masks.fillUnsetLogMultHarmonic = function (arg0_context, arg1_log_mult, arg2_has_mult, arg3_active_arr) {
+    //Convert from parameters
+    let context = arg0_context;
+    let log_mult = arg1_log_mult;
+    let has_mult = arg2_has_mult;
+    let active_arr = arg3_active_arr;
+
+    //Declare local instance variables
+    let height = context.height;
+    let n_valid = context.n_valid;
+    let px_to_valid = context.pixel_to_valid;
+    let unset_list = [];
+    let valid_indices = context.valid_indices;
+    let width = context.width;
+
+    //Function body
+    for (let i = 0; i < n_valid; i++)
+      if (active_arr[i] > 0 && has_mult[i] === 0) unset_list.push(i);
+    if (unset_list.length === 0) return;
+
+    for (let iter = 0; iter < 24; iter++) {
+      for (let k = 0; k < unset_list.length; k++) {
+        let i = unset_list[k];
+        let g = valid_indices[i];
+        let cx = g % width;
+        let cy = Math.floor(g/width);
+        let acc = 0;
+        let wsum = 0;
+
+        for (let dy = -1; dy <= 1; dy++) {
+          let nr = cy + dy;
+
+          if (nr < 0 || nr >= height) continue;
+          for (let dx = -1; dx <= 1; dx++) {
+            if (dx === 0 && dy === 0) continue;
+            let nc = cx + dx;
+
+            if (nc < 0 || nc >= width) continue;
+            let nv = px_to_valid[nr*width + nc];
+
+            if (nv >= 0 && active_arr[nv] > 0 && (has_mult[nv] === 1 || iter > 0)) {
+              let w_n = (dx === 0 || dy === 0) ? 1.0 : 0.5;
+
+              acc += w_n*log_mult[nv];
+              wsum += w_n;
+            }
+          }
+        }
+        if (wsum > 0) log_mult[i] = acc/wsum;
+      }
+    }
+  };
+
+
+  /**
+   * Applies multi-pass separable tent (approximate $C^2$ Gaussian) smoothing in place to a valid-pixel
+   * log-multiplier array without bleeding across domain zero masks.
+   * @alias population_Substrata_russia_masks.smoothLogMultTent
+   *
+   * @param {Object} arg0_context
+   * @param {Float32Array} arg1_log_mult
+   * @param {Float32Array} arg2_active_arr
+   * @param {number} arg3_radius_px
+   * @param {number} arg4_passes
+   */
+  global.population_Substrata_russia_masks.smoothLogMultTent = function (arg0_context, arg1_log_mult, arg2_active_arr, arg3_radius_px, arg4_passes) {
+    //Convert from parameters
+    let context = arg0_context;
+    let cur = arg1_log_mult;
+    let active_arr = arg2_active_arr;
+    let rad = Math.max(1, Number(arg3_radius_px) || 1);
+    let passes = Math.max(1, Number(arg4_passes) || 1);
+
+    //Declare local instance variables
+    let height = context.height;
+    let horiz = new Float32Array(context.n_valid);
+    let n_valid = context.n_valid;
+    let pixel_domain = context.pixel_domain;
+    let px_to_valid = context.pixel_to_valid;
+    let valid_indices = context.valid_indices;
+    let width = context.width;
+
+    //Function body
+    for (let p = 0; p < passes; p++) {
+      for (let i = 0; i < n_valid; i++) {
+        if (active_arr[i] <= 0) { horiz[i] = 0; continue; }
+        let idx = valid_indices[i];
+        let row_start = Math.floor(idx/width)*width;
+        let c = idx % width;
+        let c0 = Math.max(0, c - rad);
+        let c1 = Math.min(width - 1, c + rad);
+        let sum = 0;
+        let wsum = 0;
+
+        for (let cx = c0; cx <= c1; cx++) {
+          let n_idx = row_start + cx;
+          if (pixel_domain[n_idx] > 0) {
+            let nv = px_to_valid[n_idx];
+            if (nv >= 0 && active_arr[nv] > 0) {
+              let wt = rad + 1 - Math.abs(cx - c);
+              sum += cur[nv]*wt;
+              wsum += wt;
+            }
+          }
+        }
+        horiz[i] = (wsum > 0) ? (sum/wsum) : cur[i];
+      }
+      for (let i = 0; i < n_valid; i++) {
+        if (active_arr[i] <= 0) { cur[i] = 0; continue; }
+        let idx = valid_indices[i];
+        let r = Math.floor(idx/width);
+        let c = idx % width;
+        let r0 = Math.max(0, r - rad);
+        let r1 = Math.min(height - 1, r + rad);
+        let sum = 0;
+        let wsum = 0;
+
+        for (let ry = r0; ry <= r1; ry++) {
+          let n_idx = ry*width + c;
+          if (pixel_domain[n_idx] > 0) {
+            let nv = px_to_valid[n_idx];
+            if (nv >= 0 && active_arr[nv] > 0) {
+              let wt = rad + 1 - Math.abs(ry - r);
+              sum += horiz[nv]*wt;
+              wsum += wt;
+            }
+          }
+        }
+        cur[i] = (wsum > 0) ? (sum/wsum) : horiz[i];
+      }
+    }
+  };
 }
 
 if (typeof module !== "undefined" && module.exports)
