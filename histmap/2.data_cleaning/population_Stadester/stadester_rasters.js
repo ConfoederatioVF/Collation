@@ -651,6 +651,148 @@
 
 
   /**
+   * Streams partitioned Stadestér shards one file at a time, retaining only cities whose peak population reaches
+   * `min_urban_raster_population` alongside lightweight `{ _px, _min_yr, _max_yr, coords, population, radial_buffers }`.
+   * Avoids multi-gigabyte V8 heap exhaustion when global Viscount gazetteers exceed 250k settlements.
+   * @alias population_Stadester_rasters.loadStadesterUrbanList
+   *
+   * @param {Object} [arg0_options]
+   *
+   * @returns {Array<Object>}
+   */
+  population_Stadester_rasters.loadStadesterUrbanList = function (arg0_options) {
+    //Convert from parameters
+    let options = (arg0_options) ? arg0_options : {};
+
+    //Declare local instance variables
+    let cfg = global.population_Stadester_config;
+    let default_transform_path = (typeof h3 !== "undefined") ?
+      path.join(`${h3}/population_Stadester.transform/stadester/`) :
+      path.resolve(__dirname, "../../3.data_transform/population_Stadester.transform/stadester");
+    let dump_mtime = 0;
+    let dump_path = options.stadester_file_path || default_transform_path;
+    let legacy_path = path.join(`${h1}/population_Stadester/uud/`, "stadester.json");
+    let min_urban_population = (options.min_urban_raster_population !== undefined) ?
+      options.min_urban_raster_population :
+      ((cfg && cfg.min_urban_raster_population !== undefined) ? cfg.min_urban_raster_population : 5000);
+    let partition_io = global.StadesterPartitionIO;
+    let urban_list = [];
+
+    //Guard clauses
+    if (options.stadester_obj) {
+      let keys = Object.keys(options.stadester_obj);
+      for (let i = 0; i < keys.length; i++) {
+        let city = options.stadester_obj[keys[i]];
+        if (!city || !city.coords || !city.population) continue;
+        let pop_keys = Object.keys(city.population).map(Number).filter(Number.isFinite);
+        if (pop_keys.length === 0) continue;
+        let peak_pop = 0;
+        for (let x = 0; x < pop_keys.length; x++) {
+          let pv = parseFloat(city.population[pop_keys[x]]) || 0;
+          if (pv > peak_pop) peak_pop = pv;
+        }
+        if (peak_pop < min_urban_population) continue;
+        let px = city._px || population_Stadester_rasters.getCoordsPixel(city.coords);
+        urban_list.push({
+          _max_yr: Math.max(...pop_keys),
+          _min_yr: Math.min(...pop_keys),
+          _px: px,
+          coords: city.coords,
+          population: city.population,
+          radial_buffers: city.radial_buffers
+        });
+      }
+      return urban_list;
+    }
+
+    //Function body
+    if (partition_io) {
+      if (!partition_io.hasDataset(dump_path) && partition_io.hasDataset(legacy_path))
+        dump_path = legacy_path;
+      if (!partition_io.hasDataset(dump_path)) return urban_list;
+
+      dump_mtime = partition_io.getDatasetMtimeMs(dump_path);
+      let cache_key = `${dump_path}|${min_urban_population}`;
+      if (global._cached_stadester_urban_list && global._cached_stadester_urban_key === cache_key && global._cached_stadester_urban_mtime === dump_mtime)
+        return global._cached_stadester_urban_list;
+
+      let target = partition_io.resolveDatasetTarget(dump_path);
+      if (target && target.mode === "partitioned") {
+        let manifest = JSON.parse(fs.readFileSync(target.manifest_path, "utf8"));
+        let regions = Array.isArray(manifest.regions) ? manifest.regions : [];
+
+        for (let i = 0; i < regions.length; i++) {
+          let files = Array.isArray(regions[i].files) ? regions[i].files : [];
+          for (let x = 0; x < files.length; x++) {
+            let shard_path = path.join(target.dir_path, files[x]);
+            if (!fs.existsSync(shard_path)) continue;
+            let shard_obj = JSON.parse(fs.readFileSync(shard_path, "utf8"));
+            let shard_keys = Object.keys(shard_obj);
+
+            for (let y = 0; y < shard_keys.length; y++) {
+              let city = shard_obj[shard_keys[y]];
+              if (!city || !city.coords || !city.population) continue;
+              let pop_keys = Object.keys(city.population).map(Number).filter(Number.isFinite);
+              if (pop_keys.length === 0) continue;
+              let peak_pop = 0;
+              for (let z = 0; z < pop_keys.length; z++) {
+                let pv = parseFloat(city.population[pop_keys[z]]) || 0;
+                if (pv > peak_pop) peak_pop = pv;
+              }
+              if (peak_pop < min_urban_population) continue;
+              let px = population_Stadester_rasters.getCoordsPixel(city.coords);
+              urban_list.push({
+                _max_yr: Math.max(...pop_keys),
+                _min_yr: Math.min(...pop_keys),
+                _px: px,
+                coords: city.coords,
+                population: city.population,
+                radial_buffers: city.radial_buffers
+              });
+            }
+          }
+        }
+        global._cached_stadester_urban_list = urban_list;
+        global._cached_stadester_urban_key = cache_key;
+        global._cached_stadester_urban_mtime = dump_mtime;
+
+        //Return statement
+        return urban_list;
+      }
+    }
+
+    let fallback_obj = population_Stadester_rasters.loadStadesterObject(options);
+    if (fallback_obj) {
+      let keys = Object.keys(fallback_obj);
+      for (let i = 0; i < keys.length; i++) {
+        let city = fallback_obj[keys[i]];
+        if (!city || !city.coords || !city.population) continue;
+        let pop_keys = Object.keys(city.population).map(Number).filter(Number.isFinite);
+        if (pop_keys.length === 0) continue;
+        let peak_pop = 0;
+        for (let x = 0; x < pop_keys.length; x++) {
+          let pv = parseFloat(city.population[pop_keys[x]]) || 0;
+          if (pv > peak_pop) peak_pop = pv;
+        }
+        if (peak_pop < min_urban_population) continue;
+        let px = city._px || population_Stadester_rasters.getCoordsPixel(city.coords);
+        urban_list.push({
+          _max_yr: Math.max(...pop_keys),
+          _min_yr: Math.min(...pop_keys),
+          _px: px,
+          coords: city.coords,
+          population: city.population,
+          radial_buffers: city.radial_buffers
+        });
+      }
+    }
+
+    //Return statement
+    return urban_list;
+  };
+
+
+  /**
    * Generates Stadestér Base raster for a single year in float32 format.
    * @alias population_Stadester_rasters.generateStadesterBaseRaster
    * 
@@ -665,7 +807,6 @@
     let options = (arg1_options) ? arg1_options : {};
     
     //Declare local instance variables
-    let all_city_keys;
     let base_folder = options.intermediate_base_folder || `${h2}/population_Stadester/stadester_base_rasters/`;
     let base_raster_data = new Float32Array(4320*2160);
     let cfg = global.population_Stadester_config;
@@ -673,10 +814,9 @@
       options.min_urban_raster_population :
       ((cfg && cfg.min_urban_raster_population !== undefined) ? cfg.min_urban_raster_population : 5000);
     let output_file_path = path.join(base_folder, `stadester_base_${year}.png`);
-    let pixel_dictionary = {};
-    let stadester_obj = population_Stadester_rasters.loadStadesterObject(options);
     let substrata_file_path;
     let substrata_raster;
+    let urban_list = population_Stadester_rasters.loadStadesterUrbanList(options);
     
     //Guard clauses
     if (year < -10000) {
@@ -701,18 +841,16 @@
     if (fs.existsSync(substrata_file_path))
       substrata_raster = await GeoPNG.loadNumberRasterImageAsync(substrata_file_path, { format: "float32" });
     
-    if (!stadester_obj) return output_file_path;
-    all_city_keys = Object.keys(stadester_obj);
+    if (!urban_list || urban_list.length === 0) return output_file_path;
     
     //Bin cities by integer pixel index (avoids string key allocation & split)
     let pixel_map = new Map();
-    for (let i = 0; i < all_city_keys.length; i++) {
-      let city = stadester_obj[all_city_keys[i]];
+    for (let i = 0; i < urban_list.length; i++) {
+      let city = urban_list[i];
       if (!city || !city.coords || !city.population) continue;
       
-      let pop_keys = city._pop_keys || (city._pop_keys = Object.keys(city.population).map(Number));
-      let min_yr = (city._min_yr !== undefined) ? city._min_yr : (city._min_yr = Math.min(...pop_keys));
-      let max_yr = (city._max_yr !== undefined) ? city._max_yr : (city._max_yr = Math.max(...pop_keys));
+      let min_yr = city._min_yr;
+      let max_yr = city._max_yr;
       
       if ((year >= min_yr && year <= max_yr) || (max_yr >= 1975 && year >= 1975)) {
         let px = city._px || (city._px = population_Stadester_rasters.getCoordsPixel(city.coords));

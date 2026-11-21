@@ -160,6 +160,116 @@
         }
       }
 
+      //INDUS: Clean legacy Populstat South Asian cantonment/OG/township outgrowths & circumflex Romanisations
+      let indus_countries = new Set(["India", "Pakistan", "Bangladesh", "Sri Lanka", "Nepal", "Bhutan", "Maldives"]);
+      let indus_drop_re = /(?:\b(?:cantonment|cantt\.?|stage\s+og|layout\s+og|og|township|railway\s+settlement|civil\s+lines|defence\s+colony|model\s+town|punjabi\s+bagh|karol\s+bagh|electronic\s+city|finance\s+tec|national\s+park|tea\s+garden|project\s+site)\b|new\s+kar[âa]chi\s+no\.\s*\d)/i;
+      let indus_ward_drops = new Set([
+        "New Delhi-India", "Behala-India", "Jadabpur-India", "Sultanpur Majra-India",
+        "Landhi Korangi-Pakistan", "Sahijpur Bogha-India"
+      ]);
+      let indus_canonical_renames = {
+        "Wâh Cantonment-Pakistan": ["Wah-Pakistan", "Wah"],
+        "Wah Cantonment-Pakistan": ["Wah-Pakistan", "Wah"],
+        "Khâriân Cantonment-Pakistan": ["Kharian-Pakistan", "Kharian"],
+        "Kharian Cantonment-Pakistan": ["Kharian-Pakistan", "Kharian"],
+        "Hâora-India": ["Howrah-India", "Howrah"],
+        "Hubli-Dhârwâr-India": ["Hubballi-Dharwad-India", "Hubballi-Dharwad"],
+        "New Barâkpur-India": ["New Barrackpore-India", "New Barrackpore"],
+        "Ulubâria-India": ["Uluberia-India", "Uluberia"],
+        "Sandîp-Bangladesh": ["Sandwip-Bangladesh", "Sandwip"],
+        "Bhadrâvati New Town-India": ["Bhadravati-India", "Bhadravati"],
+        "Raurkela-India": ["Rourkela-India", "Rourkela"]
+      };
+      let indus_all_keys = Object.keys(stadester_obj);
+      for (let ik = 0; ik < indus_all_keys.length; ik++) {
+        let cur_k = indus_all_keys[ik];
+        let cur_c = stadester_obj[cur_k];
+        if (!cur_c || !indus_countries.has(cur_c.country)) continue;
+        if (indus_canonical_renames[cur_k]) {
+          let [tgt_k, tgt_nm] = indus_canonical_renames[cur_k];
+          let existing_tgt = stadester_obj[tgt_k];
+          if (existing_tgt && existing_tgt !== cur_c) {
+            if (cur_c.population && existing_tgt.population) {
+              let cyrs = Object.keys(cur_c.population);
+              for (let cy = 0; cy < cyrs.length; cy++) {
+                if (existing_tgt.population[cyrs[cy]] === undefined && Number(cur_c.population[cyrs[cy]]) > 0)
+                  existing_tgt.population[cyrs[cy]] = cur_c.population[cyrs[cy]];
+              }
+            }
+            population_Stadester_uud.appendCitySources(existing_tgt, cur_c.sources || cur_c.type);
+            delete stadester_obj[cur_k];
+          } else {
+            cur_c.key = tgt_k;
+            cur_c.name = tgt_nm;
+            stadester_obj[tgt_k] = cur_c;
+            if (tgt_k !== cur_k) delete stadester_obj[cur_k];
+          }
+          continue;
+        }
+        let cur_nm = String(cur_c.name || "").replace(/[!^%+]+/g, "").replace(/\s*&\s*$/, "").trim();
+        if (cur_nm !== String(cur_c.name || "")) cur_c.name = cur_nm;
+        if (indus_ward_drops.has(cur_k) || indus_drop_re.test(cur_nm)) {
+          delete stadester_obj[cur_k];
+          continue;
+        }
+        if (/[âêîôûÂÊÎÔÛ]/.test(cur_nm) || /[âêîôûÂÊÎÔÛ]/.test(cur_k)) {
+          let stripped_nm = cur_nm.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+          let stripped_k = cur_k.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+          if (stripped_nm && stripped_nm !== cur_nm) {
+            if (!Array.isArray(cur_c.other_names)) cur_c.other_names = [];
+            if (!cur_c.other_names.includes(stripped_nm)) cur_c.other_names.push(stripped_nm);
+            cur_c.name = stripped_nm;
+          }
+          if (stripped_k && stripped_k !== cur_k) {
+            let ex_clean = stadester_obj[stripped_k];
+            if (ex_clean && ex_clean !== cur_c && Array.isArray(ex_clean.coords) && Array.isArray(cur_c.coords) &&
+                population_Stadester_uud.haversineDistance(ex_clean.coords, cur_c.coords) <= 25) {
+              if (cur_c.population && ex_clean.population) {
+                let cyrs = Object.keys(cur_c.population);
+                for (let cy = 0; cy < cyrs.length; cy++) {
+                  if (ex_clean.population[cyrs[cy]] === undefined && Number(cur_c.population[cyrs[cy]]) > 0)
+                    ex_clean.population[cyrs[cy]] = cur_c.population[cyrs[cy]];
+                }
+              }
+              population_Stadester_uud.appendCitySources(ex_clean, cur_c.sources || cur_c.type);
+              delete stadester_obj[cur_k];
+            } else if (!ex_clean) {
+              cur_c.key = stripped_k;
+              stadester_obj[stripped_k] = cur_c;
+              delete stadester_obj[cur_k];
+            }
+          }
+        }
+      }
+      //INDUS: Absorb any remaining non-Viscount Populstat twin within 5 km of a same-name INDUS city
+      let indus_visc_by_nc = new Map();
+      let post_indus_keys = Object.keys(stadester_obj);
+      for (let pk = 0; pk < post_indus_keys.length; pk++) {
+        let vc = stadester_obj[post_indus_keys[pk]];
+        if (!vc || !indus_countries.has(vc.country) || !Array.isArray(vc.coords) || vc.coords.length < 2) continue;
+        if (!population_Stadester_uud.hasViscountSource(vc)) continue;
+        let nk = `${String(vc.name || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim()}|${vc.country}`;
+        if (!indus_visc_by_nc.has(nk)) indus_visc_by_nc.set(nk, []);
+        indus_visc_by_nc.get(nk).push(vc);
+      }
+      for (let pk = 0; pk < post_indus_keys.length; pk++) {
+        let cur_k = post_indus_keys[pk];
+        let nc = stadester_obj[cur_k];
+        if (!nc || !indus_countries.has(nc.country) || !Array.isArray(nc.coords) || nc.coords.length < 2) continue;
+        if (population_Stadester_uud.hasViscountSource(nc)) continue;
+        let nk = `${String(nc.name || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim()}|${nc.country}`;
+        let vc_list = indus_visc_by_nc.get(nk);
+        if (!vc_list) continue;
+        for (let vi = 0; vi < vc_list.length; vi++) {
+          let vc = vc_list[vi];
+          if (population_Stadester_uud.haversineDistance(nc.coords, vc.coords) <= 5.0) {
+            population_Stadester_uud.appendCitySources(vc, nc.sources || nc.type);
+            delete stadester_obj[cur_k];
+            break;
+          }
+        }
+      }
+
       //Inject curated manual records if missing
       population_Stadester_uud.injectManualRecords(stadester_obj);
       all_cities = Object.keys(stadester_obj);
@@ -824,8 +934,13 @@
           let is_same_name = population_Stadester_uud.checkExactNameMatch(leader_city, candidate_city);
           if (is_same_name) {
             let lead_yrs = Object.keys(leader_city.population).map(Number).filter(n => !isNaN(n) && Number(leader_city.population[n]) > 0).sort((a, b) => a - b);
+            let is_same_viscount_proj = Boolean(
+              leader_city.viscount_project &&
+              candidate_city.viscount_project &&
+              leader_city.viscount_project === candidate_city.viscount_project
+            );
             let is_temporally_compatible = true;
-            if (lead_yrs.length > 0 && cand_yrs.length > 0) {
+            if (!is_same_viscount_proj && lead_yrs.length > 0 && cand_yrs.length > 0) {
               let cand_max_yr = cand_yrs[cand_yrs.length - 1];
               let cand_min_yr = cand_yrs[0];
               let lead_max_yr = lead_yrs[lead_yrs.length - 1];

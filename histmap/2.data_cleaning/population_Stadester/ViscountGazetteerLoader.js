@@ -373,14 +373,19 @@
               let ex_max_yr = ex_yr_nums[ex_yr_nums.length - 1];
               let ex_min_yr = ex_yr_nums[0];
               let is_pre1815_bridge = (Math.min(ex_max_yr, cand_max_yr) <= 1815 && is_name_match);
+              let is_same_project_exact_site = Boolean(
+                !is_cross_project &&
+                is_name_match &&
+                (dist_km <= 0.5 || (proj.key === "INDUS" && dist_km <= 8.0))
+              );
 
-              if (!is_cross_project && ex_city.polaris_priority === 3 && candidate_city.polaris_priority === 3 && ex_city.key !== candidate_city.key && dist_km > 0.3)
+              if (!is_same_project_exact_site && !is_cross_project && ex_city.polaris_priority === 3 && candidate_city.polaris_priority === 3 && ex_city.key !== candidate_city.key && dist_km > 0.3)
                 continue;
-              if (dist_km > 1.0 && !is_pre1815_bridge && !this.hasCompatiblePopulationScale(ex_city.population, candidate_city.population))
+              if (!is_same_project_exact_site && dist_km > 1.0 && !is_pre1815_bridge && !this.hasCompatiblePopulationScale(ex_city.population, candidate_city.population))
                 continue;
               let is_temporally_compatible = true;
 
-              if (ex_min_yr > cand_max_yr || cand_min_yr > ex_max_yr) {
+              if (!is_same_project_exact_site && (ex_min_yr > cand_max_yr || cand_min_yr > ex_max_yr)) {
                 let gap_end = (ex_min_yr > cand_max_yr) ? ex_min_yr : cand_min_yr;
                 let gap_start = (ex_min_yr > cand_max_yr) ? cand_max_yr : ex_max_yr;
                 let max_allowed_gap = (typeof uud.getMaxTemporalProximityGap === "function") ?

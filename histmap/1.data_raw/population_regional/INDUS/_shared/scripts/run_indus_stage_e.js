@@ -119,6 +119,7 @@ for (let i = 0; i < files.length; i++) {
     let t0 = Date.now();
     console.log(`[INDUS StageE] Bootstrapped ${files.length} files cleanly.`);
 
+    let only_shards = process.argv.includes("--only-shards");
     let skip_deltas = process.argv.includes("--skip-deltas");
     let skip_shards = process.argv.includes("--skip-shards");
     let skip_substrata = process.argv.includes("--skip-substrata");
@@ -128,6 +129,13 @@ for (let i = 0; i < files.length; i++) {
       await population_Stadester.processRasters({ exclude: ["G", "H", "I", "J"], overwrite: true, concurrency: 4 });
     } else {
       console.log("[INDUS StageE] 1/5 Skipped Stadestér A-F (--skip-shards).");
+    }
+
+    if (only_shards) {
+      if (global.GeoPNG && typeof GeoPNG.terminateAllWorkers === "function")
+        GeoPNG.terminateAllWorkers();
+      console.log(`[INDUS StageE] --only-shards COMPLETE in ${((Date.now() - t0)/1000).toFixed(1)}s`);
+      process.exit(0);
     }
 
     if (!skip_substrata) {
