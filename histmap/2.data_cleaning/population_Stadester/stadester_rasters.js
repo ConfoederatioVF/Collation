@@ -471,6 +471,102 @@
 
 
   /**
+   * Streams partitioned Stadestér shards one file at a time, retaining only lightweight
+   * `{ coords, population, _px }` records to avoid multi-gigabyte V8 heap spikes from `radial_buffers`.
+   * @alias population_Stadester_rasters.loadStadesterLiteList
+   *
+   * @param {Object} [arg0_options]
+   *
+   * @returns {Array<Object>}
+   */
+  population_Stadester_rasters.loadStadesterLiteList = function (arg0_options) {
+    //Convert from parameters
+    let options = (arg0_options) ? arg0_options : {};
+
+    //Declare local instance variables
+    let default_transform_path = (typeof h3 !== "undefined") ?
+      path.join(`${h3}/population_Stadester.transform/stadester/`) :
+      path.resolve(__dirname, "../../3.data_transform/population_Stadester.transform/stadester");
+    let dump_mtime = 0;
+    let dump_path = options.stadester_file_path || default_transform_path;
+    let legacy_path = path.join(`${h1}/population_Stadester/uud/`, "stadester.json");
+    let lite_list = [];
+    let partition_io = global.StadesterPartitionIO;
+    let viscount_filter = (options.viscount_key) ? String(options.viscount_key).toUpperCase() : "";
+
+    //Guard clauses
+    if (options.stadester_obj) {
+      let keys = Object.keys(options.stadester_obj);
+      for (let i = 0; i < keys.length; i++) {
+        let city = options.stadester_obj[keys[i]];
+        if (!city || !city.coords || !city.population) continue;
+        let px = city._px || (city._px = population_Stadester_rasters.getCoordsPixel(city.coords));
+        lite_list.push({ _px: px, coords: city.coords, population: city.population });
+      }
+      return lite_list;
+    }
+
+    //Function body
+    if (partition_io) {
+      if (!partition_io.hasDataset(dump_path) && partition_io.hasDataset(legacy_path))
+        dump_path = legacy_path;
+      if (!partition_io.hasDataset(dump_path)) return lite_list;
+
+      dump_mtime = partition_io.getDatasetMtimeMs(dump_path);
+      let cache_key = `${dump_path}|${viscount_filter}`;
+      if (global._cached_stadester_lite && global._cached_stadester_lite_key === cache_key && global._cached_stadester_lite_mtime === dump_mtime)
+        return global._cached_stadester_lite;
+
+      let target = partition_io.resolveDatasetTarget(dump_path);
+      if (target && target.mode === "partitioned") {
+        let manifest = JSON.parse(fs.readFileSync(target.manifest_path, "utf8"));
+        let regions = Array.isArray(manifest.regions) ? manifest.regions : [];
+
+        for (let i = 0; i < regions.length; i++) {
+          let reg_entry = regions[i];
+          if (viscount_filter && reg_entry.key !== viscount_filter) continue;
+          let files = Array.isArray(reg_entry.files) ? reg_entry.files : [];
+
+          for (let x = 0; x < files.length; x++) {
+            let shard_path = path.join(target.dir_path, files[x]);
+            if (!fs.existsSync(shard_path)) continue;
+            let shard_obj = JSON.parse(fs.readFileSync(shard_path, "utf8"));
+            let shard_keys = Object.keys(shard_obj);
+
+            for (let y = 0; y < shard_keys.length; y++) {
+              let city = shard_obj[shard_keys[y]];
+              if (!city || !city.coords || !city.population) continue;
+              let px = population_Stadester_rasters.getCoordsPixel(city.coords);
+              lite_list.push({ _px: px, coords: city.coords, population: city.population });
+            }
+          }
+        }
+        global._cached_stadester_lite = lite_list;
+        global._cached_stadester_lite_key = cache_key;
+        global._cached_stadester_lite_mtime = dump_mtime;
+
+        //Return statement
+        return lite_list;
+      }
+    }
+
+    let fallback_obj = population_Stadester_rasters.loadStadesterObject(options);
+    if (fallback_obj) {
+      let keys = Object.keys(fallback_obj);
+      for (let i = 0; i < keys.length; i++) {
+        let city = fallback_obj[keys[i]];
+        if (!city || !city.coords || !city.population) continue;
+        let px = city._px || (city._px = population_Stadester_rasters.getCoordsPixel(city.coords));
+        lite_list.push({ _px: px, coords: city.coords, population: city.population });
+      }
+    }
+
+    //Return statement
+    return lite_list;
+  };
+
+
+  /**
    * Computes a `Float32Array(4320*2160)` of sub-urban settlement populations (`0 < city_pop < min_urban_raster_population`)
    * from `stadester.json` for a given year so settlements with `< 5,000` people are preserved in rural and total population rasters.
    * @alias population_Stadester_rasters.getSubUrbanSettlementsData
@@ -486,28 +582,24 @@
     let options = (arg1_options) ? arg1_options : {};
 
     //Declare local instance variables
-    let all_city_keys;
     let cfg = global.population_Stadester_config;
+    let lite_list;
     let min_urban_population = (options.min_urban_raster_population !== undefined) ?
       options.min_urban_raster_population :
       ((cfg && cfg.min_urban_raster_population !== undefined) ? cfg.min_urban_raster_population : 5000);
-    let stadester_obj = population_Stadester_rasters.loadStadesterObject(options);
     let sub_urban_data = new Float32Array(4320*2160);
 
     //Guard clauses
-    if (year < -10000 || !stadester_obj) return sub_urban_data;
+    if (year < -10000) return sub_urban_data;
 
     //Function body
-    all_city_keys = Object.keys(stadester_obj);
-    for (let i = 0; i < all_city_keys.length; i++) {
-      let city = stadester_obj[all_city_keys[i]];
-      if (!city || !city.coords || !city.population) continue;
-
+    lite_list = population_Stadester_rasters.loadStadesterLiteList(options);
+    for (let i = 0; i < lite_list.length; i++) {
+      let city = lite_list[i];
       let city_pop = population_Stadester_rasters.getCityPopulationAtYear(city, year);
       if (city_pop <= 0 || city_pop >= min_urban_population) continue;
 
-      let px = city._px || (city._px = population_Stadester_rasters.getCoordsPixel(city.coords));
-      let center_idx = px[1]*4320 + px[0];
+      let center_idx = city._px[1]*4320 + city._px[0];
       sub_urban_data[center_idx] += city_pop;
     }
 
@@ -532,28 +624,24 @@
     let options = (arg1_options) ? arg1_options : {};
 
     //Declare local instance variables
-    let all_city_keys;
     let cfg = global.population_Stadester_config;
+    let lite_list;
     let min_urban_population = (options.min_urban_raster_population !== undefined) ?
       options.min_urban_raster_population :
       ((cfg && cfg.min_urban_raster_population !== undefined) ? cfg.min_urban_raster_population : 5000);
-    let stadester_obj = population_Stadester_rasters.loadStadesterObject(options);
     let urban_data = new Float32Array(4320*2160);
 
     //Guard clauses
-    if (year < -10000 || !stadester_obj) return urban_data;
+    if (year < -10000) return urban_data;
 
     //Function body
-    all_city_keys = Object.keys(stadester_obj);
-    for (let i = 0; i < all_city_keys.length; i++) {
-      let city = stadester_obj[all_city_keys[i]];
-      if (!city || !city.coords || !city.population) continue;
-
+    lite_list = population_Stadester_rasters.loadStadesterLiteList(options);
+    for (let i = 0; i < lite_list.length; i++) {
+      let city = lite_list[i];
       let city_pop = population_Stadester_rasters.getCityPopulationAtYear(city, year);
       if (city_pop < min_urban_population) continue;
 
-      let px = city._px || (city._px = population_Stadester_rasters.getCoordsPixel(city.coords));
-      let center_idx = px[1]*4320 + px[0];
+      let center_idx = city._px[1]*4320 + city._px[0];
       urban_data[center_idx] += city_pop;
     }
 

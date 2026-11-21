@@ -110,7 +110,11 @@
       //Ensure output directory exists
       let parent_dir = path.dirname(path.resolve(this.file_uud_cities));
       if (!fs.existsSync(parent_dir)) fs.mkdirSync(parent_dir, { recursive: true });
-      fs.writeFileSync(this.file_uud_cities, JSON.stringify(uud_obj, null, 2));
+      if (typeof population_Stadester_ghs_pop !== "undefined" && typeof population_Stadester_ghs_pop.writeJSONSafe === "function") {
+        population_Stadester_ghs_pop.writeJSONSafe(this.file_uud_cities, uud_obj);
+      } else {
+        fs.writeFileSync(this.file_uud_cities, JSON.stringify(uud_obj));
+      }
       console.log(`- Saved raw UUD dataset to ${this.file_uud_cities}.`);
       
       //Return statement
@@ -133,7 +137,11 @@
         uud_obj = JSON.parse(fs.readFileSync(this.file_uud_cities, "utf8"));
       
       uud_obj = population_Stadester_uud.interpolateUUD(uud_obj, options);
-      fs.writeFileSync(this.file_uud_cities, JSON.stringify(uud_obj, null, 2));
+      if (typeof population_Stadester_ghs_pop !== "undefined" && typeof population_Stadester_ghs_pop.writeJSONSafe === "function") {
+        population_Stadester_ghs_pop.writeJSONSafe(this.file_uud_cities, uud_obj);
+      } else {
+        fs.writeFileSync(this.file_uud_cities, JSON.stringify(uud_obj));
+      }
       console.log(`- Saved interpolated UUD dataset to ${this.file_uud_cities}.`);
       
       //Return statement
@@ -157,10 +165,18 @@
         uud_obj = JSON.parse(fs.readFileSync(this.file_uud_cities, "utf8"));
       
       stadester_obj = population_Stadester_uud.parseUUDToStadester(uud_obj);
-      fs.writeFileSync(this.file_stadester_cities, JSON.stringify(stadester_obj, null, 2));
+      if (typeof population_Stadester_ghs_pop !== "undefined" && typeof population_Stadester_ghs_pop.writeJSONSafe === "function") {
+        population_Stadester_ghs_pop.writeJSONSafe(this.file_stadester_cities, stadester_obj);
+      } else {
+        fs.writeFileSync(this.file_stadester_cities, JSON.stringify(stadester_obj));
+      }
       
       stadester_obj = population_Stadester_uud.flattenStadesterMetros(stadester_obj);
-      fs.writeFileSync(this.file_flattened_stadester, JSON.stringify(stadester_obj, null, 2));
+      if (typeof population_Stadester_ghs_pop !== "undefined" && typeof population_Stadester_ghs_pop.writeJSONSafe === "function") {
+        population_Stadester_ghs_pop.writeJSONSafe(this.file_flattened_stadester, stadester_obj);
+      } else {
+        fs.writeFileSync(this.file_flattened_stadester, JSON.stringify(stadester_obj));
+      }
       
       stadester_obj = population_Stadester_uud.fixStadesterErrors(stadester_obj);
       stadester_obj = population_Stadester_uud.integrateGHSLIntoStadester(stadester_obj, {
@@ -857,11 +873,16 @@
       this.ensureDirectories();
       console.log(`- Launching population_Stadester master pipeline...`);
       
-      if (!options.exclude.includes("A")) this.A_initialiseUUD(options);
-      if (!options.exclude.includes("B")) this.B_interpolateUUD(options);
-      if (!options.exclude.includes("C")) this.C_processUUDToStadester(options);
-      if (!options.exclude.includes("D")) this.D_processCitiesAreas(options);
-      if (!options.exclude.includes("E")) this.E_cacheRadialBuffers(options);
+      let local_uud_obj = options.uud_obj;
+      let local_stadester_obj = options.stadester_obj;
+      if (!options.exclude.includes("A")) local_uud_obj = this.A_initialiseUUD(options);
+      if (!options.exclude.includes("B")) local_uud_obj = this.B_interpolateUUD({ ...options, uud_obj: local_uud_obj });
+      if (!options.exclude.includes("C")) {
+        local_stadester_obj = this.C_processUUDToStadester({ ...options, uud_obj: local_uud_obj });
+        local_uud_obj = null;
+      }
+      if (!options.exclude.includes("D")) local_stadester_obj = this.D_processCitiesAreas({ ...options, stadester_obj: local_stadester_obj });
+      if (!options.exclude.includes("E")) local_stadester_obj = this.E_cacheRadialBuffers({ ...options, stadester_obj: local_stadester_obj });
       
       if (!options.exclude.includes("F")) await this.F_generateBaseRasters(options);
       if (!options.exclude.includes("G")) await this.G_generateUrbanRasters(options);

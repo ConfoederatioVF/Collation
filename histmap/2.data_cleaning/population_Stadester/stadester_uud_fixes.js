@@ -387,6 +387,11 @@
       let city = stadester_obj[all_cities[i]];
       if (!city || !city.population) continue;
       let found_yr = Number(city["found.yr"] !== undefined ? city["found.yr"] : city.foundation_year);
+      if (Number.isFinite(found_yr) && found_yr > 0 && found_yr < 1) {
+        found_yr = Math.round(found_yr*10000);
+        city["found.yr"] = found_yr;
+        city.foundation_year = found_yr;
+      }
       if (Number.isFinite(found_yr) && found_yr > 2026) {
         found_yr = (found_yr >= 100000 && found_yr <= 202699) ? Math.floor(found_yr/100) : NaN;
         if (Number.isFinite(found_yr)) {
@@ -861,7 +866,7 @@
         let rd = global.StadesterPartitionIO.assignCityToViscountRegion(ac, ak);
         if (rd && rd.key) a_proj = String(rd.key).toUpperCase();
       }
-      if (a_proj !== "PRETA" && a_proj !== "CENTAUR") continue;
+      if (a_proj !== "PRETA" && a_proj !== "CENTAUR" && a_proj !== "INDUS" && a_proj !== "CASTLE" && a_proj !== "JADE" && a_proj !== "SARAY") continue;
       let base_name = String(ac.name || "").replace(/\s*\(agglomeration\)\s*/gi, "").trim();
       let base_key = `${base_name}-${ac.country}`;
       let target = stadester_obj[base_key];
@@ -956,7 +961,11 @@
           if (b.dropped) continue;
           let touches_viscount = (
             a.proj_key === "CENTAUR" || b.proj_key === "CENTAUR" ||
-            a.proj_key === "PRETA" || b.proj_key === "PRETA"
+            a.proj_key === "PRETA" || b.proj_key === "PRETA" ||
+            a.proj_key === "INDUS" || b.proj_key === "INDUS" ||
+            a.proj_key === "CASTLE" || b.proj_key === "CASTLE" ||
+            a.proj_key === "JADE" || b.proj_key === "JADE" ||
+            a.proj_key === "SARAY" || b.proj_key === "SARAY"
           );
 
           if (!touches_viscount) continue;

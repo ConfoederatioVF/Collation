@@ -92,7 +92,11 @@
 
         let gazetteers = Array.isArray(manifest_obj.gazetteers) ?
           manifest_obj.gazetteers.slice().sort(function (arg0_a, arg1_b) {
-            return (arg1_b.priority || 0) - (arg0_a.priority || 0);
+            let p_diff = (arg1_b.priority || 0) - (arg0_a.priority || 0);
+            if (p_diff !== 0) return p_diff;
+            let end_a = (Array.isArray(arg0_a.domain) && arg0_a.domain.length >= 2) ? Number(arg0_a.domain[1]) : -Infinity;
+            let end_b = (Array.isArray(arg1_b.domain) && arg1_b.domain.length >= 2) ? Number(arg1_b.domain[1]) : -Infinity;
+            return end_b - end_a;
           }) : [];
 
         loaded_count_by_project[proj.key] = 0;

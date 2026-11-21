@@ -4,9 +4,11 @@ let JSON5 = global.JSON5 || require("json5");
 let path = global.path || require("path");
 let { PNG } = global.pngjs || require("pngjs");
 let ccf_p = (typeof __dirname !== "undefined" && fs.existsSync(path.join(__dirname, "ViscountCountyCensusFrontier.js"))) ? path.join(__dirname, "ViscountCountyCensusFrontier.js") : path.join(process.cwd(), "histmap/3.data_transform/population_Substrata.viscount/centaur/ViscountCountyCensusFrontier.js");
+let cdd_p = (typeof __dirname !== "undefined" && fs.existsSync(path.join(__dirname, "ViscountCentaurDasymetricDetail.js"))) ? path.join(__dirname, "ViscountCentaurDasymetricDetail.js") : path.join(process.cwd(), "histmap/3.data_transform/population_Substrata.viscount/centaur/ViscountCentaurDasymetricDetail.js");
 let drs_p = (typeof __dirname !== "undefined" && fs.existsSync(path.resolve(__dirname, "../ViscountDasymetricResidualSolver.js"))) ? path.resolve(__dirname, "../ViscountDasymetricResidualSolver.js") : path.join(process.cwd(), "histmap/3.data_transform/population_Substrata.viscount/ViscountDasymetricResidualSolver.js");
 let hlp_p = (typeof __dirname !== "undefined" && fs.existsSync(path.join(__dirname, "ViscountHUResidualHelpers.js"))) ? path.join(__dirname, "ViscountHUResidualHelpers.js") : path.join(process.cwd(), "histmap/3.data_transform/population_Substrata.viscount/centaur/ViscountHUResidualHelpers.js");
 let um_p = (typeof __dirname !== "undefined" && fs.existsSync(path.resolve(__dirname, "../ViscountUrbanMask.js"))) ? path.resolve(__dirname, "../ViscountUrbanMask.js") : path.join(process.cwd(), "histmap/3.data_transform/population_Substrata.viscount/ViscountUrbanMask.js");
+let ViscountCentaurDasymetricDetail = global.ViscountCentaurDasymetricDetail || require(cdd_p).ViscountCentaurDasymetricDetail;
 let ViscountCountyCensusFrontier = global.ViscountCountyCensusFrontier || require(ccf_p).ViscountCountyCensusFrontier;
 let ViscountDasymetricResidualSolver = global.ViscountDasymetricResidualSolver || require(drs_p).ViscountDasymetricResidualSolver;
 let ViscountHUResidualHelpers = global.ViscountHUResidualHelpers || require(hlp_p).ViscountHUResidualHelpers;
@@ -221,13 +223,15 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
 
       //Return statement
       return {
+        centaur_dasymetric_detail: adm_obj.centaur_dasymetric_detail || null,
         county_census_frontier: adm_obj.county_census_frontier || null,
         cross_catchment_attenuation: Number.isFinite(adm_obj.cross_catchment_attenuation) ? Number(adm_obj.cross_catchment_attenuation) : 0.82,
         dendro_regions: dendro_regions,
         elevation_barrier_m: Number.isFinite(adm_obj.elevation_barrier_m) ? Number(adm_obj.elevation_barrier_m) : 650.0,
+        hu_assign: hu_assign,
+        hu_id_list: hu_id_list,
         hyde_prior_exponent: Number.isFinite(adm_obj.hyde_prior_exponent) ? Number(adm_obj.hyde_prior_exponent) : 0.30,
-        remove_sub_iso_state_offsets: (adm_obj.remove_sub_iso_state_offsets !== undefined) ?
-          Boolean(adm_obj.remove_sub_iso_state_offsets) : false,
+        remove_sub_iso_state_offsets: (adm_obj.remove_sub_iso_state_offsets !== undefined) ? Boolean(adm_obj.remove_sub_iso_state_offsets) : false,
         residual_clamp_max: Number.isFinite(adm_obj.residual_clamp_max) ? Number(adm_obj.residual_clamp_max) : 2.60,
         residual_clamp_min: Number.isFinite(adm_obj.residual_clamp_min) ? Number(adm_obj.residual_clamp_min) : -2.60,
         residual_gain: Number.isFinite(adm_obj.residual_gain) ? Number(adm_obj.residual_gain) : 0.90,
@@ -380,7 +384,8 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
       let ckey = (hyde_yr === year && !options.strict_hab) ? `hu_prior_${year}_${strict_cut}` : `hu_prior_${year}_h${hyde_yr}_${strict_hab ? 1 : 0}`;
 
       if (cache && cache.has(ckey)) return cache.get(ckey);
-      let d_obj = this.B_computeMacroPreservingDeCliffedHYDE(mask_data, bio_covs, hyde_yr, config, cache, strict_cut, Boolean(hu_ctx.remove_sub_iso_state_offsets));
+      let cdd_cfg = (hu_ctx.centaur_dasymetric_detail && hu_ctx.centaur_dasymetric_detail.enabled) ? hu_ctx.centaur_dasymetric_detail : null;
+      let d_obj = cdd_cfg ? ViscountCentaurDasymetricDetail.A_computeCrispDeCliffedHYDE(mask_data, bio_covs, hyde_yr, config, cache, strict_cut, Boolean(hu_ctx.remove_sub_iso_state_offsets), cdd_cfg) : this.B_computeMacroPreservingDeCliffedHYDE(mask_data, bio_covs, hyde_yr, config, cache, strict_cut, Boolean(hu_ctx.remove_sub_iso_state_offsets));
       let d_decliff = d_obj.d_decliff;
       let dist_site = bio_covs.dist_site_px;
       let elev_valid = bio_covs.elev_valid || null;
@@ -417,13 +422,15 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
       let s_rad_y = Math.max(2, Math.min(6, Math.ceil(s_max_km/9.26)));
       let inv_2s1 = 1.0/(2.0*s_sig1*s_sig1);
       let inv_2s2 = 1.0/(2.0*s_sig2*s_sig2);
+      let s_int_scale = (cdd_cfg && cdd_cfg.preserve_settlement_integral !== false) ?
+        Math.max(1.0, Math.min(3.8, (0.78*64.0 + 0.22*324.0)/Math.max(4.0, 0.78*s_sig1*s_sig1 + 0.22*s_sig2*s_sig2))) : 1.0;
 
       for (let i = 0; i < setts.length; i++) {
         let s = setts[i];
         let pop = ViscountHUResidualHelpers.interpolateSeries(s.series, year, 80);
 
         if (pop <= 0) continue;
-        let amp = Math.pow(pop, 0.62)/65.0;
+        let amp = s_int_scale*Math.pow(pop, 0.62)/65.0;
         let max_dx = Math.min(s_rad_y*3, Math.ceil((s_rad_y + 0.5)/s.cos_lat));
         let s_elev = Number.isFinite(s.elev_m) ? s.elev_m : 150.0;
 
@@ -565,12 +572,8 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
           }
         }
 
-        let phi_hu = hu_ctx.w_hyde[i]*1.05 +
-          hu_ctx.w_landuse[i]*lu_val +
-          hu_ctx.w_dendro[i]*den_val +
-          hu_ctx.w_fluvial[i]*fluv_val +
-          hu_ctx.w_coastal[i]*coast_val +
-          hu_ctx.w_settlement[i]*0.30;
+        let phi_hu = hu_ctx.w_hyde[i]*1.05 + hu_ctx.w_landuse[i]*lu_val + hu_ctx.w_dendro[i]*den_val +
+          hu_ctx.w_fluvial[i]*fluv_val + hu_ctx.w_coastal[i]*coast_val + hu_ctx.w_settlement[i]*0.30;
         let sett_add = hu_ctx.w_settlement[i]*mean_d_base*1.85*set_norm*(0.45 + 0.55*Math.min(1.5, u_nat_c));
         let dendro_add = (u_den[i] > 0) ? (hu_ctx.w_dendro[i]*mean_d_base*1.25*Math.min(2.0, u_den[i])*(0.40 + 0.60*lu_val)) : 0;
         let d_s = dist_site ? dist_site[i] : 99.0;
@@ -597,13 +600,7 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
      * @alias ViscountHUResidualKriging.D_evaluateMultiDualMaternFields
      */
     static D_evaluateMultiDualMaternFields (arg0_kriging_bundle, arg1_prior_bundles, arg2_v_vecs, arg3_years) {
-      return ViscountDasymetricResidualSolver.C_evaluateMultiDualMaternFields(
-        arg0_kriging_bundle,
-        arg1_prior_bundles,
-        arg2_v_vecs,
-        arg3_years,
-        ViscountHUResidualHelpers.capUrbanCoreSmooth.bind(ViscountHUResidualHelpers)
-      );
+      return ViscountDasymetricResidualSolver.C_evaluateMultiDualMaternFields(arg0_kriging_bundle, arg1_prior_bundles, arg2_v_vecs, arg3_years, ViscountHUResidualHelpers.capUrbanCoreSmooth.bind(ViscountHUResidualHelpers));
     }
 
 
@@ -675,15 +672,17 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
       }
       let multi = this.D_evaluateMultiDualMaternFields(bundle, prior_bundles, v_vecs, rep_years);
 
+      let cdd_cfg = (hu_ctx.centaur_dasymetric_detail && hu_ctx.centaur_dasymetric_detail.enabled) ? hu_ctx.centaur_dasymetric_detail : null;
       let strict_cut = Number.isFinite(hu_ctx.strict_hab_cutoff_year) ? Number(hu_ctx.strict_hab_cutoff_year) : 1650;
 
       for (let p = 0; p < pkeys.length; p++) {
         let field = multi.pop_fields[p];
         let pkey = pkeys[p];
         let sum = 0;
-        let target_sites = Math.max(1, (bundle.obs_bundle.period_totals && bundle.obs_bundle.period_totals[pkey]) ?
-          bundle.obs_bundle.period_totals[pkey] : 1);
+        let target_sites = Math.max(1, (bundle.obs_bundle.period_totals && bundle.obs_bundle.period_totals[pkey]) ? bundle.obs_bundle.period_totals[pkey] : 1);
 
+        if (cdd_cfg)
+          ViscountCentaurDasymetricDetail.D_applyPycnophylacticDasymetricSharpening(bundle.mask_data, bio_covs, hu_ctx, field, prior_bundles[p].d_decliff, cdd_cfg);
         if (rep_years[p] <= strict_cut && bio_covs.uopp_valid && n_valid >= 2000)
           ViscountHUResidualHelpers.capUrbanCoreSmooth(bundle.mask_data, field, bio_covs.uopp_valid, 0.85);
         for (let i = 0; i < n_valid; i++) sum += field[i];
@@ -718,13 +717,11 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
       let grid_h = bundle.mask_data.grid_height;
       let grid_w = bundle.mask_data.grid_width;
       let hab_mask = bio_covs.hab_mask;
-      let horizons_cfg = (cfg.kriging_config && Array.isArray(cfg.kriging_config.chronological_horizons)) ?
-        cfg.kriging_config.chronological_horizons : [];
+      let horizons_cfg = (cfg.kriging_config && Array.isArray(cfg.kriging_config.chronological_horizons)) ? cfg.kriging_config.chronological_horizons : [];
       let hu_ctx = bundle._hu_ctx || this.A_buildHUAdmixtureAndSettlementContext(bundle.mask_data, bio_covs, cfg);
       let hyde_years = cfg.kriging_config.all_hyde_years || [];
       let is_samoa = options.is_polynesia ? new Uint8Array(bundle.mask_data.valid_cell_count) : null;
-      let only_years = (options && Array.isArray(options.only_years) && options.only_years.length > 0) ?
-        new Set(options.only_years) : null;
+      let only_years = (options && Array.isArray(options.only_years) && options.only_years.length > 0) ? new Set(options.only_years) : null;
       let n_obs = bundle.obs_bundle.obs_count;
       let n_valid = bundle.mask_data.valid_cell_count;
       let out_dir = path.join(bundle.mask_data.domain_dir, cfg.output_population_rasters_subfolder || "2.population_rasters");
@@ -879,6 +876,8 @@ let ViscountUrbanMask = global.ViscountUrbanMask || require(um_p).ViscountUrbanM
 
               rk_pop[i] = cell_area[i]*prior_b.prior_dens[i]*res_mult;
             }
+            if (hu_ctx.centaur_dasymetric_detail && hu_ctx.centaur_dasymetric_detail.enabled)
+              ViscountCentaurDasymetricDetail.D_applyPycnophylacticDasymetricSharpening(bundle.mask_data, bio_covs, hu_ctx, rk_pop, prior_b.d_decliff, hu_ctx.centaur_dasymetric_detail);
             if (yr <= strict_cut && bio_covs.uopp_valid)
               ViscountHUResidualHelpers.capUrbanCoreSmooth(bundle.mask_data, rk_pop, bio_covs.uopp_valid, hu_ctx.urban_core_cap_mult || 0.78);
           } else if (h_z_list.length > 0) {

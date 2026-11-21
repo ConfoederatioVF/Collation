@@ -33,7 +33,10 @@ let { PNG } = global.pngjs || require("pngjs");
       let cache = arg3_cache;
 
       //Declare local instance variables.
+      let bnd_max = Number(ccf_cfg.boundary_maturity_max) || 0.85;
+      let bnd_min = Number(ccf_cfg.boundary_maturity_min) || 0.15;
       let end_yr = Number(ccf_cfg.end_year) || 1870;
+      let final_yr = Number(ccf_cfg.final_boundary_reference_year) || end_yr;
       let giant_area_thr = Number(ccf_cfg.giant_frontier_area_km2) || 15000;
       let giant_dens_thr = Number(ccf_cfg.giant_frontier_density_km2) || 2.2;
       let n_valid = mask_data.valid_cell_count;
@@ -71,12 +74,14 @@ let { PNG } = global.pngjs || require("pngjs");
 
         meta_by_id.set(cid, {
           area_km2: area_km2,
+          boundary_maturity: 1.0,
           census_pop: c_pop,
           country: m.country || "",
           density_per_km2: dens,
           id: cid,
           is_giant_frontier: giant_flag,
-          name: m.name || ""
+          name: m.name || "",
+          u_bnd: 1.0
         });
       }
 
@@ -91,6 +96,64 @@ let { PNG } = global.pngjs || require("pngjs");
 
           county_id[i] = cid;
           if (meta && meta.is_giant_frontier) is_giant[i] = 1;
+        }
+      }
+
+      //Compute county-boundary subdivision maturity sqrt(HHI) against terminal reference county boundaries
+      if (snap_yr < final_yr) {
+        let f_key = `ccf_final_cid_${final_yr}_${n_valid}`;
+        let final_cid = (cache && cache.has(f_key)) ? cache.get(f_key) : null;
+
+        if (!final_cid) {
+          let final_png_p = path.resolve(proj_root, rasters_rel, `county_id_${final_yr}.png`);
+
+          if (fs.existsSync(final_png_p)) {
+            let f_png = PNG.sync.read(fs.readFileSync(final_png_p));
+
+            final_cid = new Int32Array(n_valid);
+            for (let i = 0; i < n_valid; i++) {
+              let p4 = valid_indices[i]*4;
+
+              if (f_png.data[p4 + 3] > 0) final_cid[i] = (f_png.data[p4] << 8) | f_png.data[p4 + 1];
+            }
+            if (cache) cache.set(f_key, final_cid);
+          }
+        }
+        if (final_cid) {
+          let hhi_map = new Map();
+          let pair_cnt = new Map();
+          let size_y = new Map();
+
+          for (let i = 0; i < n_valid; i++) {
+            let cy = county_id[i];
+
+            if (cy <= 0) continue;
+            size_y.set(cy, (size_y.get(cy) || 0) + 1);
+            let cf = final_cid[i];
+
+            if (cf > 0) {
+              let pk = cy*100000 + cf;
+
+              pair_cnt.set(pk, (pair_cnt.get(pk) || 0) + 1);
+            }
+          }
+          pair_cnt.forEach(function (arg0_inter, arg1_pk) {
+            let cy = Math.floor(arg1_pk/100000);
+            let sy = size_y.get(cy) || arg0_inter;
+            let frac = arg0_inter/Math.max(1, sy);
+
+            hhi_map.set(cy, (hhi_map.get(cy) || 0) + frac*frac);
+          });
+          meta_by_id.forEach(function (arg0_m, arg1_cid) {
+            let hhi = hhi_map.get(arg1_cid);
+
+            if (hhi === undefined) return;
+            let m_bnd = Math.sqrt(Math.max(0, Math.min(1, hhi)));
+            let t_b = Math.max(0, Math.min(1, (m_bnd - bnd_min)/Math.max(1e-4, bnd_max - bnd_min)));
+
+            arg0_m.boundary_maturity = m_bnd;
+            arg0_m.u_bnd = t_b*t_b*(3 - 2*t_b);
+          });
         }
       }
 
@@ -178,6 +241,7 @@ let { PNG } = global.pngjs || require("pngjs");
       let u_coast = (bio_covs && bio_covs.u_coastal) ? bio_covs.u_coastal : null;
       let u_fluv = (bio_covs && bio_covs.u_fluvial) ? bio_covs.u_fluvial : null;
       let u_maxln = (bio_covs && bio_covs.maxln_valid) ? bio_covs.maxln_valid : null;
+      let u_terr = (bio_covs && bio_covs.u_terrain) ? bio_covs.u_terrain : null;
 
       for (let i = 0; i < n_valid; i++) {
         if (perm_ice && perm_ice[i] <= 0.05) continue;
@@ -186,12 +250,13 @@ let { PNG } = global.pngjs || require("pngjs");
         let r_val = (raw_grid && raw_grid[gidx] > 0) ? raw_grid[gidx] : 0;
         let c_t = u_coast ? u_coast[i] : 0;
         let f_t = u_fluv ? u_fluv[i] : 0;
-        let m_t = u_maxln ? u_maxln[i] : 0;
+        let m_frac = Math.max(0, Math.min(1.0, (u_maxln ? u_maxln[i] : la_i)/la_i));
+        let t_t = u_terr ? Math.max(0.05, Math.min(1.5, u_terr[i])) : 0.85;
 
         hyde_1600_dens[i] = (hyde_1600_arr && hyde_1600_arr[i] > 0) ? hyde_1600_arr[i]/la_i : 0;
         hyde_masked_dens[i] = (hyde_yr_masked_arr && hyde_yr_masked_arr[i] > 0) ? hyde_yr_masked_arr[i]/la_i : 0;
         hyde_raw_dens[i] = r_val/la_i;
-        bio_suit[i] = Math.max(0.08, (0.45 + 0.55*f_t)*(0.60 + 0.40*c_t)*(0.50 + 0.50*m_t));
+        bio_suit[i] = Math.max(0.08, (0.25 + 0.75*f_t)*(0.55 + 0.45*c_t)*(0.35 + 0.65*t_t)*(0.40 + 0.60*m_frac));
       }
 
       //Accumulate documented settlements at exact target year
@@ -323,7 +388,10 @@ let { PNG } = global.pngjs || require("pngjs");
       //Declare local instance variables.
       let cell_area = bundle.mask_data.cell_land_area;
       let compact_exp = Number(ccf_cfg.compact_hyde_exponent) || 0.78;
+      let far_p = Number(ccf_cfg.frontier_far_passes) || 3;
+      let far_r = Number(ccf_cfg.frontier_far_radius_px) || 5;
       let giant_exp = Number(ccf_cfg.giant_hyde_exponent) || 1.15;
+      let giant_floor_ratio = Number(ccf_cfg.giant_county_density_floor_ratio) || 0.025;
       let grid_h = bundle.mask_data.grid_height;
       let grid_w = bundle.mask_data.grid_width;
       let hlp_p = (typeof __dirname !== "undefined" && fs.existsSync(path.join(__dirname, "ViscountHUResidualHelpers.js"))) ?
@@ -333,9 +401,12 @@ let { PNG } = global.pngjs || require("pngjs");
       let mask_data = bundle.mask_data;
       let min_rural_share = Number(ccf_cfg.min_rural_share_of_county) || 0.08;
       let n_valid = mask_data.valid_cell_count;
+      let near_p = Number(ccf_cfg.frontier_near_passes) || 2;
+      let near_r = Number(ccf_cfg.frontier_near_radius_px) || 2;
       let p2v = mask_data.pixel_to_valid_idx;
       let perm_ice = (bio_covs && bio_covs.perm_ice) ? bio_covs.perm_ice : null;
-      let pioneer_cap = Number(ccf_cfg.frontier_pioneer_density_cap_km2) || 3.2;
+      let pioneer_cap = Number(ccf_cfg.frontier_pioneer_density_cap_km2) || 1.4;
+      let pioneer_seed_cap = Number(ccf_cfg.frontier_pioneer_seed_cap_km2) || 1.6;
       let seam_passes = Number.isFinite(ccf_cfg.county_seam_blur_passes) ? Number(ccf_cfg.county_seam_blur_passes) : 0;
       let seam_r = Number.isFinite(ccf_cfg.county_seam_blur_radius_px) ? Number(ccf_cfg.county_seam_blur_radius_px) : 0;
       let snap = this.A_loadCountySnapshotForYear(mask_data, year, ccf_cfg, cache);
@@ -355,10 +426,12 @@ let { PNG } = global.pngjs || require("pngjs");
       let hyde_raw_dens = wts.hyde_raw_dens;
       let is_giant = snap.is_giant;
       let meta_by_id = snap.meta_by_id;
+      let u_uopp = (bio_covs && bio_covs.uopp_valid) ? bio_covs.uopp_valid : null;
 
-      //1. Compute per-county urban subtraction & rural target
+      //1. Compute per-county urban subtraction, rural target & boundary-maturity utility u_census in [0, 1]
       let c_doc_urban = new Map();
       let c_rural_target = new Map();
+      let u_census_by_id = new Map();
 
       for (let i = 0; i < n_valid; i++) {
         let cid = county_id[i];
@@ -373,18 +446,23 @@ let { PNG } = global.pngjs || require("pngjs");
         let m = step.value[1];
         let doc_u = c_doc_urban.get(cid) || 0;
         let rur_t = Math.max(min_rural_share*m.census_pop, m.census_pop - doc_u);
+        let c_dens = rur_t/Math.max(1, m.area_km2);
+        let t_d = Math.max(0, Math.min(1, (c_dens - 1.2)/1.8));
+        let u_dens = t_d*t_d*(3 - 2*t_d);
+        let u_bnd = (m.u_bnd !== undefined) ? m.u_bnd : 1.0;
 
         c_rural_target.set(cid, rur_t);
+        u_census_by_id.set(cid, Math.max(u_bnd, u_dens));
       }
 
-      //2. Isotropic Gaussian proximity from compact settled counties (eliminates faceted Voronoi rays)
+      //2. Tight maturity-weighted Gaussian proximity from settled counties (eliminates broad blurring & Voronoi rays)
       let compact_bin = new Float32Array(n_valid);
 
       for (let i = 0; i < n_valid; i++) {
-        if (county_id[i] > 0 && !is_giant[i] && (!perm_ice || perm_ice[i] > 0.05))
-          compact_bin[i] = 1.0;
+        if (county_id[i] > 0 && (!perm_ice || perm_ice[i] > 0.05))
+          compact_bin[i] = u_census_by_id.get(county_id[i]) || 0;
       }
-      let compact_prox = helpers.smoothGaussianGrid(mask_data, compact_bin, 10, 4, null, false);
+      let compact_prox = helpers.smoothGaussianGrid(mask_data, compact_bin, 6, 3, null, false);
 
       //3. Compute raw intra-county suitability weights (Regime 1) and conserve per county
       let c_weight_sum = new Map();
@@ -404,21 +482,23 @@ let { PNG } = global.pngjs || require("pngjs");
         let rur_t = c_rural_target.get(cid) || 0;
         let c_mean_dens = Math.max(0.01, rur_t/Math.max(1, m.area_km2));
         let h_d = Math.max(0, hyde_raw_dens[i]);
+        let u_c = u_census_by_id.get(cid);
         let w_i = 0;
 
-        if (!is_giant[i]) {
-          let h_term = Math.pow(h_d + 0.08*c_mean_dens, compact_exp);
+        if (u_c === undefined) u_c = 1.0;
+        if (!is_giant[i] && u_c >= 0.5) {
+          let h_term = Math.pow(h_d + 0.05*c_mean_dens, compact_exp);
 
-          w_i = cell_area[i]*h_term*(0.30 + 0.70*bio_suit[i])*(1.0 + 1.5*wts.sett_boost_compact[i]);
+          w_i = cell_area[i]*h_term*(0.20 + 0.80*bio_suit[i])*(1.0 + 1.5*wts.sett_boost_compact[i]);
         } else {
+          let is_mod_urb = Boolean(u_uopp && u_uopp[i] > 3.8);
+          let h_g = is_mod_urb ? Math.max(0, hyde_masked_dens ? hyde_masked_dens[i] : 0) : h_d;
+          let h_term = Math.pow(h_g + giant_floor_ratio*c_mean_dens, giant_exp);
           let p_val = Math.min(1.0, compact_prox[i]);
-          let h_g = (c_mean_dens < 0.25 && hyde_1600_dens) ?
-            Math.max(0, hyde_1600_dens[i]) : Math.max(0, hyde_masked_dens ? hyde_masked_dens[i] : h_d);
-          let h_term = Math.pow(h_g + 0.08*c_mean_dens, giant_exp);
-          let prox_c = (c_mean_dens < 0.25) ?
-            (0.20 + 0.80*p_val) : (0.55 + 0.45*p_val);
+          let prox_floor = 0.08 + 0.92*u_c;
+          let prox_c = prox_floor + (1.0 - prox_floor)*p_val;
 
-          w_i = cell_area[i]*h_term*(0.25 + 0.75*Math.pow(bio_suit[i], 0.85))*(0.55 + 1.6*wts.sett_boost_giant[i])*prox_c;
+          w_i = cell_area[i]*h_term*(0.15 + 0.85*Math.pow(bio_suit[i], 1.15))*(0.55 + 1.6*wts.sett_boost_giant[i])*prox_c;
         }
         w_i = Math.max(1e-6, w_i);
         raw_w[i] = w_i;
@@ -479,44 +559,59 @@ let { PNG } = global.pngjs || require("pngjs");
         rk_unenum[i] = (is_hab || has_sett) ? rv : 0;
       }
 
-      //5. Combine Regime 1 & Regime 2 + Isotropic Two-Scale Bleeding Frontier Diffusion
+      //5. Combine Regime 1 & Regime 2 via Boundary-Maturity Fade + Tight Micro-Textured Pioneer Spillover
       let combine_field = new Float32Array(n_valid);
       let pioneer_src = new Float32Array(n_valid);
+      let tex_raw = new Float32Array(n_valid);
       let u_fluv = (bio_covs && bio_covs.u_fluvial) ? bio_covs.u_fluvial : null;
-      let u_maxln = (bio_covs && bio_covs.maxln_valid) ? bio_covs.maxln_valid : null;
+      let u_micro = (bio_covs && bio_covs._centaur_micro_dasy) ? bio_covs._centaur_micro_dasy : null;
+      let u_terr = (bio_covs && bio_covs.u_terrain) ? bio_covs.u_terrain : null;
 
       for (let i = 0; i < n_valid; i++) {
         if (perm_ice && perm_ice[i] <= 0.05) continue;
-        if (county_id[i] > 0 && reg1_pop[i] > 0) {
-          let d_i = reg1_pop[i]/Math.max(1.0, cell_area[i]);
+        let la_i = Math.max(1.0, cell_area[i]);
+        let f_t = u_fluv ? u_fluv[i] : 0;
+        let t_t = u_terr ? Math.max(0.05, Math.min(1.5, u_terr[i])) : 0.85;
+        let is_mod_urb = Boolean(u_uopp && u_uopp[i] > 1.5);
+        let h_16 = hyde_1600_dens ? hyde_1600_dens[i] : 0;
+        let h_clean = is_mod_urb ? h_16 : Math.max(hyde_raw_dens[i], h_16);
+        let rk_d = rk_unenum[i]/la_i;
+        let um_i = u_micro ? u_micro[i] : 1.0;
 
-          pioneer_src[i] = Math.min(pioneer_cap, d_i);
+        tex_raw[i] = Math.pow(0.005 + h_clean + 0.8*rk_d, 0.72)*um_i*(0.30 + 1.15*f_t)*(0.40 + 0.80*t_t)*(1.0 + 0.65*wts.sett_boost_giant[i]);
+        if (county_id[i] > 0 && reg1_pop[i] > 0) {
+          let u_c = u_census_by_id.get(county_id[i]) || 0;
+          let d_i = reg1_pop[i]/la_i;
+
+          pioneer_src[i] = u_c*Math.min(pioneer_seed_cap, d_i);
         }
       }
-      let p_near = helpers.smoothGaussianGrid(mask_data, pioneer_src, 4, 3, null, false);
-      let p_far = helpers.smoothGaussianGrid(mask_data, pioneer_src, 11, 4, null, false);
+      let p_near = helpers.smoothGaussianGrid(mask_data, pioneer_src, near_r, near_p, null, false);
+      let p_far = helpers.smoothGaussianGrid(mask_data, pioneer_src, far_r, far_p, null, false);
+      let tex_local = helpers.smoothGaussianGrid(mask_data, tex_raw, 4, 2, null, false, tex_raw);
 
       for (let i = 0; i < n_valid; i++) {
         if (perm_ice && perm_ice[i] <= 0.05) continue;
-        let is_hab = hab_mask ? (hab_mask[i] === 1) : true;
-        let has_1600 = Boolean(hyde_1600_dens && hyde_1600_dens[i] > 0);
-        let can_bleed = is_hab || (hyde_raw_dens[i] > 0 && has_1600);
         let cid = county_id[i];
-        let valley_mod = 0.50 + 0.65*(u_fluv ? u_fluv[i] : 0) + 0.30*(u_maxln ? u_maxln[i] : 0);
-        let bleed_d = can_bleed ? Math.min(pioneer_cap, (0.62*p_near[i] + 0.38*p_far[i])*valley_mod) : 0;
 
         if (cid > 0) {
-          let m = meta_by_id.get(cid);
-          let c_dens = m ? (c_rural_target.get(cid) || 0)/Math.max(1, m.area_km2) : 2.0;
+          let u_c = u_census_by_id.get(cid);
 
-          if (is_giant[i] || c_dens < 1.2) {
-            if (reg1_pop[i] > 0 || rk_unenum[i] > 0 || (can_bleed && bleed_d > 0))
-              combine_field[i] = Math.max(reg1_pop[i], 0.85*rk_unenum[i] + 0.65*bleed_d*cell_area[i]);
-          } else {
-            combine_field[i] = reg1_pop[i];
-          }
+          if (u_c === undefined) u_c = 1.0;
+          let ind_gap = Math.max(0, rk_unenum[i] - reg1_pop[i]);
+
+          combine_field[i] = reg1_pop[i] + (1.0 - u_c)*ind_gap;
         } else {
-          combine_field[i] = rk_unenum[i] + bleed_d*cell_area[i];
+          let is_hab = hab_mask ? (hab_mask[i] === 1) : true;
+          let has_1600 = Boolean(hyde_1600_dens && hyde_1600_dens[i] > 0);
+          let can_bleed = is_hab || (hyde_raw_dens[i] > 0 && has_1600);
+          let f_t = u_fluv ? u_fluv[i] : 0;
+          let t_t = u_terr ? Math.min(1.2, u_terr[i]) : 0.80;
+          let raw_env = (0.68*p_near[i] + 0.32*p_far[i])*(0.45 + 0.85*f_t + 0.35*t_t);
+          let env_d = can_bleed ? pioneer_cap*Math.tanh(raw_env/Math.max(0.05, pioneer_cap)) : 0;
+          let micro_tex = (tex_local[i] > 1e-4) ? Math.max(0.12, Math.min(4.0, tex_raw[i]/tex_local[i])) : 1.0;
+
+          combine_field[i] = rk_unenum[i] + env_d*micro_tex*cell_area[i];
         }
       }
 
@@ -728,7 +823,6 @@ let { PNG } = global.pngjs || require("pngjs");
       if (!county_mask || target_pop <= 0) return { handled: false };
 
       //Declare local instance variables.
-      let cands = [];
       let compact_px = 0;
       let giant_px = 0;
       let p2v = context.pixel_to_valid;
@@ -748,10 +842,7 @@ let { PNG } = global.pngjs || require("pngjs");
         if (base_rural[v_idx] > 0) zone_rur_sum += base_rural[v_idx];
         if (urban_valid[v_idx] > 0) zone_urb_sum += urban_valid[v_idx];
         if (county_mask[v_idx] === 1) compact_px++;
-        else if (county_mask[v_idx] === 2) {
-          giant_px++;
-          cands.push(v_idx);
-        }
+        else if (county_mask[v_idx] === 2) giant_px++;
       }
 
       let compact_share = (total_px > 0) ? compact_px/total_px : 0;
@@ -785,24 +876,13 @@ let { PNG } = global.pngjs || require("pngjs");
       }
 
       let core_set = new Set();
+      let is_giant_only = (compact_share < 0.03);
 
-      if (compact_share >= 0.03) {
-        for (let i = 0; i < valid_cells.length; i++) {
-          let v_idx = valid_cells[i];
+      for (let i = 0; i < valid_cells.length; i++) {
+        let v_idx = valid_cells[i];
 
-          if (county_mask[v_idx] === 1) core_set.add(v_idx);
-        }
-      } else {
-        for (let i = 0; i < valid_cells.length; i++) {
-          let v_idx = valid_cells[i];
-
-          if (county_mask[v_idx] === 1) core_set.add(v_idx);
-        }
-        cands.sort(function (arg0_a, arg1_b) { return base_rural[arg1_b] - base_rural[arg0_a]; });
-        let n_take = Math.max(8, Math.ceil(0.10*any_county_px));
-
-        for (let i = 0; i < cands.length && core_set.size < n_take; i++)
-          core_set.add(cands[i]);
+        if (county_mask[v_idx] === 1 || (is_giant_only && county_mask[v_idx] === 2))
+          core_set.add(v_idx);
       }
 
       let core_rur_sum = 0;
@@ -837,6 +917,16 @@ let { PNG } = global.pngjs || require("pngjs");
       }
 
       let scalar = core_rur_target/core_rur_sum;
+      let w_conc_sum = 0;
+
+      if (is_giant_only && core_rur_target > core_rur_sum) {
+        for (let i = 0; i < valid_cells.length; i++) {
+          let v_idx = valid_cells[i];
+
+          if (core_set.has(v_idx) && base_rural[v_idx] > 0)
+            w_conc_sum += Math.pow(base_rural[v_idx], 1.15);
+        }
+      }
 
       for (let i = 0; i < valid_cells.length; i++) {
         let v_idx = valid_cells[i];
@@ -844,7 +934,14 @@ let { PNG } = global.pngjs || require("pngjs");
         active_zone_of_v[v_idx] = z_id;
         if (core_set.has(v_idx)) {
           if (base_rural[v_idx] > 0) {
-            rural_valid[v_idx] = Math.max(1e-4, base_rural[v_idx]*scalar);
+            if (is_giant_only) {
+              let add_s = (w_conc_sum > 0 && core_rur_target > core_rur_sum) ?
+                (core_rur_target - core_rur_sum)*(Math.pow(base_rural[v_idx], 1.15)/w_conc_sum) : 0;
+
+              rural_valid[v_idx] = Math.max(1e-4, base_rural[v_idx] + add_s);
+            } else {
+              rural_valid[v_idx] = Math.max(1e-4, base_rural[v_idx]*scalar);
+            }
             touched[v_idx] = 1;
           }
         } else {
@@ -855,12 +952,14 @@ let { PNG } = global.pngjs || require("pngjs");
         }
       }
 
+      let final_core_rur = is_giant_only ? Math.max(core_rur_sum, core_rur_target) : core_rur_target;
+
       //Return statement
       return {
         handled: true,
-        rural_target_pop: core_rur_target + noncore_rur_sum,
+        rural_target_pop: final_core_rur + noncore_rur_sum,
         settled_scale: settled_scale,
-        target_pop: target_pop + noncore_rur_sum + noncore_urb_sum*settled_scale
+        target_pop: Math.max(target_pop, final_core_rur + core_urb_sum*settled_scale) + noncore_rur_sum + noncore_urb_sum*settled_scale
       };
     }
   };

@@ -313,7 +313,7 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
         "let ds = StadesterService.loadDataset('stadester_2.0'); let p = StadesterService.ensureLiteCache('stadester_2.0');",
         "console.log('WARM_LITE_CACHE=' + p);"
       ].join(" ");
-      let cache_res = child_process.spawnSync(process.execPath, ["--input-type=module", "-e", cache_script], {
+      let cache_res = child_process.spawnSync(process.execPath, ["--max-old-space-size=16384", "--input-type=module", "-e", cache_script], {
         cwd: dataview_root,
         encoding: "utf8"
       });

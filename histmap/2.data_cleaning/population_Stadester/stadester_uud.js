@@ -981,6 +981,11 @@
       
       //Record empirical span before interpolation if not already annotated
       let found_yr = Number(local_city["found.yr"] !== undefined ? local_city["found.yr"] : local_city.foundation_year);
+      if (Number.isFinite(found_yr) && found_yr > 0 && found_yr < 1) {
+        found_yr = Math.round(found_yr*10000);
+        local_city["found.yr"] = found_yr;
+        local_city.foundation_year = found_yr;
+      }
       if (Number.isFinite(found_yr) && found_yr > 2026) {
         found_yr = (found_yr >= 100000 && found_yr <= 202699) ? Math.floor(found_yr/100) : NaN;
         if (Number.isFinite(found_yr)) {

@@ -144,7 +144,8 @@ let { PNG } = global.pngjs || require("pngjs");
         }
         if (global.population_Stadester_rasters && typeof global.population_Stadester_rasters.getSubUrbanSettlementsData === "function") {
           let sub_urb = global.population_Stadester_rasters.getSubUrbanSettlementsData(yr, {
-            stadester_file_path: path.join(context.root_dir, "histmap/3.data_transform/population_Stadester.transform/stadester")
+            stadester_file_path: path.join(context.root_dir, "histmap/3.data_transform/population_Stadester.transform/stadester"),
+            viscount_key: context.key
           });
 
           if (sub_urb) {

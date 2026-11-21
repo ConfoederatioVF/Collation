@@ -32,8 +32,77 @@ SVEA = r"f:\Active Projects\Project 1509 - SVEA"
 JADE = os.path.join(SVEA, "histmap", "1.data_raw", "population_regional", "JADE")
 GIS_DIR = os.path.join(JADE, "_shared", "_gis_cache")
 CENSUS_DIR = os.path.join(JADE, "_shared", "_census_cache")
+HARVEST_DIR = os.path.join(CENSUS_DIR, "historical_harvest")
 ZGRKS_DIR = os.path.join(CENSUS_DIR, "zgrks_extracted")
 RAW_ARCH = os.path.join(JADE, "_shared", "sites_east_asia", "0.raw_data")
+
+PROV_ZH_TO_ADM1 = {
+  "安徽省": "01", "安徽": "01",
+  "浙江省": "02", "浙江": "02",
+  "江西省": "03", "江西": "03",
+  "江苏省": "04", "江苏": "04",
+  "吉林省": "05", "吉林": "05",
+  "青海省": "06", "青海": "06",
+  "福建省": "07", "福建": "07",
+  "黑龙江省": "08", "黑龙江": "08",
+  "河南省": "09", "河南": "09",
+  "河北省": "10", "河北": "10",
+  "湖南省": "11", "湖南": "11",
+  "湖北省": "12", "湖北": "12",
+  "新疆维吾尔自治区": "13", "新疆": "13",
+  "西藏自治区": "14", "西藏": "14",
+  "甘肃省": "15", "甘肃": "15",
+  "广西壮族自治区": "16", "广西": "16",
+  "贵州省": "18", "贵州": "18",
+  "辽宁省": "19", "辽宁": "19",
+  "内蒙古自治区": "20", "内蒙古": "20",
+  "宁夏回族自治区": "21", "宁夏": "21",
+  "北京市": "22", "北京": "22",
+  "上海市": "23", "上海": "23",
+  "山西省": "24", "山西": "24",
+  "山东省": "25", "山东": "25",
+  "陕西省": "26", "陕西": "26",
+  "天津市": "28", "天津": "28",
+  "云南省": "29", "云南": "29",
+  "广东省": "30", "广东": "30",
+  "海南省": "31", "海南": "31",
+  "四川省": "32", "四川": "32",
+  "重庆市": "33", "重庆": "33",
+}
+
+
+def gcj02_to_wgs84(arg0_lat, arg1_lon):
+  """Exact iterative GCJ-02 (Amap/Gaode) to WGS84 conversion for mainland China."""
+  lat, lon = float(arg0_lat), float(arg1_lon)
+  if not (72.004 <= lon <= 137.8347 and 0.8293 <= lat <= 55.8271):
+    return lat, lon
+  pi = math.pi
+  a = 6378245.0
+  ee = 0.00669342162296594323
+
+  def _delta(la, lo):
+    x, y = lo - 105.0, la - 35.0
+    dlat = -100.0 + 2.0 * x + 3.0 * y + 0.2 * y * y + 0.1 * x * y + 0.2 * math.sqrt(abs(x))
+    dlat += (20.0 * math.sin(6.0 * x * pi) + 20.0 * math.sin(2.0 * x * pi)) * 2.0 / 3.0
+    dlat += (20.0 * math.sin(y * pi) + 40.0 * math.sin(y / 3.0 * pi)) * 2.0 / 3.0
+    dlat += (160.0 * math.sin(y / 12.0 * pi) + 320.0 * math.sin(y * pi / 30.0)) * 2.0 / 3.0
+    dlon = 300.0 + x + 2.0 * y + 0.1 * x * x + 0.1 * x * y + 0.1 * math.sqrt(abs(x))
+    dlon += (20.0 * math.sin(6.0 * x * pi) + 20.0 * math.sin(2.0 * x * pi)) * 2.0 / 3.0
+    dlon += (20.0 * math.sin(x * pi) + 40.0 * math.sin(x / 3.0 * pi)) * 2.0 / 3.0
+    dlon += (150.0 * math.sin(x / 12.0 * pi) + 300.0 * math.sin(x / 30.0 * pi)) * 2.0 / 3.0
+    radlat = la / 180.0 * pi
+    magic = math.sin(radlat)
+    magic = 1.0 - ee * magic * magic
+    sqrtm = math.sqrt(magic)
+    dlat = (dlat * 180.0) / ((a * (1.0 - ee)) / (magic * sqrtm) * pi)
+    dlon = (dlon * 180.0) / (a / sqrtm * math.cos(radlat) * pi)
+    return dlat, dlon
+
+  wlat, wlon = lat, lon
+  for _ in range(3):
+    dla, dlo = _delta(wlat, wlon)
+    wlat, wlon = lat - dla, lon - dlo
+  return wlat, wlon
 
 
 ETHNIC_BUREAU_RE = re.compile(
@@ -182,11 +251,20 @@ def load_geonames_country(arg0_cc):
         rows.append(rec)
         # Index only important admin/populated seats (skip 860k unpopulated villages from hash map for speed)
         if fcode in ("PPLC", "PPLA", "PPLA2", "PPLA3", "PPLA4", "ADM1", "ADM2", "ADM3") or pop >= 1000 or arg0_cc != "CN":
-          keys = {rec["name"].lower(), rec["ascii"].lower()}
-          for a in alts[:14]:
-            keys.add(a.lower())
-            if len(a) >= 3 and a[-1] in ("市", "县", "区", "旗", "镇", "乡", "州", "盟"):
-              keys.add(a[:-1].lower())
+          keys = {
+            rec["name"].lower(),
+            rec["ascii"].lower(),
+            rec["ascii"].lower().replace("'", "").replace("’", ""),
+          }
+          for idx_a, a in enumerate(alts):
+            has_cjk = any("\u4e00" <= ch <= "\u9fff" for ch in a)
+            if idx_a < 14 or has_cjk:
+              al = a.lower()
+              keys.add(al)
+              if "'" in al or "’" in al:
+                keys.add(al.replace("'", "").replace("’", ""))
+              if len(a) >= 3 and a[-1] in ("市", "县", "区", "旗", "镇", "乡", "州", "盟"):
+                keys.add(a[:-1].lower())
           for k in keys:
             if k:
               by_alt[k].append(rec)
@@ -504,8 +582,12 @@ def load_chgis_towns_and_stations():
         "lon": lo,
       })
 
-  # 2. 1911 commercial market towns (filter genuine market towns/hubs from 40,020 cunzhen)
-  mkt_sufs = {"镇", "市", "集", "墟", "场", "口", "堡", "关", "城", "司", "营", "驿", "店", "铺"}
+  # 2. 1911 full historical cunzhen settlements (expand beyond 14 chars to include garrisons, stockades, military colonies, postal stations & historic villages!)
+  mkt_sufs = {"镇", "市", "集", "墟", "场", "城"}
+  gar_sufs = {"堡", "关", "司", "营", "驿", "塘", "汛", "屯", "寨"}
+  sta_sufs = {"口", "店", "铺", "桥", "坝", "渡", "坊", "里"}
+  vil_sufs = {"村", "庄", "坪", "沟", "河", "头", "湾", "岭", "坡", "山", "滩"}
+  all_1911_sufs = mkt_sufs | gar_sufs | sta_sufs | vil_sufs
   with zipfile.ZipFile(os.path.join(GIS_DIR, "chgis_v6_1911_utf8_v6_1911_twn_pts_utf.zip")) as zf:
     sn = [n for n in zf.namelist() if n.endswith(".shp")][0]
     sf = shapefile.Reader(shp=io.BytesIO(zf.read(sn)), dbf=io.BytesIO(zf.read(sn[:-4] + ".dbf")))
@@ -514,7 +596,7 @@ def load_chgis_towns_and_stations():
     ipy, ich, il2, icnt = flds.index("NAME_PY"), flds.index("NAME_CH"), flds.index("LEV2_PY"), flds.index("COUNT_PY")
     for r in sf.iterRecords():
       ch = str(r[ich] or "").strip()
-      if not ch or ch[-1] not in mkt_sufs:
+      if not ch or ch[-1] not in all_1911_sufs:
         continue
       try:
         lo, la = float(r[ix]), float(r[iy])
@@ -525,10 +607,13 @@ def load_chgis_towns_and_stations():
       nm = clean_name(r[ipy])
       if not nm or len(nm) < 2:
         continue
+      suf = ch[-1]
+      tier = "market" if suf in mkt_sufs else ("garrison" if suf in gar_sufs else ("station" if suf in sta_sufs else "village"))
       twn_1911.append({
         "name": nm,
         "ch": ch,
-        "suf": ch[-1],
+        "suf": suf,
+        "tier": tier,
         "pref_py": str(r[il2] or "").strip(),
         "cnty_py": str(r[icnt] or "").strip(),
         "lat": la,
@@ -563,17 +648,14 @@ def load_chgis_towns_and_stations():
 
 
 def load_relicsatlas_by_era():
-  """Loads RelicsAtlas National Key Cultural Relics (5,060) strictly filtered to genuine walled cities & settlements by dynasty."""
+  """Loads RelicsAtlas National Key Cultural Relics (5,060) filtered to genuine walled cities, historic towns, ancient ruins & settlement-anchored heritage by dynasty."""
   ra = json.load(open(os.path.join(RAW_ARCH, "cn_relicsatlas_heritage_sites.json"), encoding="utf-8"))
-  sett_kw = ("故城", "古城", "城址", "遗址", "古镇", "古村", "卫城", "所城", "堡", "都城", "王城", "宫城", "皇城", "关", "寨", "驿")
-  # Strictly reject non-settlement monuments (kilns, temples, pagodas, tombs, bridges, rock carvings, walls, shrines, mines)
+  sett_kw = ("故城", "古城", "城址", "遗址", "古镇", "古村", "卫城", "所城", "堡", "都城", "王城", "宫城", "皇城", "关", "寨", "驿", "窑", "盐井", "会馆", "书院", "村落", "民居", "土楼", "碉楼", "古城墙")
+  # Reject strictly modern revolutionary/non-settlement isolated objects (burials, individual stone tablets, modern memorials)
   reject_kw = (
-    "旧石器", "革命", "烈士", "故居", "旧址", "窑", "佛寺", "寺", "庙", "观", "塔",
-    "石刻", "石窟", "摩崖", "皇陵", "陵", "墓", "桥", "碑", "长城", "矿", "宫",
-    "殿", "祠", "会馆", "书院", "牌坊", "造像", "岩画", "崖画", "盐井", "水库",
-    "水利", "渠", "堰", "闸", "灯塔", "炮台", "教堂", "清真寺", "衙署", "府第",
-    "宅", "庄园", "石桥", "古塔", "千佛", "会盟", "办事处", "司令部", "指挥部",
-    "讲习所", "总管府", "宣抚司", "长官司", "石经", "铁塔", "木塔", "佛像",
+    "旧石器", "革命", "烈士", "故居", "旧址", "红军", "抗日", "纪念", "起义",
+    "皇陵", "陵", "墓", "碑", "造像", "岩画", "崖画", "灯塔", "办事处",
+    "司令部", "指挥部", "讲习所", "石经", "铁塔", "木塔", "佛像", "千佛",
   )
   era_map = [
     ("preqin", ("新石器", "夏", "商", "周", "春秋", "战国", "青铜")),
@@ -588,6 +670,8 @@ def load_relicsatlas_by_era():
     nm_zh = str(r.get("name") or "").strip()
     era_s = str(r.get("era") or "")
     ty = str(r.get("type") or "")
+    if ty == "近现代重要史迹及代表性建筑" or ty == "古墓葬" or ty == "石窟寺及石刻":
+      continue
     if any(rk in era_s or rk in nm_zh for rk in reject_kw):
       continue
     if ty != "古遗址" and not any(k in nm_zh for k in sett_kw):
@@ -599,10 +683,9 @@ def load_relicsatlas_by_era():
     if not (73.0 <= lo <= 135.5 and 18.0 <= la <= 54.0):
       continue
     nm_py = clean_name(zh_to_pinyin(nm_zh))
-    # Reject smashed multi-word descriptive titles (keep concise real place names <= 15 chars!)
-    if not nm_py or len(nm_py) < 3 or len(nm_py) > 15:
+    if not nm_py or len(nm_py) < 3 or len(nm_py) > 26:
       continue
-    is_walled = any(k in nm_zh for k in ("故城", "古城", "城址", "都城", "王城", "卫城", "所城", "古镇"))
+    is_walled = any(k in nm_zh for k in ("故城", "古城", "城址", "都城", "王城", "卫城", "所城", "古镇", "古村", "土楼"))
     rec = {"name": nm_py, "zh": nm_zh, "era": era_s, "addr": str(r.get("address") or ""), "lat": la, "lon": lo, "is_walled": is_walled}
     for ek, kws in era_map:
       if any(kw in era_s for kw in kws):
@@ -611,8 +694,8 @@ def load_relicsatlas_by_era():
 
 
 def load_hosner_named_complexes(arg0_gn_cn_rows):
-  """Clusters 51,432 Hosner et al. (2016) Neolithic & Bronze Age sites into multi-site river-valley complexes,
-  naming each complex after its nearest GeoNames CN PPLA3/PPLA4 populated locality within 15 km (zero code IDs!).
+  """Clusters 51,432 Hosner et al. (2016) Neolithic & Bronze Age sites into multi-site river-valley settlements (0.08 deg cells, >=2 sites or >=1 in frontier valleys),
+  naming each settlement after its nearest GeoNames CN populated place within 16 km (zero code IDs!).
   """
   hp = os.path.join(RAW_ARCH, "hosner_2016_china_neolithic_bronze.tab")
   with open(hp, encoding="utf-8") as f:
@@ -620,42 +703,42 @@ def load_hosner_named_complexes(arg0_gn_cn_rows):
   skip = next(i + 1 for i, l in enumerate(lines) if l.strip() == "*/")
   h = pd.read_csv(hp, sep="\t", skiprows=skip, low_memory=False)
 
-  # Build KDTree over named GeoNames CN towns/counties (PPLA/PPLA2/PPLA3/PPLA4 + pop>=2000)
-  gn_named = [r for r in arg0_gn_cn_rows if r["fcode"] in ("PPLC", "PPLA", "PPLA2", "PPLA3", "PPLA4") or r["pop"] >= 2000]
+  # Use ALL GeoNames CN P-class populated places (~860k villages/towns) for exact local valley naming
+  gn_named = [r for r in arg0_gn_cn_rows if r["fclass"] == "P" and len(r["ascii"] or r["name"]) >= 3]
   gn_coords = np.array([[r["lat"], r["lon"]] for r in gn_named], dtype=np.float64)
   tree = cKDTree(gn_coords)
 
-  # Grid-cluster Hosner sites at 0.14 deg (~14 km)
+  # Grid-cluster Hosner sites at 0.08 deg (~8.5 km)
   cells = defaultdict(list)
   for row in h.itertuples(index=False):
     try:
       lo, la = float(row.Longitude), float(row.Latitude)
-      age_ka = float(getattr(row, "_8", np.nan))  # Age [ka BP]
+      age_ka = float(getattr(row, "_8", np.nan))
     except Exception:
       continue
     if not (73.0 <= lo <= 135.5 and 18.0 <= la <= 54.0):
       continue
     cult = str(getattr(row, "_5", "") or "").lower()
-    cells[(round(la / 0.14), round(lo / 0.14))].append((la, lo, age_ka, cult))
+    cells[(round(la / 0.08), round(lo / 0.08))].append((la, lo, age_ka, cult))
 
   complexes = []
   for _, pts in cells.items():
-    if len(pts) < 4:
-      continue
     mla = float(np.mean([p[0] for p in pts]))
     mlo = float(np.mean([p[1] for p in pts]))
+    is_frontier = (mlo < 105.0 or mla > 41.0 or mla < 26.0)
+    if len(pts) < (1 if is_frontier else 2):
+      continue
     dist_deg, idx = tree.query([mla, mlo])
     if dist_deg > 0.16:
       continue
     gn = gn_named[int(idx)]
     nm = clean_name(gn["ascii"] or gn["name"])
-    nm = re.sub(r"\s+(?:Shi|Xian|Zhen|Xiang|Qu|Qi|County|Town)$", "", nm, flags=re.I).strip()
-    if not nm or len(nm) < 3:
+    nm = re.sub(r"\s+(?:Shi|Xian|Zhen|Xiang|Qu|Qi|Cun|County|Town|Village)$", "", nm, flags=re.I).strip()
+    if not nm or len(nm) < 3 or len(nm) > 22:
       continue
-    # Determine active prehistoric horizons from Cult age / Age ka BP
     cults = " ".join(p[3] for p in pts)
     n_sites = len(pts)
-    base_p = min(5500, int(round(380 + 260 * math.sqrt(n_sites))))
+    base_p = min(5500, int(round(320 + 240 * math.sqrt(n_sites))))
     pdict = {}
     if any(k in cults for k in ("yangshao", "peiligang", "hemudu", "dawenkou", "hongshan", "neolithic")):
       pdict[-4000] = int(round(base_p * 0.65))
@@ -681,7 +764,7 @@ def load_hosner_named_complexes(arg0_gn_cn_rows):
       "foundation_year": min(pdict.keys()) - 300,
       "population": pdict,
       "sources": ["Hosner2016_RelicsAtlas", "ZhongguoRenkouShi_Vol1"],
-      "justification": f"Hosner et al. (2016) Neolithic-Bronze Age multi-site complex ({n_sites} sites near {nm}).",
+      "justification": f"Hosner et al. (2016) Neolithic-Bronze Age valley complex ({n_sites} sites near {nm}).",
     })
   return complexes
 
@@ -783,15 +866,20 @@ def load_kham_monasteries():
 
 
 def load_tw_boch_heritage():
-  """Loads Taiwan BOCH archaeological & historical heritage sites from tw_heritage_a_*.js."""
+  """Loads all 1,448 Taiwan BOCH archaeological & historical heritage sites from tw_heritage_a_*.js (fixed trailing semicolon & Name key)."""
   out = []
   for fp in sorted(glob.glob(os.path.join(RAW_ARCH, "tw_heritage_a_*.js"))):
-    txt = open(fp, encoding="utf-8", errors="replace").read()
+    fn = os.path.basename(fp)
+    if fn == "tw_heritage_a_6.js":
+      # Modern White Terror / human rights sites (post-1945)
+      continue
+    txt = open(fp, encoding="utf-8", errors="replace").read().strip()
     idx = txt.find("{")
-    if idx < 0:
+    end = txt.rfind("}")
+    if idx < 0 or end <= idx:
       continue
     try:
-      gj = json.loads(txt[idx:])
+      gj = json.loads(txt[idx:end + 1])
     except Exception:
       continue
     for feat in gj.get("features", []):
@@ -803,11 +891,457 @@ def load_tw_boch_heritage():
       if not (118.0 <= lo <= 123.0 and 21.5 <= la <= 26.5):
         continue
       props = feat.get("properties") or {}
-      nm_zh = str(props.get("caseName") or props.get("name") or "").strip()
+      nm_zh = str(props.get("Name") or props.get("caseName") or props.get("name") or "").strip()
       if not nm_zh:
         continue
-      nm_py = clean_name(zh_to_pinyin(nm_zh))
-      if not nm_py or len(nm_py) < 3:
+      period_s = str(props.get("period") or "").strip()
+      # Skip purely Japanese-era / post-war buildings for pre-1800 chapters unless archaeological
+      is_arch = fn in ("tw_heritage_a_11.js", "tw_heritage_a_12.js") or ("遺址" in nm_zh)
+      if not is_arch and any(k in period_s for k in ("日治", "民國", "戰後")):
         continue
-      out.append({"name": nm_py, "zh": nm_zh, "lat": la, "lon": lo, "file": os.path.basename(fp)})
+      # Clean Taiwanese site/monument suffixes for readable toponym
+      base_zh = re.sub(r"(?:考古遺址|遺址|古蹟|聚落|老街|古厝|公廟|天后宮|龍山寺|城隍廟|孔廟|書院|祠堂|砲台|炮台|燈塔|古道)$", "", nm_zh).strip() or nm_zh
+      nm_py = clean_name(zh_to_pinyin(base_zh))
+      if not nm_py or len(nm_py) < 3 or len(nm_py) > 24:
+        continue
+      if is_arch:
+        beg_yr, end_yr = -2000, 1200
+      elif any(k in period_s for k in ("荷", "西", "明鄭", "明")):
+        beg_yr, end_yr = 1624, 1911
+      else:
+        beg_yr, end_yr = 1684, 1911
+      town_zh = str(props.get("T_Name") or "").strip()
+      cnty_zh = str(props.get("C_Name") or "").strip()
+      out.append({
+        "name": nm_py,
+        "zh": nm_zh,
+        "town_zh": town_zh,
+        "cnty_zh": cnty_zh,
+        "period": period_s,
+        "is_arch": is_arch,
+        "beg_yr": beg_yr,
+        "end_yr": end_yr,
+        "lat": la,
+        "lon": lo,
+        "file": fn,
+      })
+  return out
+
+
+def load_tgaz_historical_places():
+  """Loads pre-1800 historical places from tgaz_bak_2018.zip (CHGIS 18,334 + TBRC 3,010 Tibetan/Mongolian monasteries)."""
+  zp = os.path.join(GIS_DIR, "tgaz_bak_2018.zip")
+  if not os.path.exists(zp):
+    return []
+  pat = re.compile(
+    r"\((\d+),'([^']*)','([^']*)',(?:'((?:[^'\\]|\\.)*)'|NULL),(?:'((?:[^'\\]|\\.)*)'|NULL),"
+    r"(-?\d+|NULL),(-?\d+|NULL),(?:'([^']*)'|NULL),(?:'([^']*)'|NULL),(?:'([^']*)'|NULL),"
+    r"(?:'((?:[^'\\]|\\.)*)'|NULL),(?:'((?:[^'\\]|\\.)*)'|NULL)"
+  )
+  out = []
+  with zipfile.ZipFile(zp) as zf:
+    with zf.open("tgaz_bak_2018.sql") as fh:
+      for line in io.TextIOWrapper(fh, encoding="utf-8", errors="replace"):
+        if not line.startswith("INSERT INTO `mv_pn_srch`"):
+          continue
+        for m in pat.finditer(line):
+          _, sid, dsrc, nm, tr, byr, eyr, _, xc, yc, fvn, ftr = m.groups()
+          if not byr or byr == "NULL":
+            continue
+          try:
+            by = int(byr)
+            ey = int(eyr) if (eyr and eyr != "NULL") else 1911
+            lo, la = float(xc), float(yc)
+          except Exception:
+            continue
+          if by >= 1800 or not (73.0 <= lo <= 135.5 and 18.0 <= la <= 54.0):
+            continue
+          raw_py = tr or zh_to_pinyin(nm or "")
+          raw_py = re.sub(
+            r"\s+(?:Xian|Zhou|Fu|Jun|Ting|Wei|Suo|Lu|Guo|Houguo|Fangzhen|Duhufu|Changguansi|Anfusi|Tusi|Qianhu|Cheng|Gompa|Dgon\s*Pa|Monastery)$",
+            "",
+            str(raw_py or ""),
+            flags=re.I,
+          ).strip()
+          nm_clean = clean_name(raw_py)
+          if not nm_clean or len(nm_clean) < 2 or len(nm_clean) > 24:
+            continue
+          if ey < by:
+            ey = max(by + 50, 1911)
+          out.append({
+            "sys_id": sid,
+            "data_src": dsrc,
+            "name": nm_clean,
+            "zh": str(nm or "").strip(),
+            "ftype": str(ftr or fvn or "").strip(),
+            "is_monastery": (dsrc == "TBRC"),
+            "lat": la,
+            "lon": lo,
+            "beg_yr": by,
+            "end_yr": ey,
+          })
+  return out
+
+
+def load_cbdb_addresses():
+  """Loads 15,551 georeferenced historical places from CBDB ADDR_CODES (Tang-Song-Yuan-Ming-Qing)."""
+  fp = os.path.join(HARVEST_DIR, "cbdb_historical_addresses.json")
+  if not os.path.exists(fp):
+    return []
+  raw = json.load(open(fp, encoding="utf-8"))
+  out = []
+  for r in raw:
+    try:
+      la, lo = float(r["lat"]), float(r["lon"])
+      fy = int(r["firstyear"]) if r.get("firstyear") is not None else 1000
+      ly = int(r["lastyear"]) if r.get("lastyear") is not None else 1911
+    except Exception:
+      continue
+    if fy >= 1800 or not (73.0 <= lo <= 135.5 and 18.0 <= la <= 54.0):
+      continue
+    if fy == 0:
+      fy = 600
+    if ly < fy or ly == 0:
+      ly = 1911
+    nm_raw = str(r.get("name_py") or "").strip()
+    nm_raw = re.sub(r"\s+(?:Xian|Zhou|Fu|Lu|Jun|Ting|Wei|Suo|Shi|Qu|Qi|Zhen|Xiang|Cun)$", "", nm_raw, flags=re.I).strip()
+    nm = clean_name(nm_raw) or clean_name(zh_to_pinyin(r.get("name_zh", "")))
+    if not nm or len(nm) < 2 or len(nm) > 24:
+      continue
+    zh = str(r.get("name_zh") or "").strip()
+    alts = [x for x in [zh] + [a.strip() for a in str(r.get("alt_names") or "").split(";") if a.strip()] if x]
+    out.append({
+      "name": nm,
+      "zh": zh,
+      "other_names": alts[:6],
+      "lat": la,
+      "lon": lo,
+      "beg_yr": fy,
+      "end_yr": ly,
+      "chgis_id": r.get("chgis_id"),
+    })
+  return out
+
+
+def load_ming_garrisons():
+  """Loads all 375 Harvard CHGIS Ming Dynasty Garrisons (Weisuo) with exact beg_yr/end_yr."""
+  zp = os.path.join(HARVEST_DIR, "dvn_5ruxk8_Ming_Garrisons.zip")
+  if not os.path.exists(zp):
+    return []
+  out = []
+  with zipfile.ZipFile(zp) as zf:
+    sn = [n for n in zf.namelist() if n.endswith(".shp")][0]
+    sf = shapefile.Reader(shp=io.BytesIO(zf.read(sn)), dbf=io.BytesIO(zf.read(sn[:-4] + ".dbf")))
+    flds = [f[0] for f in sf.fields[1:]]
+    ipy, ich = flds.index("name_py"), flds.index("name_ch")
+    ila, ilo = flds.index("latitude"), flds.index("longitude")
+    ib, ie = flds.index("beg_yr"), flds.index("end_yr")
+    for r in sf.iterRecords():
+      try:
+        la, lo = float(r[ila]), float(r[ilo])
+        by = int(r[ib]) if r[ib] else 1375
+        ey = int(r[ie]) if r[ie] else 1644
+      except Exception:
+        continue
+      if not (73.0 <= lo <= 135.5 and 18.0 <= la <= 54.0):
+        continue
+      nm_py = re.sub(r"\s+(?:qian|hou|zuo|you|zhong)?\s*(?:wei|suo|shouyuqianhusuo)$", "", str(r[ipy] or ""), flags=re.I).strip()
+      nm = clean_name(nm_py)
+      if not nm or len(nm) < 2:
+        continue
+      out.append({
+        "name": nm,
+        "zh": str(r[ich] or "").strip(),
+        "lat": la,
+        "lon": lo,
+        "beg_yr": max(1368, by),
+        "end_yr": min(1644, max(ey, by)),
+      })
+  return out
+
+
+def load_tbrc_monasteries():
+  """Loads 2,996 TBRC Major/Minor/Printery Tibetan & Qinghai/Gansu/Sichuan/Mongolian monasteries."""
+  zp = os.path.join(HARVEST_DIR, "dvn_w6pfxr_Tibet_Monasteries_TBRC_V2_2014.zip")
+  if not os.path.exists(zp):
+    return []
+  out = []
+  with zipfile.ZipFile(zp) as zf:
+    for sn in [n for n in zf.namelist() if n.endswith(".shp")]:
+      is_major = "Major" in sn
+      sf = shapefile.Reader(shp=io.BytesIO(zf.read(sn)), dbf=io.BytesIO(zf.read(sn[:-4] + ".dbf")))
+      flds = [f[0] for f in sf.fields[1:]]
+      iwy, ich, ibo = flds.index("M_NM_WY"), flds.index("M_NM_CH"), flds.index("M_NM_BO")
+      ilo, ila = flds.index("LONG"), flds.index("LAT")
+      for r in sf.iterRecords():
+        try:
+          lo, la = float(r[ilo]), float(r[ila])
+        except Exception:
+          continue
+        if not (73.0 <= lo <= 135.5 and 18.0 <= la <= 54.0):
+          continue
+        wy = str(r[iwy] or "").strip()
+        ch = str(r[ich] or "").strip()
+        bo = str(r[ibo] or "").strip()
+        if wy.lower() in ("fnu", "none", ""):
+          wy = ""
+        nm_raw = wy if wy else zh_to_pinyin(ch)
+        nm_raw = re.sub(r"\s+(?:dgon\s*pa|dgon|gling|par\s*khang|lha\s*khang|si|monastery)$", "", nm_raw, flags=re.I).strip()
+        nm = clean_name(nm_raw)
+        if not nm or len(nm) < 3 or len(nm) > 22:
+          continue
+        alts = [x for x in (ch, bo, wy) if x and x.lower() != "fnu" and x != nm]
+        out.append({
+          "name": nm,
+          "other_names": alts[:4],
+          "lat": la,
+          "lon": lo,
+          "is_major": is_major,
+        })
+  return out
+
+
+def load_early_china_c14():
+  """Loads 7,083 AMS radiocarbon dates across 1,371 named settlements from Zenodo 17107786."""
+  fp = os.path.join(HARVEST_DIR, "zenodo_17107786_Radiocarbon_databank_for_Chinese_archaeology_v2023.4.xlsx")
+  if not os.path.exists(fp):
+    return []
+  xl = pd.ExcelFile(fp)
+  by_site = defaultdict(list)
+  for sh in xl.sheet_names[:5]:
+    df = xl.parse(sh, header=1)
+    for row in df.itertuples(index=False):
+      try:
+        nm_en = str(getattr(row, "_0", "") or "").strip()
+        nm_zh = str(getattr(row, "_2", "") or "").strip()
+        lo = float(getattr(row, "_12", np.nan))
+        la = float(getattr(row, "_13", np.nan))
+        cal_bp = float(getattr(row, "_26", np.nan))
+        if math.isnan(cal_bp):
+          c14_bp = float(getattr(row, "_21", np.nan))
+          cal_bp = c14_bp * 1.05 if not math.isnan(c14_bp) else np.nan
+      except Exception:
+        continue
+      if math.isnan(la) or math.isnan(lo) or math.isnan(cal_bp):
+        continue
+      if not (73.0 <= lo <= 135.5 and 18.0 <= la <= 54.0):
+        continue
+      yr = int(round(1950.0 - cal_bp))
+      if not (-9500 <= yr <= 1200):
+        continue
+      nm = clean_name(nm_en) or clean_name(zh_to_pinyin(nm_zh))
+      if not nm or len(nm) < 3 or len(nm) > 24:
+        continue
+      by_site[(nm, round(la, 2), round(lo, 2))].append((la, lo, yr, nm_zh))
+  out = []
+  for (nm, _, _), pts in by_site.items():
+    la = float(np.mean([p[0] for p in pts]))
+    lo = float(np.mean([p[1] for p in pts]))
+    y_min = min(p[2] for p in pts)
+    y_max = max(p[2] for p in pts)
+    zh = next((p[3] for p in pts if p[3] and p[3] != "-"), "")
+    b_yrs = [-6000, -5000, -4000, -3000, -2500, -2000, -1500, -1000, -500, -200, 2, 140, 280, 464, 609, 742, 820, 980, 1080]
+    act = [y for y in b_yrs if (y_min - 250) <= y <= (y_max + 250)]
+    if not act:
+      act = [y_min]
+    base_p = min(4800, 500 + 180 * len(pts))
+    out.append({
+      "name": nm,
+      "other_names": [zh] if zh else [],
+      "lat": la,
+      "lon": lo,
+      "beg_yr": y_min - 200,
+      "end_yr": y_max + 200,
+      "population": {y: base_p for y in act},
+      "n_dates": len(pts),
+    })
+  return out
+
+
+def load_traditional_villages():
+  """Loads 8,170 MOHURD National Traditional Ancient Villages (Batches 1-6) converted from GCJ-02 to WGS84."""
+  fp = os.path.join(HARVEST_DIR, "cn_traditional_villages_with_coords.json")
+  if not os.path.exists(fp):
+    return []
+  d = json.load(open(fp, encoding="utf-8"))
+  vils = d.get("villages", d) if isinstance(d, dict) else d
+  out = []
+  for v in vils:
+    try:
+      la_g, lo_g = float(v["latitude"]), float(v["longitude"])
+    except Exception:
+      continue
+    la, lo = gcj02_to_wgs84(la_g, lo_g)
+    if not (73.0 <= lo <= 135.5 and 18.0 <= la <= 54.0):
+      continue
+    v_zh = str(v.get("village") or "").strip()
+    if not v_zh:
+      continue
+    base_zh = re.sub(r"(?:村委会|社区|自然村|村|寨|屯|堡|庄|镇|街)$", "", v_zh).strip() or v_zh
+    nm = clean_name(zh_to_pinyin(base_zh))
+    if not nm or len(nm) < 3 or len(nm) > 22:
+      continue
+    batch = int(v.get("batch_num") or 5)
+    prov = str(v.get("province") or "").strip()
+    out.append({
+      "name": nm,
+      "zh": v_zh,
+      "province": prov,
+      "batch": batch,
+      "lat": la,
+      "lon": lo,
+    })
+  return out
+
+
+def load_domm_mongolian_monasteries():
+  """Loads 937 pre-1912 georeferenced Mongolian monasteries (khuree/khiid) from Arts Council of Mongolia DOMM."""
+  fp = os.path.join(HARVEST_DIR, "domm_mongolian_monasteries.json")
+  if not os.path.exists(fp):
+    return []
+  raw = json.load(open(fp, encoding="utf-8"))
+  out = []
+  for r in raw:
+    try:
+      la, lo = float(r["lat"]), float(r["lon"])
+    except Exception:
+      continue
+    if not (87.5 <= lo <= 120.0 and 41.5 <= la <= 52.2):
+      continue
+    nm_raw = str(r.get("name") or "").strip()
+    nm_short = re.sub(r"\s+(?:khuree|khüree|khiid|dugana|dugan|sum|süm|jas|monastery|temple)$", "", nm_raw, flags=re.I).strip() or nm_raw
+    nm = clean_name(nm_short)
+    if not nm or len(nm) < 3 or len(nm) > 26:
+      continue
+    is_major = any(k in nm_raw.lower() for k in ("khuree", "khüree", "khiid"))
+    out.append({
+      "name": nm,
+      "other_names": [nm_raw] if nm_raw != nm else [],
+      "lat": la,
+      "lon": lo,
+      "is_major": is_major,
+    })
+  return out
+
+
+def load_wikidata_and_osm_jade():
+  """Loads harvested Wikidata SPARQL & OSM Overpass historical/archaeological sites across CN, MN, TW, HK & MO."""
+  out = []
+  wd_files = [
+    ("wd_cn_ancient_and_arch.json", "China"),
+    ("wd_cn_national_heritage_q1188574.json", "China"),
+    ("wd_cn_pre1800_towns_inception.json", "China"),
+    ("wd_mn_all_hist_monasteries.json", "Mongolia"),
+    ("wd_tw_all_hist_and_arch.json", "Taiwan"),
+    ("wd_hk_mo_hist.json", "Hong Kong"),
+  ]
+  pt_re = re.compile(r"Point\(\s*(-?\d+(?:\.\d+)?)\s+(-?\d+(?:\.\d+)?)\s*\)")
+  yr_re = re.compile(r"^(-?\d{1,5})-")
+  for fn, def_ctry in wd_files:
+    fp = os.path.join(HARVEST_DIR, fn)
+    if not os.path.exists(fp):
+      continue
+    try:
+      rows = json.load(open(fp, encoding="utf-8"))
+    except Exception:
+      continue
+    for r in rows:
+      coord_s = (r.get("coord") or {}).get("value", "")
+      m = pt_re.search(coord_s)
+      if not m:
+        continue
+      lo, la = float(m.group(1)), float(m.group(2))
+      if not (73.0 <= lo <= 135.5 and 18.0 <= la <= 54.0):
+        continue
+      lbl = str((r.get("itemLabel") or {}).get("value", "")).strip()
+      zh = str((r.get("zhLabel") or r.get("mnLabel") or {}).get("value", "")).strip()
+      if not lbl or (lbl.startswith("Q") and lbl[1:].isdigit()):
+        lbl = zh_to_pinyin(zh) if zh else ""
+      nm = clean_name(lbl)
+      if not nm or len(nm) < 3 or len(nm) > 26:
+        continue
+      if any(rk in nm.lower() for rk in ("tomb", "mausoleum", "grave", "stele", "statue", "buddha", "pagoda", "museum", "school", "university", "station", "bridge", "church", "cathedral", "former residence", "headquarters", "memorial")):
+        continue
+      inc_s = (r.get("inception") or {}).get("value", "")
+      ym = yr_re.match(inc_s)
+      inc_yr = int(ym.group(1)) if ym else None
+      if inc_yr is not None and inc_yr >= 1800:
+        continue
+      ctry = def_ctry
+      if def_ctry == "Hong Kong" and lo < 113.8:
+        ctry = "Macao"
+      elif ctry == "China" and ((119.95 <= lo <= 122.2 and 21.8 <= la <= 25.4) or (119.3 <= lo <= 119.8 and 23.1 <= la <= 23.85)):
+        ctry = "Taiwan"
+      per = str((r.get("periodLabel") or {}).get("value") or (r.get("classLabel") or {}).get("value") or "").lower()
+      if inc_yr is not None:
+        by = inc_yr
+      elif any(k in per for k in ("neolithic", "bronze", "shang", "zhou", "pre-qin")):
+        by = -2000
+      elif any(k in per for k in ("han", "qin", "jin", "three kingdoms", "xiongnu")):
+        by = 2
+      elif any(k in per for k in ("tang", "sui", "uyghur", "turk")):
+        by = 700
+      elif any(k in per for k in ("song", "liao", "yuan", "khitan")):
+        by = 1080
+      elif any(k in per for k in ("ming",)):
+        by = 1450
+      else:
+        by = 1680 if ctry in ("Taiwan", "Mongolia", "Hong Kong") else 1500
+      out.append({
+        "name": nm,
+        "other_names": [zh] if zh and zh != nm else [],
+        "country": ctry,
+        "lat": la,
+        "lon": lo,
+        "beg_yr": by,
+        "end_yr": 1911 if by >= 1000 else min(1911, by + 1200),
+        "source": fn,
+      })
+
+  # OSM Overpass tiles
+  for fp in sorted(glob.glob(os.path.join(HARVEST_DIR, "osm_jade_*.json"))):
+    fn = os.path.basename(fp)
+    def_ctry = "Mongolia" if "_mn_" in fn else ("Taiwan" if "_tw_" in fn else "China")
+    try:
+      els = json.load(open(fp, encoding="utf-8"))
+    except Exception:
+      continue
+    for el in els:
+      tags = el.get("tags") or {}
+      raw_nm = tags.get("name:en") or tags.get("int_name") or tags.get("name") or ""
+      if not raw_nm:
+        continue
+      la = el.get("lat") or (el.get("center") or {}).get("lat")
+      lo = el.get("lon") or (el.get("center") or {}).get("lon")
+      if la is None or lo is None:
+        continue
+      la, lo = float(la), float(lo)
+      if not (73.0 <= lo <= 135.5 and 18.0 <= la <= 54.0):
+        continue
+      nm_s = str(raw_nm).strip()
+      nm = clean_name(nm_s) if re.search(r"[A-Za-z]", nm_s) else clean_name(zh_to_pinyin(nm_s))
+      if not nm or len(nm) < 3 or len(nm) > 24:
+        continue
+      if any(rk in nm.lower() for rk in ("tomb", "grave", "cemetery", "museum", "park", "gate", "tower", "bridge", "wall", "statue", "stele", "memorial")):
+        continue
+      ctry = def_ctry
+      if ctry == "China":
+        if 113.8 <= lo <= 114.45 and 22.15 <= la <= 22.56:
+          ctry = "Hong Kong"
+        elif 113.52 <= lo <= 113.60 and 22.10 <= la <= 22.22:
+          ctry = "Macao"
+        elif (119.95 <= lo <= 122.2 and 21.8 <= la <= 25.4) or (119.3 <= lo <= 119.8 and 23.1 <= la <= 23.85):
+          ctry = "Taiwan"
+      hist_t = str(tags.get("historic") or "").lower()
+      by = -1000 if hist_t == "archaeological_site" else (1500 if hist_t in ("fort", "castle") else 1680)
+      out.append({
+        "name": nm,
+        "other_names": [nm_s] if nm_s != nm else [],
+        "country": ctry,
+        "lat": la,
+        "lon": lo,
+        "beg_yr": by,
+        "end_yr": 1911 if hist_t != "archaeological_site" else 900,
+        "source": fn,
+      })
   return out
