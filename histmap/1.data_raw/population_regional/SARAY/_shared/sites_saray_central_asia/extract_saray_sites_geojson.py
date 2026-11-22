@@ -735,66 +735,73 @@ def ingest_all_repositories():
     except Exception:
       pass
 
-  # --- REPO 9: Wikidata Multilingual Institutional Cultural Heritage Registries ---
-  for fn in sorted(os.listdir(RAW_DIR)):
-    if not fn.startswith("wikidata_arch_") or not fn.endswith(".json"):
-      continue
-    rows = json.load(open(os.path.join(RAW_DIR, fn), "r", encoding="utf-8"))
-    for row in rows:
-      la, lo = parse_wd_coord((row.get("coord") or {}).get("value"))
-      if la is None or lo is None or not (32.0 <= la <= 58.5 and 43.0 <= lo <= 92.0):
+  # --- REPO 9: Official Uzbekistan State Register of Cultural Heritage (Cabinet of Ministers Resolution No. 846, lex.uz/docs/4543266) ---
+  uz_reg_p = os.path.join(RAW_DIR, "uz_lex_846_geocoded.json")
+  if os.path.exists(uz_reg_p):
+    for row in json.load(open(uz_reg_p, "r", encoding="utf-8")):
+      try:
+        la, lo = float(row.get("lat") or 0), float(row.get("lon") or 0)
+      except Exception:
         continue
-      lbl = (row.get("itemLabel") or {}).get("value") or ""
-      tp = (row.get("typeLabel") or {}).get("value") or ""
-      per = (row.get("periodLabel") or {}).get("value") or ""
-      cul = (row.get("cultureLabel") or {}).get("value") or ""
-      inc = parse_wd_year((row.get("inception") or {}).get("value"))
-      dis = parse_wd_year((row.get("dissolved") or {}).get("value"))
-      if inc is not None and inc > 1865:
+      if not (36.8 <= la <= 45.8 and 55.8 <= lo <= 73.5):
         continue
-      full_txt = f"{lbl} {tp} {per} {cul}"
-      if MODERN_EXCLUDE_RE.search(full_txt):
-        continue
-      pw = assign_periods_by_span(inc, dis if dis is not None else min(1865, inc + 300)) if inc is not None else classify_ca_text(full_txt)
+      cat = str(row.get("category") or "").lower()
+      nm = str(row.get("name") or "")
+      per_s = str(row.get("period") or "")
+      sy = row.get("start_yr")
+      ey = row.get("end_yr")
+      pw = assign_periods_by_span(sy, ey) if (sy is not None and ey is not None) else classify_ca_text(f"{nm} {per_s}")
       if not pw:
-        continue
-      wt = 2.0 if any(k in tp.lower() for k in ("city", "settlement", "fort", "castle", "citadel", "archaeological", "ruin", "caravanserai")) else 1.2
-      records.append((la, lo, wt, pw, "wikidata_heritage_registers", wt >= 1.5, 0))
-      source_stats["wikidata_heritage_registers"] += 1
-
-  # --- REPO 10: OSM Overpass Archaeological Sites (API Forensics filtered) ---
-  for fn in sorted(os.listdir(RAW_DIR)):
-    if not fn.startswith("osm_arch_") or not fn.endswith(".json"):
-      continue
-    els = json.load(open(os.path.join(RAW_DIR, fn), "r", encoding="utf-8"))
-    for el in els:
-      la = el.get("lat") or (el.get("center") or {}).get("lat")
-      lo = el.get("lon") or (el.get("center") or {}).get("lon")
-      if la is None or lo is None or not (32.0 <= la <= 58.5 and 43.0 <= lo <= 92.0):
-        continue
-      tags = el.get("tags") or {}
-      hval = (tags.get("historic") or "").lower()
-      if hval not in ("archaeological_site", "tumulus", "megalith", "fort", "castle", "ruins", "city_gate"):
-        continue
-      txt = " ".join(str(tags.get(k, "")) for k in ("name", "name:ru", "name:en", "site_type", "historic:period", "historic:civilization", "start_date", "description"))
-      if MODERN_EXCLUDE_RE.search(txt):
-        continue
-      pw = classify_ca_text(txt)
-      if pw is None:
-        continue
-      if not pw:
-        if hval in ("tumulus", "megalith"):
-          pw = [("03_bronze_age_bmac_sintashta_andronovo", 0.25), ("04_iron_age_saka_achaemenid_hellenistic", 0.50), ("05_kushan_kangju_wusun_parthian_antiquity", 0.25)]
-        elif hval in ("fort", "castle", "city_gate"):
-          pw = [("07_samanid_karakhanid_seljuk_khwarazmshah", 0.30), ("08_mongol_chagatai_timurid", 0.35), ("09_uzbek_khanates_kazakh_zhuzes", 0.35)]
-        elif hval == "archaeological_site":
-          pw = [("04_iron_age_saka_achaemenid_hellenistic", 0.25), ("05_kushan_kangju_wusun_parthian_antiquity", 0.30), ("06_sogdian_turkic_early_islamic", 0.25), ("07_samanid_karakhanid_seljuk_khwarazmshah", 0.20)]
+        if "археолог" in cat or "archaeol" in cat:
+          pw = [("05_kushan_kangju_wusun_parthian_antiquity", 0.25), ("06_sogdian_turkic_early_islamic", 0.30), ("07_samanid_karakhanid_seljuk_khwarazmshah", 0.30), ("08_mongol_chagatai_timurid", 0.15)]
         else:
-          continue  # Drop untyped/modern industrial ruins
-      is_kurgan = (hval in ("tumulus", "megalith")) or ("курган" in txt.lower() or "kurgan" in txt.lower())
-      wt = 0.65 if is_kurgan else 1.5
-      records.append((float(la), float(lo), wt, pw, "osm_archaeological_sites", not is_kurgan, 0))
-      source_stats["osm_archaeological_sites"] += 1
+          pw = [("08_mongol_chagatai_timurid", 0.25), ("09_uzbek_khanates_kazakh_zhuzes", 0.75)]
+      is_exact = row.get("match_mode") in ("village_exact", "site_name", "village_global")
+      wt = (2.0 if "археолог" in cat or "archaeol" in cat else 1.5) * (1.0 if is_exact else 0.70)
+      records.append((la, lo, wt, pw, "uzbekistan_cabinet_res846_register", True, 0))
+      source_stats["uzbekistan_cabinet_res846_register"] += 1
+
+  # --- REPO 10: Official Kazakhstan State List of Monuments (Ministry of Culture Order No. 88, adilet.zan.kz/rus/docs/V2000020397) ---
+  kz_reg_p = os.path.join(RAW_DIR, "kz_adilet_geocoded.json")
+  if os.path.exists(kz_reg_p):
+    for row in json.load(open(kz_reg_p, "r", encoding="utf-8")):
+      try:
+        la, lo = float(row.get("lat") or 0), float(row.get("lon") or 0)
+      except Exception:
+        continue
+      if not (40.5 <= la <= 55.6 and 46.4 <= lo <= 87.5):
+        continue
+      sy, ey = row.get("start_yr"), row.get("end_yr")
+      pw = assign_periods_by_span(sy, ey) if (sy is not None and ey is not None) else classify_ca_text(str(row.get("name") or ""))
+      if not pw:
+        continue
+      is_arch = "археолог" in str(row.get("kind") or "").lower()
+      wt = 2.2 if is_arch else 1.5
+      records.append((la, lo, wt, pw, "kazakhstan_adilet_order88_register", True, 0))
+      source_stats["kazakhstan_adilet_order88_register"] += 1
+
+  # --- REPO 10b: Harvard Dataverse Archaeological Atlas of Published Excavations (doi:10.7910/DVN/7MYVV7) ---
+  pe_saray_p = os.path.join(RAW_DIR, "published_excavations_saray.json")
+  if os.path.exists(pe_saray_p):
+    for row in json.load(open(pe_saray_p, "r", encoding="utf-8")):
+      try:
+        la, lo = float(row.get("lat") or 0), float(row.get("lon") or 0)
+      except Exception:
+        continue
+      if not (32.0 <= la <= 58.5 and 43.0 <= lo <= 92.0):
+        continue
+      txt = f"{row.get('name', '')} {row.get('desc', '')}"
+      pw = classify_ca_text(txt)
+      if not pw:
+        pw = [
+          ("03_bronze_age_bmac_sintashta_andronovo", 0.20),
+          ("04_iron_age_saka_achaemenid_hellenistic", 0.20),
+          ("05_kushan_kangju_wusun_parthian_antiquity", 0.20),
+          ("06_sogdian_turkic_early_islamic", 0.20),
+          ("07_samanid_karakhanid_seljuk_khwarazmshah", 0.20),
+        ]
+      records.append((la, lo, 1.8, pw, "published_excavations_atlas", True, 0))
+      source_stats["published_excavations_atlas"] += 1
 
   # --- REPO 11: POLARIS IA RAS Cross-Frontier Belt (Russia Northern/Western Border <= 300 km) ---
   polaris_map = {

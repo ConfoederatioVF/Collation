@@ -319,6 +319,8 @@ def clean_name(raw_name):
     s = CANONICAL_ALIASES[nk]
   if len(s) < 2 or re.match(r"^[0-9\W]+$", s):
     return ""
+  if re.search(r"(?:rout\s*point|waypoint|object\s*\d+|obekt|/foto/|chasovnya|tserkv|burnooktyabr)", s, flags=re.I):
+    return ""
   if any(ch in s for ch in ("?", "\ufffd", "`")):
     return ""
   if s.lower() in ("unknown", "settlement", "total", "0", "kazakhstan", "uzbekistan", "turkmenistan", "kyrgyzstan", "tajikistan"):
@@ -853,19 +855,34 @@ def load_premodern_archaeological_settlements(sov_polys):
     s = str(lbl or "").strip()
     if not s or len(s) < 4:
       return ""
-    # Skip generic unnamed labels like "Курган", "Поселение", "Городище", "Могильник", "Стоянка"
+    # Reject GIS survey codes, photo tags, generic religious/modern structures, and Soviet village names in pre-1865 chapters
     sl = s.lower()
-    if sl in ("курган", "могильник", "поселение", "городище", "стоянка", "тепа", "тепе", "курганы", "крепость", "мавзолей", "некрополь", "курганный могильник", "стоянка неолитическая"):
+    if sl in ("курган", "могильник", "поселение", "городище", "стоянка", "тепа", "тепе", "курганы", "крепость", "мавзолей", "некрополь", "мечеть", "мазар", "зимовка", "часовня", "церковь", "курганный могильник", "стоянка неолитическая"):
       return ""
-    if re.match(r"^(?:курган|могильник|поселение|городище|стоянка|тепа|объект|памятник)\s*[№#]?\s*\d+$", sl):
+    if re.search(r"(?:rout\s*point|роут|waypoint|wp\d+|/foto/|\\foto\\|фото|объект|object\s*\d+|obekt|№\s*\d+|зимовка|zimovka|часовн|церкв|пост\s*№|точка\s*\d+|средневеков[а-я]*\s*$)", sl):
       return ""
-    if any(k in sl for k in ("курган", "могильник", "некрополь", "захоронение", "петроглиф", "изваяние", "балбал", "наскальн", "ограда", "менгир")):
-      return ""  # Keep habitation settlements/tells/forts in settlement gazetteer, not bare burial mounds/statues
+    if re.search(r"(?:октябр|ленин|киров|совет|колхоз|совхоз|комсомол|красн(?:ый|ая|ое)|пролетар|первомай|калинин|куйбышев|свердлов|ворошилов|бурнооктябр)", sl):
+      return ""
+    if re.match(r"^(?:курган|могильник|поселение|городище|стоянка|тепа|объект|памятник|мечеть|мазар|средневековое|раннее\s+средневековое)\s*[№#]?\s*\d*$", sl):
+      return ""
+    if any(k in sl for k in ("курган", "могильник", "некрополь", "захоронение", "петроглиф", "изваяние", "балбал", "наскальн", "ограда", "менгир", "кладбище", "мечеть", "часовн", "церков", "церкв")):
+      return ""  # Keep habitation settlements/tells/forts in settlement gazetteer, not bare burial mounds/statues/single mosques
     s_lat = s.translate(CYR_MAP)
-    s_lat = re.sub(r"^(?:Gorodishche|Poseleniye|Poselenie|Stoyanka|Krepost|Mavzoley)\s+", "", s_lat, flags=re.I).strip()
-    s_lat = re.sub(r"\s+", " ", s_lat).strip(" .,-\"'«»")
+    s_lat = re.sub(
+      r"^(?:Rannee\s+srednevekovoe\s+|Pozdnee\s+srednevekovoe\s+|Srednevekovoe\s+|Drevnee\s+|Staroe\s+)?(?:Gorodishche|Poseleniye|Poselenie|Stoyanka|Krepost|Mavzoley|Ukreplenie|Rabat)\s+",
+      "", s_lat, flags=re.I
+    ).strip()
+    s_lat = re.sub(r"^(?:Rannee\s+|Pozdnee\s+)?Srednevekovoe\s+", "", s_lat, flags=re.I).strip()
+    s_lat = re.sub(r"\s+(?:Poseleniye|Poselenie|Gorodishche|Zimovka)$", "", s_lat, flags=re.I).strip()
+    s_lat = re.sub(r"\s+", " ", s_lat).strip(" .,-\"'«»/")
+    if re.search(r"(?:rout\s*point|object|obekt|foto|mechet|chasovnya|tserkv|oktyabr|lenin|^srednevekov|^rannee\s*$|^pozdnee\s*$)", s_lat, flags=re.I):
+      return ""
     if len(s_lat) < 3 or len(s_lat) > 48 or re.match(r"^[0-9\W]+$", s_lat):
       return ""
+    # Normalise ALL-CAPS CAAL Uzbek/Tajik tell names (e.g. BESHTOLTEPA -> Beshtoltepa, AVLIYoBOBOTEPA -> Avliyobobotepa)
+    letters = [ch for ch in s_lat if ch.isalpha()]
+    if letters and sum(1 for ch in letters if ch.isupper()) / len(letters) > 0.65:
+      s_lat = " ".join(w.capitalize() for w in s_lat.split())
     return clean_name(s_lat)
 
   for hk, (ch_i, base_pops) in caal_ch_map.items():

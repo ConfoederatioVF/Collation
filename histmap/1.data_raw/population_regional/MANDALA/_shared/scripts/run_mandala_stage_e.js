@@ -125,6 +125,10 @@ for (let i = 0; i < files.length; i++) {
     let t0 = Date.now();
     console.log(`[MANDALA StageE] Bootstrapped ${files.length} files cleanly.`);
 
+    let projects_arg = process.argv.find((arg0_a) => arg0_a.startsWith("--projects="));
+    let only_projects = projects_arg ?
+      projects_arg.slice("--projects=".length).split(",").map((arg0_s) => arg0_s.trim().toUpperCase()).filter(Boolean) :
+      ["MANDALA"];
     let resume_from_d = process.argv.includes("--resume-from-d");
     let shards_only = process.argv.includes("--shards-only");
     let skip_b3 = process.argv.includes("--skip-b3");
@@ -157,12 +161,18 @@ for (let i = 0; i < files.length; i++) {
     }
 
     if (!shards_only && !skip_substrata) {
-      let sub_excl = skip_b3 ? ["A", "B2", "B3"] : ["A", "B2"];
-      console.log(`[MANDALA StageE] 2/5 Running Substrata (${skip_b3 ? "GPU global scaling + GHSL interp + GPU int32" : "ViscountSubstrataPipeline + GPU scaling + GHSL interp"})...`);
-      await population_Substrata_outlier_removal.processRasters({ exclude: sub_excl, only_projects: ["MANDALA"], concurrency: 2 });
-      if (skip_b3 && typeof ViscountSubstrataPipeline !== "undefined" && typeof ViscountSubstrataPipeline.E_preserveAllViscountDomainsInGlobalRasters === "function") {
-        console.log("[MANDALA StageE] 2b/5 Preserving MANDALA domain in rasters_3 & rasters_4...");
-        ViscountSubstrataPipeline.E_preserveAllViscountDomainsInGlobalRasters({ only_projects: ["MANDALA"] });
+      if (skip_b3) {
+        console.log(`[MANDALA StageE] 2/5 Running Substrata C+D with exact preservation for [${only_projects.join(", ")}]...`);
+        await population_Substrata_outlier_removal.C_scaleProcessedHYDEToGlobal({ only_projects: only_projects, concurrency: 2 });
+        if (typeof ViscountSubstrataPipeline !== "undefined" && typeof ViscountSubstrataPipeline.E_preserveAllViscountDomainsInGlobalRasters === "function")
+          ViscountSubstrataPipeline.E_preserveAllViscountDomainsInGlobalRasters({});
+        await population_Substrata_outlier_removal.D_interpolateToGHSL({ only_projects: only_projects, concurrency: 2 });
+        if (typeof ViscountSubstrataPipeline !== "undefined" && typeof ViscountSubstrataPipeline.E_preserveAllViscountDomainsInGlobalRasters === "function")
+          ViscountSubstrataPipeline.E_preserveAllViscountDomainsInGlobalRasters({});
+        await population_Substrata_outlier_removal.D_convertToGeoPNG_int32({ only_projects: only_projects, concurrency: 2 });
+      } else {
+        console.log(`[MANDALA StageE] 2/5 Running Substrata for [${only_projects.join(", ")}] (ViscountSubstrataPipeline + GPU scaling + GHSL interp)...`);
+        await population_Substrata_outlier_removal.processRasters({ exclude: ["A", "B2"], only_projects: only_projects, concurrency: 2 });
       }
     } else {
       console.log("[MANDALA StageE] 2/5 Skipped ViscountSubstrataPipeline.");

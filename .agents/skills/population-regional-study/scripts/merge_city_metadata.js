@@ -268,13 +268,14 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
       let meta_array = JSON.parse(fs.readFileSync(meta_path, "utf8"));
       let all_files = fs.readdirSync(in_dir).sort();
       let resolved_files = all_files.filter(function (arg0_f) {
-        return /^resolved_batch_\d+\.json$/i.test(arg0_f);
+        return /^(?:resolved|out)_batch_\d+\.json$/i.test(arg0_f);
       });
       if (resolved_files.length === 0) {
         console.error(`[merge_city_metadata] No resolved_batch_*.json files found in ${in_dir}`);
         return counts;
       }
 
+      let replaced_indices = new Set();
       let spatial_grid = new Map();
       for (let i = 0; i < meta_array.length; i++) {
         let entry = meta_array[i];
@@ -424,8 +425,10 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
               target.name = clean_modern;
             }
 
+            let should_replace = Boolean(rec.replace_historical_names && !replaced_indices.has(existing_idx) && valid_hist.length > 0);
+            if (should_replace) replaced_indices.add(existing_idx);
             let combined_hist = [];
-            let existing_hist = Array.isArray(target.historical_names) ? target.historical_names : [];
+            let existing_hist = (!should_replace && Array.isArray(target.historical_names)) ? target.historical_names : [];
             for (let y = 0; y < existing_hist.length; y++) {
               let eh = existing_hist[y];
               if (eh && date_regex.test(String(eh.date || "").trim()) && !this.isCorruptedCityName(this.stripParenthetical(eh.name || "")))

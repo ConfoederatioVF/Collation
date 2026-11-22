@@ -831,7 +831,31 @@ JP_HISTORICAL_ANCHORS = {
   "Sendai": {"found": 1600, "other": ["仙台", "千代"], "pop": {1603: 45000, 1650: 55000, 1700: 65000, 1750: 60000, 1800: 55000, 1850: 55000, 1872: 52074, 1890: 66310, 1920: 118984, 1930: 190180, 1940: 223630, 1945: 238250, 1950: 341685, 1970: 545065, 1990: 918398}},
   "Sakai": {"found": 1350, "other": ["堺"], "pop": {1450: 30000, 1550: 55000, 1603: 65000, 1700: 60000, 1750: 50000, 1850: 42000, 1872: 38838, 1920: 84999, 1940: 182147, 1950: 213688, 1970: 594367, 1990: 807765}},
   "Naha": {"found": 1372, "other": ["Shuri", "Shuri-Naha", "那覇", "首里"], "pop": {1450: 15000, 1603: 22000, 1750: 32000, 1850: 38000, 1879: 40000, 1920: 53882, 1940: 65765, 1945: 18000, 1950: 108662, 1960: 223047, 1970: 276380, 1980: 295778, 1990: 304836}},
-  "Hakodate": {"found": 1454, "other": ["Usukeshi", "箱館", "函館"], "pop": {1750: 6000, 1800: 12000, 1850: 18000, 1868: 25000, 1872: 28825, 1890: 55677, 1920: 144749, 1930: 197252, 1940: 203862, 1945: 181531, 1950: 228994, 1970: 241663, 1990: 307408}},
+  "Hakodate": {"found": 1454, "other": ["Usukeshi", "箱館", "函館"], "pop": {1500: 900, 1603: 1800, 1650: 2600, 1700: 4200, 1750: 6000, 1800: 12000, 1850: 18000, 1868: 25000, 1872: 28825, 1890: 55677, 1920: 144749, 1930: 197252, 1940: 203862, 1945: 181531, 1950: 228994, 1970: 241663, 1990: 307408}},
+  "Matsumae": {"found": 1450, "other": ["Fukuyama", "Odate", "松前", "福山", "大館"], "pop": {1500: 1800, 1603: 4500, 1650: 8500, 1700: 12000, 1750: 16000, 1800: 18000, 1850: 19000, 1868: 16000, 1872: 14500, 1890: 11500, 1920: 15500}},
+  "Esashi (Hiyama)": {"found": 1590, "other": ["Esashi", "江差"], "pop": {1603: 1400, 1650: 3200, 1700: 5500, 1750: 7800, 1800: 10500, 1850: 13000, 1868: 11500, 1872: 11200, 1890: 13800, 1920: 14200}},
+  "Kaminokuni": {"found": 1457, "other": ["Katsuyama-date", "Hanazawa-date", "上ノ国", "勝山館"], "pop": {1500: 1200, 1603: 1500, 1700: 1800, 1800: 2400, 1850: 3100, 1868: 3400}},
+  "Akkeshi": {"found": 1620, "other": ["Akkeshi Basho", "厚岸"], "pop": {1650: 450, 1750: 900, 1800: 1350, 1850: 1800, 1868: 2100}},
+  "Nemuro": {"found": 1754, "other": ["Nemoro Basho", "根室"], "pop": {1754: 400, 1800: 950, 1850: 1600, 1868: 2200, 1890: 11000, 1920: 21500}},
+  "Ishikari": {"found": 1615, "other": ["Ishikari Basho", "石狩"], "pop": {1650: 550, 1750: 1100, 1800: 1700, 1850: 2500, 1868: 3000}},
+  "Mashike": {"found": 1706, "other": ["Mashike Basho", "増毛"], "pop": {1706: 400, 1750: 850, 1800: 1600, 1850: 2600, 1868: 3200}},
+  "Wakkanai": {"found": 1685, "other": ["Soya Basho", "宗谷", "稚内"], "pop": {1685: 380, 1750: 650, 1800: 1100, 1850: 1500, 1868: 1800}},
+  "Shiraoi": {"found": 1400, "other": ["Shiraoi Kotan", "Shiraoi Jinya", "白老"], "pop": {1450: 450, 1603: 600, 1750: 950, 1850: 1400, 1868: 1600}},
+  "Biratori": {"found": 1350, "other": ["Saru Kotan", "平取", "沙流"], "pop": {1400: 550, 1603: 750, 1750: 1050, 1850: 1300, 1868: 1400}},
+  "Shinhidaka": {"found": 1400, "other": ["Shizunai", "Shibuchari", "静内", "シブチャリ"], "pop": {1450: 650, 1603: 950, 1669: 1400, 1750: 1100, 1850: 1500, 1868: 1800}},
+  "Muroran": {"found": 1615, "other": ["Etomo", "Mororan Basho", "室蘭", "絵鞆"], "pop": {1650: 420, 1750: 780, 1800: 1150, 1850: 1650, 1868: 2200, 1920: 56082}},
+  "Iwanai": {"found": 1660, "other": ["Iwanai Basho", "岩内"], "pop": {1700: 550, 1750: 1100, 1800: 1900, 1850: 3200, 1868: 3900}},
+  "Yoichi": {"found": 1620, "other": ["Yoichi Basho", "余市"], "pop": {1650: 480, 1750: 950, 1800: 1550, 1850: 2600, 1868: 3200}},
+  "Suttsu": {"found": 1660, "other": ["Suttsu Basho", "寿都"], "pop": {1700: 480, 1750: 900, 1800: 1500, 1850: 2400, 1868: 2900}},
+  "Oshamambe": {"found": 1640, "other": ["Oshamambe Jinya", "長万部"], "pop": {1650: 380, 1750: 680, 1800: 1050, 1850: 1600, 1868: 1900}},
+  "Yakumo": {"found": 1600, "other": ["Kumaishi", "Yurappu", "熊石", "八雲"], "pop": {1603: 650, 1700: 1200, 1800: 2100, 1850: 2900, 1868: 3300}},
+  "Kikonai": {"found": 1443, "other": ["Nakanokawa-date", "木古内"], "pop": {1500: 550, 1603: 850, 1750: 1300, 1850: 1900, 1868: 2200}},
+  "Shiriuchi": {"found": 1443, "other": ["Wakitai-date", "知内"], "pop": {1500: 600, 1603: 950, 1750: 1450, 1850: 2100, 1868: 2400}},
+  "Hokuto": {"found": 1443, "other": ["Mobetsu-date", "Kamiiso", "茂別館", "上磯"], "pop": {1500: 750, 1603: 1100, 1750: 1850, 1850: 2800, 1868: 3300}},
+  "Abashiri": {"found": 1790, "other": ["Abashiri Kotan", "網走"], "pop": {1800: 420, 1850: 780, 1868: 1100, 1920: 17500}},
+  "Urakawa": {"found": 1669, "other": ["Urakawa Basho", "浦河"], "pop": {1700: 420, 1750: 720, 1800: 1100, 1850: 1650, 1868: 2000}},
+  "Tomakomai": {"found": 1660, "other": ["Yufutsu Basho", "勇払", "苫小牧"], "pop": {1700: 450, 1750: 800, 1800: 1250, 1850: 1750, 1868: 2100, 1920: 21800}},
+  "Date": {"found": 1615, "other": ["Usu Basho", "Usu Zenkoji", "有珠", "伊達"], "pop": {1650: 520, 1750: 950, 1804: 1500, 1850: 2100, 1868: 2600}},
   "Kagoshima": {"found": 1340, "other": ["Tsurumaru", "鹿児島"], "pop": {1550: 22000, 1650: 45000, 1750: 60000, 1850: 68000, 1872: 52000, 1920: 103180, 1940: 190257, 1945: 93698, 1950: 229462, 1970: 403340, 1990: 536814}},
   "Kumamoto": {"found": 1469, "other": ["Kumamoto-jō", "熊本"], "pop": {1603: 30000, 1700: 45000, 1800: 45000, 1872: 44620, 1920: 70388, 1940: 194139, 1950: 267506, 1970: 440020, 1990: 579306}},
   "Okayama": {"found": 1573, "other": ["岡山"], "pop": {1603: 30000, 1700: 40000, 1800: 35000, 1872: 32372, 1920: 94585, 1940: 163552, 1950: 162904, 1970: 375106, 1990: 593730}},
@@ -852,9 +876,9 @@ JP_HISTORICAL_ANCHORS = {
   "Tottori": {"found": 1545, "other": ["鳥取"], "pop": {1650: 26000, 1750: 32000, 1850: 32000, 1872: 20782, 1920: 29274, 1940: 49261, 1950: 61721, 1970: 113151, 1990: 142337}},
   "Yamaguchi": {"found": 1360, "other": ["山口"], "pop": {1450: 25000, 1540: 50000, 1603: 18000, 1750: 15000, 1868: 20000, 1920: 25600, 1940: 38326, 1950: 77759, 1970: 101039, 1990: 129484}},
   "Shimonoseki": {"found": 1185, "other": ["Akamagaseki", "Bakan", "下関", "赤間関"], "pop": {1400: 12000, 1650: 18000, 1750: 22000, 1850: 25000, 1872: 18500, 1920: 72300, 1940: 196022, 1950: 193572, 1970: 258425, 1990: 262672}},
-  "Otaru": {"found": 1869, "other": ["小樽"], "pop": {1872: 3500, 1890: 22000, 1920: 108113, 1930: 144887, 1940: 164282, 1950: 178330, 1970: 191856, 1990: 163211}},
+  "Otaru": {"found": 1630, "other": ["Otarunai Basho", "小樽", "オタルナイ"], "pop": {1650: 420, 1750: 820, 1800: 1450, 1850: 2400, 1868: 3100, 1872: 3500, 1890: 22000, 1920: 108113, 1930: 144887, 1940: 164282, 1950: 178330, 1970: 191856, 1990: 163211}},
   "Asahikawa": {"found": 1890, "other": ["旭川"], "pop": {1892: 2000, 1900: 12000, 1920: 61319, 1930: 82514, 1940: 87514, 1950: 123238, 1970: 288281, 1990: 359071}},
-  "Kushiro": {"found": 1869, "other": ["Kusuri", "釧路"], "pop": {1880: 1800, 1900: 10500, 1920: 39392, 1940: 63180, 1950: 93357, 1970: 191948, 1990: 205639}},
+  "Kushiro": {"found": 1635, "other": ["Kusuri", "Kusuri Basho", "釧路", "クスリ"], "pop": {1650: 380, 1750: 700, 1800: 1100, 1850: 1550, 1868: 1750, 1880: 1800, 1900: 10500, 1920: 39392, 1940: 63180, 1950: 93357, 1970: 191948, 1990: 205639}},
   "Kitakyushu": {"found": 1602, "other": ["Kokura", "Moji", "Yawata", "北九州", "小倉"], "pop": {1650: 24000, 1750: 26000, 1850: 25000, 1920: 295000, 1930: 475000, 1940: 750000, 1945: 510000, 1950: 736000, 1960: 986401, 1970: 1042321, 1980: 1065078, 1990: 1026455}},
   "Kawasaki": {"found": 1623, "other": ["Kawasaki-juku", "川崎"], "pop": {1650: 3500, 1750: 5000, 1850: 6000, 1920: 21391, 1930: 104351, 1940: 300777, 1945: 180042, 1950: 319226, 1960: 632975, 1970: 973486, 1980: 1040802, 1990: 1173603}},
   "Saitama": {"found": 1601, "other": ["Urawa", "Ōmiya", "Yono", "さいたま", "浦和", "大宮"], "pop": {1650: 6000, 1750: 8000, 1850: 9000, 1920: 48000, 1940: 125000, 1950: 240000, 1970: 585000, 1980: 775000, 1990: 905000}},
@@ -877,9 +901,34 @@ KR_HISTORICAL_ANCHORS = {
   "Suwon": {"country": "South Korea", "found": 940, "other": ["Hwaseong", "Suigen", "수원", "화성", "水原"], "pop": {1100: 10000, 1500: 14000, 1796: 35000, 1850: 30000, 1910: 15000, 1930: 20000, 1949: 52772, 1960: 90801, 1970: 170518}},
   "Pyongyang": {"country": "North Korea", "found": -300, "other": ["Wanggeom-seong", "Lelang", "Nangnang", "Seogyeong", "Heijō", "P'yŏngyang", "평양", "왕검성", "서경", "平壤"], "pop": {-200: 25000, 2: 65000, 200: 55000, 427: 110000, 586: 180000, 668: 150000, 750: 45000, 950: 65000, 1100: 95000, 1260: 45000, 1450: 65000, 1600: 50000, 1750: 95000, 1850: 90000, 1905: 55000, 1910: 48000, 1920: 71702, 1925: 89423, 1930: 140703, 1935: 182122, 1940: 285965, 1944: 342551, 1945: 310000, 1949: 460000, 1953: 380000, 1960: 653000, 1970: 940000, 1980: 1350000, 1993: 2354898}},
   "Kaesong": {"country": "North Korea", "found": 919, "other": ["Gaegyeong", "Songak", "Songdo", "Kaijō", "Kaesŏng", "개성", "개경", "송악", "開城"], "pop": {919: 60000, 1000: 130000, 1100: 220000, 1200: 260000, 1260: 120000, 1350: 160000, 1450: 65000, 1600: 52000, 1750: 72000, 1850: 65000, 1910: 42000, 1920: 44000, 1930: 49520, 1940: 72062, 1949: 88708, 1953: 75000, 1960: 110000, 1980: 155000, 1993: 171500}},
-  "Hamhung": {"country": "North Korea", "found": 1108, "other": ["Kankō", "Hamhŭng", "함흥", "咸興"], "pop": {1392: 18000, 1500: 24000, 1750: 35000, 1850: 32000, 1910: 20000, 1920: 22000, 1930: 43851, 1940: 75320, 1944: 112184, 1953: 165000, 1960: 275000, 1980: 485000, 1993: 670000}},
+  "Hamhung": {"country": "North Korea", "found": 698, "other": ["Hamju", "Kankō", "Hamhŭng", "함흥", "함주", "咸興"], "pop": {700: 5500, 900: 7500, 1108: 11000, 1200: 13000, 1300: 15500, 1392: 18000, 1500: 24000, 1750: 35000, 1850: 32000, 1910: 20000, 1920: 22000, 1930: 43851, 1940: 75320, 1944: 112184, 1953: 165000, 1960: 275000, 1980: 485000, 1993: 670000}},
   "Chongjin": {"country": "North Korea", "found": 1908, "other": ["Seishin", "Ch'ŏngjin", "청진", "淸津"], "pop": {1908: 3500, 1920: 14000, 1930: 35925, 1940: 197918, 1944: 184301, 1953: 150000, 1960: 260000, 1980: 490000, 1993: 582480}},
-  "Wonsan": {"country": "North Korea", "found": 1880, "other": ["Genzan", "Wŏnsan", "원산", "元山"], "pop": {1880: 8500, 1905: 18000, 1920: 28000, 1930: 42760, 1940: 79320, 1944: 112952, 1953: 95000, 1960: 165000, 1980: 240000, 1993: 300148}},
+  "Wonsan": {"country": "North Korea", "found": 1650, "other": ["Wonsan-jin", "Deokwon", "Genzan", "Wŏnsan", "원산", "덕원", "元山"], "pop": {1650: 4200, 1750: 6800, 1850: 7800, 1880: 8500, 1905: 18000, 1920: 28000, 1930: 42760, 1940: 79320, 1944: 112952, 1953: 95000, 1960: 165000, 1980: 240000, 1993: 300148}},
+  "Pukchong": {"country": "North Korea", "found": 698, "other": ["Bukcheong", "Namgyeong Namhaebu", "Cheonghae-toseong", "북청", "남경남해부", "北靑"], "pop": {700: 12000, 850: 14000, 1000: 8500, 1200: 9500, 1392: 11500, 1500: 14000, 1750: 18500, 1850: 17500, 1910: 14000, 1930: 18000}},
+  "Anbyon": {"country": "North Korea", "found": -200, "other": ["Anbyeon", "Biriyeolhol", "Deungju", "안변", "비렬홀", "安邊"], "pop": {668: 7500, 900: 9000, 1100: 11000, 1300: 10500, 1450: 12500, 1750: 16000, 1850: 15000, 1910: 11000}},
+  "Kumya": {"country": "North Korea", "found": -100, "other": ["Yonghung", "Yeongheung", "Hwaju", "Ssangseong", "영흥", "금야", "화주", "永興"], "pop": {668: 6500, 900: 8500, 1100: 11500, 1260: 14500, 1356: 13500, 1450: 15500, 1750: 21000, 1850: 19500, 1910: 14000}},
+  "Tanchon": {"country": "North Korea", "found": 500, "other": ["Dancheon", "Bokju", "단천", "복주", "端川"], "pop": {700: 5500, 1000: 7000, 1200: 8500, 1450: 11000, 1750: 16500, 1850: 16000, 1910: 14000, 1940: 35000}},
+  "Kilju": {"country": "North Korea", "found": 698, "other": ["Gilju", "길주", "吉州"], "pop": {700: 6500, 900: 7500, 1108: 9500, 1392: 10500, 1500: 12500, 1750: 16000, 1850: 15500, 1910: 13000}},
+  "Kyongsong": {"country": "North Korea", "found": 698, "other": ["Gyeongseong", "경성", "鏡城"], "pop": {700: 5500, 1000: 6800, 1200: 7500, 1450: 11000, 1600: 12500, 1750: 16000, 1850: 15500, 1910: 14000}},
+  "Hoeryong": {"country": "North Korea", "found": 700, "other": ["Hoeryeong", "Oumhoe", "회령", "會寧"], "pop": {700: 4500, 1000: 5500, 1434: 8500, 1600: 10000, 1750: 13500, 1850: 13000, 1910: 11500, 1940: 28000}},
+  "Kyongwon": {"country": "North Korea", "found": 700, "other": ["Gyeongwon", "Saebyol", "경원", "慶源"], "pop": {700: 3500, 1100: 4500, 1434: 7500, 1600: 8500, 1750: 10500, 1850: 9500, 1910: 8500}},
+  "Onsong": {"country": "North Korea", "found": 900, "other": ["Onseong", "온성", "穩城"], "pop": {900: 3000, 1440: 6500, 1600: 7500, 1750: 9500, 1850: 9000, 1910: 8000}},
+  "Musan": {"country": "North Korea", "found": 700, "other": ["무산", "茂山"], "pop": {700: 2800, 1100: 3500, 1450: 4500, 1684: 7000, 1750: 9000, 1850: 9500, 1910: 8500}},
+  "Myongchon": {"country": "North Korea", "found": 698, "other": ["Myeongcheon", "명천", "明川"], "pop": {700: 3500, 1000: 4500, 1450: 6500, 1750: 10500, 1850: 10000, 1910: 9000}},
+  "Puryong": {"country": "North Korea", "found": 900, "other": ["Buryeong", "부령", "富寧"], "pop": {900: 3000, 1431: 6000, 1600: 7000, 1750: 8800, 1850: 8200, 1910: 7500}},
+  "Kimchaek": {"country": "North Korea", "found": 200, "other": ["Songjin", "Seongjin", "Joshin", "성진", "김책", "城津"], "pop": {700: 3500, 1100: 4500, 1450: 6000, 1750: 8500, 1899: 11000, 1920: 18000, 1940: 67778, 1953: 80000, 1980: 150000}},
+  "Chongpyong": {"country": "North Korea", "found": 300, "other": ["Jeongpyeong", "Jeongju", "정평", "정주", "定平"], "pop": {700: 4500, 1033: 6500, 1300: 7500, 1450: 8500, 1750: 11500, 1850: 11000}},
+  "Hongwon": {"country": "North Korea", "found": 300, "other": ["Hongju", "홍원", "洪原"], "pop": {700: 3500, 1100: 4800, 1450: 6500, 1750: 9500, 1850: 9000}},
+  "Kowon": {"country": "North Korea", "found": 200, "other": ["Gowon", "Deokju", "고원", "덕주", "高原"], "pop": {700: 3800, 1033: 5500, 1300: 6500, 1450: 7500, 1750: 9500, 1850: 9000}},
+  "Munchon": {"country": "North Korea", "found": -100, "other": ["Muncheon", "Munju", "문천", "문주", "文川"], "pop": {700: 3800, 1000: 5000, 1300: 5800, 1450: 6800, 1750: 8800, 1850: 8500}},
+  "Iwon": {"country": "North Korea", "found": 500, "other": ["Iseong", "이원", "이성", "利原"], "pop": {700: 3200, 1100: 4200, 1450: 5800, 1750: 8200, 1850: 7800}},
+  "Kapsan": {"country": "North Korea", "found": 1392, "other": ["Gapsan", "갑산", "甲山"], "pop": {1413: 4800, 1600: 6500, 1750: 8800, 1850: 8500}},
+  "Tongchon": {"country": "North Korea", "found": -100, "other": ["Tongcheon", "통천", "通川"], "pop": {668: 4200, 1000: 5500, 1450: 7000, 1750: 9200, 1850: 8800}},
+  "Kosong": {"country": "North Korea", "found": -100, "other": ["Goseong", "고성", "高城"], "pop": {668: 4000, 1000: 5200, 1450: 6800, 1750: 8800, 1850: 8500}},
+  "Hoeyang": {"country": "North Korea", "found": 400, "other": ["회양", "淮陽"], "pop": {668: 4500, 1000: 5800, 1310: 7200, 1450: 8200, 1750: 10500, 1850: 9800}},
+  "Chorwon": {"country": "North Korea", "found": 600, "other": ["Cheorwon", "Taebong", "철원", "태봉", "鐵原"], "pop": {668: 5500, 905: 28000, 918: 22000, 1100: 10500, 1450: 9500, 1750: 12000, 1850: 11500}},
+  "Pyonggang": {"country": "North Korea", "found": 600, "other": ["Pyeonggang", "평강", "平康"], "pop": {668: 4000, 1000: 5200, 1450: 6800, 1750: 8800, 1850: 8400}},
+  "Ichon": {"country": "North Korea", "found": 400, "other": ["Icheon", "이천", "伊川"], "pop": {668: 3800, 1000: 4800, 1450: 6500, 1750: 8500, 1850: 8200}},
   "Nampo": {"country": "North Korea", "found": 1897, "other": ["Chinnampo", "Jinnampo", "Namp'o", "남포", "진남포", "南浦"], "pop": {1897: 5000, 1910: 15000, 1920: 22000, 1930: 38296, 1940: 68656, 1944: 82162, 1953: 70000, 1960: 135000, 1980: 245000, 1993: 310000}},
   "Sinuiju": {"country": "North Korea", "found": 1910, "other": ["Shingishū", "Sinŭiju", "신의주", "新義州"], "pop": {1910: 5500, 1920: 16000, 1930: 48047, 1940: 61143, 1944: 118414, 1953: 110000, 1960: 180000, 1980: 270000, 1993: 326011}},
   "Haeju": {"country": "North Korea", "found": 940, "other": ["Kaishū", "해주", "海州"], "pop": {1100: 14000, 1500: 20000, 1750: 28000, 1910: 18000, 1930: 25000, 1940: 62651, 1944: 82135, 1953: 85000, 1960: 120000, 1980: 175000, 1993: 229172}},
@@ -1120,7 +1169,7 @@ def build_prehistoric_and_ancient_settlements(chapter_stem, domain, country_filt
         yr_k = -3000 if any(k in nm_ko for k in ("패총", "신석기")) else (-1000 if any(k in nm_ko for k in ("고인돌", "지석묘", "청동기")) else -5000)
         add_sett(f"{rom} Site", la, lo, {yr_k: 160, min(-250, yr_k + 500): 140}, [nm_ko, str(x.get("ccbaMnm2") or "")], yr_k - 300, min_sep_km=2.8, explicit_ctry="South Korea")
 
-    # Add North Korea prehistoric sites from north_korea_arch_corpus.json
+    # Add North Korea prehistoric sites from north_korea_arch_corpus.json + filtered NRICH DKA NK
     for rec in json.load(open(os.path.join(RAW_ARCH, "north_korea_arch_corpus.json"), encoding="utf-8")):
       if rec["start_yr"] < -400:
         sy = max(-10000, rec["start_yr"])
@@ -1128,6 +1177,51 @@ def build_prehistoric_and_ancient_settlements(chapter_stem, domain, country_filt
         if sy <= ey:
           mid = max(-10000, min(-250, int(round(0.5 * (sy + ey) / 500.0) * 500)))
           add_sett(rec["name"], rec["lat"], rec["lon"], {mid: int(90 * rec["weight"])}, [], sy, min_sep_km=2.8)
+
+    nrich_nk_p = os.path.join(RAW_ARCH, "nrich_dka_nk_geocoded.json")
+    if os.path.exists(nrich_nk_p):
+      site_suf = ("유적", "조개더미", "패총", "고인돌", "동굴", "주거지", "집자리")
+      ban_nk = ("선양", "지린", "랴오닝", "중국", "정자와쯔", "상바오춘", "전곡리")
+      for rec in json.load(open(nrich_nk_p, encoding="utf-8")):
+        nm_ko = str(rec.get("name_ko") or "").strip()
+        loc_m = str(rec.get("loc_match") or "").strip()
+        if not any(s in nm_ko for s in site_suf) or any(b in nm_ko or b in loc_m for b in ban_nk):
+          continue
+        sy = int(rec.get("start_yr") or -3000)
+        ey = int(rec.get("end_yr") or -500)
+        if sy >= -250:
+          continue
+        rom = hangul_to_rr(nm_ko)
+        if not rom or len(rom) < 3:
+          continue
+        sy_c = max(-10000, sy)
+        ey_c = min(-250, ey)
+        mid = max(-10000, min(-250, int(round(0.5 * (sy_c + ey_c) / 500.0) * 500)))
+        add_sett(f"{rom} Site", float(rec["lat"]), float(rec["lon"]), {mid: 175, min(-250, mid + 500): 155}, [nm_ko], sy_c, min_sep_km=3.0, explicit_ctry="North Korea")
+
+    # Add Hokkaido Board of Education HARP 1245 Jomon/Palaeolithic settlements across all 14 subprefectures
+    harp_p = os.path.join(RAW_ARCH, "hokkaido_harp_1245_parsed.json")
+    if os.path.exists(harp_p):
+      hk_muni_map = arch_source_filter if isinstance(arch_source_filter, dict) else {}
+      hk_muni_seq = Counter()
+      for rec in json.load(open(harp_p, encoding="utf-8")):
+        era = str(rec.get("era_jp") or "")
+        typ = str(rec.get("site_type_jp") or "")
+        if not any(k in era for k in ("縄文", "旧石器")):
+          continue
+        if not any(k in typ for k in ("集落", "貝塚", "配石", "洞穴")):
+          continue
+        la, lo = float(rec["lat"]), float(rec["lon"])
+        addr = str(rec.get("address_jp") or "")
+        m_en = next((v for k, v in hk_muni_map.items() if addr.startswith(k)), None)
+        if not m_en:
+          continue
+        suf = "Shellmound" if "貝塚" in typ else ("Stone Circle" if "配石" in typ else "Jomon Settlement")
+        yr_y = -6500 if "旧石器" in era or "早" in era else (-4000 if "前" in era else (-3000 if "中" in era else (-1800 if "後" in era else -800)))
+        hk_muni_seq[(m_en, suf)] += 1
+        idx_n = hk_muni_seq[(m_en, suf)]
+        nm_en = f"{m_en} {suf}" if idx_n == 1 else f"{m_en} {suf} {idx_n}"
+        add_sett(nm_en, la, lo, {yr_y: 135, min(-250, yr_y + 500): 115}, [str(rec.get("name_jp") or "")], yr_y - 300, min_sep_km=7.0, explicit_ctry="Japan")
 
   elif chapter_stem == "yayoi_and_kofun_japan":
     iconic_yk = [
@@ -1152,6 +1246,19 @@ def build_prehistoric_and_ancient_settlements(chapter_stem, domain, country_filt
       ("Otsuka-Saikachido (Yokohama)", 35.552, 139.575, {-100: 650, 100: 1100}, ["大塚・歳勝土遺跡"], -150),
       ("Tareyanagi (Aomori)", 40.642, 140.556, {-100: 320, 100: 550}, ["垂柳遺跡"], -150),
       ("Moyoro Shellmound (Abashiri Okhotsk)", 44.028, 144.273, {400: 350, 550: 550, 650: 650}, ["モヨロ貝塚"], 350),
+      ("Ebetsu-futo Zoku-Jomon Complex", 43.112, 141.551, {-200: 280, 100: 420, 400: 480, 650: 520}, ["江別太遺跡"], -250),
+      ("Sapporo K39 Zoku-Jomon Site", 43.076, 141.345, {-100: 240, 200: 360, 500: 420}, ["札幌K39遺跡"], -200),
+      ("Chitose Bibi Zoku-Jomon Complex", 42.775, 141.720, {-200: 260, 100: 380, 450: 440}, ["美々遺跡群"], -250),
+      ("Esan Shellmound (Hakodate)", 41.805, 141.175, {-200: 250, 100: 380, 350: 340}, ["恵山貝塚"], -250),
+      ("Usu-Moshiri Site (Date)", 42.507, 140.782, {-200: 260, 100: 420, 350: 380}, ["有珠モシリ遺跡"], -250),
+      ("Tokoro River Mouth (Kitami Okhotsk)", 44.122, 144.072, {350: 320, 500: 480, 650: 580}, ["常呂遺跡群"], 300),
+      ("Kafukai Okhotsk Site (Rebun)", 45.285, 141.045, {400: 280, 550: 420, 650: 460}, ["香深井遺跡"], 350),
+      ("Onkoromanai Site (Wakkanai)", 45.451, 141.855, {-100: 210, 200: 300, 500: 380}, ["オンコロマナイ貝塚"], -150),
+      ("Higashi-Kushiro Shellmound", 42.987, 144.405, {-200: 240, 100: 360, 450: 420}, ["東釧路貝塚"], -250),
+      ("Nemuro Bentenjima Okhotsk Site", 43.340, 145.581, {400: 260, 550: 400, 650: 440}, ["弁天島貝塚"], 350),
+      ("Rausu Matsunorigawa Okhotsk Site", 44.017, 145.188, {450: 240, 600: 360}, ["松法川北岸遺跡"], 400),
+      ("Temiya Cave Site (Otaru)", 43.210, 141.003, {200: 220, 400: 320, 600: 340}, ["手宮洞窟"], 150),
+      ("Fugoppe Cave Site (Yoichi)", 43.195, 140.854, {200: 240, 450: 350, 600: 320}, ["フゴッペ洞窟"], 150),
     ]
     for nm, la, lo, pdict, oth, fy in iconic_yk:
       add_sett(nm, la, lo, pdict, oth, fy, min_sep_km=2.0)
@@ -1229,6 +1336,33 @@ def build_prehistoric_and_ancient_settlements(chapter_stem, domain, country_filt
       lo, la = float(m.group(1)), float(m.group(2))
       add_sett(lbl, la, lo, {300: 950, 450: 1400, 600: 1200}, [str(row.get("jaLabel") or "")], 250, min_sep_km=3.0, explicit_ctry="Japan")
 
+    # Ingest Hokkaido Board of Education HARP 1245 Zoku-Jomon (Epi-Jomon) & Okhotsk Culture settlements
+    harp_p = os.path.join(RAW_ARCH, "hokkaido_harp_1245_parsed.json")
+    if os.path.exists(harp_p):
+      hk_muni_map = arch_source_filter if isinstance(arch_source_filter, dict) else {}
+      hk_seq = Counter()
+      for rec in json.load(open(harp_p, encoding="utf-8")):
+        era = str(rec.get("era_jp") or "")
+        typ = str(rec.get("site_type_jp") or "")
+        is_okh = "オホーツク" in era
+        is_zj = "続縄文" in era
+        if not (is_okh or is_zj):
+          continue
+        if not any(k in typ for k in ("集落", "貝塚", "墳墓", "洞穴")):
+          continue
+        la, lo = float(rec["lat"]), float(rec["lon"])
+        addr = str(rec.get("address_jp") or "")
+        m_en = next((v for k, v in hk_muni_map.items() if addr.startswith(k)), None)
+        if not m_en:
+          continue
+        suf = "Okhotsk Settlement" if is_okh else "Zoku-Jomon Settlement"
+        hk_seq[(m_en, suf)] += 1
+        idx_n = hk_seq[(m_en, suf)]
+        nm_en = f"{m_en} {suf}" if idx_n == 1 else f"{m_en} {suf} {idx_n}"
+        pdict = {400: 280, 550: 360, 650: 400} if is_okh else {-200: 210, 1: 280, 250: 320, 500: 340, 650: 320}
+        fy_h = 350 if is_okh else -250
+        add_sett(nm_en, la, lo, pdict, [str(rec.get("name_jp") or "")], fy_h, min_sep_km=7.0, explicit_ctry="Japan")
+
   elif chapter_stem == "gojoseon_commanderies_and_three_kingdoms":
     iconic_3k = [
       ("Pyongyang", 39.019, 125.748, {-250: 25000, -108: 45000, 2: 65000, 200: 55000, 427: 110000, 586: 180000, 668: 150000}, ["Wanggeom-seong", "Lelang", "Nangnang", "Janganseong", "평양", "낙랑"], -300),
@@ -1252,8 +1386,30 @@ def build_prehistoric_and_ancient_settlements(chapter_stem, domain, country_filt
       ("Jeju (Tamna)", 33.500, 126.531, {1: 6000, 300: 12000, 500: 16000, 668: 18000}, ["Tamna", "제주", "탐라"], -100),
       ("Anak (Hwanghae)", 38.510, 125.494, {350: 14000, 500: 18000, 668: 15000}, ["안악"], 300),
       ("Anju", 39.618, 125.665, {-100: 8000, 300: 14000, 612: 20000, 668: 16000}, ["Salsu", "안주", "살수"], -200),
-      ("Wonsan (Okjeo)", 39.153, 127.444, {-100: 7000, 200: 11000, 500: 15000}, ["Lintun", "Okjeo", "원산", "임둔"], -108),
-      ("Hamhung (Eastern Okjeo)", 39.918, 127.536, {1: 7500, 300: 12000, 600: 16000}, ["Okjeo", "함흥", "옥저"], -100),
+      ("Wonsan (Okjeo)", 39.153, 127.444, {-100: 7000, 200: 11000, 500: 15000}, ["Lintun", "Okjeo", "Deokwon", "원산", "임둔", "덕원"], -108),
+      ("Hamhung (Eastern Okjeo)", 39.918, 127.536, {1: 7500, 300: 12000, 600: 16000}, ["Okjeo", "Hamju", "함흥", "옥저"], -100),
+      ("Anbyeon (Biriyeolhol)", 39.043, 127.523, {-150: 4200, 100: 6500, 400: 8000, 568: 9500, 668: 8500}, ["Biriyeolhol", "Dongye", "안변", "비렬홀"], -200),
+      ("Yonghung (Eastern Okjeo)", 39.533, 127.239, {-100: 3800, 200: 5500, 500: 7200, 668: 6800}, ["Kumya", "Okjeo", "영흥", "금야"], -150),
+      ("Bukcheong (Cheonghae-toseong)", 40.215, 128.320, {-100: 4500, 200: 6800, 500: 8500, 668: 9500}, ["Pukchong", "Okjeo", "북청", "청해토성"], -150),
+      ("Muncheon (Dongye)", 39.257, 127.319, {-100: 2600, 200: 3800, 500: 4600}, ["Munchon", "Dongye", "문천"], -100),
+      ("Gowon (Okjeo Frontier)", 39.438, 127.243, {100: 2500, 400: 3800, 600: 4400}, ["Kowon", "고원"], 1),
+      ("Jeongpyeong (Okjeo)", 39.818, 127.376, {100: 2800, 400: 4200, 600: 5000}, ["Chongpyong", "정평"], 1),
+      ("Hongwon (Eastern Okjeo)", 40.025, 127.956, {100: 2400, 400: 3400, 600: 4200}, ["홍원"], 1),
+      ("Dancheon (Eastern Okjeo)", 40.458, 128.903, {1: 3000, 300: 4500, 600: 5500}, ["Tanchon", "단천"], -100),
+      ("Songjin (Eastern Okjeo)", 40.669, 129.190, {100: 2600, 400: 3800, 600: 4500}, ["Seongjin", "Immyeong", "성진"], 1),
+      ("Gilju (Northern Okjeo)", 40.964, 129.328, {1: 2800, 300: 4200, 600: 5200}, ["Kilju", "길주"], -100),
+      ("Gyeongseong (Northern Okjeo)", 41.588, 129.681, {1: 2600, 300: 3900, 600: 4800}, ["Kyongsong", "경성"], -100),
+      ("Hoeryeong (Northern Okjeo)", 42.441, 129.746, {-200: 2400, 100: 3400, 450: 4200}, ["Hoeryong", "회령"], -250),
+      ("Musan (Tumen Basin)", 42.226, 129.208, {-200: 2100, 100: 2900, 450: 3400}, ["Hogok-dong", "무산"], -250),
+      ("Unggi (Northern Okjeo Bay)", 42.333, 130.389, {-200: 2200, 100: 3100, 450: 3600}, ["Sonbong", "Sopohang", "웅기"], -250),
+      ("Gyeongwon (Tumen Valley)", 42.813, 130.153, {1: 1800, 350: 2600, 600: 3100}, ["Kyongwon", "경원"], -100),
+      ("Tongcheon (Dongye)", 38.954, 127.892, {-100: 2800, 200: 4100, 550: 4800}, ["Tongchon", "Dongye", "통천"], -108),
+      ("Goseong (Dongye)", 38.749, 128.179, {-100: 2600, 200: 3900, 550: 4500}, ["Kosong", "Dongye", "고성"], -108),
+      ("Hoeyang (Goguryeo Pass)", 38.710, 127.598, {200: 2800, 450: 4200, 600: 4800}, ["회양"], 150),
+      ("Icheon (Imjin Valley)", 38.474, 126.885, {200: 2600, 450: 3900, 600: 4400}, ["Ichon", "이천"], 150),
+      ("Cheorwon (Goguryeo)", 38.250, 127.205, {350: 3200, 550: 4800, 668: 5500}, ["Chorwon", "철원"], 300),
+      ("Hwangchoryeong Garrison (Silla 568)", 40.483, 127.283, {560: 2200, 620: 1800}, ["황초령비"], 555),
+      ("Maunryeong Garrison (Silla 568)", 40.317, 128.617, {560: 2200, 620: 1800}, ["마운령비"], 555),
       ("Hwangju", 38.670, 125.775, {200: 10000, 450: 16000, 668: 15000}, ["황주"], 100),
       ("Haeju", 38.041, 125.715, {300: 9000, 500: 14000, 668: 15000}, ["해주"], 200),
     ]
@@ -1318,6 +1474,26 @@ def build_prehistoric_and_ancient_settlements(chapter_stem, domain, country_filt
         ey = min(668, rec["end_yr"])
         pdict = {max(-250, min(668, y)): int(1400 * rec["weight"]) for y in (sy, int(0.5 * (sy + ey)), ey) if -250 <= y <= 668}
         add_sett(rec["name"], rec["lat"], rec["lon"], pdict, [], rec["start_yr"], min_sep_km=3.0)
+
+    nrich_nk_p = os.path.join(RAW_ARCH, "nrich_dka_nk_geocoded.json")
+    if os.path.exists(nrich_nk_p):
+      site_suf = ("유적", "토성", "산성", "고분", "성지", "주거지", "조개더미", "패총")
+      ban_nk = ("선양", "지린", "랴오닝", "중국", "정자와쯔", "상바오춘", "전곡리")
+      for rec in json.load(open(nrich_nk_p, encoding="utf-8")):
+        nm_ko = str(rec.get("name_ko") or "").strip()
+        loc_m = str(rec.get("loc_match") or "").strip()
+        if not any(s in nm_ko for s in site_suf) or any(b in nm_ko or b in loc_m for b in ban_nk):
+          continue
+        sy = int(rec.get("start_yr") or -300)
+        ey = int(rec.get("end_yr") or 400)
+        if ey < -250 or sy > 668:
+          continue
+        rom = hangul_to_rr(nm_ko)
+        if not rom or len(rom) < 3:
+          continue
+        sy_c, ey_c = max(-250, sy), min(668, ey)
+        pdict = {sy_c: 1350, int(0.5 * (sy_c + ey_c)): 1900, ey_c: 1700}
+        add_sett(f"{rom} Site", float(rec["lat"]), float(rec["lon"]), pdict, [nm_ko], sy_c, min_sep_km=3.2, explicit_ctry="North Korea")
 
   return out, excluded
 
@@ -1432,6 +1608,25 @@ def main():
           for y, pv in pre_p.items():
             stage_c_doc_setts[k]["population"][str(y)] = pv
 
+  # Build Hokkaido Kanji municipality prefix -> English Romaji lookup from jp_munis for official HARP 1245 site naming
+  hk_muni_kanji_to_en = {}
+  for m in jp_munis:
+    if m.get("pref_kj") == "北海道" and m.get("muni_kj"):
+      hk_muni_kanji_to_en[m["muni_kj"]] = m["name"]
+
+  # Pre-1868 Hokkaido historical settlements (Wajinchi towns, Matsumae Basho stations, Bakufu jinya, major Ainu kotan)
+  PRE1868_HOKKAIDO_MUNIS = {
+    "Hakodate", "Matsumae", "Esashi (Hiyama)", "Esashi (Soya)", "Kaminokuni", "Hokuto", "Kikonai", "Shiriuchi",
+    "Fukushima", "Assabu", "Otobe", "Yakumo", "Mori", "Shikabe", "Nanae", "Oshamambe", "Setana", "Imakane",
+    "Shimamaki", "Suttsu", "Kuromatsunai", "Rankoshi", "Iwanai", "Kyowa", "Tomari", "Kamoenai", "Shakotan",
+    "Furubira", "Yoichi", "Otaru", "Ishikari", "Date", "Toyako", "Muroran", "Noboribetsu", "Shiraoi",
+    "Tomakomai", "Atsuma", "Mukawa", "Biratori", "Hidaka", "Niikappu", "Shinhidaka", "Urakawa", "Samani",
+    "Erimo", "Hiroo", "Taiki", "Toyokoro", "Urahoro", "Shiranuka", "Kushiro", "Akkeshi", "Hamanaka",
+    "Nemuro", "Bekkai", "Shibetsu", "Rausu", "Shari", "Koshimizu", "Abashiri", "Kitami", "Yubetsu",
+    "Monbetsu", "Omu", "Sarufutsu", "Wakkanai", "Rishiri", "Rishirifuji", "Rebun", "Teshio", "Enbetsu",
+    "Shosanbetsu", "Haboro", "Tomamae", "Obira", "Rumoi", "Mashike", "Chitose", "Ebetsu", "Okushiri",
+  }
+
   # =========================================================================
   # GENERATE ALL 13 CHAPTERS
   # =========================================================================
@@ -1444,11 +1639,12 @@ def main():
     # --- REGIME I: Ch 1, Ch 2, Ch 3 ---
     if stem in ("prehistoric_and_food_gathering_korea_and_japan", "yayoi_and_kofun_japan", "gojoseon_commanderies_and_three_kingdoms"):
       cf = "Both" if stem == "prehistoric_and_food_gathering_korea_and_japan" else ("Japan" if "japan" in stem else "Korea")
-      sdict, excl = build_prehistoric_and_ancient_settlements(stem, domain, cf, None, lookup_fn, jpn_m, kor_m, prk_m)
+      sdict, excl = build_prehistoric_and_ancient_settlements(stem, domain, cf, hk_muni_kanji_to_en, lookup_fn, jpn_m, kor_m, prk_m)
       write_chapter(ch_dir, stem, domain, sdict, excl, [
         {"name": "Rekihaku_c14db_v1.3.0_and_SiteRaw", "total_rows_in_bounds": 45382, "rows_processed": 45382},
+        {"name": "Hokkaido_Board_of_Education_HARP_1245_GIS", "total_rows_in_bounds": 12518, "rows_processed": 12518},
         {"name": "KHS_Korea_Heritage_and_Neolithic_Hanseong_C14", "total_rows_in_bounds": 13112, "rows_processed": 13112},
-        {"name": "NRICH_North_Korea_Archaeology_Corpus", "total_rows_in_bounds": 302, "rows_processed": 302},
+        {"name": "NRICH_North_Korea_DKA_and_Archaeology_Corpus", "total_rows_in_bounds": 545, "rows_processed": 545},
       ])
       continue
 
@@ -1483,9 +1679,9 @@ def main():
         ref_pref_pop = max(1.0, interp_dict(pref_curve, ref_yr))
 
         # Authentic foundation_year ONLY for genuinely documented late foundations (Meiji Hokkaido pioneer towns, Yokohama 1859, etc.)
-        # Do NOT stamp a synthetic 1600 floor on ancient/mediaeval Japanese municipalities so Nara/Heian/Feudal series stay intact!
+        # Pre-1868 Hokkaido Wajinchi, Matsumae Basho stations, and Ainu kotan existed well before 1868!
         is_hokk = (rid == "jp_hokkaido")
-        fy = anc["found"] if anc else (1875 if is_hokk and nm not in ("Hakodate", "Matsumae", "Esashi", "Esashi (Hiyama)", "Esashi (Soya)", "Kushiro", "Nemuro", "Akkeshi", "Shiraoi", "Biratori", "Ishikari", "Mashike", "Soya", "Wakkanai") else None)
+        fy = anc["found"] if anc else (1875 if is_hokk and nm not in PRE1868_HOKKAIDO_MUNIS else None)
 
         pdict = {}
         for yr in target_yrs:
@@ -1551,10 +1747,12 @@ def main():
       sdict = {}
       excl = []
       used_pts = []
-      # Seed ALL historical Japanese cities/castle towns/kokufu/post towns from jp_munis (zero Top-N pop cap!) + ALL Wikidata castles!
+      # Seed ALL historical Japanese cities/castle towns/kokufu/post towns from jp_munis (zero Top-N pop cap!) + Hokkaido Wajinchi/Basho/Chashi/Tate + castles!
       min_sep = 2.2 if is_edo else 2.5
-      # Pre-modern Japanese settlements exclude post-1868 Hokkaido pioneer cities except Hakodate/Matsumae/Esashi/Nemuro/Kushiro/Ainu kotan
-      hist_ezo_ok = {"Hakodate", "Matsumae", "Esashi", "Esashi (Hiyama)", "Esashi (Soya)", "Kushiro", "Nemuro", "Akkeshi", "Shiraoi", "Biratori", "Ishikari", "Mashike", "Soya", "Wakkanai"}
+      # Pre-modern Hokkaido municipalities: Tokugawa uses ALL ~78 documented Wajinchi/Basho/Ainu kotan municipalities;
+      # Nara-Heian-Feudal uses early Oshima Wajinchi/Donan Juni-date towns + major Satsumon/Okhotsk/Ainu centres
+      feudal_ezo_ok = {"Hakodate", "Matsumae", "Esashi (Hiyama)", "Kaminokuni", "Hokuto", "Kikonai", "Shiriuchi", "Fukushima", "Shiraoi", "Biratori", "Shinhidaka", "Abashiri", "Kushiro", "Ishikari", "Ebetsu", "Chitose", "Date"}
+      hist_ezo_ok = PRE1868_HOKKAIDO_MUNIS if is_edo else feudal_ezo_ok
 
       # First pass: ALL historic municipalities (no min_modern_pop cap!)
       for m in sorted(jp_munis, key=lambda x: -x["series"].get(2020, 0)):
@@ -1670,16 +1868,32 @@ def main():
         }
         used_pts.append((la, lo))
 
-      # Add Ryukyu Kingdom historical magiri seats (Shuri, Naha, Nakijin, Katsuren, Nakagusuku, Miyako/Hirara, Ishigaki/Yaeyama) & Ezo Ainu kotan / Matsumae
+      # Add Ryukyu Kingdom historical magiri seats + Donan Juni-date (12 Southern Ezo fortresses) + major Hokkaido Satsumon/Okhotsk/Ainu Chashi & Tokugawa Jinya/Basho!
       extra_hist_jp = [
-        ("Matsumae", 41.444, 140.109, {1500: 1500, 1603: 4500, 1700: 12000, 1750: 16000, 1800: 18000, 1850: 19000, 1868: 16000}, ["Fukuyama", "松前", "福山"], 1450),
-        ("Esashi (Hokkaido)", 41.869, 140.127, {1650: 2500, 1750: 6500, 1800: 9500, 1850: 12000, 1868: 11000}, ["江差"], 1600),
-        ("Shiraoi Kotan", 42.550, 141.355, {1500: 450, 1650: 650, 1750: 850, 1850: 900}, ["白老コタン"], 1200),
-        ("Biratori (Saru Ainu)", 42.586, 142.129, {1400: 500, 1650: 750, 1750: 950, 1850: 1100}, ["平取", "沙流"], 1200),
         ("Hiraizumi", 38.986, 141.114, {1100: 35000, 1150: 85000, 1189: 65000, 1300: 8000, 1500: 4500, 1700: 3500}, ["平泉", "奥州藤原"], 1090),
         ("Dazaifu", 33.513, 130.524, {663: 15000, 725: 25000, 800: 32000, 900: 35000, 1150: 22000, 1300: 12000, 1500: 7000, 1700: 5000}, ["大宰府"], 663),
         ("Azuchi", 35.156, 136.139, {1576: 25000, 1582: 35000, 1600: 5000}, ["安土城"], 1576),
         ("Nakijin (Ryukyu)", 26.691, 127.930, {1350: 4500, 1500: 5500, 1650: 4500, 1750: 5500, 1850: 6500}, ["今帰仁", "北山"], 1300),
+        # Donan Juni-date (12 Mediaeval Wajin Fortresses of Southern Ezo, 1443-1590s)
+        ("Shinori-date", 41.771, 140.817, {1450: 650, 1500: 850, 1590: 600, 1650: 450}, ["志苔館", "志海苔"], 1443),
+        ("Onnai-date", 41.522, 140.312, {1450: 450, 1550: 550, 1650: 420}, ["穏内館"], 1443),
+        ("Tanabe-date", 41.482, 140.251, {1450: 450, 1550: 550, 1650: 400}, ["覃部館"], 1443),
+        ("Haraguchi-date", 41.563, 140.002, {1450: 420, 1550: 520, 1650: 450}, ["原口館"], 1443),
+        ("Hizaka-date", 41.682, 140.045, {1450: 420, 1550: 500, 1650: 420}, ["比石館"], 1443),
+        ("Katsuyama-date (Kaminokuni)", 41.801, 140.100, {1470: 1100, 1550: 1400, 1600: 950}, ["勝山館", "花沢館"], 1457),
+        # Major Satsumon, Okhotsk, Ainu Chashi & Interior Kotan Centres across Hokkaido
+        ("Tokoro Satsumon-Okhotsk Town", 44.122, 144.072, {650: 580, 850: 720, 1100: 550, 1400: 450, 1750: 620, 1850: 850}, ["常呂遺跡", "トコロチャシ"], 650),
+        ("Moyoro Okhotsk Settlement", 44.028, 144.273, {650: 650, 850: 750, 1000: 500}, ["モヨロ貝塚"], 650),
+        ("Nemuro Peninsula Chashi Complex", 43.356, 145.650, {1250: 520, 1450: 680, 1650: 780, 1789: 950, 1850: 850}, ["根室半島チャシ跡群", "ノッカマップ"], 1200),
+        ("Kushiro Harutori Chashi", 42.976, 144.401, {1250: 480, 1500: 620, 1700: 750, 1850: 950}, ["ハルトリチャシ", "鶴ヶ岱チャシ"], 1200),
+        ("Yukuepira Chashi (Rikubetsu)", 43.465, 143.745, {1400: 380, 1600: 450, 1750: 520, 1850: 480}, ["ユクエピラチャシ"], 1350),
+        ("Asahikawa Chup-pet Kotan", 43.770, 142.365, {900: 320, 1300: 420, 1650: 550, 1800: 720, 1850: 820}, ["忠別コタン", "上川アイヌ", "神居古潭"], 850),
+        ("Obihiro Operiperi Kotan", 42.923, 143.196, {900: 320, 1300: 420, 1650: 520, 1800: 680, 1850: 780}, ["オベリベリコタン", "十勝アイヌ"], 850),
+        ("Sapporo Kotan (K39-Kotoni)", 43.076, 141.345, {700: 450, 1000: 520, 1350: 420, 1650: 480, 1850: 650}, ["サッポロコタン", "札幌元村"], 650),
+        ("Chitose Shikotsu Kotan", 42.821, 141.651, {700: 420, 1000: 480, 1400: 420, 1700: 520, 1850: 680}, ["シコツコタン", "千歳"], 650),
+        ("Atsuta Basho", 43.398, 141.434, {1650: 360, 1750: 620, 1850: 1100, 1868: 1350}, ["厚田場所"], 1630),
+        ("Hamamasu Basho", 43.575, 141.384, {1650: 350, 1750: 580, 1850: 1050, 1868: 1250}, ["浜益場所", "浜益陣屋"], 1630),
+        ("Kunashiri Tomari Basho", 43.752, 145.505, {1754: 380, 1789: 520, 1850: 750}, ["国後場所", "泊"], 1754),
       ]
       for nm, la, lo, p_all, oth, fy in extra_hist_jp:
         rid, ok = lookup_fn(la, lo)
@@ -1696,9 +1910,86 @@ def main():
             "population": pclean, "sources": ["CASTLE"],
             "foundation_year": min(fy, min(int(y) for y in pclean.keys())),
           }
+          used_pts.append((la, lo))
+
+      # Ingest Hokkaido Board of Education HARP 1245 Satsumon, Okhotsk, Ainu Chashi, Wajin Tate & Bakufu Jinya/Banya sites!
+      harp_p = os.path.join(RAW_ARCH, "hokkaido_harp_1245_parsed.json")
+      if os.path.exists(harp_p):
+        hk_seq = Counter()
+        for rec in json.load(open(harp_p, encoding="utf-8")):
+          era = str(rec.get("era_jp") or "")
+          typ = str(rec.get("site_type_jp") or "")
+          if is_edo:
+            if not any(k in era for k in ("アイヌ", "近世")) and not any(k in typ for k in ("チャシ", "陣屋", "番屋", "台場")):
+              continue
+            if not any(k in typ for k in ("チャシ", "陣屋", "番屋", "台場", "集落", "城館")):
+              continue
+          else:
+            if not any(k in era for k in ("擦文", "オホーツク", "アイヌ", "中世")):
+              continue
+            if not any(k in typ for k in ("集落", "チャシ", "城館", "貝塚")):
+              continue
+          la, lo = float(rec["lat"]), float(rec["lon"])
+          rid, ok = lookup_fn(la, lo)
+          if not ok or rid != "ezo_hokkaido":
+            continue
+          if any(haversine_km(la, lo, ula, ulo) < (11.0 if is_edo else 10.0) for ula, ulo in used_pts):
+            continue
+          addr = str(rec.get("address_jp") or "")
+          m_en = next((v for k, v in hk_muni_kanji_to_en.items() if addr.startswith(k)), None)
+          if not m_en:
+            continue
+          if "陣屋" in typ:
+            suf, base_p = "Jinya", 520
+          elif "城館" in typ:
+            suf, base_p = "Tate Fort", 480
+          elif "チャシ" in typ:
+            suf, base_p = "Chashi", 420
+          elif "番屋" in typ or "台場" in typ:
+            suf, base_p = "Basho Post", 450
+          elif "オホーツク" in era:
+            suf, base_p = "Okhotsk Village", 380
+          elif "擦文" in era:
+            suf, base_p = "Satsumon Settlement", 360
+          else:
+            suf, base_p = "Kotan", 380
+          hk_seq[(m_en, suf)] += 1
+          idx_n = hk_seq[(m_en, suf)]
+          disp_nm = f"{m_en} {suf}" if idx_n == 1 else f"{m_en} {suf} {idx_n}"
+          key = f"{disp_nm}-Japan"
+          if key in sdict:
+            continue
+          pdict = {}
+          for yr in target_yrs:
+            if not is_edo:
+              if "擦文" in era and yr > 1250 and "アイヌ" not in era and "チャシ" not in typ:
+                continue
+              if "オホーツク" in era and yr > 1050 and "擦文" not in era and "アイヌ" not in era:
+                continue
+              if ("チャシ" in typ or "アイヌ" in era) and "擦文" not in era and "オホーツク" not in era and yr < 1200:
+                continue
+              if "城館" in typ and yr < 1400:
+                continue
+            pdict[str(yr)] = base_p
+          if not pdict:
+            continue
+          sdict[key] = {
+            "name": disp_nm,
+            "other_names": [str(rec.get("name_jp") or "")],
+            "coords": [round(la, 4), round(lo, 4)],
+            "country": "Japan",
+            "key": key,
+            "region_id": rid,
+            "region": rid,
+            "population": pdict,
+            "sources": ["CASTLE"],
+            "foundation_year": min(int(y) for y in pdict.keys()),
+          }
+          used_pts.append((la, lo))
 
       write_chapter(ch_dir, stem, domain, sdict, excl, [
-        {"name": "Tokugawa_Bakuhan_Jokamachi_and_Shukuba_Cadastres" if is_edo else "Ritsuryo_Kokufu_and_Medieval_Castles_Gazetteer", "total_rows_in_bounds": len(sdict) + len(excl), "rows_processed": len(sdict) + len(excl)},
+        {"name": "Tokugawa_Bakuhan_Jokamachi_Basho_and_Shukuba_Cadastres" if is_edo else "Ritsuryo_Kokufu_Satsumon_and_Medieval_Castles_Gazetteer", "total_rows_in_bounds": len(sdict) + len(excl), "rows_processed": len(sdict) + len(excl)},
+        {"name": "Hokkaido_Board_of_Education_HARP_1245_GIS", "total_rows_in_bounds": 12518, "rows_processed": 12518},
         {"name": "Sekiyama_Hayami_Kito_Regional_Census_Series", "total_rows_in_bounds": len(sdict), "rows_processed": len(sdict)},
       ])
       continue
@@ -1863,10 +2154,28 @@ def main():
       # Sort by modern/historical size descending
       combined_kr.sort(key=lambda x: -x[4])
       min_sep = 2.0 if stem in ("korea_under_japanese_occupation", "korean_division_and_korean_war") else 2.5
+      is_pre_1945_kr = stem in ("unified_silla_and_goryeo_korea", "joseon_korea")
+      is_pre_1953_kr = stem in ("unified_silla_and_goryeo_korea", "joseon_korea", "korea_under_japanese_occupation", "korean_division_and_korean_war")
+      # Map post-1951/1991 DPRK communist renamings back to their authentic historical names in pre-1953 chapters
+      dprk_to_hist = {
+        "Kimchaek": "Songjin",
+        "Rason": "Rajin",
+        "Sonbong": "Unggi",
+        "Saebyol": "Kyongwon",
+        "Undok": "Kyonghung",
+        "Kumya": "Yonghung",
+        "Kimhyonggwon": "Pungsan",
+        "Kimjongsuk": "Sinpa",
+        "Kimhyongjik": "Huchang",
+      }
 
       for ctry, nm, la, lo, ref_mod_pop, oth_n, prov in combined_kr:
         rid, ok = lookup_fn(la, lo)
         if not ok or not rid:
+          excl.append({"name": nm, "country": ctry, "reason": "outside_study_bounds"})
+          continue
+        # Exclude post-1952 DPRK industrial worker districts (-nodongjagu / -rodongjagu) in pre-1953 chapters
+        if is_pre_1953_kr and ctry == "North Korea" and re.search(r"[- ]?[nr]odongjagu$", nm, flags=re.I):
           excl.append({"name": nm, "country": ctry, "reason": "outside_study_bounds"})
           continue
         anc = KR_HISTORICAL_ANCHORS.get(nm)
@@ -1905,15 +2214,15 @@ def main():
 
         if not pdict:
           continue
-        disp_nm = nm
+        disp_nm = dprk_to_hist.get(nm, nm) if is_pre_1953_kr else nm
         key = f"{disp_nm}-{ctry}"
         if key in sdict:
-          disp_nm = f"{nm} ({prov})" if prov else f"{nm} ({rid[3:].replace('_',' ').title()})"
+          disp_nm = f"{disp_nm} ({prov})" if prov else f"{disp_nm} ({rid[3:].replace('_',' ').title()})"
           key = f"{disp_nm}-{ctry}"
         if key in sdict:
           excl.append({"name": nm, "country": ctry, "reason": "duplicate_alias"})
           continue
-        other_all = list(oth_n) + (anc["other"] if anc else [])
+        other_all = list(oth_n) + (anc["other"] if anc else []) + ([nm] if disp_nm != nm else [])
         rec_kh = {
           "name": disp_nm,
           "other_names": list(dict.fromkeys([x for x in other_all if x and x != disp_nm]))[:8],
@@ -1929,6 +2238,73 @@ def main():
           rec_kh["foundation_year"] = min(fy, min(int(y) for y in pdict.keys()))
         sdict[key] = rec_kh
         used_pts.append((la, lo))
+
+      # Enrich Silla/Balhae/Goryeo & Joseon chapters with ALL historic Eastern North Korea seats (Balhae Namgyeong, Dongbuk 9-seong, Cheolli Jangseong, Sejong Sillok 24 Hamgyong eupseong & Yukjin Six Garrisons)
+      if is_pre_1945_kr:
+        east_nk_hist = [
+          ("Deokwon", 39.185, 127.386, {668: 5500, 900: 7000, 1100: 8500, 1300: 9500, 1450: 11500, 1750: 15500, 1850: 14500}, ["Deokwon-dohobu", "Yongju", "덕원", "德源"], -108),
+          ("Jongseong", 42.779, 129.779, {900: 2800, 1100: 3600, 1435: 7200, 1600: 8500, 1750: 10500, 1850: 9800}, ["Jongseong-dohobu", "종성", "鍾城"], 900),
+          ("Gyeongheung", 42.540, 130.380, {700: 2800, 1100: 3500, 1435: 6800, 1600: 7800, 1750: 9500, 1850: 9000}, ["Kyonghung", "Gyeongheung-dohobu", "경흥", "慶興"], 700),
+          ("Samsu", 41.298, 128.015, {1446: 3600, 1600: 4800, 1750: 6500, 1850: 6200}, ["Samsu-dohobu", "삼수", "三水"], 1446),
+          ("Jangjin", 40.376, 127.255, {1450: 2800, 1650: 3800, 1787: 5500, 1850: 5800}, ["Jangjin-dohobu", "장진", "長津"], 1450),
+          ("Geumseong", 38.435, 127.580, {750: 2800, 1100: 3600, 1450: 4800, 1750: 6500, 1850: 6200}, ["Kumsong", "금성", "金城"], 668),
+          ("Geumhwa", 38.285, 127.460, {750: 2600, 1100: 3500, 1450: 4600, 1750: 6200, 1850: 6000}, ["Kumhwa", "금화", "金化"], 668),
+          ("Heupkok", 38.995, 127.855, {750: 2200, 1100: 3000, 1450: 3800, 1750: 4800, 1850: 4600}, ["Hupkok", "흡곡", "歙谷"], 668),
+          ("Doryeonpo", 39.776, 127.565, {1033: 3200, 1150: 3600, 1300: 2800}, ["Cheolli Jangseong East Terminus", "도련포"], 1033),
+          ("Gongheomjin", 42.320, 129.620, {1107: 3800, 1110: 3200}, ["Dongbuk Nine Fortresses", "공험진"], 1107),
+          ("Ungju (Dongbuk 9-seong)", 40.085, 127.645, {1107: 4200, 1250: 3500}, ["웅주", "동북9성"], 1107),
+          ("Seosura-jin", 42.263, 130.606, {1435: 2200, 1600: 2800, 1750: 3600, 1850: 3800}, ["서수라진"], 1435),
+          ("Pungsan (Gapsan)", 40.822, 128.155, {1450: 2400, 1650: 3200, 1750: 4400, 1850: 4600}, ["풍산", "豊山"], 1450),
+          ("Changansa (Geumgangsan)", 38.618, 128.075, {668: 2200, 1000: 3400, 1300: 3600, 1500: 2800, 1750: 2600}, ["Pyohunsa", "장안사", "금강산"], 515),
+        ]
+        for nm_e, la_e, lo_e, pall_e, oth_e, fy_e in east_nk_hist:
+          rid_e, ok_e = lookup_fn(la_e, lo_e)
+          if not ok_e or not rid_e:
+            continue
+          ks_e = sorted(pall_e.keys())
+          pdict_e = {}
+          for yr in target_yrs:
+            if yr < fy_e:
+              continue
+            if ks_e[0] <= yr <= ks_e[-1]:
+              pdict_e[str(yr)] = int(round(interp_dict({str(k): v for k, v in pall_e.items()}, yr)))
+          if not pdict_e:
+            continue
+          key_e = f"{nm_e}-North Korea"
+          if key_e in sdict or any(haversine_km(la_e, lo_e, ula, ulo) < 2.2 for ula, ulo in used_pts):
+            continue
+          sdict[key_e] = {
+            "name": nm_e, "other_names": oth_e, "coords": [round(la_e, 4), round(lo_e, 4)],
+            "country": "North Korea", "key": key_e, "region_id": rid_e, "region": rid_e,
+            "population": pdict_e, "sources": ["CASTLE"],
+            "foundation_year": min(fy_e, min(int(y) for y in pdict_e.keys())),
+          }
+          used_pts.append((la_e, lo_e))
+
+        # Also ingest Balhae/Goryeo/Joseon North Korea sites from north_korea_arch_corpus.json
+        for rec in json.load(open(os.path.join(RAW_ARCH, "north_korea_arch_corpus.json"), encoding="utf-8")):
+          if rec["end_yr"] < domain[0] or rec["start_yr"] > domain[1]:
+            continue
+          la_n, lo_n = float(rec["lat"]), float(rec["lon"])
+          rid_n, ok_n = lookup_fn(la_n, lo_n)
+          if not ok_n or not rid_n:
+            continue
+          if any(haversine_km(la_n, lo_n, ula, ulo) < 3.2 for ula, ulo in used_pts):
+            continue
+          nm_n = str(rec["name"]).strip()
+          key_n = f"{nm_n}-North Korea"
+          if key_n in sdict:
+            continue
+          pdict_n = {str(yr): int(1150 * float(rec.get("weight") or 1.5)) for yr in target_yrs if rec["start_yr"] <= yr <= rec["end_yr"]}
+          if not pdict_n:
+            continue
+          sdict[key_n] = {
+            "name": nm_n, "other_names": [], "coords": [round(la_n, 4), round(lo_n, 4)],
+            "country": "North Korea", "key": key_n, "region_id": rid_n, "region": rid_n,
+            "population": pdict_n, "sources": ["CASTLE"],
+            "foundation_year": min(int(rec["start_yr"]), min(int(y) for y in pdict_n.keys())),
+          }
+          used_pts.append((la_n, lo_n))
 
       # Enrich Silla/Goryeo & Joseon chapters with KHS Korea Heritage eupseong/fortresses/seowon/temples (사적/시도기념물)
       if stem in ("unified_silla_and_goryeo_korea", "joseon_korea"):

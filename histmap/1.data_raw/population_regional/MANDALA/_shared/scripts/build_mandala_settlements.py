@@ -233,6 +233,7 @@ def load_geonames_all(polys, papua_prep):
     with zipfile.ZipFile(zp) as zf:
       raw = zf.read(f"{cc}.txt").decode("utf-8", errors="replace")
     poly = polys[cname]
+    ppl_grid_seen = set()
     for line in raw.splitlines():
       p = line.split("\t")
       if len(p) < 15:
@@ -276,6 +277,17 @@ def load_geonames_all(polys, papua_prep):
           "name": clean_name(ascii_nm), "lat": lat, "lon": lon,
           "pop": eff_p, "country": cname, "fcode": fcode, "alts": alts[:4], "source": f"GeoNames_{cc}_Full"
         })
+      elif cc in ("MM", "VN", "MY", "ID", "PH") and fclass == "P" and fcode == "PPL" and pop == 0 and len(ascii_nm) >= 3:
+        # Spatially stratified rural town/market-centre fill (~12-15 km grid cell) for under-enumerated countries
+        step_g = 0.12 if cc in ("MM", "VN", "MY") else 0.16
+        gk = (int(math.floor(lat / step_g)), int(math.floor(lon / step_g)))
+        if gk not in ppl_grid_seen:
+          ppl_grid_seen.add(gk)
+          eff_p = 2600 if cc in ("VN", "ID", "PH") else 2200
+          geo_by_country[cname].append({
+            "name": clean_name(ascii_nm), "lat": lat, "lon": lon,
+            "pop": eff_p, "country": cname, "fcode": fcode, "alts": alts[:3], "source": f"GeoNames_{cc}_RegionalTowns"
+          })
 
     print(f"  {cname} ({cc}): {len(geo_by_country[cname]):,} enumerated places", flush=True)
   return geo_by_country, geo_lookup
@@ -509,7 +521,36 @@ def load_hdx_adm2_censuses(geo_lookup, polys, papua_prep):
           la, lo, _, _ = sorted(cands, key=lambda x: -x[2])[0]
           out["Laos"].append({"name": nm, "lat": la, "lon": lo, "country": "Laos", "pops": {2024: pop_i}, "source": "HDX_COD_PS_LAO_2024"})
 
-  print(f"  Geocoded {sum(len(v) for v in out.values()):,} official HDX ADM2 census seats from {tot_rows:,} raw rows.", flush=True)
+  # Myanmar official 330+ Townships (mm_gh_myanmar-townships.csv)
+  mm_p = os.path.join(CENSUS_DIR, "mm_gh_myanmar-townships.csv")
+  if os.path.exists(mm_p):
+    with open(mm_p, "r", encoding="utf-8-sig", errors="replace") as fh:
+      for row in csv.DictReader(fh):
+        tot_rows += 1
+        raw_t = str(row.get(" Township") or row.get("Township") or "").strip()
+        nm = clean_name(raw_t)
+        if not nm:
+          continue
+        cands = geo_lookup.get(("Myanmar", norm_key(nm)))
+        if cands:
+          la, lo, gpop, _ = sorted(cands, key=lambda x: -x[2])[0]
+          out["Myanmar"].append({"name": nm, "lat": la, "lon": lo, "country": "Myanmar", "pops": {2014: max(12000, gpop)}, "source": "Myanmar_Official_Townships_Register"})
+
+  # Philippines official PSGC 1,634 Cities & Municipalities (ph_psgc_PH_Adm3_MuniCities.csv)
+  ph_p = os.path.join(CENSUS_DIR, "ph_psgc_PH_Adm3_MuniCities.csv")
+  if os.path.exists(ph_p):
+    with open(ph_p, "r", encoding="utf-8-sig", errors="replace") as fh:
+      for row in csv.DictReader(fh):
+        tot_rows += 1
+        nm = clean_name(row.get("adm3_en") or "")
+        if not nm:
+          continue
+        cands = geo_lookup.get(("Philippines", norm_key(nm)))
+        if cands:
+          la, lo, gpop, _ = sorted(cands, key=lambda x: -x[2])[0]
+          out["Philippines"].append({"name": nm, "lat": la, "lon": lo, "country": "Philippines", "pops": {2020: max(15000, gpop)}, "source": "PSA_PSGC_All_MuniCities"})
+
+  print(f"  Geocoded {sum(len(v) for v in out.values()):,} official HDX/National Admin census seats from {tot_rows:,} raw rows.", flush=True)
   return out, tot_rows
 
 
@@ -625,6 +666,159 @@ def load_historical_arch_pool(polys, papua_prep):
       "start_yr": sy, "end_yr": ey, "peak_pop": max(300, mpop),
       "foundation_year": sy, "source": "SE_Asia_Archaeological_Scholarly_Catalogue", "prio": 1
     })
+
+  # 1b. Official Thailand Fine Arts Department GIS Ancient Cities (249 cities)
+  fad_c_p = os.path.join(ARCH_RAW_DIR, "thailand_fadgis_ancient_cities.json")
+  if os.path.exists(fad_c_p):
+    for row in json.load(open(fad_c_p, "r", encoding="utf-8")):
+      try:
+        la, lo = float(row["lat"]), float(row["lon"])
+      except Exception:
+        continue
+      attrs = row.get("attrs") or {}
+      raw_en = str(attrs.get("NAMEE") or "").strip()
+      if not raw_en or len(raw_en) < 3:
+        continue
+      nm = clean_name(raw_en, is_arch=True)
+      if not nm or len(nm) > 45:
+        continue
+      pool.append({
+        "name": nm, "lat": la, "lon": lo, "country": "Thailand",
+        "start_yr": 400, "end_yr": 1750, "peak_pop": 3200,
+        "foundation_year": 400, "source": "Thailand_FADGIS_Ancient_Cities", "prio": 1
+      })
+
+  # 1c. Official Indonesia Kemendikbud Cagar Budaya Register (pre-1865 sites, candi, forts, keraton)
+  id_cb_p = os.path.join(ARCH_RAW_DIR, "indonesia_cagar_budaya_official.json")
+  if os.path.exists(id_cb_p):
+    for row in json.load(open(id_cb_p, "r", encoding="utf-8")):
+      try:
+        la, lo = float(row["lat"]), float(row["lon"])
+      except Exception:
+        continue
+      if papua_prep is not None and papua_prep.contains(Point(lo, la)):
+        continue
+      f = row.get("fields") or {}
+      raw_nm = str(f.get("nm_objekcb") or row.get("name") or "").strip()
+      cat = str(f.get("nm_kategoricb") or "").lower()
+      desc = str(f.get("deskripsi") or "")[:400].lower()
+      nl = raw_nm.lower()
+      if any(b in nl for b in ("hotel", "bank", "gedung", "stasiun", "kantor", "sekolah", "rumah sakit", "bioskop", "museum", "gereja", "kelenteng", "pasar", "jembatan")):
+        continue
+      if not (cat in ("situs", "kawasan") or any(k in nl for k in ("candi", "situs", "benteng", "keraton", "kraton", "gua", "leang", "liang", "istana", "masjid agung", "kota tua"))):
+        continue
+      nm = clean_name(raw_nm, is_arch=True)
+      if not nm or len(nm) < 3 or len(nm) > 45:
+        continue
+      if any(k in nl or k in desc for k in ("gua", "leang", "liang", "prasejarah", "megalit")):
+        sy, ey, pk = -8000, -500, 450
+      elif any(k in nl or k in desc for k in ("candi", "sriwijaya", "mataram", "majapahit", "singasari", "kediri")):
+        sy, ey, pk = 650, 1520, 2400
+      else:
+        sy, ey, pk = 1400, 1860, 2800
+      pool.append({
+        "name": nm, "lat": la, "lon": lo, "country": "Indonesia",
+        "start_yr": sy, "end_yr": ey, "peak_pop": pk,
+        "foundation_year": sy, "source": "Indonesia_Kemendikbud_Cagar_Budaya", "prio": 1
+      })
+
+  # 1d. NUSARC Nusantara Radiocarbon & Archaeological DB + Colonial OV Register + Pleiades SE Asia + Published Excavations Atlas
+  nus_p = os.path.join(ARCH_RAW_DIR, "zenodo_21882247_mini_nusarc_v3.csv")
+  if os.path.exists(nus_p):
+    with open(nus_p, "r", encoding="utf-8-sig", errors="replace") as fh:
+      for row in csv.DictReader(fh):
+        try:
+          la, lo = float(row.get("lat") or 0), float(row.get("lon") or 0)
+        except Exception:
+          continue
+        cn = which_country(la, lo)
+        if not cn:
+          continue
+        nm = clean_name(row.get("site_name") or "", is_arch=True)
+        if not nm:
+          continue
+        try:
+          bp = float(row.get("date_bp") or 3000)
+          cy = max(-10000, min(1500, int(round(1950 - bp))))
+        except Exception:
+          cy = -2000
+        pool.append({
+          "name": nm, "lat": la, "lon": lo, "country": cn,
+          "start_yr": max(-10000, cy - 600), "end_yr": min(1500, cy + 600), "peak_pop": 450,
+          "foundation_year": max(-10000, cy - 600), "source": "NUSARC_Radiocarbon_DB", "prio": 1
+        })
+
+  ov_p = os.path.join(ARCH_RAW_DIR, "zenodo_21882007_colonial_site_register_v1.0.csv")
+  if os.path.exists(ov_p):
+    with open(ov_p, "r", encoding="utf-8-sig", errors="replace") as fh:
+      for row in csv.DictReader(fh):
+        try:
+          la, lo = float(row.get("lat") or 0), float(row.get("lon") or 0)
+        except Exception:
+          continue
+        cn = which_country(la, lo)
+        if not cn:
+          continue
+        nm = clean_name(row.get("modern_name") or row.get("site_name") or "", is_arch=True)
+        if not nm:
+          continue
+        pool.append({
+          "name": nm, "lat": la, "lon": lo, "country": cn,
+          "start_yr": 700, "end_yr": 1520, "peak_pop": 1600,
+          "foundation_year": 700, "source": "Oudheidkundig_Verslag_Register", "prio": 1
+        })
+
+  pl_p = os.path.join(ARCH_RAW_DIR, "pleiades_southeast_asia.json")
+  if os.path.exists(pl_p):
+    for r in json.load(open(pl_p, "r", encoding="utf-8")):
+      try:
+        la, lo = float(r["lat"]), float(r["lon"])
+      except Exception:
+        continue
+      cn = which_country(la, lo)
+      if not cn:
+        continue
+      nm = clean_name(r.get("title") or "", is_arch=True)
+      if not nm or len(nm) > 40:
+        continue
+      pool.append({
+        "name": nm, "lat": la, "lon": lo, "country": cn,
+        "start_yr": -200, "end_yr": 700, "peak_pop": 2800,
+        "foundation_year": -200, "source": "Pleiades_SEAsia", "prio": 1
+      })
+
+  pe_p = os.path.join(ARCH_RAW_DIR, "published_excavations_mandala.json")
+  if os.path.exists(pe_p):
+    for r in json.load(open(pe_p, "r", encoding="utf-8")):
+      try:
+        la, lo = float(r["lat"]), float(r["lon"])
+      except Exception:
+        continue
+      cn = which_country(la, lo)
+      if not cn:
+        continue
+      raw_n = re.sub(r"\s*\([^)]*\)", "", str(r.get("name") or "")).strip()
+      nm = clean_name(raw_n, is_arch=True)
+      if not nm or len(nm) < 3 or len(nm) > 42:
+        continue
+      desc = (str(r.get("desc") or "") + " " + raw_n).lower()
+      if any(k in desc for k in ("paleolith", "palaeolith", "pleistocene", "hoabinh", "cave", "gua ", "liang", "leang", "rock shelter")):
+        sy, ey, pk = -9000, -1000, 380
+      elif any(k in desc for k in ("neolith", "shell midden", "austronesian", "lapita")):
+        sy, ey, pk = -3500, -500, 620
+      elif any(k in desc for k in ("bronze", "iron", "dong son", "sa huynh", "megalith", "jar burial", "ban chiang")):
+        sy, ey, pk = -1500, 400, 1200
+      elif any(k in desc for k in ("funan", "pyu", "dvaravati", "champa", "chenla", "srivijaya", "mataram")):
+        sy, ey, pk = 100, 1000, 2200
+      elif any(k in desc for k in ("angkor", "khmer", "bagan", "pagan", "majapahit", "sukhothai", "candi", "prasat")):
+        sy, ey, pk = 800, 1500, 2600
+      else:
+        sy, ey, pk = -1000, 1000, 850
+      pool.append({
+        "name": nm, "lat": la, "lon": lo, "country": cn,
+        "start_yr": sy, "end_yr": ey, "peak_pop": pk,
+        "foundation_year": sy, "source": "Published_Excavations_Atlas", "prio": 2
+      })
 
   # 2. Wikidata archaeological sites, ancient cities, forts, candi, prasats across all 11 countries
   wd_country_prefixes = [
@@ -794,8 +988,9 @@ def main():
           ref_idx = interp_country_index(cname, ref_y)
           p2020_est = ref_v / max(0.005, ref_idx)
 
-          # For colonial chapters (1515-1949), include all towns with >= 1.500 modern/est base (no Top-N cap!)
-          if is_colonial_ch and not is_modern_ch and p2020_est < 1800:
+          # For colonial chapters (1515-1949), lower floor for Portuguese Timor & under-enumerated regions so transitions stay smooth!
+          col_floor = 450 if cname == "East Timor" else (1100 if cname in ("Myanmar", "Vietnam", "Malaysia", "Indonesia", "Cambodia", "Laos") else 1500)
+          if is_colonial_ch and not is_modern_ch and p2020_est < col_floor:
             continue
 
           p_dict = {}
@@ -875,8 +1070,8 @@ def main():
             "source": it["source"], "prio": it["prio"]
           })
 
-      # Historical town backfill for pre-colonial & early modern kingdoms (1200..1862) so urban networks are complete
-      if dom_end >= 1200 and not is_colonial_ch:
+      # Historical town backfill for pre-colonial & early modern kingdoms (700..1862) so urban networks are complete and smooth across 900->1200->1500->1900!
+      if dom_end >= 900 and not is_colonial_ch:
         for cname, items in modern_pool.items():
           for it in items:
             fyr = it.get("foundation_year")
@@ -890,9 +1085,10 @@ def main():
               continue
             ry = sorted(obs.keys())[-1]
             p2020_est = obs[ry] / max(0.005, interp_country_index(cname, ry))
-            if p2020_est < 18000:
+            hist_floor = 6500 if cname in ("Cambodia", "Laos", "East Timor", "Brunei") else 11000
+            if p2020_est < hist_floor:
               continue
-            min_by = max(dom_start, 1000 if dom_start < 1000 else dom_start, fyr or -10000)
+            min_by = max(dom_start, 700 if dom_start < 700 else dom_start, fyr or -10000)
             p_dict = {}
             for y in bmarks:
               if min_by <= y <= dom_end:

@@ -536,6 +536,184 @@ def build_curated_southeast_asia_catalogue():
     (1.290, 103.852, 5.0, 1300, 1860, "Temasek / Singapore", 80000),
     (-9.200, 124.370, 4.0, 1556, 1860, "Lifau (Oecusse, Portuguese Timor)", 8000),
     (-8.556, 125.560, 4.5, 1769, 1860, "Dili (Portuguese Timor Capital)", 15000),
+    # --- EXPANDED REGIONAL ARCHAEOLOGICAL & HISTORICAL CENTRES (ALL 11 COUNTRIES, PREHISTORIC TO 1860) ---
+    # Myanmar (Pyu, Mon, Arakan, Shan, Bagan, Ava, Toungoo, Konbaung)
+    (22.150, 95.130, 3.8, -1000, 400, "Taungthaman & Halin South (Upper Irrawaddy)", 2200),
+    (20.145, 92.890, 4.0, 500, 1430, "Launggyet & Parein (Arakan Capitals)", 18000),
+    (19.120, 93.550, 3.5, 400, 1800, "Ramree / Yanbye (Arakan Coastal Port)", 8000),
+    (18.460, 94.360, 3.8, 400, 1860, "Thandwe / Sandoway (Arakan)", 12000),
+    (17.650, 95.460, 4.0, 600, 1860, "Hinthada / Henzada (Irrawaddy Delta)", 15000),
+    (16.780, 94.730, 4.5, 500, 1860, "Pathein / Kusima (Mon Delta Port)", 28000),
+    (16.510, 96.250, 4.5, 800, 1756, "Syriam / Thanlyin (Mon-Portuguese Port)", 35000),
+    (16.520, 97.620, 4.2, 600, 1860, "Martaban / Mottama (Mon Capital)", 25000),
+    (14.080, 98.200, 4.0, 700, 1860, "Dawei / Tavoy (Tenasserim Port)", 18000),
+    (12.440, 98.600, 4.2, 700, 1860, "Myeik / Mergui (Tenasserim Port)", 22000),
+    (21.450, 95.380, 4.0, 1000, 1860, "Myingyan & Pakokku (Dry Zone)", 20000),
+    (21.620, 96.130, 4.2, 1050, 1860, "Kyaukse Eleven Khayaing Irrigation Core", 32000),
+    (22.570, 95.700, 4.5, 1300, 1860, "Shwebo / Moksobo (Konbaung Homeland)", 35000),
+    (21.970, 96.080, 4.0, 1315, 1860, "Pinya & Sagaing (Shan-Burmese Capitals)", 40000),
+    (20.150, 94.930, 4.0, 1000, 1860, "Magway & Minbu Irrigation Basin", 18000),
+    (18.820, 95.220, 4.2, 1000, 1860, "Pyay / Prome (Lower Irrawaddy)", 30000),
+    (22.940, 97.750, 4.0, 1100, 1860, "Hsenwi / Theinni (Northern Shan Sawbwa)", 16000),
+    (22.620, 97.300, 4.0, 1200, 1860, "Hsipaw / Thibaw (Shan Sawbwa)", 15000),
+    (21.290, 99.600, 4.2, 1200, 1860, "Kengtung / Kyaingtong (Eastern Shan)", 22000),
+    (20.660, 96.930, 3.8, 1350, 1860, "Yawnghwe / Nyaungshwe (Inle Lake)", 14000),
+    (24.250, 97.230, 3.8, 1000, 1860, "Bhamo / Manmaw (Upper Irrawaddy Trade)", 14000),
+    (25.380, 96.880, 3.5, 1200, 1860, "Mogaung / Mong Kawng (Shan-Kachin)", 12000),
+    (23.190, 94.020, 3.5, 1100, 1860, "Kale / Kalaymyo (Chindwin Sawbwa)", 12000),
+    (20.780, 95.890, 3.8, 1000, 1860, "Meiktila Lake Irrigation Centre", 16000),
+    # Cambodia (Prehistoric, Funan, Chenla, Angkor, Post-Angkor)
+    (13.860, 102.980, 4.0, -500, 600, "Phum Snay (Banteay Meanchey Iron Age)", 3200),
+    (11.350, 105.510, 4.0, -400, 500, "Prohear & Village 10.8 (Prey Veng)", 2800),
+    (12.240, 104.580, 3.8, -1500, 200, "Samrong Sen Shellmound (Kampong Chhnang)", 2200),
+    (11.240, 104.830, 4.0, 200, 1400, "Phnom Chisor & Tonle Bati (Takeo)", 9000),
+    (11.990, 105.460, 4.2, 500, 1860, "Kampong Cham & Wat Nokor (Mekong)", 24000),
+    (12.480, 106.020, 4.0, 550, 1860, "Sambor / Sambhupura (Kratie Mekong)", 15000),
+    (13.520, 105.970, 3.8, 600, 1860, "Stung Treng / Thala Borivat (Chenla)", 12000),
+    (13.100, 103.200, 4.2, 900, 1860, "Battambang & Wat Banan / Ek Phnom", 28000),
+    (12.530, 103.920, 3.8, 900, 1860, "Pursat / Pothisat (Tonle Sap South)", 14000),
+    (12.250, 104.670, 3.8, 900, 1860, "Kampong Chhnang (Tonle Sap Port)", 15000),
+    (10.610, 104.180, 4.0, 1400, 1860, "Kampot & Phnom Chhngok (Coastal Port)", 14000),
+    (14.390, 104.680, 4.0, 890, 1400, "Preah Vihear & Dangrek Sanctuary", 12000),
+    (13.450, 103.520, 3.8, 800, 1400, "Banteay Srei & Phnom Kulen (Mahendraparvata)", 18000),
+    (11.500, 105.330, 3.8, 1200, 1860, "Prey Veng & Ba Phnom (Funan-Post-Angkor)", 16000),
+    (11.090, 105.800, 3.5, 1300, 1860, "Svay Rieng (Eastern Plains)", 11000),
+    (12.710, 104.890, 3.8, 900, 1860, "Kampong Thom / Stung Sen", 14000),
+    (13.590, 102.970, 3.8, 1000, 1860, "Sisophon / Serei Saophoan", 12000),
+    # Laos (Prehistoric, Chenla/Vat Phou, Lan Xang, Regional Muang)
+    (19.900, 102.180, 3.5, -10000, -1000, "Tam Hang & Pak Ou Caves (Northern Laos)", 650),
+    (18.410, 101.660, 3.5, -1500, 500, "Pha Phen & Sayaboury Bronze-Iron", 1400),
+    (15.120, 105.800, 4.0, 500, 1860, "Champasak & Muang Kao (Southern Laos)", 18000),
+    (17.400, 104.830, 3.8, 800, 1860, "Sikhottabong / Thakhek (Khammouane)", 15000),
+    (16.560, 104.750, 3.8, 900, 1860, "Savannakhet / Muang Phin (Middle Mekong)", 14000),
+    (19.340, 103.370, 4.0, 700, 1860, "Muang Khoun / Xiangkhoang (Phuan Capital)", 18000),
+    (20.410, 104.040, 3.5, 1000, 1860, "Sam Neua / Viengxay (Houaphanh)", 10000),
+    (20.950, 101.400, 3.5, 1100, 1860, "Luang Namtha & Muang Sing", 9500),
+    (20.690, 101.980, 3.5, 1200, 1860, "Muang Xai (Oudomxay)", 9000),
+    (20.280, 100.410, 3.5, 1200, 1860, "Houayxay / Suvannakhomkham (Bokeo)", 10000),
+    (19.260, 101.710, 3.5, 1300, 1860, "Sainyabuli / Muang Ngeun", 11000),
+    (14.800, 106.830, 3.5, 1300, 1860, "Attapeu / Muang Mai (Sekong)", 8500),
+    (15.720, 106.420, 3.5, 1200, 1860, "Salavan / Saravane", 9000),
+    (18.390, 103.650, 3.5, 1300, 1860, "Paksan / Borikhan", 9000),
+    # Vietnam (Hoabinhian, Phung Nguyen, Dong Son, Sa Huynh, Giao Chi, Dai Viet, Champa, Nguyen)
+    (20.850, 106.680, 4.0, -3500, -1500, "Cai Beo & Ha Long Neolithic (Hai Phong)", 1400),
+    (20.170, 105.780, 3.8, -4000, -1500, "Da But Shellmound (Thanh Hoa)", 1200),
+    (19.000, 105.600, 3.8, -3500, -1200, "Quynh Van Shellmound (Nghe An)", 1100),
+    (21.300, 105.420, 4.2, -1500, 600, "Viet Tri / Phong Chau (Van Lang Core)", 12000),
+    (20.430, 106.170, 4.5, 900, 1860, "Thien Truong / Nam Dinh (Tran Dynasty)", 45000),
+    (20.650, 106.050, 4.5, 1400, 1860, "Pho Hien / Hung Yen (Red River Entrepot)", 38000),
+    (20.940, 106.330, 4.2, 1000, 1860, "Hai Duong / Chu Dau Ceramics Hub", 28000),
+    (21.180, 106.070, 4.2, 600, 1860, "Bac Ninh / Kinh Bac", 26000),
+    (21.590, 105.840, 3.8, 1000, 1860, "Thai Nguyen (Viet Bac Frontier)", 15000),
+    (21.850, 106.760, 4.0, 900, 1860, "Lang Son / Doan Thanh (Northern Gate)", 18000),
+    (22.660, 106.260, 3.8, 1100, 1860, "Cao Bang (Mac Dynasty Capital)", 15000),
+    (21.150, 107.450, 4.2, 1149, 1860, "Van Don Maritime Entrepot (Quang Ninh)", 22000),
+    (19.810, 105.770, 4.5, 100, 1860, "Thanh Hoa / Cuu Chan (Ai Chau)", 35000),
+    (18.670, 105.680, 4.2, 200, 1860, "Vinh / Hoan Chau (Nghe An)", 30000),
+    (17.470, 106.620, 4.0, 400, 1860, "Dong Hoi / Bo Chinh (Quang Binh)", 18000),
+    (16.750, 107.180, 4.0, 400, 1860, "Quang Tri / Ai Tu (O-Ly Frontier)", 18000),
+    (15.120, 108.800, 4.0, 600, 1860, "Quang Ngai / Co Luy (Champa-Nguyen)", 20000),
+    (13.780, 109.220, 4.2, 900, 1860, "Quy Nhon / Thi Nai Port (Binh Dinh)", 28000),
+    (13.090, 109.300, 3.8, 800, 1860, "Tuy Hoa / Thap Nhan (Phu Yen)", 16000),
+    (10.930, 108.100, 3.8, 800, 1860, "Phan Thiet / Po Sah Inu (Binh Thuan)", 16000),
+    (10.950, 106.820, 4.0, 1679, 1860, "Bien Hoa / Cu Lao Pho (Dong Nai)", 25000),
+    (10.360, 106.360, 4.0, 1679, 1860, "My Tho (Mekong Delta Port)", 24000),
+    (10.250, 105.970, 4.0, 1732, 1860, "Vinh Long / Long Ho (Mekong Delta)", 22000),
+    (10.380, 105.430, 4.0, 1757, 1860, "Long Xuyen & Chau Doc (An Giang)", 22000),
+    (10.380, 104.480, 4.2, 1708, 1860, "Ha Tien / Cancao (Mac Cuu Entrepot)", 24000),
+    (10.040, 105.780, 4.0, 1739, 1860, "Can Tho / Tran Giang", 24000),
+    (9.600, 105.970, 3.8, 1700, 1860, "Soc Trang / Ba Thac", 16000),
+    # Malaysia & Brunei (Prehistoric, Bujang, Santubong, Melaka, Sultanates)
+    (4.650, 101.080, 3.5, -10000, -1500, "Gua Tambun & Perak Karst Caves", 450),
+    (3.980, 102.350, 3.5, -6000, -500, "Gua Kecil & Pahang Interior Neolithic", 550),
+    (4.950, 118.220, 3.5, -10000, -1000, "Madai & Baturong Caves (Sabah)", 650),
+    (6.120, 100.370, 4.2, 500, 1860, "Alor Setar / Kota Kuala Kedah", 24000),
+    (6.130, 102.240, 4.2, 700, 1860, "Kota Bharu / Chih-Tu (Kelantan)", 28000),
+    (5.330, 103.140, 4.2, 800, 1860, "Kuala Terengganu (Batu Bersurat 1303)", 26000),
+    (3.490, 103.390, 4.0, 900, 1860, "Pekan / Inderapura (Pahang Sultanate)", 18000),
+    (4.770, 100.940, 4.0, 1528, 1860, "Kuala Kangsar / Beruas (Perak Sultanate)", 20000),
+    (4.320, 100.780, 3.8, 300, 1500, "Gangga Negara / Beruas (Perak)", 12000),
+    (1.750, 103.900, 4.2, 1528, 1860, "Johor Lama / Kota Tinggi (Johor Sultanate)", 28000),
+    (2.040, 102.570, 3.8, 1400, 1860, "Muar / Pagoh (Melaka-Johor)", 14000),
+    (3.340, 101.250, 4.0, 1745, 1860, "Kuala Selangor / Klang (Selangor Sultanate)", 16000),
+    (2.700, 102.250, 3.8, 1550, 1860, "Seri Menanti / Rembau (Negeri Sembilan)", 14000),
+    (6.440, 100.200, 3.8, 1600, 1860, "Kangar / Arau (Perlis)", 12000),
+    (1.550, 110.350, 4.0, 1400, 1860, "Kuching / Sarawak Lama", 20000),
+    (4.900, 114.940, 4.2, 1000, 1860, "Kampong Ayer / Brunei Bay", 32000),
+    # Indonesia (Sumatra, Java, Bali, Kalimantan, Sulawesi, Maluku, Nusa Tenggara)
+    (-6.350, 105.840, 4.0, -500, 1600, "Banten Girang & Sunda Kelapa West", 12000),
+    (-6.600, 106.800, 4.5, 700, 1579, "Pakuan Pajajaran / Bogor (Sunda Kingdom)", 48000),
+    (-7.330, 108.350, 4.2, 670, 1550, "Kawali / Galuh (West Java Kingdom)", 22000),
+    (-6.910, 107.610, 4.0, 1400, 1860, "Priangan / Sumedang Larang (West Java)", 24000),
+    (-7.520, 110.220, 4.2, 650, 1860, "Magelang / Kedu Plain (Central Java)", 28000),
+    (-6.870, 109.140, 4.0, 1400, 1860, "Tegal & Pekalongan (North Java Pasisir)", 28000),
+    (-6.590, 110.670, 4.5, 1450, 1860, "Jepara (Kalinyamat Maritime Port)", 35000),
+    (-6.810, 110.840, 4.2, 1450, 1860, "Kudus & Pati (Muria Peninsula)", 28000),
+    (-6.890, 112.060, 4.5, 1000, 1860, "Tuban (Majapahit Principal Port)", 35000),
+    (-7.040, 113.860, 4.2, 1200, 1860, "Sumenep & Pamekasan (Madura Kingdom)", 26000),
+    (-7.650, 112.900, 4.2, 1200, 1860, "Pasuruan & Bangil (East Java)", 26000),
+    (-8.210, 114.370, 4.2, 1200, 1860, "Blambangan / Banyuwangi (East Java)", 24000),
+    (-8.090, 112.160, 4.2, 1100, 1860, "Blitar & Penataran (East Java)", 24000),
+    (-7.630, 111.520, 4.0, 1400, 1860, "Madiun & Ponorogo (East Java)", 24000),
+    (-7.430, 109.240, 4.0, 1400, 1860, "Banyumas & Purwokerto", 22000),
+    (-0.950, 100.350, 4.2, 1300, 1860, "Pagaruyung / Padang (Minangkabau)", 32000),
+    (-0.460, 100.620, 4.2, 1347, 1860, "Batusangkar / Pagaruyung (Adityawarman)", 26000),
+    (0.800, 102.050, 4.0, 1600, 1860, "Siak Sri Indrapura (Siak Sultanate)", 18000),
+    (0.920, 104.450, 4.2, 1600, 1860, "Tanjung Pinang / Bintan (Riau-Lingga)", 24000),
+    (1.750, 101.450, 3.8, 1200, 1860, "Aru / Deli & Asahan (East Sumatra)", 16000),
+    (5.180, 97.140, 4.0, 1100, 1860, "Pidie & Lhokseumawe (North Aceh)", 22000),
+    (-3.790, 102.260, 4.0, 1500, 1860, "Bengkulu / Fort Marlborough", 18000),
+    (-5.430, 105.260, 4.0, 1400, 1860, "Tulang Bawang / Telukbetung (Lampung)", 18000),
+    (-1.600, 103.610, 4.2, 1400, 1860, "Jambi Sultanate (Batang Hari)", 25000),
+    (-2.130, 106.110, 3.8, 1400, 1860, "Kota Kapur & Muntok (Bangka Srivijaya)", 16000),
+    (-0.020, 109.340, 4.0, 1400, 1860, "Sukadana & Pontianak (West Kalimantan)", 24000),
+    (1.360, 109.300, 4.0, 1400, 1860, "Sambas & Mempawah (West Borneo)", 18000),
+    (-2.740, 111.630, 3.8, 1500, 1860, "Kotawaringin (Central Kalimantan)", 12000),
+    (2.150, 117.490, 3.8, 1350, 1860, "Berau / Tanjung Redeb (East Borneo)", 12000),
+    (-2.990, 120.200, 4.2, 1200, 1860, "Luwu / Palopo (South Sulawesi Iron Kingdom)", 22000),
+    (-4.540, 120.330, 4.2, 1330, 1860, "Bone / Watampone (Bugis Kingdom)", 26000),
+    (-4.130, 120.030, 4.0, 1300, 1860, "Wajo / Sengkang (Bugis Confederation)", 18000),
+    (-5.470, 122.600, 4.2, 1300, 1860, "Buton / Baubau Wolio Fortress", 24000),
+    (1.480, 124.840, 4.0, 1400, 1860, "Manado & Minahasa Waruga (North Sulawesi)", 20000),
+    (0.540, 123.060, 3.8, 1400, 1860, "Gorontalo (Limboto Sultanate)", 16000),
+    (-8.580, 116.100, 4.2, 1200, 1860, "Mataram & Selaparang (Lombok)", 24000),
+    (-8.460, 118.730, 4.2, 1200, 1860, "Bima / Mbojo Sultanate (Sumbawa)", 22000),
+    (-8.500, 117.420, 3.8, 1300, 1860, "Sumbawa Besar (Sumbawa Sultanate)", 16000),
+    (-8.340, 122.980, 3.8, 1400, 1860, "Larantuka (East Flores Portuguese Port)", 14000),
+    (-9.660, 120.260, 3.8, 1000, 1860, "Waingapu / Melolo (Sumba Megalithic)", 12000),
+    (-10.170, 123.600, 4.2, 1500, 1860, "Kupang / Fort Concordia (West Timor)", 18000),
+    (-9.570, 124.900, 4.0, 1200, 1860, "Wehali / Laran (Central Timor Sacred Centre)", 14000),
+    (-0.620, 127.470, 3.8, 1300, 1860, "Bacan & Jailolo (North Maluku Sultanates)", 12000),
+    # Philippines (Prehistoric, Chiefdoms, Sultanates, Spanish Cabeceras)
+    (16.040, 120.330, 4.0, 900, 1860, "Lingayen & Bolinao (Caboloan / Pangasinan)", 22000),
+    (15.030, 120.690, 4.2, 1000, 1860, "Bacolor / Lubao (Kapampangan Chiefdom)", 26000),
+    (14.170, 121.240, 4.2, 900, 1860, "Bay / Pila (Laguna de Bay Chiefdom)", 24000),
+    (13.880, 120.920, 4.2, 1000, 1860, "Taal / Calatagan (Kumintang / Batangas)", 24000),
+    (13.620, 123.190, 4.2, 1100, 1860, "Caceres / Naga (Bicol / Ibalon)", 24000),
+    (13.140, 123.730, 3.8, 1300, 1860, "Albay / Daraga (Bicol)", 18000),
+    (13.410, 121.180, 3.8, 900, 1860, "Ma-i / Calapan (Mindoro Trade Polity)", 14000),
+    (11.580, 122.750, 4.0, 1000, 1860, "Panay / Capiz (Madja-as Confederation)", 20000),
+    (10.670, 122.950, 3.8, 1200, 1860, "Binalbagan / Bacolod (Buglas / Negros)", 18000),
+    (9.650, 123.850, 4.0, 1000, 1860, "Baclayon / Tagbilaran (Bool / Bohol)", 18000),
+    (11.240, 125.000, 3.8, 1100, 1860, "Carigara / Palo (Leyte)", 18000),
+    (11.780, 124.880, 3.8, 1100, 1860, "Catbalogan / Palapag (Ibabao / Samar)", 16000),
+    (8.480, 124.650, 3.8, 1200, 1860, "Cagayan de Oro / Huluga (Northern Mindanao)", 16000),
+    (7.700, 124.280, 4.0, 1300, 1860, "Marawi / Lanao (Pat a Pangampong)", 20000),
+    (6.910, 122.070, 4.2, 1400, 1860, "Zamboanga / Fort Pilar", 22000),
+    (18.200, 120.590, 4.0, 1200, 1860, "Laoag (Ilocos Norte)", 22000),
+    (17.610, 121.730, 3.8, 1200, 1860, "Lal-lo / Nueva Segovia (Cagayan Valley)", 18000),
+    # Timor-Leste (Prehistoric Caves, Fortified Hilltop Laku, Liurai Kingdoms, Portuguese Coast)
+    (-8.490, 126.900, 3.5, -4000, 1860, "Lautem / Vasino Fortified Hilltop (Laku)", 3200),
+    (-8.470, 126.460, 4.0, 500, 1860, "Baucau / Venilale (Eastern Liurai Domain)", 8500),
+    (-8.510, 126.010, 3.8, 800, 1860, "Manatuto / Laclo (North Coast Liurai)", 6500),
+    (-8.870, 126.360, 3.8, 700, 1860, "Luka / Viqueque (Ancient South Coast Kingdom)", 7500),
+    (-9.000, 125.650, 3.5, 900, 1860, "Same / Manufahi (Boaventura Liurai)", 6000),
+    (-9.310, 125.260, 3.5, 800, 1860, "Suai / Camenassa (Cova Lima Kingdom)", 5500),
+    (-8.970, 125.220, 3.5, 800, 1860, "Bobonaro / Balibo (Western Frontier)", 5500),
+    (-8.600, 125.340, 3.5, 1000, 1860, "Liquica / Maubara (Dutch-Portuguese Fort)", 5000),
+    (-8.990, 125.510, 3.5, 900, 1860, "Ainaro / Maubisse (Central Highlands)", 5000),
+    (-8.730, 125.430, 3.5, 1000, 1860, "Ermera / Atsabe (Highland Liurai)", 5500),
+    (-8.730, 125.570, 3.5, 1000, 1860, "Aileu (Central Highlands)", 4800),
   ]
   out = []
   for la, lo, wt, sy, ey, nm, mp in raw_sites:
@@ -672,88 +850,140 @@ def ingest_all_repositories():
     except Exception:
       pass
 
-  # --- REPO 5: Wikidata Institutional Heritage & Archaeological Registries (11 MANDALA countries) ---
-  for fn in sorted(os.listdir(RAW_DIR)):
-    if not fn.startswith("wikidata_arch_") or not fn.endswith(".json"):
-      continue
-    try:
-      rows = json.load(open(os.path.join(RAW_DIR, fn), "r", encoding="utf-8"))
-    except Exception:
-      continue
-    seen_q = set()
-    for r in rows:
-      qid = (r.get("item") or {}).get("value") or ""
-      if qid in seen_q:
+  # --- REPO 5: Official Thailand Fine Arts Department GIS (gis.finearts.go.th ArcGIS REST: 25,721 sites!) ---
+  fad_cities_p = os.path.join(RAW_DIR, "thailand_fadgis_ancient_cities.json")
+  if os.path.exists(fad_cities_p):
+    for row in json.load(open(fad_cities_p, "r", encoding="utf-8")):
+      try:
+        lat, lon = float(row["lat"]), float(row["lon"])
+      except Exception:
         continue
-      seen_q.add(qid)
-      lat, lon = parse_wd_coord((r.get("coord") or {}).get("value"))
-      if lat is None or not (-13.0 <= lat <= 31.0 and 89.0 <= lon <= 138.0):
+      if not (5.5 <= lat <= 20.6 and 97.3 <= lon <= 105.7):
         continue
-      inc = parse_wd_year((r.get("inception") or {}).get("value"))
-      # API forensics: exclude clearly modern post-1885 buildings unless archaeological site
-      lbl = (r.get("itemLabel") or {}).get("value") or ""
-      tlbl = (r.get("typeLabel") or {}).get("value") or ""
-      plbl = (r.get("periodLabel") or {}).get("value") or ""
-      clbl = (r.get("cultureLabel") or {}).get("value") or ""
-      hlbl = (r.get("heritageLabel") or {}).get("value") or ""
-      txt = f"{lbl} {tlbl} {plbl} {clbl} {hlbl}"
-      is_arch = any(k in txt.lower() for k in ("archaeolog", "ancient", "ruin", "candi", "prasat", "pyu", "angkor", "stupa", "cave", "megalith", "prehistoric", "dvaravati", "srivijaya", "majapahit", "champa", "dong son", "hoabinhian"))
-      if inc is not None and inc > 1885 and not is_arch:
-        continue
-      pw = []
-      if inc is not None and -15000 <= inc <= 1885:
-        pw = assign_periods_by_span(inc, min(1860, inc + 250))
+      attrs = row.get("attrs") or {}
+      txt = f"{attrs.get('NAMEE','')} {attrs.get('NAME','')} {attrs.get('CHANGWAT_E','')}"
+      pw = classify_text_to_periods(txt)
       if not pw:
-        pw = classify_text_to_periods(txt)
-      if not pw:
-        # Dated/monumental heritage fallback strictly by type
-        tl = tlbl.lower()
-        if any(k in tl for k in ("cave", "rock", "megalith")):
-          pw = [("01_palaeolithic_hoabinhian_toalean", 0.5), ("02_neolithic_austronesian_dispersal", 0.5)]
-        elif any(k in tl for k in ("candi", "prasat", "ancient city", "archaeological site", "ruins")):
-          pw = [("06_chenla_srivijaya_sailendra_mataram", 0.30), ("07_angkor_pagan_dai_viet_kediri", 0.40), ("08_majapahit_sukhothai_early_ayutthaya", 0.30)]
-        elif any(k in tl for k in ("fort", "castle", "palace", "citadel")):
-          pw = [("08_majapahit_sukhothai_early_ayutthaya", 0.25), ("09_sultanates_toungoo_le_nguyen_iberian", 0.45), ("10_late_precolonial_colonial_transition", 0.30)]
-        elif any(k in tl for k in ("church", "cathedral", "mosque")):
-          pw = [("09_sultanates_toungoo_le_nguyen_iberian", 0.45), ("10_late_precolonial_colonial_transition", 0.55)]
-        else:
-          pw = [("07_angkor_pagan_dai_viet_kediri", 0.25), ("08_majapahit_sukhothai_early_ayutthaya", 0.25), ("09_sultanates_toungoo_le_nguyen_iberian", 0.25), ("10_late_precolonial_colonial_transition", 0.25)]
-      wt = 2.0 if "ancient city" in tlbl.lower() else (1.5 if is_arch else 0.9)
-      records.append((lat, lon, wt, pw, f"wikidata_{fn[14:-5]}", is_arch, 0))
-      source_stats["wikidata_national_heritage"] += 1
+        pw = [
+          ("05_funan_pyu_dvaravati_champa", 0.25),
+          ("06_chenla_srivijaya_sailendra_mataram", 0.25),
+          ("07_angkor_pagan_dai_viet_kediri", 0.25),
+          ("08_majapahit_sukhothai_early_ayutthaya", 0.25),
+        ]
+      records.append((lat, lon, 2.8, pw, "thailand_fadgis_ancient_cities", True, 5000))
+      source_stats["thailand_fadgis_ancient_cities"] += 1
 
-  # --- REPO 6: OSM Overpass Archaeological & Heritage Sites (12 SE Asian Tiles) ---
-  for fn in sorted(os.listdir(RAW_DIR)):
-    if not fn.startswith("osm_arch_") or not fn.endswith(".json"):
-      continue
-    try:
-      els = json.load(open(os.path.join(RAW_DIR, fn), "r", encoding="utf-8"))
-    except Exception:
-      continue
-    for el in els:
-      lat, lon = el.get("lat"), el.get("lon")
-      if lat is None or lon is None:
+  fad_mis_p = os.path.join(RAW_DIR, "thailand_fadgis_mis_monuments.json")
+  if os.path.exists(fad_mis_p):
+    for row in json.load(open(fad_mis_p, "r", encoding="utf-8")):
+      try:
+        lat, lon = float(row["lat"]), float(row["lon"])
+      except Exception:
         continue
-      h = str(el.get("historic") or "")
-      st = str(el.get("site_type") or "")
-      sd = str(el.get("start_date") or "")
-      txt = f"{el.get('name','')} {el.get('name_local','')} {h} {st} {el.get('heritage','')} {sd} {el.get('religion','')}"
-      m_yr = re.search(r"\b(19\d\d|20\d\d)\b", sd)
-      if m_yr and h not in ("archaeological_site", "megalith", "tumulus"):
+      if not (5.5 <= lat <= 20.6 and 97.3 <= lon <= 105.7):
+        continue
+      attrs = row.get("attrs") or {}
+      nm_t = str(attrs.get("POS_NAME_T") or "")
+      if any(k in nm_t for k in ("ปราสาท", "ปรางค์", "กู่", "บาราย", "คูเมือง")):
+        pw = [("06_chenla_srivijaya_sailendra_mataram", 0.25), ("07_angkor_pagan_dai_viet_kediri", 0.50), ("08_majapahit_sukhothai_early_ayutthaya", 0.25)]
+        wt = 1.6
+      elif any(k in nm_t for k in ("เมืองโบราณ", "ชุมชนโบราณ", "แหล่งโบราณคดี", "ถ้ำ", "เตา")):
+        pw = [("03_bronze_age_dongson_banchiang", 0.20), ("04_iron_age_sa_huynh_early_pyu", 0.30), ("05_funan_pyu_dvaravati_champa", 0.30), ("06_chenla_srivijaya_sailendra_mataram", 0.20)]
+        wt = 1.8
+      elif any(k in nm_t for k in ("ป้อม", "กำแพง", "วัง", "พระราชวัง")):
+        pw = [("08_majapahit_sukhothai_early_ayutthaya", 0.30), ("09_sultanates_toungoo_le_nguyen_iberian", 0.45), ("10_late_precolonial_colonial_transition", 0.25)]
+        wt = 1.6
+      else:
+        pw = [("07_angkor_pagan_dai_viet_kediri", 0.20), ("08_majapahit_sukhothai_early_ayutthaya", 0.30), ("09_sultanates_toungoo_le_nguyen_iberian", 0.30), ("10_late_precolonial_colonial_transition", 0.20)]
+        wt = 1.2
+      records.append((lat, lon, wt, pw, "thailand_fadgis_mis_monuments", True, 0))
+      source_stats["thailand_fadgis_mis_monuments"] += 1
+
+  fad_50k_p = os.path.join(RAW_DIR, "thailand_fadgis_monuments_50k.json")
+  if os.path.exists(fad_50k_p):
+    for row in json.load(open(fad_50k_p, "r", encoding="utf-8")):
+      try:
+        lat, lon = float(row["lat"]), float(row["lon"])
+      except Exception:
+        continue
+      if not (5.5 <= lat <= 20.6 and 97.3 <= lon <= 105.7):
+        continue
+      pw = [("06_chenla_srivijaya_sailendra_mataram", 0.15), ("07_angkor_pagan_dai_viet_kediri", 0.25), ("08_majapahit_sukhothai_early_ayutthaya", 0.25), ("09_sultanates_toungoo_le_nguyen_iberian", 0.20), ("10_late_precolonial_colonial_transition", 0.15)]
+      records.append((lat, lon, 0.85, pw, "thailand_fadgis_monuments_50k", True, 0))
+      source_stats["thailand_fadgis_monuments_50k"] += 1
+
+  # --- REPO 6: Official Indonesia Kemendikbud Cagar Budaya National Register (558 sites, pre-1865 filtered) ---
+  id_cb_p = os.path.join(RAW_DIR, "indonesia_cagar_budaya_official.json")
+  if os.path.exists(id_cb_p):
+    for row in json.load(open(id_cb_p, "r", encoding="utf-8")):
+      try:
+        lat, lon = float(row["lat"]), float(row["lon"])
+      except Exception:
+        continue
+      if not (-11.2 <= lat <= 6.2 and 95.0 <= lon <= 135.0):
+        continue
+      f = row.get("fields") or {}
+      nm = str(f.get("nm_objekcb") or row.get("name") or "")
+      cat = str(f.get("nm_kategoricb") or "").lower()
+      desc = str(f.get("deskripsi") or "")
+      txt = f"{nm} {cat} {desc[:600]}"
+      tl = txt.lower()
+      # Skip late-colonial / 20th-century buildings (hotels, banks, 1900s schools, etc.)
+      if any(b in nm.lower() for b in ("hotel", "bank", "gedung", "stasiun", "kantor", "sekolah", "rumah sakit", "bioskop", "museum")) and not any(k in tl for k in ("candi", "situs", "prasasti", "keraton", "benteng", "masjid", "gua", "purbakala", "megalit")):
         continue
       pw = classify_text_to_periods(txt)
       if not pw:
-        if h in ("megalith", "tumulus"):
-          pw = [("03_bronze_age_dongson_banchiang", 0.5), ("04_iron_age_sa_huynh_early_pyu", 0.5)]
-        elif h in ("archaeological_site", "ruins"):
-          pw = [("05_funan_pyu_dvaravati_champa", 0.20), ("06_chenla_srivijaya_sailendra_mataram", 0.25), ("07_angkor_pagan_dai_viet_kediri", 0.30), ("08_majapahit_sukhothai_early_ayutthaya", 0.25)]
-        elif h in ("fort", "citywalls", "castle", "palace"):
-          pw = [("08_majapahit_sukhothai_early_ayutthaya", 0.20), ("09_sultanates_toungoo_le_nguyen_iberian", 0.45), ("10_late_precolonial_colonial_transition", 0.35)]
+        if any(k in tl for k in ("gua", "leang", "liang", "prasejarah", "megalit", "dolmen", "menhir", "waruga", "sarkofagus")):
+          pw = [("01_palaeolithic_hoabinhian_toalean", 0.30), ("02_neolithic_austronesian_dispersal", 0.35), ("03_bronze_age_dongson_banchiang", 0.35)]
+        elif any(k in tl for k in ("candi", "prasasti", "petirtaan", "stupa", "arca", "sriwijaya", "mataram", "majapahit", "singasari", "kediri", "tarumanegara")):
+          pw = [("06_chenla_srivijaya_sailendra_mataram", 0.35), ("07_angkor_pagan_dai_viet_kediri", 0.35), ("08_majapahit_sukhothai_early_ayutthaya", 0.30)]
+        elif any(k in tl for k in ("keraton", "kraton", "benteng", "masjid", "makam", "kesultanan", "istana", "fort", "voc")):
+          pw = [("09_sultanates_toungoo_le_nguyen_iberian", 0.55), ("10_late_precolonial_colonial_transition", 0.45)]
+        elif cat in ("situs", "kawasan", "struktur"):
+          pw = [("06_chenla_srivijaya_sailendra_mataram", 0.25), ("07_angkor_pagan_dai_viet_kediri", 0.30), ("08_majapahit_sukhothai_early_ayutthaya", 0.25), ("09_sultanates_toungoo_le_nguyen_iberian", 0.20)]
         else:
-          pw = [("09_sultanates_toungoo_le_nguyen_iberian", 0.40), ("10_late_precolonial_colonial_transition", 0.60)]
-      wt = 1.4 if h in ("archaeological_site", "citywalls", "megalith") else 0.85
-      records.append((float(lat), float(lon), wt, pw, "osm_overpass_heritage", h in ("archaeological_site", "citywalls", "fort"), 0))
-      source_stats["osm_overpass_heritage"] += 1
+          continue
+      wt = 2.4 if cat in ("situs", "kawasan") or "candi" in tl else 1.8
+      records.append((lat, lon, wt, pw, "indonesia_kemendikbud_cagar_budaya", True, 0))
+      source_stats["indonesia_kemendikbud_cagar_budaya"] += 1
+
+  # --- REPO 6b: Myanmar Department of Archaeology Bagan Monument Inventory ---
+  bg_p = os.path.join(RAW_DIR, "myanmar_bagan_mapdata.json")
+  if os.path.exists(bg_p):
+    bg = json.load(open(bg_p, "r", encoding="utf-8-sig"))
+    for row in bg.get("BaganMapInfoHead", []):
+      try:
+        lat, lon = float(row["Latitude"]), float(row["Longitude"])
+      except Exception:
+        continue
+      if 20.8 <= lat <= 21.5 and 94.6 <= lon <= 95.2:
+        pw = [("07_angkor_pagan_dai_viet_kediri", 0.70), ("08_majapahit_sukhothai_early_ayutthaya", 0.30)]
+        records.append((lat, lon, 1.8, pw, "myanmar_bagan_inventory", True, 0))
+        source_stats["myanmar_bagan_inventory"] += 1
+
+  # --- REPO 6c: Harvard Dataverse Archaeological Atlas of Published Excavations (doi:10.7910/DVN/7MYVV7: 2,843 sites!) ---
+  pe_m_p = os.path.join(RAW_DIR, "published_excavations_mandala.json")
+  if os.path.exists(pe_m_p):
+    for row in json.load(open(pe_m_p, "r", encoding="utf-8")):
+      try:
+        lat, lon = float(row["lat"]), float(row["lon"])
+      except Exception:
+        continue
+      if not (-13.0 <= lat <= 31.0 and 89.0 <= lon <= 138.0):
+        continue
+      txt = f"{row.get('name','')} {row.get('desc','')}"
+      pw = classify_text_to_periods(txt)
+      if not pw:
+        pw = [
+          ("02_neolithic_austronesian_dispersal", 0.15),
+          ("03_bronze_age_dongson_banchiang", 0.15),
+          ("04_iron_age_sa_huynh_early_pyu", 0.20),
+          ("05_funan_pyu_dvaravati_champa", 0.20),
+          ("06_chenla_srivijaya_sailendra_mataram", 0.15),
+          ("07_angkor_pagan_dai_viet_kediri", 0.15),
+        ]
+      records.append((lat, lon, 2.2, pw, "published_excavations_atlas", True, 0))
+      source_stats["published_excavations_atlas"] += 1
 
   # --- REPO 7: AADR v66 Ancient DNA (from JADE raw cache) ---
   anno_p = os.path.join(JADE_RAW, "aadr_v66.p1_1240K.aadr.PUB.anno")
@@ -906,16 +1136,32 @@ def aggregate_and_export(domain_mask, land_area, catchments, records, source_sta
     else:
       assigned_fr += 1
 
-  # Biome/Aridity/Canopy-conditioned Q75 + IQR taphonomic outlier shrinkage
+  # Biome/Aridity/Canopy-conditioned Q75 + IQR taphonomic outlier shrinkage + Thailand FADGIS survey-intensity harmonisation
+  # Prevents Thailand's 25,721-record national FADGIS survey from dwarfing Java, Red River Delta, Angkor & Irrawaddy or inflating global tau1!
   dom_mask_c = np.array([not c["is_frontier_buffer"] for c in catchments], dtype=bool)
   c_areas = np.array([c["area_km2"] for c in catchments], dtype=np.float64)
   c_hyde = np.array([hyde_dens[latlon_to_rc(c["lat"], c["lon"])] for c in catchments], dtype=np.float64)
   is_sparse = c_hyde < 4.0
+  is_thai = np.array([
+    (not c["is_frontier_buffer"]) and (5.6 <= c["lat"] <= 20.5) and (97.3 <= c["lon"] <= 105.6) and not (c["lat"] < 14.2 and c["lon"] > 102.7) and not (c["lat"] > 18.0 and c["lon"] > 101.4)
+    for c in catchments
+  ], dtype=bool)
 
   for pk in PERIOD_KEYS:
     vals = per_counts[pk]
     dens = vals / np.maximum(120.0, c_areas)
-    # Tighter urban-heritage salvage shrinkage on Periods 09-10 where modern OSM/Wikidata mapping clusters heavily in colonial capitals
+    # Harmonise Thailand FADGIS median positive density with peer core-civilisation SE Asian catchments (Java/Red River/Angkor/Irrawaddy)
+    th_pos = dens[is_thai & (dens > 0)]
+    oth_pos = dens[dom_mask_c & (~is_thai) & (dens > 0)]
+    if th_pos.size >= 10 and oth_pos.size >= 20:
+      th_med = float(np.median(th_pos))
+      oth_med = float(np.median(oth_pos))
+      if th_med > oth_med * 1.45:
+        scale_th = (oth_med * 1.25) / th_med
+        dens[is_thai] *= scale_th
+        vals[is_thai] = dens[is_thai] * np.maximum(120.0, c_areas[is_thai])
+
+    # Tighter urban-heritage salvage shrinkage on Periods 09-10
     is_late = pk in ("09_sultanates_toungoo_le_nguyen_iberian", "10_late_precolonial_colonial_transition")
     c_sp, c_dn = (0.9, 1.1) if is_late else (1.5, 2.5)
     for grp_mask, cap_mult in [(dom_mask_c & is_sparse, c_sp), (dom_mask_c & (~is_sparse), c_dn)]:

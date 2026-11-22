@@ -448,6 +448,48 @@ def build_north_korea_archaeological_corpus():
     ("Kumgangsan Changansa & Pyohunsa Temples", 38.620, 128.080, 600, 1868, 2.4, "silla_goryeo_temple"),
     ("Anbyon / Tongchon (Kangwon Historical Seats)", 39.040, 127.520, 600, 1868, 2.4, "silla_goryeo_joseon"),
     ("Pyonggang / Chorwon (Taebong Capital)", 38.300, 127.230, 800, 1868, 2.8, "silla_goryeo_joseon"),
+    # Expanded Eastern North Korea Archaeological & Historical Sites (Okjeo, Dongye, Lintun, Balhae, Goryeo, Joseon)
+    ("Hwangchoryong Stele Pass (King Jinheung 568 AD)", 40.483, 127.283, 550, 750, 2.5, "silla_frontier"),
+    ("Maunryong Stele Pass (King Jinheung 568 AD)", 40.317, 128.617, 550, 750, 2.5, "silla_frontier"),
+    ("Cheonghae-toseong / Balhae Namgyeong Namhaebu (Bukcheong)", 40.215, 128.320, 698, 1050, 3.4, "balhae_capital"),
+    ("Songpyong-dong Shellmound (Unggi)", 42.333, 130.389, -5500, -1500, 2.6, "chulmun_settlement"),
+    ("Hasambong-ri Bronze Settlement (Hoeryong)", 42.716, 129.774, -1500, -300, 2.4, "mumun_settlement"),
+    ("Hogok-dong Archaeological Site (Musan)", 42.130, 129.335, -4500, 300, 2.8, "chulmun_iron"),
+    ("Namsan-ri Black-Dog Peak Site (Hoeryong)", 42.396, 129.648, -1500, -300, 2.3, "mumun_settlement"),
+    ("Hande Palaeolithic Site (Onsong)", 42.826, 129.826, -12000, -6000, 2.2, "palaeolithic"),
+    ("Taechodo Island Prehistoric Site (Rajin)", 42.336, 130.366, -1800, -300, 2.2, "mumun_settlement"),
+    ("Sokda-ri Dolmen Cluster (Kumya)", 39.338, 127.229, -1500, -300, 2.4, "dolmen"),
+    ("Sinmyong-ri Prehistoric Site (Pungsan/Kimhyonggwon)", 40.918, 128.335, -1500, -300, 2.0, "mumun_settlement"),
+    ("Sannam-dong Bronze-Iron Site (Hongwon)", 39.949, 127.803, -1200, 300, 2.2, "mumun_iron"),
+    ("Jung-ri Iron Age Site (Bukcheong)", 40.223, 128.356, -800, 300, 2.3, "okjeo_iron"),
+    ("Biriyeolhol / Anbyon Ancient Town (Dongye/Silla)", 39.043, 127.523, -200, 1868, 2.8, "dongye_silla"),
+    ("Deokwon-bu / Wonsan-jin Ancient Port", 39.185, 127.386, -108, 1868, 2.8, "lintun_joseon"),
+    ("Munchon Ancient Coastal Seat (Okjeo/Goryeo)", 39.257, 127.319, -100, 1868, 2.4, "okjeo_joseon"),
+    ("Kowon / Deokju Fortress (Cheolli Jangseong)", 39.438, 127.243, 200, 1868, 2.5, "goryeo_fortress"),
+    ("Yonghung / Hwaju / Ssangseong Chonggwanbu", 39.533, 127.239, -100, 1868, 3.0, "okjeo_goryeo_joseon"),
+    ("Jeongpyong / Jeongju (Cheolli Jangseong Terminus)", 39.818, 127.376, 300, 1868, 2.6, "goryeo_fortress"),
+    ("Hamju / Hamhung Dongbuk Nine-Fortress Core", 39.918, 127.536, -100, 1868, 3.2, "okjeo_goryeo_joseon"),
+    ("Hongwon / Hongju Coastal Fortress", 40.025, 127.956, 300, 1868, 2.3, "balhae_joseon"),
+    ("Iwon / Iseong Coastal Seat (Balhae/Joseon)", 40.323, 128.655, 500, 1868, 2.3, "balhae_joseon"),
+    ("Dancheon / Bokju (Dongbuk 9-seong & Silver Mines)", 40.458, 128.903, 500, 1868, 2.8, "balhae_goryeo_joseon"),
+    ("Songjin / Immyeong Fortress (Eastern Okjeo/Joseon)", 40.669, 129.190, 200, 1868, 2.6, "okjeo_joseon"),
+    ("Myongchon / Chilbosan Fortress Seat", 41.106, 129.431, 698, 1868, 2.4, "balhae_joseon"),
+    ("Orang / Eorangchon Balhae-Joseon Coastal Site", 41.433, 129.656, 698, 1868, 2.2, "balhae_joseon"),
+    ("Gyeongseong Eupseong (Hamgyong Garrison HQ)", 41.588, 129.681, 698, 1868, 2.8, "balhae_joseon"),
+    ("Buryong-bu Garrison (North Hamgyong)", 42.061, 129.712, 900, 1868, 2.4, "goryeo_joseon"),
+    ("Hoeryong-bu (Yukjin Six Garrisons)", 42.441, 129.746, 700, 1868, 2.8, "balhae_joseon"),
+    ("Jongseong-bu (Yukjin Six Garrisons)", 42.779, 129.779, 900, 1868, 2.5, "goryeo_joseon"),
+    ("Musan-bu (Upper Tumen Garrison)", 42.226, 129.208, 700, 1868, 2.4, "balhae_joseon"),
+    ("Samsu-bu (Upper Yalu Garrison)", 41.298, 128.015, 1392, 1868, 2.2, "joseon_garrison"),
+    ("Jangjin-bu (Kaema Plateau Garrison)", 40.376, 127.255, 1392, 1868, 2.1, "joseon_garrison"),
+    ("Tongchon-gun Ancient Dongye Coastal Seat", 38.954, 127.892, -100, 1868, 2.4, "dongye_joseon"),
+    ("Kosong-gun Ancient Dongye Port", 38.749, 128.179, -100, 1868, 2.4, "dongye_joseon"),
+    ("Hoeyang-dohobu (Chugaryong Pass Seat)", 38.710, 127.598, 400, 1868, 2.5, "goguryeo_joseon"),
+    ("Kumsong-hyeon (North Kangwon Seat)", 38.435, 127.580, 600, 1868, 2.2, "silla_joseon"),
+    ("Ichon-dohobu (Imjin Valley Seat)", 38.474, 126.885, 400, 1868, 2.3, "goguryeo_joseon"),
+    ("Sohwa / Seosura-jin (Tumen Mouth Naval Fort)", 42.263, 130.606, 1434, 1868, 2.1, "joseon_garrison"),
+    ("Rajin / Anju-jin (Northern Okjeo Bay)", 42.249, 130.298, -100, 1868, 2.3, "okjeo_joseon"),
+    ("Doryeonpo Sea Wall (Cheolli Jangseong East End)", 39.776, 127.565, 1033, 1392, 2.4, "goryeo_fortress"),
   ]
 
   # Geocode all ~160 historic North Korean county seats (ADM2 / PPLA2 / PPLA in GeoNames KP) as Goryeo-Joseon administrative seats
@@ -708,32 +750,59 @@ def ingest_all_repositories():
         records.append((lat, lon, sy, ey, wt, "MLIT_P32_Japan"))
         source_stats["MLIT_P32_Japan"] += 1
 
-  # --- 5. Wikidata Japan Kofun, Castles & National Historic Sites (5,654 items) ---
-  wd_jp_p = os.path.join(RAW_DIR, "wd_japan_kofun_castles.json")
-  if os.path.exists(wd_jp_p):
-    for row in json.load(open(wd_jp_p, encoding="utf-8")):
-      cstr = str(row.get("coord") or "")
-      m = re.search(r"Point\(([-\d.]+)\s+([-\d.]+)\)", cstr)
-      if not m:
+  # --- 5. Official Hokkaido Board of Education Archaeological GIS (HARP Dataset 1245, 12,518 sites, CC BY 4.0) ---
+  harp_p = os.path.join(RAW_DIR, "hokkaido_harp_1245_parsed.json")
+  if os.path.exists(harp_p):
+    harp_era_map = [
+      ("旧石器", -13000, -10000),
+      ("縄文(草創", -11500, -9000),
+      ("縄文(早", -9000, -5000),
+      ("縄文(前", -5000, -3500),
+      ("縄文(中", -3500, -2500),
+      ("縄文(後", -2500, -1300),
+      ("縄文(晩", -1300, -300),
+      ("続縄文", -300, 650),
+      ("オホーツク", 400, 1000),
+      ("擦文", 650, 1250),
+      ("アイヌ", 1250, 1868),
+      ("中世", 1185, 1603),
+      ("近世", 1603, 1868),
+    ]
+    seen_harp = set()
+    for row in json.load(open(harp_p, encoding="utf-8")):
+      try:
+        lat = float(row.get("lat") or 0)
+        lon = float(row.get("lon") or 0)
+      except Exception:
         continue
-      lon, lat = float(m.group(1)), float(m.group(2))
-      if not (23.5 <= lat <= 46.5 and 122.5 <= lon <= 150.0):
+      if not (41.3 <= lat <= 45.6 and 139.3 <= lon <= 145.9):
         continue
-      txt = (str(row.get("itemLabel") or "") + " " + str(row.get("jaLabel") or "") + " " + str(row.get("typeLabel") or "")).lower()
-      if "kofun" in txt or "古墳" in txt or "tumulus" in txt:
-        sy, ey, wt = 250, 650, 1.5
-      elif "castle" in txt or "城" in txt or "gusuku" in txt or "グスク" in txt:
-        sy, ey, wt = 1300, 1868, 1.6
-      elif "shell" in txt or "貝塚" in txt or "jomon" in txt or "縄文" in txt:
-        sy, ey, wt = -5500, -400, 1.6
-      elif "yayoi" in txt or "弥生" in txt:
-        sy, ey, wt = -300, 250, 1.6
-      elif "kokufu" in txt or "kokubun" in txt or "国分寺" in txt or "官衙" in txt:
-        sy, ey, wt = 650, 1100, 1.7
-      else:
-        sy, ey, wt = -1000, 1600, 1.1
-      records.append((lat, lon, sy, ey, wt, "WD_Japan_Historic_Sites"))
-      source_stats["WD_Japan_Historic_Sites"] += 1
+      era_txt = str(row.get("era_jp") or "")
+      typ_txt = str(row.get("site_type_jp") or "")
+      wt = 1.6 if any(k in typ_txt for k in ("集落", "チャシ", "城館", "陣屋", "貝塚")) else (1.2 if any(k in typ_txt for k in ("墳墓", "番屋", "台場", "配石", "洞穴")) else 0.85)
+      matched_any = False
+      for tag, sy, ey in harp_era_map:
+        if tag in era_txt:
+          hk = (round(lat, 2), round(lon, 2), tag)
+          if hk in seen_harp:
+            matched_any = True
+            continue
+          seen_harp.add(hk)
+          records.append((lat, lon, sy, ey, wt, "Hokkaido_BOE_HARP_1245"))
+          source_stats["Hokkaido_BOE_HARP_1245"] += 1
+          matched_any = True
+      if not matched_any and "縄文" in era_txt:
+        hk = (round(lat, 2), round(lon, 2), "jomon_gen")
+        if hk not in seen_harp:
+          seen_harp.add(hk)
+          records.append((lat, lon, -6000, -400, wt, "Hokkaido_BOE_HARP_1245"))
+          source_stats["Hokkaido_BOE_HARP_1245"] += 1
+      elif not matched_any:
+        hk = (round(lat, 2), round(lon, 2), "undated")
+        if hk not in seen_harp:
+          seen_harp.add(hk)
+          records.append((lat, lon, -4000, 1200, wt * 0.5, "Hokkaido_BOE_HARP_1245"))
+          source_stats["Hokkaido_BOE_HARP_1245"] += 1
 
   # --- 6. Korea Heritage Service (KHS) Open API (17,965 total; 11,889 geolocated) ---
   khs_p = os.path.join(RAW_DIR, "khs_korea_heritage_all.json")
@@ -797,42 +866,61 @@ def ingest_all_repositories():
       records.append((lat, lon, cal_yr - 100, cal_yr + 100, 2.0, "Hanseong_Baekje_AMS"))
       source_stats["Hanseong_Baekje_AMS"] += 1
 
-  # --- 9. Wikidata South Korea Archaeology, Dolmens, Tombs & Fortresses (1,173 items) ---
-  wd_sk_p = os.path.join(RAW_DIR, "wd_south_korea_arch.json")
-  if os.path.exists(wd_sk_p):
-    for row in json.load(open(wd_sk_p, encoding="utf-8")):
-      m = re.search(r"Point\(([-\d.]+)\s+([-\d.]+)\)", str(row.get("coord") or ""))
-      if not m:
+  # --- 9. Official Korea NRICH Digital Korean Archaeology Dictionary (North Korea) ---
+  nrich_nk_p = os.path.join(RAW_DIR, "nrich_dka_nk_geocoded.json")
+  if os.path.exists(nrich_nk_p):
+    site_suffixes = ("유적", "조개더미", "패총", "토성", "산성", "고분", "고인돌", "동굴", "주거지", "성지", "읍성", "궁터", "절터", "무덤")
+    foreign_ban = ("선양", "지린", "랴오닝", "중국", "정자와쯔", "상바오춘", "전곡리")
+    for row in json.load(open(nrich_nk_p, encoding="utf-8")):
+      nm_ko = str(row.get("name_ko") or "").strip()
+      loc_m = str(row.get("loc_match") or "").strip()
+      if not any(s in nm_ko for s in site_suffixes):
         continue
-      lon, lat = float(m.group(1)), float(m.group(2))
-      if not (33.0 <= lat <= 38.7 and 124.5 <= lon <= 131.5):
+      if any(b in nm_ko or b in loc_m for b in foreign_ban):
         continue
-      txt = str(row.get("koLabel") or "") + " " + str(row.get("itemLabel") or "") + " " + str(row.get("typeLabel") or "")
-      sy, ey, wt = classify_korean_heritage_span(txt, "사적")
-      if sy is not None and wt > 0:
-        records.append((lat, lon, sy, ey, wt, "WD_SouthKorea_Arch"))
-        source_stats["WD_SouthKorea_Arch"] += 1
+      try:
+        lat, lon = float(row.get("lat") or 0), float(row.get("lon") or 0)
+        sy, ey = int(row.get("start_yr")), int(row.get("end_yr"))
+      except Exception:
+        continue
+      if not (37.6 <= lat <= 43.1 and 124.1 <= lon <= 130.8):
+        continue
+      records.append((lat, lon, sy, ey, 2.2, "NRICH_DKA_NorthKorea"))
+      source_stats["NRICH_DKA_NorthKorea"] += 1
 
-  # --- 10. North Korea Special Handling: Wikidata NK Heritage + NRICH/Joseon NK Archaeological Corpus ---
-  wd_nk_p = os.path.join(RAW_DIR, "wd_north_korea_heritage.json")
-  if os.path.exists(wd_nk_p):
-    for row in json.load(open(wd_nk_p, encoding="utf-8")):
-      m = re.search(r"Point\(([-\d.]+)\s+([-\d.]+)\)", str(row.get("coord") or ""))
-      if not m:
-        continue
-      lon, lat = float(m.group(1)), float(m.group(2))
-      if not (37.5 <= lat <= 43.2 and 124.0 <= lon <= 131.0):
-        continue
-      txt = str(row.get("koLabel") or "") + " " + str(row.get("itemLabel") or "") + " " + str(row.get("typeLabel") or "")
-      sy, ey, wt = classify_korean_heritage_span(txt, "사적")
-      if sy is not None and wt > 0:
-        records.append((lat, lon, sy, ey, wt * 1.5, "WD_NorthKorea_Heritage"))
-        source_stats["WD_NorthKorea_Heritage"] += 1
-
+  # --- 10. Official NRICH/Joseon North Korea Archaeological Corpus (incl. Eastern NK) ---
   nk_corpus = build_north_korea_archaeological_corpus()
   for rec in nk_corpus:
     records.append((rec["lat"], rec["lon"], rec["start_yr"], rec["end_yr"], rec["weight"], rec["source"]))
     source_stats[rec["source"]] += 1
+
+  # --- 10b. Harvard Dataverse Archaeological Atlas of Published Excavations (doi:10.7910/DVN/7MYVV7) ---
+  pe_p = os.path.join(RAW_DIR, "published_excavations_castle.json")
+  if os.path.exists(pe_p):
+    for row in json.load(open(pe_p, encoding="utf-8")):
+      try:
+        lat, lon = float(row.get("lat") or 0), float(row.get("lon") or 0)
+      except Exception:
+        continue
+      if not (23.5 <= lat <= 46.5 and 122.5 <= lon <= 146.5):
+        continue
+      txt = (str(row.get("name") or "") + " " + str(row.get("desc") or "")).lower()
+      if any(k in txt for k in ("paleolith", "palaeolith", "旧石器", "구석기")):
+        sy, ey = -13000, -10000
+      elif any(k in txt for k in ("jomon", "neolith", "shell", "縄文", "신석기")):
+        sy, ey = -6000, -1000
+      elif any(k in txt for k in ("yayoi", "bronze", "dolmen", "弥生", "청동기")):
+        sy, ey = -1000, 250
+      elif any(k in txt for k in ("kofun", "three kingdoms", "goguryeo", "silla", "baekje", "gaya", "古墳")):
+        sy, ey = 250, 668
+      elif any(k in txt for k in ("nara", "heian", "goryeo", "balhae", "bohai", "kamakura", "medieval")):
+        sy, ey = 668, 1450
+      elif any(k in txt for k in ("edo", "tokugawa", "joseon", "castle", "fort")):
+        sy, ey = 1400, 1868
+      else:
+        sy, ey = -2500, 1200
+      records.append((lat, lon, sy, ey, 1.5, "Published_Excavations_Atlas"))
+      source_stats["Published_Excavations_Atlas"] += 1
 
   # --- 11. Global c14_cleaned_dedup.csv & AADR v66 inside CASTLE + 300 km belt ---
   c14_p = os.path.join(SVEA_ROOT, "histmap", "1.data_raw", "population_c14bazAAR", "c14_cleaned_dedup.csv")
@@ -966,29 +1054,45 @@ def aggregate_and_export(dom_m, jpn_m, kor_m, prk_m, la, catchments, records, so
         vals[ci] = imp_d * c_areas[ci]
     per_counts[pk] = vals
 
-  # Second: Country-stratified Q75 + IQR taphonomic outlier shrinkage & cross-jurisdiction survey-intensity harmonisation
-  # Target relative mean positive density per jurisdiction anchored to historical carrying density (JPN=1.0, KOR=1.0, PRK=0.72)
-  ctry_target_dens = {"JPN": 0.040, "KOR": 0.042, "PRK": 0.028, "FRONTIER": 0.025}
+  # Second: Country- and Hokkaido-stratified Q75 + IQR taphonomic outlier shrinkage & cross-jurisdiction survey-intensity harmonisation
+  # Stratify Hokkaido (HOKK) separately from Honshu/Kyushu/Shikoku (JPN) so Hokkaido's intensive HARP 1245 survey
+  # preserves authentic within-Hokkaido gradients without swamping Honshu or inflating the variogram nugget!
+  c_strat = np.array([
+    "HOKK" if (c["country"] == "JPN" and c["lat"] >= 41.35 and c["lon"] >= 139.3) else c["country"]
+    for c in catchments
+  ])
+  prehist_pks = {"palaeolithic_early_jomon_chulmun", "middle_jomon_chulmun", "late_jomon_mumun_bronze"}
   for pk in PERIOD_KEYS:
     vals = per_counts[pk].copy()
     dens = vals / np.maximum(150.0, c_areas)
+    hokk_tgt = 0.020 if pk in prehist_pks else 0.015
+    ctry_target_dens = {"JPN": 0.042, "HOKK": hokk_tgt, "KOR": 0.042, "PRK": 0.036, "FRONTIER": 0.030}
     for cc_tag, tgt_d in ctry_target_dens.items():
-      cm = c_ctry == cc_tag
+      cm = c_strat == cc_tag
       pos = dens[cm & (dens > 0)]
       if pos.size < 5:
         continue
       q25, q75 = np.percentile(pos, [25, 75])
       iqr = max(1e-7, q75 - q25)
-      cap = q75 + 2.2 * iqr
+      cap = q75 + 1.8 * iqr
       excess = cm & (dens > cap)
       if excess.any():
         dens[excess] = cap + iqr * np.log1p((dens[excess] - cap) / iqr)
-      # Harmonise survey intensity across Japan / South Korea / North Korea so border seams stay smooth
       med_pos = float(np.median(dens[cm & (dens > 0)]))
       if med_pos > 1e-9:
         scale_f = tgt_d / med_pos
         dens[cm] *= scale_f
-    per_counts[pk] = dens * np.maximum(150.0, c_areas)
+    # Gentle 4-nearest-neighbour geodesic Empirical Bayes shrinkage (w=0.18) across continuous geography
+    # to suppress single-catchment survey micro-nugget without distorting meso-scale gradients or creating border steps
+    eb_dens = dens.copy()
+    for ci in range(n_c):
+      nbrs = [int(ni) for ni in nidxs[ci, 1:5] if float(_nd[ci, 1]) * EARTH_R_KM < 90.0]
+      if len(nbrs) >= 2:
+        loc_med = float(np.median(dens[nbrs]))
+        base_w = 0.30 if pk == "palaeolithic_early_jomon_chulmun" else 0.24
+        w_eb = base_w if dens[ci] > 0 else 0.40
+        eb_dens[ci] = (1.0 - w_eb) * dens[ci] + w_eb * loc_med
+    per_counts[pk] = eb_dens * np.maximum(150.0, c_areas)
 
   # Export period GeoJSONs + 00_all_periods.geojson
   period_meta = []

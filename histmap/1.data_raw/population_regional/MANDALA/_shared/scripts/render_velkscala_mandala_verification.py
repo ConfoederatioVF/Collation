@@ -90,12 +90,12 @@ def main():
   for ax, (yr, title) in zip(axes.flat, years):
     p = os.path.join(VELK_DIR, f"population_{yr}.png")
     arr = decode_f32(p)
-    sub = np.where(mask[r0:r1, c0:c1] & (arr[r0:r1, c0:c1] > 0), arr[r0:r1, c0:c1], np.nan)
-    fin = sub[np.isfinite(sub)]
-    tot = float(np.nansum(sub))
+    velk_raster = np.where(mask[r0:r1, c0:c1] & (arr[r0:r1, c0:c1] > 0), arr[r0:r1, c0:c1], np.nan)
+    fin = velk_raster[np.isfinite(velk_raster)]
+    tot = float(np.nansum(velk_raster))
     vmin = max(0.05, float(np.nanpercentile(fin, 2))) if fin.size else 0.1
     vmax = max(vmin * 10.0, float(np.nanpercentile(fin, 99.5))) if fin.size else 1000.0
-    im = ax.imshow(sub, origin="upper", extent=extent, cmap="magma", norm=mcolors.LogNorm(vmin=vmin, vmax=vmax))
+    im = ax.imshow(velk_raster, origin="upper", extent=extent, cmap="magma", norm=mcolors.LogNorm(vmin=vmin, vmax=vmax))
     if coast:
       ax.add_collection(LineCollection(coast, colors="#333333", linewidths=0.45, alpha=0.7))
     if rivers:
