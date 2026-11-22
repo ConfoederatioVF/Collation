@@ -191,14 +191,35 @@ if (message_port) {
     }
   });
 
-  //Ensure safe exit if parent port closes or process disconnects
+  //Ensure safe exit if parent port closes, parent process dies, or termination signals arrive
+  let parent_pid = (workerData && workerData.parent_pid) ?
+    Number(workerData.parent_pid) : (process.env.SVEA_PARENT_PID ? parseInt(process.env.SVEA_PARENT_PID, 10) : 0);
+
+  let exitWorkerCleanly = () => {
+    try {
+      if (global.GeoPNG && GeoPNG.native && typeof GeoPNG.native.shutdown === "function")
+        GeoPNG.native.shutdown();
+    } catch (e) {}
+    process.exit(0);
+  };
+
   if (parentPort) {
-    parentPort.on("close", () => {
-      process.exit(0);
-    });
+    parentPort.on("close", exitWorkerCleanly);
   } else if (typeof process !== "undefined" && process.on) {
-    process.on("disconnect", () => {
-      process.exit(0);
-    });
+    process.on("disconnect", exitWorkerCleanly);
+    process.on("SIGINT", exitWorkerCleanly);
+    process.on("SIGTERM", exitWorkerCleanly);
+    process.on("SIGBREAK", exitWorkerCleanly);
+
+    if (parent_pid > 0 && parent_pid !== process.pid) {
+      let watchdog_timer = setInterval(() => {
+        try {
+          process.kill(parent_pid, 0);
+        } catch (e) {
+          exitWorkerCleanly();
+        }
+      }, 2000);
+      if (typeof watchdog_timer.unref === "function") watchdog_timer.unref();
+    }
   }
 }

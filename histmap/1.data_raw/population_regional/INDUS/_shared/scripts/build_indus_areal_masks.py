@@ -260,17 +260,18 @@ def define_all_24_chapters(adm1, cu, basins):
 
   # --- CHAPTER 2: Vedic Period (-1500 to -500) [Regime I] ---
   ch2_regs = [
-    ("ved_sapta_sindhu", "1. Sapta Sindhu, Gandhara & Indus-Punjab Plains", union_adm1(adm1, [("Pakistan", "Punjab"), ("Pakistan", "K.P."), ("Pakistan", "F.A.T.A."), ("Pakistan", "F.C.T."), ("India", "Punjab"), ("India", "Jammu and Kashmir"), ("India", "Himachal Pradesh")]), 0.24),
-    ("ved_kurukshetra_doab", "2. Kurukshetra, Upper Ganga-Yamuna Doab & Panchala (PGW Core)", union_adm1(adm1, [("India", "Haryana"), ("India", "Delhi"), ("India", "Chandigarh"), ("India", "Uttar Pradesh"), ("India", "Uttarakhand")]), 0.34),
-    ("ved_kosala_videha_magadha", "3. Middle Ganga, Kosala, Videha & Early Magadha", union_adm1(adm1, G_BIHAR_JH + [("India", "West Bengal")]), 0.24),
-    ("ved_malwa_rajasthan_gujarat", "4. Malwa, Matsya, Rajasthan & Western Chalcolithic Periphery", union_adm1(adm1, G_RAJ_GUJ + G_CENTRAL), 0.18),
+    ("ved_sapta_sindhu", "1. Sapta Sindhu, Gandhara & Indus-Punjab Plains", union_adm1(adm1, [("Pakistan", "Punjab"), ("Pakistan", "K.P."), ("Pakistan", "F.A.T.A."), ("Pakistan", "F.C.T."), ("India", "Punjab"), ("India", "Jammu and Kashmir"), ("India", "Himachal Pradesh")]), 0.21),
+    ("ved_kurukshetra_doab", "2. Kurukshetra, Upper Ganga-Yamuna Doab & Panchala (PGW Core)", union_adm1(adm1, [("India", "Haryana"), ("India", "Delhi"), ("India", "Chandigarh"), ("India", "Uttar Pradesh"), ("India", "Uttarakhand")]), 0.29),
+    ("ved_kosala_videha_magadha", "3. Middle Ganga, Kosala, Videha & Early Magadha", union_adm1(adm1, G_BIHAR_JH + [("India", "West Bengal")]), 0.21),
+    ("ved_malwa_rajasthan_gujarat", "4. Malwa, Matsya, Rajasthan & Western Chalcolithic Periphery", union_adm1(adm1, G_RAJ_GUJ + G_CENTRAL), 0.15),
+    ("ved_deccan_jorwe_megalithic", "5. Deccan Jorwe-Chalcolithic & Megalithic Plateau (Daimabad-Inamgaon-Hallur)", union_adm1(adm1, G_MAHA_GOA + G_DECCAN_E + G_KARNATAKA), 0.14),
   ]
   chapters.append({
     "group": "1.ancient_south_asia", "folder": "2.vedic_period", "stem": "vedic_period",
-    "title": "The Vedic Period and Iron Age Gangetic Colonisation (1500BC-500BC)",
+    "title": "The Vedic Period, Iron Age Gangetic Colonisation and Deccan Megalithic Cultures (1500BC-500BC)",
     "domain": [-1500, -500], "layer": "national", "priority": 2, "is_admin1": False,
     "regions": ch2_regs,
-    "totals": {-1500: 5200000, -1300: 6400000, -1100: 8200000, -900: 10800000, -700: 14200000, -500: 18500000}
+    "totals": {-1500: 6050000, -1300: 7450000, -1100: 9550000, -900: 12550000, -700: 16500000, -500: 21500000}
   })
 
   # --- CHAPTER 3: Greco-Roman Settlements and Trading Posts (-327 to 500) ---
@@ -290,32 +291,32 @@ def define_all_24_chapters(adm1, cu, basins):
 
   # --- CHAPTER 4: Mahajanapadas (-600 to -345) ---
   ch4_regs = [
-    ("mjp_gandhara_kamboja", "1. Gandhara, Kamboja & North-Western Uttarapatha", union_adm1(adm1, [("Pakistan", "K.P."), ("Pakistan", "F.A.T.A."), ("Pakistan", "F.C.T."), ("Pakistan", "Punjab"), ("India", "Punjab"), ("India", "Jammu and Kashmir")]), 0.18),
-    ("mjp_kuru_panchala_surasena", "2. Kuru, Panchala, Surasena & Matsya (Upper Ganga-Yamuna)", union_adm1(adm1, [("India", "Haryana"), ("India", "Delhi"), ("India", "Chandigarh"), ("India", "Uttarakhand"), ("India", "Uttar Pradesh"), ("India", "Rajasthan")]), 0.30),
-    ("mjp_kosala_vajji_magadha", "3. Kosala, Malla, Vajji, Kashi, Magadha & Anga (Middle Ganga Core)", union_adm1(adm1, G_BIHAR_JH + G_BENGAL), 0.28),
-    ("mjp_avanti_chedi_assaka", "4. Avanti, Chedi, Vatsa & Assaka (Malwa-Deccan Crossroads)", union_adm1(adm1, G_CENTRAL + G_MAHA_GOA + G_ODISHA + [("India", "Gujarat")]), 0.24),
+    ("mjp_gandhara_kamboja", "1. Gandhara, Kamboja & North-Western Uttarapatha", union_adm1(adm1, [("Pakistan", "K.P."), ("Pakistan", "F.A.T.A."), ("Pakistan", "F.C.T."), ("Pakistan", "Punjab"), ("India", "Punjab"), ("India", "Jammu and Kashmir")]), 0.16),
+    ("mjp_kuru_panchala_surasena", "2. Kuru, Panchala, Surasena & Matsya (Upper Ganga-Yamuna)", union_adm1(adm1, [("India", "Haryana"), ("India", "Delhi"), ("India", "Chandigarh"), ("India", "Uttarakhand"), ("India", "Uttar Pradesh"), ("India", "Rajasthan")]), 0.27),
+    ("mjp_kosala_vajji_magadha", "3. Kosala, Malla, Vajji, Kashi, Magadha & Anga (Middle Ganga Core)", union_adm1(adm1, G_BIHAR_JH + G_BENGAL), 0.25),
+    ("mjp_avanti_chedi_assaka", "4. Avanti, Chedi, Vatsa, Assaka & Dakshinapatha (Malwa-Deccan Crossroads)", union_adm1(adm1, G_CENTRAL + G_MAHA_GOA + G_KARNATAKA + G_DECCAN_E + G_ODISHA + [("India", "Gujarat")]), 0.32),
   ]
   chapters.append({
     "group": "1.ancient_south_asia", "folder": "4.mahajanapadas", "stem": "mahajanapadas",
     "title": "The Sixteen Mahajanapadas and the Second Urbanisation (600BC-345BC)",
     "domain": [-600, -345], "layer": "national", "priority": 2, "is_admin1": False,
     "regions": ch4_regs,
-    "totals": {-600: 21000000, -500: 25500000, -400: 29800000, -345: 32500000}
+    "totals": {-600: 23500000, -500: 28500000, -400: 33200000, -345: 36200000}
   })
 
   # --- CHAPTER 5: Nanda Empire (-345 to -321) ---
   ch5_regs = [
-    ("nanda_magadha_core", "1. Magadha, Anga & Lower Gangetic Heartland (Pataliputra)", union_adm1(adm1, G_BIHAR_JH + G_BENGAL), 0.34),
-    ("nanda_upper_doab_kosala", "2. Kosala, Kashi, Vatsa & Upper Doab Provinces", union_adm1(adm1, G_UPPER_GANGA + G_PUNJAB_HR), 0.32),
-    ("nanda_avanti_malwa_west", "3. Avanti, Malwa, Chedi & Western Tributaries", union_adm1(adm1, G_CENTRAL + G_RAJ_GUJ), 0.20),
-    ("nanda_kalinga_deccan", "4. Kalinga & Northern Deccan Frontier", union_adm1(adm1, G_ODISHA + G_MAHA_GOA + G_DECCAN_E), 0.14),
+    ("nanda_magadha_core", "1. Magadha, Anga & Lower Gangetic Heartland (Pataliputra)", union_adm1(adm1, G_BIHAR_JH + G_BENGAL), 0.32),
+    ("nanda_upper_doab_kosala", "2. Kosala, Kashi, Vatsa & Upper Doab Provinces", union_adm1(adm1, G_UPPER_GANGA + G_PUNJAB_HR), 0.30),
+    ("nanda_avanti_malwa_west", "3. Avanti, Malwa, Chedi & Western Tributaries", union_adm1(adm1, G_CENTRAL + G_RAJ_GUJ), 0.19),
+    ("nanda_kalinga_deccan", "4. Kalinga & Deccan Plateau Frontier", union_adm1(adm1, G_ODISHA + G_MAHA_GOA + G_DECCAN_E + G_KARNATAKA), 0.19),
   ]
   chapters.append({
     "group": "1.ancient_south_asia", "folder": "5.nanda_empire", "stem": "nanda_empire",
     "title": "The Nanda Empire and Imperial Consolidation of the Ganga Basin (345BC-321BC)",
     "domain": [-345, -321], "layer": "national", "priority": 2, "is_admin1": False,
     "regions": ch5_regs,
-    "totals": {-345: 32000000, -335: 33200000, -321: 34500000}
+    "totals": {-345: 34200000, -335: 35500000, -321: 36900000}
   })
 
   # --- CHAPTER 6: Maurya Empire (-322 to -185) ---
@@ -350,19 +351,20 @@ def define_all_24_chapters(adm1, cu, basins):
     "totals": {319: 52000000, 400: 56500000, 500: 59000000, 600: 61000000, 650: 62500000, 750: 64000000}
   })
 
-  # --- CHAPTER 8: Northern India until the Ghurid Empire (750 to 1206) ---
+  # --- CHAPTER 8: Northern & Deccan India until the Ghurid Empire (750 to 1206) ---
   ch8_regs = [
-    ("ni_pratihara_kannauj", "1. Gurjara-Pratihara, Gahadavala & Chandella Gangetic-Bundelkhand Core", union_adm1(adm1, G_UPPER_GANGA + G_CENTRAL), 0.34),
-    ("ni_pala_sena_kamarupa", "2. Pala-Sena Bengal, Bihar, Orissa & Kamarupa", union_adm1(adm1, G_BIHAR_JH + G_BENGAL + G_ODISHA + G_NE_INDIA), 0.29),
-    ("ni_rajput_solanki_paramara", "3. Rajputana, Solanki Gujarat & Malwa Kingdoms", union_adm1(adm1, G_RAJ_GUJ), 0.18),
-    ("ni_punjab_kashmir_ghaznavid", "4. Hindu Shahi-Ghaznavid Punjab, Haryana & Karkota-Lohara Kashmir", union_adm1(adm1, G_PUNJAB_HR + G_JK + [("Pakistan", "Punjab"), ("Pakistan", "K.P."), ("Pakistan", "Azad Kashmir"), ("Pakistan", "Northern Areas")]), 0.19),
+    ("ni_pratihara_kannauj", "1. Gurjara-Pratihara, Gahadavala & Chandella Gangetic-Bundelkhand Core", union_adm1(adm1, G_UPPER_GANGA + G_CENTRAL), 0.28),
+    ("ni_pala_sena_kamarupa", "2. Pala-Sena Bengal, Bihar, Orissa & Kamarupa", union_adm1(adm1, G_BIHAR_JH + G_BENGAL + G_ODISHA + G_NE_INDIA), 0.23),
+    ("ni_rajput_solanki_paramara", "3. Rajputana, Solanki Gujarat & Malwa Kingdoms", union_adm1(adm1, G_RAJ_GUJ), 0.15),
+    ("ni_punjab_kashmir_ghaznavid", "4. Hindu Shahi-Ghaznavid Punjab, Haryana & Karkota-Lohara Kashmir", union_adm1(adm1, G_PUNJAB_HR + G_JK + [("Pakistan", "Punjab"), ("Pakistan", "K.P."), ("Pakistan", "Azad Kashmir"), ("Pakistan", "Northern Areas")]), 0.15),
+    ("ni_deccan_rashtrakuta_chalukya_kakatiya", "5. Rashtrakuta, Chalukya, Yadava, Hoysala & Kakatiya Deccan", union_adm1(adm1, G_MAHA_GOA + G_DECCAN_E + G_KARNATAKA), 0.19),
   ]
   chapters.append({
     "group": "1.ancient_south_asia", "folder": "8.northern_india_until_ghurid_empire", "stem": "northern_india_until_ghurid_empire",
-    "title": "Northern India from the Tripartite Struggle to the Ghurid Conquest (750AD-1206AD)",
+    "title": "Northern and Deccan India from the Tripartite Struggle to the Ghurid Conquest (750AD-1206AD)",
     "domain": [750, 1206], "layer": "national", "priority": 2, "is_admin1": False,
     "regions": ch8_regs,
-    "totals": {750: 49000000, 850: 52500000, 950: 56000000, 1050: 59500000, 1150: 62000000, 1206: 63500000}
+    "totals": {750: 60500000, 850: 65000000, 950: 69500000, 1050: 74000000, 1150: 77500000, 1206: 79500000}
   })
 
   # --- CHAPTER 9: Sultanate of Delhi and Successor States (1206 to 1526) ---

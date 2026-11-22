@@ -234,10 +234,12 @@ global.population_Substrata_outlier_removal = class {
 		let global_min_year = Infinity;
 		let global_max_year = -Infinity;
 		
-		// Create color-to-region mapping and determine domains
+		// Create color-to-region mapping and determine domains (24-bit RGB integer lookup, zero string alloc)
+		let regions_int_map = new Map();
 		Object.keys(statista_obj).forEach((key) => {
 			let region = statista_obj[key];
 			let color_key = region.colour.join(",");
+			let rgb_int = ((region.colour[0] & 255) << 16) | ((region.colour[1] & 255) << 8) | (region.colour[2] & 255);
 			
 			let all_local_years = Object.keys(region.population)
 			.map(Number)
@@ -266,11 +268,13 @@ global.population_Substrata_outlier_removal = class {
 					years: years_to_interpolate,
 				});
 			
-			regions_map[color_key] = {
+			let entry = {
 				key: key,
 				domain: local_mask_domain,
 				...region,
 			};
+			regions_map[color_key] = entry;
+			regions_int_map.set(rgb_int, entry);
 		});
 		
 		// Fetch outlier mask metadata from both directories
@@ -332,13 +336,11 @@ global.population_Substrata_outlier_removal = class {
 						
 						// Logic: If it is a standard outlier and NOT explicitly scalable, exclude it from the sum
 						if (!is_standard_outlier || is_scalable_outlier) {
-							let color_key = [
-								regions_mask.data[byte_index],
-								regions_mask.data[byte_index + 1],
-								regions_mask.data[byte_index + 2],
-							].join(",");
+							let rgb_int = (regions_mask.data[byte_index] << 16) |
+								(regions_mask.data[byte_index + 1] << 8) |
+								regions_mask.data[byte_index + 2];
 							
-							let region_match = regions_map[color_key];
+							let region_match = regions_int_map.get(rgb_int);
 							if (region_match)
 								regional_sums[region_match.key] = (regional_sums[region_match.key] || 0) + val;
 						}
@@ -379,13 +381,11 @@ global.population_Substrata_outlier_removal = class {
 						// If it's an outlier that isn't in the "to scale" folder, return original value
 						if (is_standard_outlier && !is_scalable_outlier) return val;
 						
-						let color_key = [
-							regions_mask.data[byte_index],
-							regions_mask.data[byte_index + 1],
-							regions_mask.data[byte_index + 2],
-						].join(",");
+						let rgb_int = (regions_mask.data[byte_index] << 16) |
+							(regions_mask.data[byte_index + 1] << 8) |
+							regions_mask.data[byte_index + 2];
 						
-						let region_match = regions_map[color_key];
+						let region_match = regions_int_map.get(rgb_int);
 						if (region_match) {
 							return val*(regional_scalars[region_match.key] || 1);
 						}
@@ -405,42 +405,42 @@ global.population_Substrata_outlier_removal = class {
 		let hyde_years = (options.hyde_years) ? options.hyde_years : landuse_HYDE.hyde_years;
 		let world_pop_obj = population_Global.A_getWorldPopulationObject();
 
-		//GPU-accelerated path on NVIDIA OpenCL (zero worker_threads RAM duplication)
-		if (options.use_gpu !== false && GeoPNG.gpu && GeoPNG.gpu.isAvailable() && typeof GeoPNG.loadRawRGBAAsync === "function") {
+		//Fast pipelined Native C++20 / OpenCL GPU path (zero worker_threads RAM duplication, overlapped sharp I/O)
+		let has_fast_accel = (options.use_gpu !== false && GeoPNG.gpu && ((GeoPNG.native && GeoPNG.native.isAvailable()) || GeoPNG.gpu.isAvailable()) && typeof GeoPNG.loadRawRGBAAsync === "function");
+		if (has_fast_accel) {
 			if (typeof GeoPNG.applyBackgroundProcessPriority === "function") GeoPNG.applyBackgroundProcessPriority();
 			if (!fs.existsSync(this.intermediate_rasters_scaled_to_global))
 				fs.mkdirSync(this.intermediate_rasters_scaled_to_global, { recursive: true });
-			console.log(`- [population_Substrata C_scaleProcessedHYDEToGlobal] Running GPU-accelerated global scaling over ${hyde_years.length} years on ${GeoPNG.gpu._device_info ? GeoPNG.gpu._device_info.device : "GPU"} ..`);
-			let yield_ms = (GeoPNG.compute_limits && GeoPNG.compute_limits.cpu && GeoPNG.compute_limits.cpu.cooperative_yield_ms !== undefined) ?
-				Number(GeoPNG.compute_limits.cpu.cooperative_yield_ms) : 4;
+			let pipeline_conc = (GeoPNG.compute_limits && GeoPNG.compute_limits.cpu && GeoPNG.compute_limits.cpu.pipeline_concurrency) ?
+				Number(GeoPNG.compute_limits.cpu.pipeline_concurrency) : 4;
 
-			for (let i = 0; i < hyde_years.length; i++) {
-				let year = hyde_years[i];
-				let local_hyde_input_path = `${this.intermediate_rasters_scaled_to_statista}popc_${year}.png`;
-				let local_output_path = `${this.intermediate_rasters_scaled_to_global}popc_${year}.png`;
-				let local_world_pop = world_pop_obj[year];
+			return await GeoPNG.processTimeseriesParallel({
+				concurrency: Math.min(options.concurrency || pipeline_conc, pipeline_conc),
+				items: hyde_years,
+				name: "population_Substrata C_scaleProcessedHYDEToGlobal [Accel]",
+				use_workers: false,
+				handler: async (year) => {
+					let local_hyde_input_path = `${this.intermediate_rasters_scaled_to_statista}popc_${year}.png`;
+					let local_output_path = `${this.intermediate_rasters_scaled_to_global}popc_${year}.png`;
+					let local_world_pop = world_pop_obj[year];
 
-				if (!fs.existsSync(local_hyde_input_path) || !Number.isFinite(local_world_pop)) continue;
-				let raw = await GeoPNG.loadRawRGBAAsync(local_hyde_input_path);
-				if (!raw) continue;
-				let sum = await GeoPNG.gpu.sumRGBA(raw.data, { format: "float32" });
-				if (sum && sum > 0) {
-					let scaled = await GeoPNG.gpu.scaleRGBA(raw.data, local_world_pop/sum);
-					if (scaled) {
-						await GeoPNG.saveRawRGBAAsync({
-							data: scaled,
-							file_path: local_output_path,
-							height: raw.height,
-							width: raw.width
-						});
+					if (!fs.existsSync(local_hyde_input_path) || !Number.isFinite(local_world_pop)) return;
+					let raw = await GeoPNG.loadRawRGBAAsync(local_hyde_input_path);
+					if (!raw) return;
+					let sum = await GeoPNG.gpu.sumRGBA(raw.data, { format: "float32" });
+					if (sum && sum > 0) {
+						let scaled = await GeoPNG.gpu.scaleRGBA(raw.data, local_world_pop/sum);
+						if (scaled) {
+							await GeoPNG.saveRawRGBAAsync({
+								data: scaled,
+								file_path: local_output_path,
+								height: raw.height,
+								width: raw.width
+							});
+						}
 					}
 				}
-				if ((i + 1) % 16 === 0 || i + 1 === hyde_years.length)
-					console.log(`- [population_Substrata C_scaleProcessedHYDEToGlobal] [${i + 1}/${hyde_years.length}] Scaled ${year} (${Math.floor(((i + 1)/hyde_years.length)*100)}%)`);
-				if ((i + 1) % 8 === 0 && typeof GeoPNG.enforceMemoryBudget === "function") GeoPNG.enforceMemoryBudget();
-				if (yield_ms > 0) await new Promise((resolve) => setTimeout(resolve, yield_ms));
-			}
-			return;
+			});
 		}
 
 		//Return statement
@@ -599,41 +599,41 @@ global.population_Substrata_outlier_removal = class {
 
 		console.log(`Converting from float32 to int32 for older versions of SVE.`);
 
-		//GPU-accelerated path on NVIDIA OpenCL (zero worker_threads RAM duplication)
-		if (options.use_gpu !== false && GeoPNG.gpu && GeoPNG.gpu.isAvailable() && typeof GeoPNG.gpu.convertF32ToU32RGBA === "function" && typeof GeoPNG.loadRawRGBAAsync === "function") {
+		//Fast pipelined Native C++20 / OpenCL GPU path (zero worker_threads RAM duplication, overlapped sharp I/O)
+		let has_fast_accel = (options.use_gpu !== false && GeoPNG.gpu && ((GeoPNG.native && GeoPNG.native.isAvailable()) || GeoPNG.gpu.isAvailable()) && typeof GeoPNG.gpu.convertF32ToU32RGBA === "function" && typeof GeoPNG.loadRawRGBAAsync === "function");
+		if (has_fast_accel) {
 			if (typeof GeoPNG.applyBackgroundProcessPriority === "function") GeoPNG.applyBackgroundProcessPriority();
 			if (!fs.existsSync(this.intermediate_rasters_geopng_int32))
 				fs.mkdirSync(this.intermediate_rasters_geopng_int32, { recursive: true });
-			console.log(`- [population_Substrata D_convertToGeoPNG_int32] Running GPU-accelerated float32->int32 conversion over ${hyde_years.length} years on ${GeoPNG.gpu._device_info ? GeoPNG.gpu._device_info.device : "GPU"} ..`);
-			let yield_ms = (GeoPNG.compute_limits && GeoPNG.compute_limits.cpu && GeoPNG.compute_limits.cpu.cooperative_yield_ms !== undefined) ?
-				Number(GeoPNG.compute_limits.cpu.cooperative_yield_ms) : 4;
+			let pipeline_conc = (GeoPNG.compute_limits && GeoPNG.compute_limits.cpu && GeoPNG.compute_limits.cpu.pipeline_concurrency) ?
+				Number(GeoPNG.compute_limits.cpu.pipeline_concurrency) : 4;
 
-			for (let i = 0; i < hyde_years.length; i++) {
-				let year = hyde_years[i];
-				let local_input_path = `${this.intermediate_rasters_interpolated}popc_${year}.png`;
-				let local_output_path = `${this.intermediate_rasters_geopng_int32}popc_${year}.png`;
-				if (!fs.existsSync(local_input_path))
-					local_input_path = `${this.intermediate_rasters_scaled_to_global}popc_${year}.png`;
-				if (!fs.existsSync(local_input_path)) continue;
+			return await GeoPNG.processTimeseriesParallel({
+				concurrency: Math.min(options.concurrency || pipeline_conc, pipeline_conc),
+				items: hyde_years,
+				name: "population_Substrata D_convertToGeoPNG_int32 [Accel]",
+				use_workers: false,
+				handler: async (year) => {
+					let local_input_path = `${this.intermediate_rasters_interpolated}popc_${year}.png`;
+					let local_output_path = `${this.intermediate_rasters_geopng_int32}popc_${year}.png`;
+					if (!fs.existsSync(local_input_path))
+						local_input_path = `${this.intermediate_rasters_scaled_to_global}popc_${year}.png`;
+					if (!fs.existsSync(local_input_path)) return;
 
-				let raw = await GeoPNG.loadRawRGBAAsync(local_input_path);
-				if (!raw) continue;
-				let rounding_method = (year < 1600) ? "ceil" : "round";
-				let conv = await GeoPNG.gpu.convertF32ToU32RGBA(raw.data, rounding_method);
-				if (conv) {
-					await GeoPNG.saveRawRGBAAsync({
-						data: conv,
-						file_path: local_output_path,
-						height: raw.height,
-						width: raw.width
-					});
+					let raw = await GeoPNG.loadRawRGBAAsync(local_input_path);
+					if (!raw) return;
+					let rounding_method = (year < 1600) ? "ceil" : "round";
+					let conv = await GeoPNG.gpu.convertF32ToU32RGBA(raw.data, rounding_method);
+					if (conv) {
+						await GeoPNG.saveRawRGBAAsync({
+							data: conv,
+							file_path: local_output_path,
+							height: raw.height,
+							width: raw.width
+						});
+					}
 				}
-				if ((i + 1) % 16 === 0 || i + 1 === hyde_years.length)
-					console.log(`- [population_Substrata D_convertToGeoPNG_int32] [${i + 1}/${hyde_years.length}] Converted ${year} (${Math.floor(((i + 1)/hyde_years.length)*100)}%)`);
-				if ((i + 1) % 8 === 0 && typeof GeoPNG.enforceMemoryBudget === "function") GeoPNG.enforceMemoryBudget();
-				if (yield_ms > 0) await new Promise((resolve) => setTimeout(resolve, yield_ms));
-			}
-			return;
+			});
 		}
 
 		//Return statement

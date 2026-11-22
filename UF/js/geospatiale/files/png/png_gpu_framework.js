@@ -11,6 +11,9 @@
   if (typeof require !== "undefined" && (!global.GeoPNG.gpu || !global.GeoPNG.gpu._opencl_kernel_source)) {
     try { require("./png_gpu_kernels.js"); } catch (e) {}
   }
+  if (typeof require !== "undefined" && (!global.GeoPNG.native || !global.GeoPNG.governor)) {
+    try { require("./png_compute_manager.js"); } catch (e) {}
+  }
 
   /**
    * Default resource constraints loaded from /common/defines/geopng_compute.json5 when available.
@@ -19,17 +22,19 @@
    */
   GeoPNG.compute_limits = {
     cpu: {
-      cooperative_yield_ms: 4,
+      cooperative_yield_ms: 0,
       max_workers: 4,
+      pipeline_concurrency: 4,
       priority_below_normal: true,
       sharp_concurrency: 2
     },
     gpu: {
       enabled: true,
-      max_dispatch_pixels: 2332800,
+      frame_budget_ms: 6,
+      max_dispatch_pixels: 4665600,
       max_vram_mb: 2048,
       min_pixels: 65536,
-      pacing_ms: 2,
+      pacing_ms: 0,
       preferred_vendor: "NVIDIA",
       workgroup_size: 256
     },
@@ -38,9 +43,14 @@
       png_filter_type: 0,
       use_sharp: true
     },
+    native: {
+      enabled: true,
+      enforce_job_object: true,
+      max_threads: 8
+    },
     ram: {
       max_cached_rasters: 8,
-      max_ram_mb: 4096
+      max_ram_mb: 6144
     }
   };
 
@@ -56,16 +66,25 @@
     if (typeof require === "undefined") return false;
     if (typeof process !== "undefined" && process.type === "renderer") return false;
 
+    let applied = false;
+
     try {
       let os_mod = require("os");
       if (os_mod && typeof os_mod.setPriority === "function" && os_mod.constants && os_mod.constants.priority) {
         os_mod.setPriority(0, os_mod.constants.priority.PRIORITY_BELOW_NORMAL);
-        return true;
+        applied = true;
       }
     } catch (e) {}
 
+    if (GeoPNG.native && GeoPNG.native.isAvailable() && GeoPNG.native._fn && typeof GeoPNG.native._fn.svea_set_process_below_normal === "function") {
+      try {
+        GeoPNG.native._fn.svea_set_process_below_normal();
+        applied = true;
+      } catch (e) {}
+    }
+
     //Return statement
-    return false;
+    return applied;
   };
 
   /**
@@ -255,6 +274,7 @@
               if (parsed.cpu) Object.assign(GeoPNG.compute_limits.cpu, parsed.cpu);
               if (parsed.gpu) Object.assign(GeoPNG.compute_limits.gpu, parsed.gpu);
               if (parsed.io) Object.assign(GeoPNG.compute_limits.io, parsed.io);
+              if (parsed.native) Object.assign(GeoPNG.compute_limits.native, parsed.native);
               if (parsed.ram) Object.assign(GeoPNG.compute_limits.ram, parsed.ram);
             }
             break;
@@ -266,6 +286,7 @@
     if (overrides.cpu) Object.assign(GeoPNG.compute_limits.cpu, overrides.cpu);
     if (overrides.gpu) Object.assign(GeoPNG.compute_limits.gpu, overrides.gpu);
     if (overrides.io) Object.assign(GeoPNG.compute_limits.io, overrides.io);
+    if (overrides.native) Object.assign(GeoPNG.compute_limits.native, overrides.native);
     if (overrides.ram) Object.assign(GeoPNG.compute_limits.ram, overrides.ram);
 
     //Return statement
@@ -489,18 +510,27 @@
     //Declare local instance variables
     let cl = GeoPNG.gpu._cl;
     let local_size = Math.max(32, Number(GeoPNG.compute_limits.gpu.workgroup_size) || 256);
-    let max_wave = Math.max(local_size, Number(GeoPNG.compute_limits.gpu.max_dispatch_pixels) || 2332800);
+    let max_wave = Math.max(local_size, Number(GeoPNG.compute_limits.gpu.max_dispatch_pixels) || 4665600);
     let pacing_ms = Math.max(0, Number(GeoPNG.compute_limits.gpu.pacing_ms) || 0);
 
     for (let offset = 0; offset < total_items; offset += max_wave) {
       let count = Math.min(max_wave, total_items - offset);
       let global_size = Math.ceil(count/local_size)*local_size;
+      let t_wave = (GeoPNG.governor && typeof GeoPNG.governor.nowMs === "function") ? GeoPNG.governor.nowMs() : Date.now();
 
       enqueue_fn(offset, count, global_size, local_size);
       cl.clFinish(GeoPNG.gpu._queue);
 
-      if (pacing_ms > 0 && offset + count < total_items)
-        await new Promise((resolve) => setTimeout(resolve, pacing_ms));
+      let wave_ms = ((GeoPNG.governor && typeof GeoPNG.governor.nowMs === "function") ? GeoPNG.governor.nowMs() : Date.now()) - t_wave;
+      if (offset + count < total_items) {
+        if (GeoPNG.governor && typeof GeoPNG.governor.paceGpuWaveAsync === "function") {
+          await GeoPNG.governor.paceGpuWaveAsync(wave_ms);
+        } else if (pacing_ms > 0) {
+          await new Promise((resolve) => setTimeout(resolve, pacing_ms));
+        }
+      } else if (GeoPNG.governor && typeof GeoPNG.governor.recordGpuWaveSync === "function") {
+        GeoPNG.governor.recordGpuWaveSync(wave_ms);
+      }
     }
   };
 
@@ -763,6 +793,13 @@
     //Guard clauses
     if (!in_rgba || !Number.isFinite(scalar)) return null;
     let pixel_count = Math.floor(in_rgba.byteLength/4);
+
+    //Fast native C++20 BelowNormal thread-pool path (zero PCIe copy & zero GPU/DWM contention)
+    if (GeoPNG.native && GeoPNG.native.isAvailable()) {
+      let nat_out = GeoPNG.native.scaleRGBA(in_rgba, scalar);
+      if (nat_out) return nat_out;
+    }
+
     if (!GeoPNG.gpu.shouldUseGPU(pixel_count)) return null;
 
     //Return statement
@@ -776,7 +813,7 @@
 
       if (!d_in || !d_out || !kernel) return null;
 
-      cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_in.mem, 0, 0, bytes, in_rgba, 0, null, null);
+      cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_in.mem, 1, 0, bytes, in_rgba, 0, null, null);
       await GeoPNG.gpu.dispatchWaves(pixel_count, function (arg0_offset, arg1_count, arg2_global, arg3_local) {
         cl.clSetKernelArgMem(kernel, 0, 8, [d_in.mem]);
         cl.clSetKernelArgMem(kernel, 1, 8, [d_out.mem]);
@@ -873,10 +910,16 @@
     //Guard clauses
     if (!in_rgba) return null;
     let pixel_count = Math.floor(in_rgba.byteLength/4);
-    if (!GeoPNG.gpu.shouldUseGPU(pixel_count)) return null;
-
     let fmt = (options.format === "int32") ? 1 : ((options.format === "float32_le") ? 2 : 0);
     let positive_only = (options.positive_only) ? 1 : 0;
+
+    //Fast native C++20 BelowNormal thread-pool path (zero PCIe copy & zero GPU/DWM contention)
+    if (GeoPNG.native && GeoPNG.native.isAvailable()) {
+      let nat_sum = GeoPNG.native.sumRGBA(in_rgba, fmt, Boolean(positive_only));
+      if (nat_sum !== null) return nat_sum;
+    }
+
+    if (!GeoPNG.gpu.shouldUseGPU(pixel_count)) return null;
 
     //Return statement
     return GeoPNG.gpu.runSerialised(async function () {
@@ -890,7 +933,7 @@
 
       if (!d_in || !d_partials || !kernel) return null;
 
-      cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_in.mem, 0, 0, bytes, in_rgba, 0, null, null);
+      cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_in.mem, 1, 0, bytes, in_rgba, 0, null, null);
       cl.clSetKernelArgMem(kernel, 0, 8, [d_in.mem]);
       cl.clSetKernelArgMem(kernel, 1, 8, [d_partials.mem]);
       cl.clSetKernelArgU32(kernel, 2, 4, [pixel_count]);
@@ -925,6 +968,13 @@
     //Guard clauses
     if (!in_rgba) return null;
     let pixel_count = Math.floor(in_rgba.byteLength/4);
+
+    //Fast native C++20 BelowNormal thread-pool path (zero PCIe copy & zero GPU/DWM contention)
+    if (GeoPNG.native && GeoPNG.native.isAvailable()) {
+      let nat_out = GeoPNG.native.thresholdClampRGBA(in_rgba, min_val);
+      if (nat_out) return nat_out;
+    }
+
     if (!GeoPNG.gpu.shouldUseGPU(pixel_count)) return null;
 
     //Return statement
@@ -938,7 +988,7 @@
 
       if (!d_in || !d_out || !kernel) return null;
 
-      cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_in.mem, 0, 0, bytes, in_rgba, 0, null, null);
+      cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_in.mem, 1, 0, bytes, in_rgba, 0, null, null);
       await GeoPNG.gpu.dispatchWaves(pixel_count, function (arg0_offset, arg1_count, arg2_global, arg3_local) {
         cl.clSetKernelArgMem(kernel, 0, 8, [d_in.mem]);
         cl.clSetKernelArgMem(kernel, 1, 8, [d_out.mem]);
@@ -988,7 +1038,9 @@
 
   GeoPNG.loadComputeLimits();
 
-  if (typeof process !== "undefined" && typeof process.on === "function") {
+  if (GeoPNG.governor && typeof GeoPNG.governor.registerLifecycleHooks === "function") {
+    GeoPNG.governor.registerLifecycleHooks();
+  } else if (typeof process !== "undefined" && typeof process.on === "function") {
     process.on("exit", function () {
       try { GeoPNG.gpu.shutdown(); } catch (e) {}
     });

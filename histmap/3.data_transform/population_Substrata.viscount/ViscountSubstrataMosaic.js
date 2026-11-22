@@ -91,60 +91,80 @@ let ViscountSubstrataSeamBlend = global.ViscountSubstrataSeamBlend || require(se
 
       for (let i = 0; i < hyde_years.length; i++) {
         let yr = hyde_years[i];
+        let is_ghsl_era = (yr >= 1975);
         let urban_valid = new Float32Array(n_valid);
-        let base_path = path.join(context.root_dir, "histmap/2.data_cleaning/population_Stadester/stadester_base_rasters", `stadester_base_${yr}.png`);
-        let urban_path = path.join(context.root_dir, "histmap/2.data_cleaning/population_Stadester/stadester_urban_rasters", `stadester_urban_${yr}.png`);
-        let u_read_path = fs.existsSync(base_path) ? base_path : urban_path;
 
-        if (fs.existsSync(u_read_path)) {
-          let u_png = PNG.sync.read(fs.readFileSync(u_read_path));
-          let u_dv = new DataView(u_png.data.buffer, u_png.data.byteOffset, u_png.data.byteLength);
-          for (let x = 0; x < n_valid; x++) {
-            let u_val = this.readPositiveFloat32(u_png.data, u_dv, context.valid_indices[x]*4);
+        if (!is_ghsl_era) {
+          let base_path = path.join(context.root_dir, "histmap/2.data_cleaning/population_Stadester/stadester_base_rasters", `stadester_base_${yr}.png`);
+          let urban_path = path.join(context.root_dir, "histmap/2.data_cleaning/population_Stadester/stadester_urban_rasters", `stadester_urban_${yr}.png`);
+          let u_read_path = fs.existsSync(base_path) ? base_path : urban_path;
 
-            urban_valid[x] = (u_val >= 0.01) ? u_val : 0;
-          }
-        }
-        if (yr <= 0) {
-          let c14_urb_path = path.join(context.root_dir, "histmap/2.data_cleaning/population_c14bazAAR/3.rasters_urban", `urbc_${yr}.png`);
-          if (fs.existsSync(c14_urb_path)) {
-            let c14_png = PNG.sync.read(fs.readFileSync(c14_urb_path));
-            let c14_dv = new DataView(c14_png.data.buffer, c14_png.data.byteOffset, c14_png.data.byteLength);
+          if (fs.existsSync(u_read_path)) {
+            let u_png = PNG.sync.read(fs.readFileSync(u_read_path));
+            let u_dv = new DataView(u_png.data.buffer, u_png.data.byteOffset, u_png.data.byteLength);
             for (let x = 0; x < n_valid; x++) {
-              let c14_val = this.readPositiveFloat32(c14_png.data, c14_dv, context.valid_indices[x]*4);
+              let u_val = this.readPositiveFloat32(u_png.data, u_dv, context.valid_indices[x]*4);
 
-              if (c14_val > urban_valid[x]) urban_valid[x] = c14_val;
+              urban_valid[x] = (u_val >= 0.01) ? u_val : 0;
             }
           }
-        }
-        if (global.population_Stadester_rasters && typeof global.population_Stadester_rasters.getSubUrbanSettlementsData === "function") {
-          let sub_urb = global.population_Stadester_rasters.getSubUrbanSettlementsData(yr, {
-            stadester_file_path: path.join(context.root_dir, "histmap/3.data_transform/population_Stadester.transform/stadester"),
-            viscount_key: context.key
-          });
+          if (yr <= 0) {
+            let c14_urb_path = path.join(context.root_dir, "histmap/2.data_cleaning/population_c14bazAAR/3.rasters_urban", `urbc_${yr}.png`);
+            if (fs.existsSync(c14_urb_path)) {
+              let c14_png = PNG.sync.read(fs.readFileSync(c14_urb_path));
+              let c14_dv = new DataView(c14_png.data.buffer, c14_png.data.byteOffset, c14_png.data.byteLength);
+              for (let x = 0; x < n_valid; x++) {
+                let c14_val = this.readPositiveFloat32(c14_png.data, c14_dv, context.valid_indices[x]*4);
 
-          if (sub_urb) {
-            for (let x = 0; x < n_valid; x++) {
-              let sv = sub_urb[context.valid_indices[x]];
+                if (c14_val > urban_valid[x]) urban_valid[x] = c14_val;
+              }
+            }
+          }
+          if (global.population_Stadester_rasters && typeof global.population_Stadester_rasters.getSubUrbanSettlementsData === "function") {
+            let sub_urb = global.population_Stadester_rasters.getSubUrbanSettlementsData(yr, {
+              stadester_file_path: path.join(context.root_dir, "histmap/3.data_transform/population_Stadester.transform/stadester"),
+              viscount_key: context.key
+            });
 
-              if (sv > 0) urban_valid[x] += sv;
+            if (sub_urb) {
+              for (let x = 0; x < n_valid; x++) {
+                let sv = sub_urb[context.valid_indices[x]];
+
+                if (sv > 0) urban_valid[x] += sv;
+              }
             }
           }
         }
 
         let rural_valid = new Float32Array(n_valid);
-        for (let s = 0; s < source_keys.length; s++) {
-          let src_cfg = context.manifest.substrata_sources[source_keys[s]];
-          let src_dom = (src_cfg.domain_code !== undefined) ? src_cfg.domain_code : (s + 1);
-          let src_file = path.join(context.root_dir, src_cfg.rasters_folder, `popc_${yr}.png`);
-          if (!fs.existsSync(src_file)) continue;
-          let s_png = PNG.sync.read(fs.readFileSync(src_file));
-          let s_dv = new DataView(s_png.data.buffer, s_png.data.byteOffset, s_png.data.byteLength);
-          for (let x = 0; x < n_valid; x++) {
-            let idx = context.valid_indices[x];
-            if (context.pixel_domain[idx] !== src_dom) continue;
-            let val = this.readPositiveFloat32(s_png.data, s_dv, idx*4);
-            if (val > 0) rural_valid[x] = val;
+        let loaded_ghsl = false;
+        if (is_ghsl_era) {
+          let ghsl_file = path.join(context.root_dir, "histmap/2.data_cleaning/population_GHSL/cleaned_rasters", `GHS_POP_${yr}.png`);
+          if (fs.existsSync(ghsl_file)) {
+            let g_png = PNG.sync.read(fs.readFileSync(ghsl_file));
+            let g_dv = new DataView(g_png.data.buffer, g_png.data.byteOffset, g_png.data.byteLength);
+            for (let x = 0; x < n_valid; x++) {
+              let idx = context.valid_indices[x];
+              let val = this.readPositiveFloat32(g_png.data, g_dv, idx*4);
+              if (val > 0) rural_valid[x] = val;
+            }
+            loaded_ghsl = true;
+          }
+        }
+        if (!loaded_ghsl) {
+          for (let s = 0; s < source_keys.length; s++) {
+            let src_cfg = context.manifest.substrata_sources[source_keys[s]];
+            let src_dom = (src_cfg.domain_code !== undefined) ? src_cfg.domain_code : (s + 1);
+            let src_file = path.join(context.root_dir, src_cfg.rasters_folder, `popc_${yr}.png`);
+            if (!fs.existsSync(src_file)) continue;
+            let s_png = PNG.sync.read(fs.readFileSync(src_file));
+            let s_dv = new DataView(s_png.data.buffer, s_png.data.byteOffset, s_png.data.byteLength);
+            for (let x = 0; x < n_valid; x++) {
+              let idx = context.valid_indices[x];
+              if (context.pixel_domain[idx] !== src_dom) continue;
+              let val = this.readPositiveFloat32(s_png.data, s_dv, idx*4);
+              if (val > 0) rural_valid[x] = val;
+            }
           }
         }
         let base_rural = Float32Array.from(rural_valid);
@@ -244,75 +264,105 @@ let ViscountSubstrataSeamBlend = global.ViscountSubstrataSeamBlend || require(se
           }
         }
 
-        //3-pass separable tent smoothing of log-multipliers within each source domain (zero uninhabited leakage)
-        let blur_r = (context.manifest && context.manifest.smoothing && Number.isFinite(context.manifest.smoothing.interior_multiplier_blur_radius_px)) ?
-          context.manifest.smoothing.interior_multiplier_blur_radius_px : 5;
-        let blur_passes = (context.manifest && context.manifest.smoothing && Number.isFinite(context.manifest.smoothing.interior_multiplier_blur_passes)) ?
-          Math.max(3, context.manifest.smoothing.interior_multiplier_blur_passes) : 3;
-        if (ccf_active && Number.isFinite(ccf_cfg.interior_multiplier_blur_radius_px)) blur_r = Number(ccf_cfg.interior_multiplier_blur_radius_px);
-        if (ccf_active && Number.isFinite(ccf_cfg.interior_multiplier_blur_passes)) blur_passes = Number(ccf_cfg.interior_multiplier_blur_passes);
-        let log_mult = new Float32Array(n_valid);
-        let tmp_mult = new Float32Array(n_valid);
+        if (!is_ghsl_era) {
+          //3-pass separable tent smoothing of log-multipliers within each source domain (zero uninhabited leakage)
+          let blur_r = (context.manifest && context.manifest.smoothing && Number.isFinite(context.manifest.smoothing.interior_multiplier_blur_radius_px)) ?
+            context.manifest.smoothing.interior_multiplier_blur_radius_px : 5;
+          let blur_passes = (context.manifest && context.manifest.smoothing && Number.isFinite(context.manifest.smoothing.interior_multiplier_blur_passes)) ?
+            Math.max(3, context.manifest.smoothing.interior_multiplier_blur_passes) : 3;
+          if (ccf_active && Number.isFinite(ccf_cfg.interior_multiplier_blur_radius_px)) blur_r = Number(ccf_cfg.interior_multiplier_blur_radius_px);
+          if (ccf_active && Number.isFinite(ccf_cfg.interior_multiplier_blur_passes)) blur_passes = Number(ccf_cfg.interior_multiplier_blur_passes);
+          let log_mult = new Float32Array(n_valid);
+          let tmp_mult = new Float32Array(n_valid);
 
-        for (let v = 0; v < n_valid; v++) {
-          log_mult[v] = (touched[v] && base_rural[v] > 0) ?
-            Math.log(Math.max(1e-6, rural_valid[v])/Math.max(1e-6, base_rural[v])) : 0;
-        }
-
-        for (let pass = 0; blur_r > 0 && pass < blur_passes; pass++) {
           for (let v = 0; v < n_valid; v++) {
-            if (!touched[v] || base_rural[v] <= 0) { tmp_mult[v] = 0; continue; }
-            let px = context.valid_indices[v];
-            let dom_id = context.pixel_domain[px];
-            let r = Math.floor(px/context.width);
-            let c = px % context.width;
-            let acc = 0;
-            let wt_sum = 0;
+            log_mult[v] = (touched[v] && base_rural[v] > 0) ?
+              Math.log(Math.max(1e-6, rural_valid[v])/Math.max(1e-6, base_rural[v])) : 0;
+          }
 
-            for (let dc = -blur_r; dc <= blur_r; dc++) {
-              let nc = (c + dc + context.width) % context.width;
-              let nv = context.pixel_to_valid[r*context.width + nc];
-              if (nv >= 0 && touched[nv] && base_rural[nv] > 0 && context.pixel_domain[context.valid_indices[nv]] === dom_id) {
-                let wt = blur_r + 1 - Math.abs(dc);
-                acc += log_mult[nv]*wt;
-                wt_sum += wt;
+          let used_native_blur = false;
+          if (blur_r > 0 && global.GeoPNG && GeoPNG.native && GeoPNG.native.isAvailable()) {
+            let valid_idx_i32 = (context.valid_indices instanceof Int32Array) ?
+              context.valid_indices : Int32Array.from(context.valid_indices);
+            let p2v_i32 = (context.pixel_to_valid instanceof Int32Array) ?
+              context.pixel_to_valid : Int32Array.from(context.pixel_to_valid);
+            let dom_u8 = (context.pixel_domain instanceof Uint8Array) ?
+              context.pixel_domain : Uint8Array.from(context.pixel_domain);
+            let touched_u8 = (touched instanceof Uint8Array) ? touched : Uint8Array.from(touched);
+            let base_f32 = (base_rural instanceof Float32Array) ? base_rural : Float32Array.from(base_rural);
+
+            used_native_blur = GeoPNG.native.viscountMosaicTentBlur(
+              log_mult,
+              touched_u8,
+              base_f32,
+              valid_idx_i32,
+              p2v_i32,
+              dom_u8,
+              context.width,
+              context.height,
+              blur_r,
+              blur_passes
+            );
+          }
+
+          if (!used_native_blur) {
+            for (let pass = 0; blur_r > 0 && pass < blur_passes; pass++) {
+              for (let v = 0; v < n_valid; v++) {
+                if (!touched[v] || base_rural[v] <= 0) { tmp_mult[v] = 0; continue; }
+                let px = context.valid_indices[v];
+                let dom_id = context.pixel_domain[px];
+                let r = Math.floor(px/context.width);
+                let c = px % context.width;
+                let acc = 0;
+                let wt_sum = 0;
+
+                for (let dc = -blur_r; dc <= blur_r; dc++) {
+                  let nc = (c + dc + context.width) % context.width;
+                  let nv = context.pixel_to_valid[r*context.width + nc];
+                  if (nv >= 0 && touched[nv] && base_rural[nv] > 0 && context.pixel_domain[context.valid_indices[nv]] === dom_id) {
+                    let wt = blur_r + 1 - Math.abs(dc);
+                    acc += log_mult[nv]*wt;
+                    wt_sum += wt;
+                  }
+                }
+                tmp_mult[v] = (wt_sum > 0) ? acc/wt_sum : log_mult[v];
+              }
+              for (let v = 0; v < n_valid; v++) {
+                if (!touched[v] || base_rural[v] <= 0) continue;
+                let px = context.valid_indices[v];
+                let dom_id = context.pixel_domain[px];
+                let r = Math.floor(px/context.width);
+                let c = px % context.width;
+                let acc = 0;
+                let wt_sum = 0;
+
+                for (let dr = -blur_r; dr <= blur_r; dr++) {
+                  let nr = r + dr;
+                  if (nr < 0 || nr >= context.height) continue;
+                  let nv = context.pixel_to_valid[nr*context.width + c];
+                  if (nv >= 0 && touched[nv] && base_rural[nv] > 0 && context.pixel_domain[context.valid_indices[nv]] === dom_id) {
+                    let wt = blur_r + 1 - Math.abs(dr);
+                    acc += tmp_mult[nv]*wt;
+                    wt_sum += wt;
+                  }
+                }
+                log_mult[v] = (wt_sum > 0) ? acc/wt_sum : tmp_mult[v];
               }
             }
-            tmp_mult[v] = (wt_sum > 0) ? acc/wt_sum : log_mult[v];
           }
+
           for (let v = 0; v < n_valid; v++) {
-            if (!touched[v] || base_rural[v] <= 0) continue;
-            let px = context.valid_indices[v];
-            let dom_id = context.pixel_domain[px];
-            let r = Math.floor(px/context.width);
-            let c = px % context.width;
-            let acc = 0;
-            let wt_sum = 0;
-
-            for (let dr = -blur_r; dr <= blur_r; dr++) {
-              let nr = r + dr;
-              if (nr < 0 || nr >= context.height) continue;
-              let nv = context.pixel_to_valid[nr*context.width + c];
-              if (nv >= 0 && touched[nv] && base_rural[nv] > 0 && context.pixel_domain[context.valid_indices[nv]] === dom_id) {
-                let wt = blur_r + 1 - Math.abs(dr);
-                acc += tmp_mult[nv]*wt;
-                wt_sum += wt;
-              }
+            if (!touched[v] || base_rural[v] <= 0) {
+              if (rural_valid[v] <= 0) rural_valid[v] = 0;
+              continue;
             }
-            log_mult[v] = (wt_sum > 0) ? acc/wt_sum : tmp_mult[v];
+            rural_valid[v] = Math.max(1e-4, base_rural[v]*Math.exp(log_mult[v]));
           }
-        }
-
-        for (let v = 0; v < n_valid; v++) {
-          if (!touched[v] || base_rural[v] <= 0) {
-            if (rural_valid[v] <= 0) rural_valid[v] = 0;
-            continue;
-          }
-          rural_valid[v] = Math.max(1e-4, base_rural[v]*Math.exp(log_mult[v]));
         }
         let w_int = this.computeZoneInteriorWeights(context, active_zone_of_v);
 
-        this.conserveZoneTargetsInteriorPinned(rural_valid, active_zone_of_v, w_int, zone_targets_by_id);
+        if (!is_ghsl_era)
+          this.conserveZoneTargetsInteriorPinned(rural_valid, active_zone_of_v, w_int, zone_targets_by_id);
 
         active_zone_series.push(active_zone_of_v);
         border_wt_series.push(w_int);
@@ -323,6 +373,7 @@ let ViscountSubstrataSeamBlend = global.ViscountSubstrataSeamBlend || require(se
 
       for (let t = 0; t < hyde_years.length; t++) {
         let yr = hyde_years[t];
+        let is_ghsl_era = (yr >= 1975);
         let out_png_path = path.join(out_folder, `popc_${yr}.png`);
         let fallback_path = path.join(context.root_dir, "histmap/3.data_transform/population_Substrata.outlier_removal/rasters_outliers_removed", `popc_${yr}.png`);
         let read_path = fs.existsSync(out_png_path) ? out_png_path : (fs.existsSync(fallback_path) ? fallback_path : null);
@@ -339,38 +390,42 @@ let ViscountSubstrataSeamBlend = global.ViscountSubstrataSeamBlend || require(se
         let z_targets = zone_targets_series[t];
         let t_w = (ccf_cfg && yr >= ccf_cfg.start_year && yr <= ccf_cfg.end_year && Number.isFinite(ccf_cfg.temporal_log_Laplacian_weight)) ? Number(ccf_cfg.temporal_log_Laplacian_weight) : temp_weight;
 
-        for (let i = 0; i < n_valid; i++) {
-          if (cal_arr[i] > 0) {
-            let prev_v = (t > 0 && calibrated_series[t - 1][i] > 0) ? calibrated_series[t - 1][i] : cal_arr[i];
-            let next_v = (t + 1 < hyde_years.length && calibrated_series[t + 1][i] > 0) ? calibrated_series[t + 1][i] : cal_arr[i];
+        if (is_ghsl_era) {
+          smoothed_r.set(cal_arr);
+        } else {
+          for (let i = 0; i < n_valid; i++) {
+            if (cal_arr[i] > 0) {
+              let prev_v = (t > 0 && calibrated_series[t - 1][i] > 0) ? calibrated_series[t - 1][i] : cal_arr[i];
+              let next_v = (t + 1 < hyde_years.length && hyde_years[t + 1] < 1975 && calibrated_series[t + 1][i] > 0) ? calibrated_series[t + 1][i] : cal_arr[i];
 
-            smoothed_r[i] = Math.max(1e-4, Math.exp((1 - t_w)*Math.log(cal_arr[i]) + 0.5*t_w*(Math.log(prev_v) + Math.log(next_v))));
-          }
-        }
-        this.conserveZoneTargetsInteriorPinned(smoothed_r, active_zones, w_int, z_targets);
-
-        //Fill isolated inland zero pinholes surrounded by 8 neighbours > 5,0
-        let ph_updates = [];
-        for (let i = 0; i < n_valid; i++) {
-          let az = active_zones[i];
-          if (smoothed_r[i] > 0 || (az >= 0 && z_targets[az].target_pop === 0)) continue;
-          let g = context.valid_indices[i];
-          let cy = Math.floor(g/context.width);
-          let cx = g % context.width;
-          if (cy <= 0 || cy >= context.height - 1) continue;
-          let acc = 0;
-          let cnt = 0;
-
-          for (let dy = -1; dy <= 1; dy++) {
-            for (let dx = -1; dx <= 1; dx++) {
-              if (dx === 0 && dy === 0) continue;
-              let nv = context.pixel_to_valid[(cy + dy)*context.width + ((cx + dx + context.width) % context.width)];
-              if (nv >= 0 && smoothed_r[nv] > 5.0) { acc += smoothed_r[nv]; cnt++; }
+              smoothed_r[i] = Math.max(1e-4, Math.exp((1 - t_w)*Math.log(cal_arr[i]) + 0.5*t_w*(Math.log(prev_v) + Math.log(next_v))));
             }
           }
-          if (cnt === 8) ph_updates.push([i, 0.25*(acc/8.0)]);
+          this.conserveZoneTargetsInteriorPinned(smoothed_r, active_zones, w_int, z_targets);
+
+          //Fill isolated inland zero pinholes surrounded by 8 neighbours > 5,0
+          let ph_updates = [];
+          for (let i = 0; i < n_valid; i++) {
+            let az = active_zones[i];
+            if (smoothed_r[i] > 0 || (az >= 0 && z_targets[az].target_pop === 0)) continue;
+            let g = context.valid_indices[i];
+            let cy = Math.floor(g/context.width);
+            let cx = g % context.width;
+            if (cy <= 0 || cy >= context.height - 1) continue;
+            let acc = 0;
+            let cnt = 0;
+
+            for (let dy = -1; dy <= 1; dy++) {
+              for (let dx = -1; dx <= 1; dx++) {
+                if (dx === 0 && dy === 0) continue;
+                let nv = context.pixel_to_valid[(cy + dy)*context.width + ((cx + dx + context.width) % context.width)];
+                if (nv >= 0 && smoothed_r[nv] > 5.0) { acc += smoothed_r[nv]; cnt++; }
+              }
+            }
+            if (cnt === 8) ph_updates.push([i, 0.25*(acc/8.0)]);
+          }
+          for (let p = 0; p < ph_updates.length; p++) smoothed_r[ph_updates[p][0]] = ph_updates[p][1];
         }
-        for (let p = 0; p < ph_updates.length; p++) smoothed_r[ph_updates[p][0]] = ph_updates[p][1];
 
         for (let i = 0; i < n_valid; i++) {
           let az = active_zones[i];
@@ -390,7 +445,8 @@ let ViscountSubstrataSeamBlend = global.ViscountSubstrataSeamBlend || require(se
           }
         }
 
-        this.applyOneSidedSeamBlend(context, out_png.data, out_dv, options);
+        if (!is_ghsl_era)
+          this.applyOneSidedSeamBlend(context, out_png.data, out_dv, options);
         fs.writeFileSync(out_png_path, PNG.sync.write(out_png, { colorType: 6, deflateLevel: 1, filterType: 0 }));
         year_summaries[yr] = { combined: Math.round(total_pop) };
       }

@@ -24,7 +24,6 @@
     //Guard clauses
     if (!buf_a || !buf_b || buf_a.byteLength !== buf_b.byteLength) return null;
     let pixel_count = Math.floor(buf_a.byteLength/4);
-    if (!GeoPNG.gpu.shouldUseGPU(pixel_count)) return null;
 
     //Declare local instance variables
     let fmt_a = (options.format_1 === "int32") ? 1 : ((options.format_1 === "float32_le") ? 2 : 0);
@@ -65,6 +64,13 @@
       op_code = 9;
     }
 
+    //Fast native C++20 BelowNormal thread-pool path (zero PCIe copy & zero GPU/DWM contention)
+    if (GeoPNG.native && GeoPNG.native.isAvailable()) {
+      let nat_out = GeoPNG.native.binaryOpRGBA(buf_a, buf_b, op_code, fmt_a, fmt_b, param0, param1, param2, param3);
+      if (nat_out) return nat_out;
+    }
+    if (!GeoPNG.gpu.shouldUseGPU(pixel_count)) return null;
+
     //Return statement
     return GeoPNG.gpu.runSerialised(async function () {
       let bytes = pixel_count*4;
@@ -77,8 +83,8 @@
 
       if (!d_a || !d_b || !d_out || !kernel) return null;
 
-      cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_a.mem, 0, 0, bytes, buf_a, 0, null, null);
-      cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_b.mem, 0, 0, bytes, buf_b, 0, null, null);
+      cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_a.mem, 1, 0, bytes, buf_a, 0, null, null);
+      cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_b.mem, 1, 0, bytes, buf_b, 0, null, null);
 
       await GeoPNG.gpu.dispatchWaves(pixel_count, function (arg0_offset, arg1_count, arg2_global, arg3_local) {
         cl.clSetKernelArgMem(kernel, 0, 8, [d_a.mem]);
@@ -129,6 +135,12 @@
     //Guard clauses
     if (!substrata_rgba || !urban_rgba || !sub_urban_f32 || !mask_ids) return null;
     let pixel_count = Math.floor(substrata_rgba.byteLength/4);
+
+    //Fast zero-alloc native C++20 BelowNormal thread-pool path (~12,5 ms vs ~112 ms, bit-exact, 0% GPU/DWM contention)
+    if (GeoPNG.native && GeoPNG.native.isAvailable()) {
+      let nat_res = GeoPNG.native.reconcileDemographicsRGBA(params);
+      if (nat_res) return nat_res;
+    }
     if (!GeoPNG.gpu.shouldUseGPU(pixel_count)) return null;
 
     //Return statement
@@ -155,11 +167,11 @@
       if (!d_sub || !d_urb || !d_sub_u || !d_mask_ids || !d_raw_rural || !d_raw_urban || !d_mask_sub || !d_mask_comb || !d_global || !d_mask_scalars || !d_rural_out || !d_urban_out || !d_total_out)
         return null;
 
-      cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_sub.mem, 0, 0, bytes, substrata_rgba, 0, null, null);
-      cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_urb.mem, 0, 0, bytes, urban_rgba, 0, null, null);
-      cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_sub_u.mem, 0, 0, bytes, new Uint8Array(sub_urban_f32.buffer, sub_urban_f32.byteOffset, bytes), 0, null, null);
+      cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_sub.mem, 1, 0, bytes, substrata_rgba, 0, null, null);
+      cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_urb.mem, 1, 0, bytes, urban_rgba, 0, null, null);
+      cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_sub_u.mem, 1, 0, bytes, new Uint8Array(sub_urban_f32.buffer, sub_urban_f32.byteOffset, bytes), 0, null, null);
       if (d_mask_ids._cache_ref !== mask_ids) {
-        cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_mask_ids.mem, 0, 0, bytes, new Uint8Array(mask_ids.buffer, mask_ids.byteOffset, bytes), 0, null, null);
+        cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_mask_ids.mem, 1, 0, bytes, new Uint8Array(mask_ids.buffer, mask_ids.byteOffset, bytes), 0, null, null);
         d_mask_ids._cache_ref = mask_ids;
       }
 
@@ -210,7 +222,7 @@
         }
       }
 
-      cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_mask_scalars.mem, 0, 0, num_masks*4, new Uint8Array(mask_scalars.buffer, mask_scalars.byteOffset, num_masks*4), 0, null, null);
+      cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_mask_scalars.mem, 1, 0, num_masks*4, new Uint8Array(mask_scalars.buffer, mask_scalars.byteOffset, num_masks*4), 0, null, null);
 
       await GeoPNG.gpu.dispatchWaves(pixel_count, function (arg0_offset, arg1_count, arg2_global, arg3_local) {
         cl.clSetKernelArgMem(k2, 0, 8, [d_raw_rural.mem]);
@@ -259,6 +271,11 @@
     //Guard clauses
     if (!in_rgba || !region_ids || !region_scalars) return null;
     let pixel_count = Math.floor(in_rgba.byteLength/4);
+
+    if (GeoPNG.native && GeoPNG.native.isAvailable()) {
+      let nat_out = GeoPNG.native.regionalScaleRGBA(in_rgba, region_ids, region_scalars, fallback_scalar);
+      if (nat_out) return nat_out;
+    }
     if (!GeoPNG.gpu.shouldUseGPU(pixel_count)) return null;
 
     //Return statement
@@ -275,12 +292,12 @@
 
       if (!d_in || !d_out || !d_rids || !d_sc || !kernel) return null;
 
-      cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_in.mem, 0, 0, bytes, in_rgba, 0, null, null);
+      cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_in.mem, 1, 0, bytes, in_rgba, 0, null, null);
       if (d_rids._cache_ref !== region_ids) {
-        cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_rids.mem, 0, 0, bytes, new Uint8Array(region_ids.buffer, region_ids.byteOffset, bytes), 0, null, null);
+        cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_rids.mem, 1, 0, bytes, new Uint8Array(region_ids.buffer, region_ids.byteOffset, bytes), 0, null, null);
         d_rids._cache_ref = region_ids;
       }
-      cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_sc.mem, 0, 0, region_scalars.byteLength, new Uint8Array(region_scalars.buffer, region_scalars.byteOffset, region_scalars.byteLength), 0, null, null);
+      cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_sc.mem, 1, 0, region_scalars.byteLength, new Uint8Array(region_scalars.buffer, region_scalars.byteOffset, region_scalars.byteLength), 0, null, null);
 
       await GeoPNG.gpu.dispatchWaves(pixel_count, function (arg0_offset, arg1_count, arg2_global, arg3_local) {
         cl.clSetKernelArgMem(kernel, 0, 8, [d_in.mem]);
@@ -320,9 +337,13 @@
     //Guard clauses
     if (!in_rgba || !region_ids) return null;
     let pixel_count = Math.floor(in_rgba.byteLength/4);
-    if (!GeoPNG.gpu.shouldUseGPU(pixel_count)) return null;
-
     let positive_only = (options.positive_only !== false) ? 1 : 0;
+
+    if (GeoPNG.native && GeoPNG.native.isAvailable()) {
+      let nat_sums = GeoPNG.native.regionalSumRGBA(in_rgba, region_ids, num_regions, Boolean(positive_only));
+      if (nat_sums) return nat_sums;
+    }
+    if (!GeoPNG.gpu.shouldUseGPU(pixel_count)) return null;
 
     //Return statement
     return GeoPNG.gpu.runSerialised(async function () {
@@ -336,9 +357,9 @@
 
       if (!d_in || !d_rids || !d_sums || !kernel) return null;
 
-      cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_in.mem, 0, 0, bytes, in_rgba, 0, null, null);
+      cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_in.mem, 1, 0, bytes, in_rgba, 0, null, null);
       if (d_rids._cache_ref !== region_ids) {
-        cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_rids.mem, 0, 0, bytes, new Uint8Array(region_ids.buffer, region_ids.byteOffset, bytes), 0, null, null);
+        cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_rids.mem, 1, 0, bytes, new Uint8Array(region_ids.buffer, region_ids.byteOffset, bytes), 0, null, null);
         d_rids._cache_ref = region_ids;
       }
       cl.clEnqueueFillBuffer(GeoPNG.gpu._queue, d_sums.mem, zero_pattern, 8, 0, num_regions*8, 0, null, null);
@@ -393,6 +414,12 @@
     //Guard clauses
     if (!grid_a_rgba || !grid_b_rgba || !popc_rgba || !urbc_rgba || !rurc_rgba || !popd_rgba || !owner_grid || !land_area || !bfs_dist)
       return null;
+
+    //Fast sparse zero-alloc native C++20 BelowNormal thread-pool path (~1,5 ms vs ~64 ms, 0% GPU/DWM contention)
+    if (params.viscount_pixels && GeoPNG.native && GeoPNG.native.isAvailable()) {
+      let nat_v = GeoPNG.native.velkscalaAntiquityOverlayRGBA(params);
+      if (nat_v) return nat_v;
+    }
     if (!GeoPNG.gpu.shouldUseGPU(total_px)) return null;
 
     //Return statement
@@ -420,35 +447,35 @@
         return null;
 
       if (d_owner._cache_key !== static_key) {
-        cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_owner.mem, 0, 0, total_px, owner_grid, 0, null, null);
+        cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_owner.mem, 1, 0, total_px, owner_grid, 0, null, null);
         d_owner._cache_key = static_key;
       }
       if (d_la._cache_key !== static_key) {
-        cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_la.mem, 0, 0, bytes, new Uint8Array(land_area.buffer, land_area.byteOffset, bytes), 0, null, null);
+        cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_la.mem, 1, 0, bytes, new Uint8Array(land_area.buffer, land_area.byteOffset, bytes), 0, null, null);
         d_la._cache_key = static_key;
       }
       if (d_bfs._cache_key !== static_key) {
-        cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_bfs.mem, 0, 0, bytes, new Uint8Array(bfs_dist.buffer, bfs_dist.byteOffset, bytes), 0, null, null);
+        cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_bfs.mem, 1, 0, bytes, new Uint8Array(bfs_dist.buffer, bfs_dist.byteOffset, bytes), 0, null, null);
         d_bfs._cache_key = static_key;
       }
       if (d_seam && seam_pixels && seam_pixels.length > 0 && d_seam._cache_key !== static_key) {
-        cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_seam.mem, 0, 0, seam_pixels.byteLength, new Uint8Array(seam_pixels.buffer, seam_pixels.byteOffset, seam_pixels.byteLength), 0, null, null);
+        cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_seam.mem, 1, 0, seam_pixels.byteLength, new Uint8Array(seam_pixels.buffer, seam_pixels.byteOffset, seam_pixels.byteLength), 0, null, null);
         d_seam._cache_key = static_key;
       }
 
       if (d_ga._cache_ref !== grid_a_rgba) {
-        cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_ga.mem, 0, 0, bytes, grid_a_rgba, 0, null, null);
+        cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_ga.mem, 1, 0, bytes, grid_a_rgba, 0, null, null);
         d_ga._cache_ref = grid_a_rgba;
       }
       if (d_gb._cache_ref !== grid_b_rgba) {
-        cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_gb.mem, 0, 0, bytes, grid_b_rgba, 0, null, null);
+        cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_gb.mem, 1, 0, bytes, grid_b_rgba, 0, null, null);
         d_gb._cache_ref = grid_b_rgba;
       }
 
-      cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_popc.mem, 0, 0, bytes, popc_rgba, 0, null, null);
-      cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_urbc.mem, 0, 0, bytes, urbc_rgba, 0, null, null);
-      cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_rurc.mem, 0, 0, bytes, rurc_rgba, 0, null, null);
-      cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_popd.mem, 0, 0, bytes, popd_rgba, 0, null, null);
+      cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_popc.mem, 1, 0, bytes, popc_rgba, 0, null, null);
+      cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_urbc.mem, 1, 0, bytes, urbc_rgba, 0, null, null);
+      cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_rurc.mem, 1, 0, bytes, rurc_rgba, 0, null, null);
+      cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_popd.mem, 1, 0, bytes, popd_rgba, 0, null, null);
 
       let local_size = Math.max(32, Number(GeoPNG.compute_limits.gpu.workgroup_size) || 256);
 
@@ -546,6 +573,11 @@
     //Guard clauses
     if (!in_rgba) return null;
     let pixel_count = Math.floor(in_rgba.byteLength/4);
+
+    if (GeoPNG.native && GeoPNG.native.isAvailable()) {
+      let nat_out = GeoPNG.native.convertF32ToU32RGBA(in_rgba, mode);
+      if (nat_out) return nat_out;
+    }
     if (!GeoPNG.gpu.shouldUseGPU(pixel_count)) return null;
 
     //Return statement
@@ -559,7 +591,7 @@
 
       if (!d_in || !d_out || !kernel) return null;
 
-      cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_in.mem, 0, 0, bytes, in_rgba, 0, null, null);
+      cl.clEnqueueWriteBuffer(GeoPNG.gpu._queue, d_in.mem, 1, 0, bytes, in_rgba, 0, null, null);
       await GeoPNG.gpu.dispatchWaves(pixel_count, function (arg0_offset, arg1_count, arg2_global, arg3_local) {
         cl.clSetKernelArgMem(kernel, 0, 8, [d_in.mem]);
         cl.clSetKernelArgMem(kernel, 1, 8, [d_out.mem]);

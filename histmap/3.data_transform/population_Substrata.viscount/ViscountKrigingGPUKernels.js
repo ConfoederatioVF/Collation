@@ -1,53 +1,73 @@
-//Initialise Viscount Kriging OpenCL 3.0 Kernel Source
+//Initialise Viscount Kriging OpenCL 3.0 Kernel Source (FP32 Local-Memory Tiled & WDDM-Safe)
 {
   let VISCOUNT_OPENCL_KERNELS = `
 #pragma OPENCL EXTENSION cl_khr_fp64 : enable
 
-/* -- Geodesic Voronoi nearest-catchment assignment (Step B) -- */
+/* -- Geodesic Voronoi nearest-catchment assignment (Step B, FP32 Local-Memory Tiled) -- */
 __kernel void viscount_voronoi_nearest (
   __global const float* cell_ux,
   __global const float* cell_uy,
   __global const float* cell_uz,
-  __global const double* obs_ux,
-  __global const double* obs_uy,
-  __global const double* obs_uz,
+  __global const float* obs_ux,
+  __global const float* obs_uy,
+  __global const float* obs_uz,
   __global int* cell_nearest,
   const uint offset,
   const uint count,
   const uint n_obs
 ) {
+  __local float s_ox[256];
+  __local float s_oy[256];
+  __local float s_oz[256];
+
   uint gid = get_global_id(0);
-  if (gid >= count) return;
+  uint lid = get_local_id(0);
+  uint active = (gid < count) ? 1u : 0u;
   uint i = offset + gid;
 
-  double cx = (double)cell_ux[i];
-  double cy = (double)cell_uy[i];
-  double cz = (double)cell_uz[i];
-  double best_dot = -2.0;
+  float cx = active ? cell_ux[i] : 0.0f;
+  float cy = active ? cell_uy[i] : 0.0f;
+  float cz = active ? cell_uz[i] : 0.0f;
+  float best_dot = -2.0f;
   int best_idx = 0;
 
-  for (uint x = 0; x < n_obs; x++) {
-    double d = cx*obs_ux[x] + cy*obs_uy[x] + cz*obs_uz[x];
-    if (d > best_dot) {
-      best_dot = d;
-      best_idx = (int)x;
+  for (uint base = 0u; base < n_obs; base += 256u) {
+    uint load_idx = base + lid;
+    if (load_idx < n_obs) {
+      s_ox[lid] = obs_ux[load_idx];
+      s_oy[lid] = obs_uy[load_idx];
+      s_oz[lid] = obs_uz[load_idx];
     }
+    barrier(CLK_LOCAL_MEM_FENCE);
+
+    if (active) {
+      uint tile_end = min(256u, n_obs - base);
+      for (uint k = 0u; k < tile_end; k++) {
+        float d = fma(cx, s_ox[k], fma(cy, s_oy[k], cz*s_oz[k]));
+        if (d > best_dot) {
+          best_dot = d;
+          best_idx = (int)(base + k);
+        }
+      }
+    }
+    barrier(CLK_LOCAL_MEM_FENCE);
   }
-  cell_nearest[i] = best_idx;
+
+  if (active) cell_nearest[i] = best_idx;
 }
 
-/* -- Pairwise non-stationary u_matrix and scale_pref_mat (Step C) -- */
+/* -- Pairwise non-stationary u_matrix and scale_pref_mat (Step C, cancellation-free chord-squared FP32) -- */
 __kernel void viscount_pairwise_u_pref (
-  __global const double* obs_ux,
-  __global const double* obs_uy,
-  __global const double* obs_uz,
-  __global const double* obs_r,
+  __global const float* obs_ux,
+  __global const float* obs_uy,
+  __global const float* obs_uz,
+  __global const float* obs_r,
   __global float* u_matrix,
   __global float* scale_pref_mat,
   const uint offset,
   const uint count,
   const uint n_obs,
-  const double earth_r
+  const float earth_r
 ) {
   uint gid = get_global_id(0);
   if (gid >= count) return;
@@ -61,22 +81,23 @@ __kernel void viscount_pairwise_u_pref (
     return;
   }
 
-  double dot = obs_ux[i]*obs_ux[x] + obs_uy[i]*obs_uy[x] + obs_uz[i]*obs_uz[x];
-  dot = fmax(-1.0, fmin(1.0, dot));
-  double c2 = fmax(0.0, 2.0 - 2.0*dot);
-  double h = earth_r*sqrt(c2)*(1.0 + c2/24.0 + (3.0*c2*c2)/640.0);
-  double ri = obs_r[i];
-  double rx = obs_r[x];
-  double r2_sum = ri*ri + rx*rx;
-  double r_eff = sqrt(0.5*r2_sum);
-  double pref = (2.0*ri*rx)/fmax(1e-8, r2_sum);
-  double u = h/fmax(1e-6, r_eff);
+  float dx = obs_ux[i] - obs_ux[x];
+  float dy = obs_uy[i] - obs_uy[x];
+  float dz = obs_uz[i] - obs_uz[x];
+  float c2 = fmax(0.0f, fma(dx, dx, fma(dy, dy, dz*dz)));
+  float h = earth_r*sqrt(c2)*(1.0f + c2*(1.0f/24.0f) + (3.0f/640.0f)*c2*c2);
+  float ri = obs_r[i];
+  float rx = obs_r[x];
+  float r2_sum = fma(ri, ri, rx*rx);
+  float r_eff = sqrt(0.5f*r2_sum);
+  float pref = (2.0f*ri*rx)/fmax(1e-8f, r2_sum);
+  float u = h/fmax(1e-6f, r_eff);
 
-  u_matrix[idx] = (float)u;
-  scale_pref_mat[idx] = (float)pref;
+  u_matrix[idx] = u;
+  scale_pref_mat[idx] = pref;
 }
 
-/* -- Pairwise two-scale Matern nu=3/2 kernel fill (Step C) -- */
+/* -- Pairwise two-scale Matern nu=3/2 kernel fill (Step C, FP32 transcendentals -> FP64 linear solver output) -- */
 __kernel void viscount_fill_matern_kernels (
   __global const float* u_matrix,
   __global const float* scale_pref_mat,
@@ -85,8 +106,8 @@ __kernel void viscount_fill_matern_kernels (
   const uint offset,
   const uint count,
   const uint n_obs,
-  const double inv_t1_s3,
-  const double inv_t2_s3
+  const float inv_t1_s3,
+  const float inv_t2_s3
 ) {
   uint gid = get_global_id(0);
   if (gid >= count) return;
@@ -100,34 +121,34 @@ __kernel void viscount_fill_matern_kernels (
     return;
   }
 
-  double pref = (double)scale_pref_mat[idx];
-  double u = (double)u_matrix[idx];
-  double s1 = u*inv_t1_s3;
-  double s2 = u*inv_t2_s3;
+  float pref = scale_pref_mat[idx];
+  float u = u_matrix[idx];
+  float s1 = u*inv_t1_s3;
+  float s2 = u*inv_t2_s3;
 
-  m1_mat[idx] = pref*(1.0 + s1)*exp(-s1);
-  m2_mat[idx] = pref*(1.0 + s2)*exp(-s2);
+  m1_mat[idx] = (double)(pref*(1.0f + s1)*exp(-s1));
+  m2_mat[idx] = (double)(pref*(1.0f + s2)*exp(-s2));
 }
 
-/* -- Two-scale non-stationary Paciorek-Schervish Matern potential evaluation (Step E) -- */
+/* -- Two-scale non-stationary Paciorek-Schervish Matern potential evaluation (Step E, FP32 Local-Memory Tiled) -- */
 __kernel void viscount_matern_eval_potentials (
   __global const float* cell_ux,
   __global const float* cell_uy,
   __global const float* cell_uz,
   __global const float* cell_r,
   __global const float* cell_area,
-  __global const double* obs_ux,
-  __global const double* obs_uy,
-  __global const double* obs_uz,
-  __global const double* obs_r,
-  __global const double* min_dot_per_obs,
-  __global const double* w_packed,
-  __global const double* c1_arr,
-  __global const double* c2_arr,
-  __global const double* inv_tau1_arr,
-  __global const double* inv_tau2_arr,
-  __global const double* var_restore_arr,
-  __global const double* lut,
+  __global const float* obs_ux,
+  __global const float* obs_uy,
+  __global const float* obs_uz,
+  __global const float* obs_r,
+  __global const float* min_dot_per_obs,
+  __global const float* w_packed,
+  __global const float* c1_arr,
+  __global const float* c2_arr,
+  __global const float* inv_tau1_arr,
+  __global const float* inv_tau2_arr,
+  __global const float* var_restore_arr,
+  __global const float* lut,
   __global float* out_pot,
   const uint offset,
   const uint count,
@@ -135,98 +156,136 @@ __kernel void viscount_matern_eval_potentials (
   const uint n_obs,
   const uint n_active,
   const uint shared_tau,
-  const double earth_r
+  const float earth_r
 ) {
+  __local float s_ox[256];
+  __local float s_oy[256];
+  __local float s_oz[256];
+  __local float s_or[256];
+  __local float s_md[256];
+
   uint gid = get_global_id(0);
-  if (gid >= count) return;
+  uint lid = get_local_id(0);
+  uint active = (gid < count) ? 1u : 0u;
   uint i = offset + gid;
 
-  double a_i = (double)cell_area[i];
-  double cx = (double)cell_ux[i];
-  double cy = (double)cell_uy[i];
-  double cz = (double)cell_uz[i];
-  double ri = (double)cell_r[i];
-  double ri2 = ri*ri;
-  double inv_t1_sh = inv_tau1_arr[0];
-  double inv_t2_sh = inv_tau2_arr[0];
-  double lut_scale = 8191.0/8.0;
+  float a_i = active ? cell_area[i] : 0.0f;
+  float cx = active ? cell_ux[i] : 0.0f;
+  float cy = active ? cell_uy[i] : 0.0f;
+  float cz = active ? cell_uz[i] : 0.0f;
+  float ri = active ? cell_r[i] : 1.0f;
+  float ri2 = ri*ri;
+  float inv_t1_sh = inv_tau1_arr[0];
+  float inv_t2_sh = inv_tau2_arr[0];
+  float lut_scale = 8191.0f/8.0f;
 
-  for (uint p_base = 0; p_base < n_active; p_base += 16) {
+  for (uint p_base = 0u; p_base < n_active; p_base += 16u) {
     uint p_end = min(n_active, p_base + 16u);
     uint p_cnt = p_end - p_base;
-    double z_acc[16];
+    float z_acc[16];
+    float lc1[16];
+    float lc2[16];
+    float lit1[16];
+    float lit2[16];
 
-    for (uint lp = 0; lp < p_cnt; lp++) z_acc[lp] = 0.0;
-
-    for (uint x = 0; x < n_obs; x++) {
-      double dot = cx*obs_ux[x] + cy*obs_uy[x] + cz*obs_uz[x];
-      if (dot <= min_dot_per_obs[x]) continue;
-      dot = fmax(-1.0, fmin(1.0, dot));
-
-      double c2_c = fmax(0.0, 2.0 - 2.0*dot);
-      double h = earth_r*sqrt(c2_c)*(1.0 + c2_c/24.0);
-      double rx = obs_r[x];
-      double r2_sum = ri2 + rx*rx;
-      double u = h/sqrt(0.5*r2_sum);
-      double pref = (2.0*ri*rx)/fmax(1e-8, r2_sum);
-      uint w_row = x*n_active + p_base;
-
-      if (shared_tau != 0u) {
-        double v2 = u*inv_t2_sh;
-        if (v2 >= 7.99) continue;
-        double m1 = 0.0;
-        double v1 = u*inv_t1_sh;
-
-        if (v1 < 7.99) {
-          double sv1 = v1*lut_scale;
-          uint i1 = (uint)sv1;
-          double f1 = sv1 - (double)i1;
-          m1 = pref*(lut[i1]*(1.0 - f1) + lut[i1 + 1u]*f1);
-        }
-        double sv2 = v2*lut_scale;
-        uint i2 = (uint)sv2;
-        double f2 = sv2 - (double)i2;
-        double m2 = pref*(lut[i2]*(1.0 - f2) + lut[i2 + 1u]*f2);
-
-        for (uint lp = 0; lp < p_cnt; lp++) {
-          uint p = p_base + lp;
-          z_acc[lp] += w_packed[w_row + lp]*(c1_arr[p]*m1 + c2_arr[p]*m2);
-        }
-      } else {
-        for (uint lp = 0; lp < p_cnt; lp++) {
-          uint p = p_base + lp;
-          double wp = w_packed[w_row + lp];
-          if (wp <= 0.0) continue;
-          double v2 = u*inv_tau2_arr[p];
-          if (v2 >= 7.99) continue;
-          double m1 = 0.0;
-          double v1 = u*inv_tau1_arr[p];
-
-          if (v1 < 7.99) {
-            double sv1 = v1*lut_scale;
-            uint i1 = (uint)sv1;
-            double f1 = sv1 - (double)i1;
-            m1 = pref*(lut[i1]*(1.0 - f1) + lut[i1 + 1u]*f1);
-          }
-          double sv2 = v2*lut_scale;
-          uint i2 = (uint)sv2;
-          double f2 = sv2 - (double)i2;
-          double m2 = pref*(lut[i2]*(1.0 - f2) + lut[i2 + 1u]*f2);
-
-          z_acc[lp] += wp*(c1_arr[p]*m1 + c2_arr[p]*m2);
-        }
-      }
+    for (uint lp = 0u; lp < p_cnt; lp++) {
+      uint p = p_base + lp;
+      z_acc[lp] = 0.0f;
+      lc1[lp] = c1_arr[p];
+      lc2[lp] = c2_arr[p];
+      lit1[lp] = inv_tau1_arr[p];
+      lit2[lp] = inv_tau2_arr[p];
     }
 
-    for (uint lp = 0; lp < p_cnt; lp++) {
-      uint p = p_base + lp;
-      double z_val = fmax(0.0, var_restore_arr[p]*z_acc[lp]);
-      out_pot[p*n_valid + i] = (float)(a_i*pow(z_val, 2.25));
+    for (uint base = 0u; base < n_obs; base += 256u) {
+      uint load_idx = base + lid;
+      if (load_idx < n_obs) {
+        s_ox[lid] = obs_ux[load_idx];
+        s_oy[lid] = obs_uy[load_idx];
+        s_oz[lid] = obs_uz[load_idx];
+        s_or[lid] = obs_r[load_idx];
+        s_md[lid] = min_dot_per_obs[load_idx] - 1e-4f;
+      }
+      barrier(CLK_LOCAL_MEM_FENCE);
+
+      if (active) {
+        uint tile_end = min(256u, n_obs - base);
+        for (uint k = 0u; k < tile_end; k++) {
+          float ox = s_ox[k];
+          float oy = s_oy[k];
+          float oz = s_oz[k];
+          float dot = fma(cx, ox, fma(cy, oy, cz*oz));
+          if (dot <= s_md[k]) continue;
+
+          float dx = cx - ox;
+          float dy = cy - oy;
+          float dz = cz - oz;
+          float c2_c = fmax(0.0f, fma(dx, dx, fma(dy, dy, dz*dz)));
+          float h = earth_r*sqrt(c2_c)*(1.0f + c2_c*(1.0f/24.0f));
+          float rx = s_or[k];
+          float r2_sum = fma(rx, rx, ri2);
+          float u = h*rsqrt(fmax(1e-12f, 0.5f*r2_sum));
+          float pref = (2.0f*ri*rx)/fmax(1e-8f, r2_sum);
+          uint w_row = (base + k)*n_active + p_base;
+
+          if (shared_tau != 0u) {
+            float v2 = u*inv_t2_sh;
+            if (v2 >= 7.99f) continue;
+            float m1 = 0.0f;
+            float v1 = u*inv_t1_sh;
+
+            if (v1 < 7.99f) {
+              float sv1 = v1*lut_scale;
+              uint i1 = (uint)sv1;
+              float f1 = sv1 - (float)i1;
+              m1 = pref*fma(lut[i1 + 1u] - lut[i1], f1, lut[i1]);
+            }
+            float sv2 = v2*lut_scale;
+            uint i2 = (uint)sv2;
+            float f2 = sv2 - (float)i2;
+            float m2 = pref*fma(lut[i2 + 1u] - lut[i2], f2, lut[i2]);
+
+            for (uint lp = 0u; lp < p_cnt; lp++)
+              z_acc[lp] = fma(w_packed[w_row + lp], fma(lc1[lp], m1, lc2[lp]*m2), z_acc[lp]);
+          } else {
+            for (uint lp = 0u; lp < p_cnt; lp++) {
+              float wp = w_packed[w_row + lp];
+              if (wp <= 0.0f) continue;
+              float v2 = u*lit2[lp];
+              if (v2 >= 7.99f) continue;
+              float m1 = 0.0f;
+              float v1 = u*lit1[lp];
+
+              if (v1 < 7.99f) {
+                float sv1 = v1*lut_scale;
+                uint i1 = (uint)sv1;
+                float f1 = sv1 - (float)i1;
+                m1 = pref*fma(lut[i1 + 1u] - lut[i1], f1, lut[i1]);
+              }
+              float sv2 = v2*lut_scale;
+              uint i2 = (uint)sv2;
+              float f2 = sv2 - (float)i2;
+              float m2 = pref*fma(lut[i2 + 1u] - lut[i2], f2, lut[i2]);
+
+              z_acc[lp] = fma(wp, fma(lc1[lp], m1, lc2[lp]*m2), z_acc[lp]);
+            }
+          }
+        }
+      }
+      barrier(CLK_LOCAL_MEM_FENCE);
+    }
+
+    if (active) {
+      for (uint lp = 0u; lp < p_cnt; lp++) {
+        uint p = p_base + lp;
+        float z_val = fmax(0.0f, var_restore_arr[p]*z_acc[lp]);
+        out_pot[p*n_valid + i] = a_i*pow(z_val, 2.25f);
+      }
     }
   }
 }
 
-/* -- Terrain-barrier-aware multi-period signed residual Matern evaluation -- */
+/* -- Terrain-barrier-aware multi-period signed residual Matern evaluation (FP32 Local-Memory Tiled) -- */
 __kernel void viscount_residual_matern_multi (
   __global const float* cell_ux,
   __global const float* cell_uy,
@@ -235,15 +294,15 @@ __kernel void viscount_residual_matern_multi (
   __global const float* cell_area,
   __global const float* elev_valid,
   __global const int* cell_obs,
-  __global const double* obs_ux,
-  __global const double* obs_uy,
-  __global const double* obs_uz,
-  __global const double* obs_r,
-  __global const double* obs_elev_m,
-  __global const double* min_dot,
-  __global const double* v_packed,
+  __global const float* obs_ux,
+  __global const float* obs_uy,
+  __global const float* obs_uz,
+  __global const float* obs_r,
+  __global const float* obs_elev_m,
+  __global const float* min_dot,
+  __global const float* v_packed,
   __global const float* prior_dens_packed,
-  __global const double* lut,
+  __global const float* lut,
   __global float* out_r,
   __global float* out_pop,
   const uint offset,
@@ -252,96 +311,128 @@ __kernel void viscount_residual_matern_multi (
   const uint n_obs,
   const uint n_p,
   const uint flags,
-  const double earth_r,
-  const double c1,
-  const double c2,
-  const double inv_tau1,
-  const double inv_tau2,
-  const double inv_eb,
-  const double cross_catch_mult,
-  const double r_gain,
-  const double r_clamp_min,
-  const double r_clamp_max
+  const float earth_r,
+  const float c1,
+  const float c2,
+  const float inv_tau1,
+  const float inv_tau2,
+  const float inv_eb,
+  const float cross_catch_mult,
+  const float r_gain,
+  const float r_clamp_min,
+  const float r_clamp_max
 ) {
+  __local float s_ox[256];
+  __local float s_oy[256];
+  __local float s_oz[256];
+  __local float s_or[256];
+  __local float s_oe[256];
+  __local float s_md[256];
+
   uint gid = get_global_id(0);
-  if (gid >= count) return;
+  uint lid = get_local_id(0);
+  uint active = (gid < count) ? 1u : 0u;
   uint i = offset + gid;
 
-  double a_i = (double)cell_area[i];
-  double cx = (double)cell_ux[i];
-  double cy = (double)cell_uy[i];
-  double cz = (double)cell_uz[i];
-  double ei = ((flags & 1u) != 0u) ? (double)elev_valid[i] : 150.0;
-  int own_obs = ((flags & 2u) != 0u) ? cell_obs[i] : -1;
-  double ri = (double)cell_r[i];
-  double ri2 = ri*ri;
-  double lut_scale = 8191.0/8.0;
+  float a_i = active ? cell_area[i] : 0.0f;
+  float cx = active ? cell_ux[i] : 0.0f;
+  float cy = active ? cell_uy[i] : 0.0f;
+  float cz = active ? cell_uz[i] : 0.0f;
+  float ei = (active && (flags & 1u) != 0u) ? elev_valid[i] : 150.0f;
+  int own_obs = (active && (flags & 2u) != 0u) ? cell_obs[i] : -1;
+  float ri = active ? cell_r[i] : 1.0f;
+  float ri2 = ri*ri;
+  float lut_scale = 8191.0f/8.0f;
 
-  for (uint p_base = 0; p_base < n_p; p_base += 16) {
+  for (uint p_base = 0u; p_base < n_p; p_base += 16u) {
     uint p_end = min(n_p, p_base + 16u);
     uint p_cnt = p_end - p_base;
-    double r_acc[16];
+    float r_acc[16];
 
-    for (uint lp = 0; lp < p_cnt; lp++) r_acc[lp] = 0.0;
+    for (uint lp = 0u; lp < p_cnt; lp++) r_acc[lp] = 0.0f;
 
-    for (uint x = 0; x < n_obs; x++) {
-      double dot = cx*obs_ux[x] + cy*obs_uy[x] + cz*obs_uz[x];
-      if (dot <= min_dot[x]) continue;
-      dot = fmax(-1.0, fmin(1.0, dot));
-
-      double c2_c = fmax(0.0, 2.0 - 2.0*dot);
-      double h = earth_r*sqrt(c2_c)*(1.0 + c2_c/24.0);
-      double rx = obs_r[x];
-      double r2_sum = ri2 + rx*rx;
-      double u = h/sqrt(0.5*r2_sum);
-      double v2 = u*inv_tau2;
-      if (v2 >= 7.99) continue;
-
-      double pref = (2.0*ri*rx)/fmax(1e-8, r2_sum);
-      double m1 = 0.0;
-      double v1 = u*inv_tau1;
-
-      if (v1 < 7.99) {
-        double sv1 = v1*lut_scale;
-        uint i1 = (uint)sv1;
-        double f1 = sv1 - (double)i1;
-        m1 = pref*(lut[i1]*(1.0 - f1) + lut[i1 + 1u]*f1);
+    for (uint base = 0u; base < n_obs; base += 256u) {
+      uint load_idx = base + lid;
+      if (load_idx < n_obs) {
+        s_ox[lid] = obs_ux[load_idx];
+        s_oy[lid] = obs_uy[load_idx];
+        s_oz[lid] = obs_uz[load_idx];
+        s_or[lid] = obs_r[load_idx];
+        s_oe[lid] = obs_elev_m[load_idx];
+        s_md[lid] = min_dot[load_idx] - 1e-4f;
       }
-      double sv2 = v2*lut_scale;
-      uint i2 = (uint)sv2;
-      double f2 = sv2 - (double)i2;
-      double m2 = pref*(lut[i2]*(1.0 - f2) + lut[i2 + 1u]*f2);
+      barrier(CLK_LOCAL_MEM_FENCE);
 
-      double de_norm = fabs(ei - obs_elev_m[x])*inv_eb;
-      double elev_att = (de_norm > 0.05) ? exp(-pow(de_norm, 1.6)) : 1.0;
-      double catch_att = (own_obs == (int)x) ? 1.0 : cross_catch_mult;
-      double kern = catch_att*elev_att*(c1*m1 + c2*m2);
-      uint v_row = x*n_p + p_base;
+      if (active) {
+        uint tile_end = min(256u, n_obs - base);
+        for (uint k = 0u; k < tile_end; k++) {
+          float ox = s_ox[k];
+          float oy = s_oy[k];
+          float oz = s_oz[k];
+          float dot = fma(cx, ox, fma(cy, oy, cz*oz));
+          if (dot <= s_md[k]) continue;
 
-      for (uint lp = 0; lp < p_cnt; lp++) {
-        double vx = v_packed[v_row + lp];
-        if (vx != 0.0) r_acc[lp] += vx*kern;
+          float dx = cx - ox;
+          float dy = cy - oy;
+          float dz = cz - oz;
+          float c2_c = fmax(0.0f, fma(dx, dx, fma(dy, dy, dz*dz)));
+          float h = earth_r*sqrt(c2_c)*(1.0f + c2_c*(1.0f/24.0f));
+          float rx = s_or[k];
+          float r2_sum = fma(rx, rx, ri2);
+          float u = h*rsqrt(fmax(1e-12f, 0.5f*r2_sum));
+          float v2 = u*inv_tau2;
+          if (v2 >= 7.99f) continue;
+
+          float pref = (2.0f*ri*rx)/fmax(1e-8f, r2_sum);
+          float m1 = 0.0f;
+          float v1 = u*inv_tau1;
+
+          if (v1 < 7.99f) {
+            float sv1 = v1*lut_scale;
+            uint i1 = (uint)sv1;
+            float f1 = sv1 - (float)i1;
+            m1 = pref*fma(lut[i1 + 1u] - lut[i1], f1, lut[i1]);
+          }
+          float sv2 = v2*lut_scale;
+          uint i2 = (uint)sv2;
+          float f2 = sv2 - (float)i2;
+          float m2 = pref*fma(lut[i2 + 1u] - lut[i2], f2, lut[i2]);
+
+          float de_norm = fabs(ei - s_oe[k])*inv_eb;
+          float elev_att = (de_norm > 0.05f) ? exp(-pow(de_norm, 1.6f)) : 1.0f;
+          float catch_att = (own_obs == (int)(base + k)) ? 1.0f : cross_catch_mult;
+          float kern = catch_att*elev_att*fma(c1, m1, c2*m2);
+          uint v_row = (base + k)*n_p + p_base;
+
+          for (uint lp = 0u; lp < p_cnt; lp++) {
+            float vx = v_packed[v_row + lp];
+            if (vx != 0.0f) r_acc[lp] = fma(vx, kern, r_acc[lp]);
+          }
+        }
       }
+      barrier(CLK_LOCAL_MEM_FENCE);
     }
 
-    for (uint lp = 0; lp < p_cnt; lp++) {
-      uint p = p_base + lp;
-      uint out_idx = p*n_valid + i;
-      double r_val = r_acc[lp];
-      double pd = (double)prior_dens_packed[out_idx];
+    if (active) {
+      for (uint lp = 0u; lp < p_cnt; lp++) {
+        uint p = p_base + lp;
+        uint out_idx = p*n_valid + i;
+        float r_val = r_acc[lp];
+        float pd = prior_dens_packed[out_idx];
 
-      out_r[out_idx] = (float)r_val;
-      if (pd > 0.0) {
-        double clamped = fmax(r_clamp_min, fmin(r_clamp_max, r_gain*r_val));
-        out_pop[out_idx] = (float)(a_i*pd*exp(clamped));
-      } else {
-        out_pop[out_idx] = 0.0f;
+        out_r[out_idx] = r_val;
+        if (pd > 0.0f) {
+          float clamped = fmax(r_clamp_min, fmin(r_clamp_max, r_gain*r_val));
+          out_pop[out_idx] = a_i*pd*exp(clamped);
+        } else {
+          out_pop[out_idx] = 0.0f;
+        }
       }
     }
   }
 }
 
-/* -- Separable horizontal tent/Gaussian blur with partition & elevation gating -- */
+/* -- Separable horizontal tent/Gaussian blur with partition & elevation gating (FP32) -- */
 __kernel void viscount_smooth_grid_h (
   __global const float* cur_in,
   __global float* tmp_out,
@@ -373,9 +464,9 @@ __kernel void viscount_smooth_grid_h (
   int cx = vi % grid_w;
   int row = (vi/grid_w)*grid_w;
   int pid = (has_part != 0u) ? part_ids[i] : 0;
-  double ei = (has_elev != 0u) ? (double)elev_v[i] : 0.0;
-  double acc = 0.0;
-  double wsum = 0.0;
+  float ei = (has_elev != 0u) ? elev_v[i] : 0.0f;
+  float acc = 0.0f;
+  float wsum = 0.0f;
 
   for (int dx = -rad; dx <= rad; dx++) {
     int col = cx + dx;
@@ -389,19 +480,19 @@ __kernel void viscount_smooth_grid_h (
     if (pos_only != 0u && cv <= 0.0f) continue;
     if (has_part != 0u && pid > 0 && part_ids[nv] != pid) continue;
 
-    double wt = (double)(rad + 1 - abs(dx));
+    float wt = (float)(rad + 1 - abs(dx));
     if (has_elev != 0u) {
-      double de = fabs(ei - (double)elev_v[nv]);
-      if (de > 450.0) wt *= exp(-(de - 450.0)/220.0);
+      float de = fabs(ei - elev_v[nv]);
+      if (de > 450.0f) wt *= exp(-(de - 450.0f)*(1.0f/220.0f));
     }
-    acc += (double)cv*wt;
+    acc = fma(cv, wt, acc);
     wsum += wt;
   }
 
-  tmp_out[i] = (wsum > 0.0) ? (float)(acc/wsum) : cur_i;
+  tmp_out[i] = (wsum > 0.0f) ? (acc/wsum) : cur_i;
 }
 
-/* -- Separable vertical tent/Gaussian blur with partition & elevation gating -- */
+/* -- Separable vertical tent/Gaussian blur with partition & elevation gating (FP32) -- */
 __kernel void viscount_smooth_grid_v (
   __global const float* tmp_in,
   __global const float* orig_in,
@@ -435,9 +526,9 @@ __kernel void viscount_smooth_grid_v (
   int cx = vi % grid_w;
   int cy = vi/grid_w;
   int pid = (has_part != 0u) ? part_ids[i] : 0;
-  double ei = (has_elev != 0u) ? (double)elev_v[i] : 0.0;
-  double acc = 0.0;
-  double wsum = 0.0;
+  float ei = (has_elev != 0u) ? elev_v[i] : 0.0f;
+  float acc = 0.0f;
+  float wsum = 0.0f;
 
   for (int dy = -rad; dy <= rad; dy++) {
     int nr = cy + dy;
@@ -450,16 +541,16 @@ __kernel void viscount_smooth_grid_v (
     if (pos_only != 0u && tv <= 0.0f) continue;
     if (has_part != 0u && pid > 0 && part_ids[nv] != pid) continue;
 
-    double wt = (double)(rad + 1 - abs(dy));
+    float wt = (float)(rad + 1 - abs(dy));
     if (has_elev != 0u) {
-      double de = fabs(ei - (double)elev_v[nv]);
-      if (de > 450.0) wt *= exp(-(de - 450.0)/220.0);
+      float de = fabs(ei - elev_v[nv]);
+      if (de > 450.0f) wt *= exp(-(de - 450.0f)*(1.0f/220.0f));
     }
-    acc += (double)tv*wt;
+    acc = fma(tv, wt, acc);
     wsum += wt;
   }
 
-  cur_out[i] = (wsum > 0.0) ? (float)(acc/wsum) : tmp_i;
+  cur_out[i] = (wsum > 0.0f) ? (acc/wsum) : tmp_i;
 }
 `;
 

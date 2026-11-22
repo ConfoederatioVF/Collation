@@ -152,13 +152,18 @@
           }
         }
 
-        let w_modern = (year >= 1975) ? 1.0 : Math.max(0, Math.min(1, (year - 1900)/75.0));
-        let m1900 = context._cached_mosaic_1900;
-        for (let i = 0; i < context.n_valid; i++) {
-          let u_sub = (urban_valid && urban_valid[i] > 0) ? urban_valid[i]*0.85 : 0;
-          let mod_rur = (prior_valid[i] > 0) ? Math.max(1e-4, prior_valid[i] - u_sub) : 0;
-          let blended = (1 - w_modern)*m1900[i] + w_modern*mod_rur;
-          mosaic_valid[i] = (blended > 0) ? blended : 0;
+        if (year >= 1975) {
+          for (let i = 0; i < context.n_valid; i++)
+            mosaic_valid[i] = (prior_valid[i] > 0) ? prior_valid[i] : 0;
+        } else {
+          let w_modern = Math.max(0, Math.min(1, (year - 1900)/75.0));
+          let m1900 = context._cached_mosaic_1900;
+          for (let i = 0; i < context.n_valid; i++) {
+            let u_sub = (urban_valid && urban_valid[i] > 0) ? urban_valid[i]*0.85 : 0;
+            let mod_rur = (prior_valid[i] > 0) ? Math.max(1e-4, prior_valid[i] - u_sub) : 0;
+            let blended = (1 - w_modern)*m1900[i] + w_modern*mod_rur;
+            mosaic_valid[i] = (blended > 0) ? blended : 0;
+          }
         }
       }
 
@@ -425,88 +430,98 @@
       }
 
       //3. Iterative C^2 separable-tent Gaussian log-multiplier calibration across internal & cross-domain boundaries
+      //For crisp GHSL/WorldPop years (>= 1975), apply direct per-zone areal scaling without tent-blur or cross-domain smearing
       let base_cal = Float32Array.from(calibrated);
-
-      population_Substrata_russia_masks.fillUnsetLogMultHarmonic(context, log_mult, has_mult, base_cal);
-      population_Substrata_russia_masks.smoothLogMultTent(context, log_mult, base_cal, blur_radius, blur_passes);
-
-      for (let iter = 0; iter < 3; iter++) {
-        let iter_rad = (iter === 0) ? blur_radius : Math.max(6, Math.round(blur_radius*0.75));
-        let iter_passes = (iter === 0) ? blur_passes : 2;
-        let zone_sums = new Float64Array(zone_targets.length);
-
-        for (let i = 0; i < n_valid; i++) {
-          let zid = active_zone_of_v[i];
-
-          if (zid >= 0 && base_cal[i] > 0)
-            zone_sums[zid] += base_cal[i]*Math.exp(log_mult[i]);
-        }
-        for (let z = 0; z < zone_targets.length; z++) {
-          let zt = zone_targets[z];
-
-          if (zone_sums[z] > 0 && zt.target_pop > 0) {
-            let dz = Math.max(-1.8, Math.min(1.8, 0.80*Math.log(zt.target_pop/zone_sums[z])));
-
-            for (let x = 0; x < zt.pixels.length; x++) {
-              let v_idx = px_to_valid[zt.pixels[x]];
-
-              if (v_idx >= 0 && base_cal[v_idx] > 0) log_mult[v_idx] += dz;
-            }
-          }
-        }
-        population_Substrata_russia_masks.smoothLogMultTent(context, log_mult, base_cal, iter_rad, iter_passes);
-      }
-
-      //4. Apply C^2-smooth multipliers and conserve residual zone mass strictly in zone interiors (zero border cliffs)
-      for (let i = 0; i < n_valid; i++)
-        calibrated[i] = (base_cal[i] > 0) ? Math.max(1e-4, base_cal[i]*Math.exp(log_mult[i])) : 0;
-
       let w_int = mosaic_mod.computeZoneInteriorWeights(context, active_zone_of_v);
 
-      mosaic_mod.conserveZoneTargetsInteriorPinned(calibrated, active_zone_of_v, w_int, zone_targets);
-
-      //5. Cross-domain (`dom 1 <-> dom 2`) smooth multiplicative log-ratio seam blend within 8 pixels of internal borders
-      {
-        let seam_copy = new Float32Array(calibrated);
+      if (year >= 1975) {
         for (let i = 0; i < n_valid; i++) {
-          let cd = context.cross_dom_dist[i];
-          if (cd > 6) continue;
-          let idx = valid_indices[i];
-          let r = Math.floor(idx/width);
-          let c = idx % width;
-          let rad = 5;
-          let dom_i = pixel_domain[idx];
-          let own_sum = 0;
-          let own_w = 0;
-          let jnt_sum = 0;
-          let jnt_w = 0;
-          for (let dy = -rad; dy <= rad; dy++) {
-            let ry = r + dy;
-            if (ry < 0 || ry >= height) continue;
-            for (let dx = -rad; dx <= rad; dx++) {
-              let cx = c + dx;
-              if (cx < 0 || cx >= width) continue;
-              let n_idx = ry*width + cx;
-              if (pixel_domain[n_idx] > 0) {
-                let nv = px_to_valid[n_idx];
-                if (nv >= 0 && seam_copy[nv] > 0) {
-                  let d2 = dx*dx + dy*dy;
-                  let w = Math.exp(-d2/10.0);
-                  let lv = Math.log(seam_copy[nv]);
-                  jnt_sum += w*lv;
-                  jnt_w += w;
-                  if (pixel_domain[n_idx] === dom_i) {
-                    own_sum += w*lv;
-                    own_w += w;
+          if (base_cal[i] > 0) {
+            calibrated[i] = has_mult[i] ? Math.max(1e-4, base_cal[i]*Math.exp(log_mult[i])) : base_cal[i];
+          } else {
+            calibrated[i] = 0;
+          }
+        }
+      } else {
+        population_Substrata_russia_masks.fillUnsetLogMultHarmonic(context, log_mult, has_mult, base_cal);
+        population_Substrata_russia_masks.smoothLogMultTent(context, log_mult, base_cal, blur_radius, blur_passes);
+
+        for (let iter = 0; iter < 3; iter++) {
+          let iter_rad = (iter === 0) ? blur_radius : Math.max(6, Math.round(blur_radius*0.75));
+          let iter_passes = (iter === 0) ? blur_passes : 2;
+          let zone_sums = new Float64Array(zone_targets.length);
+
+          for (let i = 0; i < n_valid; i++) {
+            let zid = active_zone_of_v[i];
+
+            if (zid >= 0 && base_cal[i] > 0)
+              zone_sums[zid] += base_cal[i]*Math.exp(log_mult[i]);
+          }
+          for (let z = 0; z < zone_targets.length; z++) {
+            let zt = zone_targets[z];
+
+            if (zone_sums[z] > 0 && zt.target_pop > 0) {
+              let dz = Math.max(-1.8, Math.min(1.8, 0.80*Math.log(zt.target_pop/zone_sums[z])));
+
+              for (let x = 0; x < zt.pixels.length; x++) {
+                let v_idx = px_to_valid[zt.pixels[x]];
+
+                if (v_idx >= 0 && base_cal[v_idx] > 0) log_mult[v_idx] += dz;
+              }
+            }
+          }
+          population_Substrata_russia_masks.smoothLogMultTent(context, log_mult, base_cal, iter_rad, iter_passes);
+        }
+
+        //4. Apply C^2-smooth multipliers and conserve residual zone mass strictly in zone interiors (zero border cliffs)
+        for (let i = 0; i < n_valid; i++)
+          calibrated[i] = (base_cal[i] > 0) ? Math.max(1e-4, base_cal[i]*Math.exp(log_mult[i])) : 0;
+
+        mosaic_mod.conserveZoneTargetsInteriorPinned(calibrated, active_zone_of_v, w_int, zone_targets);
+
+        //5. Cross-domain (`dom 1 <-> dom 2`) smooth multiplicative log-ratio seam blend within 8 pixels of internal borders
+        {
+          let seam_copy = new Float32Array(calibrated);
+          for (let i = 0; i < n_valid; i++) {
+            let cd = context.cross_dom_dist[i];
+            if (cd > 6) continue;
+            let idx = valid_indices[i];
+            let r = Math.floor(idx/width);
+            let c = idx % width;
+            let rad = 5;
+            let dom_i = pixel_domain[idx];
+            let own_sum = 0;
+            let own_w = 0;
+            let jnt_sum = 0;
+            let jnt_w = 0;
+            for (let dy = -rad; dy <= rad; dy++) {
+              let ry = r + dy;
+              if (ry < 0 || ry >= height) continue;
+              for (let dx = -rad; dx <= rad; dx++) {
+                let cx = c + dx;
+                if (cx < 0 || cx >= width) continue;
+                let n_idx = ry*width + cx;
+                if (pixel_domain[n_idx] > 0) {
+                  let nv = px_to_valid[n_idx];
+                  if (nv >= 0 && seam_copy[nv] > 0) {
+                    let d2 = dx*dx + dy*dy;
+                    let w = Math.exp(-d2/10.0);
+                    let lv = Math.log(seam_copy[nv]);
+                    jnt_sum += w*lv;
+                    jnt_w += w;
+                    if (pixel_domain[n_idx] === dom_i) {
+                      own_sum += w*lv;
+                      own_w += w;
+                    }
                   }
                 }
               }
             }
-          }
-          if (jnt_w > 0 && own_w > 0 && seam_copy[i] > 0) {
-            let blend_w = 0.75*(1 - (cd - 1)/6.0);
-            let delta_log = Math.max(-0.85, Math.min(0.85, (jnt_sum/jnt_w) - (own_sum/own_w)));
-            calibrated[i] = Math.max(1e-4, seam_copy[i]*Math.exp(blend_w*delta_log));
+            if (jnt_w > 0 && own_w > 0 && seam_copy[i] > 0) {
+              let blend_w = 0.75*(1 - (cd - 1)/6.0);
+              let delta_log = Math.max(-0.85, Math.min(0.85, (jnt_sum/jnt_w) - (own_sum/own_w)));
+              calibrated[i] = Math.max(1e-4, seam_copy[i]*Math.exp(blend_w*delta_log));
+            }
           }
         }
       }
@@ -617,7 +632,7 @@
           let p4 = idx*4;
           let v3 = this.readPositiveFloat32(r3_png.data, r3_dv, p4);
           let w_feather = context.feather_weights[x];
-          if (v3 > 0 && w_feather < 0.999 && context.foreign_anchor_idx[x] >= 0) {
+          if (yr < 1975 && v3 > 0 && w_feather < 0.999 && context.foreign_anchor_idx[x] >= 0) {
             let f_idx = context.foreign_anchor_idx[x];
             let f_val = this.readPositiveFloat32(r4_png.data, r4_dv, f_idx*4);
             if (f_val > 0) {
@@ -769,7 +784,7 @@
 
       for (let i = 0; i < n_years; i++) {
         let yr = hyde_years[i];
-        let urban_valid = this.loadUrbanValidForYear(context, yr);
+        let urban_valid = (yr >= 1975) ? new Float32Array(n_valid) : this.loadUrbanValidForYear(context, yr);
         let mosaic_valid = this.B_mosaicKrigedSubstrataForYear(context, yr, urban_valid);
         let cal_obj = this.C_computeCalibratedFieldForYear(context, mosaic_valid, yr, urban_valid);
         active_zones_series.push(cal_obj.active_zone_of_v || null);
@@ -782,6 +797,7 @@
       let temporally_smoothed = calibrated_series.map((arr) => new Float32Array(arr));
       for (let t = 1; t < n_years - 1; t++) {
         let yr = hyde_years[t];
+        if (yr >= 1975 || hyde_years[t + 1] >= 1975) continue;
         let prev_arr = calibrated_series[t - 1];
         let curr_arr = calibrated_series[t];
         let next_arr = calibrated_series[t + 1];
@@ -828,7 +844,7 @@
         let bu_sum = 0;
 
         //Clean foreign land border pixels (`pixel_domain === 0`) where Russian outlier masks spilled across `sub_iso_cr.asc`
-        if (context.foreign_spillover_pairs && context.foreign_spillover_pairs.length > 0) {
+        if (yr < 1975 && context.foreign_spillover_pairs && context.foreign_spillover_pairs.length > 0) {
           for (let s = 0; s < context.foreign_spillover_pairs.length; s++) {
             let s_idx = context.foreign_spillover_pairs[s][0];
             let c_idx = context.foreign_spillover_pairs[s][1];
@@ -852,7 +868,7 @@
           let r_val = (cal_arr[i] > 0) ? cal_arr[i] : 0;
           let r_feathered = r_val;
 
-          if (r_val > 0 && w_feather < 0.999 && context.foreign_anchor_idx[i] >= 0) {
+          if (yr < 1975 && r_val > 0 && w_feather < 0.999 && context.foreign_anchor_idx[i] >= 0) {
             let f_idx = context.foreign_anchor_idx[i];
             let f_val = this.readPositiveFloat32(base_png.data, base_dv, f_idx*4);
             if (f_val > 0) {
@@ -863,7 +879,7 @@
           comb_arr[i] = (yr <= 0) ? Math.max(r_feathered, u_val) : r_feathered;
         }
 
-        if (active_zones_series[t] && w_int_series[t])
+        if (yr < 1975 && active_zones_series[t] && w_int_series[t])
           mosaic_mod.conserveZoneTargetsInteriorPinned(comb_arr, active_zones_series[t], w_int_series[t], zone_targets_series[t]);
 
         for (let i = 0; i < n_valid; i++) {

@@ -24,17 +24,19 @@
     let cfg_cap = (GeoPNG.compute_limits && GeoPNG.compute_limits.cpu && GeoPNG.compute_limits.cpu.max_workers) ?
       Number(GeoPNG.compute_limits.cpu.max_workers) : 4;
     let default_concurrency = (typeof require !== "undefined") ? Math.min(cfg_cap, require("os").cpus().length || 4) : 4;
-    let use_gpu_local = (options.use_gpu !== false && GeoPNG.gpu && GeoPNG.gpu.isAvailable());
+    let pipeline_conc = (GeoPNG.compute_limits && GeoPNG.compute_limits.cpu && GeoPNG.compute_limits.cpu.pipeline_concurrency) ?
+      Number(GeoPNG.compute_limits.cpu.pipeline_concurrency) : 4;
+    let use_accel_local = (options.use_gpu !== false && GeoPNG.gpu && ((GeoPNG.native && GeoPNG.native.isAvailable()) || GeoPNG.gpu.isAvailable()));
     let worker_options = (population_Stadester_rasters.buildWorkerOptions) ?
       population_Stadester_rasters.buildWorkerOptions(options) : Object.assign({}, options);
 
     //Return statement
     return GeoPNG.processTimeseriesParallel({
-      concurrency: use_gpu_local ? 1 : Math.min(options.concurrency || default_concurrency, cfg_cap),
+      concurrency: use_accel_local ? Math.min(options.concurrency || pipeline_conc, pipeline_conc) : Math.min(options.concurrency || default_concurrency, cfg_cap),
       items: years,
-      name: use_gpu_local ? "Stadester Population Rasters [GPU]" : "Stadester Population Rasters",
-      use_workers: use_gpu_local ? false : options.use_workers,
-      task_generator: use_gpu_local ? null : ((year) => {
+      name: use_accel_local ? "Stadester Population Rasters [Accel]" : "Stadester Population Rasters",
+      use_workers: use_accel_local ? false : options.use_workers,
+      task_generator: use_accel_local ? null : ((year) => {
         return {
           type: "stadester_population_raster",
           options: worker_options,
@@ -64,17 +66,19 @@
     let cfg_cap = (GeoPNG.compute_limits && GeoPNG.compute_limits.cpu && GeoPNG.compute_limits.cpu.max_workers) ?
       Number(GeoPNG.compute_limits.cpu.max_workers) : 4;
     let default_concurrency = (typeof require !== "undefined") ? Math.min(cfg_cap, require("os").cpus().length || 4) : 4;
-    let use_gpu_local = (options.use_gpu !== false && GeoPNG.gpu && GeoPNG.gpu.isAvailable());
+    let pipeline_conc = (GeoPNG.compute_limits && GeoPNG.compute_limits.cpu && GeoPNG.compute_limits.cpu.pipeline_concurrency) ?
+      Number(GeoPNG.compute_limits.cpu.pipeline_concurrency) : 4;
+    let use_accel_local = (options.use_gpu !== false && GeoPNG.gpu && ((GeoPNG.native && GeoPNG.native.isAvailable()) || GeoPNG.gpu.isAvailable()));
     let worker_options = (population_Stadester_rasters.buildWorkerOptions) ?
       population_Stadester_rasters.buildWorkerOptions(options) : Object.assign({}, options);
 
     //Return statement
     return GeoPNG.processTimeseriesParallel({
-      concurrency: use_gpu_local ? 1 : Math.min(options.concurrency || default_concurrency, cfg_cap),
+      concurrency: use_accel_local ? Math.min(options.concurrency || pipeline_conc, pipeline_conc) : Math.min(options.concurrency || default_concurrency, cfg_cap),
       items: years,
-      name: use_gpu_local ? "Stadester Rural Rasters [GPU]" : "Stadester Rural Rasters",
-      use_workers: use_gpu_local ? false : options.use_workers,
-      task_generator: use_gpu_local ? null : ((year) => {
+      name: use_accel_local ? "Stadester Rural Rasters [Accel]" : "Stadester Rural Rasters",
+      use_workers: use_accel_local ? false : options.use_workers,
+      task_generator: use_accel_local ? null : ((year) => {
         if (year < -10000) {
           let rural_folder = options.input_rurc_folder || `${h2}/population_Stadester/stadester_rural_rasters/`;
           let output_file_path = path.join(rural_folder, `stadester_rural_${year}.png`);
@@ -354,7 +358,8 @@
                 let zc = m_json.regions[r_keys[y]];
                 let col = zc.colour || zc.color;
                 if (Array.isArray(col) && col.length >= 3) {
-                  col_map.set(`${col[0]},${col[1]},${col[2]}`, zones.length);
+                  let rgb_int = ((col[0] & 255) << 16) | ((col[1] & 255) << 8) | (col[2] & 255);
+                  col_map.set(rgb_int, zones.length);
                   zones.push({ domain: zc.domain || null, key: r_keys[y], pixels: [] });
                 }
               }
@@ -366,7 +371,7 @@
                 if (m_png.data[p4 + 3] === 0) continue;
                 let r = m_png.data[p4], g = m_png.data[p4 + 1], b = m_png.data[p4 + 2];
                 if ((r | g | b) === 0) continue;
-                let z_idx = col_map.get(`${r},${g},${b}`);
+                let z_idx = col_map.get((r << 16) | (g << 8) | b);
 
                 if (z_idx !== undefined) {
                   zones[z_idx].pixels.push(idx);
@@ -590,7 +595,9 @@
 
 
   /**
-   * Returns a GPU-ready compact Int32Array mask ID grid (`-1` for unmasked) for a given year.
+   * Returns a compact Int32Array mask ID grid (`-1` for unmasked) for a given year,
+   * cached by active Viscount epoch-stamp signature (0 ms on repeated years in the same epoch)
+   * and computed directly in integer space using native C++ coastal fringe expansion.
    * @alias population_Stadester_rasters.getCompactArealMaskMapping
    *
    * @param {number} arg0_year
@@ -603,38 +610,223 @@
     let year = parseInt(arg0_year);
     let options = (arg1_options) ? arg1_options : {};
 
-    //Guard clause
-    if (!options.pixel_to_geocode && !options.viscount_config_dir && !options.project_root &&
-      global._cached_stadester_compact_mask && global._cached_stadester_compact_mask.year === year)
+    //Guard clause: custom string map override
+    if (options.pixel_to_geocode) {
+      let pixel_to_mask = options.pixel_to_geocode;
+      let id_grid = new Int32Array(pixel_to_mask.length);
+      let label_to_id = new Map();
+      let labels = [];
+
+      for (let i = 0; i < pixel_to_mask.length; i++) {
+        let lbl = pixel_to_mask[i];
+        if (!lbl) { id_grid[i] = -1; continue; }
+        let mid = label_to_id.get(lbl);
+        if (mid === undefined) {
+          mid = labels.length;
+          label_to_id.set(lbl, mid);
+          labels.push(lbl);
+        }
+        id_grid[i] = mid;
+      }
+
+      //Return statement
+      return { id_grid: id_grid, labels: labels, num_masks: Math.max(1, labels.length), year: year };
+    }
+
+    let use_global_cache = (!options.viscount_config_dir && !options.project_root);
+    if (use_global_cache && global._cached_stadester_compact_mask && global._cached_stadester_compact_mask.year === year)
       return global._cached_stadester_compact_mask;
 
-    //Declare local instance variables
-    let pixel_to_mask = (options.pixel_to_geocode) ?
-      options.pixel_to_geocode : population_Stadester_rasters.getPixelToArealMaskMapping(year, options);
-    if (!pixel_to_mask) return null;
+    //Ensure Viscount projects & base ISO3 geocode mapping are initialised once
+    let pixel_to_geocode = population_Stadester_rasters.getPixelToGeocodeMapping();
+    if (!pixel_to_geocode) return null;
 
-    let id_grid = new Int32Array(pixel_to_mask.length);
-    let label_to_id = new Map();
-    let labels = [];
+    if (!global._cached_stadester_base_compact_geo) {
+      let base_ids = new Int32Array(pixel_to_geocode.length);
+      let base_map = new Map();
+      let base_labels = [];
 
-    for (let i = 0; i < pixel_to_mask.length; i++) {
-      let lbl = pixel_to_mask[i];
-      if (!lbl) {
-        id_grid[i] = -1;
-        continue;
+      for (let i = 0; i < pixel_to_geocode.length; i++) {
+        let lbl = pixel_to_geocode[i];
+        if (!lbl) { base_ids[i] = -1; continue; }
+        let mid = base_map.get(lbl);
+        if (mid === undefined) {
+          mid = base_labels.length;
+          base_map.set(lbl, mid);
+          base_labels.push(lbl);
+        }
+        base_ids[i] = mid;
       }
+      global._cached_stadester_base_compact_geo = {
+        id_grid: base_ids,
+        label_to_id: base_map,
+        labels: base_labels
+      };
+    }
+
+    if (!global._cached_stadester_viscount_masks || !use_global_cache) {
+      //Warm project mask descriptors once via existing loader, then release the redundant 9,33M string map to save V8 heap
+      population_Stadester_rasters.getPixelToArealMaskMapping(year, options);
+      if (use_global_cache) {
+        global._cached_stadester_areal_mask_map = null;
+        global._cached_stadester_areal_mask_year = null;
+      }
+    }
+
+    let base_geo = global._cached_stadester_base_compact_geo;
+    let projects = global._cached_stadester_viscount_masks;
+    if (!projects || projects.length === 0) {
+      let base_res = { id_grid: base_geo.id_grid, labels: base_geo.labels, num_masks: Math.max(1, base_geo.labels.length), year: year };
+      if (use_global_cache) global._cached_stadester_compact_mask = base_res;
+      return base_res;
+    }
+
+    //Collect active Viscount stamps & build canonical epoch signature
+    let active_stamps = [];
+    let sig_parts = [];
+
+    for (let i = 0; i < projects.length; i++) {
+      let entries = [];
+      let proj = projects[i];
+
+      if (proj.pipeline_mode === "polaris_russia_delegate") {
+        if (proj.macro_entry && year <= 1900) entries.push(proj.macro_entry);
+        for (let x = 0; x < proj.specialist_entries.length; x++) {
+          let sp = proj.specialist_entries[x];
+          if (!sp.domain || (year >= sp.domain[0] && year <= sp.domain[1])) entries.push(sp);
+        }
+        if (year >= 1400) {
+          for (let x = 0; x < proj.national_epoch_entries.length; x++) {
+            let ne = proj.national_epoch_entries[x];
+            if (!ne.domain || (year >= ne.domain[0] && year <= ne.domain[1])) entries.push(ne);
+          }
+        }
+      } else {
+        let groups = [
+          proj.macro_entry ? [proj.macro_entry] : [],
+          proj.specialist_entries || [],
+          proj.national_epoch_entries || []
+        ];
+        for (let g = 0; g < groups.length; g++) {
+          for (let x = 0; x < groups[g].length; x++) {
+            let entry = groups[g][x];
+            if (!entry.domain || (year >= entry.domain[0] && year <= entry.domain[1]))
+              entries.push(entry);
+          }
+        }
+      }
+
+      for (let x = 0; x < entries.length; x++) {
+        let entry = entries[x];
+        for (let y = 0; y < entry.zones.length; y++) {
+          let zone = entry.zones[y];
+          if (zone.pixels.length === 0) continue;
+          if (zone.domain && (year < zone.domain[0] || year > zone.domain[1])) continue;
+          let lbl = `V:${proj.key}:${entry.id}:${zone.key}`;
+          active_stamps.push({ label: lbl, pixels: zone.pixels });
+          sig_parts.push(lbl);
+        }
+      }
+    }
+
+    let epoch_sig = sig_parts.join("|");
+    if (use_global_cache) {
+      if (!global._cached_stadester_compact_by_sig)
+        global._cached_stadester_compact_by_sig = new Map();
+      let sig_hit = global._cached_stadester_compact_by_sig.get(epoch_sig);
+      if (sig_hit) {
+        let wrapped = { id_grid: sig_hit.id_grid, labels: sig_hit.labels, num_masks: sig_hit.num_masks, year: year };
+        global._cached_stadester_compact_mask = wrapped;
+        return wrapped;
+      }
+    }
+
+    if (active_stamps.length === 0) {
+      let base_res = { id_grid: base_geo.id_grid, labels: base_geo.labels, num_masks: Math.max(1, base_geo.labels.length), year: year };
+      if (use_global_cache) {
+        global._cached_stadester_compact_by_sig.set(epoch_sig, base_res);
+        global._cached_stadester_compact_mask = base_res;
+      }
+      return base_res;
+    }
+
+    let height = 2160;
+    let width = 4320;
+    let n_pixels = width*height;
+    let id_grid = base_geo.id_grid.slice();
+    let is_viscount_px = new Uint8Array(n_pixels);
+    let label_to_id = new Map(base_geo.label_to_id);
+    let labels = base_geo.labels.slice();
+    let raw_land_mask = global._cached_stadester_raw_land_mask || null;
+    let stamped_any = false;
+
+    for (let i = 0; i < active_stamps.length; i++) {
+      let lbl = active_stamps[i].label;
+      let px_arr = active_stamps[i].pixels;
       let mid = label_to_id.get(lbl);
       if (mid === undefined) {
         mid = labels.length;
         label_to_id.set(lbl, mid);
         labels.push(lbl);
       }
-      id_grid[i] = mid;
+
+      for (let x = 0; x < px_arr.length; x++) {
+        let idx = px_arr[x];
+        id_grid[idx] = mid;
+        is_viscount_px[idx] = 1;
+        stamped_any = true;
+      }
+    }
+
+    if (stamped_any) {
+      let used_native = (global.GeoPNG && GeoPNG.native && GeoPNG.native.isAvailable()) ?
+        GeoPNG.native.expandMaskFringeI32(id_grid, is_viscount_px, raw_land_mask, width, height) : false;
+
+      if (!used_native) {
+        let best_dist_sq = new Uint8Array(n_pixels).fill(255);
+        for (let i = 0; i < height; i++) {
+          let row_offset = i*width;
+          for (let x = 0; x < width; x++) {
+            let idx = row_offset + x;
+            if (is_viscount_px[idx] === 0) continue;
+            let left_v = is_viscount_px[row_offset + ((x + width - 1) % width)];
+            let right_v = is_viscount_px[row_offset + ((x + 1) % width)];
+            let up_v = (i > 0) ? is_viscount_px[idx - width] : 1;
+            let down_v = (i < height - 1) ? is_viscount_px[idx + width] : 1;
+            if (left_v && right_v && up_v && down_v) continue;
+            let mid = id_grid[idx];
+
+            for (let y = -2; y <= 2; y++) {
+              let ny = i + y;
+              if (ny < 0 || ny >= height) continue;
+              let n_row = ny*width;
+              for (let z = -2; z <= 2; z++) {
+                if (y === 0 && z === 0) continue;
+                let nx = (x + z + width) % width;
+                let n_idx = n_row + nx;
+                if (is_viscount_px[n_idx] === 0 && (!raw_land_mask || raw_land_mask[n_idx] === 0)) {
+                  let dist_sq = y*y + z*z;
+                  if (dist_sq < best_dist_sq[n_idx]) {
+                    best_dist_sq[n_idx] = dist_sq;
+                    id_grid[n_idx] = mid;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
 
     let compact = { id_grid: id_grid, labels: labels, num_masks: Math.max(1, labels.length), year: year };
-    if (!options.pixel_to_geocode && !options.viscount_config_dir && !options.project_root)
+    if (use_global_cache) {
+      if (global._cached_stadester_compact_by_sig.size >= 16) {
+        let oldest = global._cached_stadester_compact_by_sig.keys().next().value;
+        global._cached_stadester_compact_by_sig.delete(oldest);
+      }
+      global._cached_stadester_compact_by_sig.set(epoch_sig, compact);
       global._cached_stadester_compact_mask = compact;
+    }
 
     //Return statement
     return compact;
@@ -764,8 +956,9 @@
     let pop_file_path = path.join(options.input_popc_folder || `${h2}/population_Stadester/stadester_population_rasters/`, `stadester_population_${year}.png`);
     let pop_raster = null;
 
-    //GPU-accelerated direct BE-RGBA density calculation on NVIDIA OpenCL
-    if (options.use_gpu !== false && fs.existsSync(pop_file_path) && fs.existsSync(landarea_file) && GeoPNG.gpu && GeoPNG.gpu.isAvailable() && typeof GeoPNG.loadRawRGBAAsync === "function") {
+    //Native C++20 / OpenCL GPU direct BE-RGBA density calculation
+    let has_fast_accel = (options.use_gpu !== false && GeoPNG.gpu && ((GeoPNG.native && GeoPNG.native.isAvailable()) || GeoPNG.gpu.isAvailable()) && typeof GeoPNG.loadRawRGBAAsync === "function");
+    if (has_fast_accel && fs.existsSync(pop_file_path) && fs.existsSync(landarea_file)) {
       if (!global._cached_landarea_raw_rgba || global._cached_landarea_raw_path !== landarea_file) {
         global._cached_landarea_raw_rgba = await GeoPNG.loadRawRGBAAsync(landarea_file);
         global._cached_landarea_raw_path = landarea_file;
@@ -784,7 +977,7 @@
             height: pop_raw.height,
             width: pop_raw.width
           });
-          console.log(`- Saved Stadestér Density raster for ${year} [GPU]: ${output_file_path}`);
+          console.log(`- Saved Stadestér Density raster for ${year} [Accel]: ${output_file_path}`);
 
           //Return statement
           return output_file_path;
@@ -850,18 +1043,20 @@
     let intermediate_popd = options.intermediate_popd_folder || `${h2}/population_Stadester/stadester_density_rasters/`;
     let landarea_file = (typeof metadata_HYDE !== "undefined" && metadata_HYDE.input_raster_land_area) ?
       metadata_HYDE.input_raster_land_area : `${h1}/metadata_HYDE/general_rasters/land_area.png`;
-    let use_gpu_local = (options.use_gpu !== false && GeoPNG.gpu && GeoPNG.gpu.isAvailable());
+    let pipeline_conc = (GeoPNG.compute_limits && GeoPNG.compute_limits.cpu && GeoPNG.compute_limits.cpu.pipeline_concurrency) ?
+      Number(GeoPNG.compute_limits.cpu.pipeline_concurrency) : 4;
+    let use_accel_local = (options.use_gpu !== false && GeoPNG.gpu && ((GeoPNG.native && GeoPNG.native.isAvailable()) || GeoPNG.gpu.isAvailable()));
 
     //Function body
     if (!fs.existsSync(intermediate_popd)) fs.mkdirSync(intermediate_popd, { recursive: true });
 
     //Return statement
     return GeoPNG.processTimeseriesParallel({
-      concurrency: use_gpu_local ? 1 : Math.min(options.concurrency || default_concurrency, cfg_cap),
+      concurrency: use_accel_local ? Math.min(options.concurrency || pipeline_conc, pipeline_conc) : Math.min(options.concurrency || default_concurrency, cfg_cap),
       items: years,
-      name: use_gpu_local ? "Stadester Density Rasters [GPU]" : "Stadester Density Rasters",
-      use_workers: use_gpu_local ? false : options.use_workers,
-      task_generator: use_gpu_local ? null : ((year) => {
+      name: use_accel_local ? "Stadester Density Rasters [Accel]" : "Stadester Density Rasters",
+      use_workers: use_accel_local ? false : options.use_workers,
+      task_generator: use_accel_local ? null : ((year) => {
         let output_file_path = path.join(intermediate_popd, `stadester_density_${year}.png`);
         let pop_file_path = path.join(input_popc, `stadester_population_${year}.png`);
         if (!fs.existsSync(pop_file_path) || !fs.existsSync(landarea_file)) return null;
@@ -908,8 +1103,7 @@
     let mask_comb = {};
     let mask_scalar = {};
     let mask_sub = {};
-    let pixel_to_mask = (options.pixel_to_geocode) ?
-      options.pixel_to_geocode : population_Stadester_rasters.getPixelToArealMaskMapping(year, options);
+    let pixel_to_mask = null;
     let pop_file_path = path.join(options.input_popc_folder || `${h2}/population_Stadester/stadester_population_rasters/`, `stadester_population_${year}.png`);
     let pop_folder = path.dirname(pop_file_path);
     let raw_rural_data = new Float32Array(4320*2160);
@@ -949,8 +1143,106 @@
       base_file_path = path.join(`${h2}/population_Stadester/stadester_base_rasters/`, `stadester_base_${year}.png`);
     }
 
-    //GPU-accelerated direct BE-RGBA two-pass reconciliation on NVIDIA OpenCL
-    if (options.use_gpu !== false && !options.substrata_raster && !options.urban_raster && GeoPNG.gpu && GeoPNG.gpu.isAvailable() && typeof GeoPNG.loadRawRGBAAsync === "function") {
+    //GHS-POP / WorldPop modern era (1975-2025): preserve substrata total verbatim without Stadestér radial blob distortion
+    if (year >= 1975 && options.preserve_ghsl_total !== false) {
+      //Fast zero-alloc native C++20 direct BE-RGBA path (~7 ms vs ~120 ms JS Float64Array)
+      if (!options.substrata_raster && !options.urban_raster && options.use_gpu !== false && GeoPNG.native && GeoPNG.native.isAvailable() && typeof GeoPNG.loadRawRGBAAsync === "function") {
+        let resolved_urb_path = (base_file_path && fs.existsSync(base_file_path)) ? base_file_path : urban_file_path;
+        let [sub_raw, urb_raw] = await Promise.all([
+          fs.existsSync(substrata_file_path) ? GeoPNG.loadRawRGBAAsync(substrata_file_path) : Promise.resolve(null),
+          fs.existsSync(resolved_urb_path) ? GeoPNG.loadRawRGBAAsync(resolved_urb_path) : Promise.resolve(null)
+        ]);
+        if (!global._cached_stadester_zero_rgba || global._cached_stadester_zero_rgba.byteLength !== total_pixels*4)
+          global._cached_stadester_zero_rgba = Buffer.alloc(total_pixels*4, 0);
+        let substrata_rgba = (sub_raw && sub_raw.data) ? sub_raw.data : global._cached_stadester_zero_rgba;
+        let urban_rgba = (urb_raw && urb_raw.data) ? urb_raw.data : global._cached_stadester_zero_rgba;
+        let ghsl_res = GeoPNG.native.reconcileGHSLModernRGBA(substrata_rgba, urban_rgba);
+
+        if (ghsl_res) {
+          await Promise.all([
+            GeoPNG.saveRawRGBAAsync({ data: ghsl_res.rural_rgba, file_path: rural_file_path, height: 2160, width: 4320 }),
+            GeoPNG.saveRawRGBAAsync({ data: ghsl_res.total_rgba, file_path: pop_file_path, height: 2160, width: 4320 }),
+            GeoPNG.saveRawRGBAAsync({ data: ghsl_res.urban_rgba, file_path: urban_file_path, height: 2160, width: 4320 })
+          ]);
+          ghsl_res = null;
+          console.log(`- Saved GHSL-preserved Stadestér Urban, Rural & Pop rasters for ${year} [Accel]: Total=${pop_file_path}`);
+
+          //Return statement
+          return { pop_file_path: pop_file_path, rural_file_path: rural_file_path, urban_file_path: urban_file_path };
+        }
+      }
+
+      if (options.substrata_raster) {
+        substrata_raster = options.substrata_raster;
+      } else if (fs.existsSync(substrata_file_path)) {
+        substrata_raster = await GeoPNG.loadNumberRasterImageAsync(substrata_file_path, { format: "float32" });
+      }
+
+      if (options.urban_raster) {
+        urban_raster = options.urban_raster;
+      } else if (base_file_path && fs.existsSync(base_file_path)) {
+        urban_raster = await GeoPNG.loadNumberRasterImageAsync(base_file_path, { format: "float32" });
+      } else if (fs.existsSync(urban_file_path)) {
+        urban_raster = await GeoPNG.loadNumberRasterImageAsync(urban_file_path, { format: "float32" });
+      }
+
+      for (let i = 0; i < total_pixels; i++) {
+        let s = (substrata_raster && substrata_raster.data[i]) ? substrata_raster.data[i] : 0;
+        let tot = (s >= 1e-6) ? s : 0;
+        let u_raw = (urban_raster && urban_raster.data[i]) ? urban_raster.data[i] : 0;
+        let u_out = (u_raw >= 0.01 && tot > 0) ? Math.min(u_raw, tot) : 0;
+        if (u_out < 0.01) u_out = 0;
+        let r_out = Math.max(0, tot - u_out);
+
+        rural_data[i] = (r_out >= 1e-6) ? r_out : 0;
+        urban_data[i] = u_out;
+        total_data[i] = tot;
+      }
+
+      await Promise.all([
+        GeoPNG.saveNumberRasterImageAsync({
+          data: rural_data,
+          file_path: rural_file_path,
+          format: "float32",
+          height: 2160,
+          return_data: false,
+          width: 4320
+        }),
+        GeoPNG.saveNumberRasterImageAsync({
+          data: total_data,
+          file_path: pop_file_path,
+          format: "float32",
+          height: 2160,
+          return_data: false,
+          width: 4320
+        }),
+        GeoPNG.saveNumberRasterImageAsync({
+          data: urban_data,
+          file_path: urban_file_path,
+          format: "float32",
+          height: 2160,
+          return_data: false,
+          width: 4320
+        })
+      ]);
+
+      raw_rural_data = null;
+      raw_urban_data = null;
+      rural_data = null;
+      substrata_raster = null;
+      total_data = null;
+      urban_data = null;
+      urban_raster = null;
+
+      console.log(`- Saved GHSL-preserved Stadestér Urban, Rural & Pop rasters for ${year}: Total=${pop_file_path}`);
+
+      //Return statement
+      return { pop_file_path: pop_file_path, rural_file_path: rural_file_path, urban_file_path: urban_file_path };
+    }
+
+    //Native C++20 / OpenCL GPU direct BE-RGBA two-pass reconciliation (bypasses 9,33M string mask array)
+    let has_fast_accel = (options.use_gpu !== false && !options.substrata_raster && !options.urban_raster && GeoPNG.gpu && ((GeoPNG.native && GeoPNG.native.isAvailable()) || GeoPNG.gpu.isAvailable()) && typeof GeoPNG.loadRawRGBAAsync === "function");
+    if (has_fast_accel) {
       let compact_mask = population_Stadester_rasters.getCompactArealMaskMapping(year, options);
       let resolved_urb_path = (base_file_path && fs.existsSync(base_file_path)) ? base_file_path : urban_file_path;
       if (!fs.existsSync(resolved_urb_path)) {
@@ -962,9 +1254,10 @@
         fs.existsSync(substrata_file_path) ? GeoPNG.loadRawRGBAAsync(substrata_file_path) : Promise.resolve(null),
         fs.existsSync(resolved_urb_path) ? GeoPNG.loadRawRGBAAsync(resolved_urb_path) : Promise.resolve(null)
       ]);
-      let zero_rgba = Buffer.alloc(total_pixels*4, 0);
-      let substrata_rgba = (sub_raw && sub_raw.data) ? sub_raw.data : zero_rgba;
-      let urban_rgba = (urb_raw && urb_raw.data) ? urb_raw.data : zero_rgba;
+      if (!global._cached_stadester_zero_rgba || global._cached_stadester_zero_rgba.byteLength !== total_pixels*4)
+        global._cached_stadester_zero_rgba = Buffer.alloc(total_pixels*4, 0);
+      let substrata_rgba = (sub_raw && sub_raw.data) ? sub_raw.data : global._cached_stadester_zero_rgba;
+      let urban_rgba = (urb_raw && urb_raw.data) ? urb_raw.data : global._cached_stadester_zero_rgba;
       let mask_ids = (compact_mask && compact_mask.id_grid) ? compact_mask.id_grid : new Int32Array(total_pixels).fill(-1);
       let num_masks = (compact_mask && compact_mask.num_masks) ? compact_mask.num_masks : 1;
 
@@ -988,12 +1281,15 @@
         ]);
         gpu_res = null;
         sub_urban_data = null;
-        console.log(`- Saved reconciled Stadestér Urban, Rural & Pop rasters for ${year} [GPU]: Total=${pop_file_path}`);
+        console.log(`- Saved reconciled Stadestér Urban, Rural & Pop rasters for ${year} [Accel]: Total=${pop_file_path}`);
 
         //Return statement
         return { pop_file_path: pop_file_path, rural_file_path: rural_file_path, urban_file_path: urban_file_path };
       }
     }
+
+    pixel_to_mask = (options.pixel_to_geocode) ?
+      options.pixel_to_geocode : population_Stadester_rasters.getPixelToArealMaskMapping(year, options);
 
     if (options.substrata_raster) {
       substrata_raster = options.substrata_raster;

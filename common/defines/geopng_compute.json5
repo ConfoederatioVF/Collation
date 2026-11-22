@@ -1,37 +1,44 @@
 {
-  //GeoPNG & Raster Pipeline Resource Constraints (CPU, GPU, RAM)
-  //Prevents background geospatial pipelines from starving desktop/Electron FPS or over-allocating VRAM/RAM.
+  //GeoPNG & Raster Pipeline Resource Constraints (CPU, GPU, Native, RAM)
+  //Prevents background geospatial pipelines from starving desktop/Electron FPS or over-allocating VRAM/RAM,
+  //while maximising pipelined throughput on multi-core + NVIDIA WDDM workstations.
 
   cpu: {
-    //Yield between raster items (ms) to keep desktop compositor & Electron event loop smooth
-    cooperative_yield_ms: 4,
+    //Cooperative event-loop yield interval in ms (0 uses setImmediate without 15,6 ms Windows timer stall)
+    cooperative_yield_ms: 0,
 
     //Cap background worker_threads / child processes so CPU never hits 100% across all cores
     max_workers: 4,
 
-    //Drop Node worker process scheduling priority to BELOW_NORMAL when running background pipelines
+    //Bounded async I/O + codec pipeline depth (overlaps USB HDD reads, native sharp decode/encode & compute)
+    pipeline_concurrency: 4,
+
+    //Drop Node & native worker thread scheduling priority to BELOW_NORMAL when running background pipelines
     priority_below_normal: true,
 
-    //Cap libvips/sharp native PNG codec threads so native I/O stays fast without CPU saturation
+    //Cap libvips/sharp native PNG codec threads per job (4 parallel jobs x 2 threads = 8 threads total)
     sharp_concurrency: 2
   },
 
   gpu: {
-    //Enable NVIDIA / OpenCL GPU acceleration for GeoPNG raster maths
+    //Enable NVIDIA / OpenCL GPU acceleration for compute-heavy GeoPNG & Viscount kriging workloads
     enabled: true,
 
-    //Maximum pixels per single GPU kernel wave (4320x2160 / 4 = 2.332.800 px = 25% of frame per wave)
-    //Wave-slicing prevents WDDM GPU preemption stalls and keeps desktop FPS locked at 60+ FPS.
-    max_dispatch_pixels: 2332800,
+    //WDDM frame-budget governor: max cumulative GPU compute ms allowed inside a 16,67 ms (60 Hz) frame window
+    //before yielding to Desktop Window Manager (DWM), guaranteeing zero FPS lag across dual 4K monitors.
+    frame_budget_ms: 6,
+
+    //Maximum pixels per single GPU kernel wave (dynamically adapted to stay <= 5 ms/wave)
+    max_dispatch_pixels: 4665600,
 
     //Maximum VRAM pool & active GPU allocation ceiling in MiB (RTX 4080 SUPER has 16.376 MiB; 2.048 MiB = 12,5% cap)
     max_vram_mb: 2048,
 
-    //Minimum pixel count required to offload to GPU (tiny rasters stay on fast typed-array CPU)
+    //Minimum pixel count required to offload to GPU
     min_pixels: 65536,
 
-    //Inter-wave / inter-job micro-pacing in ms to cap GPU duty cycle for desktop/display responsiveness
-    pacing_ms: 2,
+    //Only yield via setTimeout when cumulative GPU burst exceeds frame_budget_ms (avoids 15,7 ms Windows timer penalty)
+    pacing_ms: 0,
 
     //Preferred OpenCL GPU platform vendor substring
     preferred_vendor: "NVIDIA",
@@ -41,14 +48,25 @@
   },
 
   io: {
-    //Lossless PNG compression level for sharp (1 = ~65 ms/4K frame vs ~500 ms for pngjs filter -1)
+    //Lossless PNG compression level for sharp (1 = ~23 ms/4K frame pipelined vs ~155 ms for pngjs)
     png_compression_level: 1,
 
-    //Fallback pngjs filterType (0 = None, ~115 ms vs ~500 ms for -1)
+    //Fallback pngjs filterType (0 = None)
     png_filter_type: 0,
 
     //Use native sharp (libvips/libpng) for fast lossless RGBA PNG decode/encode when available
     use_sharp: true
+  },
+
+  native: {
+    //Enable native C++20 AVX2 BelowNormal thread-pool accelerator for bandwidth-bound raster & parser ops
+    enabled: true,
+
+    //Enable Win32 Job Object (JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE) to prevent orphaned child/worker processes
+    enforce_job_object: true,
+
+    //Number of BelowNormal C++ worker threads (8 of 32 logical threads on i9-14900F; leaves 24 threads for OS/DWM/IDE)
+    max_threads: 8
   },
 
   ram: {
@@ -56,6 +74,6 @@
     max_cached_rasters: 8,
 
     //Soft RSS memory ceiling in MiB; exceeding triggers buffer pool eviction & optional GC
-    max_ram_mb: 4096
+    max_ram_mb: 6144
   }
 }

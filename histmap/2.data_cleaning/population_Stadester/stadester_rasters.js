@@ -989,8 +989,9 @@
     
     if (!fs.existsSync(urban_folder)) fs.mkdirSync(urban_folder, { recursive: true });
 
-    //GPU-accelerated direct BE-RGBA threshold clamp on NVIDIA OpenCL
-    if (!options.base_raster && options.use_gpu !== false && fs.existsSync(base_file_path) && GeoPNG.gpu && GeoPNG.gpu.isAvailable() && typeof GeoPNG.loadRawRGBAAsync === "function") {
+    //Native C++20 / OpenCL GPU direct BE-RGBA threshold clamp
+    let has_fast_accel = (options.use_gpu !== false && GeoPNG.gpu && ((GeoPNG.native && GeoPNG.native.isAvailable()) || GeoPNG.gpu.isAvailable()) && typeof GeoPNG.loadRawRGBAAsync === "function");
+    if (!options.base_raster && has_fast_accel && fs.existsSync(base_file_path)) {
       let raw_base = await GeoPNG.loadRawRGBAAsync(base_file_path);
       if (raw_base && raw_base.data) {
         let clamped_rgba = await GeoPNG.gpu.thresholdClampRGBA(raw_base.data, 0.01);
@@ -1001,7 +1002,7 @@
             height: raw_base.height,
             width: raw_base.width
           });
-          console.log(`- Saved Stadestér Urban raster for ${year} [GPU]: ${output_file_path}`);
+          console.log(`- Saved Stadestér Urban raster for ${year} [Accel]: ${output_file_path}`);
           
           //Return statement
           return output_file_path;
@@ -1074,17 +1075,25 @@
     let options = (arg1_options) ? arg1_options : {};
     
     //Declare local instance variables
-    let cfg_cap = (GeoPNG.compute_limits && GeoPNG.compute_limits.cpu && GeoPNG.compute_limits.cpu.max_workers) ?
-      Number(GeoPNG.compute_limits.cpu.max_workers) : 4;
+    let cfg_cap = (GeoPNG.compute_limits && GeoPNG.compute_limits.cpu && GeoPNG.compute_limits.cpu.pipeline_concurrency) ?
+      Number(GeoPNG.compute_limits.cpu.pipeline_concurrency) :
+      ((GeoPNG.compute_limits && GeoPNG.compute_limits.cpu && GeoPNG.compute_limits.cpu.max_workers) ?
+        Number(GeoPNG.compute_limits.cpu.max_workers) : 4);
     let default_concurrency = (typeof require !== "undefined") ? Math.min(cfg_cap, require("os").cpus().length || 4) : 4;
+    //Default to in-process pipelining so the 4,3 GB Stadestér shards are read ONCE into RAM rather than 4x across worker processes
+    let use_workers = (options.use_workers !== undefined) ? Boolean(options.use_workers) : false;
     let worker_options = population_Stadester_rasters.buildWorkerOptions(options);
+    
+    if (!use_workers)
+      population_Stadester_rasters.loadStadesterUrbanList(options);
     
     //Return statement
     return GeoPNG.processTimeseriesParallel({
       concurrency: Math.min(options.concurrency || default_concurrency, cfg_cap),
       items: years,
-      name: "Stadester Base Rasters",
-      task_generator: (year) => {
+      name: use_workers ? "Stadester Base Rasters [Workers]" : "Stadester Base Rasters [Pipelined]",
+      use_workers: use_workers,
+      task_generator: use_workers ? ((year) => {
         if (year < -10000) {
           let base_folder = options.intermediate_base_folder || `${h2}/population_Stadester/stadester_base_rasters/`;
           let output_file_path = path.join(base_folder, `stadester_base_${year}.png`);
@@ -1101,7 +1110,7 @@
           options: worker_options,
           year: year
         };
-      },
+      }) : null,
       handler: async (year) => population_Stadester_rasters.generateStadesterBaseRaster(year, options)
     });
   };
@@ -1115,16 +1124,18 @@
     let cfg_cap = (GeoPNG.compute_limits && GeoPNG.compute_limits.cpu && GeoPNG.compute_limits.cpu.max_workers) ?
       Number(GeoPNG.compute_limits.cpu.max_workers) : 4;
     let default_concurrency = (typeof require !== "undefined") ? Math.min(cfg_cap, require("os").cpus().length || 4) : 4;
-    let use_gpu_local = (options.use_gpu !== false && GeoPNG.gpu && GeoPNG.gpu.isAvailable());
+    let pipeline_conc = (GeoPNG.compute_limits && GeoPNG.compute_limits.cpu && GeoPNG.compute_limits.cpu.pipeline_concurrency) ?
+      Number(GeoPNG.compute_limits.cpu.pipeline_concurrency) : 4;
+    let use_accel_local = (options.use_gpu !== false && GeoPNG.gpu && ((GeoPNG.native && GeoPNG.native.isAvailable()) || GeoPNG.gpu.isAvailable()));
     let worker_options = population_Stadester_rasters.buildWorkerOptions(options);
     
     //Return statement
     return GeoPNG.processTimeseriesParallel({
-      concurrency: use_gpu_local ? 1 : Math.min(options.concurrency || default_concurrency, cfg_cap),
+      concurrency: use_accel_local ? Math.min(options.concurrency || pipeline_conc, pipeline_conc) : Math.min(options.concurrency || default_concurrency, cfg_cap),
       items: years,
-      name: use_gpu_local ? "Stadester Urban Rasters [GPU]" : "Stadester Urban Rasters",
-      use_workers: use_gpu_local ? false : options.use_workers,
-      task_generator: use_gpu_local ? null : ((year) => {
+      name: use_accel_local ? "Stadester Urban Rasters [Accel]" : "Stadester Urban Rasters",
+      use_workers: use_accel_local ? false : options.use_workers,
+      task_generator: use_accel_local ? null : ((year) => {
         if (year < -10000) {
           let urban_folder = options.input_urbc_folder || `${h2}/population_Stadester/stadester_urban_rasters/`;
           let output_file_path = path.join(urban_folder, `stadester_urban_${year}.png`);

@@ -176,10 +176,15 @@ PERSIANATE_POST1206_RE = re.compile(
   r"(?:abad\b|ganj\b|sarai\b|bazar\b|bazaar\b|shahar\b|shahr\b|qila\b|qala\b|"
   r"^(?:shah|sultan|firoz|feroz|fateh|fath|sikandar|ahmad|ahmed|aurang|akbar|jahangir|"
   r"muzaffar|nawab|murshid|islam|basti|chak|dera|tando|mirpur|khanpur|alipur|husain|hussain|"
-  r"hasan|hassan|muhammad|mohammad|mohammed|nizam|haji|pir|sheikh|shaikh|saiyid|syed|begum|"
+  r"hasan|hassan|muhammad|mohammad|mohammed|nizam|haji|pir|sheikh|shaikh|saiyid|syed|said|begum|"
   r"ghazi|karim|rahim|farid|jafar|qasim|aziz|ismail|ibrahim|usman|umar|farrukh|bahadur|dilawar|"
   r"shujabad|wazir|khairpur|nasir|habib|jalal|jamal|kamal|latif|majid|malik|mansur|rasul|sadiq|"
-  r"safdar|salim|sher|taqi|zahid)\b)",
+  r"safdar|salim|sher|taqi|zahid|daulat|mahmud|mehmood|mahmood|mehrab|shahdad|afzal|anwar|aslam|"
+  r"burhan|faisal|fazil|haider|hyder|imtiaz|iqbal|jahanzeb|khalil|liaqat|masood|mazhar|mian|"
+  r"mubarak|murtaza|mustafa|naeem|nasrullah|nawaz|qadir|qutb|qutub|rafiq|rashid|razzaq|rizwan|"
+  r"saeed|sajjad|sardar|shabbir|shafiq|shakir|shams|sharif|shaukat|sohail|tariq|waheed|yaqoob|"
+  r"yusuf|yousuf|zafar|zakir|zaman|zulfiqar)(?:\b|pur|pura|puram|puri|nagar|garh|gadh|kot|kota|"
+  r"gaon|gam|khera|kheda|sar|wada|wadi|peth|pet|ganj|abad|bagh|bazar|sarai|shahar|shahr|chak|dih))",
   flags=re.I
 )
 
@@ -193,16 +198,35 @@ COLONIAL_MODERN_RE = re.compile(
   flags=re.I
 )
 
-# Classical / pre-modern South Asian settlement suffixes attested across Indo-Aryan, Dravidian, Sinhala & Tibeto-Burman
+# Classical / pre-modern South Asian settlement suffixes attested across Indo-Aryan, Dravidian (incl. Deccan Kannada/Telugu/Marathi/Konkani), Sinhala & Tibeto-Burman
 ANCIENT_TRAD_MORPH_RE = re.compile(
-  r"(?:pur\b|pura\b|puram\b|puri\b|nagar\b|nagari\b|garh\b|gadh\b|kot\b|kota\b|kotta\b|kottai\b|"
-  r"durg\b|durga\b|palli\b|palle\b|pallem\b|patti\b|ur\b|uru\b|oor\b|gram\b|grama\b|gaon\b|gam\b|"
-  r"gama\b|khera\b|kheda\b|patna\b|pattana\b|pattinam\b|mangalam\b|mangal\b|kudi\b|vada\b|wada\b|"
-  r"wadi\b|vadi\b|sthan\b|tirtha\b|kshetra\b|palayam\b|nadu\b|cheri\b|kulam\b|wewa\b|giri\b|"
+  r"(?:pur\b|pura\b|puram\b|puri\b|nagar\b|nagari\b|garh\b|gadh\b|gad\b|ghar\b|kot\b|kota\b|kotta\b|kottai\b|kote\b|kotte\b|"
+  r"durg\b|durga\b|palli\b|palle\b|pally\b|pallem\b|patti\b|hatti\b|ur\b|uru\b|oor\b|gram\b|grama\b|gaon\b|gav\b|gam\b|"
+  r"gama\b|khera\b|kheda\b|khed\b|patna\b|pattana\b|pattinam\b|patnam\b|mangalam\b|mangal\b|kudi\b|vada\b|wada\b|wad\b|"
+  r"wadi\b|vadi\b|pada\b|sthan\b|tirtha\b|kshetra\b|palayam\b|palya\b|nadu\b|cheri\b|kulam\b|wewa\b|giri\b|"
   r"parvat\b|kund\b|kunda\b|sagar\b|tal\b|tala\b|toli\b|dih\b|dihi\b|dheri\b|tilla\b|ther\b|"
-  r"mound\b|dzong\b|thang\b|tar\b|besi\b|bhanjyang\b|pokhari\b)",
+  r"halli\b|koppa\b|koppal\b|kere\b|geri\b|gere\b|gudda\b|gutta\b|gal\b|kal\b|sandra\b|samudra\b|katte\b|katti\b|"
+  r"balli\b|valli\b|hole\b|nala\b|gola\b|konda\b|cherla\b|cheruvu\b|padu\b|pad\b|pudi\b|mudi\b|gudi\b|guda\b|gudem\b|"
+  r"varam\b|lanka\b|vaka\b|madugu\b|kuru\b|turu\b|nuru\b|duru\b|paka\b|bada\b|badi\b|metta\b|pet\b|peta\b|peth\b|"
+  r"oli\b|ali\b|avli\b|avali\b|ner\b|ghat\b|sar\b|sal\b|mound\b|dzong\b|thang\b|tar\b|besi\b|bhanjyang\b|pokhari\b)",
   flags=re.I
 )
+
+# Verified coordinate overrides preventing GeoNames village-homonym collisions for major South Asian towns
+EXACT_COORD_OVERRIDES = {
+  ("jhang", "Pakistan"): (31.26806, 72.31806),
+  ("narasapur", "India"): (16.434, 81.698),
+  ("nipani", "India"): (16.399, 74.383),
+  ("bhadrachalam", "India"): (17.668, 80.889),
+  ("kalka", "India"): (30.840, 76.941),
+  ("bagaha", "India"): (27.099, 84.090),
+  ("ballia", "India"): (25.760, 84.149),
+}
+
+# Non-settlement tribal/dynastic or homonym-poisoning GeoNames entries to drop
+HARD_DROP_NAMES = {
+  "durrani",
+}
 
 PRECOLONIAL_MARKET_MORPH_RE = re.compile(
   r"(?:abad\b|ganj\b|bazar\b|bazaar\b|hat\b|haat\b|mandi\b|pet\b|peth\b|pettai\b|sarai\b|"
@@ -527,26 +551,28 @@ def load_geonames_all():
             })
 
       if cc == "IN" and fclass == "P":
-        rec = (lat, lon, pop, adm1_code, ascii_nm, alts)
+        fcode_rank = 2 if fcode in ("PPLC", "PPLA", "PPLA2") else (1 if fcode in ("PPLA3", "PPLA4") else 0)
+        rec = (lat, lon, pop, adm1_code, ascii_nm, alts, fcode_rank, len(raw_alts))
         for cand in [ascii_nm, name] + raw_alts[:4]:
           nk = norm_key(cand)
           if nk:
             if adm1_code:
               in_lookup_state[(nk, adm1_code)].append(rec)
-            if pop > 0 or len(in_lookup_name[nk]) < 6:
+            if pop > 0 or fcode_rank > 0 or len(in_lookup_name[nk]) < 6:
               in_lookup_name[nk].append(rec)
       elif cc == "PK" and fclass == "P":
-        rec = (lat, lon, pop, adm1_code, ascii_nm, alts)
+        fcode_rank = 2 if fcode in ("PPLC", "PPLA", "PPLA2") else (1 if fcode in ("PPLA3", "PPLA4") else 0)
+        rec = (lat, lon, pop, adm1_code, ascii_nm, alts, fcode_rank, len(raw_alts))
         for cand in [ascii_nm, name] + raw_alts[:4]:
           nk = norm_key(cand)
-          if nk and (pop > 0 or len(pk_lookup_name[nk]) < 6):
+          if nk and (pop > 0 or fcode_rank > 0 or len(pk_lookup_name[nk]) < 6):
             pk_lookup_name[nk].append(rec)
     geo_by_cc[cc] = places
     print(f"  GeoNames {cc} ({cname}): {len(places):,} populated places & historic market nodes indexed", flush=True)
 
   for d in (in_lookup_state, in_lookup_name, pk_lookup_name):
     for k in d:
-      d[k].sort(key=lambda x: x[2], reverse=True)
+      d[k].sort(key=lambda x: (1 if x[2] > 0 else 0, x[6], x[2], x[7]), reverse=True)
   return geo_by_cc, in_lookup_state, in_lookup_name, pk_lookup_name, gn_alt_grid
 
 
@@ -972,7 +998,18 @@ def build_modern_master_pool(geo_by_cc, a04_towns, wd_by_country, sov_polys, in_
   dedup_by_country = {}
   for cname, items in pool_by_country.items():
     sov_p = sov_polys.get(cname)
-    valid_items = [it for it in items if sov_p is None or sov_p.contains(Point(it["lon"], it["lat"]))]
+    valid_items = []
+    for it in items:
+      nk_chk = norm_key(it["name"])
+      if nk_chk in HARD_DROP_NAMES:
+        continue
+      ov = EXACT_COORD_OVERRIDES.get((nk_chk, cname))
+      if ov and max(it["pops"].values()) >= 25000:
+        it["lat"], it["lon"] = ov[0], ov[1]
+      if nk_chk == "jhang" and cname == "Pakistan" and haversine_km(it["lat"], it["lon"], 31.26806, 72.31806) > 80.0:
+        continue
+      if sov_p is None or sov_p.contains(Point(it["lon"], it["lat"])):
+        valid_items.append(it)
     valid_items.sort(key=lambda x: (x["prio"], -max(x["pops"].values())))
 
     kept = []
@@ -1492,32 +1529,31 @@ def is_eligible_for_historical_epoch(arg0_it, arg1_dom_start, arg2_dom_end):
       return True
     return False
 
-  # 3. Early Mediaeval Tripartite / Imperial Chola / Pala-Sena / Rajput / Polonnaruwa (750-1206)
+  # 3. Early Mediaeval Tripartite / Rashtrakuta-Chalukya-Kakatiya-Yadava-Hoysala / Imperial Chola / Pala-Sena / Rajput (750-1206)
   if arg2_dom_end >= 750:
     if PERSIANATE_POST1206_RE.search(nm):
       return False
     if att_yr is not None and att_yr <= arg2_dom_end:
       return True
-    if tier in ("official_town", "subdistrict_hq") and p1901 >= 1200:
+    if tier in ("official_town", "subdistrict_hq", "geonames_town"):
       return True
-    if ANCIENT_TRAD_MORPH_RE.search(nm) and p1901 >= 800:
+    if ANCIENT_TRAD_MORPH_RE.search(nm) or p1901 >= 900:
       return True
     return False
 
-  # 4. Classical Gupta / Vakataka / Sangam / Maurya / Mahajanapadas (-600..750)
+  # 4. Classical Satavahana / Vakataka / Gupta / Sangam / Maurya / Mahajanapadas (-600..750)
   if arg2_dom_end >= -600:
     if PERSIANATE_POST1206_RE.search(nm):
       return False
     if att_yr is not None and att_yr <= arg2_dom_end:
       return True
-    # Require either classical South Asian toponymy + historic seat tier or major pre-modern continuity
-    if ANCIENT_TRAD_MORPH_RE.search(nm) and (tier in ("official_town", "subdistrict_hq", "geonames_town") or p1901 >= 900):
+    if tier in ("official_town", "subdistrict_hq", "geonames_town"):
       return True
-    if tier in ("official_town", "subdistrict_hq") and p1901 >= 1800:
+    if ANCIENT_TRAD_MORPH_RE.search(nm) and p1901 >= 750:
       return True
     return False
 
-  # 5. Bronze Age / Indus Valley / Vedic (-10000..-600): prehistoric/alluvial seats with archaic morphology
+  # 5. Bronze Age / Indus Valley / Vedic / Deccan Chalcolithic-Megalithic (-10000..-600)
   if PERSIANATE_POST1206_RE.search(nm):
     return False
   if att_yr is not None and att_yr <= arg2_dom_end:

@@ -329,7 +329,7 @@ if (!global.population_Substrata_russia && typeof require !== "undefined") {
       //Function body
       for (let i = 0; i < hyde_years.length; i++) {
         let yr = hyde_years[i];
-        let urban_valid = rus.loadUrbanValidForYear(ctx, yr);
+        let urban_valid = (yr >= 1975) ? new Float32Array(ctx.n_valid) : rus.loadUrbanValidForYear(ctx, yr);
         let mosaic_valid = rus.B_mosaicKrigedSubstrataForYear(ctx, yr, urban_valid);
         let cal_obj = rus.C_computeCalibratedFieldForYear(ctx, mosaic_valid, yr, urban_valid);
 
@@ -340,11 +340,12 @@ if (!global.population_Substrata_russia && typeof require !== "undefined") {
         zone_targets_series.push(cal_obj.zone_targets || []);
       }
 
-      //Temporal log-Laplacian smoothing with interior-pinned zone conservation (zero border cliffs)
+      //Temporal log-Laplacian smoothing with interior-pinned zone conservation (zero border cliffs); disabled for crisp GHSL >= 1975
       let temporally_smoothed = calibrated_series.map(function (arg0_arr) { return new Float32Array(arg0_arr); });
 
       for (let t = 1; t < hyde_years.length - 1; t++) {
         let yr = hyde_years[t];
+        if (yr >= 1975 || hyde_years[t + 1] >= 1975) continue;
         let prev_arr = calibrated_series[t - 1];
         let curr_arr = calibrated_series[t];
         let next_arr = calibrated_series[t + 1];
@@ -407,7 +408,8 @@ if (!global.population_Substrata_russia && typeof require !== "undefined") {
           }
         }
 
-        global.ViscountSubstrataMosaic.applyOneSidedSeamBlend(ctx, base_png.data, base_dv, options);
+        if (yr < 1975)
+          global.ViscountSubstrataMosaic.applyOneSidedSeamBlend(ctx, base_png.data, base_dv, options);
         fs.writeFileSync(dst_path, PNG.sync.write(base_png, { colorType: 6, deflateLevel: 1, filterType: 0 }));
         year_summaries[yr] = { combined: Math.round(sum_val) };
       }

@@ -372,7 +372,7 @@
 				if (NodeWorker) {
 					try {
 						worker = new NodeWorker(worker_file_path, {
-							workerData: { worker_id: i }
+							workerData: { parent_pid: process.pid, worker_id: i }
 						});
 					} catch (e) {
 						worker = null;
@@ -385,10 +385,13 @@
 						env: {
 							...process.env,
 							ELECTRON_RUN_AS_NODE: "1",
+							SVEA_PARENT_PID: String(process.pid),
 							WORKER_ID: String(i)
 						},
 						stdio: ["inherit", "inherit", "inherit", "ipc"]
 					});
+					if (worker && worker.pid && GeoPNG.governor && typeof GeoPNG.governor.assignChildPid === "function")
+						GeoPNG.governor.assignChildPid(worker.pid);
 					
 					//Polyfill postMessage and terminate for child_process
 					worker.postMessage = (data) => {
@@ -404,7 +407,9 @@
 							}
 						});
 					};
-					worker.terminate = () => worker.kill();
+					worker.terminate = () => {
+						try { worker.kill("SIGTERM"); } catch (e) {}
+					};
 				}
 				
 				if (!worker) continue;
@@ -551,21 +556,25 @@
 		
 		//Initialise options (enforcing GeoPNG.compute_limits CPU & RAM bounds)
 		let cpu_count = (typeof require !== "undefined") ? require("os").cpus().length : 4;
-		let cfg_cap = (GeoPNG.compute_limits && GeoPNG.compute_limits.cpu && GeoPNG.compute_limits.cpu.max_workers) ?
-			Number(GeoPNG.compute_limits.cpu.max_workers) : 4;
+		let use_workers = (options.use_workers !== undefined) ? options.use_workers : true;
+		let cfg_cap = (!use_workers && GeoPNG.compute_limits && GeoPNG.compute_limits.cpu && GeoPNG.compute_limits.cpu.pipeline_concurrency) ?
+			Number(GeoPNG.compute_limits.cpu.pipeline_concurrency) :
+			((GeoPNG.compute_limits && GeoPNG.compute_limits.cpu && GeoPNG.compute_limits.cpu.max_workers) ?
+				Number(GeoPNG.compute_limits.cpu.max_workers) : 4);
 		let default_concurrency = Math.max(1, Math.min(cpu_count - 2, cfg_cap));
 		let requested_conc = Math.returnSafeNumber(options.concurrency || options.concurrecy, default_concurrency);
 		let concurrency = Math.max(1, Math.min(requested_conc, cfg_cap));
 		let yield_ms = (GeoPNG.compute_limits && GeoPNG.compute_limits.cpu && GeoPNG.compute_limits.cpu.cooperative_yield_ms !== undefined) ?
-			Number(GeoPNG.compute_limits.cpu.cooperative_yield_ms) : 4;
+			Number(GeoPNG.compute_limits.cpu.cooperative_yield_ms) : 0;
 		if (typeof GeoPNG.applyBackgroundProcessPriority === "function")
 			GeoPNG.applyBackgroundProcessPriority();
+		if (GeoPNG.governor && typeof GeoPNG.governor.registerLifecycleHooks === "function")
+			GeoPNG.governor.registerLifecycleHooks();
 		let context = (options.context) ? options.context : {};
 		let handler = options.handler;
 		let items = (options.items) ? options.items : [];
 		let task_generator = options.task_generator;
 		let task_name = (options.name) ? options.name : "Timeseries Task";
-		let use_workers = (options.use_workers !== undefined) ? options.use_workers : true;
 		
 		//Declare local instance variables
 		let active_promises = [];
@@ -683,13 +692,17 @@
 					} catch (e) {}
 				}
 				
-				//Enforce RAM ceiling periodically and yield to preserve 60 FPS
+				//Enforce RAM ceiling periodically and yield without triggering Windows 15,6 ms timer stalls
 				if (completed_count % 8 === 0 && typeof GeoPNG.enforceMemoryBudget === "function")
 					GeoPNG.enforceMemoryBudget();
-				if (typeof Blacktraffic !== "undefined" && Blacktraffic.yield) {
-					await Blacktraffic.yield(yield_ms);
-				} else if (yield_ms > 0) {
-					await new Promise((resolve) => setTimeout(resolve, yield_ms));
+				if (yield_ms > 0) {
+					if (typeof Blacktraffic !== "undefined" && Blacktraffic.yield) {
+						await Blacktraffic.yield(yield_ms);
+					} else {
+						await new Promise((resolve) => setTimeout(resolve, yield_ms));
+					}
+				} else if (typeof setImmediate === "function") {
+					await new Promise((resolve) => setImmediate(resolve));
 				}
 			}
 		};
@@ -723,12 +736,14 @@
 		return results;
 	};
 	
-	//Register automatic lifecycle termination hooks
+	//Register automatic lifecycle termination hooks (including Windows Job Object & signal teardown)
 	if (typeof window !== "undefined") {
 		window.addEventListener("beforeunload", () => GeoPNG.terminateAllWorkers());
 		window.addEventListener("unload", () => GeoPNG.terminateAllWorkers());
 	}
-	if (typeof process !== "undefined") {
+	if (GeoPNG.governor && typeof GeoPNG.governor.registerLifecycleHooks === "function") {
+		GeoPNG.governor.registerLifecycleHooks();
+	} else if (typeof process !== "undefined") {
 		process.on("exit", () => GeoPNG.terminateAllWorkers());
 	}
 }
