@@ -76,23 +76,33 @@ def load_hgis_rows ():
   return rows
 
 
-# Map HGIS country codes to ISO-like European country names for chapter filtering
+# Map HGIS country codes (including all V2 scraped historical regimes!) to European country names for chapter filtering
 HGIS_COUNTRY_MATCH = {
-  "FR": "France", "EM_france": "France", "CS_france": "France",
-  "UK": "United Kingdom", "GB": "United Kingdom", "EM_england": "United Kingdom", "EM_scotland": "United Kingdom", "CS_united king": "United Kingdom",
+  "FR": "France", "FR_AR": "France", "FR_BAIL": "France", "FR_GEN": "France", "EM_france": "France", "CS_france": "France",
+  "UK": "United Kingdom", "GB": "United Kingdom", "UK_C74": "United Kingdom", "UK_NI": "United Kingdom", "UK_SC": "United Kingdom", "UK_WA": "United Kingdom",
+  "EM_england": "United Kingdom", "EM_scotland": "United Kingdom", "CS_united king": "United Kingdom", "IM": "Isle of Man", "JE": "Jersey",
   "IE": "Ireland", "CS_ireland": "Ireland",
-  "NL": "Netherlands", "BE": "Belgium", "LU": "Luxembourg", "CS_netherland": "Netherlands", "CS_belgium": "Belgium",
-  "SE": "Sweden", "NO": "Norway", "DK": "Denmark", "FI": "Finland", "IS": "Iceland", "FO": "Faroe Islands", "GL": "Greenland",
+  "NL": "Netherlands", "BE": "Belgium", "SNL": "Belgium", "LU": "Luxembourg", "CS_netherland": "Netherlands", "CS_belgium": "Belgium",
+  "SE": "Sweden", "NO": "Norway", "DK": "Denmark", "FI": "Finland", "FI_38": "Finland", "AX": "Aland", "IS": "Iceland", "FO": "Faroe Islands", "GL": "Greenland",
   "CS_sweden": "Sweden", "CS_norway": "Norway", "CS_denmark": "Denmark", "CS_finland": "Finland",
-  "DE": "Germany", "HRE": "Germany", "DE_IMP": "Germany", "PRUSSIA": "Germany", "CS_german emp": "Germany", "CS_germany": "Germany",
-  "AT": "Austria", "AH_IMP": "Austria", "HABSBURG": "Austria", "CS_austria": "Austria", "CH": "Switzerland", "CS_switzerlan": "Switzerland",
-  "PL": "Poland", "EM_poland lit": "Poland", "CS_poland": "Poland", "CZ": "Czechia", "SK": "Slovakia", "HU": "Hungary", "CS_czechoslov": "Czechia", "CS_hungary": "Hungary",
-  "IT": "Italy", "CS_italy": "Italy", "ES": "Spain", "EM_spain": "Spain", "CS_spain": "Spain", "PT": "Portugal", "EM_portugal": "Portugal", "CS_portugal": "Portugal",
+  "DE": "Germany", "HRE": "Germany", "HRE_OX": "Germany", "DE_IMP": "Germany", "DE_CONF": "Germany", "DE_CONF48": "Germany", "DE_EMP71": "Germany",
+  "DE_WEIMAR_ST": "Germany", "DE_WEIMAR_TD": "Germany", "FRG": "Germany", "GDR": "Germany", "PRUSSIA": "Germany", "CS_german emp": "Germany", "CS_germany": "Germany",
+  "AT": "Austria", "AH_IMP": "Austria", "AH_AT": "Austria", "HRE_HABSBURG": "Austria", "HABSBURG": "Austria", "CS_austria": "Austria",
+  "CH": "Switzerland", "CS_switzerlan": "Switzerland", "LI": "Liechtenstein",
+  "PL": "Poland", "PLC_1619": "Poland", "PLC_1619_BASE": "Poland", "PLC_1772": "Poland", "PL_16C": "Poland", "PL_CONG": "Poland", "PL_IIRP": "Poland",
+  "PL_MED": "Poland", "PL_PR1802": "Poland", "PL_WAR1811": "Poland", "AH_GAL": "Poland", "GAL_1857": "Poland", "EM_poland lit": "Poland", "CS_poland": "Poland",
+  "CZ": "Czechia", "CZ_1850": "Czechia", "CSK": "Czechia", "CSK_ZUPY": "Czechia", "SK": "Slovakia", "CSK_SK": "Slovakia",
+  "HU": "Hungary", "HU_GISTA": "Hungary", "CS_czechoslov": "Czechia", "CS_hungary": "Hungary",
+  "IT": "Italy", "IT_EM": "Italy", "IT_MED": "Italy", "IT_PRE": "Italy", "CS_italy": "Italy",
+  "ES": "Spain", "IB_MED": "Spain", "AN": "Andorra", "EM_spain": "Spain", "CS_spain": "Spain",
+  "PT": "Portugal", "PT_MED": "Portugal", "EM_portugal": "Portugal", "CS_portugal": "Portugal",
   "GR": "Greece", "EL": "Greece", "MT": "Malta", "CS_greece": "Greece",
-  "RO": "Romania", "BG": "Bulgaria", "RS": "Serbia", "HR": "Croatia", "SI": "Slovenia", "BA": "Bosnia and Herzegovina",
-  "ME": "Montenegro", "MK": "North Macedonia", "AL": "Albania", "EM_ottoman em": "Turkey", "CS_ottoman em": "Turkey",
+  "RO": "Romania", "RO_OLD": "Romania", "MD": "Moldova", "BG": "Bulgaria", "RS": "Serbia", "YU": "Serbia", "HR": "Croatia", "HR_GISTA": "Croatia",
+  "SI": "Slovenia", "BA": "Bosnia and Herzegovina", "ME": "Montenegro", "MK": "North Macedonia", "AL": "Albania", "XK": "Kosovo",
+  "TR": "Turkey-in-Europe", "OTT_EY": "Turkey-in-Europe", "BALK_OHM": "Bulgaria", "EM_ottoman em": "Turkey-in-Europe", "CS_ottoman em": "Turkey-in-Europe",
   "CS_romania": "Romania", "CS_bulgaria": "Bulgaria", "CS_yugoslavia": "Serbia", "CS_albania": "Albania",
-  "EE": "Estonia", "LV": "Latvia", "LT": "Lithuania", "CS_estonia": "Estonia", "CS_latvia": "Latvia", "CS_lithuania": "Lithuania",
+  "EE": "Estonia", "EE_IMP": "Estonia", "LV": "Latvia", "LV_HIST": "Latvia", "LV_IMP": "Latvia", "LT": "Lithuania", "LT_IMP": "Lithuania",
+  "CS_estonia": "Estonia", "CS_latvia": "Latvia", "CS_lithuania": "Lithuania",
 }
 
 

@@ -162,11 +162,13 @@ def main():
   pol_p = next(p for p in prec["projects"] if p["key"] == "POLARIS")
   ind_p = next(p for p in prec["projects"] if p["key"] == "INDUS")
   sar_p = next(p for p in prec["projects"] if p["key"] == "SARAY")
+  mag_p = next((p for p in prec["projects"] if p["key"] == "MAGNETIC"), None)
 
   hb_mask = abc._build_project_mask(hb_p_cfg, SVEA)
   pol_mask = abc._build_project_mask(pol_p, SVEA)
   ind_mask = abc._build_project_mask(ind_p, SVEA)
   sar_mask = abc._build_project_mask(sar_p, SVEA)
+  mag_mask = abc._build_project_mask(mag_p, SVEA) if mag_p is not None else None
 
   # Optional subadmin ID grids to preserve exact subadministrative mass conservation after frontier harmonisation
   sub_dir = os.path.join(SVEA, r"histmap\1.data_raw\population_regional\HANDBOOK\_shared\subadmin_censuses\rasters")
@@ -242,10 +244,12 @@ def main():
       loc_sc = np.where(loc_sc > 0.05, loc_sc, _interp_scale(yr, pol_scales))
     p_sc = _interp_scale(yr, pol_scales)
 
-    # Harmonise Greater Caucasus (POLARIS), Kopet Dag / Amu Darya (SARAY), and Durand/Makran (INDUS)
+    # Harmonise Greater Caucasus (POLARIS), Kopet Dag / Amu Darya (SARAY), Durand/Makran (INDUS), and Thrace (MAGNETIC)
     hb_f = solve_frontier_ribbon(hb_f, pol_nbr, hb_mask, pol_mask, max_dist_px=20.0, screen_len_px=7.5, iters=120, mosaic_scale=p_sc, local_scale_grid=loc_sc)
     hb_f = solve_frontier_ribbon(hb_f, pol_nbr, hb_mask, sar_mask, max_dist_px=20.0, screen_len_px=7.5, iters=120, mosaic_scale=p_sc, local_scale_grid=loc_sc)
     hb_f = solve_frontier_ribbon(hb_f, pol_nbr, hb_mask, ind_mask, max_dist_px=18.0, screen_len_px=6.5, iters=100, mosaic_scale=p_sc, local_scale_grid=loc_sc)
+    if mag_mask is not None:
+      hb_f = solve_frontier_ribbon(hb_f, pol_nbr, hb_mask, mag_mask, max_dist_px=16.0, screen_len_px=6.0, iters=120, mosaic_scale=1.0, local_scale_grid=None)
     if yr >= 1880:
       hb_f = re_conserve_subadmin_mass(hb_f, pre_f, mod_sub_id if yr >= 1960 else hist_sub_id)
     encode_float32_png(hb_f, hb_p)

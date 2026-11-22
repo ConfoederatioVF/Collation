@@ -21,8 +21,12 @@ import sys
 from collections import defaultdict
 
 import numpy as np
-from PIL import Image, ImageDraw
+import shapely
+from PIL import Image
 from shapely.geometry import shape
+
+GRID_LATS = 90.0 - (np.arange(2160, dtype=np.float64) + 0.5) * 180.0 / 2160
+GRID_LONS = -180.0 + (np.arange(4320, dtype=np.float64) + 0.5) * 360.0 / 4320
 
 SVEA_ROOT = r"f:\Active Projects\Project 1509 - SVEA"
 HB_DIR = os.path.join(SVEA_ROOT, "histmap", "1.data_raw", "population_regional", "HANDBOOK")
@@ -85,19 +89,27 @@ def rasterise_geojson_units(gj_path, domain_mask, land_area, out_id_png, out_met
       continue
 
   # Painter's sort: largest polygons painted first so tiny urban districts/enclaves never starve
+  # Uses vectorised shapely.contains_xy (ZERO PIL scanline artefacts & exact interior holes!)
   items.sort(key=lambda x: -x[0])
 
-  img = Image.new("I", (GRID_W, GRID_H), 0)
-  draw = ImageDraw.Draw(img)
+  id_grid = np.zeros((GRID_H, GRID_W), dtype=np.int32)
   meta = {}
   centroids = {}
 
   for uid, (_deg_area, geom, props) in enumerate(items, 1):
-    polys = list(geom.geoms) if geom.geom_type == "MultiPolygon" else ([geom] if geom.geom_type == "Polygon" else [])
-    for poly in polys:
-      ext = [lonlat_to_px(x, y) for x, y in poly.exterior.coords]
-      if len(ext) >= 3:
-        draw.polygon(ext, fill=uid)
+    minx, miny, maxx, maxy = geom.bounds
+    c0 = max(0, min(GRID_W - 1, int((minx + 180.0) * GRID_W / 360.0) - 1))
+    c1 = max(0, min(GRID_W - 1, int((maxx + 180.0) * GRID_W / 360.0) + 1))
+    r0 = max(0, min(GRID_H - 1, int((90.0 - maxy) * GRID_H / 180.0) - 1))
+    r1 = max(0, min(GRID_H - 1, int((90.0 - miny) * GRID_H / 180.0) + 1))
+    sub_dom = domain_mask[r0:r1 + 1, c0:c1 + 1] & (land_area[r0:r1 + 1, c0:c1 + 1] > 0)
+    drs, dcs = np.where(sub_dom)
+    if drs.size > 0:
+      rrs = r0 + drs
+      ccs = c0 + dcs
+      inside = shapely.contains_xy(geom, GRID_LONS[ccs], GRID_LATS[rrs])
+      if inside.any():
+        id_grid[rrs[inside], ccs[inside]] = uid
     rp = geom.representative_point()
     cx, cy = lonlat_to_px(rp.x, rp.y)
     centroids[uid] = (int(round(cy)), int(round(cx)))
@@ -120,10 +132,6 @@ def rasterise_geojson_units(gj_path, domain_mask, land_area, out_id_png, out_met
       "min_year": min(pops_clean.keys()) if pops_clean else None,
       "max_year": max(pops_clean.keys()) if pops_clean else None,
     }
-
-  id_grid = np.asarray(img, dtype=np.int32)
-  # Restrict strictly to active HANDBOOK land mask
-  id_grid = np.where(domain_mask & (land_area > 0), id_grid, 0)
 
   # Guarantee zero starved units: pin representative point (or nearest valid pixel within 2 px) for tiny districts
   present = set(np.unique(id_grid).tolist())

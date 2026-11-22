@@ -140,8 +140,12 @@ def draw_proj_lines (arg0_ax, arg1_proj_geom, **kwargs):
       draw_proj_lines(arg0_ax, sub, **kwargs)
 
 
-def load_basemap_cache (arg0_proj, arg1_clip_bbox=(-30.0, 26.0, 48.0, 82.0)):
-  """Loads and pre-projects Natural Earth 50m land polygons and major rivers."""
+def load_basemap_cache (arg0_proj, arg1_clip_bbox=(-30.0, 26.0, 48.0, 82.0), arg2_show_modern_borders=False):
+  """Loads and pre-projects Natural Earth 50m land polygons and major rivers.
+  For ALL historical/pre-1945 chapters (`arg2_show_modern_borders=False`), dissolves
+  `ne_50m_admin_0_countries.geojson` into pure continental landmasses so ZERO modern
+  2025 country borders appear underneath prehistoric, classical, mediaeval, early modern
+  or imperial/interwar historical borders!"""
   cbox = box(*arg1_clip_bbox)
   ctry_p = os.path.join(PARENT_GIS_CACHE, "ne_50m_admin_0_countries.geojson")
   if not os.path.isfile(ctry_p):
@@ -153,6 +157,7 @@ def load_basemap_cache (arg0_proj, arg1_clip_bbox=(-30.0, 26.0, 48.0, 82.0)):
   riv_gj = json.load(open(riv_p, encoding="utf-8"))
 
   land_patches = []
+  raw_land = []
   for feat in ctry_gj.get("features", []):
     geom_raw = feat.get("geometry")
     if not geom_raw:
@@ -160,7 +165,21 @@ def load_basemap_cache (arg0_proj, arg1_clip_bbox=(-30.0, 26.0, 48.0, 82.0)):
     g = shape(geom_raw)
     if not g.intersects(cbox):
       continue
-    pg = prepare_and_project(g, arg0_proj, 0.35, cbox)
+    if arg2_show_modern_borders:
+      pg = prepare_and_project(g, arg0_proj, 0.35, cbox)
+      land_patches.extend(geom_to_patches(pg))
+    else:
+      try:
+        gc = g.buffer(0).intersection(cbox)
+        if not gc.is_empty:
+          raw_land.append(gc)
+      except Exception:
+        pass
+
+  if not arg2_show_modern_borders and raw_land:
+    from shapely.ops import unary_union
+    dissolved = unary_union(raw_land).buffer(0)
+    pg = prepare_and_project(dissolved, arg0_proj, 0.35, None)
     land_patches.extend(geom_to_patches(pg))
 
   river_geoms = []

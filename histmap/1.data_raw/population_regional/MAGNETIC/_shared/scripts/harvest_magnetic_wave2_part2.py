@@ -251,7 +251,7 @@ def main():
       need = max(need, 5 - len(dom_used))
     added = 0
 
-    ex = ThreadPoolExecutor(max_workers=8)
+    ex = ThreadPoolExecutor(max_workers=4)
     try:
       for b0 in range(0, min(len(ordered), 80), 16):
         if len(valid_pdfs) + added >= TARGET and len(dom_used) >= 5:

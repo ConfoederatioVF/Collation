@@ -81,6 +81,15 @@ def sample_raster_to_albers (arg0_vals, arg1_proj, arg2_xlim, arg3_ylim, arg4_nx
   return np.where(sampled > 0.5, sampled, np.nan)
 
 
+def extract_europe_main_geom (arg0_geom):
+  """Keeps European & Icelandic polygon components while excluding distant Greenland (<-26.5E) and Macaronesia (<33.5N)."""
+  if arg0_geom.is_empty:
+    return arg0_geom
+  parts = list(arg0_geom.geoms) if arg0_geom.geom_type in ("MultiPolygon", "GeometryCollection") else [arg0_geom]
+  kept = [p for p in parts if p.geom_type == "Polygon" and not p.is_empty and p.centroid.x >= -26.5 and p.centroid.y >= 33.5]
+  return unary_union(kept) if kept else arg0_geom.intersection(arg0_geom.buffer(-999))
+
+
 def render_fig1_hero_coverage (arg0_land_eu, arg1_riv_eu, arg2_land_gl, arg3_riv_gl):
   """Figure 1: 6-panel historical coverage & regional partitions across Europe (10000BC-2025)."""
   panels = [
@@ -119,8 +128,8 @@ def render_fig1_hero_coverage (arg0_land_eu, arg1_riv_eu, arg2_land_gl, arg3_riv
         geom_raw = feat.get("geometry")
         if not geom_raw:
           continue
-        g = shape(geom_raw).buffer(0)
-        if g.is_empty or g.centroid.x < -25.0:
+        g = extract_europe_main_geom(shape(geom_raw).buffer(0))
+        if g.is_empty:
           continue
         pg = prepare_and_project(g, PROJ_EUROPE, 0.35)
         ps = geom_to_patches(pg)
@@ -291,8 +300,8 @@ def render_choropleth_4panel (arg0_out_name, arg1_specs, arg2_land_eu, arg3_riv_
         geom_raw = feat.get("geometry")
         if not geom_raw:
           continue
-        g = shape(geom_raw).buffer(0)
-        if g.is_empty or g.centroid.x < -25.0:
+        g = extract_europe_main_geom(shape(geom_raw).buffer(0))
+        if g.is_empty:
           continue
         rid = str(feat.get("properties", {}).get("id") or "")
         dval = dens_by_id.get(rid, arg4_vmin)
@@ -321,9 +330,9 @@ def render_choropleth_4panel (arg0_out_name, arg1_specs, arg2_land_eu, arg3_riv_
 
 def main ():
   root_summary = json.load(open(os.path.join(SHARED, "magnetic_root_summary.json"), encoding="utf-8"))
-  print("[1] Pre-projecting European & Greenland Natural Earth basemaps...", flush=True)
-  land_eu, riv_eu = load_basemap_cache(PROJ_EUROPE, (-30.0, 28.0, 48.0, 82.0))
-  land_gl, riv_gl = load_basemap_cache(PROJ_GREENLAND, (-76.0, 58.0, -8.0, 84.0))
+  print("[1] Pre-projecting European & Greenland Natural Earth basemaps (clean physical coastlines, zero anachronistic modern borders)...", flush=True)
+  land_eu, riv_eu = load_basemap_cache(PROJ_EUROPE, (-30.0, 28.0, 48.0, 82.0), arg2_show_modern_borders=False)
+  land_gl, riv_gl = load_basemap_cache(PROJ_GREENLAND, (-76.0, 58.0, -8.0, 84.0), arg2_show_modern_borders=False)
 
   print("[2] Rendering Fig 1: magnetic_areal_coverage_hero.png ...", flush=True)
   render_fig1_hero_coverage(land_eu, riv_eu, land_gl, riv_gl)

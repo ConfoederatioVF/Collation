@@ -202,6 +202,20 @@ viscount_figure <- function (arg0_file_path, arg1_caption = NULL, arg2_label = N
   }
   if (is.null(opts$span_columns)) opts$span_columns <- TRUE
 
+  if (knitr::is_latex_output()) {
+    abs_p <- normalizePath(arg0_file_path, winslash = "/", mustWork = FALSE)
+    if (nchar(abs_p) > 150L) {
+      env_name <- if (isTRUE(opts$span_columns)) "figure*" else "figure"
+      lbl_tex <- if (!is.null(opts$label) && nzchar(opts$label)) paste0("\\label{", opts$label, "}") else ""
+      cap_tex <- if (!is.null(opts$caption)) gsub("%", "\\%", gsub("&", "\\&", opts$caption, fixed = TRUE), fixed = TRUE) else ""
+      cat(sprintf(
+        "\n\\begin{%s}[%s]\n\\centering\n\\includegraphics[width=\\linewidth,height=%s,keepaspectratio]{%s}\n\\caption{%s}%s\n\\end{%s}\n\n",
+        env_name, opts$placement, opts$max_height, arg0_file_path, cap_tex, lbl_tex, env_name
+      ))
+      return(invisible(NULL))
+    }
+  }
+
   if (exists("render_figure_template", mode = "function")) {
     return(render_figure_template(arg0_file_path, opts))
   }

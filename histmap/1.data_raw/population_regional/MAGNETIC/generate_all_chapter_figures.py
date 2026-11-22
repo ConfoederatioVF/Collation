@@ -91,10 +91,12 @@ def render_regional_map (arg0_ch, arg1_summary, arg2_basemaps):
   rgb_map = {r["id"]: r["rgb"] for r in arg1_summary["subregions"]}
   name_map = {r["id"]: r["name"] for r in arg1_summary["subregions"]}
 
-  # Partition features into European mainland/North Atlantic vs distant Greenland / Macaronesia insets
+  # Partition polygons into European mainland/North Atlantic vs distant Greenland / Macaronesia insets
   main_feats = []
   gl_feats = []
   mac_feats = []
+  box_gl = unary_union([box(-76.0, 58.0, -26.0, 84.5), box(-26.0, 68.0, -10.5, 84.5)])
+  box_mac = box(-34.0, 26.5, -12.0, 41.0)
   for feat in gj.get("features", []):
     geom_raw = feat.get("geometry")
     if not geom_raw:
@@ -102,15 +104,16 @@ def render_regional_map (arg0_ch, arg1_summary, arg2_basemaps):
     g = shape(geom_raw).buffer(0)
     if g.is_empty:
       continue
-    cx = g.centroid.x
-    cy = g.centroid.y
     rid = str(feat.get("properties", {}).get("id") or "")
-    if cx < -25.0 and cy > 55.0:
-      gl_feats.append((rid, g))
-    elif cy < 34.0 and cx < -10.0:
-      mac_feats.append((rid, g))
-    else:
-      main_feats.append((rid, g))
+    g_gl = g.intersection(box_gl)
+    if not g_gl.is_empty and g_gl.area > 1e-4:
+      gl_feats.append((rid, g_gl))
+    g_mac = g.intersection(box_mac)
+    if not g_mac.is_empty and g_mac.area > 1e-4:
+      mac_feats.append((rid, g_mac))
+    g_rem = g.difference(box_gl).difference(box_mac)
+    if not g_rem.is_empty and g_rem.area > 1e-4:
+      main_feats.append((rid, g_rem))
 
   if not main_feats:
     main_feats = gl_feats + mac_feats
@@ -126,9 +129,10 @@ def render_regional_map (arg0_ch, arg1_summary, arg2_basemaps):
   lat0 = 0.5 * (lat1 + lat2)
   proj_main = AlbersEqualAreaConic(lon0, lat1, lat2, lat0)
 
-  # Pre-project basemap for this chapter's extent
+  # Pre-project basemap for this chapter's extent (NEVER draw modern 2025 country borders on pre-1945 historical chapters!)
   clip_bb = (max(-32.0, minx - 8.0), max(30.0, miny - 5.0), min(45.0, maxx + 8.0), min(82.0, maxy + 5.0))
-  land_p, riv_g = load_basemap_cache(proj_main, clip_bb)
+  is_modern_ch = (int(arg0_ch.get("index", 1)) >= 19)
+  land_p, riv_g = load_basemap_cache(proj_main, clip_bb, arg2_show_modern_borders=is_modern_ch)
 
   apply_viscount_style()
   fig, ax = plt.subplots(figsize=(9.6, 6.2), dpi=300)
@@ -154,7 +158,7 @@ def render_regional_map (arg0_ch, arg1_summary, arg2_basemaps):
 
   # Bold dissolved outer perimeter
   if proj_all_main:
-    outer_pg = unary_union(proj_all_main)
+    outer_pg = unary_union([pg.buffer(0) for pg in proj_all_main])
     outer_patches = geom_to_patches(outer_pg)
     if outer_patches:
       ax.add_collection(PatchCollection(outer_patches, facecolor="none", edgecolor="#111827", linewidths=1.15, zorder=3.6))
@@ -201,7 +205,8 @@ def render_regional_map (arg0_ch, arg1_summary, arg2_basemaps):
 
   # Add distant Macaronesia inset if present in this chapter
   if mac_feats:
-    ax_mc = ax.inset_axes([0.02, 0.04, 0.24, 0.30])
+    mac_box = [0.02, 0.04, 0.24, 0.30] if gl_feats else [0.02, 0.62, 0.24, 0.30]
+    ax_mc = ax.inset_axes(mac_box)
     apply_viscount_style(ax_mc, {"grid": False})
     draw_basemap(ax_mc, arg2_basemaps["mac_land"], arg2_basemaps["mac_riv"])
     mc_pgs = []
@@ -248,9 +253,9 @@ def render_regional_map (arg0_ch, arg1_summary, arg2_basemaps):
   ax.set_title(title_str, fontsize=10.5, pad=8)
 
   n_leg = len(legend_handles)
-  ncol = 4 if n_leg >= 10 else (3 if n_leg >= 6 else max(1, n_leg))
+  ncol = 3 if n_leg >= 4 else max(1, n_leg)
   nrows = math.ceil(n_leg / max(1, ncol))
-  bot_margin = min(0.28, 0.08 + 0.045 * nrows)
+  bot_margin = min(0.32, 0.08 + 0.048 * nrows)
   fig.subplots_adjust(left=0.03, right=0.97, top=0.92, bottom=bot_margin)
 
   if legend_handles:
@@ -402,8 +407,8 @@ def render_urban_hierarchy_figure (arg0_ch, arg1_summary):
 def main ():
   itin = load_json5_simple(ITIN_PATH)
   print("[1] Pre-projecting Greenland & Macaronesia inset basemaps...", flush=True)
-  gl_land, gl_riv = load_basemap_cache(PROJ_GREENLAND, (-76.0, 58.0, -8.0, 84.0))
-  mac_land, mac_riv = load_basemap_cache(PROJ_MACARONESIA, (-33.0, 26.5, -12.0, 41.0))
+  gl_land, gl_riv = load_basemap_cache(PROJ_GREENLAND, (-76.0, 58.0, -8.0, 84.0), arg2_show_modern_borders=False)
+  mac_land, mac_riv = load_basemap_cache(PROJ_MACARONESIA, (-33.0, 26.5, -12.0, 41.0), arg2_show_modern_borders=False)
   basemaps = {"gl_land": gl_land, "gl_riv": gl_riv, "mac_land": mac_land, "mac_riv": mac_riv}
 
   print(f"[2] Rendering 3 POLARIS-grade figures across all {len(itin['chapters'])} MAGNETIC chapters...", flush=True)

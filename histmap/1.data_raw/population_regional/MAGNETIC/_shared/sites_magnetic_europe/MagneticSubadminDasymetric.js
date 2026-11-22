@@ -59,6 +59,8 @@ let { PNG } = global.pngjs || require("pngjs");
     static resolveSnapshotYear (arg0_year, arg1_avail_years) {
       let yr = Number(arg0_year) || 1900;
       let avail = (Array.isArray(arg1_avail_years) && arg1_avail_years.length > 0) ? arg1_avail_years : this.SNAPSHOT_YEARS;
+
+      if (avail.indexOf(yr) >= 0) return yr;
       let target = 2020;
 
       if (yr < 1560) target = 1500;
@@ -447,8 +449,33 @@ let { PNG } = global.pngjs || require("pngjs");
         if (unit_active.length === 0) continue;
 
         //Use exact scraped census enumerations directly for census-era snapshots (1860+ across ALL 37 countries!),
-        //or country-mass-conserving areal shares where smooth pre-census macro mass anchors 1500-1859.
+        //and smoothly scale 1500-1859 scraped sub-administrative shares to the reconciled European macro trajectory
+        //(McEvedy & Jones / Maddison / chapter totals: 74M in 1500 -> 122M in 1750 -> 156M in 1800 -> 223M in 1850)
+        //so there is ZERO 1850->1860 cliff while maintaining exact per-unit pycnophylactic conservation!
         let use_exact_census_mass = (yr >= 1860);
+        let pre1860_macro_anchors = [
+          [1500, 74000000],
+          [1600, 87500000],
+          [1700, 101000000],
+          [1750, 122500000],
+          [1800, 156000000],
+          [1810, 168500000],
+          [1820, 181500000],
+          [1830, 195500000],
+          [1840, 209500000],
+          [1850, 223500000],
+          [1860, 240000000]
+        ];
+        let macro_scale_factor = 1.0;
+
+        if (!use_exact_census_mass) {
+          let target_eu_total = this.interpolateSubadminSeries(pre1860_macro_anchors, yr);
+          let cur_eu_base = 0;
+
+          country_base_mass.forEach(function (arg0_v) { cur_eu_base += arg0_v; });
+          if (target_eu_total > 0 && cur_eu_base > 0)
+            macro_scale_factor = target_eu_total/cur_eu_base;
+        }
         let unit_target = new Map();
 
         for (let i = 0; i < unit_active.length; i++) {
@@ -457,10 +484,12 @@ let { PNG } = global.pngjs || require("pngjs");
           let cc = u_meta.country || "EU";
           let t_raw = unit_raw_target.get(uid);
 
-          if (use_exact_census_mass && u_meta.is_direct_census !== false) {
+          let is_fallback_unit = (cc === "HB_FALLBACK" || cc === "DEFACTO_FALLBACK");
+
+          if (use_exact_census_mass && !is_fallback_unit) {
             unit_target.set(uid, t_raw);
           } else {
-            let c_base = country_base_mass.get(cc) || 1;
+            let c_base = (country_base_mass.get(cc) || 1)*macro_scale_factor;
             let c_enum = country_enum_mass.get(cc) || 1;
 
             unit_target.set(uid, t_raw*(c_base/c_enum));

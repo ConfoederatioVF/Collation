@@ -209,6 +209,16 @@ SHORT_DISPLAY_LABELS = {
   "Trabzon and Kastamonu Vilayets": "Pontus & Black Sea",
   "Adana and Konya Mediterranean Vilayets": "Cilicia & Konya",
   "Mosul, Baghdad and Basra Vilayets": "Ottoman Iraq",
+  "Parthian and Sassanid Mesopotamia (Asoristan)": "Sassanid Mesopotamia",
+  "Parthian and Sassanid Mesopotamia": "Sassanid Mesopotamia",
+  "Parthian and Sassanid Iran": "Parthian & Sassanid Iran",
+  "Hellenistic and Roman Anatolia and Cyprus": "Roman Anatolia & Cyprus",
+  "Ptolemaic and Roman Egypt": "Ptolemaic & Roman Egypt",
+  "Seleucid and Roman Levant": "Seleucid & Roman Levant",
+  "Classical Armenia, Iberia and Caucasian Albania": "Classical Transcaucasia",
+  "Greco-Bactrian and Kushan Afghanistan": "Kushan Afghanistan",
+  "Himyarite Yemen, Nabataean-Gulf and Arabian Peninsula": "Classical Arabia",
+  "Tripolitania, Cyrenaica and Garamantian Fezzan": "Tripolitania & Cyrenaica",
 }
 
 
@@ -228,7 +238,7 @@ def clean_lbl(name, max_len=24):
       break
     out.append(w)
     cur += len(w) + (1 if out else 0)
-  while len(out) > 1 and out[-1].lower().rstrip(",:-") in {"and", "of", "the", "for", "in", "&", "or", "to"}:
+  while len(out) > 1 and out[-1].lower().rstrip(",:-") in {"and", "of", "the", "for", "in", "&", "or", "to", "at", "by", "on"}:
     out.pop()
   res = " ".join(out) if out else txt[:max_len]
   return res.rstrip(" ,:-")
@@ -251,7 +261,7 @@ def geom_to_mpl_polys(geom, proj):
 
 
 def load_raw_context():
-  clip_b = sbox(-22.0, 8.0, 80.0, 48.0)
+  clip_b = sbox(-38.0, -5.0, 108.0, 62.0)
   land_geoms = []
   ne0 = json.load(open(GIS_SHARED / "ne_50m_admin_0_countries.geojson", "r", encoding="utf-8"))
   for f in ne0["features"]:
@@ -315,8 +325,7 @@ def draw_vector_subregions(ax, subreg_gj_path, raw_ctx, is_admin1=False, show_le
   u_dom = unary_union([g for _, g in geoms_raw]).buffer(0)
   minx, miny, maxx, maxy = u_dom.bounds
   proj = fixed_proj if fixed_proj is not None else LambertAzimuthalEqualArea(lon0=0.5 * (minx + maxx), lat0=0.5 * (miny + maxy))
-  pad_deg = max(3.5, 0.25 * max(maxx - minx, maxy - miny))
-  land_p, river_s, lake_p = project_context(raw_ctx, proj, (minx - pad_deg, miny - pad_deg, maxx + pad_deg, maxy + pad_deg))
+  land_p, river_s, lake_p = project_context(raw_ctx, proj, None)
 
   ax.set_facecolor("#e8f1f8")
   if land_p:
@@ -455,14 +464,30 @@ def generate_chapter_figures(ch, mod, raw_ctx):
   d0, d1 = ch["domain"]
 
   setts = list(sett_dict.values()) if isinstance(sett_dict, dict) else sett_dict
-  peaks = []
+  raw_peaks = []
+  bad_frags = ("untitled", "gate at", "insula ")
   for s in setts:
     pm = s.get("population") or {}
     if not pm:
       continue
+    nm_low = str(s.get("name") or "").strip().lower()
+    if any(bf in nm_low for bf in bad_frags):
+      continue
     pk_yr = max(pm.keys(), key=lambda y: float(pm[y]))
-    peaks.append((float(pm[pk_yr]), int(pk_yr), s["name"], s["coords"][0], s["coords"][1]))
-  peaks.sort(key=lambda x: -x[0])
+    raw_peaks.append((float(pm[pk_yr]), int(pk_yr), s["name"], float(s["coords"][0]), float(s["coords"][1])))
+  raw_peaks.sort(key=lambda x: -x[0])
+  # Deduplicate spatially proximate or canonical-alias transliteration twins (e.g., Ganja / Gəncə)
+  alias_map = {"gəncə": "ganja", "ganca": "ganja", "gäncä": "ganja", "bakı": "baku", "sumqayıt": "sumqayit", "sumgait": "sumqayit"}
+  peaks = []
+  seen_alias = set()
+  for rp in raw_peaks:
+    al = alias_map.get(rp[2].strip().lower(), rp[2].strip().lower())
+    if al in seen_alias:
+      continue
+    if any(abs(rp[3] - kp[3]) <= 0.14 and abs(rp[4] - kp[4]) <= 0.14 for kp in peaks[:40]):
+      continue
+    seen_alias.add(al)
+    peaks.append(rp)
 
   # --- FIG 1: Vector Sub-Regions & Settlements Hero Figure ---
   vpu.apply_viscount_style(grid=False)
