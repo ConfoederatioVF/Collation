@@ -30,7 +30,8 @@ SCHEMA = {
               "type": "object",
               "properties": {
                 "date": {"type": "string"},
-                "name": {"type": "string"}
+                "name": {"type": "string"},
+                "date_source_note": {"type": "string"}
               },
               "required": ["date", "name"]
             }
@@ -83,18 +84,19 @@ You are resolving historical city and archaeological site names into clean Datav
 
 IMPORTANT WORKFLOW RULES:
 - Do NOT call `run_command`, `read_file`, `search_marketplace`, or inspect any local filesystem/git files. Every field you need is already in the JSON array below.
-- Do NOT do exhaustive per-city web searches when fixing obvious ASCII-hacek transliterations (`'Cerepovec -> Cherepovets`, `` `Cerkasy -> Cherkasy ``, `Ker`c -> Kerch`, `D`'zokar -> Dzhokhar`, `Rubi`zne -> Rubizhne`, etc.) or adding well-known major historical renames (e.g. Tsaritsyn/Stalingrad/Volgograd, Yekaterinburg/Sverdlovsk, Königsberg/Kaliningrad, Khlynov/Vyatka/Kirov).
-- Use `search_web` AT MOST once or twice ONLY if an entry is `reason == "missing_entry"` and genuinely unfamiliar, then immediately call `finish` in ONE or TWO turns.
+- Verify uncertain historical rename dates via `search_web` rather than guessing or fabricating placeholder years (never invent generic `1950.1.1` or `1900.1.1` dates for documented colonial, dynastic, Soviet or post-independence renames).
+- Do NOT waste turns searching obvious ASCII-hacek transliteration fixes (`'Cerepovec -> Cherepovets`, `Ker'c -> Kerch`).
 
 For EVERY settlement in the input array below, return an entry in `settlements` with:
 - `key`: exact input `key` string (must match 1-to-1)
-- `canonical_name`: cleanest standard modern English/Latin name (NO parenthetical notes, NO backticks `` ` ``, NO apostrophe-backtick artifacts like `` `' `` or `?` or mojibake)
-- `historical_names`: chronological array of `{{"date": "Y.M.D", "name": "Name"}}`:
-  - Date format MUST match regex `^-?\\d+\\.\\d+\\.\\d+$` (e.g. `"-1000.1.1"`, `"1147.1.1"`, `"1589.1.1"`, `"1925.4.10"`). Negative years denote BCE.
-  - Preserve valid existing historical transitions if already accurate, fix any corrupted ASCII-hacek strings, and add documented pre-modern, imperial, Soviet, or modern official renames in clean standard Latin script.
-  - If an item is an archaeological site or minor settlement with one attested name across its period, provide an initial date <= its `earliest_year` (e.g. `f"{{earliest_year}}.1.1"` or `"-1000.1.1"`) and `"name"`.
-  - NEVER include parentheticals like `(Russia)` inside any name, NEVER include `?`, `'0'`, `'Unknown'`, `'Settlement'`, or backtick `` ` ``.
-- `other_names`: optional clean alternate transliterations or native forms (clean Unicode/Latin, zero backticks or `?`).
+- `canonical_name`: cleanest standard modern English/Latin settlement name (NO parenthetical notes, NO backticks `` ` ``, NO `?` or mojibake, NO administrative suffixes like `-shi`, `-gun`, `-ken`, `Prefecture`, `District`, `Kabupaten`, `Amphoe`, and NEVER a temple, shrine, pagoda, monastery, mosque or tomb name)
+- `historical_names`: strictly chronological array of `{{"date": "Y.M.D", "name": "Name", "date_source_note": "brief factual basis"}}`:
+  - Date format MUST match `^-?\\d+\\.\\d+\\.\\d+$` with valid calendar bounds (`-10000 <= Y <= 2026`, `Y != 0`, `1 <= M <= 12`, `1 <= D <= 31`). Negative years denote BCE.
+  - The earliest entry's year MUST be `<= earliest_year` (respecting `foundation_year`) so Dataview never falls back to a later/modern name in earlier centuries.
+  - Extant modern cities (`latest_year >= 1950`) MUST terminate with their documented modern restoration/rename date and `canonical_name`.
+  - Do NOT create fake historical renames out of spelling/romanisation variants of the same name (e.g. `Samarqand -> Samarkand`, `Bokhara -> Bukhara`); place variant spellings in `other_names` instead.
+  - NEVER include parentheticals like `(Russia)`, temple/shrine/monument names, `?`, `'0'`, `'Unknown'`, `'Settlement'`, or backtick `` ` ``.
+- `other_names`: optional clean alternate transliterations or native forms (clean Unicode/Latin, zero backticks, zero foreign-script spam in Latin-only countries).
 
 Call `finish` immediately with valid schema output.
 

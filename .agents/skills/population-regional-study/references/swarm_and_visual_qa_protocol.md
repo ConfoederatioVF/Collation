@@ -4,8 +4,8 @@
 
 Never waste LLM tokens on bulk deterministic parsing, and never skip human-knowledge disambiguation where historical toponymy requires scholarly judgement:
 
-- **Programmatic Node.js / Python ETL (No LLM Swarm)**:
-  - Census CSV/DBF/Parquet parsing, coordinate projection, Gazetteer deduplication, Matérn kriging (`ViscountMaternKriging.js` + `ViscountResidualCovariates.js`), Stadestér shard partitioning, Dataview cache warming and VitePress/Intellte incremental syncing.
+- **Programmatic Node.js / Python ETL (No LLM Swarm — Wrapped via `run_bounded.py`)**:
+  - Census CSV/DBF/Parquet parsing, coordinate projection, Gazetteer deduplication, Matérn kriging (`ViscountMaternKriging.js` + `ViscountResidualCovariates.js`), Stadestér shard partitioning, Dataview cache warming and VitePress/Intellte incremental syncing. All heavy/background invocations MUST run through `run_bounded.py` (with `--lock stadester_velkscala`, `--lock dataview_metadata` or `--lock gpu_compute` per [shell_and_resource_governance.md](file:///F:/Active%20Projects/Project%201509%20-%20SVEA/.agents/skills/population-regional-study/references/shell_and_resource_governance.md); single lock location only).
 - **Swarm Work (Default `Gemini 3.8 Flash` -> Escalate to `Hydrogen`)**:
   - Literature PDF discovery & archival table extraction (`./papers/`).
   - Pre-census historical census backfill (`Wave 3`) & `foundation_year` recovery in manageable `25–40` settlement batches, always accompanied by a read-only `@verifier` worker + `monitor`.
@@ -49,11 +49,14 @@ Before mutating `Dataview/data/stadester/stadester_2.0/city_metadata.json` (reme
      - Primary `.name` overwrites when stems differ require `<= 1,0 km` tolerance AND an explicitly corrupted source name.
      - Cross-language historical romanisation equivalences (`Peking <-> Beijing`, `Bombay <-> Mumbai`, `Constantinople <-> Istanbul`, `Oskemen <-> Ust-Kamenogorsk`, `Alluitsoq <-> Lichtenau`) are whitelisted in `viscount_skill_profiles.json5` so legitimate historical re-romanisations never trigger false hijack failures.
      - Terminal Modern Name Anchor (`>= 1950` / `>= 1995`): whenever an Indigenous settlement temporarily carried a colonial name (`Port Simpson` -> `Lax Kw'alaams`, `Friendly Cove` -> `Yuquot`, `Godthåb` -> `Nuuk`, `Barrow` -> `Utqiaġvik`), record the modern Indigenous restoration entry (`>= 1950` date) at the end of `historical_names` so Dataview's `stadester_metadata.ts` resolves the modern endonym cleanly without Signature B reversion. Preserve canonical base primary `.name` without `_viscount_regional`.
-3. **Post-Index Integrity & Annual Continuity Check (`Gatekeeper F`)**:
-   - `verify_downstream_ci_cd.js --project=<KEY>` inspects both `stadester_2.0_indexed.json` AND annual `getCitiesAtYear(yr)` coverage across the region's `annual_continuity_span` (`<= 3,0%` YoY step outside `border_splice_years`), verifying:
-     - `0` `_viscount_regional` keys and `0` orphaned explicitly-tagged `city_metadata.json` records.
-     - `0` foreign-script `other_names` spam entries in Latin-script-only countries across all `14` macro-regions.
-     - `0` Signature A (`>= 1995` suburb hijack) or Signature B (`< 1920` defunct annex hijack on `>= 1950` active cities) regressions.
+3. **Verified Chronology, Suspicious-Name Screening & Variant-Duplicate Scrubbing (`extract_missing_city_metadata.js` & `merge_city_metadata.js`)**:
+   - `extract_missing_city_metadata.js` flags missing entries, `under_covered_history` (`earliest_year < 1850` with `> 100`-year lag), `suspicious_existing_name` (temples/shrines/monuments/admin suffixes or variant-spelling doublets) and corrupted entries, requiring name/exonym similarity even within `<= 2,5 km` so neighbouring distinct cities are never silently cross-bound.
+   - `merge_city_metadata.js` enforces strict calendar bounds (`-10000 <= Y <= 2026`, `Y != 0`, `1 <= M <= 12`, `1 <= D <= 31`), **forbids silent synthetic `1950.1.1` date fabrication** (returning undocumented terminal mismatches to `@verifier` for real date research), rejects `earliest_hist_year > earliest_year + 100` on pre-1900 cities, rejects suspicious temple/shrine/monument/admin-suffix names and collapses consecutive phonetic-variant spellings (`Samarqand` to `Samarkand`) cleanly into `other_names`.
+4. **Post-Index Integrity, Metadata Quality & Annual Continuity Check (`Gatekeeper F`)**:
+   - Run via `run_bounded.py --lock dataview_metadata --project <KEY> -- node .agents/skills/population-regional-study/scripts/verify_downstream_ci_cd.js --project=<KEY>`, verifying:
+     - `>= 95%` regional `city_metadata.json` match coverage on major (`>= 5k`) and pre-1900 settlements, and `>= 90%` pre-1850 earliest-year fallback coverage.
+     - `0` invalid/unsorted historical dates, `0` consecutive variant-spelling renames, `0` suspicious temple/monument/admin names and `0` near-duplicate `city_metadata.json` entries (`<= 15 km` matching stem / `<= 1,5 km` collision).
+     - `0` `_viscount_regional` keys, `0` orphaned explicitly-tagged `city_metadata.json` records, `0` foreign-script `other_names` spam entries in Latin-script-only countries and `0` Signature A/B hijackings.
 
 ---
 
@@ -88,9 +91,9 @@ Quantitative CSV/JSON metrics alone cannot confirm cartographic quality or PDF l
      }
      ```
    - Re-run `render_and_audit_kriging_visuals.py <domain_dir>` (without `--render-only`) to pass Gatekeeper C3.
-2. **Figure-by-Figure Visual Confirmation, Repair Loop & Auditor Sign-Off (`figures/visual_check.json`)**:
-   - Never treat `visual_check.json` as a script-generated formality or copy boilerplate notes across figures (`Gatekeeper D2` fails on duplicate or `< 50`-char notes).
-   - Crop multi-panel figures into individual panels (`1A..nD`), inspect **every figure and cropped panel one by one** via `read_file`, and inspect compiled `.pdf` Page `1` (`abstract` continuity with Page 2 if pushed by the cover hero) and multi-page tables. If ANY defect is found (pixelated mask tiles, warped/overextended ocean frame, stale pre-revision boundaries, occluded callout/legend, label crossing outside a panel spine, serif override, raw ASCII math, an orphaned Page-1 `Abstract` heading stranded without prose, or `LMMono`/monospace typography outside code), **fix the script or `.Rmd` / LaTeX headroom, regenerate that figure/PDF and re-open it via `read_file` in a loop until spotless** before proceeding.
+2. **Independent `@verifier` Figure-by-Figure Visual Confirmation & Repair Loop (`figures/visual_check.json`)**:
+   - Never treat `visual_check.json` as a script-generated formality or let the figure-authoring worker rubber-stamp its own PNGs (`Gatekeeper D2` fails on duplicate or `< 50`-char notes, and `save_viscount_figure()` defaults to `strict_layout=True` catching tick-label, callout, legend and suptitle collisions at generation time).
+   - Crop multi-panel figures into individual panels (`1A..nD`), dispatch an **independent `@verifier`** to inspect **every figure and cropped panel one by one** via `read_file`, and inspect compiled `.pdf` Page `1`, interior page density (`0` deadspace pages) and multi-page tables. If ANY defect is found (pixelated mask tiles, warped/overextended ocean frame, stale pre-revision boundaries, occluded callout/tick/title/legend, label crossing outside a panel spine, serif override, raw ASCII math, excessive interior page deadspace, an orphaned Page-1 `Abstract` heading stranded without prose, or `LMMono`/monospace typography outside code), **fix the script or `.Rmd` / LaTeX float headroom, regenerate that figure/PDF and re-open it via `read_file` in a loop until spotless** before proceeding.
    - Verify optically on every panel:
      - **Mask & Vector Fidelity**: Smooth projected vector sub-region polygons (`0` pixelated `*_areal_mask.png` `imshow()` blocks except continuous kriging/`Velkscala` surfaces) matching current masks and `.naissance` borders.
      - **Unwarped Equal-Area Framing**: Crisp `set_aspect("equal")` shapes with dedicated side-panels or insets for distant islands/exclaves (`0` stretched coastlines or empty-ocean frames).

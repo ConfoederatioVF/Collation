@@ -12,7 +12,7 @@ This skill may be pointed at any piece of text, file, or a folder. The scope of 
 - Do not use technobabble.
 - Do not use hyperbolic words, e.g. 'complete', 'empirical', 'validated', 'verified'. 
   - Ask if a caption or title sounds natural. Does this phrase sound human, or is it grandiose technobabble? If it's the latter, change it.
-- Drop words that serve no purpose, especially from headers.
+- Drop words that serve no purpose, especially from headers and titles. Keep document titles concise and matched to the assigned itinerary (`<= 78` characters / `<= 12` words for sub-chapters; root synthesis `"Studies on Population"`; subtitles `<= 95` characters), avoiding bloated formulaic prefixes (`"Demographic Trajectory of..."`, `"Studies on Population across..."`).
 - Do not overuse LaTeX in body prose; reserve `$...$` and `$$...$$` purely for equations or expressions. However, inside Matplotlib figures, axis labels, titles and legends, mathematical parameters, Greek symbols and exponents MUST be properly rendered with Matplotlib MathText (`$\nu = 3/2$`, `$\tau_1 = 1{,}41$`, `$R^2$`, `$\log_{10}$`, wrapping European decimal commas in braces `{,}`) rather than ugly raw ASCII (`nu = 3/2`, `tau1=1,41`, `Pseudo R-squared`, `log10(`). Figure plots must preserve Matplotlib's default sans-serif theme (`plt.rcdefaults()`, `DejaVu Sans`, 4-sided axes frame), format decimal axis ticks with European commas (`0,75`, not `0.75`), never display scientific notation (`10^4`, `1e5`) or raw `log10` exponents on real-world counts (sites, inhabitants, settlements or densities — write plain numbers or semantic suffixes `k`, `M`, `B`), never use technobabble titles (`Non-Stationary Matérn Residual Kriging Fit Summary`) and never apply `.replace('_', ' ').title()` to raw schema keys (which corrupts Roman numerals into `Pueblo Iii` or `Pueblo Ii`).
 - Do not overuse bullet points. Bullet points should be reserved for lists.
 - Do not place a space between /, i.e. ' / '. Humans do not write this way.
@@ -35,7 +35,7 @@ This skill may be pointed at any piece of text, file, or a folder. The scope of 
 
 - Captions for figures may not be more than two sentences as a general rule.
 - Ensure figures are not squashed, stretched (`aspect="auto"` on maps) or overextended across empty ocean; draw spatial regions using crisp vector boundaries (`PatchCollection`) rather than pixelated categorical raster masks (reserving rasters strictly for continuous density/kriging surfaces and matrix heatmaps).
-- Ensure tables and figures have zero occluded text, legends or labels, and that labels, callouts and bar values never cross outside their panel spines or figure bounds. Regenerate figures and recompile PDFs whenever upstream masks or data change, inspecting every figure individually via `read_file`.
+- Ensure tables and figures have zero occluded text, tick labels, suptitles, legends or labels, and that labels, callouts and bar values never cross outside their panel spines or figure bounds. Tune LaTeX float heights (`<= 0,42\textheight` for interior figures) and float fractions so compiled PDF pages contain zero excessive vertical deadspace (`>= 35%` interior page occupancy). Regenerate figures and recompile PDFs whenever upstream masks or data change, inspecting every figure individually via `read_file`.
 - Instead of arrows (->), write 'to'.
 - When sample sizes are relevant, provide it as (n=17) or n=19, not spelled out in prose.
 

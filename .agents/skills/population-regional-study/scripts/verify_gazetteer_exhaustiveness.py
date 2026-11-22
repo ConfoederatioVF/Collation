@@ -116,6 +116,78 @@ def _haversine_km(arg0_lat1, arg1_lon1, arg2_lat2, arg3_lon2):
   return 6371.0 * 2.0 * math.atan2(math.sqrt(a), math.sqrt(max(0.0, 1.0 - a)))
 
 
+def _normalise_entity_stem(arg0_name):
+  """Normalises a settlement name across diacritics and common historical romanisations."""
+  import unicodedata
+  base = str(arg0_name or "").split(";")[0].split("(")[0].strip().lower()
+  base = unicodedata.normalize("NFD", base)
+  base = "".join(ch for ch in base if unicodedata.category(ch) != "Mn")
+  for src, dst in (("ł", "l"), ("đ", "d"), ("ø", "o"), ("ß", "ss"), ("æ", "ae"), ("œ", "oe")):
+    base = base.replace(src, dst)
+  base = re.sub(r"^(?:st\.?|saint|san|santa|sao|al-|el-)\s+", "saint ", base)
+  for src, dst in (("kh", "k"), ("gh", "g"), ("ph", "f"), ("dj", "j"), ("ou", "u"), ("ts", "c")):
+    base = base.replace(src, dst)
+  base = re.sub(r"[jy]", "i", base)
+  base = re.sub(r"[cq]", "k", base)
+  return re.sub(r"[^a-z0-9]+", "", base)
+
+
+def _bigram_dice(arg0_a, arg1_b):
+  """Computes Sørensen-Dice bigram similarity between two normalised stems."""
+  a = str(arg0_a or "")
+  b = str(arg1_b or "")
+  if not a or not b:
+    return 0.0
+  if a == b:
+    return 1.0
+  if len(a) < 2 or len(b) < 2:
+    return 0.0
+  bg_a = [a[i:i + 2] for i in range(len(a) - 1)]
+  bg_b = [b[i:i + 2] for i in range(len(b) - 1)]
+  inter = 0
+  for tok in bg_a:
+    if tok in bg_b:
+      inter += 1
+      bg_b.remove(tok)
+  return (2.0 * inter) / (len(bg_a) + (len(b) - 1))
+
+
+def _are_equivalent_exonyms(arg0_name_a, arg1_name_b, arg2_profiles):
+  """Returns True when two names share a normalised stem or declared romanisation equivalence class."""
+  a = _normalise_entity_stem(arg0_name_a)
+  b = _normalise_entity_stem(arg1_name_b)
+  if not a or not b:
+    return False
+  if a == b:
+    return True
+  for grp in (arg2_profiles or {}).get("romanisation_equivalences") or []:
+    if isinstance(grp, list) and a in grp and b in grp:
+      return True
+  return False
+
+
+def is_suspicious_toponym(arg0_name, arg1_profiles, arg2_is_arch_site=False):
+  """Detects non-settlement temples, shrines, monuments or raw admin-unit suffixes."""
+  raw = str(arg0_name or "").strip()
+  if not raw:
+    return None
+  low = raw.lower()
+  cfg = (arg1_profiles or {}).get("suspicious_toponym_patterns") or {}
+  allow = {str(x).strip().lower() for x in (cfg.get("allowlist") or [])}
+  if low in allow:
+    return None
+  qualifiers = [str(q).lower() for q in ((arg1_profiles or {}).get("arch_site_qualifiers") or [])]
+  if arg2_is_arch_site and any(re.search(rf"\b{re.escape(q)}\b", low) for q in qualifiers):
+    return None
+  for pat in (cfg.get("religious_monument_regexes") or []):
+    if re.search(pat, low, flags=re.IGNORECASE):
+      return f"religious/monumental non-settlement pattern `{pat}`"
+  for pat in (cfg.get("admin_unit_suffix_regexes") or []):
+    if re.search(pat, low, flags=re.IGNORECASE):
+      return f"raw administrative-unit suffix pattern `{pat}`"
+  return None
+
+
 def find_svea_root(arg0_start_path):
   """Walks upward from start path or script location to find SVEA workspace root."""
   candidates = [
@@ -418,15 +490,18 @@ def audit_spatial_bounds(arg0_entries, arg1_svea_root, arg2_mask_png=None, arg3_
 
 def audit_universal_gazetteer_anomalies(arg0_entries, arg1_mode, arg2_profiles, arg3_options):
   """Enforces universal checks across all 14 Viscount regions: (agglomeration) ghosts, compound
-  modern municipalities, foundation_year anachronisms, modern <=1,5km close pairs and GeoNames homonyms.
+  modern municipalities, foundation_year anachronisms, suspicious temple/admin names, all-era
+  variant-spelling near-duplicates, modern <=1,5km close pairs and GeoNames homonyms.
   """
   errors = []
   warnings = []
   qualifiers = [str(q).lower() for q in (arg2_profiles.get("arch_site_qualifiers") or [])]
   mod_yr = int(arg3_options.get("modern_census_year") or 1850)
   by_country = {}
+  all_by_country = {}
   dup_sig = {}
   aggl_hits, comp_hits, found_anach, close_pairs = [], [], [], []
+  suspicious_hits, variant_dup_hits = [], []
 
   for idx, city in enumerate(arg0_entries):
     cname = str(city.get("name") or city.get("key") or f"entry_{idx}")
@@ -444,10 +519,17 @@ def audit_universal_gazetteer_anomalies(arg0_entries, arg1_mode, arg2_profiles, 
           pos_yrs.append(yi)
       except (TypeError, ValueError):
         continue
+    min_yr = min(pos_yrs) if pos_yrs else 99999
     max_yr = max(pos_yrs) if pos_yrs else -99999
 
     if max_yr >= 1750 and " & " in cname and not any(q in cname.lower() for q in qualifiers):
       comp_hits.append(ckey)
+
+    is_pure_arch = max_yr < 1000 and any(re.search(rf"\b{re.escape(q)}\b", cname.lower()) for q in qualifiers)
+    if not city.get("verified_settlement"):
+      susp_reason = is_suspicious_toponym(cname, arg2_profiles, arg2_is_arch_site=is_pure_arch)
+      if susp_reason:
+        suspicious_hits.append(f"{ckey} ({susp_reason})")
 
     fy = city.get("foundation_year")
     if fy is not None:
@@ -466,6 +548,8 @@ def audit_universal_gazetteer_anomalies(arg0_entries, arg1_mode, arg2_profiles, 
         mod_set = {y for y in pos_yrs if y >= mod_yr}
         if mod_set:
           by_country.setdefault(country, []).append((ckey, la, lo, mod_set))
+        if pos_yrs:
+          all_by_country.setdefault(country, []).append((ckey, cname, _normalise_entity_stem(cname), la, lo, min_yr, max_yr))
       except (TypeError, ValueError):
         pass
 
@@ -482,6 +566,37 @@ def audit_universal_gazetteer_anomalies(arg0_entries, arg1_mode, arg2_profiles, 
     errors.append(f"[COMPOUND] Unsplit compound modern municipality `' & '` entry/entries ({len(comp_hits)}): {comp_hits[:5]}")
   if found_anach:
     errors.append(f"[FOUNDATION] Pre-foundation population anachronism(s) ({len(found_anach)}): {found_anach[:5]}")
+  if suspicious_hits:
+    errors.append(
+      f"[SUSPICIOUS_NAME] Non-settlement temple/shrine/monument or admin-unit name(s) detected ({len(suspicious_hits)}): {suspicious_hits[:5]}"
+    )
+
+  # All-era variant-spelling near-duplicate detection (<= 25 km same country with matching stem/Dice >= 0.82 or exonym equivalence)
+  for arr in all_by_country.values():
+    arr.sort(key=lambda x: x[3])
+    for i in range(len(arr)):
+      k1, n1, s1, la1, lo1, mn1, mx1 = arr[i]
+      if len(s1) < 3:
+        continue
+      for j in range(i + 1, len(arr)):
+        k2, n2, s2, la2, lo2, mn2, mx2 = arr[j]
+        if la2 - la1 > 0.25:
+          break
+        if len(s2) < 3 or abs(lo2 - lo1) > 0.45:
+          continue
+        if mx1 < mn2 - 100 or mx2 < mn1 - 100:
+          continue
+        dkm = _haversine_km(la1, lo1, la2, lo2)
+        if dkm <= 25.0:
+          is_dup_name = (s1 == s2) or _are_equivalent_exonyms(n1, n2, arg2_profiles) or (
+            min(len(s1), len(s2)) >= 5 and _bigram_dice(s1, s2) >= 0.82
+          )
+          if is_dup_name:
+            variant_dup_hits.append(f"{k1}<->{k2} ({dkm:.1f} km)")
+  if variant_dup_hits:
+    errors.append(
+      f"[VARIANT_DUP] Variant-spelling / near-duplicate settlement pair(s) <= 25 km ({len(variant_dup_hits)}): {variant_dup_hits[:5]}"
+    )
 
   if arg1_mode == "compiled" or arg3_options.get("check_close_pairs"):
     for arr in by_country.values():
@@ -526,6 +641,113 @@ def audit_universal_gazetteer_anomalies(arg0_entries, arg1_mode, arg2_profiles, 
   return errors, warnings
 
 
+def audit_subregion_era_matrix(arg0_entries, arg1_mask_png, arg2_ledger_obj=None):
+  """Cross-tabulates settlements against sibling areal-mask RGB zones across historical eras to catch unenriched sub-regions."""
+  errors = []
+  warnings = []
+  if not arg1_mask_png or not os.path.isfile(arg1_mask_png) or not arg0_entries:
+    return errors, warnings
+
+  cfg_path = re.sub(r"_areal_mask\.png$", ".json5", arg1_mask_png, flags=re.IGNORECASE)
+  if not os.path.isfile(cfg_path):
+    return errors, warnings
+
+  try:
+    cfg = load_json_or_json5(cfg_path)
+  except Exception:
+    return errors, warnings
+
+  sub_list = []
+  for k in ("regions", "subregions", "sub_regions", "zones"):
+    val_k = cfg.get(k)
+    if isinstance(val_k, list):
+      sub_list = [x for x in val_k if isinstance(x, dict)]
+      break
+    if isinstance(val_k, dict):
+      sub_list = [{"id": rk, **rv} for rk, rv in val_k.items() if isinstance(rv, dict)]
+      break
+  if len(sub_list) < 2:
+    return errors, warnings
+
+  arr = np.asarray(Image.open(arg1_mask_png).convert("RGBA"), dtype=np.uint8)
+  h, w = arr.shape[:2]
+  valid = (arr[:, :, 3] > 0) & ((arr[:, :, :3].sum(axis=2)) > 0)
+
+  sat_obj = (arg2_ledger_obj.get("saturation_audit") or {}) if isinstance(arg2_ledger_obj, dict) else {}
+  exempt_zones = {
+    str(z).strip().lower()
+    for z in (sat_obj.get("unurbanised_zones") or sat_obj.get("exempt_subregions") or [])
+  }
+
+  rgb_to_zone = {}
+  zone_px = {}
+  for sub in sub_list:
+    zid = str(sub.get("id") or sub.get("name") or "")
+    rgb = sub.get("rgb") or sub.get("color") or sub.get("colour")
+    if zid and isinstance(rgb, list) and len(rgb) >= 3:
+      t = (int(rgb[0]), int(rgb[1]), int(rgb[2]))
+      px_cnt = int((valid & (arr[:, :, 0] == t[0]) & (arr[:, :, 1] == t[1]) & (arr[:, :, 2] == t[2])).sum())
+      if px_cnt >= 40:
+        rgb_to_zone[t] = zid
+        zone_px[zid] = px_cnt
+
+  if len(zone_px) < 2:
+    return errors, warnings
+
+  zone_total = {z: 0 for z in zone_px}
+  zone_pre1900 = {z: 0 for z in zone_px}
+  any_pre1900 = False
+  for city in arg0_entries:
+    coords = city.get("coords")
+    pop = city.get("population") if isinstance(city.get("population"), dict) else {}
+    if not isinstance(coords, list) or len(coords) < 2:
+      continue
+    try:
+      r = min(h - 1, max(0, int((90.0 - float(coords[0])) * h / 180.0)))
+      c = min(w - 1, max(0, int((float(coords[1]) + 180.0) * w / 360.0)))
+    except (TypeError, ValueError):
+      continue
+    px_rgb = (int(arr[r, c, 0]), int(arr[r, c, 1]), int(arr[r, c, 2]))
+    zid = rgb_to_zone.get(px_rgb)
+    if not zid:
+      for dr in (-2, -1, 0, 1, 2):
+        for dc in (-2, -1, 0, 1, 2):
+          nr, nc = min(h - 1, max(0, r + dr)), min(w - 1, max(0, c + dc))
+          cand_z = rgb_to_zone.get((int(arr[nr, nc, 0]), int(arr[nr, nc, 1]), int(arr[nr, nc, 2])))
+          if cand_z:
+            zid = cand_z
+            break
+        if zid:
+          break
+    if not zid:
+      continue
+    zone_total[zid] += 1
+    has_pre = any(int(yk) <= 1900 and float(pv) > 0 for yk, pv in pop.items() if str(yk).lstrip("-").isdigit())
+    if has_pre:
+      zone_pre1900[zid] += 1
+      any_pre1900 = True
+
+  densities = [zone_total[z] / float(zone_px[z]) for z in zone_px if zone_total[z] > 0]
+  med_dens = float(np.median(densities)) if densities else 0.0
+  for zid, px_cnt in zone_px.items():
+    if zid.lower() in exempt_zones:
+      continue
+    if zone_total[zid] == 0:
+      errors.append(
+        f"[SUBREGION_GAP] Inhabited mask sub-region `{zid}` ({px_cnt} px) has 0 settlements; enrich before closing Stage B."
+      )
+    elif any_pre1900 and zone_pre1900[zid] == 0 and sum(zone_pre1900.values()) >= 15:
+      errors.append(
+        f"[SUBREGION_ERA_GAP] Sub-region `{zid}` has {zone_total[zid]} settlement(s) overall but 0 historical (<= 1900AD) entries; scrape historical cadastres/monographs for this sub-region."
+      )
+    elif med_dens > 0.0 and (zone_total[zid] / float(px_cnt)) < 0.15 * med_dens and zone_total[zid] < 5:
+      warnings.append(
+        f"[SUBREGION_SPARSE] Sub-region `{zid}` has very sparse settlement density ({zone_total[zid]} across {px_cnt} px vs median {med_dens * px_cnt:.1f}); verify exhaustive local scraping."
+      )
+
+  return errors, warnings
+
+
 def scan_ingestion_scripts(arg0_dir):
   """Scans regional `_shared` ingestion scripts for forbidden Top-N / truncation shortcuts."""
   errors = []
@@ -548,8 +770,8 @@ def scan_ingestion_scripts(arg0_dir):
   return errors
 
 
-def audit_saturation_ledger(arg0_ledger, arg1_entries, arg2_settlements_path):
-  """Validates `saturation_audit` metadata proving multi-wave exhaustive discovery."""
+def audit_saturation_ledger(arg0_ledger, arg1_entries, arg2_settlements_path, arg3_profiles=None, arg4_project_key=None):
+  """Validates `saturation_audit`, per-jurisdiction scraping completeness and source provenance diversity."""
   errors = []
   if not isinstance(arg0_ledger, dict):
     errors.append("[SATURATION] Source ledger must be an object containing `saturation_audit` when --require-saturation is active.")
@@ -559,6 +781,11 @@ def audit_saturation_ledger(arg0_ledger, arg1_entries, arg2_settlements_path):
   if not isinstance(sat, dict):
     errors.append("[SATURATION] Missing `saturation_audit` block in `_source_ledger.json5` (required for one-shot regional studies).")
     return errors
+
+  caps = (arg3_profiles or {}).get("provenance_caps") or {}
+  max_crowd_pop = float(caps.get("max_crowd_settlement_share", 0.20))
+  max_crowd_ent = float(caps.get("max_crowd_settlement_entries_share", 0.30))
+  crowd_re = re.compile(r"(?<![a-z0-9])(?:wikidata|osm|openstreetmap|overpass|geonames|wikipedia|zenodo)(?![a-z0-9])", re.IGNORECASE)
 
   waves = sat.get("waves")
   if not isinstance(waves, list) or len(waves) < 3:
@@ -583,6 +810,9 @@ def audit_saturation_ledger(arg0_ledger, arg1_entries, arg2_settlements_path):
   if not isinstance(corpora, list) or len(corpora) == 0:
     errors.append("[SATURATION] Missing `saturation_audit.exhausted_corpora` confirming 100% row ingestion per dataset.")
   else:
+    total_corpus_rows = 0
+    crowd_corpus_rows = 0
+    non_crowd_corpora = 0
     for c in corpora:
       if not isinstance(c, dict):
         continue
@@ -590,6 +820,56 @@ def audit_saturation_ledger(arg0_ledger, arg1_entries, arg2_settlements_path):
       proc = int(c.get("rows_processed") or -1)
       if tot <= 0 or proc < tot:
         errors.append(f"[SATURATION] Corpus {c.get('name')!r} incomplete: processed {proc}/{tot} rows.")
+      total_corpus_rows += max(0, proc)
+      cname_str = f"{c.get('name', '')} {c.get('source_tier', '')} {c.get('url', '')}"
+      if crowd_re.search(cname_str) or str(c.get("source_tier") or "").lower() == "global_crowd_wikidata_osm":
+        crowd_corpus_rows += max(0, proc)
+      else:
+        non_crowd_corpora += 1
+    if non_crowd_corpora == 0:
+      errors.append("[PROVENANCE] `exhausted_corpora` relies exclusively on global crowd/fallback sources (Wikidata/OSM/GeoNames/Zenodo); scrape national censuses, cadastres and monographs.")
+    elif total_corpus_rows > 0 and (float(crowd_corpus_rows) / total_corpus_rows) > max_crowd_ent:
+      errors.append(
+        f"[PROVENANCE] Global crowd/fallback rows ({crowd_corpus_rows}/{total_corpus_rows} = {100.0 * crowd_corpus_rows / total_corpus_rows:.1f}%) exceed cap (<= {max_crowd_ent * 100:.0f}%)."
+      )
+
+  # Per-jurisdiction scraping & historical demography coverage verification
+  jur_cov = sat.get("jurisdiction_coverage") or arg0_ledger.get("jurisdiction_coverage")
+  if isinstance(jur_cov, dict) and jur_cov:
+    for jid, jinfo in jur_cov.items():
+      if not isinstance(jinfo, dict):
+        continue
+      prim_sources = jinfo.get("primary_sources") or jinfo.get("census_cadastre_sources") or []
+      demo_lit = jinfo.get("demography_literature") or jinfo.get("papers") or []
+      crowd_share = jinfo.get("crowd_fallback_share")
+      if not isinstance(prim_sources, list) or len(prim_sources) == 0:
+        errors.append(
+          f"[JURISDICTION_SCRAPE] Jurisdiction `{jid}` lacks scraped primary census/cadastre/national registry sources in `jurisdiction_coverage`."
+        )
+      elif all(crowd_re.search(str(s)) for s in prim_sources):
+        errors.append(
+          f"[JURISDICTION_SCRAPE] Jurisdiction `{jid}` lists only global crowd/fallback sources ({prim_sources}); scrape national/regional sources."
+        )
+      if isinstance(demo_lit, list) and len(demo_lit) == 0 and "demography_literature" in jinfo:
+        errors.append(
+          f"[JURISDICTION_LIT] Jurisdiction `{jid}` has 0 archived historical demography/population papers recorded."
+        )
+      if crowd_share is not None and float(crowd_share) > max_crowd_pop:
+        errors.append(
+          f"[JURISDICTION_PROVENANCE] Jurisdiction `{jid}` crowd/global fallback share is {float(crowd_share)*100:.1f}% (> {max_crowd_pop*100:.0f}% ceiling)."
+        )
+    if arg4_project_key and sat.get("scope") == "project":
+      matrix = ((arg3_profiles or {}).get("jurisdiction_source_matrix") or {}).get(arg4_project_key, {})
+      req_jurs = [str(r.get("id")) for r in (matrix.get("required_jurisdictions") or []) if isinstance(r, dict) and r.get("id")]
+      missing_jurs = [j for j in req_jurs if j not in jur_cov]
+      if missing_jurs:
+        errors.append(
+          f"[JURISDICTION_SCRAPE] Project `{arg4_project_key}` `jurisdiction_coverage` omits required jurisdiction(s): {missing_jurs}."
+        )
+  elif sat.get("require_jurisdiction_coverage") is not False:
+    errors.append(
+      "[JURISDICTION_SCRAPE] Missing `saturation_audit.jurisdiction_coverage` mapping proving every constituent country/jurisdiction had primary national/regional sources scraped."
+    )
 
   if sat.get("submask_coverage_complete") is not True:
     submask_cov = sat.get("submask_coverage")
@@ -789,11 +1069,18 @@ def audit_settlements(arg0_paths, arg1_ledger_path=None, arg2_require_sources=Fa
             f"{os.path.basename(mask_png)}, yet ledger/gazetteer records only {obs_cands} candidate(s) (< {cand_floor} floor)."
           )
 
+  profiles = load_skill_profiles(svea_root)
+  proj_key, proj_defaults = infer_project_from_paths(arg0_paths, svea_root)
+
   if options.get("require_saturation") and resolved_mode == "regional":
     if ledger_obj is None:
       errors.append("[SATURATION] --require-saturation requires --ledger <_source_ledger.json5>.")
     else:
-      errors.extend(audit_saturation_ledger(ledger_obj, entries, primary_path))
+      errors.extend(audit_saturation_ledger(ledger_obj, entries, primary_path, profiles, proj_key))
+    if mask_png:
+      sm_errs, sm_warns = audit_subregion_era_matrix(entries, mask_png, ledger_obj)
+      errors.extend(sm_errs)
+      warnings.extend(sm_warns)
 
   # Script truncation scanner in regional mode or explicit --scan-scripts
   scan_dir = options.get("scan_scripts")
@@ -809,8 +1096,6 @@ def audit_settlements(arg0_paths, arg1_ledger_path=None, arg2_require_sources=Fa
   if scan_dir:
     errors.extend(scan_ingestion_scripts(scan_dir))
 
-  profiles = load_skill_profiles(svea_root)
-  _proj_key, proj_defaults = infer_project_from_paths(arg0_paths, svea_root)
   opts_merged = dict(options)
   if not opts_merged.get("modern_census_year"):
     opts_merged["modern_census_year"] = proj_defaults.get("default_modern_census_year", 1850)

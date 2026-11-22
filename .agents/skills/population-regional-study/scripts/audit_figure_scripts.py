@@ -320,7 +320,10 @@ def audit_python_source (arg0_source, arg1_label):
   has_subplot_creation = False
   has_fractional_axis_lim = False
   has_geo_labels = bool(re.search(r"\b(?:Longitude|Latitude)\b", arg0_source))
-  has_layout_guard = any(g in arg0_source for g in CALLOUT_GUARD_IDENTIFIERS)
+  has_layout_guard = any(g in arg0_source for g in CALLOUT_GUARD_IDENTIFIERS) or ("save_viscount_figure" in arg0_source)
+  has_legend_or_cbar = bool(re.search(r"\b(?:legend|colorbar)\s*\(", arg0_source))
+  has_suptitle = False
+  has_tight_layout_no_rect = False
   text_annotate_count = 0
   is_stage_a2_overlay = os.path.basename(arg1_label).lower() == "audit_areal_masks.py"
 
@@ -353,6 +356,10 @@ def audit_python_source (arg0_source, arg1_label):
 
       if fn_name in {"text", "annotate"}:
         text_annotate_count += 1
+      if fn_name == "suptitle":
+        has_suptitle = True
+      if fn_name == "tight_layout" and not any(kw.arg == "rect" for kw in node.keywords):
+        has_tight_layout_no_rect = True
 
       if fn_name == "set_aspect" and has_geo_labels and node.args:
         asp_arg = extract_ast_text(node.args[0])
@@ -534,9 +541,19 @@ def audit_python_source (arg0_source, arg1_label):
     warnings.append(
       f"[{arg1_label}] fractional [0, 1] axis limits set without European `FuncFormatter` / tick formatting (risks US `0.75` dots)."
     )
-  if text_annotate_count >= 4 and not has_layout_guard and not is_stage_a2_overlay and "render_and_audit_kriging_visuals.py" not in arg1_label:
-    warnings.append(
-      f"[{arg1_label}] places {text_annotate_count} text/annotate labels without calling `verify_panel_bounds_and_overlaps` / `place_inbounds_callouts`."
+  if (
+    has_subplot_creation
+    and (text_annotate_count >= 1 or has_legend_or_cbar)
+    and not has_layout_guard
+    and not is_stage_a2_overlay
+    and "render_and_audit_kriging_visuals.py" not in arg1_label
+  ):
+    errors.append(
+      f"[{arg1_label}] [OCCLUSION_GUARD] Figure script places labels/legends/colorbars without calling `verify_panel_bounds_and_overlaps` or `save_viscount_figure(..., strict_layout=True)`."
+    )
+  if has_suptitle and has_tight_layout_no_rect:
+    errors.append(
+      f"[{arg1_label}] [OCCLUSION_GUARD] Calls `suptitle()` paired with `tight_layout()` without `rect=[0, 0, 1, 0.94]`; risks suptitle overlapping top panel titles."
     )
 
   file_has_lognorm = bool(re.search(r"\b(?:LogNorm|SymLogNorm)\b", arg0_source))

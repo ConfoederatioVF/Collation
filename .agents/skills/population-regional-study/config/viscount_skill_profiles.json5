@@ -275,5 +275,206 @@
     ["bishkek", "frunze", "pishpek"],
     ["dushanbe", "stalinabad"],
     ["alluikok", "likhtenau"]
-  ]
+  ],
+
+  // Universal source-provenance and bibliography diversity limits (enforced project-wide and per jurisdiction)
+  provenance_caps: {
+    max_zenodo_bib_ratio_chapter: 0.15,
+    max_zenodo_bib_ratio_project: 0.10,
+    max_crowd_bib_ratio: 0.10,
+    min_bib_publisher_domains: 5,
+    max_crowd_kriging_share: 0.25,
+    min_regional_arch_share: 0.50,
+    max_crowd_settlement_share: 0.20,
+    max_crowd_settlement_entries_share: 0.30
+  },
+
+  // Canonical RMarkdown title/subtitle conciseness and itinerary contract
+  title_limits: {
+    root_title: "Studies on Population",
+    max_chapter_title_chars: 78,
+    max_chapter_title_words: 12,
+    max_subtitle_chars: 95
+  },
+
+  // Suspicious non-settlement toponym patterns (temples, shrines, monuments, administrative units)
+  suspicious_toponym_patterns: {
+    religious_monument_regexes: [
+      "^wat\\s+",
+      "^candi\\s+",
+      "^prasat\\s+",
+      "^pura\\s+",
+      "^stupa\\s+",
+      "^mazar\\s+",
+      "^caravanserai\\s+",
+      "\\b(?:temple|shrine|pagoda|monastery|mosque|mausoleum|tomb|basilica|cathedral|abbey|church|chapel|sanctuary|stupa|jinja|taisha|hachimangu|guangfu\\s+temple|kofun\\s+tomb)\\b",
+      "[a-z]+-(?:ji|dera|jinja|taisha|sa|am)$"
+    ],
+    admin_unit_suffix_regexes: [
+      "-(?:shi|si|gun|ken|fu|do|cho|machi|mura|gu|dong|myeon|eup)$",
+      "\\b(?:prefecture|oblast|krai|raion|uyezd|volost|guberniya|province|district|municipality|regency|kabupaten|kecamatan|amphoe|changwat|wilayah|governorate|vilayet|sanjak|tehsil|taluka|upazila|comarca|departamento|canton|county|township|parish)\\s*$"
+    ],
+    // Genuine historic towns whose canonical names contain morphemes overlapping with the patterns above
+    allowlist: [
+      "watford",
+      "waterford",
+      "waterloo",
+      "temple",
+      "templeton",
+      "christchurch",
+      "abbeyfeale",
+      "abbeyleix",
+      "chapel hill",
+      "church hill",
+      "falls church",
+      "whitechurch",
+      "whitchurch",
+      "banteay meanchey",
+      "kampong cham",
+      "nakhon si thammarat",
+      "phra nakhon si ayutthaya",
+      "dazaifu",
+      "kofu",
+      "hofu",
+      "beppu",
+      "kanazawa",
+      "sendai",
+      "sapporo",
+      "nagasaki",
+      "fukuoka",
+      "kagoshima",
+      "naha",
+      "mazar-i-sharif",
+      "mazar-e-sharif",
+      "tombouctou",
+      "timbuktu",
+      "saint-denis",
+      "sanctuary point"
+    ]
+  },
+
+  // Mandatory per-country and distinct sub-jurisdiction archaeological & demographic scraping matrix
+  jurisdiction_source_matrix: {
+    CENTAUR: {
+      required_jurisdictions: [
+        { id: "united_states", label: "United States", arch_registers: ["DINAA", "tDAR", "CARD", "SHPO registries"], demo_sources: ["US Decennial Census", "Colonial muster/tax rolls"] },
+        { id: "canada", label: "Canada", arch_registers: ["CARD", "Canadian Museum of History", "Provincial heritage portals"], demo_sources: ["Census of Canada", "New France parish registers"] },
+        { id: "alaska_hawaii_territories", label: "Alaska, Hawaii & Associated Territories", arch_registers: ["AHRS Alaska", "SHPD Hawaii ahupuaa"], demo_sources: ["US Territorial Censuses", "Missionary/Kingdom of Hawaii censuses"] },
+        { id: "greenland", label: "Greenland", arch_registers: ["NKA Greenland National Museum"], demo_sources: ["Statistics Greenland", "Danish colonial censuses"] }
+      ]
+    },
+    POLARIS: {
+      required_jurisdictions: [
+        { id: "russia", label: "Russia (incl. Siberia)", arch_registers: ["IA RAS Archaeological Map of Russia", "Siberian Branch RAS"], demo_sources: ["1897 Imperial Census", "Revizskie skazki", "All-Union & Rosstat Censuses"] },
+        { id: "ukraine", label: "Ukraine", arch_registers: ["IA NASU registries", "Ukrainian Heritage Register"], demo_sources: ["Imperial/Polish-Lithuanian lustracje", "Ukrstat & Soviet Censuses"] },
+        { id: "belarus", label: "Belarus", arch_registers: ["Institute of History NASB"], demo_sources: ["Grand Duchy of Lithuania inventories", "Belstat & Soviet Censuses"] }
+      ]
+    },
+    PRETA: {
+      required_jurisdictions: [
+        { id: "brazil", label: "Brazil", arch_registers: ["IPHAN CNSA", "MAE-USP Amazonian registers"], demo_sources: ["IBGE Censuses (1872-2022)", "Colonial mapas de populacao"] },
+        { id: "bolivia", label: "Bolivia", arch_registers: ["UDAM Bolivia", "Llanos de Moxos surveys"], demo_sources: ["INE Bolivia", "Viceroyal revisitas"] },
+        { id: "paraguay", label: "Paraguay", arch_registers: ["SNC Paraguay", "Jesuit mission registers"], demo_sources: ["INE Paraguay", "Colonial padrones"] },
+        { id: "guianas", label: "Guyana, Suriname & French Guiana", arch_registers: ["INRAP Guyane", "Stichting Surinaams Museum"], demo_sources: ["INSEE", "ABS Suriname", "Guyana Bureau of Statistics"] }
+      ]
+    },
+    JADE: {
+      required_jurisdictions: [
+        { id: "china", label: "China (incl. Tibet, Xinjiang, Manchuria)", arch_registers: ["Atlas of Chinese Cultural Relics", "CHGIS", "CASS IA"], demo_sources: ["Zhongguo Renkou Shi", "Dynastic gazetteers", "NBS Censuses"] },
+        { id: "mongolia", label: "Mongolia", arch_registers: ["MAS Institute of Archaeology", "Steppe khirigsuur/walled-town catalogues"], demo_sources: ["Qing banner registers", "NSO Mongolia Censuses"] },
+        { id: "taiwan", label: "Taiwan", arch_registers: ["Academia Sinica IHP Archaeological Site GIS"], demo_sources: ["Japanese colonial censuses", "DGBAS Taiwan"] },
+        { id: "hong_kong_macao", label: "Hong Kong & Macao", arch_registers: ["AMO Hong Kong", "Macao Cultural Affairs Bureau"], demo_sources: ["Colonial & SAR Censuses"] }
+      ]
+    },
+    INDUS: {
+      required_jurisdictions: [
+        { id: "india", label: "India", arch_registers: ["ASI Indian Archaeology Review", "NMMA", "State Archaeology Directorates"], demo_sources: ["Census of India (1872-2011)", "Ain-i-Akbari & regional gazetteers"] },
+        { id: "pakistan", label: "Pakistan", arch_registers: ["DOAM Pakistan", "Indus Valley site catalogues"], demo_sources: ["PBS Censuses", "Imperial Gazetteer of India"] },
+        { id: "bangladesh", label: "Bangladesh", arch_registers: ["Department of Archaeology Bangladesh"], demo_sources: ["BBS Censuses", "Bengal District Gazetteers"] },
+        { id: "sri_lanka", label: "Sri Lanka", arch_registers: ["Department of Archaeology Sri Lanka"], demo_sources: ["DCS Sri Lanka Censuses (1871-2024)"] },
+        { id: "nepal_bhutan_maldives", label: "Nepal, Bhutan & Maldives", arch_registers: ["DoA Nepal", "Department of Culture Bhutan", "Maldives Heritage Survey"], demo_sources: ["NSO Nepal", "NSB Bhutan", "MBS Maldives"] }
+      ]
+    },
+    CASTLE: {
+      required_jurisdictions: [
+        { id: "japan_main", label: "Japan (Honshu, Kyushu, Shikoku)", arch_registers: ["NABUNKEN Comprehensive Database", "Agency for Cultural Affairs (Bunkacho)"], demo_sources: ["e-Stat / Statistics Bureau Japan (1920-2020)", "Shumon Aratamecho & Tokugawa surveys"] },
+        { id: "japan_hokkaido", label: "Hokkaido (Ezo)", arch_registers: ["Hokkaido Archaeological Operations Centre", "Kaitakushi/Jomon/Satsumon/Ainu chashi catalogues"], demo_sources: ["Matsumae/Bakufu Ezo surveys", "Kaitakushi & Hokkaido prefectural censuses"] },
+        { id: "japan_ryukyu", label: "Ryukyu Archipelago (Okinawa)", arch_registers: ["Okinawa Prefectural Archaeological Centre", "Gusuku site registers"], demo_sources: ["Ryukyu Kingdom registers", "Okinawa censuses"] },
+        { id: "south_korea", label: "South Korea", arch_registers: ["Korea Heritage Service (CHA)", "NRICH", "KCHGIS"], demo_sources: ["KOSIS Censuses", "Joseon Hojeok & Sejong Sillok Jiriji"] },
+        { id: "north_korea", label: "North Korea (incl. Eastern Provinces: Hamgyong/Kangwon)", arch_registers: ["Koguryo/Balhae/Koryo northern site monographs", "Japanese colonial Chosen Sotokufu archaeological surveys"], demo_sources: ["Joseon Hojeok (Hamgyong/Pyongan/Hwanghae)", "1925-1944 Chosen Censuses", "1993/2008 DPRK Censuses"] }
+      ]
+    },
+    MANDALA: {
+      required_jurisdictions: [
+        { id: "vietnam", label: "Vietnam", arch_registers: ["Vietnam Institute of Archaeology", "EFEO Champa/Oc Eo inventories"], demo_sources: ["GSO Vietnam", "Dai Viet/Nguyen dinh registers", "French Indochina censuses"] },
+        { id: "thailand", label: "Thailand", arch_registers: ["Fine Arts Department (FAD) GIS", "Princess Maha Chakri Sirindhorn Anthropology Centre"], demo_sources: ["NSO Thailand (1909-2020)", "Ayutthaya/Rattanakosin provincial rolls"] },
+        { id: "myanmar", label: "Myanmar", arch_registers: ["Department of Archaeology Myanmar", "Pyu/Pagan/Mrauk-U surveys"], demo_sources: ["Konbaung sittans", "British Burma Censuses (1872-1941)", "DOP 2014"] },
+        { id: "cambodia", label: "Cambodia", arch_registers: ["CISARK / EFEO Carte Interactive", "APSARA"], demo_sources: ["NIS Cambodia", "French Protectorate censuses"] },
+        { id: "laos", label: "Laos", arch_registers: ["Department of Heritage Laos", "Plain of Jars / EFEO Lao catalogues"], demo_sources: ["LSB Laos", "French Indochina Lao provincial censuses"] },
+        { id: "indonesia", label: "Indonesia (excl. West New Guinea)", arch_registers: ["Kemendikbud / Pusat Arkeologi Nasional", "Balai Arkeologi regional reports"], demo_sources: ["BPS Censuses", "Dutch Volkstelling (1920/1930)", "VOC/Raffles Java-Outer Islands returns"] },
+        { id: "malaysia_singapore_brunei", label: "Malaysia, Singapore & Brunei", arch_registers: ["Jabatan Warisan Negara", "Sarawak/Sabah Museum", "Brunei Museums"], demo_sources: ["DOSM", "SingStat", "DEPS Brunei", "Straits Settlements/FMS Censuses"] },
+        { id: "philippines", label: "Philippines", arch_registers: ["National Museum of the Philippines", "ASP/UP archaeological reports"], demo_sources: ["PSA Censuses (1903-2020)", "Spanish colonial padrones/Guia Oficial"] },
+        { id: "timor_leste", label: "Timor-Leste", arch_registers: ["ANU/Portuguese Timor cave & fortified-site surveys"], demo_sources: ["INETL Censuses", "Portuguese Timor colonial censuses"] }
+      ]
+    },
+    SARAY: {
+      required_jurisdictions: [
+        { id: "kazakhstan", label: "Kazakhstan", arch_registers: ["Margulan Institute of Archaeology", "CAAL", "Svod pamyatnikov Kazakhstana"], demo_sources: ["1897 Imperial Census", "All-Union Soviet & QazStat Censuses"] },
+        { id: "uzbekistan", label: "Uzbekistan", arch_registers: ["Samarkand Institute of Archaeology", "CAAL", "Uzbekistan Svod pamyatnikov"], demo_sources: ["Khanate fiscal/waqf records", "1897/1926-1989 Soviet & Stat.uz Censuses"] },
+        { id: "turkmenistan", label: "Turkmenistan", arch_registers: ["YuTAKE / Margiana-Nisa-Merv catalogues", "CAAL"], demo_sources: ["Transcaspian Oblast & Soviet Censuses", "State Committee of Statistics"] },
+        { id: "kyrgyzstan", label: "Kyrgyzstan", arch_registers: ["NAS KR Institute of History & Archaeology", "CAAL"], demo_sources: ["Semirechye/Fergana 1897 & Soviet/NSC Censuses"] },
+        { id: "tajikistan", label: "Tajikistan", arch_registers: ["Donish Institute of History & Archaeology", "CAAL"], demo_sources: ["Eastern Bukhara/Pamir surveys", "Soviet & TajStat Censuses"] }
+      ]
+    },
+    HANDBOOK: {
+      required_jurisdictions: [
+        { id: "turkey", label: "Turkey", arch_registers: ["TAY Project", "Ministry of Culture Inventory"], demo_sources: ["Ottoman tahrir defters", "TUIK Censuses (1927-2024)"] },
+        { id: "iran", label: "Iran", arch_registers: ["ICHHTO", "EAMENA Iran"], demo_sources: ["SCI Censuses (1956-2016)", "Qajar/Safavid urban surveys"] },
+        { id: "egypt", label: "Egypt", arch_registers: ["EES Delta Survey", "EAMENA", "SCA"], demo_sources: ["CAPMAS Censuses (1882-2017)", "Ottoman/Mamluk tax registers"] },
+        { id: "levant_iraq", label: "Iraq, Syria, Lebanon, Jordan, Israel, Palestine, Cyprus", arch_registers: ["MEGA-Jordan", "IAA Survey", "EAMENA", "SBA Iraq"], demo_sources: ["Ottoman salnames", "Mandate & national censuses"] },
+        { id: "arabia", label: "Saudi Arabia, Yemen, Oman, UAE, Qatar, Bahrain, Kuwait", arch_registers: ["EAMENA Arabia", "Saudi Heritage Commission"], demo_sources: ["National statistical agencies", "British/Ottoman Gulf gazetteers"] },
+        { id: "maghreb", label: "Morocco, Algeria, Tunisia, Libya, Western Sahara", arch_registers: ["EAMENA Maghreb", "INP Tunisia", "INSAP Morocco"], demo_sources: ["HCP", "ONS", "INS", "Colonial censuses"] },
+        { id: "caucasus_afghanistan", label: "Armenia, Azerbaijan, Georgia, Afghanistan", arch_registers: ["National Academies of Sciences", "DAFA / Archaeological Gazetteer of Afghanistan"], demo_sources: ["1897 Imperial & Soviet Censuses", "NSIA Afghanistan"] }
+      ]
+    },
+    MAGNETIC: {
+      required_jurisdictions: [
+        { id: "western_europe", label: "UK, Ireland, France, Benelux", arch_registers: ["ADS", "INRAP / Carte Archeologique", "ARCHIS", "NMS Ireland"], demo_sources: ["National censuses (1801-2021)", "Hearth/parish rolls"] },
+        { id: "central_europe", label: "Germany, Poland, Austria, Switzerland, Czechia, Slovakia, Hungary", arch_registers: ["AZP Poland", "AMCR Czechia", "ARIADNEplus", "Landesdenkmalamter"], demo_sources: ["Zollverein/Imperial/Habsburg & modern national censuses"] },
+        { id: "northern_europe", label: "Nordics & Baltics", arch_registers: ["Fornsok", "Askeladden", "Fund og Fortidsminder", "Kyppi", "Baltic heritage registers"], demo_sources: ["Tabellverket (1749+)", "National censuses"] },
+        { id: "southern_europe", label: "Italy, Spain, Portugal, Greece, Malta", arch_registers: ["FASTI Online", "Geoportal Arqueologico", "Portal do Arqueologo", "Chronique des Fouilles"], demo_sources: ["Catasto/Vecindarios", "ISTAT/INE/ELSTAT censuses"] },
+        { id: "balkans", label: "Former Yugoslavia, Romania, Bulgaria, Albania, Moldova", arch_registers: ["RAN Romania", "AKB Bulgaria", "National Heritage Institutes"], demo_sources: ["Ottoman defters", "Habsburg/National censuses"] }
+      ]
+    },
+    QUIPU: {
+      required_jurisdictions: [
+        { id: "peru", label: "Peru", arch_registers: ["SIGDA Ministerio de Cultura"], demo_sources: ["INEI Censuses", "Toledo visitas"] },
+        { id: "colombia_venezuela_ecuador", label: "Colombia, Venezuela & Ecuador", arch_registers: ["ICANH Atlas Arqueologico", "INPC Ecuador", "IPC Venezuela"], demo_sources: ["DANE", "INEC", "INE", "Colonial padrones"] },
+        { id: "southern_cone", label: "Chile, Argentina & Uruguay", arch_registers: ["CMN Chile", "INAPL Argentina", "CPC Uruguay"], demo_sources: ["INDEC", "INE Chile", "INE Uruguay (1869-2022)"] }
+      ]
+    },
+    JAGUAR: {
+      required_jurisdictions: [
+        { id: "mexico", label: "Mexico", arch_registers: ["INAH Registro Publico", "Mesoamerican settlement surveys"], demo_sources: ["INEGI Censuses (1895-2020)", "Relaciones Geograficas"] },
+        { id: "central_america", label: "Guatemala, Belize, Honduras, El Salvador, Nicaragua, Costa Rica, Panama", arch_registers: ["IDAEH", "IHAH", "MNCR Origenes"], demo_sources: ["National statistical institutes", "Colonial padrones"] },
+        { id: "caribbean", label: "Greater & Lesser Antilles", arch_registers: ["Caribbean archaeological site inventories", "INRAP Antilles"], demo_sources: ["Colonial slave/parish censuses", "National census offices"] }
+      ]
+    },
+    AUSTRAL: {
+      required_jurisdictions: [
+        { id: "australia", label: "Australia", arch_registers: ["AustArch", "State Aboriginal Heritage Registers"], demo_sources: ["ABS Censuses (1828/1881-2021)"] },
+        { id: "new_zealand", label: "New Zealand", arch_registers: ["ArchSite NZAA"], demo_sources: ["Stats NZ Censuses (1851-2023)"] },
+        { id: "new_guinea_melanesia", label: "Papua New Guinea, West New Guinea, Fiji, Solomons, Vanuatu, New Caledonia", arch_registers: ["PNG National Museum", "Lapita / ANU Pacific catalogues"], demo_sources: ["National statistical offices", "Colonial village books"] },
+        { id: "polynesia_micronesia", label: "Polynesia & Micronesia (excl. Hawaii/American Samoa)", arch_registers: ["SPC / Bishop Museum / French Polynesia DCP registers"], demo_sources: ["National & territorial censuses"] }
+      ]
+    },
+    NICETHI: {
+      required_jurisdictions: [
+        { id: "west_africa", label: "West Africa", arch_registers: ["OSAAR", "IFAN / West African radiocarbon & tell catalogues"], demo_sources: ["Colonial administrative censuses", "National statistical bureaus"] },
+        { id: "east_horn_africa", label: "Horn & East Africa", arch_registers: ["ARCCH Ethiopia", "NMK Kenya", "Swahili/Great Lakes site inventories"], demo_sources: ["National censuses", "Colonial tax/population returns"] },
+        { id: "central_africa", label: "Central Africa", arch_registers: ["RMCA Tervuren / Bantu expansion site catalogues"], demo_sources: ["Colonial & national censuses"] },
+        { id: "southern_africa_madagascar", label: "Southern Africa & Madagascar", arch_registers: ["SAHRIS South Africa", "NMMZ Zimbabwe", "ICM Madagascar"], demo_sources: ["Stats SA", "ZIMSTAT", "INSTAT Madagascar"] }
+      ]
+    }
+  }
 }

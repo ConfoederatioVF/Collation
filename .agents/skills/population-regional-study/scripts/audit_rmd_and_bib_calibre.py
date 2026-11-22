@@ -6,15 +6,123 @@ Thresholds enforced here are anti-stub guardrails, never target stopping quotas.
 
 import argparse
 import glob
+import hashlib
 import json
 import os
 import re
 import sys
 
 try:
+  import json5
+except ImportError:
+  json5 = None
+
+try:
   import pymupdf
 except ImportError:
   import fitz as pymupdf
+
+ZENODO_BIB_RE = re.compile(r"zenodo\.org|10\.5281/zenodo|\bzenodo\b", re.IGNORECASE)
+CROWD_BIB_RE = re.compile(r"wikidata\.org|openstreetmap\.org|overpass-api|geonames\.org|wikipedia\.org", re.IGNORECASE)
+URL_HOST_RE = re.compile(r"https?://(?:www\.)?([A-Za-z0-9.-]+\.[A-Za-z]{2,})", re.IGNORECASE)
+PUBLISHER_FIELD_RE = re.compile(r"(?i)\b(?:journal|publisher|institution|booktitle)\s*=\s*[\{\"]([^\}\"]+)")
+
+
+def _load_skill_profiles():
+  """Loads `.agents/skills/population-regional-study/config/viscount_skill_profiles.json5`."""
+  p = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "config/viscount_skill_profiles.json5")
+  if not os.path.isfile(p):
+    return {}
+  raw = open(p, "r", encoding="utf-8", errors="replace").read()
+  try:
+    return json5.loads(raw) if json5 else json.loads(re.sub(r"//.*?$", "", raw, flags=re.MULTILINE))
+  except Exception:
+    return {}
+
+
+def _audit_pdf_deadspace(arg0_doc, arg1_pdf_path, arg2_label, arg3_errors, arg4_warnings=None):
+  """Measures interior page vertical ink/content occupancy via PyMuPDF to catch excessive PDF deadspace."""
+  pages = len(arg0_doc)
+  if pages < 3:
+    return 0
+  pdf_name = os.path.basename(arg1_pdf_path)
+  deadspace_pages = 0
+  in_sources_section = False
+
+  for page_idx in range(1, pages - 1):
+    page = arg0_doc[page_idx]
+    txt = page.get_text("text") or ""
+    if re.search(r"(?m)^\s*(?:Sources|Footnotes|Appendix)\s*$", txt):
+      in_sources_section = True
+      continue
+    if in_sources_section:
+      continue
+    # Skip page immediately before a Sources/Appendix heading if it ends a section cleanly
+    next_txt = arg0_doc[page_idx + 1].get_text("text") or ""
+    if re.search(r"^\s*(?:Sources|Appendix)\b", next_txt.lstrip()):
+      continue
+
+    page_h = float(page.rect.height)
+    top_m = 68.0
+    bot_m = page_h - 68.0
+    printable_h = max(1.0, bot_m - top_m)
+
+    intervals = []
+    for blk in page.get_text("blocks"):
+      if len(blk) >= 4:
+        y0 = max(top_m, min(bot_m, float(blk[1])))
+        y1 = max(top_m, min(bot_m, float(blk[3])))
+        if y1 - y0 >= 3.0:
+          intervals.append((y0, y1))
+    for img_info in page.get_image_info(xrefs=False):
+      bb = img_info.get("bbox")
+      if bb and len(bb) >= 4:
+        y0 = max(top_m, min(bot_m, float(bb[1])))
+        y1 = max(top_m, min(bot_m, float(bb[3])))
+        if y1 - y0 >= 8.0:
+          intervals.append((y0, y1))
+    for drw in page.get_drawings():
+      rect = drw.get("rect")
+      if rect is not None:
+        y0 = max(top_m, min(bot_m, float(rect.y0)))
+        y1 = max(top_m, min(bot_m, float(rect.y1)))
+        if y1 - y0 >= 4.0 and (float(rect.x1) - float(rect.x0)) >= 20.0:
+          intervals.append((y0, y1))
+
+    if not intervals:
+      deadspace_pages += 1
+      arg3_errors.append(f"[{arg2_label}] {pdf_name} p.{page_idx + 1}: [DEADSPACE] blank interior page (0% vertical occupancy).")
+      continue
+
+    intervals.sort()
+    merged = [intervals[0]]
+    for y0, y1 in intervals[1:]:
+      py0, py1 = merged[-1]
+      if y0 <= py1 + 6.0:
+        merged[-1] = (py0, max(py1, y1))
+      else:
+        merged.append((y0, y1))
+
+    occupied_pt = sum(y1 - y0 for y0, y1 in merged)
+    occ_ratio = occupied_pt / printable_h
+
+    gaps = [merged[0][0] - top_m, bot_m - merged[-1][1]]
+    for i in range(len(merged) - 1):
+      gaps.append(merged[i + 1][0] - merged[i][1])
+    max_gap_ratio = max(gaps) / printable_h if gaps else 0.0
+
+    if occ_ratio < 0.35 or max_gap_ratio > 0.55:
+      deadspace_pages += 1
+      arg3_errors.append(
+        f"[{arg2_label}] {pdf_name} p.{page_idx + 1}: [DEADSPACE] excessive interior page whitespace "
+        f"(occupancy={occ_ratio*100:.1f}% < 35% or max_gap={max_gap_ratio*100:.1f}% > 55%); tune float heights (<= 0,42\\textheight) and LaTeX float fractions."
+      )
+    elif occ_ratio < 0.48 and arg4_warnings is not None:
+      arg4_warnings.append(
+        f"[{arg2_label}] {pdf_name} p.{page_idx + 1}: elevated interior page deadspace (occupancy={occ_ratio*100:.1f}% < 48%)."
+      )
+
+  return deadspace_pages
 
 
 BANNED_FALLBACK_PATTERNS = [
@@ -275,17 +383,21 @@ def audit_compiled_pdf(arg0_pdf_path, arg1_label, arg2_errors, arg3_warnings=Non
       arg2_errors.append(
         f"[{arg1_label}] {os.path.basename(arg0_pdf_path)}: horizontal margin overflow max_x1={max_x1:.2f} pt (> 540.5 pt)."
       )
+    deadspace_pages = _audit_pdf_deadspace(doc, arg0_pdf_path, arg1_label, arg2_errors, arg3_warnings)
   finally:
     doc.close()
 
-  return {"max_x1": round(max_x1, 2), "pages": pages, "qq_hits": qq_hits, "mono_pages": len(mono_pages)}
+  return {"deadspace_pages": deadspace_pages, "max_x1": round(max_x1, 2), "pages": pages, "qq_hits": qq_hits, "mono_pages": len(mono_pages)}
 
 
 def count_unique_bib_keys(arg0_chapter_dir, arg1_bib_names=None):
-  """Returns sorted unique BibTeX entry keys, `.bib` paths, and count of entries carrying DOI or external URL."""
+  """Returns sorted unique BibTeX entry keys, `.bib` paths, DOI/URL count, total entries and source-diversity telemetry."""
   keys = set()
   linked = 0
   total_entries = 0
+  zenodo_entries = 0
+  crowd_entries = 0
+  publisher_domains = set()
   if arg1_bib_names:
     bib_files = [
       os.path.join(arg0_chapter_dir, b)
@@ -308,11 +420,27 @@ def count_unique_bib_keys(arg0_chapter_dir, arg1_bib_names=None):
         total_entries += 1
         if link_re.search(ent):
           linked += 1
+        if ZENODO_BIB_RE.search(ent):
+          zenodo_entries += 1
+        if CROWD_BIB_RE.search(ent):
+          crowd_entries += 1
+        pm = PUBLISHER_FIELD_RE.search(ent)
+        if pm:
+          publisher_domains.add(pm.group(1).strip().lower()[:40])
+        else:
+          um = URL_HOST_RE.search(ent)
+          if um:
+            publisher_domains.add(um.group(1).strip().lower())
       for match in key_re.findall(content):
         keys.add(match.strip())
     except OSError:
       continue
-  return sorted(keys), bib_files, linked, total_entries
+  diversity = {
+    "crowd_entries": crowd_entries,
+    "publisher_domains": len(publisher_domains),
+    "zenodo_entries": zenodo_entries,
+  }
+  return sorted(keys), bib_files, linked, total_entries, diversity
 
 
 def audit_zipf_sample_floor(arg0_chapter_dir, arg1_label, arg2_errors):
@@ -546,25 +674,33 @@ def audit_chapter_dir(arg0_chapter_dir, arg1_root_dir, arg2_options=None):
         if not os.path.isfile(expected_pdf):
           errors.append(f"[{rel_label}] Missing compiled PDF {os.path.basename(expected_pdf)}.")
 
-  # Archival PDFs in ./papers/
+  # Archival PDFs in ./papers/ (validity + SHA-256 uniqueness)
   papers_dir = os.path.join(arg0_chapter_dir, "papers")
   valid_pdfs = []
+  seen_pdf_hashes = {}
   if not os.path.isdir(papers_dir):
     errors.append(f"[{rel_label}] Missing ./papers/ directory (anti-stub guardrail requires >= 15 valid archival PDFs).")
   else:
     for pdf_path in sorted(glob.glob(os.path.join(papers_dir, "*.pdf"))):
       if is_valid_pdf_file(pdf_path):
-        valid_pdfs.append(os.path.basename(pdf_path))
+        h_val = hashlib.sha256(open(pdf_path, "rb").read()).hexdigest()
+        if h_val in seen_pdf_hashes:
+          errors.append(
+            f"[{rel_label}] Duplicate archival PDF in ./papers/: `{os.path.basename(pdf_path)}` is identical to `{seen_pdf_hashes[h_val]}`."
+          )
+        else:
+          seen_pdf_hashes[h_val] = os.path.basename(pdf_path)
+          valid_pdfs.append(os.path.basename(pdf_path))
       else:
         errors.append(
           f"[{rel_label}] Corrupt/stub archival file papers/{os.path.basename(pdf_path)} (failed > 10 KB + `%PDF-` magic check)."
         )
     if len(valid_pdfs) < 15:
       errors.append(
-        f"[{rel_label}] Only {len(valid_pdfs)} valid PDFs in ./papers/ (anti-stub guardrail requires >= 15 valid `%PDF-` files)."
+        f"[{rel_label}] Only {len(valid_pdfs)} unique valid PDFs in ./papers/ (anti-stub guardrail requires >= 15 valid `%PDF-` files)."
       )
 
-  # Unique .bib entries & DOI/URL verification coverage
+  # Unique .bib entries, DOI/URL coverage & source diversity (anti-Zenodo / anti-Wikidata-only)
   ref_bibs = []
   for stem in paired_stems:
     for p_rmd in (os.path.join(arg0_chapter_dir, review_stems[stem]), os.path.join(arg0_chapter_dir, settlement_stems[stem])):
@@ -578,7 +714,13 @@ def audit_chapter_dir(arg0_chapter_dir, arg1_root_dir, arg2_options=None):
       except OSError:
         pass
 
-  bib_keys, bib_files, linked_entries, total_bib_entries = count_unique_bib_keys(arg0_chapter_dir, ref_bibs or None)
+  profiles = _load_skill_profiles()
+  caps = profiles.get("provenance_caps") or {}
+  max_zen_ch = float(caps.get("max_zenodo_bib_ratio_chapter", 0.15))
+  max_crowd_bib = float(caps.get("max_crowd_bib_ratio", 0.10))
+  min_pub_doms = int(caps.get("min_bib_publisher_domains", 5))
+
+  bib_keys, bib_files, linked_entries, total_bib_entries, bib_div = count_unique_bib_keys(arg0_chapter_dir, ref_bibs or None)
   if len(bib_keys) < 20:
     errors.append(
       f"[{rel_label}] Only {len(bib_keys)} unique .bib entries across {[os.path.basename(b) for b in bib_files]} (anti-stub guardrail requires >= 20)."
@@ -588,6 +730,22 @@ def audit_chapter_dir(arg0_chapter_dir, arg1_root_dir, arg2_options=None):
     if doi_ratio < 0.85:
       errors.append(
         f"[{rel_label}] Referenced bibliography DOI/URL coverage is {linked_entries}/{total_bib_entries} ({doi_ratio*100:.1f}% < 85.0% floor)."
+      )
+    zen_ratio = float(bib_div["zenodo_entries"]) / total_bib_entries
+    if zen_ratio > max_zen_ch:
+      errors.append(
+        f"[{rel_label}] [BIB_DIVERSITY] Excessive Zenodo reliance: {bib_div['zenodo_entries']}/{total_bib_entries} "
+        f"({zen_ratio*100:.1f}% > {max_zen_ch*100:.0f}% chapter cap); cite diverse peer-reviewed journals, university presses and national statistical sources."
+      )
+    crowd_ratio = float(bib_div["crowd_entries"]) / total_bib_entries
+    if crowd_ratio > max_crowd_bib:
+      errors.append(
+        f"[{rel_label}] [BIB_DIVERSITY] Excessive Wikidata/OSM/GeoNames/Wikipedia citations: {bib_div['crowd_entries']}/{total_bib_entries} "
+        f"({crowd_ratio*100:.1f}% > {max_crowd_bib*100:.0f}% cap)."
+      )
+    if total_bib_entries >= 10 and bib_div["publisher_domains"] < min_pub_doms:
+      errors.append(
+        f"[{rel_label}] [BIB_DIVERSITY] Bibliography cites only {bib_div['publisher_domains']} distinct publisher/journal/domain(s) (< {min_pub_doms} minimum)."
       )
 
   # Banned fallback datasets check, `# References` ban and wide-table check in sub-chapter .Rmd & .bib
@@ -699,6 +857,51 @@ def audit_target(arg0_target_path, arg1_options=None):
     chapter_reports.append(metrics)
     all_errors.extend(errs)
     all_warnings.extend(warns)
+
+  # Project-level Zenodo cap & per-jurisdiction historical demography literature check
+  if chapter_dirs != [target_abs] and chapter_dirs:
+    profiles = _load_skill_profiles()
+    caps = profiles.get("provenance_caps") or {}
+    max_zen_proj = float(caps.get("max_zenodo_bib_ratio_project", 0.10))
+    proj_bib_text = []
+    proj_paper_names = []
+    total_proj_bib = 0
+    total_proj_zen = 0
+    for b_p in [os.path.join(target_abs, "studies_on_population.bib")] + [
+      b for c_d in chapter_dirs for b in sorted(glob.glob(os.path.join(c_d, "*.bib")))
+      if os.path.basename(b).lower() != "intellte-sample.bib"
+    ]:
+      if os.path.isfile(b_p):
+        b_txt = open(b_p, "r", encoding="utf-8", errors="replace").read()
+        proj_bib_text.append(b_txt)
+        if os.path.basename(b_p).lower() == "studies_on_population.bib":
+          ents = re.split(r"(?m)^\s*@[A-Za-z]+\s*\{", b_txt)[1:]
+          total_proj_bib = len(ents)
+          total_proj_zen = sum(1 for e in ents if ZENODO_BIB_RE.search(e))
+    for c_d in chapter_dirs:
+      p_d = os.path.join(c_d, "papers")
+      if os.path.isdir(p_d):
+        proj_paper_names.extend(os.listdir(p_d))
+    if total_proj_bib > 0 and (float(total_proj_zen) / total_proj_bib) > max_zen_proj:
+      all_errors.append(
+        f"[root] [BIB_DIVERSITY] Project-wide Zenodo citation share is {total_proj_zen}/{total_proj_bib} "
+        f"({100.0 * total_proj_zen / total_proj_bib:.1f}% > {max_zen_proj*100:.0f}% ceiling)."
+      )
+    proj_key = os.path.basename(target_abs).upper()
+    j_matrix = (profiles.get("jurisdiction_source_matrix") or {}).get(proj_key)
+    if isinstance(j_matrix, dict):
+      corpus_blob = ("\n".join(proj_bib_text) + "\n" + "\n".join(proj_paper_names)).lower()
+      for j_item in j_matrix.get("required_jurisdictions") or []:
+        if not isinstance(j_item, dict):
+          continue
+        label_tokens = [
+          t for t in re.split(r"[^a-z]+", str(j_item.get("label") or "").lower())
+          if len(t) >= 4 and t not in {"incl", "excl", "main", "south", "north", "east", "west", "associated", "territories", "provinces", "archipelago"}
+        ]
+        if label_tokens and not any(tok in corpus_blob for tok in label_tokens):
+          all_errors.append(
+            f"[root] [JURISDICTION_LIT] Required jurisdiction `{j_item.get('id')}` ({j_item.get('label')}) has 0 matching historical demography references across project `.bib` / `./papers/`."
+          )
 
   # Enforce figure-script theme, MathText and label hygiene across chapter/project scripts
   try:

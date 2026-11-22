@@ -197,6 +197,339 @@ let path = require("path");
     },
 
     /**
+     * Checks whether a `YYYY.M.D` date string represents a valid historical calendar date (non-zero year, valid month/day, `<= 2026`).
+     * @alias viscount_entity_audit.isValidCalendarDate
+     *
+     * @param {string} arg0_date_str
+     *
+     * @returns {boolean}
+     */
+    isValidCalendarDate (arg0_date_str) {
+      //Convert from parameters
+      let raw = String(arg0_date_str || "").trim();
+
+      //Guard clauses
+      let m = raw.match(/^(-?\d+)\.(\d+)\.(\d+)$/);
+      if (!m) return false;
+
+      //Declare local instance variables
+      let day = Number(m[3]);
+      let month = Number(m[2]);
+      let year = Number(m[1]);
+
+      //Function body
+      if (!Number.isInteger(year) || year === 0 || year < -10000 || year > 2026) return false;
+      if (!Number.isInteger(month) || month < 1 || month > 12) return false;
+      if (!Number.isInteger(day) || day < 1 || day > 31) return false;
+
+      //Return statement
+      return true;
+    },
+
+    /**
+     * Detects non-settlement temple, shrine, monument or raw administrative-unit names using `viscount_skill_profiles.json5`.
+     * @alias viscount_entity_audit.isSuspiciousToponym
+     *
+     * @param {string} arg0_name
+     * @param {Object} [arg1_profiles]
+     *
+     * @returns {string|null}
+     */
+    isSuspiciousToponym (arg0_name, arg1_profiles) {
+      //Convert from parameters
+      let profiles = (arg1_profiles) ? arg1_profiles : this.loadSkillProfiles();
+      let raw = String(arg0_name || "").trim();
+
+      //Guard clauses
+      if (!raw) return null;
+
+      //Declare local instance variables
+      let cfg = (profiles && profiles.suspicious_toponym_patterns) ? profiles.suspicious_toponym_patterns : {};
+      let low = raw.toLowerCase();
+      let raw_allow = Array.isArray(cfg.allowlist) ? cfg.allowlist : [];
+      let rel_pats = Array.isArray(cfg.religious_monument_regexes) ? cfg.religious_monument_regexes : [];
+      let adm_pats = Array.isArray(cfg.admin_unit_suffix_regexes) ? cfg.admin_unit_suffix_regexes : [];
+
+      //Function body
+      for (let i = 0; i < raw_allow.length; i++) {
+        if (String(raw_allow[i] || "").trim().toLowerCase() === low) return null;
+      }
+      for (let i = 0; i < rel_pats.length; i++) {
+        if (new RegExp(rel_pats[i], "i").test(low)) return `religious/monument pattern ${rel_pats[i]}`;
+      }
+      for (let i = 0; i < adm_pats.length; i++) {
+        if (new RegExp(adm_pats[i], "i").test(low)) return `admin-unit suffix pattern ${adm_pats[i]}`;
+      }
+
+      //Return statement
+      return null;
+    },
+
+    /**
+     * Computes great-circle Haversine distance in km between two `[lat, lng]` coordinates.
+     * @alias viscount_entity_audit.haversineKm
+     *
+     * @param {number} arg0_lat1
+     * @param {number} arg1_lng1
+     * @param {number} arg2_lat2
+     * @param {number} arg3_lng2
+     *
+     * @returns {number}
+     */
+    haversineKm (arg0_lat1, arg1_lng1, arg2_lat2, arg3_lng2) {
+      //Convert from parameters
+      let lat1 = Number(arg0_lat1);
+      let lng1 = Number(arg1_lng1);
+      let lat2 = Number(arg2_lat2);
+      let lng2 = Number(arg3_lng2);
+
+      //Declare local instance variables
+      let d_lat = (lat2 - lat1)*Math.PI/180;
+      let d_lng = (lng2 - lng1)*Math.PI/180;
+      let rad1 = lat1*Math.PI/180;
+      let rad2 = lat2*Math.PI/180;
+
+      //Function body
+      let a = Math.sin(d_lat/2)*Math.sin(d_lat/2) +
+        Math.cos(rad1)*Math.cos(rad2)*Math.sin(d_lng/2)*Math.sin(d_lng/2);
+
+      //Return statement
+      return 6371*2*Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    },
+
+    /**
+     * Audits Dataview `stadester_2.0/city_metadata.json` for regional settlement coverage,
+     * historical date validity/earliest-year fallback alignment, suspicious temple/admin names,
+     * consecutive variant-spelling renames and near-duplicate metadata records.
+     * @alias viscount_entity_audit.verifyCityMetadataQuality
+     *
+     * @param {Object} arg0_proj
+     * @param {string} arg1_dataview_root
+     * @param {Array<string>} arg2_shard_files
+     * @param {Array<string>} arg3_errors
+     * @param {Object} [arg4_options]
+     *
+     * @returns {Object} Metadata quality telemetry
+     */
+    verifyCityMetadataQuality (arg0_proj, arg1_dataview_root, arg2_shard_files, arg3_errors, arg4_options) {
+      //Convert from parameters
+      let dataview_root = arg1_dataview_root;
+      let errors = arg3_errors;
+      let options = (arg4_options) ? arg4_options : {};
+      let proj = (arg0_proj) ? arg0_proj : {};
+      let shard_files = Array.isArray(arg2_shard_files) ? arg2_shard_files : [];
+
+      //Declare local instance variables
+      let bad_dates = [];
+      let consec_variant_dups = [];
+      let earliest_gap_hits = [];
+      let matched_major = 0;
+      let matched_meta_indices = new Set();
+      let matched_pre1850 = 0;
+      let meta_path = (options.meta_path) ? options.meta_path :
+        path.join(dataview_root, "data/stadester/stadester_2.0/city_metadata.json");
+      let near_dups = [];
+      let pre1850_covered = 0;
+      let profiles = this.loadSkillProfiles();
+      let spatial_grid = new Map();
+      let suspicious_names = [];
+      let total_major = 0;
+
+      //Guard clauses
+      if (!fs.existsSync(meta_path) || shard_files.length === 0)
+        return { bad_dates: 0, coverage_pct: 100, near_dups: 0, pre1850_coverage_pct: 100, suspicious_names: 0 };
+
+      //Function body
+      let meta_arr = JSON.parse(fs.readFileSync(meta_path, "utf8"));
+      if (!Array.isArray(meta_arr))
+        return { bad_dates: 0, coverage_pct: 0, near_dups: 0, pre1850_coverage_pct: 0, suspicious_names: 0 };
+
+      for (let i = 0; i < meta_arr.length; i++) {
+        let rec = meta_arr[i];
+        if (!rec || !Array.isArray(rec.coords) || rec.coords.length < 2) continue;
+        let lat = Number(rec.coords[1]);
+        let lng = Number(rec.coords[0]);
+        if (!Number.isFinite(lat) || !Number.isFinite(lng)) continue;
+
+        let stems = new Set();
+        let raw_names = [rec.name];
+        if (Array.isArray(rec.other_names)) raw_names = raw_names.concat(rec.other_names);
+        if (Array.isArray(rec.historical_names)) {
+          for (let x = 0; x < rec.historical_names.length; x++) {
+            if (rec.historical_names[x] && rec.historical_names[x].name)
+              raw_names.push(rec.historical_names[x].name);
+          }
+        }
+        for (let x = 0; x < raw_names.length; x++) {
+          let st = this.normaliseEntityStem(raw_names[x]);
+          if (st) stems.add(st);
+        }
+
+        let gkey = `${Math.round(lat*2)},${Math.round(lng*2)}`;
+        if (!spatial_grid.has(gkey)) spatial_grid.set(gkey, []);
+        spatial_grid.get(gkey).push({
+          idx: i,
+          lat: lat,
+          lng: lng,
+          rec: rec,
+          stem: this.normaliseEntityStem(rec.name),
+          stems: stems
+        });
+      }
+
+      let shard_base = (options.shard_dir) ? options.shard_dir : path.join(dataview_root, "data/stadester/stadester_2.0");
+      for (let i = 0; i < shard_files.length; i++) {
+        let sp = path.isAbsolute(shard_files[i]) ? shard_files[i] : path.join(shard_base, shard_files[i]);
+        if (!fs.existsSync(sp)) continue;
+        let sobj = JSON.parse(fs.readFileSync(sp, "utf8"));
+        let keys = Object.keys(sobj);
+
+        for (let x = 0; x < keys.length; x++) {
+          let city = sobj[keys[x]];
+          if (!city || !Array.isArray(city.coords) || city.coords.length < 2) continue;
+          let clat = Number(city.coords[0]);
+          let clng = Number(city.coords[1]);
+          let pop = (city.population && typeof city.population === "object") ? city.population : {};
+          let yrs = [];
+          let max_pop = 0;
+          let ykeys = Object.keys(pop);
+          for (let z = 0; z < ykeys.length; z++) {
+            let yi = Number(ykeys[z]);
+            let pv = Number(pop[ykeys[z]] || 0);
+            if (Number.isFinite(yi) && pv > 0) {
+              yrs.push(yi);
+              if (pv > max_pop) max_pop = pv;
+            }
+          }
+          if (yrs.length === 0) continue;
+          yrs.sort(function (arg0_a, arg1_b) { return arg0_a - arg1_b; });
+          let earliest_yr = yrs[0];
+          let is_major_or_hist = (max_pop >= 5000) || (earliest_yr < 1900);
+          if (!is_major_or_hist) continue;
+          total_major++;
+
+          let c_stem = this.normaliseEntityStem(city.name || keys[x]);
+          let gx = Math.round(clat*2);
+          let gy = Math.round(clng*2);
+          let best = null;
+          let best_d = 999999;
+
+          for (let dx = -1; dx <= 1; dx++) {
+            for (let dy = -1; dy <= 1; dy++) {
+              let bucket = spatial_grid.get(`${gx + dx},${gy + dy}`);
+              if (!bucket) continue;
+              for (let z = 0; z < bucket.length; z++) {
+                let cand = bucket[z];
+                let d_km = this.haversineKm(clat, clng, cand.lat, cand.lng);
+                if (d_km > 25.0) continue;
+                let name_hit = Boolean(c_stem && (cand.stems.has(c_stem) || this.areEquivalentExonyms(city.name || keys[x], cand.rec.name || "", profiles)));
+                if (name_hit && d_km < best_d) {
+                  best = cand;
+                  best_d = d_km;
+                }
+              }
+            }
+          }
+
+          if (!best) continue;
+          matched_major++;
+          matched_meta_indices.add(best.idx);
+
+          let hn = Array.isArray(best.rec.historical_names) ? best.rec.historical_names : [];
+          if (earliest_yr < 1850) {
+            matched_pre1850++;
+            if (hn.length > 0 && this.isValidCalendarDate(hn[0].date)) {
+              let first_h_yr = Number(String(hn[0].date).split(".")[0]);
+              if (first_h_yr <= earliest_yr + 100)
+                pre1850_covered++;
+              else
+                earliest_gap_hits.push(`${keys[x]}(earliest=${earliest_yr},first_meta=${first_h_yr})`);
+            } else {
+              earliest_gap_hits.push(`${keys[x]}(earliest=${earliest_yr},missing_hist)`);
+            }
+          }
+        }
+      }
+
+      // Inspect every matched regional city_metadata entry for date errors, variant dup renames, suspicious names & near-dups
+      let matched_list = [];
+      matched_meta_indices.forEach(function (arg0_idx) {
+        let rec = meta_arr[arg0_idx];
+        if (!rec) return;
+        let lat = Number(rec.coords[1]);
+        let lng = Number(rec.coords[0]);
+        matched_list.push({ idx: arg0_idx, lat: lat, lng: lng, rec: rec, stem: this.normaliseEntityStem(rec.name) });
+
+        let susp = this.isSuspiciousToponym(rec.name, profiles);
+        if (susp && !rec.verified_settlement)
+          suspicious_names.push(`${rec.name} (${susp})`);
+
+        let hn = Array.isArray(rec.historical_names) ? rec.historical_names : [];
+        let prev_yr = -999999;
+        let prev_stem = "";
+        for (let x = 0; x < hn.length; x++) {
+          let item = hn[x];
+          if (!item || !this.isValidCalendarDate(item.date)) {
+            bad_dates.push(`${rec.name}:${item ? item.date : "null"}`);
+            continue;
+          }
+          let yr = Number(String(item.date).split(".")[0]);
+          if (yr < prev_yr)
+            bad_dates.push(`${rec.name}:unsorted(${prev_yr}->${yr})`);
+          prev_yr = yr;
+
+          let h_susp = this.isSuspiciousToponym(item.name, profiles);
+          if (h_susp && !rec.verified_settlement)
+            suspicious_names.push(`${rec.name}->${item.name} (${h_susp})`);
+
+          let h_stem = this.normaliseEntityStem(item.name);
+          if (prev_stem && h_stem && h_stem === prev_stem && item.name !== hn[x - 1].name)
+            consec_variant_dups.push(`${rec.name}:${hn[x - 1].name}->${item.name}`);
+          prev_stem = h_stem;
+        }
+      }, this);
+
+      // Pairwise near-duplicate check across matched regional metadata entries
+      matched_list.sort(function (arg0_a, arg1_b) { return arg0_a.lat - arg1_b.lat; });
+      for (let i = 0; i < matched_list.length; i++) {
+        let a = matched_list[i];
+        for (let x = i + 1; x < matched_list.length; x++) {
+          let b = matched_list[x];
+          if (b.lat - a.lat > 0.16) break;
+          let d_km = this.haversineKm(a.lat, a.lng, b.lat, b.lng);
+          if (d_km <= 1.5 || (d_km <= 15.0 && a.stem && b.stem && (a.stem === b.stem || this.areEquivalentExonyms(a.rec.name, b.rec.name, profiles))))
+            near_dups.push(`${a.rec.name}<->${b.rec.name} (${d_km.toFixed(1)} km)`);
+        }
+      }
+
+      let cov_pct = (total_major > 0) ? (100.0*matched_major/total_major) : 100.0;
+      let pre1850_pct = (matched_pre1850 > 0) ? (100.0*pre1850_covered/matched_pre1850) : 100.0;
+
+      if (total_major >= 20 && cov_pct < 95.0)
+        errors.push(`Regional city_metadata.json coverage for ${proj.key || "PROJECT"} is ${matched_major}/${total_major} (${cov_pct.toFixed(1)}% < 95.0% floor).`);
+      if (matched_pre1850 >= 10 && pre1850_pct < 90.0)
+        errors.push(`Pre-1850 historical_names earliest-year coverage for ${proj.key || "PROJECT"} is ${pre1850_covered}/${matched_pre1850} (${pre1850_pct.toFixed(1)}% < 90.0% floor): ${earliest_gap_hits.slice(0, 5).join(", ")}`);
+      if (bad_dates.length > 0)
+        errors.push(`Invalid or unsorted historical_names dates in city_metadata.json (${bad_dates.length}): ${bad_dates.slice(0, 5).join(", ")}`);
+      if (consec_variant_dups.length > 0)
+        errors.push(`Spurious consecutive variant-spelling renames in city_metadata.json (${consec_variant_dups.length}): ${consec_variant_dups.slice(0, 5).join(", ")}`);
+      if (suspicious_names.length > 0)
+        errors.push(`Suspicious temple/monument/admin names in city_metadata.json (${suspicious_names.length}): ${suspicious_names.slice(0, 5).join(", ")}`);
+      if (near_dups.length > 0)
+        errors.push(`Near-duplicate city_metadata.json records (${near_dups.length}): ${near_dups.slice(0, 5).join(", ")}`);
+
+      //Return statement
+      return {
+        bad_dates: bad_dates.length,
+        consec_variant_dups: consec_variant_dups.length,
+        coverage_pct: Number(cov_pct.toFixed(2)),
+        near_dups: near_dups.length,
+        pre1850_coverage_pct: Number(pre1850_pct.toFixed(2)),
+        suspicious_names: suspicious_names.length
+      };
+    },
+
+    /**
      * Audits annual `getCitiesAtYear` point-density continuity across the macro-region's manifest
      * modern census span and checks Dataview `city_metadata.json` for regional orphans or corruptions.
      * @alias viscount_entity_audit.verifyAnnualContinuityAndOrphans

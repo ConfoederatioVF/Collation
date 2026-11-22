@@ -195,6 +195,12 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
         Array.isArray(shard_res.shard_files) ? shard_res.shard_files : [],
         errors
       );
+      let meta_quality_res = viscount_entity_audit.verifyCityMetadataQuality(
+        target_proj,
+        dataview_root,
+        Array.isArray(shard_res.shard_files) ? shard_res.shard_files : [],
+        errors
+      );
       let dv_res = { build_ok: false, cache_warmed: false, meta_versions_present: 0, skipped: audit_only };
       let intellte_res = { cached_rmd: 0, skipped: audit_only, total_rmd: 0, vp_built: false };
       let integrity_res = { checked_cities: 0, matched_cities: 0, skipped: false };
@@ -222,6 +228,7 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
         errors: errors,
         integrity: integrity_res,
         intellte: intellte_res,
+        metadata_quality: meta_quality_res,
         project: project_key,
         shards: shard_res,
         success: errors.length === 0
@@ -313,7 +320,8 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
         "let ds = StadesterService.loadDataset('stadester_2.0'); let p = StadesterService.ensureLiteCache('stadester_2.0');",
         "console.log('WARM_LITE_CACHE=' + p);"
       ].join(" ");
-      let cache_res = child_process.spawnSync(process.execPath, ["--max-old-space-size=16384", "--input-type=module", "-e", cache_script], {
+      let heap_mb = Math.min(8192, Math.max(2048, Number(process.env.VISCOUNT_MAX_RAM_MB) || 6144));
+      let cache_res = child_process.spawnSync(process.execPath, [`--max-old-space-size=${heap_mb}`, "--input-type=module", "-e", cache_script], {
         cwd: dataview_root,
         encoding: "utf8"
       });
@@ -330,14 +338,14 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
 
       let tsc_bin = path.join(dataview_root, "node_modules/typescript/bin/tsc");
       let vite_bin = path.join(dataview_root, "node_modules/vite/bin/vite.js");
-      let tsc_res = child_process.spawnSync(process.execPath, ["--max-old-space-size=16384", tsc_bin, "-b"], {
+      let tsc_res = child_process.spawnSync(process.execPath, [`--max-old-space-size=${heap_mb}`, tsc_bin, "-b"], {
         cwd: dataview_root,
         encoding: "utf8"
       });
       if (tsc_res.status !== 0) {
         errors.push(`Dataview tsc -b failed (exit=${tsc_res.status}): ${(tsc_res.stdout || tsc_res.stderr || "").slice(0, 500)}`);
       } else {
-        let vite_res = child_process.spawnSync(process.execPath, ["--max-old-space-size=16384", vite_bin, "build"], {
+        let vite_res = child_process.spawnSync(process.execPath, [`--max-old-space-size=${heap_mb}`, vite_bin, "build"], {
           cwd: dataview_root,
           encoding: "utf8"
         });

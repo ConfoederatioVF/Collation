@@ -358,7 +358,163 @@ def audit_dasymetric_habitability(arg0_domain_dir, arg1_svea_root, arg2_mask, ar
   }
 
 
-def audit_diagnostics(arg0_diag_path, arg1_max_tau1=1.8, arg2_max_nugget=0.45, arg3_min_baseline_mult=2.5):
+CROWD_SOURCE_RE = re.compile(r"(?<![a-z0-9])(?:wikidata|osm|openstreetmap|overpass|geonames|wikipedia|zenodo)(?![a-z0-9])", re.IGNORECASE)
+GLOBAL_C14_RE = re.compile(r"(?<![a-z0-9])(?:p3k14c|c14bazaar|c14_cleaned_dedup|xronos|global_c14)(?![a-z0-9])", re.IGNORECASE)
+
+
+def load_skill_profiles(arg0_svea_root):
+  """Loads `.agents/skills/population-regional-study/config/viscount_skill_profiles.json5`."""
+  cands = [
+    os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "config/viscount_skill_profiles.json5"),
+  ]
+  if arg0_svea_root:
+    cands.append(
+      os.path.join(arg0_svea_root, ".agents/skills/population-regional-study/config/viscount_skill_profiles.json5")
+    )
+  for cand in cands:
+    if os.path.isfile(cand):
+      raw = open(cand, "r", encoding="utf-8", errors="replace").read()
+      try:
+        return json5.loads(raw) if json5 else json.loads(re.sub(r"//.*?$", "", raw, flags=re.MULTILINE))
+      except Exception:
+        return {}
+  return {}
+
+
+def infer_project_key(arg0_domain_dir):
+  """Infers canonical Viscount project key from a domain directory path."""
+  norm = os.path.abspath(arg0_domain_dir).replace("\\", "/").upper()
+  m = re.search(r"/POPULATION_REGIONAL/([A-Z0-9_]+)/", norm)
+  return m.group(1) if m else None
+
+
+def audit_archaeological_provenance(arg0_domain_dir, arg1_diag_data, arg2_svea_root, arg3_errors, arg4_warnings, arg5_legacy_baseline=False):
+  """Audits domain-wide and per-jurisdiction archaeological provenance to block Wikidata/OSM-heavy or single-country-masked kriges."""
+  profiles = load_skill_profiles(arg2_svea_root)
+  caps = profiles.get("provenance_caps") or {}
+  max_crowd = float(caps.get("max_crowd_kriging_share", 0.25))
+  min_reg = float(caps.get("min_regional_arch_share", 0.50))
+
+  breakdown = arg1_diag_data.get("source_provenance_breakdown")
+  jur_cov = arg1_diag_data.get("jurisdiction_arch_coverage")
+  cfg_dir = os.path.join(arg0_domain_dir, "config")
+  if (breakdown is None or jur_cov is None) and os.path.isdir(cfg_dir):
+    for fn in sorted(os.listdir(cfg_dir)):
+      if fn.endswith("_geojson_metadata.json"):
+        try:
+          meta = json.loads(open(os.path.join(cfg_dir, fn), "r", encoding="utf-8", errors="replace").read())
+          if breakdown is None and isinstance(meta.get("source_provenance_breakdown"), (dict, list)):
+            breakdown = meta.get("source_provenance_breakdown")
+          if jur_cov is None and isinstance(meta.get("jurisdiction_arch_coverage"), dict):
+            jur_cov = meta.get("jurisdiction_arch_coverage")
+        except Exception:
+          continue
+
+  if breakdown is None:
+    msg = (
+      "[ARCH_PROVENANCE] Missing `source_provenance_breakdown` in kriging metadata; record site counts by "
+      "`national_regional_register`, `academic_monograph_table`, `global_radiocarbon` and `global_crowd_wikidata_osm`."
+    )
+    if arg5_legacy_baseline:
+      arg4_warnings.append(msg)
+    else:
+      arg3_errors.append(msg)
+    return {"arch_crowd_share": None, "arch_regional_share": None, "jurisdictions_checked": 0}
+
+  items = []
+  if isinstance(breakdown, dict):
+    for k, v in breakdown.items():
+      if isinstance(v, dict):
+        items.append({"name": k, "count": int(v.get("count") or v.get("sites") or 0), "tier": str(v.get("source_tier") or v.get("tier") or "")})
+      elif isinstance(v, (int, float)):
+        items.append({"name": k, "count": int(v), "tier": ""})
+  elif isinstance(breakdown, list):
+    for it in breakdown:
+      if isinstance(it, dict):
+        items.append({
+          "name": str(it.get("name") or it.get("source") or ""),
+          "count": int(it.get("count") or it.get("sites") or 0),
+          "tier": str(it.get("source_tier") or it.get("tier") or ""),
+        })
+
+  tot_sites = 0
+  crowd_sites = 0
+  regional_sites = 0
+  regional_sources = set()
+  for it in items:
+    cnt = max(0, it["count"])
+    tot_sites += cnt
+    tier = it["tier"].lower()
+    nm = it["name"]
+    if tier == "global_crowd_wikidata_osm" or (not tier and CROWD_SOURCE_RE.search(nm)):
+      crowd_sites += cnt
+    elif tier in {"national_regional_register", "academic_monograph_table"} or (
+      not tier and not GLOBAL_C14_RE.search(nm) and not CROWD_SOURCE_RE.search(nm)
+    ):
+      regional_sites += cnt
+      if cnt > 0:
+        regional_sources.add(nm.lower())
+
+  crowd_share = (float(crowd_sites) / tot_sites) if tot_sites > 0 else 0.0
+  reg_share = (float(regional_sites) / tot_sites) if tot_sites > 0 else 0.0
+
+  if tot_sites > 0:
+    if crowd_share > max_crowd:
+      arg3_errors.append(
+        f"[ARCH_PROVENANCE] Global crowd sources (Wikidata/OSM/Overpass/GeoNames) supply {crowd_sites}/{tot_sites} "
+        f"({crowd_share*100:.1f}% > {max_crowd*100:.0f}% ceiling); scrape national/regional archaeological registers."
+      )
+    if reg_share < min_reg:
+      arg3_errors.append(
+        f"[ARCH_PROVENANCE] Primary national/regional archaeological registers & monograph tables supply only {regional_sites}/{tot_sites} "
+        f"({reg_share*100:.1f}% < {min_reg*100:.0f}% floor); do not rely on global fallbacks alone."
+      )
+    if len(regional_sources) < 2 and tot_sites >= 100:
+      arg3_errors.append(
+        f"[ARCH_PROVENANCE] Only {len(regional_sources)} distinct regional/national archaeological source(s) composited; require >= 2."
+      )
+
+  jur_checked = 0
+  proj_key = infer_project_key(arg0_domain_dir)
+  if isinstance(jur_cov, dict) and jur_cov:
+    for jid, jdata in jur_cov.items():
+      if not isinstance(jdata, dict):
+        continue
+      jur_checked += 1
+      j_tot = int(jdata.get("total_sites") or 0)
+      j_crowd = int(jdata.get("crowd_sites") or 0)
+      j_reg = int(jdata.get("regional_register_sites") or 0) + int(jdata.get("monograph_sites") or 0)
+      j_sources = jdata.get("regional_sources") or []
+      if j_reg <= 0 or (isinstance(j_sources, list) and len(j_sources) == 0):
+        arg3_errors.append(
+          f"[JURISDICTION_ARCH] Jurisdiction `{jid}` has 0 primary national/regional archaeological register or monograph sites; "
+          "every constituent country/jurisdiction must have dedicated regional archaeology scraped."
+        )
+      if j_tot > 0 and (float(j_crowd) / j_tot) > max_crowd:
+        arg3_errors.append(
+          f"[JURISDICTION_ARCH] Jurisdiction `{jid}` relies {100.0 * j_crowd / j_tot:.1f}% on Wikidata/OSM/crowd sites (> {max_crowd*100:.0f}% ceiling)."
+        )
+    if proj_key and not arg5_legacy_baseline:
+      matrix = (profiles.get("jurisdiction_source_matrix") or {}).get(proj_key, {})
+      req_jurs = [str(r.get("id")) for r in (matrix.get("required_jurisdictions") or []) if isinstance(r, dict) and r.get("id")]
+      missing = [j for j in req_jurs if j not in jur_cov]
+      if missing:
+        arg3_errors.append(
+          f"[JURISDICTION_ARCH] Project `{proj_key}` `jurisdiction_arch_coverage` omits required jurisdiction(s): {missing}."
+        )
+  elif not arg5_legacy_baseline:
+    arg3_errors.append(
+      "[JURISDICTION_ARCH] Missing `jurisdiction_arch_coverage` per-country/jurisdiction provenance breakdown in kriging metadata."
+    )
+
+  return {
+    "arch_crowd_share": round(crowd_share, 4),
+    "arch_regional_share": round(reg_share, 4),
+    "jurisdictions_checked": jur_checked,
+  }
+
+
+def audit_diagnostics(arg0_diag_path, arg1_max_tau1=1.8, arg2_max_nugget=0.45, arg3_min_baseline_mult=2.5, arg4_legacy_baseline=False):
   """Inspects kriging diagnostics JSON for un-clamped sharpness, WLS covariates, habitability weighting, and baseline multiplier."""
   errors = []
   warnings = []
@@ -486,6 +642,7 @@ def audit_diagnostics(arg0_diag_path, arg1_max_tau1=1.8, arg2_max_nugget=0.45, a
   mask_arr, _cfg = load_domain_mask(domain_dir, svea_root)
   baseline_c14 = count_c14_in_mask(svea_root, mask_arr)
   hab_stats = audit_dasymetric_habitability(domain_dir, svea_root, mask_arr, errors, warnings)
+  prov_stats = audit_archaeological_provenance(domain_dir, data, svea_root, errors, warnings, arg4_legacy_baseline)
 
   mult = None
   if domain_sites is not None and baseline_c14 is not None and baseline_c14 >= 50:
@@ -507,6 +664,7 @@ def audit_diagnostics(arg0_diag_path, arg1_max_tau1=1.8, arg2_max_nugget=0.45, a
     "baseline_multiplier": round(mult, 2) if mult is not None else None,
   }
   summary.update(hab_stats)
+  summary.update(prov_stats)
   return errors, warnings, summary
 
 
@@ -516,6 +674,7 @@ def main():
   parser.add_argument("--max-tau1", type=float, default=1.8, help="Maximum allowed un-clamped tau1 (default 1.8)")
   parser.add_argument("--max-nugget", type=float, default=0.45, help="Maximum allowed nugget-to-sill ratio (default 0.45)")
   parser.add_argument("--min-baseline-multiplier", type=float, default=2.5, help="Min domain sites vs c14_cleaned_dedup in mask (default 2.5)")
+  parser.add_argument("--legacy-baseline", action="store_true", help="Downgrade missing provenance metadata on legacy pre-upgrade domains to warnings")
   parsed = parser.parse_args()
 
   errors, warnings, summary = audit_diagnostics(
@@ -523,6 +682,7 @@ def main():
     parsed.max_tau1,
     parsed.max_nugget,
     parsed.min_baseline_multiplier,
+    parsed.legacy_baseline,
   )
   for w in warnings:
     print(f"[WARN] {w}")

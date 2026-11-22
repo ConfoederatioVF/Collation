@@ -36,6 +36,13 @@ csl: crd-mla-numeric.csl
 link-citations: true
 header-includes:
   - |
+    \renewcommand{\topfraction}{0.88}
+    \renewcommand{\bottomfraction}{0.82}
+    \renewcommand{\textfraction}{0.08}
+    \renewcommand{\floatpagefraction}{0.75}
+    \setlength{\textfloatsep}{10pt plus 2pt minus 2pt}
+    \setlength{\intextsep}{10pt plus 2pt minus 2pt}
+    \raggedbottom
     \AtBeginDocument{%
       \makeatletter
       \ifdefined\crdneedspace
@@ -314,7 +321,7 @@ render_figure_template <- function (arg0_file_path, arg1_options = NULL) {
   options <- if (!is.null(arg1_options)) arg1_options else list()
   options$placement <- "!htbp"
   if (is.null(options$max_height) || identical(options$max_height, "none")) {
-    options$max_height <- "0.52\\textheight"
+    options$max_height <- "0.42\\textheight"
   }
   return(orig_render_figure_template(arg0_file_path, options))
 }
@@ -510,6 +517,34 @@ def compile_and_verify_report(rmd_path):
         qmarks.append((i + 1, w[4]))
   assert max_x1 <= 540.1, f"Right margin overflow in {pdf_path.name}: max_x1={max_x1:.2f}"
   assert len(qmarks) == 0, f"Unresolved ?? in {pdf_path.name}: {qmarks}"
+  # Interior page deadspace guard (p.2 .. p.N-1 excluding Sources/Appendix)
+  in_sources = False
+  for i in range(1, max(1, len(doc) - 1)):
+    pg_txt = doc[i].get_text("text") or ""
+    if any(ln.strip().lower() in {"sources", "footnotes", "appendix"} for ln in pg_txt.splitlines()):
+      in_sources = True
+      continue
+    if in_sources:
+      continue
+    ph = float(doc[i].rect.height)
+    top_m, bot_m = 68.0, ph - 68.0
+    ivs = sorted(
+      (max(top_m, min(bot_m, float(b[1]))), max(top_m, min(bot_m, float(b[3]))))
+      for b in doc[i].get_text("blocks") if len(b) >= 4 and float(b[3]) - float(b[1]) >= 3.0
+    ) + sorted(
+      (max(top_m, min(bot_m, float(im["bbox"][1]))), max(top_m, min(bot_m, float(im["bbox"][3]))))
+      for im in doc[i].get_image_info(xrefs=False) if im.get("bbox")
+    )
+    if ivs:
+      ivs.sort()
+      merged = [ivs[0]]
+      for y0, y1 in ivs[1:]:
+        if y0 <= merged[-1][1] + 6.0:
+          merged[-1] = (merged[-1][0], max(merged[-1][1], y1))
+        else:
+          merged.append((y0, y1))
+      occ = sum(y1 - y0 for y0, y1 in merged) / max(1.0, bot_m - top_m)
+      assert occ >= 0.35, f"Excessive interior deadspace in {pdf_path.name} p.{i + 1}: occupancy={occ*100:.1f}% < 35%"
   doc.close()
 
   papers_dir = p.parent / "papers"

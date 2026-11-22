@@ -28,7 +28,8 @@ Unlike `/literature-review-population` (which is restricted to Holocene regional
 - **External Literature & PDF Archiving (`./papers/`, When Applicable)**:
   - Whenever external academic scholarship, archival monographs or benchmark studies are cited, download and archive the primary/secondary source PDFs into `<report_dir>/papers/<author_year_short_title>.pdf`.
   - Verify every file in `./papers/` begins with a valid `%PDF` header and is `> 10 KB` (never save HTML landing/error pages as `.pdf`).
-  - Open-access repositories (CyberLeninka, Zenodo, JSTOR Open, Archive.org, arXiv, SSRN, institutional repositories) and shadow libraries (`Sci-Hub`, `LibGen`, `Anna's Archive`) are permitted to obtain regional monographs and journal articles.
+  - Open-access repositories (CyberLeninka, Zenodo, JSTOR Open, Archive.org, arXiv, SSRN, institutional repositories) and shadow libraries (`Sci-Hub`, `LibGen`, `Anna's Archive`) are permitted to obtain regional monographs and journal articles, but bibliographies MUST remain diverse across primary journals, university presses and official statistical agencies (cap Zenodo at `<= 15%` and Wikidata/OSM/GeoNames at `<= 10%` of `.bib` entries).
+  - Run heavy Python/Node/R EDA, scraping or compilation jobs via `python .agents/skills/population-regional-study/scripts/run_bounded.py -- <cmd>` so Win32 Job Objects, `BelowNormal` CPU priority and `geopng_compute.json5` RAM/thread limits prevent workstation lag and orphaned processes.
   - Reference archived PDFs in `<report_stem>.bib` (`note = {Archived PDF: ./papers/<filename>.pdf}`) and link them in prose where appropriate (`[archived PDF](papers/<filename>.pdf)`).
 
 ### 2. Prose, Style and Localisation Rules

@@ -307,14 +307,21 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
           let clat = Number(rec.coords_lat_lng[0]);
           let clng = Number(rec.coords_lat_lng[1]);
           let clean_modern = this.stripParenthetical(rec.canonical_name || rec.name || "");
+          let profiles = viscount_entity_audit.loadSkillProfiles(svea_root);
           if (this.isCorruptedCityName(clean_modern)) {
             console.error(`[merge_city_metadata] Rejected corrupted canonical name for ${rec.key}: "${rec.canonical_name || rec.name}"`);
+            counts.rejected_items++;
+            continue;
+          }
+          if (!rec.verified_settlement && viscount_entity_audit.isSuspiciousToponym(clean_modern, profiles)) {
+            console.error(`[merge_city_metadata] Rejected suspicious temple/monument/admin canonical name for ${rec.key}: "${clean_modern}"`);
             counts.rejected_items++;
             continue;
           }
 
           let raw_hist = Array.isArray(rec.historical_names) ? rec.historical_names : [];
           let valid_hist = [];
+          let collapsed_variants = [];
           for (let y = 0; y < raw_hist.length; y++) {
             let h = raw_hist[y];
             if (!h || typeof h !== "object") {
@@ -323,8 +330,13 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
             }
             let h_date = String(h.date || "").trim();
             let h_name = this.stripParenthetical(h.name || "");
-            if (!date_regex.test(h_date) || this.isCorruptedCityName(h_name)) {
-              console.error(`[merge_city_metadata] Rejected historical entry for ${rec.key}: date="${h_date}" name="${h_name}"`);
+            if (!date_regex.test(h_date) || !viscount_entity_audit.isValidCalendarDate(h_date) || this.isCorruptedCityName(h_name)) {
+              console.error(`[merge_city_metadata] Rejected invalid date/name historical entry for ${rec.key}: date="${h_date}" name="${h_name}"`);
+              counts.rejected_name_entries++;
+              continue;
+            }
+            if (!rec.verified_settlement && viscount_entity_audit.isSuspiciousToponym(h_name, profiles)) {
+              console.error(`[merge_city_metadata] Rejected suspicious temple/monument/admin historical entry for ${rec.key}: "${h_name}"`);
               counts.rejected_name_entries++;
               continue;
             }
@@ -338,7 +350,7 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
           }
 
           let promoted_site_alias = "";
-          let sorted_hist = this.sortAndDedupHistoricalNames(valid_hist);
+          let sorted_hist = this.sortAndDedupHistoricalNames(valid_hist, collapsed_variants);
           if (sorted_hist.length > 0 && this.hasArchSiteQualifier(clean_modern)) {
             let last_hist = sorted_hist[sorted_hist.length - 1];
             let last_year = this.dateSortTuple(last_hist.date)[0];
@@ -348,19 +360,25 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
             }
           }
 
-          //Terminal Modern Name Anchor: extant modern settlements must terminate at clean_modern
+          // Chronological coverage check: pre-1900 cities must not leave earliest_year uncovered
+          let earliest_year = Number(rec.earliest_year);
+          if (Number.isFinite(earliest_year) && earliest_year < 1900 && sorted_hist.length > 0) {
+            let first_hist_yr = this.dateSortTuple(sorted_hist[0].date)[0];
+            if (first_hist_yr > earliest_year + 100) {
+              console.error(`[merge_city_metadata] Rejected ${rec.key}: earliest historical_names year (${first_hist_yr}) lags settlement earliest_year (${earliest_year}) by > 100y (causes wrong fallback).`);
+              counts.rejected_items++;
+              continue;
+            }
+          }
+
+          // Terminal Modern Name Anchor: reject undocumented mismatches instead of fabricating synthetic 1950.1.1 dates
           let latest_year = Number(rec.latest_year || 0);
           if (latest_year >= 1950 && !rec.is_renamed_post_1950 && sorted_hist.length > 0) {
             let last_entry = sorted_hist[sorted_hist.length - 1];
             if (this.normaliseName(last_entry.name) !== this.normaliseName(clean_modern)) {
-              if (sorted_hist.length === 1 && this.dateSortTuple(last_entry.date)[0] >= 1980) {
-                console.error(`[merge_city_metadata] Rejected single mismatched modern stub (${last_entry.name} vs ${clean_modern}) for ${rec.key}.`);
-                counts.rejected_items++;
-                continue;
-              }
-              let anchor_yr = Math.max(this.dateSortTuple(last_entry.date)[0] + 1, 1950);
-              valid_hist.push({ date: `${anchor_yr}.1.1`, name: clean_modern });
-              sorted_hist = this.sortAndDedupHistoricalNames(valid_hist);
+              console.error(`[merge_city_metadata] Rejected ${rec.key}: terminal historical name "${last_entry.name}" (${last_entry.date}) mismatches modern "${clean_modern}" without documented rename date (refusing synthetic 1950.1.1 fabrication; return to @verifier).`);
+              counts.rejected_items++;
+              continue;
             }
           }
 
@@ -405,7 +423,8 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
           let clean_aliases = [];
           let raw_aliases = []
             .concat(Array.isArray(rec.known_aliases) ? rec.known_aliases : [])
-            .concat(Array.isArray(rec.other_names) ? rec.other_names : []);
+            .concat(Array.isArray(rec.other_names) ? rec.other_names : [])
+            .concat(collapsed_variants);
           if (promoted_site_alias && !this.isCorruptedCityName(promoted_site_alias) && promoted_site_alias !== clean_modern)
             clean_aliases.push(promoted_site_alias);
           for (let y = 0; y < raw_aliases.length; y++) {
@@ -436,13 +455,13 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
             }
             for (let y = 0; y < valid_hist.length; y++) combined_hist.push(valid_hist[y]);
 
-            target.historical_names = this.sortAndDedupHistoricalNames(combined_hist);
+            target.historical_names = this.sortAndDedupHistoricalNames(combined_hist, collapsed_variants);
             if (latest_year >= 1950 && !rec.is_renamed_post_1950 && target.historical_names.length > 0 && target.name) {
               let t_last = target.historical_names[target.historical_names.length - 1];
               if (this.normaliseName(t_last.name) !== this.normaliseName(target.name)) {
-                let restore_yr = Math.max(this.dateSortTuple(t_last.date)[0] + 1, 1950);
-                target.historical_names.push({ date: `${restore_yr}.1.1`, name: target.name });
-                target.historical_names = this.sortAndDedupHistoricalNames(target.historical_names);
+                console.error(`[merge_city_metadata] Skipped updating ${rec.key}: merged terminal historical name "${t_last.name}" (${t_last.date}) mismatches "${target.name}" (refusing synthetic 1950.1.1 fabrication).`);
+                counts.rejected_items++;
+                continue;
               }
             }
 
@@ -503,15 +522,17 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
     },
 
     /**
-     * Sorts historical name entries chronologically and collapses consecutive duplicate names.
+     * Sorts historical name entries chronologically and collapses consecutive exact or phonetic-variant duplicates.
      * @alias city_metadata_merger.sortAndDedupHistoricalNames
      *
      * @param {Array<Object>} arg0_entries
+     * @param {Array<string>} [arg1_dropped_variants]
      *
      * @returns {Array<Object>}
      */
-    sortAndDedupHistoricalNames (arg0_entries) {
+    sortAndDedupHistoricalNames (arg0_entries, arg1_dropped_variants) {
       //Convert from parameters
+      let dropped_variants = Array.isArray(arg1_dropped_variants) ? arg1_dropped_variants : null;
       let entries = Array.isArray(arg0_entries) ? arg0_entries.slice() : [];
 
       //Function body
@@ -538,7 +559,15 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
       let deduped = [];
       for (let i = 0; i < unique_entries.length; i++) {
         let cur = unique_entries[i];
-        if (deduped.length > 0 && deduped[deduped.length - 1].name === cur.name) continue;
+        if (deduped.length > 0) {
+          let prev = deduped[deduped.length - 1];
+          let prev_stem = viscount_entity_audit.normaliseEntityStem(prev.name);
+          let cur_stem = viscount_entity_audit.normaliseEntityStem(cur.name);
+          if (prev.name === cur.name || (prev_stem && cur_stem && prev_stem === cur_stem)) {
+            if (dropped_variants && cur.name !== prev.name) dropped_variants.push(cur.name);
+            continue;
+          }
+        }
         deduped.push(cur);
       }
 

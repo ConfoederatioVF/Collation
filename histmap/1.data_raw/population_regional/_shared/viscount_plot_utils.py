@@ -296,15 +296,17 @@ def place_inbounds_callouts (arg0_fig, arg1_ax, arg2_items, arg3_proj=None, arg4
 
 
 def save_viscount_figure (arg0_fig, arg1_output_path, arg2_dpi=300, arg3_options=None, **kwargs):
-  """Saves a Matplotlib figure cleanly at print resolution without clipping labels."""
+  """Saves a Matplotlib figure cleanly at print resolution after strict layout/occlusion verification."""
   opts = arg3_options if isinstance(arg3_options, dict) else {}
   dpi_val = int(kwargs.pop("dpi", arg2_dpi))
   bbox_mode = opts.get("bbox_inches", "tight")
-  if opts.get("verify_layout"):
+  verify_enabled = bool(opts.get("verify_layout", True))
+  strict_enabled = bool(opts.get("strict_layout", True))
+  if verify_enabled:
     verify_panel_bounds_and_overlaps(
       arg0_fig,
       os.path.basename(str(arg1_output_path)),
-      {"strict": bool(opts.get("strict_layout", False))}
+      {"strict": strict_enabled}
     )
   out_dir = os.path.dirname(str(arg1_output_path))
   if out_dir:
@@ -400,8 +402,9 @@ def verify_panel_bounds_and_overlaps (arg0_fig, arg1_label="", arg2_options=None
 
     for title_art in (ax.title, ax.xaxis.label, ax.yaxis.label):
       if title_art.get_visible() and title_art.get_text().strip():
+        t_txt = title_art.get_text().strip()
         t_bb = title_art.get_window_extent(rend)
-        check_canvas(title_art.get_text().strip(), t_bb)
+        check_canvas(t_txt, t_bb)
         for other_ax, o_bb in top_axes:
           if other_ax is ax or other_ax in ax.child_axes or ax in other_ax.child_axes:
             continue
@@ -409,17 +412,61 @@ def verify_panel_bounds_and_overlaps (arg0_fig, arg1_label="", arg2_options=None
             inter_w = min(t_bb.x1, o_bb.x1) - max(t_bb.x0, o_bb.x0)
             inter_h = min(t_bb.y1, o_bb.y1) - max(t_bb.y0, o_bb.y0)
             if inter_w > 4.0 and inter_h > 4.0:
-              overlaps.append(f"{arg1_label}: '{title_art.get_text().strip()}' overlaps adjacent panel.")
+              overlaps.append(f"{arg1_label}: '{t_txt}' overlaps adjacent panel.")
+        if title_art is ax.title:
+          for nm_loc, bb_loc in local_boxes:
+            if t_bb.overlaps(bb_loc):
+              inter_w = min(t_bb.x1, bb_loc.x1) - max(t_bb.x0, bb_loc.x0)
+              inter_h = min(t_bb.y1, bb_loc.y1) - max(t_bb.y0, bb_loc.y0)
+              if inter_w > 3.0 and inter_h > 3.0:
+                overlaps.append(f"{arg1_label}: subplot title '{t_txt}' overlaps '{nm_loc}'.")
+
+    # Check visible tick labels for pairwise overlap, axis-label overlap and adjacent panel collision
+    for axis_tag, tick_list, axis_lbl in (
+      ("xtick", ax.get_xticklabels(), ax.xaxis.label),
+      ("ytick", ax.get_yticklabels(), ax.yaxis.label),
+    ):
+      t_boxes = []
+      for tl in tick_list:
+        if not tl.get_visible() or not tl.get_text().strip():
+          continue
+        tl_bb = tl.get_window_extent(rend)
+        if tl_bb.width <= 0.5 or tl_bb.height <= 0.5:
+          continue
+        t_boxes.append((tl.get_text().strip(), tl_bb))
+      for i in range(len(t_boxes)):
+        nm_i, bb_i = t_boxes[i]
+        for x in range(i + 1, len(t_boxes)):
+          nm_x, bb_x = t_boxes[x]
+          if bb_i.overlaps(bb_x):
+            inter_w = min(bb_i.x1, bb_x.x1) - max(bb_i.x0, bb_x.x0)
+            inter_h = min(bb_i.y1, bb_x.y1) - max(bb_i.y0, bb_x.y0)
+            if inter_w > 2.5 and inter_h > 2.5:
+              overlaps.append(f"{arg1_label}: {axis_tag} '{nm_i}' overlaps '{nm_x}' ({inter_w:.1f}x{inter_h:.1f} px).")
+        if axis_lbl.get_visible() and axis_lbl.get_text().strip():
+          al_bb = axis_lbl.get_window_extent(rend)
+          if bb_i.overlaps(al_bb):
+            inter_w = min(bb_i.x1, al_bb.x1) - max(bb_i.x0, al_bb.x0)
+            inter_h = min(bb_i.y1, al_bb.y1) - max(bb_i.y0, al_bb.y0)
+            if inter_w > 3.0 and inter_h > 3.0:
+              overlaps.append(f"{arg1_label}: {axis_tag} '{nm_i}' overlaps axis label '{axis_lbl.get_text().strip()}'.")
 
   if getattr(arg0_fig, "_suptitle", None) is not None and arg0_fig._suptitle.get_visible():
     st_bb = arg0_fig._suptitle.get_window_extent(rend)
     check_canvas(arg0_fig._suptitle.get_text().strip(), st_bb)
-    for _ax, a_bb in top_axes:
+    for ax_top, a_bb in top_axes:
       if st_bb.overlaps(a_bb):
         inter_w = min(st_bb.x1, a_bb.x1) - max(st_bb.x0, a_bb.x0)
         inter_h = min(st_bb.y1, a_bb.y1) - max(st_bb.y0, a_bb.y0)
         if inter_w > 3.0 and inter_h > 3.0:
           overlaps.append(f"{arg1_label}: suptitle overlaps subplot panel.")
+      if ax_top.title.get_visible() and ax_top.title.get_text().strip():
+        at_bb = ax_top.title.get_window_extent(rend)
+        if st_bb.overlaps(at_bb):
+          inter_w = min(st_bb.x1, at_bb.x1) - max(st_bb.x0, at_bb.x0)
+          inter_h = min(st_bb.y1, at_bb.y1) - max(st_bb.y0, at_bb.y0)
+          if inter_w > 3.0 and inter_h > 3.0:
+            overlaps.append(f"{arg1_label}: suptitle overlaps subplot title '{ax_top.title.get_text().strip()}'.")
 
   for fl in arg0_fig.legends:
     if fl.get_visible():

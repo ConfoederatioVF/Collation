@@ -2,6 +2,7 @@
 let fs = require("fs");
 let JSON5 = require("json5");
 let path = require("path");
+let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit");
 
 //Initialise functions
 {
@@ -170,9 +171,12 @@ let path = require("path");
         corrupted_names: 0,
         empty_historical_names: 0,
         missing_entry: 0,
+        suspicious_existing_name: 0,
         total_checked: 0,
+        under_covered_history: 0,
         up_to_date: 0
       };
+      let profiles = viscount_entity_audit.loadSkillProfiles(options.svea_root || path.resolve(__dirname, "../../../.."));
       let dataset_id = (options.dataset) ? String(options.dataset).replace(/\.json$/i, "") : "stadester_2.0";
       let svea_root = (options.svea_root) ? path.resolve(options.svea_root) :
         path.resolve(__dirname, "../../../..");
@@ -285,45 +289,43 @@ let path = require("path");
         for (let x = 0; x < nearby.length; x++) {
           let cand = nearby[x];
           let d_km = this.haversineKm(clat, clng, cand.lat, cand.lng);
-          if (d_km <= 2.5 && d_km < best_dist) {
-            best_match = cand;
-            best_dist = d_km;
+          if (d_km > 25.0) continue;
+
+          let matched_name = false;
+          for (let cn of c_norms) {
+            for (let mn of cand.norm_set) {
+              if (mn === cn || (mn.length >= 4 && cn.length >= 4 && (mn.includes(cn) || cn.includes(mn)))) {
+                matched_name = true;
+                break;
+              }
+            }
+            if (matched_name) break;
           }
-        }
-
-        if (!best_match) {
-          for (let x = 0; x < nearby.length; x++) {
-            let cand = nearby[x];
-            let d_km = this.haversineKm(clat, clng, cand.lat, cand.lng);
-            if (d_km > 25.0) continue;
-
-            let matched_name = false;
-            for (let cn of c_norms) {
-              for (let mn of cand.norm_set) {
-                if (mn === cn || (mn.length >= 4 && cn.length >= 4 && (mn.includes(cn) || cn.includes(mn)))) {
+          if (!matched_name) {
+            for (let cp of c_phons) {
+              for (let mp of cand.phon_set) {
+                if (mp === cp) {
                   matched_name = true;
                   break;
                 }
               }
               if (matched_name) break;
             }
-            if (!matched_name) {
-              for (let cp of c_phons) {
-                for (let mp of cand.phon_set) {
-                  if (mp === cp) {
-                    matched_name = true;
-                    break;
-                  }
-                }
-                if (matched_name) break;
-              }
-            }
-            if (matched_name && d_km < best_dist) {
-              best_match = cand;
-              best_dist = d_km;
-            }
+          }
+          if (!matched_name && viscount_entity_audit.areEquivalentExonyms(city.name || key, cand.entry.name || "", profiles))
+            matched_name = true;
+
+          if (matched_name && d_km < best_dist) {
+            best_match = cand;
+            best_dist = d_km;
           }
         }
+
+        let pop_years = Object.keys(city.population || {}).map(Number).filter(Number.isFinite).sort(function (arg0_a, arg1_b) {
+          return arg0_a - arg1_b;
+        });
+        let earliest_yr = pop_years.length > 0 ? pop_years[0] : null;
+        let latest_yr = pop_years.length > 0 ? pop_years[pop_years.length - 1] : null;
 
         let reason = "";
         if (!best_match) {
@@ -336,16 +338,32 @@ let path = require("path");
             counts.empty_historical_names++;
           } else {
             let has_corrupt = !this.isCleanName(best_match.entry.name);
+            let has_suspicious = Boolean(viscount_entity_audit.isSuspiciousToponym(best_match.entry.name, profiles));
+            let prev_stem = "";
             for (let x = 0; x < hn.length; x++) {
               let item = hn[x];
-              if (!item || !this.isCleanName(item.name) || !/^-?\d+\.\d+\.\d+$/.test(String(item.date || ""))) {
+              if (!item || !this.isCleanName(item.name) || !viscount_entity_audit.isValidCalendarDate(item.date)) {
                 has_corrupt = true;
                 break;
               }
+              if (viscount_entity_audit.isSuspiciousToponym(item.name, profiles)) has_suspicious = true;
+              let h_stem = viscount_entity_audit.normaliseEntityStem(item.name);
+              if (prev_stem && h_stem && h_stem === prev_stem && item.name !== hn[x - 1].name)
+                has_suspicious = true;
+              prev_stem = h_stem;
             }
             if (has_corrupt) {
               reason = "corrupted_names";
               counts.corrupted_names++;
+            } else if (has_suspicious) {
+              reason = "suspicious_existing_name";
+              counts.suspicious_existing_name++;
+            } else if (earliest_yr !== null && earliest_yr < 1850) {
+              let first_h_yr = Number(String(hn[0].date || "").split(".")[0]);
+              if (!Number.isFinite(first_h_yr) || first_h_yr > earliest_yr + 100 || (hn.length === 1 && (latest_yr - earliest_yr) >= 200 && city_aliases.length >= 2)) {
+                reason = "under_covered_history";
+                counts.under_covered_history++;
+              }
             }
           }
         }
@@ -355,9 +373,6 @@ let path = require("path");
           continue;
         }
 
-        let pop_years = Object.keys(city.population || {}).map(Number).filter(Number.isFinite).sort(function (arg0_a, arg1_b) {
-          return arg0_a - arg1_b;
-        });
         let sample_years = (pop_years.length <= 8) ? pop_years :
           [pop_years[0], pop_years[Math.floor(pop_years.length/3)], pop_years[Math.floor(2*pop_years.length/3)], pop_years[pop_years.length - 1]];
 

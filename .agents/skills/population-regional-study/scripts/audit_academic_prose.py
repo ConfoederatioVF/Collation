@@ -70,6 +70,78 @@ MONTH_YEAR_AD_PAT = re.compile(
 KNITR_INLINE_R_PAT = re.compile(r"`r\s+[^`\n]+`")
 INLINE_BACKTICK_PAT = re.compile(r"`([^`\n]+)`")
 EXPLICIT_MONO_PAT = re.compile(r"\\texttt\s*\{|\\verb(?![A-Za-z])|<code>", flags=re.IGNORECASE)
+BLOATED_TITLE_PAT = re.compile(
+  r"^Demographic\s+Trajectory\s+of\b|^Studies\s+on\s+Population\s+across\b|Holocene\s+Archaeological\s+Substrata,\s*Non-Stationary\s+Mat[eé]rn\s+Kriging",
+  flags=re.IGNORECASE,
+)
+MANUAL_PAGEBREAK_PAT = re.compile(r"\\(?:newpage|clearpage|pagebreak)\b")
+
+
+def _normalise_title_key(arg0_text):
+  """Normalises title strings for itinerary comparison."""
+  return re.sub(r"[^a-z0-9]+", " ", str(arg0_text or "").strip().lower()).strip()
+
+
+def load_itinerary_title_spec(arg0_rmd_path):
+  """Loads canonical itinerary titles from `<slug>_itinerary.json5` (preferred) or `<slug>_gazetteers.json5` (fallback)."""
+  import glob
+  import json
+  import os
+  try:
+    import json5
+  except ImportError:
+    json5 = None
+
+  def _load_j5(p):
+    raw = open(p, "r", encoding="utf-8", errors="replace").read()
+    try:
+      return json.loads(raw)
+    except Exception:
+      if json5 is not None:
+        return json5.loads(raw)
+      cleaned = re.sub(r"//.*?$|/\*.*?\*/", "", raw, flags=re.MULTILINE | re.DOTALL)
+      cleaned = re.sub(r",(\s*[}\]])", r"\1", cleaned)
+      return json.loads(cleaned)
+
+  cur = os.path.dirname(os.path.abspath(arg0_rmd_path))
+  for _ in range(4):
+    itin_cands = sorted(glob.glob(os.path.join(cur, "*_itinerary.json5")) + glob.glob(os.path.join(cur, "*_itinerary.json")))
+    gaz_cands = sorted(glob.glob(os.path.join(cur, "*_gazetteers.json5")))
+    for cand in itin_cands + gaz_cands:
+      try:
+        data = _load_j5(cand)
+      except Exception:
+        continue
+      if not isinstance(data, dict):
+        continue
+      title_map = {}
+      root_title = data.get("root_title")
+      chapters = data.get("chapters") or data.get("itinerary") or []
+      if isinstance(chapters, dict):
+        for k, v in chapters.items():
+          if isinstance(v, str):
+            title_map[str(k).strip().lower()] = v.strip()
+          elif isinstance(v, dict) and (v.get("itinerary_title") or v.get("title")):
+            title_map[str(k).strip().lower()] = str(v.get("itinerary_title") or v.get("title")).strip()
+      elif isinstance(chapters, list):
+        for item in chapters:
+          if not isinstance(item, dict):
+            continue
+          it_title = item.get("itinerary_title") or item.get("title")
+          if not it_title:
+            continue
+          for kfield in ("stem", "rmd", "folder", "id", "slug"):
+            kv = item.get(kfield)
+            if kv:
+              kclean = re.sub(r"\.rmd$", "", os.path.basename(str(kv)), flags=re.IGNORECASE).strip().lower()
+              title_map[kclean] = str(it_title).strip()
+      if root_title or title_map:
+        return {"root_title": root_title, "chapters": title_map, "source": os.path.basename(cand)}
+    parent = os.path.dirname(cur)
+    if parent == cur:
+      break
+    cur = parent
+  return None
 
 
 def _check_no_monospace(arg0_line_no, arg1_text, arg2_errors, arg3_warnings, arg4_legacy_baseline=False):
@@ -129,7 +201,13 @@ def audit_humanise_structure(arg0_rmd_path, arg1_legacy_baseline=False):
         yaml_end_idx = idx
         break
 
-  # 1. Audit YAML frontmatter caption fields
+  # 1. Audit YAML frontmatter caption, title & subtitle fields (including itinerary title contract)
+  is_root_file = basename.lower() == "studies_on_population.rmd"
+  itin_spec = load_itinerary_title_spec(arg0_rmd_path)
+  rmd_stem_low = re.sub(r"\.rmd$", "", basename, flags=re.IGNORECASE).lower()
+  chap_folder_low = os.path.basename(os.path.dirname(os.path.abspath(arg0_rmd_path))).lower()
+  stem_short_low = re.sub(r"_(?:literature_review|areal_masks_and_bins|settlements)$", "", rmd_stem_low)
+
   for idx in range(1, yaml_end_idx):
     line_no = idx + 1
     stripped_yaml = lines[idx].strip()
@@ -139,6 +217,16 @@ def audit_humanise_structure(arg0_rmd_path, arg1_legacy_baseline=False):
       val = m.group(2).strip().strip("\"'")
       _check_no_monospace(line_no, val, errors, warnings, arg1_legacy_baseline)
       clean_val = strip_non_prose_spans(val)
+      if field_name == "subtitle":
+        if len(clean_val) > 95:
+          msg = f"Line {line_no}: YAML `subtitle` length is {len(clean_val)} chars (> 95 max; keep subtitles concise)."
+          if arg1_legacy_baseline and len(clean_val) <= 115:
+            warnings.append(msg)
+          else:
+            errors.append(msg)
+        if BLOATED_TITLE_PAT.search(clean_val):
+          msg = f"Line {line_no}: YAML `subtitle` uses bloated boilerplate wording ({clean_val!r})."
+          (warnings if arg1_legacy_baseline else errors).append(msg)
       for kw in ("verified", "validated", "empirical", "complete"):
         if re.search(rf"\b{kw}\b", clean_val, re.IGNORECASE):
           errors.append(f"Line {line_no}: YAML `{field_name}` contains banned badge/hyperbole word `{kw}`.")
@@ -148,6 +236,26 @@ def audit_humanise_structure(arg0_rmd_path, arg1_legacy_baseline=False):
     if title_m:
       val = title_m.group(1).strip().strip("\"'")
       _check_no_monospace(line_no, val, errors, warnings, arg1_legacy_baseline)
+      clean_title = strip_non_prose_spans(val).strip()
+      if is_root_file:
+        expected_root = (itin_spec.get("root_title") if itin_spec else None) or "Studies on Population"
+        if _normalise_title_key(clean_title) != _normalise_title_key(expected_root):
+          msg = f"Line {line_no}: Root YAML `title` is {clean_title!r}; must match canonical itinerary title {expected_root!r}."
+          (warnings if arg1_legacy_baseline else errors).append(msg)
+      else:
+        if len(clean_title) > 78 or len(clean_title.split()) > 12:
+          msg = f"Line {line_no}: Sub-chapter YAML `title` is overly lengthy ({len(clean_title)} chars, {len(clean_title.split())} words; max 78 chars / 12 words, <= 2 lines)."
+          (warnings if arg1_legacy_baseline else errors).append(msg)
+        if BLOATED_TITLE_PAT.search(clean_title):
+          msg = f"Line {line_no}: Sub-chapter YAML `title` uses bloated formulaic wrapper ({clean_title!r}); use concise itinerary title."
+          (warnings if arg1_legacy_baseline else errors).append(msg)
+        if itin_spec and isinstance(itin_spec.get("chapters"), dict):
+          cmap = itin_spec["chapters"]
+          expected_it = cmap.get(rmd_stem_low) or cmap.get(stem_short_low) or cmap.get(chap_folder_low)
+          if expected_it and _normalise_title_key(clean_title) != _normalise_title_key(expected_it):
+            errors.append(
+              f"Line {line_no}: YAML `title` {clean_title!r} deviates from itinerary title {expected_it!r} (from {itin_spec['source']})."
+            )
 
   # 2. Scan body outside YAML: separate R code chunks from prose/headings
   in_code = False
@@ -210,6 +318,10 @@ def audit_humanise_structure(arg0_rmd_path, arg1_legacy_baseline=False):
     # Prose / table / HTML caption lines
     if not stripped or stripped.startswith("<!--"):
       continue
+    if MANUAL_PAGEBREAK_PAT.search(raw_line) and current_h1 not in {"appendix", "sources", "footnotes"}:
+      warnings.append(
+        f"Line {line_no}: Manual LaTeX page break (`\\newpage`/`\\clearpage`) in prose risks excessive PDF page deadspace."
+      )
     _check_no_monospace(line_no, raw_line, errors, warnings, arg1_legacy_baseline)
     raw_no_code = re.sub(r"`[^`]+`|<!--.*?-->|<https?://[^>]+>", " ", raw_line)
     raw_no_code = SAFE_HTML_TAG_PAT.sub(" ", raw_no_code)
