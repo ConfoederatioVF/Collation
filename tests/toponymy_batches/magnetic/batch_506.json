@@ -1,0 +1,889 @@
+{
+  "batch_index": 506,
+  "count": 30,
+  "project": "MAGNETIC",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        51.19664,
+        5.98158
+      ],
+      "country": "Netherlands",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rura-Netherlands",
+      "known_aliases": [
+        "Rura",
+        "rura"
+      ],
+      "latest_year": 500,
+      "name": "Rura",
+      "reason": "missing_entry",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.84599,
+        6.45115
+      ],
+      "country": "Germany",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rurbenden-Germany",
+      "known_aliases": [
+        "Rurbenden",
+        "rurbenden"
+      ],
+      "latest_year": 500,
+      "name": "Rurbenden",
+      "reason": "missing_entry",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.8563,
+        -6.8376
+      ],
+      "country": "Ireland",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Russellstown 1-Ireland",
+      "known_aliases": [
+        "Russellstown 1",
+        "russellstown 1"
+      ],
+      "latest_year": 200,
+      "name": "Russellstown 1",
+      "reason": "missing_entry",
+      "region": "hibernia_north_atlantic",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        60.78333,
+        11.08333
+      ],
+      "country": "Norway",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ry-Norway",
+      "known_aliases": [
+        "Ry",
+        "ry"
+      ],
+      "latest_year": -200,
+      "name": "Ry",
+      "reason": "missing_entry",
+      "region": "scandinavian_peninsula",
+      "sample_years": [
+        -2500,
+        -1000,
+        -500,
+        -200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        55.9836,
+        12.7835
+      ],
+      "country": "Sweden",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rya; site: 9:1 (VKB2:5)-Sweden",
+      "known_aliases": [
+        "Rya; site: 9:1 (VKB2:5)",
+        "rya; site: 9:1"
+      ],
+      "latest_year": -200,
+      "name": "Rya; site: 9:1 (VKB2:5)",
+      "reason": "missing_entry",
+      "region": "scandinavian_peninsula",
+      "sample_years": [
+        -1000,
+        -500,
+        -200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.128,
+        20.946
+      ],
+      "country": "Poland",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rydno-Poland",
+      "known_aliases": [
+        "Rydno",
+        "rydno"
+      ],
+      "latest_year": -500,
+      "name": "Rydno",
+      "reason": "missing_entry",
+      "region": "vistula_przeworsk_wielbark",
+      "sample_years": [
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        58.5448,
+        11.2761
+      ],
+      "country": "Sweden",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "RÃ¶rvik-Sweden",
+      "known_aliases": [
+        "RÃ¶rvik",
+        "rã¶rvik"
+      ],
+      "latest_year": -200,
+      "name": "RÃ¶rvik",
+      "reason": "missing_entry",
+      "region": "scandinavian_peninsula",
+      "sample_years": [
+        -2500,
+        -1000,
+        -500,
+        -200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        55.3378,
+        10.6306
+      ],
+      "country": "Denmark",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "RÃ¸nninge SÃ¸gÃ¥rd-Denmark",
+      "known_aliases": [
+        "RÃ¸nninge SÃ¸gÃ¥rd",
+        "rã¸nninge sã¸gã¥rd"
+      ],
+      "latest_year": -1000,
+      "name": "RÃ¸nninge SÃ¸gÃ¥rd",
+      "reason": "missing_entry",
+      "region": "denmark_jutland_isles",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.5699,
+        13.5767
+      ],
+      "country": "Germany",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "RÃ¼ckersdorf-Germany",
+      "known_aliases": [
+        "RÃ¼ckersdorf",
+        "rã¼ckersdorf"
+      ],
+      "latest_year": -1000,
+      "name": "RÃ¼ckersdorf",
+      "reason": "missing_entry",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        62.1833,
+        29.9
+      ],
+      "country": "Finland",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rääkkylä-Finland_2",
+      "known_aliases": [
+        "Rääkkylä",
+        "rääkkylä"
+      ],
+      "latest_year": -500,
+      "name": "Rääkkylä",
+      "reason": "missing_entry",
+      "region": "finland_eastern_baltic",
+      "sample_years": [
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        58.2295,
+        13.6063
+      ],
+      "country": "Sweden",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rössberga (Valtorp 2)-Sweden",
+      "known_aliases": [
+        "Rössberga (Valtorp 2)",
+        "rössberga"
+      ],
+      "latest_year": -200,
+      "name": "Rössberga (Valtorp 2)",
+      "reason": "missing_entry",
+      "region": "scandinavian_peninsula",
+      "sample_years": [
+        -1000,
+        -500,
+        -200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        59.18,
+        10.92
+      ],
+      "country": "Norway",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rødsmyra-Norway",
+      "known_aliases": [
+        "Rødsmyra",
+        "rødsmyra"
+      ],
+      "latest_year": -1000,
+      "name": "Rødsmyra",
+      "reason": "missing_entry",
+      "region": "scandinavian_peninsula",
+      "sample_years": [
+        -2500,
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.5947,
+        13.9264
+      ],
+      "country": "Germany",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Saalhausen-Germany",
+      "known_aliases": [
+        "Saalhausen",
+        "saalhausen"
+      ],
+      "latest_year": -500,
+      "name": "Saalhausen",
+      "reason": "missing_entry",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        59.51667,
+        11.33333
+      ],
+      "country": "Norway",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sand-Norway_2",
+      "known_aliases": [
+        "Sand",
+        "sand"
+      ],
+      "latest_year": 1,
+      "name": "Sand",
+      "reason": "missing_entry",
+      "region": "scandinavian_peninsula",
+      "sample_years": [
+        -500,
+        -200,
+        1
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.65866,
+        15.96654
+      ],
+      "country": "Austria",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sandberg, Roseldorf-Austria",
+      "known_aliases": [
+        "Sandberg, Roseldorf",
+        "sandberg, roseldorf"
+      ],
+      "latest_year": 500,
+      "name": "Sandberg, Roseldorf",
+      "reason": "missing_entry",
+      "region": "bohemia_moravia_slovakia",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.67183,
+        21.73507
+      ],
+      "country": "Poland",
+      "earliest_year": -500,
+      "existing_historical_names": [
+        {
+          "date": "1000.1.1",
+          "name": "Sandomierz"
+        }
+      ],
+      "existing_meta_index": 7549,
+      "existing_meta_name": "Sandomierz",
+      "key": "Sandomierz-KrakÃ³wka-Poland",
+      "known_aliases": [
+        "Sandomierz-KrakÃ³wka",
+        "sandomierz-krakã³wka"
+      ],
+      "latest_year": 500,
+      "name": "Sandomierz-KrakÃ³wka",
+      "reason": "under_covered_history",
+      "region": "vistula_przeworsk_wielbark",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.24487,
+        6.87273
+      ],
+      "country": "Germany",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sarmersbach-Germany",
+      "known_aliases": [
+        "Sarmersbach",
+        "sarmersbach"
+      ],
+      "latest_year": 500,
+      "name": "Sarmersbach",
+      "reason": "missing_entry",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        53.64004,
+        -6.2542
+      ],
+      "country": "Ireland",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sarsfieldstown 1-Ireland",
+      "known_aliases": [
+        "Sarsfieldstown 1",
+        "sarsfieldstown 1"
+      ],
+      "latest_year": -1000,
+      "name": "Sarsfieldstown 1",
+      "reason": "missing_entry",
+      "region": "hibernia_north_atlantic",
+      "sample_years": [
+        -2500,
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.89865,
+        5.99938
+      ],
+      "country": "Netherlands",
+      "earliest_year": -500,
+      "existing_historical_names": [
+        {
+          "date": "1840.1.1",
+          "name": "Schaesberg"
+        }
+      ],
+      "existing_meta_index": 9648,
+      "existing_meta_name": "Schaesberg",
+      "key": "Schaesberg, Landgraaf-Netherlands",
+      "known_aliases": [
+        "Schaesberg, Landgraaf",
+        "schaesberg, landgraaf"
+      ],
+      "latest_year": 500,
+      "name": "Schaesberg, Landgraaf",
+      "reason": "under_covered_history",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.3796,
+        11.7727
+      ],
+      "country": "Germany",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "SchafstÃ¤dt-Germany",
+      "known_aliases": [
+        "SchafstÃ¤dt",
+        "schafstã¤dt"
+      ],
+      "latest_year": -1000,
+      "name": "SchafstÃ¤dt",
+      "reason": "missing_entry",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.68949,
+        11.44244
+      ],
+      "country": "Germany",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Schalkenburg, Quenstedt-Germany",
+      "known_aliases": [
+        "Schalkenburg, Quenstedt",
+        "schalkenburg, quenstedt"
+      ],
+      "latest_year": 500,
+      "name": "Schalkenburg, Quenstedt",
+      "reason": "missing_entry",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.16781,
+        6.86872
+      ],
+      "country": "Germany",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Schalkenmehren-Germany",
+      "known_aliases": [
+        "Schalkenmehren",
+        "schalkenmehren"
+      ],
+      "latest_year": 500,
+      "name": "Schalkenmehren",
+      "reason": "missing_entry",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.42263,
+        6.19532
+      ],
+      "country": "Netherlands",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Schandelo-Netherlands",
+      "known_aliases": [
+        "Schandelo",
+        "schandelo"
+      ],
+      "latest_year": 500,
+      "name": "Schandelo",
+      "reason": "missing_entry",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.277,
+        13.5936
+      ],
+      "country": "Germany",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Schenkendorf; site: 4-Germany",
+      "known_aliases": [
+        "Schenkendorf; site: 4",
+        "schenkendorf; site: 4"
+      ],
+      "latest_year": 1,
+      "name": "Schenkendorf; site: 4",
+      "reason": "missing_entry",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -500,
+        -200,
+        1
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.38988,
+        11.98545
+      ],
+      "country": "Germany",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Schkopau-Germany",
+      "known_aliases": [
+        "Schkopau",
+        "schkopau"
+      ],
+      "latest_year": 500,
+      "name": "Schkopau",
+      "reason": "missing_entry",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.24272,
+        12.01795
+      ],
+      "country": "Germany",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Schkortleben-Germany",
+      "known_aliases": [
+        "Schkortleben",
+        "schkortleben"
+      ],
+      "latest_year": 500,
+      "name": "Schkortleben",
+      "reason": "missing_entry",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.7248,
+        16.57826
+      ],
+      "country": "Austria",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Schlossberg, Falkenstein-Austria",
+      "known_aliases": [
+        "Schlossberg, Falkenstein",
+        "schlossberg, falkenstein"
+      ],
+      "latest_year": 500,
+      "name": "Schlossberg, Falkenstein",
+      "reason": "missing_entry",
+      "region": "bohemia_moravia_slovakia",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.48844,
+        11.70203
+      ],
+      "country": "Germany",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Schlossberg, Seeburg-Germany",
+      "known_aliases": [
+        "Schlossberg, Seeburg",
+        "schlossberg, seeburg"
+      ],
+      "latest_year": 500,
+      "name": "Schlossberg, Seeburg",
+      "reason": "missing_entry",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.35176,
+        8.1826
+      ],
+      "country": "Germany",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Schnippenburg, Schwagstorf-Germany",
+      "known_aliases": [
+        "Schnippenburg, Schwagstorf",
+        "schnippenburg, schwagstorf"
+      ],
+      "latest_year": 500,
+      "name": "Schnippenburg, Schwagstorf",
+      "reason": "missing_entry",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        54.5171,
+        9.4756
+      ],
+      "country": "Germany",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Schuby-Germany",
+      "known_aliases": [
+        "Schuby",
+        "schuby"
+      ],
+      "latest_year": -1000,
+      "name": "Schuby",
+      "reason": "missing_entry",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    }
+  ]
+}

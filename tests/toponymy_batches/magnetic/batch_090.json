@@ -1,0 +1,966 @@
+{
+  "batch_index": 90,
+  "count": 30,
+  "project": "MAGNETIC",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        49.2818,
+        9.68352
+      ],
+      "country": "Germany",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Künzelsau-Germany",
+      "known_aliases": [
+        "Künzelsau",
+        "künzelsau",
+        "kincelsau",
+        "kjuncel'zau",
+        "kuenzelsau",
+        "Kincelsau",
+        "Kjuncel'zau",
+        "Kuenzelsau"
+      ],
+      "latest_year": 2025,
+      "name": "Künzelsau",
+      "reason": "missing_entry",
+      "region": "mod_germany",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.05,
+        7.26667
+      ],
+      "country": "Germany",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kürten-Germany",
+      "known_aliases": [
+        "Kürten",
+        "kürten",
+        "kirten",
+        "kjurten",
+        "kuerten",
+        "Kirten",
+        "Kjurten",
+        "Kuerten"
+      ],
+      "latest_year": 2025,
+      "name": "Kürten",
+      "reason": "missing_entry",
+      "region": "mod_germany",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.31805,
+        8.58401
+      ],
+      "country": "Switzerland",
+      "earliest_year": 1750,
+      "existing_historical_names": [
+        {
+          "date": "1850.1.1",
+          "name": "Küsnacht"
+        }
+      ],
+      "existing_meta_index": 9862,
+      "existing_meta_name": "Küsnacht",
+      "key": "Küsnacht-Switzerland",
+      "known_aliases": [
+        "Küsnacht",
+        "küsnacht",
+        "cussenachus",
+        "kjusnakht",
+        "kuesnacht",
+        "Cussenachus",
+        "Kjusnakht",
+        "Kuesnacht"
+      ],
+      "latest_year": 2025,
+      "name": "Küsnacht",
+      "reason": "under_covered_history",
+      "region": "mod_switzerland",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.08557,
+        8.44206
+      ],
+      "country": "Switzerland",
+      "earliest_year": 1750,
+      "existing_historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Küssnacht am Rigi"
+        }
+      ],
+      "existing_meta_index": 13365,
+      "existing_meta_name": "Küssnacht am Rigi",
+      "key": "Küssnacht-Switzerland",
+      "known_aliases": [
+        "Küssnacht",
+        "küssnacht",
+        "chussenachus",
+        "kjusnakht-am-rigi",
+        "kuessnacht",
+        "Chussenachus",
+        "Kjusnakht-am-Rigi",
+        "Kuessnacht"
+      ],
+      "latest_year": 2025,
+      "name": "Küssnacht",
+      "reason": "under_covered_history",
+      "region": "mod_switzerland",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.74726,
+        7.30024
+      ],
+      "country": "France",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "L'Ariane-France",
+      "known_aliases": [
+        "L'Ariane",
+        "l'ariane",
+        "ariane",
+        "Ariane"
+      ],
+      "latest_year": 2025,
+      "name": "L'Ariane",
+      "reason": "missing_entry",
+      "region": "mod_france",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        49.1078,
+        2.2352
+      ],
+      "country": "France",
+      "earliest_year": 1800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "L'Isle-Adam-France",
+      "known_aliases": [
+        "L'Isle-Adam",
+        "l'isle-adam"
+      ],
+      "latest_year": 2025,
+      "name": "L'Isle-Adam",
+      "reason": "missing_entry",
+      "region": "mod_france",
+      "sample_years": [
+        1800,
+        1921,
+        2006,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.6159,
+        1.0826
+      ],
+      "country": "France",
+      "earliest_year": 1800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "L'Isle-Jourdain-France",
+      "known_aliases": [
+        "L'Isle-Jourdain",
+        "l'isle-jourdain"
+      ],
+      "latest_year": 2025,
+      "name": "L'Isle-Jourdain",
+      "reason": "missing_entry",
+      "region": "mod_france",
+      "sample_years": [
+        1800,
+        1921,
+        2006,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.6153,
+        5.2234
+      ],
+      "country": "France",
+      "earliest_year": 1800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "L'Isle-d'Abeau-France",
+      "known_aliases": [
+        "L'Isle-d'Abeau",
+        "l'isle-d'abeau"
+      ],
+      "latest_year": 2025,
+      "name": "L'Isle-d'Abeau",
+      "reason": "missing_entry",
+      "region": "mod_france",
+      "sample_years": [
+        1800,
+        1921,
+        2006,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.9191,
+        5.0588
+      ],
+      "country": "France",
+      "earliest_year": 1800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "L'Isle-sur-la-Sorgue-France",
+      "known_aliases": [
+        "L'Isle-sur-la-Sorgue",
+        "l'isle-sur-la-sorgue"
+      ],
+      "latest_year": 2025,
+      "name": "L'Isle-sur-la-Sorgue",
+      "reason": "missing_entry",
+      "region": "mod_france",
+      "sample_years": [
+        1800,
+        1921,
+        2006,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.6515,
+        1.483
+      ],
+      "country": "France",
+      "earliest_year": 1800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "L'Union-France",
+      "known_aliases": [
+        "L'Union",
+        "l'union"
+      ],
+      "latest_year": 2025,
+      "name": "L'Union",
+      "reason": "missing_entry",
+      "region": "mod_france",
+      "sample_years": [
+        1800,
+        1921,
+        2006,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.2925,
+        -2.3622
+      ],
+      "country": "France",
+      "earliest_year": 1800,
+      "existing_historical_names": [
+        {
+          "date": "1901.1.1",
+          "name": "La Baule-Escoublac"
+        }
+      ],
+      "existing_meta_index": 14828,
+      "existing_meta_name": "La Baule-Escoublac",
+      "key": "La Baule-Escoublac-France",
+      "known_aliases": [
+        "La Baule-Escoublac",
+        "la baule-escoublac"
+      ],
+      "latest_year": 2025,
+      "name": "La Baule-Escoublac",
+      "reason": "under_covered_history",
+      "region": "mod_france",
+      "sample_years": [
+        1800,
+        1921,
+        2006,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.3165,
+        4.0303
+      ],
+      "country": "France",
+      "earliest_year": 1800,
+      "existing_historical_names": [
+        {
+          "date": "1901.1.1",
+          "name": "La Chapelle-Saint-Luc"
+        }
+      ],
+      "existing_meta_index": 14962,
+      "existing_meta_name": "La Chapelle-Saint-Luc",
+      "key": "La Chapelle-Saint-Luc-France",
+      "known_aliases": [
+        "La Chapelle-Saint-Luc",
+        "la chapelle-saint-luc"
+      ],
+      "latest_year": 2025,
+      "name": "La Chapelle-Saint-Luc",
+      "reason": "under_covered_history",
+      "region": "mod_france",
+      "sample_years": [
+        1800,
+        1921,
+        2006,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.8861,
+        1.8324
+      ],
+      "country": "France",
+      "earliest_year": 1800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "La Chapelle-Saint-Mesmin-France",
+      "known_aliases": [
+        "La Chapelle-Saint-Mesmin",
+        "la chapelle-saint-mesmin"
+      ],
+      "latest_year": 2025,
+      "name": "La Chapelle-Saint-Mesmin",
+      "reason": "missing_entry",
+      "region": "mod_france",
+      "sample_years": [
+        1800,
+        1921,
+        2006,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.3041,
+        -1.5621
+      ],
+      "country": "France",
+      "earliest_year": 1800,
+      "existing_historical_names": [
+        {
+          "date": "1901.1.1",
+          "name": "La Chapelle-sur-Erdre"
+        }
+      ],
+      "existing_meta_index": 14963,
+      "existing_meta_name": "La Chapelle-sur-Erdre",
+      "key": "La Chapelle-sur-Erdre-France",
+      "known_aliases": [
+        "La Chapelle-sur-Erdre",
+        "la chapelle-sur-erdre"
+      ],
+      "latest_year": 2025,
+      "name": "La Chapelle-sur-Erdre",
+      "reason": "under_covered_history",
+      "region": "mod_france",
+      "sample_years": [
+        1800,
+        1921,
+        2006,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.1882,
+        5.6175
+      ],
+      "country": "France",
+      "earliest_year": 800,
+      "existing_historical_names": [
+        {
+          "date": "1429.1.1",
+          "name": "La Ciotat"
+        }
+      ],
+      "existing_meta_index": 6545,
+      "existing_meta_name": "La Ciotat",
+      "key": "La Ciotat-France",
+      "known_aliases": [
+        "La Ciotat",
+        "la ciotat",
+        "la ciutat",
+        "La Ciutat"
+      ],
+      "latest_year": 2025,
+      "name": "La Ciotat",
+      "reason": "under_covered_history",
+      "region": "mod_france",
+      "sample_years": [
+        800,
+        1890,
+        1980,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.6869,
+        7.0975
+      ],
+      "country": "France",
+      "earliest_year": 1800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "La Colle-sur-Loup-France",
+      "known_aliases": [
+        "La Colle-sur-Loup",
+        "la colle-sur-loup"
+      ],
+      "latest_year": 2025,
+      "name": "La Colle-sur-Loup",
+      "reason": "missing_entry",
+      "region": "mod_france",
+      "sample_years": [
+        1800,
+        1921,
+        2006,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.9341,
+        2.3986
+      ],
+      "country": "France",
+      "earliest_year": 1800,
+      "existing_historical_names": [
+        {
+          "date": "1901.1.1",
+          "name": "La Courneuve"
+        }
+      ],
+      "existing_meta_index": 15022,
+      "existing_meta_name": "La Courneuve",
+      "key": "La Courneuve-France",
+      "known_aliases": [
+        "La Courneuve",
+        "la courneuve"
+      ],
+      "latest_year": 2025,
+      "name": "La Courneuve",
+      "reason": "under_covered_history",
+      "region": "mod_france",
+      "sample_years": [
+        1800,
+        1921,
+        2006,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.1706,
+        6.0923
+      ],
+      "country": "France",
+      "earliest_year": 1800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "La Crau-France",
+      "known_aliases": [
+        "La Crau",
+        "la crau"
+      ],
+      "latest_year": 2025,
+      "name": "La Crau",
+      "reason": "missing_entry",
+      "region": "mod_france",
+      "sample_years": [
+        1800,
+        1921,
+        2006,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.5541,
+        5.2051
+      ],
+      "country": "France",
+      "earliest_year": 1800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "La Fare-les-Oliviers-France",
+      "known_aliases": [
+        "La Fare-les-Oliviers",
+        "la fare-les-oliviers"
+      ],
+      "latest_year": 2025,
+      "name": "La Fare-les-Oliviers",
+      "reason": "missing_entry",
+      "region": "mod_france",
+      "sample_years": [
+        1800,
+        1921,
+        2006,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.164,
+        6.0414
+      ],
+      "country": "France",
+      "earliest_year": 1800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "La Farlède-France",
+      "known_aliases": [
+        "La Farlède",
+        "la farlède"
+      ],
+      "latest_year": 2025,
+      "name": "La Farlède",
+      "reason": "missing_entry",
+      "region": "mod_france",
+      "sample_years": [
+        1800,
+        1921,
+        2006,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.1847,
+        0.6366
+      ],
+      "country": "France",
+      "earliest_year": 1800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "La Ferté-Bernard-France",
+      "known_aliases": [
+        "La Ferté-Bernard",
+        "la ferté-bernard"
+      ],
+      "latest_year": 2025,
+      "name": "La Ferté-Bernard",
+      "reason": "missing_entry",
+      "region": "mod_france",
+      "sample_years": [
+        1800,
+        1921,
+        2006,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.9562,
+        3.1349
+      ],
+      "country": "France",
+      "earliest_year": 1800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "La Ferté-sous-Jouarre-France",
+      "known_aliases": [
+        "La Ferté-sous-Jouarre",
+        "la ferté-sous-jouarre"
+      ],
+      "latest_year": 2025,
+      "name": "La Ferté-sous-Jouarre",
+      "reason": "missing_entry",
+      "region": "mod_france",
+      "sample_years": [
+        1800,
+        1921,
+        2006,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.6908,
+        -0.0605
+      ],
+      "country": "France",
+      "earliest_year": 250,
+      "existing_historical_names": [
+        {
+          "date": "1000.1.1",
+          "name": "La Flèche"
+        },
+        {
+          "date": "1800.1.1",
+          "name": "la Fleche"
+        }
+      ],
+      "existing_meta_index": 7474,
+      "existing_meta_name": "La Flèche",
+      "key": "La Flèche-France",
+      "known_aliases": [
+        "La Flèche",
+        "la flèche",
+        "la fleche",
+        "feza",
+        "fissam",
+        "la Fleche",
+        "Feza",
+        "Fissam"
+      ],
+      "latest_year": 2025,
+      "name": "La Flèche",
+      "reason": "suspicious_existing_name",
+      "region": "mod_france",
+      "sample_years": [
+        250,
+        1880,
+        1970,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.129,
+        6.0162
+      ],
+      "country": "France",
+      "earliest_year": 1800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "La Garde-France",
+      "known_aliases": [
+        "La Garde",
+        "la garde"
+      ],
+      "latest_year": 2025,
+      "name": "La Garde",
+      "reason": "missing_entry",
+      "region": "mod_france",
+      "sample_years": [
+        1800,
+        1921,
+        2006,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.571,
+        4.072
+      ],
+      "country": "France",
+      "earliest_year": 1800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "La Grande-Motte-France",
+      "known_aliases": [
+        "La Grande-Motte",
+        "la grande-motte"
+      ],
+      "latest_year": 2025,
+      "name": "La Grande-Motte",
+      "reason": "missing_entry",
+      "region": "mod_france",
+      "sample_years": [
+        1800,
+        1921,
+        2006,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        49.6546,
+        -1.8214
+      ],
+      "country": "France",
+      "earliest_year": 1800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "La Hague-France",
+      "known_aliases": [
+        "La Hague",
+        "la hague"
+      ],
+      "latest_year": 2025,
+      "name": "La Hague",
+      "reason": "missing_entry",
+      "region": "mod_france",
+      "sample_years": [
+        1800,
+        1921,
+        2006,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.1641,
+        6.2417
+      ],
+      "country": "France",
+      "earliest_year": 1800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "La Londe-les-Maures-France",
+      "known_aliases": [
+        "La Londe-les-Maures",
+        "la londe-les-maures"
+      ],
+      "latest_year": 2025,
+      "name": "La Londe-les-Maures",
+      "reason": "missing_entry",
+      "region": "mod_france",
+      "sample_years": [
+        1800,
+        1921,
+        2006,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.47809,
+        4.17569
+      ],
+      "country": "Belgium",
+      "earliest_year": 1750,
+      "existing_historical_names": [
+        {
+          "date": "1901.1.1",
+          "name": "La Louvière"
+        }
+      ],
+      "existing_meta_index": 15329,
+      "existing_meta_name": "La Louvière",
+      "key": "La Louvière-Belgium",
+      "known_aliases": [
+        "La Louvière",
+        "la louvière",
+        "el lovire",
+        "la louviere",
+        "la luvjer",
+        "El Lovire",
+        "La Louviere",
+        "La Luvjer"
+      ],
+      "latest_year": 2025,
+      "name": "La Louvière",
+      "reason": "under_covered_history",
+      "region": "mod_belgium",
+      "sample_years": [
+        1750,
+        1914,
+        1990,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.6541,
+        3.0699
+      ],
+      "country": "France",
+      "earliest_year": 1800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "La Madeleine-France",
+      "known_aliases": [
+        "La Madeleine",
+        "la madeleine"
+      ],
+      "latest_year": 2025,
+      "name": "La Madeleine",
+      "reason": "missing_entry",
+      "region": "mod_france",
+      "sample_years": [
+        1800,
+        1921,
+        2006,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.6037,
+        5.854
+      ],
+      "country": "France",
+      "earliest_year": 1800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "La Motte-Servolex-France",
+      "known_aliases": [
+        "La Motte-Servolex",
+        "la motte-servolex"
+      ],
+      "latest_year": 2025,
+      "name": "La Motte-Servolex",
+      "reason": "missing_entry",
+      "region": "mod_france",
+      "sample_years": [
+        1800,
+        1921,
+        2006,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    }
+  ]
+}

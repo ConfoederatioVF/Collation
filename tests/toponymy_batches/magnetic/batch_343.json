@@ -1,0 +1,966 @@
+{
+  "batch_index": 343,
+  "count": 30,
+  "project": "MAGNETIC",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        45.27351,
+        12.07577
+      ],
+      "country": "Italy",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Portus Edronis-Italy",
+      "known_aliases": [
+        "Portus Edronis",
+        "portus edronis"
+      ],
+      "latest_year": 1347,
+      "name": "Portus Edronis",
+      "reason": "missing_entry",
+      "region": "italy_north_communes",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.39489,
+        11.20398
+      ],
+      "country": "Italy",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Portus Herculis-Italy",
+      "known_aliases": [
+        "Portus Herculis",
+        "portus herculis"
+      ],
+      "latest_year": 1347,
+      "name": "Portus Herculis",
+      "reason": "missing_entry",
+      "region": "italy_central_south_med",
+      "sample_years": [
+        -500,
+        400,
+        900,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.06847,
+        1.02115
+      ],
+      "country": "United Kingdom",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Portus Lemanis-United Kingdom",
+      "known_aliases": [
+        "Portus Lemanis",
+        "portus lemanis"
+      ],
+      "latest_year": 1347,
+      "name": "Portus Lemanis",
+      "reason": "missing_entry",
+      "region": "england_wales_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.87369,
+        8.01513
+      ],
+      "country": "Italy",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Portus Maurici-Italy",
+      "known_aliases": [
+        "Portus Maurici",
+        "portus maurici"
+      ],
+      "latest_year": 1347,
+      "name": "Portus Maurici",
+      "reason": "missing_entry",
+      "region": "italy_north_communes",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.61797,
+        12.90907
+      ],
+      "country": "Italy",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Portus Reatinus-Italy",
+      "known_aliases": [
+        "Portus Reatinus",
+        "portus reatinus"
+      ],
+      "latest_year": 1347,
+      "name": "Portus Reatinus",
+      "reason": "missing_entry",
+      "region": "italy_north_communes",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.77705,
+        12.25632
+      ],
+      "country": "Italy",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Portus-Italy",
+      "known_aliases": [
+        "Portus",
+        "portus"
+      ],
+      "latest_year": 1347,
+      "name": "Portus",
+      "reason": "missing_entry",
+      "region": "italy_central_south_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.42085,
+        15.00508
+      ],
+      "country": "Italy",
+      "earliest_year": 800,
+      "existing_historical_names": [
+        {
+          "date": "-649.1.1",
+          "name": "Paestum"
+        }
+      ],
+      "existing_meta_index": 33386,
+      "existing_meta_name": "Paestum",
+      "key": "Poseidonia/Paestum-Italy",
+      "known_aliases": [
+        "Poseidonia/Paestum",
+        "poseidonia/paestum"
+      ],
+      "latest_year": 1347,
+      "name": "Poseidonia/Paestum",
+      "reason": "under_covered_history",
+      "region": "italy_central_south_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.31751,
+        1.289
+      ],
+      "country": "France",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pouillé-France",
+      "known_aliases": [
+        "Pouillé",
+        "pouillé"
+      ],
+      "latest_year": 1347,
+      "name": "Pouillé",
+      "reason": "missing_entry",
+      "region": "france_north_royal",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.17988,
+        4.433
+      ],
+      "country": "Netherlands",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Praetorium Agrippinae-Netherlands",
+      "known_aliases": [
+        "Praetorium Agrippinae",
+        "praetorium agrippinae"
+      ],
+      "latest_year": 1347,
+      "name": "Praetorium Agrippinae",
+      "reason": "missing_entry",
+      "region": "low_countries_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.94633,
+        12.5177
+      ],
+      "country": "Italy",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Prati Fiscali-Italy",
+      "known_aliases": [
+        "Prati Fiscali",
+        "prati fiscali"
+      ],
+      "latest_year": 1347,
+      "name": "Prati Fiscali",
+      "reason": "missing_entry",
+      "region": "italy_central_south_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.04041,
+        12.39715
+      ],
+      "country": "Italy",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Prato La Corte-Italy",
+      "known_aliases": [
+        "Prato La Corte",
+        "prato la corte"
+      ],
+      "latest_year": 1347,
+      "name": "Prato La Corte",
+      "reason": "missing_entry",
+      "region": "italy_central_south_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.17905,
+        12.98567
+      ],
+      "country": "Italy",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Prolaqueum-Italy",
+      "known_aliases": [
+        "Prolaqueum",
+        "prolaqueum"
+      ],
+      "latest_year": 1347,
+      "name": "Prolaqueum",
+      "reason": "missing_entry",
+      "region": "italy_central_south_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.61887,
+        16.16085
+      ],
+      "country": "Italy",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Prunetta-Italy",
+      "known_aliases": [
+        "Prunetta",
+        "prunetta"
+      ],
+      "latest_year": 1347,
+      "name": "Prunetta",
+      "reason": "missing_entry",
+      "region": "italy_central_south_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.60456,
+        4.21688
+      ],
+      "country": "France",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Psalmodi-France",
+      "known_aliases": [
+        "Psalmodi",
+        "psalmodi"
+      ],
+      "latest_year": 1347,
+      "name": "Psalmodi",
+      "reason": "missing_entry",
+      "region": "france_south_occitania",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.08442,
+        9.90888
+      ],
+      "country": "Italy",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pullion-Italy",
+      "known_aliases": [
+        "Pullion",
+        "pullion"
+      ],
+      "latest_year": 1347,
+      "name": "Pullion",
+      "reason": "missing_entry",
+      "region": "italy_north_communes",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.17132,
+        14.71425
+      ],
+      "country": "Italy",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Punta La Penna-Italy",
+      "known_aliases": [
+        "Punta La Penna",
+        "punta la penna"
+      ],
+      "latest_year": 1347,
+      "name": "Punta La Penna",
+      "reason": "missing_entry",
+      "region": "italy_central_south_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.78788,
+        14.50718
+      ],
+      "country": "Italy",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Punta Secca-Italy",
+      "known_aliases": [
+        "Punta Secca",
+        "punta secca"
+      ],
+      "latest_year": 1347,
+      "name": "Punta Secca",
+      "reason": "missing_entry",
+      "region": "italy_central_south_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.8958,
+        10.78696
+      ],
+      "country": "Italy",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Puntone Vecchio-Italy",
+      "known_aliases": [
+        "Puntone Vecchio",
+        "puntone vecchio"
+      ],
+      "latest_year": 1347,
+      "name": "Puntone Vecchio",
+      "reason": "missing_entry",
+      "region": "italy_central_south_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.52457,
+        5.67621
+      ],
+      "country": "France",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Puyloubier-France",
+      "known_aliases": [
+        "Puyloubier",
+        "puyloubier"
+      ],
+      "latest_year": 1347,
+      "name": "Puyloubier",
+      "reason": "missing_entry",
+      "region": "france_south_occitania",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.07655,
+        15.52465
+      ],
+      "country": "Italy",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pyxous/Buxentum (settlement)-Italy",
+      "known_aliases": [
+        "Pyxous/Buxentum (settlement)",
+        "pyxous/buxentum"
+      ],
+      "latest_year": 1347,
+      "name": "Pyxous/Buxentum (settlement)",
+      "reason": "missing_entry",
+      "region": "italy_central_south_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.89861,
+        14.33483
+      ],
+      "country": "Malta",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Qlejgħa tal-Baħrija-Malta",
+      "known_aliases": [
+        "Qlejgħa tal-Baħrija",
+        "qlejgħa tal-baħrija"
+      ],
+      "latest_year": 1347,
+      "name": "Qlejgħa tal-Baħrija",
+      "reason": "missing_entry",
+      "region": "italy_central_south_med",
+      "sample_years": [
+        -2500,
+        900,
+        1200,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.66896,
+        13.07933
+      ],
+      "country": "Germany",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Quintana-Germany",
+      "known_aliases": [
+        "Quintana",
+        "quintana"
+      ],
+      "latest_year": 1347,
+      "name": "Quintana",
+      "reason": "missing_entry",
+      "region": "hre_south_alpine",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.83038,
+        12.55127
+      ],
+      "country": "Italy",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Quintilii-Italy",
+      "known_aliases": [
+        "Quintilii",
+        "quintilii"
+      ],
+      "latest_year": 1347,
+      "name": "Quintilii",
+      "reason": "missing_entry",
+      "region": "italy_central_south_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.89864,
+        11.76885
+      ],
+      "country": "Italy",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Radicofani-Italy",
+      "known_aliases": [
+        "Radicofani",
+        "radicofani"
+      ],
+      "latest_year": 1347,
+      "name": "Radicofani",
+      "reason": "missing_entry",
+      "region": "italy_central_south_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.18561,
+        10.75504
+      ],
+      "country": "Germany",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rapis-Germany",
+      "known_aliases": [
+        "Rapis",
+        "rapis"
+      ],
+      "latest_year": 1347,
+      "name": "Rapis",
+      "reason": "missing_entry",
+      "region": "hre_south_alpine",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.16633,
+        4.87051
+      ],
+      "country": "France",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ratavoux-France",
+      "known_aliases": [
+        "Ratavoux",
+        "ratavoux"
+      ],
+      "latest_year": 1347,
+      "name": "Ratavoux",
+      "reason": "missing_entry",
+      "region": "france_south_occitania",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.2924,
+        0.11477
+      ],
+      "country": "France",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rauranum-France",
+      "known_aliases": [
+        "Rauranum",
+        "rauranum"
+      ],
+      "latest_year": 1347,
+      "name": "Rauranum",
+      "reason": "missing_entry",
+      "region": "france_north_royal",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.37022,
+        14.24272
+      ],
+      "country": "Italy",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Raviscanina-Italy",
+      "known_aliases": [
+        "Raviscanina",
+        "raviscanina"
+      ],
+      "latest_year": 1347,
+      "name": "Raviscanina",
+      "reason": "missing_entry",
+      "region": "italy_central_south_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.70189,
+        4.36147
+      ],
+      "country": "France",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Reculan-France",
+      "known_aliases": [
+        "Reculan",
+        "reculan"
+      ],
+      "latest_year": 1347,
+      "name": "Reculan",
+      "reason": "missing_entry",
+      "region": "france_south_occitania",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.30819,
+        11.59717
+      ],
+      "country": "Italy",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Regis Villa/Regae-Italy",
+      "known_aliases": [
+        "Regis Villa/Regae",
+        "regis villa/regae"
+      ],
+      "latest_year": 1347,
+      "name": "Regis Villa/Regae",
+      "reason": "missing_entry",
+      "region": "italy_central_south_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    }
+  ]
+}

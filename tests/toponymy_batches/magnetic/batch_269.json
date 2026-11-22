@@ -1,0 +1,1198 @@
+{
+  "batch_index": 269,
+  "count": 30,
+  "project": "MAGNETIC",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        49.20711,
+        16.69484
+      ],
+      "country": "Czechia",
+      "earliest_year": -1000,
+      "existing_historical_names": [
+        {
+          "date": "1000.1.1",
+          "name": "Brno"
+        },
+        {
+          "date": "1250.1.1",
+          "name": "Brünn"
+        },
+        {
+          "date": "1918.10.28",
+          "name": "Brno"
+        },
+        {
+          "date": "1939.3.15",
+          "name": "Brünn"
+        },
+        {
+          "date": "1945.5.9",
+          "name": "Brno"
+        }
+      ],
+      "existing_meta_index": 7400,
+      "existing_meta_name": "Brno",
+      "key": "Líšeň-Czechia",
+      "known_aliases": [
+        "Líšeň",
+        "líšeň",
+        "brno-lisen",
+        "brno-líšeň",
+        "loesch",
+        "Brno-Lisen",
+        "Brno-Líšeň",
+        "Loesch"
+      ],
+      "latest_year": 2025,
+      "name": "Líšeň",
+      "reason": "under_covered_history",
+      "region": "mod_czechia",
+      "sample_years": [
+        -1000,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        54.53921,
+        17.75012
+      ],
+      "country": "Poland",
+      "earliest_year": 1750,
+      "existing_historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Lauenburg"
+        },
+        {
+          "date": "1945.5.8",
+          "name": "Lebork"
+        }
+      ],
+      "existing_meta_index": 13427,
+      "existing_meta_name": "Lebork",
+      "key": "Lębork-Poland",
+      "known_aliases": [
+        "Lębork",
+        "lębork",
+        "laborg",
+        "lauenburg",
+        "lauenburg in pommern",
+        "Laborg",
+        "Lauenburg",
+        "Lauenburg in Pommern"
+      ],
+      "latest_year": 2025,
+      "name": "Lębork",
+      "reason": "under_covered_history",
+      "region": "mod_poland",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.14264,
+        19.13149
+      ],
+      "country": "Poland",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lędziny-Poland",
+      "known_aliases": [
+        "Lędziny",
+        "lędziny",
+        "ledziny",
+        "lendzhini",
+        "lendzini",
+        "Ledziny",
+        "Lendzhini",
+        "Lendzini"
+      ],
+      "latest_year": 2025,
+      "name": "Lędziny",
+      "reason": "missing_entry",
+      "region": "mod_poland",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        56.35431,
+        26.17579
+      ],
+      "country": "Latvia",
+      "earliest_year": 1750,
+      "existing_historical_names": [
+        {
+          "date": "1935.1.1",
+          "name": "Lívání"
+        }
+      ],
+      "existing_meta_index": 17373,
+      "existing_meta_name": "Lívání",
+      "key": "Līvāni-Latvia",
+      "known_aliases": [
+        "Līvāni",
+        "līvāni",
+        "leivuons",
+        "livane",
+        "livani",
+        "Leivuons",
+        "Livane",
+        "Livani"
+      ],
+      "latest_year": 2025,
+      "name": "Līvāni",
+      "reason": "under_covered_history",
+      "region": "mod_latvia",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        59.46529,
+        24.98215
+      ],
+      "country": "Estonia",
+      "earliest_year": 1750,
+      "existing_historical_names": [
+        {
+          "date": "1950.1.1",
+          "name": "Maardu"
+        }
+      ],
+      "existing_meta_index": 29474,
+      "existing_meta_name": "Maardu",
+      "key": "Maardu-Estonia",
+      "known_aliases": [
+        "Maardu",
+        "maardu",
+        "mardu",
+        "mārdu",
+        "ma er du",
+        "Mardu",
+        "Mārdu"
+      ],
+      "latest_year": 2025,
+      "name": "Maardu",
+      "reason": "under_covered_history",
+      "region": "mod_estonia",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        56.85329,
+        26.21698
+      ],
+      "country": "Latvia",
+      "earliest_year": 1750,
+      "existing_historical_names": [
+        {
+          "date": "1935.1.1",
+          "name": "Madona"
+        }
+      ],
+      "existing_meta_index": 17375,
+      "existing_meta_name": "Madona",
+      "key": "Madona-Latvia",
+      "known_aliases": [
+        "Madona",
+        "madona",
+        "maduona",
+        "ma duo na",
+        "Maduona"
+      ],
+      "latest_year": 2025,
+      "name": "Madona",
+      "reason": "under_covered_history",
+      "region": "mod_latvia",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.44258,
+        19.36438
+      ],
+      "country": "Hungary",
+      "earliest_year": 1750,
+      "existing_historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Maglód"
+        }
+      ],
+      "existing_meta_index": 13520,
+      "existing_meta_name": "Maglód",
+      "key": "Maglód-Hungary",
+      "known_aliases": [
+        "Maglód",
+        "maglód",
+        "maglod",
+        "Maglod"
+      ],
+      "latest_year": 2025,
+      "name": "Maglód",
+      "reason": "under_covered_history",
+      "region": "mod_hungary",
+      "sample_years": [
+        1750,
+        1890,
+        1970,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.29694,
+        17.01778
+      ],
+      "country": "Croatia",
+      "earliest_year": 1350,
+      "existing_historical_names": [
+        {
+          "date": "1857.1.1",
+          "name": "Macarsca"
+        },
+        {
+          "date": "1947.2.10",
+          "name": "Makarska"
+        }
+      ],
+      "existing_meta_index": 10042,
+      "existing_meta_name": "Makarska",
+      "key": "Makarska-Croatia",
+      "known_aliases": [
+        "Makarska",
+        "makarska",
+        "macarsca",
+        "makars'ka",
+        "makarska og podgora",
+        "Macarsca",
+        "Makars'ka",
+        "Makarska og Podgora"
+      ],
+      "latest_year": 2025,
+      "name": "Makarska",
+      "reason": "suspicious_existing_name",
+      "region": "mod_croatia",
+      "sample_years": [
+        1350,
+        1860,
+        1945,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.22,
+        20.48
+      ],
+      "country": "Hungary",
+      "earliest_year": 1200,
+      "existing_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Makó"
+        }
+      ],
+      "existing_meta_index": 7982,
+      "existing_meta_name": "Makó",
+      "key": "Mako-Hungary",
+      "known_aliases": [
+        "Mako",
+        "mako",
+        "makowa",
+        "makó",
+        "Makowa",
+        "Makó"
+      ],
+      "latest_year": 2025,
+      "name": "Mako",
+      "reason": "under_covered_history",
+      "region": "mod_hungary",
+      "sample_years": [
+        1200,
+        1750,
+        1930,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.58498,
+        17.41196
+      ],
+      "country": "Hungary",
+      "earliest_year": 1750,
+      "existing_historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Marcali"
+        }
+      ],
+      "existing_meta_index": 13544,
+      "existing_meta_name": "Marcali",
+      "key": "Marcali-Hungary",
+      "known_aliases": [
+        "Marcali",
+        "marcali"
+      ],
+      "latest_year": 2025,
+      "name": "Marcali",
+      "reason": "under_covered_history",
+      "region": "mod_hungary",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.35,
+        22.33333
+      ],
+      "country": "Romania",
+      "earliest_year": 1350,
+      "existing_historical_names": [
+        {
+          "date": "1899.1.1",
+          "name": "Marghita"
+        }
+      ],
+      "existing_meta_index": 12070,
+      "existing_meta_name": "Marghita",
+      "key": "Marghita-Romania",
+      "known_aliases": [
+        "Marghita",
+        "marghita",
+        "margita",
+        "margitta",
+        "opstina marghita",
+        "Margita",
+        "Margitta",
+        "Opstina Marghita"
+      ],
+      "latest_year": 2025,
+      "name": "Marghita",
+      "reason": "under_covered_history",
+      "region": "mod_romania",
+      "sample_years": [
+        1350,
+        1860,
+        1945,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        54.55787,
+        23.35004
+      ],
+      "country": "Lithuania",
+      "earliest_year": 1750,
+      "existing_historical_names": [
+        {
+          "date": "1897.1.1",
+          "name": "Marijampolè"
+        }
+      ],
+      "existing_meta_index": 11643,
+      "existing_meta_name": "Marijampolè",
+      "key": "Marijampolė-Lithuania",
+      "known_aliases": [
+        "Marijampolė",
+        "marijampolė",
+        "kapsukas",
+        "mar'jampole",
+        "marejampuole",
+        "Kapsukas",
+        "Mar'jampole",
+        "Marejampuole"
+      ],
+      "latest_year": 2025,
+      "name": "Marijampolė",
+      "reason": "under_covered_history",
+      "region": "mod_lithuania",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.32065,
+        21.10474
+      ],
+      "country": "Poland",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Marki-Poland",
+      "known_aliases": [
+        "Marki",
+        "marki",
+        "markos",
+        "ma er ji",
+        "maleuki",
+        "Markos"
+      ],
+      "latest_year": 2025,
+      "name": "Marki",
+      "reason": "missing_entry",
+      "region": "mod_poland",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        49.06651,
+        18.92399
+      ],
+      "country": "Slovakia",
+      "earliest_year": 1750,
+      "existing_historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Turócz-Szent-Márton"
+        },
+        {
+          "date": "1918.10.28",
+          "name": "Turčiansky Svätý Martin"
+        },
+        {
+          "date": "1950.1.1",
+          "name": "Martin"
+        }
+      ],
+      "existing_meta_index": 13563,
+      "existing_meta_name": "Martin",
+      "key": "Martin-Slovakia",
+      "known_aliases": [
+        "Martin",
+        "martin",
+        "marcin",
+        "martin i slovakia",
+        "martina",
+        "Marcin",
+        "Martin i Slovakia",
+        "Martina"
+      ],
+      "latest_year": 2025,
+      "name": "Martin",
+      "reason": "under_covered_history",
+      "region": "mod_slovakia",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        54.2753,
+        24.68003
+      ],
+      "country": "Lithuania",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Matuizos-Lithuania",
+      "known_aliases": [
+        "Matuizos",
+        "matuizos",
+        "matuizai",
+        "matujzos",
+        "matujzy",
+        "Matuizai",
+        "Matujzos",
+        "Matujzy"
+      ],
+      "latest_year": 2025,
+      "name": "Matuizos",
+      "reason": "missing_entry",
+      "region": "mod_lithuania",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        57.86329,
+        25.05475
+      ],
+      "country": "Latvia",
+      "earliest_year": 1750,
+      "existing_historical_names": [
+        {
+          "date": "1950.1.1",
+          "name": "Mazsalaca"
+        }
+      ],
+      "existing_meta_index": 29593,
+      "existing_meta_name": "Mazsalaca",
+      "key": "Mazsalaca-Latvia",
+      "known_aliases": [
+        "Mazsalaca",
+        "mazsalaca",
+        "mazsalace",
+        "mazsalatsa",
+        "mazsalatse",
+        "Mazsalace",
+        "Mazsalatsa",
+        "Mazsalatse"
+      ],
+      "latest_year": 2025,
+      "name": "Mazsalaca",
+      "reason": "under_covered_history",
+      "region": "mod_latvia",
+      "sample_years": [
+        1750,
+        1890,
+        1970,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.25,
+        28.28333
+      ],
+      "country": "Romania",
+      "earliest_year": 1350,
+      "existing_historical_names": [
+        {
+          "date": "1899.1.1",
+          "name": "Medgidia"
+        }
+      ],
+      "existing_meta_index": 12071,
+      "existing_meta_name": "Medgidia",
+      "key": "Medgidia-Romania",
+      "known_aliases": [
+        "Medgidia",
+        "medgidia",
+        "mecidiye",
+        "medjidia",
+        "medzhidija",
+        "Mecidiye",
+        "Medjidia",
+        "Medzhidija"
+      ],
+      "latest_year": 2025,
+      "name": "Medgidia",
+      "reason": "under_covered_history",
+      "region": "mod_romania",
+      "sample_years": [
+        1350,
+        1860,
+        1945,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.1422,
+        14.41114
+      ],
+      "country": "Slovenia",
+      "earliest_year": 1350,
+      "existing_historical_names": [
+        {
+          "date": "1901.1.1",
+          "name": "Zwischenwässern"
+        },
+        {
+          "date": "1947.2.10",
+          "name": "Medvode"
+        }
+      ],
+      "existing_meta_index": 15423,
+      "existing_meta_name": "Medvode",
+      "key": "Medvode-Slovenia",
+      "known_aliases": [
+        "Medvode",
+        "medvode",
+        "mdwdh",
+        "medbode",
+        "medivode"
+      ],
+      "latest_year": 2025,
+      "name": "Medvode",
+      "reason": "under_covered_history",
+      "region": "mod_slovenia",
+      "sample_years": [
+        1350,
+        1860,
+        1945,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.16859,
+        14.57442
+      ],
+      "country": "Slovenia",
+      "earliest_year": 1350,
+      "existing_historical_names": [
+        {
+          "date": "1901.1.1",
+          "name": "Mannsburg"
+        },
+        {
+          "date": "1947.2.10",
+          "name": "Mengeš"
+        }
+      ],
+      "existing_meta_index": 15427,
+      "existing_meta_name": "Mengeš",
+      "key": "Mengeš-Slovenia",
+      "known_aliases": [
+        "Mengeš",
+        "mengeš",
+        "menges",
+        "mengesh",
+        "mengus",
+        "Menges",
+        "Mengesh",
+        "Mengus"
+      ],
+      "latest_year": 2025,
+      "name": "Mengeš",
+      "reason": "under_covered_history",
+      "region": "mod_slovenia",
+      "sample_years": [
+        1350,
+        1860,
+        1945,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.64983,
+        15.31333
+      ],
+      "country": "Slovenia",
+      "earliest_year": 1350,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Metlika-Slovenia",
+      "known_aliases": [
+        "Metlika",
+        "metlika",
+        "mottling",
+        "möttling",
+        "obcina metlika",
+        "Mottling",
+        "Möttling",
+        "Obcina Metlika"
+      ],
+      "latest_year": 2025,
+      "name": "Metlika",
+      "reason": "missing_entry",
+      "region": "mod_slovenia",
+      "sample_years": [
+        1350,
+        1860,
+        1945,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47,
+        20.63
+      ],
+      "country": "Hungary",
+      "earliest_year": 1200,
+      "existing_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Mezötúr"
+        }
+      ],
+      "existing_meta_index": 7991,
+      "existing_meta_name": "Mezötúr",
+      "key": "Mezoetur-Hungary",
+      "known_aliases": [
+        "Mezoetur",
+        "mezoetur",
+        "mezőtúr",
+        "túr",
+        "Mezőtúr",
+        "Túr"
+      ],
+      "latest_year": 2025,
+      "name": "Mezoetur",
+      "reason": "under_covered_history",
+      "region": "mod_hungary",
+      "sample_years": [
+        1200,
+        1750,
+        1930,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.81667,
+        21.03333
+      ],
+      "country": "Hungary",
+      "earliest_year": 1750,
+      "existing_historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Mezöberény"
+        }
+      ],
+      "existing_meta_index": 13617,
+      "existing_meta_name": "Mezöberény",
+      "key": "Mezőberény-Hungary",
+      "known_aliases": [
+        "Mezőberény",
+        "mezőberény",
+        "mezobereny",
+        "Mezobereny"
+      ],
+      "latest_year": 2025,
+      "name": "Mezőberény",
+      "reason": "under_covered_history",
+      "region": "mod_hungary",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.81667,
+        20.58333
+      ],
+      "country": "Hungary",
+      "earliest_year": 1750,
+      "existing_historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Mezökövesd"
+        }
+      ],
+      "existing_meta_index": 13623,
+      "existing_meta_name": "Mezökövesd",
+      "key": "Mezőkövesd-Hungary",
+      "known_aliases": [
+        "Mezőkövesd",
+        "mezőkövesd",
+        "mezoekoevesd",
+        "mezokovesd",
+        "mezökövesd",
+        "Mezoekoevesd",
+        "Mezokovesd",
+        "Mezökövesd"
+      ],
+      "latest_year": 2025,
+      "name": "Mezőkövesd",
+      "reason": "under_covered_history",
+      "region": "mod_hungary",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        56.96906,
+        24.23427
+      ],
+      "country": "Latvia",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mežciems-Latvia",
+      "known_aliases": [
+        "Mežciems",
+        "mežciems",
+        "gailumuiza",
+        "gailumuiža",
+        "mezciems",
+        "Gailumuiza",
+        "Gailumuiža",
+        "Mezciems"
+      ],
+      "latest_year": 2025,
+      "name": "Mežciems",
+      "reason": "missing_entry",
+      "region": "mod_latvia",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        54.00283,
+        16.98263
+      ],
+      "country": "Poland",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Miastko-Poland",
+      "known_aliases": [
+        "Miastko",
+        "miastko",
+        "miastkò",
+        "miasztko",
+        "miásztkó",
+        "Miastkò",
+        "Miasztko",
+        "Miásztkó"
+      ],
+      "latest_year": 2025,
+      "name": "Miastko",
+      "reason": "missing_entry",
+      "region": "mod_poland",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.75434,
+        21.9195
+      ],
+      "country": "Slovakia",
+      "earliest_year": 1750,
+      "existing_historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Nagy-Mihály"
+        },
+        {
+          "date": "1918.10.28",
+          "name": "Michalovce"
+        }
+      ],
+      "existing_meta_index": 13625,
+      "existing_meta_name": "Michalovce",
+      "key": "Michalovce-Slovakia",
+      "known_aliases": [
+        "Michalovce",
+        "michalovce",
+        "grossmichel",
+        "großmichel",
+        "michalovcė",
+        "Grossmichel",
+        "Großmichel",
+        "Michalovcė"
+      ],
+      "latest_year": 2025,
+      "name": "Michalovce",
+      "reason": "under_covered_history",
+      "region": "mod_slovakia",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.35648,
+        20.02788
+      ],
+      "country": "Poland",
+      "earliest_year": 1750,
+      "existing_historical_names": [
+        {
+          "date": "1897.1.1",
+          "name": "Miechów"
+        }
+      ],
+      "existing_meta_index": 36092,
+      "existing_meta_name": "Miechów",
+      "key": "Miechów-Poland",
+      "known_aliases": [
+        "Miechów",
+        "miechów",
+        "mehova",
+        "mekhov",
+        "mekhuv",
+        "Mehova",
+        "Mekhov",
+        "Mekhuv"
+      ],
+      "latest_year": 2025,
+      "name": "Miechów",
+      "reason": "under_covered_history",
+      "region": "mod_poland",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.28709,
+        21.4239
+      ],
+      "country": "Poland",
+      "earliest_year": 1750,
+      "existing_historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Mielec"
+        }
+      ],
+      "existing_meta_index": 13632,
+      "existing_meta_name": "Mielec",
+      "key": "Mielec-Poland",
+      "known_aliases": [
+        "Mielec",
+        "mielec",
+        "melec",
+        "melec'",
+        "meleca",
+        "Melec",
+        "Melec'",
+        "Meleca"
+      ],
+      "latest_year": 2025,
+      "name": "Mielec",
+      "reason": "under_covered_history",
+      "region": "mod_poland",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.35,
+        25.8
+      ],
+      "country": "Romania",
+      "earliest_year": 1350,
+      "existing_historical_names": [
+        {
+          "date": "1869.1.1",
+          "name": "Miercurea-Ciuc"
+        }
+      ],
+      "existing_meta_index": 10221,
+      "existing_meta_name": "Miercurea-Ciuc",
+      "key": "Miercurea-Ciuc-Romania",
+      "known_aliases": [
+        "Miercurea-Ciuc",
+        "miercurea-ciuc",
+        "csikszereda",
+        "csíkszereda",
+        "mercurea ciuc",
+        "Csikszereda",
+        "Csíkszereda",
+        "Mercurea Ciuc"
+      ],
+      "latest_year": 2025,
+      "name": "Miercurea-Ciuc",
+      "reason": "under_covered_history",
+      "region": "mod_romania",
+      "sample_years": [
+        1350,
+        1860,
+        1945,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.17103,
+        18.9041
+      ],
+      "country": "Poland",
+      "earliest_year": 1750,
+      "existing_historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Nikolai"
+        },
+        {
+          "date": "1945.5.8",
+          "name": "Mikolow"
+        }
+      ],
+      "existing_meta_index": 13636,
+      "existing_meta_name": "Mikolow",
+      "key": "Mikołów-Poland",
+      "known_aliases": [
+        "Mikołów",
+        "mikołów",
+        "miklos",
+        "miklós",
+        "mikolov",
+        "Miklos",
+        "Miklós",
+        "Mikolov"
+      ],
+      "latest_year": 2025,
+      "name": "Mikołów",
+      "reason": "under_covered_history",
+      "region": "mod_poland",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    }
+  ]
+}

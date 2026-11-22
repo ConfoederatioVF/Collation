@@ -1,0 +1,980 @@
+{
+  "batch_index": 248,
+  "project": "MAGNETIC",
+  "settlements": [
+    {
+      "key": "Évosmos-Greece",
+      "name": "Évosmos",
+      "canonical_name": "Évosmos",
+      "country": "Greece",
+      "coords_lat_lng": [
+        40.67056,
+        22.90833
+      ],
+      "earliest_year": 1350,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Évosmos",
+        "évosmos",
+        "charman'kioi",
+        "evosmo",
+        "evosmon",
+        "Charman'kioi",
+        "Evosmo",
+        "Evosmon"
+      ],
+      "historical_names": [
+        {
+          "date": "1350.1.1",
+          "name": "Évosmos"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Ílion-Greece",
+      "name": "Ílion",
+      "canonical_name": "Ílion",
+      "country": "Greece",
+      "coords_lat_lng": [
+        38.03333,
+        23.7
+      ],
+      "earliest_year": 1350,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Ílion",
+        "ílion",
+        "ilion",
+        "kato liosia",
+        "káto liósia",
+        "Ilion",
+        "Kato Liosia",
+        "Káto Liósia"
+      ],
+      "historical_names": [
+        {
+          "date": "1350.1.1",
+          "name": "Ílion"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Ísafjörður-Iceland",
+      "name": "Ísafjörður",
+      "canonical_name": "Ísafjörður",
+      "country": "Iceland",
+      "coords_lat_lng": [
+        66.07475,
+        -23.13498
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": 16310,
+      "known_aliases": [
+        "Ísafjörður",
+        "ísafjörður",
+        "ifj",
+        "isaf'ordjur",
+        "isafijordur",
+        "IFJ",
+        "Isaf'ordjur",
+        "Isafijordur"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Ísafjörður *"
+        },
+        {
+          "date": "1918.1.1",
+          "name": "Ísafjörður *"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Úbeda-Spain",
+      "name": "Úbeda",
+      "canonical_name": "Úbeda",
+      "country": "Spain",
+      "coords_lat_lng": [
+        38.01328,
+        -3.3705
+      ],
+      "earliest_year": 250,
+      "latest_year": 2025,
+      "existing_meta_index": 6990,
+      "known_aliases": [
+        "Úbeda",
+        "úbeda",
+        "ubeda",
+        "ubbada al-'arab",
+        "Ubeda",
+        "Ubbada al-'Arab"
+      ],
+      "historical_names": [
+        {
+          "date": "250.1.1",
+          "name": "Ubbadhah"
+        },
+        {
+          "date": "711.1.1",
+          "name": "Ubbadhah"
+        },
+        {
+          "date": "1233.1.1",
+          "name": "Úbeda"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Þorlákshöfn-Iceland",
+      "name": "Þorlákshöfn",
+      "canonical_name": "Þorlákshöfn",
+      "country": "Iceland",
+      "coords_lat_lng": [
+        63.85591,
+        -21.38337
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": 31239,
+      "known_aliases": [
+        "Þorlákshöfn",
+        "þorlákshöfn",
+        "thorlakshafnar",
+        "thorlakshoefn",
+        "thorlakshofn",
+        "THorlakshafnar",
+        "THorlakshoefn",
+        "Thorlakshofn"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Þorlákshöfn *"
+        },
+        {
+          "date": "1950.1.1",
+          "name": "Þorlákshöfn *"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Šempeter pri Gorici-Slovenia",
+      "name": "Šempeter pri Gorici",
+      "canonical_name": "Šempeter pri Gorici",
+      "country": "Slovenia",
+      "coords_lat_lng": [
+        45.92927,
+        13.64125
+      ],
+      "earliest_year": 1350,
+      "latest_year": 2025,
+      "existing_meta_index": 31397,
+      "known_aliases": [
+        "Šempeter pri Gorici",
+        "šempeter pri gorici",
+        "san pietro",
+        "san pietro di gorizia",
+        "san pietro di gorízia",
+        "San Pietro",
+        "San Pietro di Gorizia",
+        "San Pietro di Gorízia"
+      ],
+      "historical_names": [
+        {
+          "date": "1350.1.1",
+          "name": "Šempeter pri Gorici"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Żabbar-Malta",
+      "name": "Żabbar",
+      "canonical_name": "Żabbar",
+      "country": "Malta",
+      "coords_lat_lng": [
+        35.87687,
+        14.53592
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": 16099,
+      "known_aliases": [
+        "Żabbar",
+        "żabbar",
+        "haz-zabbar",
+        "haż-żabbar",
+        "zabar",
+        "Haz-Zabbar",
+        "Haż-Żabbar",
+        "Zabar"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Zabbar"
+        },
+        {
+          "date": "1908.1.1",
+          "name": "Zabbar"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Żebbuġ-Malta",
+      "name": "Żebbuġ",
+      "canonical_name": "Żebbuġ",
+      "country": "Malta",
+      "coords_lat_lng": [
+        36.07187,
+        14.23705
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Żebbuġ",
+        "żebbuġ",
+        "iz-zebbug",
+        "iż-żebbuġ",
+        "Iz-Zebbug",
+        "Iz-Zebbug",
+        "Iż-Żebbuġ"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Żebbuġ"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Żejtun-Malta",
+      "name": "Żejtun",
+      "canonical_name": "Żejtun",
+      "country": "Malta",
+      "coords_lat_lng": [
+        35.85547,
+        14.53341
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": 16101,
+      "known_aliases": [
+        "Żejtun",
+        "żejtun",
+        "casal zeitun",
+        "iz zeitun",
+        "iz-zejtun",
+        "Casal Zeitun",
+        "Iz Zeitun",
+        "Iz-Zejtun"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Zejtun"
+        },
+        {
+          "date": "1908.1.1",
+          "name": "Zejtun"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Żurrieq-Malta",
+      "name": "Żurrieq",
+      "canonical_name": "Żurrieq",
+      "country": "Malta",
+      "coords_lat_lng": [
+        35.8296,
+        14.47588
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": 31237,
+      "known_aliases": [
+        "Żurrieq",
+        "żurrieq",
+        "casal zurrico",
+        "iz-zurrieq",
+        "iż-żurrieq",
+        "Casal Zurrico",
+        "Iz-Zurrieq",
+        "Iż-Żurrieq"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Zurrieq"
+        },
+        {
+          "date": "1950.1.1",
+          "name": "Zurrieq"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Abja-Paluoja-Estonia",
+      "name": "Abja-Paluoja",
+      "canonical_name": "Abja-Paluoja",
+      "country": "Estonia",
+      "coords_lat_lng": [
+        58.12528,
+        25.34972
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": 37107,
+      "known_aliases": [
+        "Abja-Paluoja",
+        "abja-paluoja",
+        "ab'ja-paluoja",
+        "ab'ja-paluoja osh",
+        "ab'ya",
+        "Ab'ja-Paluoja",
+        "Ab'ja-Paluoja osh",
+        "Ab'ya"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Abja-Paluoja"
+        },
+        {
+          "date": "1897.1.1",
+          "name": "Abja-Paluoja"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Abony-Hungary",
+      "name": "Abony",
+      "canonical_name": "Abony",
+      "country": "Hungary",
+      "coords_lat_lng": [
+        47.1899,
+        20.00476
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": 12169,
+      "known_aliases": [
+        "Abony",
+        "abony",
+        "wabing",
+        "Wabing"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Abony"
+        },
+        {
+          "date": "1900.1.1",
+          "name": "Abony"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Adjud-Romania",
+      "name": "Adjud",
+      "canonical_name": "Adjud",
+      "country": "Romania",
+      "coords_lat_lng": [
+        46.09911,
+        27.18143
+      ],
+      "earliest_year": 1350,
+      "latest_year": 2025,
+      "existing_meta_index": 11970,
+      "known_aliases": [
+        "Adjud",
+        "adjud",
+        "ad judul",
+        "Ad Judul"
+      ],
+      "historical_names": [
+        {
+          "date": "1350.1.1",
+          "name": "Adjud"
+        },
+        {
+          "date": "1899.1.1",
+          "name": "Adjud"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Ainaži-Estonia",
+      "name": "Ainaži",
+      "canonical_name": "Ainaži",
+      "country": "Estonia",
+      "coords_lat_lng": [
+        57.86348,
+        24.35853
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": 27679,
+      "known_aliases": [
+        "Ainaži",
+        "ainaži",
+        "ainaze",
+        "ainazi",
+        "ainaziai",
+        "Ainaze",
+        "Ainazi",
+        "Ainaziai"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Ainazi"
+        },
+        {
+          "date": "1950.1.1",
+          "name": "Ainazi"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Aiud-Romania",
+      "name": "Aiud",
+      "canonical_name": "Aiud",
+      "country": "Romania",
+      "coords_lat_lng": [
+        46.31006,
+        23.72128
+      ],
+      "earliest_year": 1350,
+      "latest_year": 2025,
+      "existing_meta_index": 10200,
+      "known_aliases": [
+        "Aiud",
+        "aiud",
+        "ajud",
+        "ajudas",
+        "ajuds",
+        "Ajud",
+        "Ajudas",
+        "Ajuds"
+      ],
+      "historical_names": [
+        {
+          "date": "1350.1.1",
+          "name": "Nagyenyed"
+        },
+        {
+          "date": "1869.1.1",
+          "name": "Nagyenyed"
+        },
+        {
+          "date": "1918.12.1",
+          "name": "Aiud"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Aizkraukle-Latvia",
+      "name": "Aizkraukle",
+      "canonical_name": "Aizkraukle",
+      "country": "Latvia",
+      "coords_lat_lng": [
+        56.60477,
+        25.25534
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": 27680,
+      "known_aliases": [
+        "Aizkraukle",
+        "aizkraukle",
+        "aizkraukles muiza",
+        "aizkraukles muiža",
+        "aizkrauklė",
+        "Aizkraukles Muiza",
+        "Aizkraukles Muiža",
+        "Aizkrauklė"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Aizkraukle"
+        },
+        {
+          "date": "1950.1.1",
+          "name": "Aizkraukle"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Aizpute-Latvia",
+      "name": "Aizpute",
+      "canonical_name": "Aizpute",
+      "country": "Latvia",
+      "coords_lat_lng": [
+        56.72108,
+        21.60156
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": 11534,
+      "known_aliases": [
+        "Aizpute",
+        "aizpute",
+        "aispute",
+        "aizputė",
+        "ajzpute",
+        "Aispute",
+        "Aizputė",
+        "Ajzpute"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Aizpute"
+        },
+        {
+          "date": "1897.1.1",
+          "name": "Aizpute"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Ajka-Hungary",
+      "name": "Ajka",
+      "canonical_name": "Ajka",
+      "country": "Hungary",
+      "coords_lat_lng": [
+        47.10196,
+        17.55892
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": 12193,
+      "known_aliases": [
+        "Ajka",
+        "ajka",
+        "aika",
+        "ajkarendek",
+        "ayka",
+        "Aika",
+        "Ajkarendek",
+        "Ayka"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Ajka"
+        },
+        {
+          "date": "1900.1.1",
+          "name": "Ajka"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Akademija (Kaunas)-Lithuania",
+      "name": "Akademija",
+      "canonical_name": "Akademija",
+      "country": "Lithuania",
+      "coords_lat_lng": [
+        54.8964,
+        23.82411
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Akademija",
+        "akademija"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Akademija"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Akmenė-Lithuania",
+      "name": "Akmenė",
+      "canonical_name": "Akmenė",
+      "country": "Lithuania",
+      "coords_lat_lng": [
+        56.25,
+        22.75
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": 27687,
+      "known_aliases": [
+        "Akmenė",
+        "akmenė",
+        "akmene",
+        "akmenes",
+        "akmenės",
+        "Akmene",
+        "Akmenes",
+        "Akmenės"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Akmenè"
+        },
+        {
+          "date": "1950.1.1",
+          "name": "Akmenè"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Aknīste-Latvia",
+      "name": "Aknīste",
+      "canonical_name": "Aknīste",
+      "country": "Latvia",
+      "coords_lat_lng": [
+        56.16152,
+        25.74783
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": 27688,
+      "known_aliases": [
+        "Aknīste",
+        "aknīste",
+        "akniste",
+        "акнисте",
+        "Akniste",
+        "Акнисте"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Akníste"
+        },
+        {
+          "date": "1950.1.1",
+          "name": "Akníste"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Alba-Iulia-Romania",
+      "name": "Alba-Iulia",
+      "canonical_name": "Alba-Iulia",
+      "country": "Romania",
+      "coords_lat_lng": [
+        46.07,
+        23.58
+      ],
+      "earliest_year": 250,
+      "latest_year": 2025,
+      "existing_meta_index": 7214,
+      "known_aliases": [
+        "Alba-Iulia",
+        "alba-iulia",
+        "karlsburg",
+        "carlsburg",
+        "weißenburg",
+        "gyulafehérvár",
+        "alba iulia",
+        "Karlsburg",
+        "Carlsburg",
+        "Weißenburg",
+        "Gyulafehérvár",
+        "Alba Iulia"
+      ],
+      "historical_names": [
+        {
+          "date": "250.1.1",
+          "name": "Alba Iulia"
+        },
+        {
+          "date": "900.1.1",
+          "name": "Alba Iulia"
+        },
+        {
+          "date": "1200.1.1",
+          "name": "Gyulafehérvár"
+        },
+        {
+          "date": "1918.12.1",
+          "name": "Alba Iulia"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Albertfalva-Hungary",
+      "name": "Albertfalva",
+      "canonical_name": "Albertfalva",
+      "country": "Hungary",
+      "coords_lat_lng": [
+        47.44402,
+        19.03723
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Albertfalva",
+        "albertfalva"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Albertfalva"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Albertirsa-Hungary",
+      "name": "Albertirsa",
+      "canonical_name": "Albertirsa",
+      "country": "Hungary",
+      "coords_lat_lng": [
+        47.24315,
+        19.61686
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": 12202,
+      "known_aliases": [
+        "Albertirsa",
+        "albertirsa",
+        "alberti",
+        "albertirscha",
+        "irsa",
+        "Alberti",
+        "Albertirscha",
+        "Irsa"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Albertirsa"
+        },
+        {
+          "date": "1900.1.1",
+          "name": "Albertirsa"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Aleksandrów Kujawski-Poland",
+      "name": "Aleksandrów Kujawski",
+      "canonical_name": "Aleksandrów Kujawski",
+      "country": "Poland",
+      "coords_lat_lng": [
+        52.87659,
+        18.69345
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Aleksandrów Kujawski",
+        "aleksandrów kujawski",
+        "aleksandrov kujavski",
+        "aleksandrova kujavska",
+        "aleksandrow",
+        "Aleksandrov Kujavski",
+        "Aleksandrova Kujavska",
+        "Aleksandrow"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Aleksandrów Kujawski"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Aleksandrów Łódzki-Poland",
+      "name": "Aleksandrów Łódzki",
+      "canonical_name": "Aleksandrów Łódzki",
+      "country": "Poland",
+      "coords_lat_lng": [
+        51.81965,
+        19.30384
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": 11423,
+      "known_aliases": [
+        "Aleksandrów Łódzki",
+        "aleksandrów łódzki",
+        "aleksandrov lodzki",
+        "aleksandrova ludzka",
+        "aleksandrow",
+        "Aleksandrov Lodzki",
+        "Aleksandrova Ludzka",
+        "Aleksandrow"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Aleksandrów Łódzki"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Aleksinac-Serbia",
+      "name": "Aleksinac",
+      "canonical_name": "Aleksinac",
+      "country": "Serbia",
+      "coords_lat_lng": [
+        43.54167,
+        21.70778
+      ],
+      "earliest_year": 1350,
+      "latest_year": 2025,
+      "existing_meta_index": 12215,
+      "known_aliases": [
+        "Aleksinac",
+        "aleksinac",
+        "alexinatz",
+        "a lai ke xi na ci",
+        "alksynak",
+        "Alexinatz"
+      ],
+      "historical_names": [
+        {
+          "date": "1350.1.1",
+          "name": "Aleksinac"
+        },
+        {
+          "date": "1900.1.1",
+          "name": "Aleksinac"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Aleksotas-Lithuania",
+      "name": "Aleksotas",
+      "canonical_name": "Aleksotas",
+      "country": "Lithuania",
+      "coords_lat_lng": [
+        54.88037,
+        23.90842
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Aleksotas",
+        "aleksotas",
+        "aleksota",
+        "aleksoto",
+        "Aleksota",
+        "Aleksoto"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Aleksotas"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Alexandria-Romania",
+      "name": "Alexandria",
+      "canonical_name": "Alexandria",
+      "country": "Romania",
+      "coords_lat_lng": [
+        43.98333,
+        25.33333
+      ],
+      "earliest_year": 1350,
+      "latest_year": 2025,
+      "existing_meta_index": 11364,
+      "known_aliases": [
+        "Alexandria",
+        "alexandria",
+        "aleksandrija",
+        "alexandria i romania",
+        "alkzandrya",
+        "Aleksandrija",
+        "Alexandria i Romania"
+      ],
+      "historical_names": [
+        {
+          "date": "1350.1.1",
+          "name": "Alexandria"
+        },
+        {
+          "date": "1834.1.1",
+          "name": "Alexandria"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Aloja-Latvia",
+      "name": "Aloja",
+      "canonical_name": "Aloja",
+      "country": "Latvia",
+      "coords_lat_lng": [
+        57.76723,
+        24.87743
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": 27730,
+      "known_aliases": [
+        "Aloja",
+        "aloja",
+        "alojas muiza",
+        "alojas muiža",
+        "aloya",
+        "Alojas Muiza",
+        "Alojas Muiža",
+        "Aloya"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Aloja"
+        },
+        {
+          "date": "1950.1.1",
+          "name": "Aloja"
+        }
+      ],
+      "verified_settlement": true
+    }
+  ]
+}

@@ -267,7 +267,8 @@ let { ViscountTerrainSuitability } = global.ViscountTerrainSuitability ? global 
 
 
     /**
-     * Computes 4-neighbor BFS grid distance (`<= taxicab <= Euclidean`) from seed pixel indices on valid mask cells.
+     * Computes exact metric-isotropic radial Euclidean pixel distance (`sqrt(dr^2 + (dc * cos(lat))^2)`)
+     * from seed pixel indices on valid mask cells (eliminating 4-neighbour Manhattan/taxicab diamond artefacts).
      * @alias ViscountBiophysicalCovariates.computeBfsPixelDistance
      *
      * @param {Object} arg0_mask_data
@@ -287,54 +288,47 @@ let { ViscountTerrainSuitability } = global.ViscountTerrainSuitability ? global 
 
       //Declare local instance variables
       let h = mask_data.grid_height;
-      let w = mask_data.grid_width;
-      let dist_grid = new Uint16Array(w*h).fill(65535);
-      let mask_grid = mask_data.mask_grid;
+      let max_r = Math.ceil(max_steps);
+      let max_steps2 = max_steps*max_steps;
       let n_valid = mask_data.valid_cell_count;
       let out = new Float32Array(n_valid).fill(99.0);
-      let queue = [];
-      let valid_indices = mask_data.valid_indices;
+      let p2v = mask_data.pixel_to_valid_idx;
+      let seen_seeds = new Set();
+      let w = mask_data.grid_width;
 
       //Function body
       for (let i = 0; i < seed_indices.length; i++) {
         let idx = seed_indices[i];
 
-        if (idx >= 0 && idx < w*h && mask_grid[idx] === 1 && dist_grid[idx] > 0) {
-          dist_grid[idx] = 0;
-          queue.push(idx);
-        }
-      }
+        if (idx < 0 || idx >= w*h || seen_seeds.has(idx)) continue;
+        seen_seeds.add(idx);
+        let sr = Math.floor(idx/w);
+        let sc = idx % w;
+        let lat = 90 - (sr + 0.5)*180/h;
+        let cos_lat = Math.max(0.18, Math.cos(lat*Math.PI/180));
+        let cos_lat2 = cos_lat*cos_lat;
+        let max_dc = Math.min(Math.ceil(max_steps*4), Math.ceil(max_steps/cos_lat));
 
-      let head = 0;
+        for (let dr = -max_r; dr <= max_r; dr++) {
+          let nr = sr + dr;
 
-      while (head < queue.length) {
-        let curr = queue[head++];
-        let d = dist_grid[curr];
+          if (nr < 0 || nr >= h) continue;
+          let dr2 = dr*dr;
+          let row_off = nr*w;
 
-        if (d >= max_steps) continue;
-        let r = Math.floor(curr/w);
-        let c = curr % w;
-        let nbrs = [
-          (r > 0) ? curr - w : -1,
-          (r + 1 < h) ? curr + w : -1,
-          r*w + ((c + w - 1) % w),
-          r*w + ((c + 1) % w)
-        ];
+          for (let dc = -max_dc; dc <= max_dc; dc++) {
+            let d2 = dr2 + dc*dc*cos_lat2;
 
-        for (let k = 0; k < 4; k++) {
-          let ni = nbrs[k];
+            if (d2 > max_steps2) continue;
+            let nc = (sc + dc + w) % w;
+            let nv = p2v[row_off + nc];
 
-          if (ni >= 0 && mask_grid[ni] === 1 && dist_grid[ni] > d + 1) {
-            dist_grid[ni] = d + 1;
-            queue.push(ni);
+            if (nv < 0) continue;
+            let d_rad = Math.sqrt(d2);
+
+            if (d_rad < out[nv]) out[nv] = d_rad;
           }
         }
-      }
-
-      for (let i = 0; i < n_valid; i++) {
-        let d = dist_grid[valid_indices[i]];
-
-        out[i] = (d < 65535) ? d : 99.0;
       }
 
       //Return statement
@@ -527,42 +521,13 @@ let { ViscountTerrainSuitability } = global.ViscountTerrainSuitability ? global 
         }
       }
 
-      let head = 0;
-
-      while (head < queue.length) {
-        let curr = queue[head++];
-        let d = dist_grid[curr];
-
-        if (d >= 140) continue;
-        let r = Math.floor(curr/w);
-        let c = curr % w;
-
-        for (let k = 0; k < nbr_offsets.length; k++) {
-          let nr = r + nbr_offsets[k][0];
-
-          if (nr < 0 || nr >= h) continue;
-          let nc = (c + nbr_offsets[k][1] + w) % w;
-          let ni = nr*w + nc;
-          let nd = d + nbr_offsets[k][2];
-
-          if (mask_grid[ni] === 1 && nd < dist_grid[ni]) {
-            dist_grid[ni] = nd;
-            queue.push(ni);
-          }
-        }
-      }
+      let dist_km_valid = this.computeBfsPixelDistance(mask_data, queue, 15.0);
 
       for (let i = 0; i < n_valid; i++) {
-        let gidx = valid_indices[i];
-        let d_raw = dist_grid[gidx];
+        let d_px = dist_km_valid[i];
 
-        if (d_raw < 65535) {
-          let d_px = d_raw/10.0;
-          let lat = 90 - (Math.floor(gidx/w) + 0.5)*180/h;
-          let km_per_px = 9.26*Math.max(0.25, Math.sqrt(Math.max(0.08, Math.cos(lat*Math.PI/180))));
-
-          out[i] = Math.exp(-(d_px*km_per_px)/22.0);
-        }
+        if (d_px < 90.0)
+          out[i] = Math.exp(-(d_px*9.26)/22.0);
       }
 
       //Return statement
@@ -688,46 +653,13 @@ let { ViscountTerrainSuitability } = global.ViscountTerrainSuitability ? global 
         }
       }
 
-      let head = 0;
-      let nbr_offsets = [
-        [-1, 0, 10], [1, 0, 10], [0, -1, 10], [0, 1, 10],
-        [-1, -1, 14], [-1, 1, 14], [1, -1, 14], [1, 1, 14]
-      ];
-
-      while (head < queue.length) {
-        let curr = queue[head++];
-        let d = dist_grid[curr];
-
-        if (d >= 240) continue;
-        let r = Math.floor(curr/w);
-        let c = curr % w;
-
-        for (let k = 0; k < nbr_offsets.length; k++) {
-          let nr = r + nbr_offsets[k][0];
-
-          if (nr < 0 || nr >= h) continue;
-          let nc = (c + nbr_offsets[k][1] + w) % w;
-          let ni = nr*w + nc;
-          let nd = d + nbr_offsets[k][2];
-
-          if (mask_grid[ni] === 1 && nd < dist_grid[ni]) {
-            dist_grid[ni] = nd;
-            queue.push(ni);
-          }
-        }
-      }
+      let dist_fluv_px = this.computeBfsPixelDistance(mask_data, queue, 20.0);
 
       for (let i = 0; i < n_valid; i++) {
-        let gidx = valid_indices[i];
-        let d_raw = dist_grid[gidx];
+        let d_px = dist_fluv_px[i];
 
-        if (d_raw < 65535) {
-          let d_px = d_raw/10.0;
-          let lat = 90 - (Math.floor(gidx/w) + 0.5)*180/h;
-          let km_per_px = 9.26*Math.max(0.25, Math.sqrt(Math.max(0.08, Math.cos(lat*Math.PI/180))));
-
-          out[i] = 0.25 + 0.75*Math.exp(-(d_px*km_per_px)/26.0);
-        }
+        if (d_px < 90.0)
+          out[i] = 0.25 + 0.75*Math.exp(-(d_px*9.26)/26.0);
       }
 
       //Return statement

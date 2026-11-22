@@ -1,0 +1,876 @@
+{
+  "batch_index": 552,
+  "count": 30,
+  "project": "MAGNETIC",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        35.01323,
+        24.76082
+      ],
+      "country": "Greece",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kommos-Greece",
+      "known_aliases": [
+        "Kommos",
+        "kommos"
+      ],
+      "latest_year": 1,
+      "name": "Kommos",
+      "reason": "missing_entry",
+      "region": "achaea_macedonia",
+      "sample_years": [
+        -2500,
+        -1000,
+        -500,
+        -200,
+        1
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.1238,
+        4.4618
+      ],
+      "country": "Belgium",
+      "earliest_year": -2500,
+      "existing_historical_names": [
+        {
+          "date": "1901.1.1",
+          "name": "Kontich"
+        }
+      ],
+      "existing_meta_index": 15317,
+      "existing_meta_name": "Kontich",
+      "key": "Kontich-Belgium_2",
+      "known_aliases": [
+        "Kontich",
+        "kontich"
+      ],
+      "latest_year": 1,
+      "name": "Kontich",
+      "reason": "under_covered_history",
+      "region": "gallia_lugd_belgica",
+      "sample_years": [
+        -2500,
+        -1000,
+        -500,
+        -200,
+        1
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.13556,
+        7.58691
+      ],
+      "country": "Switzerland",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Koppigen, Usserfeld-Switzerland",
+      "known_aliases": [
+        "Koppigen, Usserfeld",
+        "koppigen, usserfeld"
+      ],
+      "latest_year": -1000,
+      "name": "Koppigen, Usserfeld",
+      "reason": "missing_entry",
+      "region": "germania_limes_alpine",
+      "sample_years": [
+        -2500,
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.817,
+        3.2774
+      ],
+      "country": "Belgium",
+      "earliest_year": -500,
+      "existing_historical_names": [
+        {
+          "date": "1.1.1",
+          "name": "Cortoriacum"
+        },
+        {
+          "date": "800.1.1",
+          "name": "Cortrijk"
+        },
+        {
+          "date": "1844.1.1",
+          "name": "Kortrijk"
+        }
+      ],
+      "existing_meta_index": 6668,
+      "existing_meta_name": "Kortrijk",
+      "key": "Kortrijk-Bouvekerke-Belgium",
+      "known_aliases": [
+        "Kortrijk-Bouvekerke",
+        "kortrijk-bouvekerke"
+      ],
+      "latest_year": 200,
+      "name": "Kortrijk-Bouvekerke",
+      "reason": "suspicious_existing_name",
+      "region": "gallia_lugd_belgica",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.7333,
+        15.2333
+      ],
+      "country": "Croatia",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kosinj-Croatia",
+      "known_aliases": [
+        "Kosinj",
+        "kosinj"
+      ],
+      "latest_year": -500,
+      "name": "Kosinj",
+      "reason": "missing_entry",
+      "region": "pannonia_dalmatia",
+      "sample_years": [
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.6586,
+        16.1619
+      ],
+      "country": "Slovenia",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kotare-Krogi-Slovenia",
+      "known_aliases": [
+        "Kotare-Krogi",
+        "kotare-krogi"
+      ],
+      "latest_year": -500,
+      "name": "Kotare-Krogi",
+      "reason": "missing_entry",
+      "region": "pannonia_dalmatia",
+      "sample_years": [
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.12532,
+        25.20866
+      ],
+      "country": "Greece",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Koukounaries-Greece",
+      "known_aliases": [
+        "Koukounaries",
+        "koukounaries"
+      ],
+      "latest_year": -500,
+      "name": "Koukounaries",
+      "reason": "missing_entry",
+      "region": "achaea_macedonia",
+      "sample_years": [
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.7393,
+        14.4541
+      ],
+      "country": "Slovenia",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "KriÅ¾na gora near LoÅ¾u-Slovenia",
+      "known_aliases": [
+        "KriÅ¾na gora near LoÅ¾u",
+        "kriå¾na gora near loå¾u"
+      ],
+      "latest_year": -200,
+      "name": "KriÅ¾na gora near LoÅ¾u",
+      "reason": "missing_entry",
+      "region": "pannonia_dalmatia",
+      "sample_years": [
+        -1000,
+        -500,
+        -200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.71503,
+        20.84135
+      ],
+      "country": "Greece",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Krya II-Greece",
+      "known_aliases": [
+        "Krya II",
+        "krya ii",
+        "krya i",
+        "Krya I"
+      ],
+      "latest_year": -1000,
+      "name": "Krya II",
+      "reason": "missing_entry",
+      "region": "achaea_macedonia",
+      "sample_years": [
+        -2500,
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.31763,
+        21.42411
+      ],
+      "country": "Greece",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kryopigado. Neapoli-Greece",
+      "known_aliases": [
+        "Kryopigado. Neapoli",
+        "kryopigado. neapoli"
+      ],
+      "latest_year": -1000,
+      "name": "Kryopigado. Neapoli",
+      "reason": "missing_entry",
+      "region": "achaea_macedonia",
+      "sample_years": [
+        -2500,
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.15458,
+        19.98623
+      ],
+      "country": "Serbia",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "KrÄmar-Serbia",
+      "known_aliases": [
+        "KrÄmar",
+        "krämar"
+      ],
+      "latest_year": 400,
+      "name": "KrÄmar",
+      "reason": "missing_entry",
+      "region": "moesia_dacia_thracia",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.40333,
+        13.62181
+      ],
+      "country": "Croatia",
+      "earliest_year": -500,
+      "existing_historical_names": [
+        {
+          "date": "1857.1.1",
+          "name": "Buje"
+        }
+      ],
+      "existing_meta_index": 10003,
+      "existing_meta_name": "Buje",
+      "key": "KrÅ¡ete, Buje-Croatia",
+      "known_aliases": [
+        "KrÅ¡ete, Buje",
+        "krå¡ete, buje"
+      ],
+      "latest_year": 400,
+      "name": "KrÅ¡ete, Buje",
+      "reason": "under_covered_history",
+      "region": "pannonia_dalmatia",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.4102,
+        15.0171
+      ],
+      "country": "Austria",
+      "earliest_year": -1000,
+      "existing_historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Trofaiach"
+        }
+      ],
+      "existing_meta_index": 14501,
+      "existing_meta_name": "Trofaiach",
+      "key": "Kulm; site: bei Trofaiach-Austria",
+      "known_aliases": [
+        "Kulm; site: bei Trofaiach",
+        "kulm; site: bei trofaiach"
+      ],
+      "latest_year": -500,
+      "name": "Kulm; site: bei Trofaiach",
+      "reason": "under_covered_history",
+      "region": "germania_limes_alpine",
+      "sample_years": [
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.4681,
+        12.0114
+      ],
+      "country": "Austria",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kundl-Austria",
+      "known_aliases": [
+        "Kundl",
+        "kundl"
+      ],
+      "latest_year": 1,
+      "name": "Kundl",
+      "reason": "missing_entry",
+      "region": "germania_limes_alpine",
+      "sample_years": [
+        -500,
+        -200,
+        1
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.07772,
+        10.07171
+      ],
+      "country": "Austria",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kupfergruba, Gafluna valley, Silbertal-Austria",
+      "known_aliases": [
+        "Kupfergruba, Gafluna valley, Silbertal",
+        "kupfergruba, gafluna valley, silbertal"
+      ],
+      "latest_year": -1000,
+      "name": "Kupfergruba, Gafluna valley, Silbertal",
+      "reason": "missing_entry",
+      "region": "germania_limes_alpine",
+      "sample_years": [
+        -2500,
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.51764,
+        14.82981
+      ],
+      "country": "Austria",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kupferschmelzplatz S 1-Austria",
+      "known_aliases": [
+        "Kupferschmelzplatz S 1",
+        "kupferschmelzplatz s 1"
+      ],
+      "latest_year": -1000,
+      "name": "Kupferschmelzplatz S 1",
+      "reason": "missing_entry",
+      "region": "germania_limes_alpine",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.96001,
+        16.13273
+      ],
+      "country": "Croatia",
+      "earliest_year": -500,
+      "existing_historical_names": [
+        {
+          "date": "1857.1.1",
+          "name": "Sesvete"
+        }
+      ],
+      "existing_meta_index": 10069,
+      "existing_meta_name": "Sesvete",
+      "key": "Kuzelin, Donja Glavnica, Sesvete-Croatia",
+      "known_aliases": [
+        "Kuzelin, Donja Glavnica, Sesvete",
+        "kuzelin, donja glavnica, sesvete"
+      ],
+      "latest_year": 400,
+      "name": "Kuzelin, Donja Glavnica, Sesvete",
+      "reason": "under_covered_history",
+      "region": "pannonia_dalmatia",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.61032,
+        15.27659
+      ],
+      "country": "Slovenia",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "KuÄar, Podzemelj-Slovenia",
+      "known_aliases": [
+        "KuÄar, Podzemelj",
+        "kuäar, podzemelj"
+      ],
+      "latest_year": 400,
+      "name": "KuÄar, Podzemelj",
+      "reason": "missing_entry",
+      "region": "pannonia_dalmatia",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.6667,
+        13.0833
+      ],
+      "country": "Germany",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "KÃ¼nzing-Germany",
+      "known_aliases": [
+        "KÃ¼nzing",
+        "kã¼nzing"
+      ],
+      "latest_year": -500,
+      "name": "KÃ¼nzing",
+      "reason": "missing_entry",
+      "region": "germania_limes_alpine",
+      "sample_years": [
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.47509,
+        13.74266
+      ],
+      "country": "Austria",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Königreich T3, Tiefkar, Dachsteingebirge-Austria",
+      "known_aliases": [
+        "Königreich T3, Tiefkar, Dachsteingebirge",
+        "königreich t3, tiefkar, dachsteingebirge"
+      ],
+      "latest_year": -1000,
+      "name": "Königreich T3, Tiefkar, Dachsteingebirge",
+      "reason": "missing_entry",
+      "region": "germania_limes_alpine",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.92551,
+        7.37141
+      ],
+      "country": "Switzerland",
+      "earliest_year": -2500,
+      "existing_historical_names": [
+        {
+          "date": "1850.1.1",
+          "name": "Köniz"
+        }
+      ],
+      "existing_meta_index": 9859,
+      "existing_meta_name": "Köniz",
+      "key": "Köniz-Niederwangen, Stegenweg-Switzerland",
+      "known_aliases": [
+        "Köniz-Niederwangen, Stegenweg",
+        "köniz-niederwangen, stegenweg"
+      ],
+      "latest_year": -1000,
+      "name": "Köniz-Niederwangen, Stegenweg",
+      "reason": "under_covered_history",
+      "region": "germania_limes_alpine",
+      "sample_years": [
+        -2500,
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.686,
+        8.0064
+      ],
+      "country": "Italy",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "L'Oasi-Italy",
+      "known_aliases": [
+        "L'Oasi",
+        "l'oasi"
+      ],
+      "latest_year": -1000,
+      "name": "L'Oasi",
+      "reason": "missing_entry",
+      "region": "italia_peninsular",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.08333,
+        3.4
+      ],
+      "country": "France",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "La Baume Layrou-France",
+      "known_aliases": [
+        "La Baume Layrou",
+        "la baume layrou",
+        "baume layrou",
+        "Baume Layrou"
+      ],
+      "latest_year": -500,
+      "name": "La Baume Layrou",
+      "reason": "missing_entry",
+      "region": "gallia_narb_aquit",
+      "sample_years": [
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.4167,
+        5.1667
+      ],
+      "country": "France",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "La Bonne MÃ¨re-France",
+      "known_aliases": [
+        "La Bonne MÃ¨re",
+        "la bonne mã¨re"
+      ],
+      "latest_year": -200,
+      "name": "La Bonne MÃ¨re",
+      "reason": "missing_entry",
+      "region": "gallia_narb_aquit",
+      "sample_years": [
+        -2500,
+        -1000,
+        -500,
+        -200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.91667,
+        1.93333
+      ],
+      "country": "France",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "La Caune Ouest-France",
+      "known_aliases": [
+        "La Caune Ouest",
+        "la caune ouest"
+      ],
+      "latest_year": -1000,
+      "name": "La Caune Ouest",
+      "reason": "missing_entry",
+      "region": "gallia_narb_aquit",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.72472,
+        0.11028
+      ],
+      "country": "Spain",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "La Codera-Spain",
+      "known_aliases": [
+        "La Codera",
+        "la codera"
+      ],
+      "latest_year": -500,
+      "name": "La Codera",
+      "reason": "missing_entry",
+      "region": "hispania_tarrac_lusit",
+      "sample_years": [
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.4,
+        3.56666
+      ],
+      "country": "France",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "La Conque-France",
+      "known_aliases": [
+        "La Conque",
+        "la conque"
+      ],
+      "latest_year": -500,
+      "name": "La Conque",
+      "reason": "missing_entry",
+      "region": "gallia_narb_aquit",
+      "sample_years": [
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.7306,
+        5.54025
+      ],
+      "country": "France",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "La Courtinasse-France",
+      "known_aliases": [
+        "La Courtinasse",
+        "la courtinasse"
+      ],
+      "latest_year": -500,
+      "name": "La Courtinasse",
+      "reason": "missing_entry",
+      "region": "gallia_narb_aquit",
+      "sample_years": [
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.9409,
+        3.8967
+      ],
+      "country": "Spain",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "La Cova-Spain",
+      "known_aliases": [
+        "La Cova",
+        "la cova"
+      ],
+      "latest_year": -1000,
+      "name": "La Cova",
+      "reason": "missing_entry",
+      "region": "hispania_tarrac_lusit",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        49.3573,
+        2.7756
+      ],
+      "country": "France",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "La Croix-Saint-Ouen-France",
+      "known_aliases": [
+        "La Croix-Saint-Ouen",
+        "la croix-saint-ouen"
+      ],
+      "latest_year": -1000,
+      "name": "La Croix-Saint-Ouen",
+      "reason": "missing_entry",
+      "region": "gallia_lugd_belgica",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    }
+  ]
+}

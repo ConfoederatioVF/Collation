@@ -1,0 +1,936 @@
+{
+  "batch_index": 457,
+  "count": 30,
+  "project": "MAGNETIC",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        50.4802,
+        4.1204
+      ],
+      "country": "Belgium",
+      "earliest_year": 1,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Strepy-Belgium",
+      "known_aliases": [
+        "Strepy",
+        "strepy"
+      ],
+      "latest_year": 800,
+      "name": "Strepy",
+      "reason": "missing_entry",
+      "region": "francia_merovingian",
+      "sample_years": [
+        1,
+        200,
+        250,
+        400,
+        500,
+        600,
+        700,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.0431,
+        -1.6785
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Stretton-on-Fosse-United Kingdom",
+      "known_aliases": [
+        "Stretton-on-Fosse",
+        "stretton-on-fosse"
+      ],
+      "latest_year": 700,
+      "name": "Stretton-on-Fosse",
+      "reason": "missing_entry",
+      "region": "britain_ireland_early",
+      "sample_years": [
+        -200,
+        1,
+        200,
+        250,
+        400,
+        500,
+        600,
+        700
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        58.9616,
+        -3.3057
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Stromness-United Kingdom",
+      "known_aliases": [
+        "Stromness",
+        "stromness"
+      ],
+      "latest_year": 700,
+      "name": "Stromness",
+      "reason": "missing_entry",
+      "region": "britain_ireland_early",
+      "sample_years": [
+        -200,
+        1,
+        200,
+        250,
+        400,
+        500,
+        600,
+        700
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        59.69,
+        10.63
+      ],
+      "country": "Norway",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Stubberud-Norway",
+      "known_aliases": [
+        "Stubberud",
+        "stubberud"
+      ],
+      "latest_year": 250,
+      "name": "Stubberud",
+      "reason": "missing_entry",
+      "region": "vendel_scandinavia_baltic",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        250
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        59.55,
+        7.35
+      ],
+      "country": "Norway",
+      "earliest_year": -200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Stussli-Norway",
+      "known_aliases": [
+        "Stussli",
+        "stussli"
+      ],
+      "latest_year": 700,
+      "name": "Stussli",
+      "reason": "missing_entry",
+      "region": "vendel_scandinavia_baltic",
+      "sample_years": [
+        -200,
+        1,
+        200,
+        250,
+        400,
+        500,
+        600,
+        700
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        60.59,
+        8.04
+      ],
+      "country": "Norway",
+      "earliest_year": -200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Stølebotnen-Norway",
+      "known_aliases": [
+        "Stølebotnen",
+        "stølebotnen"
+      ],
+      "latest_year": 700,
+      "name": "Stølebotnen",
+      "reason": "missing_entry",
+      "region": "vendel_scandinavia_baltic",
+      "sample_years": [
+        -200,
+        1,
+        200,
+        250,
+        400,
+        500,
+        600,
+        700
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        61.21667,
+        8.88333
+      ],
+      "country": "Norway",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Stølsbakke-Norway",
+      "known_aliases": [
+        "Stølsbakke",
+        "stølsbakke"
+      ],
+      "latest_year": 400,
+      "name": "Stølsbakke",
+      "reason": "missing_entry",
+      "region": "vendel_scandinavia_baltic",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        250,
+        400
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.4472,
+        8.6443
+      ],
+      "country": "Italy",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Su Tintiriolu-Italy",
+      "known_aliases": [
+        "Su Tintiriolu",
+        "su tintiriolu"
+      ],
+      "latest_year": 400,
+      "name": "Su Tintiriolu",
+      "reason": "missing_entry",
+      "region": "lombard_byzantine_italy",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        250,
+        400
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.06126,
+        -4.14805
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sucia/Ucia-Spain",
+      "known_aliases": [
+        "Sucia/Ucia",
+        "sucia/ucia"
+      ],
+      "latest_year": 800,
+      "name": "Sucia/Ucia",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.70331,
+        -7.62362
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Suegos-Spain",
+      "known_aliases": [
+        "Suegos",
+        "suegos"
+      ],
+      "latest_year": 800,
+      "name": "Suegos",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.52544,
+        -4.62892
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Suel-Spain",
+      "known_aliases": [
+        "Suel",
+        "suel"
+      ],
+      "latest_year": 800,
+      "name": "Suel",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.77751,
+        -9.2645
+      ],
+      "country": "Portugal",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Suimo-Portugal",
+      "known_aliases": [
+        "Suimo",
+        "suimo"
+      ],
+      "latest_year": 800,
+      "name": "Suimo",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.92663,
+        9.65785
+      ],
+      "country": "Italy",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sulci(s)-Italy",
+      "known_aliases": [
+        "Sulci(s)",
+        "sulci"
+      ],
+      "latest_year": 500,
+      "name": "Sulci(s)",
+      "reason": "missing_entry",
+      "region": "lombard_byzantine_italy",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        250,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.48062,
+        -6.41453
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sultana-Spain",
+      "known_aliases": [
+        "Sultana",
+        "sultana"
+      ],
+      "latest_year": 800,
+      "name": "Sultana",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        55.914,
+        -4.2737
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Summerston Landfill Site Balmuidy-United Kingdom",
+      "known_aliases": [
+        "Summerston Landfill Site Balmuidy",
+        "summerston landfill site balmuidy"
+      ],
+      "latest_year": 500,
+      "name": "Summerston Landfill Site Balmuidy",
+      "reason": "missing_entry",
+      "region": "britain_ireland_early",
+      "sample_years": [
+        -200,
+        1,
+        200,
+        250,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.87446,
+        -0.66611
+      ],
+      "country": "France",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Summus Pyreneus-France",
+      "known_aliases": [
+        "Summus Pyreneus",
+        "summus pyreneus"
+      ],
+      "latest_year": 800,
+      "name": "Summus Pyreneus",
+      "reason": "missing_entry",
+      "region": "francia_merovingian",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        58.1,
+        6.8
+      ],
+      "country": "Norway",
+      "earliest_year": -200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sunde-Norway",
+      "known_aliases": [
+        "Sunde",
+        "sunde"
+      ],
+      "latest_year": 600,
+      "name": "Sunde",
+      "reason": "missing_entry",
+      "region": "vendel_scandinavia_baltic",
+      "sample_years": [
+        -200,
+        1,
+        200,
+        250,
+        400,
+        500,
+        600
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        70.685,
+        23.582
+      ],
+      "country": "Norway",
+      "earliest_year": -200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sundfj√¶ra nedre_Melkøya_S22-Norway",
+      "known_aliases": [
+        "Sundfj√¶ra nedre_Melkøya_S22",
+        "sundfj√¶ra nedre_melkøya_s22",
+        "sundfj√¶ra nedre_melkøya_s21",
+        "sundfj√¶ra nedre_melkøya_s20",
+        "Sundfj√¶ra nedre_Melkøya_S21",
+        "Sundfj√¶ra nedre_Melkøya_S20"
+      ],
+      "latest_year": 700,
+      "name": "Sundfj√¶ra nedre_Melkøya_S22",
+      "reason": "missing_entry",
+      "region": "vendel_scandinavia_baltic",
+      "sample_years": [
+        -200,
+        1,
+        200,
+        250,
+        400,
+        500,
+        600,
+        700
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        61.22,
+        8.41
+      ],
+      "country": "Norway",
+      "earliest_year": -200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sveen-Norway",
+      "known_aliases": [
+        "Sveen",
+        "sveen"
+      ],
+      "latest_year": 700,
+      "name": "Sveen",
+      "reason": "missing_entry",
+      "region": "vendel_scandinavia_baltic",
+      "sample_years": [
+        -200,
+        1,
+        200,
+        250,
+        400,
+        500,
+        600,
+        700
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        58.66084,
+        16.40638
+      ],
+      "country": "Sweden",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Svintuna, Krokek-Sweden",
+      "known_aliases": [
+        "Svintuna, Krokek",
+        "svintuna, krokek"
+      ],
+      "latest_year": 800,
+      "name": "Svintuna, Krokek",
+      "reason": "missing_entry",
+      "region": "vendel_scandinavia_baltic",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.4779,
+        -0.7484
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -500,
+      "existing_historical_names": [
+        {
+          "date": "1901.1.1",
+          "name": "Corby"
+        }
+      ],
+      "existing_meta_index": 15013,
+      "existing_meta_name": "Corby",
+      "key": "Swinawe Barn near Corby-United Kingdom",
+      "known_aliases": [
+        "Swinawe Barn near Corby",
+        "swinawe barn near corby"
+      ],
+      "latest_year": 250,
+      "name": "Swinawe Barn near Corby",
+      "reason": "under_covered_history",
+      "region": "britain_ireland_early",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        250
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.71733,
+        16.49426
+      ],
+      "country": "Italy",
+      "earliest_year": -500,
+      "existing_historical_names": [
+        {
+          "date": "-719.1.1",
+          "name": "Sybaris"
+        }
+      ],
+      "existing_meta_index": 33650,
+      "existing_meta_name": "Sybaris",
+      "key": "Sybaris/Thurii/Copia-Italy",
+      "known_aliases": [
+        "Sybaris/Thurii/Copia",
+        "sybaris/thurii/copia"
+      ],
+      "latest_year": 800,
+      "name": "Sybaris/Thurii/Copia",
+      "reason": "under_covered_history",
+      "region": "lombard_byzantine_italy",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        64.1333,
+        29.0167
+      ],
+      "country": "Finland",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sylväjäniemi-Finland",
+      "known_aliases": [
+        "Sylväjäniemi",
+        "sylväjäniemi"
+      ],
+      "latest_year": 250,
+      "name": "Sylväjäniemi",
+      "reason": "missing_entry",
+      "region": "vendel_scandinavia_baltic",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        250
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.35043,
+        16.47944
+      ],
+      "country": "Hungary",
+      "earliest_year": 250,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Szent-Vid, Velem-Hungary",
+      "known_aliases": [
+        "Szent-Vid, Velem",
+        "szent-vid, velem"
+      ],
+      "latest_year": 800,
+      "name": "Szent-Vid, Velem",
+      "reason": "missing_entry",
+      "region": "avar_danubian_carpathian",
+      "sample_years": [
+        250,
+        400,
+        500,
+        600,
+        700,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.94354,
+        -7.72207
+      ],
+      "country": "Portugal",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "SÃ£o Bartolomeu-Portugal",
+      "known_aliases": [
+        "SÃ£o Bartolomeu",
+        "sã£o bartolomeu"
+      ],
+      "latest_year": 800,
+      "name": "SÃ£o Bartolomeu",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.65473,
+        -7.12072
+      ],
+      "country": "Portugal",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "SÃ£o BrÃ¡s-Portugal",
+      "known_aliases": [
+        "SÃ£o BrÃ¡s",
+        "sã£o brã¡s"
+      ],
+      "latest_year": 800,
+      "name": "SÃ£o BrÃ¡s",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.22381,
+        -7.8458
+      ],
+      "country": "Portugal",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "SÃ£o Cucufate-Portugal",
+      "known_aliases": [
+        "SÃ£o Cucufate",
+        "sã£o cucufate"
+      ],
+      "latest_year": 800,
+      "name": "SÃ£o Cucufate",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.72257,
+        -8.64357
+      ],
+      "country": "Portugal",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "SÃ£o EstevÃ£o-Portugal",
+      "known_aliases": [
+        "SÃ£o EstevÃ£o",
+        "sã£o estevã£o"
+      ],
+      "latest_year": 800,
+      "name": "SÃ£o EstevÃ£o",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.31057,
+        -7.83658
+      ],
+      "country": "Portugal",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "SÃ£o FaraÃºsto-Portugal",
+      "known_aliases": [
+        "SÃ£o FaraÃºsto",
+        "sã£o faraãºsto"
+      ],
+      "latest_year": 800,
+      "name": "SÃ£o FaraÃºsto",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.38658,
+        -8.07142
+      ],
+      "country": "Portugal",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "SÃ£o JoÃ£o de Areias-Portugal",
+      "known_aliases": [
+        "SÃ£o JoÃ£o de Areias",
+        "sã£o joã£o de areias"
+      ],
+      "latest_year": 800,
+      "name": "SÃ£o JoÃ£o de Areias",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    }
+  ]
+}

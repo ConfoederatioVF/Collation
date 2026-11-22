@@ -1,0 +1,881 @@
+{
+  "batch_index": 583,
+  "count": 30,
+  "project": "MAGNETIC",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        45.9169,
+        11.0669
+      ],
+      "country": "Italy",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Volano, San Rocco-Italy",
+      "known_aliases": [
+        "Volano, San Rocco",
+        "volano, san rocco"
+      ],
+      "latest_year": -1000,
+      "name": "Volano, San Rocco",
+      "reason": "missing_entry",
+      "region": "italia_peninsular",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.2866,
+        11.5671
+      ],
+      "country": "Austria",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Volders-Austria",
+      "known_aliases": [
+        "Volders",
+        "volders"
+      ],
+      "latest_year": -1000,
+      "name": "Volders",
+      "reason": "missing_entry",
+      "region": "germania_limes_alpine",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.1333,
+        4.4167
+      ],
+      "country": "Netherlands",
+      "earliest_year": -1000,
+      "existing_historical_names": [
+        {
+          "date": "1840.1.1",
+          "name": "Voorschoten"
+        }
+      ],
+      "existing_meta_index": 9703,
+      "existing_meta_name": "Voorschoten",
+      "key": "Voorschoten-Boschgeest-Netherlands",
+      "known_aliases": [
+        "Voorschoten-Boschgeest",
+        "voorschoten-boschgeest"
+      ],
+      "latest_year": -1000,
+      "name": "Voorschoten-Boschgeest",
+      "reason": "under_covered_history",
+      "region": "gallia_lugd_belgica",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.43487,
+        14.67171
+      ],
+      "country": "Austria",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Vorwald-Austria",
+      "known_aliases": [
+        "Vorwald",
+        "vorwald"
+      ],
+      "latest_year": -1000,
+      "name": "Vorwald",
+      "reason": "missing_entry",
+      "region": "germania_limes_alpine",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.58722,
+        20.82056
+      ],
+      "country": "Kosovo",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "VuÄak, Gllogoc-Kosovo",
+      "known_aliases": [
+        "VuÄak, Gllogoc",
+        "vuäak, gllogoc"
+      ],
+      "latest_year": 400,
+      "name": "VuÄak, Gllogoc",
+      "reason": "missing_entry",
+      "region": "moesia_dacia_thracia",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.11,
+        3.21
+      ],
+      "country": "Belgium",
+      "earliest_year": -1000,
+      "existing_historical_names": [
+        {
+          "date": "1940.1.1",
+          "name": "Damme"
+        }
+      ],
+      "existing_meta_index": 17900,
+      "existing_meta_name": "Damme",
+      "key": "Waardamme-Vijvers-Belgium",
+      "known_aliases": [
+        "Waardamme-Vijvers",
+        "waardamme-vijvers",
+        "waardamme vijvers",
+        "Waardamme Vijvers"
+      ],
+      "latest_year": -1000,
+      "name": "Waardamme-Vijvers",
+      "reason": "under_covered_history",
+      "region": "gallia_lugd_belgica",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.3794,
+        1.6531
+      ],
+      "country": "France",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Waben-France",
+      "known_aliases": [
+        "Waben",
+        "waben"
+      ],
+      "latest_year": -1000,
+      "name": "Waben",
+      "reason": "missing_entry",
+      "region": "gallia_lugd_belgica",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.8104,
+        -2.787
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Waddon Hill Stoke Abbot-United Kingdom",
+      "known_aliases": [
+        "Waddon Hill Stoke Abbot",
+        "waddon hill stoke abbot"
+      ],
+      "latest_year": 1,
+      "name": "Waddon Hill Stoke Abbot",
+      "reason": "missing_entry",
+      "region": "britannia",
+      "sample_years": [
+        -500,
+        -200,
+        1
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.572,
+        -0.6048
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Wakerley-United Kingdom",
+      "known_aliases": [
+        "Wakerley",
+        "wakerley"
+      ],
+      "latest_year": 200,
+      "name": "Wakerley",
+      "reason": "missing_entry",
+      "region": "britannia",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.8153,
+        -5.0264
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Walesland Rath-United Kingdom",
+      "known_aliases": [
+        "Walesland Rath",
+        "walesland rath"
+      ],
+      "latest_year": 200,
+      "name": "Walesland Rath",
+      "reason": "missing_entry",
+      "region": "britannia",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.7583,
+        -2.4742
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Wall Fort Kynnersley-United Kingdom",
+      "known_aliases": [
+        "Wall Fort Kynnersley",
+        "wall fort kynnersley"
+      ],
+      "latest_year": 1,
+      "name": "Wall Fort Kynnersley",
+      "reason": "missing_entry",
+      "region": "britannia",
+      "sample_years": [
+        -500,
+        -200,
+        1
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.0719,
+        14.22287
+      ],
+      "country": "Italy",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Walls of Timoleon-Italy",
+      "known_aliases": [
+        "Walls of Timoleon",
+        "walls of timoleon"
+      ],
+      "latest_year": 1,
+      "name": "Walls of Timoleon",
+      "reason": "missing_entry",
+      "region": "italia_south_islands",
+      "sample_years": [
+        -500,
+        -200,
+        1
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.1856,
+        -2.9858
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Walpole Landfill-United Kingdom",
+      "known_aliases": [
+        "Walpole Landfill",
+        "walpole landfill"
+      ],
+      "latest_year": -500,
+      "name": "Walpole Landfill",
+      "reason": "missing_entry",
+      "region": "britannia",
+      "sample_years": [
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.4813,
+        -0.1288
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -1000,
+      "existing_historical_names": [
+        {
+          "date": "1821.1.1",
+          "name": "Lambeth"
+        }
+      ],
+      "existing_meta_index": 9347,
+      "existing_meta_name": "Lambeth",
+      "key": "Wandsworth Road and Pascal Street Nine Elms Lambeth-United Kingdom",
+      "known_aliases": [
+        "Wandsworth Road and Pascal Street Nine Elms Lambeth",
+        "wandsworth road and pascal street nine elms lambeth"
+      ],
+      "latest_year": -1000,
+      "name": "Wandsworth Road and Pascal Street Nine Elms Lambeth",
+      "reason": "under_covered_history",
+      "region": "britannia",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.8579,
+        6.2649
+      ],
+      "country": "Netherlands",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Wapse-Netherlands",
+      "known_aliases": [
+        "Wapse",
+        "wapse"
+      ],
+      "latest_year": -200,
+      "name": "Wapse",
+      "reason": "missing_entry",
+      "region": "gallia_lugd_belgica",
+      "sample_years": [
+        -1000,
+        -500,
+        -200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.4168,
+        0.159
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Wardy Hill Coveney-United Kingdom",
+      "known_aliases": [
+        "Wardy Hill Coveney",
+        "wardy hill coveney"
+      ],
+      "latest_year": 200,
+      "name": "Wardy Hill Coveney",
+      "reason": "missing_entry",
+      "region": "britannia",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.2099,
+        -2.1624
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -200,
+      "existing_historical_names": [
+        {
+          "date": "900.1.1",
+          "name": "Warminster"
+        }
+      ],
+      "existing_meta_index": 7357,
+      "existing_meta_name": "Warminster",
+      "key": "Warminster Community Centre Pepper Place Warminster-United Kingdom",
+      "known_aliases": [
+        "Warminster Community Centre Pepper Place Warminster",
+        "warminster community centre pepper place warminster"
+      ],
+      "latest_year": 400,
+      "name": "Warminster Community Centre Pepper Place Warminster",
+      "reason": "under_covered_history",
+      "region": "britannia",
+      "sample_years": [
+        -200,
+        1,
+        200,
+        400
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.9801,
+        -1.1307
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Warnford Road Corhampton-United Kingdom",
+      "known_aliases": [
+        "Warnford Road Corhampton",
+        "warnford road corhampton"
+      ],
+      "latest_year": -200,
+      "name": "Warnford Road Corhampton",
+      "reason": "missing_entry",
+      "region": "britannia",
+      "sample_years": [
+        -1000,
+        -500,
+        -200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.2275,
+        -1.6326
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -500,
+      "existing_historical_names": [
+        {
+          "date": "50.1.1",
+          "name": "Sorviodunum"
+        },
+        {
+          "date": "600.1.1",
+          "name": "Searoburh"
+        },
+        {
+          "date": "1220.1.1",
+          "name": "New Sarum"
+        },
+        {
+          "date": "1800.1.1",
+          "name": "Salisbury"
+        }
+      ],
+      "existing_meta_index": 8047,
+      "existing_meta_name": "Salisbury",
+      "key": "Warren Hill Salisbury Plain-United Kingdom",
+      "known_aliases": [
+        "Warren Hill Salisbury Plain",
+        "warren hill salisbury plain"
+      ],
+      "latest_year": 1,
+      "name": "Warren Hill Salisbury Plain",
+      "reason": "under_covered_history",
+      "region": "britannia",
+      "sample_years": [
+        -500,
+        -200,
+        1
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        53.2119,
+        -0.4504
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Washingborough Fen-United Kingdom",
+      "known_aliases": [
+        "Washingborough Fen",
+        "washingborough fen"
+      ],
+      "latest_year": 1,
+      "name": "Washingborough Fen",
+      "reason": "missing_entry",
+      "region": "britannia",
+      "sample_years": [
+        -2500,
+        -1000,
+        -500,
+        -200,
+        1
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.8832,
+        0.8042
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Waterden Hoard-United Kingdom",
+      "known_aliases": [
+        "Waterden Hoard",
+        "waterden hoard"
+      ],
+      "latest_year": -1000,
+      "name": "Waterden Hoard",
+      "reason": "missing_entry",
+      "region": "britannia",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.7292,
+        -1.3844
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Watkins Farm Northmoor-United Kingdom",
+      "known_aliases": [
+        "Watkins Farm Northmoor",
+        "watkins farm northmoor"
+      ],
+      "latest_year": 200,
+      "name": "Watkins Farm Northmoor",
+      "reason": "missing_entry",
+      "region": "britannia",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        58.4674,
+        -3.3216
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Watten Caithness-United Kingdom",
+      "known_aliases": [
+        "Watten Caithness",
+        "watten caithness"
+      ],
+      "latest_year": 200,
+      "name": "Watten Caithness",
+      "reason": "missing_entry",
+      "region": "britannia",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.3052,
+        11.6359
+      ],
+      "country": "Austria",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Weer-Austria",
+      "known_aliases": [
+        "Weer",
+        "weer"
+      ],
+      "latest_year": -1000,
+      "name": "Weer",
+      "reason": "missing_entry",
+      "region": "germania_limes_alpine",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.2665,
+        5.7094
+      ],
+      "country": "Netherlands",
+      "earliest_year": -500,
+      "existing_historical_names": [
+        {
+          "date": "1100.1.1",
+          "name": "Weert"
+        }
+      ],
+      "existing_meta_index": 7832,
+      "existing_meta_name": "Weert",
+      "key": "Weert Molenakkerdreef-Netherlands",
+      "known_aliases": [
+        "Weert Molenakkerdreef",
+        "weert molenakkerdreef"
+      ],
+      "latest_year": 1,
+      "name": "Weert Molenakkerdreef",
+      "reason": "under_covered_history",
+      "region": "gallia_lugd_belgica",
+      "sample_years": [
+        -500,
+        -200,
+        1
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        53.7969,
+        -0.7958
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Welhambridge-United Kingdom",
+      "known_aliases": [
+        "Welhambridge",
+        "welhambridge"
+      ],
+      "latest_year": 1,
+      "name": "Welhambridge",
+      "reason": "missing_entry",
+      "region": "britannia",
+      "sample_years": [
+        -2500,
+        -1000,
+        -500,
+        -200,
+        1
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.179,
+        -1.5846
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Wellesbourne Walton-United Kingdom",
+      "known_aliases": [
+        "Wellesbourne Walton",
+        "wellesbourne walton"
+      ],
+      "latest_year": 1,
+      "name": "Wellesbourne Walton",
+      "reason": "missing_entry",
+      "region": "britannia",
+      "sample_years": [
+        -500,
+        -200,
+        1
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.1267,
+        -2.7189
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Wellington Quarry Marden-United Kingdom",
+      "known_aliases": [
+        "Wellington Quarry Marden",
+        "wellington quarry marden"
+      ],
+      "latest_year": 200,
+      "name": "Wellington Quarry Marden",
+      "reason": "missing_entry",
+      "region": "britannia",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.4649,
+        -3.3819
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Welsh St Donats-United Kingdom",
+      "known_aliases": [
+        "Welsh St Donats",
+        "welsh st donats"
+      ],
+      "latest_year": -1000,
+      "name": "Welsh St Donats",
+      "reason": "missing_entry",
+      "region": "britannia",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.5337,
+        11.5022
+      ],
+      "country": "Germany",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Weltenburg-Arzberg, Wall 4-Germany",
+      "known_aliases": [
+        "Weltenburg-Arzberg, Wall 4",
+        "weltenburg-arzberg, wall 4"
+      ],
+      "latest_year": -1000,
+      "name": "Weltenburg-Arzberg, Wall 4",
+      "reason": "missing_entry",
+      "region": "germania_limes_alpine",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    }
+  ]
+}

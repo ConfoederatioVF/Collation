@@ -1,0 +1,876 @@
+{
+  "batch_index": 572,
+  "count": 30,
+  "project": "MAGNETIC",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        39.9646,
+        3.9404
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sa Talaia de Torre Petxina-Spain",
+      "known_aliases": [
+        "Sa Talaia de Torre Petxina",
+        "sa talaia de torre petxina"
+      ],
+      "latest_year": 200,
+      "name": "Sa Talaia de Torre Petxina",
+      "reason": "missing_entry",
+      "region": "hispania_tarrac_lusit",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.8103,
+        -0.0838
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sacombe Road Bengeo-United Kingdom",
+      "known_aliases": [
+        "Sacombe Road Bengeo",
+        "sacombe road bengeo"
+      ],
+      "latest_year": -1000,
+      "name": "Sacombe Road Bengeo",
+      "reason": "missing_entry",
+      "region": "britannia",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.71666,
+        5.48333
+      ],
+      "country": "France",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Saint Alban-France",
+      "known_aliases": [
+        "Saint Alban",
+        "saint alban"
+      ],
+      "latest_year": -500,
+      "name": "Saint Alban",
+      "reason": "missing_entry",
+      "region": "gallia_narb_aquit",
+      "sample_years": [
+        -2500,
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.71205,
+        4.91788
+      ],
+      "country": "France",
+      "earliest_year": -2500,
+      "existing_historical_names": [
+        {
+          "date": "1901.1.1",
+          "name": "Saint-Priest"
+        }
+      ],
+      "existing_meta_index": 15661,
+      "existing_meta_name": "Saint-Priest",
+      "key": "Saint Priest Minerve-France",
+      "known_aliases": [
+        "Saint Priest Minerve",
+        "saint priest minerve"
+      ],
+      "latest_year": -500,
+      "name": "Saint Priest Minerve",
+      "reason": "under_covered_history",
+      "region": "gallia_narb_aquit",
+      "sample_years": [
+        -2500,
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.64746,
+        -0.0756
+      ],
+      "country": "France",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Saint Simon-l’Ile des Bois-France",
+      "known_aliases": [
+        "Saint Simon-l’Ile des Bois",
+        "saint simon-l’ile des bois"
+      ],
+      "latest_year": -500,
+      "name": "Saint Simon-l’Ile des Bois",
+      "reason": "missing_entry",
+      "region": "gallia_narb_aquit",
+      "sample_years": [
+        -2500,
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.115,
+        3.1046
+      ],
+      "country": "Belgium",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Saint-Andries Refuge-Belgium",
+      "known_aliases": [
+        "Saint-Andries Refuge",
+        "saint-andries refuge"
+      ],
+      "latest_year": -500,
+      "name": "Saint-Andries Refuge",
+      "reason": "missing_entry",
+      "region": "gallia_lugd_belgica",
+      "sample_years": [
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.2,
+        2.1167
+      ],
+      "country": "France",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Saint-BrÃ©vin-L'OcÃ©an-France",
+      "known_aliases": [
+        "Saint-BrÃ©vin-L'OcÃ©an",
+        "saint-brã©vin-l'ocã©an"
+      ],
+      "latest_year": -500,
+      "name": "Saint-BrÃ©vin-L'OcÃ©an",
+      "reason": "missing_entry",
+      "region": "gallia_lugd_belgica",
+      "sample_years": [
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.95,
+        -0.3167
+      ],
+      "country": "France",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Saint-Germain-la-RiviÔøΩre-France",
+      "known_aliases": [
+        "Saint-Germain-la-RiviÔøΩre",
+        "saint-germain-la-riviôøωre"
+      ],
+      "latest_year": -200,
+      "name": "Saint-Germain-la-RiviÔøΩre",
+      "reason": "missing_entry",
+      "region": "gallia_narb_aquit",
+      "sample_years": [
+        -1000,
+        -500,
+        -200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.7658,
+        -1.9611
+      ],
+      "country": "France",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Saint-Just; site: menhir 2-France",
+      "known_aliases": [
+        "Saint-Just; site: menhir 2",
+        "saint-just; site: menhir 2",
+        "saint just",
+        "SAINT JUST"
+      ],
+      "latest_year": -500,
+      "name": "Saint-Just; site: menhir 2",
+      "reason": "missing_entry",
+      "region": "gallia_lugd_belgica",
+      "sample_years": [
+        -2500,
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.735,
+        7.297
+      ],
+      "country": "Italy",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Saint-Martin-de-Corléans-Italy",
+      "known_aliases": [
+        "Saint-Martin-de-Corléans",
+        "saint-martin-de-corléans"
+      ],
+      "latest_year": -500,
+      "name": "Saint-Martin-de-Corléans",
+      "reason": "missing_entry",
+      "region": "italia_peninsular",
+      "sample_years": [
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.39857,
+        15.95987
+      ],
+      "country": "Italy",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Salapia-Italy",
+      "known_aliases": [
+        "Salapia",
+        "salapia"
+      ],
+      "latest_year": 1,
+      "name": "Salapia",
+      "reason": "missing_entry",
+      "region": "italia_peninsular",
+      "sample_years": [
+        -500,
+        -200,
+        1
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.2163,
+        -1.98
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -1000,
+      "existing_historical_names": [
+        {
+          "date": "50.1.1",
+          "name": "Sorviodunum"
+        },
+        {
+          "date": "600.1.1",
+          "name": "Searoburh"
+        },
+        {
+          "date": "1220.1.1",
+          "name": "New Sarum"
+        },
+        {
+          "date": "1800.1.1",
+          "name": "Salisbury"
+        }
+      ],
+      "existing_meta_index": 8047,
+      "existing_meta_name": "Salisbury",
+      "key": "Salisbury Plain-United Kingdom",
+      "known_aliases": [
+        "Salisbury Plain",
+        "salisbury plain"
+      ],
+      "latest_year": -1000,
+      "name": "Salisbury Plain",
+      "reason": "under_covered_history",
+      "region": "britannia",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        55.135,
+        -1.9184
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Salter's Nick-United Kingdom",
+      "known_aliases": [
+        "Salter's Nick",
+        "salter's nick"
+      ],
+      "latest_year": -200,
+      "name": "Salter's Nick",
+      "reason": "missing_entry",
+      "region": "britannia",
+      "sample_years": [
+        -2500,
+        -1000,
+        -500,
+        -200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.8667,
+        18.3
+      ],
+      "country": "Italy",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Salve-Italy",
+      "known_aliases": [
+        "Salve",
+        "salve"
+      ],
+      "latest_year": -500,
+      "name": "Salve",
+      "reason": "missing_entry",
+      "region": "italia_south_islands",
+      "sample_years": [
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.067,
+        16.779
+      ],
+      "country": "Bosnia and Herzegovina",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Salvia-Bosnia and Herzegovina",
+      "known_aliases": [
+        "Salvia",
+        "salvia"
+      ],
+      "latest_year": 400,
+      "name": "Salvia",
+      "reason": "missing_entry",
+      "region": "pannonia_dalmatia",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.12154,
+        21.00881
+      ],
+      "country": "Greece",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Samarina 8. Grevena-Greece",
+      "known_aliases": [
+        "Samarina 8. Grevena",
+        "samarina 8. grevena"
+      ],
+      "latest_year": -500,
+      "name": "Samarina 8. Grevena",
+      "reason": "missing_entry",
+      "region": "achaea_macedonia",
+      "sample_years": [
+        -2500,
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.31774,
+        8.91285
+      ],
+      "country": "Italy",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "San Cromazio, Villaspeciosa-Italy",
+      "known_aliases": [
+        "San Cromazio, Villaspeciosa",
+        "san cromazio, villaspeciosa"
+      ],
+      "latest_year": 400,
+      "name": "San Cromazio, Villaspeciosa",
+      "reason": "missing_entry",
+      "region": "italia_south_islands",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.7,
+        15.733
+      ],
+      "country": "Italy",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "San Giovanni Rotondo-Italy_2",
+      "known_aliases": [
+        "San Giovanni Rotondo",
+        "san giovanni rotondo"
+      ],
+      "latest_year": 1,
+      "name": "San Giovanni Rotondo",
+      "reason": "missing_entry",
+      "region": "italia_peninsular",
+      "sample_years": [
+        -500,
+        -200,
+        1
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.9291,
+        13.5227
+      ],
+      "country": "Italy",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "San Lorenzo Isontino-Italy",
+      "known_aliases": [
+        "San Lorenzo Isontino",
+        "san lorenzo isontino"
+      ],
+      "latest_year": -1000,
+      "name": "San Lorenzo Isontino",
+      "reason": "missing_entry",
+      "region": "italia_peninsular",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.8577,
+        10.3309
+      ],
+      "country": "Italy",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "San Rocchino-Italy",
+      "known_aliases": [
+        "San Rocchino",
+        "san rocchino"
+      ],
+      "latest_year": 1,
+      "name": "San Rocchino",
+      "reason": "missing_entry",
+      "region": "italia_peninsular",
+      "sample_years": [
+        -500,
+        -200,
+        1
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.91964,
+        8.4531
+      ],
+      "country": "Italy",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "San Salvatore di Cabras-Italy",
+      "known_aliases": [
+        "San Salvatore di Cabras",
+        "san salvatore di cabras"
+      ],
+      "latest_year": 400,
+      "name": "San Salvatore di Cabras",
+      "reason": "missing_entry",
+      "region": "italia_south_islands",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.7775,
+        10.1829
+      ],
+      "country": "Italy",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "San Zeno-Italy",
+      "known_aliases": [
+        "San Zeno",
+        "san zeno"
+      ],
+      "latest_year": -200,
+      "name": "San Zeno",
+      "reason": "missing_entry",
+      "region": "italia_peninsular",
+      "sample_years": [
+        -1000,
+        -500,
+        -200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        53.8506,
+        -0.628
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sancton-United Kingdom",
+      "known_aliases": [
+        "Sancton",
+        "sancton"
+      ],
+      "latest_year": -200,
+      "name": "Sancton",
+      "reason": "missing_entry",
+      "region": "britannia",
+      "sample_years": [
+        -2500,
+        -1000,
+        -500,
+        -200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        57.3297,
+        -1.9822
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sands of Forvie-United Kingdom",
+      "known_aliases": [
+        "Sands of Forvie",
+        "sands of forvie"
+      ],
+      "latest_year": -500,
+      "name": "Sands of Forvie",
+      "reason": "missing_entry",
+      "region": "britannia",
+      "sample_years": [
+        -2500,
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        60.1561,
+        -1.1466
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sandsting Shetland-United Kingdom",
+      "known_aliases": [
+        "Sandsting Shetland",
+        "sandsting shetland"
+      ],
+      "latest_year": 1,
+      "name": "Sandsting Shetland",
+      "reason": "missing_entry",
+      "region": "britannia",
+      "sample_years": [
+        -500,
+        -200,
+        1
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.5219,
+        -1.96609
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -1000,
+      "existing_historical_names": [
+        {
+          "date": "1961.1.1",
+          "name": "Sandwell"
+        }
+      ],
+      "existing_meta_index": 21705,
+      "existing_meta_name": "Sandwell",
+      "key": "Sandwell Park-United Kingdom",
+      "known_aliases": [
+        "Sandwell Park",
+        "sandwell park"
+      ],
+      "latest_year": -1000,
+      "name": "Sandwell Park",
+      "reason": "under_covered_history",
+      "region": "britannia",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.6926,
+        -3.8263
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sandy Park Drewsteignton-United Kingdom",
+      "known_aliases": [
+        "Sandy Park Drewsteignton",
+        "sandy park drewsteignton"
+      ],
+      "latest_year": -1000,
+      "name": "Sandy Park Drewsteignton",
+      "reason": "missing_entry",
+      "region": "britannia",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        56.4224,
+        -3.4076
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -2500,
+      "existing_historical_names": [
+        {
+          "date": "585.1.1",
+          "name": "Scone"
+        }
+      ],
+      "existing_meta_index": 32471,
+      "existing_meta_name": "Scone",
+      "key": "Sandy Road Scone-United Kingdom",
+      "known_aliases": [
+        "Sandy Road Scone",
+        "sandy road scone"
+      ],
+      "latest_year": -1000,
+      "name": "Sandy Road Scone",
+      "reason": "under_covered_history",
+      "region": "britannia",
+      "sample_years": [
+        -2500,
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.056,
+        0.2624
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sandyden Gill Mayfield-United Kingdom",
+      "known_aliases": [
+        "Sandyden Gill Mayfield",
+        "sandyden gill mayfield"
+      ],
+      "latest_year": 1,
+      "name": "Sandyden Gill Mayfield",
+      "reason": "missing_entry",
+      "region": "britannia",
+      "sample_years": [
+        -500,
+        -200,
+        1
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        58.5563,
+        -4.7019
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sangobeg-United Kingdom",
+      "known_aliases": [
+        "Sangobeg",
+        "sangobeg"
+      ],
+      "latest_year": 200,
+      "name": "Sangobeg",
+      "reason": "missing_entry",
+      "region": "britannia",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    }
+  ]
+}

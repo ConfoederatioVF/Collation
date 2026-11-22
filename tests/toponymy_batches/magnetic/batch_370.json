@@ -1,0 +1,976 @@
+{
+  "batch_index": 370,
+  "count": 30,
+  "project": "MAGNETIC",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        39.1564,
+        20.847
+      ],
+      "country": "Greece",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rogous-Greece",
+      "known_aliases": [
+        "Rogous",
+        "rogous"
+      ],
+      "latest_year": 1347,
+      "name": "Rogous",
+      "reason": "missing_entry",
+      "region": "bulgaria_greece_thrace_med",
+      "sample_years": [
+        -500,
+        400,
+        900,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.4119,
+        23.86533
+      ],
+      "country": "Romania",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Războieni-Cetate Roman castrum-Romania",
+      "known_aliases": [
+        "Războieni-Cetate Roman castrum",
+        "războieni-cetate roman castrum"
+      ],
+      "latest_year": 1347,
+      "name": "Războieni-Cetate Roman castrum",
+      "reason": "missing_entry",
+      "region": "romania_moldova_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.20463,
+        27.79058
+      ],
+      "country": "Romania",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sacidava-Romania",
+      "known_aliases": [
+        "Sacidava",
+        "sacidava"
+      ],
+      "latest_year": 1347,
+      "name": "Sacidava",
+      "reason": "missing_entry",
+      "region": "romania_moldova_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.90771,
+        26.00492
+      ],
+      "country": "Greece",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sale-Greece",
+      "known_aliases": [
+        "Sale",
+        "sale"
+      ],
+      "latest_year": 1347,
+      "name": "Sale",
+      "reason": "missing_entry",
+      "region": "bulgaria_greece_thrace_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.45319,
+        28.3655
+      ],
+      "country": "Turkey-in-Europe",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Salmydessos (coastal region)-Turkey-in-Europe",
+      "known_aliases": [
+        "Salmydessos (coastal region)",
+        "salmydessos"
+      ],
+      "latest_year": 1347,
+      "name": "Salmydessos (coastal region)",
+      "reason": "missing_entry",
+      "region": "bulgaria_greece_thrace_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.63475,
+        28.09573
+      ],
+      "country": "Turkey-in-Europe",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Salmydessos (settlement)-Turkey-in-Europe",
+      "known_aliases": [
+        "Salmydessos (settlement)",
+        "salmydessos"
+      ],
+      "latest_year": 1347,
+      "name": "Salmydessos (settlement)",
+      "reason": "missing_entry",
+      "region": "bulgaria_greece_thrace_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.25083,
+        20.64763
+      ],
+      "country": "Greece",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Same/Samos (settlement)-Greece",
+      "known_aliases": [
+        "Same/Samos (settlement)",
+        "same/samos"
+      ],
+      "latest_year": 1347,
+      "name": "Same/Samos (settlement)",
+      "reason": "missing_entry",
+      "region": "bulgaria_greece_thrace_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.50211,
+        25.53376
+      ],
+      "country": "Greece",
+      "earliest_year": 800,
+      "existing_historical_names": [
+        {
+          "date": "-699.1.1",
+          "name": "Samothrace"
+        }
+      ],
+      "existing_meta_index": 33525,
+      "existing_meta_name": "Samothrace",
+      "key": "Samothrace (settlement)-Greece",
+      "known_aliases": [
+        "Samothrace (settlement)",
+        "samothrace"
+      ],
+      "latest_year": 1347,
+      "name": "Samothrace (settlement)",
+      "reason": "under_covered_history",
+      "region": "bulgaria_greece_thrace_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.7324,
+        27.2514
+      ],
+      "country": "Turkey-in-Europe",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Saranta Ekklēsiai-Turkey-in-Europe",
+      "known_aliases": [
+        "Saranta Ekklēsiai",
+        "saranta ekklēsiai"
+      ],
+      "latest_year": 1347,
+      "name": "Saranta Ekklēsiai",
+      "reason": "missing_entry",
+      "region": "bulgaria_greece_thrace_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.06541,
+        22.07099
+      ],
+      "country": "Greece",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sarantaporo ancient settlement-Greece",
+      "known_aliases": [
+        "Sarantaporo ancient settlement",
+        "sarantaporo ancient settlement"
+      ],
+      "latest_year": 1347,
+      "name": "Sarantaporo ancient settlement",
+      "reason": "missing_entry",
+      "region": "bulgaria_greece_thrace_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.888,
+        27.232
+      ],
+      "country": "Greece",
+      "earliest_year": 800,
+      "existing_historical_names": [
+        {
+          "date": "-849.1.1",
+          "name": "Saros"
+        }
+      ],
+      "existing_meta_index": 33539,
+      "existing_meta_name": "Saros",
+      "key": "Saros-Greece",
+      "known_aliases": [
+        "Saros",
+        "saros"
+      ],
+      "latest_year": 1347,
+      "name": "Saros",
+      "reason": "under_covered_history",
+      "region": "bulgaria_greece_thrace_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.99461,
+        23.05272
+      ],
+      "country": "Bulgaria",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Scaptopara-Bulgaria",
+      "known_aliases": [
+        "Scaptopara",
+        "scaptopara"
+      ],
+      "latest_year": 1347,
+      "name": "Scaptopara",
+      "reason": "missing_entry",
+      "region": "bulgaria_greece_thrace_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.81775,
+        15.92296
+      ],
+      "country": "Croatia",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Scardona-Croatia",
+      "known_aliases": [
+        "Scardona",
+        "scardona"
+      ],
+      "latest_year": 1347,
+      "name": "Scardona",
+      "reason": "missing_entry",
+      "region": "croatia_slovenia_bosnia",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.48317,
+        16.37139
+      ],
+      "country": "Croatia",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Segestica/Siscia-Croatia",
+      "known_aliases": [
+        "Segestica/Siscia",
+        "segestica/siscia"
+      ],
+      "latest_year": 1347,
+      "name": "Segestica/Siscia",
+      "reason": "missing_entry",
+      "region": "croatia_slovenia_bosnia",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.99201,
+        20.52518
+      ],
+      "country": "Albania",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Selcë e Poshtme-Albania",
+      "known_aliases": [
+        "Selcë e Poshtme",
+        "selcë e poshtme"
+      ],
+      "latest_year": 1347,
+      "name": "Selcë e Poshtme",
+      "reason": "missing_entry",
+      "region": "serbia_montenegro_albania",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.0785,
+        28.24768
+      ],
+      "country": "Turkey-in-Europe",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sely(m)bria/Eudoxiopolis-Turkey-in-Europe",
+      "known_aliases": [
+        "Sely(m)bria/Eudoxiopolis",
+        "selybria/eudoxiopolis"
+      ],
+      "latest_year": 1347,
+      "name": "Sely(m)bria/Eudoxiopolis",
+      "reason": "missing_entry",
+      "region": "bulgaria_greece_thrace_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.99047,
+        14.90087
+      ],
+      "country": "Croatia",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Senia-Croatia",
+      "known_aliases": [
+        "Senia",
+        "senia"
+      ],
+      "latest_year": 1347,
+      "name": "Senia",
+      "reason": "missing_entry",
+      "region": "croatia_slovenia_bosnia",
+      "sample_years": [
+        -500,
+        400,
+        900,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.1557,
+        24.50621
+      ],
+      "country": "Greece",
+      "earliest_year": -500,
+      "existing_historical_names": [
+        {
+          "date": "1.1.1",
+          "name": "Serifos"
+        }
+      ],
+      "existing_meta_index": 31317,
+      "existing_meta_name": "Serifos",
+      "key": "Seriphos (settlement)-Greece",
+      "known_aliases": [
+        "Seriphos (settlement)",
+        "seriphos"
+      ],
+      "latest_year": 1347,
+      "name": "Seriphos (settlement)",
+      "reason": "under_covered_history",
+      "region": "bulgaria_greece_thrace_med",
+      "sample_years": [
+        -500,
+        900,
+        1200,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.98382,
+        22.71219
+      ],
+      "country": "Greece",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sicyon/Demetrias-Greece",
+      "known_aliases": [
+        "Sicyon/Demetrias",
+        "sicyon/demetrias"
+      ],
+      "latest_year": 1347,
+      "name": "Sicyon/Demetrias",
+      "reason": "missing_entry",
+      "region": "bulgaria_greece_thrace_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.91613,
+        23.07978
+      ],
+      "country": "Greece",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sidous-Greece",
+      "known_aliases": [
+        "Sidous",
+        "sidous"
+      ],
+      "latest_year": 1347,
+      "name": "Sidous",
+      "reason": "missing_entry",
+      "region": "bulgaria_greece_thrace_med",
+      "sample_years": [
+        -500,
+        900,
+        1200,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.66161,
+        25.08911
+      ],
+      "country": "Greece",
+      "earliest_year": 800,
+      "existing_historical_names": [
+        {
+          "date": "-699.1.1",
+          "name": "Sikinos"
+        }
+      ],
+      "existing_meta_index": 33583,
+      "existing_meta_name": "Sikinos",
+      "key": "Sikinos (settlement)-Greece",
+      "known_aliases": [
+        "Sikinos (settlement)",
+        "sikinos"
+      ],
+      "latest_year": 1347,
+      "name": "Sikinos (settlement)",
+      "reason": "under_covered_history",
+      "region": "bulgaria_greece_thrace_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.46745,
+        13.50707
+      ],
+      "country": "Croatia",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Siparis-Croatia",
+      "known_aliases": [
+        "Siparis",
+        "siparis"
+      ],
+      "latest_year": 1347,
+      "name": "Siparis",
+      "reason": "missing_entry",
+      "region": "croatia_slovenia_bosnia",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.97482,
+        24.74507
+      ],
+      "country": "Greece",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Siphnos (settlement)-Greece",
+      "known_aliases": [
+        "Siphnos (settlement)",
+        "siphnos"
+      ],
+      "latest_year": 1347,
+      "name": "Siphnos (settlement)",
+      "reason": "missing_entry",
+      "region": "bulgaria_greece_thrace_med",
+      "sample_years": [
+        -2500,
+        -200,
+        1100,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.08798,
+        23.54245
+      ],
+      "country": "Greece",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sirra-Greece",
+      "known_aliases": [
+        "Sirra",
+        "sirra"
+      ],
+      "latest_year": 1347,
+      "name": "Sirra",
+      "reason": "missing_entry",
+      "region": "bulgaria_greece_thrace_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.11139,
+        24.02861
+      ],
+      "country": "Greece",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sitagroi-Greece",
+      "known_aliases": [
+        "Sitagroi",
+        "sitagroi"
+      ],
+      "latest_year": 1347,
+      "name": "Sitagroi",
+      "reason": "missing_entry",
+      "region": "bulgaria_greece_thrace_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.21467,
+        26.47367
+      ],
+      "country": "Greece",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Skala ton Mistegnon-Greece",
+      "known_aliases": [
+        "Skala ton Mistegnon",
+        "skala ton mistegnon"
+      ],
+      "latest_year": 1347,
+      "name": "Skala ton Mistegnon",
+      "reason": "missing_entry",
+      "region": "bulgaria_greece_thrace_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.0375,
+        26.9531
+      ],
+      "country": "Greece",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Skalia-Greece",
+      "known_aliases": [
+        "Skalia",
+        "skalia"
+      ],
+      "latest_year": 1347,
+      "name": "Skalia",
+      "reason": "missing_entry",
+      "region": "bulgaria_greece_thrace_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.1662,
+        23.48889
+      ],
+      "country": "Greece",
+      "earliest_year": -500,
+      "existing_historical_names": [
+        {
+          "date": "-849.1.1",
+          "name": "Skiathos"
+        }
+      ],
+      "existing_meta_index": 33599,
+      "existing_meta_name": "Skiathos",
+      "key": "Skiathos (settlement)-Greece",
+      "known_aliases": [
+        "Skiathos (settlement)",
+        "skiathos"
+      ],
+      "latest_year": 1347,
+      "name": "Skiathos (settlement)",
+      "reason": "under_covered_history",
+      "region": "bulgaria_greece_thrace_med",
+      "sample_years": [
+        -500,
+        900,
+        1200,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.60972,
+        21.60612
+      ],
+      "country": "Greece",
+      "earliest_year": -500,
+      "existing_historical_names": [
+        {
+          "date": "-799.1.1",
+          "name": "Skillous"
+        }
+      ],
+      "existing_meta_index": 33600,
+      "existing_meta_name": "Skillous",
+      "key": "Skillous-Greece",
+      "known_aliases": [
+        "Skillous",
+        "skillous"
+      ],
+      "latest_year": 1347,
+      "name": "Skillous",
+      "reason": "under_covered_history",
+      "region": "bulgaria_greece_thrace_med",
+      "sample_years": [
+        -500,
+        900,
+        1200,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.18367,
+        23.37496
+      ],
+      "country": "Greece",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Skotoussa-Greece",
+      "known_aliases": [
+        "Skotoussa",
+        "skotoussa"
+      ],
+      "latest_year": 1347,
+      "name": "Skotoussa",
+      "reason": "missing_entry",
+      "region": "bulgaria_greece_thrace_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    }
+  ]
+}

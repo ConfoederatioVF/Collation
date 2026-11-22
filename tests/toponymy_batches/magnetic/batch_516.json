@@ -1,0 +1,917 @@
+{
+  "batch_index": 516,
+  "count": 30,
+  "project": "MAGNETIC",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        48.19497,
+        16.868
+      ],
+      "country": "Austria",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "ÃœberlandÃ¤cker, Engelhartstetten-Austria",
+      "known_aliases": [
+        "ÃœberlandÃ¤cker, Engelhartstetten",
+        "ãœberlandã¤cker, engelhartstetten"
+      ],
+      "latest_year": 500,
+      "name": "ÃœberlandÃ¤cker, Engelhartstetten",
+      "reason": "missing_entry",
+      "region": "bohemia_moravia_slovakia",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.72627,
+        6.48047
+      ],
+      "country": "Germany",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ãœdingen-Germany",
+      "known_aliases": [
+        "Ãœdingen",
+        "ãœdingen"
+      ],
+      "latest_year": 500,
+      "name": "Ãœdingen",
+      "reason": "missing_entry",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        58.15,
+        11.81
+      ],
+      "country": "Sweden",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ängås-Sweden",
+      "known_aliases": [
+        "Ängås",
+        "ängås",
+        "ãngã¥s",
+        "ÃngÃ¥s"
+      ],
+      "latest_year": -1000,
+      "name": "Ängås",
+      "reason": "missing_entry",
+      "region": "scandinavian_peninsula",
+      "sample_years": [
+        -2500,
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        59.7,
+        16.58
+      ],
+      "country": "Sweden",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Äs-Sweden",
+      "known_aliases": [
+        "Äs",
+        "äs"
+      ],
+      "latest_year": 1,
+      "name": "Äs",
+      "reason": "missing_entry",
+      "region": "scandinavian_peninsula",
+      "sample_years": [
+        -500,
+        -200,
+        1
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.67647,
+        17.33183
+      ],
+      "country": "Slovakia",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "ÄŒaÄov-Slovakia",
+      "known_aliases": [
+        "ÄŒaÄov",
+        "äœaäov"
+      ],
+      "latest_year": 500,
+      "name": "ÄŒaÄov",
+      "reason": "missing_entry",
+      "region": "bohemia_moravia_slovakia",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.14965,
+        17.65962
+      ],
+      "country": "Slovakia",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "ÄŒierny Brod-Slovakia",
+      "known_aliases": [
+        "ÄŒierny Brod",
+        "äœierny brod"
+      ],
+      "latest_year": 500,
+      "name": "ÄŒierny Brod",
+      "reason": "missing_entry",
+      "region": "bohemia_moravia_slovakia",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.10486,
+        18.63508
+      ],
+      "country": "Slovakia",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Å arovce-Slovakia",
+      "known_aliases": [
+        "Å arovce",
+        "å arovce",
+        "šarovce",
+        "Šarovce"
+      ],
+      "latest_year": 500,
+      "name": "Å arovce",
+      "reason": "missing_entry",
+      "region": "bohemia_moravia_slovakia",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.65495,
+        21.27041
+      ],
+      "country": "Slovakia",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Å ebastovce-Slovakia",
+      "known_aliases": [
+        "Å ebastovce",
+        "å ebastovce"
+      ],
+      "latest_year": 500,
+      "name": "Å ebastovce",
+      "reason": "missing_entry",
+      "region": "bohemia_moravia_slovakia",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.25324,
+        17.8145
+      ],
+      "country": "Slovakia",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Å oporÅˆa-Slovakia",
+      "known_aliases": [
+        "Å oporÅˆa",
+        "å oporåˆa"
+      ],
+      "latest_year": 500,
+      "name": "Å oporÅˆa",
+      "reason": "missing_entry",
+      "region": "bohemia_moravia_slovakia",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        59.27,
+        18.47
+      ],
+      "country": "Sweden",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Återvall-Sweden",
+      "known_aliases": [
+        "Återvall",
+        "återvall"
+      ],
+      "latest_year": -200,
+      "name": "Återvall",
+      "reason": "missing_entry",
+      "region": "scandinavian_peninsula",
+      "sample_years": [
+        -1000,
+        -500,
+        -200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.89377,
+        18.51946
+      ],
+      "country": "Poland",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "ÅÄ™g Piekarski-Poland",
+      "known_aliases": [
+        "ÅÄ™g Piekarski",
+        "åä™g piekarski"
+      ],
+      "latest_year": 500,
+      "name": "ÅÄ™g Piekarski",
+      "reason": "missing_entry",
+      "region": "vistula_przeworsk_wielbark",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.86412,
+        19.07079
+      ],
+      "country": "Poland",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Å»abieniec-Poland",
+      "known_aliases": [
+        "Å»abieniec",
+        "å»abieniec"
+      ],
+      "latest_year": 500,
+      "name": "Å»abieniec",
+      "reason": "missing_entry",
+      "region": "vistula_przeworsk_wielbark",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        53.0831,
+        17.2832
+      ],
+      "country": "Poland",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Å»uÅawka MaÅa; site: 1-Poland",
+      "known_aliases": [
+        "Å»uÅawka MaÅa; site: 1",
+        "å»uåawka maåa; site: 1"
+      ],
+      "latest_year": -500,
+      "name": "Å»uÅawka MaÅa; site: 1",
+      "reason": "missing_entry",
+      "region": "vistula_przeworsk_wielbark",
+      "sample_years": [
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.45912,
+        17.71675
+      ],
+      "country": "Slovakia",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Å½lkovce-Slovakia",
+      "known_aliases": [
+        "Å½lkovce",
+        "å½lkovce",
+        "žlkovce",
+        "Žlkovce"
+      ],
+      "latest_year": 500,
+      "name": "Å½lkovce",
+      "reason": "missing_entry",
+      "region": "bohemia_moravia_slovakia",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        55.41,
+        13.5
+      ],
+      "country": "Sweden",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Östra Vemmenhög-Sweden",
+      "known_aliases": [
+        "Östra Vemmenhög",
+        "östra vemmenhög"
+      ],
+      "latest_year": -1000,
+      "name": "Östra Vemmenhög",
+      "reason": "missing_entry",
+      "region": "scandinavian_peninsula",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        53.37923,
+        -6.07201
+      ],
+      "country": "Ireland",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "â€˜Androsâ€™ Ins./â€˜Adrosâ€™ Ins.-Ireland",
+      "known_aliases": [
+        "â€˜Androsâ€™ Ins./â€˜Adrosâ€™ Ins.",
+        "â€˜androsâ€™ ins./â€˜adrosâ€™ ins."
+      ],
+      "latest_year": 500,
+      "name": "â€˜Androsâ€™ Ins./â€˜Adrosâ€™ Ins.",
+      "reason": "missing_entry",
+      "region": "hibernia_north_atlantic",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        60.8,
+        7.78333
+      ],
+      "country": "Norway",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "øljuvatn-Norway",
+      "known_aliases": [
+        "øljuvatn"
+      ],
+      "latest_year": 200,
+      "name": "øljuvatn",
+      "reason": "missing_entry",
+      "region": "scandinavian_peninsula",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        59.36667,
+        11.33333
+      ],
+      "country": "Norway",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "øverby-Norway",
+      "known_aliases": [
+        "øverby"
+      ],
+      "latest_year": 200,
+      "name": "øverby",
+      "reason": "missing_entry",
+      "region": "scandinavian_peninsula",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        58.11667,
+        6.76667
+      ],
+      "country": "Norway",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "øyvold-Norway",
+      "known_aliases": [
+        "øyvold"
+      ],
+      "latest_year": -200,
+      "name": "øyvold",
+      "reason": "missing_entry",
+      "region": "scandinavian_peninsula",
+      "sample_years": [
+        -2500,
+        -1000,
+        -500,
+        -200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.3304,
+        15.34824
+      ],
+      "country": "Czechia",
+      "earliest_year": -200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Češov-Czechia",
+      "known_aliases": [
+        "Češov",
+        "češov"
+      ],
+      "latest_year": 1,
+      "name": "Češov",
+      "reason": "missing_entry",
+      "region": "bohemia_moravia_slovakia",
+      "sample_years": [
+        -200,
+        1
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.6753,
+        18.2086
+      ],
+      "country": "Poland",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Żegotki-Poland",
+      "known_aliases": [
+        "Żegotki",
+        "żegotki",
+        "å»egotki",
+        "żegotki; site: 3",
+        "Å»egotki",
+        "Żegotki; site: 3"
+      ],
+      "latest_year": -500,
+      "name": "Żegotki",
+      "reason": "missing_entry",
+      "region": "vistula_przeworsk_wielbark",
+      "sample_years": [
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        53.1,
+        17.2667
+      ],
+      "country": "Poland",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Żuławka Mała 1-Poland",
+      "known_aliases": [
+        "Żuławka Mała 1",
+        "żuławka mała 1"
+      ],
+      "latest_year": -200,
+      "name": "Żuławka Mała 1",
+      "reason": "missing_entry",
+      "region": "vistula_przeworsk_wielbark",
+      "sample_years": [
+        -1000,
+        -500,
+        -200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.5094,
+        0.0142
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -1000,
+      "existing_historical_names": [
+        {
+          "date": "1961.1.1",
+          "name": "Newham"
+        }
+      ],
+      "existing_meta_index": 21656,
+      "existing_meta_name": "Newham",
+      "key": "118 Victoria Dock Road E16 Canning Town Newham-United Kingdom",
+      "known_aliases": [
+        "118 Victoria Dock Road E16 Canning Town Newham",
+        "118 victoria dock road e16 canning town newham"
+      ],
+      "latest_year": -1000,
+      "name": "118 Victoria Dock Road E16 Canning Town Newham",
+      "reason": "under_covered_history",
+      "region": "britannia",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.8647,
+        -2.2453
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -200,
+      "existing_historical_names": [
+        {
+          "date": "48.1.1",
+          "name": "Glevum"
+        },
+        {
+          "date": "600.1.1",
+          "name": "Glowecestre"
+        },
+        {
+          "date": "1066.1.1",
+          "name": "Gloucester"
+        }
+      ],
+      "existing_meta_index": 6625,
+      "existing_meta_name": "Gloucester",
+      "key": "34-38 Eastgate Street Gloucester-United Kingdom",
+      "known_aliases": [
+        "34-38 Eastgate Street Gloucester",
+        "34-38 eastgate street gloucester"
+      ],
+      "latest_year": 400,
+      "name": "34-38 Eastgate Street Gloucester",
+      "reason": "under_covered_history",
+      "region": "britannia",
+      "sample_years": [
+        -200,
+        1,
+        200,
+        400
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.352,
+        0.0087
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -500,
+      "existing_historical_names": [
+        {
+          "date": "1901.1.1",
+          "name": "Huntingdon"
+        }
+      ],
+      "existing_meta_index": 15241,
+      "existing_meta_name": "Huntingdon",
+      "key": "6 Rectory Road Bluntisham Huntingdonshire-United Kingdom",
+      "known_aliases": [
+        "6 Rectory Road Bluntisham Huntingdonshire",
+        "6 rectory road bluntisham huntingdonshire"
+      ],
+      "latest_year": 1,
+      "name": "6 Rectory Road Bluntisham Huntingdonshire",
+      "reason": "under_covered_history",
+      "region": "britannia",
+      "sample_years": [
+        -500,
+        -200,
+        1
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.7481,
+        -1.2569
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -2500,
+      "existing_historical_names": [
+        {
+          "date": "900.1.1",
+          "name": "Oxenaforda"
+        },
+        {
+          "date": "1191.1.1",
+          "name": "Oxford"
+        }
+      ],
+      "existing_meta_index": 7321,
+      "existing_meta_name": "Oxford",
+      "key": "89-91 St Aldate's Oxford-United Kingdom",
+      "known_aliases": [
+        "89-91 St Aldate's Oxford",
+        "89-91 st aldate's oxford"
+      ],
+      "latest_year": -200,
+      "name": "89-91 St Aldate's Oxford",
+      "reason": "under_covered_history",
+      "region": "britannia",
+      "sample_years": [
+        -2500,
+        -1000,
+        -500,
+        -200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.5696,
+        -0.7748
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -1000,
+      "existing_historical_names": [
+        {
+          "date": "1901.1.1",
+          "name": "High Wycombe"
+        }
+      ],
+      "existing_meta_index": 15899,
+      "existing_meta_name": "High Wycombe",
+      "key": "90 High Street Marlow Wycombe-United Kingdom",
+      "known_aliases": [
+        "90 High Street Marlow Wycombe",
+        "90 high street marlow wycombe"
+      ],
+      "latest_year": -500,
+      "name": "90 High Street Marlow Wycombe",
+      "reason": "under_covered_history",
+      "region": "britannia",
+      "sample_years": [
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.5166,
+        -7.4442
+      ],
+      "country": "Spain",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "A Lagoa-Spain",
+      "known_aliases": [
+        "A Lagoa",
+        "a lagoa"
+      ],
+      "latest_year": -1000,
+      "name": "A Lagoa",
+      "reason": "missing_entry",
+      "region": "hispania_tarrac_lusit",
+      "sample_years": [
+        -2500,
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.4289,
+        0.2388
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "A2/A282 Darent valley-United Kingdom",
+      "known_aliases": [
+        "A2/A282 Darent valley",
+        "a2/a282 darent valley"
+      ],
+      "latest_year": 1,
+      "name": "A2/A282 Darent valley",
+      "reason": "missing_entry",
+      "region": "britannia",
+      "sample_years": [
+        -500,
+        -200,
+        1
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.138,
+        -0.7088
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "A3 Hindhead-United Kingdom",
+      "known_aliases": [
+        "A3 Hindhead",
+        "a3 hindhead"
+      ],
+      "latest_year": -1000,
+      "name": "A3 Hindhead",
+      "reason": "missing_entry",
+      "region": "britannia",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    }
+  ]
+}

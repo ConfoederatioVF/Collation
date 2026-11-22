@@ -1,0 +1,858 @@
+{
+  "batch_index": 554,
+  "count": 30,
+  "project": "MAGNETIC",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        42.6,
+        11.9333
+      ],
+      "country": "Italy",
+      "earliest_year": -1000,
+      "existing_historical_names": [
+        {
+          "date": "1800.1.1",
+          "name": "Bolsena"
+        }
+      ],
+      "existing_meta_index": 32839,
+      "existing_meta_name": "Bolsena",
+      "key": "Lago di Bolsena-Italy",
+      "known_aliases": [
+        "Lago di Bolsena",
+        "lago di bolsena"
+      ],
+      "latest_year": -1000,
+      "name": "Lago di Bolsena",
+      "reason": "under_covered_history",
+      "region": "italia_peninsular",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.612,
+        11.77
+      ],
+      "country": "Italy",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lago di Mezzano, Site 1-B-Italy",
+      "known_aliases": [
+        "Lago di Mezzano, Site 1-B",
+        "lago di mezzano, site 1-b",
+        "lago di mezzano, site 1-a",
+        "lago di mezzano, site ii",
+        "Lago di Mezzano, Site 1-A",
+        "Lago di Mezzano, Site II"
+      ],
+      "latest_year": -500,
+      "name": "Lago di Mezzano, Site 1-B",
+      "reason": "missing_entry",
+      "region": "italia_peninsular",
+      "sample_years": [
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.1542,
+        -6.8618
+      ],
+      "country": "Spain",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Laguna de las Madres-Spain",
+      "known_aliases": [
+        "Laguna de las Madres",
+        "laguna de las madres"
+      ],
+      "latest_year": -500,
+      "name": "Laguna de las Madres",
+      "reason": "missing_entry",
+      "region": "hispania_baetica",
+      "sample_years": [
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.6,
+        11.5667
+      ],
+      "country": "Italy",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Laion/Lajen-Italy",
+      "known_aliases": [
+        "Laion/Lajen",
+        "laion/lajen"
+      ],
+      "latest_year": -500,
+      "name": "Laion/Lajen",
+      "reason": "missing_entry",
+      "region": "italia_peninsular",
+      "sample_years": [
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.7145,
+        12.7049
+      ],
+      "country": "Italy",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lake Nemi-Italy",
+      "known_aliases": [
+        "Lake Nemi",
+        "lake nemi"
+      ],
+      "latest_year": 200,
+      "name": "Lake Nemi",
+      "reason": "missing_entry",
+      "region": "italia_peninsular",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.94478,
+        24.29027
+      ],
+      "country": "Greece",
+      "earliest_year": -1000,
+      "existing_historical_names": [
+        {
+          "date": "-359.1.1",
+          "name": "Philippi"
+        }
+      ],
+      "existing_meta_index": 32538,
+      "existing_meta_name": "Philippi",
+      "key": "Lake Philippi-Greece",
+      "known_aliases": [
+        "Lake Philippi",
+        "lake philippi"
+      ],
+      "latest_year": -1000,
+      "name": "Lake Philippi",
+      "reason": "under_covered_history",
+      "region": "achaea_macedonia",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.56065,
+        21.53231
+      ],
+      "country": "Greece",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lake Trikhonis-Greece",
+      "known_aliases": [
+        "Lake Trikhonis",
+        "lake trikhonis"
+      ],
+      "latest_year": -200,
+      "name": "Lake Trikhonis",
+      "reason": "missing_entry",
+      "region": "achaea_macedonia",
+      "sample_years": [
+        -2500,
+        -1000,
+        -500,
+        -200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.71568,
+        21.79585
+      ],
+      "country": "Greece",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lake Vegotitis-Greece",
+      "known_aliases": [
+        "Lake Vegotitis",
+        "lake vegotitis"
+      ],
+      "latest_year": -200,
+      "name": "Lake Vegotitis",
+      "reason": "missing_entry",
+      "region": "achaea_macedonia",
+      "sample_years": [
+        -2500,
+        -1000,
+        -500,
+        -200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.86175,
+        20.83993
+      ],
+      "country": "Greece",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lake Voulkaria-Greece",
+      "known_aliases": [
+        "Lake Voulkaria",
+        "lake voulkaria"
+      ],
+      "latest_year": -1000,
+      "name": "Lake Voulkaria",
+      "reason": "missing_entry",
+      "region": "achaea_macedonia",
+      "sample_years": [
+        -2500,
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.25,
+        15.25
+      ],
+      "country": "Italy",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lakkios-Italy",
+      "known_aliases": [
+        "Lakkios",
+        "lakkios"
+      ],
+      "latest_year": 1,
+      "name": "Lakkios",
+      "reason": "missing_entry",
+      "region": "italia_south_islands",
+      "sample_years": [
+        -500,
+        -200,
+        1
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.9768,
+        -2.50962
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lambscott-United Kingdom",
+      "known_aliases": [
+        "Lambscott",
+        "lambscott"
+      ],
+      "latest_year": -1000,
+      "name": "Lambscott",
+      "reason": "missing_entry",
+      "region": "britannia",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.56271,
+        6.13867
+      ],
+      "country": "France",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Landshut-Hascherkeller-France",
+      "known_aliases": [
+        "Landshut-Hascherkeller",
+        "landshut-hascherkeller"
+      ],
+      "latest_year": -500,
+      "name": "Landshut-Hascherkeller",
+      "reason": "missing_entry",
+      "region": "gallia_lugd_belgica",
+      "sample_years": [
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.48722,
+        13.68717
+      ],
+      "country": "Austria",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Langkaralm-Austria",
+      "known_aliases": [
+        "Langkaralm",
+        "langkaralm"
+      ],
+      "latest_year": -1000,
+      "name": "Langkaralm",
+      "reason": "missing_entry",
+      "region": "germania_limes_alpine",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        55.7379,
+        -4.7182
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Langside Farm-United Kingdom",
+      "known_aliases": [
+        "Langside Farm",
+        "langside farm"
+      ],
+      "latest_year": 1,
+      "name": "Langside Farm",
+      "reason": "missing_entry",
+      "region": "britannia",
+      "sample_years": [
+        -500,
+        -200,
+        1
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.8295,
+        10.6239
+      ],
+      "country": "Italy",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Langtaufers-Italy",
+      "known_aliases": [
+        "Langtaufers",
+        "langtaufers"
+      ],
+      "latest_year": -200,
+      "name": "Langtaufers",
+      "reason": "missing_entry",
+      "region": "italia_peninsular",
+      "sample_years": [
+        -1000,
+        -500,
+        -200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        54.0988,
+        -1.4109
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -500,
+      "existing_historical_names": [
+        {
+          "date": "1901.1.1",
+          "name": "Harrogate"
+        }
+      ],
+      "existing_meta_index": 15204,
+      "existing_meta_name": "Harrogate",
+      "key": "Langthorpe Harrogate-United Kingdom",
+      "known_aliases": [
+        "Langthorpe Harrogate",
+        "langthorpe harrogate"
+      ],
+      "latest_year": 1,
+      "name": "Langthorpe Harrogate",
+      "reason": "under_covered_history",
+      "region": "britannia",
+      "sample_years": [
+        -500,
+        -200,
+        1
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.5112,
+        -2.1267
+      ],
+      "country": "France",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "LanguÃ©nan; site: La Chapelle de l'Iff-France",
+      "known_aliases": [
+        "LanguÃ©nan; site: La Chapelle de l'Iff",
+        "languã©nan; site: la chapelle de l'iff"
+      ],
+      "latest_year": -1000,
+      "name": "LanguÃ©nan; site: La Chapelle de l'Iff",
+      "reason": "missing_entry",
+      "region": "gallia_lugd_belgica",
+      "sample_years": [
+        -2500,
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        53.2205,
+        -1.2249
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Langwith Basset-United Kingdom",
+      "known_aliases": [
+        "Langwith Basset",
+        "langwith basset"
+      ],
+      "latest_year": -200,
+      "name": "Langwith Basset",
+      "reason": "missing_entry",
+      "region": "britannia",
+      "sample_years": [
+        -1000,
+        -500,
+        -200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.88845,
+        14.16338
+      ],
+      "country": "Slovenia",
+      "earliest_year": -500,
+      "existing_historical_names": [
+        {
+          "date": "1901.1.1",
+          "name": "Loitsch"
+        },
+        {
+          "date": "1947.2.10",
+          "name": "Logatec"
+        }
+      ],
+      "existing_meta_index": 15374,
+      "existing_meta_name": "Logatec",
+      "key": "LaniÅ¡Äe, Kalce, Logatec-Slovenia",
+      "known_aliases": [
+        "LaniÅ¡Äe, Kalce, Logatec",
+        "laniå¡äe, kalce, logatec"
+      ],
+      "latest_year": 400,
+      "name": "LaniÅ¡Äe, Kalce, Logatec",
+      "reason": "under_covered_history",
+      "region": "pannonia_dalmatia",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.26039,
+        4.69401
+      ],
+      "country": "France",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Laprade-France",
+      "known_aliases": [
+        "Laprade",
+        "laprade"
+      ],
+      "latest_year": -1000,
+      "name": "Laprade",
+      "reason": "missing_entry",
+      "region": "gallia_narb_aquit",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.3389,
+        -3.6781
+      ],
+      "country": "Spain",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Las Camas-Spain",
+      "known_aliases": [
+        "Las Camas",
+        "las camas"
+      ],
+      "latest_year": -1000,
+      "name": "Las Camas",
+      "reason": "missing_entry",
+      "region": "hispania_tarrac_lusit",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.3354,
+        -1.0917
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Latchmere Green-United Kingdom",
+      "known_aliases": [
+        "Latchmere Green",
+        "latchmere green"
+      ],
+      "latest_year": 1,
+      "name": "Latchmere Green",
+      "reason": "missing_entry",
+      "region": "britannia",
+      "sample_years": [
+        -500,
+        -200,
+        1
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.6167,
+        10.8667
+      ],
+      "country": "Italy",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Latsch-Italy",
+      "known_aliases": [
+        "Latsch",
+        "latsch"
+      ],
+      "latest_year": -200,
+      "name": "Latsch",
+      "reason": "missing_entry",
+      "region": "italia_peninsular",
+      "sample_years": [
+        -1000,
+        -500,
+        -200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.6558,
+        -1.8642
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Latton Lands-United Kingdom",
+      "known_aliases": [
+        "Latton Lands",
+        "latton lands"
+      ],
+      "latest_year": 200,
+      "name": "Latton Lands",
+      "reason": "missing_entry",
+      "region": "britannia",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.29186,
+        14.27673
+      ],
+      "country": "Croatia",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lauriana-Croatia",
+      "known_aliases": [
+        "Lauriana",
+        "lauriana"
+      ],
+      "latest_year": 400,
+      "name": "Lauriana",
+      "reason": "missing_entry",
+      "region": "pannonia_dalmatia",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.3902,
+        3.0459
+      ],
+      "country": "France",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lauwin-Planque-France",
+      "known_aliases": [
+        "Lauwin-Planque",
+        "lauwin-planque"
+      ],
+      "latest_year": -1000,
+      "name": "Lauwin-Planque",
+      "reason": "missing_entry",
+      "region": "gallia_lugd_belgica",
+      "sample_years": [
+        -2500,
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.4333,
+        10.5833
+      ],
+      "country": "Italy",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lavagnone-Italy",
+      "known_aliases": [
+        "Lavagnone",
+        "lavagnone"
+      ],
+      "latest_year": -1000,
+      "name": "Lavagnone",
+      "reason": "missing_entry",
+      "region": "italia_peninsular",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.6167,
+        10.6333
+      ],
+      "country": "Italy",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lavandone-Italy",
+      "known_aliases": [
+        "Lavandone",
+        "lavandone"
+      ],
+      "latest_year": -500,
+      "name": "Lavandone",
+      "reason": "missing_entry",
+      "region": "italia_peninsular",
+      "sample_years": [
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.56403,
+        6.1861
+      ],
+      "country": "France",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Le Bastidon-France",
+      "known_aliases": [
+        "Le Bastidon",
+        "le bastidon"
+      ],
+      "latest_year": -1000,
+      "name": "Le Bastidon",
+      "reason": "missing_entry",
+      "region": "gallia_narb_aquit",
+      "sample_years": [
+        -2500,
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.78333,
+        3.08333
+      ],
+      "country": "France",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Le Brezet-France",
+      "known_aliases": [
+        "Le Brezet",
+        "le brezet"
+      ],
+      "latest_year": -1000,
+      "name": "Le Brezet",
+      "reason": "missing_entry",
+      "region": "gallia_narb_aquit",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    }
+  ]
+}

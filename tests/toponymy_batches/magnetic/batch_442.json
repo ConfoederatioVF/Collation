@@ -1,0 +1,940 @@
+{
+  "batch_index": 442,
+  "count": 30,
+  "project": "MAGNETIC",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        41.01399,
+        -8.49925
+      ],
+      "country": "Portugal",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ponte do Carro, Sandim-Portugal",
+      "known_aliases": [
+        "Ponte do Carro, Sandim",
+        "ponte do carro, sandim"
+      ],
+      "latest_year": 800,
+      "name": "Ponte do Carro, Sandim",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.5491,
+        -8.01987
+      ],
+      "country": "Portugal",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ponte do Coadouro, MaÃ§Ã£o-Portugal",
+      "known_aliases": [
+        "Ponte do Coadouro, MaÃ§Ã£o",
+        "ponte do coadouro, maã§ã£o"
+      ],
+      "latest_year": 800,
+      "name": "Ponte do Coadouro, MaÃ§Ã£o",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.73585,
+        -8.0552
+      ],
+      "country": "Portugal",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ponte dos TrÃªs Concelhos, Ribeira da Isna-Portugal",
+      "known_aliases": [
+        "Ponte dos TrÃªs Concelhos, Ribeira da Isna",
+        "ponte dos trãªs concelhos, ribeira da isna"
+      ],
+      "latest_year": 800,
+      "name": "Ponte dos TrÃªs Concelhos, Ribeira da Isna",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.63892,
+        -8.70924
+      ],
+      "country": "Portugal",
+      "earliest_year": -500,
+      "existing_historical_names": [
+        {
+          "date": "1258.6.18",
+          "name": "Viana da Foz do Lima"
+        },
+        {
+          "date": "1848.1.20",
+          "name": "Viana do Castelo"
+        }
+      ],
+      "existing_meta_index": 7352,
+      "existing_meta_name": "Viaña do Castelo",
+      "key": "Ponte romana de Barroselas, Viana do Castelo-Portugal",
+      "known_aliases": [
+        "Ponte romana de Barroselas, Viana do Castelo",
+        "ponte romana de barroselas, viana do castelo"
+      ],
+      "latest_year": 800,
+      "name": "Ponte romana de Barroselas, Viana do Castelo",
+      "reason": "under_covered_history",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.35368,
+        -7.70281
+      ],
+      "country": "Portugal",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ponte romana do ChamiÃ§o-Portugal",
+      "known_aliases": [
+        "Ponte romana do ChamiÃ§o",
+        "ponte romana do chamiã§o"
+      ],
+      "latest_year": 800,
+      "name": "Ponte romana do ChamiÃ§o",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.20047,
+        -7.97029
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pontefreixo-Spain",
+      "known_aliases": [
+        "Pontefreixo",
+        "pontefreixo"
+      ],
+      "latest_year": 800,
+      "name": "Pontefreixo",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        55.7335,
+        -6.385
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Port Charlotte Islay-United Kingdom",
+      "known_aliases": [
+        "Port Charlotte Islay",
+        "port charlotte islay"
+      ],
+      "latest_year": 400,
+      "name": "Port Charlotte Islay",
+      "reason": "missing_entry",
+      "region": "britain_ireland_early",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        250,
+        400
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.87324,
+        12.4971
+      ],
+      "country": "Italy",
+      "earliest_year": -200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Porta Ardeatina-Italy",
+      "known_aliases": [
+        "Porta Ardeatina",
+        "porta ardeatina"
+      ],
+      "latest_year": 500,
+      "name": "Porta Ardeatina",
+      "reason": "missing_entry",
+      "region": "lombard_byzantine_italy",
+      "sample_years": [
+        -200,
+        1,
+        200,
+        250,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.4339,
+        14.61611
+      ],
+      "country": "Italy",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Porta Bovianum-Italy",
+      "known_aliases": [
+        "Porta Bovianum",
+        "porta bovianum"
+      ],
+      "latest_year": 500,
+      "name": "Porta Bovianum",
+      "reason": "missing_entry",
+      "region": "lombard_byzantine_italy",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        250,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.49758,
+        13.69659
+      ],
+      "country": "Italy",
+      "earliest_year": -200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Porta Capuana-Italy",
+      "known_aliases": [
+        "Porta Capuana",
+        "porta capuana"
+      ],
+      "latest_year": 500,
+      "name": "Porta Capuana",
+      "reason": "missing_entry",
+      "region": "lombard_byzantine_italy",
+      "sample_years": [
+        -200,
+        1,
+        200,
+        250,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.89432,
+        12.4921
+      ],
+      "country": "Italy",
+      "earliest_year": -200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Porta Flumentana-Italy",
+      "known_aliases": [
+        "Porta Flumentana",
+        "porta flumentana"
+      ],
+      "latest_year": 500,
+      "name": "Porta Flumentana",
+      "reason": "missing_entry",
+      "region": "lombard_byzantine_italy",
+      "sample_years": [
+        -200,
+        1,
+        200,
+        250,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.44053,
+        10.99968
+      ],
+      "country": "Italy",
+      "earliest_year": -200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Porta Leoni-Italy",
+      "known_aliases": [
+        "Porta Leoni",
+        "porta leoni"
+      ],
+      "latest_year": 800,
+      "name": "Porta Leoni",
+      "reason": "missing_entry",
+      "region": "lombard_byzantine_italy",
+      "sample_years": [
+        -200,
+        250,
+        600,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.0573,
+        12.5652
+      ],
+      "country": "Italy",
+      "earliest_year": -200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Porta Montanara-Italy",
+      "known_aliases": [
+        "Porta Montanara",
+        "porta montanara"
+      ],
+      "latest_year": 800,
+      "name": "Porta Montanara",
+      "reason": "missing_entry",
+      "region": "lombard_byzantine_italy",
+      "sample_years": [
+        -200,
+        250,
+        600,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        49.75965,
+        6.64403
+      ],
+      "country": "Germany",
+      "earliest_year": -200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Porta Nigra-Germany",
+      "known_aliases": [
+        "Porta Nigra",
+        "porta nigra"
+      ],
+      "latest_year": 800,
+      "name": "Porta Nigra",
+      "reason": "missing_entry",
+      "region": "germanic_alpine_core",
+      "sample_years": [
+        -200,
+        250,
+        600,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.07496,
+        7.68478
+      ],
+      "country": "Italy",
+      "earliest_year": -200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Porta Palatina-Italy",
+      "known_aliases": [
+        "Porta Palatina",
+        "porta palatina"
+      ],
+      "latest_year": 800,
+      "name": "Porta Palatina",
+      "reason": "missing_entry",
+      "region": "lombard_byzantine_italy",
+      "sample_years": [
+        -200,
+        250,
+        600,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.73791,
+        7.32334
+      ],
+      "country": "Italy",
+      "earliest_year": -200,
+      "existing_historical_names": [
+        {
+          "date": "-25.1.1",
+          "name": "Augusta Praetoria"
+        },
+        {
+          "date": "500.1.1",
+          "name": "Aosta"
+        }
+      ],
+      "existing_meta_index": 6267,
+      "existing_meta_name": "Aosta",
+      "key": "Porta Praetoria at Aosta-Italy",
+      "known_aliases": [
+        "Porta Praetoria at Aosta",
+        "porta praetoria at aosta"
+      ],
+      "latest_year": 800,
+      "name": "Porta Praetoria at Aosta",
+      "reason": "under_covered_history",
+      "region": "lombard_byzantine_italy",
+      "sample_years": [
+        -200,
+        250,
+        600,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.85831,
+        13.57201
+      ],
+      "country": "Italy",
+      "earliest_year": 200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Porta Solestà-Italy",
+      "known_aliases": [
+        "Porta Solestà",
+        "porta solestà"
+      ],
+      "latest_year": 800,
+      "name": "Porta Solestà",
+      "reason": "missing_entry",
+      "region": "lombard_byzantine_italy",
+      "sample_years": [
+        200,
+        250,
+        400,
+        500,
+        600,
+        700,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.9916,
+        12.67
+      ],
+      "country": "Italy",
+      "earliest_year": -200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Porta Venere-Italy",
+      "known_aliases": [
+        "Porta Venere",
+        "porta venere"
+      ],
+      "latest_year": 500,
+      "name": "Porta Venere",
+      "reason": "missing_entry",
+      "region": "lombard_byzantine_italy",
+      "sample_years": [
+        -200,
+        1,
+        200,
+        250,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.40088,
+        10.8584
+      ],
+      "country": "Italy",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Porta all'Arco-Italy",
+      "known_aliases": [
+        "Porta all'Arco",
+        "porta all'arco"
+      ],
+      "latest_year": 800,
+      "name": "Porta all'Arco",
+      "reason": "missing_entry",
+      "region": "lombard_byzantine_italy",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.3005,
+        12.35386
+      ],
+      "country": "Italy",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Porta di Giove, Falerii-Italy",
+      "known_aliases": [
+        "Porta di Giove, Falerii",
+        "porta di giove, falerii"
+      ],
+      "latest_year": 500,
+      "name": "Porta di Giove, Falerii",
+      "reason": "missing_entry",
+      "region": "lombard_byzantine_italy",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        250,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.83267,
+        4.35777
+      ],
+      "country": "France",
+      "earliest_year": -200,
+      "existing_historical_names": [
+        {
+          "date": "-28.1.1",
+          "name": "Nemausus"
+        },
+        {
+          "date": "500.1.1",
+          "name": "Nîmes"
+        }
+      ],
+      "existing_meta_index": 6262,
+      "existing_meta_name": "Nîmes",
+      "key": "Porte de France, Nemausus-France",
+      "known_aliases": [
+        "Porte de France, Nemausus",
+        "porte de france, nemausus"
+      ],
+      "latest_year": 500,
+      "name": "Porte de France, Nemausus",
+      "reason": "under_covered_history",
+      "region": "francia_merovingian",
+      "sample_years": [
+        -200,
+        1,
+        200,
+        250,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.43289,
+        6.73214
+      ],
+      "country": "France",
+      "earliest_year": -200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Porte des Gaules-France",
+      "known_aliases": [
+        "Porte des Gaules",
+        "porte des gaules"
+      ],
+      "latest_year": 500,
+      "name": "Porte des Gaules",
+      "reason": "missing_entry",
+      "region": "francia_merovingian",
+      "sample_years": [
+        -200,
+        1,
+        200,
+        250,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.8723,
+        -5.2177
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Porth y Rhaw-United Kingdom",
+      "known_aliases": [
+        "Porth y Rhaw",
+        "porth y rhaw"
+      ],
+      "latest_year": 500,
+      "name": "Porth y Rhaw",
+      "reason": "missing_entry",
+      "region": "britain_ireland_early",
+      "sample_years": [
+        -200,
+        1,
+        200,
+        250,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        57.7058,
+        -2.86
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Portknockie Green Castle-United Kingdom",
+      "known_aliases": [
+        "Portknockie Green Castle",
+        "portknockie green castle"
+      ],
+      "latest_year": 700,
+      "name": "Portknockie Green Castle",
+      "reason": "missing_entry",
+      "region": "britain_ireland_early",
+      "sample_years": [
+        -200,
+        1,
+        200,
+        250,
+        400,
+        500,
+        600,
+        700
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        57.837,
+        -3.8275
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Portmahommack Tarbat-United Kingdom",
+      "known_aliases": [
+        "Portmahommack Tarbat",
+        "portmahommack tarbat"
+      ],
+      "latest_year": 700,
+      "name": "Portmahommack Tarbat",
+      "reason": "missing_entry",
+      "region": "britain_ireland_early",
+      "sample_years": [
+        -200,
+        1,
+        200,
+        250,
+        400,
+        500,
+        600,
+        700
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.43326,
+        -7.95807
+      ],
+      "country": "Portugal",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Porto da CalÃ§adinha, Ã‰vora-Portugal",
+      "known_aliases": [
+        "Porto da CalÃ§adinha, Ã‰vora",
+        "porto da calã§adinha, ã‰vora"
+      ],
+      "latest_year": 800,
+      "name": "Porto da CalÃ§adinha, Ã‰vora",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.42652,
+        -4.04199
+      ],
+      "country": "Spain",
+      "earliest_year": -200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Portus Blendium-Spain",
+      "known_aliases": [
+        "Portus Blendium",
+        "portus blendium"
+      ],
+      "latest_year": 800,
+      "name": "Portus Blendium",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -200,
+        250,
+        600,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.1376,
+        -8.53437
+      ],
+      "country": "Portugal",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Portus Hannibalis-Portugal",
+      "known_aliases": [
+        "Portus Hannibalis",
+        "portus hannibalis"
+      ],
+      "latest_year": 800,
+      "name": "Portus Hannibalis",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.59205,
+        12.81516
+      ],
+      "country": "Italy",
+      "earliest_year": -200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Portus Liquentiae-Italy",
+      "known_aliases": [
+        "Portus Liquentiae",
+        "portus liquentiae"
+      ],
+      "latest_year": 800,
+      "name": "Portus Liquentiae",
+      "reason": "missing_entry",
+      "region": "lombard_byzantine_italy",
+      "sample_years": [
+        -200,
+        250,
+        600,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.1651,
+        -0.25592
+      ],
+      "country": "Spain",
+      "earliest_year": 200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Portus Sucronis-Spain",
+      "known_aliases": [
+        "Portus Sucronis",
+        "portus sucronis"
+      ],
+      "latest_year": 800,
+      "name": "Portus Sucronis",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        200,
+        250,
+        400,
+        500,
+        600,
+        700,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    }
+  ]
+}

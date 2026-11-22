@@ -1,0 +1,993 @@
+{
+  "batch_index": 50,
+  "count": 30,
+  "project": "MAGNETIC",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        53.60639,
+        10.11972
+      ],
+      "country": "Germany",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Farmsen-Berne-Germany",
+      "known_aliases": [
+        "Farmsen-Berne",
+        "farmsen-berne"
+      ],
+      "latest_year": 2025,
+      "name": "Farmsen-Berne",
+      "reason": "missing_entry",
+      "region": "mod_germany",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.35948,
+        0.06905
+      ],
+      "country": "United Kingdom",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Farnborough (mod_uk)-United Kingdom",
+      "known_aliases": [
+        "Farnborough",
+        "farnborough"
+      ],
+      "latest_year": 2025,
+      "name": "Farnborough",
+      "reason": "missing_entry",
+      "region": "mod_uk",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.29424,
+        -0.75565
+      ],
+      "country": "United Kingdom",
+      "earliest_year": 1750,
+      "existing_historical_names": [
+        {
+          "date": "1901.1.1",
+          "name": "Farnborough"
+        }
+      ],
+      "existing_meta_index": 15117,
+      "existing_meta_name": "Farnborough",
+      "key": "Farnborough-United Kingdom",
+      "known_aliases": [
+        "Farnborough",
+        "farnborough",
+        "fab",
+        "farnboro",
+        "farnborough i hampshire",
+        "FAB",
+        "Farnboro",
+        "Farnborough i Hampshire"
+      ],
+      "latest_year": 2025,
+      "name": "Farnborough",
+      "reason": "under_covered_history",
+      "region": "mod_uk",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        61.3085,
+        7.79694
+      ],
+      "country": "Norway",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Farnes-Norway",
+      "known_aliases": [
+        "Farnes",
+        "farnes",
+        "ovre aardal",
+        "ovre ardal",
+        "øvre aardal",
+        "Ovre Aardal",
+        "Ovre Ardal",
+        "Øvre Aardal"
+      ],
+      "latest_year": 2025,
+      "name": "Farnes",
+      "reason": "missing_entry",
+      "region": "mod_norway",
+      "sample_years": [
+        800,
+        1750,
+        1930,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.21444,
+        -0.80054
+      ],
+      "country": "United Kingdom",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Farnham-United Kingdom",
+      "known_aliases": [
+        "Farnham",
+        "farnham",
+        "فارنهام"
+      ],
+      "latest_year": 2025,
+      "name": "Farnham",
+      "reason": "missing_entry",
+      "region": "mod_uk",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        53.55,
+        -2.4
+      ],
+      "country": "United Kingdom",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Farnworth-United Kingdom",
+      "known_aliases": [
+        "Farnworth",
+        "farnworth"
+      ],
+      "latest_year": 2025,
+      "name": "Farnworth",
+      "reason": "missing_entry",
+      "region": "mod_uk",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        58.09479,
+        6.80468
+      ],
+      "country": "Norway",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Farsund-Norway",
+      "known_aliases": [
+        "Farsund",
+        "farsund"
+      ],
+      "latest_year": 2025,
+      "name": "Farsund",
+      "reason": "missing_entry",
+      "region": "mod_norway",
+      "sample_years": [
+        800,
+        1750,
+        1930,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        55.80858,
+        12.36066
+      ],
+      "country": "Denmark",
+      "earliest_year": 800,
+      "existing_historical_names": [
+        {
+          "date": "1955.1.1",
+          "name": "Farum"
+        }
+      ],
+      "existing_meta_index": 20309,
+      "existing_meta_name": "Farum",
+      "key": "Farum-Denmark",
+      "known_aliases": [
+        "Farum",
+        "farum",
+        "фарум",
+        "Фарум"
+      ],
+      "latest_year": 2025,
+      "name": "Farum",
+      "reason": "under_covered_history",
+      "region": "mod_denmark",
+      "sample_years": [
+        800,
+        1750,
+        1930,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        67.25883,
+        15.39181
+      ],
+      "country": "Norway",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fauske-Norway",
+      "known_aliases": [
+        "Fauske",
+        "fauske",
+        "фауске",
+        "Фауске"
+      ],
+      "latest_year": 2025,
+      "name": "Fauske",
+      "reason": "missing_entry",
+      "region": "mod_norway",
+      "sample_years": [
+        800,
+        1750,
+        1930,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.3148,
+        0.88856
+      ],
+      "country": "United Kingdom",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Faversham-United Kingdom",
+      "known_aliases": [
+        "Faversham",
+        "faversham",
+        "fejveshem",
+        "fawrsham",
+        "фейвешем",
+        "Fejveshem",
+        "Фейвешем"
+      ],
+      "latest_year": 2025,
+      "name": "Faversham",
+      "reason": "missing_entry",
+      "region": "mod_uk",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.16116,
+        16.38233
+      ],
+      "country": "Austria",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Favoriten-Austria",
+      "known_aliases": [
+        "Favoriten",
+        "favoriten",
+        "фаворитен",
+        "Фаворитен"
+      ],
+      "latest_year": 2025,
+      "name": "Favoriten",
+      "reason": "missing_entry",
+      "region": "mod_austria",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        53.67688,
+        -1.35647
+      ],
+      "country": "United Kingdom",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Featherstone (mod_uk)-United Kingdom",
+      "known_aliases": [
+        "Featherstone",
+        "featherstone",
+        "fytrstwn",
+        "فیترستون"
+      ],
+      "latest_year": 2025,
+      "name": "Featherstone",
+      "reason": "missing_entry",
+      "region": "mod_uk",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.64483,
+        -2.09315
+      ],
+      "country": "United Kingdom",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Featherstone-United Kingdom",
+      "known_aliases": [
+        "Featherstone",
+        "featherstone"
+      ],
+      "latest_year": 2025,
+      "name": "Featherstone",
+      "reason": "missing_entry",
+      "region": "mod_uk",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        49.75,
+        0.37
+      ],
+      "country": "France",
+      "earliest_year": 250,
+      "existing_historical_names": [
+        {
+          "date": "850.1.1",
+          "name": "Fisciampum"
+        },
+        {
+          "date": "1300.1.1",
+          "name": "Fécamp"
+        }
+      ],
+      "existing_meta_index": 6600,
+      "existing_meta_name": "Fécamp",
+      "key": "Fecamp-France",
+      "known_aliases": [
+        "Fecamp",
+        "fecamp",
+        "fécamp",
+        "super fluvium fiscannum",
+        "fiscannus",
+        "Fécamp",
+        "super fluvium Fiscannum",
+        "Fiscannus"
+      ],
+      "latest_year": 2025,
+      "name": "Fecamp",
+      "reason": "under_covered_history",
+      "region": "mod_france",
+      "sample_years": [
+        250,
+        1876,
+        1970,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        54.4378,
+        11.19352
+      ],
+      "country": "Germany",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fehmarn-Germany",
+      "known_aliases": [
+        "Fehmarn",
+        "fehmarn",
+        "femarn",
+        "femarnas",
+        "femern",
+        "Femarn",
+        "Femarnas",
+        "Femern"
+      ],
+      "latest_year": 2025,
+      "name": "Fehmarn",
+      "reason": "missing_entry",
+      "region": "mod_germany",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.23645,
+        9.59734
+      ],
+      "country": "Austria",
+      "earliest_year": 1750,
+      "existing_historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Feldkirch"
+        }
+      ],
+      "existing_meta_index": 12862,
+      "existing_meta_name": "Feldkirch",
+      "key": "Feldkirch-Austria",
+      "known_aliases": [
+        "Feldkirch",
+        "feldkirch",
+        "fel'dkirkh",
+        "ferutokiruhi",
+        "fldkyrsh",
+        "Fel'dkirkh"
+      ],
+      "latest_year": 2025,
+      "name": "Feldkirch",
+      "reason": "under_covered_history",
+      "region": "mod_austria",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.90748,
+        11.84266
+      ],
+      "country": "Germany",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Feldkirchen-Westerham-Germany",
+      "known_aliases": [
+        "Feldkirchen-Westerham",
+        "feldkirchen-westerham",
+        "fel'dkirkhen-vestergam",
+        "fel'dkirkhen-vesterkham",
+        "feldkirkhen-vesterkham",
+        "Fel'dkirkhen-Vestergam",
+        "Fel'dkirkhen-Vesterkham",
+        "Feldkirkhen-Vesterkham"
+      ],
+      "latest_year": 2025,
+      "name": "Feldkirchen-Westerham",
+      "reason": "missing_entry",
+      "region": "mod_germany",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.96375,
+        1.3511
+      ],
+      "country": "United Kingdom",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Felixstowe-United Kingdom",
+      "known_aliases": [
+        "Felixstowe",
+        "felixstowe",
+        "filikstou",
+        "fei li ke si tuo",
+        "flykstw",
+        "Filikstou"
+      ],
+      "latest_year": 2025,
+      "name": "Felixstowe",
+      "reason": "missing_entry",
+      "region": "mod_uk",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.80912,
+        9.27697
+      ],
+      "country": "Germany",
+      "earliest_year": 1750,
+      "existing_historical_names": [
+        {
+          "date": "1890.1.1",
+          "name": "Fellbach"
+        }
+      ],
+      "existing_meta_index": 10777,
+      "existing_meta_name": "Fellbach",
+      "key": "Fellbach-Germany",
+      "known_aliases": [
+        "Fellbach",
+        "fellbach",
+        "felbakh",
+        "fell'bakh",
+        "foeuebach",
+        "Felbakh",
+        "Fell'bakh",
+        "Foeuebach"
+      ],
+      "latest_year": 2025,
+      "name": "Fellbach",
+      "reason": "under_covered_history",
+      "region": "mod_germany",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.13763,
+        9.42139
+      ],
+      "country": "Germany",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Felsberg-Germany",
+      "known_aliases": [
+        "Felsberg",
+        "felsberg",
+        "fel'sberg",
+        "ferusuberuku",
+        "flsbrg",
+        "Fel'sberg"
+      ],
+      "latest_year": 2025,
+      "name": "Felsberg",
+      "reason": "missing_entry",
+      "region": "mod_germany",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.4462,
+        -0.41388
+      ],
+      "country": "United Kingdom",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Feltham-United Kingdom",
+      "known_aliases": [
+        "Feltham",
+        "feltham",
+        "felthama",
+        "फ़ेल्ठम"
+      ],
+      "latest_year": 2025,
+      "name": "Feltham",
+      "reason": "missing_entry",
+      "region": "mod_uk",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.80743,
+        -1.89975
+      ],
+      "country": "United Kingdom",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ferndown-United Kingdom",
+      "known_aliases": [
+        "Ferndown",
+        "ferndown",
+        "ferndaun",
+        "frndawn",
+        "ферндаун",
+        "Ferndaun",
+        "Ферндаун"
+      ],
+      "latest_year": 2025,
+      "name": "Ferndown",
+      "reason": "missing_entry",
+      "region": "mod_uk",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.252,
+        6.1061
+      ],
+      "country": "France",
+      "earliest_year": 1800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ferney-Voltaire-France",
+      "known_aliases": [
+        "Ferney-Voltaire",
+        "ferney-voltaire"
+      ],
+      "latest_year": 2025,
+      "name": "Ferney-Voltaire",
+      "reason": "missing_entry",
+      "region": "mod_switzerland",
+      "sample_years": [
+        1800,
+        1921,
+        2006,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        54.68333,
+        -1.55
+      ],
+      "country": "United Kingdom",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ferryhill-United Kingdom",
+      "known_aliases": [
+        "Ferryhill",
+        "ferryhill"
+      ],
+      "latest_year": 2025,
+      "name": "Ferryhill",
+      "reason": "missing_entry",
+      "region": "mod_uk",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        59.92463,
+        11.15711
+      ],
+      "country": "Norway",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fetsund-Norway",
+      "known_aliases": [
+        "Fetsund",
+        "fetsund",
+        "fetsun",
+        "fetosun",
+        "фетсун",
+        "Fetsun",
+        "Фетсун"
+      ],
+      "latest_year": 2025,
+      "name": "Fetsund",
+      "reason": "missing_entry",
+      "region": "mod_norway",
+      "sample_years": [
+        800,
+        1750,
+        1930,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        49.37597,
+        11.21433
+      ],
+      "country": "Germany",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Feucht-Germany",
+      "known_aliases": [
+        "Feucht",
+        "feucht",
+        "fojkht",
+        "fu yi he te",
+        "фойхт",
+        "Fojkht",
+        "Фойхт"
+      ],
+      "latest_year": 2025,
+      "name": "Feucht",
+      "reason": "missing_entry",
+      "region": "mod_germany",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        49.16287,
+        10.3385
+      ],
+      "country": "Germany",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Feuchtwangen-Germany",
+      "known_aliases": [
+        "Feuchtwangen",
+        "feuchtwangen",
+        "feuchtwanger",
+        "fojkhtvangen",
+        "foyxtvangen",
+        "Feuchtwanger",
+        "Fojkhtvangen",
+        "Foyxtvangen"
+      ],
+      "latest_year": 2025,
+      "name": "Feuchtwangen",
+      "reason": "missing_entry",
+      "region": "mod_germany",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.732,
+        4.2313
+      ],
+      "country": "France",
+      "earliest_year": 1800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Feurs-France",
+      "known_aliases": [
+        "Feurs",
+        "feurs"
+      ],
+      "latest_year": 2025,
+      "name": "Feurs",
+      "reason": "missing_entry",
+      "region": "mod_france",
+      "sample_years": [
+        1800,
+        1921,
+        2006,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        58.3782,
+        8.67601
+      ],
+      "country": "Norway",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Fevik-Norway",
+      "known_aliases": [
+        "Fevik",
+        "fevik",
+        "fevig",
+        "Fevig"
+      ],
+      "latest_year": 2025,
+      "name": "Fevik",
+      "reason": "missing_entry",
+      "region": "mod_norway",
+      "sample_years": [
+        800,
+        1750,
+        1930,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.6736,
+        4.8589
+      ],
+      "country": "France",
+      "earliest_year": 1800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Feyzin-France",
+      "known_aliases": [
+        "Feyzin",
+        "feyzin"
+      ],
+      "latest_year": 2025,
+      "name": "Feyzin",
+      "reason": "missing_entry",
+      "region": "mod_france",
+      "sample_years": [
+        1800,
+        1921,
+        2006,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    }
+  ]
+}

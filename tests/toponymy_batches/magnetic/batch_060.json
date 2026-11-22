@@ -1,0 +1,1101 @@
+{
+  "batch_index": 60,
+  "count": 30,
+  "project": "MAGNETIC",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        53.39234,
+        -2.63994
+      ],
+      "country": "United Kingdom",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Great Sankey-United Kingdom",
+      "known_aliases": [
+        "Great Sankey",
+        "great sankey",
+        "sankey",
+        "Sankey"
+      ],
+      "latest_year": 2025,
+      "name": "Great Sankey",
+      "reason": "missing_entry",
+      "region": "mod_uk",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.66277,
+        -2.01111
+      ],
+      "country": "United Kingdom",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Great Wyrley-United Kingdom",
+      "known_aliases": [
+        "Great Wyrley",
+        "great wyrley",
+        "wyrley",
+        "Wyrley"
+      ],
+      "latest_year": 2025,
+      "name": "Great Wyrley",
+      "reason": "missing_entry",
+      "region": "mod_uk",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.61,
+        1.73
+      ],
+      "country": "United Kingdom",
+      "earliest_year": 1200,
+      "existing_historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Great Yarmouth"
+        }
+      ],
+      "existing_meta_index": 7936,
+      "existing_meta_name": "Great Yarmouth",
+      "key": "Great Yarmouth-United Kingdom",
+      "known_aliases": [
+        "Great Yarmouth",
+        "great yarmouth",
+        "yarmouth",
+        "gernemwa",
+        "yernemuth",
+        "gariannonum",
+        "Yarmouth",
+        "Gernemwa",
+        "Yernemuth",
+        "Gariannonum"
+      ],
+      "latest_year": 2025,
+      "name": "Great Yarmouth",
+      "reason": "under_covered_history",
+      "region": "mod_uk",
+      "sample_years": [
+        1200,
+        1750,
+        1930,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.28212,
+        14.3019
+      ],
+      "country": "Austria",
+      "earliest_year": 250,
+      "existing_historical_names": [
+        {
+          "date": "799.1.1",
+          "name": "Linze"
+        },
+        {
+          "date": "1200.1.1",
+          "name": "Linz"
+        }
+      ],
+      "existing_meta_index": 7127,
+      "existing_meta_name": "Linz",
+      "key": "Greater Linz-Austria",
+      "known_aliases": [
+        "Greater Linz",
+        "linz",
+        "lentia",
+        "lnz",
+        "linc",
+        "Lentia",
+        "LNZ",
+        "Linc"
+      ],
+      "latest_year": 2025,
+      "name": "Greater Linz",
+      "reason": "under_covered_history",
+      "region": "mod_austria",
+      "sample_years": [
+        250,
+        1600,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.89982,
+        9.19579
+      ],
+      "country": "Germany",
+      "earliest_year": 1700,
+      "existing_historical_names": [
+        {
+          "date": "1700.1.1",
+          "name": "Ludwigsburg"
+        }
+      ],
+      "existing_meta_index": 8699,
+      "existing_meta_name": "Ludwigsburg",
+      "key": "Greater Ludwigsburg-Germany",
+      "known_aliases": [
+        "Greater Ludwigsburg",
+        "ludwigsburg"
+      ],
+      "latest_year": 2025,
+      "name": "Greater Ludwigsburg",
+      "reason": "under_covered_history",
+      "region": "mod_germany",
+      "sample_years": [
+        1700,
+        1945,
+        2011,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.62074,
+        7.65976
+      ],
+      "country": "Germany",
+      "earliest_year": 1750,
+      "existing_historical_names": [
+        {
+          "date": "1875.1.1",
+          "name": "Lörrach"
+        }
+      ],
+      "existing_meta_index": 10366,
+      "existing_meta_name": "Lörrach",
+      "key": "Greater Lörrach-Germany",
+      "known_aliases": [
+        "Greater Lörrach",
+        "lörrach",
+        "l'orrakh",
+        "lerakh",
+        "lerrakh",
+        "L'orrakh",
+        "Lerakh",
+        "Lerrakh"
+      ],
+      "latest_year": 2025,
+      "name": "Greater Lörrach",
+      "reason": "under_covered_history",
+      "region": "mod_germany",
+      "sample_years": [
+        1750,
+        1900,
+        1970,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.20604,
+        8.55493
+      ],
+      "country": "Germany",
+      "earliest_year": 1750,
+      "existing_historical_names": [
+        {
+          "date": "1890.1.1",
+          "name": "Oberursel"
+        }
+      ],
+      "existing_meta_index": 10854,
+      "existing_meta_name": "Oberursel",
+      "key": "Greater Oberursel-Germany",
+      "known_aliases": [
+        "Greater Oberursel",
+        "oberursel"
+      ],
+      "latest_year": 2025,
+      "name": "Greater Oberursel",
+      "reason": "under_covered_history",
+      "region": "mod_germany",
+      "sample_years": [
+        1750,
+        1900,
+        1970,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        49.98748,
+        8.4528
+      ],
+      "country": "Germany",
+      "earliest_year": 1750,
+      "existing_historical_names": [
+        {
+          "date": "1890.1.1",
+          "name": "Rüsselsheim"
+        }
+      ],
+      "existing_meta_index": 10880,
+      "existing_meta_name": "Rüsselsheim",
+      "key": "Greater Rüsselsheim am Main-Germany",
+      "known_aliases": [
+        "Greater Rüsselsheim am Main",
+        "rüsselsheim am main",
+        "riselsheima",
+        "riselskhajm",
+        "rjussel'sgajm-am-majn",
+        "Rüsselsheim am Main",
+        "Riselsheima",
+        "Riselskhajm",
+        "Rjussel'sgajm-am-Majn"
+      ],
+      "latest_year": 2025,
+      "name": "Greater Rüsselsheim am Main",
+      "reason": "under_covered_history",
+      "region": "mod_germany",
+      "sample_years": [
+        1750,
+        1910,
+        1970,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.82087,
+        7.13509
+      ],
+      "country": "Germany",
+      "earliest_year": 1750,
+      "existing_historical_names": [
+        {
+          "date": "1905.1.1",
+          "name": "Troisdorf"
+        }
+      ],
+      "existing_meta_index": 16020,
+      "existing_meta_name": "Troisdorf",
+      "key": "Greater Troisdorf-Germany",
+      "known_aliases": [
+        "Greater Troisdorf",
+        "troisdorf",
+        "trojsdorf",
+        "zqg",
+        "te luo si duo fu",
+        "Trojsdorf",
+        "ZQG"
+      ],
+      "latest_year": 2025,
+      "name": "Greater Troisdorf",
+      "reason": "under_covered_history",
+      "region": "mod_germany",
+      "sample_years": [
+        1750,
+        1900,
+        1970,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.83271,
+        9.31609
+      ],
+      "country": "Germany",
+      "earliest_year": 1750,
+      "existing_historical_names": [
+        {
+          "date": "1890.1.1",
+          "name": "Waiblingen"
+        }
+      ],
+      "existing_meta_index": 10930,
+      "existing_meta_name": "Waiblingen",
+      "key": "Greater Waiblingen-Germany",
+      "known_aliases": [
+        "Greater Waiblingen",
+        "waiblingen",
+        "vajblingen",
+        "vayblingen",
+        "waiblinga",
+        "Vajblingen",
+        "Vayblingen",
+        "Waiblinga"
+      ],
+      "latest_year": 2025,
+      "name": "Greater Waiblingen",
+      "reason": "under_covered_history",
+      "region": "mod_germany",
+      "sample_years": [
+        1750,
+        1900,
+        1970,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.52866,
+        -0.35508
+      ],
+      "country": "United Kingdom",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Greenford-United Kingdom",
+      "known_aliases": [
+        "Greenford",
+        "greenford",
+        "grinafarda",
+        "grynfwrd",
+        "گرینفورد"
+      ],
+      "latest_year": 2025,
+      "name": "Greenford",
+      "reason": "missing_entry",
+      "region": "mod_uk",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        55.95,
+        -4.76
+      ],
+      "country": "United Kingdom",
+      "earliest_year": 1500,
+      "existing_historical_names": [
+        {
+          "date": "1600.1.1",
+          "name": "Greenock"
+        }
+      ],
+      "existing_meta_index": 8566,
+      "existing_meta_name": "Greenock",
+      "key": "Greenock-United Kingdom",
+      "known_aliases": [
+        "Greenock",
+        "greenock",
+        "grianáig",
+        "Grianáig"
+      ],
+      "latest_year": 2025,
+      "name": "Greenock",
+      "reason": "under_covered_history",
+      "region": "mod_uk",
+      "sample_years": [
+        1500,
+        1880,
+        1950,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.48,
+        0
+      ],
+      "country": "United Kingdom",
+      "earliest_year": 1500,
+      "existing_historical_names": [
+        {
+          "date": "1500.1.1",
+          "name": "Greenwich"
+        }
+      ],
+      "existing_meta_index": 8433,
+      "existing_meta_name": "Greenwich",
+      "key": "Greenwich-United Kingdom",
+      "known_aliases": [
+        "Greenwich",
+        "greenwich",
+        "became part of london",
+        "gronewic",
+        "grenewic",
+        "grenawic",
+        "became part of London",
+        "Gronewic",
+        "Grenewic",
+        "Grenawic"
+      ],
+      "latest_year": 2025,
+      "name": "Greenwich",
+      "reason": "under_covered_history",
+      "region": "mod_uk",
+      "sample_years": [
+        1500,
+        1870,
+        1945,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.3363,
+        6.34072
+      ],
+      "country": "Germany",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Grefrath-Germany",
+      "known_aliases": [
+        "Grefrath",
+        "grefrath",
+        "grefrat",
+        "ge lei fu la te",
+        "грефрат",
+        "Grefrat",
+        "Грефрат"
+      ],
+      "latest_year": 2025,
+      "name": "Grefrath",
+      "reason": "missing_entry",
+      "region": "mod_germany",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.65778,
+        12.19918
+      ],
+      "country": "Germany",
+      "earliest_year": 1750,
+      "existing_historical_names": [
+        {
+          "date": "1861.1.1",
+          "name": "Greiz"
+        }
+      ],
+      "existing_meta_index": 10145,
+      "existing_meta_name": "Greiz",
+      "key": "Greiz-Germany",
+      "known_aliases": [
+        "Greiz",
+        "greiz",
+        "grajc",
+        "грайц",
+        "Grajc",
+        "Грайц"
+      ],
+      "latest_year": 2025,
+      "name": "Greiz",
+      "reason": "under_covered_history",
+      "region": "mod_germany",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        56.41578,
+        10.87825
+      ],
+      "country": "Denmark",
+      "earliest_year": 800,
+      "existing_historical_names": [
+        {
+          "date": "1901.1.1",
+          "name": "Grenå"
+        }
+      ],
+      "existing_meta_index": 15183,
+      "existing_meta_name": "Grenå",
+      "key": "Grenaa-Denmark",
+      "known_aliases": [
+        "Grenaa",
+        "grenaa",
+        "grena",
+        "grenå",
+        "Grena",
+        "Grenå"
+      ],
+      "latest_year": 2025,
+      "name": "Grenaa",
+      "reason": "under_covered_history",
+      "region": "mod_denmark",
+      "sample_years": [
+        800,
+        1750,
+        1930,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.7702,
+        1.2791
+      ],
+      "country": "France",
+      "earliest_year": 1800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Grenade-France",
+      "known_aliases": [
+        "Grenade",
+        "grenade"
+      ],
+      "latest_year": 2025,
+      "name": "Grenade",
+      "reason": "missing_entry",
+      "region": "mod_france",
+      "sample_years": [
+        1800,
+        1921,
+        2006,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.1921,
+        7.39586
+      ],
+      "country": "Switzerland",
+      "earliest_year": 1750,
+      "existing_historical_names": [
+        {
+          "date": "1850.1.1",
+          "name": "Grenchen"
+        }
+      ],
+      "existing_meta_index": 9820,
+      "existing_meta_name": "Grenchen",
+      "key": "Grenchen-Switzerland",
+      "known_aliases": [
+        "Grenchen",
+        "grenchen",
+        "granges",
+        "grenchenas",
+        "grenkhen",
+        "Granges",
+        "Grenchenas",
+        "Grenkhen"
+      ],
+      "latest_year": 2025,
+      "name": "Grenchen",
+      "reason": "under_covered_history",
+      "region": "mod_switzerland",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.55,
+        7.68333
+      ],
+      "country": "Germany",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Grenzach-Wyhlen-Germany",
+      "known_aliases": [
+        "Grenzach-Wyhlen",
+        "grenzach-wyhlen",
+        "grencakh-vilen",
+        "grenzach",
+        "ge lun cha-wei lun",
+        "Grencakh-Vilen",
+        "Grenzach"
+      ],
+      "latest_year": 2025,
+      "name": "Grenzach-Wyhlen",
+      "reason": "missing_entry",
+      "region": "mod_switzerland",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.7536,
+        2.7272
+      ],
+      "country": "France",
+      "earliest_year": 1800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Gretz-Armainvilliers-France",
+      "known_aliases": [
+        "Gretz-Armainvilliers",
+        "gretz-armainvilliers"
+      ],
+      "latest_year": 2025,
+      "name": "Gretz-Armainvilliers",
+      "reason": "missing_entry",
+      "region": "mod_france",
+      "sample_years": [
+        1800,
+        1921,
+        2006,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        55.58333,
+        12.3
+      ],
+      "country": "Denmark",
+      "earliest_year": 800,
+      "existing_historical_names": [
+        {
+          "date": "1950.1.1",
+          "name": "Greve"
+        }
+      ],
+      "existing_meta_index": 28758,
+      "existing_meta_name": "Greve",
+      "key": "Greve-Denmark",
+      "known_aliases": [
+        "Greve",
+        "greve"
+      ],
+      "latest_year": 2025,
+      "name": "Greve",
+      "reason": "under_covered_history",
+      "region": "mod_denmark",
+      "sample_years": [
+        800,
+        1750,
+        1930,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.09364,
+        7.59396
+      ],
+      "country": "Germany",
+      "earliest_year": 1750,
+      "existing_historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Greven"
+        }
+      ],
+      "existing_meta_index": 13000,
+      "existing_meta_name": "Greven",
+      "key": "Greven-Germany",
+      "known_aliases": [
+        "Greven",
+        "greven",
+        "grefen",
+        "grevaon",
+        "grēvaon",
+        "Grefen",
+        "Grevaon",
+        "Grēvaon"
+      ],
+      "latest_year": 2025,
+      "name": "Greven",
+      "reason": "under_covered_history",
+      "region": "mod_germany",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.09102,
+        6.5827
+      ],
+      "country": "Germany",
+      "earliest_year": 1750,
+      "existing_historical_names": [
+        {
+          "date": "1890.1.1",
+          "name": "Grevenbroich"
+        }
+      ],
+      "existing_meta_index": 10790,
+      "existing_meta_name": "Grevenbroich",
+      "key": "Grevenbroich-Germany",
+      "known_aliases": [
+        "Grevenbroich",
+        "grevenbroich",
+        "grefenbrojkh",
+        "grevenbroichas",
+        "grevenbroikh",
+        "Grefenbrojkh",
+        "Grevenbroichas",
+        "Grevenbroikh"
+      ],
+      "latest_year": 2025,
+      "name": "Grevenbroich",
+      "reason": "under_covered_history",
+      "region": "mod_germany",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        59.77276,
+        10.80413
+      ],
+      "country": "Norway",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Greverud-Norway",
+      "known_aliases": [
+        "Greverud",
+        "greverud"
+      ],
+      "latest_year": 2025,
+      "name": "Greverud",
+      "reason": "missing_entry",
+      "region": "mod_norway",
+      "sample_years": [
+        800,
+        1750,
+        1930,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        53.86128,
+        11.19054
+      ],
+      "country": "Germany",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Grevesmühlen-Germany",
+      "known_aliases": [
+        "Grevesmühlen",
+        "grevesmühlen",
+        "grevesmilen",
+        "grevesmilene",
+        "grevesmjulen",
+        "Grevesmilen",
+        "Grevesmilene",
+        "Grevesmjulen"
+      ],
+      "latest_year": 2025,
+      "name": "Grevesmühlen",
+      "reason": "missing_entry",
+      "region": "mod_germany",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        53.14083,
+        -6.06306
+      ],
+      "country": "Ireland",
+      "earliest_year": 1750,
+      "existing_historical_names": [
+        {
+          "date": "1943.1.1",
+          "name": "Greystones-Delgany"
+        }
+      ],
+      "existing_meta_index": 18688,
+      "existing_meta_name": "Greystones-Delgany",
+      "key": "Greystones-Ireland",
+      "known_aliases": [
+        "Greystones",
+        "greystones",
+        "greistonsas",
+        "grejstons",
+        "grejstouns",
+        "Greistonsas",
+        "Grejstons",
+        "Grejstouns"
+      ],
+      "latest_year": 2025,
+      "name": "Greystones",
+      "reason": "under_covered_history",
+      "region": "mod_ireland",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.73901,
+        4.69829
+      ],
+      "country": "Belgium",
+      "earliest_year": 1750,
+      "existing_historical_names": [
+        {
+          "date": "1954.1.1",
+          "name": "Grez-Doiceau"
+        }
+      ],
+      "existing_meta_index": 20145,
+      "existing_meta_name": "Grez-Doiceau",
+      "key": "Grez-Doiceau-Belgium",
+      "known_aliases": [
+        "Grez-Doiceau",
+        "grez-doiceau",
+        "graven",
+        "gre",
+        "gre-duaso",
+        "Graven",
+        "Gre",
+        "Gre-Duaso"
+      ],
+      "latest_year": 2025,
+      "name": "Grez-Doiceau",
+      "reason": "under_covered_history",
+      "region": "mod_belgium",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        49.86085,
+        8.5725
+      ],
+      "country": "Germany",
+      "earliest_year": 1750,
+      "existing_historical_names": [
+        {
+          "date": "1890.1.1",
+          "name": "Griesheim"
+        }
+      ],
+      "existing_meta_index": 10791,
+      "existing_meta_name": "Griesheim",
+      "key": "Griesheim-Germany",
+      "known_aliases": [
+        "Griesheim",
+        "griesheim"
+      ],
+      "latest_year": 2025,
+      "name": "Griesheim",
+      "reason": "under_covered_history",
+      "region": "mod_germany",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.6104,
+        4.7858
+      ],
+      "country": "France",
+      "earliest_year": 1800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Grigny-sur-Rhône-France",
+      "known_aliases": [
+        "Grigny-sur-Rhône",
+        "grigny-sur-rhône"
+      ],
+      "latest_year": 2025,
+      "name": "Grigny-sur-Rhône",
+      "reason": "missing_entry",
+      "region": "mod_france",
+      "sample_years": [
+        1800,
+        1921,
+        2006,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.93409,
+        4.37213
+      ],
+      "country": "Belgium",
+      "earliest_year": 1750,
+      "existing_historical_names": [
+        {
+          "date": "1901.1.1",
+          "name": "Grimbergen"
+        }
+      ],
+      "existing_meta_index": 15187,
+      "existing_meta_name": "Grimbergen",
+      "key": "Grimbergen-Belgium",
+      "known_aliases": [
+        "Grimbergen",
+        "grimbergen",
+        "grimberghen",
+        "xrimberxen",
+        "grymbrzhan",
+        "strombeek-bever",
+        "strombeek",
+        "strombek-bever",
+        "Grimberghen",
+        "Xrimberxen",
+        "Grimbergen (Strombeek-Bever)",
+        "Strombeek",
+        "Strombek-Bever"
+      ],
+      "latest_year": 2025,
+      "name": "Grimbergen",
+      "reason": "under_covered_history",
+      "region": "mod_belgium",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,962 @@
+{
+  "batch_index": 400,
+  "count": 30,
+  "project": "MAGNETIC",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        37.52038,
+        -6.17132
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Convento de San Francisco-Spain",
+      "known_aliases": [
+        "Convento de San Francisco",
+        "convento de san francisco"
+      ],
+      "latest_year": 800,
+      "name": "Convento de San Francisco",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.66239,
+        -8.68932
+      ],
+      "country": "Ireland",
+      "earliest_year": -200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Coonagh West 4-Ireland",
+      "known_aliases": [
+        "Coonagh West 4",
+        "coonagh west 4",
+        "coonagh west 5",
+        "Coonagh West 5"
+      ],
+      "latest_year": 700,
+      "name": "Coonagh West 4",
+      "reason": "missing_entry",
+      "region": "britain_ireland_early",
+      "sample_years": [
+        -200,
+        1,
+        200,
+        250,
+        400,
+        500,
+        600,
+        700
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.7782,
+        -1.5122
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Coral Springs Curbridge-United Kingdom",
+      "known_aliases": [
+        "Coral Springs Curbridge",
+        "coral springs curbridge"
+      ],
+      "latest_year": 600,
+      "name": "Coral Springs Curbridge",
+      "reason": "missing_entry",
+      "region": "britain_ireland_early",
+      "sample_years": [
+        -200,
+        1,
+        200,
+        250,
+        400,
+        500,
+        600
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        53.1611,
+        -6.74091
+      ],
+      "country": "Ireland",
+      "earliest_year": -200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Corbally 1 (Brownstown TD)-Ireland",
+      "known_aliases": [
+        "Corbally 1 (Brownstown TD)",
+        "corbally 1",
+        "corbally 2",
+        "Corbally 2 (Corbally TD)"
+      ],
+      "latest_year": 700,
+      "name": "Corbally 1 (Brownstown TD)",
+      "reason": "missing_entry",
+      "region": "britain_ireland_early",
+      "sample_years": [
+        -200,
+        1,
+        200,
+        250,
+        400,
+        500,
+        600,
+        700
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        54.22162,
+        -6.32121
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Corcreeghy (Site 8)-United Kingdom",
+      "known_aliases": [
+        "Corcreeghy (Site 8)",
+        "corcreeghy"
+      ],
+      "latest_year": 700,
+      "name": "Corcreeghy (Site 8)",
+      "reason": "missing_entry",
+      "region": "britain_ireland_early",
+      "sample_years": [
+        -200,
+        1,
+        200,
+        250,
+        400,
+        500,
+        600,
+        700
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.88473,
+        -4.77915
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [
+        {
+          "date": "-152.1.1",
+          "name": "Corduba"
+        },
+        {
+          "date": "550.1.1",
+          "name": "Córdoba"
+        },
+        {
+          "date": "711.1.1",
+          "name": "Qurtuba"
+        },
+        {
+          "date": "1236.6.29",
+          "name": "Córdoba"
+        }
+      ],
+      "existing_meta_index": 6556,
+      "existing_meta_name": "Córdoba",
+      "key": "Corduba/Col. Patricia-Spain",
+      "known_aliases": [
+        "Corduba/Col. Patricia",
+        "corduba/col. patricia"
+      ],
+      "latest_year": 800,
+      "name": "Corduba/Col. Patricia",
+      "reason": "under_covered_history",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        53.6132,
+        -7.84865
+      ],
+      "country": "Ireland",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Corlea, Track 7-Ireland",
+      "known_aliases": [
+        "Corlea, Track 7",
+        "corlea, track 7",
+        "corlea, track 5",
+        "corlea, track 3",
+        "corlea, track 2",
+        "Corlea, Track 5",
+        "Corlea, Track 3",
+        "Corlea, Track 2"
+      ],
+      "latest_year": 700,
+      "name": "Corlea, Track 7",
+      "reason": "missing_entry",
+      "region": "britain_ireland_early",
+      "sample_years": [
+        -2500,
+        1,
+        400,
+        700
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        53.97495,
+        -9.14384
+      ],
+      "country": "Ireland",
+      "earliest_year": 1,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Corlummin 2-Ireland",
+      "known_aliases": [
+        "Corlummin 2",
+        "corlummin 2",
+        "corlummin 1",
+        "Corlummin 1"
+      ],
+      "latest_year": 800,
+      "name": "Corlummin 2",
+      "reason": "missing_entry",
+      "region": "britain_ireland_early",
+      "sample_years": [
+        1,
+        200,
+        250,
+        400,
+        500,
+        600,
+        700,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.6176,
+        -8.78473
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Corticata Ins.-Spain",
+      "known_aliases": [
+        "Corticata Ins.",
+        "corticata ins."
+      ],
+      "latest_year": 800,
+      "name": "Corticata Ins.",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.14433,
+        -5.61696
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Arahal"
+        }
+      ],
+      "existing_meta_index": 12268,
+      "existing_meta_name": "Arahal",
+      "key": "Cortijo de Casulillas, Arahal-Spain",
+      "known_aliases": [
+        "Cortijo de Casulillas, Arahal",
+        "cortijo de casulillas, arahal",
+        "cortijo de casulillas",
+        "Cortijo de Casulillas"
+      ],
+      "latest_year": 800,
+      "name": "Cortijo de Casulillas, Arahal",
+      "reason": "under_covered_history",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.41356,
+        -5.00255
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cortijo de FuentidueÃ±a-Spain",
+      "known_aliases": [
+        "Cortijo de FuentidueÃ±a",
+        "cortijo de fuentidueã±a",
+        "cortijo de fuentidueñas",
+        "Cortijo de Fuentidueñas"
+      ],
+      "latest_year": 800,
+      "name": "Cortijo de FuentidueÃ±a",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.39875,
+        -6.00769
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cortijo de la Cartuja-Spain",
+      "known_aliases": [
+        "Cortijo de la Cartuja",
+        "cortijo de la cartuja"
+      ],
+      "latest_year": 800,
+      "name": "Cortijo de la Cartuja",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.47066,
+        -6.0399
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cortijo del Aceitero-Spain",
+      "known_aliases": [
+        "Cortijo del Aceitero",
+        "cortijo del aceitero"
+      ],
+      "latest_year": 800,
+      "name": "Cortijo del Aceitero",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.87664,
+        -4.85369
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cortijo del Alcaide-Spain",
+      "known_aliases": [
+        "Cortijo del Alcaide",
+        "cortijo del alcaide"
+      ],
+      "latest_year": 800,
+      "name": "Cortijo del Alcaide",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.95784,
+        -7.07286
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cortiljo de la Mazmorra-Spain",
+      "known_aliases": [
+        "Cortiljo de la Mazmorra",
+        "cortiljo de la mazmorra"
+      ],
+      "latest_year": 800,
+      "name": "Cortiljo de la Mazmorra",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.78325,
+        -6.24336
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cortinal de los BaÃ±os, Alange-Spain",
+      "known_aliases": [
+        "Cortinal de los BaÃ±os, Alange",
+        "cortinal de los baã±os, alange"
+      ],
+      "latest_year": 800,
+      "name": "Cortinal de los BaÃ±os, Alange",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.91564,
+        -8.63713
+      ],
+      "country": "Portugal",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cossourado-Portugal",
+      "known_aliases": [
+        "Cossourado",
+        "cossourado"
+      ],
+      "latest_year": 800,
+      "name": "Cossourado",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.50911,
+        -6.27467
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cotinussa Ins.-Spain",
+      "known_aliases": [
+        "Cotinussa Ins.",
+        "cotinussa ins."
+      ],
+      "latest_year": 800,
+      "name": "Cotinussa Ins.",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.31423,
+        -8.12545
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Coto de CendÃ¡-Spain",
+      "known_aliases": [
+        "Coto de CendÃ¡",
+        "coto de cendã¡"
+      ],
+      "latest_year": 800,
+      "name": "Coto de CendÃ¡",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.33288,
+        -8.16511
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Coto dos Mouros, Abelenda das PeÃ±as-Spain",
+      "known_aliases": [
+        "Coto dos Mouros, Abelenda das PeÃ±as",
+        "coto dos mouros, abelenda das peã±as"
+      ],
+      "latest_year": 800,
+      "name": "Coto dos Mouros, Abelenda das PeÃ±as",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.6591,
+        -1.9517
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cotswold Community-United Kingdom",
+      "known_aliases": [
+        "Cotswold Community",
+        "cotswold community"
+      ],
+      "latest_year": 600,
+      "name": "Cotswold Community",
+      "reason": "missing_entry",
+      "region": "britain_ireland_early",
+      "sample_years": [
+        -200,
+        1,
+        200,
+        250,
+        400,
+        500,
+        600
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.16626,
+        -8.48599
+      ],
+      "country": "Portugal",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Couce-Portugal",
+      "known_aliases": [
+        "Couce",
+        "couce"
+      ],
+      "latest_year": 800,
+      "name": "Couce",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.8711,
+        -8.634
+      ],
+      "country": "Portugal",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Couto de Ouro-Portugal",
+      "known_aliases": [
+        "Couto de Ouro",
+        "couto de ouro"
+      ],
+      "latest_year": 800,
+      "name": "Couto de Ouro",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.7971,
+        2.6814
+      ],
+      "country": "Spain",
+      "earliest_year": -200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cova de Moleta-Spain",
+      "known_aliases": [
+        "Cova de Moleta",
+        "cova de moleta"
+      ],
+      "latest_year": 700,
+      "name": "Cova de Moleta",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -200,
+        1,
+        200,
+        250,
+        400,
+        500,
+        600,
+        700
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.9663,
+        3.9651
+      ],
+      "country": "Spain",
+      "earliest_year": -200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cova des CÃ rritx-Spain",
+      "known_aliases": [
+        "Cova des CÃ rritx",
+        "cova des cã rritx",
+        "cova d'es carritx",
+        "Cova d'es Carritx"
+      ],
+      "latest_year": 500,
+      "name": "Cova des CÃ rritx",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -200,
+        1,
+        200,
+        250,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.5334,
+        -1.4044
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -500,
+      "existing_historical_names": [
+        {
+          "date": "2025.1.1",
+          "name": "Hinckley"
+        }
+      ],
+      "existing_meta_index": 27399,
+      "existing_meta_name": "Hinckley",
+      "key": "Coventry Road Hinckley-United Kingdom",
+      "known_aliases": [
+        "Coventry Road Hinckley",
+        "coventry road hinckley"
+      ],
+      "latest_year": 400,
+      "name": "Coventry Road Hinckley",
+      "reason": "under_covered_history",
+      "region": "britain_ireland_early",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        250,
+        400
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.2742,
+        -1.0595
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cowdery's Down-United Kingdom",
+      "known_aliases": [
+        "Cowdery's Down",
+        "cowdery's down"
+      ],
+      "latest_year": 700,
+      "name": "Cowdery's Down",
+      "reason": "missing_entry",
+      "region": "britain_ireland_early",
+      "sample_years": [
+        -200,
+        1,
+        200,
+        250,
+        400,
+        500,
+        600,
+        700
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.205,
+        -0.4343
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cox Farm Abinger-United Kingdom",
+      "known_aliases": [
+        "Cox Farm Abinger",
+        "cox farm abinger"
+      ],
+      "latest_year": 400,
+      "name": "Cox Farm Abinger",
+      "reason": "missing_entry",
+      "region": "britain_ireland_early",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        250,
+        400
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.1933,
+        -2.6723
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Coxley Great Trench-United Kingdom",
+      "known_aliases": [
+        "Coxley Great Trench",
+        "coxley great trench"
+      ],
+      "latest_year": 700,
+      "name": "Coxley Great Trench",
+      "reason": "missing_entry",
+      "region": "britain_ireland_early",
+      "sample_years": [
+        -200,
+        1,
+        200,
+        250,
+        400,
+        500,
+        600,
+        700
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.63472,
+        -3.06861
+      ],
+      "country": "France",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "CoÃ«t a Touz, Carnac-France",
+      "known_aliases": [
+        "CoÃ«t a Touz, Carnac",
+        "coã«t a touz, carnac"
+      ],
+      "latest_year": 800,
+      "name": "CoÃ«t a Touz, Carnac",
+      "reason": "missing_entry",
+      "region": "francia_merovingian",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    }
+  ]
+}

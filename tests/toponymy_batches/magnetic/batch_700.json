@@ -1,0 +1,834 @@
+{
+  "batch_index": 700,
+  "count": 30,
+  "project": "MAGNETIC",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        36.7997,
+        14.5722
+      ],
+      "country": "Italy",
+      "earliest_year": -8000,
+      "existing_historical_names": [
+        {
+          "date": "-500.1.1",
+          "name": "Hybla Heraea"
+        },
+        {
+          "date": "848.1.1",
+          "name": "Ragus"
+        },
+        {
+          "date": "1100.1.1",
+          "name": "Ragusa"
+        }
+      ],
+      "existing_meta_index": 6843,
+      "existing_meta_name": "Ragusa",
+      "key": "Riparo di Fontana Nuova, Ragusa-Italy",
+      "known_aliases": [
+        "Riparo di Fontana Nuova, Ragusa",
+        "riparo di fontana nuova, ragusa"
+      ],
+      "latest_year": -6000,
+      "name": "Riparo di Fontana Nuova, Ragusa",
+      "reason": "under_covered_history",
+      "region": "italian_peninsula_po",
+      "sample_years": [
+        -8000,
+        -6000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.06,
+        11.05
+      ],
+      "country": "Italy",
+      "earliest_year": -6000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Riparo di Pradestel-Italy",
+      "known_aliases": [
+        "Riparo di Pradestel",
+        "riparo di pradestel"
+      ],
+      "latest_year": -6000,
+      "name": "Riparo di Pradestel",
+      "reason": "missing_entry",
+      "region": "italian_peninsula_po",
+      "sample_years": [
+        -6000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.1581,
+        11.0875
+      ],
+      "country": "Italy",
+      "earliest_year": -8000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Riparo di Vatte di Zambana-Italy",
+      "known_aliases": [
+        "Riparo di Vatte di Zambana",
+        "riparo di vatte di zambana"
+      ],
+      "latest_year": -6000,
+      "name": "Riparo di Vatte di Zambana",
+      "reason": "missing_entry",
+      "region": "italian_peninsula_po",
+      "sample_years": [
+        -8000,
+        -6000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        53.6466,
+        -2.0257
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -8000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rishworth Drain-United Kingdom",
+      "known_aliases": [
+        "Rishworth Drain",
+        "rishworth drain"
+      ],
+      "latest_year": -6000,
+      "name": "Rishworth Drain",
+      "reason": "missing_entry",
+      "region": "british_irish_shelf",
+      "sample_years": [
+        -8000,
+        -6000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.29,
+        7.71
+      ],
+      "country": "Switzerland",
+      "earliest_year": -10000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rislisberghohle-Switzerland",
+      "known_aliases": [
+        "Rislisberghohle",
+        "rislisberghohle"
+      ],
+      "latest_year": -8000,
+      "name": "Rislisberghohle",
+      "reason": "missing_entry",
+      "region": "alpine_upper_danube",
+      "sample_years": [
+        -10000,
+        -8000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        53.58333,
+        9.7666
+      ],
+      "country": "Germany",
+      "earliest_year": -10000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rissen 14a-Germany",
+      "known_aliases": [
+        "Rissen 14a",
+        "rissen 14a"
+      ],
+      "latest_year": -6000,
+      "name": "Rissen 14a",
+      "reason": "missing_entry",
+      "region": "alpine_upper_danube",
+      "sample_years": [
+        -10000,
+        -8000,
+        -6000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.92,
+        7.47
+      ],
+      "country": "Switzerland",
+      "earliest_year": -8000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ritzigrund-Switzerland",
+      "known_aliases": [
+        "Ritzigrund",
+        "ritzigrund"
+      ],
+      "latest_year": -6000,
+      "name": "Ritzigrund",
+      "reason": "missing_entry",
+      "region": "alpine_upper_danube",
+      "sample_years": [
+        -8000,
+        -6000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.1899,
+        -0.1405
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -8000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "River Snail-United Kingdom",
+      "known_aliases": [
+        "River Snail",
+        "river snail"
+      ],
+      "latest_year": -6000,
+      "name": "River Snail",
+      "reason": "missing_entry",
+      "region": "north_european_plain",
+      "sample_years": [
+        -8000,
+        -6000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.77,
+        2.08
+      ],
+      "country": "France",
+      "earliest_year": -8000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Roc de Dourgne-France",
+      "known_aliases": [
+        "Roc de Dourgne",
+        "roc de dourgne"
+      ],
+      "latest_year": -6000,
+      "name": "Roc de Dourgne",
+      "reason": "missing_entry",
+      "region": "iberian_cantabrian_refugium",
+      "sample_years": [
+        -8000,
+        -6000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        49.72,
+        -1.93
+      ],
+      "country": "France",
+      "earliest_year": -8000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Roc de Gîte-France",
+      "known_aliases": [
+        "Roc de Gîte",
+        "roc de gîte"
+      ],
+      "latest_year": -6000,
+      "name": "Roc de Gîte",
+      "reason": "missing_entry",
+      "region": "franco_aquitaine_loire",
+      "sample_years": [
+        -8000,
+        -6000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.79485,
+        1.31496
+      ],
+      "country": "France",
+      "earliest_year": -10000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Roc de la Cave, Roc-de-Cave-France",
+      "known_aliases": [
+        "Roc de la Cave, Roc-de-Cave",
+        "roc de la cave, roc-de-cave"
+      ],
+      "latest_year": -8000,
+      "name": "Roc de la Cave, Roc-de-Cave",
+      "reason": "missing_entry",
+      "region": "franco_aquitaine_loire",
+      "sample_years": [
+        -10000,
+        -8000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.9608,
+        2.3834
+      ],
+      "country": "Spain",
+      "earliest_year": -8000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Roc del Migdia-Spain",
+      "known_aliases": [
+        "Roc del Migdia",
+        "roc del migdia"
+      ],
+      "latest_year": -6000,
+      "name": "Roc del Migdia",
+      "reason": "missing_entry",
+      "region": "iberian_cantabrian_refugium",
+      "sample_years": [
+        -8000,
+        -6000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.87,
+        2.43
+      ],
+      "country": "France",
+      "earliest_year": -8000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Roc den Bertran-France",
+      "known_aliases": [
+        "Roc den Bertran",
+        "roc den bertran"
+      ],
+      "latest_year": -6000,
+      "name": "Roc den Bertran",
+      "reason": "missing_entry",
+      "region": "iberian_cantabrian_refugium",
+      "sample_years": [
+        -8000,
+        -6000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.70452,
+        0.87917
+      ],
+      "country": "France",
+      "earliest_year": -10000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Roc-aux-Sorciers, Abri Bourdois (franco_aquitai)-France",
+      "known_aliases": [
+        "Roc-aux-Sorciers, Abri Bourdois",
+        "roc-aux-sorciers, abri bourdois"
+      ],
+      "latest_year": -8000,
+      "name": "Roc-aux-Sorciers, Abri Bourdois",
+      "reason": "missing_entry",
+      "region": "franco_aquitaine_loire",
+      "sample_years": [
+        -10000,
+        -8000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.0452,
+        0.87917
+      ],
+      "country": "France",
+      "earliest_year": -10000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Roc-aux-Sorciers, Abri Bourdois-France",
+      "known_aliases": [
+        "Roc-aux-Sorciers, Abri Bourdois",
+        "roc-aux-sorciers, abri bourdois"
+      ],
+      "latest_year": -8000,
+      "name": "Roc-aux-Sorciers, Abri Bourdois",
+      "reason": "missing_entry",
+      "region": "franco_aquitaine_loire",
+      "sample_years": [
+        -10000,
+        -8000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.2732,
+        14.6874
+      ],
+      "country": "Italy",
+      "earliest_year": -8000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rocchicella di Mineo-Italy",
+      "known_aliases": [
+        "Rocchicella di Mineo",
+        "rocchicella di mineo"
+      ],
+      "latest_year": -6000,
+      "name": "Rocchicella di Mineo",
+      "reason": "missing_entry",
+      "region": "italian_peninsula_po",
+      "sample_years": [
+        -8000,
+        -6000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.25,
+        2.83
+      ],
+      "country": "France",
+      "earliest_year": -8000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Roche au Diable-France",
+      "known_aliases": [
+        "Roche au Diable",
+        "roche au diable"
+      ],
+      "latest_year": -6000,
+      "name": "Roche au Diable",
+      "reason": "missing_entry",
+      "region": "franco_aquitaine_loire",
+      "sample_years": [
+        -8000,
+        -6000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.98,
+        1.05
+      ],
+      "country": "France",
+      "earliest_year": -10000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Roche aux Fees-France",
+      "known_aliases": [
+        "Roche aux Fees",
+        "roche aux fees"
+      ],
+      "latest_year": -6000,
+      "name": "Roche aux Fees",
+      "reason": "missing_entry",
+      "region": "franco_aquitaine_loire",
+      "sample_years": [
+        -10000,
+        -8000,
+        -6000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.57,
+        6.45
+      ],
+      "country": "France",
+      "earliest_year": -8000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Roche-France",
+      "known_aliases": [
+        "Roche",
+        "roche"
+      ],
+      "latest_year": -6000,
+      "name": "Roche",
+      "reason": "missing_entry",
+      "region": "alpine_upper_danube",
+      "sample_years": [
+        -8000,
+        -6000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.4525,
+        6.65312
+      ],
+      "country": "France",
+      "earliest_year": -10000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Roche-aux-Gours-France",
+      "known_aliases": [
+        "Roche-aux-Gours",
+        "roche-aux-gours"
+      ],
+      "latest_year": -8000,
+      "name": "Roche-aux-Gours",
+      "reason": "missing_entry",
+      "region": "alpine_upper_danube",
+      "sample_years": [
+        -10000,
+        -8000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.35,
+        6.76
+      ],
+      "country": "France",
+      "earliest_year": -10000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rochedane-France",
+      "known_aliases": [
+        "Rochedane",
+        "rochedane"
+      ],
+      "latest_year": -6000,
+      "name": "Rochedane",
+      "reason": "missing_entry",
+      "region": "alpine_upper_danube",
+      "sample_years": [
+        -10000,
+        -8000,
+        -6000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.01,
+        -0.39
+      ],
+      "country": "France",
+      "earliest_year": -8000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rochefort Grotte-France",
+      "known_aliases": [
+        "Rochefort Grotte",
+        "rochefort grotte"
+      ],
+      "latest_year": -6000,
+      "name": "Rochefort Grotte",
+      "reason": "missing_entry",
+      "region": "franco_aquitaine_loire",
+      "sample_years": [
+        -8000,
+        -6000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.99396,
+        -0.40289
+      ],
+      "country": "France",
+      "earliest_year": -8000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rochefort-France_2",
+      "known_aliases": [
+        "Rochefort",
+        "rochefort"
+      ],
+      "latest_year": -6000,
+      "name": "Rochefort",
+      "reason": "missing_entry",
+      "region": "franco_aquitaine_loire",
+      "sample_years": [
+        -8000,
+        -6000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        54.4999,
+        -5.46377
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -10000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Roddans Port-United Kingdom",
+      "known_aliases": [
+        "Roddans Port",
+        "roddans port"
+      ],
+      "latest_year": -8000,
+      "name": "Roddans Port",
+      "reason": "missing_entry",
+      "region": "british_irish_shelf",
+      "sample_years": [
+        -10000,
+        -8000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.64103,
+        8.14118
+      ],
+      "country": "Italy",
+      "earliest_year": -10000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Romagnano III-Italy",
+      "known_aliases": [
+        "Romagnano III",
+        "romagnano iii"
+      ],
+      "latest_year": -6000,
+      "name": "Romagnano III",
+      "reason": "missing_entry",
+      "region": "italian_peninsula_po",
+      "sample_years": [
+        -10000,
+        -8000,
+        -6000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.71,
+        5.71
+      ],
+      "country": "France",
+      "earliest_year": -8000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Romains-France",
+      "known_aliases": [
+        "Romains",
+        "romains"
+      ],
+      "latest_year": -6000,
+      "name": "Romains",
+      "reason": "missing_entry",
+      "region": "italian_peninsula_po",
+      "sample_years": [
+        -8000,
+        -6000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.9,
+        15.9167
+      ],
+      "country": "Italy",
+      "earliest_year": -10000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Romito, Papasidero-Italy",
+      "known_aliases": [
+        "Romito, Papasidero",
+        "romito, papasidero"
+      ],
+      "latest_year": -8000,
+      "name": "Romito, Papasidero",
+      "reason": "missing_entry",
+      "region": "italian_peninsula_po",
+      "sample_years": [
+        -10000,
+        -8000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.13562,
+        13.65472
+      ],
+      "country": "Croatia",
+      "earliest_year": -10000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Romualdova-Croatia",
+      "known_aliases": [
+        "Romualdova",
+        "romualdova"
+      ],
+      "latest_year": -8000,
+      "name": "Romualdova",
+      "reason": "missing_entry",
+      "region": "italian_peninsula_po",
+      "sample_years": [
+        -10000,
+        -8000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.0669,
+        3.8669
+      ],
+      "country": "France",
+      "earliest_year": -8000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rond du Barry-France",
+      "known_aliases": [
+        "Rond du Barry",
+        "rond du barry"
+      ],
+      "latest_year": -6000,
+      "name": "Rond du Barry",
+      "reason": "missing_entry",
+      "region": "franco_aquitaine_loire",
+      "sample_years": [
+        -8000,
+        -6000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.83,
+        5.31
+      ],
+      "country": "France",
+      "earliest_year": -10000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Roquefure-France",
+      "known_aliases": [
+        "Roquefure",
+        "roquefure"
+      ],
+      "latest_year": -6000,
+      "name": "Roquefure",
+      "reason": "missing_entry",
+      "region": "italian_peninsula_po",
+      "sample_years": [
+        -10000,
+        -8000,
+        -6000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    }
+  ]
+}

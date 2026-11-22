@@ -1,0 +1,752 @@
+{
+  "batch_index": 512,
+  "project": "MAGNETIC",
+  "settlements": [
+    {
+      "key": "Trundholm-Denmark",
+      "name": "Trundholm",
+      "canonical_name": "Trundholm",
+      "country": "Denmark",
+      "coords_lat_lng": [
+        55.914,
+        11.565
+      ],
+      "earliest_year": -1000,
+      "latest_year": -500,
+      "existing_meta_index": 30946,
+      "known_aliases": [
+        "Trundholm",
+        "trundholm"
+      ],
+      "historical_names": [
+        {
+          "date": "-1000.1.1",
+          "name": "Trundholm"
+        },
+        {
+          "date": "1950.1.1",
+          "name": "Trundholm"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Trzcinica-Poland",
+      "name": "Trzcinica",
+      "canonical_name": "Trzcinica",
+      "country": "Poland",
+      "coords_lat_lng": [
+        49.7419,
+        21.4158
+      ],
+      "earliest_year": -1000,
+      "latest_year": -1000,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Trzcinica",
+        "trzcinica"
+      ],
+      "historical_names": [
+        {
+          "date": "-1000.1.1",
+          "name": "Trzcinica"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "TrÃ¶ssla-Sweden",
+      "name": "TrÃ¶ssla",
+      "canonical_name": "TrÃ¶ssla",
+      "country": "Sweden",
+      "coords_lat_lng": [
+        58.9465,
+        17.561
+      ],
+      "earliest_year": -500,
+      "latest_year": 200,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "TrÃ¶ssla",
+        "trã¶ssla"
+      ],
+      "historical_names": [
+        {
+          "date": "-500.1.1",
+          "name": "TrÃ¶ssla"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Tråvika-Norway",
+      "name": "Tråvika",
+      "canonical_name": "Tråvika",
+      "country": "Norway",
+      "coords_lat_lng": [
+        61.65,
+        9.33333
+      ],
+      "earliest_year": -2500,
+      "latest_year": 1,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Tråvika",
+        "tråvika"
+      ],
+      "historical_names": [
+        {
+          "date": "-2500.1.1",
+          "name": "Tråvika"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Tuchlovice-Czechia",
+      "name": "Tuchlovice",
+      "canonical_name": "Tuchlovice",
+      "country": "Czechia",
+      "coords_lat_lng": [
+        50.13813,
+        13.9909
+      ],
+      "earliest_year": -500,
+      "latest_year": 500,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Tuchlovice",
+        "tuchlovice"
+      ],
+      "historical_names": [
+        {
+          "date": "-500.1.1",
+          "name": "Tuchlovice"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Tuklaty-Czechia",
+      "name": "Tuklaty",
+      "canonical_name": "Tuklaty",
+      "country": "Czechia",
+      "coords_lat_lng": [
+        50.0852,
+        14.77007
+      ],
+      "earliest_year": -500,
+      "latest_year": 500,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Tuklaty",
+        "tuklaty"
+      ],
+      "historical_names": [
+        {
+          "date": "-500.1.1",
+          "name": "Tuklaty"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Turlojiske-Lithuania",
+      "name": "Turlojiske",
+      "canonical_name": "Turlojiske",
+      "country": "Lithuania",
+      "coords_lat_lng": [
+        54.3579,
+        23.3216
+      ],
+      "earliest_year": -1000,
+      "latest_year": -1000,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Turlojiske",
+        "turlojiske"
+      ],
+      "historical_names": [
+        {
+          "date": "-1000.1.1",
+          "name": "Turlojiske"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "TvaroÅ¾nÃ¡-Czechia",
+      "name": "TvaroÅ¾nÃ¡",
+      "canonical_name": "TvaroÅ¾nÃ¡",
+      "country": "Czechia",
+      "coords_lat_lng": [
+        49.19179,
+        16.77229
+      ],
+      "earliest_year": -500,
+      "latest_year": 500,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "TvaroÅ¾nÃ¡",
+        "tvaroå¾nã¡"
+      ],
+      "historical_names": [
+        {
+          "date": "-500.1.1",
+          "name": "TvaroÅ¾nÃ¡"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "TvrÅ¡ice-Czechia",
+      "name": "TvrÅ¡ice",
+      "canonical_name": "TvrÅ¡ice",
+      "country": "Czechia",
+      "coords_lat_lng": [
+        50.34119,
+        13.58908
+      ],
+      "earliest_year": -500,
+      "latest_year": 500,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "TvrÅ¡ice",
+        "tvrå¡ice"
+      ],
+      "historical_names": [
+        {
+          "date": "-500.1.1",
+          "name": "TvrÅ¡ice"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Tytlewo-Poland",
+      "name": "Tytlewo",
+      "canonical_name": "Tytlewo",
+      "country": "Poland",
+      "coords_lat_lng": [
+        53.29841,
+        18.57271
+      ],
+      "earliest_year": -1000,
+      "latest_year": -500,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Tytlewo",
+        "tytlewo"
+      ],
+      "historical_names": [
+        {
+          "date": "-1000.1.1",
+          "name": "Tytlewo"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "TÃ¥garp-Sweden",
+      "name": "TÃ¥garp",
+      "canonical_name": "TÃ¥garp",
+      "country": "Sweden",
+      "coords_lat_lng": [
+        55.9334,
+        12.9504
+      ],
+      "earliest_year": -1000,
+      "latest_year": -1000,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "TÃ¥garp",
+        "tã¥garp",
+        "tågarp",
+        "Tågarp"
+      ],
+      "historical_names": [
+        {
+          "date": "-1000.1.1",
+          "name": "TÃ¥garp"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "TÃ¶nsberg-Germany",
+      "name": "TÃ¶nsberg",
+      "canonical_name": "TÃ¶nsberg",
+      "country": "Germany",
+      "coords_lat_lng": [
+        51.94758,
+        8.69416
+      ],
+      "earliest_year": -500,
+      "latest_year": 500,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "TÃ¶nsberg",
+        "tã¶nsberg"
+      ],
+      "historical_names": [
+        {
+          "date": "-500.1.1",
+          "name": "TÃ¶nsberg"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "TÅ™ebusice-Czechia",
+      "name": "TÅ™ebusice",
+      "canonical_name": "TÅ™ebusice",
+      "country": "Czechia",
+      "coords_lat_lng": [
+        50.20125,
+        14.17991
+      ],
+      "earliest_year": -500,
+      "latest_year": 500,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "TÅ™ebusice",
+        "tå™ebusice"
+      ],
+      "historical_names": [
+        {
+          "date": "-500.1.1",
+          "name": "TÅ™ebusice"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Tørkop-Norway",
+      "name": "Tørkop",
+      "canonical_name": "Tørkop",
+      "country": "Norway",
+      "coords_lat_lng": [
+        59.1,
+        11.43333
+      ],
+      "earliest_year": -1000,
+      "latest_year": -1000,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Tørkop",
+        "tørkop"
+      ],
+      "historical_names": [
+        {
+          "date": "-1000.1.1",
+          "name": "Tørkop"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Uckro-Germany",
+      "name": "Uckro",
+      "canonical_name": "Uckro",
+      "country": "Germany",
+      "coords_lat_lng": [
+        51.8502,
+        13.601
+      ],
+      "earliest_year": -1000,
+      "latest_year": -200,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Uckro",
+        "uckro"
+      ],
+      "historical_names": [
+        {
+          "date": "-1000.1.1",
+          "name": "Uckro"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Uedesheim-Germany",
+      "name": "Uedesheim",
+      "canonical_name": "Uedesheim",
+      "country": "Germany",
+      "coords_lat_lng": [
+        51.16263,
+        6.78978
+      ],
+      "earliest_year": -500,
+      "latest_year": 500,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Uedesheim",
+        "uedesheim"
+      ],
+      "historical_names": [
+        {
+          "date": "-500.1.1",
+          "name": "Uedesheim"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "UherskÃ© HradiÅ¡tÄ›-Czechia",
+      "name": "UherskÃ© HradiÅ¡tÄ›",
+      "canonical_name": "UherskÃ© HradiÅ¡tÄ›",
+      "country": "Czechia",
+      "coords_lat_lng": [
+        49.06516,
+        17.45919
+      ],
+      "earliest_year": -500,
+      "latest_year": 500,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "UherskÃ© HradiÅ¡tÄ›",
+        "uherskã© hradiå¡tä›"
+      ],
+      "historical_names": [
+        {
+          "date": "-500.1.1",
+          "name": "UherskÃ© HradiÅ¡tÄ›"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Ulafeltet-Norway",
+      "name": "Ulafeltet",
+      "canonical_name": "Ulafeltet",
+      "country": "Norway",
+      "coords_lat_lng": [
+        59.03333,
+        10.18333
+      ],
+      "earliest_year": -500,
+      "latest_year": 1,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Ulafeltet",
+        "ulafeltet"
+      ],
+      "historical_names": [
+        {
+          "date": "-500.1.1",
+          "name": "Ulafeltet"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Ulsted-Denmark",
+      "name": "Ulsted",
+      "canonical_name": "Ulsted",
+      "country": "Denmark",
+      "coords_lat_lng": [
+        57.0764,
+        10.2558
+      ],
+      "earliest_year": -1000,
+      "latest_year": -1000,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Ulsted",
+        "ulsted"
+      ],
+      "historical_names": [
+        {
+          "date": "-1000.1.1",
+          "name": "Ulsted"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Ulster Museum-United Kingdom",
+      "name": "Ulster Museum",
+      "canonical_name": "Ulster Museum",
+      "country": "United Kingdom",
+      "coords_lat_lng": [
+        54.5821,
+        -5.9358
+      ],
+      "earliest_year": -2500,
+      "latest_year": -500,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Ulster Museum",
+        "ulster museum"
+      ],
+      "historical_names": [
+        {
+          "date": "-2500.1.1",
+          "name": "Ulster Museum"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Ulucz 1/82-Poland",
+      "name": "Ulucz 1/82",
+      "canonical_name": "Ulucz 1/82",
+      "country": "Poland",
+      "coords_lat_lng": [
+        49.6667,
+        22.2667
+      ],
+      "earliest_year": -1000,
+      "latest_year": -1000,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Ulucz 1/82",
+        "ulucz 1/82"
+      ],
+      "historical_names": [
+        {
+          "date": "-1000.1.1",
+          "name": "Ulucz 1/82"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Unterstedt-Germany",
+      "name": "Unterstedt",
+      "canonical_name": "Unterstedt",
+      "country": "Germany",
+      "coords_lat_lng": [
+        53.0772,
+        9.3593
+      ],
+      "earliest_year": -1000,
+      "latest_year": -1000,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Unterstedt",
+        "unterstedt"
+      ],
+      "historical_names": [
+        {
+          "date": "-1000.1.1",
+          "name": "Unterstedt"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Uthus-Norway",
+      "name": "Uthus",
+      "canonical_name": "Uthus",
+      "country": "Norway",
+      "coords_lat_lng": [
+        60.51667,
+        8.15
+      ],
+      "earliest_year": -500,
+      "latest_year": 200,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Uthus",
+        "uthus"
+      ],
+      "historical_names": [
+        {
+          "date": "-500.1.1",
+          "name": "Uthus"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Vaasa-Finland_2",
+      "name": "Vaasa",
+      "canonical_name": "Vaasa",
+      "country": "Finland",
+      "coords_lat_lng": [
+        63.05,
+        21.5
+      ],
+      "earliest_year": -500,
+      "latest_year": 1,
+      "existing_meta_index": 8727,
+      "known_aliases": [
+        "Vaasa",
+        "vaasa"
+      ],
+      "historical_names": [
+        {
+          "date": "-500.1.1",
+          "name": "Vasa"
+        },
+        {
+          "date": "1606.1.1",
+          "name": "Vasa"
+        },
+        {
+          "date": "1855.1.1",
+          "name": "Nikolaystad"
+        },
+        {
+          "date": "1917.12.6",
+          "name": "Vaasa"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "VadgÃ¥rd-Denmark",
+      "name": "VadgÃ¥rd",
+      "canonical_name": "VadgÃ¥rd",
+      "country": "Denmark",
+      "coords_lat_lng": [
+        56.9117,
+        9.2977
+      ],
+      "earliest_year": -1000,
+      "latest_year": -1000,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "VadgÃ¥rd",
+        "vadgã¥rd"
+      ],
+      "historical_names": [
+        {
+          "date": "-1000.1.1",
+          "name": "VadgÃ¥rd"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Valleberga ; site: 5.6-Sweden",
+      "name": "Valleberga ; site: 5.6",
+      "canonical_name": "Valleberga ; site: 5.6",
+      "country": "Sweden",
+      "coords_lat_lng": [
+        55.983,
+        12.95
+      ],
+      "earliest_year": -1000,
+      "latest_year": -1000,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Valleberga ; site: 5.6",
+        "valleberga ; site: 5.6"
+      ],
+      "historical_names": [
+        {
+          "date": "-1000.1.1",
+          "name": "Valleberga ; site: 5.6"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Vallstena Uppgarde-Sweden",
+      "name": "Vallstena Uppgarde",
+      "canonical_name": "Vallstena Uppgarde",
+      "country": "Sweden",
+      "coords_lat_lng": [
+        57.5652,
+        18.6355
+      ],
+      "earliest_year": -1000,
+      "latest_year": -500,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Vallstena Uppgarde",
+        "vallstena uppgarde"
+      ],
+      "historical_names": [
+        {
+          "date": "-1000.1.1",
+          "name": "Vallstena Uppgarde"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Vantaa (finland_easter)-Finland",
+      "name": "Vantaa",
+      "canonical_name": "Vantaa",
+      "country": "Finland",
+      "coords_lat_lng": [
+        60.25,
+        24.25
+      ],
+      "earliest_year": -1000,
+      "latest_year": -200,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Vantaa",
+        "vantaa"
+      ],
+      "historical_names": [
+        {
+          "date": "-1000.1.1",
+          "name": "Vantaa"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Vantaa-Finland_2",
+      "name": "Vantaa",
+      "canonical_name": "Vantaa",
+      "country": "Finland",
+      "coords_lat_lng": [
+        60.2666,
+        24.85
+      ],
+      "earliest_year": -500,
+      "latest_year": 200,
+      "existing_meta_index": 8379,
+      "known_aliases": [
+        "Vantaa",
+        "vantaa"
+      ],
+      "historical_names": [
+        {
+          "date": "-500.1.1",
+          "name": "Helsinge"
+        },
+        {
+          "date": "1351.1.1",
+          "name": "Helsinge"
+        },
+        {
+          "date": "1972.1.1",
+          "name": "Vantaa"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Vatnan 17_Hus 7-Norway",
+      "name": "Vatnan 17_Hus 7",
+      "canonical_name": "Vatnan 17_Hus 7",
+      "country": "Norway",
+      "coords_lat_lng": [
+        70.53078,
+        22.90571
+      ],
+      "earliest_year": -1000,
+      "latest_year": -500,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Vatnan 17_Hus 7",
+        "vatnan 17_hus 7"
+      ],
+      "historical_names": [
+        {
+          "date": "-1000.1.1",
+          "name": "Vatnan 17_Hus 7"
+        }
+      ],
+      "verified_settlement": true
+    }
+  ]
+}

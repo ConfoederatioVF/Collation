@@ -1,0 +1,1096 @@
+{
+  "batch_index": 64,
+  "count": 30,
+  "project": "MAGNETIC",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        53.73,
+        -1.86
+      ],
+      "country": "United Kingdom",
+      "earliest_year": 1200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Halifax-United Kingdom",
+      "known_aliases": [
+        "Halifax",
+        "halifax",
+        "halyfax",
+        "halh-gefeaxe",
+        "Halyfax"
+      ],
+      "latest_year": 2025,
+      "name": "Halifax",
+      "reason": "missing_entry",
+      "region": "mod_uk",
+      "sample_years": [
+        1200,
+        1750,
+        1930,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        60.4,
+        23.08333
+      ],
+      "country": "Finland",
+      "earliest_year": -200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Halikko-Finland",
+      "known_aliases": [
+        "Halikko",
+        "halikko"
+      ],
+      "latest_year": 2025,
+      "name": "Halikko",
+      "reason": "missing_entry",
+      "region": "mod_finland",
+      "sample_years": [
+        -200,
+        1347,
+        1914,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.28333,
+        11.51667
+      ],
+      "country": "Austria",
+      "earliest_year": 1750,
+      "existing_historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Hall in Tirol"
+        }
+      ],
+      "existing_meta_index": 13031,
+      "existing_meta_name": "Hall in Tirol",
+      "key": "Hall in Tirol-Austria",
+      "known_aliases": [
+        "Hall in Tirol",
+        "hall in tirol",
+        "gall'-in-tirol'",
+        "hall",
+        "hall en tyrol",
+        "Gall'-in-Tirol'",
+        "Hall",
+        "Hall en Tyrol"
+      ],
+      "latest_year": 2025,
+      "name": "Hall in Tirol",
+      "reason": "under_covered_history",
+      "region": "mod_austria",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.73385,
+        4.23454
+      ],
+      "country": "Belgium",
+      "earliest_year": 1750,
+      "existing_historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Halle"
+        }
+      ],
+      "existing_meta_index": 8752,
+      "existing_meta_name": "Halle",
+      "key": "Halle-Belgium",
+      "known_aliases": [
+        "Halle",
+        "halle",
+        "galle",
+        "hal",
+        "halle i belgia",
+        "Galle",
+        "Hal",
+        "Halle i Belgia"
+      ],
+      "latest_year": 2025,
+      "name": "Halle",
+      "reason": "under_covered_history",
+      "region": "mod_belgium",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.06007,
+        8.36083
+      ],
+      "country": "Germany",
+      "earliest_year": 1750,
+      "existing_historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Halle"
+        }
+      ],
+      "existing_meta_index": 13032,
+      "existing_meta_name": "Halle",
+      "key": "Halle-Germany",
+      "known_aliases": [
+        "Halle",
+        "halle",
+        "galle",
+        "Galle",
+        "Halle (Westf.)",
+        "Halle (Westfalen)"
+      ],
+      "latest_year": 2025,
+      "name": "Halle",
+      "reason": "under_covered_history",
+      "region": "mod_germany",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.47924,
+        11.91605
+      ],
+      "country": "Germany",
+      "earliest_year": 1750,
+      "existing_historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Halle-Neustadt"
+        }
+      ],
+      "existing_meta_index": 13033,
+      "existing_meta_name": "Halle-Neustadt",
+      "key": "Halle-Neustadt-Germany",
+      "known_aliases": [
+        "Halle-Neustadt",
+        "halle-neustadt",
+        "galle-nojshtadt",
+        "hale noystadt",
+        "halle neustadt",
+        "Galle-Nojshtadt",
+        "Hale Noystadt",
+        "Halle Neustadt"
+      ],
+      "latest_year": 2025,
+      "name": "Halle-Neustadt",
+      "reason": "under_covered_history",
+      "region": "mod_germany",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        59.06463,
+        15.10993
+      ],
+      "country": "Sweden",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hallsberg-Sweden",
+      "known_aliases": [
+        "Hallsberg",
+        "hallsberg",
+        "khall'sberg",
+        "khalsberi",
+        "xwm",
+        "Khall'sberg",
+        "Khalsberi",
+        "XWM"
+      ],
+      "latest_year": 2025,
+      "name": "Hallsberg",
+      "reason": "missing_entry",
+      "region": "mod_sweden",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        59.61395,
+        16.22846
+      ],
+      "country": "Sweden",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hallstahammar-Sweden",
+      "known_aliases": [
+        "Hallstahammar",
+        "hallstahammar",
+        "khalstakhamar",
+        "hlstwymmr",
+        "халстахамар",
+        "Khalstakhamar",
+        "Халстахамар"
+      ],
+      "latest_year": 2025,
+      "name": "Hallstahammar",
+      "reason": "missing_entry",
+      "region": "mod_sweden",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.7759,
+        3.1257
+      ],
+      "country": "France",
+      "earliest_year": 1800,
+      "existing_historical_names": [
+        {
+          "date": "1901.1.1",
+          "name": "Halluin"
+        }
+      ],
+      "existing_meta_index": 15198,
+      "existing_meta_name": "Halluin",
+      "key": "Halluin-France",
+      "known_aliases": [
+        "Halluin",
+        "halluin"
+      ],
+      "latest_year": 2025,
+      "name": "Halluin",
+      "reason": "under_covered_history",
+      "region": "mod_belgium",
+      "sample_years": [
+        1800,
+        1921,
+        2006,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        56.67446,
+        12.85676
+      ],
+      "country": "Sweden",
+      "earliest_year": 800,
+      "existing_historical_names": [
+        {
+          "date": "1805.1.1",
+          "name": "Halmstad"
+        }
+      ],
+      "existing_meta_index": 9027,
+      "existing_meta_name": "Halmstad",
+      "key": "Halmstad-Sweden",
+      "known_aliases": [
+        "Halmstad",
+        "halmstad",
+        "gal'mstad",
+        "had",
+        "halmostadium",
+        "Gal'mstad",
+        "HAD",
+        "Halmostadium"
+      ],
+      "latest_year": 2025,
+      "name": "Halmstad",
+      "reason": "under_covered_history",
+      "region": "mod_sweden",
+      "sample_years": [
+        800,
+        1750,
+        1930,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.94506,
+        0.63927
+      ],
+      "country": "United Kingdom",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Halstead-United Kingdom",
+      "known_aliases": [
+        "Halstead",
+        "halstead",
+        "halstyd asks",
+        "هالستید، اسکس",
+        "halstyd  asks"
+      ],
+      "latest_year": 2025,
+      "name": "Halstead",
+      "reason": "missing_entry",
+      "region": "mod_uk",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        53.63301,
+        9.83945
+      ],
+      "country": "Germany",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Halstenbek-Germany",
+      "known_aliases": [
+        "Halstenbek",
+        "halstenbek",
+        "khal'stenbek",
+        "khalstenbek",
+        "ha er si teng bei ke",
+        "Khal'stenbek",
+        "Khalstenbek"
+      ],
+      "latest_year": 2025,
+      "name": "Halstenbek",
+      "reason": "missing_entry",
+      "region": "mod_germany",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.52834,
+        4.26785
+      ],
+      "country": "Netherlands",
+      "earliest_year": 1750,
+      "existing_historical_names": [
+        {
+          "date": "1840.1.1",
+          "name": "Halsteren"
+        }
+      ],
+      "existing_meta_index": 9505,
+      "existing_meta_name": "Halsteren",
+      "key": "Halsteren-Netherlands",
+      "known_aliases": [
+        "Halsteren",
+        "halsteren"
+      ],
+      "latest_year": 2025,
+      "name": "Halsteren",
+      "reason": "under_covered_history",
+      "region": "mod_netherlands",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.74297,
+        7.18163
+      ],
+      "country": "Germany",
+      "earliest_year": 1750,
+      "existing_historical_names": [
+        {
+          "date": "1890.1.1",
+          "name": "Haltern"
+        }
+      ],
+      "existing_meta_index": 10796,
+      "existing_meta_name": "Haltern",
+      "key": "Haltern am See-Germany",
+      "known_aliases": [
+        "Haltern am See",
+        "haltern am see",
+        "halahtron",
+        "halostrun",
+        "haltern",
+        "Halahtron",
+        "Halostrun",
+        "Haltern"
+      ],
+      "latest_year": 2025,
+      "name": "Haltern am See",
+      "reason": "under_covered_history",
+      "region": "mod_germany",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.18612,
+        7.49817
+      ],
+      "country": "Germany",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Halver-Germany",
+      "known_aliases": [
+        "Halver",
+        "halver",
+        "gal'fer",
+        "halvara",
+        "khal'fer",
+        "Gal'fer",
+        "Halvara",
+        "Khal'fer"
+      ],
+      "latest_year": 2025,
+      "name": "Halver",
+      "reason": "missing_entry",
+      "region": "mod_germany",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        60.7945,
+        11.06798
+      ],
+      "country": "Norway",
+      "earliest_year": 800,
+      "existing_historical_names": [
+        {
+          "date": "1855.1.1",
+          "name": "Hamar"
+        }
+      ],
+      "existing_meta_index": 9990,
+      "existing_meta_name": "Hamar",
+      "key": "Hamar-Norway",
+      "known_aliases": [
+        "Hamar",
+        "hamar",
+        "gamar",
+        "hmr",
+        "hamaras",
+        "Gamar",
+        "HMR",
+        "Hamaras"
+      ],
+      "latest_year": 2025,
+      "name": "Hamar",
+      "reason": "under_covered_history",
+      "region": "mod_norway",
+      "sample_years": [
+        800,
+        1750,
+        1930,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        53.54465,
+        10.02699
+      ],
+      "country": "Germany",
+      "earliest_year": 250,
+      "existing_historical_names": [
+        {
+          "date": "810.1.1",
+          "name": "Hammaburg"
+        },
+        {
+          "date": "1189.1.1",
+          "name": "Hamburg"
+        }
+      ],
+      "existing_meta_index": 7109,
+      "existing_meta_name": "Hamburg",
+      "key": "Hamburg-Germany",
+      "known_aliases": [
+        "Hamburg",
+        "hamburg",
+        "hammaburg",
+        "Hammaburg"
+      ],
+      "latest_year": 2025,
+      "name": "Hamburg",
+      "reason": "under_covered_history",
+      "region": "mod_germany",
+      "sample_years": [
+        250,
+        1870,
+        2002,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.1,
+        9.35
+      ],
+      "country": "Germany",
+      "earliest_year": 250,
+      "existing_historical_names": [
+        {
+          "date": "851.1.1",
+          "name": "Hamala"
+        },
+        {
+          "date": "1300.1.1",
+          "name": "Hameln"
+        }
+      ],
+      "existing_meta_index": 7271,
+      "existing_meta_name": "Hameln",
+      "key": "Hameln-Germany",
+      "known_aliases": [
+        "Hameln",
+        "hameln",
+        "hamela",
+        "hameloa",
+        "Hamela",
+        "Hameloa"
+      ],
+      "latest_year": 2025,
+      "name": "Hameln",
+      "reason": "under_covered_history",
+      "region": "mod_germany",
+      "sample_years": [
+        250,
+        1492,
+        1910,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        55.78,
+        -4.05
+      ],
+      "country": "United Kingdom",
+      "earliest_year": 1300,
+      "existing_historical_names": [
+        {
+          "date": "1300.1.1",
+          "name": "Hamilton"
+        }
+      ],
+      "existing_meta_index": 8171,
+      "existing_meta_name": "Hamilton",
+      "key": "Hamilton-United Kingdom",
+      "known_aliases": [
+        "Hamilton",
+        "hamilton",
+        "cadzow",
+        "cadyou",
+        "Cadzow",
+        "Cadyou"
+      ],
+      "latest_year": 2025,
+      "name": "Hamilton",
+      "reason": "under_covered_history",
+      "region": "mod_uk",
+      "sample_years": [
+        1300,
+        1800,
+        1940,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        60.56974,
+        27.19794
+      ],
+      "country": "Finland",
+      "earliest_year": 800,
+      "existing_historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Hamina"
+        }
+      ],
+      "existing_meta_index": 13037,
+      "existing_meta_name": "Hamina",
+      "key": "Hamina-Finland",
+      "known_aliases": [
+        "Hamina",
+        "hamina",
+        "fredericia",
+        "fredrikshamn",
+        "gamina",
+        "Fredericia",
+        "Fredrikshamn",
+        "Gamina"
+      ],
+      "latest_year": 2025,
+      "name": "Hamina",
+      "reason": "under_covered_history",
+      "region": "mod_finland",
+      "sample_years": [
+        800,
+        1750,
+        1930,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        57.78049,
+        12.03604
+      ],
+      "country": "Sweden",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hammarkullen-Sweden",
+      "known_aliases": [
+        "Hammarkullen",
+        "hammarkullen"
+      ],
+      "latest_year": 2025,
+      "name": "Hammarkullen",
+      "reason": "missing_entry",
+      "region": "mod_sweden",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.1,
+        4.13
+      ],
+      "country": "Belgium",
+      "earliest_year": 250,
+      "existing_historical_names": [
+        {
+          "date": "700.1.1",
+          "name": "Hamme"
+        }
+      ],
+      "existing_meta_index": 6634,
+      "existing_meta_name": "Hamme",
+      "key": "Hamme-Belgium",
+      "known_aliases": [
+        "Hamme",
+        "hamme"
+      ],
+      "latest_year": 2025,
+      "name": "Hamme",
+      "reason": "under_covered_history",
+      "region": "mod_belgium",
+      "sample_years": [
+        250,
+        1492,
+        1910,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.11633,
+        9.89143
+      ],
+      "country": "Germany",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hammelburg-Germany",
+      "known_aliases": [
+        "Hammelburg",
+        "hammelburg",
+        "gammel'burg",
+        "hamelburg",
+        "khamelburg",
+        "Gammel'burg",
+        "Hamelburg",
+        "Khamelburg"
+      ],
+      "latest_year": 2025,
+      "name": "Hammelburg",
+      "reason": "missing_entry",
+      "region": "mod_germany",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        70.66313,
+        23.68092
+      ],
+      "country": "Norway",
+      "earliest_year": 800,
+      "existing_historical_names": [
+        {
+          "date": "1801.1.1",
+          "name": "Hammerfest"
+        }
+      ],
+      "existing_meta_index": 9007,
+      "existing_meta_name": "Hammerfest",
+      "key": "Hammerfest-Norway",
+      "known_aliases": [
+        "Hammerfest",
+        "hammerfest",
+        "hft",
+        "hammarfeasta",
+        "hammerfest koezseg",
+        "HFT",
+        "Hammarfeasta",
+        "Hammerfest koezseg"
+      ],
+      "latest_year": 2025,
+      "name": "Hammerfest",
+      "reason": "under_covered_history",
+      "region": "mod_norway",
+      "sample_years": [
+        800,
+        1750,
+        1930,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.73262,
+        6.59031
+      ],
+      "country": "Germany",
+      "earliest_year": 1750,
+      "existing_historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Hamminkeln"
+        }
+      ],
+      "existing_meta_index": 13038,
+      "existing_meta_name": "Hamminkeln",
+      "key": "Hamminkeln-Germany",
+      "known_aliases": [
+        "Hamminkeln",
+        "hamminkeln",
+        "gamminkel'n",
+        "khaminkeln",
+        "khamminkel'n",
+        "Gamminkel'n",
+        "Khaminkeln",
+        "Khamminkel'n"
+      ],
+      "latest_year": 2025,
+      "name": "Hamminkeln",
+      "reason": "under_covered_history",
+      "region": "mod_germany",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.25332,
+        5.54732
+      ],
+      "country": "Netherlands",
+      "earliest_year": 1750,
+      "existing_historical_names": [
+        {
+          "date": "1940.1.1",
+          "name": "Hamont-Achel"
+        }
+      ],
+      "existing_meta_index": 17996,
+      "existing_meta_name": "Hamont-Achel",
+      "key": "Hamont-Netherlands",
+      "known_aliases": [
+        "Hamont",
+        "hamont",
+        "hamont-achel",
+        "Hamont-Achel (Hamont)"
+      ],
+      "latest_year": 2025,
+      "name": "Hamont",
+      "reason": "under_covered_history",
+      "region": "mod_netherlands",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.42002,
+        -0.31504
+      ],
+      "country": "United Kingdom",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hampton Wick-United Kingdom",
+      "known_aliases": [
+        "Hampton Wick",
+        "hampton wick",
+        "wica",
+        "haimpatana vika",
+        "ہیمپٹن وک",
+        "Wica"
+      ],
+      "latest_year": 2025,
+      "name": "Hampton Wick",
+      "reason": "missing_entry",
+      "region": "mod_uk",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.41334,
+        -0.36701
+      ],
+      "country": "United Kingdom",
+      "earliest_year": 1750,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hampton-United Kingdom",
+      "known_aliases": [
+        "Hampton",
+        "hampton",
+        "roehampton",
+        "Roehampton"
+      ],
+      "latest_year": 2025,
+      "name": "Hampton",
+      "reason": "missing_entry",
+      "region": "mod_uk",
+      "sample_years": [
+        1750,
+        1900,
+        1960,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.12686,
+        8.93459
+      ],
+      "country": "Germany",
+      "earliest_year": 250,
+      "existing_historical_names": [
+        {
+          "date": "1143.1.1",
+          "name": "Hagenowe"
+        },
+        {
+          "date": "1300.1.1",
+          "name": "Hanau"
+        }
+      ],
+      "existing_meta_index": 6635,
+      "existing_meta_name": "Hanau",
+      "key": "Hanau-Germany",
+      "known_aliases": [
+        "Hanau",
+        "hanau",
+        "hagenouwa",
+        "Hagenouwa"
+      ],
+      "latest_year": 2025,
+      "name": "Hanau",
+      "reason": "under_covered_history",
+      "region": "mod_germany",
+      "sample_years": [
+        250,
+        1750,
+        2005,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        59.16775,
+        18.14478
+      ],
+      "country": "Sweden",
+      "earliest_year": 800,
+      "existing_historical_names": [
+        {
+          "date": "1969.1.1",
+          "name": "Haninge"
+        }
+      ],
+      "existing_meta_index": 22828,
+      "existing_meta_name": "Haninge",
+      "key": "Haninge-Sweden",
+      "known_aliases": [
+        "Haninge",
+        "haninge"
+      ],
+      "latest_year": 2025,
+      "name": "Haninge",
+      "reason": "under_covered_history",
+      "region": "mod_sweden",
+      "sample_years": [
+        800,
+        1750,
+        1930,
+        2025
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,876 @@
+{
+  "batch_index": 24,
+  "project": "MAGNETIC",
+  "settlements": [
+    {
+      "key": "Bremen-Germany",
+      "name": "Bremen",
+      "canonical_name": "Bremen",
+      "country": "Germany",
+      "coords_lat_lng": [
+        53.10864,
+        8.78606
+      ],
+      "earliest_year": 1,
+      "latest_year": 2025,
+      "existing_meta_index": 6481,
+      "known_aliases": [
+        "Bremen",
+        "bremen",
+        "brema",
+        "bremae",
+        "bremun",
+        "Brema",
+        "Bremae",
+        "Bremun"
+      ],
+      "historical_names": [
+        {
+          "date": "1.1.1",
+          "name": "Bremon"
+        },
+        {
+          "date": "787.1.1",
+          "name": "Bremon"
+        },
+        {
+          "date": "1200.1.1",
+          "name": "Bremen"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Bremerhaven-Germany",
+      "name": "Bremerhaven",
+      "canonical_name": "Bremerhaven",
+      "country": "Germany",
+      "coords_lat_lng": [
+        53.55,
+        8.58
+      ],
+      "earliest_year": 1700,
+      "latest_year": 2025,
+      "existing_meta_index": 8837,
+      "known_aliases": [
+        "Bremerhaven",
+        "bremerhaven"
+      ],
+      "historical_names": [
+        {
+          "date": "1700.1.1",
+          "name": "Bremerhaven"
+        },
+        {
+          "date": "1800.1.1",
+          "name": "Bremerhaven"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Bremervörde-Germany",
+      "name": "Bremervörde",
+      "canonical_name": "Bremervörde",
+      "country": "Germany",
+      "coords_lat_lng": [
+        53.48513,
+        9.14644
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": 31277,
+      "known_aliases": [
+        "Bremervörde",
+        "bremervörde",
+        "bremerf'orde",
+        "bremerfjorde",
+        "bremerverde",
+        "Bremerf'orde",
+        "Bremerfjorde",
+        "Bremerverde"
+      ],
+      "historical_names": [
+        {
+          "date": "1.1.1",
+          "name": "Bremervörde"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Brent-United Kingdom",
+      "name": "Brent",
+      "canonical_name": "Brent",
+      "country": "United Kingdom",
+      "coords_lat_lng": [
+        51.55306,
+        -0.3023
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": 21538,
+      "known_aliases": [
+        "Brent",
+        "brent",
+        "brent keruelet",
+        "brent kerület",
+        "london borough of brent",
+        "Brent keruelet",
+        "Brent kerület",
+        "London Borough of Brent"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Brent"
+        },
+        {
+          "date": "1961.1.1",
+          "name": "Brent"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Brentwood-United Kingdom",
+      "name": "Brentwood",
+      "canonical_name": "Brentwood",
+      "country": "United Kingdom",
+      "coords_lat_lng": [
+        51.62127,
+        0.30556
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": 14899,
+      "known_aliases": [
+        "Brentwood",
+        "brentwood",
+        "brentud",
+        "brentvud",
+        "brentwood i essex",
+        "Brentud",
+        "Brentvud",
+        "Brentwood i Essex"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Brentwood"
+        },
+        {
+          "date": "1901.1.1",
+          "name": "Brentwood"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Bressoux-Belgium",
+      "name": "Bressoux",
+      "canonical_name": "Bressoux",
+      "country": "Belgium",
+      "coords_lat_lng": [
+        50.63988,
+        5.60629
+      ],
+      "earliest_year": 250,
+      "latest_year": 2025,
+      "existing_meta_index": 10480,
+      "known_aliases": [
+        "Bressoux",
+        "bressoux",
+        "liege",
+        "liège",
+        "grivegnée",
+        "luik",
+        "lüttich",
+        "vicus leudicus",
+        "Liege",
+        "Liège",
+        "Liege",
+        "Liège"
+      ],
+      "historical_names": [
+        {
+          "date": "250.1.1",
+          "name": "Bressoux"
+        },
+        {
+          "date": "1880.1.1",
+          "name": "Bressoux"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Bressuire-France",
+      "name": "Bressuire",
+      "canonical_name": "Bressuire",
+      "country": "France",
+      "coords_lat_lng": [
+        46.8654,
+        -0.4733
+      ],
+      "earliest_year": 1800,
+      "latest_year": 2025,
+      "existing_meta_index": 9067,
+      "known_aliases": [
+        "Bressuire",
+        "bressuire"
+      ],
+      "historical_names": [
+        {
+          "date": "1809.1.1",
+          "name": "Bressuire"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Bretten-Germany",
+      "name": "Bretten",
+      "canonical_name": "Bretten",
+      "country": "Germany",
+      "coords_lat_lng": [
+        49.03685,
+        8.70745
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": 12477,
+      "known_aliases": [
+        "Bretten",
+        "bretten",
+        "breten",
+        "brtn",
+        "brytn",
+        "Breten"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Bretten"
+        },
+        {
+          "date": "1900.1.1",
+          "name": "Bretten"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Bretzfeld-Germany",
+      "name": "Bretzfeld",
+      "canonical_name": "Bretzfeld",
+      "country": "Germany",
+      "coords_lat_lng": [
+        49.17944,
+        9.43833
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Bretzfeld",
+        "bretzfeld",
+        "brecfel'd",
+        "brecfeld",
+        "bretcfel'd",
+        "Brecfel'd",
+        "Brecfeld",
+        "Bretcfel'd"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Bretzfeld"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Breuillet-France",
+      "name": "Breuillet",
+      "canonical_name": "Breuillet",
+      "country": "France",
+      "coords_lat_lng": [
+        48.5716,
+        2.1644
+      ],
+      "earliest_year": 1800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Breuillet",
+        "breuillet"
+      ],
+      "historical_names": [
+        {
+          "date": "1800.1.1",
+          "name": "Breuillet"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Breukelen-Netherlands",
+      "name": "Breukelen",
+      "canonical_name": "Breukelen",
+      "country": "Netherlands",
+      "coords_lat_lng": [
+        52.17417,
+        5.00139
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": 9433,
+      "known_aliases": [
+        "Breukelen",
+        "breukelen",
+        "beuloekeolleon",
+        "ბროიკელენი",
+        "브뢰컬런"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Breukelen"
+        },
+        {
+          "date": "1840.1.1",
+          "name": "Breukelen"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Brevik-Sweden",
+      "name": "Brevik",
+      "canonical_name": "Brevik",
+      "country": "Sweden",
+      "coords_lat_lng": [
+        59.35,
+        18.2
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Brevik",
+        "brevik"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Brevik"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Briançon-France",
+      "name": "Briançon",
+      "canonical_name": "Briançon",
+      "country": "France",
+      "coords_lat_lng": [
+        44.8995,
+        6.6536
+      ],
+      "earliest_year": 1800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Briançon",
+        "briançon"
+      ],
+      "historical_names": [
+        {
+          "date": "1800.1.1",
+          "name": "Briançon"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Bridgend-United Kingdom",
+      "name": "Bridgend",
+      "canonical_name": "Bridgend",
+      "country": "United Kingdom",
+      "coords_lat_lng": [
+        51.50583,
+        -3.57722
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": 14901,
+      "known_aliases": [
+        "Bridgend",
+        "bridgend",
+        "bridgend county borough",
+        "bridzendas",
+        "bridzhend",
+        "Bridgend County Borough",
+        "Bridzendas",
+        "Bridzhend"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Bridgend"
+        },
+        {
+          "date": "1901.1.1",
+          "name": "Bridgend"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Bridgnorth-United Kingdom",
+      "name": "Bridgnorth",
+      "canonical_name": "Bridgnorth",
+      "country": "United Kingdom",
+      "coords_lat_lng": [
+        52.53661,
+        -2.42033
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Bridgnorth",
+        "bridgnorth",
+        "cwatbrycg",
+        "بریج‌نورث",
+        "Cwatbrycg"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Bridgnorth"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Bridgwater-United Kingdom",
+      "name": "Bridgwater",
+      "canonical_name": "Bridgwater",
+      "country": "United Kingdom",
+      "coords_lat_lng": [
+        51.12837,
+        -3.00356
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Bridgwater",
+        "bridgwater",
+        "bridgewater",
+        "bridzhuoter",
+        "bridzhuotur",
+        "Bridgewater",
+        "Bridzhuoter",
+        "Bridzhuotur"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Bridgwater"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Bridlington-United Kingdom",
+      "name": "Bridlington",
+      "canonical_name": "Bridlington",
+      "country": "United Kingdom",
+      "coords_lat_lng": [
+        54.08306,
+        -0.19192
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Bridlington",
+        "bridlington",
+        "brydlyngtwn",
+        "بریدلینگتون"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Bridlington"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Bridport-United Kingdom",
+      "name": "Bridport",
+      "canonical_name": "Bridport",
+      "country": "United Kingdom",
+      "coords_lat_lng": [
+        50.7338,
+        -2.75831
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Bridport",
+        "bridport",
+        "brydpwrt",
+        "бридпорт",
+        "брідпорт",
+        "Бридпорт",
+        "Брідпорт"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Bridport"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Brie-Comte-Robert-France",
+      "name": "Brie-Comte-Robert",
+      "canonical_name": "Brie-Comte-Robert",
+      "country": "France",
+      "coords_lat_lng": [
+        48.6904,
+        2.6131
+      ],
+      "earliest_year": 1800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Brie-Comte-Robert",
+        "brie-comte-robert"
+      ],
+      "historical_names": [
+        {
+          "date": "1800.1.1",
+          "name": "Brie-Comte-Robert"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Brierfield-United Kingdom",
+      "name": "Brierfield",
+      "canonical_name": "Brierfield",
+      "country": "United Kingdom",
+      "coords_lat_lng": [
+        53.82468,
+        -2.23415
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Brierfield",
+        "brierfield"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Brierfield"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Brierley Hill-United Kingdom",
+      "name": "Brierley Hill",
+      "canonical_name": "Brierley Hill",
+      "country": "United Kingdom",
+      "coords_lat_lng": [
+        52.48173,
+        -2.12139
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Brierley Hill",
+        "brierley hill"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Brierley Hill"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Brieselang-Germany",
+      "name": "Brieselang",
+      "canonical_name": "Brieselang",
+      "country": "Germany",
+      "coords_lat_lng": [
+        52.58856,
+        12.99466
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Brieselang",
+        "brieselang",
+        "briselang",
+        "brizelang",
+        "bu li sai lang",
+        "Briselang",
+        "Brizelang"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Brieselang"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Brighouse-United Kingdom",
+      "name": "Brighouse",
+      "canonical_name": "Brighouse",
+      "country": "United Kingdom",
+      "coords_lat_lng": [
+        53.70322,
+        -1.78428
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Brighouse",
+        "brighouse",
+        "brigaus",
+        "бригаус",
+        "بریج‌هاوس",
+        "Brigaus",
+        "Бригаус"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Brighouse"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Brighton-United Kingdom",
+      "name": "Brighton",
+      "canonical_name": "Brighton",
+      "country": "United Kingdom",
+      "coords_lat_lng": [
+        50.84,
+        -0.13
+      ],
+      "earliest_year": 1100,
+      "latest_year": 2025,
+      "existing_meta_index": 7636,
+      "known_aliases": [
+        "Brighton",
+        "brighton",
+        "bristelmestune",
+        "brighthelmstone",
+        "brighthelmston",
+        "Bristelmestune",
+        "Brighthelmstone",
+        "Brighthelmston"
+      ],
+      "historical_names": [
+        {
+          "date": "1100.1.1",
+          "name": "Brighton"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Brignais-France",
+      "name": "Brignais",
+      "canonical_name": "Brignais",
+      "country": "France",
+      "coords_lat_lng": [
+        45.6751,
+        4.7527
+      ],
+      "earliest_year": 1800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Brignais",
+        "brignais"
+      ],
+      "historical_names": [
+        {
+          "date": "1800.1.1",
+          "name": "Brignais"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Brignoles-France",
+      "name": "Brignoles",
+      "canonical_name": "Brignoles",
+      "country": "France",
+      "coords_lat_lng": [
+        43.3878,
+        6.0759
+      ],
+      "earliest_year": 250,
+      "latest_year": 2025,
+      "existing_meta_index": 6484,
+      "known_aliases": [
+        "Brignoles",
+        "brignoles",
+        "briginum",
+        "briginonium",
+        "castrum brinoniae"
+      ],
+      "historical_names": [
+        {
+          "date": "250.1.1",
+          "name": "Brignoles"
+        },
+        {
+          "date": "700.1.1",
+          "name": "Brignoles"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Brilon-Germany",
+      "name": "Brilon",
+      "canonical_name": "Brilon",
+      "country": "Germany",
+      "coords_lat_lng": [
+        51.39462,
+        8.57146
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": 12483,
+      "known_aliases": [
+        "Brilon",
+        "brilon",
+        "brailen",
+        "bryln",
+        "brylwn",
+        "Brailen"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Brilon"
+        },
+        {
+          "date": "1900.1.1",
+          "name": "Brilon"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Brioude-France",
+      "name": "Brioude",
+      "canonical_name": "Brioude",
+      "country": "France",
+      "coords_lat_lng": [
+        45.3,
+        3.38
+      ],
+      "earliest_year": 250,
+      "latest_year": 2025,
+      "existing_meta_index": 6486,
+      "known_aliases": [
+        "Brioude",
+        "brioude",
+        "brivas",
+        "briude",
+        "Brivas",
+        "Briude"
+      ],
+      "historical_names": [
+        {
+          "date": "250.1.1",
+          "name": "Brioude"
+        },
+        {
+          "date": "700.1.1",
+          "name": "Brioude"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Brissac Loire Aubance-France",
+      "name": "Brissac Loire Aubance",
+      "canonical_name": "Brissac Loire Aubance",
+      "country": "France",
+      "coords_lat_lng": [
+        47.3392,
+        -0.4087
+      ],
+      "earliest_year": 1800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Brissac Loire Aubance",
+        "brissac loire aubance"
+      ],
+      "historical_names": [
+        {
+          "date": "1800.1.1",
+          "name": "Brissac Loire Aubance"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Bristol-United Kingdom",
+      "name": "Bristol",
+      "canonical_name": "Bristol",
+      "country": "United Kingdom",
+      "coords_lat_lng": [
+        51.27,
+        -2.35
+      ],
+      "earliest_year": 250,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Bristol",
+        "bristol",
+        "caer odor",
+        "bricstow",
+        "abona",
+        "Caer Odor",
+        "Bricstow",
+        "Abona"
+      ],
+      "historical_names": [
+        {
+          "date": "250.1.1",
+          "name": "Bristol"
+        }
+      ],
+      "verified_settlement": true
+    }
+  ]
+}

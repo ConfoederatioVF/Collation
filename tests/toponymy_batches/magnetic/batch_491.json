@@ -1,0 +1,871 @@
+{
+  "batch_index": 491,
+  "count": 30,
+  "project": "MAGNETIC",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        59.1833,
+        17.6667
+      ],
+      "country": "Sweden",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Igelsta-Sweden",
+      "known_aliases": [
+        "Igelsta",
+        "igelsta"
+      ],
+      "latest_year": -1000,
+      "name": "Igelsta",
+      "reason": "missing_entry",
+      "region": "scandinavian_peninsula",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.09093,
+        20.24444
+      ],
+      "country": "Poland",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "IgoÅ‚omia-Poland",
+      "known_aliases": [
+        "IgoÅ‚omia",
+        "igoå‚omia"
+      ],
+      "latest_year": 500,
+      "name": "IgoÅ‚omia",
+      "reason": "missing_entry",
+      "region": "vistula_przeworsk_wielbark",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        63.55,
+        27.0166
+      ],
+      "country": "Finland",
+      "earliest_year": -1000,
+      "existing_historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Iisalmi"
+        }
+      ],
+      "existing_meta_index": 13154,
+      "existing_meta_name": "Iisalmi",
+      "key": "Iisalmi-Finland_2",
+      "known_aliases": [
+        "Iisalmi",
+        "iisalmi"
+      ],
+      "latest_year": -1000,
+      "name": "Iisalmi",
+      "reason": "under_covered_history",
+      "region": "finland_eastern_baltic",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.32622,
+        -10.02005
+      ],
+      "country": "Ireland",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Illauntannig midden-Ireland",
+      "known_aliases": [
+        "Illauntannig midden",
+        "illauntannig midden"
+      ],
+      "latest_year": 200,
+      "name": "Illauntannig midden",
+      "reason": "missing_entry",
+      "region": "hibernia_north_atlantic",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.31285,
+        6.7655
+      ],
+      "country": "Germany",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "In der Hohlwies, Niederehe-Germany",
+      "known_aliases": [
+        "In der Hohlwies, Niederehe",
+        "in der hohlwies, niederehe"
+      ],
+      "latest_year": 500,
+      "name": "In der Hohlwies, Niederehe",
+      "reason": "missing_entry",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        69.0167,
+        25.7667
+      ],
+      "country": "Norway",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Inari-Norway",
+      "known_aliases": [
+        "Inari",
+        "inari"
+      ],
+      "latest_year": -500,
+      "name": "Inari",
+      "reason": "missing_entry",
+      "region": "finland_eastern_baltic",
+      "sample_years": [
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.58929,
+        -9.08303
+      ],
+      "country": "Ireland",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Inchagreenoge-Ireland",
+      "known_aliases": [
+        "Inchagreenoge",
+        "inchagreenoge"
+      ],
+      "latest_year": -1000,
+      "name": "Inchagreenoge",
+      "reason": "missing_entry",
+      "region": "hibernia_north_atlantic",
+      "sample_years": [
+        -2500,
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.94341,
+        -10.17691
+      ],
+      "country": "Ireland",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Inchimacteige-Ireland",
+      "known_aliases": [
+        "Inchimacteige",
+        "inchimacteige"
+      ],
+      "latest_year": 1,
+      "name": "Inchimacteige",
+      "reason": "missing_entry",
+      "region": "hibernia_north_atlantic",
+      "sample_years": [
+        -500,
+        -200,
+        1
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.89953,
+        6.36269
+      ],
+      "country": "Germany",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Inda-Germany",
+      "known_aliases": [
+        "Inda",
+        "inda"
+      ],
+      "latest_year": 500,
+      "name": "Inda",
+      "reason": "missing_entry",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        69.23929,
+        29.28959
+      ],
+      "country": "Norway",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Inganeset-Norway",
+      "known_aliases": [
+        "Inganeset",
+        "inganeset"
+      ],
+      "latest_year": -500,
+      "name": "Inganeset",
+      "reason": "missing_entry",
+      "region": "scandinavian_peninsula",
+      "sample_years": [
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        55.4353,
+        14.0334
+      ],
+      "country": "Sweden",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ingelstorp-Sweden",
+      "known_aliases": [
+        "Ingelstorp",
+        "ingelstorp"
+      ],
+      "latest_year": -1000,
+      "name": "Ingelstorp",
+      "reason": "missing_entry",
+      "region": "scandinavian_peninsula",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        54.3025,
+        -8.58107
+      ],
+      "country": "Ireland",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Inishmulclohy or Coney Island-Ireland",
+      "known_aliases": [
+        "Inishmulclohy or Coney Island",
+        "inishmulclohy or coney island"
+      ],
+      "latest_year": -500,
+      "name": "Inishmulclohy or Coney Island",
+      "reason": "missing_entry",
+      "region": "hibernia_north_atlantic",
+      "sample_years": [
+        -2500,
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        70.18935,
+        21.27659
+      ],
+      "country": "Norway",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Innervikdalen-Norway",
+      "known_aliases": [
+        "Innervikdalen",
+        "innervikdalen"
+      ],
+      "latest_year": 200,
+      "name": "Innervikdalen",
+      "reason": "missing_entry",
+      "region": "scandinavian_peninsula",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        54.70077,
+        -7.43504
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Island MacHugh-United Kingdom",
+      "known_aliases": [
+        "Island MacHugh",
+        "island machugh",
+        "island mchugh",
+        "Island McHugh"
+      ],
+      "latest_year": 1,
+      "name": "Island MacHugh",
+      "reason": "missing_entry",
+      "region": "hibernia_north_atlantic",
+      "sample_years": [
+        -2500,
+        -1000,
+        -500,
+        -200,
+        1
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.0131,
+        -8.50413
+      ],
+      "country": "Ireland",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Island-Ireland",
+      "known_aliases": [
+        "Island",
+        "island"
+      ],
+      "latest_year": -1000,
+      "name": "Island",
+      "reason": "missing_entry",
+      "region": "hibernia_north_atlantic",
+      "sample_years": [
+        -2500,
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.73897,
+        -7.57761
+      ],
+      "country": "Ireland",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Islands-Ireland",
+      "known_aliases": [
+        "Islands",
+        "islands"
+      ],
+      "latest_year": -1000,
+      "name": "Islands",
+      "reason": "missing_entry",
+      "region": "hibernia_north_atlantic",
+      "sample_years": [
+        -2500,
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        53.48468,
+        9.51652
+      ],
+      "country": "Germany",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Issendorf-Germany",
+      "known_aliases": [
+        "Issendorf",
+        "issendorf"
+      ],
+      "latest_year": 500,
+      "name": "Issendorf",
+      "reason": "missing_entry",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        70.81405,
+        27.95919
+      ],
+      "country": "Norway",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Iversfjord_Hus 19-Norway",
+      "known_aliases": [
+        "Iversfjord_Hus 19",
+        "iversfjord_hus 19",
+        "iversfjord_hus 22",
+        "iversfjord_hus 32",
+        "iversfjord_hus 18",
+        "Iversfjord_Hus 22",
+        "Iversfjord_Hus 32",
+        "Iversfjord_Hus 18"
+      ],
+      "latest_year": -500,
+      "name": "Iversfjord_Hus 19",
+      "reason": "missing_entry",
+      "region": "scandinavian_peninsula",
+      "sample_years": [
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.58814,
+        6.77399
+      ],
+      "country": "Germany",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Iversheim-Germany",
+      "known_aliases": [
+        "Iversheim",
+        "iversheim"
+      ],
+      "latest_year": 500,
+      "name": "Iversheim",
+      "reason": "missing_entry",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.1651,
+        18.2592
+      ],
+      "country": "Poland",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Janowice-Poland",
+      "known_aliases": [
+        "Janowice",
+        "janowice"
+      ],
+      "latest_year": -200,
+      "name": "Janowice",
+      "reason": "missing_entry",
+      "region": "vistula_przeworsk_wielbark",
+      "sample_years": [
+        -1000,
+        -500,
+        -200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        56.4633,
+        8.8664
+      ],
+      "country": "Denmark",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Jattrup-Denmark",
+      "known_aliases": [
+        "Jattrup",
+        "jattrup"
+      ],
+      "latest_year": -1000,
+      "name": "Jattrup",
+      "reason": "missing_entry",
+      "region": "denmark_jutland_isles",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        56.2643,
+        8.7538
+      ],
+      "country": "Denmark",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Jersild-Denmark",
+      "known_aliases": [
+        "Jersild",
+        "jersild"
+      ],
+      "latest_year": -500,
+      "name": "Jersild",
+      "reason": "missing_entry",
+      "region": "denmark_jutland_isles",
+      "sample_years": [
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.28621,
+        14.11862
+      ],
+      "country": "Germany",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Jesau-Germany",
+      "known_aliases": [
+        "Jesau",
+        "jesau"
+      ],
+      "latest_year": 500,
+      "name": "Jesau",
+      "reason": "missing_entry",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        69.949,
+        23.189
+      ],
+      "country": "Norway",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Jiebmaluokta-Norway",
+      "known_aliases": [
+        "Jiebmaluokta",
+        "jiebmaluokta"
+      ],
+      "latest_year": -200,
+      "name": "Jiebmaluokta",
+      "reason": "missing_entry",
+      "region": "scandinavian_peninsula",
+      "sample_years": [
+        -1000,
+        -500,
+        -200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        65.0333,
+        29.0666
+      ],
+      "country": "Finland",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Joenniemi-Finland",
+      "known_aliases": [
+        "Joenniemi",
+        "joenniemi"
+      ],
+      "latest_year": -500,
+      "name": "Joenniemi",
+      "reason": "missing_entry",
+      "region": "finland_eastern_baltic",
+      "sample_years": [
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        53.40585,
+        -6.83503
+      ],
+      "country": "Ireland",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Johnstown 3-Ireland",
+      "known_aliases": [
+        "Johnstown 3",
+        "johnstown 3"
+      ],
+      "latest_year": -200,
+      "name": "Johnstown 3",
+      "reason": "missing_entry",
+      "region": "hibernia_north_atlantic",
+      "sample_years": [
+        -2500,
+        -1000,
+        -500,
+        -200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        68.0666,
+        27.4
+      ],
+      "country": "Finland",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Juikenttä-Finland",
+      "known_aliases": [
+        "Juikenttä",
+        "juikenttä"
+      ],
+      "latest_year": -500,
+      "name": "Juikenttä",
+      "reason": "missing_entry",
+      "region": "finland_eastern_baltic",
+      "sample_years": [
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        55.8384,
+        11.5292
+      ],
+      "country": "Denmark",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Jyderup Skov-Denmark",
+      "known_aliases": [
+        "Jyderup Skov",
+        "jyderup skov"
+      ],
+      "latest_year": -1000,
+      "name": "Jyderup Skov",
+      "reason": "missing_entry",
+      "region": "denmark_jutland_isles",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.10262,
+        6.50878
+      ],
+      "country": "Germany",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "JÃ¼chen (1)-Germany",
+      "known_aliases": [
+        "JÃ¼chen (1)",
+        "jã¼chen",
+        "JÃ¼chen (2)"
+      ],
+      "latest_year": 500,
+      "name": "JÃ¼chen (1)",
+      "reason": "missing_entry",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.81895,
+        6.36411
+      ],
+      "country": "Germany",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "JÃ¼ngersdorf-Germany",
+      "known_aliases": [
+        "JÃ¼ngersdorf",
+        "jã¼ngersdorf"
+      ],
+      "latest_year": 500,
+      "name": "JÃ¼ngersdorf",
+      "reason": "missing_entry",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    }
+  ]
+}

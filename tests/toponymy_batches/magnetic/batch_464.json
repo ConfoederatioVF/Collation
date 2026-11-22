@@ -1,0 +1,927 @@
+{
+  "batch_index": 464,
+  "count": 30,
+  "project": "MAGNETIC",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        39.57695,
+        -7.96063
+      ],
+      "country": "Portugal",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Velho de CaratÃ£o-Portugal",
+      "known_aliases": [
+        "Velho de CaratÃ£o",
+        "velho de caratã£o"
+      ],
+      "latest_year": 800,
+      "name": "Velho de CaratÃ£o",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.99254,
+        16.67594
+      ],
+      "country": "Czechia",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "VelkÃ© NÄ›mÄice-Czechia",
+      "known_aliases": [
+        "VelkÃ© NÄ›mÄice",
+        "velkã© nä›mäice"
+      ],
+      "latest_year": 800,
+      "name": "VelkÃ© NÄ›mÄice",
+      "reason": "missing_entry",
+      "region": "west_slavic_poland_bohemia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        60.85,
+        11.46667
+      ],
+      "country": "Norway",
+      "earliest_year": -200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ven-Norway",
+      "known_aliases": [
+        "Ven",
+        "ven"
+      ],
+      "latest_year": 700,
+      "name": "Ven",
+      "reason": "missing_entry",
+      "region": "vendel_scandinavia_baltic",
+      "sample_years": [
+        -200,
+        1,
+        200,
+        250,
+        400,
+        500,
+        600,
+        700
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        60.28333,
+        11.18333
+      ],
+      "country": "Norway",
+      "earliest_year": 1,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Venjar-Norway",
+      "known_aliases": [
+        "Venjar",
+        "venjar"
+      ],
+      "latest_year": 800,
+      "name": "Venjar",
+      "reason": "missing_entry",
+      "region": "vendel_scandinavia_baltic",
+      "sample_years": [
+        1,
+        200,
+        250,
+        400,
+        500,
+        600,
+        700,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.41673,
+        -5.8925
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [
+        {
+          "date": "900.1.1",
+          "name": "Trujillo"
+        }
+      ],
+      "existing_meta_index": 7349,
+      "existing_meta_name": "Trujillo",
+      "key": "Venta de Magasca, Trujillo-Spain",
+      "known_aliases": [
+        "Venta de Magasca, Trujillo",
+        "venta de magasca, trujillo"
+      ],
+      "latest_year": 800,
+      "name": "Venta de Magasca, Trujillo",
+      "reason": "under_covered_history",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.28387,
+        -4.73082
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ventipo-Spain",
+      "known_aliases": [
+        "Ventipo",
+        "ventipo"
+      ],
+      "latest_year": 800,
+      "name": "Ventipo",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.6507,
+        -3.46127
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Vergilia-Spain",
+      "known_aliases": [
+        "Vergilia",
+        "vergilia"
+      ],
+      "latest_year": 800,
+      "name": "Vergilia",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        60.53333,
+        8.16667
+      ],
+      "country": "Norway",
+      "earliest_year": 1,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Verpe-Norway",
+      "known_aliases": [
+        "Verpe",
+        "verpe"
+      ],
+      "latest_year": 800,
+      "name": "Verpe",
+      "reason": "missing_entry",
+      "region": "vendel_scandinavia_baltic",
+      "sample_years": [
+        1,
+        200,
+        250,
+        400,
+        500,
+        600,
+        700,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        59.29,
+        11.1
+      ],
+      "country": "Norway",
+      "earliest_year": 1,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Vestberg vestre-Norway",
+      "known_aliases": [
+        "Vestberg vestre",
+        "vestberg vestre"
+      ],
+      "latest_year": 800,
+      "name": "Vestberg vestre",
+      "reason": "missing_entry",
+      "region": "vendel_scandinavia_baltic",
+      "sample_years": [
+        1,
+        200,
+        250,
+        400,
+        500,
+        600,
+        700,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.85275,
+        12.46155
+      ],
+      "country": "Italy",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Vicus Alexandri-Italy",
+      "known_aliases": [
+        "Vicus Alexandri",
+        "vicus alexandri"
+      ],
+      "latest_year": 800,
+      "name": "Vicus Alexandri",
+      "reason": "missing_entry",
+      "region": "lombard_byzantine_italy",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.72342,
+        -5.79713
+      ],
+      "country": "Spain",
+      "earliest_year": 250,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Vicus Aquarius-Spain",
+      "known_aliases": [
+        "Vicus Aquarius",
+        "vicus aquarius"
+      ],
+      "latest_year": 800,
+      "name": "Vicus Aquarius",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        250,
+        400,
+        500,
+        600,
+        700,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.27228,
+        -8.09127
+      ],
+      "country": "Portugal",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Vicus Atucausensis-Portugal",
+      "known_aliases": [
+        "Vicus Atucausensis",
+        "vicus atucausensis"
+      ],
+      "latest_year": 800,
+      "name": "Vicus Atucausensis",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.96039,
+        -3.49968
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Vicus Cuminarius-Spain",
+      "known_aliases": [
+        "Vicus Cuminarius",
+        "vicus cuminarius"
+      ],
+      "latest_year": 800,
+      "name": "Vicus Cuminarius",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.23135,
+        -8.71243
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [
+        {
+          "date": "50.1.1",
+          "name": "Vicus Spacorum"
+        },
+        {
+          "date": "550.1.1",
+          "name": "Vigo"
+        }
+      ],
+      "existing_meta_index": 7822,
+      "existing_meta_name": "Vigo",
+      "key": "Vicus Spacorum-Spain",
+      "known_aliases": [
+        "Vicus Spacorum",
+        "vicus spacorum"
+      ],
+      "latest_year": 800,
+      "name": "Vicus Spacorum",
+      "reason": "under_covered_history",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.44107,
+        18.96221
+      ],
+      "country": "Hungary",
+      "earliest_year": 250,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Vicus Teuto-Hungary",
+      "known_aliases": [
+        "Vicus Teuto",
+        "vicus teuto"
+      ],
+      "latest_year": 800,
+      "name": "Vicus Teuto",
+      "reason": "missing_entry",
+      "region": "avar_danubian_carpathian",
+      "sample_years": [
+        250,
+        400,
+        500,
+        600,
+        700,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.22818,
+        -7.18639
+      ],
+      "country": "Portugal",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Vicus Veniensis-Portugal",
+      "known_aliases": [
+        "Vicus Veniensis",
+        "vicus veniensis"
+      ],
+      "latest_year": 800,
+      "name": "Vicus Veniensis",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.63625,
+        -8.123
+      ],
+      "country": "Portugal",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Vieira-Portugal",
+      "known_aliases": [
+        "Vieira",
+        "vieira"
+      ],
+      "latest_year": 800,
+      "name": "Vieira",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.97404,
+        -7.70404
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [
+        {
+          "date": "-25.1.1",
+          "name": "Lucus Augusti"
+        },
+        {
+          "date": "550.1.1",
+          "name": "Lugo"
+        }
+      ],
+      "existing_meta_index": 6711,
+      "existing_meta_name": "Lugo",
+      "key": "Vigo, Lugo-Spain",
+      "known_aliases": [
+        "Vigo, Lugo",
+        "vigo, lugo"
+      ],
+      "latest_year": 800,
+      "name": "Vigo, Lugo",
+      "reason": "under_covered_history",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.21602,
+        -7.78562
+      ],
+      "country": "Portugal",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Vila Formosa, Alter do ChÃ£o-Portugal",
+      "known_aliases": [
+        "Vila Formosa, Alter do ChÃ£o",
+        "vila formosa, alter do chã£o"
+      ],
+      "latest_year": 800,
+      "name": "Vila Formosa, Alter do ChÃ£o",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.2198,
+        -8.84036
+      ],
+      "country": "Portugal",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Vila Nova de S. Pedro-Portugal",
+      "known_aliases": [
+        "Vila Nova de S. Pedro",
+        "vila nova de s. pedro"
+      ],
+      "latest_year": 800,
+      "name": "Vila Nova de S. Pedro",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -2500,
+        1,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.9475,
+        -7.30052
+      ],
+      "country": "Portugal",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Vila Verde de Ficalho-Portugal",
+      "known_aliases": [
+        "Vila Verde de Ficalho",
+        "vila verde de ficalho"
+      ],
+      "latest_year": 800,
+      "name": "Vila Verde de Ficalho",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.85109,
+        -9.37462
+      ],
+      "country": "Portugal",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Vila Verde, Terrugem-Portugal",
+      "known_aliases": [
+        "Vila Verde, Terrugem",
+        "vila verde, terrugem"
+      ],
+      "latest_year": 800,
+      "name": "Vila Verde, Terrugem",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.16082,
+        -7.38877
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Viladonga-Spain",
+      "known_aliases": [
+        "Viladonga",
+        "viladonga",
+        "Viladonga (Castro de)"
+      ],
+      "latest_year": 800,
+      "name": "Viladonga",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.49313,
+        -7.26995
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Vilamar-Os Castros-Spain",
+      "known_aliases": [
+        "Vilamar-Os Castros",
+        "vilamar-os castros"
+      ],
+      "latest_year": 800,
+      "name": "Vilamar-Os Castros",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.34162,
+        -7.20173
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "VilameÃ¡-Spain",
+      "known_aliases": [
+        "VilameÃ¡",
+        "vilameã¡"
+      ],
+      "latest_year": 800,
+      "name": "VilameÃ¡",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.24233,
+        -7.59226
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "VilardecÃ¡s-Spain",
+      "known_aliases": [
+        "VilardecÃ¡s",
+        "vilardecã¡s"
+      ],
+      "latest_year": 800,
+      "name": "VilardecÃ¡s",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.75248,
+        -7.68842
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Vilela-Spain",
+      "known_aliases": [
+        "Vilela",
+        "vilela"
+      ],
+      "latest_year": 800,
+      "name": "Vilela",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.45281,
+        -8.52801
+      ],
+      "country": "Portugal",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Villa Cardillio-Portugal",
+      "known_aliases": [
+        "Villa Cardillio",
+        "villa cardillio",
+        "vila cardílio",
+        "Vila Cardílio"
+      ],
+      "latest_year": 800,
+      "name": "Villa Cardillio",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.6829,
+        13.1129
+      ],
+      "country": "Italy",
+      "earliest_year": 1,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Villa Magna-Italy",
+      "known_aliases": [
+        "Villa Magna",
+        "villa magna"
+      ],
+      "latest_year": 800,
+      "name": "Villa Magna",
+      "reason": "missing_entry",
+      "region": "lombard_byzantine_italy",
+      "sample_years": [
+        1,
+        200,
+        250,
+        400,
+        500,
+        600,
+        700,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.33149,
+        -7.35516
+      ],
+      "country": "Portugal",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Villa da Qta. da FÃ³rnea-Portugal",
+      "known_aliases": [
+        "Villa da Qta. da FÃ³rnea",
+        "villa da qta. da fã³rnea"
+      ],
+      "latest_year": 800,
+      "name": "Villa da Qta. da FÃ³rnea",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,912 @@
+{
+  "batch_index": 80,
+  "project": "MAGNETIC",
+  "settlements": [
+    {
+      "key": "Juuka-Finland",
+      "name": "Juuka",
+      "canonical_name": "Juuka",
+      "country": "Finland",
+      "coords_lat_lng": [
+        63.23333,
+        29.25
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Juuka",
+        "juuka",
+        "juga",
+        "juka",
+        "yuga",
+        "Juga",
+        "Juka",
+        "Yuga"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Juuka"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Juupajoki-Finland",
+      "name": "Juupajoki",
+      "canonical_name": "Juupajoki",
+      "country": "Finland",
+      "coords_lat_lng": [
+        61.79901,
+        24.36939
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Juupajoki",
+        "juupajoki"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Juupajoki"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Juva-Finland",
+      "name": "Juva",
+      "canonical_name": "Juva",
+      "country": "Finland",
+      "coords_lat_lng": [
+        61.9,
+        27.85
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Juva",
+        "juva",
+        "jockas",
+        "yuva",
+        "you wa",
+        "Jockas",
+        "Yuva"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Juva"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Juvignac-France",
+      "name": "Juvignac",
+      "canonical_name": "Juvignac",
+      "country": "France",
+      "coords_lat_lng": [
+        43.6173,
+        3.7908
+      ],
+      "earliest_year": 1800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Juvignac",
+        "juvignac"
+      ],
+      "historical_names": [
+        {
+          "date": "1800.1.1",
+          "name": "Juvignac"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Jyllinge-Denmark",
+      "name": "Jyllinge",
+      "canonical_name": "Jyllinge",
+      "country": "Denmark",
+      "coords_lat_lng": [
+        55.75295,
+        12.10315
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": 29063,
+      "known_aliases": [
+        "Jyllinge",
+        "jyllinge"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Jyllinge"
+        },
+        {
+          "date": "1950.1.1",
+          "name": "Jyllinge"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Jyvaskyla-Finland",
+      "name": "Jyvaskyla",
+      "canonical_name": "Jyvaskyla",
+      "country": "Finland",
+      "coords_lat_lng": [
+        62.23,
+        25.73
+      ],
+      "earliest_year": 1500,
+      "latest_year": 2025,
+      "existing_meta_index": 8441,
+      "known_aliases": [
+        "Jyvaskyla",
+        "jyvaskyla",
+        "jyväskylä",
+        "Jyväskylä"
+      ],
+      "historical_names": [
+        {
+          "date": "1500.1.1",
+          "name": "Jyväskylä"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Jyväskylä-Finland",
+      "name": "Jyväskylä",
+      "canonical_name": "Jyväskylä",
+      "country": "Finland",
+      "coords_lat_lng": [
+        61.96606,
+        25.65606
+      ],
+      "earliest_year": 1890,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Jyväskylä",
+        "jyväskylä"
+      ],
+      "historical_names": [
+        {
+          "date": "1890.1.1",
+          "name": "Jyväskylä"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Jämijärvi-Finland",
+      "name": "Jämijärvi",
+      "canonical_name": "Jämijärvi",
+      "country": "Finland",
+      "coords_lat_lng": [
+        61.81667,
+        22.7
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Jämijärvi",
+        "jämijärvi",
+        "jjamijarvi",
+        "йямиярви",
+        "Jjamijarvi",
+        "Йямиярви"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Jämijärvi"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Jämsä-Finland",
+      "name": "Jämsä",
+      "canonical_name": "Jämsä",
+      "country": "Finland",
+      "coords_lat_lng": [
+        61.8642,
+        25.19002
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": 13194,
+      "known_aliases": [
+        "Jämsä",
+        "jämsä",
+        "jaemsae",
+        "jamsa",
+        "jamsja",
+        "Jaemsae",
+        "Jamsa",
+        "Jamsja"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Jämsä"
+        },
+        {
+          "date": "1900.1.1",
+          "name": "Jämsä"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Jämsänkoski-Finland",
+      "name": "Jämsänkoski",
+      "canonical_name": "Jämsänkoski",
+      "country": "Finland",
+      "coords_lat_lng": [
+        61.919,
+        25.17011
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": 13194,
+      "known_aliases": [
+        "Jämsänkoski",
+        "jämsänkoski",
+        "jaemsaenkoski",
+        "jjamsjankoski",
+        "йямсянкоски",
+        "Jaemsaenkoski",
+        "Jjamsjankoski",
+        "Йямсянкоски"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Jämsänkoski"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Jäppilä-Finland",
+      "name": "Jäppilä",
+      "canonical_name": "Jäppilä",
+      "country": "Finland",
+      "coords_lat_lng": [
+        62.37899,
+        27.43372
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Jäppilä",
+        "jäppilä",
+        "jaeppilae",
+        "jappilja",
+        "яппиля",
+        "Jaeppilae",
+        "Jappilja",
+        "Яппиля"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Jäppilä"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Järvenperä-Finland",
+      "name": "Järvenperä",
+      "canonical_name": "Järvenperä",
+      "country": "Finland",
+      "coords_lat_lng": [
+        60.24169,
+        24.71357
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Järvenperä",
+        "järvenperä",
+        "j-perae",
+        "j-perä",
+        "jaebae",
+        "J-perae",
+        "J-perä",
+        "Jaebae"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Järvenperä"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Järvenpää-Finland",
+      "name": "Järvenpää",
+      "canonical_name": "Järvenpää",
+      "country": "Finland",
+      "coords_lat_lng": [
+        60.47369,
+        25.08992
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": 19954,
+      "known_aliases": [
+        "Järvenpää",
+        "järvenpää",
+        "jaervenpaeae",
+        "jarvenpaa",
+        "jarvenpjaa",
+        "Jaervenpaeae",
+        "Jarvenpaa",
+        "Jarvenpjaa"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Järvenpää"
+        },
+        {
+          "date": "1952.1.1",
+          "name": "Järvenpää"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Jätkäsaari-Finland",
+      "name": "Jätkäsaari",
+      "canonical_name": "Jätkäsaari",
+      "country": "Finland",
+      "coords_lat_lng": [
+        60.15857,
+        24.91691
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Jätkäsaari",
+        "jätkäsaari",
+        "busholmen",
+        "busis",
+        "jaetkis",
+        "Busholmen",
+        "Busis",
+        "Jaetkis"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Jätkäsaari"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Jääli-Finland",
+      "name": "Jääli",
+      "canonical_name": "Jääli",
+      "country": "Finland",
+      "coords_lat_lng": [
+        65.09296,
+        25.68518
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Jääli",
+        "jääli",
+        "jaalinkyla",
+        "jaeaeli",
+        "jajali",
+        "Jaalinkyla",
+        "Jaeaeli",
+        "Jajali"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Jääli"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Jørpeland-Norway",
+      "name": "Jørpeland",
+      "canonical_name": "Jørpeland",
+      "country": "Norway",
+      "coords_lat_lng": [
+        59.02251,
+        6.04078
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Jørpeland",
+        "jørpeland",
+        "jorpeland",
+        "Jorpeland"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Jørpeland"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Jüchen-Germany",
+      "name": "Jüchen",
+      "canonical_name": "Jüchen",
+      "country": "Germany",
+      "coords_lat_lng": [
+        51.1,
+        6.5
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": 13234,
+      "known_aliases": [
+        "Jüchen",
+        "jüchen",
+        "jikhen",
+        "jjukhen",
+        "juche",
+        "Jikhen",
+        "Jjukhen",
+        "Juche"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Jüchen"
+        },
+        {
+          "date": "1900.1.1",
+          "name": "Jüchen"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Jülich-Germany",
+      "name": "Jülich",
+      "canonical_name": "Jülich",
+      "country": "Germany",
+      "coords_lat_lng": [
+        50.92149,
+        6.36267
+      ],
+      "earliest_year": -500,
+      "latest_year": 2025,
+      "existing_meta_index": 10355,
+      "known_aliases": [
+        "Jülich",
+        "jülich",
+        "iuliacum",
+        "jilikh",
+        "joellesch",
+        "Iuliacum",
+        "Jilikh",
+        "Joellesch"
+      ],
+      "historical_names": [
+        {
+          "date": "-500.1.1",
+          "name": "Jülich"
+        },
+        {
+          "date": "1800.1.1",
+          "name": "Jülich"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Jüterbog-Germany",
+      "name": "Jüterbog",
+      "canonical_name": "Jüterbog",
+      "country": "Germany",
+      "coords_lat_lng": [
+        51.99607,
+        13.07979
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Jüterbog",
+        "jüterbog",
+        "iutrebocum",
+        "jiterbog",
+        "jjuterbog",
+        "Iutrebocum",
+        "Jiterbog",
+        "Jjuterbog"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Jüterbog"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Kaakkuri-Finland",
+      "name": "Kaakkuri",
+      "canonical_name": "Kaakkuri",
+      "country": "Finland",
+      "coords_lat_lng": [
+        64.96038,
+        25.53049
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Kaakkuri",
+        "kaakkuri",
+        "кааккури",
+        "Кааккури"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Kaakkuri"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Kaarela-Finland",
+      "name": "Kaarela",
+      "canonical_name": "Kaarela",
+      "country": "Finland",
+      "coords_lat_lng": [
+        60.25174,
+        24.88111
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Kaarela",
+        "kaarela",
+        "33",
+        "karboele",
+        "karbole",
+        "Karboele",
+        "Karbole"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Kaarela"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Kaarina-Finland",
+      "name": "Kaarina",
+      "canonical_name": "Kaarina",
+      "country": "Finland",
+      "coords_lat_lng": [
+        60.40724,
+        22.36904
+      ],
+      "earliest_year": 1,
+      "latest_year": 2025,
+      "existing_meta_index": 19956,
+      "known_aliases": [
+        "Kaarina",
+        "kaarina",
+        "s:t karins",
+        "saint karin",
+        "sankt karins",
+        "S:t Karins",
+        "Saint Karin",
+        "Sankt Karins"
+      ],
+      "historical_names": [
+        {
+          "date": "1.1.1",
+          "name": "Kaarina"
+        },
+        {
+          "date": "1952.1.1",
+          "name": "Kaarina"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Kaarst-Germany",
+      "name": "Kaarst",
+      "canonical_name": "Kaarst",
+      "country": "Germany",
+      "coords_lat_lng": [
+        51.22929,
+        6.61883
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": 13238,
+      "known_aliases": [
+        "Kaarst",
+        "kaarst",
+        "kaasch",
+        "kaasj",
+        "karst",
+        "Kaasch",
+        "Kaasj",
+        "Karst"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Kaarst"
+        },
+        {
+          "date": "1900.1.1",
+          "name": "Kaarst"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Kaavi-Finland",
+      "name": "Kaavi",
+      "canonical_name": "Kaavi",
+      "country": "Finland",
+      "coords_lat_lng": [
+        62.98333,
+        28.5
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Kaavi",
+        "kaavi",
+        "kaavi vald",
+        "kavi",
+        "kavui",
+        "Kaavi vald",
+        "Kavi"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Kaavi"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Kabelvåg-Norway",
+      "name": "Kabelvåg",
+      "canonical_name": "Kabelvåg",
+      "country": "Norway",
+      "coords_lat_lng": [
+        68.21066,
+        14.47554
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Kabelvåg",
+        "kabelvåg",
+        "kabel'vog",
+        "kabelvaag",
+        "kabelvag",
+        "Kabel'vog",
+        "Kabelvaag",
+        "Kabelvag"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Kabelvåg"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Kadaň-Czechia",
+      "name": "Kadaň",
+      "canonical_name": "Kadaň",
+      "country": "Czechia",
+      "coords_lat_lng": [
+        50.38333,
+        13.26667
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": 13240,
+      "known_aliases": [
+        "Kadaň",
+        "kadaň",
+        "kaaden",
+        "kadan",
+        "kadan'",
+        "Kaaden",
+        "Kadan",
+        "Kadan'"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Kaaden"
+        },
+        {
+          "date": "1900.1.1",
+          "name": "Kaaden"
+        },
+        {
+          "date": "1918.10.28",
+          "name": "Kadan"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Kaiserslautern-Germany",
+      "name": "Kaiserslautern",
+      "canonical_name": "Kaiserslautern",
+      "country": "Germany",
+      "coords_lat_lng": [
+        49.43,
+        7.77
+      ],
+      "earliest_year": 250,
+      "latest_year": 2025,
+      "existing_meta_index": 7280,
+      "known_aliases": [
+        "Kaiserslautern",
+        "kaiserslautern",
+        "villa luthra",
+        "keyserslutern",
+        "Villa Luthra",
+        "Keyserslutern"
+      ],
+      "historical_names": [
+        {
+          "date": "250.1.1",
+          "name": "Lutra"
+        },
+        {
+          "date": "830.1.1",
+          "name": "Lutra"
+        },
+        {
+          "date": "1276.1.1",
+          "name": "Kaiserslautern"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Kajaani-Finland",
+      "name": "Kajaani",
+      "canonical_name": "Kajaani",
+      "country": "Finland",
+      "coords_lat_lng": [
+        64.22728,
+        27.72846
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": 13241,
+      "known_aliases": [
+        "Kajaani",
+        "kajaani",
+        "caianeburgum",
+        "kaj",
+        "kajaani linn",
+        "Caianeburgum",
+        "KAJ",
+        "Kajaani linn"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Kajaani"
+        },
+        {
+          "date": "1900.1.1",
+          "name": "Kajaani"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Kalajoki-Finland",
+      "name": "Kalajoki",
+      "canonical_name": "Kalajoki",
+      "country": "Finland",
+      "coords_lat_lng": [
+        64.25,
+        23.95
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": 36002,
+      "known_aliases": [
+        "Kalajoki",
+        "kalajoki",
+        "kalagioki",
+        "kalajoki linn",
+        "ka la yue ji",
+        "Kalagioki",
+        "Kalajoki linn"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Kalajoki"
+        },
+        {
+          "date": "1880.1.1",
+          "name": "Kalajoki"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Kalajärvi-Finland",
+      "name": "Kalajärvi",
+      "canonical_name": "Kalajärvi",
+      "country": "Finland",
+      "coords_lat_lng": [
+        60.30476,
+        24.73718
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Kalajärvi",
+        "kalajärvi",
+        "kalis",
+        "калис",
+        "Kalis",
+        "Калис"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Kalajärvi"
+        }
+      ],
+      "verified_settlement": true
+    }
+  ]
+}

@@ -1,0 +1,936 @@
+{
+  "batch_index": 450,
+  "count": 30,
+  "project": "MAGNETIC",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        37.98783,
+        -4.488
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sacili/Municipium Martiale-Spain",
+      "known_aliases": [
+        "Sacili/Municipium Martiale",
+        "sacili/municipium martiale"
+      ],
+      "latest_year": 800,
+      "name": "Sacili/Municipium Martiale",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.98801,
+        0.56322
+      ],
+      "country": "France",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "SacouÃ©-France",
+      "known_aliases": [
+        "SacouÃ©",
+        "sacouã©"
+      ],
+      "latest_year": 800,
+      "name": "SacouÃ©",
+      "reason": "missing_entry",
+      "region": "francia_merovingian",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.02295,
+        -8.9964
+      ],
+      "country": "Portugal",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sacrum Pr.-Portugal",
+      "known_aliases": [
+        "Sacrum Pr.",
+        "sacrum pr."
+      ],
+      "latest_year": 800,
+      "name": "Sacrum Pr.",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.58283,
+        -5.47864
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Saepo-Spain",
+      "known_aliases": [
+        "Saepo",
+        "saepo"
+      ],
+      "latest_year": 800,
+      "name": "Saepo",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        58.46,
+        8.77
+      ],
+      "country": "Norway",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sagene B6-Norway",
+      "known_aliases": [
+        "Sagene B6",
+        "sagene b6",
+        "sagene b1",
+        "sagene b5",
+        "sagene b2",
+        "Sagene B1",
+        "Sagene B5",
+        "Sagene B2"
+      ],
+      "latest_year": 700,
+      "name": "Sagene B6",
+      "reason": "missing_entry",
+      "region": "vendel_scandinavia_baltic",
+      "sample_years": [
+        -2500,
+        1,
+        400,
+        700
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.55106,
+        -5.83362
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Saguntia-Spain",
+      "known_aliases": [
+        "Saguntia",
+        "saguntia"
+      ],
+      "latest_year": 800,
+      "name": "Saguntia",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.91515,
+        0.69212
+      ],
+      "country": "France",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Saint-BÃ©at-France",
+      "known_aliases": [
+        "Saint-BÃ©at",
+        "saint-bã©at"
+      ],
+      "latest_year": 800,
+      "name": "Saint-BÃ©at",
+      "reason": "missing_entry",
+      "region": "francia_merovingian",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.68495,
+        -3.98617
+      ],
+      "country": "France",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Saint-Pol-de-LÃ©on-France",
+      "known_aliases": [
+        "Saint-Pol-de-LÃ©on",
+        "saint-pol-de-lã©on"
+      ],
+      "latest_year": 800,
+      "name": "Saint-Pol-de-LÃ©on",
+      "reason": "missing_entry",
+      "region": "francia_merovingian",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.98374,
+        0.66934
+      ],
+      "country": "France",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Saint-PÃ©-d'Ardet-France",
+      "known_aliases": [
+        "Saint-PÃ©-d'Ardet",
+        "saint-pã©-d'ardet"
+      ],
+      "latest_year": 800,
+      "name": "Saint-PÃ©-d'Ardet",
+      "reason": "missing_entry",
+      "region": "francia_merovingian",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.24799,
+        -4.04669
+      ],
+      "country": "France",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Saint-SÃ©gal-France",
+      "known_aliases": [
+        "Saint-SÃ©gal",
+        "saint-sã©gal"
+      ],
+      "latest_year": 800,
+      "name": "Saint-SÃ©gal",
+      "reason": "missing_entry",
+      "region": "francia_merovingian",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.29972,
+        -3.55222
+      ],
+      "country": "France",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sainte-Catherine, PlounÃ©vÃ©zel-France",
+      "known_aliases": [
+        "Sainte-Catherine, PlounÃ©vÃ©zel",
+        "sainte-catherine, plounã©vã©zel"
+      ],
+      "latest_year": 800,
+      "name": "Sainte-Catherine, PlounÃ©vÃ©zel",
+      "reason": "missing_entry",
+      "region": "francia_merovingian",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.84573,
+        16.58688
+      ],
+      "country": "Hungary",
+      "earliest_year": 250,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sala/Salla-Hungary",
+      "known_aliases": [
+        "Sala/Salla",
+        "sala/salla"
+      ],
+      "latest_year": 800,
+      "name": "Sala/Salla",
+      "reason": "missing_entry",
+      "region": "avar_danubian_carpathian",
+      "sample_years": [
+        250,
+        400,
+        500,
+        600,
+        700,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.37273,
+        -8.51171
+      ],
+      "country": "Portugal",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Salacia Imperatoria/Salacia-Portugal",
+      "known_aliases": [
+        "Salacia Imperatoria/Salacia",
+        "salacia imperatoria/salacia"
+      ],
+      "latest_year": 800,
+      "name": "Salacia Imperatoria/Salacia",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.71894,
+        -8.27477
+      ],
+      "country": "Portugal",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Salaniana-Portugal",
+      "known_aliases": [
+        "Salaniana",
+        "salaniana"
+      ],
+      "latest_year": 800,
+      "name": "Salaniana",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.52576,
+        -4.73807
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Saldania-Spain",
+      "known_aliases": [
+        "Saldania",
+        "saldania"
+      ],
+      "latest_year": 800,
+      "name": "Saldania",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.46341,
+        -5.061
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Salduba/Saltum-Spain",
+      "known_aliases": [
+        "Salduba/Saltum",
+        "salduba/saltum"
+      ],
+      "latest_year": 800,
+      "name": "Salduba/Saltum",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.2416,
+        -7.67226
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Salientes-Spain",
+      "known_aliases": [
+        "Salientes",
+        "salientes"
+      ],
+      "latest_year": 800,
+      "name": "Salientes",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.69521,
+        -8.49581
+      ],
+      "country": "Ireland",
+      "earliest_year": 1,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sallymount Site 1-Ireland",
+      "known_aliases": [
+        "Sallymount Site 1",
+        "sallymount site 1"
+      ],
+      "latest_year": 800,
+      "name": "Sallymount Site 1",
+      "reason": "missing_entry",
+      "region": "britain_ireland_early",
+      "sample_years": [
+        1,
+        200,
+        250,
+        400,
+        500,
+        600,
+        700,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.11956,
+        -5.69938
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [
+        {
+          "date": "-200.1.1",
+          "name": "Salpensa"
+        },
+        {
+          "date": "1251.1.1",
+          "name": "Utrera"
+        }
+      ],
+      "existing_meta_index": 6993,
+      "existing_meta_name": "Utrera",
+      "key": "Salpensa/Sala-Spain",
+      "known_aliases": [
+        "Salpensa/Sala",
+        "salpensa/sala"
+      ],
+      "latest_year": 800,
+      "name": "Salpensa/Sala",
+      "reason": "under_covered_history",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.0984,
+        1.1698
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -200,
+      "existing_historical_names": [
+        {
+          "date": "1901.1.1",
+          "name": "Ashford"
+        }
+      ],
+      "existing_meta_index": 14784,
+      "existing_meta_name": "Ashford",
+      "key": "Saltwood Tunnel Ashford-United Kingdom",
+      "known_aliases": [
+        "Saltwood Tunnel Ashford",
+        "saltwood tunnel ashford"
+      ],
+      "latest_year": 700,
+      "name": "Saltwood Tunnel Ashford",
+      "reason": "under_covered_history",
+      "region": "britain_ireland_early",
+      "sample_years": [
+        -200,
+        1,
+        200,
+        250,
+        400,
+        500,
+        600,
+        700
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.52589,
+        21.59622
+      ],
+      "country": "Greece",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Samikon/Samia-Greece",
+      "known_aliases": [
+        "Samikon/Samia",
+        "samikon/samia"
+      ],
+      "latest_year": 800,
+      "name": "Samikon/Samia",
+      "reason": "missing_entry",
+      "region": "byzantine_slavic_balkans",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.42851,
+        -7.27458
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "San Adrao de LourenzÃ¡-Spain",
+      "known_aliases": [
+        "San Adrao de LourenzÃ¡",
+        "san adrao de lourenzã¡"
+      ],
+      "latest_year": 800,
+      "name": "San Adrao de LourenzÃ¡",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.475,
+        12.4183
+      ],
+      "country": "Italy",
+      "earliest_year": -200,
+      "existing_historical_names": [
+        {
+          "date": "421.3.25",
+          "name": "Rivoalto"
+        },
+        {
+          "date": "810.1.1",
+          "name": "Venezia"
+        }
+      ],
+      "existing_meta_index": 7008,
+      "existing_meta_name": "Venezia",
+      "key": "San Francesco, Venice-Italy",
+      "known_aliases": [
+        "San Francesco, Venice",
+        "san francesco, venice"
+      ],
+      "latest_year": 700,
+      "name": "San Francesco, Venice",
+      "reason": "under_covered_history",
+      "region": "lombard_byzantine_italy",
+      "sample_years": [
+        -200,
+        1,
+        200,
+        250,
+        400,
+        500,
+        600,
+        700
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.99628,
+        -7.2124
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "San Lourenzo de Pentes-Spain",
+      "known_aliases": [
+        "San Lourenzo de Pentes",
+        "san lourenzo de pentes"
+      ],
+      "latest_year": 800,
+      "name": "San Lourenzo de Pentes",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.61358,
+        -3.98706
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "San Pedro de la Mata, Sonseca-Spain",
+      "known_aliases": [
+        "San Pedro de la Mata, Sonseca",
+        "san pedro de la mata, sonseca"
+      ],
+      "latest_year": 800,
+      "name": "San Pedro de la Mata, Sonseca",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.88629,
+        -7.56952
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [
+        {
+          "date": "-25.1.1",
+          "name": "Lucus Augusti"
+        },
+        {
+          "date": "550.1.1",
+          "name": "Lugo"
+        }
+      ],
+      "existing_meta_index": 6711,
+      "existing_meta_name": "Lugo",
+      "key": "San RomÃ¡n, Lugo-Spain",
+      "known_aliases": [
+        "San RomÃ¡n, Lugo",
+        "san romã¡n, lugo"
+      ],
+      "latest_year": 800,
+      "name": "San RomÃ¡n, Lugo",
+      "reason": "under_covered_history",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.80229,
+        -6.96173
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "San Telmo-Spain",
+      "known_aliases": [
+        "San Telmo",
+        "san telmo"
+      ],
+      "latest_year": 800,
+      "name": "San Telmo",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        55.8516,
+        -6.4107
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sanaigmore Warren Islay-United Kingdom",
+      "known_aliases": [
+        "Sanaigmore Warren Islay",
+        "sanaigmore warren islay"
+      ],
+      "latest_year": 600,
+      "name": "Sanaigmore Warren Islay",
+      "reason": "missing_entry",
+      "region": "britain_ireland_early",
+      "sample_years": [
+        -200,
+        1,
+        200,
+        250,
+        400,
+        500,
+        600
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        56.55258,
+        16.63935
+      ],
+      "country": "Sweden",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sandby borg, Sandby-Sweden",
+      "known_aliases": [
+        "Sandby borg, Sandby",
+        "sandby borg, sandby"
+      ],
+      "latest_year": 800,
+      "name": "Sandby borg, Sandby",
+      "reason": "missing_entry",
+      "region": "vendel_scandinavia_baltic",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        70.61506,
+        22.17809
+      ],
+      "country": "Norway",
+      "earliest_year": -200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sandvika-Norway",
+      "known_aliases": [
+        "Sandvika",
+        "sandvika"
+      ],
+      "latest_year": 700,
+      "name": "Sandvika",
+      "reason": "missing_entry",
+      "region": "vendel_scandinavia_baltic",
+      "sample_years": [
+        -200,
+        1,
+        200,
+        250,
+        400,
+        500,
+        600,
+        700
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    }
+  ]
+}

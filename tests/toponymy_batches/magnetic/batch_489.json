@@ -1,0 +1,924 @@
+{
+  "batch_index": 489,
+  "count": 30,
+  "project": "MAGNETIC",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        51.6015,
+        11.4891
+      ],
+      "country": "Germany",
+      "earliest_year": -1000,
+      "existing_historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Hettstedt"
+        }
+      ],
+      "existing_meta_index": 13087,
+      "existing_meta_name": "Hettstedt",
+      "key": "Hettstedt-Germany_2",
+      "known_aliases": [
+        "Hettstedt",
+        "hettstedt"
+      ],
+      "latest_year": -200,
+      "name": "Hettstedt",
+      "reason": "under_covered_history",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -1000,
+        -500,
+        -200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.79232,
+        5.8699
+      ],
+      "country": "Netherlands",
+      "earliest_year": -500,
+      "existing_historical_names": [
+        {
+          "date": "1840.1.1",
+          "name": "Heumen"
+        }
+      ],
+      "existing_meta_index": 9524,
+      "existing_meta_name": "Heumen",
+      "key": "Heumensoord, Heumen-Netherlands",
+      "known_aliases": [
+        "Heumensoord, Heumen",
+        "heumensoord, heumen",
+        "heumen-heumensoord",
+        "Heumen-Heumensoord"
+      ],
+      "latest_year": 500,
+      "name": "Heumensoord, Heumen",
+      "reason": "under_covered_history",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        53.54598,
+        -10.25813
+      ],
+      "country": "Ireland",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "High Island-Ireland",
+      "known_aliases": [
+        "High Island",
+        "high island"
+      ],
+      "latest_year": 1,
+      "name": "High Island",
+      "reason": "missing_entry",
+      "region": "hibernia_north_atlantic",
+      "sample_years": [
+        -500,
+        -200,
+        1
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        55.9334,
+        12.8333
+      ],
+      "country": "Sweden",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "HilleshÃ¶g; site: 6:5 (VKB 3:6)-Sweden",
+      "known_aliases": [
+        "HilleshÃ¶g; site: 6:5 (VKB 3:6)",
+        "hilleshã¶g; site: 6:5"
+      ],
+      "latest_year": -200,
+      "name": "HilleshÃ¶g; site: 6:5 (VKB 3:6)",
+      "reason": "missing_entry",
+      "region": "scandinavian_peninsula",
+      "sample_years": [
+        -1000,
+        -500,
+        -200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        54.45843,
+        -6.10071
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hillsborough-United Kingdom",
+      "known_aliases": [
+        "Hillsborough",
+        "hillsborough"
+      ],
+      "latest_year": 200,
+      "name": "Hillsborough",
+      "reason": "missing_entry",
+      "region": "hibernia_north_atlantic",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        55.567,
+        13.05
+      ],
+      "country": "Sweden",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hindby mosse-Sweden",
+      "known_aliases": [
+        "Hindby mosse",
+        "hindby mosse"
+      ],
+      "latest_year": 200,
+      "name": "Hindby mosse",
+      "reason": "missing_entry",
+      "region": "scandinavian_peninsula",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.2185,
+        6.61016
+      ],
+      "country": "Germany",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hinterhausen-Germany",
+      "known_aliases": [
+        "Hinterhausen",
+        "hinterhausen"
+      ],
+      "latest_year": 500,
+      "name": "Hinterhausen",
+      "reason": "missing_entry",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.23079,
+        6.76919
+      ],
+      "country": "Germany",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hinterweiler-Germany",
+      "known_aliases": [
+        "Hinterweiler",
+        "hinterweiler"
+      ],
+      "latest_year": 500,
+      "name": "Hinterweiler",
+      "reason": "missing_entry",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        55.0084,
+        9.8506
+      ],
+      "country": "Denmark",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hjortspring Mose-Denmark",
+      "known_aliases": [
+        "Hjortspring Mose",
+        "hjortspring mose"
+      ],
+      "latest_year": 200,
+      "name": "Hjortspring Mose",
+      "reason": "missing_entry",
+      "region": "denmark_jutland_isles",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.27391,
+        6.95312
+      ],
+      "country": "Germany",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hochkelberg, Kolverath-Germany",
+      "known_aliases": [
+        "Hochkelberg, Kolverath",
+        "hochkelberg, kolverath"
+      ],
+      "latest_year": 500,
+      "name": "Hochkelberg, Kolverath",
+      "reason": "missing_entry",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.85773,
+        6.03208
+      ],
+      "country": "Netherlands",
+      "earliest_year": -500,
+      "existing_historical_names": [
+        {
+          "date": "1840.1.1",
+          "name": "Kerkrade"
+        }
+      ],
+      "existing_meta_index": 9542,
+      "existing_meta_name": "Kerkrade",
+      "key": "Hoeve Overste Hof, Kerkrade-Netherlands",
+      "known_aliases": [
+        "Hoeve Overste Hof, Kerkrade",
+        "hoeve overste hof, kerkrade"
+      ],
+      "latest_year": 500,
+      "name": "Hoeve Overste Hof, Kerkrade",
+      "reason": "under_covered_history",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.08409,
+        7.97519
+      ],
+      "country": "Germany",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "HofkÃ¼hl, Kirchveischede-Germany",
+      "known_aliases": [
+        "HofkÃ¼hl, Kirchveischede",
+        "hofkã¼hl, kirchveischede"
+      ],
+      "latest_year": 500,
+      "name": "HofkÃ¼hl, Kirchveischede",
+      "reason": "missing_entry",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        69.037,
+        17.048
+      ],
+      "country": "Norway",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hofsøy-Norway",
+      "known_aliases": [
+        "Hofsøy",
+        "hofsøy"
+      ],
+      "latest_year": 200,
+      "name": "Hofsøy",
+      "reason": "missing_entry",
+      "region": "scandinavian_peninsula",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        59.025,
+        11.2333
+      ],
+      "country": "Sweden",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hogdal 410-Sweden",
+      "known_aliases": [
+        "Hogdal 410",
+        "hogdal 410"
+      ],
+      "latest_year": 1,
+      "name": "Hogdal 410",
+      "reason": "missing_entry",
+      "region": "scandinavian_peninsula",
+      "sample_years": [
+        -2500,
+        -1000,
+        -500,
+        -200,
+        1
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.9431,
+        9.9675
+      ],
+      "country": "Germany",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hohe Schanze-Germany",
+      "known_aliases": [
+        "Hohe Schanze",
+        "hohe schanze"
+      ],
+      "latest_year": -200,
+      "name": "Hohe Schanze",
+      "reason": "missing_entry",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -1000,
+        -500,
+        -200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.60615,
+        16.90493
+      ],
+      "country": "Austria",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hohenau an der March-Austria",
+      "known_aliases": [
+        "Hohenau an der March",
+        "hohenau an der march"
+      ],
+      "latest_year": 500,
+      "name": "Hohenau an der March",
+      "reason": "missing_entry",
+      "region": "bohemia_moravia_slovakia",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.24594,
+        6.74175
+      ],
+      "country": "Germany",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hohenfels-Germany",
+      "known_aliases": [
+        "Hohenfels",
+        "hohenfels"
+      ],
+      "latest_year": 500,
+      "name": "Hohenfels",
+      "reason": "missing_entry",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.35126,
+        9.36346
+      ],
+      "country": "Germany",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hohlestein-Germany",
+      "known_aliases": [
+        "Hohlestein",
+        "hohlestein"
+      ],
+      "latest_year": 500,
+      "name": "Hohlestein",
+      "reason": "missing_entry",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        69.6,
+        30.2
+      ],
+      "country": "Norway",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Holmfoss-Norway",
+      "known_aliases": [
+        "Holmfoss",
+        "holmfoss"
+      ],
+      "latest_year": -500,
+      "name": "Holmfoss",
+      "reason": "missing_entry",
+      "region": "scandinavian_peninsula",
+      "sample_years": [
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.7361,
+        6.7894
+      ],
+      "country": "Netherlands",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Holsloot-Netherlands",
+      "known_aliases": [
+        "Holsloot",
+        "holsloot"
+      ],
+      "latest_year": -1000,
+      "name": "Holsloot",
+      "reason": "missing_entry",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.67389,
+        6.93528
+      ],
+      "country": "Germany",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Holsterhausen-Germany",
+      "known_aliases": [
+        "Holsterhausen",
+        "holsterhausen"
+      ],
+      "latest_year": 500,
+      "name": "Holsterhausen",
+      "reason": "missing_entry",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.9811,
+        9.2284
+      ],
+      "country": "Germany",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "HoltebÃ¼ttel; site: 19-Germany",
+      "known_aliases": [
+        "HoltebÃ¼ttel; site: 19",
+        "holtebã¼ttel; site: 19"
+      ],
+      "latest_year": -1000,
+      "name": "HoltebÃ¼ttel; site: 19",
+      "reason": "missing_entry",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.88436,
+        6.06432
+      ],
+      "country": "Germany",
+      "earliest_year": -500,
+      "existing_historical_names": [
+        {
+          "date": "1840.1.1",
+          "name": "Kerkrade"
+        }
+      ],
+      "existing_meta_index": 9542,
+      "existing_meta_name": "Kerkrade",
+      "key": "Holzkuil, Kerkrade-Germany",
+      "known_aliases": [
+        "Holzkuil, Kerkrade",
+        "holzkuil, kerkrade"
+      ],
+      "latest_year": 500,
+      "name": "Holzkuil, Kerkrade",
+      "reason": "under_covered_history",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.95441,
+        6.11408
+      ],
+      "country": "Germany",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hommerschen-Germany",
+      "known_aliases": [
+        "Hommerschen",
+        "hommerschen"
+      ],
+      "latest_year": 500,
+      "name": "Hommerschen",
+      "reason": "missing_entry",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.00196,
+        6.18785
+      ],
+      "country": "Germany",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Honsdorf-Germany",
+      "known_aliases": [
+        "Honsdorf",
+        "honsdorf"
+      ],
+      "latest_year": 500,
+      "name": "Honsdorf",
+      "reason": "missing_entry",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.839,
+        14.5457
+      ],
+      "country": "Germany",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Horno; site: 8-Germany",
+      "known_aliases": [
+        "Horno; site: 8",
+        "horno; site: 8"
+      ],
+      "latest_year": -500,
+      "name": "Horno; site: 8",
+      "reason": "missing_entry",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        49.37555,
+        17.70035
+      ],
+      "country": "Czechia",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "HostÃ½n, ChvalÄov-Czechia",
+      "known_aliases": [
+        "HostÃ½n, ChvalÄov",
+        "hostã½n, chvaläov"
+      ],
+      "latest_year": 500,
+      "name": "HostÃ½n, ChvalÄov",
+      "reason": "missing_entry",
+      "region": "bohemia_moravia_slovakia",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.36145,
+        6.11555
+      ],
+      "country": "Netherlands",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hout-Blerick-Veldenkamp-Netherlands",
+      "known_aliases": [
+        "Hout-Blerick-Veldenkamp",
+        "hout-blerick-veldenkamp"
+      ],
+      "latest_year": 500,
+      "name": "Hout-Blerick-Veldenkamp",
+      "reason": "missing_entry",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.4333,
+        14.25
+      ],
+      "country": "Germany",
+      "earliest_year": -1000,
+      "existing_historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Hoyerswerda"
+        }
+      ],
+      "existing_meta_index": 13128,
+      "existing_meta_name": "Hoyerswerda",
+      "key": "Hoyerswerda-Germany_2",
+      "known_aliases": [
+        "Hoyerswerda",
+        "hoyerswerda"
+      ],
+      "latest_year": -200,
+      "name": "Hoyerswerda",
+      "reason": "under_covered_history",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -1000,
+        -500,
+        -200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.33989,
+        17.5639
+      ],
+      "country": "Slovakia",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "HrnÄiarovce-Slovakia",
+      "known_aliases": [
+        "HrnÄiarovce",
+        "hrnäiarovce",
+        "hrnčiarovce",
+        "Hrnčiarovce"
+      ],
+      "latest_year": 500,
+      "name": "HrnÄiarovce",
+      "reason": "missing_entry",
+      "region": "bohemia_moravia_slovakia",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    }
+  ]
+}

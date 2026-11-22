@@ -1,0 +1,827 @@
+{
+  "batch_index": 128,
+  "project": "MAGNETIC",
+  "settlements": [
+    {
+      "key": "Paimio-Finland",
+      "name": "Paimio",
+      "canonical_name": "Paimio",
+      "country": "Finland",
+      "coords_lat_lng": [
+        60.45671,
+        22.68694
+      ],
+      "earliest_year": -200,
+      "latest_year": 2025,
+      "existing_meta_index": 35979,
+      "known_aliases": [
+        "Paimio",
+        "paimio",
+        "pajmio",
+        "pemar",
+        "pa yi mi ao",
+        "Pajmio",
+        "Pemar"
+      ],
+      "historical_names": [
+        {
+          "date": "-200.1.1",
+          "name": "Paimio"
+        },
+        {
+          "date": "1880.1.1",
+          "name": "Paimio"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Paisley-United Kingdom",
+      "name": "Paisley",
+      "canonical_name": "Paisley",
+      "country": "United Kingdom",
+      "coords_lat_lng": [
+        55.83,
+        -4.43
+      ],
+      "earliest_year": 1100,
+      "latest_year": 2025,
+      "existing_meta_index": 7758,
+      "known_aliases": [
+        "Paisley",
+        "paisley",
+        "paislay",
+        "passelet",
+        "passeleth",
+        "passelay",
+        "Paislay",
+        "Passelet",
+        "Passeleth",
+        "Passelay"
+      ],
+      "historical_names": [
+        {
+          "date": "1100.1.1",
+          "name": "Paisley"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Pakkala-Finland",
+      "name": "Pakkala",
+      "canonical_name": "Pakkala",
+      "country": "Finland",
+      "coords_lat_lng": [
+        60.28613,
+        24.95733
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Pakkala",
+        "pakkala"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Pakkala"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Palaiseau-France",
+      "name": "Palaiseau",
+      "canonical_name": "Palaiseau",
+      "country": "France",
+      "coords_lat_lng": [
+        48.7155,
+        2.2293
+      ],
+      "earliest_year": 1800,
+      "latest_year": 2025,
+      "existing_meta_index": 9151,
+      "known_aliases": [
+        "Palaiseau",
+        "palaiseau"
+      ],
+      "historical_names": [
+        {
+          "date": "1809.1.1",
+          "name": "Palaiseau"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Palmers Green-United Kingdom",
+      "name": "Palmers Green",
+      "canonical_name": "Palmers Green",
+      "country": "United Kingdom",
+      "coords_lat_lng": [
+        51.61794,
+        -0.11012
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Palmers Green",
+        "palmers green"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Palmers Green"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Palmerstown-Ireland",
+      "name": "Palmerstown",
+      "canonical_name": "Palmerstown",
+      "country": "Ireland",
+      "coords_lat_lng": [
+        53.35019,
+        -6.37778
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Palmerstown",
+        "palmerstown",
+        "baile phamar",
+        "baile phámar",
+        "palmerstaun",
+        "Baile Phamar",
+        "Baile Phámar",
+        "Palmerstaun"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Palmerstown"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Paltamo-Finland",
+      "name": "Paltamo",
+      "canonical_name": "Paltamo",
+      "country": "Finland",
+      "coords_lat_lng": [
+        64.41667,
+        27.83333
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Paltamo",
+        "paltamo",
+        "палтамо",
+        "Палтамо"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Paltamo"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Pamel-Belgium",
+      "name": "Pamel",
+      "canonical_name": "Pamel",
+      "country": "Belgium",
+      "coords_lat_lng": [
+        50.8453,
+        4.07129
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": 30319,
+      "known_aliases": [
+        "Pamel",
+        "pamel",
+        "roosdaal",
+        "Roosdaal"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Pamel"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Pameče-Slovenia",
+      "name": "Pameče",
+      "canonical_name": "Pameče",
+      "country": "Slovenia",
+      "coords_lat_lng": [
+        46.53417,
+        15.07917
+      ],
+      "earliest_year": 1950,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Pameče",
+        "pameče",
+        "pamece",
+        "Pamece"
+      ],
+      "historical_names": [
+        {
+          "date": "1950.1.1",
+          "name": "Pameče"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Panazol-France",
+      "name": "Panazol",
+      "canonical_name": "Panazol",
+      "country": "France",
+      "coords_lat_lng": [
+        45.8447,
+        1.3227
+      ],
+      "earliest_year": 1800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Panazol",
+        "panazol"
+      ],
+      "historical_names": [
+        {
+          "date": "1800.1.1",
+          "name": "Panazol"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Pankow-Germany",
+      "name": "Pankow",
+      "canonical_name": "Pankow",
+      "country": "Germany",
+      "coords_lat_lng": [
+        52.56926,
+        13.40186
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": 10857,
+      "known_aliases": [
+        "Pankow",
+        "pankow",
+        "pankov",
+        "pankw",
+        "pnqw",
+        "Pankov"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Pankow"
+        },
+        {
+          "date": "1890.1.1",
+          "name": "Pankow"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Pansio-Finland",
+      "name": "Pansio",
+      "canonical_name": "Pansio",
+      "country": "Finland",
+      "coords_lat_lng": [
+        60.44728,
+        22.16402
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Pansio",
+        "pansio"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Pansio"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Papenburg-Germany",
+      "name": "Papenburg",
+      "canonical_name": "Papenburg",
+      "country": "Germany",
+      "coords_lat_lng": [
+        53.07769,
+        7.41516
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": 10377,
+      "known_aliases": [
+        "Papenburg",
+        "papenburg",
+        "papenbourg",
+        "papenburgo",
+        "babnbwrgh",
+        "Papenbourg",
+        "Papenburgo"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Papenburg"
+        },
+        {
+          "date": "1875.1.1",
+          "name": "Papenburg"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Papendrecht-Netherlands",
+      "name": "Papendrecht",
+      "canonical_name": "Papendrecht",
+      "country": "Netherlands",
+      "coords_lat_lng": [
+        51.83167,
+        4.6875
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": 9619,
+      "known_aliases": [
+        "Papendrecht",
+        "papendrecht",
+        "papendrekht",
+        "papendrext",
+        "pa peng de lei he te",
+        "pendrecht",
+        "Papendrekht",
+        "Papendrext",
+        "Pendrecht"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Papendrecht"
+        },
+        {
+          "date": "1840.1.1",
+          "name": "Papendrecht"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Par-United Kingdom",
+      "name": "Par",
+      "canonical_name": "Par",
+      "country": "United Kingdom",
+      "coords_lat_lng": [
+        50.35107,
+        -4.70288
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Par",
+        "par",
+        "pcw",
+        "PCW"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Par"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Paray-Vieille-Poste-France",
+      "name": "Paray-Vieille-Poste",
+      "canonical_name": "Paray-Vieille-Poste",
+      "country": "France",
+      "coords_lat_lng": [
+        48.7239,
+        2.3577
+      ],
+      "earliest_year": 1800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Paray-Vieille-Poste",
+        "paray-vieille-poste"
+      ],
+      "historical_names": [
+        {
+          "date": "1800.1.1",
+          "name": "Paray-Vieille-Poste"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Paray-le-Monial-France",
+      "name": "Paray-le-Monial",
+      "canonical_name": "Paray-le-Monial",
+      "country": "France",
+      "coords_lat_lng": [
+        46.4429,
+        4.1115
+      ],
+      "earliest_year": 1800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Paray-le-Monial",
+        "paray-le-monial"
+      ],
+      "historical_names": [
+        {
+          "date": "1800.1.1",
+          "name": "Paray-le-Monial"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Parchim-Germany",
+      "name": "Parchim",
+      "canonical_name": "Parchim",
+      "country": "Germany",
+      "coords_lat_lng": [
+        53.42631,
+        11.84875
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": 10378,
+      "known_aliases": [
+        "Parchim",
+        "parchim",
+        "parhima",
+        "parkhim",
+        "szw",
+        "Parhima",
+        "Parkhim",
+        "SZW"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Parchim"
+        },
+        {
+          "date": "1875.1.1",
+          "name": "Parchim"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Parempuyre-France",
+      "name": "Parempuyre",
+      "canonical_name": "Parempuyre",
+      "country": "France",
+      "coords_lat_lng": [
+        44.9548,
+        -0.5844
+      ],
+      "earliest_year": 1800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Parempuyre",
+        "parempuyre"
+      ],
+      "historical_names": [
+        {
+          "date": "1800.1.1",
+          "name": "Parempuyre"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Parikkala-Finland",
+      "name": "Parikkala",
+      "canonical_name": "Parikkala",
+      "country": "Finland",
+      "coords_lat_lng": [
+        61.55,
+        29.5
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Parikkala",
+        "parikkala",
+        "париккала",
+        "Париккала"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Parikkala"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Parkano-Finland",
+      "name": "Parkano",
+      "canonical_name": "Parkano",
+      "country": "Finland",
+      "coords_lat_lng": [
+        62.01667,
+        23.01667
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": 35981,
+      "known_aliases": [
+        "Parkano",
+        "parkano",
+        "parkano linn",
+        "pa er ka nuo",
+        "parkanw",
+        "Parkano linn"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Parkano"
+        },
+        {
+          "date": "1880.1.1",
+          "name": "Parkano"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Parkstone-United Kingdom",
+      "name": "Parkstone",
+      "canonical_name": "Parkstone",
+      "country": "United Kingdom",
+      "coords_lat_lng": [
+        50.72994,
+        -1.94492
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Parkstone",
+        "parkstone"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Parkstone"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Parthenay-France",
+      "name": "Parthenay",
+      "canonical_name": "Parthenay",
+      "country": "France",
+      "coords_lat_lng": [
+        46.6458,
+        -0.235
+      ],
+      "earliest_year": 1800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Parthenay",
+        "parthenay"
+      ],
+      "historical_names": [
+        {
+          "date": "1800.1.1",
+          "name": "Parthenay"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Partille-Sweden",
+      "name": "Partille",
+      "canonical_name": "Partille",
+      "country": "Sweden",
+      "coords_lat_lng": [
+        57.7395,
+        12.10642
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": 11891,
+      "known_aliases": [
+        "Partille",
+        "partille"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Partille"
+        },
+        {
+          "date": "1898.1.1",
+          "name": "Partille"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Pasaia-Spain",
+      "name": "Pasaia",
+      "canonical_name": "Pasaia",
+      "country": "Spain",
+      "coords_lat_lng": [
+        43.3253,
+        -1.92707
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": 13907,
+      "known_aliases": [
+        "Pasaia",
+        "pasaia"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Pasaia"
+        },
+        {
+          "date": "1900.1.1",
+          "name": "Pasaia"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Pasewalk-Germany",
+      "name": "Pasewalk",
+      "canonical_name": "Pasewalk",
+      "country": "Germany",
+      "coords_lat_lng": [
+        53.50627,
+        13.98997
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Pasewalk",
+        "pasewalk",
+        "pazeval'k",
+        "pazevalk",
+        "pazevalka",
+        "Pazeval'k",
+        "Pazevalk",
+        "Pazevalka"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Pasewalk"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Pasing-Germany",
+      "name": "Pasing",
+      "canonical_name": "Pasing",
+      "country": "Germany",
+      "coords_lat_lng": [
+        48.14146,
+        11.45599
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Pasing",
+        "pasing"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Pasing"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Passy-France",
+      "name": "Passy",
+      "canonical_name": "Passy",
+      "country": "France",
+      "coords_lat_lng": [
+        45.9579,
+        6.7507
+      ],
+      "earliest_year": 1800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Passy",
+        "passy"
+      ],
+      "historical_names": [
+        {
+          "date": "1800.1.1",
+          "name": "Passy"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Pateniemi-Finland",
+      "name": "Pateniemi",
+      "canonical_name": "Pateniemi",
+      "country": "Finland",
+      "coords_lat_lng": [
+        65.07936,
+        25.40889
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Pateniemi",
+        "pateniemi",
+        "patenniemi",
+        "Patenniemi"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Pateniemi"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Pattensen-Germany",
+      "name": "Pattensen",
+      "canonical_name": "Pattensen",
+      "country": "Germany",
+      "coords_lat_lng": [
+        52.26448,
+        9.76436
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Pattensen",
+        "pattensen",
+        "patenzen",
+        "pattenzen",
+        "pattjehiusen",
+        "Patenzen",
+        "Pattenzen",
+        "Pattjehiusen"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Pattensen"
+        }
+      ],
+      "verified_settlement": true
+    }
+  ]
+}

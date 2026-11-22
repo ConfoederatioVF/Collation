@@ -1,0 +1,964 @@
+{
+  "batch_index": 352,
+  "count": 30,
+  "project": "MAGNETIC",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        41.16972,
+        9.28235
+      ],
+      "country": "Italy",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Turublum Minus-Italy",
+      "known_aliases": [
+        "Turublum Minus",
+        "turublum minus"
+      ],
+      "latest_year": 1347,
+      "name": "Turublum Minus",
+      "reason": "missing_entry",
+      "region": "italy_central_south_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.41925,
+        11.87028
+      ],
+      "country": "Italy",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tuscana-Italy",
+      "known_aliases": [
+        "Tuscana",
+        "tuscana"
+      ],
+      "latest_year": 1347,
+      "name": "Tuscana",
+      "reason": "missing_entry",
+      "region": "italy_central_south_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.09399,
+        7.15481
+      ],
+      "country": "Switzerland",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Twann-Switzerland",
+      "known_aliases": [
+        "Twann",
+        "twann"
+      ],
+      "latest_year": 1347,
+      "name": "Twann",
+      "reason": "missing_entry",
+      "region": "hre_south_alpine",
+      "sample_years": [
+        -2500,
+        900,
+        1200,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.14272,
+        15.04456
+      ],
+      "country": "Italy",
+      "earliest_year": 800,
+      "existing_historical_names": [
+        {
+          "date": "-395.1.1",
+          "name": "Tyndaris"
+        }
+      ],
+      "existing_meta_index": 33752,
+      "existing_meta_name": "Tyndaris",
+      "key": "Tyndaris-Italy",
+      "known_aliases": [
+        "Tyndaris",
+        "tyndaris"
+      ],
+      "latest_year": 1347,
+      "name": "Tyndaris",
+      "reason": "under_covered_history",
+      "region": "italy_central_south_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.52905,
+        15.11322
+      ],
+      "country": "Italy",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ulixis Portus-Italy",
+      "known_aliases": [
+        "Ulixis Portus",
+        "ulixis portus"
+      ],
+      "latest_year": 1347,
+      "name": "Ulixis Portus",
+      "reason": "missing_entry",
+      "region": "italy_central_south_med",
+      "sample_years": [
+        -500,
+        400,
+        900,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.12075,
+        9.23644
+      ],
+      "country": "Germany",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ungedanken-Germany",
+      "known_aliases": [
+        "Ungedanken",
+        "ungedanken"
+      ],
+      "latest_year": 1347,
+      "name": "Ungedanken",
+      "reason": "missing_entry",
+      "region": "hre_south_alpine",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.69531,
+        1.35807
+      ],
+      "country": "France",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Unnamed Gallo-Roman villa (Antone, Cm. Pierre-Buffière)-France",
+      "known_aliases": [
+        "Unnamed Gallo-Roman villa (Antone, Cm. Pierre-Buffière)",
+        "unnamed gallo-roman villa"
+      ],
+      "latest_year": 1347,
+      "name": "Unnamed Gallo-Roman villa (Antone, Cm. Pierre-Buffière)",
+      "reason": "missing_entry",
+      "region": "france_south_occitania",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.35516,
+        1.42687
+      ],
+      "country": "France",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Unnamed Gallo-Roman villa (Granéjouls)-France",
+      "known_aliases": [
+        "Unnamed Gallo-Roman villa (Granéjouls)",
+        "unnamed gallo-roman villa",
+        "Unnamed Gallo-Roman villa (Montlauzun)"
+      ],
+      "latest_year": 1347,
+      "name": "Unnamed Gallo-Roman villa (Granéjouls)",
+      "reason": "missing_entry",
+      "region": "france_south_occitania",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.28788,
+        0.23283
+      ],
+      "country": "France",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Unnamed Gallo-Roman villa (Petit-Bersac)-France",
+      "known_aliases": [
+        "Unnamed Gallo-Roman villa (Petit-Bersac)",
+        "unnamed gallo-roman villa"
+      ],
+      "latest_year": 1347,
+      "name": "Unnamed Gallo-Roman villa (Petit-Bersac)",
+      "reason": "missing_entry",
+      "region": "france_south_occitania",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.30524,
+        0.06977
+      ],
+      "country": "France",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Unnamed Roman villa-France",
+      "known_aliases": [
+        "Unnamed Roman villa",
+        "unnamed roman villa"
+      ],
+      "latest_year": 1347,
+      "name": "Unnamed Roman villa",
+      "reason": "missing_entry",
+      "region": "france_north_royal",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.00706,
+        1.09263
+      ],
+      "country": "France",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Unnamed Villa in Castelferrus-France",
+      "known_aliases": [
+        "Unnamed Villa in Castelferrus",
+        "unnamed villa in castelferrus"
+      ],
+      "latest_year": 1347,
+      "name": "Unnamed Villa in Castelferrus",
+      "reason": "missing_entry",
+      "region": "france_south_occitania",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.30446,
+        1.91095
+      ],
+      "country": "France",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Unnamed settlement at Sampuy-France",
+      "known_aliases": [
+        "Unnamed settlement at Sampuy",
+        "unnamed settlement at sampuy"
+      ],
+      "latest_year": 1347,
+      "name": "Unnamed settlement at Sampuy",
+      "reason": "missing_entry",
+      "region": "france_north_royal",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.7431,
+        12.40196
+      ],
+      "country": "Italy",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Unnamed tuff quarry-Italy",
+      "known_aliases": [
+        "Unnamed tuff quarry",
+        "unnamed tuff quarry"
+      ],
+      "latest_year": 1347,
+      "name": "Unnamed tuff quarry",
+      "reason": "missing_entry",
+      "region": "italy_central_south_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.80704,
+        1.04304
+      ],
+      "country": "France",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Unnamed villa in Martizay-France",
+      "known_aliases": [
+        "Unnamed villa in Martizay",
+        "unnamed villa in martizay"
+      ],
+      "latest_year": 1347,
+      "name": "Unnamed villa in Martizay",
+      "reason": "missing_entry",
+      "region": "france_north_royal",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.65366,
+        0.83261
+      ],
+      "country": "France",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Unnamed villa-France",
+      "known_aliases": [
+        "Unnamed villa",
+        "unnamed villa"
+      ],
+      "latest_year": 1347,
+      "name": "Unnamed villa",
+      "reason": "missing_entry",
+      "region": "france_south_occitania",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.28772,
+        -0.39089
+      ],
+      "country": "France",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Untitled (france_south_o)-France",
+      "known_aliases": [
+        "Untitled",
+        "untitled"
+      ],
+      "latest_year": 1347,
+      "name": "Untitled",
+      "reason": "missing_entry",
+      "region": "france_south_occitania",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.96939,
+        -0.18562
+      ],
+      "country": "France",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Untitled-France",
+      "known_aliases": [
+        "Untitled",
+        "untitled"
+      ],
+      "latest_year": 1347,
+      "name": "Untitled",
+      "reason": "missing_entry",
+      "region": "france_south_occitania",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.8338,
+        12.67346
+      ],
+      "country": "Italy",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Untitled-Italy",
+      "known_aliases": [
+        "Untitled",
+        "untitled"
+      ],
+      "latest_year": 1347,
+      "name": "Untitled",
+      "reason": "missing_entry",
+      "region": "italy_central_south_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.72468,
+        6.53095
+      ],
+      "country": "Switzerland",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Urba-Switzerland",
+      "known_aliases": [
+        "Urba",
+        "urba"
+      ],
+      "latest_year": 1347,
+      "name": "Urba",
+      "reason": "missing_entry",
+      "region": "hre_south_alpine",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.9847,
+        12.52495
+      ],
+      "country": "Italy",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Urvinum Hortense-Italy",
+      "known_aliases": [
+        "Urvinum Hortense",
+        "urvinum hortense"
+      ],
+      "latest_year": 1347,
+      "name": "Urvinum Hortense",
+      "reason": "missing_entry",
+      "region": "italy_central_south_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.80965,
+        8.85073
+      ],
+      "country": "Italy",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Usel(l)is-Italy",
+      "known_aliases": [
+        "Usel(l)is",
+        "uselis"
+      ],
+      "latest_year": 1347,
+      "name": "Usel(l)is",
+      "reason": "missing_entry",
+      "region": "italy_central_south_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.20119,
+        2.75926
+      ],
+      "country": "France",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Usuerva-France",
+      "known_aliases": [
+        "Usuerva",
+        "usuerva"
+      ],
+      "latest_year": 1347,
+      "name": "Usuerva",
+      "reason": "missing_entry",
+      "region": "france_south_occitania",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.92632,
+        18.15743
+      ],
+      "country": "Italy",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Uzentum/Ouxenton-Italy",
+      "known_aliases": [
+        "Uzentum/Ouxenton",
+        "uzentum/ouxenton"
+      ],
+      "latest_year": 1347,
+      "name": "Uzentum/Ouxenton",
+      "reason": "missing_entry",
+      "region": "italy_central_south_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.26936,
+        8.43576
+      ],
+      "country": "Italy",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Vada Sabatia-Italy",
+      "known_aliases": [
+        "Vada Sabatia",
+        "vada sabatia"
+      ],
+      "latest_year": 1347,
+      "name": "Vada Sabatia",
+      "reason": "missing_entry",
+      "region": "italy_north_communes",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.35944,
+        10.44801
+      ],
+      "country": "Italy",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Vada Volaterrana-Italy",
+      "known_aliases": [
+        "Vada Volaterrana",
+        "vada volaterrana"
+      ],
+      "latest_year": 1347,
+      "name": "Vada Volaterrana",
+      "reason": "missing_entry",
+      "region": "italy_central_south_med",
+      "sample_years": [
+        -500,
+        400,
+        900,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.04053,
+        16.88301
+      ],
+      "country": "Italy",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Valenzano-Italy",
+      "known_aliases": [
+        "Valenzano",
+        "valenzano"
+      ],
+      "latest_year": 1347,
+      "name": "Valenzano",
+      "reason": "missing_entry",
+      "region": "italy_central_south_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.50732,
+        18.03187
+      ],
+      "country": "Italy",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Valetium/Balesium-Italy",
+      "known_aliases": [
+        "Valetium/Balesium",
+        "valetium/balesium"
+      ],
+      "latest_year": 1347,
+      "name": "Valetium/Balesium",
+      "reason": "missing_entry",
+      "region": "italy_central_south_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.2566,
+        4.64763
+      ],
+      "country": "France",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Vallis Clara-France",
+      "known_aliases": [
+        "Vallis Clara",
+        "vallis clara"
+      ],
+      "latest_year": 1347,
+      "name": "Vallis Clara",
+      "reason": "missing_entry",
+      "region": "france_south_occitania",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.08329,
+        8.44438
+      ],
+      "country": "Italy",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Vardagate-Italy",
+      "known_aliases": [
+        "Vardagate",
+        "vardagate"
+      ],
+      "latest_year": 1347,
+      "name": "Vardagate",
+      "reason": "missing_entry",
+      "region": "italy_north_communes",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.01819,
+        12.89619
+      ],
+      "country": "Italy",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Varia-Italy",
+      "known_aliases": [
+        "Varia",
+        "varia"
+      ],
+      "latest_year": 1347,
+      "name": "Varia",
+      "reason": "missing_entry",
+      "region": "italy_central_south_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    }
+  ]
+}

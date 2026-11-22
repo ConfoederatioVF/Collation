@@ -1,0 +1,902 @@
+{
+  "batch_index": 89,
+  "project": "MAGNETIC",
+  "settlements": [
+    {
+      "key": "Kungsbacka-Sweden",
+      "name": "Kungsbacka",
+      "canonical_name": "Kungsbacka",
+      "country": "Sweden",
+      "coords_lat_lng": [
+        57.48719,
+        12.07612
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": 11821,
+      "known_aliases": [
+        "Kungsbacka",
+        "kungsbacka",
+        "kungsbacka skene",
+        "kungsbaka",
+        "kungsbakka",
+        "Kungsbacka Skene",
+        "Kungsbaka",
+        "Kungsbakka"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Kungsbacka"
+        },
+        {
+          "date": "1898.1.1",
+          "name": "Kungsbacka"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Kungsängen-Sweden",
+      "name": "Kungsängen",
+      "canonical_name": "Kungsängen",
+      "country": "Sweden",
+      "coords_lat_lng": [
+        59.47857,
+        17.74834
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Kungsängen",
+        "kungsängen",
+        "kungsengen",
+        "kwngsngn",
+        "кунгсенген",
+        "Kungsengen",
+        "Кунгсенген"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Kungsängen"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Kungälv-Sweden",
+      "name": "Kungälv",
+      "canonical_name": "Kungälv",
+      "country": "Sweden",
+      "coords_lat_lng": [
+        57.87096,
+        11.98054
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": 16082,
+      "known_aliases": [
+        "Kungälv",
+        "kungälv",
+        "konghelle",
+        "kungaelv",
+        "kungahaella",
+        "Konghelle",
+        "Kungaelv",
+        "Kungahaella"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Kungälv"
+        },
+        {
+          "date": "1908.1.1",
+          "name": "Kungälv"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Kuortane-Finland",
+      "name": "Kuortane",
+      "canonical_name": "Kuortane",
+      "country": "Finland",
+      "coords_lat_lng": [
+        62.8,
+        23.5
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Kuortane",
+        "kuortane",
+        "куортане",
+        "Куортане"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Kuortane"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Kurikka-Finland",
+      "name": "Kurikka",
+      "canonical_name": "Kurikka",
+      "country": "Finland",
+      "coords_lat_lng": [
+        62.61667,
+        22.41667
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": 13363,
+      "known_aliases": [
+        "Kurikka",
+        "kurikka",
+        "курикка",
+        "Курикка"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Kurikka"
+        },
+        {
+          "date": "1900.1.1",
+          "name": "Kurikka"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Kuru-Finland",
+      "name": "Kuru",
+      "canonical_name": "Kuru",
+      "country": "Finland",
+      "coords_lat_lng": [
+        61.87558,
+        23.71948
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Kuru",
+        "kuru"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Kuru"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Kuusamo-Finland",
+      "name": "Kuusamo",
+      "canonical_name": "Kuusamo",
+      "country": "Finland",
+      "coords_lat_lng": [
+        65.96447,
+        29.18878
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": 13366,
+      "known_aliases": [
+        "Kuusamo",
+        "kuusamo",
+        "guossan",
+        "guossán",
+        "kao",
+        "Guossan",
+        "Guossán",
+        "KAO"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Kuusamo"
+        },
+        {
+          "date": "1900.1.1",
+          "name": "Kuusamo"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Kuusimäki-Finland",
+      "name": "Kuusimäki",
+      "canonical_name": "Kuusimäki",
+      "country": "Finland",
+      "coords_lat_lng": [
+        61.05029,
+        28.14033
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Kuusimäki",
+        "kuusimäki",
+        "kuusimjaki",
+        "куусимяки",
+        "Kuusimjaki",
+        "Куусимяки"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Kuusimäki"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Kuusjoki-Finland",
+      "name": "Kuusjoki",
+      "canonical_name": "Kuusjoki",
+      "country": "Finland",
+      "coords_lat_lng": [
+        60.51667,
+        23.2
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Kuusjoki",
+        "kuusjoki",
+        "куусйоки",
+        "Куусйоки"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Kuusjoki"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Kvinesdal-Norway",
+      "name": "Kvinesdal",
+      "canonical_name": "Kvinesdal",
+      "country": "Norway",
+      "coords_lat_lng": [
+        58.31215,
+        6.96187
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Kvinesdal",
+        "kvinesdal",
+        "kvinesdal kommun",
+        "Kvinesdal kommun"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Kvinesdal"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Kvissleby-Sweden",
+      "name": "Kvissleby",
+      "canonical_name": "Kvissleby",
+      "country": "Sweden",
+      "coords_lat_lng": [
+        62.29361,
+        17.375
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Kvissleby",
+        "kvissleby",
+        "kvislebj",
+        "kvissle",
+        "kvisslebi",
+        "Kvislebj",
+        "Kvissle",
+        "Kvisslebi"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Kvissleby"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Kylmäkoski-Finland",
+      "name": "Kylmäkoski",
+      "canonical_name": "Kylmäkoski",
+      "country": "Finland",
+      "coords_lat_lng": [
+        61.154,
+        23.68858
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Kylmäkoski",
+        "kylmäkoski",
+        "kjul'mjakoski",
+        "кюльмякоски",
+        "Kjul'mjakoski",
+        "Кюльмякоски"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Kylmäkoski"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Kyrksæterøra-Norway",
+      "name": "Kyrksæterøra",
+      "canonical_name": "Kyrksæterøra",
+      "country": "Norway",
+      "coords_lat_lng": [
+        63.29057,
+        9.08909
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Kyrksæterøra",
+        "kyrksæterøra",
+        "kirksaeteroren",
+        "kirksaeterören",
+        "kyrksaeterora",
+        "Kirksaeteroren",
+        "Kirksaeterören",
+        "Kyrksaeterora"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Kyrksæterøra"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Kárášjohka-Norway",
+      "name": "Kárášjohka",
+      "canonical_name": "Kárášjohka",
+      "country": "Norway",
+      "coords_lat_lng": [
+        69.47187,
+        25.51122
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Kárášjohka",
+        "kárášjohka",
+        "karasjohka",
+        "karasjok",
+        "qkk",
+        "Karasjohka",
+        "Karasjok",
+        "QKK"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Kárášjohka"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Kälviä-Finland",
+      "name": "Kälviä",
+      "canonical_name": "Kälviä",
+      "country": "Finland",
+      "coords_lat_lng": [
+        63.86067,
+        23.45289
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Kälviä",
+        "kälviä",
+        "kaelviae",
+        "kelvia",
+        "kelviå",
+        "Kaelviae",
+        "Kelvia",
+        "Kelviå"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Kälviä"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Kämmenniemi-Finland",
+      "name": "Kämmenniemi",
+      "canonical_name": "Kämmenniemi",
+      "country": "Finland",
+      "coords_lat_lng": [
+        61.62982,
+        23.83724
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Kämmenniemi",
+        "kämmenniemi",
+        "kaemmenniemi",
+        "kjammenniemi",
+        "кямменниеми",
+        "Kaemmenniemi",
+        "Kjammenniemi",
+        "Кямменниеми"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Kämmenniemi"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Kärkölä-Finland",
+      "name": "Kärkölä",
+      "canonical_name": "Kärkölä",
+      "country": "Finland",
+      "coords_lat_lng": [
+        60.61292,
+        23.94196
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Kärkölä",
+        "kärkölä",
+        "karkala",
+        "karkola",
+        "kjarkela",
+        "Karkala",
+        "Karkola",
+        "Kjarkela"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Kärkölä"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Kärsämäki (mod_finland)-Finland",
+      "name": "Kärsämäki",
+      "canonical_name": "Kärsämäki",
+      "country": "Finland",
+      "coords_lat_lng": [
+        60.4857,
+        22.28904
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Kärsämäki",
+        "kärsämäki"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Kärsämäki"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Kärsämäki-Finland",
+      "name": "Kärsämäki",
+      "canonical_name": "Kärsämäki",
+      "country": "Finland",
+      "coords_lat_lng": [
+        63.96667,
+        25.76667
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Kärsämäki",
+        "kärsämäki",
+        "kaersaemaeki",
+        "kjarsjamjaki",
+        "кярсямяки",
+        "Kaersaemaeki",
+        "Kjarsjamjaki",
+        "Кярсямяки"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Kärsämäki"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Kävlinge-Sweden",
+      "name": "Kävlinge",
+      "canonical_name": "Kävlinge",
+      "country": "Sweden",
+      "coords_lat_lng": [
+        55.79188,
+        13.11021
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": 11805,
+      "known_aliases": [
+        "Kävlinge",
+        "kävlinge",
+        "shevlinge",
+        "shwlynyh",
+        "шевлинге",
+        "Shevlinge",
+        "Шевлинге"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Kävlinge"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Königs Wusterhausen-Germany",
+      "name": "Königs Wusterhausen",
+      "canonical_name": "Königs Wusterhausen",
+      "country": "Germany",
+      "coords_lat_lng": [
+        52.30141,
+        13.633
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Königs Wusterhausen",
+        "königs wusterhausen",
+        "kenigs vusterkhauzen",
+        "kenigs-vusterkhauzen",
+        "kenigsvusterhauzene",
+        "Kenigs Vusterkhauzen",
+        "Kenigs-Vusterkhauzen",
+        "Kenigsvusterhauzene"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Königs Wusterhausen"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Königsbrunn-Germany",
+      "name": "Königsbrunn",
+      "canonical_name": "Königsbrunn",
+      "country": "Germany",
+      "coords_lat_lng": [
+        48.27506,
+        10.89178
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": 13320,
+      "known_aliases": [
+        "Königsbrunn",
+        "königsbrunn",
+        "kenigsbrun",
+        "kenigsbrunn",
+        "kjonigsbrunn",
+        "Kenigsbrun",
+        "Kenigsbrunn",
+        "Kjonigsbrunn"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Königsbrunn"
+        },
+        {
+          "date": "1900.1.1",
+          "name": "Königsbrunn"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Königslutter am Elm-Germany",
+      "name": "Königslutter am Elm",
+      "canonical_name": "Königslutter am Elm",
+      "country": "Germany",
+      "coords_lat_lng": [
+        52.25116,
+        10.81683
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Königslutter am Elm",
+        "königslutter am elm",
+        "kenigsluter am elm",
+        "kjonigslutehr-na-ehl'me",
+        "kjonigslutter-am-ehl'm",
+        "Kenigsluter am Elm",
+        "Kjonigslutehr-na-Ehl'me",
+        "Kjonigslutter-am-Ehl'm"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Königslutter am Elm"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Königstein im Taunus-Germany",
+      "name": "Königstein im Taunus",
+      "canonical_name": "Königstein im Taunus",
+      "country": "Germany",
+      "coords_lat_lng": [
+        50.17943,
+        8.47132
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": 31341,
+      "known_aliases": [
+        "Königstein im Taunus",
+        "königstein im taunus",
+        "kenigshtajn na taunusu",
+        "kenigshtajn-im-taunus",
+        "kjonigshtajn",
+        "Kenigshtajn na Taunusu",
+        "Kenigshtajn-im-Taunus",
+        "Kjonigshtajn"
+      ],
+      "historical_names": [
+        {
+          "date": "1505.8.6",
+          "name": "Königstein im Taunus"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Köpenick-Germany",
+      "name": "Köpenick",
+      "canonical_name": "Köpenick",
+      "country": "Germany",
+      "coords_lat_lng": [
+        52.4455,
+        13.57455
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": 10357,
+      "known_aliases": [
+        "Köpenick",
+        "köpenick",
+        "berlin-koepenick",
+        "berlin-köpenick",
+        "copenicum",
+        "Berlin-Koepenick",
+        "Berlin-Köpenick",
+        "Copenicum"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Köpenick"
+        },
+        {
+          "date": "1875.1.1",
+          "name": "Köpenick"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Köping-Sweden",
+      "name": "Köping",
+      "canonical_name": "Köping",
+      "country": "Sweden",
+      "coords_lat_lng": [
+        59.51404,
+        15.99255
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": 11816,
+      "known_aliases": [
+        "Köping",
+        "köping",
+        "koeping",
+        "koping",
+        "køping",
+        "Koeping",
+        "Koping",
+        "Køping"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Köping"
+        },
+        {
+          "date": "1898.1.1",
+          "name": "Köping"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Körmend-Hungary",
+      "name": "Körmend",
+      "canonical_name": "Körmend",
+      "country": "Hungary",
+      "coords_lat_lng": [
+        47.01096,
+        16.60596
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": 13323,
+      "known_aliases": [
+        "Körmend",
+        "körmend"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Körmend"
+        },
+        {
+          "date": "1900.1.1",
+          "name": "Körmend"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Köyliö-Finland",
+      "name": "Köyliö",
+      "canonical_name": "Köyliö",
+      "country": "Finland",
+      "coords_lat_lng": [
+        61.1191,
+        22.30976
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Köyliö",
+        "köyliö",
+        "kjojulijo",
+        "kjulo",
+        "koeylioe",
+        "Kjojulijo",
+        "Kjulo",
+        "Koeylioe"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Köyliö"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Køge-Denmark",
+      "name": "Køge",
+      "canonical_name": "Køge",
+      "country": "Denmark",
+      "coords_lat_lng": [
+        55.45802,
+        12.18214
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": 15315,
+      "known_aliases": [
+        "Køge",
+        "køge",
+        "kege",
+        "keje",
+        "kioge",
+        "Kege",
+        "Keje",
+        "Kioge"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Køge"
+        },
+        {
+          "date": "1901.1.1",
+          "name": "Køge"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Kümmersbruck-Germany",
+      "name": "Kümmersbruck",
+      "canonical_name": "Kümmersbruck",
+      "country": "Germany",
+      "coords_lat_lng": [
+        49.41917,
+        11.88833
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Kümmersbruck",
+        "kümmersbruck",
+        "kimersbruk",
+        "kjummersbruk",
+        "kuemmersbruck",
+        "Kimersbruk",
+        "Kjummersbruk",
+        "Kuemmersbruck"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Kümmersbruck"
+        }
+      ],
+      "verified_settlement": true
+    }
+  ]
+}

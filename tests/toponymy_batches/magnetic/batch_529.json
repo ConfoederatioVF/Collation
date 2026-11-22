@@ -1,0 +1,871 @@
+{
+  "batch_index": 529,
+  "count": 30,
+  "project": "MAGNETIC",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        36.85031,
+        14.83967
+      ],
+      "country": "Italy",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Calicantone-Cava d'Ispica-Italy",
+      "known_aliases": [
+        "Calicantone-Cava d'Ispica",
+        "calicantone-cava d'ispica"
+      ],
+      "latest_year": -1000,
+      "name": "Calicantone-Cava d'Ispica",
+      "reason": "missing_entry",
+      "region": "italia_south_islands",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.3133,
+        -5.1346
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Callestick nr Perranzabuloe-United Kingdom",
+      "known_aliases": [
+        "Callestick nr Perranzabuloe",
+        "callestick nr perranzabuloe"
+      ],
+      "latest_year": -500,
+      "name": "Callestick nr Perranzabuloe",
+      "reason": "missing_entry",
+      "region": "britannia",
+      "sample_years": [
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.76583,
+        -0.48639
+      ],
+      "country": "France",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Camblanes-et-Meynac-France",
+      "known_aliases": [
+        "Camblanes-et-Meynac",
+        "camblanes-et-meynac"
+      ],
+      "latest_year": 400,
+      "name": "Camblanes-et-Meynac",
+      "reason": "missing_entry",
+      "region": "gallia_narb_aquit",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.105,
+        0.2117
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -500,
+      "existing_historical_names": [
+        {
+          "date": "70.1.1",
+          "name": "Duroliponte"
+        },
+        {
+          "date": "600.1.1",
+          "name": "Grantebrycge"
+        },
+        {
+          "date": "1066.1.1",
+          "name": "Cambridge"
+        }
+      ],
+      "existing_meta_index": 6500,
+      "existing_meta_name": "Cambridge",
+      "key": "Cambridgeshire Dykes: Brent Ditch-United Kingdom",
+      "known_aliases": [
+        "Cambridgeshire Dykes: Brent Ditch",
+        "cambridgeshire dykes: brent ditch"
+      ],
+      "latest_year": 1,
+      "name": "Cambridgeshire Dykes: Brent Ditch",
+      "reason": "under_covered_history",
+      "region": "britannia",
+      "sample_years": [
+        -500,
+        -200,
+        1
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.205,
+        0.119
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -200,
+      "existing_historical_names": [
+        {
+          "date": "70.1.1",
+          "name": "Duroliponte"
+        },
+        {
+          "date": "600.1.1",
+          "name": "Grantebrycge"
+        },
+        {
+          "date": "1066.1.1",
+          "name": "Cambridge"
+        }
+      ],
+      "existing_meta_index": 6500,
+      "existing_meta_name": "Cambridge",
+      "key": "Cambridgeshire Fens-United Kingdom",
+      "known_aliases": [
+        "Cambridgeshire Fens",
+        "cambridgeshire fens"
+      ],
+      "latest_year": 400,
+      "name": "Cambridgeshire Fens",
+      "reason": "under_covered_history",
+      "region": "britannia",
+      "sample_years": [
+        -200,
+        1,
+        200,
+        400
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.50333,
+        -0.36934
+      ],
+      "country": "France",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cameillac-France",
+      "known_aliases": [
+        "Cameillac",
+        "cameillac"
+      ],
+      "latest_year": 400,
+      "name": "Cameillac",
+      "reason": "missing_entry",
+      "region": "gallia_narb_aquit",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.6234,
+        -4.6842
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Camelford School Camelford-United Kingdom",
+      "known_aliases": [
+        "Camelford School Camelford",
+        "camelford school camelford"
+      ],
+      "latest_year": 200,
+      "name": "Camelford School Camelford",
+      "reason": "missing_entry",
+      "region": "britannia",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.83429,
+        -0.05313
+      ],
+      "country": "France",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Camp de BiÃ¨re, Merri-France",
+      "known_aliases": [
+        "Camp de BiÃ¨re, Merri",
+        "camp de biã¨re, merri"
+      ],
+      "latest_year": 400,
+      "name": "Camp de BiÃ¨re, Merri",
+      "reason": "missing_entry",
+      "region": "gallia_lugd_belgica",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.95394,
+        -2.54664
+      ],
+      "country": "France",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Camp de Lescouais, Josselin-France",
+      "known_aliases": [
+        "Camp de Lescouais, Josselin",
+        "camp de lescouais, josselin"
+      ],
+      "latest_year": 400,
+      "name": "Camp de Lescouais, Josselin",
+      "reason": "missing_entry",
+      "region": "gallia_lugd_belgica",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.9386,
+        1.3558
+      ],
+      "country": "Spain",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Camp dels Moros de la Codina-Spain",
+      "known_aliases": [
+        "Camp dels Moros de la Codina",
+        "camp dels moros de la codina"
+      ],
+      "latest_year": -1000,
+      "name": "Camp dels Moros de la Codina",
+      "reason": "missing_entry",
+      "region": "hispania_tarrac_lusit",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.1091,
+        1.47713
+      ],
+      "country": "France",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Camp d’Alba-France",
+      "known_aliases": [
+        "Camp d’Alba",
+        "camp d’alba"
+      ],
+      "latest_year": -500,
+      "name": "Camp d’Alba",
+      "reason": "missing_entry",
+      "region": "gallia_narb_aquit",
+      "sample_years": [
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.01721,
+        0.1772
+      ],
+      "country": "France",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Campan-France",
+      "known_aliases": [
+        "Campan",
+        "campan"
+      ],
+      "latest_year": 400,
+      "name": "Campan",
+      "reason": "missing_entry",
+      "region": "gallia_narb_aquit",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.3019,
+        9.9283
+      ],
+      "country": "Italy",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Campo Moro, Lanzada-Italy",
+      "known_aliases": [
+        "Campo Moro, Lanzada",
+        "campo moro, lanzada"
+      ],
+      "latest_year": 1,
+      "name": "Campo Moro, Lanzada",
+      "reason": "missing_entry",
+      "region": "italia_peninsular",
+      "sample_years": [
+        -500,
+        -200,
+        1
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.8746,
+        10.4491
+      ],
+      "country": "Italy",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Campolungo, Bienno-Italy",
+      "known_aliases": [
+        "Campolungo, Bienno",
+        "campolungo, bienno"
+      ],
+      "latest_year": -200,
+      "name": "Campolungo, Bienno",
+      "reason": "missing_entry",
+      "region": "italia_peninsular",
+      "sample_years": [
+        -1000,
+        -500,
+        -200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.89296,
+        7.8464
+      ],
+      "country": "Italy",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Campomarzio, Taggia-Italy",
+      "known_aliases": [
+        "Campomarzio, Taggia",
+        "campomarzio, taggia"
+      ],
+      "latest_year": 400,
+      "name": "Campomarzio, Taggia",
+      "reason": "missing_entry",
+      "region": "italia_peninsular",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        57.4118,
+        -5.8229
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Camusteel-United Kingdom",
+      "known_aliases": [
+        "Camusteel",
+        "camusteel"
+      ],
+      "latest_year": -200,
+      "name": "Camusteel",
+      "reason": "missing_entry",
+      "region": "britannia",
+      "sample_years": [
+        -2500,
+        -1000,
+        -500,
+        -200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.2085,
+        2.6928
+      ],
+      "country": "Spain",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Can Barraca-Spain",
+      "known_aliases": [
+        "Can Barraca",
+        "can barraca"
+      ],
+      "latest_year": -500,
+      "name": "Can Barraca",
+      "reason": "missing_entry",
+      "region": "hispania_tarrac_lusit",
+      "sample_years": [
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.4052,
+        2.828
+      ],
+      "country": "Spain",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Can Bec de Baix-Spain",
+      "known_aliases": [
+        "Can Bec de Baix",
+        "can bec de baix"
+      ],
+      "latest_year": -1000,
+      "name": "Can Bec de Baix",
+      "reason": "missing_entry",
+      "region": "hispania_tarrac_lusit",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.5468,
+        2.0797
+      ],
+      "country": "Spain",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Can GambÃºs 2-Spain",
+      "known_aliases": [
+        "Can GambÃºs 2",
+        "can gambãºs 2"
+      ],
+      "latest_year": -500,
+      "name": "Can GambÃºs 2",
+      "reason": "missing_entry",
+      "region": "hispania_tarrac_lusit",
+      "sample_years": [
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.5444,
+        1.8903
+      ],
+      "country": "Spain",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Can Missert-Spain",
+      "known_aliases": [
+        "Can Missert",
+        "can missert"
+      ],
+      "latest_year": -200,
+      "name": "Can Missert",
+      "reason": "missing_entry",
+      "region": "hispania_tarrac_lusit",
+      "sample_years": [
+        -1000,
+        -500,
+        -200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.3297,
+        1.0469
+      ],
+      "country": "Spain",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Can PerramÃ³n-Spain",
+      "known_aliases": [
+        "Can PerramÃ³n",
+        "can perramã³n"
+      ],
+      "latest_year": -500,
+      "name": "Can PerramÃ³n",
+      "reason": "missing_entry",
+      "region": "hispania_tarrac_lusit",
+      "sample_years": [
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.4726,
+        3.0886
+      ],
+      "country": "Spain",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Can Roig Nou-Spain",
+      "known_aliases": [
+        "Can Roig Nou",
+        "can roig nou"
+      ],
+      "latest_year": -200,
+      "name": "Can Roig Nou",
+      "reason": "missing_entry",
+      "region": "hispania_tarrac_lusit",
+      "sample_years": [
+        -1000,
+        -500,
+        -200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.5382,
+        2.1354
+      ],
+      "country": "Spain",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Can Roqueta/DIASA-Spain",
+      "known_aliases": [
+        "Can Roqueta/DIASA",
+        "can roqueta/diasa"
+      ],
+      "latest_year": -200,
+      "name": "Can Roqueta/DIASA",
+      "reason": "missing_entry",
+      "region": "hispania_tarrac_lusit",
+      "sample_years": [
+        -1000,
+        -500,
+        -200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.3463,
+        1.913
+      ],
+      "country": "Spain",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Can SadurnÃ­-Spain",
+      "known_aliases": [
+        "Can SadurnÃ­",
+        "can sadurnã­"
+      ],
+      "latest_year": -1000,
+      "name": "Can SadurnÃ­",
+      "reason": "missing_entry",
+      "region": "hispania_tarrac_lusit",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.5397,
+        2.1704
+      ],
+      "country": "Spain",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Can Vinyalets-Spain",
+      "known_aliases": [
+        "Can Vinyalets",
+        "can vinyalets"
+      ],
+      "latest_year": -1000,
+      "name": "Can Vinyalets",
+      "reason": "missing_entry",
+      "region": "hispania_tarrac_lusit",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.2194,
+        2.6426
+      ],
+      "country": "Spain",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Can Xac-Spain",
+      "known_aliases": [
+        "Can Xac",
+        "can xac"
+      ],
+      "latest_year": -500,
+      "name": "Can Xac",
+      "reason": "missing_entry",
+      "region": "hispania_tarrac_lusit",
+      "sample_years": [
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.39747,
+        8.27558
+      ],
+      "country": "Italy",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Canalicum-Italy",
+      "known_aliases": [
+        "Canalicum",
+        "canalicum"
+      ],
+      "latest_year": 400,
+      "name": "Canalicum",
+      "reason": "missing_entry",
+      "region": "italia_peninsular",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        55.6547,
+        -3.4769
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Candyburn-United Kingdom",
+      "known_aliases": [
+        "Candyburn",
+        "candyburn"
+      ],
+      "latest_year": 200,
+      "name": "Candyburn",
+      "reason": "missing_entry",
+      "region": "britannia",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.6274,
+        0.77738
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Canewdon-United Kingdom",
+      "known_aliases": [
+        "Canewdon",
+        "canewdon"
+      ],
+      "latest_year": -1000,
+      "name": "Canewdon",
+      "reason": "missing_entry",
+      "region": "britannia",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.6621,
+        3.4211
+      ],
+      "country": "Spain",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Canyamel-Spain",
+      "known_aliases": [
+        "Canyamel",
+        "canyamel"
+      ],
+      "latest_year": -1000,
+      "name": "Canyamel",
+      "reason": "missing_entry",
+      "region": "hispania_tarrac_lusit",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    }
+  ]
+}

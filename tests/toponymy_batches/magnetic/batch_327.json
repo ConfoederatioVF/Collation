@@ -1,0 +1,954 @@
+{
+  "batch_index": 327,
+  "count": 30,
+  "project": "MAGNETIC",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        50.37911,
+        4.02844
+      ],
+      "country": "Belgium",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Givry-Belgium",
+      "known_aliases": [
+        "Givry",
+        "givry"
+      ],
+      "latest_year": 1347,
+      "name": "Givry",
+      "reason": "missing_entry",
+      "region": "low_countries_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.74237,
+        4.1563
+      ],
+      "country": "France",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Goincet-France",
+      "known_aliases": [
+        "Goincet",
+        "goincet"
+      ],
+      "latest_year": 1347,
+      "name": "Goincet",
+      "reason": "missing_entry",
+      "region": "france_south_occitania",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.18318,
+        -3.45645
+      ],
+      "country": "United Kingdom",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Grabbist Hillfort-United Kingdom",
+      "known_aliases": [
+        "Grabbist Hillfort",
+        "grabbist hillfort"
+      ],
+      "latest_year": 1347,
+      "name": "Grabbist Hillfort",
+      "reason": "missing_entry",
+      "region": "england_wales_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.59156,
+        11.99515
+      ],
+      "country": "Italy",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Gran Carro (Bolsena)-Italy",
+      "known_aliases": [
+        "Gran Carro (Bolsena)",
+        "gran carro"
+      ],
+      "latest_year": 1347,
+      "name": "Gran Carro (Bolsena)",
+      "reason": "missing_entry",
+      "region": "italy_central_south_med",
+      "sample_years": [
+        -2500,
+        800,
+        1100,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.3854,
+        5.48495
+      ],
+      "country": "France",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Grannum-France",
+      "known_aliases": [
+        "Grannum",
+        "grannum"
+      ],
+      "latest_year": 1347,
+      "name": "Grannum",
+      "reason": "missing_entry",
+      "region": "france_north_royal",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.21283,
+        11.71043
+      ],
+      "country": "Italy",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Graviscae-Italy",
+      "known_aliases": [
+        "Graviscae",
+        "graviscae"
+      ],
+      "latest_year": 1347,
+      "name": "Graviscae",
+      "reason": "missing_entry",
+      "region": "italy_central_south_med",
+      "sample_years": [
+        -500,
+        400,
+        900,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.61875,
+        -2.92725
+      ],
+      "country": "United Kingdom",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Great Bulmore-United Kingdom",
+      "known_aliases": [
+        "Great Bulmore",
+        "great bulmore"
+      ],
+      "latest_year": 1347,
+      "name": "Great Bulmore",
+      "reason": "missing_entry",
+      "region": "england_wales_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.0662,
+        0.19132
+      ],
+      "country": "United Kingdom",
+      "earliest_year": 1,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Great Chesterford-United Kingdom",
+      "known_aliases": [
+        "Great Chesterford",
+        "great chesterford"
+      ],
+      "latest_year": 1347,
+      "name": "Great Chesterford",
+      "reason": "missing_entry",
+      "region": "england_wales_med",
+      "sample_years": [
+        1,
+        500,
+        1000,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.82674,
+        -2.14741
+      ],
+      "country": "United Kingdom",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Great Witcombe-United Kingdom",
+      "known_aliases": [
+        "Great Witcombe",
+        "great witcombe"
+      ],
+      "latest_year": 1347,
+      "name": "Great Witcombe",
+      "reason": "missing_entry",
+      "region": "england_wales_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        53.23185,
+        -0.4807
+      ],
+      "country": "United Kingdom",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Greetwell-United Kingdom",
+      "known_aliases": [
+        "Greetwell",
+        "greetwell"
+      ],
+      "latest_year": 1347,
+      "name": "Greetwell",
+      "reason": "missing_entry",
+      "region": "england_wales_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        54.51404,
+        -1.87106
+      ],
+      "country": "United Kingdom",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Greta Bridge-United Kingdom",
+      "known_aliases": [
+        "Greta Bridge",
+        "greta bridge"
+      ],
+      "latest_year": 1347,
+      "name": "Greta Bridge",
+      "reason": "missing_entry",
+      "region": "england_wales_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.14314,
+        16.23657
+      ],
+      "country": "Italy",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Grimaldi-Italy",
+      "known_aliases": [
+        "Grimaldi",
+        "grimaldi"
+      ],
+      "latest_year": 1347,
+      "name": "Grimaldi",
+      "reason": "missing_entry",
+      "region": "italy_central_south_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.61328,
+        -3.83789
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Grimspound-United Kingdom",
+      "known_aliases": [
+        "Grimspound",
+        "grimspound"
+      ],
+      "latest_year": 1347,
+      "name": "Grimspound",
+      "reason": "missing_entry",
+      "region": "england_wales_med",
+      "sample_years": [
+        -2500,
+        900,
+        1200,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.3427,
+        12.45531
+      ],
+      "country": "Italy",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Grotta Porciosa, Borghetto-Italy",
+      "known_aliases": [
+        "Grotta Porciosa, Borghetto",
+        "grotta porciosa, borghetto"
+      ],
+      "latest_year": 1347,
+      "name": "Grotta Porciosa, Borghetto",
+      "reason": "missing_entry",
+      "region": "italy_central_south_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.85584,
+        12.89323
+      ],
+      "country": "Italy",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Grotta del Mortale-Italy",
+      "known_aliases": [
+        "Grotta del Mortale",
+        "grotta del mortale"
+      ],
+      "latest_year": 1347,
+      "name": "Grotta del Mortale",
+      "reason": "missing_entry",
+      "region": "italy_central_south_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.78861,
+        12.66769
+      ],
+      "country": "Italy",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Grottaferrata-Italy",
+      "known_aliases": [
+        "Grottaferrata",
+        "grottaferrata"
+      ],
+      "latest_year": 1347,
+      "name": "Grottaferrata",
+      "reason": "missing_entry",
+      "region": "italy_central_south_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.49246,
+        12.81137
+      ],
+      "country": "Italy",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Grotte di S. Nicola-Italy",
+      "known_aliases": [
+        "Grotte di S. Nicola",
+        "grotte di s. nicola"
+      ],
+      "latest_year": 1347,
+      "name": "Grotte di S. Nicola",
+      "reason": "missing_entry",
+      "region": "italy_central_south_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.28519,
+        15.90691
+      ],
+      "country": "Italy",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Grumentum-Italy",
+      "known_aliases": [
+        "Grumentum",
+        "grumentum"
+      ],
+      "latest_year": 1347,
+      "name": "Grumentum",
+      "reason": "missing_entry",
+      "region": "italy_central_south_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        49.11336,
+        1.86102
+      ],
+      "country": "France",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Guiry-Gadancourt-France",
+      "known_aliases": [
+        "Guiry-Gadancourt",
+        "guiry-gadancourt"
+      ],
+      "latest_year": 1347,
+      "name": "Guiry-Gadancourt",
+      "reason": "missing_entry",
+      "region": "france_north_royal",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        55.1701,
+        -2.17362
+      ],
+      "country": "United Kingdom",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Habitancum-United Kingdom",
+      "known_aliases": [
+        "Habitancum",
+        "habitancum"
+      ],
+      "latest_year": 1347,
+      "name": "Habitancum",
+      "reason": "missing_entry",
+      "region": "england_wales_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.99871,
+        14.26259
+      ],
+      "country": "Italy",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Halaesa-Italy",
+      "known_aliases": [
+        "Halaesa",
+        "halaesa"
+      ],
+      "latest_year": 1347,
+      "name": "Halaesa",
+      "reason": "missing_entry",
+      "region": "italy_central_south_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.64968,
+        5.32328
+      ],
+      "country": "Netherlands",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Halder-Netherlands",
+      "known_aliases": [
+        "Halder",
+        "halder"
+      ],
+      "latest_year": 1347,
+      "name": "Halder",
+      "reason": "missing_entry",
+      "region": "low_countries_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.817,
+        12.80886
+      ],
+      "country": "Italy",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Halicyae-Italy",
+      "known_aliases": [
+        "Halicyae",
+        "halicyae"
+      ],
+      "latest_year": 1347,
+      "name": "Halicyae",
+      "reason": "missing_entry",
+      "region": "italy_central_south_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.74008,
+        7.16924
+      ],
+      "country": "Germany",
+      "earliest_year": 800,
+      "existing_historical_names": [
+        {
+          "date": "1890.1.1",
+          "name": "Haltern"
+        }
+      ],
+      "existing_meta_index": 10796,
+      "existing_meta_name": "Haltern",
+      "key": "Haltern-Germany",
+      "known_aliases": [
+        "Haltern",
+        "haltern"
+      ],
+      "latest_year": 1347,
+      "name": "Haltern",
+      "reason": "under_covered_history",
+      "region": "hre_north_rhineland",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        54.98654,
+        -2.45197
+      ],
+      "country": "United Kingdom",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Haltwhistle Burn Roman Fortlet and Camp-United Kingdom",
+      "known_aliases": [
+        "Haltwhistle Burn Roman Fortlet and Camp",
+        "haltwhistle burn roman fortlet and camp"
+      ],
+      "latest_year": 1347,
+      "name": "Haltwhistle Burn Roman Fortlet and Camp",
+      "reason": "missing_entry",
+      "region": "england_wales_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.0719,
+        14.70031
+      ],
+      "country": "Italy",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Haluntium-Italy",
+      "known_aliases": [
+        "Haluntium",
+        "haluntium"
+      ],
+      "latest_year": 1347,
+      "name": "Haluntium",
+      "reason": "missing_entry",
+      "region": "italy_central_south_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.43066,
+        8.74784
+      ],
+      "country": "Italy",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hasta-Italy",
+      "known_aliases": [
+        "Hasta",
+        "hasta"
+      ],
+      "latest_year": 1347,
+      "name": "Hasta",
+      "reason": "missing_entry",
+      "region": "italy_north_communes",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        54.34953,
+        -6.71627
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Haughey's Fort-United Kingdom",
+      "known_aliases": [
+        "Haughey's Fort",
+        "haughey's fort"
+      ],
+      "latest_year": 1347,
+      "name": "Haughey's Fort",
+      "reason": "missing_entry",
+      "region": "scotland_ireland_med",
+      "sample_years": [
+        -2500,
+        200,
+        1000,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.8219,
+        -0.9727
+      ],
+      "country": "United Kingdom",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hayling Island Saxon Settlement-United Kingdom",
+      "known_aliases": [
+        "Hayling Island Saxon Settlement",
+        "hayling island saxon settlement"
+      ],
+      "latest_year": 1100,
+      "name": "Hayling Island Saxon Settlement",
+      "reason": "missing_entry",
+      "region": "england_wales_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.24256,
+        2.11235
+      ],
+      "country": "France",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hebromagus/Eburomagus-France",
+      "known_aliases": [
+        "Hebromagus/Eburomagus",
+        "hebromagus/eburomagus"
+      ],
+      "latest_year": 1347,
+      "name": "Hebromagus/Eburomagus",
+      "reason": "missing_entry",
+      "region": "france_south_occitania",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    }
+  ]
+}

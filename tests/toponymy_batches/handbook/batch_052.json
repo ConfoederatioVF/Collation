@@ -1,0 +1,1810 @@
+{
+  "batch_index": 52,
+  "count": 60,
+  "project": "HANDBOOK",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        39.72369,
+        26.27322
+      ],
+      "country": "Turkey",
+      "earliest_year": -3000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Neandria-Turkey",
+      "known_aliases": [
+        "Neandria",
+        "neandria"
+      ],
+      "latest_year": 1900,
+      "name": "Neandria",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -3000,
+        750,
+        1250,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.81311,
+        26.16414
+      ],
+      "country": "Turkey",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Achaiion-Turkey",
+      "known_aliases": [
+        "Achaiion",
+        "achaiion"
+      ],
+      "latest_year": 1900,
+      "name": "Achaiion",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.49864,
+        26.9361
+      ],
+      "country": "Turkey",
+      "earliest_year": -539,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Adramyttium-Turkey",
+      "known_aliases": [
+        "Adramyttium",
+        "adramyttium"
+      ],
+      "latest_year": 1900,
+      "name": "Adramyttium",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -539,
+        600,
+        1150,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.49014,
+        26.33635
+      ],
+      "country": "Turkey",
+      "earliest_year": -3000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Assos-Turkey",
+      "known_aliases": [
+        "Assos",
+        "assos"
+      ],
+      "latest_year": 1900,
+      "name": "Assos",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -3000,
+        200,
+        1050,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.37224,
+        26.13298
+      ],
+      "country": "Turkey",
+      "earliest_year": -3000,
+      "existing_historical_names": [
+        {
+          "date": "-800.1.1",
+          "name": "Chios"
+        }
+      ],
+      "existing_meta_index": 6543,
+      "existing_meta_name": "Chios",
+      "key": "Chios-Turkey",
+      "known_aliases": [
+        "Chios",
+        "chios"
+      ],
+      "latest_year": 1900,
+      "name": "Chios",
+      "reason": "under_covered_history",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -3000,
+        200,
+        1050,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.74006,
+        34.53922
+      ],
+      "country": "Turkey",
+      "earliest_year": -539,
+      "existing_historical_names": [
+        {
+          "date": "-630.1.1",
+          "name": "Soloi"
+        }
+      ],
+      "existing_meta_index": 33610,
+      "existing_meta_name": "Soloi",
+      "key": "Soloi-Turkey",
+      "known_aliases": [
+        "Soloi",
+        "soloi"
+      ],
+      "latest_year": 1900,
+      "name": "Soloi",
+      "reason": "under_covered_history",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -539,
+        600,
+        1150,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        25.11964,
+        32.79827
+      ],
+      "country": "Egypt",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Eileithyiaspolis-Egypt",
+      "known_aliases": [
+        "Eileithyiaspolis",
+        "eileithyiaspolis"
+      ],
+      "latest_year": 1900,
+      "name": "Eileithyiaspolis",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        1000,
+        1400,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.65031,
+        31.97848
+      ],
+      "country": "Turkey",
+      "earliest_year": -3200,
+      "existing_historical_names": [
+        {
+          "date": "-1199.1.1",
+          "name": "Gordion"
+        }
+      ],
+      "existing_meta_index": 33352,
+      "existing_meta_name": "Gordion",
+      "key": "Gordion-Turkey",
+      "known_aliases": [
+        "Gordion",
+        "gordion"
+      ],
+      "latest_year": 1900,
+      "name": "Gordion",
+      "reason": "under_covered_history",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -3200,
+        750,
+        1250,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.484,
+        27.333
+      ],
+      "country": "Turkey",
+      "earliest_year": -3000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Assesos-Turkey",
+      "known_aliases": [
+        "Assesos",
+        "assesos"
+      ],
+      "latest_year": 1900,
+      "name": "Assesos",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -3000,
+        750,
+        1250,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.38556,
+        27.88319
+      ],
+      "country": "Turkey",
+      "earliest_year": -3000,
+      "existing_historical_names": [
+        {
+          "date": "-755.1.1",
+          "name": "Cyzicus"
+        }
+      ],
+      "existing_meta_index": 32579,
+      "existing_meta_name": "Cyzicus",
+      "key": "Cyzicus-Turkey",
+      "known_aliases": [
+        "Cyzicus",
+        "cyzicus"
+      ],
+      "latest_year": 1900,
+      "name": "Cyzicus",
+      "reason": "under_covered_history",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -3000,
+        200,
+        1050,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.13249,
+        28.05074
+      ],
+      "country": "Turkey",
+      "earliest_year": -3000,
+      "existing_historical_names": [
+        {
+          "date": "-599.1.1",
+          "name": "Daskyleion"
+        }
+      ],
+      "existing_meta_index": 33036,
+      "existing_meta_name": "Daskyleion",
+      "key": "Daskyleion-Turkey",
+      "known_aliases": [
+        "Daskyleion",
+        "daskyleion"
+      ],
+      "latest_year": 1900,
+      "name": "Daskyleion",
+      "reason": "under_covered_history",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -3000,
+        200,
+        1050,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.98339,
+        29.02579
+      ],
+      "country": "Turkey",
+      "earliest_year": -539,
+      "existing_historical_names": [
+        {
+          "date": "-684.1.1",
+          "name": "Chalcedon"
+        }
+      ],
+      "existing_meta_index": 32268,
+      "existing_meta_name": "Chalcedon",
+      "key": "Chalcedon-Turkey",
+      "known_aliases": [
+        "Chalcedon",
+        "chalcedon"
+      ],
+      "latest_year": 1900,
+      "name": "Chalcedon",
+      "reason": "under_covered_history",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -539,
+        600,
+        1150,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.19422,
+        26.41131
+      ],
+      "country": "Turkey",
+      "earliest_year": -3000,
+      "existing_historical_names": [
+        {
+          "date": "-599.1.1",
+          "name": "Astyra Abydos"
+        }
+      ],
+      "existing_meta_index": 31617,
+      "existing_meta_name": "Astyra Abydos",
+      "key": "Abydos-Turkey",
+      "known_aliases": [
+        "Abydos",
+        "abydos"
+      ],
+      "latest_year": 1900,
+      "name": "Abydos",
+      "reason": "under_covered_history",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -3000,
+        750,
+        1250,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.19429,
+        26.53576
+      ],
+      "country": "Turkey",
+      "earliest_year": -539,
+      "existing_historical_names": [],
+      "existing_meta_index": 32955,
+      "existing_meta_name": "Arisbe",
+      "key": "Arisbe-Turkey",
+      "known_aliases": [
+        "Arisbe",
+        "arisbe"
+      ],
+      "latest_year": 1900,
+      "name": "Arisbe",
+      "reason": "empty_historical_names",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -539,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.07973,
+        26.37442
+      ],
+      "country": "Turkey",
+      "earliest_year": -539,
+      "existing_historical_names": [
+        {
+          "date": "-599.1.1",
+          "name": "Dardanos"
+        }
+      ],
+      "existing_meta_index": 33035,
+      "existing_meta_name": "Dardanos",
+      "key": "Dardanos-Turkey",
+      "known_aliases": [
+        "Dardanos",
+        "dardanos"
+      ],
+      "latest_year": 1900,
+      "name": "Dardanos",
+      "reason": "under_covered_history",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -539,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.2333,
+        25.90081
+      ],
+      "country": "Turkey",
+      "earliest_year": -539,
+      "existing_historical_names": [
+        {
+          "date": "-699.1.1",
+          "name": "Imbros"
+        }
+      ],
+      "existing_meta_index": 32214,
+      "existing_meta_name": "Imbros",
+      "key": "Imbros-Turkey",
+      "known_aliases": [
+        "Imbros",
+        "imbros"
+      ],
+      "latest_year": 1900,
+      "name": "Imbros",
+      "reason": "under_covered_history",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -539,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.34669,
+        26.69916
+      ],
+      "country": "Turkey",
+      "earliest_year": -539,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Pityoussa-Turkey",
+      "known_aliases": [
+        "Pityoussa",
+        "pityoussa"
+      ],
+      "latest_year": 1900,
+      "name": "Pityoussa",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -539,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.20822,
+        40.72046
+      ],
+      "country": "Syria",
+      "earliest_year": -539,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Shadikanni-Syria",
+      "known_aliases": [
+        "Shadikanni",
+        "shadikanni"
+      ],
+      "latest_year": 1900,
+      "name": "Shadikanni",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -539,
+        600,
+        1150,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        31.8254,
+        45.7032
+      ],
+      "country": "Iraq",
+      "earliest_year": -3000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tell Jidr-Iraq",
+      "known_aliases": [
+        "Tell Jidr",
+        "tell jidr"
+      ],
+      "latest_year": 1900,
+      "name": "Tell Jidr",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -3000,
+        750,
+        1250,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.051,
+        45.4062
+      ],
+      "country": "Iraq",
+      "earliest_year": -539,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tell Laham-Iraq",
+      "known_aliases": [
+        "Tell Laham",
+        "tell laham"
+      ],
+      "latest_year": 1900,
+      "name": "Tell Laham",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -539,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.6179,
+        34.91712
+      ],
+      "country": "Israel",
+      "earliest_year": -3200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Dor-Israel",
+      "known_aliases": [
+        "Dor",
+        "dor"
+      ],
+      "latest_year": 1900,
+      "name": "Dor",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -3200,
+        750,
+        1250,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.83668,
+        42.48637
+      ],
+      "country": "Iraq",
+      "earliest_year": -3000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tell Abu Dhahir-Iraq",
+      "known_aliases": [
+        "Tell Abu Dhahir",
+        "tell abu dhahir"
+      ],
+      "latest_year": 1900,
+      "name": "Tell Abu Dhahir",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -3000,
+        -1000,
+        1500,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.42974,
+        42.59727
+      ],
+      "country": "Iraq",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tell Abu Marya-Iraq",
+      "known_aliases": [
+        "Tell Abu Marya",
+        "tell abu marya"
+      ],
+      "latest_year": 1900,
+      "name": "Tell Abu Marya",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.84656,
+        41.33542
+      ],
+      "country": "Syria",
+      "earliest_year": -3000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tell Farfara-Syria",
+      "known_aliases": [
+        "Tell Farfara",
+        "tell farfara"
+      ],
+      "latest_year": 1900,
+      "name": "Tell Farfara",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -3000,
+        750,
+        1250,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.81651,
+        41.16682
+      ],
+      "country": "Syria",
+      "earliest_year": -3000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tell Hamidi-Syria",
+      "known_aliases": [
+        "Tell Hamidi",
+        "tell hamidi"
+      ],
+      "latest_year": 1900,
+      "name": "Tell Hamidi",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -3000,
+        750,
+        1250,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.84936,
+        41.46023
+      ],
+      "country": "Syria",
+      "earliest_year": -539,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tell Qarasa-Syria",
+      "known_aliases": [
+        "Tell Qarasa",
+        "tell qarasa"
+      ],
+      "latest_year": 1900,
+      "name": "Tell Qarasa",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -539,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.2958,
+        44.46689
+      ],
+      "country": "Iraq",
+      "earliest_year": -3000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Dilbat-Iraq",
+      "known_aliases": [
+        "Dilbat",
+        "dilbat"
+      ],
+      "latest_year": 1900,
+      "name": "Dilbat",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -3000,
+        200,
+        1050,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.53898,
+        44.78311
+      ],
+      "country": "Iraq",
+      "earliest_year": -3000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ishan al-Khara-Iraq",
+      "known_aliases": [
+        "Ishan al-Khara",
+        "ishan al-khara"
+      ],
+      "latest_year": 1900,
+      "name": "Ishan al-Khara",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -3000,
+        750,
+        1250,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.1048,
+        43.75179
+      ],
+      "country": "Iraq",
+      "earliest_year": -539,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kilizu-Iraq",
+      "known_aliases": [
+        "Kilizu",
+        "kilizu"
+      ],
+      "latest_year": 1900,
+      "name": "Kilizu",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -539,
+        600,
+        1150,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.05974,
+        44.25424
+      ],
+      "country": "Iraq",
+      "earliest_year": -539,
+      "existing_historical_names": [
+        {
+          "date": "-2899.1.1",
+          "name": "Sippar"
+        }
+      ],
+      "existing_meta_index": 33592,
+      "existing_meta_name": "Sippar",
+      "key": "Sippar-Iraq",
+      "known_aliases": [
+        "Sippar",
+        "sippar"
+      ],
+      "latest_year": 1900,
+      "name": "Sippar",
+      "reason": "under_covered_history",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -539,
+        600,
+        1150,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.1454,
+        44.2185
+      ],
+      "country": "Iraq",
+      "earliest_year": -539,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tell Abu Qubur-Iraq",
+      "known_aliases": [
+        "Tell Abu Qubur",
+        "tell abu qubur"
+      ],
+      "latest_year": 1900,
+      "name": "Tell Abu Qubur",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -539,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.80112,
+        44.47527
+      ],
+      "country": "Iraq",
+      "earliest_year": -539,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tell Itwayba-Iraq",
+      "known_aliases": [
+        "Tell Itwayba",
+        "tell itwayba"
+      ],
+      "latest_year": 1900,
+      "name": "Tell Itwayba",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -539,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.3105,
+        45.023
+      ],
+      "country": "Iraq",
+      "earliest_year": -539,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tulul Abu Adhem-Iraq",
+      "known_aliases": [
+        "Tulul Abu Adhem",
+        "tulul abu adhem"
+      ],
+      "latest_year": 1900,
+      "name": "Tulul Abu Adhem",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -539,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.47768,
+        44.51279
+      ],
+      "country": "Iraq",
+      "earliest_year": -3000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tulul Khattab-Iraq",
+      "known_aliases": [
+        "Tulul Khattab",
+        "tulul khattab"
+      ],
+      "latest_year": 1900,
+      "name": "Tulul Khattab",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -3000,
+        750,
+        1250,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.11928,
+        45.93733
+      ],
+      "country": "Iraq",
+      "earliest_year": -539,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Deru-Iraq",
+      "known_aliases": [
+        "Deru",
+        "deru"
+      ],
+      "latest_year": 1900,
+      "name": "Deru",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -539,
+        800,
+        1400,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.27334,
+        33.44109
+      ],
+      "country": "Turkey",
+      "earliest_year": -3000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Meydancıkkale-Turkey",
+      "known_aliases": [
+        "Meydancıkkale",
+        "meydancıkkale"
+      ],
+      "latest_year": 1900,
+      "name": "Meydancıkkale",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -3000,
+        750,
+        1250,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.19757,
+        30.71123
+      ],
+      "country": "Turkey",
+      "earliest_year": -3000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Yazılıkaya-Turkey",
+      "known_aliases": [
+        "Yazılıkaya",
+        "yazılıkaya"
+      ],
+      "latest_year": 1900,
+      "name": "Yazılıkaya",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -3000,
+        750,
+        1250,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.11511,
+        43.32967
+      ],
+      "country": "Turkey",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Argištiḫinili Artarapšakai-Turkey",
+      "known_aliases": [
+        "Argištiḫinili Artarapšakai",
+        "argištiḫinili artarapšakai"
+      ],
+      "latest_year": 1900,
+      "name": "Argištiḫinili Artarapšakai",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -500,
+        800,
+        1400,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.91313,
+        43.7448
+      ],
+      "country": "Turkey",
+      "earliest_year": -539,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Körzüt Kalesi-Turkey",
+      "known_aliases": [
+        "Körzüt Kalesi",
+        "körzüt kalesi"
+      ],
+      "latest_year": 1900,
+      "name": "Körzüt Kalesi",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -539,
+        500,
+        1100,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.70831,
+        43.21132
+      ],
+      "country": "Turkey",
+      "earliest_year": -3200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ayanis-Turkey",
+      "known_aliases": [
+        "Ayanis",
+        "ayanis"
+      ],
+      "latest_year": 1900,
+      "name": "Ayanis",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -3200,
+        100,
+        1000,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.43871,
+        44.02045
+      ],
+      "country": "Turkey",
+      "earliest_year": -539,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Yeşilalıç rock niche inscription-Turkey",
+      "known_aliases": [
+        "Yeşilalıç rock niche inscription",
+        "yeşilalıç rock niche inscription"
+      ],
+      "latest_year": 1900,
+      "name": "Yeşilalıç rock niche inscription",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -539,
+        500,
+        1100,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.15332,
+        44.45151
+      ],
+      "country": "Turkey",
+      "earliest_year": -3200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Karmir-blur-Turkey",
+      "known_aliases": [
+        "Karmir-blur",
+        "karmir-blur"
+      ],
+      "latest_year": 1900,
+      "name": "Karmir-blur",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -3200,
+        500,
+        1100,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.69647,
+        39.64665
+      ],
+      "country": "Turkey",
+      "earliest_year": -3200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Altıntepe-Turkey",
+      "known_aliases": [
+        "Altıntepe",
+        "altıntepe"
+      ],
+      "latest_year": 1900,
+      "name": "Altıntepe",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -3200,
+        100,
+        1000,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.93733,
+        44.25584
+      ],
+      "country": "Turkey",
+      "earliest_year": -539,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Başbulak-Turkey",
+      "known_aliases": [
+        "Başbulak",
+        "başbulak"
+      ],
+      "latest_year": 1900,
+      "name": "Başbulak",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -539,
+        500,
+        1100,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.05361,
+        42.38331
+      ],
+      "country": "Iraq",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Dur-Bel-Harran-belu-uṣur-Iraq",
+      "known_aliases": [
+        "Dur-Bel-Harran-belu-uṣur",
+        "dur-bel-harran-belu-uṣur"
+      ],
+      "latest_year": 1900,
+      "name": "Dur-Bel-Harran-belu-uṣur",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -1000,
+        900,
+        1300,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.09545,
+        35.79086
+      ],
+      "country": "Jordan",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Gal'adi-Jordan",
+      "known_aliases": [
+        "Gal'adi",
+        "gal'adi"
+      ],
+      "latest_year": 1900,
+      "name": "Gal'adi",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -1000,
+        900,
+        1300,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.17616,
+        37.2273
+      ],
+      "country": "Syria",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Nirabu-Syria",
+      "known_aliases": [
+        "Nirabu",
+        "nirabu"
+      ],
+      "latest_year": 1900,
+      "name": "Nirabu",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -1000,
+        900,
+        1300,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.3178,
+        35.24337
+      ],
+      "country": "Israel",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mahalliba-Israel",
+      "known_aliases": [
+        "Mahalliba",
+        "mahalliba"
+      ],
+      "latest_year": 1900,
+      "name": "Mahalliba",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -1000,
+        900,
+        1300,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.21357,
+        36.77043
+      ],
+      "country": "Syria",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Dāna-Syria",
+      "known_aliases": [
+        "Dāna",
+        "dāna"
+      ],
+      "latest_year": 1900,
+      "name": "Dāna",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -1000,
+        900,
+        1300,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.27645,
+        35.19008
+      ],
+      "country": "Israel",
+      "earliest_year": -3000,
+      "existing_historical_names": [
+        {
+          "date": "-929.1.1",
+          "name": "Samaria"
+        }
+      ],
+      "existing_meta_index": 32397,
+      "existing_meta_name": "Samaria",
+      "key": "Samaria-Israel",
+      "known_aliases": [
+        "Samaria",
+        "samaria"
+      ],
+      "latest_year": 1900,
+      "name": "Samaria",
+      "reason": "under_covered_history",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -3000,
+        200,
+        1050,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        31.85979,
+        34.92099
+      ],
+      "country": "Israel",
+      "earliest_year": -3000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Gazara-Israel",
+      "known_aliases": [
+        "Gazara",
+        "gazara"
+      ],
+      "latest_year": 1900,
+      "name": "Gazara",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -3000,
+        750,
+        1250,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.54007,
+        37.26867
+      ],
+      "country": "Syria",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Dabigu-Syria",
+      "known_aliases": [
+        "Dabigu",
+        "dabigu"
+      ],
+      "latest_year": 1900,
+      "name": "Dabigu",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -1000,
+        900,
+        1300,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.10498,
+        41.23051
+      ],
+      "country": "Syria",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Nabulu-Syria",
+      "known_aliases": [
+        "Nabulu",
+        "nabulu"
+      ],
+      "latest_year": 1900,
+      "name": "Nabulu",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -1000,
+        1150,
+        1450,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.95804,
+        35.62237
+      ],
+      "country": "Turkey",
+      "earliest_year": -3000,
+      "existing_historical_names": [
+        {
+          "date": "900.1.1",
+          "name": "Mopsuestia"
+        }
+      ],
+      "existing_meta_index": 7311,
+      "existing_meta_name": "Mopsuestia",
+      "key": "Mopsouestia-Turkey",
+      "known_aliases": [
+        "Mopsouestia",
+        "mopsouestia"
+      ],
+      "latest_year": 1900,
+      "name": "Mopsouestia",
+      "reason": "under_covered_history",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -3000,
+        750,
+        1250,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.90114,
+        40.08306
+      ],
+      "country": "Turkey",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bahçecik-Turkey",
+      "known_aliases": [
+        "Bahçecik",
+        "bahçecik"
+      ],
+      "latest_year": 1900,
+      "name": "Bahçecik",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -1000,
+        850,
+        1300,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.40884,
+        43.07741
+      ],
+      "country": "Iraq",
+      "earliest_year": -3000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tarbiṣu-Iraq",
+      "known_aliases": [
+        "Tarbiṣu",
+        "tarbiṣu"
+      ],
+      "latest_year": 1900,
+      "name": "Tarbiṣu",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -3000,
+        750,
+        1250,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.3091,
+        42.19971
+      ],
+      "country": "Iraq",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sur Jureh-Iraq",
+      "known_aliases": [
+        "Sur Jureh",
+        "sur jureh"
+      ],
+      "latest_year": 1900,
+      "name": "Sur Jureh",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -1000,
+        900,
+        1300,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.2923,
+        42.17391
+      ],
+      "country": "Iraq",
+      "earliest_year": 1300,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Zawiyah-Iraq",
+      "known_aliases": [
+        "Zawiyah",
+        "zawiyah"
+      ],
+      "latest_year": 1900,
+      "name": "Zawiyah",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        1300,
+        1400,
+        1500,
+        1600,
+        1700,
+        1800,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.3857,
+        42.03058
+      ],
+      "country": "Iraq",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Judeideh-Iraq",
+      "known_aliases": [
+        "Judeideh",
+        "judeideh"
+      ],
+      "latest_year": 1900,
+      "name": "Judeideh",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -1000,
+        900,
+        1300,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.05725,
+        40.81935
+      ],
+      "country": "Syria",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Urakka-Syria",
+      "known_aliases": [
+        "Urakka",
+        "urakka"
+      ],
+      "latest_year": 1900,
+      "name": "Urakka",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -1000,
+        900,
+        1300,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    }
+  ]
+}

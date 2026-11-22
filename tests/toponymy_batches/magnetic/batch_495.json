@@ -1,0 +1,899 @@
+{
+  "batch_index": 495,
+  "count": 30,
+  "project": "MAGNETIC",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        64.1333,
+        29.4833
+      ],
+      "country": "Finland",
+      "earliest_year": -500,
+      "existing_historical_names": [
+        {
+          "date": "1900.1.1",
+          "name": "Kuhmo *"
+        }
+      ],
+      "existing_meta_index": 13353,
+      "existing_meta_name": "Kuhmo *",
+      "key": "Kuhmo Series-Finland",
+      "known_aliases": [
+        "Kuhmo Series",
+        "kuhmo series"
+      ],
+      "latest_year": 1,
+      "name": "Kuhmo Series",
+      "reason": "under_covered_history",
+      "region": "finland_eastern_baltic",
+      "sample_years": [
+        -500,
+        -200,
+        1
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        63.85,
+        29.9
+      ],
+      "country": "Finland",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kuhmo-Finland_2",
+      "known_aliases": [
+        "Kuhmo",
+        "kuhmo"
+      ],
+      "latest_year": -200,
+      "name": "Kuhmo",
+      "reason": "missing_entry",
+      "region": "finland_eastern_baltic",
+      "sample_years": [
+        -1000,
+        -500,
+        -200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        59.18333,
+        10.21667
+      ],
+      "country": "Norway",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kullerød-Norway",
+      "known_aliases": [
+        "Kullerød",
+        "kullerød"
+      ],
+      "latest_year": -200,
+      "name": "Kullerød",
+      "reason": "missing_entry",
+      "region": "scandinavian_peninsula",
+      "sample_years": [
+        -2500,
+        -1000,
+        -500,
+        -200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        49.66,
+        17.21
+      ],
+      "country": "Czechia",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kulna-Czechia",
+      "known_aliases": [
+        "Kulna",
+        "kulna"
+      ],
+      "latest_year": 1,
+      "name": "Kulna",
+      "reason": "missing_entry",
+      "region": "bohemia_moravia_slovakia",
+      "sample_years": [
+        -500,
+        -200,
+        1
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        57.49,
+        12.06
+      ],
+      "country": "Sweden",
+      "earliest_year": -1000,
+      "existing_historical_names": [
+        {
+          "date": "1898.1.1",
+          "name": "Kungsbacka"
+        }
+      ],
+      "existing_meta_index": 11821,
+      "existing_meta_name": "Kungsbacka",
+      "key": "Kungsbacka-Sweden_2",
+      "known_aliases": [
+        "Kungsbacka",
+        "kungsbacka"
+      ],
+      "latest_year": -1000,
+      "name": "Kungsbacka",
+      "reason": "under_covered_history",
+      "region": "scandinavian_peninsula",
+      "sample_years": [
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        62.9666,
+        23.5
+      ],
+      "country": "Finland",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kuortane-Finland_2",
+      "known_aliases": [
+        "Kuortane",
+        "kuortane"
+      ],
+      "latest_year": -200,
+      "name": "Kuortane",
+      "reason": "missing_entry",
+      "region": "finland_eastern_baltic",
+      "sample_years": [
+        -1000,
+        -500,
+        -200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.2227,
+        18.48673
+      ],
+      "country": "Poland",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kurów; site: 1-Poland",
+      "known_aliases": [
+        "Kurów; site: 1",
+        "kurów; site: 1"
+      ],
+      "latest_year": -500,
+      "name": "Kurów; site: 1",
+      "reason": "missing_entry",
+      "region": "vistula_przeworsk_wielbark",
+      "sample_years": [
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        55.4687,
+        13.0177
+      ],
+      "country": "Sweden",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kv Skolan-Sweden",
+      "known_aliases": [
+        "Kv Skolan",
+        "kv skolan"
+      ],
+      "latest_year": 1,
+      "name": "Kv Skolan",
+      "reason": "missing_entry",
+      "region": "scandinavian_peninsula",
+      "sample_years": [
+        -500,
+        -200,
+        1
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        55.58,
+        13.11
+      ],
+      "country": "Sweden",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kvarnby-Sweden",
+      "known_aliases": [
+        "Kvarnby",
+        "kvarnby"
+      ],
+      "latest_year": 1,
+      "name": "Kvarnby",
+      "reason": "missing_entry",
+      "region": "scandinavian_peninsula",
+      "sample_years": [
+        -500,
+        -200,
+        1
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        68.763,
+        16.108
+      ],
+      "country": "Norway",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kveøy-Norway",
+      "known_aliases": [
+        "Kveøy",
+        "kveøy"
+      ],
+      "latest_year": 200,
+      "name": "Kveøy",
+      "reason": "missing_entry",
+      "region": "scandinavian_peninsula",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        57.75,
+        11.8333
+      ],
+      "country": "Sweden",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kvisljungeby-Sweden",
+      "known_aliases": [
+        "Kvisljungeby",
+        "kvisljungeby"
+      ],
+      "latest_year": 1,
+      "name": "Kvisljungeby",
+      "reason": "missing_entry",
+      "region": "scandinavian_peninsula",
+      "sample_years": [
+        -500,
+        -200,
+        1
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        55.8402,
+        12.9724
+      ],
+      "country": "Sweden",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "KÃ¤llspraanget; site: KvÃ¤rlÃ¶v 19:1 (SU9)-Sweden",
+      "known_aliases": [
+        "KÃ¤llspraanget; site: KvÃ¤rlÃ¶v 19:1 (SU9)",
+        "kã¤llspraanget; site: kvã¤rlã¶v 19:1"
+      ],
+      "latest_year": -200,
+      "name": "KÃ¤llspraanget; site: KvÃ¤rlÃ¶v 19:1 (SU9)",
+      "reason": "missing_entry",
+      "region": "scandinavian_peninsula",
+      "sample_years": [
+        -1000,
+        -500,
+        -200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.93683,
+        6.7715
+      ],
+      "country": "Germany",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "KÃ¶nigsdorf-Germany",
+      "known_aliases": [
+        "KÃ¶nigsdorf",
+        "kã¶nigsdorf"
+      ],
+      "latest_year": 500,
+      "name": "KÃ¶nigsdorf",
+      "reason": "missing_entry",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        65.9833,
+        24.4833
+      ],
+      "country": "Finland",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Könölä-Finland",
+      "known_aliases": [
+        "Könölä",
+        "könölä"
+      ],
+      "latest_year": -500,
+      "name": "Könölä",
+      "reason": "missing_entry",
+      "region": "finland_eastern_baltic",
+      "sample_years": [
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.60422,
+        18.31945
+      ],
+      "country": "Poland",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lachmirowice-Poland",
+      "known_aliases": [
+        "Lachmirowice",
+        "lachmirowice"
+      ],
+      "latest_year": 500,
+      "name": "Lachmirowice",
+      "reason": "missing_entry",
+      "region": "vistula_przeworsk_wielbark",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        53.9155,
+        -9.18873
+      ],
+      "country": "Ireland",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lack West, Turlough-Ireland",
+      "known_aliases": [
+        "Lack West, Turlough",
+        "lack west, turlough"
+      ],
+      "latest_year": -1000,
+      "name": "Lack West, Turlough",
+      "reason": "missing_entry",
+      "region": "hibernia_north_atlantic",
+      "sample_years": [
+        -2500,
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        70.06753,
+        27.55881
+      ],
+      "country": "Norway",
+      "earliest_year": -1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Laksjohka-Norway",
+      "known_aliases": [
+        "Laksjohka",
+        "laksjohka"
+      ],
+      "latest_year": -200,
+      "name": "Laksjohka",
+      "reason": "missing_entry",
+      "region": "scandinavian_peninsula",
+      "sample_years": [
+        -1000,
+        -500,
+        -200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.36345,
+        -6.96142
+      ],
+      "country": "Ireland",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Landscape Wetland-Ireland",
+      "known_aliases": [
+        "Landscape Wetland",
+        "landscape wetland"
+      ],
+      "latest_year": -500,
+      "name": "Landscape Wetland",
+      "reason": "missing_entry",
+      "region": "hibernia_north_atlantic",
+      "sample_years": [
+        -2500,
+        -1000,
+        -500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.55123,
+        7.17231
+      ],
+      "country": "Germany",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Landskrone, Lohrsdorf-Germany",
+      "known_aliases": [
+        "Landskrone, Lohrsdorf",
+        "landskrone, lohrsdorf"
+      ],
+      "latest_year": 500,
+      "name": "Landskrone, Lohrsdorf",
+      "reason": "missing_entry",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.7679,
+        5.9894
+      ],
+      "country": "Netherlands",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lange Bosweg, Raren-Netherlands",
+      "known_aliases": [
+        "Lange Bosweg, Raren",
+        "lange bosweg, raren"
+      ],
+      "latest_year": 500,
+      "name": "Lange Bosweg, Raren",
+      "reason": "missing_entry",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        56.6261,
+        9.5032
+      ],
+      "country": "Denmark",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "LangemosegÃ¥rd-Denmark",
+      "known_aliases": [
+        "LangemosegÃ¥rd",
+        "langemosegã¥rd"
+      ],
+      "latest_year": 1,
+      "name": "LangemosegÃ¥rd",
+      "reason": "missing_entry",
+      "region": "denmark_jutland_isles",
+      "sample_years": [
+        -500,
+        -200,
+        1
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.87455,
+        6.24023
+      ],
+      "country": "Germany",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Langweiler-Germany",
+      "known_aliases": [
+        "Langweiler",
+        "langweiler",
+        "langweiler 9",
+        "Langweiler 9"
+      ],
+      "latest_year": 500,
+      "name": "Langweiler",
+      "reason": "missing_entry",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.78877,
+        24.18884
+      ],
+      "country": "Poland",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Laskiv-Poland",
+      "known_aliases": [
+        "Laskiv",
+        "laskiv"
+      ],
+      "latest_year": 500,
+      "name": "Laskiv",
+      "reason": "missing_entry",
+      "region": "vistula_przeworsk_wielbark",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.8887,
+        7.1154
+      ],
+      "country": "Netherlands",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Laudermarke-Netherlands",
+      "known_aliases": [
+        "Laudermarke",
+        "laudermarke"
+      ],
+      "latest_year": 1,
+      "name": "Laudermarke",
+      "reason": "missing_entry",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -500,
+        -200,
+        1
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.89445,
+        18.04494
+      ],
+      "country": "Slovakia",
+      "earliest_year": -500,
+      "existing_historical_names": [
+        {
+          "date": "179.1.1",
+          "name": "Laugaricio"
+        },
+        {
+          "date": "1000.1.1",
+          "name": "Trencsén"
+        },
+        {
+          "date": "1918.10.28",
+          "name": "Trenčín"
+        }
+      ],
+      "existing_meta_index": 10251,
+      "existing_meta_name": "Trenčín",
+      "key": "Laugaricio-Slovakia",
+      "known_aliases": [
+        "Laugaricio",
+        "laugaricio"
+      ],
+      "latest_year": 500,
+      "name": "Laugaricio",
+      "reason": "under_covered_history",
+      "region": "bohemia_moravia_slovakia",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.7978,
+        6.06282
+      ],
+      "country": "Germany",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Laurensberg-Germany",
+      "known_aliases": [
+        "Laurensberg",
+        "laurensberg"
+      ],
+      "latest_year": 500,
+      "name": "Laurensberg",
+      "reason": "missing_entry",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.60889,
+        -9.12696
+      ],
+      "country": "Ireland",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Leahys-Ireland",
+      "known_aliases": [
+        "Leahys",
+        "leahys"
+      ],
+      "latest_year": -1000,
+      "name": "Leahys",
+      "reason": "missing_entry",
+      "region": "hibernia_north_atlantic",
+      "sample_years": [
+        -2500,
+        -1000
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        59.74191,
+        9.86493
+      ],
+      "country": "Norway",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Leirdalsvn. 39 øvre Eiker kommune-Norway",
+      "known_aliases": [
+        "Leirdalsvn. 39 øvre Eiker kommune",
+        "leirdalsvn. 39 øvre eiker kommune"
+      ],
+      "latest_year": 200,
+      "name": "Leirdalsvn. 39 øvre Eiker kommune",
+      "reason": "missing_entry",
+      "region": "scandinavian_peninsula",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.7831,
+        6.00116
+      ],
+      "country": "Germany",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lemiers-Germany",
+      "known_aliases": [
+        "Lemiers",
+        "lemiers"
+      ],
+      "latest_year": 500,
+      "name": "Lemiers",
+      "reason": "missing_entry",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        50.76887,
+        6.47656
+      ],
+      "country": "Germany",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lendersdorf-Germany",
+      "known_aliases": [
+        "Lendersdorf",
+        "lendersdorf"
+      ],
+      "latest_year": 500,
+      "name": "Lendersdorf",
+      "reason": "missing_entry",
+      "region": "germania_magna_west",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    }
+  ]
+}

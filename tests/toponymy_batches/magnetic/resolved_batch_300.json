@@ -1,0 +1,887 @@
+{
+  "batch_index": 300,
+  "project": "MAGNETIC",
+  "settlements": [
+    {
+      "key": "Galátsi-Greece",
+      "name": "Galátsi",
+      "canonical_name": "Galátsi",
+      "country": "Greece",
+      "coords_lat_lng": [
+        38.01667,
+        23.75
+      ],
+      "earliest_year": 1350,
+      "latest_year": 1830,
+      "existing_meta_index": 21570,
+      "known_aliases": [
+        "Galátsi",
+        "galátsi",
+        "galatsi",
+        "galatsion",
+        "galátsion",
+        "Galatsi",
+        "Galatsion",
+        "Galátsion"
+      ],
+      "historical_names": [
+        {
+          "date": "1350.1.1",
+          "name": "Galátsion"
+        },
+        {
+          "date": "1961.1.1",
+          "name": "Galátsion"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Kamnica-Slovenia",
+      "name": "Kamnica",
+      "canonical_name": "Kamnica",
+      "country": "Slovenia",
+      "coords_lat_lng": [
+        46.57444,
+        15.61417
+      ],
+      "earliest_year": 1350,
+      "latest_year": 1830,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Kamnica",
+        "kamnica",
+        "kamnicja",
+        "камница",
+        "камниця",
+        "Kamnicja",
+        "Камница",
+        "Камниця"
+      ],
+      "historical_names": [
+        {
+          "date": "1350.1.1",
+          "name": "Kamnica"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Néa Ionía-Greece_2",
+      "name": "Néa Ionía",
+      "canonical_name": "Néa Ionía",
+      "country": "Greece",
+      "coords_lat_lng": [
+        38.0357,
+        23.75733
+      ],
+      "earliest_year": 1350,
+      "latest_year": 1830,
+      "existing_meta_index": 16836,
+      "known_aliases": [
+        "Néa Ionía",
+        "néa ionía",
+        "nea ionia",
+        "podharadhes",
+        "podharádhes",
+        "Nea Ionia",
+        "Podharadhes",
+        "Podharádhes"
+      ],
+      "historical_names": [
+        {
+          "date": "1350.1.1",
+          "name": "Néa Ionía"
+        },
+        {
+          "date": "1928.1.1",
+          "name": "Néa Ionía"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Sykiés-Greece",
+      "name": "Sykiés",
+      "canonical_name": "Sykiés",
+      "country": "Greece",
+      "coords_lat_lng": [
+        40.64944,
+        22.95083
+      ],
+      "earliest_year": 1350,
+      "latest_year": 1830,
+      "existing_meta_index": 21715,
+      "known_aliases": [
+        "Sykiés",
+        "sykiés",
+        "sikeai",
+        "sikéai",
+        "sykeai",
+        "Sikeai",
+        "Sikéai",
+        "Sykeai"
+      ],
+      "historical_names": [
+        {
+          "date": "1350.1.1",
+          "name": "Sikies"
+        },
+        {
+          "date": "1961.1.1",
+          "name": "Sikies"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Veliko Turnovo-Bulgaria",
+      "name": "Veliko Turnovo",
+      "canonical_name": "Veliko Turnovo",
+      "country": "Bulgaria",
+      "coords_lat_lng": [
+        43.07,
+        25.65
+      ],
+      "earliest_year": 250,
+      "latest_year": 1830,
+      "existing_meta_index": 7194,
+      "known_aliases": [
+        "Veliko Turnovo",
+        "veliko turnovo",
+        "tarnovo",
+        "veliko tŭrnovo",
+        "Tarnovo",
+        "Veliko Tŭrnovo"
+      ],
+      "historical_names": [
+        {
+          "date": "250.1.1",
+          "name": "Tarnovo"
+        },
+        {
+          "date": "800.1.1",
+          "name": "Tarnovo"
+        },
+        {
+          "date": "1186.1.1",
+          "name": "Veliko Tarnovo"
+        },
+        {
+          "date": "1393.1.1",
+          "name": "Tırnova"
+        },
+        {
+          "date": "1878.1.1",
+          "name": "Veliko Târnovo"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Chalon-sur-Saone-France",
+      "name": "Chalon-sur-Saone",
+      "canonical_name": "Chalon-sur-Saone",
+      "country": "France",
+      "coords_lat_lng": [
+        48.95,
+        4.37
+      ],
+      "earliest_year": 250,
+      "latest_year": 1750,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Chalon-sur-Saone",
+        "chalon-sur-saone",
+        "chalon-sur-saône",
+        "cavillonum",
+        "cabillonum",
+        "Chalon-sur-Saône",
+        "Cavillonum",
+        "Cabillonum"
+      ],
+      "historical_names": [
+        {
+          "date": "250.1.1",
+          "name": "Chalon-sur-Saone"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Chalons-sur-Marne-France",
+      "name": "Chalons-sur-Marne",
+      "canonical_name": "Chalons-sur-Marne",
+      "country": "France",
+      "coords_lat_lng": [
+        46.78,
+        4.85
+      ],
+      "earliest_year": 250,
+      "latest_year": 1750,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Chalons-sur-Marne",
+        "chalons-sur-marne",
+        "châlons-sur-marne",
+        "catalaunum",
+        "cathalaunum",
+        "civitas catuuellaunorum",
+        "Châlons-sur-Marne",
+        "Catalaunum",
+        "Cathalaunum",
+        "Civitas catuuellaunorum"
+      ],
+      "historical_names": [
+        {
+          "date": "250.1.1",
+          "name": "Chalons-sur-Marne"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Chateau Gontier-France",
+      "name": "Chateau Gontier",
+      "canonical_name": "Chateau Gontier",
+      "country": "France",
+      "coords_lat_lng": [
+        47.83,
+        -0.7
+      ],
+      "earliest_year": 250,
+      "latest_year": 1750,
+      "existing_meta_index": 7411,
+      "known_aliases": [
+        "Chateau Gontier",
+        "chateau gontier",
+        "castrum gunterii",
+        "Castrum Gunterii"
+      ],
+      "historical_names": [
+        {
+          "date": "250.1.1",
+          "name": "Chateau Gontier"
+        },
+        {
+          "date": "1000.1.1",
+          "name": "Chateau Gontier"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Figueras-Spain",
+      "name": "Figueras",
+      "canonical_name": "Figueras",
+      "country": "Spain",
+      "coords_lat_lng": [
+        42.27,
+        2.95
+      ],
+      "earliest_year": 250,
+      "latest_year": 1750,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Figueras",
+        "figueras",
+        "ficaris",
+        "Ficaris"
+      ],
+      "historical_names": [
+        {
+          "date": "250.1.1",
+          "name": "Figueras"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "RangÃ¡rbotnar-Iceland",
+      "name": "RangÃ¡rbotnar",
+      "canonical_name": "RangÃ¡rbotnar",
+      "country": "Iceland",
+      "coords_lat_lng": [
+        64.0666,
+        -19.75
+      ],
+      "earliest_year": -2500,
+      "latest_year": 1600,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "RangÃ¡rbotnar",
+        "rangã¡rbotnar"
+      ],
+      "historical_names": [
+        {
+          "date": "-2500.1.1",
+          "name": "RangÃ¡rbotnar"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "San-Sebastian-Spain",
+      "name": "San-Sebastian",
+      "canonical_name": "San-Sebastian",
+      "country": "Spain",
+      "coords_lat_lng": [
+        43.32,
+        -1.98
+      ],
+      "earliest_year": 1100,
+      "latest_year": 1750,
+      "existing_meta_index": 7654,
+      "known_aliases": [
+        "San-Sebastian",
+        "san-sebastian",
+        "san sebastián",
+        "donostia",
+        "San Sebastián",
+        "Donostia"
+      ],
+      "historical_names": [
+        {
+          "date": "1100.1.1",
+          "name": "Donostia-San Sebastián"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Svinavath-Iceland",
+      "name": "Svinavath",
+      "canonical_name": "Svinavath",
+      "country": "Iceland",
+      "coords_lat_lng": [
+        65.5326,
+        -20.1016
+      ],
+      "earliest_year": -2500,
+      "latest_year": 1600,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Svinavath",
+        "svinavath"
+      ],
+      "historical_names": [
+        {
+          "date": "-2500.1.1",
+          "name": "Svinavath"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Sørvágur-Faroe Islands",
+      "name": "Sørvágur",
+      "canonical_name": "Sørvágur",
+      "country": "Faroe Islands",
+      "coords_lat_lng": [
+        62.07203,
+        -7.30749
+      ],
+      "earliest_year": -10000,
+      "latest_year": 1750,
+      "existing_meta_index": 17534,
+      "known_aliases": [
+        "Sørvágur",
+        "sørvágur",
+        "saurvogur",
+        "siorvaguras",
+        "sjorvoavur",
+        "Saurvogur",
+        "Siorvaguras",
+        "Sjorvoavur"
+      ],
+      "historical_names": [
+        {
+          "date": "-10000.1.1",
+          "name": "Sørvágur"
+        },
+        {
+          "date": "1936.1.1",
+          "name": "Sørvágur"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Við Sjógv-Faroe Islands",
+      "name": "Við Sjógv",
+      "canonical_name": "Við Sjógv",
+      "country": "Faroe Islands",
+      "coords_lat_lng": [
+        62.11967,
+        -6.75005
+      ],
+      "earliest_year": -10000,
+      "latest_year": 1750,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Við Sjógv",
+        "við sjógv",
+        "siov",
+        "sjogv",
+        "sjov",
+        "Siov",
+        "Sjogv",
+        "Sjov"
+      ],
+      "historical_names": [
+        {
+          "date": "-10000.1.1",
+          "name": "Við Sjógv"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Alcira-Spain",
+      "name": "Alcira",
+      "canonical_name": "Alcira",
+      "country": "Spain",
+      "coords_lat_lng": [
+        39.15,
+        -0.43
+      ],
+      "earliest_year": 250,
+      "latest_year": 1750,
+      "existing_meta_index": 7218,
+      "known_aliases": [
+        "Alcira",
+        "alcira",
+        "al-ǧazīra",
+        "ǧazīrat šuqar"
+      ],
+      "historical_names": [
+        {
+          "date": "250.1.1",
+          "name": "al-ǧazira"
+        },
+        {
+          "date": "900.1.1",
+          "name": "al-ǧazira"
+        },
+        {
+          "date": "1230.1.1",
+          "name": "Alzira"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Camacha-Portugal",
+      "name": "Camacha",
+      "canonical_name": "Camacha",
+      "country": "Portugal",
+      "coords_lat_lng": [
+        32.67919,
+        -16.84462
+      ],
+      "earliest_year": 1500,
+      "latest_year": 1750,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Camacha",
+        "camacha",
+        "kamasha",
+        "камаша",
+        "Kamasha",
+        "Камаша"
+      ],
+      "historical_names": [
+        {
+          "date": "1500.1.1",
+          "name": "Camacha"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Estreito de Câmara de Lobos-Portugal",
+      "name": "Estreito de Câmara de Lobos",
+      "canonical_name": "Estreito de Câmara de Lobos",
+      "country": "Portugal",
+      "coords_lat_lng": [
+        32.6612,
+        -17.00014
+      ],
+      "earliest_year": 1500,
+      "latest_year": 1750,
+      "existing_meta_index": 12841,
+      "known_aliases": [
+        "Estreito de Câmara de Lobos",
+        "estreito de câmara de lobos",
+        "estreito de camara de lobos",
+        "Estreito de Camara de Lobos"
+      ],
+      "historical_names": [
+        {
+          "date": "1500.1.1",
+          "name": "Estreito de Câmara de Lobos"
+        },
+        {
+          "date": "1900.1.1",
+          "name": "Estreito de Câmara de Lobos"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Giugliano in Campania-Italy",
+      "name": "Giugliano in Campania",
+      "canonical_name": "Giugliano in Campania",
+      "country": "Italy",
+      "coords_lat_lng": [
+        40.93,
+        14.2
+      ],
+      "earliest_year": 1200,
+      "latest_year": 1750,
+      "existing_meta_index": 7928,
+      "known_aliases": [
+        "Giugliano in Campania",
+        "giugliano in campania",
+        "giugliano",
+        "Giugliano"
+      ],
+      "historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Giugliano in Campania"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Santa Maria Maior-Portugal",
+      "name": "Santa Maria Maior",
+      "canonical_name": "Santa Maria Maior",
+      "country": "Portugal",
+      "coords_lat_lng": [
+        32.64838,
+        -16.89087
+      ],
+      "earliest_year": 1500,
+      "latest_year": 1750,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Santa Maria Maior",
+        "santa maria maior"
+      ],
+      "historical_names": [
+        {
+          "date": "1500.1.1",
+          "name": "Santa Maria Maior"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Santana-Portugal",
+      "name": "Santana",
+      "canonical_name": "Santana",
+      "country": "Portugal",
+      "coords_lat_lng": [
+        32.8,
+        -16.88333
+      ],
+      "earliest_year": 1500,
+      "latest_year": 1750,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Santana",
+        "santana",
+        "сантана",
+        "Сантана"
+      ],
+      "historical_names": [
+        {
+          "date": "1500.1.1",
+          "name": "Santana"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "São Roque-Portugal",
+      "name": "São Roque",
+      "canonical_name": "São Roque",
+      "country": "Portugal",
+      "coords_lat_lng": [
+        32.66667,
+        -16.91667
+      ],
+      "earliest_year": 1500,
+      "latest_year": 1750,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "São Roque",
+        "são roque",
+        "sao roque",
+        "Sao Roque"
+      ],
+      "historical_names": [
+        {
+          "date": "1500.1.1",
+          "name": "São Roque"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Tamaraceite-Spain",
+      "name": "Tamaraceite",
+      "canonical_name": "Tamaraceite",
+      "country": "Spain",
+      "coords_lat_lng": [
+        28.09894,
+        -15.47218
+      ],
+      "earliest_year": 750,
+      "latest_year": 1750,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Tamaraceite",
+        "tamaraceite"
+      ],
+      "historical_names": [
+        {
+          "date": "750.1.1",
+          "name": "Tamaraceite"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Aalborg (denmark_med)-Denmark",
+      "name": "Aalborg",
+      "canonical_name": "Aalborg",
+      "country": "Denmark",
+      "coords_lat_lng": [
+        57.048,
+        9.9187
+      ],
+      "earliest_year": 800,
+      "latest_year": 1500,
+      "existing_meta_index": 7853,
+      "known_aliases": [
+        "Aalborg",
+        "aalborg",
+        "aal",
+        "alaborg",
+        "alborg",
+        "AAL",
+        "Alaborg",
+        "Alborg"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Alabu"
+        },
+        {
+          "date": "1000.1.1",
+          "name": "Alabu"
+        },
+        {
+          "date": "1342.1.1",
+          "name": "Ålborg"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Amuri-Finland",
+      "name": "Amuri",
+      "canonical_name": "Amuri",
+      "country": "Finland",
+      "coords_lat_lng": [
+        61.49957,
+        23.74459
+      ],
+      "earliest_year": 800,
+      "latest_year": 1500,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Amuri",
+        "amuri",
+        "амури",
+        "amuri a",
+        "amuri b",
+        "Амури",
+        "Amuri A",
+        "Amuri B"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Amuri"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Björnhovda-Sweden",
+      "name": "Björnhovda",
+      "canonical_name": "Björnhovda",
+      "country": "Sweden",
+      "coords_lat_lng": [
+        56.6558,
+        16.51565
+      ],
+      "earliest_year": 800,
+      "latest_year": 1500,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Björnhovda",
+        "björnhovda"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Björnhovda"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Borås-Sweden_2",
+      "name": "Borås",
+      "canonical_name": "Borås",
+      "country": "Sweden",
+      "coords_lat_lng": [
+        57.72101,
+        12.9401
+      ],
+      "earliest_year": 800,
+      "latest_year": 1500,
+      "existing_meta_index": 9025,
+      "known_aliases": [
+        "Borås",
+        "borås",
+        "boerosia",
+        "boras",
+        "boros",
+        "Boerosia",
+        "Boras",
+        "Boros"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Borås"
+        },
+        {
+          "date": "1805.1.1",
+          "name": "Borås"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Botes-Sweden",
+      "name": "Botes",
+      "canonical_name": "Botes",
+      "country": "Sweden",
+      "coords_lat_lng": [
+        57.28979,
+        18.57434
+      ],
+      "earliest_year": -500,
+      "latest_year": 1500,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Botes",
+        "botes"
+      ],
+      "historical_names": [
+        {
+          "date": "-500.1.1",
+          "name": "Botes"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Eketorp-Sweden",
+      "name": "Eketorp",
+      "canonical_name": "Eketorp",
+      "country": "Sweden",
+      "coords_lat_lng": [
+        56.29555,
+        16.48617
+      ],
+      "earliest_year": 800,
+      "latest_year": 1500,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Eketorp",
+        "eketorp"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Eketorp"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Gundestrup-Denmark",
+      "name": "Gundestrup",
+      "canonical_name": "Gundestrup",
+      "country": "Denmark",
+      "coords_lat_lng": [
+        56.81407,
+        9.56238
+      ],
+      "earliest_year": -500,
+      "latest_year": 1500,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Gundestrup",
+        "gundestrup",
+        "gundestrup, aars"
+      ],
+      "historical_names": [
+        {
+          "date": "-500.1.1",
+          "name": "Gundestrup"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Hatanpää-Finland",
+      "name": "Hatanpää",
+      "canonical_name": "Hatanpää",
+      "country": "Finland",
+      "coords_lat_lng": [
+        61.48293,
+        23.76253
+      ],
+      "earliest_year": 800,
+      "latest_year": 1500,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Hatanpää",
+        "hatanpää",
+        "hatanpaeae",
+        "khatanpjaja",
+        "хатанпяя",
+        "Hatanpaeae",
+        "Khatanpjaja",
+        "Хатанпяя"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Hatanpää"
+        }
+      ],
+      "verified_settlement": true
+    }
+  ]
+}

@@ -1,0 +1,943 @@
+{
+  "batch_index": 379,
+  "count": 30,
+  "project": "MAGNETIC",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        47.48132,
+        8.31345
+      ],
+      "country": "Switzerland",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Aquae Helveticae-Switzerland",
+      "known_aliases": [
+        "Aquae Helveticae",
+        "aquae helveticae"
+      ],
+      "latest_year": 800,
+      "name": "Aquae Helveticae",
+      "reason": "missing_entry",
+      "region": "germanic_alpine_core",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.78896,
+        0.59294
+      ],
+      "country": "France",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Aquae Onesiorum-France",
+      "known_aliases": [
+        "Aquae Onesiorum",
+        "aquae onesiorum"
+      ],
+      "latest_year": 800,
+      "name": "Aquae Onesiorum",
+      "reason": "missing_entry",
+      "region": "francia_merovingian",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.85639,
+        -8.10722
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Aquae Originae/Aquis Originis-Spain",
+      "known_aliases": [
+        "Aquae Originae/Aquis Originis",
+        "aquae originae/aquis originis"
+      ],
+      "latest_year": 800,
+      "name": "Aquae Originae/Aquis Originis",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.88955,
+        -7.69715
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Aquae Quintinae/Aquae Quintiae-Spain",
+      "known_aliases": [
+        "Aquae Quintinae/Aquae Quintiae",
+        "aquae quintinae/aquae quintiae"
+      ],
+      "latest_year": 800,
+      "name": "Aquae Quintinae/Aquae Quintiae",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.7598,
+        8.23979
+      ],
+      "country": "Germany",
+      "earliest_year": -500,
+      "existing_historical_names": [
+        {
+          "date": "80.1.1",
+          "name": "Aquae Aureliae"
+        },
+        {
+          "date": "600.1.1",
+          "name": "Baden"
+        },
+        {
+          "date": "1800.1.1",
+          "name": "Baden-Baden"
+        }
+      ],
+      "existing_meta_index": 6435,
+      "existing_meta_name": "Baden-Baden",
+      "key": "Aquae-Germany",
+      "known_aliases": [
+        "Aquae",
+        "aquae"
+      ],
+      "latest_year": 800,
+      "name": "Aquae",
+      "reason": "under_covered_history",
+      "region": "germanic_alpine_core",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.81682,
+        -0.55299
+      ],
+      "country": "France",
+      "earliest_year": -500,
+      "existing_historical_names": [
+        {
+          "date": "-50.1.1",
+          "name": "Mediolanum Santonum"
+        },
+        {
+          "date": "400.1.1",
+          "name": "Santones"
+        },
+        {
+          "date": "600.1.1",
+          "name": "Saintes"
+        }
+      ],
+      "existing_meta_index": 6289,
+      "existing_meta_name": "Saintes",
+      "key": "Aqueduc romain, Saintes-France",
+      "known_aliases": [
+        "Aqueduc romain, Saintes",
+        "aqueduc romain, saintes"
+      ],
+      "latest_year": 800,
+      "name": "Aqueduc romain, Saintes",
+      "reason": "under_covered_history",
+      "region": "francia_merovingian",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.97389,
+        -7.98056
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Aquis Querquennis-Spain",
+      "known_aliases": [
+        "Aquis Querquennis",
+        "aquis querquennis"
+      ],
+      "latest_year": 800,
+      "name": "Aquis Querquennis",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.05611,
+        -9.00806
+      ],
+      "country": "Portugal",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Arabriga-Portugal",
+      "known_aliases": [
+        "Arabriga",
+        "arabriga",
+        "ierabriga",
+        "Ierabriga"
+      ],
+      "latest_year": 800,
+      "name": "Arabriga",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.09791,
+        -8.22733
+      ],
+      "country": "Portugal",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Arados-Portugal",
+      "known_aliases": [
+        "Arados",
+        "arados"
+      ],
+      "latest_year": 800,
+      "name": "Arados",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.63686,
+        -7.98688
+      ],
+      "country": "Portugal",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Arandis/Aranni-Portugal",
+      "known_aliases": [
+        "Arandis/Aranni",
+        "arandis/aranni"
+      ],
+      "latest_year": 800,
+      "name": "Arandis/Aranni",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.93838,
+        -4.44119
+      ],
+      "country": "Spain",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Aratispi-Spain",
+      "known_aliases": [
+        "Aratispi",
+        "aratispi"
+      ],
+      "latest_year": 800,
+      "name": "Aratispi",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.22751,
+        16.04632
+      ],
+      "country": "Italy",
+      "earliest_year": -200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Arch of Trajan at Canosa-Italy",
+      "known_aliases": [
+        "Arch of Trajan at Canosa",
+        "arch of trajan at canosa"
+      ],
+      "latest_year": 800,
+      "name": "Arch of Trajan at Canosa",
+      "reason": "missing_entry",
+      "region": "lombard_byzantine_italy",
+      "sample_years": [
+        -200,
+        250,
+        600,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.01679,
+        22.28759
+      ],
+      "country": "Greece",
+      "earliest_year": -200,
+      "existing_historical_names": [
+        {
+          "date": "1950.1.1",
+          "name": "Aridea"
+        }
+      ],
+      "existing_meta_index": 27803,
+      "existing_meta_name": "Aridea",
+      "key": "Archagelos. Aridea-Greece",
+      "known_aliases": [
+        "Archagelos. Aridea",
+        "archagelos. aridea"
+      ],
+      "latest_year": 500,
+      "name": "Archagelos. Aridea",
+      "reason": "under_covered_history",
+      "region": "byzantine_slavic_balkans",
+      "sample_years": [
+        -200,
+        1,
+        200,
+        250,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        56.0578,
+        -2.8189
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Archerfield Estate Dirleton-United Kingdom",
+      "known_aliases": [
+        "Archerfield Estate Dirleton",
+        "archerfield estate dirleton"
+      ],
+      "latest_year": 700,
+      "name": "Archerfield Estate Dirleton",
+      "reason": "missing_entry",
+      "region": "britain_ireland_early",
+      "sample_years": [
+        -200,
+        1,
+        200,
+        250,
+        400,
+        500,
+        600,
+        700
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.57293,
+        -7.9092
+      ],
+      "country": "Portugal",
+      "earliest_year": -200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Arco Romano de Dona Isabel-Portugal",
+      "known_aliases": [
+        "Arco Romano de Dona Isabel",
+        "arco romano de dona isabel"
+      ],
+      "latest_year": 800,
+      "name": "Arco Romano de Dona Isabel",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -200,
+        250,
+        600,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.79841,
+        -8.59189
+      ],
+      "country": "Portugal",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Arco da Geia-Portugal",
+      "known_aliases": [
+        "Arco da Geia",
+        "arco da geia"
+      ],
+      "latest_year": 800,
+      "name": "Arco da Geia",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.64777,
+        13.76879
+      ],
+      "country": "Italy",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Arco di Riccardo-Italy",
+      "known_aliases": [
+        "Arco di Riccardo",
+        "arco di riccardo"
+      ],
+      "latest_year": 500,
+      "name": "Arco di Riccardo",
+      "reason": "missing_entry",
+      "region": "lombard_byzantine_italy",
+      "sample_years": [
+        -500,
+        -200,
+        1,
+        200,
+        250,
+        400,
+        500
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.82367,
+        -8.59527
+      ],
+      "country": "Portugal",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Arco, Labruja-Portugal",
+      "known_aliases": [
+        "Arco, Labruja",
+        "arco, labruja"
+      ],
+      "latest_year": 800,
+      "name": "Arco, Labruja",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.40655,
+        -7.60812
+      ],
+      "country": "Portugal",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Arco-Portugal",
+      "known_aliases": [
+        "Arco",
+        "arco"
+      ],
+      "latest_year": 800,
+      "name": "Arco",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        55.9584,
+        -5.1814
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ardachuple Colintraive-United Kingdom",
+      "known_aliases": [
+        "Ardachuple Colintraive",
+        "ardachuple colintraive"
+      ],
+      "latest_year": 600,
+      "name": "Ardachuple Colintraive",
+      "reason": "missing_entry",
+      "region": "britain_ireland_early",
+      "sample_years": [
+        -200,
+        1,
+        200,
+        250,
+        400,
+        500,
+        600
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        52.7367,
+        -3.0969
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Arddleen-United Kingdom",
+      "known_aliases": [
+        "Arddleen",
+        "arddleen"
+      ],
+      "latest_year": 700,
+      "name": "Arddleen",
+      "reason": "missing_entry",
+      "region": "britain_ireland_early",
+      "sample_years": [
+        -200,
+        1,
+        200,
+        250,
+        400,
+        500,
+        600,
+        700
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        56.7153,
+        -5.286
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ardgour-United Kingdom",
+      "known_aliases": [
+        "Ardgour",
+        "ardgour"
+      ],
+      "latest_year": 600,
+      "name": "Ardgour",
+      "reason": "missing_entry",
+      "region": "britain_ireland_early",
+      "sample_years": [
+        -200,
+        1,
+        200,
+        250,
+        400,
+        500,
+        600
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.06909,
+        0.643
+      ],
+      "country": "France",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "ArdiÃ¨ge-France",
+      "known_aliases": [
+        "ArdiÃ¨ge",
+        "ardiã¨ge"
+      ],
+      "latest_year": 800,
+      "name": "ArdiÃ¨ge",
+      "reason": "missing_entry",
+      "region": "francia_merovingian",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        55.8879,
+        -6.3358
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ardnave Islay-United Kingdom",
+      "known_aliases": [
+        "Ardnave Islay",
+        "ardnave islay"
+      ],
+      "latest_year": 700,
+      "name": "Ardnave Islay",
+      "reason": "missing_entry",
+      "region": "britain_ireland_early",
+      "sample_years": [
+        -200,
+        1,
+        200,
+        250,
+        400,
+        500,
+        600,
+        700
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.20976,
+        7.2568
+      ],
+      "country": "Switzerland",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ardon-Switzerland",
+      "known_aliases": [
+        "Ardon",
+        "ardon"
+      ],
+      "latest_year": 800,
+      "name": "Ardon",
+      "reason": "missing_entry",
+      "region": "germanic_alpine_core",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        53.60925,
+        -6.65352
+      ],
+      "country": "Ireland",
+      "earliest_year": 1,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ardsallagh 2-Ireland",
+      "known_aliases": [
+        "Ardsallagh 2",
+        "ardsallagh 2",
+        "ardsallagh 1",
+        "ardsallagh",
+        "ardsallagh 4",
+        "Ardsallagh 1",
+        "Ardsallagh",
+        "Ardsallagh 4"
+      ],
+      "latest_year": 800,
+      "name": "Ardsallagh 2",
+      "reason": "missing_entry",
+      "region": "britain_ireland_early",
+      "sample_years": [
+        1,
+        200,
+        250,
+        400,
+        500,
+        600,
+        700,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.9709,
+        0.72408
+      ],
+      "country": "France",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Arguenos-France",
+      "known_aliases": [
+        "Arguenos",
+        "arguenos"
+      ],
+      "latest_year": 800,
+      "name": "Arguenos",
+      "reason": "missing_entry",
+      "region": "francia_merovingian",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        51.92224,
+        -3.74376
+      ],
+      "country": "United Kingdom",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Arhosfa'r Garreg-Lwyd, Llanddeusant, Carmarthenshire-United Kingdom",
+      "known_aliases": [
+        "Arhosfa'r Garreg-Lwyd, Llanddeusant, Carmarthenshire",
+        "arhosfa'r garreg-lwyd, llanddeusant, carmarthenshire"
+      ],
+      "latest_year": 800,
+      "name": "Arhosfa'r Garreg-Lwyd, Llanddeusant, Carmarthenshire",
+      "reason": "missing_entry",
+      "region": "britain_ireland_early",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.55091,
+        7.53647
+      ],
+      "country": "Switzerland",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Arialbinnum-Switzerland",
+      "known_aliases": [
+        "Arialbinnum",
+        "arialbinnum"
+      ],
+      "latest_year": 800,
+      "name": "Arialbinnum",
+      "reason": "missing_entry",
+      "region": "germanic_alpine_core",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.4492,
+        -8.02333
+      ],
+      "country": "Portugal",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Aritium-Portugal",
+      "known_aliases": [
+        "Aritium",
+        "aritium"
+      ],
+      "latest_year": 800,
+      "name": "Aritium",
+      "reason": "missing_entry",
+      "region": "visigothic_iberia",
+      "sample_years": [
+        -500,
+        200,
+        500,
+        800
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    }
+  ]
+}

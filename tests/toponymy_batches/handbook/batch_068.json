@@ -1,0 +1,1857 @@
+{
+  "batch_index": 68,
+  "count": 60,
+  "project": "HANDBOOK",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        25.66478,
+        32.63188
+      ],
+      "country": "Egypt",
+      "earliest_year": -10000,
+      "existing_historical_names": [
+        {
+          "date": "-3000.1.1",
+          "name": "Waset"
+        },
+        {
+          "date": "-332.1.1",
+          "name": "Thebes"
+        },
+        {
+          "date": "30.1.1",
+          "name": "Diospolis Magna"
+        },
+        {
+          "date": "640.1.1",
+          "name": "Al-Uqsur"
+        },
+        {
+          "date": "1800.1.1",
+          "name": "Luxor"
+        }
+      ],
+      "existing_meta_index": 6173,
+      "existing_meta_name": "Luxor",
+      "key": "Diospolis Magna-Egypt",
+      "known_aliases": [
+        "Diospolis Magna",
+        "diospolis magna"
+      ],
+      "latest_year": 1517,
+      "name": "Diospolis Magna",
+      "reason": "under_covered_history",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        -10000,
+        -4500,
+        1050,
+        1517
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        28.96493,
+        16.28326
+      ],
+      "country": "Libya",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Waddān-Libya_2",
+      "known_aliases": [
+        "Waddān",
+        "waddān",
+        "ودان"
+      ],
+      "latest_year": 1500,
+      "name": "Waddān",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1150,
+        1350,
+        1500
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        28.95651,
+        21.21413
+      ],
+      "country": "Libya",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Awǧilaŧ-Libya",
+      "known_aliases": [
+        "Awǧilaŧ",
+        "awǧilaŧ",
+        "أوجلة"
+      ],
+      "latest_year": 1500,
+      "name": "Awǧilaŧ",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1150,
+        1350,
+        1500
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        30.43271,
+        31.05262
+      ],
+      "country": "Egypt",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Subk al-ʿAbīd-Egypt",
+      "known_aliases": [
+        "Subk al-ʿAbīd",
+        "subk al-ʿabīd",
+        "سبك العبيد"
+      ],
+      "latest_year": 1500,
+      "name": "Subk al-ʿAbīd",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1150,
+        1350,
+        1500
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        30.73556,
+        31.62447
+      ],
+      "country": "Egypt",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Qurbayt-Egypt",
+      "known_aliases": [
+        "Qurbayt",
+        "qurbayt",
+        "قربيت"
+      ],
+      "latest_year": 1500,
+      "name": "Qurbayt",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1150,
+        1350,
+        1500
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        30.85902,
+        32.32461
+      ],
+      "country": "Egypt",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "al-Qanṭaraŧ-Egypt",
+      "known_aliases": [
+        "al-Qanṭaraŧ",
+        "al-qanṭaraŧ",
+        "القنطرة"
+      ],
+      "latest_year": 1500,
+      "name": "al-Qanṭaraŧ",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1150,
+        1350,
+        1500
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        26.10673,
+        34.27748
+      ],
+      "country": "Egypt",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Quṣayr-Egypt",
+      "known_aliases": [
+        "Quṣayr",
+        "quṣayr",
+        "قصير"
+      ],
+      "latest_year": 1500,
+      "name": "Quṣayr",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1150,
+        1350,
+        1500
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.37702,
+        -3.64184
+      ],
+      "country": "Morocco",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Wādī Malwiyyaŧ-Morocco",
+      "known_aliases": [
+        "Wādī Malwiyyaŧ",
+        "wādī malwiyyaŧ",
+        "وادي ملوية"
+      ],
+      "latest_year": 1500,
+      "name": "Wādī Malwiyyaŧ",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1150,
+        1350,
+        1500
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.42515,
+        -3.67995
+      ],
+      "country": "Morocco",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Wādī Masūn-Morocco",
+      "known_aliases": [
+        "Wādī Masūn",
+        "wādī masūn",
+        "وادي مسون"
+      ],
+      "latest_year": 1500,
+      "name": "Wādī Masūn",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1150,
+        1350,
+        1500
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.19475,
+        -4.31719
+      ],
+      "country": "Morocco",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Qalʿaŧ Karmāṭaŧ-Morocco",
+      "known_aliases": [
+        "Qalʿaŧ Karmāṭaŧ",
+        "qalʿaŧ karmāṭaŧ",
+        "قلعة كرماطة"
+      ],
+      "latest_year": 1500,
+      "name": "Qalʿaŧ Karmāṭaŧ",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1150,
+        1350,
+        1500
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.24946,
+        -4.39975
+      ],
+      "country": "Morocco",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Wādī Īnāwan-Morocco",
+      "known_aliases": [
+        "Wādī Īnāwan",
+        "wādī īnāwan",
+        "وادي إيناون"
+      ],
+      "latest_year": 1500,
+      "name": "Wādī Īnāwan",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1150,
+        1350,
+        1500
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        31.87198,
+        -4.48761
+      ],
+      "country": "Morocco",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Wādī Zīz-Morocco",
+      "known_aliases": [
+        "Wādī Zīz",
+        "wādī zīz",
+        "وادي زيز"
+      ],
+      "latest_year": 1500,
+      "name": "Wādī Zīz",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1150,
+        1350,
+        1500
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.49584,
+        -5.30163
+      ],
+      "country": "Morocco",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Wādī Warġaŧ-Morocco",
+      "known_aliases": [
+        "Wādī Warġaŧ",
+        "wādī warġaŧ",
+        "وادي ورغة"
+      ],
+      "latest_year": 1500,
+      "name": "Wādī Warġaŧ",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1150,
+        1350,
+        1500
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.9938,
+        -5.76527
+      ],
+      "country": "Morocco",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Wādī Safdad-Morocco",
+      "known_aliases": [
+        "Wādī Safdad",
+        "wādī safdad",
+        "وادي سفدد"
+      ],
+      "latest_year": 1500,
+      "name": "Wādī Safdad",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1150,
+        1350,
+        1500
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        31.13962,
+        -5.84677
+      ],
+      "country": "Morocco",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "al-Naḥḥāsīn-Morocco",
+      "known_aliases": [
+        "al-Naḥḥāsīn",
+        "al-naḥḥāsīn",
+        "النحاسين"
+      ],
+      "latest_year": 1500,
+      "name": "al-Naḥḥāsīn",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1150,
+        1350,
+        1500
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.45352,
+        -5.98544
+      ],
+      "country": "Morocco",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Wādī Sabū-Morocco",
+      "known_aliases": [
+        "Wādī Sabū",
+        "wādī sabū",
+        "وادي سبو"
+      ],
+      "latest_year": 1500,
+      "name": "Wādī Sabū",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1150,
+        1350,
+        1500
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.55645,
+        -6.48719
+      ],
+      "country": "Morocco",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Buḥayraŧ Aryāġ-Morocco",
+      "known_aliases": [
+        "Buḥayraŧ Aryāġ",
+        "buḥayraŧ aryāġ",
+        "بحيرة أرياغ"
+      ],
+      "latest_year": 1500,
+      "name": "Buḥayraŧ Aryāġ",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1150,
+        1350,
+        1500
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.99489,
+        -6.88943
+      ],
+      "country": "Morocco",
+      "earliest_year": 1000,
+      "existing_historical_names": [
+        {
+          "date": "1150.1.1",
+          "name": "Ribat al-Fath"
+        },
+        {
+          "date": "1700.1.1",
+          "name": "Rabat"
+        }
+      ],
+      "existing_meta_index": 7535,
+      "existing_meta_name": "Rabat",
+      "key": "Ribāṭ-Morocco",
+      "known_aliases": [
+        "Ribāṭ",
+        "ribāṭ",
+        "رباط"
+      ],
+      "latest_year": 1500,
+      "name": "Ribāṭ",
+      "reason": "under_covered_history",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1150,
+        1350,
+        1500
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        30.93544,
+        -7.42487
+      ],
+      "country": "Morocco",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Wādī Darʿaŧ-Morocco",
+      "known_aliases": [
+        "Wādī Darʿaŧ",
+        "wādī darʿaŧ",
+        "وادي درعة"
+      ],
+      "latest_year": 1500,
+      "name": "Wādī Darʿaŧ",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1150,
+        1350,
+        1500
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        29.19903,
+        -8.07804
+      ],
+      "country": "Morocco",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Wādī Darʿaŧ-Morocco (2)",
+      "known_aliases": [
+        "Wādī Darʿaŧ",
+        "wādī darʿaŧ",
+        "وادي درعة"
+      ],
+      "latest_year": 1500,
+      "name": "Wādī Darʿaŧ",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1150,
+        1350,
+        1500
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.18255,
+        8.71976
+      ],
+      "country": "Tunisia",
+      "earliest_year": 1000,
+      "existing_historical_names": [
+        {
+          "date": "1921.1.1",
+          "name": "Al Kâf"
+        },
+        {
+          "date": "2000.1.1",
+          "name": "Al-Kaf"
+        }
+      ],
+      "existing_meta_index": 16429,
+      "existing_meta_name": "Al Kâf",
+      "key": "Ḫawr al-Kāf-Tunisia",
+      "known_aliases": [
+        "Ḫawr al-Kāf",
+        "ḫawr al-kāf",
+        "خور الكاف"
+      ],
+      "latest_year": 1500,
+      "name": "Ḫawr al-Kāf",
+      "reason": "suspicious_existing_name",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1150,
+        1350,
+        1500
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.99173,
+        -6.75244
+      ],
+      "country": "Morocco",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ain el Hajaj-Morocco",
+      "known_aliases": [
+        "Ain el Hajaj",
+        "ain el hajaj"
+      ],
+      "latest_year": 1517,
+      "name": "Ain el Hajaj",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1200,
+        1400,
+        1517
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.21,
+        -5.7
+      ],
+      "country": "Morocco",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Jebel bou Draa-Morocco",
+      "known_aliases": [
+        "Jebel bou Draa",
+        "jebel bou draa"
+      ],
+      "latest_year": 1517,
+      "name": "Jebel bou Draa",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1200,
+        1400,
+        1517
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.28327,
+        1.98122
+      ],
+      "country": "Algeria",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Oppidum Novum-Algeria",
+      "known_aliases": [
+        "Oppidum Novum",
+        "oppidum novum"
+      ],
+      "latest_year": 1200,
+      "name": "Oppidum Novum",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.74256,
+        6.34191
+      ],
+      "country": "Algeria",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tadutti-Algeria",
+      "known_aliases": [
+        "Tadutti",
+        "tadutti"
+      ],
+      "latest_year": 1200,
+      "name": "Tadutti",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.69639,
+        6.60542
+      ],
+      "country": "Algeria",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hr. Guesseria-Algeria",
+      "known_aliases": [
+        "Hr. Guesseria",
+        "hr. guesseria"
+      ],
+      "latest_year": 1200,
+      "name": "Hr. Guesseria",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.67359,
+        6.65733
+      ],
+      "country": "Algeria",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Chemora-Algeria",
+      "known_aliases": [
+        "Chemora",
+        "chemora"
+      ],
+      "latest_year": 1200,
+      "name": "Chemora",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.74969,
+        5.87448
+      ],
+      "country": "Algeria",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ad Centenarium-Algeria",
+      "known_aliases": [
+        "Ad Centenarium",
+        "ad centenarium"
+      ],
+      "latest_year": 1200,
+      "name": "Ad Centenarium",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.55466,
+        5.61382
+      ],
+      "country": "Algeria",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Nicivibus-Algeria",
+      "known_aliases": [
+        "Nicivibus",
+        "nicivibus"
+      ],
+      "latest_year": 1200,
+      "name": "Nicivibus",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.62632,
+        5.90219
+      ],
+      "country": "Algeria",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lamasba-Algeria",
+      "known_aliases": [
+        "Lamasba",
+        "lamasba"
+      ],
+      "latest_year": 1200,
+      "name": "Lamasba",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.04782,
+        5.5833
+      ],
+      "country": "Algeria",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mesarfelta-Algeria",
+      "known_aliases": [
+        "Mesarfelta",
+        "mesarfelta"
+      ],
+      "latest_year": 1200,
+      "name": "Mesarfelta",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.63003,
+        5.96235
+      ],
+      "country": "Algeria",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lamsorti-Algeria",
+      "known_aliases": [
+        "Lamsorti",
+        "lamsorti"
+      ],
+      "latest_year": 1200,
+      "name": "Lamsorti",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.09995,
+        5.63101
+      ],
+      "country": "Algeria",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ad Aquas Herculis-Algeria",
+      "known_aliases": [
+        "Ad Aquas Herculis",
+        "ad aquas herculis"
+      ],
+      "latest_year": 1200,
+      "name": "Ad Aquas Herculis",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.22229,
+        5.70491
+      ],
+      "country": "Algeria",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Calceus-Algeria",
+      "known_aliases": [
+        "Calceus",
+        "calceus"
+      ],
+      "latest_year": 1200,
+      "name": "Calceus",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.90378,
+        5.7532
+      ],
+      "country": "Algeria",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Castrum Du Confluent-Algeria",
+      "known_aliases": [
+        "Castrum Du Confluent",
+        "castrum du confluent"
+      ],
+      "latest_year": 1200,
+      "name": "Castrum Du Confluent",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.9801,
+        4.18481
+      ],
+      "country": "Algeria",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tatilti-Algeria",
+      "known_aliases": [
+        "Tatilti",
+        "tatilti"
+      ],
+      "latest_year": 1200,
+      "name": "Tatilti",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.64459,
+        5.37077
+      ],
+      "country": "Algeria",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tamar Hat-Algeria",
+      "known_aliases": [
+        "Tamar Hat",
+        "tamar hat"
+      ],
+      "latest_year": 1200,
+      "name": "Tamar Hat",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.16857,
+        1.34104
+      ],
+      "country": "Algeria",
+      "earliest_year": 1000,
+      "existing_historical_names": [
+        {
+          "date": "1901.1.1",
+          "name": "El-Asnam"
+        },
+        {
+          "date": "1981.1.1",
+          "name": "Chlef"
+        }
+      ],
+      "existing_meta_index": 15073,
+      "existing_meta_name": "Chlef",
+      "key": "Chlef-Algeria_2",
+      "known_aliases": [
+        "Chlef",
+        "chlef"
+      ],
+      "latest_year": 1200,
+      "name": "Chlef",
+      "reason": "under_covered_history",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.13129,
+        6.76395
+      ],
+      "country": "Algeria",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sigus-Algeria",
+      "known_aliases": [
+        "Sigus",
+        "sigus"
+      ],
+      "latest_year": 1200,
+      "name": "Sigus",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.37232,
+        6.59109
+      ],
+      "country": "Algeria",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "El Hofra-Algeria",
+      "known_aliases": [
+        "El Hofra",
+        "el hofra"
+      ],
+      "latest_year": 1200,
+      "name": "El Hofra",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.26514,
+        6.49135
+      ],
+      "country": "Algeria",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Castellum Phuensium-Algeria",
+      "known_aliases": [
+        "Castellum Phuensium",
+        "castellum phuensium"
+      ],
+      "latest_year": 1200,
+      "name": "Castellum Phuensium",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.37066,
+        2.35783
+      ],
+      "country": "Algeria",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ferme Romanette-Algeria",
+      "known_aliases": [
+        "Ferme Romanette",
+        "ferme romanette"
+      ],
+      "latest_year": 1200,
+      "name": "Ferme Romanette",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.18518,
+        3.49838
+      ],
+      "country": "Algeria",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Castellum Dimmidi-Algeria",
+      "known_aliases": [
+        "Castellum Dimmidi",
+        "castellum dimmidi"
+      ],
+      "latest_year": 1200,
+      "name": "Castellum Dimmidi",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        26.2793,
+        8.65793
+      ],
+      "country": "Algeria",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Afer-Algeria",
+      "known_aliases": [
+        "Afer",
+        "afer"
+      ],
+      "latest_year": 1200,
+      "name": "Afer",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        26.21696,
+        8.62416
+      ],
+      "country": "Algeria",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tin Touloult-Algeria",
+      "known_aliases": [
+        "Tin Touloult",
+        "tin touloult"
+      ],
+      "latest_year": 1200,
+      "name": "Tin Touloult",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.59189,
+        5.08286
+      ],
+      "country": "Algeria",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Macri-Algeria",
+      "known_aliases": [
+        "Macri",
+        "macri"
+      ],
+      "latest_year": 1200,
+      "name": "Macri",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.81876,
+        4.28717
+      ],
+      "country": "Algeria",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Aras-Algeria",
+      "known_aliases": [
+        "Aras",
+        "aras"
+      ],
+      "latest_year": 1200,
+      "name": "Aras",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.87848,
+        3.77318
+      ],
+      "country": "Algeria",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Grimidi-Algeria",
+      "known_aliases": [
+        "Grimidi",
+        "grimidi"
+      ],
+      "latest_year": 1200,
+      "name": "Grimidi",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.2173,
+        0.24353
+      ],
+      "country": "Algeria",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ala Miliaria-Algeria",
+      "known_aliases": [
+        "Ala Miliaria",
+        "ala miliaria"
+      ],
+      "latest_year": 1200,
+      "name": "Ala Miliaria",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.15881,
+        3.26216
+      ],
+      "country": "Algeria",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Aïn-Tamda-Algeria",
+      "known_aliases": [
+        "Aïn-Tamda",
+        "aïn-tamda"
+      ],
+      "latest_year": 1200,
+      "name": "Aïn-Tamda",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.26958,
+        2.76532
+      ],
+      "country": "Algeria",
+      "earliest_year": 1000,
+      "existing_historical_names": [
+        {
+          "date": "1901.1.1",
+          "name": "Medea"
+        }
+      ],
+      "existing_meta_index": 15350,
+      "existing_meta_name": "Medea",
+      "key": "Medea-Algeria",
+      "known_aliases": [
+        "Medea",
+        "medea"
+      ],
+      "latest_year": 1200,
+      "name": "Medea",
+      "reason": "under_covered_history",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.25781,
+        6.28278
+      ],
+      "country": "Algeria",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Oued-Athménia-Algeria",
+      "known_aliases": [
+        "Oued-Athménia",
+        "oued-athménia"
+      ],
+      "latest_year": 1200,
+      "name": "Oued-Athménia",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.68865,
+        -0.87938
+      ],
+      "country": "Algeria",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "El Ancor-Algeria",
+      "known_aliases": [
+        "El Ancor",
+        "el ancor"
+      ],
+      "latest_year": 1200,
+      "name": "El Ancor",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.80536,
+        -0.26721
+      ],
+      "country": "Algeria",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bethioua-Algeria",
+      "known_aliases": [
+        "Bethioua",
+        "bethioua"
+      ],
+      "latest_year": 1200,
+      "name": "Bethioua",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.84748,
+        6.64457
+      ],
+      "country": "Algeria",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Medracen-Algeria",
+      "known_aliases": [
+        "Medracen",
+        "medracen"
+      ],
+      "latest_year": 1200,
+      "name": "Medracen",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.64835,
+        5.38772
+      ],
+      "country": "Algeria",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cellas-Algeria",
+      "known_aliases": [
+        "Cellas",
+        "cellas"
+      ],
+      "latest_year": 1200,
+      "name": "Cellas",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.46614,
+        5.70593
+      ],
+      "country": "Algeria",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "El Kasr-Algeria",
+      "known_aliases": [
+        "El Kasr",
+        "el kasr"
+      ],
+      "latest_year": 1200,
+      "name": "El Kasr",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.04523,
+        5.33015
+      ],
+      "country": "Algeria",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Castellum Dianese-Algeria",
+      "known_aliases": [
+        "Castellum Dianese",
+        "castellum dianese"
+      ],
+      "latest_year": 1200,
+      "name": "Castellum Dianese",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.19982,
+        5.65369
+      ],
+      "country": "Algeria",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ain Hanech-Algeria",
+      "known_aliases": [
+        "Ain Hanech",
+        "ain hanech"
+      ],
+      "latest_year": 1200,
+      "name": "Ain Hanech",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.85756,
+        5.3662
+      ],
+      "country": "Algeria",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lobrinenses-Algeria",
+      "known_aliases": [
+        "Lobrinenses",
+        "lobrinenses"
+      ],
+      "latest_year": 1200,
+      "name": "Lobrinenses",
+      "reason": "missing_entry",
+      "region": "mediaeval_north_africa",
+      "sample_years": [
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "sources": [
+        "HANDBOOK"
+      ]
+    }
+  ]
+}

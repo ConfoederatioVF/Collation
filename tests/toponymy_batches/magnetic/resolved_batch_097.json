@@ -1,0 +1,822 @@
+{
+  "batch_index": 97,
+  "project": "MAGNETIC",
+  "settlements": [
+    {
+      "key": "Leppävirta-Finland",
+      "name": "Leppävirta",
+      "canonical_name": "Leppävirta",
+      "country": "Finland",
+      "coords_lat_lng": [
+        62.49009,
+        27.78262
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Leppävirta",
+        "leppävirta",
+        "leppaevirta",
+        "leppjavirta",
+        "леппявирта",
+        "Leppaevirta",
+        "Leppjavirta",
+        "Леппявирта"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Leppävirta"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Lerum-Sweden",
+      "name": "Lerum",
+      "canonical_name": "Lerum",
+      "country": "Sweden",
+      "coords_lat_lng": [
+        57.77051,
+        12.26904
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": 11830,
+      "known_aliases": [
+        "Lerum",
+        "lerum"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Lerum"
+        },
+        {
+          "date": "1898.1.1",
+          "name": "Lerum"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Lervik-Norway",
+      "name": "Lervik",
+      "canonical_name": "Lervik",
+      "country": "Norway",
+      "coords_lat_lng": [
+        59.27119,
+        10.7461
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Lervik",
+        "lervik"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Lervik"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Les Angles-France",
+      "name": "Les Angles",
+      "canonical_name": "Les Angles",
+      "country": "France",
+      "coords_lat_lng": [
+        43.9414,
+        4.7563
+      ],
+      "earliest_year": 1800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Les Angles",
+        "les angles"
+      ],
+      "historical_names": [
+        {
+          "date": "1800.1.1",
+          "name": "Les Angles"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Les Arcs-France",
+      "name": "Les Arcs",
+      "canonical_name": "Les Arcs",
+      "country": "France",
+      "coords_lat_lng": [
+        43.4533,
+        6.4862
+      ],
+      "earliest_year": 1800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Les Arcs",
+        "les arcs"
+      ],
+      "historical_names": [
+        {
+          "date": "1800.1.1",
+          "name": "Les Arcs"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Les Clayes-sous-Bois-France",
+      "name": "Les Clayes-sous-Bois",
+      "canonical_name": "Les Clayes-sous-Bois",
+      "country": "France",
+      "coords_lat_lng": [
+        48.8168,
+        1.9835
+      ],
+      "earliest_year": 1800,
+      "latest_year": 2025,
+      "existing_meta_index": 14987,
+      "known_aliases": [
+        "Les Clayes-sous-Bois",
+        "les clayes-sous-bois"
+      ],
+      "historical_names": [
+        {
+          "date": "1800.1.1",
+          "name": "Les Clayes-sous-Bois"
+        },
+        {
+          "date": "1901.1.1",
+          "name": "Les Clayes-sous-Bois"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Les Hauts-d'Anjou-France",
+      "name": "Les Hauts-d'Anjou",
+      "canonical_name": "Les Hauts-d'Anjou",
+      "country": "France",
+      "coords_lat_lng": [
+        47.697,
+        -0.5499
+      ],
+      "earliest_year": 1800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Les Hauts-d'Anjou",
+        "les hauts-d'anjou"
+      ],
+      "historical_names": [
+        {
+          "date": "1800.1.1",
+          "name": "Les Hauts-d'Anjou"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Les Herbiers-France",
+      "name": "Les Herbiers",
+      "canonical_name": "Les Herbiers",
+      "country": "France",
+      "coords_lat_lng": [
+        46.8644,
+        -1.0286
+      ],
+      "earliest_year": 1800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Les Herbiers",
+        "les herbiers"
+      ],
+      "historical_names": [
+        {
+          "date": "1800.1.1",
+          "name": "Les Herbiers"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Les Moulins-France",
+      "name": "Les Moulins",
+      "canonical_name": "Les Moulins",
+      "country": "France",
+      "coords_lat_lng": [
+        43.67523,
+        7.20456
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Les Moulins",
+        "les moulins",
+        "arenas les moulins",
+        "Arenas les Moulins"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Les Moulins"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Les Olives-France",
+      "name": "Les Olives",
+      "canonical_name": "Les Olives",
+      "country": "France",
+      "coords_lat_lng": [
+        43.32393,
+        5.4584
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Les Olives",
+        "les olives"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Les Olives"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Les Pennes-Mirabeau-France",
+      "name": "Les Pennes-Mirabeau",
+      "canonical_name": "Les Pennes-Mirabeau",
+      "country": "France",
+      "coords_lat_lng": [
+        43.4005,
+        5.3222
+      ],
+      "earliest_year": 1800,
+      "latest_year": 2025,
+      "existing_meta_index": 15551,
+      "known_aliases": [
+        "Les Pennes-Mirabeau",
+        "les pennes-mirabeau"
+      ],
+      "historical_names": [
+        {
+          "date": "1800.1.1",
+          "name": "Les Pennes-Mirabeau"
+        },
+        {
+          "date": "1901.1.1",
+          "name": "Les Pennes-Mirabeau"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Les Ponts-de-Cé-France",
+      "name": "Les Ponts-de-Cé",
+      "canonical_name": "Les Ponts-de-Cé",
+      "country": "France",
+      "coords_lat_lng": [
+        47.427,
+        -0.511
+      ],
+      "earliest_year": 1800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Les Ponts-de-Cé",
+        "les ponts-de-cé"
+      ],
+      "historical_names": [
+        {
+          "date": "1800.1.1",
+          "name": "Les Ponts-de-Cé"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Les Sables-d'Olonne-France",
+      "name": "Les Sables-d'Olonne",
+      "canonical_name": "Les Sables-d'Olonne",
+      "country": "France",
+      "coords_lat_lng": [
+        46.5264,
+        -1.7611
+      ],
+      "earliest_year": 1200,
+      "latest_year": 2025,
+      "existing_meta_index": 8043,
+      "known_aliases": [
+        "Les Sables-d'Olonne",
+        "les sables-d'olonne",
+        "les sables d' olonne",
+        "les Sables d' Olonne"
+      ],
+      "historical_names": [
+        {
+          "date": "1218.1.1",
+          "name": "Les Sables-d'Olonne"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Les Sorinières-France",
+      "name": "Les Sorinières",
+      "canonical_name": "Les Sorinières",
+      "country": "France",
+      "coords_lat_lng": [
+        47.142,
+        -1.5195
+      ],
+      "earliest_year": 1800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Les Sorinières",
+        "les sorinières"
+      ],
+      "historical_names": [
+        {
+          "date": "1800.1.1",
+          "name": "Les Sorinières"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Lescar-France",
+      "name": "Lescar",
+      "canonical_name": "Lescar",
+      "country": "France",
+      "coords_lat_lng": [
+        43.3412,
+        -0.4303
+      ],
+      "earliest_year": 1800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Lescar",
+        "lescar"
+      ],
+      "historical_names": [
+        {
+          "date": "1800.1.1",
+          "name": "Lescar"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Lesce-Slovenia",
+      "name": "Lesce",
+      "canonical_name": "Lesce",
+      "country": "Slovenia",
+      "coords_lat_lng": [
+        46.36111,
+        14.15778
+      ],
+      "earliest_year": 1350,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Lesce",
+        "lesce",
+        "lees",
+        "lesc",
+        "lszh",
+        "Lees",
+        "Lesc"
+      ],
+      "historical_names": [
+        {
+          "date": "1350.1.1",
+          "name": "Lesce"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Lesquin-France",
+      "name": "Lesquin",
+      "canonical_name": "Lesquin",
+      "country": "France",
+      "coords_lat_lng": [
+        50.5904,
+        3.1132
+      ],
+      "earliest_year": 1800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Lesquin",
+        "lesquin"
+      ],
+      "historical_names": [
+        {
+          "date": "1800.1.1",
+          "name": "Lesquin"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Lessines-Belgium",
+      "name": "Lessines",
+      "canonical_name": "Lessines",
+      "country": "Belgium",
+      "coords_lat_lng": [
+        50.71104,
+        3.83579
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": 18080,
+      "known_aliases": [
+        "Lessines",
+        "lessines",
+        "lesin",
+        "lessen",
+        "lessin",
+        "Lesin",
+        "Lessen",
+        "Lessin"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Lessines"
+        },
+        {
+          "date": "1940.1.1",
+          "name": "Lessines"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Letchworth Garden City-United Kingdom",
+      "name": "Letchworth Garden City",
+      "canonical_name": "Letchworth Garden City",
+      "country": "United Kingdom",
+      "coords_lat_lng": [
+        51.97938,
+        -0.22664
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Letchworth Garden City",
+        "letchworth garden city",
+        "letchworth",
+        "Letchworth"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Letchworth Garden City"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Letterkenny-Ireland",
+      "name": "Letterkenny",
+      "canonical_name": "Letterkenny",
+      "country": "Ireland",
+      "coords_lat_lng": [
+        54.95,
+        -7.73333
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": 15354,
+      "known_aliases": [
+        "Letterkenny",
+        "letterkenny",
+        "ltr",
+        "leitir ceanainn",
+        "leterkeni",
+        "LTR",
+        "Leitir Ceanainn",
+        "Leterkeni"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Letterkenny"
+        },
+        {
+          "date": "1901.1.1",
+          "name": "Letterkenny"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Leuben-Germany",
+      "name": "Leuben",
+      "canonical_name": "Leuben",
+      "country": "Germany",
+      "coords_lat_lng": [
+        51.01122,
+        13.82029
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Leuben",
+        "leuben"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Leuben"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Leusden-Netherlands",
+      "name": "Leusden",
+      "canonical_name": "Leusden",
+      "country": "Netherlands",
+      "coords_lat_lng": [
+        52.1325,
+        5.43194
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": 9558,
+      "known_aliases": [
+        "Leusden",
+        "leusden",
+        "hamersveld",
+        "leusden-centrum",
+        "леусден",
+        "Hamersveld",
+        "Leusden-Centrum",
+        "Леусден"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Leusden"
+        },
+        {
+          "date": "1840.1.1",
+          "name": "Leusden"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Leutkirch-Germany",
+      "name": "Leutkirch",
+      "canonical_name": "Leutkirch",
+      "country": "Germany",
+      "coords_lat_lng": [
+        47.82672,
+        10.0205
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": 13451,
+      "known_aliases": [
+        "Leutkirch",
+        "leutkirch",
+        "leutkirch im allgaeu",
+        "leutkirch im allgau",
+        "leutkirch im allgäu",
+        "Leutkirch im Allgaeu",
+        "Leutkirch im Allgau",
+        "Leutkirch im Allgäu"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Leutkirch"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Levallois-Perret-France",
+      "name": "Levallois-Perret",
+      "canonical_name": "Levallois-Perret",
+      "country": "France",
+      "coords_lat_lng": [
+        48.8946,
+        2.2874
+      ],
+      "earliest_year": 1800,
+      "latest_year": 2025,
+      "existing_meta_index": 10411,
+      "known_aliases": [
+        "Levallois-Perret",
+        "levallois-perret"
+      ],
+      "historical_names": [
+        {
+          "date": "1800.1.1",
+          "name": "Levallois-Perret"
+        },
+        {
+          "date": "1876.1.1",
+          "name": "Levallois-Perret"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Levanger-Norway",
+      "name": "Levanger",
+      "canonical_name": "Levanger",
+      "country": "Norway",
+      "coords_lat_lng": [
+        63.74644,
+        11.29963
+      ],
+      "earliest_year": 800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Levanger",
+        "levanger",
+        "kommun levanger",
+        "levangers kommun",
+        "levangken",
+        "Kommun Levanger",
+        "Levangers kommun",
+        "Levangken"
+      ],
+      "historical_names": [
+        {
+          "date": "800.1.1",
+          "name": "Levanger"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Leven-United Kingdom",
+      "name": "Leven",
+      "canonical_name": "Leven",
+      "country": "United Kingdom",
+      "coords_lat_lng": [
+        56.2,
+        -3
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Leven",
+        "leven",
+        "inbhir liobhann",
+        "inbhir lìobhann",
+        "inbhir líobhann",
+        "Inbhir Liobhann",
+        "Inbhir Lìobhann",
+        "Inbhir Líobhann"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Leven"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Lewes-United Kingdom",
+      "name": "Lewes",
+      "canonical_name": "Lewes",
+      "country": "United Kingdom",
+      "coords_lat_lng": [
+        50.87398,
+        0.0088
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Lewes",
+        "lewes",
+        "l'juis",
+        "luis",
+        "lei wei si",
+        "L'juis",
+        "Luis"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Lewes"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Leyland-United Kingdom",
+      "name": "Leyland",
+      "canonical_name": "Leyland",
+      "country": "United Kingdom",
+      "coords_lat_lng": [
+        53.69786,
+        -2.68758
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Leyland",
+        "leyland"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Leyland"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Leytonstone-United Kingdom",
+      "name": "Leytonstone",
+      "canonical_name": "Leytonstone",
+      "country": "United Kingdom",
+      "coords_lat_lng": [
+        51.56856,
+        0.00768
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": 10565,
+      "known_aliases": [
+        "Leytonstone",
+        "leytonstone",
+        "leitonstooun",
+        "lejtanstoun",
+        "lejtonstoun",
+        "Leitonstooun",
+        "Lejtanstoun",
+        "Lejtonstoun"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Leytonstone"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Lich-Germany",
+      "name": "Lich",
+      "canonical_name": "Lich",
+      "country": "Germany",
+      "coords_lat_lng": [
+        50.52085,
+        8.81567
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Lich",
+        "lich",
+        "likh",
+        "li xi",
+        "lysh",
+        "Likh"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Lich"
+        }
+      ],
+      "verified_settlement": true
+    }
+  ]
+}

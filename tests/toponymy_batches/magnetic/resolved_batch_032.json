@@ -1,0 +1,845 @@
+{
+  "batch_index": 32,
+  "project": "MAGNETIC",
+  "settlements": [
+    {
+      "key": "Chaumont-Gistoux-Belgium",
+      "name": "Chaumont-Gistoux",
+      "canonical_name": "Chaumont-Gistoux",
+      "country": "Belgium",
+      "coords_lat_lng": [
+        50.67753,
+        4.7212
+      ],
+      "earliest_year": -4000,
+      "latest_year": 2025,
+      "existing_meta_index": 20118,
+      "known_aliases": [
+        "Chaumont-Gistoux",
+        "chaumont-gistoux",
+        "chaumont",
+        "shomon-zhistu",
+        "tchamont-djistou",
+        "Chaumont",
+        "Shomon-Zhistu",
+        "Tchamont-Djistou"
+      ],
+      "historical_names": [
+        {
+          "date": "-4000.1.1",
+          "name": "Chaumont-Gistoux"
+        },
+        {
+          "date": "1954.1.1",
+          "name": "Chaumont-Gistoux"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Chauny-France",
+      "name": "Chauny",
+      "canonical_name": "Chauny",
+      "country": "France",
+      "coords_lat_lng": [
+        49.6185,
+        3.2192
+      ],
+      "earliest_year": 1800,
+      "latest_year": 2025,
+      "existing_meta_index": 9085,
+      "known_aliases": [
+        "Chauny",
+        "chauny"
+      ],
+      "historical_names": [
+        {
+          "date": "1809.1.1",
+          "name": "Chauny"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Cheadle Hulme-United Kingdom",
+      "name": "Cheadle Hulme",
+      "canonical_name": "Cheadle Hulme",
+      "country": "United Kingdom",
+      "coords_lat_lng": [
+        53.3761,
+        -2.1897
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Cheadle Hulme",
+        "cheadle hulme",
+        "chedl-khalm",
+        "cidilo-hjumo",
+        "qi de er xiu mu",
+        "Chedl-Khalm",
+        "Cidilo-Hjumo"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Cheadle Hulme"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Cheadle-United Kingdom",
+      "name": "Cheadle",
+      "canonical_name": "Cheadle",
+      "country": "United Kingdom",
+      "coords_lat_lng": [
+        52.98333,
+        -1.98333
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Cheadle",
+        "cheadle"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Cheadle"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Chelles-France",
+      "name": "Chelles",
+      "canonical_name": "Chelles",
+      "country": "France",
+      "coords_lat_lng": [
+        48.8845,
+        2.5954
+      ],
+      "earliest_year": 1800,
+      "latest_year": 2025,
+      "existing_meta_index": 9087,
+      "known_aliases": [
+        "Chelles",
+        "chelles"
+      ],
+      "historical_names": [
+        {
+          "date": "1809.1.1",
+          "name": "Chelles"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Chelmsford-United Kingdom",
+      "name": "Chelmsford",
+      "canonical_name": "Chelmsford",
+      "country": "United Kingdom",
+      "coords_lat_lng": [
+        51.74,
+        0.48
+      ],
+      "earliest_year": 1200,
+      "latest_year": 2025,
+      "existing_meta_index": 7888,
+      "known_aliases": [
+        "Chelmsford",
+        "chelmsford",
+        "caesaromagus",
+        "Caesaromagus"
+      ],
+      "historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Chelmsford"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Chelmsley Wood-United Kingdom",
+      "name": "Chelmsley Wood",
+      "canonical_name": "Chelmsley Wood",
+      "country": "United Kingdom",
+      "coords_lat_lng": [
+        52.4781,
+        -1.73813
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Chelmsley Wood",
+        "chelmsley wood",
+        "chelmnas vudas",
+        "chelmsli-vud",
+        "celmasli vuda",
+        "Chelmnas Vudas",
+        "Chelmsli-Vud"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Chelmsley Wood"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Chelsfield-United Kingdom",
+      "name": "Chelsfield",
+      "canonical_name": "Chelsfield",
+      "country": "United Kingdom",
+      "coords_lat_lng": [
+        51.35806,
+        0.12772
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Chelsfield",
+        "chelsfield"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Chelsfield"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Cheltenham-United Kingdom",
+      "name": "Cheltenham",
+      "canonical_name": "Cheltenham",
+      "country": "United Kingdom",
+      "coords_lat_lng": [
+        51.9,
+        -2.07
+      ],
+      "earliest_year": 1200,
+      "latest_year": 2025,
+      "existing_meta_index": 7889,
+      "known_aliases": [
+        "Cheltenham",
+        "cheltenham",
+        "celtan hom",
+        "chintenha[m]",
+        "Celtan hom",
+        "Chintenha[m]"
+      ],
+      "historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Cheltenham"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Chemillé-en-Anjou-France",
+      "name": "Chemillé-en-Anjou",
+      "canonical_name": "Chemillé-en-Anjou",
+      "country": "France",
+      "coords_lat_lng": [
+        47.2211,
+        -0.6964
+      ],
+      "earliest_year": 1800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Chemillé-en-Anjou",
+        "chemillé-en-anjou"
+      ],
+      "historical_names": [
+        {
+          "date": "1800.1.1",
+          "name": "Chemillé-en-Anjou"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Chennevières-sur-Marne-France",
+      "name": "Chennevières-sur-Marne",
+      "canonical_name": "Chennevières-sur-Marne",
+      "country": "France",
+      "coords_lat_lng": [
+        48.7951,
+        2.5443
+      ],
+      "earliest_year": 1800,
+      "latest_year": 2025,
+      "existing_meta_index": 14971,
+      "known_aliases": [
+        "Chennevières-sur-Marne",
+        "chennevières-sur-marne"
+      ],
+      "historical_names": [
+        {
+          "date": "1800.1.1",
+          "name": "Chennevières-sur-Marne"
+        },
+        {
+          "date": "1901.1.1",
+          "name": "Chennevières-sur-Marne"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Chenôve-France",
+      "name": "Chenôve",
+      "canonical_name": "Chenôve",
+      "country": "France",
+      "coords_lat_lng": [
+        47.2911,
+        5.0001
+      ],
+      "earliest_year": 1800,
+      "latest_year": 2025,
+      "existing_meta_index": 14972,
+      "known_aliases": [
+        "Chenôve",
+        "chenôve"
+      ],
+      "historical_names": [
+        {
+          "date": "1800.1.1",
+          "name": "Chenôve"
+        },
+        {
+          "date": "1901.1.1",
+          "name": "Chenôve"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Chepstow-United Kingdom",
+      "name": "Chepstow",
+      "canonical_name": "Chepstow",
+      "country": "United Kingdom",
+      "coords_lat_lng": [
+        51.64087,
+        -2.67683
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Chepstow",
+        "chepstow",
+        "cas-gwent",
+        "chepstou",
+        "cepsto",
+        "Cas-gwent",
+        "Chepstou"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Chepstow"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Cherbourg-France",
+      "name": "Cherbourg",
+      "canonical_name": "Cherbourg",
+      "country": "France",
+      "coords_lat_lng": [
+        49.65,
+        -1.65
+      ],
+      "earliest_year": 250,
+      "latest_year": 2025,
+      "existing_meta_index": 6535,
+      "known_aliases": [
+        "Cherbourg",
+        "cherbourg",
+        "cherbourg-octeville",
+        "Cherbourg-Octeville"
+      ],
+      "historical_names": [
+        {
+          "date": "250.1.1",
+          "name": "Caresburg"
+        },
+        {
+          "date": "1026.1.1",
+          "name": "Caresburg"
+        },
+        {
+          "date": "1400.1.1",
+          "name": "Cherbourg"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Chertsey-United Kingdom",
+      "name": "Chertsey",
+      "canonical_name": "Chertsey",
+      "country": "United Kingdom",
+      "coords_lat_lng": [
+        51.38812,
+        -0.50782
+      ],
+      "earliest_year": -2500,
+      "latest_year": 2025,
+      "existing_meta_index": 14973,
+      "known_aliases": [
+        "Chertsey",
+        "chertsey",
+        "chrtsy",
+        "qie te xi",
+        "چرتسی"
+      ],
+      "historical_names": [
+        {
+          "date": "-2500.1.1",
+          "name": "Chertsey"
+        },
+        {
+          "date": "1901.1.1",
+          "name": "Chertsey"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Chesham-United Kingdom",
+      "name": "Chesham",
+      "canonical_name": "Chesham",
+      "country": "United Kingdom",
+      "coords_lat_lng": [
+        51.7,
+        -0.6
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Chesham",
+        "chesham",
+        "chesum",
+        "chshham",
+        "чесъм",
+        "Chesum",
+        "Чесъм"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Chesham"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Cheshunt-United Kingdom",
+      "name": "Cheshunt",
+      "canonical_name": "Cheshunt",
+      "country": "United Kingdom",
+      "coords_lat_lng": [
+        51.7002,
+        -0.03026
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": 14974,
+      "known_aliases": [
+        "Cheshunt",
+        "cheshunt",
+        "chesant",
+        "chznt",
+        "qie sen te",
+        "Chesant"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Cheshunt"
+        },
+        {
+          "date": "1901.1.1",
+          "name": "Cheshunt"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Chessington-United Kingdom",
+      "name": "Chessington",
+      "canonical_name": "Chessington",
+      "country": "United Kingdom",
+      "coords_lat_lng": [
+        51.3624,
+        -0.30427
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Chessington",
+        "chessington",
+        "cesingtana",
+        "चेसिंग्टन"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Chessington"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Chester-le-Street-United Kingdom",
+      "name": "Chester-le-Street",
+      "canonical_name": "Chester-le-Street",
+      "country": "United Kingdom",
+      "coords_lat_lng": [
+        54.85862,
+        -1.57408
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": 23750,
+      "known_aliases": [
+        "Chester-le-Street",
+        "chester-le-street",
+        "chstr ly astryt",
+        "qie si te lei jie",
+        "چستر لی استریت"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Chester-le-Street"
+        },
+        {
+          "date": "1975.1.1",
+          "name": "Chester-le-Street"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Chesterfield-United Kingdom",
+      "name": "Chesterfield",
+      "canonical_name": "Chesterfield",
+      "country": "United Kingdom",
+      "coords_lat_lng": [
+        53.25,
+        -1.42
+      ],
+      "earliest_year": 1200,
+      "latest_year": 2025,
+      "existing_meta_index": 7890,
+      "known_aliases": [
+        "Chesterfield",
+        "chesterfield"
+      ],
+      "historical_names": [
+        {
+          "date": "1200.1.1",
+          "name": "Chesterfield"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Chevigny-Saint-Sauveur-France",
+      "name": "Chevigny-Saint-Sauveur",
+      "canonical_name": "Chevigny-Saint-Sauveur",
+      "country": "France",
+      "coords_lat_lng": [
+        47.2986,
+        5.132
+      ],
+      "earliest_year": 1800,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Chevigny-Saint-Sauveur",
+        "chevigny-saint-sauveur"
+      ],
+      "historical_names": [
+        {
+          "date": "1800.1.1",
+          "name": "Chevigny-Saint-Sauveur"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Chichester-United Kingdom",
+      "name": "Chichester",
+      "canonical_name": "Chichester",
+      "country": "United Kingdom",
+      "coords_lat_lng": [
+        50.84,
+        -0.78
+      ],
+      "earliest_year": -200,
+      "latest_year": 2025,
+      "existing_meta_index": 6538,
+      "known_aliases": [
+        "Chichester",
+        "chichester",
+        "noviomagus reginorum",
+        "cicestre",
+        "Noviomagus Reginorum",
+        "Cicestre"
+      ],
+      "historical_names": [
+        {
+          "date": "-200.1.1",
+          "name": "Noviomagus Reginorum"
+        },
+        {
+          "date": "43.1.1",
+          "name": "Noviomagus Reginorum"
+        },
+        {
+          "date": "600.1.1",
+          "name": "Cisseceaster"
+        },
+        {
+          "date": "1066.1.1",
+          "name": "Chichester"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Chigwell-United Kingdom",
+      "name": "Chigwell",
+      "canonical_name": "Chigwell",
+      "country": "United Kingdom",
+      "coords_lat_lng": [
+        51.61999,
+        0.07596
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": 14976,
+      "known_aliases": [
+        "Chigwell",
+        "chigwell"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Chigwell"
+        },
+        {
+          "date": "1901.1.1",
+          "name": "Chigwell"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Childwall-United Kingdom",
+      "name": "Childwall",
+      "canonical_name": "Childwall",
+      "country": "United Kingdom",
+      "coords_lat_lng": [
+        53.39719,
+        -2.897
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Childwall",
+        "childwall"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Childwall"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Chilly-Mazarin-France",
+      "name": "Chilly-Mazarin",
+      "canonical_name": "Chilly-Mazarin",
+      "country": "France",
+      "coords_lat_lng": [
+        48.71489,
+        2.31638
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": 14978,
+      "known_aliases": [
+        "Chilly-Mazarin",
+        "chilly-mazarin"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Chilly-Mazarin"
+        },
+        {
+          "date": "1901.1.1",
+          "name": "Chilly-Mazarin"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Chilwell-United Kingdom",
+      "name": "Chilwell",
+      "canonical_name": "Chilwell",
+      "country": "United Kingdom",
+      "coords_lat_lng": [
+        52.9118,
+        -1.23631
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Chilwell",
+        "chilwell"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Chilwell"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Chimay-Belgium",
+      "name": "Chimay",
+      "canonical_name": "Chimay",
+      "country": "Belgium",
+      "coords_lat_lng": [
+        50.04856,
+        4.31712
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Chimay",
+        "chimay",
+        "chimai",
+        "shime",
+        "shimei",
+        "Chimai",
+        "Shime"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Chimay"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Chingford-United Kingdom",
+      "name": "Chingford",
+      "canonical_name": "Chingford",
+      "country": "United Kingdom",
+      "coords_lat_lng": [
+        51.63033,
+        0.00051
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Chingford",
+        "chingford",
+        "chyngfwrd",
+        "چینگفورد"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Chingford"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Chinon-France",
+      "name": "Chinon",
+      "canonical_name": "Chinon",
+      "country": "France",
+      "coords_lat_lng": [
+        47.1692,
+        0.2433
+      ],
+      "earliest_year": 250,
+      "latest_year": 2025,
+      "existing_meta_index": 6541,
+      "known_aliases": [
+        "Chinon",
+        "chinon"
+      ],
+      "historical_names": [
+        {
+          "date": "250.1.1",
+          "name": "Chinon"
+        },
+        {
+          "date": "700.1.1",
+          "name": "Chinon"
+        }
+      ],
+      "verified_settlement": true
+    },
+    {
+      "key": "Chippenham-United Kingdom",
+      "name": "Chippenham",
+      "canonical_name": "Chippenham",
+      "country": "United Kingdom",
+      "coords_lat_lng": [
+        51.46,
+        -2.12472
+      ],
+      "earliest_year": 1750,
+      "latest_year": 2025,
+      "existing_meta_index": null,
+      "known_aliases": [
+        "Chippenham",
+        "chippenham",
+        "chippenem",
+        "cipenhamas",
+        "cippanhamm",
+        "Chippenem",
+        "Cipenhamas",
+        "Cippanhamm"
+      ],
+      "historical_names": [
+        {
+          "date": "1750.1.1",
+          "name": "Chippenham"
+        }
+      ],
+      "verified_settlement": true
+    }
+  ]
+}

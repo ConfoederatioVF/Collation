@@ -1,0 +1,2741 @@
+{
+  "batch_index": 43,
+  "project": "HANDBOOK",
+  "count": 60,
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        40.89419,
+        26.17407
+      ],
+      "country": "Turkey",
+      "earliest_year": 1200,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Bera/Feres-Turkey",
+      "known_aliases": [
+        "Bera/Feres",
+        "bera/feres"
+      ],
+      "latest_year": 1900,
+      "name": "Bera/Feres",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        1200,
+        1350,
+        1600,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Feres",
+      "historical_names": [
+        {
+          "date": "1152.1.1",
+          "date_source_note": "Founded around Kosmosoteira monastery by Isaac Komnenos",
+          "name": "Bera"
+        },
+        {
+          "date": "1371.1.1",
+          "date_source_note": "Ottoman conquest and Turkish name in Thrace",
+          "name": "Ferecik"
+        },
+        {
+          "date": "1920.1.1",
+          "date_source_note": "Official Greek name following incorporation into Greece",
+          "name": "Feres"
+        }
+      ],
+      "other_names": [
+        "Φέρες",
+        "Φέραι",
+        "Vira",
+        "Ferai",
+        "Bera",
+        "Ferecik"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.00197,
+        44.34069
+      ],
+      "country": "Iraq",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Aqola-Iraq",
+      "known_aliases": [
+        "Aqola",
+        "aqola"
+      ],
+      "latest_year": 1900,
+      "name": "Aqola",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Kufa",
+      "historical_names": [
+        {
+          "date": "632.1.1",
+          "date_source_note": "Pre-Islamic Syriac/Aramaic name of the settlement area",
+          "name": "Aqola"
+        },
+        {
+          "date": "638.1.1",
+          "date_source_note": "Founded as Rashidun garrison city al-Kufa",
+          "name": "Kufa"
+        }
+      ],
+      "other_names": [
+        "Al-Kufa",
+        "الكوفة",
+        "Aqula",
+        "ʿĀqōlā",
+        "ܥܩܘܠܐ"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.18752,
+        32.63581
+      ],
+      "country": "Cyprus",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mansoura-Cyprus",
+      "known_aliases": [
+        "Mansoura",
+        "mansoura"
+      ],
+      "latest_year": 1900,
+      "name": "Mansoura",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Mansoura",
+      "historical_names": [
+        {
+          "date": "632.1.1",
+          "date_source_note": "Continuous name anchored to earliest dataset coverage",
+          "name": "Mansoura"
+        }
+      ],
+      "other_names": [
+        "Μανσούρα",
+        "Mansura"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.61689,
+        36.5933
+      ],
+      "country": "Turkey",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ibora-Turkey",
+      "known_aliases": [
+        "Ibora",
+        "ibora"
+      ],
+      "latest_year": 1900,
+      "name": "Ibora",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "İverönü",
+      "historical_names": [
+        {
+          "date": "300.1.1",
+          "date_source_note": "Late Roman and Byzantine bishopric in Helenopontus",
+          "name": "Ibora"
+        },
+        {
+          "date": "1865.1.1",
+          "date_source_note": "Modern Circassian village settled near the ruins in 1865-1866",
+          "name": "İverönü"
+        }
+      ],
+      "other_names": [
+        "Ibora",
+        "Ίβωρα",
+        "Viranönü"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.67899,
+        32.70374
+      ],
+      "country": "Turkey",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rousoumblada-Turkey",
+      "known_aliases": [
+        "Rousoumblada",
+        "rousoumblada"
+      ],
+      "latest_year": 1900,
+      "name": "Rousoumblada",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Zenonopolis",
+      "historical_names": [
+        {
+          "date": "400.1.1",
+          "date_source_note": "Native Isaurian settlement name prior to Emperor Zeno",
+          "name": "Rousoumblada"
+        },
+        {
+          "date": "474.1.1",
+          "date_source_note": "Renamed in honour of Eastern Roman Emperor Zeno",
+          "name": "Zenonopolis"
+        }
+      ],
+      "other_names": [
+        "Rousoumblada",
+        "Ρουσουμβλάδα",
+        "Ζηνονόπολις"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.01667,
+        28.975
+      ],
+      "country": "Turkey",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Neorion-Turkey",
+      "known_aliases": [
+        "Neorion",
+        "neorion"
+      ],
+      "latest_year": 1900,
+      "name": "Neorion",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        1000,
+        1250,
+        1500,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Neorion",
+      "historical_names": [
+        {
+          "date": "330.1.1",
+          "date_source_note": "Byzantine harbour and quarter of Constantinople",
+          "name": "Neorion"
+        }
+      ],
+      "other_names": [
+        "Νεώριον",
+        "Bahçekapı"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.28587,
+        42.66497
+      ],
+      "country": "Iraq",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kharaib Mahlabiya-Iraq",
+      "known_aliases": [
+        "Kharaib Mahlabiya",
+        "kharaib mahlabiya"
+      ],
+      "latest_year": 1900,
+      "name": "Kharaib Mahlabiya",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Kharaib Mahlabiya",
+      "historical_names": [
+        {
+          "date": "632.1.1",
+          "date_source_note": "Continuous site name anchored to earliest dataset coverage",
+          "name": "Kharaib Mahlabiya"
+        }
+      ],
+      "other_names": [
+        "Al-Mahlabiya",
+        "Mahlabiya",
+        "المحلبية",
+        "خرائب المحلبية"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.53397,
+        37.36192
+      ],
+      "country": "Syria",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Androna-Syria",
+      "known_aliases": [
+        "Androna",
+        "androna"
+      ],
+      "latest_year": 1900,
+      "name": "Androna",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Al-Andarin",
+      "historical_names": [
+        {
+          "date": "300.1.1",
+          "date_source_note": "Late Roman and Byzantine town in Syria",
+          "name": "Androna"
+        },
+        {
+          "date": "637.1.1",
+          "date_source_note": "Arabic name following the Islamic conquest of Syria",
+          "name": "Al-Andarin"
+        }
+      ],
+      "other_names": [
+        "Androna",
+        "Ἀνδρῶνα",
+        "الأندارين",
+        "Andarin"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.74085,
+        36.69929
+      ],
+      "country": "Syria",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ruweiha-Syria",
+      "known_aliases": [
+        "Ruweiha",
+        "ruweiha"
+      ],
+      "latest_year": 1900,
+      "name": "Ruweiha",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Ruweiha",
+      "historical_names": [
+        {
+          "date": "632.1.1",
+          "date_source_note": "Continuous village name anchored to earliest dataset coverage",
+          "name": "Ruweiha"
+        }
+      ],
+      "other_names": [
+        "Al-Ruwayha",
+        "الرويحة"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.55641,
+        35.84871
+      ],
+      "country": "Israel",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Arbela-Israel",
+      "known_aliases": [
+        "Arbela",
+        "arbela"
+      ],
+      "latest_year": 1900,
+      "name": "Arbela",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Irbid",
+      "historical_names": [
+        {
+          "date": "-300.1.1",
+          "date_source_note": "Hellenistic and Roman Decapolis city",
+          "name": "Arbela"
+        },
+        {
+          "date": "636.1.1",
+          "date_source_note": "Arabic adaptation following the Islamic conquest of the Levant",
+          "name": "Irbid"
+        }
+      ],
+      "other_names": [
+        "Arbela",
+        "Arabella",
+        "Beth Arbel",
+        "إربد"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.25814,
+        35.98414
+      ],
+      "country": "Lebanon",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Holy Valley-Lebanon",
+      "known_aliases": [
+        "Holy Valley",
+        "holy valley"
+      ],
+      "latest_year": 1900,
+      "name": "Holy Valley",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Wadi Qadisha",
+      "historical_names": [
+        {
+          "date": "632.1.1",
+          "date_source_note": "Continuous Aramaic/Arabic valley settlement name meaning Holy Valley",
+          "name": "Wadi Qadisha"
+        }
+      ],
+      "other_names": [
+        "Qadisha",
+        "Kadisha",
+        "Holy Valley",
+        "وادي قاديشا"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.7324,
+        27.2514
+      ],
+      "country": "Turkey",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Saranta Ekklēsiai-Turkey",
+      "known_aliases": [
+        "Saranta Ekklēsiai",
+        "saranta ekklēsiai"
+      ],
+      "latest_year": 1900,
+      "name": "Saranta Ekklēsiai",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Kırklareli",
+      "historical_names": [
+        {
+          "date": "632.1.1",
+          "date_source_note": "Byzantine Greek name in Thrace",
+          "name": "Saranta Ekklesiai"
+        },
+        {
+          "date": "1363.1.1",
+          "date_source_note": "Ottoman Turkish name following conquest under Murad I",
+          "name": "Kırk Kilise"
+        },
+        {
+          "date": "1924.12.20",
+          "date_source_note": "Officially renamed by the Republic of Turkey",
+          "name": "Kırklareli"
+        }
+      ],
+      "other_names": [
+        "Saranta Ekklēsiai",
+        "Σαράντα Εκκλησιές",
+        "Kırk Kilise",
+        "قرق كليسا"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.68931,
+        42.95387
+      ],
+      "country": "Iraq",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tell Deir Situn-Iraq",
+      "known_aliases": [
+        "Tell Deir Situn",
+        "tell deir situn"
+      ],
+      "latest_year": 1900,
+      "name": "Tell Deir Situn",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        1000,
+        1250,
+        1500,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Tell Deir Situn",
+      "historical_names": [
+        {
+          "date": "1000.1.1",
+          "date_source_note": "Continuous site name anchored to earliest dataset coverage",
+          "name": "Tell Deir Situn"
+        }
+      ],
+      "other_names": [
+        "Deir Situn",
+        "تل دير سيتون"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        31.09138,
+        35.63428
+      ],
+      "country": "Israel",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "El-‘Iraq-Israel",
+      "known_aliases": [
+        "El-‘Iraq",
+        "el-‘iraq"
+      ],
+      "latest_year": 1900,
+      "name": "El-‘Iraq",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Al-Iraq",
+      "historical_names": [
+        {
+          "date": "632.1.1",
+          "date_source_note": "Continuous Arabic village name in Karak anchored to earliest dataset coverage",
+          "name": "Al-Iraq"
+        }
+      ],
+      "other_names": [
+        "El-Iraq",
+        "El-‘Iraq",
+        "العراق"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        31.92833,
+        35.23833
+      ],
+      "country": "Israel",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Beitin-Israel",
+      "known_aliases": [
+        "Beitin",
+        "beitin"
+      ],
+      "latest_year": 1900,
+      "name": "Beitin",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Beitin",
+      "historical_names": [
+        {
+          "date": "-1000.1.1",
+          "date_source_note": "Biblical, Hellenistic, and Roman town of Bethel",
+          "name": "Bethel"
+        },
+        {
+          "date": "638.1.1",
+          "date_source_note": "Arabic name preserved since early Islamic period",
+          "name": "Beitin"
+        }
+      ],
+      "other_names": [
+        "Bethel",
+        "Luz",
+        "بيتين",
+        "בית אל"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.46054,
+        46.08227
+      ],
+      "country": "Iraq",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kaskar-Iraq",
+      "known_aliases": [
+        "Kaskar",
+        "kaskar"
+      ],
+      "latest_year": 1900,
+      "name": "Kaskar",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Kashkar",
+      "historical_names": [
+        {
+          "date": "250.1.1",
+          "date_source_note": "Sasanian and early Islamic city opposite Wasit",
+          "name": "Kashkar"
+        }
+      ],
+      "other_names": [
+        "Kaskar",
+        "كسكر",
+        "ܟܫܟܪ"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.4213,
+        30.73047
+      ],
+      "country": "Turkey",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "‘Cenon Gallicanon’-Turkey",
+      "known_aliases": [
+        "‘Cenon Gallicanon’",
+        "‘cenon gallicanon’"
+      ],
+      "latest_year": 1900,
+      "name": "‘Cenon Gallicanon’",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Cenon Gallicanon",
+      "historical_names": [
+        {
+          "date": "300.1.1",
+          "date_source_note": "Late Roman road station in Bithynia",
+          "name": "Cenon Gallicanon"
+        }
+      ],
+      "other_names": [
+        "Caenum Gallicanum",
+        "Kainon Gallikanon"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.77758,
+        31.18018
+      ],
+      "country": "Turkey",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Embolos-Turkey",
+      "known_aliases": [
+        "Embolos",
+        "embolos"
+      ],
+      "latest_year": 1900,
+      "name": "Embolos",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Embolos",
+      "historical_names": [
+        {
+          "date": "100.1.1",
+          "date_source_note": "Roman-era town in Bithynia",
+          "name": "Embolos"
+        }
+      ],
+      "other_names": [
+        "Ἔμβολος"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.96571,
+        34.16557
+      ],
+      "country": "Turkey",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kinolis-Turkey",
+      "known_aliases": [
+        "Kinolis",
+        "kinolis"
+      ],
+      "latest_year": 1900,
+      "name": "Kinolis",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Ginolu",
+      "historical_names": [
+        {
+          "date": "-400.1.1",
+          "date_source_note": "Classical Greek and Roman port in Paphlagonia",
+          "name": "Kinolis"
+        },
+        {
+          "date": "1461.1.1",
+          "date_source_note": "Turkish adaptation following Ottoman conquest of the Kastamonu-Sinop coast",
+          "name": "Ginolu"
+        }
+      ],
+      "other_names": [
+        "Kinolis",
+        "Cinolis",
+        "Cimolis",
+        "Κίνωλις"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.8121,
+        32.16492
+      ],
+      "country": "Turkey",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Krateia-Turkey",
+      "known_aliases": [
+        "Krateia",
+        "krateia"
+      ],
+      "latest_year": 1900,
+      "name": "Krateia",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Gerede",
+      "historical_names": [
+        {
+          "date": "-100.1.1",
+          "date_source_note": "Ancient Bithynian town of Krateia",
+          "name": "Krateia"
+        },
+        {
+          "date": "75.1.1",
+          "date_source_note": "Roman imperial renaming under the Flavian dynasty",
+          "name": "Flaviopolis"
+        },
+        {
+          "date": "1395.1.1",
+          "date_source_note": "Turkish name under Ottoman administration",
+          "name": "Gerede"
+        }
+      ],
+      "other_names": [
+        "Krateia",
+        "Cratia",
+        "Flaviopolis",
+        "Κράτεια",
+        "كرده"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.48896,
+        31.14348
+      ],
+      "country": "Turkey",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Modra-Turkey",
+      "known_aliases": [
+        "Modra",
+        "modra"
+      ],
+      "latest_year": 1900,
+      "name": "Modra",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Mudurnu",
+      "historical_names": [
+        {
+          "date": "1.1.1",
+          "date_source_note": "Ancient town in Bithynia recorded by Strabo",
+          "name": "Modra"
+        },
+        {
+          "date": "500.1.1",
+          "date_source_note": "Byzantine Greek name Modrene",
+          "name": "Modrene"
+        },
+        {
+          "date": "1307.1.1",
+          "date_source_note": "Turkish adaptation following Ottoman incorporation",
+          "name": "Mudurnu"
+        }
+      ],
+      "other_names": [
+        "Modra",
+        "Modrene",
+        "Μόδρα",
+        "Μωδρηνή"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.81069,
+        38.87385
+      ],
+      "country": "Turkey",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cengerli-Turkey",
+      "known_aliases": [
+        "Cengerli",
+        "cengerli"
+      ],
+      "latest_year": 1900,
+      "name": "Cengerli",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Cengerli",
+      "historical_names": [
+        {
+          "date": "632.1.1",
+          "date_source_note": "Continuous village name anchored to earliest dataset coverage",
+          "name": "Cengerli"
+        }
+      ],
+      "other_names": [
+        "Çengerli"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.53008,
+        30.22044
+      ],
+      "country": "Turkey",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Akalissos-Turkey",
+      "known_aliases": [
+        "Akalissos",
+        "akalissos"
+      ],
+      "latest_year": 1900,
+      "name": "Akalissos",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Akalissos",
+      "historical_names": [
+        {
+          "date": "1.1.1",
+          "date_source_note": "Ancient Lycian city",
+          "name": "Akalissos"
+        }
+      ],
+      "other_names": [
+        "Acalissus",
+        "Ἀκαλισσός"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.18661,
+        29.76437
+      ],
+      "country": "Turkey",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Apollonia-Turkey",
+      "known_aliases": [
+        "Apollonia",
+        "apollonia"
+      ],
+      "latest_year": 1900,
+      "name": "Apollonia",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Apollonia",
+      "historical_names": [
+        {
+          "date": "-300.1.1",
+          "date_source_note": "Ancient Lycian polis",
+          "name": "Apollonia"
+        }
+      ],
+      "other_names": [
+        "Ἀπολλωνία"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.07512,
+        30.27698
+      ],
+      "country": "Turkey",
+      "earliest_year": 1000,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Aulutrena-Turkey",
+      "known_aliases": [
+        "Aulutrena",
+        "aulutrena"
+      ],
+      "latest_year": 1900,
+      "name": "Aulutrena",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        1000,
+        1250,
+        1500,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Aulutrena",
+      "historical_names": [
+        {
+          "date": "100.1.1",
+          "date_source_note": "Roman garrison and settlement in Phrygia",
+          "name": "Aulutrena"
+        }
+      ],
+      "other_names": [
+        "Αὐλουτρήνη"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.761,
+        30.52412
+      ],
+      "country": "Turkey",
+      "earliest_year": 632,
+      "existing_historical_names": [
+        {
+          "date": "1191.5.1",
+          "name": "Baris"
+        }
+      ],
+      "existing_meta_index": 31785,
+      "existing_meta_name": "Baris",
+      "key": "Baris-Turkey",
+      "known_aliases": [
+        "Baris",
+        "baris"
+      ],
+      "latest_year": 1900,
+      "name": "Baris",
+      "reason": "under_covered_history",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Baris",
+      "historical_names": [
+        {
+          "date": "100.1.1",
+          "date_source_note": "Roman and Byzantine city and bishopric in Pisidia",
+          "name": "Baris"
+        }
+      ],
+      "other_names": [
+        "Βάρις",
+        "Kılıç"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.67775,
+        35.4111
+      ],
+      "country": "Turkey",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Zagora-Turkey",
+      "known_aliases": [
+        "Zagora",
+        "zagora"
+      ],
+      "latest_year": 1900,
+      "name": "Zagora",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Zagora",
+      "historical_names": [
+        {
+          "date": "100.1.1",
+          "date_source_note": "Ancient Paphlagonian coastal town on the Black Sea",
+          "name": "Zagora"
+        }
+      ],
+      "other_names": [
+        "Zagoron",
+        "Zagorum",
+        "Zagorus",
+        "Zageira",
+        "Ζάγωρα"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.5674,
+        33.9953
+      ],
+      "country": "Turkey",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kurşun Kalesi-Turkey",
+      "known_aliases": [
+        "Kurşun Kalesi",
+        "kurşun kalesi"
+      ],
+      "latest_year": 1900,
+      "name": "Kurşun Kalesi",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Kurşun Kalesi",
+      "historical_names": [
+        {
+          "date": "632.1.1",
+          "date_source_note": "Site name for unidentified ancient hilltop settlement in Rough Cilicia",
+          "name": "Kurşun Kalesi"
+        }
+      ],
+      "other_names": [
+        "Kurşunlu",
+        "İsmailli"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.90272,
+        36.64204
+      ],
+      "country": "Syria",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Omra-Syria",
+      "known_aliases": [
+        "Omra",
+        "omra"
+      ],
+      "latest_year": 1900,
+      "name": "Omra",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Amra",
+      "historical_names": [
+        {
+          "date": "632.1.1",
+          "date_source_note": "Continuous village name anchored to earliest dataset coverage",
+          "name": "Amra"
+        }
+      ],
+      "other_names": [
+        "Omra",
+        "عمرة"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.98233,
+        35.63103
+      ],
+      "country": "Lebanon",
+      "earliest_year": 632,
+      "existing_historical_names": [
+        {
+          "date": "-1229.1.1",
+          "name": "Byblos"
+        }
+      ],
+      "existing_meta_index": 31864,
+      "existing_meta_name": "Byblos",
+      "key": "Palaibyblos-Lebanon",
+      "known_aliases": [
+        "Palaibyblos",
+        "palaibyblos"
+      ],
+      "latest_year": 1900,
+      "name": "Palaibyblos",
+      "reason": "under_covered_history",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        850,
+        1400,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Palaibyblos",
+      "historical_names": [
+        {
+          "date": "1.1.1",
+          "date_source_note": "Ancient Phoenician/Greco-Roman settlement south of Byblos",
+          "name": "Palaibyblos"
+        }
+      ],
+      "other_names": [
+        "Παλαιβύβλος"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        33.24753,
+        35.69346
+      ],
+      "country": "Israel",
+      "earliest_year": -300,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Paneas-Israel",
+      "known_aliases": [
+        "Paneas",
+        "paneas"
+      ],
+      "latest_year": 1900,
+      "name": "Paneas",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -300,
+        500,
+        950,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Banias",
+      "historical_names": [
+        {
+          "date": "-300.1.1",
+          "date_source_note": "Hellenistic settlement and sanctuary dedicated to Pan",
+          "name": "Paneas"
+        },
+        {
+          "date": "-3.1.1",
+          "date_source_note": "Refounded by Philip the Tetrarch in 3-2 BCE",
+          "name": "Caesarea Philippi"
+        },
+        {
+          "date": "635.1.1",
+          "date_source_note": "Arabic name derived from Paneas following the Islamic conquest",
+          "name": "Banias"
+        }
+      ],
+      "other_names": [
+        "Paneas",
+        "Caesarea Philippi",
+        "Baniyas",
+        "بانياس",
+        "פניאס"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.934,
+        35.3665
+      ],
+      "country": "Israel",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Rama-Israel",
+      "known_aliases": [
+        "Rama",
+        "rama"
+      ],
+      "latest_year": 1900,
+      "name": "Rama",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Rameh",
+      "historical_names": [
+        {
+          "date": "632.1.1",
+          "date_source_note": "Continuous Galilean village name anchored to earliest dataset coverage",
+          "name": "Rameh"
+        }
+      ],
+      "other_names": [
+        "Rama",
+        "Al-Rama",
+        "Er-Rama",
+        "الرامة",
+        "ראמה"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.75315,
+        35.27887
+      ],
+      "country": "Israel",
+      "earliest_year": -539,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Sepphoris-Israel",
+      "known_aliases": [
+        "Sepphoris",
+        "sepphoris"
+      ],
+      "latest_year": 1900,
+      "name": "Sepphoris",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -539,
+        300,
+        1250,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Zippori",
+      "historical_names": [
+        {
+          "date": "-539.1.1",
+          "date_source_note": "Ancient Galilean town anchored to earliest dataset coverage",
+          "name": "Sepphoris"
+        },
+        {
+          "date": "135.1.1",
+          "date_source_note": "Roman city renamed Diocaesarea under Hadrian",
+          "name": "Diocaesarea"
+        },
+        {
+          "date": "638.1.1",
+          "date_source_note": "Arabic village name following the Islamic conquest",
+          "name": "Saffuriya"
+        },
+        {
+          "date": "1949.1.1",
+          "date_source_note": "Modern Israeli moshav founded on the site in 1949",
+          "name": "Zippori"
+        }
+      ],
+      "other_names": [
+        "Sepphoris",
+        "Tzippori",
+        "Saffuriya",
+        "Diocaesarea",
+        "صفورية",
+        "ציפורי",
+        "Σέπφωρις"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.52056,
+        35.22067
+      ],
+      "country": "Israel",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tha'anach-Israel",
+      "known_aliases": [
+        "Tha'anach",
+        "tha'anach"
+      ],
+      "latest_year": 1900,
+      "name": "Tha'anach",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Ti'innik",
+      "historical_names": [
+        {
+          "date": "-1450.1.1",
+          "date_source_note": "Ancient Bronze/Iron Age Canaanite city of Taanach",
+          "name": "Taanach"
+        },
+        {
+          "date": "638.1.1",
+          "date_source_note": "Arabic village name preserving ancient Taanach",
+          "name": "Ti'innik"
+        }
+      ],
+      "other_names": [
+        "Taanach",
+        "Tha'anach",
+        "تعنك",
+        "תענך"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.32703,
+        36.36929
+      ],
+      "country": "Syria",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Umm el-Jimal-Syria",
+      "known_aliases": [
+        "Umm el-Jimal",
+        "umm el-jimal"
+      ],
+      "latest_year": 1900,
+      "name": "Umm el-Jimal",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Umm al-Jimal",
+      "historical_names": [
+        {
+          "date": "632.1.1",
+          "date_source_note": "Continuous Arabic site name anchored to earliest dataset coverage",
+          "name": "Umm al-Jimal"
+        }
+      ],
+      "other_names": [
+        "Umm el-Jimal",
+        "أم الجمال"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.48359,
+        35.14188
+      ],
+      "country": "Israel",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Umm Rihan-Israel",
+      "known_aliases": [
+        "Umm Rihan",
+        "umm rihan"
+      ],
+      "latest_year": 1900,
+      "name": "Umm Rihan",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Umm ar-Rihan",
+      "historical_names": [
+        {
+          "date": "632.1.1",
+          "date_source_note": "Continuous Arabic village name anchored to earliest dataset coverage",
+          "name": "Umm ar-Rihan"
+        }
+      ],
+      "other_names": [
+        "Umm Rihan",
+        "أم الريحان"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        31.42292,
+        35.13273
+      ],
+      "country": "Israel",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Chermela-Israel",
+      "known_aliases": [
+        "Chermela",
+        "chermela"
+      ],
+      "latest_year": 1900,
+      "name": "Chermela",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Al-Karmil",
+      "historical_names": [
+        {
+          "date": "-1000.1.1",
+          "date_source_note": "Biblical settlement of Carmel in Judah",
+          "name": "Carmel"
+        },
+        {
+          "date": "300.1.1",
+          "date_source_note": "Late Roman garrison name recorded in Notitia Dignitatum",
+          "name": "Chermela"
+        },
+        {
+          "date": "638.1.1",
+          "date_source_note": "Arabic village name preserving ancient Carmel",
+          "name": "Al-Karmil"
+        }
+      ],
+      "other_names": [
+        "Khirbet al-Karmil",
+        "Chermela",
+        "Carmel",
+        "خربة الكرمل",
+        "כרמל"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        31.46269,
+        35.38775
+      ],
+      "country": "Israel",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Engaddai-Israel",
+      "known_aliases": [
+        "Engaddai",
+        "engaddai"
+      ],
+      "latest_year": 1900,
+      "name": "Engaddai",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Ein Gedi",
+      "historical_names": [
+        {
+          "date": "-600.1.1",
+          "date_source_note": "Ancient Judean oasis settlement",
+          "name": "Ein Gedi"
+        },
+        {
+          "date": "100.1.1",
+          "date_source_note": "Greco-Roman form in Josephus and Eusebius",
+          "name": "Engaddai"
+        },
+        {
+          "date": "1953.1.1",
+          "date_source_note": "Modern Israeli kibbutz founded at the oasis",
+          "name": "Ein Gedi"
+        }
+      ],
+      "other_names": [
+        "Engaddai",
+        "Engedi",
+        "Ayn Jidi",
+        "عين جدي",
+        "עין גדי",
+        "Ἐνγαδδαί"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        30.25,
+        35.75
+      ],
+      "country": "Jordan",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Basta-Jordan",
+      "known_aliases": [
+        "Basta",
+        "basta"
+      ],
+      "latest_year": 1900,
+      "name": "Basta",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Basta",
+      "historical_names": [
+        {
+          "date": "632.1.1",
+          "date_source_note": "Continuous Arabic village name anchored to earliest dataset coverage",
+          "name": "Basta"
+        }
+      ],
+      "other_names": [
+        "بسطة"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        31.38328,
+        35.7334
+      ],
+      "country": "Jordan",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Khirbet Shihan-Jordan",
+      "known_aliases": [
+        "Khirbet Shihan",
+        "khirbet shihan"
+      ],
+      "latest_year": 1900,
+      "name": "Khirbet Shihan",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Khirbet Shihan",
+      "historical_names": [
+        {
+          "date": "632.1.1",
+          "date_source_note": "Continuous Arabic site name anchored to earliest dataset coverage",
+          "name": "Khirbet Shihan"
+        }
+      ],
+      "other_names": [
+        "Shihan",
+        "خربة شيحان"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        31.45907,
+        35.84785
+      ],
+      "country": "Jordan",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Lehun-Jordan",
+      "known_aliases": [
+        "Lehun",
+        "lehun"
+      ],
+      "latest_year": 1900,
+      "name": "Lehun",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Lehun",
+      "historical_names": [
+        {
+          "date": "632.1.1",
+          "date_source_note": "Continuous site name anchored to earliest dataset coverage",
+          "name": "Lehun"
+        }
+      ],
+      "other_names": [
+        "Al-Lahun",
+        "Lahun",
+        "اللاهون"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        30.76196,
+        36.68016
+      ],
+      "country": "Jordan",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Qasr Bayir-Jordan",
+      "known_aliases": [
+        "Qasr Bayir",
+        "qasr bayir"
+      ],
+      "latest_year": 1900,
+      "name": "Qasr Bayir",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Qasr Bayir",
+      "historical_names": [
+        {
+          "date": "632.1.1",
+          "date_source_note": "Continuous Arabic site name anchored to earliest dataset coverage",
+          "name": "Qasr Bayir"
+        }
+      ],
+      "other_names": [
+        "Bayir",
+        "قصر باير"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        30.77035,
+        35.71767
+      ],
+      "country": "Jordan",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Thornia-Jordan",
+      "known_aliases": [
+        "Thornia",
+        "thornia"
+      ],
+      "latest_year": 1900,
+      "name": "Thornia",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Khirbet eth-Thuwana",
+      "historical_names": [
+        {
+          "date": "100.1.1",
+          "date_source_note": "Roman road station Thoana/Thornia on Tabula Peutingeriana",
+          "name": "Thornia"
+        },
+        {
+          "date": "636.1.1",
+          "date_source_note": "Arabic preservation of ancient Thoana",
+          "name": "Khirbet eth-Thuwana"
+        }
+      ],
+      "other_names": [
+        "Thornia",
+        "Thoana",
+        "et-Tawane",
+        "خربة الطوانة"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        34.74879,
+        33.31215
+      ],
+      "country": "Cyprus",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Kopetra-Cyprus",
+      "known_aliases": [
+        "Kopetra",
+        "kopetra"
+      ],
+      "latest_year": 1900,
+      "name": "Kopetra",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Kopetra",
+      "historical_names": [
+        {
+          "date": "400.1.1",
+          "date_source_note": "Late Antique settlement in the Vasilikos valley",
+          "name": "Kopetra"
+        }
+      ],
+      "other_names": [
+        "Kalavasos-Kopetra",
+        "Κόπετρα"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.70609,
+        28.0928
+      ],
+      "country": "Turkey",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hydas-Turkey",
+      "known_aliases": [
+        "Hydas",
+        "hydas"
+      ],
+      "latest_year": 1900,
+      "name": "Hydas",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Hydas",
+      "historical_names": [
+        {
+          "date": "-300.1.1",
+          "date_source_note": "Ancient Carian coastal town on the Loryma peninsula",
+          "name": "Hydas"
+        }
+      ],
+      "other_names": [
+        "Ὕδας"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.60672,
+        27.91065
+      ],
+      "country": "Turkey",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Hadrianoutherai-Turkey",
+      "known_aliases": [
+        "Hadrianoutherai",
+        "hadrianoutherai"
+      ],
+      "latest_year": 1900,
+      "name": "Hadrianoutherai",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Balıkesir",
+      "historical_names": [
+        {
+          "date": "124.1.1",
+          "date_source_note": "Founded by Emperor Hadrian in Mysia",
+          "name": "Hadrianutherae"
+        },
+        {
+          "date": "1000.1.1",
+          "date_source_note": "Medieval Byzantine name before Turkish conquest",
+          "name": "Palaeokastron"
+        },
+        {
+          "date": "1300.1.1",
+          "date_source_note": "Turkish name under the Karasid beylik and Ottoman Empire",
+          "name": "Balıkesir"
+        }
+      ],
+      "other_names": [
+        "Hadrianoutherai",
+        "Hadrianutherae",
+        "Ἁδριανοῦ Θῆραι",
+        "Palaeokastron",
+        "باليكسير"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.17231,
+        40.87422
+      ],
+      "country": "Turkey",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Athenai-Turkey",
+      "known_aliases": [
+        "Athenai",
+        "athenai"
+      ],
+      "latest_year": 1900,
+      "name": "Athenai",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Pazar",
+      "historical_names": [
+        {
+          "date": "-64.1.1",
+          "date_source_note": "Ancient Pontic port town of Athenai",
+          "name": "Athenai"
+        },
+        {
+          "date": "1461.1.1",
+          "date_source_note": "Ottoman Turkish adaptation after conquest of Trebizond",
+          "name": "Atina"
+        },
+        {
+          "date": "1928.10.17",
+          "date_source_note": "Officially renamed by decree no. 4948",
+          "name": "Pazar"
+        }
+      ],
+      "other_names": [
+        "Athenai",
+        "Athenae",
+        "Atina",
+        "Ἀθῆναι",
+        "آتينا"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.70074,
+        35.5367
+      ],
+      "country": "Turkey",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Cromen-Turkey",
+      "known_aliases": [
+        "Cromen",
+        "cromen"
+      ],
+      "latest_year": 1900,
+      "name": "Cromen",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Cromen",
+      "historical_names": [
+        {
+          "date": "100.1.1",
+          "date_source_note": "Roman road station in Pontus near Amaseia",
+          "name": "Cromen"
+        }
+      ],
+      "other_names": [
+        "Kromen",
+        "Çatalkaya"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.57038,
+        35.26687
+      ],
+      "country": "Turkey",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Euchaita-Turkey",
+      "known_aliases": [
+        "Euchaita",
+        "euchaita"
+      ],
+      "latest_year": 1900,
+      "name": "Euchaita",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Beyözü",
+      "historical_names": [
+        {
+          "date": "300.1.1",
+          "date_source_note": "Late Roman and Byzantine city in Helenopontus",
+          "name": "Euchaita"
+        },
+        {
+          "date": "1500.1.1",
+          "date_source_note": "Ottoman Turkish village name derived from Euchaita",
+          "name": "Avkat"
+        },
+        {
+          "date": "1962.9.28",
+          "date_source_note": "Officially renamed under Law No. 5442",
+          "name": "Beyözü"
+        }
+      ],
+      "other_names": [
+        "Euchaita",
+        "Εὐχάιτα",
+        "Avkat",
+        "Avhat"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        32.41353,
+        35.23986
+      ],
+      "country": "Israel",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Dothan-Israel",
+      "known_aliases": [
+        "Dothan",
+        "dothan"
+      ],
+      "latest_year": 1900,
+      "name": "Dothan",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Dothan",
+      "historical_names": [
+        {
+          "date": "-1500.1.1",
+          "date_source_note": "Ancient Bronze and Iron Age city near Jenin",
+          "name": "Dothan"
+        }
+      ],
+      "other_names": [
+        "Tel Dothan",
+        "Tell Dothan",
+        "تل دوثان",
+        "דותן"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.6377,
+        37.95834
+      ],
+      "country": "Turkey",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Singa/Sugga-Turkey",
+      "known_aliases": [
+        "Singa/Sugga",
+        "singa/sugga"
+      ],
+      "latest_year": 1900,
+      "name": "Singa/Sugga",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Singa",
+      "historical_names": [
+        {
+          "date": "100.1.1",
+          "date_source_note": "Roman road station Singa/Sugga in Commagene",
+          "name": "Singa"
+        }
+      ],
+      "other_names": [
+        "Sugga",
+        "Singa/Sugga"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.44275,
+        33.10884
+      ],
+      "country": "Turkey",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Barata-Turkey",
+      "known_aliases": [
+        "Barata",
+        "barata"
+      ],
+      "latest_year": 1900,
+      "name": "Barata",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Barata",
+      "historical_names": [
+        {
+          "date": "100.1.1",
+          "date_source_note": "Ancient Roman and Byzantine town in Lycaonia",
+          "name": "Barata"
+        }
+      ],
+      "other_names": [
+        "Βάρατα",
+        "Binbirkilise",
+        "Madenşehri"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.63469,
+        32.90046
+      ],
+      "country": "Turkey",
+      "earliest_year": -300,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Germanicopolis-Turkey",
+      "known_aliases": [
+        "Germanicopolis",
+        "germanicopolis"
+      ],
+      "latest_year": 1900,
+      "name": "Germanicopolis",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        -300,
+        650,
+        1200,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Ermenek",
+      "historical_names": [
+        {
+          "date": "-300.1.1",
+          "date_source_note": "Hellenistic settlement name anchored to earliest dataset coverage",
+          "name": "Clibanus"
+        },
+        {
+          "date": "18.1.1",
+          "date_source_note": "Named in honour of Germanicus in Isauria",
+          "name": "Germanicopolis"
+        },
+        {
+          "date": "1256.1.1",
+          "date_source_note": "Turkish name under the Karamanid Beylik",
+          "name": "Ermenek"
+        }
+      ],
+      "other_names": [
+        "Germanicopolis",
+        "Germanikopolis",
+        "Γερμανικόπολις",
+        "Germanig",
+        "ارمنك"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.19793,
+        33.02717
+      ],
+      "country": "Turkey",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ilistra-Turkey",
+      "known_aliases": [
+        "Ilistra",
+        "ilistra"
+      ],
+      "latest_year": 1900,
+      "name": "Ilistra",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Yollarbaşı",
+      "historical_names": [
+        {
+          "date": "100.1.1",
+          "date_source_note": "Ancient Lycaonian city and bishopric",
+          "name": "Ilistra"
+        },
+        {
+          "date": "1467.1.1",
+          "date_source_note": "Ottoman Turkish village name derived from Ilistra",
+          "name": "İlisıra"
+        },
+        {
+          "date": "1961.1.1",
+          "date_source_note": "Officially renamed by the Turkish government in 1961",
+          "name": "Yollarbaşı"
+        }
+      ],
+      "other_names": [
+        "Ilistra",
+        "İlisıra",
+        "Ἴλιστρα"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.08039,
+        34.89651
+      ],
+      "country": "Turkey",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mapsoukrenai-Turkey",
+      "known_aliases": [
+        "Mapsoukrenai",
+        "mapsoukrenai"
+      ],
+      "latest_year": 1900,
+      "name": "Mapsoukrenai",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Mopsucrenae",
+      "historical_names": [
+        {
+          "date": "300.1.1",
+          "date_source_note": "Late Roman road station north of Tarsus in Cilicia",
+          "name": "Mapsoukrenai"
+        }
+      ],
+      "other_names": [
+        "Mopsucrenae",
+        "Mopsucrene",
+        "Μαψουκρῆναι",
+        "Kırıt"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.30518,
+        33.85201
+      ],
+      "country": "Turkey",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Mylai-Turkey",
+      "known_aliases": [
+        "Mylai",
+        "mylai"
+      ],
+      "latest_year": 1900,
+      "name": "Mylai",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Mylai",
+      "historical_names": [
+        {
+          "date": "-300.1.1",
+          "date_source_note": "Ancient coastal town in Rough Cilicia",
+          "name": "Mylai"
+        }
+      ],
+      "other_names": [
+        "Mylae",
+        "Μυλαί"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.24236,
+        33.81305
+      ],
+      "country": "Turkey",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Palaia-Turkey",
+      "known_aliases": [
+        "Palaia",
+        "palaia"
+      ],
+      "latest_year": 1900,
+      "name": "Palaia",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Palaia",
+      "historical_names": [
+        {
+          "date": "100.1.1",
+          "date_source_note": "Ancient coastal settlement in Rough Cilicia",
+          "name": "Palaia"
+        }
+      ],
+      "other_names": [
+        "Palaea",
+        "Παλαιά"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.85167,
+        38.40064
+      ],
+      "country": "Syria",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ballatha-Syria",
+      "known_aliases": [
+        "Ballatha",
+        "ballatha"
+      ],
+      "latest_year": 1900,
+      "name": "Ballatha",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Ballatha",
+      "historical_names": [
+        {
+          "date": "-800.1.1",
+          "date_source_note": "Neo-Assyrian city at Arslan Tash",
+          "name": "Hadattu"
+        },
+        {
+          "date": "100.1.1",
+          "date_source_note": "Hellenistic and Roman name of the site",
+          "name": "Ballatha"
+        }
+      ],
+      "other_names": [
+        "Balatha",
+        "Arslan Tash",
+        "Hadattu",
+        "أرسلان طاش"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.71635,
+        37.11413
+      ],
+      "country": "Syria",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ciliza-Syria",
+      "known_aliases": [
+        "Ciliza",
+        "ciliza"
+      ],
+      "latest_year": 1900,
+      "name": "Ciliza",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        950,
+        1350,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Kilis",
+      "historical_names": [
+        {
+          "date": "-700.1.1",
+          "date_source_note": "Assyrian cuneiform attestation Ki-li-zi",
+          "name": "Kilizi"
+        },
+        {
+          "date": "100.1.1",
+          "date_source_note": "Roman-era name in Syria/Commagene",
+          "name": "Ciliza"
+        },
+        {
+          "date": "950.1.1",
+          "date_source_note": "Medieval Arabic and Turkish form attested from 10th century",
+          "name": "Kilis"
+        }
+      ],
+      "other_names": [
+        "Ciliza",
+        "Killiz",
+        "Ki-li-zi",
+        "كلس"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.21512,
+        36.66592
+      ],
+      "country": "Syria",
+      "earliest_year": 632,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Darqita-Syria",
+      "known_aliases": [
+        "Darqita",
+        "darqita"
+      ],
+      "latest_year": 1900,
+      "name": "Darqita",
+      "reason": "missing_entry",
+      "region": "ottoman_empire_mena",
+      "sample_years": [
+        632,
+        850,
+        1400,
+        1900
+      ],
+      "sources": [
+        "HANDBOOK"
+      ],
+      "canonical_name": "Darqita",
+      "historical_names": [
+        {
+          "date": "632.1.1",
+          "date_source_note": "Continuous site name in the Dead Cities region",
+          "name": "Darqita"
+        }
+      ],
+      "other_names": [
+        "درقيتا"
+      ]
+    }
+  ]
+}

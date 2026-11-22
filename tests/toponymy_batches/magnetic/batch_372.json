@@ -1,0 +1,960 @@
+{
+  "batch_index": 372,
+  "count": 30,
+  "project": "MAGNETIC",
+  "settlements": [
+    {
+      "coords_lat_lng": [
+        38.5855,
+        22.6686
+      ],
+      "country": "Greece",
+      "earliest_year": -500,
+      "existing_historical_names": [
+        {
+          "date": "-849.1.1",
+          "name": "Tithorea"
+        }
+      ],
+      "existing_meta_index": 33166,
+      "existing_meta_name": "Tithorea",
+      "key": "Tithorea/Neon-Greece",
+      "known_aliases": [
+        "Tithorea/Neon",
+        "tithorea/neon"
+      ],
+      "latest_year": 1347,
+      "name": "Tithorea/Neon",
+      "reason": "under_covered_history",
+      "region": "bulgaria_greece_thrace_med",
+      "sample_years": [
+        -500,
+        900,
+        1200,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        38.15557,
+        23.9319
+      ],
+      "country": "Greece",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tower of Oinoe, Marathon-Greece",
+      "known_aliases": [
+        "Tower of Oinoe, Marathon",
+        "tower of oinoe, marathon"
+      ],
+      "latest_year": 1347,
+      "name": "Tower of Oinoe, Marathon",
+      "reason": "missing_entry",
+      "region": "bulgaria_greece_thrace_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        42.08061,
+        22.17728
+      ],
+      "country": "North Macedonia",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tranupara-North Macedonia",
+      "known_aliases": [
+        "Tranupara",
+        "tranupara"
+      ],
+      "latest_year": 1347,
+      "name": "Tranupara",
+      "reason": "missing_entry",
+      "region": "serbia_montenegro_albania",
+      "sample_years": [
+        -500,
+        900,
+        1200,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.14322,
+        28.19515
+      ],
+      "country": "Romania",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Troesmis-Romania",
+      "known_aliases": [
+        "Troesmis",
+        "troesmis"
+      ],
+      "latest_year": 1347,
+      "name": "Troesmis",
+      "reason": "missing_entry",
+      "region": "romania_moldova_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.09207,
+        27.94399
+      ],
+      "country": "Romania",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Tropaeum Traiani (settlement)-Romania",
+      "known_aliases": [
+        "Tropaeum Traiani (settlement)",
+        "tropaeum traiani"
+      ],
+      "latest_year": 1347,
+      "name": "Tropaeum Traiani (settlement)",
+      "reason": "missing_entry",
+      "region": "romania_moldova_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.19868,
+        26.12975
+      ],
+      "country": "Greece",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Trypitos-Greece",
+      "known_aliases": [
+        "Trypitos",
+        "trypitos"
+      ],
+      "latest_year": 1347,
+      "name": "Trypitos",
+      "reason": "missing_entry",
+      "region": "bulgaria_greece_thrace_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.5324,
+        22.70335
+      ],
+      "country": "Bulgaria",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Târgovishte-Bulgaria",
+      "known_aliases": [
+        "Târgovishte",
+        "târgovishte"
+      ],
+      "latest_year": 1347,
+      "name": "Târgovishte",
+      "reason": "missing_entry",
+      "region": "bulgaria_greece_thrace_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        48.88331,
+        14.3467
+      ],
+      "country": "Czechia",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Třisov-Czechia",
+      "known_aliases": [
+        "Třisov",
+        "třisov"
+      ],
+      "latest_year": 1347,
+      "name": "Třisov",
+      "reason": "missing_entry",
+      "region": "bohemia_moravia_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.665,
+        19.07291
+      ],
+      "country": "Hungary",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Ulcisia Castra/Castra Constantia-Hungary",
+      "known_aliases": [
+        "Ulcisia Castra/Castra Constantia",
+        "ulcisia castra/castra constantia"
+      ],
+      "latest_year": 1347,
+      "name": "Ulcisia Castra/Castra Constantia",
+      "reason": "missing_entry",
+      "region": "hungary_slovakia_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.37993,
+        21.09638
+      ],
+      "country": "Serbia",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Veliko Orašje-Serbia",
+      "known_aliases": [
+        "Veliko Orašje",
+        "veliko orašje"
+      ],
+      "latest_year": 1347,
+      "name": "Veliko Orašje",
+      "reason": "missing_entry",
+      "region": "serbia_montenegro_albania",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.12466,
+        18.86518
+      ],
+      "country": "Hungary",
+      "earliest_year": 250,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Vetus Salina-Hungary",
+      "known_aliases": [
+        "Vetus Salina",
+        "vetus salina"
+      ],
+      "latest_year": 1347,
+      "name": "Vetus Salina",
+      "reason": "missing_entry",
+      "region": "hungary_slovakia_med",
+      "sample_years": [
+        250,
+        700,
+        1100,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.0853,
+        20.86214
+      ],
+      "country": "Greece",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Vigla (bulgaria_greec)-Greece",
+      "known_aliases": [
+        "Vigla",
+        "vigla"
+      ],
+      "latest_year": 1347,
+      "name": "Vigla",
+      "reason": "missing_entry",
+      "region": "bulgaria_greece_thrace_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.20929,
+        24.7022
+      ],
+      "country": "Greece",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Vigla-Greece",
+      "known_aliases": [
+        "Vigla",
+        "vigla"
+      ],
+      "latest_year": 1347,
+      "name": "Vigla",
+      "reason": "missing_entry",
+      "region": "bulgaria_greece_thrace_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        43.09958,
+        17.69989
+      ],
+      "country": "Bosnia and Herzegovina",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Vila Mogorjelo-Bosnia and Herzegovina",
+      "known_aliases": [
+        "Vila Mogorjelo",
+        "vila mogorjelo"
+      ],
+      "latest_year": 1347,
+      "name": "Vila Mogorjelo",
+      "reason": "missing_entry",
+      "region": "croatia_slovenia_bosnia",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.30173,
+        25.15774
+      ],
+      "country": "Greece",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Villa Dionysos (Knossos)-Greece",
+      "known_aliases": [
+        "Villa Dionysos (Knossos)",
+        "villa dionysos"
+      ],
+      "latest_year": 1347,
+      "name": "Villa Dionysos (Knossos)",
+      "reason": "missing_entry",
+      "region": "bulgaria_greece_thrace_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        47.04517,
+        17.88865
+      ],
+      "country": "Hungary",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Villa Romana Baláca-Hungary",
+      "known_aliases": [
+        "Villa Romana Baláca",
+        "villa romana baláca"
+      ],
+      "latest_year": 1347,
+      "name": "Villa Romana Baláca",
+      "reason": "missing_entry",
+      "region": "hungary_slovakia_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        44.72662,
+        21.19136
+      ],
+      "country": "Serbia",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Viminacium-Serbia",
+      "known_aliases": [
+        "Viminacium",
+        "viminacium"
+      ],
+      "latest_year": 1347,
+      "name": "Viminacium",
+      "reason": "missing_entry",
+      "region": "serbia_montenegro_albania",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.27959,
+        23.69028
+      ],
+      "country": "Greece",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Vlithias-Greece",
+      "known_aliases": [
+        "Vlithias",
+        "vlithias"
+      ],
+      "latest_year": 1347,
+      "name": "Vlithias",
+      "reason": "missing_entry",
+      "region": "bulgaria_greece_thrace_med",
+      "sample_years": [
+        -500,
+        900,
+        1200,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.35864,
+        20.86272
+      ],
+      "country": "Greece",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Voulista Panagia-Greece",
+      "known_aliases": [
+        "Voulista Panagia",
+        "voulista panagia"
+      ],
+      "latest_year": 1347,
+      "name": "Voulista Panagia",
+      "reason": "missing_entry",
+      "region": "bulgaria_greece_thrace_med",
+      "sample_years": [
+        -500,
+        400,
+        900,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.08193,
+        25.81099
+      ],
+      "country": "Greece",
+      "earliest_year": -2500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "West House at Vasiliki-Greece",
+      "known_aliases": [
+        "West House at Vasiliki",
+        "west house at vasiliki"
+      ],
+      "latest_year": 1347,
+      "name": "West House at Vasiliki",
+      "reason": "missing_entry",
+      "region": "bulgaria_greece_thrace_med",
+      "sample_years": [
+        -2500,
+        900,
+        1200,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        41.13805,
+        24.88641
+      ],
+      "country": "Greece",
+      "earliest_year": 800,
+      "existing_historical_names": [
+        {
+          "date": "1896.1.1",
+          "name": "Xanthi"
+        }
+      ],
+      "existing_meta_index": 11523,
+      "existing_meta_name": "Xanthi",
+      "key": "Xantheia/Xanthi-Greece",
+      "known_aliases": [
+        "Xantheia/Xanthi",
+        "xantheia/xanthi"
+      ],
+      "latest_year": 1347,
+      "name": "Xantheia/Xanthi",
+      "reason": "under_covered_history",
+      "region": "bulgaria_greece_thrace_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.20711,
+        26.13147
+      ],
+      "country": "Greece",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Xirokastrini-Greece",
+      "known_aliases": [
+        "Xirokastrini",
+        "xirokastrini"
+      ],
+      "latest_year": 1347,
+      "name": "Xirokastrini",
+      "reason": "missing_entry",
+      "region": "bulgaria_greece_thrace_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        35.09797,
+        26.26081
+      ],
+      "country": "Greece",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Zakros-Greece",
+      "known_aliases": [
+        "Zakros",
+        "zakros"
+      ],
+      "latest_year": 1347,
+      "name": "Zakros",
+      "reason": "missing_entry",
+      "region": "bulgaria_greece_thrace_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        36.7867,
+        23.08432
+      ],
+      "country": "Greece",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Zarax-Greece",
+      "known_aliases": [
+        "Zarax",
+        "zarax"
+      ],
+      "latest_year": 1347,
+      "name": "Zarax",
+      "reason": "missing_entry",
+      "region": "bulgaria_greece_thrace_med",
+      "sample_years": [
+        -500,
+        900,
+        1200,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        39.39579,
+        20.56212
+      ],
+      "country": "Greece",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Zervokhori-Greece",
+      "known_aliases": [
+        "Zervokhori",
+        "zervokhori"
+      ],
+      "latest_year": 1347,
+      "name": "Zervokhori",
+      "reason": "missing_entry",
+      "region": "bulgaria_greece_thrace_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        37.47578,
+        22.12086
+      ],
+      "country": "Greece",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Zoitia-Greece",
+      "known_aliases": [
+        "Zoitia",
+        "zoitia"
+      ],
+      "latest_year": 1347,
+      "name": "Zoitia",
+      "reason": "missing_entry",
+      "region": "bulgaria_greece_thrace_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        45.52483,
+        22.40783
+      ],
+      "country": "Romania",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Zăvoi Roman Camp-Romania",
+      "known_aliases": [
+        "Zăvoi Roman Camp",
+        "zăvoi roman camp"
+      ],
+      "latest_year": 1347,
+      "name": "Zăvoi Roman Camp",
+      "reason": "missing_entry",
+      "region": "romania_moldova_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        40.25,
+        26.25
+      ],
+      "country": "Turkey-in-Europe",
+      "earliest_year": -2500,
+      "existing_historical_names": [
+        {
+          "date": "-500.1.1",
+          "name": "Dardanellia"
+        },
+        {
+          "date": "1462.1.1",
+          "name": "Çanakkale"
+        }
+      ],
+      "existing_meta_index": 14925,
+      "existing_meta_name": "Çanakkale",
+      "key": "Çanakkale-Turkey-in-Europe",
+      "known_aliases": [
+        "Çanakkale",
+        "çanakkale"
+      ],
+      "latest_year": 1347,
+      "name": "Çanakkale",
+      "reason": "under_covered_history",
+      "region": "bulgaria_greece_thrace_med",
+      "sample_years": [
+        -2500,
+        900,
+        1200,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        46.91759,
+        17.81591
+      ],
+      "country": "Hungary",
+      "earliest_year": 800,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Örvényes-Hungary",
+      "known_aliases": [
+        "Örvényes",
+        "örvényes"
+      ],
+      "latest_year": 1347,
+      "name": "Örvényes",
+      "reason": "missing_entry",
+      "region": "hungary_slovakia_med",
+      "sample_years": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    },
+    {
+      "coords_lat_lng": [
+        54.11164,
+        17.87036
+      ],
+      "country": "Poland",
+      "earliest_year": -500,
+      "existing_historical_names": [],
+      "existing_meta_index": null,
+      "existing_meta_name": null,
+      "key": "Łubiana-Poland",
+      "known_aliases": [
+        "Łubiana",
+        "łubiana",
+        "åubiana"
+      ],
+      "latest_year": 1347,
+      "name": "Łubiana",
+      "reason": "missing_entry",
+      "region": "poland_piast",
+      "sample_years": [
+        -500,
+        400,
+        1000,
+        1347
+      ],
+      "sources": [
+        "MAGNETIC"
+      ]
+    }
+  ]
+}
