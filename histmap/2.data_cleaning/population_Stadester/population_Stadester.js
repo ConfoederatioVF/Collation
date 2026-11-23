@@ -216,8 +216,11 @@
       
       //Declare local instance variables
       let stadester_obj = options.stadester_obj;
-      if (!stadester_obj && fs.existsSync(this.file_processed_stadester))
+      if (!stadester_obj && this.file_stadester_vis && StadesterPartitionIO.hasDataset(this.file_stadester_vis)) {
+        stadester_obj = StadesterPartitionIO.readPartitionedStadester(this.file_stadester_vis);
+      } else if (!stadester_obj && fs.existsSync(this.file_processed_stadester)) {
         stadester_obj = JSON.parse(fs.readFileSync(this.file_processed_stadester, "utf8"));
+      }
       
       stadester_obj = population_Stadester_density.processCitiesAreas(stadester_obj, {
         raw_folder: this.raw_folder,

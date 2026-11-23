@@ -174,6 +174,7 @@ def fmt_yr(yr):
 
 
 SHORT_DISPLAY_LABELS = {
+  "Antioch-on-the-Orontes": "Antioch",
   "Khorasan, Sistan and Baluchestan": "Khorasan & Sistan",
   "Fars, Khuzestan and Persian Gulf Littoral": "Fars & Khuzestan",
   "Azerbaijan, Gilan and Mazandaran": "Azerbaijan & Caspian",
@@ -476,18 +477,23 @@ def generate_chapter_figures(ch, mod, raw_ctx):
     pk_yr = max(pm.keys(), key=lambda y: float(pm[y]))
     raw_peaks.append((float(pm[pk_yr]), int(pk_yr), s["name"], float(s["coords"][0]), float(s["coords"][1])))
   raw_peaks.sort(key=lambda x: -x[0])
-  # Deduplicate spatially proximate or canonical-alias transliteration twins (e.g., Ganja / Gəncə)
+  # Keep 100% of genuine enriched settlements for spatial scatter & Zipf rank-size curve;
+  # deduplicate proximate metropolitan aliases ONLY for top-12 bars & map callouts!
   alias_map = {"gəncə": "ganja", "ganca": "ganja", "gäncä": "ganja", "bakı": "baku", "sumqayıt": "sumqayit", "sumgait": "sumqayit"}
-  peaks = []
+  peaks = raw_peaks
+  sep_deg = 0.015 if stem == "modern_cyprus" else 0.14
+  top_unique = []
   seen_alias = set()
   for rp in raw_peaks:
     al = alias_map.get(rp[2].strip().lower(), rp[2].strip().lower())
     if al in seen_alias:
       continue
-    if any(abs(rp[3] - kp[3]) <= 0.14 and abs(rp[4] - kp[4]) <= 0.14 for kp in peaks[:40]):
+    if any(abs(rp[3] - kp[3]) <= sep_deg and abs(rp[4] - kp[4]) <= sep_deg for kp in top_unique[:25]):
       continue
     seen_alias.add(al)
-    peaks.append(rp)
+    top_unique.append(rp)
+    if len(top_unique) >= 24:
+      break
 
   # --- FIG 1: Vector Sub-Regions & Settlements Hero Figure ---
   vpu.apply_viscount_style(grid=False)
@@ -498,9 +504,9 @@ def generate_chapter_figures(ch, mod, raw_ctx):
     slons = [p[4] for p in peaks]
     slats = [p[3] for p in peaks]
     sxs, sys_ = proj.fwd_arr(slons, slats)
-    sizes = [max(4.5, min(38.0, 3.8 + 2.9 * math.log10(max(10.0, p[0])))) for p in peaks]
-    ax.scatter(sxs, sys_, s=sizes, c="#1e3a8a", alpha=0.52, edgecolors="white", linewidths=0.30, zorder=6)
-    top_callouts = [{"label": clean_lbl(p[2], 20), "lon": p[4], "lat": p[3]} for p in peaks[:12]]
+    sizes = [max(2.0 if len(peaks) > 1500 else 4.5, min(36.0, (2.2 if len(peaks) > 1500 else 3.8) + 2.6 * math.log10(max(10.0, p[0])))) for p in peaks]
+    ax.scatter(sxs, sys_, s=sizes, c="#1e3a8a", alpha=0.35 if len(peaks) > 1500 else 0.52, edgecolors="none" if len(peaks) > 1500 else "white", linewidths=0.0 if len(peaks) > 1500 else 0.30, zorder=6)
+    top_callouts = [{"label": clean_lbl(p[2], 20), "lon": p[4], "lat": p[3]} for p in top_unique[:12]]
     vpu.place_inbounds_callouts(fig, ax, top_callouts, arg3_proj=proj, arg6_options={"max_labels": 7, "min_sep_px": 50.0, "fontsize": 6.8, "dot_color": "#b91c1c"})
   clean_title_short = re.sub(r"\s*\([^)]*\d{3,4}[^)]*\)\s*$", "", title_short).strip()
   n_fmt = f"{len(peaks):,}".replace(",", ".")
@@ -716,7 +722,7 @@ def generate_chapter_figures(ch, mod, raw_ctx):
   ax1.set_ylabel("Peak Population", fontsize=8.4)
   ax1.legend(loc="lower left", fontsize=7.3, frameon=True)
 
-  top12 = peaks[:12][::-1]
+  top12 = top_unique[:12][::-1]
   tlbls = [clean_lbl(p[2], 20) for p in top12]
   tvals = [p[0] for p in top12]
   yp3 = np.arange(len(tlbls))

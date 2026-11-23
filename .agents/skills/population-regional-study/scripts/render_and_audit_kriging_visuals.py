@@ -412,15 +412,16 @@ def audit_domain_visuals(arg0_domain_dir, arg1_render=False, arg2_require_manife
 
 
 def main():
-  parser = argparse.ArgumentParser(description="Render 4-panel cartographic kriging audits & enforce visual sign-off.")
+  parser = argparse.ArgumentParser(description="Render 300 DPI 4-panel cartographic kriging diagnostic PNGs (quantitative/manifest auditing now runs in audit_kriging_sharpness.js).")
   parser.add_argument("domain_dir", help="Path to archaeological kriging domain (e.g. _shared/sites_IA_RAS)")
   parser.add_argument("--render", action="store_true", help="Render/refresh 300 DPI 4-panel audit PNGs in diagnostics_visual/")
-  parser.add_argument("--render-only", action="store_true", help="Render PNGs and skip visual_verification_manifest.json gate")
-  parser.add_argument("--require-visual-manifest", action="store_true", help="Explicitly require signed visual_verification_manifest.json (default unless --render-only)")
+  parser.add_argument("--render-only", action="store_true", help="Render PNGs only (recommended; run audit_kriging_sharpness.js for Stage B1/B3 gatekeeping)")
+  parser.add_argument("--require-visual-manifest", action="store_true", help="Legacy flag kept for CLI compatibility")
   parsed = parser.parse_args()
 
-  require_man = not parsed.render_only
-  errors, warnings, summary = audit_domain_visuals(parsed.domain_dir, parsed.render, require_man)
+  require_man = parsed.require_visual_manifest and not parsed.render_only
+  do_render = parsed.render or parsed.render_only
+  errors, warnings, summary = audit_domain_visuals(parsed.domain_dir, do_render, require_man)
   for w in warnings:
     print(f"[WARN] {w}")
   for e in errors:

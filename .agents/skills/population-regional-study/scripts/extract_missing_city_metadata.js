@@ -2,11 +2,14 @@
 let fs = require("fs");
 let JSON5 = require("json5");
 let path = require("path");
+let { viscount_audit_utils } = require("./viscount_audit_utils");
 let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit");
 
 //Initialise functions
 {
   let city_metadata_extractor = {
+    ARTICLE_INVERT_RE: /^.+,\s*(?:Al|El|As|Ash|Ar|Az|Ad|An|At|Le|La|Les|L'|Los|Las|Il|Lo|De|Den|Het|Der|Die|Das|The)$/i,
+
     /**
      * Checks whether a candidate settlement string is valid and uncorrupted according to Dataview standards.
      * @alias city_metadata_extractor.isCleanName
@@ -27,41 +30,64 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
       if (/^[?\s\-_.,]+$/.test(s)) return false;
       if (s.includes("?") || s.includes("\uFFFD") || s.includes("\u00EF\u00BF\u00BD")) return false;
       if (s.includes("`")) return false;
+      if (this.ARTICLE_INVERT_RE.test(s)) return false;
+      if ((s.match(/,/g) || []).length >= 2 && /\d{3,}/.test(s)) return false;
 
       //Return statement
       return true;
     },
 
     /**
-     * Computes great-circle Haversine distance in kilometres between two `[lat, lng]` points.
-     * @alias city_metadata_extractor.haversineKm
+     * Loads city metadata records from partitioned `city_metadata/` (`00_capitals.json` + region shard)
+     * or falls back to legacy monolithic `city_metadata.json`.
+     * @alias city_metadata_extractor.loadMetadataRecords
      *
-     * @param {number} arg0_lat1
-     * @param {number} arg1_lng1
-     * @param {number} arg2_lat2
-     * @param {number} arg3_lng2
+     * @param {string} arg0_dataview_root
+     * @param {string} arg1_dataset_id
+     * @param {string} [arg2_project_key]
      *
-     * @returns {number}
+     * @returns {{ is_partitioned: boolean, records: Array<Object> }}
      */
-    haversineKm (arg0_lat1, arg1_lng1, arg2_lat2, arg3_lng2) {
+    loadMetadataRecords (arg0_dataview_root, arg1_dataset_id, arg2_project_key) {
       //Convert from parameters
-      let lat1 = Number(arg0_lat1);
-      let lng1 = Number(arg1_lng1);
-      let lat2 = Number(arg2_lat2);
-      let lng2 = Number(arg3_lng2);
+      let dataset_id = arg1_dataset_id;
+      let dataview_root = arg0_dataview_root;
+      let project_key = String(arg2_project_key || "").toUpperCase();
 
       //Declare local instance variables
-      let d_lat = (lat2 - lat1)*Math.PI/180;
-      let d_lng = (lng2 - lng1)*Math.PI/180;
-      let rad1 = lat1*Math.PI/180;
-      let rad2 = lat2*Math.PI/180;
+      let stadester_dir = path.join(dataview_root, "data/stadester", dataset_id);
+      let part_dir = path.join(stadester_dir, "city_metadata");
+      let man_path = path.join(part_dir, "city_metadata_manifest.json");
+      let records = [];
 
       //Function body
-      let a = Math.sin(d_lat/2)*Math.sin(d_lat/2) +
-        Math.cos(rad1)*Math.cos(rad2)*Math.sin(d_lng/2)*Math.sin(d_lng/2);
+      if (fs.existsSync(man_path)) {
+        let man = JSON.parse(fs.readFileSync(man_path, "utf8"));
+        let shards = Array.isArray(man.shards) ? man.shards : [];
+        for (let i = 0; i < shards.length; i++) {
+          let sh = shards[i];
+          let is_cap = sh.key === "CAPITALS" || sh.file === "00_capitals.json";
+          if (project_key && !is_cap && sh.key !== project_key && sh.key !== "UNASSIGNED") continue;
+          let sp = path.join(part_dir, sh.file);
+          if (!fs.existsSync(sp)) continue;
+          let arr = JSON.parse(fs.readFileSync(sp, "utf8"));
+          for (let x = 0; x < arr.length; x++)
+            records.push({ entry: arr[x], index: x, is_capital_shard: is_cap, shard_file: sh.file });
+        }
+        return { is_partitioned: true, records: records };
+      }
+
+      let versioned_meta = path.join(stadester_dir, "city_metadata.json");
+      let legacy_meta = path.join(dataview_root, "data/stadester/city_metadata.json");
+      let meta_path = fs.existsSync(versioned_meta) ? versioned_meta : legacy_meta;
+      if (fs.existsSync(meta_path)) {
+        let arr = JSON.parse(fs.readFileSync(meta_path, "utf8"));
+        for (let i = 0; i < arr.length; i++)
+          records.push({ entry: arr[i], index: i, is_capital_shard: false, shard_file: "city_metadata.json" });
+      }
 
       //Return statement
-      return 6371*2*Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      return { is_partitioned: false, records: records };
     },
 
     /**
@@ -115,7 +141,7 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
 
       //Declare local instance variables
       let args = {
-        batch_size: 30,
+        batch_size: 25,
         dataset: "stadester_2.0",
         dataview_root: "",
         out_dir: "",
@@ -126,18 +152,13 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
       //Function body
       for (let i = 0; i < argv.length; i++) {
         let tok = String(argv[i] || "");
-        if (tok.startsWith("--project="))
-          args.project = tok.slice(10).trim().toUpperCase();
-        else if (tok.startsWith("--dataset="))
-          args.dataset = tok.slice(10).trim();
-        else if (tok.startsWith("--svea-root="))
-          args.svea_root = tok.slice(12).trim();
-        else if (tok.startsWith("--dataview-root="))
-          args.dataview_root = tok.slice(16).trim();
-        else if (tok.startsWith("--batch-size="))
-          args.batch_size = Math.max(1, Number(tok.slice(13)) || 30);
-        else if (tok.startsWith("--out-dir="))
-          args.out_dir = tok.slice(10).trim();
+        if (tok.startsWith("--project=")) args.project = tok.slice(10).trim().toUpperCase();
+        else if (tok === "--project" && i + 1 < argv.length) args.project = argv[++i].trim().toUpperCase();
+        else if (tok.startsWith("--dataset=")) args.dataset = tok.slice(10).trim();
+        else if (tok.startsWith("--svea-root=")) args.svea_root = tok.slice(12).trim();
+        else if (tok.startsWith("--dataview-root=")) args.dataview_root = tok.slice(16).trim();
+        else if (tok.startsWith("--batch-size=")) args.batch_size = Math.max(1, Math.min(30, Number(tok.slice(13)) || 25));
+        else if (tok.startsWith("--out-dir=")) args.out_dir = tok.slice(10).trim();
       }
 
       //Return statement
@@ -145,19 +166,14 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
     },
 
     /**
-     * Resolves repository roots, compares Viscount settlements against Dataview per-version `city_metadata.json`,
-     * and writes fixed-size JSON batches for Gemini Flash historical toponymy resolution.
+     * Compares Viscount settlements against Dataview partitioned `city_metadata/` (or legacy file),
+     * flagging missing entries, capitals, single-entry stubs >= 10k, indigenous-heritage regions,
+     * corrupt/inverted/suspicious names and under-covered timelines into 25-30-city Flash chunks.
      * @alias city_metadata_extractor.runExtraction
      *
      * @param {Object} [arg0_options]
-     *  @param {number} [arg0_options.batch_size=30]
-     *  @param {string} [arg0_options.dataset="stadester_2.0"]
-     *  @param {string} [arg0_options.dataview_root]
-     *  @param {string} [arg0_options.out_dir]
-     *  @param {string} [arg0_options.project]
-     *  @param {string} [arg0_options.svea_root]
      *
-     * @returns {Object} Summary statistics and generated batch file list
+     * @returns {Object}
      */
     runExtraction (arg0_options) {
       //Convert from parameters
@@ -165,38 +181,40 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
 
       //Declare local instance variables
       let batch_files = [];
-      let batch_size = Math.max(1, Number(options.batch_size) || 30);
+      let batch_size = Math.max(1, Math.min(30, Number(options.batch_size) || 25));
       let candidates = [];
       let counts = {
+        capital_audit: 0,
         corrupted_names: 0,
         empty_historical_names: 0,
+        indigenous_stub: 0,
         missing_entry: 0,
+        single_entry_major_stub: 0,
         suspicious_existing_name: 0,
         total_checked: 0,
         under_covered_history: 0,
         up_to_date: 0
       };
-      let profiles = viscount_entity_audit.loadSkillProfiles(options.svea_root || path.resolve(__dirname, "../../../.."));
       let dataset_id = (options.dataset) ? String(options.dataset).replace(/\.json$/i, "") : "stadester_2.0";
       let svea_root = (options.svea_root) ? path.resolve(options.svea_root) :
-        path.resolve(__dirname, "../../../..");
+        (viscount_audit_utils.findSveaRoot(__dirname) || path.resolve(__dirname, "../../../.."));
       let dataview_root = (options.dataview_root) ? path.resolve(options.dataview_root) :
-        (process.env.DATAVIEW_ROOT ? path.resolve(process.env.DATAVIEW_ROOT) :
-          path.resolve(svea_root, "../Project 1436 - Dataview"));
+        (process.env.DATAVIEW_ROOT ? path.resolve(process.env.DATAVIEW_ROOT) : path.resolve(svea_root, "../Project 1436 - Dataview"));
+      let profiles = viscount_entity_audit.loadSkillProfiles(svea_root);
+      let indig_regions = new Set(Array.isArray(profiles.indigenous_endonym_regions) ? profiles.indigenous_endonym_regions : []);
+      let is_indig_project = Boolean(options.project && indig_regions.has(options.project));
 
       //Guard clauses
       let loader_path = path.join(svea_root, "histmap/2.data_cleaning/population_Stadester/ViscountGazetteerLoader.js");
-      let versioned_meta_path = path.join(dataview_root, "data/stadester", dataset_id, "city_metadata.json");
-      let legacy_meta_path = path.join(dataview_root, "data/stadester/city_metadata.json");
-      let meta_path = fs.existsSync(versioned_meta_path) ? versioned_meta_path : legacy_meta_path;
       let prec_path = path.join(svea_root, "histmap/2.data_cleaning/population_Stadester/config/viscount_precedence.json5");
-
       if (!fs.existsSync(loader_path)) {
         console.error(`[extract_missing_city_metadata] ViscountGazetteerLoader not found: ${loader_path}`);
         return { batch_files: [], counts: counts };
       }
-      if (!fs.existsSync(meta_path)) {
-        console.error(`[extract_missing_city_metadata] Dataview city_metadata.json not found: ${meta_path}`);
+
+      let meta_loaded = this.loadMetadataRecords(dataview_root, dataset_id, options.project);
+      if (meta_loaded.records.length === 0) {
+        console.error(`[extract_missing_city_metadata] Dataview city_metadata not found for ${dataset_id}`);
         return { batch_files: [], counts: counts };
       }
 
@@ -207,11 +225,11 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
 
       let settlements_obj = global.ViscountGazetteerLoader.getViscountRegionalObject(load_opts);
       let settlement_keys = Object.keys(settlements_obj);
-      let raw_meta = JSON.parse(fs.readFileSync(meta_path, "utf8"));
       let spatial_grid = new Map();
 
-      for (let i = 0; i < raw_meta.length; i++) {
-        let entry = raw_meta[i];
+      for (let i = 0; i < meta_loaded.records.length; i++) {
+        let rec_wrap = meta_loaded.records[i];
+        let entry = rec_wrap.entry;
         if (!entry || !Array.isArray(entry.coords) || entry.coords.length < 2) continue;
 
         let lat = Number(entry.coords[1]);
@@ -235,17 +253,17 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
           if (ps) phon_set.add(ps);
         }
 
-        let gx = Math.round(lat*2);
-        let gy = Math.round(lng*2);
-        let grid_key = `${gx},${gy}`;
+        let grid_key = `${Math.round(lat*2)},${Math.round(lng*2)}`;
         if (!spatial_grid.has(grid_key)) spatial_grid.set(grid_key, []);
         spatial_grid.get(grid_key).push({
           entry: entry,
-          index: i,
+          index: rec_wrap.index,
+          is_capital_shard: rec_wrap.is_capital_shard,
           lat: lat,
           lng: lng,
           norm_set: norm_set,
-          phon_set: phon_set
+          phon_set: phon_set,
+          shard_file: rec_wrap.shard_file
         });
       }
 
@@ -288,7 +306,7 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
 
         for (let x = 0; x < nearby.length; x++) {
           let cand = nearby[x];
-          let d_km = this.haversineKm(clat, clng, cand.lat, cand.lng);
+          let d_km = viscount_audit_utils.haversineKm(clat, clng, cand.lat, cand.lng);
           if (d_km > 25.0) continue;
 
           let matched_name = false;
@@ -304,10 +322,7 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
           if (!matched_name) {
             for (let cp of c_phons) {
               for (let mp of cand.phon_set) {
-                if (mp === cp) {
-                  matched_name = true;
-                  break;
-                }
+                if (mp === cp) { matched_name = true; break; }
               }
               if (matched_name) break;
             }
@@ -321,11 +336,18 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
           }
         }
 
-        let pop_years = Object.keys(city.population || {}).map(Number).filter(Number.isFinite).sort(function (arg0_a, arg1_b) {
+        let pop_obj = (city.population && typeof city.population === "object") ? city.population : {};
+        let pop_years = Object.keys(pop_obj).map(Number).filter(Number.isFinite).sort(function (arg0_a, arg1_b) {
           return arg0_a - arg1_b;
         });
+        let max_pop = 0;
+        for (let x = 0; x < pop_years.length; x++) {
+          let pv = Number(pop_obj[String(pop_years[x])] || 0);
+          if (pv > max_pop) max_pop = pv;
+        }
         let earliest_yr = pop_years.length > 0 ? pop_years[0] : null;
         let latest_yr = pop_years.length > 0 ? pop_years[pop_years.length - 1] : null;
+        let is_capital = Boolean(city.is_capital || city.capital || (best_match && (best_match.is_capital_shard || best_match.entry.capital)));
 
         let reason = "";
         if (!best_match) {
@@ -358,12 +380,21 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
             } else if (has_suspicious) {
               reason = "suspicious_existing_name";
               counts.suspicious_existing_name++;
+            } else if (is_capital && hn.length === 1 && String(hn[0].date) === "1900.1.1") {
+              reason = "capital_audit";
+              counts.capital_audit++;
             } else if (earliest_yr !== null && earliest_yr < 1850) {
               let first_h_yr = Number(String(hn[0].date || "").split(".")[0]);
-              if (!Number.isFinite(first_h_yr) || first_h_yr > earliest_yr + 100 || (hn.length === 1 && (latest_yr - earliest_yr) >= 200 && city_aliases.length >= 2)) {
+              if (!Number.isFinite(first_h_yr) || first_h_yr > earliest_yr + 100 || (hn.length === 1 && (latest_yr - earliest_yr) >= 200)) {
                 reason = "under_covered_history";
                 counts.under_covered_history++;
               }
+            } else if (hn.length === 1 && is_indig_project && max_pop >= 5000 && String(hn[0].date) === "1900.1.1") {
+              reason = "indigenous_stub";
+              counts.indigenous_stub++;
+            } else if (hn.length === 1 && max_pop >= 10000 && String(hn[0].date) === "1900.1.1") {
+              reason = "single_entry_major_stub";
+              counts.single_entry_major_stub++;
             }
           }
         }
@@ -375,7 +406,6 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
 
         let sample_years = (pop_years.length <= 8) ? pop_years :
           [pop_years[0], pop_years[Math.floor(pop_years.length/3)], pop_years[Math.floor(2*pop_years.length/3)], pop_years[pop_years.length - 1]];
-
         let dedup_aliases = Array.from(new Set(city_aliases.map(function (arg0_s) {
           return String(arg0_s || "").trim();
         }).filter(Boolean)));
@@ -383,13 +413,17 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
         candidates.push({
           coords_lat_lng: [Number(clat.toFixed(5)), Number(clng.toFixed(5))],
           country: city.country || "",
-          earliest_year: pop_years.length > 0 ? pop_years[0] : null,
+          earliest_year: earliest_yr,
           existing_historical_names: best_match && Array.isArray(best_match.entry.historical_names) ? best_match.entry.historical_names : [],
           existing_meta_index: best_match ? best_match.index : null,
           existing_meta_name: best_match ? best_match.entry.name : null,
+          existing_shard_file: best_match ? best_match.shard_file : null,
+          is_capital: is_capital,
+          is_indigenous_region: is_indig_project,
           key: key,
           known_aliases: dedup_aliases,
-          latest_year: pop_years.length > 0 ? pop_years[pop_years.length - 1] : null,
+          latest_year: latest_yr,
+          max_pop: Math.round(max_pop),
           name: city.name || key,
           reason: reason,
           region: city.region || "",
@@ -397,6 +431,12 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
           sources: Array.isArray(city.sources) ? city.sources.slice() : []
         });
       }
+
+      // Sort capitals first, then descending peak population
+      candidates.sort(function (arg0_a, arg1_b) {
+        if (arg0_a.is_capital !== arg1_b.is_capital) return arg0_a.is_capital ? -1 : 1;
+        return (arg1_b.max_pop || 0) - (arg0_a.max_pop || 0);
+      });
 
       let project_slug = options.project ? options.project.toLowerCase() : "all_projects";
       if (options.project && fs.existsSync(prec_path)) {
@@ -420,7 +460,7 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
             fs.unlinkSync(path.join(out_dir, old_files[i]));
         }
       }
-      if (!fs.existsSync(out_dir)) fs.mkdirSync(out_dir, { recursive: true });
+      fs.mkdirSync(out_dir, { recursive: true });
 
       for (let i = 0; i < candidates.length; i += batch_size) {
         let batch_idx = Math.floor(i/batch_size) + 1;
@@ -431,6 +471,7 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
         fs.writeFileSync(batch_path, JSON.stringify({
           batch_index: batch_idx,
           count: batch_slice.length,
+          is_indigenous_region: is_indig_project,
           project: options.project || "ALL",
           settlements: batch_slice
         }, null, 2), "utf8");
@@ -444,12 +485,13 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
         batch_size: batch_size,
         counts: counts,
         generated_at_gmt0: new Date().toISOString(),
+        is_partitioned_source: meta_loaded.is_partitioned,
         out_dir: out_dir,
         project: options.project || "ALL"
       };
       fs.writeFileSync(manifest_path, JSON.stringify(summary, null, 2), "utf8");
 
-      console.log(`[extract_missing_city_metadata] Checked ${counts.total_checked} settlements (${options.project || "ALL"}): ${candidates.length} need updates (${counts.missing_entry} missing, ${counts.empty_historical_names} empty, ${counts.corrupted_names} corrupt) -> ${batch_files.length} batch(es) in ${out_dir}`);
+      console.log(`[extract_missing_city_metadata] Checked ${counts.total_checked} settlements (${options.project || "ALL"}): ${candidates.length} need updates -> ${batch_files.length} batch(es) of <= ${batch_size} in ${out_dir}`);
 
       //Return statement
       return summary;

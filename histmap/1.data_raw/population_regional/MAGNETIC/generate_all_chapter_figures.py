@@ -242,7 +242,10 @@ def render_regional_map (arg0_ch, arg1_summary, arg2_basemaps):
       xs_s.append(px)
       ys_s.append(py)
   if xs_s:
-    ax.scatter(xs_s, ys_s, s=4.5, c="#1e293b", alpha=0.35, linewidths=0.0, zorder=4.8)
+    n_pts = len(xs_s)
+    pt_s = 0.55 if n_pts > 15000 else (1.35 if n_pts > 5000 else 4.0)
+    pt_a = 0.22 if n_pts > 15000 else (0.28 if n_pts > 5000 else 0.35)
+    ax.scatter(xs_s, ys_s, s=pt_s, c="#1e293b", alpha=pt_a, linewidths=0.0, zorder=4.8)
 
   top_items = [
     {"label": truncate_label(s["name"], 18), "lon": s["lon"], "lat": s["lat"]}

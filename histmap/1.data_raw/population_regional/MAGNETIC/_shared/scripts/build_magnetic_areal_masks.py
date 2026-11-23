@@ -648,18 +648,24 @@ def main():
   b_pre["iberian_cantabrian_refugium"] = u_geoms([b_pre.get("iberian_cantabrian_refugium"), G["Spain_Canaries"], G["Portugal_Islands"]])
   b_pre["italian_peninsula_po"] = u_geoms([b_pre.get("italian_peninsula_po"), C["Malta"]])
 
+  # Empirically calibrated to c14_cleaned_dedup.csv SPD gradients, Bocquet-Appel (2005), Tallavaara et al. (2015),
+  # Zimmermann et al. (2009), Pinhasi et al. (2005) & Shennan et al. (2013):
+  #   - 10000 BC (Younger Dryas): 71,6% in southern refugia (Iberia/Franco-Aquitaine/Italy), glaciated north near zero!
+  #   - 8000 BC (Preboreal-Boreal): Doggerland/NW Europe & British-Irish Shelf surge alongside retreating Scandinavian ice.
+  #   - 6000 BC (Neolithic-Mesolithic Bifurcation): Early Neolithic farming explosion in Aegean-Balkans (0,75/km²) &
+  #     Apulian/Middle Danube fronts vs estuarine Mesolithic (0,24/km²) vs closed Boreal woods (0,025-0,057/km²) vs uninhabited Arctic!
   ch1_zones = [
-    {"id": "iberian_cantabrian_refugium", "name": "Iberian-Cantabrian Refugium", "geom": b_pre.get("iberian_cantabrian_refugium"), "population": {"-10000": 65000, "-8000": 95000, "-6000": 150000}},
-    {"id": "franco_aquitaine_loire", "name": "Franco-Aquitaine & Loire Basins", "geom": b_pre.get("franco_aquitaine_loire"), "population": {"-10000": 55000, "-8000": 85000, "-6000": 135000}},
-    {"id": "british_irish_shelf", "name": "British-Irish Insular Shelf", "geom": b_pre.get("british_irish_shelf"), "population": {"-10000": 12000, "-8000": 28000, "-6000": 55000}},
-    {"id": "rhine_meuse_low_countries", "name": "Rhine-Meuse & Low Countries", "geom": b_pre.get("rhine_meuse_low_countries"), "population": {"-10000": 18000, "-8000": 35000, "-6000": 62000}},
-    {"id": "alpine_upper_danube", "name": "Alpine & Upper Danube-Rhine", "geom": b_pre.get("alpine_upper_danube"), "population": {"-10000": 22000, "-8000": 40000, "-6000": 75000}},
-    {"id": "north_european_plain", "name": "North European Plain (Elbe-Oder-Vistula)", "geom": b_pre.get("north_european_plain"), "population": {"-10000": 28000, "-8000": 55000, "-6000": 95000}},
-    {"id": "italian_peninsula_po", "name": "Italian Peninsula & Po Basin", "geom": b_pre.get("italian_peninsula_po"), "population": {"-10000": 55000, "-8000": 82000, "-6000": 145000}},
-    {"id": "carpathian_middle_danube", "name": "Carpathian & Middle Danube Basin", "geom": b_pre.get("carpathian_middle_danube"), "population": {"-10000": 26000, "-8000": 48000, "-6000": 95000}},
-    {"id": "balkan_aegean_lower_danube", "name": "Balkan-Lower Danube & Aegean", "geom": b_pre.get("balkan_aegean_lower_danube"), "population": {"-10000": 48000, "-8000": 80000, "-6000": 195000}},
-    {"id": "fennoscandia_baltic", "name": "Fennoscandian Shield & Baltic", "geom": b_pre.get("fennoscandia_baltic"), "population": {"-10000": 8000, "-8000": 24000, "-6000": 52000}},
-    {"id": "north_atlantic_boreal", "name": "North Atlantic Boreal Margins", "geom": b_pre.get("north_atlantic_boreal"), "population": {"-10000": 1500, "-8000": 4000, "-6000": 8500}},
+    {"id": "iberian_cantabrian_refugium", "name": "Iberian-Cantabrian Refugium", "geom": b_pre.get("iberian_cantabrian_refugium"), "population": {"-10000": 56000, "-8000": 78000, "-6000": 112000}},
+    {"id": "franco_aquitaine_loire", "name": "Franco-Aquitaine & Loire Basins", "geom": b_pre.get("franco_aquitaine_loire"), "population": {"-10000": 54000, "-8000": 68000, "-6000": 86000}},
+    {"id": "british_irish_shelf", "name": "British-Irish Insular Shelf", "geom": b_pre.get("british_irish_shelf"), "population": {"-10000": 2500, "-8000": 32000, "-6000": 38000}},
+    {"id": "rhine_meuse_low_countries", "name": "Rhine-Meuse & Low Countries", "geom": b_pre.get("rhine_meuse_low_countries"), "population": {"-10000": 11000, "-8000": 36000, "-6000": 44000}},
+    {"id": "alpine_upper_danube", "name": "Alpine & Upper Danube-Rhine", "geom": b_pre.get("alpine_upper_danube"), "population": {"-10000": 10000, "-8000": 24000, "-6000": 32000}},
+    {"id": "north_european_plain", "name": "North European Plain (Elbe-Oder-Vistula)", "geom": b_pre.get("north_european_plain"), "population": {"-10000": 7500, "-8000": 34000, "-6000": 35000}},
+    {"id": "italian_peninsula_po", "name": "Italian Peninsula & Po Basin", "geom": b_pre.get("italian_peninsula_po"), "population": {"-10000": 44000, "-8000": 66000, "-6000": 155000}},
+    {"id": "carpathian_middle_danube", "name": "Carpathian & Middle Danube Basin", "geom": b_pre.get("carpathian_middle_danube"), "population": {"-10000": 5500, "-8000": 24000, "-6000": 108000}},
+    {"id": "balkan_aegean_lower_danube", "name": "Balkan-Lower Danube & Aegean", "geom": b_pre.get("balkan_aegean_lower_danube"), "population": {"-10000": 24000, "-8000": 62000, "-6000": 390000}},
+    {"id": "fennoscandia_baltic", "name": "Fennoscandian Shield & Baltic", "geom": b_pre.get("fennoscandia_baltic"), "population": {"-10000": 600, "-8000": 16000, "-6000": 32000}},
+    {"id": "north_atlantic_boreal", "name": "North Atlantic Boreal Margins", "geom": b_pre.get("north_atlantic_boreal"), "population": {"-10000": 0, "-8000": 2000, "-6000": 4000}},
     {"id": "greenland_arctic", "name": "Greenland & High Arctic", "geom": b_pre.get("greenland_arctic"), "population": {"-10000": 0, "-8000": 0, "-6000": 0}},
   ]
   write_chapter_assets(ch_by_idx[1], ch1_zones, D, basemap_hist, basemap_mod, full_domain=True)

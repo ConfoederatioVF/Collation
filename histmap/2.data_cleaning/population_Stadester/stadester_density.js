@@ -595,33 +595,30 @@
     let all_cities = Object.keys(stadester_obj);
     let cfg = global.population_Stadester_config;
     let city_timeline_list = [];
-    let density_dict_by_year = {};
     let global_density = population_Stadester_density.getGlobalPopulationDensityObject();
-    let total_cities_by_year = {};
     
     //Prepare sorted density keys and timelines for each city once
     for (let i = 0; i < all_cities.length; i++) {
       let city = stadester_obj[all_cities[i]];
+      if (city) city.centre_density = {};
       if (city && city.density) {
         let keys = Object.keys(city.density).map(Number).sort((a, b) => a - b);
         let vals = [];
         for (let x = 0; x < keys.length; x++) vals.push(city.density[keys[x]]);
-        city._density_keys = keys;
         city_timeline_list.push({
           city: city,
           cur_idx: -1,
           cur_val: null,
-          key: city.key,
           keys: keys,
           vals: vals
         });
       }
     }
     
-    //Chronological sweep across years to compute ordinals and total active cities
+    //Chronological sweep across years assigning centre densities directly without retaining per-year ordinal maps
     for (let yr = cfg.baseline_year; yr <= cfg.end_year; yr++) {
       let density_list = [];
-      let year_ordinals = {};
+      let g_dens = global_density[yr] || 180;
       
       for (let i = 0; i < city_timeline_list.length; i++) {
         let entry = city_timeline_list[i];
@@ -630,31 +627,18 @@
           entry.cur_val = entry.vals[entry.cur_idx];
         }
         if (entry.cur_val !== null && entry.cur_val > 0)
-          density_list.push({ key: entry.key, density: entry.cur_val });
+          density_list.push({ city: entry.city, density: entry.cur_val });
       }
       
       density_list.sort((a, b) => b.density - a.density);
-      for (let i = 0; i < density_list.length; i++)
-        year_ordinals[density_list[i].key] = i + 1;
-      
-      density_dict_by_year[yr] = year_ordinals;
-      total_cities_by_year[yr] = density_list.length;
-    }
-    
-    //Assign centre densities
-    for (let i = 0; i < all_cities.length; i++) {
-      let city = stadester_obj[all_cities[i]];
-      let centre_density_obj = {};
-      
-      for (let yr = cfg.baseline_year; yr <= cfg.end_year; yr++) {
-        let rank = density_dict_by_year[yr][city.key];
-        if (rank) {
-          let total_cities = total_cities_by_year[yr];
-          let a_val = 130*Math.log(total_cities/120/rank) + 506 + (global_density[yr] || 180);
-          centre_density_obj[yr] = Math.max(10, a_val);
-        }
+      let total_cities = density_list.length;
+      for (let i = 0; i < total_cities; i++) {
+        let local_city = density_list[i].city;
+        if (!local_city.population || local_city.population[yr] === undefined) continue;
+        let rank = i + 1;
+        let a_val = 130*Math.log(total_cities/120/rank) + 506 + g_dens;
+        local_city.centre_density[yr] = Math.max(10, a_val);
       }
-      city.centre_density = centre_density_obj;
     }
     
     //Return statement

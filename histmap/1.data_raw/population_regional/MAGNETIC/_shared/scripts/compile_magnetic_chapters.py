@@ -32,7 +32,7 @@ def compile_chapter (arg0_ch):
   idx = arg0_ch["index"]
   key = arg0_ch["key"]
   ch_dir_raw = os.path.join(MAG_DIR, arg0_ch["folder"])
-  ch_dir = win_short_path(ch_dir_raw) if len(ch_dir_raw) > 145 else ch_dir_raw.replace("\\", "/")
+  ch_dir = win_short_path(ch_dir_raw) if len(ch_dir_raw) > 110 else ch_dir_raw.replace("\\", "/")
   rmds = [f"{key}_literature_review.Rmd", f"{key}_settlements.Rmd"]
   errs = []
   for rmd in rmds:

@@ -1,7 +1,7 @@
 {
-  // Operation Viscount 14-Region Declarative Skill Profiles
-  // Consumed by Gatekeepers A, A2, C1, D1, D2, E2 and F so no single macro-region is hardcoded.
-  version: "1.0",
+  // Operation Viscount 14-Region Declarative Skill Profiles (Single Source of Truth)
+  // Consumed by Node.js Gatekeepers A, B1-B3, C, D1-D3, E, F and S across all 14 macro-regions.
+  version: "2.0",
 
   macro_region_defaults: {
     CENTAUR: {
@@ -104,6 +104,150 @@
     }
   },
 
+  // Stage A: Two-pass OHM + academic HGIS areal mask governance & degenerate topology controls
+  hgis_policy: {
+    banned_hgis_sources: [
+      "eu4", "europa universalis", "vic2", "vic3", "victoria2", "victoria 2",
+      "ck2", "ck3", "crusader kings", "hoi4", "hearts of iron", "paradox",
+      "aourednik", "historical-basemaps"
+    ],
+    hyde_annual_start: 1951,
+    hyde_centennial_end: 1700,
+    hyde_decennial_end: 1950,
+    max_collinear_straight_edge_px: 22,
+    max_modern_border_edge_iou_pre1945: 0.62,
+    ohm_substrata_required: true,
+    pass2_max_subagents: 2,
+    require_separate_mask_auditor: true,
+    sliver_area_threshold_km2: 25,
+    sliver_min_px: 4,
+    topology_repair_required: true
+  },
+
+  // Stage B: Dual HYDE 3.5 + KK10 believed-density catchment tightening + minimum surface floor
+  catchment_density_policy: {
+    density_envelope_mode: "max_hyde35_kk10",
+    exclude_only_when_both_zero_and_site_free: true,
+    global_max_catchment_area_km2: 25000,
+    min_catchments_per_100k_km2: 5.0,
+    min_tier_compliance_ratio: 0.90,
+    tiers: [
+      { id: "dense_core", max_area_km2: 1800, min_inh_per_km2: 25.0 },
+      { id: "settled_belt", max_area_km2: 3000, min_inh_per_km2: 5.0 },
+      { id: "moderate_rural", max_area_km2: 6000, min_inh_per_km2: 1.0 },
+      { id: "sparse_margin", max_area_km2: 14000, min_inh_per_km2: 0.05 },
+      { id: "minimum_floor", max_area_km2: 25000, min_inh_per_km2: 0.0 }
+    ]
+  },
+
+  // Stage B: Kriging sharpness, radial anisotropy, habitability & pycnophylactic mass conservation
+  kriging_sharpness_floors: {
+    max_manhattan_anisotropy_ratio: 1.35,
+    max_nugget_to_sill_ratio: 0.45,
+    max_raw_tau1: 1.80,
+    max_subadmin_mass_rel_err: 0.0001,
+    max_unhab_leak_ratio: 0.03,
+    max_unhab_mass_share: 0.015,
+    max_urban_backproj_p95_ratio: 1.65,
+    max_urban_core_med_ratio: 1.60,
+    min_c14_multiplier: 2.5,
+    min_dx_mean: 0.14,
+    min_hp15_mean: 0.20,
+    min_log_corr_hyde: 0.25
+  },
+
+  // Stage C: Anti-heuristic population distribution & chronology continuity guards
+  population_distribution_guards: {
+    max_adjacent_decennial_jump: 3.0,
+    max_early_modern_step_ratio: 1.35,
+    max_post_1995_only_ratio: 0.45,
+    max_single_peak_share: 0.035,
+    max_top3_peak_share: 0.12,
+    min_check_sample_size: 50,
+    min_interquartile_log10_spread: 0.40,
+    min_unique_peak_ratio: 0.55,
+    require_evidence_basis_for_historical: true
+  },
+
+  // Stage C: Municipal-limits non-decomposition vs extra-municipal suburb preservation
+  municipal_decomposition_rules: {
+    capital_overrides_largest_population: true,
+    intra_municipal_suffix_regexes: [
+      "\\b(?:arrondissement|borough|ward|stadtbezirk|bezirk|okrug|shiyakha|qism|kism|markaz|mahalle|alcaldia|delegacion|sub-?district)\\b",
+      "\\b(?:raion|rayon)\\s*(?:of\\s+)?(?:baku|yerevan|tbilisi|moscow|kyiv|minsk|almaty|tashkent)?$",
+      "\\(mod_uk\\)$",
+      "-(?:ku|gu|dong|quận)$",
+      "^\\d+(?:er|e|st|nd|rd|th)\\s+arrondissement\\b"
+    ],
+    preserve_extra_municipal_suburbs: true
+  },
+
+  // Stages C & E: Spatiotemporally agnostic 3-Phase metropolitan reconciliation (all time + DEGURBA)
+  metro_reconciliation_policy: {
+    conservation_abs_tolerance: 1.0,
+    degurba_start_year: 1975,
+    degurba_taper_start_year: 1965,
+    max_multi_metro_weight_sum: 1.0,
+    preserve_persistent_city_proper: true,
+    remove_metro_datapoint_when_residual_le_zero: true,
+    transport_era_envelopes: [
+      { coeff_km: 2.5, end_year: 1829, exponent: 0.35, id: "pre_rail_walking", max_radius_km: 12.0, start_year: -10000 },
+      { coeff_km: 5.5, end_year: 1944, exponent: 0.35, id: "rail_tram", max_radius_km: 28.0, start_year: 1830 },
+      { coeff_km: 8.5, end_year: 1974, exponent: 0.35, id: "automobile_pre_degurba", max_radius_km: 45.0, start_year: 1945 }
+    ]
+  },
+
+  // Stage D & F: GitHub / Windows MAX_PATH-safe filename, stem & title ceilings
+  path_and_title_limits: {
+    max_chapter_stem_chars: 42,
+    max_chapter_title_chars: 72,
+    max_chapter_title_words: 10,
+    max_filename_chars: 72,
+    max_repo_rel_path_chars: 180,
+    max_subtitle_chars: 90,
+    root_title: "Studies on Population"
+  },
+
+  // Stage D: Source diversity & anti-concentration citation limits
+  citation_diversity_limits: {
+    max_single_author_or_domain_share: 0.30,
+    max_single_source_cite_share: 0.20,
+    max_top3_sources_cite_share: 0.45,
+    min_cited_bib_utilisation: 0.75,
+    min_distinct_cited_keys_chapter: 15,
+    min_pdf_count_chapter: 15,
+    min_unique_bib_keys_chapter: 20
+  },
+
+  // Universal source-provenance limits
+  provenance_caps: {
+    max_crowd_bib_ratio: 0.10,
+    max_crowd_kriging_share: 0.25,
+    max_crowd_settlement_entries_share: 0.30,
+    max_crowd_settlement_share: 0.20,
+    max_zenodo_bib_ratio_chapter: 0.15,
+    max_zenodo_bib_ratio_project: 0.10,
+    min_bib_publisher_domains: 5,
+    min_regional_arch_share: 0.50
+  },
+
+  // Stage F: Regions & territories requiring mandatory pre-colonial / indigenous endonym checks
+  indigenous_endonym_regions: [
+    "CENTAUR", "PRETA", "QUIPU", "JAGUAR", "AUSTRAL", "NICETHI", "CASTLE", "POLARIS", "MAGNETIC"
+  ],
+
+  endonym_transliteration_standards: {
+    arabic_persian: "ALA-LC / BGN-PCGN endonymic Latin (no comma-inverted Al-/El-)",
+    chinese: "Hanyu Pinyin without tone numbers",
+    cyrillic_slavic: "National/BGN-PCGN endonymic Latin (Kyiv, Chernihiv, Baranavichy; zero ASCII backtick haceks)",
+    greek: "ELOT 743 / ISO 843 endonymic Latin",
+    indic: "IAST / standard Indian endonymic Latin",
+    indigenous_precolonial: "Attested Indigenous endonym with Unicode diacritics (Nuuk/Nûk, Tāmaki Makaurau, Warrane, Utqiaġvik, Qosqo, Tenochtitlan)",
+    japanese: "Modified Hepburn",
+    korean: "Revised Romanization of Korean",
+    turkic: "Official modern Latin endonym (İstanbul, Bakı, Samarqand, Toshkent/Tashkent; zero UE/AE/OE ASCII digraphs)"
+  },
+
   // Countries/jurisdictions across the 14 Viscount regions where indigenous, official or historical
   // non-Latin script aliases are scholarly (NOTE: "georgia" is disambiguated dynamically via lon < -30).
   multi_script_countries: [
@@ -131,7 +275,6 @@
     "vietnam", "western sahara", "yemen", "yugoslf"
   ],
 
-  // Maps Viscount short codes, sub-national states and territories to Natural Earth country properties
   adm0_canonical_overrides: {
     "usa": "United States of America", "uniteds": "United States of America", "united states": "United States of America",
     "alabama": "United States of America", "alaska": "United States of America", "arizona": "United States of America",
@@ -207,12 +350,10 @@
     "tanzania": "United Republic of Tanzania", "zimbabw": "Zimbabwe", "gambia": "Gambia"
   },
 
-  // Disputed/UN-boundary bounding boxes unioned onto sovereign polygons during spatial bounds checks ([min_lon, min_lat, max_lon, max_lat])
   polygon_union_bboxes: {
     "Ukraine": [32.35, 44.30, 36.75, 46.30]
   },
 
-  // Archaeology/topographic site qualifiers exempt from modern compound " & " municipality splits
   arch_site_qualifiers: [
     "Site", "Complex", "Hillfort", "Settlement", "Mound", "Kurgan", "Barrow", "Tumulus",
     "Kofun", "Tell", "Tepe", "Hoyuk", "Höyük", "Huaca", "Pueblo", "Sambaqui", "Midden",
@@ -221,9 +362,11 @@
     "Palaeolithic", "Neolithic", "Bronze", "Iron Age", "Ford", "Steppe", "Approach", "Frontier"
   ],
 
-  // Cross-language historical romanisation & colonial exonym equivalence classes (normalised stems)
   romanisation_equivalences: [
     ["beiiing", "peking", "peiping"],
+    ["pireas", "piraeus"],
+    ["isni", "isniimallgau"],
+    ["graodemurviedro", "graodesagunto"],
     ["guangzhou", "kanton"],
     ["naniing", "nanking"],
     ["kingdao", "tsingtao"],
@@ -258,6 +401,8 @@
     ["helsinki", "helsingfors"],
     ["turku", "abo"],
     ["oslo", "khristiania", "kristiania"],
+    ["rodos", "rhodes"],
+    ["kiiv", "kiev"],
     ["harare", "salisburi"],
     ["maputo", "lourenkomarkes"],
     ["kinshasa", "leopoldville"],
@@ -274,30 +419,25 @@
     ["almati", "almaata", "verni"],
     ["bishkek", "frunze", "pishpek"],
     ["dushanbe", "stalinabad"],
-    ["alluikok", "likhtenau"]
+    ["alluikok", "likhtenau"],
+    ["nuuk", "godthaab", "godthab"],
+    ["utkiagvik", "barrow", "ukpeagvik"],
+    ["ikaluit", "frobisherbai"],
+    ["kusko", "kosko"],
+    ["kairo", "alkahirah", "alkahira", "fustat"],
+    ["alexandria", "aliskandariiah", "aliskandariia"],
+    ["algiers", "eldiazair", "aliazair"],
+    ["baku", "baki"]
   ],
 
-  // Universal source-provenance and bibliography diversity limits (enforced project-wide and per jurisdiction)
-  provenance_caps: {
-    max_zenodo_bib_ratio_chapter: 0.15,
-    max_zenodo_bib_ratio_project: 0.10,
-    max_crowd_bib_ratio: 0.10,
-    min_bib_publisher_domains: 5,
-    max_crowd_kriging_share: 0.25,
-    min_regional_arch_share: 0.50,
-    max_crowd_settlement_share: 0.20,
-    max_crowd_settlement_entries_share: 0.30
-  },
-
-  // Canonical RMarkdown title/subtitle conciseness and itinerary contract
+  // Legacy alias kept for compatibility with existing scripts reading `title_limits`
   title_limits: {
-    root_title: "Studies on Population",
-    max_chapter_title_chars: 78,
-    max_chapter_title_words: 12,
-    max_subtitle_chars: 95
+    max_chapter_title_chars: 72,
+    max_chapter_title_words: 10,
+    max_subtitle_chars: 90,
+    root_title: "Studies on Population"
   },
 
-  // Suspicious non-settlement toponym patterns (temples, shrines, monuments, administrative units)
   suspicious_toponym_patterns: {
     religious_monument_regexes: [
       "^wat\\s+",
@@ -314,46 +454,17 @@
       "-(?:shi|si|gun|ken|fu|do|cho|machi|mura|gu|dong|myeon|eup)$",
       "\\b(?:prefecture|oblast|krai|raion|uyezd|volost|guberniya|province|district|municipality|regency|kabupaten|kecamatan|amphoe|changwat|wilayah|governorate|vilayet|sanjak|tehsil|taluka|upazila|comarca|departamento|canton|county|township|parish)\\s*$"
     ],
-    // Genuine historic towns whose canonical names contain morphemes overlapping with the patterns above
     allowlist: [
-      "watford",
-      "waterford",
-      "waterloo",
-      "temple",
-      "templeton",
-      "christchurch",
-      "abbeyfeale",
-      "abbeyleix",
-      "chapel hill",
-      "church hill",
-      "falls church",
-      "whitechurch",
-      "whitchurch",
-      "banteay meanchey",
-      "kampong cham",
-      "nakhon si thammarat",
-      "phra nakhon si ayutthaya",
-      "dazaifu",
-      "kofu",
-      "hofu",
-      "beppu",
-      "kanazawa",
-      "sendai",
-      "sapporo",
-      "nagasaki",
-      "fukuoka",
-      "kagoshima",
-      "naha",
-      "mazar-i-sharif",
-      "mazar-e-sharif",
-      "tombouctou",
-      "timbuktu",
-      "saint-denis",
-      "sanctuary point"
+      "watford", "waterford", "waterloo", "temple", "templeton", "christchurch",
+      "abbeyfeale", "abbeyleix", "chapel hill", "church hill", "falls church",
+      "whitechurch", "whitchurch", "banteay meanchey", "kampong cham",
+      "nakhon si thammarat", "phra nakhon si ayutthaya", "dazaifu", "kofu",
+      "hofu", "beppu", "kanazawa", "sendai", "sapporo", "nagasaki", "fukuoka",
+      "kagoshima", "naha", "mazar-i-sharif", "mazar-e-sharif", "tombouctou",
+      "timbuktu", "saint-denis", "sanctuary point", "savigny-le-temple"
     ]
   },
 
-  // Mandatory per-country and distinct sub-jurisdiction archaeological & demographic scraping matrix
   jurisdiction_source_matrix: {
     CENTAUR: {
       required_jurisdictions: [

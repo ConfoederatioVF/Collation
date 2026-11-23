@@ -6,7 +6,10 @@ let path = require("path");
 //Initialise functions
 {
   let viscount_entity_audit = {
+    _cached_arch_regexes: null,
+    _cached_exonym_map: null,
     _cached_profiles: null,
+    _cached_susp_regexes: null,
 
     /**
      * Returns true when two stems match either via Bigram Dice threshold or via the shared
@@ -29,25 +32,24 @@ let path = require("path");
       if (!a || !b) return false;
       if (a === b) return true;
 
-      //Declare local instance variables
-      let groups = Array.isArray(profiles.romanisation_equivalences) ? profiles.romanisation_equivalences : [];
-
       //Function body
-      for (let i = 0; i < groups.length; i++) {
-        let g = groups[i];
-        if (!Array.isArray(g)) continue;
-        let has_a = false;
-        let has_b = false;
-        for (let x = 0; x < g.length; x++) {
-          let item = String(g[x] || "");
-          if (item === a) has_a = true;
-          if (item === b) has_b = true;
+      if (!this._cached_exonym_map) {
+        this._cached_exonym_map = new Map();
+        let groups = Array.isArray(profiles.romanisation_equivalences) ? profiles.romanisation_equivalences : [];
+        for (let i = 0; i < groups.length; i++) {
+          let g = groups[i];
+          if (!Array.isArray(g)) continue;
+          for (let x = 0; x < g.length; x++) {
+            let item = String(g[x] || "");
+            if (item) this._cached_exonym_map.set(item, i);
+          }
         }
-        if (has_a && has_b) return true;
       }
+      let ga = this._cached_exonym_map.get(a);
+      if (ga === undefined) return false;
 
       //Return statement
-      return false;
+      return ga === this._cached_exonym_map.get(b);
     },
 
     /**
@@ -77,12 +79,17 @@ let path = require("path");
       ];
 
       //Function body
-      for (let i = 0; i < quals.length; i++) {
-        let q = String(quals[i] || "").trim();
-        if (!q) continue;
-        let escaped = q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-        let re = new RegExp(`\\b${escaped}\\b`, "i");
-        if (re.test(raw_name)) return true;
+      if (!this._cached_arch_regexes) {
+        this._cached_arch_regexes = [];
+        for (let i = 0; i < quals.length; i++) {
+          let q = String(quals[i] || "").trim();
+          if (!q) continue;
+          let escaped = q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+          this._cached_arch_regexes.push(new RegExp(`\\b${escaped}\\b`, "i"));
+        }
+      }
+      for (let i = 0; i < this._cached_arch_regexes.length; i++) {
+        if (this._cached_arch_regexes[i].test(raw_name)) return true;
       }
 
       //Return statement
@@ -251,14 +258,25 @@ let path = require("path");
       let adm_pats = Array.isArray(cfg.admin_unit_suffix_regexes) ? cfg.admin_unit_suffix_regexes : [];
 
       //Function body
-      for (let i = 0; i < raw_allow.length; i++) {
-        if (String(raw_allow[i] || "").trim().toLowerCase() === low) return null;
+      if (!this._cached_susp_regexes) {
+        let allow_set = new Set();
+        for (let i = 0; i < raw_allow.length; i++)
+          allow_set.add(String(raw_allow[i] || "").trim().toLowerCase());
+        let rel_compiled = [];
+        for (let i = 0; i < rel_pats.length; i++)
+          rel_compiled.push({ pat: rel_pats[i], re: new RegExp(rel_pats[i], "i") });
+        let adm_compiled = [];
+        for (let i = 0; i < adm_pats.length; i++)
+          adm_compiled.push({ pat: adm_pats[i], re: new RegExp(adm_pats[i], "i") });
+        this._cached_susp_regexes = { adm: adm_compiled, allow: allow_set, rel: rel_compiled };
       }
-      for (let i = 0; i < rel_pats.length; i++) {
-        if (new RegExp(rel_pats[i], "i").test(low)) return `religious/monument pattern ${rel_pats[i]}`;
+
+      if (this._cached_susp_regexes.allow.has(low)) return null;
+      for (let i = 0; i < this._cached_susp_regexes.rel.length; i++) {
+        if (this._cached_susp_regexes.rel[i].re.test(low)) return `religious/monument pattern ${this._cached_susp_regexes.rel[i].pat}`;
       }
-      for (let i = 0; i < adm_pats.length; i++) {
-        if (new RegExp(adm_pats[i], "i").test(low)) return `admin-unit suffix pattern ${adm_pats[i]}`;
+      for (let i = 0; i < this._cached_susp_regexes.adm.length; i++) {
+        if (this._cached_susp_regexes.adm[i].re.test(low)) return `admin-unit suffix pattern ${this._cached_susp_regexes.adm[i].pat}`;
       }
 
       //Return statement
@@ -336,13 +354,26 @@ let path = require("path");
       let total_major = 0;
 
       //Guard clauses
-      if (!fs.existsSync(meta_path) || shard_files.length === 0)
+      let part_dir = path.join(dataview_root, "data/stadester/stadester_2.0/city_metadata");
+      let man_path = path.join(part_dir, "city_metadata_manifest.json");
+      let meta_arr = [];
+      if (!options.meta_path && fs.existsSync(man_path)) {
+        let man = JSON.parse(fs.readFileSync(man_path, "utf8"));
+        let shards = Array.isArray(man.shards) ? man.shards : [];
+        let pkey = String(proj.key || "").toUpperCase();
+        for (let i = 0; i < shards.length; i++) {
+          let sh = shards[i];
+          if (pkey && sh.key !== "CAPITALS" && sh.key !== pkey && sh.key !== "UNASSIGNED") continue;
+          let sp = path.join(part_dir, sh.file);
+          if (fs.existsSync(sp)) meta_arr = meta_arr.concat(JSON.parse(fs.readFileSync(sp, "utf8")));
+        }
+      } else if (fs.existsSync(meta_path)) {
+        meta_arr = JSON.parse(fs.readFileSync(meta_path, "utf8"));
+      }
+      if (!Array.isArray(meta_arr) || meta_arr.length === 0 || shard_files.length === 0)
         return { bad_dates: 0, coverage_pct: 100, near_dups: 0, pre1850_coverage_pct: 100, suspicious_names: 0 };
 
       //Function body
-      let meta_arr = JSON.parse(fs.readFileSync(meta_path, "utf8"));
-      if (!Array.isArray(meta_arr))
-        return { bad_dates: 0, coverage_pct: 0, near_dups: 0, pre1850_coverage_pct: 0, suspicious_names: 0 };
 
       for (let i = 0; i < meta_arr.length; i++) {
         let rec = meta_arr[i];
@@ -660,21 +691,34 @@ let path = require("path");
       if (non_splice_jumps.length > 0)
         errors.push(`Annual getCitiesAtYear continuity cliff > 3.0% outside border_splice_years [${y0}-${y1}]: ${non_splice_jumps.slice(0, 5).join(", ")}`);
 
-      // Inspect Dataview stadester_2.0/city_metadata.json for explicitly tagged orphans & corrupted entries
+      // Inspect Dataview stadester_2.0/city_metadata/ (or legacy city_metadata.json) for explicitly tagged orphans & corrupted entries
+      let part_dir = path.join(dataview_root, "data/stadester/stadester_2.0/city_metadata");
+      let man_path = path.join(part_dir, "city_metadata_manifest.json");
       let meta_path = path.join(dataview_root, "data/stadester/stadester_2.0/city_metadata.json");
-      if (fs.existsSync(meta_path)) {
-        let meta_arr = JSON.parse(fs.readFileSync(meta_path, "utf8"));
-        if (Array.isArray(meta_arr)) {
-          for (let i = 0; i < meta_arr.length; i++) {
-            let rec = meta_arr[i];
-            if (!rec || typeof rec !== "object") continue;
-            let nm = String(rec.name || "");
-            if (!nm || nm.includes("\uFFFD")) bad_meta++;
-            let c_str = String(rec.country || "").trim().toLowerCase();
-            let k_str = String(rec.key || "");
-            if (c_str && proj_countries.has(c_str) && k_str && !shard_key_set.has(k_str))
-              meta_orphans.push(k_str);
-          }
+      let meta_arr = [];
+      if (fs.existsSync(man_path)) {
+        let man = JSON.parse(fs.readFileSync(man_path, "utf8"));
+        let shards = Array.isArray(man.shards) ? man.shards : [];
+        let pkey = String(proj.key || "").toUpperCase();
+        for (let i = 0; i < shards.length; i++) {
+          let sh = shards[i];
+          if (pkey && sh.key !== "CAPITALS" && sh.key !== pkey && sh.key !== "UNASSIGNED") continue;
+          let sp = path.join(part_dir, sh.file);
+          if (fs.existsSync(sp)) meta_arr = meta_arr.concat(JSON.parse(fs.readFileSync(sp, "utf8")));
+        }
+      } else if (fs.existsSync(meta_path)) {
+        meta_arr = JSON.parse(fs.readFileSync(meta_path, "utf8"));
+      }
+      if (Array.isArray(meta_arr)) {
+        for (let i = 0; i < meta_arr.length; i++) {
+          let rec = meta_arr[i];
+          if (!rec || typeof rec !== "object") continue;
+          let nm = String(rec.name || "");
+          if (!nm || nm.includes("\uFFFD")) bad_meta++;
+          let c_str = String(rec.country || "").trim().toLowerCase();
+          let k_str = String(rec.key || "");
+          if (c_str && proj_countries.has(c_str) && k_str && !shard_key_set.has(k_str))
+            meta_orphans.push(k_str);
         }
       }
       if (bad_meta > 0)

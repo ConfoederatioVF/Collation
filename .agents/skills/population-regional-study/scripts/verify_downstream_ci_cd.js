@@ -207,7 +207,7 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
 
       if (!audit_only) {
         intellte_res = this.verifyIntelltePipelineAndCiCache(target_proj, svea_root, intellte_root, full_build, errors);
-        dv_res = this.verifyDataviewCachesAndBuild(dataview_root, errors);
+        dv_res = this.verifyDataviewCachesAndBuild(dataview_root, target_proj, errors);
       }
 
       let indexed_cache_path = path.join(dataview_root, "data/stadester/cache/stadester_2.0_indexed.json");
@@ -286,10 +286,11 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
      *
      * @returns {Object}
      */
-    verifyDataviewCachesAndBuild (arg0_dataview_root, arg1_errors) {
+    verifyDataviewCachesAndBuild (arg0_dataview_root, arg1_proj, arg2_errors) {
       //Convert from parameters
       let dataview_root = arg0_dataview_root;
-      let errors = arg1_errors;
+      let errors = Array.isArray(arg2_errors) ? arg2_errors : arg1_proj;
+      let proj = Array.isArray(arg2_errors) ? arg1_proj : null;
 
       //Declare local instance variables
       let build_ok = false;
@@ -303,21 +304,28 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
       }
 
       //Function body
-      let version_meta_paths = [
-        path.join(dataview_root, "data/stadester/stadester_2.0/city_metadata.json"),
+      let v2_part = path.join(dataview_root, "data/stadester/stadester_2.0/city_metadata/city_metadata_manifest.json");
+      let v2_mono = path.join(dataview_root, "data/stadester/stadester_2.0/city_metadata.json");
+      if (fs.existsSync(v2_part) || fs.existsSync(v2_mono))
+        meta_versions_present++;
+      else
+        errors.push(`Missing Dataview stadester_2.0 metadata (neither ${v2_part} nor ${v2_mono} found).`);
+
+      let legacy_meta_paths = [
         path.join(dataview_root, "data/stadester/stadester_1.1/city_metadata.json"),
         path.join(dataview_root, "data/stadester/stadester_1.0/city_metadata.json")
       ];
-      for (let i = 0; i < version_meta_paths.length; i++) {
-        if (fs.existsSync(version_meta_paths[i]))
+      for (let i = 0; i < legacy_meta_paths.length; i++) {
+        if (fs.existsSync(legacy_meta_paths[i]))
           meta_versions_present++;
         else
-          errors.push(`Missing Dataview per-version metadata file: ${version_meta_paths[i]}`);
+          errors.push(`Missing Dataview per-version metadata file: ${legacy_meta_paths[i]}`);
       }
 
+      let proj_opt = (proj && proj.key) ? `, { only_project: ${JSON.stringify(proj.key)} }` : "";
       let cache_script = [
         "import { StadesterService } from './core/server/stadester_service.ts';",
-        "let ds = StadesterService.loadDataset('stadester_2.0'); let p = StadesterService.ensureLiteCache('stadester_2.0');",
+        `let ds = StadesterService.loadDataset('stadester_2.0'${proj_opt}); let p = StadesterService.ensureLiteCache('stadester_2.0'${proj_opt});`,
         "console.log('WARM_LITE_CACHE=' + p);"
       ].join(" ");
       let heap_mb = Math.min(8192, Math.max(2048, Number(process.env.VISCOUNT_MAX_RAM_MB) || 6144));
@@ -328,12 +336,13 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
       if (cache_res.status !== 0) {
         errors.push(`Dataview stadester_2.0 cache re-warming failed (exit=${cache_res.status}): ${(cache_res.stderr || "").slice(0, 400)}`);
       } else {
+        let shard_man = path.join(dataview_root, "data/stadester/cache/stadester_2.0/cache_manifest.json");
         let lite_path = path.join(dataview_root, "data/stadester/cache/stadester_2.0_lite.json");
         let idx_path = path.join(dataview_root, "data/stadester/cache/stadester_2.0_indexed.json");
-        if (fs.existsSync(lite_path) && fs.existsSync(idx_path))
+        if (fs.existsSync(shard_man) || (fs.existsSync(lite_path) && fs.existsSync(idx_path)))
           cache_warmed = true;
         else
-          errors.push("Dataview cache re-warming completed without producing both stadester_2.0_lite.json and stadester_2.0_indexed.json.");
+          errors.push("Dataview cache re-warming completed without producing per-shard cache_manifest.json or lite/indexed caches.");
       }
 
       let tsc_bin = path.join(dataview_root, "node_modules/typescript/bin/tsc");
@@ -423,7 +432,7 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
 
       let { IntellteDiscovery } = require(path.join(intellte_root, "core/framework/node/A_discover_records.js"));
       let { MarkdownRenderer } = require(path.join(intellte_root, "core/framework/node/MarkdownRenderer.js"));
-      let manifest = IntellteDiscovery.A_discoverRecords(intellte_root, { only_concept_id: concept_id });
+      let manifest = IntellteDiscovery.A_discoverRecords({ only_concept_id: concept_id, root_dir: intellte_root });
       let renderer = new MarkdownRenderer({ root_dir: intellte_root });
       let rec_list = Array.isArray(manifest && manifest.records) ? manifest.records : [];
 
@@ -451,6 +460,26 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
 
       if (total_rmd === 0)
         errors.push(`No compiled Rmd versions discovered in Intellte for ${concept_id}.`);
+
+      // Enforce GitHub/Windows MAX_PATH-safe repo-relative paths (<= 180 chars) inside Intellte docs/records/<concept_id>
+      let intellte_rec_dir = path.join(intellte_root, "docs/records", concept_id);
+      if (fs.existsSync(intellte_rec_dir)) {
+        let stack = [intellte_rec_dir];
+        for (let step = 0; stack.length > 0 && step < 10000; step++) {
+          let cur = stack.pop();
+          let ents = fs.readdirSync(cur, { withFileTypes: true });
+          for (let i = 0; i < ents.length; i++) {
+            let full = path.join(cur, ents[i].name);
+            if (ents[i].isDirectory()) {
+              stack.push(full);
+            } else {
+              let rel = path.relative(intellte_root, full).replace(/\\/g, "/");
+              if (rel.length > 180)
+                errors.push(`[PATH_LIMIT] Synced Intellte file exceeds 180-char repo-relative cap (${rel.length} chars): ${rel}`);
+            }
+          }
+        }
+      }
 
       if (full_build) {
         let vp_bin = path.join(intellte_root, "node_modules/vitepress/bin/vitepress.js");
@@ -803,14 +832,14 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
       if (counts.transform_count >= 0 && counts.dataview_count >= 0 && counts.transform_count !== counts.dataview_count)
         errors.push(`Shard count mismatch for ${proj.key}: transform=${counts.transform_count} vs dataview=${counts.dataview_count}`);
 
-      let exhaust_script = path.join(svea_root, ".agents/skills/population-regional-study/scripts/verify_gazetteer_exhaustiveness.py");
+      let exhaust_script = path.join(svea_root, ".agents/skills/population-regional-study/scripts/verify_gazetteer_exhaustiveness.js");
       for (let i = 0; i < shard_files.length; i++) {
         let shard_abs = path.join(dataview_root, "data/stadester/stadester_2.0", shard_files[i]);
         if (!fs.existsSync(shard_abs)) {
           errors.push(`Missing Dataview shard file: ${shard_abs}`);
           continue;
         }
-        let audit_res = child_process.spawnSync("python", [
+        let audit_res = child_process.spawnSync(process.execPath, [
           exhaust_script,
           shard_abs,
           "--require-sources",

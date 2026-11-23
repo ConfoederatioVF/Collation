@@ -1,12 +1,16 @@
 //Import modules
+let crypto = require("crypto");
 let fs = require("fs");
 let JSON5 = require("json5");
 let path = require("path");
+let { viscount_audit_utils } = require("./viscount_audit_utils");
 let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit");
 
 //Initialise functions
 {
   let city_metadata_merger = {
+    ARTICLE_INVERT_RE: /^.+,\s*(?:Al|El|As|Ash|Ar|Az|Ad|An|At|Le|La|Les|L'|Los|Las|Il|Lo|De|Den|Het|Der|Die|Das|The)$/i,
+
     /**
      * Parses a `YYYY.M.D` (including negative BCE years) date string into numeric tuple `[year, month, day]`.
      * @alias city_metadata_merger.dateSortTuple
@@ -17,10 +21,9 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
      */
     dateSortTuple (arg0_date_str) {
       //Convert from parameters
-      let date_str = String(arg0_date_str || "");
+      let parts = String(arg0_date_str || "").split(".");
 
-      //Function body
-      let parts = date_str.split(".");
+      //Guard clauses
       if (parts.length !== 3) return [0, 1, 1];
 
       //Return statement
@@ -36,47 +39,12 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
      * @returns {boolean}
      */
     hasArchSiteQualifier (arg0_name) {
-      //Convert from parameters
-      let profiles = viscount_entity_audit.loadSkillProfiles();
-
       //Return statement
-      return viscount_entity_audit.hasArchSiteQualifier(arg0_name, profiles);
+      return viscount_entity_audit.hasArchSiteQualifier(arg0_name, viscount_entity_audit.loadSkillProfiles());
     },
 
     /**
-     * Computes great-circle Haversine distance in kilometres between two `[lat, lng]` points.
-     * @alias city_metadata_merger.haversineKm
-     *
-     * @param {number} arg0_lat1
-     * @param {number} arg1_lng1
-     * @param {number} arg2_lat2
-     * @param {number} arg3_lng2
-     *
-     * @returns {number}
-     */
-    haversineKm (arg0_lat1, arg1_lng1, arg2_lat2, arg3_lng2) {
-      //Convert from parameters
-      let lat1 = Number(arg0_lat1);
-      let lng1 = Number(arg1_lng1);
-      let lat2 = Number(arg2_lat2);
-      let lng2 = Number(arg3_lng2);
-
-      //Declare local instance variables
-      let d_lat = (lat2 - lat1)*Math.PI/180;
-      let d_lng = (lng2 - lng1)*Math.PI/180;
-      let rad1 = lat1*Math.PI/180;
-      let rad2 = lat2*Math.PI/180;
-
-      //Function body
-      let a = Math.sin(d_lat/2)*Math.sin(d_lat/2) +
-        Math.cos(rad1)*Math.cos(rad2)*Math.sin(d_lng/2)*Math.sin(d_lng/2);
-
-      //Return statement
-      return 6371*2*Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    },
-
-    /**
-     * Mirrors Dataview `isCorruptedCityName`: returns true when name is corrupted and must be rejected.
+     * Mirrors Dataview `isCorruptedCityName`: returns true when name is corrupted, comma-inverted or address-junk.
      * @alias city_metadata_merger.isCorruptedCityName
      *
      * @param {string} arg0_name
@@ -95,18 +63,20 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
       if (/^[?\s\-_.,]+$/.test(trimmed)) return true;
       if (trimmed.includes("?") || trimmed.includes("\uFFFD") || trimmed.includes("\u00EF\u00BF\u00BD")) return true;
       if (trimmed.includes("`")) return true;
+      if (this.ARTICLE_INVERT_RE.test(trimmed)) return true;
+      if ((trimmed.match(/,/g) || []).length >= 2 && /\d{3,}/.test(trimmed)) return true;
 
       //Return statement
       return false;
     },
 
     /**
-     * Returns true when an alias contains non-indigenous foreign-script GeoNames transliteration noise
-     * for predominantly Latin-script settler countries/territories.
+     * Returns true when an alias contains non-indigenous foreign-script noise for Latin-only countries.
      * @alias city_metadata_merger.isForeignScriptNoiseForCountry
      *
      * @param {string} arg0_alias
      * @param {string} arg1_country
+     * @param {Array<number>} [arg2_coords]
      *
      * @returns {boolean}
      */
@@ -135,11 +105,8 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
      * @returns {string}
      */
     normaliseName (arg0_name) {
-      //Convert from parameters
-      let raw_name = arg0_name;
-
       //Return statement
-      return String(raw_name || "")
+      return String(arg0_name || "")
         .replace(/\s*\([^)]*\)/g, "")
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "")
@@ -174,24 +141,21 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
         dry_run: false,
         in_dir: "",
         project: "",
+        require_auditor_signoff: false,
         svea_root: ""
       };
 
       //Function body
       for (let i = 0; i < argv.length; i++) {
         let tok = String(argv[i] || "");
-        if (tok.startsWith("--project="))
-          args.project = tok.slice(10).trim().toUpperCase();
-        else if (tok.startsWith("--dataset="))
-          args.dataset = tok.slice(10).trim();
-        else if (tok.startsWith("--in-dir="))
-          args.in_dir = tok.slice(9).trim();
-        else if (tok.startsWith("--svea-root="))
-          args.svea_root = tok.slice(12).trim();
-        else if (tok.startsWith("--dataview-root="))
-          args.dataview_root = tok.slice(16).trim();
-        else if (tok === "--dry-run")
-          args.dry_run = true;
+        if (tok.startsWith("--project=")) args.project = tok.slice(10).trim().toUpperCase();
+        else if (tok === "--project" && i + 1 < argv.length) args.project = argv[++i].trim().toUpperCase();
+        else if (tok.startsWith("--dataset=")) args.dataset = tok.slice(10).trim();
+        else if (tok.startsWith("--in-dir=")) args.in_dir = tok.slice(9).trim();
+        else if (tok.startsWith("--svea-root=")) args.svea_root = tok.slice(12).trim();
+        else if (tok.startsWith("--dataview-root=")) args.dataview_root = tok.slice(16).trim();
+        else if (tok === "--dry-run") args.dry_run = true;
+        else if (tok === "--require-auditor-signoff") args.require_auditor_signoff = true;
       }
 
       //Return statement
@@ -199,19 +163,13 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
     },
 
     /**
-     * Validates and merges Gemini Flash toponymy outputs into Dataview per-version `city_metadata.json`,
-     * transposing SVEA `[lat, lng]` coordinates to Dataview `[lng, lat]` and clearing stale caches for that version.
+     * Validates and merges resolved toponymy outputs into partitioned `city_metadata/` (`00_capitals.json` +
+     * target regional shard) or legacy `city_metadata.json`, invalidating ONLY the modified regional shard caches.
      * @alias city_metadata_merger.runMerge
      *
      * @param {Object} [arg0_options]
-     *  @param {string} [arg0_options.dataset="stadester_2.0"]
-     *  @param {string} [arg0_options.dataview_root]
-     *  @param {boolean} [arg0_options.dry_run=false]
-     *  @param {string} [arg0_options.in_dir]
-     *  @param {string} [arg0_options.project]
-     *  @param {string} [arg0_options.svea_root]
      *
-     * @returns {Object} Merge summary counters
+     * @returns {Object}
      */
     runMerge (arg0_options) {
       //Convert from parameters
@@ -228,19 +186,20 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
       let dataset_id = (options.dataset) ? String(options.dataset).replace(/\.json$/i, "") : "stadester_2.0";
       let date_regex = /^-?\d+\.\d+\.\d+$/;
       let svea_root = (options.svea_root) ? path.resolve(options.svea_root) :
-        path.resolve(__dirname, "../../../..");
+        (viscount_audit_utils.findSveaRoot(__dirname) || path.resolve(__dirname, "../../../.."));
       let dataview_root = (options.dataview_root) ? path.resolve(options.dataview_root) :
-        (process.env.DATAVIEW_ROOT ? path.resolve(process.env.DATAVIEW_ROOT) :
-          path.resolve(svea_root, "../Project 1436 - Dataview"));
+        (process.env.DATAVIEW_ROOT ? path.resolve(process.env.DATAVIEW_ROOT) : path.resolve(svea_root, "../Project 1436 - Dataview"));
 
       let project_slug = options.project ? options.project.toLowerCase() : "all_projects";
+      let shard_prefix = "";
       let prec_path = path.join(svea_root, "histmap/2.data_cleaning/population_Stadester/config/viscount_precedence.json5");
       if (options.project && fs.existsSync(prec_path)) {
         let prec = JSON5.parse(fs.readFileSync(prec_path, "utf8"));
         let plist = Array.isArray(prec.projects) ? prec.projects : [];
         for (let i = 0; i < plist.length; i++) {
-          if (String(plist[i].key || "").toUpperCase() === options.project && plist[i].slug) {
-            project_slug = plist[i].slug;
+          if (String(plist[i].key || "").toUpperCase() === options.project) {
+            if (plist[i].slug) project_slug = plist[i].slug;
+            if (plist[i].shard_prefix) shard_prefix = plist[i].shard_prefix;
             break;
           }
         }
@@ -248,24 +207,37 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
 
       let in_dir = (options.in_dir) ? path.resolve(options.in_dir) :
         path.join(svea_root, "tests/toponymy_batches", project_slug);
-      let versioned_meta_dir = path.join(dataview_root, "data/stadester", dataset_id);
-      let meta_path = fs.existsSync(versioned_meta_dir) ?
-        path.join(versioned_meta_dir, "city_metadata.json") :
+      let stadester_dir = path.join(dataview_root, "data/stadester", dataset_id);
+      let part_dir = path.join(stadester_dir, "city_metadata");
+      let man_path = path.join(part_dir, "city_metadata_manifest.json");
+      let mono_path = fs.existsSync(path.join(stadester_dir, "city_metadata.json")) ?
+        path.join(stadester_dir, "city_metadata.json") :
         path.join(dataview_root, "data/stadester/city_metadata.json");
-      let cache_dir = path.join(dataview_root, "data/stadester/cache");
+      let is_partitioned = fs.existsSync(man_path);
 
       //Guard clauses
       if (!fs.existsSync(in_dir)) {
         console.error(`[merge_city_metadata] Input batch directory not found: ${in_dir}`);
         return counts;
       }
-      if (!fs.existsSync(meta_path)) {
-        console.error(`[merge_city_metadata] Dataview city_metadata.json not found: ${meta_path}`);
+      if (options.require_auditor_signoff) {
+        let signoff_p = path.join(in_dir, "auditor_signoff.json");
+        if (!fs.existsSync(signoff_p)) {
+          console.error(`[merge_city_metadata] Refusing merge without separate toponymy_auditor sign-off: ${signoff_p}`);
+          return counts;
+        }
+        let so = JSON.parse(fs.readFileSync(signoff_p, "utf8"));
+        if (so.approved !== true || Number(so.errors_remaining || 0) !== 0) {
+          console.error(`[merge_city_metadata] Refusing merge: auditor_signoff.json not approved or errors_remaining=${so.errors_remaining}`);
+          return counts;
+        }
+      }
+      if (!is_partitioned && !fs.existsSync(mono_path)) {
+        console.error(`[merge_city_metadata] Dataview city_metadata not found in ${stadester_dir}`);
         return counts;
       }
 
       //Function body
-      let meta_array = JSON.parse(fs.readFileSync(meta_path, "utf8"));
       let all_files = fs.readdirSync(in_dir).sort();
       let resolved_files = all_files.filter(function (arg0_f) {
         return /^(?:resolved|out)_batch_\d+\.json$/i.test(arg0_f);
@@ -275,31 +247,57 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
         return counts;
       }
 
-      let replaced_indices = new Set();
-      let spatial_grid = new Map();
-      for (let i = 0; i < meta_array.length; i++) {
-        let entry = meta_array[i];
-        if (!entry || !Array.isArray(entry.coords) || entry.coords.length < 2) continue;
-        let lat = Number(entry.coords[1]);
-        let lng = Number(entry.coords[0]);
-        if (!Number.isFinite(lat) || !Number.isFinite(lng)) continue;
+      let profiles = viscount_entity_audit.loadSkillProfiles(svea_root);
+      let mun_rules = (profiles && profiles.municipal_decomposition_rules) ? profiles.municipal_decomposition_rules : {};
+      let mun_regexes = (Array.isArray(mun_rules.intra_municipal_suffix_regexes) ? mun_rules.intra_municipal_suffix_regexes : []).map(function (arg0_r) {
+        return new RegExp(arg0_r, "i");
+      });
 
-        let gx = Math.round(lat*2);
-        let gy = Math.round(lng*2);
-        let gkey = `${gx},${gy}`;
-        if (!spatial_grid.has(gkey)) spatial_grid.set(gkey, []);
-        spatial_grid.get(gkey).push({ entry: entry, index: i, lat: lat, lng: lng });
+      // Load active shard buckets (`00_capitals.json` + target region shard when partitioned, else monolithic)
+      let manifest = is_partitioned ? JSON.parse(fs.readFileSync(man_path, "utf8")) : null;
+      let shard_arrays = new Map();
+      let dirty_shards = new Set();
+      let target_region_file = "15_unassigned.json";
+
+      if (is_partitioned) {
+        let shards = Array.isArray(manifest.shards) ? manifest.shards : [];
+        for (let i = 0; i < shards.length; i++) {
+          let sh = shards[i];
+          let is_cap = sh.key === "CAPITALS" || sh.file === "00_capitals.json";
+          if (sh.key === options.project) target_region_file = sh.file;
+          if (!options.project || is_cap || sh.key === options.project || sh.key === "UNASSIGNED") {
+            let sp = path.join(part_dir, sh.file);
+            shard_arrays.set(sh.file, fs.existsSync(sp) ? JSON.parse(fs.readFileSync(sp, "utf8")) : []);
+          }
+        }
+      } else {
+        target_region_file = "city_metadata.json";
+        shard_arrays.set("city_metadata.json", JSON.parse(fs.readFileSync(mono_path, "utf8")));
       }
+
+      // Build unified spatial index across loaded shards
+      let spatial_grid = new Map();
+      let replaced_refs = new Set();
+      shard_arrays.forEach(function (arg0_arr, arg1_file) {
+        for (let i = 0; i < arg0_arr.length; i++) {
+          let entry = arg0_arr[i];
+          if (!entry || !Array.isArray(entry.coords) || entry.coords.length < 2) continue;
+          let lat = Number(entry.coords[1]);
+          let lng = Number(entry.coords[0]);
+          if (!Number.isFinite(lat) || !Number.isFinite(lng)) continue;
+          let gkey = `${Math.round(lat*2)},${Math.round(lng*2)}`;
+          if (!spatial_grid.has(gkey)) spatial_grid.set(gkey, []);
+          spatial_grid.get(gkey).push({ entry: entry, index: i, lat: lat, lng: lng, shard_file: arg1_file });
+        }
+      });
 
       for (let i = 0; i < resolved_files.length; i++) {
         let payload = JSON.parse(fs.readFileSync(path.join(in_dir, resolved_files[i]), "utf8"));
-        let records = Array.isArray(payload.settlements) ? payload.settlements :
-          (Array.isArray(payload) ? payload : []);
+        let records = Array.isArray(payload.settlements) ? payload.settlements : (Array.isArray(payload) ? payload : []);
 
         for (let x = 0; x < records.length; x++) {
           let rec = records[x];
           if (!rec || !Array.isArray(rec.coords_lat_lng) || rec.coords_lat_lng.length < 2) {
-            console.error("[merge_city_metadata] Skipping record without valid coords_lat_lng:", rec && rec.key);
             counts.rejected_items++;
             continue;
           }
@@ -307,14 +305,18 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
           let clat = Number(rec.coords_lat_lng[0]);
           let clng = Number(rec.coords_lat_lng[1]);
           let clean_modern = this.stripParenthetical(rec.canonical_name || rec.name || "");
-          let profiles = viscount_entity_audit.loadSkillProfiles(svea_root);
           if (this.isCorruptedCityName(clean_modern)) {
             console.error(`[merge_city_metadata] Rejected corrupted canonical name for ${rec.key}: "${rec.canonical_name || rec.name}"`);
             counts.rejected_items++;
             continue;
           }
           if (!rec.verified_settlement && viscount_entity_audit.isSuspiciousToponym(clean_modern, profiles)) {
-            console.error(`[merge_city_metadata] Rejected suspicious temple/monument/admin canonical name for ${rec.key}: "${clean_modern}"`);
+            console.error(`[merge_city_metadata] Rejected suspicious canonical name for ${rec.key}: "${clean_modern}"`);
+            counts.rejected_items++;
+            continue;
+          }
+          if (!rec.verified_settlement && mun_regexes.some(function (arg0_r) { return arg0_r.test(clean_modern); })) {
+            console.error(`[merge_city_metadata] Rejected intra-municipal district name for ${rec.key}: "${clean_modern}"`);
             counts.rejected_items++;
             continue;
           }
@@ -324,30 +326,21 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
           let collapsed_variants = [];
           for (let y = 0; y < raw_hist.length; y++) {
             let h = raw_hist[y];
-            if (!h || typeof h !== "object") {
-              counts.rejected_name_entries++;
-              continue;
-            }
+            if (!h || typeof h !== "object") { counts.rejected_name_entries++; continue; }
             let h_date = String(h.date || "").trim();
             let h_name = this.stripParenthetical(h.name || "");
             if (!date_regex.test(h_date) || !viscount_entity_audit.isValidCalendarDate(h_date) || this.isCorruptedCityName(h_name)) {
-              console.error(`[merge_city_metadata] Rejected invalid date/name historical entry for ${rec.key}: date="${h_date}" name="${h_name}"`);
               counts.rejected_name_entries++;
               continue;
             }
             if (!rec.verified_settlement && viscount_entity_audit.isSuspiciousToponym(h_name, profiles)) {
-              console.error(`[merge_city_metadata] Rejected suspicious temple/monument/admin historical entry for ${rec.key}: "${h_name}"`);
               counts.rejected_name_entries++;
               continue;
             }
             valid_hist.push({ date: h_date, name: h_name });
           }
 
-          if (valid_hist.length === 0) {
-            console.error(`[merge_city_metadata] No valid historical_names remained for ${rec.key}; skipping.`);
-            counts.rejected_items++;
-            continue;
-          }
+          if (valid_hist.length === 0) { counts.rejected_items++; continue; }
 
           let promoted_site_alias = "";
           let sorted_hist = this.sortAndDedupHistoricalNames(valid_hist, collapsed_variants);
@@ -360,40 +353,39 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
             }
           }
 
-          // Chronological coverage check: pre-1900 cities must not leave earliest_year uncovered
           let earliest_year = Number(rec.earliest_year);
           if (Number.isFinite(earliest_year) && earliest_year < 1900 && sorted_hist.length > 0) {
             let first_hist_yr = this.dateSortTuple(sorted_hist[0].date)[0];
             if (first_hist_yr > earliest_year + 100) {
-              console.error(`[merge_city_metadata] Rejected ${rec.key}: earliest historical_names year (${first_hist_yr}) lags settlement earliest_year (${earliest_year}) by > 100y (causes wrong fallback).`);
+              console.error(`[merge_city_metadata] Rejected ${rec.key}: earliest historical_names year (${first_hist_yr}) lags earliest_year (${earliest_year}) by > 100y.`);
               counts.rejected_items++;
               continue;
             }
           }
 
-          // Terminal Modern Name Anchor: reject undocumented mismatches instead of fabricating synthetic 1950.1.1 dates
           let latest_year = Number(rec.latest_year || 0);
           if (latest_year >= 1950 && !rec.is_renamed_post_1950 && sorted_hist.length > 0) {
             let last_entry = sorted_hist[sorted_hist.length - 1];
             if (this.normaliseName(last_entry.name) !== this.normaliseName(clean_modern)) {
-              console.error(`[merge_city_metadata] Rejected ${rec.key}: terminal historical name "${last_entry.name}" (${last_entry.date}) mismatches modern "${clean_modern}" without documented rename date (refusing synthetic 1950.1.1 fabrication; return to @verifier).`);
+              console.error(`[merge_city_metadata] Rejected ${rec.key}: terminal historical name "${last_entry.name}" (${last_entry.date}) mismatches modern "${clean_modern}".`);
               counts.rejected_items++;
               continue;
             }
           }
 
-          let existing_idx = null;
-          if (Number.isInteger(rec.existing_meta_index) &&
-              rec.existing_meta_index >= 0 &&
-              rec.existing_meta_index < meta_array.length) {
-            let indexed = meta_array[rec.existing_meta_index];
+          // Match existing record across loaded shards
+          let matched_ref = null;
+          let pref_shard = rec.existing_shard_file || (is_partitioned ? target_region_file : "city_metadata.json");
+          if (Number.isInteger(rec.existing_meta_index) && shard_arrays.has(pref_shard)) {
+            let arr = shard_arrays.get(pref_shard);
+            let indexed = arr[rec.existing_meta_index];
             if (indexed && Array.isArray(indexed.coords) && indexed.coords.length >= 2) {
-              let dist = this.haversineKm(clat, clng, indexed.coords[1], indexed.coords[0]);
-              if (dist <= 25.0) existing_idx = rec.existing_meta_index;
+              let d = viscount_audit_utils.haversineKm(clat, clng, indexed.coords[1], indexed.coords[0]);
+              if (d <= 25.0) matched_ref = { entry: indexed, index: rec.existing_meta_index, shard_file: pref_shard };
             }
           }
 
-          if (existing_idx === null) {
+          if (!matched_ref) {
             let gx = Math.round(clat*2);
             let gy = Math.round(clng*2);
             let best_dist = 999999;
@@ -405,14 +397,13 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
                 if (!bucket) continue;
                 for (let y = 0; y < bucket.length; y++) {
                   let cand = bucket[y];
-                  let d = this.haversineKm(clat, clng, cand.lat, cand.lng);
+                  let d = viscount_audit_utils.haversineKm(clat, clng, cand.lat, cand.lng);
                   let c_norm = this.normaliseName(cand.entry.name);
-                  let target_is_corrupt_or_arch = this.isCorruptedCityName(cand.entry.name) || this.hasArchSiteQualifier(cand.entry.name);
-                  let stems_match = Boolean(rec_norm && c_norm && c_norm === rec_norm);
-                  if ((d <= 2.5 && target_is_corrupt_or_arch) || (d <= 25.0 && stems_match)) {
+                  let stems_match = Boolean(rec_norm && c_norm && (c_norm === rec_norm || viscount_entity_audit.areEquivalentExonyms(clean_modern, cand.entry.name, profiles)));
+                  if ((d <= 1.5) || (d <= 25.0 && stems_match)) {
                     if (d < best_dist) {
                       best_dist = d;
-                      existing_idx = cand.index;
+                      matched_ref = cand;
                     }
                   }
                 }
@@ -436,34 +427,17 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
             if (valid_hist[y].name !== clean_modern) clean_aliases.push(valid_hist[y].name);
           }
 
-          if (existing_idx !== null) {
-            let target = meta_array[existing_idx];
-            let is_arch_qualifier = this.hasArchSiteQualifier(clean_modern);
-            if (!is_arch_qualifier &&
-                (this.isCorruptedCityName(target.name) || this.hasArchSiteQualifier(target.name))) {
-              target.name = clean_modern;
-            }
+          if (matched_ref) {
+            let target = matched_ref.entry;
+            let ref_sig = `${matched_ref.shard_file}:${matched_ref.index}`;
+            if (!this.hasArchSiteQualifier(clean_modern)) target.name = clean_modern;
+            if (rec.country && !target.country) target.country = rec.country;
 
-            let should_replace = Boolean(rec.replace_historical_names && !replaced_indices.has(existing_idx) && valid_hist.length > 0);
-            if (should_replace) replaced_indices.add(existing_idx);
-            let combined_hist = [];
-            let existing_hist = (!should_replace && Array.isArray(target.historical_names)) ? target.historical_names : [];
-            for (let y = 0; y < existing_hist.length; y++) {
-              let eh = existing_hist[y];
-              if (eh && date_regex.test(String(eh.date || "").trim()) && !this.isCorruptedCityName(this.stripParenthetical(eh.name || "")))
-                combined_hist.push({ date: String(eh.date).trim(), name: this.stripParenthetical(eh.name) });
-            }
-            for (let y = 0; y < valid_hist.length; y++) combined_hist.push(valid_hist[y]);
-
+            let should_replace = Boolean((rec.replace_historical_names || true) && !replaced_refs.has(ref_sig) && valid_hist.length > 0);
+            if (should_replace) replaced_refs.add(ref_sig);
+            let combined_hist = should_replace ? valid_hist.slice() :
+              (Array.isArray(target.historical_names) ? target.historical_names.slice() : []).concat(valid_hist);
             target.historical_names = this.sortAndDedupHistoricalNames(combined_hist, collapsed_variants);
-            if (latest_year >= 1950 && !rec.is_renamed_post_1950 && target.historical_names.length > 0 && target.name) {
-              let t_last = target.historical_names[target.historical_names.length - 1];
-              if (this.normaliseName(t_last.name) !== this.normaliseName(target.name)) {
-                console.error(`[merge_city_metadata] Skipped updating ${rec.key}: merged terminal historical name "${t_last.name}" (${t_last.date}) mismatches "${target.name}" (refusing synthetic 1950.1.1 fabrication).`);
-                counts.rejected_items++;
-                continue;
-              }
-            }
 
             let prev_other = Array.isArray(target.other_names) ? target.other_names : [];
             let merged_other = [];
@@ -474,48 +448,74 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
             for (let y = 0; y < clean_aliases.length; y++) merged_other.push(clean_aliases[y]);
             if (merged_other.length > 0) target.other_names = Array.from(new Set(merged_other));
 
+            dirty_shards.add(matched_ref.shard_file);
             counts.updated++;
           } else {
+            let dest_file = (is_partitioned && rec.is_capital) ? "00_capitals.json" : target_region_file;
+            if (!shard_arrays.has(dest_file)) shard_arrays.set(dest_file, []);
+            let dest_arr = shard_arrays.get(dest_file);
             let new_entry = {
               coords: [Number(clng.toFixed(5)), Number(clat.toFixed(5))],
-              historical_names: this.sortAndDedupHistoricalNames(valid_hist),
+              country: rec.country || "",
+              historical_names: sorted_hist,
               name: clean_modern
             };
+            if (rec.is_capital) new_entry.capital = true;
+            if (options.project) new_entry.region_shard = options.project;
             if (clean_aliases.length > 0) new_entry.other_names = Array.from(new Set(clean_aliases));
 
-            let new_idx = meta_array.length;
-            meta_array.push(new_entry);
-
-            let gx = Math.round(clat*2);
-            let gy = Math.round(clng*2);
-            let gkey = `${gx},${gy}`;
+            let new_idx = dest_arr.length;
+            dest_arr.push(new_entry);
+            let gkey = `${Math.round(clat*2)},${Math.round(clng*2)}`;
             if (!spatial_grid.has(gkey)) spatial_grid.set(gkey, []);
-            spatial_grid.get(gkey).push({ entry: new_entry, index: new_idx, lat: clat, lng: clng });
+            spatial_grid.get(gkey).push({ entry: new_entry, index: new_idx, lat: clat, lng: clng, shard_file: dest_file });
 
+            dirty_shards.add(dest_file);
             counts.inserted++;
           }
         }
       }
 
-      if (!options.dry_run) {
-        fs.writeFileSync(meta_path, JSON.stringify(meta_array, null, 2), "utf8");
-        if (fs.existsSync(cache_dir)) {
-          let stale_names = [
-            `${dataset_id}_lite.json`,
-            `${dataset_id}_indexed.json`,
-            "stadester_city_cache.json"
-          ];
-          for (let i = 0; i < stale_names.length; i++) {
-            let stale_path = path.join(cache_dir, stale_names[i]);
-            if (fs.existsSync(stale_path)) {
-              fs.unlinkSync(stale_path);
+      if (!options.dry_run && dirty_shards.size > 0) {
+        if (is_partitioned) {
+          let shards = Array.isArray(manifest.shards) ? manifest.shards : [];
+          dirty_shards.forEach(function (arg0_sf) {
+            let arr = shard_arrays.get(arg0_sf) || [];
+            let json_str = JSON.stringify(arr, null, 2);
+            let tmp_p = path.join(part_dir, `${arg0_sf}.tmp`);
+            fs.writeFileSync(tmp_p, json_str, "utf8");
+            fs.renameSync(tmp_p, path.join(part_dir, arg0_sf));
+            let sha = crypto.createHash("sha256").update(json_str).digest("hex");
+            for (let i = 0; i < shards.length; i++) {
+              if (shards[i].file === arg0_sf) {
+                shards[i].count = arr.length;
+                shards[i].sha256 = sha;
+                break;
+              }
+            }
+          });
+          manifest.updated_at_gmt0 = new Date().toISOString();
+          fs.writeFileSync(man_path, JSON.stringify(manifest, null, 2), "utf8");
+        } else {
+          let tmp_p = `${mono_path}.tmp`;
+          fs.writeFileSync(tmp_p, JSON.stringify(shard_arrays.get("city_metadata.json") || [], null, 2), "utf8");
+          fs.renameSync(tmp_p, mono_path);
+        }
+
+        // Targeted per-shard cache invalidation ONLY (never invalidate unmodified regional namespaces like CENTAUR!)
+        let shard_cache_dir = path.join(dataview_root, "data/stadester/cache", dataset_id, "shards");
+        if (fs.existsSync(shard_cache_dir) && shard_prefix) {
+          let cfiles = fs.readdirSync(shard_cache_dir);
+          for (let i = 0; i < cfiles.length; i++) {
+            if (cfiles[i].toLowerCase().startsWith(shard_prefix.toLowerCase())) {
+              fs.unlinkSync(path.join(shard_cache_dir, cfiles[i]));
               counts.cache_files_removed++;
             }
           }
         }
       }
 
-      console.log(`[merge_city_metadata] Updated ${counts.updated}, inserted ${counts.inserted}, rejected items ${counts.rejected_items}, rejected name entries ${counts.rejected_name_entries}, removed ${counts.cache_files_removed} cache file(s) for ${dataset_id}.`);
+      console.log(`[merge_city_metadata] Updated ${counts.updated}, inserted ${counts.inserted}, rejected items ${counts.rejected_items}, dirty shards [${Array.from(dirty_shards).join(", ")}], invalidated ${counts.cache_files_removed} targeted shard cache file(s).`);
 
       //Return statement
       return counts;
@@ -584,11 +584,8 @@ let { viscount_entity_audit } = require("./viscount_entity_and_continuity_audit"
      * @returns {string}
      */
     stripParenthetical (arg0_name) {
-      //Convert from parameters
-      let raw_name = String(arg0_name || "");
-
       //Return statement
-      return raw_name.replace(/\s*\([^)]*\)/g, "").trim();
+      return String(arg0_name || "").replace(/\s*\([^)]*\)/g, "").trim();
     }
   };
 
