@@ -488,6 +488,13 @@
         }
       }
       
+      if (primary_entry.has_ucdb) {
+        primary_entry.city._ghsl_uc_id = uc_id;
+        for (let x = 0; x < sub_entries.length; x++) {
+          if (sub_entries[x] && sub_entries[x].sub && sub_entries[x].sub.city)
+            sub_entries[x].sub.city._ghsl_uc_id = uc_id;
+        }
+      }
       if (primary_entry.has_ucdb && !(preserve_manual && population_Stadester_uud.hasCitySource(primary_entry.city, "manual")))
         population_Stadester_uud.appendCitySources(primary_entry.city, "ghsl");
       integrated_count++;

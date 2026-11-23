@@ -627,77 +627,17 @@
     stadester_obj = population_Stadester_uud.removeStadesterDuplicates(stadester_obj);
     if (do_not_flatten_metros) return stadester_obj;
 
-    all_cities = Object.keys(stadester_obj);
-
-    for (let i = 0; i < all_cities.length; i++) {
-      let city = stadester_obj[all_cities[i]];
-      let is_agg = city.is_agglomeration || (city.name && (city.name.toLowerCase().includes("agglomeration") || city.name.toLowerCase().includes("greater")));
-      if (is_agg && city.coords) {
-        let cell = `${Math.floor(city.coords[0]/cell_size)},${Math.floor(city.coords[1]/cell_size)}`;
-        if (!grid.has(cell)) grid.set(cell, []);
-        grid.get(cell).push(city);
-      }
-    }
-
-    for (let i = 0; i < all_cities.length; i++) {
-      let local_city = stadester_obj[all_cities[i]];
-      if (!local_city || !local_city.coords) continue;
-      let is_agg = local_city.is_agglomeration || (local_city.name && (local_city.name.toLowerCase().includes("agglomeration") || local_city.name.toLowerCase().includes("greater")));
-      if (is_agg) continue;
-
-      let cx = Math.floor(local_city.coords[0]/cell_size);
-      let cy = Math.floor(local_city.coords[1]/cell_size);
-      let metro_match = null;
-
-      for (let dx = -1; dx <= 1; dx++) {
-        for (let dy = -1; dy <= 1; dy++) {
-          let cell = `${cx + dx},${cy + dy}`;
-          let aggs = grid.get(cell);
-          if (aggs) {
-            for (let a = 0; a < aggs.length; a++) {
-              let agg = aggs[a];
-              if (agg.key === local_city.key) continue;
-              if (population_Stadester_uud.haversineDistance(agg.coords, local_city.coords) <= 250) {
-                let is_name_overlap = population_Stadester_uud.checkExactNameMatch(local_city, agg);
-                if (!is_name_overlap) {
-                  let all_a = population_Stadester_uud.getAllCityNames(local_city);
-                  let all_b = population_Stadester_uud.getAllCityNames(agg);
-                  for (let ax = 0; ax < all_a.length && !is_name_overlap; ax++) {
-                    for (let bx = 0; bx < all_b.length; bx++) {
-                      let na = all_a[ax];
-                      let nb = all_b[bx];
-                      if (na.length >= 4 && nb.length >= 4 && (na === nb || nb.includes(na) || na.includes(nb))) {
-                        is_name_overlap = true;
-                        break;
-                      }
-                    }
-                  }
-                }
-                if (is_name_overlap) { metro_match = agg; break; }
-              }
-            }
-          }
-          if (metro_match) break;
-        }
-        if (metro_match) break;
-      }
-
-      if (metro_match && local_city.population && metro_match.population) {
-        let local_max_yr = Number.isFinite(local_city._raw_max_year) ? local_city._raw_max_year : -Infinity;
-        let pop_keys = Object.keys(metro_match.population);
-        for (let x = 0; x < pop_keys.length; x++) {
-          let yr = pop_keys[x];
-          let yr_num = Number(yr);
-          let agg_pop = parseFloat(metro_match.population[yr]);
-          let city_pop = parseFloat(local_city.population[yr]);
-          if (isNaN(city_pop) && Number.isFinite(local_max_yr) && yr_num > local_max_yr && (yr_num - local_max_yr) <= 30)
-            city_pop = parseFloat(local_city.population[local_max_yr]);
-          if (!isNaN(agg_pop) && !isNaN(city_pop)) {
-            local_city.metro_key = metro_match.key;
-            metro_match.population[yr] = Math.max(0, agg_pop - city_pop);
-          }
-        }
-      }
+    //Use the unified 3-Phase Spatiotemporally Agnostic Metropolitan Reconciler
+    let { StadesterMetroReconciler } = require("./StadesterMetroReconciler.js");
+    let reconciler = new StadesterMetroReconciler({ use_trailing_carry: true });
+    let recon_res = reconciler.reconcile(stadester_obj);
+    if (recon_res && recon_res.stats && recon_res.stats.metros_inspected > 0) {
+      console.log(
+        `- [StadesterMetroReconciler] Reconciled ${recon_res.stats.metros_inspected} metro(s): ` +
+        `${recon_res.stats.reconciled_positive_pairs} positive-residual, ${recon_res.stats.reconciled_negative_pairs} negative-residual ` +
+        `(${recon_res.stats.removed_metro_year_points} metro year-points removed, ${recon_res.stats.absorbed_metros_removed} absorbed shells pruned, ` +
+        `max conservation err=${recon_res.stats.max_conservation_err.toFixed(2)}).`
+      );
     }
 
     //Return statement
